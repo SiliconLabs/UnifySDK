@@ -1,0 +1,272 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+/**
+ *
+ * @file dotdot_mqtt.h
+ * @defgroup dotdot_mqtt DotDot Serializer
+ * @ingroup uic_components
+ *
+ * @brief This component provides helper functions for parsing and generates UIC
+ * json payloads sent over MQTT.
+ *
+ * @startuml
+   participant "MQTT" as mqtt
+   participant "DotDot MQTT" as dotdot
+   participant "OnOff Mapper" as onoff
+
+   note over mqtt, onoff
+   In this example only OnOff mappers are shown.
+   But there should exist mappers for all supported ZCL Clusters.
+   In addition only a selection of the supported commands for each of these mappers are shown here.
+   end note
+   === Initialization ==
+   onoff    -> dotdot: uic_mqtt_dotdot_on_off_on_callback_set(on_cb)
+   onoff    -> dotdot: uic_mqtt_dotdot_on_off_off_callback_set(off_cb)
+   onoff    -> dotdot: uic_mqtt_dotdot_set_on_off_write_attributes_callback(on_att_cb)
+
+   note over dotdot: uic_mqtt_dotdot_init() is called
+
+   dotdot -> mqtt:     uic_mqtt_subscribe("ucl/by-unid/+/+/OnOff/Commands/On", ...);
+   dotdot -> mqtt:     uic_mqtt_subscribe("ucl/by-unid/+/+/OnOff/Commands/Off", ...);
+   dotdot -> mqtt:     uic_mqtt_subscribe("ucl/by-unid/+/+/OnOff/Commands/WriteAttributes", ...)
+   ... ...
+   note over onoff: An end device is added
+   onoff -> dotdot:    uic_mqtt_dotdot_publish_supported_commands(unid, endpoint)
+   dotdot -> onoff:    on_cb(unid, endpoint, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK)
+   dotdot -> onoff:    off_cb(unid, endpoint, UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK)
+
+   note over dotdot, onoff
+   When uic_mqtt_dotdot_publish_supported_commands is called,
+   DotDot MQTT calls all registered OnOff command callback functions
+   with UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK.
+   When the Command is supported by the unid/endpoint
+   SL_STATUS_OK shall be returned, otherwise SL_STATUS_NOT_AVAILABLE.
+
+   In this example both callbacks returns SL_STATUS_OK
+   end note
+
+   dotdot -> mqtt:     uic_mqtt_publish("ucl/by-unid/<unid>/ep<x>/OnOff/SupportedCommands", "[\"On\", \"Off\"]")
+   ... ...
+   note over mqtt: IoT Service has published an OnOff/Commands/Off
+   mqtt -> dotdot:     uic_mqtt_dotdot_on_on_off_off(topic, message)
+   dotdot -> onoff:    on_cb(unid, endpoint, UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL)
+
+   @enduml
+ * @{
+ */
+
+#ifndef DOTDOT_MQTT_H
+#define DOTDOT_MQTT_H
+
+#include <stdint.h>
+#include <stdbool.h>
+
+#include "sl_status.h"
+#include "uic_typedefs.h"
+#include "zap-types.h"
+#include "uic_mqtt.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
+/** @brief Attribute publish type */
+typedef enum {
+  /** Publish Desired */
+  UCL_MQTT_PUBLISH_TYPE_DESIRED   = 0x01,
+  /** Publish Reported */
+  UCL_MQTT_PUBLISH_TYPE_REPORTED  = 0x02,
+  /** Publish all types (Desired and Reported) */
+  UCL_MQTT_PUBLISH_TYPE_ALL       = 0xFF
+} {{dotdot_prefix}}_attribute_publish_type_t;
+
+/** @brief Callback type, used in {{dotdot_prefix}} callback functions */
+typedef enum {
+  /** Normal callback type */
+  {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_NORMAL,
+  /** Support check type, check if the callback is supported by unid/endpoint */
+  {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_SUPPORT_CHECK,
+} {{dotdot_prefix}}_callback_call_type_t;
+
+// Initialize all dotdot available clusters
+sl_status_t {{dotdot_prefix}}_init();
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+// Callback types used by the {{asSnakeCaseLower label}} cluster
+{{#zcl_commands}}
+typedef sl_status_t (*{{asCommandCallback this}}_t)(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    {{dotdot_prefix}}_callback_call_type_t call_type{{#zcl_command_arguments}}{{#first}},{{/first}}
+    {{asUnderlyingType type}} {{asSnakeCaseLower label}}{{listComma this}}
+    {{/zcl_command_arguments}}
+);
+{{/zcl_commands}}
+
+typedef struct {
+  {{#zcl_attributes}}
+    {{#if_is_enum type}}
+  {{enumType type}} {{asSnakeCaseLower label}};
+    {{else}}
+  {{asUnderlyingType type}} {{asSnakeCaseLower label}};
+    {{/if_is_enum}}
+  {{else}}
+  uint8_t {{dotdot_prefix}}_{{asSnakeCaseLower label}}_dummy;
+  {{/zcl_attributes}}
+} {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t;
+
+typedef struct {
+  {{#zcl_attributes}}
+  bool {{asSnakeCaseLower label}};
+  {{else}}
+  bool {{dotdot_prefix}}_{{asSnakeCaseLower label}}_dummy;
+  {{/zcl_attributes}}
+} {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t;
+
+typedef sl_status_t (*{{asWriteAttributesCallback this}}_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    {{dotdot_prefix}}_callback_call_type_t call_type,
+    {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t,
+    {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t
+);
+
+typedef sl_status_t (*{{asForceReadAttributesCallback this}}_t)(
+    const dotdot_unid_t unid,
+    const dotdot_endpoint_id_t endpoint,
+    {{dotdot_prefix}}_callback_call_type_t call_type,
+    {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t
+);
+
+typedef struct {
+{{#zcl_commands}}
+  bool {{asSnakeCaseLower label}};
+{{else}}
+  bool dummy;
+{{/zcl_commands}}
+} {{dotdot_prefix}}_{{asSnakeCaseLower label}}_supported_commands_t;
+{{#zcl_commands}}
+/**
+ * Setup callback to be called when a
+ * +/{{parent.label}}/{{asSnakeCaseLower label}} is received. Setting
+ * this callback will overwrite the previous set callback
+ */
+void {{asCommandCallback this}}_set(const {{asCommandCallback this}}_t callback);
+
+{{/zcl_commands}}
+/**
+ * Setup a callback for WriteAttribute to be called when a
+ * +/{{asSnakeCaseLower label}}/Commands/WriteAttributes is received. Setting this callback
+ * will overwrite any previously set callback
+ */
+void {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_write_attributes_callback(
+  const {{asWriteAttributesCallback this}}_t callback
+);
+
+/**
+ * Setup a callback for ForceReadAttributes to be called when a
+ * +/{{asSnakeCaseLower label}}/Commands/ForceReadAttributes is received. Setting this callback
+ * will overwrite any previously set callback
+ */
+void {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_force_read_attributes_callback(
+  const {{asForceReadAttributesCallback this}}_t callback
+);
+
+{{#zcl_attributes}}
+/**
+ * @brief Publish the attribute; {{parent.label}}/Attributes/{{label}}
+ *
+ * @param base_topic    topic prefix to publish, /{{asSnakeCaseLower label}}
+ *                      will be appended
+ * @param value         Value to publish
+ * @param publish_type  Whether to publish as Desired, Reported, or Both.
+ * @return SL_STATUS_OK on success
+ */
+sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
+  const char *base_topic,
+  {{asUnderlyingType type}} value,
+  {{dotdot_prefix}}_attribute_publish_type_t publish_type
+);
+
+{{/zcl_attributes}}
+
+/**
+ * @brief Publish the {{label}}/ClusterRevision attribute
+ *
+ * @param base_topic    topic prefix to publish, /{{label}}/Attributes/ClusterRevision
+ *                      will be appended.
+ * @param value         Value to publish.
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower label}}_publish_cluster_revision(const char* base_topic, uint16_t value);
+
+{{/if}}
+{{/zcl_clusters}}
+
+/**
+ * @brief Publish the SupportedCommands for UNID/EndPoint
+ *
+ * This function will iterate over all Commands in all Clusters and call all
+ * registered callback functions with unid, endpoint, and
+ * callback_type = UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK. All Cluster
+ * Command callback functions that return SL_STATUS_OK  will be added to the
+ * list of supported commands and published.
+ *
+ * @param unid
+ * @param endpoint
+ */
+void {{dotdot_prefix}}_publish_supported_commands(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint);
+
+/**
+* Function definition used to register a Group dispatch function from a Protocol
+* Controller.
+* Incoming publications at ucl/by-group/+/&lt;Cluster&gt;/Commands/&lt;Command&gt; will be
+* forwarded to this function.
+* @param group_id       Group ID of the group to dispatch.
+* @param cluster_name   The name of the Cluster for which the command was received
+* @param command        The Command that was received within the Cluster.
+* @param message        The MQTT message/payload received for the command
+* @param message_length The length of the MQTT message/payload received for the
+*                       Command.
+* @param callback MQTT subscription callback that is normally used for individual
+*                 Command dispatch for the cluster.
+*/
+typedef void (*group_dispatch_t)(uint16_t group_id,
+                                 const char *cluster_name,
+                                 const char *command,
+                                 const char *message,
+                                 size_t message_length,
+                                 mqtt_message_callback_t callback);
+
+/**
+ * @brief Setup Group dispatch callback
+ *
+ * This function will set the callback used when a ucl/by-group/# is received
+ * and subscribe to all by-group topics handlers supported by the Protocol
+ * Controller. Setting this callback will overwrite any previously set
+ * callback but will not resubscribe to the topic handlers.
+ *
+ * @param callback
+ */
+void {{dotdot_prefix}}_set_group_dispatch_callback(group_dispatch_t callback);
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
+#endif // DOTDOT_MQTT_H
+/** @} end dotdot_mqtt */

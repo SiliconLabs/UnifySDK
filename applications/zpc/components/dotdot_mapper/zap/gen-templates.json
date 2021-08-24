@@ -1,0 +1,31 @@
+{
+  "name": "ZPC Dotdot Mappers",
+  "version": "ZPC-dotdot-v1",
+  "override": "../../../../../components/uic_dotdot/zap/addon-override.js",
+  "helpers": [
+    "../../../../../components/uic_dotdot/zap/addon-helper.js"
+  ],
+  "templates": [
+    {
+      "path": "dotdot_attributes_cpp.zapt",
+      "name": "Implementation of ZCL attributes for the attribute store",
+      "output": "src/dotdot_attributes.cpp"
+    },
+    {
+      "path": "dotdot_attributes_h.zapt",
+      "name": "Interface for the ZPC attributes for the attribute store",
+      "output": "include/dotdot_attributes.h"
+    },
+    {
+      "path": "dotdot_attributes_uam.zapt",
+      "name": "Interface for the ZPC attributes for the attribute store",
+      "output": "include/dotdot_attributes.uam"
+    },
+    {
+      "path": "dotdot_attributes_id_h.zapt",
+      "name": "Interface for the ZPC attributes for the attribute store",
+      "output": "include/dotdot_attributes_id.h"
+    }
+
+  ]
+}

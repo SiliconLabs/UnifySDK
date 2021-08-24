@@ -1,0 +1,38 @@
+@startuml
+
+' Style for the diagram
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ArrowColor #000000
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam ParticipantBorderColor #480509
+skinparam SequenceLifeLineBorderColor #001111
+skinparam SequenceLifeLineBorderThickness 2
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+
+hide footbox
+title Z-Wave frame transmission\nComponents with processes in grey
+
+' List of participants
+participant "User component" as u
+participant "Z-Wave TX" as tx #DEDEDE
+participant "Z-Wave API" as zwapi
+participant "Z-Wave RX" as rx #DEDEDE
+
+u -> tx: <b>zwave_tx_send_data\n(frame data, user_callback_function)
+tx -> tx: Queues the frame
+tx -> u: returns\nSL_STATUS_OK, zwave_tx_session_id
+tx -> tx: Process verifies\nthe Tx queue
+tx -> zwapi: <b>zwapi_send_data\n(frame data, Z-Wave TX Callback)
+zwapi -> tx : SL_STATUS_OK
+zwapi -> zwapi: Frame being sent\non the radio
+rx -> rx: continuously\nmonitors\nincoming\nmessages
+rx -> zwapi: <b>zwapi_poll</b>()
+zwapi -> tx: Z-Wave TX Callback\n(callback registered with last call \nto zwapi_send_data)
+tx -> u: User callback
+
+@enduml

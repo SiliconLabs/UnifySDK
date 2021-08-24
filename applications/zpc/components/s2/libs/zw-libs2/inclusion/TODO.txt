@@ -1,0 +1,28 @@
+TODO List collection for inclusion:
+
+This is a rough dynamic living list of inclusion tasks yet to be implemented, for full overview, please search for TODO in libs2 code base.
+
+-----------
+Source code:
+inclusion\s2_inclusion.c 
+	Line 23: /** TODO: Investigate if there is/should be a common header for util functions as this. 
+	Line 46: /** TODO: We should ensure the events in this enum matches the COMMANDS in COMMAND_CLASS_S2 to 
+	Line 153:   // TODO: Investigate if it can be fixed.
+	Line 164:   // TODO: Investigate if it can be fixed.
+	Line 175:   // TODO: Investigate if it can be fixed.
+	Line 200:   // TODO: Define how to obtain our pub key.
+	Line 201:   uint8_t frame[] = {COMMAND_CLASS_SECURITY2, SECURITY2_PUB_KEY}; // TODO: Fetch buffer from S2 work pool in future.
+	Line 218:   // TODO: Fetch buffer from S2 work pool in future. Some dynamic allocation of a send buffer should be available.
+
+inclusion\s2_inclusion.h
+  Line 14: /** TODO: Those must be located in ZW_classcmd.h in future, for now, just place here for test purposes. 
+  
+Mock files:
+include\mock\s2_extern_mock.c
+include\mock\s2_mock.c
+inclusion\mock\s2_inclusion_extern_mock.c 
+  Line 18, Line 19, Line 17: // TODO: Extend comparison of S2 struct on need to have basis.
+
+inclusion\mock\s2_inclusion_extern_mock.c 
+  Line 41: //    MOCK_CALL_COMPARE_INPUT_STRUCT_S2_CONNECTION(p_mock->compare_rule_arg[0], // TODO: Forcing COMPARE_ANY for temporary development.
+

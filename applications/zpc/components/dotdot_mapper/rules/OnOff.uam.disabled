@@ -1,0 +1,24 @@
+// MAP file for the auto-generated command class handler
+
+// Binary switch Command Class
+def zwCOMMAND_CLASS_SWITCH_BINARY_VERSION 0x2501
+def zwSWITCH_BINARY_CURRENT_VALUE 0x2502
+def zwSWITCH_BINARY_TARGET_VALUE 0x2503
+def zwSWITCH_BINARY_DURATION 0x2504
+
+
+// OnOff Cluster
+def zbON_OFF_CLUSTER_SWITCH 0x00060000
+
+scope 0 {
+
+// Linking reported attributes zwave -> zigbee
+r'zbON_OFF_CLUSTER_SWITCH = r'zwSWITCH_BINARY_CURRENT_VALUE
+
+r'zwSWITCH_BINARY_TARGET_VALUE = if(e'zwCOMMAND_CLASS_SWITCH_BINARY_VERSION == 1) 0 undefined
+
+// Linking desired attributes zigbee -> zwave
+d'zwSWITCH_BINARY_CURRENT_VALUE = d'zbON_OFF_CLUSTER_SWITCH
+d'zwSWITCH_BINARY_TARGET_VALUE  = d'zbON_OFF_CLUSTER_SWITCH
+
+}

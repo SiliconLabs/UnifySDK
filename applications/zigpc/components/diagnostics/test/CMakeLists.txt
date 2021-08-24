@@ -1,0 +1,1 @@
+target_add_unittest(zigpc_diagnostics SOURCES zigpc_diagnostics_test.cpp DEPENDS uic_mqtt_mock)

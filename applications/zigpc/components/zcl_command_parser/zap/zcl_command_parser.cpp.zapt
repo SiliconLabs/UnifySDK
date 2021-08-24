@@ -1,0 +1,261 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+{{#zcl_atomics}}{{zcl_type_map_set_item this.name this.name}}{{/zcl_atomics}}
+{{#zcl_enums}}{{#if type}}{{zcl_type_map_set_item this.label this.type}}{{/if}}{{/zcl_enums}}
+{{#zcl_bitmaps}}{{#if type}}{{zcl_type_map_set_item this.label this.type}}{{/if}}{{/zcl_bitmaps}}
+
+#include <cstring>
+#include <set>
+#include <unordered_map>
+
+// UIC shared components
+#include "sl_log.h"
+
+#include "zigpc_gateway_notify.h"
+#include "zigpc_common_zigbee.h"
+#include "zcl_definitions.h"
+#include "zcl_util.h"
+
+#include "zcl_command_parser.h"
+#include "zcl_command_parser_int.h"
+
+constexpr char LOG_TAG[] = "{{component_cmdparser_prefix}}";
+
+{{zcl_commands_filtered_reset}}
+{{#zcl_clusters}}
+{{#zcl_commands}}
+{{#if (supportedCluster parent.label)}}
+{{#if (isEqual source "client")}}
+{{zcl_commands_filtered_add}}
+{{/if}}
+{{/if}}
+{{/zcl_commands}}
+{{/zcl_clusters}}
+{{!-- Wait till the above operation has been processed by ZAP --}}
+{{#after}}
+/**
+ * @brief Container to hold data parsed for incoming messages
+ * from the Zigbee network.
+ */
+typedef struct {
+  zcl_cluster_id_t cluster_id;
+  zcl_command_id_t command_id;
+  {{component_cmdparser_prefix}}_callback_data_t data;
+} {{component_cmdparser_prefix}}_result_t;
+
+static std::unordered_map<zcl_cluster_id_t, std::set<zcl_command_id_t>>  command_parser_support_map = {
+{{#zcl_clusters}}
+{{#zcl_commands}}
+{{#if (supportedCluster parent.label)}}
+{{#if (isEqual source "client")}}
+{{#zcl_commands_filtered_first}}
+  {
+    {{asZigPCZclClusterType parent}},
+    {
+{{/zcl_commands_filtered_first}}
+      {{asZigPCZclCommandType parent this}},
+{{#zcl_commands_filtered_last}}
+    }
+  },
+{{/zcl_commands_filtered_last}}
+{{/if}}
+{{/if}}
+{{/zcl_commands}}
+{{/zcl_clusters}}
+};
+
+bool {{component_cmdparser_prefix}}_cluster_command_supported(zcl_cluster_id_t cluster_id,
+                                                              zcl_command_id_t command_id)
+{
+  bool support_check = false;
+
+  auto cluster_found = command_parser_support_map.find(cluster_id);
+  if (cluster_found != command_parser_support_map.end()) {
+    size_t command_found = cluster_found->second.count(command_id);
+
+    if (command_found != 0) {
+      support_check = true;
+    }
+  }
+
+  return support_check;
+}
+
+{{#zcl_clusters}}
+{{#zcl_commands}}
+{{#if (supportedCluster parent.label)}}
+{{#if (isEqual source "client")}}
+{{component_zigpc_zcl_prefix}}_status_t {{component_cmdparser_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_command(
+  const zigpc_gateway_on_command_received_t *cmd,
+  {{component_cmdparser_prefix}}_result_t *result
+) {
+  
+  {{component_zigpc_zcl_prefix}}_status_t status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_SUCCESS;
+{{#zcl_command_arguments}}
+{{#first}}
+  size_t payload_offset = cmd->frame_payload_offset;
+  {{component_zigpc_zcl_prefix}}_data_type_t arg_type = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_DATA_TYPE_NODATA;
+  size_t arg_size = 0;
+  {{component_cmdparser_prefix}}_{{asSnakeCaseLower parent.parent.label}}_{{asSnakeCaseLower parent.label}}_t *data;
+  data = &result->data.{{asSnakeCaseLower parent.parent.label}}_{{asSnakeCaseLower parent.label}};
+
+{{/first}}
+{{#if (supportedStruct type)}}
+  if (status == {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_SUCCESS) {
+    arg_type = {{asZigPCZclDataType (zcl_type_map_get_item type)}};
+    arg_size = {{component_zigpc_zcl_prefix}}_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_MALFORMED_COMMAND;
+    } else {
+{{#if isArray}}
+      data->{{asSnakeCaseLower label}} = ({{asZigPCZclStructType type}} *) &cmd->frame.buffer;
+{{else}}
+      memcpy(data->{{asSnakeCaseLower label}}, &cmd->frame.buffer[payload_offset], arg_size);
+{{/if}}
+      payload_offset += arg_size;
+    }
+  }
+{{else if isArray}}
+  if (status == {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_SUCCESS) {
+    arg_type = {{asZigPCZclDataType (zcl_type_map_get_item type)}};
+    arg_size = {{component_zigpc_zcl_prefix}}_get_data_type_size(arg_type);
+    uint8_t arg_array_count = cmd->frame.buffer[payload_offset];
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + (arg_size * arg_array_count)) + 1) {
+      status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_MALFORMED_COMMAND;
+    } else {
+      data->{{asSnakeCaseLower label}}_count = arg_array_count;
+      payload_offset++;
+      data->{{asSnakeCaseLower label}} = ({{asUnderlyingType type}} *) &cmd->frame.buffer[payload_offset];
+      payload_offset += arg_size * arg_array_count;
+    }
+  }
+{{else if (isString type)}}
+  if (status == {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_SUCCESS) {
+    arg_type = {{asZigPCZclDataType (zcl_type_map_get_item type)}};
+    arg_size = {{component_zigpc_zcl_prefix}}_get_data_type_size(arg_type);
+    uint8_t arg_str_len = cmd->frame.buffer[payload_offset];
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + (arg_size * arg_str_len) + 1)) {
+      status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_MALFORMED_COMMAND;
+    } else {
+      data->{{asSnakeCaseLower label}}_length = arg_str_len;
+      payload_offset++;
+      data->{{asSnakeCaseLower label}} = (const char *) &cmd->frame.buffer[payload_offset];
+      payload_offset += arg_size * arg_str_len;
+    }
+  }
+{{else}}
+  if (status == {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_SUCCESS) {
+    arg_type = {{asZigPCZclDataType (zcl_type_map_get_item type)}};
+    arg_size = {{component_zigpc_zcl_prefix}}_get_data_type_size(arg_type);
+    if (arg_size == 0) {
+      // Unable to get size of parameter
+      status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_UNSUP_CLUSTER_COMMAND;
+    } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_MALFORMED_COMMAND;
+    } else {
+      std::memcpy(&data->{{asSnakeCaseLower label}}, &cmd->frame.buffer[payload_offset], arg_size);
+      payload_offset += arg_size;
+    }
+  }
+{{/if}}
+{{/zcl_command_arguments}}
+  if (status == {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_SUCCESS) {
+    result->cluster_id = {{asZigPCZclClusterType parent}};
+    result->command_id = {{asZigPCZclCommandType parent this}};
+    sl_log_debug(LOG_TAG, "{{parent.label}}/{{label}} parsed successfully");
+  }
+  return status;
+}
+
+{{/if}}
+{{/if}}
+{{/zcl_commands}}
+{{/zcl_clusters}}
+
+{{#zcl_clusters}}
+{{#zcl_commands}}
+{{#if (supportedCluster parent.label)}}
+{{#if (isEqual source "client")}}
+{{#zcl_commands_filtered_first}}
+
+{{component_zigpc_zcl_prefix}}_status_t {{component_cmdparser_prefix}}_{{asSnakeCaseLower parent.label}}_client_cluster(
+  const zigpc_gateway_on_command_received_t *cmd,
+  {{component_cmdparser_prefix}}_result_t *result
+) {
+  {{component_zigpc_zcl_prefix}}_status_t status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_UNSUP_CLUSTER_COMMAND;
+  switch(cmd->command_id) {
+{{/zcl_commands_filtered_first}}
+    case {{asZigPCZclCommandType parent this}}:
+      status = {{component_cmdparser_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_command(cmd, result);
+      break;
+{{#zcl_commands_filtered_last}}
+    default:
+      break;
+  }
+  return status;
+}
+{{/zcl_commands_filtered_last}}
+{{/if}}
+{{/if}}
+{{/zcl_commands}}
+{{/zcl_clusters}}
+
+void {{component_cmdparser_prefix}}_on_command_received(void* event_data) {
+  {{component_cmdparser_prefix}}_result_t result;
+  zigpc_gateway_on_command_received_t *cmd
+      = (zigpc_gateway_on_command_received_t *) event_data;
+
+  if (cmd != NULL) {
+    cmd->return_status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_UNSUPPORTED_CLUSTER;
+    sl_log_debug(LOG_TAG, "Parsing %s cluster[0x%04X] command[0x%02X] data",
+                 cmd->from_server_to_client ? "client" : "server",
+                 cmd->cluster_id, cmd->command_id);
+    if(cmd->from_server_to_client == true) {
+      switch(cmd->cluster_id) {
+  {{#zcl_clusters}}
+  {{#zcl_commands}}
+  {{#if (supportedCluster parent.label)}}
+  {{#if (isEqual source "client")}}
+  {{#zcl_commands_filtered_first}}
+        case {{asZigPCZclClusterType parent}}:
+          cmd->return_status = {{component_cmdparser_prefix}}_{{asSnakeCaseLower parent.label}}_client_cluster(cmd, &result);
+          break;
+  {{/zcl_commands_filtered_first}}
+  {{/if}}
+  {{/if}}
+  {{/zcl_commands}}
+  {{/zcl_clusters}}
+        default:
+          break;
+      }
+    }
+
+    if (cmd->return_status == {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_SUCCESS) {
+      sl_log_debug(LOG_TAG, "Calling listeners");
+      zigpc_zclcmdparse_invoke_callback(cmd->eui64, cmd->endpoint_id, result.cluster_id, result.command_id, &result.data);
+    }
+  }
+}
+
+{{/after}}

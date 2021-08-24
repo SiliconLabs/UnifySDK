@@ -1,0 +1,78 @@
+# Debugging Inclusion Unit Tests
+
+Keep in mind that the s2_inclusion unit tests are structured with the
+expectations being setup in the first half of each test case. Then the test
+stimulus or execution only appears in the second half of each test case
+function.
+
+The debug assertions print out the line where the failed expectation was set up,
+not the line with the stimulus triggering it. This makes it complicated to find
+the cause of the assert failure.
+
+In order to debug a failed assertion, it can be helpful to run the unit test in a
+debugger and set a breakpoint. The table shows good functions to place the
+breakpoint on when troubleshooting different error messages.
+
+|Test Error Message | Where to put breakpoint |
+| ---               | ---                     |
+|":38:test_name:FAIL: Expected 3 Was 5" (and similar)|UnityTestResultsFailBegin()|
+|"Expected mock call(s) never occurred, see list above for details."|mock_call_expected_did_not_occur()|
+|"Unexpected mock call occurred: "|mock_call_did_not_find()|
+
+Here is a full example using lldb:
+
+```bash
+/projects/zipgateway/libs2/build (internal_lr_debug) $ lldb inclusion/test/test_inclusion_including_node
+(lldb) target create "inclusion/test/test_inclusion_including_node"
+Current executable set to 'inclusion/test/test_inclusion_including_node' (x86_64).
+(lldb) b UnityTestResultsFailBegin
+Breakpoint 1: where = test_inclusion_including_node`UnityTestResultsFailBegin + 70 at unity.c:358:33, address = 0x000000010001e1c6
+(lldb) r
+Process 89791 launched: '/Users/jaburon/projects/zipgateway/libs2/build/inclusion/test/test_inclusion_including_node' (x86_64)
+:130:test_controller_build:PASS
+<SNIP>
+:5784:test_kex_including_node_state_machine_no_keys_neg:PASS
+Process 89791 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x000000010001e1c6 test_inclusion_including_node`UnityTestResultsFailBegin(line=38) at unity.c:358:33
+   355 	static void UnityTestResultsFailBegin(const UNITY_LINE_TYPE line)
+   356 	{
+   357 	#ifndef UNITY_FIXTURES
+-> 358 	    UnityTestResultsBegin(Unity.TestFile, line);
+   359 	#else
+   360 	    UNITY_UNUSED(line);
+   361 	#endif
+Target 0: (test_inclusion_including_node) stopped.
+(lldb) bt
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+  * frame #0: 0x000000010001e1c6 test_inclusion_including_node`UnityTestResultsFailBegin(line=38) at unity.c:358:33
+    frame #1: 0x000000010001e3e4 test_inclusion_including_node`UnityAssertEqualNumber(expected=3, actual=5, msg=0x0000000000000000, lineNumber=38, style=UNITY_DISPLAY_STYLE_UINT32) at unity.c:523:9
+    frame #2: 0x0000000100035273 test_inclusion_including_node`s2_event_handler(p_actual_evt=0x0000000100045b60) at s2_event_handler_mock.c:38:5
+    frame #3: 0x0000000100007a33 test_inclusion_including_node`inclusion_failed_evt_push(fail_type='\0') at s2_inclusion.c:676:3
+    frame #4: 0x000000010000a3c5 test_inclusion_including_node`s2_check_no_keys at s2_inclusion.c:1780:5
+    frame #5: 0x0000000100005d7c test_inclusion_including_node`process_event(evt=517) at s2_inclusion.c:577:13
+    frame #6: 0x000000010000724b test_inclusion_including_node`s2_inclusion_post_event_internal(p_context=0x00007ffeefbfb8f8) at s2_inclusion.c:968:3
+    frame #7: 0x0000000100006896 test_inclusion_including_node`s2_inclusion_post_event(p_context=0x00007ffeefbfb8f8, src=0x00000001000a26ec) at s2_inclusion.c:835:5
+    frame #8: 0x000000010001beb5 test_inclusion_including_node`test_kex_including_node_LR_unauth_keys at test_inclusion_including_node.c:6016:3
+    frame #9: 0x00000001000214dd test_inclusion_including_node`UnityDefaultTestRun(Func=(test_inclusion_including_node`test_kex_including_node_LR_unauth_keys at test_inclusion_including_node.c:5799), FuncName="test_kex_including_node_LR_unauth_keys", FuncLineNum=5798) at unity.c:1273:9
+    frame #10: 0x00000001000049ef test_inclusion_including_node`main(argc=1, argp=0x00007ffeefbff6d0) at test_inclusion_including_node_runner.c:235:5
+    frame #11: 0x00007fff5e2713d5 libdyld.dylib`start + 1
+(lldb) up 7
+frame #7: 0x0000000100006896 test_inclusion_including_node`s2_inclusion_post_event(p_context=0x00007ffeefbfb8f8, src=0x00000001000a26ec) at s2_inclusion.c:835:5
+   832
+   833 	  if(mp_context->inclusion_peer.r_node == src->r_node) {
+   834 	    mp_context->inclusion_peer.class_id = src->class_id;
+-> 835 	    s2_inclusion_post_event_internal(mp_context);
+   836 	  }
+   837 	}
+   838
+(lldb) up
+frame #8: 0x000000010001beb5 test_inclusion_including_node`test_kex_including_node_LR_unauth_keys at test_inclusion_including_node.c:6016:3
+   6013	  s2_context.buf    = s2_transfer_end_frame;
+   6014	  s2_context.length = sizeof(s2_transfer_end_frame);
+   6015	  s2_conn.class_id = UNIT_TEST_TEMP_KEY_SECURE;
+-> 6016	  s2_inclusion_post_event(&s2_context, &s2_conn);
+   6017
+   6018	  mock_calls_verify();
+   6019	}
+```

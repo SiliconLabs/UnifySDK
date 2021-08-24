@@ -1,0 +1,20 @@
+/**
+
+@author Silicon Laboratories Inc.
+
+@mainpage Z-Wave Protocol Controller
+@section intro Introduction
+The ZPC is the Unify protocol-controller (PC) for the Z-Wave protocol.
+
+@section References
+@subsection device_class_spec Z-Wave Alliance, Z-Wave Device Class Specification
+@subsection application_cc_spec Z-Wave Alliance, Application Command Class Specification
+@subsection management_cc_spec Z-Wave Alliance, Management Command Class Specification
+@subsection transport_cc_spec Z-Wave Alliance, Transport-Encapsulation Command Class Specification
+@subsection network_cc_spec Z-Wave Alliance, Network-Protocol Command Class Specification
+@subsection role_type_spec Z-Wave Alliance, Z-Wave Plus Role Types Specification
+@subsection device_type_spec Z-Wave Alliance, Z-Wave Plus Device Types Specification
+@subsection device_type_spec_v2 Z-Wave Alliance, Z-Wave Plus v2 Device Type Specification
+@subsection zwave_nwk_spec Z-Wave Alliance, Z-Wave and Z-Wave Long Range Network Layer Specification
+
+ */

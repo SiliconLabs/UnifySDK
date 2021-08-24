@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["MqttHandler","MqttHandler handles subscription messages related to UIC OTA. It subscribes to listen to the correct topics and is to be passed to the mosquitto client"]]});

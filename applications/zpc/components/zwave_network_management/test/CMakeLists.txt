@@ -1,0 +1,11 @@
+target_add_unittest(zwave_network_management
+SOURCES
+  zwave_network_management_test.c
+DEPENDS
+  uic_contiki_stub
+  zwave_s2_mock
+  zwave_controller_mock
+  zwave_tx_mock
+  zwave_api_mock
+  zwave_s0_mock
+)

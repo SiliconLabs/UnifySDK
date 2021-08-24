@@ -1,0 +1,20 @@
+{
+  "name": "ZPC Dotdot Attribute State Publisher",
+  "version": "ZPC-dotdot-v1",
+  "override": "../../../../../components/uic_dotdot/zap/addon-override.js",
+  "helpers": [
+    "../../../../../components/uic_dotdot/zap/addon-helper.js", "addon-publisher-helper.js"
+  ],
+  "templates": [
+    {
+      "path": "dotdot_mqtt_topics_handler_cpp.zapt",
+      "name": "Implementation for publishing the state of ZCL attributes to MQTT interface",
+      "output": "src/dotdot_mqtt_topics_handler.cpp"
+    },
+    {
+      "path": "dotdot_mqtt_topics_handler_h.zapt",
+      "name": "Implementation for publishing the state of ZCL attributes to MQTT interface",
+      "output": "include/dotdot_mqtt_topics_handler.h"
+    }
+  ]
+}

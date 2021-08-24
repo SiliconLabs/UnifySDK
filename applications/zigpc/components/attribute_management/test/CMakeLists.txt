@@ -1,0 +1,34 @@
+target_add_unittest(
+  zigpc_attribute_management
+  NAME
+  zigpc_attrmgmt_send_reporting_test
+  SOURCES
+  zigpc_attrmgmt_send_reporting_test.cpp
+  DEPENDS
+  zigpc_zcl_profiles_mock
+  zigpc_common_mock
+  zigpc_gateway_mock)
+
+target_add_unittest(
+  zigpc_attribute_management
+  NAME
+  zigpc_attrmgmt_send_read_test
+  SOURCES
+  zigpc_attrmgmt_send_read_test.cpp
+  DEPENDS
+  zigpc_zcl_profiles_mock
+  zigpc_common_mock
+  zigpc_zcl_util_mock
+  zigpc_gateway_mock)
+
+target_add_unittest(
+  zigpc_attribute_management
+  NAME
+  zigpc_attrmgmt_receive_test
+  SOURCES
+  zigpc_attrmgmt_receive_test.cpp
+  DEPENDS
+  zigpc_common_mock
+  zigpc_zcl_util_mock
+  uic_dotdot_mqtt_mock
+  zigpc_gateway_mock)

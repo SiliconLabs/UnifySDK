@@ -1,0 +1,27 @@
+@startuml
+    title UIC Main loop
+    participant process1
+    entity "UIC Main" as main
+    participant etimer
+    participant process2
+
+    main-> process1: fixt_init()
+    main-> process2: fixt_init()
+    main-> process1: INIT
+    main-> process2: INIT
+
+    process1 -> main: uic_main_ext_register_rfd()
+
+    alt main loop
+      ... select sleeps until data on fd ...
+      main -> process1: POLL (data is read of the fd)
+      process1 -> process2: do_stuff(msg)
+      process2 -> main: process_post(process2,DO_STUFF, msg)
+      main -> process2: DO_STUFF (process event hanler)
+      process2->etimer: etimer_set()
+      ... select sleeps until timeout ...
+      main -> etimer: POLL (process event hanler)
+      etimer -> main: process_post(process2,EVENT_TIMER, &timer)
+      main -> process2: EVENT_TIMER (process event hanler)
+    end
+@enduml

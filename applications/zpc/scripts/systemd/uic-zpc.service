@@ -1,0 +1,14 @@
+[Unit]
+Description=UIC Z-Wave protocol controller
+Requires=mosquitto.service
+
+[Service]
+ExecStart=/usr/bin/zpc
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+KillMode=process
+User=uic
+Group=uic
+
+[Install]
+WantedBy=multi-user.target

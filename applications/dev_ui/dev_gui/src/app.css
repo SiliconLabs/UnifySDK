@@ -1,0 +1,308 @@
+.split1 {
+    float: left;
+    width: 230px;
+    transition: width 0.3s;
+}
+
+.split2 {
+    height: 100%;
+    float: left;
+    width: calc(100% - 245px);
+    margin: 15px 0px 0px 15px;
+    transition: width 0.3s;
+}
+
+.side-bar-collapsed .split1 {
+    width: 50px;
+    transition: width 0.3s;
+}
+
+.side-bar-collapsed .split2 {
+    width: calc(100% - 65px);
+    transition: width 0.3s;
+}
+
+.split2>h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.side-bar-collapse {
+    border: solid 1px #dee2e6;
+    border-radius: 12px;
+    height: 20px;
+    width: 20px;
+    color: darkslategrey;
+    margin-left: -25px;
+    background: #f7f7f7;
+    margin-top: 20px;
+    float: left;
+    cursor: pointer;
+}
+
+.side-bar-collapse:hover {
+    background: #e4e4e4;
+}
+
+.side-bar-collapse svg {
+    color: #303030;
+    transform: rotate(0deg);
+    transition: 0.5s;
+}
+
+.side-bar-collapsed .side-bar-collapse svg {
+    transform: rotate(180deg);
+    transition: 0.5s;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.word-break {
+    word-break: break-word;
+}
+
+.wd-col-1 {
+    width: 8.33%;
+}
+
+.wd-col-2 {
+    width: 16.66%;
+}
+
+.wd-col-4 {
+    width: 33.33%;
+}
+
+.wd-col-5 {
+    width: 41.65%;
+}
+
+.wd-col-6 {
+    width: 50%;
+}
+
+.wd-40px {
+    width: 40px;
+}
+
+.pointer {
+    cursor: pointer !important;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-padding-h {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.no-padding-r {
+    padding-right: 0 !important;
+}
+
+.no-padding-l {
+    padding-left: 0 !important;
+}
+
+.padding-5 {
+    padding: 5px !important;
+}
+
+.padding-h-15 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.padding-l-5 {
+    padding-left: 5px;
+}
+
+.no-content {
+    color: #777777;
+    line-height: 100px;
+}
+
+.margin-h-5 {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.margin-5 {
+    margin: 5px;
+}
+
+.margin-b-0 {
+    margin-bottom: 0;
+}
+
+.margin-b-10 {
+    margin-bottom: 10px;
+}
+
+.margin-v-20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.margin-v-10 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.margin-r-5 {
+    margin-right: 5px;
+}
+
+.margin-r-30 {
+    margin-right: 30px;
+}
+
+.margin-t-10 {
+    margin-top: 10px;
+}
+
+.editable-tr .form-control {
+    padding: 5px;
+    line-height: 17px;
+    height: 30px;
+}
+
+.table.table-striped th,
+.table.table-striped td {
+    vertical-align: middle;
+    line-height: 17px;
+}
+
+.table-cell {
+    display: table-cell;
+}
+
+.error-modal-header {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.error-border {
+    border-color: #dc3545;
+}
+
+.icon {
+    font-size: 18px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.icon:active {
+    color: #003e81;
+}
+
+.cursor-defult {
+    cursor: default;
+}
+
+.spinner-border.spinner-border-sm {
+    border-width: 0.1em;
+}
+
+.tooltip-inner {
+    white-space: pre-line;
+}
+
+.col-form-label {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.popover-l.popover {
+    max-width: 300px;
+}
+
+.invalid .MuiOutlinedInput-notchedOutline {
+    border-color: #dc3545;
+}
+
+.nav-tabs .nav-link {
+    padding: 1rem 1rem;
+}
+
+.split2 .progress {
+    background-color: #cee5ff;
+}
+
+.hidden {
+    display: none;
+}
+
+.col-sm-5p {
+    flex: 0 0 5%;
+    max-width: 5%;
+}
+
+.col-sm-30p {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+
+.cluster-attributes .MuiOutlinedInput-adornedEnd {
+    padding-right: 0px;
+}
+
+.cluster-attributes .MuiInputAdornment-positionEnd {
+    height: 40px;
+    width: 40px;
+    max-height: inherit;
+}
+
+.cluster-attributes .icon {
+    margin: auto;
+}
+
+.cluster-attributes .MuiInputLabel-outlined.MuiInputLabel-marginDense {
+    overflow: hidden;
+    width: calc(100% - 46px);
+    text-overflow: ellipsis;
+}
+
+@keyframes blinker {
+    from {
+        opacity: 1.0;
+        font-weight: 600;
+    }
+    to {
+        opacity: 0.1;
+        font-weight: 600;
+    }
+}
+
+.blinking {
+    animation-name: blinker;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    animation-duration: 1.5s;
+}
+
+@keyframes blinker-error {
+    50% {
+        background-color: hsl(355, 100%, 90%)
+    }
+}
+
+.blinking-error {
+    animation-name: blinker-error;
+    animation-iteration-count: 3;
+    animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    animation-duration: 0.8s;
+}

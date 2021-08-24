@@ -1,0 +1,36 @@
+// Force lifeline associations
+// The ZPC will by default establish a lifeline association to nodes that have
+// no AGI information, or if the AGI profile of a group is 0x0000 or 0x0001.
+
+// If we want to force the ZPC to establish an association,
+// configure the Group Profile to be 1 for the device that match a given fingerprint
+
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+
+def zwASSOCIATION_GROUP_ID      0x00008503
+def zwASSOCIATION_GROUP_PROFILE 0x00005904
+
+// AGI profile value to establish the lifeline or not.
+def ESTABLISH_LIFELINE 0x0001
+def NO_LIFELINE        0xFFFF
+
+scope 0 {
+
+// To fingerprint this device, we match the following:
+// * Manufacturer ID
+// * Product Type ID
+// * Product ID
+
+r'zwASSOCIATION_GROUP_ID[1].zwASSOCIATION_GROUP_PROFILE =
+  if ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x05)) ESTABLISH_LIFELINE
+  if ((r'zwMANUFACTURER_ID == 0x86) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x50)) ESTABLISH_LIFELINE
+  undefined
+
+// Establish a lifeline for Association Group 2 of the PowerStrip sample application
+r'zwASSOCIATION_GROUP_ID[2].zwASSOCIATION_GROUP_PROFILE =
+  if ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x05)) ESTABLISH_LIFELINE
+  undefined
+
+}

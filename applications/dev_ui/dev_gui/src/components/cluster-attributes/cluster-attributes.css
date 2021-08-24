@@ -1,0 +1,50 @@
+.disabled {
+    opacity: 0.40;
+    cursor: default;
+}
+
+.check-container {
+    line-height: 24px;
+    display: inline-block;
+}
+
+.writable {
+    background: #fffdc5;
+    border-radius: 5px;
+    border: 1px solid #c4c297;
+}
+
+.flex-input {
+    display: flex !important;
+}
+
+.writable-hint {
+    font-size: 10px;
+}
+
+.writable-hint span {
+    height: 15px;
+    width: 26px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.form-text.hint {
+    display: inline-block;
+    margin-top: 2px;
+    margin-left: 15px;
+    color: grey;
+}
+
+.invalid .form-text.hint {
+    color: #dc3545;
+}
+
+.adornment {
+    display: inline;
+}
+
+.card-header .adornment {
+    float: right;
+}

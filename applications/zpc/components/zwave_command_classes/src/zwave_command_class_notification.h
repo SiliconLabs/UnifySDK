@@ -1,0 +1,198 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+/**
+ * @defgroup notification_command_class Notification Command Class
+ * @ingroup command_classes
+ * @brief A Z-Wave Notification Command Class handlers and control functions
+ *
+ * This module parses a Notification Report command and control the
+ * notification command class interview.
+ *
+ * This module will update the attributes values corresponding to the
+ * Notification Command Class.
+ *
+ * An example of attribute store tree organization for Notification
+ * Command Class is shown in the image below.
+ * \image html attribute_store_notification_command_class.png
+ *
+ * @{
+ */
+
+#ifndef ZWAVE_COMMAND_CLASS_NOTIFICATION_H
+#define ZWAVE_COMMAND_CLASS_NOTIFICATION_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "sl_status.h"
+#include "zwave_controller_connection_info.h"
+#include "zwave_rx.h"
+#include "attribute_store.h"
+
+
+// Following defines are created using the notification.py
+#define NOTIFICATION_SMOKE_ALARM              (0x1)
+#define NOTIFICATION_CO_ALARM                 (0x2)
+#define NOTIFICATION_CO2_ALARM                (0x3)
+#define NOTIFICATION_HEAT_ALARM               (0x4)
+#define NOTIFICATION_WATER_ALARM              (0x5)
+#define NOTIFICATION_ACCESS_CONTROL           (0x6)
+#define NOTIFICATION_HOME_SECURITY            (0x7)
+#define NOTIFICATION_POWER_MANAGEMENT         (0x8)
+#define NOTIFICATION_SYSTEM                   (0x9)
+#define NOTIFICATION_APPLIANCE                (0xc)
+#define NOTIFICATION_HOME_HEALTH              (0xd)
+#define NOTIFICATION_SIREN                    (0xe)
+#define NOTIFICATION_WATER_VALVE              (0xf)
+#define NOTIFICATION_WEATHER_ALARM            (0x10)
+#define NOTIFICATION_IRRIGATION               (0x11)
+#define NOTIFICATION_GAS_ALARM                (0x12)
+#define NOTIFICATION_PEST_CONTROL             (0x13)
+#define NOTIFICATION_LIGHT_SENSOR             (0x14)
+#define NOTIFICATION_WATER_QUALITY_MONITORING (0x15)
+#define NOTIFICATION_HOME_MONITORING          (0x16)
+
+#define NOTIFICATION_STATE_LAST_EVENT                                  (0xff)
+#define NOTIFICATION_STATE_SMOKE_ALARM_SENSOR_STATUS                   (0x0)
+#define NOTIFICATION_STATE_SMOKE_ALARM_ALARM_STATUS                    (0x1)
+#define NOTIFICATION_STATE_SMOKE_ALARM_MAINTENANCE_STATUS              (0x2)
+#define NOTIFICATION_STATE_SMOKE_ALARM_PERIODIC_INSPECTION_STATUS      (0x3)
+#define NOTIFICATION_STATE_SMOKE_ALARM_DUST_IN_DEVICE_STATUS           (0x4)
+#define NOTIFICATION_STATE_CO_ALARM_SENSOR_STATUS                      (0x0)
+#define NOTIFICATION_STATE_CO_ALARM_TEST_STATUS                        (0x1)
+#define NOTIFICATION_STATE_CO_ALARM_MAINTENANCE_STATUS                 (0x2)
+#define NOTIFICATION_STATE_CO_ALARM_ALARM_STATUS                       (0x3)
+#define NOTIFICATION_STATE_CO_ALARM_PERIODIC_INSPECTION_STATUS         (0x4)
+#define NOTIFICATION_STATE_CO2_ALARM_SENSOR_STATUS                     (0x0)
+#define NOTIFICATION_STATE_CO2_ALARM_TEST_STATUS                       (0x1)
+#define NOTIFICATION_STATE_CO2_ALARM_MAINTENANCE_STATUS                (0x2)
+#define NOTIFICATION_STATE_CO2_ALARM_ALARM_STATUS                      (0x3)
+#define NOTIFICATION_STATE_CO2_ALARM_PERIODIC_INSPECTION_STATUS        (0x4)
+#define NOTIFICATION_STATE_HEAT_ALARM_HEAT_SENSOR_STATUS               (0x0)
+#define NOTIFICATION_STATE_HEAT_ALARM_ALARM_STATUS                     (0x1)
+#define NOTIFICATION_STATE_HEAT_ALARM_MAINTENANCE_STATUS               (0x2)
+#define NOTIFICATION_STATE_HEAT_ALARM_DUST_IN_DEVICE_STATUS            (0x3)
+#define NOTIFICATION_STATE_HEAT_ALARM_PERIODIC_INSPECTION_STATUS       (0x4)
+#define NOTIFICATION_STATE_WATER_ALARM_SENSOR_STATUS                   (0x0)
+#define NOTIFICATION_STATE_WATER_ALARM_MAINTENANCE_STATUS              (0x1)
+#define NOTIFICATION_STATE_WATER_ALARM_WATER_FLOW_ALARM_STATUS         (0x2)
+#define NOTIFICATION_STATE_WATER_ALARM_WATER_PRESSURE_ALARM_STATUS     (0x3)
+#define NOTIFICATION_STATE_WATER_ALARM_WATER_TEMPERATURE_ALARM_STATUS  (0x4)
+#define NOTIFICATION_STATE_WATER_ALARM_WATER_LEVEL_ALARM_STATUS        (0x5)
+#define NOTIFICATION_STATE_WATER_ALARM_PUMP_STATUS                     (0x6)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_LOCK_STATE                   (0x0)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_KEYPAD_STATE                 (0x1)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_DOOR_STATE                   (0x2)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_DOOR_HANDLE_STATE            (0x3)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_BARRIER_UL_DISABLING_STATUS  (0x4)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_BARRIER_VACATION_MODE_STATUS (0x5)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_BARRIER_SAFETY_BEARM_OBSTACLE_STATUS \
+  (0x6)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_BARRIER_SENSOR_STATUS           (0x7)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_BARRIER_BATTERY_STATUS          (0x8)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_BARRIER_SHORTCIRCUIT_STATUS     (0x9)
+#define NOTIFICATION_STATE_ACCESS_CONTROL_BARRIER_CONTROL_STATUS          (0xa)
+#define NOTIFICATION_STATE_HOME_SECURITY_SENSOR_STATUS                    (0x0)
+#define NOTIFICATION_STATE_HOME_SECURITY_COVER_STATUS                     (0x1)
+#define NOTIFICATION_STATE_HOME_SECURITY_MOTION_SENSOR_STATUS             (0x2)
+#define NOTIFICATION_STATE_HOME_SECURITY_MAGNETIC_INTERFERENCE_STATUS     (0x3)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_POWER_STATUS                  (0x0)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_MAINS_STATUS                  (0x1)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_OVERCURRENT_STATUS            (0x2)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_OVERVOLTAGE_STATUS            (0x3)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_OVERLOAD_STATUS               (0x4)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_LOAD_ERROR_STATUS             (0x5)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_BATTERY_MAINTENANCE_STATUS    (0x6)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_BATTERY_LOAD_STATUS           (0x7)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_BATTERY_LEVEL_STATUS          (0x8)
+#define NOTIFICATION_STATE_POWER_MANAGEMENT_BACKUP_BATTERY_LEVEL_STATUS   (0x9)
+#define NOTIFICATION_STATE_SYSTEM_HW_STATUS                               (0x0)
+#define NOTIFICATION_STATE_SYSTEM_SW_STATUS                               (0x1)
+#define NOTIFICATION_STATE_SYSTEM_COVER_STATUS                            (0x2)
+#define NOTIFICATION_STATE_SYSTEM_EMERGENCY_SHUTOFF_STATUS                (0x3)
+#define NOTIFICATION_STATE_SYSTEM_DIGITAL_INPUT_STATE                     (0x4)
+#define NOTIFICATION_STATE_APPLIANCE_PROGRAM_STATUS                       (0x0)
+#define NOTIFICATION_STATE_APPLIANCE_MAINTENANCE_STATUS                   (0x1)
+#define NOTIFICATION_STATE_APPLIANCE_APPLIANCE_STATUS                     (0x2)
+#define NOTIFICATION_STATE_APPLIANCE_TARGET_TEMPERATURE_FAILURE_STATUS    (0x3)
+#define NOTIFICATION_STATE_APPLIANCE_WATER_SUPPLY_FAILURE_STATUS          (0x4)
+#define NOTIFICATION_STATE_APPLIANCE_BOILING_FAILURE_STATUS               (0x5)
+#define NOTIFICATION_STATE_APPLIANCE_WASHING_FAILURE_STATUS               (0x6)
+#define NOTIFICATION_STATE_APPLIANCE_RINSING_FAILURE_STATUS               (0x7)
+#define NOTIFICATION_STATE_APPLIANCE_DRAINING_FAILURE_STATUS              (0x8)
+#define NOTIFICATION_STATE_APPLIANCE_SPINNING_FAILURE_STATUS              (0x9)
+#define NOTIFICATION_STATE_APPLIANCE_DRYING_FAILURE_STATUS                (0xa)
+#define NOTIFICATION_STATE_APPLIANCE_FAN_FAILURE_STATUS                   (0xb)
+#define NOTIFICATION_STATE_APPLIANCE_COMPRESSOR_FAILURE_STATUS            (0xc)
+#define NOTIFICATION_STATE_HOME_HEALTH_POSITION_STATUS                    (0x0)
+#define NOTIFICATION_STATE_HOME_HEALTH_SLEEP_APNEA_STATUS                 (0x1)
+#define NOTIFICATION_STATE_HOME_HEALTH_SLEEP_STAGE_STATUS                 (0x2)
+#define NOTIFICATION_STATE_SIREN_SIREN_STATUS                             (0x0)
+#define NOTIFICATION_STATE_WATER_VALVE_VALVE_OPERATION_STATUS             (0x0)
+#define NOTIFICATION_STATE_WATER_VALVE_MASTER_VALVE_OPERATION_STATUS      (0x1)
+#define NOTIFICATION_STATE_WATER_VALVE_VALVE_SHORT_CIRCUIT_STATUS         (0x2)
+#define NOTIFICATION_STATE_WATER_VALVE_MASTER_VALVE_SHORT_CIRCUIT_STATUS  (0x3)
+#define NOTIFICATION_STATE_WATER_VALVE_VALVE_CURRENT_ALARM_STATUS         (0x4)
+#define NOTIFICATION_STATE_WATER_VALVE_MASTER_VALVE_CURRENT_ALARM_STATUS  (0x5)
+#define NOTIFICATION_STATE_WEATHER_ALARM_RAIN_ALARM_STATUS                (0x0)
+#define NOTIFICATION_STATE_WEATHER_ALARM_MOISTURE_ALARM_STATUS            (0x1)
+#define NOTIFICATION_STATE_WEATHER_ALARM_FREEZE_ALARM_STATUS              (0x2)
+#define NOTIFICATION_STATE_IRRIGATION_SCHEDULE_ID_STATUS                  (0x0)
+#define NOTIFICATION_STATE_IRRIGATION_VALVE_RUN_STATUS                    (0x1)
+#define NOTIFICATION_STATE_IRRIGATION_DEVICE_CONFIGURATION_STATUS         (0x2)
+#define NOTIFICATION_STATE_GAS_ALARM_COMBUSTIBLE_GAS_STATUS               (0x0)
+#define NOTIFICATION_STATE_GAS_ALARM_TOXIC_GAS_STATUS                     (0x1)
+#define NOTIFICATION_STATE_GAS_ALARM_ALARM_STATUS                         (0x2)
+#define NOTIFICATION_STATE_GAS_ALARM_MAINTENANCE_STATUS                   (0x3)
+#define NOTIFICATION_STATE_PEST_CONTROL_TRAP_STATUS                       (0x0)
+#define NOTIFICATION_STATE_LIGHT_SENSOR_LIGHT_DETECTION_STATUS            (0x0)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_CHLORINE_ALARM_STATUS (0x0)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_ACIDITY_PH_STATUS     (0x1)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_WATER_OXIDATION_ALARM_STATUS \
+  (0x2)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_CHLORINE_SENSOR_STATUS (0x3)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_ACIDITY_PH_SENSOR_STATUS \
+  (0x4)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_WATERFLOW_MEASURING_STATION_SENSOR \
+  (0x5)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_WATERFLOW_CLEAR_WATER_SENSOR \
+  (0x6)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_DISINFECTION_SYSTEM_STATUS \
+  (0x7)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_FILTER_CLEANING_STATUS (0x8)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_HEATING_STATUS         (0x9)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_FILTER_PUMP_STATUS     (0xa)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_FRESHWATER_FLOW_STATUS (0xb)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_DRY_PROTECTION_STATUS  (0xc)
+#define NOTIFICATION_STATE_WATER_QUALITY_MONITORING_COLLECTIVE_DISORDER_STATUS \
+  (0xd)
+#define NOTIFICATION_STATE_HOME_MONITORING_HOME_OCCUPANCY_STATUS (0x0)
+
+/**
+ * @brief Intitialize the Notification command class control APIs
+ *
+ * This setup will register the notification command handler to the Z-Wave CC framework,
+ * register rule to attribute resolver.
+
+ * @return Always true
+ */
+sl_status_t zwave_command_class_notification_init();
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  //ZWAVE_COMMAND_CLASS_NOTIFICATION_H
+/** @} end zwave_command_class_notification */

@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["uic_image_provider"];

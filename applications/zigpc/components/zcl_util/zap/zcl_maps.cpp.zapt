@@ -1,0 +1,64 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+#include <unordered_map>
+
+/* ZigPC components */
+#include "zcl_definitions.h"
+#include "zcl_util.h"
+
+{{#zcl_atomics}}
+{{#first}}
+/**
+ * @brief Map of ZCL data type to size
+ */
+static const std::unordered_map<{{component_zigpc_zcl_prefix}}_data_type_t, size_t> zcl_data_type_size_map = {
+{{/first}}
+{{#if size}}
+  { {{asZigPCZclDataType name}}, {{size}} },
+{{/if}}
+{{#last}}
+  { {{asZigPCZclDataType 'bool'}}, 1 },
+  { {{asZigPCZclDataType 'string'}}, 1 },
+  { {{asZigPCZclDataType 'octstr'}}, 1 },
+  { {{asZigPCZclDataType 'attribId'}}, 2 },
+  { {{asZigPCZclDataType 'StructTransitionType'}}, sizeof({{asZigPCZclStructType 'TransitionType'}}) },
+};
+/* TODO: Investigate following data type sizes missing from ZAP autogeneration.
+ * {{asZigPCZclDataType 'semi'}}
+ * {{asZigPCZclDataType 'single'}}
+ * {{asZigPCZclDataType 'double'}}
+ * {{asZigPCZclDataType 'string'}}
+ * {{asZigPCZclDataType 'octstr'}}
+ * {{asZigPCZclDataType 'octstr16'}}
+ * {{asZigPCZclDataType 'array'}}
+ * {{asZigPCZclDataType 'struct'}}
+ * {{asZigPCZclDataType 'set'}}
+ * {{asZigPCZclDataType 'bag'}}
+ * {{asZigPCZclDataType 'ToD'}}
+ * {{asZigPCZclDataType 'date'}}
+ * {{asZigPCZclDataType 'utc'}}
+ * {{asZigPCZclDataType 'clusterId'}}
+ * {{asZigPCZclDataType 'attribId'}}
+ * {{asZigPCZclDataType 'bacOid'}}
+ * {{asZigPCZclDataType 'unk'}}
+ */
+{{/last}}
+{{/zcl_atomics}}
+
+const std::unordered_map<{{component_zigpc_zcl_prefix}}_data_type_t, size_t> *{{component_zigpc_zcl_prefix}}_get_zcl_data_type_size_map(void)
+{
+  return &zcl_data_type_size_map;
+}

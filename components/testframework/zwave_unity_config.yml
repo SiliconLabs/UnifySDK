@@ -1,0 +1,4 @@
+:unity:
+  :mock_prefix: ''
+  :mock_suffix: '_mock.h'
+  :include_extensions: '(.h)'

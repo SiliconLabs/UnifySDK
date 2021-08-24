@@ -1,0 +1,21 @@
+.MuiOutlinedInput-inputMarginDense {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+.MuiInputLabel-formControl {
+    top: -2px !important;
+}
+
+.MuiInputLabel-formControl.MuiFormLabel-filled,
+.MuiInputLabel-formControl.Mui-focused {
+    top: 1px !important;
+}
+
+.MuiFormLabel-root {
+    font-size: 15px !important;
+}
+
+.MuiInput-underline:before {
+    border-bottom: none !important;
+}

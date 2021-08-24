@@ -1,0 +1,2 @@
+add_library(ucl_definitions INTERFACE)
+target_include_directories(ucl_definitions INTERFACE include)

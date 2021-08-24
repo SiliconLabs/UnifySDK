@@ -1,0 +1,11 @@
+// This is a test comment
+
+// here is an assignment 
+def jo44ngen 12
+
+
+// Define two relations
+scope 0 {
+  d'42 = 2 + 2*d'55 + if(r'11) (r'22) (2)
+  d'763 = d'1.4
+}

@@ -1,0 +1,150 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+#ifndef DOTDOT_MQTT_TRANSLATORS_H
+#define DOTDOT_MQTT_TRANSLATORS_H
+#include <sstream>
+#include <string>
+#include <map>
+
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+
+namespace bpt = boost::property_tree;
+
+struct constCharPtrTranslator {
+  typedef std::string internal_type;
+  typedef const char* external_type;
+
+  boost::optional<external_type> get_value(const internal_type& str)
+  {
+    return boost::optional<external_type>(str.c_str());
+  }
+
+  boost::optional<internal_type> put_value(const external_type& e)
+  {
+    return boost::optional<internal_type>(std::string(e));
+  }
+};
+
+{{#zcl_enums}}
+struct {{asType label}}Translator {
+  typedef std::string internal_type;
+  typedef {{asType label}}   external_type;
+
+  boost::optional<external_type> get_value(const internal_type& str)
+  {
+    if (!str.empty())
+    {
+      std::map<internal_type, external_type> enum_map = {
+        {{#zcl_enum_items}}
+        { "{{label}}", ZCL_{{asDelimitedMacro parent.label}}_{{asDelimitedMacro label}} }{{listComma this}}
+        {{/zcl_enum_items}}
+      };
+      return boost::optional<external_type>(enum_map[str]);
+    }
+    else
+    {
+      return boost::optional<external_type>(boost::none);
+    }
+  }
+
+  boost::optional<internal_type> put_value(const external_type& e) {
+    std::map<external_type, internal_type> enum_map = {
+      {{#zcl_enum_items}}
+      { ZCL_{{asDelimitedMacro parent.label}}_{{asDelimitedMacro label}}, "{{label}}" }{{listComma this}}
+      {{/zcl_enum_items}}
+    };
+    return boost::optional<internal_type>(enum_map[e]);
+  }
+};
+
+{{/zcl_enums}}
+
+{{#zcl_structs}}
+struct {{asType label}}Translator {
+  typedef std::string internal_type;
+  typedef {{asType label}}   external_type;
+
+  boost::optional<external_type> get_value(const internal_type& str)
+  {
+    if (!str.empty())
+    {
+      external_type new_external_instance;
+
+      std::stringstream ss;
+      bpt::ptree pt;
+      ss << str;
+      bpt::json_parser::read_json(ss, pt);
+
+      {{#zcl_struct_items}}
+        new_external_instance.{{label}} = pt.get<{{asUnderlyingType type}}>("{{label}}");
+      {{/zcl_struct_items}}
+
+      return boost::optional<external_type>(new_external_instance);
+    }
+    else
+    {
+      return boost::optional<external_type>(boost::none);
+    }
+  }
+
+  boost::optional<internal_type> put_value(const external_type& e) {
+
+    bpt::ptree doc;
+
+    {{#zcl_struct_items}}
+      doc.add("{{label}}", e.{{label}});
+    {{/zcl_struct_items}}
+
+    std::stringstream ss;
+    bpt::write_json(ss, doc);
+
+    return boost::optional<internal_type>(ss.str());
+  }
+};
+
+{{/zcl_structs}}
+
+
+namespace boost {
+namespace property_tree {
+
+template<typename Ch, typename Traits, typename Alloc>
+struct translator_between<std::basic_string< Ch, Traits, Alloc >, const char*>
+{
+  typedef constCharPtrTranslator type;
+};
+
+{{#zcl_enums}}
+template<typename Ch, typename Traits, typename Alloc>
+struct translator_between<std::basic_string< Ch, Traits, Alloc >, {{asType label}}>
+{
+    typedef {{asType label}}Translator type;
+};
+
+{{/zcl_enums}}
+
+
+{{#zcl_structs}}
+template<typename Ch, typename Traits, typename Alloc>
+struct translator_between<std::basic_string< Ch, Traits, Alloc >, {{asType label}}>
+{
+    typedef {{asType label}}Translator type;
+};
+{{/zcl_structs}}
+
+} // namespace property_tree
+} // namespace boost
+
+#endif

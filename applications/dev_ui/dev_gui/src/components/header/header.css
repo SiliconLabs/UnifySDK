@@ -1,0 +1,34 @@
+.header {
+    text-align: center;
+    border-bottom: 1px solid #ececec;
+    display: inline-block;
+    width: 100%;
+    background: #f7f7f7;
+    cursor: pointer;
+    line-height: 15px;
+    height: 139px;
+    transition: height 0.3s;
+    overflow: hidden;
+}
+
+.header.collapsed {
+    height: 59px;
+    transition: height 0.3s;
+}
+
+.header h4 {
+    margin-bottom: 0;
+}
+
+.logo img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img {
+    height: 71px;
+}
+
+.collapsed img {
+    height: 40px;
+}

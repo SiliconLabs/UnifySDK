@@ -1,0 +1,27 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build_rpi",
+            "type": "shell",
+            "command": "docker run --rm -v`pwd`:`pwd` -w `pwd`/build_armhf uic_armhf ninja"
+        },
+        {
+            "label": "build_and_launch_debug_on_rpi",
+            "type": "shell",
+            "dependsOn": "build_rpi",
+            "command": "scp build_armhf/components/libuic.so build_armhf/applications/zpc/zpc pi@${input:rpi_ip}:. && ssh -t pi@${input:rpi_ip} \"gdbserver localhost:3001 ./zpc --datastore.file uic.db\"",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "rpi_ip",
+            "description": "IP or hostname of the Raspberry PI",
+            "type": "promptString",
+            "default": "raspberrypi.local"
+        }
+    ]
+}

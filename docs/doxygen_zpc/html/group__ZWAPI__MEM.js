@@ -1,0 +1,37 @@
+var group__ZWAPI__MEM =
+[
+    [ "_NVR_FLASH_STRUCT_", "struct__NVR__FLASH__STRUCT__.html", [
+      [ "abSAWCenterFreq", "struct__NVR__FLASH__STRUCT__.html#a938d5f952ed24e15b87120c2afdbd3f0", null ],
+      [ "abUUID", "struct__NVR__FLASH__STRUCT__.html#af8b3f8f5b3ff9afbe8e5ff29aefafe91", null ],
+      [ "aSecurityPrivateKey", "struct__NVR__FLASH__STRUCT__.html#ab61bf273efd2a42710985407309c0fbc", null ],
+      [ "aSecurityPublicKey", "struct__NVR__FLASH__STRUCT__.html#a3b80be37d90041667cbd30544b53549c", null ],
+      [ "bCrystalCalibration", "struct__NVR__FLASH__STRUCT__.html#ae1770e3053b53f7dc287a87cbb79de6d", null ],
+      [ "bNVMChipSelect", "struct__NVR__FLASH__STRUCT__.html#aff91251eb715980a341bc9f5fd8cc86e", null ],
+      [ "bNVMPageSize", "struct__NVR__FLASH__STRUCT__.html#adb3fafda9297b9f3239afef4beb63633", null ],
+      [ "bNVMSize", "struct__NVR__FLASH__STRUCT__.html#a9aa5640ac7f19c0c9aa73807ef76c351", null ],
+      [ "bNVMType", "struct__NVR__FLASH__STRUCT__.html#aeb07cb806f384878c99125c65b98f185", null ],
+      [ "bPinSwap", "struct__NVR__FLASH__STRUCT__.html#a944b4b44408ac4b09aacfdb4df9788a1", null ],
+      [ "bRevision", "struct__NVR__FLASH__STRUCT__.html#af31b7ce224a7302a838debd45bfa0b00", null ],
+      [ "bSAWBandwidth", "struct__NVR__FLASH__STRUCT__.html#aaf8732626aef1aa552311a45fb4c135a", null ],
+      [ "bTxCalibration1", "struct__NVR__FLASH__STRUCT__.html#aa8cf39b4bfc8e0ab8d9b32192e8a9c0c", null ],
+      [ "bTxCalibration2", "struct__NVR__FLASH__STRUCT__.html#aab3c29d92c5e6af28b393945285fb6c3", null ],
+      [ "idProductUsb", "struct__NVR__FLASH__STRUCT__.html#a13ef3ded02f4abea16d3926ae3c20e71", null ],
+      [ "idVendorUsb", "struct__NVR__FLASH__STRUCT__.html#ae0d686e2c2122cc1b15e9d1f80142a83", null ]
+    ] ],
+    [ "NVR_CRC16_SIZE", "group__ZWAPI__MEM.html#ga07aedfbe8a0e16ae4fabd064f6db9d8d", null ],
+    [ "NVR_NVM_PAGE_SIZE_SIZE", "group__ZWAPI__MEM.html#ga33ddd9fe9bc20d71cc01de23cc3d562c", null ],
+    [ "NVR_NVM_SIZE_SIZE", "group__ZWAPI__MEM.html#ga6ff09d330f90bbbc02377a6557542d36", null ],
+    [ "NVR_SAW_CENTER_FREQ_SIZE", "group__ZWAPI__MEM.html#ga267df95e7dd638919ebc02d166ff80ea", null ],
+    [ "NVR_SECURITY_PRIVATE_KEY_SIZE", "group__ZWAPI__MEM.html#gafe342b44b5f9dd51e8d517f1b7d395f5", null ],
+    [ "NVR_SECURITY_PUBLIC_KEY_SIZE", "group__ZWAPI__MEM.html#gaad63a9842ae9a4fb9591bba81b4c5cae", null ],
+    [ "NVR_USBID_SIZE", "group__ZWAPI__MEM.html#ga31d5557066e684634f08c26264c8bcbc", null ],
+    [ "NVR_UUID_SIZE", "group__ZWAPI__MEM.html#ga9fec200ea3cdd974b81d7c5827106e04", null ],
+    [ "NVR_FLASH_STRUCT", "group__ZWAPI__MEM.html#ga7377592e0209d55561abf4a232d14cc7", null ],
+    [ "zwapi_memory_get_buffer", "group__ZWAPI__MEM.html#ga8ec9372079a3bd76196bfe41dd92ed04", null ],
+    [ "zwapi_memory_get_byte", "group__ZWAPI__MEM.html#ga2dc7b845f0fd77940f1ff50ef6678f20", null ],
+    [ "zwapi_memory_get_ids", "group__ZWAPI__MEM.html#ga7e303e378a0865e5e9e6b921d4f3ebc6", null ],
+    [ "zwapi_memory_put_buffer", "group__ZWAPI__MEM.html#gacb5c44761a7cf79639491da5b30638fe", null ],
+    [ "zwapi_memory_put_buffer_blocking", "group__ZWAPI__MEM.html#ga75fa4bf5e20fe77058f81eb9ba6130e6", null ],
+    [ "zwapi_memory_put_byte", "group__ZWAPI__MEM.html#gadd1100f113aeea6e2f38bcaa047b0425", null ],
+    [ "zwapi_nvr_get_value", "group__ZWAPI__MEM.html#gaa55944ff269122a5747d7a1868ff93ef", null ]
+];

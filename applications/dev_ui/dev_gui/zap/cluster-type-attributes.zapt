@@ -1,0 +1,128 @@
+//This file is generated automatically. Don't try to change something here.
+//To add support for new clusters, modify addon-helper.js
+//To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
+{{#zcl_enums}}{{initEnums label}}{{/zcl_enums}} {{#zcl_bitmaps}}{{initBitmaps label}}{{/zcl_bitmaps}}
+
+export let ClusterTypeAttrs: any = {
+{{#zcl_clusters}}
+  {{#if (isSupportedCluster label)}}
+    {{label}}: {
+      server:{
+        attributes: [
+          {{#zcl_attributes_server}}
+            {                
+              id: {{id}},
+              name: "{{label}}",
+              type: "{{castType type}}",
+              {{#if (isNotEmpty max)}}
+              max: {{asNumber max}},
+              {{/if}}
+              {{#if (isNotEmpty min)}}
+              min: {{asNumber min}},
+              {{/if}}
+              required: {{not isOptional}},
+              reportRequired: {{isReportable}},
+              sceneRequired: {{asBoolean isSceneRequired}},
+              writable: {{isWritable}},
+              {{#if (isNotEmpty defaultValue)}}
+              default: {{asNumber defaultValue}},
+              {{/if}}
+            {{#if (isEnum type)}}
+              enum:[
+                {{#zcl_enums}}
+                  {{#if (isCurrentType parent label)}}
+                    {{#zcl_enum_items}}
+                      {
+                        name: "{{label}}",
+                        value: {{asNumber value}}
+                      }{{listComma this}}
+                    {{/zcl_enum_items}}
+                  {{/if}}                  
+                {{/zcl_enums}}
+              ],
+            {{/if}}
+            {{#if (isBitmap type)}}
+              bitmap: [
+                {{#zcl_bitmaps}}
+                  {{#if (isCurrentType parent label)}}
+                    {{#zcl_bitmap_items}}
+                      {
+                        name: "{{label}}",
+                        mask: {{mask}},
+                        type: "{{castType type}}",
+                        offset: {{asOffset mask}},
+                      {{#if (isEnum type)}}
+                        enum:[
+                          {{#zcl_enums}}
+                            {{#if (isCurrentBitmapEnum parent label)}}
+                              {{#zcl_enum_items}}
+                                {
+                                  name: "{{label}}",
+                                  value: {{asNumber value}}
+                                }{{listComma this}}
+                              {{/zcl_enum_items}}
+                            {{/if}}                  
+                          {{/zcl_enums}}
+                        ]
+                      {{/if}}
+                      }{{listComma this}}
+                    {{/zcl_bitmap_items}}
+                  {{/if}}   
+                {{/zcl_bitmaps}}
+              ]
+            {{/if}}
+            }{{listComma this}}
+          {{/zcl_attributes_server}}
+        ],
+        commands: [
+          {{#zcl_commands}}
+            {
+              id: {{id}},
+              name: "{{label}}",
+              required: {{not isOptional}},
+              fields: [
+                {{#zcl_command_arguments}}
+                  {
+                    name: "{{label}}",
+                    type: "{{castType type}}",
+                  {{#if (isEnum type)}}
+                    enum:[
+                      {{#zcl_enums}}
+                        {{#if (isCurrentType parent label)}}
+                          {{#zcl_enum_items}}
+                            {
+                              name: "{{label}}",
+                              value: {{value}}
+                            }{{listComma this}}
+                          {{/zcl_enum_items}}
+                        {{/if}}                  
+                      {{/zcl_enums}}
+                    ],
+                  {{/if}}
+                  {{#if (isBitmap type)}}
+                    bitmap:[
+                      {{#zcl_bitmaps}}
+                        {{#if (isCurrentType parent label)}}
+                          {{#zcl_bitmap_items}}
+                            {
+                              name: "{{label}}",
+                              mask: {{mask}},
+                              type: "{{castType type}}",
+                              offset: {{asOffset mask}},
+                            }{{listComma this}}
+                          {{/zcl_bitmap_items}}
+                        {{/if}}   
+                      {{/zcl_bitmaps}}
+                    ]
+                  {{/if}}
+                  }{{listComma this}}
+                {{/zcl_command_arguments}}
+              ]              
+            }{{listComma this}}
+          {{/zcl_commands}}
+        ] 
+      }
+    }{{listComma this}}
+  {{/if}}
+{{/zcl_clusters}}
+}

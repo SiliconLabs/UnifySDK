@@ -1,0 +1,21 @@
+{
+    "Version": "1",
+    "Images": [
+        {
+            "FileName": "updates/ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl",
+            "Uiid": "ZWave-0000-0003-0004-0000",
+            "Unid": [],
+            "Version": "10.15.4",
+            "ApplyAfter": "2021-06-29T16:39:57+02:00",
+            "Md5": "cZYo9OIM+rnuUk6G9dXmtg=="
+        },
+        {
+            "FileName": "updates/ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl",
+            "Uiid": "ZWave-0000-0002-0004-0000",
+            "Unid": ["zw-C87E6FB8-0006", "zw-C87E6FB8-0007", "zw-C87E6FB8-0008"],
+            "Version": "10.15.4",
+            "ApplyAfter": "2021-06-29T16:42:59+02:00",
+	        "Md5": "GnzJgyfhQhzJQHRVtVy8vw=="
+        }
+    ]
+}

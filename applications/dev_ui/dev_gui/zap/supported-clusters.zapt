@@ -1,0 +1,9 @@
+//This file is generated automatically. Don't try to change something here.
+//To add support for new clusters, modify addon-helper.js
+//To change the stucture of the SupportedClusters, modify supported-clusters.zapt
+
+const SupportedClusters = {
+    {{getSupportedClusters}}
+}
+
+module.exports.SupportedClusters = SupportedClusters;

@@ -1,0 +1,89 @@
+find_package(Ruby)
+# The RUBY_EXECUTABLE variable does not exist when the ADD_UNITY2_TEST function
+# is called So instaed store the value in cache and use the cached value
+set(UNITY2_RUBY_EXECUTABLE
+    ${RUBY_EXECUTABLE}
+    CACHE INTERNAL "")
+
+
+
+function(generate_unity_runner test_runner test_file)
+set(UNITY_DIR
+"${CMAKE_SOURCE_DIR}/components/testframework/libs/cmock/vendor/unity")
+add_custom_command(
+  OUTPUT ${TEST_RUNNER}
+  DEPENDS ${TEST_FILE}
+  COMMAND
+    ${UNITY2_RUBY_EXECUTABLE} ${UNITY_DIR}/auto/generate_test_runner.rb
+    ${CMAKE_SOURCE_DIR}/components/testframework/zwave_unity_config.yml
+    ${TEST_FILE} ${TEST_RUNNER}
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endfunction()
+
+
+# This function creates unity2 test executables. It uses the provided target to setup and import configuration
+# to successfully compile a unit-test executable. more specifically, it re-uses the build object files of the provided target
+# to relink it with optional mock dependencies into a new executable. It does so using the same include and link directives as the provided target.
+# the provided target need to exist and be valid before calling this function.
+# 
+# usage:
+# `target_add_unittest(my_component SOURCES test.c)` - creates a cmake target named my_component_test. it will compile test.c and link it against my_component.
+#
+# `target_add_unittest(my_component SOURCES test.c DEPENDS my_mock)` - creates a cmake target named my_component_test and links target my_mock
+#
+# `target_add_unittest(my_component SOURCES test.c DEPENDS foo_mock EXCLUDE foo.c)` - leaves out foo.c object when linking the new test target.
+#   use when you want to replace it with an mock
+#
+# possible arguments:
+# +-----------+----------------------------------------------------------------------+----------+
+# | Argument  |                             Description                              | optional |
+# +-----------+----------------------------------------------------------------------+----------+
+# | 1st arg   | target to setup an unit-test target for                              |          |
+# | NAME      | Overwrite the default name of test executable (default=$Target_test) | x        |
+# | SOURCES   | Source files that define unit-tests                                  |          |
+# | DEPENDS   | New additional dependencies                                          | x        |
+# | EXCLUDE   | Omit certain source files from the imported target                   | x        |
+# | DISABLED  | Disable test                                                         | x        |
+# +-----------+----------------------------------------------------------------------+----------+
+#
+function(target_add_unittest)
+  # first argument is the target to make unit-test exe of
+  list(POP_FRONT ARGV TARGET)
+
+  cmake_parse_arguments(PARSED_ARGS "DISABLED" "NAME"
+                        "DEPENDS;SOURCES;EXCLUDE" ${ARGV} )
+  if (NOT ${PARSED_ARGS_UNPARSED_ARGUMENTS} STREQUAL "") 
+    message(FATAL_ERROR "could not parse ${PARSED_ARGS_UNPARSED_ARGUMENTS}")
+  elseif (NOT ${PARSED_ARGS_KEYWORDS_MISSING_VALUES} STREQUAL "")
+    message(FATAL_ERROR "following keywords are missing values: ${PARSED_ARGS_KEYWORDS_MISSING_VALUES}")
+  endif()
+
+  if (NOT DEFINED PARSED_ARGS_NAME)
+    set(TEST_TARGET "${TARGET}_test")
+  else()
+    set(TEST_TARGET "${PARSED_ARGS_NAME}")
+  endif()
+    
+  # The first file in the source list is the main test file
+  list(GET PARSED_ARGS_SOURCES 0 TEST_FILE)
+  get_filename_component(TEST_NAME ${TEST_FILE} NAME_WE)
+  set(TEST_RUNNER "${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}_runner.c")
+  generate_unity_runner(${TEST_RUNNER} ${TEST_FILE})
+
+  get_target_property(target_type ${TARGET} TYPE)
+  if (target_type STREQUAL "INTERFACE_LIBRARY")
+    list(APPEND PARSED_ARGS_DEPENDS ${TARGET})
+  else()
+    collect_object_files(${TARGET} "${TARGET_OBJS}" "${PARSED_ARGS_EXCLUDE}")
+  endif()
+  # tests binaries reuse the o files of the actual target and relink them with the correct components
+  # nessicary for the test. e.g. mocks/stubs.
+  add_executable(${TEST_TARGET} ${PARSED_ARGS_SOURCES} ${TARGET_OBJS} ${TEST_RUNNER})
+  target_include_directories(${TEST_TARGET} PRIVATE . $<TARGET_PROPERTY:${TARGET},INCLUDE_DIRECTORIES>)
+  target_link_libraries(${TEST_TARGET} PRIVATE unity2 ${PARSED_ARGS_DEPENDS} $<TARGET_PROPERTY:${TARGET},LINK_LIBRARIES>)
+  add_test(${TEST_NAME} ${TEST_TARGET})
+
+  if (${PARSED_ARGS_DISABLED})
+    set_tests_properties(${TEST_NAME} PROPERTIES DISABLED True)
+  endif()
+endfunction()

@@ -1,0 +1,30 @@
+{
+  "name": "UIC Dotdot Mappers",
+  "version": "UIC-dotdot-v1",
+  "override": "../../uic_dotdot/zap/addon-override.js",
+  "helpers": [
+    "../../uic_dotdot/zap/addon-helper.js"
+  ],
+  "templates": [
+    {
+      "path": "dotdot_mqtt_cpp.zapt",
+      "name": "Implementation for parsing mqtt topics for the UIC",
+      "output": "src/dotdot_mqtt.cpp"
+    },
+    {
+      "path": "dotdot_mqtt_translators_h.zapt",
+      "name": "Templates for custom translators for PTree",
+      "output": "include/dotdot_mqtt_translators.h"
+    },
+    {
+      "path": "dotdot_mqtt_h.zapt",
+      "name": "Code for parsing mqtt topics for the UIC",
+      "output": "include/dotdot_mqtt.h"
+    },
+    {
+      "path": "../test/dotdot_mqtt_test.include.zapt",
+      "name": "Unittest for dotdot_mqtt",
+      "output": "test/dotdot_mqtt_test.include"
+    }
+  ]
+}

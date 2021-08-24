@@ -1,0 +1,8 @@
+/**
+
+@defgroup zigpc_common ZigPC Common Utilities
+@ingroup zigpc_components
+
+This component stores all common utilities and definitions used throughout ZigPC. 
+ 
+ */

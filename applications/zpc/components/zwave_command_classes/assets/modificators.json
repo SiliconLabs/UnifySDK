@@ -1,0 +1,32 @@
+{
+    "version": 1,
+    "name": "Z-Wave command class model modificators",
+    "attr_aliases_dict": {
+      "BASIC_CURRENT_VALUE": "BASIC_VALUE",
+      "SWITCH_BINARY_VALUE" : "SWITCH_BINARY_CURRENT_VALUE",
+      "SWITCH_BINARY_SWITCH_VALUE"  : "SWITCH_BINARY_CURRENT_VALUE",
+      "MULTI_CHANNEL_END_POINT_FIND_END_POINT": "MULTI_CHANNEL_END_POINT",
+      "MULTI_CHANNEL_CAPABILITY_END_POINT": "MULTI_CHANNEL_END_POINT",
+      "DOOR_LOCK_OPERATION_CURRENT_DOOR_LOCK_MODE": "DOOR_LOCK_OPERATION_DOOR_LOCK_MODE"
+    },
+    "_comment": "Usage of cc_exclusion_list",
+    "_comment": "- if min_cc_version is 0 and min_cc_version is -1 the command class is excluded",
+    "_comment": "- if min_cc_version is 0 and min_cc_version is 1 the command class version above 1 is excluded",
+    "_comment": "- if min_cc_version is 4 and min_cc_version is 255 the command class version lower than 4 is excluded",
+    "cc_exclusion_list": [
+      {"cc_name": "COMMAND_CLASS_NO_OPERATION"                  ,  "min_cc_version": "0", "max_cc_version": "-1"},
+      {"cc_name": "COMMAND_CLASS_SUPERVISON"                  ,  "min_cc_version": "0", "max_cc_version": "-1"},
+      {"cc_name": "COMMAND_CLASS_SECURITY"                    ,  "min_cc_version": "0", "max_cc_version": "-1"},
+      {"cc_name": "COMMAND_CLASS_SECURITY_2"                  ,  "min_cc_version": "0", "max_cc_version": "-1"},
+      {"cc_name": "COMMAND_CLASS_NETWORK_MANAGEMENT_INCLUSION",  "min_cc_version": "0", "max_cc_version": "-1"},
+      {"cc_name": "COMMAND_CLASS_FIRMWARE_UPDATE_MD"          ,  "min_cc_version": "0", "max_cc_version": "-1"},
+      {"cc_name": "COMMAND_CLASS_MULTI_INSTANCE"              ,  "min_cc_version": "0", "max_cc_version": "-1"},      
+      {"cc_name": "COMMAND_CLASS_MULTI_CHANNEL"               ,  "min_cc_version": "3", "max_cc_version": "255"},
+      {"cc_name": "COMMAND_CLASS_MULTI_INSTANCE"              ,  "min_cc_version": "3", "max_cc_version": "255"},
+      {"cc_name": "COMMAND_CLASS_DOOR_LOCK"                   ,  "min_cc_version": "0", "max_cc_version": "2"},
+      {"cc_name": "COMMAND_CLASS_SENSOR_BINARY"               ,  "min_cc_version": "0", "max_cc_version": "1"}
+
+    ],
+    "attr_child_parent_dict": {
+    }
+}

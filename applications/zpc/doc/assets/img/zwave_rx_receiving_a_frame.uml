@@ -1,0 +1,64 @@
+@startuml
+
+' Style for the diagram
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ArrowColor #000000
+
+skinparam ActivityBackgroundColor #DEDEDE
+skinparam ActivityBorderColor #480509
+skinparam ActivityBorderThickness 2
+skinparam ActivityFontColor #000000
+skinparam ActivityStartColor #797777
+
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+
+title Receiving a Z-Wave Command Frame
+
+partition "Z-Wave RX" {
+  (*) -->[zwapi_poll()] Incoming Z-Wave API Frame
+  if "Z-Wave API Frame is a Z-Wave Command Class frame" then
+}
+
+partition "UIC-95 Z-Wave Transport/Encapsulation plugin" {
+   -->[Yes] Incoming Z-Wave CC Frame
+  -->[De-encapsulate] Incoming Z-Wave CC Frame
+}
+
+partition "Z-Wave Controller" {
+  -->[zwave_controller_on_frame_received()] Frame Dispatch 
+}
+
+partition "Subscribers" {
+  -->[on_frame_received()] Subscriber function
+  -->[return] Frame Dispatch 
+}
+
+partition "Z-Wave Command Handler" {
+  -->[on_frame_received()] Handle the Z-Wave Command
+  
+  if "Command Class is supported and/or controlled" then
+    if "Security level is ok" then
+      -->[Yes] Call the Z-Wave Handler
+      --> Handle the Z-Wave Command
+    endif
+  else
+    -->[No] Discard the frame
+    --> Handle the Z-Wave Command
+  endif
+
+  -->[return] Frame Dispatch 
+}
+
+
+
+
+
+
+
+
+@enduml

@@ -1,0 +1,2 @@
+[build]
+rustflags = ["-C", "link-args=-Wl,-rpath,../../../../components/uic_log -Wl,-rpath,../../../../components/uic_config"]

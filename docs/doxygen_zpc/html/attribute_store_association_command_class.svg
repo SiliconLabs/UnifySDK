@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="681px" preserveAspectRatio="none" style="width:1218px;height:681px;" version="1.1" viewBox="0 0 1218 681" width="1218px" zoomAndPan="magnify"><defs><filter height="300%" id="fsjhws4ls93vl" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="202" x="501.6548" y="16.708">Association data model</text><rect fill="#DDDDDD" height="26.2969" rx="5" ry="5" style="stroke:#000000;stroke-width:1.0;" width="491" x="356.6548" y="28.9531"/><text fill="#FEFEFE" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="362.6548" y="46.9482">ATTRIBUTE(type)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="357" x="484.6548" y="46.9482">: ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_type</text><!--MD5=[ea3d5de2a0d35296bc751d5a1b771698]
+cluster Attribute Store--><path d="M6,80.25 C6,70.25 603,70.25 603,70.25 C603,70.25 1200,70.25 1200,80.25 L1200,664.25 C1200,674.25 603,674.25 603,674.25 C603,674.25 6,674.25 6,664.25 L6,80.25 " fill="#FFFFFF" filter="url(#fsjhws4ls93vl)" style="stroke:#000000;stroke-width:1.5;"/><path d="M6,80.25 C6,90.25 603,90.25 603,90.25 C603,90.25 1200,90.25 1200,80.25 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="118" x="544" y="105.2451">Attribute Store</text><!--MD5=[805408bc1e2a668481c00ef3df754567]
+cluster For each Association Group--><rect fill="#FFFFFF" filter="url(#fsjhws4ls93vl)" height="363" style="stroke:#000000;stroke-width:1.5;" width="880" x="312" y="303.25"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="219" x="642.5" y="318.2451">For each Association Group</text><rect fill="#F2FFE6" filter="url(#fsjhws4ls93vl)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="201" x="362.5" y="112.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="440.5" y="125.3887">NodeID</text><line style="stroke:#000000;stroke-width:1.5;" x1="363.5" x2="562.5" y1="130.2188" y2="130.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="189" x="368.5" y="143.501">Attribute Type = ATTRIBUTE_NODE_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="368.5" y="155.1416">value = Desired: [], Reported: [03]</text><rect fill="#E6FFF7" filter="url(#fsjhws4ls93vl)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="224" x="351" y="221.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="405.5" y="234.3887">Endpoint Attribute</text><line style="stroke:#000000;stroke-width:1.5;" x1="352" x2="574" y1="239.2188" y2="239.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="212" x="357" y="252.501">Attribute Type = ATTRIBUTE_ENDPOINT_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="357" y="264.1416">value = Desired: [] - Reported: [04]</text><rect fill="#FFFFFF" filter="url(#fsjhws4ls93vl)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="290" x="14" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="134" x="92" y="343.3887">Supported Groupings</text><line style="stroke:#000000;stroke-width:1.5;" x1="15" x2="303" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="278" x="20" y="361.501">Attribute Type = ATTRIBUTE(SUPPORTED_GROUPINGS)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="20" y="373.1416">value = Desired: [] - Reported: [1]</text><rect fill="#FFFFFF" filter="url(#fsjhws4ls93vl)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="207" x="664.5" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="741" y="343.3887">Group ID</text><line style="stroke:#000000;stroke-width:1.5;" x1="665.5" x2="870.5" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="141" x="670.5" y="361.501">ID = ATTRIBUTE(GROUP_ID)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="195" x="670.5" y="373.1416">value = Desired: [], Reported: [Group X]</text><rect fill="#FFFFFF" filter="url(#fsjhws4ls93vl)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="241" x="320.5" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="78" x="402" y="452.3887">Group Name</text><line style="stroke:#000000;stroke-width:1.5;" x1="321.5" x2="560.5" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="161" x="326.5" y="470.501">ID = ATTRIBUTE(GROUP_NAME)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="229" x="326.5" y="482.1416">value = Desired: [], Reported: ["Group Name"]</text><rect fill="#FFFFFF" filter="url(#fsjhws4ls93vl)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="204" x="597" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="81" x="658.5" y="452.3887">Group Profile</text><line style="stroke:#000000;stroke-width:1.5;" x1="598" x2="800" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="174" x="603" y="470.501">ID = ATTRIBUTE(GROUP_PROFILE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="192" x="603" y="482.1416">value = Desired: [], Reported: [0x0001]</text><rect fill="#FFFFFF" filter="url(#fsjhws4ls93vl)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="274" x="873" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="129" x="945.5" y="452.3887">Group Command List</text><line style="stroke:#000000;stroke-width:1.5;" x1="874" x2="1146" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="213" x="879" y="470.501">ID = ATTRIBUTE(GROUP_COMMAND_LIST)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="262" x="879" y="482.1416">value = Desired: [], Reported: [0x5A 0x01 0x25 0x03]</text><rect fill="#FFFFFF" filter="url(#fsjhws4ls93vl)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="237" x="919.5" y="609.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="92" x="992" y="622.3887">Group Content</text><line style="stroke:#000000;stroke-width:1.5;" x1="920.5" x2="1155.5" y1="627.2188" y2="627.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="179" x="925.5" y="640.501">ID = ATTRIBUTE(GROUP_CONTENT)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="225" x="925.5" y="652.1416">value = Desired: [03 00 01 00], Reported: [02]</text><rect fill="#FFFFFF" filter="url(#fsjhws4ls93vl)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="233" x="633.5" y="609.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="95" x="702.5" y="622.3887">Group Capacity</text><line style="stroke:#000000;stroke-width:1.5;" x1="634.5" x2="865.5" y1="627.2188" y2="627.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="221" x="639.5" y="640.501">ID = ATTRIBUTE(MAX_NODES_SUPPORTED)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="639.5" y="652.1416">value = Desired: [], Reported: [05]</text><!--MD5=[95477c314ce472250aabd32546a8a81f]
+reverse link node to endpoint--><path codeLine="902" d="M463,174.8796 C463,190.2226 463,207.4737 463,221.1141 " fill="none" id="node-backto-endpoint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="463,161.4838,459,167.4838,463,173.4838,467,167.4838,463,161.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[26aa234b9e4954d03f97c556232ede5b]
+reverse link endpoint to group_number--><path codeLine="903" d="M382.0911,274.7601 C333.824,292.0664 273.2123,313.7989 227.353,330.2418 " fill="none" id="endpoint-backto-group_number" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="394.3974,270.3476,387.3994,268.6074,383.1016,274.3978,390.0996,276.138,394.3974,270.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d5dae42b09276d7d5f969234a5bd893f]
+reverse link endpoint to group_id--><path codeLine="904" d="M572.2707,273.9678 C601.4221,282.4462 632.6807,292.4089 661,303.25 C681.2162,310.9891 702.8492,321.0435 721.3359,330.2119 " fill="none" id="endpoint-backto-group_id" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="559.4837,270.3033,564.1495,275.8015,571.0193,273.6093,566.3535,268.1111,559.4837,270.3033" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[594302a057004fdffc808029236b7445]
+reverse link group_id to group_name--><path codeLine="905" d="M681.6304,383.5399 C629.6048,400.8817 564.0628,422.7291 514.5245,439.2418 " fill="none" id="group_id-backto-group_name" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="694.2071,379.3476,687.2501,377.4503,682.823,383.1425,689.78,385.0398,694.2071,379.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[bdbc6522c25cace555faf6de560d5fd0]
+reverse link group_id to group_profile--><path codeLine="906" d="M745.3397,390.5468 C735.2707,406.4529 723.6705,424.7778 714.5952,439.1141 " fill="none" id="group_id-backto-group_profile" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="752.3428,379.4838,745.7539,382.414,745.9244,389.6231,752.5134,386.6929,752.3428,379.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[944d66304b70c0240fe6188fbcd777f4]
+reverse link group_id to group_command_list--><path codeLine="907" d="M834.6209,384.757 C872.6706,401.895 919.7786,423.1131 955.5874,439.2418 " fill="none" id="group_id-backto-group_command_list" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="822.6113,379.3476,826.4393,385.4588,833.5526,384.2758,829.7247,378.1646,822.6113,379.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9862cb46a1c77a5d746c934be74e6519]
+reverse link group_id to group_content--><path codeLine="908" d="M884.9897,363.6396 C989.1334,374.2729 1130.2395,396.3122 1165,439.25 C1211.3096,496.4538 1127.0488,570.9449 1074.8473,609.0037 " fill="none" id="group_id-backto-group_content" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="871.8411,362.3371,877.4175,366.9092,883.7826,363.5202,878.2062,358.9482,871.8411,362.3371" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e043c861a8ae238dba5a9ae7a2e10ed9]
+reverse link group_id to group_capacity--><path codeLine="909" d="M795.2776,390.1967 C804.738,404.6056 814.1773,421.9264 819,439.25 C824.8406,460.23 823.7825,467.0038 819,488.25 C808.8085,533.5256 782.8216,581.263 765.8092,609.2324 " fill="none" id="group_id-backto-group_capacity" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="787.7738,379.3209,787.8888,386.5311,794.5886,389.1981,794.4736,381.9879,787.7738,379.3209" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[425bd027371e2269fc0b113b1ef53ed4]
+link group_command_list to group_content--><!--MD5=[a565d149eff2f938983dd242f6cd9b10]
+link group_profile to group_capacity--><!--MD5=[d2deb5d26b868c2e2bcffaa305800050]
+@startuml attribute_store_association_command_class.svg
+title Association data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Supported Groupings" as group_number #FFFFFF
+  group_number : Attribute Type = ATTRIBUTE(SUPPORTED_GROUPINGS)
+  group_number : value = Desired: [] - Reported: [1]
+
+  package "For each Association Group" <<Rectangle>> {
+    object "Group ID" as group_id #FFFFFF
+    group_id : ID = ATTRIBUTE(GROUP_ID)
+    group_id : value = Desired: [], Reported: [Group X]
+
+    object "Group Name" as group_name #FFFFFF
+    group_name : ID = ATTRIBUTE(GROUP_NAME)
+    group_name : value = Desired: [], Reported: ["Group Name"]
+
+    object "Group Profile" as group_profile #FFFFFF
+    group_profile : ID = ATTRIBUTE(GROUP_PROFILE)
+    group_profile : value = Desired: [], Reported: [0x0001]
+
+    object "Group Command List" as group_command_list #FFFFFF
+    group_command_list : ID = ATTRIBUTE(GROUP_COMMAND_LIST)
+    group_command_list : value = Desired: [], Reported: [0x5A 0x01 0x25 0x03]
+
+    object "Group Content" as group_content #FFFFFF
+    group_content : ID = ATTRIBUTE(GROUP_CONTENT)
+    group_content : value = Desired: [03 00 01 00], Reported: [02]
+
+    object "Group Capacity" as group_capacity #FFFFFF
+    group_capacity : ID = ATTRIBUTE(MAX_NODES_SUPPORTED)
+    group_capacity : value = Desired: [], Reported: [05]
+  }
+}
+
+node *- - endpoint
+endpoint *- - group_number
+endpoint *- - group_id
+group_id *- - group_name
+group_id *- - group_profile
+group_id *- - group_command_list
+group_id *- - group_content
+group_id *- - group_capacity
+
+group_command_list -[hidden]- -> group_content
+group_profile -[hidden]- -> group_capacity
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 10:25:05 UTC 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: ANSI_X3.4-1968
+Language: en
+Country: US
+--></g></svg>

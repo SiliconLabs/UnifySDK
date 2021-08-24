@@ -1,0 +1,12 @@
+target_add_unittest(
+  dotdot_mqtt_topics_handler
+  SOURCES
+  zpc_dotdot_mqtt_group_dispatch_test.c
+  EXCLUDE
+  dotdot_mqtt_topics_handler.cpp
+  DEPENDS
+  dotdot_attributes
+  zpc_attribute_store_mock
+  uic_attribute_store_mock
+  uic_dotdot_mqtt_mock
+  zcl_cluster_servers_mock)

@@ -1,0 +1,58 @@
+cmake_minimum_required(VERSION 3.19)
+
+# ##############################################################################
+# Modules
+# ##############################################################################
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules"
+                      ${CMAKE_MODULE_PATH})
+set(CMAKE_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/include/"
+                       ${CMAKE_INCLUDE_PATH})
+
+# ##############################################################################
+# Include Configurations
+# ##############################################################################
+include(cmake/include/version.cmake)
+include(cmake/include/build_permutations.cmake)
+
+project(
+  uic
+  LANGUAGES C CXX
+  VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV})
+
+include(cmake/include/target_interface_libraries.cmake)
+include(cmake/include/compiler_options.cmake)
+include(cmake/include/compatible_platform.cmake)
+include(cmake/include/unittest.cmake)
+include(cmake/include/doxygen.cmake)
+include(cmake/include/package.cmake)
+include(cmake/include/uic_helper.cmake)
+
+
+enable_language(Rust)
+include(CMakeCargo)
+# ##############################################################################
+# Global includes
+# ##############################################################################
+include_directories(include ${CMAKE_CURRENT_BINARY_DIR}/include)
+
+add_custom_target(sl_status_strings
+  SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/include/sl_status.h ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sl_status_strings.sh
+  BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
+  COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sl_status_strings.sh > ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h)
+# ##############################################################################
+# Subdirectories
+# ##############################################################################
+add_subdirectory(components)
+add_subdirectory(applications)
+
+# This is for generating cmake/release-version.cmake to add to source package
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake.in
+               ${CMAKE_BINARY_DIR}/cmake/release-version.cmake)
+add_custom_target(
+  uic_source
+  COMMAND cp ${CMAKE_BINARY_DIR}/cmake/release-version.cmake
+          ${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake
+  COMMAND ${CMAKE_MAKE_PROGRAM} package_source
+  COMMAND rm ${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/uic_version.h.in
+               ${CMAKE_BINARY_DIR}/include/uic_version.h)

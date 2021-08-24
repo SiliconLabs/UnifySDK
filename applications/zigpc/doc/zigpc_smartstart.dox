@@ -1,0 +1,8 @@
+/**
+
+@defgroup zigpc_smartstart ZigPC SmartStart Monitor
+@ingroup zigpc_components
+
+The role of the ZigPC SmartStart Manager is to accept UIC SmartStart list
+updates and perform any node additions based on the information available.
+ */

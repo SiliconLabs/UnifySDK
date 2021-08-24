@@ -1,0 +1,6 @@
+target_add_unittest(uic_dotdot_mqtt
+NAME uic_dotdot_mqtt_test
+SOURCES dotdot_mqtt_test.cpp
+DEPENDS uic_mqtt_stub)
+
+target_include_directories(uic_dotdot_mqtt_test PRIVATE ${CMAKE_CURRENT_BINARY_DIR})

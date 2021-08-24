@@ -1,0 +1,22 @@
+/**
+
+@defgroup contiki The Contiki RTOS
+@ingroup uic_components
+@{
+
+  @defgroup pt Protothreads
+
+  @defgroup sys System
+
+  @defgroup lib Library
+
+  @defgroup mem Memory
+
+  @defgroup dev Device
+
+  @defgroup contiki_test Test
+
+@}
+
+
+*/

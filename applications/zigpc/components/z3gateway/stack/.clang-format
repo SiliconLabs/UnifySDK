@@ -1,0 +1,3 @@
+# Compatible with: clang-format version 10.0.0
+DisableFormat: true
+SortIncludes: false

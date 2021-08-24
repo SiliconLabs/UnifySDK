@@ -1,0 +1,24 @@
+{
+  "name": "UIC Dotdot Mappers",
+  "version": "UIC-dotdot-v1",
+  "helpers": [
+    "addon-helper.js"
+  ],
+  "templates": [
+    {
+      "path": "cluster-types.zapt",
+      "name": "Cluster Types",
+      "output": "cluster-types.ts"
+    },
+    {
+      "path": "cluster-type-attributes.zapt",
+      "name": "Cluster Type Attributes",
+      "output": "cluster-type-attributes.ts"
+    },
+    {
+      "path": "supported-clusters.zapt",
+      "name": "Supported Clusters",
+      "output": "supported-clusters.js"
+    }
+  ]
+}

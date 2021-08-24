@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["APP_NAME",""],["CONFIG_VERSION",""]],"fn":[["get_config",""],["main",""],["ok_or_exit_with_message",""],["parse_application_arguments",""],["run",""]],"mod":[["cache","Cache is an object that bookkeeps unid & endpoint to group relations. it also returns information about changed records."],["mqtt_client",""],["mqtt_handler",""]]});

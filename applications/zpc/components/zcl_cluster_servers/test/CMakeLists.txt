@@ -1,0 +1,28 @@
+target_add_unittest(
+  zcl_group_cluster_server
+  SOURCES
+  zcl_group_cluster_server_test.c
+  DEPENDS
+  uic_datastore
+  uic_attribute_store
+  uic_attribute_resolver
+  zpc_attribute_store
+  dotdot_attributes
+  zpc_utils_mock
+  uic_mqtt_mock
+  dotdot_mqtt_topics_handler_mock
+  zwave_network_management_mock)
+
+target_add_unittest(
+  zcl_OTA_cluster_server
+  SOURCES
+  zcl_OTA_cluster_server_test.cpp
+  DEPENDS
+  uic_datastore
+  zpc_attribute_store
+  zwave_command_classes_mock
+  uic_mqtt_mock
+  uic_mqtt_stub
+  EXCLUDE
+  uic_mqtt
+  uic_mqtt_client)

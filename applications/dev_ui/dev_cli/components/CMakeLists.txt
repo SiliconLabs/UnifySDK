@@ -1,0 +1,3 @@
+add_subdirectory(dev_run_cli)
+add_subdirectory(dev_commands)
+add_subdirectory(dev_cli_config)

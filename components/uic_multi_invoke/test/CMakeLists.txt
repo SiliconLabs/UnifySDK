@@ -1,0 +1,1 @@
+target_add_unittest(uic_multi_invoke SOURCES multi_invoke_test.cpp)

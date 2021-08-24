@@ -1,0 +1,3 @@
+Language: Cpp
+# Don't format .Cpp files.
+DisableFormat: true

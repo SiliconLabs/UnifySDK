@@ -1,0 +1,66 @@
+{
+  "scopeName": "source.uam",
+  "patterns": [
+    {
+      "include": "#expression"
+    }
+  ],
+  "repository": {
+    "expression": {
+      "patterns": [
+        {
+          "include": "#keyword"
+        },
+        {
+          "include": "#paren-expression"
+        },
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#rep_attribute"
+        },
+        {
+          "include": "#des_attribute"
+        }
+
+      ]
+    },
+    "rep_attribute": {
+      "match": "r'[\\.\\[\\]\\w]+",
+      "name": "support.variable"
+    },
+    "des_attribute": {
+      "match": "d'[\\.\\[\\]\\w]+",
+      "name": "support.type"
+    },
+    "comment": {
+      "match": "\\/\\/.*",
+      "name": "keyword.comment"
+    },
+    "keyword": {
+      "match": "if|def|scope|undefined|or",
+      "name": "keyword.control"
+    },
+    "paren-expression": {
+      "begin": "\\(",
+      "end": "\\)",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.paren.open"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.paren.close"
+        }
+      },
+      "name": "expression.group",
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ]
+    }
+  }
+}

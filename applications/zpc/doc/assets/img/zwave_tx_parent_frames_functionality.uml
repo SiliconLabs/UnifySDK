@@ -1,0 +1,70 @@
+@startuml
+
+' Style for the diagram
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ArrowColor #000000
+
+skinparam ActivityBackgroundColor #DEDEDE
+skinparam ActivityBorderColor #480509
+skinparam ActivityBorderThickness 2
+skinparam ActivityFontColor #000000
+skinparam ActivityStartColor #797777
+
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam ParticipantBorderColor #480509
+skinparam SequenceLifeLineBorderColor #001111
+skinparam SequenceLifeLineBorderThickness 2
+
+hide footbox
+
+title Z-Wave TX parent frame functionality with S2 encapsulation
+
+' List of participants
+participant "User component" as u
+participant "Z-Wave TX" as tx #DEDEDE
+participant "Z-Wave\nTransport" as s2 #DEDEDE 
+participant "Z-Wave API" as zwapi
+participant "Z-Wave RX" as rx #DEDEDE
+
+rnote left of u: I have a frame\nto be encrypted\nand then sent.
+u -> tx: <b>zwave_tx_send_data\n(frame data, encapsulation=S2 Auth)
+
+rnote right of tx: <b>Queue:\n<b>- Frame 1</b>: Encapsulation S2 Auth
+
+tx -> tx: Process verifies the TX queue\nSee that the next frame (1) encapsulation = S2 Auth
+tx -> s2: <b>zwave_controller_transport_send_data</b> (parent = Frame 1)
+
+loop for as many encapsulated frames needed\n(Nonce Get, Encapsulated frame, etc) to get Frame 1 delivered
+  s2 -> tx: <b>zwave_tx_send_data</b>\n(Frame 2 data, encapsulation = None)
+  rnote right of tx: <b>Queue:\n<b>- Frame 1</b>: Encapsulation S2 Auth\n<b>- Frame 2</b>: Encapsulation None, parent=Frame 1
+  tx -> tx: Process verifies the TX queue\nSee that the next frame (2) encapsulation = None
+
+  tx -> zwapi: <b>zwapi_send_data\n(Frame 2 data)
+  rx -> zwapi: <b>zwapi_poll</b>()
+  zwapi -> tx: <b>zwapi_send_data</b> callback\n(Frame 2 transmission results)
+
+  tx -> s2: <b>zwave_tx_send_data</b> callback\n(frame 2 transmission results)
+end
+s2 -> tx: <b>zwave_controller_transport_send_data</b> callback\nFrame 2 transmission completed
+
+rnote right of tx: <b>Queue:\n<b>- Frame 1</b>: Encap. S2 Auth (sent via Frame 2)
+tx -> tx: Process verifies the TX queue\nSee that next frame (1)\nis to be discarded because of Frame 2 replacing it.
+
+tx -> u: <b>zwave_tx_send_data</b> callback\n(frame 1 transmission results)
+
+
+@enduml
+
+
+
+
+tx_queue_1 -- tx_queue_2
+
+@enduml

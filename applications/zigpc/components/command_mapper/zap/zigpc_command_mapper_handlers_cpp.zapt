@@ -1,0 +1,339 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+{{#zcl_atomics}}{{zcl_type_map_set_item this.name this.name}}{{/zcl_atomics}}
+{{#zcl_enums}}{{#if type}}{{zcl_type_map_set_item this.label this.type}}{{/if}}{{/zcl_enums}}
+{{#zcl_bitmaps}}{{#if type}}{{zcl_type_map_set_item this.label this.type}}{{/if}}{{/zcl_bitmaps}}
+{{#after}}
+
+// TODO: Investigate using 1 unicast dispatch callback with ZCL types used
+
+#include <iostream>
+#include <string>
+#include <list>
+#include <vector>
+#include <unordered_map>
+
+// UIC shared components
+#include <sl_status.h>
+#include <sl_log.h>
+#include <dotdot_mqtt.h>
+
+// ZigPC components
+#include "zigpc_gateway.h"
+#include "zigpc_common_zigbee.h"
+#include "zcl_util.h"
+#include "zcl_definitions.h"
+
+// Internal includes
+#include "zigpc_command_mapper_int.h"
+
+static constexpr char LOG_TAG[] = "zigpc_cmdmapper";
+
+/**
+ * @brief Populate Write Attribute record to a frame data buffer.
+ * The frame buffer is filled with the attribute id(2-bytes), attribute data
+ * type (1-byte), and the attribute data(n-bytes). Since the frame data struct
+ * only stores references to the data, any addition information (such as
+ * attribute ID and data types) must be stored in auxillary arrays passed in.
+ *
+ * @param write_attr_data       Frame data array to populate.
+ * @param attr_id_list          AUX Attr ID array to store and refer.
+ * @param attr_data_type_list   AUX Attr data type array to store and refer.
+ * @param attribute_id          Attribute ID to be used.
+ * @param attribute_data_type,  Attribute data type to be used.
+ * @param attribute_data        Attribute data to be used.
+ */
+void {{component_zigpc_cmdmapper_prefix}}_populate_write_attr_record(
+  std::vector<{{component_zigpc_zcl_prefix}}_frame_data_t> &write_attr_data,
+  std::list<zcl_attribute_id_t> &attr_id_list,
+  std::list<zigpc_zcl_data_type_t> &attr_data_type_list,
+  zcl_attribute_id_t attribute_id,
+  zigpc_zcl_data_type_t attribute_data_type,
+  void *attribute_data
+) {
+  {{component_zigpc_zcl_prefix}}_frame_data_t frame_data;
+
+  attr_id_list.push_back(attribute_id);
+  frame_data.type = ZIGPC_ZCL_DATA_TYPE_ATTRIB_ID;
+  frame_data.data = &attr_id_list.back();
+  write_attr_data.push_back(frame_data);
+
+  attr_data_type_list.push_back(attribute_data_type);
+  frame_data.type = ZIGPC_ZCL_DATA_TYPE_DATA8;
+  frame_data.data = &attr_data_type_list.back();
+  write_attr_data.push_back(frame_data);
+
+  frame_data.type = attribute_data_type;
+  frame_data.data = attribute_data;
+  write_attr_data.push_back(frame_data);
+
+}
+
+/**
+ * @brief Populate Read Attribute record to a frame data buffer.
+ * The frame buffer is filled with the attribute id(2-bytes). Since the frame
+ * data struct only stores references to the data, any addition information
+ * (such as attribute ID) must be stored in auxillary arrays passed in.
+ *
+ * @param read_attr_data        Frame data array to populate.
+ * @param attr_id_list          AUX Attr ID array to store and refer.
+ * @param attribute_id          Attribute ID to be used.
+ */
+void {{component_zigpc_cmdmapper_prefix}}_populate_read_attr_record(
+  std::vector<{{component_zigpc_zcl_prefix}}_frame_data_t> &read_attr_data,
+  std::list<zcl_attribute_id_t> &attr_id_list,
+  zcl_attribute_id_t attribute_id
+) {
+  {{component_zigpc_zcl_prefix}}_frame_data_t frame_data;
+
+  attr_id_list.push_back(attribute_id);
+  frame_data.type = ZIGPC_ZCL_DATA_TYPE_ATTRIB_ID;
+  frame_data.data = &attr_id_list.back();
+  read_attr_data.push_back(frame_data);
+}
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+/******************
+ * DotDot MQTT Command Handlers for {{label}} cluster
+ ******************/
+
+{{#zcl_attributes}}
+{{#first}}
+/**
+ * @brief DotDot MQTT handler for {{label}}/WriteAttributes command.
+ *
+ * @param unid UIC device identifier string
+ * @param endpoint UIC device endpoint identifier
+ * {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_state_t Attribute values
+ * {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_updated_state_t Boolean flags of which attributes to write
+ */
+sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label}}_write_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  {{component_dotdot_mqtt_prefix}}_callback_call_type_t call_type,
+  {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_state_t values,
+  {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_updated_state_t values_to_write
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<{{component_zigpc_zcl_prefix}}_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = {{component_zigpc_cmdmapper_prefix}}_cluster_support_check(unid, endpoint, {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_CLUSTER_{{asSnakeCaseUpper parent.label}});
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+{{/first}}
+{{#if isWritable }}
+    if (values_to_write.{{asSnakeCaseLower label}} == true) {
+      {{component_zigpc_cmdmapper_prefix}}_populate_write_attr_record(
+        write_attr_data,
+        attr_id_list,
+        attr_data_type_list,
+        {{asZigPCZclAttributeType parent this}},
+        {{asZigPCZclDataType (zcl_type_map_get_item type)}},
+        &values.{{asSnakeCaseLower label}}
+      );
+    }
+
+{{/if}}
+{{#last}}
+    if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+      {{component_zigpc_cmdmapper_prefix}}_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        {{asZigPCZclClusterType parent}},
+        ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+        write_attr_data.size(),
+        write_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+{{/last}}
+{{/zcl_attributes}}
+
+{{#zcl_attributes}}
+{{#first}}
+/**
+ * @brief DotDot MQTT handler for {{label}}/Commands/ForceReadAttributes.
+ *
+ * @param unid UIC device identifier string
+ * @param endpoint UIC device endpoint identifier
+ * {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_updated_state_t Boolean flags of which attributes to read
+ */
+sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label}}_force_read_attributes_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  {{component_dotdot_mqtt_prefix}}_callback_call_type_t call_type,
+  {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_updated_state_t attributes_to_read
+) {
+  sl_status_t status = SL_STATUS_OK;
+  std::vector<{{component_zigpc_zcl_prefix}}_frame_data_t> read_attr_data;
+  std::list<zcl_attribute_id_t> read_attr_ids;
+
+  if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = {{component_zigpc_cmdmapper_prefix}}_cluster_support_check(unid, endpoint, {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_CLUSTER_{{asSnakeCaseUpper parent.label}});
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+  } else {
+
+{{/first}}
+    if (attributes_to_read.{{asSnakeCaseLower label}} == true) {
+      {{component_zigpc_cmdmapper_prefix}}_populate_read_attr_record(
+        read_attr_data, read_attr_ids,
+        {{asZigPCZclAttributeType parent this}}
+      );
+    }
+{{#last}}
+
+    if ((status == SL_STATUS_OK) && (read_attr_data.size() > 0)) {
+      {{component_zigpc_cmdmapper_prefix}}_send_unicast(
+        unid,
+        endpoint,
+        ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+        {{asZigPCZclClusterType parent}},
+        ZIGPC_ZCL_GLOBAL_COMMAND_READ_ATTRIBUTES,
+        read_attr_data.size(),
+        read_attr_data.data()
+      );
+    }
+  }
+
+  return status;
+
+}
+{{/last}}
+{{/zcl_attributes}}
+
+{{#zcl_commands}}
+{{#if (isEqual source "server")}}
+/**
+ * @brief DotDot MQTT translator handler for {{parent.label}}/{{label}} command.
+ *
+ * @param unid  UIC device identifier string
+ * @param endpoint  UIC device endpoint identifier
+ * @param callback_type Callback type
+{{#zcl_command_arguments}}
+ * @param {{asSnakeCaseLower label}}  Command argument of type {{asUnderlyingType type}}
+{{/zcl_command_arguments}}
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
+ * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is supported by the unid/endpoint
+ * @return SL_STATUS_NOT_AVAILABLE if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK and command is not supported by the unid/endpoint
+ */
+sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_handler(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  {{component_dotdot_mqtt_prefix}}_callback_call_type_t callback_type{{#zcl_command_arguments}}{{#first}},{{/first}}
+  {{asUnderlyingType type}} {{asSnakeCaseLower label}}{{listComma this}}{{/zcl_command_arguments}}
+) {
+  sl_status_t status = SL_STATUS_OK;
+
+  if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
+    status = {{component_zigpc_cmdmapper_prefix}}_cluster_support_check(unid, endpoint, {{asZigPCZclClusterType parent}});
+    if (status != SL_STATUS_OK) {
+      status = SL_STATUS_NOT_AVAILABLE;
+    }
+    return status;
+  }
+
+  const size_t cmd_arg_count = {{zcl_command_arguments_count id}};
+{{#zcl_command_arguments}}
+{{#if (supportedStruct type)}}
+  // Copy fields to packed struct
+  {{asZigPCZclStructType type}} zigpc_{{asSnakeCaseLower label}};
+{{#zcl_struct_items_by_struct_name type}}
+  zigpc_{{asSnakeCaseLower parent.label}}.{{asSnakeCaseLower label}} = {{asSnakeCaseLower parent.label}}.{{label}};
+{{/zcl_struct_items_by_struct_name}}
+
+{{/if}}
+{{/zcl_command_arguments}}
+{{#zcl_command_arguments}}
+{{#first}}
+  {{component_zigpc_zcl_prefix}}_frame_data_t cmd_arg_list[cmd_arg_count] = {
+{{/first}}
+    {
+      .type = {{asZigPCZclDataType (zcl_type_map_get_item type)}},
+      .data = {{#if (isString type)}} {{asSnakeCaseLower label}} {{else if (supportedStruct type)}} &zigpc_{{asSnakeCaseLower label}} {{else}} &{{asSnakeCaseLower label}} {{/if}}
+    },
+{{#last}}
+  };
+{{/last}}
+{{/zcl_command_arguments}}
+
+  if (status == SL_STATUS_OK) {
+    {{component_zigpc_cmdmapper_prefix}}_send_unicast(
+      unid,
+      endpoint,
+      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+      {{asZigPCZclClusterType parent}},
+      {{asZigPCZclCommandType parent this}},
+      cmd_arg_count,
+{{#zcl_command_arguments}}
+{{#first}}
+      cmd_arg_list
+{{/first}}
+{{else}}
+      NULL
+{{/zcl_command_arguments}}
+    );
+  }
+
+  // Always return SL_STATUS_OK if being called normally.
+  return SL_STATUS_OK;
+}
+
+{{/if}}
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
+
+/**
+ * @brief Register the callbacks for the DotDot Commands supported.
+ */
+sl_status_t {{component_zigpc_cmdmapper_prefix}}_register_dotdot_mqtt_handlers(void)
+{
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_attributes}}
+{{#first}}
+  {{component_dotdot_mqtt_prefix}}_set_{{asSnakeCaseLower parent.label}}_write_attributes_callback(
+    {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label}}_write_attributes_handler
+  );
+  {{component_dotdot_mqtt_prefix}}_set_{{asSnakeCaseLower parent.label}}_force_read_attributes_callback(
+    {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label}}_force_read_attributes_handler
+  );
+{{/first}}
+{{/zcl_attributes}}
+{{#zcl_commands}}
+{{#if (isEqual source "server")}}
+  {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_callback_set(
+    {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_handler
+  );
+{{/if}}
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
+  return SL_STATUS_OK;
+}
+{{/after}}

@@ -1,0 +1,315 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+#include "sl_log.h"
+#include "sl_status.h"
+#include "attribute_store.h"
+#include "zpc_attribute_store_network_helper.h"
+#include "attribute_store_helper.h"
+#include "attribute_store_defined_attribute_types.h"
+#include "attribute.hpp"
+#include "zwave_unid.h"
+#include "dotdot_mqtt_topics_handler.h"
+#include "dotdot_attributes.h"
+#include "dotdot_mqtt.h"
+#include "uic_mqtt.h"
+#include "ucl_definitions.h"
+
+#include <stdio.h>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <cstring>
+
+#define LOG_TAG "dotdot_mqtt_topics_handler"
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+////////////////////////////////////////////////////////////////////////////////
+// Start of cluster {{asSnakeCaseLower label}}
+////////////////////////////////////////////////////////////////////////////////
+
+//Publishing the desired attribute state
+static void {{asSnakeCaseLower label}}_cluster_attrs_desired_state_publisher_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED){
+    return;
+  }
+  //sl_log_debug(LOG_TAG,"{{asSnakeCaseLower label}}_cluster_attrs_desired_state_publisher_callback");
+
+  // Get the UNID and EndPoint, and prepare the basic topic
+  std::stringstream basic_topic;
+  unid_t unid;
+  zwave_endpoint_id_t endpoint_id;
+  sl_status_t unid_ep_status
+    = attribute_store_network_helper_get_unid_endpoint_from_node(updated_node,
+                                                                 unid,
+                                                                 &endpoint_id);
+  if (unid_ep_status == SL_STATUS_OK){
+    basic_topic << "ucl/by-unid/" << std::string(unid) << "/ep" << std::to_string(endpoint_id);
+  }
+
+  attribute_store_type_t attr_node_type = attribute_store_get_node_type(updated_node);
+  if (attr_node_type != ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    try {
+      attribute_store::attribute attr(updated_node);
+      {{#zcl_attributes}}
+        if (attr_node_type == {{asAttributeIdDefine parent.label label}}) {
+          {{#if (isString type)}}
+            std::vector<char> str_desired = attr.desired_or_reported<std::vector<char>>();
+            {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
+              basic_topic.str().c_str(),
+              static_cast<{{asUnderlyingType type}}>( str_desired.data() ),
+              UCL_MQTT_PUBLISH_TYPE_DESIRED);
+          {{else}}
+            {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
+              basic_topic.str().c_str(),
+              static_cast<{{asUnderlyingType type}}>(attr.desired_or_reported<int32_t>()),
+              UCL_MQTT_PUBLISH_TYPE_DESIRED);
+          {{/if}}
+          return;
+        }
+      {{/zcl_attributes}}
+    } catch (std::exception &ex) {
+      sl_log_warning(LOG_TAG, "publish desired attribute failed: %s", ex.what());
+    }
+  }
+
+}
+
+//Publishing the Reported attribute state
+static void {{asSnakeCaseLower label}}_cluster_attrs_reported_state_publisher_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  if (change == ATTRIBUTE_DELETED || change == ATTRIBUTE_CREATED){
+    return;
+  }
+  //sl_log_debug(LOG_TAG,"{{asSnakeCaseLower label}}_cluster_attrs_reported_state_publisher_callback");
+  // Get the UNID and EndPoint, and prepare the basic topic
+  std::stringstream basic_topic;
+  unid_t unid;
+  zwave_endpoint_id_t endpoint_id;
+  sl_status_t unid_ep_status
+    = attribute_store_network_helper_get_unid_endpoint_from_node(updated_node,
+                                                                 unid,
+                                                                 &endpoint_id);
+  if (unid_ep_status == SL_STATUS_OK){
+    basic_topic << "ucl/by-unid/" << std::string(unid) << "/ep" << std::to_string(endpoint_id);
+  }
+
+  attribute_store_type_t attr_node_type = attribute_store_get_node_type(updated_node);
+  if (attr_node_type != ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {
+    try {
+      attribute_store::attribute attr(updated_node);
+      {{#zcl_attributes}}
+        if (attr_node_type == {{asAttributeIdDefine parent.label label}}) {
+          {{#if (isString type)}}
+            std::vector<char> str_reported = attr.reported<std::vector<char>>();
+            if (attr.desired_exists()) {
+              {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
+                basic_topic.str().c_str(),
+                static_cast<{{asUnderlyingType type}}>( str_reported.data() ),
+                UCL_MQTT_PUBLISH_TYPE_REPORTED);
+            }
+            else {
+              {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
+                basic_topic.str().c_str(),
+                static_cast<{{asUnderlyingType type}}>( str_reported.data() ),
+                UCL_MQTT_PUBLISH_TYPE_ALL);
+            }
+          {{else}}
+            if (attr.desired_exists()) {
+              {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
+                basic_topic.str().c_str(),
+                static_cast<{{asUnderlyingType type}}>(attr.reported<int32_t>()),
+                UCL_MQTT_PUBLISH_TYPE_REPORTED);
+            }
+            else {
+              {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
+                basic_topic.str().c_str(),
+                static_cast<{{asUnderlyingType type}}>(attr.reported<int32_t>()),
+                UCL_MQTT_PUBLISH_TYPE_ALL);
+            }
+          {{/if}}
+
+          return;
+        }
+      {{/zcl_attributes}}
+    } catch (std::exception &ex) {
+      sl_log_warning(LOG_TAG, "publish reported attribute failed: %s", ex.what());
+    }
+  }
+}
+
+// WriteAttribute Callbacks
+static sl_status_t {{asSnakeCaseLower label}}_cluster_mapper_write_attributes_callback(
+  const char* unid,
+  const uint8_t endpoint,
+  {{dotdot_prefix}}_callback_call_type_t call_type,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t attributes,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t updated_attributes)
+{
+  if (call_type == {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_SUPPORT_CHECK) {
+    attribute_store::attribute 
+      endpoint_node(attribute_store_network_helper_get_endpoint_node(unid, endpoint));
+    if (endpoint_node.is_valid()){
+      for (const auto& child : endpoint_node.children()) {
+        {{#zcl_attributes}}
+          {{#if isWritable }}
+            if ({{asAttributeIdDefine parent.label label}} == child.type()) {
+              return SL_STATUS_OK;
+            }
+          {{/if}}
+        {{/zcl_attributes}}
+      }
+    }
+    return SL_STATUS_NOT_AVAILABLE;
+  }
+
+  sl_log_debug(LOG_TAG,
+               "{{asSnakeCaseLower label}}: Incoming WriteAttributes command for %s, endpoint %d.\n",
+               unid,
+               endpoint);
+
+  attribute_store_node_t endpoint_node
+    = attribute_store_network_helper_get_endpoint_node(unid, endpoint);
+  attribute_store::attribute attr(endpoint_node);
+  attribute_store::attribute updated_node;
+  {{#zcl_attributes}}
+    {{#if isWritable }}
+      if(updated_attributes.{{asSnakeCaseLower label}}){
+        updated_node = attr.child_by_type({{asAttributeIdDefine parent.label label}});
+        if(updated_node.is_valid()) {
+          {{#if (isString type) }}
+            std::vector<uint8_t> value(attributes.{{asSnakeCaseLower label}}, std::next(attributes.{{asSnakeCaseLower label}}, strlen(attributes.{{asSnakeCaseLower label}}) +1) );
+            updated_node.set(DESIRED_ATTRIBUTE, value);
+          {{else}}
+            updated_node.set_desired<int32_t>(attributes.{{asSnakeCaseLower label}});
+          {{/if}}
+        }
+      }
+    {{/if}}
+  {{/zcl_attributes}}
+
+  return SL_STATUS_OK;
+}
+
+static void {{asSnakeCaseLower label}}_cluster_attrs_creation_callback(
+   attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  // Get the UNID and EndPoint, and prepare the cluster revision topic
+  std::stringstream base_topic, revision_topic;
+  unid_t unid;
+  zwave_endpoint_id_t endpoint_id;
+  sl_status_t unid_ep_status
+    = attribute_store_network_helper_get_unid_endpoint_from_node(updated_node,
+                                                                 unid,
+                                                                 &endpoint_id);
+  base_topic << "ucl/by-unid/" << std::string(unid) << "/ep"<< std::to_string(endpoint_id);
+  if (unid_ep_status == SL_STATUS_OK){
+    revision_topic <<  "ucl/by-unid/" << std::string(unid) << "/ep"
+      << std::to_string(endpoint_id) << "/{{label}}/Attributes/ClusterRevision";
+  } else {
+    sl_log_debug(LOG_TAG, "can not find unid and endpoint of %i attribute id", updated_node);
+    return;
+  }
+
+  if (change == ATTRIBUTE_UPDATED){
+    if (uic_mqtt_count_topics(revision_topic.str().c_str()) == 0){
+      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_publish_cluster_revision(base_topic.str().c_str(), {{revision}});
+    }
+  }
+
+  if (change == ATTRIBUTE_DELETED) {
+    // If the an attribute under a given cluster is deleted, we beleive
+    // that the mapper engine will delete all attributes per the cluster
+    // therefore we unretain the ClusterRevision mqtt publish
+     if ((uic_mqtt_count_topics(revision_topic.str().c_str()) != 0)) {
+      uic_mqtt_unretain_by_regex(revision_topic.str().c_str());
+    }
+  }
+}
+
+{{/if}}
+{{/zcl_clusters}}
+
+static void on_pan_node_interview_done(attribute_store_node_t updated_node,
+                                       attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
+
+  try {
+    node_state_topic_state_t network_status = NODE_STATE_TOPIC_LAST;
+    attribute_store::attribute attr_network_status(updated_node);
+    network_status = attr_network_status.reported<node_state_topic_state_t>();
+    if (network_status == NODE_STATE_TOPIC_STATE_INCLUDED) {
+      unid_t unid = "\0";
+      zwave_endpoint_id_t endpoint_id = 0;
+      sl_status_t status_unid
+        = attribute_store_network_helper_get_unid_from_node(updated_node, unid);
+      if (status_unid == SL_STATUS_OK){
+        attribute_store::attribute node_id_node = attr_network_status.first_parent(ATTRIBUTE_NODE_ID);
+        uint32_t num_child = node_id_node.child_count();
+        attribute_store::attribute endpoint_node = ATTRIBUTE_STORE_INVALID_NODE;
+        for(uint32_t i = 0; i < num_child; i++ ){
+          endpoint_node = node_id_node.child_by_type(ATTRIBUTE_ENDPOINT_ID, i);
+          if (endpoint_node != ATTRIBUTE_STORE_INVALID_NODE) {
+            endpoint_id = endpoint_node.reported<zwave_endpoint_id_t>();
+            {{dotdot_prefix}}_publish_supported_commands(unid, endpoint_id);
+          }
+        }
+      }
+    }
+  } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG, "Cannot publish supported commands %s", ex.what());
+  }
+}
+
+sl_status_t dotdot_mqtt_topics_handler_init()
+{
+  {{#zcl_clusters}}
+  {{#if (supportedCluster label)}}
+  // Register WriteAttribute Callbacks
+  {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_write_attributes_callback(
+    {{asSnakeCaseLower label}}_cluster_mapper_write_attributes_callback);
+  {{#zcl_attributes}}
+    //Desired attribute state
+    attribute_store_register_callback_by_type_and_state(
+      {{asSnakeCaseLower parent.label}}_cluster_attrs_desired_state_publisher_callback,
+      {{asAttributeIdDefine parent.label label}},
+      DESIRED_ATTRIBUTE);
+    //Reported attribute state
+    attribute_store_register_callback_by_type_and_state(
+      {{asSnakeCaseLower parent.label}}_cluster_attrs_reported_state_publisher_callback,
+      {{asAttributeIdDefine parent.label label}},
+      REPORTED_ATTRIBUTE);
+    //registering a callback when an attribute is created for publishing cluster revision
+    attribute_store_register_callback_by_type(
+      {{asSnakeCaseLower parent.label}}_cluster_attrs_creation_callback,
+      {{asAttributeIdDefine parent.label label}});
+  {{/zcl_attributes}}
+  {{/if}}
+  {{/zcl_clusters}}
+
+  // Register a callback for Networkstatus attribute update
+  attribute_store_register_callback_by_type_and_state(
+    on_pan_node_interview_done,
+    ATTRIBUTE_NETWORK_STATUS,
+    REPORTED_ATTRIBUTE);
+
+  return SL_STATUS_OK;
+}

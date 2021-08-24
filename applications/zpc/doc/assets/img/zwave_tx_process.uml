@@ -1,0 +1,52 @@
+@startuml
+
+' Style for the diagram
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ArrowColor #000000
+
+skinparam ActivityBackgroundColor #DEDEDE
+skinparam ActivityBorderColor #480509
+skinparam ActivityBorderThickness 2
+skinparam ActivityFontColor #000000
+skinparam ActivityStartColor #797777
+
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+
+partition "Z-Wave TX Process" {
+  (*) -->[init] ZWAVE_TX_STATE_IDLE
+  if "Queue empty?" then
+    -->[Yes] ZWAVE_TX_STATE_IDLE
+  else
+    -->[No] ZWAVE_TX_STATE_TRANSMISSION_ONGOING
+  endif
+}
+
+partition "Z-Wave API" {
+  --> zwapi_send_data()
+}
+
+partition "Z-Wave TX Process" {
+  if "Expected replies \n&& Transmission successful" then
+    -->[Yes] ZWAVE_TX_STATE_BACKOFF
+    if "Backoff timer expired" then
+      -->[Yes] ZWAVE_TX_STATE_IDLE
+    else 
+      if "Replies received" then
+        -->[Yes] ZWAVE_TX_STATE_IDLE
+      else
+        -->[No] ZWAVE_TX_STATE_BACKOFF
+      endif
+    endif
+  else
+    -->[No] ZWAVE_TX_STATE_IDLE
+  endif
+}
+
+
+
+@enduml

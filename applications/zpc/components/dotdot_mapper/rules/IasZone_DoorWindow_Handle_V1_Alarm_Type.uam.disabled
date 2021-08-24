@@ -1,0 +1,34 @@
+// Here we are adding a Manufacturer Specific mapping Example for Yale Touchscreen doorlock
+
+// DotDot Attributes
+// This represents the attributes in the DotDot IASZone cluster
+def DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATE 0x05000000
+def DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_TYPE 0x05000001
+def DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATUS 0x05000002
+
+def DOOR_WINDOW_HANDLE_ZONE_TYPE 0x016
+
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+def zwNOTIFICATION_V1_ALARM_TYPE 0x00007108
+
+def IsYaleTouchDoorLock (r'zwMANUFACTURER_ID == 0x0109) & (r'zwPRODUCT_TYPE_ID == 0x02) & (r'zwPRODUCT_ID == 0x00)
+
+scope 0 {
+// For now zbIAS_ZONE_ZONE_STATE is always NOT ENROLLED
+r'DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATE = 
+  if IsYaleTouchDoorLock
+    (if (e'zwNOTIFICATION_V1_ALARM_TYPE) IAS_ZONE_ZONE_STATE_NOT_ENROLLED undefined)
+  undefined
+// Always set type to Door/Window handle
+r'DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_TYPE = 
+  if IsYaleTouchDoorLock
+    (if (r'zwNOTIFICATION_V1_ALARM_TYPE == 0x18 | r'zwNOTIFICATION_V1_ALARM_TYPE == 0x19) DOOR_WINDOW_HANDLE_ZONE_TYPE undefined)
+  undefined
+// If CO detected set ALARM1 (bit 0) and ALARM2 (bit 1) to 1, otherwise set to 0
+r'DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONE_STATUS =
+  if IsYaleTouchDoorLock
+    (if (r'zwNOTIFICATION_V1_ALARM_TYPE == 0x19) 0 3)
+  undefined
+}

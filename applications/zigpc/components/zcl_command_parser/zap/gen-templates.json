@@ -1,0 +1,23 @@
+{
+  "name": "UIC ZigPC Command Parser",
+  "version": "uic-zigpc-command-parser-v1",
+  "override": "../../../../../components/uic_dotdot/zap/addon-override.js",
+  "helpers": ["addon-helper.js"],
+  "templates": [
+    {
+      "path": "zcl_command_parser.h.zapt",
+      "name": "ZCL Command Parser Header",
+      "output": "include/zcl_command_parser.h"
+    },
+    {
+      "path": "zcl_command_parser.cpp.zapt",
+      "name": "ZCL Command Parsing Logic",
+      "output": "src/zcl_command_parser.cpp"
+    },
+    {
+      "path": "zcl_command_parser_int.h.zapt",
+      "name": "ZCL Command Parsing Internal Header",
+      "output": "src/zcl_command_parser_int.h"
+    }
+  ]
+}

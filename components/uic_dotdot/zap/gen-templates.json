@@ -1,0 +1,13 @@
+{
+  "name": "UIC Dotdot Shared",
+  "version": "UICShared-dotdot-v1",
+  "override": "addon-override.js",
+  "helpers": ["addon-helper.js"],
+  "templates": [
+    {
+      "path": "zap-types.zapt",
+      "name": "ZCL types",
+      "output": "include/zap-types.h"
+    }
+  ]
+}

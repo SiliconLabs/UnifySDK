@@ -1,0 +1,29 @@
+{
+    "name": "attribute-mapper",
+    "displayName": "Attribute Mapper",
+    "description": "Attribute Mapping Language",
+    "publisher": "silabs",
+    "version": "0.0.1",
+    "repository": {},
+    "engines": {
+        "vscode": "^1.41.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+      "contributes": {
+        "languages": [
+          {
+            "id": "uam",
+            "extensions": [".uam"]
+          }
+        ],
+        "grammars": [
+          {
+            "language": "uam",
+            "scopeName": "source.uam",
+            "path": "./syntaxes/uam.tmGrammar.json"
+          }
+        ]
+      }
+    }

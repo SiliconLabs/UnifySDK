@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["call_once",""],["zwave_command_class_firmware_update_init",""],["zwave_command_class_init_rust_handlers",""]],"struct":[["ZwaveCommandClassFirmwareUpdate",""],["ZwaveHandlerConfig",""]]});

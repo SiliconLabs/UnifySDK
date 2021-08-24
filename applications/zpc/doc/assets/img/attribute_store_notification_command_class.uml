@@ -1,0 +1,62 @@
+@startuml
+' Style for the diagram
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam shadowing false
+skinparam ArrowColor #000000
+skinparam ObjectBackgroundColor #DEDEDE
+skinparam ObjectBorderColor #480509
+skinparam ObjectBorderThickness 2
+skinparam ObjectFontColor #000000
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+title Attribute Store Notification Command Class attributes
+object HomeID #fffae6
+HomeID : ID = ATTRIBUTE_HOME_ID
+HomeID : value = Desired: [], Reported: [8C CE FB E6]
+object "NodeID" as NodeID_1 #f2ffe6
+NodeID_1 : ID = ATTRIBUTE_NODE_ID
+NodeID_1 : value = Desired: [], Reported: [01]
+object "Endpoint" as endpoint_1 #e6fff7
+endpoint_1 : ID = ATTRIBUTE_ENDPOINT_ID
+endpoint_1 : value = Desired: [], Reported: [00]
+object "Attribute" as attribute_1 #FFFFFF
+attribute_1 : ID = ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_VERSION
+attribute_1 : value = Desired: [], Reported: []
+package "For each Notification Type" <<Rectangle>> {
+object "Attribute" as attribute_3 #FFFFFF
+attribute_3 : ID = ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE
+attribute_3 : value = Desired: [ ], Reported: [ <Notification Type ID>]
+object "Attribute" as attribute_7 #FFFFFF
+attribute_7 : ID = ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_SUPPORTED_STATES_OR_EVENTS
+attribute_7 : value = Desired: [], Reported: [<State ID 1>, <State ID 2>]
+
+package "For each Notification State Type" <<Rectangle>> {
+object "Attribute" as attribute_s1 #FFFFFF
+attribute_s1 : ID = ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_STATE
+attribute_s1 : value = Desired: [ ], Reported: [<State ID>]
+object "Attribute" as attribute_5 #FFFFFF
+attribute_5 : ID = ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_EVENT
+attribute_5 : value = Desired: [ ], Reported: [<Event>]
+object "Attribute" as attribute_6 #FFFFFF
+attribute_6 : ID = ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_EVENT_PARAMETERS
+attribute_6 : value = Desired: [ ], Reported: [<Event Paramters]
+
+}
+}
+package "NIF resolver component" {
+  object "nif_parsing_after_inclusion()" as function_1
+  function_1 : +Creates VERSION attributes under endpoints
+}
+
+HomeID *-- NodeID_1
+NodeID_1 *-- endpoint_1
+endpoint_1 *-- attribute_3
+attribute_3 *-- attribute_s1
+attribute_s1 *-- attribute_5
+attribute_5 *-- attribute_6
+attribute_3 *-- attribute_7
+function_1 --> attribute_1 : creates if does not exist
+endpoint_1 *-- attribute_1
+@enduml

@@ -1,0 +1,321 @@
+/**
+
+\author Silicon Laboratories Inc.
+\version 1.0
+ 
+\mainpage libs2 API Guide
+libs2 is an library which implements all functionality related to Z-Wave S2 security. libs2 is deviced into 4 major components. 
+Z-Wave S2 security is extensively described in SDS11274. 
+
+\li \ref crypto functions, both raw aes modules, eliptic curve functions and higher level functions, such a random number generator, key 
+derivation functions and streaming functions such as AESCCM.
+\li \ref S2trans functions. Responsible for frame exchange during normal S2 communication.
+\li \ref s2incl functions. These function are responsible for secure key exchange during inclusion. This is the module which used the ECDH functions.
+\li \ref keystore functions. These are not really implemented by libs2, but is an abstract description of functions needed by libs2 to 
+store ECDH keys and network keys.
+ 
+ 
+\section integration Integrating libs2
+
+This section describes how in integrate libs2 into a existing Z-Wave application. Throughout this section we will refer to 
+sections of the Z/IP Gateway source code. The Z/IP Gateway is a Z-Wave reference implementation that uses libs2. In the 
+Z/IP Gateway, the important places to look is the source file S2_wrap.c and CC_Networkmanagement.c.
+
+\subsection tran_int Transport Layer Integration
+
+To get started an application using libs2 must implement the functions defined in \ref s2external. In the Z/IP Gateway 
+these are all implemented in S2_wrap.c.
+
+Fist we will describe all the calls from libs2 and upward to your application.
+
+First the functions \ref S2_send_frame and \ref S2_send_frame_multi must be implemented. These function maps directly to ZW_SendData or
+ZW_SendDataBridge if a bridge library is used. When sending is done, the S2 layer need to be notified using the
+function \ref S2_send_frame_done_notify.
+
+An implementations may look like this:
+
+\code
+
+static void S2_send_frame_callback(BYTE txStatus) {
+  S2_send_frame_done_notify((struct S2*) user,
+      txStatus == TRANSMIT_COMPLETE_OK ? S2_TRANSMIT_COMPLETE_OK : S2_TRANSMIT_COMPLETE_NO_ACK,
+          clock_time()-transmit_start_time + NONCE_REP_TIME);
+}
+
+uint8_t S2_send_frame(struct S2* ctxt,const s2_connection_t* conn, uint8_t* buf, uint16_t len) {
+
+   return ZW_SendData(conn->r_node,
+                (BYTE*) buf,
+                len,
+                conn->zw_tx_options, S2_send_frame_callback);
+}                
+
+uint8_t S2_send_frame_multi(struct S2* ctxt,const s2_connection_t* conn, uint8_t* buf, uint16_t len) {
+   transmit_start_time = clock_time();
+   return ZW_SendData(0xFF,
+                (BYTE*) buf,
+                len,
+                conn->zw_tx_options, S2_send_frame_callback);
+}                
+
+\endcode
+
+ The next thing is a timer the function \ref S2_set_timeout must start a timer and then call 
+ \ref S2_timeout_notify on timeout.
+ 
+\code
+static void timeout() {
+  S2_timeout_notify(ctxt);
+}
+
+void S2_set_timeout(struct S2* ctxt, uint32_t interval) {
+  ZW_TimerStart(interval/10, timeout,TIMER_ONE_TIME)
+} 
+\endcode
+ 
+ 
+Now we need to interface a HW random number generator. Make sure that this a hardware seeded random number.
+
+\code
+S2_get_hw_random(
+  uint8_t *buf,
+  uint8_t len)
+{
+  uint8_t *pbuf;
+  uint8_t rnd[2];
+  uint8_t left, pos;
+
+  pbuf = buf;
+  left = len;
+  while (left > 0)
+  {
+    ZW_GetRandomWord(rnd);    
+    *pbuf++ = *rnd;
+    left--;
+    if (left > 0)
+    {
+      *pbuf++ = *(rnd + 1);
+      left--;
+    }
+  }
+}
+\endcode
+
+We also need to setup command list, which is sent in the S2 commands supported get. This is the "S2 NIF". 
+
+\code
+void S2_get_commands_supported(uint8_t class_id, uint8_t** cmdClasses, uint8_t* length) {
+  *cmdClasses = &SecureClasses[0];
+  *length  = nSecureClasses;
+}
+\endcode
+
+Finally what to do when a S2 frame has been received:
+
+\code
+void S2_msg_received_event(struct S2* ctxt,s2_connection_t* src , uint8_t* buf, uint16_t len) {
+  ts_param_t p;
+  const int scheme_map[] = {
+      SECURITY_SCHEME_2_UNAUTHENTICATED,
+      SECURITY_SCHEME_2_AUTHENTICATED,
+      SECURITY_SCHEME_2_ACCESS};
+  ts_set_std(&p,0);
+
+
+  p.scheme = scheme_map[src->class_id];
+  p.snode = src->r_node;
+  p.dnode = src->l_node;
+
+  ApplicationCommandHandlerZIP(&p,(ZW_APPLICATION_TX_BUFFER*)buf,len);
+}
+\endcode
+
+This was all the functions which are calling upward. Now we cover all the functions calling downward. Ie, from you
+application into libs2.
+
+On application boot fist thing to do is to initiate the S2 context. This is done with \ref S2_init_ctx. This must be done on application startup and when the
+homeid changes. In this example we also check if the context has already been initialized.
+\code
+ if(s2_ctx) S2_destroy(s2_ctx);
+ s2_ctx = S2_init_ctx(UIP_HTONL(homeID));
+\endcode
+
+The function S2_init_ctx will also read the keys from the keystore, and initialize the prng.
+
+When the application receives a COMMAND_CLASS_SECURITY2 frame, it must call the \ref S2_application_command_handler. It is important 
+that the \ref S2_RXOPTION_MULTICAST is set when receiving multicast or broadcast frame.
+
+\code
+security2_CommandHandler(ts_param_t* p,
+const ZW_APPLICATION_TX_BUFFER *pCmd, uint16_t cmdLength) /* IN Number of command bytes including the command */
+{
+  const uint8_t s2_cap_report[] = {COMMAND_CLASS_SECURITY_2, SECURITY_2_CAPABILITIES_REPORT,0};
+
+  s2_connection_t conn;
+  conn.r_node = p->snode;
+  conn.l_node = p->dnode;
+  conn.zw_tx_options = p->tx_flags;
+  conn.rx_options = 0;
+
+  conn.tx_options = p->rx_flags & ( RECEIVE_STATUS_TYPE_BROAD |  RECEIVE_STATUS_TYPE_MULTI) ? S2_RXOPTION_MULTICAST : 0;
+
+  if( (pCmd->ZW_Common.cmd == SECURITY_2_CONTROLLER_CAPABILITIES_GET)  && (p->scheme == SECURITY_SCHEME_2_ACCESS)) {
+    S2_send_data(s2_ctx,&conn,s2_cap_report,sizeof(s2_cap_report));
+  } else {
+    S2_application_command_handler(s2_ctx,&conn,(uint8_t*) pCmd,cmdLength);
+  }
+}
+\endcode
+
+\subsection single_trans Singlecast frame transmission.
+When the application needs to send a S2 singlecast frame it just calls \ref S2_send_data. It is important to select the desired security class. 
+And also which verification strategy to use when sending. See \ref S2_TXOPTION_VERIFY_DELIVERY. When frame transmission has completed 
+libs2 will call the function \ref S2_send_done_event.
+
+\subsection multicst_trans Multicast frame transmission
+When sending multicast frames the application needs to go though multiple steps.
+
+\li A group id must be selected. A group id is just a byte representing the group of nodes the multicast frame is destened for. 
+It is the application which is responsible for mapping multicast node lists and multicast group ids.
+
+\li Then the application sends a S2 multi cast frame with \ref S2_send_data_multicast here the r_node must be set to the group id.
+\li Then the application must send a singlecast folloup message to the first node in the node list. Here the application will
+set \ref S2_TXOPTION_SINGLECAST_FOLLOWUP, \ref S2_TXOPTION_VERIFY_DELIVERY and \ref S2_TXOPTION_FIRST_SINGLECAST_FOLLOWUP. 
+\li now the application may sync up the next nodes, but this time it must only set \ref S2_TXOPTION_SINGLECAST_FOLLOWUP, \ref S2_TXOPTION_VERIFY_DELIVERY 
+\li the last step must be repeated for the rest of the nodes.
+
+\subsection key_int  Keystore Layer Integration
+Here we must interface routines which stores the network and ECDH keys to a file or flash storange. In the Z/IP Gateway this is
+implemented in s2_keystore.c.
+Integration of this should be straight forward. See \ref keystore.
+ 
+Notice on the ECDH keypair generations. The private EDCH key may just be any 128 random number. The public ECDH key may be generated 
+from the private key using the funciton \ref crypto_scalarmult_curve25519_base. This means that in reality the application only needs
+to actually store the private ECDH key.
+
+The function \ref keystore_public_key_read, may be implemented like this:
+
+\code
+void
+keystore_public_key_read(uint8_t *pub_key)
+{
+  uint8_t priv_key[32];
+  keystore_private_key_read(priv_key);
+  crypto_scalarmult_curve25519_base(pub_key,priv_key);
+  memset(priv_key,0,sizeof(priv_key));
+} 
+\endcode
+
+\subsection incl_int Inclusion Layer Integration
+The inclusion layer integration, mainly require the application to setup an event
+handler which need to act on cirtan events. There is also a timer associated 
+with the inclusion module. The functions related to the inclusion module is 
+described in \ref s2incl. In the Z/IP Gateway these functions are referred
+in S2_wrap.c.
+
+
+In S2 incluison the application user need to verify the identity as well as the
+security level of a node being included. When a controller or slave is being 
+included into a network the user may optionally verify the including controler.
+
+This means that the appliction needs to handle user inteaction durring inclusion.
+
+Fist the application must initailise the inclusion layer on boot, and setup the
+event handler, see \ref incl_event_handler.
+\code
+  s2_inclusion_init(SECURITY_2_SCHEME_1_SUPPORT,KEX_REPORT_CURVE_25519,
+      SECURITY_2_SECURITY_2_CLASS_0|SECURITY_2_SECURITY_2_CLASS_1 | SECURITY_2_SECURITY_2_CLASS_2 | SECURITY_2_SECURITY_0_NETWORK_KEY);
+  s2_inclusion_set_event_handler(&sec2_event_handler);
+\endcode
+
+\subsection incl_event_handler Setting up the user libs2 inclusion event handler. 
+The event handler is registered into libs2 using the function \ref s2_inclusion_set_event_handler.
+The events that must be handled by the event handler is described in \ref zwave_event_codes_t.
+
+This is an example of an event handler
+\code
+static void sec2_event_handler(zwave_event_t* ev) {
+  uint8_t flags;
+  switch(ev->event_type) {
+    case S2_NODE_INCLUSION_INITIATED_EVENT:
+      sec0_abort_inclusion(); //Here we abort S0 inclusion
+      break;
+    case S2_NODE_INCLUSION_PUBLIC_KEY_CHALLENGE_EVENT:
+      /* Here we ask the user to verify the public key */
+      NetworkManagement_dsk_challenge(ev->evt.s2_event.s2_data.challenge_req.public_key);
+      break;
+    case S2_NODE_INCLUSION_KEX_REPORT_EVENT:
+      /* Here we ask the user to verify that the node is allowed to get the security classes it has asked for*/
+      NetworkManagement_key_request(ev->evt.s2_event.s2_data.kex_report.security_keys);
+      break;
+    case S2_NODE_INCLUSION_COMPLETE_EVENT:
+      /* The new node has been S2 included */
+      if(sec_incl_cb) {
+        sec_incl_cb(keystore_flags_2_node_flags(ev->evt.s2_event.s2_data.inclusion_complete.exchanged_keys));
+      }
+      break;
+    case S2_NODE_JOINING_COMPLETE_EVENT:
+      /* The controller has now been included. Here we ask the keystore which keys has been granted.*/
+      nvm_config_get(assigned_keys,&flags);
+      if(sec_incl_cb) {
+        sec_incl_cb(keystore_flags_2_node_flags(flags));
+      }
+      break;
+    case S2_NODE_INCLUSION_FAILED_EVENT:
+      /* We have failed to S2 include the new node, or failed to be included ourselevs */
+      if(sec_incl_cb) {
+        sec_incl_cb(NODE_FLAG_KNOWN_BAD | (ev->evt.s2_event.s2_data.inclusion_fail.kex_fail_type << 16));
+      }
+      break;
+    case S2_JOINING_COMPLETE_NEVER_STARTED_EVENT:
+      /* The S2 bootstrapping never started. If this was a SmartStart learn mode, we must
+       * self-destruct now. */
+      if(is_smart_start_learn_mode) {
+        do_self_destruct();
+      }
+      break;
+  }
+}
+\endcode
+In the example above NetworkManagement_key_request, will ask the user if the device is allowed to get the S2 
+keys which it has asked for. There is not requirement for user interaction in this step. The controller
+may choose just to call \ref s2_inclusion_key_grant with the same keys as requested.
+
+In addition NetworkManagement_dsk_challenge will ask the user to verify the public key. Please not that for
+S2 access class devices ev->evt.s2_event.s2_data.challenge_req.public_key will not contain the first two bytes of
+the DSK. These two bytes must be entered by the user. Then the user has verified the DSK (and optionally typed in 
+two bytes), \ref s2_inclusion_challenge_response must be called.
+
+The S2_JOINING_COMPLETE_NEVER_STARTED_EVENT is emitted when the S2 bootstrapping never started.
+If the device is a controller and is adding another device, this event can be safely ignored. A device
+in classic learn mode can also ignore this event. This event is only important for devices which have just 
+completed a Smart Start learn mode - they must initiate a self-destruct when receiving upon receiving the event.
+Smart Start included devices receiving the S2_NODE_INCLUSION_FAILED_EVENT must also self-destruct. In the example
+above, this happens in sec_incl_cb().
+
+\subsection incl_timer Inclusion timer.
+Setting the inclusion timer(\ref s2_inclusion_set_timeout) is straight forward.
+
+\code 
+static void incl_timeout(void* ctxt) {
+  s2_inclusion_notify_timeout((struct S2*)ctxt);
+}
+
+uint8_t s2_inclusion_set_timeout(struct S2* ctxt, uint32_t interval) {
+  ctimer_set(&s2_inclusion_timer,interval * 10,incl_timeout,ctxt);
+  return 0;
+}
+\endcode
+
+\subsection do_inclusion Perfoming a inclusion or learnmode.
+The two relevant functions are \ref s2_inclusion_including_start and \ref s2_inclusion_joining_start which should be 
+executed right after the Z-Wave protocol inclusion is done.
+
+\see
+Initiating Add mode \ref s2_inclusion_including_start.\n
+A state diagram for add mode is seen in \ref add_mode_fsm.\n
+Initiation Learn mode \ref s2_inclusion_joining_start.\n
+A state diagram for learn mode is seen in \ref learn_mode_fsm.\n
+
+
+ */

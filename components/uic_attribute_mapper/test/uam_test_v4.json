@@ -1,0 +1,67 @@
+{
+  "name": "UAM Mappers single test",
+  "version": "v4",
+  "test_name": "Temperature_Measurement",
+  "uam_file": "../components/uic_attribute_mapper/test/rules/complex_test_map_1.uam",
+  "tree_data": [
+    {
+      "branch_descriptor": "0x04020000", 
+      "value": {"desired": 0, "reported": 100}
+    },
+    {
+      "branch_descriptor": "0x3102[1].0x3103",
+      "value": {"desired": 0, "reported": 0}
+    },
+    {
+      "branch_descriptor": "0x3102[1].0x3104",
+      "value": {"desired": 0, "reported": 2}
+    },
+    {
+      "branch_descriptor": "0x3102[1].0x3105",
+      "value": {"desired": 0, "reported": 100}
+    },
+    {
+      "branch_descriptor": "0x3102[0].0x3108[1].0x3104",
+      "value": {}
+    },
+    {
+      "branch_descriptor": "0x3102[0].0x3108[1].0x3105",
+      "value": {}
+    },
+    {
+      "branch_descriptor": "0x3102[0x02].0x3103",
+      "value": {"desired": 10, "reported": 0}
+    },
+    {
+      "branch_descriptor": "0x3102[2].0x3104",
+      "value": {"desired": null, "reported": 2}
+    },
+    {
+      "branch_descriptor": "0x3102[2].0x3105",
+      "value": {"reported": 100}
+    }
+  ],
+  "test_data": [
+    {
+      "scope": 0, 
+      "activator": {"branch_descriptor": "0x3102[1].0x3105", "value": {"reported": 10}}, 
+      "test_assert": [
+        {"branch_descriptor": "0x04020000", "value": {"reported": 1}}
+      ]
+    },
+    {
+      "scope": 1, 
+      "activator": {"branch_descriptor": "0x3102[1].0x3105", "value": {"desired": 10}}, 
+      "test_assert": [
+        {"branch_descriptor": "0x3102[1].0x04020008", "value": {"reported": 1}}
+      ]
+    },
+    {
+      "scope": 2, 
+      "activator": {"branch_descriptor": "0x3102[2].0x3105", "value": {"desired": 10}}, 
+      "test_assert": [
+        {"branch_descriptor": "0x04020008", "value": {"reported": 1}}
+      ]
+    }
+  ]
+}

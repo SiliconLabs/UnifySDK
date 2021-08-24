@@ -1,0 +1,11 @@
+Security 2 Comamnd Class implementation
+
+This project implements the Z-Wave security 2 command class. 
+
+Directory structure:
+
+crypto/   all crypto blocks
+test/     all unit tests
+include/  all public headerfiles
+protocol/ all sercurity protocol functions, like state machins, the command class imeplementation it self.   
+

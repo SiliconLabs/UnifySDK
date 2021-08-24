@@ -1,0 +1,64 @@
+{
+    "name": "dev-gui-server",
+    "version": "0.0.0",
+    "description": "Developer GUI for testing and debugging UIC",
+    "private": true,
+    "bin": "./src/server.js",
+    "pkg": {
+        "assets": [
+            "./build/index.html",
+            "./build/**/*"
+        ]
+    },
+    "devDependencies": {
+        "@material-ui/core": "^4.11.3",
+        "@types/react": "^17.0.2",
+        "@types/react-dom": "^17.0.2",
+        "@types/react-qr-reader": "^2.1.4",
+        "@types/react-router-dom": "^5.1.7",
+        "@types/websocket": "^1.0.2",
+        "pkg": "^4.5.1",
+        "react-bootstrap": "^1.5.2",
+        "react-icons": "^4.2.0",
+        "react-qr-reader": "^2.2.1",
+        "react-scripts": "^3.4.3",
+        "style-loader": "^2.0.0",
+        "typescript": "^4.2.4",
+        "url-loader": "^4.1.1"
+    },
+    "dependencies": {
+        "mqtt": "^4.2.6",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-router-dom": "^5.2.0",
+        "react-toastify": "^7.0.3",
+        "websocket": "^1.0.33"
+    },
+    "homepage": "./",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "npm run start-react",
+        "start-server": "node ./src/dev-gui-api.js",
+        "start-react": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject",
+        "dev": "nf start -p 3000",
+        "dev-gui-api-build-armhf": "pkg ./src/dev-gui-api.js --target=node12.2.0-linux-armv7 --no-bytecode --public-packages '*' --public",
+        "dev-gui-server-build-armhf": "pkg package.json --target=node12.2.0-linux-armv7 --no-bytecode --public-packages '*' --public",
+        "dev-gui-api-build-x86_64": "pkg ./src/dev-gui-api.js --target=node12.2.0-linux-x64 --no-bytecode --public-packages '*' --public",
+        "dev-gui-server-build-x86_64": "pkg package.json --target=node12.2.0-linux-x64 --no-bytecode --public-packages '*' --public"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}

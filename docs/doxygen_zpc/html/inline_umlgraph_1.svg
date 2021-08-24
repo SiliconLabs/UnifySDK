@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1584.4043px" preserveAspectRatio="none" style="width:2217px;height:1584px;" version="1.1" viewBox="0 0 2217 1584" width="2217.0221px" zoomAndPan="magnify"><defs><filter height="300%" id="fpdeu0v8z9nqr" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.2879485120066856"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.575897024013371" dy="4.575897024013371" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[a5878460733a88f4391fd7505e1acc62]
+entity S0_AWAITING_SCHEME_REPORT--><rect fill="#F0F8FF" filter="url(#fpdeu0v8z9nqr)" height="41.5227" style="stroke:#0000FF;stroke-width:2.2879485120066856;" width="277.9857" x="478.8907" y="8.0078"/><text fill="#0000FF" font-family="sans-serif" font-size="16.0156" lengthAdjust="spacing" textLength="255.1063" x="490.3305" y="34.3136">S0_AWAITING_SCHEME_REPORT</text><!--MD5=[1c945eb52f21069c8a673c209a429e15]
+entity S0_HANDLE_SCHEME_REPORT--><rect fill="#F0F8FF" filter="url(#fpdeu0v8z9nqr)" height="41.5227" style="stroke:#0000FF;stroke-width:2.2879485120066856;" width="265.402" x="387.9448" y="267.69"/><text fill="#0000FF" font-family="sans-serif" font-size="16.0156" lengthAdjust="spacing" textLength="242.5225" x="399.3845" y="293.9958">S0_HANDLE_SCHEME_REPORT</text><!--MD5=[86993a22c4e1330c4a839ace9d8102af]
+entity S0_AWAITING_KEY_VERIFY--><rect fill="#F0F8FF" filter="url(#fpdeu0v8z9nqr)" height="41.5227" style="stroke:#0000FF;stroke-width:2.2879485120066856;" width="229.9388" x="464.0191" y="527.3721"/><text fill="#0000FF" font-family="sans-serif" font-size="16.0156" lengthAdjust="spacing" textLength="207.0593" x="475.4588" y="553.678">S0_AWAITING_KEY_VERIFY</text><!--MD5=[a784defeb11d4364a4d6e0dbaa1f701e]
+entity S0_HANDLE_NET_KEY_VERIFY--><rect fill="#F0F8FF" filter="url(#fpdeu0v8z9nqr)" height="41.5227" style="stroke:#0000FF;stroke-width:2.2879485120066856;" width="257.3942" x="388.5168" y="942.6348"/><text fill="#0000FF" font-family="sans-serif" font-size="16.0156" lengthAdjust="spacing" textLength="234.5147" x="399.9565" y="968.9406">S0_HANDLE_NET_KEY_VERIFY</text><!--MD5=[d76b8e327c288a3e64e47d01f1ee8067]
+entity S0_AWAITING_2SCHEME_REPORT--><rect fill="#F0F8FF" filter="url(#fpdeu0v8z9nqr)" height="41.5227" style="stroke:#0000FF;stroke-width:2.2879485120066856;" width="288.2815" x="387.9448" y="1340.7378"/><text fill="#0000FF" font-family="sans-serif" font-size="16.0156" lengthAdjust="spacing" textLength="265.402" x="399.3845" y="1367.0437">S0_AWAITING_2SCHEME_REPORT</text><!--MD5=[46eb83ae4af0597a44b1c8d7d3cc2555]
+entity S0_INC_IDLE--><rect fill="#F0F8FF" filter="url(#fpdeu0v8z9nqr)" height="41.5227" style="stroke:#0000FF;stroke-width:2.2879485120066856;" width="120.1173" x="1038.2941" y="1529.4936"/><text fill="#0000FF" font-family="sans-serif" font-size="16.0156" lengthAdjust="spacing" textLength="97.2378" x="1049.7339" y="1555.7994">S0_INC_IDLE</text><!--MD5=[e9cf402e0ddf1b39cb804b07054a419c]
+link S0_INC_IDLE to S0_AWAITING_SCHEME_REPORT--><path d="M1158.5838,1536.7085 C1276.2045,1508.8366 1525.0552,1440.5115 1525.0552,1361.3294 C1525.0552,963.2263 1525.0552,963.2263 1525.0552,963.2263 C1525.0552,902.6972 1532.6185,880.2977 1499.8878,829.3813 C1438.3313,733.6233 1342.9451,782.8659 1290.5405,681.8087 C1263.1469,628.9828 1293.9724,607.4699 1293.9724,547.9637 C1293.9724,158.4404 1293.9724,158.4404 1293.9724,158.4404 C1293.9724,104.8112 961.6529,62.559 762.988,42.0917 " fill="none" id="S0_INC_IDLE-to-S0_AWAITING_SCHEME_REPORT" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="757.1499,41.4926,766.9247,47.0957,762.8399,42.0766,767.859,37.9917,757.1499,41.4926" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1296.2603,608.5943 L1296.2603,671.5129 L1560.5184,671.5129 L1560.5184,620.034 L1549.0786,608.5943 L1296.2603,608.5943 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1549.0786,608.5943 L1549.0786,620.034 L1560.5184,620.034 L1549.0786,608.5943 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="232.2268" x="1303.1242" y="628.1184">EV_S0_BOOTSTRAPPING_START</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="240.2346" x="1303.1242" y="645.4299">S0_SEND_SCHEME_GET_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="170.4522" x="1303.1242" y="662.7415">s0_send_scheme_get()</text><!--MD5=[9f683091ff865f2b243612629572d9ed]
+link S0_AWAITING_SCHEME_REPORT to S0_INC_IDLE--><path d="M757.2242,32.487 C1032.5799,42.0351 1620.0051,72.478 1620.0051,158.4404 C1620.0051,158.4404 1620.0051,158.4404 1620.0051,1361.3294 C1620.0051,1466.2553 1522.7929,1455.8137 1425.5294,1495.1744 C1379.3216,1513.8738 1246.0206,1532.3901 1164.529,1542.422 " fill="none" id="S0_AWAITING_SCHEME_REPORT-to-S0_INC_IDLE" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="1158.753,1543.1295,1169.5288,1546.4195,1164.4305,1542.434,1168.416,1537.3356,1158.753,1543.1295" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1625.7249,608.5943 L1625.7249,671.5129 L1885.4071,671.5129 L1885.4071,620.034 L1873.9673,608.5943 L1625.7249,608.5943 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1873.9673,608.5943 L1873.9673,620.034 L1885.4071,620.034 L1873.9673,608.5943 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="200.1955" x="1632.5888" y="628.1184">EV_S0_BOOTSTRAP_ABORT</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="235.6587" x="1632.5888" y="645.4299">S0_BOOTSTRAP_ABORT_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="154.4365" x="1632.5888" y="662.7415">s0_abort_bootstrap()</text><!--MD5=[9f683091ff865f2b243612629572d9ed]
+link S0_AWAITING_SCHEME_REPORT to S0_INC_IDLE--><path d="M757.0281,35.0834 C1096.8517,51.8385 1941.4618,99.4189 1941.4618,158.4404 C1941.4618,158.4404 1941.4618,158.4404 1941.4618,1361.3294 C1941.4618,1547.5145 1726.0432,1453.8471 1544.5028,1495.1744 C1411.6722,1525.4129 1252.5497,1539.9446 1164.7512,1546.1302 " fill="none" id="S0_AWAITING_SCHEME_REPORT-to-S0_INC_IDLE-1" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="1158.5543,1546.5612,1169.1428,1550.4116,1164.2604,1546.1643,1168.5077,1541.2818,1158.5543,1546.5612" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1947.1817,608.5943 L1947.1817,671.5129 L2206.8638,671.5129 L2206.8638,620.034 L2195.4241,608.5943 L1947.1817,608.5943 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M2195.4241,608.5943 L2195.4241,620.034 L2206.8638,620.034 L2195.4241,608.5943 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="118.9733" x="1954.0455" y="628.1184">EV_S0_TIMEOUT</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="235.6587" x="1954.0455" y="645.4299">S0_BOOTSTRAP_ABORT_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="154.4365" x="1954.0455" y="662.7415">s0_abort_bootstrap()</text><!--MD5=[302e2777fbbe6f37d9bf0389bfb0c374]
+link S0_AWAITING_SCHEME_REPORT to S0_HANDLE_SCHEME_REPORT--><path d="M610.0906,49.4112 C592.5238,96.3251 549.8618,210.2578 530.4975,261.9716 " fill="none" id="S0_AWAITING_SCHEME_REPORT-to-S0_HANDLE_SCHEME_REPORT" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="528.4758,267.3705,536.3717,259.3333,530.4817,262.0138,527.8012,256.1238,528.4758,267.3705" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M589.2842,124.6932 L589.2842,187.6118 L877.5658,187.6118 L877.5658,136.1329 L866.126,124.6932 L589.2842,124.6932 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M866.126,124.6932 L866.126,136.1329 L877.5658,136.1329 L866.126,124.6932 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="261.9701" x="596.1481" y="144.2173">EV_S0_SCHEME_REPORT_RECEIVED</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="264.2581" x="596.1481" y="161.5288">S0_SCHEME_REPORT_RECV_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="197.9075" x="596.1481" y="178.8404">s0_handle_net_key_verify()</text><!--MD5=[15c88129d1759b3b90304614e9730799]
+link S0_HANDLE_SCHEME_REPORT to S0_INC_IDLE--><path d="M653.6808,299.9314 C854.722,319.3557 1212.7502,361.8479 1212.7502,418.1226 C1212.7502,418.1226 1212.7502,418.1226 1212.7502,755.595 C1212.7502,823.4879 1174.9456,849.7667 1209.3183,908.3156 C1260.0219,994.6817 1355.3783,931.7709 1406.0819,1018.1371 C1423.843,1048.3906 1415.9777,1063.4141 1406.0819,1097.0713 C1351.3432,1283.2464 1188.2821,1460.5119 1124.4177,1524.7338 " fill="none" id="S0_HANDLE_SCHEME_REPORT-to-S0_INC_IDLE" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="1119.9937,1529.161,1130.5081,1525.1126,1124.0368,1525.115,1124.0344,1518.6437,1119.9937,1529.161" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1215.0382,835.1012 L1215.0382,898.0198 L1485.0161,898.0198 L1485.0161,846.5409 L1473.5763,835.1012 L1215.0382,835.1012 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1473.5763,835.1012 L1473.5763,846.5409 L1485.0161,846.5409 L1473.5763,835.1012 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="245.9545" x="1221.902" y="854.6253">EV_S0_WRONG_SCHEME_REPORT</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="235.6587" x="1221.902" y="871.9368">S0_BOOTSTRAP_ABORT_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="154.4365" x="1221.902" y="889.2484">s0_abort_bootstrap()</text><!--MD5=[f88b3bdac1c427253889e16e2ead8c7d]
+link S0_HANDLE_SCHEME_REPORT to S0_AWAITING_KEY_VERIFY--><path d="M525.3216,309.0934 C535.8404,355.9124 561.3554,469.4789 573.0068,521.3389 " fill="none" id="S0_HANDLE_SCHEME_REPORT-to-S0_AWAITING_KEY_VERIFY" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="574.2904,527.0526,576.4979,516.0041,573.0365,521.4719,567.5687,518.0105,574.2904,527.0526" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M564.1168,384.3754 L564.1168,447.2939 L790.6237,447.2939 L790.6237,395.8151 L779.184,384.3754 L564.1168,384.3754 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M779.184,384.3754 L779.184,395.8151 L790.6237,395.8151 L779.184,384.3754 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="167.0202" x="570.9807" y="403.8994">EV_S0_SEND_KEY_SET</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="202.4834" x="570.9807" y="421.211">S0_SEND_KEY_SET_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="136.1329" x="570.9807" y="438.5225">s0_send_key_set()</text><!--MD5=[506feb4b7686178e34f82e1b0439792f]
+link S0_AWAITING_KEY_VERIFY to S0_INC_IDLE--><path d="M623.9768,568.7361 C675.0676,595.0284 756.0977,645.5515 792.9117,716.1279 C871.3411,866.4855 726.7548,952.0419 814.6472,1097.0713 C873.2613,1193.7894 967.798,1135.1826 1033.1463,1227.4844 C1099.0624,1320.5883 1101.8253,1464.6752 1099.8473,1523.6025 " fill="none" id="S0_AWAITING_KEY_VERIFY-to-S0_INC_IDLE" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="1099.6291,1529.3669,1104.5915,1519.2518,1099.8457,1523.6512,1095.4463,1518.9053,1099.6291,1529.3669" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M820.367,1023.857 L820.367,1086.7755 L1080.0492,1086.7755 L1080.0492,1035.2967 L1068.6095,1023.857 L820.367,1023.857 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1068.6095,1023.857 L1068.6095,1035.2967 L1080.0492,1035.2967 L1068.6095,1023.857 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="118.9733" x="827.2309" y="1043.381">EV_S0_TIMEOUT</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="235.6587" x="827.2309" y="1060.6926">S0_BOOTSTRAP_ABORT_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="154.4365" x="827.2309" y="1078.0041">s0_abort_bootstrap()</text><!--MD5=[506feb4b7686178e34f82e1b0439792f]
+link S0_AWAITING_KEY_VERIFY to S0_INC_IDLE--><path d="M680.4955,568.6331 C706.2175,576.7354 732.8534,587.8218 755.1605,602.8744 C952.8305,736.2603 1008.0285,796.0674 1094.9209,1018.1371 C1172.2403,1215.7414 1144.3769,1285.1144 1114.3684,1495.1744 C1113.0449,1504.4396 1110.525,1514.3255 1107.8692,1523.1191 " fill="none" id="S0_AWAITING_KEY_VERIFY-to-S0_INC_IDLE-1" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="1106.0218,1529.0115,1113.4683,1520.5563,1107.733,1523.5536,1104.7356,1517.8183,1106.0218,1529.0115" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1126.9521,1023.857 L1126.9521,1086.7755 L1386.6343,1086.7755 L1386.6343,1035.2967 L1375.1946,1023.857 L1126.9521,1023.857 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1375.1946,1023.857 L1375.1946,1035.2967 L1386.6343,1035.2967 L1375.1946,1023.857 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="200.1955" x="1133.816" y="1043.381">EV_S0_BOOTSTRAP_ABORT</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="235.6587" x="1133.816" y="1060.6926">S0_BOOTSTRAP_ABORT_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="154.4365" x="1133.816" y="1078.0041">s0_abort_bootstrap()</text><!--MD5=[1c2947fd64541d149900f3c1d02a739c]
+link S0_AWAITING_KEY_VERIFY to S0_HANDLE_NET_KEY_VERIFY--><path d="M557.2686,568.8457 C528.2534,598.414 478.2513,655.6532 458.8712,716.1279 C433.5356,795.1868 477.0595,891.6652 501.8342,937.1384 " fill="none" id="S0_AWAITING_KEY_VERIFY-to-S0_HANDLE_NET_KEY_VERIFY" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="504.7567,942.4265,503.7814,931.2019,501.9899,937.4203,495.7715,935.6288,504.7567,942.4265" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M464.5911,721.8478 L464.5911,784.7663 L778.04,784.7663 L778.04,733.2875 L766.6003,721.8478 L464.5911,721.8478 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M766.6003,721.8478 L766.6003,733.2875 L778.04,733.2875 L766.6003,721.8478 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="216.2111" x="471.4549" y="741.3718">S0_HANDLE_NET_KEY_VERIFY</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="289.4255" x="471.4549" y="758.6834">S0_NET_KEY_VERIFY_RECEIVED_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="197.9075" x="471.4549" y="775.9949">s0_handle_net_key_verify()</text><!--MD5=[cacdc678a3c1415bf786d91f6b7f6273]
+link S0_HANDLE_NET_KEY_VERIFY to S0_INC_IDLE--><path d="M561.8599,983.9558 C613.2072,1010.365 695.5732,1061.1546 735.713,1131.3905 C774.6077,1199.4481 711.6849,1242.7763 757.4485,1306.4186 C823.2988,1397.9951 901.8412,1341.4148 986.2433,1416.2401 C1017.3777,1443.8418 1009.5861,1463.5099 1036.5782,1495.1744 C1045.7821,1505.9716 1057.0916,1516.6196 1067.5071,1525.6231 " fill="none" id="S0_HANDLE_NET_KEY_VERIFY-to-S0_INC_IDLE" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="1071.9074,1529.3767,1067.0442,1519.2135,1067.5558,1525.6645,1061.1047,1526.1761,1071.9074,1529.3767" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M763.1683,1233.2042 L763.1683,1296.1228 L1018.2746,1296.1228 L1018.2746,1244.644 L1006.8349,1233.2042 L763.1683,1233.2042 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M1006.8349,1233.2042 L1006.8349,1244.644 L1018.2746,1244.644 L1006.8349,1233.2042 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="231.0828" x="770.0322" y="1252.7283">EV_S0_WAS_NOT_CONTROLLER</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="113.2535" x="770.0322" y="1270.0399">S0_NO_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="154.4365" x="770.0322" y="1287.3514">s0_abort_bootstrap()</text><!--MD5=[3c25914b918318eb2370bccb61c73eb7]
+link S0_HANDLE_NET_KEY_VERIFY to S0_AWAITING_2SCHEME_REPORT--><path d="M505.4086,984.0107 C484.0557,1024.173 442.666,1115.3477 458.8712,1193.1651 C469.9173,1246.2086 498.6246,1303.0322 516.6354,1335.1769 " fill="none" id="S0_HANDLE_NET_KEY_VERIFY-to-S0_AWAITING_2SCHEME_REPORT" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="519.6482,1340.5024,518.5609,1329.2881,516.8316,1335.5241,510.5956,1333.7948,519.6482,1340.5024" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M464.5911,1137.1104 L464.5911,1182.8694 L720.8413,1182.8694 L720.8413,1148.5502 L709.4015,1137.1104 L464.5911,1137.1104 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M709.4015,1137.1104 L709.4015,1148.5502 L720.8413,1148.5502 L709.4015,1137.1104 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="232.2268" x="471.4549" y="1156.6345">EV_S0_SEND_SCHEME_INHERIT</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="192.1877" x="471.4549" y="1173.946">s0_send_scheme_inherit()</text><!--MD5=[aef6c262098217463fda2273bd1cdac1]
+link S0_AWAITING_2SCHEME_REPORT to S0_INC_IDLE--><path d="M387.6269,1367.4799 C248.1494,1374.9397 54.6267,1389.9103 31.0248,1416.2401 C7.6083,1442.363 6.8638,1469.7384 31.0248,1495.1744 C65.5996,1531.5737 804.7615,1545.6764 1032.2932,1549.1648 " fill="none" id="S0_AWAITING_2SCHEME_REPORT-to-S0_INC_IDLE" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="1038.2242,1549.255,1027.9995,1544.5226,1032.505,1549.1678,1027.8599,1553.6733,1038.2242,1549.255" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M36.7447,1421.96 L36.7447,1484.8786 L328.4581,1484.8786 L328.4581,1433.3997 L317.0184,1421.96 L36.7447,1421.96 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M317.0184,1421.96 L317.0184,1433.3997 L328.4581,1433.3997 L317.0184,1421.96 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="261.9701" x="43.6085" y="1441.4841">EV_S0_SCHEME_REPORT_RECEIVED</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="267.69" x="43.6085" y="1458.7956">S0_SEND_SCHEME_INHERIT_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="106.3896" x="43.6085" y="1476.1072">callback to NM</text><!--MD5=[aef6c262098217463fda2273bd1cdac1]
+link S0_AWAITING_2SCHEME_REPORT to S0_INC_IDLE--><path d="M452.8283,1381.973 C422.5867,1391.5873 393.2485,1403.6689 384.5129,1416.2401 C364.4936,1445.0493 360.6764,1469.434 384.5129,1495.1744 C406.3568,1518.7632 859.2595,1540.0936 1032.1116,1547.4054 " fill="none" id="S0_AWAITING_2SCHEME_REPORT-to-S0_INC_IDLE-1" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="1038.1412,1547.6595,1028.0473,1542.6541,1032.4264,1547.4187,1027.6618,1551.7978,1038.1412,1547.6595" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M390.2327,1421.96 L390.2327,1484.8786 L649.9149,1484.8786 L649.9149,1433.3997 L638.4751,1421.96 L390.2327,1421.96 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M638.4751,1421.96 L638.4751,1433.3997 L649.9149,1433.3997 L638.4751,1421.96 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="118.9733" x="397.0966" y="1441.4841">EV_S0_TIMEOUT</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="235.6587" x="397.0966" y="1458.7956">S0_BOOTSTRAP_ABORT_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="154.4365" x="397.0966" y="1476.1072">s0_abort_bootstrap()</text><!--MD5=[aef6c262098217463fda2273bd1cdac1]
+link S0_AWAITING_2SCHEME_REPORT to S0_INC_IDLE--><path d="M607.2681,1381.958 C627.626,1390.1837 648.5086,1401.3433 664.7865,1416.2401 C693.9775,1442.9543 673.6382,1472.3613 705.9696,1495.1744 C757.2178,1531.335 934.5746,1543.8418 1032.3605,1548.0448 " fill="none" id="S0_AWAITING_2SCHEME_REPORT-to-S0_INC_IDLE-2" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><polygon fill="#A80036" points="1038.1078,1548.2862,1028.0132,1543.2822,1032.393,1548.0461,1027.629,1552.426,1038.1078,1548.2862" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M711.6895,1421.96 L711.6895,1484.8786 L971.3716,1484.8786 L971.3716,1433.3997 L959.9319,1421.96 L711.6895,1421.96 " fill="#FBFB77" filter="url(#fpdeu0v8z9nqr)" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><path d="M959.9319,1421.96 L959.9319,1433.3997 L971.3716,1433.3997 L959.9319,1421.96 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.1439742560033428;"/><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="200.1955" x="718.5533" y="1441.4841">EV_S0_BOOTSTRAP_ABORT</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="235.6587" x="718.5533" y="1458.7956">S0_BOOTSTRAP_ABORT_ACTION</text><text fill="#000000" font-family="sans-serif" font-size="14.8717" lengthAdjust="spacing" textLength="154.4365" x="718.5533" y="1476.1072">s0_abort_bootstrap()</text><!--MD5=[363c2d94d3bbbdd8fdcda1bf3049f308]
+@startuml inline_umlgraph_1.svg
+ top to bottom direction
+ scale 2200 width
+ 
+ rectangle  S0_INC_IDLE #aliceblue;line:blue;line.bold;text:blue
+ together {
+ rectangle  S0_AWAITING_SCHEME_REPORT #aliceblue;line:blue;line.bold;text:blue
+ rectangle  S0_HANDLE_SCHEME_REPORT #aliceblue;line:blue;line.bold;text:blue
+ rectangle  S0_AWAITING_KEY_VERIFY #aliceblue;line:blue;line.bold;text:blue
+ rectangle  S0_HANDLE_NET_KEY_VERIFY #aliceblue;line:blue;line.bold;text:blue
+ rectangle  S0_AWAITING_2SCHEME_REPORT #aliceblue;line:blue;line.bold;text:blue
+ }
+ 
+   S0_INC_IDLE -down-> S0_AWAITING_SCHEME_REPORT
+ note on link
+ EV_S0_BOOTSTRAPPING_START
+ S0_SEND_SCHEME_GET_ACTION
+ s0_send_scheme_get()
+ end note
+ 
+   S0_AWAITING_SCHEME_REPORT - -> S0_INC_IDLE
+ note on link
+ EV_S0_BOOTSTRAP_ABORT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+
+   S0_AWAITING_SCHEME_REPORT - -> S0_INC_IDLE
+ note on link
+ EV_S0_TIMEOUT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+ 
+   S0_AWAITING_SCHEME_REPORT - -> S0_HANDLE_SCHEME_REPORT
+ note on link
+ EV_S0_SCHEME_REPORT_RECEIVED
+ S0_SCHEME_REPORT_RECV_ACTION
+ s0_handle_net_key_verify()
+ end note
+ 
+   S0_HANDLE_SCHEME_REPORT - -> S0_INC_IDLE
+ note on link
+ EV_S0_WRONG_SCHEME_REPORT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+
+   S0_HANDLE_SCHEME_REPORT - -> S0_AWAITING_KEY_VERIFY
+ note on link
+ EV_S0_SEND_KEY_SET
+ S0_SEND_KEY_SET_ACTION
+ s0_send_key_set()
+ end note
+ 
+   S0_AWAITING_KEY_VERIFY - -> S0_INC_IDLE
+ note on link
+ EV_S0_TIMEOUT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+
+   S0_AWAITING_KEY_VERIFY - -> S0_HANDLE_NET_KEY_VERIFY
+ note on link
+ S0_HANDLE_NET_KEY_VERIFY
+ S0_NET_KEY_VERIFY_RECEIVED_ACTION
+ s0_handle_net_key_verify()
+ end note
+
+   S0_AWAITING_KEY_VERIFY - -> S0_INC_IDLE
+ note on link
+ EV_S0_BOOTSTRAP_ABORT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+ 
+   S0_HANDLE_NET_KEY_VERIFY - -> S0_INC_IDLE
+ note on link
+ EV_S0_WAS_NOT_CONTROLLER
+ S0_NO_ACTION
+ s0_abort_bootstrap()
+ end note
+ 
+   S0_HANDLE_NET_KEY_VERIFY - -> S0_AWAITING_2SCHEME_REPORT
+ note on link
+ EV_S0_SEND_SCHEME_INHERIT
+ s0_send_scheme_inherit()
+ end note
+ 
+   S0_AWAITING_2SCHEME_REPORT - -> S0_INC_IDLE
+ note on link
+ EV_S0_SCHEME_REPORT_RECEIVED
+ S0_SEND_SCHEME_INHERIT_ACTION
+ callback to NM
+ end note
+ 
+   S0_AWAITING_2SCHEME_REPORT - -> S0_INC_IDLE
+ note on link
+ EV_S0_TIMEOUT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+ 
+ 
+   S0_AWAITING_2SCHEME_REPORT - -> S0_INC_IDLE
+ note on link
+ EV_S0_BOOTSTRAP_ABORT
+ S0_BOOTSTRAP_ABORT_ACTION
+ s0_abort_bootstrap()
+ end note
+@enduml
+
+PlantUML version 1.2021.00(Sun Jan 10 10:25:05 UTC 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: ANSI_X3.4-1968
+Language: en
+Country: US
+--></g></svg>

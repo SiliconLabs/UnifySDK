@@ -1,0 +1,58 @@
+/* # License
+ * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ *
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ */
+
+// Standard library
+#include <cstring>
+#include <unistd.h>
+
+// Import command handler class and project libraries
+#include "dev_cli_config.h"
+#include "dev_cli_command_runner.h"
+#include "dev_cli_command_handler.hpp"
+
+// Process events for a command
+#include "dev_cli_run.h"
+
+// UIC component
+#include "sys/process.h"
+#include "sl_log.h"
+#include "uic_mqtt.h"
+
+// Pre decleration of the main function for command
+int template_main();
+
+/*
+Initiating the command command is done by doing as follows:
+The first argument is the command you need to input as argument for CLI =>
+Template.command The second argument is a small text describing the
+funcitonality and intent of command => Template.arguments_help The third
+argument is if you need additional input arguments then you explain these there
+=> Template.arguments_help The fourth and last argument is your function you
+want to be main. You pass it to the class and it will setup a pointer to it =>
+Template.command_ptr
+*/
+
+CommandTemplate
+  Template("command_name", "command help", "usage: [ip host]", template_main);
+
+int template_main()
+{
+  // Execute anything you want in this main loop
+
+  // Arguments are saved in config and options can be seen with help or in
+  // dev_cli_config It is possible to add arguments in dev_cli_config
+
+  // End the command by broadcasting process command done
+  // If you have callback methods the broadcast event should be in the last
+  // callback function
+  process_post(PROCESS_BROADCAST, PROCESS_COMMAND_DONE, 0);
+  return 0;
+}

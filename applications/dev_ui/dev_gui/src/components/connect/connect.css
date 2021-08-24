@@ -1,0 +1,44 @@
+.connect {
+    height: 200px;
+    width: 70%;
+    position: fixed;
+    top: 0;
+    left: 30%;
+    overflow-x: hidden;
+    border-bottom: 3px solid grey;
+    color: black;
+    width: 70%;
+}
+
+.con-container {
+    font-size: 15px;
+    color: #303030;
+    line-height: 17px;
+    padding: 0 !important;
+    width: 900px !important;
+    margin: auto;
+}
+
+.con-item {
+    display: flex;
+    padding: 5px 1px !important;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.item-title {
+    text-align: right;
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    align-self: center;
+}
+
+.item-value {
+    margin-left: 5px;
+}
+
+.connect-btn {
+    margin-right: -12px;
+    padding-bottom: 5px;
+    float: right;
+}

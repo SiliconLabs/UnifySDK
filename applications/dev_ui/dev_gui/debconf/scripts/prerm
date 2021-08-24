@@ -1,0 +1,5 @@
+#!/bin/sh
+systemctl stop uic-dev-gui-api.service
+systemctl stop uic-dev-gui-server.service
+systemctl disable uic-dev-gui-api.service
+systemctl disable uic-dev-gui-server.service

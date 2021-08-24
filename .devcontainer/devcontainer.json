@@ -1,0 +1,54 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.128.0/containers/docker-existing-dockerfile
+{
+  "name": "UIC container",
+  // Sets the run context to one level up instead of the .devcontainer folder.
+  "context": "..",
+  // Forward port 1883 (mosquitto) to host
+  "forwardPorts": [
+    1883
+  ],
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.shell.linux": null,
+    "cmake.cmakePath": "/usr/bin/cmake",
+    "cmake.buildDirectory": "${workspaceRoot}/build_docker",
+    "C_Cpp.default.cStandard": "c99",
+    "C_Cpp.default.cppStandard": "c++11",
+    "clang-format.executable": "/usr/bin/clang-format-10"
+  },
+  // Install extensions for vscode
+  "extensions": [
+    "ms-vscode.cpptools",
+    "twxs.cmake",
+    "ms-vscode.cmake-tools",
+    "cheshirekow.cmake-format",
+    "xaver.clang-format"
+  ],
+  "postStartCommand": "Xvfb &",
+  "containerUser": "root",
+  "remoteUser": "user",
+  "updateRemoteUserUID": true,
+  // Install clang-format-10
+  "postCreateCommand": "curl https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add - && echo \"deb http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main\" | sudo tee /etc/apt/sources.list.d/llvm.list && sudo apt-get update && sudo apt-get install -y clang-format-10 && sudo update-binfmts --enable",
+  "runArgs": [
+    // Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+    //"--cap-add=SYS_PTRACE",
+    //"--security-opt",
+    //"seccomp=unconfined",
+    // Uncomment this to forward /dev/ttyUSB to the container (e.g. UZB)
+    //"--device=/dev/ttyUSB0"
+  ],
+  "build": {
+    "dockerfile": "../docker/Dockerfile"
+  },
+  "mounts": [
+    // Uncomment when building ZigPC to mount the Gecko SDK to the container
+    // "source=/opt/super,target=/opt/super,type=bind,consistency=cached",
+  ],
+  "remoteEnv": {
+    "DISPLAY":":0"
+    // Uncomment when building ZigPC to specify Gecko SDK path in the container
+    // "GSDK_LOCATION": "/opt/super"
+  },
+}

@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["rust_command_classes"];

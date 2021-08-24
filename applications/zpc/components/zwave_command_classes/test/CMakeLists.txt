@@ -1,0 +1,455 @@
+set(MOCK_LIBS
+    uic_attribute_store_mock
+    zpc_attribute_store_mock
+    zwave_command_handler_mock
+    zwave_controller_mock
+    zpc_utils_mock
+    uic_attribute_resolver_mock
+    zpc_config_mock
+    zwave_tx_scheme_selector_mock
+    zwave_tx_mock
+    zwave_network_management_mock
+    zwave_api_mock
+    zwave_unid_mock)
+
+add_library(zwave_command_class_test_helper zwave_command_class_test_helper.c)
+target_link_libraries(
+  zwave_command_class_test_helper
+  zwave_command_classes
+  unity2
+  zwave_tx_scheme_selector_mock
+  zwave_tx_mock
+  uic_attribute_store_mock
+  zpc_attribute_store_mock)
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_classes_fixt_test
+  SOURCES
+  zwave_command_classes_fixt.c
+  DEPENDS
+  ${MOCK_LIBS})
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_time_test
+  SOURCES
+  zwave_command_class_time_test.c
+  DEPENDS
+  zwave_command_class_test_helper
+  ${MOCK_LIBS})
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_powerlevel_test
+  SOURCES
+  zwave_command_class_powerlevel_test.c
+  DEPENDS
+  zwave_command_class_test_helper
+  uic_contiki_stub
+  ${MOCK_LIBS})
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_manufacturer_specific_test
+  SOURCES
+  zwave_command_class_manufacturer_specific_test.c
+  zwave_command_class_manufacturer_specific_test_zpc_config_mock.c
+  DEPENDS
+  zwave_command_class_test_helper
+  zwave_security_validation_mock
+  ${MOCK_LIBS})
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_s0_test
+  SOURCES
+  zwave_command_class_security_0_test.c
+  DEPENDS
+  zwave_command_class_test_helper
+  ${MOCK_LIBS})
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_indicator_test
+  SOURCES
+  zwave_command_class_indicator_test.c
+  DEPENDS
+  zwave_command_class_test_helper
+  ${MOCK_LIBS}
+  EXCLUDE
+  platform_exec.c)
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_notification_test
+  SOURCES
+  zwave_command_class_notification_test.c
+  DEPENDS
+  ${MOCK_LIBS}
+  zwave_command_class_test_helper)
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_supervision_test
+  SOURCES
+  zwave_command_class_supervision_test.c
+  DEPENDS
+  uic_contiki_stub
+  zwave_tx_groups
+  ${MOCK_LIBS})
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_wakeup_test
+  SOURCES
+  zwave_command_class_wakeup_test.c
+  DEPENDS
+  ${MOCK_LIBS}
+  EXCLUDE
+  src/zwave_command_class_wakeup.c
+  src/zwave_command_classes_utils.c)
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_security_2_test
+  SOURCES
+  zwave_command_class_security_2_test.c
+  DEPENDS
+  ${MOCK_LIBS})
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_version_test
+  SOURCES
+  zwave_command_class_version_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zpc_config_mock
+  zwave_tx_scheme_selector_mock
+  zwave_tx_mock)
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_node_info_resolver_test
+  SOURCES
+  zwave_command_class_node_info_resolver_test.c
+  DEPENDS
+  ${MOCK_LIBS}
+  zwave_security_validation_mock
+  EXCLUDE
+  zwave_command_class_node_info_resolver.c)
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_zwaveplus_info_test
+  SOURCES
+  zwave_command_class_zwaveplus_info_test.c
+  DEPENDS
+  zwave_command_class_test_helper
+  uic_contiki_stub
+  ${MOCK_LIBS})
+
+# Multi Channel test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_multi_channel_test
+  SOURCES
+  zwave_command_class_multi_channel_test.c
+  DEPENDS
+  ${MOCK_LIBS}
+  EXCLUDE
+  zwave_command_class_multi_channel.c)
+
+# Basic test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_basic_test
+  SOURCES
+  zwave_command_class_basic_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zpc_config_mock
+  zwave_tx_scheme_selector_mock
+  zwave_tx_mock)
+
+# Device Reset Locally test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_device_reset_locally_test
+  SOURCES
+  zwave_command_class_device_reset_locally_test.c
+  DEPENDS
+  zwave_command_class_test_helper
+  uic_contiki_stub
+  zwave_controller_mock
+  zwave_command_handler_mock
+  zwave_command_classes_mock
+  zwave_network_management_mock
+  EXCLUDE
+  zwave_command_class_association_send.cpp)
+
+# Z-Wave Command Class utils test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_classes_utils_test
+  SOURCES
+  zwave_command_classes_utils_test.c
+  DEPENDS
+  uic_attribute_store_mock
+  zwave_controller_mock
+  zwave_tx_scheme_selector_mock
+  zpc_attribute_store_mock
+  zwave_tx_mock
+  zwave_unid_mock)
+
+# Z-Wave Multilevel Switch Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_switch_multilevel_test
+  SOURCES
+  zwave_command_class_switch_multilevel_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_utils
+  uic_attribute_utils_mock
+  zwave_command_handler_mock
+  zwave_controller_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zpc_config_mock
+  zwave_tx_scheme_selector_mock
+  zwave_tx_mock)
+
+
+# Z-Wave Binary Switch Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_binary_switch_test
+  SOURCES
+  zwave_command_class_binary_switch_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_command_handler_mock
+  zwave_controller_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zpc_config_mock
+  zwave_tx_scheme_selector_mock
+  zwave_tx_mock)
+
+# Z-Wave Firmware Update functionality test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_firmware_update_test
+  SOURCES
+  zwave_command_class_firmware_update_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_attribute_store
+  zpc_utils
+  zwave_tx_scheme_selector
+  zwave_controller
+  zwave_command_handler_mock
+  zwave_network_management_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zpc_config_mock
+  zwave_api_mock)
+
+
+
+# Association
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_association_test
+  SOURCES
+  zwave_command_class_association_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zwave_tx_scheme_selector_mock
+  zwave_network_management_mock
+  zwave_tx_mock)
+
+# Multi Channel Association
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_multi_channel_association_test
+  SOURCES
+  zwave_command_class_multi_channel_association_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zwave_tx_scheme_selector_mock
+  zwave_network_management_mock
+  zwave_tx_mock)
+
+# Association send module
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_association_send_test
+  SOURCES
+  zwave_command_class_association_send_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler
+  uic_attribute_resolver
+  zwave_tx_scheme_selector_mock
+  zwave_network_management_mock
+  zwave_tx_mock)
+
+# Multi Command
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_multi_command_test
+  SOURCES
+  zwave_command_class_multi_command_test.c
+  DEPENDS
+  zpc_utils
+  zwave_controller
+  zwave_command_handler_mock
+  zwave_network_management_mock)
+
+# Command Class AGI test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_agi_test
+  SOURCES
+  zwave_command_class_agi_test.cpp
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_classes
+  uic_attribute_resolver_mock
+  zwave_command_handler_mock
+  zwave_network_management_mock)
+
+# Command Class ICCC test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_inclusion_controller_test
+  SOURCES
+  zwave_command_class_inclusion_controller_test.cpp
+  DEPENDS
+  uic_contiki_stub
+  zpc_attribute_store_test_helper
+  zwave_command_classes
+  uic_attribute_resolver_mock
+  zwave_command_handler_mock
+  zwave_network_management_mock
+  zwave_controller_mock
+  zwave_security_validation_mock)
+
+# Tests for generated command classes
+set(GEN_TEST_INCLUDES
+    "${CMAKE_SOURCE_DIR}/applications/zpc/components/zwave_controller/include ${CMAKE_SOURCE_DIR}/include"
+)
+
+# Generated Command Class Door Lock test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  generated_door_lock_test
+  SOURCES
+  generated_door_lock_test.cpp
+  DEPENDS
+  uic_log
+  zwave_handlers
+  ${MOCK_LIBS})
+target_include_directories(generated_door_lock_test
+                           PRIVATE ${GEN_TEST_INCLUDES})
+target_compile_options(generated_door_lock_test PRIVATE -Wno-unused-variable
+                                                        -Wno-unused-function)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+  target_compile_options(generated_door_lock_test
+                         PRIVATE -Wno-unused-but-set-variable)
+endif()
+
+# Generated Command Class Thermostat Setpoint test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  generated_thermostat_setpoint_test
+  SOURCES
+  generated_thermostat_setpoint_test.cpp
+  DEPENDS
+  uic_log
+  zwave_handlers
+  ${MOCK_LIBS})
+target_include_directories(generated_thermostat_setpoint_test
+                           PRIVATE ${GEN_TEST_INCLUDES})
+target_compile_options(generated_thermostat_setpoint_test
+                       PRIVATE -Wno-unused-variable -Wno-unused-function)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+  target_compile_options(generated_thermostat_setpoint_test
+                         PRIVATE -Wno-unused-but-set-variable)
+endif()
+
+# Generated Command Class Basic Tariff Info test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  generated_basic_tariff_info_test
+  SOURCES
+  generated_basic_tariff_info_test.cpp
+  DEPENDS
+  uic_log
+  zwave_handlers
+  ${MOCK_LIBS})
+target_include_directories(generated_basic_tariff_info_test
+                           PRIVATE ${GEN_TEST_INCLUDES})
+target_compile_options(generated_basic_tariff_info_test
+                       PRIVATE -Wno-unused-variable -Wno-unused-function)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+  target_compile_options(generated_basic_tariff_info_test
+                         PRIVATE -Wno-unused-but-set-variable)
+endif()

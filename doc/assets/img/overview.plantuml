@@ -1,0 +1,16 @@
+# Unify SDK Overview
+@startuml SDKOverview
+(Mosquito MQTT) as mqtt
+(Smartstart - upvl) as upvl
+(Z-Wave - zpc) as zpc
+(Zigbee - zigpc) as zigpc
+(OTA Image Provider) as image_provider
+
+(zpc) -u-> (mqtt)
+(zigpc) -u-> (mqtt)
+(image_provider) -d-> (mqtt)
+
+(upvl) -l-> (mqtt)
+(Developer GUI - dev_gui) -r-> (mqtt)
+
+@enduml

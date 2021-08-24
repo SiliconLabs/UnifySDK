@@ -1,0 +1,17 @@
+[workspace]
+
+members = [
+    "applications/upvl",
+    "applications/angel",
+    "applications/image_provider",
+    "applications/zpc/components/zwave_command_classes",
+    "applications/zpc/components/zwave_rust/zwave_rust_proc_macros",
+    "applications/zpc/components/zwave_rust/zwave_controller",
+    "applications/zpc/components/zwave_rust/zwave_tx",
+    "components/uic_rust/uic_bindgen",
+    "components/uic_rust/uic_config_rs",
+    "components/uic_rust/uic_log_rs",
+    "components/uic_rust/uic_proc_macro",
+    "components/uic_rust/uic_proc_macro_test",
+    "components/uic_rust/uic_attribute_store_rs",
+]

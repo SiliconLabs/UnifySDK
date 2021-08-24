@@ -1,0 +1,12 @@
+# Attribute store network helper Unit Test
+
+target_add_unittest(zpc_attribute_store
+NAME  zpc_attribute_store_network_helper_test
+SOURCES zpc_attribute_store_network_helper_test.c
+)
+
+target_add_unittest(zpc_attribute_store
+NAME  zpc_attribute_store_test
+SOURCES zpc_attribute_store_test.c
+DEPENDS zwave_network_management_mock
+)

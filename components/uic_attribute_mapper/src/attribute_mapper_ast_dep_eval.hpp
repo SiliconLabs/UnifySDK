@@ -1,0 +1,126 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+/**
+ * @file attribute_mapper_ast_dep_eval.hpp
+ * @brief Dependency evaluators used by the mapping engine.
+ *
+ * @{
+ */
+
+#ifndef ATTRIBUTE_MAPPER_AST_DEP_EVAL_HPP
+#define ATTRIBUTE_MAPPER_AST_DEP_EVAL_HPP
+
+#include "attribute.hpp"
+#include <set>
+#include "attribute_mapper_ast_eval.hpp"
+
+namespace ast
+{
+typedef char value_type_t;
+typedef std::pair<attribute_store_type_t, value_type_t> attribute_dependency_t;
+
+/**
+ * @brief Dependency evaluator
+ * 
+ * This evaluator goes through an AST starting with an expression and builds a
+ * list of attribute id's that are used if the expression is to be evaluated.
+ * Note that this evaluator accumulates a list of dependencies. Ie. each
+ * instance of this class should only be used once. Otherwise the result will be
+ * a combined set of dependencies for each expression this evaluator has been
+ * applied on.
+ */
+class dep_eval
+{
+  public:
+  /**
+   * @brief Construct a new dep eval object
+   * 
+   * @param global_context Not currently used
+   */
+  dep_eval(const ast_tree &global_context);
+
+  void operator()(nil) {}
+  void operator()(unsigned int n) {}
+  void operator()(const attribute &a);
+  void operator()(const operation &x);
+  void operator()(const signed_ &x);
+  void operator()(const condition &x);
+
+  /**
+   * @brief This is the normal entry point of the evaluator.
+   *
+   * @param x Top level expression to start from 
+   */
+  void operator()(const expression &x);
+
+  /**
+   * @brief Get the list of dependencies
+   * 
+   * @return const std::set<attribute_dependency_t>& 
+   */
+  const std::set<attribute_dependency_t> &get_dependencies();
+
+  private:
+  const ast_tree &global_context;
+  std::set<attribute_dependency_t> dependencies;
+};
+
+/**
+ * @brief Attribute path evaluator
+ * 
+ * This evaluator build a list of attribute id's present in an
+ * attribute path.
+ */
+class dep_eval_path
+{
+  public:
+  /**
+   * @brief Construct a new dep eval path object
+   * 
+   * @param global_context Not currently used
+   * @param value_type Desired or reported 
+   */
+  dep_eval_path(const ast_tree &global_context, value_type_t value_type);
+
+  /// operand, usually a literal constant number
+  void operator()(const ast::operand &operand);
+  /// hat operator ^ (parent)
+  void operator()(const nil &nul) {}
+  /// just given by type id
+  void operator()(unsigned int type_id);
+  /// Subscript operator
+  void operator()(const attribute_path_subscript &subscript);
+  /// parse a path list,
+  void operator()(const std::vector<attribute_path_element> &paths);
+
+  /**
+   * @brief Get the dependencies list
+   * 
+   * @return const std::set<attribute_dependency_t>& 
+   */
+  const std::set<attribute_dependency_t> &get_dependencies();
+
+  private:
+  const ast_tree &global_context;
+  std::set<attribute_dependency_t> dependencies;
+  value_type_t value_type;
+};
+
+}  // namespace ast
+
+#endif  //ATTRIBUTE_MAPPER_AST_DEP_EVAL_HPP
+
+/**
+ * @}
+ */

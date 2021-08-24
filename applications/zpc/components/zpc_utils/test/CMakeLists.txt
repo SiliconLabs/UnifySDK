@@ -1,0 +1,4 @@
+target_add_unittest(zpc_utils SOURCES zwave_utils_test.c DEPENDS zpc_attribute_store_mock uic_attribute_store_mock) 
+target_add_unittest(zpc_utils NAME zwave_unid_test SOURCES zwave_unid_test.c)
+target_add_unittest(zpc_utils NAME zpc_converters_test SOURCES zpc_converters_test.c)
+target_add_unittest(zpc_utils NAME zpc_crc16_test SOURCES zpc_crc16_test.c)

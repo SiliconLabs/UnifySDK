@@ -1,0 +1,18 @@
+{
+  "name": "UIC ZigPC ZCL Utilities",
+  "version": "uic-zigpc-zcl-util-v1",
+  "override": "addon-override.js",
+  "helpers": ["addon-helper.js"],
+  "templates": [
+    {
+      "path": "zcl_definitions.h.zapt",
+      "name": "ZCL definitions header",
+      "output": "include/zcl_definitions.h"
+    },
+    {
+      "path": "zcl_maps.cpp.zapt",
+      "name": "ZCL generated maps",
+      "output": "src/zcl_maps.cpp"
+    }
+  ]
+}

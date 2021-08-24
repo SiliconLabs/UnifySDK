@@ -1,0 +1,65 @@
+ai
+Ant Design Icons - https://github.com/ant-design/ant-design-icons
+License: MIT https://opensource.org/licenses/MIT
+
+bs
+Bootstrap Icons - https://github.com/twbs/icons
+License:MIT https://github.com/twbs/icons/blob/main/LICENSE.md
+
+cg
+css.gg - https://github.com/astrit/css.gg
+License: MIT https://github.com/astrit/css.gg/blob/master/LICENSE
+
+fi
+Feather - https://feathericons.com/
+License: MIT https://github.com/feathericons/feather/blob/master/LICENSE
+
+go
+Github Octicons icons - https://octicons.github.com/
+License: MIT https://github.com/primer/octicons/blob/master/LICENSE
+
+gr
+Grommet-Icons - https://github.com/grommet/grommet-icons
+License: Apache License Version 2.0 http://www.apache.org/licenses/
+
+io, io5
+Ionicons, Ionicons 5 - https://ionicons.com/
+License: MIT https://github.com/ionic-team/ionicons/blob/master/LICENSE
+
+md
+Material Design icons - http://google.github.io/material-design-icons/
+License	Apache License Version 2.0 
+
+ri
+Remix Icon - https://github.com/Remix-Design/RemixIcon
+License: Apache License Version 2.0 https://github.com/Remix-Design/RemixIcon/blob/master/License
+
+WebSockets
+Apache License 2.0 https://github.com/theturtle32/WebSocket-Node/blob/master/LICENSE
+
+material-ui
+MIT License https://github.com/mui-org/material-ui/blob/HEAD/LICENSE
+
+react-bootstrap
+MIT License https://github.com/react-bootstrap/react-bootstrap/blob/master/LICENSE
+
+react-router-dom
+MIT License https://github.com/ReactTraining/react-router/blob/master/LICENSE
+
+react-scripts
+MIT License https://github.com/GraphCMS/react-scripts/blob/master/LICENSE
+
+url-loader
+MIT License https://github.com/webpack-contrib/url-loader/blob/HEAD/LICENSE
+
+style-loader
+MIT License https://github.com/webpack-contrib/style-loader/blob/HEAD/LICENSE
+
+concurrently
+MIT License https://github.com/kimmobrunfeldt/concurrently/blob/master/LICENSE
+
+react-toastify
+MIT License https://github.com/fkhadra/react-toastify/blob/master/LICENSE
+
+react-qr-reader
+MIT License https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/LICENSE

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["MosqMessage","A mosquitto message"],["MosquittoClient",""],["TopicMatcher","Matching subscription topics. Returned from Mosquitto::subscribe."]],"trait":[["MqttClient","interface wrapper of the mosquitto_client, so that we can reuse it for testig purposes."],["MqttMessageReceived",""]],"type":[["Result",""]]});

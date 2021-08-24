@@ -1,0 +1,86 @@
+@startuml
+
+' Style for the diagram
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam shadowing false
+skinparam ArrowColor #000000
+
+skinparam ObjectBackgroundColor #DEDEDE
+skinparam ObjectBorderColor #480509
+skinparam ObjectBorderThickness 2
+skinparam ObjectFontColor #000000
+
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+
+title Attribute Store Thermostat Setpoint Command Class attributes
+
+object HomeID #fffae6
+HomeID : ID = ATTRIBUTE_HOME_ID
+HomeID : value = Desired: [], Reported: [FB E6 8C CE]
+
+object "NodeID" as NodeID_1 #f2ffe6
+NodeID_1 : ID = ATTRIBUTE_NODE_ID
+NodeID_1 : value = Desired: [], Reported: [03]
+
+object "Endpoint" as endpoint_1 #e6fff7
+endpoint_1 : ID = ATTRIBUTE_ENDPOINT_ID
+endpoint_1 : value = Desired: [], Reported: [00]
+
+object "Attribute" as attribute_1 #FFFFFF
+attribute_1 : ID = ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VERSION
+attribute_1 : value = Desired: [], Reported: [11]
+
+object "Attribute" as attribute_2 #FFFFFF
+attribute_2 : ID = ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_SETPOINT_TYPES
+attribute_2 : value = Desired: [], Reported: [18]
+
+
+package "For each Supported Type" <<Rectangle>> {
+
+  object "Attribute" as attribute_3 #FFFFFF
+  attribute_3 : ID = ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_TYPE
+  attribute_3 : value = Desired: [], Reported: [01]
+
+  object "Attribute" as attribute_4 #FFFFFF
+  attribute_4 : ID = ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE
+  attribute_4 : value = Desired: [], Reported: [20]
+
+  object "Attribute" as attribute_6 #FFFFFF
+  attribute_6 : ID = ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE_SCALE
+  attribute_6 : value = Desired: [], Reported: [01]
+
+  object "Attribute" as attribute_5 #FFFFFF
+  attribute_5 : ID =   ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE
+  attribute_5 : value = Desired: [], Reported: [10]
+
+  object "Attribute" as attribute_7 #FFFFFF
+  attribute_7 : ID =   ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE_SCALE
+  attribute_7 : value = Desired: [], Reported: [01]
+
+  object "Attribute" as attribute_8 #FFFFFF
+  attribute_8 : ID =   ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE
+  attribute_8 : value = Desired: [], Reported: [40]
+
+  object "Attribute" as attribute_9 #FFFFFF
+  attribute_9 : ID =   ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE_SCALE
+  attribute_9 : value = Desired: [], Reported: [01]
+}
+
+HomeID *-- NodeID_1
+NodeID_1 *-- endpoint_1
+endpoint_1 *-- attribute_1
+endpoint_1 *-- attribute_2
+
+endpoint_1 *-- attribute_3
+attribute_3 *-- attribute_4
+attribute_3 *-- attribute_5
+attribute_3 *-- attribute_6
+attribute_7 --* attribute_3
+attribute_8 --* attribute_3
+attribute_9 --* attribute_3
+
+
+@enduml
