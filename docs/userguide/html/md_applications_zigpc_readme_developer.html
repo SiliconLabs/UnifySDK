@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
   </td>
  </tr>
@@ -91,14 +91,14 @@ $(document).ready(function(){initNavTree('md_applications_zigpc_readme_developer
 <blockquote class="doxtable">
 <p><em>NOTE: The current version of the Zigbee Protocol Controller is a Beta release.</em> </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md148"></a>
+<h1><a class="anchor" id="autotoc_md149"></a>
 Build Instructions</h1>
 <p>This guide describes how to cross compile the Zigbee Protocol Controller / ZigPC for Raspberry Pi using Docker on your work station. If you haven't already built the Unify docker image, follow the guide in the docker folder <a class="el" href="md_docker_readme_developer.html">readme.md</a> file.</p>
-<h2><a class="anchor" id="autotoc_md149"></a>
+<h2><a class="anchor" id="autotoc_md150"></a>
 Set up Gecko SDK</h2>
 <p>The Zigbee Protocol controller uses certain functionality in the <a href="https://docs.silabs.com/gecko-platform/latest/">Gecko SDK</a>. The Gecko SDK can be downloaded through <a href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a>. The ZigPC uses the <a href="https://www.silabs.com/developers/zigbee-emberznet">EmberZNet library</a> provided through the Gecko Platform. See the <a href="https://www.silabs.com/documents/public/application-notes/AN0822-simplicity-studio-user-guide.pdf">AN0822: Simplicity Studio User's Guide</a> for more information. In summary, select the EmberZNet library at installation time or, when creating a new project, select "Manage SDKs" followed by "Customize Installation".</p>
 <p>After EmberZNet/GeckoSDK is installed, locate its path (e.g., /opt/SimplicityStudio_v5/developer/sdks/gecko_sdk_suite/v3.1). Currently, v3.1 is the only supported version. Set an environment variable $GSDK_LOCATION for this path.</p>
-<h2><a class="anchor" id="autotoc_md150"></a>
+<h2><a class="anchor" id="autotoc_md151"></a>
 Cross Compiling for Raspberry Pi Using Docker</h2>
 <blockquote class="doxtable">
 <p>Cross compilation builds currently supports only the Raspberry Pi OS Buster. </p>
@@ -118,7 +118,7 @@ Cross Compiling for Raspberry Pi Using Docker</h2>
 </div><!-- fragment --></li>
 </ul>
 <p>Alternatively, use the provided runDocker.sh script in the docker directory. Fill out the GSDK_LOCATION and UIC_REPO paths in the script to properly set up the docker image.</p>
-<h2><a class="anchor" id="autotoc_md151"></a>
+<h2><a class="anchor" id="autotoc_md152"></a>
 Compiling</h2>
 <p>To compile, run these commands from the top level Unify directory, inside the Docker container:</p>
 <div class="fragment"><div class="line">mkdir build</div>
@@ -127,7 +127,7 @@ Compiling</h2>
 <div class="line">ninja               # Build binaries</div>
 <div class="line">ninja doxygen       # Build doxygen documentation (optional)</div>
 <div class="line">ninja package       # Build Debian Installers (optional)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md152"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md153"></a>
 Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host</h2>
 <p>You can run the Raspberry Pi unit tests (and ZigPC binary) within Docker on the Host machine by using QEMU to emulate the ARM architecture, and binfmt in the kernel, to tell Linux OS to run the ARM binaries within QEMU.</p>
 <p>To run the unit tests within Docker on the Host machine, run the following command in the Host (not in the Docker container):</p>
@@ -137,10 +137,10 @@ Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host</h2>
 </blockquote>
 <p>After enabling this you can run the unittests by issuing following command in the <code>uic_armhf</code> docker image in the build directory:</p>
 <div class="fragment"><div class="line">ninja test</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md153"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md154"></a>
 Install Instructions</h1>
 <p>Unify Installation is documented in the main <a class="el" href="index.html#md_README">README.md</a>.</p>
-<h1><a class="anchor" id="autotoc_md154"></a>
+<h1><a class="anchor" id="autotoc_md155"></a>
 Reading Console Logs</h1>
 <p>ZigPC is built on top of the Z3Gateway, which is the GSDK App Builder project. Because Z3Gateway uses the SiLabs Ember Application framework, logs from the framework will be shown as a part of ZigPC console logs.</p>
 <p>After ZigPC is launched, the logs from ZigPC will be associated with a timestamp, log level, and a tag in the following format:</p>
@@ -181,7 +181,7 @@ Reading Console Logs</h1>
 <div class="line">==================================================</div>
 <div class="line">Tip: log_level c to reduce the verbosity of log</div>
 <div class="line">==================================================</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md155"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md156"></a>
 Changing Log Levels</h2>
 <p>Changing the log levels can be achieved using the log_level command in the "ZigPC&gt;" console on ZigPC. The following formats are supported for this command:</p>
 <ul>
@@ -200,17 +200,17 @@ Changing Log Levels</h2>
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md156"></a>
+<h1><a class="anchor" id="autotoc_md157"></a>
 Using Zigbee Network Analyzer to Monitor PAN</h1>
 <p>The "Network Analyzer" perspective in Silicon Labs Simplicity Studio IDE v5 can be used to analyze the traffic on the Zigbee PAN.</p>
 <p>Network activity can be observed based on the UCL commands relayed by ZigPC.</p>
-<h2><a class="anchor" id="autotoc_md157"></a>
+<h2><a class="anchor" id="autotoc_md158"></a>
 Installing Simplicity Studio v5</h2>
 <p>If you have not done so already, download Simplicity Studio v5 from <a href="https://www.silabs.com/products/development-tools/software/simplicity-studio">https://www.silabs.com/products/development-tools/software/simplicity-studio</a> on a host computer.</p>
-<h2><a class="anchor" id="autotoc_md158"></a>
+<h2><a class="anchor" id="autotoc_md159"></a>
 Detecting Devices in Simplicity Studio</h2>
 <p>Devices in Simplicity Studio can be detected using any of the following methods:</p>
-<h3><a class="anchor" id="autotoc_md159"></a>
+<h3><a class="anchor" id="autotoc_md160"></a>
 Connection via Ethernet Interface</h3>
 <p>If the host computer and one of the Zigbee devices are connected via Ethernet (using a Wireless Starter Kit for example: <a href="https://www.silabs.com/development-tools/wireless/efr32xg22-wireless-starter-kit">https://www.silabs.com/development-tools/wireless/efr32xg22-wireless-starter-kit</a>), Simplicity Studio can capture network traffic using this interface. Either an end device or the gateway radio can be connected via Ethernet to perform network capture (since the serial USB connection, which ZigPC uses, can run independently of the Ethernet connection services).</p>
 <p>Instructions:</p>
@@ -224,7 +224,7 @@ Connection via Ethernet Interface</h3>
 <li>If the device doesn't appear, click on the "Refresh" icon in the "Debug
    Adapters" view.</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md160"></a>
+<h3><a class="anchor" id="autotoc_md161"></a>
 Connection via Serial USB Interface</h3>
 <p>Because the Gateway radio is connected to Raspberry Pi running ZigPC, a test end device should be connected to the host computer.</p>
 <p>Instructions:</p>
@@ -234,14 +234,14 @@ Connection via Serial USB Interface</h3>
 <li>If the device doesn't appear, click on the "Refresh" icon in the "Debug
    Adapters" view.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md161"></a>
+<h2><a class="anchor" id="autotoc_md162"></a>
 Capturing Network Traffic in Simplicity Studio</h2>
 <p>Using the top menu, select Window → Perspective → Network Analyzer.</p>
 <p>Then, in the "Debug Adapters" window, right-click on the connected device and click "Connect", then click "Start capture".</p>
 <p>This will trigger the Network Analyzer to record PAN events, as shown below:</p>
 <p><img src="user_guide-network-analyzer-view.png" alt="" class="inline"/>   </p>
 <p>The middle table, labeled "Transactions", can be used to get a high-level overview of messages sent on the network.</p>
-<h2><a class="anchor" id="autotoc_md162"></a>
+<h2><a class="anchor" id="autotoc_md163"></a>
 Decrypting Network Traffic in Simplicity Studio</h2>
 <p>ZigPC uses Network key (NWK key) based on the install code. In typical Zigbee applications, the Ember CLI can be used to get this key. However, because the Ember CLI has been disabled in ZigPC, the NWK Key is logged in the ZigPC debug console after the network is opened for joining:</p>
 <p>Look for the following pattern:</p>
@@ -263,7 +263,7 @@ Decrypting Network Traffic in Simplicity Studio</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Aug 24 2021 09:11:37 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Mon Aug 30 2021 13:07:52 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

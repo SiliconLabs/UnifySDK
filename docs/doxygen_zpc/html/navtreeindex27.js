@@ -1,5 +1,7 @@
 var NAVTREEINDEX27 =
 {
+"zwapi__session_8h.html#a46db2c84fdbebbc7fa1411bb94874093":[25,0,0,0,1,14,4,13,0],
+"zwapi__session_8h.html#a6f5555814b03c924b3d057d1b4080cf1":[25,0,0,0,1,14,4,13,14],
 "zwapi__session_8h.html#a9223c1372abf6de825f952025493aed0":[25,0,0,0,1,14,4,13,4],
 "zwapi__session_8h.html#ab14952e68e09294bf6879ec90d2193fb":[25,0,0,0,1,14,4,13,3],
 "zwapi__session_8h.html#abf613a2ad7710ac80fb239ba55e621d7":[25,0,0,0,1,14,4,13,13],
@@ -178,8 +180,8 @@ var NAVTREEINDEX27 =
 "zwave__command__class__binary__switch_8c.html#ada850b2947076af4a0eb4e1bcef42c37":[25,0,0,0,1,15,2,6,9],
 "zwave__command__class__binary__switch_8c.html#ada850b2947076af4a0eb4e1bcef42c37a1b5757828d7b174efa07d686e5d5acac":[25,0,0,0,1,15,2,6,9,0],
 "zwave__command__class__binary__switch_8c.html#ada850b2947076af4a0eb4e1bcef42c37a1b5757828d7b174efa07d686e5d5acac":[25,0,0,0,1,15,2,34,17,0],
-"zwave__command__class__binary__switch_8c.html#ada850b2947076af4a0eb4e1bcef42c37a3ed5a8b283cce878ec439109c8099285":[25,0,0,0,1,15,2,34,17,1],
 "zwave__command__class__binary__switch_8c.html#ada850b2947076af4a0eb4e1bcef42c37a3ed5a8b283cce878ec439109c8099285":[25,0,0,0,1,15,2,6,9,1],
+"zwave__command__class__binary__switch_8c.html#ada850b2947076af4a0eb4e1bcef42c37a3ed5a8b283cce878ec439109c8099285":[25,0,0,0,1,15,2,34,17,1],
 "zwave__command__class__binary__switch_8c.html#ae459a09d9f68de3d41e5e70c515d18b9":[25,0,0,0,1,15,2,6,10],
 "zwave__command__class__binary__switch_8c.html#aedc6dfae9a20e70a7eb9ea5d3910f603":[25,0,0,0,1,15,2,6,8],
 "zwave__command__class__binary__switch_8c.html#aefdc747956727fa542d10bc6fe464140":[25,0,0,0,1,15,2,6,11],
@@ -247,7 +249,5 @@ var NAVTREEINDEX27 =
 "zwave__command__class__multi__channel_8c.html#a6f560e5e6dbd528d9405413823f431c1":[25,0,0,0,1,15,2,15,10],
 "zwave__command__class__multi__channel_8c.html#a7653ba2fd689a4ff2fc7e906d1cb83f7":[25,0,0,0,1,15,2,15,23],
 "zwave__command__class__multi__channel_8c.html#a79c087a9d19a6535e6f1e2a7888462af":[25,0,0,0,1,15,2,15,20],
-"zwave__command__class__multi__channel_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6":[25,0,0,0,1,15,2,15,8],
-"zwave__command__class__multi__channel_8c.html#a88ad4dc75b1c623b46ed20d5dc40fced":[25,0,0,0,1,15,2,15,19],
-"zwave__command__class__multi__channel_8c.html#a8a93fa5a9f1fbb30e6b1d778f2ec4293":[25,0,0,0,1,15,2,15,29]
+"zwave__command__class__multi__channel_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6":[25,0,0,0,1,15,2,15,8]
 };

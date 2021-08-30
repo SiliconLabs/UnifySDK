@@ -138,32 +138,26 @@ and ensure a supported radio module is attached to your RPi4.
 
 ### Installation
 
-First, copy the Unify SDK to your RPi4 and login via ssh:
+First, download the released debian packages from the github [release page](https://github.com/SiliconLabs/UnifySDK/releases),
+and place them in a folder called `deb-packages`.
+
+Copy all the packages to your RPi4 and login via ssh:
 
 ``` bash
-scp uic-sdk_<version>.zip pi@<pi_address>:/home/pi
+scp -r deb-packages pi@<pi_address>:/home/pi
 ssh pi@<pi_address>
 ```
+<pi_address> is the address of your RPi4.
 
-<version> is the current Unify release version, and <pi_address> is the address of your RPi4.
-
-
-Once logged into the Raspberry Pi, the SDK must be extracted using the following unzip
-command:
-
-``` bash
-unzip uic-sdk_<version>.zip
-```
-
-The easiest way to install the Unify components on the Raspberry Pi is to install
-all packages using the apt command as this will also fetch dependencies:
+Once logged into the Raspberry Pi, the easiest way to install the Unify
+components on the Raspberry Pi is to install all packages using the apt command
+as this will also fetch dependencies:
 
 ``` bash
 curl -s http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key | sudo apt-key add -
 sudo curl -s  http://repo.mosquitto.org/debian/mosquitto-buster.list -o /etc/apt/sources.list.d/mosquitto-buster.list
 sudo apt update
 sudo apt install mosquitto mosquitto-clients
-cd uic-sdk_<version>
 sudo apt install ./deb-packages/*.deb
 ```
 
@@ -176,13 +170,13 @@ skip updating some packages.
 If this is the first time the Unify SDK is installed, you will be prompted with
 configuration options.
 
-After setting the first-time configuration options, configure system to restart Unify components automatically on every boot with the following commands:
+After setting the first-time configuration options, configure system to restart
+Unify components automatically on every boot with the following commands:
 
 ``` bash
 sudo systemctl enable uic-zpc
 sudo systemctl start uic-zpc
 ```
-
 ### Evaluation
 
 The Unify dev_ui can be accessed from a browser on [http://raspberrypi.local:3000](http://raspberrypi.local:3000).
@@ -193,6 +187,17 @@ the Raspberry Pi.
 See the [Dev-UI manual](applications/dev_ui/dev_gui/readme_user.md)
 for more information about using this interface.
 
+### Building
+
+Use the command following command to get the latest sources.
+```
+git clone https://github.com/SiliconLabs/UnifySDK.git
+```
+
+The sources can also be downloaded from a .tar.gz file on the github 
+[release page](https://github.com/SiliconLabs/UnifySDK/releases). 
+
+Please read the `Developer guides` for each component on how to build.
 ## Communication Overview
 
 All individual Unify components communicate via MQTT. In this reference

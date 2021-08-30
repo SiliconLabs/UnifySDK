@@ -1,6 +1,10 @@
 # ZigPC (Beta) Release Notes
 This document describes the changes between the current and last released ZigPC.
 
+## [1.0.1] - Aug 2021
+### Fixed
+* Build issues
+
 ## [1.0.0] - Aug 2021
 ### Added
 * Implementation of Unify specification 1.0

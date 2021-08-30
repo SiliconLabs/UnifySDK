@@ -1,5 +1,7 @@
 var NAVTREEINDEX18 =
 {
+"structzigpc__gateway__dispatch__init__report__t.html#a722c1aea8ab6a4e35311316ee81bf393":[24,0,81,4],
+"structzigpc__gateway__dispatch__init__report__t.html#a7fb6671a2049a5dc0644e60324d05872":[24,0,81,2],
 "structzigpc__gateway__dispatch__init__report__t.html#a8b5658b4268f8751bdabfb22c264685e":[24,0,81,3],
 "structzigpc__gateway__dispatch__init__report__t.html#ab9e8bcabaf91f58a4eb9745bed4a7102":[24,0,81,0],
 "structzigpc__gateway__dispatch__init__report__t.html#addccacd74cb39f73fb73afd545055142":[24,0,81,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX18 =
 "uic__stdin__test_8h_source.html":[25,0,1,18,0,2],
 "uic__typedefs_8h.html":[25,0,1,8,0,0],
 "uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c":[25,0,1,8,0,0,2],
-"uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5":[25,0,1,8,0,0,0],
-"uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395":[25,0,1,8,0,0,1],
-"uic__typedefs_8h_source.html":[25,0,1,8,0,0]
+"uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5":[25,0,1,8,0,0,0]
 };

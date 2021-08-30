@@ -1,5 +1,7 @@
 var NAVTREEINDEX25 =
 {
+"zpc__attribute__resolver_8c.html":[25,0,0,0,1,8,1,0],
+"zpc__attribute__resolver_8h.html":[25,0,0,0,1,8,0,0],
 "zpc__attribute__resolver_8h_source.html":[25,0,0,0,1,8,0,0],
 "zpc__attribute__resolver__callbacks_8h.html":[25,0,0,0,1,8,1,1],
 "zpc__attribute__resolver__callbacks_8h_source.html":[25,0,0,0,1,8,1,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX25 =
 "zwapi__func__ids_8h.html#a776169d4fcaf7c1d5a95bd531161cb58":[25,0,0,0,1,14,4,2,19],
 "zwapi__func__ids_8h.html#a7ad819a9cd2d3ba41aa1e49c158e0acd":[25,0,0,0,1,14,4,2,83],
 "zwapi__func__ids_8h.html#a7dcc64b8f3399b360797fdf938bc35b4":[25,0,0,0,1,14,4,2,24],
-"zwapi__func__ids_8h.html#a808611fca5297acb34815c1e91f5e038":[25,0,0,0,1,14,4,2,53],
-"zwapi__func__ids_8h.html#a810ac3216899129a32b0228726923a79":[25,0,0,0,1,14,4,2,47],
-"zwapi__func__ids_8h.html#a8144c49ea2f4880d7960f100cb3e6031":[25,0,0,0,1,14,4,2,45]
+"zwapi__func__ids_8h.html#a808611fca5297acb34815c1e91f5e038":[25,0,0,0,1,14,4,2,53]
 };

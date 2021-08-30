@@ -1,5 +1,7 @@
 var NAVTREEINDEX28 =
 {
+"zwave__command__class__multi__channel_8c.html#a88ad4dc75b1c623b46ed20d5dc40fced":[25,0,0,0,1,15,2,15,19],
+"zwave__command__class__multi__channel_8c.html#a8a93fa5a9f1fbb30e6b1d778f2ec4293":[25,0,0,0,1,15,2,15,29],
 "zwave__command__class__multi__channel_8c.html#a8f845bef966dfa5c377b08bb0f7d406a":[25,0,0,0,1,15,2,15,25],
 "zwave__command__class__multi__channel_8c.html#ab00746de7a448304166a3d8147484aef":[25,0,0,0,1,15,2,15,0],
 "zwave__command__class__multi__channel_8c.html#ab6c9e18bbc89e9d8f3dba5ea8663047b":[25,0,0,0,1,15,2,15,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX28 =
 "zwave__command__class__switch__multilevel_8c.html#a29e413f6725b2ba32d165ffaa35b01e5":[25,0,0,0,1,15,2,34,7],
 "zwave__command__class__switch__multilevel_8c.html#a2c29ee5e01b9818d09448de111541f33":[25,0,0,0,1,15,2,34,30],
 "zwave__command__class__switch__multilevel_8c.html#a3a48b9a3a4b2d94c644107976c45bc72":[25,0,0,0,1,15,2,34,1],
-"zwave__command__class__switch__multilevel_8c.html#a3e9b0e45e626fa8d21141ecb6f56eae5":[25,0,0,0,1,15,2,34,36],
-"zwave__command__class__switch__multilevel_8c.html#a4193cd1c8c2e6ebd0e056fa2364a663f":[25,0,0,0,1,15,2,34,2],
-"zwave__command__class__switch__multilevel_8c.html#a442c5935ffd7adf364a802f802a664fd":[25,0,0,0,1,15,2,34,27]
+"zwave__command__class__switch__multilevel_8c.html#a3e9b0e45e626fa8d21141ecb6f56eae5":[25,0,0,0,1,15,2,34,36]
 };

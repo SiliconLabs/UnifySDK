@@ -1,5 +1,7 @@
 var NAVTREEINDEX21 =
 {
+"structLEARN__INFO.html#acd67ae49dd225b36036d0afd5f2001fe":[22,4,8,2,1,3],
+"structLEARN__INFO.html#ad8e5b6faf1551c935c19b9f17316a8df":[22,4,8,2,1,2],
 "structLEARN__INFO.html#afee82775945b1a73b57563017c1c0949":[22,4,8,2,1,1],
 "struct__NVR__FLASH__STRUCT__.html":[22,4,8,3,0],
 "struct__NVR__FLASH__STRUCT__.html#a13ef3ded02f4abea16d3926ae3c20e71":[22,4,8,3,0,14],
@@ -247,7 +249,5 @@ var NAVTREEINDEX21 =
 "structmqtt__client.html#a8a17fa4fbd2cbf13e94eba9c10ecd740":[24,0,38,24],
 "structmqtt__client.html#a8c1e778626f8fd02db4e02caaeed715e":[24,0,38,29],
 "structmqtt__client.html#a8d04bab9dd82f6dd45c92cfaaf996202":[24,0,38,19],
-"structmqtt__client.html#a9212bad4d25cd1c51b5dbc2b5cfd1183":[24,0,38,35],
-"structmqtt__client.html#a9372f0d22c22fe095187553d19bde7b8":[24,0,38,44],
-"structmqtt__client.html#a96613839e4f20dce40846251c96be739":[24,0,38,47]
+"structmqtt__client.html#a9212bad4d25cd1c51b5dbc2b5cfd1183":[24,0,38,35]
 };

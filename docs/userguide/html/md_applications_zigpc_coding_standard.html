@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
   </td>
  </tr>
@@ -89,38 +89,38 @@ $(document).ready(function(){initNavTree('md_applications_zigpc_coding_standard.
 <div class="contents">
 <div class="textblock"><p>#ZigPC Coding Standard # This document is intended for developers. It describes the coding standard used in the Zigbee Protocol Controller, which is an adaptation / subset of the general <a href="https://stash.silabs.com/projects/WMN_DOCS/repos/docs_misc/browse/software/standards/coding-standard.md">Silicon Labs IoT Coding Standard</a></p>
 <p>This is version <b>1.0</b> of the ZigPC coding standard.</p>
-<h2><a class="anchor" id="autotoc_md139"></a>
+<h2><a class="anchor" id="autotoc_md140"></a>
 Rules</h2>
 <p>These rules generally apply to the ZigPC. They start at the most general functional unit of code (a folder / component) and narrow to the more specific variables. It is recommended to read the generic coding standard to see where these rules are derived from.</p>
-<h3><a class="anchor" id="autotoc_md140"></a>
+<h3><a class="anchor" id="autotoc_md141"></a>
 1 - Folders</h3>
 <p>Folders are used in the ZigPC to denote components and to describe the project hierarchy.</p>
 <p>Folder names SHALL follow the general rule of &lt;component_name&gt; without any prefix of zigpc or uic etc... This is to avoid repetition of information - ZigPC is already at the top level of the folder hierarchy (uic/applications/zigpc/ etc...)</p>
 <p>Folder names SHALL be in "snake_case" - only lower case with underscores used as name seperators</p>
 <p>Care should be taken to ensure each module name is less than 10 characters. Abbreviations should be used where appropriate.</p>
-<h3><a class="anchor" id="autotoc_md141"></a>
+<h3><a class="anchor" id="autotoc_md142"></a>
 2 - Files</h3>
 <p>Files are the logical division of components in the ZigPC and represent a separation of responsibilities.</p>
 <p>File names SHALL be in "snake_case" as discussed in [1](1 - Folders).</p>
 <p>File names SHALL be of the format "zigpc_xxxx_yyyy" where &lt;xxxx&gt; refers to a the module and &lt;yyyy&gt; refers to the responsibility covered by that file. Please balance conciseness with descriptiveness, if possible.</p>
 <p>Headers and .c/.cpp files SHOULD match, with the exception where certain functionality is intended to be private and/or a header describes an API with multiple different responsibilities. In these cases, multiple .c/.cpp files will correspond to one header.</p>
-<h3><a class="anchor" id="autotoc_md142"></a>
+<h3><a class="anchor" id="autotoc_md143"></a>
 3 - C++ Classes</h3>
 <p>C++ class names SHOULD be written in "CapitalCase" when defined. C++ methods/fields SHOULD be written in "camelCase".</p>
 <p>If a component is written entirely in C++, it SHALL define its own namespace under a global zigpc namespace.</p>
-<h3><a class="anchor" id="autotoc_md143"></a>
+<h3><a class="anchor" id="autotoc_md144"></a>
 4 - Functions</h3>
 <p>Functions in the general ZigPC hierarchy SHOULD be written in "snake_case". The exception is when interfacing with stack-level functionality in the z3gateway. In this case, "camelCase" is recommended.</p>
 <p>The general format of each function name SHOULD take the form of "zigpc_xxxx_yyyy" where &lt;xxxx&gt; is the name of the module and &lt;yyyy&gt; is the specific name of the function. &lt;yyyy&gt; SHOULD be of the form "verb_noun" or of "noun_verb_noun", as specified in the general coding standard. It is recommended to keep these function name short and concise to improve readibility.</p>
-<h3><a class="anchor" id="autotoc_md144"></a>
+<h3><a class="anchor" id="autotoc_md145"></a>
 5 - Variables</h3>
 <p>The rules of variable names depend on their scope. In general, variables should be kept to as limited a scope as possible. Global variables SHOULD only be used if absolutely necessary.</p>
 <p>Constant variable SHOULD be exposed in the global scope behind function calls (zigpc_xxxx_get_yyyy() etc...)</p>
-<h4><a class="anchor" id="autotoc_md145"></a>
+<h4><a class="anchor" id="autotoc_md146"></a>
 5.1 Global Variables</h4>
 <p>Variables in the global scope SHOULD be capitalized. 'static const xxxx' is the recommended way to define global variables. The '#define' macro SHOULD only be used if absolutely required or if defining a variable intended to set the length of an array.</p>
 <p>A prefix SHALL be used when defining a global variable in the form of "ZIGPC_XXXX_YYYY" where &lt;XXXX&gt; is the module name and YYYY describes the specific use case of that variable</p>
-<h4><a class="anchor" id="autotoc_md146"></a>
+<h4><a class="anchor" id="autotoc_md147"></a>
 5.2 Function Parameters and Local Variables</h4>
 <p>Function parameters SHALL be in lower "snake_case". A prefix SHALL NOT be used when defining a function parameter. The name of each variable should clearly describe what the variable represents, with abbreviations as necessary.</p>
 <p>Function parameters SHOULD match between the function definition and function prototype (defined in an associated header).</p>
@@ -131,7 +131,7 @@ Rules</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Aug 24 2021 09:11:37 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Mon Aug 30 2021 13:07:52 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

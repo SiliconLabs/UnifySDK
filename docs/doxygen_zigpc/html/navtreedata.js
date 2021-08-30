@@ -119,338 +119,341 @@ var NAVTREE =
       ] ]
     ] ],
     [ "ZigPC (Beta) Release Notes", "md_applications_zigpc_release_notes.html", [
-      [ "[1.0.0] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md80", [
-        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md81", null ],
-        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md82", null ]
+      [ "[1.0.1] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md80", [
+        [ "Fixed", "md_applications_zigpc_release_notes.html#autotoc_md81", null ]
       ] ],
-      [ "Known Issues", "md_applications_zigpc_release_notes.html#autotoc_md83", null ],
-      [ "Zigbee Certification information", "md_applications_zigpc_release_notes.html#autotoc_md85", null ]
+      [ "[1.0.0] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md82", [
+        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md83", null ],
+        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md84", null ]
+      ] ],
+      [ "Known Issues", "md_applications_zigpc_release_notes.html#autotoc_md85", null ],
+      [ "Zigbee Certification information", "md_applications_zigpc_release_notes.html#autotoc_md87", null ]
     ] ],
     [ "uic_mapper_testninja", "md_components_uic_attribute_mapper_src_README.html", null ],
     [ "Change Log", "md_components_uic_attribute_mapper_vscode-extension_CHANGELOG.html", [
-      [ "[Unreleased]", "md_components_uic_attribute_mapper_vscode-extension_CHANGELOG.html#autotoc_md88", null ]
+      [ "[Unreleased]", "md_components_uic_attribute_mapper_vscode-extension_CHANGELOG.html#autotoc_md90", null ]
     ] ],
     [ "attribute-mapper README", "md_components_uic_attribute_mapper_vscode-extension_README.html", null ],
     [ "Welcome to your VS Code Extension", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html", [
-      [ "What's in the folder", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md91", null ],
-      [ "Get up and running straight away", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md92", null ],
-      [ "Make changes", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md93", null ],
-      [ "Add more language features", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md94", null ],
-      [ "Install your extension", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md95", null ]
+      [ "What's in the folder", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md93", null ],
+      [ "Get up and running straight away", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md94", null ],
+      [ "Make changes", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md95", null ],
+      [ "Add more language features", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md96", null ],
+      [ "Install your extension", "md_components_uic_attribute_mapper_vscode-extension_vsc-extension-quickstart.html#autotoc_md97", null ]
     ] ],
     [ "Zigbee Alliance – Copyright, Right to Use and Disclaimer", "md_components_uic_dotdot_dotdot-xml_LICENSE.html", [
-      [ "Copyright Ownership", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md97", null ],
-      [ "Definitions", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md98", null ],
-      [ "Limited Right to Use", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md99", null ],
-      [ "Joining Zigbee Alliance", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md100", null ],
-      [ "Disclaimer", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md101", null ]
+      [ "Copyright Ownership", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md99", null ],
+      [ "Definitions", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md100", null ],
+      [ "Limited Right to Use", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md101", null ],
+      [ "Joining Zigbee Alliance", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md102", null ],
+      [ "Disclaimer", "md_components_uic_dotdot_dotdot-xml_LICENSE.html#autotoc_md103", null ]
     ] ],
     [ "Releases", "md_components_uic_dotdot_dotdot-xml_README.html", [
-      [ "Eclipse Setup", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md103", null ],
-      [ "Converting Clusters", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md104", [
-        [ "library.xml", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md105", null ],
-        [ "Clusters", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md106", null ],
-        [ "Cluster Inheritance", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md107", null ],
-        [ "Naming", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md108", null ]
+      [ "Eclipse Setup", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md105", null ],
+      [ "Converting Clusters", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md106", [
+        [ "library.xml", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md107", null ],
+        [ "Clusters", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md108", null ],
+        [ "Cluster Inheritance", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md109", null ],
+        [ "Naming", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md110", null ]
       ] ],
-      [ "Types", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md109", [
-        [ "Bitmaps", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md110", null ],
-        [ "Restrictions", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md111", null ],
-        [ "Enumerations", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md112", null ],
-        [ "Special Values", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md113", null ],
-        [ "Invalid Values", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md114", null ],
-        [ "anyType", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md115", null ],
-        [ "ReportableChange", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md116", null ]
+      [ "Types", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md111", [
+        [ "Bitmaps", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md112", null ],
+        [ "Restrictions", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md113", null ],
+        [ "Enumerations", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md114", null ],
+        [ "Special Values", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md115", null ],
+        [ "Invalid Values", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md116", null ],
+        [ "anyType", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md117", null ],
+        [ "ReportableChange", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md118", null ]
       ] ],
-      [ "Clusters", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md117", [
-        [ "Classification", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md118", null ],
-        [ "Attributes", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md119", null ],
-        [ "Commands", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md120", null ]
+      [ "Clusters", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md119", [
+        [ "Classification", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md120", null ],
+        [ "Attributes", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md121", null ],
+        [ "Commands", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md122", null ]
       ] ],
-      [ "Derived Clusters", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md121", [
-        [ "Classification", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md122", null ],
-        [ "Derived Attributes", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md123", null ],
-        [ "Derived Commands", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md124", null ]
+      [ "Derived Clusters", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md123", [
+        [ "Classification", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md124", null ],
+        [ "Derived Attributes", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md125", null ],
+        [ "Derived Commands", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md126", null ]
       ] ],
-      [ "Arrays", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md125", null ],
-      [ "Expressions", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md126", null ],
-      [ "Patterns", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md127", [
-        [ "Sets of dependent attributes / commands", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md128", null ],
-        [ "Fields in a Command", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md129", null ]
+      [ "Arrays", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md127", null ],
+      [ "Expressions", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md128", null ],
+      [ "Patterns", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md129", [
+        [ "Sets of dependent attributes / commands", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md130", null ],
+        [ "Fields in a Command", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md131", null ]
       ] ],
-      [ "Tags", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md130", null ],
-      [ "Viewing As HTML", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md131", null ]
+      [ "Tags", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md132", null ],
+      [ "Viewing As HTML", "md_components_uic_dotdot_dotdot-xml_README.html#autotoc_md133", null ]
     ] ],
     [ "CMake coding standard", "md_doc_standards_cmake-standard.html", null ],
     [ "Unify Coding Standard", "md_doc_standards_coding-standard.html", [
-      [ "1 Introduction", "md_doc_standards_coding-standard.html#autotoc_md135", [
-        [ "1.1 Purpose of this document", "md_doc_standards_coding-standard.html#autotoc_md136", null ],
-        [ "1.2 Latest version of this document", "md_doc_standards_coding-standard.html#autotoc_md137", null ],
-        [ "1.3 Changing this document", "md_doc_standards_coding-standard.html#autotoc_md138", [
-          [ "Zigbee Devices Used for Testing", "md_applications_zigpc_release_notes.html#autotoc_md84", null ],
-          [ "1.3.1 Versioning", "md_doc_standards_coding-standard.html#autotoc_md139", null ],
-          [ "1.3.2 Review committee", "md_doc_standards_coding-standard.html#autotoc_md140", null ]
+      [ "1 Introduction", "md_doc_standards_coding-standard.html#autotoc_md137", [
+        [ "1.1 Purpose of this document", "md_doc_standards_coding-standard.html#autotoc_md138", null ],
+        [ "1.2 Latest version of this document", "md_doc_standards_coding-standard.html#autotoc_md139", null ],
+        [ "1.3 Changing this document", "md_doc_standards_coding-standard.html#autotoc_md140", [
+          [ "Zigbee Devices Used for Testing", "md_applications_zigpc_release_notes.html#autotoc_md86", null ],
+          [ "1.3.1 Versioning", "md_doc_standards_coding-standard.html#autotoc_md141", null ],
+          [ "1.3.2 Review committee", "md_doc_standards_coding-standard.html#autotoc_md142", null ]
         ] ],
-        [ "1.4 Structure and wording of this document", "md_doc_standards_coding-standard.html#autotoc_md141", [
-          [ "1.4.1 Source Code", "md_doc_standards_coding-standard.html#autotoc_md142", null ],
-          [ "1.4.2 Required", "md_doc_standards_coding-standard.html#autotoc_md143", null ],
-          [ "1.4.3 Recommended", "md_doc_standards_coding-standard.html#autotoc_md144", null ],
-          [ "1.4.4 Should", "md_doc_standards_coding-standard.html#autotoc_md145", null ]
+        [ "1.4 Structure and wording of this document", "md_doc_standards_coding-standard.html#autotoc_md143", [
+          [ "1.4.1 Source Code", "md_doc_standards_coding-standard.html#autotoc_md144", null ],
+          [ "1.4.2 Required", "md_doc_standards_coding-standard.html#autotoc_md145", null ],
+          [ "1.4.3 Recommended", "md_doc_standards_coding-standard.html#autotoc_md146", null ],
+          [ "1.4.4 Should", "md_doc_standards_coding-standard.html#autotoc_md147", null ]
         ] ],
-        [ "1.5 Application of this standard", "md_doc_standards_coding-standard.html#autotoc_md146", [
-          [ "1.5.1 New modules", "md_doc_standards_coding-standard.html#autotoc_md147", null ],
-          [ "1.5.2 Existing modules", "md_doc_standards_coding-standard.html#autotoc_md148", null ]
+        [ "1.5 Application of this standard", "md_doc_standards_coding-standard.html#autotoc_md148", [
+          [ "1.5.1 New modules", "md_doc_standards_coding-standard.html#autotoc_md149", null ],
+          [ "1.5.2 Existing modules", "md_doc_standards_coding-standard.html#autotoc_md150", null ]
         ] ]
       ] ],
-      [ "2 General Guidelines", "md_doc_standards_coding-standard.html#autotoc_md149", [
-        [ "2.1 General Guidelines", "md_doc_standards_coding-standard.html#autotoc_md150", [
-          [ "2.1.1 Use peer review", "md_doc_standards_coding-standard.html#autotoc_md151", null ],
-          [ "2.1.3 Be a Boy Scout", "md_doc_standards_coding-standard.html#autotoc_md152", null ],
-          [ "2.1.4 Avoid reinventing the Wheel", "md_doc_standards_coding-standard.html#autotoc_md153", null ],
-          [ "2.1.5 Refactor code", "md_doc_standards_coding-standard.html#autotoc_md154", null ]
+      [ "2 General Guidelines", "md_doc_standards_coding-standard.html#autotoc_md151", [
+        [ "2.1 General Guidelines", "md_doc_standards_coding-standard.html#autotoc_md152", [
+          [ "2.1.1 Use peer review", "md_doc_standards_coding-standard.html#autotoc_md153", null ],
+          [ "2.1.3 Be a Boy Scout", "md_doc_standards_coding-standard.html#autotoc_md154", null ],
+          [ "2.1.4 Avoid reinventing the Wheel", "md_doc_standards_coding-standard.html#autotoc_md155", null ],
+          [ "2.1.5 Refactor code", "md_doc_standards_coding-standard.html#autotoc_md156", null ]
         ] ],
-        [ "2.2 Testing", "md_doc_standards_coding-standard.html#autotoc_md155", [
-          [ "2.2.1 Testability", "md_doc_standards_coding-standard.html#autotoc_md156", null ],
-          [ "2.2.2 Regression Test", "md_doc_standards_coding-standard.html#autotoc_md157", null ]
+        [ "2.2 Testing", "md_doc_standards_coding-standard.html#autotoc_md157", [
+          [ "2.2.1 Testability", "md_doc_standards_coding-standard.html#autotoc_md158", null ],
+          [ "2.2.2 Regression Test", "md_doc_standards_coding-standard.html#autotoc_md159", null ]
         ] ],
-        [ "2.3 Embedded Coding", "md_doc_standards_coding-standard.html#autotoc_md158", [
-          [ "2.3.1 Write energy friendly code", "md_doc_standards_coding-standard.html#autotoc_md159", null ],
-          [ "2.3.2 Interrupts", "md_doc_standards_coding-standard.html#autotoc_md160", null ]
+        [ "2.3 Embedded Coding", "md_doc_standards_coding-standard.html#autotoc_md160", [
+          [ "2.3.1 Write energy friendly code", "md_doc_standards_coding-standard.html#autotoc_md161", null ],
+          [ "2.3.2 Interrupts", "md_doc_standards_coding-standard.html#autotoc_md162", null ]
         ] ]
       ] ],
-      [ "3 C Specific Guidelines", "md_doc_standards_coding-standard.html#autotoc_md161", [
-        [ "3.1 Compilers", "md_doc_standards_coding-standard.html#autotoc_md162", [
-          [ "3.1.1 C standards version (Required)", "md_doc_standards_coding-standard.html#autotoc_md163", null ],
-          [ "3.1.1.1 C++ standards version (Required)", "md_doc_standards_coding-standard.html#autotoc_md164", null ],
-          [ "3.1.2 Support mixing C++ and C (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md165", null ],
-          [ "3.1.3 Multiple build tool support (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md166", null ],
-          [ "3.1.4 Compile with warnings (Required)", "md_doc_standards_coding-standard.html#autotoc_md167", null ],
-          [ "3.1.5 Treat warnings as errors (Required)", "md_doc_standards_coding-standard.html#autotoc_md168", null ]
+      [ "3 C Specific Guidelines", "md_doc_standards_coding-standard.html#autotoc_md163", [
+        [ "3.1 Compilers", "md_doc_standards_coding-standard.html#autotoc_md164", [
+          [ "3.1.1 C standards version (Required)", "md_doc_standards_coding-standard.html#autotoc_md165", null ],
+          [ "3.1.1.1 C++ standards version (Required)", "md_doc_standards_coding-standard.html#autotoc_md166", null ],
+          [ "3.1.2 Support mixing C++ and C (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md167", null ],
+          [ "3.1.3 Multiple build tool support (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md168", null ],
+          [ "3.1.4 Compile with warnings (Required)", "md_doc_standards_coding-standard.html#autotoc_md169", null ],
+          [ "3.1.5 Treat warnings as errors (Required)", "md_doc_standards_coding-standard.html#autotoc_md170", null ]
         ] ],
-        [ "3.2 Preprocessor", "md_doc_standards_coding-standard.html#autotoc_md169", [
-          [ "3.2.1 Use header file guards (Required)", "md_doc_standards_coding-standard.html#autotoc_md170", null ],
-          [ "3.2.2 Preprocessor conditional compilation (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md171", null ],
-          [ "3.2.3 Use of preprocessor directive #error (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md172", null ],
-          [ "3.2.4 Use of preprocessor directive #include (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md173", null ]
+        [ "3.2 Preprocessor", "md_doc_standards_coding-standard.html#autotoc_md171", [
+          [ "3.2.1 Use header file guards (Required)", "md_doc_standards_coding-standard.html#autotoc_md172", null ],
+          [ "3.2.2 Preprocessor conditional compilation (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md173", null ],
+          [ "3.2.3 Use of preprocessor directive #error (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md174", null ],
+          [ "3.2.4 Use of preprocessor directive #include (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md175", null ]
         ] ],
-        [ "3.2.5 Use of preprocessor directive <tt>#undef</tt> (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md174", null ],
-        [ "3.2.6 Use of preprocessor 'stringify' and concatenation (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md175", null ],
-        [ "3.2.7 General use of preprocessor  (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md176", null ],
-        [ "3.3 Standard Libraries", "md_doc_standards_coding-standard.html#autotoc_md177", [
-          [ "3.3.1 Use of stdint.h and stdbool.h (Required)", "md_doc_standards_coding-standard.html#autotoc_md178", null ],
-          [ "3.3.2 Use of stdlib (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md179", null ],
-          [ "3.3.3 Use of dynamic memory / the heap (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md180", null ],
-          [ "3.3.4 Do not use the standard C assert() (Required)", "md_doc_standards_coding-standard.html#autotoc_md181", null ]
+        [ "3.2.5 Use of preprocessor directive <tt>#undef</tt> (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md176", null ],
+        [ "3.2.6 Use of preprocessor 'stringify' and concatenation (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md177", null ],
+        [ "3.2.7 General use of preprocessor  (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md178", null ],
+        [ "3.3 Standard Libraries", "md_doc_standards_coding-standard.html#autotoc_md179", [
+          [ "3.3.1 Use of stdint.h and stdbool.h (Required)", "md_doc_standards_coding-standard.html#autotoc_md180", null ],
+          [ "3.3.2 Use of stdlib (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md181", null ],
+          [ "3.3.3 Use of dynamic memory / the heap (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md182", null ],
+          [ "3.3.4 Do not use the standard C assert() (Required)", "md_doc_standards_coding-standard.html#autotoc_md183", null ]
         ] ],
-        [ "3.4 Keywords", "md_doc_standards_coding-standard.html#autotoc_md182", [
-          [ "3.4.1 The \"volatile\" keyword (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md183", null ],
-          [ "3.4.2 The \"inline\" keyword (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md184", null ],
-          [ "3.4.3 The \"static\" keyword (Required)", "md_doc_standards_coding-standard.html#autotoc_md185", null ]
+        [ "3.4 Keywords", "md_doc_standards_coding-standard.html#autotoc_md184", [
+          [ "3.4.1 The \"volatile\" keyword (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md185", null ],
+          [ "3.4.2 The \"inline\" keyword (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md186", null ],
+          [ "3.4.3 The \"static\" keyword (Required)", "md_doc_standards_coding-standard.html#autotoc_md187", null ]
         ] ],
-        [ "3.5 Data Types", "md_doc_standards_coding-standard.html#autotoc_md186", [
-          [ "3.5.1 Avoid enums in arrays, structures, or unions (Required)", "md_doc_standards_coding-standard.html#autotoc_md187", null ],
-          [ "3.5.2 Avoid bitfields in structures/unions (Required)", "md_doc_standards_coding-standard.html#autotoc_md188", null ]
+        [ "3.5 Data Types", "md_doc_standards_coding-standard.html#autotoc_md188", [
+          [ "3.5.1 Avoid enums in arrays, structures, or unions (Required)", "md_doc_standards_coding-standard.html#autotoc_md189", null ],
+          [ "3.5.2 Avoid bitfields in structures/unions (Required)", "md_doc_standards_coding-standard.html#autotoc_md190", null ]
         ] ],
-        [ "3.6 Variables", "md_doc_standards_coding-standard.html#autotoc_md189", [
-          [ "3.6.1 Using global variables (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md190", null ]
+        [ "3.6 Variables", "md_doc_standards_coding-standard.html#autotoc_md191", [
+          [ "3.6.1 Using global variables (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md192", null ]
         ] ],
-        [ "3.7 Functions", "md_doc_standards_coding-standard.html#autotoc_md191", [
-          [ "3.7.1 Prototype functions (Required)", "md_doc_standards_coding-standard.html#autotoc_md192", null ],
-          [ "3.7.2 Functions return data types (Required)", "md_doc_standards_coding-standard.html#autotoc_md193", [
-            [ "Exceptions", "md_doc_standards_coding-standard.html#autotoc_md194", null ]
+        [ "3.7 Functions", "md_doc_standards_coding-standard.html#autotoc_md193", [
+          [ "3.7.1 Prototype functions (Required)", "md_doc_standards_coding-standard.html#autotoc_md194", null ],
+          [ "3.7.2 Functions return data types (Required)", "md_doc_standards_coding-standard.html#autotoc_md195", [
+            [ "Exceptions", "md_doc_standards_coding-standard.html#autotoc_md196", null ]
           ] ],
-          [ "3.7.3 Return values should always be checked and propagated (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md195", null ],
-          [ "3.7.4 Functions replicating a standard API can follow that API (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md196", null ]
+          [ "3.7.3 Return values should always be checked and propagated (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md197", null ],
+          [ "3.7.4 Functions replicating a standard API can follow that API (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md198", null ]
         ] ],
-        [ "3.8 Macros", "md_doc_standards_coding-standard.html#autotoc_md197", [
-          [ "3.8.1 Macros with side-effects (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md198", null ],
-          [ "3.8.2 Macros with statement(s) (Required)", "md_doc_standards_coding-standard.html#autotoc_md199", null ],
-          [ "3.8.3 Functional macros with argument(s) (Required)", "md_doc_standards_coding-standard.html#autotoc_md200", null ]
+        [ "3.8 Macros", "md_doc_standards_coding-standard.html#autotoc_md199", [
+          [ "3.8.1 Macros with side-effects (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md200", null ],
+          [ "3.8.2 Macros with statement(s) (Required)", "md_doc_standards_coding-standard.html#autotoc_md201", null ],
+          [ "3.8.3 Functional macros with argument(s) (Required)", "md_doc_standards_coding-standard.html#autotoc_md202", null ]
         ] ],
-        [ "3.9 goto statements", "md_doc_standards_coding-standard.html#autotoc_md201", [
-          [ "3.9.1 <tt>goto</tt> statements should only be used for cleanup purposes or early exit in case of an error, when there is no simple workaround (Required)", "md_doc_standards_coding-standard.html#autotoc_md202", null ],
-          [ "3.9.2 <tt>goto</tt>s should only refer to a label declared after them (Required)", "md_doc_standards_coding-standard.html#autotoc_md203", null ],
-          [ "3.9.3 <tt>goto</tt>s should only refer to a static label located in the same function (Required)", "md_doc_standards_coding-standard.html#autotoc_md204", null ],
-          [ "3.9.4 Any label referenced by a <tt>goto</tt> need to be declared in the same block or a block enclosing the <tt>goto</tt> (Required)", "md_doc_standards_coding-standard.html#autotoc_md205", null ]
+        [ "3.9 goto statements", "md_doc_standards_coding-standard.html#autotoc_md203", [
+          [ "3.9.1 <tt>goto</tt> statements should only be used for cleanup purposes or early exit in case of an error, when there is no simple workaround (Required)", "md_doc_standards_coding-standard.html#autotoc_md204", null ],
+          [ "3.9.2 <tt>goto</tt>s should only refer to a label declared after them (Required)", "md_doc_standards_coding-standard.html#autotoc_md205", null ],
+          [ "3.9.3 <tt>goto</tt>s should only refer to a static label located in the same function (Required)", "md_doc_standards_coding-standard.html#autotoc_md206", null ],
+          [ "3.9.4 Any label referenced by a <tt>goto</tt> need to be declared in the same block or a block enclosing the <tt>goto</tt> (Required)", "md_doc_standards_coding-standard.html#autotoc_md207", null ]
         ] ],
-        [ "3.10 Libraries", "md_doc_standards_coding-standard.html#autotoc_md206", [
-          [ "3.10.1 Dependencies (Required)", "md_doc_standards_coding-standard.html#autotoc_md207", null ],
-          [ "3.10.2 Including third party code (Required)", "md_doc_standards_coding-standard.html#autotoc_md208", null ],
-          [ "3.10.3 Configuring libraries in source form (Required)", "md_doc_standards_coding-standard.html#autotoc_md209", null ],
-          [ "3.10.4 Configuring libraries in binary form (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md210", null ]
+        [ "3.10 Libraries", "md_doc_standards_coding-standard.html#autotoc_md208", [
+          [ "3.10.1 Dependencies (Required)", "md_doc_standards_coding-standard.html#autotoc_md209", null ],
+          [ "3.10.2 Including third party code (Required)", "md_doc_standards_coding-standard.html#autotoc_md210", null ],
+          [ "3.10.3 Configuring libraries in source form (Required)", "md_doc_standards_coding-standard.html#autotoc_md211", null ],
+          [ "3.10.4 Configuring libraries in binary form (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md212", null ]
         ] ],
-        [ "3.11 Misc", "md_doc_standards_coding-standard.html#autotoc_md211", [
-          [ "3.11.1 Avoid embedding assignments in expressions (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md212", null ]
+        [ "3.11 Misc", "md_doc_standards_coding-standard.html#autotoc_md213", [
+          [ "3.11.1 Avoid embedding assignments in expressions (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md214", null ]
         ] ]
       ] ],
-      [ "4 Coding style and formatting", "md_doc_standards_coding-standard.html#autotoc_md213", [
-        [ "4.1 General formatting", "md_doc_standards_coding-standard.html#autotoc_md214", [
-          [ "4.1.1 Use spaces, not tabs (Required)", "md_doc_standards_coding-standard.html#autotoc_md215", null ],
-          [ "4.1.2 Indents are 2 spaces per level (Required)", "md_doc_standards_coding-standard.html#autotoc_md216", [
-            [ "4.1.2.1 Preprocessor indentation (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md217", null ]
+      [ "4 Coding style and formatting", "md_doc_standards_coding-standard.html#autotoc_md215", [
+        [ "4.1 General formatting", "md_doc_standards_coding-standard.html#autotoc_md216", [
+          [ "4.1.1 Use spaces, not tabs (Required)", "md_doc_standards_coding-standard.html#autotoc_md217", null ],
+          [ "4.1.2 Indents are 2 spaces per level (Required)", "md_doc_standards_coding-standard.html#autotoc_md218", [
+            [ "4.1.2.1 Preprocessor indentation (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md219", null ]
           ] ],
-          [ "4.1.3 Lines should not be longer than 80 characters (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md218", null ],
-          [ "4.1.4 Line endings (Required)", "md_doc_standards_coding-standard.html#autotoc_md219", null ],
-          [ "4.1.5 Use only plain ASCII or UTF-8 (Required)", "md_doc_standards_coding-standard.html#autotoc_md220", null ],
-          [ "4.1.6 Use ISO8601 formatting for dates (Required)", "md_doc_standards_coding-standard.html#autotoc_md221", null ],
-          [ "4.1.7 Inserting empty and blank lines (Required)", "md_doc_standards_coding-standard.html#autotoc_md222", null ],
-          [ "4.1.8 Use parentheses liberally (Required)", "md_doc_standards_coding-standard.html#autotoc_md223", null ],
-          [ "4.1.9 Break up long expressions (Required)", "md_doc_standards_coding-standard.html#autotoc_md224", null ],
-          [ "4.1.10 <tt>goto</tt> labels should be on column 1 (Required)", "md_doc_standards_coding-standard.html#autotoc_md225", null ]
+          [ "4.1.3 Lines should not be longer than 80 characters (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md220", null ],
+          [ "4.1.4 Line endings (Required)", "md_doc_standards_coding-standard.html#autotoc_md221", null ],
+          [ "4.1.5 Use only plain ASCII or UTF-8 (Required)", "md_doc_standards_coding-standard.html#autotoc_md222", null ],
+          [ "4.1.6 Use ISO8601 formatting for dates (Required)", "md_doc_standards_coding-standard.html#autotoc_md223", null ],
+          [ "4.1.7 Inserting empty and blank lines (Required)", "md_doc_standards_coding-standard.html#autotoc_md224", null ],
+          [ "4.1.8 Use parentheses liberally (Required)", "md_doc_standards_coding-standard.html#autotoc_md225", null ],
+          [ "4.1.9 Break up long expressions (Required)", "md_doc_standards_coding-standard.html#autotoc_md226", null ],
+          [ "4.1.10 <tt>goto</tt> labels should be on column 1 (Required)", "md_doc_standards_coding-standard.html#autotoc_md227", null ]
         ] ],
-        [ "4.2 Commenting code (Required)", "md_doc_standards_coding-standard.html#autotoc_md226", [
-          [ "4.2.1 Use C++ style comments (\"//\")", "md_doc_standards_coding-standard.html#autotoc_md227", null ]
+        [ "4.2 Commenting code (Required)", "md_doc_standards_coding-standard.html#autotoc_md228", [
+          [ "4.2.1 Use C++ style comments (\"//\")", "md_doc_standards_coding-standard.html#autotoc_md229", null ]
         ] ],
-        [ "4.3 Bracing style (Required)", "md_doc_standards_coding-standard.html#autotoc_md228", null ],
-        [ "4.4 Switch statements and labels", "md_doc_standards_coding-standard.html#autotoc_md229", [
-          [ "4.4.1 Using labels (Required)", "md_doc_standards_coding-standard.html#autotoc_md230", null ],
-          [ "4.4.2 Labels with block (Required)", "md_doc_standards_coding-standard.html#autotoc_md231", null ],
-          [ "4.4.3 Switch statements (Required)", "md_doc_standards_coding-standard.html#autotoc_md232", null ]
+        [ "4.3 Bracing style (Required)", "md_doc_standards_coding-standard.html#autotoc_md230", null ],
+        [ "4.4 Switch statements and labels", "md_doc_standards_coding-standard.html#autotoc_md231", [
+          [ "4.4.1 Using labels (Required)", "md_doc_standards_coding-standard.html#autotoc_md232", null ],
+          [ "4.4.2 Labels with block (Required)", "md_doc_standards_coding-standard.html#autotoc_md233", null ],
+          [ "4.4.3 Switch statements (Required)", "md_doc_standards_coding-standard.html#autotoc_md234", null ]
         ] ],
-        [ "4.5 Functions, operators and C keywords", "md_doc_standards_coding-standard.html#autotoc_md233", [
-          [ "4.5.1 Listing function parameters (Required)", "md_doc_standards_coding-standard.html#autotoc_md234", null ],
-          [ "4.5.2 Using function parentheses (Required)", "md_doc_standards_coding-standard.html#autotoc_md235", null ],
-          [ "4.5.3 Binary and ternary operators (Required)", "md_doc_standards_coding-standard.html#autotoc_md236", null ],
-          [ "4.5.4 Use a single space after C keywords (Required)", "md_doc_standards_coding-standard.html#autotoc_md237", null ],
-          [ "4.5.5 Additional space within expressions", "md_doc_standards_coding-standard.html#autotoc_md238", null ],
-          [ "4.5.6 Identify do-nothing code (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md239", null ],
-          [ "4.5.7 Pointer asterisk position (Required)", "md_doc_standards_coding-standard.html#autotoc_md240", null ],
-          [ "4.5.8 Don't mix pointer and value type declarations (Required)", "md_doc_standards_coding-standard.html#autotoc_md241", null ]
+        [ "4.5 Functions, operators and C keywords", "md_doc_standards_coding-standard.html#autotoc_md235", [
+          [ "4.5.1 Listing function parameters (Required)", "md_doc_standards_coding-standard.html#autotoc_md236", null ],
+          [ "4.5.2 Using function parentheses (Required)", "md_doc_standards_coding-standard.html#autotoc_md237", null ],
+          [ "4.5.3 Binary and ternary operators (Required)", "md_doc_standards_coding-standard.html#autotoc_md238", null ],
+          [ "4.5.4 Use a single space after C keywords (Required)", "md_doc_standards_coding-standard.html#autotoc_md239", null ],
+          [ "4.5.5 Additional space within expressions", "md_doc_standards_coding-standard.html#autotoc_md240", null ],
+          [ "4.5.6 Identify do-nothing code (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md241", null ],
+          [ "4.5.7 Pointer asterisk position (Required)", "md_doc_standards_coding-standard.html#autotoc_md242", null ],
+          [ "4.5.8 Don't mix pointer and value type declarations (Required)", "md_doc_standards_coding-standard.html#autotoc_md243", null ]
         ] ],
-        [ "4.6 Naming", "md_doc_standards_coding-standard.html#autotoc_md242", [
-          [ "4.6.1 General Considerations", "md_doc_standards_coding-standard.html#autotoc_md243", [
-            [ "4.6.1.1 Use meaningful names (Required)", "md_doc_standards_coding-standard.html#autotoc_md244", null ],
-            [ "4.6.1.2 Avoid abbreviations (Required)", "md_doc_standards_coding-standard.html#autotoc_md245", null ]
+        [ "4.6 Naming", "md_doc_standards_coding-standard.html#autotoc_md244", [
+          [ "4.6.1 General Considerations", "md_doc_standards_coding-standard.html#autotoc_md245", [
+            [ "4.6.1.1 Use meaningful names (Required)", "md_doc_standards_coding-standard.html#autotoc_md246", null ],
+            [ "4.6.1.2 Avoid abbreviations (Required)", "md_doc_standards_coding-standard.html#autotoc_md247", null ]
           ] ],
-          [ "4.6.2 Namespaces (Required)", "md_doc_standards_coding-standard.html#autotoc_md246", null ],
-          [ "4.6.3 Naming (Required)", "md_doc_standards_coding-standard.html#autotoc_md247", [
-            [ "4.6.3.1 Casing (Required)", "md_doc_standards_coding-standard.html#autotoc_md248", null ],
-            [ "4.6.3.2 Casing and acronyms (Required)", "md_doc_standards_coding-standard.html#autotoc_md249", null ]
+          [ "4.6.2 Namespaces (Required)", "md_doc_standards_coding-standard.html#autotoc_md248", null ],
+          [ "4.6.3 Naming (Required)", "md_doc_standards_coding-standard.html#autotoc_md249", [
+            [ "4.6.3.1 Casing (Required)", "md_doc_standards_coding-standard.html#autotoc_md250", null ],
+            [ "4.6.3.2 Casing and acronyms (Required)", "md_doc_standards_coding-standard.html#autotoc_md251", null ]
           ] ],
-          [ "4.6.4 Naming functions and variables", "md_doc_standards_coding-standard.html#autotoc_md250", [
-            [ "4.6.4.1 Functions and variables names have the form verb_noun (Required)", "md_doc_standards_coding-standard.html#autotoc_md251", null ],
-            [ "4.6.4.2 Function parameters should not have any prefix (Required)", "md_doc_standards_coding-standard.html#autotoc_md252", null ],
-            [ "4.6.4.3 Function-local variables should not have any prefix (Required)", "md_doc_standards_coding-standard.html#autotoc_md253", null ],
-            [ "4.6.4.4 Variable and Function Names Indicate Units for Time (Required)", "md_doc_standards_coding-standard.html#autotoc_md254", null ],
-            [ "4.6.4.5 Functions/stubs called on specific events/callbacks should start 'on' in their name (Required)", "md_doc_standards_coding-standard.html#autotoc_md255", null ],
-            [ "4.6.4.6 Interrupt handlers should be suffixed by 'IRQHandler' or 'irq_handler' (Required)", "md_doc_standards_coding-standard.html#autotoc_md256", null ],
-            [ "4.6.4.7 Non-blocking functions executed periodically in a main loop should be suffixed by 'step' (Required)", "md_doc_standards_coding-standard.html#autotoc_md257", null ],
-            [ "4.6.4.8 Functions that are tasks should be suffixed by 'task' (Required)", "md_doc_standards_coding-standard.html#autotoc_md258", null ]
+          [ "4.6.4 Naming functions and variables", "md_doc_standards_coding-standard.html#autotoc_md252", [
+            [ "4.6.4.1 Functions and variables names have the form verb_noun (Required)", "md_doc_standards_coding-standard.html#autotoc_md253", null ],
+            [ "4.6.4.2 Function parameters should not have any prefix (Required)", "md_doc_standards_coding-standard.html#autotoc_md254", null ],
+            [ "4.6.4.3 Function-local variables should not have any prefix (Required)", "md_doc_standards_coding-standard.html#autotoc_md255", null ],
+            [ "4.6.4.4 Variable and Function Names Indicate Units for Time (Required)", "md_doc_standards_coding-standard.html#autotoc_md256", null ],
+            [ "4.6.4.5 Functions/stubs called on specific events/callbacks should start 'on' in their name (Required)", "md_doc_standards_coding-standard.html#autotoc_md257", null ],
+            [ "4.6.4.6 Interrupt handlers should be suffixed by 'IRQHandler' or 'irq_handler' (Required)", "md_doc_standards_coding-standard.html#autotoc_md258", null ],
+            [ "4.6.4.7 Non-blocking functions executed periodically in a main loop should be suffixed by 'step' (Required)", "md_doc_standards_coding-standard.html#autotoc_md259", null ],
+            [ "4.6.4.8 Functions that are tasks should be suffixed by 'task' (Required)", "md_doc_standards_coding-standard.html#autotoc_md260", null ]
           ] ],
-          [ "4.6.5 Naming constants", "md_doc_standards_coding-standard.html#autotoc_md259", [
-            [ "4.6.5.1 Constants should use upper case (Required)", "md_doc_standards_coding-standard.html#autotoc_md260", null ]
+          [ "4.6.5 Naming constants", "md_doc_standards_coding-standard.html#autotoc_md261", [
+            [ "4.6.5.1 Constants should use upper case (Required)", "md_doc_standards_coding-standard.html#autotoc_md262", null ]
           ] ],
-          [ "4.6.6 Naming function-like macros", "md_doc_standards_coding-standard.html#autotoc_md261", [
-            [ "4.6.6.1 Follow the naming convention for regular functions (Required)", "md_doc_standards_coding-standard.html#autotoc_md262", null ],
-            [ "4.6.6.2 Use all caps for macros that can't be functions (Required)", "md_doc_standards_coding-standard.html#autotoc_md263", null ]
+          [ "4.6.6 Naming function-like macros", "md_doc_standards_coding-standard.html#autotoc_md263", [
+            [ "4.6.6.1 Follow the naming convention for regular functions (Required)", "md_doc_standards_coding-standard.html#autotoc_md264", null ],
+            [ "4.6.6.2 Use all caps for macros that can't be functions (Required)", "md_doc_standards_coding-standard.html#autotoc_md265", null ]
           ] ],
-          [ "4.6.7 Naming types", "md_doc_standards_coding-standard.html#autotoc_md264", [
-            [ "4.6.7.1 Public typedefs (Required)", "md_doc_standards_coding-standard.html#autotoc_md265", null ],
-            [ "4.6.7.2 Structure fields should be snake_case, without any prefixes (Required)", "md_doc_standards_coding-standard.html#autotoc_md266", null ],
-            [ "4.6.7.3 Type from typedef (Optional)", "md_doc_standards_coding-standard.html#autotoc_md267", null ]
+          [ "4.6.7 Naming types", "md_doc_standards_coding-standard.html#autotoc_md266", [
+            [ "4.6.7.1 Public typedefs (Required)", "md_doc_standards_coding-standard.html#autotoc_md267", null ],
+            [ "4.6.7.2 Structure fields should be snake_case, without any prefixes (Required)", "md_doc_standards_coding-standard.html#autotoc_md268", null ],
+            [ "4.6.7.3 Type from typedef (Optional)", "md_doc_standards_coding-standard.html#autotoc_md269", null ]
           ] ],
-          [ "4.6.8 Files and directory structure", "md_doc_standards_coding-standard.html#autotoc_md268", [
-            [ "4.6.8.1 Filenames and directories use lower case (Required)", "md_doc_standards_coding-standard.html#autotoc_md269", null ],
-            [ "4.6.8.2 Avoid duplicate filenames", "md_doc_standards_coding-standard.html#autotoc_md270", null ],
-            [ "4.6.8.3 File names (Required)", "md_doc_standards_coding-standard.html#autotoc_md271", null ],
-            [ "4.6.8.4 Directory names (Required)", "md_doc_standards_coding-standard.html#autotoc_md272", null ]
+          [ "4.6.8 Files and directory structure", "md_doc_standards_coding-standard.html#autotoc_md270", [
+            [ "4.6.8.1 Filenames and directories use lower case (Required)", "md_doc_standards_coding-standard.html#autotoc_md271", null ],
+            [ "4.6.8.2 Avoid duplicate filenames", "md_doc_standards_coding-standard.html#autotoc_md272", null ],
+            [ "4.6.8.3 File names (Required)", "md_doc_standards_coding-standard.html#autotoc_md273", null ],
+            [ "4.6.8.4 Directory names (Required)", "md_doc_standards_coding-standard.html#autotoc_md274", null ]
           ] ]
         ] ]
       ] ],
-      [ "5 Documentation", "md_doc_standards_coding-standard.html#autotoc_md273", [
-        [ "5.1 General", "md_doc_standards_coding-standard.html#autotoc_md274", null ],
-        [ "5.2 Comments should answer the question \"Why?\" (Required)", "md_doc_standards_coding-standard.html#autotoc_md275", null ]
+      [ "5 Documentation", "md_doc_standards_coding-standard.html#autotoc_md275", [
+        [ "5.1 General", "md_doc_standards_coding-standard.html#autotoc_md276", null ],
+        [ "5.2 Comments should answer the question \"Why?\" (Required)", "md_doc_standards_coding-standard.html#autotoc_md277", null ]
       ] ],
-      [ "6 Doxygen Coding Style Guide", "md_doc_standards_coding-standard.html#autotoc_md276", [
-        [ "6.1 File comment header (Required)", "md_doc_standards_coding-standard.html#autotoc_md277", null ],
-        [ "6.2 Grouping modules (@addtogroup) (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md278", null ],
-        [ "6.3 File/module level documentation (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md279", null ],
-        [ "6.4 Function documentation (Required)", "md_doc_standards_coding-standard.html#autotoc_md280", null ],
-        [ "6.5 Variable documentation (Required)", "md_doc_standards_coding-standard.html#autotoc_md281", null ],
-        [ "6.6 Header file vs. implementation file (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md282", null ],
-        [ "6.7 Do not document sections (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md283", null ],
-        [ "6.8 Do not release sections (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md284", null ]
+      [ "6 Doxygen Coding Style Guide", "md_doc_standards_coding-standard.html#autotoc_md278", [
+        [ "6.1 File comment header (Required)", "md_doc_standards_coding-standard.html#autotoc_md279", null ],
+        [ "6.2 Grouping modules (@addtogroup) (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md280", null ],
+        [ "6.3 File/module level documentation (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md281", null ],
+        [ "6.4 Function documentation (Required)", "md_doc_standards_coding-standard.html#autotoc_md282", null ],
+        [ "6.5 Variable documentation (Required)", "md_doc_standards_coding-standard.html#autotoc_md283", null ],
+        [ "6.6 Header file vs. implementation file (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md284", null ],
+        [ "6.7 Do not document sections (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md285", null ],
+        [ "6.8 Do not release sections (Recommended)", "md_doc_standards_coding-standard.html#autotoc_md286", null ]
       ] ],
-      [ "7 Licensing", "md_doc_standards_coding-standard.html#autotoc_md285", [
-        [ "7.1 Silicon Labs Licenses", "md_doc_standards_coding-standard.html#autotoc_md286", null ],
-        [ "7.2 Third-Party Code", "md_doc_standards_coding-standard.html#autotoc_md287", null ]
+      [ "7 Licensing", "md_doc_standards_coding-standard.html#autotoc_md287", [
+        [ "7.1 Silicon Labs Licenses", "md_doc_standards_coding-standard.html#autotoc_md288", null ],
+        [ "7.2 Third-Party Code", "md_doc_standards_coding-standard.html#autotoc_md289", null ]
       ] ],
-      [ "8 C++ Specific Guidelines", "md_doc_standards_coding-standard.html#autotoc_md288", null ]
+      [ "8 C++ Specific Guidelines", "md_doc_standards_coding-standard.html#autotoc_md290", null ]
     ] ],
     [ "Known Abbreviations", "md_doc_standards_known-abbreviations.html", null ],
     [ "Unify SDK Developer Readme", "md_doc_readme_developer.html", [
-      [ "Directory Structure and File Naming Conventions", "md_doc_readme_developer.html#autotoc_md291", [
-        [ "Rules", "md_doc_readme_developer.html#autotoc_md292", null ],
-        [ "Structure of Components (Best Practice)", "md_doc_readme_developer.html#autotoc_md293", null ],
-        [ "Structure", "md_doc_readme_developer.html#autotoc_md294", null ]
+      [ "Directory Structure and File Naming Conventions", "md_doc_readme_developer.html#autotoc_md293", [
+        [ "Rules", "md_doc_readme_developer.html#autotoc_md294", null ],
+        [ "Structure of Components (Best Practice)", "md_doc_readme_developer.html#autotoc_md295", null ],
+        [ "Structure", "md_doc_readme_developer.html#autotoc_md296", null ]
       ] ],
-      [ "Component Templates", "md_doc_readme_developer.html#autotoc_md295", [
-        [ "Demo", "md_doc_readme_developer.html#autotoc_md296", null ]
+      [ "Component Templates", "md_doc_readme_developer.html#autotoc_md297", [
+        [ "Demo", "md_doc_readme_developer.html#autotoc_md298", null ]
       ] ],
-      [ "Clang-Format (autoformat code)", "md_doc_readme_developer.html#autotoc_md297", [
-        [ "Install on Mac", "md_doc_readme_developer.html#autotoc_md298", null ],
-        [ "Install on Ubuntu", "md_doc_readme_developer.html#autotoc_md299", null ],
-        [ "Visual Studio Code", "md_doc_readme_developer.html#autotoc_md300", null ],
-        [ "Command Line", "md_doc_readme_developer.html#autotoc_md301", null ]
+      [ "Clang-Format (autoformat code)", "md_doc_readme_developer.html#autotoc_md299", [
+        [ "Install on Mac", "md_doc_readme_developer.html#autotoc_md300", null ],
+        [ "Install on Ubuntu", "md_doc_readme_developer.html#autotoc_md301", null ],
+        [ "Visual Studio Code", "md_doc_readme_developer.html#autotoc_md302", null ],
+        [ "Command Line", "md_doc_readme_developer.html#autotoc_md303", null ]
       ] ],
-      [ "Pre-commit Hooks", "md_doc_readme_developer.html#autotoc_md302", null ],
-      [ "CMake", "md_doc_readme_developer.html#autotoc_md303", [
-        [ "Defining new uic-components", "md_doc_readme_developer.html#autotoc_md304", null ],
-        [ "Mock uic-components", "md_doc_readme_developer.html#autotoc_md305", [
-          [ "Additional headers", "md_doc_readme_developer.html#autotoc_md306", null ]
+      [ "Pre-commit Hooks", "md_doc_readme_developer.html#autotoc_md304", null ],
+      [ "CMake", "md_doc_readme_developer.html#autotoc_md305", [
+        [ "Defining new uic-components", "md_doc_readme_developer.html#autotoc_md306", null ],
+        [ "Mock uic-components", "md_doc_readme_developer.html#autotoc_md307", [
+          [ "Additional headers", "md_doc_readme_developer.html#autotoc_md308", null ]
         ] ],
-        [ "Unit-testing", "md_doc_readme_developer.html#autotoc_md307", [
-          [ "DEPENDS", "md_doc_readme_developer.html#autotoc_md308", null ],
-          [ "NAME", "md_doc_readme_developer.html#autotoc_md309", null ]
+        [ "Unit-testing", "md_doc_readme_developer.html#autotoc_md309", [
+          [ "DEPENDS", "md_doc_readme_developer.html#autotoc_md310", null ],
+          [ "NAME", "md_doc_readme_developer.html#autotoc_md311", null ]
         ] ],
-        [ "EXCLUDE", "md_doc_readme_developer.html#autotoc_md310", null ],
-        [ "Stub", "md_doc_readme_developer.html#autotoc_md311", null ],
-        [ "Do's and dont's", "md_doc_readme_developer.html#autotoc_md312", null ],
-        [ "CMake File Formatting", "md_doc_readme_developer.html#autotoc_md313", null ],
-        [ "Example", "md_doc_readme_developer.html#autotoc_md314", null ],
-        [ "References", "md_doc_readme_developer.html#autotoc_md315", null ],
-        [ "Code Coverage", "md_doc_readme_developer.html#autotoc_md316", [
-          [ "Dependencies", "md_doc_readme_developer.html#autotoc_md317", null ]
+        [ "EXCLUDE", "md_doc_readme_developer.html#autotoc_md312", null ],
+        [ "Stub", "md_doc_readme_developer.html#autotoc_md313", null ],
+        [ "Do's and dont's", "md_doc_readme_developer.html#autotoc_md314", null ],
+        [ "CMake File Formatting", "md_doc_readme_developer.html#autotoc_md315", null ],
+        [ "Example", "md_doc_readme_developer.html#autotoc_md316", null ],
+        [ "References", "md_doc_readme_developer.html#autotoc_md317", null ],
+        [ "Code Coverage", "md_doc_readme_developer.html#autotoc_md318", [
+          [ "Dependencies", "md_doc_readme_developer.html#autotoc_md319", null ]
         ] ]
       ] ]
     ] ],
     [ "Unify SDK Library Overview", "md_doc_overview.html", [
-      [ "Base Platform", "md_doc_overview.html#autotoc_md319", [
-        [ "Main loop", "md_doc_overview.html#autotoc_md320", null ],
-        [ "Config System", "md_doc_overview.html#autotoc_md321", null ],
-        [ "Logging System", "md_doc_overview.html#autotoc_md322", null ],
-        [ "MQTT Client", "md_doc_overview.html#autotoc_md323", null ],
-        [ "DotDot Serializer", "md_doc_overview.html#autotoc_md324", null ],
-        [ "DotDot Attributes", "md_doc_overview.html#autotoc_md325", null ],
-        [ "Datastore", "md_doc_overview.html#autotoc_md326", null ],
-        [ "Attribute Store", "md_doc_overview.html#autotoc_md327", null ],
-        [ "Attribute Mapper", "md_doc_overview.html#autotoc_md328", null ],
-        [ "Console Interface", "md_doc_overview.html#autotoc_md329", null ],
-        [ "SmartStart", "md_doc_overview.html#autotoc_md330", null ],
-        [ "Node State Topic", "md_doc_overview.html#autotoc_md331", null ],
-        [ "Protocol Controller MQTT", "md_doc_overview.html#autotoc_md332", null ],
-        [ "OTA MQTT Client", "md_doc_overview.html#autotoc_md333", null ]
+      [ "Base Platform", "md_doc_overview.html#autotoc_md321", [
+        [ "Main loop", "md_doc_overview.html#autotoc_md322", null ],
+        [ "Config System", "md_doc_overview.html#autotoc_md323", null ],
+        [ "Logging System", "md_doc_overview.html#autotoc_md324", null ],
+        [ "MQTT Client", "md_doc_overview.html#autotoc_md325", null ],
+        [ "DotDot Serializer", "md_doc_overview.html#autotoc_md326", null ],
+        [ "DotDot Attributes", "md_doc_overview.html#autotoc_md327", null ],
+        [ "Datastore", "md_doc_overview.html#autotoc_md328", null ],
+        [ "Attribute Store", "md_doc_overview.html#autotoc_md329", null ],
+        [ "Attribute Mapper", "md_doc_overview.html#autotoc_md330", null ],
+        [ "Console Interface", "md_doc_overview.html#autotoc_md331", null ],
+        [ "SmartStart", "md_doc_overview.html#autotoc_md332", null ],
+        [ "Node State Topic", "md_doc_overview.html#autotoc_md333", null ],
+        [ "Protocol Controller MQTT", "md_doc_overview.html#autotoc_md334", null ],
+        [ "OTA MQTT Client", "md_doc_overview.html#autotoc_md335", null ]
       ] ],
-      [ "Test Framework", "md_doc_overview.html#autotoc_md334", null ],
-      [ "Build System", "md_doc_overview.html#autotoc_md335", null ],
-      [ "Packaging Framework", "md_doc_overview.html#autotoc_md336", null ],
-      [ "Coding Standard", "md_doc_overview.html#autotoc_md337", null ]
+      [ "Test Framework", "md_doc_overview.html#autotoc_md336", null ],
+      [ "Build System", "md_doc_overview.html#autotoc_md337", null ],
+      [ "Packaging Framework", "md_doc_overview.html#autotoc_md338", null ],
+      [ "Coding Standard", "md_doc_overview.html#autotoc_md339", null ]
     ] ],
     [ "Unify Dockerfile", "md_docker_readme_developer.html", [
-      [ "Install Docker", "md_docker_readme_developer.html#autotoc_md339", null ],
-      [ "Build Dockerfile Image", "md_docker_readme_developer.html#autotoc_md340", null ]
+      [ "Install Docker", "md_docker_readme_developer.html#autotoc_md341", null ],
+      [ "Build Dockerfile Image", "md_docker_readme_developer.html#autotoc_md342", null ]
     ] ],
     [ "README to Make Debian Package for UIC Component (for Example ZPC)", "md_doc_README_debian_packaging.html", [
-      [ "Function arguments", "md_doc_README_debian_packaging.html#autotoc_md342", null ],
-      [ "1. PKG_NAME      component package Name", "md_doc_README_debian_packaging.html#autotoc_md343", null ],
-      [ "2. PKG_FILE_NAME Debian package filename for the component", "md_doc_README_debian_packaging.html#autotoc_md344", null ],
-      [ "3. PKG_DEPNDS    Component debian package depenedencies.", "md_doc_README_debian_packaging.html#autotoc_md345", null ],
-      [ "4. PKG_EXTRA     Component debian package Control extra info", "md_doc_README_debian_packaging.html#autotoc_md346", null ],
-      [ "See https://cmake.org/cmake/help/v3.6/module/CPackDeb.html for more information", "md_doc_README_debian_packaging.html#autotoc_md347", null ]
+      [ "Function arguments", "md_doc_README_debian_packaging.html#autotoc_md344", null ],
+      [ "1. PKG_NAME      component package Name", "md_doc_README_debian_packaging.html#autotoc_md345", null ],
+      [ "2. PKG_FILE_NAME Debian package filename for the component", "md_doc_README_debian_packaging.html#autotoc_md346", null ],
+      [ "3. PKG_DEPNDS    Component debian package depenedencies.", "md_doc_README_debian_packaging.html#autotoc_md347", null ],
+      [ "4. PKG_EXTRA     Component debian package Control extra info", "md_doc_README_debian_packaging.html#autotoc_md348", null ],
+      [ "See https://cmake.org/cmake/help/v3.6/module/CPackDeb.html for more information", "md_doc_README_debian_packaging.html#autotoc_md349", null ]
     ] ],
     [ "Unify SDK Library Developer Guide", "md_doc_readme_uic_application_developer.html", [
-      [ "Creating a New Application", "md_doc_readme_uic_application_developer.html#autotoc_md349", null ],
-      [ "Unify SDK Library (Unify Main) and IPC", "md_doc_readme_uic_application_developer.html#autotoc_md350", null ]
+      [ "Creating a New Application", "md_doc_readme_uic_application_developer.html#autotoc_md351", null ],
+      [ "Unify SDK Library (Unify Main) and IPC", "md_doc_readme_uic_application_developer.html#autotoc_md352", null ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
@@ -507,11 +510,11 @@ var NAVTREEINDEX =
 "group__zigpc__net__mgmt__process.html#ga47d7a4ef202563bd8d19d8763828b277",
 "linux-serial_8c.html#a53035d56f85f0801086fd975f49e94dc",
 "md_doc_standards_coding-standard.html#autotoc_md144",
-"ota_8hpp.html#a061d9131ad0a8a302d543c11819b0394ad0749aaba8b833466dfcbb0428e4f89c",
-"structmessage__queue__element__t.html#a926055b89ca5b86b2345104b75be0c8d",
-"structzigpc__gateway__dispatch__init__report__t.html#a8b5658b4268f8751bdabfb22c264685e",
-"unionzigpc__net__mgmt__fsm__data__t.html",
-"zigpc__net__mgmt__fsm_8c.html#a6a783171a4f0f7a213b1b39692677377"
+"ota_8hpp.html#a061d9131ad0a8a302d543c11819b0394a5343bcd21aad65124478a61831f6949e",
+"structmessage__queue__element__t.html#a115cef721788d07f3f25cdfc6248419a",
+"structzigpc__gateway__dispatch__init__report__t.html#a722c1aea8ab6a4e35311316ee81bf393",
+"uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395",
+"zigpc__net__mgmt__fsm_8c.html#a529405535e56b42ae280045d0356e2ac"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

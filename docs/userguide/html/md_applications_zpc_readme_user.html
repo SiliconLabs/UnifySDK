@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
   </td>
  </tr>
@@ -88,11 +88,11 @@ $(document).ready(function(){initNavTree('md_applications_zpc_readme_user.html',
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>ZPC translates the Unify Controller Language(UCL) into Z-Wave commands and communicates with Z-Wave devices in a Z-Wave network.</p>
-<h1><a class="anchor" id="autotoc_md213"></a>
+<h1><a class="anchor" id="autotoc_md216"></a>
 Installation</h1>
 <p>The ZPC is installed on a Debian Buster platform using the uic-zpc Debian package provided with the SDK.</p>
 <div class="fragment"><div class="line">apt install uic-zpc_&lt;version&gt;_armhf.deb</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md214"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md217"></a>
 Files</h2>
 <p>The Debian package of the ZPC contains the following files:</p>
 <table class="markdownTable">
@@ -113,7 +113,7 @@ Files</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">/usr/share/uic/rules  </td><td class="markdownTableBodyNone">Default location of mapping rules   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md215"></a>
+<h3><a class="anchor" id="autotoc_md218"></a>
 Configuration File</h3>
 <p>The configuration file is written in YAML and is used to set up the ZPC. The ZPC can dump the running configuration, which can be used as a starting point for the config file.</p>
 <p>Configuration file example:</p>
@@ -143,13 +143,13 @@ Configuration File</h3>
 <div class="line">  - rf_region:&#39;EU&#39;</div>
 <div class="line">  - serial:&#39;/dev/ttyUSB0&#39;</div>
 <div class="line">  - serial_log_file:&#39;&#39;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md216"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md219"></a>
 Database File</h3>
 <p>The ZPC uses a sqlite database for storing network information. The default location of the database is /var/lib/uic/database.db. The database must be located in a writable part of the file system. If the database is lost, the ZPC will lose vital information about the network and need to probe all nodes in the network.</p>
-<h1><a class="anchor" id="autotoc_md217"></a>
+<h1><a class="anchor" id="autotoc_md220"></a>
 Running ZPC</h1>
 <p>You can run the ZPC either by using the systemd service, that is installed through the Debian package, or by running the ZPC from the command line.</p>
-<h2><a class="anchor" id="autotoc_md218"></a>
+<h2><a class="anchor" id="autotoc_md221"></a>
 Running ZPC Using Systemd</h2>
 <p>Normally, the ZPC, which is installed as a systemd service, should be run as a service.</p>
 <p>You can start and stop the ZPC service with the systemctl command (see systemctl linux manual for details).</p>
@@ -157,7 +157,7 @@ Running ZPC Using Systemd</h2>
 <div class="line">sudo systemctl stop uic-zpc</div>
 </div><!-- fragment --><p>To see the logs of the ZPC when it runs as a service, use the following command:</p>
 <div class="fragment"><div class="line">journalctl -u uic-zpc.service</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md219"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md222"></a>
 Running ZPC From the Command Line</h2>
 <p>Running the ZPC from the command line provides a Command Line Interface (CLI) that supports various debugging commands. To get more information about the commands, type <code>help</code> in the CLI.</p>
 <p>These are the steps to run the ZPC from the command line:</p>
@@ -171,9 +171,9 @@ Running ZPC From the Command Line</h2>
 <p>Note that the default permissions for the ZPC database file located in /var/lib/uic/database.db is only writable for the <em>uic</em> system user (which is created upon installation). If you run the zpc as another user, select a different database location.</p>
 <p>For example,</p>
 <div class="fragment"><div class="line">zpc --zpc.serial /dev/ttyUSB0 --zpc.rf_region EU --datastore.file mydatabase.db --mapdir rules</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md220"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md223"></a>
 (Advanced) Configuring ZPC to Use TLS Certificate-Based Encryption</h3>
-<h4><a class="anchor" id="autotoc_md221"></a>
+<h4><a class="anchor" id="autotoc_md224"></a>
 Self Signed Certificate Generation</h4>
 <p>The following script can generate and self sign the necessary certificates for connection ZPC to MQTT broker in the directory format shown below.</p>
 <div class="fragment"><div class="line">scripts/tls-certificates-generation.sh &lt;broker IP/hostname&gt;</div>
@@ -191,7 +191,7 @@ Self Signed Certificate Generation</h4>
 <div class="line">    └── client.key</div>
 </div><!-- fragment --><p>Passing <code>--mqtt.cafile (ca/ca.crt)</code>, <code>--mqtt.certfile (client/client.crt)</code> and <code>--mqtt.keyfile (client/client.key)</code> enables the TLS support in ZPC.</p>
 <p>Having the config options: <code>"cafile" (client/ca.crt)</code>, <code>"certfile" (broker/broker.crt)</code> and <code>"keyfile" (broker/broker.key)</code> in Mosquitto Broker config file will make Broker communicate with ZPC with TLS encryption.</p>
-<h4><a class="anchor" id="autotoc_md222"></a>
+<h4><a class="anchor" id="autotoc_md225"></a>
 Broker Configurations</h4>
 <p>Configure the Mosquitto broker with the following parameters to enable TLS support. Broker can support TLS and non-TLS communication simultaneously on two different ports. For example, in the following mosquitto.conf, Mosquitto Broker will accept non-TLS communication on port 1883.</p>
 <p>While on port 8883 Mosquitto Broker will need ZPC to pass correct &ndash;mqtt.cafile, &ndash;mqtt.certfile and &ndash;mqtt.keyfile on command line to connect to TLS encrypted communication with ZPC.</p>
@@ -206,7 +206,7 @@ Broker Configurations</h4>
 <div class="line">certfile broker/broker.crt</div>
 <div class="line">keyfile broker/broker.key</div>
 <div class="line">require_certificate true</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md223"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md226"></a>
 ZPC command line options</h4>
 <h5>CA File</h5>
 <p>Path to file containing the PEM encoded CA certificate to connect to Mosquitto MQTT broker for TLS encryption </p><div class="fragment"><div class="line">--mqtt.cafile arg</div>
@@ -230,7 +230,7 @@ ZPC command line options</h4>
 <p>For example:</p>
 <div class="fragment"><div class="line">zpc  --log.level i --log.tag_level uic_component_fixtures:d,mqtt_client:d</div>
 </div><!-- fragment --><p>This will set the global log level to info but it enables the debug on the two components such as the following: mqtt_client and uic_component_fixtures.</p>
-<h1><a class="anchor" id="autotoc_md224"></a>
+<h1><a class="anchor" id="autotoc_md227"></a>
 Understanding how the ZPC Works</h1>
 <p>The purpose of this section is to explain the ZPC behavior and how to correlate frames seen on a Z-Wave Zniffer with operations performed by the ZPC.</p>
 <p>The ZPC performs network discovery and operation of for both listening and non listening devices using a software component called the attribute system.</p>
@@ -252,7 +252,7 @@ Understanding how the ZPC Works</h1>
 <p>Currently, when the ZPC sends a SET command with supervision encapsulation and the device reports the supervision state working, the ZPC will not reflect this on the MQTT side. The reported value will be updated on MQTT side when the supervision state OK/FAILED is received. </p>
 </blockquote>
 <p>The Z-Wave Wake up devices are supported by pausing node resolution when the device is sleeping, which means that if the temperature of a thermostat is changed multiple times while the device is sleeping, the ZPC will only send the latest change using thermostat setpoint command. The ZPC will send wake up no-more information when there is nothing more to resolve regarding the node.</p>
-<h1><a class="anchor" id="autotoc_md225"></a>
+<h1><a class="anchor" id="autotoc_md228"></a>
 Dotdot Cluster to Z-Wave Command Class Mapping</h1>
 <p>The ZPC maps dotdot clusters to Z-Wave command classes and vice versa. All maps are defined by a set of configuration files which the ZPC loads as boot. However, default files are installed in the folder /usr/share/uic/rules. The mapping file extension is *.uam which is short for Unified Attribute Map.</p>
 <p>The following table has a brief description of how ZCL clusters are mapped to Z-Wave command classes.</p>
@@ -282,7 +282,7 @@ Dotdot Cluster to Z-Wave Command Class Mapping</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">IASZone  </td><td class="markdownTableBodyNone">Battery  </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md226"></a>
+<h1><a class="anchor" id="autotoc_md229"></a>
 Migrating to ZPC from Z/IP Gateway</h1>
 <p>This section describes how to migrate to a ZPC from a Z/IP gateway. If migration from a third party gateway is desired, the first step in the migration process is to migrate to a Z/IP Gateway.</p>
 <p>To successfully migrate, the following Z/IP Gateway SDK tools are needed.</p><ul>
@@ -323,7 +323,7 @@ Migrating to ZPC from Z/IP Gateway</h1>
 <li>With the updated JSON file, a new database can be constructed with zpc_database_tool. <code>zpc_database_tool --datastore.file datastore.db --import modified_datastore.json</code></li>
 <li>You can now start the ZPC as usual. The ZPC will start probing all nodes, sleeping devices will be probed when they wake up.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md227"></a>
+<h2><a class="anchor" id="autotoc_md230"></a>
 ZPC Database JSON Example</h2>
 <div class="fragment"><div class="line">   {</div>
 <div class="line">  &quot;type&quot;: &quot;0x00000001&quot;,</div>
@@ -405,7 +405,7 @@ ZPC Database JSON Example</h2>
 <div class="line">    }</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md228"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md231"></a>
 Performing Backup and Restore</h1>
 <p>The backup and restore process works under the assumption that the controller firmware version for the backup and restore is identical.</p>
 <p>The following are the backup steps:</p><ul>
@@ -420,10 +420,10 @@ Performing Backup and Restore</h1>
 <li>Use zw_programmer to restore the NVM to the Z-Wave module. Copy a backup of the SQLite database to an active SQLite database.</li>
 <li>Start the ZPC again.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md229"></a>
+<h1><a class="anchor" id="autotoc_md232"></a>
 Performing Firmware Updates</h1>
 <p>The ZPC has the capability to perform Firmware Updates. It requires to run and configure the <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider</a> application.</p>
-<h2><a class="anchor" id="autotoc_md230"></a>
+<h2><a class="anchor" id="autotoc_md233"></a>
 UIID Construction</h2>
 <p>To upload an image for a Z-Wave node, compute a Unique Image Identifier (UIID) for this device.</p>
 <p>The UIID for the ZPC is a string that can be constructed using the following information:</p>
@@ -434,7 +434,7 @@ UIID Construction</h2>
 <li>The Firmware Target (Firmware Update Command Class)</li>
 </ul>
 <p>The string must be formatted using the following format: <b>ZWave-&lt;ManufacturerID&gt;-&lt;ProductType&gt;-&lt;ProductID&gt;-&lt;FirmwareTarget&gt;</b></p>
-<h2><a class="anchor" id="autotoc_md231"></a>
+<h2><a class="anchor" id="autotoc_md234"></a>
 UIID/UNID Association</h2>
 <p>When the ZPC interviews a node, it will publish the detected firmware targets under the UIID space in the OTA cluster: <code>ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/#</code></p>
 <p>For more details about available attributes under each UIID, see the the Unify specification - Common OTA FW Update Service chapter.</p>
@@ -443,7 +443,7 @@ UIID/UNID Association</h2>
 <div class="fragment"><div class="line">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-0000/CurrentVersion/Reported - {&quot;value&quot;: &quot;3.2.0&quot;}</div>
 <div class="line">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-0001/CurrentVersion/Reported - {&quot;value&quot;: &quot;3.2.0&quot;}</div>
 </div><!-- fragment --><p>UIID <em>ZWave-010f-1002-0b01-0000</em> can be used to firmware update target 0. UIID <em>ZWave-010f-1002-0b01-0001</em> can be used to firmware update target 1.</p>
-<h2><a class="anchor" id="autotoc_md232"></a>
+<h2><a class="anchor" id="autotoc_md235"></a>
 Version String Calculation</h2>
 <p>The version of a firmware is determined based on the data reported by the Z-Wave node using the Version Command Class.</p>
 <p>The version string will be composed of three decimal digits following <a href="https://semver.org/">semantic versioning</a>. By default, the version for a given firmware will be fetched in the Version Command Class, in the Version Report Command. Only the Major and Minor digits can be retrieved from this report.</p>
@@ -460,20 +460,20 @@ Version String Calculation</h2>
 <li>Application Version 3 (LSB) = 15</li>
 </ul>
 <p>The resulting version string will be *"3.14.15"*.</p>
-<h2><a class="anchor" id="autotoc_md233"></a>
+<h2><a class="anchor" id="autotoc_md236"></a>
 Triggering a Firmware Update</h2>
 <p>The ZPC will download the available images from the <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider</a> whenever a matching UIID (and optional UNID) is advertised as available.</p>
 <p>To initiate a firmware update, configure the <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider</a> with a compatible image.</p>
 <p>The ZPC will initiate a firmware update operation immediately and start publishing the transfer progress in OTA attributes under the UIID space in the OTA cluster.</p>
 <p>The ZPC is capable of performing any number of concurrent firmware updates. To avoid network congestion, configure the <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider</a> meta data to specify UIID and UNID to control when to apply the firmware of individual nodes.</p>
 <p>The <em>ApplyAfter</em> parameter can also be used to delay firmware transfers.</p>
-<h2><a class="anchor" id="autotoc_md234"></a>
+<h2><a class="anchor" id="autotoc_md237"></a>
 Aborting a Firmware Update</h2>
 <p>There is currently no way to abort an ongoing Firmware Update.</p>
-<h2><a class="anchor" id="autotoc_md235"></a>
+<h2><a class="anchor" id="autotoc_md238"></a>
 After a Successful Firmware Update</h2>
 <p>The ZPC will not automatically re-interview a node that was OTA firmware updated. An IoT Service must instruct the ZPC to perform a new node interview to discover the new capabilities and version information of a node.</p>
-<h2><a class="anchor" id="autotoc_md236"></a>
+<h2><a class="anchor" id="autotoc_md239"></a>
 Examples</h2>
 <p>This sections provides an example using the <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider</a> and <a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Developer GUI</a> to perform a firmware update of a PowerStrip sample application.</p>
 <p>First, make sure that the ZPC, <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider</a> and <a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Developer GUI</a> are running.</p>
@@ -519,7 +519,7 @@ Examples</h2>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported - {<span class="stringliteral">&quot;value&quot;</span>: <span class="stringliteral">&quot;Idle&quot;</span>}</div>
 </div><!-- fragment --><p>At that point, an IoT Service must interview the node again, and the new firmware data and capabilites will be available.</p>
 <p><img src="./doc/assets/img/dev_gui_node_interview_button.png" alt="Re-interview button in DevGUI" title="Re-interview button in DevGUI" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md237"></a>
+<h2><a class="anchor" id="autotoc_md240"></a>
 Possible Errors</h2>
 <p>There are a few possible errors described in the Unify specification. The <em>LastError</em> attribute indicates the status of the last Firmware Update/transfer attempt.</p>
 <p><img src="./doc/assets/img/dev_gui_possible_firmware_udpate_errors.png" alt="Errors during Firmware Update" title="Errors during Firmware Update" class="inline"/></p>
@@ -529,9 +529,9 @@ Possible Errors</h2>
 <li><b>Aborted</b> This error can happen if the transfer could not complete without a timeout.</li>
 </ul>
 <p>In the case of an abort, you can retry a Firmware Update by modifying the Image Provider list of images. Remove the UIID(/UNID) combination, wait for the image Provider to advertise that the image is no longer available, and modify back the image list with the desired UIID(/UNID) combination.</p>
-<h1><a class="anchor" id="autotoc_md238"></a>
+<h1><a class="anchor" id="autotoc_md241"></a>
 Z-Wave Certification Information</h1>
-<h2><a class="anchor" id="autotoc_md239"></a>
+<h2><a class="anchor" id="autotoc_md242"></a>
 Device Type and Role Type</h2>
 <p>The ZPC has a Generic Controller Device type and uses the following device classes.</p><ul>
 <li>GENERIC_TYPE_GENERIC_CONTROLLER</li>
@@ -542,7 +542,7 @@ Device Type and Role Type</h2>
 <li>Learn Mode</li>
 <li>Failed Replace</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md240"></a>
+<h2><a class="anchor" id="autotoc_md243"></a>
 Manufacturer-Specific Information</h2>
 <p>The ZPC uses the following manufacturer-specific information:</p><ul>
 <li>Manufacturer ID : 0x0000</li>
@@ -550,17 +550,17 @@ Manufacturer-Specific Information</h2>
 <li>Product ID : 0x0001</li>
 <li>Firmware ID : 0x0001</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md241"></a>
+<h2><a class="anchor" id="autotoc_md244"></a>
 Network Management Information</h2>
 <p>This product can be operated in any Z-Wave network with other Z-Wave-certified devices from other manufacturers. All mains operated nodes within the network will act as repeaters regardless of vendor to increase reliability of the network.</p>
-<h3><a class="anchor" id="autotoc_md242"></a>
+<h3><a class="anchor" id="autotoc_md245"></a>
 Network Management</h3>
 <p>The <a href="./md_applications_dev_ui_dev_gui_readme_user.html">Dev GUI User's Guide</a> describes how to perform the following operations:</p><ul>
 <li>Direct range and Network-Wide Inclusion (Add) of other nodes in the network.</li>
 <li>Direct range and Network-Wide Exclusion (remove) of other nodes (in any network).</li>
 </ul>
 <p>Learn mode and Controller replication are not available.</p>
-<h2><a class="anchor" id="autotoc_md243"></a>
+<h2><a class="anchor" id="autotoc_md246"></a>
 Association Command Class Information</h2>
 <p>The ZPC supports the following Association Groups </p><table class="markdownTable">
 <tr class="markdownTableHead">
@@ -568,7 +568,7 @@ Association Command Class Information</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">10  </td><td class="markdownTableBodyNone">Lifeline  </td><td class="markdownTableBodyNone">Lifeline reports.   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md244"></a>
+<h2><a class="anchor" id="autotoc_md247"></a>
 Multilevel Switch Command Class Control</h2>
 <p>The ZPC controls the Multilevel Switch Command Class. It is possible to set and see the current level of a multilevel switch supporting node.</p>
 <p>However, the model on which the Unify system and <a href="./md_applications_dev_ui_dev_gui_readme_user.html">Dev GUI</a> operate is based on The Dotdot model.</p>
@@ -578,14 +578,14 @@ Multilevel Switch Command Class Control</h2>
 <li>If OnOff is off, the Multilevel Switch value at the end node will be 0, no matter what the current level shows.</li>
 <li>If OnOff is on, the Multilevel Switch value at the end node will be according to the level setting.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md245"></a>
+<h2><a class="anchor" id="autotoc_md248"></a>
 Indicator Command Class Information</h2>
 <p>The ZPC supports identifying itself. The log output will indicate that a blinking script is invoked. No visible LED is available for this purpose.</p>
 <div class="fragment"><div class="line">&lt;datetime&gt; &lt;d&gt; [zwave_command_class_indicator] calling blinker on_time:600ms, off_time:200ms, num_cycles:3</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md246"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md249"></a>
 Device Reset Locally Command Class Information</h2>
 <p>The ZPC can be reset to default. The <a href="./md_applications_dev_ui_dev_gui_readme_user.html">Dev GUI User guide</a> details how to request the ZPC to initiate a reset procedure.</p>
-<h2><a class="anchor" id="autotoc_md247"></a>
+<h2><a class="anchor" id="autotoc_md250"></a>
 Command Class Information</h2>
 <p>The following table shows supported and controlled Z-Wave Command Classes by the ZPC.</p>
 <table class="markdownTable">
@@ -658,14 +658,14 @@ automatically by the controller.   </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Security 2  </td><td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">Unencrypted  </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md248"></a>
+<h2><a class="anchor" id="autotoc_md251"></a>
 SmartStart Information</h2>
 <p>The ZPC supports including other nodes using SmartStart. Detailed steps to manipulate the SmartStart list are given in the <a href="./md_applications_dev_ui_dev_gui_readme_user.html">Dev GUI User's Guide</a>.</p>
-<h2><a class="anchor" id="autotoc_md249"></a>
+<h2><a class="anchor" id="autotoc_md252"></a>
 Z-Wave Long Range Support</h2>
 <p>The ZPC can operate as a Z-Wave Long Range controller, operating both on Z-Wave and Z-Wave Long Range PHY/MAC.</p>
 <p>Steps to include Z-Wave Long Range nodes using the ZPC are described in the <a href="./md_applications_dev_ui_dev_gui_readme_user.html">Dev GUI User's Guide</a>.</p>
-<h2><a class="anchor" id="autotoc_md250"></a>
+<h2><a class="anchor" id="autotoc_md253"></a>
 SmartStart Supported Protocol Detection</h2>
 <p>The ZPC can perform SmartStart inclusions both for Z-Wave and Z-Wave Long Range nodes.</p>
 <p>The list of supported protocols for a DSK entry is not advertised in the Unify SmartStart list, which means that the ZPC, in some cases, needs to discover which protocols are supported/in range for the SmartStart entry.</p>
@@ -686,7 +686,7 @@ SmartStart Supported Protocol Detection</h2>
 <div class="plantumlgraph">
 <object type="image/svg+xml" data="inline_umlgraph_3.svg"></object>
 </div>
-<h1><a class="anchor" id="autotoc_md251"></a>
+<h1><a class="anchor" id="autotoc_md254"></a>
 Transitioning from Z/IP Gateway + Z-Ware</h1>
 <p>The ZPC provides a subset of Z-Wave features compared to the Z/IP Gateway.</p>
 <ul>
@@ -708,7 +708,7 @@ Transitioning from Z/IP Gateway + Z-Ware</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Aug 24 2021 09:11:37 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Mon Aug 30 2021 13:07:52 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

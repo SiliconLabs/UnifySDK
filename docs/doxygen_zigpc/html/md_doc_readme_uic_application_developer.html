@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
   </td>
  </tr>
@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('md_doc_readme_uic_application_develope
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This guide is targeted for new Unify application developers who intend to use the libuic library. It also provides a quick-start guide to make a Unify application using the Unify shared library (C).</p>
-<h1><a class="anchor" id="autotoc_md349"></a>
+<h1><a class="anchor" id="autotoc_md351"></a>
 Creating a New Application</h1>
 <ol type="1">
 <li>Create a new folder in <code>applications</code> folder e.g., <code>applications/my_uic_application</code>.</li>
@@ -158,7 +158,7 @@ ninja
 ninja deb
 </pre></li>
 </ol>
-<h1><a class="anchor" id="autotoc_md350"></a>
+<h1><a class="anchor" id="autotoc_md352"></a>
 Unify SDK Library (Unify Main) and IPC</h1>
 <p>The Unify SDK library is implemented as an event-driven system. It runs in a single thread and uses the proto-threads from the Contiki OS as an event queue system. The event system is centered around a single select call, which monitors all external file descriptors and is responsible for triggering a timer, which is implemented in the Unify Main component. This design was chosen to avoid concurrency issues between threads.</p>
 <p>The following sequence diagram shows how the Unify Main loop triggers events based on file descriptors in <code>process1</code> and timers in <code>process2</code>.</p>
@@ -170,7 +170,7 @@ Unify SDK Library (Unify Main) and IPC</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Aug 24 2021 09:11:39 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

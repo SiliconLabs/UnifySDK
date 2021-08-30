@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
   </td>
  </tr>
@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('md_components_uic_dotdot_dotdot-xml_RE
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Releases are tied to a specific revision of the Zigbee Cluster Library (ZCL). These files are released from a git repo which is tagged based on the release version of the ZCL. At the time of the initial conversion, the ZCL document was at release 7. Multiple releases of the XML files may be made against a single ZCL version. the tagging mechanism is designed to handle this and follows the format zcl &lt;ZCL Version&gt;. &lt;XML Release Version&gt; where ZCL Version is the version of the ZCL document and the XML Release Version is a counter based on the source document which starts from 0. This means the initial release tag for ZCLr7 is zcl7.0. Subsequent releases of XML against ZCLr7 will be zcl7.1, zcl7.2, etc. When a new ZCL, such as ZCLr8 is released, the tags will be come zcl8.0, zcl8.1, etc.</p>
-<h1><a class="anchor" id="autotoc_md73"></a>
+<h1><a class="anchor" id="autotoc_md75"></a>
 Eclipse Setup</h1>
 <p>To configure eclipse to properly work with the XML files you'll need a version of eclipse that supports the XML Editors and Tools. You can <a href="https://www.eclipse.org/downloads/packages/compare">compare different versions</a>. Once installed, follow the instructions below to get set up for validation. These assume you've already got a local copy of the GIT repo checked out.</p>
 <ol type="1">
@@ -103,7 +103,7 @@ Eclipse Setup</h1>
 <li>Open "library.xml"</li>
 <li>Right click, "Validate"</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md74"></a>
+<h1><a class="anchor" id="autotoc_md76"></a>
 Converting Clusters</h1>
 <p>There should be a base file for each cluster available in the project, produced by scraping the word documents for the ZCL. These files need to be reviewed by a human and edited as necessary. The process to do this at a high level is as follows</p>
 <ol type="1">
@@ -112,13 +112,13 @@ Converting Clusters</h1>
 <li>Commit when you're done and they validate</li>
 <li>Make a pull request</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md75"></a>
+<h2><a class="anchor" id="autotoc_md77"></a>
 library.xml</h2>
 <p>Each file should be referenced in library.xml as it is reviewd. At the bottom of the file you'll see some statements like the following.</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">xi:include</span> <span class="keyword">href</span>=<span class="stringliteral">&quot;global.xml&quot;</span> <span class="keyword">parse</span>=<span class="stringliteral">&quot;xml&quot;</span> /&gt;</div>
 <div class="line">&lt;<span class="keywordtype">xi:include</span> <span class="keyword">href</span>=<span class="stringliteral">&quot;Basic.xml&quot;</span> <span class="keyword">parse</span>=<span class="stringliteral">&quot;xml&quot;</span> /&gt;</div>
 </div><!-- fragment --><p>Duplicate the line for Basic.xml for your cluster, and insert it into the correct position based on the ordering in the ZCL document.</p>
-<h2><a class="anchor" id="autotoc_md76"></a>
+<h2><a class="anchor" id="autotoc_md78"></a>
 Clusters</h2>
 <p>Each base cluster is defined with the following basic structure</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">zcl:cluster</span> <span class="keyword">xmlns:zcl</span>=<span class="stringliteral">&quot;http://zigbee.org/zcl/clusters&quot;</span></div>
@@ -137,7 +137,7 @@ Clusters</h2>
 <p>The type:type definition allows for the definition of complex types, or types which are used by multiple attributes and/or commands. This must be used whenever an enumeration, bitmap, etc. is reused. For more information see the Types section below.</p>
 <p>The server and client define the attributes and commands that comprise the respective server and client sides of a cluster. For more information see the Clusters section below.</p>
 <p>The tags section allows for the definition of tags at the cluster level which are then referenced by the commands which the tag may be used to extend. For more information see the Tags section below.</p>
-<h2><a class="anchor" id="autotoc_md77"></a>
+<h2><a class="anchor" id="autotoc_md79"></a>
 Cluster Inheritance</h2>
 <p>Clusters may inherit from a base cluster. Each derived cluster is defined with the following basic structure</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">zcl:derivedCluster</span> <span class="keyword">xmlns:zcl</span>=<span class="stringliteral">&quot;http://zigbee.org/zcl/clusters&quot;</span></div>
@@ -152,14 +152,14 @@ Cluster Inheritance</h2>
 <div class="line">&lt;/<span class="keywordtype">zcl:derivedCluster</span>&gt;</div>
 </div><!-- fragment --><p>The classification element is required, all of the others can be omitted if there is no content. The classification information is given in the ZCL document and must include the picsCode.</p>
 <p>The server and client allow the attributes and commands that are modified by the respective server and client sides of a cluster to be expressed. For more information see the Derived Clusters section below.</p>
-<h2><a class="anchor" id="autotoc_md78"></a>
+<h2><a class="anchor" id="autotoc_md80"></a>
 Naming</h2>
 <p>All names in the XML must adhere to regular expression <code>[A-Za-z0-9\-]*</code>. This means that in general, names should be such that the first letter of each work is upper-case, and the rest of the word lower-case. There should also be no spaces in the name.</p>
-<h1><a class="anchor" id="autotoc_md79"></a>
+<h1><a class="anchor" id="autotoc_md81"></a>
 Types</h1>
 <p>Types can be defined in the XML. There is the opportunity to create both base types and derived types. Then restrictions may be used to properly form the type. The minimum required set of fields for an attribute definition are id, name, and short. The discrete attribute is optional, and if omitted defaults to false which indicates the data type is considered to be analog. Finally, an inheritsFrom attribute indicates the short value for the attribute from which the attribute derives.</p>
 <p>Examples can be seen in the library.xml which defines the base data types and some subclassed types such as the zclStatus type. More advanced mechanisms such as multi-element fields are visible in the global.xml which defines multi-element types which are used for repetition in messages like the Read Attributes Response.</p>
-<h2><a class="anchor" id="autotoc_md80"></a>
+<h2><a class="anchor" id="autotoc_md82"></a>
 Bitmaps</h2>
 <p>Bitmap types can be expanded to subfields in the schema using the bitmap tag, which allows a set of fields to be specified using a mask and shift. A bitmap is defined as follows:</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">attribute</span> <span class="keyword">id</span>=<span class="stringliteral">&quot;0014&quot;</span> <span class="keyword">name</span>=<span class="stringliteral">&quot;DisableLocalConfig&quot;</span> <span class="keyword">type</span>=<span class="stringliteral">&quot;map8&quot;</span> <span class="keyword">writable</span>=<span class="stringliteral">&quot;true&quot;</span> <span class="keyword">default</span>=<span class="stringliteral">&quot;0&quot;</span>&gt;</div>
@@ -183,7 +183,7 @@ Bitmaps</h2>
 <li>MyEnum: (0000 1010 &amp; 0000 1100) &gt;&gt; 2 = 0000 1000 &gt;&gt; 2 = 0000 0010 = 2 (ThirdValue)</li>
 </ul>
 <p>Each element specified may have the restrictions listed below.</p>
-<h2><a class="anchor" id="autotoc_md81"></a>
+<h2><a class="anchor" id="autotoc_md83"></a>
 Restrictions</h2>
 <p>There are a number of restrictions available for types. These build the basis of the typing system and are as follows</p>
 <ul>
@@ -212,24 +212,24 @@ Restrictions</h2>
 <li>special - specifies a special value, see the Special Values section below</li>
 <li>invalid - species an invalid value as defined in the Zigbee specification</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md82"></a>
+<h2><a class="anchor" id="autotoc_md84"></a>
 Enumerations</h2>
 <p>Enumerations are defined as a value and a short name. The short name is intended to be such that it could be used as a constant name in code. Verbose descriptions are not permitted, and instead a descriptive name should be used. The value is specified as a HexBinary, which means that it's specified in Hex, and must be expressed as a multiple of two hexadecimal characters.</p>
 <p>In some cases, the spec defines a range of enumeration values for use by a manufacturer. Sometimes this is a significant range which cannot easily be represented by making multiple enumeration statements. In this case, the enumeratedRange restriction can be used to specify a min and max value of the range along with a name.</p>
-<h2><a class="anchor" id="autotoc_md83"></a>
+<h2><a class="anchor" id="autotoc_md85"></a>
 Special Values</h2>
 <p>In some cases, a special value is defined by the Zigbee specification. In these cases, the special value along with a descriptor should be defined using this tag. Special values take precedence over other restrictions imposed (e.g. a special value may fall outside the min/max range for the attribute).</p>
-<h2><a class="anchor" id="autotoc_md84"></a>
+<h2><a class="anchor" id="autotoc_md86"></a>
 Invalid Values</h2>
 <p>For some data types of fields, a specific value is defined to indicate the data contained is invalid / unused / absent / ignored.</p>
-<h2><a class="anchor" id="autotoc_md85"></a>
+<h2><a class="anchor" id="autotoc_md87"></a>
 anyType</h2>
 <p>The anyType type is defined in the global commands XML as this construct only applies to Zigbee pro. It must never be used in a cluster specific command.</p>
 <p>The type is defined as two field, the first is the Type, which is required to be a type name. The second is the Value which is defiend as type unk as the type is unknown without the information provided by Type. When interpreting data based on this type, it should be done using the details of the type named in the Type field.</p>
-<h2><a class="anchor" id="autotoc_md86"></a>
+<h2><a class="anchor" id="autotoc_md88"></a>
 ReportableChange</h2>
 <p>The ReportableChange field is specified as unk, but must be interpreted based on the value of AttributeType in each of the commands in which the field is included.</p>
-<h1><a class="anchor" id="autotoc_md87"></a>
+<h1><a class="anchor" id="autotoc_md89"></a>
 Clusters</h1>
 <p>Each cluster is defined as a client / server pair. Inside each side of these pairs exists a set of attributes and/or commands. Each side is required to implement several global attributes. There may be additional attributes and commands defined. See the Attributes and Commands sections below for more information.</p>
 <p>A cluster also has some additional information such as id, name, and how it is classified.</p>
@@ -243,7 +243,7 @@ Clusters</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">revision  </td><td class="markdownTableBodyNone">true  </td><td class="markdownTableBodyNone">The cluster revision described by this document   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md88"></a>
+<h2><a class="anchor" id="autotoc_md90"></a>
 Classification</h2>
 <p>The classification tag contains information about the role the cluster takes and any hierarchy information.</p>
 <table class="markdownTable">
@@ -256,7 +256,7 @@ Classification</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">primaryTransaction  </td><td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">For application clusters, the primary transaction type. Defaults to 1   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md89"></a>
+<h2><a class="anchor" id="autotoc_md91"></a>
 Attributes</h2>
 <p>Attribute definitions look like the following.</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">attributes</span>&gt;</div>
@@ -305,7 +305,7 @@ Attributes</h2>
 <td class="markdownTableBodyNone">deprecated  </td><td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">Indicates that an attribute has been deprecated   </td></tr>
 </table>
 <p>Inside an attribute definition, either a bitmap or a series of restrictions may be specified. An example of restrictions can be seen in the example attribute definition for <code>GenericDevice-Class</code>. For an example of bitmap definitions, see the Bitmaps section.</p>
-<h2><a class="anchor" id="autotoc_md90"></a>
+<h2><a class="anchor" id="autotoc_md92"></a>
 Commands</h2>
 <p>Command definitions look like the following.</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">commands</span>&gt;</div>
@@ -358,7 +358,7 @@ Commands</h2>
 <td class="markdownTableBodyNone">deprecated  </td><td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">Indicates that a command field has been deprecated   </td></tr>
 </table>
 <p>Similar to an attribute, a field may contain definitions of bitmaps or restrictions.</p>
-<h1><a class="anchor" id="autotoc_md91"></a>
+<h1><a class="anchor" id="autotoc_md93"></a>
 Derived Clusters</h1>
 <p>Each derived cluster is defined as a client / server pair. Inside each side of these pairs exists modifiers to the base cluster set of attributes and/or commands. Additional attributes and commands may not be defined, but must be added to the base cluster. See the Derived Attributes and Derived Commands sections below for more information.</p>
 <p>A cluster also has some additional information such as id, name, and how it is classified.</p>
@@ -374,7 +374,7 @@ Derived Clusters</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">inheritsFrom  </td><td class="markdownTableBodyNone">true  </td><td class="markdownTableBodyNone">Specifies the name of the cluster from which this cluster inherits   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md92"></a>
+<h2><a class="anchor" id="autotoc_md94"></a>
 Classification</h2>
 <p>The classification tag contains information about the role the cluster takes and any hierarchy information.</p>
 <table class="markdownTable">
@@ -387,7 +387,7 @@ Classification</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">primaryTransaction  </td><td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">For application clusters, the primary transaction type. Defaults to 1   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md93"></a>
+<h2><a class="anchor" id="autotoc_md95"></a>
 Derived Attributes</h2>
 <p>Derived attribute modifications look like the following.</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">attributes</span>&gt;</div>
@@ -408,7 +408,7 @@ Derived Attributes</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">requiredIf  </td><td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">Allows for an expression to be implemented which indicates the conditions in which an attribute is mandatory. Defaults to false   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md94"></a>
+<h2><a class="anchor" id="autotoc_md96"></a>
 Derived Commands</h2>
 <p>Derived commands definitions look like the following.</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">commands</span>&gt;</div>
@@ -430,7 +430,7 @@ Derived Commands</h2>
 <td class="markdownTableBodyNone">requiredIf  </td><td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">Allows for an expression to be implemented which indicates the conditions in which a command is mandatory. Defaults to the value specified in the base cluster.   </td></tr>
 </table>
 <p>A derived command may specify additional tags which may be included. It may also specify that they are required (by default tags are optional).</p>
-<h1><a class="anchor" id="autotoc_md95"></a>
+<h1><a class="anchor" id="autotoc_md97"></a>
 Arrays</h1>
 <p>Conversion of an array in a command field is done using the following process.</p>
 <ol type="1">
@@ -464,14 +464,14 @@ Arrays</h1>
 <li>If there is no field that specifies the number of entries, then this means that they must consume the rest of the message. This is indicated by setting the arrayLengthSize to 0. <pre class="fragment">&lt;field name="MyArray" type="uint8" array="true" arrayLengthSize="0" /&gt;
 </pre></li>
 </ol>
-<h1><a class="anchor" id="autotoc_md96"></a>
+<h1><a class="anchor" id="autotoc_md98"></a>
 Expressions</h1>
 <p>Logical expressions in the XML SHALL be expressed using the operators specified in <a href="https://www.w3.org/TR/1999/REC-xpath-19991116/#section-Expressions">XPath 1.0</a>. Specifically, section 3. This provides the operators or, and, =, !=, &lt;=, &lt;, &gt;=, &gt;. References to other fields in a command are done through name. Sub-elements in a bitmap may also be referenced using dot notation (ie, field.bitmapItem).</p>
 <p>In addition, the following functions are available for expressions</p>
 <p>| Function | Description | | implements(X) | Returns true when a specific implementation implements the attribute or command named by X. Uses the name, not the id | | min(X, Y, ...) | Returns the minimum value of the provided arguments. May take numeric literals or attribute names as references. | | max(X, Y, ...) | Returns the maximum value of the provided arguments. May take numeric literals or attribute names as references. | | revision() | Returns the revision of the cluster for which an attribute is implemented. In the global context, this is interpreted as the value of the specific cluster into which the global attribute or command has been inserted. |</p>
-<h1><a class="anchor" id="autotoc_md97"></a>
+<h1><a class="anchor" id="autotoc_md99"></a>
 Patterns</h1>
-<h2><a class="anchor" id="autotoc_md98"></a>
+<h2><a class="anchor" id="autotoc_md100"></a>
 Sets of dependent attributes / commands</h2>
 <p>In some clusters, there are a number of optional attributes or commands that are specified as having to be implemented together when implemented. The procedure used to capture this in XML is as follows.</p>
 <ol type="1">
@@ -482,7 +482,7 @@ Sets of dependent attributes / commands</h2>
 <p class="startli">&lt;attribute id="0001" name="Attribute2" ... requiredIf="implements(Attribute1)" /&gt;</p>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md99"></a>
+<h2><a class="anchor" id="autotoc_md101"></a>
 Fields in a Command</h2>
 <p>Below is an example of optional fields in a command using the presentIf capabilities. It's implemented as a type because it's required to be repeated, etc.</p>
 <div class="fragment"><div class="line">&lt;<span class="keywordtype">type:type</span> <span class="keyword">id</span>=<span class="stringliteral">&quot;ff&quot;</span> <span class="keyword">short</span>=<span class="stringliteral">&quot;configureReportingRecord&quot;</span> <span class="keyword">name</span>=<span class="stringliteral">&quot;Attribute Reporting Configuration Record&quot;</span>&gt;</div>
@@ -498,10 +498,10 @@ Fields in a Command</h2>
 <div class="line">    &lt;/<span class="keywordtype">type:sequence</span>&gt;</div>
 <div class="line">  &lt;/<span class="keywordtype">restriction</span>&gt;</div>
 <div class="line">&lt;/<span class="keywordtype">type:type</span>&gt;</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md100"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md102"></a>
 Tags</h1>
 <p>Tags allow for the extension of an existing command. A tag is defined as an identifier, a type and a name. It can then be added to some or all of the commands that exist in the cluster. Tags are created in the tags section which follows the cluster side definitions. A command may then reference the tags that may be used with it. An example may be seen in the groups cluster, specifically the AddGroup command.</p>
-<h1><a class="anchor" id="autotoc_md101"></a>
+<h1><a class="anchor" id="autotoc_md103"></a>
 Viewing As HTML</h1>
 <p>The library.xml field has a stylesheet associated which can generate a HTML representation of the ZCL Library. This can be accessed by running the following python command inside the directory. The &lt;port&gt; attribute indicates the port you want to run on.</p>
 <p>python -m SimpleHTTPServer &lt;port&gt;</p>
@@ -512,7 +512,7 @@ Viewing As HTML</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Aug 24 2021 09:11:40 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Mon Aug 30 2021 13:07:55 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

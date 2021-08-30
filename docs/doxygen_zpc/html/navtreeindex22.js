@@ -1,5 +1,7 @@
 var NAVTREEINDEX22 =
 {
+"structmqtt__client.html#a9372f0d22c22fe095187553d19bde7b8":[24,0,38,44],
+"structmqtt__client.html#a96613839e4f20dce40846251c96be739":[24,0,38,47],
 "structmqtt__client.html#a9788e50da4e46fa57e47eb4f91df8297":[24,0,38,26],
 "structmqtt__client.html#a9d95b991adfba3c6c9d1066e4053edbf":[24,0,38,15],
 "structmqtt__client.html#aa04bdd74835d9ab8b757bb3268b2efd2":[24,0,38,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX22 =
 "structuic__main__ext__fd__registration__t.html#a752d1c37e6b7073b2c1c5bc192abfa11":[22,13,2,1,1],
 "structuic__main__ext__fd__registration__t.html#ad80c80226d74072d5e0077abf2d443e1":[22,13,2,1,0],
 "structuic__main__ext__fd__registration__t.html#ad832a9e027cea70af0978a957b49ae5e":[22,13,2,1,2],
-"structuic__ota_1_1meta__t.html":[24,0,2,0],
-"structuic__ota_1_1meta__t.html#a009d6b9aeba385a79978c5ef2dfa5893":[24,0,2,0,0],
-"structuic__ota_1_1meta__t.html#a189bd743e82b2d22fc01ca94fab43f17":[24,0,2,0,2]
+"structuic__ota_1_1meta__t.html":[24,0,2,0]
 };

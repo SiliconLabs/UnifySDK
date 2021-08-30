@@ -1,6 +1,10 @@
 # ZPC Release Notes
 This document describes the changes between the last released ZPC and the current release.
 
+## [1.0.1] - Aug 2021
+### Fixed
+* Build issues
+
 ## [1.0.0] - Aug 2021
 ### Added
 * Implementation of Unify specification 1.0

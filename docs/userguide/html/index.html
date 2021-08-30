@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
   </td>
  </tr>
@@ -199,18 +199,16 @@ Prerequisites</h2>
 <p>If these prerequisites are not fulfilled, follow the setup instructions in the <a href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up">Official Raspberry Pi User Guide</a>, and ensure a supported radio module is attached to your RPi4.</p>
 <h2><a class="anchor" id="autotoc_md12"></a>
 Installation</h2>
-<p>First, copy the Unify SDK to your RPi4 and login via ssh:</p>
-<div class="fragment"><div class="line">scp uic-sdk_&lt;version&gt;.zip pi@&lt;pi_address&gt;:/home/pi</div>
+<p>First, download the released debian packages from the github <a href="https://github.com/SiliconLabs/UnifySDK/releases">release page</a>, and place them in a folder called <code>deb-packages</code>.</p>
+<p>Copy all the packages to your RPi4 and login via ssh:</p>
+<div class="fragment"><div class="line">scp -r deb-packages pi@&lt;pi_address&gt;:/home/pi</div>
 <div class="line">ssh pi@&lt;pi_address&gt;</div>
-</div><!-- fragment --><p>&lt;version&gt; is the current Unify release version, and &lt;pi_address&gt; is the address of your RPi4.</p>
-<p>Once logged into the Raspberry Pi, the SDK must be extracted using the following unzip command:</p>
-<div class="fragment"><div class="line">unzip uic-sdk_&lt;version&gt;.zip</div>
-</div><!-- fragment --><p>The easiest way to install the Unify components on the Raspberry Pi is to install all packages using the apt command as this will also fetch dependencies:</p>
+</div><!-- fragment --><p>&lt;pi_address&gt; is the address of your RPi4.</p>
+<p>Once logged into the Raspberry Pi, the easiest way to install the Unify components on the Raspberry Pi is to install all packages using the apt command as this will also fetch dependencies:</p>
 <div class="fragment"><div class="line">curl -s http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key | sudo apt-key add -</div>
 <div class="line">sudo curl -s  http://repo.mosquitto.org/debian/mosquitto-buster.list -o /etc/apt/sources.list.d/mosquitto-buster.list</div>
 <div class="line">sudo apt update</div>
 <div class="line">sudo apt install mosquitto mosquitto-clients</div>
-<div class="line">cd uic-sdk_&lt;version&gt;</div>
 <div class="line">sudo apt install ./deb-packages/*.deb</div>
 </div><!-- fragment --><p>Use <code>sudo apt reinstall ./deb-packages/*.deb</code> to update previously installed packages to a newer version. Repeated use of <code>apt install</code> has been known to skip updating some packages.</p>
 <h2><a class="anchor" id="autotoc_md13"></a>
@@ -224,14 +222,19 @@ Evaluation</h2>
 <p>The Unify dev_ui can be accessed from a browser on <a href="http://raspberrypi.local:3000">http://raspberrypi.local:3000</a>.</p>
 <p><em>Note</em> that the Unify user interface needs TCP access to the port 3000 and 1337 on the Raspberry Pi.</p>
 <p>See the <a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Dev-UI manual</a> for more information about using this interface.</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Building</h2>
+<p>Use the command following command to get the latest sources. </p><div class="fragment"><div class="line">git clone https://github.com/SiliconLabs/UnifySDK.git</div>
+</div><!-- fragment --><p>The sources can also be downloaded from a .tar.gz file on the github <a href="https://github.com/SiliconLabs/UnifySDK/releases">release page</a>.</p>
+<p>Please read the <code>Developer guides</code> for each component on how to build. </p>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Communication Overview</h1>
 <p>All individual Unify components communicate via MQTT. In this reference implementation, the Mosquitto MQTT broker is used which does not support clustering. As a result, all nodes connect to a single central broker.</p>
 <p>MQTT implements a publisher-subscriber model, where all payloads are published to topics to which zero, one, or many clients can subscribe to. By default, publishers can publish to any topic and all subscribers can subscribe to any topic. MQTT has the notion of access-control but that functionality is currently not used by Unify.</p>
 <p>A publisher does not get notified (by the broker) if a subscriber has received its message. All QoS functionality is handled by the broker.</p>
 <p>MQTT has the notion of message-retention, i.e., a message can be retained on a topic and delivered to any future subscribers. Only a single message is retained on a given topic at a time. Publishing an MQTT-message with an empty (zero bytes) payload to a topic will clear its previously retained message.</p>
 <p>In Unify, all message payloads are JSON-objects. Some of the Unify topics (e.g., commands) may not require any data, but they will require at least an empty JSON object (e.g., {}).</p>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 Communication Use Cases (Advanced)</h1>
 <p>The purpose of this section is to give advanced users information about the communication flow between the Unify components and the physical IoT devices. A couple of use cases are provided with sequence diagrams describing the frame flow. The examples require the Mosquitto command-line utilities to be installed.</p>
 <p>For a more basic introduction, see the Dev-UI.</p>
@@ -274,7 +277,7 @@ Including a Device</h2>
 <div class="line">    &quot;State&quot;: &quot;idle&quot;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>The device has now been included.</p>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 Turning on a Light</h2>
 <p>After this device has been included, it can be operated by sending the OnOff cluster commands. For example, the following topic and payload will turn on the light:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t ucl/by-unid/zw-C6739552-0003/Commands/OnOff/On -m &#39;{}&#39;</div>
@@ -296,7 +299,7 @@ How To Make A New IoT Service</h1>
 <li>Config System. The config system implements parsing of config files and command line arguments. See the Unify Library Framework/Config System in Unify Documentation for details.</li>
 </ol>
 <p>The UPVL and ANGEL applications use the shared components and are good examples to peruse. They can be found in the Unify source code in the <code>applications/angel/</code> and <code>applications/upvl/</code> directories.</p>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 System Requirements</h1>
 <p>The Unify SDK is at the moment only implemented for the Linux OS. The table below shows the resource usage of the individual components measured using <a href="https://valgrind.org/">Valgrind</a> on a i686 architecture, compiled without debugging information.</p>
 <table class="markdownTable">
@@ -326,10 +329,10 @@ System Requirements</h1>
 <li>libboost-log1.67.0</li>
 <li>libboost-program-options1.67.0</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md20"></a>
 Porting the Unify SDK</h1>
 <p>Porting the Unify SDK to new platform using Debian Linux should be straight forward. However, if components are ported to other Linux distributions it may be necessary to update the startup scripts of the components. The Debian packages provided with the Unify SDK all uses the system service <code>systemd</code> which takes care of startup and shutdown of the components. For example, the file <a href="applications/zpc/scripts/systemd/uic-zpc.service">uic-zpc.service</a> is as systemd config script. When porting to a new Linux system the systemd config files should be used for reference. It is very important that all the Unify components runs as a dedicated system user to prevent attackers from compromising the entire system. Also note that most components need write access to parts of the filesystem. The default path for writing files is <code>/var/lib/uic</code>. </p>
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md21"></a>
 FAQ</h1>
 <ul>
 <li><em>How can I see if the Unify components are running?</em><br  />
@@ -405,7 +408,7 @@ FAQ</h1>
 <li><em>My device shows up with more clusters than expected!</em><br  />
  This is intended behavior. A protocol cluster can overlap in functionality with multiple UCL clusters. Rather then mapping to one, The Unify gateway exposes the protocol cluster to multiple clusters. </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 Development</h2>
 <ul>
 <li><em>Can I build with Rust's cargo manually?</em><br  />
@@ -416,24 +419,24 @@ Development</h2>
 <li><em>Is mac supported for developing?</em><br  />
  Our software should build and run on a mac machine. However, it is not officially supported. </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md22"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 ZPC</h2>
 <ul>
 <li><em>ZPC complains about etc/uic/database.db permissions, How do I fix it?</em><br  />
  This means your probably running the ZPC as an executable and not as a <code>systemd</code> service. Advised is to run ZPC with a database path that is writable in this case: <div class="fragment"><div class="line">/usr/bin/zpc --datastore.file ~/zpc.db</div>
 </div><!-- fragment --></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md23"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 UPVL - ANGEL - IMAGE_PROVIDER</h2>
 <ul>
 <li><em>Inclusion of a device keeps failing</em> try to reset the UPVL database: <div class="fragment"><div class="line">sudo systemctl stop uic-upvl &amp;&amp; rm /var/lib/uic/upvl.db &amp;&amp; sudo systemctl start uic-upvl</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md24"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 License</h1>
 <p><b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b></p>
 <p>The licensor of this software is Silicon Laboratories Inc. Your use of this software is governed by the terms of Silicon Labs Master Software License Agreement (MSLA) available at www.silabs.com/about-us/legal/master-software-license-agreement. This software is distributed to you in Source Code format and is governed by the sections of the MSLA applicable to Source Code.</p>
-<h1><a class="anchor" id="autotoc_md25"></a>
+<h1><a class="anchor" id="autotoc_md26"></a>
 Third party libraries and code</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -463,7 +466,7 @@ Third party libraries and code</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Aug 24 2021 09:11:37 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Mon Aug 30 2021 13:07:52 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

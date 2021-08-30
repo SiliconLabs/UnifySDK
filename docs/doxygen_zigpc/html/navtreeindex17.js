@@ -1,5 +1,7 @@
 var NAVTREEINDEX17 =
 {
+"structmessage__queue__element__t.html#a115cef721788d07f3f25cdfc6248419a":[24,0,20,0],
+"structmessage__queue__element__t.html#a612573186a832a0d25d70fed8477a748":[24,0,20,2],
 "structmessage__queue__element__t.html#a926055b89ca5b86b2345104b75be0c8d":[24,0,20,1],
 "structmessage__queue__element__t.html#ae3b7892a7f0916f2db52f8507935db11":[24,0,20,3],
 "structmqtt__client.html":[24,0,21],
@@ -247,7 +249,5 @@ var NAVTREEINDEX17 =
 "structzigpc__gateway__dispatch__event.html#aa86fc26317cb5bc9f5457fde574f7699":[24,0,80,1],
 "structzigpc__gateway__dispatch__event.html#acd68721cee93578e7865d10a5abbb8ae":[24,0,80,3],
 "structzigpc__gateway__dispatch__event.html#af25f3899179bb9718192b82c7ed757c0":[24,0,80,0],
-"structzigpc__gateway__dispatch__init__report__t.html":[24,0,81],
-"structzigpc__gateway__dispatch__init__report__t.html#a722c1aea8ab6a4e35311316ee81bf393":[24,0,81,4],
-"structzigpc__gateway__dispatch__init__report__t.html#a7fb6671a2049a5dc0644e60324d05872":[24,0,81,2]
+"structzigpc__gateway__dispatch__init__report__t.html":[24,0,81]
 };
