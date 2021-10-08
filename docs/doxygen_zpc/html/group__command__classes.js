@@ -12,6 +12,7 @@ var group__command__classes =
     [ "Binary Switch Command Class", "group__binary__switch__command__class.html", "group__binary__switch__command__class" ],
     [ "Device Reset Locally Command Class", "group__device__reset__locally__command__class.html", "group__device__reset__locally__command__class" ],
     [ "Inclusion Controller Command Class", "group__zwave__command__class__inclusion__controller.html", "group__zwave__command__class__inclusion__controller" ],
+    [ "Indicator  Command Class", "group__zwave__command__class__indicator.html", "group__zwave__command__class__indicator" ],
     [ "Multi Channel Association Command Class", "group__multi__channel__association__command__class.html", "group__multi__channel__association__command__class" ],
     [ "Multi Command Command Class", "group__multi__command__command__class.html", "group__multi__command__command__class" ],
     [ "Multilevel Sensor Command Class", "group__multilevel__sensor__command__class.html", "group__multilevel__sensor__command__class" ],
@@ -22,5 +23,7 @@ var group__command__classes =
     [ "Switch Multilevel Command Class", "group__switch__multilevel__command__class.html", "group__switch__multilevel__command__class" ],
     [ "Thermostat Mode Command Class", "group__thermostat__mode__command__class.html", "group__thermostat__mode__command__class" ],
     [ "Thermostat Setpoint Command Class", "group__thermostat__setpoint__command__class.html", "group__thermostat__setpoint__command__class" ],
+    [ "Transport Service Command Class", "group__zwave__command__class__transport__service.html", "group__zwave__command__class__transport__service" ],
+    [ "Wake Up Command Class", "group__zwave__command__class__wake__up.html", "group__zwave__command__class__wake__up" ],
     [ "}}_handler Command handlers for {{_name}}", "group____name.html", null ]
 ];

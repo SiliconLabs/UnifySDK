@@ -27,7 +27,6 @@ include(cmake/include/doxygen.cmake)
 include(cmake/include/package.cmake)
 include(cmake/include/uic_helper.cmake)
 
-
 enable_language(Rust)
 include(CMakeCargo)
 # ##############################################################################
@@ -35,10 +34,16 @@ include(CMakeCargo)
 # ##############################################################################
 include_directories(include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
-add_custom_target(sl_status_strings
-  SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/include/sl_status.h ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sl_status_strings.sh
-  BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
-  COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sl_status_strings.sh > ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h)
+add_custom_command(
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
+  COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sl_status_strings.sh >
+          ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/include/sl_status.h
+          ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sl_status_strings.sh)
+add_custom_target(
+  sl_status_strings
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h)
+
 # ##############################################################################
 # Subdirectories
 # ##############################################################################

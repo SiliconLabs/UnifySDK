@@ -18,7 +18,7 @@
 
 /* ZigPC components */
 #include "zigpc_common_zigbee.h"
-#include "zigpc_node_mgmt.h"
+#include <zigpc_datastore.h>
 #include "zigpc_gateway.h"
 #include "zcl_util.h"
 #include "zigpc_group_mgmt.h"
@@ -53,14 +53,15 @@ sl_status_t
                                              zcl_cluster_id_t cluster_id)
 {
   zigbee_eui64_t eui64;
-  zcl_cluster_type_t cluster;
   sl_status_t status = zigpc_command_mapper_populate_eui64(unid, eui64);
 
   if (status == SL_STATUS_OK) {
-    status = zigpc_nodemgmt_fetch_node_ep_cluster(eui64,
-                                                  endpoint_id,
-                                                  cluster_id,
-                                                  &cluster);
+    zigpc_cluster_data_t data;
+    status = zigpc_datastore_read_cluster(eui64,
+                                          endpoint_id,
+                                          ZCL_CLUSTER_SERVER_SIDE,
+                                          cluster_id,
+                                          &data);
     if (status != SL_STATUS_OK) {
       status = SL_STATUS_NOT_FOUND;
     }

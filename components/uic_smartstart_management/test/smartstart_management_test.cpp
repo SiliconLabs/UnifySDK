@@ -217,11 +217,8 @@ void test_notify_node_added_removed_sunny_cases()
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(smartstart_enable, true);
   std::string expected_message_added
-    = "{\"DSK\":\"" + test_entries_with_mostly_true[0].dsk + "\",\"Include\":"
-      + std::string(test_entries_with_mostly_true[0].include ? "true" : "false")
-      + ",\"ProtocolControllerUnid\":\""
-      + test_entries_with_mostly_true[0].protocol_controller_unid + "\""
-      + ",\"Unid\":\"" + DEVICE_16_UNID + "\",\"PreferredProtocols\":[]}";
+    = "{\"DSK\":\"" + test_entries_with_mostly_true[0].dsk + "\",\"Unid\":\""
+      + DEVICE_16_UNID + "\"}";
   uic_mqtt_publish_Expect(SMARTSTART_LIST_UPDATE_TOPIC,
                           expected_message_added.c_str(),
                           expected_message_added.size(),
@@ -232,12 +229,9 @@ void test_notify_node_added_removed_sunny_cases()
       DEVICE_16_UNID);
   TEST_ASSERT_EQUAL(status_added, SL_STATUS_OK);
 
-  std::string expected_message_removed
-    = "{\"DSK\":\"" + test_entries_with_mostly_true[1].dsk + "\",\"Include\":"
-      + std::string(test_entries_with_mostly_true[1].include ? "true" : "false")
-      + ",\"ProtocolControllerUnid\":\""
-      + test_entries_with_mostly_true[1].protocol_controller_unid + "\""
-      + ",\"Unid\":\"\",\"PreferredProtocols\":[]}";
+  std::string expected_message_removed = "{\"DSK\":\""
+                                         + test_entries_with_mostly_true[1].dsk
+                                         + "\",\"Unid\":\"\"}";
   uic_mqtt_publish_Expect(SMARTSTART_LIST_UPDATE_TOPIC,
                           expected_message_removed.c_str(),
                           expected_message_removed.size(),
@@ -246,6 +240,42 @@ void test_notify_node_added_removed_sunny_cases()
     = smartstart::Management::get_instance()->notify_node_removed(
       DEVICE_15_UNID);
   TEST_ASSERT_EQUAL(removed_status, SL_STATUS_OK);
+}
+
+void test_changing_manual_intervention_required()
+{
+  std::string smartstart_list
+    = generate_smartstart_list(test_entries_with_mostly_true);
+  my_mqtt_on_list_update("", smartstart_list.c_str(), smartstart_list.size());
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(smartstart_enable, true);
+  std::string expected_message = "{\"DSK\":\""
+                                 + test_entries_with_mostly_true[0].dsk
+                                 + "\",\"ManualInterventionRequired\":true}";
+
+  uic_mqtt_publish_Expect(SMARTSTART_LIST_UPDATE_TOPIC,
+                          expected_message.c_str(),
+                          expected_message.size(),
+                          false);
+  sl_status_t status_update
+    = smartstart::Management::get_instance()->set_manual_intervention_required(
+      test_entries_with_mostly_true[0].dsk,
+      true);
+  TEST_ASSERT_EQUAL(status_update, SL_STATUS_OK);
+
+  // Nothing will happen if re-update the same value as in the list
+  status_update
+    = smartstart::Management::get_instance()->set_manual_intervention_required(
+      test_entries_with_mostly_true[0].dsk,
+      false);
+  TEST_ASSERT_EQUAL(status_update, SL_STATUS_OK);
+
+  // Non-existing DSK
+  status_update
+    = smartstart::Management::get_instance()->set_manual_intervention_required(
+      std::string("Not a DSK"),
+      true);
+  TEST_ASSERT_EQUAL(status_update, SL_STATUS_NOT_FOUND);
 }
 
 /// Test whether handling invalid query correctly

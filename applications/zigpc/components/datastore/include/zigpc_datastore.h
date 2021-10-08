@@ -123,8 +123,12 @@
 #ifndef ZIGPC_DATASTORE_H
 #define ZIGPC_DATASTORE_H
 
-#include "sl_status.h"
-#include "zigpc_common_zigbee.h"
+// Shared UIC includes
+#include <sl_status.h>
+#include <sl_log.h>
+
+// ZigPC includes
+#include <zigpc_common_zigbee.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -295,6 +299,16 @@ sl_status_t zigpc_datastore_write_device(const zigbee_eui64_t eui64,
  */
 sl_status_t zigpc_datastore_remove_device(const zigbee_eui64_t eui64);
 
+/**
+ * @brief Remove persisted children under device entity.
+ *
+ * @param eui64         Device identifier.
+ * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NOT_FOUND if the
+ * device node does not exist, SL_STATUS_NOT_INITIALIZED if attribute store is
+ * not initialized, or SL_STATUS_FAIL if the child delete process fails.
+ */
+sl_status_t zigpc_datastore_remove_device_children(const zigbee_eui64_t eui64);
+
 /**********************************
  **********************************
  *
@@ -397,11 +411,12 @@ sl_status_t zigpc_datastore_remove_endpoint(const zigbee_eui64_t eui64,
  *
  * @param eui64         Device identifier.
  * @param endpoint_id   Endpoint identifier.
+ * @param cluster_side  Cluster side (server/client).
  * @return size_t Number of endpoints persisted.
  */
-
 size_t zigpc_datastore_get_cluster_count(const zigbee_eui64_t eui64,
-                                         zigbee_endpoint_id_t endpoint_id);
+                                         zigbee_endpoint_id_t endpoint_id,
+                                         zcl_cluster_side_t cluster_side);
 
 /**
  * @brief Find a particular cluster entity persisted under a device endpoint and
@@ -411,6 +426,7 @@ size_t zigpc_datastore_get_cluster_count(const zigbee_eui64_t eui64,
  *
  * @param eui64         Device identifier.
  * @param endpoint_id   Endpoint identifier.
+ * @param cluster_side  Cluster side (server/client).
  * @param index         Index to retrieve.
  * @param cluster_id    Reference to cluster identifier search key to populate.
  * @return sl_status_t  SL_STATUS_OK if the endpoint is found,
@@ -421,8 +437,25 @@ size_t zigpc_datastore_get_cluster_count(const zigbee_eui64_t eui64,
 sl_status_t
   zigpc_datastore_find_cluster_by_index(const zigbee_eui64_t eui64,
                                         zigbee_endpoint_id_t endpoint_id,
+                                        zcl_cluster_side_t cluster_side,
                                         size_t index,
                                         zcl_cluster_id_t *cluster_id);
+
+/**
+ * @brief Determine if a particular cluster ID is supported under a device
+ * endpoint.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param cluster_side  Cluster side (server/client).
+ * @param cluster_id    Cluster identifier to find.
+ * @return bool         TRUE if the cluster identifier exists under the device
+ * endpoint, FALSE if not.
+ */
+bool zigpc_datastore_contains_cluster(const zigbee_eui64_t eui64,
+                                      zigbee_endpoint_id_t endpoint_id,
+                                      zcl_cluster_side_t cluster_side,
+                                      zcl_cluster_id_t cluster_id);
 
 /**
  * @brief Create cluster entity to be persisted under a device endpoint. The
@@ -432,12 +465,14 @@ sl_status_t
  * @param eui64         Device identifier to persist under.
  * @param endpoint_id   Endpoint identifier to persist under.
  * @param cluster_id    Cluster identifier.
+ * @param cluster_side  Cluster side (server/client).
  * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_ALREADY_EXISTS if
  * the cluster node already exists, SL_STATUS_NOT_INITIALIZED if attribute store
  * is not initialized or SL_STATUS_FAIL if the creation process fails.
  */
 sl_status_t zigpc_datastore_create_cluster(const zigbee_eui64_t eui64,
                                            zigbee_endpoint_id_t endpoint_id,
+                                           zcl_cluster_side_t cluster_side,
                                            zcl_cluster_id_t cluster_id);
 
 /**
@@ -446,6 +481,7 @@ sl_status_t zigpc_datastore_create_cluster(const zigbee_eui64_t eui64,
  * @param eui64         Device identifier.
  * @param endpoint_id   Endpoint identifier.
  * @param cluster_id    Cluster identifier.
+ * @param cluster_side  Cluster side (server/client).
  * @param data          Cluster data to be read.
  * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER
  * if invalid data object provided, SL_STATUS_NOT_FOUND if the cluster node
@@ -454,6 +490,7 @@ sl_status_t zigpc_datastore_create_cluster(const zigbee_eui64_t eui64,
  */
 sl_status_t zigpc_datastore_read_cluster(const zigbee_eui64_t eui64,
                                          zigbee_endpoint_id_t endpoint_id,
+                                         zcl_cluster_side_t cluster_side,
                                          zcl_cluster_id_t cluster_id,
                                          zigpc_cluster_data_t *const data);
 
@@ -463,6 +500,7 @@ sl_status_t zigpc_datastore_read_cluster(const zigbee_eui64_t eui64,
  * @param eui64         Device identifier.
  * @param endpoint_id   Endpoint identifier.
  * @param cluster_id    Cluster identifier.
+ * @param cluster_side  Cluster side (server/client).
  * @param data          Cluster data to be written.
  * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER
  * if invalid data object provided, SL_STATUS_NOT_FOUND if the cluster node
@@ -471,6 +509,7 @@ sl_status_t zigpc_datastore_read_cluster(const zigbee_eui64_t eui64,
  */
 sl_status_t zigpc_datastore_write_cluster(const zigbee_eui64_t eui64,
                                           zigbee_endpoint_id_t endpoint_id,
+                                          zcl_cluster_side_t cluster_side,
                                           zcl_cluster_id_t cluster_id,
                                           const zigpc_cluster_data_t *data);
 
@@ -480,13 +519,237 @@ sl_status_t zigpc_datastore_write_cluster(const zigbee_eui64_t eui64,
  * @param eui64         Device identifier.
  * @param endpoint_id   Endpoint identifier.
  * @param cluster_id    Cluster identifier.
+ * @param cluster_side  Cluster side (server/client).
  * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NOT_FOUND if the
  * cluster node does not exist, SL_STATUS_NOT_INITIALIZED if attribute store
  * is not initialized, or SL_STATUS_FAIL if the delete process fails.
  */
 sl_status_t zigpc_datastore_remove_cluster(const zigbee_eui64_t eui64,
                                            zigbee_endpoint_id_t endpoint_id,
+                                           zcl_cluster_side_t cluster_side,
                                            zcl_cluster_id_t cluster_id);
+
+/**********************************
+ **********************************
+ *
+ * Cluster Attribute List API
+ *
+ **********************************
+ **********************************/
+
+/**
+ * @brief Get count of attributes persisted under a cluster.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param cluster_side  Cluster side (server/client).
+ * @param cluster_id    Cluster identifier.
+ * @return size_t Number of attributes persisted.
+ */
+size_t zigpc_datastore_get_attribute_count(const zigbee_eui64_t eui64,
+                                           zigbee_endpoint_id_t endpoint_id,
+                                           zcl_cluster_side_t cluster_side,
+                                           zcl_cluster_id_t cluster_id);
+
+/**
+ * @brief Read the attribute list under a given cluster.
+ *
+ * @param eui64           Device identifier.
+ * @param endpoint_id     Endpoint identifier.
+ * @param cluster_side    Cluster side (server/client).
+ * @param cluster_id      Cluster identifier.
+ * @param attribute_list  Attribute list to populate.
+ * @param attribute_count Reference to attribute list count; IN: Provides the
+ *                        capacity of list passed in; OUT: updates with number
+ *                        of items populated into the list.
+ * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER
+ * if invalid list provided, SL_STATUS_NOT_FOUND if the cluster node
+ * does not exist, SL_STATUS_INVALID_COUNT if the attribute list passed
+ * in has insufficient capacity, SL_STATUS_NOT_INITIALIZED if attribute store is not
+ * initialized, or SL_STATUS_FAIL if the read process fails.
+ */
+sl_status_t
+  zigpc_datastore_read_attribute_list(const zigbee_eui64_t eui64,
+                                      zigbee_endpoint_id_t endpoint_id,
+                                      zcl_cluster_side_t cluster_side,
+                                      zcl_cluster_id_t cluster_id,
+                                      zcl_attribute_id_t *const attribute_list,
+                                      size_t *attribute_count);
+
+/**
+ * @brief Write attribute list under a given cluster. This function will
+ * overwrite any existing list by removing any pre-existing list.
+ *
+ * @param eui64           Device identifier.
+ * @param endpoint_id     Endpoint identifier.
+ * @param cluster_side    Cluster side (server/client).
+ * @param cluster_id      Cluster identifier.
+ * @param attribute_list  Attribute list to persist.
+ * @param attribute_count Number of list items to persist.
+ * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER
+ * if invalid list provided, SL_STATUS_NOT_FOUND if the cluster node
+ * does not exist, SL_STATUS_NOT_INITIALIZED if attribute store is not
+ * initialized, or SL_STATUS_FAIL if the write process fails.
+ */
+sl_status_t
+  zigpc_datastore_write_attribute_list(const zigbee_eui64_t eui64,
+                                       zigbee_endpoint_id_t endpoint_id,
+                                       zcl_cluster_side_t cluster_side,
+                                       zcl_cluster_id_t cluster_id,
+                                       const zcl_attribute_id_t *attribute_list,
+                                       size_t attribute_count);
+
+/**********************************
+ **********************************
+ *
+ * Cluster Command List API
+ *
+ **********************************
+ **********************************/
+
+/**
+ * @brief Get count of commands persisted under a cluster based on the command
+ * type passed in.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param cluster_side  Cluster side (server/client).
+ * @param cluster_id    Cluster identifier.
+ * @param command_type  Type of commands under the cluster (out/in).
+ * @return size_t Number of commands persisted.
+ */
+size_t zigpc_datastore_get_command_count(const zigbee_eui64_t eui64,
+                                         zigbee_endpoint_id_t endpoint_id,
+                                         zcl_cluster_side_t cluster_side,
+                                         zcl_cluster_id_t cluster_id,
+                                         zcl_command_type_t command_type);
+
+/**
+ * @brief Read command list under a given cluster based on the command type
+ * passed in.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param cluster_side  Cluster side (server/client).
+ * @param cluster_id    Cluster identifier.
+ * @param command_type  Type of commands under the cluster (out/in).
+ * @param command_list  Command list to populate.
+ * @param command_count Reference to command list count; IN: Provides the
+ *                      capacity of list passed in; OUT: updates with number
+ *                      of items populated into the list.
+ * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER
+ * if invalid list provided, SL_STATUS_NOT_FOUND if the cluster node
+ * does not exist, SL_STATUS_INVALID_COUNT if the command list passed
+ * in has insufficient capacity, SL_STATUS_NOT_INITIALIZED if attribute store is not
+ * initialized, or SL_STATUS_FAIL if the read process fails.
+ */
+sl_status_t
+  zigpc_datastore_read_command_list(const zigbee_eui64_t eui64,
+                                    zigbee_endpoint_id_t endpoint_id,
+                                    zcl_cluster_side_t cluster_side,
+                                    zcl_cluster_id_t cluster_id,
+                                    zcl_command_type_t command_type,
+                                    zcl_command_id_t *const command_list,
+                                    size_t *command_count);
+
+/**
+ * @brief Write command list under a given cluster based on the command type
+ * passed in. This function will overwrite any existing list by removing any
+ * pre-existing list.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param cluster_side  Cluster side (server/client).
+ * @param cluster_id    Cluster identifier.
+ * @param command_type  Type of commands under the cluster (out/in).
+ * @param command_list  Command list to persist.
+ * @param command_count Number of list items to persist.
+ * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER
+ * if invalid list provided, SL_STATUS_NOT_FOUND if the cluster node
+ * does not exist, SL_STATUS_NOT_INITIALIZED if attribute store is not
+ * initialized, or SL_STATUS_FAIL if the write process fails.
+ */
+sl_status_t
+  zigpc_datastore_write_command_list(const zigbee_eui64_t eui64,
+                                     zigbee_endpoint_id_t endpoint_id,
+                                     zcl_cluster_side_t cluster_side,
+                                     zcl_cluster_id_t cluster_id,
+                                     zcl_command_type_t command_type,
+                                     const zcl_command_id_t *command_list,
+                                     size_t command_count);
+
+/**********************************
+ **********************************
+ *
+ * Utility Functions
+ *
+ **********************************
+ **********************************/
+
+/**
+ * @brief Find the endpoint identifier under a device containing a particular
+ * cluster identifier.
+ *
+ * @param eui64         Device identifier.
+ * @param cluster_side  Cluster side (server/client).
+ * @param cluster_id    Cluster identifier.
+ * @param endpoint_id   Reference to endpoint identifier search key to populate.
+ * @return sl_status_t  SL_STATUS_OK if the endpoint is found and populated,
+ * SL_STATUS_NOT_FOUND if the endpoint is not found under the device,
+ * SL_STATUS_NULL_POINTER if the provided EUI64 or endpoint_id is invalid, or
+ * SL_STATUS_FAIL if the find process fails.
+ */
+sl_status_t zigpc_datastore_find_endpoint_containing_cluster(
+  const zigbee_eui64_t eui64,
+  zcl_cluster_side_t cluster_side,
+  zcl_cluster_id_t cluster_id,
+  zigbee_endpoint_id_t *const endpoint_id);
+
+/**********************************
+ **********************************
+ *
+ * Utility Logging API
+ *
+ **********************************
+ **********************************/
+
+/**
+ * @brief Log the stored discovery information under a device which includes:
+ * endpoints, clusters, attributes, and command support information.
+ *
+ * @param eui64 Device identifier.
+ */
+void zigpc_datastore_log_device_disc_state(const zigbee_eui64_t eui64);
+
+/**
+ * @brief Log the network information.
+ *
+ * @param log_tag       Tag to log the message under.
+ * @param log_level     Level to log the message under.
+ * @param log_prefix    String to prefix log message.
+ * @return sl_status_t  SL_STATUS_OK if the network is successfully logged,
+ * SL_STATUS_NULL_POINTER if the log_tag provided is invalid, or
+ * SL_STATUS_NOT_FOUND if the network entity is not found.
+ */
+sl_status_t zigpc_datastore_log_network(const char *log_tag,
+                                        sl_log_level_t log_level,
+                                        const char *log_prefix);
+
+/**
+ * @brief Log single device entity.
+ *
+ * @param log_tag       Tag to log the message under.
+ * @param log_level     Level to log the message under.
+ * @param log_prefix    String to prefix log message.
+ * @param eui64         Device identifier.
+ * @return sl_status_t  SL_STATUS_OK if the device is successfully logged,
+ * SL_STATUS_NULL_POINTER if the log_tag provided is invalid, or
+ * SL_STATUS_NOT_FOUND if the device entity is not found.
+ */
+sl_status_t zigpc_datastore_log_device(const char *log_tag,
+                                       sl_log_level_t log_level,
+                                       const char *log_prefix,
+                                       const zigbee_eui64_t eui64);
 
 #ifdef __cplusplus
 }

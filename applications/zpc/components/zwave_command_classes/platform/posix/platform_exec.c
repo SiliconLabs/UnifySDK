@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 #include "platform_exec.h"
 #include "sl_log.h"
@@ -60,7 +61,13 @@ void platform_exec(const char *file,
        * On success execve() will never return here (the new process image takes over).
        */
 
-      execve(file, args, environment);
+      if (execve(file, args, environment) == -1) {
+        sl_log_error(LOG_TAG,
+                     "Error executing %s: %s (errno %d)\n",
+                     file,
+                     strerror(errno),
+                     errno);
+      }
       /* We should never get here. If we do execev failed. */
 
       _Exit(EXIT_FAILURE);

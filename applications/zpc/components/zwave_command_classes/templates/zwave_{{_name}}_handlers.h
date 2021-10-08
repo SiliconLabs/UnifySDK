@@ -14,15 +14,12 @@
 #ifndef ZWAVE_{{_name}}_HANDLERS_H
 #define ZWAVE_{{_name}}_HANDLERS_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-#include "attribute_store.h"
-#include "sl_status.h"
+/**
+ * @ingroup command_classes
+*/
 
 /**
  * @defgroup {{_name}}_handler Command handlers for {{_name}}
- * @ingroup command_classes
  * @brief Functions for controlling {{_name}}
  * 
  * This module implement functions for generating and parsing the Z-Wave frames
@@ -58,6 +55,12 @@ digraph G {
 
 @{
 */
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include "attribute_store.h"
+#include "sl_status.h"
+
 
 
 /**
@@ -113,11 +116,13 @@ sl_status_t  zwave_{{_name}}_handle_report_command_override(
 /**
  * @brief Override function for {{_name}}
  * 
- * This if this function is implemented as a weak symbol. This provided
- * such an external component can modifiy the behaviour of the generated 
- * code.
- * 
- * @return If not SL_STATUS_OK the auto generated hander is executed after this.
+ * This if this function is implemented as a weak symbol. This provided such an
+ * external component can modify the behaviour of the auto generated code. 
+ * @param _node Attribute to genrate the get frame from.
+ * @param frame Pointer to frame data which should be written into
+ * @param frame_len Length of the generated frame. I this is 0 on exit the auto
+ * generated code is executed otherwise it is not.
+ * @return Return code to send to the resolver.
  */
 
 sl_status_t zwave_{{_name}}_override(
@@ -128,11 +133,13 @@ sl_status_t zwave_{{_name}}_override(
 /**
  * @brief Override function for {{_name}}
  * 
- * This if this function is implemented as a weak symbol. This provided
- * such an external component can modifiy the behaviour of the generated 
- * code.
- * 
- * @return If not SL_STATUS_OK the auto generated hander is executed after this.
+ * This if this function is implemented as a weak symbol. This provided such an
+ * external component can modify the behaviour of the auto generated code. 
+ * @param _node Attribute to genrate the set frame from.
+ * @param frame Pointer to frame data which should be written into
+ * @param frame_len Length of the generated frame. I this is 0 on exit the auto
+ * generated code is executed otherwise it is not.
+ * @return Return code to send to the resolver.
  */
 
 sl_status_t zwave_{{_name}}_override(

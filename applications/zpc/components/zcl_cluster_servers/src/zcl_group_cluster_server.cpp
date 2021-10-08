@@ -27,6 +27,7 @@
 #include "attribute_store_defined_attribute_types.h"
 #include "dotdot_attributes.h"
 #include "zpc_dotdot_mqtt_group_dispatch.h"
+#include "ucl_node_state.h"
 
 //Generic includes
 #include <string>
@@ -47,18 +48,9 @@ struct endpoint_cache_t {
   std::string unid;
 };
 
-// Map of endpoints in our network, to handle deletion
-std::map<attribute_store_node_t, endpoint_cache_t> endpoints_in_network;
-
 // Constants
 constexpr char GROUP_CLUSTER_NAME[]       = "Groups";
 constexpr uint16_t GROUP_CLUSTER_REVISION = 1;
-
-////////////////////////////////////////////////////////////////////////////////
-// Local Functions
-////////////////////////////////////////////////////////////////////////////////
-static void on_endpoint_update(attribute_store_node_t endpoint_id_node,
-                               attribute_store_change_t change);
 
 ////////////////////////////////////////////////////////////////////////////////
 // ZCL Command handlers
@@ -69,7 +61,7 @@ sl_status_t add_group(const std::string &unid,
                       const std::string &group_name)
 {
   if (group_id == 0) {
-    sl_log_info(LOG_TAG, "GroupID 0 is not valid. Ignoring command.");
+    sl_log_debug(LOG_TAG, "GroupID 0 is not valid. Ignoring command.");
     return SL_STATUS_FAIL;
   }
 
@@ -238,8 +230,8 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
   }
 
   if (is_zpc_unid(unid.c_str())) {
-    sl_log_info(LOG_TAG,
-                "Group command received for the ZPC's UNID. Ignoring.");
+    sl_log_debug(LOG_TAG,
+                 "Group command received for the ZPC's UNID. Ignoring.");
     return;
   }
 
@@ -266,9 +258,9 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
                 pt.get<uint16_t>("GroupId"),
                 pt.get<std::string>("GroupName"));
     } catch (const std::exception &exception) {
-      sl_log_info(LOG_TAG,
-                  "ZCL AddGroup Command: Unable to parse JSON payload. %s\n",
-                  exception.what());
+      sl_log_debug(LOG_TAG,
+                   "ZCL AddGroup Command: Unable to parse JSON payload. %s\n",
+                   exception.what());
       return;
     }
   } else if (command == "ViewGroup") {
@@ -289,9 +281,9 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
       // remove the group:
       remove_group(unid, endpoint_id, pt.get<uint16_t>("GroupId"));
     } catch (const std::exception &exception) {
-      sl_log_info(LOG_TAG,
-                  "ZCL RemoveGroup Command: Unable to parse JSON payload.%s\n",
-                  exception.what());
+      sl_log_debug(LOG_TAG,
+                   "ZCL RemoveGroup Command: Unable to parse JSON payload.%s\n",
+                   exception.what());
       return;
     }
   } else if (command == "RemoveAllGroups") {
@@ -326,9 +318,9 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
                 pt.get<uint16_t>("GroupId"),
                 pt.get<std::string>("GroupName"));
     } catch (const std::exception &exception) {
-      sl_log_info(LOG_TAG,
-                  "ZCL RemoveGroup Command: Unable to parse JSON payload.%s\n",
-                  exception.what());
+      sl_log_debug(LOG_TAG,
+                   "ZCL RemoveGroup Command: Unable to parse JSON payload.%s\n",
+                   exception.what());
       return;
     }
   } else {
@@ -634,72 +626,117 @@ static void subscribe_to_group_cluster_commands()
                      on_zcl_by_group_group_cluster_server_command_received);
 }
 
+/**
+ * @brief Initialization function that will publish and subscribe to all
+ * necessary topic when a new endpoint should be shown as supporting the
+ * Group cluster
+ *
+ * @param endpoint_id_node  Attribute Store node for the Endpoint ID.
+ */
+static void
+  initialize_endpoint_group_cluster(attribute_store_node_t endpoint_id_node)
+{
+  std::string unid;
+  zwave_endpoint_id_t endpoint_id;
+  if (SL_STATUS_OK
+      != zcl_cluster_servers_get_unid_endpoint(endpoint_id_node,
+                                               endpoint_id,
+                                               unid)) {
+    sl_log_warning(
+      LOG_TAG,
+      "Cannot read UNID/endpoint value for Attribute Store node %d",
+      endpoint_id_node);
+    return;
+  }
+  if (is_zpc_unid(unid.c_str())) {
+    return;
+  }
+  // Publish Group Cluster for the endpoint
+  publish_name_support_cluster_attribute(endpoint_id_node);
+  publish_group_list_cluster_attribute(endpoint_id_node);
+  publish_group_cluster_supported_commands(unid, endpoint_id);
+  publish_group_cluster_cluster_revision(unid, endpoint_id);
+  subscribe_to_node_group_cluster_commands(unid, endpoint_id);
+
+  // Publish all the GroupNames for that endpoint (1..N groups)
+  attribute_store_node_t group_id_node   = ATTRIBUTE_STORE_INVALID_NODE;
+  attribute_store_node_t group_name_node = ATTRIBUTE_STORE_INVALID_NODE;
+  size_t index                           = 0;
+  do {
+    group_id_node = attribute_store_get_node_child_by_type(
+      endpoint_id_node,
+      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,
+      index++);
+    group_name_node = attribute_store_get_node_child_by_type(
+      group_id_node,
+      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME,
+      0);
+
+    publish_group_name_cluster_attribute(group_name_node);
+  } while (group_id_node != ATTRIBUTE_STORE_INVALID_NODE);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute Store Callback functions
 //////////////////////////////////////////////////////////////////////////////
-static void on_endpoint_update(attribute_store_node_t endpoint_id_node,
-                               attribute_store_change_t change)
+static void on_endpoint_deletion(attribute_store_node_t endpoint_id_node,
+                                 attribute_store_change_t change)
 {
-  if (change == ATTRIBUTE_DELETED) {
-    auto it = endpoints_in_network.find(endpoint_id_node);
-    if (it != endpoints_in_network.end()) {
-      unretain_all_group_cluster_publications(it->second.unid,
-                                              it->second.endpoint_id);
-      endpoints_in_network.erase(it);
-    }
+  // Endpoint gets deleted, remove the Group cluster publications
+  if (change != ATTRIBUTE_DELETED) {
     return;
   }
 
-  if (attribute_store_is_value_defined(endpoint_id_node, REPORTED_ATTRIBUTE)) {
-    auto it = endpoints_in_network.find(endpoint_id_node);
-    if (it == endpoints_in_network.end()) {
-      std::string unid;
-      zwave_endpoint_id_t endpoint_id;
-      if (SL_STATUS_OK
-          != zcl_cluster_servers_get_unid_endpoint(endpoint_id_node,
-                                                   endpoint_id,
-                                                   unid)) {
-        sl_log_warning(
-          LOG_TAG,
-          "Cannot read UNID/endpoint value for Attribute Store node %d",
-          endpoint_id_node);
-        return;
-      }
-      if (is_zpc_unid(unid.c_str())) {
-        return;
-      }
-      // Publish Group Cluster for the endpoint
-      publish_name_support_cluster_attribute(endpoint_id_node);
-      publish_group_list_cluster_attribute(endpoint_id_node);
-      publish_group_cluster_supported_commands(unid, endpoint_id);
-      publish_group_cluster_cluster_revision(unid, endpoint_id);
-      subscribe_to_node_group_cluster_commands(unid, endpoint_id);
+  std::string unid;
+  zwave_endpoint_id_t endpoint_id;
+  if (SL_STATUS_OK
+      != zcl_cluster_servers_get_unid_endpoint(endpoint_id_node,
+                                               endpoint_id,
+                                               unid)) {
+    sl_log_warning(
+      LOG_TAG,
+      "Cannot read UNID/endpoint value for Attribute Store node %d",
+      endpoint_id_node);
+    return;
+  }
+  if (is_zpc_unid(unid.c_str())) {
+    return;
+  }
 
-      // Publish all the GroupNames for that endpoint (1..N groups)
-      attribute_store_node_t group_id_node   = ATTRIBUTE_STORE_INVALID_NODE;
-      attribute_store_node_t group_name_node = ATTRIBUTE_STORE_INVALID_NODE;
-      size_t index                           = 0;
-      do {
-        group_id_node = attribute_store_get_node_child_by_type(
-          endpoint_id_node,
-          DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,
-          index++);
-        group_name_node = attribute_store_get_node_child_by_type(
-          group_id_node,
-          DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME,
-          0);
+  unretain_all_group_cluster_publications(unid, endpoint_id);
+}
 
-        publish_group_name_cluster_attribute(group_name_node);
-      } while (group_id_node != ATTRIBUTE_STORE_INVALID_NODE);
+static void on_network_status_update(attribute_store_node_t network_status_node,
+                                     attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
 
-      // Add the endpoint to the cache:
-      endpoint_cache_t cache = {};
-      cache.unid             = unid;
-      cache.endpoint_id      = endpoint_id;
-      endpoints_in_network.insert(
-        std::pair<attribute_store_node_t, endpoint_cache_t>(endpoint_id_node,
-                                                            cache));
-    }
+  // Check the network status:
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(network_status_node,
+                                                 ATTRIBUTE_NODE_ID);
+  node_state_topic_state_t network_status
+    = get_node_network_status(node_id_node);
+
+  if (network_status != NODE_STATE_TOPIC_STATE_INCLUDED) {
+    return;
+  }
+
+  // Look at all the endpoints and see if we want to publish the group cluster
+  size_t i = 0;
+  attribute_store_node_t endpoint_id_node
+    = attribute_store_get_node_child_by_type(node_id_node,
+                                             ATTRIBUTE_ENDPOINT_ID,
+                                             i);
+  while (endpoint_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
+    initialize_endpoint_group_cluster(endpoint_id_node);
+    i++;
+    endpoint_id_node
+      = attribute_store_get_node_child_by_type(node_id_node,
+                                               ATTRIBUTE_ENDPOINT_ID,
+                                               i);
   }
 }
 
@@ -738,8 +775,13 @@ sl_status_t zcl_group_cluster_server_init()
   sl_status_t init_status = SL_STATUS_OK;
 
   init_status |= attribute_store_register_callback_by_type_and_state(
-    on_endpoint_update,
+    on_endpoint_deletion,
     ATTRIBUTE_ENDPOINT_ID,
+    REPORTED_ATTRIBUTE);
+
+  init_status |= attribute_store_register_callback_by_type_and_state(
+    on_network_status_update,
+    ATTRIBUTE_NETWORK_STATUS,
     REPORTED_ATTRIBUTE);
 
   // Subscribe to incoming commands in the ucl/by-group/# space
@@ -751,10 +793,4 @@ sl_status_t zcl_group_cluster_server_init()
 void zcl_group_cluster_server_teardown()
 {
   // Nothing to do, publications will be cleaned up automatically.
-  for (auto it = endpoints_in_network.begin(); it != endpoints_in_network.end();
-       ++it) {
-    unretain_all_group_cluster_publications(it->second.unid,
-                                            it->second.endpoint_id);
-  }
-  endpoints_in_network.clear();
 }

@@ -472,8 +472,8 @@ void test_zwave_rx_on_node_added()
   // Init:
   rx_init_successful_test_helper();
 
-  zwave_controller_on_node_id_assigned_Expect(ZWAVE_RX_TEST_DESTINATION_NODE_ID,
-                                              false);
+  zwave_controller_on_node_id_assigned_Expect(
+    ZWAVE_RX_TEST_DESTINATION_NODE_ID, PROTOCOL_ZWAVE);
   // Trigger a on_new_node_added callback:
   registered_zwapi_callbacks->application_controller_update(
     0x40,  //New ID assigned

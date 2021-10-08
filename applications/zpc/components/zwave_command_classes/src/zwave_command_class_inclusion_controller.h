@@ -29,7 +29,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Setup fixture for @ref inclusion_controller_command_class
+ * @brief Setup fixture for @ref zwave_command_class_inclusion_controller
  *
  * This setup will register callbacks to the zwave controller and zwave
  * command handler modules, so that it can be notified when to parse commands or

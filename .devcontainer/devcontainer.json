@@ -25,7 +25,6 @@
     "cheshirekow.cmake-format",
     "xaver.clang-format"
   ],
-  "postStartCommand": "Xvfb &",
   "containerUser": "root",
   "remoteUser": "user",
   "updateRemoteUserUID": true,
@@ -47,8 +46,7 @@
     // "source=/opt/super,target=/opt/super,type=bind,consistency=cached",
   ],
   "remoteEnv": {
-    "DISPLAY":":0"
     // Uncomment when building ZigPC to specify Gecko SDK path in the container
     // "GSDK_LOCATION": "/opt/super"
-  },
+  }
 }

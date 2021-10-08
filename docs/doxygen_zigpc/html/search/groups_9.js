@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['protothreads_5054',['Protothreads',['../group__pt.html',1,'']]],
-  ['protothread_20semaphores_5055',['Protothread semaphores',['../group__ptsem.html',1,'']]],
-  ['posix_2dspecific_20implementation_20of_20the_20event_20demultiplexer_27s_20internal_20interface_5056',['Posix-Specific Implementation of the Event Demultiplexer&apos;s Internal Interface',['../group__uic__main__ext__posix.html',1,'']]]
+  ['ring_20buffer_20library_5187',['Ring buffer library',['../group__ringbuf.html',1,'']]],
+  ['real_2dtime_20task_20scheduling_5188',['Real-time task scheduling',['../group__rt.html',1,'']]]
 ];

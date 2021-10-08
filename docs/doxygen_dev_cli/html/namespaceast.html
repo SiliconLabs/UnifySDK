@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Developer Command Line Interface
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -156,6 +156,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:a94a74eef22bd0db806b70da094c8ffab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accf202c9a5e9a1bf3dab9ace8075ccc1"><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>, <a class="el" href="namespaceast.html#a94a74eef22bd0db806b70da094c8ffab">value_type_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#accf202c9a5e9a1bf3dab9ace8075ccc1">attribute_dependency_t</a></td></tr>
 <tr class="separator:accf202c9a5e9a1bf3dab9ace8075ccc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3546c9117df2077a10c18303e52c29d1"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; <a class="el" href="namespaceast.html#accf202c9a5e9a1bf3dab9ace8075ccc1">attribute_dependency_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a3546c9117df2077a10c18303e52c29d1">dependencies_t</a></td></tr>
+<tr class="separator:a3546c9117df2077a10c18303e52c29d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4408d0d26ca7c2f5265148a978cb746d"><td class="memItemLeft" align="right" valign="top">typedef boost::optional&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a4408d0d26ca7c2f5265148a978cb746d">result_type</a></td></tr>
 <tr class="separator:a4408d0d26ca7c2f5265148a978cb746d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -200,8 +202,17 @@ Functions</h2></td></tr>
 <tr class="separator:ac43f302dec945dd9f009272554c36a82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada7a47876b86212e3157d132e1a668f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#ada7a47876b86212e3157d132e1a668f6">operator==</a> (const <a class="el" href="structast_1_1assignment.html">assignment</a> &amp;a, const <a class="el" href="structast_1_1assignment.html">assignment</a> &amp;b)</td></tr>
 <tr class="separator:ada7a47876b86212e3157d132e1a668f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93ecddf19db0dd84661b69c37638397b"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a93ecddf19db0dd84661b69c37638397b">operator&lt;&lt;</a> (std::ostream &amp;s, const <a class="el" href="namespaceast.html#accf202c9a5e9a1bf3dab9ace8075ccc1">attribute_dependency_t</a> &amp;d)</td></tr>
+<tr class="separator:a93ecddf19db0dd84661b69c37638397b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a310c610cce1679dac6fa449183bfbe7d"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a310c610cce1679dac6fa449183bfbe7d">operator&lt;&lt;</a> (std::ostream &amp;s, const <a class="el" href="structast_1_1assignment.html">assignment</a> &amp;d)</td></tr>
+<tr class="separator:a310c610cce1679dac6fa449183bfbe7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ce5a1fa7d15d79ecbb3aa756b6ffaa5"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a8ce5a1fa7d15d79ecbb3aa756b6ffaa5">operator&lt;&lt;</a> (std::ostream &amp;s, const <a class="el" href="structast_1_1attribute.html">attribute</a> &amp;d)</td></tr>
+<tr class="separator:a8ce5a1fa7d15d79ecbb3aa756b6ffaa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb695bf493f084174fcccefbb2c0ba62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#abb695bf493f084174fcccefbb2c0ba62">reduce_tree</a> (<a class="el" href="structast_1_1ast__tree.html">ast_tree</a> &amp;)</td></tr>
 <tr class="separator:abb695bf493f084174fcccefbb2c0ba62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29a850fe3c69ca21124984ded0a218f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a29a850fe3c69ca21124984ded0a218f0">check_cyclic_dependencies</a> (const <a class="el" href="structast_1_1ast__tree.html">ast::ast_tree</a> &amp;ast, const std::multimap&lt; <a class="el" href="namespaceast.html#accf202c9a5e9a1bf3dab9ace8075ccc1">ast::attribute_dependency_t</a>, <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; &amp;relations)</td></tr>
+<tr class="memdesc:a29a850fe3c69ca21124984ded0a218f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a list of relations contain cyclic dependencies.  <a href="namespaceast.html#a29a850fe3c69ca21124984ded0a218f0">More...</a><br /></td></tr>
+<tr class="separator:a29a850fe3c69ca21124984ded0a218f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62b847c39bb09cb61df17d7b303400f7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a62b847c39bb09cb61df17d7b303400f7">Parse</a> (const std::string &amp;string_to_parse, <a class="el" href="structast_1_1ast__tree.html">ast::ast_tree</a> &amp;ast)</td></tr>
 <tr class="memdesc:a62b847c39bb09cb61df17d7b303400f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse UAM script and build and AST.  <a href="namespaceast.html#a62b847c39bb09cb61df17d7b303400f7">More...</a><br /></td></tr>
 <tr class="separator:a62b847c39bb09cb61df17d7b303400f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -249,6 +260,20 @@ Functions</h2></td></tr>
 
 <p>Attribute path element. </p>
 <p>This describes one element in an attribute path. This can either be an operand ( like a integer constant ) or a subscript ( 1234[4] ) </p>
+
+</div>
+</div>
+<a id="a3546c9117df2077a10c18303e52c29d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3546c9117df2077a10c18303e52c29d1">&#9670;&nbsp;</a></span>dependencies_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::vector&lt;<a class="el" href="namespaceast.html#accf202c9a5e9a1bf3dab9ace8075ccc1">attribute_dependency_t</a>&gt; <a class="el" href="namespaceast.html#a3546c9117df2077a10c18303e52c29d1">ast::dependencies_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -329,6 +354,154 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a29a850fe3c69ca21124984ded0a218f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29a850fe3c69ca21124984ded0a218f0">&#9670;&nbsp;</a></span>check_cyclic_dependencies()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ast::check_cyclic_dependencies </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structast_1_1ast__tree.html">ast::ast_tree</a> &amp;&#160;</td>
+          <td class="paramname"><em>ast</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::multimap&lt; <a class="el" href="namespaceast.html#accf202c9a5e9a1bf3dab9ace8075ccc1">ast::attribute_dependency_t</a>, <a class="el" href="structast_1_1assignment.html">ast::assignment</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>relations</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if a list of relations contain cyclic dependencies. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">relations</td><td>reference to relation table </td></tr>
+    <tr><td class="paramname">ast</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true cyclic dependencies are detected </dd>
+<dd>
+false cyclic dependencies are not detected. </dd></dl>
+
+</div>
+</div>
+<a id="a310c610cce1679dac6fa449183bfbe7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a310c610cce1679dac6fa449183bfbe7d">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; ast::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structast_1_1assignment.html">assignment</a> &amp;&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8ce5a1fa7d15d79ecbb3aa756b6ffaa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ce5a1fa7d15d79ecbb3aa756b6ffaa5">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; ast::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structast_1_1attribute.html">attribute</a> &amp;&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a93ecddf19db0dd84661b69c37638397b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93ecddf19db0dd84661b69c37638397b">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream&amp; ast::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespaceast.html#accf202c9a5e9a1bf3dab9ace8075ccc1">attribute_dependency_t</a> &amp;&#160;</td>
+          <td class="paramname"><em>d</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ada7a47876b86212e3157d132e1a668f6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ada7a47876b86212e3157d132e1a668f6">&#9670;&nbsp;</a></span>operator==() <span class="overload">[1/9]</span></h2>
 
@@ -646,7 +819,7 @@ false False is parse did not succeed. </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceast.html">ast</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Developer Command Line Interface by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:39 for Developer Command Line Interface by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

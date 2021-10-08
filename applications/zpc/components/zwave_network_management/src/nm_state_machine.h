@@ -8,9 +8,6 @@
 #include "sys/etimer.h"
 #include "sl_status.h"
 
-// We should reset our Z-Wave API last in a reset sequence.
-#define ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY 5
-
 #define NODE_INFO_MAX_SIZE 64
 
 typedef enum {
@@ -33,8 +30,8 @@ typedef enum {
    * to grant keys prompt
    */
   NM_EV_ADD_SECURITY_REQ_KEYS,
-  /* NM_EV_ADD_SECURITY_KEY_CHALLENGE is called (fro on_dsk_challenge)when 
-   * public key report is received from other side. NM FSM calls 
+  /* NM_EV_ADD_SECURITY_KEY_CHALLENGE is called (fro on_dsk_challenge)when
+   * public key report is received from other side. NM FSM calls
    * zwave_controller_on_dsk_report() to send the request user
    */
   NM_EV_ADD_SECURITY_KEY_CHALLENGE,
@@ -43,10 +40,10 @@ typedef enum {
   /** NM_EV_ADD_SECURITY_KEYS_SET event is triggered when the user grants
    * keys with zwave_network_management_keys_set()
    * NM FSM calls zwave_s2_key_grant() to notify S2 about the granted keys
-   */ 
+   */
   NM_EV_ADD_SECURITY_KEYS_SET,
   /** NM_EV_ADD_SECURITY_DSK_SET is triggered (from zwave_network_management_dsk_set)
-   * to Indicate to the S2 bootstrapping controller whether the DSK is accepted 
+   * to Indicate to the S2 bootstrapping controller whether the DSK is accepted
    * and report the user input when needed
    */
   NM_EV_ADD_SECURITY_DSK_SET,
@@ -106,9 +103,9 @@ typedef struct network_mgmt_state {
   uint8_t count; // counter used to send multiple explore_request_inclusion/exclusion frame
 
   /* Used for testing when middleware has finished probing a newly
-   * included smart start node */
+   * included SmartStart node */
 
-  /// The DSK we expect, this is used in smart start inclusion
+  /// The DSK we expect, this is used in SmartStart inclusion
   zwave_dsk_t expected_dsk;
   /// The DSK reported by the node, this is pushed in libs2
   zwave_dsk_t reported_dsk;
@@ -133,7 +130,7 @@ typedef struct network_mgmt_state {
   sl_status_t status;
 
   zwave_node_info_t node_info;
-  ///True if smart start should be enabled after returning to idle.
+  ///True if SmartStart should be enabled after returning to idle.
   bool smart_start_enabled;
   struct etimer timer;
   // Requested Learn mode
@@ -233,7 +230,26 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data);
  * \ingroup NW_CMD_handler
  */
 #define NMS_FLAG_CSA_INCLUSION 0x100
-
+/**
+ * @brief Initialize the Z-Wave network management state machine 
+ *
+ * Sets \ref zwave_s2_network_callbacks_t
+ * Calls \ref zwave_s2_set_network_callbacks and \ref zwave_s0_set_network_callbacks
+ * Resets \ref network_mgmt_state_t nms
+ * Sets the Network Management state to \ref NM_IDLE
+ * Print the HomeID, NodeID and DSK to console and Print node list
+ * Stops all ongoing Network management operations
+ *
+ */
 void nm_state_machine_init();
+/**
+ * @brief Teardown the Z-Wave network management state machine 
+ * Resets \ref network_mgmt_state_t nms
+ * Sets the Network Management state to \ref NM_IDLE
+ * Stops all ongoing Network management operations
+ *
+ */
+ 
+void nm_state_machine_teardown();
 
 #endif

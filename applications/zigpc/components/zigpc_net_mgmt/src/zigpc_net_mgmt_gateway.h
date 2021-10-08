@@ -14,6 +14,8 @@
 #ifndef ZIGPC_NET_MGMT_GATEWAY_H
 #define ZIGPC_NET_MGMT_GATEWAY_H
 
+#include <sl_status.h>
+
 /**
  * @brief Setup listeners to receive ZigPC Gateway events.
  *

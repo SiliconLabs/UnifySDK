@@ -13,10 +13,10 @@
  *****************************************************************************/
 #include "attribute_resolver_rule_internal.hpp"
 
-std::vector<attribute_store_node_t>
+std::set<attribute_store_node_t>
   attribute_resolver_rule_get_group_nodes(resolver_rule_type_t rule_type,
                                           attribute_store_node_t _node)
 {
-  return std::vector<attribute_store_node_t>();
+  return std::set<attribute_store_node_t>();
   //NA
 }

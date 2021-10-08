@@ -16,6 +16,7 @@ var group__components =
     [ "Z-Wave RX", "group__zwave__rx.html", "group__zwave__rx" ],
     [ "Z-Wave SmartStart Management", "group__zwave__smartstart__management.html", null ],
     [ "Z-Wave Transports", "group__zwave__transports.html", "group__zwave__transports" ],
+    [ "Transport Service", "group__transport__service.html", "group__transport__service" ],
     [ "Z-Wave TX", "group__zwave__tx.html", "group__zwave__tx" ],
     [ "Z-Wave TX Groups", "group__zwave__tx__groups.html", "group__zwave__tx__groups" ],
     [ "A Z-Wave Transmission Scheme Selectors", "group__zwave__tx__scheme__selector.html", "group__zwave__tx__scheme__selector" ],

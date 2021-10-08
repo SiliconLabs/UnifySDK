@@ -13,7 +13,6 @@
 
 // Includes from this component
 #include "zwave_command_class_thermostat_setpoint.h"
-#include "zwave_command_class_thermostat_setpoint_attributes.h"
 #include "zwave_command_classes_utils.h"
 
 // Includes from other components
@@ -32,10 +31,10 @@
 // Generic includes
 #include <assert.h>
 
-// Includes from auto-generated files
-
 // Log define
 #define LOG_TAG "zwave_command_class_thermostat_setpoint"
+
+#define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_##type
 
 ///////////////////////////////////////////////////////////////////////////////
 // Private helper functions
@@ -44,51 +43,35 @@ static void zwave_command_class_thermostat_setpoint_set_default_capabilities(
   attribute_store_node_t type_node)
 {
   attribute_store_node_t min_value_node
-    = attribute_store_get_node_child_by_type(
-      type_node,
-      ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE,
-      0);
+    = attribute_store_get_node_child_by_type(type_node,
+                                             ATTRIBUTE(MIN_VALUE),
+                                             0);
 
   int32_t min_value = DEFAULT_MIN_VALUE;
-  attribute_store_set_node_attribute_value(min_value_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&min_value,
-                                           sizeof(min_value));
+  attribute_store_set_reported(min_value_node, &min_value, sizeof(min_value));
 
   attribute_store_node_t max_value_node
-    = attribute_store_get_node_child_by_type(
-      type_node,
-      ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE,
-      0);
+    = attribute_store_get_node_child_by_type(type_node,
+                                             ATTRIBUTE(MAX_VALUE),
+                                             0);
 
   int32_t max_value = DEFAULT_MAX_VALUE * 1000;
-  attribute_store_set_node_attribute_value(max_value_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&max_value,
-                                           sizeof(max_value));
+  attribute_store_set_reported(max_value_node, &max_value, sizeof(max_value));
 
   attribute_store_node_t min_value_scale_node
-    = attribute_store_get_node_child_by_type(
-      type_node,
-      ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE_SCALE,
-      0);
+    = attribute_store_get_node_child_by_type(type_node,
+                                             ATTRIBUTE(MIN_VALUE_SCALE),
+                                             0);
 
   uint8_t scale = DEFAULT_SCALE;
-  attribute_store_set_node_attribute_value(min_value_scale_node,
-                                           REPORTED_ATTRIBUTE,
-                                           &scale,
-                                           sizeof(scale));
+  attribute_store_set_reported(min_value_scale_node, &scale, sizeof(scale));
 
   attribute_store_node_t max_value_scale_node
-    = attribute_store_get_node_child_by_type(
-      type_node,
-      ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE_SCALE,
-      0);
+    = attribute_store_get_node_child_by_type(type_node,
+                                             ATTRIBUTE(MAX_VALUE_SCALE),
+                                             0);
 
-  attribute_store_set_node_attribute_value(max_value_scale_node,
-                                           REPORTED_ATTRIBUTE,
-                                           &scale,
-                                           sizeof(scale));
+  attribute_store_set_reported(max_value_scale_node, &scale, sizeof(scale));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -109,8 +92,7 @@ static void zwave_command_class_thermostat_setpoint_on_version_attribute_update(
   }
 
   // Check that we have the right type of attribute.
-  assert(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VERSION
-         == attribute_store_get_node_type(updated_node));
+  assert(ATTRIBUTE(VERSION) == attribute_store_get_node_type(updated_node));
 
   uint8_t supporting_node_version = 0;
   attribute_store_read_value(updated_node,
@@ -130,7 +112,7 @@ static void zwave_command_class_thermostat_setpoint_on_version_attribute_update(
 
   // Let the rest of the command class perform the job.
   attribute_store_type_t supported_sensor_types[]
-    = {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_SETPOINT_TYPES};
+    = {ATTRIBUTE(SUPPORTED_SETPOINT_TYPES)};
   attribute_store_add_if_missing(endpoint_node,
                                  supported_sensor_types,
                                  COUNT_OF(supported_sensor_types));
@@ -143,13 +125,6 @@ static attribute_store_node_t
   zwave_command_class_thermostat_setpoint_create_type(
     attribute_store_node_t endpoint_node, uint8_t type)
 {
-  //FIXME: THis is a hack to ignore other setpoint types than heating / cooling.
-  // We do not store other because of this infamous Interpretation A / Interpretation B
-  // which make us risk storing wrong data and go in a spin asking for it.
-  if (type != 1 && type != 2) {
-    return ATTRIBUTE_STORE_INVALID_NODE;
-  }
-
   // Do we already have the node ?
   attribute_store_node_t type_node = attribute_store_get_node_child_by_value(
     endpoint_node,
@@ -169,10 +144,7 @@ static attribute_store_node_t
                                endpoint_node);
 
   if (SL_STATUS_OK
-      != attribute_store_set_node_attribute_value(type_node,
-                                                  REPORTED_ATTRIBUTE,
-                                                  &type,
-                                                  sizeof(type))) {
+      != attribute_store_set_reported(type_node, &type, sizeof(type))) {
     return ATTRIBUTE_STORE_INVALID_NODE;
   };
 
@@ -197,7 +169,7 @@ sl_status_t zwave_command_class_thermostat_setpoint_supported_get(
   attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
 {
   // Check that we have the right type of attribute.
-  assert(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_SETPOINT_TYPES
+  assert(ATTRIBUTE(SUPPORTED_SETPOINT_TYPES)
          == attribute_store_get_node_type(node));
 
   // Default frame length in case of error
@@ -219,8 +191,7 @@ sl_status_t zwave_command_class_thermostat_setpoint_capabilities_get(
   attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
 {
   // Check that we have the right type of attribute.
-  assert(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE
-         == attribute_store_get_node_type(node));
+  assert(ATTRIBUTE(MIN_VALUE) == attribute_store_get_node_type(node));
   // Default frame length in case of error
   *frame_len = 0;
 
@@ -395,17 +366,14 @@ static sl_status_t zwave_command_class_thermostat_setpoint_handle_report(
     ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE_SCALE,
     0);
 
-  attribute_store_set_node_attribute_value(scale_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&scale,
-                                           sizeof(scale));
+  attribute_store_set_reported(scale_node, &scale, sizeof(scale));
 
   int32_t setpoint_value
     = command_class_get_int32_value(size,
                                     precision,
                                     &frame_data[REPORT_VALUE_INDEX]);
   sl_log_debug(LOG_TAG,
-               "NodeID %03d:%d - Thermostat current setpoint value: %.1f",
+               "NodeID %d:%d - Thermostat current setpoint value: %.1f",
                (int)connection_info->remote.node_id,
                (int)connection_info->remote.endpoint_id,
                setpoint_value / 1000.0f);
@@ -418,10 +386,9 @@ static sl_status_t zwave_command_class_thermostat_setpoint_handle_report(
       ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE,
       0);
 
-  attribute_store_set_node_attribute_value(setpoint_value_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&setpoint_value,
-                                           sizeof(setpoint_value));
+  attribute_store_set_reported(setpoint_value_node,
+                               &setpoint_value,
+                               sizeof(setpoint_value));
   // We have a set function for this attribute, so we also align the desired value
   attribute_store_set_desired_as_reported(setpoint_value_node);
 
@@ -446,14 +413,12 @@ static sl_status_t
   attribute_store_node_t supported_bitmask_node
     = attribute_store_get_node_child_by_type(
       endpoint_node,
-      ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_SETPOINT_TYPES,
+      ATTRIBUTE(SUPPORTED_SETPOINT_TYPES),
       0);
 
-  attribute_store_set_node_attribute_value(
-    supported_bitmask_node,
-    REPORTED_ATTRIBUTE,
-    &frame_data[SUPPORTED_REPORT_BITMASK_INDEX],
-    frame_length - SUPPORTED_REPORT_BITMASK_INDEX);
+  attribute_store_set_reported(supported_bitmask_node,
+                               &frame_data[SUPPORTED_REPORT_BITMASK_INDEX],
+                               frame_length - SUPPORTED_REPORT_BITMASK_INDEX);
 
   // Now create a type attribute for each supported type
   for (uint8_t byte = 0; byte < frame_length - SUPPORTED_REPORT_BITMASK_INDEX;
@@ -462,6 +427,11 @@ static sl_status_t
       if (frame_data[SUPPORTED_REPORT_BITMASK_INDEX + byte] & (1 << bit)) {
         // This type is supported.
         uint8_t type = byte * 8 + bit;
+        if (type > 2) {
+          // Use Bit Interpretation A see Thermostat Setpoint Command Class in
+          // Z-Wave Application Command Class Specification
+          type += 4;
+        }
         zwave_command_class_thermostat_setpoint_create_type(endpoint_node,
                                                             type);
       }
@@ -518,10 +488,9 @@ static sl_status_t
     = (frame_data[CAPABILITIES_REPORT_MIN_PRECISION_SCALE_SIZE_INDEX]
        & SCALE_MASK)
       >> 3;
-  attribute_store_set_node_attribute_value(supported_min_value_scale_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&received_min_value_scale,
-                                           sizeof(received_min_value_scale));
+  attribute_store_set_reported(supported_min_value_scale_node,
+                               &received_min_value_scale,
+                               sizeof(received_min_value_scale));
 
   attribute_store_node_t supported_min_value_node
     = attribute_store_get_node_child_by_type(
@@ -542,25 +511,24 @@ static sl_status_t
     &frame_data[CAPABILITIES_REPORT_MIN_VALUE_INDEX]);
 
   sl_log_debug(LOG_TAG,
-               "NodeID %03d:%d - Thermostat Min supported temperature: %.1f",
+               "NodeID %d:%d - Thermostat Min supported temperature "
+               "(3 decimal digits): %d",
                (int)connection_info->remote.node_id,
                (int)connection_info->remote.endpoint_id,
-               (float)received_min_value);
+               received_min_value);
 
-  attribute_store_set_node_attribute_value(supported_min_value_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&received_min_value,
-                                           sizeof(received_min_value));
+  attribute_store_set_reported(supported_min_value_node,
+                               &received_min_value,
+                               sizeof(received_min_value));
 
   // Save the Max value
   int32_t max_value_precision_scale_size_index
     = CAPABILITIES_REPORT_MIN_PRECISION_SCALE_SIZE_INDEX
       + received_min_value_size + 1;
   attribute_store_node_t supported_max_value_scale_node
-    = attribute_store_get_node_child_by_type(
-      type_node,
-      ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE_SCALE,
-      0);
+    = attribute_store_get_node_child_by_type(type_node,
+                                             ATTRIBUTE(MAX_VALUE_SCALE),
+                                             0);
 
   if (supported_max_value_scale_node == ATTRIBUTE_STORE_INVALID_NODE) {
     return SL_STATUS_FAIL;
@@ -568,16 +536,14 @@ static sl_status_t
 
   int32_t received_max_value_scale
     = (frame_data[max_value_precision_scale_size_index] & SCALE_MASK) >> 3;
-  attribute_store_set_node_attribute_value(supported_max_value_scale_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&received_max_value_scale,
-                                           sizeof(received_max_value_scale));
+  attribute_store_set_reported(supported_max_value_scale_node,
+                               &received_max_value_scale,
+                               sizeof(received_max_value_scale));
 
   attribute_store_node_t supported_max_value_node
-    = attribute_store_get_node_child_by_type(
-      type_node,
-      ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE,
-      0);
+    = attribute_store_get_node_child_by_type(type_node,
+                                             ATTRIBUTE(MAX_VALUE),
+                                             0);
   int32_t received_max_value_size
     = frame_data[max_value_precision_scale_size_index] & SIZE_MASK;
   int32_t received_max_value_precision
@@ -589,15 +555,15 @@ static sl_status_t
     &frame_data[max_value_precision_scale_size_index + 1]);
 
   sl_log_debug(LOG_TAG,
-               "NodeID %03d:%d - Thermostat Max supported temperature: %.1f",
+               "NodeID %d:%d - Thermostat Max supported temperature "
+               "(3 decimal digits): %d",
                (int)connection_info->remote.node_id,
                (int)connection_info->remote.endpoint_id,
-               (float)received_max_value);
+               received_max_value);
 
-  attribute_store_set_node_attribute_value(supported_max_value_node,
-                                           REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&received_max_value,
-                                           sizeof(received_max_value));
+  attribute_store_set_reported(supported_max_value_node,
+                               &received_max_value,
+                               sizeof(received_max_value));
 
   return SL_STATUS_OK;
 }
@@ -646,24 +612,23 @@ sl_status_t zwave_command_class_thermostat_setpoint_init()
 {
   // Resolver functions.
   attribute_resolver_register_rule(
-    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_SETPOINT_TYPES,
+    ATTRIBUTE(SUPPORTED_SETPOINT_TYPES),
     NULL,
     zwave_command_class_thermostat_setpoint_supported_get);
 
   attribute_resolver_register_rule(
-    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE,
+    ATTRIBUTE(MIN_VALUE),
     NULL,
     zwave_command_class_thermostat_setpoint_capabilities_get);
 
-  attribute_resolver_register_rule(
-    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE,
-    zwave_command_class_thermostat_setpoint_set,
-    zwave_command_class_thermostat_setpoint_get);
+  attribute_resolver_register_rule(ATTRIBUTE(VALUE),
+                                   zwave_command_class_thermostat_setpoint_set,
+                                   zwave_command_class_thermostat_setpoint_get);
 
   // Listening for supporting nodes
   attribute_store_register_callback_by_type(
     zwave_command_class_thermostat_setpoint_on_version_attribute_update,
-    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VERSION);
+    ATTRIBUTE(VERSION));
 
   // Register Thermostat Setpoint CC handler to the Z-Wave CC framework
   zwave_command_handler_t handler = {};

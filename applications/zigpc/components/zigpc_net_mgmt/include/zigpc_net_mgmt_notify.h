@@ -55,9 +55,9 @@ enum zigpc_net_mgmt_notify_event {
  * @brief Event data on network state update
  *
  */
-struct zigpc_net_mgmt_on_network_init {
+typedef struct zigpc_net_mgmt_on_network_init {
   zigbee_eui64_t pc_eui64;
-};
+} zigpc_net_mgmt_on_network_init_t;
 
 /**
  * @brief Event data on network state update. These fields
@@ -65,7 +65,7 @@ struct zigpc_net_mgmt_on_network_init {
  * paramters needed to advance the network management FSM.
  *
  */
-struct zigpc_net_mgmt_on_network_state_update {
+typedef struct zigpc_net_mgmt_on_network_state_update {
   /**
    * @brief The new network management state
    *
@@ -90,15 +90,15 @@ struct zigpc_net_mgmt_on_network_state_update {
   const char
     *requested_state_parameter_list[ZIGPC_NET_MGMT_REQUESTED_STATE_PARAMS_MAX];
   uint8_t requested_state_parameter_count;
-};
+} zigpc_net_mgmt_on_network_state_update_t;
 
 /**
  * @brief Event data on node added to the network
  *
  */
-struct zigpc_net_mgmt_on_node_added {
+typedef struct zigpc_net_mgmt_on_node_added {
   zigbee_eui64_t eui64;
-};
+} zigpc_net_mgmt_on_node_added_t;
 
 typedef struct {
   bool success;

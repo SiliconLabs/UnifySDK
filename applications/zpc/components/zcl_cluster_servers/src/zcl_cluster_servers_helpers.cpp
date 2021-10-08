@@ -40,7 +40,7 @@ sl_status_t
                                        &endpoint_id,
                                        sizeof(zwave_endpoint_id_t));
 
-  unid_t received_unid;
+  unid_t received_unid = "";
   status |= attribute_store_network_helper_get_unid_from_node(endpoint_id_node,
                                                               received_unid);
 

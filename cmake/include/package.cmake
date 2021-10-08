@@ -89,6 +89,7 @@ if(NOT APPLE)
       "libuic" # Package Depends on
       "${CMAKE_BINARY_DIR}/applications/zpc/debconf/config;\
         ${CMAKE_BINARY_DIR}/applications/zpc/debconf/templates;\
+        ${CMAKE_BINARY_DIR}/applications/zpc/debconf/conffiles;\
         ${CMAKE_BINARY_DIR}/applications/zpc/debconf/postinst")
     list(APPEND CPACK_COMPONENTS_ALL "uic-zpc")
   endif()

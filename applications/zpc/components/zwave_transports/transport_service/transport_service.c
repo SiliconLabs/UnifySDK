@@ -24,7 +24,6 @@
 #define LOG_TAG "transport_service"
 
 #define PAYLOAD_SIZE_MAX    (200)
-#define FRAGMENTMAXPAYLOAD  47
 #define FIRST_HDR_LEN       4 /* Cmd class, cmd, size, seqno */
 #define SUBSEQ_HDR_LEN      5 /* Cmd class, cmd, size, seqno + offset 1, offset 2*/
 #define FRAGMENT_FC_TIMEOUT 1000 /*ms*/
@@ -33,11 +32,14 @@
 #define RESET_TIME     5000 /* ms */
 #define offsetof(s, m) (uint16_t)((uint8_t *)&(((s *)0)->m) - (uint8_t *)0)
 static on_transport_service_send_data_complete_t on_send_complete_cb = 0;
-static send_data_t lower_layer_send_data                             = 0;
+
+/* See send_data() in zwave_transport_service_wrapper.c */
+static send_data_t lower_layer_send_data = 0;
+
 static upper_layer_command_handler_t upper_layer_command_handler;
 
 static uint16_t my_node_id;
-static uint8_t max_fragment_size  = 0;
+static uint16_t max_fragment_size  = 0;
 static uint16_t offset_to_request = 0;
 
 static uint8_t flag_tie_broken = 0;
@@ -52,20 +54,18 @@ static uint8_t get_next_missing_offset();
 static void rx_timer_expired(void *ss);
 static void send_last_frag(void);
 
-#define log_debug(f, ...) sl_log_debug(LOG_TAG, f, ## __VA_ARGS__)
-#define log_error(f, ...) sl_log_debug(LOG_TAG, f, ## __VA_ARGS__)
+#define log_debug(f, ...) sl_log_debug(LOG_TAG, f, ##__VA_ARGS__)
+#define log_error(f, ...) sl_log_debug(LOG_TAG, f, ##__VA_ARGS__)
 void transport_service_init(ts_node_id_t node_id,
-                            uint8_t max_frag_size,
                             const upper_layer_command_handler_t command_handler,
                             const send_data_t send_data)
 {
   lower_layer_send_data       = send_data;
   upper_layer_command_handler = command_handler;
   my_node_id                  = node_id;
-  max_fragment_size           = max_frag_size;
 }
 
-uint8_t t2_txBuf[FRAGMENTMAXPAYLOAD
+uint8_t t2_txBuf[PAYLOAD_SIZE_MAX
                  + sizeof(ZW_COMMAND_SUBSEQUENT_FRAGMENT_1BYTE_FRAME) - 1];
 ZW_COMMAND_FIRST_FRAGMENT_1BYTE_FRAME *first_frag
   = (ZW_COMMAND_FIRST_FRAGMENT_1BYTE_FRAME *)t2_txBuf;
@@ -366,7 +366,7 @@ typedef struct sending_cntrl_blk {
     remaining_data_len;  // this records the len of remaining data to be sent
   control_block_t
     cmn; /* Common fields, necessary for both sending and receiving */
-  const uint8_t *datagram;
+  uint8_t datagram[PAYLOAD_SIZE_MAX];
   uint16_t datagram_len;
   uint8_t sending;
   uint8_t flag_replied_frag_req;
@@ -430,7 +430,6 @@ typedef struct receiving_cntrl_blk {
   uint8_t recv_frag_compl_list[16];
 
   /* Buffer for incoming re-assembled datagrams */
-  //#define datagramData       ((BYTE*) uip_buf)
   uint8_t datagramData[PAYLOAD_SIZE_MAX];
 
   /* To copy the data to destination buffer */
@@ -505,10 +504,11 @@ void transport_service_senddata_cb(uint8_t status, void *user)
     scb.round_trip_first_frag = clock_time() - scb.round_trip_first_frag;
     /* 300 below is added to ease the receiving side to send fragment wait if
      * it wants to */
-    scb.round_trip_first_frag += 300;
-    log_debug("Adding delay of scb.round_trip_first_frag: %lu ms before sending "
-              "second fragment\n",
-              scb.round_trip_first_frag);
+    scb.round_trip_first_frag += 50;
+    log_debug(
+      "Adding delay of scb.round_trip_first_frag: %lu ms before sending "
+      "second fragment\n",
+      scb.round_trip_first_frag);
   }
 
   if (status != 0) {
@@ -748,7 +748,7 @@ static uint8_t send_frag_req_cmd()
                                 rcb.cmn.source,
                                 t2_txBuf,
                                 sizeof(*frag_req),
-                                1, //expect one frame in response
+                                1,  //expect one frame in response
                                 NULL);
 
     if (ret == 0) {
@@ -817,6 +817,7 @@ static void temp_callback_last_frag(uint8_t status, void *user)
     } else {
       if (on_send_complete_cb) {
         on_send_complete_cb(1, 0);
+        on_send_complete_cb = 0;
       }
       t2_sm_post_event(EV_FAILURE_LAST_FRAG2);
       log_debug("reset_timer\n");
@@ -842,7 +843,7 @@ static void send_last_frag(void)
                                 scb.cmn.dest,
                                 t2_txBuf,
                                 sizeof(*subseq_frag) + scb.datalen_to_send - 1,
-                                1, //expect one frame in response
+                                1,  //expect one frame in response
                                 temp_callback_last_frag);
 
   } else {
@@ -860,6 +861,7 @@ static void send_last_frag(void)
       if (on_send_complete_cb) {
         log_debug("lower_layer_send_data failed twice. Aborting the send\n");
         on_send_complete_cb(1, 0);
+        on_send_complete_cb = 0;
       }
       t2_sm_post_event(EV_FAILURE_LAST_FRAG2);
       ctimer_set(&scb.reset_timer, RESET_TIME, reset_transport_service, 0);
@@ -924,17 +926,10 @@ static void send_subseq_frag(void *nthing)
     return;
   }
   ctimer_set(&scb.reset_timer, RESET_TIME, reset_transport_service, 0);
-#if 0
-  printf("sending payload\n");
-  for (int i = 0; i < (sizeof(*subseq_frag) + scb.datalen_to_send - 1); i++) {
-      printf("0x%02X ", t2_txBuf[i]);
-      if (!(i % 8))
-          printf("\n");
-  }
-#endif
-
   scb.remaining_data_len -= scb.datalen_to_send;
   log_debug("remaining_data_len: %d\n", scb.remaining_data_len);
+  log_debug("data_len: %d\n", sizeof(*subseq_frag) + scb.datalen_to_send - 1);
+
   ret = lower_layer_send_data(scb.cmn.source,
                               scb.cmn.dest,
                               t2_txBuf,
@@ -962,6 +957,7 @@ void temp_callback_reply_frag_req(unsigned char status, void *user)
   //    memcpy((uint8_t*)&scb.cmn.tx_status, ts, sizeof(TX_STATUS_TYPE));
   if ((status != 0) && (on_send_complete_cb)) {
     on_send_complete_cb(status, 0);
+    on_send_complete_cb = 0;
   }
   t2_sm_post_event(EV_SENT_MISS_FRAG);
 }
@@ -977,6 +973,7 @@ void fc_timer_expired(void *nthing)
     t2_sm_post_event(EV_FRAG_COMPL_TIMER_REQ);
     if (on_send_complete_cb) {
       on_send_complete_cb(1, 0);
+      on_send_complete_cb = 0;
     }
     ctimer_set(&scb.reset_timer, RESET_TIME, reset_transport_service, 0);
     return;
@@ -992,6 +989,7 @@ void fc_timer_expired(void *nthing)
     log_debug("Sending failure to application\n");
     if (on_send_complete_cb) {
       on_send_complete_cb(1, 0);
+      on_send_complete_cb = 0;
     }
     return;
   }
@@ -1004,6 +1002,7 @@ void fc_timer_expired(void *nthing)
     scb.current_dnode              = 0;
     if (on_send_complete_cb) {
       on_send_complete_cb(1, 0);
+      on_send_complete_cb = 0;
     }
     t2_sm_post_event(EV_FRAG_COMPL_TIMER2);
     ctimer_stop(&rcb.fc_timer);
@@ -1106,7 +1105,10 @@ static void rx_timer_expired(void *ss)
 {
   log_debug("rx_timer_expired\n");
   const struct rx_timer_expired_data *rdata = ss;
-  uint8_t state                             = rdata->state;
+  uint8_t state                             = 0;
+  if (rdata) {
+    state = rdata->state;
+  }
 
   ctimer_stop(&rcb.rx_timer);
 
@@ -1293,8 +1295,8 @@ static bool receive(void)
 
       if ((datagram_offset > sizeof(rcb.datagramData))
           || (rcb.cur_recvd_data_size > sizeof(rcb.datagramData))
-          || ((datagram_offset + rcb.cur_recvd_data_size) >
-              sizeof(rcb.datagramData))) {
+          || ((datagram_offset + rcb.cur_recvd_data_size)
+              > sizeof(rcb.datagramData))) {
         log_debug("Offset of fragment received is more than PAYLOAD_SIZE_MAX. "
                   "Ignoring fragment\n");
         if (current_state == ST_RECEIVING) {
@@ -1321,9 +1323,18 @@ static bool receive(void)
       log_debug("Pending Segments: %d\n", rcb.cmn.pending_segments);
       rcb.datagram_size = datagram_size_tmp;
 
-      memcpy(rcb.datagramData + datagram_offset,
-             rcb.fragment + SUBSEQ_HDR_LEN,
-             rcb.cur_recvd_data_size);
+      if (datagram_offset < sizeof(rcb.datagramData)
+          && ((datagram_offset + rcb.cur_recvd_data_size)
+              < sizeof(rcb.datagramData))) {
+        memcpy(rcb.datagramData + datagram_offset,
+               rcb.fragment + SUBSEQ_HDR_LEN,
+               rcb.cur_recvd_data_size);
+      } else {
+        log_debug("Offset and size of of fragment received is more than"
+                  "PAYLOAD_SIZE_MAX: %d. Ignoring fragment\n",
+                  PAYLOAD_SIZE_MAX);
+        return false;
+      }
 
       if ((datagram_offset + rcb.cur_recvd_data_size)
           >= rcb.datagram_size) {            /*last fragment? */
@@ -1419,6 +1430,7 @@ static bool receive(void)
         if (on_send_complete_cb) {
           log_debug("Sending back TRANSMIT_COMPLETE_OK to client\n");
           on_send_complete_cb(0, 0);
+          on_send_complete_cb = 0;
         }
       } else {
         log_debug("Fragment complete session id is %d while current session id "
@@ -1500,6 +1512,7 @@ static bool transport_service_command_handler(ts_node_id_t source,
       log_debug("Failing the send session\n");
       if (on_send_complete_cb) {
         on_send_complete_cb(1, 0);
+        on_send_complete_cb = 0;
       }
     }
     flag_tie_broken = 1;
@@ -1639,10 +1652,6 @@ bool transport_service_on_frame_received(ts_node_id_t source,
                                          const uint8_t *frame_data,
                                          uint8_t frame_length)
 {
-  if (frame_data[COMMAND_CLASS_INDEX] != COMMAND_CLASS_TRANSPORT_SERVICE_V2) {
-    return true;  //failure
-  }
-
   return transport_service_command_handler(source,
                                            dest,
                                            rx_type,
@@ -1664,19 +1673,7 @@ static void send_first_frag()
     scb.cmn.session_id = 0;     /* Being back from 0 */
 
   scb.frag_compl_list[scb.cmn.session_id] = 0;
-  /* This logic should not be in transport service */
-#if 0
-    if(scb.cmn.p.tx_flags & TRANSMIT_OPTION_EXPLORE) {
-        log_debug("TRANSMIT_OPTION_EXPLORE is on\n");
-        gmax_fragment_size-=8;
-    } else if(!(scb.cmn.p.tx_flags & TRANSMIT_OPTION_NO_ROUTE)) {
-        gmax_fragment_size-=8;
-    } else if(!(scb.cmn.p.tx_flags & TRANSMIT_OPTION_NO_ROUTE)) {
-        log_debug("TRANSMIT_OPTION_NO_ROUTE is on\n");
-        gmax_fragment_size-=8;
-    }
-#endif
-  log_debug("gmax_fragment_size: %d\n", max_fragment_size);
+  log_debug("Max payload size: %d\n", max_fragment_size);
 
   if (scb.remaining_data_len == 0)
     scb.remaining_data_len = scb.datagram_len;
@@ -1698,8 +1695,9 @@ static void send_first_frag()
   /* Take 0th-7th bit of scb.datagram_len */
   first_frag->datagramSize2 = scb.datagram_len & 0xff;
   first_frag->properties2   = scb.cmn.session_id << 4;
-  log_debug("packing session id %d\n", first_frag->properties2 >> 4);
+  log_debug("Packing session id %d\n", first_frag->properties2 >> 4);
 
+  log_error("Length of payload being sent: %d\n", scb.datalen_to_send);
   memcpy(&first_frag->payload1, scb.datagram, scb.datalen_to_send);
 
   /*4 is size of ZW_COMMAND_FIRST_FRAGMENT_1BYTE_FRAME till payload field */
@@ -1716,6 +1714,7 @@ static void send_first_frag()
     return;
   }
 
+  log_debug("data_len: %d\n", sizeof(*first_frag) + scb.datalen_to_send - 1);
   ctimer_set(&scb.reset_timer, RESET_TIME, reset_transport_service, 0);
   ret = lower_layer_send_data(scb.cmn.source,
                               scb.cmn.dest,
@@ -1738,14 +1737,17 @@ transport_service_send_data_return_code_t
                               ts_node_id_t dest,
                               const uint8_t *payload,
                               uint16_t payload_len,
+                              uint16_t max_frame_len,
                               const on_transport_service_send_data_complete_t c)
 {
   on_send_complete_cb = c;
+  max_fragment_size   = max_frame_len - 7;
   if (payload_len > PAYLOAD_SIZE_MAX) {
     log_debug("Payload size is more than PAYLOAD_SIZE_MAX. "
               "Ignoring the fragment\n\n");
     return TRANSPORT_SERVICE_WILL_OVERFLOW;
   }
+  memcpy(scb.datagram, payload, payload_len);
   ctimer_set(&scb.reset_timer, RESET_TIME, reset_transport_service, 0);
   log_debug("Request for Sending data: dataLength: %d, MyNodeid: %d "
             "Source node:%d, Destination node: %d\n",
@@ -1770,7 +1772,6 @@ transport_service_send_data_return_code_t
     return TRANSPORT_SERVICE_BUSY;
   }
 
-  scb.datagram              = payload;
   scb.cmn.source            = source;
   scb.cmn.dest              = dest;
   scb.datagram_len          = payload_len;

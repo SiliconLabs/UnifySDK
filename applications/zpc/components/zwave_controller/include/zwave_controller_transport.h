@@ -45,6 +45,8 @@
 #include "zwave_controller.h"
 #include "zwave_tx.h"
 
+#include "zwave_command_class_version_types.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -82,7 +84,7 @@ typedef struct zwave_controller_transport {
    * is implementing.
    *
    */
-  uint8_t version;
+  zwave_cc_version_t version;
 
   /**
    * @brief Send function to use when encapsulating with this transport.
@@ -149,13 +151,13 @@ sl_status_t zwave_controller_transport_register(
  * @brief check if a command class is registered as an encapsulation cc in
  *        Z-Wave controller transport framework. If it does, the module will
  *        retrun the version of the encapsulation command class.
- * 
+ *
  * @param  command_class Z-Wave Command Class
- * 
+ *
  * @return zero if the command class is not registered as an encapsulation cc
- *              in the Z-Wave transport plugin framework. 
+ *              in the Z-Wave transport plugin framework.
  */
-uint8_t zwave_controller_transport_is_encapsulation_cc(
+zwave_cc_version_t zwave_controller_transport_is_encapsulation_cc(
   zwave_command_class_t command_class);
 
 #ifdef __cplusplus

@@ -12,6 +12,7 @@
  *****************************************************************************/
 
 // This component
+#include "ota_time.h"
 #include "ota_time.hpp"
 
 // UIC Components
@@ -73,7 +74,7 @@ std::string get_utc_time_string_from_utc_time(time_t time_input_utc)
   return time;
 }
 
-time_t calculate_utc_current_time_difference(const time_t &time_utc)
+time_t calculate_utc_current_time_difference(const time_t time_utc)
 {
   time_t current_time;
   current_time = time(NULL);

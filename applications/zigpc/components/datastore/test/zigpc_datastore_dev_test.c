@@ -43,13 +43,19 @@ int suiteTearDown(int num_failures)
  * @brief Setup before each test case
  *
  */
-void setUp(void) {}
+void setUp(void)
+{
+  attribute_store_mock_Init();
+}
 
 /**
  * @brief Teardown after each test case
  *
  */
-void tearDown(void) {}
+void tearDown(void)
+{
+  attribute_store_mock_Destroy();
+}
 
 void helper_assert_parent_set_overhead(attribute_store_node_t return_nodeid)
 {
@@ -69,10 +75,21 @@ void test_zigpc_datstore_device_count_sanity(void)
 {
   // ARRANGE
   size_t count;
+  size_t expected_count = 10U;
 
   helper_assert_parent_set_overhead(MOCK_NWK_NODE_ID);
 
-  attribute_store_get_node_child_count_ExpectAndReturn(MOCK_NWK_NODE_ID, 10);
+  for (size_t i = 0; i < expected_count; i++) {
+    attribute_store_get_node_child_by_type_ExpectAndReturn(MOCK_NWK_NODE_ID,
+                                                           ZIGPC_DS_TYPE_DEVICE,
+                                                           i,
+                                                           i + 1);
+  }
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    MOCK_NWK_NODE_ID,
+    ZIGPC_DS_TYPE_DEVICE,
+    expected_count,
+    ATTRIBUTE_STORE_INVALID_NODE);
 
   // ACT
   count = zigpc_datastore_get_device_count();
@@ -293,6 +310,55 @@ void test_zigpc_datstore_device_delete(void)
 
   // ACT
   status = zigpc_datastore_remove_device(eui64_arr);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, status);
+}
+
+void test_zigpc_datstore_device_remove_children(void)
+{
+  // ARRANGE
+  sl_status_t status;
+  zigbee_eui64_uint_t eui64 = 0xF42783A3948723D8;
+  zigbee_eui64_t eui64_arr  = "\xF4\x27\x83\xA3\x94\x87\x23\xD8";
+  size_t expected_children  = 5;
+
+  {  // EXPECT
+    helper_assert_parent_set_overhead(MOCK_NWK_NODE_ID);
+
+    attribute_store_node_exists_ExpectAndReturn(MOCK_NWK_NODE_ID, true);
+    attribute_store_get_node_child_by_value_ExpectAndReturn(
+      MOCK_NWK_NODE_ID,
+      ZIGPC_DS_TYPE_DEVICE,
+      DESIRED_ATTRIBUTE,
+      (uint8_t *)&eui64,
+      sizeof(zigbee_eui64_uint_t),
+      0,
+      MOCK_DEV_1_NODE_ID);
+
+    // remove_children expects
+    attribute_store_node_exists_ExpectAndReturn(MOCK_NWK_NODE_ID, true);
+    attribute_store_get_node_child_by_value_ExpectAndReturn(
+      MOCK_NWK_NODE_ID,
+      ZIGPC_DS_TYPE_DEVICE,
+      DESIRED_ATTRIBUTE,
+      (uint8_t *)&eui64,
+      sizeof(zigbee_eui64_uint_t),
+      0,
+      MOCK_DEV_1_NODE_ID);
+
+    attribute_store_get_node_child_count_ExpectAndReturn(MOCK_DEV_1_NODE_ID,
+                                                         expected_children);
+    for (size_t i = 0; i < expected_children; i++) {
+      attribute_store_get_node_child_ExpectAndReturn(MOCK_DEV_1_NODE_ID,
+                                                     i,
+                                                     i + 10);
+      attribute_store_delete_node_ExpectAndReturn(i + 10, SL_STATUS_OK);
+    }
+  }
+
+  // ACT
+  status = zigpc_datastore_remove_device_children(eui64_arr);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, status);

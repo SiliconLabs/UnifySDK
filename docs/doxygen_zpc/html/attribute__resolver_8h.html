@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -120,6 +120,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gadf861538dd5cb124bd6d0a83526e327c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gadf861538dd5cb124bd6d0a83526e327c">attribute_resolver_register_rule</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> node_type, <a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a> set_func, <a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a> get_func)</td></tr>
 <tr class="memdesc:gadf861538dd5cb124bd6d0a83526e327c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register an attribute rule.  <a href="group__attribute__resolver.html#gadf861538dd5cb124bd6d0a83526e327c">More...</a><br /></td></tr>
 <tr class="separator:gadf861538dd5cb124bd6d0a83526e327c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga36150b164bf3a1a4bdd7b5c762999473"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga36150b164bf3a1a4bdd7b5c762999473">attribute_resolver_set_attribute_depth</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> node_type, int depth)</td></tr>
+<tr class="memdesc:ga36150b164bf3a1a4bdd7b5c762999473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the relative depth of an attribute in the attribute tree.  <a href="group__attribute__resolver.html#ga36150b164bf3a1a4bdd7b5c762999473">More...</a><br /></td></tr>
+<tr class="separator:ga36150b164bf3a1a4bdd7b5c762999473"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2be726f603b349975aab0498d1457202"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga2be726f603b349975aab0498d1457202">attribute_resolver_pause_node_resolution</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
 <tr class="memdesc:ga2be726f603b349975aab0498d1457202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pause the resolution on a given node.  <a href="group__attribute__resolver.html#ga2be726f603b349975aab0498d1457202">More...</a><br /></td></tr>
 <tr class="separator:ga2be726f603b349975aab0498d1457202"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,7 +148,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:gac219d9eb804a9862ba4dd1e089a72fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function traverses attribute store to check if any parent of the attribute node is paused or not.  <a href="group__attribute__resolver.html#gac219d9eb804a9862ba4dd1e089a72fe3">More...</a><br /></td></tr>
 <tr class="separator:gac219d9eb804a9862ba4dd1e089a72fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gad167230e6bf706a5e1bde2d8b75a2b38">is_node_pending_set_resolution</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
-<tr class="memdesc:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if a node is pendign a set resolution. i.e. command has been sent and we are waiting for a state update in the attribute store.  <a href="group__attribute__resolver.html#gad167230e6bf706a5e1bde2d8b75a2b38">More...</a><br /></td></tr>
+<tr class="memdesc:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if a node is pending a set resolution. i.e. command has been sent and we are waiting for a state update in the attribute store.  <a href="group__attribute__resolver.html#gad167230e6bf706a5e1bde2d8b75a2b38">More...</a><br /></td></tr>
 <tr class="separator:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa3536d271edf4bd224afc20fc1253d08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gaa3536d271edf4bd224afc20fc1253d08">attribute_resolver_state_log</a> ()</td></tr>
 <tr class="memdesc:gaa3536d271edf4bd224afc20fc1253d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the state of the Attribute Resolver using <a class="el" href="group__sl__log.html">Log</a>.  <a href="group__attribute__resolver.html#gaa3536d271edf4bd224afc20fc1253d08">More...</a><br /></td></tr>
@@ -157,7 +160,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_6aae6d97117ab6b712c07aa9139de170.html">uic_attribute_resolver</a></li><li class="navelem"><a class="el" href="dir_ea063d55e7262d84fe61245a8bc10cf9.html">include</a></li><li class="navelem"><a class="el" href="attribute__resolver_8h.html">attribute_resolver.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:37 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -29,15 +29,21 @@ extern "C" {
 
 #define PRIMARY_NETWORK_NUM 1
 
+#define NODE_TYPE_OFFSET 0x10000000
+
 /**
  * @brief Node datastore node types
  *
  */
-enum {
-  ZIGPC_DS_TYPE_NETWORK = (0x10000000 + 1),
-  ZIGPC_DS_TYPE_DEVICE,
-  ZIGPC_DS_TYPE_ENDPOINT,
-  ZIGPC_DS_TYPE_CLUSTER,
+typedef enum {
+  ZIGPC_DS_TYPE_NETWORK                   = (NODE_TYPE_OFFSET + 0x1),
+  ZIGPC_DS_TYPE_DEVICE                    = (NODE_TYPE_OFFSET + 0x2),
+  ZIGPC_DS_TYPE_ENDPOINT                  = (NODE_TYPE_OFFSET + 0x4),
+  ZIGPC_DS_TYPE_SERVER_CLUSTER            = (NODE_TYPE_OFFSET + 0x8),
+  ZIGPC_DS_TYPE_CLIENT_CLUSTER            = (NODE_TYPE_OFFSET + 0x10),
+  ZIGPC_DS_TYPE_CLUSTER_ATTRIBUTE         = (NODE_TYPE_OFFSET + 0x20),
+  ZIGPC_DS_TYPE_CLUSTER_GENERATED_COMMAND = (NODE_TYPE_OFFSET + 0x40),
+  ZIGPC_DS_TYPE_CLUSTER_RECEIVED_COMMAND  = (NODE_TYPE_OFFSET + 0x80),
 } zigpc_datastore_node_type_t;
 
 #ifdef __cplusplus

@@ -1,8 +1,9 @@
 use crate::{cache::Cache, mqtt_client::*};
+use std::collections::BTreeMap;
 use std::collections::HashSet;
 use std::rc::Rc;
-use uic_log::log_error;
 use uic_log::log_debug;
+use uic_log::log_error;
 
 const TAG: &str = "mqtt_handler";
 
@@ -50,11 +51,11 @@ impl<'a> MqttHandler<'a> {
     fn process_message(&mut self, msg: MosqMessage) -> std::result::Result<(), String> {
         if msg.text().is_empty() {
             // Ignore unretain message
-            log_debug(TAG,  format!("Unretain of {}", msg.topic()).to_string() );
+            log_debug(TAG, format!("Unretain of {}", msg.topic()));
             Ok(())
         } else {
             let json = json::parse(msg.text())
-            .map_err(|e| format!("could not parse body of topic '{}' : {}", msg.topic(), e))?;
+                .map_err(|e| format!("could not parse body of topic '{}' : {}", msg.topic(), e))?;
 
             if self.reported_group_list_matcher.matches(&msg) {
                 self.on_group_list_reported(msg.topic(), json)
@@ -94,14 +95,62 @@ impl<'a> MqttHandler<'a> {
         let (unid, ep) = MqttHandler::get_unid_ep_of_topic(topic)?;
         let value = &json["value"];
         let group_list: Vec<u16> = value.members().filter_map(|v| v.as_u16()).collect();
-        let changes = self.cache.set_group_list_for_node(&unid, ep, &group_list);
+        let changes = self
+            .cache
+            .set_group_list_for_node(&unid, ep, &group_list);
 
         for change in changes {
-            let topic = format!("ucl/by-group/{}/NodeList/{}", change.group_id, &change.unid);
             let mut payload = Vec::new();
             if !change.is_unretain() {
                 let json_object = json::object! {
                     "value" => json::JsonValue::from( change.endpoints ),
+                };
+                payload = json::stringify(json_object).as_bytes().to_vec();
+            } else {
+                if self.cache.get_endpoints_for_group(&change.group_id) == None {
+                    self.cache.remove_group_name(change.group_id);
+                    let topic = format!("ucl/by-group/{}/GroupName", &change.group_id);
+                    self.mqtt_client
+                        .publish(&topic, &payload, 0, true)
+                        .map_err(|e| format!("error publishing topic '{}' : {}", topic, e))?;
+                }
+                if let Some(supported_commands) = self
+                    .cache
+                    .get_endpoints_supported_commands_per_cluster(vec![(unid.clone(), ep)])
+                {
+                    self.publish_commands_by_cluster(&change.group_id, supported_commands, true)?;
+                }
+            }
+            let topic = format!(
+                "ucl/by-group/{}/NodeList/{}",
+                &change.group_id, &change.unid
+            );
+            self.mqtt_client
+                .publish(&topic, &payload, 0, true)
+                .map_err(|e| format!("error publishing topic '{}' : {}", topic, e))?;
+            if let Some(supported_commands) = self
+                .cache
+                .get_group_supported_commands_per_cluster(&change.group_id)
+            {
+                self.publish_commands_by_cluster(&change.group_id, supported_commands, false)?;
+            }
+        }
+        Ok(())
+    }
+
+    fn publish_commands_by_cluster(
+        &mut self,
+        group_id: &u16,
+        supported_commands: BTreeMap<String, HashSet<String>>,
+        is_unretain: bool,
+    ) -> std::result::Result<(), String> {
+        for (cluster, commands) in supported_commands {
+            let mut payload = Vec::new();
+            let topic = format!("ucl/by-group/{}/{}/SupportedCommands", &group_id, cluster);
+            if !is_unretain {
+                let vec_commands = commands.into_iter().collect::<Vec<String>>();
+                let json_object = json::object! {
+                    "value" => json::JsonValue::from(vec_commands),
                 };
                 payload = json::stringify(json_object).as_bytes().to_vec();
             }
@@ -109,7 +158,6 @@ impl<'a> MqttHandler<'a> {
                 .publish(&topic, &payload, 0, true)
                 .map_err(|e| format!("error publishing topic '{}' : {}", topic, e))?;
         }
-
         Ok(())
     }
 
@@ -128,7 +176,6 @@ impl<'a> MqttHandler<'a> {
             let name = val_obj
                 .as_str()
                 .ok_or(format!("value of \"value\" key not a string {}", topic))?;
-
             let group_str = topic.split_terminator('/').collect::<Vec<&str>>()[6];
             let group_id = group_str
                 .parse::<u16>()
@@ -208,7 +255,7 @@ impl<'a> MqttHandler<'a> {
             for endpoint in self.cache.get_endpoints_for_group(&group).iter().flatten() {
                 if let Some(commands) = self
                     .cache
-                    .get_endpoint_cluster_supported_commands(&endpoint, cluster_name)
+                    .get_endpoint_cluster_supported_commands(endpoint, cluster_name)
                 {
                     command_sets.push(commands);
                 }
@@ -216,9 +263,9 @@ impl<'a> MqttHandler<'a> {
             if let Some((first, rest)) = command_sets.split_first() {
                 // Find the intersection of all the sets in our vector.
                 let common_commands: Vec<String> = rest
-                    .into_iter()
+                    .iter()
                     .fold(first.clone(), |acc, s| {
-                        acc.intersection(&s).cloned().collect()
+                        acc.intersection(s).cloned().collect()
                     })
                     .into_iter()
                     .collect();
@@ -227,17 +274,11 @@ impl<'a> MqttHandler<'a> {
                     "value" => json::JsonValue::from( common_commands ),
                 };
 
-
                 let pub_topic =
                     format!("ucl/by-group/{}/{}/SupportedCommands", group, cluster_name);
                 let _msg_id = self
                     .mqtt_client
-                    .publish(
-                        &pub_topic,
-                        json::stringify(json_object).as_bytes(),
-                        0,
-                        true,
-                    )
+                    .publish(&pub_topic, json::stringify(json_object).as_bytes(), 0, true)
                     .map_err(|e| format!("error publishing to '{}' : {}", pub_topic, e))?;
             }
         }

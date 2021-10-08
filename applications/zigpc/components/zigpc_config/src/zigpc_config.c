@@ -23,6 +23,9 @@
 // List of default settings
 static const char *CONFIG_KEY_ZIGPC_SERIAL_PORT = "zigpc.serial";
 static const char *DEFAULT_SERIAL_PORT          = "/dev/ttyUSB0";
+static const char *CONFIG_KEY_ZIGPC_USE_TC_WELL_KNOWN_KEY
+  = "zigpc.tc_use_well_known_key";
+static const bool DEFAULT_USE_TC_WELL_KNOWN_KEY = false;
 
 static zigpc_config_t config;
 int zigpc_config_init()
@@ -42,6 +45,10 @@ int zigpc_config_init()
   status |= config_add_string(CONFIG_KEY_ZIGPC_SERIAL_PORT,
                               "serial port to use",
                               DEFAULT_SERIAL_PORT);
+  status
+    |= config_add_bool(CONFIG_KEY_ZIGPC_USE_TC_WELL_KNOWN_KEY,
+                       "Allow Trust Center joins using well-known link key",
+                       DEFAULT_USE_TC_WELL_KNOWN_KEY);
 
   return status != CONFIG_STATUS_OK;
 }
@@ -54,6 +61,9 @@ sl_status_t zigpc_config_fixt_setup()
   status |= config_get_as_int(CONFIG_KEY_MQTT_PORT, &config.mqtt_port);
   status
     |= config_get_as_string(CONFIG_KEY_DATASTORE_FILE, &config.datastore_file);
+  status |= config_get_as_bool(CONFIG_KEY_ZIGPC_USE_TC_WELL_KNOWN_KEY,
+                               &config.tc_use_well_known_key);
+
   return status == CONFIG_STATUS_OK ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 

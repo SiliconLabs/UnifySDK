@@ -34,27 +34,27 @@ int update_smart_start_list(const char *dsk,
  * @brief The function assigns a cb to ucl/SmartStart/List to print the smart
  * start list when received.
  *
- * @param cache You can choose to ignore a cached smart start list
+ * @param cache You can choose to ignore a cached SmartStart list
  * \ingroup DEV CLI
  *
  */
 void print_smart_start_list();
 
 /**
- * @brief Removing a smart start list entry by publishing a DSK key to
+ * @brief Removing a SmartStart list entry by publishing a DSK key to
  * ucl/SmartStart/List
  *
- * @param dsk_key The DSK key to remove from the smart start entry list
+ * @param dsk_key The DSK key to remove from the SmartStart entry list
  * \ingroup DEV CLI
  * @returns int
  */
 int remove_entry_smart_start_list(const char *dsk_key);
 
 /**
- * @brief Parsing a const char * as a smart start list and printing it in a
+ * @brief Parsing a const char * as a SmartStart list and printing it in a
  * readable format
  *
- * @param ss_list A pointer to the smart start list in a char array format
+ * @param ss_list A pointer to the SmartStart list in a char array format
  * \ingroup DEV CLI
  * @returns int
  */

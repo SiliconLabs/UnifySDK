@@ -48,3 +48,7 @@
 .card-header .adornment {
     float: right;
 }
+
+.writable .MuiSelect-iconOutlined {
+    margin-right: 20px;
+}

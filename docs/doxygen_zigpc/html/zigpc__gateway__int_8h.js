@@ -4,6 +4,7 @@ var zigpc__gateway__int_8h =
     [ "zigpc_gateway_dispatch_init_report_t", "structzigpc__gateway__dispatch__init__report__t.html", "structzigpc__gateway__dispatch__init__report__t" ],
     [ "zigpc_gateway_dispatch_bind_request_t", "structzigpc__gateway__dispatch__bind__request__t.html", "structzigpc__gateway__dispatch__bind__request__t" ],
     [ "zigpc_gateway_dispatch_add_node", "structzigpc__gateway__dispatch__add__node.html", "structzigpc__gateway__dispatch__add__node" ],
+    [ "zigpc_gateway_dispatch_permit_joins_t", "structzigpc__gateway__dispatch__permit__joins__t.html", "structzigpc__gateway__dispatch__permit__joins__t" ],
     [ "zigpc_gateway_dispatch_remove_node_t", "structzigpc__gateway__dispatch__remove__node__t.html", "structzigpc__gateway__dispatch__remove__node__t" ],
     [ "zigpc_gateway_dispatch_interview_node_t", "structzigpc__gateway__dispatch__interview__node__t.html", "structzigpc__gateway__dispatch__interview__node__t" ],
     [ "zigpc_gateway_dispatch_add_ota_image_t", "structzigpc__gateway__dispatch__add__ota__image__t.html", "structzigpc__gateway__dispatch__add__ota__image__t" ],
@@ -15,6 +16,7 @@ var zigpc__gateway__int_8h =
     [ "zigpc_gateway_dispatch_type", "zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237", [
       [ "ZIGPC_GW_DISPATCH_MIN_VAL", "zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a756a8a17279f1a08876bb9c67bc72398", null ],
       [ "ZIGPC_GW_DISPATCH_NETWORK_INIT", "zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ae73e8efcea4751a970bb0a3b4f327a66", null ],
+      [ "ZIGPC_GW_DISPATCH_PERMIT_JOINS", "zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ac4ddeb3f838876a57c3ab20857668826", null ],
       [ "ZIGPC_GW_DISPATCH_ADD_NODE_INSTALL_CODE", "zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ac4e1169bd7d60ca6ab47f849580e3814", null ],
       [ "ZIGPC_GW_DISPATCH_INTERVIEW_NODE", "zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237afa776a5c5990813fd415d18b27482ec1", null ],
       [ "ZIGPC_GW_DISPATCH_REMOVE_NODE", "zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a2fc0554bf73986a2d27b254654eaecf0", null ],

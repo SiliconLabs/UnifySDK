@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['known_20abbreviations_8082',['Known Abbreviations',['../md_doc_standards_known-abbreviations.html',1,'']]]
+  ['legacy_20z_2fip_20gateway_20serial_2dapi_20names_8287',['Legacy Z/IP Gateway Serial-API Names',['../group__ZWAPI.html',1,'']]]
 ];

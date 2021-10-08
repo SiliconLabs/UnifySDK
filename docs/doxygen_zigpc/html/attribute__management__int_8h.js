@@ -25,6 +25,7 @@ var attribute__management__int_8h =
     [ "zigpc_attrmgmt_send_read_attributes_command", "attribute__management__int_8h.html#a00b19f9da2ceb571c8bbf28020f4a167", null ],
     [ "ZIGPC_ATTR_MGMT_DELAY_READ_ATTRIBUTES", "attribute__management__int_8h.html#a20bcf2bfcc35144748c69b3862e08633", null ],
     [ "ZIGPC_ATTRMGMT_READ_RECORDS_LIMIT_PER_MESSAGE", "attribute__management__int_8h.html#ae412a3d796b4078513543dd59e65abc6", null ],
+    [ "ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT", "attribute__management__int_8h.html#a88e72fabd634f2ba9d453fef917b7820", null ],
     [ "ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT", "attribute__management__int_8h.html#a7f8558c0968fea23102f269c4ecd808b", null ],
     [ "ZIGPC_ATTRMGMT_REPORT_INTERVAL_MIN_DEFAULT", "attribute__management__int_8h.html#af3c4214de97c173b691650968217693b", null ],
     [ "ZIGPC_ATTRMGMT_REPORT_RECORDS_LIMIT_PER_MESSAGE", "attribute__management__int_8h.html#a398911b2bb6c64c06ff89d922f041c9d", null ]

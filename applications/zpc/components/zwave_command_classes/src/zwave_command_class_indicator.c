@@ -226,9 +226,6 @@ static sl_status_t zwave_command_class_indicator_handle_set(
   const zwave_controller_connection_info_t *connection_info,
   const uint8_t *frame_data)
 {
-  if (connection_info->local.is_multicast)
-    return SL_STATUS_OK;
-
   const ZW_INDICATOR_SET_FRAME *set_cmd
     = (const ZW_INDICATOR_SET_FRAME *)frame_data;
 
@@ -308,17 +305,15 @@ static sl_status_t zwave_command_class_indicator_handle_setV3(
   const uint8_t *frame_data,
   uint16_t frame_length)
 {
-  if (connection_info->local.is_multicast)
-    return SL_STATUS_OK;
-
   const ZW_INDICATOR_SET_1BYTE_V3_FRAME *set_cmd
     = (const ZW_INDICATOR_SET_1BYTE_V3_FRAME *)frame_data;
 
   int obj_count = 0;
   if (!zwave_command_class_indicator_get_object_count(&obj_count,
                                                       set_cmd->properties1,
-                                                      frame_length))
+                                                      frame_length)) {
     return SL_STATUS_FAIL;
+  }
 
   if (obj_count == 0) {
     /* Only process indicator0Value here - ignore if obj_count > 0 */
@@ -375,12 +370,24 @@ static sl_status_t zwave_command_class_indicator_handle_getV3(
   const uint8_t *frame_data,
   uint16_t frame_length)
 {
-  assert(frame_length < sizeof(ZW_INDICATOR_GET_V3_FRAME));
+  if (frame_length < sizeof(ZW_INDICATOR_GET_V3_FRAME)) {
+    sl_log_debug(LOG_TAG,
+                 "incoming frame length: %d is less than size of"
+                 "ZW_INDICATOR_GET_V3_FRAME frame: %d",
+                 frame_length,
+                 sizeof(ZW_INDICATOR_GET_V3_FRAME));
+  }
 
   const ZW_INDICATOR_GET_V3_FRAME *get_cmd
     = (const ZW_INDICATOR_GET_V3_FRAME *)frame_data;
 
-  if (get_cmd->indicatorId == INDICATOR_GET_NODE_IDENTIFY_V3) {
+  uint8_t indicator_id = INDICATOR_GET_NODE_IDENTIFY_V3;
+
+  if (frame_length == sizeof(ZW_INDICATOR_GET_V3_FRAME)) {
+    indicator_id = get_cmd->indicatorId;
+  }
+
+  if (indicator_id == INDICATOR_GET_NODE_IDENTIFY_V3) {
     ZW_INDICATOR_REPORT_3BYTE_V3_FRAME report = {0};
 
     report.cmdClass        = COMMAND_CLASS_INDICATOR_V3;
@@ -501,19 +508,18 @@ sl_status_t zwave_command_class_indicator_support_handler(
 
   switch (frame_data[COMMAND_INDEX]) {
     case INDICATOR_SET_V3:
-      if (connection_info->local.is_multicast)
-        return SL_STATUS_OK;
-
-      if (frame_length == sizeof(ZW_INDICATOR_SET_FRAME))
+      if (frame_length == sizeof(ZW_INDICATOR_SET_FRAME)) {
         return zwave_command_class_indicator_handle_set(connection_info,
                                                         frame_data);
+      }
       return zwave_command_class_indicator_handle_setV3(connection_info,
                                                         frame_data,
                                                         frame_length);
 
     case INDICATOR_GET_V3:
-      if (connection_info->local.is_multicast)
+      if (connection_info->local.is_multicast) {
         return SL_STATUS_OK;
+      }
 
       if (frame_length == sizeof(ZW_INDICATOR_GET_FRAME))
         return zwave_command_class_indicator_handle_get(connection_info,
@@ -524,8 +530,9 @@ sl_status_t zwave_command_class_indicator_support_handler(
                                                         frame_length);
 
     case INDICATOR_SUPPORTED_GET_V3:
-      if (connection_info->local.is_multicast)
+      if (connection_info->local.is_multicast) {
         return SL_STATUS_OK;
+      }
 
       return zwave_command_class_indicator_handle_supported_getV3(
         connection_info,
@@ -541,6 +548,7 @@ sl_status_t zwave_command_class_indicator_support_handler(
 sl_status_t zwave_command_class_indicator_init()
 {
   zwave_command_handler_t handler = {0};
+
   handler.support_handler    = zwave_command_class_indicator_support_handler;
   handler.minimal_scheme     = ZWAVE_CONTROLLER_ENCAPSULATION_NETWORK_SCHEME;
   handler.command_class      = COMMAND_CLASS_INDICATOR;

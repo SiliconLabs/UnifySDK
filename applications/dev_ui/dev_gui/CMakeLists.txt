@@ -32,21 +32,25 @@ else()
       ${CMAKE_CURRENT_BINARY_DIR}/package.json
     COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/public .
     COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/tsconfig.json .
-    COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps --loglevel silent >
-            /dev/null # With yarn 38s with npm 69s change
-    COMMAND ${NPM_EXECUTABLE} run build > /dev/null)
+    COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps --loglevel
+            silent # With yarn 38s with npm 69s change
+    COMMAND ${NPM_EXECUTABLE} run build
+    USES_TERMINAL)
 
   add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/dev-gui-server
     DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/package-lock.json
-    COMMAND ${NPM_EXECUTABLE} run
-            dev-gui-server-build-${CMAKE_SYSTEM_PROCESSOR})
+    COMMAND ${NPM_EXECUTABLE} run dev-gui-server-build-${CMAKE_SYSTEM_PROCESSOR}
+    USES_TERMINAL)
 
   add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/dev-gui-api
     DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/dev-gui-server
-    COMMAND ${NPM_EXECUTABLE} run dev-gui-api-build-${CMAKE_SYSTEM_PROCESSOR})
+    COMMAND ${NPM_EXECUTABLE} run dev-gui-api-build-${CMAKE_SYSTEM_PROCESSOR}
+    USES_TERMINAL)
 
+  separate_arguments(ZAP_GENERATE_CMD_ARGS NATIVE_COMMAND
+                     ${ZAP_GENERATE_CMD_STR})
   add_custom_command(
     OUTPUT
       ${CMAKE_CURRENT_BINARY_DIR}/src/cluster-types/cluster-type-attributes.ts
@@ -58,7 +62,7 @@ else()
             ${CMAKE_CURRENT_SOURCE_DIR}/zap/gen-templates.json
             ${CMAKE_CURRENT_SOURCE_DIR}/zap/addon-helper.js
     COMMAND
-      ${ZAP_EXECUTABLE} generate --noUi --noServer --no-sandbox -z
+      ${ZAP_GENERATE_CMD_ARGS} -z
       ../../../../components/uic_dotdot/dotdot-xml/library.xml -g
       ${CMAKE_CURRENT_SOURCE_DIR}/zap/gen-templates.json -o
       ${CMAKE_CURRENT_BINARY_DIR}/src/cluster-types)
@@ -78,7 +82,7 @@ else()
     INSTALL_TYPES Full)
 
   install(
-    DIRECTORY
+    FILES assets/cert.pem assets/key.pem
     DESTINATION /var/lib/dev-gui
     COMPONENT uic-dev-gui)
 

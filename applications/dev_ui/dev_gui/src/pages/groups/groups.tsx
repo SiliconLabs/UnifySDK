@@ -13,7 +13,7 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
     super(props);
     this.state = {
       ProcessingGroup: {} as Group,
-      GroupList: this.getGroups(this.props.NodeList),
+      GroupList: this.getGroups(this.props.GroupList, this.props.NodeList),
       ShowEditModal: false
     };
     this.changeEditGroupDlg = React.createRef();
@@ -25,50 +25,38 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
   changeConfirmDlg: any;
   changeGroupCommandDlg: any;
 
-  getGroups(list: any) {
-    let groups = new Map<number, any>();
-    list.forEach((node: any) => {
-      if (!node.ep) return;
-      Object.keys(node.ep).forEach(endpoint => {
-        let groupList = node.ep[endpoint].Groups?.Attributes?.GroupList?.Reported;
-        if (!groupList || !groupList.length) return;
-        groupList.forEach((id: any) => {
-          let group = (groups.has(id)
-            ? groups.get(id)
-            : {
-              GroupId: id,
-              SupportedCommands: node.ep[endpoint].Groups.SupportedCommands,
-              GroupEndpointList: [],
-              FailedNodes: [],
-              UpdatingNodes: []
-            }) as Group;
-          group.Name = group.Name || node.ep[endpoint].Groups?.Attributes[id]?.Name?.Reported;
-          let clusters = node.ep[endpoint].Clusters || {};
-          if (group.GroupEndpointList.filter(g => g.Unid === node.Unid && g.Ep === endpoint).length === 0)
-            group.GroupEndpointList.push({
-              Unid: node.Unid,
-              Ep: endpoint,
-              ClusterTypes: Object.keys(clusters),
-              Security: node.Security,
-              NetworkStatus: node.NetworkStatus
-            });
-
-          if (node.NetworkStatus === "Offline" || node.NetworkStatus === "Unavailable")
-            group.FailedNodes.push(`<b>${node.Unid}/${endpoint}</b>:&nbsp;[${Object.keys(clusters).join(", ") || "-"}]`);
-          else {
+  getGroups(groupList: any[], nodeList: any[]) {
+    groupList.forEach((group: any) => {
+      group.Count = group.NodeList && Object.keys(group.NodeList).length;
+      group.FailedNodes = [];
+      group.UpdatingNodes = [];
+      group.Clusters = [];
+      group.NodeList && Object.keys(group.NodeList).forEach((unid) => {
+        let node = nodeList.find(i => i.Unid === unid);
+        if (!node) return;
+        group.NodeList[unid].forEach((ep: any) => {
+          let endPoint = "ep" + ep;
+          if (!node.ep || !node.ep[endPoint])
+            return;
+          let clusters = node.ep[endPoint].Clusters || {};
+          if (node.NetworkStatus === "Offline" || node.NetworkStatus === "Unavailable") {
+            group.FailedNodes.push(`<b>${node.Unid}/${endPoint}</b>:&nbsp;[${Object.keys(clusters).join(", ") || "-"}]`);
+          } else {
             let updatingClusters: string[] = [];
-            Object.keys(clusters).forEach(cluster => {
+            Object.keys(clusters).forEach((cluster: string) => {
+              if (group[cluster] && group[cluster].SupportedCommands && group[cluster].SupportedCommands.length && group.Clusters.indexOf(cluster) === -1)
+                group.Clusters.push(cluster);
               let attrs = clusters[cluster].Attributes || {};
               let updatingProperties: string[] = [];
               Object.keys(attrs).forEach(attr => {
                 let attribute = attrs[attr];
                 if (attribute.Desired !== undefined && attribute.Desired !== null) {
                   let type = typeof (attribute.Desired);
-                  if (type !== "object" && attribute.Reported !== attribute.Desired)
+                  if (type !== "object" && (attribute.Reported !== attribute.Desired))
                     updatingProperties.push(`${attr}: ${attribute.Desired}`)
                   else if (type === "object")
                     Object.keys(attribute.Desired).forEach(i => {
-                      if (attribute.Reported[i] !== undefined && (attribute.Reported[i] !== attribute.Desired[i]))
+                      if (!attribute.Reported || (attribute.Reported[i] !== attribute.Desired[i]))
                         updatingProperties.push(`${attr}.${i}: ${attribute.Desired[i]}`)
                     });
                 }
@@ -77,29 +65,29 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
                 updatingClusters.push(`<i>${cluster}</i>:&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;[${updatingProperties.join(', <br>')}]`);
             });
             if (updatingClusters.length)
-              group.UpdatingNodes.push(`<b>${node.Unid}/${endpoint}</b> <br>&nbsp;&nbsp;${updatingClusters.join('; <br>&nbsp')}`);
+              group.UpdatingNodes.push(`<b>${node.Unid}/${endPoint}</b> <br>&nbsp;&nbsp;${updatingClusters.join('; <br>&nbsp')}`);
           }
-          groups.set(id, group);
         });
       });
-    })
-    return new Map([...groups.entries()].sort((a, b) => a[0] - b[0]));
+    });
+    return groupList.sort((a, b) => a.GroupId - b.GroupId);
   }
 
-  updateState(nodeList: any[]) {
-    this.setState({ GroupList: this.getGroups(nodeList) });
+  updateState(groupList: any[], nodeList: any[]) {
+    this.setState({ GroupList: this.getGroups(groupList, nodeList) });
   }
 
   createGroup() {
     let maxIndex = 0;
-    this.state.GroupList && this.state.GroupList.size && this.state.GroupList.forEach((value, key) => maxIndex = maxIndex > key ? maxIndex : key);
+    this.state.GroupList && this.state.GroupList.length && this.state.GroupList.forEach((item) => maxIndex = maxIndex > item.GroupId ? maxIndex : item.GroupId);
     let newGroup = {
-      Name: "",
+      GroupName: "",
       GroupId: maxIndex + 1,
-      GroupEndpointList: [],
+      NodeList: {},
       SupportedCommands: [],
       FailedNodes: [],
-      UpdatingNodes: []
+      UpdatingNodes: [],
+      Clusters: []
     } as Group;
     this.edit(newGroup);
   }
@@ -112,7 +100,7 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
     this.setState({ ProcessingGroup: item }, () => {
       this.changeConfirmDlg?.current.update(
         true,
-        `Remove Group ${this.state.ProcessingGroup.Name || "-"}[${this.state.ProcessingGroup.GroupId}]`,
+        `Remove Group ${this.state.ProcessingGroup.GroupName || "-"}[${this.state.ProcessingGroup.GroupId}]`,
         `Are you sure, you want to remove this group?`
       );
     });
@@ -148,7 +136,7 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
             <Button variant="outline-primary" className="float-left margin-b-10" onClick={() => this.createGroup()}>Create Group</Button>
           </Col>
         </Row>
-        {(!this.state.GroupList || !this.state.GroupList.size)
+        {(!this.state.GroupList || !this.state.GroupList.length)
           ? <Row>
             <Col xs={12} className="text-center">
               <span className="no-content">No Content</span>
@@ -165,7 +153,7 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
               </tr>
             </thead>
             <tbody>
-              {[...this.state.GroupList.values()].map((item, index) => {
+              {this.state.GroupList.map((item, index) => {
                 let waitingPopover = (
                   <Popover id={`w${item.GroupId}`} className="popover-l">
                     <Popover.Title as="h3">Waiting for update next properties</Popover.Title>
@@ -186,7 +174,7 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
                 return (
                   <tr key={index}>
                     <td>{item.GroupId}</td>
-                    <td>{item.Name || "-"}</td>
+                    <td>{item.GroupName || "-"}</td>
                     <td>
                       <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={waitingPopover}>
                         <Spinner hidden={!item.UpdatingNodes.length} as="span" animation="border" size="sm" variant="primary" />
@@ -196,12 +184,12 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
                       <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={failedPopover}>
                         <span hidden={!item.FailedNodes.length} className="icon margin-h-5 cursor-defult"><AiIcons.AiOutlineWarning color="orange" /></span>
                       </OverlayTrigger>
-                      {item.GroupEndpointList.length}
+                      {item.Count}
                     </td>
                     <td className="text-center">
                       <Tooltip title="Run Command">
-                        <span className={item.FailedNodes.length === item.GroupEndpointList.length ? `cursor-defult disabled margin-h-5 icon` : `margin-h-5 icon`} >
-                          <FiIcons.FiCommand onClick={() => { if (item.FailedNodes.length !== item.GroupEndpointList.length) this.choiceGroupCommand(item) }} />
+                        <span className={item.FailedNodes.length === item.Count ? `cursor-defult disabled margin-h-5 icon` : `margin-h-5 icon`} >
+                          <FiIcons.FiCommand onClick={() => { if (item.FailedNodes.length !== item.Count) this.choiceGroupCommand(item) }} />
                         </span>
                       </Tooltip>
                       <Tooltip title="View/Edit">

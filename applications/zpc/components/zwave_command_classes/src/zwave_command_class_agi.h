@@ -25,6 +25,7 @@
 #include "sl_status.h"
 #include "zwave_command_class_association_internals.h"
 #include "zwave_controller_types.h"
+#include "ZW_classcmd.h"
 
 ///< How many nodes/endpoint associations do we allow in each group.
 ///< Do not set this to more than 126, the attribute store won't be able to store it.
@@ -51,6 +52,34 @@ typedef uint32_t agi_profile_t;
 
 /// Frame parsing defines
 #define AGI_INFO_REPORT_GROUP_COUNT_MASK 0x3F
+///< Maximum content (number of bytes) for a Association group name. This is aligned
+///< with the storage capacity of the attribute store.
+#define MAX_GROUP_NAME_SIZE ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH
+// defining Association Group Name Report frame
+typedef struct association_group_name_report_frame {
+  uint8_t command_class;
+  uint8_t command;
+  association_group_id_t grouping_identifier;
+  uint8_t name_length;
+  uint8_t name[MAX_GROUP_CONTENT_SIZE];
+} association_group_name_report_frame_t;
+
+// defining Association Group Info Report frame
+typedef struct association_group_info_report_frame {
+  uint8_t command_class;
+  uint8_t command;
+  uint8_t properties;
+  VG_ASSOCIATION_GROUP_INFO_REPORT_VG vg_ass_group_info[MAX_GROUP_CONTENT_SIZE];
+} association_group_info_report_frame_t;
+
+// defining Association Group Command List Report frame
+typedef struct association_group_command_list_report_frame {
+  uint8_t command_class;
+  uint8_t command;
+  association_group_id_t grouping_identifier;
+  uint8_t list_length;
+  uint8_t command_list[MAX_GROUP_CONTENT_SIZE];
+} association_group_command_list_report_frame_t;
 
 #ifdef __cplusplus
 extern "C" {

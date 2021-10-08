@@ -38,18 +38,12 @@
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_##type
 
-///< Values for the ATTRIBUTE(STATE) of the binary Switch
-typedef enum {
-  FINAL_STATE       = 0,
-  NEEDS_ONE_COMMAND = 1,
-} state_values_t;
-
 /**
  * @brief Full state of a binary Switch supporting node.
  */
 typedef struct binary_switch_state {
-  state_values_t desired_state;
-  state_values_t reported_state;
+  command_status_values_t desired_state;
+  command_status_values_t reported_state;
   uint32_t desired_value;
   uint32_t reported_value;
   uint32_t desired_duration;
@@ -73,18 +67,23 @@ static const attribute_store_type_t v2_sub_attributes[] = {ATTRIBUTE(DURATION)};
 ///////////////////////////////////////////////////////////////////////////////
 // Local helper functions
 ///////////////////////////////////////////////////////////////////////////////
+static void align_current_to_target_value(attribute_store_node_t value_node)
+{
+  attribute_store_set_reported_as_desired(value_node);
+}
+
 static void set_state_value(attribute_store_node_t state_node,
-                            state_values_t reported,
-                            state_values_t desired)
+                            command_status_values_t reported,
+                            command_status_values_t desired)
 {
   attribute_store_set_node_attribute_value(state_node,
                                            REPORTED_ATTRIBUTE,
                                            (uint8_t *)&reported,
-                                           sizeof(state_values_t));
+                                           sizeof(command_status_values_t));
   attribute_store_set_node_attribute_value(state_node,
                                            DESIRED_ATTRIBUTE,
                                            (uint8_t *)&desired,
-                                           sizeof(state_values_t));
+                                           sizeof(command_status_values_t));
 }
 
 static void get_state(attribute_store_node_t state_node,
@@ -93,11 +92,11 @@ static void get_state(attribute_store_node_t state_node,
   attribute_store_read_value(state_node,
                              DESIRED_OR_REPORTED_ATTRIBUTE,
                              (uint8_t *)&state->desired_state,
-                             sizeof(state_values_t));
+                             sizeof(command_status_values_t));
   attribute_store_read_value(state_node,
                              REPORTED_ATTRIBUTE,
                              (uint8_t *)&state->reported_state,
-                             sizeof(state_values_t));
+                             sizeof(command_status_values_t));
 
   attribute_store_node_t duration_node
     = attribute_store_get_node_child_by_type(state_node,
@@ -240,6 +239,10 @@ static sl_status_t zwave_command_class_binary_switch_handle_report(
   uint32_t duration = 0;  // Assumed value if no duration is provided.
   if (frame_length > REPORT_DURATION_INDEX) {
     duration = frame_data[REPORT_DURATION_INDEX];
+    if (duration == 0xFF) {
+      // If duration is 0xFF (default factory), we consider this to be instantaneous
+      duration = 0;
+    }
     set_reported_duration(state_node, duration);
     set_desired_duration(state_node, duration);
   }
@@ -257,18 +260,12 @@ static sl_status_t zwave_command_class_binary_switch_handle_report(
   }
 
   // Current/target value adjustments based on the reported duration.
-  if (duration == 0) {
-    // Ensure no mismatch between reported/desired if duration is 0.
-    if (attribute_store_is_value_defined(value_node, DESIRED_ATTRIBUTE)) {
-      attribute_store_set_reported_as_desired(value_node);
-    }
-  }
-  if (duration > 0) {
-    // here we want to probe again after that duration.
+  attribute_timeout_cancel_callback(state_node, &align_current_to_target_value);
+  if (attribute_store_is_value_defined(value_node, DESIRED_ATTRIBUTE)) {
     attribute_timeout_set_callback(state_node,
                                    zwave_duration_to_time((uint8_t)duration)
                                      + PROBE_BACK_OFF,
-                                   &attribute_store_undefine_reported);
+                                   &align_current_to_target_value);
   }
 
   // Set the reported of the state node, so that it does not "get" again.

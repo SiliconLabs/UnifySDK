@@ -6,7 +6,7 @@ var zwave__controller__utils_8c =
     [ "zwave_command_class_list_pack", "group__zwave__controller__utils.html#gac6028ff4c772ca1a731dffaf4b530e15", null ],
     [ "zwave_command_class_list_unpack", "group__zwave__controller__utils.html#gaa97ac86e21524642008397f6c3563be2", null ],
     [ "zwave_network_scheme_str", "group__zwave__controller__utils.html#ga9427607701e7e0fd0126582293d1ed9d", null ],
-    [ "zwave_node_get_command_class_version", "group__zwave__controller__utils.html#gab4265d8e64973b26350c948e934e1af9", null ],
+    [ "zwave_node_get_command_class_version", "group__zwave__controller__utils.html#ga1fb87a67860c11e6e89930eb51fda21f", null ],
     [ "zwave_node_supports_command_class", "group__zwave__controller__utils.html#gaaa5d4e371acabd40b10dcf27edd993ff", null ],
     [ "zwave_parse_nif", "group__zwave__controller__utils.html#gae7aa94787eba3ff966f9307d973e43ba", null ],
     [ "zwave_parse_nif_list_until_marker_or_end", "zwave__controller__utils_8c.html#aa75fc83b24952e1842b8a5252869b56c", null ],

@@ -5,7 +5,7 @@ target_add_unittest(
   DEPENDS
   zigpc_common_mock
   zigpc_zcl_util_mock
-  zigpc_node_mgmt_mock
+  zigpc_datastore_mock
   zigpc_gateway_mock)
 
 target_add_unittest(

@@ -58,7 +58,8 @@ void test_datastore_attribute_storage()
                                                       0x00,  // No parent
                                                       test_array,
                                                       sizeof(test_array),
-                                                      false),
+                                                      test_array,
+                                                      0),
                             "Attribute 0x01 insertion went wrong.");
 
   TEST_ASSERT_TRUE_MESSAGE(datastore_contains_attribute(0x01),
@@ -70,7 +71,8 @@ void test_datastore_attribute_storage()
                                                       0x00,
                                                       test_array,
                                                       sizeof(test_array),
-                                                      true),
+                                                      test_array,
+                                                      sizeof(test_array)),
                             "Attribute 0x01 update went wrong.");
 
   // Insert attribute 0x02 without a valid parent_id
@@ -81,7 +83,8 @@ void test_datastore_attribute_storage()
                               0x03,
                               test_array,
                               sizeof(test_array),
-                              false),
+                              NULL,
+                              0),
     "Attribute not 0x02 insertion went well, it should not have.");
 
   // Insert attribute 0x02
@@ -91,29 +94,36 @@ void test_datastore_attribute_storage()
                                                       0x01,
                                                       test_array,
                                                       sizeof(test_array),
-                                                      false),
+                                                      NULL,
+                                                      0),
                             "Attribute 0x02 insertion went wrong");
 
-  uint32_t received_type              = 0xFF;
+  uint32_t received_type                      = 0xFF;
   datastore_attribute_id_t received_parent_id = 0xFF;
   uint8_t received_value[255]                 = {0};
   uint8_t received_value_size                 = 0xFF;
-  bool received_desired                       = false;
+  uint8_t received_desired_value[255]         = {0};
+  uint8_t received_desired_value_size         = 0xFF;
 
-  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
-                            datastore_fetch_attribute(0x01,
-                                                      &received_type,
-                                                      &received_parent_id,
-                                                      received_value,
-                                                      &received_value_size,
-                                                      &received_desired),
-                            "Fetching attribute node 0x01 went wrong.");
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_OK,
+    datastore_fetch_attribute(0x01,
+                              &received_type,
+                              &received_parent_id,
+                              received_value,
+                              &received_value_size,
+                              received_desired_value,
+                              &received_desired_value_size),
+    "Fetching attribute node 0x01 went wrong.");
 
   TEST_ASSERT_EQUAL(0x06, received_type);
   TEST_ASSERT_EQUAL(0x00, received_parent_id);
   TEST_ASSERT_EQUAL_INT8_ARRAY(test_array, received_value, received_value_size);
   TEST_ASSERT_EQUAL(sizeof(test_array), received_value_size);
-  TEST_ASSERT_EQUAL(true, received_desired);
+  TEST_ASSERT_EQUAL_INT8_ARRAY(test_array,
+                               received_desired_value,
+                               received_desired_value_size);
+  TEST_ASSERT_EQUAL(sizeof(test_array), received_desired_value_size);
 
   // Delete our node 0x01, it should not allow us as it has a child
   TEST_ASSERT_EQUAL_MESSAGE(
@@ -133,7 +143,8 @@ void test_datastore_attribute_storage()
                                                       0x01,
                                                       test_array,
                                                       sizeof(test_array),
-                                                      false),
+                                                      NULL,
+                                                      0),
                             "Attribute node 0x03 insertion went wrong");
 
   // Fetch second child of node 0x01:
@@ -146,15 +157,15 @@ void test_datastore_attribute_storage()
                                     &received_type,
                                     received_value,
                                     &received_value_size,
-                                    &received_desired),
+                                    received_desired_value,
+                                    &received_desired_value_size),
     "Fetching 2nd child of node 0x01 went wrong");
 
   // Verify that the data for child 2 was received properly:
   TEST_ASSERT_EQUAL(0x03, received_id);
   TEST_ASSERT_EQUAL(0xFFFFF, received_type);
   TEST_ASSERT_EQUAL_INT8_ARRAY(test_array, received_value, received_value_size);
-  TEST_ASSERT_EQUAL(sizeof(test_array), received_value_size);
-  TEST_ASSERT_EQUAL(false, received_desired);
+  TEST_ASSERT_EQUAL(0, received_desired_value_size);
 
   // Fetch third child of node 0x01 (should not exist):
   TEST_ASSERT_EQUAL_MESSAGE(
@@ -165,7 +176,8 @@ void test_datastore_attribute_storage()
                                     &received_type,
                                     received_value,
                                     &received_value_size,
-                                    &received_desired),
+                                    received_desired_value,
+                                    &received_desired_value_size),
     "Fetching 3rd child of node 0x01 went well, though there should be only "
     "2!");
 
@@ -183,24 +195,26 @@ void test_datastore_attribute_storage()
                                                       0x00,  // No parent
                                                       test_array,
                                                       sizeof(test_array),
-                                                      false),
+                                                      NULL,
+                                                      0),
                             "Attribute 0x01 insertion went wrong.");
 
-  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
-                            datastore_fetch_attribute(0xf0000000,
-                                                      &received_type,
-                                                      &received_parent_id,
-                                                      received_value,
-                                                      &received_value_size,
-                                                      &received_desired),
-                            "Fetching attribute node 0xf0000000 went wrong.");
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_OK,
+    datastore_fetch_attribute(0xf0000000,
+                              &received_type,
+                              &received_parent_id,
+                              received_value,
+                              &received_value_size,
+                              received_desired_value,
+                              &received_desired_value_size),
+    "Fetching attribute node 0xf0000000 went wrong.");
 
   TEST_ASSERT_EQUAL(0xff000000, received_type);
   TEST_ASSERT_EQUAL(0x00, received_parent_id);
   TEST_ASSERT_EQUAL_INT8_ARRAY(test_array, received_value, received_value_size);
   TEST_ASSERT_EQUAL(sizeof(test_array), received_value_size);
-  TEST_ASSERT_EQUAL(false, received_desired);
-
+  TEST_ASSERT_EQUAL(0, received_desired_value_size);
 
   // Insert attribute 0xf000001 with type 0xff000001 and parent 0xf000000
   TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
@@ -209,23 +223,29 @@ void test_datastore_attribute_storage()
                                                       0xf0000000,
                                                       test_array,
                                                       sizeof(test_array),
-                                                      false),
+                                                      test_array,
+                                                      sizeof(test_array)),
                             "Attribute 0x01 insertion went wrong.");
 
-  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
-                            datastore_fetch_attribute(0xf0000001,
-                                                      &received_type,
-                                                      &received_parent_id,
-                                                      received_value,
-                                                      &received_value_size,
-                                                      &received_desired),
-                            "Fetching attribute node 0xf0000001 went wrong.");
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_OK,
+    datastore_fetch_attribute(0xf0000001,
+                              &received_type,
+                              &received_parent_id,
+                              received_value,
+                              &received_value_size,
+                              received_desired_value,
+                              &received_desired_value_size),
+    "Fetching attribute node 0xf0000001 went wrong.");
 
   TEST_ASSERT_EQUAL(0xff000001, received_type);
   TEST_ASSERT_EQUAL(0xf0000000, received_parent_id);
   TEST_ASSERT_EQUAL_INT8_ARRAY(test_array, received_value, received_value_size);
   TEST_ASSERT_EQUAL(sizeof(test_array), received_value_size);
-  TEST_ASSERT_EQUAL(false, received_desired);
+  TEST_ASSERT_EQUAL_INT8_ARRAY(test_array,
+                               received_desired_value,
+                               received_desired_value_size);
+  TEST_ASSERT_EQUAL(sizeof(test_array), received_desired_value_size);
 
   // Teardown
   TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,

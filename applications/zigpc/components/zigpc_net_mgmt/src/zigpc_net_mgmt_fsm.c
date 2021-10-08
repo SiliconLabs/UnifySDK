@@ -14,12 +14,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* Contiki includes */
-#include "sl_log.h"
-#include "sl_status.h"
-#include "sys/etimer.h"
+// UIC shared includes
+#include <sl_log.h>
+#include <sl_status.h>
+#include <sys/etimer.h>
 
-#include "zigpc_gateway.h"
+// ZigPC includes
+#include <zigpc_datastore.h>
+#include <zigpc_gateway.h>
 
 #include "zigpc_net_mgmt_notify_int.h"
 #include "zigpc_net_mgmt_fsm.h"
@@ -48,35 +50,45 @@ static const char *zigpc_net_mgmt_remove_node_parameters
 static sl_status_t zigpc_net_mgmt_hdl_init_complete(
   const zigpc_net_mgmt_fsm_data_t *const event_data)
 {
+  sl_status_t status = SL_STATUS_OK;
+
   const zigpc_net_mgmt_fsm_init_complete_t *data
     = &event_data->on_net_init_complete;
   etimer_stop(&fsm.timer);
 
   if (data == NULL) {
-    return SL_STATUS_NULL_POINTER;
+    status = SL_STATUS_NULL_POINTER;
+  } else {
+    zigpc_network_data_t nwk;
+
+    memcpy(nwk.gateway_eui64, data->zigpc_eui64, sizeof(zigbee_eui64_t));
+    nwk.panid = data->zigpc_panid;
+    memcpy(nwk.ext_panid, data->zigpc_ext_panid, sizeof(zigbee_ext_panid_t));
+    nwk.radio_channel = data->zigpc_radio_channel;
+
+    zigpc_datastore_create_network();
+    status = zigpc_datastore_write_network(&nwk);
+    if (status != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG, "Unable to store network data: 0x%X", status);
+    }
   }
 
-  // TODO: Store this information for usage within ZigPC
-  sl_log_debug(LOG_TAG,
-               "PC EUI64: %02hhX%02hhX%02hhX%02hhX%02hhX%02hhX%02hhX%02hhX",
-               data->zigpc_eui64[0],
-               data->zigpc_eui64[1],
-               data->zigpc_eui64[2],
-               data->zigpc_eui64[3],
-               data->zigpc_eui64[4],
-               data->zigpc_eui64[5],
-               data->zigpc_eui64[6],
-               data->zigpc_eui64[7]);
-  sl_log_debug(LOG_TAG, "PC PANID: 0x%04X", data->zigpc_panid);
-  sl_log_debug(LOG_TAG, "PC Channel: 0x%02X", data->zigpc_radio_channel);
+  if (status == SL_STATUS_OK) {
+    zigpc_datastore_log_network(LOG_TAG, SL_LOG_INFO, "Network info");
 
-  // Store EUI64
-  zigpc_net_mgmt_set_protocol_controller_eui64(data->zigpc_eui64);
+    // TODO: Remove the following logs since log_network already does this
+    sl_log_debug(LOG_TAG, "PC PANID: 0x%04X", data->zigpc_panid);
+    sl_log_debug(LOG_TAG, "PC Channel: 0x%02X", data->zigpc_radio_channel);
 
-  zigpc_net_mgmt_notify_network_init(data->zigpc_eui64);
+    // Store EUI64
+    zigpc_net_mgmt_set_protocol_controller_eui64(data->zigpc_eui64);
 
-  fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
-  return SL_STATUS_OK;
+    zigpc_net_mgmt_notify_network_init(data->zigpc_eui64);
+
+    fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
+  }
+
+  return status;
 }
 
 static sl_status_t zigpc_net_mgmt_hdl_idle_add_request(
@@ -91,6 +103,7 @@ static sl_status_t zigpc_net_mgmt_hdl_idle_add_request(
   zigpc_gateway_add_node_install_code(data->eui64,
                                       data->install_code,
                                       data->install_code_length);
+  zigpc_gateway_network_permit_joins(true);
 
   /* No state change as this is a command sent to zigpc_gateway */
 
@@ -124,6 +137,18 @@ sl_status_t zigpc_net_mgmt_hdl_idle_interview_request(
 
   if (data == NULL) {
     status = SL_STATUS_NULL_POINTER;
+  } else {
+    status = zigpc_datastore_remove_device_children(data->eui64);
+  }
+
+  if (status == SL_STATUS_OK) {
+    zigpc_device_data_t dev;
+
+    status = zigpc_datastore_read_device(data->eui64, &dev);
+    if (status == SL_STATUS_OK) {
+      dev.network_status = ZIGBEE_NODE_STATUS_INTERVIEWING;
+      status             = zigpc_datastore_write_device(data->eui64, &dev);
+    }
   }
 
   if (status == SL_STATUS_OK) {
@@ -141,38 +166,47 @@ sl_status_t zigpc_net_mgmt_hdl_idle_interview_request(
 static sl_status_t zigpc_net_mgmt_hdl_node_add_complete(
   const zigpc_net_mgmt_fsm_data_t *const event_data)
 {
+  sl_status_t status = SL_STATUS_OK;
+
   const struct zigpc_gateway_on_node_add *data
     = &event_data->on_node_add_complete;
 
   if (data == NULL) {
-    return SL_STATUS_NULL_POINTER;
-  }
-
-  if (memcmp(fsm.joining_eui64, data->eui64, sizeof(zigbee_eui64_t))) {
+    status = SL_STATUS_NULL_POINTER;
+  } else if (memcmp(fsm.joining_eui64, data->eui64, sizeof(zigbee_eui64_t))) {
     sl_log_warning(LOG_TAG, "Received unexpected node joined event");
-    return SL_STATUS_IN_PROGRESS;
+    status = SL_STATUS_IN_PROGRESS;
+  } else {
+    etimer_stop(&fsm.timer);
+
+    zigpc_datastore_remove_device(data->eui64);
+    status = zigpc_datastore_create_device(data->eui64);
   }
 
-  etimer_stop(&fsm.timer);
+  if (status == SL_STATUS_OK) {
+    zigpc_device_data_t dev = {
+      .network_status            = ZIGBEE_NODE_STATUS_NODEID_ASSIGNED,
+      .max_cmd_delay             = 1,
+      .endpoint_total_count      = 0,
+      .endpoint_discovered_count = 0,
+    };
+    status = zigpc_datastore_write_device(data->eui64, &dev);
+  }
 
-  sl_log_debug(
-    LOG_TAG,
-    "Added Node's EUI64: %02hhX%02hhX%02hhX%02hhX%02hhX%02hhX%02hhX%02hhX",
-    data->eui64[0],
-    data->eui64[1],
-    data->eui64[2],
-    data->eui64[3],
-    data->eui64[4],
-    data->eui64[5],
-    data->eui64[6],
-    data->eui64[7]);
+  if (status == SL_STATUS_OK) {
+    zigpc_datastore_log_device(LOG_TAG,
+                               SL_LOG_DEBUG,
+                               "Device Added (Pre-Interview)",
+                               data->eui64);
 
-  memcpy(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t));
+    memcpy(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t));
 
-  zigpc_net_mgmt_notify_node_added(data->eui64);
+    zigpc_net_mgmt_notify_node_added(data->eui64);
 
-  fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
-  return SL_STATUS_OK;
+    fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
+  }
+
+  return status;
 }
 
 static sl_status_t zigpc_net_mgmt_hdl_node_add_timeout(
@@ -193,8 +227,20 @@ static sl_status_t zigpc_net_mgmt_hdl_node_interviewed(
   const zigpc_gateway_on_node_discovered_t *data
     = &event_data->on_node_discovered;
 
-  if (memcmp(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t))) {
+  if (data == NULL) {
+    status = SL_STATUS_NULL_POINTER;
+  } else if (memcmp(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t))) {
+    sl_log_warning(LOG_TAG, "Received unexpected node interviewed event");
     status = SL_STATUS_NOT_FOUND;
+  } else {
+    zigpc_device_data_t dev;
+
+    status = zigpc_datastore_read_device(data->eui64, &dev);
+    if (status == SL_STATUS_OK) {
+      dev.endpoint_total_count      = data->endpoint_count;
+      dev.endpoint_discovered_count = 0;
+      status = zigpc_datastore_write_device(data->eui64, &dev);
+    }
   }
 
   if (status == SL_STATUS_OK) {
@@ -212,14 +258,48 @@ static sl_status_t zigpc_net_mgmt_hdl_node_endpoint_interviewed(
   const zigpc_net_mgmt_fsm_data_t *const event_data)
 {
   sl_status_t status = SL_STATUS_OK;
+  zigpc_device_data_t dev;
+
   const zigpc_gateway_on_node_endpoint_discovered_t *data
     = &event_data->on_node_endpoint_discovered;
 
-  if (memcmp(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t))) {
+  if (data == NULL) {
+    status = SL_STATUS_NULL_POINTER;
+  } else if (memcmp(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t))) {
+    sl_log_warning(LOG_TAG, "Received unexpected node EP interviewed event");
     status = SL_STATUS_NOT_FOUND;
+  } else {
+    status = zigpc_datastore_read_device(data->eui64, &dev);
   }
 
   if (status == SL_STATUS_OK) {
+    const zigbee_endpoint_t *ep = &data->endpoint;
+    status = zigpc_datastore_create_endpoint(data->eui64, ep->endpoint_id);
+    // Populate server clusters under endpoint
+    for (size_t i = 0; (status == SL_STATUS_OK) && (i < ep->cluster_count);
+         i++) {
+      zcl_cluster_id_t cluster_id = ep->cluster_list[i].cluster_id;
+
+      status = zigpc_datastore_create_cluster(data->eui64,
+                                              ep->endpoint_id,
+                                              ZCL_CLUSTER_SERVER_SIDE,
+                                              cluster_id);
+    }
+    // Populate client clusters under endpoint
+    for (size_t i = 0;
+         (status == SL_STATUS_OK) && (i < ep->client_cluster_count);
+         i++) {
+      zcl_cluster_id_t cluster_id = ep->client_cluster_list[i].cluster_id;
+
+      status = zigpc_datastore_create_cluster(data->eui64,
+                                              ep->endpoint_id,
+                                              ZCL_CLUSTER_CLIENT_SIDE,
+                                              cluster_id);
+    }
+  }
+
+  if (status == SL_STATUS_OK) {
+    dev.endpoint_discovered_count++;
     fsm.interview.endpoint_discovered_count++;
 
     sl_log_debug(LOG_TAG,
@@ -229,9 +309,18 @@ static sl_status_t zigpc_net_mgmt_hdl_node_endpoint_interviewed(
     if (fsm.interview.endpoint_discovered_count
         == fsm.interview.endpoint_total_count) {
       etimer_stop(&fsm.timer);
+
+      zigpc_datastore_log_device(LOG_TAG,
+                                 SL_LOG_DEBUG,
+                                 "Device Interviewed",
+                                 data->eui64);
+
       zigpc_net_mgmt_notify_node_interview_status(fsm.interview.eui64, true);
       fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
+
+      dev.network_status = ZIGBEE_NODE_STATUS_INCLUDED;
     }
+    status = zigpc_datastore_write_device(data->eui64, &dev);
   }
 
   return status;
@@ -243,6 +332,13 @@ static sl_status_t zigpc_net_mgmt_hdl_node_int_timeout(
   // TODO: Add action(s) to perform
   zigpc_net_mgmt_notify_node_interview_status(fsm.interview.eui64, false);
   fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
+
+  zigpc_device_data_t dev;
+  sl_status_t status = zigpc_datastore_read_device(fsm.interview.eui64, &dev);
+  if (status == SL_STATUS_OK) {
+    dev.network_status = ZIGBEE_NODE_STATUS_INTERVIEW_FAIL;
+    status = zigpc_datastore_write_device(fsm.interview.eui64, &dev);
+  }
 
   /* unused */
   (void)(event_data);
@@ -259,6 +355,14 @@ static sl_status_t zigpc_net_mgmt_hdl_idle_remove_request(
 
   if (data == NULL) {
     status = SL_STATUS_NULL_POINTER;
+  } else {
+    zigpc_device_data_t dev;
+
+    status = zigpc_datastore_read_device(data->eui64, &dev);
+    if (status == SL_STATUS_OK) {
+      dev.network_status = ZIGBEE_NODE_STATUS_UNAVAILABLE;
+      status             = zigpc_datastore_write_device(data->eui64, &dev);
+    }
   }
 
   if (status == SL_STATUS_OK) {
@@ -283,27 +387,20 @@ static sl_status_t zigpc_net_mgmt_hdl_node_remove_complete(
 
   if (data == NULL) {
     status = SL_STATUS_NULL_POINTER;
-  }
-
-  if ((status == SL_STATUS_OK)
-      && memcmp(fsm.eui64_to_remove, data->eui64, sizeof(zigbee_eui64_t))) {
+  } else if (memcmp(fsm.eui64_to_remove, data->eui64, sizeof(zigbee_eui64_t))) {
     sl_log_warning(LOG_TAG, "Received unexpected node removed event");
     status = SL_STATUS_IN_PROGRESS;
+  } else {
+    zigpc_datastore_log_device(LOG_TAG,
+                               SL_LOG_INFO,
+                               "Removed Device",
+                               data->eui64);
+
+    status = zigpc_datastore_remove_device(data->eui64);
   }
+
   if (status == SL_STATUS_OK) {
     etimer_stop(&fsm.timer);
-
-    sl_log_debug(
-      LOG_TAG,
-      "Removed Node's EUI64: %02hhX%02hhX%02hhX%02hhX%02hhX%02hhX%02hhX%02hhX",
-      data->eui64[0],
-      data->eui64[1],
-      data->eui64[2],
-      data->eui64[3],
-      data->eui64[4],
-      data->eui64[5],
-      data->eui64[6],
-      data->eui64[7]);
 
     zigpc_net_mgmt_notify_node_removed(data->eui64);
 

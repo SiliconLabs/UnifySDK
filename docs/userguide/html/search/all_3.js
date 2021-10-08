@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['image_20provider_20developer_27s_20guide_8',['Image Provider Developer&apos;s Guide',['../md_applications_image_provider_readme_developer.html',1,'']]],
-  ['image_20provider_20user_27s_20guide_9',['Image Provider User&apos;s Guide',['../md_applications_image_provider_readme_user.html',1,'']]],
-  ['image_20provider_20release_20notes_10',['Image Provider Release Notes',['../md_applications_image_provider_release_notes.html',1,'']]]
+  ['known_2dabbreviations_2emd_9',['known-abbreviations.md',['../known-abbreviations_8md.html',1,'']]],
+  ['known_20abbreviations_10',['Known Abbreviations',['../md_doc_standards_known-abbreviations.html',1,'']]]
 ];

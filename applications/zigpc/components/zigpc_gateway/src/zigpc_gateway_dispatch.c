@@ -17,6 +17,7 @@
 #include "sl_log.h"
 #include "sl_status.h"
 
+#include "zigpc_gateway.h"
 #include "zigpc_gateway_int.h"
 
 #define DISPATCH_CHAR_BUFFER_LENGTH 50
@@ -41,10 +42,27 @@ sl_status_t zigpc_gateway_dispatch(struct zigpc_gateway_dispatch_event *event)
           event->add_node.eui64,
           event->add_node.install_code,
           event->add_node.install_code_length);
-
-        if (operation_status == EMBER_SUCCESS) {
+        break;
+      case ZIGPC_GW_DISPATCH_PERMIT_JOINS:
+        if (event->permit_joins.enable) {
+          const zigpc_config_t *conf = zigpc_get_config();
+          if (conf->tc_use_well_known_key == true) {
+            EmberEUI64 wildcardEui64    = "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF";
+            EmberKeyData centralizedKey = z3gatewayGetTrustCenterWellKownKey();
+            operation_status = z3gatewayTrustCenterAddLinkKey(wildcardEui64,
+                                                              &centralizedKey,
+                                                              true);
+          }
           operation_status = z3gatewayTrustCenterJoinOpen(true);
+
+          zigpc_gateway_command_print_nwk_key();
+        } else {
+          operation_status = z3gatewayTrustCenterJoinClose();
         }
+        sl_log_info(LOG_TAG,
+                    "%s Joins status: 0x%X",
+                    event->permit_joins.enable ? "Permit" : "Deny",
+                    operation_status);
         break;
       case ZIGPC_GW_DISPATCH_REMOVE_NODE:
         operation_status
@@ -80,6 +98,7 @@ const char *
     RETURN_STR_CASE_DISPATCH_TYPE(ADD_NODE_INSTALL_CODE)
     RETURN_STR_CASE_DISPATCH_TYPE(INTERVIEW_NODE)
     RETURN_STR_CASE_DISPATCH_TYPE(REMOVE_NODE)
+    RETURN_STR_CASE_DISPATCH_TYPE(PERMIT_JOINS)
     default:
       snprintf(str, DISPATCH_CHAR_BUFFER_LENGTH, "UNKNOWN TYPE: %d", type);
       return str;
@@ -142,9 +161,9 @@ sl_status_t zigpc_gateway_dispatch_config_binding(
 }
 
 sl_status_t zigpc_gateway_dispatch_ota_image(
-        const zigpc_gateway_dispatch_add_ota_image_t *ota_image_data)
+  const zigpc_gateway_dispatch_add_ota_image_t *ota_image_data)
 {
-    EmberStatus emStatus = z3gatewayAddOtaImage(ota_image_data->filename);
+  EmberStatus emStatus = z3gatewayAddOtaImage(ota_image_data->filename);
 
-    return (emStatus == EMBER_SUCCESS) ? SL_STATUS_OK : SL_STATUS_FAIL;
+  return (emStatus == EMBER_SUCCESS) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }

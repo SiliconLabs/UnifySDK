@@ -162,7 +162,7 @@ struct attribute_path_subscript {
  */
 struct attribute {
   char value_type;
-  std::vector<attribute_path_element> attribute;
+  std::vector<attribute_path_element> attribute_path;
 };
 
 /**
@@ -176,8 +176,8 @@ struct attribute {
  *
  */
 struct assignment {
-  ast::attribute attribute;  ///< left hand side of the assignment
-  expression rhs;            ///< right hand side of the assignment
+  ast::attribute lhs;  ///< left hand side of the assignment
+  expression rhs;      ///< right hand side of the assignment
 };
 
 /**
@@ -215,9 +215,9 @@ bool operator==(const assignment &a, const assignment &b);
 BOOST_FUSION_ADAPT_STRUCT(ast::signed_, sign, operand_)
 BOOST_FUSION_ADAPT_STRUCT(ast::operation, operator_, operand_)
 BOOST_FUSION_ADAPT_STRUCT(ast::expression, first, rest)
-BOOST_FUSION_ADAPT_STRUCT(ast::assignment, attribute, rhs)
+BOOST_FUSION_ADAPT_STRUCT(ast::assignment, lhs, rhs)
 BOOST_FUSION_ADAPT_STRUCT(ast::condition, cond_value, cond_true, cond_false)
-BOOST_FUSION_ADAPT_STRUCT(ast::attribute, value_type, attribute)
+BOOST_FUSION_ADAPT_STRUCT(ast::attribute, value_type, attribute_path)
 BOOST_FUSION_ADAPT_STRUCT(ast::attribute_path_subscript, identifier, index)
 BOOST_FUSION_ADAPT_STRUCT(ast::scope, priority, assignments)
 

@@ -15,7 +15,7 @@
  * @defgroup dotdot_mqtt_topics_handler DotDot MQTT Topics Handler
  * @ingroup dotdot_mqtt_topics_handler
  * @brief It reads the ZCL attribute state and publish the state to the MQTT interface.
- *        It also Parse WriteAttributes MWTT topic and update the desired state of
+ *        It also Parse WriteAttributes MQTT topic and update the desired state of
  *        writable ZCL attributes in the Attribute Store.
  *
  * @{

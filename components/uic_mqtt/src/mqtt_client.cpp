@@ -87,29 +87,33 @@ sl_status_t mqtt_client::setup()
   mqtt_client_library_instance
     = mqtt_wrapper_new(mqtt_client_id.c_str(), true, this);
   if (mqtt_client_library_instance == nullptr) {
+    sl_log_error(LOG_TAG,
+                 "Failed to create a new MQTT instance. "
+                 "Aborting initialization. ");
     return SL_STATUS_FAIL;
   }
 
-  if (!mqtt_cafile.empty() && !mqtt_certfile.empty()
-             && !mqtt_keyfile.empty()) {
+  if (!mqtt_cafile.empty() && !mqtt_certfile.empty() && !mqtt_keyfile.empty()) {
     sl_log_debug(LOG_TAG, "Setting Certificate based TLS.\n");
     if (mqtt_wrapper_tls_set(mqtt_client_library_instance,
-                                 mqtt_cafile.c_str(),
-                                 mqtt_certfile.c_str(),
-                                 mqtt_keyfile.c_str())
+                             mqtt_cafile.c_str(),
+                             mqtt_certfile.c_str(),
+                             mqtt_keyfile.c_str())
         != SL_STATUS_OK) {
-      sl_log_warning(LOG_TAG, "Certificate based TLS setting failed\n");
-    return SL_STATUS_FAIL;
+      sl_log_error(LOG_TAG, "Certificate based TLS setting failed\n");
+      return SL_STATUS_FAIL;
     }
   } else if (!mqtt_cafile.empty() || !mqtt_certfile.empty()
              || !mqtt_keyfile.empty()) {
-    sl_log_warning(LOG_TAG,
-                   "One of the TLS certificate configuration file missing."
-                   "Certificate based TLS setting failed\n");
+    sl_log_error(LOG_TAG,
+                 "One of the TLS certificate configuration file missing."
+                 "Certificate based TLS setting failed\n");
     return SL_STATUS_FAIL;
   }
 
-  sl_log_debug(LOG_TAG, "Registering callbacks.\n");
+  sl_log_debug(
+    LOG_TAG,
+    "Registering MQTT wrapper callbacks for connect/disconnect/messages.\n");
   mqtt_wrapper_connect_callback_set(mqtt_client_library_instance,
                                     mqtt_client_on_connect_callback);
 
@@ -136,6 +140,9 @@ int mqtt_client::file_descriptor()
 
 void mqtt_client::poll()
 {
+  if(current_state == &mqtt_client_fsm_disconnected::get_instance()) {
+    return;
+  }
   // We have already select()ed on the socket, so we're going to run the individual
   // read-, write-, and misc-operations.
   switch (auto status_code
@@ -235,12 +242,7 @@ void mqtt_client::publish(const std::string &topic,
                           size_t message_length,
                           bool retain)
 {
-  message_queue_element_t new_message;
-  new_message.topic.assign(topic);
-  new_message.message.assign(message);
-  new_message.message_length = message_length;
-  new_message.retain         = retain;
-  publishing_queue.push(std::move(new_message));
+  bool enqueue_message = true;
 
   if (retain) {
     if (message_length > 0) {
@@ -250,7 +252,30 @@ void mqtt_client::publish(const std::string &topic,
       //Remove is this as retain delete message
       retained_topics.erase(topic);
     }
+    // Try to find retain message with same topic
+    // And replace message content and message_length
+    // Try to find retained message with same topic,
+    // change message content and message_length
+    for (auto it = publishing_queue.begin(); it != publishing_queue.end(); ++it) {
+      if ((*it).retain && (*it).topic.compare(topic) == 0) {
+          // variant1: modify content of existing message
+          (*it).message.assign(message);
+          (*it).message_length = message_length;
+          enqueue_message = false;
+          break;
+      }
+    }
   }
+
+  if (enqueue_message) {
+    message_queue_element_t new_message;
+    new_message.topic.assign(topic);
+    new_message.message.assign(message);
+    new_message.message_length = message_length;
+    new_message.retain         = retain;
+    publishing_queue.push_back(std::move(new_message));
+  }
+    
   if (event_counter(MQTT_EVENT_PUBLISH, nullptr) == 0) {
     // We will only send publish-events if there aren't any.
     send_event(MQTT_EVENT_PUBLISH, nullptr);
@@ -302,7 +327,7 @@ void mqtt_client::unretain(const std::string &prefix_pattern)
   for (auto it = (start); it != end; it++) {
     if (it == start)
       continue;
-    publishing_queue.push({*it, "", 0, true});
+    publishing_queue.push_back({*it, "", 0, true});
   }
   retained_topics.erase(start, end);
   send_event(MQTT_EVENT_PUBLISH, nullptr);
@@ -313,7 +338,7 @@ void mqtt_client::unretain_by_regex(const std::string &pattern)
   std::regex re(pattern);
   for (auto it = retained_topics.begin(); it != retained_topics.end();) {
     if (std::regex_match(*it, re)) {
-      publishing_queue.push({*it, "", 0, true});
+      publishing_queue.push_back({*it, "", 0, true});
       retained_topics.erase(it++);
     } else {
       it++;
@@ -342,7 +367,7 @@ sl_status_t mqtt_client::publish_to_broker(bool flushing)
                                             MQTT_CLIENT_QoS,
                                             next_message.retain);
   if (publish_retval == SL_STATUS_OK) {
-    publishing_queue.pop();
+    publishing_queue.pop_front();
   } else {
     if (publish_retval == SL_STATUS_ERRNO) {
       sl_log_error(LOG_TAG,
@@ -575,22 +600,21 @@ sl_status_t mqtt_client::connect()
                            MQTT_CLIENT_KEEP_ALIVE_INTERVAL_MILLISECONDS / 1000);
   switch (retval) {
     case SL_STATUS_OK:
-      sl_log_debug(LOG_TAG,
-                   "Connection to %s:%d established.\n",
-                   hostname.c_str(),
-                   port);
+      sl_log_info(LOG_TAG,
+                  "Connection to MQTT broker %s:%d established.\n",
+                  hostname.c_str(),
+                  port);
       break;
     case SL_STATUS_INVALID_PARAMETER:
-      sl_log_critical(LOG_TAG,
-                      "Invalid input-parameters (hostname or port).\n");
+      sl_log_error(LOG_TAG, "Invalid input-parameters (hostname or port).\n");
       // TODO Send some relevant events or assert()
       break;
     case SL_STATUS_ERRNO:
-      sl_log_critical(LOG_TAG, "System error: %s\n", strerror(errno));
+      sl_log_warning(LOG_TAG, "System error: %s\n", strerror(errno));
       // TODO Send some relevant events?
       break;
     default:
-      sl_log_critical(LOG_TAG,
+      sl_log_error(LOG_TAG,
                       "MQTT-wrapper returned an invalid status-code: 0x%04x\n",
                       retval);
       break;
@@ -628,15 +652,15 @@ void mqtt_client::on_disconnect(int result_code)
 {
   if (result_code != 0) {
     if (result_code == SL_STATUS_ERRNO) {
-      sl_log_error(LOG_TAG,
-                   "Unexpected disconnect: %s\n",
-                   std::strerror(errno));
+      sl_log_warning(LOG_TAG,
+                     "Unexpected disconnect: %s\n",
+                     std::strerror(errno));
     } else {
-      sl_log_error(LOG_TAG,
-                   "Unexpected disconnect: %s(0x%04x): %s\n",
-                   sl_status_string(result_code),
-                   result_code,
-                   sl_status_string_verbose(result_code));
+      sl_log_warning(LOG_TAG,
+                     "Unexpected disconnect: %s(0x%04x): %s\n",
+                     sl_status_string(result_code),
+                     result_code,
+                     sl_status_string_verbose(result_code));
     }
     send_event(MQTT_TRANSITION_DISCONNECTED, nullptr);
     send_delayed_event(MQTT_EVENT_CONNECT, next_reconnect_backoff);

@@ -49,10 +49,16 @@ typedef struct zwave_minimum_frame {
   uint8_t command;
 } zwave_minimum_frame_t;
 
+///< Values that can be used for "Umbrella" attributes
+typedef enum {
+  FINAL_STATE             = 0,
+  NEEDS_ONE_COMMAND       = 1,
+  NEEDS_MULTIPLE_COMMANDS = 2,
+} command_status_values_t;
+
 // Helper macros
 #define FAHRENHEIT_TO_DEGREES(value) ((value - 32.0F) * 5 / 9);
 #define DEGREES_TO_FAHRENHEIT(value) (value * 9 / 5.0F) + 32;
-#define ROLE_TYPE_UNKNOWN            0xFF
 
 // Constants
 /// Additional delay in ms to wait before issuing a Get Command
@@ -187,7 +193,16 @@ bool is_actuator_command_class(zwave_command_class_t command_class);
  *
  * @return the Role Type of a node
  */
-uint8_t get_zwave_node_role_type(zwave_node_id_t node_id);
+zwave_role_type_t get_zwave_node_role_type(zwave_node_id_t node_id);
+
+/**
+ * @brief Verifies if a Node is a Portable End Node. (PS / PEN Role type)
+ *
+ * @param node  Any attribute store node under the NodeID node
+ * @returns true if the Role type of the node is ROLE_TYPE_END_NODE_PORTABLE,
+ *          false otherwise
+ */
+bool is_portable_end_node(attribute_store_node_t node);
 
 #ifdef __cplusplus
 }

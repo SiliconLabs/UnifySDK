@@ -184,7 +184,17 @@ fn extern_c_handler(
             connection: *const zwave_controller::zwave_controller_connection_info_t,
             data: &[u8],
         ) -> sl_status_t {
-            unsafe { #name.get_mut().unwrap().#member_name((*connection).into(), data.into()) }
+            use std::convert::TryInto;
+            match data.try_into() {
+                Ok(frame) => {
+                    unsafe { #name.get_mut().unwrap().#member_name((*connection).into(), frame) }
+                },
+                Err(e) => {
+                    uic_log::log_warning("rust_command_classes", format!("could not convert incoming frame: {}", e));
+                    1
+                }
+            }
+
         }
     }
 }
@@ -218,7 +228,7 @@ pub fn initialize_zwave_command_classes(_item: TokenStream) -> TokenStream {
             status
         }
     };
-    return expanded.into();
+    expanded.into()
 }
 
 fn append_init_handler(fn_name: Ident) {

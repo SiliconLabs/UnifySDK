@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -274,7 +274,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a81c97c8e96754051245cfa22cc4fcb43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset nonce timer.  <a href="zwave__s0__transport_8c.html#a81c97c8e96754051245cfa22cc4fcb43">More...</a><br /></td></tr>
 <tr class="separator:a81c97c8e96754051245cfa22cc4fcb43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af77837497bf85a6f14cf49fac0278b1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__transport_8c.html#af77837497bf85a6f14cf49fac0278b1b">zwave_s0_transport_init</a> ()</td></tr>
-<tr class="memdesc:af77837497bf85a6f14cf49fac0278b1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the S0 Transport *.  <a href="zwave__s0__transport_8c.html#af77837497bf85a6f14cf49fac0278b1b">More...</a><br /></td></tr>
+<tr class="memdesc:af77837497bf85a6f14cf49fac0278b1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the S0 Transport Also calls <a class="el" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da" title="Initialize the S0 network layer.">zwave_s0_network_init()</a> which aborts all tx sessions and frees them and also frees rx sessions and reads S0 key from keystore and initializes the S0 key.  <a href="zwave__s0__transport_8c.html#af77837497bf85a6f14cf49fac0278b1b">More...</a><br /></td></tr>
 <tr class="separator:af77837497bf85a6f14cf49fac0278b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -840,6 +840,7 @@ Variables</h2></td></tr>
 
 <p>Free all S0 RX sessions <br  />
  </p>
+<p>Sets the state of all MAX_RXSESSIONS S0 receive sessions to RX_SESSION_DONE </p>
 
 </div>
 </div>
@@ -860,6 +861,7 @@ Variables</h2></td></tr>
 
 <p>Free all S0 Tx sessions <br  />
  </p>
+<p>Stops the Nonce Request timer and frees all tx sessions </p>
 
 </div>
 </div>
@@ -879,6 +881,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Free S0 nonce block list. </p>
+<p>Frees all NONCE_BLOCK_LIST_SIZE number of nonce blocks </p>
 
 </div>
 </div>
@@ -1294,6 +1297,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Abort all S0 network TX sessions. </p>
+<p>This function aborts all NUM_TX_SESSIONS of S0 transmit session and calls the callback with TRANSMIT_COMPLETE_FAIL to notify upper layer for failure </p>
 
 </div>
 </div>
@@ -1700,9 +1704,14 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true If frame is accepted </dd>
-<dd>
-false If frame is not an S0 frame. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t<ul>
+<li>SL_STATUS_WOULD_OVERFLOW Frame length is more than ZWAVE_MAX_FRAME_SIZE</li>
+<li>SL_STATUS_NOT_FOUND if Command class is not Security 0 or command inside the command class is unknown</li>
+<li>SL_STATUS_NOT_SUPPORTED If frame is not supported because of some reason</li>
+<li>SL_STATUS_FAIL Decryption of frame failed</li>
+<li>SL_STATUS_OK if OK </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -1772,11 +1781,13 @@ false If frame is not an S0 frame. </dd></dl>
     <tr><td class="paramname">tx_options</td><td>Transmit options. The number_of_responses field determines if S0 verify delivery is going to be used </td></tr>
     <tr><td class="paramname">on_send_complete</td><td>Callback for the transmission complete event. </td></tr>
     <tr><td class="paramname">user</td><td>User pointer </td></tr>
+    <tr><td class="paramname">parent_session_id</td><td>Parent session id of this session </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t <br  />
- ap* - SL_STATUS_OK on success<ul>
+<ul>
+<li>SL_STATUS_OK on success</li>
 <li>SL_STATUS_NOT_SUPPORTED if unknown encapuslation scheme is applied.</li>
 <li>SL_STATUS_BUSY if a tranmission is ongoing.</li>
 <li>SL_STATUS_WOULD_OVERFLOW if we cannot handle the frame and it should just be dropped. </li>
@@ -1801,10 +1812,10 @@ false If frame is not an S0 frame. </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Initialize the S0 Transport *. </p>
+<p>Initialize the S0 Transport Also calls <a class="el" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da" title="Initialize the S0 network layer.">zwave_s0_network_init()</a> which aborts all tx sessions and frees them and also frees rx sessions and reads S0 key from keystore and initializes the S0 key. </p>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if successful </dd>
 <dd>
-SL_STATUS_FAIL if an error occurred </dd></dl>
+SL_STATUS_FAIL if an error occurred in <a class="el" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da" title="Initialize the S0 network layer.">zwave_s0_network_init()</a> </dd></dl>
 
 </div>
 </div>
@@ -2121,7 +2132,7 @@ SL_STATUS_FAIL if an error occurred </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_adea59f225018a199b25c065c5cc4ca8.html">zwave_transports</a></li><li class="navelem"><a class="el" href="dir_2dd6c5c783177b0b8bd633a4c311e976.html">src</a></li><li class="navelem"><a class="el" href="zwave__s0__transport_8c.html">zwave_s0_transport.c</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:37 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

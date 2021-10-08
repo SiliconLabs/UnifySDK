@@ -175,6 +175,37 @@ void test_zwave_s0_sm_controller()
   TEST_ASSERT_EQUAL(S0_INC_IDLE, get_s0_sm_state());
 }
 
+/* There should not be any kind of validation on Supported security scheme
+ * byte in Scheme report */
+void test_zwave_s0_sm_controller_with_wrong_scheme_report()
+{
+  zwave_network_management_get_node_id_IgnoreAndReturn(1);
+
+  s0_expect_frame(exp_frame_scheme_get,
+                  sizeof(exp_frame_scheme_get),
+                  SL_STATUS_OK);
+  TEST_ASSERT_EQUAL(S0_INC_IDLE, get_s0_sm_state());
+  zwave_s0_start_bootstrapping(42, 1);
+  TEST_ASSERT_EQUAL(S0_AWAITING_SCHEME_REPORT, get_s0_sm_state());
+  s0_expect_frame(exp_frame_net_key_set,
+                  sizeof(exp_frame_net_key_set),
+                  SL_STATUS_OK);
+  s0_scheme_report_received(1, 42);  //trigger scheme_report
+
+  s0_expect_frame(exp_frame_scheme_inherit,
+                  sizeof(exp_frame_scheme_inherit),
+                  SL_STATUS_OK);
+  TEST_ASSERT_EQUAL(S0_AWAITING_KEY_VERIFY, get_s0_sm_state());
+  s0_network_key_verify_received(42);  //trigger net key verify
+  TEST_ASSERT_EQUAL(S0_AWAITING_2SCHEME_REPORT, get_s0_sm_state());
+  zwave_s0_set_network_callbacks(my_s0_on_inclusion_complete_cb);
+  ggranted_keys  = KEY_CLASS_S0;
+  gkex_fail_code = ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE;
+  s0_scheme_report_received(1, 42);  //trigger scheme report for scheme inherit
+  TEST_ASSERT_EQUAL(S0_INC_IDLE, get_s0_sm_state());
+}
+
+
 void test_zwave_s0_sm_abort()
 {
   zwave_network_management_get_node_id_IgnoreAndReturn(1);
@@ -363,7 +394,6 @@ void test_zwave_s0_sm_keystore_fail()
                   sizeof(exp_frame_scheme_get),
                   SL_STATUS_OK);
   TEST_ASSERT_EQUAL(S0_INC_IDLE, get_s0_sm_state());
-  printf("--------------\n");
   zwave_s0_start_bootstrapping(42, 1);
   TEST_ASSERT_EQUAL(S0_AWAITING_SCHEME_REPORT, get_s0_sm_state());
   s0_expect_frame(exp_frame_net_key_set,

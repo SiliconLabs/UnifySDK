@@ -62,14 +62,13 @@ attribute_store_node_t get_zpc_node_id_node()
                                                  0);
 }
 
-///FIXME: Change uin8_t to zwave_endpoint_id_t
-attribute_store_node_t get_zpc_endpoint_id_node(uint8_t endpoint_id)
+attribute_store_node_t get_zpc_endpoint_id_node(zwave_endpoint_id_t endpoint_id)
 {
   return attribute_store_get_node_child_by_value(get_zpc_node_id_node(),
                                                  ATTRIBUTE_ENDPOINT_ID,
                                                  REPORTED_ATTRIBUTE,
                                                  (uint8_t *)&endpoint_id,
-                                                 sizeof(uint8_t),
+                                                 sizeof(zwave_endpoint_id_t),
                                                  0);
 }
 
@@ -83,11 +82,16 @@ static sl_status_t invoke_update_callbacks_in_network()
     = attribute_store_refresh_node_and_children_callbacks(home_id);
 
   if (refresh != SL_STATUS_OK) {
-    sl_log_warning(LOG_TAG, "Failed to trigger a refresh callback");
+    sl_log_error(LOG_TAG,
+                 "Failed to trigger a refresh callback for attribute Store "
+                 "node %d. This node should represent our HomeID");
     return refresh;
   }
 
-  sl_log_info(LOG_TAG, "Refreshed callbacks on Attribute Node %d", home_id);
+  sl_log_info(
+    LOG_TAG,
+    "Refreshed callbacks on Attribute Node %d, representing our current HomeID",
+    home_id);
   return refresh;
 }
 

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -108,7 +108,20 @@ Macros</h2></td></tr>
 <tr class="memdesc:gab64e1338c3f7d0a977e2fe4c5941e448"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of callbacks structures which may be registered.  <a href="group__zwave__controller__callbacks.html#gab64e1338c3f7d0a977e2fe4c5941e448">More...</a><br /></td></tr>
 <tr class="separator:gab64e1338c3f7d0a977e2fe4c5941e448"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga67730d6979cf7f616ffbd41dba465fa2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga67730d6979cf7f616ffbd41dba465fa2">ZWAVE_CONTROLLER_RESET_STEP_MIN_PRIORITY</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:ga67730d6979cf7f616ffbd41dba465fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum Priority for a reset step.  <a href="group__zwave__controller__callbacks.html#ga67730d6979cf7f616ffbd41dba465fa2">More...</a><br /></td></tr>
 <tr class="separator:ga67730d6979cf7f616ffbd41dba465fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5dff7aa68712022861b11db0d0ed48ee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga5dff7aa68712022861b11db0d0ed48ee">ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:ga5dff7aa68712022861b11db0d0ed48ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify the lifeline destinations that we are resetting.  <a href="group__zwave__controller__callbacks.html#ga5dff7aa68712022861b11db0d0ed48ee">More...</a><br /></td></tr>
+<tr class="separator:ga5dff7aa68712022861b11db0d0ed48ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9d47b901a05c30859bea3ce34ce36c89"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga9d47b901a05c30859bea3ce34ce36c89">ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:ga9d47b901a05c30859bea3ce34ce36c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up the SmartStart as we exit the network.  <a href="group__zwave__controller__callbacks.html#ga9d47b901a05c30859bea3ce34ce36c89">More...</a><br /></td></tr>
+<tr class="separator:ga9d47b901a05c30859bea3ce34ce36c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacf03c126e4680e51fd814c06ab389134"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#gacf03c126e4680e51fd814c06ab389134">ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY</a>&#160;&#160;&#160;4</td></tr>
+<tr class="memdesc:gacf03c126e4680e51fd814c06ab389134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty and flush the Tx Queue.  <a href="group__zwave__controller__callbacks.html#gacf03c126e4680e51fd814c06ab389134">More...</a><br /></td></tr>
+<tr class="separator:gacf03c126e4680e51fd814c06ab389134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8d41dadb68943c85e8913a60f3e2b2fe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga8d41dadb68943c85e8913a60f3e2b2fe">ZWAVE_CONTROLLER_ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY</a>&#160;&#160;&#160;5</td></tr>
+<tr class="memdesc:ga8d41dadb68943c85e8913a60f3e2b2fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset the network for the Z-Wave API. This should be last.  <a href="group__zwave__controller__callbacks.html#ga8d41dadb68943c85e8913a60f3e2b2fe">More...</a><br /></td></tr>
+<tr class="separator:ga8d41dadb68943c85e8913a60f3e2b2fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -143,6 +156,22 @@ Functions</h2></td></tr>
  my_callbacks.on_new_suc = NULL;<br  />
  </code> </div><p> The user component must de-register callbacks if the variable is to be destroyed </p><div> <code> zwave_controller_deregister_callbacks(my_callbacks);<br  />
  // Now my_callbacks can be destroyed </code> </div> <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga5dff7aa68712022861b11db0d0ed48ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5dff7aa68712022861b11db0d0ed48ee">&#9670;&nbsp;</a></span>ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Notify the lifeline destinations that we are resetting. </p>
+
+</div>
+</div>
 <a id="gab64e1338c3f7d0a977e2fe4c5941e448"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab64e1338c3f7d0a977e2fe4c5941e448">&#9670;&nbsp;</a></span>ZWAVE_CONTROLLER_MAXIMUM_CALLBACK_SUBSCRIBERS</h2>
 
@@ -170,6 +199,56 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Minimum Priority for a reset step. </p>
+
+</div>
+</div>
+<a id="ga9d47b901a05c30859bea3ce34ce36c89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9d47b901a05c30859bea3ce34ce36c89">&#9670;&nbsp;</a></span>ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clean up the SmartStart as we exit the network. </p>
+
+</div>
+</div>
+<a id="gacf03c126e4680e51fd814c06ab389134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacf03c126e4680e51fd814c06ab389134">&#9670;&nbsp;</a></span>ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Empty and flush the Tx Queue. </p>
+
+</div>
+</div>
+<a id="ga8d41dadb68943c85e8913a60f3e2b2fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8d41dadb68943c85e8913a60f3e2b2fe">&#9670;&nbsp;</a></span>ZWAVE_CONTROLLER_ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZWAVE_CONTROLLER_ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>reset the network for the Z-Wave API. This should be last. </p>
 
 </div>
 </div>
@@ -344,7 +423,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:56 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:38 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

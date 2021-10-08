@@ -1,3 +1,3 @@
 export type ClusterTypeTooltipProps = {
-    ClusterTypes: string[]
+   Ep: any[]
 }

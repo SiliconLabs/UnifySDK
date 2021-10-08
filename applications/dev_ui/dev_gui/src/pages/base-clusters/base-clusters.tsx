@@ -83,22 +83,18 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
 
   createGroup() {
     let maxIndex = 0;
-    this.props.NodeList.forEach((node) => {
-      if (node.ep)
-        Object.keys(node.ep).forEach(endpoint => {
-          node.ep[endpoint].Groups?.Attributes?.GroupList?.Reported?.forEach((gr: number) => {
-            maxIndex = maxIndex > gr ? maxIndex : gr;
-          });
-        });
+    this.props.GroupList.forEach((group) => {
+      maxIndex = maxIndex > group.GroupId ? maxIndex : group.GroupId;
     });
 
     let newGroup = {
-      Name: "",
+      GroupName: "",
       GroupId: maxIndex + 1,
-      GroupEndpointList: [],
+      NodeList: {},
       SupportedCommands: [],
       FailedNodes: [],
-      UpdatingNodes: []
+      UpdatingNodes: [],
+      Clusters: []
     } as Group;
     this.changeEditGroupDlg.current.updateState(newGroup, this.getNodesByClusterType(this.props.NodeList), true);
   }
@@ -114,7 +110,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
             updatingProperties.push(`${attr}: ${attribute.Desired}`)
           else if (type === "object")
             Object.keys(attribute.Desired).forEach(i => {
-              if (attribute.Reported[i] !== undefined && (attribute.Reported[i] !== attribute.Desired[i]))
+              if (attribute.Reported !== undefined && attribute.Reported[i] !== undefined && (attribute.Reported[i] !== attribute.Desired[i]))
                 updatingProperties.push(`${attr}.${i}: ${attribute.Desired[i]}`)
             });
         }
@@ -127,7 +123,10 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
     if (!attrNames.length && this.state.ClusterList && this.state.ClusterList.length) {
       this.state.ClusterList.forEach(i => {
         if (i.Attributes) {
-          attrNames = Object.keys(i.Attributes).slice(0, 5);
+          Object.keys(i.Attributes).slice(0, 5).forEach(attr => {
+            if (attrNames.indexOf(attr) === -1)
+              attrNames.push(attr);
+          });
           return;
         }
       });
@@ -188,7 +187,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
                         <Spinner hidden={!updatingProperties.length || item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} as="span" animation="border" size="sm" variant="primary" />
                       </OverlayTrigger>
                     </td>
-                    <td>{item.SupportedCommands && item.SupportedCommands.map((cmd: string, index: number) => {
+                    <td>{item.SupportedCommands && item.SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes").map((cmd: string, index: number) => {
                       return <Button disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} key={index} className="margin-5" size="sm" onClick={this.preSendCommand.bind(this, item, cmd)}>{cmd}</Button>
                     })}
                     </td>

@@ -190,14 +190,24 @@ transfer_state *-- expiry_time
 @startuml
 [*] --> IDLE
 IDLE --> ONGOING : Initiate firmware update
+IDLE: Reported: IDLE
+IDLE: Desired: IDLE
 ONGOING --> ONGOING : End node responds and frame valid
+ONGOING: Reported: ONGOING
+ONGOING: Desired: IDLE
 ONGOING --> WAITING_FOR_ACTIVATION : Update done and end node supports activation
-WAITING_FOR_ACTIVATION --> IDLE : Activation done. Update either success or fail.
+WAITING_FOR_ACTIVATION --> ACTIVATION_TIMEOUT: Set apply timer callback
+ACTIVATION_TIMEOUT --> IDLE : Get rule triggerred to send Activtion command. Update either success or fail.
+WAITING_FOR_ACTIVATION: Reported: WAITING_FOR_ACTIVATION
+WAITING_FOR_ACTIVATION: Desired: IDLE
+ACTIVATION_TIMEOUT: Reported: Undefined
+ACTIVATION_TIMEOUT: Desired: WAITING_FOR_ACTIVATION
 ONGOING --> WAITING_FOR_REBOOT : Update done and end node requires reboot
+WAITING_FOR_REBOOT: Reported: WAITING_FOR_REBOOT
+WAITING_FOR_REBOOT: Desired: IDLE
 WAITING_FOR_REBOOT --> IDLE : Reboot done. Update either success or fail.
 ONGOING --> IDLE : Update either success or fail. No reboot needed.
 @enduml
-
  *
  * @{
 */

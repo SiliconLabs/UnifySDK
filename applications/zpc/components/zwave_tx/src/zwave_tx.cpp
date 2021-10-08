@@ -191,8 +191,9 @@ sl_status_t zwave_tx_init()
   zwave_controller_register_callbacks(&zwave_tx_callbacks);
 
   // Tell the Z-Wave Controller that we want to do something on Reset
-  zwave_controller_register_reset_step(&zwave_tx_flush_queue_reset_step,
-                                       TX_FLUSH_RESET_STEP_PRIORITY);
+  zwave_controller_register_reset_step(
+    &zwave_tx_flush_queue_reset_step,
+    ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY);
   return SL_STATUS_OK;
 }
 

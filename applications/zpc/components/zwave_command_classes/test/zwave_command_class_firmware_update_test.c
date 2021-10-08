@@ -25,6 +25,7 @@
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "zwave_tx_scheme_selector.h"
+#include "ota_time.h"
 
 // Interface includes
 #include "attribute_store_defined_attribute_types.h"
@@ -180,7 +181,7 @@ void test_zwave_command_class_firmware_update_configure_and_cancel()
                       node_id,
                       endpoint_id,
                       0,
-                      clock_seconds() - 1,
+                      get_current_utc_current_time() - 1,
                       "test_firmware.gbl"));
 
   // Attribute Store verifications
@@ -308,7 +309,7 @@ void test_zwave_command_class_firmware_abort_when_idle()
                       node_id,
                       endpoint_id,
                       0,
-                      clock_seconds() - 1,
+                      get_current_utc_current_time() - 1,
                       "test_firmware.gbl"));
 
   // Attribute Store verifications
@@ -428,10 +429,10 @@ void test_zwave_command_class_firmware_update_no_activation()
   TEST_ASSERT_EQUAL(IDLE, u32_value);
 }
 
-void test_zwave_command_class_firmware_update_node_supports_activation()
+void test_zwave_command_class_firmware_update_node_supports_firmware_activation()
 {
   // Assume false by default.
-  TEST_ASSERT_FALSE(node_supports_activation(endpoint_id_node));
+  TEST_ASSERT_FALSE(node_supports_firmware_activation(endpoint_id_node));
 
   // Create a supporting node data:
   attribute_store_node_t firmware_update_node
@@ -444,19 +445,58 @@ void test_zwave_command_class_firmware_update_node_supports_activation()
                                &u32_value,
                                sizeof(u32_value));
 
-  TEST_ASSERT_TRUE(node_supports_activation(endpoint_id_node));
+  TEST_ASSERT_FALSE(node_supports_firmware_activation(endpoint_id_node));
 
   u32_value = 0xFF;
   attribute_store_set_reported(firmware_activation_node,
                                &u32_value,
                                sizeof(u32_value));
-  TEST_ASSERT_TRUE(node_supports_activation(endpoint_id_node));
+  TEST_ASSERT_FALSE(node_supports_firmware_activation(endpoint_id_node));
+
+  zwave_cc_version_t version = 5;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+  TEST_ASSERT_FALSE(node_supports_firmware_activation(endpoint_id_node));
+
+  version = 7;
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE(VERSION),
+                                     &version,
+                                     sizeof(version));
+  TEST_ASSERT_TRUE(node_supports_firmware_activation(endpoint_id_node));
 
   u32_value = 0;
   attribute_store_set_reported(firmware_activation_node,
                                &u32_value,
                                sizeof(u32_value));
-  TEST_ASSERT_FALSE(node_supports_activation(endpoint_id_node));
+  TEST_ASSERT_FALSE(node_supports_firmware_activation(endpoint_id_node));
+}
+
+void test_zwave_command_class_firmware_update_node_supports_cc()
+{
+  // Assume false by default.
+  TEST_ASSERT_FALSE(node_supports_cc(endpoint_id_node));
+
+  // Create a supporting node data:
+  attribute_store_node_t firmware_update_node
+    = attribute_store_add_node(ATTRIBUTE(FWU), endpoint_id_node);
+
+  attribute_store_node_t firmware_cc_node
+    = attribute_store_add_node(ATTRIBUTE(FWU_CC), firmware_update_node);
+  u32_value = (uint32_t) true;
+  attribute_store_set_reported(firmware_cc_node, &u32_value, sizeof(u32_value));
+
+  TEST_ASSERT_TRUE(node_supports_cc(endpoint_id_node));
+
+  u32_value = 0x1;
+  attribute_store_set_reported(firmware_cc_node, &u32_value, sizeof(u32_value));
+  TEST_ASSERT_TRUE(node_supports_cc(endpoint_id_node));
+
+  u32_value = 0;
+  attribute_store_set_reported(firmware_cc_node, &u32_value, sizeof(u32_value));
+  TEST_ASSERT_FALSE(node_supports_cc(endpoint_id_node));
 }
 
 void test_zwave_command_class_firmware_update_double_update_rejected()
@@ -612,7 +652,7 @@ void test_zwave_command_class_firmware_update_is_firmware_update_ongoing()
   attribute_store_set_reported(firmware_transfer_node,
                                &u32_value,
                                sizeof(u32_value));
-                               
+
   // Ongoing: No expiry and reported is ONGOING
   TEST_ASSERT_TRUE(is_firmware_update_ongoing(endpoint_id_node));
 
@@ -668,7 +708,7 @@ void test_zwave_command_class_firmware_update_postpone_expiry()
                     postpone_firmware_update_expiry(endpoint_id_node));
 
   clock_time_t current_time = clock_time();
-  time_value                = clock_time() + 2;
+  time_value                = clock_time() + 15;
   attribute_store_set_reported(expiry_time_node,
                                &time_value,
                                sizeof(time_value));
@@ -741,7 +781,9 @@ void test_zwave_command_class_firmware_theoretical_fragment_size_lr_s2()
                                &endpoint_id,
                                sizeof(endpoint_id));
 
-  TEST_ASSERT_EQUAL(152, get_theoretical_max_fragment_size(endpoint_id_node));
+  TEST_ASSERT_EQUAL(
+    152,
+    firmware_transfer_get_theoretical_max_fragment_size(endpoint_id_node));
 }
 
 void test_zwave_command_class_firmware_theoretical_fragment_size_lr_s2_multi_channel()
@@ -762,7 +804,9 @@ void test_zwave_command_class_firmware_theoretical_fragment_size_lr_s2_multi_cha
                                &endpoint_id,
                                sizeof(endpoint_id));
 
-  TEST_ASSERT_EQUAL(148, get_theoretical_max_fragment_size(endpoint_id_node));
+  TEST_ASSERT_EQUAL(
+    148,
+    firmware_transfer_get_theoretical_max_fragment_size(endpoint_id_node));
 }
 
 void test_zwave_command_class_firmware_theoretical_fragment_size_unknown_protocol()
@@ -783,8 +827,9 @@ void test_zwave_command_class_firmware_theoretical_fragment_size_unknown_protoco
                                &endpoint_id,
                                sizeof(endpoint_id));
 
-  TEST_ASSERT_EQUAL(ZWAVE_TX_SAFE_LOWEST_MAX_PAYLOAD - 6,
-                    get_theoretical_max_fragment_size(endpoint_id_node));
+  TEST_ASSERT_EQUAL(
+    ZWAVE_TX_SAFE_LOWEST_MAX_PAYLOAD - 6,
+    firmware_transfer_get_theoretical_max_fragment_size(endpoint_id_node));
 }
 
 void test_zwave_command_class_firmware_theoretical_fragment_size_zwave_s0()
@@ -806,7 +851,9 @@ void test_zwave_command_class_firmware_theoretical_fragment_size_zwave_s0()
                                sizeof(endpoint_id));
   zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RF_REGION_UNDEFINED);
 
-  TEST_ASSERT_EQUAL(20, get_theoretical_max_fragment_size(endpoint_id_node));
+  TEST_ASSERT_EQUAL(
+    20,
+    firmware_transfer_get_theoretical_max_fragment_size(endpoint_id_node));
 }
 
 void test_zwave_command_class_firmware_theoretical_fragment_size_zwave_jp_region()
@@ -828,7 +875,9 @@ void test_zwave_command_class_firmware_theoretical_fragment_size_zwave_jp_region
                                sizeof(endpoint_id));
   zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RF_REGION_JP);
 
-  TEST_ASSERT_EQUAL(132, get_theoretical_max_fragment_size(endpoint_id_node));
+  TEST_ASSERT_EQUAL(
+    132,
+    firmware_transfer_get_theoretical_max_fragment_size(endpoint_id_node));
 }
 
 void test_zwave_command_class_firmware_theoretical_fragment_size_zwave_kr_region()
@@ -850,7 +899,9 @@ void test_zwave_command_class_firmware_theoretical_fragment_size_zwave_kr_region
                                sizeof(endpoint_id));
   zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RF_REGION_KR);
 
-  TEST_ASSERT_EQUAL(132, get_theoretical_max_fragment_size(endpoint_id_node));
+  TEST_ASSERT_EQUAL(
+    132,
+    firmware_transfer_get_theoretical_max_fragment_size(endpoint_id_node));
 }
 
 void test_zwave_command_class_firmware_theoretical_fragment_size_zwave_non_secure()
@@ -872,5 +923,7 @@ void test_zwave_command_class_firmware_theoretical_fragment_size_zwave_non_secur
                                sizeof(endpoint_id));
   zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RF_REGION_US_LR);
 
-  TEST_ASSERT_EQUAL(36, get_theoretical_max_fragment_size(endpoint_id_node));
+  TEST_ASSERT_EQUAL(
+    36,
+    firmware_transfer_get_theoretical_max_fragment_size(endpoint_id_node));
 }

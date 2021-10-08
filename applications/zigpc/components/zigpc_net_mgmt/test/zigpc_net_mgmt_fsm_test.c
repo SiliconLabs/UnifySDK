@@ -13,15 +13,16 @@
 
 #include <string.h>
 
-#include "unity.h"
+// Shared UIC includes
+#include <unity.h>
 
-#include "zigpc_net_mgmt_fsm.h"
-#include "zigpc_gateway_notify.h"
-
-#include "zigpc_gateway_mock.h"
-#include "zigpc_gateway_notify_mock.h"
+// ZigPC includes
+#include <zigpc_datastore_mock.h>
+#include <zigpc_gateway_mock.h>
+#include <zigpc_gateway_notify_mock.h>
 
 #include "zigpc_net_mgmt_notify_int_mock.h"
+#include "zigpc_net_mgmt_fsm.h"
 
 extern struct zigpc_net_mgmt_fsm fsm;
 
@@ -55,13 +56,27 @@ void test_zigpc_net_mgmt_fsm_should_transition_to_idle_from_init_complete_event(
 {
   // ARRANGE
   zigpc_net_mgmt_fsm_data_t test_init_data;
+  zigbee_ext_panid_t test_ext_pan_id = "\x12\x34\x56\x78\x9A\xBB\xF2\x48";
+
+  zigpc_network_data_t nwk;
+  memcpy(nwk.gateway_eui64, TEST_EUI64, sizeof(zigbee_eui64_t));
+  memcpy(nwk.ext_panid, test_ext_pan_id, sizeof(zigbee_ext_panid_t));
+  nwk.panid         = 0x3456;
+  nwk.radio_channel = 0x12;
 
   fsm.state = ZIGPC_NET_MGMT_FSM_STATE_INIT;
   memcpy(test_init_data.on_net_init_complete.zigpc_eui64,
-         TEST_EUI64,
+         nwk.gateway_eui64,
          sizeof(zigbee_eui64_t));
-  test_init_data.on_net_init_complete.zigpc_panid         = 0x3456;
-  test_init_data.on_net_init_complete.zigpc_radio_channel = 0x12;
+  memcpy(test_init_data.on_net_init_complete.zigpc_ext_panid,
+         nwk.ext_panid,
+         sizeof(zigbee_ext_panid_t));
+  test_init_data.on_net_init_complete.zigpc_panid         = nwk.panid;
+  test_init_data.on_net_init_complete.zigpc_radio_channel = nwk.radio_channel;
+
+  zigpc_datastore_create_network_ExpectAndReturn(SL_STATUS_OK);
+  zigpc_datastore_write_network_ExpectAndReturn(&nwk, SL_STATUS_OK);
+  zigpc_datastore_log_network_IgnoreAndReturn(SL_STATUS_OK);
 
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   zigpc_net_mgmt_notify_network_init_ExpectWithArray(
@@ -79,7 +94,7 @@ void test_zigpc_net_mgmt_fsm_should_transition_to_idle_from_init_complete_event(
                                     &test_init_data);
 
   // ASSERT (Handled by CMock)
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, test_status);
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, test_status);
 }
 
 /**
@@ -107,6 +122,7 @@ void test_zigpc_net_mgmt_fsm_should_handle_valid_state_transitions(void)
     sizeof(zigbee_install_code_t),
     add_node_data.node_add_request.install_code_length,
     SL_STATUS_OK);
+  zigpc_gateway_network_permit_joins_ExpectAndReturn(true, SL_STATUS_OK);
 
   // ACT
   sl_status_t test_status
@@ -156,6 +172,7 @@ void test_zigpc_net_mgmt_fsm_node_add_request_should_call_gateway_api(void)
 
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   zigpc_gateway_add_node_install_code_IgnoreAndReturn(SL_STATUS_OK);
+  zigpc_gateway_network_permit_joins_ExpectAndReturn(true, SL_STATUS_OK);
 
   // ACT
   sl_status_t test_status
@@ -213,6 +230,18 @@ void test_zigpc_net_mgmt_fsm_should_handle_complete_event_from_add_node_state(
          node_added_data.on_node_add_complete.eui64,
          sizeof(zigbee_eui64_t));
 
+  {  // datastore expects
+    zigpc_datastore_remove_device_ExpectAndReturn(fsm.joining_eui64,
+                                                  SL_STATUS_OK);
+    zigpc_datastore_create_device_ExpectAndReturn(fsm.joining_eui64,
+                                                  SL_STATUS_OK);
+    zigpc_datastore_write_device_ExpectAndReturn(fsm.joining_eui64,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
+    zigpc_datastore_log_device_IgnoreAndReturn(SL_STATUS_OK);
+  }
+
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   zigpc_net_mgmt_notify_node_added_Expect(
     node_added_data.on_node_add_complete.eui64);
@@ -227,7 +256,7 @@ void test_zigpc_net_mgmt_fsm_should_handle_complete_event_from_add_node_state(
     = zigpc_net_mgmt_fsm_post_event(ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_COMPLETE,
                                     &node_added_data);
   // ASSERT
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, test_status);
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, test_status);
 }
 
 void test_zigpc_net_mgmt_fsm_should_handle_timeout_event_from_add_node_state(
@@ -260,10 +289,24 @@ void test_zigpc_net_mgmt_fsm_should_handle_interview_request_from_idle_state(
 {
   // ARRANGE
   zigpc_net_mgmt_fsm_data_t interview_data;
+
   fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
   memcpy(interview_data.node_interview_request.eui64,
          TEST_EUI64,
          sizeof(zigbee_eui64_t));
+
+  {  // datastore expects
+    zigpc_datastore_remove_device_children_ExpectAndReturn(TEST_EUI64,
+                                                           SL_STATUS_OK);
+
+    zigpc_datastore_read_device_ExpectAndReturn(TEST_EUI64, NULL, SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+
+    zigpc_datastore_write_device_ExpectAndReturn(TEST_EUI64,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
+  }
 
   zigpc_gateway_interview_node_ExpectWithArrayAndReturn(
     interview_data.node_interview_request.eui64,
@@ -282,7 +325,7 @@ void test_zigpc_net_mgmt_fsm_should_handle_interview_request_from_idle_state(
     ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_REQUEST,
     &interview_data);
   // ASSERT
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, test_status);
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, test_status);
 }
 
 /**
@@ -303,7 +346,19 @@ void test_zigpc_net_mgmt_fsm_should_track_device_discovery_event_in_node_intervi
          node_discovered_data.on_node_discovered.eui64,
          sizeof(zigbee_eui64_t));
 
-  zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
+  {  // datastore expects
+    zigpc_datastore_read_device_ExpectAndReturn(fsm.interview.eui64,
+                                                NULL,
+                                                SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+
+    zigpc_datastore_write_device_ExpectAndReturn(fsm.interview.eui64,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
+
+    zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
+  }
 
   // ACT
   sl_status_t test_status
@@ -332,6 +387,7 @@ void test_zigpc_net_mgmt_fsm_should_track_single_device_endpoint_discovery_event
           .endpoint = {
             .endpoint_id   = 1,
             .cluster_count = 0,
+            .client_cluster_count = 0,
           },
         },
       };
@@ -341,6 +397,24 @@ void test_zigpc_net_mgmt_fsm_should_track_single_device_endpoint_discovery_event
          test_event_data.on_node_endpoint_discovered.eui64,
          sizeof(zigbee_eui64_t));
   fsm.interview.endpoint_total_count = 1;
+
+  {  // datastore expects
+    zigpc_datastore_read_device_ExpectAndReturn(fsm.interview.eui64,
+                                                NULL,
+                                                SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+
+    zigbee_endpoint_t *ep
+      = &test_event_data.on_node_endpoint_discovered.endpoint;
+    zigpc_datastore_create_endpoint_ExpectAndReturn(fsm.interview.eui64,
+                                                    ep->endpoint_id,
+                                                    SL_STATUS_OK);
+
+    zigpc_datastore_write_device_ExpectAndReturn(fsm.interview.eui64,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
+  }
 
   zigpc_net_mgmt_notify_node_interview_status_Expect(
     test_event_data.on_node_endpoint_discovered.eui64,
@@ -375,7 +449,16 @@ void test_zigpc_net_mgmt_fsm_should_track_multiple_device_endpoint_discovery_eve
         .eui64 = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF},
         .endpoint = {
           .endpoint_id = 1,
-          .cluster_count = 0,
+          .cluster_count = 2,
+          .cluster_list = {
+            {.cluster_id = 5},
+            {.cluster_id = 6},
+          },
+          .client_cluster_count = 1,
+          .client_cluster_list = {
+            {.cluster_id = 10},
+            {.cluster_id = 12},
+          },
         }
       }
     },
@@ -397,6 +480,41 @@ void test_zigpc_net_mgmt_fsm_should_track_multiple_device_endpoint_discovery_eve
   fsm.interview.endpoint_total_count      = 2;
   fsm.interview.endpoint_discovered_count = 0;
 
+  {  // datastore expects
+    zigpc_datastore_read_device_ExpectAndReturn(fsm.interview.eui64,
+                                                NULL,
+                                                SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+
+    zigbee_endpoint_t *ep
+      = &test_event_data[0].on_node_endpoint_discovered.endpoint;
+    zigpc_datastore_create_endpoint_ExpectAndReturn(fsm.interview.eui64,
+                                                    ep->endpoint_id,
+                                                    SL_STATUS_OK);
+
+    for (size_t i = 0; i < ep->cluster_count; i++) {
+      zigpc_datastore_create_cluster_ExpectAndReturn(
+        fsm.interview.eui64,
+        ep->endpoint_id,
+        ZCL_CLUSTER_SERVER_SIDE,
+        ep->cluster_list[i].cluster_id,
+        SL_STATUS_OK);
+    }
+    for (size_t i = 0; i < ep->client_cluster_count; i++) {
+      zigpc_datastore_create_cluster_ExpectAndReturn(
+        fsm.interview.eui64,
+        ep->endpoint_id,
+        ZCL_CLUSTER_CLIENT_SIDE,
+        ep->client_cluster_list[i].cluster_id,
+        SL_STATUS_OK);
+    }
+
+    zigpc_datastore_write_device_ExpectAndReturn(fsm.interview.eui64,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
+  }
+
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   zigpc_net_mgmt_notify_state_update_ExpectAndReturn(
     ZIGPC_NET_MGMT_FSM_STATE_IDLE,
@@ -413,6 +531,25 @@ void test_zigpc_net_mgmt_fsm_should_track_multiple_device_endpoint_discovery_eve
   TEST_ASSERT_EQUAL(1, fsm.interview.endpoint_discovered_count);
 
   // ARRANGE
+
+  {  // datastore expects
+    zigpc_datastore_read_device_ExpectAndReturn(fsm.interview.eui64,
+                                                NULL,
+                                                SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+
+    zigbee_endpoint_t *ep
+      = &test_event_data[1].on_node_endpoint_discovered.endpoint;
+    zigpc_datastore_create_endpoint_ExpectAndReturn(fsm.interview.eui64,
+                                                    ep->endpoint_id,
+                                                    SL_STATUS_OK);
+
+    zigpc_datastore_write_device_ExpectAndReturn(fsm.interview.eui64,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
+  }
+
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   /* Only expect the state to change once after all endpoint interview data
    * is received
@@ -440,6 +577,18 @@ void test_zigpc_net_mgmt_fsm_should_handle_timeout_event_from_node_interview_sta
 
   fsm.state = ZIGPC_NET_MGMT_FSM_STATE_NODE_INTERVIEW;
 
+  {  // datastore expects
+    zigpc_datastore_read_device_ExpectAndReturn(fsm.interview.eui64,
+                                                NULL,
+                                                SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+
+    zigpc_datastore_write_device_ExpectAndReturn(fsm.interview.eui64,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
+  }
+
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   zigpc_net_mgmt_notify_state_update_ExpectAndReturn(
     ZIGPC_NET_MGMT_FSM_STATE_IDLE,
@@ -465,12 +614,25 @@ void test_zigpc_net_mgmt_fsm_should_handle_node_remove_request_from_idle_state(
 {
   // ARRANGE
   zigpc_net_mgmt_fsm_data_t remove_data;
+
+  memcpy(remove_data.node_remove_request.eui64,
+         TEST_EUI64,
+         sizeof(zigbee_eui64_t));
   fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
 
-  zigpc_gateway_remove_node_ExpectWithArrayAndReturn(
-    remove_data.node_remove_request.eui64,
-    sizeof(zigbee_eui64_t),
-    SL_STATUS_OK);
+  {  // datastore expects
+    zigpc_datastore_read_device_ExpectAndReturn(TEST_EUI64, NULL, SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+
+    zigpc_datastore_write_device_ExpectAndReturn(TEST_EUI64,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
+  }
+
+  zigpc_gateway_remove_node_ExpectWithArrayAndReturn(TEST_EUI64,
+                                                     sizeof(zigbee_eui64_t),
+                                                     SL_STATUS_OK);
 
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   zigpc_net_mgmt_notify_state_update_ExpectAndReturn(
@@ -507,9 +669,11 @@ void test_zigpc_net_mgmt_fsm_should_handle_complete_event_from_remove_node_state
          node_removed_data.on_node_remove_complete.eui64,
          sizeof(zigbee_eui64_t));
 
+  zigpc_datastore_remove_device_ExpectAndReturn(fsm.eui64_to_remove,
+                                                SL_STATUS_OK);
+
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
-  zigpc_net_mgmt_notify_node_removed_Expect(
-    node_removed_data.on_node_remove_complete.eui64);
+  zigpc_net_mgmt_notify_node_removed_Expect(fsm.eui64_to_remove);
   zigpc_net_mgmt_notify_state_update_ExpectAndReturn(
     ZIGPC_NET_MGMT_FSM_STATE_IDLE,
     NULL,

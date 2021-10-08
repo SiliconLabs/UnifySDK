@@ -37,7 +37,7 @@ extern "C" {
 
 /**
  * @brief Initialize the Multi Command handler
- * 
+ *
  * @returns SL_STATUS_OK if successful
  * @returns SL_STATUS_FAIL if an error occurred
  */

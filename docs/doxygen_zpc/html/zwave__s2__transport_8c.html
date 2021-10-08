@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -124,6 +124,16 @@ Macros</h2></td></tr>
 <tr class="separator:a2b98a62ea70f01156d5cffe001cf5167"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a977d202ebc70ac44b967d2aba1fc48e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a977d202ebc70ac44b967d2aba1fc48e3">INVALID_KEY_ID</a>&#160;&#160;&#160;0xFF</td></tr>
 <tr class="separator:a977d202ebc70ac44b967d2aba1fc48e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a734ee331d8332130496b98b5ed19bfe6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a734ee331d8332130496b98b5ed19bfe6">UNAUTHENTICATED_KEY_SLOT</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a734ee331d8332130496b98b5ed19bfe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a991a7dd2ab21a33d402179d74e1c4618"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a991a7dd2ab21a33d402179d74e1c4618">AUTHENTICATED_KEY_SLOT</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a991a7dd2ab21a33d402179d74e1c4618"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43cb350e837f9942168dd08c404c9771"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a43cb350e837f9942168dd08c404c9771">ACCESS_KEY_SLOT</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a43cb350e837f9942168dd08c404c9771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28b49a1612deaa3798bf5db3beda98cf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a28b49a1612deaa3798bf5db3beda98cf">LR_AUTHENTICATED_KEY_SLOT</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a28b49a1612deaa3798bf5db3beda98cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae909358c5d63a9566520fb064ce116a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#ae909358c5d63a9566520fb064ce116a4">LR_ACCESS_KEY_SLOT</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:ae909358c5d63a9566520fb064ce116a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -148,6 +158,8 @@ Functions</h2></td></tr>
 <tr class="separator:aa8349729129a9416cfc1b9a5587f8446"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb95889ce5b21261e0052c260a60ffe3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#aeb95889ce5b21261e0052c260a60ffe3">S2_get_hw_random</a> (uint8_t *buf, uint8_t len)</td></tr>
 <tr class="separator:aeb95889ce5b21261e0052c260a60ffe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af96e0dcea652ffcb0c8b68aa70a635bd"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#af96e0dcea652ffcb0c8b68aa70a635bd">convert_lr_to_zwave_class_id</a> (uint8_t class_id)</td></tr>
+<tr class="separator:af96e0dcea652ffcb0c8b68aa70a635bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44a4115d1259dfea50758fb1d0832ecf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a44a4115d1259dfea50758fb1d0832ecf">S2_get_commands_supported</a> (node_t lnode, uint8_t class_id, const uint8_t **cmdClasses, uint8_t *length)</td></tr>
 <tr class="separator:a44a4115d1259dfea50758fb1d0832ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01f39d22aea9400043dab4b12b646180"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a01f39d22aea9400043dab4b12b646180">S2_send_done_event</a> (struct S2 *ctxt, s2_tx_status_t status)</td></tr>
@@ -190,7 +202,7 @@ Variables</h2></td></tr>
 <tr class="separator:ad371b7f9203c56958f2da1504392e01b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a073139acc1baa825c6aa1ce39652a763"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a073139acc1baa825c6aa1ce39652a763">zwave_tx_valid_parent_session_id</a> = false</td></tr>
 <tr class="separator:a073139acc1baa825c6aa1ce39652a763"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fe7777db712bfbb01326179006aadb4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="zwave__s2__transport_8c.html#a9a8db3a39271d539e7349b222ca7acce">zwave_s2_current_transmission_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a9fe7777db712bfbb01326179006aadb4">current_transmission_type</a> = <a class="el" href="transport__service_8h.html#a2ef83d72d1511b89d9496ab3f65b8a10a1a0dc9beb3cc3e6ea7523340e00466ec">SINGLECAST</a></td></tr>
+<tr class="memitem:a9fe7777db712bfbb01326179006aadb4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="zwave__s2__transport_8c.html#a9a8db3a39271d539e7349b222ca7acce">zwave_s2_current_transmission_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a9fe7777db712bfbb01326179006aadb4">current_transmission_type</a> = <a class="el" href="group__transport__service.html#gga2ef83d72d1511b89d9496ab3f65b8a10a1a0dc9beb3cc3e6ea7523340e00466ec">SINGLECAST</a></td></tr>
 <tr class="separator:a9fe7777db712bfbb01326179006aadb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b6416bf9f53c7480a4cbc9642de0431"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__transport_8c.html#a1b6416bf9f53c7480a4cbc9642de0431">last_frame_data</a> [<a class="el" href="group__zwave__utils.html#ga7986f390872b9a02d79c47dd2db9d5f2">ZWAVE_MAX_FRAME_SIZE</a>]</td></tr>
 <tr class="separator:a1b6416bf9f53c7480a4cbc9642de0431"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,6 +220,34 @@ Variables</h2></td></tr>
 <tr class="separator:a0541644aece3b4de55b65ab73f4614e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a43cb350e837f9942168dd08c404c9771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43cb350e837f9942168dd08c404c9771">&#9670;&nbsp;</a></span>ACCESS_KEY_SLOT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ACCESS_KEY_SLOT&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a991a7dd2ab21a33d402179d74e1c4618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a991a7dd2ab21a33d402179d74e1c4618">&#9670;&nbsp;</a></span>AUTHENTICATED_KEY_SLOT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AUTHENTICATED_KEY_SLOT&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7d2fd9e4cfbc24033739f733be35e718"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7d2fd9e4cfbc24033739f733be35e718">&#9670;&nbsp;</a></span>END_NODE_VERIFY_DELIVERY_TIMEOUT</h2>
 
@@ -244,6 +284,34 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define LOG_TAG&#160;&#160;&#160;&quot;zwave_s2_transport&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae909358c5d63a9566520fb064ce116a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae909358c5d63a9566520fb064ce116a4">&#9670;&nbsp;</a></span>LR_ACCESS_KEY_SLOT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LR_ACCESS_KEY_SLOT&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28b49a1612deaa3798bf5db3beda98cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28b49a1612deaa3798bf5db3beda98cf">&#9670;&nbsp;</a></span>LR_AUTHENTICATED_KEY_SLOT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LR_AUTHENTICATED_KEY_SLOT&#160;&#160;&#160;3</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -292,6 +360,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a734ee331d8332130496b98b5ed19bfe6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a734ee331d8332130496b98b5ed19bfe6">&#9670;&nbsp;</a></span>UNAUTHENTICATED_KEY_SLOT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UNAUTHENTICATED_KEY_SLOT&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a9a8db3a39271d539e7349b222ca7acce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9a8db3a39271d539e7349b222ca7acce">&#9670;&nbsp;</a></span>zwave_s2_current_transmission_type_t</h2>
@@ -326,6 +408,32 @@ Variables</h2></td></tr>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>key_class</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af96e0dcea652ffcb0c8b68aa70a635bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af96e0dcea652ffcb0c8b68aa70a635bd">&#9670;&nbsp;</a></span>convert_lr_to_zwave_class_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint8_t convert_lr_to_zwave_class_id </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>class_id</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1006,7 +1114,7 @@ false If frame is not an S2 frame. </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="zwave__s2__transport_8c.html#a9a8db3a39271d539e7349b222ca7acce">zwave_s2_current_transmission_type_t</a> current_transmission_type = <a class="el" href="transport__service_8h.html#a2ef83d72d1511b89d9496ab3f65b8a10a1a0dc9beb3cc3e6ea7523340e00466ec">SINGLECAST</a></td>
+          <td class="memname"><a class="el" href="zwave__s2__transport_8c.html#a9a8db3a39271d539e7349b222ca7acce">zwave_s2_current_transmission_type_t</a> current_transmission_type = <a class="el" href="group__transport__service.html#gga2ef83d72d1511b89d9496ab3f65b8a10a1a0dc9beb3cc3e6ea7523340e00466ec">SINGLECAST</a></td>
         </tr>
       </table>
   </td>
@@ -1264,7 +1372,7 @@ false If frame is not an S2 frame. </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_7865c04e95e3af91f230df5bcfa47762.html">s2</a></li><li class="navelem"><a class="el" href="dir_5a84bbd2dc954749314d7bf6843a3ac7.html">src</a></li><li class="navelem"><a class="el" href="zwave__s2__transport_8c.html">zwave_s2_transport.c</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

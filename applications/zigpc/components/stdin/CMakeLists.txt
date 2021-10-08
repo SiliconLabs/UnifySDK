@@ -6,6 +6,7 @@ target_include_directories(
   PUBLIC include
   PRIVATE src)
 
-target_link_libraries(zigpc_stdin PRIVATE zigpc_gateway uic_stdin)
+target_link_libraries(zigpc_stdin PRIVATE zigpc_gateway zigpc_datastore
+                                          uic_stdin)
 
 add_subdirectory(test)

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -98,6 +98,12 @@ $(document).ready(function(){initNavTree('globals_func_o.html',''); initResizabl
 <li>occupancy_sensing_motion_idle_update_callback()
 : <a class="el" href="group__occupancy__sensing__cluster__mapper.html#ga6f16b331083dd97ae2a0ad36f623ac0c">occupancy_sensing_cluster_mapper.h</a>
 </li>
+<li>on_capabilities_attribute_update()
+: <a class="el" href="zwave__command__class__wake__up_8c.html#af927fc2e0ebd3d6502c5167a6e8c6e27">zwave_command_class_wake_up.c</a>
+</li>
+<li>on_desired_wake_up_setting_update()
+: <a class="el" href="zwave__command__class__wake__up_8c.html#ae5ff8372dbe888c88db63f4ba9198fa2">zwave_command_class_wake_up.c</a>
+</li>
 <li>on_dsk_challenge()
 : <a class="el" href="nm__state__machine_8c.html#abe186aa0f7d064a03736782299dd8854">nm_state_machine.c</a>
 </li>
@@ -133,9 +139,6 @@ $(document).ready(function(){initNavTree('globals_func_o.html',''); initResizabl
 </li>
 <li>on_node_information_update()
 : <a class="el" href="zwave__command__class__node__info__resolver_8c.html#aaf800d8f937ec37f13207cb2d7172b81">zwave_command_class_node_info_resolver.c</a>
-</li>
-<li>on_node_resolved()
-: <a class="el" href="zwave__command__class__wakeup_8c.html#a816d889a5261977c4cb5edf64dad3b29">zwave_command_class_wakeup.c</a>
 </li>
 <li>on_non_secure_nif_update()
 : <a class="el" href="zwave__command__class__node__info__resolver_8c.html#a3922df75d3ca3f6b2feb8ef5c43418f5">zwave_command_class_node_info_resolver.c</a>
@@ -175,13 +178,16 @@ $(document).ready(function(){initNavTree('globals_func_o.html',''); initResizabl
 , <a class="el" href="zwave__command__class__binary__switch_8c.html#aefdc747956727fa542d10bc6fe464140">zwave_command_class_binary_switch.c</a>
 </li>
 <li>on_transport_service_send_data_complete()
-: <a class="el" href="zwave__transport__service__wrapper_8c.html#a2c832af898764cd401d552c1e3a3478c">zwave_transport_service_wrapper.c</a>
+: <a class="el" href="zwave__transport__service__wrapper_8c.html#a1b8b0c2adaf8a21eec99c59749fa5ed3">zwave_transport_service_wrapper.c</a>
 </li>
 <li>on_version_attribute_update()
-: <a class="el" href="zwave__command__class__wakeup_8c.html#ad2c55aec9b04c76f33eaf024aee36881">zwave_command_class_wakeup.c</a>
+: <a class="el" href="zwave__command__class__wake__up_8c.html#ad2c55aec9b04c76f33eaf024aee36881">zwave_command_class_wake_up.c</a>
 </li>
 <li>on_version_command_class_found_attribute_update()
 : <a class="el" href="zwave__command__class__version_8c.html#a715e0ff2928770074e00a9b9598a5455">zwave_command_class_version.c</a>
+</li>
+<li>on_wake_up_setting_send_data_complete()
+: <a class="el" href="zwave__command__class__wake__up_8c.html#ad7709e1f938934fc7dcec1aa5b487b76">zwave_command_class_wake_up.c</a>
 </li>
 <li>on_zwave_cc_version_version_attribute_update()
 : <a class="el" href="zwave__command__class__version_8c.html#a8a4e9c9487684f71cbf19490cbd42f1c">zwave_command_class_version.c</a>
@@ -198,7 +204,7 @@ $(document).ready(function(){initNavTree('globals_func_o.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:58 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:51 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

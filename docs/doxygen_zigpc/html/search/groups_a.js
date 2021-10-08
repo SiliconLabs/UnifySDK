@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['ring_20buffer_20library_5057',['Ring buffer library',['../group__ringbuf.html',1,'']]],
-  ['real_2dtime_20task_20scheduling_5058',['Real-time task scheduling',['../group__rt.html',1,'']]]
+  ['status_20codes_5189',['Status Codes',['../group__sl__status.html',1,'']]],
+  ['smartstart_5190',['SmartStart',['../group__smartstart.html',1,'']]],
+  ['system_5191',['System',['../group__sys.html',1,'']]],
+  ['signal_20handler_20for_20unify_20main_5192',['Signal handler for Unify Main',['../group__uic__main__signal.html',1,'']]]
 ];

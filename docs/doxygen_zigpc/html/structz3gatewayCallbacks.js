@@ -1,6 +1,7 @@
 var structz3gatewayCallbacks =
 [
     [ "onClusterCommandReceived", "structz3gatewayCallbacks.html#a0e30b31ec50e4d7490f7a66126ffa4b8", null ],
+    [ "onEmberAfStackInitalized", "structz3gatewayCallbacks.html#ac77dd8f69e61a65272947e7c7e660208", null ],
     [ "onOtaUpdateCompleted", "structz3gatewayCallbacks.html#ad4bb9a0fe6e91712319c2afdb7a508fe", null ],
     [ "onOtaUpdateStarted", "structz3gatewayCallbacks.html#adede2d0e13d4bb779373c583854055d3", null ],
     [ "onReadAttributesResponse", "structz3gatewayCallbacks.html#a863de4d01abd06f4b652ebb744652ab4", null ],

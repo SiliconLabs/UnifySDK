@@ -20,7 +20,6 @@
 
 /* ZigPC includes */
 #include "zigpc_common_unid.h"
-#include "zigpc_node_mgmt.h"
 #include "zigpc_net_mgmt.h"
 #include "zigpc_net_mgmt_notify.h"
 
@@ -204,10 +203,6 @@ void zigpc_smartstart_on_node_added(void *event_data)
 
   if (status == SL_STATUS_OK) {
     stored_dsk_entries.erase(key);
-    status = zigpc_net_mgmt_interview_node(node_added->eui64);
-  }
-  if (status == SL_STATUS_OK) {
-    status = zigpc_nodemgmt_manage_node_eui64(node_added->eui64);
   }
 
   sl_log_debug(LOG_TAG,

@@ -16,8 +16,11 @@
 #include <string.h>
 #include <stdio.h>
 
+// Shared UIC includes
 #include "sl_log.h"
-#include "zigpc_node_mgmt.h"
+
+// ZigPC includes
+#include <zigpc_datastore.h>
 
 #include "zigpc_gateway_process.h"
 #include "zigpc_gateway_process_send.h"
@@ -70,6 +73,21 @@ sl_status_t zigpc_gateway_network_init(void)
   return status;
 }
 
+sl_status_t zigpc_gateway_network_permit_joins(bool enable)
+{
+  sl_status_t status = SL_STATUS_OK;
+  struct zigpc_gateway_dispatch_event dispatch_event;
+  dispatch_event.type                = ZIGPC_GW_DISPATCH_PERMIT_JOINS;
+  dispatch_event.permit_joins.enable = enable;
+
+  status = zigpc_gateway_process_send_event(
+    ZIGPC_GW_EVENT_DISPATCH,
+    (void *)&dispatch_event,
+    sizeof(struct zigpc_gateway_dispatch_event));
+
+  return status;
+}
+
 sl_status_t
   zigpc_gateway_send_zcl_command_frame(const zigbee_eui64_t eui64,
                                        zigbee_endpoint_id_t endpoint_id,
@@ -93,9 +111,13 @@ sl_status_t
            frame->buffer,
            ZCL_FRAME_BUFFER_SIZE_MAX);
 
-    bool is_sleepy = zigpc_node_check_sleepy(eui64);
+    bool sleepy_cluster_found
+      = zigpc_datastore_contains_cluster(eui64,
+                                         endpoint_id,
+                                         ZCL_CLUSTER_SERVER_SIDE,
+                                         ZIGPC_ZCL_CLUSTER_POLL_CONTROL);
 
-    if (!is_sleepy) {
+    if (!sleepy_cluster_found) {
       status = zigpc_gateway_process_send_event(
         ZIGPC_GW_EVENT_ZCL_FRAME,
         (void *)&zcl_frame_data,
@@ -277,40 +299,51 @@ sl_status_t zigpc_gateway_interview_node(const zigbee_eui64_t eui64)
   return status;
 }
 
-sl_status_t zigpc_gateway_add_ota_image(
-                const char* filename,
-                unsigned int filename_size)
+sl_status_t zigpc_gateway_add_ota_image(const char *filename,
+                                        unsigned int filename_size)
 {
-    sl_status_t status = SL_STATUS_OK;
-    
-    zigpc_gateway_dispatch_add_ota_image_t
-        ota_image_data;
+  sl_status_t status = SL_STATUS_OK;
 
-    if( (filename != NULL) && 
-        (filename_size >0) && 
-        (filename_size < ZCL_DEFAULT_STR_LENGTH))
-    {
-        snprintf(
-                ota_image_data.filename,
-                ZCL_DEFAULT_STR_LENGTH,
-                "%s",
-                filename);
-        ota_image_data.filename_size = filename_size;
-  
-        status = zigpc_gateway_process_send_event(
-                    ZIGPC_GW_EVENT_OTA_FILE,
-                    (void *)&ota_image_data,
-                    sizeof(zigpc_gateway_dispatch_add_ota_image_t));
-    }
-    else
-    {
-        status = SL_STATUS_FAIL;
-    }
+  zigpc_gateway_dispatch_add_ota_image_t ota_image_data;
 
-    return status;
+  if ((filename != NULL) && (filename_size > 0)
+      && (filename_size < ZCL_DEFAULT_STR_LENGTH)) {
+    snprintf(ota_image_data.filename, ZCL_DEFAULT_STR_LENGTH, "%s", filename);
+    ota_image_data.filename_size = filename_size;
+
+    status = zigpc_gateway_process_send_event(
+      ZIGPC_GW_EVENT_OTA_FILE,
+      (void *)&ota_image_data,
+      sizeof(zigpc_gateway_dispatch_add_ota_image_t));
+  } else {
+    status = SL_STATUS_FAIL;
+  }
+
+  return status;
 }
 
 void zigpc_gateway_command_print_info(void)
 {
   z3gatewayCommandPrintInfo();
+}
+
+void zigpc_gateway_command_print_nwk_key(void)
+{
+  EmberKeyStruct nwk_key;
+
+  EmberStatus status
+    = z3gatewayGetEmberKey(EMBER_CURRENT_NETWORK_KEY, &nwk_key);
+  if (status != EMBER_SUCCESS) {
+    sl_log_error(LOG_TAG, "Failed to read NWK key: EmberStatus(0x%X)", status);
+  } else {
+    char nwk_key_str[EMBER_ENCRYPTION_KEY_SIZE * 3 + 1];
+    size_t nwk_key_str_size = 0;
+    for (uint8_t i = 0; i < EMBER_ENCRYPTION_KEY_SIZE; i++) {
+      nwk_key_str_size += snprintf(nwk_key_str + nwk_key_str_size,
+                                   4,
+                                   " %02X",
+                                   emberKeyContents(&(nwk_key.key))[i]);
+    }
+    sl_log_info(LOG_TAG, "NWK Key:%s", nwk_key_str);
+  }
 }

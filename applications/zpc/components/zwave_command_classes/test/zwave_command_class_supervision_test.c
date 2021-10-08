@@ -23,6 +23,7 @@
 
 // Interface includes
 #include "attribute_store_defined_attribute_types.h"
+#include "zwave_command_class_wake_up_types.h"
 #include "ZW_classcmd.h"
 
 // Includes from other components
@@ -50,7 +51,7 @@ static zwave_controller_connection_info_t received_connection_info = {};
 static zwave_tx_options_t received_tx_options                      = {};
 static uint8_t received_data[ZWAVE_MAX_FRAME_SIZE];
 static int send_data_tx_calls;
-static uint32_t wake_up_value = 1;
+static wake_up_bitmask_t wake_up_value = 1;
 
 static uint8_t received_supervision_status;
 static zwapi_tx_report_t received_tx_info;
@@ -207,25 +208,30 @@ static void wake_up_on_demand_verification(bool supported)
     test_connection_info.remote.node_id,
     0,
     2);
-  attribute_store_node_t test_wake_up_node = 48;
+  attribute_store_node_t test_wake_up_node_capabilities = 48;
   attribute_store_get_node_child_by_type_ExpectAndReturn(
     test_endpoint_id_node,
-    ATTRIBUTE_COMMAND_CLASS_WAKEUP_V3_WAKE_ON_DEMAND,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES,
     0,
-    test_wake_up_node);
+    test_wake_up_node_capabilities);
+  attribute_store_node_t test_wake_up_node_bitmask = 20;
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    test_wake_up_node_capabilities,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES_BITMASK,
+    0,
+    test_wake_up_node_bitmask);
 
   wake_up_value = 1;
   if (supported == false) {
     wake_up_value = 0;
   }
-  attribute_store_read_value_ExpectAndReturn(test_wake_up_node,
-                                             REPORTED_ATTRIBUTE,
-                                             NULL,
-                                             sizeof(uint32_t),
-                                             SL_STATUS_OK);
-  attribute_store_read_value_IgnoreArg_read_value();
-  attribute_store_read_value_ReturnMemThruPtr_read_value(&wake_up_value,
-                                                         sizeof(wake_up_value));
+  attribute_store_get_reported_ExpectAndReturn(test_wake_up_node_bitmask,
+                                               NULL,
+                                               sizeof(wake_up_bitmask_t),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnMemThruPtr_value(&wake_up_value,
+                                                      sizeof(wake_up_value));
   if (supported == true) {
     is_node_or_parent_paused_ExpectAndReturn(test_node_id_node, true);
     attribute_resolver_node_or_child_needs_resolution_ExpectAndReturn(

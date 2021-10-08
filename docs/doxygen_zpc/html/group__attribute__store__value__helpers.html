@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -135,8 +135,11 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga78d2a9c79ae9f51af5417840decbb295"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read an arbitrary sized value from the attribute store and writes it to a pointer.  <a href="group__attribute__store__value__helpers.html#ga78d2a9c79ae9f51af5417840decbb295">More...</a><br /></td></tr>
 <tr class="separator:ga78d2a9c79ae9f51af5417840decbb295"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga541af3a257fdaf58fbc0a1eee4b8e755"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__value__helpers.html#ga541af3a257fdaf58fbc0a1eee4b8e755">attribute_store_set_child_reported</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> parent, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, const void *value, uint8_t value_size)</td></tr>
-<tr class="memdesc:ga541af3a257fdaf58fbc0a1eee4b8e755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of the first child of a node with a given type. and writes its reported value.  <a href="group__attribute__store__value__helpers.html#ga541af3a257fdaf58fbc0a1eee4b8e755">More...</a><br /></td></tr>
+<tr class="memdesc:ga541af3a257fdaf58fbc0a1eee4b8e755"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds if missing and sets the value of the first child of a node with a given type. and writes its reported value.  <a href="group__attribute__store__value__helpers.html#ga541af3a257fdaf58fbc0a1eee4b8e755">More...</a><br /></td></tr>
 <tr class="separator:ga541af3a257fdaf58fbc0a1eee4b8e755"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaa2a0f6d0363b1f1ba56f8c176c005c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__value__helpers.html#gaaa2a0f6d0363b1f1ba56f8c176c005c3">attribute_store_set_child_desired</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> parent, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, const void *value, uint8_t value_size)</td></tr>
+<tr class="memdesc:gaaa2a0f6d0363b1f1ba56f8c176c005c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds if missing and sets the value of the first child of a node with a given type. and writes its desired value.  <a href="group__attribute__store__value__helpers.html#gaaa2a0f6d0363b1f1ba56f8c176c005c3">More...</a><br /></td></tr>
+<tr class="separator:gaaa2a0f6d0363b1f1ba56f8c176c005c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3736691d1717b5b4711a0badb05ebb3f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__value__helpers.html#ga3736691d1717b5b4711a0badb05ebb3f">attribute_store_set_uint32_child_by_type</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> parent, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> state, uint32_t value)</td></tr>
 <tr class="memdesc:ga3736691d1717b5b4711a0badb05ebb3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value of the first child with a given type.  <a href="group__attribute__store__value__helpers.html#ga3736691d1717b5b4711a0badb05ebb3f">More...</a><br /></td></tr>
 <tr class="separator:ga3736691d1717b5b4711a0badb05ebb3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -464,6 +467,59 @@ SL_STATUS_FAIL if the value is undefined, has not the expected size or has not b
 
 </div>
 </div>
+<a id="gaaa2a0f6d0363b1f1ba56f8c176c005c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaa2a0f6d0363b1f1ba56f8c176c005c3">&#9670;&nbsp;</a></span>attribute_store_set_child_desired()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_set_child_desired </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>value_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds if missing and sets the value of the first child of a node with a given type. and writes its desired value. </p>
+<p>If there is no child of the given type for the parent, it will be created.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>The Attribute store node under which the child's desired value must be written </td></tr>
+    <tr><td class="paramname">type</td><td>The type of the child </td></tr>
+    <tr><td class="paramname">value</td><td>A pointer to a variable containing the data to be written for the node. </td></tr>
+    <tr><td class="paramname">value_size</td><td>The number of bytes to read from the value pointer.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t returned by <a class="el" href="group__attribute__store__api.html#gad28e15ea78932b2cac3ac7326aab4ea3">attribute_store_set_node_attribute_value</a> </dd></dl>
+
+</div>
+</div>
 <a id="ga541af3a257fdaf58fbc0a1eee4b8e755"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga541af3a257fdaf58fbc0a1eee4b8e755">&#9670;&nbsp;</a></span>attribute_store_set_child_reported()</h2>
 
@@ -502,7 +558,7 @@ SL_STATUS_FAIL if the value is undefined, has not the expected size or has not b
       </table>
 </div><div class="memdoc">
 
-<p>Sets the value of the first child of a node with a given type. and writes its reported value. </p>
+<p>Adds if missing and sets the value of the first child of a node with a given type. and writes its reported value. </p>
 <p>If there is no child of the given type for the parent, it will be created.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -904,7 +960,7 @@ SL_STATUS_FAIL if the value is undefined, has not the expected size or has not b
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:56 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:38 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

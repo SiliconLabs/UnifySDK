@@ -24,13 +24,14 @@
 // Generic includes
 #include <vector>
 #include <set>
+#include <string>
 
 /**
  * @file zwave_command_handler_internals.h
  * @addtogroup zwave_command_handler_internals Internal definitions for the Z-Wave Command Handler
  * @ingroup zwave_command_handler
  * @brief Shared internal functions and variables for the Z-Wave Command Handler.
- *  * 
+ *  *
  * @{
  */
 
@@ -50,6 +51,15 @@ struct zwave_command_handler_compare {
   }
 };
 
+struct zwave_command_handler_compare_alphabetic {
+  bool operator()(const zwave_command_handler_t &a,
+                  const zwave_command_handler_t &b) const
+  {
+    return (std::string(a.command_class_name)
+            < std::string(b.command_class_name));
+  }
+};
+
 typedef std::set<zwave_command_handler_t,
                  zwave_command_handler_compare>::iterator
   zwave_command_handler_it_t;
@@ -60,7 +70,7 @@ extern std::multiset<zwave_command_handler_t, zwave_command_handler_compare>
 
 /**
  * @brief Verifies if a Command Class is supported at a certain Security level
- * 
+ *
  * If a handler is supported with NO_SCHEME we allow the frame to
  * reach the handler no matter what scheme it was received on.
  *
@@ -68,7 +78,7 @@ extern std::multiset<zwave_command_handler_t, zwave_command_handler_compare>
  * i.e. the highest scheme supported by the node.
  * @param it      The Command Class handler iterator
  * @param scheme  The Security Scheme at which the frame was received.
- * 
+ *
  * @returns true if the Command Class is supported for the given scheme
  * @returns false if the Command Class is not supported for the given scheme
  */

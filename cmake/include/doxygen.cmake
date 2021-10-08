@@ -7,8 +7,9 @@ if(DOXYGEN_FOUND)
   # ############################################################################
   # Excluding a few large items to reduce the doxygen build time
   set(DOXYGEN_FILE_PATTERNS *.h *.c *.dox *.doxygen *.hpp *.md)
-  set(DOXYGEN_EXCLUDE_PATTERNS */test/* */libs/* ZW_classcmd.h */dotdot/*.md
-                               */gen/*)
+  set(DOXYGEN_EXCLUDE_PATTERNS
+      */test/* */libs/* ZW_classcmd.h */uic_dotdot/**.md */gen/*
+      */uic_attribute_mapper/*/*.md)
   set(DOXYGEN_HTML_EXTRA_STYLESHEET
       ${CMAKE_CURRENT_SOURCE_DIR}/doc/doxygen/assets/customdoxygen.css)
   set(DOXYGEN_HTML_EXTRA_FILES
@@ -16,8 +17,15 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_EXTRACT_ALL YES)
   set(DOXYGEN_GENERATE_TREEVIEW YES)
   # set(DOXYGEN_GENERATE_XML)
+
+  set(DOXYGEN_GENERATE_LATEX YES)
+  set(DOXYGEN_LATEX_OUTPUT latex)
+  set(DOXYGEN_BATCHMODE YES)
+  set(DOXYGEN_USE_PDFLATEX YES)
+  set(DOXYGEN_LATEX_CMD_NAME "\"pdflatex -interaction=nonstopmode\"")
+
   set(DOXYGEN_HIDE_UNDOC_RELATIONS NO)
-  set(DOXYGEN_BUILTIN_STL_SUPPORT YES)
+  set(DOXYGEN_BUILTIN_STL_SUPPORT YES)  
   set(DOXYGEN_EXTRACT_PRIVATE YES)
   set(DOXYGEN_EXTRACT_PACKAGE YES)
   set(DOXYGEN_EXTRACT_STATIC YES)
@@ -27,7 +35,6 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_TEMPLATE_RELATIONS YES)
   set(DOXYGEN_HTML_TIMESTAMP YES)
   set(DOXYGEN_WARN_NO_PARAMDOC YES)
-  set(DOXYGEN_PLANTUML_JAR_PATH ${CMAKE_SOURCE_DIR}/plantuml)
 
   # Set HAVE_DOT to NO as default to turn off generating graphs (reduces build
   # time) If graphs are desired set DOXYGEN_HAVE_DOT to YES with
@@ -55,6 +62,7 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_GRAPHICAL_HIERARCHY YES)
   set(DOXYGEN_DIRECTORY_GRAPH YES)
   set(DOXYGEN_VERBATIM_VARS DOXYGEN_ALIASES)
+  set(DOXYGEN_LATEX)
   if(PlantUML_FOUND)
     set(DOXYGEN_PLANTUML_JAR_PATH ${PlantUML_JARFILE})
   else()
@@ -78,12 +86,13 @@ if(DOXYGEN_FOUND)
   # ############################################################################
   add_custom_target(doxygen)
   add_custom_target(doxygen_zip)
+  add_custom_target(doxygen_pdf)
 
   function(add_doxygen_target)
     # DOX_TARGET DOX_PROJECT_NAME DOX_IMAGE_PATH DOX_SOURCES
     cmake_parse_arguments(
       ADD_DOX
-      "" # Boolean Flags
+      "PDF" # Boolean Flags
       "TARGET;PROJECT_NAME" # Mono value arguments
       "SRC_PATHS;IMAGE_PATHS;PLANTUML_PATHS" # Multi-value arguments
       ${ARGN})
@@ -113,6 +122,18 @@ if(DOXYGEN_FOUND)
       DEPENDS ${ADD_DOX_TARGET}
       COMMAND zip -r -q ${ADD_DOX_TARGET}_${CMAKE_PROJECT_VERSION}.docs.zip
               html)
+    
+    if (${ADD_DOX_PDF}) 
+      add_custom_target(
+        ${ADD_DOX_TARGET}_pdf
+        DEPENDS 
+          ${ADD_DOX_TARGET}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${ADD_DOX_TARGET}/latex
+        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/scripts/build/pdf_latex/compile_latex.sh ${ADD_DOX_TARGET}_${CMAKE_PROJECT_VERSION}
+      )
+
+      add_dependencies(doxygen_pdf ${ADD_DOX_TARGET}_pdf)
+    endif()        
 
     add_dependencies(doxygen_zip ${ADD_DOX_TARGET}_zip)
   endfunction()
@@ -190,6 +211,7 @@ if(DOXYGEN_FOUND)
   # ############################################################################
   set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
   file(GLOB USERGUIDE_MD_FILES1 applications/*/*.md LIST_DIRECTORIES true)
+  list(FILTER USERGUIDE_MD_FILES1 EXCLUDE REGEX "zigpc.md$")
   file(GLOB USERGUIDE_MD_FILES2 applications/dev_ui/dev_gui/*.md
        LIST_DIRECTORIES true)
 
@@ -201,6 +223,7 @@ if(DOXYGEN_FOUND)
     IMAGE_PATHS
     ${CMAKE_CURRENT_SOURCE_DIR}/doc/assets/img/
     ${CMAKE_CURRENT_SOURCE_DIR}/applications/dev_ui/dev_gui/doc/assets/img/
+    ${CMAKE_CURRENT_SOURCE_DIR}/applications/zpc/doc/assets/img/
     ${CMAKE_CURRENT_SOURCE_DIR}/applications/zigpc
     SRC_PATHS
     README.md
@@ -210,7 +233,9 @@ if(DOXYGEN_FOUND)
     docker/readme_developer.md
     ${USERGUIDE_MD_FILES2}
     ${USERGUIDE_MD_FILES1}
-    doc/standards/known-abbreviations.md)
+    doc/standards/known-abbreviations.md
+    PDF 
+    true)
   unset(DOXYGEN_USE_MDFILE_AS_MAINPAGE)
 
 else()

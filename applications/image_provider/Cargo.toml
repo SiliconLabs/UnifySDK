@@ -26,6 +26,10 @@ md5 = "0.7.0"
 base64 = "0.13.0"
 serde_json = "1.0.64"
 serde = { version = "1.0", features = ["derive"] }
+ctrlc = { version = "3.0", features = ["termination"] }
+
+[dev-dependencies]
+serial_test = "*"
 
 [build-dependencies]
 uic_bindgen = { path = "../../components/uic_rust/uic_bindgen" }

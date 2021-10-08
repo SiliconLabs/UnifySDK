@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -88,16 +88,18 @@ $(document).ready(function(){initNavTree('md_applications_zigpc_release_notes.ht
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This document describes the changes between the current and last released ZigPC.</p>
-<h1><a class="anchor" id="autotoc_md202"></a>
+<h1><a class="anchor" id="autotoc_md208"></a>
+[1.0.2] - Oct 2021</h1>
+<h1><a class="anchor" id="autotoc_md209"></a>
 [1.0.1] - Aug 2021</h1>
-<h2><a class="anchor" id="autotoc_md203"></a>
+<h2><a class="anchor" id="autotoc_md210"></a>
 Fixed</h2>
 <ul>
 <li>Build issues</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md204"></a>
+<h1><a class="anchor" id="autotoc_md211"></a>
 [1.0.0] - Aug 2021</h1>
-<h2><a class="anchor" id="autotoc_md205"></a>
+<h2><a class="anchor" id="autotoc_md212"></a>
 Added</h2>
 <ul>
 <li>Implementation of Unify specification 1.0</li>
@@ -121,13 +123,13 @@ Added</h2>
 </li>
 <li>Zigbee Host-NCP EZSP-UART Support </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md206"></a>
+<h2><a class="anchor" id="autotoc_md213"></a>
 Changed</h2>
 <ul>
 <li>Various bug fixes</li>
 <li>Documentation updates</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md207"></a>
+<h1><a class="anchor" id="autotoc_md214"></a>
 Known Issues</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -135,31 +137,29 @@ Known Issues</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">If connection to the MQTT broker is lost, ZigPC does not re-subscribe to topics  </td><td class="markdownTableBodyNone">Restart ZigPC.   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Building in Docker may fail due to Xvfb failing.  </td><td class="markdownTableBodyNone">Run <code>Xvfb -ac ${DISPLAY} -screen 0 640x480x8 -nolisten tcp &gt; /dev/null 2&gt;&amp;1 &amp;</code> in Docker.   </td></tr>
-<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">User may experience outdated devices that are still listed from cached data in the browser  </td><td class="markdownTableBodyNone">A fresh browser session can remove outdated devices.   </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Network management state is not published correctly if UPVL is started after ZigPC  </td><td class="markdownTableBodyNone">Start UPVL before ZigPC.   </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">The UPVL becomes unresponsive to MQTT messages and will miss MQTT messages published to "ucl/SmartStart/List/Update"  </td><td class="markdownTableBodyNone">Restart UPVL.   </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Including a node using the SmartStart list is only effective for 18 hours  </td><td class="markdownTableBodyNone">Ensure that a node is added within 18 hours of being put in the SmartStart List.   </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">When performing network-steering, the device will either fail node addition or node interview partially.  </td><td class="markdownTableBodyNone">In the device's EmberCLI, enter the commands <code>network leave</code> and <code>keys clear</code> then retry.   </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">When excluding devices, the protocol UNID is not removed from the node's SmartStart entry. This will cause the ZigPC to refuse to re-include the node.  </td><td class="markdownTableBodyNone">Clear the ZigPC UNID from the SmartStart entry using the Dev UI.   </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">After completing node removal, the node state information is not cleared from the MQTT topics previously used to service the node.  </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">ZigPC does not set the desired attribute values for the DotDot clusters serviced.  </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ZigPC is able to service the DotDot Color Control cluster (0x0300) but not publish any attribute changes.  </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">ZigPC does not persist any network information. devices previously connected to the ZigPC network will not be reachable after ZigPC restarts.  </td><td class="markdownTableBodyNone">Ensure the devices have left the ZigPC Zigbee network after ZigPC restarts.   </td></tr>
+<td class="markdownTableBodyNone">ZigPC is able to service the DotDot Color Control cluster (0x0300) but not publish any attribute changes.  </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ZigPC does not persist any network information. devices previously connected to the ZigPC network will not be reachable after ZigPC restarts.  </td><td class="markdownTableBodyNone">Ensure the devices have left the ZigPC Zigbee network after ZigPC restarts.   </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">ZigPC only supports "Remove" and "Idle" PC state change requests via the Node List view in DevUI. "Add" and "Reset" options are not supported.  </td><td class="markdownTableBodyNone">To add nodes to the Zigbee network, using the Smartstart DSK process outlined in the readme.   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md208"></a>
+<h3><a class="anchor" id="autotoc_md215"></a>
 Zigbee Devices Used for Testing</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -174,7 +174,7 @@ Zigbee Devices Used for Testing</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Silabs  </td><td class="markdownTableBodyNone">xG12 or xG21 radio  </td><td class="markdownTableBodyNone">Z3Switch  </td><td class="markdownTableBodyNone">Yes  </td><td class="markdownTableBodyNone">Since Z3Switch only has a OnOff client cluster, attribute reports and commands are not supported for this cluster.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md209"></a>
+<h1><a class="anchor" id="autotoc_md216"></a>
 Zigbee Certification information</h1>
 <blockquote class="doxtable">
 <p><em>NOTE the ZigPC is at this point not certifiable</em> </p>
@@ -185,7 +185,7 @@ Zigbee Certification information</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:52 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:34 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

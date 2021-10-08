@@ -7,6 +7,7 @@ target_add_unittest(
   uic_attribute_store
   uic_attribute_resolver
   zpc_attribute_store
+  ucl_node_state
   dotdot_attributes
   zpc_utils_mock
   uic_mqtt_mock

@@ -110,7 +110,7 @@ sl_status_t attribute_store_set_reported(attribute_store_node_t node,
  * @param node          The Attribute store node under
  *                      which the value must be retrieved
  * @param value         Pointer where to copy the value
-* @param expected_size  The size of the pointer of read_value
+ * @param expected_size  The size of the pointer of read_value
  *
  * @returns SL_STATUS_OK    if the read value has the expected size and
  *                          has been copied to the pointer.
@@ -218,7 +218,7 @@ sl_status_t
                              size_t expected_size);
 
 /**
- * @brief Sets the value of the first child of a node with a given type.
+ * @brief Adds if missing and sets the value of the first child of a node with a given type.
  * and writes its reported value.
  *
  * If there is no child of the given type for the parent, it will be created.
@@ -237,6 +237,27 @@ sl_status_t attribute_store_set_child_reported(attribute_store_node_t parent,
                                                attribute_store_type_t type,
                                                const void *value,
                                                uint8_t value_size);
+
+/**
+ * @brief Adds if missing and sets the value of the first child of a node with a given type.
+ * and writes its desired value.
+ *
+ * If there is no child of the given type for the parent, it will be created.
+ *
+ * @param parent        The Attribute store node under
+ *                      which the child's desired value must be written
+ * @param type          The type of the child
+ * @param value         A pointer to a variable containing
+ *                      the data to be written for the node.
+ * @param value_size    The number of bytes to read from the value pointer.
+ *
+ * @returns sl_status_t returned by @ref attribute_store_set_node_attribute_value
+
+ */
+sl_status_t attribute_store_set_child_desired(attribute_store_node_t parent,
+                                              attribute_store_type_t type,
+                                              const void *value,
+                                              uint8_t value_size);
 
 /**
  * @brief Set the value of the first child with a given type.

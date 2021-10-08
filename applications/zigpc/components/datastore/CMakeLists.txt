@@ -1,4 +1,6 @@
-add_library(zigpc_datastore src/zigpc_datastore.cpp)
+add_library(
+  zigpc_datastore src/zigpc_datastore.cpp src/zigpc_datastore_accessor.cpp
+                  src/zigpc_datastore_util.cpp)
 
 target_include_directories(
   zigpc_datastore

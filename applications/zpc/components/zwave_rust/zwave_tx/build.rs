@@ -12,4 +12,11 @@ fn main() {
     let bind_target =
         BindingsTarget::from_json(format!("{}/zwave_tx_bindgen.json", env!("LIBUIC_DIR"))).unwrap();
     bind_target.write_link_configuration();
+
+    uic_bindgen::generate_bindings(
+        bind_target,
+        Some(".*zwave_tx.*|ZWAVE_TX.*"),
+        Some(".*zwave_controller.*"),
+        None,
+    );
 }

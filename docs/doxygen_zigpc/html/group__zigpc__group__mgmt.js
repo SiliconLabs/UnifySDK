@@ -1,5 +1,6 @@
 var group__zigpc__group__mgmt =
 [
+    [ "ZigPC Group Map functions", "group__zigpc__group__map.html", "group__zigpc__group__map" ],
     [ "ZigPC Group Management MQTT functions", "group__zigpc__group__mgmt__mqtt.html", "group__zigpc__group__mgmt__mqtt" ],
     [ "zigpc_group_member_t", "structzigpc__group__member__t.html", [
       [ "endpoint_id", "structzigpc__group__member__t.html#a672c667fe57b2c1cb22e343d3a59a456", null ],

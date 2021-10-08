@@ -61,11 +61,14 @@ void suiteSetUp()
   n5ep0.emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA, 1)
     .emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_FIRMWARE, 0x1)
     .emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_FIRMWARE_VERSION, 0x00112233);
+  n5ep0.child_by_type(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA).emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_HARDWARE_VERSION, 1);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
+  attribute_store_teardown();
+  datastore_teardown();
   return num_failures;
 }
 
@@ -78,7 +81,7 @@ void test_zcl_OTA_cluster_server_current_version()
     1,
     mqtt_mock_helper_get_num_publish(
       "ucl/by-unid/zw-DEADBEEF-0005/ep0/OTA/Attributes/UIID/"
-      "ZWave-0000-0001-002a-0001/CurrentVersion/Reported"));
+      "ZWave-0000-0001-002a-01-01/CurrentVersion/Reported"));
 }
 
 void test_zcl_OTA_cluster_server_test_image_available()
@@ -87,25 +90,30 @@ void test_zcl_OTA_cluster_server_test_image_available()
     = n5ep0.emplace_node<uint32_t>(ATTRIBUTE_COMMAND_CLASS_FWU_MD_FWU, 0x1)
         .emplace_node<uint32_t>(ATTRIBUTE_COMMAND_CLASS_FWU_MD_FWU_FW, 0x1);
 
-  std::string meta
-    = R"xxx({"Version":"1.0.2","ApplyAfter":"2021-06-29T16:39:57+02:00","Filename":"ZW_SensorPir_7.16.1_104_EFR32ZG13P32_REGION_EU_DEBUG_v255.gbl"})xxx";
-  mqtt_mock_helper_publish("ucl/OTA/info/ZWave-0000-0001-002a-0001/all",
-                           meta.c_str(),
-                           meta.length());
-  mqtt_mock_helper_publish(
-    "ucl/OTA/info/ZWave-0000-0001-002a-0001/zw-DEADBEEF-0005",
-    meta.c_str(),
-    meta.length());
+  {
+    // Valgrind complains that meta (std::string) can leak memory in this context.
+    // We'll put it in its own scope to make sure it's deleted when we don't need it
+    // anymore.
+    std::string meta
+      = R"xxx({"Version":"1.0.2","ApplyAfter":"2021-06-29T16:39:57+02:00","Filename":"ZW_SensorPir_7.16.1_104_EFR32ZG13P32_REGION_EU_DEBUG_v255.gbl"})xxx";
+    mqtt_mock_helper_publish("ucl/OTA/info/ZWave-0000-0001-002a-01-01/all",
+                             meta.c_str(),
+                             meta.length());
+    mqtt_mock_helper_publish(
+      "ucl/OTA/info/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005",
+      meta.c_str(),
+      meta.length());
+  }
 
   TEST_ASSERT_EQUAL(
     1,
     mqtt_mock_helper_get_num_subscribers(
-      "ucl/OTA/data/ZWave-0000-0001-002a-0001/zw-DEADBEEF-0005"));
+      "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005"));
 
   TEST_ASSERT_GREATER_OR_EQUAL(
     1,
     mqtt_mock_helper_get_num_publish(
-      "ucl/OTA/data/ZWave-0000-0001-002a-0001/zw-DEADBEEF-0005/get"));
+      "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005/get"));
 
   fwu_fw.delete_node();
 
@@ -118,7 +126,7 @@ void test_zcl_OTA_cluster_server_test_image_available()
   TEST_ASSERT_EQUAL(
     0,
     mqtt_mock_helper_get_num_subscribers(
-      "ucl/OTA/data/ZWave-0000-0001-002a-0001/zw-DEADBEEF-0005"));
+      "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005"));
 }
 
 void test_zcl_OTA_cluster_server_test_file_available()
@@ -128,23 +136,23 @@ void test_zcl_OTA_cluster_server_test_file_available()
   std::string meta
     = R"xxx({"Version":"1.0.2","ApplyAfter":"2021-06-29T16:39:57+02:00","Filename":"ZW_SensorPir_7.16.1_104_EFR32ZG13P32_REGION_EU_DEBUG_v255.gbl"})xxx";
 
-  mqtt_mock_helper_publish("ucl/OTA/info/ZWave-0000-0001-002a-0001/all",
+  mqtt_mock_helper_publish("ucl/OTA/info/ZWave-0000-0001-002a-01-01/all",
                            meta.c_str(),
                            meta.length());
   mqtt_mock_helper_publish(
-    "ucl/OTA/info/ZWave-0000-0001-002a-0001/zw-DEADBEEF-0005",
+    "ucl/OTA/info/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005",
     meta.c_str(),
     meta.length());
 
   TEST_ASSERT_EQUAL(
     1,
     mqtt_mock_helper_get_num_subscribers(
-      "ucl/OTA/data/ZWave-0000-0001-002a-0001/zw-DEADBEEF-0005"));
+      "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005"));
 
   TEST_ASSERT_GREATER_OR_EQUAL(
     1,
     mqtt_mock_helper_get_num_publish(
-      "ucl/OTA/data/ZWave-0000-0001-002a-0001/zw-DEADBEEF-0005/get"));
+      "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005/get"));
 
   command_class_firmware_update_initiate_firmware_update_ExpectAndReturn(
     5,
@@ -158,7 +166,7 @@ void test_zcl_OTA_cluster_server_test_file_available()
 
   std::string data = "My firmware data";
   mqtt_mock_helper_publish(
-    "ucl/OTA/data/ZWave-0000-0001-002a-0001/zw-DEADBEEF-0005",
+    "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005",
     data.c_str(),
     data.length());
 }

@@ -31,13 +31,15 @@
 #include "zwave_command_class_thermostat_mode.h"
 #include "zwave_command_class_thermostat_setpoint.h"
 #include "zwave_command_class_version.h"
-#include "zwave_command_class_wakeup.h"
+#include "zwave_command_class_wake_up.h"
 #include "zwave_command_class_time.h"
 #include "zwave_command_class_basic.h"
 #include "zwave_command_class_zwave_plus_info.h"
 #include "zwave_command_class_device_reset_locally.h"
 #include "zwave_command_class_inclusion_controller.h"
-
+#include "zwave_command_class_multi_command.h"
+#include "zwave_command_class_transport_service.h"
+#include "zwave_command_class_indicator_control.h"
 // Generic includes
 #include <stdbool.h>
 
@@ -84,12 +86,15 @@ sl_status_t zwave_command_classes_init()
   initialization_status |= zwave_command_class_thermostat_setpoint_init();
   initialization_status |= zwave_command_class_time_init();
   initialization_status |= zwave_command_class_version_init();
-  initialization_status |= zwave_command_class_wakeup_init();
+  initialization_status |= zwave_command_class_wake_up_init();
   initialization_status |= zwave_command_class_zwave_plus_info_init();
   initialization_status |= zwave_command_class_basic_init();
   initialization_status |= zwave_command_class_device_reset_locally_init();
+  initialization_status |= zwave_command_class_multi_command_init();
+  initialization_status |= zwave_command_class_transport_service_init();
   initialization_status |= zwave_command_class_inclusion_controller_init();
   initialization_status |= zwave_command_class_init_rust_handlers();
+  initialization_status |= zwave_command_class_indicator_control_init();
 
   // Auto-generated handlers
   initialization_status |= zwave_COMMAND_CLASS_DOOR_LOCK_init();

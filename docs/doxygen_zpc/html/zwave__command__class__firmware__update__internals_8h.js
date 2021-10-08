@@ -16,10 +16,11 @@ var zwave__command__class__firmware__update__internals_8h =
       [ "REQUIRE_MORE_IMAGE", "group__zwave__command__class__firmware__update__internals.html#ggaeb922dd828131d99e5157ce0669a08f5a7d879f06fd7dfea73f2e1aca09b9d659", null ],
       [ "NOT_SUPPORTED", "group__zwave__command__class__firmware__update__internals.html#ggaeb922dd828131d99e5157ce0669a08f5a9bf1138c8c1f4519e5b814514b750ca3", null ]
     ] ],
-    [ "get_theoretical_max_fragment_size", "group__zwave__command__class__firmware__update__internals.html#ga848b4be05028e38c769886b15d82a8d6", null ],
+    [ "firmware_transfer_get_theoretical_max_fragment_size", "group__zwave__command__class__firmware__update__internals.html#ga1073e79c7ee689cf7b15f15075f3e5d4", null ],
     [ "is_firmware_target_valid", "group__zwave__command__class__firmware__update__internals.html#ga6e97c4e8a464e17aac66f67ad950cc66", null ],
     [ "is_firmware_update_ongoing", "group__zwave__command__class__firmware__update__internals.html#gad6a37e2ff3908af73ad934c91230d3dc", null ],
-    [ "node_supports_activation", "group__zwave__command__class__firmware__update__internals.html#gaef836e139173dd0a9eca65c95ec0cd8d", null ],
+    [ "node_supports_cc", "group__zwave__command__class__firmware__update__internals.html#ga4f28e91457a81684a0722904a7b7422d", null ],
+    [ "node_supports_firmware_activation", "group__zwave__command__class__firmware__update__internals.html#ga80690516ce672571a3bd71d29b8c16ed", null ],
     [ "postpone_firmware_update_expiry", "group__zwave__command__class__firmware__update__internals.html#ga61f1d6725709f2e14800cccf6ffd909a", null ],
     [ "set_firmware_transfer_file", "group__zwave__command__class__firmware__update__internals.html#gab86aadb90742bb9d3d954a1def8290ad", null ],
     [ "set_firmware_transfer_fragment_size", "group__zwave__command__class__firmware__update__internals.html#ga53a41379bc0348edd498d92c04d94cd6", null ],

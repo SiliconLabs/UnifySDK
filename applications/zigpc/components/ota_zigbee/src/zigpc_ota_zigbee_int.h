@@ -27,9 +27,13 @@
 #define OTA_ZIGBEE_INT_H
 
 #include <string>
-#include "ota.hpp"
-#include "sl_status.h"
 
+// Shared UIC includes
+#include <ota.hpp>
+#include <sl_status.h>
+
+// ZigPC includes
+#include <zcl_definitions.h>
 
 /*
  * @brief ZIGPC_DEFAULT_OTA_PATH
@@ -42,14 +46,15 @@ static const char ZIGPC_DEFAULT_OTA_PATH[] = "./ota-files/";
  * The default size of the cache for used to configure
  * the OTA Image Listener
  */
-static const unsigned long ZIGPC_DEFAULT_OTA_CACHE_SIZE = 10*1024*1024;  //bytes
+static const unsigned long ZIGPC_DEFAULT_OTA_CACHE_SIZE
+  = 10 * 1024 * 1024;  //bytes
 
 /*
  * @brief ZIGPC_DEFAULT_OTA_TIMEOUT  
  * The default time, in seconds for downloading an OTA image
  * from an image provider
  */
-static const unsigned int ZIGPC_DEFAULT_OTA_TIMEOUT = 60*60;  //seconds
+static const unsigned int ZIGPC_DEFAULT_OTA_TIMEOUT = 60 * 60;  //seconds
 
 /**
  * @brief ota_zigbee_register_observers

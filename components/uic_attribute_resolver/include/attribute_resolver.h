@@ -136,6 +136,25 @@ sl_status_t
                                    attribute_resolver_function_t get_func);
 
 /**
+ * @brief Set the relative depth of an attribute in the attribute tree
+ *
+ * This functions sets the relative depth of an attribute, this is used
+ * when the attribute resolver tries to detect if multiple attributes will
+ * be resolved by the same set frame. Normally the resolver will assume
+ * that all resolved attribute in a frame are siblings (depth=1),
+ * however once an a while the a frame will resolve attribute which are on deeper
+ * levels, ie cousins and grand cousins. It is assumed that all attributes resolved
+ * in a frame are all on the same level, ie all are siblings.
+ *
+ * @param node_type
+ * @param depth
+ * @return sl_status_t
+ */
+sl_status_t
+  attribute_resolver_set_attribute_depth(attribute_store_type_t node_type,
+                                         int depth);
+
+/**
  * @brief Pause the resolution on a given node.
  *
  * @param node   Attribute node that the resolution is paused.
@@ -157,7 +176,7 @@ void attribute_resolver_resume_node_resolution(attribute_store_node_t node);
  * completed and resolved a part of the attribute tree. In other words,
  *  the node passed as a parameter and all its children.
  *
- * This feature is used to send wakeup no more information for Z-Wave wakeup
+ * This feature is used to send Wake Up No More Information for Z-Wave Wake Up
  * nodes. It is also used by the network monitor to identify when the
  * node is no longer interviewed after inclusion.
  *
@@ -225,7 +244,7 @@ bool attribute_resolver_node_or_child_needs_resolution(
 bool is_node_or_parent_paused(attribute_store_node_t node);
 
 /**
- * @brief Returns true if a node is pendign a set resolution.
+ * @brief Returns true if a node is pending a set resolution.
  *        i.e. command has been sent and we are waiting for a state update
  *        in the attribute store.
  *
@@ -239,6 +258,13 @@ bool is_node_pending_set_resolution(attribute_store_node_t node);
  * @brief Log the state of the Attribute Resolver using \ref sl_log.
 */
 void attribute_resolver_state_log();
+
+/**
+ * @brief FIXME: Anders writes a comprehensive explanation here.
+*/
+sl_status_t
+  attribute_resolver_set_attribute_depth(attribute_store_type_t node_type,
+                                         int depth);
 
 #ifdef __cplusplus
 }

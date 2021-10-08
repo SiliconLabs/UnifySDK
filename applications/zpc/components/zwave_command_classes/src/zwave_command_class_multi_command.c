@@ -121,7 +121,7 @@ sl_status_t zwave_command_class_multi_command_init()
   handler.control_handler = NULL;
   handler.minimal_scheme  = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
   handler.command_class   = COMMAND_CLASS_MULTI_CMD;
-  handler.command_class_name = "Multi command";
+  handler.command_class_name = "Multi Command";
   handler.version            = MULTI_CMD_VERSION;
 
   return zwave_command_handler_register_handler(handler);

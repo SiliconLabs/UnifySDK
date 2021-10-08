@@ -1,4 +1,3 @@
-import { Group } from "./pages/groups/groups-types";
 import { Image } from "./pages/ota/ota-types";
 
 export type AppState = {
@@ -6,7 +5,7 @@ export type AppState = {
   IsConnected: boolean | null,
   IsSideBarCollapsed: boolean,
   NodeList: any[],
-  GroupList: Map<number, Group>,
+  GroupList: any[],
   SmartStartList: any[],
   OTAImageList: Image[]
 }

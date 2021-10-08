@@ -115,7 +115,7 @@ sl_status_t attribute_store_callback_registration_stub(
   if (type == ATTRIBUTE_NODE_ID) {
     node_id_update_callback_save = callback_function;
   } else if ((type == ATTRIBUTE_GRANTED_SECURITY_KEYS)
-             || (type == ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL)
+             || (type == ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL)
              || (type == ATTRIBUTE_NETWORK_STATUS)) {
     network_status_update_callback_save = callback_function;
   } else {
@@ -147,15 +147,13 @@ static void
     test_network_status_node);
 
   network_status = return_value;
-  attribute_store_read_value_ExpectAndReturn(test_network_status_node,
-                                             REPORTED_ATTRIBUTE,
-                                             NULL,
-                                             sizeof(node_state_topic_state_t),
-                                             SL_STATUS_OK);
-  attribute_store_read_value_IgnoreArg_read_value();
-  attribute_store_read_value_ReturnMemThruPtr_read_value(
-    &network_status,
-    sizeof(network_status));
+  attribute_store_get_reported_ExpectAndReturn(test_network_status_node,
+                                               NULL,
+                                               sizeof(node_state_topic_state_t),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnMemThruPtr_value(&network_status,
+                                                      sizeof(network_status));
 }
 
 static void get_node_security_verification(attribute_store_node_t test_node,
@@ -205,10 +203,16 @@ static void get_get_node_maximum_command_delay_verification(
     0,
     test_endpoint_node);
   attribute_store_get_node_child_by_value_IgnoreArg_value();
-  attribute_store_node_t test_wake_up_interval_node = 40;
+  attribute_store_node_t test_wake_up_setting_node = 231;
   attribute_store_get_node_child_by_type_ExpectAndReturn(
     test_endpoint_node,
-    ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_SETTING,
+    0,
+    test_wake_up_setting_node);
+  attribute_store_node_t test_wake_up_interval_node = 40;
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    test_wake_up_setting_node,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
     0,
     test_wake_up_interval_node);
 
@@ -295,7 +299,7 @@ void test_ucl_node_state_init()
 
   attribute_store_register_callback_by_type_and_state_ExpectAndReturn(
     NULL,
-    ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
     REPORTED_ATTRIBUTE,
     SL_STATUS_OK);
   attribute_store_register_callback_by_type_and_state_IgnoreArg_callback_function();

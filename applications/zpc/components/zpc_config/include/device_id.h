@@ -18,7 +18,10 @@
 #ifndef DEVICE_ID_H
 #define DEVICE_ID_H
 /**
- * @brief Get unique reboot persistent device id 
+ * @brief Get unique reboot persistent device id
+ *
+ * Can be used in identifying the device, ZPC is running on 
+ * for e.g. in Device specific report Command class
  *
  */
 const char* get_device_id();

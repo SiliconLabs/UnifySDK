@@ -11,10 +11,19 @@ target_include_directories(
   PUBLIC include
   # FIXME: Find another way of getting zwave_dsk_t for the zpc_converters
   PRIVATE ${ZPC_SOURCE_DIR}/components/zwave_controller/include)
-target_link_libraries(zpc_utils uic_log zpc_attribute_store zwave_controller)
+
+target_link_libraries(zpc_utils
+  uic_log
+  zpc_attribute_store
+  zwave_controller
+  zwave_definitions
+)
 
 # Mocks
 add_mock(zpc_utils_mock include/zwave_utils.h)
+target_link_libraries(zpc_utils_mock PUBLIC zwave_definitions)
 add_mock(zwave_unid_mock include/zwave_unid.h)
+target_link_libraries(zwave_unid_mock PUBLIC zwave_definitions)
+
 
 add_subdirectory(test)

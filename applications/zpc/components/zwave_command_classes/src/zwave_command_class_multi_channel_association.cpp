@@ -528,7 +528,7 @@ static sl_status_t zwave_command_class_multi_channel_association_set(
     sl_log_warning(LOG_TAG,
                    "ZPC just updated its Association Group Content desired "
                    "value. This should not happen !");
-    attribute_store_set_reported_as_desired(node);
+    attribute_store_undefine_desired(node);
     return SL_STATUS_ALREADY_EXISTS;
   }
 
@@ -721,7 +721,7 @@ void establish_lifeline_association(attribute_store_node_t endpoint_node)
       != attribute_store_network_helper_get_zwave_ids_from_node(endpoint_node,
                                                                 &node_id,
                                                                 &endpoint_id)) {
-    sl_log_error(LOG_TAG, "Can't get Z-Wave IDs from node %d", endpoint_node);
+    sl_log_error(LOG_TAG, "Cannot get Z-Wave IDs from node %d", endpoint_node);
     return;
   }
 
@@ -786,6 +786,11 @@ void establish_lifeline_association(attribute_store_node_t endpoint_node)
     } else {
       add_desired_association(node_id, endpoint_id, i, new_association);
     }
+    sl_log_info(LOG_TAG,
+                "Establishing Lifeline for Node %d:%d Group ID %d.",
+                node_id,
+                endpoint_id,
+                i);
   }
 }
 

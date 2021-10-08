@@ -49,7 +49,7 @@ class print
   void operator()(const operation &x)
   {
     const char *op_str[]
-      = {"+", "-", "==", "*", "/", "&", "|", "^", "<<", ">>", "or"};
+      = {"+", "-", "==", "*", "/", "&", "|", "^", "<", ">", "or"};
     _out << op_str[x.operator_] << ' ';
     boost::apply_visitor(*this, x.operand_);
   }
@@ -68,12 +68,12 @@ class print
 
   void operator()(const assignment &a)
   {
-    (*this)(a.attribute);
+    (*this)(a.lhs);
     _out << " = ";
     (*this)(a.rhs);
   }
 
-  bool resolve_attr_names;
+  bool resolve_attr_names = false;
 
   private:
   std::ostream &_out;
@@ -131,7 +131,30 @@ void print::operator()(const attribute &a)
 {
   _out << a.value_type << '\'';
   path_printer pp(_out);
-  pp(a.attribute);
+  pp(a.attribute_path);
+}
+
+/************************ ostream helpers *************************/
+
+inline std::ostream &operator<<(std::ostream &s,
+                                const attribute_dependency_t &d)
+{
+  s << d.second << "'" << attribute_store_name_by_type(d.first);
+  return s;
+}
+
+inline std::ostream &operator<<(std::ostream &s, const assignment &d)
+{
+  print printer(s);
+  printer(d);
+  return s;
+}
+
+inline std::ostream &operator<<(std::ostream &s, const attribute &d)
+{
+  print printer(s);
+  printer(d);
+  return s;
 }
 
 }  // namespace ast

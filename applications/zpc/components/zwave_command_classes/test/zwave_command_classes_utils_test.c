@@ -297,7 +297,7 @@ void test_get_zwave_node_role_type()
 {
   zwave_node_id_t test_node_id          = 0x01;
   unid_t test_unid                      = "zw000001";
-  uint8_t role_type                     = 0x01;
+  zwave_role_type_t role_type           = 0x01;
   attribute_store_node_t node_endpoint  = 0x88;
   attribute_store_node_t role_type_node = 0x98;
   zwave_unid_from_node_id_Expect(test_node_id, NULL);
@@ -314,9 +314,82 @@ void test_get_zwave_node_role_type()
     role_type_node);
   attribute_store_get_reported_ExpectAndReturn(role_type_node,
                                                NULL,
-                                               sizeof(uint8_t),
+                                               sizeof(zwave_role_type_t),
                                                SL_STATUS_OK);
   attribute_store_get_reported_IgnoreArg_value();
   attribute_store_get_reported_ReturnThruPtr_value(&role_type);
-  TEST_ASSERT_EQUAL_INT8(role_type, get_zwave_node_role_type(test_node_id));
+  TEST_ASSERT_EQUAL(role_type, get_zwave_node_role_type(test_node_id));
+}
+
+void test_is_portable_end_node()
+{
+  zwave_node_id_t test_node_id          = 0x01;
+  unid_t test_unid                      = "zw000001";
+  zwave_role_type_t role_type           = ROLE_TYPE_PEN;
+  attribute_store_node_t node_id_node   = 0x78;
+  attribute_store_node_t node_endpoint  = 0x88;
+  attribute_store_node_t role_type_node = 0x98;
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(node_id_node,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             node_id_node);
+  attribute_store_get_reported_ExpectAndReturn(node_id_node,
+                                               NULL,
+                                               sizeof(zwave_node_id_t),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnThruPtr_value(&test_node_id);
+
+  zwave_unid_from_node_id_Expect(test_node_id, NULL);
+  zwave_unid_from_node_id_IgnoreArg_unid();
+  zwave_unid_from_node_id_ReturnMemThruPtr_unid(test_unid, sizeof(unid_t));
+  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
+    test_unid,
+    0,
+    node_endpoint);
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    node_endpoint,
+    ATTRIBUTE_ZWAVE_ROLE_TYPE,
+    0,
+    role_type_node);
+  attribute_store_get_reported_ExpectAndReturn(role_type_node,
+                                               NULL,
+                                               sizeof(zwave_role_type_t),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnThruPtr_value(&role_type);
+  TEST_ASSERT_TRUE(is_portable_end_node(node_id_node));
+
+  // Not a PEN
+  role_type = ROLE_TYPE_CSC;
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(node_id_node,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             node_id_node);
+  attribute_store_get_reported_ExpectAndReturn(node_id_node,
+                                               NULL,
+                                               sizeof(zwave_node_id_t),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnThruPtr_value(&test_node_id);
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_node_id,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             test_node_id);
+  zwave_unid_from_node_id_Expect(test_node_id, NULL);
+  zwave_unid_from_node_id_IgnoreArg_unid();
+  zwave_unid_from_node_id_ReturnMemThruPtr_unid(test_unid, sizeof(unid_t));
+  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
+    test_unid,
+    0,
+    node_endpoint);
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    node_endpoint,
+    ATTRIBUTE_ZWAVE_ROLE_TYPE,
+    0,
+    role_type_node);
+  attribute_store_get_reported_ExpectAndReturn(role_type_node,
+                                               NULL,
+                                               sizeof(zwave_role_type_t),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnThruPtr_value(&role_type);
+  TEST_ASSERT_FALSE(is_portable_end_node(node_id_node));
 }

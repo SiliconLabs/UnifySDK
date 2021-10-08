@@ -41,8 +41,7 @@ extern "C" {
  *
  * This function must be called before any network management operation is
  * started.
- * @returns SL_STATUS_OK on success
- * @returns SL_STATUS_FAIL otherwise
+ * @returns SL_STATUS_OK on success SL_STATUS_FAIL otherwise
  */
 sl_status_t zwave_network_management_fixt_setup(void);
 

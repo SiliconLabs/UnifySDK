@@ -12,10 +12,12 @@
  *****************************************************************************/
 #include "network_monitor_fixt.h"
 #include "network_monitor.h"
+#include "smart_start_list_monitor.h"
 
 sl_status_t network_monitor_setup_fixt(void)
 {
   network_state_monitor_init();
   process_start(&network_monitor_process, NULL);
+  smart_start_list_monitor_init();
   return SL_STATUS_OK;
 }

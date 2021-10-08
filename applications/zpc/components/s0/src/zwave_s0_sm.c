@@ -134,7 +134,6 @@ typedef struct {
 s0_sm_t s0_sm;
 
 void s0_scheme_report_received(const uint8_t scheme, zwave_node_id_t from_node);
-void s0_handle_scheme_report();
 void s0_handle_net_key_verify();
 static void s0_sm_process_event(uint16_t evt);
 
@@ -159,10 +158,10 @@ static void s0_abort_bootstrap()
 
 static void s0_timeout(void *data)
 {
-  sl_log_warning(LOG_TAG,
-                 "Timeout in response from node: %d in state: %s\n",
-                 s0_sm.bootstrap_conn.remote.node_id,
-                 s0_incl_state_name(s0_sm.bootstrap_state));
+  sl_log_debug(LOG_TAG,
+               "Timeout in response from NodeID: %d in state: %s\n",
+               s0_sm.bootstrap_conn.remote.node_id,
+               s0_incl_state_name(s0_sm.bootstrap_state));
   s0_sm_process_event(EV_S0_TIMEOUT);
 }
 
@@ -170,15 +169,18 @@ static void s0_send_data_callback(uint8_t status,
                                   const zwapi_tx_report_t *tx_info,
                                   void *user)
 {
-  sl_log_warning(LOG_TAG, "s0_send_data_callback: %d\n", status);
+  sl_log_debug(LOG_TAG,
+               "S0 Send data callback invoked with status = %d\n",
+               status);
   if (status == TRANSMIT_COMPLETE_OK) {
     ctimer_set(&s0_sm.bootstrap_timer, S0_INCLUSION_TIMER, s0_timeout, 0);
   } else if (status == TRANSMIT_COMPLETE_FAIL) {
-    sl_log_error(LOG_TAG,
-                 "Error in transmission to node id:%d in "
-                 "state: %s\n",
-                 s0_sm.bootstrap_conn.remote.node_id,
-                 s0_incl_state_name(s0_sm.bootstrap_state));
+    sl_log_warning(LOG_TAG,
+                   "Error in transmission to NodeID %d "
+                   "while S0 bootstrapping is in %s state. "
+                   "Aborting S0 bootstrapping.",
+                   s0_sm.bootstrap_conn.remote.node_id,
+                   s0_incl_state_name(s0_sm.bootstrap_state));
     s0_sm_process_event(EV_S0_BOOTSTRAP_ABORT);
   }
 }
@@ -225,7 +227,9 @@ static sl_status_t s0_send_key_set()
 
   s0_set_key(temp_key);
   if (keystore_network_key_read(KEY_CLASS_S0, key) == false) {
-    sl_log_error(LOG_TAG, "Failure in reading KEY_CLASS_S0 from keystore\n");
+    sl_log_error(LOG_TAG,
+                 "Failed to read the S0 key from the keystore. "
+                 "Cannot set the network key for S0 bootstrapping.");
     return SL_STATUS_FAIL;
   }
 
@@ -281,14 +285,6 @@ static const s0_transition_t s0_transition_table[] = {
    EV_S0_SCHEME_REPORT_RECEIVED,
    S0_SCHEME_REPORT_RECV_ACTION,
    S0_HANDLE_SCHEME_REPORT},
-
-  /* If the Bootstrapping needs to be aborted because wrong scheme report is
-   * received
-   */
-  {S0_HANDLE_SCHEME_REPORT,
-   EV_S0_WRONG_SCHEME_REPORT,
-   S0_BOOTSTRAP_ABORT_ACTION,
-   S0_INC_IDLE},
 
   {S0_HANDLE_SCHEME_REPORT,
    EV_S0_SEND_KEY_SET,
@@ -369,24 +365,29 @@ static void s0_sm_process_event(uint16_t evt)
       switch (s0_transition_table[i].action) {
         case S0_SEND_SCHEME_GET_ACTION:
           if (SL_STATUS_OK != s0_send_scheme_get()) {
-            sl_log_error(LOG_TAG, "Failure in sending SCHEME GET\n");
+            sl_log_error(LOG_TAG,
+                         "Failure in sending SCHEME GET. "
+                         "Aborting S0 bootstrapping.\n");
             s0_sm_process_event(EV_S0_BOOTSTRAP_ABORT);
           }
 
           break;
         case S0_SCHEME_REPORT_RECV_ACTION:
-          s0_handle_scheme_report();
+          s0_sm_process_event(EV_S0_SEND_KEY_SET);
           break;
         case S0_SEND_KEY_SET_ACTION:
           if (SL_STATUS_OK != s0_send_key_set()) {
-            sl_log_error(LOG_TAG, "Failure in sending NETWORK KEY SET\n");
+            sl_log_error(LOG_TAG,
+                         "Failure in sending NETWORK KEY SET. "
+                         "Aborting S0 bootstrapping.\n");
             s0_sm_process_event(EV_S0_BOOTSTRAP_ABORT);
           }
           if (keystore_network_key_read(KEY_CLASS_S0, key) == true) {
             s0_set_key(key);
           } else {
             sl_log_error(LOG_TAG,
-                         "Failure in reading KEY_CLASS_S0 from keystore\n");
+                         "Failure in reading KEY_CLASS_S0 from keystore. "
+                         "Aborting S0 bootstrapping.\n");
             s0_sm_process_event(EV_S0_BOOTSTRAP_ABORT);
           }
           break;
@@ -395,7 +396,9 @@ static void s0_sm_process_event(uint16_t evt)
           break;
         case S0_SEND_SCHEME_INHERIT_ACTION:
           if (SL_STATUS_OK != s0_send_scheme_inherit()) {
-            sl_log_error(LOG_TAG, "Failure in sending SCHEME INHERIT\n");
+            sl_log_error(LOG_TAG,
+                         "Failure in sending SCHEME INHERIT. "
+                         "Aborting S0 bootstrapping.\n");
             s0_sm_process_event(EV_S0_BOOTSTRAP_ABORT);
           }
           break;
@@ -405,7 +408,7 @@ static void s0_sm_process_event(uint16_t evt)
               KEY_CLASS_S0,
               ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE);
           } else {
-            sl_log_error(
+            sl_log_warning(
               LOG_TAG,
               "No s0_on_bootstrapping_complete_callback set to be notified?\n");
           }
@@ -464,15 +467,6 @@ void s0_network_key_verify_received(zwave_node_id_t from_node)
   if (from_node == s0_sm.bootstrap_conn.remote.node_id) {
     ctimer_stop(&s0_sm.bootstrap_timer);
     s0_sm_process_event(EV_S0_NET_KEY_VERIFY_RECEIVED);
-  }
-}
-
-void s0_handle_scheme_report()
-{
-  if (s0_sm.scheme_report == 0) {
-    s0_sm_process_event(EV_S0_SEND_KEY_SET);
-  } else {
-    s0_sm_process_event(EV_S0_WRONG_SCHEME_REPORT);
   }
 }
 

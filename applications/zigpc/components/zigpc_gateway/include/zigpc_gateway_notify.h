@@ -148,9 +148,9 @@ struct zigpc_gateway_on_network_init {
  * network.
  *
  */
-struct zigpc_gateway_on_node_add {
+typedef struct zigpc_gateway_on_node_add {
   zigbee_eui64_t eui64; /**< Joined device EUI64 in big endian */
-};
+} zigpc_gateway_on_node_add_t;
 
 /**
  * @brief Event data passed when receiving node removal complete event.

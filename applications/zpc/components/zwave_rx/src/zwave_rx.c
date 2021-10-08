@@ -171,7 +171,7 @@ sl_status_t zwave_rx_init(const char *serial_port,
   // if the module does not support it, we still try and fail, we should not run
   // if the user config indicates an RF region and the Z-Wave API runs another.
   if (region != zwapi_get_rf_region()) {
-    sl_log_debug(LOG_TAG, "Set the Z-Wave RF region to %d\n", region);
+    sl_log_info(LOG_TAG, "Setting the Z-Wave RF region to %d\n", region);
     command_status = zwapi_set_rf_region(region);
     if (command_status == SL_STATUS_NOT_SUPPORTED) {
       sl_log_critical(
@@ -192,7 +192,7 @@ sl_status_t zwave_rx_init(const char *serial_port,
       // Stop everything if the desired RF region cannot be applied.
       return SL_STATUS_FAIL;
     } else {
-      sl_log_debug(LOG_TAG, "Applying soft reset of the Z-Wave Module\n");
+      sl_log_info(LOG_TAG, "Applying soft reset of the Z-Wave Module\n");
       zwapi_soft_reset();
       // Do we want to wait for the chip to come back up ? (approx. 1000ms-1500ms)
       // I'd say no. If somebody else tries to use the Z-Wave API too early, it
@@ -204,11 +204,11 @@ sl_status_t zwave_rx_init(const char *serial_port,
   // Try to set the node ID basetype to 16 bits disregarding the RF region
   command_status = zwapi_set_node_id_basetype(NODEID_16BITS);
   if (command_status != SL_STATUS_OK) {
-    sl_log_debug(LOG_TAG,
-                 "Z-Wave Module runs on 8-bits NodeID basetype setting\n");
+    sl_log_info(LOG_TAG,
+                "Z-Wave Module runs on 8-bits NodeID basetype setting\n");
   } else {
-    sl_log_debug(LOG_TAG,
-                 "Z-Wave Module runs on 16-bits NodeID basetype setting\n");
+    sl_log_info(LOG_TAG,
+                "Z-Wave Module runs on 16-bits NodeID basetype setting\n");
   }
 
   return SL_STATUS_OK;

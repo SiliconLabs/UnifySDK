@@ -21,6 +21,7 @@
 #include "sys/ctimer.h"
 #include "zwave_controller_command_class_indices.h"
 #include "zwave_controller.h"
+#include "zwave_controller_callbacks.h"
 #include "zwave_command_handler.h"
 #include "sl_log.h"
 
@@ -29,9 +30,9 @@
 #include <assert.h>
 
 constexpr char LOG_TAG[] = "zwave_command_class_device_reset_locally";
-// Maximum time trying to notify Lifeline destination that we are resetting.
-constexpr uint32_t maximum_time_for_reset_notifiation = 5000;
-constexpr int32_t reset_notification_priority         = 1;
+// Maximum time trying to notify Lifeline destinations that we are resetting, in ms
+// We will wait 30 seconds, then move on.
+constexpr uint32_t maximum_time_for_reset_notifiation = 30000;
 
 static std::map<zwave_node_id_t, uint8_t> nodes_to_be_removed;
 struct ctimer timer;
@@ -83,15 +84,16 @@ static void on_reset_notification_send_complete(sl_status_t status, void *user)
 {
   // Tell the Z-Wave controller to continue its reset journey.
   sl_log_debug(LOG_TAG,
-               "Device Reset Locally Notification "
+               "Reset step: Device Reset Locally Notification "
                "to the lifeline destinations completed.");
-  zwave_controller_on_reset_step_complete(reset_notification_priority);
+  zwave_controller_on_reset_step_complete(
+    ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY);
 }
 
 static sl_status_t zwave_command_class_device_reset_on_zpc_reset()
 {
   sl_log_info(LOG_TAG,
-              "Initiating a Device Reset Locally Notification "
+              "Reset step: Queuing a Device Reset Locally Notification "
               "to the lifeline destinations.");
 
   // We leave our network behind, don't care about nodes to be removed.
@@ -176,7 +178,7 @@ sl_status_t zwave_command_class_device_reset_locally_init()
   // Tell the Z-Wave Controller that we have to do something on reset
   zwave_controller_register_reset_step(
     &zwave_command_class_device_reset_on_zpc_reset,
-    reset_notification_priority);
+    ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY);
 
   zwave_command_handler_t handler = {0};
   handler.support_handler

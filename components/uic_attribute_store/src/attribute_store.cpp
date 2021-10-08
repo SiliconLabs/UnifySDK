@@ -54,19 +54,20 @@ static attribute_store_node_t last_assigned_id = 0;
                             node->parent_node->id,       \
                             &node->reported_value[0],    \
                             node->reported_value.size(), \
-                            node->desired_value.size() != 0 ? true : false)
+                            &node->desired_value[0],     \
+                            node->desired_value.size())
 
 /**
  * @brief Saves the root node in the datastore.
  */
-#define STORE_ROOT_ATTRIBUTE()                                          \
-  datastore_store_attribute(root_node->id,                              \
-                            root_node->type,                            \
-                            ATTRIBUTE_STORE_NULL_ID,                    \
-                            &root_node->reported_value[0],              \
-                            root_node->reported_value.size(),           \
-                            root_node->desired_value.size() != 0 ? true \
-                                                                 : false)
+#define STORE_ROOT_ATTRIBUTE()                                \
+  datastore_store_attribute(root_node->id,                    \
+                            root_node->type,                  \
+                            ATTRIBUTE_STORE_NULL_ID,          \
+                            &root_node->reported_value[0],    \
+                            root_node->reported_value.size(), \
+                            &root_node->desired_value[0],     \
+                            root_node->desired_value.size())
 ///////////////////////////////////////////////////////////////////////////////
 // Private helper functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -192,20 +193,22 @@ static sl_status_t
   attribute_store_load_from_datastore(attribute_store_node *node,
                                       attribute_store_node_t id)
 {
-  attribute_store_type_t received_type                         = 0;
-  attribute_store_node_t received_parent_id                    = 0;
-  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {0};
-  uint8_t received_value_size                                  = 0;
-  bool received_desired_value                                  = false;
+  attribute_store_type_t received_type                                  = 0;
+  attribute_store_node_t received_parent_id                             = 0;
+  uint8_t received_reported_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {0};
+  uint8_t received_reported_value_size                                  = 0;
+  uint8_t received_desired_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH]  = {0};
+  uint8_t received_desired_value_size                                   = 0;
 
   // Fetch the node first:
   sl_status_t datastore_status
     = datastore_fetch_attribute(id,
                                 &received_type,
                                 &received_parent_id,
-                                received_value,
-                                &received_value_size,
-                                &received_desired_value);
+                                received_reported_value,
+                                &received_reported_value_size,
+                                received_desired_value,
+                                &received_desired_value_size);
   // Don't do more if it did not go well
   if (datastore_status != SL_STATUS_OK) {
     log_attribute_store_node_not_found(id);
@@ -225,16 +228,15 @@ static sl_status_t
       return SL_STATUS_FAIL;
     }
     // Create the new node and assign values
-    new_node = parent_node->add_child(received_type, id);
-    new_node->reported_value
-      = std::vector<uint8_t>(received_value,
-                             received_value + received_value_size);
+    new_node                 = parent_node->add_child(received_type, id);
+    new_node->reported_value = std::vector<uint8_t>(
+      received_reported_value,
+      received_reported_value + received_reported_value_size);
 
-    if (received_desired_value == true) {
-      new_node->desired_value
-        = std::vector<uint8_t>(received_value,
-                               received_value + received_value_size);
-    }
+    new_node->desired_value = std::vector<uint8_t>(
+      received_desired_value,
+      received_desired_value + received_desired_value_size);
+
     // We just created a node, keep the local map updated
     id_node_map[new_node->id] = new_node;
 
@@ -243,17 +245,17 @@ static sl_status_t
     // and accept NULL pointer for parent_node
     node->type        = received_type;
     node->parent_node = parent_node;
-    node->reported_value.resize(received_value_size);
-    if (received_value_size > 0) {
-      node->reported_value.assign(received_value,
-                                  received_value + received_value_size);
+    node->reported_value.resize(received_reported_value_size);
+    if (received_reported_value_size > 0) {
+      node->reported_value.assign(received_reported_value,
+                                  received_reported_value
+                                    + received_reported_value_size);
     }
-    if (received_desired_value == true) {
-      node->desired_value.resize(received_value_size);
-      if (received_value_size > 0) {
-        node->desired_value.assign(received_value,
-                                   received_value + received_value_size);
-      }
+    node->desired_value.resize(received_desired_value_size);
+    if (received_desired_value_size > 0) {
+      node->desired_value.assign(received_desired_value,
+                                 received_desired_value
+                                   + received_desired_value_size);
     }
   }
 
@@ -265,9 +267,10 @@ static sl_status_t
                                             child_index++,
                                             &child_id,
                                             &received_type,
-                                            received_value,
-                                            &received_value_size,
-                                            &received_desired_value)) {
+                                            received_reported_value,
+                                            &received_reported_value_size,
+                                            received_desired_value,
+                                            &received_desired_value_size)) {
     // Now load the child into a new node.
     datastore_status = attribute_store_load_from_datastore(NULL, child_id);
     // Don't do more if it did not go well
@@ -320,13 +323,19 @@ sl_status_t attribute_store_init(void)
   }
 
   // Load the root data and all its children from the datastore, in case it's there.
-  attribute_store_load_from_datastore(root_node, root_node->id);
+  if (attribute_store_load_from_datastore(root_node, root_node->id)
+      != SL_STATUS_OK) {
+    sl_log_info(LOG_TAG,
+                "Attribute Store data could not be loaded from the datastore. "
+                "Starting with an empty Attribute Store.");
+  }
   if (NULL != root_node) {
     // Save the root in the datastore:
     STORE_ROOT_ATTRIBUTE();
-
     return SL_STATUS_OK;
   }
+
+  sl_log_critical(LOG_TAG, "Could not initialize the Attribute Store.");
   return SL_STATUS_FAIL;
 }
 
@@ -435,6 +444,10 @@ sl_status_t attribute_store_delete_node(attribute_store_node_t id)
         return deletion_status;
       }
     }
+    // Clear the desired/reported values from the root when a deletion was requested.
+    root_node->reported_value.resize(0);
+    root_node->desired_value.resize(0);
+    STORE_ROOT_ATTRIBUTE();
   } else {
     // Find the children first
     // (else datastore will not be happy, you cannot delete a node with children)

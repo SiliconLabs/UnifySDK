@@ -22,9 +22,13 @@
     for more details.
 */
 
-#define emberAddTransientLinkKey ezspAddTransientLinkKey
+#define emberAddOrUpdateKeyTableEntry ezspAddOrUpdateKeyTableEntry
+#define emberAddTransientLinkKey      ezspAddTransientLinkKey
+#define emberClearTransientLinkKeys   ezspClearTransientLinkKeys
 
-#define emberClearTransientLinkKeys ezspClearTransientLinkKeys
+EmberStatus ezspAddOrUpdateKeyTableEntry(EmberEUI64 address,
+                                         bool linkKey,
+                                         EmberKeyData *keyData);
 
 EmberStatus ezspAddTransientLinkKey(EmberEUI64 partner,
                                     EmberKeyData *transientKey);

@@ -62,7 +62,7 @@ typedef struct {
   /// - RECEIVE_STATUS_FOREIGN_FRAME The received frame is not addressed to this
   ///   node (Only valid in promiscuous mode)
   /// - RECEIVE_STATUS_FOREIGN_HOMEID The received frame is received from a
-  ///   foreign HomeID. Only Controllers in Smart Start AddNode mode can receive this
+  ///   foreign HomeID. Only Controllers in SmartStart AddNode mode can receive this
   uint8_t status_flags;
 
   /// RSSI measurement of the received frame This is a signed 8-bit value.

@@ -145,6 +145,16 @@ static sl_status_t resolve_node_info(attribute_store_node_t node,
   // Confirm that we are resolving a ATTRIBUTE_ZWAVE_NIF
   assert(ATTRIBUTE_ZWAVE_NIF == attribute_store_get_node_type(node));
 
+  // Are we trying to resolve our own NIF?
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_NODE_ID);
+
+  if (get_zpc_node_id_node() == node_id_node) {
+    attribute_store_delete_node(node);
+    *frame_length = 0;
+    return SL_STATUS_ALREADY_EXISTS;
+  }
+
   // Find the Endpoint ID for who we want the NIF.
   zwave_endpoint_id_t endpoint_id = 0;
   if (SL_STATUS_OK

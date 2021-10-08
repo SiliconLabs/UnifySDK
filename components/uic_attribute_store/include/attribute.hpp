@@ -33,6 +33,8 @@
 #include <stdexcept>
 #include <string>
 #include <iterator>
+#include <functional>
+
 namespace attribute_store
 {
 /**
@@ -92,7 +94,7 @@ class attribute
   /**
    * @ref attribute_store_get_first_parent_with_type
    */
-  attribute first_parent(attribute_store_type_t type)
+  attribute first_parent(attribute_store_type_t type) const
   {
     return attribute_store_get_first_parent_with_type(_n, type);
   }
@@ -319,6 +321,24 @@ class attribute
   }
 
   /**
+   * @brief Returns a vector of children of this attribute with a given type.
+   *
+   * @param type        Attribute Store Type.
+   *
+   * @return std::vector<attribute>
+   */
+  std::vector<attribute> children(attribute_store_type_t type) const
+  {
+    std::vector<attribute> _children;
+    for (size_t i = 0; i < child_count(); i++) {
+      if (child(i).type() == type) {
+        _children.push_back(child(i));
+      }
+    }
+    return _children;
+  }
+
+  /**
    * @brief Get child by value
    *
    * Get a child by the reppored value of that child. If no matching child is
@@ -332,13 +352,12 @@ class attribute
   template<typename T>
   attribute child_by_type_and_value(attribute_store_type_t type, T value) const
   {
-    return attribute_store_get_node_child_by_value(
-      _n,
-      type,
-      REPORTED_ATTRIBUTE,
-      reinterpret_cast<uint8_t *>(&value),
-      sizeof(T),
-      0);
+    for (auto c: children(type)) {
+      if (c.reported_exists() && c.reported<T>() == value) {
+        return c;
+      }
+    }
+    return ATTRIBUTE_STORE_INVALID_NODE;
   }
 
   /**
@@ -382,9 +401,9 @@ class attribute
 
   /**
    * @brief Get or add a child of a given attribtue type and value.
-   * 
-   * This function will check if this nodes as a child  of a given type and value. 
-   * If a child exists the child is returned, if it does not exist the child is 
+   *
+   * This function will check if this nodes as a child  of a given type and value.
+   * If a child exists the child is returned, if it does not exist the child is
    * created and the repported value is set.
    */
   template<typename T>
@@ -400,9 +419,9 @@ class attribute
 
   /**
    * @brief Get or add a child of a given attribtue type.
-   * 
-   * This function will check if this nodes as a child  of a given type. 
-   * If a child exists the child is returned, if it does not exist the child is 
+   *
+   * This function will check if this nodes as a child  of a given type.
+   * If a child exists the child is returned, if it does not exist the child is
    * created.
    */
   attribute emplace_node(attribute_store_type_t type)
@@ -423,6 +442,33 @@ class attribute
   {
     attribute_store_delete_node(_n);
     _n = ATTRIBUTE_STORE_INVALID_NODE;
+  }
+
+  /**
+   * @brief Visit all nodes in the tree.
+   *
+   * This function visits all tree nodes going from the top and down. It will
+   * continue to the node children if the status returned by the function is
+   * SL_STATUS_OK. If the function returns SL_STATUS_ABORT, no more nodes are
+   * visited. Otherwise, siblings will be visited.
+   *
+   * @param func function to execute
+   * @param depth The current depth of the top node.
+   */
+  inline sl_status_t visit(
+    const std::function<sl_status_t(attribute_store::attribute &, int)> &func,
+    int depth = 0)
+  {
+    sl_status_t status = func(*this, depth);
+    if (SL_STATUS_OK == status) {
+      for (auto c: children()) {
+        status = c.visit(func, depth + 1);
+        if (status == SL_STATUS_ABORT) {
+          return status;
+        }
+      }
+    }
+    return status;
   }
 
   //type conversion back to attribute_store_node_t

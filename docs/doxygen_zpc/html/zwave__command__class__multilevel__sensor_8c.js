@@ -3,7 +3,7 @@ var zwave__command__class__multilevel__sensor_8c =
     [ "ATTRIBUTE", "zwave__command__class__multilevel__sensor_8c.html#a3a48b9a3a4b2d94c644107976c45bc72", null ],
     [ "LOG_TAG", "zwave__command__class__multilevel__sensor_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "zwave_command_class_multilevel_sensor_control_handler", "zwave__command__class__multilevel__sensor_8c.html#a389d2c5d83cce7ddd65d15c522bb45e7", null ],
-    [ "zwave_command_class_multilevel_sensor_create_type", "zwave__command__class__multilevel__sensor_8c.html#ae2ab743c61dcd4de5d73c24ae6a93d3c", null ],
+    [ "zwave_command_class_multilevel_sensor_create_type", "zwave__command__class__multilevel__sensor_8c.html#a4ba40eb5b003a48d178274fbb562842d", null ],
     [ "zwave_command_class_multilevel_sensor_get", "zwave__command__class__multilevel__sensor_8c.html#a84a39cf772f936e63412802f65e83ad7", null ],
     [ "zwave_command_class_multilevel_sensor_handle_report", "zwave__command__class__multilevel__sensor_8c.html#aab8e97fb91292b61b6d8597ce2b546e0", null ],
     [ "zwave_command_class_multilevel_sensor_handle_supported_report", "zwave__command__class__multilevel__sensor_8c.html#a21e1bcf070f6c2e6cb3002cdaf6dfd15", null ],

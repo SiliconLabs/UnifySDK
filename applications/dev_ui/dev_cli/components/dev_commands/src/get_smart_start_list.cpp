@@ -39,15 +39,15 @@ int get_smart_start_list_main();
 void print_smart_start_list();
 
 /**
- * @brief Command retrieves the smart start list and displays it
+ * @brief Command retrieves the SmartStart list and displays it
  *
- * Connects to a MQTT broker, retrieves the smart start list and displays it
+ * Connects to a MQTT broker, retrieves the SmartStart list and displays it
  *
  * @ingroup dev_cli_commands Developer CLI commands
  *
  */
 CommandTemplate GetSmartStartList("getsmartstartlist",
-                                  "Get the smart start list",
+                                  "Get the SmartStart list",
                                   "usage: [dev_cli.host *.port]",
                                   get_smart_start_list_main);
 
@@ -70,13 +70,13 @@ namespace bpt = boost::property_tree;
 static bpt::ptree smart_start_list_json;
 static std::vector<std::string> dsk_keys;
 
-// Print specifically the smart start list in a json object
+// Print specifically the SmartStart list in a json object
 static void
   print_whole_smart_start_list(boost::property_tree::ptree const &smart_json)
 {
   printf("\n\n");
   int entry_num = 0;
-  printf("Smart Start List:\n\n");
+  printf("SmartStart List:\n\n");
   dsk_keys.clear();
   for (const bpt::ptree::value_type &entry: smart_json) {
     printf("Entry: %d\n", entry_num);
@@ -98,7 +98,7 @@ int parse_json_smart_start_list(const char *ss_list)
   std::stringstream ss(ss_list);
   try {
     // Try reading the string as json expecting a string formatted as json
-    printf("Parsing smart start list\n");
+    printf("Parsing SmartStart list\n");
     bpt::read_json(ss, smart_start_list_json);
     print_whole_smart_start_list(smart_start_list_json);
     return 0;
@@ -106,12 +106,12 @@ int parse_json_smart_start_list(const char *ss_list)
     // Error handling if the output of ucl/SmartStart/List is unable to be
     // parsed
     printf(
-      "The format of smart start list was not able to be parsed as json.\n");
+      "Error: Could not parse the JSON data for the SmartStart list.\n");
     return 1;
   }
 }
 
-// Saving smart start list on callback for subscrigin to ucl/SmartStart/List
+// Saving SmartStart list on callback for subscrigin to ucl/SmartStart/List
 static void print_smart_start_list_cb(const char *topic,
                                       const char *payload,
                                       size_t payload_size)
@@ -121,7 +121,7 @@ static void print_smart_start_list_cb(const char *topic,
   process_post(PROCESS_BROADCAST, PROCESS_COMMAND_DONE, 0);
 }
 
-// Subscribe to the topic for the smart start list for printing it with callback
+// Subscribe to the topic for the SmartStart list for printing it with callback
 // function
 void print_smart_start_list()
 {

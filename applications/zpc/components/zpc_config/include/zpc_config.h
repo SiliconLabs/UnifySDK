@@ -65,16 +65,16 @@ typedef struct {
   /// Measured 0dBm output power for the Z-Wave module.
   /// Refer to \ref zwave_rx_init
   int zwave_measured_0dbm_power;
-  ///< Default wakeup interval to be used when including wakeup nodes
-  int default_wakeup_interval;
+  ///< Default wake up interval to be used when including wake up nodes
+  int default_wake_up_interval;
   uint16_t manufacturer_id;
   uint16_t product_type;
   uint16_t product_id;
   const char *device_id;
   ///< hardware version of the device where ZPC is running on.
   int hardware_version;
-  ///< This value represents a maximum number of missing wakeup periods.
-  uint8_t missing_wakeup_notification;
+  ///< This value represents a maximum number of missing wake up periods.
+  uint8_t missing_wake_up_notification;
   ///< This value represents a maximum number of accepted frame transmission failure.
   uint8_t accepted_transmit_failure;
   ///< Prioritized list of protocols to use for SmartStart inclusions

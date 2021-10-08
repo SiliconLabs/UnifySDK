@@ -31,10 +31,10 @@ void test_log()
 {
   sl_log("test1", SL_LOG_CRITICAL, "Hello %s", "world");
   sl_log_debug(LOG_TAG, "Hello World\n");
-  sl_log_info(LOG_TAG, "test2", "WTF %u\n", 123);
-  sl_log_warning(LOG_TAG, "test1", "WTF %d\n", -1234);
-  sl_log_critical(LOG_TAG, "test42", "WTF %u", 1234);
-  sl_log_error(LOG_TAG, "wassap", "WTF %s", "Test String");
+  sl_log_info(LOG_TAG, "test2", "This is a number %u\n", 123);
+  sl_log_warning(LOG_TAG, "test1", "This is a signed number %d\n", -1234);
+  sl_log_critical(LOG_TAG, "test42", "This is an unsigned number %u", 1234);
+  sl_log_error(LOG_TAG, "wassap", "This is a string %s", "Test String");
 }
 
 void test_log_level()

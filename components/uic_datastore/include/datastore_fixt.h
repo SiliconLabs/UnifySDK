@@ -35,7 +35,7 @@ extern "C" {
 #endif
 
 /**
- * @brief: MAX Length of typical version string: for e.g. ver_0.0.6_RC1-269-gb5a9d4be 
+ * @brief: MAX Length of typical version string: for e.g. ver_0.0.6_RC1-269-gb5a9d4be
  */
 #define UIC_VERSION_MAX_LEN 100
 
@@ -43,9 +43,9 @@ extern "C" {
  * @brief Fixture for setting up the datastore component.
  *
  * This function gets the config string for datastore file and opens the
- * datastore (Sqlite database) 
- * then calls \ref datastore_table_init 
- * And calls datastore_attribure_init 
+ * datastore (Sqlite database)
+ * then calls \ref datastore_table_init
+ * And calls datastore_attribure_init
  *
  * @return SL_STATUS_OK for success, SL_STATUS_FAIL if an error occurred
  */
@@ -61,12 +61,12 @@ sl_status_t datastore_fixt_setup(void);
  */
 int datastore_fixt_teardown();
 /**
- * @brief Function for setting up the datastore component handling the 
+ * @brief Function for setting up the datastore component handling the
  * datastore version.
  *
  * This function calls reads the datastore config option and calls
  * \ref datastore_open which opens the database
- * and calls \ref datastore_table_init initializes generic tables and 
+ * and calls \ref datastore_table_init initializes generic tables and
  * then this function checks if the database version
  * is same as current version. (Generic tables have the database version stored)
  *

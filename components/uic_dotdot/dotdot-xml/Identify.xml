@@ -15,7 +15,7 @@ applicable to this document can be found in the LICENSE.md file.
   <classification role="utility" picsCode="I" />
   <server>
     <attributes>
-      <attribute id="0000" name="IdentifyTime" type="uint16" writable="true" required="true" max="65535"
+      <attribute id="0000" name="IdentifyTime" type="uint16" reportRequired="true" writable="true" required="true" max="65535"
         default="0" />
     </attributes>
     <commands>

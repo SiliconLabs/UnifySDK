@@ -175,7 +175,7 @@ void test_is_valid_zcl_cluster(void)
   zcl_cluster_type_t cluster;
 
   cluster.cluster_id = 5;
-  cluster.role       = ZCL_SERVER_ROLE;
+  cluster.role       = ZCL_CLUSTER_SERVER_SIDE;
 
   bool is_valid = is_valid_zcl_cluster(cluster);
   TEST_ASSERT_EQUAL(true, is_valid);
@@ -197,7 +197,7 @@ void test_is_valid_endpoint(void)
   zcl_cluster_type_t cluster;
 
   cluster.cluster_id = 5;
-  cluster.role       = ZCL_SERVER_ROLE;
+  cluster.role       = ZCL_CLUSTER_SERVER_SIDE;
 
   bool is_valid = is_valid_zcl_cluster(cluster);
   TEST_ASSERT_EQUAL(true, is_valid);
@@ -219,7 +219,7 @@ void test_is_valid_node(void)
   zcl_cluster_type_t cluster;
 
   cluster.cluster_id = 5;
-  cluster.role       = ZCL_SERVER_ROLE;
+  cluster.role       = ZCL_CLUSTER_SERVER_SIDE;
 
   bool is_valid = is_valid_zcl_cluster(cluster);
   TEST_ASSERT_EQUAL(true, is_valid);
@@ -266,7 +266,7 @@ void test_copy_node_info(void)
           ZCL_DEFAULT_STR_LENGTH);
 
   cluster.cluster_id = 5;
-  cluster.role       = ZCL_SERVER_ROLE;
+  cluster.role       = ZCL_CLUSTER_SERVER_SIDE;
 
   bool is_valid = is_valid_zcl_cluster(cluster);
   TEST_ASSERT_EQUAL(true, is_valid);

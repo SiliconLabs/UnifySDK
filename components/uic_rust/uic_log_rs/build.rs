@@ -14,4 +14,6 @@ fn main() {
     let bind_target =
         BindingsTarget::from_json(format!("{}/uic_log_bindgen.json", env!("LIBUIC_DIR"))).unwrap();
     bind_target.write_link_configuration();
+
+    uic_bindgen::generate_bindings(bind_target, Some(".*log.*"), None, None);
 }

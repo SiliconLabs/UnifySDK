@@ -45,13 +45,19 @@ int suiteTearDown(int num_failures)
  * @brief Setup before each test case
  *
  */
-void setUp(void) {}
+void setUp(void)
+{
+  attribute_store_mock_Init();
+}
 
 /**
  * @brief Teardown after each test case
  *
  */
-void tearDown(void) {}
+void tearDown(void)
+{
+  attribute_store_mock_Destroy();
+}
 
 void helper_set_cluster_parents_overhead(zigbee_eui64_uint_t *eui64_i,
                                          zigbee_endpoint_id_t *endpoint_id,
@@ -96,16 +102,29 @@ void test_zigpc_datastore_get_cluster_count_sanity(void)
   zigbee_eui64_t eui64             = "\x03\x05\xFF\x29\x34\x11\x4A\xBB";
   zigbee_eui64_uint_t eui64_i      = 0x0305FF2934114ABB;
   zigbee_endpoint_id_t endpoint_id = 15;
+  size_t expected_count            = 3U;
 
   helper_set_cluster_parents_overhead(&eui64_i,
                                       &endpoint_id,
                                       MOCK_DEV_1_EP1_NODE_ID);
 
-  attribute_store_get_node_child_count_ExpectAndReturn(MOCK_DEV_1_EP1_NODE_ID,
-                                                       3);
+  for (size_t i = 0; i < expected_count; i++) {
+    attribute_store_get_node_child_by_type_ExpectAndReturn(
+      MOCK_DEV_1_EP1_NODE_ID,
+      ZIGPC_DS_TYPE_SERVER_CLUSTER,
+      i,
+      i + 1);
+  }
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    MOCK_DEV_1_EP1_NODE_ID,
+    ZIGPC_DS_TYPE_SERVER_CLUSTER,
+    expected_count,
+    ATTRIBUTE_STORE_INVALID_NODE);
 
   // ACT
-  count = zigpc_datastore_get_cluster_count(eui64, endpoint_id);
+  count = zigpc_datastore_get_cluster_count(eui64,
+                                            endpoint_id,
+                                            ZCL_CLUSTER_SERVER_SIDE);
 
   // ASSERT
   TEST_ASSERT_EQUAL(3, count);
@@ -124,7 +143,9 @@ void test_zigpc_datastore_get_cluster_count_no_device(void)
                                       ATTRIBUTE_STORE_INVALID_NODE);
 
   // ACT
-  count = zigpc_datastore_get_cluster_count(eui64, endpoint_id);
+  count = zigpc_datastore_get_cluster_count(eui64,
+                                            endpoint_id,
+                                            ZCL_CLUSTER_SERVER_SIDE);
 
   // ASSERT
   TEST_ASSERT_EQUAL(0, count);
@@ -147,7 +168,7 @@ void test_zigpc_datastore_cluster_find_by_index(void)
 
   attribute_store_get_node_child_by_type_ExpectAndReturn(
     MOCK_DEV_1_EP1_NODE_ID,
-    ZIGPC_DS_TYPE_CLUSTER,
+    ZIGPC_DS_TYPE_SERVER_CLUSTER,
     index,
     MOCK_DEV_1_EP1_CL1_NODE_ID);
 
@@ -165,12 +186,77 @@ void test_zigpc_datastore_cluster_find_by_index(void)
   // ACT
   status = zigpc_datastore_find_cluster_by_index(eui64,
                                                  endpoint_id,
+                                                 ZCL_CLUSTER_SERVER_SIDE,
                                                  index,
                                                  &cluster_id);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, status);
   TEST_ASSERT_EQUAL(expected_cluster_id, cluster_id);
+}
+
+void test_zigpc_datastore_contains_cluster_true(void)
+{
+  zigbee_eui64_t eui64             = "\x03\x55\xFF\x20\x34\x11\x4A\xBB";
+  zigbee_eui64_uint_t eui64_i      = 0x0355FF2034114ABB;
+  zigbee_endpoint_id_t endpoint_id = 6;
+  zcl_cluster_id_t cluster_id      = 0x1234;
+
+  // ARRANGE
+  helper_set_cluster_parents_overhead(&eui64_i,
+                                      &endpoint_id,
+                                      MOCK_DEV_1_EP1_NODE_ID);
+
+  attribute_store_node_exists_ExpectAndReturn(MOCK_DEV_1_EP1_NODE_ID, true);
+  attribute_store_get_node_child_by_value_ExpectAndReturn(
+    MOCK_DEV_1_EP1_NODE_ID,
+    ZIGPC_DS_TYPE_SERVER_CLUSTER,
+    DESIRED_ATTRIBUTE,
+    (uint8_t *)&cluster_id,
+    sizeof(zcl_cluster_id_t),
+    0,
+    MOCK_DEV_1_EP1_CL1_NODE_ID);
+
+  // ACT
+  bool is_found = zigpc_datastore_contains_cluster(eui64,
+                                                   endpoint_id,
+                                                   ZCL_CLUSTER_SERVER_SIDE,
+                                                   cluster_id);
+
+  // ASSERT
+  TEST_ASSERT_TRUE(is_found);
+}
+
+void test_zigpc_datastore_contains_cluster_false(void)
+{
+  zigbee_eui64_t eui64             = "\x03\x55\xFF\x20\x34\x11\x4A\xBB";
+  zigbee_eui64_uint_t eui64_i      = 0x0355FF2034114ABB;
+  zigbee_endpoint_id_t endpoint_id = 6;
+  zcl_cluster_id_t cluster_id      = 0x1234;
+
+  // ARRANGE
+  helper_set_cluster_parents_overhead(&eui64_i,
+                                      &endpoint_id,
+                                      MOCK_DEV_1_EP1_NODE_ID);
+
+  attribute_store_node_exists_ExpectAndReturn(MOCK_DEV_1_EP1_NODE_ID, true);
+  attribute_store_get_node_child_by_value_ExpectAndReturn(
+    MOCK_DEV_1_EP1_NODE_ID,
+    ZIGPC_DS_TYPE_SERVER_CLUSTER,
+    DESIRED_ATTRIBUTE,
+    (uint8_t *)&cluster_id,
+    sizeof(zcl_cluster_id_t),
+    0,
+    ATTRIBUTE_STORE_INVALID_NODE);
+
+  // ACT
+  bool is_found = zigpc_datastore_contains_cluster(eui64,
+                                                   endpoint_id,
+                                                   ZCL_CLUSTER_SERVER_SIDE,
+                                                   cluster_id);
+
+  // ASSERT
+  TEST_ASSERT_FALSE(is_found);
 }
 
 void test_zigpc_datastore_cluster_create(void)
@@ -189,7 +275,7 @@ void test_zigpc_datastore_cluster_create(void)
   attribute_store_node_exists_ExpectAndReturn(MOCK_DEV_1_EP1_NODE_ID, true);
   attribute_store_get_node_child_by_value_ExpectAndReturn(
     MOCK_DEV_1_EP1_NODE_ID,
-    ZIGPC_DS_TYPE_CLUSTER,
+    ZIGPC_DS_TYPE_SERVER_CLUSTER,
     DESIRED_ATTRIBUTE,
     (uint8_t *)&cluster_id,
     sizeof(zcl_cluster_id_t),
@@ -197,7 +283,7 @@ void test_zigpc_datastore_cluster_create(void)
     ATTRIBUTE_STORE_INVALID_NODE);
 
   // Expect calls to add nodes
-  attribute_store_add_node_ExpectAndReturn(ZIGPC_DS_TYPE_CLUSTER,
+  attribute_store_add_node_ExpectAndReturn(ZIGPC_DS_TYPE_SERVER_CLUSTER,
                                            MOCK_DEV_1_EP1_NODE_ID,
                                            MOCK_DEV_1_EP1_CL1_NODE_ID);
   attribute_store_set_node_attribute_value_ExpectAndReturn(
@@ -208,7 +294,10 @@ void test_zigpc_datastore_cluster_create(void)
     SL_STATUS_OK);
 
   // ACT
-  status = zigpc_datastore_create_cluster(eui64, endpoint_id, cluster_id);
+  status = zigpc_datastore_create_cluster(eui64,
+                                          endpoint_id,
+                                          ZCL_CLUSTER_SERVER_SIDE,
+                                          cluster_id);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, status);
@@ -234,7 +323,7 @@ void test_zigpc_datastore_cluster_read(void)
   attribute_store_node_exists_ExpectAndReturn(MOCK_DEV_1_EP1_NODE_ID, true);
   attribute_store_get_node_child_by_value_ExpectAndReturn(
     MOCK_DEV_1_EP1_NODE_ID,
-    ZIGPC_DS_TYPE_CLUSTER,
+    ZIGPC_DS_TYPE_SERVER_CLUSTER,
     DESIRED_ATTRIBUTE,
     (uint8_t *)&cluster_id,
     sizeof(zcl_cluster_id_t),
@@ -254,7 +343,11 @@ void test_zigpc_datastore_cluster_read(void)
     sizeof(zigpc_cluster_data_t));
 
   // ACT
-  status = zigpc_datastore_read_cluster(eui64, endpoint_id, cluster_id, &data);
+  status = zigpc_datastore_read_cluster(eui64,
+                                        endpoint_id,
+                                        ZCL_CLUSTER_SERVER_SIDE,
+                                        cluster_id,
+                                        &data);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, status);
@@ -278,7 +371,7 @@ void test_zigpc_datastore_cluster_write(void)
   attribute_store_node_exists_ExpectAndReturn(MOCK_DEV_1_EP1_NODE_ID, true);
   attribute_store_get_node_child_by_value_ExpectAndReturn(
     MOCK_DEV_1_EP1_NODE_ID,
-    ZIGPC_DS_TYPE_CLUSTER,
+    ZIGPC_DS_TYPE_SERVER_CLUSTER,
     DESIRED_ATTRIBUTE,
     (uint8_t *)&cluster_id,
     sizeof(zcl_cluster_id_t),
@@ -293,7 +386,11 @@ void test_zigpc_datastore_cluster_write(void)
     SL_STATUS_OK);
 
   // ACT
-  status = zigpc_datastore_write_cluster(eui64, endpoint_id, cluster_id, &data);
+  status = zigpc_datastore_write_cluster(eui64,
+                                         endpoint_id,
+                                         ZCL_CLUSTER_SERVER_SIDE,
+                                         cluster_id,
+                                         &data);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, status);
@@ -315,7 +412,7 @@ void test_zigpc_datastore_cluster_delete(void)
   attribute_store_node_exists_ExpectAndReturn(MOCK_DEV_1_EP1_NODE_ID, true);
   attribute_store_get_node_child_by_value_ExpectAndReturn(
     MOCK_DEV_1_EP1_NODE_ID,
-    ZIGPC_DS_TYPE_CLUSTER,
+    ZIGPC_DS_TYPE_SERVER_CLUSTER,
     DESIRED_ATTRIBUTE,
     (uint8_t *)&cluster_id,
     sizeof(zcl_cluster_id_t),
@@ -326,7 +423,10 @@ void test_zigpc_datastore_cluster_delete(void)
                                               SL_STATUS_OK);
 
   // ACT
-  status = zigpc_datastore_remove_cluster(eui64, endpoint_id, cluster_id);
+  status = zigpc_datastore_remove_cluster(eui64,
+                                          endpoint_id,
+                                          ZCL_CLUSTER_SERVER_SIDE,
+                                          cluster_id);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, status);

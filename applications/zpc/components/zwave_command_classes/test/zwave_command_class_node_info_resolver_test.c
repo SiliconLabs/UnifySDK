@@ -146,6 +146,12 @@ void test_zwave_command_class_resolve_node_info_root_device()
   attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
                                                 ATTRIBUTE_ZWAVE_NIF);
 
+  attribute_store_node_t test_node_id_node = 23;
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_updated_node,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             test_node_id_node);
+  get_zpc_node_id_node_ExpectAndReturn(test_node_id_node + 1);
+
   // The function should find out the endpoint ID now
   test_endpoint_id = 0;
   attribute_store_network_helper_get_endpoint_id_from_node_ExpectAndReturn(
@@ -170,12 +176,40 @@ void test_zwave_command_class_resolve_node_info_root_device()
                                 sizeof(request_node_info_frame_t));
 }
 
+void test_zwave_command_class_resolve_node_info_zpc_node()
+{
+  attribute_store_node_t test_updated_node = 0x87;
+  attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
+                                                ATTRIBUTE_ZWAVE_NIF);
+
+  attribute_store_node_t test_node_id_node = 23;
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_updated_node,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             test_node_id_node);
+  get_zpc_node_id_node_ExpectAndReturn(test_node_id_node);
+  attribute_store_delete_node_ExpectAndReturn(test_updated_node, SL_STATUS_OK);
+
+  // Call the function to test
+  TEST_ASSERT_EQUAL(SL_STATUS_ALREADY_EXISTS,
+                    resolve_node_info(test_updated_node,
+                                      received_frame,
+                                      &received_frame_length));
+
+  TEST_ASSERT_EQUAL(0, received_frame_length);
+}
+
 void test_zwave_command_class_resolve_node_info_attribute_store_fails()
 {
   attribute_store_node_t test_updated_node = 123;
 
   attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
                                                 ATTRIBUTE_ZWAVE_NIF);
+
+  attribute_store_node_t test_node_id_node = 23;
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_updated_node,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             test_node_id_node);
+  get_zpc_node_id_node_ExpectAndReturn(test_node_id_node + 1);
 
   // The function should find out the endpoint ID now
   attribute_store_network_helper_get_endpoint_id_from_node_ExpectAndReturn(
@@ -221,6 +255,12 @@ void test_zwave_command_class_resolve_node_info_endpoint()
 
   attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
                                                 ATTRIBUTE_ZWAVE_NIF);
+
+  attribute_store_node_t test_node_id_node = 23;
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_updated_node,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             test_node_id_node);
+  get_zpc_node_id_node_ExpectAndReturn(test_node_id_node + 1);
 
   // The function should find out the endpoint ID now (returns >0)
   test_endpoint_id = 45;

@@ -118,8 +118,11 @@ Here you can see a demo-session of adding a component with cookiecutter.
 *Note! This Git-repository used in the demo is outdated and did only exist
 to demonstrate this functionality for the team to consider.*
 
-[![asciicast](https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1.svg)](https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1)
 
+<a href=https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1> 
+  Heres a small video demonstrating how to use the cookiecutter<br/>
+  <img src="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1.png" width="60%">
+</a>
 ## Clang-Format (autoformat code)
 
 Clang-format is a tool that can format code according to coding style configuration.

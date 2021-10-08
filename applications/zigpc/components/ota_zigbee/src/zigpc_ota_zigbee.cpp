@@ -19,8 +19,10 @@
 #include "sl_log.h"
 #include "ota.hpp"
 
-#include "zigpc_common_unid.h"
-#include "zigpc_node_mgmt.h"
+// ZigPC includes
+#include <zigpc_common_unid.h>
+#include <zigpc_datastore.h>
+
 #include "zigpc_ota_zigbee.h"
 #include "zigpc_ota_zigbee_int.h"
 
@@ -38,22 +40,26 @@ void zigpc_ota_zigbee_image_available(uic_ota::meta_t ota_meta_info)
     sl_status_t status
       = str_to_zigbee_eui64(unid_str.c_str(), unid_str.size(), eui64);
 
-    if ((SL_STATUS_OK == status) && (zigpc_nodemgmt_check_if_managed(eui64))) {
+    zigbee_endpoint_id_t ota_endpoint_id;
+    status = zigpc_datastore_find_endpoint_containing_cluster(
+      eui64,
+      ZCL_CLUSTER_CLIENT_SIDE,
+      ZIGPC_ZCL_CLUSTER_OTA_UPGRADE,
+      &ota_endpoint_id);
+
+    if (SL_STATUS_OK == status) {
       uic_ota::get_by_unid(ota_meta_info.unid,
                            ota_meta_info.uiid,
                            zigpc_ota_zigbee_image_ready);
 
-      zigbee_endpoint_id_t endpoint_id
-        = zigpc_nodemgmt_fetch_endpoint_containing_cluster(eui64, 0x0019);
-
       uic_ota::update_status(
         ota_meta_info.unid.c_str(),
-        endpoint_id,
+        ota_endpoint_id,
         ota_meta_info.unid.c_str(),
         uic_ota::status_t::WAITING_TO_UPGRADE_VIA_EXTERNAL_EVENT);
 
       uic_ota::update_last_error(ota_meta_info.unid.c_str(),
-                                 endpoint_id,
+                                 ota_endpoint_id,
                                  ota_meta_info.unid.c_str(),
                                  uic_ota::last_error_t::SUCCESS);
     }
@@ -100,7 +106,6 @@ sl_status_t zigpc_ota_init()
 
 sl_status_t zigpc_ota_configure_node(const zigbee_eui64_t eui64)
 {
-
   sl_status_t status = SL_STATUS_OK;
   char eui64_cstr[ZIGBEE_EUI64_HEX_STR_LENGTH];
 
@@ -115,18 +120,24 @@ sl_status_t zigpc_ota_configure_node(const zigbee_eui64_t eui64)
     //for now, use the UNID as a UIID for a given node
     uic_ota::subscribe_unid(unid, unid);
 
-    zigbee_endpoint_id_t endpoint_id
-      = zigpc_nodemgmt_fetch_endpoint_containing_cluster(eui64, 0x0019);
+    zigbee_endpoint_id_t ota_endpoint_id;
+    status = zigpc_datastore_find_endpoint_containing_cluster(
+      eui64,
+      ZCL_CLUSTER_CLIENT_SIDE,
+      ZIGPC_ZCL_CLUSTER_OTA_UPGRADE,
+      &ota_endpoint_id);
 
-    uic_ota::update_status(unid.c_str(),
-                           endpoint_id,
-                           unid.c_str(),
-                           uic_ota::status_t::IDLE);
+    if (status == SL_STATUS_OK) {
+      uic_ota::update_status(unid.c_str(),
+                             ota_endpoint_id,
+                             unid.c_str(),
+                             uic_ota::status_t::IDLE);
 
-    uic_ota::update_last_error(unid.c_str(),
-                               endpoint_id,
-                               unid.c_str(),
-                               uic_ota::last_error_t::SUCCESS);
+      uic_ota::update_last_error(unid.c_str(),
+                                 ota_endpoint_id,
+                                 unid.c_str(),
+                                 uic_ota::last_error_t::SUCCESS);
+    }
   }
 
   return status;

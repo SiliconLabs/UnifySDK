@@ -37,7 +37,6 @@ var zwave__s0__sm_8c =
     [ "s0_bootstrapping_start", "zwave__s0__sm_8c.html#af4d6768672314f24fe46c7d19b5b433f", null ],
     [ "s0_event_name", "zwave__s0__sm_8c.html#a0dc7eb896bebdab4882a3d4fb89e5ad5", null ],
     [ "s0_handle_net_key_verify", "zwave__s0__sm_8c.html#ab4101f12d142bd597954a665c6acc700", null ],
-    [ "s0_handle_scheme_report", "zwave__s0__sm_8c.html#a192f059113df9bd33baf29380b1ba294", null ],
     [ "s0_incl_state_name", "zwave__s0__sm_8c.html#a00ff81b246bf8cb1115793c817f34350", null ],
     [ "s0_network_key_verify_received", "zwave__s0__sm_8c.html#a324baa22838a503a6e1df7375e7deaaa", null ],
     [ "s0_scheme_report_received", "zwave__s0__sm_8c.html#a6f16899e498cbd0eeb2e3e52a732decf", null ],

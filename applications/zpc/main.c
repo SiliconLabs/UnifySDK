@@ -129,7 +129,7 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
   /** Initialize the Z-Wave Command handler framework after the Command Classes */
   {&zwave_command_handler_init, "Z-Wave Command Handler framework"},
 
-  {&zwave_smartstart_management_setup_fixt, "Z-Wave Smartstart Management"},
+  {&zwave_smartstart_management_setup_fixt, "Z-Wave SmartStart Management"},
   /**
    * UCL MQTT initialize all ucl mqtt handlers.
    */
@@ -143,7 +143,7 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
    * This component will trigger an update callback for all attributes under our current HomeID.
    * It should be initialized last.
    */
-  {&zpc_attribute_store_init, "ZPC Attribute store init"},
+  {&zpc_attribute_store_init, "ZPC Attribute Store"},
   {NULL, "Terminator"}};
 
 /** Final tear-down steps.

@@ -21,7 +21,7 @@
 extern "C" {
 
 // Short alias for this namespace
-using namespace std;  
+using namespace std;
 using namespace attribute_store;
 
 /// Setup the test suite (called once before all test_xxx functions are called)
@@ -34,6 +34,8 @@ void suiteSetUp()
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
+  attribute_store_teardown();
+  datastore_teardown();
   return num_failures;
 }
 
@@ -49,10 +51,10 @@ void test_mapper_engine_example()
   MapperEngine &e = MapperEngine::get_instance();
   e.set_ep_type(attribute::root().type());
   e.reset();
- 
+
   // Create attribute tree
   create_branch("0x04020000").set_reported<uint32_t>(100);
-    
+
   create_branch("0x3102[1].0x3103").set_reported<uint32_t>(0);
   create_branch("0x3102[1].0x3104").set_reported<uint32_t>(2);
   create_branch("0x3102[1].0x3105").set_reported<uint32_t>(100);
@@ -73,7 +75,7 @@ void test_mapper_engine_example()
   // Activate rules
   check_branch("0x3102[1].0x3105").set_reported<uint32_t>(10);
   check_branch("0x3102[2].0x3105").set_desired<uint32_t>(10);
-   
+
   attribute_store_log();
 
   // Test

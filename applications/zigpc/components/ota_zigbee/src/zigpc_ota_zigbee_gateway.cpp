@@ -17,10 +17,12 @@
 #include "ota.hpp"
 #include "sl_log.h"
 
-#include "zigpc_gateway_notify.h"
-#include "zigpc_gateway.h"
-#include "zigpc_node_mgmt.h"
-#include "zigpc_common_unid.h"
+// ZigPC includes
+#include <zcl_definitions.h>
+#include <zigpc_datastore.h>
+#include <zigpc_gateway_notify.h>
+#include <zigpc_gateway.h>
+#include <zigpc_common_unid.h>
 
 #include "zigpc_ota_zigbee_int.h"
 
@@ -49,13 +51,13 @@ void zigpc_ota_zigbee_image_ready(const uic_ota::image_ready_result_t result,
 {
   //check if the result was good and if the file downloaded properly
   if (uic_ota::image_ready_result_t::OK == result) {
-    sl_log_info(LOG_TAG, "Successfully downloaded ota image to %s",file_path.c_str());
+    sl_log_info(LOG_TAG,
+                "Successfully downloaded ota image to %s",
+                file_path.c_str());
 
     zigpc_gateway_add_ota_image(file_path.c_str(), file_path.size());
-  }
-  else
-  {
-      sl_log_warning(LOG_TAG, "Error downloading ota image");
+  } else {
+    sl_log_warning(LOG_TAG, "Error downloading ota image");
   }
 }
 
@@ -76,20 +78,24 @@ void on_ota_zigbee_upgrade_start(void *data)
     std::string prefix(ZIGPC_UNID_PREFIX);
     std::string unid = prefix + eui64_str;
 
-    //TODO replace with OTA cluster number from ZCL util
-    zigbee_endpoint_id_t endpoint_id
-      = zigpc_nodemgmt_fetch_endpoint_containing_cluster(ota_data->eui64,
-                                                         0x0019);
+    zigbee_endpoint_id_t ota_endpoint_id;
+    status = zigpc_datastore_find_endpoint_containing_cluster(
+      ota_data->eui64,
+      ZCL_CLUSTER_CLIENT_SIDE,
+      ZIGPC_ZCL_CLUSTER_OTA_UPGRADE,
+      &ota_endpoint_id);
 
-    uic_ota::update_status(unid.c_str(),
-                           endpoint_id,
-                           unid.c_str(),
-                           uic_ota::status_t::DOWNLOAD_IN_PROGRESS);
+    if (status == SL_STATUS_OK) {
+      uic_ota::update_status(unid.c_str(),
+                             ota_endpoint_id,
+                             unid.c_str(),
+                             uic_ota::status_t::DOWNLOAD_IN_PROGRESS);
 
-    uic_ota::update_last_error(unid.c_str(),
-                               endpoint_id,
-                               unid.c_str(),
-                               uic_ota::last_error_t::SUCCESS);
+      uic_ota::update_last_error(unid.c_str(),
+                                 ota_endpoint_id,
+                                 unid.c_str(),
+                                 uic_ota::last_error_t::SUCCESS);
+    }
   }
 }
 
@@ -108,29 +114,33 @@ void on_ota_zigbee_upgrade_complete(void *data)
                                ZIGBEE_EUI64_HEX_STR_LENGTH);
 
   if (SL_STATUS_OK == status) {
-  sl_log_info(LOG_TAG, "OTA update status");
+    sl_log_info(LOG_TAG, "OTA update status");
     std::string eui64_str(eui64_cstr);
     std::string prefix(ZIGPC_UNID_PREFIX);
     std::string unid = prefix + eui64_str;
 
-    //TODO replace with OTA cluster number from ZCL util
-    zigbee_endpoint_id_t endpoint_id
-      = zigpc_nodemgmt_fetch_endpoint_containing_cluster(ota_data->eui64,
-                                                         0x0019);
+    zigbee_endpoint_id_t ota_endpoint_id;
+    status = zigpc_datastore_find_endpoint_containing_cluster(
+      ota_data->eui64,
+      ZCL_CLUSTER_CLIENT_SIDE,
+      ZIGPC_ZCL_CLUSTER_OTA_UPGRADE,
+      &ota_endpoint_id);
 
-    uic_ota::update_status(unid.c_str(),
-                           endpoint_id,
-                           unid.c_str(),
-                           uic_ota::status_t::IDLE);
+    if (status == SL_STATUS_OK) {
+      uic_ota::update_status(unid.c_str(),
+                             ota_endpoint_id,
+                             unid.c_str(),
+                             uic_ota::status_t::IDLE);
 
-    uic_ota::last_error_t last_error
-      = (ota_data->status == ZIGPC_ZCL_STATUS_SUCCESS)
-          ? uic_ota::last_error_t::SUCCESS
-          : uic_ota::last_error_t::ABORT;
+      uic_ota::last_error_t last_error
+        = (ota_data->status == ZIGPC_ZCL_STATUS_SUCCESS)
+            ? uic_ota::last_error_t::SUCCESS
+            : uic_ota::last_error_t::ABORT;
 
-    uic_ota::update_last_error(unid.c_str(),
-                               endpoint_id,
-                               unid.c_str(),
-                               last_error);
+      uic_ota::update_last_error(unid.c_str(),
+                                 ota_endpoint_id,
+                                 unid.c_str(),
+                                 last_error);
+    }
   }
 }

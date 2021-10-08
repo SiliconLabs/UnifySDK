@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -141,6 +141,7 @@ Functions</h2></td></tr>
 
 <p>Free all S0 RX sessions <br  />
  </p>
+<p>Sets the state of all MAX_RXSESSIONS S0 receive sessions to RX_SESSION_DONE </p>
 
 </div>
 </div>
@@ -161,6 +162,7 @@ Functions</h2></td></tr>
 
 <p>Free all S0 Tx sessions <br  />
  </p>
+<p>Stops the Nonce Request timer and frees all tx sessions </p>
 
 </div>
 </div>
@@ -180,6 +182,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Free S0 nonce block list. </p>
+<p>Frees all NONCE_BLOCK_LIST_SIZE number of nonce blocks </p>
 
 </div>
 </div>
@@ -237,6 +240,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Abort all S0 network TX sessions. </p>
+<p>This function aborts all NUM_TX_SESSIONS of S0 transmit session and calls the callback with TRANSMIT_COMPLETE_FAIL to notify upper layer for failure </p>
 
 </div>
 </div>
@@ -273,7 +277,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_adea59f225018a199b25c065c5cc4ca8.html">zwave_transports</a></li><li class="navelem"><a class="el" href="dir_2f8f4ba1c585320e3fdaf8dbf6a41c22.html">include</a></li><li class="navelem"><a class="el" href="zwave__s0__internal_8h.html">zwave_s0_internal.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:37 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

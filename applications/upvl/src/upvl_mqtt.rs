@@ -61,11 +61,11 @@ use std::path::Path;
 /// Logging helper
 /// TODO: fancier logging
 // Constants should be upper case, otherwise, the compiler gives a warning.
-const SUBS_PREFIX: &'static str = "Subscriber: ";
+const SUBS_PREFIX: &str = "Subscriber: ";
 /// Logging helper
-const PUB_PREFIX: &'static str = "Publisher: ";
+const PUB_PREFIX: &str = "Publisher: ";
 /// The default upvl_mqtt log tag
-const LOG_TAG: &'static str = "upvl_mqtt";
+const LOG_TAG: &str = "upvl_mqtt";
 
 // DATA TYPES
 
@@ -97,7 +97,7 @@ impl<'a, 'b> UpvlMqttSessionData<'a, 'b> {
             rec_count: 0,
             rec_drops: 0,
             subscribers: None,
-            db_conn: db_conn,
+            db_conn,
         }
     }
 }
@@ -138,7 +138,13 @@ pub struct UpvlMqttSession {
 impl UpvlMqttSession {
     /// Constructor
     /// Set up the connection to the broker
-    pub fn new(broker: &str, port: u32, cafile: &str, certfile: &str, keyfile: &str) -> UpvlMqttSession {
+    pub fn new(
+        broker: &str,
+        port: u32,
+        cafile: &str,
+        certfile: &str,
+        keyfile: &str,
+    ) -> UpvlMqttSession {
         // Create a new mosquitto client instance and assign it to an
         // immutable variable.
         let mcl = mosq::Mosquitto::new("upvl-1");
@@ -146,45 +152,48 @@ impl UpvlMqttSession {
         let passphrase: Option<&str> = Some("");
 
         if !cafile.is_empty() && !certfile.is_empty() && !keyfile.is_empty() {
+            let cafilepath = Path::new(cafile);
+            let certfilepath = Path::new(certfile);
+            let keyfilepath = Path::new(keyfile);
 
-          let cafilepath   = Path::new (cafile);
-          let certfilepath = Path::new (certfile);
-          let keyfilepath  = Path::new (keyfile);
-
-          if !cafilepath.exists() || !certfilepath.exists() || !keyfilepath.exists() {
-              upvl_log::log_warning(LOG_TAG,
-                 "One or more of the certificate files does not exist \n".to_string());
+            if !cafilepath.exists() || !certfilepath.exists() || !keyfilepath.exists() {
+                upvl_log::log_critical(
+                    LOG_TAG,
+                    "One or more of the certificate files does not exist \n".to_string(),
+                );
                 panic!("Application terminated!");
-          }
-          match mcl.tls_set(&cafilepath, &certfilepath, &keyfilepath, passphrase)
-          {
-            //    .expect();
-            Ok(_) => upvl_log::log_info(
-                      LOG_TAG,
-                      "TLS certifcate setting success".to_string()),
-            Err(err) =>
-            {
-              upvl_log::log_critical(
-                LOG_TAG,
-                format !("Cannot setup TLS certificates, Error description: {}",
-                         err), );
-              panic !("Application terminated!");
             }
-          }
+            match mcl.tls_set(&cafilepath, &certfilepath, &keyfilepath, passphrase) {
+                //    .expect();
+                Ok(_) => {
+                    upvl_log::log_info(LOG_TAG, "Succesfully set the TLS certifcate.".to_string())
+                }
+                Err(err) => {
+                    upvl_log::log_critical(
+                        LOG_TAG,
+                        format!("Cannot setup TLS certificates, Error description: {}", err),
+                    );
+                    panic!("Application terminated!");
+                }
+            }
         } else {
             if cafile.is_empty() || certfile.is_empty() || keyfile.is_empty() {
-                upvl_log::log_warning(LOG_TAG,
-                             "One or more of the certificate file path is blank\n".to_string());
+                upvl_log::log_warning(
+                    LOG_TAG,
+                    "One or more of the certificate file path is blank\n".to_string(),
+                );
             }
 
-            upvl_log::log_warning(LOG_TAG,
-                         "Trying non-TLS connection to the broker\n".to_string());
+            upvl_log::log_warning(
+                LOG_TAG,
+                "Trying non-TLS connection to the broker\n".to_string(),
+            );
         }
         // Connect the mosquitto client to localhost, port 1883
         // If connection fails, stop the process with the error
         // message "Cannot connect ..."
         // TODO: replace this with proper error handling
-        match mcl.connect(&broker, port, 5) {
+        match mcl.connect(broker, port, 5) {
             //    .expect("Cannot connect to broker");
             Ok(_) => upvl_log::log_info(
                 LOG_TAG,
@@ -202,7 +211,7 @@ impl UpvlMqttSession {
 
         // Return the session
         UpvlMqttSession {
-            mcl: mcl,
+            mcl,
             qos: 0,
             broker: broker.to_string(),
             port,
@@ -211,7 +220,7 @@ impl UpvlMqttSession {
 
     /// Subscribe to our topics.
     pub fn subscribe(&self) -> UpvlSubscribers {
-        upvl_log::log_info(LOG_TAG, format!("Subscribing"));
+        upvl_log::log_info(LOG_TAG, "Subscribing".to_string());
 
         // Tell mcl to subscribe to ucl/SmartStart with QoS qos.  If this
         // fails, stop the process with an error message.
@@ -219,11 +228,11 @@ impl UpvlMqttSession {
             update_subscriber: self
                 .mcl
                 .subscribe("ucl/SmartStart/List/Update/#", self.qos)
-                .expect("Can't subscribe to provisioning entries"),
+                .expect("Cannot subscribe to provisioning entries"),
             remove_subscriber: self
                 .mcl
                 .subscribe("ucl/SmartStart/List/Remove/#", self.qos)
-                .expect("Can't subscribe to provisioning entries"),
+                .expect("Cannot subscribe to provisioning entries"),
         }
     }
 
@@ -326,11 +335,11 @@ impl UpvlMqttSession {
 
     /// Get the callbacks handler for the mqtt event callbacks, so that
     /// you can install callbacks.
-    pub fn get_callbacks<'a, T>(&'a self, ses_data: T) -> mosq::Callbacks<'a, T> {
+    pub fn get_callbacks<T>(&self, ses_data: T) -> mosq::Callbacks<T> {
         self.mcl.callbacks(ses_data)
     }
 
-    /// Function to publish a Smart Start List from a JSON UpvlList.
+    /// Function to publish a SmartStart List from a JSON UpvlList.
     /// #Panics
     ///
     /// This will **panic** if the json_value cannot be converted to a string.
@@ -355,7 +364,7 @@ impl UpvlMqttSession {
                 upvl_log::log_error(
                     LOG_TAG,
                     format!(
-                        "Publish failed with error {} {}",
+                        "MQTT publication failed with error {} {}",
                         err,
                         mosq::Error::error(&err)
                     ),
@@ -443,7 +452,7 @@ impl UpvlMqttSession {
                             // The error is passed to the outer context,
                             // but we handle the Ok() branch here, since
                             // it has a different JSON type than Update.
-                            let json: serde_json::Value = serde_json::from_str(&payload)?;
+                            let json: serde_json::Value = serde_json::from_str(payload)?;
 
                             let provision: upvl_json::SmartStartEntry =
                                 upvl_json::SmartStartEntry::from(json);
@@ -453,7 +462,7 @@ impl UpvlMqttSession {
                             //
                             // Currently, the interface between upvl_mqtt and
                             // upvl_db uses the upvl_json types.
-                            if upvl_db::db_remove_entry(&data.db_conn, &provision) == 1 {
+                            if upvl_db::db_remove_entry(data.db_conn, &provision) == 1 {
                                 // Return true to say: Publish an updated List
                                 Ok(true)
                             } else {
@@ -462,7 +471,7 @@ impl UpvlMqttSession {
                         } else if subscribers.update_subscriber.matches(&msg) {
                             // Return type of from_str is Result<UpvlUpdate,_> here.
                             // We pass on the error to the outer context with ?
-                            let json: serde_json::Value = serde_json::from_str(&payload)?;
+                            let json: serde_json::Value = serde_json::from_str(payload)?;
                             let provision: upvl_json::SmartStartEntry =
                                 upvl_json::SmartStartEntry::from(json);
 
@@ -473,7 +482,7 @@ impl UpvlMqttSession {
                             // if there are changes in the database,
                             // upsert() should return whether the
                             // provision was a duplicate.
-                            upvl_db::db_upsert_entry(&data.db_conn, provision);
+                            upvl_db::db_upsert_entry(data.db_conn, provision);
                             Ok(true)
                         } else {
                             // This shouldn't happen, since we only
@@ -495,7 +504,7 @@ impl UpvlMqttSession {
                             data.rec_count += 1;
                             // Create an updated list and hand over the
                             // list to publish_list
-                            let list = upvl_db::db_list_provisions(&data.db_conn);
+                            let list = upvl_db::db_list_provisions(data.db_conn);
                             self.publish_list(list);
                         }
                         Ok(false) => data.rec_drops += 1,
@@ -504,7 +513,7 @@ impl UpvlMqttSession {
                             data.rec_drops += 1;
                             upvl_log::log_error(
                                 LOG_TAG,
-                                format!("Cannot convert payload to json, error {}", err),
+                                format!("Cannot convert payload to JSON. Error: {}", err),
                             );
                         }
                     }
@@ -514,7 +523,7 @@ impl UpvlMqttSession {
                     data.rec_drops += 1;
                     upvl_log::log_error(
                         LOG_TAG,
-                        format!("Cannot convert payload to string, error {}", err),
+                        format!("Cannot convert payload to string. Error: {}", err),
                     );
                 }
             }
@@ -537,7 +546,7 @@ impl UpvlMqttSession {
             upvl_log::log_info(
                 LOG_TAG,
                 format!(
-                    "Disconnected from MQTT broker, status {}.\n{}\n",
+                    "Disconnected from MQTT broker. Status: {}.\n{}\n",
                     status_code, data
                 ),
             );
@@ -546,7 +555,7 @@ impl UpvlMqttSession {
         // Set up subscriptions when the UPVL is (re-)connected to the broker.
         mc.on_connect(|data, status| {
             if status == 0 {
-                upvl_log::log_info(LOG_TAG, format!("(Re-)connected to broker"));
+                upvl_log::log_info(LOG_TAG, "(Re-)connected to broker".to_string());
 
                 //Subscribe to our topics.
                 // We need to re-subscribe, since the broker may not

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -127,6 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7eb74f498fe9ca8dfe478641f0590382"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmartstart_1_1Management.html#a7eb74f498fe9ca8dfe478641f0590382">notify_node_removed</a> (const std::string &amp;unid)</td></tr>
 <tr class="memdesc:a7eb74f498fe9ca8dfe478641f0590382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a node has been removed and SSM will then update the cache map.  <a href="classsmartstart_1_1Management.html#a7eb74f498fe9ca8dfe478641f0590382">More...</a><br /></td></tr>
 <tr class="separator:a7eb74f498fe9ca8dfe478641f0590382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaa94907d05553db603539141ad67bc5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmartstart_1_1Management.html#abaa94907d05553db603539141ad67bc5">set_manual_intervention_required</a> (const std::string &amp;dsk, bool manual_intervention_required)</td></tr>
+<tr class="memdesc:abaa94907d05553db603539141ad67bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call this function to change the value of the "ManualInterventionRequired" field.  <a href="classsmartstart_1_1Management.html#abaa94907d05553db603539141ad67bc5">More...</a><br /></td></tr>
+<tr class="separator:abaa94907d05553db603539141ad67bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89a7f76e8f0852b4e63a7a574458284a"><td class="memItemLeft" align="right" valign="top">const std::unordered_map&lt; std::string, <a class="el" href="classsmartstart_1_1Entry.html">Entry</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmartstart_1_1Management.html#a89a7f76e8f0852b4e63a7a574458284a">get_cache</a> () const</td></tr>
 <tr class="separator:a89a7f76e8f0852b4e63a7a574458284a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -429,6 +432,44 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="abaa94907d05553db603539141ad67bc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaa94907d05553db603539141ad67bc5">&#9670;&nbsp;</a></span>set_manual_intervention_required()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> smartstart::Management::set_manual_intervention_required </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>dsk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>manual_intervention_required</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Call this function to change the value of the "ManualInterventionRequired" field. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dsk</td><td>DSK of the entry to be modified </td></tr>
+    <tr><td class="paramname">manual_intervention_required</td><td>Set to true if the entry needs some network exclusion before it can join our network. False otherwise </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the entry was updated SL_STATUS_NOT_FOUND If the DSK is not in the list. SL_STATUS_FAIL If the DSK returns more than 1 entry in the list </dd></dl>
+
+</div>
+</div>
 <a id="a88455f330f8537bb955fc17ffceb115f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a88455f330f8537bb955fc17ffceb115f">&#9670;&nbsp;</a></span>teardown()</h2>
 
@@ -575,7 +616,7 @@ Static Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacesmartstart.html">smartstart</a></li><li class="navelem"><a class="el" href="classsmartstart_1_1Management.html">Management</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:40 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Developer Command Line Interface
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -89,9 +89,6 @@ $(document).ready(function(){initNavTree('globals_func_p.html',''); initResizabl
 <li>parse_json_smart_start_list()
 : <a class="el" href="command__smartstartlist__lib_8hpp.html#a5e2041c432e7a083e4c8555c157720b4">command_smartstartlist_lib.hpp</a>
 </li>
-<li>pop_image_key_poll()
-: <a class="el" href="ota__cache_8hpp.html#a30b97bebdb4594de970eea5537466b45">ota_cache.hpp</a>
-</li>
 <li>print_help()
 : <a class="el" href="group__dev__cli__run.html#ga006cb759e54389b2162add532190e67f">dev_cli_command_runner.h</a>
 </li>
@@ -99,13 +96,13 @@ $(document).ready(function(){initNavTree('globals_func_p.html',''); initResizabl
 : <a class="el" href="command__smartstartlist__lib_8hpp.html#ae306ede4d1bd7a5a3197364d59ecf543">command_smartstartlist_lib.hpp</a>
 </li>
 <li>PROCESS()
-: <a class="el" href="group__etimer.html#ga227a1b747fe7b8636229d296144b8ef6">etimer.c</a>
+: <a class="el" href="dev__cli__run_8c.html#a1d684186283d6eb3630ef032722c12fc">dev_cli_run.c</a>
 , <a class="el" href="uic__signal__handler_8c.html#a2539819f61408afb7617373f35443cb9">uic_signal_handler.c</a>
-, <a class="el" href="dev__cli__run_8c.html#a1d684186283d6eb3630ef032722c12fc">dev_cli_run.c</a>
 , <a class="el" href="uic__mqtt_8c.html#a9f51265935b3b3b48760a3cdfdf4d232">uic_mqtt.c</a>
-, <a class="el" href="uic__stdin__process_8c.html#acfecdbe8356bc8f016125b201c8ff46d">uic_stdin_process.c</a>
 , <a class="el" href="contiki__test__helper_8c.html#ab3e0b7e664d2a336da367884e7422f23">contiki_test_helper.c</a>
+, <a class="el" href="uic__stdin__process_8c.html#acfecdbe8356bc8f016125b201c8ff46d">uic_stdin_process.c</a>
 , <a class="el" href="group__ctimer.html#ga4241d30b742d2a169b414f6108f14798">ctimer.c</a>
+, <a class="el" href="group__etimer.html#ga227a1b747fe7b8636229d296144b8ef6">etimer.c</a>
 </li>
 <li>process_alloc_event()
 : <a class="el" href="group__process.html#ga24326129d48a7afaf618e3e01f75c086">process.c</a>
@@ -148,17 +145,23 @@ $(document).ready(function(){initNavTree('globals_func_p.html',''); initResizabl
 : <a class="el" href="group__process.html#ga6a4607d87381f2f919eb36899fa4de20">process.c</a>
 </li>
 <li>PROCESS_THREAD()
-: <a class="el" href="group__etimer.html#ga045d36807a20508f3dfea0a618e23ca7">etimer.c</a>
-, <a class="el" href="group__ctimer.html#gaf26a718bc3bf6caa93e4619f5418f3a7">ctimer.c</a>
-, <a class="el" href="contiki__test__helper_8c.html#a2fa038a75cfc951133b86ccc2d0e9eda">contiki_test_helper.c</a>
-, <a class="el" href="uic__signal__handler_8c.html#a6410d50b02879ac1c62b449e10d616ca">uic_signal_handler.c</a>
-, <a class="el" href="dev__cli__run_8c.html#a2c2c3b21a7951336fbf3ce8a453bc283">dev_cli_run.c</a>
+: <a class="el" href="contiki__test__helper_8c.html#a2fa038a75cfc951133b86ccc2d0e9eda">contiki_test_helper.c</a>
 , <a class="el" href="uic__mqtt_8c.html#ae1b0bc6a321773fe74857fec0ececa0b">uic_mqtt.c</a>
+, <a class="el" href="uic__signal__handler_8c.html#a6410d50b02879ac1c62b449e10d616ca">uic_signal_handler.c</a>
 , <a class="el" href="uic__stdin__process_8c.html#acf75191111b430f913be35deb6e0bc83">uic_stdin_process.c</a>
+, <a class="el" href="group__ctimer.html#gaf26a718bc3bf6caa93e4619f5418f3a7">ctimer.c</a>
+, <a class="el" href="dev__cli__run_8c.html#a2c2c3b21a7951336fbf3ce8a453bc283">dev_cli_run.c</a>
+, <a class="el" href="group__etimer.html#ga045d36807a20508f3dfea0a618e23ca7">etimer.c</a>
 </li>
 <li>procinit_init()
 : <a class="el" href="procinit_8h.html#a508134cda4b79fa37f3b96191f0266fa">procinit.h</a>
 , <a class="el" href="procinit_8c.html#a508134cda4b79fa37f3b96191f0266fa">procinit.c</a>
+</li>
+<li>publish_status_string()
+: <a class="el" href="ota__mqtt_8hpp.html#a7625a5c035b4a64f3774cfaf07e6d8bd">ota_mqtt.hpp</a>
+</li>
+<li>publish_status_unsigned_long()
+: <a class="el" href="ota__mqtt_8hpp.html#a0898bcb52aaa368e565023bfa0eb170e">ota_mqtt.hpp</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -166,7 +169,7 @@ $(document).ready(function(){initNavTree('globals_func_p.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Developer Command Line Interface by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:41 for Developer Command Line Interface by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

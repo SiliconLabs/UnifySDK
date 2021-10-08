@@ -17,11 +17,12 @@
 #include "sl_log.h"
 #include "uic_mqtt.h"
 #include "uic_stdin.hpp"
-#include "ota_time.hpp"
+#include "ota_time.h"
 
 // Other component includes
 #include "zwave_controller.h"
 #include "zwave_controller_keyset.h"
+#include "zwave_controller_utils.h"
 #include "zwave_tx.h"
 #include "zwave_tx_groups.h"
 #include "attribute_store.h"
@@ -66,6 +67,8 @@ static sl_status_t handle_zwave_tx_association(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx_multi(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx_flush(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx_log(const handle_args_t &arg);
+static sl_status_t
+  handle_zwave_command_handler_dispatch(const handle_args_t &arg);
 static sl_status_t handle_remove_zwave_node(const handle_args_t &arg);
 static sl_status_t handle_attribute_store_log(const handle_args_t &arg);
 static sl_status_t
@@ -132,6 +135,10 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
     " :Logs the content of the TX queue. Use 1 to print frame contents. "
     "0 to print the frames only. Default option is 0.",
     &handle_zwave_tx_log}},
+  {"zwave_command_handler_dispatch",
+   {COLOR_START "<payload>" COLOR_END
+                " :Injects a payload to the local Z-Wave dispatch handler.",
+    &handle_zwave_command_handler_dispatch}},
   {"zwave_remove_node",
    {" :Remove a z-wave node from the network", &handle_remove_zwave_node}},
   {"attribute_store_log",
@@ -144,18 +151,18 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
    {COLOR_START "<type>,<Value>" COLOR_END
                 " :Goes throught the entire attribute store and set all "
                 "attribute types to the indicated value."
-                " Value willl be stored as 4 bytes long. Arguments are in "
+                " Value willl be stored as int32_t. Arguments are in "
                 "hexadecimal format",
     &handle_attribute_store_set_all_desired_types}},
   {"attribute_store_set_desired",
    {COLOR_START "<ID>,<Value>" COLOR_END
                 " :Sets the Attribute ID to the given DESIRED value."
-                " Value is 1 byte maximum, decimal format",
+                " Value is int32_t, decimal format",
     &handle_attribute_store_set_desired}},
   {"attribute_store_set_reported",
    {COLOR_START "<ID>,<Value>" COLOR_END
                 " :Sets the Attribute ID to the given REPORTED value."
-                " Value is 1 byte maximum, decimal format",
+                " Value is int32_t, decimal format",
     &handle_attribute_store_set_reported}},
   {"attribute_store_log_node",
    {COLOR_START "<Node ID>" COLOR_END
@@ -218,16 +225,17 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
     " :Initiates a full interview for a given Endpoint under a NodeID",
     &handle_zwave_initiate_interview}},
   {"zwave_initiate_firmware_update",
-   {COLOR_START
-    "<NodeID>,<filename>" COLOR_END
-    "Initiates a firmware update of <NodeID> Endpoint 0, firmware 0, using the "
-    "specified file name for binary data. ",
+   {COLOR_START "<NodeID>,<filename>" COLOR_END
+                "Initiates a firmware update of <NodeID> Endpoint 0, "
+                "firmware 0, using the "
+                "specified file name for binary data. ",
     &handle_zwave_initiate_firmware_update}},
   {"zwave_abort_firmware_update",
    {COLOR_START "<NodeID>" COLOR_END
                 "Ensures that any firmware update of <NodeID> is stopped.",
     &handle_zwave_abort_firmware_update}},
-  {"zwave_cc_versions_log", {"Print the CC version table", &handle_cc_versions_log}},
+  {"zwave_cc_versions_log",
+   {"Print the CC version table", &handle_cc_versions_log}},
 };
 
 // Pre declaration of setup function
@@ -465,6 +473,30 @@ static sl_status_t handle_zwave_tx_flush(const handle_args_t &arg)
   return zwave_tx_init();
 }
 
+static sl_status_t
+  handle_zwave_command_handler_dispatch(const handle_args_t &arg)
+{
+  if (arg.size() != 2) {
+    dprintf(
+      out_stream,
+      "Invalid number of arguments: Payload needs to be specified.\n"
+      " Example: zwave_command_handler_dispatch 87010003500308500403500506\n");
+    return SL_STATUS_FAIL;
+  }
+  std::array<uint8_t, ZWAVE_MAX_FRAME_SIZE> frame_data;
+
+  for (std::size_t i = 0; i < (arg[1].length()); i += 2) {
+    frame_data.at(i / 2)
+      = static_cast<uint8_t>(std::stoi(arg[1].substr(i, 2), nullptr, 16));
+  }
+  zwave_controller_connection_info_t connection_info = {{{0}}};
+  connection_info.remote.node_id = zwave_network_management_get_node_id();
+  connection_info.encapsulation = zpc_highest_security_class();
+  return zwave_command_handler_dispatch(&connection_info,
+                                        frame_data.data(),
+                                        (uint16_t)(arg[1].length() / 2));
+}
+
 static sl_status_t handle_remove_zwave_node(const handle_args_t &arg)
 {
   return zwave_network_management_remove_node();
@@ -655,11 +687,10 @@ static sl_status_t handle_attribute_store_log(const handle_args_t &arg)
 static sl_status_t handle_attribute_store_set_desired(const handle_args_t &arg)
 {
   if (arg.size() != 3) {
-    dprintf(
-      out_stream,
-      "Invalid number of arguments, expected args:"
-      "attribute_store_set_desired <ID>,<Value>. Value is 1 byte maximum, "
-      "decimal\n");
+    dprintf(out_stream,
+            "Invalid number of arguments, expected args:"
+            "attribute_store_set_desired <ID>,<Value>. Value is 4 bytes, "
+            "decimal\n");
     return SL_STATUS_FAIL;
   }
   attribute_store_node_t node = ATTRIBUTE_STORE_INVALID_NODE;
@@ -669,13 +700,11 @@ static sl_status_t handle_attribute_store_set_desired(const handle_args_t &arg)
     dprintf(out_stream, "%s: Invalid argument: %s\n", arg[1].c_str(), e.what());
     return SL_STATUS_FAIL;
   }
-  uint8_t value = 0;
   try {
-    value = static_cast<uint8_t>(std::stoi(arg[2].c_str(), nullptr, 10));
-    return attribute_store_set_node_attribute_value(node,
-                                                    DESIRED_ATTRIBUTE,
-                                                    &value,
-                                                    sizeof(value));
+    int32_t value
+      = static_cast<int32_t>(std::stoi(arg[2].c_str(), nullptr, 10));
+    attribute_store::attribute(node).set_desired(value);
+    return SL_STATUS_OK;
   } catch (const std::invalid_argument &e) {
     dprintf(out_stream, "%s: Invalid argument: %s\n", arg[2].c_str(), e.what());
     return SL_STATUS_FAIL;
@@ -686,7 +715,7 @@ static void
   set_all_children_with_type(attribute_store_node_t node,
                              attribute_store_type_t type,
                              attribute_store_node_value_state_t value_state,
-                             uint32_t value)
+                             int32_t value)
 {
   if (node == ATTRIBUTE_STORE_INVALID_NODE) {
     return;
@@ -721,9 +750,9 @@ static sl_status_t
     dprintf(out_stream, "%s: Invalid argument: %s\n", arg[1].c_str(), e.what());
     return SL_STATUS_FAIL;
   }
-  uint32_t value = 0;
+  int32_t value = 0;
   try {
-    value = static_cast<uint32_t>(std::stoi(arg[2].c_str(), nullptr, 16));
+    value = static_cast<int32_t>(std::stoi(arg[2].c_str(), nullptr, 16));
 
     set_all_children_with_type(attribute_store_get_root(),
                                type,
@@ -741,11 +770,10 @@ static sl_status_t
 static sl_status_t handle_attribute_store_set_reported(const handle_args_t &arg)
 {
   if (arg.size() != 3) {
-    dprintf(
-      out_stream,
-      "Invalid number of arguments, expected args:"
-      "attribute_store_set_reported <ID>,<Value>. Value is 1 byte maximum, "
-      "decimal\n");
+    dprintf(out_stream,
+            "Invalid number of arguments, expected args:"
+            "attribute_store_set_reported <ID>,<Value>. Value is 4 bytes, "
+            "decimal\n");
     return SL_STATUS_FAIL;
   }
   attribute_store_node_t node = ATTRIBUTE_STORE_INVALID_NODE;
@@ -755,13 +783,11 @@ static sl_status_t handle_attribute_store_set_reported(const handle_args_t &arg)
     dprintf(out_stream, "%s: Invalid argument: %s\n", arg[1].c_str(), e.what());
     return SL_STATUS_FAIL;
   }
-  uint8_t value = 0;
   try {
-    value = static_cast<uint8_t>(std::stoi(arg[2].c_str(), nullptr, 10));
-    return attribute_store_set_node_attribute_value(node,
-                                                    REPORTED_ATTRIBUTE,
-                                                    &value,
-                                                    sizeof(value));
+    int32_t value
+      = static_cast<int32_t>(std::stoi(arg[2].c_str(), nullptr, 10));
+    attribute_store::attribute(node).set_reported(value);
+    return SL_STATUS_OK;
   } catch (const std::invalid_argument &e) {
     dprintf(out_stream, "%s: Invalid argument: %s\n", arg[2].c_str(), e.what());
     return SL_STATUS_FAIL;
@@ -920,7 +946,8 @@ static sl_status_t handle_zwave_abort_firmware_update(const handle_args_t &arg)
   }
 }
 
-static sl_status_t handle_cc_versions_log([[maybe_unused]] const handle_args_t &arg)
+static sl_status_t
+  handle_cc_versions_log([[maybe_unused]] const handle_args_t &arg)
 {
   zwave_command_handler_print_info(out_stream);
   return SL_STATUS_OK;

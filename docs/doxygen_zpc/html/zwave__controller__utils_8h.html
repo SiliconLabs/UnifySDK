@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -91,6 +91,7 @@ $(document).ready(function(){initNavTree('zwave__controller__utils_8h.html','');
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="zwave__controller__connection__info_8h_source.html">zwave_controller_connection_info.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__rx_8h_source.html">zwave_rx.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zwave__command__class__version__types_8h_source.html">zwave_command_class_version_types.h</a>&quot;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 </div>
 <p><a href="zwave__controller__utils_8h_source.html">Go to the source code of this file.</a></p>
@@ -118,9 +119,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gaaa5d4e371acabd40b10dcf27edd993ff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__utils.html#gaaa5d4e371acabd40b10dcf27edd993ff">zwave_node_supports_command_class</a> (<a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> command_class, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
 <tr class="memdesc:gaaa5d4e371acabd40b10dcf27edd993ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify whether a node/endpoint supports a Command Class using the attribute Store.  <a href="group__zwave__controller__utils.html#gaaa5d4e371acabd40b10dcf27edd993ff">More...</a><br /></td></tr>
 <tr class="separator:gaaa5d4e371acabd40b10dcf27edd993ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab4265d8e64973b26350c948e934e1af9"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__utils.html#gab4265d8e64973b26350c948e934e1af9">zwave_node_get_command_class_version</a> (<a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> command_class, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
-<tr class="memdesc:gab4265d8e64973b26350c948e934e1af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the version of a Command Class implemented by a node.  <a href="group__zwave__controller__utils.html#gab4265d8e64973b26350c948e934e1af9">More...</a><br /></td></tr>
-<tr class="separator:gab4265d8e64973b26350c948e934e1af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1fb87a67860c11e6e89930eb51fda21f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__command__class__version__types_8h.html#aad4ed685a718abe0fd70f07f949a4907">zwave_cc_version_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__utils.html#ga1fb87a67860c11e6e89930eb51fda21f">zwave_node_get_command_class_version</a> (<a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> command_class, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
+<tr class="memdesc:ga1fb87a67860c11e6e89930eb51fda21f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the version of a Command Class implemented by a node.  <a href="group__zwave__controller__utils.html#ga1fb87a67860c11e6e89930eb51fda21f">More...</a><br /></td></tr>
+<tr class="separator:ga1fb87a67860c11e6e89930eb51fda21f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae7aa94787eba3ff966f9307d973e43ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__utils.html#gae7aa94787eba3ff966f9307d973e43ba">zwave_parse_nif</a> (const uint8_t *nif, size_t nif_length, <a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> *supported_command_classes, size_t *supported_command_classes_length, <a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> *controlled_command_classes, size_t *controlled_command_classes_length)</td></tr>
 <tr class="memdesc:gae7aa94787eba3ff966f9307d973e43ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a NIF byte array and converts it into a lists of supported/controlled Command Classes.  <a href="group__zwave__controller__utils.html#gae7aa94787eba3ff966f9307d973e43ba">More...</a><br /></td></tr>
 <tr class="separator:gae7aa94787eba3ff966f9307d973e43ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,7 +138,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_dae23a69ab9b3e4e7b8961d2a8b892da.html">zwave_controller</a></li><li class="navelem"><a class="el" href="dir_2570bdd78b13444b3d8c7a2c537bd14f.html">include</a></li><li class="navelem"><a class="el" href="zwave__controller__utils_8h.html">zwave_controller_utils.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

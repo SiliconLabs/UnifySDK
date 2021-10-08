@@ -396,7 +396,7 @@ void test_zwave_node_supports_command_class_extended()
 void test_zwave_node_get_command_class_version_happy_case()
 {
   zwave_command_class_t command_class      = 0x9384;
-  uint8_t command_class_version            = 23;
+  zwave_cc_version_t command_class_version = 23;
   attribute_store_node_t test_version_node = 3495;
 
   zwave_unid_from_node_id_Expect(test_node_id, NULL);
@@ -414,13 +414,12 @@ void test_zwave_node_get_command_class_version_happy_case()
     0,
     test_version_node);
 
-  attribute_store_read_value_ExpectAndReturn(test_version_node,
-                                             REPORTED_ATTRIBUTE,
-                                             NULL,
-                                             sizeof(command_class_version),
-                                             true);
-  attribute_store_read_value_IgnoreArg_read_value();
-  attribute_store_read_value_ReturnMemThruPtr_read_value(
+  attribute_store_get_reported_ExpectAndReturn(test_version_node,
+                                               NULL,
+                                               sizeof(command_class_version),
+                                               SL_STATUS_OK);
+  attribute_store_get_reported_IgnoreArg_value();
+  attribute_store_get_reported_ReturnMemThruPtr_value(
     &command_class_version,
     sizeof(command_class_version));
 
@@ -449,31 +448,6 @@ void test_zwave_node_get_command_class_version_unkonwn_node()
                                                          test_endpoint_id));
 }
 
-void test_zwave_node_get_command_class_version_unknown_cc()
-{
-  zwave_command_class_t command_class = 0x9384;
-
-  zwave_unid_from_node_id_Expect(test_node_id, NULL);
-  zwave_unid_from_node_id_IgnoreArg_unid();
-  zwave_unid_from_node_id_ReturnMemThruPtr_unid(test_unid, sizeof(unid_t));
-
-  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
-    test_unid,
-    test_endpoint_id,
-    test_endpoint_node);
-
-  attribute_store_get_node_child_by_type_ExpectAndReturn(
-    test_endpoint_node,
-    ZWAVE_CC_VERSION_ATTRIBUTE(command_class),
-    0,
-    ATTRIBUTE_STORE_INVALID_NODE);
-
-  TEST_ASSERT_EQUAL(0,
-                    zwave_node_get_command_class_version(command_class,
-                                                         test_node_id,
-                                                         test_endpoint_id));
-}
-
 void test_zwave_node_get_command_class_version_read_error()
 {
   zwave_command_class_t command_class      = 0x9384;
@@ -494,12 +468,11 @@ void test_zwave_node_get_command_class_version_read_error()
     0,
     test_version_node);
 
-  attribute_store_read_value_ExpectAndReturn(test_version_node,
-                                             REPORTED_ATTRIBUTE,
-                                             NULL,
-                                             sizeof(uint8_t),
-                                             false);
-  attribute_store_read_value_IgnoreArg_read_value();
+  attribute_store_get_reported_ExpectAndReturn(test_version_node,
+                                               NULL,
+                                               sizeof(zwave_cc_version_t),
+                                               SL_STATUS_FAIL);
+  attribute_store_get_reported_IgnoreArg_value();
 
   TEST_ASSERT_EQUAL(0,
                     zwave_node_get_command_class_version(command_class,

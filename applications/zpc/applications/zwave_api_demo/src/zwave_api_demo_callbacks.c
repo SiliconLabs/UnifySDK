@@ -51,7 +51,7 @@ void zwapi_demo_application_handler(uint8_t rx_status,
                       "%02X ",
                       zwave_command[i]);
   }
-  sl_log_info(LOG_TAG, "%s\n", message);
+  sl_log_debug(LOG_TAG, "%s\n", message);
 }
 
 void zwapi_demo_application_controller_update(uint8_t status,
@@ -87,18 +87,18 @@ void zwapi_demo_application_controller_update(uint8_t status,
                       "%02X ",
                       zwave_nif[i]);
   }
-  sl_log_info(LOG_TAG, "%s\n", message);
+  sl_log_debug(LOG_TAG, "%s\n", message);
 }
 
 void zwapi_demo_send_nif_callback(uint8_t tx_status)
 {
   if (tx_status == TRANSMIT_COMPLETE_OK) {
-    sl_log_info(LOG_TAG, "NIF transmitted succesfully\n");
+    sl_log_debug(LOG_TAG, "NIF transmitted succesfully\n");
   } else if (tx_status == TRANSMIT_COMPLETE_NO_ACK) {
-    sl_log_warning(LOG_TAG, "NIF not Ack'ed, destination might be sleepy!\n");
+    sl_log_info(LOG_TAG, "NIF not Ack'ed, destination might be sleepy!\n");
   } else if (tx_status == TRANSMIT_COMPLETE_FAIL) {
-    sl_log_warning(LOG_TAG,
-                   "NIF could not be transmitted, network may be jammed!\n");
+    sl_log_info(LOG_TAG,
+                "NIF could not be transmitted, network may be jammed!\n");
   }
 }
 
@@ -140,8 +140,8 @@ void zwapi_demo_node_add_callback(LEARN_INFO *new_node_information)
 
     case ADD_NODE_STATUS_NOT_PRIMARY:
       sl_log_error(LOG_TAG,
-                   "Z-Wave module is not primary controller. Do not call add "
-                   "node again!\n");
+                   "Z-Wave module is not primary controller. "
+                   "Do not call add node again!\n");
       break;
   }
 }
@@ -195,8 +195,8 @@ void zwapi_demo_node_remove_failed_callback(uint8_t tx_status)
   } else if (tx_status == ZW_FAILED_NODE_REMOVED) {
     sl_log_info(LOG_TAG, "The failed node was succesfully removed\n");
   } else if (tx_status == ZW_FAILED_NODE_NOT_REMOVED) {
-    sl_log_error(LOG_TAG,
-                 "An error occurred and the node could not be removed\n");
+    sl_log_info(LOG_TAG,
+                "An error occurred and the node could not be removed\n");
   }
 }
 

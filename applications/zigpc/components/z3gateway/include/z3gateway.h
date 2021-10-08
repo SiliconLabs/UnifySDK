@@ -24,6 +24,7 @@
 #define Z3GATEWAY_H
 
 #include "z3gateway_callbacks.h"
+#include "app/util/ezsp/ezsp-enum.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -106,7 +107,7 @@ EmberStatus z3gatewayGetCountersList(uint16_t list[EMBER_COUNTER_TYPE_COUNT]);
 
 /**
  * @brief Clears the counters of counter plugin
- * 
+ *
  */
 void z3gatewayClearCounters();
 
@@ -195,6 +196,26 @@ EmberStatus z3gatewayTrustCenterJoinOpen(bool openForever);
  *                      EMBER_NETWORK_DOWN if the network is not initialized.
  */
 EmberStatus z3gatewayTrustCenterJoinClose(void);
+
+/**
+ * @brief Retrieve the Trust Center well-known link key.
+ *
+ * @return EmberKeyData
+ */
+EmberKeyData z3gatewayGetTrustCenterWellKownKey(void);
+
+/**
+ * @brief Add link key to either to the regular or transient key table.
+ *
+ * @param eui64             Device that will be using the key (or wildcard).
+ * @param key               Link key data
+ * @param inTransientTable  Store key in either the regular or transient table.
+ * @return EmberStatus      EMBER_SUCCESS on success, or EZSP-related error
+ * occured when requesting key to be added.
+ */
+EmberStatus z3gatewayTrustCenterAddLinkKey(const EmberEUI64 eui64,
+                                           const EmberKeyData *key,
+                                           bool inTransientTable);
 
 /**
  * @brief Add a device to the network using the Z3 Install Code method.
@@ -329,7 +350,7 @@ EmberStatus z3gatewayInitBinding(const EmberEUI64 eui64,
 EmberStatus z3gatewaySendPollingCheckInResponse(void);
 
 /**
- * @brief z3gatewayAddOtaImage 
+ * @brief z3gatewayAddOtaImage
  * Manually adds an OtaImage to the ota-server plugin
  *
  * @param filename - the filename of the OTA Image
@@ -338,7 +359,31 @@ EmberStatus z3gatewaySendPollingCheckInResponse(void);
  * Fails if the ota-storage plugin was unable to parse
  * the filename correctly with EMBER_ERR_FATAL
 **/
-EmberStatus z3gatewayAddOtaImage(const char* filename);
+EmberStatus z3gatewayAddOtaImage(const char *filename);
+
+/**
+ * @brief Populate Ember key data specified by the type.
+ *
+ * @param type          Ember key type to get.
+ * @param key           reference where data will be populated.
+ * @return EmberStatus  EMBER_SUCCESS on success, or error otherwise.
+ */
+EmberStatus z3gatewayGetEmberKey(EmberKeyType type, EmberKeyStruct *const key);
+
+/**
+ * @brief Set EZSP policy on the ZigPC NCP.
+ *
+ * @param policyId      Type of policy to apply.
+ * @param decisionId    Policy variant to apply.
+ * @param policyName    Descriptive name of policy.
+ * @param decisionName  Descruptive label of decision to be set.
+ * @return EzspStatus   EMBER_SUCCESS on success, or EZSP-related error
+ * otherwise.
+ */
+EzspStatus z3gatewaySetEzspPolicy(EzspPolicyId policyId,
+                                  EzspDecisionId decisionId,
+                                  const char *policyName,
+                                  const char *decisionName);
 
 #ifdef __cplusplus
 }

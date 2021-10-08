@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -104,44 +104,11 @@ Functions</h2></td></tr>
 <tr class="memitem:af0c6d4bcdf574dab1afeb1da8b72c1e9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__time_8hpp.html#af0c6d4bcdf574dab1afeb1da8b72c1e9">get_utc_time_string_from_utc_time</a> (time_t time_input_utc)</td></tr>
 <tr class="memdesc:af0c6d4bcdf574dab1afeb1da8b72c1e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion from time to string to UTC time.  <a href="ota__time_8hpp.html#af0c6d4bcdf574dab1afeb1da8b72c1e9">More...</a><br /></td></tr>
 <tr class="separator:af0c6d4bcdf574dab1afeb1da8b72c1e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d7d7ad51ce0dad2c565bc10e4bfbdf6"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__time_8hpp.html#a1d7d7ad51ce0dad2c565bc10e4bfbdf6">calculate_utc_current_time_difference</a> (const time_t &amp;time_utc)</td></tr>
-<tr class="memdesc:a1d7d7ad51ce0dad2c565bc10e4bfbdf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate time diffrence between the local time and UTC time.  <a href="ota__time_8hpp.html#a1d7d7ad51ce0dad2c565bc10e4bfbdf6">More...</a><br /></td></tr>
-<tr class="separator:a1d7d7ad51ce0dad2c565bc10e4bfbdf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91c55ef0d4c4ab2d1170e6fbf5f7fa97"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__time_8hpp.html#a91c55ef0d4c4ab2d1170e6fbf5f7fa97">get_current_utc_current_time</a> ()</td></tr>
-<tr class="memdesc:a91c55ef0d4c4ab2d1170e6fbf5f7fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current UTC time.  <a href="ota__time_8hpp.html#a91c55ef0d4c4ab2d1170e6fbf5f7fa97">More...</a><br /></td></tr>
-<tr class="separator:a91c55ef0d4c4ab2d1170e6fbf5f7fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Time API for OTA POSIX specific. </p>
 <p>This API allows conversion of date-time strings to UTC time as an absolute time measure. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a1d7d7ad51ce0dad2c565bc10e4bfbdf6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d7d7ad51ce0dad2c565bc10e4bfbdf6">&#9670;&nbsp;</a></span>calculate_utc_current_time_difference()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">time_t calculate_utc_current_time_difference </td>
-          <td>(</td>
-          <td class="paramtype">const time_t &amp;&#160;</td>
-          <td class="paramname"><em>time_utc</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calculate time diffrence between the local time and UTC time. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">time_utc</td><td>time_t variable time in seconds.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>time_t indicating the difference in seconds since the epoch began (01/01/1970) Positive value indicates that we are ahead the UTC time Negative value indicates that we are behind the UTC time </dd></dl>
-
-</div>
-</div>
 <a id="a490338ccbe5ed5306d0b708c6a4813e5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a490338ccbe5ed5306d0b708c6a4813e5">&#9670;&nbsp;</a></span>calculate_utc_time_from_rfc_3339()</h2>
 
@@ -172,26 +139,6 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a91c55ef0d4c4ab2d1170e6fbf5f7fa97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91c55ef0d4c4ab2d1170e6fbf5f7fa97">&#9670;&nbsp;</a></span>get_current_utc_current_time()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">time_t get_current_utc_current_time </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the current UTC time. </p>
-<dl class="section return"><dt>Returns</dt><dd>time_t value indicating the number of seconds since the epoch began (01/01/1970) </dd></dl>
 
 </div>
 </div>
@@ -228,7 +175,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_79802ae3566d880275ef9cc4670d3b68.html">uic_ota</a></li><li class="navelem"><a class="el" href="dir_954e2300b3d3d25fc435b06538671d1c.html">platform</a></li><li class="navelem"><a class="el" href="dir_2aca6073f13bd364625e4895edfe4f8a.html">posix</a></li><li class="navelem"><a class="el" href="ota__time_8hpp.html">ota_time.hpp</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

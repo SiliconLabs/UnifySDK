@@ -29,6 +29,7 @@ namespace ast
 {
 typedef char value_type_t;
 typedef std::pair<attribute_store_type_t, value_type_t> attribute_dependency_t;
+typedef std::vector<attribute_dependency_t> dependencies_t;
 
 /**
  * @brief Dependency evaluator
@@ -43,37 +44,35 @@ typedef std::pair<attribute_store_type_t, value_type_t> attribute_dependency_t;
 class dep_eval
 {
   public:
-  /**
-   * @brief Construct a new dep eval object
-   * 
-   * @param global_context Not currently used
-   */
-  dep_eval(const ast_tree &global_context);
-
-  void operator()(nil) {}
-  void operator()(unsigned int n) {}
-  void operator()(const attribute &a);
-  void operator()(const operation &x);
-  void operator()(const signed_ &x);
-  void operator()(const condition &x);
+  const dependencies_t &operator()(nil)
+  {
+    return dependencies;
+  }
+  const dependencies_t &operator()(unsigned int n)
+  {
+    return dependencies;
+  }
+  const dependencies_t &operator()(const attribute &a);
+  const dependencies_t &operator()(const operation &x);
+  const dependencies_t &operator()(const signed_ &x);
+  const dependencies_t &operator()(const condition &x);
 
   /**
    * @brief This is the normal entry point of the evaluator.
    *
    * @param x Top level expression to start from 
    */
-  void operator()(const expression &x);
+  const dependencies_t &operator()(const expression &x);
 
   /**
    * @brief Get the list of dependencies
    * 
-   * @return const std::set<attribute_dependency_t>& 
+   * @return const std::vector<attribute_dependency_t>& 
    */
-  const std::set<attribute_dependency_t> &get_dependencies();
+  const dependencies_t &get_dependencies() const;
 
   private:
-  const ast_tree &global_context;
-  std::set<attribute_dependency_t> dependencies;
+  dependencies_t dependencies;
 };
 
 /**
@@ -91,29 +90,34 @@ class dep_eval_path
    * @param global_context Not currently used
    * @param value_type Desired or reported 
    */
-  dep_eval_path(const ast_tree &global_context, value_type_t value_type);
+  dep_eval_path(value_type_t value_type);
 
   /// operand, usually a literal constant number
-  void operator()(const ast::operand &operand);
+  const dependencies_t &operator()(const ast::operand &operand);
   /// hat operator ^ (parent)
-  void operator()(const nil &nul) {}
+  const dependencies_t &operator()(const nil &nul)
+  {
+    return dependencies;
+  }
   /// just given by type id
-  void operator()(unsigned int type_id);
+  const dependencies_t &operator()(unsigned int type_id);
   /// Subscript operator
-  void operator()(const attribute_path_subscript &subscript);
+  const dependencies_t &operator()(const attribute_path_subscript &subscript);
+  /// One path element
+  const dependencies_t &operator()(const attribute_path_element &path_element);
   /// parse a path list,
-  void operator()(const std::vector<attribute_path_element> &paths);
+  const dependencies_t &
+    operator()(const std::vector<attribute_path_element> &paths);
 
   /**
    * @brief Get the dependencies list
    * 
-   * @return const std::set<attribute_dependency_t>& 
+   * @return const std::vector<attribute_dependency_t>& 
    */
-  const std::set<attribute_dependency_t> &get_dependencies();
+  const dependencies_t &get_dependencies() const;
 
   private:
-  const ast_tree &global_context;
-  std::set<attribute_dependency_t> dependencies;
+  dependencies_t dependencies;
   value_type_t value_type;
 };
 

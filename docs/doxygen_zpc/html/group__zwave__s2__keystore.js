@@ -23,5 +23,6 @@ var group__zwave__s2__keystore =
     [ "zwave_s2_keystore_get_assigned_keys", "group__zwave__s2__keystore.html#ga42cbe7b3856c32fcde78b52c3b0be2ae", null ],
     [ "zwave_s2_keystore_get_dsk", "group__zwave__s2__keystore.html#gaaa90915209c3b118a05cc8adb221f83e", null ],
     [ "zwave_s2_keystore_init", "group__zwave__s2__keystore.html#gad872f58f76c4d4974b5fe50ac641004b", null ],
-    [ "zwave_s2_keystore_set_ecdh_key_mode", "group__zwave__s2__keystore.html#ga0a7d6a1c6107a1eadcdd959fe53dd229", null ]
+    [ "zwave_s2_keystore_set_ecdh_key_mode", "group__zwave__s2__keystore.html#ga0a7d6a1c6107a1eadcdd959fe53dd229", null ],
+    [ "zwave_s2_log_security_keys", "group__zwave__s2__keystore.html#ga6e7eb7c062ee0f17a650a0e7ca7c9831", null ]
 ];

@@ -30,7 +30,7 @@ use rusqlite::{params, Connection, Error};
 use crate::upvl_json::{self, SmartStartEntry};
 use upvl_log::{self};
 
-const LOG_TAG: &'static str = "upvl_db";
+const LOG_TAG: &str = "upvl_db";
 
 /// Current Database Version.
 /// At startup [db_upgrade] checks this against the "pragma_user_version",
@@ -109,10 +109,10 @@ pub fn db_teardown(db_conn: Connection) {
 
 /// Checks if an entry is valid
 pub fn is_entry_valid(entry: &serde_json::Value) -> bool {
-    return entry["DSK"].is_string()
+    entry["DSK"].is_string()
         && entry["Include"].is_boolean()
         && entry["ProtocolControllerUnid"].is_string()
-        && entry["Unid"].is_string();
+        && entry["Unid"].is_string()
 }
 
 /// Update database for a provision in deserialized json format.
@@ -162,7 +162,7 @@ pub fn db_upsert_entry(db_conn: &Connection, mut entry: SmartStartEntry) {
             (":payload", &entry.Payload.to_string()),
         ],
     ) {
-        Ok(_) => upvl_log::log_info(LOG_TAG, format!("Updated DB for DSK {}.", entry.DSK)),
+        Ok(_) => upvl_log::log_info(LOG_TAG, format!("Updated database for DSK {}.", entry.DSK)),
         Err(err) => upvl_log::log_error(
             LOG_TAG,
             format!("Error {} when updating table with DSK {}.", err, entry.DSK),
@@ -183,7 +183,7 @@ fn entry_merge(
             return Some(serde_json::Value::Object(target));
         }
     }
-    return None;
+    None
 }
 
 ///Remove a provision by DSK.
@@ -321,7 +321,7 @@ mod test {
         db_conn
             .execute("CREATE TABLE provision(id)", [])
             .expect("Should work");
-        db_upgrade(&db_conn);
+        db_upgrade(db_conn);
     }
     #[test]
     fn test_db_upgrade_0() {
@@ -381,7 +381,7 @@ mod test {
                  "ProtocolControllerUnid": "",
                  "Unid":""}),
         };
-        db_upsert_entry(&db_conn, provision.clone());
+        db_upsert_entry(db_conn, provision.clone());
         provision
     }
     #[test]
@@ -439,11 +439,11 @@ mod test {
         let provision = SmartStartEntry {
             DSK: dsk.clone(),
             Payload: json!({
-                 "DSK": dsk.clone(),
+                 "DSK": dsk,
                  "ProtocolControllerUnid": "",
                  "Unid":""}),
         };
-        db_upsert_entry(&db_conn, provision.clone());
+        db_upsert_entry(&db_conn, provision);
         assert_eq!(
             "[]",
             serde_json::to_string(&db_list_provisions(&db_conn)).unwrap()
@@ -451,11 +451,11 @@ mod test {
         let provision = SmartStartEntry {
             DSK: dsk.clone(),
             Payload: json!({
-                 "DSK": dsk.clone(),
+                 "DSK": dsk,
                  "Include":false,
                  "Unid":""}),
         };
-        db_upsert_entry(&db_conn, provision.clone());
+        db_upsert_entry(&db_conn, provision);
         assert_eq!(
             "[]",
             serde_json::to_string(&db_list_provisions(&db_conn)).unwrap()
@@ -463,11 +463,11 @@ mod test {
         let provision = SmartStartEntry {
             DSK: dsk.clone(),
             Payload: json!({
-                 "DSK": dsk.clone(),
+                 "DSK": dsk,
                  "Include":false,
                  "ProtocolControllerUnid": ""}),
         };
-        db_upsert_entry(&db_conn, provision.clone());
+        db_upsert_entry(&db_conn, provision);
         assert_eq!(
             "[]",
             serde_json::to_string(&db_list_provisions(&db_conn)).unwrap()

@@ -112,7 +112,7 @@ pub fn as_extern_c(item: TokenStream) -> TokenStream {
 /// * replaces body with code required to call the rust function.
 fn transmute_to_c_wrapper(func: &mut syn::ItemFn) {
     func.block.stmts.clear();
-    func.block.stmts.push(compose_actual_call(&func));
+    func.block.stmts.push(compose_actual_call(func));
     func.sig.ident = quote::format_ident!("{}_c", func.sig.ident);
     convert_args_to_c_types(&mut func.sig.inputs);
 }
@@ -260,7 +260,7 @@ fn char_ptr() -> syn::Type {
             qself: None,
             path: syn::Path {
                 leading_colon: Some(token::Colon2(Span::call_site())),
-                segments: segments,
+                segments,
             },
         })),
     })
@@ -294,7 +294,7 @@ fn c_ulong_ptr() -> syn::Type {
             qself: None,
             path: syn::Path {
                 leading_colon: Some(token::Colon2(Span::call_site())),
-                segments: segments,
+                segments,
             },
         })),
     })
@@ -314,12 +314,12 @@ fn u8_ptr(mutable: bool) -> syn::Type {
     syn::Type::Ptr(syn::TypePtr {
         star_token: token::Star(Span::call_site()),
         const_token: None,
-        mutability: mutability,
+        mutability,
         elem: Box::new(syn::Type::Path(syn::TypePath {
             qself: None,
             path: syn::Path {
                 leading_colon: None,
-                segments: segments,
+                segments,
             },
         })),
     })
@@ -335,7 +335,7 @@ fn u16_t() -> syn::Type {
         qself: None,
         path: Path {
             leading_colon: None,
-            segments: segments,
+            segments,
         },
     })
 }

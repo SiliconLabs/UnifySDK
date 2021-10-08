@@ -34,19 +34,6 @@ var zwave__utils_8h =
     [ "zwave_home_id_t", "group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2", null ],
     [ "zwave_node_id_t", "group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935", null ],
     [ "zwave_nodemask_t", "group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0", null ],
-    [ "zwave_operating_mode_t", "group__zwave__utils.html#ga8bbb481ea6707182dc397268b4de3846", null ],
-    [ "zwave_protocol_t", "group__zwave__utils.html#gaf5484bdd20ebce433593702cc9c26b9b", null ],
-    [ "zwave_operating_mode", "group__zwave__utils.html#gae08ff4e6c7eaf1776bacc293350f552d", [
-      [ "OPERATING_MODE_AL", "group__zwave__utils.html#ggae08ff4e6c7eaf1776bacc293350f552da82316bcf93c2d59b54fa1180dfd1fffe", null ],
-      [ "OPERATING_MODE_FL", "group__zwave__utils.html#ggae08ff4e6c7eaf1776bacc293350f552daf05f56194d8ab3c5ac4397299700ca36", null ],
-      [ "OPERATING_MODE_NL", "group__zwave__utils.html#ggae08ff4e6c7eaf1776bacc293350f552da53e65ed8cf915777737a47db0bcd14d8", null ],
-      [ "OPERATING_MODE_UNKNOWN", "group__zwave__utils.html#ggae08ff4e6c7eaf1776bacc293350f552da775769d88085c66825aeb1ce269753d5", null ]
-    ] ],
-    [ "zwave_protocol", "group__zwave__utils.html#gac806884442257ed7635f299b4ba7d998", [
-      [ "PROTOCOL_ZWAVE", "group__zwave__utils.html#ggac806884442257ed7635f299b4ba7d998a276e933e6a627c7728a007c510fba4e7", null ],
-      [ "PROTOCOL_ZWAVE_LONG_RANGE", "group__zwave__utils.html#ggac806884442257ed7635f299b4ba7d998a02360a62341ba147c9e4e9d4654b6a4b", null ],
-      [ "PROTOCOL_UNKNOWN", "group__zwave__utils.html#ggac806884442257ed7635f299b4ba7d998a6efaad26f583a75bbab8867546966e53", null ]
-    ] ],
     [ "get_operating_mode", "group__zwave__utils.html#ga0c8feec1efda2517e43c69571deb3bfd", null ],
     [ "get_protocol", "group__zwave__utils.html#gaa553f79c1a3129d5f67468275f2cdd4d", null ],
     [ "store_protocol", "group__zwave__utils.html#ga316d5f3b287b702bde7c8e5fa6d788ed", null ],

@@ -11,7 +11,7 @@ var structzwave__controller__callbacks__t =
     [ "on_new_suc", "structzwave__controller__callbacks__t.html#a92a84510c5908c814787ccd2ca9dfdb1", null ],
     [ "on_node_added", "structzwave__controller__callbacks__t.html#afd3dad357221cdea96ac8dc541e99ceb", null ],
     [ "on_node_deleted", "structzwave__controller__callbacks__t.html#a7ed2767264b1e1025479d66c4f425529", null ],
-    [ "on_node_id_assigned", "structzwave__controller__callbacks__t.html#a53d3dd7a41b4a34c598c5a75cd377a5f", null ],
+    [ "on_node_id_assigned", "structzwave__controller__callbacks__t.html#aa3666720b2ce77559deba06024b1e66e", null ],
     [ "on_node_info_req_failed", "structzwave__controller__callbacks__t.html#a25a0dfbd5a13d202677f2d81c28d2311", null ],
     [ "on_node_information", "structzwave__controller__callbacks__t.html#a26a5d2e011231eee37a44a79caf3e7e1", null ],
     [ "on_request_neighbor_update", "structzwave__controller__callbacks__t.html#a5308fde27fd89161ae26b8488b22b4d1", null ],

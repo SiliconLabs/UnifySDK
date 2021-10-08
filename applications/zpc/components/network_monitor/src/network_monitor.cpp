@@ -22,6 +22,7 @@
 
 // Interfaces
 #include "ucl_definitions.h"
+#include "zwave_command_class_wake_up_types.h"
 
 // Includes from other components
 #include "zpc_endian.h"
@@ -99,9 +100,19 @@ struct node_added_event_data {
   zwave_protocol_t inclusion_protocol;
 };
 
+
+/**
+ * @brief Struct used for sending event data with event \ref NODE_ID_ASSIGNED_EVENT.
+ */
+struct node_id_assigned_event_data {
+  zwave_node_id_t node_id;              ///< Node ID
+  zwave_protocol_t inclusion_protocol;
+};
+
+
 struct network_monitor_sleeping_node_info {
   struct ctimer timer;
-  uint32_t wakeup_interval;
+  wake_up_interval_t wakeup_interval;
   zwave_node_id_t node_id;
   bool
     network_status;  // Status that represents the availability of the sleeping node
@@ -124,8 +135,10 @@ static unid_t zpc_unid;
 static zwave_nodemask_t current_node_list;
 
 // Forward declarations
-static void network_monitor_on_node_id_assigned(zwave_node_id_t node_id,
-                                                bool included_by_us);
+static void
+  network_monitor_on_node_id_assigned(zwave_node_id_t node_id,
+                                      bool included_by_us,
+                                      zwave_protocol_t inclusion_protocol);
 static void network_monitor_on_node_deleted(zwave_node_id_t node_id);
 static void network_monitor_on_node_added(sl_status_t status,
                                           const zwave_node_info_t *nif,
@@ -192,12 +205,21 @@ static attribute_store_node_t
   return attribute_store_network_helper_get_node_id_node(unid);
 }
 
-static void network_monitor_on_node_id_assigned(zwave_node_id_t node_id,
-                                                bool included_by_us)
+static void
+  network_monitor_on_node_id_assigned(zwave_node_id_t node_id,
+                                      bool included_by_us,
+                                      zwave_protocol_t inclusion_protocol)
 {
+  struct node_id_assigned_event_data *event_data
+    = new struct node_id_assigned_event_data;
+  // Copy all the data about this new added node.
+  event_data->node_id            = node_id;
+  event_data->inclusion_protocol = inclusion_protocol;
+
+
   process_post(&network_monitor_process,
                NODE_ID_ASSIGNED_EVENT,
-               (void *)(intptr_t)node_id);
+               event_data);
 }
 
 static void network_monitor_on_nif_updated(attribute_store_node_t updated_node,
@@ -297,6 +319,7 @@ static void network_monitor_on_frame_received(
   network_monitor_handle_event_success_frame_transmission(
     connection_info->remote.node_id);
 }
+
 /**
  * @brief Create nodes in the attribute store for all
  * nodes currently in the network
@@ -443,7 +466,7 @@ static void network_monitor_remove_attribute_store_home_id(unid_t old_unid)
 static void network_monitor_remove_attribute_store_node(zwave_node_id_t node_id)
 {
   sl_log_debug(LOG_TAG,
-               "Removing NodeID %03d from the Attribute Store.",
+               "Removing NodeID %d from the Attribute Store.",
                node_id);
   // Find out attribute store node based on the zwave_node_id_t
   attribute_store_node_t node_id_node
@@ -468,7 +491,7 @@ static attribute network_monitor_add_attribute_store_node(
 {
   sl_log_debug(
     LOG_TAG,
-    "Making sure that NodeID %03d (with endpoint 0) is in the Attribute Store.",
+    "Making sure that NodeID %d (with endpoint 0) is in the Attribute Store.",
     node_id);
   unid_t unid;
   zwave_unid_from_node_id(node_id, unid);
@@ -625,12 +648,13 @@ static void
   sleeping_nodes_status.clear();
 }
 
-static void
-  network_monitor_handle_event_node_id_assigned(zwave_node_id_t node_id)
+static void network_monitor_handle_event_node_id_assigned(
+  node_id_assigned_event_data *event_data)
 {
   network_monitor_add_attribute_store_node(
-    node_id,
+    event_data->node_id,
     NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED);
+  store_protocol(event_data->node_id, event_data->inclusion_protocol);
 }
 
 static void
@@ -680,6 +704,16 @@ static void network_monitor_handle_event_node_interview_done(
   }
 }
 
+static void
+  update_last_received_frame_timestamp(attribute_store_node_t node_id_node)
+{
+  unsigned long current_time = clock_seconds();
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
+                                     &current_time,
+                                     sizeof(current_time));
+}
+
 static void network_monitor_handle_event_node_deleted(zwave_node_id_t node_id)
 {
   if (node_id < ZW_MIN_NODE_ID) {
@@ -725,6 +759,9 @@ static void network_monitor_hanlde_event_failed_frame_transmission(
             network_status.set_reported<node_state_topic_state_t>(
               NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL);
           } else {
+            sl_log_info(LOG_TAG,
+                        "NodeID %d is now considered as failing/offline",
+                        node_id);
             network_status.set_reported<node_state_topic_state_t>(
               NODE_STATE_TOPIC_STATE_OFFLINE);
           }
@@ -738,9 +775,11 @@ static void network_monitor_hanlde_event_failed_frame_transmission(
 static void network_monitor_handle_event_success_frame_transmission(
   zwave_node_id_t node_id)
 {
+  attribute_store_node_t node_id_node
+    = attribute_store_node_from_zwave_node(node_id);
+  // Save that we got a successful transmission.
+  update_last_received_frame_timestamp(node_id_node);
   try {
-    attribute_store_node_t node_id_node
-      = attribute_store_node_from_zwave_node(node_id);
     attribute attr(node_id_node);
     attribute network_status = attr.child_by_type(ATTRIBUTE_NETWORK_STATUS);
     unid_t unid;
@@ -756,6 +795,7 @@ static void network_monitor_handle_event_success_frame_transmission(
           NODE_STATE_TOPIC_INTERVIEWING);
         ucl_mqtt_initiate_node_interview(unid);
       } else {
+        sl_log_info(LOG_TAG, "NodeID %d is online again", node_id);
         network_status.set_reported<node_state_topic_state_t>(
           NODE_STATE_TOPIC_STATE_INCLUDED);
       }
@@ -776,10 +816,11 @@ static void network_monitor_handle_event_success_frame_transmission(
             NODE_STATE_TOPIC_INTERVIEWING);
           ucl_mqtt_initiate_node_interview(unid);
         } else {
+          sl_log_info(LOG_TAG, "NodeID %d is online again", node_id);
           network_status.set_reported<node_state_topic_state_t>(
             NODE_STATE_TOPIC_STATE_INCLUDED);
         }
-        clock_time_t timeout = zpc_get_config()->missing_wakeup_notification
+        clock_time_t timeout = zpc_get_config()->missing_wake_up_notification
                                * failing_list_it->second.get()->wakeup_interval;
         failing_list_it->second.get()->network_status = true;
         ctimer_set(&failing_list_it->second.get()->timer,
@@ -804,7 +845,7 @@ static void network_monitor_wakeup_interval_attribute_update(
 
   try {
     attribute attr(updated_node);
-    uint32_t wakeup_interval = attr.reported<uint32_t>();
+    wake_up_interval_t wakeup_interval = attr.reported<wake_up_interval_t>();
     // If the wakeup interval is set 0 means the node only be awake due to user action,
     // and we can not really monitor such nodes.
     if (wakeup_interval != 0) {
@@ -814,7 +855,7 @@ static void network_monitor_wakeup_interval_attribute_update(
       wakeup_node_info->wakeup_interval = wakeup_interval;
       wakeup_node_info->node_id = node_id_node.reported<zwave_node_id_t>();
       wakeup_node_info->network_status = true;
-      clock_time_t timeout = zpc_get_config()->missing_wakeup_notification
+      clock_time_t timeout = zpc_get_config()->missing_wake_up_notification
                              * wakeup_node_info->wakeup_interval;
       ctimer_set(&wakeup_node_info.get()->timer,
                  timeout * CLOCK_SECOND,
@@ -837,15 +878,15 @@ static void network_monitor_sleeping_nodes_network_status_controller(void *data)
       = attribute_store_node_from_zwave_node(read_data->node_id);
     attribute last_awaked_timestamp_node
       = node_id_node.child_by_type(ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP);
-    uint32_t last_awake_timestamp = 0;
+    unsigned long last_awake_timestamp = 0;
     if (SL_STATUS_OK
         != attribute_store_read_value(last_awaked_timestamp_node,
                                       REPORTED_ATTRIBUTE,
                                       &last_awake_timestamp,
                                       sizeof(last_awake_timestamp))) {
-      uint32_t current_time_stamp = clock_seconds();
-      uint32_t diff               = current_time_stamp - last_awake_timestamp;
-      if (diff >= (zpc_get_config()->missing_wakeup_notification
+      unsigned long current_time_stamp = clock_seconds();
+      unsigned long diff = current_time_stamp - last_awake_timestamp;
+      if (diff >= (zpc_get_config()->missing_wake_up_notification
                    * read_data->wakeup_interval)) {
         // If the network status was interviewing and the frame transmission is failed
         // the network status shall be NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL.
@@ -873,11 +914,11 @@ static void network_monitor_sleeping_nodes_network_status_controller(void *data)
 ////////////////////////////////////////////////////////////////////////////////
 void network_state_monitor_init()
 {
-  // Register for ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL attribute
+  // Register for ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL attribute
   // update that enables monitoring the sleeping nodes
   attribute_store_register_callback_by_type_and_state(
     network_monitor_wakeup_interval_attribute_update,
-    ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
     REPORTED_ATTRIBUTE);
 
   zwave_controller_register_callbacks(&network_monitor_callbacks);
@@ -920,6 +961,10 @@ PROCESS_THREAD(network_monitor_process, ev, data)
         sl_log_info(LOG_TAG, "network_monitor_process is exiting.\n");
         break;
 
+      case PROCESS_EVENT_EXITED:
+        // Do not do anything with this event, just wait to go down.
+        break;
+
       case NEW_NETWORK_EVENT:
         network_monitor_handle_event_new_network(
           static_cast<new_network_entered_data *>(data));
@@ -927,7 +972,7 @@ PROCESS_THREAD(network_monitor_process, ev, data)
 
       case NODE_ID_ASSIGNED_EVENT:
         network_monitor_handle_event_node_id_assigned(
-          static_cast<zwave_node_id_t>(reinterpret_cast<intptr_t>(data)));
+          static_cast<node_id_assigned_event_data*>(data));
         break;
 
       case NODE_ADDED_EVENT:

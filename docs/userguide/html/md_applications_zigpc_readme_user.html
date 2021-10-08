@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('md_applications_zigpc_readme_user.html
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md165"></a>
+<h1><a class="anchor" id="autotoc_md162"></a>
 Overview</h1>
 <p>The Unify SDK provides a consolidated API to observe and control devices that communicate using different sensor network protocols (Zigbee, Z-Wave, and so on) with the help of Unify Protocol Controllers.</p>
 <p>An MQTT broker is at the core of Unify SDK. It is used by Protocol Controllers to send and receive commands and information from other Unify components using the Unify Controller Language (UCL).</p>
@@ -103,79 +103,58 @@ Overview</h1>
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md166"></a>
+<h1><a class="anchor" id="autotoc_md163"></a>
 Hardware Prerequisites</h1>
 <p>Running Unify with ZigPC requires the following equipment:</p>
-<h2><a class="anchor" id="autotoc_md167"></a>
+<h2><a class="anchor" id="autotoc_md164"></a>
 Gateway Host Device: Raspberry Pi</h2>
 <p>ZigPC is officially supported on a Raspberry Pi 4 running Debian Buster (A.K.A. Raspberry Pi OS).</p>
 <p>For installation and setup, follow steps outlined in: <a href="https://www.raspberrypi.org/documentation/">https://www.raspberrypi.org/documentation/</a></p>
 <p>Find more information about Raspberry Pi OS here: <a href="https://www.raspberrypi.org/downloads/raspberry-pi-os/">https://www.raspberrypi.org/downloads/raspberry-pi-os/</a></p>
-<h2><a class="anchor" id="autotoc_md168"></a>
-Gateway NCP Device: Zigbee Radio</h2>
+<h2><a class="anchor" id="autotoc_md165"></a>
+Gateway NCP Device</h2>
 <p>Supported radios: EFR32MG1X or EFR32MG2X Supported EZSP protocol: UART (SPI not officially supported)</p>
-<p>There are two ways to get the NCP image:</p>
-<h3><a class="anchor" id="autotoc_md169"></a>
-Using Pre-built NCP Images</h3>
-<p>A single radio should be designated as a Zigbee Gateway NCP that ZigPC connects to.</p>
-<p>The Gecko SDK provides ready-made NCP images available under the following path: <code>&lt;GECKO_SDK&gt;/protocol/zigbee/ncp-images/*</code></p>
-<p>The folders underneath are distinguished by the format: &lt;part_number&gt;-&lt;board_number&gt;</p>
-<h3><a class="anchor" id="autotoc_md170"></a>
-Building NCP FW Using Studio</h3>
-<p>Follow section 2 from the following application note to build a NCP application using the Simplicity Studio IDE: <a href="https://www.silabs.com/documents/public/application-notes/an1010-customized-ncp.pdf">AN1010: Building a Customized NCP Application</a></p>
-<h2><a class="anchor" id="autotoc_md171"></a>
-PAN Device: Zigbee Light</h2>
-<p>A Zigbee 3.0 Light application is used as an example device that can join the ZigPC network.</p>
-<p>Follow the instructions in <em>Section 4: Starting an Example Application</em> in <a href="https://www.silabs.com/documents/public/quick-start-guides/qsg106-efr32-zigbee-pro.pdf">QSG106: Zigbee EmberZNet PRO Quick-Start Guide</a> to create a <b>Z3Light</b> Application.</p>
-<p>NOTE: before the Appbuilder project generation, ensure the following changes are made:</p><ol type="1">
-<li>In the <em>Plugins</em> tab, ensure the "Binding Table Size" in the "Binding Table
-Library" plugin is bigger is considerable enough to accommodate ZCL groups (uses multicast bindings) and attribute reporting (to allow ZigPC to receive automated attribute updates). For the Z3Light project, this should be at least 16.</li>
-</ol>
-<div class="fragment"><div class="line">Plugins tab -&gt; Binding Table Library -&gt;    Binding Table Size &gt; 16</div>
-</div><!-- fragment --><ol type="1">
-<li>[OPTIONAL] In the <em>Plugins</em> tab, ensure the "Reporting Table Size" in the "Reporting" plugin is bigger than the number of attributes supported in each device endpoint cluster. For the Z3Light project, this should be at least 9.</li>
-</ol>
-<div class="fragment"><div class="line">Plugins tab -&gt; Reporting -&gt;    Reporting Table Size &gt; 9</div>
-<div class="line">NOTE: In the Appbuilder project, see EMBER_AF_GENERATED_REPORTING_CONFIG_DEFAULTS_TABLE_SIZE for the recommended minimum size</div>
-</div><!-- fragment --><blockquote class="doxtable">
-<p><em>NOTE: If the reporting table size is not sufficient to support all attributes, Unify IoT Services will need to use the ForceReadAttributes command to get updated attribute states</em> </p>
-</blockquote>
-<p>Follow the steps below to create and flash the Zigbee Z3Light Image:</p>
-<h2><a class="anchor" id="autotoc_md172"></a>
-Flashing Devices</h2>
-<p>For flashing device firmware onto the Zigbee radios, see <em>Section 4.4: Compiling and Flashing the Application</em> in <a href="https://www.silabs.com/documents/public/quick-start-guides/qsg106-efr32-zigbee-pro.pdf">QSG106: Zigbee EmberZNet PRO Quick-Start Guide</a>.</p>
+<h2><a class="anchor" id="autotoc_md166"></a>
+PAN Zigbee Device</h2>
+<p>Currently supported Zigbee device configurations:</p><ul>
+<li>Zigbee 3.0 with Install Code</li>
+</ul>
+<p>See the Appendix section at the bottom of the guide for steps to configure example NCP and Z3Light device FW images.</p>
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md173"></a>
+<h1><a class="anchor" id="autotoc_md167"></a>
 Installing ZigPC</h1>
 <p>All of the Unify components below (MQTT Broker, UPVL client and ANGEL client) should be installed before running the ZigPC. Running Unify with ZigPC requires using an MQTT Broker. Unify currently supports using Mosquitto MQTT (<a href="https://mosquitto.org/">https://mosquitto.org/</a>).</p>
 <p>See the "Getting Started" section in <a class="el" href="index.html#md_README">Unify SDK Overview</a> to unzip and install the Unify components.</p>
-<h2><a class="anchor" id="autotoc_md174"></a>
+<h2><a class="anchor" id="autotoc_md168"></a>
 Description of Installed Components</h2>
 <p>After the packages are installed, the following services and libraries are available on the Raspberry Pi:</p>
-<h3><a class="anchor" id="autotoc_md175"></a>
+<h3><a class="anchor" id="autotoc_md169"></a>
 Mosquitto MQTT System Service</h3>
 <p>The Mosquitto MQTT broker is installed as a system service running in the background. It should be started before attempting to launch any Unify component. Otherwise, Unify components may not launch properly and may not communicate to each other properly.</p>
-<h3><a class="anchor" id="autotoc_md176"></a>
+<h3><a class="anchor" id="autotoc_md170"></a>
 Mosquitto MQTT Clients: mosquitto_pub, mosquitto_sub</h3>
 <p>The Mosquitto publish &amp; subscribe tools can be used to interact with the Unify MQTT broker by providing a topic and a message payload (if publishing).</p>
-<h3><a class="anchor" id="autotoc_md177"></a>
+<h3><a class="anchor" id="autotoc_md171"></a>
 libuic.so</h3>
-<p>This library contains the runtime dependencies needed for some Unify components (including ZigPC). See <a class="el" href="md_doc_readme_uic_application_developer.html">Unify SDK Library Developer Guide</a> for more details.</p>
-<h3><a class="anchor" id="autotoc_md178"></a>
+<p>This library contains the runtime dependencies used by some Unify components (including ZigPC). See <a class="el" href="md_doc_readme_uic_application_developer.html">Unify SDK Library Developer Guide</a> for more details.</p>
+<h3><a class="anchor" id="autotoc_md172"></a>
 uic-upvl</h3>
 <p>The Unify SDK Provisioning List (UPVL) maintains the UCL SmartStart topics (and its List, Update, and Remove subtopics. See <a class="el" href="md_applications_upvl_readme_user.html">UPVL User Guide</a> for more details.</p>
-<h3><a class="anchor" id="autotoc_md179"></a>
+<h3><a class="anchor" id="autotoc_md173"></a>
 uic-angel</h3>
-<p>An application that book-keeps groups data among the different protocol controllers. It publishes its state on ucl/by-group topics. See <a class="el" href="md_applications_angel_readme_user.html">ANGEL User Guide</a> for more details.</p>
-<h3><a class="anchor" id="autotoc_md180"></a>
+<p>Unify IoT service that book-keeps groups data among different Protocol Controllers. It manages the ucl/by-group/# topic space. See <a class="el" href="md_applications_angel_readme_user.html">ANGEL User Guide</a> for more details.</p>
+<h3><a class="anchor" id="autotoc_md174"></a>
+uic-image-provider</h3>
+<p>Unify IoT service that stores and distributes OTA Firmware images for Protocol Controllers over UCL. It manages the ucl/OTA/# topic space. See <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider User's Guide</a> for more details.</p>
+<h3><a class="anchor" id="autotoc_md175"></a>
 ZigPC</h3>
 <p>The Zigbee Protocol Controller application connects to the Mosquitto MQTT broker, sets up a PAN as a Zigbee Coordinator, and relays messages using the Zigbee NCP connected on a serial port.</p>
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md181"></a>
+<h1><a class="anchor" id="autotoc_md176"></a>
 Starting ZigPC on the Command Line</h1>
 <ol type="1">
 <li>Run the MQTT Broker on the Raspberry Pi. <div class="fragment"><div class="line">systemctl start mosquitto</div>
@@ -212,60 +191,58 @@ Starting ZigPC on the Command Line</h1>
 <p><em>NOTE: Run <code>zigpc --help</code> to see a full list of supported parameters</em> </p>
 </blockquote>
 <blockquote class="doxtable">
-<p><em>NOTE: ZigPC serial argument point to the UART-EZSP port exposed by the Zigbee NCP. This path will be different based on the configuration of tty devices connected to your Rapsberry Pi</em> </p>
+<p><em>NOTE: ZigPC serial argument point to the UART-EZSP port exposed by the Zigbee NCP. This path will be different based on the configuration of tty devices connected to your Raspberry Pi</em> </p>
 </blockquote>
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md182"></a>
+<h1><a class="anchor" id="autotoc_md177"></a>
 Understanding ZigPC Functions</h1>
 <p>The Zigbee Protocol Controller performs network discovery and device servicing for sleepy and non-sleepy Zigbee devices. The following section outline some of the different functions ZigPC performs.</p>
-<h2><a class="anchor" id="autotoc_md183"></a>
+<h2><a class="anchor" id="autotoc_md178"></a>
 Device Addressing</h2>
 <p>Unify uses a unique identifier when addressing nodes included by different protocol controllers called a Unified Node Identifier (UNID). ZigPC uses the Extended Unique Identifier of the device (EUI64) as part of the UNID to relay messages between Unify and Zigbee devices: <code>zb-&lt;EUI64_IN_BIG_ENDIAN&gt;</code></p>
 <p>For example, if the EUI64 of a device is <code>00-11-22-33-44-55-66-77</code>, the UNID will be: <code>zb-0011223344556677</code></p>
-<h2><a class="anchor" id="autotoc_md184"></a>
+<h2><a class="anchor" id="autotoc_md179"></a>
 Zigbee Node Commissioning</h2>
 <p>ZigPC currently only supports adding Zigbee devices using the Unify SmartStart List functionality. The currently supported format recognized by ZigPC is the Z3 Install Codes based Device-Specific key (DSK). See Unify Specification Section 3.7.1 for more details.</p>
-<h3><a class="anchor" id="autotoc_md185"></a>
+<h3><a class="anchor" id="autotoc_md180"></a>
 Z3 Install Code-Based Provisioning</h3>
 <p>The Unify SmartStart List enables easily adding pre-provisioned devices to the network using a protocol-specific Device-Specific Key (DSK). The SmartStart List is managed by another Unify component called uic-upvl.</p>
 <p>Currently, ZigPC uses DSKs that contain information from the out-of-band Zigbee 3.0 Installation Code method to permit a Zigbee device to join the network.</p>
 <p><b>DSK Format:</b></p>
-<p>ZigPC Accepts SmartStart entries that have the following DSK format in groups of two hexadecimal values:</p>
-<p><code>&lt;END_DEVICE_EUI64&gt;-&lt;END_DEVICE_INSTALL_CODE&gt;-&lt;END_DEVICE_INSTALL_CODE_CRC&gt;</code></p>
-<p>For example, if the Zigbee device EUI64 (big endian) is 0x00 0xAA 0x11 0xBB 0x22 0xCC 0x33 0xDD and the install code (big endian) is 0x0A 0x0B 0x0C 0x0D 0xE 0xF 0x1 0x2 with a CRC of 0x7B8A, the DSK should be:</p>
-<p><code>00-AA-11-BB-22-CC-33-DD-0A-0B-0C-0D-0E-0F-01-02-7B-8A</code></p>
-<p>After a Z3 Install code-based SmartStart DSK has been recognized in the Unify published SmartStart List, ZigPC will extract and add the Install Code and EUI64 pair to ZigPC. When network-steering is performed on the joining node, ZigPC will validate using the Install Code based Link key extracted and allow the device to join the network.</p>
+<p>ZigPC Accepts SmartStart entries that have the following DSK format in groups of two hexadecimal values: </p><div class="fragment"><div class="line">&lt;END_DEVICE_EUI64&gt;-&lt;END_DEVICE_INSTALL_CODE&gt;-&lt;END_DEVICE_INSTALL_CODE_CRC&gt;</div>
+</div><!-- fragment --><p>For example, if the Zigbee device EUI64 (big endian) is 0x00 0xAA 0x11 0xBB 0x22 0xCC 0x33 0xDD and the install code (big endian) is 0x0A 0x0B 0x0C 0x0D 0xE 0xF 0x1 0x2 with a CRC of 0x7B8A, the DSK should be: </p><div class="fragment"><div class="line">00-AA-11-BB-22-CC-33-DD-0A-0B-0C-0D-0E-0F-01-02-7B-8A</div>
+</div><!-- fragment --><p>After a Z3 Install code-based SmartStart DSK has been recognized in the Unify published SmartStart List, ZigPC will extract and add the Install Code and EUI64 pair to ZigPC. When network-steering is performed on the joining node, ZigPC will validate using the Install Code based Link key extracted and allow the device to join the network.</p>
 <p>See (AN1089: Using Installation Codes with Zigbee Devices)[<a href="https://www.silabs.com/documents/public/application-notes/an1089-using-installation-codes-with-zigbee-devices.pdf">https://www.silabs.com/documents/public/application-notes/an1089-using-installation-codes-with-zigbee-devices.pdf</a>] for more details on how to setup Z3 Install Codes on joining devices.</p>
 <p>UCL topics used:</p><ul>
 <li>Subscribing to the current list of SmartStart entries: <code>ucl/SmartStart/List</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md186"></a>
-Device Discovery</h2>
-<p>Once added to the network, ZigPC performs device interviewing to retrieve the ZCL clusters supported per each endpoint on the device. After the device interview process finishes, bindings and attribute reports are configured to publish attribute updates to Unify. In addition, ZigPC publishes the commands supported by these ZCL clusters.</p>
-<p>UCL topics used:</p><ul>
-<li>Publishing supported commands for ZCL clusters discovered: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/ep&lt;ENDPOINT_ID&gt;/&lt;CLUSTER_NAME&gt;/SupportedCommands</code></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md187"></a>
-Device Command Relaying</h2>
-<p>After the supported commands are published by ZigPC for a device endpoint, UCL commands can be sent to the Zigbee device. The UCL command received by ZigPC is mapped to a corresponding ZCL command and sent to the Zigbee device endpoint.</p>
-<p>UCL topics used:</p><ul>
-<li>Subscribing to ZCL cluster commands sent by Unify gateway: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/ep&lt;ENDPOINT_ID&gt;/&lt;CLUSTER_NAME&gt;/Commands/&lt;COMMAND_NAME&gt;</code></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md188"></a>
+<h2><a class="anchor" id="autotoc_md181"></a>
 Device State Updates</h2>
 <p>ZigPC publishes the network status of devices through inclusion, interview, and regular function stages.</p>
 <p>UCL topics used:</p><ul>
-<li>Publishing Zigbee device status: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/State</code></li>
+<li>Publishing device state updates: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/State</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md189"></a>
+<h2><a class="anchor" id="autotoc_md182"></a>
+Device Discovery</h2>
+<p>Once added to the network, ZigPC performs device interviewing to retrieve the ZCL clusters supported per each endpoint on the device. After the device interview process finishes, bindings and attribute reports are configured to publish attribute updates to Unify. In addition, ZigPC publishes the commands supported by these ZCL clusters as UCL clusters.</p>
+<p>UCL topics used:</p><ul>
+<li>Publishing supported commands for UCL clusters discovered: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/ep&lt;ENDPOINT_ID&gt;/&lt;CLUSTER_NAME&gt;/SupportedCommands</code></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md183"></a>
+Device Command Relaying</h2>
+<p>After the supported commands are published by ZigPC for a device endpoint, UCL commands can be sent to the Zigbee device. The UCL command received by ZigPC is mapped to a corresponding ZCL command and sent to the Zigbee device endpoint.</p>
+<p>UCL topics used:</p><ul>
+<li>Subscribing to UCL cluster commands sent by Unify gateway: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/ep&lt;ENDPOINT_ID&gt;/&lt;CLUSTER_NAME&gt;/Commands/&lt;COMMAND_NAME&gt;</code></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md184"></a>
 Device Attribute Updates</h2>
 <p>Zigbee devices with attribute reporting configured will send ZigPC attribute reports for each attribute supported in each ZCL cluster under each endpoint. These attribute updates are published under the UCL <code>Reported</code> topic when changes occur of after a timeout.</p>
 <p>UCL topics used:</p><ul>
-<li>Publishing ZCL cluster attribute updates: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/ep&lt;ENDPOINT_ID&gt;/&lt;CLUSTER_NAME&gt;/Attributes/&lt;ATTRIBUTE_NAME&gt;/Reported</code></li>
+<li>Publishing UCL cluster attribute updates: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/ep&lt;ENDPOINT_ID&gt;/&lt;CLUSTER_NAME&gt;/Attributes/&lt;ATTRIBUTE_NAME&gt;/Reported</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md190"></a>
+<h2><a class="anchor" id="autotoc_md185"></a>
 Group Message Handling</h2>
 <p>Unify uses the ZCL Group ID format to send group commands to multiple devices spanning different protocols at the same time. ZigPC uses the ZCL Groups cluster functionality on each Zigbee endpoint to maintain the group membership. After an endpoint is added to the group using the UCL Groups/AddGroup command, ZigPC publishes the list of groups the endpoint is part of.</p>
 <p>ZigPC uses the functionality provided by the Unify Group manager component called uic-angel. Once the group list is published by ZigPC, the uic-angel manages the group commands that can be sent through the Unify gateway.</p>
@@ -276,27 +253,60 @@ Group Message Handling</h2>
 </ul>
 </li>
 </ul>
+<h2><a class="anchor" id="autotoc_md186"></a>
+Zigbee OTA Firmware Upgrade Support</h2>
+<p>ZigPC supports OTA updates for nodes that have an OTA ZCL cluster. The OTA mechanism is based off the existing GSDK, OTA-Server plugin. For more information, see <a href="https://www.silabs.com/documents/public/application-notes/an728-ota-client-server-setup.pdf">Silicon Labs' OTA Server-Client Application Note</a>.</p>
+<p>NOTE: It is expected that a device will have a bootloader to properly support OTA updates. See <a href="https://www.silabs.com/documents/public/user-guides ug103-06-fundamentals-bootloading.pdf">Silicon Labs' Bootloader User Guide</a> for more details.</p>
+<h2><a class="anchor" id="autotoc_md187"></a>
+Zigbee Sleepy End Device Support</h2>
+<p>ZigPC handles sleepy end device (SED) communications with the use of the ZCL PollControl server functionality available on the SED. After the SED is interviewed by ZigPC, ZCL messages sent to SED will be stored until the SED PollControl server sends ZigPC a PollControl/CheckIn message. ZigPC will send a PollControl/CheckInrResponse as a reply to transition SED into fast-polling mode. This will allow ZigPC to unload/send any queued messages to the SED.</p>
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md191"></a>
-Getting Started with Including Z3Light Device to ZigPC</h1>
-<p>For the following example, the EUI64 addresses used are as follows:</p>
-<p><b>ZigPC Gateway EUI64: zb-AAAAAAAAAAAAAAAA</b></p>
-<p><b>Z3Light EUI64: zb-0102030405060708</b></p>
-<h2><a class="anchor" id="autotoc_md192"></a>
-Adding Z3Light Device to the ZigPC Network</h2>
+<h1><a class="anchor" id="autotoc_md188"></a>
+Getting Started with Including Zigbee 3.0 Device to ZigPC</h1>
+<p>For the following example, the UNID addresses used are as follows:</p>
+<p><b>ZigPC Gateway UNID: zb-AAAAAAAAAAAAAAAA</b></p>
+<p><b>Zigbee Device UNID: zb-0102030405060708</b></p>
+<p>There are 3 command-lines terminals used in the following steps:</p><ol type="1">
+<li>Non-ARM Host prompt: Host&gt; (used in Simplicity Commander instructions)</li>
+<li>Raspberry Pi prompt: RaspberryPi&gt;</li>
+<li>Zigbee Device EmberCLI prompt: Z3Device&gt;</li>
+</ol>
+<p>OPTIONAL: To see all messages sent to the broker, follow the steps to download and install the <a href="https://mqtt-explorer.com/">MQTT Explorer tool</a>. After it is run on the host machine, connect to the MQTT broker on the Raspberry Pi.</p>
+<p>To perform the below steps using the Unify Dev GUI tool, see <a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Dev GUI User Guide</a>.</p>
+<h2><a class="anchor" id="autotoc_md189"></a>
+Adding Zigbee Device to the ZigPC Network</h2>
 <p>NOTE: The following steps use the command line interface (CLI) exposed by Simplicity Commander stand-alone tool.</p>
 <ol type="1">
-<li><p class="startli">Create a random HEX sequence of 6,8,12, or 16 bytes (12, 16, 24, 32 characters respectively) and put it in a file containing the following text:</p>
-<p class="startli"><code>Install Code: &lt;RANDOM_HEX_SEQUENCE&gt;</code></p>
-<p class="startli">For example: </p><div class="fragment"><div class="line">Install Code: F64C3E6D196569CE4F2000A40069B534</div>
+<li>Ensure ZigPC has started: <div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; zigpc --zigpc.serial /dev/ttyACM0 --mqtt.host 0.0.0.0 --mqtt.port 1883 --datastore.file zigpc.db</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># uic build: XXXXXXXX</div>
+<div class="line"># 2021-Sep-17 13:09:30.225367 &lt;i&gt; [uic_component_fixtures] Completed: Unify Signal Handler</div>
+<div class="line"># 2021-Sep-17 13:09:30.226845 &lt;d&gt; [mqtt_wrapper_mosquitto] Initializing Mosquitto library: 1.6.12</div>
+<div class="line"># 2021-Sep-17 13:09:30.235265 &lt;i&gt; [uic_component_fixtures] Completed: Unify MQTT Client</div>
+<div class="line"># 2021-Sep-17 13:09:30.236246 &lt;d&gt; [uic_stdin_process] Registering stdin fileno 5</div>
+<div class="line"># 2021-Sep-17 13:09:30.237239 &lt;i&gt; [uic_component_fixtures] Completed: Unify STDIN</div>
+<div class="line"># 2021-Sep-17 13:09:30.238070 &lt;i&gt; [uic_component_fixtures] Completed: ZIGPC Config</div>
+<div class="line"># 2021-Sep-17 13:09:30.238927 &lt;i&gt; [datastore_fixt] Using datastore file: zigpc.db</div>
+<div class="line"># ...</div>
+<div class="line"># ...</div>
 </div><!-- fragment --></li>
-<li>Connect only the Z3Light Zigbee device to your host machine via USB.</li>
-<li>Use the Simplicity Commander CLI to flash the Install code to the Z3Light end device: <div class="fragment"><div class="line">commander flash --tokengroup znet --tokenfile install-code.txt --device efr32mg12p</div>
+<li>Create a random HEX sequence of 6,8,12, or 16 bytes (12, 16, 24, 32 characters respectively) and put it in a file containing the following text: <code>Install Code: &lt;RANDOM_HEX_SEQUENCE&gt;</code> <div class="fragment"><div class="line">## command ##</div>
+<div class="line">Host&gt; cat /tmp/install-code.txt:</div>
+<div class="line"> </div>
+<div class="line">Install Code: F64C3E6D196569CE4F2000A40069B534</div>
 </div><!-- fragment --></li>
-<li>Validate the install code is present and extract the CRC corresponding to the install code by running the following command: <div class="fragment"><div class="line">commander tokendump –-tokengroup znet –-device efr32mg12p</div>
-<div class="line"># The following section in the console logs show the EUI64, Instal code, and the CRC generated from it</div>
+<li>Connect the Zigbee device to your host machine via USB.</li>
+<li>Use the Simplicity Commander CLI to flash the Install code to the Zigbee Device: <div class="fragment"><div class="line">## command ##</div>
+<div class="line">Host&gt; commander flash --tokengroup znet --tokenfile /tmp/install-code.txt --device efr32mg12p</div>
+</div><!-- fragment --></li>
+<li>Validate the install code is present and extract the CRC corresponding to the install code by running the following command: <div class="fragment"><div class="line">## command ##</div>
+<div class="line">Host&gt; commander tokendump –-tokengroup znet –-device efr32mg12p</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
 <div class="line"># ...</div>
 <div class="line"># # MFG_EMBER_EUI_64              : 0807060504030201       &lt;-- NOTE: This is in Little Endian</div>
 <div class="line"># ...</div>
@@ -305,106 +315,250 @@ Adding Z3Light Device to the ZigPC Network</h2>
 <div class="line"># Install Code       : F64C3E6D196569CE4F2000A40069B534    &lt;-- NOTE: This is in Big Endian</div>
 <div class="line"># # CRC                : 0x7646                            &lt;-- NOTE: This is in Little Endian</div>
 </div><!-- fragment --></li>
-<li><p class="startli">Format the SmartStart DSK using the Z3Light's EUI64, install code, and install code CRC.</p><ul>
+<li><p class="startli">Format the SmartStart DSK using the Z3Device's EUI64, install code, and install code CRC.</p><ul>
 <li>Example EUI64 in big endian = <code>01-02-03-04-05-06-07-08</code></li>
 <li>Install code in big endian = <code>F6-4C-3E-6D-19-65-69-CE-4F-20-00-A4-00-69-B5-34</code></li>
 <li>Install code CRC big endian = <code>46-76</code></li>
 <li>DSK combining above information = <code>01-02-03-04-05-06-07-08-F6-4C-3E-6D-19-65-69-CE-4F-20-00-A4-00-69-B5-34-46-76</code></li>
 </ul>
-<p class="startli">**NOTE: Ensure the EUI64 used above corresponds to the device that is joining, not the example EUI64 used as an example`.</p>
+<p class="startli">NOTE: Ensure the EUI64 used above corresponds to the device that is joining, not the example EUI64 used as an example`.</p>
 </li>
-<li><p class="startli">In the Z3Light, perform cleanup of the device state using the Ember CLI. </p><div class="fragment"><div class="line">Z3Light&gt; plugin reporting clear</div>
-<div class="line">Z3Light&gt; plugin groups clear</div>
-<div class="line">Z3Light&gt; network leave</div>
-<div class="line">Z3Light&gt; keys clear</div>
-</div><!-- fragment --><p class="startli">NOTE: Ensure that Z3Light is not part of the network by entering the <code>info</code> command and seeing <code>panID [0x0000]</code> and <code>nodeID [0xFFFE]</code> in the output: </p><div class="fragment"><div class="line">Z3Light&gt; info</div>
+<li><p class="startli">Access the Zigbee device EmberCLI using Studio or a serial terminal to perform cleanup of the device state. </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">Z3Device&gt; plugin reporting clear</div>
+<div class="line">Z3Device&gt; plugin groups clear</div>
+<div class="line">Z3Device&gt; network leave</div>
+<div class="line">Z3Device&gt; keys clear</div>
+</div><!-- fragment --><p class="startli">NOTE: Ensure that Z3Device is not part of the network by entering the <code>info</code> command and seeing <code>panID [0x0000]</code> and <code>nodeID [0xFFFE]</code> in the output: </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">Z3Device&gt; info</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># MFG String:</div>
+<div class="line"># AppBuilder MFG Code: 0x1002</div>
+<div class="line"># node [(&gt;)0102030405060708] chan [0] pwr [0]</div>
+<div class="line"># panID [0x0000] nodeID [0xFFFE] xpan [0x(&gt;)0000000000000000]</div>
+<div class="line"># parentID [0x0000] parentRssi [0]</div>
+<div class="line"># ...</div>
+<div class="line"># ...</div>
 </div><!-- fragment --></li>
-<li><p class="startli">Validate that a new MQTT topic has been published showing the Protocol Controller Network Management state as IDLE: </p><div class="fragment"><div class="line">mosquitto_sub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</div>
-<div class="line"># Sample output:</div>
-<div class="line"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;, &quot;node interview&quot;], &quot;RequestedStateParameters&quot;: []}</div>
-</div><!-- fragment --><p class="startli">Topic the output above, the ZigPC UNID can be extracted as <code>zb-AAAAAAAAAAAAAAAA</code></p>
+<li><p class="startli">Validate that a new MQTT topic has been published showing the Protocol Controller Network Management state as IDLE: </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;], &quot;RequestedStateParameters&quot;: []}</div>
+</div><!-- fragment --><p class="startli">Topic the output above, the ZigPC Gateway UNID can be seen from the topic as <code>zb-AAAAAAAAAAAAAAAA</code></p>
+<p class="startli"><b>Dev GUI Method</b>: Go to the Nodes tab to see the Protocol Controller UNID and state.</p>
+<p class="startli"><img src="user_guide-devgui-nodes-init.png" alt="" class="inline"/>   </p>
 </li>
-<li>Use the Mosquitto publish tool to add a SmartStart entry using the DSK created above.<ul>
-<li>OPTIONAL: you can also specify the EUI64 of the ZigPC Gateway NCP (see User Manual below) in the "ProtocolControllerUnid" field: <div class="fragment"><div class="line">mosquitto_pub -h 0.0.0.0 -p 1883 -t &#39;ucl/SmartStart/List/Update&#39; -m &#39;{&quot;DSK&quot;:&quot;01-02-03-04-05-06-07-08-F6-4C-3E-6D-19-65-69-CE-4F-20-00-A4-00-69-B5-34-46-76&quot;,&quot;Include&quot;:true,&quot;ProtocolControllerUnid&quot;:&quot;&quot;,&quot;Unid&quot;:&quot;&quot;}&#39;</div>
-</div><!-- fragment --></li>
-</ul>
+<li><p class="startli">Use the Mosquitto publish tool to add a SmartStart entry using the DSK created above.</p>
+<p class="startli">OPTIONAL: you can also specify the EUI64 of the ZigPC Gateway NCP (see User Manual below) in the "ProtocolControllerUnid" field: </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_pub -h 0.0.0.0 -p 1883 -t &#39;ucl/SmartStart/List/Update&#39; -m &#39;{&quot;DSK&quot;:&quot;01-02-03-04-05-06-07-08-F6-4C-3E-6D-19-65-69-CE-4F-20-00-A4-00-69-B5-34-46-76&quot;,&quot;Include&quot;:true,&quot;ProtocolControllerUnid&quot;:&quot;&quot;,&quot;Unid&quot;:&quot;&quot;}&#39;</div>
+</div><!-- fragment --><p class="startli"><b>Dev GUI Method</b>: Go to the SmartStart tab and click on the "Add" key</p>
+<p class="startli"><img src="user_guide-devgui-smartstart-new.png" alt="" class="inline"/>   </p>
+<p class="startli"><b>Dev GUI Method</b>: Fill in the DSK in the entry.</p>
+<p class="startli"><img src="user_guide-devgui-smartstart-dsk-add.png" alt="" class="inline"/>   </p>
 </li>
-<li>After it is added, ZigPC will open the network to permit the Z3Light to join using the install code configured.</li>
-<li>In the Z3Light, start the Network Steering plugin process by entering <code>plugin network-steering start 0</code> on the Z3Light Ember CLI: <div class="fragment"><div class="line">Z3Light&gt; plugin network-steering start 0</div>
+<li>Once ZigPC detects the new SmartStart entry, it will open the network to permit the Z3Device to join using the install code configured.</li>
+<li>In the Z3Device, start the Network Steering plugin process by entering <code>plugin network-steering start 0</code> on the Z3Device Ember CLI: <div class="fragment"><div class="line">## command ##</div>
+<div class="line">Z3Device&gt; plugin network-steering start 0</div>
 </div><!-- fragment --></li>
-<li>Z3Light should join the NCP network and ZigPC will create a UNID for the Z3Light in the following format: "zb-&lt;Z3LIGHT_EUI64_BE&gt;".</li>
-<li><p class="startli">Validate that the UNID has been assigned by checking the Unify SmartStart list using the Mosquitto subscribe tool: </p><div class="fragment"><div class="line">mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/SmartStart/List&#39;</div>
-<div class="line"># Sample output:</div>
+<li>Z3Device should join the ZigPC network and assign a UNID using the following format: <code>zb-&lt;Z3DEVICE_EUI64_BE&gt;</code>. <div class="fragment"><div class="line">## Sample format ##</div>
+<div class="line"># Z3Device EUI64(BE): 0102030405060708</div>
+<div class="line"># Z3Device UNID: zb-0102030405060708</div>
+</div><!-- fragment --></li>
+<li><p class="startli">Validate that the UNID has been assigned by checking the Unify SmartStart list using the Mosquitto subscribe tool: </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/SmartStart/List&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
 <div class="line"># ucl/SmartStart/List { &quot;value&quot;: [{&quot;DSK&quot;:&quot;01-02-03-04-05-06-07-08-F6-4C-3E-6D-19-65-69-CE-4F-20-00-A4-00-69-B5-34-46-76&quot;,&quot;Include&quot;:true,&quot;ProtocolControllerUnid&quot;:&quot;&quot;,&quot;Unid&quot;:&quot;zb-0102030405060708&quot;}] }</div>
 </div><!-- fragment --><p class="startli">As seen, the Device UNID is "zb-0102030405060708".</p>
+<p class="startli"><b>Dev GUI Method</b>: Go to the SmartStart tab and see the updated UNID field.</p>
+<p class="startli"><img src="user_guide-devgui-smartstart-dsk-used.png" alt="" class="inline"/>   </p>
 </li>
-<li>Validate that the ZigPC NetworkManagement state has transitioned back to idle (previous MQTT messages would have shown the NetworkManagement state has transitioned from "idle" -&gt; "add node" -&gt; "node interview" -&gt; "idle"): <div class="fragment"><div class="line">mosquitto_sub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</div>
-<div class="line"># Sample output:</div>
+<li>Validate that the ZigPC NetworkManagement state has transitioned back to idle (previous MQTT messages would have shown the NetworkManagement state has transitioned from "idle" -&gt; "add node" -&gt; "node interview" -&gt; "idle"): <div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
 <div class="line"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;, &quot;node interview&quot;], &quot;RequestedStateParameters&quot;: []}</div>
 </div><!-- fragment --></li>
+<li><p class="startli">Validate that a new MQTT topic has been published showing Z3Device is online and functional: </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/by-unid/zb-0102030405060708/State&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/State { &quot;Security&quot;: &quot;Zigbee Z3.0&quot;, &quot;MaximumCommandDelay&quot;: &quot;1&quot;, &quot;NetworkStatus&quot;: &quot;Online functional&quot; }</div>
+</div><!-- fragment --><p class="startli"><b>Dev GUI Method</b>: Go to the Nodes tab and see the updated Z3Device entry.</p>
+<p class="startli"><img src="user_guide-devgui-nodes-included.png" alt="" class="inline"/>   </p>
+</li>
 </ol>
+<h2><a class="anchor" id="autotoc_md190"></a>
+Discovering UCL Cluster Command Support for Z3Device</h2>
+<p>NOTE: The Zigbee device must be added using the SmartStart addition process discussed above. NOTE: ZigPC will publish the UCL cluster command support under for all endpoints discovered in the interview process.</p>
 <ol type="1">
-<li>Validate that a new MQTT topic has been published showing the Z3Light OnOff cluster capabilities using the Mosquitto subscribe tool: <div class="fragment"><div class="line">mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands&#39;</div>
-<div class="line"># Sample output:</div>
-<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands { &quot;value&quot;: [&quot;Off&quot;,&quot;On&quot;,&quot;Toggle&quot;,&quot;OffWithEffect&quot;,&quot;OnWithRecallGlobalScene&quot;,&quot;OnWithTimedOff&quot;] }</div>
-</div><!-- fragment --></li>
+<li><p class="startli">Subscribe to the UCL cluster command topic space under a Z3Device endpoint: NOTE: Endpoint 1 (ep1) chosen for this example. Other endpoint support will be published based on device discovery </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/by-unid/zb-0102030405060708/ep1/+/SupportedCommands&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands</div>
+<div class="line"># {&quot;value&quot;: [&quot;Off&quot;,&quot;On&quot;,&quot;Toggle&quot;,&quot;OffWithEffect&quot;,&quot;OnWithRecallGlobalScene&quot;,&quot;OnWithTimedOff&quot;,&quot;WriteAttributes&quot;,&quot;ForceReadAttributes&quot;]}</div>
+<div class="line">#</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/Level/SupportedCommands</div>
+<div class="line"># {&quot;value&quot;: [&quot;MoveToLevel&quot;,&quot;Move&quot;,&quot;Step&quot;,&quot;Stop&quot;,&quot;MoveToLevelWithOnOff&quot;,&quot;MoveWithOnOff&quot;,&quot;StepWithOnOff&quot;,&quot;StopWithOnOff&quot;,&quot;MoveToClosestFrequency&quot;,&quot;WriteAttributes&quot;,&quot;ForceReadAttributes&quot;]}</div>
+<div class="line">#</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/Identify/SupportedCommands</div>
+<div class="line"># {&quot;value&quot;: [&quot;Identify&quot;,&quot;IdentifyQuery&quot;,&quot;TriggerEffect&quot;,&quot;WriteAttributes&quot;,&quot;ForceReadAttributes&quot;]}</div>
+<div class="line">#</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/Groups/SupportedCommands</div>
+<div class="line"># {&quot;value&quot;: [&quot;AddGroup&quot;,&quot;ViewGroup&quot;,&quot;GetGroupMembership&quot;,&quot;RemoveGroup&quot;,&quot;RemoveAllGroups&quot;,&quot;AddGroupIfIdentifying&quot;,&quot;WriteAttributes&quot;,&quot;ForceReadAttributes&quot;]}</div>
+</div><!-- fragment --><p class="startli"><b>Dev GUI Method</b>: Go to the Nodes tab and see <code>Type</code> column to see the supported clusters.</p>
+<p class="startli"><img src="user_guide-devgui-nodes-included.png" alt="" class="inline"/>   </p>
+</li>
 </ol>
-<p>To perform the above steps using the Unify Dev GUI tool, see <a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Dev GUI User Guide</a>.</p>
-<h2><a class="anchor" id="autotoc_md193"></a>
-Sending Commands to the Z3Light Device</h2>
-<p>NOTE: The Zigbee device must be added using the SmartStart addition process discussed above.</p>
+<h2><a class="anchor" id="autotoc_md191"></a>
+Discovering UCL Cluster Attribute Updates for Z3Device</h2>
+<p>NOTE: The Zigbee device must be added using the SmartStart addition process discussed above. NOTE: ZigPC will publish the UCL cluster support under for all endpoints discovered in the interview process.</p>
 <ol type="1">
-<li>Use the Mosquitto sub command to find the OnOff support for the added device: <div class="fragment"><div class="line">mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands&#39;</div>
-<div class="line"># Sample output:</div>
-<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands { &quot;value&quot;: [&quot;Off&quot;,&quot;On&quot;,&quot;Toggle&quot;,&quot;OffWithEffect&quot;,&quot;OnWithRecallGlobalScene&quot;,&quot;OnWithTimedOff&quot;] }</div>
+<li><p class="startli">Subscribe to the UCL cluster attribute topic space under one of the Z3Device endpoints: NOTE: Endpoint 1 (ep1) chosen for this example. Other endpoint support will be published based on device discovery. </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/by-unid/zb-0102030405060708/ep1/+/Attributes/#&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/GlobalSceneControl/Reported { &quot;value&quot;: true }</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported { &quot;value&quot;: false }</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnTime/Reported { &quot;value&quot;: 0 }</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OffWaitTime/Reported { &quot;value&quot;: 0 }</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/StartUpOnOff/Reported { &quot;value&quot;: &quot;SetOnOffTo0&quot; }</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/ClusterRevision/Reported {&quot;value&quot;: 2}</div>
+<div class="line">#</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/Level/Attributes/CurrentLevel/Reported { &quot;value&quot;: 0 }</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/Level/Attributes/RemainingTime/Reported { &quot;value&quot;: 0 }</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/Level/Attributes/StartUpCurrentLevel/Reported { &quot;value&quot;: 0 }</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/Level/Attributes/ClusterRevision/Reported {&quot;value&quot;: 2}</div>
+<div class="line"># ...</div>
+<div class="line"># ...</div>
+</div><!-- fragment --><p class="startli"><b>Dev GUI Method</b>: Go to a specific cluster tab (i.e. OnOff) see the main attribute <code>State</code> column.</p>
+<p class="startli"><img src="user_guide-devgui-onoff-discovery.png" alt="" class="inline"/>   </p>
+</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md192"></a>
+Sending a UCL Cluster Command to Z3Device to see Attribute Update</h2>
+<p>The UCL command format translates 1:1 to ZCL messages that is recognized by ZCL compliant Zigbee devices. To know the exact format of the UCL command, see the Unify specification and the DotDot specification.</p>
+<ol type="1">
+<li><p class="startli">See the supported commands for a UCL cluster. For this exercise, the endpoint 1, OnOff cluster will be selected. </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/SupportedCommands {&quot;value&quot;: [&quot;Off&quot;,&quot;On&quot;,&quot;Toggle&quot;,&quot;OffWithEffect&quot;,&quot;OnWithRecallGlobalScene&quot;,&quot;OnWithTimedOff&quot;,&quot;WriteAttributes&quot;,&quot;ForceReadAttributes&quot;]}</div>
+</div><!-- fragment --><p class="startli">The commands can be send to the Z3Device/ep1/OnOff cluster: <code>Off, On, Toggle, OffWithEffect, OnWithRecallGlobalScene, OnWithTimedOff, WriteAttributes, ForceReadAttributes</code></p><ol type="a">
+<li><p class="startli">Publish a UCL command to send to the Z3Device endpoint's OnOff cluster. </p><div class="fragment"><div class="line">## sample output based on choosing to send the OnOff/Toggle command ##</div>
+<div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_pub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Commands/Toggle&#39; -m &#39;{}&#39;</div>
+</div><!-- fragment --><p class="startli"><b>Dev GUI Method</b>: Go to the OnOff tab and click on the <code>Toggle</code> Command on the ep1 row.</p>
+</li>
+</ol>
+</li>
+<li>On the Z3Device device, notice that a ZCL message has been received: <div class="fragment"><div class="line">Z3Device&gt;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># T00000000:RX len 3, ep 01, clus 0x0006 (On/off) FC 01 seq 1A cmd 02 payload[]</div>
 </div><!-- fragment --></li>
-<li>To send the ON command to the OnOff cluster to device endpoint, format the following topic with an empty payload: "ucl/by-unid/zb-0102030405060708/ep1/OnOff/Commands/On" <div class="fragment"><div class="line">mosquitto_pub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Commands/On&#39; -m &#39;{}&#39;</div>
-</div><!-- fragment --></li>
-<li>On the Zigbee device, notice that a ZCL on message has been received with OnOff cmd 01: <div class="fragment"><div class="line"># Sample output:</div>
-<div class="line"># T00000000:RX len 3, ep 01, clus 0x0006 (On/off) FC 01 seq 1A cmd 01 payload[]</div>
-</div><!-- fragment --></li>
-<li>Use the Mosquitto sub commend to see the reported OnOff attribute state: <div class="fragment"><div class="line">mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported&#39;</div>
-<div class="line"># Sample output:</div>
+<li><p class="startli">Subscribe to the UCL OnOff Attribute in the OnOff cluster to see the updated reported state: </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
 <div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported { &quot;value&quot;: true }</div>
+</div><!-- fragment --><p class="startli"><b>Dev GUI Method</b>: Go to the OnOff tab and see the OnOff <code>State</code> icon is active.</p>
+<p class="startli"><img src="user_guide-devgui-onoff-toggle.png" alt="" class="inline"/>   </p>
+</li>
+<li>Retry the same UCL command to send to the Z3Device endpoint's OnOff cluster. <div class="fragment"><div class="line">## sample output based on choosing to send the OnOff/Toggle command ##</div>
+<div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_pub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Commands/Toggle&#39; -m &#39;{}&#39;</div>
+</div><!-- fragment --></li>
+<li>On the Z3Device device, notice that a ZCL message has been received: <div class="fragment"><div class="line">Z3Device&gt;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># T00000000:RX len 3, ep 01, clus 0x0006 (On/off) FC 01 seq 1B cmd 02 payload[]</div>
+</div><!-- fragment --></li>
+<li>Subscribe to the UCL OnOff Attribute in the OnOff cluster to see the updated reported state: <div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported { &quot;value&quot;: false }</div>
 </div><!-- fragment --></li>
 </ol>
-<p>To perform the above steps using the Unify Dev GUI tool, see <a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Dev GUI User Guide</a>.</p>
-<h2><a class="anchor" id="autotoc_md194"></a>
+<h2><a class="anchor" id="autotoc_md193"></a>
 Removing a Device Already in the ZigPC Network</h2>
 <p>NOTE: The Zigbee device must be added using the SmartStart addition process discussed above.</p>
 <ol type="1">
-<li><p class="startli">Use the Mosquitto sub command to find Zigbee device UNID to remove: </p><div class="fragment"><div class="line">mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t &#39;ucl/SmartStart/List&#39;</div>
-<div class="line"># Sample output:</div>
-<div class="line"># ucl/SmartStart/List { &quot;value&quot;: [{&quot;DSK&quot;:&quot;01-02-03-04-05-06-07-08-F6-4C-3E-6D-19-65-69-CE-4F-20-00-A4-00-69-B5-34-46-76&quot;,&quot;Include&quot;:true,&quot;ProtocolControllerUnid&quot;:&quot;&quot;,&quot;Unid&quot;:&quot;zb-0102030405060708&quot;}] }</div>
-</div><!-- fragment --><p class="startli">In the sample output above, the device UNID we can remove is <code>zb-0102030405060708</code>.</p>
-</li>
-<li>Send a Network Management state change to start removing a node: <div class="fragment"><div class="line">mosquitto_pub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39; -m &#39;{&quot;State&quot;: &quot;remove node&quot;}&#39;</div>
+<li>Send a Network Management state change to start removing a node: <div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_pub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39; -m &#39;{&quot;State&quot;: &quot;remove node&quot;}&#39;</div>
 </div><!-- fragment --></li>
-<li><p class="startli">ZigPC will try to perform a state change. If successful, the following message will be published: </p><div class="fragment"><div class="line">mosquitto_sub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement&#39;</div>
-<div class="line"># Sample output:</div>
+<li><p class="startli">ZigPC will try to perform a state change. If successful, the following message will be published: </p><div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
 <div class="line"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;remove node&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;, &quot;node interview&quot;], &quot;RequestedStateParameters&quot;: [&quot;Unid&quot;]}</div>
 </div><!-- fragment --><p class="startli">As seen above, ZigPC requests that the UNID parameter should be passed in.</p>
 </li>
-<li>Send the UNID of the Zigbee device to remove: <div class="fragment"><div class="line">mosquitto_pub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39; -m &#39;{&quot;State&quot;: &quot;remove node&quot;, &quot;StateParameters&quot;: {&quot;Unid&quot;: &quot;zb-0102030405060708&quot;}}&#39;</div>
+<li>Send the UNID of the Z3Device to remove: <div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_pub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write&#39; -m &#39;{&quot;State&quot;: &quot;remove node&quot;, &quot;StateParameters&quot;: {&quot;Unid&quot;: &quot;zb-0102030405060708&quot;}}&#39;</div>
 </div><!-- fragment --></li>
-<li>Validate that the Zigbee device has left the network by entering <code>info</code> on the Z3Light Ember CLI and noticing a nodeID of 0xFFFE: <div class="fragment"><div class="line">Z3Light&gt; info</div>
+<li>Validate that the Z3Device has left the network by entering <code>info</code> on the Ember CLI and noticing a nodeID of 0xFFFE: <div class="fragment"><div class="line">## command ##</div>
+<div class="line">Z3Device&gt; info</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
+<div class="line"># MFG String:</div>
+<div class="line"># AppBuilder MFG Code: 0x1002</div>
+<div class="line"># node [(&gt;)0102030405060708] chan [0] pwr [0]</div>
+<div class="line"># panID [0x0000] nodeID [0xFFFE] xpan [0x(&gt;)0000000000000000]</div>
+<div class="line"># parentID [0x0000] parentRssi [0]</div>
+<div class="line"># ...</div>
 </div><!-- fragment --></li>
-<li>Validate that the NetworkManagement topic has shown the state transition from "remove node" to "idle": <div class="fragment"><div class="line">mosquitto_sub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</div>
-<div class="line"># Sample output:</div>
+<li>Validate that the NetworkManagement topic has shown the state transition from "remove node" to "idle": <div class="fragment"><div class="line">## command ##</div>
+<div class="line">RaspberryPi&gt; mosquitto_sub -h 0.0.0.0 -p 1883 -t &#39;ucl/by-unid/+/ProtocolController/NetworkManagement&#39;</div>
+<div class="line"> </div>
+<div class="line">## sample output ##</div>
 <div class="line"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;, &quot;node interview&quot;], &quot;RequestedStateParameters&quot;: []}</div>
 </div><!-- fragment --></li>
+</ol>
+<h2><a class="anchor" id="autotoc_md194"></a>
+Updating Zigbee Device Firmware already on the ZigPC Network</h2>
+<p>To initialize an OTA update, you need the following:</p><ul>
+<li>A working end-device with a ZCL OTA client cluster enabled.</li>
+<li>A valid firmware file to upload to the device - refer to the application note above.</li>
+<li>Sufficient storage space on both host and end device for the firmware image.</li>
+<li>(Optional) An ota-files directory created in the location where the ZigPC will be run.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md195"></a>
+Instructions on how to start an OTA update:</h3>
+<ol type="1">
+<li>Run the Zigbee Protocol Controller, as specified above in this document</li>
+<li>Verify that the 'ota-files' directory exists. If this folder was not created by the user, the Zigbee Protocol Controller should create it at startup.</li>
+<li>Add a Zigbee node, as described above in [Adding Z3Light Device to the ZigPC Network]</li>
+<li>Start the Unify Image Provider application. See <a class="el" href="md_applications_image_provider_readme_user.html">Unify Image Provider User Guide</a></li>
+<li><p class="startli">Add the firmware image to the image-provider's specified folder. Update the images.json file with the firmware information.</p>
+<p class="startli"><em>NOTE: For this version of the Zigbee Protocol Controller, the UIID should be set to the UNID of the node that should be updated. Future releases will allow for a more involved UIID, which can reflect version and other information.</em></p>
+<p class="startli"><em>NOTE: The image-provider's images.json file needs to be updated <b>after</b> ZigPC is running to ensure that ZigPC receives the "image announce" message. Updating the images.json file automatically triggers this process.</em></p>
+</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md196"></a>
+Once the Unify Image Provider recognizes changes to images.json, the following actions will occur:</h3>
+<ol type="1">
+<li>ZigPC will recognize any supported OTA image metadata and the image should be automatically copied to the 'ota-files' directory.</li>
+<li><p class="startli">The Silicon Labs' OTA-Client plugin on the Zigbee node should periodically poll ZigPC for new images (based on the "OTA Client Query Delay").</p>
+<p class="startli"><em>NOTE: If there is access to the CLI on the node, the command '<code>plugin ota-client request-image</code>' can manually send this request to ZigPC.</em></p>
+</li>
+<li>The OTA image transfer from ZigPC to the Zigbee node should start. Do not interrupt the OTA process to ensure proper operation. Debug messages on the ZigPC can be enabled at startup with the option '-d', which can help verify that the messages are being sent.</li>
+<li>After the OTA image upload and installation is complete, the new firmware version running on the Zigbee node can be verified. The OTA process is now complete.</li>
 </ol>
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md195"></a>
+<h1><a class="anchor" id="autotoc_md197"></a>
 Technical Specifications</h1>
-<h2><a class="anchor" id="autotoc_md196"></a>
+<h2><a class="anchor" id="autotoc_md198"></a>
 Device UNID Format</h2>
 <p>ZigPC uses the following format for the UNID: zb-&lt;EUI64-IN-BIG-ENDIAN&gt;</p>
 <p>where "zb-" is the current fixed prefix (subject to be configurable in later releases)</p>
 <p>For example, the following Zigbee device having a EUI64 of 01 23 45 67 89 AB CD EF has the following device UNID <code>zb-0123456789ABCDEF</code>.</p>
-<h2><a class="anchor" id="autotoc_md197"></a>
+<h2><a class="anchor" id="autotoc_md199"></a>
 Recognized SmartStart DSK Format</h2>
 <p>ZigPC supports the following SmartStart Device-Specific Key (DSK) format:</p>
 <p><code>&lt;NODE_EUI64&gt;</code>-<code>&lt;Z3_INSTALL_CODE&gt;</code>-<code>&lt;Z3_INSTALL_CODE_CRC&gt;</code></p>
@@ -419,7 +573,7 @@ Recognized SmartStart DSK Format</h2>
 <li>for <b>8-byte</b> Z3 Install code variant: <code>00-11-22-33-44-55-66-77-AA-BB-CC-DD-EE-FF-00-11-88-99</code></li>
 <li>for <b>16-byte</b> Z3 Install code variant: <code>00-11-22-33-44-55-66-77-AA-BB-CC-DD-EE-FF-00-11-22-33-44-55-66-77-88-99-12-34</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md198"></a>
+<h2><a class="anchor" id="autotoc_md200"></a>
 Zigbee Device Support</h2>
 <p>ZigPC should have a Zigbee NCP attached via the serial UART connection.</p>
 <p>EFR32MG1X or EFR32MG2X are the supported NCP Radios.</p>
@@ -448,57 +602,47 @@ Zigbee Device Support</h2>
 <li>(0x0300) ColorControl</li>
 <li>(0x0406) OccupancySensing</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md199"></a>
-Zigbee OTA Support</h2>
-<p>The ZigPC supports OTA updates for nodes that have an OTA ZCL cluster. The OTA mechanism is based off the existing GSDK, OTA-Server plugin. For more information, see <a href="https://www.silabs.com/documents/public/application-notes/an728-ota-client-server-setup.pdf">Silicon Labs' OTA Server-Client Application Note</a>.</p>
-<blockquote class="doxtable">
-<p>NOTE: It is expected that a device will have a bootloader to properly support </p>
-</blockquote>
-<p>OTA updates. See <a href="https://www.silabs.com/documents/public/user-guides/ug103-06-fundamentals-bootloading.pdf">Silicon Labs' Bootloader User Guide</a> for more details.</p>
-<h3><a class="anchor" id="autotoc_md200"></a>
-ZigPC OTA Process</h3>
-<p>To initialize an OTA update, you need the following:</p><ul>
-<li>A working end-device with a ZCL OTA client cluster enabled.</li>
-<li>A valid firmware file to upload to the device - refer to the application note above.</li>
-<li>Sufficient storage space on both host and end device for the firmware image.</li>
-<li>(Optional) An ota-files directory created in the location where the ZigPC will be run.</li>
-</ul>
-<p>Instructions on how to start an OTA update:</p>
-<ol type="1">
-<li>Run the Zigbee Protocol Controller, as specified above in this document</li>
-<li>Verify that the 'ota-files' directory exists. If this folder was not created by the user, the Zigbee Protocol Controller should create it at startup.</li>
-<li>Add a Zigbee node, as described above in [Adding Z3Light Device to the ZigPC Network]</li>
-<li>Start the Unify Image Provider application. See <a class="el" href="md_applications_image_provider_readme_user.html">Unify Image Provider User Guide</a></li>
-<li>Add the firmware image to the image-provider's specified folder. Update the images.json file with the firmware information.</li>
+<h1><a class="anchor" id="autotoc_md201"></a>
+Appendix</h1>
+<h2><a class="anchor" id="autotoc_md202"></a>
+Setting Up the Zigbee NCP Connected to ZigPC</h2>
+<p>There are two ways to get the NCP image:</p>
+<h3><a class="anchor" id="autotoc_md203"></a>
+Using Pre-built NCP FW Images</h3>
+<p>A single radio should be designated as a Zigbee Gateway NCP that ZigPC connects to.</p>
+<p>The Gecko SDK provides ready-made NCP images available under the following path: <code>&lt;GECKO_SDK&gt;/protocol/zigbee/ncp-images/*</code></p>
+<p>The folders underneath are distinguished by the format: &lt;part_number&gt;-&lt;board_number&gt;</p>
+<h3><a class="anchor" id="autotoc_md204"></a>
+Building NCP FW Images Using Studio</h3>
+<p>Follow section 2 from the following application note to build a NCP application using the Simplicity Studio IDE: <a href="https://www.silabs.com/documents/public/application-notes/an1010-customized-ncp.pdf">AN1010: Building a Customized NCP Application</a></p>
+<h2><a class="anchor" id="autotoc_md205"></a>
+Setting Up the Sample Zigbee Z3Light FW Image</h2>
+<p>A Zigbee 3.0 Light device FW is used as an example device that can join the ZigPC network.</p>
+<p>Follow the instructions in <em>Section 4: Starting an Example Application</em> in <a href="https://www.silabs.com/documents/public/quick-start-guides/qsg106-efr32-zigbee-pro.pdf">QSG106: Zigbee EmberZNet PRO Quick-Start Guide</a> to create a <b>Z3Light</b> Application.</p>
+<p>NOTE: before the Appbuilder project generation, ensure the following changes are made:</p><ol type="1">
+<li>In the <em>Plugins</em> tab, ensure the "Binding Table Size" in the "Binding Table
+Library" plugin is bigger is considerable enough to accommodate ZCL groups (uses multicast bindings) and attribute reporting (to allow ZigPC to receive automated attribute updates). For the Z3Light project, this should be at least 16.</li>
 </ol>
-<blockquote class="doxtable">
-<p>_NOTE: For this version of the Zigbee Protocol Controller, the UIID should </p>
-</blockquote>
-<p>be set to the UNID of the node that should be updated. Future releases will allow for a more involved UIID, which can reflect version and other information._</p>
-<blockquote class="doxtable">
-<p>_NOTE: The image-provider's images.json file needs to be updated <b>after</b> </p>
-</blockquote>
-<p>ZigPC is running to ensure that ZigPC receives the "image announce" message. Updating the images.json file automatically triggers this process._</p>
-<p>Once the Unify Image Provider recognizes changes to images.json, the following actions will occur:</p>
-<ol type="1">
-<li>ZigPC will recognize any supported OTA image metadata and the image should be automatically copied to the 'ota-files' directory.</li>
-<li>The Silicon Labs' OTA-Client plugin on the Zigbee node should periodically poll ZigPC for new images (based on the "OTA Client Query Delay").</li>
+<div class="fragment"><div class="line">Plugins tab -&gt; Binding Table Library -&gt;    Binding Table Size &gt; 16</div>
+</div><!-- fragment --><ol type="1">
+<li>[OPTIONAL] In the <em>Plugins</em> tab, ensure the "Reporting Table Size" in the "Reporting" plugin is bigger than the number of attributes supported in each device endpoint cluster. For the Z3Light project, this should be at least 9.</li>
 </ol>
-<blockquote class="doxtable">
-<p>_NOTE: If there is access to the CLI on the node, the command </p>
+<div class="fragment"><div class="line">Plugins tab -&gt; Reporting -&gt;    Reporting Table Size &gt; 9</div>
+<div class="line">NOTE: In the Appbuilder project, see EMBER_AF_GENERATED_REPORTING_CONFIG_DEFAULTS_TABLE_SIZE for the recommended minimum size</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p><em>NOTE: If the reporting table size is not sufficient to support all attributes, Unify IoT Services will need to use the ForceReadAttributes command to get updated attribute states</em> </p>
 </blockquote>
-<p>'plugin ota-client request-image' can manually send this request to ZigPC._</p>
-<ol type="1">
-<li>The OTA image transfer from ZigPC to the Zigbee node should start. Do not interrupt the OTA process to ensure proper operation. Debug messages on the ZigPC can be enabled at startup with the option '-d', which can help verify that the messages are being sent.</li>
-<li>After the OTA image upload and installation is complete, the new firmware version running on the Zigbee node can be verified. The OTA process is now complete. </li>
-</ol>
+<p>Follow the steps below to create and flash the Zigbee Z3Light Image:</p>
+<h2><a class="anchor" id="autotoc_md206"></a>
+Flashing Zigbee Devices</h2>
+<p>For flashing device firmware onto the Zigbee radios, see <em>Section 4.4: Compiling and Flashing the Application</em> in <a href="https://www.silabs.com/documents/public/quick-start-guides/qsg106-efr32-zigbee-pro.pdf">QSG106: Zigbee EmberZNet PRO Quick-Start Guide</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:52 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:34 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

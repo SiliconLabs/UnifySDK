@@ -26,6 +26,8 @@ extern std::string received_device_unid;
 extern bool notify_node_added_called;
 extern bool notify_node_removed_called;
 
+using namespace smartstart;
+
 extern "C" {
 #include "zpc_config_mock.h"
 #include "zwave_controller_callbacks_mock.h"
@@ -85,8 +87,7 @@ static void add_device_4()
                                  ",\"ProtocolControllerUnid\":\"zw-C87FFD5F-0001\""
                                  ",\"Unid\":\"\"}]";
   // clang-format on
-  smartstart::Management::get_instance()->update_smartstart_cache(
-    smartstart_list);
+  Management::get_instance()->update_smartstart_cache(smartstart_list);
 }
 
 static void add_device_5()
@@ -98,8 +99,7 @@ static void add_device_5()
                                  ",\"Unid\":\"\"}]";
   // clang-format on
 
-  smartstart::Management::get_instance()->update_smartstart_cache(
-    smartstart_list);
+  Management::get_instance()->update_smartstart_cache(smartstart_list);
 }
 
 static void add_device_6()
@@ -112,8 +112,7 @@ static void add_device_6()
                                  ",\"Unid\":\"\"}]";
   // clang-format on
 
-  smartstart::Management::get_instance()->update_smartstart_cache(
-    smartstart_list);
+  Management::get_instance()->update_smartstart_cache(smartstart_list);
 }
 
 static void add_device_7()
@@ -125,9 +124,7 @@ static void add_device_7()
                                  ",\"PreferredProtocols\":[\"Z-Wave\",\"Z-Wave Long Range\"]"
                                  ",\"Unid\":\"\"}]";
   // clang-format on
-
-  smartstart::Management::get_instance()->update_smartstart_cache(
-    smartstart_list);
+  Management::get_instance()->update_smartstart_cache(smartstart_list);
 }
 
 static void add_device_8()
@@ -139,9 +136,7 @@ static void add_device_8()
                                  ",\"PreferredProtocols\":[\"Z-Wave Long Range\",\"Z-Wave\"]"
                                  ",\"Unid\":\"\"}]";
   // clang-format on
-
-  smartstart::Management::get_instance()->update_smartstart_cache(
-    smartstart_list);
+  Management::get_instance()->update_smartstart_cache(smartstart_list);
 }
 
 static void add_device_9()
@@ -153,9 +148,7 @@ static void add_device_9()
                                  ",\"PreferredProtocols\":[\"Z-Wave\"]"
                                  ",\"Unid\":\"\"}]";
   // clang-format on
-
-  smartstart::Management::get_instance()->update_smartstart_cache(
-    smartstart_list);
+  Management::get_instance()->update_smartstart_cache(smartstart_list);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -349,8 +342,7 @@ void test_zwave_smartstart_inclusion_request_multiple_entires_in_list()
                                  ",\"ProtocolControllerUnid\":\"\""
                                  ",\"Unid\":\"\"}]";
     // clang-format on
-    smartstart::Management::get_instance()->update_smartstart_cache(
-      smartstart_list);
+    Management::get_instance()->update_smartstart_cache(smartstart_list);
   }
   zwave_home_id_t nwi_2nd_entry = 0xC15FD928;
   // clang-format off

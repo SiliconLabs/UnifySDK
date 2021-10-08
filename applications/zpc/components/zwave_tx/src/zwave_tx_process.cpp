@@ -290,7 +290,8 @@ static void zwave_tx_message_transmission_completed_step()
     tx_queue.clear();
     reset_awaiting_empty_queue = false;
     sl_log_info(LOG_TAG, "Reset step: Tx Queue flush completed");
-    zwave_controller_on_reset_step_complete(TX_FLUSH_RESET_STEP_PRIORITY);
+    zwave_controller_on_reset_step_complete(
+      ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY);
   }
 
   if (tx_queue.empty()) {
@@ -358,7 +359,7 @@ static void zwave_tx_message_transmission_completed_step()
       = completed_element.zwave_tx_options.number_of_responses
         * (completed_element.transmission_time + CLOCK_SECOND);
     sl_log_debug(LOG_TAG,
-                 "Starting Z-Wave TX backoff for frame sent to NodeID %03d, "
+                 "Starting Z-Wave TX backoff for frame sent to NodeID %d, "
                  "backoff time: %lu ms.\n",
                  completed_element.connection_info.remote.node_id,
                  backoff_time);
@@ -451,7 +452,7 @@ static void zwave_tx_inspect_received_frame(
       //We got the last needed reply:
       sl_log_debug(LOG_TAG,
                    "Received all expected replies from NodeID "
-                   "%03d for frame id=%p. Resuming from TX back off\n",
+                   "%d for frame id=%p. Resuming from TX back off\n",
                    connection_info->remote.node_id,
                    current_element.zwave_tx_session_id);
       zwave_tx_resume_from_backoff_step();

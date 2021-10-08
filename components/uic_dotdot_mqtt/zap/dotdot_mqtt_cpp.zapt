@@ -572,6 +572,16 @@ sl_status_t {{dotdot_prefix}}_init() {
   return status_flag;
 }
 
+// Publish all supported dotdot cluster commands per each endpoints.
+// Here is the steps what this API does:
+// - For each dotdot cluster
+// - -  For each dotdot cluster command
+// - - - Invoke the callback to ask if that particular unid/ep supports the command
+// - - - - add or not the command in supported command list based on the return value of the command handler callback
+// - - - end
+// - - - publish the list of supported commands
+//- - end
+//-  end
 void {{dotdot_prefix}}_publish_supported_commands(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint)

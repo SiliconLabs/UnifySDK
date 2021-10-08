@@ -20,6 +20,7 @@
 #include "zwave_s2_network.h"
 #include "zwave_s2_network_callbacks_mock.h"
 #include "sl_log.h"
+#include "zwapi_protocol_mem_mock.h"
 
 #include "zwave_network_management_mock.h"
 
@@ -79,6 +80,8 @@ void test_s2_network_init()
   s2_inclusion_set_event_handler_StubWithCallback(
     my_s2_inclusion_set_event_handler_CALLBACK);
   S2_init_ctx_IgnoreAndReturn(0);
+
+  zwapi_memory_get_buffer_IgnoreAndReturn(SL_STATUS_OK);
 
   zwave_s2_network_init();
 }

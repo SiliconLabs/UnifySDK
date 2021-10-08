@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -113,12 +113,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1e8de7a7020acf3340d6a0a377837981"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#a1e8de7a7020acf3340d6a0a377837981">~TimeoutHandler</a> ()</td></tr>
 <tr class="memdesc:a1e8de7a7020acf3340d6a0a377837981"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classTimeoutHandler.html" title="Handling timeout data and ctimers sharing data.">TimeoutHandler</a> deconstructor. Will stop ctimer in shared ptr.  <a href="classTimeoutHandler.html#a1e8de7a7020acf3340d6a0a377837981">More...</a><br /></td></tr>
 <tr class="separator:a1e8de7a7020acf3340d6a0a377837981"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b219ebddf1a33896a907f0d92790020"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#a3b219ebddf1a33896a907f0d92790020">get_image_key</a> () const</td></tr>
-<tr class="separator:a3b219ebddf1a33896a907f0d92790020"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b4f186b56b31e04f2e0880d8520b977"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#a5b4f186b56b31e04f2e0880d8520b977">get_image_poll_state</a> () const</td></tr>
-<tr class="separator:a5b4f186b56b31e04f2e0880d8520b977"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5694ef2144e50c1e977baa37c1363f79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#a5694ef2144e50c1e977baa37c1363f79">set_image_poll_state</a> (bool state)</td></tr>
-<tr class="separator:a5694ef2144e50c1e977baa37c1363f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a302d770781810737a0798f3557d70cec"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#a302d770781810737a0798f3557d70cec">get_unid</a> () const</td></tr>
+<tr class="separator:a302d770781810737a0798f3557d70cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af68a8bf727108e78de08ab5b160cdc05"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#af68a8bf727108e78de08ab5b160cdc05">get_subscribe_topic</a> () const</td></tr>
+<tr class="separator:af68a8bf727108e78de08ab5b160cdc05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53837c054fefb7a00dc002293ec1662c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#a53837c054fefb7a00dc002293ec1662c">get_unid_poll_state</a> () const</td></tr>
+<tr class="separator:a53837c054fefb7a00dc002293ec1662c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca969c491ddfbfe3aa5da3107c4776b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#aca969c491ddfbfe3aa5da3107c4776b0">set_unid_poll_state</a> (bool state) const</td></tr>
+<tr class="separator:aca969c491ddfbfe3aa5da3107c4776b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae53892a8ebc55e2d89d7e0d165f1f781"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#ae53892a8ebc55e2d89d7e0d165f1f781">get_image_ready_cb</a> () const</td></tr>
 <tr class="separator:ae53892a8ebc55e2d89d7e0d165f1f781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af94615790a03d1c9c08481f7bb05bf4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structctimer.html">ctimer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html#af94615790a03d1c9c08481f7bb05bf4e">get_ctimer_pointer</a> () const</td></tr>
@@ -254,40 +256,6 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3b219ebddf1a33896a907f0d92790020"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b219ebddf1a33896a907f0d92790020">&#9670;&nbsp;</a></span>get_image_key()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string TimeoutHandler::get_image_key </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5b4f186b56b31e04f2e0880d8520b977"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b4f186b56b31e04f2e0880d8520b977">&#9670;&nbsp;</a></span>get_image_poll_state()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool TimeoutHandler::get_image_poll_state </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ae53892a8ebc55e2d89d7e0d165f1f781"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae53892a8ebc55e2d89d7e0d165f1f781">&#9670;&nbsp;</a></span>get_image_ready_cb()</h2>
 
@@ -296,6 +264,57 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a> TimeoutHandler::get_image_ready_cb </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af68a8bf727108e78de08ab5b160cdc05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af68a8bf727108e78de08ab5b160cdc05">&#9670;&nbsp;</a></span>get_subscribe_topic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string TimeoutHandler::get_subscribe_topic </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a302d770781810737a0798f3557d70cec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a302d770781810737a0798f3557d70cec">&#9670;&nbsp;</a></span>get_unid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string TimeoutHandler::get_unid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a53837c054fefb7a00dc002293ec1662c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53837c054fefb7a00dc002293ec1662c">&#9670;&nbsp;</a></span>get_unid_poll_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TimeoutHandler::get_unid_poll_state </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -357,18 +376,18 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5694ef2144e50c1e977baa37c1363f79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5694ef2144e50c1e977baa37c1363f79">&#9670;&nbsp;</a></span>set_image_poll_state()</h2>
+<a id="aca969c491ddfbfe3aa5da3107c4776b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca969c491ddfbfe3aa5da3107c4776b0">&#9670;&nbsp;</a></span>set_unid_poll_state()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void TimeoutHandler::set_image_poll_state </td>
+          <td class="memname">void TimeoutHandler::set_unid_poll_state </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -407,7 +426,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classTimeoutHandler.html">TimeoutHandler</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:39 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

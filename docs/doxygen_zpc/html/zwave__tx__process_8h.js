@@ -1,6 +1,5 @@
 var zwave__tx__process_8h =
 [
-    [ "TX_FLUSH_RESET_STEP_PRIORITY", "zwave__tx__process_8h.html#ad28adb42735b6e6eeab372365256e5de", null ],
     [ "zwave_tx_state_t", "group__zwave__tx__process.html#gaf23d19e8b58de89df0b17367f24efd55", null ],
     [ "zwave_tx_events_t", "group__zwave__tx__process.html#ga01ff7baa7653524ec6e0d2b5b70a884a", [
       [ "ZWAVE_TX_SEND_NEXT_MESSAGE", "group__zwave__tx__process.html#gga01ff7baa7653524ec6e0d2b5b70a884aa18031f9233bd88db00a50ec83e12e6aa", null ],

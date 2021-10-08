@@ -101,31 +101,25 @@ void z3gatewayTrustCenterDeviceEndpointDiscovered(const EmberEUI64 newNodeEui64,
       memcpy(endpointInfo.serverClusterList,
              deviceTableEntry->clusterIds,
              sizeof(uint16_t) * endpointInfo.serverClusterCount);
-
     }
 
-    int clusterListSize =
-        EMBER_AF_PLUGIN_DEVICE_TABLE_CLUSTER_SIZE - endpointInfo.serverClusterCount;
-    if( clusterListSize> 0)
-    {
-        endpointInfo.clientClusterList =
-            malloc(sizeof(uint16_t) * clusterListSize);
-        endpointInfo.clientClusterCount = 0;
+    int clusterListSize = EMBER_AF_PLUGIN_DEVICE_TABLE_CLUSTER_SIZE
+                          - endpointInfo.serverClusterCount;
+    if (clusterListSize > 0) {
+      endpointInfo.clientClusterList
+        = malloc(sizeof(uint16_t) * clusterListSize);
+      endpointInfo.clientClusterCount = 0;
 
-        for(unsigned int i = 0;
-                i < clusterListSize;
-                i++)
-        {
-            unsigned int rawDeviceTableIndex = 
-                i+deviceTableEntry->clusterOutStartPosition;
-            //TODO get this undefined value from somewhere else
-            if(deviceTableEntry->clusterIds[rawDeviceTableIndex] != 0xFFFF)
-            {
-                endpointInfo.clientClusterList[i] = 
-                    deviceTableEntry->clusterIds[rawDeviceTableIndex];
-                endpointInfo.clientClusterCount++; 
-            }
+      for (unsigned int i = 0; i < clusterListSize; i++) {
+        unsigned int rawDeviceTableIndex
+          = i + deviceTableEntry->clusterOutStartPosition;
+        //TODO get this undefined value from somewhere else
+        if (deviceTableEntry->clusterIds[rawDeviceTableIndex] != 0xFFFF) {
+          endpointInfo.clientClusterList[i]
+            = deviceTableEntry->clusterIds[rawDeviceTableIndex];
+          endpointInfo.clientClusterCount++;
         }
+      }
     }
 
     bool callbackExists
@@ -139,11 +133,37 @@ void z3gatewayTrustCenterDeviceEndpointDiscovered(const EmberEUI64 newNodeEui64,
     if (endpointInfo.serverClusterCount > 0) {
       free(endpointInfo.serverClusterList);
     }
-    if(clusterListSize > 0)
-    {
+    if (clusterListSize > 0) {
       free(endpointInfo.clientClusterList);
     }
   }
+}
+
+EmberKeyData z3gatewayGetTrustCenterWellKownKey(void)
+{
+  EmberKeyData key = ZIGBEE_PROFILE_INTEROPERABILITY_LINK_KEY;
+
+  return key;
+}
+
+EmberStatus z3gatewayTrustCenterAddLinkKey(const EmberEUI64 eui64,
+                                           const EmberKeyData *key,
+                                           bool inTransientTable)
+{
+  EmberStatus status = EMBER_SUCCESS;
+
+  // Copy to non-const variables
+  EmberEUI64 eui64_cp;
+  EmberKeyData key_cp;
+  memcpy(eui64_cp, eui64, sizeof(EmberEUI64));
+  memcpy(&key_cp, key, sizeof(EmberKeyData));
+
+  if (inTransientTable) {
+    status = emberAddTransientLinkKey(eui64_cp, &key_cp);
+  } else {
+    status = emberAddOrUpdateKeyTableEntry(eui64_cp, true, &key_cp);
+  }
+  return status;
 }
 
 EmberStatus z3gatewayTrustCenterAddDeviceInstallCode(const EmberEUI64 eui64,
@@ -152,13 +172,9 @@ EmberStatus z3gatewayTrustCenterAddDeviceInstallCode(const EmberEUI64 eui64,
 {
   EmberStatus status = EMBER_SUCCESS;
   EmberKeyData linkKey;
-  EmberKeyStruct keyStructTC;
 
   if ((NULL == installCode) || (NULL == eui64) || (installCodeLength == 0)) {
     status = EMBER_BAD_ARGUMENT;
-  } else if (emberAfNetworkState() != EMBER_JOINED_NETWORK) {
-    status = EMBER_NETWORK_DOWN;
-    emberAfCorePrintln("Error: Network not up: 0x%X", status);
   } else {
     status = emAfInstallCodeToKey(installCode, installCodeLength, &linkKey);
     if (status != EMBER_SUCCESS) {
@@ -169,24 +185,10 @@ EmberStatus z3gatewayTrustCenterAddDeviceInstallCode(const EmberEUI64 eui64,
   }
 
   if (status == EMBER_SUCCESS) {
-    status = emberAddTransientLinkKey((uint8_t *)eui64, &linkKey);
+    status = z3gatewayTrustCenterAddLinkKey(eui64, &linkKey, true);
     if (status != EMBER_SUCCESS) {
       emberAfCorePrintln("Error: Failed to add Link Key Pair: 0x%X", status);
     }
-  }
-
-  if (status == EMBER_SUCCESS) {
-    status = emberGetKey(EMBER_CURRENT_NETWORK_KEY, &keyStructTC);
-    if (status != EMBER_SUCCESS) {
-      emberAfCorePrintln("Error: Failed to read NWK key: 0x%X", status);
-    }
-  }
-  if (status == EMBER_SUCCESS) {
-    emberAfCorePrint("[DEBUG] NWK Key:");
-    for (uint8_t i = 0; i < EMBER_ENCRYPTION_KEY_SIZE; i++) {
-      emberAfCorePrint(" %02X", emberKeyContents(&(keyStructTC.key))[i]);
-    }
-    emberAfCorePrintln("");
   }
 
   return status;
@@ -274,7 +276,8 @@ EmberStatus z3gatewayTrustCenterInit(void)
       emberAfCorePrintln(
         "Error: Failed to get trust center network parameters: 0x%X",
         status);
-    } else {
+    } else if (Z3GATEWAY_CALLBACK_EXISTS(z3gwState.callbacks,
+                                         onTrustCenterInitialized)) {
       z3gwState.callbacks->onTrustCenterInitialized(ncpEui64, &network);
     }
   }

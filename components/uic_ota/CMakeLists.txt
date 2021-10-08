@@ -1,7 +1,7 @@
 # Library
 add_library(
   uic_ota SHARED platform/${COMPATIBLE_PLATFORM}/ota_time.cpp src/ota.cpp
-                 src/ota_cache.cpp src/ota_image_validation.cpp)
+                 src/ota_cache.cpp src/ota_mqtt.cpp src/ota_download.cpp)
 target_include_directories(
   uic_ota
   PRIVATE src 

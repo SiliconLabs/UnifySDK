@@ -26,7 +26,7 @@
 #include "attribute_mapper_ast.hpp"
 #include "attribute_mapper_ast_dep_eval.hpp"
 #include <map>
-
+#include <memory>
 /**
  * @brief Mapper Engine
  *
@@ -150,7 +150,7 @@ class MapperEngine
    * @return true If load succeed
    * @return false Some error occurred in parsing of AST validation
    */
-  bool update_dependencies();
+  bool update_dependencies(const ast::ast_tree &ast);
 
   /**
    * @brief Set the endpoint type which should be used as start context for all
@@ -172,27 +172,19 @@ class MapperEngine
 
   private:
   /**
-   * @brief Check if the mapper rules has cyclic dependencies
-   *
-   * @return true Cyclic dependencies are found.
-   *
-   */
-  bool check_cyclic_dependencies();
-
-  /**
    * @brief Get the destination for attribute
    *
    * Try to resolve the attribute node from the AST attribute path.
    *
-   * @param dest              Refernce to object that should hold the attribute
-   * @param attribute         AST attribute path
+   * @param endpoint          endpoint to start from
+   * @param attribute        Attribute (path) to resolve
    * @param create_if_missing If true the destination attribute is created if it does not exists
-   * @return true             Attribute was found/created
-   * @return false            Attribute was not found
+   * @return destination attribute, if no destination is found we return INVALID_ATTRIBUTE
    */
-  bool get_destination_for_attribute(attribute_store::attribute &dest,
-                                     const ast::attribute &attribute,
-                                     bool create_if_missing) const;
+  attribute_store::attribute
+    get_destination_for_attribute(const attribute_store::attribute &endpoint,
+                                  const ast::attribute &attribute,
+                                  bool create_if_missing) const;
 
   /**
    * @brief Called when an attribute is updated.
@@ -221,8 +213,8 @@ class MapperEngine
                                            attribute_store_change_t change);
 
   //Lookup table for which assignments depend on which attributes
-  std::multimap<ast::attribute_dependency_t, ast::assignment> relations;
-  ast::ast_tree ast;
+  std::multimap<ast::attribute_dependency_t, std::shared_ptr<ast::assignment>>
+    relations;
   attribute_store_type_t ep_type;
 };
 

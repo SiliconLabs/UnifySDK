@@ -27,6 +27,7 @@ extern "C" {
 #include "zwave_network_management_mock.h"
 #include "zwave_command_handler_mock.h"
 #include "attribute_resolver_mock.h"
+#include "zwave_tx_mock.h"
 
 #include "unity.h"
 
@@ -80,6 +81,8 @@ void suiteSetUp()
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
+  attribute_store_teardown();
+  datastore_teardown();
   return num_failures;
 }
 
@@ -422,15 +425,15 @@ void test_zwave_command_class_agi_group_info_report_multiple_blocks()
     TEST_ASSERT_EQUAL(0x0505, profile);
 
     //Verify that group 2 does not exist
-    const association_group_id_t group_2 = 2;
+    const agi_profile_t group_profile_2 = 2;
     attribute attr_group_profile_2
       = attribute(endpoint_id_node)
           .child_by_type(ATTRIBUTE(GROUP_ID))
-          .child_by_type_and_value(ATTRIBUTE(GROUP_PROFILE), group_2);
+          .child_by_type_and_value(ATTRIBUTE(GROUP_PROFILE), group_profile_2);
     TEST_ASSERT_FALSE(attr_group_profile_2.is_valid());
 
   } catch (std::exception &ex) {
-    TEST_ASSERT_TRUE_MESSAGE(false, "Exception thrown");
+    TEST_ASSERT_TRUE_MESSAGE(false, ex.what());
   }
 }
 
@@ -485,5 +488,173 @@ void test_zwave_command_class_agi_group_info_report_too_short_second_block()
   } catch (std::exception &ex) {
     TEST_ASSERT_TRUE_MESSAGE(false, "Exception thrown");
   }
+}
+
+// Test Group Name Get command handler
+void test_zwave_command_class_agi_handle_group_name_get()
+{
+  uint8_t expected_name[]
+    = {0x4c, 0x69, 0x66, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x00};
+  const uint8_t get_frame[] = {COMMAND_CLASS_ASSOCIATION_GRP_INFO,
+                               ASSOCIATION_GROUP_NAME_GET_V3,
+                               LIFELINE_GROUP_ID};
+  zwave_tx_send_data_IgnoreAndReturn(SL_STATUS_OK);
+  agi_handler.support_handler(&connection, get_frame, sizeof(get_frame));
+  try {
+    attribute attr_group_name_node = attribute(zpc_endpoint_id_node)
+                                       .child_by_type(ATTRIBUTE(GROUP_ID))
+                                       .child_by_type(ATTRIBUTE(GROUP_NAME));
+    TEST_ASSERT_TRUE(attr_group_name_node.is_valid());
+    TEST_ASSERT_TRUE(attr_group_name_node.reported_exists());
+    uint8_t group_name[255] = {};
+    uint8_t name_size;
+
+    attribute_store_node_t test_attr_group_name
+      = attribute_store_get_node_child_by_type(
+        attribute_store_get_node_child_by_type(zpc_endpoint_id_node,
+                                               ATTRIBUTE(GROUP_ID),
+                                               0),
+        ATTRIBUTE(GROUP_NAME),
+        0);
+
+    attribute_store_get_node_attribute_value(test_attr_group_name,
+                                             REPORTED_ATTRIBUTE,
+                                             group_name,
+                                             &name_size);
+    TEST_ASSERT_EQUAL(name_size, sizeof(expected_name));
+  } catch (std::exception &ex) {
+    TEST_ASSERT_TRUE_MESSAGE(false, "Exception thrown");
+  }
+}
+
+// Test Group Info Get Command handler
+void test_zwave_command_class_agi_handle_group_info_get()
+{
+  // Test a scenario when List Mode is set to 0
+  const uint8_t get_frame[]       = {COMMAND_CLASS_ASSOCIATION_GRP_INFO,
+                               ASSOCIATION_GROUP_INFO_GET_V3,
+                               0x00,
+                               LIFELINE_GROUP_ID};
+  uint8_t expected_report_frame[] = {COMMAND_CLASS_ASSOCIATION_GRP_INFO,
+                                     ASSOCIATION_GROUP_INFO_REPORT,
+                                     0x01,
+                                     LIFELINE_GROUP_ID,
+                                     0x00,
+                                     0x00,
+                                     0x01,
+                                     RESERVED_BYTE,
+                                     0x00,
+                                     0x00};
+  zwave_tx_send_data_ExpectWithArrayAndReturn(&connection,
+                                              sizeof(connection),
+                                              sizeof(expected_report_frame),
+                                              expected_report_frame,
+                                              sizeof(expected_report_frame),
+                                              NULL,
+                                              0,
+                                              NULL,
+                                              NULL,
+                                              0,
+                                              NULL,
+                                              0,
+                                              SL_STATUS_OK);
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_session();
+  zwave_tx_send_data_IgnoreArg_connection();
+
+  zwave_controller_connection_info_t connection_info_1
+    = {.local = {.node_id = 1, .endpoint_id = 0, .is_multicast = false}};
+
+  agi_handler.support_handler(&connection_info_1, get_frame, sizeof(get_frame));
+
+  // Test a scenario when List Mode is set to 1
+  const uint8_t get_frame_2[]
+    = {COMMAND_CLASS_ASSOCIATION_GRP_INFO, ASSOCIATION_GROUP_INFO_GET_V3, 0x40};
+  // built the second Group profile
+  agi_profile_t profile_2           = 0x0003;
+  association_group_id_t group_id_2 = 0x02;
+  attribute attr_ep_node_zpc(zpc_endpoint_id_node);
+  attr_ep_node_zpc.add_node(ATTRIBUTE(GROUP_ID))
+    .set_reported<association_group_id_t>(group_id_2);
+  attr_ep_node_zpc.child_by_type_and_value(ATTRIBUTE(GROUP_ID), group_id_2)
+    .add_node(ATTRIBUTE(GROUP_PROFILE))
+    .set_reported<agi_profile_t>(profile_2);
+
+  uint8_t expected_report_frame_2[] = {COMMAND_CLASS_ASSOCIATION_GRP_INFO,
+                                       ASSOCIATION_GROUP_INFO_REPORT,
+                                       0x82,
+                                       LIFELINE_GROUP_ID,
+                                       0x00,
+                                       0x00,
+                                       0x01,
+                                       RESERVED_BYTE,
+                                       0x00,
+                                       0x00,
+                                       group_id_2,
+                                       0x00,
+                                       0x00,
+                                       0x03,
+                                       RESERVED_BYTE,
+                                       0x00,
+                                       0x00};
+  zwave_tx_send_data_ExpectWithArrayAndReturn(&connection,
+                                              sizeof(connection),
+                                              sizeof(expected_report_frame_2),
+                                              expected_report_frame_2,
+                                              sizeof(expected_report_frame_2),
+                                              NULL,
+                                              0,
+                                              NULL,
+                                              NULL,
+                                              0,
+                                              NULL,
+                                              0,
+                                              SL_STATUS_OK);
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_session();
+  zwave_tx_send_data_IgnoreArg_connection();
+  agi_handler.support_handler(&connection_info_1,
+                              get_frame_2,
+                              sizeof(get_frame_2));
+}
+
+// test Group Command List Get Command handler
+void test_zwave_command_class_agi_handle_group_command_list_get()
+{
+  const uint8_t get_frame[] = {COMMAND_CLASS_ASSOCIATION_GRP_INFO,
+                               ASSOCIATION_GROUP_COMMAND_LIST_GET,
+                               0x00,
+                               LIFELINE_GROUP_ID};
+  // add GROUP_COMMAND_LIST attribute value
+  zwave_command_class_agi_add_group_commands(LIFELINE_GROUP_ID, 0x5a, 0x01);
+  uint8_t expected_report_frame[] = {COMMAND_CLASS_ASSOCIATION_GRP_INFO,
+                                     ASSOCIATION_GROUP_COMMAND_LIST_REPORT,
+                                     LIFELINE_GROUP_ID,
+                                     0x02,
+                                     0x5a,
+                                     0x01};
+  zwave_tx_send_data_ExpectWithArrayAndReturn(&connection,
+                                              sizeof(connection),
+                                              sizeof(expected_report_frame),
+                                              expected_report_frame,
+                                              sizeof(expected_report_frame),
+                                              NULL,
+                                              0,
+                                              NULL,
+                                              NULL,
+                                              0,
+                                              NULL,
+                                              0,
+                                              SL_STATUS_OK);
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_session();
+  zwave_tx_send_data_IgnoreArg_connection();
+  agi_handler.support_handler(&connection, get_frame, sizeof(get_frame));
 }
 }

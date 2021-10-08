@@ -26,7 +26,8 @@
 #include "process.h"
 #include "sl_log.h"
 
-constexpr char LOG_TAG[] = "attribute_resolver_rule";
+constexpr char LOG_TAG[]             = "attribute_resolver_rule";
+constexpr int DEFAULT_GROUPING_DEPTH = 1;
 
 struct attribute_rule {
   attribute_resolver_function_t set_func;
@@ -42,6 +43,7 @@ static enum {
 } resolver_state;
 
 static std::map<attribute_store_type_t, struct attribute_rule> rule_book;
+static std::map<attribute_store_type_t, int> relatives;
 
 /* Set of attributes in the same report message, this is deducted form the get function */
 static std::multimap<attribute_resolver_function_t, attribute_store_type_t>
@@ -121,44 +123,64 @@ static const char *
 static void
   attribute_resolver_rule_get_group(resolver_rule_type_t rule_type,
                                     attribute_store_type_t attribute_type,
-                                    std::vector<attribute_store_type_t> &result)
+                                    std::set<attribute_store_type_t> &result)
 {
+  // Start by inserting the node itself.
+  result.insert(attribute_type);
   //do we have the attribute in the rule book
   if (rule_book.count(attribute_type)) {
     if (rule_type == RESOLVER_GET_RULE) {
       attribute_resolver_function_t f = rule_book.at(attribute_type).get_func;
       const auto range                = get_group.equal_range(f);
       for (auto i = range.first; i != range.second; i++) {
-        result.push_back(i->second);
+        result.insert(i->second);
       }
     } else if (rule_type == RESOLVER_SET_RULE) {
       attribute_resolver_function_t f = rule_book.at(attribute_type).set_func;
       const auto range                = set_group.equal_range(f);
       for (auto i = range.first; i != range.second; i++) {
-        result.push_back(i->second);
+        result.insert(i->second);
       }
     }
   }
 }
 
-std::vector<attribute_store_node_t>
+std::set<attribute_store_node_t>
   attribute_resolver_rule_get_group_nodes(resolver_rule_type_t rule_type,
                                           attribute_store_node_t _node)
 {
-  std::vector<attribute_store_node_t> result;
-  std::vector<attribute_store_type_t> group_types;
-  attribute_store::attribute node   = _node;
-  attribute_store::attribute parent = node.parent();
+  std::set<attribute_store_node_t> result;
+  std::set<attribute_store_type_t> group_types;
+  attribute_store::attribute node = _node;
 
-  attribute_resolver_rule_get_group(rule_type, node.type(), group_types);
-  for (const auto &t: group_types) {
-    // UIC-938 fix this hardcoded navigation.
-    attribute_store::attribute a = parent.child_by_type(t);
-
-    if (a.is_valid()) {
-      result.push_back(a);
-    }
+  if (!node.is_valid()) {
+    return result;
   }
+  attribute_resolver_rule_get_group(rule_type, node.type(), group_types);
+
+  int depth = DEFAULT_GROUPING_DEPTH;
+  if (relatives.count(node.type())) {
+    depth = relatives.at(node.type());
+  }
+
+  // find common ancestor
+  attribute_store::attribute parent = node;
+  for (int i = 0; i < depth; i++) {
+    parent = parent.parent();
+  }
+  // Go though the tree an collect relatives on the same level
+  parent.visit(
+    [=, &result](attribute_store::attribute &child, int level) -> sl_status_t {
+      if (level > depth) {
+        return SL_STATUS_SUSPENDED;
+      } else if (level == depth) {
+        if (group_types.count(child.type())) {
+          result.insert(child);
+        }
+      }
+      return SL_STATUS_OK;
+    });
+
   return result;
 }
 
@@ -230,9 +252,9 @@ void on_resolver_send_data_complete(resolver_send_status_t status,
           for (attribute_store::attribute a:
                attribute_resolver_rule_get_group_nodes(rule_type, node)) {
             // Now we can align the reported to the desired value
+            attribute_store_log_node(a, false);
             a.set_reported(a.desired_or_reported<std::vector<uint8_t>>());
             a.clear_desired();
-            attribute_store_log_node(a, false);
           }
         }
       }
@@ -376,6 +398,7 @@ void attribute_resolver_rule_init(attribute_rule_complete_t __compl_func)
 {
   get_group.clear();
   set_group.clear();
+  relatives.clear();
   compl_func = __compl_func;
   rule_book.clear();
   resolver_state = RESOLVER_IDLE;
@@ -432,4 +455,15 @@ bool attribute_resolver_has_set_rule(attribute_store_type_t node_type)
 bool attribute_resolver_has_get_rule(attribute_store_type_t node_type)
 {
   return attribute_resolver_get_function(node_type) != nullptr;
+}
+
+sl_status_t
+  attribute_resolver_set_attribute_depth(attribute_store_type_t node_type,
+                                         int depth)
+{
+  if (relatives.count(node_type)) {
+    relatives.erase(node_type);
+  }
+  relatives.insert(std::make_pair(node_type, depth));
+  return SL_STATUS_OK;
 }

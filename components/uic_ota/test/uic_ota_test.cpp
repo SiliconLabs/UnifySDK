@@ -83,9 +83,7 @@ void setUp()
 
 void tearDown()
 {
-  remove("/tmp/dummy.gbl");
-  remove("/tmp/dummy_2.gbl");
-  remove("/tmp/dummy_3.gbl");
+  uic_ota::clear_cache();
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);
 }
 
@@ -323,6 +321,34 @@ void test_ota_subscribes_and_callback()
   TEST_ASSERT_EQUAL_STRING("ZW_PowerStrip_7.16.0_90_ZGM130S_REGION_US_LR.gbl",
                            meta_info.filename.c_str());
   TEST_ASSERT_EQUAL(4, info_callback_counter);
+
+  // 13
+  // Unsubscribe all uiids which a unid is subscribed to.
+  const char topic_13[]       = "ucl/OTA/info/uiid_13/all";
+  std::string payload_meta_13 = R"({
+    "Version": "1.0.0",
+    "ApplyAfter": "2021-07-13T12:13:59+02:00",
+    "Filename": "ZW_test.gbl"
+  })";
+  meta_info.unid              = "";
+  meta_info.uiid              = "";
+  meta_info.apply_after       = 0;
+  meta_info.version           = "0.0.0";
+  info_callback_counter       = 0;
+  uic_ota::subscribe_unid("unid_13", "uiid_13_1");
+  uic_ota::subscribe_unid("unid_13", "uiid_13_2");
+  uic_ota::subscribe_unid("unid_13", "uiid_13_3");
+  uic_ota::subscribe_unid("unid_13", "uiid_13_4");
+
+  uic_ota::unsubscribe_all_unids_uiid("unid_13");
+  mqtt_mock_helper_publish(topic_13,
+                           payload_meta_13.c_str(),
+                           payload_meta_13.length());
+
+  TEST_ASSERT_EQUAL_STRING("0.0.0", meta_info.version.c_str());
+  TEST_ASSERT_EQUAL_STRING("", meta_info.uiid.c_str());
+  TEST_ASSERT_EQUAL_STRING("", meta_info.unid.c_str());
+  TEST_ASSERT_EQUAL(0, info_callback_counter);
 }
 
 void time_zone_string(std::string &offset_string, long offset)
@@ -488,9 +514,11 @@ uic_ota::image_ready_result_t image_result
 void image_ready_callback_1(uic_ota::image_ready_result_t result,
                             std::string file_path)
 {
+  sl_log_debug(LOG_TAG, "Image ready callback counter 1");
   image_result = result;
   if (image_result == uic_ota::image_ready_result_t::TIMED_OUT) {
     image_ready_callback_1_timeout_counter++;
+    sl_log_debug(LOG_TAG, "Ready 1 timeout");
   } else if (image_result == uic_ota::image_ready_result_t::ERROR) {
     image_ready_callback_1_error_counter++;
   }
@@ -501,9 +529,11 @@ void image_ready_callback_1(uic_ota::image_ready_result_t result,
 void image_ready_callback_2(uic_ota::image_ready_result_t result,
                             std::string file_path)
 {
+  sl_log_debug(LOG_TAG, "Image ready callback counter 2");
   image_result = result;
   if (image_result == uic_ota::image_ready_result_t::TIMED_OUT) {
     image_ready_callback_2_timeout_counter++;
+    sl_log_debug(LOG_TAG, "Ready 2 timeout");
   } else if (image_result == uic_ota::image_ready_result_t::ERROR) {
     image_ready_callback_2_error_counter++;
   }
@@ -556,7 +586,9 @@ void test_ota_image_ready_uiid()
                            image_payload.c_str(),
                            image_payload.length());
 
-  TEST_ASSERT_EQUAL(uic_ota::image_ready_result_t::OK, image_result);
+  TEST_ASSERT_EQUAL_MESSAGE(uic_ota::image_ready_result_t::OK,
+                            image_result,
+                            "Expected success on callback UIC-000-000-001_EU");
   TEST_ASSERT_EQUAL(1, image_ready_callback_1_counter);
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);
 
@@ -580,7 +612,7 @@ void test_ota_image_ready_uiid()
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);
 
   // 3
-  // Callbacks in que
+  // Callback is overwritten
   reset_counters();
   uic_ota::subscribe_unid("unid", "UIC-000-000-012_EU");
   image_dummy_meta_info("UIC-000-000-012_EU");
@@ -594,7 +626,7 @@ void test_ota_image_ready_uiid()
 
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);
 
-  TEST_ASSERT_EQUAL(1, image_ready_callback_1_counter);
+  TEST_ASSERT_EQUAL(0, image_ready_callback_1_counter);
   TEST_ASSERT_EQUAL(1, image_ready_callback_2_counter);
   TEST_ASSERT_EQUAL(0, image_ready_callback_1_timeout_counter);
   TEST_ASSERT_EQUAL(0, image_ready_callback_2_timeout_counter);
@@ -603,6 +635,9 @@ void test_ota_image_ready_uiid()
   // Testing having multiple unids listening to UIID
   reset_counters();
   uic_ota::subscribe_unid("unid", "UIC-000-000-012_EU");
+  uic_ota::subscribe_unid("unid_2", "UIC-000-000-012_EU");
+  uic_ota::subscribe_unid("unid_3", "UIC-000-000-012_EU");
+  uic_ota::subscribe_unid("unid_4", "UIC-000-000-012_EU");
   image_dummy_meta_info("UIC-000-000-012_EU");
   uic_ota::get_by_unid("unid", "UIC-000-000-012_EU", image_ready_callback_1);
   uic_ota::get_by_unid("unid_2", "UIC-000-000-012_EU", image_ready_callback_2);
@@ -619,8 +654,8 @@ void test_ota_image_ready_uiid()
   TEST_ASSERT_EQUAL(2, image_ready_callback_1_counter);
   TEST_ASSERT_EQUAL(3, image_ready_callback_2_counter);
   TEST_ASSERT_EQUAL(0, image_ready_callback_1_timeout_counter);
-  TEST_ASSERT_EQUAL(0, image_ready_callback_2_timeout_counter);
-  TEST_ASSERT_EQUAL(uic_ota::image_ready_result_t::OK, image_result);
+  TEST_ASSERT_EQUAL(1, image_ready_callback_2_timeout_counter);
+  TEST_ASSERT_EQUAL(uic_ota::image_ready_result_t::TIMED_OUT, image_result);
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);
 }
 
@@ -704,6 +739,7 @@ void test_ota_image_ready_unid()
   TEST_ASSERT_EQUAL(0, image_ready_callback_1_timeout_counter);
   TEST_ASSERT_EQUAL(0, image_ready_callback_2_timeout_counter);
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);
+
   // 4
   // Make sure that images always takes the specific unid over all
   reset_counters();
@@ -756,7 +792,7 @@ void test_ota_image_ready_unid()
                            image_payload.length());
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);
 
-  TEST_ASSERT_EQUAL_STRING("/tmp/UIC-000-000-010_EU_UIC-C87E6FB9-0010.dat",
+  TEST_ASSERT_EQUAL_STRING("/tmp/UIC-000-000-010_EU.dat",
                            file_path_result.c_str());
 }
 
@@ -1021,7 +1057,6 @@ void test_ota_status_updates()
 
   TEST_ASSERT_EQUAL_JSON(R"({"value":"Success"})", message_desired);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"Success"})", message_reported);
-
 }
 
 void test_ota_supported_commands()
@@ -1207,6 +1242,13 @@ void test_ota_cached_images()
   // out
   reset_counters();
   uic_ota::clear_cache();
+
+  file_exists = false;
+  if (access("/tmp/UIC-000-000-010_EU_UIC-C87E6FB9-0010.dat", F_OK) == 0) {
+    file_exists = true;
+  }
+
+  TEST_ASSERT_FALSE_MESSAGE(file_exists, "Did not remove cached file");
 
   uic_ota::get_by_unid("UIC-C87E6FB9-0010",
                        "UIC-000-000-010_EU",

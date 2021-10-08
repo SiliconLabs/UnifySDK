@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonGroup, Col, Dropdown, DropdownButton, Form, InputGroup, Modal, Row, Table } from 'react-bootstrap';
+import { Button, Col, Dropdown, DropdownButton, Form, InputGroup, Modal, Row, Table } from 'react-bootstrap';
 import * as GrIcons from 'react-icons/gr';
 import * as RiIcons from 'react-icons/ri';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -52,7 +52,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
         this.setState({ InclusionProccess: true });
     else if (data.State === "remove node")
       if (data.RequestedStateParameters && data.RequestedStateParameters.indexOf("Unid") > -1)
-        this.setState({RequestedData: data, ShowRemoveModal: true });
+        this.setState({ RequestedData: data, ShowRemoveModal: true });
   }
 
   search(list: any[]) {
@@ -60,7 +60,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
     this.setState({ NodeList: filtered });
   }
 
-  runNodeCommand(unid: string, cmdType: string, cmd: string) {
+  runStateCommand(unid: string, cmdType: string, cmd: string) {
     this.runCommand(unid, cmdType, { State: cmd })
   }
 
@@ -85,7 +85,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
   }
 
   setSecurity(accept: boolean) {
-    this.runCommand(this.state.RequestedData.Unid, "run-node-command", {
+    this.runCommand(this.state.RequestedData.Unid, "run-state-command", {
       State: "add node",
       StateParameters: {
         UserAccept: accept,
@@ -97,7 +97,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
   }
 
   setRemoveData(accept: boolean) {
-    this.runCommand(this.state.RequestedData.Unid, "run-node-command", {
+    this.runCommand(this.state.RequestedData.Unid, "run-state-command", {
       State: "remove node",
       StateParameters: {
         Unid: accept ? this.state.UnidToRemove : null
@@ -117,6 +117,19 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
     if (dsk)
       return dsk.slice(5);
   }
+
+  actionsList = (actions: any[], title: string, runCmd: any, className: string) => <>
+    {actions && actions.length
+      ? <DropdownButton variant="outline-primary" title={title} className={`float-right ${className}`}>
+        {actions.map((cmd: string, cmdIndex: number) => {
+          return (
+            <Dropdown.Item key={cmdIndex} onClick={() => runCmd(cmd)}> {cmd.charAt(0).toUpperCase() + cmd.slice(1)}</Dropdown.Item>
+          )
+        })
+        }
+      </DropdownButton>
+      : <></>}
+  </>
 
   render() {
     return (
@@ -143,7 +156,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
               <tr className="">
                 <th>#</th>
                 <th className="wd-col-2">Unid</th>
-                <th className="wd-col-2 text-center">Type</th>
+                <th className="wd-col-2">Type</th>
                 <th className="wd-col-1">Status</th>
                 <th>Security</th>
                 <th className="wd-col-1">Max Delay</th>
@@ -162,7 +175,10 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
                     <tr>
                       <td>{index + 1}</td>
                       <td className={tdClassName}>{item.Unid}</td>
-                      <td className={`${tdClassName} text-center`}><ClusterTypeTooltip ClusterTypes={item.ClusterTypes} /></td>
+                      <td className={`${tdClassName} flex`}>{(item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1)
+                        ? <Tooltip title="Protocol Controller" ><span className="icon cursor-defult"><GrIcons.GrNodes /></span></Tooltip>
+                        : <ClusterTypeTooltip Ep={item.ep} />}
+                      </td>
                       <td className={tdClassName}>
                         <div className="flex">
                           <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
@@ -180,24 +196,8 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
                       <td className={tdClassName}>{item.MaximumCommandDelay}</td>
                       <td className={tdClassName}>{item.State}</td>
                       <td>
-                        <ButtonGroup aria-label="Basic example" className="float-right" hidden={item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) === -1 || item.NetworkStatus === "Unavailable"}>
-                          <Button variant="outline-primary" className="float-right" onClick={this.runNodeCommand.bind(this, item.Unid, "run-node-command", "add node")} >Add</Button>
-                          <Button variant="outline-primary" className="float-right" onClick={this.runNodeCommand.bind(this, item.Unid, "run-node-command", "remove node")} >Remove</Button>
-                          <Button variant="outline-primary" className="float-right" onClick={this.runNodeCommand.bind(this, item.Unid, "run-node-command", "reset")} >Reset</Button>
-                          <Button variant="outline-primary" className="float-right" onClick={this.runNodeCommand.bind(this, item.Unid, "run-node-command", "idle")} >Idle</Button>
-                        </ButtonGroup>
-                        {item.SupportedCommands && item.SupportedCommands.length
-                          ? <DropdownButton variant="outline-primary" title="Actions" className="float-right">
-                            {item.SupportedCommands && item.SupportedCommands.map((cmd: string, cmdIndex: number) => {
-                              return (
-                                <Dropdown.Item key={cmdIndex} onClick={this.runCommand.bind(this, item.Unid, "run-state-command", cmd)}> {cmd}</Dropdown.Item>
-                                // <Button key={cmdIndex} variant="outline-primary" className="float-right margin-r-5" onClick={this.runCommand.bind(this, item, "run-state-command", cmd)}>{cmd}</Button>
-                              )
-                            })
-                            }
-                          </DropdownButton>
-                          : <></>
-                        }
+                        {this.actionsList(item.SupportedCommands, "Commands", this.runCommand.bind(this, item.Unid, "run-node-command"), "")}
+                        {this.actionsList(item.SupportedStateList, "States", this.runStateCommand.bind(this, item.Unid, "run-state-command"), "margin-r-5")}
                       </td>
                     </tr>
                   </Tooltip>

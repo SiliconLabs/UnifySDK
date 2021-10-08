@@ -28,19 +28,28 @@ extern "C" {
 /**
  * @brief Abort all S0 network TX sessions.
  *
+ * This function aborts all NUM_TX_SESSIONS of S0 transmit session and calls
+ * the callback with TRANSMIT_COMPLETE_FAIL to notify upper layer for failure
+ *
  */
 void s0_abort_all_tx_sessions();
 
 /**
  * @brief Free all S0 RX sessions  
+ *
+ * Sets the state of all MAX_RXSESSIONS S0 receive sessions to RX_SESSION_DONE 
  */ 
 void free_all_rx_session();
 /**
  * @brief Free all S0 Tx sessions  
+ *
+ * Stops the Nonce Request timer and frees all tx sessions
  */ 
 void free_all_tx_sessions();
 /**
  * @brief Free S0 nonce block list 
+ *
+ * Frees all NONCE_BLOCK_LIST_SIZE number of nonce blocks
  */ 
 void free_nonce_block_list();
 /**

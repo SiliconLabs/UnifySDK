@@ -38,7 +38,7 @@ extern "C" {
 /**
  * @brief Network Management FSM States.
  */
-enum zigpc_net_mgmt_fsm_state {
+typedef enum zigpc_net_mgmt_fsm_state {
   ZIGPC_NET_MGMT_FSM_STATE_MIN_VAL = 0,
   ZIGPC_NET_MGMT_FSM_STATE_INIT,
   ZIGPC_NET_MGMT_FSM_STATE_IDLE,
@@ -47,7 +47,7 @@ enum zigpc_net_mgmt_fsm_state {
   ZIGPC_NET_MGMT_FSM_STATE_NODE_INTERVIEW,
 
   ZIGPC_NET_MGMT_FSM_STATE_MAX_VAL,
-};
+} zigpc_net_mgmt_fsm_state_t;
 
 /**
  * @brief Container for state change request for the ZigPC Network Management

@@ -10,6 +10,7 @@ var classsmartstart_1_1Management =
     [ "notify_node_added", "classsmartstart_1_1Management.html#a8ac886bc2b36ce4b5a2edb0cf7dfb07b", null ],
     [ "notify_node_removed", "classsmartstart_1_1Management.html#a7eb74f498fe9ca8dfe478641f0590382", null ],
     [ "operator=", "classsmartstart_1_1Management.html#ae73bdc1c400f07e4736fb0450bd00907", null ],
+    [ "set_manual_intervention_required", "classsmartstart_1_1Management.html#abaa94907d05553db603539141ad67bc5", null ],
     [ "teardown", "classsmartstart_1_1Management.html#a88455f330f8537bb955fc17ffceb115f", null ],
     [ "update_smartstart_cache", "classsmartstart_1_1Management.html#a4037abf256a8ad1771c5692381db5dde", null ],
     [ "_instance", "classsmartstart_1_1Management.html#adfd526f0551128d719199ac333cdd0f7", null ],

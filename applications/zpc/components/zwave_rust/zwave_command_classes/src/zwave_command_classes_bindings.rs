@@ -542,7 +542,7 @@ pub struct zwave_rx_receive_options_t {
     #[doc = " - RECEIVE_STATUS_FOREIGN_FRAME The received frame is not addressed to this"]
     #[doc = "   node (Only valid in promiscuous mode)"]
     #[doc = " - RECEIVE_STATUS_FOREIGN_HOMEID The received frame is received from a"]
-    #[doc = "   foreign HomeID. Only Controllers in Smart Start AddNode mode can receive this"]
+    #[doc = "   foreign HomeID. Only Controllers in SmartStart AddNode mode can receive this"]
     pub status_flags: u8,
     #[doc = " RSSI measurement of the received frame This is a signed 8-bit value."]
     #[doc = ""]

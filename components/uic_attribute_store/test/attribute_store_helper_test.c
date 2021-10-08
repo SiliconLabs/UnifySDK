@@ -489,3 +489,71 @@ void test_attribute_store_set_child_reported()
                                        &value,
                                        sizeof(value)));
 }
+
+void test_attribute_store_set_child_desired()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node
+    = attribute_store_add_node(0xAAAA, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  // Try setting the value, a child should be created here.
+  uint32_t value = 9393;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_child_desired(test_node,
+                                                       0xBBBB,
+                                                       &value,
+                                                       sizeof(value)));
+
+  attribute_store_node_t created_node
+    = attribute_store_get_node_child_by_type(test_node, 0xBBBB, 0);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, created_node);
+
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(created_node, REPORTED_ATTRIBUTE));
+
+  uint32_t received_value     = 0;
+  uint8_t received_value_size = 0;
+  attribute_store_get_node_attribute_value(created_node,
+                                           DESIRED_ATTRIBUTE,
+                                           (uint8_t *)&received_value,
+                                           &received_value_size);
+
+  TEST_ASSERT_EQUAL(sizeof(value), received_value_size);
+  TEST_ASSERT_EQUAL(value, received_value);
+
+  // Try modifying the value, the child already exists
+  value = 42;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_child_desired(test_node,
+                                                       0xBBBB,
+                                                       &value,
+                                                       sizeof(value)));
+
+  // Read back, from the created node in the first set
+  attribute_store_get_node_attribute_value(created_node,
+                                           DESIRED_ATTRIBUTE,
+                                           (uint8_t *)&received_value,
+                                           &received_value_size);
+
+  TEST_ASSERT_EQUAL(sizeof(value), received_value_size);
+  TEST_ASSERT_EQUAL(value, received_value);
+
+  // Finally, just for fun, call the API with an invalid node.
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_set_child_desired(ATTRIBUTE_STORE_INVALID_NODE,
+                                       0xBBBB,
+                                       &value,
+                                       sizeof(value)));
+
+  // Also try the invalid type
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_set_child_desired(test_node,
+                                       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+                                       &value,
+                                       sizeof(value)));
+}

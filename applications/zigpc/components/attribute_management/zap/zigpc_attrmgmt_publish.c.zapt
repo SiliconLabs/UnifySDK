@@ -107,8 +107,8 @@ sl_status_t {{component_zigpc_attrmgmt_prefix}}_publish_reported(const zigbee_eu
     }
   }
 
-  sl_log_debug(LOG_TAG, "Reported cluster[0x%04X]:attribute[0x%04X] value publish status: 0x%X",
-               cluster_id, attr_id, status);
+  sl_log_info(LOG_TAG, "Unid:%s,Ep:%u,Cluster:0x%04X,Attr:0x%04X Reported publish status: 0x%X",
+              unid, endpoint_id, cluster_id, attr_id, status);
 
   return status;
 }

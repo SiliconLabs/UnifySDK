@@ -20,7 +20,6 @@
 /* Logger includes */
 #include "sl_log.h"
 
-#include "zigpc_config.h"
 #include "zigpc_gateway_process.h"
 #include "zigpc_gateway_process_send.h"
 #include "zigpc_gateway_int.h"

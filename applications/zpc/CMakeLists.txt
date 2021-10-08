@@ -48,11 +48,16 @@ install(DIRECTORY DESTINATION /var/lib/zpc
 install(FILES scripts/systemd/uic-zpc.service DESTINATION
     /lib/systemd/system/ COMPONENT uic-zpc)
 
+install(FILES scripts/udev/99-leds.rules DESTINATION
+    /etc/udev/rules.d/ COMPONENT uic-zpc)
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/config.in
   ${CMAKE_CURRENT_BINARY_DIR}/debconf/config)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/postinst.in
   ${CMAKE_CURRENT_BINARY_DIR}/debconf/postinst)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/templates.in
   ${CMAKE_CURRENT_BINARY_DIR}/debconf/templates)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/conffiles.in
+  ${CMAKE_CURRENT_BINARY_DIR}/debconf/conffiles)
 
 include(scripts/scripts.cmake)

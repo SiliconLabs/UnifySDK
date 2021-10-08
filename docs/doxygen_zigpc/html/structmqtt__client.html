@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('structmqtt__client.html',''); initResi
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5c336e85117b9a8edb92c04b64c14501"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a5c336e85117b9a8edb92c04b64c14501">mqtt_client</a> (const std::string &amp;<a class="el" href="structmqtt__client.html#afc85ed5fe07733bb69265ea6d924df15">hostname</a>, const uint32_t <a class="el" href="structmqtt__client.html#a864ae50e074c2cffef9b7ac4d2bfefdd">port</a>, const std::string &amp;client_id, const std::string &amp;cafile, const std::string &amp;certfile, const std::string &amp;keyfile, std::function&lt; int(const int, void *)&gt; <a class="el" href="structmqtt__client.html#a9212bad4d25cd1c51b5dbc2b5cfd1183">event_sender</a>, std::function&lt; void(const int, const unsigned long)&gt; <a class="el" href="structmqtt__client.html#a5c44ebc0782a5a0cbee4d6c252ac6d67">delayed_event_sender</a>, std::function&lt; int(const int, void *)&gt; <a class="el" href="structmqtt__client.html#a524836e19595f554fa927452630dbced">event_counter</a>)</td></tr>
+<tr class="memitem:a5c336e85117b9a8edb92c04b64c14501"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a5c336e85117b9a8edb92c04b64c14501">mqtt_client</a> (const std::string &amp;<a class="el" href="structmqtt__client.html#afc85ed5fe07733bb69265ea6d924df15">hostname</a>, const <a class="el" href="classuint32__t.html">uint32_t</a> <a class="el" href="structmqtt__client.html#a864ae50e074c2cffef9b7ac4d2bfefdd">port</a>, const std::string &amp;client_id, const std::string &amp;cafile, const std::string &amp;certfile, const std::string &amp;keyfile, std::function&lt; int(const int, void *)&gt; <a class="el" href="structmqtt__client.html#a9212bad4d25cd1c51b5dbc2b5cfd1183">event_sender</a>, std::function&lt; void(const int, const unsigned long)&gt; <a class="el" href="structmqtt__client.html#a5c44ebc0782a5a0cbee4d6c252ac6d67">delayed_event_sender</a>, std::function&lt; int(const int, void *)&gt; <a class="el" href="structmqtt__client.html#a524836e19595f554fa927452630dbced">event_counter</a>)</td></tr>
 <tr class="separator:a5c336e85117b9a8edb92c04b64c14501"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50c1125f962434d481f9b8ddd3101699"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a50c1125f962434d481f9b8ddd3101699">setup</a> ()</td></tr>
 <tr class="separator:a50c1125f962434d481f9b8ddd3101699"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,7 +177,7 @@ Private Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:afc85ed5fe07733bb69265ea6d924df15"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#afc85ed5fe07733bb69265ea6d924df15">hostname</a></td></tr>
 <tr class="separator:afc85ed5fe07733bb69265ea6d924df15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a864ae50e074c2cffef9b7ac4d2bfefdd"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a864ae50e074c2cffef9b7ac4d2bfefdd">port</a></td></tr>
+<tr class="memitem:a864ae50e074c2cffef9b7ac4d2bfefdd"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a864ae50e074c2cffef9b7ac4d2bfefdd">port</a></td></tr>
 <tr class="separator:a864ae50e074c2cffef9b7ac4d2bfefdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a313783864dd13cb738d58ee84d956190"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a313783864dd13cb738d58ee84d956190">socket_file_descriptor</a></td></tr>
 <tr class="separator:a313783864dd13cb738d58ee84d956190"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -189,8 +189,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a9372f0d22c22fe095187553d19bde7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ae56dee55b65012becfbe24f9e0ab8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="mqtt__client_8hpp.html#a61c7385469ae06687e64450a07875e71">connection_callback_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a3ae56dee55b65012becfbe24f9e0ab8c">on_disconnect_callback</a> = nullptr</td></tr>
 <tr class="separator:a3ae56dee55b65012becfbe24f9e0ab8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96613839e4f20dce40846251c96be739"><td class="memItemLeft" align="right" valign="top">std::queue&lt; <a class="el" href="structmessage__queue__element__t.html">message_queue_element_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a96613839e4f20dce40846251c96be739">publishing_queue</a></td></tr>
-<tr class="separator:a96613839e4f20dce40846251c96be739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5997c2a32fa64f6238f3ccf769d1f9c1"><td class="memItemLeft" align="right" valign="top">std::deque&lt; <a class="el" href="structmessage__queue__element__t.html">message_queue_element_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a5997c2a32fa64f6238f3ccf769d1f9c1">publishing_queue</a></td></tr>
+<tr class="separator:a5997c2a32fa64f6238f3ccf769d1f9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90330fbc504f4b4075b599875e83cad"><td class="memItemLeft" align="right" valign="top">std::queue&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#ae90330fbc504f4b4075b599875e83cad">subscription_queue</a></td></tr>
 <tr class="separator:ae90330fbc504f4b4075b599875e83cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf81204e2eb0e4e1f48ccd4f574f1f49"><td class="memItemLeft" align="right" valign="top">std::queue&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#adf81204e2eb0e4e1f48ccd4f574f1f49">unsubscription_queue</a></td></tr>
@@ -237,7 +237,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramtype">const <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td>
           <td class="paramname"><em>port</em>, </td>
         </tr>
         <tr>
@@ -1342,7 +1342,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const uint32_t mqtt_client::port</td>
+          <td class="memname">const <a class="el" href="classuint32__t.html">uint32_t</a> mqtt_client::port</td>
         </tr>
       </table>
   </td>
@@ -1354,8 +1354,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a96613839e4f20dce40846251c96be739"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96613839e4f20dce40846251c96be739">&#9670;&nbsp;</a></span>publishing_queue</h2>
+<a id="a5997c2a32fa64f6238f3ccf769d1f9c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5997c2a32fa64f6238f3ccf769d1f9c1">&#9670;&nbsp;</a></span>publishing_queue</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1364,7 +1364,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::queue&lt;<a class="el" href="structmessage__queue__element__t.html">message_queue_element_t</a>&gt; mqtt_client::publishing_queue</td>
+          <td class="memname">std::deque&lt;<a class="el" href="structmessage__queue__element__t.html">message_queue_element_t</a>&gt; mqtt_client::publishing_queue</td>
         </tr>
       </table>
   </td>
@@ -1495,7 +1495,7 @@ Friends</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structmqtt__client.html">mqtt_client</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:38 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -212,24 +212,6 @@ $(document).ready(function(){initNavTree('globals_eval.html',''); initResizable(
 <li>NO_NEXT_VERSION
 : <a class="el" href="ota-server-policy_8c.html#a4378623437d76ba978b65926c1ec91fba35d26b17ece431caba4af6adbbb77920">ota-server-policy.c</a>
 </li>
-<li>NODE_MGMT_ADD_END_EVT
-: <a class="el" href="group__zigpc__node__mgmt__int.html#ggaedd9b05e86412d4600382d5783d03b20aaa726cc2ae9c734b067f506de3348e9e">zigpc_node_mgmt_int.h</a>
-</li>
-<li>NODE_MGMT_FETCH_EVT
-: <a class="el" href="group__zigpc__node__mgmt__int.html#ggaedd9b05e86412d4600382d5783d03b20a94a4f86219a94b189b6c2e322ac4270a">zigpc_node_mgmt_int.h</a>
-</li>
-<li>NODE_MGMT_MANAGE_EUI64_EVT
-: <a class="el" href="group__zigpc__node__mgmt__int.html#ggaedd9b05e86412d4600382d5783d03b20ad4bf6b6a0501636806ced7d1a4c22b79">zigpc_node_mgmt_int.h</a>
-</li>
-<li>NODE_MGMT_MANAGE_EVT
-: <a class="el" href="group__zigpc__node__mgmt__int.html#ggaedd9b05e86412d4600382d5783d03b20a284730e939c781eb2bd7f914d0856a19">zigpc_node_mgmt_int.h</a>
-</li>
-<li>NODE_MGMT_REMOVE_EVT
-: <a class="el" href="group__zigpc__node__mgmt__int.html#ggaedd9b05e86412d4600382d5783d03b20a2b66b466c567a556bc8a4acd5f46535e">zigpc_node_mgmt_int.h</a>
-</li>
-<li>NODE_MGMT_UPDATE_EVT
-: <a class="el" href="group__zigpc__node__mgmt__int.html#ggaedd9b05e86412d4600382d5783d03b20a5c8d2e5cfce45ebd2c93516b1139d965">zigpc_node_mgmt_int.h</a>
-</li>
 </ul>
 
 
@@ -352,8 +334,17 @@ $(document).ready(function(){initNavTree('globals_eval.html',''); initResizable(
 <li>ZCL_ATTR_TYPE_UINT8
 : <a class="el" href="group__zigpc__common__zigbee.html#gga2e6ffe10ec9891b8dc75a26b0e839881ad601d994dc1e817e2991ab3f40f3d8da">zigpc_common_zigbee.h</a>
 </li>
-<li>ZCL_CLIENT_ROLE
-: <a class="el" href="group__zigpc__common__zigbee.html#gga2a464b6a066c66fcf05b6eb2d09e9bf1af01d8477284ce4c1044519c593e4d823">zigpc_common_zigbee.h</a>
+<li>ZCL_CLUSTER_CLIENT_SIDE
+: <a class="el" href="group__zigpc__common__zigbee.html#ggaded7bd91209e5031318c1ce1a51d6f4eac5f799e7536b26b9754b141ecf56e492">zigpc_common_zigbee.h</a>
+</li>
+<li>ZCL_CLUSTER_GENERATED_COMMAND
+: <a class="el" href="group__zigpc__common__zigbee.html#gga84936305ad6b520020901ad3cbbe77b6a4cf7d596df3eb6e82e2e6610d16f1a24">zigpc_common_zigbee.h</a>
+</li>
+<li>ZCL_CLUSTER_RECEIVED_COMMAND
+: <a class="el" href="group__zigpc__common__zigbee.html#gga84936305ad6b520020901ad3cbbe77b6ae2440bcfac1bac6699161e2dc0173ed7">zigpc_common_zigbee.h</a>
+</li>
+<li>ZCL_CLUSTER_SERVER_SIDE
+: <a class="el" href="group__zigpc__common__zigbee.html#ggaded7bd91209e5031318c1ce1a51d6f4ea89f444e90cb1a2ce39fc6c7d06eda49d">zigpc_common_zigbee.h</a>
 </li>
 <li>ZCL_DATA_TYPE_BOOL
 : <a class="el" href="group__zigpc__common__zigbee.html#gga45344515e4dce7ac0d0f44d829688ed5acb14c29be4461b0ad4f41a10cb8fc7a8">zigpc_common_zigbee.h</a>
@@ -394,9 +385,6 @@ $(document).ready(function(){initNavTree('globals_eval.html',''); initResizable(
 <li>ZCL_OP_STATUS_SUCCESS
 : <a class="el" href="group__zigpc__common__zigbee.html#ggaa9947bc2df97f9a535a56b2da30c4ba9a23fcc8386d12ef28ff79345a494d26c2">zigpc_common_zigbee.h</a>
 </li>
-<li>ZCL_SERVER_ROLE
-: <a class="el" href="group__zigpc__common__zigbee.html#gga2a464b6a066c66fcf05b6eb2d09e9bf1a7f7eaf260e36fce9aa814f3c4a1e9e7d">zigpc_common_zigbee.h</a>
-</li>
 <li>ZIGBEE_NODE_STATUS_INCLUDED
 : <a class="el" href="group__zigpc__common__zigbee.html#gga08a96e23bc169d2dc1059ad68e6def4da3a0948fa808adfa10c0ed3f2a49bcd0c">zigpc_common_zigbee.h</a>
 </li>
@@ -433,17 +421,29 @@ $(document).ready(function(){initNavTree('globals_eval.html',''); initResizable(
 <li>ZIGPC_ATTR_MGMT_EVT_READ_ATTRIBUTES_COMMAND
 : <a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7acefd75a406289bf10b1af9b347932375">attribute_management_int.h</a>
 </li>
-<li>ZIGPC_DS_TYPE_CLUSTER
-: <a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba6b9f7a9337c4fd2271763bb3ba1b97e3">zigpc_datastore_id.h</a>
+<li>ZIGPC_DS_TYPE_CLIENT_CLUSTER
+: <a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a3185b4348a3155bca42395d4602ea9f7">zigpc_datastore_id.h</a>
+</li>
+<li>ZIGPC_DS_TYPE_CLUSTER_ATTRIBUTE
+: <a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358acb6a2b48df1f57c5c1ebc1ba4586410b">zigpc_datastore_id.h</a>
+</li>
+<li>ZIGPC_DS_TYPE_CLUSTER_GENERATED_COMMAND
+: <a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358addc740f9d38c2f79a1e010a73f3a3621">zigpc_datastore_id.h</a>
+</li>
+<li>ZIGPC_DS_TYPE_CLUSTER_RECEIVED_COMMAND
+: <a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358ae5fd79c728ac0ee9acb8d3674b9b365d">zigpc_datastore_id.h</a>
 </li>
 <li>ZIGPC_DS_TYPE_DEVICE
-: <a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55babf68142e14de17d57f37a232ddeb1721">zigpc_datastore_id.h</a>
+: <a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358abf68142e14de17d57f37a232ddeb1721">zigpc_datastore_id.h</a>
 </li>
 <li>ZIGPC_DS_TYPE_ENDPOINT
-: <a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba4386e09afcad530c5141b090fd4ef790">zigpc_datastore_id.h</a>
+: <a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a4386e09afcad530c5141b090fd4ef790">zigpc_datastore_id.h</a>
 </li>
 <li>ZIGPC_DS_TYPE_NETWORK
-: <a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba78e0f7b447100aee788e0cf0665bdbf0">zigpc_datastore_id.h</a>
+: <a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a78e0f7b447100aee788e0cf0665bdbf0">zigpc_datastore_id.h</a>
+</li>
+<li>ZIGPC_DS_TYPE_SERVER_CLUSTER
+: <a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a9f9f5d8d967c45f0070064c203cc6e46">zigpc_datastore_id.h</a>
 </li>
 <li>ZIGPC_GATEWAY_NOTIFY_MAX
 : <a class="el" href="group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfcab66357989c7fb30ca50e804a1459deb5">zigpc_gateway_notify.h</a>
@@ -495,6 +495,9 @@ $(document).ready(function(){initNavTree('globals_eval.html',''); initResizable(
 </li>
 <li>ZIGPC_GW_DISPATCH_NETWORK_INIT
 : <a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ae73e8efcea4751a970bb0a3b4f327a66">zigpc_gateway_int.h</a>
+</li>
+<li>ZIGPC_GW_DISPATCH_PERMIT_JOINS
+: <a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ac4ddeb3f838876a57c3ab20857668826">zigpc_gateway_int.h</a>
 </li>
 <li>ZIGPC_GW_DISPATCH_REMOVE_NODE
 : <a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a2fc0554bf73986a2d27b254654eaecf0">zigpc_gateway_int.h</a>
@@ -607,26 +610,11 @@ $(document).ready(function(){initNavTree('globals_eval.html',''); initResizable(
 <li>ZIGPC_NET_MGMT_NOTIFY_STATE_UPDATE
 : <a class="el" href="group__zigpc__net__mgmt__notify.html#gga4bf2181cf0fa570fde08a88ba56d7cdda28edfbc6ba2ba13c79dfa95b6b3a8daf">zigpc_net_mgmt_notify.h</a>
 </li>
-<li>ZIGPC_PROTCTRL_EVENT_MAX_VAL
-: <a class="el" href="zigpc__protctrl__process__send_8h.html#a9e84884bc21daabe7a0b9841627df5faa5621357652335b9d9c5c1aeaaff6a069">zigpc_protctrl_process_send.h</a>
-</li>
-<li>ZIGPC_PROTCTRL_EVENT_MIN_VAL
-: <a class="el" href="zigpc__protctrl__process__send_8h.html#a9e84884bc21daabe7a0b9841627df5faa112a333cecbea74c5d51b90563f935f8">zigpc_protctrl_process_send.h</a>
-</li>
-<li>ZIGPC_PROTCTRL_EVENT_NET_INIT
-: <a class="el" href="zigpc__protctrl__process__send_8h.html#a9e84884bc21daabe7a0b9841627df5faa970dfaee51a50ecb568f63a88da8eb7a">zigpc_protctrl_process_send.h</a>
-</li>
-<li>ZIGPC_PROTCTRL_EVENT_NET_STATE_UPDATE
-: <a class="el" href="zigpc__protctrl__process__send_8h.html#a9e84884bc21daabe7a0b9841627df5faae94568513340d6afcacbc7bc638eb815">zigpc_protctrl_process_send.h</a>
-</li>
-<li>ZIGPC_PROTCTRL_EVENT_WRITE_MESSAGE
-: <a class="el" href="zigpc__protctrl__process__send_8h.html#a9e84884bc21daabe7a0b9841627df5faa1a45c0e9ed81af989d80bf52f1a00f1d">zigpc_protctrl_process_send.h</a>
-</li>
 <li>ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER
-: <a class="el" href="group__zigpc__zcl.html#ggab93b3d8de226b13b5d58eb91ab75caccabc2242c885a944cd86156fc86a0edaaf">zcl_util.h</a>
+: <a class="el" href="group__zigpc__zcl__util.html#ggab93b3d8de226b13b5d58eb91ab75caccabc2242c885a944cd86156fc86a0edaaf">zcl_util.h</a>
 </li>
 <li>ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER
-: <a class="el" href="group__zigpc__zcl.html#ggab93b3d8de226b13b5d58eb91ab75cacca036d3505044db1d63e89372922e9229e">zcl_util.h</a>
+: <a class="el" href="group__zigpc__zcl__util.html#ggab93b3d8de226b13b5d58eb91ab75cacca036d3505044db1d63e89372922e9229e">zcl_util.h</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -634,7 +622,7 @@ $(document).ready(function(){initNavTree('globals_eval.html',''); initResizable(
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:55 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

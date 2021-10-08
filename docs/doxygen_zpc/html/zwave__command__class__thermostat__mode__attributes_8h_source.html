@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -109,44 +109,38 @@ $(document).ready(function(){initNavTree('zwave__command__class__thermostat__mod
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="zwave__controller__types_8h.html">zwave_controller_types.h</a>&quot;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="attribute__store_8h.html">attribute_store.h</a>&quot;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// Generic incldues</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// Interfaces</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="attribute__store__defined__attribute__types_8h.html">attribute_store_defined_attribute_types.h</a>&quot;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Thermostat Mode Command Class</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="zwave__command__class__thermostat__mode__attributes_8h.html#a57094f24b10230172ff62bedbae0aa68">   27</a></span>&#160;<span class="preprocessor">#define COMMAND_CLASS_THERMOSTAT_MODE 0x40</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Generic incldues</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="zwave__command__class__thermostat__mode__attributes_8h.html#a113978a30ec2b17156d9e92db7ca3a34">   29</a></span>&#160;<span class="preprocessor">#define ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE_VERSION \</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">  ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_THERMOSTAT_MODE)</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Thermostat Mode Command Class</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="zwave__command__class__thermostat__mode__attributes_8h.html#a57094f24b10230172ff62bedbae0aa68">   30</a></span>&#160;<span class="preprocessor">#define COMMAND_CLASS_THERMOSTAT_MODE 0x40</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="zwave__command__class__thermostat__mode__attributes_8h.html#aca8b49be1189fee44893d4b6843d3026">   32</a></span>&#160;<span class="preprocessor">#define ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE \</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">  ((attribute_store_type_t)((COMMAND_CLASS_THERMOSTAT_MODE &lt;&lt; 8) | 0x02))</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="zwave__command__class__thermostat__mode__attributes_8h.html#ab71146e85e907d598a4ff96349bd0e92">   35</a></span>&#160;<span class="preprocessor">#define ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_MODES \</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">  ((attribute_store_type_t)((COMMAND_CLASS_THERMOSTAT_MODE &lt;&lt; 8) | 0x03))</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="zwave__command__class__thermostat__mode__attributes_8h.html#aad71f23a9b91742ca5a148f12ccc9a9c">command_class_thermostat_mode_is_mode_supported</a>(</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *unid, <span class="keyword">const</span> <a class="code" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> endpoint, uint8_t mode);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;int32_t <a class="code" href="zwave__command__class__thermostat__mode__attributes_8h.html#a2679232cfe20dddd7ae1021788f0d682">command_class_thermostat_mode_get_mode</a>(</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *unid,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">const</span> <a class="code" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> endpoint,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="zwave__command__class__thermostat__mode__attributes_8h.html#a65762065a78bd4d23351626d298b700c">command_class_thermostat_mode_set_mode</a>(</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *unid,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keyword">const</span> <a class="code" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> endpoint,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  int32_t new_mode);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif  //ZWAVE_COMMAND_CLASS_THERMOSTAT_MODE_ATTRIBUTES_H</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="zwave__command__class__thermostat__mode__attributes_8h.html#aad71f23a9b91742ca5a148f12ccc9a9c">command_class_thermostat_mode_is_mode_supported</a>(</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *unid, <span class="keyword">const</span> <a class="code" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> endpoint, uint8_t mode);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;int32_t <a class="code" href="zwave__command__class__thermostat__mode__attributes_8h.html#a2679232cfe20dddd7ae1021788f0d682">command_class_thermostat_mode_get_mode</a>(</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *unid,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keyword">const</span> <a class="code" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> endpoint,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="zwave__command__class__thermostat__mode__attributes_8h.html#a65762065a78bd4d23351626d298b700c">command_class_thermostat_mode_set_mode</a>(</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *unid,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keyword">const</span> <a class="code" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> endpoint,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  int32_t new_mode);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif  //ZWAVE_COMMAND_CLASS_THERMOSTAT_MODE_ATTRIBUTES_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aattribute__store_8h_html"><div class="ttname"><a href="attribute__store_8h.html">attribute_store.h</a></div></div>
@@ -155,6 +149,7 @@ $(document).ready(function(){initNavTree('zwave__command__class__thermostat__mod
 <div class="ttc" id="azwave__command__class__thermostat__mode__attributes_8h_html_aad71f23a9b91742ca5a148f12ccc9a9c"><div class="ttname"><a href="zwave__command__class__thermostat__mode__attributes_8h.html#aad71f23a9b91742ca5a148f12ccc9a9c">command_class_thermostat_mode_is_mode_supported</a></div><div class="ttdeci">bool command_class_thermostat_mode_is_mode_supported(const char *unid, const zwave_endpoint_id_t endpoint, uint8_t mode)</div><div class="ttdoc">Verify whether the mode is supported.</div><div class="ttdef"><b>Definition:</b> zwave_command_class_thermostat_mode_attributes.c:32</div></div>
 <div class="ttc" id="azwave__controller__types_8h_html_a092c5878990b4dcf6037d4375ca63564"><div class="ttname"><a href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a></div><div class="ttdeci">uint8_t zwave_endpoint_id_t</div><div class="ttdef"><b>Definition:</b> zwave_controller_types.h:50</div></div>
 <div class="ttc" id="azwave__command__class__thermostat__mode__attributes_8h_html_a2679232cfe20dddd7ae1021788f0d682"><div class="ttname"><a href="zwave__command__class__thermostat__mode__attributes_8h.html#a2679232cfe20dddd7ae1021788f0d682">command_class_thermostat_mode_get_mode</a></div><div class="ttdeci">int32_t command_class_thermostat_mode_get_mode(const char *unid, const zwave_endpoint_id_t endpoint, attribute_store_node_value_state_t value_state)</div><div class="ttdoc">Get the currently configured modes.</div><div class="ttdef"><b>Definition:</b> zwave_command_class_thermostat_mode_attributes.c:62</div></div>
+<div class="ttc" id="aattribute__store__defined__attribute__types_8h_html"><div class="ttname"><a href="attribute__store__defined__attribute__types_8h.html">attribute_store_defined_attribute_types.h</a></div></div>
 <div class="ttc" id="agroup__attribute__store__api_html_ga296998251b25382f24977825b7193e18"><div class="ttname"><a href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a></div><div class="ttdeci">attribute_store_node_value_state_t</div><div class="ttdoc">This is the value state of a value.</div><div class="ttdef"><b>Definition:</b> attribute_store.h:127</div></div>
 <div class="ttc" id="agroup__sl__status_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:127</div></div>
 <div class="ttc" id="azwave__controller__types_8h_html"><div class="ttname"><a href="zwave__controller__types_8h.html">zwave_controller_types.h</a></div><div class="ttdoc">TODO: Write brief for zwave_controller_types.</div></div>
@@ -162,7 +157,7 @@ $(document).ready(function(){initNavTree('zwave__command__class__thermostat__mod
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6ac9bb75d77e4d974481da8e3d01cbca.html">zwave_command_classes</a></li><li class="navelem"><a class="el" href="dir_6ebbdbf23914ef85dcaf406f7830aebb.html">include</a></li><li class="navelem"><a class="el" href="zwave__command__class__thermostat__mode__attributes_8h.html">zwave_command_class_thermostat_mode_attributes.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

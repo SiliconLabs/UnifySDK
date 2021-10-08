@@ -119,6 +119,12 @@ int attribute_store_callbacks_teardown(void)
 sl_status_t attribute_store_register_callback(
   attribute_store_node_update_callback_t callback_function)
 {
+  if (callback_function == nullptr) {
+    sl_log_warning(LOG_TAG,
+                   "Attempt to register a nullptr update callback for all "
+                   "attributes. Discarding.");
+    return SL_STATUS_FAIL;
+  }
   generic_callbacks.insert(callback_function);
   return SL_STATUS_OK;
 }
@@ -127,6 +133,14 @@ sl_status_t attribute_store_register_callback_by_type(
   attribute_store_node_update_callback_t callback_function,
   attribute_store_type_t type)
 {
+  if (callback_function == nullptr) {
+    sl_log_warning(
+      LOG_TAG,
+      "Attempt to register a nullptr update callback for attribute type %d. "
+      "Discarding.",
+      type);
+    return SL_STATUS_FAIL;
+  }
   type_callbacks[type].insert(callback_function);
   return SL_STATUS_OK;
 }
@@ -136,6 +150,15 @@ sl_status_t attribute_store_register_callback_by_type_and_state(
   attribute_store_type_t type,
   attribute_store_node_value_state_t value_state)
 {
+  if (callback_function == nullptr) {
+    sl_log_warning(LOG_TAG,
+                   "Attempt to register a nullptr update callback for "
+                   "attribute type %d and value state %d. "
+                   "Discarding.",
+                   type,
+                   value_state);
+    return SL_STATUS_FAIL;
+  }
   attribute_store_value_callback_setting_t setting = {type, value_state};
   value_callbacks[setting].insert(callback_function);
   return SL_STATUS_OK;

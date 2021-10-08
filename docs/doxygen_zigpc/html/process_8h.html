@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -108,8 +108,10 @@ Macros</h2></td></tr>
 <tr class="separator:ga8c1c92ac579df9addba8037625589611"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9ab88d3a6c2d13dd59f9d41e1347ad40"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga9ab88d3a6c2d13dd59f9d41e1347ad40">PROCESS_CONF_NUMEVENTS</a>&#160;&#160;&#160;255</td></tr>
 <tr class="separator:ga9ab88d3a6c2d13dd59f9d41e1347ad40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae866e02394e4c350efce12ad02cebd70"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#gae866e02394e4c350efce12ad02cebd70">PROCESS_CONF_NUMEVENTS_WARN</a>&#160;&#160;&#160;32</td></tr>
-<tr class="separator:gae866e02394e4c350efce12ad02cebd70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga203287c010773e1223347682148a3e0c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga203287c010773e1223347682148a3e0c">PROCESS_CONF_NUMEVENTS_PRINT</a>&#160;&#160;&#160;64</td></tr>
+<tr class="separator:ga203287c010773e1223347682148a3e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga52a36a03fb08b1708d84b421d2b3b962"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga52a36a03fb08b1708d84b421d2b3b962">PROCESS_CONF_NUMEVENTS_ERROR</a>&#160;&#160;&#160;230</td></tr>
+<tr class="separator:ga52a36a03fb08b1708d84b421d2b3b962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga57de891168a2d72f56213461d9fb0cc9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga57de891168a2d72f56213461d9fb0cc9">PROCESS_EVENT_NONE</a>&#160;&#160;&#160;0x80</td></tr>
 <tr class="separator:ga57de891168a2d72f56213461d9fb0cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6c18caccfa1f228ca39b41f1be228f91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga6c18caccfa1f228ca39b41f1be228f91">PROCESS_EVENT_INIT</a>&#160;&#160;&#160;0x81</td></tr>
@@ -189,7 +191,7 @@ Typedefs</h2></td></tr>
 <tr class="separator:ga4d81d85c09c89d0e97cd0d239728a942"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaacfecee3e853f3904a8e695de0f6649d"><td class="memItemLeft" align="right" valign="top">typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#gaacfecee3e853f3904a8e695de0f6649d">process_data_t</a></td></tr>
 <tr class="separator:gaacfecee3e853f3904a8e695de0f6649d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7434c88e71afb7d2a2da615c016fc7b6"><td class="memItemLeft" align="right" valign="top">typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga7434c88e71afb7d2a2da615c016fc7b6">process_num_events_t</a></td></tr>
+<tr class="memitem:ga7434c88e71afb7d2a2da615c016fc7b6"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga7434c88e71afb7d2a2da615c016fc7b6">process_num_events_t</a></td></tr>
 <tr class="separator:ga7434c88e71afb7d2a2da615c016fc7b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -265,7 +267,7 @@ Functions called from application programs</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_f1d32ca542c0f43616b5a5e0d1cef42d.html">uic_contiki</a></li><li class="navelem"><a class="el" href="dir_7e2d4b5dbef12d3b4b67dd812c2f2df2.html">core</a></li><li class="navelem"><a class="el" href="dir_cab485229364bacc9038f86019979476.html">sys</a></li><li class="navelem"><a class="el" href="process_8h.html">process.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

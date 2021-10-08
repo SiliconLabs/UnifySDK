@@ -134,7 +134,7 @@ static sl_status_t remove_failed_node()
   sl_status_t command_status = SL_STATUS_FAIL;
   char *token                = strtok(NULL, " ");
   if (token == NULL) {
-    sl_log_error(LOG_TAG, "You must enter a NodeID with this command\n");
+    sl_log_info(LOG_TAG, "Error: you must enter a NodeID with this command\n");
     return command_status;
   }
 
@@ -178,7 +178,7 @@ static sl_status_t send_data()
   sl_status_t command_status = SL_STATUS_FAIL;
   char *token                = strtok(NULL, " ");
   if (token == NULL) {
-    sl_log_error(LOG_TAG, "You must enter a NodeID with this command\n");
+    sl_log_info(LOG_TAG, "Error: you must enter a NodeID with this command\n");
     return command_status;
   }
 
@@ -212,7 +212,7 @@ static sl_status_t send_basic_set(uint8_t value)
   sl_status_t command_status = SL_STATUS_FAIL;
   char *token                = strtok(NULL, " ");
   if (token == NULL) {
-    sl_log_error(LOG_TAG, "You must enter a NodeID with this command\n");
+    sl_log_info(LOG_TAG, "Error: you must enter a NodeID with this command\n");
     return command_status;
   }
 
@@ -267,7 +267,7 @@ static sl_status_t send_nif()
   sl_status_t command_status = SL_STATUS_FAIL;
   char *token                = strtok(NULL, " ");
   if (token == NULL) {
-    sl_log_error(LOG_TAG, "You must enter a NodeID with this command\n");
+    sl_log_info(LOG_TAG, "Error: you must enter a NodeID with this command\n");
     return command_status;
   }
 
@@ -291,7 +291,7 @@ static sl_status_t request_nif()
   sl_status_t command_status = SL_STATUS_FAIL;
   char *token                = strtok(NULL, " ");
   if (token == NULL) {
-    sl_log_error(LOG_TAG, "You must enter a NodeID with this command\n");
+    sl_log_info(LOG_TAG, "Error: you must enter a NodeID with this command\n");
     return command_status;
   }
 

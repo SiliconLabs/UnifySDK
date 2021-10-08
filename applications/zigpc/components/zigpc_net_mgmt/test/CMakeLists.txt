@@ -26,6 +26,7 @@ target_add_unittest(
   zigpc_net_mgmt_fsm_test.c
   DEPENDS
   zigpc_net_mgmt_notify_mock
+  zigpc_datastore_mock
   zigpc_gateway_mock)
 
 # Notify Tests

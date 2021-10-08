@@ -34,8 +34,8 @@ constexpr const char *LOG_TAG = "zpc_database_tool";
 
 /*
  * Translators for boost property tree which allows for parsing hex strings and
- * translating attribute type names to attribute id's 
- * 
+ * translating attribute type names to attribute id's
+ *
  */
 struct Uint8VectorTranslator {
   typedef string internal_type;
@@ -179,15 +179,25 @@ int main(int argc, char *argv[])
   const char *export_file;
 
   config_add_string("import",
-                    "import json file, if the database file already exists the "
-                    "existing data will be erased",
+                    "Import JSON file. If the database file already exists, "
+                    "its contents will be erased and replaced with the data "
+                    "from the import JSON file.",
                     "");
-  config_add_string("export", "export json file ", "");
+  config_add_string("export",
+                    "Export JSON file. The database file contents will "
+                    "be written to the export file.",
+                    "");
 
   if (SL_STATUS_OK != config_parse(argc, argv, UIC_VERSION)) {
+    sl_log_info(LOG_TAG,
+                "Could not parse configuration. "
+                "Aborting Import/Export operation.");
     return 1;
   }
   if (SL_STATUS_OK != datastore_fixt_setup()) {
+    sl_log_warning(LOG_TAG,
+                   "Could not initialize database. Please verify "
+                   "configuration. Aborting Import/Export operation.");
     return 1;
   }
 
@@ -198,7 +208,9 @@ int main(int argc, char *argv[])
   config_get_as_string("export", &export_file);
 
   if ((strlen(import_file) > 0) && (strlen(import_file) > 0)) {
-    sl_log_error(LOG_TAG, "import and export are mutually exclusive");
+    sl_log_info(LOG_TAG,
+                "Import and Export functionalities are mutually exclusive. "
+                "Please perform one operation at a time.");
     return 1;
   }
 
@@ -209,13 +221,13 @@ int main(int argc, char *argv[])
     attribute root = attribute::root();
     bpt::read_json(import_file, pt);
     import_data_store(root, pt);
-    sl_log_info(LOG_TAG, "Data base successfully imported");
+    sl_log_info(LOG_TAG, "Database was successfully imported.");
   }
 
   if (strlen(export_file) > 0) {
     auto pt = dump_data_store(attribute::root());
     bpt::write_json(export_file, pt);
-    sl_log_info(LOG_TAG, "import and export are mutually exported");
+    sl_log_info(LOG_TAG, "Database was successfully exported.");
   }
 
   datastore_fixt_teardown();

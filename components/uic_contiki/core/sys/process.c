@@ -379,15 +379,24 @@ process_post(struct process *p, process_event_t ev, process_data_t data) CC_REEN
    return PROCESS_ERR_FULL;
   }
 
-  if (nevents > PROCESS_CONF_NUMEVENTS_WARN) {
-    sl_log_error(LOG_TAG, "Event queue has more than 32 events, total:%d, when "
-                          "event %d was posted to %s from %s\n",
-                          nevents,
-                          ev,
-                          PROCESS_NAME_STRING(p),
-                          process_current ?
-                            PROCESS_NAME_STRING(process_current):
-                            "----");
+    if (nevents > PROCESS_CONF_NUMEVENTS_ERROR) {
+    sl_log_error(LOG_TAG,
+                 "Contiki Event queue usage is too high: %d events. "
+                 "Last event %d was posted to %s from %s.\n",
+                 nevents,
+                 ev,
+                 PROCESS_NAME_STRING(p),
+                 process_current ? PROCESS_NAME_STRING(process_current)
+                                 : "<unknown process>");
+  } else if (nevents > PROCESS_CONF_NUMEVENTS_PRINT) {
+    sl_log_debug(LOG_TAG,
+                 "Contiki Event queue usage is high: %d events."
+                 "Last event %d was posted to %s from %s.\n",
+                 nevents,
+                 ev,
+                 PROCESS_NAME_STRING(p),
+                 process_current ? PROCESS_NAME_STRING(process_current)
+                                 : "<unknown process>");
   }
 
   snum = (process_num_events_t)(fevent + nevents) % PROCESS_CONF_NUMEVENTS;

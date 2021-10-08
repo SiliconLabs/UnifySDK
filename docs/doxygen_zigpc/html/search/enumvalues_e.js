@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['wait_5ffor_5fmore_4717',['WAIT_FOR_MORE',['../namespaceuic__ota.html#a15a593e80817e9c52f1d5dc96871921ba07df05a95433f3c8382192c2beea9a1a',1,'uic_ota']]],
-  ['waiting_5fto_5fupgrade_4718',['WAITING_TO_UPGRADE',['../namespaceuic__ota.html#a15a593e80817e9c52f1d5dc96871921ba3956bebbc4b29e796f8eb11ccfbcd755',1,'uic_ota']]],
-  ['waiting_5fto_5fupgrade_5fvia_5fexternal_5fevent_4719',['WAITING_TO_UPGRADE_VIA_EXTERNAL_EVENT',['../namespaceuic__ota.html#a15a593e80817e9c52f1d5dc96871921ba5c6bd28760671ccb13a1f319c805e5f9',1,'uic_ota']]]
+  ['upgrade_5fabort_4845',['UPGRADE_ABORT',['../ota-server-policy_8c.html#a30b5d911724cb620be72d5c189fdefcaaae097de758fa406aa89f660a7a6c7217',1,'ota-server-policy.c']]],
+  ['upgrade_5fask_5fme_5flater_4846',['UPGRADE_ASK_ME_LATER',['../ota-server-policy_8c.html#a30b5d911724cb620be72d5c189fdefcaa9b25185b55573a4245c2f30303fd9810',1,'ota-server-policy.c']]],
+  ['upgrade_5fif_5fserver_5fhas_5fnewer_4847',['UPGRADE_IF_SERVER_HAS_NEWER',['../ota-server-policy_8c.html#a4378623437d76ba978b65926c1ec91fba52a3c7db0c2bdd8d1a9b33f4e61f540b',1,'ota-server-policy.c']]],
+  ['upgrade_5fnow_4848',['UPGRADE_NOW',['../ota-server-policy_8c.html#a30b5d911724cb620be72d5c189fdefcaaa2e22adf2e14d56171bb91a5d2fd1096',1,'ota-server-policy.c']]],
+  ['upgrade_5fsoon_4849',['UPGRADE_SOON',['../ota-server-policy_8c.html#a30b5d911724cb620be72d5c189fdefcaa14627f61c90fe74637b58d2a27b017e7',1,'ota-server-policy.c']]]
 ];

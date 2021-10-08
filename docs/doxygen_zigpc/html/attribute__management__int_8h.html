@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -172,7 +172,7 @@ Variables</h2></td></tr>
 <tr class="memitem:ae412a3d796b4078513543dd59e65abc6"><td class="memItemLeft" align="right" valign="top">static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#ae412a3d796b4078513543dd59e65abc6">ZIGPC_ATTRMGMT_READ_RECORDS_LIMIT_PER_MESSAGE</a> = 25</td></tr>
 <tr class="memdesc:ae412a3d796b4078513543dd59e65abc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limit of Read Attribute Records to send per ZCL Message.  <a href="attribute__management__int_8h.html#ae412a3d796b4078513543dd59e65abc6">More...</a><br /></td></tr>
 <tr class="separator:ae412a3d796b4078513543dd59e65abc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a398911b2bb6c64c06ff89d922f041c9d"><td class="memItemLeft" align="right" valign="top">static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a398911b2bb6c64c06ff89d922f041c9d">ZIGPC_ATTRMGMT_REPORT_RECORDS_LIMIT_PER_MESSAGE</a> = 6</td></tr>
+<tr class="memitem:a398911b2bb6c64c06ff89d922f041c9d"><td class="memItemLeft" align="right" valign="top">static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a398911b2bb6c64c06ff89d922f041c9d">ZIGPC_ATTRMGMT_REPORT_RECORDS_LIMIT_PER_MESSAGE</a> = 5</td></tr>
 <tr class="memdesc:a398911b2bb6c64c06ff89d922f041c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limit of Configure Reporting Records to send per ZCL Message.  <a href="attribute__management__int_8h.html#a398911b2bb6c64c06ff89d922f041c9d">More...</a><br /></td></tr>
 <tr class="separator:a398911b2bb6c64c06ff89d922f041c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3c4214de97c173b691650968217693b"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#af3c4214de97c173b691650968217693b">ZIGPC_ATTRMGMT_REPORT_INTERVAL_MIN_DEFAULT</a> = 10</td></tr>
@@ -181,6 +181,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a7f8558c0968fea23102f269c4ecd808b"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a7f8558c0968fea23102f269c4ecd808b">ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT</a> = 60</td></tr>
 <tr class="memdesc:a7f8558c0968fea23102f269c4ecd808b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Configure Reporting Record Maximum Interval (Seconds).  <a href="attribute__management__int_8h.html#a7f8558c0968fea23102f269c4ecd808b">More...</a><br /></td></tr>
 <tr class="separator:a7f8558c0968fea23102f269c4ecd808b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88e72fabd634f2ba9d453fef917b7820"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a88e72fabd634f2ba9d453fef917b7820">ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT</a> = 0x0000</td></tr>
+<tr class="memdesc:a88e72fabd634f2ba9d453fef917b7820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Configure Reporting Record Reportable Change to allow any change to be reported.  <a href="attribute__management__int_8h.html#a88e72fabd634f2ba9d453fef917b7820">More...</a><br /></td></tr>
+<tr class="separator:a88e72fabd634f2ba9d453fef917b7820"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7"></a>
@@ -705,6 +708,31 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a88e72fabd634f2ba9d453fef917b7820"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88e72fabd634f2ba9d453fef917b7820">&#9670;&nbsp;</a></span>ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classuint32__t.html">uint32_t</a> ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT = 0x0000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default Configure Reporting Record Reportable Change to allow any change to be reported. </p>
+<p>NOTE: This value is chosen arbitrarily and will likely be configurable in the future. </p>
+
+</div>
+</div>
 <a id="a7f8558c0968fea23102f269c4ecd808b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f8558c0968fea23102f269c4ecd808b">&#9670;&nbsp;</a></span>ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT</h2>
 
@@ -765,7 +793,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const unsigned int ZIGPC_ATTRMGMT_REPORT_RECORDS_LIMIT_PER_MESSAGE = 6</td>
+          <td class="memname">const unsigned int ZIGPC_ATTRMGMT_REPORT_RECORDS_LIMIT_PER_MESSAGE = 5</td>
         </tr>
       </table>
   </td>
@@ -786,7 +814,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_b6f745f966ae74add2521a551533f539.html">attribute_management</a></li><li class="navelem"><a class="el" href="dir_65cbbcbe9e4af1172428fcc9ed2fe9fe.html">src</a></li><li class="navelem"><a class="el" href="attribute__management__int_8h.html">attribute_management_int.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

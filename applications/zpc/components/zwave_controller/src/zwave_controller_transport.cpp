@@ -72,7 +72,7 @@ static const zwave_controller_transport_t *
   return nullptr;
 }
 
-uint8_t zwave_controller_transport_is_encapsulation_cc(
+zwave_cc_version_t zwave_controller_transport_is_encapsulation_cc(
   zwave_command_class_t command_class)
 {
   const zwave_controller_transport_t *t;

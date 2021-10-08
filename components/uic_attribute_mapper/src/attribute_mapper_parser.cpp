@@ -13,6 +13,9 @@
 
 #include "attribute_mapper_grammar.hpp"
 #include "attribute_mapper_ast.hpp"
+#include "sl_log.h"
+
+constexpr const char *LOG_TAG = "attribute_mapper";
 
 namespace ast
 {
@@ -22,18 +25,19 @@ bool Parse(const std::string &file_to_parse, ast_tree &ast)
   using skipperType  = SkipperGrammar<IteratorType>;
   using grammarType  = UAMGrammar<IteratorType, skipperType>;
 
-  static grammarType grammar;
-  static skipperType skipper;
+  grammarType grammar;
+  skipperType skipper;
 
   IteratorType begin(file_to_parse.begin());
   IteratorType end(file_to_parse.end());
 
   if (!phrase_parse(begin, end, grammar, skipper, ast)) {
-    std::cout << "parser error" << std::endl;
+    sl_log_error(LOG_TAG, "parse error");
+    return false;
   }
 
   if (begin != end) {
-    std::cout << "Did not pase to the end of file." << '\n';
+    sl_log_error(LOG_TAG, "Did not pase to the end of file.");
     return false;
   }
 

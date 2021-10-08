@@ -13,7 +13,10 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
     }
 
     updateState(command: any) {
-        this.setState({ Payload: this.getPayload(command), Command: command });
+        this.setState({
+            Payload: {},
+            Command: {}
+        }, () => this.setState({ Payload: this.getPayload(command), Command: command }));
     }
 
     getPayload(command: any) {
@@ -91,7 +94,7 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
                                         </div>
                                     default:
                                         return <div key={`${index}:${bIndex}`} className="col-sm-6 inline margin-v-10">
-                                            <TextField size="small" className="flex-input" fullWidth={true} label={b.name} name={b.name} variant="outlined" type={b.type} defaultValue={this.state.Payload[i.name][b.name]} onChange={this.handleBitmapChange.bind(this, i, false)} onFocus={(event) => event.target.select()}/>
+                                            <TextField size="small" className="flex-input" fullWidth={true} label={b.name} name={b.name} variant="outlined" type={b.type} defaultValue={this.state.Payload[i.name][b.name]} onChange={this.handleBitmapChange.bind(this, i, false)} onFocus={(event) => event.target.select()} />
                                         </div>
                                 }
                             })

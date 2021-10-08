@@ -32,7 +32,7 @@
 #include "zwave_controller_command_class_indices.h"
 
 // Setup Log ID
-#define LOG_TAG "zwapi_controller_utils"
+#define LOG_TAG "zwave_controller_utils"
 
 void zwave_sl_log_frame_data(
   const zwave_controller_connection_info_t *connection_info,
@@ -46,7 +46,7 @@ void zwave_sl_log_frame_data(
 
   index += snprintf(message + index,
                     sizeof(message) - index,
-                    "Z-Wave Frame (NodeID %03d:%d -> %03d:%d ",
+                    "Z-Wave Frame (NodeID %d:%d -> %d:%d ",
                     connection_info->remote.node_id,
                     connection_info->remote.endpoint_id,
                     connection_info->local.node_id,
@@ -88,7 +88,7 @@ void zwave_sl_log_nif_data(zwave_node_id_t node_id,
 
   index += snprintf(message + index,
                     sizeof(message) - index,
-                    "NIF from NodeID: %03d",
+                    "NIF from NodeID: %d",
                     node_id);
 
   index += snprintf(message + index,
@@ -109,8 +109,7 @@ void zwave_sl_log_nif_data(zwave_node_id_t node_id,
   }
 
   if (node_info->listening_protocol
-      & (ZWAVE_NODE_INFO_LISTENING_PROTOCOL_LISTENING_MASK
-         | ZWAVE_NODE_INFO_LISTENING_PROTOCOL_ROUTING_MASK)) {
+      & ZWAVE_NODE_INFO_LISTENING_PROTOCOL_LISTENING_MASK) {
     index += snprintf(message + index, sizeof(message) - index, "AL mode - ");
   } else if (node_info->optional_protocol
              & (ZWAVE_NODE_INFO_OPTIONAL_PROTOCOL_SENSOR_1000MS_MASK
@@ -139,7 +138,7 @@ void zwave_sl_log_nif_data(zwave_node_id_t node_id,
                       node_info->command_class_list[i]);
   }
 
-  sl_log_info(LOG_TAG, "%s\n", message);
+  sl_log_debug(LOG_TAG, "%s", message);
 }
 
 void zwave_sl_log_dsk(const char *tag, const zwave_dsk_t dsk)
@@ -158,7 +157,7 @@ void zwave_command_class_list_unpack(zwave_node_info_t *node_info,
   uint8_t i = 0, nif_index = 0;
   while ((nif_index < nif_length)
          && (i < ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH)) {
-    // Check if it's extended CC format (2 bytes length). Check SDS13781
+    // Check if it's extended CC format (2 bytes length). Check
     // CC:0000.00.00.11.001 for more details
     if (((nif[nif_index] & 0xF0) == 0xF0) && (nif_index < nif_length - 1)) {
       node_info->command_class_list[i]
@@ -273,9 +272,10 @@ bool zwave_node_supports_command_class(zwave_command_class_t command_class,
   return command_class_found;
 }
 
-uint8_t zwave_node_get_command_class_version(uint16_t command_class,
-                                             zwave_node_id_t node_id,
-                                             zwave_endpoint_id_t endpoint_id)
+zwave_cc_version_t
+  zwave_node_get_command_class_version(uint16_t command_class,
+                                       zwave_node_id_t node_id,
+                                       zwave_endpoint_id_t endpoint_id)
 {
   unid_t node_unid;
   zwave_unid_from_node_id(node_id, node_unid);
@@ -291,15 +291,8 @@ uint8_t zwave_node_get_command_class_version(uint16_t command_class,
     ZWAVE_CC_VERSION_ATTRIBUTE(command_class),
     0);
 
-  if (version_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    return 0;
-  }
-
-  uint8_t version = 0;
-  attribute_store_read_value(version_node,
-                             REPORTED_ATTRIBUTE,
-                             &version,
-                             sizeof(version));
+  zwave_cc_version_t version = 0;
+  attribute_store_get_reported(version_node, &version, sizeof(version));
 
   return version;
 }

@@ -1,0 +1,16 @@
+target_add_unittest(
+  zigpc_controller
+  NAME
+  zigpc_controller_events_test
+  SOURCES
+  zigpc_controller_events_test.cpp
+  EXCLUDE
+  zigpc_controller.cpp
+  DEPENDS
+  zigpc_attribute_management_mock
+  zigpc_datastore_mock
+  zigpc_gateway_mock
+  zigpc_net_mgmt_mock
+  zigpc_ota_zigbee_mock
+  uic_mqtt_mock
+  uic_dotdot_mqtt_mock)

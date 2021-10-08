@@ -8,6 +8,8 @@ var group__config =
     [ "CONFIG_KEY_MQTT_HOST", "group__config.html#ga3f4fb187fb7daba01f86175d1f1e791d", null ],
     [ "CONFIG_KEY_MQTT_KEYFILE", "group__config.html#gafc5a11e0eede063267e52f3e1304a6b7", null ],
     [ "CONFIG_KEY_MQTT_PORT", "group__config.html#ga8bd0eb214865a267c0edd4d7e024901b", null ],
+    [ "DEFAULT_CONFIG_PATH", "group__config.html#ga814585e9e2b41f2f341c6368c39ba0c7", null ],
+    [ "DEFAULT_DATASTORE_FILE", "group__config.html#ga8c56d21a24a5625f91d15a7bd267a92b", null ],
     [ "config_status_t", "group__config.html#ga3b41bf466c6ddabc6c1ce4aca94ab582", [
       [ "CONFIG_STATUS_OK", "group__config.html#gga3b41bf466c6ddabc6c1ce4aca94ab582ac8cb23bf8b248043d4025f94d31ddb1f", null ],
       [ "CONFIG_STATUS_NOK", "group__config.html#gga3b41bf466c6ddabc6c1ce4aca94ab582a5be7ab74ba9951bb51633fd3f14d09ee", null ],

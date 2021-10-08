@@ -141,7 +141,7 @@ bool is_zwave_command_class_filtered_for_root_device(
                                         node_id,
                                         endpoint_id)) {
     if (is_version_cc_found(updated_node)) {
-      uint8_t version
+      zwave_cc_version_t version
         = zwave_node_get_command_class_version(COMMAND_CLASS_MULTI_CHANNEL_V4,
                                                node_id,
                                                endpoint_id);
@@ -192,9 +192,9 @@ bool is_actuator_command_class(zwave_command_class_t command_class)
   }
 }
 
-uint8_t get_zwave_node_role_type(zwave_node_id_t node_id)
+zwave_role_type_t get_zwave_node_role_type(zwave_node_id_t node_id)
 {
-  uint8_t role_type = ROLE_TYPE_UNKNOWN;
+  zwave_role_type_t role_type = ROLE_TYPE_UNKNOWN;
   unid_t unid;
   zwave_unid_from_node_id(node_id, unid);
   attribute_store_node_t endpoint_node
@@ -210,6 +210,26 @@ uint8_t get_zwave_node_role_type(zwave_node_id_t node_id)
   }
 
   return role_type;
+}
+
+/**
+ * @brief Verifies if a Node is a Portable End Node. (PS / PEN Role type)
+ *
+ * @param node  The Attribute Store node for the Endpoint ID 0 which
+ *                       which needs a wake up configuration
+ * @returns true if the Role type of the node is ROLE_TYPE_END_NODE_PORTABLE,
+ *          false otherwise
+ */
+bool is_portable_end_node(attribute_store_node_t node)
+{
+  zwave_node_id_t node_id = 0;
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_NODE_ID);
+  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
+  if (get_zwave_node_role_type(node_id) == ROLE_TYPE_PEN) {
+    return true;
+  }
+  return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -231,7 +251,7 @@ int32_t command_class_get_int32_value(uint8_t size,
   for (int i = 0; i < size; i++) {
     setpoint_value = (setpoint_value << 8ULL) | value[i];
   }
-  //We want this with 3 decimals
+  // We want this with 3 decimals
   setpoint_value = setpoint_value * 1000;
   for (uint8_t i = 0; i < precision; i++) {
     setpoint_value = setpoint_value / 10;

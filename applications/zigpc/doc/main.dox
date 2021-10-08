@@ -4,16 +4,16 @@
 
 @mainpage Zigbee Protocol Controller
 @section intro Introduction
-The ZigPC is the Unify protocol-controller (PC) for the Zigbee protocol.
+The ZigPC is the Unify Protocol Controller for the Zigbee protocol.
 
 Refer to the following documents to get more information:
-  - [ZigPC Get Started](applications/zigpc/readme_get_started.md)
   - [ZigPC User Guide](applications/zigpc/readme_user.md)
   - [ZigPC Developer Guide](applications/zigpc/readme_developer.md)
   - [ZigPC Release Notes](applications/zigpc/release_notes.md)
 
 @section References
-TBD
+Zigbee Alliance, Base Device Behavior Specification
+Zigbee Alliance, ZigBee Cluster Library Specification
 
 @section ZigPC Components
 @subpage zigpc_components "See ZigPC Components"

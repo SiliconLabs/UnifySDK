@@ -51,7 +51,7 @@ bool operator==(const condition &a, const condition &b)
 
 bool operator==(const attribute &a, const attribute &b)
 {
-  return a.value_type == b.value_type && a.attribute == b.attribute;
+  return a.value_type == b.value_type && a.attribute_path == b.attribute_path;
 }
 
 bool operator==(const attribute_path_subscript &a,
@@ -62,7 +62,7 @@ bool operator==(const attribute_path_subscript &a,
 
 bool operator==(const assignment &a, const assignment &b)
 {
-  return a.attribute == b.attribute && a.rhs == b.rhs;
+  return a.lhs == b.lhs && a.rhs == b.rhs;
 }
 
 }  // namespace ast

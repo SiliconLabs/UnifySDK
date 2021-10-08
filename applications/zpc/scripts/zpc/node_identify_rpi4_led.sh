@@ -25,7 +25,7 @@
 SCRIPTNAME=@CMAKE_INSTALL_PREFIX@/zpc/node_identify_rpi4_led.sh
 # The LED to control. On Raspberry Pi 4, led0 (the one next to power led) is available.
 LEDPATH=/sys/class/leds/led0
-PIDFILE=/var/run/zipgateway-node-identify.pid
+PIDFILE=/var/lib/uic/node-identify.pid
 
 # Divide integer by 1000 without calling external program.
 # (/bin/sh does not support floating point math)
@@ -48,6 +48,8 @@ ms2sec() {
 indicator_config() {
     echo none > $LEDPATH/trigger
     echo timer > $LEDPATH/trigger
+    # Wait for the kernel to bring up the delay_* SysFS files and update permissions.
+    sleep 0.2
     echo $1 > $LEDPATH/delay_on
     echo $2 > $LEDPATH/delay_off
 }

@@ -79,9 +79,9 @@ sl_status_t uic_main_ext_unregister_rfd(int fdr)
       return SL_STATUS_OK;
     }
   }
-  sl_log_critical(LOG_TAG,
-                  "Failed to remove fdr registration for %d: not found",
-                  fdr);
+  sl_log_warning(LOG_TAG,
+                 "Failed to remove fdr registration for %d: not found",
+                 fdr);
   return SL_STATUS_FAIL;
 }
 

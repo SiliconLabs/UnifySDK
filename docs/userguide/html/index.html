@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">Unify SDK Overview </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> Latest version of the Unify SDK Overview is available online <a href="https://siliconlabs.github.io/UnifySDK/userguide/html/index.html">here</a>.</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> Latest released version of the Unify SDK Overview is available online <a href="https://siliconlabs.github.io/UnifySDK/userguide/html/index.html">here</a>.</p>
 <p>The Unify SDK provides software source and binary packages for Raspberry Pi 4 to help build an IoT gateway product. The Unify SDK enables an IoT service to control and manage end nodes in several wireless PHY radios (e.g., Z-Wave, Zigbee, and so on) supported by Silicon Labs. The Unify SDK uses the Unify Controller Language (UCL) as an internal abstraction layer to seamlessly control various end nodes that are enabled with multiple wireless PHY radios. The detailed architecture of the Unify SDK is discussed in the Unify SDK Specification.</p>
 <p>The Unify SDK uses Unify SDK library to decouple API modules from the PHY drivers. This facilitates code reuse and enables easily adding new high-level APIs without the need to modify the PHY drivers. The library provides a number of components that simplify the task of writing a PHY driver also known as a Protocol Controller.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
@@ -149,12 +149,12 @@ Unify SDK Components</h1>
 <ul>
 <li>Z-Wave Protocol controller (ZPC)</li>
 <li>Zigbee Protocol Controller (ZigPC)</li>
-<li>Unify SDk Smart Start Provisioning list (UPVL)</li>
-<li>Unify SDK Multicast Group Manager (ANGLE)</li>
+<li>Unify SDK SmartStart Provisioning list (UPVL)</li>
+<li>Unify SDK Group Manager (ANGEL)</li>
 <li>Unify SDK OTA Image Provider (Image Provider)</li>
 <li>IoT Services (i.e., DEV GUI)</li>
 </ul>
-<p><img src="SDKOverview.svg" alt="" style="pointer-events: none;" class="inline" title="SDK Overview"/>   </p>
+<p><img src="SDKOverview.png" alt="" class="inline" title="SDK Overview"/>   </p>
 <p>The Unify SDK was previously known as Unified IoT Controller or UIC for short. The old name can still be found in some parts of the SDK.</p>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Core Unify Components</h2>
@@ -169,7 +169,7 @@ Protocol Controllers</h3>
 <p>Each protocol controller interfaces with its radio hardware and implements a translation between its own wireless protocol and the <em>Unified Command Language</em> (UCL), which is defined in the Unify SDK Specification. In addition, these protocol controllers implement best practices regarding message delivery, and adherence to regulatory requirements. Protocol-specific implementation details can be found in the user guide for each protocol controller.</p>
 <h3><a class="anchor" id="autotoc_md6"></a>
 The Unified SDK Provisioning List (UPVL)</h3>
-<p><a class="el" href="md_applications_upvl_readme_user.html">The UPVL</a> serves the Smart Start Provisioning list to perform Smart Start Security 2 (S2) inclusions and maintains the ucl/SmartStart MQTT topic.</p>
+<p><a class="el" href="md_applications_upvl_readme_user.html">The UPVL</a> serves the SmartStart Provisioning list to perform SmartStart Security 2 (S2) inclusions and maintains the ucl/SmartStart MQTT topic.</p>
 <h3><a class="anchor" id="autotoc_md7"></a>
 The Unify SDK Group Manager (ANGEL)</h3>
 <p><a class="el" href="md_applications_angel_readme_user.html">ANGEL</a> is an application that manages groups and bookkeeping between protocol controllers, and also publishes group state changes to the ucl/by-group MQTT topic.</p>
@@ -316,7 +316,7 @@ System Requirements</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">uic-image-provider  </td><td class="markdownTableBodyNone">3281 kb  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">&#160;uic-upvl  </td><td class="markdownTableBodyNone">3339 kb  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
+<td class="markdownTableBodyNone">uic-upvl  </td><td class="markdownTableBodyNone">3339 kb  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">uic-dev-gui  </td><td class="markdownTableBodyNone">95 MB  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
 </table>
@@ -340,8 +340,7 @@ FAQ</h1>
  <div class="fragment"><div class="line">systemctl status `ls /lib/systemd/system/uic-*.service | xargs -n 1 basename`</div>
 </div><!-- fragment --></li>
 </ul>
-<p>The output of this command will tell if the service is loaded and/or is active: <br  />
- </p><div class="fragment"><div class="line">● uic-dev-gui-api.service - Unify User Interface API</div>
+<p>The output of this command will tell if the service is loaded and/or is active: </p><div class="fragment"><div class="line">● uic-dev-gui-api.service - Unify User Interface API</div>
 <div class="line">   Loaded: loaded (/lib/systemd/system/uic-dev-gui-api.service; enabled; vendor preset: enabled)</div>
 <div class="line">   Active: active (running) since Sun 2021-07-25 12:17:05 BST; 21min ago</div>
 </div><!-- fragment --><ul>
@@ -373,7 +372,7 @@ FAQ</h1>
  To verify the rf region on your gateway, execute the following command in your gateway terminal: <div class="fragment"><div class="line">cat /etc/uic/uic.cfg</div>
 </div><!-- fragment --></li>
 </ol>
-<p>It outputs the configured rf_region: </p><div class="fragment"><div class="line">pi@raspberrypi:/etc/uic $ cat uic.cfg </div>
+<p>It outputs the configured rf_region: </p><div class="fragment"><div class="line">pi@raspberrypi:/etc/uic $ cat uic.cfg</div>
 <div class="line">zpc:</div>
 <div class="line">  serial: /dev/ttyUSB0</div>
 <div class="line">  rf_region: US</div>
@@ -452,12 +451,14 @@ Third party libraries and code</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Boost  </td><td class="markdownTableBodyNone">logging, data structures, config files and json  </td><td class="markdownTableBodyNone"><a href="https://www.boost.org/LICENSE_1_0.txt">https://www.boost.org/LICENSE_1_0.txt</a>  </td><td class="markdownTableBodyNone">Boost   </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">nlohmann/json  </td><td class="markdownTableBodyNone">json  </td><td class="markdownTableBodyNone"><a href="https://github.com/nlohmann/">https://github.com/nlohmann/</a>  </td><td class="markdownTableBodyNone">MIT   </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">CMock  </td><td class="markdownTableBodyNone">Unittest  </td><td class="markdownTableBodyNone"><a href="https://github.com/ThrowTheSwitch/CMock/blob/master/LICENSE.txt">https://github.com/ThrowTheSwitch/CMock/blob/master/LICENSE.txt</a>  </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Unity  </td><td class="markdownTableBodyNone">Unittest  </td><td class="markdownTableBodyNone"><a href="https://github.com/ThrowTheSwitch/Unity/blob/master/LICENSE.txt">https://github.com/ThrowTheSwitch/Unity/blob/master/LICENSE.txt</a>  </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">React  </td><td class="markdownTableBodyNone">User interface  </td><td class="markdownTableBodyNone"><a href="https://github.com/facebook/react/blob/master/LICENSE">https://github.com/facebook/react/blob/master/LICENSE</a>  </td><td class="markdownTableBodyNone">MIT   </td></tr>
+<td class="markdownTableBodyNone">Unity  </td><td class="markdownTableBodyNone">Unittest  </td><td class="markdownTableBodyNone"><a href="https://github.com/ThrowTheSwitch/Unity/blob/master/LICENSE.txt">https://github.com/ThrowTheSwitch/Unity/blob/master/LICENSE.txt</a>  </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">React  </td><td class="markdownTableBodyNone">User interface  </td><td class="markdownTableBodyNone"><a href="https://github.com/facebook/react/blob/master/LICENSE">https://github.com/facebook/react/blob/master/LICENSE</a>  </td><td class="markdownTableBodyNone">MIT   </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">React License  </td><td class="markdownTableBodyNone">User interface  </td><td class="markdownTableBodyNone"><a href="https://github.com/react-icons/react-icons/blob/master/packages/react-icons/LICENSE">https://github.com/react-icons/react-icons/blob/master/packages/react-icons/LICENSE</a>  </td><td class="markdownTableBodyNone">Misc <em>TBD</em>   </td></tr>
 </table>
 </div></div><!-- PageDoc -->
@@ -466,7 +467,7 @@ Third party libraries and code</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:52 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:34 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

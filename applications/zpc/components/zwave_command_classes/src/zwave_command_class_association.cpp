@@ -524,7 +524,7 @@ sl_status_t zwave_command_class_association_set(attribute_store_node_t node,
     sl_log_warning(LOG_TAG,
                    "ZPC just updated its Association Group Content desired "
                    "value. This should not happen !");
-    attribute_store_set_reported_as_desired(node);
+    attribute_store_undefine_desired(node);
     return SL_STATUS_ALREADY_EXISTS;
   }
   // Else let's resolve it ourselves.

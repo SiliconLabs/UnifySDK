@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -122,8 +122,8 @@ $(document).ready(function(){initNavTree('dotdot__bitmap_8hpp_source.html',''); 
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#a42085a594cfd9b65c4a58fc13626a5fd">   44</a></span>&#160;  std::string <a class="code" href="classdotdot__bitmap.html#a42085a594cfd9b65c4a58fc13626a5fd">get_enum_name_of_element_by_value</a>(</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    std::vector&lt;std::vector&lt;std::string&gt;&gt; enum_element,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    uint32_t enum_idx) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#a7e4ab42e585455031756022003cda1be">   47</a></span>&#160;  uint32_t <a class="code" href="classdotdot__bitmap.html#a7e4ab42e585455031756022003cda1be">get_enum_value_of_element_by_name</a>(</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classuint32__t.html">uint32_t</a> enum_idx) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#a7e4ab42e585455031756022003cda1be">   47</a></span>&#160;  <a class="code" href="classuint32__t.html">uint32_t</a> <a class="code" href="classdotdot__bitmap.html#a7e4ab42e585455031756022003cda1be">get_enum_value_of_element_by_name</a>(</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    std::vector&lt;std::vector&lt;std::string&gt;&gt; enum_element,</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">const</span> std::string &amp;name) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('dotdot__bitmap_8hpp_source.html',''); 
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    std::pair&lt;std::vector&lt;std::string&gt;, std::vector&lt;std::vector&lt;std::string&gt;&gt;&gt;&gt;</div>
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#aa5a055a43bc5ecfd3d79bcbfeb66a371">   55</a></span>&#160;    <a class="code" href="classdotdot__bitmap.html#aa5a055a43bc5ecfd3d79bcbfeb66a371">bitmap_data</a>;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#ab5faccc5e96ba9e84756efca8baaa55f">   57</a></span>&#160;  uint32_t <a class="code" href="classdotdot__bitmap.html#ab5faccc5e96ba9e84756efca8baaa55f">convert_hex_string_to_uint32_t</a>(<span class="keyword">const</span> std::string &amp;hex) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#ab5faccc5e96ba9e84756efca8baaa55f">   57</a></span>&#160;  <a class="code" href="classuint32__t.html">uint32_t</a> <a class="code" href="classdotdot__bitmap.html#ab5faccc5e96ba9e84756efca8baaa55f">convert_hex_string_to_uint32_t</a>(<span class="keyword">const</span> std::string &amp;hex) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#a9c28d1fff4e46cf90d9663337f7a2c70">   60</a></span>&#160;  <a class="code" href="classdotdot__bitmap.html#a9c28d1fff4e46cf90d9663337f7a2c70">dotdot_bitmap</a>(</div>
@@ -147,10 +147,10 @@ $(document).ready(function(){initNavTree('dotdot__bitmap_8hpp_source.html',''); 
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="classdotdot__bitmap.html#aa5a055a43bc5ecfd3d79bcbfeb66a371">bitmap_data</a>(input_bitmap_data) {};</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  std::vector&lt;std::pair&lt;std::string, std::string&gt;&gt;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#ac99e844027f3d71e29137e44e681feae">   71</a></span>&#160;    <a class="code" href="classdotdot__bitmap.html#ac99e844027f3d71e29137e44e681feae">get_bitmap_values</a>(uint32_t bitmap_value) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#ac99e844027f3d71e29137e44e681feae">   71</a></span>&#160;    <a class="code" href="classdotdot__bitmap.html#ac99e844027f3d71e29137e44e681feae">get_bitmap_values</a>(<a class="code" href="classuint32__t.html">uint32_t</a> bitmap_value) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  boost::property_tree::ptree</div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#a6bf121ee471a36c7039ed2089f648ef0">   73</a></span>&#160;    <a class="code" href="classdotdot__bitmap.html#a6bf121ee471a36c7039ed2089f648ef0">get_bitmap_values_as_json_tree</a>(uint32_t bitmap_value) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#a8fb6bad5cdf1fd940bcdcabd330829d6">   74</a></span>&#160;  uint32_t <a class="code" href="classdotdot__bitmap.html#a8fb6bad5cdf1fd940bcdcabd330829d6">get_bitmap_state_value_from_json_tree</a>(</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#a6bf121ee471a36c7039ed2089f648ef0">   73</a></span>&#160;    <a class="code" href="classdotdot__bitmap.html#a6bf121ee471a36c7039ed2089f648ef0">get_bitmap_values_as_json_tree</a>(<a class="code" href="classuint32__t.html">uint32_t</a> bitmap_value) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classdotdot__bitmap.html#a8fb6bad5cdf1fd940bcdcabd330829d6">   74</a></span>&#160;  <a class="code" href="classuint32__t.html">uint32_t</a> <a class="code" href="classdotdot__bitmap.html#a8fb6bad5cdf1fd940bcdcabd330829d6">get_bitmap_state_value_from_json_tree</a>(</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">const</span> boost::property_tree::ptree &amp;bitmap_tree) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
@@ -169,6 +169,7 @@ $(document).ready(function(){initNavTree('dotdot__bitmap_8hpp_source.html',''); 
 <div class="ttc" id="aclassdotdot__bitmap_html_a6ade93c90616ea8febec38182db94c0e"><div class="ttname"><a href="classdotdot__bitmap.html#a6ade93c90616ea8febec38182db94c0e">dotdot_bitmap::idx_name</a></div><div class="ttdeci">const uint8_t idx_name</div><div class="ttdef"><b>Definition:</b> dotdot_bitmap.hpp:39</div></div>
 <div class="ttc" id="asl__log_8h_html"><div class="ttname"><a href="sl__log_8h.html">sl_log.h</a></div></div>
 <div class="ttc" id="aclassdotdot__bitmap_html_a776be7addbb5ee6c8d8ce3502738300f"><div class="ttname"><a href="classdotdot__bitmap.html#a776be7addbb5ee6c8d8ce3502738300f">dotdot_bitmap::idx_mask</a></div><div class="ttdeci">const uint8_t idx_mask</div><div class="ttdef"><b>Definition:</b> dotdot_bitmap.hpp:41</div></div>
+<div class="ttc" id="aclassuint32__t_html"><div class="ttname"><a href="classuint32__t.html">uint32_t</a></div></div>
 <div class="ttc" id="aclassdotdot__bitmap_html_a9c05bc52394684a7251814cc2d0c3b18"><div class="ttname"><a href="classdotdot__bitmap.html#a9c05bc52394684a7251814cc2d0c3b18">dotdot_bitmap::attribute_name</a></div><div class="ttdeci">const std::string attribute_name</div><div class="ttdef"><b>Definition:</b> dotdot_bitmap.hpp:51</div></div>
 <div class="ttc" id="aclassdotdot__bitmap_html_ac99e844027f3d71e29137e44e681feae"><div class="ttname"><a href="classdotdot__bitmap.html#ac99e844027f3d71e29137e44e681feae">dotdot_bitmap::get_bitmap_values</a></div><div class="ttdeci">std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt; get_bitmap_values(uint32_t bitmap_value) const</div></div>
 <div class="ttc" id="aclassdotdot__bitmap_html_ae94ba56dd2e9c4584e7d41844d4c5d8e"><div class="ttname"><a href="classdotdot__bitmap.html#ae94ba56dd2e9c4584e7d41844d4c5d8e">dotdot_bitmap::idx_shiftright</a></div><div class="ttdeci">const uint8_t idx_shiftright</div><div class="ttdef"><b>Definition:</b> dotdot_bitmap.hpp:42</div></div>
@@ -178,7 +179,7 @@ $(document).ready(function(){initNavTree('dotdot__bitmap_8hpp_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_fddaf0ada9b26e48dca23fc9f0133e62.html">uic_dotdot_mqtt</a></li><li class="navelem"><a class="el" href="dir_07ebcf8fa06e93a13cb16a3c010ad375.html">src</a></li><li class="navelem"><a class="el" href="dotdot__bitmap_8hpp.html">dotdot_bitmap.hpp</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

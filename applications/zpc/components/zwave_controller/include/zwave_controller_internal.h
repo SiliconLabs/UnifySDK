@@ -39,7 +39,7 @@ void zwave_controller_on_state_updated(zwave_network_management_state_t state);
 void zwave_controller_on_error(zwave_network_management_error_t error);
 /// see @ref zwave_controller_callbacks_t
 void zwave_controller_on_node_id_assigned(zwave_node_id_t node_id,
-                                          bool included_by_us);
+                                    zwave_protocol_t inclusion_protocol);
 /// see @ref zwave_controller_callbacks_t
 void zwave_controller_on_node_deleted(zwave_node_id_t node_id);
 /// see @ref zwave_controller_callbacks_t

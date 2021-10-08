@@ -56,7 +56,7 @@ pub fn sl_log_unset_tag_level(tag: &str) {
 
 pub fn sl_log_level_from_string(level: &str) -> Result<sl_log_level_t, sl_status_t> {
     // todo: fix generation of defines fo sl_status
-    let txt = CString::new(level).map_err(|_| 1 as u32)?;
+    let txt = CString::new(level).map_err(|_| 1_u32)?;
     let mut lvl = sl_log_level_t::SL_LOG_DEBUG;
     let status = unsafe { root::sl_log_level_from_string(txt.as_ptr(), &mut lvl) };
     match status {

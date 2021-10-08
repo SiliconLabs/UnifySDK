@@ -65,7 +65,7 @@ void mqtt_client_fsm_connected::event(int incoming_event,
       client_instance->transition(mqtt_client_fsm_disconnected::get_instance());
       break;
     default:
-      sl_log_critical(LOG_TAG, "FSM-Connected: Unhandled event: 0x%x\n", incoming_event);
+      sl_log_warning(LOG_TAG, "FSM-Connected: Unhandled event: 0x%x\n", incoming_event);
       break;
   }
 }

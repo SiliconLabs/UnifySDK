@@ -46,7 +46,7 @@ extern "C" {
 #define UCL_TOPIC_ROOT "ucl"
 
 /*************************************************************
- * UCL topic definitions for Smart Start.
+ * UCL topic definitions for SmartStart.
  ************************************************************/
 
 #define UCL_TOPIC_FMTSTR_SMARTSTART UCL_TOPIC_ROOT UCL_TOPIC_SEP "SmartStart"

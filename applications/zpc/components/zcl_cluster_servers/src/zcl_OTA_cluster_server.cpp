@@ -26,6 +26,7 @@
 #include "zwave_unid.h"
 #include "zpc_config.h"
 #include "zpc_attribute_store_network_helper.h"
+#include "zwave_command_class_version_types.h"
 #include "zpc_attribute_store.h"
 #include "zwave_unid.h"
 
@@ -43,15 +44,22 @@ constexpr uint16_t OTA_CLUSTER_REVISION = 1;
 
 /**
  * @brief Extract the target ID from the UIID string
+          I.e. get the 00 out of "ZWave-0000-0002-0004-00-01"
  *
  * @param uiid
  * @return int
  */
 static int get_target_from_uiid(const std::string &uiid)
 {
-  auto last_dash = uiid.rfind('-');
-  if (last_dash != std::string::npos) {
-    std::string target_str = uiid.substr(last_dash + 1);
+  size_t last_dash = 0, last_2_dash = 0;
+  for (size_t idx = 0; idx < uiid.size(); idx++) {
+    if (uiid[idx] == '-') {
+      last_2_dash = last_dash;
+      last_dash = idx;
+    }
+  }
+  if ((last_2_dash != 0) && (last_dash != 0)) {
+    std::string target_str = uiid.substr(last_2_dash + 1, last_dash - last_2_dash - 1);
     return std::stoi(target_str);
   } else {
     sl_log_error(TAG, "Unable to resolve target from uiid");
@@ -74,19 +82,18 @@ static std::string get_target_version(attribute node, int fw_target_id)
                                                           0);
     attribute version_data
       = ep.child_by_type(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA);
-    attribute fw_target = version_data.child_by_type_and_value<int32_t>(
-      ATTRIBUTE_CC_VERSION_FIRMWARE,
-      fw_target_id);
+    attribute fw_target = version_data.child_by_type(
+      ATTRIBUTE_CC_VERSION_FIRMWARE);
     int32_t fw_version
       = fw_target.child_by_type(ATTRIBUTE_CC_VERSION_FIRMWARE_VERSION)
           .reported<int32_t>();
-
     std::stringstream ss;
     ss << ((fw_version >> 16) & 0xff) << "." << ((fw_version >> 8) & 0xff)
        << "." << ((fw_version >> 0) & 0xff);
     return ss.str();
 
-  } catch (std::invalid_argument &) {
+  } catch (std::invalid_argument &e) {
+    sl_log_error(TAG, "Fail to get target version due to %s", e.what());
     return "";
   }
 }
@@ -117,17 +124,23 @@ static sl_status_t get_target_info(attribute fw_target,
       = ep0_node.child_by_type(ATTRIBUTE_MANUFACTURER_SPECIFIC_PRODUCT_TYPE_ID);
     attribute product_type_id
       = ep0_node.child_by_type(ATTRIBUTE_MANUFACTURER_SPECIFIC_PRODUCT_ID);
+    attribute version_report_node
+      = ep0_node.child_by_type(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA);
+    attribute hardware_version = version_report_node.child_by_type(
+      ATTRIBUTE_CC_VERSION_HARDWARE_VERSION);
 
     if (ep_node.is_valid() && zw_node.is_valid() && ep0_node.is_valid()
         && manufacturer_id.is_valid() && product_id.is_valid()
-        && product_type_id.is_valid()) {
+        && product_type_id.is_valid() && hardware_version.is_valid()) {
       // Generate the UUID
       std::stringstream ss;
       ss << "ZWave" << std::hex << std::setfill('0');
       ss << "-" << std::setw(4) << manufacturer_id.reported<int32_t>();
       ss << "-" << std::setw(4) << product_type_id.reported<int32_t>();
       ss << "-" << std::setw(4) << product_id.reported<int32_t>();
-      ss << "-" << std::setw(4) << fw_target.reported<int32_t>();
+      ss << "-" << std::setw(2) << fw_target.reported<int32_t>();
+      ss << "-" << std::setw(2)
+         << hardware_version.reported<zwave_version_hardware_version_t>();
       uiid = ss.str();
 
       // Get the nodeid and the endpoint
@@ -295,8 +308,8 @@ static void start_update(const std::string &uiid,
   zwave_endpoint_id_t endpoint_id = 0;
   if (current_version != target_version) {
     std::stringstream ss;
-    ss << "New Firmware image is available ";
-    ss << " UNID: " << unid;
+    ss << "New Firmware image is available. ";
+    ss << "UNID: " << unid;
     ss << " UIID: " << uiid;
     ss << " Target Version: " << target_version;
     ss << " Current version: " << current_version;
@@ -326,9 +339,9 @@ static void start_update(const std::string &uiid,
                   firmware_target,
                   apply_after,
                   path.c_str()))) {
-          sl_log_error(TAG,
-                       "Failed to start firmware update for UNID %s",
-                       unid.c_str());
+          sl_log_info(TAG,
+                      "Failed to start firmware update for UNID %s",
+                      unid.c_str());
         }
       });
   }
@@ -468,7 +481,8 @@ static void on_nif_update(attribute_store_node_t nif_node,
                                                              node_unid)) {
       return;
     }
-    uic_ota::unretain_ota_status_by_unid(node_unid);
+
+    uic_ota::unsubscribe_all_unids_uiid(std::string(node_unid));
   }
 }
 
@@ -505,6 +519,10 @@ sl_status_t zcl_OTA_cluster_server_init()
   attribute_store_register_callback_by_type(
     firmware_version_update,
     ATTRIBUTE_CC_VERSION_FIRMWARE_VERSION);
+
+  attribute_store_register_callback_by_type(
+    firmware_version_update,
+    ATTRIBUTE_CC_VERSION_HARDWARE_VERSION);
 
   attribute_store_register_callback_by_type(on_nif_update, ATTRIBUTE_ZWAVE_NIF);
 

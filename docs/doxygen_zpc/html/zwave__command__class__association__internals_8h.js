@@ -7,7 +7,7 @@ var zwave__command__class__association__internals_8h =
     [ "association_get_frame_t", "group__zwave__command__class__association__internals.html#gacd4d91e1ad5816eb74cf4abca170e0fe", null ],
     [ "association_group_capacity_t", "group__zwave__command__class__association__internals.html#gab3cbf103bfc2e59d88c6781d5a57e156", null ],
     [ "association_group_count_t", "group__zwave__command__class__association__internals.html#gaae35ba14f83008c37a607345b5216c56", null ],
-    [ "association_group_id_t", "group__zwave__command__class__association__internals.html#ga5c4046e2eb80a1a7ca5906ab68605d54", null ],
+    [ "association_group_id_t", "group__zwave__command__class__association__internals.html#gae21b908b2b1b88902cc885a23582f399", null ],
     [ "association_grouping_report_frame_t", "group__zwave__command__class__association__internals.html#ga9a56d1580b6c3f5e4d3a109c06560f76", null ],
     [ "association_report_frame_t", "group__zwave__command__class__association__internals.html#gaa7b3183af60ffddedd60ccfdd9c2814e", null ],
     [ "association_set_frame_t", "group__zwave__command__class__association__internals.html#gaf78d2d03a86597ac39e504631e718292", null ],

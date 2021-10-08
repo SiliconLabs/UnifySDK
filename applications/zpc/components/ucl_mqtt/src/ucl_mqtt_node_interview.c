@@ -28,8 +28,8 @@
 sl_status_t ucl_mqtt_initiate_node_interview(const unid_t node_unid)
 {
   if (is_zpc_unid(node_unid)) {
-    sl_log_info(LOG_TAG,
-                "Node interview requested for the ZPC's UNID. Ignoring.");
+    sl_log_debug(LOG_TAG,
+                 "Node interview requested for the ZPC's UNID. Ignoring.");
     return SL_STATUS_OK;
   }
 
@@ -66,8 +66,8 @@ sl_status_t
                                        zwave_endpoint_id_t endpoint_id)
 {
   if (is_zpc_unid(node_unid)) {
-    sl_log_info(LOG_TAG,
-                "Endpoint interview requested for the ZPC's UNID. Ignoring.");
+    sl_log_debug(LOG_TAG,
+                 "Endpoint interview requested for the ZPC's UNID. Ignoring.");
     return SL_STATUS_OK;
   }
 

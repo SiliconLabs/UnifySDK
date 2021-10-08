@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -98,6 +98,9 @@ $(document).ready(function(){initNavTree('structz3gatewayCallbacks.html',''); in
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:ac77dd8f69e61a65272947e7c7e660208"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structz3gatewayCallbacks.html#ac77dd8f69e61a65272947e7c7e660208">onEmberAfStackInitalized</a> )(void)</td></tr>
+<tr class="memdesc:ac77dd8f69e61a65272947e7c7e660208"><td class="mdescLeft">&#160;</td><td class="mdescRight">This callback is invoked when the Ember Application Framework has initialized the stack layer (including any NCP init routines).  <a href="structz3gatewayCallbacks.html#ac77dd8f69e61a65272947e7c7e660208">More...</a><br /></td></tr>
+<tr class="separator:ac77dd8f69e61a65272947e7c7e660208"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcc1612fc4978cf80b017bf50975c994"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structz3gatewayCallbacks.html#afcc1612fc4978cf80b017bf50975c994">onTrustCenterInitialized</a> )(const EmberEUI64 eui64, const EmberNetworkParameters *network)</td></tr>
 <tr class="memdesc:afcc1612fc4978cf80b017bf50975c994"><td class="mdescLeft">&#160;</td><td class="mdescRight">This callback is invoked when the network has initialized on the Gateway. If the network is down, the network-creator plugin is used to form the Zigbee network and the complete callback of this plugin is used to invoked this callback. If the network is already up, the network information is retrieved from the Gateway and passed through this callback. Users should wait for this callback before performing operations on the Zigbee network. If this callback is not invoked within an appropriate delay (TODO: Insert benchmarking values), it is safe to assume that network initialization has failed.  <a href="structz3gatewayCallbacks.html#afcc1612fc4978cf80b017bf50975c994">More...</a><br /></td></tr>
 <tr class="separator:afcc1612fc4978cf80b017bf50975c994"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,10 +128,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0e30b31ec50e4d7490f7a66126ffa4b8"><td class="memItemLeft" align="right" valign="top">EmberAfStatus(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structz3gatewayCallbacks.html#a0e30b31ec50e4d7490f7a66126ffa4b8">onClusterCommandReceived</a> )(const EmberEUI64 eui64, uint8_t endpoint, uint16_t clusterId, uint8_t commandId, bool commandFromServerToClient, const uint8_t *buffer, uint16_t bufferLength, uint8_t bufferPayloadStartIndex)</td></tr>
 <tr class="memdesc:a0e30b31ec50e4d7490f7a66126ffa4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This callback is invoked when the Gateway receives a ZCL cluster command from a node on the network. The response contains a message buffer consisting of the command payload. Refer to the ZCL specification section "General ZCL Frame Format" for more information.  <a href="structz3gatewayCallbacks.html#a0e30b31ec50e4d7490f7a66126ffa4b8">More...</a><br /></td></tr>
 <tr class="separator:a0e30b31ec50e4d7490f7a66126ffa4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adede2d0e13d4bb779373c583854055d3"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structz3gatewayCallbacks.html#adede2d0e13d4bb779373c583854055d3">onOtaUpdateStarted</a> )(const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, uint32_t firmwareVersion)</td></tr>
+<tr class="memitem:adede2d0e13d4bb779373c583854055d3"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structz3gatewayCallbacks.html#adede2d0e13d4bb779373c583854055d3">onOtaUpdateStarted</a> )(const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, <a class="el" href="classuint32__t.html">uint32_t</a> firmwareVersion)</td></tr>
 <tr class="memdesc:adede2d0e13d4bb779373c583854055d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This callback is invoked when the ota-server plugin determines an OTA update has started.  <a href="structz3gatewayCallbacks.html#adede2d0e13d4bb779373c583854055d3">More...</a><br /></td></tr>
 <tr class="separator:adede2d0e13d4bb779373c583854055d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4bb9a0fe6e91712319c2afdb7a508fe"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structz3gatewayCallbacks.html#ad4bb9a0fe6e91712319c2afdb7a508fe">onOtaUpdateCompleted</a> )(const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, uint32_t firmwareVersion, EmberAfStatus status)</td></tr>
+<tr class="memitem:ad4bb9a0fe6e91712319c2afdb7a508fe"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structz3gatewayCallbacks.html#ad4bb9a0fe6e91712319c2afdb7a508fe">onOtaUpdateCompleted</a> )(const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, <a class="el" href="classuint32__t.html">uint32_t</a> firmwareVersion, EmberAfStatus status)</td></tr>
 <tr class="memdesc:ad4bb9a0fe6e91712319c2afdb7a508fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">This callback is invoked when the ota-server plugin determines an OTA update has completed.  <a href="structz3gatewayCallbacks.html#ad4bb9a0fe6e91712319c2afdb7a508fe">More...</a><br /></td></tr>
 <tr class="separator:ad4bb9a0fe6e91712319c2afdb7a508fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -164,6 +167,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ac77dd8f69e61a65272947e7c7e660208"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac77dd8f69e61a65272947e7c7e660208">&#9670;&nbsp;</a></span>onEmberAfStackInitalized</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* z3gatewayCallbacks::onEmberAfStackInitalized) (void)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This callback is invoked when the Ember Application Framework has initialized the stack layer (including any NCP init routines). </p>
+
+</div>
+</div>
 <a id="ad4bb9a0fe6e91712319c2afdb7a508fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad4bb9a0fe6e91712319c2afdb7a508fe">&#9670;&nbsp;</a></span>onOtaUpdateCompleted</h2>
 
@@ -171,7 +190,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* z3gatewayCallbacks::onOtaUpdateCompleted) (const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, uint32_t firmwareVersion, EmberAfStatus status)</td>
+          <td class="memname">void(* z3gatewayCallbacks::onOtaUpdateCompleted) (const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, <a class="el" href="classuint32__t.html">uint32_t</a> firmwareVersion, EmberAfStatus status)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -198,7 +217,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* z3gatewayCallbacks::onOtaUpdateStarted) (const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, uint32_t firmwareVersion)</td>
+          <td class="memname">void(* z3gatewayCallbacks::onOtaUpdateStarted) (const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, <a class="el" href="classuint32__t.html">uint32_t</a> firmwareVersion)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -421,7 +440,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structz3gatewayCallbacks.html">z3gatewayCallbacks</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:41 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

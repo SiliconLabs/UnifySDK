@@ -38,9 +38,9 @@ use upvl_log::{self, log_error};
 
 use upvl_conf::*;
 
-const LOG_TAG: &'static str = "upvl_main";
-const DB_FILE: &'static str = "upvl_test.db";
-const CLIENT_NAME: &'static str = "upvl_client";
+const LOG_TAG: &str = "upvl_main";
+const DB_FILE: &str = "upvl_test.db";
+const CLIENT_NAME: &str = "upvl_client";
 
 fn main() -> Result<(), i32> {
     if parse_application_arguments().is_err() {
@@ -100,7 +100,7 @@ fn main() -> Result<(), i32> {
     // store connection.
     let ses_data = upvl_mqtt::UpvlMqttSessionData::new(&db_conn);
 
-    // Before starting the infinity loop publish the smart start list to the
+    // Before starting the infinity loop publish the SmartStart list to the
     // ucl/SmartStart/List topic for anyone listening before update
     mq_ses.publish_list(upvl_db::db_list_provisions(&db_conn));
 
@@ -116,7 +116,7 @@ fn main() -> Result<(), i32> {
     // Close the database
     upvl_db::db_teardown(db_conn);
 
-    upvl_log::log_info(LOG_TAG, format!("Goodbye, world!"));
+    upvl_log::log_info(LOG_TAG, "Goodbye, world!".to_string());
     Ok(())
 }
 

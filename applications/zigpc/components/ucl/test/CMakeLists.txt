@@ -1,0 +1,18 @@
+target_add_unittest(
+  zigpc_ucl
+  NAME
+  zigpc_ucl_mqtt_test
+  SOURCES
+  zigpc_ucl_mqtt_test.cpp
+  DEPENDS
+  uic_mqtt_mock)
+
+target_add_unittest(
+  zigpc_ucl
+  NAME
+  zigpc_ucl_pc_nwmgmt_test
+  SOURCES
+  zigpc_ucl_pc_nwmgmt_test.cpp
+  DEPENDS
+  zigpc_net_mgmt_mock
+  uic_mqtt_mock)

@@ -1,5 +1,6 @@
 var zigpc__net__mgmt_8h =
 [
+    [ "zigpc_net_mgmt_fsm_state_t", "group__zigpc__net__mgmt.html#gabfe083f1de2b3b27d5601f6a4561f736", null ],
     [ "zigpc_net_mgmt_fsm_state", "group__zigpc__net__mgmt.html#ga41074cd4be64194f1a68da0b7449ba8e", [
       [ "ZIGPC_NET_MGMT_FSM_STATE_MIN_VAL", "group__zigpc__net__mgmt.html#gga41074cd4be64194f1a68da0b7449ba8ea6f5197db89445232db5dbce6a8b68909", null ],
       [ "ZIGPC_NET_MGMT_FSM_STATE_INIT", "group__zigpc__net__mgmt.html#gga41074cd4be64194f1a68da0b7449ba8eae55d3c527781e1ecca7de185c311a9fd", null ],

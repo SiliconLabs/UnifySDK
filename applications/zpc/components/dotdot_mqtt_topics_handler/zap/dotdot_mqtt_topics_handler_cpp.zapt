@@ -31,6 +31,7 @@
 #include <sstream>
 #include <vector>
 #include <cstring>
+#include <set>
 
 #define LOG_TAG "dotdot_mqtt_topics_handler"
 
@@ -83,7 +84,7 @@ static void {{asSnakeCaseLower label}}_cluster_attrs_desired_state_publisher_cal
         }
       {{/zcl_attributes}}
     } catch (std::exception &ex) {
-      sl_log_warning(LOG_TAG, "publish desired attribute failed: %s", ex.what());
+      sl_log_warning(LOG_TAG, "Failed to publish the Desired attribute value: %s", ex.what());
     }
   }
 
@@ -148,12 +149,12 @@ static void {{asSnakeCaseLower label}}_cluster_attrs_reported_state_publisher_ca
         }
       {{/zcl_attributes}}
     } catch (std::exception &ex) {
-      sl_log_warning(LOG_TAG, "publish reported attribute failed: %s", ex.what());
+      sl_log_warning(LOG_TAG, "Failed to publish Reported attribute value: %s", ex.what());
     }
   }
 }
 
-// WriteAttribute Callbacks
+// WriteAttribute Callbacks {{asSnakeCaseLower label}}
 static sl_status_t {{asSnakeCaseLower label}}_cluster_mapper_write_attributes_callback(
   const char* unid,
   const uint8_t endpoint,
@@ -162,12 +163,12 @@ static sl_status_t {{asSnakeCaseLower label}}_cluster_mapper_write_attributes_ca
   {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t updated_attributes)
 {
   if (call_type == {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_SUPPORT_CHECK) {
-    attribute_store::attribute 
+    attribute_store::attribute
       endpoint_node(attribute_store_network_helper_get_endpoint_node(unid, endpoint));
     if (endpoint_node.is_valid()){
       for (const auto& child : endpoint_node.children()) {
         {{#zcl_attributes}}
-          {{#if isWritable }}
+          {{#if (isZwaveWritable)}}
             if ({{asAttributeIdDefine parent.label label}} == child.type()) {
               return SL_STATUS_OK;
             }
@@ -188,7 +189,7 @@ static sl_status_t {{asSnakeCaseLower label}}_cluster_mapper_write_attributes_ca
   attribute_store::attribute attr(endpoint_node);
   attribute_store::attribute updated_node;
   {{#zcl_attributes}}
-    {{#if isWritable }}
+    {{#if (isZwaveWritable) }}
       if(updated_attributes.{{asSnakeCaseLower label}}){
         updated_node = attr.child_by_type({{asAttributeIdDefine parent.label label}});
         if(updated_node.is_valid()) {
@@ -241,38 +242,92 @@ static void {{asSnakeCaseLower label}}_cluster_attrs_creation_callback(
     }
   }
 }
-
 {{/if}}
 {{/zcl_clusters}}
 
+// Create a set of attribute types per Cluster
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+const std::set<attribute_store_type_t> zcl_{{label}}_attributes {
+{{#zcl_attributes}} (attribute_store_type_t) 0x{{attributeID this}}{{listComma this}}
+{{/zcl_attributes}}
+};
+{{/if}}
+{{/zcl_clusters}}
+
+// Publish an empty array of supported Commands for a cluster that does not have 
+// any commands and have >= 1 attribute supported.
+static void {{dotdot_prefix}}_empty_publish_supported_commands(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  attribute_store::attribute node_ep_node)
+{
+  bool no_command_per_cluster;
+  {{#zcl_clusters}}
+  {{#if (supportedCluster label)}}
+  no_command_per_cluster = false;
+  {{#zcl_commands}}
+  {{else}}
+  no_command_per_cluster = true;
+  {{/zcl_commands}}
+  if (no_command_per_cluster){
+    for (attribute_store::attribute node : node_ep_node.children()) {
+      if ( zcl_{{label}}_attributes.count(node.type()) > 0 ) {
+        std::string topic_no_command = "ucl/by-unid/" + std::string(unid) +
+          "/ep" + std::to_string(endpoint) + "/{{label}}/SupportedCommands";
+        if (uic_mqtt_count_topics(topic_no_command.c_str()) == 0){
+          std::string payload_str_no_command(R"({"value": []})");
+          uic_mqtt_publish(topic_no_command.c_str() ,
+                           payload_str_no_command.c_str(),
+                           payload_str_no_command.length(),
+                           true);
+        }
+        break;
+      }
+    }
+  }
+  {{/if}}
+  {{/zcl_clusters}}
+}
+
+// A Network Status callback function which will be called when
+// a node is included and interviewed and publish all supported
+// dotdot cluster commands per each endpoint
 static void on_pan_node_interview_done(attribute_store_node_t updated_node,
                                        attribute_store_change_t change)
 {
-  if (change != ATTRIBUTE_UPDATED) {
-    return;
-  }
-
   try {
-    node_state_topic_state_t network_status = NODE_STATE_TOPIC_LAST;
+    unid_t unid = "\0";
+    zwave_endpoint_id_t endpoint_id = 0;
+    sl_status_t status_unid
+      = attribute_store_network_helper_get_unid_from_node(updated_node, unid);
     attribute_store::attribute attr_network_status(updated_node);
-    network_status = attr_network_status.reported<node_state_topic_state_t>();
+    node_state_topic_state_t network_status = attr_network_status.reported<node_state_topic_state_t>();
+    attribute_store::attribute node_id_node = attr_network_status.first_parent(ATTRIBUTE_NODE_ID);
+
     if (network_status == NODE_STATE_TOPIC_STATE_INCLUDED) {
-      unid_t unid = "\0";
-      zwave_endpoint_id_t endpoint_id = 0;
-      sl_status_t status_unid
-        = attribute_store_network_helper_get_unid_from_node(updated_node, unid);
       if (status_unid == SL_STATUS_OK){
-        attribute_store::attribute node_id_node = attr_network_status.first_parent(ATTRIBUTE_NODE_ID);
-        uint32_t num_child = node_id_node.child_count();
-        attribute_store::attribute endpoint_node = ATTRIBUTE_STORE_INVALID_NODE;
-        for(uint32_t i = 0; i < num_child; i++ ){
-          endpoint_node = node_id_node.child_by_type(ATTRIBUTE_ENDPOINT_ID, i);
-          if (endpoint_node != ATTRIBUTE_STORE_INVALID_NODE) {
-            endpoint_id = endpoint_node.reported<zwave_endpoint_id_t>();
-            {{dotdot_prefix}}_publish_supported_commands(unid, endpoint_id);
-          }
+        for(attribute_store::attribute endpoint_node : node_id_node.children(ATTRIBUTE_ENDPOINT_ID)){
+          endpoint_id = endpoint_node.reported<zwave_endpoint_id_t>();
+          {{dotdot_prefix}}_publish_supported_commands(unid, endpoint_id);
+          // Publishing an empty array of Supported Commands for a cluster that does not
+          // have any commands.
+          {{dotdot_prefix}}_empty_publish_supported_commands(unid, endpoint_id, endpoint_node);
         }
       }
+    } else if ((network_status == NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL)
+                || (network_status == NODE_STATE_TOPIC_INTERVIEWING)
+                || (network_status == NODE_STATE_TOPIC_STATE_OFFLINE)) {
+      // unretain SupportedCommands during node interview and fail
+      std::string topic_no_command_un;
+      {{#zcl_clusters}}
+      for(attribute_store::attribute endpoint_node : node_id_node.children(ATTRIBUTE_ENDPOINT_ID) ){
+          endpoint_id = endpoint_node.reported<zwave_endpoint_id_t>();
+          topic_no_command_un = "ucl/by-unid/" + std::string(unid) +
+            "/ep" + std::to_string(endpoint_id) + "/{{label}}/SupportedCommands";
+          uic_mqtt_unretain_by_regex(topic_no_command_un.c_str());
+      }
+      {{/zcl_clusters}}
     }
   } catch (std::exception &ex) {
     sl_log_warning(LOG_TAG, "Cannot publish supported commands %s", ex.what());

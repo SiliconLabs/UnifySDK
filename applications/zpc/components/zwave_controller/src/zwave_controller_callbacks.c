@@ -13,8 +13,17 @@
 #include "zwave_controller_callbacks.h"
 #include "zwave_controller_transport_internal.h"
 #include "zwave_controller_internal.h"
+#include "zwave_controller_utils.h"
 
+// Includes from other components
+#include "zwave_network_management.h"
+
+// Generic includes
 #include <stddef.h>
+
+// UIC includes
+#include "sl_log.h"
+#define LOG_TAG "zwave_controller_dispatch"
 
 // Our variables for the component
 const zwave_controller_callbacks_t *zwave_controller_callbacks_array
@@ -94,9 +103,11 @@ sl_status_t zwave_controller_register_reset_step(
 
 void zwave_controller_reset()
 {
-  reset_ongoing = true;
-  zwave_controller_on_reset_step_complete(
-    ZWAVE_CONTROLLER_RESET_STEP_MIN_PRIORITY - 1);
+  if (reset_ongoing == false) {
+    reset_ongoing = true;
+    zwave_controller_on_reset_step_complete(
+      ZWAVE_CONTROLLER_RESET_STEP_MIN_PRIORITY - 1);
+  }
 }
 
 void zwave_controller_on_reset_step_complete(int32_t priority)
@@ -146,19 +157,43 @@ void zwave_controller_on_state_updated(zwave_network_management_state_t state)
 
 void zwave_controller_on_error(zwave_network_management_error_t error)
 {
+  sl_log_info(LOG_TAG,
+              "Network Management error has occured. Error: %d",
+              error);
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_error, error);
 }
 
-void zwave_controller_on_node_id_assigned(zwave_node_id_t node_id,
-                                          bool included_by_us)
+void zwave_controller_on_node_id_assigned(
+  zwave_node_id_t node_id, zwave_protocol_t inclusion_protocol)
 {
+  // Decide if it was included by us based on if the network management is idle
+  // or not.
+  bool included_by_us = zwave_network_management_is_busy();
+  if (included_by_us) {
+    sl_log_info(LOG_TAG,
+                "New NodeID assigned (%d), "
+                "it was assigned by the ZPC",
+                node_id);
+  } else {
+    sl_log_info(LOG_TAG,
+                "New NodeID assigned (%d), "
+                "it was assigned by another controller.",
+                node_id);
+  }
+
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_node_id_assigned,
                                       node_id,
-                                      included_by_us);
+                                      included_by_us,
+                                      inclusion_protocol);
 }
 
 void zwave_controller_on_node_deleted(zwave_node_id_t node_id)
 {
+  if (node_id != 0) {
+    sl_log_info(LOG_TAG, "NodeID %d has left the network. ", node_id);
+  } else {
+    sl_log_info(LOG_TAG, "Excluded a NodeID from another network. ");
+  }
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_node_deleted, node_id);
 }
 
@@ -169,6 +204,7 @@ void zwave_controller_on_node_info_req_failed(zwave_node_id_t node_id)
 
 void zwave_controller_on_frame_transmission_failed(zwave_node_id_t node_id)
 {
+  sl_log_info(LOG_TAG, "Transmission failure with NodeID %d", node_id);
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_frame_transmission_failed, node_id);
 }
 
@@ -185,6 +221,13 @@ void zwave_controller_on_node_added(sl_status_t status,
                                     zwave_kex_fail_type_t kex_fail_type,
                                     zwave_protocol_t inclusion_protocol)
 {
+  sl_log_info(LOG_TAG,
+              "New NodeID %d has joined the network. "
+              "Granted keys: 0x%02X - Protocol: %d",
+              node_id,
+              granted_keys,
+              inclusion_protocol);
+  zwave_sl_log_dsk(LOG_TAG, dsk);
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_node_added,
                                       status,
                                       nif,
@@ -201,6 +244,12 @@ void zwave_controller_on_new_network_entered(
   zwave_keyset_t granted_keys,
   zwave_kex_fail_type_t kex_fail_type)
 {
+  sl_log_info(LOG_TAG,
+              "Entering new network. HomeID %08X - ZPC NodeID: %d - "
+              "Granted keys: 0x%02X",
+              home_id,
+              node_id,
+              granted_keys);
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_new_network_entered,
                                       home_id,
                                       node_id,
@@ -242,7 +291,10 @@ void zwave_controller_on_frame_received(
 }
 
 void zwave_controller_on_smart_start_inclusion_request(
-  uint32_t home_id, bool already_included, const zwave_node_info_t *node_info, zwave_protocol_t inclusion_protocol)
+  uint32_t home_id,
+  bool already_included,
+  const zwave_node_info_t *node_info,
+  zwave_protocol_t inclusion_protocol)
 {
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_smart_start_inclusion_request,
                                       home_id,
@@ -254,6 +306,7 @@ void zwave_controller_on_smart_start_inclusion_request(
 void zwave_controller_on_node_information(zwave_node_id_t node_id,
                                           const zwave_node_info_t *node_info)
 {
+  zwave_sl_log_nif_data(node_id, node_info);
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_node_information, node_id, node_info);
 }
 

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('attribute__store_8h_source.html',''); 
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define ATTRIBUTE_TREE_ROOT \</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="attribute__store_8h.html#ac4e0368d17a3688cf724b30823e49d22">   48</a></span>&#160;<span class="preprocessor">  ((attribute_store_type_t)0x0001)  </span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor"></span> </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">   50</a></span>&#160;<span class="keyword">typedef</span> uint32_t <a class="code" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">   50</a></span>&#160;<span class="keyword">typedef</span> <a class="code" href="classuint32__t.html">uint32_t</a> <a class="code" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">//typedef void *attribute_store_node_t;</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">  101</a></span>&#160;<span class="keyword">typedef</span> <a class="code" href="group__datastore__attributes.html#ga5918f3c1eb857df59e4b33c9032bf10a">datastore_attribute_id_t</a> <a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>;</div>
@@ -183,14 +183,14 @@ $(document).ready(function(){initNavTree('attribute__store_8h_source.html',''); 
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a></div>
 <div class="line"><a name="l00273"></a><span class="lineno"><a class="line" href="group__attribute__store__api.html#ga22c49112dbd85a29019323a019a2e3ca">  273</a></span>&#160;  <a class="code" href="group__attribute__store__api.html#ga22c49112dbd85a29019323a019a2e3ca">attribute_store_get_node_child</a>(<a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node,</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                                 uint32_t child_index);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                                 <a class="code" href="classuint32__t.html">uint32_t</a> child_index);</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
 <div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="group__attribute__store__api.html#gab88fe49c92ab2b88f03db2a31a1c838a">  283</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="group__attribute__store__api.html#gab88fe49c92ab2b88f03db2a31a1c838a">attribute_store_get_node_child_count</a>(<a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node);</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a></div>
 <div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="group__attribute__store__api.html#ga57917747cf871f8053e3c5f213d2388e">  301</a></span>&#160;  <a class="code" href="group__attribute__store__api.html#ga57917747cf871f8053e3c5f213d2388e">attribute_store_get_node_child_by_type</a>(<a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node,</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                                         <a class="code" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> child_type,</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                                         uint32_t child_index);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                                         <a class="code" href="classuint32__t.html">uint32_t</a> child_index);</div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
 <div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="group__attribute__store__api.html#ga75cb79c1e772c4a0396c7887929ecdb0">  328</a></span>&#160;<a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> <a class="code" href="group__attribute__store__api.html#ga75cb79c1e772c4a0396c7887929ecdb0">attribute_store_get_node_child_by_value</a>(</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node,</div>
@@ -198,7 +198,7 @@ $(document).ready(function(){initNavTree('attribute__store_8h_source.html',''); 
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state,</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  <span class="keyword">const</span> uint8_t *value,</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  uint8_t value_size,</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  uint32_t child_index);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  <a class="code" href="classuint32__t.html">uint32_t</a> child_index);</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
 <div class="line"><a name="l00348"></a><span class="lineno"><a class="line" href="group__attribute__store__api.html#ga5ce6c785aac6d5cefd494814888074fa">  348</a></span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__attribute__store__api.html#ga5ce6c785aac6d5cefd494814888074fa">attribute_store_register_callback</a>(</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;  <a class="code" href="group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff">attribute_store_node_update_callback_t</a> callback_function);</div>
@@ -250,6 +250,7 @@ $(document).ready(function(){initNavTree('attribute__store_8h_source.html',''); 
 <div class="ttc" id="agroup__attribute__store__api_html_ga57917747cf871f8053e3c5f213d2388e"><div class="ttname"><a href="group__attribute__store__api.html#ga57917747cf871f8053e3c5f213d2388e">attribute_store_get_node_child_by_type</a></div><div class="ttdeci">attribute_store_node_t attribute_store_get_node_child_by_type(attribute_store_node_t node, attribute_store_type_t child_type, uint32_t child_index)</div><div class="ttdoc">Get the node handle of a child of a node with a certain type.</div></div>
 <div class="ttc" id="agroup__datastore__attributes_html_ga5918f3c1eb857df59e4b33c9032bf10a"><div class="ttname"><a href="group__datastore__attributes.html#ga5918f3c1eb857df59e4b33c9032bf10a">datastore_attribute_id_t</a></div><div class="ttdeci">uint32_t datastore_attribute_id_t</div><div class="ttdef"><b>Definition:</b> datastore_attributes.h:40</div></div>
 <div class="ttc" id="agroup__attribute__store__api_html_ga22c49112dbd85a29019323a019a2e3ca"><div class="ttname"><a href="group__attribute__store__api.html#ga22c49112dbd85a29019323a019a2e3ca">attribute_store_get_node_child</a></div><div class="ttdeci">attribute_store_node_t attribute_store_get_node_child(attribute_store_node_t node, uint32_t child_index)</div><div class="ttdoc">Get the node handle of a child of a node.</div></div>
+<div class="ttc" id="aclassuint32__t_html"><div class="ttname"><a href="classuint32__t.html">uint32_t</a></div></div>
 <div class="ttc" id="agroup__attribute__store__api_html_ga1f00448b41fd90c913518f5641c12c49"><div class="ttname"><a href="group__attribute__store__api.html#ga1f00448b41fd90c913518f5641c12c49">attribute_store_log_node</a></div><div class="ttdeci">void attribute_store_log_node(attribute_store_node_t node, bool log_children)</div><div class="ttdoc">Log the content of the Attribute Store tree using Log from a given node.</div></div>
 <div class="ttc" id="agroup__attribute__store__api_html_gac873d6eac22ae497ed44c62d3ba1d958"><div class="ttname"><a href="group__attribute__store__api.html#gac873d6eac22ae497ed44c62d3ba1d958">attribute_store_register_callback_by_type_and_state</a></div><div class="ttdeci">sl_status_t attribute_store_register_callback_by_type_and_state(attribute_store_node_update_callback_t callback_function, attribute_store_type_t type, attribute_store_node_value_state_t value_state)</div><div class="ttdoc">Register a callback function to any node with a given type for a given value_state update.</div></div>
 <div class="ttc" id="agroup__attribute__store__api_html_ga2b7e18d0efb27747221103e461fa8de3"><div class="ttname"><a href="group__attribute__store__api.html#ga2b7e18d0efb27747221103e461fa8de3">attribute_store_log</a></div><div class="ttdeci">void attribute_store_log(void)</div><div class="ttdoc">Log the content of the Attribute Store tree using Log.</div></div>
@@ -266,7 +267,7 @@ $(document).ready(function(){initNavTree('attribute__store_8h_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_d7fba4d9e86299b704b642937f0243e8.html">uic_attribute_store</a></li><li class="navelem"><a class="el" href="dir_1258395076e871e9609ba7f43babf823.html">include</a></li><li class="navelem"><a class="el" href="attribute__store_8h.html">attribute_store.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

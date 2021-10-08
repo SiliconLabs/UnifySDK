@@ -57,6 +57,7 @@ sl_status_t  __attribute__((weak)) zwave_{{_name}}_handle_report_command_overrid
 sl_status_t  __attribute__((weak)) zwave_{{_name}}_override(
   attribute_store_node_t   _node, uint8_t *frame, uint16_t *frame_len)
 {
+  *frame_len = 0;
   return SL_STATUS_IDLE;
 }
 {{/cmd_type}}
@@ -65,6 +66,7 @@ sl_status_t  __attribute__((weak)) zwave_{{_name}}_override(
 sl_status_t __attribute__((weak)) zwave_{{_name}}_override(
   attribute_store_node_t    _node, uint8_t *frame, uint16_t *frame_len)
 {
+  *frame_len = 0;
   return SL_STATUS_IDLE;
 }
 {{/cmd_type}}
@@ -77,9 +79,10 @@ sl_status_t __attribute__((weak)) zwave_{{_name}}_override(
 static sl_status_t zwave_{{_name}}(
   attribute_store_node_t _node, uint8_t *frame, uint16_t *frame_len)
 {
-  if(zwave_{{_name}}_override(_node,frame, frame_len) == SL_STATUS_OK) {
-    return SL_STATUS_OK;
-  }
+   sl_status_t rc = zwave_{{_name}}_override(_node, frame, frame_len);
+   if( *frame_len > 0 ) {
+     return rc;
+  }  
 
   try {
     uint8_t offset=0;
@@ -133,9 +136,10 @@ static sl_status_t zwave_{{_name}}(
 static sl_status_t zwave_{{_name}}(
   attribute_store_node_t _node, uint8_t *frame, uint16_t *frame_len)
 {
-  if(zwave_{{_name}}_override(_node,frame, frame_len) == SL_STATUS_OK) {
-    return SL_STATUS_OK;
-  }
+   sl_status_t rc = zwave_{{_name}}_override(_node, frame, frame_len);
+   if( *frame_len > 0 ) {
+     return rc;
+  }  
 
   try {
     uint8_t offset = 0;
@@ -317,10 +321,9 @@ static void {{_name}}_on_version_attribute_update(
     return;
   }
 
-  uint8_t version      = 0;
-  uint8_t version_size = 0;
+  zwave_cc_version_t version      = 0;
   attribute updated_node(_updated_node);
-  attribute endpoint_node = updated_node.parent();
+  attribute endpoint_node = updated_node.first_parent(ATTRIBUTE_ENDPOINT_ID);
 
 
   if (is_zwave_command_class_filtered_for_root_device(
@@ -329,7 +332,7 @@ static void {{_name}}_on_version_attribute_update(
   }
 
   try {
-  version = updated_node.reported<uint8_t>();
+  version = updated_node.reported<zwave_cc_version_t>();
   } catch(std::invalid_argument& e) {
     return;
   }

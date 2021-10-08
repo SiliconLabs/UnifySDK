@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -89,9 +89,6 @@ $(document).ready(function(){initNavTree('globals_defs_m.html',''); initResizabl
 <li>MANUFACTURER_SPECIFIC_SCHEME
 : <a class="el" href="zwave__command__class__manufacturer__specific_8c.html#a633946cac736208693a187c68526e405">zwave_command_class_manufacturer_specific.c</a>
 </li>
-<li>MAX_CHANNEL_ZWAVE_FRAME_SIZE
-: <a class="el" href="zwave__transport__service__wrapper_8c.html#add8044993118696c9436c8ef74160cf3">zwave_transport_service_wrapper.c</a>
-</li>
 <li>MAX_COMMAND_DELAY_INFINITE
 : <a class="el" href="ucl__node__state_8h.html#ab1f9d81cf6c30e7e981a95e9df32f090">ucl_node_state.h</a>
 </li>
@@ -109,6 +106,9 @@ $(document).ready(function(){initNavTree('globals_defs_m.html',''); initResizabl
 </li>
 <li>MAX_GROUP_CONTENT_SIZE
 : <a class="el" href="group__zwave__command__class__association__internals.html#ga8203d9c25f954d432f5247f670aa23b7">zwave_command_class_association_internals.h</a>
+</li>
+<li>MAX_GROUP_NAME_SIZE
+: <a class="el" href="group__agi__command__class.html#gae69e89aac93f7b540c6aa9a17787cf79">zwave_command_class_agi.h</a>
 </li>
 <li>MAX_LEVEL
 : <a class="el" href="zwave__command__class__switch__multilevel_8c.html#a5bb4257ca9fa4bfcf9391b7895b97761">zwave_command_class_switch_multilevel.c</a>
@@ -161,11 +161,17 @@ $(document).ready(function(){initNavTree('globals_defs_m.html',''); initResizabl
 <li>MAXIMUM_MULTI_CHANNEL_SEND_SESSIONS
 : <a class="el" href="zwave__multi__channel__transport_8h.html#a3938ba1f087c534de6c7f9a86c3f217e">zwave_multi_channel_transport.h</a>
 </li>
+<li>MAXIMUM_WAKE_UP_INTERVAL
+: <a class="el" href="zwave__command__class__wake__up_8c.html#af370ffbbb52b8a915f1ab50f15ba5794">zwave_command_class_wake_up.c</a>
+</li>
 <li>MEMB
 : <a class="el" href="group__memb.html#gaf31774d02a69fd3f1c2b282454438cba">memb.h</a>
 </li>
 <li>MIN_LEVEL
 : <a class="el" href="zwave__command__class__switch__multilevel_8c.html#a76fefef9133fcfabf0402b881a5a229d">zwave_command_class_switch_multilevel.c</a>
+</li>
+<li>MINIMUM_WAKE_UP_INTERVAL
+: <a class="el" href="zwave__command__class__wake__up_8c.html#ae76501784753de0489ae1c3650146bb2">zwave_command_class_wake_up.c</a>
 </li>
 <li>MINUTE_IN_MS
 : <a class="el" href="group__zwave__command__class__supervision__internals.html#gabf2258d03b96693863c0ef2c3a6b2b0d">zwave_command_class_supervision_internals.h</a>
@@ -178,6 +184,9 @@ $(document).ready(function(){initNavTree('globals_defs_m.html',''); initResizabl
 </li>
 <li>MQTT_CLIENT_MINIMUM_RECONNECT_BACKOFF_MILLISECONDS
 : <a class="el" href="group__mqtt__client.html#gaa3ed05f361af715572198e761e04f18d">mqtt_client.h</a>
+</li>
+<li>MQTT_CLIENT_POLL_TIMER_MILLISECONDS
+: <a class="el" href="group__mqtt__client.html#ga7c06056c76aa03c3b4d68558065959e0">mqtt_client.h</a>
 </li>
 <li>MQTT_CLIENT_QoS
 : <a class="el" href="group__mqtt__client.html#gaa4b61eaf9d965adfa1fff41aa3d2d7cf">mqtt_client.h</a>
@@ -211,7 +220,7 @@ $(document).ready(function(){initNavTree('globals_defs_m.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:58 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:52 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

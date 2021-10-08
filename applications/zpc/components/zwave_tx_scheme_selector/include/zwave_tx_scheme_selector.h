@@ -98,15 +98,27 @@ zwave_controller_encapsulation_scheme_t
   zwave_tx_scheme_get_node_highest_security_class(zwave_node_id_t node_id);
 
 /**
- * @brief Computes how long of a frame can be sent to a given NodeID / Endpoint.
+ * @brief Computes the maximum number of bytes that can be sent to a given NodeID.
+ *        (lowest layer)
+ *
+ * @param node_id             The NodeID of the destination
+ * @returns The number of bytes that can be sent to the destination
+ */
+uint16_t zwave_tx_scheme_get_max_payload(zwave_node_id_t node_id);
+
+/**
+ * @brief Computes how long of a frame can be sent to a given NodeID / Endpoint
+ *        when queuing a frame at the application level.
  *
  * @param node_id             The NodeID of the destination
  * @param endpoint_id         The Endpoint ID to send to
- * @returns The number of bytes that can be sent to the destinations before
- *          Security and Multi Channel encapsulation.
+ * @returns The number of bytes that can be sent to the destination before
+ *          all additional encapsulations such as Security or Multi Channel
+ *          encapsulation.
  */
-uint16_t zwave_tx_scheme_get_max_payload(zwave_node_id_t node_id,
-                                         zwave_endpoint_id_t endpoint_id);
+uint16_t
+  zwave_tx_scheme_get_max_application_payload(zwave_node_id_t node_id,
+                                              zwave_endpoint_id_t endpoint_id);
 
 #ifdef __cplusplus
 }

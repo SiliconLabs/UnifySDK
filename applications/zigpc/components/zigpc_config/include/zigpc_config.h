@@ -27,6 +27,7 @@
 #if !defined(ZIGPC_CONFIG_H)
 #define ZIGPC_CONFIG_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #ifdef __cplusplus
@@ -38,10 +39,12 @@ extern "C" {
  *
  */
 typedef struct {
-  const char *mqtt_host;       ///< Hostname of the MQTT broker
-  int mqtt_port;               ///< port of the MQTT broker
-  const char *serial_port;     ///< Name of the serial port of the Z-Wave module
-  const char *datastore_file;  ///< Name of the serial port of the Z-Wave module
+  const char *mqtt_host;      /**< Hostname of the MQTT broker */
+  int mqtt_port;              /**< Port of the MQTT broker */
+  const char *serial_port;    /**< Name of the serial port of the Zigbee NCP */
+  const char *datastore_file; /**< Path to the SQLite datastore used by ZigPC */
+  bool tc_use_well_known_key; /**< Allow Trust Center joins using
+                                           well-known link key */
 } zigpc_config_t;
 
 /**

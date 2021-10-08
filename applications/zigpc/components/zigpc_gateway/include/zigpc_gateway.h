@@ -40,6 +40,15 @@ extern "C" {
 sl_status_t zigpc_gateway_network_init(void);
 
 /**
+ * @brief Request to enable/disable permitting Zigbee devices to join the
+ * network.
+ *
+ * @return sl_status_t          SL_STATUS_OK on request accepted by ZigPC
+ * Gateway, or error in reading and preparing data to be sent to ZigPC Gateway.
+ */
+sl_status_t zigpc_gateway_network_permit_joins(bool enable);
+
+/**
  *@brief Request to send a ZCL frame to an end device.
  *
  * @param eui64                 End device EUI64 in big-endian format.
@@ -171,6 +180,12 @@ sl_status_t zigpc_gateway_add_ota_image(
  *
  */
 void zigpc_gateway_command_print_info(void);
+
+/**
+ * @brief Send command to print Ember NWK key.
+ *
+ */
+void zigpc_gateway_command_print_nwk_key(void);
 
 /**
  * @brief Get the counters list array of values

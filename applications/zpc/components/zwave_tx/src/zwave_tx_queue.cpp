@@ -271,7 +271,7 @@ void zwave_tx_queue::log(bool log_messages_payload) const
                  it->user);
     sl_log_debug(
       LOG_TAG,
-      "\tAddresses: (NodeID:Endpoint) %03d:%d -> %03d:%d, is_multicast: %d\n",
+      "\tAddresses: (NodeID:Endpoint) %d:%d -> %d:%d, is_multicast: %d\n",
       it->connection_info.local.node_id,
       it->connection_info.local.endpoint_id,
       it->connection_info.remote.node_id,
@@ -334,7 +334,7 @@ void zwave_tx_queue::log_element(const zwave_tx_session_id_t session_id,
       sl_log_debug(
         LOG_TAG,
         "Entry (id=%p): (address %p), Qos: %u, discard timeout: %d ms, responses: %d\
- Addresses: (NodeID:Endpoint) %03d:%d -> %03d:%d. Multicast = %d\
+ Addresses: (NodeID:Endpoint) %d:%d -> %d:%d. Multicast = %d\
  Parent frame: %p, use parent options: %d, parent frame valid: %d\
  fasttrack: %d, Queue timestamp: %lu, transmission timestamp: %lu, transmission time (ms): %lu\n",
         it->zwave_tx_session_id,
@@ -396,7 +396,7 @@ void zwave_tx_queue::simple_log(zwave_tx_queue_element_t *e) const
   // Source address
   index += snprintf(message + index,
                     sizeof(message) - index,
-                    " - %03d:%d -> ",
+                    " - %d:%d -> ",
                     e->connection_info.local.node_id,
                     e->connection_info.local.endpoint_id);
 
@@ -404,7 +404,7 @@ void zwave_tx_queue::simple_log(zwave_tx_queue_element_t *e) const
   if (e->connection_info.remote.is_multicast == false) {
     index += snprintf(message + index,
                       sizeof(message) - index,
-                      " %03d:%d - ",
+                      " %d:%d - ",
                       e->connection_info.remote.node_id,
                       e->connection_info.remote.endpoint_id);
   } else {

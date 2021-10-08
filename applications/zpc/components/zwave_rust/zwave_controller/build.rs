@@ -15,4 +15,10 @@ fn main() {
     ))
     .unwrap();
     bind_target.write_link_configuration();
+    uic_bindgen::generate_bindings(
+        bind_target,
+        Some(".*zwave_controller.*|zwave_node_.*"),
+        None,
+        None,
+    );
 }

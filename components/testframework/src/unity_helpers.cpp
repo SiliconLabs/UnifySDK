@@ -11,8 +11,7 @@
  *
  *****************************************************************************/
 #include "unity_helpers.h"
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+#include <nlohmann/json.hpp>
 #include <sstream>
 
 extern "C" {
@@ -31,21 +30,13 @@ void INTERNAL_TEST_ASSERT_EQUAL_JSON(const char *expected,
   // if the cpp destructors are not called for std::stringstream and boost::property_tree,
   // thus those are scoped here, and the debug string is copied to the dbg char array.
   {
-    std::stringstream ss_expected;
-    ss_expected << expected;
-    std::stringstream ss_actual;
-    ss_actual << actual;
-    boost::property_tree::ptree pt_expected;
-    boost::property_tree::read_json(ss_expected, pt_expected);
-    boost::property_tree::ptree pt_actual;
-    boost::property_tree::read_json(ss_actual, pt_actual);
-    result = pt_expected == pt_actual;
+    nlohmann::json json_expected = nlohmann::json::parse(expected);
+    nlohmann::json json_actual   = nlohmann::json::parse(actual);
+    result                       = json_expected == json_actual;
     std::stringstream ss_dbg;
     if (!result) {
-      ss_dbg << "Expected: ";
-      boost::property_tree::json_parser::write_json(ss_dbg, pt_expected);
-      ss_dbg << " Actual: ";
-      boost::property_tree::json_parser::write_json(ss_dbg, pt_actual);
+      ss_dbg << "Expected: " << json_expected.dump();
+      ss_dbg << " Actual: " << json_actual.dump();
       strncpy(dbg, ss_dbg.str().c_str(), sizeof(dbg) - 1);
       // Ensure null termination
       dbg[1000] = 0;

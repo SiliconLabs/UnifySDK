@@ -1,16 +1,14 @@
 var searchData=
 [
-  ['map_5ftype_5fstring_1951',['map_type_string',['../classdotdot__bitmap.html#aa2701c45dd80e52dec11501fb6f7d0da',1,'dotdot_bitmap']]],
-  ['mask_1952',['mask',['../structringbuf.html#a78d6347a4464086fdbae6258c1e603c4',1,'ringbuf']]],
-  ['max_5freconnect_5fbackoff_1953',['max_reconnect_backoff',['../structmqtt__client.html#abe97d6f55c95ebf74e9ec9c12a82e1c2',1,'mqtt_client']]],
-  ['mem_1954',['mem',['../structmemb.html#a2bef4b5f9d4b3d1d6cbcb6da023402ad',1,'memb']]],
-  ['message_1955',['message',['../structmessage__queue__element__t.html#a115cef721788d07f3f25cdfc6248419a',1,'message_queue_element_t']]],
-  ['message_5flength_1956',['message_length',['../structmessage__queue__element__t.html#a926055b89ca5b86b2345104b75be0c8d',1,'message_queue_element_t']]],
-  ['mid_1957',['mid',['../structmqtt__message.html#a3116cb88128bdf4c58cb00acbc84ebc8',1,'mqtt_message']]],
-  ['mqtt_5fcafile_1958',['mqtt_cafile',['../structmqtt__client.html#a0e472a4f575d5084b1fbf54cfaee9588',1,'mqtt_client']]],
-  ['mqtt_5fcertfile_1959',['mqtt_certfile',['../structmqtt__client.html#a6e4bd88cb7d591c5ca0455cab5e958d5',1,'mqtt_client']]],
-  ['mqtt_5fclient_5fid_1960',['mqtt_client_id',['../structmqtt__client.html#a444ce40dea264c13265ac5fba1b4d30e',1,'mqtt_client']]],
-  ['mqtt_5fclient_5flibrary_5finstance_1961',['mqtt_client_library_instance',['../structmqtt__client.html#a1f00181f2421e4180904e9596d1b1c72',1,'mqtt_client']]],
-  ['mqtt_5fkeyfile_1962',['mqtt_keyfile',['../structmqtt__client.html#a49a0603abd52883362a2ad702411c452',1,'mqtt_client']]],
-  ['mutex_1963',['mutex',['../uic__stdin__process_8c.html#a4acff8232e4aec9cd5c6dc200ac55ef3',1,'uic_stdin_process.c']]]
+  ['name_2007',['name',['../structprocess.html#a78b62efdeb69a53c334a2fe0909c84cd',1,'process']]],
+  ['needspoll_2008',['needspoll',['../structprocess.html#a2b2ad213f87d7a470caf9f350a436f7c',1,'process']]],
+  ['nevents_2009',['nevents',['../group__process.html#ga72ab1764a4a4597286e870de00eab905',1,'process.c']]],
+  ['next_2010',['next',['../structlist.html#a1900fe79e875e2838625b2eb60837f8f',1,'list::next()'],['../structctimer.html#a9061efee4ff4da5188fbb094178f2597',1,'ctimer::next()'],['../structetimer.html#ac9d5daf994eb722f1bbfd347e7415450',1,'etimer::next()'],['../structprocess.html#aa714b70ab9ca99fc489de2f70a091b0b',1,'process::next()']]],
+  ['next_5fexpiration_2011',['next_expiration',['../group__etimer.html#ga12f6d67a26f6414e70ee5de069d4a320',1,'etimer.c']]],
+  ['next_5freconnect_5fbackoff_2012',['next_reconnect_backoff',['../structmqtt__client.html#a67cf2d1f5772d5094e235e999d86c931',1,'mqtt_client']]],
+  ['notify_5fnode_5fadded_5fcalled_2013',['notify_node_added_called',['../smartstart__management__mock_8hpp.html#aa01b65fc526cc26621ad78f7733176a6',1,'smartstart_management_mock.hpp']]],
+  ['notify_5fnode_5fadded_5freturn_5fvalue_2014',['notify_node_added_return_value',['../smartstart__management__mock_8hpp.html#a6dc2effb3a1c4d3c27522cec50d4cae7',1,'smartstart_management_mock.hpp']]],
+  ['notify_5fnode_5fremoved_5fcalled_2015',['notify_node_removed_called',['../smartstart__management__mock_8hpp.html#a7ab630abc77156bfab95aaa2bfcc5b16',1,'smartstart_management_mock.hpp']]],
+  ['notify_5fnode_5fremoved_5freturn_5fvalue_2016',['notify_node_removed_return_value',['../smartstart__management__mock_8hpp.html#a46ed2e6bc7f2280720a1eb71975a56cd',1,'smartstart_management_mock.hpp']]],
+  ['num_2017',['num',['../structmemb.html#abcabf6d8483632290436ef8d1b57a43e',1,'memb']]]
 ];

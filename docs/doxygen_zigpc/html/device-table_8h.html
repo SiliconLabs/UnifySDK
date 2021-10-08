@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -209,11 +209,6 @@ Typedefs</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
-&#160;&#160;<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba78e0f7b447100aee788e0cf0665bdbf0">ZIGPC_DS_TYPE_NETWORK</a> = (0x10000000 + 1), 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55babf68142e14de17d57f37a232ddeb1721">ZIGPC_DS_TYPE_DEVICE</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba4386e09afcad530c5141b090fd4ef790">ZIGPC_DS_TYPE_ENDPOINT</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba6b9f7a9337c4fd2271763bb3ba1b97e3">ZIGPC_DS_TYPE_CLUSTER</a>, 
-<br />
 &#160;&#160;<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba6fefcef8bb7d35207a8d0aaf798264d7">DEVICE_DISCOVERY_STATE_ENDPOINTS_SEND</a> = 0x00, 
 <a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55bac4b75577ac36793aef54baccec4c2f55">DEVICE_DISCOVERY_STATE_ENDPOINTS_WAITING</a> = 0x01, 
 <a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55babf168804ff71c29672fd3b7e0d402c1f">DEVICE_DISCOVERY_STATE_SIMPLE_SEND</a> = 0x02, 
@@ -297,7 +292,7 @@ Functions</h2></td></tr>
 <tr class="memitem:adbf220c91b49b11791a7c97f6dbbf925"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="device-table_8h.html#adbf220c91b49b11791a7c97f6dbbf925">emberAfDeviceTableNewDeviceJoinHandler</a> (EmberNodeId newNodeId, EmberEUI64 newNodeEui64)</td></tr>
 <tr class="memdesc:adbf220c91b49b11791a7c97f6dbbf925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Informs the device table that a new device joined.  <a href="device-table_8h.html#adbf220c91b49b11791a7c97f6dbbf925">More...</a><br /></td></tr>
 <tr class="separator:adbf220c91b49b11791a7c97f6dbbf925"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93b999488d3e2ebffb6a5be926ee467a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="device-table_8h.html#a93b999488d3e2ebffb6a5be926ee467a">emberAfDeviceTableTimeSinceLastMessage</a> (uint16_t index)</td></tr>
+<tr class="memitem:a93b999488d3e2ebffb6a5be926ee467a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="device-table_8h.html#a93b999488d3e2ebffb6a5be926ee467a">emberAfDeviceTableTimeSinceLastMessage</a> (uint16_t index)</td></tr>
 <tr class="memdesc:a93b999488d3e2ebffb6a5be926ee467a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates time since the device heard the last message.  <a href="device-table_8h.html#a93b999488d3e2ebffb6a5be926ee467a">More...</a><br /></td></tr>
 <tr class="separator:a93b999488d3e2ebffb6a5be926ee467a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf7f6960a751cf0c9dc82037dd27f488"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="device-table_8h.html#adf7f6960a751cf0c9dc82037dd27f488">emberAfDeviceTableMatchEui64</a> (EmberEUI64 a, EmberEUI64 b)</td></tr>
@@ -312,7 +307,7 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>APIs and defines for the Device Table plugin. </p>
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
 License</h1>
 <p><b>Copyright 2018 Silicon Laboratories Inc. www.silabs.com</b></p>
 <p>The licensor of this software is Silicon Laboratories Inc. Your use of this software is governed by the terms of Silicon Labs Master Software License Agreement (MSLA) available at www.silabs.com/about-us/legal/master-software-license-agreement. This software is distributed to you in Source Code format and is governed by the sections of the MSLA applicable to Source Code. </p>
@@ -1003,11 +998,7 @@ License</h1>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba78e0f7b447100aee788e0cf0665bdbf0"></a>ZIGPC_DS_TYPE_NETWORK&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55babf68142e14de17d57f37a232ddeb1721"></a>ZIGPC_DS_TYPE_DEVICE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba4386e09afcad530c5141b090fd4ef790"></a>ZIGPC_DS_TYPE_ENDPOINT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba6b9f7a9337c4fd2271763bb3ba1b97e3"></a>ZIGPC_DS_TYPE_CLUSTER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba6fefcef8bb7d35207a8d0aaf798264d7"></a>DEVICE_DISCOVERY_STATE_ENDPOINTS_SEND&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba6fefcef8bb7d35207a8d0aaf798264d7"></a>DEVICE_DISCOVERY_STATE_ENDPOINTS_SEND&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55bac4b75577ac36793aef54baccec4c2f55"></a>DEVICE_DISCOVERY_STATE_ENDPOINTS_WAITING&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55babf168804ff71c29672fd3b7e0d402c1f"></a>DEVICE_DISCOVERY_STATE_SIMPLE_SEND&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba5b6740dfa75743b83eb4a38ccc4fd827"></a>DEVICE_DISCOVERY_STATE_SIMPLE_WAITING&#160;</td><td class="fielddoc"></td></tr>
@@ -1654,7 +1645,7 @@ License</h1>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t emberAfDeviceTableTimeSinceLastMessage </td>
+          <td class="memname"><a class="el" href="classuint32__t.html">uint32_t</a> emberAfDeviceTableTimeSinceLastMessage </td>
           <td>(</td>
           <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
@@ -1815,7 +1806,7 @@ License</h1>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_d068be7b5e98c454d73184551add16b7.html">z3gateway</a></li><li class="navelem"><a class="el" href="dir_1dfd061e24aa4957c100c55d6cc74317.html">stack</a></li><li class="navelem"><a class="el" href="dir_abd021e52e1a7cb47278c30d7826b839.html">app</a></li><li class="navelem"><a class="el" href="dir_e462cdfa41f9b42cd664877bdb43f698.html">framework</a></li><li class="navelem"><a class="el" href="dir_595293b6dc5397a4de7ad9a7565295d7.html">plugin</a></li><li class="navelem"><a class="el" href="dir_6b4c9bce5423e840b0c18e203dbb4d20.html">device-table</a></li><li class="navelem"><a class="el" href="device-table_8h.html">device-table.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

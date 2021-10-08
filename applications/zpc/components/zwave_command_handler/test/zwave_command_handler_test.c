@@ -50,11 +50,10 @@ static void
   zwave_controller_set_application_nif_stub(const uint8_t *command_classes,
                                             uint8_t command_classes_length)
 {
-  TEST_ASSERT_EQUAL(4, command_classes_length);
+  TEST_ASSERT_EQUAL(3, command_classes_length);
   TEST_ASSERT_EQUAL(COMMAND_CLASS_ZWAVEPLUS_INFO, command_classes[0]);
-  TEST_ASSERT_EQUAL(COMMAND_CLASS_TRANSPORT_SERVICE, command_classes[1]);
-  TEST_ASSERT_EQUAL(COMMAND_CLASS_SECURITY, command_classes[3]);
-  TEST_ASSERT_EQUAL(COMMAND_CLASS_TIME_V2, command_classes[2]);
+  TEST_ASSERT_EQUAL(COMMAND_CLASS_SECURITY, command_classes[2]);
+  TEST_ASSERT_EQUAL(COMMAND_CLASS_TIME_V2, command_classes[1]);
 }
 
 static void zwave_controller_set_secure_application_nif_stub(

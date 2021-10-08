@@ -1,21 +1,88 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="405px" preserveAspectRatio="none" style="width:1082px;height:405px;" version="1.1" viewBox="0 0 1082 405" width="1082px" zoomAndPan="magnify"><defs><filter height="300%" id="f1clm0pvc0cl2s" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><ellipse cx="353.5" cy="16" fill="#000000" filter="url(#f1clm0pvc0cl2s)" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><g id="IDLE"><rect fill="#FEFECE" filter="url(#f1clm0pvc0cl2s)" height="50" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="50" x="328.5" y="87"/><line style="stroke:#A80036;stroke-width:1.5;" x1="328.5" x2="378.5" y1="113.2969" y2="113.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="338.5" y="104.9951">IDLE</text></g><g id="ONGOING"><rect fill="#FEFECE" filter="url(#f1clm0pvc0cl2s)" height="50" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="87" x="390" y="214"/><line style="stroke:#A80036;stroke-width:1.5;" x1="390" x2="477" y1="240.2969" y2="240.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="400" y="231.9951">ONGOING</text></g><g id="WAITING_FOR_ACTIVATION"><rect fill="#FEFECE" filter="url(#f1clm0pvc0cl2s)" height="50" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="203" x="7" y="341"/><line style="stroke:#A80036;stroke-width:1.5;" x1="7" x2="210" y1="367.2969" y2="367.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="183" x="17" y="358.9951">WAITING_FOR_ACTIVATION</text></g><g id="WAITING_FOR_REBOOT"><rect fill="#FEFECE" filter="url(#f1clm0pvc0cl2s)" height="50" rx="12.5" ry="12.5" style="stroke:#A80036;stroke-width:1.5;" width="181" x="556" y="341"/><line style="stroke:#A80036;stroke-width:1.5;" x1="556" x2="737" y1="367.2969" y2="367.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161" x="566" y="358.9951">WAITING_FOR_REBOOT</text></g><!--MD5=[9c5673dd9f569fe24504060ab78be963]
-link *start to IDLE--><path d="M353.5,26.2737 C353.5,39.3608 353.5,62.5555 353.5,81.5207 " fill="none" id="*start-to-IDLE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="353.5,86.7458,357.5,77.7458,353.5,81.7458,349.5,77.7458,353.5,86.7458" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d41842302ca67f5a37a90af18a619068]
-link IDLE to ONGOING--><path d="M328.4987,118.5829 C291.9995,129.4211 230.9013,152.9526 254.5,184 C284.6459,223.6611 314.9781,199.052 362.5,214 C369.6913,216.262 377.247,218.7741 384.6375,221.3086 " fill="none" id="IDLE-to-ONGOING" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="389.7212,223.0641,382.5198,216.3454,384.9951,221.432,379.9085,223.9072,389.7212,223.0641" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="151" x="255.5" y="180.0669">Initiate firmware update</text><!--MD5=[02c83846398aa9de016ff26a10596df8]
-link ONGOING to IDLE--><path d="M429.1038,213.6693 C425.8051,199.2257 420.3051,181.2257 411.5,167 C403.8896,154.7045 392.865,143.306 382.4666,134.1114 " fill="none" id="ONGOING-to-IDLE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="378.6715,130.826,382.8581,139.7407,382.4518,134.0985,388.0941,133.6922,378.6715,130.826" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="310" x="421.5" y="180.0669">Update either success or fail. No reboot needed.</text><!--MD5=[bf95208068f958690ce858b1af1bfb4c]
-link ONGOING to ONGOING--><path d="M477.0917,227.5141 C495.8982,226.5737 512,230.4023 512,239 C512,246.7916 498.7757,250.6665 482.2987,250.6247 " fill="none" id="ONGOING-to-ONGOING" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="477.0917,250.4859,485.9819,254.7244,482.0899,250.6192,486.1951,246.7272,477.0917,250.4859" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="226" x="518" y="243.5669">End node responds and frame valid</text><!--MD5=[d2901a3a9c03b31757dd22a897fdbe5d]
-link ONGOING to WAITING_FOR_ACTIVATION--><path d="M389.9548,255.7633 C380.9691,258.8164 371.5,261.744 362.5,264 C277.4451,285.3201 243.662,250.5461 167.5,294 C149.9222,304.0289 135.4236,321.4747 125.1978,336.6813 " fill="none" id="ONGOING-to-WAITING_FOR_ACTIVATION" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="122.4279,340.903,130.7096,335.5725,125.1708,336.7225,124.0208,331.1838,122.4279,340.903" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="301" x="168.5" y="307.0669">Update done and end node supports activation</text><!--MD5=[8ee85d0e6ef4af210c79d1c4e9137252]
-link WAITING_FOR_ACTIVATION to IDLE--><path d="M92.5955,340.7629 C74.5254,308.5303 50.7928,252.3427 77.5,214 C106.5963,172.2273 257.6797,133.6729 323.169,118.6455 " fill="none" id="WAITING_FOR_ACTIVATION-to-IDLE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="328.1094,117.5192,318.4454,115.6199,323.2345,118.6306,320.2237,123.4197,328.1094,117.5192" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="293" x="78.5" y="243.5669">Activation done. Update either success or fail.</text><!--MD5=[0fc91e6b99cd5b1182cd2cbce0dd14a2]
-link ONGOING to WAITING_FOR_REBOOT--><path d="M451.2607,264.1829 C463.1453,279.4826 479.9656,298.4251 498.5,311 C515.0198,322.2081 534.1183,331.4904 552.9912,339.0355 " fill="none" id="ONGOING-to-WAITING_FOR_REBOOT" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="557.7828,340.9165,550.8667,333.9045,553.1285,339.0895,547.9435,341.3513,557.7828,340.9165" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="277" x="499.5" y="307.0669">Update done and end node requires reboot</text><!--MD5=[5137197dd438a057b6bb28e1cf836452]
-link WAITING_FOR_REBOOT to IDLE--><path d="M737.2985,346.178 C754.7231,338.1437 770.8382,326.8563 781.5,311 C818.6306,255.7789 791.4018,209.8609 740.5,167 C713.2337,144.041 470.0548,121.7214 383.7309,114.456 " fill="none" id="WAITING_FOR_REBOOT-to-IDLE" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="378.5185,114.0195,387.1533,118.7567,383.5011,114.4368,387.8209,110.7846,378.5185,114.0195" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="275" x="799.5" y="243.5669">Reboot done. Update either success or fail.</text><!--MD5=[e3f8d4c26125aff65767f9ede56b7cc8]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="505px" preserveAspectRatio="none" style="width:508px;height:505px;" version="1.1" viewBox="0 0 508 505" width="508px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="338" x="84.5" y="28.708">Inclusion Protocol candidate discovery</text><line style="stroke:#001111;stroke-width:2.0;stroke-dasharray:5.0,5.0;" x1="59" x2="59" y1="71.25" y2="498.5078"/><line style="stroke:#001111;stroke-width:2.0;stroke-dasharray:5.0,5.0;" x1="289" x2="289" y1="71.25" y2="498.5078"/><line style="stroke:#001111;stroke-width:2.0;stroke-dasharray:5.0,5.0;" x1="441" x2="441" y1="71.25" y2="498.5078"/><rect fill="#FFFFFF" height="30.2969" style="stroke:#480509;stroke-width:1.5;" width="109" x="5" y="39.9531"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="12" y="59.9482">SmartStart list</text><rect fill="#FFFFFF" height="30.2969" style="stroke:#480509;stroke-width:1.5;" width="43" x="268" y="39.9531"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="29" x="275" y="59.9482">ZPC</text><rect fill="#FFFFFF" height="30.2969" style="stroke:#480509;stroke-width:1.5;" width="81" x="401" y="39.9531"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="408" y="59.9482">End node</text><polygon fill="#000000" points="277.5,113.5156,287.5,117.5156,277.5,121.5156,281.5,117.5156" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="59.5" x2="283.5" y1="117.5156" y2="117.5156"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="206" x="71.5" y="97.3169">New Entry in the SmartStart list.</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="190" x="81.5" y="112.4497">2 possible inclusion protocols.</text><rect fill="#FFFFFF" height="23" style="stroke:#000000;stroke-width:1.0;" width="209" x="261" y="130.5156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="192" x="269.5" y="146.5825">Initiate protocol discovery</text><rect fill="#FFFFFF" height="23" style="stroke:#000000;stroke-width:1.0;" width="151" x="133" y="163.6484"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="143" x="137" y="179.7153">known protocols: none</text><polygon fill="#000000" points="300.5,224.0469,290.5,228.0469,300.5,232.0469,296.5,228.0469" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="294.5" x2="440.5" y1="228.0469" y2="228.0469"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="128" x="301.5" y="207.8481">Z-Wave Long Range</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="128" x="301.5" y="222.981">SmartStart Prime</text><rect fill="#FFFFFF" height="38" style="stroke:#000000;stroke-width:1.0;" width="152" x="132" y="241.0469"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="107" x="136" y="257.1138">known protocols:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="144" x="136" y="272.2466">1. Z-Wave Long Range</text><polygon fill="#000000" points="300.5,316.5781,290.5,320.5781,300.5,324.5781,296.5,320.5781" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="294.5" x2="440.5" y1="320.5781" y2="320.5781"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="341" y="300.3794">Z-Wave</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="128" x="301.5" y="315.5122">SmartStart Prime</text><rect fill="#FFFFFF" height="53" style="stroke:#000000;stroke-width:1.0;" width="152" x="132" y="333.5781"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="107" x="136" y="349.645">known protocols:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="144" x="136" y="364.7778">1. Z-Wave Long Range</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="65" x="136" y="379.9106">2. Z-Wave</text><rect fill="#FFFFFF" height="38" style="stroke:#000000;stroke-width:1.0;" width="221" x="255" y="396.9766"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="173" x="259" y="413.0435">All candidates received</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="213" x="259" y="428.1763">Stopping Protocol discovery.</text><rect fill="#FFFFFF" height="38" style="stroke:#000000;stroke-width:1.0;" width="273" x="229" y="445.2422"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="178" x="233" y="461.3091">Initiate SmartStart Inclusion</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="265" x="233" y="476.4419">at the next SmartStart Inclusion Request.</text><!--MD5=[08e392bc2cacde7a1f9982c841752500]
 @startuml inline_umlgraph_11.svg
-[*] - -> IDLE
-IDLE - -> ONGOING : Initiate firmware update
-ONGOING - -> ONGOING : End node responds and frame valid
-ONGOING - -> WAITING_FOR_ACTIVATION : Update done and end node supports activation
-WAITING_FOR_ACTIVATION - -> IDLE : Activation done. Update either success or fail.
-ONGOING - -> WAITING_FOR_REBOOT : Update done and end node requires reboot
-WAITING_FOR_REBOOT - -> IDLE : Reboot done. Update either success or fail.
-ONGOING - -> IDLE : Update either success or fail. No reboot needed.
+' Style for the diagram
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ArrowColor #000000
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam ParticipantBorderColor #480509
+skinparam SequenceLifeLineBorderColor #001111
+skinparam SequenceLifeLineBorderThickness 2
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+skinparam ActorBackgroundColor #FFFFFF
+skinparam ActorBorderColor #480509
+
+hide footbox
+title Inclusion Protocol candidate discovery
+
+' List of participants
+participant "SmartStart list" as upvl
+participant "ZPC" as zpc
+participant "End node" as node
+
+upvl -> zpc: New Entry in the SmartStart list.\n 2 possible inclusion protocols.
+
+rnote over zpc, node: <b>Initiate protocol discovery</b>
+
+rnote left of zpc: known protocols: none
+
+node -> zpc: Z-Wave Long Range\n<b>SmartStart Prime
+
+rnote left of zpc: known protocols:\n1. Z-Wave Long Range
+
+node -> zpc: Z-Wave\n<b>SmartStart Prime
+
+rnote left of zpc: known protocols:\n1. Z-Wave Long Range\n2. Z-Wave
+
+rnote over zpc, node: <b>All candidates received\n<b>Stopping Protocol discovery.
+
+rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request.
+@enduml
+
+@startuml inline_umlgraph_11.svg
+skinparam classFontColor black
+skinparam classFontSize 10
+skinparam classFontName Helvetica
+skinparam sequenceMessageAlign center
+skinparam shadowing false
+skinparam ArrowColor #000000
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam ParticipantBorderColor #480509
+skinparam SequenceLifeLineBorderColor #001111
+skinparam SequenceLifeLineBorderThickness 2
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor #000000
+skinparam ActorBackgroundColor #FFFFFF
+skinparam ActorBorderColor #480509
+
+hide footbox
+title Inclusion Protocol candidate discovery
+
+participant "SmartStart list" as upvl
+participant "ZPC" as zpc
+participant "End node" as node
+
+upvl -> zpc: New Entry in the SmartStart list.\n 2 possible inclusion protocols.
+
+rnote over zpc, node: <b>Initiate protocol discovery</b>
+
+rnote left of zpc: known protocols: none
+
+node -> zpc: Z-Wave Long Range\n<b>SmartStart Prime
+
+rnote left of zpc: known protocols:\n1. Z-Wave Long Range
+
+node -> zpc: Z-Wave\n<b>SmartStart Prime
+
+rnote left of zpc: known protocols:\n1. Z-Wave Long Range\n2. Z-Wave
+
+rnote over zpc, node: <b>All candidates received\n<b>Stopping Protocol discovery.
+
+rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request.
 @enduml
 
 PlantUML version 1.2021.00(Sun Jan 10 10:25:05 UTC 2021)

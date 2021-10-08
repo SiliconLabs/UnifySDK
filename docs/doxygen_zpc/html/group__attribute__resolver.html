@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -127,6 +127,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gadf861538dd5cb124bd6d0a83526e327c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gadf861538dd5cb124bd6d0a83526e327c">attribute_resolver_register_rule</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> node_type, <a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a> set_func, <a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a> get_func)</td></tr>
 <tr class="memdesc:gadf861538dd5cb124bd6d0a83526e327c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register an attribute rule.  <a href="group__attribute__resolver.html#gadf861538dd5cb124bd6d0a83526e327c">More...</a><br /></td></tr>
 <tr class="separator:gadf861538dd5cb124bd6d0a83526e327c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga36150b164bf3a1a4bdd7b5c762999473"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga36150b164bf3a1a4bdd7b5c762999473">attribute_resolver_set_attribute_depth</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> node_type, int depth)</td></tr>
+<tr class="memdesc:ga36150b164bf3a1a4bdd7b5c762999473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the relative depth of an attribute in the attribute tree.  <a href="group__attribute__resolver.html#ga36150b164bf3a1a4bdd7b5c762999473">More...</a><br /></td></tr>
+<tr class="separator:ga36150b164bf3a1a4bdd7b5c762999473"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2be726f603b349975aab0498d1457202"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga2be726f603b349975aab0498d1457202">attribute_resolver_pause_node_resolution</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
 <tr class="memdesc:ga2be726f603b349975aab0498d1457202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pause the resolution on a given node.  <a href="group__attribute__resolver.html#ga2be726f603b349975aab0498d1457202">More...</a><br /></td></tr>
 <tr class="separator:ga2be726f603b349975aab0498d1457202"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,7 +155,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:gac219d9eb804a9862ba4dd1e089a72fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function traverses attribute store to check if any parent of the attribute node is paused or not.  <a href="group__attribute__resolver.html#gac219d9eb804a9862ba4dd1e089a72fe3">More...</a><br /></td></tr>
 <tr class="separator:gac219d9eb804a9862ba4dd1e089a72fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gad167230e6bf706a5e1bde2d8b75a2b38">is_node_pending_set_resolution</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
-<tr class="memdesc:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if a node is pendign a set resolution. i.e. command has been sent and we are waiting for a state update in the attribute store.  <a href="group__attribute__resolver.html#gad167230e6bf706a5e1bde2d8b75a2b38">More...</a><br /></td></tr>
+<tr class="memdesc:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if a node is pending a set resolution. i.e. command has been sent and we are waiting for a state update in the attribute store.  <a href="group__attribute__resolver.html#gad167230e6bf706a5e1bde2d8b75a2b38">More...</a><br /></td></tr>
 <tr class="separator:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa3536d271edf4bd224afc20fc1253d08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gaa3536d271edf4bd224afc20fc1253d08">attribute_resolver_state_log</a> ()</td></tr>
 <tr class="memdesc:gaa3536d271edf4bd224afc20fc1253d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the state of the Attribute Resolver using <a class="el" href="group__sl__log.html">Log</a>.  <a href="group__attribute__resolver.html#gaa3536d271edf4bd224afc20fc1253d08">More...</a><br /></td></tr>
@@ -435,6 +438,46 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga36150b164bf3a1a4bdd7b5c762999473"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga36150b164bf3a1a4bdd7b5c762999473">&#9670;&nbsp;</a></span>attribute_resolver_set_attribute_depth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_resolver_set_attribute_depth </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td>
+          <td class="paramname"><em>node_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the relative depth of an attribute in the attribute tree. </p>
+<p>FIXME: Anders writes a comprehensive explanation here.</p>
+<p>This functions sets the relative depth of an attribute, this is used when the attribute resolver tries to detect if multiple attributes will be resolved by the same set frame. Normally the resolver will assume that all resolved attribute in a frame are siblings (depth=1), however once an a while the a frame will resolve attribute which are on deeper levels, ie cousins and grand cousins. It is assumed that all attributes resolved in a frame are all on the same level, ie all are siblings.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_type</td><td></td></tr>
+    <tr><td class="paramname">depth</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t </dd></dl>
+
+</div>
+</div>
 <a id="ga4e89504e8607d0621899f4c1961c7fb8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga4e89504e8607d0621899f4c1961c7fb8">&#9670;&nbsp;</a></span>attribute_resolver_set_resolution_listener()</h2>
 
@@ -463,7 +506,7 @@ Functions</h2></td></tr>
 
 <p>Register a listener to be called when a node and all its children has been resolved. </p>
 <p>This function allows for a callback to be fired when the resolver has completed and resolved a part of the attribute tree. In other words, the node passed as a parameter and all its children.</p>
-<p>This feature is used to send wakeup no more information for Z-Wave wakeup nodes. It is also used by the network monitor to identify when the node is no longer interviewed after inclusion.</p>
+<p>This feature is used to send Wake Up No More Information for Z-Wave Wake Up nodes. It is also used by the network monitor to identify when the node is no longer interviewed after inclusion.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node</td><td>Node to monitor </td></tr>
@@ -556,7 +599,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns true if a node is pendign a set resolution. i.e. command has been sent and we are waiting for a state update in the attribute store. </p>
+<p>Returns true if a node is pending a set resolution. i.e. command has been sent and we are waiting for a state update in the attribute store. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node</td><td>Attribute node </td></tr>
@@ -572,7 +615,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:56 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:38 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

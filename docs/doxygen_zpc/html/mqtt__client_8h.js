@@ -3,6 +3,7 @@ var mqtt__client_8h =
     [ "MQTT_CLIENT_KEEP_ALIVE_INTERVAL_MILLISECONDS", "group__mqtt__client.html#ga083a671472a0a6c3e18643e50f77965f", null ],
     [ "MQTT_CLIENT_MAXIMUM_RECONNECT_BACKOFF_MILLISECONDS", "group__mqtt__client.html#ga949c17ab6392e71ef22000298f7e50f6", null ],
     [ "MQTT_CLIENT_MINIMUM_RECONNECT_BACKOFF_MILLISECONDS", "group__mqtt__client.html#gaa3ed05f361af715572198e761e04f18d", null ],
+    [ "MQTT_CLIENT_POLL_TIMER_MILLISECONDS", "group__mqtt__client.html#ga7c06056c76aa03c3b4d68558065959e0", null ],
     [ "MQTT_CLIENT_QoS", "group__mqtt__client.html#gaa4b61eaf9d965adfa1fff41aa3d2d7cf", null ],
     [ "message_callback_t", "group__mqtt__client.html#gadaf2076e6465d05fa47091fccf706ab0", null ],
     [ "mqtt_client_t", "group__mqtt__client.html#ga57dffc3593ed5dc537ca8d04bc81272c", null ],

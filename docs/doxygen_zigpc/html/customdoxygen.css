@@ -639,4 +639,9 @@ a[href$=\[none\]] {
 
 #doc-content img {
   max-width: 99%;
+  border: 1px solid #797777;
+}
+
+div.contents > div.textblock > ol > li {
+  padding: 10px 10px 0 10px ;
 }

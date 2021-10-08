@@ -60,6 +60,7 @@ void test_init()
   char *argv_inject[3]    = {"test_config", "--conf", TEST_CONFIG_FILE};
   const char *ini_content = "zigpc:\n"
                             "    - serial: /dev/ttyUSB0\n"
+                            "    - tc_use_well_known_key: true\n"
                             "datastore:\n"
                             "    - file: /var/lib/uic/zigpc.db\n"
                             "mqtt:\n"
@@ -78,4 +79,5 @@ void test_init()
   TEST_ASSERT_EQUAL_STRING("/dev/ttyUSB0", zigpc_get_config()->serial_port);
   TEST_ASSERT_EQUAL_STRING("/var/lib/uic/zigpc.db",
                            zigpc_get_config()->datastore_file);
+  TEST_ASSERT_TRUE(zigpc_get_config()->tc_use_well_known_key);
 }

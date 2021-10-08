@@ -134,7 +134,7 @@ var NAVTREE =
       [ "Access Developer GUI", "md_applications_dev_ui_dev_gui_readme_user.html#autotoc_md85", null ],
       [ "Connecting the Developer GUI", "md_applications_dev_ui_dev_gui_readme_user.html#autotoc_md86", null ],
       [ "Node Inclusion", "md_applications_dev_ui_dev_gui_readme_user.html#autotoc_md87", null ],
-      [ "Smart Start List", "md_applications_dev_ui_dev_gui_readme_user.html#autotoc_md88", null ],
+      [ "SmartStart List", "md_applications_dev_ui_dev_gui_readme_user.html#autotoc_md88", null ],
       [ "Devices", "md_applications_dev_ui_dev_gui_readme_user.html#autotoc_md89", [
         [ "On/Off Switch", "md_applications_dev_ui_dev_gui_readme_user.html#autotoc_md90", null ],
         [ "Binary Sensor", "md_applications_dev_ui_dev_gui_readme_user.html#autotoc_md91", null ],
@@ -147,227 +147,287 @@ var NAVTREE =
       ] ]
     ] ],
     [ "Dev GUI Release Notes", "md_applications_dev_ui_dev_gui_release_notes.html", [
-      [ "New Features", "md_applications_dev_ui_dev_gui_release_notes.html#autotoc_md98", null ],
-      [ "Known Bugs", "md_applications_dev_ui_dev_gui_release_notes.html#autotoc_md99", null ]
+      [ "[1.0.2] - Oct 2021", "md_applications_dev_ui_dev_gui_release_notes.html#autotoc_md98", null ]
     ] ],
     [ "ANGEL Developer's Guide", "md_applications_angel_readme_developer.html", [
-      [ "Building the ANGEL Application", "md_applications_angel_readme_developer.html#autotoc_md101", [
-        [ "Build Instructions", "md_applications_angel_readme_developer.html#autotoc_md102", [
-          [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_angel_readme_developer.html#autotoc_md103", null ],
-          [ "Cargo for Local Development", "md_applications_angel_readme_developer.html#autotoc_md104", null ]
+      [ "Building the ANGEL Application", "md_applications_angel_readme_developer.html#autotoc_md100", [
+        [ "Build Instructions", "md_applications_angel_readme_developer.html#autotoc_md101", [
+          [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_angel_readme_developer.html#autotoc_md102", null ],
+          [ "Cargo for Local Development", "md_applications_angel_readme_developer.html#autotoc_md103", null ]
         ] ]
       ] ]
     ] ],
     [ "ANGEL User's Guide", "md_applications_angel_readme_user.html", [
-      [ "Running the ANGEL", "md_applications_angel_readme_user.html#autotoc_md106", [
-        [ "Using Systemd Service", "md_applications_angel_readme_user.html#autotoc_md107", null ],
-        [ "Using Command Line", "md_applications_angel_readme_user.html#autotoc_md108", null ],
-        [ "Output Examples", "md_applications_angel_readme_user.html#autotoc_md109", null ]
+      [ "Running the ANGEL", "md_applications_angel_readme_user.html#autotoc_md105", [
+        [ "Using Systemd Service", "md_applications_angel_readme_user.html#autotoc_md106", null ],
+        [ "Using Command Line", "md_applications_angel_readme_user.html#autotoc_md107", null ],
+        [ "Output Examples", "md_applications_angel_readme_user.html#autotoc_md108", null ]
       ] ]
     ] ],
     [ "ANGEL Release Notes", "md_applications_angel_release_notes.html", [
-      [ "Known Bugs", "md_applications_angel_release_notes.html#autotoc_md111", null ]
+      [ "[1.0.2] - Oct 2021", "md_applications_angel_release_notes.html#autotoc_md110", [
+        [ "Fixed", "md_applications_angel_release_notes.html#autotoc_md111", null ]
+      ] ],
+      [ "Known Bugs", "md_applications_angel_release_notes.html#autotoc_md112", null ]
     ] ],
     [ "Image Provider Developer's Guide", "md_applications_image_provider_readme_developer.html", [
-      [ "Building the Image Provider Application", "md_applications_image_provider_readme_developer.html#autotoc_md113", [
-        [ "Build Instructions", "md_applications_image_provider_readme_developer.html#autotoc_md114", [
-          [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_image_provider_readme_developer.html#autotoc_md115", null ],
-          [ "Cargo for Local Development", "md_applications_image_provider_readme_developer.html#autotoc_md116", null ]
+      [ "Building the Image Provider Application", "md_applications_image_provider_readme_developer.html#autotoc_md114", [
+        [ "Build Instructions", "md_applications_image_provider_readme_developer.html#autotoc_md115", [
+          [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_image_provider_readme_developer.html#autotoc_md116", null ],
+          [ "Cargo for Local Development", "md_applications_image_provider_readme_developer.html#autotoc_md117", null ]
         ] ]
       ] ]
     ] ],
     [ "Image Provider User's Guide", "md_applications_image_provider_readme_user.html", [
-      [ "Running the Image Provider", "md_applications_image_provider_readme_user.html#autotoc_md118", [
-        [ "Using Systemd Service", "md_applications_image_provider_readme_user.html#autotoc_md119", null ],
-        [ "Using the Command Line", "md_applications_image_provider_readme_user.html#autotoc_md120", null ]
+      [ "Running the Image Provider", "md_applications_image_provider_readme_user.html#autotoc_md119", [
+        [ "Using Systemd Service", "md_applications_image_provider_readme_user.html#autotoc_md120", null ],
+        [ "Using the Command Line", "md_applications_image_provider_readme_user.html#autotoc_md121", null ]
       ] ],
-      [ "Using the Image Provider", "md_applications_image_provider_readme_user.html#autotoc_md121", [
-        [ "OTA Folder Structure", "md_applications_image_provider_readme_user.html#autotoc_md122", null ],
-        [ "Metadata File Name and Format", "md_applications_image_provider_readme_user.html#autotoc_md123", [
-          [ "Md5 Checksum calculation", "md_applications_image_provider_readme_user.html#autotoc_md124", null ]
+      [ "Using the Image Provider", "md_applications_image_provider_readme_user.html#autotoc_md122", [
+        [ "OTA Folder Structure", "md_applications_image_provider_readme_user.html#autotoc_md123", null ],
+        [ "Metadata File Name and Format", "md_applications_image_provider_readme_user.html#autotoc_md124", [
+          [ "Md5 Checksum calculation", "md_applications_image_provider_readme_user.html#autotoc_md125", null ]
         ] ],
-        [ "Output Examples", "md_applications_image_provider_readme_user.html#autotoc_md125", null ]
+        [ "Output Examples", "md_applications_image_provider_readme_user.html#autotoc_md126", null ]
       ] ]
     ] ],
     [ "Image Provider Release Notes", "md_applications_image_provider_release_notes.html", [
-      [ "Known Bugs", "md_applications_image_provider_release_notes.html#autotoc_md127", null ]
+      [ "[1.0.2] - Oct 2021", "md_applications_image_provider_release_notes.html#autotoc_md128", [
+        [ "Changed", "md_applications_image_provider_release_notes.html#autotoc_md129", null ],
+        [ "Fixed", "md_applications_image_provider_release_notes.html#autotoc_md130", null ]
+      ] ],
+      [ "Known Bugs", "md_applications_image_provider_release_notes.html#autotoc_md131", null ]
     ] ],
     [ "UPVL Developer's Guide", "md_applications_upvl_readme_developer.html", [
-      [ "Building the UPVL", "md_applications_upvl_readme_developer.html#autotoc_md129", [
-        [ "Build Instructions", "md_applications_upvl_readme_developer.html#autotoc_md130", [
-          [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_upvl_readme_developer.html#autotoc_md131", null ],
-          [ "Cargo for Local Development", "md_applications_upvl_readme_developer.html#autotoc_md132", null ]
+      [ "Building the UPVL", "md_applications_upvl_readme_developer.html#autotoc_md133", [
+        [ "Build Instructions", "md_applications_upvl_readme_developer.html#autotoc_md134", [
+          [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_upvl_readme_developer.html#autotoc_md135", null ],
+          [ "Cargo for Local Development", "md_applications_upvl_readme_developer.html#autotoc_md136", null ]
         ] ]
       ] ]
     ] ],
     [ "UPVL User's Guide", "md_applications_upvl_readme_user.html", [
-      [ "Running the UPVL", "md_applications_upvl_readme_user.html#autotoc_md134", [
-        [ "Using Systemd Service", "md_applications_upvl_readme_user.html#autotoc_md135", null ],
-        [ "Using Command Line", "md_applications_upvl_readme_user.html#autotoc_md136", null ],
-        [ "Output Examples", "md_applications_upvl_readme_user.html#autotoc_md137", null ]
+      [ "Running the UPVL", "md_applications_upvl_readme_user.html#autotoc_md138", [
+        [ "Using Systemd Service", "md_applications_upvl_readme_user.html#autotoc_md139", null ],
+        [ "Using Command Line", "md_applications_upvl_readme_user.html#autotoc_md140", null ],
+        [ "Output Examples", "md_applications_upvl_readme_user.html#autotoc_md141", null ]
       ] ]
     ] ],
     [ "UPVL Release Notes", "md_applications_upvl_release_notes.html", [
-      [ "Known Bugs", "md_applications_upvl_release_notes.html#autotoc_md139", null ]
+      [ "[1.0.2] - Oct 2021", "md_applications_upvl_release_notes.html#autotoc_md143", null ],
+      [ "Known Bugs", "md_applications_upvl_release_notes.html#autotoc_md144", null ]
     ] ],
-    [ "coding_standard", "md_applications_zigpc_coding_standard.html", null ],
     [ "ZigPC (Beta) Developer Guide", "md_applications_zigpc_readme_developer.html", [
-      [ "Build Instructions", "md_applications_zigpc_readme_developer.html#autotoc_md149", [
-        [ "Rules", "md_applications_zigpc_coding_standard.html#autotoc_md140", [
-          [ "1 - Folders", "md_applications_zigpc_coding_standard.html#autotoc_md141", null ],
-          [ "2 - Files", "md_applications_zigpc_coding_standard.html#autotoc_md142", null ],
-          [ "3 - C++ Classes", "md_applications_zigpc_coding_standard.html#autotoc_md143", null ],
-          [ "4 - Functions", "md_applications_zigpc_coding_standard.html#autotoc_md144", null ],
-          [ "5 - Variables", "md_applications_zigpc_coding_standard.html#autotoc_md145", [
-            [ "5.1 Global Variables", "md_applications_zigpc_coding_standard.html#autotoc_md146", null ],
-            [ "5.2 Function Parameters and Local Variables", "md_applications_zigpc_coding_standard.html#autotoc_md147", null ]
-          ] ]
-        ] ],
-        [ "Set up Gecko SDK", "md_applications_zigpc_readme_developer.html#autotoc_md150", null ],
-        [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_zigpc_readme_developer.html#autotoc_md151", null ],
-        [ "Compiling", "md_applications_zigpc_readme_developer.html#autotoc_md152", null ],
-        [ "Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host", "md_applications_zigpc_readme_developer.html#autotoc_md153", null ]
+      [ "Build Instructions", "md_applications_zigpc_readme_developer.html#autotoc_md146", [
+        [ "Set up Gecko SDK", "md_applications_zigpc_readme_developer.html#autotoc_md147", null ],
+        [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_zigpc_readme_developer.html#autotoc_md148", null ],
+        [ "Compiling", "md_applications_zigpc_readme_developer.html#autotoc_md149", null ],
+        [ "Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host", "md_applications_zigpc_readme_developer.html#autotoc_md150", null ]
       ] ],
-      [ "Install Instructions", "md_applications_zigpc_readme_developer.html#autotoc_md154", null ],
-      [ "Reading Console Logs", "md_applications_zigpc_readme_developer.html#autotoc_md155", [
-        [ "Changing Log Levels", "md_applications_zigpc_readme_developer.html#autotoc_md156", null ]
+      [ "Install Instructions", "md_applications_zigpc_readme_developer.html#autotoc_md151", null ],
+      [ "Reading Console Logs", "md_applications_zigpc_readme_developer.html#autotoc_md152", [
+        [ "Changing Log Levels", "md_applications_zigpc_readme_developer.html#autotoc_md153", null ]
       ] ],
-      [ "Using Zigbee Network Analyzer to Monitor PAN", "md_applications_zigpc_readme_developer.html#autotoc_md157", [
-        [ "Installing Simplicity Studio v5", "md_applications_zigpc_readme_developer.html#autotoc_md158", null ],
-        [ "Detecting Devices in Simplicity Studio", "md_applications_zigpc_readme_developer.html#autotoc_md159", [
-          [ "Connection via Ethernet Interface", "md_applications_zigpc_readme_developer.html#autotoc_md160", null ],
-          [ "Connection via Serial USB Interface", "md_applications_zigpc_readme_developer.html#autotoc_md161", null ]
+      [ "Using Zigbee Network Analyzer to Monitor PAN", "md_applications_zigpc_readme_developer.html#autotoc_md154", [
+        [ "Installing Simplicity Studio v5", "md_applications_zigpc_readme_developer.html#autotoc_md155", null ],
+        [ "Detecting Devices in Simplicity Studio", "md_applications_zigpc_readme_developer.html#autotoc_md156", [
+          [ "Connection via Ethernet Interface", "md_applications_zigpc_readme_developer.html#autotoc_md157", null ],
+          [ "Connection via Serial USB Interface", "md_applications_zigpc_readme_developer.html#autotoc_md158", null ]
         ] ],
-        [ "Capturing Network Traffic in Simplicity Studio", "md_applications_zigpc_readme_developer.html#autotoc_md162", null ],
-        [ "Decrypting Network Traffic in Simplicity Studio", "md_applications_zigpc_readme_developer.html#autotoc_md163", null ]
+        [ "Capturing Network Traffic in Simplicity Studio", "md_applications_zigpc_readme_developer.html#autotoc_md159", null ],
+        [ "Decrypting Network Traffic in Simplicity Studio", "md_applications_zigpc_readme_developer.html#autotoc_md160", null ]
       ] ]
     ] ],
     [ "ZigPC (Beta) User's Guide", "md_applications_zigpc_readme_user.html", [
-      [ "Overview", "md_applications_zigpc_readme_user.html#autotoc_md165", null ],
-      [ "Hardware Prerequisites", "md_applications_zigpc_readme_user.html#autotoc_md166", [
-        [ "Gateway Host Device: Raspberry Pi", "md_applications_zigpc_readme_user.html#autotoc_md167", null ],
-        [ "Gateway NCP Device: Zigbee Radio", "md_applications_zigpc_readme_user.html#autotoc_md168", [
-          [ "Using Pre-built NCP Images", "md_applications_zigpc_readme_user.html#autotoc_md169", null ],
-          [ "Building NCP FW Using Studio", "md_applications_zigpc_readme_user.html#autotoc_md170", null ]
-        ] ],
-        [ "PAN Device: Zigbee Light", "md_applications_zigpc_readme_user.html#autotoc_md171", null ],
-        [ "Flashing Devices", "md_applications_zigpc_readme_user.html#autotoc_md172", null ]
+      [ "Overview", "md_applications_zigpc_readme_user.html#autotoc_md162", null ],
+      [ "Hardware Prerequisites", "md_applications_zigpc_readme_user.html#autotoc_md163", [
+        [ "Gateway Host Device: Raspberry Pi", "md_applications_zigpc_readme_user.html#autotoc_md164", null ],
+        [ "Gateway NCP Device", "md_applications_zigpc_readme_user.html#autotoc_md165", null ],
+        [ "PAN Zigbee Device", "md_applications_zigpc_readme_user.html#autotoc_md166", null ]
       ] ],
-      [ "Installing ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md173", [
-        [ "Description of Installed Components", "md_applications_zigpc_readme_user.html#autotoc_md174", [
-          [ "Mosquitto MQTT System Service", "md_applications_zigpc_readme_user.html#autotoc_md175", null ],
-          [ "Mosquitto MQTT Clients: mosquitto_pub, mosquitto_sub", "md_applications_zigpc_readme_user.html#autotoc_md176", null ],
-          [ "libuic.so", "md_applications_zigpc_readme_user.html#autotoc_md177", null ],
-          [ "uic-upvl", "md_applications_zigpc_readme_user.html#autotoc_md178", null ],
-          [ "uic-angel", "md_applications_zigpc_readme_user.html#autotoc_md179", null ],
-          [ "ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md180", null ]
+      [ "Installing ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md167", [
+        [ "Description of Installed Components", "md_applications_zigpc_readme_user.html#autotoc_md168", [
+          [ "Mosquitto MQTT System Service", "md_applications_zigpc_readme_user.html#autotoc_md169", null ],
+          [ "Mosquitto MQTT Clients: mosquitto_pub, mosquitto_sub", "md_applications_zigpc_readme_user.html#autotoc_md170", null ],
+          [ "libuic.so", "md_applications_zigpc_readme_user.html#autotoc_md171", null ],
+          [ "uic-upvl", "md_applications_zigpc_readme_user.html#autotoc_md172", null ],
+          [ "uic-angel", "md_applications_zigpc_readme_user.html#autotoc_md173", null ],
+          [ "uic-image-provider", "md_applications_zigpc_readme_user.html#autotoc_md174", null ],
+          [ "ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md175", null ]
         ] ]
       ] ],
-      [ "Starting ZigPC on the Command Line", "md_applications_zigpc_readme_user.html#autotoc_md181", null ],
-      [ "Understanding ZigPC Functions", "md_applications_zigpc_readme_user.html#autotoc_md182", [
-        [ "Device Addressing", "md_applications_zigpc_readme_user.html#autotoc_md183", null ],
-        [ "Zigbee Node Commissioning", "md_applications_zigpc_readme_user.html#autotoc_md184", [
-          [ "Z3 Install Code-Based Provisioning", "md_applications_zigpc_readme_user.html#autotoc_md185", null ]
+      [ "Starting ZigPC on the Command Line", "md_applications_zigpc_readme_user.html#autotoc_md176", null ],
+      [ "Understanding ZigPC Functions", "md_applications_zigpc_readme_user.html#autotoc_md177", [
+        [ "Device Addressing", "md_applications_zigpc_readme_user.html#autotoc_md178", null ],
+        [ "Zigbee Node Commissioning", "md_applications_zigpc_readme_user.html#autotoc_md179", [
+          [ "Z3 Install Code-Based Provisioning", "md_applications_zigpc_readme_user.html#autotoc_md180", null ]
         ] ],
-        [ "Device Discovery", "md_applications_zigpc_readme_user.html#autotoc_md186", null ],
-        [ "Device Command Relaying", "md_applications_zigpc_readme_user.html#autotoc_md187", null ],
-        [ "Device State Updates", "md_applications_zigpc_readme_user.html#autotoc_md188", null ],
-        [ "Device Attribute Updates", "md_applications_zigpc_readme_user.html#autotoc_md189", null ],
-        [ "Group Message Handling", "md_applications_zigpc_readme_user.html#autotoc_md190", null ]
+        [ "Device State Updates", "md_applications_zigpc_readme_user.html#autotoc_md181", null ],
+        [ "Device Discovery", "md_applications_zigpc_readme_user.html#autotoc_md182", null ],
+        [ "Device Command Relaying", "md_applications_zigpc_readme_user.html#autotoc_md183", null ],
+        [ "Device Attribute Updates", "md_applications_zigpc_readme_user.html#autotoc_md184", null ],
+        [ "Group Message Handling", "md_applications_zigpc_readme_user.html#autotoc_md185", null ],
+        [ "Zigbee OTA Firmware Upgrade Support", "md_applications_zigpc_readme_user.html#autotoc_md186", null ],
+        [ "Zigbee Sleepy End Device Support", "md_applications_zigpc_readme_user.html#autotoc_md187", null ]
       ] ],
-      [ "Getting Started with Including Z3Light Device to ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md191", [
-        [ "Adding Z3Light Device to the ZigPC Network", "md_applications_zigpc_readme_user.html#autotoc_md192", null ],
-        [ "Sending Commands to the Z3Light Device", "md_applications_zigpc_readme_user.html#autotoc_md193", null ],
-        [ "Removing a Device Already in the ZigPC Network", "md_applications_zigpc_readme_user.html#autotoc_md194", null ]
-      ] ],
-      [ "Technical Specifications", "md_applications_zigpc_readme_user.html#autotoc_md195", [
-        [ "Device UNID Format", "md_applications_zigpc_readme_user.html#autotoc_md196", null ],
-        [ "Recognized SmartStart DSK Format", "md_applications_zigpc_readme_user.html#autotoc_md197", null ],
-        [ "Zigbee Device Support", "md_applications_zigpc_readme_user.html#autotoc_md198", null ],
-        [ "Zigbee OTA Support", "md_applications_zigpc_readme_user.html#autotoc_md199", [
-          [ "ZigPC OTA Process", "md_applications_zigpc_readme_user.html#autotoc_md200", null ]
+      [ "Getting Started with Including Zigbee 3.0 Device to ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md188", [
+        [ "Adding Zigbee Device to the ZigPC Network", "md_applications_zigpc_readme_user.html#autotoc_md189", null ],
+        [ "Discovering UCL Cluster Command Support for Z3Device", "md_applications_zigpc_readme_user.html#autotoc_md190", null ],
+        [ "Discovering UCL Cluster Attribute Updates for Z3Device", "md_applications_zigpc_readme_user.html#autotoc_md191", null ],
+        [ "Sending a UCL Cluster Command to Z3Device to see Attribute Update", "md_applications_zigpc_readme_user.html#autotoc_md192", null ],
+        [ "Removing a Device Already in the ZigPC Network", "md_applications_zigpc_readme_user.html#autotoc_md193", null ],
+        [ "Updating Zigbee Device Firmware already on the ZigPC Network", "md_applications_zigpc_readme_user.html#autotoc_md194", [
+          [ "Instructions on how to start an OTA update:", "md_applications_zigpc_readme_user.html#autotoc_md195", null ],
+          [ "Once the Unify Image Provider recognizes changes to images.json, the following actions will occur:", "md_applications_zigpc_readme_user.html#autotoc_md196", null ]
         ] ]
+      ] ],
+      [ "Technical Specifications", "md_applications_zigpc_readme_user.html#autotoc_md197", [
+        [ "Device UNID Format", "md_applications_zigpc_readme_user.html#autotoc_md198", null ],
+        [ "Recognized SmartStart DSK Format", "md_applications_zigpc_readme_user.html#autotoc_md199", null ],
+        [ "Zigbee Device Support", "md_applications_zigpc_readme_user.html#autotoc_md200", null ]
+      ] ],
+      [ "Appendix", "md_applications_zigpc_readme_user.html#autotoc_md201", [
+        [ "Setting Up the Zigbee NCP Connected to ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md202", [
+          [ "Using Pre-built NCP FW Images", "md_applications_zigpc_readme_user.html#autotoc_md203", null ],
+          [ "Building NCP FW Images Using Studio", "md_applications_zigpc_readme_user.html#autotoc_md204", null ]
+        ] ],
+        [ "Setting Up the Sample Zigbee Z3Light FW Image", "md_applications_zigpc_readme_user.html#autotoc_md205", null ],
+        [ "Flashing Zigbee Devices", "md_applications_zigpc_readme_user.html#autotoc_md206", null ]
       ] ]
     ] ],
     [ "ZigPC (Beta) Release Notes", "md_applications_zigpc_release_notes.html", [
-      [ "[1.0.1] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md202", [
-        [ "Fixed", "md_applications_zigpc_release_notes.html#autotoc_md203", null ]
+      [ "[1.0.2] - Oct 2021", "md_applications_zigpc_release_notes.html#autotoc_md208", null ],
+      [ "[1.0.1] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md209", [
+        [ "Fixed", "md_applications_zigpc_release_notes.html#autotoc_md210", null ]
       ] ],
-      [ "[1.0.0] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md204", [
-        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md205", null ],
-        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md206", null ]
+      [ "[1.0.0] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md211", [
+        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md212", null ],
+        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md213", null ]
       ] ],
-      [ "Known Issues", "md_applications_zigpc_release_notes.html#autotoc_md207", null ],
-      [ "Zigbee Certification information", "md_applications_zigpc_release_notes.html#autotoc_md209", null ]
+      [ "Known Issues", "md_applications_zigpc_release_notes.html#autotoc_md214", null ],
+      [ "Zigbee Certification information", "md_applications_zigpc_release_notes.html#autotoc_md216", null ]
     ] ],
     [ "ZPC Developer's Guide", "md_applications_zpc_readme_developer.html", [
-      [ "Build Instructions", "md_applications_zpc_readme_developer.html#autotoc_md211", [
-        [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_zpc_readme_developer.html#autotoc_md212", null ],
-        [ "Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host", "md_applications_zpc_readme_developer.html#autotoc_md213", null ]
+      [ "Build Instructions", "md_applications_zpc_readme_developer.html#autotoc_md218", [
+        [ "Cross Compiling for Raspberry Pi Using Docker", "md_applications_zpc_readme_developer.html#autotoc_md219", null ],
+        [ "Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host", "md_applications_zpc_readme_developer.html#autotoc_md220", null ]
       ] ],
-      [ "Install Instructions", "md_applications_zpc_readme_developer.html#autotoc_md214", null ]
+      [ "Install Instructions", "md_applications_zpc_readme_developer.html#autotoc_md221", null ]
     ] ],
     [ "ZPC User's Guide", "md_applications_zpc_readme_user.html", [
-      [ "Installation", "md_applications_zpc_readme_user.html#autotoc_md216", [
-        [ "Files", "md_applications_zpc_readme_user.html#autotoc_md217", [
-          [ "Zigbee Devices Used for Testing", "md_applications_zigpc_release_notes.html#autotoc_md208", null ],
-          [ "Configuration File", "md_applications_zpc_readme_user.html#autotoc_md218", null ],
-          [ "Database File", "md_applications_zpc_readme_user.html#autotoc_md219", null ]
+      [ "Installation", "md_applications_zpc_readme_user.html#autotoc_md223", [
+        [ "Files", "md_applications_zpc_readme_user.html#autotoc_md224", [
+          [ "Zigbee Devices Used for Testing", "md_applications_zigpc_release_notes.html#autotoc_md215", null ],
+          [ "Configuration File", "md_applications_zpc_readme_user.html#autotoc_md225", null ],
+          [ "Database File", "md_applications_zpc_readme_user.html#autotoc_md226", null ]
         ] ]
       ] ],
-      [ "Running ZPC", "md_applications_zpc_readme_user.html#autotoc_md220", [
-        [ "Running ZPC Using Systemd", "md_applications_zpc_readme_user.html#autotoc_md221", null ],
-        [ "Running ZPC From the Command Line", "md_applications_zpc_readme_user.html#autotoc_md222", [
-          [ "(Advanced) Configuring ZPC to Use TLS Certificate-Based Encryption", "md_applications_zpc_readme_user.html#autotoc_md223", [
-            [ "Self Signed Certificate Generation", "md_applications_zpc_readme_user.html#autotoc_md224", null ],
-            [ "Broker Configurations", "md_applications_zpc_readme_user.html#autotoc_md225", null ],
-            [ "ZPC command line options", "md_applications_zpc_readme_user.html#autotoc_md226", null ]
+      [ "Running ZPC", "md_applications_zpc_readme_user.html#autotoc_md227", [
+        [ "Running ZPC Using Systemd", "md_applications_zpc_readme_user.html#autotoc_md228", null ],
+        [ "Running ZPC From the Command Line", "md_applications_zpc_readme_user.html#autotoc_md229", [
+          [ "(Advanced) Configuring ZPC to Use TLS Certificate-Based Encryption", "md_applications_zpc_readme_user.html#autotoc_md230", [
+            [ "Self Signed Certificate Generation", "md_applications_zpc_readme_user.html#autotoc_md231", null ],
+            [ "Broker Configurations", "md_applications_zpc_readme_user.html#autotoc_md232", null ],
+            [ "ZPC command line options", "md_applications_zpc_readme_user.html#autotoc_md233", null ]
           ] ]
         ] ]
       ] ],
-      [ "Understanding how the ZPC Works", "md_applications_zpc_readme_user.html#autotoc_md227", null ],
-      [ "Dotdot Cluster to Z-Wave Command Class Mapping", "md_applications_zpc_readme_user.html#autotoc_md228", null ],
-      [ "Migrating to ZPC from Z/IP Gateway", "md_applications_zpc_readme_user.html#autotoc_md229", [
-        [ "ZPC Database JSON Example", "md_applications_zpc_readme_user.html#autotoc_md230", null ]
+      [ "Understanding how the ZPC Works", "md_applications_zpc_readme_user.html#autotoc_md234", null ],
+      [ "Dotdot Cluster to Z-Wave Command Class Mapping", "md_applications_zpc_readme_user.html#autotoc_md235", null ],
+      [ "Migrating to ZPC from Z/IP Gateway", "md_applications_zpc_readme_user.html#autotoc_md236", [
+        [ "ZPC Database JSON Example", "md_applications_zpc_readme_user.html#autotoc_md237", null ]
       ] ],
-      [ "Performing Backup and Restore", "md_applications_zpc_readme_user.html#autotoc_md231", null ],
-      [ "Performing Firmware Updates", "md_applications_zpc_readme_user.html#autotoc_md232", [
-        [ "UIID Construction", "md_applications_zpc_readme_user.html#autotoc_md233", null ],
-        [ "UIID/UNID Association", "md_applications_zpc_readme_user.html#autotoc_md234", null ],
-        [ "Version String Calculation", "md_applications_zpc_readme_user.html#autotoc_md235", null ],
-        [ "Triggering a Firmware Update", "md_applications_zpc_readme_user.html#autotoc_md236", null ],
-        [ "Aborting a Firmware Update", "md_applications_zpc_readme_user.html#autotoc_md237", null ],
-        [ "After a Successful Firmware Update", "md_applications_zpc_readme_user.html#autotoc_md238", null ],
-        [ "Examples", "md_applications_zpc_readme_user.html#autotoc_md239", null ],
-        [ "Possible Errors", "md_applications_zpc_readme_user.html#autotoc_md240", null ]
+      [ "Performing Backup and Restore", "md_applications_zpc_readme_user.html#autotoc_md238", null ],
+      [ "Datastore Versioning", "md_applications_zpc_readme_user.html#autotoc_md239", [
+        [ "Recovering a Database", "md_applications_zpc_readme_user.html#autotoc_md240", null ]
       ] ],
-      [ "Z-Wave Certification Information", "md_applications_zpc_readme_user.html#autotoc_md241", [
-        [ "Device Type and Role Type", "md_applications_zpc_readme_user.html#autotoc_md242", null ],
-        [ "Manufacturer-Specific Information", "md_applications_zpc_readme_user.html#autotoc_md243", null ],
-        [ "Network Management Information", "md_applications_zpc_readme_user.html#autotoc_md244", [
-          [ "Network Management", "md_applications_zpc_readme_user.html#autotoc_md245", null ]
+      [ "Performing Firmware Updates", "md_applications_zpc_readme_user.html#autotoc_md241", [
+        [ "UIID Construction", "md_applications_zpc_readme_user.html#autotoc_md242", null ],
+        [ "UIID/UNID Association", "md_applications_zpc_readme_user.html#autotoc_md243", null ],
+        [ "Version String Calculation", "md_applications_zpc_readme_user.html#autotoc_md244", null ],
+        [ "Triggering a Firmware Update", "md_applications_zpc_readme_user.html#autotoc_md245", null ],
+        [ "Aborting a Firmware Update", "md_applications_zpc_readme_user.html#autotoc_md246", null ],
+        [ "After a Successful Firmware Update", "md_applications_zpc_readme_user.html#autotoc_md247", null ],
+        [ "Examples", "md_applications_zpc_readme_user.html#autotoc_md248", null ],
+        [ "Possible Errors", "md_applications_zpc_readme_user.html#autotoc_md249", null ]
+      ] ],
+      [ "Z-Wave Certification Information", "md_applications_zpc_readme_user.html#autotoc_md250", [
+        [ "Z-Wave Protocol Interoperability", "md_applications_zpc_readme_user.html#autotoc_md251", null ],
+        [ "Device Type and Role Type", "md_applications_zpc_readme_user.html#autotoc_md252", null ],
+        [ "Manufacturer-Specific Information", "md_applications_zpc_readme_user.html#autotoc_md253", null ],
+        [ "Z-Wave Plus Info Information", "md_applications_zpc_readme_user.html#autotoc_md254", null ],
+        [ "Network Management Information", "md_applications_zpc_readme_user.html#autotoc_md255", [
+          [ "Network Management", "md_applications_zpc_readme_user.html#autotoc_md256", [
+            [ "Adding a Node", "md_applications_zpc_readme_user.html#autotoc_md257", null ],
+            [ "Removing a Node", "md_applications_zpc_readme_user.html#autotoc_md258", null ],
+            [ "Management Operations for Individual Nodes", "md_applications_zpc_readme_user.html#autotoc_md259", null ]
+          ] ]
         ] ],
-        [ "Association Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md246", null ],
-        [ "Multilevel Switch Command Class Control", "md_applications_zpc_readme_user.html#autotoc_md247", null ],
-        [ "Indicator Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md248", null ],
-        [ "Device Reset Locally Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md249", null ],
-        [ "Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md250", null ],
-        [ "SmartStart Information", "md_applications_zpc_readme_user.html#autotoc_md251", null ],
-        [ "Z-Wave Long Range Support", "md_applications_zpc_readme_user.html#autotoc_md252", null ],
-        [ "SmartStart Supported Protocol Detection", "md_applications_zpc_readme_user.html#autotoc_md253", null ]
+        [ "Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md260", [
+          [ "Association / Multi Channel Association Command Classes Information", "md_applications_zpc_readme_user.html#autotoc_md261", [
+            [ "Node status", "md_applications_zpc_readme_user.html#autotoc_md262", null ],
+            [ "Sending commands", "md_applications_zpc_readme_user.html#autotoc_md263", null ]
+          ] ],
+          [ "Basic Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md264", [
+            [ "Node status", "md_applications_zpc_readme_user.html#autotoc_md265", null ],
+            [ "Sending commands", "md_applications_zpc_readme_user.html#autotoc_md266", null ]
+          ] ],
+          [ "Battery Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md267", [
+            [ "Node status", "md_applications_zpc_readme_user.html#autotoc_md268", null ],
+            [ "Sending commands", "md_applications_zpc_readme_user.html#autotoc_md269", null ]
+          ] ],
+          [ "Binary Switch Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md270", [
+            [ "Node status", "md_applications_zpc_readme_user.html#autotoc_md271", null ],
+            [ "Sending commands", "md_applications_zpc_readme_user.html#autotoc_md272", null ]
+          ] ],
+          [ "Device Reset Locally Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md273", [
+            [ "Door Lock Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md274", null ],
+            [ "Node status", "md_applications_zpc_readme_user.html#autotoc_md275", null ],
+            [ "Sending commands", "md_applications_zpc_readme_user.html#autotoc_md276", null ]
+          ] ],
+          [ "Indicator Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md277", [
+            [ "Support", "md_applications_zpc_readme_user.html#autotoc_md278", null ],
+            [ "Node status", "md_applications_zpc_readme_user.html#autotoc_md279", null ],
+            [ "Sending commands", "md_applications_zpc_readme_user.html#autotoc_md280", null ]
+          ] ],
+          [ "Multilevel Switch Command Class Information", "md_applications_zpc_readme_user.html#autotoc_md281", [
+            [ "Node status", "md_applications_zpc_readme_user.html#autotoc_md282", null ],
+            [ "Sending commands", "md_applications_zpc_readme_user.html#autotoc_md283", null ]
+          ] ],
+          [ "Security 0 - Security 2 Command Classes Information", "md_applications_zpc_readme_user.html#autotoc_md284", [
+            [ "Node status", "md_applications_zpc_readme_user.html#autotoc_md285", null ],
+            [ "Sending commands", "md_applications_zpc_readme_user.html#autotoc_md286", null ]
+          ] ],
+          [ "Thermostat Setpoint and Thermostat Mode Command Classes Information", "md_applications_zpc_readme_user.html#autotoc_md287", [
+            [ "Node status", "md_applications_zpc_readme_user.html#autotoc_md288", null ],
+            [ "Sending commands", "md_applications_zpc_readme_user.html#autotoc_md289", null ]
+          ] ]
+        ] ],
+        [ "SmartStart Information", "md_applications_zpc_readme_user.html#autotoc_md290", [
+          [ "SmartStart List Format", "md_applications_zpc_readme_user.html#autotoc_md291", null ],
+          [ "Modifying SmartStart List Entries", "md_applications_zpc_readme_user.html#autotoc_md292", null ],
+          [ "Removing SmartStart List Entries", "md_applications_zpc_readme_user.html#autotoc_md293", null ],
+          [ "Z-Wave Long Range Support", "md_applications_zpc_readme_user.html#autotoc_md294", null ],
+          [ "SmartStart Supported Protocol Detection", "md_applications_zpc_readme_user.html#autotoc_md295", null ]
+        ] ]
       ] ],
-      [ "Transitioning from Z/IP Gateway + Z-Ware", "md_applications_zpc_readme_user.html#autotoc_md254", null ]
+      [ "Transitioning from Z/IP Gateway + Z-Ware", "md_applications_zpc_readme_user.html#autotoc_md296", null ]
     ] ],
     [ "ZPC Release Notes", "md_applications_zpc_release_notes.html", [
-      [ "[1.0.1] - Aug 2021", "md_applications_zpc_release_notes.html#autotoc_md256", [
-        [ "Fixed", "md_applications_zpc_release_notes.html#autotoc_md257", null ]
+      [ "[1.0.2] - Oct 2021", "md_applications_zpc_release_notes.html#autotoc_md298", [
+        [ "Added", "md_applications_zpc_release_notes.html#autotoc_md299", null ],
+        [ "Changed", "md_applications_zpc_release_notes.html#autotoc_md300", null ],
+        [ "Fixed", "md_applications_zpc_release_notes.html#autotoc_md301", null ]
       ] ],
-      [ "[1.0.0] - Aug 2021", "md_applications_zpc_release_notes.html#autotoc_md258", [
-        [ "Added", "md_applications_zpc_release_notes.html#autotoc_md259", null ],
-        [ "Changed", "md_applications_zpc_release_notes.html#autotoc_md260", null ]
+      [ "[1.0.1] - Aug 2021", "md_applications_zpc_release_notes.html#autotoc_md302", [
+        [ "Fixed", "md_applications_zpc_release_notes.html#autotoc_md303", null ]
       ] ],
-      [ "Known Bugs", "md_applications_zpc_release_notes.html#autotoc_md261", null ],
-      [ "Z-Wave Certification information", "md_applications_zpc_release_notes.html#autotoc_md262", null ]
+      [ "[1.0.0] - Aug 2021", "md_applications_zpc_release_notes.html#autotoc_md304", [
+        [ "Added", "md_applications_zpc_release_notes.html#autotoc_md305", null ],
+        [ "Changed", "md_applications_zpc_release_notes.html#autotoc_md306", null ]
+      ] ],
+      [ "Known Bugs", "md_applications_zpc_release_notes.html#autotoc_md307", null ],
+      [ "Z-Wave Certification information", "md_applications_zpc_release_notes.html#autotoc_md308", null ]
     ] ],
     [ "Known Abbreviations", "md_doc_standards_known-abbreviations.html", null ]
   ] ]
@@ -376,7 +436,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "index.html",
-"md_doc_readme_developer.html#autotoc_md44"
+"md_applications_zpc_release_notes.html#autotoc_md301"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

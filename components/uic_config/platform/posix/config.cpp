@@ -19,10 +19,6 @@
 #include "yaml_parser.hpp"
 namespace po = boost::program_options;
 
-// Default Settings
-#define DEFAULT_CONFIG_PATH    "/etc/uic/uic.cfg"
-#define DEFAULT_DATASTORE_FILE "/var/lib/uic/database.db"
-
 /**
  * @brief Config class supporting adding, removing and parsing configurations
  *
@@ -65,7 +61,7 @@ class Config
                      "private key for this client", std::string(""));
    this->config_add(CONFIG_KEY_LOG_LEVEL,
                      "Log Level (d,i,w,e,c)",
-                     std::string("d"));
+                     std::string("i"));
     this->config_add(
       CONFIG_KEY_LOG_TAG_LEVEL,
       "Tag based log level\nFormat: <tag>:<severity>, <tag>:<severity>, ...",
@@ -86,7 +82,7 @@ class Config
 
   /**
    * @brief Dump the current configuration in YAML format
-   * 
+   *
    * @param out Stream to dump config to
    */
   void dump_config(std::ostream &out) const

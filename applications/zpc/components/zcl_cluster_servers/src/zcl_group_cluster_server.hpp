@@ -43,7 +43,7 @@ extern "C" {
  * ucl/by-unid/&lt;unid&gt;/ep&lt;id&gt;/Groups/Attributes/GroupList/Reported
  * ucl/by-unid/&lt;unid&gt;/ep&lt;id&gt;/Groups/Attributes/GroupList/Desired
  *
- * @param [in] endpoint_id_node   Attribute Store node of the endpoint
+ * @param endpoint_id_node   Attribute Store node of the endpoint
  *
  * @returns SL_STATUS_OK if the data from the attribute store was coherent and a
  * call to mqtt_publish has been made, any other code otherwise

@@ -47,23 +47,5 @@ time_t calculate_utc_time_from_rfc_3339(const std::string &date_time);
  */
 std::string get_utc_time_string_from_utc_time(time_t time_input_utc);
 
-/**
- * @brief Calculate time diffrence between the local time and UTC time.
- *
- * @param time_utc time_t variable time in seconds.
- *
- * @returns time_t indicating the difference in seconds since the epoch began (01/01/1970)
- *          Positive value indicates that we are ahead the UTC time
- *          Negative value indicates that we are behind the UTC time
- */
-time_t calculate_utc_current_time_difference(const time_t &time_utc);
-
-/**
- * @brief Returns the current UTC time.
- *
- * @returns time_t value indicating the number of seconds since the epoch began (01/01/1970)
- */
-time_t get_current_utc_current_time();
-
 #endif  //OTA_TIME_HPP
 /** @} end ota_time */

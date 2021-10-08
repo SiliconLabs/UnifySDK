@@ -37,6 +37,8 @@ void suiteSetUp()
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
+  attribute_store_teardown();
+  datastore_teardown();
   return num_failures;
 }
 
@@ -83,6 +85,7 @@ void test_mapper_engine_test()
       d'1234 = 2 * (d'1235) + (three & 0xff) - 0
       d'1234.42[1].4444 = (d'mylightswitch) + 0x64
       r'1234.42[0].11118888 = (d'9999) or (d'1235)
+      r'1234.42[3].11118888 = (d'9999) or (d'1235)
     }
   )");
 
@@ -94,6 +97,19 @@ void test_mapper_engine_test()
   auto n11118888 = n0.child_by_type(11118888);
   TEST_ASSERT_TRUE(n11118888.is_valid());
   TEST_ASSERT_EQUAL(1, n11118888.reported<int32_t>());
+
+  // Check that we evaluate the right hand side dependencies
+
+  auto n3 = n1234.emplace_node<uint8_t>(42, 3);
+  // As we have now created n3 the rule r'1234.42[3].11118888 = (d'9999) or (d'1235)
+  // should succseed.
+  auto n3_n11118888 = n3.child_by_type(11118888);
+  TEST_ASSERT_TRUE(n3_n11118888.is_valid());
+  TEST_ASSERT_EQUAL(1, n3_n11118888.reported<int32_t>());
+
+  //Check that we delete the created node when we are deleting the n3 attribute
+  n3.delete_node();
+  TEST_ASSERT_FALSE(n3.child_by_type(11118888).is_valid());
 }
 
 void test_mapper_clear_desired()
@@ -132,6 +148,8 @@ void test_mapper_clear_desired()
 
 void test_mapper_cyclic_check()
 {
+  TEST_IGNORE_MESSAGE("Cyclic checker is disabled");
+
   MapperEngine &e = MapperEngine::get_instance();
   e.set_ep_type(attribute::root().type());
   e.reset();
@@ -139,6 +157,13 @@ void test_mapper_cyclic_check()
     scope 0 {
       d'1234 = d'1235
       d'1235 = d'1234
+    }
+  )"));
+
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 0 {
+      r'1234[0].1111 = d'1235
+      r'1234[1].1111 = d'1235
     }
   )"));
 }

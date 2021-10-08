@@ -70,10 +70,8 @@ struct eval {
    * @brief Construct a new eval object
    * 
    * @param context Context in which this evaluator should work.
-   * @param global_context List of global_context to use in the evaluation 
    */
-  eval(const attribute_store::attribute context,
-       const ast_tree &global_context);
+  eval(const attribute_store::attribute context = 0);
 
   /**
    * @brief the undefined keyword
@@ -115,7 +113,6 @@ struct eval {
   result_type operator()(const expression &x) const;
 
   private:
-  const ast_tree &global_context;
   attribute_store::attribute context;
 };
 
@@ -132,10 +129,8 @@ struct attribute_path_eval {
    * @brief Construct a new attribute path eval object
    * 
    * @param context parent on the attribute store
-   * @param global_context List of global_context, TODO: remove when reducer is implemented.
    */
-  attribute_path_eval(const attribute_store::attribute context,
-                      const ast_tree &global_context);
+  attribute_path_eval(const attribute_store::attribute context);
 
   /// hat operator ^ (parent)
   attribute_store::attribute operator()(const operand &oper);
@@ -154,17 +149,17 @@ struct attribute_path_eval {
   /**
    * Return true if the path has been fully resolved
    */
-  bool all_elements_parsed();
+  bool all_elements_parsed() const;
 
   /**
    *  return true if all but the last path elements has been resolved
    */
-  bool last_token_failed();
+  bool last_token_failed() const;
 
   /**
    *  get the type is of the last element that was attempted to be parsed
    */
-  attribute_store_type_t last_fail_type();
+  attribute_store_type_t last_fail_type() const;
 
   /**
    *  Return the depth of the path, ie the number ofr path elemnts
@@ -175,8 +170,7 @@ struct attribute_path_eval {
   //ID of last type passed
   attribute_store_type_t last_type_id = 0;
   int elements_left                   = 0;
-  const ast_tree &global_context;
-  attribute_store::attribute context = 0;
+  attribute_store::attribute context  = 0;
 };
 
 }  // namespace ast

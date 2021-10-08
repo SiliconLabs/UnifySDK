@@ -1,0 +1,19 @@
+
+// Multilevel Sensor Command Class
+def zwTYPE          0x3102
+def zwSCALE         0x3104
+def zwVALUE         0x3105 // Value is int32 with 3 decimal points
+
+// We have a timing sensor in Multilevel sensor.
+def ZW_SENSOR_TYPE_TIME 0x21
+
+// ZCL node's local time
+def DOTDOT_ATTRIBUTE_ID_TIME_LOCAL_TIME 0x000A0007
+
+scope 0 {
+
+r'DOTDOT_ATTRIBUTE_ID_TIME_LOCAL_TIME =
+  if(r'zwTYPE[ZW_SENSOR_TYPE_TIME].zwSCALE == 0) (r'zwTYPE[ZW_SENSOR_TYPE_TIME].zwVALUE / 1000)
+    undefined
+
+}

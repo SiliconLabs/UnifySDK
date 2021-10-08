@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -85,6 +85,7 @@ $(document).ready(function(){initNavTree('group__zigpc__gateway__notify.html',''
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -127,6 +128,12 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event data passed when receiving an OTA update complete message for a device.  <a href="structzigpc__gateway__on__ota__completed__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gad109b0fac14a7d637091f8fa42a14a0c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structzigpc__gateway__on__node__add.html">zigpc_gateway_on_node_add</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway__notify.html#gad109b0fac14a7d637091f8fa42a14a0c">zigpc_gateway_on_node_add_t</a></td></tr>
+<tr class="memdesc:gad109b0fac14a7d637091f8fa42a14a0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event data passed after successful node addition to the Gateway network.  <a href="group__zigpc__gateway__notify.html#gad109b0fac14a7d637091f8fa42a14a0c">More...</a><br /></td></tr>
+<tr class="separator:gad109b0fac14a7d637091f8fa42a14a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:ga68b826da48d6db275d1cd028d9ec0cfc"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway__notify.html#ga68b826da48d6db275d1cd028d9ec0cfc">zigpc_gateway_notify_event</a> { <br />
@@ -161,6 +168,23 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Observer API for getting events from zigpc_gateway. </p>
 <p>In order to listen to events from Z3Gateway, ZigPC Gateway allows components to register observer functions that receive an event type and associated data </p>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="gad109b0fac14a7d637091f8fa42a14a0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad109b0fac14a7d637091f8fa42a14a0c">&#9670;&nbsp;</a></span>zigpc_gateway_on_node_add_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structzigpc__gateway__on__node__add.html">zigpc_gateway_on_node_add</a> <a class="el" href="group__zigpc__gateway__notify.html#gad109b0fac14a7d637091f8fa42a14a0c">zigpc_gateway_on_node_add_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Event data passed after successful node addition to the Gateway network. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="ga68b826da48d6db275d1cd028d9ec0cfc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga68b826da48d6db275d1cd028d9ec0cfc">&#9670;&nbsp;</a></span>zigpc_gateway_notify_event</h2>
@@ -286,7 +310,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

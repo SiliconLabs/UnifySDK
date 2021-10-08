@@ -143,7 +143,7 @@ void subscription_callback_multi(const char *topic,
   sub_callback_count++;
 }
 
-void subsription_callback_wildcard(const char *topic,
+void subscription_callback_wildcard(const char *topic,
                                    const char *message,
                                    const size_t message_length)
 {
@@ -152,7 +152,7 @@ void subsription_callback_wildcard(const char *topic,
   wildcard_sub_count++;
 }
 
-void subsription_callback_wildcard_second(const char *topic,
+void subscription_callback_wildcard_second(const char *topic,
                                           const char *message,
                                           const size_t message_length)
 {
@@ -690,7 +690,7 @@ void test_mqtt_client_subscribe_wildcard_happy()
                               0);  // Connecting succeeded.
   mqtt_client_subscribe(client_instance,
                         "MQTT/Client/#",
-                        subsription_callback_wildcard);
+                        subscription_callback_wildcard);
 
   // Mock section for Single Level Wildcard: +
   {
@@ -707,7 +707,7 @@ void test_mqtt_client_subscribe_wildcard_happy()
                               0);  // Connecting succeeded.
   mqtt_client_subscribe(client_instance,
                         "MQTT/+/test",
-                        subsription_callback_wildcard_second);
+                        subscription_callback_wildcard_second);
 
   struct mqtt_message *mock_message
     = (struct mqtt_message *)malloc(sizeof(struct mqtt_message));

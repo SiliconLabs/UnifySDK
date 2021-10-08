@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('zwave__command__class__version_8c.html
 <code>#include &lt;<a class="el" href="assert_8h_source.html">assert.h</a>&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;ZW_classcmd.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="zwave__command__class__version__types_8h_source.html">zwave_command_class_version_types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__command__handler_8h_source.html">zwave_command_handler.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__controller__connection__info_8h_source.html">zwave_controller_connection_info.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__controller__utils_8h_source.html">zwave_controller_utils.h</a>&quot;</code><br />
@@ -119,6 +120,8 @@ Macros</h2></td></tr>
 <tr class="separator:a7ce0df38eb467e59f209470c8f5ac4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afda283c42574998187e8bc9c47741646"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__version_8c.html#afda283c42574998187e8bc9c47741646">NUM_FW_TARGETS</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:afda283c42574998187e8bc9c47741646"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad391ebcfd09538a72365e568764a973d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__version_8c.html#ad391ebcfd09538a72365e568764a973d">DEFAULT_HARDWARE_VERSION</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ad391ebcfd09538a72365e568764a973d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada74f023281c944181dc6296e287a1f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__version_8c.html#ada74f023281c944181dc6296e287a1f7">REPORT_LIBRARY_TYPE_INDEX</a>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:ada74f023281c944181dc6296e287a1f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ca5b81bb15e2297a790d63451c94774"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__version_8c.html#a9ca5b81bb15e2297a790d63451c94774">REPORT_ZWAVE_PROTOCOL_VERSION_INDEX</a>&#160;&#160;&#160;3</td></tr>
@@ -195,7 +198,7 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a5d7cf275885bdeaad67350753dc5339b"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__version_8c.html#a5d7cf275885bdeaad67350753dc5339b">version_report_attribute</a> [] = {<a class="el" href="zwave__command__class__version_8c.html#a3a48b9a3a4b2d94c644107976c45bc72">ATTRIBUTE</a>(VERSION_REPORT_DATA)}</td></tr>
+<tr class="memitem:a5d7cf275885bdeaad67350753dc5339b"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__version_8c.html#a5d7cf275885bdeaad67350753dc5339b">version_report_attribute</a> [] = {<a class="el" href="zwave__command__class__wake__up_8c.html#a3a48b9a3a4b2d94c644107976c45bc72">ATTRIBUTE</a>(VERSION_REPORT_DATA)}</td></tr>
 <tr class="separator:a5d7cf275885bdeaad67350753dc5339b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac660741808ae2f893c308def096420a4"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__version_8c.html#ac660741808ae2f893c308def096420a4">version_attributes_v3</a> []</td></tr>
 <tr class="separator:ac660741808ae2f893c308def096420a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -213,6 +216,20 @@ Variables</h2></td></tr>
           <td class="paramtype">&#160;</td>
           <td class="paramname">type</td><td>)</td>
           <td>&#160;&#160;&#160;ATTRIBUTE_CC_VERSION_##type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad391ebcfd09538a72365e568764a973d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad391ebcfd09538a72365e568764a973d">&#9670;&nbsp;</a></span>DEFAULT_HARDWARE_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFAULT_HARDWARE_VERSION&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1294,7 +1311,7 @@ false otherwise </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> version_report_attribute[] = {<a class="el" href="zwave__command__class__version_8c.html#a3a48b9a3a4b2d94c644107976c45bc72">ATTRIBUTE</a>(VERSION_REPORT_DATA)}</td>
+          <td class="memname">const <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> version_report_attribute[] = {<a class="el" href="zwave__command__class__wake__up_8c.html#a3a48b9a3a4b2d94c644107976c45bc72">ATTRIBUTE</a>(VERSION_REPORT_DATA)}</td>
         </tr>
       </table>
   </td>
@@ -1308,12 +1325,12 @@ false otherwise </dd></dl>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="azwave__command__class__version_8c_html_a3a48b9a3a4b2d94c644107976c45bc72"><div class="ttname"><a href="zwave__command__class__version_8c.html#a3a48b9a3a4b2d94c644107976c45bc72">ATTRIBUTE</a></div><div class="ttdeci">#define ATTRIBUTE(type)</div><div class="ttdef"><b>Definition:</b> zwave_command_class_version.c:58</div></div>
+<div class="ttc" id="azwave__command__class__version_8c_html_a3a48b9a3a4b2d94c644107976c45bc72"><div class="ttname"><a href="zwave__command__class__version_8c.html#a3a48b9a3a4b2d94c644107976c45bc72">ATTRIBUTE</a></div><div class="ttdeci">#define ATTRIBUTE(type)</div><div class="ttdef"><b>Definition:</b> zwave_command_class_version.c:62</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6ac9bb75d77e4d974481da8e3d01cbca.html">zwave_command_classes</a></li><li class="navelem"><a class="el" href="dir_a7413761325a0de7b31d33e30e75f050.html">src</a></li><li class="navelem"><a class="el" href="zwave__command__class__version_8c.html">zwave_command_class_version.c</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -100,3 +100,9 @@ void test_read_private_ecdh_key()
   keystore_private_key_read(key);
   TEST_ASSERT_EQUAL_STRING_LEN(my_ecdh_priv_key, key, 32);
 }
+
+void test_sl_log_keys()
+{
+  // Nothing to test here really.
+  zwave_s2_log_security_keys(SL_LOG_INFO);
+}

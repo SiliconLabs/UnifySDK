@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -87,6 +87,7 @@ $(document).ready(function(){initNavTree('group__command__classes__utils.html','
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Command Classes utils<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__command__classes.html">Z-Wave Command Classes</a></div></div>  </div>
@@ -111,8 +112,6 @@ Macros</h2></td></tr>
 <tr class="separator:ga7923f810f19ba64870e8c91583853946"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5d96f905d30340ad774f7dcab6a7d448"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#ga5d96f905d30340ad774f7dcab6a7d448">DEGREES_TO_FAHRENHEIT</a>(value)&#160;&#160;&#160;(value * 9 / 5.0F) + 32;</td></tr>
 <tr class="separator:ga5d96f905d30340ad774f7dcab6a7d448"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1d555ef66f486466d766309be0046134"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#ga1d555ef66f486466d766309be0046134">ROLE_TYPE_UNKNOWN</a>&#160;&#160;&#160;0xFF</td></tr>
-<tr class="separator:ga1d555ef66f486466d766309be0046134"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga82b5fe45aa3230ea730738b2e67a39ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#ga82b5fe45aa3230ea730738b2e67a39ad">PROBE_BACK_OFF</a>&#160;&#160;&#160;500</td></tr>
 <tr class="separator:ga82b5fe45aa3230ea730738b2e67a39ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -124,6 +123,14 @@ Typedefs</h2></td></tr>
 </blockquote>
  <a href="group__command__classes__utils.html#gac5379e9db79c10ecde10c6980aecd304">More...</a><br /></td></tr>
 <tr class="separator:gac5379e9db79c10ecde10c6980aecd304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gafb8d304ba182570dc688ef06a555e8e0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a> { <a class="el" href="group__command__classes__utils.html#ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac">FINAL_STATE</a> = 0, 
+<a class="el" href="group__command__classes__utils.html#ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285">NEEDS_ONE_COMMAND</a> = 1, 
+<a class="el" href="group__command__classes__utils.html#ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4">NEEDS_MULTIPLE_COMMANDS</a> = 2
+ }</td></tr>
+<tr class="separator:gafb8d304ba182570dc688ef06a555e8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -157,9 +164,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gadfa3418577b4f55243888933db59bc0f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#gadfa3418577b4f55243888933db59bc0f">is_actuator_command_class</a> (<a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> command_class)</td></tr>
 <tr class="memdesc:gadfa3418577b4f55243888933db59bc0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a Command Class is an actuator Command Class.  <a href="group__command__classes__utils.html#gadfa3418577b4f55243888933db59bc0f">More...</a><br /></td></tr>
 <tr class="separator:gadfa3418577b4f55243888933db59bc0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6950174a6510c529933ea2d5b9787b83"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#ga6950174a6510c529933ea2d5b9787b83">get_zwave_node_role_type</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
-<tr class="memdesc:ga6950174a6510c529933ea2d5b9787b83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the Role Type of a node.  <a href="group__command__classes__utils.html#ga6950174a6510c529933ea2d5b9787b83">More...</a><br /></td></tr>
-<tr class="separator:ga6950174a6510c529933ea2d5b9787b83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf1fbb6a0e57bf5218e97120ed7adc966"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__generic__types_8h.html#a04b237ff90b9b6e537431f48980569d8">zwave_role_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#gaf1fbb6a0e57bf5218e97120ed7adc966">get_zwave_node_role_type</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memdesc:gaf1fbb6a0e57bf5218e97120ed7adc966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the Role Type of a node.  <a href="group__command__classes__utils.html#gaf1fbb6a0e57bf5218e97120ed7adc966">More...</a><br /></td></tr>
+<tr class="separator:gaf1fbb6a0e57bf5218e97120ed7adc966"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7dd7a32346c549c1f82f97037625db40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#ga7dd7a32346c549c1f82f97037625db40">is_portable_end_node</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
+<tr class="memdesc:ga7dd7a32346c549c1f82f97037625db40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a Node is a Portable End Node. (PS / PEN Role type)  <a href="group__command__classes__utils.html#ga7dd7a32346c549c1f82f97037625db40">More...</a><br /></td></tr>
+<tr class="separator:ga7dd7a32346c549c1f82f97037625db40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Utils for Command Classes handlers. </p>
@@ -216,20 +226,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga1d555ef66f486466d766309be0046134"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1d555ef66f486466d766309be0046134">&#9670;&nbsp;</a></span>ROLE_TYPE_UNKNOWN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define ROLE_TYPE_UNKNOWN&#160;&#160;&#160;0xFF</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="gac5379e9db79c10ecde10c6980aecd304"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gac5379e9db79c10ecde10c6980aecd304">&#9670;&nbsp;</a></span>zwave_minimum_frame_t</h2>
@@ -247,6 +243,27 @@ Functions</h2></td></tr>
 <p>Minimal Z-Wave Frame that can be sent (Command Class / Command). </p>
 </blockquote>
 </p>
+<p>Values that can be used for "Umbrella" attributes </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="gafb8d304ba182570dc688ef06a555e8e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafb8d304ba182570dc688ef06a555e8e0">&#9670;&nbsp;</a></span>command_status_values_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__command__classes__utils.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac"></a>FINAL_STATE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285"></a>NEEDS_ONE_COMMAND&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4"></a>NEEDS_MULTIPLE_COMMANDS&#160;</td><td class="fielddoc"></td></tr>
+</table>
 
 </div>
 </div>
@@ -296,14 +313,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga6950174a6510c529933ea2d5b9787b83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6950174a6510c529933ea2d5b9787b83">&#9670;&nbsp;</a></span>get_zwave_node_role_type()</h2>
+<a id="gaf1fbb6a0e57bf5218e97120ed7adc966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf1fbb6a0e57bf5218e97120ed7adc966">&#9670;&nbsp;</a></span>get_zwave_node_role_type()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t get_zwave_node_role_type </td>
+          <td class="memname"><a class="el" href="zwave__generic__types_8h.html#a04b237ff90b9b6e537431f48980569d8">zwave_role_type_t</a> get_zwave_node_role_type </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em></td><td>)</td>
@@ -347,6 +364,40 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the Command Class is an actuator Command Class, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="ga7dd7a32346c549c1f82f97037625db40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7dd7a32346c549c1f82f97037625db40">&#9670;&nbsp;</a></span>is_portable_end_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_portable_end_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifies if a Node is a Portable End Node. (PS / PEN Role type) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Any attribute store node under the NodeID node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the Role type of the node is ROLE_TYPE_END_NODE_PORTABLE, false otherwise</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>The Attribute Store node for the Endpoint ID 0 which which needs a wake up configuration </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the Role type of the node is ROLE_TYPE_END_NODE_PORTABLE, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -613,7 +664,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:55 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:37 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

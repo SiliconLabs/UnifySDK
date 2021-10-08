@@ -11,14 +11,16 @@
  *
  *****************************************************************************/
 
-/* Contiki includes */
 #include <stdlib.h>
 #include <string.h>
 
-#include "sl_log.h"
-#include "sl_status.h"
+// Shared UIC includes
+#include <sl_log.h>
+#include <sl_status.h>
 
-#include "zigpc_common_observable.h"
+// ZigPC includes
+#include <zigpc_common_observable.h>
+#include <zigpc_config.h>
 
 #include "zigpc_gateway_notify.h"
 #include "zigpc_gateway_int.h"
@@ -69,6 +71,23 @@ sl_status_t zigpc_gateway_reset_observers(void)
   }
 
   return result;
+}
+
+void zigpc_gateway_hdl_on_emberaf_stack_init(void)
+{
+  const zigpc_config_t *conf = zigpc_get_config();
+  if (conf->tc_use_well_known_key == false) {
+    EzspStatus status = z3gatewaySetEzspPolicy(
+      EZSP_TRUST_CENTER_POLICY,
+      (EZSP_DECISION_ALLOW_JOINS | EZSP_DECISION_JOINS_USE_INSTALL_CODE_KEY),
+      "Trust Center Policy",
+      "Joins using install code only");
+
+    sl_log_info(
+      LOG_TAG,
+      "Policy set status to allow joins using install code only: 0x%X",
+      status);
+  }
 }
 
 /**
@@ -250,7 +269,6 @@ void zigpc_gateway_hdl_on_node_endpoint_discovered(
                    i,
                    endpointInfo->serverClusterList[i]);
     }
-
   }
 
   endpoint_discovered.endpoint.endpoint_id   = endpointInfo->endpoint;
@@ -265,25 +283,25 @@ void zigpc_gateway_hdl_on_node_endpoint_discovered(
     }
   }
 
-  if(endpointInfo->clientClusterCount > 0)
-  {
-        for(    size_t cluster_index = 0;
-                cluster_index < endpointInfo->clientClusterCount;
-                cluster_index++)
-        {
-            if(endpointInfo->clientClusterList[cluster_index] 
-                    == ZIGPC_ZCL_CLUSTER_OTA_UPGRADE)
-            {
-                endpoint_discovered
-                    .endpoint
-                    .cluster_list[endpointInfo->serverClusterCount]
-                    .cluster_id = 
-                            endpointInfo->clientClusterList[cluster_index];
+  endpoint_discovered.endpoint.client_cluster_count
+    = endpointInfo->clientClusterCount;
+  if (endpointInfo->clientClusterCount > 0) {
+    for (size_t cluster_index = 0;
+         cluster_index < endpointInfo->clientClusterCount;
+         cluster_index++) {
+      endpoint_discovered.endpoint.client_cluster_list[cluster_index].cluster_id
+        = endpointInfo->clientClusterList[cluster_index];
 
-                endpoint_discovered.endpoint.cluster_count++;
+      if (endpointInfo->clientClusterList[cluster_index]
+          == ZIGPC_ZCL_CLUSTER_OTA_UPGRADE) {
+        endpoint_discovered.endpoint
+          .cluster_list[endpointInfo->serverClusterCount]
+          .cluster_id
+          = endpointInfo->clientClusterList[cluster_index];
 
-            }
-        }
+        endpoint_discovered.endpoint.cluster_count++;
+      }
+    }
   }
 
   status
@@ -524,6 +542,7 @@ void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64,
 }
 
 struct z3gatewayCallbacks zigpc_gateway_z3gateway_callbacks = {
+  .onEmberAfStackInitalized        = zigpc_gateway_hdl_on_emberaf_stack_init,
   .onTrustCenterInitialized        = zigpc_gateway_hdl_on_network_initialized,
   .onTrustCenterDeviceJoinStart    = zigpc_gateway_hdl_on_node_add_start,
   .onTrustCenterDeviceJoinComplete = zigpc_gateway_hdl_on_node_add_complete,

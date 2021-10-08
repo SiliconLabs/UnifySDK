@@ -23,8 +23,15 @@
 #ifndef ATTRIBUTE_MANAGEMENT_H
 #define ATTRIBUTE_MANAGEMENT_H
 
-#include "zigpc_common_zigbee.h"
-#include "sl_status.h"
+// Shared UIC includes
+#include <sl_status.h>
+
+// ZigPC includes
+#include <zigpc_common_zigbee.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
  * @brief configure_attributes_node - API for configuring reports on a given 
@@ -52,6 +59,10 @@ sl_status_t configure_attributes_node(const zigbee_node_t node);
 **/
 sl_status_t configure_attributes_endpoint(const zigbee_eui64_t eui64,
                                           const zigbee_endpoint_t endpoint);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  //ATTRIBUTE_MANAGEMENT_H
 

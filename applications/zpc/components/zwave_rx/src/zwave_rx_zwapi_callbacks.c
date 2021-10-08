@@ -106,7 +106,7 @@ void zwave_rx_application_controller_update(uint8_t status,
   switch (status) {
     case UPDATE_STATE_NEW_ID_ASSIGNED:  // New node in the network
       // Notify the Z-Wave controller, which will dispatch the event further.
-      zwave_controller_on_node_id_assigned(node_id, false);
+      zwave_controller_on_node_id_assigned(node_id, PROTOCOL_ZWAVE);
       break;
 
     case UPDATE_STATE_DELETE_DONE:  // Node deleted from the network
@@ -135,7 +135,7 @@ void zwave_rx_application_controller_update(uint8_t status,
 
     case UPDATE_STATE_NODE_INFO_FOREIGN_HOMEID_RECEIVED:  // SmartStart Prime received
     case UPDATE_STATE_INCLUDED_NODE_INFO_RECEIVED:  // SmartStart INIF received
-    case UPDATE_STATE_NODE_INFO_SMARTSTART_HOMEID_RECEIVED_LR:  // SmartStart Prime received on Long Range 
+    case UPDATE_STATE_NODE_INFO_SMARTSTART_HOMEID_RECEIVED_LR:  // SmartStart Prime received on Long Range
       if (status == UPDATE_STATE_INCLUDED_NODE_INFO_RECEIVED) {
         already_included = true;
       }

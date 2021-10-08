@@ -2,7 +2,7 @@ var structsending__cntrl__blk =
 [
     [ "cmn", "structsending__cntrl__blk.html#a42467f46caafb8628566b87db93f1848", null ],
     [ "current_dnode", "structsending__cntrl__blk.html#adc27a0b1d70a3d77acad2c4bdac90136", null ],
-    [ "datagram", "structsending__cntrl__blk.html#a2afcf22a843c2d527974498233319727", null ],
+    [ "datagram", "structsending__cntrl__blk.html#af22232af61438b9327e9a612a9bf3c03", null ],
     [ "datagram_len", "structsending__cntrl__blk.html#a5c157dafb2fd418fdcbb87d147e22654", null ],
     [ "datalen_to_send", "structsending__cntrl__blk.html#a16983e64dca58908ec4b7860ed7e785f", null ],
     [ "does_not_fit_in_first_frag", "structsending__cntrl__blk.html#a2f8a8411aa1ff844e3443d59fecbd988", null ],

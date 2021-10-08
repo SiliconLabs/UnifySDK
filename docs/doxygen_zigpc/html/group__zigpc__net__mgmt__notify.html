@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -86,6 +86,7 @@ $(document).ready(function(){initNavTree('group__zigpc__net__mgmt__notify.html',
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -117,6 +118,18 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ga7584315b2fdd68fb948befaeefb2a711"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt__notify.html#ga7584315b2fdd68fb948befaeefb2a711">ZIGPC_NET_MGMT_REQUESTED_STATE_PARAMS_MAX</a>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:ga7584315b2fdd68fb948befaeefb2a711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gae082f45c0c345b737869a7295d85d2e1"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structzigpc__net__mgmt__on__network__init.html">zigpc_net_mgmt_on_network_init</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt__notify.html#gae082f45c0c345b737869a7295d85d2e1">zigpc_net_mgmt_on_network_init_t</a></td></tr>
+<tr class="memdesc:gae082f45c0c345b737869a7295d85d2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event data on network state update.  <a href="group__zigpc__net__mgmt__notify.html#gae082f45c0c345b737869a7295d85d2e1">More...</a><br /></td></tr>
+<tr class="separator:gae082f45c0c345b737869a7295d85d2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab487b9af83bec792e800f2034c72d9b7"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structzigpc__net__mgmt__on__network__state__update.html">zigpc_net_mgmt_on_network_state_update</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt__notify.html#gab487b9af83bec792e800f2034c72d9b7">zigpc_net_mgmt_on_network_state_update_t</a></td></tr>
+<tr class="memdesc:gab487b9af83bec792e800f2034c72d9b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event data on network state update. These fields will be used to publish the new state as well as any missing paramters needed to advance the network management FSM.  <a href="group__zigpc__net__mgmt__notify.html#gab487b9af83bec792e800f2034c72d9b7">More...</a><br /></td></tr>
+<tr class="separator:gab487b9af83bec792e800f2034c72d9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaafcdc5756bb79124b60b59e53c715879"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structzigpc__net__mgmt__on__node__added.html">zigpc_net_mgmt_on_node_added</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt__notify.html#gaafcdc5756bb79124b60b59e53c715879">zigpc_net_mgmt_on_node_added_t</a></td></tr>
+<tr class="memdesc:gaafcdc5756bb79124b60b59e53c715879"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event data on node added to the network.  <a href="group__zigpc__net__mgmt__notify.html#gaafcdc5756bb79124b60b59e53c715879">More...</a><br /></td></tr>
+<tr class="separator:gaafcdc5756bb79124b60b59e53c715879"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -157,6 +170,55 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="gae082f45c0c345b737869a7295d85d2e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae082f45c0c345b737869a7295d85d2e1">&#9670;&nbsp;</a></span>zigpc_net_mgmt_on_network_init_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structzigpc__net__mgmt__on__network__init.html">zigpc_net_mgmt_on_network_init</a> <a class="el" href="group__zigpc__net__mgmt__notify.html#gae082f45c0c345b737869a7295d85d2e1">zigpc_net_mgmt_on_network_init_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Event data on network state update. </p>
+
+</div>
+</div>
+<a id="gab487b9af83bec792e800f2034c72d9b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab487b9af83bec792e800f2034c72d9b7">&#9670;&nbsp;</a></span>zigpc_net_mgmt_on_network_state_update_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structzigpc__net__mgmt__on__network__state__update.html">zigpc_net_mgmt_on_network_state_update</a> <a class="el" href="group__zigpc__net__mgmt__notify.html#gab487b9af83bec792e800f2034c72d9b7">zigpc_net_mgmt_on_network_state_update_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Event data on network state update. These fields will be used to publish the new state as well as any missing paramters needed to advance the network management FSM. </p>
+
+</div>
+</div>
+<a id="gaafcdc5756bb79124b60b59e53c715879"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaafcdc5756bb79124b60b59e53c715879">&#9670;&nbsp;</a></span>zigpc_net_mgmt_on_node_added_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structzigpc__net__mgmt__on__node__added.html">zigpc_net_mgmt_on_node_added</a> <a class="el" href="group__zigpc__net__mgmt__notify.html#gaafcdc5756bb79124b60b59e53c715879">zigpc_net_mgmt_on_node_added_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Event data on node added to the network. </p>
 
 </div>
 </div>
@@ -267,7 +329,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

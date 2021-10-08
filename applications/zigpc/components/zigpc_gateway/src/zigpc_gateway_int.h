@@ -14,8 +14,9 @@
 #ifndef ZIGPC_GATEWAY_INT_H
 #define ZIGPC_GATEWAY_INT_H
 
-/* ZigPC Common includes */
-#include "zigpc_common_zigbee.h"
+// ZigPC includes
+#include <zigpc_common_zigbee.h>
+#include <zigpc_config.h>
 
 /* Z3gateway includes */
 #include "z3gateway.h"
@@ -39,6 +40,7 @@ static const char LOG_TAG[] = "zigpc_gateway";
 enum zigpc_gateway_dispatch_type {
   ZIGPC_GW_DISPATCH_MIN_VAL = 0,
   ZIGPC_GW_DISPATCH_NETWORK_INIT,
+  ZIGPC_GW_DISPATCH_PERMIT_JOINS,
   ZIGPC_GW_DISPATCH_ADD_NODE_INSTALL_CODE,
   ZIGPC_GW_DISPATCH_INTERVIEW_NODE,
   ZIGPC_GW_DISPATCH_REMOVE_NODE,
@@ -75,6 +77,14 @@ struct zigpc_gateway_dispatch_add_node {
 };
 
 /**
+ * @brief Data for permitting joins to the Zigbee network.
+ *
+ */
+typedef struct {
+  bool enable;
+} zigpc_gateway_dispatch_permit_joins_t;
+
+/**
  * @brief Data for processing node removal.
  *
  */
@@ -105,6 +115,7 @@ struct zigpc_gateway_dispatch_event {
     struct zigpc_gateway_dispatch_add_node add_node;
     zigpc_gateway_dispatch_remove_node_t remove_node;
     zigpc_gateway_dispatch_interview_node_t interview_node;
+    zigpc_gateway_dispatch_permit_joins_t permit_joins;
   };
 };
 
@@ -160,7 +171,7 @@ sl_status_t zigpc_gateway_dispatch_zcl_frame(
   const zigpc_gateway_dispatch_zcl_frame_t *zcl_data);
 
 /**
- * @brief zigpc_gateway_dispatch_init_reports 
+ * @brief zigpc_gateway_dispatch_init_reports
  * Dispatches a ZCL configure reports command to a given endpoint
  *
  * @param report_data -a structure containing all the information required to
@@ -172,7 +183,7 @@ sl_status_t zigpc_gateway_dispatch_init_reports(
   zigpc_gateway_dispatch_init_report_t *report_data);
 
 /**
- * @brief zigpc_gateway_dispatch_config_binding 
+ * @brief zigpc_gateway_dispatch_config_binding
  * Dispatches a Zigbee message to request to configure a binding on an endpoint
  *
  * @param binding_data -a structure containing all the information required to

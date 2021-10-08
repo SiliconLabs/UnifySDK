@@ -39,10 +39,10 @@ static sl_status_t
        .zWaveVersion = ZWAVEPLUS_VERSION_V2,
        .roleType = ZWAVEPLUS_INFO_REPORT_ROLE_TYPE_CONTROLLER_CENTRAL_STATIC,
        .nodeType = ZWAVEPLUS_INFO_REPORT_NODE_TYPE_ZWAVEPLUS_NODE,
-       .installerIconType1 = (ICON_TYPE_GENERIC_GATEWAY >> 8) & 0xFF,
-       .installerIconType2 = ICON_TYPE_GENERIC_GATEWAY & 0xFF,
-       .userIconType1      = (ICON_TYPE_GENERIC_GATEWAY >> 8) & 0xFF,
-       .userIconType2      = ICON_TYPE_GENERIC_GATEWAY & 0xFF};
+       .installerIconType1 = (ICON_TYPE_GENERIC_CENTRAL_CONTROLLER >> 8) & 0xFF,
+       .installerIconType2 = ICON_TYPE_GENERIC_CENTRAL_CONTROLLER & 0xFF,
+       .userIconType1      = (ICON_TYPE_GENERIC_CENTRAL_CONTROLLER >> 8) & 0xFF,
+       .userIconType2      = ICON_TYPE_GENERIC_CENTRAL_CONTROLLER & 0xFF};
 
   return zwave_command_class_send_report(connection_info,
                                          sizeof(report),

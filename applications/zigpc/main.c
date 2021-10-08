@@ -23,10 +23,10 @@
 #include "zigpc_command_mapper.h"
 #include "zigpc_diagnostics.h"
 #include "zigpc_smartstart_fixt.h"
-#include "zigpc_protctrl_process.h"
+#include "zigpc_ucl_fixt.h"
 #include "zigpc_node_state.h"
 #include "attribute_management_process.h"
-#include "zigpc_node_mgmt_process.h"
+#include "zigpc_controller.h"
 #include "zigpc_group_mgmt.h"
 #include "zigpc_stdin_fixt.h"
 #include "zcl_command_parser.h"
@@ -57,9 +57,9 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
   {zigpc_node_state_setup, "ZIGPC Node State Monitor"},
   {zigpc_smartstart_setup, "ZIGPC SmartStart"},
   {attribute_management_setup, "ZIGPC Attribute Management"},
-  {zigpc_node_mgmt_setup, "Zigpc Node Management"},
+  {zigpc_ctrl_fixt_setup, "ZigPC Controller"},
   {zigpc_diagnostics_init_fixt, " ZigPC Diagnostics"},
-  {zigpc_protctrl_process_setup, "ZIGPC Protocol Controller Monitor"},
+  {zigpc_ucl_fixt_setup, "ZIGPC UCL Util"},
   {uic_mqtt_dotdot_init, " DotDot MQTT Translator"},
   {zigpc_group_init, "Zigpc Groups Management"},
   {zigpc_stdin_setup_fixt, "ZigPC STDIN"},
@@ -75,14 +75,14 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
  * been stopped.
  */
 static uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[] = {
-  {zigpc_protctrl_process_shutdown, "ZIGPC Protocol Controller Monitor"},
+  {zigpc_ucl_fixt_shutdown, "ZIGPC UCL Util"},
   {zigpc_smartstart_shutdown, "ZIGPC SmartStart"},
   {zigpc_node_state_shutdown, "ZIGPC Node State Monitor"},
   {zigpc_net_mgmt_process_shutdown, "ZIGPC Network Management"},
   {zigpc_gateway_process_shutdown, "ZIGPC Gateway"},
   {zigpc_command_mapper_shutdown, "ZIGPC Command Mapper"},
   {attribute_management_shutdown, "ZIGPC Attribute Management"},
-  {zigpc_node_mgmt_shutdown, "Zigpc Node Management"},
+  {zigpc_ctrl_fixt_shutdown, "ZigPC Controller"},
   {attribute_store_teardown, "Attribute store"},
   {datastore_fixt_teardown, "Datastore"},
   {NULL, "Terminator"},

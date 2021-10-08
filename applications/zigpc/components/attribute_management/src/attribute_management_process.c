@@ -138,11 +138,6 @@ PROCESS_THREAD(attribute_management_process, ev, data)
                                                  receive_data->cluster_id,
                                                  receive_data->is_read_response,
                                                  &receive_data->frame);
-
-      sl_log_debug(LOG_TAG,
-                   "Reading frame for ENDPOINT %d, CLUSTER %d",
-                   receive_data->endpoint_id,
-                   receive_data->cluster_id);
     }
     // must be freed!
     // allocated in zigpc_attrmgmt_process_send_event())

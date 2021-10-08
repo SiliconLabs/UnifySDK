@@ -80,6 +80,8 @@ typedef struct supervised_session {
  *
  * @param session_id The Supervision Session ID to find among the
  *                   supervised sessions.
+ * @param node_id
+ * @param endpoint_id 
  *
  * @returns
  * - supervised_session_t Pointer of the found supervised session if the ID

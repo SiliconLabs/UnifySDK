@@ -12,6 +12,8 @@ target_link_libraries(zwave_controller PUBLIC
   zwave_network_management
   zwave_tx_scheme_selector
   zpc_attribute_store
+  zwave_definitions
+  uic_log
 PRIVATE
   zwave_s2
 )

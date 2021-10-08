@@ -17,9 +17,6 @@
 #include "zwave_tx.h"
 #include "process.h"
 
-// Priority of the TX Queue flush when reseting.
-#define TX_FLUSH_RESET_STEP_PRIORITY 4
-
 /**
  * @defgroup zwave_tx_process Z-Wave TX Process
  * @ingroup zwave_tx

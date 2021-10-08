@@ -33,13 +33,13 @@ typedef enum {
   NM_IDLE,
 
   /** Add mode state.
-   * Direct range/NWI, S2, or Smart Start.
+   * Direct range/NWI, S2, or SmartStart.
    *
    * Waiting for protocol.  On \ref NM_EV_ADD_NODE_FOUND, go to \ref NM_NODE_FOUND.
    */
   NM_WAITING_FOR_ADD,
   /** Add mode state.
-   * Direct range/NWI, S2, Smart Start, Proxy Inclusion, or Proxy Replace.
+   * Direct range/NWI, S2, SmartStart, Proxy Inclusion, or Proxy Replace.
    *
    * Waiting for protocol to receive node info from a node.  On \ref
    * NM_EV_ADD_CONTROLLER or \ref NM_EV_ADD_END_NODE, cache the node
@@ -47,7 +47,7 @@ typedef enum {
    */
   NM_NODE_FOUND,
   /** Add mode state.
-   * Direct range/NWI, S2, Smart Start, Proxy Inclusion, or Proxy Replace.
+   * Direct range/NWI, S2, SmartStart, Proxy Inclusion, or Proxy Replace.
    *
    * Waiting for protocol to assign node ID and home ID to the new node.
    *
@@ -105,13 +105,13 @@ typedef enum {
   NM_LEARN_MODE_STARTED,
 
   /** Add mode state.
-   * Direct range/NWI, S2, Smart Start, Proxy Inclusion, Proxy Replace.
+   * Direct range/NWI, S2, SmartStart, Proxy Inclusion, Proxy Replace.
    *
    * Waiting for the S2 inclusion state machine to complete.  On \ref
    * NM_EV_SECURITY_DONE, go to \ref NM_WAIT_FOR_PROBE_AFTER_ADD and
    * start probe.
    *
-   * If Smart Start security fails, start a
+   * If SmartStart security fails, start a
    * #SMART_START_SELF_DESTRUCT_TIMEOUT sec. timer and go to
    * #NM_WAIT_FOR_SELF_DESTRUCT.
    */
@@ -193,7 +193,7 @@ typedef enum {
 
   /** Add mode state.
    *
-   * Direct range/NWI, S2, Smart Start, Replace Failed, Proxy Inclusion, or
+   * Direct range/NWI, S2, SmartStart, Replace Failed, Proxy Inclusion, or
    * Proxy Replace.
    *
    * Wait for timeout to let protocol finish up its add by sending a
@@ -204,7 +204,7 @@ typedef enum {
 
   /** Add mode state.
    *
-   * Direct range/NWI, S2, Smart Start, Replace Failed, Proxy Inclusion, or
+   * Direct range/NWI, S2, SmartStart, Replace Failed, Proxy Inclusion, or
    * Proxy Replace.
    *
    * Waiting for the SUC to complete the secure part of inclusion.
@@ -227,7 +227,7 @@ typedef enum {
   NM_PROXY_INCLUSION_WAIT_NIF,
 
   /** Add mode state.
-   * Smart Start.
+   * SmartStart.
    *
    * The gateway must send NOPs to a failing node and wait for the
    * result, before doing ZW_RemoveFailed().
@@ -241,7 +241,7 @@ typedef enum {
   NM_WAIT_FOR_TX_TO_SELF_DESTRUCT,
 
   /** Add mode state.
-   * Smart Start.
+   * SmartStart.
    *
    * Waiting for protocol to complete the ZW_RemoveFailedNode() (or
    * for timeout).  Protocol callback RemoveSelfDestructStatus()
@@ -259,7 +259,7 @@ typedef enum {
    */
   NM_FAILED_NODE_REMOVE,
   /** Failed node remove state.
-   *  Add node state (smart start self destruct)
+   *  Add node state (SmartStart self destruct)
    *
    *  NMS Sends NOP in this state and next state is set according to if entry
    *  was due to timeout event or NM_EV_REMOVE_FAILED event from NM_IDLE.

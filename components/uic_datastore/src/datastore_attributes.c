@@ -74,8 +74,8 @@ sl_status_t datastore_attribute_table_init()
     " id              UNSIGNED INT, "  // (UNIQUE NOT NULL inferred by PRIMARY KEY down below)
     " type            UNSIGNED INT NOT NULL, "
     " parent_id       UNSIGNED INT, "  // parent_id can be NULL for the root node
-    " reported_value  BLOB, "          // This is the reported value in full.
-    " desired_value   BOOL DEFAULT false, "  // This captures if the desired value is defined
+    " reported_value  BLOB, "          // This is the reported value.
+    " desired_value   BLOB, "          // This is the desired value.
     " PRIMARY KEY(id) "
     // parent_id has to be an existing id in the same table (or NULL)
     " FOREIGN KEY (parent_id) REFERENCES " DATASTORE_TABLE_ATTRIBUTES " (id),"
@@ -189,9 +189,10 @@ sl_status_t datastore_attribute_statement_teardown()
 sl_status_t datastore_store_attribute(datastore_attribute_id_t id,
                                       uint32_t type,
                                       uint32_t parent_id,
-                                      const uint8_t *value,
-                                      uint8_t value_size,
-                                      bool desired_value)
+                                      const uint8_t *reported_value,
+                                      uint8_t reported_value_size,
+                                      const uint8_t *desired_value,
+                                      uint8_t desired_value_size)
 {
   sl_status_t result = SL_STATUS_OK;
 
@@ -227,14 +228,22 @@ sl_status_t datastore_store_attribute(datastore_attribute_id_t id,
   }
 
   // Bind the reported_value (blob object)
-  rc = sqlite3_bind_blob(upsert_statement, 4, value, value_size, SQLITE_STATIC);
+  rc = sqlite3_bind_blob(upsert_statement,
+                         4,
+                         reported_value,
+                         reported_value_size,
+                         SQLITE_STATIC);
   if (rc != SQLITE_OK) {
     log_binding_failed();
     result = SL_STATUS_FAIL;
   }
 
-  // Bind the desired_value (boolean, we use int for this)
-  rc = sqlite3_bind_int(upsert_statement, 5, (int)desired_value);
+  // Bind the reported_value (blob object)
+  rc = sqlite3_bind_blob(upsert_statement,
+                         5,
+                         desired_value,
+                         desired_value_size,
+                         SQLITE_STATIC);
   if (rc != SQLITE_OK) {
     log_binding_failed();
     result = SL_STATUS_FAIL;
@@ -243,10 +252,12 @@ sl_status_t datastore_store_attribute(datastore_attribute_id_t id,
   if (result == SL_STATUS_OK) {
     rc = sqlite3_step(upsert_statement);
     if (rc != SQLITE_DONE && rc != SQLITE_ROW) {
+      char *expanded_sql = sqlite3_expanded_sql(upsert_statement);
       sl_log_error(LOG_TAG,
                    "Step operation failed: %s, Query: %s",
                    sqlite3_errmsg(db),
-                   sqlite3_expanded_sql(upsert_statement));
+                   expanded_sql);
+      sqlite3_free(expanded_sql);
       result = SL_STATUS_FAIL;
     }
   }
@@ -260,9 +271,10 @@ sl_status_t datastore_store_attribute(datastore_attribute_id_t id,
 sl_status_t datastore_fetch_attribute(datastore_attribute_id_t id,
                                       uint32_t *type,
                                       datastore_attribute_id_t *parent_id,
-                                      uint8_t *value,
-                                      uint8_t *value_size,
-                                      bool *desired_value)
+                                      uint8_t *reported_value,
+                                      uint8_t *reported_value_size,
+                                      uint8_t *desired_value,
+                                      uint8_t *desired_value_size)
 {
   sl_status_t status = SL_STATUS_FAIL;
 
@@ -283,14 +295,20 @@ sl_status_t datastore_fetch_attribute(datastore_attribute_id_t id,
     // Pull the result from the first row (there should be only one)
     *type = (uint32_t)sqlite3_column_int64(select_statement, 1);
     // If parent_id is NULL in the database, it will return 0
-    *parent_id     = (uint32_t)sqlite3_column_int64(select_statement, 2);
-    *desired_value = sqlite3_column_int(select_statement, 4);
+    *parent_id = (uint32_t)sqlite3_column_int64(select_statement, 2);
 
     // Get a pointer from sqlite and copy the data to the user pointer
+    // Reported value
     const uint8_t *value_buffer
       = (const uint8_t *)sqlite3_column_blob(select_statement, 3);
-    *value_size = (uint8_t)sqlite3_column_bytes(select_statement, 3);
-    memcpy(value, value_buffer, *value_size);
+    *reported_value_size = (uint8_t)sqlite3_column_bytes(select_statement, 3);
+    memcpy(reported_value, value_buffer, *reported_value_size);
+
+    // Desired value
+    value_buffer = (const uint8_t *)sqlite3_column_blob(select_statement, 4);
+    *desired_value_size = (uint8_t)sqlite3_column_bytes(select_statement, 4);
+    memcpy(desired_value, value_buffer, *desired_value_size);
+
     status = SL_STATUS_OK;
   } else {
     // No result was found for the id
@@ -306,9 +324,10 @@ sl_status_t datastore_fetch_attribute_child(datastore_attribute_id_t parent_id,
                                             uint32_t child_index,
                                             datastore_attribute_id_t *child_id,
                                             uint32_t *type,
-                                            uint8_t *value,
-                                            uint8_t *value_size,
-                                            bool *desired_value)
+                                            uint8_t *reported_value,
+                                            uint8_t *reported_value_size,
+                                            uint8_t *desired_value,
+                                            uint8_t *desired_value_size)
 {
   sl_status_t status = SL_STATUS_FAIL;
 
@@ -336,14 +355,19 @@ sl_status_t datastore_fetch_attribute_child(datastore_attribute_id_t parent_id,
     // Pull the result from the first row (there should be only one)
     *child_id = (uint32_t)sqlite3_column_int64(select_child_index_statement, 0);
     *type     = (uint32_t)sqlite3_column_int64(select_child_index_statement, 1);
-    *desired_value = sqlite3_column_int(select_child_index_statement, 3);
 
     // Get a pointer from sqlite and copy the data to the user pointer
     const uint8_t *value_buffer
       = (const uint8_t *)sqlite3_column_blob(select_child_index_statement, 2);
-    *value_size
+    *reported_value_size
       = (uint8_t)sqlite3_column_bytes(select_child_index_statement, 2);
-    memcpy(value, value_buffer, *value_size);
+    memcpy(reported_value, value_buffer, *reported_value_size);
+
+    // Same thing for the desired value
+    value_buffer = sqlite3_column_blob(select_child_index_statement, 3);
+    *desired_value_size
+      = (uint8_t)sqlite3_column_bytes(select_child_index_statement, 3);
+    memcpy(desired_value, value_buffer, *desired_value_size);
     status = SL_STATUS_OK;
   } else {
     // No result was found for the parent_id / child_index

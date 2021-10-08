@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -151,16 +151,25 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__zpc__utils.html#ga5dab344c577b4f66090f4f2ab1ad70a5">zpc_converters.c</a>
 </li>
 <li>zpc_crc16()
-: <a class="el" href="group__zpc__crc16.html#ga9b91051ed79ff5ca771ca834bf961847">zpc_crc16.h</a>
-, <a class="el" href="group__zpc__crc16.html#ga9b91051ed79ff5ca771ca834bf961847">zpc_crc16.c</a>
+: <a class="el" href="group__zpc__crc16.html#ga716637a23c8c1eca940460c96fd7b99d">zpc_crc16.h</a>
+, <a class="el" href="group__zpc__crc16.html#ga716637a23c8c1eca940460c96fd7b99d">zpc_crc16.c</a>
 </li>
 <li>zpc_datastore_fixt_setup()
 : <a class="el" href="group__zpc__datastore__fixture.html#gad2200ae2872fefa0bd9b09ce049b8527">zpc_datastore_fixt.h</a>
 , <a class="el" href="group__zpc__datastore__fixture.html#gad2200ae2872fefa0bd9b09ce049b8527">zpc_datastore.c</a>
 </li>
+<li>zpc_datastore_version
+: <a class="el" href="group__zpc__datastore__fixture.html#ga87a6dd2ea9b31cad2bc716efed56b79f">zpc_datastore_fixt.h</a>
+</li>
+<li>ZPC_DATASTORE_VERSION
+: <a class="el" href="group__zpc__datastore__fixture.html#ga746b225ad41ab77cf45f65cdb47fcfbd">zpc_datastore_fixt.h</a>
+</li>
+<li>zpc_datastore_version_t
+: <a class="el" href="group__zpc__datastore__fixture.html#ga61f8dbc5c924683b4fafba4c192818a0">zpc_datastore_fixt.h</a>
+</li>
 <li>zpc_dodot_mqtt_init()
-: <a class="el" href="group__zpc__dotdot__mqtt.html#gaabeacddeee53e0e795ebe0c460e222b6">zpc_dotdot_mqtt.c</a>
-, <a class="el" href="group__zpc__dotdot__mqtt.html#gaabeacddeee53e0e795ebe0c460e222b6">zpc_dotdot_mqtt.h</a>
+: <a class="el" href="group__zpc__dotdot__mqtt.html#gaabeacddeee53e0e795ebe0c460e222b6">zpc_dotdot_mqtt.h</a>
+, <a class="el" href="group__zpc__dotdot__mqtt.html#gaabeacddeee53e0e795ebe0c460e222b6">zpc_dotdot_mqtt.c</a>
 </li>
 <li>zpc_dotdot_mqtt_group_dispatch()
 : <a class="el" href="group__zpc__dotdot__mqtt__group__dispatch.html#ga9463267671845f689b3eaccd81867782">zpc_dotdot_mqtt_group_dispatch.h</a>
@@ -706,8 +715,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__ZWAPI__BASIS.html#gaf449e160929aabe71a098a0955b24463">zwapi_protocol_basis.c</a>
 </li>
 <li>zwapi_get_long_range_nodes()
-: <a class="el" href="group__ZWAPI__BASIS.html#ga20e954f2c107012490fe9aa9e4a31169">zwapi_protocol_basis.h</a>
-, <a class="el" href="group__ZWAPI__BASIS.html#ga20e954f2c107012490fe9aa9e4a31169">zwapi_protocol_basis.c</a>
+: <a class="el" href="group__ZWAPI__BASIS.html#ga20e954f2c107012490fe9aa9e4a31169">zwapi_protocol_basis.c</a>
+, <a class="el" href="group__ZWAPI__BASIS.html#ga20e954f2c107012490fe9aa9e4a31169">zwapi_protocol_basis.h</a>
 </li>
 <li>zwapi_get_lr_maximum_payload_size()
 : <a class="el" href="group__ZWAPI__BASIS.html#ga9ae8c8dbc1d120d4d193c967c919266b">zwapi_protocol_basis.h</a>
@@ -1232,8 +1241,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__ZWAPI__INIT.html#ga647114dcb008816008cf9389548b1a12">zwapi_init.c</a>
 </li>
 <li>zwapi_supports_long_range()
-: <a class="el" href="group__ZWAPI__BASIS.html#ga17ea6a36c50659bf019a0a7dea77fa9d">zwapi_protocol_basis.h</a>
-, <a class="el" href="group__ZWAPI__BASIS.html#ga17ea6a36c50659bf019a0a7dea77fa9d">zwapi_protocol_basis.c</a>
+: <a class="el" href="group__ZWAPI__BASIS.html#ga17ea6a36c50659bf019a0a7dea77fa9d">zwapi_protocol_basis.c</a>
+, <a class="el" href="group__ZWAPI__BASIS.html#ga17ea6a36c50659bf019a0a7dea77fa9d">zwapi_protocol_basis.h</a>
 </li>
 <li>zwapi_timestamp_get()
 : <a class="el" href="zwapi__timestamp_8c.html#a6ebe1ddfe689bce6ee72fc12f708aece">zwapi_timestamp.c</a>
@@ -1307,6 +1316,9 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 </li>
 <li>ZWAVE_CC_VERSION_ATTRIBUTE
 : <a class="el" href="group__attribute__types.html#ga3166964cf57ad2a2698767b68277881c">attribute_store_defined_attribute_types.h</a>
+</li>
+<li>zwave_cc_version_t
+: <a class="el" href="zwave__command__class__version__types_8h.html#aad4ed685a718abe0fd70f07f949a4907">zwave_command_class_version_types.h</a>
 </li>
 <li>zwave_command_class_agi_add_group_commands()
 : <a class="el" href="group__agi__command__class.html#ga791dc8783548560ba53938f58d108de2">zwave_command_class_agi.h</a>
@@ -1396,6 +1408,9 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 </li>
 <li>zwave_command_class_inclusion_controller_init()
 : <a class="el" href="group__zwave__command__class__inclusion__controller.html#ga632e0f4bd326decac2e2a4044921ee16">zwave_command_class_inclusion_controller.h</a>
+</li>
+<li>zwave_command_class_indicator_control_init()
+: <a class="el" href="group__zwave__command__class__indicator.html#ga58968b0949852e2440f8f68c79d06eb6">zwave_command_class_indicator_control.h</a>
 </li>
 <li>zwave_command_class_indicator_get_indicator_values()
 : <a class="el" href="zwave__command__class__indicator_8c.html#a2d4e7f6cc1b4e84795d298d9384374f3">zwave_command_class_indicator.c</a>
@@ -1509,7 +1524,7 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__multilevel__sensor_8c.html#a389d2c5d83cce7ddd65d15c522bb45e7">zwave_command_class_multilevel_sensor.c</a>
 </li>
 <li>zwave_command_class_multilevel_sensor_create_type()
-: <a class="el" href="zwave__command__class__multilevel__sensor_8c.html#ae2ab743c61dcd4de5d73c24ae6a93d3c">zwave_command_class_multilevel_sensor.c</a>
+: <a class="el" href="zwave__command__class__multilevel__sensor_8c.html#a4ba40eb5b003a48d178274fbb562842d">zwave_command_class_multilevel_sensor.c</a>
 </li>
 <li>zwave_command_class_multilevel_sensor_get()
 : <a class="el" href="zwave__command__class__multilevel__sensor_8c.html#a84a39cf772f936e63412802f65e83ad7">zwave_command_class_multilevel_sensor.c</a>
@@ -1537,8 +1552,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__multilevel__sensor_8c.html#ab4b4bf6b25b944d99128aff497ab7f14">zwave_command_class_multilevel_sensor.c</a>
 </li>
 <li>zwave_command_class_node_info_resolver_init()
-: <a class="el" href="group__zwave__nif__resolver.html#gae3d7718b1013ff52f8ea4984621b762c">zwave_command_class_node_info_resolver.c</a>
-, <a class="el" href="group__zwave__nif__resolver.html#gae3d7718b1013ff52f8ea4984621b762c">zwave_command_class_node_info_resolver.h</a>
+: <a class="el" href="group__zwave__nif__resolver.html#gae3d7718b1013ff52f8ea4984621b762c">zwave_command_class_node_info_resolver.h</a>
+, <a class="el" href="group__zwave__nif__resolver.html#gae3d7718b1013ff52f8ea4984621b762c">zwave_command_class_node_info_resolver.c</a>
 </li>
 <li>zwave_command_class_notification_init()
 : <a class="el" href="group__notification__command__class.html#gaf43b7b125712b1d27cfacdc80691d26a">zwave_command_class_notification.h</a>
@@ -1560,8 +1575,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="zwave__command__class__powerlevel_8h.html#a39d6e2c6ae8dc111f69b40df755461c7">zwave_command_class_powerlevel.h</a>
 </li>
 <li>zwave_command_class_powerlevel_support_handler()
-: <a class="el" href="zwave__command__class__powerlevel_8h.html#adadb52502e81ed531e5a992d83e7eeca">zwave_command_class_powerlevel.h</a>
-, <a class="el" href="zwave__command__class__powerlevel_8c.html#adadb52502e81ed531e5a992d83e7eeca">zwave_command_class_powerlevel.c</a>
+: <a class="el" href="zwave__command__class__powerlevel_8c.html#adadb52502e81ed531e5a992d83e7eeca">zwave_command_class_powerlevel.c</a>
+, <a class="el" href="zwave__command__class__powerlevel_8h.html#adadb52502e81ed531e5a992d83e7eeca">zwave_command_class_powerlevel.h</a>
 </li>
 <li>zwave_command_class_security_0_commands_supported_get()
 : <a class="el" href="group__security__0__command__class.html#ga559eb9ddddf8d8ecfbc9613e30953f31">zwave_command_class_security_0.c</a>
@@ -1575,16 +1590,16 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__security__0__command__class.html#gaf1dd75d7ea7af6746142a01c7f9aed2e">zwave_command_class_security_0.h</a>
 </li>
 <li>zwave_command_class_security_0_init()
-: <a class="el" href="group__security__0__command__class.html#ga7460f029f90a343242e45c6233e1cdc2">zwave_command_class_security_0.c</a>
-, <a class="el" href="group__security__0__command__class.html#ga7460f029f90a343242e45c6233e1cdc2">zwave_command_class_security_0.h</a>
+: <a class="el" href="group__security__0__command__class.html#ga7460f029f90a343242e45c6233e1cdc2">zwave_command_class_security_0.h</a>
+, <a class="el" href="group__security__0__command__class.html#ga7460f029f90a343242e45c6233e1cdc2">zwave_command_class_security_0.c</a>
 </li>
 <li>zwave_command_class_security_0_support_handler()
 : <a class="el" href="group__security__0__command__class.html#ga35d4b754918a348261f43e34d56e6d52">zwave_command_class_security_0.c</a>
 , <a class="el" href="group__security__0__command__class.html#ga35d4b754918a348261f43e34d56e6d52">zwave_command_class_security_0.h</a>
 </li>
 <li>zwave_command_class_security_2_commands_supported_get()
-: <a class="el" href="group__security__2__command__class.html#ga41f799ed267cda8d478efe20e721cd2c">zwave_command_class_security_2.c</a>
-, <a class="el" href="group__security__2__command__class.html#ga41f799ed267cda8d478efe20e721cd2c">zwave_command_class_security_2.h</a>
+: <a class="el" href="group__security__2__command__class.html#ga41f799ed267cda8d478efe20e721cd2c">zwave_command_class_security_2.h</a>
+, <a class="el" href="group__security__2__command__class.html#ga41f799ed267cda8d478efe20e721cd2c">zwave_command_class_security_2.c</a>
 </li>
 <li>zwave_command_class_security_2_commands_supported_report()
 : <a class="el" href="zwave__command__class__security__2_8c.html#ad6cf88ba96647fbb110ad024d13ad927">zwave_command_class_security_2.c</a>
@@ -1593,8 +1608,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__security__2_8c.html#aa9d9bbdae7f77c34856a744f20f6bd34">zwave_command_class_security_2.c</a>
 </li>
 <li>zwave_command_class_security_2_init()
-: <a class="el" href="group__security__2__command__class.html#ga8d46dba73126d88511566e7ae09eced5">zwave_command_class_security_2.c</a>
-, <a class="el" href="group__security__2__command__class.html#ga8d46dba73126d88511566e7ae09eced5">zwave_command_class_security_2.h</a>
+: <a class="el" href="group__security__2__command__class.html#ga8d46dba73126d88511566e7ae09eced5">zwave_command_class_security_2.h</a>
+, <a class="el" href="group__security__2__command__class.html#ga8d46dba73126d88511566e7ae09eced5">zwave_command_class_security_2.c</a>
 </li>
 <li>zwave_command_class_security_2_support_handler()
 : <a class="el" href="zwave__command__class__security__2_8c.html#a371e1c6f2a526119ee0bb383bf33c687">zwave_command_class_security_2.c</a>
@@ -1604,8 +1619,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__command__classes__utils.html#ga9a9c99943bf863fde841149699d15593">zwave_command_classes_utils.c</a>
 </li>
 <li>zwave_command_class_supervision_abort_send_data()
-: <a class="el" href="group__zwave__command__class__supervision__handler.html#gad32f8e43a689055a0cc346f289f6836f">zwave_command_class_supervision.c</a>
-, <a class="el" href="group__zwave__command__class__supervision__handler.html#gad32f8e43a689055a0cc346f289f6836f">zwave_command_class_supervision.h</a>
+: <a class="el" href="group__zwave__command__class__supervision__handler.html#gad32f8e43a689055a0cc346f289f6836f">zwave_command_class_supervision.h</a>
+, <a class="el" href="group__zwave__command__class__supervision__handler.html#gad32f8e43a689055a0cc346f289f6836f">zwave_command_class_supervision.c</a>
 </li>
 <li>zwave_command_class_supervision_assign_session_tx_id()
 : <a class="el" href="group__zwave__command__class__supervision__process.html#ga785b4034cff72c8f6a0f57601639e769">zwave_command_class_supervision_process.h</a>
@@ -1638,8 +1653,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__supervision_8c.html#a033177d7c253b3c99982f2a591dd1180">zwave_command_class_supervision.c</a>
 </li>
 <li>zwave_command_class_supervision_init()
-: <a class="el" href="group__zwave__command__class__supervision__handler.html#gaeaff3d9d85a38b52f67f91ea41163a72">zwave_command_class_supervision.c</a>
-, <a class="el" href="group__zwave__command__class__supervision__handler.html#gaeaff3d9d85a38b52f67f91ea41163a72">zwave_command_class_supervision.h</a>
+: <a class="el" href="group__zwave__command__class__supervision__handler.html#gaeaff3d9d85a38b52f67f91ea41163a72">zwave_command_class_supervision.h</a>
+, <a class="el" href="group__zwave__command__class__supervision__handler.html#gaeaff3d9d85a38b52f67f91ea41163a72">zwave_command_class_supervision.c</a>
 </li>
 <li>zwave_command_class_supervision_on_send_data_complete()
 : <a class="el" href="zwave__command__class__supervision_8c.html#aace8983e67aecb69a062967f18389354">zwave_command_class_supervision.c</a>
@@ -1710,8 +1725,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__thermostat__mode_8c.html#af456ef66a56bd24ddcb9c83c5477fe9e">zwave_command_class_thermostat_mode.c</a>
 </li>
 <li>zwave_command_class_thermostat_mode_init()
-: <a class="el" href="group__thermostat__mode__command__class.html#ga0ab18b0653e4398983bcaa978c963c56">zwave_command_class_thermostat_mode.c</a>
-, <a class="el" href="group__thermostat__mode__command__class.html#ga0ab18b0653e4398983bcaa978c963c56">zwave_command_class_thermostat_mode.h</a>
+: <a class="el" href="group__thermostat__mode__command__class.html#ga0ab18b0653e4398983bcaa978c963c56">zwave_command_class_thermostat_mode.h</a>
+, <a class="el" href="group__thermostat__mode__command__class.html#ga0ab18b0653e4398983bcaa978c963c56">zwave_command_class_thermostat_mode.c</a>
 </li>
 <li>zwave_command_class_thermostat_mode_on_version_attribute_update()
 : <a class="el" href="zwave__command__class__thermostat__mode_8c.html#aa726133b7627309baf3f913394ac16db">zwave_command_class_thermostat_mode.c</a>
@@ -1744,8 +1759,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__thermostat__setpoint_8c.html#a9810fc8f89912d03983ea41cc4f3d6e8">zwave_command_class_thermostat_setpoint.c</a>
 </li>
 <li>zwave_command_class_thermostat_setpoint_init()
-: <a class="el" href="group__thermostat__setpoint__command__class.html#ga0021ba0eca3af0c795d63e7cbdb6ec00">zwave_command_class_thermostat_setpoint.c</a>
-, <a class="el" href="group__thermostat__setpoint__command__class.html#ga0021ba0eca3af0c795d63e7cbdb6ec00">zwave_command_class_thermostat_setpoint.h</a>
+: <a class="el" href="group__thermostat__setpoint__command__class.html#ga0021ba0eca3af0c795d63e7cbdb6ec00">zwave_command_class_thermostat_setpoint.h</a>
+, <a class="el" href="group__thermostat__setpoint__command__class.html#ga0021ba0eca3af0c795d63e7cbdb6ec00">zwave_command_class_thermostat_setpoint.c</a>
 </li>
 <li>zwave_command_class_thermostat_setpoint_on_version_attribute_update()
 : <a class="el" href="zwave__command__class__thermostat__setpoint_8c.html#a326207cd9644bb237af5cc2234e8f769">zwave_command_class_thermostat_setpoint.c</a>
@@ -1766,12 +1781,22 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__time_8c.html#a8767a308abbb50ddb32309174b87fea0">zwave_command_class_time.c</a>
 </li>
 <li>zwave_command_class_time_init()
-: <a class="el" href="zwave__command__class__time_8c.html#aa72fa8c480ed97a0e4e905df5f8536eb">zwave_command_class_time.c</a>
-, <a class="el" href="zwave__command__class__time_8h.html#aed42e449bc5dabb12fdf2c1811860bd8">zwave_command_class_time.h</a>
+: <a class="el" href="zwave__command__class__time_8h.html#aed42e449bc5dabb12fdf2c1811860bd8">zwave_command_class_time.h</a>
+, <a class="el" href="zwave__command__class__time_8c.html#aa72fa8c480ed97a0e4e905df5f8536eb">zwave_command_class_time.c</a>
 </li>
 <li>zwave_command_class_time_support_handler()
 : <a class="el" href="zwave__command__class__time_8c.html#a6aff930c768a1b88eb1471fc324cce16">zwave_command_class_time.c</a>
 , <a class="el" href="zwave__command__class__time_8h.html#a6aff930c768a1b88eb1471fc324cce16">zwave_command_class_time.h</a>
+</li>
+<li>zwave_command_class_transport_service_control_handler()
+: <a class="el" href="zwave__command__class__transport__service_8c.html#ad95db5c28c88ef73916efd1548550c32">zwave_command_class_transport_service.c</a>
+</li>
+<li>zwave_command_class_transport_service_init()
+: <a class="el" href="group__zwave__command__class__transport__service.html#gaca6a860db490d9995ea9f2f8a5a8fd33">zwave_command_class_transport_service.c</a>
+, <a class="el" href="group__zwave__command__class__transport__service.html#gaca6a860db490d9995ea9f2f8a5a8fd33">zwave_command_class_transport_service.h</a>
+</li>
+<li>zwave_command_class_transport_service_support_handler()
+: <a class="el" href="zwave__command__class__transport__service_8c.html#a63a38123dab6727dcea83dcbae86855a">zwave_command_class_transport_service.c</a>
 </li>
 <li>zwave_command_class_version_capabilities_get()
 : <a class="el" href="zwave__command__class__version_8c.html#a4c2f93ff53090c7ceec6617db826f271">zwave_command_class_version.c</a>
@@ -1801,8 +1826,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__command__class__version_8c.html#a0a4414dccf0c308a49bff798b23231aa">zwave_command_class_version.c</a>
 </li>
 <li>zwave_command_class_version_init()
-: <a class="el" href="group__zwave__command__class__version.html#gabae96a5c6c82334f5979f3b407b973e3">zwave_command_class_version.c</a>
-, <a class="el" href="group__zwave__command__class__version.html#gabae96a5c6c82334f5979f3b407b973e3">zwave_command_class_version.h</a>
+: <a class="el" href="group__zwave__command__class__version.html#gabae96a5c6c82334f5979f3b407b973e3">zwave_command_class_version.h</a>
+, <a class="el" href="group__zwave__command__class__version.html#gabae96a5c6c82334f5979f3b407b973e3">zwave_command_class_version.c</a>
 </li>
 <li>zwave_command_class_version_software_get()
 : <a class="el" href="zwave__command__class__version_8c.html#a7964d758b9e6deea73e79cf921e9b493">zwave_command_class_version.c</a>
@@ -1810,13 +1835,13 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 <li>zwave_command_class_version_support_handler()
 : <a class="el" href="zwave__command__class__version_8c.html#a75a0004cf86479f6896b5b515576d83f">zwave_command_class_version.c</a>
 </li>
-<li>zwave_command_class_wakeup_init()
-: <a class="el" href="zwave__command__class__wakeup_8h.html#a8c0a7a6b7da292d02c28e50c40c8cf59">zwave_command_class_wakeup.h</a>
-, <a class="el" href="zwave__command__class__wakeup_8c.html#a8c0a7a6b7da292d02c28e50c40c8cf59">zwave_command_class_wakeup.c</a>
+<li>zwave_command_class_wake_up_init()
+: <a class="el" href="group__zwave__command__class__wake__up.html#ga11866ec0935bee3fba386bc3ed28e0b6">zwave_command_class_wake_up.c</a>
+, <a class="el" href="group__zwave__command__class__wake__up.html#ga11866ec0935bee3fba386bc3ed28e0b6">zwave_command_class_wake_up.h</a>
 </li>
-<li>zwave_command_class_wakeup_supports_wake_up_on_demand()
-: <a class="el" href="zwave__command__class__wakeup_8c.html#a0bc8a7759501f6f2a90c328d16be812b">zwave_command_class_wakeup.c</a>
-, <a class="el" href="zwave__command__class__wakeup_8h.html#a0bc8a7759501f6f2a90c328d16be812b">zwave_command_class_wakeup.h</a>
+<li>zwave_command_class_wake_up_supports_wake_up_on_demand()
+: <a class="el" href="group__zwave__command__class__wake__up.html#ga3f21bf48988be7063716ec5cbddd37fa">zwave_command_class_wake_up.c</a>
+, <a class="el" href="group__zwave__command__class__wake__up.html#ga3f21bf48988be7063716ec5cbddd37fa">zwave_command_class_wake_up.h</a>
 </li>
 <li>zwave_command_class_zwave_plus_info_handle_zwave_plus_info_get()
 : <a class="el" href="zwave__command__class__zwave__plus__info_8c.html#a4c05a51258a80241d493e41834bcfa1b">zwave_command_class_zwave_plus_info.c</a>
@@ -1826,8 +1851,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="zwave__command__class__zwave__plus__info_8h.html#ab8abcae16d5e5de1ef5244add916e5f7">zwave_command_class_zwave_plus_info.h</a>
 </li>
 <li>zwave_command_class_zwave_plus_info_support_handler()
-: <a class="el" href="zwave__command__class__zwave__plus__info_8c.html#a8f304ea7b56f6b203f53d05ab6477d80">zwave_command_class_zwave_plus_info.c</a>
-, <a class="el" href="zwave__command__class__zwave__plus__info_8h.html#a8f304ea7b56f6b203f53d05ab6477d80">zwave_command_class_zwave_plus_info.h</a>
+: <a class="el" href="zwave__command__class__zwave__plus__info_8h.html#a8f304ea7b56f6b203f53d05ab6477d80">zwave_command_class_zwave_plus_info.h</a>
+, <a class="el" href="zwave__command__class__zwave__plus__info_8c.html#a8f304ea7b56f6b203f53d05ab6477d80">zwave_command_class_zwave_plus_info.c</a>
 </li>
 <li>zwave_command_classes_init()
 : <a class="el" href="group__command__classes__fixt.html#ga5272651939ced1723158340039e8da19">zwave_command_classes_fixt.h</a>
@@ -1852,7 +1877,7 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="group__zwave__command__handler.html#gadc660fe6ba68c4eb1818a2e4451349e2">zwave_command_handler.h</a>
 </li>
 <li>zwave_command_handler_get_version()
-: <a class="el" href="group__zwave__command__handler.html#ga74899d8809a1d53e5251e33f6de59841">zwave_command_handler.h</a>
+: <a class="el" href="group__zwave__command__handler.html#gaac5bc2ca2660912ba6bda3ca8a6b1912">zwave_command_handler.h</a>
 </li>
 <li>zwave_command_handler_init()
 : <a class="el" href="group__zwave__command__handler.html#ga539a63c9d0911ff117864e485f58d79e">zwave_command_handler.h</a>
@@ -1895,8 +1920,11 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info.h</a>
 </li>
 <li>zwave_controller_deregister_callbacks()
-: <a class="el" href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">zwave_controller_callbacks.c</a>
-, <a class="el" href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">zwave_controller_callbacks.h</a>
+: <a class="el" href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">zwave_controller_callbacks.h</a>
+, <a class="el" href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">zwave_controller_callbacks.c</a>
+</li>
+<li>ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY
+: <a class="el" href="group__zwave__controller__callbacks.html#ga5dff7aa68712022861b11db0d0ed48ee">zwave_controller_callbacks.h</a>
 </li>
 <li>ZWAVE_CONTROLLER_DISPATCH_CALLBACKS
 : <a class="el" href="zwave__controller__callbacks_8c.html#a5ecc442294921777732936da8c8d8fa9">zwave_controller_callbacks.c</a>
@@ -1944,8 +1972,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__zwave__controller__internal.html#ga0afcbfc774350542747870d3c0cf9a63">zwave_controller_callbacks.c</a>
 </li>
 <li>zwave_controller_on_error()
-: <a class="el" href="group__zwave__controller__internal.html#ga1583638c085e036ee7bf29b8aeb5aed0">zwave_controller_callbacks.c</a>
-, <a class="el" href="group__zwave__controller__internal.html#ga1583638c085e036ee7bf29b8aeb5aed0">zwave_controller_internal.h</a>
+: <a class="el" href="group__zwave__controller__internal.html#ga1583638c085e036ee7bf29b8aeb5aed0">zwave_controller_internal.h</a>
+, <a class="el" href="group__zwave__controller__internal.html#ga1583638c085e036ee7bf29b8aeb5aed0">zwave_controller_callbacks.c</a>
 </li>
 <li>zwave_controller_on_frame_received()
 : <a class="el" href="group__zwave__controller__internal.html#ga79b433f95d08d541cd2a4d74ed27fd65">zwave_controller_internal.h</a>
@@ -1968,28 +1996,28 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__zwave__controller__internal.html#ga71b33f4713533e9a8fc752119f5a060e">zwave_controller_internal.h</a>
 </li>
 <li>zwave_controller_on_new_network_entered()
-: <a class="el" href="group__zwave__controller__internal.html#ga18550ef3f5046fc084a0e0581be81ef5">zwave_controller_internal.h</a>
-, <a class="el" href="group__zwave__controller__internal.html#ga18550ef3f5046fc084a0e0581be81ef5">zwave_controller_callbacks.c</a>
+: <a class="el" href="group__zwave__controller__internal.html#ga18550ef3f5046fc084a0e0581be81ef5">zwave_controller_callbacks.c</a>
+, <a class="el" href="group__zwave__controller__internal.html#ga18550ef3f5046fc084a0e0581be81ef5">zwave_controller_internal.h</a>
 </li>
 <li>zwave_controller_on_new_suc()
 : <a class="el" href="group__zwave__controller__internal.html#gaa93eec32b28fd4eb3adde58e8f4f9d49">zwave_controller_callbacks.c</a>
 , <a class="el" href="group__zwave__controller__internal.html#gaa93eec32b28fd4eb3adde58e8f4f9d49">zwave_controller_internal.h</a>
 </li>
 <li>zwave_controller_on_node_added()
-: <a class="el" href="group__zwave__controller__internal.html#ga4ea4895ef12ecb1b950f26cceb3fa2ce">zwave_controller_internal.h</a>
-, <a class="el" href="group__zwave__controller__internal.html#ga4ea4895ef12ecb1b950f26cceb3fa2ce">zwave_controller_callbacks.c</a>
+: <a class="el" href="group__zwave__controller__internal.html#ga4ea4895ef12ecb1b950f26cceb3fa2ce">zwave_controller_callbacks.c</a>
+, <a class="el" href="group__zwave__controller__internal.html#ga4ea4895ef12ecb1b950f26cceb3fa2ce">zwave_controller_internal.h</a>
 </li>
 <li>zwave_controller_on_node_deleted()
-: <a class="el" href="group__zwave__controller__internal.html#ga8cfb4a77017843c63190b2c5c5ddcb3c">zwave_controller_internal.h</a>
-, <a class="el" href="group__zwave__controller__internal.html#ga8cfb4a77017843c63190b2c5c5ddcb3c">zwave_controller_callbacks.c</a>
+: <a class="el" href="group__zwave__controller__internal.html#ga8cfb4a77017843c63190b2c5c5ddcb3c">zwave_controller_callbacks.c</a>
+, <a class="el" href="group__zwave__controller__internal.html#ga8cfb4a77017843c63190b2c5c5ddcb3c">zwave_controller_internal.h</a>
 </li>
 <li>zwave_controller_on_node_id_assigned()
-: <a class="el" href="group__zwave__controller__internal.html#ga8b467b452013b49f39f68174a3b63362">zwave_controller_internal.h</a>
-, <a class="el" href="group__zwave__controller__internal.html#ga8b467b452013b49f39f68174a3b63362">zwave_controller_callbacks.c</a>
+: <a class="el" href="group__zwave__controller__internal.html#gadce8e3c18cd1e82f04b34e2f5ec8c0bc">zwave_controller_internal.h</a>
+, <a class="el" href="group__zwave__controller__internal.html#gadce8e3c18cd1e82f04b34e2f5ec8c0bc">zwave_controller_callbacks.c</a>
 </li>
 <li>zwave_controller_on_node_info_req_failed()
-: <a class="el" href="group__zwave__controller__internal.html#gad8a28781923cfb3cea88dbb277fed535">zwave_controller_callbacks.c</a>
-, <a class="el" href="group__zwave__controller__internal.html#gad8a28781923cfb3cea88dbb277fed535">zwave_controller_internal.h</a>
+: <a class="el" href="group__zwave__controller__internal.html#gad8a28781923cfb3cea88dbb277fed535">zwave_controller_internal.h</a>
+, <a class="el" href="group__zwave__controller__internal.html#gad8a28781923cfb3cea88dbb277fed535">zwave_controller_callbacks.c</a>
 </li>
 <li>zwave_controller_on_node_information()
 : <a class="el" href="group__zwave__controller__internal.html#ga354c0d4573d2be752dc8529b6daa78c9">zwave_controller_internal.h</a>
@@ -2000,27 +2028,27 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__zwave__controller__internal.html#gab01fac24c2a8ba94ed030a69886236f0">zwave_controller_internal.h</a>
 </li>
 <li>zwave_controller_on_reset_step_complete()
-: <a class="el" href="group__zwave__controller__callbacks.html#gabc2b2fe46f23b718d3abd1b879a162b2">zwave_controller_callbacks.h</a>
-, <a class="el" href="group__zwave__controller__callbacks.html#gabc2b2fe46f23b718d3abd1b879a162b2">zwave_controller_callbacks.c</a>
+: <a class="el" href="group__zwave__controller__callbacks.html#gabc2b2fe46f23b718d3abd1b879a162b2">zwave_controller_callbacks.c</a>
+, <a class="el" href="group__zwave__controller__callbacks.html#gabc2b2fe46f23b718d3abd1b879a162b2">zwave_controller_callbacks.h</a>
 </li>
 <li>zwave_controller_on_smart_start_inclusion_request()
 : <a class="el" href="group__zwave__controller__internal.html#ga8a10b80b992a01130b65fb44c94f1942">zwave_controller_callbacks.c</a>
 , <a class="el" href="group__zwave__controller__internal.html#ga8a10b80b992a01130b65fb44c94f1942">zwave_controller_internal.h</a>
 </li>
 <li>zwave_controller_on_state_updated()
-: <a class="el" href="group__zwave__controller__internal.html#ga48d2e96f3ec5e89ee752790dcaca7960">zwave_controller_callbacks.c</a>
-, <a class="el" href="group__zwave__controller__internal.html#ga48d2e96f3ec5e89ee752790dcaca7960">zwave_controller_internal.h</a>
+: <a class="el" href="group__zwave__controller__internal.html#ga48d2e96f3ec5e89ee752790dcaca7960">zwave_controller_internal.h</a>
+, <a class="el" href="group__zwave__controller__internal.html#ga48d2e96f3ec5e89ee752790dcaca7960">zwave_controller_callbacks.c</a>
 </li>
 <li>zwave_controller_region_t
 : <a class="el" href="zwave__controller__types_8h.html#abdce6a30dd05643fe69bca63c10e067d">zwave_controller_types.h</a>
 </li>
 <li>zwave_controller_register_callbacks()
-: <a class="el" href="group__zwave__controller__callbacks.html#ga12b82fdf317e0eb3bf314a037c7ae855">zwave_controller_callbacks.c</a>
-, <a class="el" href="group__zwave__controller__callbacks.html#ga12b82fdf317e0eb3bf314a037c7ae855">zwave_controller_callbacks.h</a>
+: <a class="el" href="group__zwave__controller__callbacks.html#ga12b82fdf317e0eb3bf314a037c7ae855">zwave_controller_callbacks.h</a>
+, <a class="el" href="group__zwave__controller__callbacks.html#ga12b82fdf317e0eb3bf314a037c7ae855">zwave_controller_callbacks.c</a>
 </li>
 <li>zwave_controller_register_reset_step()
-: <a class="el" href="group__zwave__controller__callbacks.html#ga03053680af8662ef6fe9edf17d790eca">zwave_controller_callbacks.c</a>
-, <a class="el" href="group__zwave__controller__callbacks.html#ga03053680af8662ef6fe9edf17d790eca">zwave_controller_callbacks.h</a>
+: <a class="el" href="group__zwave__controller__callbacks.html#ga03053680af8662ef6fe9edf17d790eca">zwave_controller_callbacks.h</a>
+, <a class="el" href="group__zwave__controller__callbacks.html#ga03053680af8662ef6fe9edf17d790eca">zwave_controller_callbacks.c</a>
 </li>
 <li>zwave_controller_reset()
 : <a class="el" href="group__zwave__controller.html#ga003007299b737f9636f1a99442e22c3a">zwave_controller.h</a>
@@ -2052,14 +2080,17 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__zwave__controller.html#ga35c0407648757629f7e74017fe81cfb2">zwave_controller.c</a>
 </li>
 <li>zwave_controller_set_secure_application_nif()
-: <a class="el" href="group__zwave__controller.html#ga9bb84d2fd8efe19d2f01cb431b3a3d27">zwave_controller.h</a>
-, <a class="el" href="group__zwave__controller.html#ga9bb84d2fd8efe19d2f01cb431b3a3d27">zwave_controller.c</a>
+: <a class="el" href="group__zwave__controller.html#ga9bb84d2fd8efe19d2f01cb431b3a3d27">zwave_controller.c</a>
+, <a class="el" href="group__zwave__controller.html#ga9bb84d2fd8efe19d2f01cb431b3a3d27">zwave_controller.h</a>
+</li>
+<li>ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY
+: <a class="el" href="group__zwave__controller__callbacks.html#ga9d47b901a05c30859bea3ce34ce36c89">zwave_controller_callbacks.h</a>
 </li>
 <li>zwave_controller_transport_init()
 : <a class="el" href="zwave__controller__transport__internal_8h.html#a0e9a451a65fad72b55a3cac729e555ab">zwave_controller_transport_internal.h</a>
 </li>
 <li>zwave_controller_transport_is_encapsulation_cc()
-: <a class="el" href="group__zwave__controller__transport.html#ga746b0933ccc978a9cfe9313488da82f9">zwave_controller_transport.h</a>
+: <a class="el" href="group__zwave__controller__transport.html#gac2a2517636452c80d8b6384fbc6963ac">zwave_controller_transport.h</a>
 </li>
 <li>zwave_controller_transport_on_frame_received()
 : <a class="el" href="zwave__controller__transport__internal_8h.html#ab1d371c3594b30fb5e48405df834696a">zwave_controller_transport_internal.h</a>
@@ -2072,6 +2103,12 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 </li>
 <li>zwave_controller_transport_t
 : <a class="el" href="group__zwave__controller__transport.html#gaf72b6c663101c48945fda0c4c31c0c61">zwave_controller_transport.h</a>
+</li>
+<li>ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY
+: <a class="el" href="group__zwave__controller__callbacks.html#gacf03c126e4680e51fd814c06ab389134">zwave_controller_callbacks.h</a>
+</li>
+<li>ZWAVE_CONTROLLER_ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY
+: <a class="el" href="group__zwave__controller__callbacks.html#ga8d41dadb68943c85e8913a60f3e2b2fe">zwave_controller_callbacks.h</a>
 </li>
 <li>ZWAVE_DSK_LENGTH
 : <a class="el" href="zwave__controller__types_8h.html#ae0f25d7f5c4688bb3d6454c348572a84">zwave_controller_types.h</a>
@@ -2172,8 +2209,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__multi__channel__transport_8h.html#aa7f7def2350cbead6e65c3430702b0ee">zwave_multi_channel_transport.h</a>
 </li>
 <li>zwave_multi_channel_transport_init()
-: <a class="el" href="zwave__multi__channel__transport_8h.html#a41f607e54c3aedd8783d43f185df6c0a">zwave_multi_channel_transport.h</a>
-, <a class="el" href="zwave__multi__channel__transport_8c.html#a4e46df0ac5347f7ed59cbc1bd6a02360">zwave_multi_channel_transport.c</a>
+: <a class="el" href="zwave__multi__channel__transport_8c.html#a4e46df0ac5347f7ed59cbc1bd6a02360">zwave_multi_channel_transport.c</a>
+, <a class="el" href="zwave__multi__channel__transport_8h.html#a41f607e54c3aedd8783d43f185df6c0a">zwave_multi_channel_transport.h</a>
 </li>
 <li>zwave_multicast_group_id_t
 : <a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_controller_types.h</a>
@@ -2183,8 +2220,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__zwave__network__management.html#ga4f29e019031e0fea2e461121666c10de">zwave_network_management.h</a>
 </li>
 <li>zwave_network_management_add_node()
-: <a class="el" href="group__zwave__network__management.html#gabcb05aa3686ebc777a52d45f2cc093ad">zwave_network_management.h</a>
-, <a class="el" href="group__zwave__network__management.html#gabcb05aa3686ebc777a52d45f2cc093ad">zwave_network_management.c</a>
+: <a class="el" href="group__zwave__network__management.html#gabcb05aa3686ebc777a52d45f2cc093ad">zwave_network_management.c</a>
+, <a class="el" href="group__zwave__network__management.html#gabcb05aa3686ebc777a52d45f2cc093ad">zwave_network_management.h</a>
 </li>
 <li>zwave_network_management_add_node_with_dsk()
 : <a class="el" href="group__zwave__network__management.html#ga70d33229419c634dfb25b946dbc5eb7d">zwave_network_management.h</a>
@@ -2223,8 +2260,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="group__zwave__network__management.html#ga1e4c00e7d35cb0031bae20d80ce8dc4b">zwave_network_management.h</a>
 </li>
 <li>zwave_network_management_fixt_setup()
-: <a class="el" href="group__zwave__network__management__fixt.html#gaa8950dbf92037e3ec5e0385641176c98">zwave_network_management_fixt.h</a>
-, <a class="el" href="group__zwave__network__management__fixt.html#gaa8950dbf92037e3ec5e0385641176c98">zwave_network_management_fixt.c</a>
+: <a class="el" href="group__zwave__network__management__fixt.html#gaa8950dbf92037e3ec5e0385641176c98">zwave_network_management_fixt.c</a>
+, <a class="el" href="group__zwave__network__management__fixt.html#gaa8950dbf92037e3ec5e0385641176c98">zwave_network_management_fixt.h</a>
 </li>
 <li>zwave_network_management_fixt_teardown()
 : <a class="el" href="group__zwave__network__management__fixt.html#gae63db6a62bbb5734f7291465bd18a047">zwave_network_management_fixt.h</a>
@@ -2235,20 +2272,24 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__zwave__network__management.html#gae30cb70a49076bdf1809f281e63e694c">nm_state_machine.c</a>
 </li>
 <li>zwave_network_management_get_home_id()
-: <a class="el" href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">zwave_network_management.h</a>
-, <a class="el" href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">nm_state_machine.c</a>
+: <a class="el" href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">nm_state_machine.c</a>
+, <a class="el" href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">zwave_network_management.h</a>
 </li>
 <li>zwave_network_management_get_node_id()
-: <a class="el" href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">zwave_network_management.h</a>
-, <a class="el" href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">nm_state_machine.c</a>
+: <a class="el" href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">nm_state_machine.c</a>
+, <a class="el" href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">zwave_network_management.h</a>
 </li>
 <li>zwave_network_management_get_state()
 : <a class="el" href="group__zwave__network__management.html#gaaf0ce0b04ebf420e4f7e23e166121a35">zwave_network_management.h</a>
 , <a class="el" href="group__zwave__network__management.html#gaaf0ce0b04ebf420e4f7e23e166121a35">zwave_network_management.c</a>
 </li>
+<li>zwave_network_management_is_busy()
+: <a class="el" href="group__zwave__network__management.html#ga496a9fcbb21a3ffa39b17eeb532a70fa">zwave_network_management.c</a>
+, <a class="el" href="group__zwave__network__management.html#ga496a9fcbb21a3ffa39b17eeb532a70fa">zwave_network_management.h</a>
+</li>
 <li>zwave_network_management_is_zpc_sis()
-: <a class="el" href="group__zwave__network__management.html#ga10d248f803b45c70adf8ecec24308109">zwave_network_management.h</a>
-, <a class="el" href="group__zwave__network__management.html#ga10d248f803b45c70adf8ecec24308109">zwave_network_management.c</a>
+: <a class="el" href="group__zwave__network__management.html#ga10d248f803b45c70adf8ecec24308109">zwave_network_management.c</a>
+, <a class="el" href="group__zwave__network__management.html#ga10d248f803b45c70adf8ecec24308109">zwave_network_management.h</a>
 </li>
 <li>ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_AUTH
 : <a class="el" href="group__zwave__network__management.html#gga9b8e934334335348e5cf74df4ece6847a19b317d8b3c2bf60a32521418fe52c16">zwave_network_management.h</a>
@@ -2284,15 +2325,12 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="group__zwave__network__management.html#gga9b8e934334335348e5cf74df4ece6847ae5dee9ad715c777f64e5c1397ea74507">zwave_network_management.h</a>
 </li>
 <li>zwave_network_management_keys_set()
-: <a class="el" href="group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6">zwave_network_management.c</a>
-, <a class="el" href="group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6">zwave_network_management.h</a>
+: <a class="el" href="group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6">zwave_network_management.h</a>
+, <a class="el" href="group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6">zwave_network_management.c</a>
 </li>
 <li>zwave_network_management_learn_mode()
-: <a class="el" href="group__zwave__network__management.html#ga07ccc6d6a52b8f29ff5b818e69980209">zwave_network_management.c</a>
-, <a class="el" href="group__zwave__network__management.html#ga07ccc6d6a52b8f29ff5b818e69980209">zwave_network_management.h</a>
-</li>
-<li>zwave_network_management_proxy_inclusion()
-: <a class="el" href="group__zwave__network__management.html#ga872fa375783798e73036043b6cb97e00">zwave_network_management.h</a>
+: <a class="el" href="group__zwave__network__management.html#ga07ccc6d6a52b8f29ff5b818e69980209">zwave_network_management.h</a>
+, <a class="el" href="group__zwave__network__management.html#ga07ccc6d6a52b8f29ff5b818e69980209">zwave_network_management.c</a>
 </li>
 <li>zwave_network_management_remove_failed()
 : <a class="el" href="group__zwave__network__management.html#gade18f44167921855f974d5efb34f4837">zwave_network_management.h</a>
@@ -2302,27 +2340,21 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="group__zwave__network__management.html#ga9cf0dfbb0b6c2dcf64ff3d218eb7c839">zwave_network_management.c</a>
 , <a class="el" href="group__zwave__network__management.html#ga9cf0dfbb0b6c2dcf64ff3d218eb7c839">zwave_network_management.h</a>
 </li>
-<li>zwave_network_management_replace_failed()
-: <a class="el" href="group__zwave__network__management.html#ga033c09d10da40168bb60ebac8fa0e03a">zwave_network_management.h</a>
-</li>
 <li>zwave_network_management_request_node_neighbor_discovery()
 : <a class="el" href="group__zwave__network__management.html#ga529c2e3e0edac5ed86f98fe55fc77c57">zwave_network_management.h</a>
 , <a class="el" href="group__zwave__network__management.html#ga529c2e3e0edac5ed86f98fe55fc77c57">zwave_network_management.c</a>
-</li>
-<li>ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY
-: <a class="el" href="nm__state__machine_8h.html#a037d906bef1eaa3411eebfca6c1e385f">nm_state_machine.h</a>
 </li>
 <li>zwave_network_management_set_default()
 : <a class="el" href="group__zwave__network__management.html#ga6228fbce9b19e3ac23d9197b7f6f65c7">zwave_network_management.c</a>
 , <a class="el" href="group__zwave__network__management.html#ga6228fbce9b19e3ac23d9197b7f6f65c7">zwave_network_management.h</a>
 </li>
 <li>zwave_network_management_smart_start_enable()
-: <a class="el" href="group__zwave__network__management.html#ga5f1a2008d6e6e8dd3e180dcca878065b">zwave_network_management.c</a>
-, <a class="el" href="group__zwave__network__management.html#ga5f1a2008d6e6e8dd3e180dcca878065b">zwave_network_management.h</a>
+: <a class="el" href="group__zwave__network__management.html#ga5f1a2008d6e6e8dd3e180dcca878065b">zwave_network_management.h</a>
+, <a class="el" href="group__zwave__network__management.html#ga5f1a2008d6e6e8dd3e180dcca878065b">zwave_network_management.c</a>
 </li>
 <li>zwave_network_management_start_proxy_inclusion()
-: <a class="el" href="group__zwave__network__management.html#ga9423226296d636674ffa006952a5f172">zwave_network_management.c</a>
-, <a class="el" href="group__zwave__network__management.html#ga9423226296d636674ffa006952a5f172">zwave_network_management.h</a>
+: <a class="el" href="group__zwave__network__management.html#ga9423226296d636674ffa006952a5f172">zwave_network_management.h</a>
+, <a class="el" href="group__zwave__network__management.html#ga9423226296d636674ffa006952a5f172">zwave_network_management.c</a>
 </li>
 <li>zwave_network_management_state_t
 : <a class="el" href="group__zwave__network__management.html#ga151fc4231aa100f1acc0542648a17694">zwave_network_management_state.h</a>
@@ -2335,8 +2367,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__zwave__controller__utils.html#ga9427607701e7e0fd0126582293d1ed9d">zwave_controller_utils.h</a>
 </li>
 <li>zwave_node_get_command_class_version()
-: <a class="el" href="group__zwave__controller__utils.html#gab4265d8e64973b26350c948e934e1af9">zwave_controller_utils.c</a>
-, <a class="el" href="group__zwave__controller__utils.html#gab4265d8e64973b26350c948e934e1af9">zwave_controller_utils.h</a>
+: <a class="el" href="group__zwave__controller__utils.html#ga1fb87a67860c11e6e89930eb51fda21f">zwave_controller_utils.c</a>
+, <a class="el" href="group__zwave__controller__utils.html#ga1fb87a67860c11e6e89930eb51fda21f">zwave_controller_utils.h</a>
 </li>
 <li>zwave_node_id_basetype_t
 : <a class="el" href="group__ZWAPI__BASIS.html#gaec0c79eea18b5081d865431f87c3c574">zwapi_protocol_basis.h</a>
@@ -2400,10 +2432,10 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__controller__command__class__indices_8h.html#afcb5dff41940b8c01c44ce00ee911925">zwave_controller_command_class_indices.h</a>
 </li>
 <li>zwave_operating_mode
-: <a class="el" href="group__zwave__utils.html#gae08ff4e6c7eaf1776bacc293350f552d">zwave_utils.h</a>
+: <a class="el" href="zwave__generic__types_8h.html#ae08ff4e6c7eaf1776bacc293350f552d">zwave_generic_types.h</a>
 </li>
 <li>zwave_operating_mode_t
-: <a class="el" href="group__zwave__utils.html#ga8bbb481ea6707182dc397268b4de3846">zwave_utils.h</a>
+: <a class="el" href="zwave__generic__types_8h.html#a8bbb481ea6707182dc397268b4de3846">zwave_generic_types.h</a>
 </li>
 <li>zwave_parse_nif()
 : <a class="el" href="group__zwave__controller__utils.html#gae7aa94787eba3ff966f9307d973e43ba">zwave_controller_utils.c</a>
@@ -2413,13 +2445,13 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__controller__utils_8c.html#aa75fc83b24952e1842b8a5252869b56c">zwave_controller_utils.c</a>
 </li>
 <li>zwave_protocol
-: <a class="el" href="group__zwave__utils.html#gac806884442257ed7635f299b4ba7d998">zwave_utils.h</a>
+: <a class="el" href="zwave__generic__types_8h.html#ac806884442257ed7635f299b4ba7d998">zwave_generic_types.h</a>
 </li>
 <li>ZWAVE_PROTOCOL_COMMAND_CLASS
 : <a class="el" href="zwave__controller__command__class__indices_8h.html#a1bd49af7bd8fbfcd792798a716ec2bfa">zwave_controller_command_class_indices.h</a>
 </li>
 <li>zwave_protocol_t
-: <a class="el" href="group__zwave__utils.html#gaf5484bdd20ebce433593702cc9c26b9b">zwave_utils.h</a>
+: <a class="el" href="zwave__generic__types_8h.html#af5484bdd20ebce433593702cc9c26b9b">zwave_generic_types.h</a>
 </li>
 <li>ZWAVE_RF_REGION_ANZ
 : <a class="el" href="zwave__rf__region_8h.html#a95b50c6130340b3acb22cc85b1c2600aa664d3346328f2a322de90ecbcea1d682">zwave_rf_region.h</a>
@@ -2460,17 +2492,23 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 <li>ZWAVE_RF_REGION_US_LR
 : <a class="el" href="zwave__rf__region_8h.html#a95b50c6130340b3acb22cc85b1c2600aaaa0cb94cfefaae0bedbda1d24374f17e">zwave_rf_region.h</a>
 </li>
+<li>zwave_role_type
+: <a class="el" href="zwave__generic__types_8h.html#a2eb4b11d5765c72bca1b1d626fd93bcb">zwave_generic_types.h</a>
+</li>
+<li>zwave_role_type_t
+: <a class="el" href="zwave__generic__types_8h.html#a04b237ff90b9b6e537431f48980569d8">zwave_generic_types.h</a>
+</li>
 <li>zwave_rx_application_command_handler()
-: <a class="el" href="zwave__rx__zwapi__callbacks_8h.html#ad4081a8d944b8daad978322699bc01e3">zwave_rx_zwapi_callbacks.h</a>
-, <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#ad4081a8d944b8daad978322699bc01e3">zwave_rx_zwapi_callbacks.c</a>
+: <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#ad4081a8d944b8daad978322699bc01e3">zwave_rx_zwapi_callbacks.c</a>
+, <a class="el" href="zwave__rx__zwapi__callbacks_8h.html#ad4081a8d944b8daad978322699bc01e3">zwave_rx_zwapi_callbacks.h</a>
 </li>
 <li>zwave_rx_application_command_handler_bridge()
-: <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#aa36427751230efea8a45e11214b73e99">zwave_rx_zwapi_callbacks.c</a>
-, <a class="el" href="zwave__rx__zwapi__callbacks_8h.html#aa36427751230efea8a45e11214b73e99">zwave_rx_zwapi_callbacks.h</a>
+: <a class="el" href="zwave__rx__zwapi__callbacks_8h.html#aa36427751230efea8a45e11214b73e99">zwave_rx_zwapi_callbacks.h</a>
+, <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#aa36427751230efea8a45e11214b73e99">zwave_rx_zwapi_callbacks.c</a>
 </li>
 <li>zwave_rx_application_controller_update()
-: <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#ad8a7864d183b913f74d0f18edbf89f36">zwave_rx_zwapi_callbacks.c</a>
-, <a class="el" href="zwave__rx__zwapi__callbacks_8h.html#ad8a7864d183b913f74d0f18edbf89f36">zwave_rx_zwapi_callbacks.h</a>
+: <a class="el" href="zwave__rx__zwapi__callbacks_8h.html#ad8a7864d183b913f74d0f18edbf89f36">zwave_rx_zwapi_callbacks.h</a>
+, <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#ad8a7864d183b913f74d0f18edbf89f36">zwave_rx_zwapi_callbacks.c</a>
 </li>
 <li>ZWAVE_RX_FIXT_DEFAULT_RF_REGION
 : <a class="el" href="zwave__rx__fixt_8c.html#a34e5cf5f99b2deca337e33d9bde39a57">zwave_rx_fixt.c</a>
@@ -2504,8 +2542,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__rx_8c.html#ac7f59182746624a9c1be51f17015fd3a">zwave_rx.c</a>
 </li>
 <li>zwave_rx_shutdown()
-: <a class="el" href="zwave__rx_8c.html#aed3606fa8bb6eff34c27efe91c3525a6">zwave_rx.c</a>
-, <a class="el" href="zwave__rx__internals_8h.html#aed3606fa8bb6eff34c27efe91c3525a6">zwave_rx_internals.h</a>
+: <a class="el" href="zwave__rx__internals_8h.html#aed3606fa8bb6eff34c27efe91c3525a6">zwave_rx_internals.h</a>
+, <a class="el" href="zwave__rx_8c.html#aed3606fa8bb6eff34c27efe91c3525a6">zwave_rx.c</a>
 </li>
 <li>ZWAVE_RX_VERIFY_OVERFLOW
 : <a class="el" href="zwave__rx__internals_8h.html#a5271693400e97e0f87571a5868dcec92">zwave_rx_internals.h</a>
@@ -2517,32 +2555,32 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="zwave__rx_8c.html#ae32f1d4f52c3d9036e611dfeed3fdcee">zwave_rx.c</a>
 </li>
 <li>zwave_rx_zwave_api_started()
-: <a class="el" href="zwave__rx__zwapi__callbacks_8h.html#a716dfa7496a25ae66a5068fc21c3ef0c">zwave_rx_zwapi_callbacks.h</a>
-, <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#a716dfa7496a25ae66a5068fc21c3ef0c">zwave_rx_zwapi_callbacks.c</a>
+: <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#a716dfa7496a25ae66a5068fc21c3ef0c">zwave_rx_zwapi_callbacks.c</a>
+, <a class="el" href="zwave__rx__zwapi__callbacks_8h.html#a716dfa7496a25ae66a5068fc21c3ef0c">zwave_rx_zwapi_callbacks.h</a>
 </li>
 <li>zwave_s0_network_init()
-: <a class="el" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network.c</a>
-, <a class="el" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network.h</a>
+: <a class="el" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network.h</a>
+, <a class="el" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network.c</a>
 </li>
 <li>zwave_s0_on_frame_received()
 : <a class="el" href="zwave__s0__transport_8h.html#a075cd6959f4f2b9cbd757c5d43f97820">zwave_s0_transport.h</a>
 , <a class="el" href="zwave__s0__transport_8c.html#ac210111a0dea1ced8357694a75f4f03b">zwave_s0_transport.c</a>
 </li>
 <li>zwave_s0_send_data()
-: <a class="el" href="zwave__s0__transport_8h.html#ae1fe787c412080fb3f718d5a18e006ea">zwave_s0_transport.h</a>
-, <a class="el" href="zwave__s0__transport_8c.html#a570b0e517c20de66716b86a4c1b515bc">zwave_s0_transport.c</a>
+: <a class="el" href="zwave__s0__transport_8c.html#a570b0e517c20de66716b86a4c1b515bc">zwave_s0_transport.c</a>
+, <a class="el" href="zwave__s0__transport_8h.html#ae1fe787c412080fb3f718d5a18e006ea">zwave_s0_transport.h</a>
 </li>
 <li>zwave_s0_set_network_callbacks()
-: <a class="el" href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_network.c</a>
-, <a class="el" href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_network.h</a>
+: <a class="el" href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_network.h</a>
+, <a class="el" href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_network.c</a>
 </li>
 <li>zwave_s0_start_bootstrapping()
 : <a class="el" href="group__zwave__s0.html#ga27e4137188b19b88cf40318f7fea87dc">zwave_s0_network.h</a>
 , <a class="el" href="group__zwave__s0.html#ga27e4137188b19b88cf40318f7fea87dc">zwave_s0_network.c</a>
 </li>
 <li>zwave_s0_transport_init()
-: <a class="el" href="zwave__s0__transport_8h.html#a7fcd7083b5fe3b6b2838d0d64f815f53">zwave_s0_transport.h</a>
-, <a class="el" href="zwave__s0__transport_8c.html#af77837497bf85a6f14cf49fac0278b1b">zwave_s0_transport.c</a>
+: <a class="el" href="zwave__s0__transport_8c.html#af77837497bf85a6f14cf49fac0278b1b">zwave_s0_transport.c</a>
+, <a class="el" href="zwave__s0__transport_8h.html#a7fcd7083b5fe3b6b2838d0d64f815f53">zwave_s0_transport.h</a>
 </li>
 <li>zwave_s2_abort_join()
 : <a class="el" href="zwave__s2__network_8h.html#a074221d8ef753fa390a9313612d2fde8">zwave_s2_network.h</a>
@@ -2566,8 +2604,8 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="zwave__s2__network_8c.html#ab663ce0b3e451f798a3b53fba3a936c1">zwave_s2_network.c</a>
 </li>
 <li>zwave_s2_fixt_setup()
-: <a class="el" href="zwave__s2__fixt_8c.html#a1af45353b0982d4cc58858472e65d122">zwave_s2_fixt.c</a>
-, <a class="el" href="zwave__s2__fixt_8h.html#a1af45353b0982d4cc58858472e65d122">zwave_s2_fixt.h</a>
+: <a class="el" href="zwave__s2__fixt_8h.html#a1af45353b0982d4cc58858472e65d122">zwave_s2_fixt.h</a>
+, <a class="el" href="zwave__s2__fixt_8c.html#a1af45353b0982d4cc58858472e65d122">zwave_s2_fixt.c</a>
 </li>
 <li>zwave_s2_init()
 : <a class="el" href="zwave__s2__process_8c.html#a51f51bd8129a84a685510bf2aaa812a9">zwave_s2_process.c</a>
@@ -2587,34 +2625,38 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="group__zwave__s2__keystore.html#ga42cbe7b3856c32fcde78b52c3b0be2ae">zwave_s2_keystore.h</a>
 </li>
 <li>zwave_s2_keystore_get_dsk()
-: <a class="el" href="group__zwave__s2__keystore.html#gaaa90915209c3b118a05cc8adb221f83e">zwave_s2_keystore.h</a>
-, <a class="el" href="group__zwave__s2__keystore.html#gaaa90915209c3b118a05cc8adb221f83e">zwave_s2_keystore.c</a>
+: <a class="el" href="group__zwave__s2__keystore.html#gaaa90915209c3b118a05cc8adb221f83e">zwave_s2_keystore.c</a>
+, <a class="el" href="group__zwave__s2__keystore.html#gaaa90915209c3b118a05cc8adb221f83e">zwave_s2_keystore.h</a>
 </li>
 <li>zwave_s2_keystore_init()
 : <a class="el" href="group__zwave__s2__keystore.html#gad872f58f76c4d4974b5fe50ac641004b">zwave_s2_keystore_int.h</a>
 , <a class="el" href="group__zwave__s2__keystore.html#gad872f58f76c4d4974b5fe50ac641004b">zwave_s2_keystore.c</a>
 </li>
 <li>zwave_s2_keystore_set_ecdh_key_mode()
-: <a class="el" href="group__zwave__s2__keystore.html#ga0a7d6a1c6107a1eadcdd959fe53dd229">zwave_s2_keystore.c</a>
-, <a class="el" href="group__zwave__s2__keystore.html#ga0a7d6a1c6107a1eadcdd959fe53dd229">zwave_s2_keystore_int.h</a>
+: <a class="el" href="group__zwave__s2__keystore.html#ga0a7d6a1c6107a1eadcdd959fe53dd229">zwave_s2_keystore_int.h</a>
+, <a class="el" href="group__zwave__s2__keystore.html#ga0a7d6a1c6107a1eadcdd959fe53dd229">zwave_s2_keystore.c</a>
 </li>
 <li>ZWAVE_S2_KEYSTORE_STATIC_ECDH_KEY
 : <a class="el" href="group__zwave__s2__keystore.html#gga35f3a041ee4a3465cf4675357f420cb8ad230e2d1c6e316af6b091113ef4b6cd5">zwave_s2_keystore.h</a>
 </li>
+<li>zwave_s2_log_security_keys()
+: <a class="el" href="group__zwave__s2__keystore.html#ga6e7eb7c062ee0f17a650a0e7ca7c9831">zwave_s2_keystore.h</a>
+, <a class="el" href="group__zwave__s2__keystore.html#ga6e7eb7c062ee0f17a650a0e7ca7c9831">zwave_s2_keystore.c</a>
+</li>
 <li>zwave_s2_neighbor_discovery_complete()
-: <a class="el" href="zwave__s2__network_8c.html#a725f9d02cf5844e32c7e03a997ee20f6">zwave_s2_network.c</a>
-, <a class="el" href="zwave__s2__network_8h.html#a725f9d02cf5844e32c7e03a997ee20f6">zwave_s2_network.h</a>
+: <a class="el" href="zwave__s2__network_8h.html#a725f9d02cf5844e32c7e03a997ee20f6">zwave_s2_network.h</a>
+, <a class="el" href="zwave__s2__network_8c.html#a725f9d02cf5844e32c7e03a997ee20f6">zwave_s2_network.c</a>
 </li>
 <li>zwave_s2_network_callbacks_t
 : <a class="el" href="zwave__s2__network_8h.html#a4c03d9d281a119324b565f10c276f0a3">zwave_s2_network.h</a>
 </li>
 <li>zwave_s2_network_init()
-: <a class="el" href="zwave__s2__network_8h.html#a0be26cd9f5167a9c1f8cbe812b6b899f">zwave_s2_network.h</a>
-, <a class="el" href="zwave__s2__network_8c.html#a0be26cd9f5167a9c1f8cbe812b6b899f">zwave_s2_network.c</a>
+: <a class="el" href="zwave__s2__network_8c.html#a0be26cd9f5167a9c1f8cbe812b6b899f">zwave_s2_network.c</a>
+, <a class="el" href="zwave__s2__network_8h.html#a0be26cd9f5167a9c1f8cbe812b6b899f">zwave_s2_network.h</a>
 </li>
 <li>zwave_s2_on_frame_received()
-: <a class="el" href="zwave__s2__transport_8c.html#a98eccab8e2cd831c0286fd3e41bfaea5">zwave_s2_transport.c</a>
-, <a class="el" href="zwave__s2__internal_8h.html#a98eccab8e2cd831c0286fd3e41bfaea5">zwave_s2_internal.h</a>
+: <a class="el" href="zwave__s2__internal_8h.html#a98eccab8e2cd831c0286fd3e41bfaea5">zwave_s2_internal.h</a>
+, <a class="el" href="zwave__s2__transport_8c.html#a98eccab8e2cd831c0286fd3e41bfaea5">zwave_s2_transport.c</a>
 </li>
 <li>zwave_s2_on_new_network_entered()
 : <a class="el" href="zwave__s2__process_8c.html#a517b0574bf5a727ab367104eb856efaf">zwave_s2_process.c</a>
@@ -2628,12 +2670,12 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="zwave__s2__transport_8c.html#a3ed55d2315fdd494c0e209f5e31986f9">zwave_s2_transport.c</a>
 </li>
 <li>zwave_s2_set_network_callbacks()
-: <a class="el" href="zwave__s2__network_8h.html#a7af4fbf520536f7ecdd7732f4c384091">zwave_s2_network.h</a>
-, <a class="el" href="zwave__s2__network_8c.html#a7af4fbf520536f7ecdd7732f4c384091">zwave_s2_network.c</a>
+: <a class="el" href="zwave__s2__network_8c.html#a7af4fbf520536f7ecdd7732f4c384091">zwave_s2_network.c</a>
+, <a class="el" href="zwave__s2__network_8h.html#a7af4fbf520536f7ecdd7732f4c384091">zwave_s2_network.h</a>
 </li>
 <li>zwave_s2_set_secure_nif()
-: <a class="el" href="zwave__s2__transport_8c.html#a0a70fd417320eafd4816d2441d9b4776">zwave_s2_transport.c</a>
-, <a class="el" href="zwave__s2__transport_8h.html#a71c8259f91a29186d6527db5e23ff71c">zwave_s2_transport.h</a>
+: <a class="el" href="zwave__s2__transport_8h.html#a71c8259f91a29186d6527db5e23ff71c">zwave_s2_transport.h</a>
+, <a class="el" href="zwave__s2__transport_8c.html#a0a70fd417320eafd4816d2441d9b4776">zwave_s2_transport.c</a>
 </li>
 <li>zwave_s2_start_add_node()
 : <a class="el" href="zwave__s2__network_8c.html#adcf6400ad79675fc65ef0476d2525c1b">zwave_s2_network.c</a>
@@ -2648,32 +2690,32 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 , <a class="el" href="zwave__s2__transport_8h.html#ab1c23b4068ab68699bb2c34896bb565f">zwave_s2_transport.h</a>
 </li>
 <li>zwave_security_validation_is_node_s2_capable()
-: <a class="el" href="group__zwave__security__validation.html#ga45c2f13cc52763102c4016d07576cbc4">zwave_security_validation.h</a>
-, <a class="el" href="group__zwave__security__validation.html#ga45c2f13cc52763102c4016d07576cbc4">zwave_security_validation.c</a>
+: <a class="el" href="group__zwave__security__validation.html#ga45c2f13cc52763102c4016d07576cbc4">zwave_security_validation.c</a>
+, <a class="el" href="group__zwave__security__validation.html#ga45c2f13cc52763102c4016d07576cbc4">zwave_security_validation.h</a>
 </li>
 <li>zwave_security_validation_is_s2_nif_downgrade_attack_detected()
 : <a class="el" href="group__zwave__security__validation.html#ga83d2429dc872b553f71b3ca3d1ff1108">zwave_security_validation.h</a>
 , <a class="el" href="group__zwave__security__validation.html#ga83d2429dc872b553f71b3ca3d1ff1108">zwave_security_validation.c</a>
 </li>
 <li>zwave_security_validation_is_security_valid_for_control()
-: <a class="el" href="group__zwave__security__validation.html#ga88e833788fe114c71de5fca53f572c1e">zwave_security_validation.h</a>
-, <a class="el" href="group__zwave__security__validation.html#ga88e833788fe114c71de5fca53f572c1e">zwave_security_validation.c</a>
+: <a class="el" href="group__zwave__security__validation.html#ga88e833788fe114c71de5fca53f572c1e">zwave_security_validation.c</a>
+, <a class="el" href="group__zwave__security__validation.html#ga88e833788fe114c71de5fca53f572c1e">zwave_security_validation.h</a>
 </li>
 <li>zwave_security_validation_is_security_valid_for_support()
 : <a class="el" href="group__zwave__security__validation.html#ga8f0224aa1344af06e424ee8e86214f6a">zwave_security_validation.c</a>
 , <a class="el" href="group__zwave__security__validation.html#ga8f0224aa1344af06e424ee8e86214f6a">zwave_security_validation.h</a>
 </li>
 <li>zwave_security_validation_set_node_as_s2_capable()
-: <a class="el" href="group__zwave__security__validation.html#ga65be55bf46158201858695ec961f5b52">zwave_security_validation.c</a>
-, <a class="el" href="group__zwave__security__validation.html#ga65be55bf46158201858695ec961f5b52">zwave_security_validation.h</a>
+: <a class="el" href="group__zwave__security__validation.html#ga65be55bf46158201858695ec961f5b52">zwave_security_validation.h</a>
+, <a class="el" href="group__zwave__security__validation.html#ga65be55bf46158201858695ec961f5b52">zwave_security_validation.c</a>
 </li>
 <li>zwave_sl_log_dsk()
 : <a class="el" href="group__zwave__controller__utils.html#ga26e71271bcc52cca1f6bda38597da89a">zwave_controller_utils.h</a>
 , <a class="el" href="group__zwave__controller__utils.html#ga26e71271bcc52cca1f6bda38597da89a">zwave_controller_utils.c</a>
 </li>
 <li>zwave_sl_log_frame_data()
-: <a class="el" href="group__zwave__controller__utils.html#ga2ac386a76b31bf71971f04bdea180eac">zwave_controller_utils.h</a>
-, <a class="el" href="group__zwave__controller__utils.html#ga2ac386a76b31bf71971f04bdea180eac">zwave_controller_utils.c</a>
+: <a class="el" href="group__zwave__controller__utils.html#ga2ac386a76b31bf71971f04bdea180eac">zwave_controller_utils.c</a>
+, <a class="el" href="group__zwave__controller__utils.html#ga2ac386a76b31bf71971f04bdea180eac">zwave_controller_utils.h</a>
 </li>
 <li>zwave_sl_log_nif_data()
 : <a class="el" href="group__zwave__controller__utils.html#ga876f5cc57f782a87e5eceb3d307700e8">zwave_controller_utils.h</a>
@@ -2686,12 +2728,12 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="group__zwave__command__class__supervision__internals.html#ga104600291f40dbacfdb4e3127fe58830">zwave_command_class_supervision_internals.h</a>
 </li>
 <li>zwave_transport_service_on_frame_received()
-: <a class="el" href="zwave__transport__service_8h.html#a6e17e67e0196ee1c86a12fa9608f8d15">zwave_transport_service.h</a>
-, <a class="el" href="zwave__transport__service__wrapper_8c.html#a836e1af25a73aef2bc515da73660cd3b">zwave_transport_service_wrapper.c</a>
+: <a class="el" href="zwave__transport__service__wrapper_8c.html#a836e1af25a73aef2bc515da73660cd3b">zwave_transport_service_wrapper.c</a>
+, <a class="el" href="zwave__transport__service_8h.html#a836e1af25a73aef2bc515da73660cd3b">zwave_transport_service.h</a>
 </li>
 <li>zwave_transport_service_send_data()
-: <a class="el" href="zwave__transport__service__wrapper_8c.html#a25392f1b13e9fd8f33a3f54834c806df">zwave_transport_service_wrapper.c</a>
-, <a class="el" href="zwave__transport__service_8h.html#a6216ae3a018a4028bfc3025695784f0e">zwave_transport_service.h</a>
+: <a class="el" href="zwave__transport__service_8h.html#a6216ae3a018a4028bfc3025695784f0e">zwave_transport_service.h</a>
+, <a class="el" href="zwave__transport__service__wrapper_8c.html#a25392f1b13e9fd8f33a3f54834c806df">zwave_transport_service_wrapper.c</a>
 </li>
 <li>zwave_transport_service_transport_init()
 : <a class="el" href="zwave__transport__service__wrapper_8c.html#ad02263e40b63853166ac8a7601954f33">zwave_transport_service_wrapper.c</a>
@@ -2754,9 +2796,12 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 <li>zwave_tx_log_queue()
 : <a class="el" href="group__zwave__tx__interface.html#ga4b1785eddaa2ebfc6a702d9b4d0b27a3">zwave_tx.h</a>
 </li>
+<li>zwave_tx_number_of_responses
+: <a class="el" href="zwave__transport__service__wrapper_8c.html#afba0fd6c50afc700313b2d8ae7da82af">zwave_transport_service_wrapper.c</a>
+</li>
 <li>zwave_tx_on_frame_received()
-: <a class="el" href="group__zwave__tx__callbacks.html#ga511df59a2e84d200627f25df99f8068c">zwave_tx_callbacks.h</a>
-, <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#a511df59a2e84d200627f25df99f8068c">zwave_rx_zwapi_callbacks.c</a>
+: <a class="el" href="zwave__rx__zwapi__callbacks_8c.html#a511df59a2e84d200627f25df99f8068c">zwave_rx_zwapi_callbacks.c</a>
+, <a class="el" href="group__zwave__tx__callbacks.html#ga511df59a2e84d200627f25df99f8068c">zwave_tx_callbacks.h</a>
 </li>
 <li>zwave_tx_on_node_info_req_failed()
 : <a class="el" href="group__zwave__tx__callbacks.html#gaaefb6471f232c757e1650cd8a692f2d0">zwave_tx_callbacks.h</a>
@@ -2770,6 +2815,7 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 <li>zwave_tx_parent_session_id
 : <a class="el" href="zwave__s2__transport_8c.html#a4c25d4f9b45f89392d63d76e2b95cd02">zwave_s2_transport.c</a>
 , <a class="el" href="zwave__s0__transport_8c.html#a4c25d4f9b45f89392d63d76e2b95cd02">zwave_s0_transport.c</a>
+, <a class="el" href="zwave__transport__service__wrapper_8c.html#a4c25d4f9b45f89392d63d76e2b95cd02">zwave_transport_service_wrapper.c</a>
 </li>
 <li>zwave_tx_process_abort_transmission()
 : <a class="el" href="group__zwave__tx__process.html#gacfa786d79b6e21edba7a05921c94f24d">zwave_tx_process.h</a>
@@ -2807,25 +2853,29 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 <li>ZWAVE_TX_SAFE_LOWEST_MAX_PAYLOAD
 : <a class="el" href="group__zwave__tx__scheme__selector.html#ga6f9d1b8df2060b034cab2440d33a1eee">zwave_tx_scheme_selector.h</a>
 </li>
+<li>zwave_tx_scheme_get_max_application_payload()
+: <a class="el" href="group__zwave__tx__scheme__selector.html#ga6128c675d7c258737616e44ef823516d">zwave_tx_scheme_selector.c</a>
+, <a class="el" href="group__zwave__tx__scheme__selector.html#ga6128c675d7c258737616e44ef823516d">zwave_tx_scheme_selector.h</a>
+</li>
 <li>zwave_tx_scheme_get_max_payload()
-: <a class="el" href="group__zwave__tx__scheme__selector.html#ga1c7a42811336fe3f28d9397a455828f7">zwave_tx_scheme_selector.h</a>
-, <a class="el" href="group__zwave__tx__scheme__selector.html#ga1c7a42811336fe3f28d9397a455828f7">zwave_tx_scheme_selector.c</a>
+: <a class="el" href="group__zwave__tx__scheme__selector.html#gab15d83efc0084ff753e16826ce063136">zwave_tx_scheme_selector.h</a>
+, <a class="el" href="group__zwave__tx__scheme__selector.html#gab15d83efc0084ff753e16826ce063136">zwave_tx_scheme_selector.c</a>
 </li>
 <li>zwave_tx_scheme_get_node_connection_info()
-: <a class="el" href="group__zwave__tx__scheme__selector.html#ga2c884bc863b6f63eac2a074fdde828d8">zwave_tx_scheme_selector.c</a>
-, <a class="el" href="group__zwave__tx__scheme__selector.html#ga2c884bc863b6f63eac2a074fdde828d8">zwave_tx_scheme_selector.h</a>
+: <a class="el" href="group__zwave__tx__scheme__selector.html#ga2c884bc863b6f63eac2a074fdde828d8">zwave_tx_scheme_selector.h</a>
+, <a class="el" href="group__zwave__tx__scheme__selector.html#ga2c884bc863b6f63eac2a074fdde828d8">zwave_tx_scheme_selector.c</a>
 </li>
 <li>zwave_tx_scheme_get_node_granted_keys()
-: <a class="el" href="group__zwave__tx__scheme__selector.html#ga1b28ff5a376c1505c6c3d7c2a0413784">zwave_tx_scheme_selector.h</a>
-, <a class="el" href="group__zwave__tx__scheme__selector.html#ga1b28ff5a376c1505c6c3d7c2a0413784">zwave_tx_scheme_selector.c</a>
+: <a class="el" href="group__zwave__tx__scheme__selector.html#ga1b28ff5a376c1505c6c3d7c2a0413784">zwave_tx_scheme_selector.c</a>
+, <a class="el" href="group__zwave__tx__scheme__selector.html#ga1b28ff5a376c1505c6c3d7c2a0413784">zwave_tx_scheme_selector.h</a>
 </li>
 <li>zwave_tx_scheme_get_node_highest_security_class()
-: <a class="el" href="group__zwave__tx__scheme__selector.html#ga0efa34ef87df3cef0f14ac47c733d491">zwave_tx_scheme_selector.c</a>
-, <a class="el" href="group__zwave__tx__scheme__selector.html#ga0efa34ef87df3cef0f14ac47c733d491">zwave_tx_scheme_selector.h</a>
+: <a class="el" href="group__zwave__tx__scheme__selector.html#ga0efa34ef87df3cef0f14ac47c733d491">zwave_tx_scheme_selector.h</a>
+, <a class="el" href="group__zwave__tx__scheme__selector.html#ga0efa34ef87df3cef0f14ac47c733d491">zwave_tx_scheme_selector.c</a>
 </li>
 <li>zwave_tx_scheme_get_node_tx_options()
-: <a class="el" href="group__zwave__tx__scheme__selector.html#ga8f8d4442ddf4c165d5a79b9a25d6420d">zwave_tx_scheme_selector.c</a>
-, <a class="el" href="group__zwave__tx__scheme__selector.html#ga8f8d4442ddf4c165d5a79b9a25d6420d">zwave_tx_scheme_selector.h</a>
+: <a class="el" href="group__zwave__tx__scheme__selector.html#ga8f8d4442ddf4c165d5a79b9a25d6420d">zwave_tx_scheme_selector.h</a>
+, <a class="el" href="group__zwave__tx__scheme__selector.html#ga8f8d4442ddf4c165d5a79b9a25d6420d">zwave_tx_scheme_selector.c</a>
 </li>
 <li>zwave_tx_scheme_get_zpc_granted_keys()
 : <a class="el" href="group__zwave__tx__scheme__selector.html#ga13b472eb06e679638bad680aa33825db">zwave_tx_scheme_selector.c</a>
@@ -2881,11 +2931,12 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="group__zwave__tx__groups.html#ga08693ca0195e6f5921a7065a733ca324">zwave_tx_groups.h</a>
 </li>
 <li>zwave_tx_use_parent_frame_options
-: <a class="el" href="zwave__s2__transport_8c.html#ad371b7f9203c56958f2da1504392e01b">zwave_s2_transport.c</a>
-, <a class="el" href="zwave__s0__transport_8c.html#ad371b7f9203c56958f2da1504392e01b">zwave_s0_transport.c</a>
+: <a class="el" href="zwave__s0__transport_8c.html#ad371b7f9203c56958f2da1504392e01b">zwave_s0_transport.c</a>
+, <a class="el" href="zwave__s2__transport_8c.html#ad371b7f9203c56958f2da1504392e01b">zwave_s2_transport.c</a>
 </li>
 <li>zwave_tx_valid_parent_session_id
 : <a class="el" href="zwave__s2__transport_8c.html#a073139acc1baa825c6aa1ce39652a763">zwave_s2_transport.c</a>
+, <a class="el" href="zwave__transport__service__wrapper_8c.html#a073139acc1baa825c6aa1ce39652a763">zwave_transport_service_wrapper.c</a>
 , <a class="el" href="zwave__s0__transport_8c.html#a073139acc1baa825c6aa1ce39652a763">zwave_s0_transport.c</a>
 </li>
 <li>zwave_unid_from_node_id()
@@ -2904,6 +2955,9 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 : <a class="el" href="group__zpc__utils.html#ga76885767debd174e96e6df00b0a368c3">zwave_unid.c</a>
 , <a class="el" href="group__zpc__utils.html#ga76885767debd174e96e6df00b0a368c3">zwave_unid.h</a>
 </li>
+<li>zwave_version_hardware_version_t
+: <a class="el" href="zwave__command__class__version__types_8h.html#a7cc4aab693f999dad028cd5c2fbffd09">zwave_command_class_version_types.h</a>
+</li>
 <li>ZWAVEPLUS_VERSION_V2
 : <a class="el" href="zwave__command__class__zwave__plus__info_8h.html#ad6f25e7d6c5bb3b34414ec2ca04a6754">zwave_command_class_zwave_plus_info.h</a>
 </li>
@@ -2913,7 +2967,7 @@ $(document).ready(function(){initNavTree('globals_z.html',''); initResizable(); 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:58 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:51 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

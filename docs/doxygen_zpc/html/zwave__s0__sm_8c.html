@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -172,8 +172,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a6f16899e498cbd0eeb2e3e52a732decf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a6f16899e498cbd0eeb2e3e52a732decf">s0_scheme_report_received</a> (const uint8_t scheme, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> from_node)</td></tr>
 <tr class="memdesc:a6f16899e498cbd0eeb2e3e52a732decf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to notify the S0 Inclusion state machine that S0 Scheme report frame was received.  <a href="zwave__s0__sm_8c.html#a6f16899e498cbd0eeb2e3e52a732decf">More...</a><br /></td></tr>
 <tr class="separator:a6f16899e498cbd0eeb2e3e52a732decf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a192f059113df9bd33baf29380b1ba294"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a192f059113df9bd33baf29380b1ba294">s0_handle_scheme_report</a> ()</td></tr>
-<tr class="separator:a192f059113df9bd33baf29380b1ba294"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4101f12d142bd597954a665c6acc700"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#ab4101f12d142bd597954a665c6acc700">s0_handle_net_key_verify</a> ()</td></tr>
 <tr class="separator:ab4101f12d142bd597954a665c6acc700"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84e7be6182bb4e2f919fb2a3733e6ca1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a84e7be6182bb4e2f919fb2a3733e6ca1">s0_sm_process_event</a> (uint16_t evt)</td></tr>
@@ -528,10 +526,11 @@ License</h1>
 </div><div class="memdoc">
 
 <p>Start the S0 add node process. </p>
-<p>Calling this function will make the S0 FSM start the bootstrap process of a newly added node. This must be called right after ADD_NODE_DONE event for nodes supporting COMMAND_CLASS_SECURITY2</p>
+<p>Calling this function will make the S0 FSM start the bootstrap process of a newly added node. This must be called right after ADD_NODE_DONE event for nodes supporting COMMAND_CLASS_SECURITY</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">node_id</td><td>The node we wish to include </td></tr>
+    <tr><td class="paramname">conn</td><td>zwave_controller_connection_info_t structure </td></tr>
+    <tr><td class="paramname">is_controller</td><td>If the node being included controller. To do extra S0 boot strapping steps for controllers </td></tr>
   </table>
   </dd>
 </dl>
@@ -564,23 +563,6 @@ License</h1>
       <table class="memname">
         <tr>
           <td class="memname">void s0_handle_net_key_verify </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a192f059113df9bd33baf29380b1ba294"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a192f059113df9bd33baf29380b1ba294">&#9670;&nbsp;</a></span>s0_handle_scheme_report()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void s0_handle_scheme_report </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -912,7 +894,7 @@ License</h1>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_755ae2411314d71b54e2ffe5b00038d7.html">s0</a></li><li class="navelem"><a class="el" href="dir_a574612eed7c27ed0dbfd75f745bb010.html">src</a></li><li class="navelem"><a class="el" href="zwave__s0__sm_8c.html">zwave_s0_sm.c</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

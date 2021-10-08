@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -105,7 +105,7 @@ Modules</h2></td></tr>
 <tr class="memdesc:group__zwave__command__handler__callbacks"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of callback functions that are registered to the <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a>. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__zwave__command__handler__internals"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler__internals.html">Internal definitions for the Z-Wave Command Handler</a></td></tr>
-<tr class="memdesc:group__zwave__command__handler__internals"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared internal functions and variables for the Z-Wave Command Handler. <br /></td></tr>
+<tr class="memdesc:group__zwave__command__handler__internals"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared internal functions and variables for the Z-Wave Command Handler. *. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -131,9 +131,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gae1313215c0459775bb126a2ba636eb2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler.html#gae1313215c0459775bb126a2ba636eb2f">zwave_command_handler_register_handler</a> (<a class="el" href="structzwave__command__handler__t.html">zwave_command_handler_t</a> new_command_class_handler)</td></tr>
 <tr class="memdesc:gae1313215c0459775bb126a2ba636eb2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a command class handler.  <a href="group__zwave__command__handler.html#gae1313215c0459775bb126a2ba636eb2f">More...</a><br /></td></tr>
 <tr class="separator:gae1313215c0459775bb126a2ba636eb2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga74899d8809a1d53e5251e33f6de59841"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler.html#ga74899d8809a1d53e5251e33f6de59841">zwave_command_handler_get_version</a> (<a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> command_class)</td></tr>
-<tr class="memdesc:ga74899d8809a1d53e5251e33f6de59841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the version of Command Class that the handler handles.  <a href="group__zwave__command__handler.html#ga74899d8809a1d53e5251e33f6de59841">More...</a><br /></td></tr>
-<tr class="separator:ga74899d8809a1d53e5251e33f6de59841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaac5bc2ca2660912ba6bda3ca8a6b1912"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__command__class__version__types_8h.html#aad4ed685a718abe0fd70f07f949a4907">zwave_cc_version_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler.html#gaac5bc2ca2660912ba6bda3ca8a6b1912">zwave_command_handler_get_version</a> (<a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> command_class)</td></tr>
+<tr class="memdesc:gaac5bc2ca2660912ba6bda3ca8a6b1912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the version of Command Class that the handler handles.  <a href="group__zwave__command__handler.html#gaac5bc2ca2660912ba6bda3ca8a6b1912">More...</a><br /></td></tr>
+<tr class="separator:gaac5bc2ca2660912ba6bda3ca8a6b1912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gadc660fe6ba68c4eb1818a2e4451349e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler.html#gadc660fe6ba68c4eb1818a2e4451349e2">zwave_command_handler_dispatch</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
 <tr class="memdesc:gadc660fe6ba68c4eb1818a2e4451349e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches a frame to its respective Command Class handler.  <a href="group__zwave__command__handler.html#gadc660fe6ba68c4eb1818a2e4451349e2">More...</a><br /></td></tr>
 <tr class="separator:gadc660fe6ba68c4eb1818a2e4451349e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,7 +165,7 @@ Functions</h2></td></tr>
 <p>The handler MUST return a <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> status code.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">connection_info</td><td>Info about the connection properties of this frame. </td></tr>
+    <tr><td class="paramname">connection</td><td>Info about the connection properties of this frame. </td></tr>
     <tr><td class="paramname">frame_data</td><td>The data payload of this frame. </td></tr>
     <tr><td class="paramname">frame_length</td><td>The length of this frame.</td></tr>
   </table>
@@ -256,14 +256,14 @@ Any other status: Supervision Command Class returns FAIL. </dd></dl>
 
 </div>
 </div>
-<a id="ga74899d8809a1d53e5251e33f6de59841"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga74899d8809a1d53e5251e33f6de59841">&#9670;&nbsp;</a></span>zwave_command_handler_get_version()</h2>
+<a id="gaac5bc2ca2660912ba6bda3ca8a6b1912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaac5bc2ca2660912ba6bda3ca8a6b1912">&#9670;&nbsp;</a></span>zwave_command_handler_get_version()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t zwave_command_handler_get_version </td>
+          <td class="memname"><a class="el" href="zwave__command__class__version__types_8h.html#aad4ed685a718abe0fd70f07f949a4907">zwave_cc_version_t</a> zwave_command_handler_get_version </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a>&#160;</td>
           <td class="paramname"><em>command_class</em></td><td>)</td>
@@ -387,7 +387,7 @@ SL_STATUS_FAIL Otherwise </dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:56 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:38 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

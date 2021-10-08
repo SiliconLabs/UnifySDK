@@ -13,13 +13,13 @@
 
 #include <string.h>
 
-#include "unity.h"
+#include <unity.h>
 
-#include "zcl_definitions.h"
-#include "zcl_util_mock.h"
-#include "zigpc_common_zigbee_mock.h"
-#include "zigpc_gateway_mock.h"
-#include "zigpc_node_mgmt_mock.h"
+#include <zcl_definitions.h>
+#include <zcl_util_mock.h>
+#include <zigpc_common_zigbee_mock.h>
+#include <zigpc_gateway_mock.h>
+#include <zigpc_datastore_mock.h>
 
 #include "zigpc_command_mapper_int.h"
 
@@ -130,12 +130,13 @@ void test_zigpc_command_mapper_cluster_support_check_entry_not_found(void)
   str_to_zigbee_eui64_ExpectAndReturn(unid, strlen(unid), NULL, SL_STATUS_OK);
   str_to_zigbee_eui64_IgnoreArg_eui64();
   str_to_zigbee_eui64_ReturnMemThruPtr_eui64(eui64, sizeof(zigbee_eui64_t));
-  zigpc_nodemgmt_fetch_node_ep_cluster_ExpectAndReturn(eui64,
-                                                       0,
-                                                       0,
-                                                       NULL,
-                                                       SL_STATUS_FAIL);
-  zigpc_nodemgmt_fetch_node_ep_cluster_IgnoreArg_cluster();
+  zigpc_datastore_read_cluster_ExpectAndReturn(eui64,
+                                               0,
+                                               ZCL_CLUSTER_SERVER_SIDE,
+                                               0,
+                                               NULL,
+                                               SL_STATUS_NOT_FOUND);
+  zigpc_datastore_read_cluster_IgnoreArg_data();
 
   // ACT
   status = zigpc_command_mapper_cluster_support_check(unid, 0, 0);
@@ -154,12 +155,13 @@ void test_zigpc_command_mapper_cluster_support_check_entry_found(void)
   str_to_zigbee_eui64_ExpectAndReturn(unid, strlen(unid), NULL, SL_STATUS_OK);
   str_to_zigbee_eui64_IgnoreArg_eui64();
   str_to_zigbee_eui64_ReturnMemThruPtr_eui64(eui64, sizeof(zigbee_eui64_t));
-  zigpc_nodemgmt_fetch_node_ep_cluster_ExpectAndReturn(eui64,
-                                                       0,
-                                                       0,
-                                                       NULL,
-                                                       SL_STATUS_OK);
-  zigpc_nodemgmt_fetch_node_ep_cluster_IgnoreArg_cluster();
+  zigpc_datastore_read_cluster_ExpectAndReturn(eui64,
+                                               0,
+                                               ZCL_CLUSTER_SERVER_SIDE,
+                                               0,
+                                               NULL,
+                                               SL_STATUS_OK);
+  zigpc_datastore_read_cluster_IgnoreArg_data();
 
   // ACT
   status = zigpc_command_mapper_cluster_support_check(unid, 0, 0);

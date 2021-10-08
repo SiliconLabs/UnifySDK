@@ -9,14 +9,14 @@ target_link_libraries(
   zigpc_command_mapper
   zigpc_config
   zigpc_common
+  zigpc_controller
   zigpc_diagnostics
   zigpc_zcl_profiles
   zigpc_gateway
   zigpc_net_mgmt
   zigpc_group_mgmt
-  zigpc_node_mgmt
   zigpc_node_state
-  zigpc_protctrl
+  zigpc_ucl
   zigpc_smartstart
   zigpc_stdin
   zigpc_zcl_command_parser

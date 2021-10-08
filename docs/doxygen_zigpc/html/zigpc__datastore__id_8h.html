@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -85,8 +85,7 @@ $(document).ready(function(){initNavTree('zigpc__datastore__id_8h.html',''); ini
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">zigpc_datastore_id.h File Reference</div>  </div>
 </div><!--header-->
@@ -98,42 +97,25 @@ $(document).ready(function(){initNavTree('zigpc__datastore__id_8h.html',''); ini
 Macros</h2></td></tr>
 <tr class="memitem:ga95785b1772faa7d7671bd13fda0d756c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore__id.html#ga95785b1772faa7d7671bd13fda0d756c">PRIMARY_NETWORK_NUM</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:ga95785b1772faa7d7671bd13fda0d756c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga258a4c2c4dc4a6637b59953c770912d6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore__id.html#ga258a4c2c4dc4a6637b59953c770912d6">NODE_TYPE_OFFSET</a>&#160;&#160;&#160;0x10000000</td></tr>
+<tr class="separator:ga258a4c2c4dc4a6637b59953c770912d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ga06fc87d81c62e9abb8790b6e5713c55b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
-&#160;&#160;<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba78e0f7b447100aee788e0cf0665bdbf0">ZIGPC_DS_TYPE_NETWORK</a> = (0x10000000 + 1), 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55babf68142e14de17d57f37a232ddeb1721">ZIGPC_DS_TYPE_DEVICE</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba4386e09afcad530c5141b090fd4ef790">ZIGPC_DS_TYPE_ENDPOINT</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba6b9f7a9337c4fd2271763bb3ba1b97e3">ZIGPC_DS_TYPE_CLUSTER</a>, 
+<tr class="memitem:ga579b23fd09f2270bba5c5458fef07358"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore__id.html#ga579b23fd09f2270bba5c5458fef07358">zigpc_datastore_node_type_t</a> { <br />
+&#160;&#160;<a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a78e0f7b447100aee788e0cf0665bdbf0">ZIGPC_DS_TYPE_NETWORK</a> = (NODE_TYPE_OFFSET + 0x1), 
+<a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358abf68142e14de17d57f37a232ddeb1721">ZIGPC_DS_TYPE_DEVICE</a> = (NODE_TYPE_OFFSET + 0x2), 
+<a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a4386e09afcad530c5141b090fd4ef790">ZIGPC_DS_TYPE_ENDPOINT</a> = (NODE_TYPE_OFFSET + 0x4), 
+<a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a9f9f5d8d967c45f0070064c203cc6e46">ZIGPC_DS_TYPE_SERVER_CLUSTER</a> = (NODE_TYPE_OFFSET + 0x8), 
 <br />
-&#160;&#160;<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba6fefcef8bb7d35207a8d0aaf798264d7">DEVICE_DISCOVERY_STATE_ENDPOINTS_SEND</a> = 0x00, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55bac4b75577ac36793aef54baccec4c2f55">DEVICE_DISCOVERY_STATE_ENDPOINTS_WAITING</a> = 0x01, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55babf168804ff71c29672fd3b7e0d402c1f">DEVICE_DISCOVERY_STATE_SIMPLE_SEND</a> = 0x02, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba5b6740dfa75743b83eb4a38ccc4fd827">DEVICE_DISCOVERY_STATE_SIMPLE_WAITING</a> = 0x03, 
-<br />
-&#160;&#160;<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba127b4ec04cc8d0fb96ec498967b5eead">EMBER_AF_PLUGIN_DEVICE_TABLE_STATE_NULL</a> = 0x00, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55bab33b53ffe262d485d77419bf02d92271">EMBER_AF_PLUGIN_DEVICE_TABLE_STATE_JOINED</a> = 0x10, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba381d92a0477f8baed8acf38240738d2b">EMBER_AF_PLUGIN_DEVICE_TABLE_STATE_UNRESPONSIVE</a> = 0x11, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55badd18fbc0f0e8387103951fc8dcee64f6">EMBER_AF_PLUGIN_DEVICE_TABLE_STATE_LEAVE_SENT</a> = 0x20, 
-<br />
-&#160;&#160;<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba103cd11d92264eb26734a80592ed4419">EMBER_AF_PLUGIN_DEVICE_TABLE_STATE_LEFT</a> = 0x30, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba150671b8c80c8c208d1799127b6fc133">EMBER_AF_PLUGIN_DEVICE_TABLE_STATE_UNKNOWN</a> = 0xff, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba45385eb6ec5fbc3179702f8516c48c99">RTIMER_OK</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55bade68e86389e0531689232ff133ade6b7">RTIMER_ERR_FULL</a>, 
-<br />
-&#160;&#160;<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba27ae4cfb3cd9e0d4279ceba3efbf5017">RTIMER_ERR_TIME</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba6158ceaa4e727bb58a633d59a3cac417">RTIMER_ERR_ALREADY_SCHEDULED</a>
+&#160;&#160;<a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a3185b4348a3155bca42395d4602ea9f7">ZIGPC_DS_TYPE_CLIENT_CLUSTER</a> = (NODE_TYPE_OFFSET + 0x10), 
+<a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358acb6a2b48df1f57c5c1ebc1ba4586410b">ZIGPC_DS_TYPE_CLUSTER_ATTRIBUTE</a> = (NODE_TYPE_OFFSET + 0x20), 
+<a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358addc740f9d38c2f79a1e010a73f3a3621">ZIGPC_DS_TYPE_CLUSTER_GENERATED_COMMAND</a> = (NODE_TYPE_OFFSET + 0x40), 
+<a class="el" href="group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358ae5fd79c728ac0ee9acb8d3674b9b365d">ZIGPC_DS_TYPE_CLUSTER_RECEIVED_COMMAND</a> = (NODE_TYPE_OFFSET + 0x80)
 <br />
  }</td></tr>
-<tr class="memdesc:ga06fc87d81c62e9abb8790b6e5713c55b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node datastore node types.  <a href="group__zigpc__datastore__id.html#ga06fc87d81c62e9abb8790b6e5713c55b">More...</a><br /></td></tr>
-<tr class="separator:ga06fc87d81c62e9abb8790b6e5713c55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ga35affda5451f8a2c91c2e50afd5aa205"><td class="memItemLeft" align="right" valign="top">enum  { ... } &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore__id.html#ga35affda5451f8a2c91c2e50afd5aa205">zigpc_datastore_node_type_t</a></td></tr>
-<tr class="memdesc:ga35affda5451f8a2c91c2e50afd5aa205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node datastore node types.  <a href="group__zigpc__datastore__id.html#ga35affda5451f8a2c91c2e50afd5aa205">More...</a><br /></td></tr>
-<tr class="separator:ga35affda5451f8a2c91c2e50afd5aa205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:ga579b23fd09f2270bba5c5458fef07358"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node datastore node types.  <a href="group__zigpc__datastore__id.html#ga579b23fd09f2270bba5c5458fef07358">More...</a><br /></td></tr>
+<tr class="separator:ga579b23fd09f2270bba5c5458fef07358"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -141,7 +123,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_fd74d2cee03cec1d978c7e6c3dd4b8d0.html">datastore</a></li><li class="navelem"><a class="el" href="dir_e4bd89c97ad8566f71cb364c7d89d26c.html">src</a></li><li class="navelem"><a class="el" href="zigpc__datastore__id_8h.html">zigpc_datastore_id.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

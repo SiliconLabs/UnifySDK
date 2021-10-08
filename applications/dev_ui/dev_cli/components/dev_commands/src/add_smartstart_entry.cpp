@@ -39,9 +39,9 @@ int update_smart_start_list(const char *dsk,
                             const char *unid);
 
 /**
- * @brief This command class is used for adding smart start entry
+ * @brief This command class is used for adding SmartStart entry
  *
- * The command class can implement a smart start entry if user inputs DSK key,
+ * The command class can implement a SmartStart entry if user inputs DSK key,
  * Include, ProtocolControllerUnid and UNID.
  *
  * @ingroup dev_cli_commands Developer CLI commands
@@ -49,19 +49,19 @@ int update_smart_start_list(const char *dsk,
  */
 CommandTemplate AddSmartStartEntry(
   "addsmartstartentry",
-  "Adding a smart start entry",
+  "Adding a SmartStart entry",
   "usage: [dev_clu.host *.port *.dsk *.include *.protocolunid *.unid]",
   add_smart_start_entry_main);
 
 /**
- * @brief This command will add a smart start entry to the smart start list
+ * @brief This command will add a SmartStart entry to the SmartStart list
  *
  * \ingroup DEV CLI COMMAND
  * @returns int
  */
 int add_smart_start_entry_main()
 {
-  sl_log_debug(LOG_TAG, "Adding smart start entry to smart start list\n");
+  sl_log_debug(LOG_TAG, "Adding SmartStart entry to the SmartStart list\n");
   sl_log_set_level(SL_LOG_ERROR);
 
   const dev_cli_config_t *config = dev_cli_get_config();
@@ -74,9 +74,9 @@ int add_smart_start_entry_main()
 
   // User information
   if (state == 0) {
-    printf("Added dsk key to smart start list DSK: %s\n", config->dsk);
+    printf("Added DSK: %s to the SmartStart list\n", config->dsk);
   } else {
-    printf("Were unable to add dsk key to smart start list DSK: %s\n",
+    printf("Error: unable to add DSK: %s to the SmartStart list.\n",
            config->dsk);
   }
 
@@ -85,7 +85,7 @@ int add_smart_start_entry_main()
   return 0;
 }
 
-// Update smart start list command
+// Update SmartStart list command
 int update_smart_start_list(const char *dsk,
                             const char *include,
                             const char *protocolunid,
@@ -108,7 +108,7 @@ int update_smart_start_list(const char *dsk,
                      strlen(update),
                      false);
 
-    sl_log_debug(LOG_TAG, "Updated smart start list on DSK key: %s\n", dsk);
+    sl_log_debug(LOG_TAG, "Updated SmartStart list on DSK key: %s\n", dsk);
     return 0;
   } else {
     const char *error_msg = "No user input of DSK key ignoring update";

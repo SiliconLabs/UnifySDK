@@ -14,7 +14,7 @@
 /**
  * @file zigpc_group_mgmt.h
  * @defgroup zigpc_group_mgmt ZigPC Group Management Interface functions
- * @ingroup zigpc_group_mgmt
+ * @ingroup zigpc_components
  * @brief This header contains the definitions and functionality associated with
  * the Zigpc Group Management. This is the intended public interface for the
  * entire component. All definitions and functions here are required for

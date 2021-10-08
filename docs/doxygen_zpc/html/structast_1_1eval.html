@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -99,9 +99,9 @@ $(document).ready(function(){initNavTree('structast_1_1eval.html',''); initResiz
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a068c033dba5559af742846b43241e795"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structast_1_1eval.html#a068c033dba5559af742846b43241e795">eval</a> (const attribute_store::attribute <a class="el" href="structast_1_1eval.html#ae333a78de26db055b098ed92958e35f6">context</a>, const <a class="el" href="structast_1_1ast__tree.html">ast_tree</a> &amp;<a class="el" href="structast_1_1eval.html#a94306796f7af073f2e5a3016e4b8d818">global_context</a>)</td></tr>
-<tr class="memdesc:a068c033dba5559af742846b43241e795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new eval object.  <a href="structast_1_1eval.html#a068c033dba5559af742846b43241e795">More...</a><br /></td></tr>
-<tr class="separator:a068c033dba5559af742846b43241e795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf9050aed2196865a3fc3f23e6ba0c50"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structast_1_1eval.html#acf9050aed2196865a3fc3f23e6ba0c50">eval</a> (const attribute_store::attribute <a class="el" href="structast_1_1eval.html#ae333a78de26db055b098ed92958e35f6">context</a>=0)</td></tr>
+<tr class="memdesc:acf9050aed2196865a3fc3f23e6ba0c50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new eval object.  <a href="structast_1_1eval.html#acf9050aed2196865a3fc3f23e6ba0c50">More...</a><br /></td></tr>
+<tr class="separator:acf9050aed2196865a3fc3f23e6ba0c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addb92e7367e6cabc54476044349ccf90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceast.html#a4408d0d26ca7c2f5265148a978cb746d">result_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structast_1_1eval.html#addb92e7367e6cabc54476044349ccf90">operator()</a> (const <a class="el" href="structast_1_1nil.html">nil</a> &amp;) const</td></tr>
 <tr class="memdesc:addb92e7367e6cabc54476044349ccf90"><td class="mdescLeft">&#160;</td><td class="mdescRight">the undefined keyword  <a href="structast_1_1eval.html#addb92e7367e6cabc54476044349ccf90">More...</a><br /></td></tr>
 <tr class="separator:addb92e7367e6cabc54476044349ccf90"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,8 +126,6 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a94306796f7af073f2e5a3016e4b8d818"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structast_1_1ast__tree.html">ast_tree</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structast_1_1eval.html#a94306796f7af073f2e5a3016e4b8d818">global_context</a></td></tr>
-<tr class="separator:a94306796f7af073f2e5a3016e4b8d818"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae333a78de26db055b098ed92958e35f6"><td class="memItemLeft" align="right" valign="top">attribute_store::attribute&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structast_1_1eval.html#ae333a78de26db055b098ed92958e35f6">context</a></td></tr>
 <tr class="separator:ae333a78de26db055b098ed92958e35f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -139,8 +137,8 @@ Private Attributes</h2></td></tr>
 <p>If the evaluation context is an invalid attribute all evaluations involving an attribute will return no value.</p>
 <p>The AST evaluators are implemented as a functor (a function object). This because this allows us to use the boost::apply_visitor, which is able to evaluate the boost::variant objects using functors, through the operator() overloading. The use of the boost::apply_visitor is boost::apply_visitor( functor, variant ), this will call the appropiate operator() overloading for the data type in the variant. See <a href="https://www.boost.org/doc/libs/1_76_0/doc/html/boost/apply_visitor.html">https://www.boost.org/doc/libs/1_76_0/doc/html/boost/apply_visitor.html</a> for details. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a068c033dba5559af742846b43241e795"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a068c033dba5559af742846b43241e795">&#9670;&nbsp;</a></span>eval()</h2>
+<a id="acf9050aed2196865a3fc3f23e6ba0c50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf9050aed2196865a3fc3f23e6ba0c50">&#9670;&nbsp;</a></span>eval()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,18 +147,8 @@ Private Attributes</h2></td></tr>
           <td class="memname">ast::eval::eval </td>
           <td>(</td>
           <td class="paramtype">const attribute_store::attribute&#160;</td>
-          <td class="paramname"><em>context</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>context</em> = <code>0</code></td><td>)</td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structast_1_1ast__tree.html">ast_tree</a> &amp;&#160;</td>
-          <td class="paramname"><em>global_context</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -169,7 +157,6 @@ Private Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">context</td><td>Context in which this evaluator should work. </td></tr>
-    <tr><td class="paramname">global_context</td><td>List of global_context to use in the evaluation </td></tr>
   </table>
   </dd>
 </dl>
@@ -359,28 +346,6 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a94306796f7af073f2e5a3016e4b8d818"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94306796f7af073f2e5a3016e4b8d818">&#9670;&nbsp;</a></span>global_context</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structast_1_1ast__tree.html">ast_tree</a>&amp; ast::eval::global_context</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>components/uic_attribute_mapper/src/<a class="el" href="attribute__mapper__ast__eval_8hpp_source.html">attribute_mapper_ast_eval.hpp</a></li>
 </ul>
@@ -390,7 +355,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceast.html">ast</a></li><li class="navelem"><a class="el" href="structast_1_1eval.html">eval</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:57 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:43 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

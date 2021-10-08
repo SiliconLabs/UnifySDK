@@ -7,16 +7,26 @@ import * as GrIcons from 'react-icons/gr';
 
 
 class ClusterTypeTooltip extends React.Component<ClusterTypeTooltipProps, {}> {
-    getTooltip(type: any) {
+    getTooltip(endpoint: string, type: string, attr: any) {
         if (type === NodeTypesList.ProtocolController)
-            return <Tooltip title="Protocol Controller"><span className="icon cursor-defult"><GrIcons.GrNodes /></span></Tooltip>
-        return (ClusterViewOverrides as any)[type]?.NodesTooltip || (NodeTypesList as any)[type] || "Unknown";
+            return <Tooltip title="Protocol Controller" ><span className="icon cursor-defult"><GrIcons.GrNodes /></span></Tooltip>
+        return (ClusterViewOverrides as any)[type]?.NodesTooltip(endpoint, attr) || (NodeTypesList as any)[type] || "Unknown";
     }
 
     render() {
-        return (
-            this.props.ClusterTypes.map((i: any, index: number) => { return <div key={index} className="col-md-12"> {this.getTooltip(i)}</div> })
-        );
+        let eps = this.props.Ep && Object.keys(this.props.Ep);
+        if (eps && eps.length) {
+            return eps.map((ep: any, index: number) => {
+                let clusters = this.props.Ep[ep].Clusters && Object.keys(this.props.Ep[ep].Clusters);
+                if (clusters && clusters.length)
+                    return clusters.map((cluster: any, clIndex: number) => {
+                        return <div key={`${index}.${clIndex}`}> {this.getTooltip(ep, cluster, this.props.Ep[ep].Clusters[cluster].Attributes)}</div>
+                    })
+                else return (<div key={index}></div>)
+            })
+        } else {
+            return (<></>)
+        }
     }
 }
 

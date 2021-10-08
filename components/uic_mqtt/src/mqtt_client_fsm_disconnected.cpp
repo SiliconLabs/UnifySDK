@@ -23,12 +23,12 @@
 // Disconnected
 void mqtt_client_fsm_disconnected::enter(mqtt_client *client_instance)
 {
-  sl_log_debug(LOG_TAG, "FSM-Disconnected: Entering state.\n");
+  sl_log_debug(LOG_TAG, "Entering state: FSM-Disconnected.\n");
 }
 
 void mqtt_client_fsm_disconnected::exit(mqtt_client *client_instance)
 {
-  sl_log_debug(LOG_TAG, "FSM-Disconnected: Leaving state.\n");
+  sl_log_debug(LOG_TAG, "Leaving state: FSM-Disconnected.\n");
 }
 
 void mqtt_client_fsm_disconnected::event(int incoming_event,
@@ -50,9 +50,13 @@ void mqtt_client_fsm_disconnected::event(int incoming_event,
     case MQTT_EVENT_UNSUBSCRIBE:
       // Ignore event.
       break;
+    case MQTT_TRANSITION_DISCONNECTED:
+      sl_log_info(LOG_TAG, "We are disconnected from the MQTT broker.");
+      break;
     default:
-      sl_log_critical(LOG_TAG, "FSM-Disconnected: Unhandled event: 0x%x\n",
-                      incoming_event);
+      sl_log_warning(LOG_TAG,
+                     "FSM-Disconnected: Unhandled event: 0x%x\n",
+                     incoming_event);
       break;
   }
 }

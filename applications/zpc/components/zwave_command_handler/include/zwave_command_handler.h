@@ -35,6 +35,9 @@
 #include "zwave_rx.h"
 #include "sl_status.h"
 
+// Interface includes
+#include "zwave_command_class_version_types.h"
+
 // Generic includes
 #include <stdbool.h>
 
@@ -48,7 +51,7 @@ extern "C" {
    *
    * The handler MUST return a \ref sl_status_t status code.
    *
-   * @param connection_info Info about the connection properties of this frame.
+   * @param connection Info about the connection properties of this frame.
    * @param frame_data The data payload of this frame.
    * @param frame_length The length of this frame.
    *
@@ -104,7 +107,7 @@ typedef struct {
 
   /// version of the implemented command class
   ///
-  uint8_t version;
+  zwave_cc_version_t version;
 
   /// Use manual-security filtering for incoming frames
   /// If set to true, the command class dispatch handler will send frames to the
@@ -158,7 +161,8 @@ sl_status_t zwave_command_handler_register_handler(
  *          If the Command Class is neither supported not controlled, it will be 0.
  *          0 if no Command Class handler is registered for the Command Class identifier.
  */
-uint8_t zwave_command_handler_get_version(zwave_command_class_t command_class);
+zwave_cc_version_t
+  zwave_command_handler_get_version(zwave_command_class_t command_class);
 
 // It is moved here to insert supervision decapsulated commands back to
 // the command handler. This may be updated with TX/RX validation scheme

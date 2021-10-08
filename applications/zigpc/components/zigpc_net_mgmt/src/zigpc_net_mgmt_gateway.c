@@ -136,6 +136,15 @@ void zigpc_net_mgmt_callback_on_node_endpoint_discovered(void *event_data)
              * ep_discovered_data->endpoint.cluster_count);
   }
 
+  ep_discovered_data->endpoint.client_cluster_count
+    = ep_disc->endpoint.client_cluster_count;
+  if (ep_discovered_data->endpoint.client_cluster_count > 0) {
+    memcpy(ep_discovered_data->endpoint.client_cluster_list,
+           ep_disc->endpoint.client_cluster_list,
+           sizeof(zcl_cluster_type_t)
+             * ep_discovered_data->endpoint.client_cluster_count);
+  }
+
   process_data_fsm.fsm_event
     = ZIGPC_NET_MGMT_FSM_EVENT_NODE_ENDPOINT_INTERVIEWED;
 

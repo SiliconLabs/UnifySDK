@@ -91,7 +91,7 @@ typedef struct {
 } association_t;
 
 ///> Association Group ID Type
-typedef uint32_t association_group_id_t;
+typedef uint8_t association_group_id_t;
 ///> Association Group Capacity Type
 typedef uint32_t association_group_capacity_t;
 ///> Association Group count Type

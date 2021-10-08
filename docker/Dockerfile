@@ -5,8 +5,11 @@ SHELL ["/bin/bash", "-c"]
 
 ARG USER_ID=1000
 ARG GROUP_ID=1000
+# Set to true to install clang toolchain
+ARG CLANG=false
 # Architectures
 ARG ARCH="armhf"
+ENV HEADLESS_HOST=true
 
 # Target dependenciesls
 ARG TARGET_DEPS="libssl-dev libsystemd-dev libwrap0-dev uthash-dev \
@@ -28,7 +31,7 @@ ARG HOST_DEPS="ninja-build git git-lfs zip unzip curl pkg-config \
   build-essential devscripts debhelper \
   rsync acl zlib1g-dev python3-dev libxml2-dev libxslt-dev\
   openjdk-11-jre\
-  clang"
+  clang nlohmann-json3-dev"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -75,6 +78,13 @@ RUN curl -L https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip --outp
   && cmake -GNinja .. \
   && ninja && ninja install \
   && rm -rf /tmp/doxygen*
+
+# Install doxygen latex had to install additional packages to accomodate for doxygen 1.8.20 version
+RUN apt-get update \
+  && apt-get install --no-install-recommends -y cm-super-minimal ghostscript texlive-extra-utils \ 
+  texlive-font-utils texlive-fonts-recommended texlive-latex-extra \
+  texlive-latex-recommended texlive-plain-generic 
+
 
 # manually compile and install mosquitto v2.0.11. 
 ARG armhf_cmake_params='-DCMAKE_C_COMPILER=/usr/bin/arm-linux-gnueabihf-gcc -DCMAKE_CXX_COMPILER=/usr/bin/arm-linux-gnueabihf-g++ -DPACK_DEBIAN_PACKAGE_ARCHITECTURE=armhf \
@@ -134,8 +144,6 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && apt-get install --no-install-recommends -y yarn \
   && rm -rf /var/lib/apt/lists/*
 
-ENV DISPLAY :99
-
 # Install ZAP and dependencies
 # TODO: replace this zap package with one only containing zap generate,
 # and remove weird dependencies to X, asound and xvfb when this is done
@@ -145,10 +153,17 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends libx11-xcb1 libxcb-dri3-0 libdrm2 libgbm1 libasound2 xvfb xauth \
   && rm -rf /var/lib/apt/lists/*
 
+# Install Clang toolchain
+RUN if [ "$CLANG" = true ] ; then \
+  apt-get update \
+  && apt-get install -y --no-install-recommends lsb-release wget software-properties-common \
+  && curl -sL https://apt.llvm.org/llvm.sh --output /tmp/llvm.sh \
+  && chmod +x /tmp/llvm.sh \
+  && /tmp/llvm.sh 12 \
+  ; fi
+
+
 RUN getent group ${GROUP_ID} || addgroup --gid ${GROUP_ID} user
 RUN useradd -m -l -u $USER_ID -g $GROUP_ID -G sudo -p $(openssl passwd -1 user) -o -s /bin/bash user
 RUN echo "user   ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER user
-
-# TODO: HACK HACK HACK, remove this when we get a proper ZAP generate package
-CMD bash -c "(while true ; do Xvfb -ac ${DISPLAY} -screen 0 640x480x8 -nolisten tcp > /dev/null 2>&1 ; sleep 1 ; done) &" && /bin/bash

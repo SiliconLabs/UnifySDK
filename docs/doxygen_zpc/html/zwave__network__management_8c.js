@@ -8,6 +8,7 @@ var zwave__network__management_8c =
     [ "zwave_network_management_assign_return_route", "group__zwave__network__management.html#gaea33750f3c0be561e79df3f46fc036cb", null ],
     [ "zwave_network_management_dsk_set", "group__zwave__network__management.html#ga2f0d6b1ded21f38171d56b7c574a1f71", null ],
     [ "zwave_network_management_get_state", "group__zwave__network__management.html#gaaf0ce0b04ebf420e4f7e23e166121a35", null ],
+    [ "zwave_network_management_is_busy", "group__zwave__network__management.html#ga496a9fcbb21a3ffa39b17eeb532a70fa", null ],
     [ "zwave_network_management_is_zpc_sis", "group__zwave__network__management.html#ga10d248f803b45c70adf8ecec24308109", null ],
     [ "zwave_network_management_keys_set", "group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6", null ],
     [ "zwave_network_management_learn_mode", "group__zwave__network__management.html#ga07ccc6d6a52b8f29ff5b818e69980209", null ],

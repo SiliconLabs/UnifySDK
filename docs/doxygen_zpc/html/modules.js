@@ -16,7 +16,7 @@ var modules =
     [ "Main Function for Contiki", "group__uic__main.html", "group__uic__main" ],
     [ "UIC MQTT Client", "group__uic__mqtt.html", "group__uic__mqtt" ],
     [ "OTA Image Listener", "group__image__listener.html", null ],
-    [ "Ota_listener", "group__ota__listener.html", "group__ota__listener" ],
+    [ "OTA Listener", "group__ota__listener.html", "group__ota__listener" ],
     [ "SmartStart", "group__smartstart.html", "group__smartstart" ],
     [ "Unify Stdin", "group__uic__stdin.html", "group__uic__stdin" ],
     [ "Z-Wave Controller types", "group__zwave__controller__types.html", null ],

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -84,7 +84,9 @@ $(document).ready(function(){initNavTree('ota__cache_8hpp.html',''); initResizab
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ota_cache.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -108,90 +110,107 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTimeoutHandler.html">TimeoutHandler</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handling timeout data and ctimers sharing data.  <a href="classTimeoutHandler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ede4a1bc3b3a9a2d13c8173d546c98d"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structtimeout__handler.html">timeout_handler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a7ede4a1bc3b3a9a2d13c8173d546c98d">timeout_handler_t</a></td></tr>
-<tr class="memdesc:a7ede4a1bc3b3a9a2d13c8173d546c98d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setting the image callback for a specific image key.  <a href="ota__cache_8hpp.html#a7ede4a1bc3b3a9a2d13c8173d546c98d">More...</a><br /></td></tr>
-<tr class="separator:a7ede4a1bc3b3a9a2d13c8173d546c98d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceImageHandler"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceImageHandler.html">ImageHandler</a></td></tr>
+<tr class="memdesc:namespaceImageHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ImageFileHandler controls and operates availability of an image file. This class encapsulates following control: <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceimage__file__handler"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimage__file__handler.html">image_file_handler</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceUnidStateHandler"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUnidStateHandler.html">UnidStateHandler</a></td></tr>
+<tr class="memdesc:namespaceUnidStateHandler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handling Unid state for OTA. Class will encapsulate following: <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceunid__state__handler"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html">unid_state_handler</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a9b56b15082b0b5ff71d1a1779062e64c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a9b56b15082b0b5ff71d1a1779062e64c">endpoint_cache_t</a> = uint8_t</td></tr>
 <tr class="memdesc:a9b56b15082b0b5ff71d1a1779062e64c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type definition for endpoint caching.  <a href="ota__cache_8hpp.html#a9b56b15082b0b5ff71d1a1779062e64c">More...</a><br /></td></tr>
 <tr class="separator:a9b56b15082b0b5ff71d1a1779062e64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fef91239a6616869c1930150e995ca8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a6fef91239a6616869c1930150e995ca8">set_image_callback_function</a> (const std::string &amp;key, const <a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a> image_ready_cb)</td></tr>
-<tr class="memdesc:a6fef91239a6616869c1930150e995ca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setting the image callback for a specific image key.  <a href="ota__cache_8hpp.html#a6fef91239a6616869c1930150e995ca8">More...</a><br /></td></tr>
-<tr class="separator:a6fef91239a6616869c1930150e995ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa09fd2dfd8ed5f895f0ca915fcf0d195"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#aa09fd2dfd8ed5f895f0ca915fcf0d195">set_image_key_poll</a> (std::shared_ptr&lt; <a class="el" href="classTimeoutHandler.html">TimeoutHandler</a> &gt; <a class="el" href="structtimeout__handler.html">timeout_handler</a>)</td></tr>
-<tr class="memdesc:aa09fd2dfd8ed5f895f0ca915fcf0d195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setting image status of a specific image key.  <a href="ota__cache_8hpp.html#aa09fd2dfd8ed5f895f0ca915fcf0d195">More...</a><br /></td></tr>
-<tr class="separator:aa09fd2dfd8ed5f895f0ca915fcf0d195"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30b97bebdb4594de970eea5537466b45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a30b97bebdb4594de970eea5537466b45">pop_image_key_poll</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:a30b97bebdb4594de970eea5537466b45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop key from image key poll.  <a href="ota__cache_8hpp.html#a30b97bebdb4594de970eea5537466b45">More...</a><br /></td></tr>
-<tr class="separator:a30b97bebdb4594de970eea5537466b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a064113bc4b760f943364b06ba1d6bf41"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a064113bc4b760f943364b06ba1d6bf41">get_image_key_poll_state</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:a064113bc4b760f943364b06ba1d6bf41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get image key poll state.  <a href="ota__cache_8hpp.html#a064113bc4b760f943364b06ba1d6bf41">More...</a><br /></td></tr>
-<tr class="separator:a064113bc4b760f943364b06ba1d6bf41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9efa89f9c6806dad84d2373dccfab8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#ad9efa89f9c6806dad84d2373dccfab8f">set_image_key_poll_state_true</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:ad9efa89f9c6806dad84d2373dccfab8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set image key poll state.  <a href="ota__cache_8hpp.html#ad9efa89f9c6806dad84d2373dccfab8f">More...</a><br /></td></tr>
-<tr class="separator:ad9efa89f9c6806dad84d2373dccfab8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05132589a55a98606cf7b11abcd885ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a05132589a55a98606cf7b11abcd885ff">set_unid_listening</a> (const std::string &amp;uiid, const std::string unid)</td></tr>
-<tr class="memdesc:a05132589a55a98606cf7b11abcd885ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set unid to listening on uiid.  <a href="ota__cache_8hpp.html#a05132589a55a98606cf7b11abcd885ff">More...</a><br /></td></tr>
-<tr class="separator:a05132589a55a98606cf7b11abcd885ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d1b9c7a7e823742f7e4567332cd5667"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a7d1b9c7a7e823742f7e4567332cd5667">get_unids_listening</a> (const std::string &amp;uiid)</td></tr>
-<tr class="memdesc:a7d1b9c7a7e823742f7e4567332cd5667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all unids listening to a specific uiid.  <a href="ota__cache_8hpp.html#a7d1b9c7a7e823742f7e4567332cd5667">More...</a><br /></td></tr>
-<tr class="separator:a7d1b9c7a7e823742f7e4567332cd5667"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a455fd1f44b7e87f065d0b23520aa9f05"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a455fd1f44b7e87f065d0b23520aa9f05">get_unids_listening_count</a> (const std::string &amp;uiid)</td></tr>
-<tr class="memdesc:a455fd1f44b7e87f065d0b23520aa9f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get count of listening unids to a uiid.  <a href="ota__cache_8hpp.html#a455fd1f44b7e87f065d0b23520aa9f05">More...</a><br /></td></tr>
-<tr class="separator:a455fd1f44b7e87f065d0b23520aa9f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a071fb9355ef680fc9038d8d0867a3367"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a071fb9355ef680fc9038d8d0867a3367">remove_unid_listening</a> (const std::string &amp;uiid, const std::string &amp;unid)</td></tr>
-<tr class="memdesc:a071fb9355ef680fc9038d8d0867a3367"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove unid listening on uiid.  <a href="ota__cache_8hpp.html#a071fb9355ef680fc9038d8d0867a3367">More...</a><br /></td></tr>
-<tr class="separator:a071fb9355ef680fc9038d8d0867a3367"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e3bcf86215c5d9c19f31a5bbc4d0b52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a8e3bcf86215c5d9c19f31a5bbc4d0b52">set_image_meta_info</a> (const std::string &amp;key, const <a class="el" href="structuic__ota_1_1meta__t.html">uic_ota::meta_t</a> &amp;meta_info)</td></tr>
-<tr class="memdesc:a8e3bcf86215c5d9c19f31a5bbc4d0b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setting image filename.  <a href="ota__cache_8hpp.html#a8e3bcf86215c5d9c19f31a5bbc4d0b52">More...</a><br /></td></tr>
-<tr class="separator:a8e3bcf86215c5d9c19f31a5bbc4d0b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61e37157306d8e1f4fe21502fdfb71f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structuic__ota_1_1meta__t.html">uic_ota::meta_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a61e37157306d8e1f4fe21502fdfb71f6">get_image_meta_info</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:a61e37157306d8e1f4fe21502fdfb71f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get image meta info.  <a href="ota__cache_8hpp.html#a61e37157306d8e1f4fe21502fdfb71f6">More...</a><br /></td></tr>
-<tr class="separator:a61e37157306d8e1f4fe21502fdfb71f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54c8e76e177bd525104e51f5129ea4ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a54c8e76e177bd525104e51f5129ea4ca">remove_image_meta_info</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:a54c8e76e177bd525104e51f5129ea4ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove image meta info.  <a href="ota__cache_8hpp.html#a54c8e76e177bd525104e51f5129ea4ca">More...</a><br /></td></tr>
-<tr class="separator:a54c8e76e177bd525104e51f5129ea4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad041c7bc3843fe2c7e6aa57425902fe6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#ad041c7bc3843fe2c7e6aa57425902fe6">check_if_meta_info_received</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:ad041c7bc3843fe2c7e6aa57425902fe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if meta info is received for image key.  <a href="ota__cache_8hpp.html#ad041c7bc3843fe2c7e6aa57425902fe6">More...</a><br /></td></tr>
-<tr class="separator:ad041c7bc3843fe2c7e6aa57425902fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbe8592b5f978726386f4a8a8a7160a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#afbe8592b5f978726386f4a8a8a7160a5">get_image_callback</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:afbe8592b5f978726386f4a8a8a7160a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the image callback for a specific image key.  <a href="ota__cache_8hpp.html#afbe8592b5f978726386f4a8a8a7160a5">More...</a><br /></td></tr>
-<tr class="separator:afbe8592b5f978726386f4a8a8a7160a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adaac2d9da9df4330dba72ceb3f614a56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#adaac2d9da9df4330dba72ceb3f614a56">remove_image_callback</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:adaac2d9da9df4330dba72ceb3f614a56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove image callback for image key.  <a href="ota__cache_8hpp.html#adaac2d9da9df4330dba72ceb3f614a56">More...</a><br /></td></tr>
-<tr class="separator:adaac2d9da9df4330dba72ceb3f614a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75e64fc6b403e4acddf5d3035ea11799"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a75e64fc6b403e4acddf5d3035ea11799">is_image_received_and_cached</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:a75e64fc6b403e4acddf5d3035ea11799"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if image is received and cached.  <a href="ota__cache_8hpp.html#a75e64fc6b403e4acddf5d3035ea11799">More...</a><br /></td></tr>
-<tr class="separator:a75e64fc6b403e4acddf5d3035ea11799"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5b252e33025c0a2a5d6b2f1c211b99a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#ae5b252e33025c0a2a5d6b2f1c211b99a">get_image_cached_filepath</a> (const std::string &amp;key)</td></tr>
-<tr class="memdesc:ae5b252e33025c0a2a5d6b2f1c211b99a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get image which is received and cached.  <a href="ota__cache_8hpp.html#ae5b252e33025c0a2a5d6b2f1c211b99a">More...</a><br /></td></tr>
-<tr class="separator:ae5b252e33025c0a2a5d6b2f1c211b99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a590d4c33b61f856fa3a1d9edf760c7f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a590d4c33b61f856fa3a1d9edf760c7f6">set_images_received_cached_filepath</a> (const std::string &amp;key, const std::string &amp;filepath)</td></tr>
-<tr class="memdesc:a590d4c33b61f856fa3a1d9edf760c7f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set image which is received and cache it.  <a href="ota__cache_8hpp.html#a590d4c33b61f856fa3a1d9edf760c7f6">More...</a><br /></td></tr>
-<tr class="separator:a590d4c33b61f856fa3a1d9edf760c7f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4e232e303286dc9ae9f9afecc9d6cca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#ad4e232e303286dc9ae9f9afecc9d6cca">clear_images_cache</a> ()</td></tr>
-<tr class="memdesc:ad4e232e303286dc9ae9f9afecc9d6cca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear out cache of images.  <a href="ota__cache_8hpp.html#ad4e232e303286dc9ae9f9afecc9d6cca">More...</a><br /></td></tr>
-<tr class="separator:ad4e232e303286dc9ae9f9afecc9d6cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fa8f72be41ec732223653f792208ee1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a1fa8f72be41ec732223653f792208ee1">is_status_published</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;ep)</td></tr>
-<tr class="memdesc:a1fa8f72be41ec732223653f792208ee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if unid and ep has been published to.  <a href="ota__cache_8hpp.html#a1fa8f72be41ec732223653f792208ee1">More...</a><br /></td></tr>
-<tr class="separator:a1fa8f72be41ec732223653f792208ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a744f283bdb4ddf2577489db9699117fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a744f283bdb4ddf2577489db9699117fd">set_status_published_cached</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;ep)</td></tr>
-<tr class="memdesc:a744f283bdb4ddf2577489db9699117fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set unid and endpoint as published to.  <a href="ota__cache_8hpp.html#a744f283bdb4ddf2577489db9699117fd">More...</a><br /></td></tr>
-<tr class="separator:a744f283bdb4ddf2577489db9699117fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd47353c31c0962993cf54f09c1a24d1"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::vector&lt; <a class="el" href="ota__cache_8hpp.html#a9b56b15082b0b5ff71d1a1779062e64c">endpoint_cache_t</a> &gt;, std::less&lt;&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#abd47353c31c0962993cf54f09c1a24d1">get_map_status_published_cached_and_clear</a> ()</td></tr>
-<tr class="memdesc:abd47353c31c0962993cf54f09c1a24d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get map of published unid and endpoints.  <a href="ota__cache_8hpp.html#abd47353c31c0962993cf54f09c1a24d1">More...</a><br /></td></tr>
-<tr class="separator:abd47353c31c0962993cf54f09c1a24d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6d14f76516cb0a258fd66392c0e785c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="ota__cache_8hpp.html#a9b56b15082b0b5ff71d1a1779062e64c">endpoint_cache_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#ac6d14f76516cb0a258fd66392c0e785c">get_endpoints_status_published_and_pop</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid)</td></tr>
-<tr class="memdesc:ac6d14f76516cb0a258fd66392c0e785c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get published status updates on UNID and pop.  <a href="ota__cache_8hpp.html#ac6d14f76516cb0a258fd66392c0e785c">More...</a><br /></td></tr>
-<tr class="separator:ac6d14f76516cb0a258fd66392c0e785c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc046c5d9902c1d5f194cb04f4152409"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#acc046c5d9902c1d5f194cb04f4152409">set_image_listening_unid_on_uiid</a> (const std::string &amp;uiid, const std::string &amp;unid, <a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a> image_ready_cb)</td></tr>
-<tr class="memdesc:acc046c5d9902c1d5f194cb04f4152409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a unid listening to a uiid and it's image callback.  <a href="ota__cache_8hpp.html#acc046c5d9902c1d5f194cb04f4152409">More...</a><br /></td></tr>
-<tr class="separator:acc046c5d9902c1d5f194cb04f4152409"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f70bdf5fce8d6e7679184ecdd388e79"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::string, <a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a8f70bdf5fce8d6e7679184ecdd388e79">get_image_listening_list</a> (const std::string &amp;uiid)</td></tr>
-<tr class="memdesc:a8f70bdf5fce8d6e7679184ecdd388e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all a unids listening to uiid and image callbacks.  <a href="ota__cache_8hpp.html#a8f70bdf5fce8d6e7679184ecdd388e79">More...</a><br /></td></tr>
-<tr class="separator:a8f70bdf5fce8d6e7679184ecdd388e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafa08d32304ca74e704b3b2f70a2692a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#aafa08d32304ca74e704b3b2f70a2692a">remove_unids_listening_on_uiid</a> (const std::string &amp;uiid)</td></tr>
-<tr class="memdesc:aafa08d32304ca74e704b3b2f70a2692a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all unids listening to uiid and callbacks.  <a href="ota__cache_8hpp.html#aafa08d32304ca74e704b3b2f70a2692a">More...</a><br /></td></tr>
-<tr class="separator:aafa08d32304ca74e704b3b2f70a2692a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ede4a1bc3b3a9a2d13c8173d546c98d"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structtimeout__handler.html">timeout_handler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ota__cache_8hpp.html#a7ede4a1bc3b3a9a2d13c8173d546c98d">timeout_handler_t</a></td></tr>
+<tr class="memdesc:a7ede4a1bc3b3a9a2d13c8173d546c98d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setting the image callback for a specific image key.  <a href="ota__cache_8hpp.html#a7ede4a1bc3b3a9a2d13c8173d546c98d">More...</a><br /></td></tr>
+<tr class="separator:a7ede4a1bc3b3a9a2d13c8173d546c98d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a9b22cbc398d9f882d17348dd810b7133"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimage__file__handler.html#a9b22cbc398d9f882d17348dd810b7133">image_file_handler::set_image_meta_info</a> (const std::string &amp;key, const <a class="el" href="structuic__ota_1_1meta__t.html">uic_ota::meta_t</a> &amp;meta_info)</td></tr>
+<tr class="memdesc:a9b22cbc398d9f882d17348dd810b7133"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setting image filename.  <a href="namespaceimage__file__handler.html#a9b22cbc398d9f882d17348dd810b7133">More...</a><br /></td></tr>
+<tr class="separator:a9b22cbc398d9f882d17348dd810b7133"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5469e6a192ee3f6943d151c17f3b8e98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structuic__ota_1_1meta__t.html">uic_ota::meta_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimage__file__handler.html#a5469e6a192ee3f6943d151c17f3b8e98">image_file_handler::get_image_meta_info</a> (const std::string &amp;key)</td></tr>
+<tr class="memdesc:a5469e6a192ee3f6943d151c17f3b8e98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get image meta info.  <a href="namespaceimage__file__handler.html#a5469e6a192ee3f6943d151c17f3b8e98">More...</a><br /></td></tr>
+<tr class="separator:a5469e6a192ee3f6943d151c17f3b8e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea44fd9a52c63b4412e6bf2710a88583"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimage__file__handler.html#aea44fd9a52c63b4412e6bf2710a88583">image_file_handler::remove_image_meta_info</a> (const std::string &amp;key)</td></tr>
+<tr class="memdesc:aea44fd9a52c63b4412e6bf2710a88583"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove image meta info.  <a href="namespaceimage__file__handler.html#aea44fd9a52c63b4412e6bf2710a88583">More...</a><br /></td></tr>
+<tr class="separator:aea44fd9a52c63b4412e6bf2710a88583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8dae3716c103fbd75d8aa5874c87df1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimage__file__handler.html#aa8dae3716c103fbd75d8aa5874c87df1">image_file_handler::check_if_meta_info_received</a> (const std::string &amp;key)</td></tr>
+<tr class="memdesc:aa8dae3716c103fbd75d8aa5874c87df1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if meta info is received for image key.  <a href="namespaceimage__file__handler.html#aa8dae3716c103fbd75d8aa5874c87df1">More...</a><br /></td></tr>
+<tr class="separator:aa8dae3716c103fbd75d8aa5874c87df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf04d0c32b767227eec5a95926f06659"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimage__file__handler.html#acf04d0c32b767227eec5a95926f06659">image_file_handler::set_images_received_cached_filepath</a> (const std::string &amp;key, const std::string &amp;filepath)</td></tr>
+<tr class="memdesc:acf04d0c32b767227eec5a95926f06659"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set image which is received and cache it.  <a href="namespaceimage__file__handler.html#acf04d0c32b767227eec5a95926f06659">More...</a><br /></td></tr>
+<tr class="separator:acf04d0c32b767227eec5a95926f06659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4189682b6069f60304c66a924227e42"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimage__file__handler.html#af4189682b6069f60304c66a924227e42">image_file_handler::get_image_cached_filepath</a> (const std::string &amp;key)</td></tr>
+<tr class="memdesc:af4189682b6069f60304c66a924227e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get image which is received and cached.  <a href="namespaceimage__file__handler.html#af4189682b6069f60304c66a924227e42">More...</a><br /></td></tr>
+<tr class="separator:af4189682b6069f60304c66a924227e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e231267205c5cf2c77a9f058977f5ff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimage__file__handler.html#a2e231267205c5cf2c77a9f058977f5ff">image_file_handler::is_image_received_and_cached</a> (const std::string &amp;key)</td></tr>
+<tr class="memdesc:a2e231267205c5cf2c77a9f058977f5ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if image is received and cached.  <a href="namespaceimage__file__handler.html#a2e231267205c5cf2c77a9f058977f5ff">More...</a><br /></td></tr>
+<tr class="separator:a2e231267205c5cf2c77a9f058977f5ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a311c1d29a0750b1d1581db2d1d7476e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceimage__file__handler.html#a311c1d29a0750b1d1581db2d1d7476e4">image_file_handler::clear_images_cache</a> ()</td></tr>
+<tr class="memdesc:a311c1d29a0750b1d1581db2d1d7476e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear out cache of images.  <a href="namespaceimage__file__handler.html#a311c1d29a0750b1d1581db2d1d7476e4">More...</a><br /></td></tr>
+<tr class="separator:a311c1d29a0750b1d1581db2d1d7476e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae52e0a5999833ae8890862098c203cd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#ae52e0a5999833ae8890862098c203cd7">unid_state_handler::set_unid_poll</a> (std::shared_ptr&lt; <a class="el" href="classTimeoutHandler.html">TimeoutHandler</a> &gt; <a class="el" href="structtimeout__handler.html">timeout_handler</a>)</td></tr>
+<tr class="memdesc:ae52e0a5999833ae8890862098c203cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setting image status of a specific image key.  <a href="namespaceunid__state__handler.html#ae52e0a5999833ae8890862098c203cd7">More...</a><br /></td></tr>
+<tr class="separator:ae52e0a5999833ae8890862098c203cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f40c96fc2a5077ccff6941ac361ba6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a0f40c96fc2a5077ccff6941ac361ba6e">unid_state_handler::pop_unid_poll</a> (const std::string &amp;unid)</td></tr>
+<tr class="memdesc:a0f40c96fc2a5077ccff6941ac361ba6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop key from image key poll.  <a href="namespaceunid__state__handler.html#a0f40c96fc2a5077ccff6941ac361ba6e">More...</a><br /></td></tr>
+<tr class="separator:a0f40c96fc2a5077ccff6941ac361ba6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a178f8f66256ed0b2c9fadffe047e39d0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a178f8f66256ed0b2c9fadffe047e39d0">unid_state_handler::get_unid_poll_state</a> (const std::string &amp;unid)</td></tr>
+<tr class="memdesc:a178f8f66256ed0b2c9fadffe047e39d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get image key poll state.  <a href="namespaceunid__state__handler.html#a178f8f66256ed0b2c9fadffe047e39d0">More...</a><br /></td></tr>
+<tr class="separator:a178f8f66256ed0b2c9fadffe047e39d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae886899455143f339fed1c6b4c20070b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#ae886899455143f339fed1c6b4c20070b">unid_state_handler::set_unid_poll_state_true</a> (const std::string &amp;unid)</td></tr>
+<tr class="memdesc:ae886899455143f339fed1c6b4c20070b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set UNID poll state.  <a href="namespaceunid__state__handler.html#ae886899455143f339fed1c6b4c20070b">More...</a><br /></td></tr>
+<tr class="separator:ae886899455143f339fed1c6b4c20070b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a138c9ae1902a28f2a63e6e10af4a51f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a138c9ae1902a28f2a63e6e10af4a51f1">unid_state_handler::is_unid_in_poll</a> (const std::string &amp;unid)</td></tr>
+<tr class="memdesc:a138c9ae1902a28f2a63e6e10af4a51f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if UNID in poll.  <a href="namespaceunid__state__handler.html#a138c9ae1902a28f2a63e6e10af4a51f1">More...</a><br /></td></tr>
+<tr class="separator:a138c9ae1902a28f2a63e6e10af4a51f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af779b9e2da7edd8a3e56874f127779dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#af779b9e2da7edd8a3e56874f127779dc">unid_state_handler::get_unid_callback</a> (const std::string &amp;unid)</td></tr>
+<tr class="memdesc:af779b9e2da7edd8a3e56874f127779dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the image callback for a specific image key.  <a href="namespaceunid__state__handler.html#af779b9e2da7edd8a3e56874f127779dc">More...</a><br /></td></tr>
+<tr class="separator:af779b9e2da7edd8a3e56874f127779dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2fbcb905a4b7423f04250eaf2b10388"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#ad2fbcb905a4b7423f04250eaf2b10388">unid_state_handler::is_poll_topic_subscribed</a> (const std::string &amp;topic)</td></tr>
+<tr class="memdesc:ad2fbcb905a4b7423f04250eaf2b10388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the topic is already subscribed.  <a href="namespaceunid__state__handler.html#ad2fbcb905a4b7423f04250eaf2b10388">More...</a><br /></td></tr>
+<tr class="separator:ad2fbcb905a4b7423f04250eaf2b10388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a674912bc943081b14b45c2fae7edbc82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a674912bc943081b14b45c2fae7edbc82">unid_state_handler::set_unid_listening</a> (const std::string &amp;uiid, const std::string &amp;unid)</td></tr>
+<tr class="memdesc:a674912bc943081b14b45c2fae7edbc82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set UNID to listening on UIID.  <a href="namespaceunid__state__handler.html#a674912bc943081b14b45c2fae7edbc82">More...</a><br /></td></tr>
+<tr class="separator:a674912bc943081b14b45c2fae7edbc82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53bc03fd6be17f8cb0ddb672783fed23"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a53bc03fd6be17f8cb0ddb672783fed23">unid_state_handler::get_unids_listening</a> (const std::string &amp;uiid)</td></tr>
+<tr class="memdesc:a53bc03fd6be17f8cb0ddb672783fed23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all UNIDs listening to a specific UIID.  <a href="namespaceunid__state__handler.html#a53bc03fd6be17f8cb0ddb672783fed23">More...</a><br /></td></tr>
+<tr class="separator:a53bc03fd6be17f8cb0ddb672783fed23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaccc301536abd5df84ddcd0b58ada430"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#aaccc301536abd5df84ddcd0b58ada430">unid_state_handler::get_unids_listening_count</a> (const std::string &amp;uiid)</td></tr>
+<tr class="memdesc:aaccc301536abd5df84ddcd0b58ada430"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get count of listening UNIDs to a UIID.  <a href="namespaceunid__state__handler.html#aaccc301536abd5df84ddcd0b58ada430">More...</a><br /></td></tr>
+<tr class="separator:aaccc301536abd5df84ddcd0b58ada430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58d83de94f588b5490830d593c87fbb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a58d83de94f588b5490830d593c87fbb7">unid_state_handler::remove_unid_listening</a> (const std::string &amp;uiid, const std::string &amp;unid)</td></tr>
+<tr class="memdesc:a58d83de94f588b5490830d593c87fbb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove UNID listening on UIID.  <a href="namespaceunid__state__handler.html#a58d83de94f588b5490830d593c87fbb7">More...</a><br /></td></tr>
+<tr class="separator:a58d83de94f588b5490830d593c87fbb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacaec226808820bb16ae090f5422169a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#aacaec226808820bb16ae090f5422169a">unid_state_handler::get_uiids_unid_is_listening_to</a> (const std::string &amp;unid)</td></tr>
+<tr class="memdesc:aacaec226808820bb16ae090f5422169a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all UIIDs which a single UNID is listening to.  <a href="namespaceunid__state__handler.html#aacaec226808820bb16ae090f5422169a">More...</a><br /></td></tr>
+<tr class="separator:aacaec226808820bb16ae090f5422169a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad69af464a83da591541d7ec8d8543c92"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::vector&lt; std::string &gt;, std::less&lt;&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#ad69af464a83da591541d7ec8d8543c92">unid_state_handler::get_uiids_and_unids_listening</a> ()</td></tr>
+<tr class="memdesc:ad69af464a83da591541d7ec8d8543c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all UIIDs and UNIDs active.  <a href="namespaceunid__state__handler.html#ad69af464a83da591541d7ec8d8543c92">More...</a><br /></td></tr>
+<tr class="separator:ad69af464a83da591541d7ec8d8543c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a062f7bbf15656d284dd901cd47731c9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a062f7bbf15656d284dd901cd47731c9f">unid_state_handler::set_status_published_cached</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;ep)</td></tr>
+<tr class="memdesc:a062f7bbf15656d284dd901cd47731c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set UNID and endpoint as published to.  <a href="namespaceunid__state__handler.html#a062f7bbf15656d284dd901cd47731c9f">More...</a><br /></td></tr>
+<tr class="separator:a062f7bbf15656d284dd901cd47731c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6de5d88cc02b4a4d9f709c210ec28de8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a6de5d88cc02b4a4d9f709c210ec28de8">unid_state_handler::is_status_published</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;ep)</td></tr>
+<tr class="memdesc:a6de5d88cc02b4a4d9f709c210ec28de8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if UNID and ep has been published to.  <a href="namespaceunid__state__handler.html#a6de5d88cc02b4a4d9f709c210ec28de8">More...</a><br /></td></tr>
+<tr class="separator:a6de5d88cc02b4a4d9f709c210ec28de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed5c91702f672d42086723c7577b701"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::vector&lt; <a class="el" href="ota__cache_8hpp.html#a9b56b15082b0b5ff71d1a1779062e64c">endpoint_cache_t</a> &gt;, std::less&lt;&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a4ed5c91702f672d42086723c7577b701">unid_state_handler::get_map_status_published_cached_and_clear</a> ()</td></tr>
+<tr class="memdesc:a4ed5c91702f672d42086723c7577b701"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get map of published UNID and endpoints.  <a href="namespaceunid__state__handler.html#a4ed5c91702f672d42086723c7577b701">More...</a><br /></td></tr>
+<tr class="separator:a4ed5c91702f672d42086723c7577b701"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d0ff96253955c85f548058ba7575c52"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="ota__cache_8hpp.html#a9b56b15082b0b5ff71d1a1779062e64c">endpoint_cache_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceunid__state__handler.html#a9d0ff96253955c85f548058ba7575c52">unid_state_handler::get_endpoints_status_published_and_pop</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid)</td></tr>
+<tr class="memdesc:a9d0ff96253955c85f548058ba7575c52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get published status updates on UNID and pop.  <a href="namespaceunid__state__handler.html#a9d0ff96253955c85f548058ba7575c52">More...</a><br /></td></tr>
+<tr class="separator:a9d0ff96253955c85f548058ba7575c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Caching of image information. </p>
@@ -238,781 +257,13 @@ Classes</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ad041c7bc3843fe2c7e6aa57425902fe6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad041c7bc3843fe2c7e6aa57425902fe6">&#9670;&nbsp;</a></span>check_if_meta_info_received()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool check_if_meta_info_received </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Checks if meta info is received for image key. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key identifier.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>if image meta info is recieved. </dd></dl>
-
-</div>
-</div>
-<a id="ad4e232e303286dc9ae9f9afecc9d6cca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4e232e303286dc9ae9f9afecc9d6cca">&#9670;&nbsp;</a></span>clear_images_cache()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void clear_images_cache </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Clear out cache of images. </p>
-
-</div>
-</div>
-<a id="ac6d14f76516cb0a258fd66392c0e785c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6d14f76516cb0a258fd66392c0e785c">&#9670;&nbsp;</a></span>get_endpoints_status_published_and_pop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="ota__cache_8hpp.html#a9b56b15082b0b5ff71d1a1779062e64c">endpoint_cache_t</a>&gt; get_endpoints_status_published_and_pop </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;&#160;</td>
-          <td class="paramname"><em>unid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get published status updates on UNID and pop. </p>
-<dl class="section return"><dt>Returns</dt><dd>vector of endpoints belonging to specific UNID. </dd></dl>
-
-</div>
-</div>
-<a id="ae5b252e33025c0a2a5d6b2f1c211b99a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5b252e33025c0a2a5d6b2f1c211b99a">&#9670;&nbsp;</a></span>get_image_cached_filepath()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string get_image_cached_filepath </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get image which is received and cached. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key which is received and cached.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>filepath for image. </dd></dl>
-
-</div>
-</div>
-<a id="afbe8592b5f978726386f4a8a8a7160a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbe8592b5f978726386f4a8a8a7160a5">&#9670;&nbsp;</a></span>get_image_callback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a> get_image_callback </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the image callback for a specific image key. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key for getting image ready callback.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>image ready callback for image. </dd></dl>
-
-</div>
-</div>
-<a id="a064113bc4b760f943364b06ba1d6bf41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a064113bc4b760f943364b06ba1d6bf41">&#9670;&nbsp;</a></span>get_image_key_poll_state()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool get_image_key_poll_state </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get image key poll state. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>Image key in poll.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>boolean true if the image key has been activated. </dd></dl>
-
-</div>
-</div>
-<a id="a8f70bdf5fce8d6e7679184ecdd388e79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f70bdf5fce8d6e7679184ecdd388e79">&#9670;&nbsp;</a></span>get_image_listening_list()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;std::pair&lt;std::string, <a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a>&gt; &gt; get_image_listening_list </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>uiid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get all a unids listening to uiid and image callbacks. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">uiid</td><td>image identifier. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a61e37157306d8e1f4fe21502fdfb71f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61e37157306d8e1f4fe21502fdfb71f6">&#9670;&nbsp;</a></span>get_image_meta_info()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structuic__ota_1_1meta__t.html">uic_ota::meta_t</a> get_image_meta_info </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get image meta info. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key for getting meta info.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>meta info structure of image.</dd></dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::invalid_argument</td><td>if meta info could not be found. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="abd47353c31c0962993cf54f09c1a24d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd47353c31c0962993cf54f09c1a24d1">&#9670;&nbsp;</a></span>get_map_status_published_cached_and_clear()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::map&lt;std::string, std::vector&lt;<a class="el" href="ota__cache_8hpp.html#a9b56b15082b0b5ff71d1a1779062e64c">endpoint_cache_t</a>&gt;, std::less&lt;&gt; &gt; get_map_status_published_cached_and_clear </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get map of published unid and endpoints. </p>
-<dl class="section return"><dt>Returns</dt><dd>map of published unid and endpoints. </dd></dl>
-
-</div>
-</div>
-<a id="a7d1b9c7a7e823742f7e4567332cd5667"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d1b9c7a7e823742f7e4567332cd5667">&#9670;&nbsp;</a></span>get_unids_listening()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;std::string&gt; get_unids_listening </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>uiid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get all unids listening to a specific uiid. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">uiid</td><td>unique image identifier ID.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>vector of unids listening to uiid. </dd></dl>
-
-</div>
-</div>
-<a id="a455fd1f44b7e87f065d0b23520aa9f05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a455fd1f44b7e87f065d0b23520aa9f05">&#9670;&nbsp;</a></span>get_unids_listening_count()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t get_unids_listening_count </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>uiid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get count of listening unids to a uiid. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">uiid</td><td>unique image identifier ID.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>count of listening unids to uiid. </dd></dl>
-
-</div>
-</div>
-<a id="a75e64fc6b403e4acddf5d3035ea11799"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75e64fc6b403e4acddf5d3035ea11799">&#9670;&nbsp;</a></span>is_image_received_and_cached()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool is_image_received_and_cached </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check if image is received and cached. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key or search.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if received and cached. </dd></dl>
-
-</div>
-</div>
-<a id="a1fa8f72be41ec732223653f792208ee1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fa8f72be41ec732223653f792208ee1">&#9670;&nbsp;</a></span>is_status_published()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool is_status_published </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;&#160;</td>
-          <td class="paramname"><em>unid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;&#160;</td>
-          <td class="paramname"><em>ep</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check if unid and ep has been published to. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">unid</td><td>UNID to check. </td></tr>
-    <tr><td class="paramname">ep</td><td>endpoint ID to check. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a30b97bebdb4594de970eea5537466b45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30b97bebdb4594de970eea5537466b45">&#9670;&nbsp;</a></span>pop_image_key_poll()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void pop_image_key_poll </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Pop key from image key poll. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>Image key in que. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="adaac2d9da9df4330dba72ceb3f614a56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adaac2d9da9df4330dba72ceb3f614a56">&#9670;&nbsp;</a></span>remove_image_callback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void remove_image_callback </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Remove image callback for image key. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key for removing image callback . </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a54c8e76e177bd525104e51f5129ea4ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54c8e76e177bd525104e51f5129ea4ca">&#9670;&nbsp;</a></span>remove_image_meta_info()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void remove_image_meta_info </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Remove image meta info. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key removing meta info for. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a071fb9355ef680fc9038d8d0867a3367"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a071fb9355ef680fc9038d8d0867a3367">&#9670;&nbsp;</a></span>remove_unid_listening()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void remove_unid_listening </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>uiid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>unid</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Remove unid listening on uiid. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">uiid</td><td>unique image identifier ID. </td></tr>
-    <tr><td class="paramname">unid</td><td>end-note id. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="aafa08d32304ca74e704b3b2f70a2692a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafa08d32304ca74e704b3b2f70a2692a">&#9670;&nbsp;</a></span>remove_unids_listening_on_uiid()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void remove_unids_listening_on_uiid </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>uiid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Remove all unids listening to uiid and callbacks. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">uiid</td><td>image identifier. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a6fef91239a6616869c1930150e995ca8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fef91239a6616869c1930150e995ca8">&#9670;&nbsp;</a></span>set_image_callback_function()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_image_callback_function </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a>&#160;</td>
-          <td class="paramname"><em>image_ready_cb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Setting the image callback for a specific image key. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key for setting image ready callback. </td></tr>
-    <tr><td class="paramname">image_ready_cb</td><td>image ready callback. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="aa09fd2dfd8ed5f895f0ca915fcf0d195"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa09fd2dfd8ed5f895f0ca915fcf0d195">&#9670;&nbsp;</a></span>set_image_key_poll()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_image_key_poll </td>
-          <td>(</td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classTimeoutHandler.html">TimeoutHandler</a> &gt;&#160;</td>
-          <td class="paramname"><em>timeout_handler</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Setting image status of a specific image key. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname"><a class="el" href="structtimeout__handler.html" title="Setting the image callback for a specific image key.">timeout_handler</a></td><td>handler </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ad9efa89f9c6806dad84d2373dccfab8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9efa89f9c6806dad84d2373dccfab8f">&#9670;&nbsp;</a></span>set_image_key_poll_state_true()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_image_key_poll_state_true </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set image key poll state. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>Image key in poll. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="acc046c5d9902c1d5f194cb04f4152409"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc046c5d9902c1d5f194cb04f4152409">&#9670;&nbsp;</a></span>set_image_listening_unid_on_uiid()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_image_listening_unid_on_uiid </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>uiid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>unid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">uic_ota::image_ready_funct_t</a>&#160;</td>
-          <td class="paramname"><em>image_ready_cb</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set a unid listening to a uiid and it's image callback. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">uiid</td><td>image identifier. </td></tr>
-    <tr><td class="paramname">unid</td><td>unid listening on uiid. </td></tr>
-    <tr><td class="paramname">image_ready_cb</td><td>image ready callback listening on uiid. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a8e3bcf86215c5d9c19f31a5bbc4d0b52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e3bcf86215c5d9c19f31a5bbc4d0b52">&#9670;&nbsp;</a></span>set_image_meta_info()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_image_meta_info </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structuic__ota_1_1meta__t.html">uic_ota::meta_t</a> &amp;&#160;</td>
-          <td class="paramname"><em>meta_info</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Setting image filename. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key for setting image filename. </td></tr>
-    <tr><td class="paramname">meta_info</td><td>meta info to set </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a590d4c33b61f856fa3a1d9edf760c7f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a590d4c33b61f856fa3a1d9edf760c7f6">&#9670;&nbsp;</a></span>set_images_received_cached_filepath()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_images_received_cached_filepath </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>filepath</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set image which is received and cache it. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">key</td><td>image key which is received. </td></tr>
-    <tr><td class="paramname">filepath</td><td>for image which is received. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a744f283bdb4ddf2577489db9699117fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a744f283bdb4ddf2577489db9699117fd">&#9670;&nbsp;</a></span>set_status_published_cached()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_status_published_cached </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;&#160;</td>
-          <td class="paramname"><em>unid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;&#160;</td>
-          <td class="paramname"><em>ep</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set unid and endpoint as published to. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">unid</td><td>UNID to set as published. </td></tr>
-    <tr><td class="paramname">ep</td><td>Endpoint ID to set as published to. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a05132589a55a98606cf7b11abcd885ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05132589a55a98606cf7b11abcd885ff">&#9670;&nbsp;</a></span>set_unid_listening()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_unid_listening </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>uiid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string&#160;</td>
-          <td class="paramname"><em>unid</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set unid to listening on uiid. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">uiid</td><td>unique image identifier ID. </td></tr>
-    <tr><td class="paramname">unid</td><td>end-note id. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_79802ae3566d880275ef9cc4670d3b68.html">uic_ota</a></li><li class="navelem"><a class="el" href="dir_0c4b3fc701aead651ff7e6f61b61f7ac.html">src</a></li><li class="navelem"><a class="el" href="ota__cache_8hpp.html">ota_cache.hpp</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:52 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:34 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

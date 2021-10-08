@@ -26,9 +26,7 @@
 
 namespace ast
 {
-eval::eval(const attribute_store::attribute context, const ast_tree &mapping) :
-  global_context(mapping), context(context)
-{}
+eval::eval(const attribute_store::attribute context) : context(context) {}
 
 result_type eval::operator()(const nil &) const
 {
@@ -42,8 +40,8 @@ result_type eval::operator()(const unsigned int n) const
 
 result_type eval::operator()(const attribute &a) const
 {
-  attribute_path_eval ape(context, global_context);
-  attribute_store::attribute value = ape(a.attribute);
+  attribute_path_eval ape(context);
+  attribute_store::attribute value = ape(a.attribute_path);
 
   if (a.value_type == 'e') {  //existence evaluation
     return ape
@@ -95,7 +93,7 @@ result_type eval::operator()(const operation &x, result_type lhs) const
         return lhs.value() | rhs.value();
       case operator_bitxor:
         return lhs.value() ^ rhs.value();
-      case operator_or: //handled above
+      case operator_or:  //handled above
         break;
         ;
     }
@@ -137,15 +135,15 @@ result_type eval::operator()(const condition &x) const
 }
 
 attribute_path_eval::attribute_path_eval(
-  const attribute_store::attribute context, const ast_tree &global_context) :
-  global_context(global_context), context(context)
+  const attribute_store::attribute context) :
+  context(context)
 {}
 
 // hat operator ^ (parent)
 attribute_store::attribute
   attribute_path_eval::operator()(const ast::operand &oper)
 {
-  ast::eval evaluator(context, global_context);
+  ast::eval evaluator(context);
   auto value = boost::apply_visitor(evaluator, oper);
   if (value) {
     unsigned int attribute_id = (*this)(value.value());
@@ -175,15 +173,14 @@ attribute_store::attribute
 attribute_store::attribute attribute_path_eval::operator()(
   const attribute_path_subscript &subscript) const
 {
-  eval evaluator(context, global_context);
+  eval evaluator(context);
   auto index = boost::apply_visitor(evaluator, subscript.index);
   if (index) {
     auto type_id
       = boost::apply_visitor(evaluator, subscript.identifier);  //TODO do lookup
     if (type_id) {
       attribute_store::attribute child
-        = context.child_by_type_and_value<uint8_t>(type_id.value(),
-                                                   index.value());
+        = context.child_by_type_and_value(type_id.value(), index.value());
       return child;
     }
   }
@@ -211,18 +208,18 @@ attribute_store::attribute attribute_path_eval::operator()(
 }
 
 //Return true if the path has been fully resolved
-bool attribute_path_eval::all_elements_parsed()
+bool attribute_path_eval::all_elements_parsed() const
 {
   return elements_left == 0;
 }
 
 // return true if all but the last path elements has been resolved
-bool attribute_path_eval::last_token_failed()
+bool attribute_path_eval::last_token_failed() const
 {
   return elements_left == 1;
 }
 // get the type is of the last element that was attempted to be parsed
-attribute_store_type_t attribute_path_eval::last_fail_type()
+attribute_store_type_t attribute_path_eval::last_fail_type() const
 {
   return last_type_id;
 }

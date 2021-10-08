@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -93,7 +93,8 @@ $(document).ready(function(){initNavTree('zigpc__gateway__int_8h.html',''); init
 <div class="title">zigpc_gateway_int.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="zigpc__common__zigbee_8h_source.html">zigpc_common_zigbee.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="zigpc__common__zigbee_8h_source.html">zigpc_common_zigbee.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="zigpc__config_8h_source.html">zigpc_config.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="z3gateway_8h_source.html">z3gateway.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__gateway__notify_8h_source.html">zigpc_gateway_notify.h</a>&quot;</code><br />
 </div>
@@ -108,6 +109,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__bind__request__t.html">zigpc_gateway_dispatch_bind_request_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__add__node.html">zigpc_gateway_dispatch_add_node</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__permit__joins__t.html">zigpc_gateway_dispatch_permit_joins_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data for permitting joins to the Zigbee network.  <a href="structzigpc__gateway__dispatch__permit__joins__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__remove__node__t.html">zigpc_gateway_dispatch_remove_node_t</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data for processing node removal.  <a href="structzigpc__gateway__dispatch__remove__node__t.html#details">More...</a><br /></td></tr>
@@ -137,10 +141,11 @@ Enumerations</h2></td></tr>
 <tr class="memitem:a490438d3ae798a3164e730aa8e642237"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237">zigpc_gateway_dispatch_type</a> { <br />
 &#160;&#160;<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a756a8a17279f1a08876bb9c67bc72398">ZIGPC_GW_DISPATCH_MIN_VAL</a> = 0, 
 <a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ae73e8efcea4751a970bb0a3b4f327a66">ZIGPC_GW_DISPATCH_NETWORK_INIT</a>, 
+<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ac4ddeb3f838876a57c3ab20857668826">ZIGPC_GW_DISPATCH_PERMIT_JOINS</a>, 
 <a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ac4e1169bd7d60ca6ab47f849580e3814">ZIGPC_GW_DISPATCH_ADD_NODE_INSTALL_CODE</a>, 
-<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237afa776a5c5990813fd415d18b27482ec1">ZIGPC_GW_DISPATCH_INTERVIEW_NODE</a>, 
 <br />
-&#160;&#160;<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a2fc0554bf73986a2d27b254654eaecf0">ZIGPC_GW_DISPATCH_REMOVE_NODE</a>, 
+&#160;&#160;<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237afa776a5c5990813fd415d18b27482ec1">ZIGPC_GW_DISPATCH_INTERVIEW_NODE</a>, 
+<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a2fc0554bf73986a2d27b254654eaecf0">ZIGPC_GW_DISPATCH_REMOVE_NODE</a>, 
 <a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a8a57a67bc5a0025bf853e76705c3822b">ZIGPC_GW_DISPATCH_MAX_VAL</a>
 <br />
  }</td></tr>
@@ -260,6 +265,7 @@ Variables</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237a756a8a17279f1a08876bb9c67bc72398"></a>ZIGPC_GW_DISPATCH_MIN_VAL&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237ae73e8efcea4751a970bb0a3b4f327a66"></a>ZIGPC_GW_DISPATCH_NETWORK_INIT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237ac4ddeb3f838876a57c3ab20857668826"></a>ZIGPC_GW_DISPATCH_PERMIT_JOINS&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237ac4e1169bd7d60ca6ab47f849580e3814"></a>ZIGPC_GW_DISPATCH_ADD_NODE_INSTALL_CODE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237afa776a5c5990813fd415d18b27482ec1"></a>ZIGPC_GW_DISPATCH_INTERVIEW_NODE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237a2fc0554bf73986a2d27b254654eaecf0"></a>ZIGPC_GW_DISPATCH_REMOVE_NODE&#160;</td><td class="fielddoc"></td></tr>
@@ -592,7 +598,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_d9c8a1816f4ea9a94746c6de1ae8e276.html">zigpc_gateway</a></li><li class="navelem"><a class="el" href="dir_1233302668cfc38a9302dcaeddaa7aed.html">src</a></li><li class="navelem"><a class="el" href="zigpc__gateway__int_8h.html">zigpc_gateway_int.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

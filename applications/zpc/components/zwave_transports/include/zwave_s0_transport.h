@@ -33,11 +33,12 @@ extern "C" {
  * @param data_length       Length of un-encrypted data.
  * @param cmd_data          un-encrypted data to send
  * @param tx_options        Transmit options. The number_of_responses field
- * determines if S0 verify delivery is going to be used
+ *                        determines if S0 verify delivery is going to be used
  * @param on_send_complete  Callback for the transmission complete event.
  * @param user              User pointer
+ * @param parent_session_id Parent session id of this session 
  * @return sl_status_t     
- ap*   - SL_STATUS_OK             on success
+ *   - SL_STATUS_OK             on success
  *   - SL_STATUS_NOT_SUPPORTED  if unknown encapuslation scheme is applied.
  *   - SL_STATUS_BUSY           if a tranmission is ongoing.
  *   - SL_STATUS_WOULD_OVERFLOW if we cannot handle the frame and it should just be dropped.
@@ -61,8 +62,13 @@ sl_status_t
  * @param rx_options      Receive options
  * @param frame_data      S0 control frame data
  * @param frame_length    S0 control frame length
- * @return true           If frame is accepted
- * @return false          If frame is not an S0 frame.
+ * @return sl_status_t
+ *   - SL_STATUS_WOULD_OVERFLOW Frame length is more than ZWAVE_MAX_FRAME_SIZE
+ *   - SL_STATUS_NOT_FOUND if Command class is not Security 0 or command inside
+ *                         the command class is unknown
+ *   - SL_STATUS_NOT_SUPPORTED If frame is not supported because of some reason
+ *   - SL_STATUS_FAIL Decryption of frame failed
+ *   - SL_STATUS_OK if OK
  */
 sl_status_t zwave_s0_on_frame_received(
   const zwave_controller_connection_info_t *connection_info,
@@ -73,9 +79,12 @@ sl_status_t zwave_s0_on_frame_received(
 
 /**
  * @brief Initialize the S0 Transport
- * *
+ * Also calls zwave_s0_network_init() which aborts all tx sessions and 
+ * frees them and also frees rx sessions and reads S0 key from keystore and
+ * initializes the S0 key
+ *
  * @returns SL_STATUS_OK if successful
- * @returns SL_STATUS_FAIL if an error occurred
+ * @returns SL_STATUS_FAIL if an error occurred in zwave_s0_network_init()
  */
 sl_status_t zwave_s0_transport_init(void);
 

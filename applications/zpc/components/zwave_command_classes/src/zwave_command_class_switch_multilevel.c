@@ -60,19 +60,12 @@
 ///> of the node
 #define SUBSTATE_DURATION 1 << 2
 
-///< Values for the ATTRIBUTE(STATE) of the multilevel Switch
-typedef enum {
-  FINAL_STATE             = 0,
-  NEEDS_ONE_COMMAND       = 1,
-  NEEDS_MULTIPLE_COMMANDS = 2,
-} state_values_t;
-
 /**
  * @brief Full state of a multilevel Switch supporting node.
  */
 typedef struct multilevel_switch_state {
-  state_values_t desired_state;
-  state_values_t reported_state;
+  command_status_values_t desired_state;
+  command_status_values_t reported_state;
   uint32_t desired_value;
   uint32_t reported_value;
   uint32_t desired_duration;
@@ -111,17 +104,17 @@ static void zwave_command_class_switch_multilevel_on_desired_sub_state_update(
 // Local helper functions
 ///////////////////////////////////////////////////////////////////////////////
 static void set_state_value(attribute_store_node_t state_node,
-                            state_values_t reported,
-                            state_values_t desired)
+                            command_status_values_t reported,
+                            command_status_values_t desired)
 {
   attribute_store_set_node_attribute_value(state_node,
                                            REPORTED_ATTRIBUTE,
                                            (uint8_t *)&reported,
-                                           sizeof(state_values_t));
+                                           sizeof(command_status_values_t));
   attribute_store_set_node_attribute_value(state_node,
                                            DESIRED_ATTRIBUTE,
                                            (uint8_t *)&desired,
-                                           sizeof(state_values_t));
+                                           sizeof(command_status_values_t));
 }
 
 static void get_state(attribute_store_node_t state_node,
@@ -130,11 +123,11 @@ static void get_state(attribute_store_node_t state_node,
   attribute_store_read_value(state_node,
                              DESIRED_OR_REPORTED_ATTRIBUTE,
                              (uint8_t *)&state->desired_state,
-                             sizeof(state_values_t));
+                             sizeof(command_status_values_t));
   attribute_store_read_value(state_node,
                              REPORTED_ATTRIBUTE,
                              (uint8_t *)&state->reported_state,
-                             sizeof(state_values_t));
+                             sizeof(command_status_values_t));
 
   attribute_store_node_t duration_node
     = attribute_store_get_node_child_by_type(state_node,
@@ -865,7 +858,7 @@ sl_status_t zwave_command_class_switch_multilevel_init()
   handler.manual_security_validation = false;
   handler.command_class              = COMMAND_CLASS_SWITCH_MULTILEVEL_V4;
   handler.version                    = SWITCH_MULTILEVEL_VERSION_V4;
-  handler.command_class_name         = "Switch Multilevel";
+  handler.command_class_name         = "Multilevel Switch";
   handler.comments                   = "Partial control: <br>"
                      "1. we do not use start/stop level change.<br>"
                      "2. we do not support the 0xFF duration";

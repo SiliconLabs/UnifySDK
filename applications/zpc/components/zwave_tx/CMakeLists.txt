@@ -21,6 +21,7 @@ PUBLIC
   uic_contiki_platform
   uic_contiki
   zwave_tx_groups
+  zwave_definitions
 PRIVATE
   zwave_controller
 )

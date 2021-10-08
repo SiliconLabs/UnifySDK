@@ -22,7 +22,7 @@ use uic_config::*;
 use uic_log::*;
 use std::path::Path;
 
-const APP_NAME: &'static str = "uic-angel";
+const APP_NAME: &str = "uic-angel";
 const CONFIG_VERSION: &str = env!("VERSION_STR");
 
 fn main() -> std::result::Result<(), i32> {
@@ -58,11 +58,11 @@ fn run(mqtt_client_id: &str,
         let keyfilepath = Path::new(key_file);
 
         if cafilepath.exists() && certfilepath.exists() && keyfilepath.exists() {
-            mqtt_client.tls_set(&cafilepath, &certfilepath, &keyfilepath)?;
+            mqtt_client.tls_set(cafilepath, certfilepath, keyfilepath)?;
         }
     }
 
-    mqtt_client.connect(&mqtt_broker, mqtt_port.try_into().unwrap())?;
+    mqtt_client.connect(mqtt_broker, mqtt_port.try_into().unwrap())?;
 
     let reported_group_list =
         mqtt_client.subscribe("ucl/by-unid/+/+/Groups/Attributes/GroupList/Reported", 0)?;

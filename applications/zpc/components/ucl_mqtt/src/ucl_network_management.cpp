@@ -25,6 +25,7 @@
 #include <boost/iostreams/stream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <nlohmann/json.hpp>
 #include <cstddef>
 #include <map>
 #include <sstream>
@@ -83,7 +84,7 @@ typedef enum {
   /// The Protocol Controller is carrying out some network maintenance,
   /// which can for example be distributing
   /// the network topology or state to all other controller nodes in the network.
-  UCL_NM_TOPIC_NETWORK_MAINTENANCE,
+  UCL_NM_TOPIC_NETWORK_UPDATE,
   /// The Protocol Controller is resetting to default
   UCL_NM_TOPIC_RESET,
   /// The Protocol Controller goes offline and will not be reachable at all.
@@ -125,7 +126,7 @@ class UclNetworkManagementStateData
 {
   public:
   const ucl_network_management_state_t state;
-  const std::vector<std::pair<std::string, std::string>> state_parameters;
+  const std::map<std::string, std::string, std::less<>> state_parameters;
   const std::vector<std::string> requested_state_parameters;
 
   /**
@@ -137,7 +138,7 @@ class UclNetworkManagementStateData
    */
   UclNetworkManagementStateData(
     ucl_network_management_state_t state,
-    const std::vector<std::pair<std::string, std::string>> &state_parameters,
+    const std::map<std::string, std::string, std::less<>> &state_parameters,
     const std::vector<std::string> &requested_state_parameters) :
     state(state),
     state_parameters(state_parameters),
@@ -152,7 +153,7 @@ class UclNetworkManagementStateData
    */
   UclNetworkManagementStateData(
     ucl_network_management_state_t state,
-    const std::vector<std::pair<std::string, std::string>> &state_parameters) :
+    const std::map<std::string, std::string, std::less<>> &state_parameters) :
     UclNetworkManagementStateData(
       state, state_parameters, std::vector<std::string>())
   {}
@@ -166,7 +167,7 @@ class UclNetworkManagementStateData
                                          const std::vector<std::string> &) :
     UclNetworkManagementStateData(
       state,
-      std::vector<std::pair<std::string, std::string>>(),
+      std::map<std::string, std::string, std::less<>>(),
       requested_state_parameters)
 
   {}
@@ -179,7 +180,7 @@ class UclNetworkManagementStateData
   explicit UclNetworkManagementStateData(ucl_network_management_state_t state) :
     UclNetworkManagementStateData(
       state,
-      std::vector<std::pair<std::string, std::string>>(),
+      std::map<std::string, std::string, std::less<>>(),
       std::vector<std::string>())
   {}
 };
@@ -292,23 +293,34 @@ static void
 ////////////////////////////////////////////////////////////////////////////////
 // Local Variables and Consts
 ////////////////////////////////////////////////////////////////////////////////
+constexpr std::string_view UCL_NM_TOPIC_IDLE_STR           = "idle";
+constexpr std::string_view UCL_NM_TOPIC_ADD_NODE_STR       = "add node";
+constexpr std::string_view UCL_NM_TOPIC_REMOVE_NODE_STR    = "remove node";
+constexpr std::string_view UCL_NM_TOPIC_JOIN_NETWORK_STR   = "join network";
+constexpr std::string_view UCL_NM_TOPIC_LEAVE_NETWORK_STR  = "leave network";
+constexpr std::string_view UCL_NM_TOPIC_NETWORK_REPAIR_STR = "network repair";
+constexpr std::string_view UCL_NM_TOPIC_NETWORK_UPDATE_STR = "network update";
+constexpr std::string_view UCL_NM_TOPIC_RESET_STR          = "reset";
+constexpr std::string_view UCL_NM_TOPIC_TEMPORARILY_OFFLINE_STR
+  = "temporarily offline";
+constexpr std::string_view UCL_NM_TOPIC_SCAN_MODE_STR = "scan mode";
 
 // Use boost::property_tree::detail::less_nocase as comperator
 // to make map keys case insensitive
-static const std::map<std::string,
+static const std::map<std::string_view,
                       ucl_network_management_state_t,
-                      bpt::detail::less_nocase<std::string>>
+                      bpt::detail::less_nocase<std::string_view>>
   ucl_network_management_state_map = {
-    {"idle", UCL_NM_TOPIC_IDLE},
-    {"add node", UCL_NM_TOPIC_ADD_NODE},
-    {"remove node", UCL_NM_TOPIC_REMOVE_NODE},
-    {"join network", UCL_NM_TOPIC_JOIN_NETWORK},
-    {"leave network", UCL_NM_TOPIC_LEAVE_NETWORK},
-    {"network repair", UCL_NM_TOPIC_NETWORK_REPAIR},
-    {"network maintenance", UCL_NM_TOPIC_NETWORK_MAINTENANCE},
-    {"reset", UCL_NM_TOPIC_RESET},
-    {"temporarily offline", UCL_NM_TOPIC_TEMPORARILY_OFFLINE},
-    {"scan mode", UCL_NM_TOPIC_SCAN_MODE},
+    {UCL_NM_TOPIC_IDLE_STR, UCL_NM_TOPIC_IDLE},
+    {UCL_NM_TOPIC_ADD_NODE_STR, UCL_NM_TOPIC_ADD_NODE},
+    {UCL_NM_TOPIC_REMOVE_NODE_STR, UCL_NM_TOPIC_REMOVE_NODE},
+    {UCL_NM_TOPIC_JOIN_NETWORK_STR, UCL_NM_TOPIC_JOIN_NETWORK},
+    {UCL_NM_TOPIC_LEAVE_NETWORK_STR, UCL_NM_TOPIC_LEAVE_NETWORK},
+    {UCL_NM_TOPIC_NETWORK_REPAIR_STR, UCL_NM_TOPIC_NETWORK_REPAIR},
+    {UCL_NM_TOPIC_NETWORK_UPDATE_STR, UCL_NM_TOPIC_NETWORK_UPDATE},
+    {UCL_NM_TOPIC_RESET_STR, UCL_NM_TOPIC_RESET},
+    {UCL_NM_TOPIC_TEMPORARILY_OFFLINE_STR, UCL_NM_TOPIC_TEMPORARILY_OFFLINE},
+    {UCL_NM_TOPIC_SCAN_MODE_STR, UCL_NM_TOPIC_SCAN_MODE},
 };
 
 static const zwave_controller_callbacks_t ucl_network_management_callbacks = {
@@ -369,7 +381,9 @@ static void ucl_network_management_on_state_updated(
       ucl_nm_state = UCL_NM_TOPIC_REMOVE_NODE;
       break;
     default:
-      sl_log_warning(LOG_TAG, "unhandled network management state");
+      sl_log_warning(LOG_TAG,
+                     "Unhandled Network Management state: %d",
+                     nm_state);
       break;
   }
   process_post(&ucl_network_management_process,
@@ -389,7 +403,7 @@ static void ucl_network_management_on_keys_report(bool csa, zwave_keyset_t keys)
   sl_status_t status = zwave_network_management_keys_set(true, csa, keys);
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG,
-                 "zwave_network_management_keys_set failed: %d",
+                 "zwave_network_management_keys_set failed with Status: 0x%04X",
                  status);
   }
 }
@@ -430,24 +444,25 @@ static void ucl_network_management_on_dsk_report(uint8_t input_length,
     char dsk_str[DSK_STR_LEN];
     // Input validation of 'input_length'
     if (input_length % 2 != 0) {
-      sl_log_error(LOG_TAG,
-                   "number of leading bytes to 'x' out in dsk is 'odd' (%u), "
-                   "which isn't supported. Must be an even number",
-                   input_length);
+      sl_log_info(LOG_TAG,
+                  "Invalid DSK input length (%d). The number of missing bytes "
+                  "for the DSK input must be an even number. Please try again",
+                  input_length);
       return;
     }
     // More input validation of 'input_length'
     if (input_length > ZWAVE_DSK_LENGTH) {
-      sl_log_error(
-        LOG_TAG,
-        "number of leading bytes to 'x' out is larger than the number "
-        "of bytes in the dsk, it is: %u",
-        input_length);
+      sl_log_info(LOG_TAG,
+                  "Invalid DSK input. You have entered too much data (%d), "
+                  "more than the length of a DSK (%d). Please try again",
+                  input_length,
+                  ZWAVE_DSK_LENGTH);
+
       return;
     }
     if (zpc_converters_dsk_to_str(dsk, dsk_str, sizeof(dsk_str))
         != SL_STATUS_OK) {
-      sl_log_error(LOG_TAG, "Failed to convert DSK to string");
+      sl_log_info(LOG_TAG, "Failed to convert DSK to string");
       return;
     }
     // Blank out 'input_length' bytes with 'x'
@@ -505,8 +520,8 @@ static sl_status_t write_topic_received(const std::string &message)
   try {
     bpt::json_parser::read_json(ss, root_tree);
   } catch (const bpt::json_parser_error &e) {
-    sl_log_error(LOG_TAG,
-                 "Failed parsing json message: '%s', error: %s",
+    sl_log_debug(LOG_TAG,
+                 "Failed to parse JSON message: '%s', error: %s",
                  message.c_str(),
                  e.what());
     return SL_STATUS_FAIL;
@@ -516,7 +531,9 @@ static sl_status_t write_topic_received(const std::string &message)
     sl_log_debug(LOG_TAG, "State: '%s' received", mesg.c_str());
     auto state = ucl_network_management_state_map.find(mesg);
     if (state == ucl_network_management_state_map.end()) {
-      sl_log_error(LOG_TAG, "Invalid state: %s", mesg.c_str());
+      sl_log_debug(LOG_TAG,
+                   "Invalid state: %s, ignoring command.",
+                   mesg.c_str());
       return SL_STATUS_FAIL;
     }
 
@@ -546,19 +563,21 @@ static sl_status_t write_topic_received(const std::string &message)
                                                           zwave_dsk)) {
                   zwave_network_management_dsk_set(zwave_dsk);
                 } else {  // Failed to parse dsk
-                  sl_log_warning(LOG_TAG,
-                                 "Failed to parse dsk: '%s'",
-                                 dsk_str.get().c_str());
+                  sl_log_debug(LOG_TAG,
+                               "Failed to parse DSK: '%s'",
+                               dsk_str.get().c_str());
                 }
               } else {  // UserAccepted is true, but SecurityCode is not supplied
-                sl_log_warning(
+                sl_log_debug(
                   LOG_TAG,
                   "\"State\": \"add node\" is missing \"StateParameters\" "
-                  "\"SecurityCode\", discarting message: %s",
+                  "\"SecurityCode\", discarding command: %s",
                   message.c_str());
               }
             } else {  // UserAccepted is false
-              sl_log_debug(LOG_TAG, "User rejected node add");
+              sl_log_debug(
+                LOG_TAG,
+                "User rejected node add operation (UserAccepted = false).");
               zwave_network_management_abort();
             }
           } else {  // UserAccept have not been supplied
@@ -578,7 +597,7 @@ static sl_status_t write_topic_received(const std::string &message)
         break;
       case UCL_NM_TOPIC_NETWORK_REPAIR:
         break;
-      case UCL_NM_TOPIC_NETWORK_MAINTENANCE:
+      case UCL_NM_TOPIC_NETWORK_UPDATE:
         break;
       case UCL_NM_TOPIC_RESET:
         zwave_controller_reset();
@@ -590,7 +609,9 @@ static sl_status_t write_topic_received(const std::string &message)
       case UCL_NM_TOPIC_LAST:
         break;
       default:
-        sl_log_warning(LOG_TAG, "Unhandled UCL Network Management Topic");
+        sl_log_warning(LOG_TAG,
+                       "Unhandled UCL Network Management Topic: %d",
+                       state->second);
         break;
     }
   } catch (const bpt::ptree_error &e) {
@@ -628,6 +649,42 @@ static sl_status_t
   return SL_STATUS_OK;
 }
 
+nlohmann::json get_supported_states(ucl_network_management_state_t state)
+{
+  switch (state) {
+    case UCL_NM_TOPIC_IDLE:
+      return nlohmann::json::array({UCL_NM_TOPIC_ADD_NODE_STR,
+                                    UCL_NM_TOPIC_REMOVE_NODE_STR,
+                                    UCL_NM_TOPIC_RESET_STR});
+
+    case UCL_NM_TOPIC_ADD_NODE:
+      return nlohmann::json::array({UCL_NM_TOPIC_IDLE_STR});
+    case UCL_NM_TOPIC_REMOVE_NODE:
+      return nlohmann::json::array({UCL_NM_TOPIC_IDLE_STR});
+
+    case UCL_NM_TOPIC_REMOVE_FAILED_NODE:
+      return nlohmann::json::array({UCL_NM_TOPIC_IDLE_STR});
+    case UCL_NM_TOPIC_JOIN_NETWORK:
+      return nlohmann::json::array({UCL_NM_TOPIC_IDLE_STR});
+    case UCL_NM_TOPIC_LEAVE_NETWORK:
+      break;
+    case UCL_NM_TOPIC_NODE_INTERVIEW:
+      break;
+    case UCL_NM_TOPIC_NETWORK_REPAIR:
+      break;
+    case UCL_NM_TOPIC_NETWORK_UPDATE:
+      break;
+    case UCL_NM_TOPIC_RESET:
+      break;
+    case UCL_NM_TOPIC_TEMPORARILY_OFFLINE:
+      break;
+    case UCL_NM_TOPIC_SCAN_MODE:
+      return nlohmann::json::array({UCL_NM_TOPIC_IDLE_STR});
+    default:
+      break;
+  }
+  return nlohmann::json::array();
+}
 static sl_status_t state_topic_update(
   const unid_t unid,
   const UclNetworkManagementStateData &uic_state_topic_update_data)
@@ -648,37 +705,25 @@ static sl_status_t state_topic_update(
        it != ucl_network_management_state_map.end();
        ++it) {
     if (it->second == uic_state_topic_update_data.state) {
-      bpt::iptree root;
-      root.put("State", it->first);
+      nlohmann::json root;
+      // State
+      root["State"] = it->first;
+
+      // SupportedStateList
+      root["SupportedStateList"] = get_supported_states(it->second);
 
       // StateParameters
-      bpt::iptree state_parameters;
-      for (auto sp_it = uic_state_topic_update_data.state_parameters.begin();
-           sp_it != uic_state_topic_update_data.state_parameters.end();
-           ++sp_it) {
-        state_parameters.put(sp_it->first, sp_it->second);
-      }
-      if (!state_parameters.empty()) {
-        root.add_child("StateParameters", state_parameters);
+      if (!uic_state_topic_update_data.state_parameters.empty()) {
+        root["StateParameters"] = uic_state_topic_update_data.state_parameters;
       }
 
       // RequestedStateParamters
-      bpt::iptree requested_state_parameters;
-      for (auto rsp_it
-           = uic_state_topic_update_data.requested_state_parameters.begin();
-           rsp_it
-           != uic_state_topic_update_data.requested_state_parameters.end();
-           ++rsp_it) {
-        bpt::iptree child;
-        child.put("", *rsp_it);
-        requested_state_parameters.push_back(std::make_pair("", child));
+      if (!uic_state_topic_update_data.requested_state_parameters.empty()) {
+        root["RequestedStateParameters"]
+          = uic_state_topic_update_data.requested_state_parameters;
       }
-      if (!requested_state_parameters.empty()) {
-        root.add_child("RequestedStateParameters", requested_state_parameters);
-      }
-      std::stringstream ss;
-      bpt::json_parser::write_json(ss, root);
-      std::string msg = ss.str();
+
+      std::string msg = root.dump();
       uic_mqtt_publish((get_topic(unid) + "/NetworkManagement").data(),
                        msg.data(),
                        msg.size(),
@@ -732,6 +777,9 @@ static void ucl_network_management_init()
 
 static void ucl_network_management_exit()
 {
+  UclNetworkManagementStateData ucl_nm_state_data(
+    UCL_NM_TOPIC_TEMPORARILY_OFFLINE);
+  state_topic_update(zpc_unid, ucl_nm_state_data);
   write_topic_unsubscribe(zpc_unid, ucl_network_management_mqtt_callback);
   uic_mqtt_unretain((get_topic(zpc_unid) + "/NetworkManagement").c_str());
 }
@@ -820,6 +868,10 @@ PROCESS_THREAD(ucl_network_management_process, ev, data)
 
       case PROCESS_EVENT_EXIT:
         ucl_network_management_exit();
+        break;
+
+      case PROCESS_EVENT_EXITED:
+        // Do not do anything with this event, just wait to go down.
         break;
 
       case NEW_NETWORK_EVENT:

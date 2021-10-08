@@ -92,7 +92,7 @@ void uic_mqtt_process_on_disconnect(mqtt_client_t instance,
   if (uic_main_ext_unregister_rfd(file_descriptor) == SL_STATUS_OK) {
     sl_log_debug(LOG_TAG, "Unregistered file-descriptor.\n");
   } else {
-    sl_log_critical(LOG_TAG, "Unable to unregister file-descriptor.\n");
+    sl_log_warning(LOG_TAG, "Unable to unregister file-descriptor.\n");
   }
 }
 
@@ -196,8 +196,7 @@ PROCESS_THREAD(uic_mqtt_process, ev, data)
   while (1) {
     if (ev == PROCESS_EVENT_INIT) {
       process_post(&uic_mqtt_process, MQTT_EVENT_CONNECT, NULL);
-      etimer_set(&uic_mqtt_loop_timer,
-                 MQTT_CLIENT_KEEP_ALIVE_INTERVAL_MILLISECONDS / 3);
+      etimer_set(&uic_mqtt_loop_timer, MQTT_CLIENT_POLL_TIMER_MILLISECONDS);
 
     } else if (ev == PROCESS_EVENT_EXIT) {
       // The event-loop has been shut down a this point, so we need to disconnect

@@ -29,35 +29,31 @@ class GroupCommandDlg extends React.Component<GroupCommandDlgProps, GroupCommand
     }
 
     updateState(group: Group, showModal: boolean) {
-        let clustersSet = new Set<string>();
-        group.GroupEndpointList.forEach(i => {
-            if (i.NetworkStatus !== "Offline" && i.NetworkStatus !== "Unavailable" && i.ClusterTypes)
-                i.ClusterTypes.forEach((t: any) => { if (ClusterTypeAttrs[t].server.commands.length) clustersSet.add(t) });
-        });
-        let clusters = [...clustersSet];
-        if (!clusters.length) {
+        if (!group.Clusters.length) {
             toast(`This group does not contain any commands`, { type: "warning" })
             return;
         }
-        let commands = ClusterTypeAttrs[clusters[0]].server.commands
-        this.setState(
-            {
-                Group: group,
-                AvailableClusters: clusters,
-                ClusterType: clusters[0],
-                AvailableCommands: commands,
-                Command: commands[0],
-                ShowModal: showModal
-            }, () => this.changeCommandAttrs.current.updateState(this.state.Command));
+        let cluster = group.Clusters[0];
+        let advertisedCommands = (group as any)[cluster].SupportedCommands
+        let commands = ClusterTypeAttrs[cluster].server.commands.filter((i: any) => advertisedCommands.indexOf(i.name) > -1);
+        this.setState({
+            Group: group,
+            ClusterType: cluster,
+            ShowModal: showModal,
+            AvailableCommands: commands,
+            Command: commands[0]
+        }, () => this.changeCommandAttrs.current.updateState(this.state.Command));
     }
 
     handleClusterChange = (event: any) => {
-        let commands = ClusterTypeAttrs[event.target.value].server.commands
-        this.setState({ ClusterType: event.target.value, AvailableCommands: commands, Command: commands[0] });
+        let advertisedCommands = (this.state.Group as any)[event.target.value].SupportedCommands;
+        let commands = ClusterTypeAttrs[event.target.value].server.commands.filter((i: any) => advertisedCommands.indexOf(i.name) > -1);
+        this.setState({ ClusterType: event.target.value, AvailableCommands: commands, Command: commands[0] },
+            () => this.changeCommandAttrs.current.updateState(this.state.Command));
     }
 
     handleCommandChange = (event: any) => {
-        this.setState({ Command: ClusterTypeAttrs[this.state.ClusterType].server.commands.find((i: any) => i.id === Number(event.target.value)) },
+        this.setState({ Command: this.state.AvailableCommands.find((i: any) => i.id === Number(event.target.value)) },
             () => this.changeCommandAttrs.current.updateState(this.state.Command));
     }
 
@@ -89,8 +85,8 @@ class GroupCommandDlg extends React.Component<GroupCommandDlgProps, GroupCommand
                             <Form.Label column>Cluster Type</Form.Label>
                             <div>
                                 <Form.Control as="select" name="ClusterType" onChange={this.handleClusterChange} value={this.state.ClusterType}>
-                                    {this.state.AvailableClusters.map((item: any, ind: number) => {
-                                        return <option key={ind} value={item}>{item}</option>
+                                    {this.state.Group.Clusters?.map((cluster: any, index: number) => {
+                                        return <option key={index} value={cluster}>{cluster}</option>
                                     })}
                                 </Form.Control>
                             </div>

@@ -42,7 +42,8 @@
 
 // Log tag
 static constexpr char LOG_TAG[] = "zwave_command_class_notification";
-static constexpr unsigned int MAX_SUPPORTED_NOTIFICATION_TYPES = 13;
+static constexpr unsigned int MAX_SUPPORTED_NOTIFICATION_TYPES  = 20;
+static constexpr unsigned int MAX_SUPPORTED_NOTIFICATION_STATES = 256;
 static constexpr unsigned int NOTIFICATION_REPORT_EVENT_STATE_PARAMETER_OFFSET
   = 9;
 
@@ -59,12 +60,21 @@ static sl_status_t zwave_command_class_notification_update_state_event(
   const int32_t notification_event = frame->mevent;
 
   attribute notification_event_node
-    = notification_type_node.child_by_type_and_value(ATTRIBUTE(STATE), state)
-        .child_by_type(ATTRIBUTE(EVENT), 0);
+    = attribute_store_get_node_child_by_value(notification_type_node,
+                                              ATTRIBUTE(STATE),
+                                              REPORTED_ATTRIBUTE,
+                                              &state,
+                                              sizeof(state),
+                                              0);
+  notification_event_node
+    = notification_event_node.child_by_type(ATTRIBUTE(EVENT), 0);
+
   if (!notification_event_node.is_valid()) {
     sl_log_debug(LOG_TAG,
-                 "Failed to lookup attribute "
-                 "ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_EVENT");
+                 "Failed to find the State -> Event node under Notification "
+                 "Type Attribute %d, for State value %d",
+                 notification_type_node,
+                 state);
     return SL_STATUS_OK;
   }
   notification_event_node.set_reported(notification_event);
@@ -75,7 +85,10 @@ static sl_status_t zwave_command_class_notification_update_state_event(
   attribute notification_event_param
     = notification_event_node.child_by_type(ATTRIBUTE(EVENT_PARAMETERS), 0);
   if (!notification_event_param.is_valid()) {
-    sl_log_warning(LOG_TAG, "Failed to lookup attribute %d", __LINE__);
+    sl_log_debug(
+      LOG_TAG,
+      "Failed to find the Event Parameter attribute under attribute %d",
+      notification_event_node);
     return SL_STATUS_OK;
   }
   if (state_event_param_len > 0
@@ -126,8 +139,12 @@ static sl_status_t zwave_command_class_notification_report_cmd_handler(
     attribute v1_alarm_type_node;
     if (v1_alarm_type != 0) {
       v1_alarm_type_node
-        = ep_node.child_by_type_and_value(ATTRIBUTE(V1_ALARM_TYPE),
-                                          v1_alarm_type);
+        = attribute_store_get_node_child_by_value(ep_node,
+                                                  ATTRIBUTE(V1_ALARM_TYPE),
+                                                  REPORTED_ATTRIBUTE,
+                                                  &v1_alarm_type,
+                                                  sizeof(v1_alarm_type),
+                                                  0);
       if (v1_alarm_type_node.is_valid()) {
         v1_alarm_type_node.child_by_type(ATTRIBUTE(V1_ALARM_LEVEL))
           .set_reported(frame->v1AlarmLevel);
@@ -142,7 +159,12 @@ static sl_status_t zwave_command_class_notification_report_cmd_handler(
 
     const uint8_t notification_type = frame->notificationType;
     attribute notification_type_node
-      = ep_node.child_by_type_and_value(ATTRIBUTE(TYPE), notification_type);
+      = attribute_store_get_node_child_by_value(ep_node,
+                                                ATTRIBUTE(TYPE),
+                                                REPORTED_ATTRIBUTE,
+                                                &notification_type,
+                                                sizeof(notification_type),
+                                                0);
     if (!notification_type_node.is_valid()) {
       sl_log_warning(LOG_TAG, "Failed to lookup attribute %d", __LINE__);
       return SL_STATUS_OK;
@@ -159,8 +181,8 @@ static sl_status_t zwave_command_class_notification_report_cmd_handler(
             & NOTIFICATION_REPORT_PROPERTIES1_EVENT_PARAMETERS_LENGTH_MASK_V8)) {
         sl_log_debug(
           LOG_TAG,
-          "IDLE Event received without any event parameters, Setting "
-          "all states to idle.");
+          "Notification Idle Event received without any event parameters. "
+          "Setting all states to idle.");
         std::set<unsigned int> updated_states;
         for (auto const &elem:
              notification_event_state_map.at(frame->notificationType)) {
@@ -229,7 +251,7 @@ static sl_status_t
       sending_node_unid,
       connection_info->remote.endpoint_id);
 
-  uint8_t version
+  zwave_cc_version_t version
     = zwave_node_get_command_class_version(COMMAND_CLASS_NOTIFICATION_V8,
                                            connection_info->remote.node_id,
                                            connection_info->remote.endpoint_id);
@@ -246,7 +268,7 @@ static sl_status_t
   } else if (number_of_bit_masks == 2) {
     notification_types_bits = (frame_data[4] << 8) | frame_data[3];
   } else {
-    sl_log_error(LOG_TAG,
+    sl_log_debug(LOG_TAG,
                  "Supported notification types Bit Masks length is wrong\n");
   }
 
@@ -307,6 +329,14 @@ static sl_status_t
           supported_notification_types[number_of_supported_notification_types]
             = NOTIFICATION_REPORT_HOME_HEALTH_V4;
           break;
+        case 0x4000:
+          supported_notification_types[number_of_supported_notification_types]
+            = NOTIFICATION_GET_SIREN_V6;
+          break;
+        case 0x8000:
+          supported_notification_types[number_of_supported_notification_types]
+            = NOTIFICATION_GET_WATER_VALVE_V7;
+          break;
       }
       number_of_supported_notification_types++;
     }
@@ -358,10 +388,10 @@ static sl_status_t
     uint16_t frame_length)
 {
   if (frame_length < 4) {
-    sl_log_warning(
-      LOG_TAG,
-      "Received EVENT_SUPPORTED_REPORT with too small frame length (%d)",
-      frame_length);
+    sl_log_debug(LOG_TAG,
+                 "Received an Event Supported Report Command with "
+                 "too small frame length (%d). Ignoring",
+                 frame_length);
     return SL_STATUS_OK;
   }
 
@@ -372,7 +402,10 @@ static sl_status_t
     = (report_frame->properties1
        & EVENT_SUPPORTED_REPORT_PROPERTIES1_NUMBER_OF_BIT_MASKS_MASK_V3);
   if (number_of_bytes == 0) {
-    sl_log_info(LOG_TAG, "Notification Type not supported");
+    sl_log_warning(LOG_TAG,
+                   "The Notification Type is not supported. It seems that we "
+                   "sent a wrong Get Command or that the supporting node "
+                   "did not report correct data.");
     return SL_STATUS_OK;
   }
   // Get the unid of the sending node
@@ -399,11 +432,10 @@ static sl_status_t
       sizeof(report_frame->notificationType),
       0);
   if (ATTRIBUTE_STORE_INVALID_NODE == notification_node) {
-    sl_log_warning(
-      LOG_TAG,
-      "Failed to lookup Notification Type (%d) under Endpoint (%d)",
-      report_frame->notificationType,
-      connection_info->remote.endpoint_id);
+    sl_log_debug(LOG_TAG,
+                 "Failed to lookup Notification Type (%d) under Endpoint (%d)",
+                 report_frame->notificationType,
+                 connection_info->remote.endpoint_id);
     return SL_STATUS_OK;
   }
 
@@ -413,10 +445,10 @@ static sl_status_t
       ATTRIBUTE(SUPPORTED_STATES_OR_EVENTS),
       0);
   if (ATTRIBUTE_STORE_INVALID_NODE == supported_state_or_event_node) {
-    sl_log_warning(LOG_TAG,
-                   "Failed to lookup Notification Supported Event State "
-                   "Attribute under Notification Type (%d)",
-                   report_frame->notificationType);
+    sl_log_debug(LOG_TAG,
+                 "Failed to lookup Notification Supported Event State "
+                 "Attribute under Notification Type (%d)",
+                 report_frame->notificationType);
     return SL_STATUS_OK;
   }
 
@@ -451,7 +483,10 @@ static sl_status_t
           notification_state_node
             = attribute_store_add_node(ATTRIBUTE(STATE), notification_node);
           if (notification_state_node == ATTRIBUTE_STORE_INVALID_NODE) {
-            sl_log_error(LOG_TAG, "Failed to create attribute");
+            sl_log_error(LOG_TAG,
+                         "Failed to create attribute for the Notification "
+                         "State under attribute %d.",
+                         notification_state_node);
             assert(false);
             continue;
           }
@@ -459,14 +494,20 @@ static sl_status_t
             = attribute_store_add_node(ATTRIBUTE(EVENT),
                                        notification_state_node);
           if (event_type == ATTRIBUTE_STORE_INVALID_NODE) {
-            sl_log_error(LOG_TAG, "Failed to create attribute");
+            sl_log_error(LOG_TAG,
+                         "Failed to create attribute for the Notification "
+                         "Event Type under attribute %d.",
+                         notification_state_node);
             assert(false);
             continue;
           }
           if (ATTRIBUTE_STORE_INVALID_NODE
               == attribute_store_add_node(ATTRIBUTE(EVENT_PARAMETERS),
                                           event_type)) {
-            sl_log_error(LOG_TAG, "Failed to create attribute");
+            sl_log_error(LOG_TAG,
+                         "Failed to create attribute for the Notification "
+                         "Event Parameters under attribute %d.",
+                         event_type);
             assert(false);
             continue;
           }
@@ -505,7 +546,10 @@ static sl_status_t
       notification_state_node
         = attribute_store_add_node(ATTRIBUTE(STATE), notification_node);
       if (notification_state_node == ATTRIBUTE_STORE_INVALID_NODE) {
-        sl_log_error(LOG_TAG, "Failed to create attribute");
+        sl_log_error(LOG_TAG,
+                     "Failed to create attribute for the Notification "
+                     "State under attribute %d.",
+                     notification_state_node);
         assert(false);
       }
       attribute_store_set_node_attribute_value(notification_state_node,
@@ -526,7 +570,6 @@ static sl_status_t zwave_command_class_notification_control_handler(
   if (frame_length <= COMMAND_INDEX) {
     return SL_STATUS_FAIL;
   }
-
   if (frame_data[COMMAND_CLASS_INDEX] != COMMAND_CLASS_NOTIFICATION_V4) {
     return SL_STATUS_NOT_SUPPORTED;
   }
@@ -589,7 +632,7 @@ void zwave_command_class_notification_on_version_attribute_update(
     assert(false && "Should always be able to get command class version here");
     return;
   }
-  uint8_t version
+  zwave_cc_version_t version
     = zwave_node_get_command_class_version(COMMAND_CLASS_NOTIFICATION_V8,
                                            node_id,
                                            endpoint_id);
@@ -631,7 +674,31 @@ static sl_status_t zwave_command_class_notification_get(
     &notification_type,
     sizeof(notification_type));
   notification_get_frame->notificationType = notification_type;
-  notification_get_frame->mevent           = 0x00;
+
+  // Get Notification Event / State from attribute store
+  uint8_t notification_state;
+  attribute_store_read_value(
+    attribute_store_get_first_parent_with_type(node, ATTRIBUTE(STATE)),
+    REPORTED_ATTRIBUTE,
+    &notification_state,
+    sizeof(notification_state));
+  uint8_t supported_notification_states[MAX_SUPPORTED_NOTIFICATION_STATES];
+  uint8_t number_of_supported_states;
+  attribute_store_node_t supported_states_node
+    = attribute_store_get_node_child_by_type(
+      attribute_store_get_first_parent_with_type(node, ATTRIBUTE(TYPE)),
+      ATTRIBUTE(SUPPORTED_STATES_OR_EVENTS),
+      0);
+  attribute_store_get_node_attribute_value(supported_states_node,
+                                           REPORTED_ATTRIBUTE,
+                                           supported_notification_states,
+                                           &number_of_supported_states);
+  if (!number_of_supported_states) {
+    notification_get_frame->mevent = 0x00;
+  } else {
+    notification_get_frame->mevent
+      = supported_notification_states[notification_state];
+  }
   *frame_len = sizeof(ZW_NOTIFICATION_GET_V4_FRAME);
 
   // Just in case the supporting node does not answer Notification

@@ -150,6 +150,33 @@ void test_zcl_frame_fill_data_array_multiple_uint8_data(void)
   TEST_ASSERT_EQUAL_HEX8_ARRAY(test_data, frame.buffer, test_data_len);
 }
 
+void test_zcl_frame_fill_data_array_frame_overflow(void)
+{
+  // ARRANGE
+  sl_status_t status;
+  zcl_frame_t frame = {.size = 0};
+
+  // ACT for valid entries
+  for (uint8_t i = 0; i < (ZCL_FRAME_BUFFER_SIZE_MAX); i++) {
+    status = zigpc_zcl_frame_fill_data_array(&frame,
+                                             ZIGPC_ZCL_DATA_TYPE_UINT8,
+                                             1,
+                                             &i);
+    // ASSERT for valid entries
+    TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, status);
+  }
+  TEST_ASSERT_EQUAL(255U, frame.size);
+
+  // ACT for overflow value add
+  uint8_t data = 0xAB;
+  status       = zigpc_zcl_frame_fill_data_array(&frame,
+                                           ZIGPC_ZCL_DATA_TYPE_UINT8,
+                                           1,
+                                           &data);
+  // ASSERT for overflow
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_WOULD_OVERFLOW, status);
+}
+
 void test_zcl_build_command_frame_sanity(void)
 {
   // ARRANGE
@@ -212,4 +239,98 @@ void test_zcl_build_command_frame_sanity_multiple_args(void)
 
   TEST_ASSERT_EQUAL_HEX8(arg3_len, frame.buffer[6]);
   TEST_ASSERT_EQUAL_STRING_LEN(arg3_data, &frame.buffer[7], arg3_len);
+}
+
+void test_zcl_build_command_frame_empty_string_arg(void)
+{
+  // ARRANGE
+  sl_status_t status;
+  zcl_frame_t frame;
+  zcl_cluster_id_t cluster_id = 0x0A2F;
+  zcl_command_id_t command_id = 0x47;
+  size_t arg_count            = 1;
+  char *arg1_data             = "";
+
+  zigpc_zcl_frame_data_t arg_list[] = {
+    {.type = ZIGPC_ZCL_DATA_TYPE_STRING, .data = arg1_data},
+  };
+
+  // ACT
+  status = zigpc_zcl_build_command_frame(&frame,
+                                         ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+                                         cluster_id,
+                                         command_id,
+                                         arg_count,
+                                         arg_list);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, status);
+  // 3 header + 1 (string len of 0)
+  TEST_ASSERT_EQUAL(4U, frame.size);
+  TEST_ASSERT_EQUAL_HEX8(0U, frame.buffer[3]);
+}
+
+void test_zcl_build_command_frame_arg_overflow(void)
+{
+  // ARRANGE
+  sl_status_t status;
+  zcl_frame_t frame;
+  zcl_cluster_id_t cluster_id = 0x0A2F;
+  zcl_command_id_t command_id = 0x47;
+  size_t arg_count            = 127;
+  uint16_t arg_data           = 0x5678;
+
+  zigpc_zcl_frame_data_t arg_list[arg_count];
+
+  for (size_t i = 0U; i < arg_count; i++) {
+    arg_list[i].type = ZIGPC_ZCL_DATA_TYPE_UINT16;
+    arg_list[i].data = &arg_data;
+  }
+
+  // ACT
+  status = zigpc_zcl_build_command_frame(&frame,
+                                         ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+                                         cluster_id,
+                                         command_id,
+                                         arg_count,
+                                         arg_list);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_WOULD_OVERFLOW, status);
+  // 3 header + 252 (126 uint16 data)
+  TEST_ASSERT_EQUAL(255, frame.size);
+}
+
+void test_zcl_build_command_frame_string_arg_invalid(void)
+{
+  // ARRANGE
+  sl_status_t status;
+  zcl_frame_t frame;
+  zcl_cluster_id_t cluster_id = 0x0A2F;
+  zcl_command_id_t command_id = 0x47;
+  size_t arg_count            = 2;
+  const char *arg1_data
+    = "UQMNaZUFcznYhd0LsMfjnEzG1bzs0HS9PQSUh4TJx0MKzrX7dbbpSNHLNJxTQLolHELHUhVr"
+      "PglgNOXoTH0Tulli5TGw4ApkldMM2GtIb4Fv0Ag3Zp8XVxziEXgr1VJ7x7XOhZDlkgetwpiH"
+      "2YttQGLSAVxG3G4HGwkfHhwHjdh8YtbdaT8MfErpYraanQDHh47mNPv8Qc5rjZeoivrNxNVN"
+      "othG0wzXqkzwmObwQez1yesmKcjLkVbJHcxZ342";
+  uint8_t arg2_data = 0x12;
+
+  zigpc_zcl_frame_data_t arg_list[] = {
+    {.type = ZIGPC_ZCL_DATA_TYPE_STRING, .data = arg1_data},
+    {.type = ZIGPC_ZCL_DATA_TYPE_UINT8, .data = &arg2_data},
+  };
+
+  // ACT
+  status = zigpc_zcl_build_command_frame(&frame,
+                                         ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+                                         cluster_id,
+                                         command_id,
+                                         arg_count,
+                                         arg_list);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_INVALID_SIGNATURE, status);
+  // 3 header (arg 1 & 2 not added)
+  TEST_ASSERT_EQUAL(3, frame.size);
 }

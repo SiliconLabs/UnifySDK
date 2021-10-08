@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -99,17 +99,15 @@ $(document).ready(function(){initNavTree('structzigpc__config__t.html',''); init
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a8ec2d0b5f448cafedfe723b5c091d126"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#a8ec2d0b5f448cafedfe723b5c091d126">mqtt_host</a></td></tr>
-<tr class="memdesc:a8ec2d0b5f448cafedfe723b5c091d126"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hostname of the MQTT broker.  <a href="structzigpc__config__t.html#a8ec2d0b5f448cafedfe723b5c091d126">More...</a><br /></td></tr>
 <tr class="separator:a8ec2d0b5f448cafedfe723b5c091d126"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a492af11e9147dc96fd72c86a6bb2f4f6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#a492af11e9147dc96fd72c86a6bb2f4f6">mqtt_port</a></td></tr>
-<tr class="memdesc:a492af11e9147dc96fd72c86a6bb2f4f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">port of the MQTT broker  <a href="structzigpc__config__t.html#a492af11e9147dc96fd72c86a6bb2f4f6">More...</a><br /></td></tr>
 <tr class="separator:a492af11e9147dc96fd72c86a6bb2f4f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a467d06b3d94b7279713db8981f7e8b6c"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#a467d06b3d94b7279713db8981f7e8b6c">serial_port</a></td></tr>
-<tr class="memdesc:a467d06b3d94b7279713db8981f7e8b6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the serial port of the Z-Wave module.  <a href="structzigpc__config__t.html#a467d06b3d94b7279713db8981f7e8b6c">More...</a><br /></td></tr>
 <tr class="separator:a467d06b3d94b7279713db8981f7e8b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a222cdae7ac1949dd794ee0973fe126e7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#a222cdae7ac1949dd794ee0973fe126e7">datastore_file</a></td></tr>
-<tr class="memdesc:a222cdae7ac1949dd794ee0973fe126e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the serial port of the Z-Wave module.  <a href="structzigpc__config__t.html#a222cdae7ac1949dd794ee0973fe126e7">More...</a><br /></td></tr>
 <tr class="separator:a222cdae7ac1949dd794ee0973fe126e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a737268886605033ba760f3edf87eadef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__config__t.html#a737268886605033ba760f3edf87eadef">tc_use_well_known_key</a></td></tr>
+<tr class="separator:a737268886605033ba760f3edf87eadef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Reference to options used by ZigPC. </p>
@@ -125,8 +123,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Name of the serial port of the Z-Wave module. </p>
+<p>Path to the SQLite datastore used by ZigPC </p>
 
 </div>
 </div>
@@ -141,8 +138,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Hostname of the MQTT broker. </p>
+<p>Hostname of the MQTT broker </p>
 
 </div>
 </div>
@@ -157,8 +153,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>port of the MQTT broker </p>
+<p>Port of the MQTT broker </p>
 
 </div>
 </div>
@@ -173,8 +168,22 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Name of the serial port of the Zigbee NCP </p>
 
-<p>Name of the serial port of the Z-Wave module. </p>
+</div>
+</div>
+<a id="a737268886605033ba760f3edf87eadef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a737268886605033ba760f3edf87eadef">&#9670;&nbsp;</a></span>tc_use_well_known_key</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool zigpc_config_t::tc_use_well_known_key</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allow Trust Center joins using well-known link key </p>
 
 </div>
 </div>
@@ -187,7 +196,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structzigpc__config__t.html">zigpc_config_t</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:41 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

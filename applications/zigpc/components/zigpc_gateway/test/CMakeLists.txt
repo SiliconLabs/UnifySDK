@@ -32,7 +32,7 @@ target_add_unittest(
   zigpc_gateway_process_send_mock
   z3gateway_mock
   zigpc_common_mock
-  zigpc_node_mgmt_mock)
+  zigpc_datastore_mock)
 
 # Datastore Tests
 target_add_unittest(

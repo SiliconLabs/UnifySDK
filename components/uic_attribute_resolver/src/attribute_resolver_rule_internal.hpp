@@ -23,7 +23,7 @@
 #ifndef ATTRIBUTE_RESOLVER_RULE_INTERNAL_HPP
 #define ATTRIBUTE_RESOLVER_RULE_INTERNAL_HPP
 
-#include <vector>
+#include <set>
 
 #include "attribute_resolver_rule.h"
 
@@ -40,7 +40,7 @@
  * @param rule_type Set or get resolution
  * @param group A collection of all the other attribute in the group
  */
-std::vector<attribute_store_node_t>
+std::set<attribute_store_node_t>
   attribute_resolver_rule_get_group_nodes(resolver_rule_type_t rule_type,
                                           attribute_store_node_t group);
 

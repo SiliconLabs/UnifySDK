@@ -51,17 +51,17 @@ different security schemes are displayed:
 
 ![Secure Node](doc/assets/img/secure_node_list_inclusion.PNG)
 
-## Smart Start List
+## SmartStart List
 
-The smart start list enables including devices easily. A page of the smart
+The SmartStart list enables including devices easily. A page of the smart
 start list enables editing and inputting **DSK** keys of devices. When a device
-starts up or resets, it will automatically get included. A smart start entry and
+starts up or resets, it will automatically get included. A SmartStart entry and
 inclusion may look like this:
 
-![Smart Start List](doc/assets/img/save_smart_start_device.PNG)
+![SmartStart List](doc/assets/img/save_smart_start_device.PNG)
 
 After filling in the **DSK** key and checking include, click save. If the _UIC
-UPVL_ is running, it will be saved to the smart start list.
+UPVL_ is running, it will be saved to the SmartStart list.
 
 ## Devices
 

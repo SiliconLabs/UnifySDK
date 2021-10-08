@@ -7,5 +7,5 @@ var structzwave__command__handler__t =
     [ "manual_security_validation", "structzwave__command__handler__t.html#a73f06c74476ed1be11bbfa0a9ed0b65d", null ],
     [ "minimal_scheme", "structzwave__command__handler__t.html#aa94964ef3bebc9ef5a7307da7f7252e5", null ],
     [ "support_handler", "structzwave__command__handler__t.html#a19c6e973e9a1300f1e554ab1222f3d31", null ],
-    [ "version", "structzwave__command__handler__t.html#a16953f36920aca0aeb0c0de31c3eb059", null ]
+    [ "version", "structzwave__command__handler__t.html#ae49c010733bb35b15d8bc01faea9892d", null ]
 ];

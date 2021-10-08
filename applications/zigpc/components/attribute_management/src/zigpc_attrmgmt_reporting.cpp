@@ -43,10 +43,10 @@ sl_status_t zigpc_attrmgmt_build_configure_report_records(
           zigpc_zcl_configure_reporting_record_t record = {
             ZIGPC_ZCL_GLOBAL_REPORTING_ROLE_GENERATOR,  // direction
             attr.attribute_id,                          // attribute_identifier
-            static_cast<zigpc_zcl_data_type_t>(attr.type),  // attribute_type
+            static_cast<uint8_t>(attr.type),            // attribute_type
             ZIGPC_ATTRMGMT_REPORT_INTERVAL_MIN_DEFAULT,  // minimum_reporting_interval
             ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT,  // maximum_reporting_interval
-            1,                                           // reportable_change
+            ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT,        // reportable_change
           };
           record_list.push_back(record);
         }

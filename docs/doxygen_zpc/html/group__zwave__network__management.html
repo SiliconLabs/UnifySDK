@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -114,6 +114,8 @@ Macros</h2></td></tr>
 <tr class="separator:ga3f29354175ee0dc574ce6019e3f15e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga08131e922b6601e1a64f11d4021f7c7f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga08131e922b6601e1a64f11d4021f7c7f">LEARN_MODE_TIMEOUT_DIRECT_RANGE</a>&#160;&#160;&#160;20000</td></tr>
 <tr class="separator:ga08131e922b6601e1a64f11d4021f7c7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae5aa3cad9ee1c6521683f763ab61b338"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gae5aa3cad9ee1c6521683f763ab61b338">SEND_DATA_TIMEOUT</a>&#160;&#160;&#160;125000</td></tr>
+<tr class="separator:gae5aa3cad9ee1c6521683f763ab61b338"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac05181e7a063964d503e97445e46483e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gac05181e7a063964d503e97445e46483e">ADD_NODE_STATUS_ADDING_END_NODE_TIMEOUT</a>&#160;&#160;&#160;60000</td></tr>
 <tr class="separator:gac05181e7a063964d503e97445e46483e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8701ee13b4228529cdbb2258eb5efb6b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga8701ee13b4228529cdbb2258eb5efb6b">ADD_NODE_PROTOCOL_NEIGHBOR_DISCOVERY_TIMEOUT</a>&#160;&#160;&#160;  (76000 + <a class="el" href="group__zwave__utils.html#ga32210e58ed7248bc8b07ac63555e69d8">ZW_MAX_NODES</a> * (3517 + 732))</td></tr>
@@ -192,11 +194,11 @@ Functions</h2></td></tr>
 <tr class="memitem:gabcb05aa3686ebc777a52d45f2cc093ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gabcb05aa3686ebc777a52d45f2cc093ad">zwave_network_management_add_node</a> ()</td></tr>
 <tr class="memdesc:gabcb05aa3686ebc777a52d45f2cc093ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the Z-Wave controller in add node mode.  <a href="group__zwave__network__management.html#gabcb05aa3686ebc777a52d45f2cc093ad">More...</a><br /></td></tr>
 <tr class="separator:gabcb05aa3686ebc777a52d45f2cc093ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga70d33229419c634dfb25b946dbc5eb7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga70d33229419c634dfb25b946dbc5eb7d">zwave_network_management_add_node_with_dsk</a> (const <a class="el" href="zwave__controller__types_8h.html#a437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk, <a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__utils.html#gaf5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a> preferred_inclusion)</td></tr>
-<tr class="memdesc:ga70d33229419c634dfb25b946dbc5eb7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the Z-Wave controller in smart start add node mode.  <a href="group__zwave__network__management.html#ga70d33229419c634dfb25b946dbc5eb7d">More...</a><br /></td></tr>
+<tr class="memitem:ga70d33229419c634dfb25b946dbc5eb7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga70d33229419c634dfb25b946dbc5eb7d">zwave_network_management_add_node_with_dsk</a> (const <a class="el" href="zwave__controller__types_8h.html#a437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk, <a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="zwave__generic__types_8h.html#af5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a> preferred_inclusion)</td></tr>
+<tr class="memdesc:ga70d33229419c634dfb25b946dbc5eb7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Put the Z-Wave controller in SmartStart add node mode.  <a href="group__zwave__network__management.html#ga70d33229419c634dfb25b946dbc5eb7d">More...</a><br /></td></tr>
 <tr class="separator:ga70d33229419c634dfb25b946dbc5eb7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5f1a2008d6e6e8dd3e180dcca878065b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga5f1a2008d6e6e8dd3e180dcca878065b">zwave_network_management_smart_start_enable</a> (bool enable)</td></tr>
-<tr class="memdesc:ga5f1a2008d6e6e8dd3e180dcca878065b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the controller in smart start mode.  <a href="group__zwave__network__management.html#ga5f1a2008d6e6e8dd3e180dcca878065b">More...</a><br /></td></tr>
+<tr class="memdesc:ga5f1a2008d6e6e8dd3e180dcca878065b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the controller in SmartStart mode.  <a href="group__zwave__network__management.html#ga5f1a2008d6e6e8dd3e180dcca878065b">More...</a><br /></td></tr>
 <tr class="separator:ga5f1a2008d6e6e8dd3e180dcca878065b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3b0416e91e7de032f028aada296111c6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6">zwave_network_management_keys_set</a> (bool accept, bool csa, <a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys)</td></tr>
 <tr class="memdesc:ga3b0416e91e7de032f028aada296111c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inform an S2 bootstrapping controller which keys must be granted to the node being bootstrapped.  <a href="group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6">More...</a><br /></td></tr>
@@ -213,12 +215,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga6228fbce9b19e3ac23d9197b7f6f65c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga6228fbce9b19e3ac23d9197b7f6f65c7">zwave_network_management_set_default</a> (void)</td></tr>
 <tr class="memdesc:ga6228fbce9b19e3ac23d9197b7f6f65c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the controller.  <a href="group__zwave__network__management.html#ga6228fbce9b19e3ac23d9197b7f6f65c7">More...</a><br /></td></tr>
 <tr class="separator:ga6228fbce9b19e3ac23d9197b7f6f65c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga033c09d10da40168bb60ebac8fa0e03a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga033c09d10da40168bb60ebac8fa0e03a">zwave_network_management_replace_failed</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> nodeid)</td></tr>
-<tr class="separator:ga033c09d10da40168bb60ebac8fa0e03a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gade18f44167921855f974d5efb34f4837"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gade18f44167921855f974d5efb34f4837">zwave_network_management_remove_failed</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> nodeid)</td></tr>
+<tr class="memdesc:gade18f44167921855f974d5efb34f4837"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a failed node.  <a href="group__zwave__network__management.html#gade18f44167921855f974d5efb34f4837">More...</a><br /></td></tr>
 <tr class="separator:gade18f44167921855f974d5efb34f4837"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga872fa375783798e73036043b6cb97e00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga872fa375783798e73036043b6cb97e00">zwave_network_management_proxy_inclusion</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> nodeid)</td></tr>
-<tr class="separator:ga872fa375783798e73036043b6cb97e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac01bf38badf30f94eac9a04b486cb967"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">zwave_network_management_get_home_id</a> ()</td></tr>
 <tr class="memdesc:gac01bf38badf30f94eac9a04b486cb967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cached home_id.  <a href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">More...</a><br /></td></tr>
 <tr class="separator:gac01bf38badf30f94eac9a04b486cb967"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,6 +238,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gaea33750f3c0be561e79df3f46fc036cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gaea33750f3c0be561e79df3f46fc036cb">zwave_network_management_assign_return_route</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id)</td></tr>
 <tr class="memdesc:gaea33750f3c0be561e79df3f46fc036cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign static return routes within a Routing End Node.  <a href="group__zwave__network__management.html#gaea33750f3c0be561e79df3f46fc036cb">More...</a><br /></td></tr>
 <tr class="separator:gaea33750f3c0be561e79df3f46fc036cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga496a9fcbb21a3ffa39b17eeb532a70fa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga496a9fcbb21a3ffa39b17eeb532a70fa">zwave_network_management_is_busy</a> ()</td></tr>
+<tr class="memdesc:ga496a9fcbb21a3ffa39b17eeb532a70fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if we are carrying some network management operations.  <a href="group__zwave__network__management.html#ga496a9fcbb21a3ffa39b17eeb532a70fa">More...</a><br /></td></tr>
+<tr class="separator:ga496a9fcbb21a3ffa39b17eeb532a70fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Z-Wave network management component. </p>
@@ -325,6 +327,21 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="gae5aa3cad9ee1c6521683f763ab61b338"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae5aa3cad9ee1c6521683f763ab61b338">&#9670;&nbsp;</a></span>SEND_DATA_TIMEOUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEND_DATA_TIMEOUT&#160;&#160;&#160;125000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Time that Send data (including e.g. sending NOP) will take as a maximum. Protocol that tries routing with FLiRS nodes takes very very long. </p>
 
 </div>
 </div>
@@ -428,13 +445,13 @@ Functions</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b"></a>NM_IDLE&#160;</td><td class="fielddoc"><p>Idle state. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a75b8a34b502245956686cb16b27959da"></a>NM_WAITING_FOR_ADD&#160;</td><td class="fielddoc"><p>Add mode state. Direct range/NWI, S2, or Smart Start.</p>
+<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a75b8a34b502245956686cb16b27959da"></a>NM_WAITING_FOR_ADD&#160;</td><td class="fielddoc"><p>Add mode state. Direct range/NWI, S2, or SmartStart.</p>
 <p>Waiting for protocol. On <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3a59f0453726fff4016e03a840e0aa6030">NM_EV_ADD_NODE_FOUND</a>, go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a4725f2059dd443717f3a5cfdfaccc151">NM_NODE_FOUND</a>. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a4725f2059dd443717f3a5cfdfaccc151"></a>NM_NODE_FOUND&#160;</td><td class="fielddoc"><p>Add mode state. Direct range/NWI, S2, Smart Start, Proxy Inclusion, or Proxy Replace.</p>
+<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a4725f2059dd443717f3a5cfdfaccc151"></a>NM_NODE_FOUND&#160;</td><td class="fielddoc"><p>Add mode state. Direct range/NWI, S2, SmartStart, Proxy Inclusion, or Proxy Replace.</p>
 <p>Waiting for protocol to receive node info from a node. On <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3a9ca1f3e003e2578003ac384eca9a5f0e">NM_EV_ADD_CONTROLLER</a> or <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3a0405c04d07479d0d78ce423ddbde9605">NM_EV_ADD_END_NODE</a>, cache the node id and node info and go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a4a85751bacc0f1b227faf0694093e883">NM_WAIT_FOR_PROTOCOL</a>. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a4a85751bacc0f1b227faf0694093e883"></a>NM_WAIT_FOR_PROTOCOL&#160;</td><td class="fielddoc"><p>Add mode state. Direct range/NWI, S2, Smart Start, Proxy Inclusion, or Proxy Replace.</p>
+<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a4a85751bacc0f1b227faf0694093e883"></a>NM_WAIT_FOR_PROTOCOL&#160;</td><td class="fielddoc"><p>Add mode state. Direct range/NWI, S2, SmartStart, Proxy Inclusion, or Proxy Replace.</p>
 <p>Waiting for protocol to assign node ID and home ID to the new node.</p>
 <p>On <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3a67fd956fd2553f750ba958cb47ed98f2">NM_EV_ADD_PROTOCOL_DONE</a>, send an ADD_NODE_STOP to protocol. On <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3a27943e2c3c34c65e7f68fd5b471d9261">NM_EV_ADD_NODE_STATUS_DONE</a>, register the new node in node_db and go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a0abe30ea2570997398942569bc19d26d">NM_WAIT_FOR_SECURE_ADD</a>. If GW is handling inclusion, start security processing the new node (S2 or S0 inclusion). Otherwise, start a 2 s timer and go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a91146715852fd90fb78895f4e953add1">NM_PREPARE_SUC_INCLISION</a>. </p>
 </td></tr>
@@ -452,9 +469,9 @@ Functions</h2></td></tr>
 <p>On protocol callback (LearnModeStatus()) with LEARN_MODE_DONE, the gateway has been assigned a node ID and home ID. Go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a782f036b9213f3990a8beac18f356d6e">NM_WAIT_FOR_SECURE_LEARN</a>, detect new environment and reset gateway accordingly.</p>
 <p>Cannot be interrupted because the gateway properties have changed and we are waiting on the protocol. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a0abe30ea2570997398942569bc19d26d"></a>NM_WAIT_FOR_SECURE_ADD&#160;</td><td class="fielddoc"><p>Add mode state. Direct range/NWI, S2, Smart Start, Proxy Inclusion, Proxy Replace.</p>
+<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a0abe30ea2570997398942569bc19d26d"></a>NM_WAIT_FOR_SECURE_ADD&#160;</td><td class="fielddoc"><p>Add mode state. Direct range/NWI, S2, SmartStart, Proxy Inclusion, Proxy Replace.</p>
 <p>Waiting for the S2 inclusion state machine to complete. On <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3a48d4ae1d0216e7b6c8f6a28efd06260e">NM_EV_SECURITY_DONE</a>, go to NM_WAIT_FOR_PROBE_AFTER_ADD and start probe.</p>
-<p>If Smart Start security fails, start a <a class="el" href="group__zwave__network__management.html#ga7ff596ba58e6375fc7a4ceb971ef591e">SMART_START_SELF_DESTRUCT_TIMEOUT</a> sec. timer and go to #NM_WAIT_FOR_SELF_DESTRUCT. </p>
+<p>If SmartStart security fails, start a <a class="el" href="group__zwave__network__management.html#ga7ff596ba58e6375fc7a4ceb971ef591e">SMART_START_SELF_DESTRUCT_TIMEOUT</a> sec. timer and go to #NM_WAIT_FOR_SELF_DESTRUCT. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a4d2a6c0d98621da339d84075ef3708d3"></a>NM_WAITING_FOR_NODE_REMOVAL&#160;</td><td class="fielddoc"><p>Remove node state.</p>
 <p>SL_STATUS OK return value of <a class="el" href="group__ZWAPI__CONTROLLER.html#ga3e5775eb9485817712be83dc69d644e4" title="Remove any type of node from the network.">zwapi_remove_node_from_network()</a> bring NMS to this state. Here we set time of ADD_REMOVE_TIMEOUT (60 seconds) to wait for callback <a class="el" href="nm__state__machine_8c.html#abea8332a6608bd1315ba68682471a486">on_remove_node_status_update()</a></p>
@@ -482,11 +499,11 @@ Functions</h2></td></tr>
 <p>On <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3afadd864eec5f7c29ef27ded6d7c35f28">NM_EV_REPLACE_FAILED_DONE</a>, if GW is handling inclusion, go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a0abe30ea2570997398942569bc19d26d">NM_WAIT_FOR_SECURE_ADD</a>. Otherwise go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a91146715852fd90fb78895f4e953add1">NM_PREPARE_SUC_INCLISION</a>. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a91146715852fd90fb78895f4e953add1"></a>NM_PREPARE_SUC_INCLISION&#160;</td><td class="fielddoc"><p>Add mode state.</p>
-<p>Direct range/NWI, S2, Smart Start, Replace Failed, Proxy Inclusion, or Proxy Replace.</p>
+<p>Direct range/NWI, S2, SmartStart, Replace Failed, Proxy Inclusion, or Proxy Replace.</p>
 <p>Wait for timeout to let protocol finish up its add by sending a transfer end to SUC. Then go to NM_WIAT_FOR_SUC_INCLUSION and request handover. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694ac94451b7143b14596cc90ec810239239"></a>NM_WAIT_FOR_SUC_INCLUSION&#160;</td><td class="fielddoc"><p>Add mode state.</p>
-<p>Direct range/NWI, S2, Smart Start, Replace Failed, Proxy Inclusion, or Proxy Replace.</p>
+<p>Direct range/NWI, S2, SmartStart, Replace Failed, Proxy Inclusion, or Proxy Replace.</p>
 <p>Waiting for the SUC to complete the secure part of inclusion.</p>
 <p>On <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3aefbdc5f52d07d6d4ddf7f9a1937cbb88">NM_EV_PROXY_COMPLETE</a>, go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a0abe30ea2570997398942569bc19d26d">NM_WAIT_FOR_SECURE_ADD</a> and post <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3a48d4ae1d0216e7b6c8f6a28efd06260e">NM_EV_SECURITY_DONE</a>. </p>
 </td></tr>
@@ -494,17 +511,17 @@ Functions</h2></td></tr>
 <p>Safe-guarded by a timer, on timeout, go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a>.</p>
 <p>On <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3abdabb80ae6ac176d7c52af6439a7beee">NM_EV_NODE_INFO</a>, inclusion goes to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a4725f2059dd443717f3a5cfdfaccc151">NM_NODE_FOUND</a> and fakes <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3a9ca1f3e003e2578003ac384eca9a5f0e">NM_EV_ADD_CONTROLLER</a> and <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3a27943e2c3c34c65e7f68fd5b471d9261">NM_EV_ADD_NODE_STATUS_DONE</a>. Replace goes to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a4c4efe99e0d6e69cbb307028b7e07f92">NM_REPLACE_FAILED_REQ</a> and fakes <a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3afadd864eec5f7c29ef27ded6d7c35f28">NM_EV_REPLACE_FAILED_DONE</a>. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694ab8fbad08043c80cac32254cd1e3ee345"></a>NM_WAIT_FOR_TX_TO_SELF_DESTRUCT&#160;</td><td class="fielddoc"><p>Add mode state. Smart Start.</p>
+<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694ab8fbad08043c80cac32254cd1e3ee345"></a>NM_WAIT_FOR_TX_TO_SELF_DESTRUCT&#160;</td><td class="fielddoc"><p>Add mode state. SmartStart.</p>
 <p>The gateway must send NOPs to a failing node and wait for the result, before doing ZW_RemoveFailed().</p>
 <p>The NOP is sent before entering this state. Now the gateway waits for protocol callback <a class="el" href="nm__state__machine_8c.html#a4221caf69dfb4cb2cd9e2e0eb4b9f0a6">nop_send_done()</a> to trigger NM_EV_TX_DONE_SELF_DESTRUCT. Then we start a timer, call ZW_RemoveFailedNode() and go to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a5850e11b011b41855070d76e1c74998e">NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL</a>. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a5850e11b011b41855070d76e1c74998e"></a>NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL&#160;</td><td class="fielddoc"><p>Add mode state. Smart Start.</p>
+<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a5850e11b011b41855070d76e1c74998e"></a>NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL&#160;</td><td class="fielddoc"><p>Add mode state. SmartStart.</p>
 <p>Waiting for protocol to complete the ZW_RemoveFailedNode() (or for timeout). Protocol callback RemoveSelfDestructStatus() triggers sending status to unsolicited destinations with #ResetState() callback. Timeout calls #ResetState() directly. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a1809dd1ffd3d4217877bd42e77d63b08"></a>NM_FAILED_NODE_REMOVE&#160;</td><td class="fielddoc"><p>Failed node remove state.</p>
 <p>NMS sends NOP to failing node before coming to this state and waits for callback <a class="el" href="nm__state__machine_8c.html#a4221caf69dfb4cb2cd9e2e0eb4b9f0a6">nop_send_done()</a> and calls <a class="el" href="group__ZWAPI__CONTROLLER.html#gac21344422be9ce06ad84438f12c1e466" title="Remove a node from the failed node list, if it already exist.">zwapi_remove_failed_node()</a>. If <a class="el" href="group__ZWAPI__CONTROLLER.html#gac21344422be9ce06ad84438f12c1e466" title="Remove a node from the failed node list, if it already exist.">zwapi_remove_failed_node()</a> does not return ZW_FAILED_NODE_REMOVE_STARTED its callback (on_remove_failed_status_update) is called with <a class="el" href="group__ZWAPI__CONTROLLER.html#gada8273213487e5c790c8dc593cb3d9f2" title="The failed node was not removed from the failing nodes list.">ZW_FAILED_NODE_NOT_REMOVED()</a> </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a35407950f9012a40a262d892e9c5b7ae"></a>NM_SEND_NOP&#160;</td><td class="fielddoc"><p>Failed node remove state. Add node state (smart start self destruct)</p>
+<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a35407950f9012a40a262d892e9c5b7ae"></a>NM_SEND_NOP&#160;</td><td class="fielddoc"><p>Failed node remove state. Add node state (SmartStart self destruct)</p>
 <p>NMS Sends NOP in this state and next state is set according to if entry was due to timeout event or NM_EV_REMOVE_FAILED event from NM_IDLE. </p>
 </td></tr>
 </table>
@@ -584,7 +601,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gaf5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="zwave__generic__types_8h.html#af5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a>&#160;</td>
           <td class="paramname"><em>preferred_inclusion</em>&#160;</td>
         </tr>
         <tr>
@@ -595,7 +612,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Put the Z-Wave controller in smart start add node mode. </p>
+<p>Put the Z-Wave controller in SmartStart add node mode. </p>
 <p>This function should be called after receiving a SmartStart inclusion request to which we have a matching provision list entry.</p>
 <p>The following callbacks may be triggered asynchronous by this operation:</p>
 <ul>
@@ -761,6 +778,26 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga496a9fcbb21a3ffa39b17eeb532a70fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga496a9fcbb21a3ffa39b17eeb532a70fa">&#9670;&nbsp;</a></span>zwave_network_management_is_busy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool zwave_network_management_is_busy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verify if we are carrying some network management operations. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if we are busy doing something, false if IDLE. </dd></dl>
+
+</div>
+</div>
 <a id="ga10d248f803b45c70adf8ecec24308109"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga10d248f803b45c70adf8ecec24308109">&#9670;&nbsp;</a></span>zwave_network_management_is_zpc_sis()</h2>
 
@@ -858,24 +895,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga872fa375783798e73036043b6cb97e00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga872fa375783798e73036043b6cb97e00">&#9670;&nbsp;</a></span>zwave_network_management_proxy_inclusion()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_network_management_proxy_inclusion </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>nodeid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="gade18f44167921855f974d5efb34f4837"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gade18f44167921855f974d5efb34f4837">&#9670;&nbsp;</a></span>zwave_network_management_remove_failed()</h2>
 
@@ -891,6 +910,25 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Remove a failed node. </p>
+<p>This function can be used for remove a failing node from Z-Wave network. NOP will be sent to the node to make sure that the Z-Wave protocol marks it failing on the controller and the subsequent remove failed call for that node will succeed.</p>
+<p>The following callbacks may be triggered asynchronous by this operation</p>
+<ul>
+<li>on_node_deleted</li>
+<li>on_error</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nodeid</td><td>Node id of failing node which will be removed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t<ul>
+<li>SL_STATUS_BUSY if Network Management (State Machine) is busy in some other operation</li>
+<li>SL_STATUS_OK when remove failed is triggered </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>
@@ -917,25 +955,6 @@ Functions</h2></td></tr>
 <li>on_node_removed</li>
 </ul>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t FAILURE is state is not IDLE </dd></dl>
-
-</div>
-</div>
-<a id="ga033c09d10da40168bb60ebac8fa0e03a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga033c09d10da40168bb60ebac8fa0e03a">&#9670;&nbsp;</a></span>zwave_network_management_replace_failed()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_network_management_replace_failed </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>nodeid</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>TODO: </p>
 
 </div>
 </div>
@@ -1009,14 +1028,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set the controller in smart start mode. </p>
-<p>When smart start is enabled the controller will open the Z-Wave controller for smart start inclusions. If an other network management operation is activated the smart start inclusion mode will be temporary suspended until the operation is done.</p>
-<p>When a smart start inclusion request is received the smart start mode is automatically disabled. Smart start mode must be re-enabled manually if a smart start inclusion is not stated as a response to a smart start inclusion request.</p>
+<p>Set the controller in SmartStart mode. </p>
+<p>When SmartStart is enabled the controller will open the Z-Wave controller for SmartStart inclusions. If an other network management operation is activated the SmartStart inclusion mode will be temporary suspended until the operation is done.</p>
+<p>When a SmartStart inclusion request is received the SmartStart mode is automatically disabled. SmartStart mode must be re-enabled manually if a smart start inclusion is not stated as a response to a SmartStart inclusion request.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enable</td><td><ul>
-<li>TRUE the network will be kept open for smart start inclusions.</li>
-<li>FALSE smart start inclusions are disabled. </li>
+<li>TRUE the network will be kept open for SmartStart inclusions.</li>
+<li>FALSE SmartStart inclusions are disabled. </li>
 </ul>
 </td></tr>
   </table>
@@ -1060,7 +1079,9 @@ Functions</h2></td></tr>
 <p>Request the NM to perform proxy inclusion. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">node_id</td><td>the NodeID of the node</td></tr>
+    <tr><td class="paramname">node_id</td><td>the NodeID of the node </td></tr>
+    <tr><td class="paramname">nif</td><td></td></tr>
+    <tr><td class="paramname">inclusion_step</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -1073,7 +1094,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:56 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:38 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

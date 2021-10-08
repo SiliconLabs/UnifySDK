@@ -122,9 +122,9 @@ static zwave_s2_keyset_t get_s2_keyset_from_node(zwave_node_id_t node_id)
       keyset = ZWAVE_LONG_RANGE_KEYSET;
       break;
     default:
-      sl_log_warning(LOG_TAG,
-                     "Unknown keyset for NodeID %d. S2 transmission will fail.",
-                     node_id);
+      sl_log_error(LOG_TAG,
+                   "Unknown keyset for NodeID %d. S2 transmission will fail.",
+                   node_id);
       keyset = UNKNOWN_KEYSET;
   }
 
@@ -196,24 +196,45 @@ void S2_get_hw_random(uint8_t *buf, uint8_t len)
   }
 }
 
+// FIXME: LibS2 should probably have a public API for this.
+// S2 passes us a Class ID and we must de-cipher else we believe that LR key
+// classes are higher security.
+#define UNAUTHENTICATED_KEY_SLOT  0
+#define AUTHENTICATED_KEY_SLOT    1
+#define ACCESS_KEY_SLOT           2
+#define LR_AUTHENTICATED_KEY_SLOT 3
+#define LR_ACCESS_KEY_SLOT        4
+static uint8_t convert_lr_to_zwave_class_id(uint8_t class_id)
+{
+  if (class_id == LR_ACCESS_KEY_SLOT) {
+    class_id = ACCESS_KEY_SLOT;
+  } else if (class_id == LR_AUTHENTICATED_KEY_SLOT) {
+    class_id = AUTHENTICATED_KEY_SLOT;
+  }
+  // Not a LR class ID does not require any convertion.
+  return class_id;
+}
+
 void S2_get_commands_supported(node_t lnode,
                                uint8_t class_id,
                                const uint8_t **cmdClasses,
                                uint8_t *length)
 {
-  uint8_t key_mask = 1 << class_id;
-  uint8_t assigned_keys
-    = zwave_s2_keystore_get_assigned_keys() & SECURITY_2_KEY_S2_MASK;
+  class_id              = convert_lr_to_zwave_class_id(class_id);
+  uint8_t key_mask      = 1 << class_id;
+  uint8_t assigned_keys = zwave_s2_keystore_get_assigned_keys()
+                          & SECURITY_2_KEY_MASK
+                          & ~SECURITY_2_SECURITY_0_NETWORK_KEY;
+  sl_log_info(LOG_TAG,
+              "Received a S2 Supported Command Get on key class 0x%02X. "
+              "Our granted S2 key class set is 0x%02X",
+              key_mask,
+              assigned_keys);
+
   if ((assigned_keys & key_mask) > (assigned_keys & ~key_mask)) {
     *cmdClasses = secure_nif;
     *length     = secure_nif_length;
   } else {
-    sl_log_error(LOG_TAG,
-                 "Got commands supported get on key class(%i) which is not our "
-                 "highest %x %x\n",
-                 class_id,
-                 (assigned_keys & key_mask),
-                 (assigned_keys & ~key_mask));
     *length = 0;
   }
 }
@@ -383,8 +404,8 @@ sl_status_t
 
   // Can we handle the frame size?
   if (data_length > sizeof(last_frame_data)) {
-    sl_log_warning(LOG_TAG,
-                   "Too large frame requested for transmitting. Discarding\n");
+    sl_log_error(LOG_TAG,
+                 "Too large frame requested for transmitting. Discarding\n");
     return SL_STATUS_WOULD_OVERFLOW;
   }
 

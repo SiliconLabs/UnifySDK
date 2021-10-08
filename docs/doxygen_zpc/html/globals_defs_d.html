@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -100,16 +100,20 @@ $(document).ready(function(){initNavTree('globals_defs_d.html',''); initResizabl
 <li>DATASTORE_TABLE_INT
 : <a class="el" href="datastore__internals_8h.html#a58717a46eb251497af1a964121ab21d9">datastore_internals.h</a>
 </li>
-<li>DATASTORE_VERSION_V1
-: <a class="el" href="zpc__datastore_8c.html#a8efebb3bca1c33e53da9709b93bc9037">zpc_datastore.c</a>
-</li>
 <li>DEBUG
-: <a class="el" href="autostart_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">autostart.c</a>
-, <a class="el" href="group__ctimer.html#gad72dbcf6d0153db1b8d8a58001feed83">ctimer.c</a>
+: <a class="el" href="group__ctimer.html#gad72dbcf6d0153db1b8d8a58001feed83">ctimer.c</a>
 , <a class="el" href="group__process.html#gad72dbcf6d0153db1b8d8a58001feed83">process.c</a>
+, <a class="el" href="autostart_8c.html#ad72dbcf6d0153db1b8d8a58001feed83">autostart.c</a>
+</li>
+<li>DEFAULT_CONFIG_PATH
+: <a class="el" href="group__config.html#ga814585e9e2b41f2f341c6368c39ba0c7">config.h</a>
+</li>
+<li>DEFAULT_DATASTORE_FILE
+: <a class="el" href="group__config.html#ga8c56d21a24a5625f91d15a7bd267a92b">config.h</a>
 </li>
 <li>DEFAULT_HARDWARE_VERSION
 : <a class="el" href="zpc__config_8c.html#ad391ebcfd09538a72365e568764a973d">zpc_config.c</a>
+, <a class="el" href="zwave__command__class__version_8c.html#ad391ebcfd09538a72365e568764a973d">zwave_command_class_version.c</a>
 </li>
 <li>DEFAULT_INCLUSION_PROTOCOL_PREFERENCE
 : <a class="el" href="zpc__config_8c.html#afdbb87edd3dfaebd1879641e5a9df9b3">zpc_config.c</a>
@@ -126,8 +130,8 @@ $(document).ready(function(){initNavTree('globals_defs_d.html',''); initResizabl
 <li>DEFAULT_NUMBER_OF_ACCEPTED_FRAME_TRANSMISSION_ERROR
 : <a class="el" href="zpc__config_8c.html#aff82b854b395cbe654803471a42079aa">zpc_config.c</a>
 </li>
-<li>DEFAULT_NUMBER_OF_MISSING_WAKEUP_NOTIFICATION
-: <a class="el" href="zpc__config_8c.html#a9db411f610398bc1b4b5434f18234641">zpc_config.c</a>
+<li>DEFAULT_NUMBER_OF_MISSING_WAKE_UP_NOTIFICATION
+: <a class="el" href="zpc__config_8c.html#aed10e112fd7f34f6258b1e02bca60de8">zpc_config.c</a>
 </li>
 <li>DEFAULT_OTA_CACHE_PATH
 : <a class="el" href="zpc__config_8c.html#aced49f2a5660a78ad57aaa65cc056e5c">zpc_config.c</a>
@@ -147,8 +151,14 @@ $(document).ready(function(){initNavTree('globals_defs_d.html',''); initResizabl
 <li>DEFAULT_SERIAL_PORT
 : <a class="el" href="zpc__config_8c.html#a6293683ab23e499395ab35ed7ffe8d26">zpc_config.c</a>
 </li>
-<li>DEFAULT_WAKEUP_INTERVAL
-: <a class="el" href="zpc__config_8c.html#af614a4b08493d6ab284522f30fe8bb9a">zpc_config.c</a>
+<li>DEFAULT_WAKE_UP_CAPBILITIES_BITMASK
+: <a class="el" href="zwave__command__class__wake__up_8c.html#a3d14580db692fc50e0f841c780c05eee">zwave_command_class_wake_up.c</a>
+</li>
+<li>DEFAULT_WAKE_UP_INTERVAL
+: <a class="el" href="zpc__config_8c.html#a91821d066212001672fa1969cb4cf548">zpc_config.c</a>
+</li>
+<li>DEFAULT_WAKE_UP_STEP
+: <a class="el" href="zwave__command__class__wake__up_8c.html#a3a0088bdeacb9c5ef32eccd2fd1a074a">zwave_command_class_wake_up.c</a>
 </li>
 <li>DEFAULT_ZWAVE_MEASURED_0DBM_POWER
 : <a class="el" href="zpc__config_8c.html#a396a1c92c233c0335ad0e288b2adcb6c">zpc_config.c</a>
@@ -192,7 +202,7 @@ $(document).ready(function(){initNavTree('globals_defs_d.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:58 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:52 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

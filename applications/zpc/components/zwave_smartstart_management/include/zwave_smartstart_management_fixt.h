@@ -25,6 +25,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+/**
+ * @brief Initialize the Z-Wave SmartStart Management Module.
+ *
+ * Calls zwave_controller_register_callbacks() to set following callbacks 
+ *  .on_node_deleted
+ *  .on_node_added
+ *  .on_smart_start_inclusion_request
+ * and then starts the smartstart_management_process Contiki process and 
+ * notifies to the process that there are some SmartStart entries awaiting
+ * inclusion.
+ * @returns SL_STATUS_OK
+ */
 
 sl_status_t zwave_smartstart_management_setup_fixt(void);
 

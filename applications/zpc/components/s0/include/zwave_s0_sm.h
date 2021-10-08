@@ -153,9 +153,11 @@ typedef enum {
  *
  * Calling this function will make the S0 FSM start the bootstrap process of a
  * newly added node. This must be called right after ADD_NODE_DONE event for
- * nodes supporting COMMAND_CLASS_SECURITY2
+ * nodes supporting COMMAND_CLASS_SECURITY
  *
- * @param node_id The node we wish to include
+ * @param conn zwave_controller_connection_info_t structure
+ * @param is_controller If the node being included controller. To do extra S0
+ *                      boot strapping steps for controllers 
  */
 
 void s0_bootstrapping_start(const zwave_controller_connection_info_t *conn,

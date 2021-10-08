@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Developer Command Line Interface
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
 <li>calculate_utc_current_time_difference()
-: <a class="el" href="ota__time_8hpp.html#a1d7d7ad51ce0dad2c565bc10e4bfbdf6">ota_time.hpp</a>
+: <a class="el" href="ota__time_8h.html#a028b0c239f3105d892a138e06e94d7e4">ota_time.h</a>
 </li>
 <li>calculate_utc_time_from_rfc_3339()
 : <a class="el" href="ota__time_8hpp.html#a490338ccbe5ed5306d0b708c6a4813e5">ota_time.hpp</a>
@@ -167,14 +167,8 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>check_branch()
 : <a class="el" href="attribute__store__test__helpers_8hpp.html#a5f0285aae9e4b9411d94ad1535d5e2a2">attribute_store_test_helpers.hpp</a>
 </li>
-<li>check_if_meta_info_received()
-: <a class="el" href="ota__cache_8hpp.html#ad041c7bc3843fe2c7e6aa57425902fe6">ota_cache.hpp</a>
-</li>
 <li>check_interrupt()
 : <a class="el" href="uic__signal__handler_8c.html#a83ab65a8af179a5d9a44e6942fa2ac04">uic_signal_handler.c</a>
-</li>
-<li>clear_images_cache()
-: <a class="el" href="ota__cache_8hpp.html#ad4e232e303286dc9ae9f9afecc9d6cca">ota_cache.hpp</a>
 </li>
 <li>client_instance
 : <a class="el" href="uic__mqtt_8c.html#a56fa47cccd7d6fbfbf3af4030b9d2752">uic_mqtt.c</a>
@@ -309,16 +303,16 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 : <a class="el" href="mqtt__client_8hpp.html#a61c7385469ae06687e64450a07875e71">mqtt_client.hpp</a>
 </li>
 <li>contiki_test_helper_init()
-: <a class="el" href="contiki__test__helper_8c.html#a0e3872a9e05050732d9fb83f5b7c3cc7">contiki_test_helper.c</a>
-, <a class="el" href="contiki__test__helper_8h.html#a0e3872a9e05050732d9fb83f5b7c3cc7">contiki_test_helper.h</a>
+: <a class="el" href="contiki__test__helper_8h.html#a0e3872a9e05050732d9fb83f5b7c3cc7">contiki_test_helper.h</a>
+, <a class="el" href="contiki__test__helper_8c.html#a0e3872a9e05050732d9fb83f5b7c3cc7">contiki_test_helper.c</a>
 </li>
 <li>contiki_test_helper_run()
-: <a class="el" href="contiki__test__helper_8h.html#ac5683519dae42ba1818cb0459a875ba9">contiki_test_helper.h</a>
-, <a class="el" href="contiki__test__helper_8c.html#ac5683519dae42ba1818cb0459a875ba9">contiki_test_helper.c</a>
+: <a class="el" href="contiki__test__helper_8c.html#ac5683519dae42ba1818cb0459a875ba9">contiki_test_helper.c</a>
+, <a class="el" href="contiki__test__helper_8h.html#ac5683519dae42ba1818cb0459a875ba9">contiki_test_helper.h</a>
 </li>
 <li>contiki_test_helper_run_clock_increases_for_each_event()
-: <a class="el" href="contiki__test__helper_8c.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.c</a>
-, <a class="el" href="contiki__test__helper_8h.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.h</a>
+: <a class="el" href="contiki__test__helper_8h.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.h</a>
+, <a class="el" href="contiki__test__helper_8c.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.c</a>
 </li>
 <li>contiki_test_helper_run_once()
 : <a class="el" href="contiki__test__helper_8c.html#a84f3131d248842aa2fb5af6678ddd63c">contiki_test_helper.c</a>
@@ -326,6 +320,12 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 </li>
 <li>CONTIKI_VERSION_STRING
 : <a class="el" href="contiki-version_8h.html#a63c4c28fe517f6d19ef5620c50f57802">contiki-version.h</a>
+</li>
+<li>convert_last_error_to_label()
+: <a class="el" href="ota__mqtt_8hpp.html#a5e67b4c9c3ee5ebdefea142b57d7c483">ota_mqtt.hpp</a>
+</li>
+<li>convert_status_to_label()
+: <a class="el" href="ota__mqtt_8hpp.html#a7290d0fed82a2d82f51897eb33f6ec13">ota_mqtt.hpp</a>
 </li>
 <li>crc16_add()
 : <a class="el" href="group__lib.html#ga3f1f2610eae7a4736fb0393c7e449eb4">crc16.c</a>
@@ -363,7 +363,7 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Developer Command Line Interface by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:41 for Developer Command Line Interface by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

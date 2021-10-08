@@ -9,6 +9,7 @@ var attribute__resolver_8h =
     [ "attribute_resolver_register_rule", "group__attribute__resolver.html#gadf861538dd5cb124bd6d0a83526e327c", null ],
     [ "attribute_resolver_restart_set_resolution", "group__attribute__resolver.html#ga99ff84b41f526fb7a9cfa45b153f9fa8", null ],
     [ "attribute_resolver_resume_node_resolution", "group__attribute__resolver.html#ga3b1564df64159c70b31bfe10e9e5b8a6", null ],
+    [ "attribute_resolver_set_attribute_depth", "group__attribute__resolver.html#ga36150b164bf3a1a4bdd7b5c762999473", null ],
     [ "attribute_resolver_set_resolution_listener", "group__attribute__resolver.html#ga4e89504e8607d0621899f4c1961c7fb8", null ],
     [ "attribute_resolver_state_log", "group__attribute__resolver.html#gaa3536d271edf4bd224afc20fc1253d08", null ],
     [ "attribute_resolver_teardown", "group__attribute__resolver.html#gaad926dec80fd09bd159b1f2fa0cdf38a", null ],

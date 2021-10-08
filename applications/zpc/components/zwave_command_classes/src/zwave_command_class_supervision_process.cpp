@@ -106,13 +106,13 @@ static void supervision_process_on_timer_expired_event(etimer *timer)
   std::vector<supervision_id_t> expired_sessions;
   for (session_iterator_t it = sessions.begin(); it != sessions.end(); ++it) {
     if (it->second.expiry_time <= now) {
-      sl_log_info(LOG_TAG,
-                  "Timed out waiting for a Supervision Report for NodeID "
-                  "%d:%d Session ID %d. "
-                  "Considering Supervision Session failed",
-                  it->second.session.node_id,
-                  it->second.session.endpoint_id,
-                  it->second.session.session_id);
+      sl_log_debug(LOG_TAG,
+                   "Timed out waiting for a Supervision Report for NodeID "
+                   "%d:%d Session ID %d. "
+                   "Considering Supervision Session failed",
+                   it->second.session.node_id,
+                   it->second.session.endpoint_id,
+                   it->second.session.session_id);
       expired_sessions.push_back(it->first);
       if (it->second.callback != nullptr) {
         it->second.callback(SUPERVISION_REPORT_FAIL,

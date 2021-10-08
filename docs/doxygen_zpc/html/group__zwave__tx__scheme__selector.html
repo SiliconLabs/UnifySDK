@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -117,9 +117,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ga0efa34ef87df3cef0f14ac47c733d491"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga0efa34ef87df3cef0f14ac47c733d491">zwave_tx_scheme_get_node_highest_security_class</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="memdesc:ga0efa34ef87df3cef0f14ac47c733d491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the Highest security Class of a NodeID.  <a href="group__zwave__tx__scheme__selector.html#ga0efa34ef87df3cef0f14ac47c733d491">More...</a><br /></td></tr>
 <tr class="separator:ga0efa34ef87df3cef0f14ac47c733d491"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1c7a42811336fe3f28d9397a455828f7"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga1c7a42811336fe3f28d9397a455828f7">zwave_tx_scheme_get_max_payload</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
-<tr class="memdesc:ga1c7a42811336fe3f28d9397a455828f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes how long of a frame can be sent to a given NodeID / Endpoint.  <a href="group__zwave__tx__scheme__selector.html#ga1c7a42811336fe3f28d9397a455828f7">More...</a><br /></td></tr>
-<tr class="separator:ga1c7a42811336fe3f28d9397a455828f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab15d83efc0084ff753e16826ce063136"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#gab15d83efc0084ff753e16826ce063136">zwave_tx_scheme_get_max_payload</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memdesc:gab15d83efc0084ff753e16826ce063136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the maximum number of bytes that can be sent to a given NodeID. (lowest layer)  <a href="group__zwave__tx__scheme__selector.html#gab15d83efc0084ff753e16826ce063136">More...</a><br /></td></tr>
+<tr class="separator:gab15d83efc0084ff753e16826ce063136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6128c675d7c258737616e44ef823516d"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga6128c675d7c258737616e44ef823516d">zwave_tx_scheme_get_max_application_payload</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
+<tr class="memdesc:ga6128c675d7c258737616e44ef823516d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes how long of a frame can be sent to a given NodeID / Endpoint when queuing a frame at the application level.  <a href="group__zwave__tx__scheme__selector.html#ga6128c675d7c258737616e44ef823516d">More...</a><br /></td></tr>
+<tr class="separator:ga6128c675d7c258737616e44ef823516d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>A Z-Wave frame transmission security scheme selector. </p>
@@ -142,14 +145,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga1c7a42811336fe3f28d9397a455828f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1c7a42811336fe3f28d9397a455828f7">&#9670;&nbsp;</a></span>zwave_tx_scheme_get_max_payload()</h2>
+<a id="ga6128c675d7c258737616e44ef823516d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6128c675d7c258737616e44ef823516d">&#9670;&nbsp;</a></span>zwave_tx_scheme_get_max_application_payload()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t zwave_tx_scheme_get_max_payload </td>
+          <td class="memname">uint16_t zwave_tx_scheme_get_max_application_payload </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em>, </td>
@@ -168,7 +171,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Computes how long of a frame can be sent to a given NodeID / Endpoint. </p>
+<p>Computes how long of a frame can be sent to a given NodeID / Endpoint when queuing a frame at the application level. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node_id</td><td>The NodeID of the destination </td></tr>
@@ -176,7 +179,34 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The number of bytes that can be sent to the destinations before Security and Multi Channel encapsulation. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that can be sent to the destination before all additional encapsulations such as Security or Multi Channel encapsulation. </dd></dl>
+
+</div>
+</div>
+<a id="gab15d83efc0084ff753e16826ce063136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab15d83efc0084ff753e16826ce063136">&#9670;&nbsp;</a></span>zwave_tx_scheme_get_max_payload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t zwave_tx_scheme_get_max_payload </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramname"><em>node_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes the maximum number of bytes that can be sent to a given NodeID. (lowest layer) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_id</td><td>The NodeID of the destination </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes that can be sent to the destination </dd></dl>
 
 </div>
 </div>
@@ -371,7 +401,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:56 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:38 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

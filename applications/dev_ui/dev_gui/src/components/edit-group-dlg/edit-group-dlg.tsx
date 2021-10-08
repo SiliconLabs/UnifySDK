@@ -1,11 +1,11 @@
 import { Tooltip } from '@material-ui/core';
 import * as React from 'react';
 import { Button, Col, Form, Modal, Row, Table } from 'react-bootstrap';
-import { ClusterTypes, NodeTypesList } from '../../cluster-types/cluster-types';
-import { ClusterViewOverrides } from '../../pages/base-clusters/cluster-view-overrides';
+import { NodeTypesList } from '../../cluster-types/cluster-types';
 import { Group } from '../../pages/groups/groups-types';
 import { EditGroupDlgProps, EditGroupDlgState } from './edit-group-dlg-types';
 import * as RiIcons from 'react-icons/ri';
+import ClusterTypeTooltip from '../cluster-type-tooltip/cluster-type-tooltip';
 
 
 class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState> {
@@ -29,15 +29,15 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
             if (node.Type !== NodeTypesList.ProtocolController && node.ep) {
                 Object.keys(node.ep).forEach(endpoint => {
                     if (node.ep[endpoint].Groups?.SupportedCommands?.indexOf("AddGroup") > -1
-                        && ((node.NetworkStatus !== "Offline" && node.NetworkStatus !== "Unavailable") || !!this.state.ProcessingGroup?.GroupEndpointList?.find(i => i.Unid === node.Unid && i.Ep === endpoint)))
+                        && ((node.NetworkStatus !== "Offline" && node.NetworkStatus !== "Unavailable") || this.isGroupContainsEp(node.Unid, endpoint)))
                         endpointList.push({
                             Unid: node.Unid,
                             Ep: endpoint,
-                            ClusterTypes: Object.keys(node.ep[endpoint].Clusters),
+                            EpData: { [endpoint]: node.ep[endpoint] },
                             Security: node.Security,
                             NetworkStatus: node.NetworkStatus,
                             Groups: node.ep[endpoint].Groups,
-                            Checked: this.state.CheckedAll || !!this.state.ProcessingGroup?.GroupEndpointList?.find(i => i.Unid === node.Unid && i.Ep === endpoint)
+                            Checked: this.state.CheckedAll || this.isGroupContainsEp(node.Unid, endpoint)
                         });
                 });
             }
@@ -51,8 +51,23 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
         });
     }
 
+    isGroupContainsEp(unid: string, ep: string) {
+        let isContains = false;
+        let match = ep.match(/\d+/);
+        let endPoint = match ? parseInt(match[0]) : null;
+        if (endPoint !== null) {
+            this.state.ProcessingGroup.NodeList && Object.keys(this.state.ProcessingGroup.NodeList).forEach(nodeId => {
+                if (nodeId === unid && this.state.ProcessingGroup.NodeList[nodeId].indexOf(endPoint) > -1) {
+                    isContains = true;
+                    return;
+                }
+            });
+        }
+        return isContains;
+    }
+
     updateState(item: Group, nodeList: any[], checkedAll: boolean = false) {
-        this.setState({ ProcessingGroup: item, PristineGroupName: item.Name, CheckedAll: checkedAll }, () => {
+        this.setState({ ProcessingGroup: item, PristineGroupName: item.GroupName, CheckedAll: checkedAll }, () => {
             this.setState({ EndpointList: this.getEndpointList(nodeList) }, () => {
                 this.updates = {
                     addList: checkedAll ? new Set<string>(this.state.EndpointList.map(item => `${item.Unid}/${item.Ep}`)) : new Set<string>(),
@@ -69,7 +84,7 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
 
     handleNameChange = (event: any) => {
         let group = { ...this.state.ProcessingGroup };
-        group.Name = event.target.value;
+        group.GroupName = event.target.value;
         this.setState({ ProcessingGroup: group });
     }
 
@@ -77,13 +92,13 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
         let unid = `${item.Unid}/${item.Ep}`;
         item.Checked = event.target.checked;
         if (event.target.checked) {
-            if (this.state.ProcessingGroup.GroupEndpointList.filter(i => i.Unid === item.Unid && i.Ep === item.Ep).length === 0)
+            if (!this.isGroupContainsEp(item.Unid, item.Ep))
                 this.updates.addList.add(unid);
             if (this.updates.removeList.has(unid))
                 this.updates.removeList.delete(unid);
         }
         else {
-            if (this.state.ProcessingGroup.GroupEndpointList.filter(i => i.Unid === item.Unid && i.Ep === item.Ep).length > 0)
+            if (this.isGroupContainsEp(item.Unid, item.Ep))
                 this.updates.removeList.add(unid);
             if (this.updates.addList.has(unid))
                 this.updates.addList.delete(unid);
@@ -118,13 +133,13 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
             return;
 
         (this.updates.addList as Set<string>).forEach((i) => {
-            this.sendClusterCommand(i, "AddGroup", { GroupId: this.state.ProcessingGroup.GroupId, GroupName: this.state.ProcessingGroup.Name });
+            this.sendClusterCommand(i, "AddGroup", { GroupId: this.state.ProcessingGroup.GroupId, GroupName: this.state.ProcessingGroup.GroupName });
         });
         (this.updates.removeList as Set<string>).forEach((i) => {
             this.sendClusterCommand(i, "RemoveGroup", { GroupId: this.state.ProcessingGroup.GroupId });
         });
 
-        if (this.state.ProcessingGroup.Name !== this.state.PristineGroupName)
+        if (this.state.ProcessingGroup.GroupName !== this.state.PristineGroupName)
             this.props.SocketServer.send(JSON.stringify(
                 {
                     type: "run-group-command",
@@ -132,7 +147,7 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
                         GroupId: this.state.ProcessingGroup.GroupId,
                         ClusterType: "Groups",
                         Cmd: "AddGroup",
-                        Payload: { GroupId: this.state.ProcessingGroup.GroupId, GroupName: this.state.ProcessingGroup.Name || "" }
+                        Payload: { GroupId: this.state.ProcessingGroup.GroupId, GroupName: this.state.ProcessingGroup.GroupName || "" }
                     }
                 }));
 
@@ -162,14 +177,14 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
             <Modal show={this.state.ShowModal} size="lg" onHide={() => this.toggleEditModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        {`Group: [${this.state.ProcessingGroup.GroupId}] ${this.state.ProcessingGroup.Name}`}
+                        {`Group: [${this.state.ProcessingGroup.GroupId}] ${this.state.ProcessingGroup.GroupName}`}
                     </Modal.Title>
                 </Modal.Header>
                 <div className="error-modal-header col-sm-12" hidden={this.state.IsGroupValid}>The group must have at least one endpoint.</div>
                 <Modal.Body>
                     <div className="row col-sm-12 margin-b-10 flex">
                         <Form.Label column sm="2">Group Name:</Form.Label>
-                        <Form.Control type="text" className="col-sm-3" placeholder="Group Name" defaultValue={this.state.ProcessingGroup.Name} onKeyUp={this.handleNameChange} />
+                        <Form.Control type="text" className="col-sm-3" placeholder="Group Name" defaultValue={this.state.ProcessingGroup.GroupName} onKeyUp={this.handleNameChange} />
                     </div>
                     {(!this.state.EndpointList || !this.state.EndpointList.length)
                         ? <Row>
@@ -181,7 +196,7 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
                             <thead>
                                 <tr>
                                     <th className="wd-col-3">Unid</th>
-                                    <th className="wd-col-2 text-center">Type</th>
+                                    <th className="wd-col-2">Type</th>
                                     <th>Security</th>
                                     <th className="text-center"><Form.Check name="CheckedAll" checked={this.state.CheckedAll} onChange={(e) => this.handleCheckAllChange(e)} /></th>
                                 </tr>
@@ -196,11 +211,7 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
                                                     <span hidden={!(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable")} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
                                                     {item.Unid}/{item.Ep}
                                                 </td>
-                                                <td className="text-center">{item.ClusterTypes.length
-                                                    ? item.ClusterTypes.map((i: any, index: number) => {
-                                                        return <div key={index} className="col-md-12"> {(ClusterViewOverrides as any)[i]?.NodesTooltip || (ClusterTypes as any)[i] || "Unknown"}</div>
-                                                    })
-                                                    : "-"}</td>
+                                                <td className="flex"><ClusterTypeTooltip Ep={item.EpData} /></td>
                                                 <td>{item.Security}</td>
                                                 <td className="text-center">
                                                     <Form.Check name={item.Unid} checked={item.Checked} onChange={(e) => this.handleCheckboxChange(item, e)} />

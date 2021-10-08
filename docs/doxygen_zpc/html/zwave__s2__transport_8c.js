@@ -1,16 +1,22 @@
 var zwave__s2__transport_8c =
 [
+    [ "ACCESS_KEY_SLOT", "zwave__s2__transport_8c.html#a43cb350e837f9942168dd08c404c9771", null ],
+    [ "AUTHENTICATED_KEY_SLOT", "zwave__s2__transport_8c.html#a991a7dd2ab21a33d402179d74e1c4618", null ],
     [ "END_NODE_VERIFY_DELIVERY_TIMEOUT", "zwave__s2__transport_8c.html#a7d2fd9e4cfbc24033739f733be35e718", null ],
     [ "INVALID_KEY_ID", "zwave__s2__transport_8c.html#a977d202ebc70ac44b967d2aba1fc48e3", null ],
     [ "LOG_TAG", "zwave__s2__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
+    [ "LR_ACCESS_KEY_SLOT", "zwave__s2__transport_8c.html#ae909358c5d63a9566520fb064ce116a4", null ],
+    [ "LR_AUTHENTICATED_KEY_SLOT", "zwave__s2__transport_8c.html#a28b49a1612deaa3798bf5db3beda98cf", null ],
     [ "NONCE_REP_TIME", "zwave__s2__transport_8c.html#af745d97a8d46d76cc16d1c542c07c9b0", null ],
     [ "SECURITY_2_COMMANDS_SUPPORTED_REPORT", "zwave__s2__transport_8c.html#a2b98a62ea70f01156d5cffe001cf5167", null ],
     [ "SECURITY_2_NONCE_GET", "zwave__s2__transport_8c.html#abea833ec9ff4f3a00bb0ee3a48e2776f", null ],
+    [ "UNAUTHENTICATED_KEY_SLOT", "zwave__s2__transport_8c.html#a734ee331d8332130496b98b5ed19bfe6", null ],
     [ "zwave_s2_current_transmission_type_t", "zwave__s2__transport_8c.html#a9a8db3a39271d539e7349b222ca7acce", [
       [ "SINGLECAST", "zwave__s2__transport_8c.html#a9a8db3a39271d539e7349b222ca7accea1a0dc9beb3cc3e6ea7523340e00466ec", null ],
       [ "MULTICAST", "zwave__s2__transport_8c.html#a9a8db3a39271d539e7349b222ca7accea607d700b2c0a01c54bdadde074a7cb12", null ]
     ] ],
     [ "class_to_encapsulation", "zwave__s2__transport_8c.html#a317202daf4333df3301fa9d59bb2a5fa", null ],
+    [ "convert_lr_to_zwave_class_id", "zwave__s2__transport_8c.html#af96e0dcea652ffcb0c8b68aa70a635bd", null ],
     [ "encapsulation_to_class", "zwave__s2__transport_8c.html#a92710e65e87d24e2d66d3178e4c0051a", null ],
     [ "get_s2_keyset_from_group", "zwave__s2__transport_8c.html#a09d06c6e68cce5284f0e4388c768ccdc", null ],
     [ "get_s2_keyset_from_node", "zwave__s2__transport_8c.html#a941224c0fe3a7bdef2ee00d21c72e4bb", null ],

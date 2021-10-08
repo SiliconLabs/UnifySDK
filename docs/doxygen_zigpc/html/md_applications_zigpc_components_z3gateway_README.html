@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('md_applications_zigpc_components_z3gat
 <div class="contents">
 <div class="textblock"><p>This component was derived from the z3gateway generated from Simplicity Studio (v4 REL) App Builder and with the Silicon Laboratories Inc. Gecko SDK v.2.7.</p>
 <p>The modified Makefile is used to generate the Z3Gateway component as a library. In addition to the source files under <code>libs/</code>, the files under <code>src/</code> and <code>include/</code> are also packaged to create the library.</p>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md11"></a>
 File structure</h1>
 <pre class="fragment">|- Makefile             App Builder generated Makefile with modifications
                         needed to build as a CMake project
@@ -102,9 +102,9 @@ File structure</h1>
         |- stack        Modified files from ZNet stack from
                         `&lt;super&gt;/protocol/zigbee/`
 </pre><p>NOTE: The currently supported compiler is GCC.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md12"></a>
 Modifications to Z3Gateway Project</h1>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Makefile changes</h2>
 <p>The appbuilder generated Makefile is modified as follows:</p><ol type="1">
 <li>Options to pass in the following parameters:<ul>
@@ -137,7 +137,7 @@ Makefile changes</h2>
 </li>
 <li>Create macro <code>ENABLE_ZIGPC_CHANGES</code> to encompass changes made from the appbuilder generated code</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<h1><a class="anchor" id="autotoc_md14"></a>
 GSDK EmberAF Host File Changes</h1>
 <ol type="1">
 <li>Split emberAfMain functionality into init and tick functions:<ul>
@@ -146,7 +146,7 @@ GSDK EmberAF Host File Changes</h1>
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 GSDK Linux Serial File Changes</h2>
 <ol type="1">
 <li>Remove SIGINT signal handler in <a class="el" href="linux-serial_8c.html" title="Simulate serial I/O for linux EZSP UART applications.">linux-serial.c</a> in order for the ZigPC SIGINT handler to allow graceful shutdown of components<ul>
@@ -154,7 +154,7 @@ GSDK Linux Serial File Changes</h2>
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 Remove CLI interface functionality</h2>
 <ol type="1">
 <li>Undefine macro ZA_CLI_FULL</li>
@@ -169,7 +169,7 @@ Remove CLI interface functionality</h2>
 </ul>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 List of GSDK Zigbee Plugins Used in API exposed</h2>
 <p>The following plugins are used in the API exposed under <code>/include</code>:</p><ol type="1">
 <li>Network Creator: For PAN creation</li>
@@ -182,7 +182,7 @@ List of GSDK Zigbee Plugins Used in API exposed</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('zwave__utils_8h.html',''); initResizab
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="sl__status_8h_source.html">sl_status.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zwave__generic__types_8h_source.html">zwave_generic_types.h</a>&quot;</code><br />
 </div>
 <p><a href="zwave__utils_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -169,19 +170,6 @@ Classes</h2></td></tr>
 <tr class="separator:gad6ec5277490cecb6e5cd85853e32cfaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga46d0b776ef3260900522fee3b1ff433c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga46d0b776ef3260900522fee3b1ff433c">ZWAVE_NODE_INFO_OPTIONAL_PROTOCOL_SECURITY_MASK</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:ga46d0b776ef3260900522fee3b1ff433c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae08ff4e6c7eaf1776bacc293350f552d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#gae08ff4e6c7eaf1776bacc293350f552d">zwave_operating_mode</a> { <a class="el" href="group__zwave__utils.html#ggae08ff4e6c7eaf1776bacc293350f552da82316bcf93c2d59b54fa1180dfd1fffe">OPERATING_MODE_AL</a>, 
-<a class="el" href="group__zwave__utils.html#ggae08ff4e6c7eaf1776bacc293350f552daf05f56194d8ab3c5ac4397299700ca36">OPERATING_MODE_FL</a>, 
-<a class="el" href="group__zwave__utils.html#ggae08ff4e6c7eaf1776bacc293350f552da53e65ed8cf915777737a47db0bcd14d8">OPERATING_MODE_NL</a>, 
-<a class="el" href="group__zwave__utils.html#ggae08ff4e6c7eaf1776bacc293350f552da775769d88085c66825aeb1ce269753d5">OPERATING_MODE_UNKNOWN</a>
- }</td></tr>
-<tr class="memdesc:gae08ff4e6c7eaf1776bacc293350f552d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave Operating Modes (AL, FL or NL). Refer to <a class="el" href="index.html#zwave_nwk_spec">Z-Wave Alliance, Z-Wave and Z-Wave Long Range Network Layer Specification</a> for details.  <a href="group__zwave__utils.html#gae08ff4e6c7eaf1776bacc293350f552d">More...</a><br /></td></tr>
-<tr class="separator:gae08ff4e6c7eaf1776bacc293350f552d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac806884442257ed7635f299b4ba7d998"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#gac806884442257ed7635f299b4ba7d998">zwave_protocol</a> { <a class="el" href="group__zwave__utils.html#ggac806884442257ed7635f299b4ba7d998a276e933e6a627c7728a007c510fba4e7">PROTOCOL_ZWAVE</a>, 
-<a class="el" href="group__zwave__utils.html#ggac806884442257ed7635f299b4ba7d998a02360a62341ba147c9e4e9d4654b6a4b">PROTOCOL_ZWAVE_LONG_RANGE</a>, 
-<a class="el" href="group__zwave__utils.html#ggac806884442257ed7635f299b4ba7d998a6efaad26f583a75bbab8867546966e53">PROTOCOL_UNKNOWN</a>
- }</td></tr>
-<tr class="memdesc:gac806884442257ed7635f299b4ba7d998"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave Inclusion Protocol (Z-Wave / Z-Wave Long Range).  <a href="group__zwave__utils.html#gac806884442257ed7635f299b4ba7d998">More...</a><br /></td></tr>
-<tr class="separator:gac806884442257ed7635f299b4ba7d998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6d38d1aa10a5aa432326a6154ac9a9a0"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>[<a class="el" href="group__zwave__utils.html#ga4f5491634ebc4d0e5d3c4b85cc5e240d">ZW_LR_MAX_NODEMASK_LENGTH</a>]</td></tr>
 <tr class="memdesc:ga6d38d1aa10a5aa432326a6154ac9a9a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node mask.  <a href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">More...</a><br /></td></tr>
 <tr class="separator:ga6d38d1aa10a5aa432326a6154ac9a9a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -191,22 +179,16 @@ Classes</h2></td></tr>
 <tr class="memitem:ga4afdc83ff2cd0daf56a53dac916a11c2"><td class="memItemLeft" align="right" valign="top">typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a></td></tr>
 <tr class="memdesc:ga4afdc83ff2cd0daf56a53dac916a11c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave HomeID type.  <a href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">More...</a><br /></td></tr>
 <tr class="separator:ga4afdc83ff2cd0daf56a53dac916a11c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8bbb481ea6707182dc397268b4de3846"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__zwave__utils.html#gae08ff4e6c7eaf1776bacc293350f552d">zwave_operating_mode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga8bbb481ea6707182dc397268b4de3846">zwave_operating_mode_t</a></td></tr>
-<tr class="memdesc:ga8bbb481ea6707182dc397268b4de3846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave Operating Modes (AL, FL or NL). Refer to <a class="el" href="index.html#zwave_nwk_spec">Z-Wave Alliance, Z-Wave and Z-Wave Long Range Network Layer Specification</a> for details.  <a href="group__zwave__utils.html#ga8bbb481ea6707182dc397268b4de3846">More...</a><br /></td></tr>
-<tr class="separator:ga8bbb481ea6707182dc397268b4de3846"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf5484bdd20ebce433593702cc9c26b9b"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__zwave__utils.html#gac806884442257ed7635f299b4ba7d998">zwave_protocol</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#gaf5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a></td></tr>
-<tr class="memdesc:gaf5484bdd20ebce433593702cc9c26b9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave Inclusion Protocol (Z-Wave / Z-Wave Long Range).  <a href="group__zwave__utils.html#gaf5484bdd20ebce433593702cc9c26b9b">More...</a><br /></td></tr>
-<tr class="separator:gaf5484bdd20ebce433593702cc9c26b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0c8feec1efda2517e43c69571deb3bfd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__utils.html#ga8bbb481ea6707182dc397268b4de3846">zwave_operating_mode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga0c8feec1efda2517e43c69571deb3bfd">get_operating_mode</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memitem:ga0c8feec1efda2517e43c69571deb3bfd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__generic__types_8h.html#a8bbb481ea6707182dc397268b4de3846">zwave_operating_mode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga0c8feec1efda2517e43c69571deb3bfd">get_operating_mode</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="memdesc:ga0c8feec1efda2517e43c69571deb3bfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the operating mode of a node.  <a href="group__zwave__utils.html#ga0c8feec1efda2517e43c69571deb3bfd">More...</a><br /></td></tr>
 <tr class="separator:ga0c8feec1efda2517e43c69571deb3bfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa553f79c1a3129d5f67468275f2cdd4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__utils.html#gaf5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#gaa553f79c1a3129d5f67468275f2cdd4d">get_protocol</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memitem:gaa553f79c1a3129d5f67468275f2cdd4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__generic__types_8h.html#af5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#gaa553f79c1a3129d5f67468275f2cdd4d">get_protocol</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="memdesc:gaa553f79c1a3129d5f67468275f2cdd4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the protocol that the node is running in this network.  <a href="group__zwave__utils.html#gaa553f79c1a3129d5f67468275f2cdd4d">More...</a><br /></td></tr>
 <tr class="separator:gaa553f79c1a3129d5f67468275f2cdd4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga236a6e748ebea2aa6b2c48e5f1e8e307"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga236a6e748ebea2aa6b2c48e5f1e8e307">zwave_get_protocol_name</a> (<a class="el" href="group__zwave__utils.html#gaf5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a> protocol)</td></tr>
+<tr class="memitem:ga236a6e748ebea2aa6b2c48e5f1e8e307"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga236a6e748ebea2aa6b2c48e5f1e8e307">zwave_get_protocol_name</a> (<a class="el" href="zwave__generic__types_8h.html#af5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a> protocol)</td></tr>
 <tr class="memdesc:ga236a6e748ebea2aa6b2c48e5f1e8e307"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of a protocol value.  <a href="group__zwave__utils.html#ga236a6e748ebea2aa6b2c48e5f1e8e307">More...</a><br /></td></tr>
 <tr class="separator:ga236a6e748ebea2aa6b2c48e5f1e8e307"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga316d5f3b287b702bde7c8e5fa6d788ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga316d5f3b287b702bde7c8e5fa6d788ed">store_protocol</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__zwave__utils.html#gaf5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a> inclusion_protocol)</td></tr>
+<tr class="memitem:ga316d5f3b287b702bde7c8e5fa6d788ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga316d5f3b287b702bde7c8e5fa6d788ed">store_protocol</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="zwave__generic__types_8h.html#af5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a> inclusion_protocol)</td></tr>
 <tr class="memdesc:ga316d5f3b287b702bde7c8e5fa6d788ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores a protocol value for a NodeID in the attribute store.  <a href="group__zwave__utils.html#ga316d5f3b287b702bde7c8e5fa6d788ed">More...</a><br /></td></tr>
 <tr class="separator:ga316d5f3b287b702bde7c8e5fa6d788ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -222,7 +204,7 @@ License</h1>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_54567e4ebcfe372d0538afdd0fb8ee58.html">zpc_utils</a></li><li class="navelem"><a class="el" href="dir_43f180f3a8900e7bbb11214b04c041fd.html">include</a></li><li class="navelem"><a class="el" href="zwave__utils_8h.html">zwave_utils.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

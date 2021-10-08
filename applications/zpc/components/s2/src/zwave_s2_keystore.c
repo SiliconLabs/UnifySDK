@@ -12,7 +12,6 @@
  *****************************************************************************/
 
 #include "zwave_s2_keystore.h"
-
 #include "zwave_s2_keystore_int.h"
 
 /// Must be included before S2.h (because of definition of offsetof)
@@ -35,6 +34,7 @@
 
 #include "zwave_s0_internal.h"
 #define S2_NUM_KEY_CLASSES (s2_get_key_count()) /* Includes the S0 key */
+#define NETWORK_KEY_SIZE   16  //< Size of a Z-Wave network key.
 
 uint8_t dynamic_ecdh_private_key[32];
 static zwave_s2_keystore_ecdh_key_mode_t ecdh_key_mode;
@@ -112,9 +112,8 @@ void keystore_public_key_read(uint8_t *buf)
 
 bool keystore_network_key_read(uint8_t keyclass, uint8_t *buf)
 {
-  uint8_t assigned_keys;
+  uint8_t assigned_keys = zwave_s2_keystore_get_assigned_keys();
 
-  assigned_keys = zwave_s2_keystore_get_assigned_keys();
   if (0 == (keyclass & assigned_keys)) {
     return false;
   }
@@ -143,10 +142,72 @@ bool keystore_network_key_read(uint8_t keyclass, uint8_t *buf)
       return false;
   }
 
-  sl_log_info(LOG_TAG, "Key class %x \n", keyclass);
-  sl_log_byte_arr(LOG_TAG, SL_LOG_INFO, buf, 16);
-
   return true;
+}
+
+void zwave_s2_log_security_keys(sl_log_level_t log_level)
+{
+  uint8_t assigned_keys = zwave_s2_keystore_get_assigned_keys();
+  for (uint8_t i = 0; i < 8; i++) {
+    uint8_t current_keyclass = 1 << i;
+    if (0 == (current_keyclass & assigned_keys)) {
+      continue;
+    }
+
+    uint8_t current_key[NETWORK_KEY_SIZE] = {};
+
+    switch (current_keyclass) {
+      case KEY_CLASS_S0:
+        nvm_config_get(security_netkey, current_key);
+        sl_log(LOG_TAG,
+               log_level,
+               "Z-Wave S0 Network Key (class %x)",
+               current_keyclass);
+        break;
+      case KEY_CLASS_S2_UNAUTHENTICATED:
+        nvm_config_get(security2_key[0], current_key);
+        sl_log(LOG_TAG,
+               log_level,
+               "Z-Wave S2 Unauthenticated Network Key (class 0x%x)",
+               current_keyclass);
+        break;
+      case KEY_CLASS_S2_AUTHENTICATED:
+        nvm_config_get(security2_key[1], current_key);
+        sl_log(LOG_TAG,
+               log_level,
+               "Z-Wave S2 Authenticated Network Key (class 0x%x)",
+               current_keyclass);
+        break;
+      case KEY_CLASS_S2_ACCESS:
+        nvm_config_get(security2_key[2], current_key);
+        sl_log(LOG_TAG,
+               log_level,
+               "Z-Wave S2 Access Control Network Key (class 0x%x)",
+               current_keyclass);
+        break;
+      case KEY_CLASS_S2_AUTHENTICATED_LR:
+        nvm_config_get(security2_lr_key[0], current_key);
+        sl_log(LOG_TAG,
+               log_level,
+               "Z-Wave LR S2 Authenticated Network Key (class 0x%x)",
+               current_keyclass);
+        break;
+      case KEY_CLASS_S2_ACCESS_LR:
+        nvm_config_get(security2_lr_key[1], current_key);
+        sl_log(LOG_TAG,
+               log_level,
+               "Z-Wave LR S2 Access Control Network Key (class 0x%x)",
+               current_keyclass);
+        break;
+      default:
+        sl_log(LOG_TAG,
+               log_level,
+               "<unknown> Network Key (class 0x%x)",
+               current_keyclass);
+        break;
+    }
+    sl_log_byte_arr(LOG_TAG, log_level, current_key, 16);
+  }
 }
 
 bool keystore_network_key_write(uint8_t keyclass, const uint8_t *buf)
@@ -191,7 +252,7 @@ void zwave_s2_keystore_set_ecdh_key_mode(zwave_s2_keystore_ecdh_key_mode_t mode)
 
 uint8_t zwave_s2_keystore_get_assigned_keys()
 {
-  uint8_t assigned_keys;
+  uint8_t assigned_keys = 0;
 
   nvm_config_get(assigned_keys, &assigned_keys);
   return assigned_keys;
@@ -217,15 +278,11 @@ void zwave_s2_create_new_network_keys()
   for (int c = 0; c < S2_NUM_KEY_CLASSES - 1; c++) {
     S2_get_hw_random(net_key, 16);
     keystore_network_key_write(1 << c, net_key);
-    sl_log_debug(LOG_TAG, "New key %x \n", 1 << c);
-    sl_log_byte_arr(LOG_TAG, SL_LOG_DEBUG, net_key, 16);
   }
 
   // Also create a new S0 key:
   S2_get_hw_random(net_key, 16);
   keystore_network_key_write(KEY_CLASS_S0, net_key);
-  sl_log_debug(LOG_TAG, "New key %x \n", KEY_CLASS_S0);
-  sl_log_byte_arr(LOG_TAG, SL_LOG_DEBUG, net_key, 16);
 
   memset(net_key, 0, sizeof(net_key));
 }

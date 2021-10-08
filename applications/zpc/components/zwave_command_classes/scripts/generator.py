@@ -92,7 +92,10 @@ def attribute_name(cmd_name, param_name):
     elif('SIZE' in attr):
         return None
     elif(attr in attr_aliases):
-        return attr_aliases[attr]
+        if(attr_aliases[attr]==""):
+            return None
+        else:
+            return attr_aliases[attr]
     return attr
 
 
@@ -248,21 +251,21 @@ def main():
         if 'attr_child_parent_dict' in m_data:
             child_parent_dict = m_data['attr_child_parent_dict']
 
-        if 'cc_exclusion_list' in m_data:
-            cc_exclusion_list = m_data['cc_exclusion_list']
-
+        if 'cc_inclusion_list' in m_data:
+            cc_inclusion_list = m_data['cc_inclusion_list']
 
     for cmd_class in data_dict.findall('cmd_class'):
         version = cmd_class.attrib['version']
         cc_name = cmd_class.attrib['name']
-        for excl_name in cc_exclusion_list:
+        remove = True
+        for excl_name in cc_inclusion_list:
             if(cc_name == excl_name['cc_name'] and (
-                (int(version) < int(excl_name['min_cc_version'])) or 
-                (int(version) > int(excl_name['max_cc_version']))) ):
-                try:
-                    data_dict.remove(cmd_class)
-                except ValueError:
-                    pass
+                (int(version) >= int(excl_name['min_cc_version'])) and 
+                (int(version) <= int(excl_name['max_cc_version']))) ):
+                    remove = False
+
+        if(remove):
+            data_dict.remove(cmd_class)
 
     # Make sure that everything is ordered by version
     data_dict[:] = sorted(

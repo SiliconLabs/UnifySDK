@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['idle_4655',['IDLE',['../namespaceuic__ota.html#a15a593e80817e9c52f1d5dc96871921baa5daf7f2ebbba4975d61dab1c40188c7',1,'uic_ota']]],
-  ['include_4656',['include',['../namespacesmartstart.html#a30905b6ddd0b73b0a63205eb26c99a95ad436eb0fd9de10b54a828ce6435f7e81',1,'smartstart']]],
-  ['invalid_5fimage_4657',['INVALID_IMAGE',['../namespaceuic__ota.html#a061d9131ad0a8a302d543c11819b0394a2d0123834a4c1d1a6b499a140821e7ea',1,'uic_ota']]]
+  ['fifthteen_5fminute_4792',['fifthteen_minute',['../zigpc__cpu__usage_8hpp.html#a87a9d2d43dfce194526255fcbd11d5a7a66921d5adc9e92e4c4559ff2f8bbdb83',1,'zigpc_cpu_usage.hpp']]],
+  ['five_5fminute_4793',['five_minute',['../zigpc__cpu__usage_8hpp.html#a87a9d2d43dfce194526255fcbd11d5a7a74f75b3cfcd97ccff4bdbdb431c121d7',1,'zigpc_cpu_usage.hpp']]]
 ];

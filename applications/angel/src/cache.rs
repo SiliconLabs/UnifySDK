@@ -13,7 +13,7 @@
 use std::collections::BTreeMap;
 use std::iter::FromIterator;
 use std::{collections::HashSet, vec};
-use uic_log::log_warning;
+use uic_log::log_debug;
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct EntryChanged {
@@ -70,13 +70,13 @@ impl Cache {
         if let Some(cached_group) = self.groups_for_endpoints.get(&key) {
             for group in cached_group {
                 if !groups.contains(group) {
-                    to_be_removed.push(group.clone());
+                    to_be_removed.push(*group);
                 }
             }
 
             for group in groups {
                 if !cached_group.contains(group) {
-                    to_be_added.push(group.clone());
+                    to_be_added.push(*group);
                 }
             }
         } else {
@@ -100,9 +100,9 @@ impl Cache {
         }
 
         if let Some(groups) = self.groups_for_endpoints.get(&(unid.to_string(), endpoint)) {
-            return Vec::from_iter(groups.clone());
+            Vec::from_iter(groups.clone())
         } else {
-            return Vec::new();
+            Vec::new()
         }
     }
 
@@ -148,7 +148,7 @@ impl Cache {
         let mut reverse_lookup: BTreeMap<u16, BTreeMap<String, Vec<u16>>> = BTreeMap::new();
         for (k, v) in &self.groups_for_endpoints {
             for group in v {
-                if let Some(unid_list) = reverse_lookup.get_mut(&group) {
+                if let Some(unid_list) = reverse_lookup.get_mut(group) {
                     if let Some(ep_list) = unid_list.get_mut(&k.0) {
                         ep_list.push(k.1);
                     } else {
@@ -157,7 +157,7 @@ impl Cache {
                 } else {
                     let mut map = BTreeMap::new();
                     map.insert(k.0.to_owned(), vec![k.1]);
-                    reverse_lookup.insert(group.clone(), map);
+                    reverse_lookup.insert(*group, map);
                 }
             }
         }
@@ -170,10 +170,10 @@ impl Cache {
     /// or when the new name == the old name
     pub fn update_group_name(&mut self, groupid: u16, name: &str) -> bool {
         if self.get_group_name(groupid).is_some() && name.is_empty() {
-            log_warning(
+            log_debug(
                 "cache",
                 format!(
-                    "omitting groupname update of group {} because of an empty string.",
+                    "Group Name is empty for Group ID {}. Omitting Group Name update",
                     self.group_names.get(&groupid).unwrap()
                 ),
             );
@@ -188,6 +188,10 @@ impl Cache {
         self.group_names.get(&groupid).map(|s| s.into())
     }
 
+    pub fn remove_group_name(&mut self, groupid: u16) {
+        self.group_names.remove(&groupid);
+    }
+
     /// Update the list of supported-commands, per cluster, for the given endpoint.
     pub fn set_endpoint_cluster_supported_commands(
         &mut self,
@@ -197,7 +201,7 @@ impl Cache {
     ) {
         let endpoint = self
             .supported_commands_for_endpoints
-            .entry(key.clone())
+            .entry(key)
             .or_insert(BTreeMap::new());
         endpoint.insert(cluster_name.to_string(), commands);
     }
@@ -213,7 +217,7 @@ impl Cache {
                 return Some(cluster_commands.clone());
             }
         }
-        return None;
+        None
     }
 
     /// Get the list of endpoints that belong to group.
@@ -222,12 +226,47 @@ impl Cache {
             let mut return_vec: Vec<(String, u16)> = Vec::new();
             for (unid, eps) in unid_list {
                 for ep in eps {
-                    return_vec.push((unid.clone(), ep.clone()));
+                    return_vec.push((unid.clone(), *ep));
                 }
             }
             return Some(return_vec);
         }
-        return None;
+        None
+    }
+
+    /// Get the list of commands supported by group per clusters.
+    pub fn get_group_supported_commands_per_cluster(
+        &self,
+        group_id: &u16, // ep: (String, u16),
+    ) -> Option<BTreeMap<String, HashSet<String>>> {
+        if let Some(eps) = self.get_endpoints_for_group(group_id) {
+            return self.get_endpoints_supported_commands_per_cluster(eps);
+        }
+        None
+    }
+
+    /// Get the list of commands supported by endpoint per clusters.
+    pub fn get_endpoints_supported_commands_per_cluster(
+        &self,
+        end_points: Vec<(String, u16)>,
+    ) -> Option<BTreeMap<String, HashSet<String>>> {
+        let mut return_vec: BTreeMap<String, HashSet<String>> = BTreeMap::new();
+        if !end_points.is_empty() {
+            for ep in end_points {
+                if let Some(ep_cluster_commands) = self.supported_commands_for_endpoints.get(&ep) {
+                    for (cluster, commands) in ep_cluster_commands.iter() {
+                        let cluster_commands = return_vec
+                            .entry(cluster.to_string())
+                            .or_insert(HashSet::new());
+                        for command in commands.iter() {
+                            cluster_commands.insert(command.to_string());
+                        }
+                    }
+                }
+            }
+            return Some(return_vec);
+        }
+        None
     }
 }
 
@@ -241,35 +280,35 @@ mod tests {
             unid: unid.to_string(),
             endpoints: ep,
         };
-        changes.iter().find(|&x| x == &entr).is_some()
+        changes.iter().any(|x| x == &entr)
     }
 
     #[test]
     fn set_groups_for_nodes_test() {
         let mut cache = Cache::new();
-        let changes = cache.set_group_list_for_node("zw-1235", 0, &vec![3, 4, 5]);
+        let changes = cache.set_group_list_for_node("zw-1235", 0, &[3, 4, 5]);
         assert_eq!(changes.len(), 3);
         assert!(change_contains(&changes, "zw-1235", 3, vec![0]));
         assert!(change_contains(&changes, "zw-1235", 4, vec![0]));
         assert!(change_contains(&changes, "zw-1235", 5, vec![0]));
 
         // no data change equals no update
-        let changes = cache.set_group_list_for_node("zw-1235", 0, &vec![3, 4, 5]);
+        let changes = cache.set_group_list_for_node("zw-1235", 0, &[3, 4, 5]);
         assert_eq!(changes.len(), 0);
 
         // remove group 5
-        let changes = cache.set_group_list_for_node("zw-1235", 0, &vec![3, 4]);
+        let changes = cache.set_group_list_for_node("zw-1235", 0, &[3, 4]);
         assert_eq!(changes.len(), 1);
         assert!(change_contains(&changes, "zw-1235", 5, vec![]));
 
         // add different unid doesnt effect result
-        let changes = cache.set_group_list_for_node("aa-000", 0, &vec![0, 3]);
+        let changes = cache.set_group_list_for_node("aa-000", 0, &[0, 3]);
         assert_eq!(changes.len(), 2);
         assert!(change_contains(&changes, "aa-000", 0, vec![0]));
         assert!(change_contains(&changes, "aa-000", 3, vec![0]));
 
         // add extra end-point
-        let changes = cache.set_group_list_for_node("zw-1235", 2, &vec![3, 66]);
+        let changes = cache.set_group_list_for_node("zw-1235", 2, &[3, 66]);
         assert_eq!(changes.len(), 2);
         assert!(change_contains(&changes, "zw-1235", 3, vec![0, 2]));
         assert!(change_contains(&changes, "zw-1235", 66, vec![2]));

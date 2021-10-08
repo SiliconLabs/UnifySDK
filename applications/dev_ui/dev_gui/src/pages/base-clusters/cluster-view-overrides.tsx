@@ -32,7 +32,7 @@ export let ClusterViewOverrides = {
                 Value: (item: any) => item.Attributes?.SystemMode?.Reported || "-"
             },
         ],
-        NodesTooltip: <Tooltip title="Thermostat"><span className="cursor-defult"><IoIcons.IoMdThermometer /></span></Tooltip>,
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: Thermostat`}><span className="cursor-defult"><IoIcons.IoMdThermometer /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.Thermostat,
             title: 'Thermostats',
@@ -52,7 +52,7 @@ export let ClusterViewOverrides = {
                     : "-"
             }
         ],
-        NodesTooltip: <Tooltip title="On/Off"><span className="cursor-defult"><IoIcons.IoIosSwitch /></span></Tooltip>,
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: On/Off`}><span className="cursor-defult"><IoIcons.IoIosSwitch /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.OnOff,
             title: 'On/Offs',
@@ -80,7 +80,7 @@ export let ClusterViewOverrides = {
                 Value: (item: any) => item.Attributes?.ActuatorEnabled?.Reported?.toString() || "-"
             }
         ],
-        NodesTooltip: <Tooltip title="Door Lock"><span className="cursor-defult"><RiIcons.RiDoorOpenFill /></span></Tooltip>,
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: Door Lock`}><span className="cursor-defult"><RiIcons.RiDoorOpenFill /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.DoorLock,
             title: 'Door Locks',
@@ -104,7 +104,7 @@ export let ClusterViewOverrides = {
                     : "-"
             }
         ],
-        NodesTooltip: <Tooltip title="Binary Sensors"><span className="cursor-defult"><MdIcons.MdLeakAdd /></span></Tooltip>,
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: Binary Sensors`}><span className="cursor-defult"><MdIcons.MdLeakAdd /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.OccupancySensing,
             title: 'Binary Sensors',
@@ -120,7 +120,7 @@ export let ClusterViewOverrides = {
                 Value: (item: any) => <><span className={item.Attributes?.IdentifyTime?.Reported === 0 ? '' : "dot-icon bg-warning blinking"}></span>{item.Attributes?.IdentifyTime?.Reported}</>
             }
         ],
-        NodesTooltip: <Tooltip title="Identify"><span className="cursor-defult"><RiIcons.RiScan2Line /></span></Tooltip>,
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: Identify`}><span className="cursor-defult"><RiIcons.RiScan2Line /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.Identify,
             title: 'Identify',
@@ -130,7 +130,7 @@ export let ClusterViewOverrides = {
         } as NavbarItem,
     } as ClusterViewOverride,
     Level: {
-        NodesTooltip: <Tooltip title="Level"><span className="cursor-defult"><AiIcons.AiOutlineControl /></span></Tooltip>,
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: Level`}><span className="cursor-defult"><AiIcons.AiOutlineControl /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.Level,
             title: 'Level',
@@ -140,7 +140,7 @@ export let ClusterViewOverrides = {
         } as NavbarItem,
     } as ClusterViewOverride,
     ColorControl: {
-        NodesTooltip: <Tooltip title="Level"><span className="cursor-defult"><MdIcons.MdInvertColors /></span></Tooltip>,
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: Color Control`}><span className="cursor-defult"><MdIcons.MdInvertColors /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.ColorControl,
             title: 'ColorControl',
@@ -150,7 +150,7 @@ export let ClusterViewOverrides = {
         } as NavbarItem,
     } as ClusterViewOverride,
     IASZone: {
-        NodesTooltip: <Tooltip title="IASZone"><span className="cursor-defult"><MdIcons.MdPlace /></span></Tooltip>,
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: IASZone`}><span className="cursor-defult"><MdIcons.MdPlace /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.IASZone,
             title: 'IASZone',
@@ -160,12 +160,47 @@ export let ClusterViewOverrides = {
         } as NavbarItem,
     } as ClusterViewOverride,
     Basic: {
-        NodesTooltip: <Tooltip title="Basic"><span className="cursor-defult"><FiIcons.FiCircle /></span></Tooltip>,
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: Basic`}><span className="cursor-defult"><FiIcons.FiCircle /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.Basic,
             title: 'Basic',
             path: '/basic',
             icon: <FiIcons.FiCircle />,
+            cName: 'nav-text'
+        } as NavbarItem,
+    } as ClusterViewOverride,
+    PowerConfiguration: {
+        ViewTable: [
+            {
+                Name: `Battery`,
+                Value: (item: any) => item?.Attributes?.BatteryPercentageRemaining?.Reported !== undefined ? item?.Attributes?.BatteryPercentageRemaining?.Reported : "-"
+            },
+            {
+                Name: `Battery Low`,
+                Value: (item: any) => item?.Attributes?.BatteryAlarmMask?.Reported?.BatteryVoltageTooLow !== undefined ? item?.Attributes?.BatteryAlarmMask?.Reported?.BatteryVoltageTooLow.toString() : "-"
+            }
+        ],
+        NodesTooltip: (endpoint: string, attr: any) => {
+            if (attr && attr.BatteryPercentageRemaining !== undefined && attr.BatteryPercentageRemaining.Reported !== undefined) {
+                let percentage = attr.BatteryPercentageRemaining.Reported;
+                let icon: any;
+                if (attr.BatteryAlarmMask && attr.BatteryAlarmMask.Reported && attr.BatteryAlarmMask.Reported.BatteryVoltageTooLow)
+                    icon = <MdIcons.MdBatteryAlert color="#dc3545" />;
+                else if (percentage < 20)
+                    icon = <MdIcons.MdBattery20 />;
+                else if (percentage < 50)
+                    icon = <MdIcons.MdBattery50 />;
+                else if (percentage < 80)
+                    icon = <MdIcons.MdBattery80 />;
+                else icon = <MdIcons.MdBatteryFull />;
+                return <Tooltip title={`${endpoint}: battery ${percentage}%`}><span className="cursor-defult">{icon}</span></Tooltip>
+            }
+        },
+        NavbarItem: {
+            name: ClusterTypes.Basic,
+            title: 'Battery',
+            path: '/battery',
+            icon: <MdIcons.MdBatteryStd />,
             cName: 'nav-text'
         } as NavbarItem,
     } as ClusterViewOverride

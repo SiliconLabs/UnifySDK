@@ -1749,15 +1749,23 @@ static void s2_inclusion_complete(void)
   // Post event upwards to inform that inclusion of noda A has successfully completed.
   zwave_event_t * s2_event;
 
-  s2_inclusion_stop_timeout();
-  s2_restore_keys(mp_context);
+  //Check that the final transfer end is ok
+  if ((SECURITY_2_TRANSFER_END == mp_context->buf[SECURITY_2_COMMAND_POS]) &&
+      (SECURITY_2_KEY_REQ_COMPLETE == (mp_context->buf[SECURITY_2_TRANSFER_END_FLAGS_POS] &
+          (SECURITY_2_KEY_REQ_COMPLETE | SECURITY_2_KEY_VERIFIED))))
+  {
+    s2_inclusion_stop_timeout();
+    s2_restore_keys(mp_context);
 
-  s2_event = (zwave_event_t *)m_event_buffer;
-  s2_event->event_type                                             = S2_NODE_INCLUSION_COMPLETE_EVENT;
-  s2_event->evt.s2_event.peer                                      = mp_context->inclusion_peer;
-  s2_event->evt.s2_event.s2_data.inclusion_complete.exchanged_keys = mp_context->key_exchange;
-
-  m_evt_handler(s2_event);
+    s2_event = (zwave_event_t *)m_event_buffer;
+    s2_event->event_type                                             = S2_NODE_INCLUSION_COMPLETE_EVENT;
+    s2_event->evt.s2_event.peer                                      = mp_context->inclusion_peer;
+    s2_event->evt.s2_event.s2_data.inclusion_complete.exchanged_keys = mp_context->key_exchange;
+    m_evt_handler(s2_event);
+  } else {
+    inclusion_failed_frame_send(KEX_FAIL_KEY_VERIFY,NON_SECURE);
+    inclusion_failed_evt_push(KEX_FAIL_KEY_VERIFY);
+  }
 }
 
 static void s2_check_no_keys() {

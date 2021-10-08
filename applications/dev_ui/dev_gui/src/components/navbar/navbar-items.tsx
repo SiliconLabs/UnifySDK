@@ -22,7 +22,7 @@ export const NavbarItems: NavbarItem[] = [
   },
   {
     name: 'SmartStart',
-    title: 'Smart Start',
+    title: 'SmartStart',
     path: '/smartstart',
     icon: <CgIcons.CgSmartphoneShake />,
     cName: 'nav-text'

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -113,7 +113,7 @@ $(document).ready(function(){initNavTree('device-table_8h_source.html',''); init
 <div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structEmberAfPluginDeviceTableEntry.html">   40</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structEmberAfPluginDeviceTableEntry.html#ac67aab3c047e72d677c2269fc130baa5">   41</a></span>&#160;  uint8_t     <a class="code" href="structEmberAfPluginDeviceTableEntry.html#ac67aab3c047e72d677c2269fc130baa5">endpoint</a>;</div>
 <div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structEmberAfPluginDeviceTableEntry.html#adf11fec8756f48f764a519cc07476895">   42</a></span>&#160;  uint16_t    <a class="code" href="structEmberAfPluginDeviceTableEntry.html#adf11fec8756f48f764a519cc07476895">deviceId</a>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structEmberAfPluginDeviceTableEntry.html#a43eaf119190ef4e5b60041efdaa2fb6c">   43</a></span>&#160;  uint32_t    <a class="code" href="structEmberAfPluginDeviceTableEntry.html#a43eaf119190ef4e5b60041efdaa2fb6c">lastMsgTimestamp</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structEmberAfPluginDeviceTableEntry.html#a43eaf119190ef4e5b60041efdaa2fb6c">   43</a></span>&#160;  <a class="code" href="classuint32__t.html">uint32_t</a>    <a class="code" href="structEmberAfPluginDeviceTableEntry.html#a43eaf119190ef4e5b60041efdaa2fb6c">lastMsgTimestamp</a>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="structEmberAfPluginDeviceTableEntry.html#aa4e8b5dfc1cce36624e6d69bf2d92031">   44</a></span>&#160;  EmberNodeId <a class="code" href="structEmberAfPluginDeviceTableEntry.html#aa4e8b5dfc1cce36624e6d69bf2d92031">nodeId</a>;</div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structEmberAfPluginDeviceTableEntry.html#a17b19ce136ef65fdf50c3994973acd92">   45</a></span>&#160;  EmberEUI64  <a class="code" href="structEmberAfPluginDeviceTableEntry.html#a17b19ce136ef65fdf50c3994973acd92">eui64</a>;</div>
 <div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structEmberAfPluginDeviceTableEntry.html#a0f3676f0927ae33be1ef0cfc0669ee84">   46</a></span>&#160;  <a class="code" href="device-table_8h.html#a9b69897bd205813aaafea0fed6e528d7">EmberAfPluginDeviceTableDeviceState</a> <a class="code" href="structEmberAfPluginDeviceTableEntry.html#a0f3676f0927ae33be1ef0cfc0669ee84">state</a>;</div>
@@ -177,7 +177,7 @@ $(document).ready(function(){initNavTree('device-table_8h_source.html',''); init
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="keywordtype">void</span> <a class="code" href="device-table_8h.html#adbf220c91b49b11791a7c97f6dbbf925">emberAfDeviceTableNewDeviceJoinHandler</a>(EmberNodeId newNodeId,</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                                            EmberEUI64 newNodeEui64);</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;uint32_t <a class="code" href="device-table_8h.html#a93b999488d3e2ebffb6a5be926ee467a">emberAfDeviceTableTimeSinceLastMessage</a>(uint16_t index);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<a class="code" href="classuint32__t.html">uint32_t</a> <a class="code" href="device-table_8h.html#a93b999488d3e2ebffb6a5be926ee467a">emberAfDeviceTableTimeSinceLastMessage</a>(uint16_t index);</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160; </div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="device-table_8h.html#adf7f6960a751cf0c9dc82037dd27f488">emberAfDeviceTableMatchEui64</a>(EmberEUI64 a, EmberEUI64 b);</div>
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
@@ -321,6 +321,7 @@ $(document).ready(function(){initNavTree('device-table_8h_source.html',''); init
 <div class="ttc" id="agroup__list_html_ga070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="group__list.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> list.c:50</div></div>
 <div class="ttc" id="adevice-table_8c_html_aed1f4309221fc661d7498cf6c3ad93c7"><div class="ttname"><a href="device-table_8c.html#aed1f4309221fc661d7498cf6c3ad93c7">clearDeviceTableIndex</a></div><div class="ttdeci">static void clearDeviceTableIndex(uint16_t index)</div><div class="ttdef"><b>Definition:</b> device-table.c:161</div></div>
 <div class="ttc" id="adevice-table-internal_8h_html_a98b0fa14a5cf4951ca70e0a6f9a0f3f3"><div class="ttname"><a href="device-table-internal_8h.html#a98b0fa14a5cf4951ca70e0a6f9a0f3f3">emAfDeviceTableUpdateDeviceState</a></div><div class="ttdeci">void emAfDeviceTableUpdateDeviceState(uint16_t index, uint8_t newState)</div><div class="ttdef"><b>Definition:</b> device-table.c:402</div></div>
+<div class="ttc" id="aclassuint32__t_html"><div class="ttname"><a href="classuint32__t.html">uint32_t</a></div></div>
 <div class="ttc" id="adevice-table-tracking_8c_html_a038cb6cd940f7a1f67d0e8145b55daf3"><div class="ttname"><a href="device-table-tracking_8c.html#a038cb6cd940f7a1f67d0e8145b55daf3">emAfPluginDeviceTablePreCommandReceivedCallback</a></div><div class="ttdeci">bool emAfPluginDeviceTablePreCommandReceivedCallback(EmberAfClusterCommand *cmd)</div><div class="ttdef"><b>Definition:</b> device-table-tracking.c:53</div></div>
 <div class="ttc" id="adevice-table_8c_html_a4896668d8c7917ce92aa477f79cf13eb"><div class="ttname"><a href="device-table_8c.html#a4896668d8c7917ce92aa477f79cf13eb">emberAfDeviceTablePointer</a></div><div class="ttdeci">EmberAfPluginDeviceTableEntry * emberAfDeviceTablePointer(void)</div><div class="ttdoc">Returns a pointer to the device table structure.</div><div class="ttdef"><b>Definition:</b> device-table.c:84</div></div>
 <div class="ttc" id="adevice-table_8h_html_adf7f6960a751cf0c9dc82037dd27f488"><div class="ttname"><a href="device-table_8h.html#adf7f6960a751cf0c9dc82037dd27f488">emberAfDeviceTableMatchEui64</a></div><div class="ttdeci">bool emberAfDeviceTableMatchEui64(EmberEUI64 a, EmberEUI64 b)</div><div class="ttdoc">Returns true if the two EUI64 parameters match.</div><div class="ttdef"><b>Definition:</b> device-table.c:148</div></div>
@@ -357,7 +358,7 @@ $(document).ready(function(){initNavTree('device-table_8h_source.html',''); init
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_d068be7b5e98c454d73184551add16b7.html">z3gateway</a></li><li class="navelem"><a class="el" href="dir_1dfd061e24aa4957c100c55d6cc74317.html">stack</a></li><li class="navelem"><a class="el" href="dir_abd021e52e1a7cb47278c30d7826b839.html">app</a></li><li class="navelem"><a class="el" href="dir_e462cdfa41f9b42cd664877bdb43f698.html">framework</a></li><li class="navelem"><a class="el" href="dir_595293b6dc5397a4de7ad9a7565295d7.html">plugin</a></li><li class="navelem"><a class="el" href="dir_6b4c9bce5423e840b0c18e203dbb4d20.html">device-table</a></li><li class="navelem"><a class="el" href="device-table_8h.html">device-table.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

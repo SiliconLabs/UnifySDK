@@ -135,6 +135,8 @@ static sl_status_t zwave_command_handler_register_handler_stub(
 int suiteTearDown(int num_failures)
 {
   controller_callbacks = NULL;
+  attribute_store_teardown();
+  datastore_teardown();
   return num_failures;
 }
 
@@ -208,7 +210,7 @@ void test_zwave_command_class_inclusion_controller_reject_frame_too_low_security
   // Receive at lower security
   connection.encapsulation
     = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED;
-  controller_callbacks->on_node_id_assigned(test_node_id, false);
+  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -238,7 +240,7 @@ void test_zwave_command_class_inclusion_controller_reject_frame_unkonwn_node()
 {
   // Receive from an unknown node
   connection.remote.node_id = 20;
-  controller_callbacks->on_node_id_assigned(test_node_id, false);
+  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -267,7 +269,7 @@ void test_zwave_command_class_inclusion_controller_reject_frame_unkonwn_node()
 void test_zwave_command_class_inclusion_controller_proxy_inclusion_initiate()
 {
   TEST_ASSERT_NOT_NULL(controller_callbacks->on_node_id_assigned);
-  controller_callbacks->on_node_id_assigned(test_node_id, false);
+  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -367,7 +369,7 @@ void test_zwave_command_class_inclusion_controller_proxy_inclusion_replace()
 
 void test_zwave_command_class_inclusion_controller_initiate_command_s0_node()
 {
-  controller_callbacks->on_node_id_assigned(test_node_id, false);
+  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -432,7 +434,7 @@ void test_zwave_command_class_inclusion_controller_initiate_command_s0_node()
 
 void test_zwave_command_class_inclusion_controller_missing_initiate_frame()
 {
-  controller_callbacks->on_node_id_assigned(test_node_id, false);
+  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
   contiki_test_helper_run(10000);
   TEST_ASSERT_TRUE(attr_endpoint.child_by_type(ATTRIBUTE_ZWAVE_NIF).is_valid());
   TEST_ASSERT_TRUE(
@@ -458,7 +460,7 @@ void test_zwave_command_class_inclusion_controller_missing_on_node_assign_frame(
 
 void test_zwave_command_class_inclusion_controller_missing_nif()
 {
-  controller_callbacks->on_node_id_assigned(test_node_id, false);
+  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -479,8 +481,8 @@ void test_zwave_command_class_inclusion_controller_missing_nif()
 // pending inclusion request, it shall be handled
 void test_zwave_command_class_inclusion_controller_nm_state_busy()
 {
-  controller_callbacks->on_node_id_assigned(test_node_id, false);
-  contiki_test_helper_run(0);
+  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
+  contiki_test_helper_run(5000);
 
   const ZW_INITIATE_FRAME frame
     = {.cmdClass = COMMAND_CLASS_INCLUSION_CONTROLLER,
@@ -491,7 +493,7 @@ void test_zwave_command_class_inclusion_controller_nm_state_busy()
     &connection,
     reinterpret_cast<const uint8_t *>(&frame),
     sizeof(frame));
-  contiki_test_helper_run(0);
+  contiki_test_helper_run(5000);
 
   zwave_security_validation_is_node_s2_capable_ExpectAndReturn(test_node_id,
                                                                true);

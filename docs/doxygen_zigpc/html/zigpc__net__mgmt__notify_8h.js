@@ -1,6 +1,9 @@
 var zigpc__net__mgmt__notify_8h =
 [
     [ "ZIGPC_NET_MGMT_REQUESTED_STATE_PARAMS_MAX", "group__zigpc__net__mgmt__notify.html#ga7584315b2fdd68fb948befaeefb2a711", null ],
+    [ "zigpc_net_mgmt_on_network_init_t", "group__zigpc__net__mgmt__notify.html#gae082f45c0c345b737869a7295d85d2e1", null ],
+    [ "zigpc_net_mgmt_on_network_state_update_t", "group__zigpc__net__mgmt__notify.html#gab487b9af83bec792e800f2034c72d9b7", null ],
+    [ "zigpc_net_mgmt_on_node_added_t", "group__zigpc__net__mgmt__notify.html#gaafcdc5756bb79124b60b59e53c715879", null ],
     [ "zigpc_net_mgmt_notify_event", "group__zigpc__net__mgmt__notify.html#ga4bf2181cf0fa570fde08a88ba56d7cdd", [
       [ "ZIGPC_NET_MGMT_NOTIFY_NETWORK_INIT", "group__zigpc__net__mgmt__notify.html#gga4bf2181cf0fa570fde08a88ba56d7cdda5bbf826eff5772e0298c9516121fd592", null ],
       [ "ZIGPC_NET_MGMT_NOTIFY_STATE_UPDATE", "group__zigpc__net__mgmt__notify.html#gga4bf2181cf0fa570fde08a88ba56d7cdda28edfbc6ba2ba13c79dfa95b6b3a8daf", null ],

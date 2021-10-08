@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -110,45 +110,38 @@ $(document).ready(function(){initNavTree('zwave__s0__network_8h_source.html','')
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">   39</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a>)(</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="code" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network_init</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a>(<span class="keyword">const</span> <a class="code" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a> <a class="code" href="structcb.html">cb</a>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zwave__s0.html#ga27e4137188b19b88cf40318f7fea87dc">zwave_s0_start_bootstrapping</a>(<a class="code" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="code" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                  uint8_t is_controller);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif  //ZWAVE_S0_NETWORK_H</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">   42</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a>)(</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="code" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network_init</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a>(<span class="keyword">const</span> <a class="code" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a> <a class="code" href="structcb.html">cb</a>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zwave__s0.html#ga27e4137188b19b88cf40318f7fea87dc">zwave_s0_start_bootstrapping</a>(<a class="code" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="code" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                  uint8_t is_controller);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif  //ZWAVE_S0_NETWORK_H</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="agroup__zwave__s0_html_ga27e4137188b19b88cf40318f7fea87dc"><div class="ttname"><a href="group__zwave__s0.html#ga27e4137188b19b88cf40318f7fea87dc">zwave_s0_start_bootstrapping</a></div><div class="ttdeci">void zwave_s0_start_bootstrapping(zwave_node_id_t node_id, uint8_t is_controller)</div><div class="ttdoc">Start the S0 add node process.</div><div class="ttdef"><b>Definition:</b> zwave_s0_network.c:22</div></div>
-<div class="ttc" id="anetwork__monitor__fixt_8h_html"><div class="ttname"><a href="network__monitor__fixt_8h.html">network_monitor_fixt.h</a></div><div class="ttdoc">Fixtures for network monitor.</div></div>
 <div class="ttc" id="agroup__zwave__controller__keyset_html_gaa3cfbf3467d02ec3ba1b4313b3e2834a"><div class="ttname"><a href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a></div><div class="ttdeci">uint8_t zwave_keyset_t</div><div class="ttdef"><b>Definition:</b> zwave_controller_keyset.h:40</div></div>
 <div class="ttc" id="agroup__zwave__s0_html_ga87da65496dd77458d5c14dbe30209d82"><div class="ttname"><a href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a></div><div class="ttdeci">void zwave_s0_set_network_callbacks(const s0_on_bootstrapping_complete_cb cb)</div><div class="ttdoc">Set callback function for the S0 inclusion. This function ptr is saved internally in s0.</div><div class="ttdef"><b>Definition:</b> zwave_s0_network.c:51</div></div>
-<div class="ttc" id="agroup__sl__status_html_ga642351dcd77b6c1ffef9d663db8a5714"><div class="ttname"><a href="group__sl__status.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a></div><div class="ttdeci">#define SL_STATUS_OK</div><div class="ttdoc">No error.</div><div class="ttdef"><b>Definition:</b> sl_status.h:40</div></div>
-<div class="ttc" id="agroup__zwave__utils_html_gad2b01997b1abb48bc7a1877551536935"><div class="ttname"><a href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a></div><div class="ttdeci">uint16_t zwave_node_id_t</div><div class="ttdoc">Z-Wave NodeID type.</div><div class="ttdef"><b>Definition:</b> zwave_utils.h:73</div></div>
+<div class="ttc" id="agroup__zwave__utils_html_gad2b01997b1abb48bc7a1877551536935"><div class="ttname"><a href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a></div><div class="ttdeci">uint16_t zwave_node_id_t</div><div class="ttdoc">Z-Wave NodeID type.</div><div class="ttdef"><b>Definition:</b> zwave_utils.h:76</div></div>
 <div class="ttc" id="azwave__network__management_8h_html"><div class="ttname"><a href="zwave__network__management_8h.html">zwave_network_management.h</a></div></div>
 <div class="ttc" id="astructcb_html"><div class="ttname"><a href="structcb.html">cb</a></div><div class="ttdef"><b>Definition:</b> transport_service.c:352</div></div>
-<div class="ttc" id="anetwork__monitor__fixt_8c_html_adb7a01a50efbf2c6b43abdcf1aefda49"><div class="ttname"><a href="network__monitor__fixt_8c.html#adb7a01a50efbf2c6b43abdcf1aefda49">network_monitor_setup_fixt</a></div><div class="ttdeci">sl_status_t network_monitor_setup_fixt(void)</div><div class="ttdoc">Setup fixture for the network monitor.</div><div class="ttdef"><b>Definition:</b> network_monitor_fixt.c:16</div></div>
-<div class="ttc" id="agroup__zwave__s0_html_ga76fa676b152471a413e32cc25d8f56c9"><div class="ttname"><a href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a></div><div class="ttdeci">void(* s0_on_bootstrapping_complete_cb)(zwave_keyset_t granted_keys, zwave_kex_fail_type_t kex_fail_code)</div><div class="ttdef"><b>Definition:</b> zwave_s0_network.h:39</div></div>
+<div class="ttc" id="agroup__zwave__s0_html_ga76fa676b152471a413e32cc25d8f56c9"><div class="ttname"><a href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a></div><div class="ttdeci">void(* s0_on_bootstrapping_complete_cb)(zwave_keyset_t granted_keys, zwave_kex_fail_type_t kex_fail_code)</div><div class="ttdef"><b>Definition:</b> zwave_s0_network.h:42</div></div>
 <div class="ttc" id="agroup__zwave__s0_html_ga62613f2673f05d300b1f7c8b09d981da"><div class="ttname"><a href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network_init</a></div><div class="ttdeci">sl_status_t zwave_s0_network_init()</div><div class="ttdoc">Initialize the S0 network layer.</div><div class="ttdef"><b>Definition:</b> zwave_s0_network.c:32</div></div>
-<div class="ttc" id="anetwork__monitor_8h_html"><div class="ttname"><a href="network__monitor_8h.html">network_monitor.h</a></div></div>
-<div class="ttc" id="agroup__network__monitor_html_ga06ced1749dfbcde823b9ce17aca599da"><div class="ttname"><a href="group__network__monitor.html#ga06ced1749dfbcde823b9ce17aca599da">network_state_monitor_init</a></div><div class="ttdeci">void network_state_monitor_init()</div></div>
-<div class="ttc" id="agroup__list_html_ga070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="group__list.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> list.c:50</div></div>
 <div class="ttc" id="azpc__attribute__store__test__helper_8h_html_a8571121ca4b060a8eaca9b120d728ac8"><div class="ttname"><a href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a></div><div class="ttdeci">const zwave_node_id_t node_id</div></div>
 <div class="ttc" id="agroup__zwave__network__management_html_ga9b8e934334335348e5cf74df4ece6847"><div class="ttname"><a href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a></div><div class="ttdeci">zwave_kex_fail_type_t</div><div class="ttdoc">Error codes used in S2 inclusion.</div><div class="ttdef"><b>Definition:</b> zwave_network_management.h:72</div></div>
 <div class="ttc" id="agroup__sl__status_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:127</div></div>
-<div class="ttc" id="agroup__process_html_ga6a4607d87381f2f919eb36899fa4de20"><div class="ttname"><a href="group__process.html#ga6a4607d87381f2f919eb36899fa4de20">process_start</a></div><div class="ttdeci">void process_start(struct process *p, const char *arg) CC_REENTRANT_ARG</div><div class="ttdef"><b>Definition:</b> process.c:109</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_755ae2411314d71b54e2ffe5b00038d7.html">s0</a></li><li class="navelem"><a class="el" href="dir_25b0f675993b6ab9c1139ad6791706db.html">include</a></li><li class="navelem"><a class="el" href="zwave__s0__network_8h.html">zwave_s0_network.h</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

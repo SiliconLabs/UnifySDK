@@ -1,10 +1,11 @@
 "use strict";
 
 let webSocketServer = require('websocket').server;
+let https = require('https');
 let http = require('http');
 let mqtt = require('mqtt');
-var fs = require('fs');
-let path = require('path');
+let fs = require('fs');
+let os = require('os');
 let supportedClusters = require('./cluster-types/supported-clusters.js').SupportedClusters;
 
 process.title = 'dev-gui-server';
@@ -31,8 +32,9 @@ let topics = ["ucl/SmartStart/List",
     "ucl/by-unid/+/State/SupportedCommands",
     "ucl/by-unid/+/ProtocolController/NetworkManagement",
     "ucl/by-unid/+/+/Groups/#",
-    `ucl/by-unid/+/+/OTA/#`,
+    "ucl/by-unid/+/+/OTA/#",
     "ucl/OTA/info/+/+",
+    "ucl/by-group/#"
 ];
 Object.keys(supportedClusters).forEach((i) => {
     topics.push(`ucl/by-unid/+/+/${i}/SupportedCommands`);
@@ -40,13 +42,28 @@ Object.keys(supportedClusters).forEach((i) => {
 });
 console.log(`TopicList:${JSON.stringify(topics)}`);
 
-let server = http.createServer(function(request, response) {});
+let server;
+let isHttps = false;
+if (process.env && process.env.HTTPS !== undefined && JSON.parse(process.env.HTTPS) && process.env.SSL_CRT_FILE && process.env.SSL_KEY_FILE) {
+    try {
+        let options = {
+            cert: fs.readFileSync(process.env.SSL_CRT_FILE),
+            key: fs.readFileSync(process.env.SSL_KEY_FILE)
+        };
+        server = https.createServer(options);
+        isHttps = true
+    } catch (e) {
+        console.log(`Could not start server: ${e.message}`);
+        return;
+    }
+} else
+    server = http.createServer();
+
 server.listen(webSocketsServerPort, function() {
-    console.log(`${new Date()}: Server is listening on port ${webSocketsServerPort}`);
+    console.log(`${new Date()}: Server is listening on ${isHttps ? "https" : "http"}://${os.hostname}:${webSocketsServerPort}`);
 });
 
 let wsServer = new webSocketServer({ httpServer: server });
-
 wsServer.on('request', function(request) {
     console.log("Certificates:" + JSON.stringify(getCertificates()));
     let connection = request.accept(undefined, request.origin);
@@ -79,7 +96,7 @@ wsServer.on('request', function(request) {
                     mqttConnection.end();
                     break;
                 case "get-smart-start-list":
-                    console.log("Retrieve Smart Start List");
+                    console.log("Retrieve SmartStart List");
                     let response = {
                         type: "smart-start-list",
                         data: state.SmartStart
@@ -87,14 +104,14 @@ wsServer.on('request', function(request) {
                     sendToAll(response);
                     break;
                 case "run-smart-start-command":
-                    console.log(`Run Smart Start Command: ucl/SmartStart/List/${mes.data.Cmd} ${JSON.stringify(mes.data.Payload)}`);
+                    console.log(`Run SmartStart Command: ucl/SmartStart/List/${mes.data.Cmd} ${JSON.stringify(mes.data.Payload)}`);
                     mqttConnection.publish(`ucl/SmartStart/List/${mes.data.Cmd}`, JSON.stringify(mes.data.Payload));
                     break;
-                case "run-node-command":
+                case "run-state-command":
                     console.log(`Run Node Command: ucl/by-unid/${mes.data.Unid}/ProtocolController/NetworkManagement/Write ${JSON.stringify(mes.data.Payload)}`);
                     mqttConnection.publish(`ucl/by-unid/${mes.data.Unid}/ProtocolController/NetworkManagement/Write`, JSON.stringify(mes.data.Payload));
                     break;
-                case "run-state-command":
+                case "run-node-command":
                     console.log(`Run State Command: ucl/by-unid/${mes.data.Unid}/State/Commands/${mes.data.Payload}`);
                     mqttConnection.publish(`ucl/by-unid/${mes.data.Unid}/State/Commands/${mes.data.Payload}`);
                     break;
@@ -234,11 +251,13 @@ function onMqttMessage(topic, message) {
     } else if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/OTA\/(.*)/)) {
         response = processOTAByUnid(topic, message);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/(.*)\/Groups/)) {
-        response = processGroup(topic, message);
+        response = processClusterGroup(topic, message);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/(.*)/)) {
         response = processCluster(topic, message);
     } else if (topic.match(/ucl\/OTA\/info\/(.*)\/(.*)/)) {
         response = processOTAInfo(topic, message);
+    } else if (topic.match(/ucl\/by-group\/.*/)) {
+        response = processGroup(topic, message);
     }
 
     sendToAll(response);
@@ -261,10 +280,16 @@ function initProp(prop, path, payload) {
     let propName = path.shift();
     if (!prop[propName])
         prop[propName] = {};
-    if (path.length)
+    if (path.length) {
         initProp(prop[propName], path, payload);
-    else
-        prop[propName] = payload;
+        if (Object.keys(prop[propName]).length === 0) {
+            delete(prop[propName]);
+        }
+    } else {
+        if (payload === null) {
+            delete(prop[propName])
+        } else prop[propName] = payload;
+    }
 }
 
 function getNodeByUnid(unid) {
@@ -341,11 +366,20 @@ function clearMqttByUnid() {
 
 function clearMqttByGroup() {
     state.Groups.forEach(group => {
-        mqttConnection.publish(`ucl/by-group/${group.GroupId}/GroupName`, "");
-        if (group.NodeList)
-            group.NodeList.forEach(unid => mqttConnection.publish(`ucl/by-group/${group.GroupId}/NodeList/${unid}`, ""));
-        if (group.Clusters)
-            group.Clusters.forEach(cluster => mqttConnection.publish(`ucl/by-group/${group.GroupId}/${cluster}/SupportedCommands`, ""));
+        Object.keys(group).forEach(key => {
+            if (key !== "GroupId")
+                switch (key) {
+                    case "NodeList":
+                        Object.keys(group[key]).forEach(unid => mqttConnection.publish(`ucl/by-group/${group.GroupId}/NodeList/${unid}`, ""));
+                        break;
+                    case "GroupName":
+                        mqttConnection.publish(`ucl/by-group/${group.GroupId}/GroupName`, "");
+                        break;
+                    default:
+                        mqttConnection.publish(`ucl/by-group/${group.GroupId}/${key}/SupportedCommands`, "", { retain: true });
+                        break;
+                }
+        });
     });
 }
 
@@ -370,7 +404,7 @@ function removeAttr(unid, ep, cluster, attr, attrName) {
 }
 
 function processSmartStart(topic, message) {
-    console.log(`Received Smart Start List: '${message}'`);
+    console.log(`Received SmartStart List: '${message}'`);
     if (message.toString() == "")
         return;
     try {
@@ -381,7 +415,7 @@ function processSmartStart(topic, message) {
             data: state.SmartStart
         }
     } catch (error) {
-        return getErrorResponse(`Failed Parsing Smart Start List: ${error}`);
+        return getErrorResponse(`Failed Parsing SmartStart List: ${error}`);
     }
 }
 
@@ -397,6 +431,7 @@ function processProtocolController(topic, message) {
         let node = getNodeByUnid(unid);
         let data = JSON.parse(message.toString());
         node.State = data.State;
+        node.SupportedStateList = data.SupportedStateList;
         if (node.ClusterTypes.indexOf("ProtocolController") === -1)
             node.ClusterTypes.push("ProtocolController");
         data.Unid = unid;
@@ -444,7 +479,7 @@ function processNodeState(topic, message) {
     }
 }
 
-function processGroup(topic, message) {
+function processClusterGroup(topic, message) {
     let match = topic.match(/ucl\/by-unid\/(.*)\/(.*)\/Groups\/(.*)/);
     if (!match || match.length < 4)
         return;
@@ -581,5 +616,37 @@ function processOTAInfo(topic, message) {
         };
     } catch (error) {
         return getErrorResponse(`Failed Parsing OTA`);
+    }
+}
+
+function processGroup(topic, message) {
+    let match = topic.match(/ucl\/by-group\/(.*)/);
+    if (!match || match.length < 2)
+        return;
+    try {
+        let path = match[1].split('/');
+        let groupId = parseInt(path.shift());
+        console.log(`Received Group: unid='${groupId}', topic='${topic}', mes='${message}'`);
+        let group = state.Groups.find(i => i.GroupId === groupId);
+        if (message.toString() === "" && !group)
+            return;
+
+        if (!group) {
+            group = { GroupId: groupId, NodeList: {} };
+            state.Groups.push(group);
+        }
+
+        let payload = message.toString() === "" ? null : JSON.parse(message);
+        initProp(group, path, payload && payload.value);
+        state.Groups.forEach((i, index) => {
+            if (i.NodeList === undefined)
+                state.Groups.splice(index, 1);
+        });
+        return {
+            type: "groups",
+            data: state.Groups
+        }
+    } catch (err) {
+        return getErrorResponse(`Failed Parsing Group: ${err}`);
     }
 }

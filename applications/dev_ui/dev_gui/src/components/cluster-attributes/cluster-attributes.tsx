@@ -73,9 +73,10 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
         return isValid;
     }
 
-    validateAttr(item: any) {
+    validateAttr(item: any, parentName: string | null) {
         let supAttr = this.state.SupportedAttributes;
-        supAttr[item.name].isValid = this.validate(item.name);
+        let name = parentName ? parentName : item.name;
+        supAttr[name].isValid = this.validate(name);
         this.setState({ SupportedAttributes: supAttr });
     }
 
@@ -211,13 +212,16 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                         <Card.Header>{i.name}{adornment}</Card.Header>
                                         <Card.Body className={`${!supported ? "disabled" : ""}`}>
                                             {i.bitmap && i.bitmap.map((b: any, bIndex: number) => {
+                                                let value;
+                                                if (this.state.SupportedAttributes[i.name]?.Reported !== undefined && this.state.SupportedAttributes[i.name]?.Reported !== null)
+                                                    value = this.state.SupportedAttributes[i.name]?.Reported[b.name]
                                                 switch (b.type) {
                                                     case "enum":
                                                         return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 ${(this.state.SupportedAttributes[i.name] === undefined || this.state.SupportedAttributes[i.name].isValid) ? "" : "invalid"}`}>
                                                             {i.writable && b.enum
                                                                 ? <TextField size="small" className="writable flex-input" fullWidth={true} select label={b.name} name={b.name} disabled={!supported}
-                                                                    value={this.state.SupportedAttributes[i.name]?.Reported[b.name] ?? 0} defaultValue={this.state.SupportedAttributes[i.name]?.Reported[b.name] ?? 0}
-                                                                    onChange={this.handleBitmapChange.bind(this, i, false)} variant="outlined" onBlur={this.validateAttr.bind(this, b)} >
+                                                                    value={value ?? 0} defaultValue={value ?? 0}
+                                                                    onChange={this.handleBitmapChange.bind(this, i, false)} variant="outlined" onBlur={this.validateAttr.bind(this, b, i.name)} >
                                                                     {b.enum.map((option: any) => {
                                                                         return <MenuItem key={option.name} value={option.name}>
                                                                             {option.name}
@@ -225,7 +229,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                                                     })}
                                                                 </TextField>
                                                                 : <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} label={b.name} disabled={!supported}
-                                                                    value={this.state.SupportedAttributes[i.name]?.Reported[b.name] ?? 0} variant="outlined" />
+                                                                    value={value ?? 0} variant="outlined" />
                                                             }
                                                         </div>
                                                     case "boolean":
@@ -234,8 +238,8 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                                                 <Form.Label column sm="12" className="flex">
                                                                     <div className="check-container">
                                                                         {i.writable
-                                                                            ? <Form.Check name={b.name} disabled={!supported} defaultChecked={this.state.SupportedAttributes[i.name]?.Reported[b.name] ?? false} onChange={this.handleBitmapChange.bind(this, i, true)} />
-                                                                            : <Form.Check name={b.name} disabled={!supported} readOnly={true} checked={this.state.SupportedAttributes[i.name]?.Reported[b.name] ?? false} />}
+                                                                            ? <Form.Check name={b.name} disabled={!supported} defaultChecked={value ?? false} onChange={this.handleBitmapChange.bind(this, i, true)} />
+                                                                            : <Form.Check name={b.name} disabled={!supported} readOnly={true} checked={value ?? false} />}
                                                                     </div>
                                                                     <div className="word-break">{b.name}</div>
                                                                 </Form.Label>
@@ -245,10 +249,10 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                                         return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 ${(this.state.SupportedAttributes[i.name] === undefined || this.state.SupportedAttributes[i.name].isValid) ? "" : "invalid"}`}>
                                                             {i.writable && supported
                                                                 ? <TextField size="small" className="writable flex-input" fullWidth={true} label={b.name} name={b.name} variant="outlined" type={b.type}
-                                                                    defaultValue={this.state.SupportedAttributes[i.name]?.Reported[b.name]} onChange={this.handleBitmapChange.bind(this, i, false)}
-                                                                    disabled={!supported} onBlur={this.validateAttr.bind(this, b)} onFocus={(event) => event.target.select()} />
+                                                                    defaultValue={value || ""} onChange={this.handleBitmapChange.bind(this, i, false)}
+                                                                    disabled={!supported} onBlur={this.validateAttr.bind(this, b, i.name)} onFocus={(event) => event.target.select()} />
                                                                 : <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} disabled={!supported} label={b.name} variant="outlined"
-                                                                    type="text" value={this.state.SupportedAttributes[i.name]?.Reported[b.name] || ""} />}
+                                                                    type="text" value={value || ""} />}
                                                         </div>
                                                 }
                                             })
@@ -259,7 +263,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                     return <div key={index} className={`col-sm-6 inline margin-v-10 ${(this.state.SupportedAttributes[i.name] === undefined || this.state.SupportedAttributes[i.name].isValid) ? "" : "invalid"}`}>
                                         {i.writable && supported
                                             ? <TextField size="small" className="writable flex-input" fullWidth={true} select label={i.name} name={i.name} value={this.state.SupportedAttributes[i.name]?.Reported ?? ""}
-                                                defaultValue={this.state.SupportedAttributes[i.name]?.Reported ?? ""} onChange={this.handleChange} variant="outlined" onBlur={this.validateAttr.bind(this, i)} InputProps={adornment} >
+                                                defaultValue={this.state.SupportedAttributes[i.name]?.Reported ?? ""} onChange={this.handleChange} variant="outlined" onBlur={this.validateAttr.bind(this, i, null)} InputProps={adornment} >
                                                 {i.enum.map((option: any) => {
                                                     return <MenuItem key={option.name} value={option.name}>
                                                         {option.name}
@@ -275,7 +279,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                     return <div key={index} className={`col-sm-6 inline margin-v-10 ${(this.state.SupportedAttributes[i.name] === undefined || this.state.SupportedAttributes[i.name].isValid) ? "" : "invalid"}`}>
                                         {i.writable && supported
                                             ? <TextField size="small" className="writable flex-input" fullWidth={true} label={i.name} name={i.name} variant="outlined" type={i.type}
-                                                defaultValue={this.state.SupportedAttributes[i.name]?.Reported} onChange={this.handleChange} onBlur={this.validateAttr.bind(this, i)}
+                                                defaultValue={this.state.SupportedAttributes[i.name]?.Reported} onChange={this.handleChange} onBlur={this.validateAttr.bind(this, i, null)}
                                                 onFocus={(event) => event.target.select()} InputProps={adornment} />
                                             : <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} disabled={!supported} label={i.name} variant="outlined" type="text"
                                                 value={this.state.SupportedAttributes[i.name]?.Reported || ""} InputProps={adornment} />}

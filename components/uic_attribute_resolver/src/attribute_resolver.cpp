@@ -284,7 +284,7 @@ void attribute_resolver_state_log()
        it != pending_get_resolutions.end();
        ++it) {
     sl_log_debug(LOG_TAG,
-                 "\t Node %d, timeout: %d, retries: %d",
+                 "\t Node %d, timeout: %llu, retries: %d",
                  it->first,
                  it->second.send_timeout,
                  it->second.count);
@@ -323,10 +323,7 @@ void attribute_resolver_state_log()
 static bool resolution_already_queued(resolver_rule_type_t rule_type,
                                       attribute node)
 {
-  std::vector<attribute_store_node_t> group_nodes
-    = attribute_resolver_rule_get_group_nodes(rule_type, node);
-
-  for (attribute a: group_nodes) {
+  for (attribute a: attribute_resolver_rule_get_group_nodes(rule_type, node)) {
     if ((rule_type == RESOLVER_GET_RULE) && pending_get_resolutions.count(a)) {
       sl_log_debug(LOG_TAG,
                    "Already resolving GET %s vs %s id %i",
@@ -416,8 +413,7 @@ static sl_status_t execute_set(attribute_store_node_t node)
 
   if (rule_status == SL_STATUS_OK) {
     pending_set_resolutions[node] = false;
-  }
-  if (rule_status == SL_STATUS_IN_PROGRESS) {
+  } else if (rule_status == SL_STATUS_IN_PROGRESS) {
     pending_set_resolutions[node] = true;
   }
 
@@ -611,6 +607,15 @@ static void on_resolver_node_deleted(attribute_store_node_t node)
   // detect missing nodes.
   // Tell the Resolver Rule part to stop waiting for a callback for deleted nodes.
   attribute_resolver_rule_abort(node);
+
+  // See if we need to scan something.
+  // if somebody is waiting for a resolution notification, (above the current node)
+  // ensure that the node gets scanned again
+  attribute_store_node_t parent_with_listener
+    = get_highest_parent_with_resolution_listener(node);
+  if (parent_with_listener != ATTRIBUTE_STORE_INVALID_NODE) {
+    scan_node(parent_with_listener);
+  }
 }
 
 static bool is_node_under_resolution(attribute_store_node_t node)

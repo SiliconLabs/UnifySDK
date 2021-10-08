@@ -15,8 +15,11 @@
 #include "zwave_command_class_supervision_internals.h"
 #include "zwave_command_class_supervision_process.h"
 #include "zwave_controller_command_class_indices.h"
-#include "zwave_command_class_wakeup.h"
+#include "zwave_command_class_wake_up.h"
 #include "zwave_command_classes_utils.h"
+
+// Interface includes
+#include "zwave_command_class_wake_up_types.h"
 
 // Includes from other components
 #include "sl_log.h"
@@ -131,10 +134,10 @@ static sl_status_t zwave_command_class_supervision_handle_supervision_get(
     // (either via ZPC Stin command or via pending resolution)
     attribute_store_node_t node
       = zwave_command_class_get_node_id_node(connection_info);
-    if (zwave_command_class_wakeup_supports_wake_up_on_demand(node) == true) {
+    if (zwave_command_class_wake_up_supports_wake_up_on_demand(node) == true) {
       if (true
           == ZW_IS_NODE_IN_MASK(connection_info->remote.node_id,
-                                   wake_on_demand_list)) {
+                                wake_on_demand_list)) {
         report.properties1 |= SUPERVISION_REPORT_PROPERTIES1_WAKE_UP_BIT_MASK;
       } else if (is_node_or_parent_paused(node) == true
                  && attribute_resolver_node_or_child_needs_resolution(node)
@@ -185,13 +188,12 @@ static sl_status_t zwave_command_class_supervision_handle_supervision_report(
   if (current_session == NULL) {
     // Maybe a duplicate transmission of a finished report.
     // Just ignore it happily.
-    sl_log_warning(
-      LOG_TAG,
-      "NodeID %d:%d sent us an unknown Supervision Session ID (%d)",
-      connection_info->remote.node_id,
-      connection_info->remote.endpoint_id,
-      frame_data[SUPERVISION_REPORT_SESSION_ID_INDEX]
-        & SUPERVISION_REPORT_PROPERTIES1_SESSION_ID_MASK);
+    sl_log_debug(LOG_TAG,
+                 "NodeID %d:%d sent us an unknown Supervision Session ID (%d)",
+                 connection_info->remote.node_id,
+                 connection_info->remote.endpoint_id,
+                 frame_data[SUPERVISION_REPORT_SESSION_ID_INDEX]
+                   & SUPERVISION_REPORT_PROPERTIES1_SESSION_ID_MASK);
     return SL_STATUS_OK;
   }
 

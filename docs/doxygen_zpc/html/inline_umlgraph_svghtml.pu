@@ -109,7 +109,7 @@
  s0_abort_bootstrap()
  end note
 @enduml
-@startuml inline_umlgraph_2.svg
+@startuml inline_umlgraph_3.svg
   box "MQTT Broker" #LightYellow
   participant MQTT
   end box
@@ -140,7 +140,7 @@
   NetworkManagement     -> UclNetworkManagement : on_node_added()
   UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/NetworkManagement</i>\nNetworkManagement {"State": "Idle"}
 @enduml
-@startuml inline_umlgraph_3.svg
+@startuml inline_umlgraph_4.svg
   box "MQTT Broker" #LightYellow
   participant MQTT
   end box
@@ -158,7 +158,7 @@
   NetworkManagement     -> UclNetworkManagement : on_state_updated(NM_IDLE)
   UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement</i>\n{"State": "idle", ...}
 @enduml
-@startuml inline_umlgraph_4.svg
+@startuml inline_umlgraph_5.svg
   box "MQTT Broker" #LightYellow
   participant MQTT
   end box
@@ -178,7 +178,7 @@
   NetworkManagement     -> UclNetworkManagement : on_state_updated(NM_IDLE)
   UclNetworkManagement  -> MQTT                 : <i>ucl/by-unid/<gw-node>/</i>\n<i>ProtocolController/</i>\n<i>NetworkManagement</i>\n{"State": "idle", ...}
 @enduml
-@startuml inline_umlgraph_5.svg
+@startuml inline_umlgraph_9.svg
   box "MQTT Broker" #LightYellow
   participant MQTT
   end box
@@ -199,7 +199,81 @@
   AttributeStore      -> StateTopic           : att_store_node_cb(node_id, ATTRIBUTE_DELETED)
   StateTopic          -> MQTT                 : delete <i>ucl/by-unid/<new-node></i>
 @enduml
-@startuml inline_umlgraph_6.svg
+@startuml ota_internal.svg
+title OTA download from image provider
+
+participant "OTA cache" as OTAC
+participant "OTA API" as API
+participant "Protocol controller" as PC
+participant "Image provider" as IP
+
+PC -> API: subscribe_unid(unid, uiid)
+
+alt If no unids listening to uiid 
+API -> IP: Subscribe: ucl/OTA/info/uiid/all
+end
+API -> IP: Subscribe: ucl/OTA/info/uiid/unid
+API -> OTAC: unid listening to uiid
+alt #LightBlue specific unid available 
+== image availability ==
+IP -> API: Publish: ucl/OTA/info/uiid/unid
+API -> OTAC: Cache image meta info for uiid/unid
+API -> PC: image_available_callback(meta_info)
+== image download ==
+PC -> API: get_by_unid(unid, uiid, image_ready_cb)
+alt #LightBlue image not cached
+API -> IP: Subscribe: ucl/OTA/data/uiid/unid
+API -> IP: Publish: ucl/OTA/info/uiid/unid/get
+alt #LightBlue image received
+IP -> API: Publish: image file data message
+API -> OTAC: Cache image file
+API -> PC: image_ready_cb(OK, filepath)
+else no image received
+API -> PC: image_ready_cb(ERROR, "")
+end
+API -> IP: Unsubscribe: ucl/OTA/data/uiid/unid
+else #LightBlue image cached
+API -> OTAC: get image filepath from cache
+OTAC -> API: image filepath
+API -> PC: image_ready_cb(OK, filepath)
+end
+
+else #LightGreen no specific unid available
+== image availability ==
+IP -> API: Publish: ucl/OTA/info/uiid/all
+API -> OTAC: Cache image meta info for uiid/all
+API -> OTAC: get_unids_listening_to_uiid()
+OTAC -> API: list of unids listening to the uiid
+loop #LightGreen for all unids listening to uiid
+API -> PC: image_available_callback(meta_info)
+== image download ==
+PC -> API: get_by_unid(unid, uiid, image_ready_cb)
+alt #LightGreen image not cached
+API -> IP: Subscribe: ucl/OTA/data/uiid/all
+API -> IP: Publish: ucl/OTA/info/uiid/all/get
+alt #LightGreen image received
+IP -> API: image file data message
+API -> OTAC: cache image file
+API -> PC: image_ready_cb(OK, filepath)
+else #LightGreen no image received
+API -> PC: image_ready_cb(ERROR, "")
+end
+API -> IP: Unsubscribe: ucl/OTA/data/uiid/all
+else #LightGreen image cached
+API -> OTAC: get image filepath from cache
+OTAC -> API: image filepath
+API -> PC: image_ready_cb(OK, filepath)
+end
+end
+end
+PC -> API: unsubscribe_unid(unid, uiid)
+API -> OTAC: remove unid listening to uiid
+API -> IP: Unsubscribe: ucl/OTA/info/uiid/unid
+alt If no more unids listening to uiid
+API -> IP: Unsubscribe: ucl/OTA/info/uiid/all
+end
+@enduml
+@startuml inline_umlgraph_11.svg
 ' Style for the diagram
 skinparam classFontColor black
 skinparam classFontSize 10
@@ -242,7 +316,7 @@ rnote over zpc, node: <b>All candidates received\n<b>Stopping Protocol discovery
 
 rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request.
 @enduml
-@startuml inline_umlgraph_7.svg
+@startuml inline_umlgraph_12.svg
 ' Style for the diagram
 skinparam classFontColor black
 skinparam classFontSize 10
@@ -285,7 +359,7 @@ rnote over zpc, node: <b>Cycle detected for supported protocols\n<b>Stopping Pro
 
 rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request.
 @enduml
-@startuml inline_umlgraph_8.svg
+@startuml inline_umlgraph_13.svg
 ' Style for the diagram
 skinparam classFontColor black
 skinparam classFontSize 10
@@ -376,7 +450,7 @@ dotdot_attributes -> attribute_store
 attribute_store -> datastore
 attribute_mapper -u-> attribute_store
 @enduml
-@startuml inline_umlgraph_9.svg
+@startuml inline_umlgraph_17.svg
   participant AttributeStore
   box "ZPC" #LightBlue
   participant NetworkMonitor
@@ -401,7 +475,7 @@ attribute_mapper -u-> attribute_store
   NetworkMonitor        -> AttributeStore       : Create the newHomeID node in AttributeStore
   NetworkMonitor        -> AttributeStore       : Create nodes in the attribute store for all nodes currently in the network
 @enduml
-@startuml inline_umlgraph_10.svg
+@startuml inline_umlgraph_18.svg
   hide footbox
   title Z-Wave node interview detection and monitoring
   participant "Attribute Resolver" as AttributeResolver
@@ -657,13 +731,24 @@ transfer_state *-- last_status
 transfer_state *-- fragment_size
 transfer_state *-- expiry_time
 @enduml
-@startuml inline_umlgraph_11.svg
+@startuml inline_umlgraph_21.svg
 [*] --> IDLE
 IDLE --> ONGOING : Initiate firmware update
+IDLE: Reported: IDLE
+IDLE: Desired: IDLE
 ONGOING --> ONGOING : End node responds and frame valid
+ONGOING: Reported: ONGOING
+ONGOING: Desired: IDLE
 ONGOING --> WAITING_FOR_ACTIVATION : Update done and end node supports activation
-WAITING_FOR_ACTIVATION --> IDLE : Activation done. Update either success or fail.
+WAITING_FOR_ACTIVATION --> ACTIVATION_TIMEOUT: Set apply timer callback
+ACTIVATION_TIMEOUT --> IDLE : Get rule triggerred to send Activtion command. Update either success or fail.
+WAITING_FOR_ACTIVATION: Reported: WAITING_FOR_ACTIVATION
+WAITING_FOR_ACTIVATION: Desired: IDLE
+ACTIVATION_TIMEOUT: Reported: Undefined
+ACTIVATION_TIMEOUT: Desired: WAITING_FOR_ACTIVATION
 ONGOING --> WAITING_FOR_REBOOT : Update done and end node requires reboot
+WAITING_FOR_REBOOT: Reported: WAITING_FOR_REBOOT
+WAITING_FOR_REBOOT: Desired: IDLE
 WAITING_FOR_REBOOT --> IDLE : Reboot done. Update either success or fail.
 ONGOING --> IDLE : Update either success or fail. No reboot needed.
 @enduml
@@ -1134,6 +1219,94 @@ endpoint *-- capabilities_requested
 value -[hidden]--> on_off
 duration -[hidden]--> substate_update
 @enduml
+@startuml attribute_store_wake_up_command_class.svg
+title Wake Up data model
+allow_mixing
+skinparam objectBorderColor black
+skinparam NoteBackgroundColor #fffae3
+skinparam NoteBorderColor red
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_WAKE_UP_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [4]
+
+  object "Setting" as setting #FFFFFF
+  setting : Attribute Type = ATTRIBUTE(SETTING)
+  setting : value = Desired: [0] - Reported: [1]
+
+  object "Capabilities" as capabilities #FFFFFF
+  capabilities : Attribute Type = ATTRIBUTE(CAPABILITIES)
+  capabilities : value = Desired: [], Reported: [01]
+
+  object "Wake Up NodeID" as wake_up_node_id #FFFFFF
+  wake_up_node_id : Attribute Type = ATTRIBUTE(NODE_ID)
+  wake_up_node_id : value = Desired: [01], Reported: [10]
+
+  object "Wake Up Interval" as wake_up_interval #FFFFFF
+  wake_up_interval : Attribute Type = ATTRIBUTE(INTERVAL)
+  wake_up_interval : value = Desired: [80,51,01,00], Reported: [14,00,00,00]
+
+  object "Maximum Wake Up Interval" as maximum_wake_up_interval #FFFFFF
+  maximum_wake_up_interval : Attribute Type = ATTRIBUTE(MAXIMUM_INTERVAL)
+  maximum_wake_up_interval : value = Desired: [], Reported: [80,51,01,00]
+
+  object "Minimum Wake Up Interval" as minimum_wake_up_interval #FFFFFF
+  minimum_wake_up_interval : Attribute Type = ATTRIBUTE(MINIMUM_INTERVAL)
+  minimum_wake_up_interval : value = Desired: [], Reported: [14,00,00,00]
+
+  object "Default Wake Up Interval" as default_wake_up_interval #FFFFFF
+  default_wake_up_interval : Attribute Type = ATTRIBUTE(DEFAULT_INTERVAL)
+  default_wake_up_interval : value = Desired: [], Reported: [2c,01,00,00]
+
+  object "Wake Up Interval Step" as wake_up_interval_step #FFFFFF
+  wake_up_interval_step : Attribute Type = ATTRIBUTE(INTERVAL_STEP)
+  wake_up_interval_step : value = Desired: [], Reported: [14,00,00,00]
+
+  object "Capabilities bitmask" as capabilties_bitmask #FFFFFF
+  capabilties_bitmask : Attribute Type = ATTRIBUTE(CAPABILITIES_BITMASK)
+  capabilties_bitmask : value = Desired: [], Reported: [01]
+
+  note left of capabilities
+    Resolution listener
+    Configure Wake Up Interval
+  end note
+
+  note left of node
+    Resolution listener
+    Send Wake Up No More
+  end note
+}
+
+node *-- endpoint
+endpoint *-- version
+endpoint *-- setting
+endpoint *-- capabilities
+
+setting *-- wake_up_node_id
+setting *-- wake_up_interval
+
+capabilities *-- maximum_wake_up_interval
+capabilities *-- minimum_wake_up_interval
+capabilities *-- default_wake_up_interval
+capabilities *-- wake_up_interval_step
+capabilities *-- capabilties_bitmask
+
+maximum_wake_up_interval -[hidden]--> default_wake_up_interval
+minimum_wake_up_interval -[hidden]--> wake_up_interval_step
+@enduml
 @startuml ota_image_listener_component.svg
 title OTA Image Listener component
 legend top
@@ -1205,7 +1378,7 @@ deactivate IL
 PC->IL: unregister(uiid)
 PC->IL: clear_cache()
 @enduml
-@startuml inline_umlgraph_12.svg
+@startuml inline_umlgraph_23.svg
 participant MQTT
 participant SmartStartManagement as SSM
 participant ProtocolControllerSmartStartManagement as PCSSM
@@ -1245,7 +1418,7 @@ group Node Removed from ProtocolController
   SSM       -> PCSSM: on_smartstart_state_changed()
 end
 @enduml
-@startuml inline_umlgraph_13.svg
+@startuml inline_umlgraph_25.svg
 title Relationships - Class Diagram
 
 title Mapping engine

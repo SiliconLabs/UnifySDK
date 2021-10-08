@@ -121,6 +121,7 @@ class Entry
   std::string protocol_controller_unid;
   std::string device_unid;
   std::vector<std::string> preferred_protocols;
+  bool manual_intervention_required;
   /**
    * @brief smartstart::Entry constructor.
    * @param dsk DSK as string, which is used as a key in the SmartStart cache.
@@ -221,6 +222,20 @@ class Management
    * @param unid Unid as string to be removed.
    */
   sl_status_t notify_node_removed(const std::string &unid);
+
+  /**
+   * @brief Call this function to change the value of the "ManualInterventionRequired" field
+   * @param dsk DSK of the entry to be modified
+   * @param manual_intervention_required Set to true if the entry needs some
+   *                                     network exclusion before it can
+   *                                     join our network. False otherwise
+   * @returns SL_STATUS_OK          if the entry was updated
+   *          SL_STATUS_NOT_FOUND   If the DSK is not in the list.
+   *          SL_STATUS_FAIL        If the DSK returns more than 1 entry in the list
+   */
+  sl_status_t
+    set_manual_intervention_required(const std::string &dsk,
+                                     bool manual_intervention_required);
 
   const std::unordered_map<std::string, Entry> &get_cache() const;
 };

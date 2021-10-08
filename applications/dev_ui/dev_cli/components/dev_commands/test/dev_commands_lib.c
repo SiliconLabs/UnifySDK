@@ -20,7 +20,7 @@ void suiteSetUp()
   printf("Initialising test");
 }
 
-// Test parsing smart start list in correct format
+// Test parsing SmartStart list in correct format
 void test_parsing_smart_start_list_correct_format()
 {
   const char *ss_list
@@ -41,7 +41,7 @@ void test_parsing_smart_start_list_correct_format()
   TEST_ASSERT_EQUAL(state, 0);
 }
 
-// Test parsing smart start list in wrong format
+// Test parsing SmartStart list in wrong format
 void test_parsing_smart_start_list_wrong_format()
 {
   const char *ss_list

@@ -35,6 +35,12 @@
 #include "sys/ctimer.h"
 
 /**
+ * @brief Type definition for endpoint caching.
+ *  
+ */
+using endpoint_cache_t = uint8_t;
+
+/**
  * @brief Setting the image callback for a specific image key.
  * 
  * @param key image key.
@@ -43,7 +49,8 @@
  * @param timeout_timer the ctimer.
  */
 typedef struct timeout_handler {
-  std::string key;
+  std::string unid;
+  std::string subscribe_topic;
   bool state = false;
   uic_ota::image_ready_funct_t image_ready_cb;
   struct ctimer timeout_timer;
@@ -75,92 +82,26 @@ class TimeoutHandler
    */
   ~TimeoutHandler();
 
-  std::string get_image_key() const;
-  bool get_image_poll_state() const;
-  void set_image_poll_state(bool state);
+  std::string get_unid() const;
+  std::string get_subscribe_topic() const;
+  bool get_unid_poll_state() const;
+  void set_unid_poll_state(bool state) const;
   uic_ota::image_ready_funct_t get_image_ready_cb() const;
   ctimer *get_ctimer_pointer() const;
 };
 
 /**
- * @brief Type definition for endpoint caching.
- *  
+ * @namespace ImageHandler
+ * @brief The ImageFileHandler controls and operates availability of an image 
+ * file. This class encapsulates following control: 
+ *  - Image file path.
+ *  - Image meta info.
  */
-using endpoint_cache_t = uint8_t;
-
-/**
- * @brief Setting the image callback for a specific image key.
- * 
- * @param key image key for setting image ready callback.
- * @param image_ready_cb image ready callback.
- */
-void set_image_callback_function(
-  const std::string &key, const uic_ota::image_ready_funct_t image_ready_cb);
-
-/**
- * @brief Setting image status of a specific image key.
- * 
- * @param timeout_handler handler
- */
-void set_image_key_poll(std::shared_ptr<TimeoutHandler> timeout_handler);
-
-/**
- * @brief Pop key from image key poll.
- * 
- * @param key Image key in que.
- */
-void pop_image_key_poll(const std::string &key);
-
-/**
- * @brief Get image key poll state.
- * 
- * @param key Image key in poll.
- * 
- * @returns boolean true if the image key has been activated.
- */
-bool get_image_key_poll_state(const std::string &key);
-
-/**
- * @brief Set image key poll state.
- * 
- * @param key Image key in poll.
- */
-void set_image_key_poll_state_true(const std::string &key);
-
-/**
- * @brief Set unid to listening on uiid.
- * 
- * @param uiid unique image identifier ID.
- * @param unid end-note id.
- */
-void set_unid_listening(const std::string &uiid, const std::string unid);
-
-/**
- * @brief Get all unids listening to a specific uiid.
- * 
- * @param uiid unique image identifier ID.
- * 
- * @returns vector of unids listening to uiid.
- */
-std::vector<std::string> get_unids_listening(const std::string &uiid);
-
-/**
- * @brief Get count of listening unids to a uiid.
- * 
- * @param uiid unique image identifier ID.
- * 
- * @returns count of listening unids to uiid.
- */
-uint32_t get_unids_listening_count(const std::string &uiid);
-
-/**
- * @brief Remove unid listening on uiid.
- * 
- * @param uiid unique image identifier ID.
- * @param unid end-note id.
- * 
- */
-void remove_unid_listening(const std::string &uiid, const std::string &unid);
+namespace image_file_handler
+{
+////////////////////////////////////////////////////////////////////////////////
+// Image meta info received
+////////////////////////////////////////////////////////////////////////////////
 
 /**
  * @brief Setting image filename.
@@ -198,31 +139,18 @@ void remove_image_meta_info(const std::string &key);
  */
 bool check_if_meta_info_received(const std::string &key);
 
-/**
- * @brief Get the image callback for a specific image key.
- * 
- * @param key image key for getting image ready callback.
- * 
- * @returns image ready callback for image.
- */
-uic_ota::image_ready_funct_t get_image_callback(const std::string &key);
+////////////////////////////////////////////////////////////////////////////////
+// Cached image files
+////////////////////////////////////////////////////////////////////////////////
 
 /**
- * @brief Remove image callback for image key.
+ * @brief Set image which is received and cache it.
  * 
- * @param key image key for removing image callback .
- * 
+ * @param key image key which is received.
+ * @param filepath for image which is received.
  */
-void remove_image_callback(const std::string &key);
-
-/**
- * @brief Check if image is received and cached.
- * 
- * @param key image key or search.
- * 
- * @returns true if received and cached.
- */
-bool is_image_received_and_cached(const std::string &key);
+void set_images_received_cached_filepath(const std::string &key,
+                                         const std::string &filepath);
 
 /**
  * @brief Get image which is received and cached.
@@ -234,45 +162,168 @@ bool is_image_received_and_cached(const std::string &key);
 std::string get_image_cached_filepath(const std::string &key);
 
 /**
- * @brief Set image which is received and cache it.
+ * @brief Check if image is received and cached.
  * 
- * @param key image key which is received.
- * @param filepath for image which is received.
+ * @param key image key or search.
  * 
+ * @returns true if received and cached.
  */
-void set_images_received_cached_filepath(const std::string &key,
-                                         const std::string &filepath);
+bool is_image_received_and_cached(const std::string &key);
 
 /**
  * @brief Clear out cache of images.
- * 
  */
 void clear_images_cache();
+};  // namespace image_file_handler
 
 /**
- * @brief Check if unid and ep has been published to.
- * 
- * @param unid UNID to check.
- * @param ep endpoint ID to check.
- * 
+ * @namespace UnidStateHandler.
+ * @brief Handling Unid state for OTA. Class will encapsulate following:
+ *  - If an image is provided specifically for the UNID or should accept 
+ * UIID/all.
+ *  - The last provided image_ready_cb for UNID in poll.
+ *  - If the UNID is in poll waiting for an image.
  */
-bool is_status_published(const dotdot_unid_t &unid,
-                         const dotdot_endpoint_id_t &ep);
+namespace unid_state_handler
+{
+////////////////////////////////////////////////////////////////////////////////
+// Unid poll management
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Setting image status of a specific image key.
+ * 
+ * @param timeout_handler handler
+ */
+void set_unid_poll(std::shared_ptr<TimeoutHandler> timeout_handler);
 
 /**
- * @brief Set unid and endpoint as published to.
+ * @brief Pop key from image key poll.
  * 
- * @param unid UNID to set as published.
+ * @param unid UNID in que.
+ */
+void pop_unid_poll(const std::string &unid);
+
+/**
+ * @brief Get image key poll state.
+ * 
+ * @param unid end-note id.
+ * 
+ * @returns boolean true if the image key has been activated.
+ */
+bool get_unid_poll_state(const std::string &unid);
+
+/**
+ * @brief Set UNID poll state.
+ * 
+ * @param unid end-note id.
+ */
+void set_unid_poll_state_true(const std::string &unid);
+
+/**
+ * @brief Check if UNID in poll.
+ * 
+ * @param unid end-note id.
+ */
+bool is_unid_in_poll(const std::string &unid);
+
+/**
+ * @brief Get the image callback for a specific image key.
+ * 
+ * @param key image key for getting image ready callback.
+ * 
+ * @returns image ready callback for image.
+ */
+uic_ota::image_ready_funct_t get_unid_callback(const std::string &unid);
+
+/**
+ * @brief Check if the topic is already subscribed.
+ * 
+ * @param topic MQTT topic.
+ * 
+ * @returns true/false.
+ */
+bool is_poll_topic_subscribed(const std::string &topic);
+
+////////////////////////////////////////////////////////////////////////////////
+// Unid management
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Set UNID to listening on UIID.
+ * 
+ * @param uiid unique image identifier ID.
+ * @param unid end-note id.
+ */
+void set_unid_listening(const std::string &uiid, const std::string &unid);
+
+/**
+ * @brief Get all UNIDs listening to a specific UIID.
+ * 
+ * @param uiid unique image identifier ID.
+ * 
+ * @returns vector of UNIDs listening to UIID.
+ */
+std::vector<std::string> get_unids_listening(const std::string &uiid);
+
+/**
+ * @brief Get count of listening UNIDs to a UIID.
+ * 
+ * @param uiid unique image identifier ID.
+ * 
+ * @returns count of listening UNIDs to UIID.
+ */
+std::size_t get_unids_listening_count(const std::string &uiid);
+
+/**
+ * @brief Remove UNID listening on UIID.
+ * 
+ * @param uiid unique image identifier ID.
+ * @param unid end-note id.
+ */
+void remove_unid_listening(const std::string &uiid, const std::string &unid);
+
+/**
+ * @brief Get all UIIDs which a single UNID is listening to.
+ * 
+ * @param unid end-note id.
+ * 
+ * @returns vector of UIIDs.
+ */
+std::vector<std::string>
+  get_uiids_unid_is_listening_to(const std::string &unid);
+
+/**
+ * @brief Get all UIIDs and UNIDs active.
+ * 
+ * @returns map of UIIDs and listening UNIDs.
+ */
+std::map<std::string, std::vector<std::string>, std::less<>>
+  get_uiids_and_unids_listening();
+
+////////////////////////////////////////////////////////////////////////////////
+// Unid MQTT management
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Set UNID and endpoint as published to.
+ * 
+ * @param unid end-note id set as published.
  * @param ep Endpoint ID to set as published to.
- * 
  */
 void set_status_published_cached(const dotdot_unid_t &unid,
                                  const dotdot_endpoint_id_t &ep);
 
 /**
- * @brief Get map of published unid and endpoints.
+ * @brief Check if UNID and ep has been published to.
  * 
- * @returns map of published unid and endpoints.
+ * @param unid end-note id to check.
+ * @param ep endpoint ID to check.
+ */
+bool is_status_published(const dotdot_unid_t &unid,
+                         const dotdot_endpoint_id_t &ep);
+
+/**
+ * @brief Get map of published UNID and endpoints.
+ * 
+ * @returns map of published UNID and endpoints.
  */
 std::map<std::string, std::vector<endpoint_cache_t>, std::less<>>
   get_map_status_published_cached_and_clear();
@@ -284,33 +335,7 @@ std::map<std::string, std::vector<endpoint_cache_t>, std::less<>>
  */
 std::vector<endpoint_cache_t>
   get_endpoints_status_published_and_pop(const dotdot_unid_t &unid);
-
-/**
- * @brief Set a unid listening to a uiid and it's image callback.
- * 
- * @param uiid image identifier.
- * @param unid unid listening on uiid.
- * @param image_ready_cb image ready callback listening on uiid.
- */
-void set_image_listening_unid_on_uiid(
-  const std::string &uiid,
-  const std::string &unid,
-  uic_ota::image_ready_funct_t image_ready_cb);
-
-/**
- * @brief Get all a unids listening to uiid and image callbacks.
- * 
- * @param uiid image identifier.
- */
-std::vector<std::pair<std::string, uic_ota::image_ready_funct_t>>
-  get_image_listening_list(const std::string &uiid);
-
-/**
- * @brief Remove all unids listening to uiid and callbacks.
- * 
- * @param uiid image identifier.
- */
-void remove_unids_listening_on_uiid(const std::string &uiid);
+};  // namespace unid_state_handler
 
 #endif  //OTA_CACHE_HPP
 /** @} end ota_cache */

@@ -1,6 +1,6 @@
 # Unify SDK Overview
 
-Latest version of the Unify SDK Overview is available online
+Latest released version of the Unify SDK Overview is available online
 [here](https://siliconlabs.github.io/UnifySDK/userguide/html/index.html).
 
 The Unify SDK provides software source and binary packages for Raspberry Pi 4 to
@@ -13,7 +13,7 @@ The detailed architecture of the Unify SDK is discussed in the Unify SDK Specifi
 
 The Unify SDK uses Unify SDK library to decouple API modules from the PHY drivers.
 This facilitates code reuse and enables easily adding new
-high-level APIs without the need to modify the PHY drivers. 
+high-level APIs without the need to modify the PHY drivers.
 The library provides a number of components that simplify the task of writing a PHY driver
 also known as a Protocol Controller.
 
@@ -66,12 +66,12 @@ The Unify MQTT clients can be grouped into several applications:
 
 - Z-Wave Protocol controller (ZPC)
 - Zigbee Protocol Controller (ZigPC)
-- Unify SDk Smart Start Provisioning list (UPVL)
-- Unify SDK Multicast Group Manager (ANGLE)
+- Unify SDK SmartStart Provisioning list (UPVL)
+- Unify SDK Group Manager (ANGEL)
 - Unify SDK OTA Image Provider (Image Provider)
 - IoT Services (i.e., DEV GUI)
 
-![SDK Overview](doc/assets/img/SDKOverview.svg)
+![SDK Overview](doc/assets/img/SDKOverview.png)
 
 The Unify SDK was previously known as Unified IoT Controller or UIC for short.
 The old name can still be found in some parts of the SDK.
@@ -96,8 +96,8 @@ implementation details can be found in the user guide for each protocol controll
 
 #### The Unified SDK Provisioning List (UPVL)
 
-[The UPVL](applications/upvl/readme_user.md) serves the Smart Start Provisioning
-list to perform Smart Start Security 2 (S2) inclusions and maintains the ucl/SmartStart MQTT topic.
+[The UPVL](applications/upvl/readme_user.md) serves the SmartStart Provisioning
+list to perform SmartStart Security 2 (S2) inclusions and maintains the ucl/SmartStart MQTT topic.
 
 #### The Unify SDK Group Manager (ANGEL)
 
@@ -382,15 +382,15 @@ using [Valgrind](https://valgrind.org/) on a i686 architecture, compiled without
 debugging information.
 
 
-|     Component     |  Flash  |         RAM             |
-|-------------------|---------|-------------------------|
-| libuic            | 4085 kb |                 NA      |
-| uic-zigpc         | 1880 kb |  1900 kb + 8 kb pr node |
-| uic-zpc           | 5888 kb |  1500 kb + 8 kb pr node |
-| uic-angel         | 3220 kb |                1000 kb  |
-| uic-image-provider| 3281 kb |                1000 kb  |
-| uic-upvl          | 3339 kb |                1000 kb  |
-| uic-dev-gui       |   95 MB |                1000 kb  |
+| Component          | Flash   | RAM                    |
+| ------------------ | ------- | ---------------------- |
+| libuic             | 4085 kb | NA                     |
+| uic-zigpc          | 1880 kb | 1900 kb + 8 kb pr node |
+| uic-zpc            | 5888 kb | 1500 kb + 8 kb pr node |
+| uic-angel          | 3220 kb | 1000 kb                |
+| uic-image-provider | 3281 kb | 1000 kb                |
+| uic-upvl           | 3339 kb | 1000 kb                |
+| uic-dev-gui        | 95 MB   | 1000 kb                |
 
 The SDK depends on the following debian packages:
 
@@ -414,14 +414,14 @@ files should be used for reference. It is very important that all the Unify
 components runs as a dedicated system user to prevent attackers from
 compromising the entire system. Also note that most components need write
 access to parts of the filesystem. The default path for writing files is
-`/var/lib/uic`. 
+`/var/lib/uic`.
 ## FAQ
 * *How can I see if the Unify components are running?*<br>
 Unify applications are running as Linux `systemd` services. To get a status overview of all installed Unify components, run the following command:<br>
 ```sh
 systemctl status `ls /lib/systemd/system/uic-*.service | xargs -n 1 basename`
 ```
-The output of this command will tell if the service is loaded and/or is active:  
+The output of this command will tell if the service is loaded and/or is active:
 ```sh
 ● uic-dev-gui-api.service - Unify User Interface API
    Loaded: loaded (/lib/systemd/system/uic-dev-gui-api.service; enabled; vendor preset: enabled)
@@ -431,7 +431,7 @@ The output of this command will tell if the service is loaded and/or is active:
 Logging is collected via Linux `systemd`. In the terminal `journalctl` is able to print the collected logs from all Unify components. Getting the log of, for instance `uic-upvl`, is done via command:
 ```sh
 journalctl -u uic-upvl
-``` 
+```
 * *How do I clear Unify caches and databases?*<br>
 Execute the following command in a terminal on the Unify gateway:
 ```sh
@@ -453,7 +453,7 @@ cat /etc/uic/uic.cfg
 ```
 It outputs the configured rf_region:
 ```bash
-pi@raspberrypi:/etc/uic $ cat uic.cfg 
+pi@raspberrypi:/etc/uic $ cat uic.cfg
 zpc:
   serial: /dev/ttyUSB0
   rf_region: US
@@ -477,9 +477,9 @@ run:
 ```
 Replace the serial argument with the port the Z-Wave controller is connected to.
 * *I have an old Z-Wave device, is it still supported?*<br>
-Yes. However, older devices may be inconsistent in reporting their actual state. This usually means that operating the same command for a second time, the state get updated correctly. 
+Yes. However, older devices may be inconsistent in reporting their actual state. This usually means that operating the same command for a second time, the state get updated correctly.
 * *Can I get detailed diagnostics about devices, its clusters and the network?*<br>
-Using application [`mqtt explorer`](http://mqtt-explorer.com) can give more insights in your Unify network. 
+Using application [`mqtt explorer`](http://mqtt-explorer.com) can give more insights in your Unify network.
 * *How do I determine the root cause for my failed firmware update?*<br>
 The lastError field in the OTA tab of the dev_gui is giving a rough error code. The logging of the uic-zpc usually gives a more detailed explanation of the reason why a firmware update is not accepted.
 * *My device shows up with more clusters than expected!*<br>
@@ -525,8 +525,8 @@ the MSLA applicable to Source Code.
 | Editline      | for console UI                                      | <https://sourceforge.net/projects/libedit/>                                           | BSD           |
 | Sqlite        | for persistent storage                              | <https://www.sqlite.org/copyright.html>                                               | public domain |
 | Boost         | logging, data structures, config files and json     | <https://www.boost.org/LICENSE_1_0.txt>                                               | Boost         |
+| nlohmann/json | json                                                | <https://github.com/nlohmann/>                                                        | MIT           |
 | CMock         | Unittest                                            | <https://github.com/ThrowTheSwitch/CMock/blob/master/LICENSE.txt>                     |               |
 | Unity         | Unittest                                            | <https://github.com/ThrowTheSwitch/Unity/blob/master/LICENSE.txt>                     |               |
 | React         | User interface                                      | <https://github.com/facebook/react/blob/master/LICENSE>                               | MIT           |
 | React License | User interface                                      | <https://github.com/react-icons/react-icons/blob/master/packages/react-icons/LICENSE> | Misc *TBD*    |
-

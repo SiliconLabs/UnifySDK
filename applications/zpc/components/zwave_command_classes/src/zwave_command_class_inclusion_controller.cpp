@@ -175,12 +175,14 @@ static void node_id_resolusion_listener(attribute_store_node_t node)
       && (it->second.get()->security_bootstrap == COMPLETED)) {
     attribute_resolver_clear_resolution_listener(node,
                                                  node_id_resolusion_listener);
-    node_ids_inclusion_request.erase(it);
     // Send  Inclsuion Controller Complete command to the Inclusion Controller
     zwave_command_class_inclusion_controller_send_complete_command(
       it->second.get()->step_id,
       it->second.get()->status_inclusion_complete,
       it->second.get()->connection_info);
+    // Make sure our ref-count doesn't reach zero until we are actually done with the
+    // object.
+    node_ids_inclusion_request.erase(it);
   }
 }
 
@@ -202,7 +204,7 @@ static void zwave_command_class_inclusion_controller_on_nif_update(
       attribute_store_node_t node_id_node
         = attribute_store_network_helper_get_zwave_node_id_node(it->first);
       attribute_resolver_pause_node_resolution(node_id_node);
-      sl_log_info(LOG_TAG, "NIF is resolved for NodeID %i", node_id);
+      sl_log_debug(LOG_TAG, "NIF is resolved for NodeID %i", node_id);
     }
   }
 }
@@ -215,10 +217,13 @@ static void zwave_command_class_inclusion_timer_on_node_add_received(void *user)
   inclusion_handler_state_t *read_data
     = static_cast<inclusion_handler_state_t *>(user);
   auto it = node_ids_inclusion_request.find(read_data->node_id);
+  // Let's fetch the object before we delete it as removing it from the std::map
+  // will most likely cause the ref-count to go to zero otherwise.
+  auto actual_object = node_ids_inclusion_request[read_data->node_id];
   node_ids_inclusion_request.erase(it);
   // Create the node id node in attribute store
   unid_t unid;
-  zwave_unid_from_node_id(read_data->node_id, unid);
+  zwave_unid_from_node_id(actual_object->node_id, unid);
   attribute_store_node_t endpoint_id_node
     = attribute_store_network_helper_create_endpoint_node(unid, 0);
   attribute_store_node_t nif_attribute
@@ -248,12 +253,13 @@ static void zwave_command_class_inclusion_nif_resolve_timer_cc(void *user)
   auto it = node_ids_inclusion_request.find(read_data->node_id);
   if ((it != node_ids_inclusion_request.end())
       && (it->second.get()->security_bootstrap == NOT_STARTED)) {
-    node_ids_inclusion_request.erase(it);
     // Send  Inclsuion Controller Complete command to the Inclusion Controller
     zwave_command_class_inclusion_controller_send_complete_command(
       it->second.get()->step_id,
       COMPLETE_STEP_FAILED,
       it->second.get()->connection_info);
+    // Delete at the end, to make sure our ref-count doesn't reach zero prematurely.
+    node_ids_inclusion_request.erase(it);
   }
 }
 
@@ -293,7 +299,7 @@ static void
  *        Inclusion Controller the flag will be FALSE)
  */
 static void zwave_command_class_inclusion_controller_on_node_id_assigned(
-  zwave_node_id_t node_id, bool included_by_us)
+  zwave_node_id_t node_id, bool included_by_us, zwave_protocol_t protocol)
 {
   // We are only interested about nodes included by others
   if (included_by_us) {

@@ -102,7 +102,7 @@ extern "C" {
 /// promiscuous mode
 #define RECEIVE_STATUS_FOREIGN_FRAME 0x40
 /// Received frame is send on another network (rxOptions == 1xxxxxxx). Useful
-/// only in Smart Start - used when receiving INIF from another network
+/// only in SmartStart - used when receiving INIF from another network
 #define RECEIVE_STATUS_FOREIGN_HOMEID 0x80
 ///@}
 

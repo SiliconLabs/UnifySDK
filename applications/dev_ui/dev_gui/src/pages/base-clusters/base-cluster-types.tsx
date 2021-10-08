@@ -3,6 +3,7 @@ import { NavbarItem } from "../../components/navbar/navbar-types"
 
 export type BaseClustersProps = {
   NodeList: any[],
+  GroupList: any[],
   SocketServer: WebSocket,
   IsConnected: boolean | null,
   ClusterType: ClusterTypes,

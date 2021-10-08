@@ -21,6 +21,8 @@
 #include "thermostat_cluster_mapper.h"
 #include "sl_status.h"
 #include "door_lock_cluster_mapper.h"
+#include "identify_cluster_mapper.h"
+#include "manufacturer_id_to_name_mapper.h"
 
 sl_status_t dotdot_mapper_init()
 {
@@ -46,6 +48,17 @@ sl_status_t dotdot_mapper_init()
   if (!door_lock_cluster_mapper_init()) {
     return SL_STATUS_FAIL;
   }
+
+  // Identify Cluster
+  if (!identify_cluster_mapper_init()) {
+    return SL_STATUS_FAIL;
+  }
+
+  //Manufacturer ID to Name mapper
+   if (!manufacturer_id_to_name_mapper_init()) {
+    return SL_STATUS_FAIL;
+  } 
+
   return SL_STATUS_OK;
 }
 
@@ -59,6 +72,7 @@ int dotdot_mapper_teardown()
   thermostat_cluster_mapper_teardown();
   //DoorLock Cluster
   door_lock_cluster_mapper_teardown();
-
+  //Manufacturer ID to Name mapper
+  manufacturer_id_to_name_mapper_teardown();
   return 0;
 }

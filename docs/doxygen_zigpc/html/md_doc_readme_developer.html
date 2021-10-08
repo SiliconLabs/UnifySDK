@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -87,9 +87,9 @@ $(document).ready(function(){initNavTree('md_doc_readme_developer.html',''); ini
 <div class="title">Unify SDK Developer Readme </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md293"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md259"></a>
 Directory Structure and File Naming Conventions</h1>
-<h2><a class="anchor" id="autotoc_md294"></a>
+<h2><a class="anchor" id="autotoc_md260"></a>
 Rules</h2>
 <ul>
 <li>All filenames must be lower case except the following:<ul>
@@ -102,7 +102,7 @@ Rules</h2>
 </li>
 <li>Use _ for spaces in file/folder names</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md295"></a>
+<h2><a class="anchor" id="autotoc_md261"></a>
 Structure of Components (Best Practice)</h2>
 <p>This is a best practice for component folder structure. Note that exceptions exist for this, such as Contiki and libs2.</p>
 <div class="fragment"><div class="line">.</div>
@@ -118,7 +118,7 @@ Structure of Components (Best Practice)</h2>
 </div><!-- fragment --><ul>
 <li>Library names and folders of Unify components are required to be prefixed with uic_, i.e. "uic_my_sample_component".</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md296"></a>
+<h2><a class="anchor" id="autotoc_md262"></a>
 Structure</h2>
 <div class="fragment"><div class="line">.</div>
 <div class="line">|-- applications/               // Unify application specific code goes here</div>
@@ -155,7 +155,7 @@ Structure</h2>
 <div class="line">|-- docker/Dockerfile           // Dockerfile for compiling and cross-compiling ZPC</div>
 <div class="line">|-- CMakeLists.txt              // Root CMakeLists.txt</div>
 <div class="line">`-- Jenkinsfile                 // Jenkinsfile for CI on Jenkins</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md297"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md263"></a>
 Component Templates</h1>
 <p>A <a href="https://cookiecutter.readthedocs.io/">cookiecutter</a> template helps to quickly add the boilerplate code for ZPC-components.</p>
 <p>Cookiecutter is written in Python and the simplest way to install it is from PyPI using <a href="https://pipxproject.github.io/pipx/">pipx</a>.</p>
@@ -167,33 +167,33 @@ Component Templates</h1>
 <div class="fragment"><div class="line">cookiecutter ssh://git@stash.silabs.com/uic/zpc_cookiecutter.git</div>
 </div><!-- fragment --><p>You will be asked some questions regarding your component, with default values in square-brackets.</p>
 <p>After this is done, manually add your new component subdirectory to the <code>CMakeLists.txt</code> in the <code>components</code> directory.</p>
-<h2><a class="anchor" id="autotoc_md298"></a>
+<h2><a class="anchor" id="autotoc_md264"></a>
 Demo</h2>
 <p>Here you can see a demo-session of adding a component with cookiecutter.</p>
 <p><em>Note! This Git-repository used in the demo is outdated and did only exist to demonstrate this functionality for the team to consider.</em></p>
-<p><a href="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1"><img src="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1.svg" alt="asciicast" style="pointer-events: none;" class="inline"/></a></p>
-<h1><a class="anchor" id="autotoc_md299"></a>
+<p><a href="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1">Heres a small video demonstrating how to use the cookiecutter <img src="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1.png" alt="" width="60%" class="inline"/> </a> </p>
+<h1><a class="anchor" id="autotoc_md265"></a>
 Clang-Format (autoformat code)</h1>
 <p>Clang-format is a tool that can format code according to coding style configuration. The <code>.clang-format</code> file in this repository depends on clang-format 10.</p>
-<h2><a class="anchor" id="autotoc_md300"></a>
+<h2><a class="anchor" id="autotoc_md266"></a>
 Install on Mac</h2>
 <div class="fragment"><div class="line">brew install llvm</div>
 <div class="line">ln -s &quot;$(brew --prefix llvm)/bin/clang-format&quot; &quot;/usr/local/bin/clang-format&quot;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md301"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md267"></a>
 Install on Ubuntu</h2>
 <div class="fragment"><div class="line">wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -</div>
 <div class="line">sudo echo &quot;deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main</div>
 <div class="line">deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main&quot; &gt; /etc/apt/sources.list.d/llvm.list</div>
 <div class="line">sudo apt-get update</div>
 <div class="line">sudo apt-get install clang-format-10</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md302"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md268"></a>
 Visual Studio Code</h2>
 <p>In Visual Studio Code, you can install clang-format plugin (xaver.clang-format), which allows you to format files with clang-format (also supports format on save). See plugin documentation for details.</p>
-<h2><a class="anchor" id="autotoc_md303"></a>
+<h2><a class="anchor" id="autotoc_md269"></a>
 Command Line</h2>
 <p>You can run clang-format from the command line.</p>
 <div class="fragment"><div class="line">clang-format -i &lt;filename&gt;  # -i causes to do in-file changes</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md304"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md270"></a>
 Pre-commit Hooks</h1>
 <p>The ZPC repository has a config-file for the pre-commit.org git hook system. With the pre-commit hooks, utilities such as clang-format and cmake-format will be run a all files before committing them to the repository.</p>
 <p>The pre-commit hooks must be activated locally on your machine to work.</p>
@@ -202,10 +202,10 @@ Pre-commit Hooks</h1>
 </div><!-- fragment --><p>Second, install the git hook:</p>
 <div class="fragment"><div class="line">python -m pre-commit install</div>
 </div><!-- fragment --><p>From now on, all new files will be formatted before they are committed.</p>
-<h1><a class="anchor" id="autotoc_md305"></a>
+<h1><a class="anchor" id="autotoc_md271"></a>
 CMake</h1>
 <p>We created additional functions on top of the usual cmake functions which makes it more easier to create new targets. This section explains how to use cmake to create new uic-components, mocks and unit-tests. These functions should cover all possible use-cases. Their semantics is similar to the existing cmake framework, making it easy for developers who are familiar with cmake to understand what they do. A good tip is to also take a look at the current cmake files to find similar constructions which you can use as an example when defining your own.</p>
-<h2><a class="anchor" id="autotoc_md306"></a>
+<h2><a class="anchor" id="autotoc_md272"></a>
 Defining new uic-components</h2>
 <p>Uic-components are declared SHARED using cmake's <code>add_library</code>.</p>
 <p>Newly created components need to comply with the following requirements:</p>
@@ -216,7 +216,7 @@ Defining new uic-components</h2>
 <p>An example:</p>
 <div class="fragment"><div class="line">add_library(uic_my_component SHARED my_source.c)</div>
 </div><!-- fragment --><p>There is scripting in place that will verify if these conditions are met. In the unlikely event you want to suppress these errors, <code>disable_target_check(&lt;my_exception_target&gt;)</code> can be used.</p>
-<h2><a class="anchor" id="autotoc_md307"></a>
+<h2><a class="anchor" id="autotoc_md273"></a>
 Mock uic-components</h2>
 <p>The cmock framework is used to generate mocks of uic components. More specifically, cmock generates a mock implementation for provided header files. This means no source files are needed to create mocks! To ease the use of mocking in the uic ecosystem we have a cmake function to create mock libraries:</p>
 <div class="fragment"><div class="line">target_add_mock(&lt;target&gt; &lt;additional_headers&gt;)</div>
@@ -224,15 +224,15 @@ Mock uic-components</h2>
 <div class="fragment"><div class="line">target_include_directories(mytarget PUBLIC include PRIVATE my/private/include/dir)</div>
 <div class="line">target_add_mock(mytarget)</div>
 </div><!-- fragment --><p>will create a library named <code>mytarget_mock</code> containing mock implementations of headers that reside in the folder <code>${CMAKE_CURRENT_LIST_DIR}/include</code>. Headers residing in folder <code>my/private/include/dir</code> are not mocked and therefore not in the mock library.</p>
-<h3><a class="anchor" id="autotoc_md308"></a>
+<h3><a class="anchor" id="autotoc_md274"></a>
 Additional headers</h3>
 <p>For further customization <code>target_add_mock</code> has the possibility to add additional headers. Its intended to mock headers that are needed by the test but where declared private or part of an external library that needs to be mocked.</p>
-<h2><a class="anchor" id="autotoc_md309"></a>
+<h2><a class="anchor" id="autotoc_md275"></a>
 Unit-testing</h2>
 <p><code>target_add_unittest</code> is used to create unit-tests for a given target. In it simplest form all you need is</p>
 <div class="fragment"><div class="line">target_add_unittest(uic_my_component SOURCES test.c)</div>
 </div><!-- fragment --><p>In test.c you define your unity test cases. No need to add additional include and link_libraries, they are all deducted from the <code>uic_my_component</code>. What happens internally is that the function relinks the target it creates a test for, in this case <code>uic_my_component</code>. This enable us to link mocks in the production code. the function has a <code>DEPENDS</code> argument that is purposed for that.</p>
-<h3><a class="anchor" id="autotoc_md310"></a>
+<h3><a class="anchor" id="autotoc_md276"></a>
 DEPENDS</h3>
 <p>the DEPENDS argument enables you to switch a dependant library with a mock version. One that is generated with target_add_mock for instance. the <code>DEPENDS</code> argument behaves similar to cmake's <code>target_link_libraries</code>. Given the following situation:</p>
 <div class="fragment"><div class="line">add_library(uic_my_component SHARED mycomponent.c)</div>
@@ -249,7 +249,7 @@ DEPENDS</h3>
 <div class="line">DEPENDS uic_my_dependant_mock</div>
 <div class="line">)</div>
 </div><!-- fragment --><p><b>Note</b> <code>DEPENDS</code> accepts a list of items space separated.</p>
-<h3><a class="anchor" id="autotoc_md311"></a>
+<h3><a class="anchor" id="autotoc_md277"></a>
 NAME</h3>
 <p>With the <code>NAME</code> argument we can give the test a custom name. This way we can build multiple tests of the same component. e.g.</p>
 <div class="fragment"><div class="line">target_add_unittest(uic_my_component </div>
@@ -261,7 +261,7 @@ NAME</h3>
 <div class="line">NAME uic_custom_test2</div>
 <div class="line">SOURCES source.c</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md312"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md278"></a>
 EXCLUDE</h2>
 <p>Mocking a header which is part of the same target will not build, as you will get duplicate symbol errors. There is a symbol present in the actual production code, and one in the mock. With <code>EXCLUDE</code> you can easily leave out actual production sources. thereby making your test compile:</p>
 <div class="fragment"><div class="line">add_library(uic_my_component a.c b.c c.c)</div>
@@ -270,14 +270,14 @@ EXCLUDE</h2>
 <div class="line">DEPENDS a_mock</div>
 <div class="line">EXCLUDE a.c)</div>
 </div><!-- fragment --><p><code>EXCLUDE</code> expects an string that it can match against source files. Typically you want to list the sources files you want to exclude. e.g. <code>a.c</code> or if its nested <code>src/a.c</code> for example. In theory you could exclude a selection of files by specifying, for example, 'network'. this will exclude all source files which contains 'network' from the build.</p>
-<h2><a class="anchor" id="autotoc_md313"></a>
+<h2><a class="anchor" id="autotoc_md279"></a>
 Stub</h2>
 <p>There are some exceptions where a simple mock not suffices. These components typically expose hooks of existing component. These components are post-fixed with _stub. they can be added in the DEPENDS argument. at the moment of writing we have 2:</p>
 <ul>
 <li>uic_contiki_stub, functions to forward time or dequeue the events on the queue.</li>
 <li>uic_mqtt_stub, hooks to show mqtt state.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md314"></a>
+<h2><a class="anchor" id="autotoc_md280"></a>
 Do's and dont's</h2>
 <ul>
 <li>The <code>NAME</code> argument is optional and doesn't have to be explicitly specified.</li>
@@ -285,13 +285,13 @@ Do's and dont's</h2>
 <li>Do not add the target under test in the <code>DEPENDS</code> section, its already implied because of the first argument. you can leave it out. e.g. dont do this: <code>target_add_unittest(mytarget DEPENDS mytarget)</code></li>
 <li>The <code>DEPENDS</code> section typically contains only dependencies to _mock targets.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md315"></a>
+<h2><a class="anchor" id="autotoc_md281"></a>
 CMake File Formatting</h2>
 <p>The ZPC repository includes config-files for formatting of CMake files using the Python module cmake-format. cmake-format can be install using the pip installation utility.</p>
 <div class="fragment"><div class="line">python -m pip install cmake_format</div>
 </div><!-- fragment --><p>To auto-format a CMake file run the command:</p>
 <div class="fragment"><div class="line">python -m cmake_format -i ./&lt;some dir&gt;/CMakeLists.txt</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md316"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md282"></a>
 Example</h2>
 <p>Define all test cases in a file, where each test case is a function with the prefix test_,</p>
 <div class="fragment"><div class="line">#include &lt;unity.h&gt;</div>
@@ -299,21 +299,21 @@ Example</h2>
 <div class="line">void foo_case1_test() {</div>
 <div class="line">  TEST_ASSERT_TRUE( foo_true() )</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md317"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md283"></a>
 References</h2>
 <ul>
 <li>Unity <a href="http://www.throwtheswitch.org/unity">http://www.throwtheswitch.org/unity</a></li>
 <li><a href="https://github.com/ThrowTheSwitch/CMock/blob/v2.5.2/docs/CMock_Summary.md">CMock_Summery</a></li>
 <li><a href="http://www.throwtheswitch.org/cmock">http://www.throwtheswitch.org/cmock</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md318"></a>
+<h2><a class="anchor" id="autotoc_md284"></a>
 Code Coverage</h2>
 <p>When making unit tests, code coverage is helpful for determining which parts of the code are tested. When building the Unify project, enable code coverage by adding setting the CMAKE flags: <code>CMAKE_GCOV=True</code> and <code>CMAKE_BUILD_TYPE=Debug</code> by running <code>cmake &lt;other CMAKE flags&gt; -DCMAKE_BUILD_TYPE=Debug -DCMAKE_GCOV=True ..</code> when building. After building and running the unit tests, the tool <code>gcovr</code> can be used to generate coverage reports.</p>
 <p>Within the build folder run:</p>
 <div class="fragment"><div class="line">mkdir -p gcovr &amp;&amp; gcovr -r . -e &#39;.+mock.+&#39; -e &#39;.+test.+&#39; -e &#39;.+unity.+&#39; --html-details --html --output gcovr/gcovr.html</div>
 </div><!-- fragment --><p>Then, open <code>&lt;build_folder&gt;/gcovr/gcovr.html</code> in your favorite browser.</p>
 <p>The code coverage report is also available on Jenkins by clicking the <code>Coverage Report</code> link.</p>
-<h3><a class="anchor" id="autotoc_md319"></a>
+<h3><a class="anchor" id="autotoc_md285"></a>
 Dependencies</h3>
 <p>Install the <code>gcovr</code> package using <code>apt-get</code> on Ubuntu/Debian or <code>brew</code> on Mac. <code>gcovr</code> is already installed in the Unify docker image. </p>
 </div></div><!-- contents -->
@@ -322,7 +322,7 @@ Dependencies</h3>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

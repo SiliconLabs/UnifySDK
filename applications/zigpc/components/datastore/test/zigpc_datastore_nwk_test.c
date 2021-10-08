@@ -42,13 +42,19 @@ int suiteTearDown(int num_failures)
  * @brief Setup before each test case
  *
  */
-void setUp(void) {}
+void setUp(void)
+{
+  attribute_store_mock_Init();
+}
 
 /**
  * @brief Teardown after each test case
  *
  */
-void tearDown(void) {}
+void tearDown(void)
+{
+  attribute_store_mock_Destroy();
+}
 
 void test_zigpc_datstore_create_network(void)
 {

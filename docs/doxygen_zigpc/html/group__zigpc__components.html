@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -98,11 +98,23 @@ Modules</h2></td></tr>
 <tr class="memitem:group__command__mapper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__mapper.html">ZigPC Command Mapper</a></td></tr>
 <tr class="memdesc:group__command__mapper"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ZigPC Command Mapper is responsible for translating MQTT DotDot commands to be sent to the Zigbee network. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zigpc__controller"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__controller.html">Centralized Logic for ZigPC Actions</a></td></tr>
+<tr class="memdesc:group__zigpc__controller"><td class="mdescLeft">&#160;</td><td class="mdescRight">This component serves as a mediator to invoke behaviors for Zigbee devices based on its network state (device announced, device interviewed, etc.) <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__zigpc__datastore"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore.html">ZigPC Data Storage API</a></td></tr>
 <tr class="memdesc:group__zigpc__datastore"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for the creating, updating, and deleting persistent information. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zigpc__datastore__hpp"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__datastore__hpp.html">ZigPC Datastore C++ API</a></td></tr>
+<tr class="memdesc:group__zigpc__datastore__hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">C++ API for the ZigPC datstore component. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zigpc__group__mgmt"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__group__mgmt.html">ZigPC Group Management Interface functions</a></td></tr>
+<tr class="memdesc:group__zigpc__group__mgmt"><td class="mdescLeft">&#160;</td><td class="mdescRight">This header contains the definitions and functionality associated with the Zigpc Group Management. This is the intended public interface for the entire component. All definitions and functions here are required for manipulating groups. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__zigpc__node__state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__node__state.html">ZigPC Node State Monitor</a></td></tr>
 <tr class="memdesc:group__zigpc__node__state"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ZigPC Node state monitor component is responsible for publishing the network state of individual nodes and their cluster states serviced by the protocol controller. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__ota__zigbee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ota__zigbee.html">ZigPC OTA functions</a></td></tr>
+<tr class="memdesc:group__ota__zigbee"><td class="mdescLeft">&#160;</td><td class="mdescRight">This header contains the definitions and functionality associated with over-the-air upgrades setup. This is the intended public interface for the entire component. All definitions and functions here are required for manipulating or configuring OTA Updates. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__zigpc__smartstart"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__smartstart.html">ZigPC SmartStart</a></td></tr>
 <tr class="memdesc:group__zigpc__smartstart"><td class="mdescLeft">&#160;</td><td class="mdescRight">ZigPC SmartStart Functionality. <br /></td></tr>
@@ -110,26 +122,23 @@ Modules</h2></td></tr>
 <tr class="memitem:group__zigpc__stdin"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__stdin.html">ZigPC STDIN Interface</a></td></tr>
 <tr class="memdesc:group__zigpc__stdin"><td class="mdescLeft">&#160;</td><td class="mdescRight">ZigPC STDIN inteface provides addition commands that can be used to interact with the ZigPC application. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zigpc__ucl"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__ucl.html">ZigPC UCL Utility Component</a></td></tr>
+<tr class="memdesc:group__zigpc__ucl"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is responsible for publishing and subscribing to Zigbee Protocol Controller specific topics that is not exposed by the UIC shared component. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__z3gateway"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html">Z3Gateway Component</a></td></tr>
 <tr class="memdesc:group__z3gateway"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper command and callback functions setup for Z3Gateway. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__zcl__profiles"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zcl__profiles.html">ZigPC ZCL Profiles</a></td></tr>
 <tr class="memdesc:group__zcl__profiles"><td class="mdescLeft">&#160;</td><td class="mdescRight">The role of the ZigPC ZCL profiles component is to contain the definitions and procedures to help translate ZCL Cluster information recevied from Unify and from the Zigbee network. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__zigpc__zcl"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl.html">Helpers for Zigbee Cluster Library (ZCL) data handling.</a></td></tr>
-<tr class="memdesc:group__zigpc__zcl"><td class="mdescLeft">&#160;</td><td class="mdescRight">This header contains definitions that represent the Zigbee data types used in the Geko SDK. <br /></td></tr>
+<tr class="memitem:group__zigpc__zcl__util"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html">ZigPC ZCL Utilities</a></td></tr>
+<tr class="memdesc:group__zigpc__zcl__util"><td class="mdescLeft">&#160;</td><td class="mdescRight">This component contains definitions and behaviours that is used to manipulate ZCL data types. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__zigpc__gateway"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway.html">ZigPC Gateway Component</a></td></tr>
 <tr class="memdesc:group__zigpc__gateway"><td class="mdescLeft">&#160;</td><td class="mdescRight">Public command API for zigpc_gateway. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__zigpc__net__mgmt"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html">ZigPC Network Management</a></td></tr>
 <tr class="memdesc:group__zigpc__net__mgmt"><td class="mdescLeft">&#160;</td><td class="mdescRight">The role of the ZigPC Network Management component is to handle all logic related to changing the Zigbee network, such as: network formation adding nodes to the network, discovering nodes, and removing nodes. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__zigpc__node__mgmt"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__node__mgmt.html">ZigPC Node Management component</a></td></tr>
-<tr class="memdesc:group__zigpc__node__mgmt"><td class="mdescLeft">&#160;</td><td class="mdescRight">API for node management. Basic operations involving nodes and node endpoints and functions for storing and accessing node information. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__zigpc__protctrl__process"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__protctrl__process.html">ZigPC ProtocolController Monitor</a></td></tr>
-<tr class="memdesc:group__zigpc__protctrl__process"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ZigPC Protocol Controller monitor is responsible for managing the following MQTT topics: <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__zigpc__common"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__common.html">ZigPC Common Utilities</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,13 +148,13 @@ Modules</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p><a class="el" href="group__zigpc__components.html">ZigPC Components</a></p>
-<p>The Zigpcc Protocol Controller is made of a number of components, each component is described here. </p>
+<p>The Zigbee Protocol Controller is made of a number of components, each component is described here. </p>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

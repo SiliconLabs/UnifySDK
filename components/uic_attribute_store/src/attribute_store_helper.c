@@ -222,6 +222,19 @@ sl_status_t attribute_store_set_child_reported(attribute_store_node_t parent,
   return attribute_store_set_reported(child_node, value, value_size);
 }
 
+sl_status_t attribute_store_set_child_desired(attribute_store_node_t parent,
+                                               attribute_store_type_t type,
+                                               const void *value,
+                                               uint8_t value_size)
+{
+  attribute_store_node_t child_node
+    = attribute_store_get_node_child_by_type(parent, type, 0);
+  if (child_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    child_node = attribute_store_add_node(type, parent);
+  }
+  return attribute_store_set_desired(child_node, value, value_size);
+}
+
 sl_status_t attribute_store_set_uint32_child_by_type(
   attribute_store_node_t parent,
   attribute_store_type_t type,

@@ -1,0 +1,9 @@
+SUBSYSTEM=="leds", GROUP="leds", MODE="0660"
+SUBSYSTEM=="leds*", PROGRAM="/bin/sh -c '\
+	chown -R root:leds /sys/class/leds && chmod -R 775 /sys/class/leds;\
+	chown -R root:leds /sys/devices/platform/leds && chmod -R 775 /sys/devices/platform/leds\
+'"
+SUBSYSTEM=="leds", ACTION=="change", PROGRAM="/bin/sh -c '\
+	chown -R root:leds /sys%p; \
+	chmod -R 775 /sys%p \
+'"

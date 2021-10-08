@@ -10,7 +10,7 @@ target_link_libraries(
   zcl_group_cluster_server
   PUBLIC zcl_cluster_servers
   PRIVATE uic_attribute_store zpc_attribute_store zpc_utils
-          dotdot_mqtt_topics_handler dotdot_attributes uic_mqtt)
+          dotdot_mqtt_topics_handler dotdot_attributes uic_mqtt ucl_node_state)
 target_interface_libraries(zcl_group_cluster_server zwave_controller)
 
 # ZCL OTA Cluster Server

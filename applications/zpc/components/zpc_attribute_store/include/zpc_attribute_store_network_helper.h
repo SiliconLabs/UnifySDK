@@ -114,7 +114,7 @@ attribute_store_node_t
  * returned Node representing the NodeID belongs to the same HomeiD
  * as the ZPC
  *
- * @param node_id The Z-Wave NodeID value to parse and search in the tree.
+ * @param zwave_node_id The Z-Wave NodeID value to parse and search in the tree.
  *
  * @returns attribute_store_node_t representing the NodeID for the Z-Wave
  *          NodeID in the attribute store.

@@ -24,13 +24,12 @@
 #include "zwave_controller_command_class_indices.h"
 #include "ZW_classcmd.h"
 #include "zwave_controller_utils.h"
-
+#include "zwave_tx_scheme_selector.h"
+#include "zwave_security_validation.h"
 
 #define LOG_TAG "zwave_transport_service_wrapper"
-#define PAYLOAD_SIZE_MAX             (200)
-#define MAX_CHANNEL_ZWAVE_FRAME_SIZE 40
 //Send data stuff
-static int transport_service_busy = 0;
+static bool transport_service_busy = false;
 static on_zwave_tx_send_data_complete_t
   intercepted_on_zwave_tx_send_data_complete
   = 0;
@@ -38,13 +37,17 @@ static on_lower_layer_send_data_complete_t
   intercepted_on_lower_layer_send_data_complete
   = 0;
 
-void upper_layer_command_handler(ts_node_id_t source,
-                                 ts_node_id_t dest,
-                                 const uint8_t *frame,
-                                 uint16_t frame_len)
+static zwave_tx_session_id_t zwave_tx_parent_session_id = NULL;
+static bool zwave_tx_valid_parent_session_id            = false;
+static uint8_t zwave_tx_number_of_responses             = 0;
+
+static void upper_layer_command_handler(ts_node_id_t source,
+                                        ts_node_id_t dest,
+                                        const uint8_t *frame,
+                                        uint16_t frame_len)
 {
-  zwave_controller_connection_info_t conn;
-  zwave_rx_receive_options_t rx_options;
+  zwave_controller_connection_info_t conn = {};
+  zwave_rx_receive_options_t rx_options   = {};
 
   conn.local.node_id  = dest;
   conn.remote.node_id = source;
@@ -56,7 +59,6 @@ static void on_zwave_tx_send_data_complete(uint8_t status,
                                            const zwapi_tx_report_t *tx_info,
                                            void *user)
 {
-
   if (!intercepted_on_lower_layer_send_data_complete) {
     sl_log_debug(LOG_TAG,
                  "No callback resistered by transport service for "
@@ -70,28 +72,54 @@ static void on_zwave_tx_send_data_complete(uint8_t status,
   }
 }
 
-uint8_t send_data(ts_node_id_t source,
-                  ts_node_id_t dest,
-                  const uint8_t *payload,
-                  const uint16_t payload_len,
-                  const uint8_t no_of_expected_responses,
-                  const on_lower_layer_send_data_complete_t cb)
+static uint8_t send_data(ts_node_id_t source,
+                         ts_node_id_t dest,
+                         const uint8_t *payload,
+                         const uint16_t payload_len,
+                         uint8_t no_of_expected_responses,
+                         const on_lower_layer_send_data_complete_t cb)
 {
   zwave_controller_connection_info_t conn = {};
-  zwave_tx_options_t options              = {};
+  zwave_tx_options_t options              = {0};
   /* Transport service is asking to send a frame. Save the callback sent
-    * by Transport service here in wrapper at 
+    * by Transport service here in wrapper at
     * intercepted_on_lower_layer_send_data_complete
     * and send new function on_zwave_tx_send_data_complete() as callback to
     * zwave_tx_send_data(). When on_zwave_tx_send_data_complete() called by
-    * zwave_tx_send_data() wrapper will call 
+    * zwave_tx_send_data() wrapper will call
     * intercepted_on_lower_layer_send_data_complete()
     */
   intercepted_on_lower_layer_send_data_complete = cb;
   conn.local.node_id                            = source;
   conn.remote.node_id                           = dest;
-  conn.encapsulation          = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
-  options.number_of_responses = no_of_expected_responses;
+  conn.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+  // Only if its last fragment we tell tx that number of responses to the frame
+  // is 1 (no_of_expected_responses) plus what ever the parent frame had
+  if (no_of_expected_responses
+      && (payload[1] == COMMAND_SUBSEQUENT_SEGMENT_V2)) {
+    no_of_expected_responses += zwave_tx_number_of_responses;
+  }
+  options.number_of_responses     = no_of_expected_responses;
+  options.valid_parent_session_id = zwave_tx_valid_parent_session_id;
+  options.parent_session_id       = zwave_tx_parent_session_id;
+
+  // FIXME: Here the concept of parent session id is quite dangerous
+  // in this context, the thing is that tranport service can
+  // start receiving instead of sending due to the tie breaking rules.
+  if (transport_service_busy) {
+    options.valid_parent_session_id = true;
+    options.parent_session_id       = zwave_tx_parent_session_id;
+  } else {
+    // Frames sent by Transport service as part of the protocol should have more
+    // priority than responses to get frames which transport service assembled.
+    // For e.g.
+    // frames like Transport service segment complete need higher priority than
+    // response to the (fragmented) get command sent by Transport Service from
+    // other side.
+    options.qos_priority = ZWAVE_TX_QOS_RECOMMENDED_GET_ANSWER_PRIORITY
+                           + (ZWAVE_TX_RECOMMENDED_QOS_GAP * 2);
+  }
+
   if (zwave_tx_send_data(&conn,
                          payload_len,
                          payload,
@@ -106,20 +134,20 @@ uint8_t send_data(ts_node_id_t source,
   }
 }
 
-void on_transport_service_send_data_complete(uint8_t status, void *user)
+static void on_transport_service_send_data_complete(uint8_t status, void *user)
 {
-
-  transport_service_busy = 0;
+  transport_service_busy = false;
   if (!intercepted_on_zwave_tx_send_data_complete) {
-    sl_log_debug(LOG_TAG,
-                 "No callback resistered by transport service for "
-                 "this transmission\n");
     return;
   }
   if (status == 0) {
-    intercepted_on_zwave_tx_send_data_complete(TRANSMIT_COMPLETE_OK, 0, 0);
+    intercepted_on_zwave_tx_send_data_complete(TRANSMIT_COMPLETE_OK,
+                                               0,
+                                               zwave_tx_parent_session_id);
   } else {
-    intercepted_on_zwave_tx_send_data_complete(TRANSMIT_COMPLETE_FAIL, 0, 0);
+    intercepted_on_zwave_tx_send_data_complete(TRANSMIT_COMPLETE_FAIL,
+                                               0,
+                                               zwave_tx_parent_session_id);
   }
 }
 
@@ -132,25 +160,40 @@ sl_status_t zwave_transport_service_send_data(
   void *user,
   zwave_tx_session_id_t parent_session_id)
 {
-
-  if (zwave_node_get_command_class_version(TRANSPORT_SERVICE_VERSION_V2,
-                                           conn_info->remote.node_id,
-                                           0)
-      != 2) {
+  if (conn_info->remote.is_multicast == true) {
     return SL_STATUS_NOT_SUPPORTED;
   }
 
-  transport_service_send_data_return_code_t ret;  
-  if (transport_service_busy) {
-    sl_log_error(LOG_TAG, "Transport service is busy");
-    return SL_STATUS_BUSY;
-  } else {
-    transport_service_busy = 1;
+  if (data_length
+      <= zwave_tx_scheme_get_max_payload(conn_info->remote.node_id)) {
+    return SL_STATUS_NOT_SUPPORTED;
   }
 
-  /*FIXME: Logic to determine the max frame size has to be implemented.
-   * For e.g. if its channel configuration 3 we have room for 157 bytes
-   */
+  // Use Transport Service only if at least one is true:
+  // 1. The node supports S2
+  // 2. The node supports at least v2 of Transport Service.
+  if (!zwave_security_validation_is_node_s2_capable(conn_info->remote.node_id)
+      && (zwave_node_get_command_class_version(
+            COMMAND_CLASS_TRANSPORT_SERVICE_V2,
+            conn_info->remote.node_id,
+            0)
+          < TRANSPORT_SERVICE_VERSION_V2)) {
+    sl_log_info(LOG_TAG,
+                "NodeID %d does not support S2 or Transport Service >= v2. "
+                "Frame (id=%p) will not be segmented.\n",
+                conn_info->remote.node_id,
+                parent_session_id);
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
+  transport_service_send_data_return_code_t ret;
+  if (transport_service_busy) {
+    sl_log_warning(
+      LOG_TAG,
+      "Transport service is busy. Cannot service frame (parent_id=%p)",
+      parent_session_id);
+    return SL_STATUS_BUSY;
+  }
 
   /* This is a request for Transport service to send payload
    * Intercept the callback (intercepted_on_zwave_tx_send_data_complete)
@@ -160,14 +203,20 @@ sl_status_t zwave_transport_service_send_data(
    * intercepted_on_zwave_tx_send_data_complete()
    */
   intercepted_on_zwave_tx_send_data_complete = on_zwave_tx_send_data_complete;
-  ret = transport_service_send_data(conn_info->local.node_id,
-                                  conn_info->remote.node_id,
-                                  cmd_data,
-                                  data_length,
-                                  on_transport_service_send_data_complete);
+  zwave_tx_parent_session_id                 = parent_session_id;
+  zwave_tx_valid_parent_session_id           = true;
+  zwave_tx_number_of_responses               = tx_options->number_of_responses;
 
-  transport_service_busy = 0;
+  ret = transport_service_send_data(
+    conn_info->local.node_id,
+    conn_info->remote.node_id,
+    cmd_data,
+    data_length,
+    zwave_tx_scheme_get_max_payload(conn_info->remote.node_id),
+    on_transport_service_send_data_complete);
+
   if (ret == TRANSPORT_SERVICE_SEND_SUCCESS) {
+    transport_service_busy = true;
     return SL_STATUS_OK;
   } else if (ret == TRANSPORT_SERVICE_WILL_OVERFLOW) {
     return SL_STATUS_WOULD_OVERFLOW;
@@ -186,8 +235,11 @@ sl_status_t zwave_transport_service_on_frame_received(
   receive_type rx_type = 0;
 
   if (frame_data[COMMAND_CLASS_INDEX] != COMMAND_CLASS_TRANSPORT_SERVICE_V2) {
-     sl_log_error(LOG_TAG, "Frame is not COMMAND_CLASS_TRANSPORT_SERVICE_V2\n");
-     return SL_STATUS_NOT_SUPPORTED;
+    sl_log_error(
+      LOG_TAG,
+      "Received frame dispatched to Transport Service does not start with the "
+      "Transport Service Command Class. Ignoring.\n");
+    return SL_STATUS_NOT_SUPPORTED;
   }
 
   uint8_t cmd_type = frame_data[COMMAND_INDEX] & 0xf8;
@@ -196,8 +248,9 @@ sl_status_t zwave_transport_service_on_frame_received(
       && (cmd_type != COMMAND_SEGMENT_REQUEST_V2)
       && (cmd_type != COMMAND_SEGMENT_WAIT_V2)
       && (cmd_type != COMMAND_SUBSEQUENT_SEGMENT_V2)) {
-    sl_log_error(LOG_TAG, "Command not found in"
-                          "COMMAND_CLASS_TRANSPORT_SERVICE_V2\n");
+    sl_log_info(LOG_TAG,
+                "Received an unknown command for Transport Service Command "
+                "Class. Ignoring");
     return SL_STATUS_NOT_FOUND;
   }
 
@@ -212,18 +265,12 @@ sl_status_t zwave_transport_service_on_frame_received(
       rx_type = MULTICAST;
       break;
     default:
-      sl_log_error(LOG_TAG,
-                   "Unknown rx_ptions: %d\n",
-                   rx_options->status_flags);
+      sl_log_warning(LOG_TAG,
+                     "Unknown rx_options: %d. "
+                     "Assuming frame was received using Singlecast.",
+                     rx_options->status_flags);
   }
 
-  if (frame_length > PAYLOAD_SIZE_MAX) {
-    return SL_STATUS_WOULD_OVERFLOW;
-  }
-
-  if (frame_length < MAX_CHANNEL_ZWAVE_FRAME_SIZE) {
-    return SL_STATUS_NOT_SUPPORTED;
-  }
   if (transport_service_on_frame_received(connection_info->remote.node_id,
                                           connection_info->local.node_id,
                                           rx_type,
@@ -238,19 +285,15 @@ sl_status_t zwave_transport_service_on_frame_received(
 
 sl_status_t zwave_transport_service_transport_init()
 {
-  transport_service_init(1,
-                         MAX_CHANNEL_ZWAVE_FRAME_SIZE,
-                         upper_layer_command_handler,
-                         send_data);
+  transport_service_init(1, upper_layer_command_handler, send_data);
   static zwave_controller_transport_t transport = {
-    .priority      = 1,  // see zwave_controller_transport->priority
-    .command_class = COMMAND_CLASS_TRANSPORT_SERVICE_V2,
-    .version       = 2,
-    //TODO: This task is only to enable RX part
-    //    .send_data         = zwave_transport_service_send_data,
-    .send_data = 0,
+    .priority          = 1,  // see zwave_controller_transport->priority
+    .command_class     = COMMAND_CLASS_TRANSPORT_SERVICE_V2,
+    .version           = 2,
+    .send_data         = zwave_transport_service_send_data,
     .on_frame_received = zwave_transport_service_on_frame_received,
   };
 
+  transport_service_busy = false;
   return zwave_controller_transport_register(&transport);
 }

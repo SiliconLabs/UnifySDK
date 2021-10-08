@@ -133,7 +133,7 @@ struct mqtt_client {
 
   // Message-queueing and routing: Containers and arbitrators. The arbitrators are
   // what allows for an asynchronous implementation of the client.
-  std::queue<message_queue_element_t> publishing_queue;
+  std::deque<message_queue_element_t> publishing_queue;
   std::queue<std::string> subscription_queue;
   std::queue<std::string> unsubscription_queue;
   std::map<std::string, std::vector<message_callback_t>> subscription_callbacks;

@@ -32,8 +32,8 @@
 #define UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_DEFAULT_TIMEOUT 3000000
 /**
  * @brief All possible values for Node Request Node Neighbor Discovery Statuses
- *        \ref zwapi_request_neighbor_update() callback status values       
- *         i.e., UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED = 0x21 
+ *        \ref zwapi_request_neighbor_update() callback status values
+ *         i.e., UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED = 0x21
  */
 typedef enum {
   UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED = 33,
@@ -67,27 +67,27 @@ static void ucl_nm_request_node_neighbor_update_callback(uint8_t status)
   switch (status) {
     case UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED:
       sl_log_info(LOG_TAG,
-                  "Node(%i) Neighbor Discovery is started.",
+                  "NodeID %i Neighbor Discovery has started.",
                   requested_node_neighbor_update_list.front());
       break;
     case UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_FAILED:
       sl_log_info(LOG_TAG,
-                  "Node(%i) Neighbor Discovery is failed.",
+                  "NodeID %i Neighbor Discovery has failed.",
                   requested_node_neighbor_update_list.front());
       break;
     case UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_COMPLETED:
       sl_log_info(LOG_TAG,
-                  "Node(%i) Neighbor Discovery is completed",
+                  "NodeID %i Neighbor Discovery is completed",
                   requested_node_neighbor_update_list.front());
       break;
     case UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_NOT_SUPPORTED:
       sl_log_info(LOG_TAG,
-                  "Node(%i) Neighbor Discovery is not supported.",
+                  "NodeID %i Neighbor Discovery is not supported.",
                   requested_node_neighbor_update_list.front());
       break;
     case UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_TIMEOUT:
       sl_log_info(LOG_TAG,
-                  "Node(%i ) Neighbor Discovery request timeout.",
+                  "NodeID %i Neighbor Discovery request timed out.",
                   requested_node_neighbor_update_list.front());
       break;
   }
@@ -130,7 +130,7 @@ static void on_timeout_requested_node_neighbor_update(void *data)
 void ucl_nm_trigger_node_neighbor_update(zwave_node_id_t node_id)
 {
   zwave_protocol_t node_protocol = get_protocol(node_id);
-  if (node_protocol == PROTOCOL_ZWAVE_LONG_RANGE){
+  if (node_protocol == PROTOCOL_ZWAVE_LONG_RANGE) {
     //If the Node is operating on the Z-Wave Long Range PHY/MAC/NWK,
     // we do not perform neighbor discovery.
     return;

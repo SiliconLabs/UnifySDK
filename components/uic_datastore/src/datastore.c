@@ -90,7 +90,8 @@ static sl_status_t datastore_fetch_internal(const datastore_key_t key,
   sqlite3_stmt *stmt = NULL;
   const char *sql;
   if (db == NULL) {
-    sl_log_error(LOG_TAG, "datastore init hasn't been called\n");
+    sl_log_error(LOG_TAG,
+                 "Datastore is not initialized. Fetching data failed.\n");
     return SL_STATUS_FAIL;
   }
   if (value_type == DATASTORE_VALUE_TYPE_INT) {
@@ -148,7 +149,8 @@ static sl_status_t datastore_store_internal(const datastore_key_t key,
   sqlite3_stmt *stmt = NULL;
   const char *sql;
   if (db == NULL) {
-    sl_log_error(LOG_TAG, "datastore init hasn't been called\n");
+    sl_log_error(LOG_TAG,
+                 "Datastore is not initialized. Writing data failed.\n");
     return SL_STATUS_FAIL;
   }
   if (value_type == DATASTORE_VALUE_TYPE_INT) {
@@ -203,7 +205,9 @@ static bool datastore_contains_internal(const char *table,
   bool result        = false;
   sqlite3_stmt *stmt = NULL;
   if (db == NULL) {
-    sl_log_error(LOG_TAG, "datastore init hasn't been called\n");
+    sl_log_error(LOG_TAG,
+                 "Datastore is not initialized. "
+                 "Reading data existence failed.\n");
     return false;
   }
   snprintf(sql, sizeof(sql), "SELECT value FROM %s WHERE key = ?", table);

@@ -1,6 +1,6 @@
 [Unit]
 Description=UIC Z-Wave protocol controller
-Requires=mosquitto.service
+After=network.target mosquitto.service
 
 [Service]
 ExecStart=/usr/bin/zpc

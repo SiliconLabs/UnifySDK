@@ -50,7 +50,7 @@ static const unsigned int ZIGPC_ATTRMGMT_READ_RECORDS_LIMIT_PER_MESSAGE = 25;
  * to the device.
  *
  */
-static const unsigned int ZIGPC_ATTRMGMT_REPORT_RECORDS_LIMIT_PER_MESSAGE = 6;
+static const unsigned int ZIGPC_ATTRMGMT_REPORT_RECORDS_LIMIT_PER_MESSAGE = 5;
 
 /**
  * @brief Default Configure Reporting Record Minimum Interval (Seconds).
@@ -69,6 +69,16 @@ static const uint16_t ZIGPC_ATTRMGMT_REPORT_INTERVAL_MIN_DEFAULT = 10;
  *
  */
 static const uint16_t ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT = 60;
+
+/**
+ * @brief Default Configure Reporting Record Reportable Change to allow
+ * any change to be reported.
+ *
+ * NOTE: This value is chosen arbitrarily and will likely be configurable
+ * in the future.
+ *
+ */
+static const uint32_t ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT = 0x0000;
 
 /**
  * attr_mgmt_evt

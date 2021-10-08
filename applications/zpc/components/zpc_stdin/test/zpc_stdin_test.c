@@ -327,16 +327,15 @@ void test_attribute_store_set_desired()
   state = uic_stdin_handle_command("attribute_store_set_desired 34,hello");
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
 
-  attribute_store_set_node_attribute_value_ExpectAndReturn(
-    2394,
-    DESIRED_ATTRIBUTE,
-    NULL,
-    sizeof(uint8_t),
-    SL_STATUS_IN_PROGRESS);
+  attribute_store_set_node_attribute_value_ExpectAndReturn(2394,
+                                                           DESIRED_ATTRIBUTE,
+                                                           NULL,
+                                                           sizeof(int32_t),
+                                                           SL_STATUS_OK);
   attribute_store_set_node_attribute_value_IgnoreArg_value();
 
   state = uic_stdin_handle_command("attribute_store_set_desired 2394,124");
-  TEST_ASSERT_EQUAL(SL_STATUS_IN_PROGRESS, state);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }
 
 void test_attribute_store_set_all_desired_types()
@@ -378,16 +377,15 @@ void test_attribute_store_set_reported()
   state = uic_stdin_handle_command("attribute_store_set_reported 34,hello");
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
 
-  attribute_store_set_node_attribute_value_ExpectAndReturn(
-    2394,
-    REPORTED_ATTRIBUTE,
-    NULL,
-    sizeof(uint8_t),
-    SL_STATUS_WOULD_OVERFLOW);
+  attribute_store_set_node_attribute_value_ExpectAndReturn(2394,
+                                                           REPORTED_ATTRIBUTE,
+                                                           NULL,
+                                                           sizeof(int32_t),
+                                                           SL_STATUS_OK);
   attribute_store_set_node_attribute_value_IgnoreArg_value();
 
   state = uic_stdin_handle_command("attribute_store_set_reported 2394,124");
-  TEST_ASSERT_EQUAL(SL_STATUS_WOULD_OVERFLOW, state);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }
 
 void test_zwave_wake_up()

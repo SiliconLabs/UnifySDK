@@ -21,13 +21,13 @@
  * It supports reading configuration from a YAML config file,
  * as well as from command line (arguments).
  * Command line arguments overrides the configurations from the config file.
- * 
+ *
  * Config variables are registed to the config system though the config_add_xxx
- * functions. When all variables have been registed the parsing of command line 
+ * functions. When all variables have been registed the parsing of command line
  * arguments and the configuration file is done using the function \ref config_parse.
  * After this the value of each configuration variable may be retrived using the
  * config_get_as_xxxx functions.
- * 
+ *
  * @{
  */
 
@@ -39,6 +39,7 @@
 extern "C" {
 #endif
 
+// Configuration keys
 #define CONFIG_KEY_DATASTORE_FILE "datastore.file"
 #define CONFIG_KEY_MQTT_HOST      "mqtt.host"
 #define CONFIG_KEY_MQTT_PORT      "mqtt.port"
@@ -47,6 +48,10 @@ extern "C" {
 #define CONFIG_KEY_MQTT_KEYFILE   "mqtt.keyfile"
 #define CONFIG_KEY_LOG_LEVEL      "log.level"
 #define CONFIG_KEY_LOG_TAG_LEVEL  "log.tag_level"
+
+// Default Settings
+#define DEFAULT_CONFIG_PATH    "/etc/uic/uic.cfg"
+#define DEFAULT_DATASTORE_FILE "/var/lib/uic/database.db"
 
 typedef enum {
   CONFIG_STATUS_OK             = 0x0,

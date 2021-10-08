@@ -26,7 +26,7 @@
 
 void mqtt_client_fsm_connecting::enter(mqtt_client *client_instance)
 {
-  sl_log_debug(LOG_TAG, "FSM-Connecting: Entering state.\n");
+  sl_log_debug(LOG_TAG, "Entering state: FSM-Connecting.\n");
   if (client_instance->connect() != SL_STATUS_OK) {
     // Connection wasn't successful so we'll need to try again.
     // We start by re-entering the DISCONNECTED state
@@ -55,7 +55,7 @@ void mqtt_client_fsm_connecting::enter(mqtt_client *client_instance)
 
 void mqtt_client_fsm_connecting::exit(mqtt_client *client_instance)
 {
-  sl_log_debug(LOG_TAG, "FSM-Connecting: Leaving state.\n");
+  sl_log_debug(LOG_TAG, "Leaving state: FSM-Connecting.\n");
 }
 
 void mqtt_client_fsm_connecting::event(int incoming_event,
@@ -76,10 +76,12 @@ void mqtt_client_fsm_connecting::event(int incoming_event,
       break;
     case MQTT_TRANSITION_CONNECTED:
       client_instance->transition(mqtt_client_fsm_connected::get_instance());
+      sl_log_info(LOG_TAG, "We are connected to the MQTT broker.");
       break;
     default:
-      sl_log_critical(LOG_TAG, "FSM-Connecting: Unhandled event: 0x%x\n",
-                      incoming_event);
+      sl_log_warning(LOG_TAG,
+                     "FSM-Connecting: Unhandled event: 0x%x\n",
+                     incoming_event);
       break;
   }
 }

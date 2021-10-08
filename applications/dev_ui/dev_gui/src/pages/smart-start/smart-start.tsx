@@ -72,7 +72,21 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
     }
     delete (item.IsNew);
     delete (item.IsEdit);
-    this.props.SocketServer.send(JSON.stringify({ type: "run-smart-start-command", data: { Cmd: "Update", Payload: item } }));
+    let payload = {
+      DSK: item.DSK,
+      Unid: item.Unid,
+      ProtocolControllerUnid: item.ProtocolControllerUnid,
+      Include: item.Include
+    };
+    this.props.SocketServer.send(JSON.stringify({ type: "run-smart-start-command", data: { Cmd: "Update", Payload: payload } }));
+  }
+
+  savePreferred(item: any) {
+    let payload = {
+      DSK: item.DSK,
+      PreferredProtocols: item.PreferredProtocols
+    };
+    this.props.SocketServer.send(JSON.stringify({ type: "run-smart-start-command", data: { Cmd: "Update", Payload: payload } }));
   }
 
   isDSKValid(dsk: string) {
@@ -127,7 +141,7 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
   render() {
     return (
       <>
-        <h3>The Smart Start List</h3>
+        <h3>The SmartStart List</h3>
         <Row hidden={!this.props.IsConnected} >
           <Col xs={12}>
             <Button variant="outline-primary" className="float-left" onClick={this.add} >Add</Button>
@@ -164,14 +178,14 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
                         {item.IsEdit
                           ? <TextField value={item.DSK} className="flex-input" size="small" type="text" />
                           : <TextField value={item.DSK} onChange={this.updateStateByEvent.bind(this, index, 'DSK')} className="flex-input" label="DSK" size="small" type="text" variant="outlined"
-                            // InputProps={{
-                            //   endAdornment: <InputAdornment position="end"> <Tooltip title="Scan QR-code">
-                            //     <span className="icon">
-                            //       <RiIcons.RiQrScan2Line onClick={() => this.changeQrCodeDlg.current?.updateState(true, index)} />
-                            //     </span>
-                            //   </Tooltip> </InputAdornment>
-                            // }}
-                             />
+                            InputProps={window.location.protocol === "https:" ? {
+                              endAdornment: <InputAdornment position="end"> <Tooltip title="Scan QR-code">
+                                <span className="icon">
+                                  <RiIcons.RiQrScan2Line onClick={() => this.changeQrCodeDlg.current?.updateState(true, index)} />
+                                </span>
+                              </Tooltip> </InputAdornment>
+                            } : {}}
+                          />
                         }
                       </td>
                       <td className="text-center">
@@ -209,6 +223,11 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
                       <span>
                         {item.Include ? <FiIcons.FiCheck color="#28a745" /> : <FiIcons.FiXCircle color="#6c757d" />}
                       </span>
+                      <Tooltip title="Manual Intervention Required" hidden={!item || !item.ManualInterventionRequired}>
+                        <span className="icon" >
+                          <FiIcons.FiAlertTriangle color="orange" />
+                        </span>
+                      </Tooltip>
                     </td>
                     <td>{item.ProtocolControllerUnid}</td>
                     <td>{item.Unid}</td>
@@ -236,7 +255,7 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
           </Table>
         }
 
-        <PreferredProtocolsDlg ref={this.changePreferredDlg} SaveFunc={this.save.bind(this)} />
+        <PreferredProtocolsDlg ref={this.changePreferredDlg} SaveFunc={this.savePreferred.bind(this)} />
         <ConfirmDlg ref={this.changeConfirmDlg} ConfirmAction={this.confirmRemove} />
         <QrCodeDlg ref={this.changeQrCodeDlg} UpdateDSK={this.updateState.bind(this)} />
       </>

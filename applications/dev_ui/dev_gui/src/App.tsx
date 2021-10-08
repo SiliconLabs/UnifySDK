@@ -14,7 +14,6 @@ import { ClusterTypes } from './cluster-types/cluster-types';
 import { ClusterViewOverrides } from './pages/base-clusters/cluster-view-overrides';
 import { NavbarItems } from './components/navbar/navbar-items';
 import Groups from './pages/groups/groups';
-import { Group } from './pages/groups/groups-types';
 import OTA from './pages/ota/ota';
 import { Image } from "./pages/ota/ota-types";
 import * as IoIcons from 'react-icons/io';
@@ -31,7 +30,7 @@ class App extends Component<{}, AppState> {
       IsConnected: false,
       IsSideBarCollapsed: true,
       NodeList: [],
-      GroupList: new Map<number, Group>(),
+      GroupList: [],
       SmartStartList: [],
       OTAImageList: ([] as Image[])
     }
@@ -56,6 +55,7 @@ class App extends Component<{}, AppState> {
     this.handleNodesChange([]);
     this.handleSmartStartChange([]);
     this.handleOTAChange([]);
+    this.handleGroupsChange([]);
   }
 
   handleIsConnectedChange(isConnected: boolean) {
@@ -80,7 +80,7 @@ class App extends Component<{}, AppState> {
     if (this.changeNodes.current)
       this.changeNodes.current.search(list);
     if (this.changeGroups.current)
-      this.changeGroups.current.updateState(list);
+      this.changeGroups.current.updateState(this.state.GroupList, list);
     if (this.changeOTA.current)
       this.changeOTA.current.updateNodeList(list);
     if (this.changeClusters.current)
@@ -91,6 +91,12 @@ class App extends Component<{}, AppState> {
     this.setState({ SmartStartList: list });
     if (this.changeSmartStart.current)
       this.changeSmartStart.current.search([...list]);
+  }
+
+  handleGroupsChange(list: any) {
+    this.setState({ GroupList: list });
+    if (this.changeGroups.current)
+      this.changeGroups.current.updateState(list, this.state.NodeList);
   }
 
   handleOTAChange(list: any) {
@@ -106,6 +112,7 @@ class App extends Component<{}, AppState> {
       ClusterType: (ClusterTypes as any)[clusterType],
       ClusterTypeAttrs: ClusterTypeAttrs[clusterType],
       NodeList: this.state.NodeList,
+      GroupList: this.state.GroupList,
       ClusterViewOverrides: (ClusterViewOverrides as any)[clusterType]
     }
   }
@@ -156,7 +163,7 @@ class App extends Component<{}, AppState> {
               <div className="col-sm-12 no-padding-l">
                 <Switch>
                   <Route path='/nodes' exact render={() => <Nodes ref={this.changeNodes} {...baseProps} NodeList={this.state.NodeList} />} />
-                  <Route path='/groups' exact render={() => <Groups ref={this.changeGroups}  {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Route path='/groups' exact render={() => <Groups ref={this.changeGroups}  {...baseProps} NodeList={this.state.NodeList} GroupList={this.state.GroupList} />} />
                   <Route path='/smartstart' exact render={() => <SmartStart ref={this.changeSmartStart} {...baseProps} SmartStartList={this.state.SmartStartList} />} />
                   <Route path='/ota' exact render={() => <OTA ref={this.changeOTA}  {...baseProps} NodeList={this.state.NodeList} />} />
                   {Object.keys(ClusterTypes).map((type, index) =>
@@ -184,7 +191,8 @@ class App extends Component<{}, AppState> {
   }
 
   initWebSocket() {
-    let connection = new WebSocket('ws://' + window.location.hostname + ':1337');
+    let protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    let connection = new WebSocket(`${protocol}://${window.location.hostname}:1337`);
     connection.onopen = function () {
       console.log('Connection established');
     };
@@ -238,6 +246,7 @@ class App extends Component<{}, AppState> {
         this.changeHeader.current?.changeConnect.current.updateAttr("Host", mes.data.Host);
         this.handleIsConnectedChange(mes.data.IsConnected);
         this.handleSmartStartChange(mes.data.SmartStart);
+        this.handleGroupsChange(mes.data.Groups);
         this.handleNodesChange(mes.data.Nodes);
         this.handleOTAChange(mes.data.OTA);
         break;
@@ -246,6 +255,9 @@ class App extends Component<{}, AppState> {
         break;
       case "nodes-list":
         this.handleNodesChange(mes.data);
+        break;
+      case "groups":
+        this.handleGroupsChange(mes.data);
         break;
       case "ota":
         this.handleOTAChange(mes.data);

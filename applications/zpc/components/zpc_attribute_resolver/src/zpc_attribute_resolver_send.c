@@ -55,7 +55,7 @@ sl_status_t attribute_resolver_send(attribute_store_node_t node,
                                                                 &node_id,
                                                                 &endpoint_id)) {
     sl_log_warning(LOG_TAG,
-                   "Cant't find out NodeID / Endpoint ID for Attribute Store "
+                   "Cannot find out NodeID / Endpoint ID for Attribute Store "
                    "node %p. Ignoring",
                    node);
     return SL_STATUS_FAIL;

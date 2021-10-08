@@ -5,7 +5,7 @@ var group__datastore__attributes =
     [ "datastore_delete_all_attributes", "group__datastore__attributes.html#ga355f2492318d5bf403b6bcb4e2a33e76", null ],
     [ "datastore_delete_attribute", "group__datastore__attributes.html#ga6783658218a9adc789e40e773cac6553", null ],
     [ "datastore_delete_attribute_with_children", "group__datastore__attributes.html#gacd66062fc66d70490f31ef14dbe98cbb", null ],
-    [ "datastore_fetch_attribute", "group__datastore__attributes.html#ga8b1d8b22566e69dabbd01bef3dca48a0", null ],
-    [ "datastore_fetch_attribute_child", "group__datastore__attributes.html#ga251f148adf0f2208479d8e19749d2a6d", null ],
-    [ "datastore_store_attribute", "group__datastore__attributes.html#ga9d81af2177792ba8396bc6cd5b3ff307", null ]
+    [ "datastore_fetch_attribute", "group__datastore__attributes.html#ga96ec0c42931fec03f8bf56ff783b6895", null ],
+    [ "datastore_fetch_attribute_child", "group__datastore__attributes.html#gafb18f61d4490e6359649c4ce7492137e", null ],
+    [ "datastore_store_attribute", "group__datastore__attributes.html#ga5cc337fea58c92d52534b744d51ce896", null ]
 ];

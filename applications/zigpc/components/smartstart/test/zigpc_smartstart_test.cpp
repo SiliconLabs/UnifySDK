@@ -25,7 +25,6 @@ extern "C" {
 #include "zigpc_common_zigbee_mock.h"
 #include "zigpc_net_mgmt_mock.h"
 #include "zigpc_net_mgmt_notify_mock.h"
-#include "zigpc_node_mgmt_mock.h"
 #include "uic_mqtt_mock.h"
 
 zigbee_eui64_t pc_eui64 = {0x0, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8};
@@ -439,9 +438,6 @@ void test_smartstart_manager_should_update_entry_on_node_added(void)
   zigbee_eui64_to_str_IgnoreArg_str_buf();
   zigbee_eui64_to_str_ReturnArrayThruPtr_str_buf(entry_eui64_str,
                                                  strlen(entry_eui64_str) + 1);
-  zigpc_net_mgmt_interview_node_ExpectAndReturn(node_added.eui64, SL_STATUS_OK);
-  zigpc_nodemgmt_manage_node_eui64_ExpectAndReturn(node_added.eui64,
-                                                   SL_STATUS_OK);
 
   // ACT
   zigpc_smartstart_on_node_added(&node_added);

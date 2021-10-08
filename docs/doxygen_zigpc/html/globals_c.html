@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -93,7 +93,7 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 : <a class="el" href="af-main-host_8c.html#a260df5d9c4e52c48b603207909841659">af-main-host.c</a>
 </li>
 <li>calculate_utc_current_time_difference()
-: <a class="el" href="ota__time_8hpp.html#a1d7d7ad51ce0dad2c565bc10e4bfbdf6">ota_time.hpp</a>
+: <a class="el" href="ota__time_8h.html#a028b0c239f3105d892a138e06e94d7e4">ota_time.h</a>
 </li>
 <li>calculate_utc_time_from_rfc_3339()
 : <a class="el" href="ota__time_8hpp.html#a490338ccbe5ed5306d0b708c6a4813e5">ota_time.hpp</a>
@@ -176,9 +176,6 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>check_branch()
 : <a class="el" href="attribute__store__test__helpers_8hpp.html#a5f0285aae9e4b9411d94ad1535d5e2a2">attribute_store_test_helpers.hpp</a>
 </li>
-<li>check_if_meta_info_received()
-: <a class="el" href="ota__cache_8hpp.html#ad041c7bc3843fe2c7e6aa57425902fe6">ota_cache.hpp</a>
-</li>
 <li>check_interrupt()
 : <a class="el" href="uic__signal__handler_8c.html#a83ab65a8af179a5d9a44e6942fa2ac04">uic_signal_handler.c</a>
 </li>
@@ -196,9 +193,6 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 </li>
 <li>childRun()
 : <a class="el" href="linux-serial_8c.html#adc3e62632bad70aff83beeec7c99fb2e">linux-serial.c</a>
-</li>
-<li>clear_images_cache()
-: <a class="el" href="ota__cache_8hpp.html#ad4e232e303286dc9ae9f9afecc9d6cca">ota_cache.hpp</a>
 </li>
 <li>clearDeviceTableIndex()
 : <a class="el" href="device-table_8c.html#aed1f4309221fc661d7498cf6c3ad93c7">device-table.c</a>
@@ -329,6 +323,9 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>CONFIG_KEY_ZIGPC_SERIAL_PORT
 : <a class="el" href="zigpc__config_8c.html#a985c56dce5a3f1d48d9d05a80fba84f6">zigpc_config.c</a>
 </li>
+<li>CONFIG_KEY_ZIGPC_USE_TC_WELL_KNOWN_KEY
+: <a class="el" href="zigpc__config_8c.html#a11fd270470b1cf7d99cf3c244d5cdfa9">zigpc_config.c</a>
+</li>
 <li>config_parse()
 : <a class="el" href="group__config.html#gaa9ac6d930fee052df2878ed345a6beb2">config.h</a>
 </li>
@@ -358,8 +355,8 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 , <a class="el" href="group__attribute__management.html#ga1b27479b3760a513b0bfabc0ad1ca9cd">attribute_management.c</a>
 </li>
 <li>configure_attributes_node()
-: <a class="el" href="group__attribute__management.html#ga7c65f180b7ed7e0be015c9e72f945bdd">attribute_management.h</a>
-, <a class="el" href="group__attribute__management.html#ga7c65f180b7ed7e0be015c9e72f945bdd">attribute_management.c</a>
+: <a class="el" href="group__attribute__management.html#ga7c65f180b7ed7e0be015c9e72f945bdd">attribute_management.c</a>
+, <a class="el" href="group__attribute__management.html#ga7c65f180b7ed7e0be015c9e72f945bdd">attribute_management.h</a>
 </li>
 <li>connection_callback_t
 : <a class="el" href="mqtt__client_8hpp.html#a61c7385469ae06687e64450a07875e71">mqtt_client.hpp</a>
@@ -376,12 +373,12 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 , <a class="el" href="contiki__test__helper_8c.html#ac5683519dae42ba1818cb0459a875ba9">contiki_test_helper.c</a>
 </li>
 <li>contiki_test_helper_run_clock_increases_for_each_event()
-: <a class="el" href="contiki__test__helper_8h.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.h</a>
-, <a class="el" href="contiki__test__helper_8c.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.c</a>
+: <a class="el" href="contiki__test__helper_8c.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.c</a>
+, <a class="el" href="contiki__test__helper_8h.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.h</a>
 </li>
 <li>contiki_test_helper_run_once()
-: <a class="el" href="contiki__test__helper_8c.html#a84f3131d248842aa2fb5af6678ddd63c">contiki_test_helper.c</a>
-, <a class="el" href="contiki__test__helper_8h.html#a84f3131d248842aa2fb5af6678ddd63c">contiki_test_helper.h</a>
+: <a class="el" href="contiki__test__helper_8h.html#a84f3131d248842aa2fb5af6678ddd63c">contiki_test_helper.h</a>
+, <a class="el" href="contiki__test__helper_8c.html#a84f3131d248842aa2fb5af6678ddd63c">contiki_test_helper.c</a>
 </li>
 <li>CONTIKI_VERSION_STRING
 : <a class="el" href="contiki-version_8h.html#a63c4c28fe517f6d19ef5620c50f57802">contiki-version.h</a>
@@ -391,6 +388,12 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 </li>
 <li>CONTROL_WRITER
 : <a class="el" href="linux-serial_8c.html#a6c2ef5f4cd178e0f9be58923ae80fbe9">linux-serial.c</a>
+</li>
+<li>convert_last_error_to_label()
+: <a class="el" href="ota__mqtt_8hpp.html#a5e67b4c9c3ee5ebdefea142b57d7c483">ota_mqtt.hpp</a>
+</li>
+<li>convert_status_to_label()
+: <a class="el" href="ota__mqtt_8hpp.html#a7290d0fed82a2d82f51897eb33f6ec13">ota_mqtt.hpp</a>
 </li>
 <li>copy_attribute_list()
 : <a class="el" href="group__zigpc__common__zigbee.html#ga485cfe4a0be77a564014b859fd8a507a">zigpc_common_zigbee.h</a>
@@ -409,8 +412,8 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 , <a class="el" href="group__zigpc__common__zigbee.html#ga8ee76c2d86bdb89475a2e92601697fce">zigpc_common_zigbee.h</a>
 </li>
 <li>copy_endpoint_list()
-: <a class="el" href="group__zigpc__common__zigbee.html#gab4dd0b616ed444bd4eacbea38d407d43">zigpc_common_zigbee.h</a>
-, <a class="el" href="group__zigpc__common__zigbee.html#gab4dd0b616ed444bd4eacbea38d407d43">zigpc_common_zigbee.c</a>
+: <a class="el" href="group__zigpc__common__zigbee.html#gab4dd0b616ed444bd4eacbea38d407d43">zigpc_common_zigbee.c</a>
+, <a class="el" href="group__zigpc__common__zigbee.html#gab4dd0b616ed444bd4eacbea38d407d43">zigpc_common_zigbee.h</a>
 </li>
 <li>copy_node()
 : <a class="el" href="group__zigpc__common__zigbee.html#ga86bf319b842638942b82d0bbee42ef08">zigpc_common_zigbee.h</a>
@@ -481,7 +484,7 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:52 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

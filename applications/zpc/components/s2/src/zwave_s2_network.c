@@ -49,7 +49,9 @@ const char *s2_inclusion_event_name(zwave_event_codes_t ev)
 
 static void event_handler(zwave_event_t *event)
 {
-  sl_log_debug(LOG_TAG, "S2 inclusion event %s\n", s2_inclusion_event_name(event->event_type));
+  sl_log_debug(LOG_TAG,
+               "S2 inclusion event: %s\n",
+               s2_inclusion_event_name(event->event_type));
   switch (event->event_type) {
     case S2_NODE_INCLUSION_INITIATED_EVENT:
       if (callbacks.on_inclusion_started) {
@@ -95,9 +97,7 @@ static void event_handler(zwave_event_t *event)
           // in this case set kex_fail_type to UNKNOWN.
           kex_fail_type = ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN;
         }
-        callbacks.on_inclusion_complete(
-          0,
-          kex_fail_type);
+        callbacks.on_inclusion_complete(0, kex_fail_type);
       }
       zwave_s2_create_new_dynamic_ecdh_key();
       break;
@@ -118,7 +118,7 @@ void zwave_s2_network_init()
 {
   zwave_home_id_t home_id;
 
-  sl_log_info(LOG_TAG, "Initializing Security 2 engine\n");
+  sl_log_debug(LOG_TAG, "Initializing Security 2 engine\n");
 
   home_id    = zwave_network_management_get_home_id();
   my_node_id = zwave_network_management_get_node_id();
@@ -136,6 +136,9 @@ void zwave_s2_network_init()
 
   s2_inclusion_set_event_handler(&event_handler);
   zwave_s2_create_new_dynamic_ecdh_key();
+
+  // Print out our keys on the console
+  zwave_s2_log_security_keys(SL_LOG_INFO);
 }
 
 void zwave_s2_start_learn_mode(zwave_node_id_t node_id)

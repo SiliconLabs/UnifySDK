@@ -44,6 +44,12 @@ struct z3gatewayEndpointInfo {
  */
 struct z3gatewayCallbacks {
   /**
+   * @brief This callback is invoked when the Ember Application Framework has
+   * initialized the stack layer (including any NCP init routines).
+   */
+  void (*onEmberAfStackInitalized)(void);
+
+  /**
    * @brief This callback is invoked when the network has initialized on the
    * Gateway. If the network is down, the network-creator plugin is used to
    * form the Zigbee network and the complete callback of this plugin is used

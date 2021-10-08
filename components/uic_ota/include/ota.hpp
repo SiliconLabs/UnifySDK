@@ -115,7 +115,7 @@ deactivate IL
 PC->IL: unregister(uiid)
 PC->IL: clear_cache()
 @enduml
- * \defgroup ota_listener
+ * \defgroup ota_listener OTA Listener
  * @{
  */
 namespace uic_ota
@@ -230,7 +230,7 @@ sl_status_t init(const image_available_func_t &image_available_cb,
                  uint16_t cluster_revision = DEFAULT_CLUSTER_REVISION);
 
 /**
- * @brief Listen for images that match the unid + uiid pair/
+ * @brief Listen for images that match the UNID + UIID pair/
  * when changes to this key is detected, image_ready will be called.
  *
  * @param unid end-note id.
@@ -240,11 +240,22 @@ void subscribe_unid(const std::string &unid, const std::string &uiid);
 
 /**
  * @brief Stop watching specific images.
+ * 
+ * Will stop watching specific UIID image and will NOT unretain MQTT topics.
  *
  * @param unid end-note id.
  * @param uiid unique image id.
  */
 void unsubscribe_unid(const std::string &unid, const std::string &uiid);
+
+/**
+ * @brief Stop watching all images for unid and unretain MQTT messages.
+ * 
+ * Will unsubscribe on all image UIIDs and unretain all MQTT topics for the unid.
+ *
+ * @param unid end-note id.
+ */
+void unsubscribe_all_unids_uiid(const std::string &unid);
 
 /**
  * @brief After an image_available call is triggered.
@@ -405,7 +416,7 @@ void unretain_ota_status();
 /**
  * @brief Clean up MQTT status for a UNID and related endpoints.
  *
- * This function shoul be used when a device or endpoint
+ * This function should be used when a device or endpoint
  * disconnects for cleaning up OTA statuses.
  */
 void unretain_ota_status_by_unid(const dotdot_unid_t &unid);

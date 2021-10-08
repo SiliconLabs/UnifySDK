@@ -1,5 +1,6 @@
 var zwave__command__class__thermostat__setpoint_8c =
 [
+    [ "ATTRIBUTE", "zwave__command__class__thermostat__setpoint_8c.html#a3a48b9a3a4b2d94c644107976c45bc72", null ],
     [ "LOG_TAG", "zwave__command__class__thermostat__setpoint_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "zwave_command_class_thermostat_setpoint_capabilities_get", "zwave__command__class__thermostat__setpoint_8c.html#a72a0b012f7295a134a34635a23ea9639", null ],
     [ "zwave_command_class_thermostat_setpoint_control_handler", "zwave__command__class__thermostat__setpoint_8c.html#ac1e950ab326a39cfe526c94762386b5b", null ],

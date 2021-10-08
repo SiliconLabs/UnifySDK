@@ -32,24 +32,26 @@ PROCESS(smartstart_management_process, "SmartStart");
 
 typedef enum { SMARTSTART_UPDATE_LIST_CACHE } smartstart_events;
 
-static void publish_smartstart_list_update(const smartstart::Entry &entry)
+static void publish_smart_start_list_unid_update(const smartstart::Entry &entry)
 {
   std::stringstream ss;
   ss << "{\"DSK\":\"" << entry.dsk << "\",";
-  ss << "\"Include\":" << (entry.include == true ? "true" : "false") << ",";
-  ss << "\"ProtocolControllerUnid\":\"" << entry.protocol_controller_unid
-     << "\",";
-  ss << "\"Unid\":\"" << entry.device_unid << "\",";
-  ss << "\"PreferredProtocols\":[";
-  for (auto it = std::begin(entry.preferred_protocols);
-       it != std::end(entry.preferred_protocols);
-       it++) {
-    ss << "\"" << *it << "\"";
-    if ((it + 1) != std::end(entry.preferred_protocols)) {
-      ss << ",";
-    }
-  }
-  ss << "]}";
+  ss << "\"Unid\":\"" << entry.device_unid << "\"}";
+  std::string message = ss.str();
+  uic_mqtt_publish(SMARTSTART_LIST_UPDATE_TOPIC.c_str(),
+                   message.c_str(),
+                   message.length(),
+                   false);
+}
+
+static void publish_smart_start_manual_intervention_required_update(
+  const smartstart::Entry &entry)
+{
+  std::stringstream ss;
+  ss << "{\"DSK\":\"" << entry.dsk << "\",";
+  ss << "\"ManualInterventionRequired\":"
+     << (entry.manual_intervention_required == true ? "true" : "false");
+  ss << "}";
   std::string message = ss.str();
   uic_mqtt_publish(SMARTSTART_LIST_UPDATE_TOPIC.c_str(),
                    message.c_str(),
@@ -154,7 +156,7 @@ sl_status_t Management::notify_node_added(const std::string &dsk,
 {
   Query q(QueryType::exact, QueryKey::dsk, dsk);
   std::vector<Entry> query_result = this->get_cache_entries(q);
-  if (query_result.size() == 0) {
+  if (query_result.empty()) {
     sl_log_info(LOG_TAG,
                 "Newly added node DSK (%s) is not in the SmartStart list. "
                 "No update to the SmartStart list will be made.",
@@ -169,13 +171,15 @@ sl_status_t Management::notify_node_added(const std::string &dsk,
                    dsk.c_str());
     return SL_STATUS_FAIL;
   }
+
   Entry entry       = query_result[0];
   entry.device_unid = device_unid;
   sl_log_debug(LOG_TAG,
-               "Adding unid %s for %s in SmartStart list.",
+               "Adding UNID %s for %s in SmartStart list.",
                entry.device_unid.c_str(),
                entry.dsk.c_str());
-  publish_smartstart_list_update(entry);
+  publish_smart_start_list_unid_update(entry);
+
   return SL_STATUS_OK;
 }
 
@@ -183,11 +187,11 @@ sl_status_t Management::notify_node_removed(const std::string &device_unid)
 {
   Query q(QueryType::exact, QueryKey::device_unid, device_unid);
   std::vector<Entry> query_result = this->get_cache_entries(q);
-  if (query_result.size() == 0) {
-    sl_log_info(LOG_TAG,
-                "Removed node UNID (%s) is not in the SmartStart list. "
-                "No update to the SmartStart list will be made.",
-                device_unid.c_str());
+  if (query_result.empty()) {
+    sl_log_debug(LOG_TAG,
+                 "Removed node UNID (%s) is not in the SmartStart list. "
+                 "No update to the SmartStart list will be made.",
+                 device_unid.c_str());
     return SL_STATUS_FAIL;
   }
   if (query_result.size() > 1) {
@@ -198,13 +202,49 @@ sl_status_t Management::notify_node_removed(const std::string &device_unid)
       device_unid.c_str());
     return SL_STATUS_FAIL;
   }
+
   Entry entry = query_result[0];
   sl_log_debug(LOG_TAG,
                "Removing UNID %s for DSK %s from the SmartStart list.",
                entry.device_unid.c_str(),
                entry.dsk.c_str());
   entry.device_unid.clear();
-  publish_smartstart_list_update(entry);
+  publish_smart_start_list_unid_update(entry);
+
+  return SL_STATUS_OK;
+}
+
+sl_status_t Management::set_manual_intervention_required(
+  const std::string &dsk, bool manual_intervention_required)
+{
+  Query q(QueryType::exact, QueryKey::dsk, dsk);
+  std::vector<Entry> query_result = this->get_cache_entries(q);
+  if (query_result.empty()) {
+    sl_log_debug(LOG_TAG,
+                 "DSK (%s) is not in the SmartStart list. "
+                 "No update to the SmartStart list will be made.",
+                 dsk.c_str());
+    return SL_STATUS_NOT_FOUND;
+  }
+  if (query_result.size() > 1) {
+    sl_log_warning(LOG_TAG,
+                   "DSK (%s) matches >1 entries in the SmartStart list. "
+                   "This should not happen.",
+                   dsk.c_str());
+    return SL_STATUS_FAIL;
+  }
+
+  Entry entry = query_result[0];
+  if (entry.manual_intervention_required == manual_intervention_required) {
+    return SL_STATUS_OK;
+  }
+  sl_log_debug(LOG_TAG,
+               "Setting ManualInterventionRequired to %d for DSK %s "
+               "in the SmartStart list.",
+               manual_intervention_required,
+               entry.dsk.c_str());
+  entry.manual_intervention_required = manual_intervention_required;
+  publish_smart_start_manual_intervention_required_update(entry);
   return SL_STATUS_OK;
 }
 
@@ -236,6 +276,15 @@ sl_status_t
             preferred_protocols.push_back(protocol.second.get<std::string>(""));
           }
           entry.preferred_protocols = preferred_protocols;
+        }
+
+        // ManualInterventionRequired is an optional field. Assume false if not present.
+        if (e.second.get_child_optional("ManualInterventionRequired")
+            == boost::none) {
+          entry.manual_intervention_required = false;
+        } else {
+          entry.manual_intervention_required
+            = e.second.get<bool>("ManualInterventionRequired");
         }
 
         if (entry.protocol_controller_unid.empty()

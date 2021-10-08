@@ -21,6 +21,7 @@
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "dotdot_attributes.h"
+#include "ucl_node_state.h"
 
 // Interfaces
 #include "sl_status.h"
@@ -93,6 +94,13 @@ static void create_test_network()
                                &endpoint_id,
                                sizeof(zwave_endpoint_id_t));
 
+  attribute_store_node_t network_status_node
+    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  attribute_store_set_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+
   // NodeID 2
   node_id_node = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
 
@@ -121,6 +129,13 @@ static void create_test_network()
                                &endpoint_id,
                                sizeof(zwave_endpoint_id_t));
 
+  network_status_node
+    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
+  network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  attribute_store_set_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+
   // NodeID 4
   node_id_node = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
 
@@ -135,6 +150,13 @@ static void create_test_network()
                                sizeof(zwave_endpoint_id_t));
   attribute_store_add_node(0x00040001, node_id_node);
 
+  network_status_node
+    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
+  network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  attribute_store_set_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+
   // NodeID 5, with undefined EP
   node_id_node = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
 
@@ -143,6 +165,13 @@ static void create_test_network()
 
   endpoint_id_node
     = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
+
+  network_status_node
+    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_node);
+  network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  attribute_store_set_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
 }
 
 void uic_mqtt_subscribe_callback(const char *topic,
@@ -228,16 +257,16 @@ void test_zcl_group_cluster_server_init_test()
     true);
 
   // Group Cluster Revision for Node 2, ep 1
-  uic_mqtt_publish_Expect(
-    "ucl/by-unid/zw-00000000-0002/ep1/Groups/Attributes/ClusterRevision/Desired",
-    revision_message,
-    sizeof(revision_message) - 1,
-    true);
-  uic_mqtt_publish_Expect(
-    "ucl/by-unid/zw-00000000-0002/ep1/Groups/Attributes/ClusterRevision/Reported",
-    revision_message,
-    sizeof(revision_message) - 1,
-    true);
+  uic_mqtt_publish_Expect("ucl/by-unid/zw-00000000-0002/ep1/Groups/Attributes/"
+                          "ClusterRevision/Desired",
+                          revision_message,
+                          sizeof(revision_message) - 1,
+                          true);
+  uic_mqtt_publish_Expect("ucl/by-unid/zw-00000000-0002/ep1/Groups/Attributes/"
+                          "ClusterRevision/Reported",
+                          revision_message,
+                          sizeof(revision_message) - 1,
+                          true);
 
   // subscribe to incoming commands for NodeID 2, ep 1
   uic_mqtt_subscribe_Expect(
@@ -278,16 +307,16 @@ void test_zcl_group_cluster_server_init_test()
     true);
 
   // Group Cluster Revision for Node 2, ep 2
-  uic_mqtt_publish_Expect(
-    "ucl/by-unid/zw-00000000-0002/ep2/Groups/Attributes/ClusterRevision/Desired",
-    revision_message,
-    sizeof(revision_message) - 1,
-    true);
-  uic_mqtt_publish_Expect(
-    "ucl/by-unid/zw-00000000-0002/ep2/Groups/Attributes/ClusterRevision/Reported",
-    revision_message,
-    sizeof(revision_message) - 1,
-    true);
+  uic_mqtt_publish_Expect("ucl/by-unid/zw-00000000-0002/ep2/Groups/Attributes/"
+                          "ClusterRevision/Desired",
+                          revision_message,
+                          sizeof(revision_message) - 1,
+                          true);
+  uic_mqtt_publish_Expect("ucl/by-unid/zw-00000000-0002/ep2/Groups/Attributes/"
+                          "ClusterRevision/Reported",
+                          revision_message,
+                          sizeof(revision_message) - 1,
+                          true);
 
   // subscribe to incoming commands for NodeID 2, ep 1
   uic_mqtt_subscribe_Expect(
@@ -328,16 +357,16 @@ void test_zcl_group_cluster_server_init_test()
     true);
 
   // Group Cluster Revision for Node 4, ep 0
-  uic_mqtt_publish_Expect(
-    "ucl/by-unid/zw-00000000-0004/ep0/Groups/Attributes/ClusterRevision/Desired",
-    revision_message,
-    sizeof(revision_message) - 1,
-    true);
-  uic_mqtt_publish_Expect(
-    "ucl/by-unid/zw-00000000-0004/ep0/Groups/Attributes/ClusterRevision/Reported",
-    revision_message,
-    sizeof(revision_message) - 1,
-    true);
+  uic_mqtt_publish_Expect("ucl/by-unid/zw-00000000-0004/ep0/Groups/Attributes/"
+                          "ClusterRevision/Desired",
+                          revision_message,
+                          sizeof(revision_message) - 1,
+                          true);
+  uic_mqtt_publish_Expect("ucl/by-unid/zw-00000000-0004/ep0/Groups/Attributes/"
+                          "ClusterRevision/Reported",
+                          revision_message,
+                          sizeof(revision_message) - 1,
+                          true);
 
   // subscribe to incoming commands for NodeID 4, ep 0
   uic_mqtt_subscribe_Expect(
@@ -697,13 +726,51 @@ void test_zcl_group_cluster_server_remove_all_groups_command_test()
     sizeof("{}") - 1);
 }
 
+void test_zcl_group_cluster_server_delete_network_status_test()
+{
+  // Delete a network status. Nothing should happen.
+  zwave_node_id_t node_id_2 = 2;
+  attribute_store_node_t node_id_2_node
+    = attribute_store_get_node_child_by_value(home_id_node,
+                                              ATTRIBUTE_NODE_ID,
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&node_id_2,
+                                              sizeof(node_id_2),
+                                              0);
+
+  attribute_store_node_t network_status_2
+    = attribute_store_get_node_child_by_type(node_id_2_node,
+                                             ATTRIBUTE_NETWORK_STATUS,
+                                             0);
+  attribute_store_delete_node(network_status_2);
+}
+
+void test_zcl_group_cluster_server_delete_endpoint_test()
+{
+  // Delete an endpoint. We will clean up the publications
+  zwave_node_id_t node_id_2 = 2;
+  attribute_store_node_t node_id_2_node
+    = attribute_store_get_node_child_by_value(home_id_node,
+                                              ATTRIBUTE_NODE_ID,
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&node_id_2,
+                                              sizeof(node_id_2),
+                                              0);
+
+  zwave_endpoint_id_t endpoint_2 = 2;
+  attribute_store_node_t endpoint_2_node
+    = attribute_store_get_node_child_by_value(node_id_2_node,
+                                              ATTRIBUTE_ENDPOINT_ID,
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&endpoint_2,
+                                              sizeof(endpoint_2),
+                                              0);
+  uic_mqtt_unretain_Expect("ucl/by-unid/zw-00000000-0002/ep2/Groups");
+  attribute_store_delete_node(endpoint_2_node);
+}
+
 void test_zcl_group_cluster_server_teardown_test()
 {
-  // Teardown the Group Server cluster, see that MQTT publications are cleaned
-  // up correctly
-  uic_mqtt_unretain_Expect("ucl/by-unid/zw-00000000-0002/ep1/Groups");
-  uic_mqtt_unretain_Expect("ucl/by-unid/zw-00000000-0002/ep2/Groups");
-  uic_mqtt_unretain_Expect("ucl/by-unid/zw-00000000-0004/ep0/Groups");
-
+  // Teardown the Group Server cluster, nothing should happen
   zcl_group_cluster_server_teardown();
 }

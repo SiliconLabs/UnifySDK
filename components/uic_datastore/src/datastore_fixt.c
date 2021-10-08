@@ -55,7 +55,6 @@ static sl_status_t datastore_attribute_init()
 
 static sl_status_t datastore_open(const char *datastore_file)
 {
-
   if (db != NULL) {
     // We are already initialized, teardown before attempting init again.
     sl_status_t teardown_status = datastore_fixt_teardown();
@@ -71,15 +70,12 @@ static sl_status_t datastore_open(const char *datastore_file)
   }
 
   sqlite3_stmt *stmt = NULL;
-  sl_log_debug(LOG_TAG, "Using db file: %s\n", datastore_file);
+  sl_log_info(LOG_TAG, "Using datastore file: %s\n", datastore_file);
   int sqlite_flags = SQLITE_OPEN_CREATE | SQLITE_OPEN_READWRITE;
-  if(strncmp(":memory:", datastore_file, sizeof(":memory:")) == 0) {
+  if (strncmp(":memory:", datastore_file, sizeof(":memory:")) == 0) {
     sqlite_flags |= SQLITE_OPEN_MEMORY;
   }
-  rc = sqlite3_open_v2(datastore_file,
-                       &db,
-                       sqlite_flags,
-                       NULL);
+  rc = sqlite3_open_v2(datastore_file, &db, sqlite_flags, NULL);
   if (rc != SQLITE_OK) {
     sl_log_error(LOG_TAG, "Cannot open database: %s\n", sqlite3_errmsg(db));
     sqlite3_close(db);
@@ -105,7 +101,7 @@ sl_status_t datastore_init(const char *datastore_path)
 {
   sl_status_t ret = datastore_open(datastore_path);
   if (ret != SL_STATUS_OK) {
-      return ret;
+    return ret;
   }
   // Create generic tables if not exist
   if (datastore_table_init() != SL_STATUS_OK) {
@@ -114,7 +110,6 @@ sl_status_t datastore_init(const char *datastore_path)
 
   return datastore_attribute_init();
 }
-
 
 sl_status_t datastore_teardown()
 {
@@ -152,50 +147,55 @@ sl_status_t datastore_fixt_setup_and_handle_version(int64_t db_version)
                  CONFIG_KEY_DATASTORE_FILE);
     return SL_STATUS_FAIL;
   }
- 
+
   sl_status_t ret = datastore_open(datastore_file);
   if (ret != SL_STATUS_OK) {
-      return ret;
+    return ret;
   }
   // Create generic tables if not exist
   if (datastore_table_init() != SL_STATUS_OK) {
     return SL_STATUS_FAIL;
   }
 
-  int64_t version_fetched = 0;
+  int64_t version_fetched                          = 0;
   uint8_t fetched_uic_version[UIC_VERSION_MAX_LEN] = {0};
-  unsigned int fetched_uic_version_size = UIC_VERSION_MAX_LEN;
+  unsigned int fetched_uic_version_size            = UIC_VERSION_MAX_LEN;
   if (datastore_contains_int("version") == true) {
     datastore_fetch_int("version", &version_fetched);
     sl_log_info(LOG_TAG,
-                "Datastore version fetched from Datastore: %d\n",
+                "Datastore version reported from the datastore file: %" PRId64
+                "\n",
                 version_fetched);
 
     datastore_fetch_arr("uic_version",
                         fetched_uic_version,
                         &fetched_uic_version_size);
     sl_log_info(LOG_TAG,
-                   "UIC version fetched from Datastore: %s\n",
-                   fetched_uic_version);
+                "Last UIC version that has written in the datastore file: %s\n",
+                fetched_uic_version);
     if (version_fetched != db_version) {
-      sl_log_error(LOG_TAG, "Datastore version: %lu in datastore file is non "
-                            "compatible with current datastore version: %lu",
-                            version_fetched,
-                            db_version);
+      sl_log_error(LOG_TAG,
+                   "Datastore version: %" PRId64 " in datastore file is non "
+                   "compatible with the ZPC datastore version: %" PRId64 ". "
+                   "Please erase or recover your ZPC datastore using the ZPC "
+                   "datastore tools",
+                   version_fetched,
+                   db_version);
       return SL_STATUS_FAIL;
     }
   } else {
     sl_log_info(LOG_TAG,
-                "Writing Datastore version: %d for first time",
+                "Writing Datastore version: %" PRId64 " for first time",
                 db_version);
     datastore_store_int("version", db_version);
   }
   sl_log_info(LOG_TAG,
-              "Writing project version: %s to datastore\n",
+              "Writing last UIC version: %s to the datastore file\n",
               UIC_VERSION);
 
-  datastore_store_arr("uic_version", (const uint8_t *)UIC_VERSION, sizeof(UIC_VERSION));
-
+  datastore_store_arr("uic_version",
+                      (const uint8_t *)UIC_VERSION,
+                      sizeof(UIC_VERSION));
 
   return datastore_attribute_init();
 }
@@ -206,7 +206,6 @@ sl_status_t datastore_fixt_setup_and_handle_version(int64_t db_version)
 
 sl_status_t datastore_fixt_setup(void)
 {
-
   const char *datastore_file;
   config_status_t config_status
     = config_get_as_string(CONFIG_KEY_DATASTORE_FILE, &datastore_file);
@@ -216,10 +215,10 @@ sl_status_t datastore_fixt_setup(void)
                  CONFIG_KEY_DATASTORE_FILE);
     return SL_STATUS_FAIL;
   }
- 
+
   sl_status_t ret = datastore_open(datastore_file);
   if (ret != SL_STATUS_OK) {
-      return ret;
+    return ret;
   }
   // Create generic tables if not exist
   if (datastore_table_init() != SL_STATUS_OK) {

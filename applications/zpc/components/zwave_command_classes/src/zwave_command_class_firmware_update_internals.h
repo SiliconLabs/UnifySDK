@@ -103,7 +103,7 @@ sl_status_t set_transfer_offset(attribute_store_node_t firmware_transfer_node,
  * @returns sl_status_t code.
  */
 uint16_t
-  get_theoretical_max_fragment_size(attribute_store_node_t endpoint_node);
+  firmware_transfer_get_theoretical_max_fragment_size(attribute_store_node_t endpoint_node);
 
 /**
  * @brief Sets the Firmware transfer fragment size for a Firmware Update.
@@ -126,7 +126,18 @@ sl_status_t set_firmware_transfer_fragment_size(
  *
  * @returns true if supported, false otherwise
  */
-bool node_supports_activation(attribute_store_node_t endpoint_node);
+bool node_supports_firmware_activation(attribute_store_node_t endpoint_node);
+
+/**
+ * @brief Verifies if a node supports Firmware CC, which indicates if
+ *        the supporting node’s Command Classes functionality will continue
+ *        to function normally during Firmware Update transfer.
+ *
+ * @param endpoint_node  Attribute Store node for the Endpoint ID
+ *
+ * @returns true if supported, false otherwise
+ */
+bool node_supports_cc(attribute_store_node_t endpoint_node);
 
 /**
  * @brief Verifies if a Firmware Target value is valid for an endpoint.

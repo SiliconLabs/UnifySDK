@@ -42,6 +42,7 @@ sl_status_t zwave_transport_service_transport_init();
  * determines if S0 verify delivery is going to be used
  * @param on_send_complete  Callback for the transmission complete event.
  * @param user              User pointer
+ * @param parent_session_id Parent session id of this session 
  * @return sl_status_t     
  *   - SL_STATUS_OK             on success
  *   - SL_STATUS_BUSY           if a tranmission is ongoing.
@@ -73,11 +74,13 @@ sl_status_t zwave_transport_service_send_data(
  *                                  transport service can handle 
  */
 sl_status_t zwave_transport_service_on_frame_received(
-  const zwave_controller_connection_info_t *connectiod_info,
+  const zwave_controller_connection_info_t *connection_info,
   const zwave_rx_receive_options_t *rx_options,
   const uint8_t *frame_data,
   uint16_t frame_length);
 #ifdef __cplusplus
 }
 #endif
+/** @} end zwave_transport_service*/
+
 #endif  //ZWAVE_TRANSPORT_SERVICE_H

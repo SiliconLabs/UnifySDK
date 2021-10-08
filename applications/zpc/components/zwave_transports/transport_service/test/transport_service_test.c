@@ -2,10 +2,14 @@
 #include "transport_service.h"
 #include "stdio.h"
 #include "unity.h"
+#include "zwave_tx_scheme_selector_mock.h"
+#include "sl_log.h"
 
-ts_node_id_t my_node_id      = 1;
-static uint8_t max_frag_size = 47;
-ts_node_id_t source_node_id  = 2;
+#define MAX_MSDU_SIZE   158
+#define SMALL_MSDU_SIZE 47
+
+ts_node_id_t my_node_id     = 1;
+ts_node_id_t source_node_id = 2;
 
 /* -------------- ctimer stub begin -------------------------*/
 typedef uint16_t clock_time_t;
@@ -160,9 +164,16 @@ unsigned char test_subseq_frag2a[]
      0x6a,  // datagram_size_2 (size bits 7..0 = 106)
      0x00,  // session_ID [7..4], Ext[3] (=0 i.e. no ext header),
             // datagram_offset_1[2..0] (size bits 10..8 = 0)
-     0x2f,  // datagram_offset_2 (size bits 7..0 = 47)
+     0x28,  // datagram_offset_2 (size bits 7..0 = 47)
 
      // ----- Payload from here (next 20 bytes)
+     0x28,
+     0x29,
+     0x2a,
+     0x2b,
+     0x2c,
+     0x2d,
+     0x2e,
      0x2f,
      0x30,
      0x31,
@@ -176,18 +187,11 @@ unsigned char test_subseq_frag2a[]
      0x04,
      0x05,
      0x06,
-     0x07,
-     0x08,
-     0x09,
-     0x0a,
-     0x0b,
-     0x0c,
-     0x0d,
      // ----- Payload to here
 
      // Last two bytes are CRC-16-CCITT
-     0x8c,
-     0x4b};
+     0xd1,
+     0x80};
 
 unsigned char test_subseq_frag2b[]
   = {0x55,  // COMMAND_CLASS_TRANSPORT_SERVICE_V2
@@ -196,9 +200,16 @@ unsigned char test_subseq_frag2b[]
      0x6a,  // datagram_size_2 (size bits 7..0 = 106)
      0x00,  // session_ID [7..4], Ext[3] (=0 i.e. no ext header),
             // datagram_offset_1[2..0] (size bits 10..8 = 0)
-     0x43,  // datagram_offset_2 (size bits 7..0 = 67)
+     0x3c,  // datagram_offset_2 (size bits 7..0 = 67)
 
-     // ----- Payload from here (next 27 bytes)
+     // ----- Payload from here (next 20 bytes)
+     0x07,
+     0x08,
+     0x09,
+     0x0a,
+     0x0b,
+     0x0c,
+     0x0d,
      0x0e,
      0x0f,
      0x10,
@@ -212,25 +223,11 @@ unsigned char test_subseq_frag2b[]
      0x18,
      0x19,
      0x1a,
-     0x1b,
-     0x1c,
-     0x1d,
-     0x1e,
-     0x1f,
-     0x20,
-     0x21,
-     0x22,
-     0x23,
-     0x24,
-     0x25,
-     0x26,
-     0x27,
-     0x28,
      // ----- Payload to here
 
      // Last two bytes are CRC-16-CCITT
-     0x6b,
-     0x5a};
+     0xa6,
+     0x17};
 
 unsigned char test_first_frag1[]
   = {0x55,  // COMMAND_CLASS_TRANSPORT_SERVICE_V2
@@ -239,7 +236,7 @@ unsigned char test_first_frag1[]
      0x6a,  // datagram_size_2 (size bits 7..0 = 106)
      0x00,  // session_ID [7..4], Ext[3] (=0 i.e. no ext header), Reserved[2..0]
 
-     // ----- Payload from here (first 47 bytes)
+     // ----- Payload from here (first 40 bytes)
      0x20,
      0x01,
      0x00,
@@ -280,20 +277,13 @@ unsigned char test_first_frag1[]
      0x25,
      0x26,
      0x27,
-     0x28,
-     0x29,
-     0x2a,
-     0x2b,
-     0x2c,
-     0x2d,
-     0x2e,
      // ----- Payload to here
 
      // Last two bytes are CRC-16-CCITT
      // (can be calculated with https://crccalc.com/ for test purposes
      //  - use the "CRC-16/AUG-CCITT" value)
-     0x04,
-     0xa5};
+     0xEA,
+     0x0D};
 
 unsigned char test_subseq_frag2[]
   = {0x55,  // COMMAND_CLASS_TRANSPORT_SERVICE_V2
@@ -302,9 +292,16 @@ unsigned char test_subseq_frag2[]
      0x6a,  // datagram_size_2 (size bits 7..0 = 106)
      0x00,  // session_ID [7..4], Ext[3] (=0 i.e. no ext header),
             // datagram_offset_1[2..0] (size bits 10..8 = 0)
-     0x2f,  // datagram_offset_2 (size bits 7..0 = 47)
+     0x28,  // datagram_offset_2 (size bits 7..0 = 47)
 
-     // ----- Payload from here (next 47 bytes)
+     // ----- Payload from here (next 40 bytes)
+     0x28,
+     0x29,
+     0x2a,
+     0x2b,
+     0x2c,
+     0x2d,
+     0x2e,
      0x2f,
      0x30,
      0x31,
@@ -337,7 +334,23 @@ unsigned char test_subseq_frag2[]
      0x17,
      0x18,
      0x19,
-     0x1a,
+     0x1A,
+     // ----- Payload to here
+
+     // Last two bytes are CRC-16-CCITT
+     0x19,
+     0xd9};
+
+unsigned char test_subseq_frag3[]
+  = {0x55,  // COMMAND_CLASS_TRANSPORT_SERVICE_V2
+     0xe0,  // COMMAND_SUBSEQUENT_FRAGMENT[7..3], datagram_size_1[2..0]
+            // (size bits 10..8 = 0)
+     0x6a,  // datagram_size_2 (size bits 7..0 = 106)
+     0x00,  // session_ID [7..4], Ext[3] (=0 i.e. no ext header),
+            // datagram_offset_1[2..0] (size bits 10..8 = 0)
+     0x50,  // datagram_offset_2 (size bits 7..0 = 94)
+
+     // ----- Payload from here (last 27 bytes)
      0x1b,
      0x1c,
      0x1d,
@@ -352,22 +365,6 @@ unsigned char test_subseq_frag2[]
      0x26,
      0x27,
      0x28,
-     // ----- Payload to here
-
-     // Last two bytes are CRC-16-CCITT
-     0x1d,
-     0x69};
-
-unsigned char test_subseq_frag3[]
-  = {0x55,  // COMMAND_CLASS_TRANSPORT_SERVICE_V2
-     0xe0,  // COMMAND_SUBSEQUENT_FRAGMENT[7..3], datagram_size_1[2..0]
-            // (size bits 10..8 = 0)
-     0x6a,  // datagram_size_2 (size bits 7..0 = 106)
-     0x00,  // session_ID [7..4], Ext[3] (=0 i.e. no ext header),
-            // datagram_offset_1[2..0] (size bits 10..8 = 0)
-     0x5e,  // datagram_offset_2 (size bits 7..0 = 94)
-
-     // ----- Payload from here (last 12 bytes)
      0x29,
      0x2a,
      0x2b,
@@ -383,8 +380,8 @@ unsigned char test_subseq_frag3[]
      // ----- Payload to here
 
      // Last two bytes are CRC-16-CCITT
-     0x05,
-     0xd6};
+     0x0e,
+     0x07};
 
 unsigned char test_frag_compl[] = {
   0x55,  // COMMAND_CLASS_TRANSPORT_SERVICE_V2
@@ -397,7 +394,7 @@ unsigned char test_frag_req[] = {
   0xC8,  // COMMAND_FRAGMENT_REQUEST
   0x00,  // SessionID[7..4], Reserved[3], datagram_offset_1[2..0]
          // (size bits 10..8 = 0)
-  0x2f   // datagram_offset_2 = 47
+  0x28   // datagram_offset_2 = 47
 };
 
 unsigned char test_frag_req1[] = {
@@ -405,14 +402,14 @@ unsigned char test_frag_req1[] = {
   0xC8,  // COMMAND_FRAGMENT_REQUEST
   0x00,  // SessionID[7..4], Reserved[3], datagram_offset_1[2..0]
          //(size bits 10..8 = 0)
-  0x43   // datagram_offset_2 = 67
+  0x3C   // datagram_offset_2 = 67
 };
 unsigned char test_frag_req_final[] = {
   0x55,  // COMMAND_CLASS_TRANSPORT_SERVICE_V2
   0xC8,  // COMMAND_FRAGMENT_REQUEST
   0x00,  // SessionID[7..4], Reserved[3], datagram_offset_1[2..0]
          //(size bits 10..8 = 0)
-  0x5e,  // datagram_offset_2 (size bits 7..0 = 94)
+  0x50,  // datagram_offset_2 (size bits 7..0 = 94)
 };
 
 unsigned char test_frag_wait_zero_pending[]  = {0x55, 0xF0, 0x00};
@@ -469,7 +466,6 @@ uint8_t send_data_frag_req_miss_one_frag(
   TEST_ASSERT_EQUAL_HEX8_ARRAY(payload, test_frag_req, sizeof(test_frag_req));
 
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
   TEST_ASSERT_EQUAL(
@@ -495,7 +491,6 @@ uint8_t send_data_frag_req(
                                sizeof(test_frag_req_final));
 
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
   //contiki_test_helper_run(5000); //Reset the State machine
@@ -519,7 +514,6 @@ uint8_t send_data_frag_req1(
 {
   TEST_ASSERT_EQUAL_HEX8_ARRAY(payload, test_frag_req1, sizeof(test_frag_req1));
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
   TEST_ASSERT_EQUAL(
@@ -585,7 +579,6 @@ uint8_t send_data_frag_wait_three_pending(
 void test_simple_test()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
   TEST_ASSERT_EQUAL(
@@ -622,7 +615,6 @@ void test_simple_test()
 void test_simple_test_broadcast()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
   TEST_ASSERT_EQUAL(
@@ -658,7 +650,6 @@ void test_simple_test_broadcast()
 void test_non_uniform_fragment_sizes()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
   TEST_ASSERT_EQUAL(
@@ -700,7 +691,6 @@ void test_non_uniform_fragment_sizes()
 void test_non_sequential_fragments()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
   TEST_ASSERT_EQUAL(
@@ -743,7 +733,6 @@ void test_non_sequential_fragments()
 void test_dont_send_one_frag()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_req);
   TEST_ASSERT_EQUAL(
@@ -766,7 +755,6 @@ void test_dont_send_one_frag()
 void test_dont_send_one_frag_rx_timeout()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_req_rx_timeout);
   TEST_ASSERT_EQUAL(
@@ -792,7 +780,6 @@ void test_dont_send_one_frag_rx_timeout()
 void test_miss_one_frag()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_req_miss_one_frag);
   TEST_ASSERT_EQUAL(
@@ -814,41 +801,39 @@ void test_miss_one_frag()
   //contiki_test_helper_run(5000); //Reset the State machine
 }
 
-/*
- * Send first and third fragment and see if Transport service sends request for second fragment
- */
-void test_miss_one_frag_broadcast()
-{
-  transport_service_init(my_node_id,
-                         max_frag_size,
-                         stubbed_upper_layer_command_handler,
-                         0);
-  TEST_ASSERT_EQUAL(
-    transport_service_on_frame_received(source_node_id,
-                                        my_node_id,
-                                        BROADCAST,
-                                        test_first_frag1,
-                                        sizeof(test_first_frag1)),
-    false);
-
-  TEST_ASSERT_EQUAL(
-    transport_service_on_frame_received(source_node_id,
-                                        my_node_id,
-                                        BROADCAST,
-                                        test_subseq_frag3,
-                                        sizeof(test_subseq_frag3)),
-    false);
-
-  //contiki_test_helper_run(5000); //Reset the State machine
-}
-
+///*
+// * Send first and third fragment and see if Transport service sends request for second fragment
+// */
+//void test_miss_one_frag_broadcast()
+//{
+//  transport_service_init(my_node_id,
+//                         stubbed_upper_layer_command_handler,
+//                         0);
+//  TEST_ASSERT_EQUAL(
+//    transport_service_on_frame_received(source_node_id,
+//                                        my_node_id,
+//                                        BROADCAST,
+//                                        test_first_frag1,
+//                                        sizeof(test_first_frag1)),
+//    false);
+//
+//  TEST_ASSERT_EQUAL(
+//    transport_service_on_frame_received(source_node_id,
+//                                        my_node_id,
+//                                        BROADCAST,
+//                                        test_subseq_frag3,
+//                                        sizeof(test_subseq_frag3)),
+//    false);
+//
+//  //contiki_test_helper_run(5000); //Reset the State machine
+//}
+//
 /*
  * Send first, second and fourt fragment and see if Transport service sends request for third fragment
  */
 void test_miss_one_frag_variant()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_req1);
   TEST_ASSERT_EQUAL(
@@ -880,7 +865,6 @@ void test_miss_one_frag_variant()
 void test_dont_send_first_frag()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_wait_zero_pending);
   TEST_ASSERT_EQUAL(
@@ -902,7 +886,6 @@ void test_dont_send_first_frag()
 void test_frag_wait_fn()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_wait_three_pending);
   TEST_ASSERT_EQUAL(
@@ -920,7 +903,6 @@ void test_frag_wait_fn()
                                         sizeof(test_subseq_frag2)),
     false);
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
   TEST_ASSERT_EQUAL(
@@ -987,7 +969,6 @@ uint8_t send_data_test_subseq_frag2(
                                sizeof(test_subseq_frag2));
 
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3);
   on_lower_layer_send_data_complete(0, 0);
@@ -1007,7 +988,6 @@ uint8_t send_data_test_first_frag1(
                                test_first_frag1,
                                sizeof(test_first_frag1));
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2);
   on_lower_layer_send_data_complete(0, 0);
@@ -1031,15 +1011,15 @@ void stubbed_failed_on_transport_service_send_data_complete(uint8_t status,
 void test_send_whole_payload()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
-
                          send_data_test_first_frag1);
 
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(2, SMALL_MSDU_SIZE);
   transport_service_send_data(my_node_id,
                               2,
                               raw_data2,
                               sizeof(raw_data2),
+                              SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
   test_timer_callback(0);
   return;
@@ -1068,9 +1048,7 @@ uint8_t send_data_test_first_frag11(
                     false);
   test_frag_req[2] = backup_byte;
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
-
                          send_data_test_subseq_frag2);
   on_lower_layer_send_data_complete(0, 0);
   test_timer_callback(0);
@@ -1081,15 +1059,14 @@ void test_send_frag_req_from_different_session_id()
 {
   my_node_id = 3;
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
-
                          send_data_test_first_frag11);
-
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(0, SMALL_MSDU_SIZE);
   transport_service_send_data(my_node_id,
                               2,
                               raw_data2,
                               sizeof(raw_data2),
+                              SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
   test_timer_callback(0);
 }
@@ -1127,10 +1104,11 @@ uint8_t send_data_test_first_frag_tie_break(
 
   //Set the send_data function to send_data_frag_compl so that when TS sends
   //frag complete test can verify it.
+
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_frag_compl);
+
   //Send first frag
   TEST_ASSERT_EQUAL(
     transport_service_on_frame_received(2,
@@ -1161,15 +1139,16 @@ uint8_t send_data_test_first_frag_tie_break(
 void test_tie_break()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_first_frag_tie_break);
 
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(2, SMALL_MSDU_SIZE);
   //2. ask transport service to send
   transport_service_send_data(my_node_id,
                               2,
                               raw_data2,
                               sizeof(raw_data2),
+                              SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
   test_timer_callback(0);
 }
@@ -1192,7 +1171,6 @@ uint8_t send_data_test_subseq_frag3_variant(
                                test_subseq_frag3,
                                sizeof(test_subseq_frag3));
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_variant);
   on_lower_layer_send_data_complete(1, 0);
@@ -1212,7 +1190,6 @@ uint8_t send_data_test_subseq_frag2_variant(
                                sizeof(test_subseq_frag2));
 
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_variant);
   on_lower_layer_send_data_complete(0, 0);
@@ -1232,7 +1209,6 @@ uint8_t send_data_test_first_frag1_variant(
                                test_first_frag1,
                                sizeof(test_first_frag1));
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_variant);
   on_lower_layer_send_data_complete(0, 0);
@@ -1243,15 +1219,16 @@ uint8_t send_data_test_first_frag1_variant(
 void test_two_last_fragments_failed_callback()
 {
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_first_frag1_variant);
 
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(0, SMALL_MSDU_SIZE);
   transport_service_send_data(
     my_node_id,
     2,
     raw_data2,
     sizeof(raw_data2),
+    SMALL_MSDU_SIZE,
     stubbed_failed_on_transport_service_send_data_complete);
   test_timer_callback(0);
   return;
@@ -1273,10 +1250,7 @@ uint8_t send_data_test_subseq_frag3_final(
   TEST_ASSERT_EQUAL_HEX8_ARRAY(payload,
                                test_subseq_frag3,
                                sizeof(test_subseq_frag3));
-  transport_service_init(my_node_id,
-                         max_frag_size,
-                         stubbed_upper_layer_command_handler,
-                         0);
+  transport_service_init(my_node_id, stubbed_upper_layer_command_handler, 0);
   on_lower_layer_send_data_complete(0, 0);
   return 0;
 }
@@ -1295,7 +1269,6 @@ uint8_t send_data_test_subseq_frag3_fc_timer_expired_again(
                                test_subseq_frag3,
                                sizeof(test_subseq_frag3));
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_final);
   /* Send success callback for the fragment TS tried to send 
@@ -1324,7 +1297,6 @@ uint8_t send_data_test_subseq_frag3_fc_timer_expired(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_fc_timer_expired_again);
   /* Send success callback for the third fragment TS tried to send 
@@ -1354,7 +1326,6 @@ uint8_t send_data_test_subseq_frag2_fc_timer_expired(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_fc_timer_expired);
   /* Send success callback for the second fragment TS tried to send 
@@ -1383,7 +1354,6 @@ uint8_t send_data_test_first_fc_timer_expired(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_fc_timer_expired);
   /* Send success callback for the first fragment TS tried to send 
@@ -1400,16 +1370,17 @@ void test_two_last_fragments_fc_timer_expired()
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_first_fc_timer_expired);
 
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(0, SMALL_MSDU_SIZE);
   /*As TS to send raw_data2[] */
   transport_service_send_data(
     my_node_id,
     2,
     raw_data2,
     sizeof(raw_data2),
+    SMALL_MSDU_SIZE,
     stubbed_failed_on_transport_service_send_data_complete);
 
   test_timer_callback(0);
@@ -1439,16 +1410,20 @@ uint8_t send_data_test_first_frag_transport_service_busy_sending(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2);  //<- continue
 
   /* Try sending another raw data attempt and check if TS returns 
    * TRANSPORT_SERVICE_BUSY
    */
-  TEST_ASSERT_EQUAL(
-    transport_service_send_data(my_node_id, 2, raw_data2, sizeof(raw_data2), 0),
-    TRANSPORT_SERVICE_BUSY);
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(0, SMALL_MSDU_SIZE);
+  TEST_ASSERT_EQUAL(transport_service_send_data(my_node_id,
+                                                2,
+                                                raw_data2,
+                                                sizeof(raw_data2),
+                                                SMALL_MSDU_SIZE,
+                                                0),
+                    TRANSPORT_SERVICE_BUSY);
 
   /* Send success callback for the first fragment TS tried to send 
    */
@@ -1466,14 +1441,15 @@ void test_transport_service_busy_sending()
    */
   transport_service_init(
     my_node_id,
-    max_frag_size,
     stubbed_upper_layer_command_handler,
     send_data_test_first_frag_transport_service_busy_sending);  // <----
 
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(0, SMALL_MSDU_SIZE);
   transport_service_send_data(my_node_id,
                               2,
                               raw_data2,
                               sizeof(raw_data2),
+                              SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
   test_timer_callback(0);  //Reset TS
   return;
@@ -1497,11 +1473,13 @@ void test_transport_service_busy_receiving()
 
   /* Ask TS now to send in the middle of receiving. And check if this request is
    * denied as TRANSPORT_SERVICE_BUSY */
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(2, SMALL_MSDU_SIZE);
   TEST_ASSERT_EQUAL(transport_service_send_data(
                       my_node_id,
                       2,
                       raw_data2,
                       sizeof(raw_data2),
+                      SMALL_MSDU_SIZE,
                       stubbed_on_transport_service_send_data_complete),
                     TRANSPORT_SERVICE_BUSY);
 
@@ -1567,7 +1545,6 @@ uint8_t send_data_test_subseq_frag3_fc_timer_after_frag_req(
    */
   transport_service_init(
     my_node_id,
-    max_frag_size,
     stubbed_upper_layer_command_handler,
     send_data_test_subseq_frag2_fc_timer_after_frag_req_resend);
   /* Notify TS that it received test_frag_req[] which tells that second
@@ -1604,7 +1581,6 @@ uint8_t send_data_test_subseq_frag2_fc_timer_after_frag_req(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_fc_timer_after_frag_req);
   /* Send success callback for the second fragment TS tried to send 
@@ -1632,7 +1608,6 @@ uint8_t send_data_test_first_frag_fc_timer_after_frag_req(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_fc_timer_after_frag_req);
   /* Send success callback for the first fragment TS tried to send 
@@ -1650,17 +1625,18 @@ void test_fc_timer_after_frag_req()
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_first_frag_fc_timer_after_frag_req);
 
   /* Ask TS to send raw data and make sure send data is failure in
    * callback stubbed_failed_on_transport_service_send_data_complete()*/
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(0, SMALL_MSDU_SIZE);
   transport_service_send_data(
     my_node_id,
     2,
     raw_data2,
     sizeof(raw_data2),
+    SMALL_MSDU_SIZE,
     stubbed_failed_on_transport_service_send_data_complete);
   /* Reset the TS */
   test_timer_callback(0);
@@ -1705,7 +1681,6 @@ uint8_t send_data_test_subseq_frag2_failed_send_data(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag3_failed_send_data);
   /* Send success callback for the subseq fragment TS tried to send 
@@ -1733,7 +1708,6 @@ uint8_t send_data_test_first_frag1_failed_send_data(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_failed_send_data);
 
@@ -1751,16 +1725,17 @@ void test_two_last_fragments_failed_send_data()
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_first_frag1_failed_send_data);
 
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(0, SMALL_MSDU_SIZE);
   /* Expect the send to fail.*/
   transport_service_send_data(
     my_node_id,
     2,
     raw_data2,
     sizeof(raw_data2),
+    SMALL_MSDU_SIZE,
     stubbed_failed_on_transport_service_send_data_complete);
 
   test_timer_callback(0);
@@ -1795,7 +1770,6 @@ uint8_t send_data_test_subseq_frag2_with_one_wait(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_first_frag1);
 
@@ -1828,7 +1802,6 @@ uint8_t send_data_test_first_frag1_with_one_wait(
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_subseq_frag2_with_one_wait);
   /* Send success callback for the first fragment TS tried to send 
@@ -1845,16 +1818,17 @@ void test_send_whole_payload_with_one_wait()
    * which will be called 
    */
   transport_service_init(my_node_id,
-                         max_frag_size,
                          stubbed_upper_layer_command_handler,
                          send_data_test_first_frag1_with_one_wait);
 
   /* Ask TS to send raw data and make sure send data is success in
    * callback stubbed_on_transport_service_send_data_complete()*/
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(0, SMALL_MSDU_SIZE);
   transport_service_send_data(my_node_id,
                               2,
                               raw_data2,
                               sizeof(raw_data2),
+                              SMALL_MSDU_SIZE,
                               stubbed_on_transport_service_send_data_complete);
   test_timer_callback(0);
   return;

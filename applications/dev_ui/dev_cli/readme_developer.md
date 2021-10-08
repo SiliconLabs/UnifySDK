@@ -57,9 +57,9 @@ The _src_ folder contains the following files (**8-17-2020**):
 
 uic/applications/dev_ui/dev_cli/components/dev_commands/src/
 ├── a_dev_cli_ui_help.cpp               # Display commands and usages
-├── add_smartstart_entry.cpp            # Manipulating smart start list
-├── get_smart_start_list.cpp            # Manipulating smart start list
-├── remove_smartstart_entry.cpp         # Manipulating smart start list
+├── add_smartstart_entry.cpp            # Manipulating SmartStart list
+├── get_smart_start_list.cpp            # Manipulating SmartStart list
+├── remove_smartstart_entry.cpp         # Manipulating SmartStart list
 └── template.cpp.EXAMPLE                # Template example
 
 ```

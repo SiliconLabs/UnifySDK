@@ -302,7 +302,7 @@ void test_zwave_network_management_add_node_smartstart_node_found_timeout()
   // Tell cmock to expect (ADD_NODE_STOP)
   zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, 0);
 
-  // Tell cmock to expect smart start enable
+  // Tell cmock to expect SmartStart enable
   expect_smart_start_enable();
 
   //Tell cmock to expect error
@@ -408,7 +408,7 @@ void test_zwave_network_management_add_node_smartstart_prot_done_timeout()
    * zwapi_add_smartstart_node_to_network(). This callback function will be
    * saved at on_node_add_started_Expect() which is used in later steps*/
   zwapi_add_smartstart_node_to_network_AddCallback(my_add_node_stub);
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
   zwave_controller_on_state_updated_Ignore();
 
   /* Call Network management */
@@ -469,7 +469,7 @@ void test_zwave_network_management_add_node_smartstart_prot_done_timeout()
   /* Setup zwapi_remove_failed_node() stuff. Also save the callback*/
   setup_zwapi_remove_failed_node_mock(1);
 
-  /*Expect smart start enabled*/
+  /*Expect SmartStart enabled*/
   expect_smart_start_enable();
 
   /* Transition from NM_WAIT_FOR_SECURE_ADD to NM_WAIT_FOR_SECURE_ADD*/
@@ -511,7 +511,7 @@ void test_zwave_network_management_add_node_smartstart_prot_done_add_failed()
    * zwapi_add_smartstart_node_to_network(). This callback function will be
    * saved at on_node_add_started_Expect() which is used in later steps*/
   zwapi_add_smartstart_node_to_network_AddCallback(my_add_node_stub);
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
   zwave_controller_on_state_updated_Ignore();
 
   /* Call Network management */
@@ -570,7 +570,7 @@ void test_zwave_network_management_add_node_smartstart_prot_done_add_failed()
   /* Setup zwapi_remove_failed_node() stuff. Also save the callback*/
   setup_zwapi_remove_failed_node_mock(1);
 
-  /*Expect smart start enabled*/
+  /*Expect SmartStart enabled*/
   expect_smart_start_enable();
 
   /* Transition from NM_WAIT_FOR_SECURE_ADD to NM_WAIT_FOR_SECURE_ADD*/
@@ -608,7 +608,7 @@ void test_add_node_status_update_unknown_status()
    * zwapi_add_smartstart_node_to_network(). This callback function will be
    * saved at on_node_add_started_Expect() which is used in later steps*/
   zwapi_add_smartstart_node_to_network_AddCallback(my_add_node_stub);
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
   zwave_controller_on_state_updated_Ignore();
 
   /* Call Network management */
@@ -710,7 +710,7 @@ void test_nif_length_invalid_max()
   zwave_controller_on_error_Expect(
     ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_FAIL);
   TEST_ASSERT_EQUAL(NM_NODE_FOUND, zwave_network_management_get_state());
-  /*Expect smart start enabled*/
+  /*Expect SmartStart enabled*/
   expect_smart_start_enable();
 
   /* Transition from NM_WAIT_FOR_SECURE_ADD to NM_WAIT_FOR_SECURE_ADD*/
@@ -786,7 +786,7 @@ void test_zwave_network_management_remove_node_when_not_idle()
   TEST_ASSERT_EQUAL(SL_STATUS_BUSY, zwave_network_management_remove_node());
 }
 
-/* Common smart start code until dsk accepting. This code is used in
+/* Common SmartStart code until dsk accepting. This code is used in
  * most of the unit tests */
 void smart_start_common()
 {
@@ -821,7 +821,7 @@ void smart_start_common()
    * zwapi_add_smartstart_node_to_network(). This callback function will be
    * saved at on_node_add_started_Expect() which is used in later steps*/
   zwapi_add_smartstart_node_to_network_AddCallback(my_add_node_stub);
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, inclusion_protocol);
   zwave_controller_on_state_updated_Ignore();
 
   /* Call Network management */
@@ -954,7 +954,7 @@ void test_zwave_network_management_add_node_smartstart_wrong_dsk_self_destruct()
   /* Setup zwapi_remove_failed_node() stuff. Also save the callback*/
   setup_zwapi_remove_failed_node_mock(1);
 
-  /*Expect smart start enabled*/
+  /*Expect SmartStart enabled*/
   expect_smart_start_enable();
 
   /* Transition from NM_WAIT_FOR_SECURE_ADD to NM_WAIT_FOR_SECURE_ADD*/
@@ -1010,7 +1010,7 @@ void test_zwave_network_management_add_node_self_destruct_nop_failed()
   setup_zwapi_remove_failed_node_mock(1);
   contiki_test_helper_run(0);
 
-  /*Expect smart start enabled*/
+  /*Expect SmartStart enabled*/
   expect_smart_start_enable();
 
   /* Transition from NM_WAIT_FOR_SECURE_ADD to NM_WAIT_FOR_SECURE_ADD*/
@@ -1063,7 +1063,7 @@ void test_zwave_network_management_add_node_self_destruct()
   /* Setup zwapi_remove_failed_node() stuff. Also save the callback*/
   setup_zwapi_remove_failed_node_mock(1);
 
-  /*Expect smart start enabled*/
+  /*Expect SmartStart enabled*/
   expect_smart_start_enable();
 
   /* Transition from NM_WAIT_FOR_SECURE_ADD to NM_WAIT_FOR_SECURE_ADD*/
@@ -1086,7 +1086,8 @@ void test_zwave_network_management_add_node_self_destruct()
 }
 
 /* This tests zwapi_remove_failed_node() not getting a callback from serialapi
- * and eventually timeout after 20000 seconds to trigger NM_EV_TIMEOUT in
+ * and eventually timeout after SEND_DATA_TIMEOUT ms
+ * to trigger NM_EV_TIMEOUT in
  * state: NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL
  */
 void test_zwave_network_management_add_node_self_destruct_timeout()
@@ -1118,7 +1119,7 @@ void test_zwave_network_management_add_node_self_destruct_timeout()
   /* Setup zwapi_remove_failed_node() stuff. Also save the callback*/
   setup_zwapi_remove_failed_node_mock(0);
 
-  /*Expect smart start enabled*/
+  /*Expect SmartStart enabled*/
   expect_smart_start_enable();
 
   /* Transition from NM_SEND_NOP to NM_WAIT_FOR_TX_TO_SELF_DESTRUCT*/
@@ -1129,7 +1130,7 @@ void test_zwave_network_management_add_node_self_destruct_timeout()
   /*Expect error returned ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_FAIL*/
   zwave_controller_on_error_Expect(
     ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_SECURITY_FAIL);
-  contiki_test_helper_run(20000);
+  contiki_test_helper_run(SEND_DATA_TIMEOUT);
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
 
@@ -1236,7 +1237,7 @@ void test_smart_start_enable()
 }
 
 /*
- * Set a set default where smart start was enabled before executing the command
+ * Set a set default where SmartStart was enabled before executing the command
  *
  */
 void test_set_default()
@@ -1576,7 +1577,7 @@ void test_zwave_network_management_s0_add_controller_failed()
   zwave_command_class_list_unpack_ReturnThruPtr_node_info(sample_nif);
   zwave_command_class_list_unpack_IgnoreArg_node_info();
 
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
 
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_WAIT_FOR_PROTOCOL, zwave_network_management_get_state());
@@ -1677,7 +1678,7 @@ void test_zwave_network_management_s0_add_controller()
   zwave_command_class_list_unpack_ReturnThruPtr_node_info(sample_nif);
   zwave_command_class_list_unpack_IgnoreArg_node_info();
 
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
 
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_WAIT_FOR_PROTOCOL, zwave_network_management_get_state());
@@ -1754,7 +1755,7 @@ void test_zwave_network_management_s0_add_end_node()
   zwave_command_class_list_unpack_ReturnThruPtr_node_info(sample_nif);
   zwave_command_class_list_unpack_IgnoreArg_node_info();
 
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
 
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_WAIT_FOR_PROTOCOL, zwave_network_management_get_state());
@@ -1834,7 +1835,7 @@ void test_zwave_network_management_add_node()
   zwave_command_class_list_unpack_ReturnThruPtr_node_info(sample_nif);
   zwave_command_class_list_unpack_IgnoreArg_node_info();
 
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
 
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_WAIT_FOR_PROTOCOL, zwave_network_management_get_state());
@@ -1856,8 +1857,8 @@ void test_zwave_network_management_add_node()
 
   // Expect zwave_controller_on_keys_report() being called after arrival of
   // kex report
-  uint8_t key_request = KEY_CLASS_S0 | KEY_CLASS_S2_UNAUTHENTICATED | KEY_CLASS_S2_AUTHENTICATED
-      | KEY_CLASS_S2_ACCESS;
+  uint8_t key_request = KEY_CLASS_S0 | KEY_CLASS_S2_UNAUTHENTICATED
+                        | KEY_CLASS_S2_AUTHENTICATED | KEY_CLASS_S2_ACCESS;
   zwave_controller_on_keys_report_Expect(0, key_request);
   zwave_controller_on_keys_report_IgnoreArg_csa();
   // Fire NM_EV_ADD_SECURITY_REQ_KEYS (That keys report has arrived from other side)
@@ -1867,7 +1868,6 @@ void test_zwave_network_management_add_node()
   zwave_controller_on_state_updated_Ignore();
   TEST_ASSERT_EQUAL(NM_WAIT_FOR_SECURE_ADD,
                     zwave_network_management_get_state());
-
 
   //expect zwave_s2_key_grant() called
   zwave_s2_key_grant_Expect(1, key_request, 0);
@@ -1906,7 +1906,6 @@ void test_zwave_network_management_add_node()
     ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE,
     PROTOCOL_ZWAVE);
 
-
   zwave_controller_on_node_added_IgnoreArg_nif();
   // Fire NM_EV_SECURITY_DONE
   my_sec2_inclusion_cb.on_inclusion_complete(
@@ -1914,8 +1913,7 @@ void test_zwave_network_management_add_node()
     ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE);
   contiki_test_helper_run(0);
   /* ----------------------------------------------------*/
-  TEST_ASSERT_EQUAL(NM_IDLE,
-                    zwave_network_management_get_state());
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
 
 /* A inclusion timeout test which tests if the NM process will timeout
@@ -2037,7 +2035,7 @@ void test_zwave_network_management_add_node_wrong_dsk_input()
   zwave_command_class_list_unpack_ReturnThruPtr_node_info(sample_nif);
   zwave_command_class_list_unpack_IgnoreArg_node_info();
 
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
 
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_WAIT_FOR_PROTOCOL, zwave_network_management_get_state());
@@ -2280,7 +2278,8 @@ void test_zwave_network_management_add_node_false_positive_inclusion()
   zwave_command_class_list_unpack_ReturnThruPtr_node_info(sample_nif);
   zwave_command_class_list_unpack_IgnoreArg_node_info();
 
-  zwave_controller_on_node_id_assigned_Expect(node_id, true);
+  zwave_controller_on_node_id_assigned_Expect(node_id, PROTOCOL_ZWAVE);
+  zwave_controller_on_node_id_assigned_IgnoreArg_inclusion_protocol();
 
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_WAIT_FOR_PROTOCOL, zwave_network_management_get_state());
@@ -2374,8 +2373,7 @@ void test_zwave_network_management_start_proxy_inclusion()
     granted_keys,
     ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE);
   contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(NM_IDLE,
-                    zwave_network_management_get_state());
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
 
 void test_zwave_network_inclusion_protocol_is_saved()
@@ -2407,8 +2405,11 @@ void test_zwave_network_inclusion_protocol_is_saved()
 void test_zwave_network_management_assign_return_route()
 {
   zwave_node_id_t test_zpc_node_id = 0x01;
-  zwave_node_id_t test_node_id = 0x02;
-  zwapi_assign_return_route_ExpectAndReturn(test_node_id, test_zpc_node_id, NULL, SL_STATUS_OK);
+  zwave_node_id_t test_node_id     = 0x02;
+  zwapi_assign_return_route_ExpectAndReturn(test_node_id,
+                                            test_zpc_node_id,
+                                            NULL,
+                                            SL_STATUS_OK);
   zwapi_assign_return_route_IgnoreArg_completedFunc();
   zwave_network_management_assign_return_route(test_node_id, test_zpc_node_id);
 }

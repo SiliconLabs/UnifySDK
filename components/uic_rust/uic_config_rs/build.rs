@@ -6,11 +6,14 @@
 // www.silabs.com/about-us/legal/master-software-license-agreement. This
 // software is distributed to you in Source Code format and is governed by the
 // sections of the MSLA applicable to Source Code.
-use uic_bindgen::BindingsTarget;
 
 fn main() {
-    let bind_target =
-        BindingsTarget::from_json(format!("{}/uic_config_bindgen.json", env!("LIBUIC_DIR")))
-            .unwrap();
+    let bind_target = uic_bindgen::BindingsTarget::from_json(format!(
+        "{}/uic_config_bindgen.json",
+        env!("LIBUIC_DIR")
+    ))
+    .unwrap();
     bind_target.write_link_configuration();
+
+    uic_bindgen::generate_bindings(bind_target, Some("conf.*"), None, None);
 }

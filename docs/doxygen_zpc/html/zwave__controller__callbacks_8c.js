@@ -1,5 +1,6 @@
 var zwave__controller__callbacks_8c =
 [
+    [ "LOG_TAG", "zwave__controller__callbacks_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "ZWAVE_CONTROLLER_DISPATCH_CALLBACKS", "zwave__controller__callbacks_8c.html#a5ecc442294921777732936da8c8d8fa9", null ],
     [ "zwave_controller_callbacks_init", "group__zwave__controller__callbacks.html#gafb29674d2b018e2c069e1932f5179673", null ],
     [ "zwave_controller_deregister_callbacks", "group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c", null ],
@@ -14,7 +15,7 @@ var zwave__controller__callbacks_8c =
     [ "zwave_controller_on_new_suc", "group__zwave__controller__internal.html#gaa93eec32b28fd4eb3adde58e8f4f9d49", null ],
     [ "zwave_controller_on_node_added", "group__zwave__controller__internal.html#ga4ea4895ef12ecb1b950f26cceb3fa2ce", null ],
     [ "zwave_controller_on_node_deleted", "group__zwave__controller__internal.html#ga8cfb4a77017843c63190b2c5c5ddcb3c", null ],
-    [ "zwave_controller_on_node_id_assigned", "group__zwave__controller__internal.html#ga8b467b452013b49f39f68174a3b63362", null ],
+    [ "zwave_controller_on_node_id_assigned", "group__zwave__controller__internal.html#gadce8e3c18cd1e82f04b34e2f5ec8c0bc", null ],
     [ "zwave_controller_on_node_info_req_failed", "group__zwave__controller__internal.html#gad8a28781923cfb3cea88dbb277fed535", null ],
     [ "zwave_controller_on_node_information", "group__zwave__controller__internal.html#ga354c0d4573d2be752dc8529b6daa78c9", null ],
     [ "zwave_controller_on_request_neighbor_update", "group__zwave__controller__internal.html#gab01fac24c2a8ba94ed030a69886236f0", null ],

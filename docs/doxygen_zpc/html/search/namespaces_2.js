@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uic_5fota_4377',['uic_ota',['../namespaceuic__ota.html',1,'']]]
+  ['ota_5fdownload_4488',['ota_download',['../namespaceota__download.html',1,'']]]
 ];

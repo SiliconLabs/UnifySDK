@@ -13,10 +13,10 @@
 
 /**
  * @file zcl_util.h
- * @defgroup zigpc_zcl Helpers for Zigbee Cluster Library (ZCL) data handling.
+ * @defgroup zigpc_zcl_util ZigPC ZCL Utilities
  * @ingroup zigpc_components
- * @brief This header contains definitions that represent the Zigbee data types
- * used in the Geko SDK.
+ * @brief This component contains definitions and behaviours that is used to
+ * manipulate ZCL data types.
  *
  * @{
  */
@@ -89,7 +89,8 @@ sl_status_t zigpc_zcl_frame_init_command(zcl_frame_t *const frame,
  * @param type          Type of data to be transferred to the frame.
  * @param data          Pointer to the data to be transferred.
  * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER if
- * if invalid pointers are passed in.
+ * if invalid pointers are passed in, or SL_STATUS_WOULD_OVERFLOW if appending
+ * data would cause buffer overflow.
  */
 sl_status_t zigpc_zcl_frame_fill_data(zcl_frame_t *const frame,
                                       zigpc_zcl_data_type_t type,
@@ -105,7 +106,8 @@ sl_status_t zigpc_zcl_frame_fill_data(zcl_frame_t *const frame,
  * @param type_count    Number of data elements to be compied.
  * @param data          Pointer to the data to be transferred.
  * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER if
- * if invalid pointers are passed in, or SL_STATUS_INVALID_COUNT if the count
+ * if invalid pointers are passed in, SL_STATUS_WOULD_OVERFLOW if appending
+ * data would cause buffer overflow, or SL_STATUS_INVALID_COUNT if the count
  * of elements is 0.
  */
 sl_status_t zigpc_zcl_frame_fill_data_array(zcl_frame_t *const frame,
@@ -127,7 +129,8 @@ sl_status_t zigpc_zcl_frame_fill_data_array(zcl_frame_t *const frame,
  * @param command_arg_list    Command argument type and data list.
  * arguments.
  * @return sl_status_t        SL_STATUS_OK on success, SL_STATUS_NULL_POINTER if
- * if invalid pointers are passed in.
+ * if invalid pointers are passed in, or other error related to the ZCL command
+ * argument appending process.
  */
 sl_status_t zigpc_zcl_build_command_frame(
   zcl_frame_t *const frame,
@@ -154,4 +157,4 @@ size_t zigpc_zcl_get_type_size(zigpc_zcl_data_type_t type);
 
 #endif /* ZIGPC_ZCL_UTIL_H */
 
-/** @} end zigpc_zcl */
+/** @} end zigpc_zcl_util */

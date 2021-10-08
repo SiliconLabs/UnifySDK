@@ -222,6 +222,7 @@ void test_on_zwave_cc_version_version_attribute_update()
 
 void test_on_nif_attribute_update()
 {
+  attribute_resolver_set_attribute_depth_IgnoreAndReturn(SL_STATUS_OK);
   zwave_endpoint_id_t endpoint_id = 0;
   attribute_store_set_reported(endpoint_id_node,
                                &endpoint_id,
@@ -353,6 +354,7 @@ void test_on_nif_attribute_update()
 
 void test_on_nif_attribute_update_no_endpoint_data()
 {
+  attribute_resolver_set_attribute_depth_IgnoreAndReturn(SL_STATUS_OK);
   attribute_store_undefine_reported(endpoint_id_node);
   // Create a NIF under the fake endpoint
   attribute_store_node_t test_nif_node
@@ -550,8 +552,8 @@ void test_zwave_command_class_version_report_happy_case_no_data()
                                sizeof(u8_value));
   TEST_ASSERT_EQUAL(1, u8_value);
 
-  // Nothing from the report was picked up
-  TEST_ASSERT_EQUAL(0,
+  // Check that 1 field is set: Default Hardware Version will be set if not found
+  TEST_ASSERT_EQUAL(1,
                     attribute_store_get_node_child_count(version_report_node));
 }
 
@@ -584,7 +586,7 @@ void test_zwave_command_class_version_report_happy_case_library()
   TEST_ASSERT_EQUAL(1, u8_value);
 
   // Check that the field was picked up by the report
-  TEST_ASSERT_EQUAL(1,
+  TEST_ASSERT_EQUAL(2,
                     attribute_store_get_node_child_count(version_report_node));
   attribute_store_node_t library_type_node
     = attribute_store_get_node_child_by_type(version_report_node,
@@ -627,7 +629,7 @@ void test_zwave_command_class_version_report_happy_case_protocol_version()
   TEST_ASSERT_EQUAL(1, u8_value);
 
   // Check that the field was picked up by the report
-  TEST_ASSERT_EQUAL(2,
+  TEST_ASSERT_EQUAL(3,
                     attribute_store_get_node_child_count(version_report_node));
   attribute_store_node_t protocol_version_node
     = attribute_store_get_node_child_by_type(version_report_node,
@@ -678,7 +680,7 @@ void test_zwave_command_class_version_report_happy_case_firmware_0()
   TEST_ASSERT_EQUAL(1, u8_value);
 
   // Check that the field was picked up by the report
-  TEST_ASSERT_EQUAL(3,
+  TEST_ASSERT_EQUAL(4,
                     attribute_store_get_node_child_count(version_report_node));
   uint32_t firmware_id = 0;
   attribute_store_node_t firmware_0_node

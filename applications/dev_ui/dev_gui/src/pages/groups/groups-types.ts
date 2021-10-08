@@ -1,20 +1,22 @@
 export type GroupsProps = {
   NodeList: any[],
+  GroupList: any[],
   SocketServer: WebSocket,
   IsConnected: boolean | null
 }
 
 export type GroupsState = {
   ProcessingGroup: Group,
-  GroupList: Map<number, Group>,
+  GroupList: any[],
   ShowEditModal: boolean,
 }
 
 export type Group = {
   GroupId: number,
-  Name: string,
-  GroupEndpointList: any[],
+  GroupName: string,
+  NodeList: any,
   SupportedCommands: string[],
   FailedNodes: string[],
-  UpdatingNodes: string[]
+  UpdatingNodes: string[],
+  Clusters: string[]
 }

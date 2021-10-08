@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -104,9 +104,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a32e7da3c9fea5314da8059378ade7fb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__controller__transport.html#a32e7da3c9fea5314da8059378ade7fb8">command_class</a></td></tr>
 <tr class="memdesc:a32e7da3c9fea5314da8059378ade7fb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which Z-Wave command class this transport is serving.  <a href="structzwave__controller__transport.html#a32e7da3c9fea5314da8059378ade7fb8">More...</a><br /></td></tr>
 <tr class="separator:a32e7da3c9fea5314da8059378ade7fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5598d609bfc0652e9734556548fa911"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__controller__transport.html#ac5598d609bfc0652e9734556548fa911">version</a></td></tr>
-<tr class="memdesc:ac5598d609bfc0652e9734556548fa911"><td class="mdescLeft">&#160;</td><td class="mdescRight">The command class version of the command class that this transport is implementing.  <a href="structzwave__controller__transport.html#ac5598d609bfc0652e9734556548fa911">More...</a><br /></td></tr>
-<tr class="separator:ac5598d609bfc0652e9734556548fa911"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eab1fe89fdf378fc506f78d4ed8a9e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__command__class__version__types_8h.html#aad4ed685a718abe0fd70f07f949a4907">zwave_cc_version_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__controller__transport.html#a7eab1fe89fdf378fc506f78d4ed8a9e4">version</a></td></tr>
+<tr class="memdesc:a7eab1fe89fdf378fc506f78d4ed8a9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The command class version of the command class that this transport is implementing.  <a href="structzwave__controller__transport.html#a7eab1fe89fdf378fc506f78d4ed8a9e4">More...</a><br /></td></tr>
+<tr class="separator:a7eab1fe89fdf378fc506f78d4ed8a9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d88a4bfb59c2366b995bf1c8a7945ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__controller__transport.html#a8d88a4bfb59c2366b995bf1c8a7945ea">send_data</a> )(const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection, uint16_t data_length, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, const <a class="el" href="group__zwave__tx__interface.html#ga12c249f53157f1b461a0c534a274a72f">zwave_tx_options_t</a> *tx_options, const <a class="el" href="group__zwave__tx__interface.html#gabfbc700a89ba6dce9c1f38fa3ed41789">on_zwave_tx_send_data_complete_t</a> on_send_complete, void *user, <a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> parent_session)</td></tr>
 <tr class="memdesc:a8d88a4bfb59c2366b995bf1c8a7945ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send function to use when encapsulating with this transport.  <a href="structzwave__controller__transport.html#a8d88a4bfb59c2366b995bf1c8a7945ea">More...</a><br /></td></tr>
 <tr class="separator:a8d88a4bfb59c2366b995bf1c8a7945ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,14 +199,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac5598d609bfc0652e9734556548fa911"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5598d609bfc0652e9734556548fa911">&#9670;&nbsp;</a></span>version</h2>
+<a id="a7eab1fe89fdf378fc506f78d4ed8a9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eab1fe89fdf378fc506f78d4ed8a9e4">&#9670;&nbsp;</a></span>version</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t zwave_controller_transport::version</td>
+          <td class="memname"><a class="el" href="zwave__command__class__version__types_8h.html#aad4ed685a718abe0fd70f07f949a4907">zwave_cc_version_t</a> zwave_controller_transport::version</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -224,7 +224,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structzwave__controller__transport.html">zwave_controller_transport</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:57 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:41 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

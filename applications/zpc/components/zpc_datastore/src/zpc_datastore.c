@@ -14,16 +14,8 @@
 
 #include "zpc_datastore_fixt.h"
 #include "datastore_fixt.h"
-/**
- * @brief Version 1 of datastore database. 
- * Each datastore version identifies the unique schema of the attribute store
- * The version number should be bumped up when new schema is introduced in 
- * datastore which is no more compatible with current or old schemas. And which
- * requires some sort of data or format conversion.
- */
-#define DATASTORE_VERSION_V1 1
 
 sl_status_t zpc_datastore_fixt_setup()
 {
-  return datastore_fixt_setup_and_handle_version(DATASTORE_VERSION_V1); 
+  return datastore_fixt_setup_and_handle_version(ZPC_DATASTORE_VERSION);
 }

@@ -10,7 +10,6 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-
 // Includes from this component
 #include "zwave_command_class_version.h"
 
@@ -18,8 +17,11 @@
 #include <assert.h>
 #include <stdbool.h>
 
-// Includes from other components
+// Interfaces includes
 #include "ZW_classcmd.h"
+#include "zwave_command_class_version_types.h"
+
+// Includes from other components
 #include "zwave_command_handler.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_controller_utils.h"
@@ -43,6 +45,8 @@
 #define LOG_TAG "zwave_command_class_version"
 
 #define NUM_FW_TARGETS 1
+// Default value if If no hardware version is provided (Version CC v1)
+#define DEFAULT_HARDWARE_VERSION 1
 
 // Frame parsing indices:
 #define REPORT_LIBRARY_TYPE_INDEX               2
@@ -149,6 +153,7 @@ static void
     version_attribute[0],
     NULL,
     zwave_command_class_version_command_class_version_get);
+  attribute_resolver_set_attribute_depth(version_attribute[0], 0);
 
   // Add it into the attribute store.
   attribute_store_add_if_missing(endpoint_node,
@@ -160,8 +165,8 @@ static void
   attribute_store_network_helper_get_node_id_from_node(endpoint_node, &node_id);
 
   // Check version support on endpoint 0, root device.
-  if (!zwave_node_supports_command_class(COMMAND_CLASS_VERSION, node_id, 0)) {
-    uint8_t default_version = 1;
+  if (!is_version_cc_found(endpoint_node)) {
+    zwave_cc_version_t default_version = 1;
     attribute_store_set_uint8_child_by_type(endpoint_node,
                                             version_attribute[0],
                                             REPORTED_ATTRIBUTE,
@@ -508,14 +513,19 @@ static sl_status_t zwave_command_class_version_handle_report_command(
                                        &firmware_version,
                                        sizeof(firmware_version));
   }
+  zwave_version_hardware_version_t hardware_version
+    = DEFAULT_HARDWARE_VERSION;  // If its Version CC version 1 then there wont
+                                 // be any hardware version so assume 1
 
   if (frame_length > REPORT_HARDWARE_VERSION_INDEX) {
-    uint32_t hardware_version = frame_data[REPORT_HARDWARE_VERSION_INDEX];
-    attribute_store_set_child_reported(version_report_node,
-                                       ATTRIBUTE(HARDWARE_VERSION),
-                                       &hardware_version,
-                                       sizeof(hardware_version));
+    hardware_version = frame_data[REPORT_HARDWARE_VERSION_INDEX];
   }
+  // Note: even if the version frame is empty, the ATTRIBUTE_CC_VERSION_HARDWARE_VERSION
+  // attribute will be set to 1
+  attribute_store_set_child_reported(version_report_node,
+                                     ATTRIBUTE(HARDWARE_VERSION),
+                                     &hardware_version,
+                                     sizeof(hardware_version));
 
   uint8_t number_of_targets = 0;
   if (frame_length > REPORT_NUMBER_OF_TARGETS_INDEX) {
@@ -586,7 +596,7 @@ static sl_status_t zwave_command_classes_version_handler_version_cc_get(
     return SL_STATUS_NOT_SUPPORTED;
   }
 
-  uint8_t version_of_cc
+  zwave_cc_version_t version_of_cc
     = zwave_controller_transport_is_encapsulation_cc(frame_data[2]);
   if (version_of_cc == 0) {
     version_of_cc = zwave_command_handler_get_version(frame_data[2]);
@@ -781,7 +791,7 @@ static sl_status_t zwave_command_class_version_command_class_version_get(
 
   // We cannot ask for the version of extended CCs.
   if (requested_command_class >= EXTENDED_COMMAND_CLASS_IDENTIFIER_START) {
-    uint8_t default_version = 1;
+    zwave_cc_version_t default_version = 1;
     attribute_store_set_reported(node,
                                  &default_version,
                                  sizeof(default_version));
@@ -940,7 +950,7 @@ static void on_zwave_cc_version_version_attribute_update(
   // Confirm that ATTRIBUTE_COMMAND_CLASS_VERSION_VERSION attribute is created
   assert(ATTRIBUTE_COMMAND_CLASS_VERSION_VERSION
          == attribute_store_get_node_type(updated_node));
-  uint8_t supported_version = 0;
+  zwave_cc_version_t supported_version = 0;
   if (SL_STATUS_OK
       != attribute_store_read_value(updated_node,
                                     REPORTED_ATTRIBUTE,

@@ -18,6 +18,7 @@
 // Includes from other components
 #include "zwave_controller.h"
 #include "zwave_controller_keyset.h"
+#include "zwave_controller_command_class_indices.h"
 #include "zwave_rx.h"
 #include "ZW_classcmd.h"
 #include "sl_log.h"
@@ -25,12 +26,18 @@
 // Generic includes
 #include <vector>
 #include <algorithm>  // std::find
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <string>
 
 /// Setup Log ID
 #define LOG_TAG "zwave_command_handler_callbacks"
 
-std::set<uint16_t> secure_supported_command_classes;
-std::set<uint16_t> nonsecure_supported_command_classes;
+static std::set<zwave_command_class_t> secure_supported_command_classes;
+static std::set<zwave_command_class_t> nonsecure_supported_command_classes;
+// List of Command Classes that are controlled only
+static std::set<zwave_command_class_t> controlled_only_command_classes;
 
 // Array buffers that we pass on to the Z-Wave API / S2.
 // They keep the uint16_t CC identifiers converted to uint8_t
@@ -41,9 +48,10 @@ static std::vector<uint8_t> secure_command_class_buffer;
 ///////////////////////////////////////////////////////////////////////////////
 // Private helper functions
 ///////////////////////////////////////////////////////////////////////////////
-static void
-  command_class_list_to_buffer(const std::set<uint16_t> &source_list,
-                               std::vector<uint8_t> &destination_buffer)
+static void command_class_list_to_buffer(
+  const std::set<uint16_t> &source_list,
+  const std::set<uint16_t> &additional_controlled_list,
+  std::vector<uint8_t> &destination_buffer)
 {
   // Clear our static byte array before copying
   destination_buffer.clear();
@@ -59,6 +67,9 @@ static void
   // Now copy the other Command Classes one by one.
   for (auto cc: source_list) {
     if (destination_buffer.size() >= ZWAVE_MAX_FRAME_SIZE) {
+      sl_log_warning(LOG_TAG,
+                     "NIF has grown too large to advertise all supported "
+                     "Command Classes. Omitting Command Class 0x%02X");
       return;
     }
     if (cc == COMMAND_CLASS_ZWAVEPLUS_INFO) {
@@ -66,7 +77,31 @@ static void
     }
 
     if (cc <= 0xF1) {
-      destination_buffer.push_back(cc);
+      destination_buffer.push_back(cc & 0xFF);
+    } else {
+      // It's an extended CC, we copy MSB then LSB
+      destination_buffer.push_back(cc >> 8);
+      destination_buffer.push_back(cc & 0xFF);
+    }
+  }
+
+  // Now add the controlled CC at the end:
+  if (!additional_controlled_list.empty()) {
+    destination_buffer.push_back(COMMAND_CLASS_CONTROL_MARK);
+  }
+  for (auto cc: additional_controlled_list) {
+    if (destination_buffer.size() >= ZWAVE_MAX_FRAME_SIZE) {
+      sl_log_info(LOG_TAG,
+                  "NIF has grown too large to advertise all controlled "
+                  "Command Classes. Omitting Command Class 0x%02X");
+      return;
+    }
+    // Never put Basic in the NIF.
+    if (cc == COMMAND_CLASS_BASIC) {
+      continue;
+    }
+    if (cc <= 0xF1) {
+      destination_buffer.push_back(cc & 0xFF);
     } else {
       // It's an extended CC, we copy MSB then LSB
       destination_buffer.push_back(cc >> 8);
@@ -79,8 +114,7 @@ static void init_command_class_lists()
 {
   secure_supported_command_classes.clear();
   nonsecure_supported_command_classes.clear();
-  /// FIXME: These guys should probably register themselves too.
-  nonsecure_supported_command_classes.insert(COMMAND_CLASS_TRANSPORT_SERVICE);
+  controlled_only_command_classes.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -109,8 +143,8 @@ void zwave_command_handler_on_new_network_entered(
   zpc_highest_scheme = zwave_controller_get_highest_encapsulation(granted_keys);
 
   /// Add the supported CCs based on the registered command handlers
-  zwave_command_handler_it_t it;
-  for (it = command_handler_list.begin(); it != command_handler_list.end();
+  for (zwave_command_handler_it_t it = command_handler_list.begin();
+       it != command_handler_list.end();
        ++it) {
     if (it->support_handler == nullptr) {
       continue;
@@ -126,16 +160,45 @@ void zwave_command_handler_on_new_network_entered(
     }
   }
 
+  // Make a list of what we control only (no support)
+  for (zwave_command_handler_it_t it = command_handler_list.begin();
+       it != command_handler_list.end();
+       ++it) {
+    // Take only the controlled CCs.
+    if (it->control_handler == nullptr) {
+      continue;
+    }
+    // When we have a control handler, verify if there is a support handler:
+    bool support = false;
+    for (zwave_command_handler_it_t it_2 = command_handler_list.begin();
+         it_2 != command_handler_list.end();
+         ++it_2) {
+      if ((it_2->command_class == it->command_class)
+          && (it_2->support_handler != nullptr)) {
+        support = true;
+        break;
+      }
+    }
+
+    if (!support) {
+      controlled_only_command_classes.insert(it->command_class);
+    }
+  }
+
   /// Set non-secure NIF
   command_class_list_to_buffer(nonsecure_supported_command_classes,
+                               controlled_only_command_classes,
                                non_secure_command_class_buffer);
   zwave_controller_set_application_nif(
     (const uint8_t *)&non_secure_command_class_buffer[0],
     non_secure_command_class_buffer.size());
 
-  /// Set secure NIF
+  /// Set secure NIF. No controlled CC must be advertised here.
+  controlled_only_command_classes.clear();
   command_class_list_to_buffer(secure_supported_command_classes,
+                               controlled_only_command_classes,
                                secure_command_class_buffer);
+
   zwave_controller_set_secure_application_nif(
     (const uint8_t *)&secure_command_class_buffer[0],
     secure_command_class_buffer.size());
@@ -148,54 +211,55 @@ void zwave_command_handler_on_frame_received(
   uint16_t frame_length)
 {
   ///TODO: Verify frame parsing
+
+  // Print out the frame dispatch
+  std::stringstream message;
+  message << "Dispatching incoming command from NodeID "
+          << int(connection_info->remote.node_id) << ":"
+          << int(connection_info->remote.endpoint_id) << " - [ ";
+
+  for (uint16_t i = 0; i < frame_length; i++) {
+    message << std::setfill('0') << std::setw(2) << std::hex << std::uppercase
+            << int(frame_data[i]) << " ";
+  }
+  message << "]";
+  sl_log_debug(LOG_TAG, "%s", message.str().c_str());
+
+  // Dispatch and look at the status code
   sl_status_t status
     = zwave_command_handler_dispatch(connection_info, frame_data, frame_length);
   switch (status) {
     case SL_STATUS_OK:
-      sl_log_debug(LOG_TAG,
-                   "Command Class=0x%02X - Command=0x%02X from NodeID "
-                   "%03d:%d handled successfully.\n",
-                   frame_data[0],
-                   frame_data[1],
-                   connection_info->remote.node_id,
-                   connection_info->remote.endpoint_id);
+      sl_log_debug(LOG_TAG, "Command was handled successfully.");
       return;
       break;
 
     case SL_STATUS_FAIL:
-      sl_log_warning(LOG_TAG,
-                     "Command Class=0x%02X - Command=0x%02X from "
-                     "NodeID %03d:%d had an error "
-                     "during handling.\n",
-                     frame_data[0],
-                     frame_data[1],
-                     connection_info->remote.node_id,
-                     connection_info->remote.endpoint_id);
+      sl_log_debug(LOG_TAG,
+                   "Command had an error during handling. "
+                   "Not all parameters were accepted");
       return;
       break;
 
     case SL_STATUS_BUSY:
+      // This should not happen, or if it happens, we should be able to return
+      // an application busy message or similar.
+      sl_log_error(
+        LOG_TAG,
+        "Frame handler is busy and could not handle frame correctly.");
       return;
       break;
 
     case SL_STATUS_NOT_SUPPORTED:
-      sl_log_warning(LOG_TAG,
-                     "Command Class=0x%02X - Command=0x%02X from "
-                     "NodeID %03d:%d gets rejected because "
-                     "it is not supported.\n",
-                     frame_data[0],
-                     frame_data[1],
-                     connection_info->remote.node_id,
-                     connection_info->remote.endpoint_id);
+      sl_log_info(LOG_TAG,
+                  "Command got rejected because it is not supported. "
+                  "It was possibly also rejected due to security filtering\n");
       return;
       break;
 
     default:
       sl_log_warning(LOG_TAG,
-                     "Command Class=0x%02X - Command=0x%02X had an unexpected "
-                     "return status: 0x%04X\n",
-                     frame_data[0],
-                     frame_data[1],
+                     "Command had an unexpected return status: 0x%04X\n",
                      status);
       return;
       break;

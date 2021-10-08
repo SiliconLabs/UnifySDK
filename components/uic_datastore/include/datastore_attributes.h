@@ -45,19 +45,21 @@ typedef uint32_t datastore_attribute_id_t;
  * It will insert it if no ID already exists, else it will update the data
  * in the data store.
  *
- * @param id              Unique ID for the Attribute Store node to be
- *                        inserted/updated. It has to be >0, as 0 is reserved for "no parents".
- * @param type            Node type from the Attribute Store.
- * @param parent_id       Unique ID of the Attribute Store parent node for
- *                        the node to be inserted/updated. Set this to 0x00
- *                        for a node without parent (root node)
- * @param value           Pointer to the value to write the the attribute
- *                        (REPORTED value)
- * @param value_size      Size of the data contained in the value pointer.
- * @param desired_value   boolean keeping track if the desired value is defined
- *                        if true, it means that it will take the same value as
- *                        reported on restore.
- *                        If false, desired will stay undefined.
+ * @param id                  Unique ID for the Attribute Store node to be
+ *                            inserted/updated. It has to be >0, as 0 is
+ *                            reserved for "no parents".
+ * @param type                Node type from the Attribute Store.
+ * @param parent_id           Unique ID of the Attribute Store parent node for
+ *                            the node to be inserted/updated. Set this to 0x00
+ *                            for a node without parent (root node)
+ * @param reported_value      Pointer to the value to write the the attribute
+ *                            (REPORTED value)
+ * @param reported_value_size Size of the data contained in the reported_value
+ *                            pointer.
+ * @param desired_value       Pointer to the value to write the the attribute
+ *                            (DESIRED value)
+ * @param desired_value_size  Size of the data contained in the desired_value
+ *                            pointer.
  *
  * @returns SL_STATUS_OK if successful
  * @returns SL_STATUS_FAIL if an error happened
@@ -65,25 +67,34 @@ typedef uint32_t datastore_attribute_id_t;
 sl_status_t datastore_store_attribute(datastore_attribute_id_t id,
                                       uint32_t type,
                                       datastore_attribute_id_t parent_id,
-                                      const uint8_t *value,
-                                      uint8_t value_size,
-                                      bool desired_value);
+                                      const uint8_t *reported_value,
+                                      uint8_t reported_value_size,
+                                      const uint8_t *desired_value,
+                                      uint8_t desired_value_size);
 
 /**
  * @brief Fetch an attribute from the persistent datastore.
  *
- * @param id            Unique ID for the Attribute Store node to be
- *                      inserted/updated.
- * @param type          Pointer to copy the node type from the Attribute Store.
- * @param parent_id     Pointer where the Unique ID of the parent will be written
- * @param value         Pointer to the stored value of the attribute will
- *                      be copied. The value buffer must be able to contain
- *                      255 bytes.
- * @param value_size    Pointer to a variable where the size
- *                      of the value/payload written to the value pointer
- *                      will be written.
- * @param desired_value Pointer where the a boolean value will be written
- *                      to indicate if the desired value is defined.
+ * @param id                  Unique ID for the Attribute Store node to be
+ *                            inserted/updated.
+ * @param type                Pointer to copy the node type from the
+ *                            Attribute Store.
+ * @param parent_id           Pointer where the Unique ID of the parent will
+ *                            be written
+ * @param reported_value      Pointer to the stored reported value of the
+ *                            attribute will be copied. The value buffer must
+ *                            be able to contain
+ *                            ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH bytes.
+ * @param reported_value_size Pointer to a variable where the size
+ *                            of the reported value/payload written to the
+ *                            reported value pointer will be written.
+ * @param desired_value       Pointer to the stored desired value of the
+ *                            attribute will be copied. The value buffer must
+ *                            be able to contain
+ *                            ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH bytes.
+ * @param desired_value_size  Pointer to a variable where the size
+ *                            of the desired value/payload written to the
+ *                            desired value pointer will be written.
  *
  * @returns SL_STATUS_OK if successful
  * @returns SL_STATUS_FAIL if an error happened
@@ -92,28 +103,35 @@ sl_status_t datastore_store_attribute(datastore_attribute_id_t id,
 sl_status_t datastore_fetch_attribute(const datastore_attribute_id_t id,
                                       uint32_t *type,
                                       datastore_attribute_id_t *parent_id,
-                                      uint8_t *value,
-                                      uint8_t *value_size,
-                                      bool *desired_value);
+                                      uint8_t *reported_value,
+                                      uint8_t *reported_value_size,
+                                      uint8_t *desired_value,
+                                      uint8_t *desired_value_size);
 
 /**
  * @brief Fetch the child of an attribute from the persistent datastore.
  *
- * @param parent_id       Unique ID for the Attribute Store node of which the
- *                        nth child will be returned.
- * @param child_index     The index of the child to find. 0 for the first child,
- *                        1 for the second child, etc.
- * @param child_id        Pointer where the Unique ID of the found child will be copied
- * @param type            Pointer to copy the type of the found child
- *                        from the Attribute Store.
- * @param value           Pointer to the stored value of the attribute will
- *                        be copied. The value buffer must be able to contain
- *                        255 bytes.
- * @param value_size      Pointer to a variable where the size
- *                        of the value/payload written to the value pointer
- *                        will be written.
- * @param desired_value   Pointer where the a boolean value will be written
- *                        to indicate if the desired value is defined.
+ * @param parent_id           Unique ID for the Attribute Store node of which the
+ *                            nth child will be returned.
+ * @param child_index         The index of the child to find. 0 for the first child,
+ *                            1 for the second child, etc.
+ * @param child_id            Pointer where the Unique ID of the found child will be copied
+ * @param type                Pointer to copy the type of the found child
+ *                            from the Attribute Store.
+ * @param reported_value      Pointer to the stored reported value of the
+ *                            attribute will be copied. The value buffer must
+ *                            be able to contain
+ *                            ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH bytes.
+ * @param reported_value_size Pointer to a variable where the size
+ *                            of the reported value/payload written to the
+ *                            reported value pointer will be written.
+ * @param desired_value       Pointer to the stored desired value of the
+ *                            attribute will be copied. The value buffer must
+ *                            be able to contain
+ *                            ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH bytes.
+ * @param desired_value_size  Pointer to a variable where the size
+ *                            of the desired value/payload written to the
+ *                            desired value pointer will be written.
  *
  * @returns SL_STATUS_OK if successful
  * @returns SL_STATUS_FAIL if an error happened
@@ -123,9 +141,10 @@ sl_status_t datastore_fetch_attribute_child(datastore_attribute_id_t parent_id,
                                             uint32_t child_index,
                                             datastore_attribute_id_t *child_id,
                                             uint32_t *type,
-                                            uint8_t *value,
-                                            uint8_t *value_size,
-                                            bool *desired_value);
+                                            uint8_t *reported_value,
+                                            uint8_t *reported_value_size,
+                                            uint8_t *desired_value,
+                                            uint8_t *desired_value_size);
 
 /**
  * @brief Check if the datastore contains an attribute for given key.

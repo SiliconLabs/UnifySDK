@@ -18,10 +18,13 @@
 #ifndef ZWAVE_UTILS_H
 #define ZWAVE_UTILS_H
 
+// Generic includes
 #include <stdint.h>
 #include <stdbool.h>
 
+// Interfaces
 #include "sl_status.h"
+#include "zwave_generic_types.h"
 
 /**
  * @ingroup zpc_utils
@@ -117,40 +120,6 @@ typedef struct {
   uint8_t generic;   ///< Generic Device Type
   uint8_t specific;  ///< Specific Device Type
 } node_type_t;
-
-/**
- * @brief Z-Wave Operating Modes (AL, FL or NL).
- * Refer to @ref zwave_nwk_spec for details.
- */
-typedef enum zwave_operating_mode {
-  /// Node is Always Listening (AL)
-  ///
-  OPERATING_MODE_AL,
-  /// Node is Frequently Listening (FL)
-  ///
-  OPERATING_MODE_FL,
-  /// Node is Non-Listening (NL)
-  ///
-  OPERATING_MODE_NL,
-  /// We do not know the Operating mode of the node.
-  ///
-  OPERATING_MODE_UNKNOWN
-} zwave_operating_mode_t;
-
-/**
- * @brief Z-Wave Inclusion Protocol (Z-Wave / Z-Wave Long Range).
- */
-typedef enum zwave_protocol {
-  /// Node is operating on the Z-Wave PHY/MAC/NWK
-  ///
-  PROTOCOL_ZWAVE,
-  /// Node is operating on the Z-Wave Long Range PHY/MAC/NWK
-  ///
-  PROTOCOL_ZWAVE_LONG_RANGE,
-  /// We do not know the protocol of that node.
-  ///
-  PROTOCOL_UNKNOWN
-} zwave_protocol_t;
 
 // Node Information Frame masks for the listening_protocol byte
 #define ZWAVE_NODE_INFO_LISTENING_PROTOCOL_LISTENING_MASK        0x80

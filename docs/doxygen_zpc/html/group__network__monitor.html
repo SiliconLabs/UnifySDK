@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -106,13 +106,13 @@ Functions</h2></td></tr>
 <p>The Network Monitor acts as an interface between the <a class="el" href="group__attribute__store.html">Attribute Store</a> and <a class="el" href="group__zwave__network__management.html">Z-Wave Network Management</a> and the <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a>. It keeps track of the current state of the network. It reacts to events from the zwave_controller component and add/remove nodes to/from the attribute system. It will also sanitize the HomeID and NodeID list of the controller with the HomeID provided and NodeID list in the attribute system. If a mismatch occurs, the component will update the attribute system to reflect the controller information.</p>
 <p>The network state monitor will also keep track of which nodes in the network are unreachable.</p>
 <div class="plantumlgraph">
-<object type="image/svg+xml" data="inline_umlgraph_9.svg"></object>
+<object type="image/svg+xml" data="inline_umlgraph_17.svg"></object>
 <div class="caption">
 Network Monitor Sequence Diagram</div>
 </div>
 <p>The network monitor will also keep track of the nodes being interviewed by monitoring Z-Wave NIF creations in the attribute store.</p>
 <div class="plantumlgraph">
-<object type="image/svg+xml" data="inline_umlgraph_10.svg"></object>
+<object type="image/svg+xml" data="inline_umlgraph_18.svg"></object>
 <div class="caption">
 Network Monitor Interview monitoring</div>
 </div>
@@ -160,7 +160,7 @@ Network Monitor Interview monitoring</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:55 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:37 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

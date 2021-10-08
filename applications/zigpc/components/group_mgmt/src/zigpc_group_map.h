@@ -14,7 +14,7 @@
 /**
  * @file group_map.h
  * @defgroup zigpc_group_map ZigPC Group Map functions
- * @ingroup zigpc_group_map
+ * @ingroup zigpc_group_mgmt
  * @brief This header contains the definitions and functionality associated with
  * the Zigpc Group Map. This is the internal mechanism for storing and manipulating
  * groups data.

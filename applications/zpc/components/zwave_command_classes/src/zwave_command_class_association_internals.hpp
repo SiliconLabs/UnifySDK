@@ -85,7 +85,7 @@ void get_node_id_association_bytestream(association_set source,
                                         association_bytes &target);
 
 /**
- * @brief Substract Set1 from Set2.
+ * @brief Substract set_1 from set_2.
  *
  * @param [in] set_1
  * @param [in] set_2

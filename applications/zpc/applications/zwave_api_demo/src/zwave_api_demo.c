@@ -114,7 +114,8 @@ int main(int argc, char **argv)
   sl_status_t init_status = zwapi_init(serial_device, NULL, &callbacks);
 
   if (init_status != SL_STATUS_OK) {
-    sl_log_error(LOG_TAG, "Z-Wave module initialization went wrong. Exiting\n");
+    sl_log_critical(LOG_TAG,
+                    "Z-Wave module initialization went wrong. Exiting\n");
     return EXIT_FAILURE;
   }
 

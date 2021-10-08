@@ -153,7 +153,7 @@ sl_status_t zwave_network_management_abort();
 sl_status_t zwave_network_management_add_node();
 
 /**
- * @brief Put the Z-Wave controller in smart start add node mode.
+ * @brief Put the Z-Wave controller in SmartStart add node mode.
  *
  * This function should be called after receiving a SmartStart inclusion request
  * to which we have a matching provision list entry.
@@ -176,21 +176,21 @@ sl_status_t zwave_network_management_add_node_with_dsk(
   zwave_protocol_t preferred_inclusion);
 
 /**
- * @brief Set the controller in smart start mode.
+ * @brief Set the controller in SmartStart mode.
  *
- * When smart start is enabled the controller will open the Z-Wave controller for
- * smart start inclusions. If an other network management operation is activated
- * the smart start inclusion mode will be temporary suspended until the
+ * When SmartStart is enabled the controller will open the Z-Wave controller for
+ * SmartStart inclusions. If an other network management operation is activated
+ * the SmartStart inclusion mode will be temporary suspended until the
  * operation is done.
  *
- * When a smart start inclusion request is received the smart start mode is
- * automatically disabled. Smart start mode must be re-enabled manually if a smart
- * start inclusion is not stated as a response to a smart start inclusion
+ * When a SmartStart inclusion request is received the SmartStart mode is
+ * automatically disabled. SmartStart mode must be re-enabled manually if a smart
+ * start inclusion is not stated as a response to a SmartStart inclusion
  * request.
  *
  * @param enable
- * - TRUE the network will be kept open for smart start inclusions.
- * - FALSE smart start inclusions are disabled.
+ * - TRUE the network will be kept open for SmartStart inclusions.
+ * - FALSE SmartStart inclusions are disabled.
  *
  */
 void zwave_network_management_smart_start_enable(bool enable);
@@ -274,11 +274,27 @@ sl_status_t zwave_network_management_learn_mode(uint8_t intent);
  */
 sl_status_t zwave_network_management_set_default(void);
 
-///TODO:
-///
-sl_status_t zwave_network_management_replace_failed(zwave_node_id_t nodeid);
+/**
+ * @brief Remove a failed node
+ *
+ * This function can be used for remove a failing node from Z-Wave network.
+ * NOP will be sent to the node to make sure that the Z-Wave protocol marks
+ * it failing on the controller and the subsequent remove failed call for that
+ * node will succeed.
+ *
+ * The following callbacks may be triggered asynchronous by this operation
+ *
+ * - on_node_deleted
+ * - on_error
+ *
+ * @param nodeid Node id of failing node which will be removed
+ * @return sl_status_t
+ *   - SL_STATUS_BUSY if Network Management (State Machine) is busy in some
+ *                    other operation
+ *   - SL_STATUS_OK when remove failed is triggered
+ */
+
 sl_status_t zwave_network_management_remove_failed(zwave_node_id_t nodeid);
-sl_status_t zwave_network_management_proxy_inclusion(zwave_node_id_t nodeid);
 
 /**
  * @brief Get the cached home_id.
@@ -318,6 +334,8 @@ sl_status_t zwave_network_management_request_node_neighbor_discovery(
 /**
  * @brief Request the NM to perform proxy inclusion
  * @param node_id the NodeID of the node
+ * @param nif
+ * @param inclusion_step
  *
  * @return sl_status_t BUSY if the state is not IDLE
  */
@@ -335,6 +353,13 @@ sl_status_t zwave_network_management_start_proxy_inclusion(
 sl_status_t zwave_network_management_assign_return_route(
   zwave_node_id_t node_id, zwave_node_id_t destination_node_id);
 
+/**
+ * @brief Verify if we are carrying some network management operations
+ *
+ * @returns true if we are busy doing something, false if IDLE.
+ */
+bool zwave_network_management_is_busy();
+
 /* An application MUST time out waiting for the
  * ADD_NODE_STATUS_NODE_FOUND status if it does not receive the indication
  * after calling AddNodeToNetwork(ADD_NODE_ANY).
@@ -345,6 +370,9 @@ sl_status_t zwave_network_management_assign_return_route(
 #define LEARN_MODE_TIMEOUT_NETWORK_WIDE   6000  //6 seconds
 // defining Direct range learn mode operation timeout to 20 seconds
 #define LEARN_MODE_TIMEOUT_DIRECT_RANGE 20000
+/// Time that Send data (including e.g. sending NOP) will take as a maximum.
+/// Protocol that tries routing with FLiRS nodes takes very very long.
+#define SEND_DATA_TIMEOUT 125000
 
 /* An application MUST time out waiting for the ADD_NODE_STATUS_ADDING_END_NODE
  * status if it does not receive the indication within a time period after

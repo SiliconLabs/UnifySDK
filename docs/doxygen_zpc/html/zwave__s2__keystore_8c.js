@@ -1,6 +1,7 @@
 var zwave__s2__keystore_8c =
 [
     [ "LOG_TAG", "zwave__s2__keystore_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
+    [ "NETWORK_KEY_SIZE", "zwave__s2__keystore_8c.html#ab0dd4d1ba9852a84dcea79df02b9ae4d", null ],
     [ "S2_NUM_KEY_CLASSES", "zwave__s2__keystore_8c.html#af3a545d2ef8b8bee2963f7e4ab1f40a2", null ],
     [ "keystore_network_key_clear", "zwave__s2__keystore_8c.html#a4cd194550cfba930547cbd0e03ce2292", null ],
     [ "keystore_network_key_read", "zwave__s2__keystore_8c.html#a1f1d747c23d661a2e64ebb4812ed2faa", null ],
@@ -15,6 +16,7 @@ var zwave__s2__keystore_8c =
     [ "zwave_s2_keystore_get_dsk", "group__zwave__s2__keystore.html#gaaa90915209c3b118a05cc8adb221f83e", null ],
     [ "zwave_s2_keystore_init", "group__zwave__s2__keystore.html#gad872f58f76c4d4974b5fe50ac641004b", null ],
     [ "zwave_s2_keystore_set_ecdh_key_mode", "group__zwave__s2__keystore.html#ga0a7d6a1c6107a1eadcdd959fe53dd229", null ],
+    [ "zwave_s2_log_security_keys", "group__zwave__s2__keystore.html#ga6e7eb7c062ee0f17a650a0e7ca7c9831", null ],
     [ "dynamic_ecdh_private_key", "zwave__s2__keystore_8c.html#a8e97448d105e2552002a083bbc27f0ed", null ],
     [ "ecdh_key_mode", "zwave__s2__keystore_8c.html#ae9388b937aa9bae225b37279a1bea297", null ]
 ];

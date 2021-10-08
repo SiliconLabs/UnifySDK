@@ -191,11 +191,15 @@ static void refresh_all_transitions()
     // Out of bounds check. Did we calculate a value located outside the
     // [start_value ; finish_value] interval ?
     if ((value < it->second.start_value) && (value < it->second.finish_value)) {
-      sl_log_warning(LOG_TAG, "Out of bounds! Calculation mistake??");
+      sl_log_warning(LOG_TAG,
+                     "Target value is out of bounds (smaller than both start "
+                     "and finish). We probably have a calculation mistake.");
       value = it->second.finish_value;
     } else if ((value > it->second.start_value)
                && (value > it->second.finish_value)) {
-      sl_log_warning(LOG_TAG, "Out of bounds! Calculation mistake??");
+      sl_log_warning(LOG_TAG,
+                     "Target value is out of bounds (greater than both start "
+                     "and finish). We probably have a calculation mistake.");
       value = it->second.finish_value;
     }
 

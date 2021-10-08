@@ -217,11 +217,13 @@ attribute check_branch(std::string branch_descriptor, attribute branch_root)
   }
   // Validate branch
   if (!validate_path(branch_data, branch_root)) {
+    delete branch_data;
     return node;
   }
 
   std::cout << " :OK" << std::endl;
   node = (*branch_data).back().attr;
+  delete branch_data;
   return node;
 }
 
@@ -232,10 +234,12 @@ attribute create_branch(std::string branch_descriptor, attribute branch_root)
   std::vector<BranchNode> *branch_data = new std::vector<BranchNode>();
 
   if (!parse_branch_descriptor(branch_descriptor, branch_data)) {
+    delete branch_data;
     return node;
   }
 
   create_path(branch_data, branch_root);
   node = (*branch_data).back().attr;
+  delete branch_data;
   return node;
 }

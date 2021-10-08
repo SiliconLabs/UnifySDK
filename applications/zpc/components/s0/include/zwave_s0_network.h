@@ -34,7 +34,10 @@ extern "C" {
 
 /**
  * Bootstrapping S0 complete event.
- * @param success: true if success, false if failure
+ * @param granted_keys
+ * @param kex_fail_code 
+ *
+ * @returns true if success, false if failure
  */
 typedef void (*s0_on_bootstrapping_complete_cb)(
   zwave_keyset_t granted_keys, zwave_kex_fail_type_t kex_fail_code);

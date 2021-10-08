@@ -7,6 +7,7 @@ var attribute__store__helper_8c =
     [ "attribute_store_is_value_defined", "group__attribute__store__value__helpers.html#gac39c5bdc7c7290dc9abe16948cb848b6", null ],
     [ "attribute_store_is_value_matched", "group__attribute__store__value__helpers.html#ga4f8587c8649ac94509c63e91970bce82", null ],
     [ "attribute_store_read_value", "group__attribute__store__value__helpers.html#ga78d2a9c79ae9f51af5417840decbb295", null ],
+    [ "attribute_store_set_child_desired", "group__attribute__store__value__helpers.html#gaaa2a0f6d0363b1f1ba56f8c176c005c3", null ],
     [ "attribute_store_set_child_reported", "group__attribute__store__value__helpers.html#ga541af3a257fdaf58fbc0a1eee4b8e755", null ],
     [ "attribute_store_set_desired", "group__attribute__store__value__helpers.html#ga2179ceede1afad2f87c6dbe35809b6ab", null ],
     [ "attribute_store_set_desired_as_reported", "group__attribute__store__value__helpers.html#ga1f3e02cc114657ba063672a054f3164d", null ],

@@ -28,6 +28,9 @@
 // Includes from other components
 #include "zwave_rx.h"
 
+// Interfaces
+#include "zwave_command_class_version_types.h"
+
 // Generic includes
 #include <stddef.h>
 
@@ -136,7 +139,7 @@ bool zwave_node_supports_command_class(zwave_command_class_t command_class,
  * @returns the version number of the Command Class. 0 if it is
  *          neither supported nor controlled.
  */
-uint8_t
+zwave_cc_version_t
   zwave_node_get_command_class_version(zwave_command_class_t command_class,
                                        zwave_node_id_t node_id,
                                        zwave_endpoint_id_t endpoint_id);

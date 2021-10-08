@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('namespaceuic__ota.html',''); initResiz
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">uic_ota Namespace Reference<div class="ingroups"><a class="el" href="group__ota__listener.html">Ota_listener</a></div></div>  </div>
+<div class="title">uic_ota Namespace Reference<div class="ingroups"><a class="el" href="group__ota__listener.html">OTA Listener</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
@@ -146,11 +146,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:a68bb2448e182a4afdc37048777fb0789"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize ota_listener  <a href="namespaceuic__ota.html#a68bb2448e182a4afdc37048777fb0789">More...</a><br /></td></tr>
 <tr class="separator:a68bb2448e182a4afdc37048777fb0789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19baf1996e05f7b86a2662722d3f2b5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a19baf1996e05f7b86a2662722d3f2b5d">subscribe_unid</a> (const std::string &amp;unid, const std::string &amp;uiid)</td></tr>
-<tr class="memdesc:a19baf1996e05f7b86a2662722d3f2b5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Listen for images that match the unid + uiid pair/ when changes to this key is detected, image_ready will be called.  <a href="namespaceuic__ota.html#a19baf1996e05f7b86a2662722d3f2b5d">More...</a><br /></td></tr>
+<tr class="memdesc:a19baf1996e05f7b86a2662722d3f2b5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Listen for images that match the UNID + UIID pair/ when changes to this key is detected, image_ready will be called.  <a href="namespaceuic__ota.html#a19baf1996e05f7b86a2662722d3f2b5d">More...</a><br /></td></tr>
 <tr class="separator:a19baf1996e05f7b86a2662722d3f2b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6df3aa8dde97490dc31a2f022a57240"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#ae6df3aa8dde97490dc31a2f022a57240">unsubscribe_unid</a> (const std::string &amp;unid, const std::string &amp;uiid)</td></tr>
 <tr class="memdesc:ae6df3aa8dde97490dc31a2f022a57240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop watching specific images.  <a href="namespaceuic__ota.html#ae6df3aa8dde97490dc31a2f022a57240">More...</a><br /></td></tr>
 <tr class="separator:ae6df3aa8dde97490dc31a2f022a57240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aa2d4d6e0ad5f318e1b3cdf4fde20e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a3aa2d4d6e0ad5f318e1b3cdf4fde20e4">unsubscribe_all_unids_uiid</a> (const std::string &amp;unid)</td></tr>
+<tr class="memdesc:a3aa2d4d6e0ad5f318e1b3cdf4fde20e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop watching all images for unid and unretain MQTT messages.  <a href="namespaceuic__ota.html#a3aa2d4d6e0ad5f318e1b3cdf4fde20e4">More...</a><br /></td></tr>
+<tr class="separator:a3aa2d4d6e0ad5f318e1b3cdf4fde20e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa78b130295055d35342f5e3206efad9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#afa78b130295055d35342f5e3206efad9">get_by_unid</a> (const std::string &amp;unid, const std::string &amp;uiid, const <a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">image_ready_funct_t</a> &amp;get_ready_cb)</td></tr>
 <tr class="memdesc:afa78b130295055d35342f5e3206efad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">After an image_available call is triggered.  <a href="namespaceuic__ota.html#afa78b130295055d35342f5e3206efad9">More...</a><br /></td></tr>
 <tr class="separator:afa78b130295055d35342f5e3206efad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -470,7 +473,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Listen for images that match the unid + uiid pair/ when changes to this key is detected, image_ready will be called. </p>
+<p>Listen for images that match the UNID + UIID pair/ when changes to this key is detected, image_ready will be called. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unid</td><td>end-note id. </td></tr>
@@ -518,7 +521,34 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Clean up MQTT status for a UNID and related endpoints. </p>
-<p>This function shoul be used when a device or endpoint disconnects for cleaning up OTA statuses. </p>
+<p>This function should be used when a device or endpoint disconnects for cleaning up OTA statuses. </p>
+
+</div>
+</div>
+<a id="a3aa2d4d6e0ad5f318e1b3cdf4fde20e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aa2d4d6e0ad5f318e1b3cdf4fde20e4">&#9670;&nbsp;</a></span>unsubscribe_all_unids_uiid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void uic_ota::unsubscribe_all_unids_uiid </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>unid</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop watching all images for unid and unretain MQTT messages. </p>
+<p>Will unsubscribe on all image UIIDs and unretain all MQTT topics for the unid.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unid</td><td>end-note id. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -549,6 +579,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Stop watching specific images. </p>
+<p>Will stop watching specific UIID image and will NOT unretain MQTT topics.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">unid</td><td>end-note id. </td></tr>
@@ -929,7 +960,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceuic__ota.html">uic_ota</a></li>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:53 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:40 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

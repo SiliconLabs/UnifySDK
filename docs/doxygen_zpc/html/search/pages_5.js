@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['legacy_20z_2fip_20gateway_20serial_2dapi_20names_8083',['Legacy Z/IP Gateway Serial-API Names',['../group__ZWAPI.html',1,'']]]
+  ['model_5fstructure_8288',['model_structure',['../md_applications_zpc_components_zwave_command_classes_model_structure.html',1,'']]]
 ];

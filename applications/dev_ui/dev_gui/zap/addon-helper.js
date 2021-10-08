@@ -7,7 +7,8 @@ let supportedClusters = [
     "Level",
     "OccupancySensing",
     "OnOff",
-    "Thermostat"
+    "Thermostat",
+    "PowerConfiguration"
 ];
 
 const enums = new Set();

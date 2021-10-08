@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['coding_5fstandard_2emd_33',['coding_standard.md',['../coding__standard_8md.html',1,'']]]
+  ['known_2dabbreviations_2emd_31',['known-abbreviations.md',['../known-abbreviations_8md.html',1,'']]]
 ];

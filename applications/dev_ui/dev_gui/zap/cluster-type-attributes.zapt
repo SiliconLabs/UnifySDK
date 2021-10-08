@@ -3,6 +3,7 @@
 //To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
 {{#zcl_enums}}{{initEnums label}}{{/zcl_enums}} {{#zcl_bitmaps}}{{initBitmaps label}}{{/zcl_bitmaps}}
 
+//generate ClusterTypes
 export let ClusterTypeAttrs: any = {
 {{#zcl_clusters}}
   {{#if (isSupportedCluster label)}}

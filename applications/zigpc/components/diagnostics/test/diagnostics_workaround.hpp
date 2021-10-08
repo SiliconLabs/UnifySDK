@@ -22,5 +22,6 @@
 #include "zigpc_used_physical_ram.hpp"
 #include "zigpc_cpu_usage.hpp"
 #include "zigpc_example_metric.hpp"
+#include "zigpc_counter_plugin_metric.hpp"
 #endif
 #endif

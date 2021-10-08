@@ -15,7 +15,7 @@
 /**
  * @file ota_zigbee.h
  * @defgroup ota_zigbee ZigPC OTA functions
- * @ingroup ota_zigbee
+ * @ingroup zigpc_components
  * @brief This header contains the definitions and functionality associated with
  * over-the-air upgrades setup. This is the intended public interface for the
  * entire component. All definitions and functions here are required for
@@ -27,9 +27,11 @@
 #ifndef OTA_ZIGBEE_H
 #define OTA_ZIGBEE_H
 
-#include "sl_status.h"
-#include "zigpc_common_zigbee.h"
-#include "zcl_definitions.h"
+// Shared UIC includes
+#include <sl_status.h>
+
+// ZigPC includes
+#include <zigpc_common_zigbee.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -35,10 +35,10 @@ void test_zwave_command_class_zwave_plus_info_get()
        ZWAVEPLUS_VERSION_V2,
        ZWAVEPLUS_INFO_REPORT_ROLE_TYPE_CONTROLLER_CENTRAL_STATIC,
        ZWAVEPLUS_INFO_REPORT_NODE_TYPE_ZWAVEPLUS_NODE,
-       (ICON_TYPE_GENERIC_GATEWAY >> 8) & 0xFF,
-       (ICON_TYPE_GENERIC_GATEWAY & 0xFF),
-       (ICON_TYPE_GENERIC_GATEWAY >> 8) & 0xFF,
-       (ICON_TYPE_GENERIC_GATEWAY & 0xFF)};
+       (ICON_TYPE_GENERIC_CENTRAL_CONTROLLER >> 8) & 0xFF,
+       (ICON_TYPE_GENERIC_CENTRAL_CONTROLLER & 0xFF),
+       (ICON_TYPE_GENERIC_CENTRAL_CONTROLLER >> 8) & 0xFF,
+       (ICON_TYPE_GENERIC_CENTRAL_CONTROLLER & 0xFF)};
 
   execute_frame_expect_frame(
     zwave_command_class_zwave_plus_info_support_handler,

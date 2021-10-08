@@ -229,7 +229,7 @@ void test_network_monitor_init()
     attribute_store_register_callback_by_type_and_state_save);
   attribute_store_register_callback_by_type_and_state_ExpectAndReturn(
     NULL,
-    ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
     REPORTED_ATTRIBUTE,
     SL_STATUS_OK);
   attribute_store_register_callback_by_type_and_state_IgnoreArg_callback_function();
@@ -418,7 +418,7 @@ void test_network_monitor_test_node_id_assigned()
 {
   test_network_monitor_init();
   zwave_node_id_t zwave_node_id = 0x24;
-  nm_callbacks->on_node_id_assigned(zwave_node_id, true);
+  nm_callbacks->on_node_id_assigned(zwave_node_id, true, PROTOCOL_ZWAVE);
 
   // On node added triggers all kind of calls to attribute_store_get_node_child_by_type()
   //attribute_store_get_node_child_by_type_IgnoreAndReturn(new_node_mock);
@@ -453,6 +453,7 @@ void test_network_monitor_test_node_id_assigned()
     &network_status,
     sizeof(network_status),
     SL_STATUS_OK);
+  store_protocol_ExpectAndReturn(zwave_node_id, PROTOCOL_ZWAVE, SL_STATUS_OK);
   contiki_test_helper_run(0);
 }
 
@@ -699,6 +700,13 @@ void test_non_sleeping_node_failing_status_monitoring_procedure()
   nm_callbacks->on_frame_transmission_failed(my_node_id);
   contiki_test_helper_run(0);
   // mock for successful transmission
+  attribute_store_set_child_reported_ExpectAndReturn(
+    my_test_node_node_id,
+    ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
+    NULL,
+    sizeof(unsigned long),
+    SL_STATUS_OK);
+  attribute_store_set_child_reported_IgnoreArg_value();
   attribute_store_network_helper_get_node_id_node_ExpectAndReturn(
     NULL,
     my_test_node_node_id);
@@ -746,7 +754,7 @@ void test_sleeping_node_failing_status_monitoring_procedure()
   static zwave_node_id_t my_test_node_id                      = 0x01;
   static uint8_t my_test_node_id_size            = sizeof(zwave_node_id_t);
   zpc_config_t my_nm_missing_wakeup_notification = {0};
-  my_nm_missing_wakeup_notification.missing_wakeup_notification = 2;
+  my_nm_missing_wakeup_notification.missing_wake_up_notification = 2;
   static uint8_t my_test_wakeup_interval[]
     = {0x01, 0x00, 0x00, 0x00};  //1 seconds
   static uint8_t my_test_wakeup_interval_value_size
@@ -799,11 +807,11 @@ void test_sleeping_node_failing_status_monitoring_procedure()
     ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
     0,
     my_last_awaked_timestamp_node);
-  static uint32_t my_test_lastwake_timestamp = 0;
+  static unsigned long my_test_lastwake_timestamp = 0;
   attribute_store_read_value_ExpectAndReturn(my_last_awaked_timestamp_node,
                                              REPORTED_ATTRIBUTE,
                                              NULL,
-                                             sizeof(my_test_lastwake_timestamp),
+                                             sizeof(unsigned long),
                                              1);
   attribute_store_read_value_IgnoreArg_read_value();
   attribute_store_read_value_ReturnMemThruPtr_read_value(
@@ -845,6 +853,13 @@ void test_sleeping_node_failing_status_monitoring_procedure()
   contiki_test_helper_run(2000);
 
   // mock to hear successfull tranmission from the failing node
+  attribute_store_set_child_reported_ExpectAndReturn(
+    my_test_node_id_node,
+    ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
+    NULL,
+    sizeof(unsigned long),
+    SL_STATUS_OK);
+  attribute_store_set_child_reported_IgnoreArg_value();
   attribute_store_network_helper_get_node_id_node_ExpectAndReturn(
     NULL,
     my_test_node_id_node);

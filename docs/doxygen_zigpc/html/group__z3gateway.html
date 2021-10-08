@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -154,6 +154,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ga3d745a1a38f161cd0f6b003cabd228dd"><td class="memItemLeft" align="right" valign="top">EmberStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#ga3d745a1a38f161cd0f6b003cabd228dd">z3gatewayTrustCenterJoinClose</a> (void)</td></tr>
 <tr class="memdesc:ga3d745a1a38f161cd0f6b003cabd228dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop devices from joining the gateway network.  <a href="group__z3gateway.html#ga3d745a1a38f161cd0f6b003cabd228dd">More...</a><br /></td></tr>
 <tr class="separator:ga3d745a1a38f161cd0f6b003cabd228dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaedcb3329cc6650e809bf8907ad6c52f3"><td class="memItemLeft" align="right" valign="top">EmberKeyData&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#gaedcb3329cc6650e809bf8907ad6c52f3">z3gatewayGetTrustCenterWellKownKey</a> (void)</td></tr>
+<tr class="memdesc:gaedcb3329cc6650e809bf8907ad6c52f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the Trust Center well-known link key.  <a href="group__z3gateway.html#gaedcb3329cc6650e809bf8907ad6c52f3">More...</a><br /></td></tr>
+<tr class="separator:gaedcb3329cc6650e809bf8907ad6c52f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7fd7ec960a48187de17108147adaf8b3"><td class="memItemLeft" align="right" valign="top">EmberStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#ga7fd7ec960a48187de17108147adaf8b3">z3gatewayTrustCenterAddLinkKey</a> (const EmberEUI64 eui64, const EmberKeyData *key, bool inTransientTable)</td></tr>
+<tr class="memdesc:ga7fd7ec960a48187de17108147adaf8b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add link key to either to the regular or transient key table.  <a href="group__z3gateway.html#ga7fd7ec960a48187de17108147adaf8b3">More...</a><br /></td></tr>
+<tr class="separator:ga7fd7ec960a48187de17108147adaf8b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gade0b665306a9f4b5664321457d0740be"><td class="memItemLeft" align="right" valign="top">EmberStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#gade0b665306a9f4b5664321457d0740be">z3gatewayTrustCenterAddDeviceInstallCode</a> (const EmberEUI64 eui64, uint8_t *installCode, uint8_t installCodeLength)</td></tr>
 <tr class="memdesc:gade0b665306a9f4b5664321457d0740be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a device to the network using the Z3 Install Code method.  <a href="group__z3gateway.html#gade0b665306a9f4b5664321457d0740be">More...</a><br /></td></tr>
 <tr class="separator:gade0b665306a9f4b5664321457d0740be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,6 +190,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gae26a2ecb86f648c8073be13bf71bfd70"><td class="memItemLeft" align="right" valign="top">EmberStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#gae26a2ecb86f648c8073be13bf71bfd70">z3gatewayAddOtaImage</a> (const char *filename)</td></tr>
 <tr class="memdesc:gae26a2ecb86f648c8073be13bf71bfd70"><td class="mdescLeft">&#160;</td><td class="mdescRight">z3gatewayAddOtaImage Manually adds an OtaImage to the ota-server plugin  <a href="group__z3gateway.html#gae26a2ecb86f648c8073be13bf71bfd70">More...</a><br /></td></tr>
 <tr class="separator:gae26a2ecb86f648c8073be13bf71bfd70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4baac82597e3f2afc110a3ce249ada43"><td class="memItemLeft" align="right" valign="top">EmberStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#ga4baac82597e3f2afc110a3ce249ada43">z3gatewayGetEmberKey</a> (EmberKeyType type, EmberKeyStruct *const key)</td></tr>
+<tr class="memdesc:ga4baac82597e3f2afc110a3ce249ada43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate Ember key data specified by the type.  <a href="group__z3gateway.html#ga4baac82597e3f2afc110a3ce249ada43">More...</a><br /></td></tr>
+<tr class="separator:ga4baac82597e3f2afc110a3ce249ada43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5715dca10e7896340a612b3f29271eac"><td class="memItemLeft" align="right" valign="top">EzspStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#ga5715dca10e7896340a612b3f29271eac">z3gatewaySetEzspPolicy</a> (EzspPolicyId policyId, EzspDecisionId decisionId, const char *policyName, const char *decisionName)</td></tr>
+<tr class="memdesc:ga5715dca10e7896340a612b3f29271eac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set EZSP policy on the ZigPC NCP.  <a href="group__z3gateway.html#ga5715dca10e7896340a612b3f29271eac">More...</a><br /></td></tr>
+<tr class="separator:ga5715dca10e7896340a612b3f29271eac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Wrapper command and callback functions setup for Z3Gateway. </p>
@@ -481,6 +493,65 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga4baac82597e3f2afc110a3ce249ada43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4baac82597e3f2afc110a3ce249ada43">&#9670;&nbsp;</a></span>z3gatewayGetEmberKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EmberStatus z3gatewayGetEmberKey </td>
+          <td>(</td>
+          <td class="paramtype">EmberKeyType&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">EmberKeyStruct *const&#160;</td>
+          <td class="paramname"><em>key</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Populate Ember key data specified by the type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>Ember key type to get. </td></tr>
+    <tr><td class="paramname">key</td><td>reference where data will be populated. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>EmberStatus EMBER_SUCCESS on success, or error otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="gaedcb3329cc6650e809bf8907ad6c52f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaedcb3329cc6650e809bf8907ad6c52f3">&#9670;&nbsp;</a></span>z3gatewayGetTrustCenterWellKownKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EmberKeyData z3gatewayGetTrustCenterWellKownKey </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieve the Trust Center well-known link key. </p>
+<dl class="section return"><dt>Returns</dt><dd>EmberKeyData </dd></dl>
+
+</div>
+</div>
 <a id="gab492bc5b6040d0384fc8b2b439af46bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab492bc5b6040d0384fc8b2b439af46bf">&#9670;&nbsp;</a></span>z3gatewayInit()</h2>
 
@@ -726,6 +797,58 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga5715dca10e7896340a612b3f29271eac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5715dca10e7896340a612b3f29271eac">&#9670;&nbsp;</a></span>z3gatewaySetEzspPolicy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EzspStatus z3gatewaySetEzspPolicy </td>
+          <td>(</td>
+          <td class="paramtype">EzspPolicyId&#160;</td>
+          <td class="paramname"><em>policyId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">EzspDecisionId&#160;</td>
+          <td class="paramname"><em>decisionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>policyName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>decisionName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set EZSP policy on the ZigPC NCP. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">policyId</td><td>Type of policy to apply. </td></tr>
+    <tr><td class="paramname">decisionId</td><td>Policy variant to apply. </td></tr>
+    <tr><td class="paramname">policyName</td><td>Descriptive name of policy. </td></tr>
+    <tr><td class="paramname">decisionName</td><td>Descruptive label of decision to be set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>EzspStatus EMBER_SUCCESS on success, or EZSP-related error otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="ga76352344ef57259fd3b334d7533331bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga76352344ef57259fd3b334d7533331bc">&#9670;&nbsp;</a></span>z3gatewayShutdown()</h2>
 
@@ -808,6 +931,51 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>EmberStatus EMBER_SUCCESS or error </dd></dl>
+
+</div>
+</div>
+<a id="ga7fd7ec960a48187de17108147adaf8b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7fd7ec960a48187de17108147adaf8b3">&#9670;&nbsp;</a></span>z3gatewayTrustCenterAddLinkKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EmberStatus z3gatewayTrustCenterAddLinkKey </td>
+          <td>(</td>
+          <td class="paramtype">const EmberEUI64&#160;</td>
+          <td class="paramname"><em>eui64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const EmberKeyData *&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>inTransientTable</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add link key to either to the regular or transient key table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eui64</td><td>Device that will be using the key (or wildcard). </td></tr>
+    <tr><td class="paramname">key</td><td>Link key data </td></tr>
+    <tr><td class="paramname">inTransientTable</td><td>Store key in either the regular or transient table. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>EmberStatus EMBER_SUCCESS on success, or EZSP-related error occured when requesting key to be added. </dd></dl>
 
 </div>
 </div>
@@ -939,7 +1107,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

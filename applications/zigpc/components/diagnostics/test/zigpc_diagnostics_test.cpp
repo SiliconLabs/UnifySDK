@@ -21,18 +21,29 @@ extern "C" {
 // Test framework
 #include "unity.h"
 #include "uic_mqtt_mock.h"
+#include "zigpc_gateway_mock.h"
 
 // UIC Component
 #include "sl_status.h"
+
+// A global flag to check if the test/stub metric called "update_value"
+bool static stub_metric_invoked_flag = false;
+//Global notify flag
+bool static stub_manager_invoked_flag = false;
+
 void suiteSetUp(void) {}
 
 void setUp(void)
 {
+  // set all the stub flags to false
+  stub_manager_invoked_flag = false;
+  stub_metric_invoked_flag  = false;
   uic_mqtt_mock_Init();
 }
 
 void tearDown(void)
 {
+  uic_mqtt_mock_Verify();
   uic_mqtt_mock_Destroy();
 }
 
@@ -63,8 +74,6 @@ void test_uic_diagnostic_request_to_strings_correct_return()
 // Testing diagnostic manager :
 
 // Setup for the handle_metricID_request
-// Global Flag
-bool static stub_metric_flag = false;
 
 class zigpc_stub_metric : public zigpc_diagnostics_metric
 {
@@ -77,8 +86,20 @@ class zigpc_stub_metric : public zigpc_diagnostics_metric
 
   void update_value()
   {
-    stub_metric_flag = true;
+    stub_metric_invoked_flag = true;
     printf("Stub Metric update called\n");
+  }
+};
+
+// stub notify
+
+class zigpc_diagnostics_stub_manager :
+  public virtual zigpc_diagnostics_notification
+{
+  public:
+  void notify(std::string metric_id)
+  {
+    stub_manager_invoked_flag = true;
   }
 };
 
@@ -90,7 +111,6 @@ void test_uic_diagnostic_manager_handle_metricID_request()
     = zigpc_diagnostics_manager::get_instance();
   zigpc_diagnostics_notification &m_notify = manager;
   std::vector<std::string> metric_id_v;
-  printf("Starting test \n");
   std::string stub_metric_id = "SYS_HEALTH_STUB_SYNC";
   // add the metric ID to the vector
   metric_id_v.push_back(stub_metric_id);
@@ -100,7 +120,7 @@ void test_uic_diagnostic_manager_handle_metricID_request()
   // Call a handlemetric request with the vector containing the good metricID
   manager.handle_metricID_request(metric_id_v);
   // check if update of the metric stub has been called
-  TEST_ASSERT_TRUE(stub_metric_flag);
+  TEST_ASSERT_TRUE(stub_metric_invoked_flag);
 }
 
 // check the increment
@@ -108,28 +128,25 @@ void test_uic_diagnostic_manager_handle_metricID_request()
 void test_uic_diagnostics_uptime_metric()
 {
   // ARRANGE
-  zigpc_diagnostics_notification notif;
+  zigpc_diagnostics_stub_manager notif;
   zigpc_uptime_metric uptime_metric(notif, "UPTIME_MOCK_ID");
   std::string topic = uptime_metric.get_metric_id();
   long time1;
   long time2;
 
   // EXPECT
-  uic_mqtt_publish_Expect(topic.c_str(), nullptr, 0, false);
-  uic_mqtt_publish_IgnoreArg_message();
-  uic_mqtt_publish_IgnoreArg_message_length();
-
   //ACT
   uptime_metric.update_value();
   time1 = stoi(uptime_metric.get_serialized_value());
+
+  TEST_ASSERT_TRUE(stub_manager_invoked_flag);
+  // Reset flag for second part of the test
+  stub_manager_invoked_flag = false;
 
   // 2 second delay
   usleep(2000000);
 
   //EXPECT
-  uic_mqtt_publish_Expect(topic.c_str(), nullptr, 0, false);
-  uic_mqtt_publish_IgnoreArg_message();
-  uic_mqtt_publish_IgnoreArg_message_length();
 
   //ACT
   uptime_metric.update_value();
@@ -137,6 +154,7 @@ void test_uic_diagnostics_uptime_metric()
 
   //ASSERT
   TEST_ASSERT_TRUE(time1 < time2);
+  TEST_ASSERT_TRUE(stub_manager_invoked_flag);
 }
 
 void test_uic_diagnostics_publish_all_metric()
@@ -170,5 +188,36 @@ void test_uic_diagnostics_publish_all_metric()
 
   manager.publish_metric_list();
   TEST_ASSERT_TRUE(true);
+}
+
+void test_uic_diagnostics_counter_metric()
+{
+  // ARRANGE
+
+  zigpc_diagnostics_stub_manager notif;
+  zigpc_counter_plugin_metric counter_metric(notif, "COUNTER_MOCK_ID");
+  std::string topic = counter_metric.get_metric_id();
+
+  uint16_t mock_counter_array[] = {1, 2, 3};
+
+  //Expect
+  zigpc_gateway_get_counters_capacity_ExpectAndReturn(3);
+
+  zigpc_gateway_get_counters_list_ExpectAndReturn(NULL, 3, SL_STATUS_OK);
+  zigpc_gateway_get_counters_list_IgnoreArg_buffer();
+  zigpc_gateway_get_counters_list_ReturnArrayThruPtr_buffer(mock_counter_array,
+                                                            3);
+
+  zigpc_gateway_get_counters_entry_label_ExpectAndReturn(0, "FIRST");
+  zigpc_gateway_get_counters_entry_label_ExpectAndReturn(1, "SECOND");
+  zigpc_gateway_get_counters_entry_label_ExpectAndReturn(2, "LAST");
+
+  //ACT
+  counter_metric.update_value();
+
+  std::string expected_message = R"({"FIRST" : 1,"SECOND" : 2,"LAST" : 3})";
+  TEST_ASSERT_TRUE(stub_manager_invoked_flag);
+  TEST_ASSERT_EQUAL_STRING(counter_metric.get_serialized_value().c_str(),
+                           expected_message.c_str());
 }
 }

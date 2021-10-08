@@ -1,6 +1,7 @@
 var zwave__command__class__version_8c =
 [
     [ "ATTRIBUTE", "zwave__command__class__version_8c.html#a3a48b9a3a4b2d94c644107976c45bc72", null ],
+    [ "DEFAULT_HARDWARE_VERSION", "zwave__command__class__version_8c.html#ad391ebcfd09538a72365e568764a973d", null ],
     [ "LOG_TAG", "zwave__command__class__version_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "NUM_FW_TARGETS", "zwave__command__class__version_8c.html#afda283c42574998187e8bc9c47741646", null ],
     [ "REPORT_FIRMWARE_0_SUB_VERSION_INDEX", "zwave__command__class__version_8c.html#a5302c0b127b6d586f1b697d9cb79f2a5", null ],

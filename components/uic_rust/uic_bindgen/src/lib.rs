@@ -26,8 +26,6 @@ pub struct LinkLibrary {
 pub struct BindingsTarget {
     name: String,
     target_source_dir: PathBuf,
-    allow_list: String,
-    block_list: String,
     link_libraries: Vec<LinkLibrary>,
     include_dirs: Vec<PathBuf>,
     input_config: Option<PathBuf>,
@@ -62,19 +60,6 @@ impl BindingsTarget {
             result.push(header);
         }
         result
-    }
-
-    pub fn is_valid(&self) -> Option<()> {
-        if !self.target_source_dir.exists() {
-            println!(
-                "cargo:warning= stopping bindgen for {} could not find include dir {}",
-                self.name,
-                self.target_source_dir.to_string_lossy()
-            );
-            return None;
-        }
-
-        Some(())
     }
 
     /// export native c library configuration to rust cargo.
@@ -113,21 +98,33 @@ impl BindingsTarget {
 }
 
 /// generates an bindings file
-pub fn generate_bindings(target: BindingsTarget) {
+#[allow(unused_variables, unreachable_code)]
+pub fn generate_bindings(
+    target: BindingsTarget,
+    allow_re: Option<&str>,
+    block_re: Option<&str>,
+    extra_headers: Option<&[String]>,
+) {
+    // Enable after UIC-1059
+    return;
     println!(
         "cargo:rerun-if-changed={}",
         &target.input_config.clone().unwrap().to_str().unwrap()
     );
 
-    target.is_valid().expect("target not valid!");
+    if !target.target_source_dir.exists() && extra_headers.is_none() {
+        panic!(
+            "cargo:warning= stopping bindgen for {}. no valid config src_dir: {} extra_headers: {:?}",
+            target.name,
+            target.target_source_dir.to_string_lossy(),
+            extra_headers
+        );
+    }
 
     //println!("cargo:rustc-env=BINDGEN_EXTRA_CLANG_ARGS=-x c++ -std=c++14");
     let mut bindings = bindgen::Builder::default()
         .derive_default(true)
         .opaque_type("std::.*")
-        .allowlist_type(target.allow_list.clone())
-        .allowlist_function(target.allow_list.clone())
-        .allowlist_var(target.allow_list.clone())
         .default_alias_style(bindgen::AliasVariation::TypeAlias)
         .default_enum_style(bindgen::EnumVariation::Rust {
             non_exhaustive: false,
@@ -138,11 +135,18 @@ pub fn generate_bindings(target: BindingsTarget) {
         .clang_arg("-v")
         .respect_cxx_access_specs(true);
 
-    if !target.block_list.is_empty() {
+    if let Some(allow) = allow_re {
         bindings = bindings
-            .blocklist_function(target.block_list.clone())
-            .blocklist_type(target.block_list.clone())
-            .blocklist_item(target.block_list.clone());
+            .allowlist_type(allow)
+            .allowlist_function(allow)
+            .allowlist_var(allow);
+    }
+
+    if let Some(block) = block_re {
+        bindings = bindings
+            .blocklist_function(block)
+            .blocklist_type(block)
+            .blocklist_item(block);
     }
 
     for include in &target.get_include_dirs() {
@@ -153,9 +157,15 @@ pub fn generate_bindings(target: BindingsTarget) {
         bindings = bindings.header(header.to_string_lossy());
     }
 
+    if let Some(extra) = extra_headers {
+        for header in extra {
+            bindings = bindings.header(header);
+        }
+    }
+
     bindings
         .generate()
-        .unwrap()
+        .unwrap_or_else(|_| panic!("error in binding generator for {}", &target.name))
         .write_to_file(target.get_output_file())
         .unwrap()
 }

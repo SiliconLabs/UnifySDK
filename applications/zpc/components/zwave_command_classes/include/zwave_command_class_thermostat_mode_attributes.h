@@ -20,20 +20,14 @@
 #include "zwave_controller_types.h"
 #include "attribute_store.h"
 
+// Interfaces
+#include "attribute_store_defined_attribute_types.h"
+
 // Generic incldues
 #include <stdbool.h>
 
 // Thermostat Mode Command Class
 #define COMMAND_CLASS_THERMOSTAT_MODE 0x40
-
-#define ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE_VERSION \
-  ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_THERMOSTAT_MODE)
-
-#define ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE \
-  ((attribute_store_type_t)((COMMAND_CLASS_THERMOSTAT_MODE << 8) | 0x02))
-
-#define ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_MODES \
-  ((attribute_store_type_t)((COMMAND_CLASS_THERMOSTAT_MODE << 8) | 0x03))
 
 #ifdef __cplusplus
 extern "C" {
@@ -72,6 +66,7 @@ int32_t command_class_thermostat_mode_get_mode(
  * @param unid
  * @param endpoint
  * @param value_state
+ * @param new_mode 
  *
  * @returns SL_STATUS_OK if it was written
  */

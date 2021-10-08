@@ -17,7 +17,6 @@
 #include <assert.h>
 
 // Interface includes
-#include "ZW_classcmd.h"
 #include "zwave_controller_command_class_indices.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_attribute_store.h"
@@ -95,7 +94,9 @@ static void zwave_command_class_agi_zpc_group_init()
                                                 0);
 
     if (group_node == ATTRIBUTE_STORE_INVALID_NODE) {
-      sl_log_debug(LOG_TAG, "Creating Group ID %d for the ZPC", current_group);
+      sl_log_debug(LOG_TAG,
+                   "Creating Association Group ID %d for the ZPC",
+                   current_group);
       group_node = attribute_store_add_node(ATTRIBUTE(GROUP_ID), endpoint_node);
       attribute_store_set_reported(group_node,
                                    &current_group,
@@ -484,7 +485,7 @@ static sl_status_t zwave_command_class_agi_handle_group_info_report_command(
 
   for (uint8_t i = 0; i < group_count; i++) {
     if (frame_length <= (start_index + (i * 7) + 4)) {
-      sl_log_info(LOG_TAG, "Frame too short, aborting the AGI frame parsing");
+      sl_log_debug(LOG_TAG, "Frame too short, aborting the AGI frame parsing");
       return SL_STATUS_OK;
     }
     association_group_id_t group_id = frame[start_index + (i * 7) + 1];
@@ -569,6 +570,196 @@ static sl_status_t zwave_command_class_agi_handle_group_name_report(
   return SL_STATUS_OK;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Supported Command Handler functions
+///////////////////////////////////////////////////////////////////////////////
+static sl_status_t zwave_command_class_agi_handle_group_name_get(
+  const zwave_controller_connection_info_t *connection_info,
+  const uint8_t *frame)
+{
+  if (connection_info->local.is_multicast) {
+    return SL_STATUS_OK;
+  }
+
+  attribute_store_node_t zpc_ep0_node
+    = get_zpc_endpoint_id_node(connection_info->local.endpoint_id);
+  const auto *get_frame
+    = reinterpret_cast<const ZW_ASSOCIATION_GROUP_NAME_GET_FRAME *>(frame);
+  association_group_id_t group_identifier = get_frame->groupingIdentifier;
+  attribute_store_node_t group_identifier_node
+    = attribute_store_get_node_child_by_value(zpc_ep0_node,
+                                              ATTRIBUTE(GROUP_ID),
+                                              REPORTED_ATTRIBUTE,
+                                              &group_identifier,
+                                              sizeof(group_identifier),
+                                              0);
+  if (group_identifier_node != ATTRIBUTE_STORE_INVALID_NODE) {
+    attribute_store_node_t group_name_node
+      = attribute_store_get_node_child_by_type(group_identifier_node,
+                                               ATTRIBUTE(GROUP_NAME),
+                                               0);
+    association_group_name_report_frame_t report = {};
+    report.command_class       = COMMAND_CLASS_ASSOCIATION_GRP_INFO_V3;
+    report.command             = ASSOCIATION_GROUP_NAME_REPORT_V3;
+    report.grouping_identifier = group_identifier;
+    uint8_t name_size          = 0;
+    attribute_store_get_node_attribute_value(group_name_node,
+                                             REPORTED_ATTRIBUTE,
+                                             report.name,
+                                             &name_size);
+    report.name_length = name_size -1;
+    uint8_t report_length
+      = offsetof(association_group_name_report_frame_t, name) + name_size - 1;
+    return zwave_command_class_send_report(connection_info,
+                                           report_length,
+                                           (uint8_t *)&report);
+  }
+  return SL_STATUS_OK;
+}
+
+static sl_status_t zwave_command_class_agi_handle_group_info_get(
+  const zwave_controller_connection_info_t *connection_info,
+  const uint8_t *frame)
+{
+  if (connection_info->local.is_multicast) {
+    return SL_STATUS_OK;
+  }
+  attribute_store_node_t zpc_ep0_node
+    = get_zpc_endpoint_id_node(connection_info->local.endpoint_id);
+  const auto *get_frame
+    = reinterpret_cast<const ZW_ASSOCIATION_GROUP_INFO_GET_FRAME *>(frame);
+  uint8_t list_mode
+    = get_frame->properties1
+      & ASSOCIATION_GROUP_INFO_GET_PROPERTIES1_LIST_MODE_BIT_MASK;
+  // Note that the ZPC Association Group Information does not change on the fly.
+  // Due to that we set the Dynamic Info field to zero.
+  uint8_t dynamic_info = 0x00;
+  uint8_t group_count  = 0x00;
+
+  association_group_info_report_frame_t report_frame = {};
+  report_frame.command_class = COMMAND_CLASS_ASSOCIATION_GRP_INFO_V3;
+  report_frame.command       = ASSOCIATION_GROUP_INFO_REPORT;
+  uint8_t report_frame_size;
+
+  // If List Mode is set to 0, a receiving node MUST advertise the properties
+  // of the association group identified by the Grouping Identifier.
+  if (list_mode == 0x00) {
+    association_group_id_t group_identifier = get_frame->groupingIdentifier;
+    agi_profile_t profile = zwave_command_class_agi_get_group_profile(
+      connection_info->local.node_id,
+      connection_info->local.endpoint_id,
+      group_identifier);
+
+    // If List Mode is set to 0, the Group Count field MUST be set to 1.
+    group_count             = 0x01;
+    report_frame.properties = list_mode | dynamic_info | group_count;
+    report_frame.vg_ass_group_info[0].groupingIdentifier
+      = static_cast<uint8_t>(group_identifier);
+    report_frame.vg_ass_group_info[0].mode       = 0x00;
+    report_frame.vg_ass_group_info[0].reserved   = RESERVED_BYTE;
+    report_frame.vg_ass_group_info[0].eventCode1 = 0x00;
+    report_frame.vg_ass_group_info[0].eventCode2 = 0x00;
+    report_frame.vg_ass_group_info[0].profile1
+      = static_cast<uint8_t>(profile >> 8);
+    report_frame.vg_ass_group_info[0].profile2
+      = static_cast<uint8_t>(profile & 0xFF);
+    report_frame_size
+      = offsetof(association_group_info_report_frame_t, vg_ass_group_info)
+        + sizeof(VG_ASSOCIATION_GROUP_INFO_REPORT_VG);
+  } else {
+    // First get the number of child per ZPC endpoints
+    size_t nm_childs = attribute_store_get_node_child_count(zpc_ep0_node);
+    attribute_store_node_t group_id_node = ATTRIBUTE_STORE_INVALID_NODE;
+    association_group_id_t group_id;
+    agi_profile_t group_profile;
+    for (size_t i = 0; i < nm_childs; i++) {
+      group_id_node
+        = attribute_store_get_node_child_by_type(zpc_ep0_node,
+                                                 ATTRIBUTE(GROUP_ID),
+                                                 i);
+      if (group_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
+        // Read Group ID and Group profile of each Group ID contents
+        attribute_store_get_reported(group_id_node,
+                                     &group_id,
+                                     sizeof(group_id));
+
+        group_profile = zwave_command_class_agi_get_group_profile(
+          connection_info->local.node_id,
+          connection_info->local.endpoint_id,
+          group_id);
+        report_frame.vg_ass_group_info[group_count].groupingIdentifier
+          = static_cast<uint8_t>(group_id);
+        report_frame.vg_ass_group_info[group_count].mode       = 0x00;
+        report_frame.vg_ass_group_info[group_count].reserved   = RESERVED_BYTE;
+        report_frame.vg_ass_group_info[group_count].eventCode1 = 0x00;
+        report_frame.vg_ass_group_info[group_count].eventCode2 = 0x00;
+        report_frame.vg_ass_group_info[group_count].profile1
+          = static_cast<uint8_t>(group_profile >> 8);
+        report_frame.vg_ass_group_info[group_count].profile2
+          = static_cast<uint8_t>(group_profile & 0xFF);
+        group_count++;
+      }
+    }
+    report_frame.properties
+      = ASSOCIATION_GROUP_INFO_REPORT_PROPERTIES1_LIST_MODE_BIT_MASK_V2
+        | dynamic_info | group_count;
+    report_frame_size
+      = offsetof(association_group_info_report_frame_t, vg_ass_group_info)
+        + (sizeof(VG_ASSOCIATION_GROUP_INFO_REPORT_VG) * group_count);
+  }
+
+  return zwave_command_class_send_report(connection_info,
+                                         report_frame_size,
+                                         (uint8_t *)&report_frame);
+}
+
+static sl_status_t zwave_command_class_agi_handle_group_command_list_get(
+  const zwave_controller_connection_info_t *connection_info,
+  const uint8_t *frame)
+{
+  if (connection_info->local.is_multicast) {
+    return SL_STATUS_OK;
+  };
+  attribute_store_node_t zpc_ep0_node
+    = get_zpc_endpoint_id_node(connection_info->local.endpoint_id);
+  const auto *get_frame
+    = reinterpret_cast<const ZW_ASSOCIATION_GROUP_COMMAND_LIST_GET_FRAME *>(
+      frame);
+  association_group_id_t group_id = get_frame->groupingIdentifier;
+  attribute_store_node_t group_id_node
+    = attribute_store_get_node_child_by_value(zpc_ep0_node,
+                                              ATTRIBUTE(GROUP_ID),
+                                              REPORTED_ATTRIBUTE,
+                                              &group_id,
+                                              sizeof(group_id),
+                                              0);
+  if (group_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
+    attribute_store_node_t group_command_list_node
+      = attribute_store_get_node_child_by_type(group_id_node,
+                                               ATTRIBUTE(GROUP_COMMAND_LIST),
+                                               0);
+    association_group_command_list_report_frame_t report_frame = {};
+    report_frame.command_class       = COMMAND_CLASS_ASSOCIATION_GRP_INFO_V3;
+    report_frame.command             = ASSOCIATION_GROUP_COMMAND_LIST_REPORT_V3;
+    report_frame.grouping_identifier = group_id;
+    uint8_t command_list_size        = 0;
+    attribute_store_get_node_attribute_value(group_command_list_node,
+                                             REPORTED_ATTRIBUTE,
+                                             report_frame.command_list,
+                                             &command_list_size);
+    report_frame.list_length = command_list_size;
+
+    uint8_t report_length
+      = offsetof(association_group_command_list_report_frame_t, command_list)
+        + command_list_size;
+    return zwave_command_class_send_report(connection_info,
+                                           report_length,
+                                           (uint8_t *)&report_frame);
+  }
+
+  return SL_STATUS_OK;
+}
+
 static sl_status_t zwave_command_class_agi_support_handler(
   const zwave_controller_connection_info_t *connection_info,
   const uint8_t *frame_data,
@@ -585,16 +776,17 @@ static sl_status_t zwave_command_class_agi_support_handler(
 
   switch (frame_data[COMMAND_INDEX]) {
     case ASSOCIATION_GROUP_NAME_GET_V3:
-      //TODO;
-      return SL_STATUS_NOT_SUPPORTED;
+      return zwave_command_class_agi_handle_group_name_get(connection_info,
+                                                           frame_data);
 
     case ASSOCIATION_GROUP_INFO_GET_V3:
-      //TODO;
-      return SL_STATUS_NOT_SUPPORTED;
+      return zwave_command_class_agi_handle_group_info_get(connection_info,
+                                                           frame_data);
 
     case ASSOCIATION_GROUP_COMMAND_LIST_GET_V3:
-      //TODO;
-      return SL_STATUS_NOT_SUPPORTED;
+      return zwave_command_class_agi_handle_group_command_list_get(
+        connection_info,
+        frame_data);
 
     default:
       return SL_STATUS_NOT_SUPPORTED;

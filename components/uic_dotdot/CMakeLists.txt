@@ -1,5 +1,25 @@
 # Library
 find_program(ZAP_EXECUTABLE "zap" REQUIRED)
+
+set(ZAP_GENERATE_CMD_STR
+    "${ZAP_EXECUTABLE} generate --noUi --noServer --no-sandbox --tempState")
+if(DEFINED ENV{HEADLESS_HOST})
+  find_program(XVFB_RUN_EXECUTABLE "xvfb-run" REQUIRED)
+  message(
+    STATUS
+      "Found ENV(HEADLESS_HOST), using ${XVFB_RUN_EXECUTABLE} to run ZAP headless"
+  )
+  string(PREPEND ZAP_GENERATE_CMD_STR "${XVFB_RUN_EXECUTABLE} -a ")
+else()
+  message(
+    STATUS "Missing ENV(HEADLESS_HOST), running zap will require a display")
+endif()
+
+set(ZAP_GENERATE_CMD_STR
+    ${ZAP_GENERATE_CMD_STR}
+    CACHE INTERNAL zap_generate_cmd_str)
+message(STATUS "Using zap generate command: ${ZAP_GENERATE_CMD_STR}")
+
 set(Boost_USE_MULTITHREADED ON)
 find_package(Boost REQUIRED)
 
@@ -29,9 +49,23 @@ macro(RUN_ZAP TEMPLATE_JSON)
   math(EXPR zap_template_count "${zap_template_count}-1")
   foreach(index RANGE ${zap_template_count})
     # Read templates[<index>]["path"] from json
-    string(JSON z_path GET ${ZAP_TEMPLATE_JSON} templates ${index} path)
+    string(
+      JSON
+      z_path
+      GET
+      ${ZAP_TEMPLATE_JSON}
+      templates
+      ${index}
+      path)
     # Read templates[<index>]["output"] from json
-    string(JSON z_output GET ${ZAP_TEMPLATE_JSON} templates ${index} output)
+    string(
+      JSON
+      z_output
+      GET
+      ${ZAP_TEMPLATE_JSON}
+      templates
+      ${index}
+      output)
     # Append to input list from "path"
     list(APPEND zap_input ${template_folder}/${z_path})
     # Append to output list from "output"
@@ -59,11 +93,13 @@ macro(RUN_ZAP TEMPLATE_JSON)
     endforeach()
   endif()
 
+  separate_arguments(ZAP_GENERATE_CMD_ARGS NATIVE_COMMAND
+                     ${ZAP_GENERATE_CMD_STR})
   add_custom_command(
     OUTPUT ${zap_output}
     DEPENDS ${zap_input}
     COMMAND
-      ${ZAP_EXECUTABLE} generate --noUi --noServer --no-sandbox --tempState -z
+      ${ZAP_GENERATE_CMD_ARGS} -z
       ${CMAKE_SOURCE_DIR}/components/uic_dotdot/dotdot-xml/library.xml -g
       ${CMAKE_CURRENT_SOURCE_DIR}/${TEMPLATE_JSON} -o
       ${CMAKE_CURRENT_BINARY_DIR})
@@ -71,6 +107,6 @@ endmacro()
 
 run_zap(zap/gen-templates.json)
 add_library(uic_dotdot_types INTERFACE
-                         ${CMAKE_CURRENT_BINARY_DIR}/include/zap-types.h)
+            ${CMAKE_CURRENT_BINARY_DIR}/include/zap-types.h)
 target_include_directories(uic_dotdot_types
                            INTERFACE ${CMAKE_CURRENT_BINARY_DIR}/include)

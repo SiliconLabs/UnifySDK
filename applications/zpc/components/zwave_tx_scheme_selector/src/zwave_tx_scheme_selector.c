@@ -171,8 +171,7 @@ zwave_controller_encapsulation_scheme_t
   return zwave_controller_get_highest_encapsulation(remote_node_keys);
 }
 
-uint16_t zwave_tx_scheme_get_max_payload(zwave_node_id_t node_id,
-                                         zwave_endpoint_id_t endpoint_id)
+uint16_t zwave_tx_scheme_get_max_payload(zwave_node_id_t node_id)
 {
   // Gather all the data we need from the attribute store.
   attribute_store_node_t node_id_node
@@ -183,9 +182,6 @@ uint16_t zwave_tx_scheme_get_max_payload(zwave_node_id_t node_id,
                                              0);
   zwave_protocol_t protocol = PROTOCOL_UNKNOWN;
   attribute_store_get_reported(protocol_node, &protocol, sizeof(protocol));
-
-  zwave_controller_encapsulation_scheme_t encapsulation
-    = zwave_tx_scheme_get_node_highest_security_class(node_id);
 
   // Now we are set. First off, which protocol?
   uint16_t maximum_fragment_size = 0;
@@ -208,11 +204,28 @@ uint16_t zwave_tx_scheme_get_max_payload(zwave_node_id_t node_id,
   } else {
     maximum_fragment_size = ZWAVE_TX_SAFE_LOWEST_MAX_PAYLOAD;
     sl_log_warning(LOG_TAG,
-                   "Unkonwn protocol for NodeID %d. Selecting the "
+                   "Unknown protocol for NodeID %d. Selecting the "
                    "lowest possible payload size(%d).",
                    node_id,
                    maximum_fragment_size);
-    return maximum_fragment_size;
+  }
+
+  return maximum_fragment_size;
+}
+
+uint16_t
+  zwave_tx_scheme_get_max_application_payload(zwave_node_id_t node_id,
+                                              zwave_endpoint_id_t endpoint_id)
+{
+  // Gather all the data we need from the attribute store.
+  zwave_controller_encapsulation_scheme_t encapsulation
+    = zwave_tx_scheme_get_node_highest_security_class(node_id);
+
+  uint16_t maximum_fragment_size = zwave_tx_scheme_get_max_payload(node_id);
+
+  // If we operate with unknowns, just try with the lowest possible
+  if (maximum_fragment_size <= ZWAVE_TX_SAFE_LOWEST_MAX_PAYLOAD) {
+    return ZWAVE_TX_SAFE_LOWEST_MAX_PAYLOAD;
   }
 
   // Security encapsulation overhead

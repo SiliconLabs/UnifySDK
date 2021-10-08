@@ -66,9 +66,8 @@ pi@unify:/var/lib/uic-image-provider $ tree
 .
 ├── images.json
 └── updates
-    ├── image_0.jpg
-    ├── image_1.jpg
-    └── image_2.jpg
+    ├── ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl
+    └── ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl
 ```
 
 ### Metadata File Name and Format
@@ -140,35 +139,27 @@ The JSON file must follow the following JSON schema:
 }
 ```
 
-This is a sample *images.json* file advertising 3 images.
+This is a sample *images.json* file advertising 2 images.
 
 ```json
 {
   "Version": "1",
   "Images": [
-    {
-      "FileName": "updates/image_0.jpg",
-      "Uiid": "ZWave-000-002-003_EU",
+   {
+      "FileName": "updates/ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl",
+      "Uiid": "ZWave-0000-0003-0004-00-01",
       "Unid": [],
-      "Version": "1.0.2",
+      "Version": "10.15.4",
       "ApplyAfter": "2021-06-29T16:39:57+02:00",
-      "Md5": "AxDtA0hVrAYcFFA8S85WjQ=="
+      "Md5": "cZYo9OIM+rnuUk6G9dXmtg=="
     },
     {
-      "FileName": "updates/image_1.jpg",
-      "Uiid": "ZWave-001-002-003_EU",
-      "Unid": ["zw-C87E6FB8-0005"],
-      "Version": "1.0.2",
-      "ApplyAfter": "2021-06-29T16:39:57+02:00",
-      "Md5": "JQuIx5gfzUtpPVS59wY34g=="
-    },
-    {
-      "FileName": "updates/image_2.jpg",
-      "Uiid": "ZWave-002-002-003_EU",
+      "FileName": "updates/ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl",
+      "Uiid": "ZWave-0000-0002-0004-00-01",
       "Unid": ["zw-C87E6FB8-0006", "zw-C87E6FB8-0007", "zw-C87E6FB8-0008"],
-      "Version": "1.0.3",
+      "Version": "10.15.4",
       "ApplyAfter": "2021-06-29T16:42:59+02:00",
-      "Md5": "GEyaucM09e025pO/FeIuZQ=="
+      "Md5": "GnzJgyfhQhzJQHRVtVy8vw=="
     }
   ]
 }
@@ -180,7 +171,7 @@ The following parameters must be provided for each Firmware entry:
 firmware files. Absolute path can be used.
 * **Uiid** : The Unique Image Identifier. This allows Protocol Controller
 to identify know which nodes can receive the firmware. More details about how
-to build the UIID is given in each individual Protocol Controller
+to build the UIID is described in each individual Protocol Controller manual
 * **Unid** : A list of UNIDs that should receive the update. An empty array
 will instruct the Protocol Controller to update all compatible nodes. An array
 with UNIDs will instruct the Protocol Controller to update only the list of
@@ -210,7 +201,7 @@ base64::encode(md5::compute(buffer).to_vec());
 The checksum string can also be created using openssl:
 
 ```bash
-cat ZW_SensorPir_7.15.4_227_ZGM130S_REGION_EU_DEBUG_v255.gbl | openssl dgst -binary -md5 | openssl base64
+cat ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl | openssl dgst -binary -md5 | openssl base64
 ```
 
 ### Output Examples

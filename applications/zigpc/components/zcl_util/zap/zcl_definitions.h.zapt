@@ -14,7 +14,7 @@
 /**
  * @file zcl_definitions.h
  * @defgroup {{component_zigpc_zcl_prefix}}_definitions ZigPC ZCL Definitions
- * @ingroup {{component_zigpc_zcl_prefix}}
+ * @ingroup zigpc_zcl_util
  * @brief Contains definitions used by ZigPC in order to intrepret ZCL
  * information.
  *
@@ -152,9 +152,9 @@ typedef struct {
  *
  */
 typedef struct {
-  zigpc_zcl_global_reporting_role_type_t direction;
-  zcl_attribute_id_t attribute_identifier;
-  zigpc_zcl_data_type_t attribute_type;
+  uint8_t direction;
+  uint16_t attribute_identifier;
+  uint8_t attribute_type;
   uint16_t minimum_reporting_interval;
   uint16_t maximum_reporting_interval;
   uint32_t reportable_change;

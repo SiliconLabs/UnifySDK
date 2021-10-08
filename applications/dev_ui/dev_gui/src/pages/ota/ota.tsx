@@ -29,7 +29,7 @@ export class OTA extends React.Component<OTAProps, OTAState> {
       if (!node.ep) return;
       return Object.keys(node.ep).forEach((ep) => {
         if (!node.ep[ep].OTA || !node.ep[ep].OTA.Attributes || !node.ep[ep].OTA.Attributes.UIID) return;
-        return Object.keys(node.ep[ep].OTA.Attributes.UIID).forEach((uiid, index) => {         
+        return Object.keys(node.ep[ep].OTA.Attributes.UIID).forEach((uiid, index) => {
           let itemAttr = node.ep[ep].OTA.Attributes.UIID[uiid];
           if (!itemAttr) return;
           let progress = 0;
@@ -38,7 +38,7 @@ export class OTA extends React.Component<OTAProps, OTAState> {
           list.push({
             Unid: node.Unid,
             Uiid: uiid,
-            ClusterTypes: node.ClusterTypes,
+            EpData: { [ep]: node.ep[ep] },
             CurrentVersion: itemAttr.CurrentVersion?.Reported,
             TargetVersion: itemAttr.TargetVersion?.Reported,
             ApplyAfter: itemAttr.ApplyAfter?.Reported,
@@ -64,7 +64,7 @@ export class OTA extends React.Component<OTAProps, OTAState> {
                   <tr className="">
                     <th>UNID</th>
                     <th>UIID</th>
-                    <th className="text-center">Type</th>
+                    <th>Type</th>
                     <th>Current Version</th>
                     <th>Target Version</th>
                     <th>Apply after</th>
@@ -78,7 +78,7 @@ export class OTA extends React.Component<OTAProps, OTAState> {
                       <tr key={index}>
                         <td>{item.Unid}</td>
                         <td>{item.Uiid}</td>
-                        <td className="text-center"><ClusterTypeTooltip ClusterTypes={item.ClusterTypes} /></td>
+                        <td className="flex"><ClusterTypeTooltip Ep={item.EpData} /></td>
                         <td>{item.CurrentVersion}</td>
                         <td>{item.TargetVersion}</td>
                         <td>{item.ApplyAfter}</td>

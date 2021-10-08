@@ -47,7 +47,7 @@ var structmqtt__client =
     [ "on_connect_callback", "structmqtt__client.html#a9372f0d22c22fe095187553d19bde7b8", null ],
     [ "on_disconnect_callback", "structmqtt__client.html#a3ae56dee55b65012becfbe24f9e0ab8c", null ],
     [ "port", "structmqtt__client.html#a864ae50e074c2cffef9b7ac4d2bfefdd", null ],
-    [ "publishing_queue", "structmqtt__client.html#a96613839e4f20dce40846251c96be739", null ],
+    [ "publishing_queue", "structmqtt__client.html#a5997c2a32fa64f6238f3ccf769d1f9c1", null ],
     [ "retained_topics", "structmqtt__client.html#a086f40c5e160b69aa31fa6f0123311a3", null ],
     [ "socket_file_descriptor", "structmqtt__client.html#a313783864dd13cb738d58ee84d956190", null ],
     [ "subscription_callbacks", "structmqtt__client.html#a1c0ddfd872749c0045861083dbf5110e", null ],

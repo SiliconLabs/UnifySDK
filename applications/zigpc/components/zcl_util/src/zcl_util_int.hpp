@@ -13,8 +13,8 @@
 
 /**
  * @file zcl_util_int.hpp
- * @defgroup zcl_util_int Internal API used within the ZCL utility component.
- * @ingroup zcl_util
+ * @defgroup zigpc_zcl_util_int Internal API used within the ZCL utility component.
+ * @ingroup zigpc_zcl_util
  *
  * @{
  */
@@ -29,8 +29,28 @@
  *
  * @return const std::unordered_map<zigpc_zcl_data_type_t, size_t>*
  */
-const std::unordered_map<zigpc_zcl_data_type_t, size_t> *zigpc_zcl_get_zcl_data_type_size_map(void);
+const std::unordered_map<zigpc_zcl_data_type_t, size_t> *
+  zigpc_zcl_get_zcl_data_type_size_map(void);
+
+/**
+ * @brief Append command data to a ZCL frame.
+ *
+ * NOTE: Ensure pointers to arg_data passed is valid in the context that this
+ * function is called.
+ *
+ * @param frame               Pointer to ZCL frame container to be populated.
+ * @param arg_type            ZCL command argument type.
+ * @param arg_data            ZCL command argument data.
+ * arguments.
+ * @return sl_status_t        SL_STATUS_OK on success, SL_STATUS_NULL_POINTER if
+ * if invalid pointers are passed in, SL_STATUS_INVALID_SIGNATURE on data that
+ * does not conform to the ZCL specification, or other error related to ZCL
+ * frame building.
+ */
+sl_status_t zigpc_zcl_add_command_frame_arg(zcl_frame_t *const frame,
+                                            zigpc_zcl_data_type_t arg_type,
+                                            const void *arg_data);
 
 #endif /* ZIGPC_ZCL_UTIL_INT_HPP */
 
-/** @} end zcl_util_int */
+/** @} end zigpc_zcl_util_int */

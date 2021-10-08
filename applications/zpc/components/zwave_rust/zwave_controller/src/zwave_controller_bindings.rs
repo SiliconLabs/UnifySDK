@@ -436,7 +436,7 @@ pub struct zwave_rx_receive_options_t {
     #[doc = " - RECEIVE_STATUS_FOREIGN_FRAME The received frame is not addressed to this"]
     #[doc = "   node (Only valid in promiscuous mode)"]
     #[doc = " - RECEIVE_STATUS_FOREIGN_HOMEID The received frame is received from a"]
-    #[doc = "   foreign HomeID. Only Controllers in Smart Start AddNode mode can receive this"]
+    #[doc = "   foreign HomeID. Only Controllers in SmartStart AddNode mode can receive this"]
     pub status_flags: u8,
     #[doc = " RSSI measurement of the received frame This is a signed 8-bit value."]
     #[doc = ""]
@@ -515,19 +515,19 @@ pub enum zwave_network_management_state_t {
     #[doc = " Idle state."]
     NM_IDLE = 0,
     #[doc = " Add mode state."]
-    #[doc = " Direct range/NWI, S2, or Smart Start."]
+    #[doc = " Direct range/NWI, S2, or SmartStart."]
     #[doc = ""]
     #[doc = " Waiting for protocol.  On \\ref NM_EV_ADD_NODE_FOUND, go to \\ref NM_NODE_FOUND."]
     NM_WAITING_FOR_ADD = 1,
     #[doc = " Add mode state."]
-    #[doc = " Direct range/NWI, S2, Smart Start, Proxy Inclusion, or Proxy Replace."]
+    #[doc = " Direct range/NWI, S2, SmartStart, Proxy Inclusion, or Proxy Replace."]
     #[doc = ""]
     #[doc = " Waiting for protocol to receive node info from a node.  On \\ref"]
     #[doc = " NM_EV_ADD_CONTROLLER or \\ref NM_EV_ADD_END_NODE, cache the node"]
     #[doc = " id and node info and go to \\ref NM_WAIT_FOR_PROTOCOL."]
     NM_NODE_FOUND = 2,
     #[doc = " Add mode state."]
-    #[doc = " Direct range/NWI, S2, Smart Start, Proxy Inclusion, or Proxy Replace."]
+    #[doc = " Direct range/NWI, S2, SmartStart, Proxy Inclusion, or Proxy Replace."]
     #[doc = ""]
     #[doc = " Waiting for protocol to assign node ID and home ID to the new node."]
     #[doc = ""]
@@ -578,13 +578,13 @@ pub enum zwave_network_management_state_t {
     #[doc = " and we are waiting on the protocol."]
     NM_LEARN_MODE_STARTED = 6,
     #[doc = " Add mode state."]
-    #[doc = " Direct range/NWI, S2, Smart Start, Proxy Inclusion, Proxy Replace."]
+    #[doc = " Direct range/NWI, S2, SmartStart, Proxy Inclusion, Proxy Replace."]
     #[doc = ""]
     #[doc = " Waiting for the S2 inclusion state machine to complete.  On \\ref"]
     #[doc = " NM_EV_SECURITY_DONE, go to \\ref NM_WAIT_FOR_PROBE_AFTER_ADD and"]
     #[doc = " start probe."]
     #[doc = ""]
-    #[doc = " If Smart Start security fails, start a"]
+    #[doc = " If SmartStart security fails, start a"]
     #[doc = " #SMART_START_SELF_DESTRUCT_TIMEOUT sec. timer and go to"]
     #[doc = " #NM_WAIT_FOR_SELF_DESTRUCT."]
     NM_WAIT_FOR_SECURE_ADD = 7,
@@ -653,7 +653,7 @@ pub enum zwave_network_management_state_t {
     NM_REPLACE_FAILED_REQ = 12,
     #[doc = " Add mode state."]
     #[doc = ""]
-    #[doc = " Direct range/NWI, S2, Smart Start, Replace Failed, Proxy Inclusion, or"]
+    #[doc = " Direct range/NWI, S2, SmartStart, Replace Failed, Proxy Inclusion, or"]
     #[doc = " Proxy Replace."]
     #[doc = ""]
     #[doc = " Wait for timeout to let protocol finish up its add by sending a"]
@@ -662,7 +662,7 @@ pub enum zwave_network_management_state_t {
     NM_PREPARE_SUC_INCLISION = 13,
     #[doc = " Add mode state."]
     #[doc = ""]
-    #[doc = " Direct range/NWI, S2, Smart Start, Replace Failed, Proxy Inclusion, or"]
+    #[doc = " Direct range/NWI, S2, SmartStart, Replace Failed, Proxy Inclusion, or"]
     #[doc = " Proxy Replace."]
     #[doc = ""]
     #[doc = " Waiting for the SUC to complete the secure part of inclusion."]
@@ -681,7 +681,7 @@ pub enum zwave_network_management_state_t {
     #[doc = " \\ref NM_EV_REPLACE_FAILED_DONE."]
     NM_PROXY_INCLUSION_WAIT_NIF = 15,
     #[doc = " Add mode state."]
-    #[doc = " Smart Start."]
+    #[doc = " SmartStart."]
     #[doc = ""]
     #[doc = " The gateway must send NOPs to a failing node and wait for the"]
     #[doc = " result, before doing ZW_RemoveFailed()."]
@@ -693,7 +693,7 @@ pub enum zwave_network_management_state_t {
     #[doc = " NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL."]
     NM_WAIT_FOR_TX_TO_SELF_DESTRUCT = 16,
     #[doc = " Add mode state."]
-    #[doc = " Smart Start."]
+    #[doc = " SmartStart."]
     #[doc = ""]
     #[doc = " Waiting for protocol to complete the ZW_RemoveFailedNode() (or"]
     #[doc = " for timeout).  Protocol callback RemoveSelfDestructStatus()"]
@@ -709,7 +709,7 @@ pub enum zwave_network_management_state_t {
     #[doc = "  ZW_FAILED_NODE_NOT_REMOVED()"]
     NM_FAILED_NODE_REMOVE = 18,
     #[doc = " Failed node remove state."]
-    #[doc = "  Add node state (smart start self destruct)"]
+    #[doc = "  Add node state (SmartStart self destruct)"]
     #[doc = ""]
     #[doc = "  NMS Sends NOP in this state and next state is set according to if entry"]
     #[doc = "  was due to timeout event or NM_EV_REMOVE_FAILED event from NM_IDLE."]
@@ -912,9 +912,9 @@ pub struct zwave_controller_callbacks_t {
             frame_length: u16,
         ),
     >,
-    #[doc = " A smart start inclusion request was received."]
+    #[doc = " A SmartStart inclusion request was received."]
     #[doc = ""]
-    #[doc = " @param home_id           Smart Start DSK derived HomeId of the Smart"]
+    #[doc = " @param home_id           SmartStart DSK derived HomeId of the Smart"]
     #[doc = "                          Start node wanting to be included"]
     #[doc = " @param already_included  Node is already included into another network."]
     #[doc = ""]

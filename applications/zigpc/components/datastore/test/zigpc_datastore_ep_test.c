@@ -44,13 +44,19 @@ int suiteTearDown(int num_failures)
  * @brief Setup before each test case
  *
  */
-void setUp(void) {}
+void setUp(void)
+{
+  attribute_store_mock_Init();
+}
 
 /**
  * @brief Teardown after each test case
  *
  */
-void tearDown(void) {}
+void tearDown(void)
+{
+  attribute_store_mock_Destroy();
+}
 
 void helper_set_ep_parents_overhead(zigbee_eui64_uint_t *eui64_i,
                                     attribute_store_node_t return_nodeid)
@@ -83,10 +89,22 @@ void test_zigpc_datastore_get_endpoint_count_sanity(void)
   size_t count;
   zigbee_eui64_t eui64        = "\x03\x05\xFF\x29\x34\x11\x4A\xBB";
   zigbee_eui64_uint_t eui64_i = 0x0305FF2934114ABB;
+  size_t expected_count       = 3U;
 
   helper_set_ep_parents_overhead(&eui64_i, MOCK_DEV_1_NODE_ID);
 
-  attribute_store_get_node_child_count_ExpectAndReturn(MOCK_DEV_1_NODE_ID, 3);
+  for (size_t i = 0; i < expected_count; i++) {
+    attribute_store_get_node_child_by_type_ExpectAndReturn(
+      MOCK_DEV_1_NODE_ID,
+      ZIGPC_DS_TYPE_ENDPOINT,
+      i,
+      i + 1);
+  }
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    MOCK_DEV_1_NODE_ID,
+    ZIGPC_DS_TYPE_ENDPOINT,
+    expected_count,
+    ATTRIBUTE_STORE_INVALID_NODE);
 
   // ACT
   count = zigpc_datastore_get_endpoint_count(eui64);

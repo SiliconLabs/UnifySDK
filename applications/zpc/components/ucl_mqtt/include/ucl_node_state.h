@@ -49,6 +49,9 @@
 #ifndef UCL_NODE_STATE_H
 #define UCL_NODE_STATE_H
 
+#include "attribute_store.h"
+#include "ucl_definitions.h"
+
 #include "process.h"
 #include "sl_status.h"
 
@@ -85,6 +88,18 @@ typedef enum {
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @brief Checks the network status of a node
+ *
+ * @param node_id_node  Attribute Store node of the NodeID.
+ *
+ * @returns node_state_topic_state_t value.
+ *          NODE_STATE_TOPIC_STATE_UNAVAILABLE if there was an issue reading
+ *          the value
+ */
+node_state_topic_state_t
+  get_node_network_status(attribute_store_node_t node_id_node);
 
 /**
  * @brief Name the of @ref contiki process for the Ucl Node State.

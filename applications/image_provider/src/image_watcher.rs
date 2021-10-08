@@ -1,4 +1,4 @@
-use crate::{mqtt_client::*};
+extern crate mosquitto_client;
 use std::time::Duration;
 use std::path::Path;
 use std::path::PathBuf;
@@ -8,16 +8,16 @@ use std::io::Read;
 use serde::{Serialize, Deserialize};
 
 use std::thread;
-use md5;
-use base64;
+
+
 
 use std::collections::HashMap;
 use std::sync::Mutex;
 
 use uic_log::log_error;
 use uic_log::log_info;
+use uic_log::log_debug;
 
-use std::sync::Arc;
 
 #[allow(non_snake_case)]
 #[derive(Serialize, Deserialize, Default)]
@@ -55,7 +55,7 @@ struct TwoStringsKey{
 }
 
 pub struct ImageWatcher {
-    mqtt_client: Arc<MosquittoClient>,
+    mqtt_client: mosquitto_client::Mosquitto,
     images_location: String,
     poll_period: i32
 }
@@ -80,39 +80,39 @@ lazy_static! {
     static ref IMAGE_MAP: Mutex<HashMap<TwoStringsKey, MapEntry>> = {
         let m = HashMap::new();
         Mutex::new(m)
-    }; 
+    };
 }
 
 static mut IMG_PATH: String = String::new();
 
 impl ImageWatcher {
     pub fn new(
-        client:  Arc<MosquittoClient>,
+        client: mosquitto_client::Mosquitto,
         images_location: String,
         poll_period: i32
     ) -> Self {
                 ImageWatcher {
                     mqtt_client: client,
-                    images_location: images_location,
-                    poll_period: poll_period
+                    images_location,
+                    poll_period
         }
     }
 
     /// Build topics from map key and send empty payload to topics
     /// ucl/OTA/info/{}/{}
-    /// Clear map  
-    fn denounce_images(mqtt_client: Arc<MosquittoClient>) {
+    /// Clear map
+    pub fn remove_image_advertisement(mqtt_client: mosquitto_client::Mosquitto) {
         let mut map = IMAGE_MAP.lock().unwrap();
         // Unretain message by sending empty payload
         for key in map.keys() {
             let topic = format!("ucl/OTA/info/{}/{}", key.uiid, key.unid);
             log_info(
                 "image_watcher",
-                format!("Publishing image denounce to \"{}\"", topic)
+                format!("Removing image advertisement to \"{}\"", topic)
             );
-            let _msg_id = 
+            let _msg_id =
                 mqtt_client
-                    .publish(&topic, &vec![] , 0, true)
+                    .publish(&topic, &[] , 0, true)
                     .map_err(|e| format!("error publishing topic '{}' : {}", topic, e));
         }
         // remove all entry from map
@@ -131,8 +131,8 @@ impl ImageWatcher {
             let mut buffer = Vec::new();
             if file_exists(&path, &mut buffer) {
                 if calc_md5_digest(&buffer) != image.Md5 {
-                    error_message(WatchError::Md5Error, 
-                        format!("{}", image.FileName)
+                    error_message(WatchError::Md5Error,
+                        image.FileName.to_string()
                     );
                 } else {
                     Self::fill_map(image);
@@ -146,20 +146,23 @@ impl ImageWatcher {
     /// Fill map entry
     fn fill_map(image: ImageEntry) {
         let mut map = IMAGE_MAP.lock().unwrap();
-        if image.Unid.len() > 0 {
+        if !image.Unid.is_empty() {
             for unid in image.Unid {
+                if unid.to_string().trim().is_empty() || image.Uiid.to_string().trim().is_empty() {
+                    continue;
+                }
                 let entry = MapEntry{
-                    FileName: image.FileName.to_string(), 
-                    Uiid: image.Uiid.to_string(), 
-                    Unid: unid.to_string(), 
-                    Version: image.Version.to_string(), 
-                    ApplyAfter: image.ApplyAfter.to_string(), 
+                    FileName: image.FileName.to_string(),
+                    Uiid: image.Uiid.to_string(),
+                    Unid: unid.to_string(),
+                    Version: image.Version.to_string(),
+                    ApplyAfter: image.ApplyAfter.to_string(),
                     Md5: image.Md5.to_string()
                 };
                 let key = TwoStringsKey{ uiid: image.Uiid.to_owned(), unid: unid.to_owned() };
                 map.insert(key.clone(), entry);
             }
-        } else {
+        } else if !image.Uiid.trim().is_empty() {
             let entry = MapEntry {
                 FileName: image.FileName.to_string(), 
                 Uiid: image.Uiid.to_string(), 
@@ -168,16 +171,16 @@ impl ImageWatcher {
                 ApplyAfter: image.ApplyAfter.to_string(), 
                 Md5: image.Md5.to_string()
             };
-            let key = TwoStringsKey{ uiid: image.Uiid.to_owned(), unid: "all".to_owned() };
-            map.insert(key.clone(), entry);
+            let key = TwoStringsKey{ uiid: image.Uiid, unid: "all".to_owned() };
+            map.insert(key, entry);
         }
     }
 
-    /// Build topics from map key and send empty payload to topics
-    /// ucl/OTA/info/{}/{}
-    fn announce_images(mqtt_client: Arc<MosquittoClient>) {
+    /// Build topics from map key, build payload from map value, send payload to 
+    /// ucl/OTA/info/{}/{} topics
+    fn advertise_images(mqtt_client: mosquitto_client::Mosquitto) {
         let map = IMAGE_MAP.lock().unwrap();
-        // Announce images to MQTT
+        // Advertise images to MQTT
         for key in map.keys() {
             let topic = format!("ucl/OTA/info/{}/{}", key.uiid, key.unid);
             let entry = map.get(key);
@@ -190,10 +193,10 @@ impl ImageWatcher {
                     };
                     log_info(
                         "image_watcher",
-                        format!("Publishing image announce to \"{}\"", topic)
+                        format!("Advertising new image at \"{}\"", topic)
                     );
                     let payload = data.dump().as_bytes().to_vec();
-                    let _msg_id = 
+                    let _msg_id =
                         mqtt_client
                             .publish(&topic, &payload , 0, true)
                             .map_err(|e| format!("error publishing topic '{}' : {}", topic, e));
@@ -203,7 +206,7 @@ impl ImageWatcher {
                         format!("{}/{}", key.uiid, key.unid)
                     );
                 }
-            }    
+            }
         }
     }
 
@@ -212,9 +215,9 @@ impl ImageWatcher {
         let digest = calc_md5_digest(buffer);
         let is_changed = digest != metafile.md5_digest;
         metafile.md5_digest = digest;
-        return is_changed
+        is_changed
     }
-    
+
     /// Poll changes in images.json
     /// If changes occures: send denounce messages, process metadata from file,
     /// send announce messages
@@ -225,7 +228,7 @@ impl ImageWatcher {
 
         unsafe {IMG_PATH = images_path_s.clone();}
         unsafe {
-            log_info(
+            log_debug(
                 "image_watcher",
                 format!("Image storage path {}", IMG_PATH)
             );
@@ -235,7 +238,7 @@ impl ImageWatcher {
         metadata_path.push(images_path_s);
         metadata_path.push("images.json");
 
-        let poll_period = Duration::from_secs(self.poll_period.clone() as u64);
+        let poll_period = Duration::from_secs(self.poll_period as u64);
 
         let mut metadata_file = MetaFile {
             md5_digest: String::new(),
@@ -246,39 +249,39 @@ impl ImageWatcher {
             let mut buffer = Vec::new();
             if !file_exists(&metadata_path, &mut buffer) {
                 if metadata_file.detected {
-                    Self::denounce_images(mqtt_client.clone());
-                    metadata_file.detected = false; 
+                    Self::remove_image_advertisement(mqtt_client.clone());
+                    metadata_file.detected = false;
                     metadata_file.md5_digest = String::new();
-                }  
+                }
             } else {
                 metadata_file.detected = true;
                 if Self::file_changed(&mut metadata_file, &mut buffer) {
                     match serde_json::from_slice::<ImageList>(buffer.as_slice()) {
                         Ok(json_data) => {
-                            Self::denounce_images(mqtt_client.clone());
+                            Self::remove_image_advertisement(mqtt_client.clone());
                             Self::process_metadata(json_data.Images);
-                            Self::announce_images(mqtt_client.clone());
+                            Self::advertise_images(mqtt_client.clone());
                         },
                         Err(e) => {
                             error_message(WatchError::JsonError,
                                 format!("Could not parse images.json metadata: {}", e)
                             );
                             if metadata_file.detected {
-                                Self::denounce_images(mqtt_client.clone());
+                                Self::remove_image_advertisement(mqtt_client.clone());
                                 metadata_file.detected = false;
                             }
                         }
                     }
                 }
-            } 
+            }
             thread::sleep(poll_period);
         }).unwrap();
     }
 }
 
-/// Calculate and return md5 base64 encoded digest from buffer 
+/// Calculate and return md5 base64 encoded digest from buffer
 fn calc_md5_digest(buffer: &Vec<u8>) -> String {
-    return base64::encode(md5::compute(buffer).to_vec());
+    base64::encode(md5::compute(buffer).to_vec())
 }
 
 /// Get file from Map
@@ -290,13 +293,13 @@ pub fn get_image_file(uiid: String, unid: String, buffer: &mut Vec<u8>) {
     let key = TwoStringsKey{uiid:uiid.to_owned(), unid:unid.to_owned()};
     let path_c: String = unsafe{IMG_PATH.clone()};
 
-    if map.contains_key(&key.clone()) {
+    if map.contains_key(&key) {
         log_info(
             "image_watcher",
             format!("Image requested for {}/{}", uiid, unid)
         );
         // Get value for key
-        let entry = map.get(&key.clone()); 
+        let entry = map.get(&key);
         match entry {
             Some(entry) => {
                 // Extract image file name
@@ -306,14 +309,12 @@ pub fn get_image_file(uiid: String, unid: String, buffer: &mut Vec<u8>) {
                 path.push(path_c);
                 path.push(filename);
 
-                if file_exists(&path, buffer) {
-                    if calc_md5_digest(buffer) != entry.Md5 {
-                        error_message(WatchError::Md5Error, 
-                            format!("{}", filename)
-                        );
-                        // Remove all data from buffer
-                        buffer.clear();
-                    } 
+                if file_exists(&path, buffer) && calc_md5_digest(buffer) != entry.Md5 {
+                    error_message(WatchError::Md5Error,
+                        filename.to_string()
+                    );
+                    // Remove all data from buffer
+                    buffer.clear();
                 }
             },
             None => {
@@ -339,20 +340,20 @@ fn file_exists(path: &Path, buffer: &mut Vec<u8>) -> bool {
                 Err(_) => {
                     error_message(
                         WatchError::FileError,
-                        format!("{}", path.display().to_string())
+                        path.display().to_string()
                     );
                     buffer.clear();
-                    return false;
+                    false
                 }
-                Ok(_) => return true
+                Ok(_) => true
             }
         },
         Err(_) => {
             error_message(
-                WatchError::PathEror, 
-                format!("{}", path.display().to_string())
+                WatchError::PathEror,
+                path.display().to_string()
             );
-            return false;
+            false
         }
     }
 }
@@ -363,23 +364,23 @@ fn error_message(e: WatchError, text: String) {
         WatchError::FileError => {
             log_error(
                 "image_watcher",
-                format!("Couldn't open file {}", text)
+                format!("Could not open file {}", text)
             );
         },
         WatchError::PathEror => {
             log_error(
                 "image_watcher",
-                format!("Couldn't open path {}", text)
+                format!("Could not open path {}", text)
             );
         },
         WatchError::JsonError => {
-            log_error(
+            log_info(
                 "image_watcher",
-                format!("Couldn't parse JSON {}", text)
+                format!("Could not parse JSON {}", text)
             );
         },
         WatchError::Md5Error => {
-            log_error(
+          log_info(
                 "image_watcher",
                 format!("Md5 digest error for {}", text)
             );
@@ -391,7 +392,7 @@ fn error_message(e: WatchError, text: String) {
             );
         },
         WatchError::MapKeyError => {
-            log_error(
+            log_info(
                 "image_watcher",
                 format!("Map Key Error {}", text)
             );
@@ -403,8 +404,10 @@ fn error_message(e: WatchError, text: String) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use serial_test::serial;
 
     #[test]
+    #[serial]
     fn metadata_changes_test() {
         // Define some json objects
         let json_1 = json::object! {
@@ -433,6 +436,7 @@ mod tests {
     }
 
     #[test]
+    #[serial]
     fn map_fill_test() {
         // Create Image entries
         // entry_1 with Uiid = "zw-000-001" and Unid = []
@@ -445,7 +449,7 @@ mod tests {
             Md5:  String::from("GEyaucM09e025pO/FeIuZQ==")
         };
 
-        // entry_1 with Uiid = "zw-000-001" 
+        // entry_1 with Uiid = "zw-000-001"
         // and Unid = ["zw-BEEF-0002", "zw-BEEF-0003", "zw-BEEF-0004"]
         let mut unid_vector = Vec::<String>::new();
 
@@ -474,11 +478,11 @@ mod tests {
         let key2 = TwoStringsKey{uiid: String::from("zw-000-002"), unid: String::from("zw-BEEF-0002")};
         let key3 = TwoStringsKey{uiid: String::from("zw-000-002"), unid: String::from("zw-BEEF-0003")};
         let key4 = TwoStringsKey{uiid: String::from("zw-000-002"), unid: String::from("zw-BEEF-0004")};
-        
+
         // Some non-existing key
         let key5 = TwoStringsKey{uiid: String::from("zw-000-002"), unid: String::from("zw-BEEF-0005")};
 
-        let map = IMAGE_MAP.lock().unwrap();
+        let mut map = IMAGE_MAP.lock().unwrap();
 
         // Check if keys exists and values is correct
         assert!(map.get(&key1).is_some());
@@ -486,5 +490,70 @@ mod tests {
         assert!(map.get(&key3).is_some());
         assert!(map.get(&key4).is_some());
         assert!(map.get(&key5).is_none());
+
+        // Remove all entry from map
+        map.clear();
+    }
+
+    #[test]
+    #[serial]
+    fn map_fill_empty_string_test() {
+        // Create Image entries
+        // entry_1 with Uiid = "" and Unid = []
+        let entry_1 = ImageEntry {
+            FileName :  String::from("updates/image_0.jpg"),
+            Uiid : String::from(""),
+            Unid : Vec::<String>::new(),
+            Version:  String::from("1.0.0"),
+            ApplyAfter:  String::from("2021-06-29T16:39:57+02:00"),
+            Md5:  String::from("GEyaucM09e025pO/FeIuZQ==")
+        };
+
+        // entry_2 with Uiid = "zw-000-001" 
+        // and Unid = ["", " ", "  "]
+        let mut unid_vector_2 = Vec::<String>::new();
+
+        unid_vector_2.push(String::from(""));
+        unid_vector_2.push(String::from(" "));
+        unid_vector_2.push(String::from("  "));
+
+        let entry_2 = ImageEntry {
+            FileName :  String::from("updates/image_0.jpg"),
+            Uiid : String::from("zw-000-002"),
+            Unid : unid_vector_2,
+            Version:  String::from("1.0.0"),
+            ApplyAfter:  String::from("2021-06-29T16:39:57+02:00"),
+            Md5:  String::from("GEyaucM09e025pO/FeIuZQ==")
+        };
+
+        // entry_3 with Uiid = "" 
+        // and Unid = ["", " ", "  "]
+        let mut unid_vector_3 = Vec::<String>::new();
+
+        unid_vector_3.push(String::from("zw-000-002"));
+        unid_vector_3.push(String::from("zw-000-003"));
+        unid_vector_3.push(String::from("zw-000-004"));
+
+        let entry_3 = ImageEntry {
+            FileName :  String::from("updates/image_0.jpg"),
+            Uiid : String::from(""),
+            Unid : unid_vector_3,
+            Version:  String::from("1.0.0"),
+            ApplyAfter:  String::from("2021-06-29T16:39:57+02:00"),
+            Md5:  String::from("GEyaucM09e025pO/FeIuZQ==")
+        };
+
+        // Add entry to map
+        ImageWatcher::fill_map(entry_1);
+        ImageWatcher::fill_map(entry_2);
+        ImageWatcher::fill_map(entry_3);
+
+        let mut map = IMAGE_MAP.lock().unwrap();
+
+        // Check if map is empty
+        assert!(map.is_empty());
+
+        // Remove all entry from map
+        map.clear();
     }
 }

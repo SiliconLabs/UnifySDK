@@ -704,9 +704,13 @@ void test_zwave_command_class_notification_get()
 {
   uint8_t frame[10];
   uint16_t frame_len;
-  uint8_t notification_type_home_security         = 0x07;
-  attribute_store_node_t test_updated_node        = 0x66;
-  attribute_store_node_t test_updated_node_parent = 0x55;
+  uint8_t notification_type_home_security                  = 0x07;
+  attribute_store_node_t test_updated_node                 = 0x66;
+  attribute_store_node_t test_updated_node_parent          = 0x55;
+  attribute_store_node_t test_updated_node_parent_state    = 0x66;
+  attribute_store_node_t test_updated_node_supported_state = 0x77;
+  uint8_t test_notification_state                          = 0x00;
+  uint8_t test_number_of_supported_states                  = 0x00;
 
   const uint8_t expected__notification_get[]
     = {COMMAND_CLASS_NOTIFICATION_V4, NOTIFICATION_GET_V4, 0x00, 0x07, 0x00};
@@ -726,6 +730,41 @@ void test_zwave_command_class_notification_get()
   attribute_store_read_value_ReturnMemThruPtr_read_value(
     &notification_type_home_security,
     sizeof(notification_type_home_security));
+
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(
+    test_updated_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_STATE,
+    test_updated_node_parent_state);
+  attribute_store_read_value_ExpectAndReturn(test_updated_node_parent_state,
+                                             REPORTED_ATTRIBUTE,
+                                             NULL,
+                                             sizeof(test_notification_state),
+                                             SL_STATUS_OK);
+  attribute_store_read_value_IgnoreArg_read_value();
+  attribute_store_read_value_ReturnMemThruPtr_read_value(
+    &test_notification_state,
+    sizeof(test_notification_state));
+
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(
+    test_updated_node,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_TYPE,
+    test_updated_node_parent);
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    test_updated_node_parent,
+    ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_SUPPORTED_STATES_OR_EVENTS,
+    0,
+    test_updated_node_supported_state);
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    test_updated_node_supported_state,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  attribute_store_get_node_attribute_value_ReturnMemThruPtr_value_size(
+    &test_number_of_supported_states,
+    sizeof(test_number_of_supported_states));
 
   // Set the node reported value to 0 to prevent Notification Get loops
   attribute_store_set_node_attribute_value_ExpectAndReturn(test_updated_node,

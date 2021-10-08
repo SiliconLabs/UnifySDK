@@ -20,13 +20,12 @@ target_add_unittest(
   NAME
   attribute_resolver_common_test
   SOURCES
-  attribute_resolver_common_test.c
+  attribute_resolver_common_test.cpp
   DEPENDS
   uic_contiki_stub
   uic_attribute_store
   uic_datastore
-  uic_attribute_resolver_mock
-  )
+  uic_attribute_resolver_mock)
 
 # Resolver Benchmark test
 target_add_unittest(

@@ -17,13 +17,6 @@ var zwave__command__class__switch__multilevel_8c =
     [ "SUBSTATE_VALUE", "zwave__command__class__switch__multilevel_8c.html#af094b6b93a3830d1448b852aa0ef1c66", null ],
     [ "UP", "zwave__command__class__switch__multilevel_8c.html#a1965eaca47dbf3f87acdafc2208f04eb", null ],
     [ "multilevel_switch_state_t", "zwave__command__class__switch__multilevel_8c.html#a0732bbde7d97c1fcdb05bbb2b52ea09a", null ],
-    [ "state_values_t", "zwave__command__class__switch__multilevel_8c.html#ada850b2947076af4a0eb4e1bcef42c37", [
-      [ "FINAL_STATE", "zwave__command__class__binary__switch_8c.html#ada850b2947076af4a0eb4e1bcef42c37a1b5757828d7b174efa07d686e5d5acac", null ],
-      [ "NEEDS_ONE_COMMAND", "zwave__command__class__binary__switch_8c.html#ada850b2947076af4a0eb4e1bcef42c37a3ed5a8b283cce878ec439109c8099285", null ],
-      [ "FINAL_STATE", "zwave__command__class__switch__multilevel_8c.html#ada850b2947076af4a0eb4e1bcef42c37a1b5757828d7b174efa07d686e5d5acac", null ],
-      [ "NEEDS_ONE_COMMAND", "zwave__command__class__switch__multilevel_8c.html#ada850b2947076af4a0eb4e1bcef42c37a3ed5a8b283cce878ec439109c8099285", null ],
-      [ "NEEDS_MULTIPLE_COMMANDS", "zwave__command__class__switch__multilevel_8c.html#ada850b2947076af4a0eb4e1bcef42c37af5327b63a6783dad292e0f3daa8cb2d4", null ]
-    ] ],
     [ "get_state", "zwave__command__class__switch__multilevel_8c.html#a7cd4e090e971290dd3527991b77d0862", null ],
     [ "on_state_send_data_complete", "zwave__command__class__switch__multilevel_8c.html#aefdc747956727fa542d10bc6fe464140", null ],
     [ "set_desired_duration", "zwave__command__class__switch__multilevel_8c.html#a10fe98f54107ed8850a8718730b5de47", null ],
@@ -33,7 +26,7 @@ var zwave__command__class__switch__multilevel_8c =
     [ "set_reported_duration", "zwave__command__class__switch__multilevel_8c.html#ad9c702f574d93ec670441aa7b9344375", null ],
     [ "set_reported_on_off", "zwave__command__class__switch__multilevel_8c.html#a29a12e399a5555bdea5fd738176c9f09", null ],
     [ "set_reported_value", "zwave__command__class__switch__multilevel_8c.html#acc9175dc30996e464bf423af23dd6418", null ],
-    [ "set_state_value", "zwave__command__class__switch__multilevel_8c.html#a442c5935ffd7adf364a802f802a664fd", null ],
+    [ "set_state_value", "zwave__command__class__switch__multilevel_8c.html#a61b840814b4ebed1e48e1b62a0e6a645", null ],
     [ "update_node_state", "zwave__command__class__switch__multilevel_8c.html#a2230cf536d6bdba0265ca6c235afd89d", null ],
     [ "zwave_command_class_switch_multilevel_control_handler", "zwave__command__class__switch__multilevel_8c.html#ae3088526ca025e0a4f4d75d2c67dab7a", null ],
     [ "zwave_command_class_switch_multilevel_get", "zwave__command__class__switch__multilevel_8c.html#a2c29ee5e01b9818d09448de111541f33", null ],

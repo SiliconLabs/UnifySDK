@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -95,18 +95,21 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_basic_probe_status()
 : <a class="el" href="zwave__command__class__basic_8c.html#ad9a5bd805178a882e104a8c0796c75f3">zwave_command_class_basic.c</a>
 </li>
+<li>get_closest_supported_interval()
+: <a class="el" href="zwave__command__class__wake__up_8c.html#aafee6942702a86d4aaea1f91c18ccce7">zwave_command_class_wake_up.c</a>
+</li>
 <li>get_current_utc_current_time()
-: <a class="el" href="ota__time_8hpp.html#a91c55ef0d4c4ab2d1170e6fbf5f7fa97">ota_time.hpp</a>
+: <a class="el" href="ota__time_8h.html#a91c55ef0d4c4ab2d1170e6fbf5f7fa97">ota_time.h</a>
 </li>
 <li>get_device_id()
 : <a class="el" href="device__id_8h.html#a231482c6d0e377e8842b842c97be8f99">device_id.h</a>
 , <a class="el" href="device__id_8c.html#a231482c6d0e377e8842b842c97be8f99">device_id.c</a>
 </li>
-<li>get_endpoints_status_published_and_pop()
-: <a class="el" href="ota__cache_8hpp.html#ac6d14f76516cb0a258fd66392c0e785c">ota_cache.hpp</a>
-</li>
 <li>get_event_for_learn_status()
 : <a class="el" href="nm__state__machine_8c.html#abf1b965ec1c5a35734c8cb5c5824aaf9">nm_state_machine.c</a>
+</li>
+<li>get_file_size()
+: <a class="el" href="zwave__command__class__firmware__update_8c.html#a7ab6f1b95254510376e1bfedd90e2e94">zwave_command_class_firmware_update.c</a>
 </li>
 <li>get_first_available_send_data_setting_slot()
 : <a class="el" href="zwave__multi__channel__transport_8c.html#aaaedbadda3bd673a0e107630192613d2">zwave_multi_channel_transport.c</a>
@@ -120,21 +123,6 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_ids()
 : <a class="el" href="zwave__api__demo__commands_8c.html#a7704494c31f180297c1098e1d6dba70a">zwave_api_demo_commands.c</a>
 </li>
-<li>get_image_cached_filepath()
-: <a class="el" href="ota__cache_8hpp.html#ae5b252e33025c0a2a5d6b2f1c211b99a">ota_cache.hpp</a>
-</li>
-<li>get_image_callback()
-: <a class="el" href="ota__cache_8hpp.html#afbe8592b5f978726386f4a8a8a7160a5">ota_cache.hpp</a>
-</li>
-<li>get_image_key_poll_state()
-: <a class="el" href="ota__cache_8hpp.html#a064113bc4b760f943364b06ba1d6bf41">ota_cache.hpp</a>
-</li>
-<li>get_image_listening_list()
-: <a class="el" href="ota__cache_8hpp.html#a8f70bdf5fce8d6e7679184ecdd388e79">ota_cache.hpp</a>
-</li>
-<li>get_image_meta_info()
-: <a class="el" href="ota__cache_8hpp.html#a61e37157306d8e1f4fe21502fdfb71f6">ota_cache.hpp</a>
-</li>
 <li>get_indicator_value0()
 : <a class="el" href="zwave__command__class__indicator_8c.html#aa23691cb712a61ad87039173e84d4232">zwave_command_class_indicator.c</a>
 </li>
@@ -144,11 +132,11 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_lr_maximum_payload_size()
 : <a class="el" href="zwave__api__demo__commands_8c.html#a76b09ce6c5a77913aceb29b27d24732a">zwave_api_demo_commands.c</a>
 </li>
-<li>get_map_status_published_cached_and_clear()
-: <a class="el" href="ota__cache_8hpp.html#abd47353c31c0962993cf54f09c1a24d1">ota_cache.hpp</a>
-</li>
 <li>get_maximum_payload_size()
 : <a class="el" href="zwave__api__demo__commands_8c.html#ae44fafdb387f9eab4293b00c4bd9f735">zwave_api_demo_commands.c</a>
+</li>
+<li>get_maximum_possible_interval()
+: <a class="el" href="zwave__command__class__wake__up_8c.html#a86fe76f7c6c116734a69cb35ef264f26">zwave_command_class_wake_up.c</a>
 </li>
 <li>get_next_missing_offset()
 : <a class="el" href="transport__service_8c.html#affd944193a83bcd8f404cc2274f933d8">transport_service.c</a>
@@ -165,6 +153,9 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <li>get_node_max_frame_size()
 : <a class="el" href="zwave__s0__transport_8c.html#aeb22afea5af0dc149f03d08edb74a44a">zwave_s0_transport.c</a>
 </li>
+<li>get_node_network_status()
+: <a class="el" href="ucl__node__state_8h.html#a5e4f4d8fb92990fbe9cedf84bccbcb50">ucl_node_state.h</a>
+</li>
 <li>get_number_of_groups()
 : <a class="el" href="group__zwave__command__class__association__internals.html#ga8ea6af3c4096eed22e4474e67f428fe3">zwave_command_class_association_internals.h</a>
 </li>
@@ -179,8 +170,8 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 : <a class="el" href="uic__stdin__command__handler_8h.html#a4dc9830db2ca50f0789db94665f08bf4">uic_stdin_command_handler.h</a>
 </li>
 <li>get_protocol()
-: <a class="el" href="group__zwave__utils.html#gaa553f79c1a3129d5f67468275f2cdd4d">zwave_utils.h</a>
-, <a class="el" href="group__zwave__utils.html#gaa553f79c1a3129d5f67468275f2cdd4d">zwave_utils.c</a>
+: <a class="el" href="group__zwave__utils.html#gaa553f79c1a3129d5f67468275f2cdd4d">zwave_utils.c</a>
+, <a class="el" href="group__zwave__utils.html#gaa553f79c1a3129d5f67468275f2cdd4d">zwave_utils.h</a>
 </li>
 <li>get_rf_region()
 : <a class="el" href="zwave__api__demo__commands_8c.html#ac9a0d4c53d031265675de7bc074b5788">zwave_api_demo_commands.c</a>
@@ -192,8 +183,8 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 : <a class="el" href="zwave__s0__transport_8c.html#ade289797a519efdfbcbb8176339c60f3">zwave_s0_transport.c</a>
 </li>
 <li>get_s0_sm_state()
-: <a class="el" href="zwave__s0__sm_8h.html#a98819b0a7889e8df757b121542897086">zwave_s0_sm.h</a>
-, <a class="el" href="zwave__s0__sm_8c.html#a98819b0a7889e8df757b121542897086">zwave_s0_sm.c</a>
+: <a class="el" href="zwave__s0__sm_8c.html#a98819b0a7889e8df757b121542897086">zwave_s0_sm.c</a>
+, <a class="el" href="zwave__s0__sm_8h.html#a98819b0a7889e8df757b121542897086">zwave_s0_sm.h</a>
 </li>
 <li>get_s2_keyset_from_group()
 : <a class="el" href="zwave__s2__transport_8c.html#a09d06c6e68cce5284f0e4388c768ccdc">zwave_s2_transport.c</a>
@@ -205,42 +196,33 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 : <a class="el" href="zwave__s0__transport_8c.html#ac0f595613ded622cf74daf3471ad1257">zwave_s0_transport.c</a>
 </li>
 <li>get_state()
-: <a class="el" href="zwave__command__class__switch__multilevel_8c.html#a7cd4e090e971290dd3527991b77d0862">zwave_command_class_switch_multilevel.c</a>
-, <a class="el" href="zwave__command__class__binary__switch_8c.html#ae459a09d9f68de3d41e5e70c515d18b9">zwave_command_class_binary_switch.c</a>
-</li>
-<li>get_theoretical_max_fragment_size()
-: <a class="el" href="group__zwave__command__class__firmware__update__internals.html#ga848b4be05028e38c769886b15d82a8d6">zwave_command_class_firmware_update_internals.h</a>
+: <a class="el" href="zwave__command__class__binary__switch_8c.html#ae459a09d9f68de3d41e5e70c515d18b9">zwave_command_class_binary_switch.c</a>
+, <a class="el" href="zwave__command__class__switch__multilevel_8c.html#a7cd4e090e971290dd3527991b77d0862">zwave_command_class_switch_multilevel.c</a>
 </li>
 <li>get_tx_session_by_node()
 : <a class="el" href="zwave__s0__transport_8c.html#a5e3b1c19125c57849fb649d1b693609f">zwave_s0_transport.c</a>
-</li>
-<li>get_unids_listening()
-: <a class="el" href="ota__cache_8hpp.html#a7d1b9c7a7e823742f7e4567332cd5667">ota_cache.hpp</a>
-</li>
-<li>get_unids_listening_count()
-: <a class="el" href="ota__cache_8hpp.html#a455fd1f44b7e87f065d0b23520aa9f05">ota_cache.hpp</a>
 </li>
 <li>get_utc_time_string_from_utc_time()
 : <a class="el" href="ota__time_8hpp.html#af0c6d4bcdf574dab1afeb1da8b72c1e9">ota_time.hpp</a>
 </li>
 <li>get_zpc_endpoint_id_node()
-: <a class="el" href="zpc__attribute__store_8c.html#a58edca7aa1fe5cbfce65d71ef5656827">zpc_attribute_store.c</a>
+: <a class="el" href="zpc__attribute__store_8c.html#aff3429ac79dfe4ddd5452d8c51545d4c">zpc_attribute_store.c</a>
 , <a class="el" href="zpc__attribute__store_8h.html#a58edca7aa1fe5cbfce65d71ef5656827">zpc_attribute_store.h</a>
 </li>
 <li>get_zpc_network_node()
-: <a class="el" href="zpc__attribute__store_8c.html#aa77e8f9b18958337bb68279c8c53ccdc">zpc_attribute_store.c</a>
-, <a class="el" href="zpc__attribute__store_8h.html#aa77e8f9b18958337bb68279c8c53ccdc">zpc_attribute_store.h</a>
+: <a class="el" href="zpc__attribute__store_8h.html#aa77e8f9b18958337bb68279c8c53ccdc">zpc_attribute_store.h</a>
+, <a class="el" href="zpc__attribute__store_8c.html#aa77e8f9b18958337bb68279c8c53ccdc">zpc_attribute_store.c</a>
 </li>
 <li>get_zpc_node_id_node()
-: <a class="el" href="zpc__attribute__store_8c.html#a4c4a364eb42142672d0a42f3c09b43b4">zpc_attribute_store.c</a>
-, <a class="el" href="zpc__attribute__store_8h.html#a4c4a364eb42142672d0a42f3c09b43b4">zpc_attribute_store.h</a>
+: <a class="el" href="zpc__attribute__store_8h.html#a4c4a364eb42142672d0a42f3c09b43b4">zpc_attribute_store.h</a>
+, <a class="el" href="zpc__attribute__store_8c.html#a4c4a364eb42142672d0a42f3c09b43b4">zpc_attribute_store.c</a>
 </li>
 <li>get_zpc_stdin_callbacks()
 : <a class="el" href="zpc__stdin__command__handling_8h.html#a2eb61d065bb0ddaf6bccaa8c03f910a2">zpc_stdin_command_handling.h</a>
 </li>
 <li>get_zwave_node_role_type()
-: <a class="el" href="group__command__classes__utils.html#ga6950174a6510c529933ea2d5b9787b83">zwave_command_classes_utils.h</a>
-, <a class="el" href="group__command__classes__utils.html#ga6950174a6510c529933ea2d5b9787b83">zwave_command_classes_utils.c</a>
+: <a class="el" href="group__command__classes__utils.html#gaf1fbb6a0e57bf5218e97120ed7adc966">zwave_command_classes_utils.c</a>
+, <a class="el" href="group__command__classes__utils.html#gaf1fbb6a0e57bf5218e97120ed7adc966">zwave_command_classes_utils.h</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -248,7 +230,7 @@ $(document).ready(function(){initNavTree('globals_func_g.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:58 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:51 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

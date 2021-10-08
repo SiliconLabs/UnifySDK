@@ -1,6 +1,21 @@
 # ZPC Release Notes
 This document describes the changes between the last released ZPC and the current release.
 
+## [1.0.2] - Oct 2021
+### Added
+* ZPC is Z-Wave Certified against the Z-Wave Specification release 2021A.
+* Support of Z-Wave Command Classes
+  + Firmware Update
+* Control of Z-Wave Command Classes
+  + Firmware Update
+  + Indicator
+
+### Changed
+  * OTA UIID has been updated to include hardware revision
+
+### Fixed
+  * Fixed various certification issues
+  
 ## [1.0.1] - Aug 2021
 ### Fixed
 * Build issues
@@ -58,10 +73,9 @@ This document describes the changes between the last released ZPC and the curren
 # Known Bugs
 | ID        | Known issues                                                                                          | Note                                            |
 |-----------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------|
-| UIC-1154	| Upon node removal the ucl/by-unid/UNID/OTA topic may not be cleared.                                  |                                                 |
-| UIC-1142	| Debian package overwrites the existing UIC configuration.                                             | Back up the config file before doing the update.|
 | UIC-1162  | When device have multiple functionalities on the Z-Wave end,which is mapped to the same ZigBee attribute, the mapping will be incomplete.   | Update the UAM file to avoid overlap.           |
 | UIC-1088  | Potentially wrong controller NIF after controller migration.                                          | Usually no problem in practice                  |
+| UIC-1175  | ZPC performs S2 re-synchronisation of all nodes after reboot.                                         | After a reboot the ZPC will re-negotiate SPANs and MPANs for all nodes at the first transmission attempt.                 |
 
 # Z-Wave Certification information
 > _NOTE the ZPC is at this point not certifiable_

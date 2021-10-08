@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -123,14 +123,20 @@ $(document).ready(function(){initNavTree('globals_f.html',''); initResizable(); 
 : <a class="el" href="zwave__s2__keystore__int_8h.html#a9c1a1eb1e6b1cbfe24a2da3feb83d68f">zwave_s2_keystore_int.h</a>
 </li>
 <li>FINAL_STATE
-: <a class="el" href="zwave__command__class__binary__switch_8c.html#ada850b2947076af4a0eb4e1bcef42c37a1b5757828d7b174efa07d686e5d5acac">zwave_command_class_binary_switch.c</a>
-, <a class="el" href="zwave__command__class__switch__multilevel_8c.html#ada850b2947076af4a0eb4e1bcef42c37a1b5757828d7b174efa07d686e5d5acac">zwave_command_class_switch_multilevel.c</a>
+: <a class="el" href="group__command__classes__utils.html#ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac">zwave_command_classes_utils.h</a>
 </li>
 <li>find_missing()
 : <a class="el" href="transport__service_8c.html#a35b51aa3cd60ec7fbc89438a7a800a9e">transport_service.c</a>
 </li>
 <li>find_transition()
 : <a class="el" href="transport__service_8c.html#a8f014c5804fe50e480dea5db75de4d51">transport_service.c</a>
+</li>
+<li>firmware_transfer_get_theoretical_max_fragment_size()
+: <a class="el" href="group__zwave__command__class__firmware__update__internals.html#ga1073e79c7ee689cf7b15f15075f3e5d4">zwave_command_class_firmware_update.c</a>
+, <a class="el" href="group__zwave__command__class__firmware__update__internals.html#ga1073e79c7ee689cf7b15f15075f3e5d4">zwave_command_class_firmware_update_internals.h</a>
+</li>
+<li>FIRMWARE_TRANSFER_TIMEOUT
+: <a class="el" href="zwave__command__class__firmware__update_8c.html#a6f39e834fb5d5f2b7a9117a611d70b1b">zwave_command_class_firmware_update.c</a>
 </li>
 <li>first_frag
 : <a class="el" href="transport__service_8c.html#ae337025a3b8057ffa451123c0009f728">transport_service.c</a>
@@ -155,9 +161,6 @@ $(document).ready(function(){initNavTree('globals_f.html',''); initResizable(); 
 </li>
 <li>FRAGMENT_RX_TIMEOUT
 : <a class="el" href="transport__service_8c.html#ab8c33872ee5db32436e5c29a9bd90d0c">transport_service.c</a>
-</li>
-<li>FRAGMENTMAXPAYLOAD
-: <a class="el" href="transport__service_8c.html#a41925c1a8b34a6f8db064e331d55c64b">transport_service.c</a>
 </li>
 <li>FRAME_LENGTH_MAX
 : <a class="el" href="zwapi__internal_8h.html#a2f43a1eb12696f73d1d0b927d94f0160">zwapi_internal.h</a>
@@ -726,13 +729,16 @@ $(document).ready(function(){initNavTree('globals_f.html',''); initResizable(); 
 <li>FUNC_ID_ZW_WATCHDOG_STOP
 : <a class="el" href="zwapi__func__ids_8h.html#a0c5214cdc5debe11c94d6bdd03ab185e">zwapi_func_ids.h</a>
 </li>
+<li>FWU_DATA_REPORT_ENCAPSULATION_OVERHEAD
+: <a class="el" href="zwave__command__class__firmware__update_8c.html#a8861a51ef477d948ba5d64e319112e25">zwave_command_class_firmware_update.c</a>
+</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:58 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:51 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

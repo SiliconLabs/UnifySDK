@@ -24,6 +24,7 @@
 #include "sl_log.h"
 #include "uic_mqtt.h"
 #include "attribute.hpp"
+#include "zwave_command_class_wake_up_types.h"
 
 // Interfaces (only using typedefs from here)
 #include "zwave_controller_keyset.h"
@@ -113,25 +114,7 @@ static node_state_topic_security_t
   return get_node_state_security_value(granted_keys);
 }
 
-static node_state_topic_state_t
-  get_node_network_status(attribute_store_node_t node_id_node)
-{
-  // Default to UNAVAILABLE if the value is undefined in the attribute store
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
-
-  attribute_store_node_t network_status_node
-    = attribute_store_get_node_child_by_type(node_id_node,
-                                             ATTRIBUTE_NETWORK_STATUS,
-                                             0);
-  attribute_store_read_value(network_status_node,
-                             REPORTED_ATTRIBUTE,
-                             (uint8_t *)&network_status,
-                             sizeof(node_state_topic_state_t));
-
-  return network_status;
-}
-
-static uint32_t
+static wake_up_interval_t
   get_nl_node_maximum_command_delay(attribute_store_node_t node_id_node)
 {
   zwave_endpoint_id_t root_device = 0;
@@ -142,23 +125,28 @@ static uint32_t
                                               &root_device,
                                               sizeof(zwave_endpoint_id_t),
                                               0);
+  attribute_store_node_t wake_up_setting_node
+    = attribute_store_get_node_child_by_type(
+      endpoint_node,
+      ATTRIBUTE_COMMAND_CLASS_WAKE_UP_SETTING,
+      0);
 
   attribute_store_node_t wake_up_interval_node
     = attribute_store_get_node_child_by_type(
-      endpoint_node,
-      ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL,
+      wake_up_setting_node,
+      ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
       0);
 
   if (wake_up_interval_node == ATTRIBUTE_STORE_INVALID_NODE) {
     return MAX_COMMAND_DELAY_UNKNOWN;
   }
 
-  uint32_t wake_up_interval = 0;
+  wake_up_interval_t wake_up_interval = 0;
   if (SL_STATUS_OK
       != attribute_store_read_value(wake_up_interval_node,
                                     REPORTED_ATTRIBUTE,
                                     &wake_up_interval,
-                                    sizeof(uint32_t))) {
+                                    sizeof(wake_up_interval_t))) {
     return MAX_COMMAND_DELAY_UNKNOWN;
   }
 
@@ -286,8 +274,9 @@ static void publish_node_state_supported_commands(const std::string &unid)
   }
 
   // For now all nodes only support re-interview.
-  std::string topic   = "ucl/by-unid/" + unid + "/State/SupportedCommands";
-  std::string message = R"({"value": ["Interview","RemoveOffline","DiscoverNeighbors"]})";
+  std::string topic = "ucl/by-unid/" + unid + "/State/SupportedCommands";
+  std::string message
+    = R"({"value": ["Interview","RemoveOffline","DiscoverNeighbors"]})";
   uic_mqtt_publish(topic.c_str(), message.c_str(), message.size(), true);
 }
 
@@ -316,7 +305,7 @@ static void subscribe_to_node_state_commands(const std::string &unid)
  * The following attributes will trigger this function
  * - ATTRIBUTE_GRANTED_SECURITY_KEYS
  * - ATTRIBUTE_NETWORK_STATUS
- * - ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL
+ * - ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL
  *
  * Any update will trigger a new MQTT publication.
  */
@@ -403,7 +392,7 @@ sl_status_t ucl_node_state_init()
 
   attribute_store_register_callback_by_type_and_state(
     on_pan_node_state_attribute_update,
-    ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
     REPORTED_ATTRIBUTE);
 
   return SL_STATUS_OK;
@@ -421,6 +410,26 @@ void ucl_node_state_teardown()
   uic_mqtt_unretain_by_regex("^(?!ucl\\/by-unid\\/.*\\/State$).*");
 
   nodes_in_network.clear();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//  Public/shared functions.
+//////////////////////////////////////////////////////////////////////////////
+node_state_topic_state_t
+  get_node_network_status(attribute_store_node_t node_id_node)
+{
+  // Default to UNAVAILABLE if the value is undefined in the attribute store
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+
+  attribute_store_node_t network_status_node
+    = attribute_store_get_node_child_by_type(node_id_node,
+                                             ATTRIBUTE_NETWORK_STATUS,
+                                             0);
+  attribute_store_get_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+
+  return network_status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -28,7 +28,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Return the name of a network management state
+ * @brief Return the name string of a network management state
  * 
  * @param state 
  * @return const char* 
@@ -36,7 +36,7 @@ extern "C" {
 const char* nm_state_name(zwave_network_management_state_t state);
 
 /**
- * @brief Return the name of a network management event.
+ * @brief Return the name string of a network management event.
  * 
  * @param ev 
  * @return const char* 

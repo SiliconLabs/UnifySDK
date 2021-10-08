@@ -13,10 +13,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "unity.h"
+#include <unity.h>
 
-#include "zigpc_common_zigbee_mock.h"
-#include "zigpc_node_mgmt_mock.h"
+#include <zigpc_common_zigbee_mock.h>
+#include <zigpc_datastore_mock.h>
 
 #include "zigpc_gateway.h"
 #include "zigpc_gateway_int.h"
@@ -71,6 +71,24 @@ void test_zigpc_gateway_network_init_calls_process(void)
   TEST_ASSERT_EQUAL(SL_STATUS_OK, test_status);
 }
 
+void test_zigpc_gateway_network_permit_joins_calls_process(void)
+{
+  // ARRANGE
+  sl_status_t test_status;
+  zigpc_gateway_process_send_event_ExpectAndReturn(
+    ZIGPC_GW_EVENT_DISPATCH,
+    NULL,
+    sizeof(struct zigpc_gateway_dispatch_event),
+    SL_STATUS_OK);
+  zigpc_gateway_process_send_event_IgnoreArg_data();
+
+  // ACT
+  test_status = zigpc_gateway_network_permit_joins(true);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, test_status);
+}
+
 void test_zigpc_gateway_add_node_install_code_calls_process(void)
 {
   // ARRANGE
@@ -115,12 +133,20 @@ void test_zigpc_gateway_send_cluster_command_calls_process(void)
 {
   // ARRANGE
   sl_status_t test_status;
-  zcl_cluster_id_t test_zcl_cluster = 0x05;
-  zcl_frame_t test_zcl_frame        = {0};
+  zcl_cluster_id_t test_zcl_cluster     = 0x05;
+  zigbee_endpoint_id_t test_endpoint_id = 2;
+  zcl_frame_t test_zcl_frame            = {0};
+
   zigbee_eui64_copy_switch_endian_Ignore();
   zigbee_eui64_to_str_IgnoreAndReturn(SL_STATUS_OK);
 
-  zigpc_node_check_sleepy_ExpectAndReturn(test_eui64, false);
+  zigpc_datastore_contains_cluster_ExpectAndReturn(
+    test_eui64,
+    test_endpoint_id,
+    ZCL_CLUSTER_SERVER_SIDE,
+    ZIGPC_ZCL_CLUSTER_POLL_CONTROL,
+    true);
+
   zigpc_gateway_process_send_event_ExpectAndReturn(
     ZIGPC_GW_EVENT_ZCL_FRAME,
     NULL,
@@ -130,7 +156,7 @@ void test_zigpc_gateway_send_cluster_command_calls_process(void)
 
   // ACT
   test_status = zigpc_gateway_send_zcl_command_frame(test_eui64,
-                                                     0,
+                                                     test_endpoint_id,
                                                      test_zcl_cluster,
                                                      &test_zcl_frame);
 

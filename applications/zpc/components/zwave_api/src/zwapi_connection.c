@@ -179,7 +179,7 @@ zwapi_connection_status_t zwapi_connection_refresh()
               retVal         = ZWAPI_CONNECTION_STATUS_TX_CAN;
               ack_nak_needed = false;
             } else {
-              sl_log_info(
+              sl_log_warning(
                 LOG_TAG,
                 "Frame parsing received unexpected value. Ignoring\n");
             }

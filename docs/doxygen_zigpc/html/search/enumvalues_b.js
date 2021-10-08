@@ -1,9 +1,19 @@
 var searchData=
 [
-  ['sl_5flog_5fcritical_4705',['SL_LOG_CRITICAL',['../group__sl__log.html#ggaf7788b8693561747f76339f6537ff8aba66b9e4aabb177ed4bf5ac6371e84d58d',1,'sl_log.h']]],
-  ['sl_5flog_5fdebug_4706',['SL_LOG_DEBUG',['../group__sl__log.html#ggaf7788b8693561747f76339f6537ff8aba08914048403ca38994c4ca9e2eb5bfb5',1,'sl_log.h']]],
-  ['sl_5flog_5ferror_4707',['SL_LOG_ERROR',['../group__sl__log.html#ggaf7788b8693561747f76339f6537ff8aba0340f23d9f5c82a359ab93111544c5b8',1,'sl_log.h']]],
-  ['sl_5flog_5finfo_4708',['SL_LOG_INFO',['../group__sl__log.html#ggaf7788b8693561747f76339f6537ff8abae29b58ec6ba251db0a06ffcf7e709887',1,'sl_log.h']]],
-  ['sl_5flog_5fwarning_4709',['SL_LOG_WARNING',['../group__sl__log.html#ggaf7788b8693561747f76339f6537ff8aba7cf77760aedb3d9197922a5455e20f64',1,'sl_log.h']]],
-  ['success_4710',['SUCCESS',['../namespaceuic__ota.html#a061d9131ad0a8a302d543c11819b0394ad0749aaba8b833466dfcbb0428e4f89c',1,'uic_ota']]]
+  ['reinstall_5fif_5fserver_5fhas_5fsame_4822',['REINSTALL_IF_SERVER_HAS_SAME',['../ota-server-policy_8c.html#a4378623437d76ba978b65926c1ec91fba770a80a13ade378a3cc5bfe8d3482ca3',1,'ota-server-policy.c']]],
+  ['reported_5fattribute_4823',['REPORTED_ATTRIBUTE',['../group__attribute__store__api.html#gga296998251b25382f24977825b7193e18aa7b15f97ff28c4e80662f986b2111d6d',1,'attribute_store.h']]],
+  ['require_5fmore_5fimage_4824',['REQUIRE_MORE_IMAGE',['../namespaceuic__ota.html#a061d9131ad0a8a302d543c11819b0394ae2e715065ecc3564ef16b625d1c650bd',1,'uic_ota']]],
+  ['resolver_5fget_5frule_4825',['RESOLVER_GET_RULE',['../attribute__resolver__rule_8h.html#a6ae323c64b845f108a676a0731e6d6eaaf057b3ce10b86b47422731ccf73371bb',1,'attribute_resolver_rule.h']]],
+  ['resolver_5fsend_5fstatus_5faborted_4826',['RESOLVER_SEND_STATUS_ABORTED',['../attribute__resolver__rule_8h.html#a8ccc6634654142ad6659d5c837ba830cac033783f504ffa0c04dda5efc27f07b6',1,'attribute_resolver_rule.h']]],
+  ['resolver_5fsend_5fstatus_5falready_5fhandled_4827',['RESOLVER_SEND_STATUS_ALREADY_HANDLED',['../attribute__resolver__rule_8h.html#a8ccc6634654142ad6659d5c837ba830ca366d2b12be32a2b6a87679f83ec9db04',1,'attribute_resolver_rule.h']]],
+  ['resolver_5fsend_5fstatus_5ffail_4828',['RESOLVER_SEND_STATUS_FAIL',['../attribute__resolver__rule_8h.html#a8ccc6634654142ad6659d5c837ba830ca24f88fe13d6bf88f1c06ba3266d3119c',1,'attribute_resolver_rule.h']]],
+  ['resolver_5fsend_5fstatus_5fok_4829',['RESOLVER_SEND_STATUS_OK',['../attribute__resolver__rule_8h.html#a8ccc6634654142ad6659d5c837ba830ca1b4c727e14bc3e14fe611c8c3cd181b3',1,'attribute_resolver_rule.h']]],
+  ['resolver_5fsend_5fstatus_5fok_5fexecution_5ffailed_4830',['RESOLVER_SEND_STATUS_OK_EXECUTION_FAILED',['../attribute__resolver__rule_8h.html#a8ccc6634654142ad6659d5c837ba830cac830bcc50183c69ff03c7b7233f40835',1,'attribute_resolver_rule.h']]],
+  ['resolver_5fsend_5fstatus_5fok_5fexecution_5fpending_4831',['RESOLVER_SEND_STATUS_OK_EXECUTION_PENDING',['../attribute__resolver__rule_8h.html#a8ccc6634654142ad6659d5c837ba830ca12c9c0f99ea18587e6d6f31cdb11e76c',1,'attribute_resolver_rule.h']]],
+  ['resolver_5fsend_5fstatus_5fok_5fexecution_5fverified_4832',['RESOLVER_SEND_STATUS_OK_EXECUTION_VERIFIED',['../attribute__resolver__rule_8h.html#a8ccc6634654142ad6659d5c837ba830ca3dbcc7ee6b16a79c386fe021cff7b385',1,'attribute_resolver_rule.h']]],
+  ['resolver_5fset_5frule_4833',['RESOLVER_SET_RULE',['../attribute__resolver__rule_8h.html#a6ae323c64b845f108a676a0731e6d6eaaeccc73ba7627ec10953dff1e7e8183f4',1,'attribute_resolver_rule.h']]],
+  ['rtimer_5ferr_5falready_5fscheduled_4834',['RTIMER_ERR_ALREADY_SCHEDULED',['../group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba6158ceaa4e727bb58a633d59a3cac417',1,'rtimer.h']]],
+  ['rtimer_5ferr_5ffull_4835',['RTIMER_ERR_FULL',['../group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55bade68e86389e0531689232ff133ade6b7',1,'rtimer.h']]],
+  ['rtimer_5ferr_5ftime_4836',['RTIMER_ERR_TIME',['../group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba27ae4cfb3cd9e0d4279ceba3efbf5017',1,'rtimer.h']]],
+  ['rtimer_5fok_4837',['RTIMER_OK',['../group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba45385eb6ec5fbc3179702f8516c48c99',1,'rtimer.h']]]
 ];

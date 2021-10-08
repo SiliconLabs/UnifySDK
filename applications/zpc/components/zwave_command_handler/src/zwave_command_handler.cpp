@@ -22,9 +22,12 @@
 #include "zwave_controller_utils.h"
 #include "zwave_security_validation.h"
 #include "zwave_rx.h"
-#include "ZW_classcmd.h"
 #include "sl_log.h"
 #include "zwave_network_management.h"  // for zwave_network_management_get_home_id / get_node_id
+
+// Interface includes
+#include "ZW_classcmd.h"
+#include "zwave_command_class_version_types.h"
 
 // Generic includes
 #include <iomanip>
@@ -184,7 +187,8 @@ sl_status_t zwave_command_handler_register_handler(
   return SL_STATUS_OK;
 }
 
-uint8_t zwave_command_handler_get_version(zwave_command_class_t command_class)
+zwave_cc_version_t
+  zwave_command_handler_get_version(zwave_command_class_t command_class)
 {
   zwave_command_handler_t handler_to_read = {};
   handler_to_read.command_class           = command_class;
@@ -223,16 +227,26 @@ void zwave_command_handler_print_info(int fd)
   ss << "| " << "Command Class                 " << " | Version | Support | Control | Security Level              | Comment |" << std::endl;
   ss << "| " << "------------------------------" << " | ------- | ------- | ------- | --------------------------- | ------- |" << std::endl;
   // clang-format on
+
+  // Sort our list alphabetically
+  std::multiset<zwave_command_handler_t,
+                zwave_command_handler_compare_alphabetic>
+    sorted_list;
   for (auto iter = command_handler_list.begin();
        iter != command_handler_list.end();
        iter++) {
+    sorted_list.insert(*iter);
+  }
+
+  // Then print the info of each element
+  for (auto iter = sorted_list.begin(); iter != sorted_list.end(); iter++) {
     zwave_command_handler_t handler = *iter;
 
     // The purpose of this is to combine multiple registered handlers into one.
     // This could be done much smoother if we had registed two independent command handlers lists.
     auto iter2 = iter;
     iter2++;
-    while (iter2 != command_handler_list.end()) {
+    while (iter2 != sorted_list.end()) {
       if (iter2->command_class == iter->command_class) {
         if (handler.control_handler == nullptr
             && iter2->control_handler != nullptr) {

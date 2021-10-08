@@ -29,7 +29,7 @@ pub struct MosquittoClient {
 impl MosquittoClient {
     pub fn new(mqtt_client_id: &str) -> Self {
         MosquittoClient {
-            client: Mosquitto::new(&mqtt_client_id),
+            client: Mosquitto::new(mqtt_client_id),
         }
     }
 }
@@ -38,7 +38,7 @@ impl<'a> MqttClient<'a> for MosquittoClient {
     fn connect(&self, mqtt_broker: &str, mqtt_port: u32) -> mosquitto_client::Result<()> {
         log_info(
             "mqtt_client",
-            format!("connecting to \"{}\" port:{}", mqtt_broker, mqtt_port),
+            format!("Connecting to \"{}\" port:{}", mqtt_broker, mqtt_port),
         );
         self.client.connect(mqtt_broker, mqtt_port, 200)
     }
@@ -46,7 +46,7 @@ impl<'a> MqttClient<'a> for MosquittoClient {
     fn tls_set(&self, cafilepath: &Path, certfilepath: &Path, keyfilepath: &Path) -> mosquitto_client::Result<()> {
         log_info(
             "mqtt_client",
-            format!("setting up tls with ca: {}, device cert: {}, device key :{}", 
+            format!("Setting up TLS with ca: {}, device cert: {}, device key :{}",
             cafilepath.display(), certfilepath.display(), keyfilepath.display()),
         );
         self.client.tls_set(cafilepath, certfilepath, keyfilepath, None)
@@ -55,7 +55,7 @@ impl<'a> MqttClient<'a> for MosquittoClient {
     fn subscribe(&'a self, topic: &str, qos: u32) -> mosquitto_client::Result<TopicMatcher<'a>> {
         log_info(
             "mqtt_client",
-            format!("subscribing to \"{}\" qos:{}", topic, qos),
+            format!("Subscribing to \"{}\" qos:{}", topic, qos),
         );
         self.client.subscribe(topic, qos)
     }

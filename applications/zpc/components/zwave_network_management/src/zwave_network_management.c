@@ -70,12 +70,14 @@ sl_status_t zwave_network_management_add_node_with_dsk(
 sl_status_t zwave_network_management_set_default()
 {
   if (nms.state != NM_IDLE) {
-    sl_log_warning(LOG_TAG,
-                   "Network management is busy. "
-                   "Ignoring Set Default request.\n");
+    sl_log_info(LOG_TAG,
+                "Network management is busy. "
+                "Ignoring Set Default request.\n");
     return SL_STATUS_BUSY;
   }
-  sl_log_info(LOG_TAG, "Initiating a Set Default / Reset operation\n");
+  sl_log_info(
+    LOG_TAG,
+    "Reset step: Initiating a Z-Wave API Set Default / Reset operation\n");
   process_post(&zwave_network_management_process, NM_EV_SET_DEFAULT, 0);
   return SL_STATUS_OK;
 }
@@ -88,7 +90,9 @@ sl_status_t zwave_network_management_remove_failed(zwave_node_id_t node_id)
                 "Ignoring Remove Failed node request.\n");
     return SL_STATUS_BUSY;
   }
-  sl_log_info(LOG_TAG, "Initiating a remove failed for node id: %d\n", node_id);
+  sl_log_info(LOG_TAG,
+              "Initiating a Remove Failed operation for NodeID: %d\n",
+              node_id);
   nms.tmp_node = node_id;
   process_post(&zwave_network_management_process, NM_EV_REMOVE_FAILED, 0);
   return SL_STATUS_OK;
@@ -156,8 +160,9 @@ sl_status_t zwave_network_management_keys_set(bool accept,
   if (nms.state != NM_WAIT_FOR_SECURE_ADD) {
     sl_log_error(
       LOG_TAG,
-      " The network managemnt(NM) S2 key set operation will not be performed,"
-      " since  NM is not in NM_WAIT_FOR_SECURE_ADD state.\n");
+      " The Network Management S2 key set operation will not be performed "
+      " since Network Management is not in the NM_WAIT_FOR_SECURE_ADD "
+      "state.\n");
     return SL_STATUS_BUSY;
   }
   nms.accepted_s2_bootstrapping = accept;
@@ -190,9 +195,9 @@ sl_status_t zwave_network_management_learn_mode(uint8_t intent)
     process_post(&zwave_network_management_process, NM_EV_LEARN_STOP, 0);
     return SL_STATUS_OK;
   } else if (nms.state != NM_IDLE) {
-    sl_log_error(LOG_TAG,
-                 "The requested Learn Mode operarion is rejected since the "
-                 "Network Management is busy.\n");
+    sl_log_info(LOG_TAG,
+                "Network management is busy. "
+                "Ignoring Learn Mode request.\n");
     return SL_STATUS_BUSY;
   }
 
@@ -237,19 +242,26 @@ sl_status_t zwave_network_management_start_proxy_inclusion(
   return SL_STATUS_OK;
 }
 
-sl_status_t
-  zwave_network_management_assign_return_route(zwave_node_id_t node_id,
-                                               zwave_node_id_t destination_node_id)
+sl_status_t zwave_network_management_assign_return_route(
+  zwave_node_id_t node_id, zwave_node_id_t destination_node_id)
 {
   sl_status_t status
     = zwapi_assign_return_route(node_id, destination_node_id, NULL);
   return status;
 }
+
+bool zwave_network_management_is_busy()
+{
+  if (nms.state != NM_IDLE) {
+    return true;
+  }
+  return false;
+}
 #if 0
 // #define NETWORK_MANAGEMENT_TIMEOUT 2*6000
 // #define SMART_START_SELF_DESTRUCT_TIMEOUT (3*CLOCK_SECOND)
 //
-// /* Defer restarting Smart Start Add mode after including one smart start node until this time
+// /* Defer restarting SmartStart Add mode after including one SmartStart node until this time
 //  * has elapsed. */
 // #define SMART_START_MIDDLEWARE_PROBE_TIMEOUT (9 * CLOCK_SECOND)
 //
@@ -271,11 +283,11 @@ sl_status_t
 // static void
 // SecureInclusionDone(int status);
 
-// /* This is a lock which prevents reactivation of Smart Start inclusion
+// /* This is a lock which prevents reactivation of SmartStart inclusion
 //  * until middleware_probe_timeout() has triggered */
 // int waiting_for_middleware_probe = FALSE;
 //
-// /* Smart start middleware probe timer */
+// /* SmartStart middleware probe timer */
 // static struct ctimer ss_timer;
 //
 

@@ -54,16 +54,16 @@ impl From<String> for SmartStartEntry {
 }
 
 /// Convert SmartStartEntry into serde_json::Value
-impl Into<serde_json::Value> for SmartStartEntry {
-    fn into(self) -> serde_json::Value {
-        self.Payload
+impl From<SmartStartEntry> for serde_json::Value {
+    fn from(entry: SmartStartEntry) -> Self {
+        entry.Payload
     }
 }
 
 /// Convert SmartStartEntry into String
-impl Into<String> for SmartStartEntry {
-    fn into(self) -> String {
-        self.Payload.to_string()
+impl From<SmartStartEntry> for String {
+    fn from(entry: SmartStartEntry) -> Self {
+        entry.Payload.to_string()
     }
 }
 
@@ -87,7 +87,7 @@ mod test {
             "ProtocolControllerUnid": "",
             "Unid": "8184198715775"
         }"#;
-        let tmp: serde_json::Value = serde_json::from_str(&entry_str).unwrap();
+        let tmp: serde_json::Value = serde_json::from_str(entry_str).unwrap();
         let entry: SmartStartEntry = SmartStartEntry::from(tmp.clone());
         let entry_expected = SmartStartEntry {
             DSK: "24859-64107-46202-12845-60475-62452-54892-59867".to_string(),

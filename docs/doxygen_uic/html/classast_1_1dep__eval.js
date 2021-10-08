@@ -1,14 +1,12 @@
 var classast_1_1dep__eval =
 [
-    [ "dep_eval", "classast_1_1dep__eval.html#a285f8def093bfcc9c8b7dbc989dde63e", null ],
-    [ "get_dependencies", "classast_1_1dep__eval.html#a17ba5bc35192323a9a5b0e737134726a", null ],
-    [ "operator()", "classast_1_1dep__eval.html#a1b7907f4595f2ca38d0576e1c53aa805", null ],
-    [ "operator()", "classast_1_1dep__eval.html#a24c6ba6369f0a33eb1bdb257e2c3f782", null ],
-    [ "operator()", "classast_1_1dep__eval.html#ac81412b5eaa719a47e16d7d0989b3625", null ],
-    [ "operator()", "classast_1_1dep__eval.html#ada87079541221b2603cda4bc03534c30", null ],
-    [ "operator()", "classast_1_1dep__eval.html#a40aaa255d18e6ac10977db70c7f7e028", null ],
-    [ "operator()", "classast_1_1dep__eval.html#a9eae36d62005a0930f888a1c2b6d081d", null ],
-    [ "operator()", "classast_1_1dep__eval.html#af6e7516f2596efa60093b5d2a2f45bd8", null ],
-    [ "dependencies", "classast_1_1dep__eval.html#aa379bfb347eba876dabdd9da868a6844", null ],
-    [ "global_context", "classast_1_1dep__eval.html#ae726a0a7408ce1c408227eb607f6b42c", null ]
+    [ "get_dependencies", "classast_1_1dep__eval.html#a32653b965aaf140bf33c995ba7b76191", null ],
+    [ "operator()", "classast_1_1dep__eval.html#aff66e14a19d8050b72f616d51f9cf1a6", null ],
+    [ "operator()", "classast_1_1dep__eval.html#af86e80e54972977a500492e1bb60deae", null ],
+    [ "operator()", "classast_1_1dep__eval.html#ad097ebc36e6a0d4c5e776b2b96d93795", null ],
+    [ "operator()", "classast_1_1dep__eval.html#ae35f84c564c46cfc1fee3ca734cf92b6", null ],
+    [ "operator()", "classast_1_1dep__eval.html#ad8a2392e0b8ab17a27c1229df67ab5d5", null ],
+    [ "operator()", "classast_1_1dep__eval.html#abdbdc09abf630394705013b4c4904e48", null ],
+    [ "operator()", "classast_1_1dep__eval.html#a0f56de6ee5a691ccefa98fcdddd801a5", null ],
+    [ "dependencies", "classast_1_1dep__eval.html#a1728d46f71322ae554227b50b659bc21", null ]
 ];

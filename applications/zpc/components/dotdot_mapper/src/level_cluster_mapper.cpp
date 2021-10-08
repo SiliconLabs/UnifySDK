@@ -29,10 +29,10 @@ constexpr uint8_t ON = 0xFF;
 // Level Cluster constants
 constexpr uint8_t DEFAULT_MOVE_RATE = 0xFF;
 
-// All Z-Wave devices will be ab  le to go from 0 to 255 in the level cluster.
-// Z-Wave does 0 to 99%, and the first non-zero value will be from 0x03 (mapped to 1%)
-constexpr uint8_t DEFAULT_MIN_LEVEL = 0x03;
-constexpr uint8_t DEFAULT_MAX_LEVEL = 0xFF;
+// ZigBee normally like to have a 0..255 range, but also allows to advertise a min/max
+// Z-Wave does 0..99%, the UAM file advertises this range.
+constexpr uint8_t DEFAULT_MIN_LEVEL = 0x00;
+constexpr uint8_t DEFAULT_MAX_LEVEL = 0x63;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Incoming command/control functions
@@ -86,11 +86,11 @@ sl_status_t
   }
 
   // This is the ZigBee equivalent of Z-Wave Start level change.
-  // We don't bother and just do a regular set towards boundaries (0 or 255)
+  // We don't bother and just do a regular set towards boundaries (DEFAULT_MIN_LEVEL or DEFAULT_MAX_LEVEL)
   // with an estimated transition time.
-  uint8_t level = 0;
+  uint8_t level = DEFAULT_MIN_LEVEL;
   if (move_mode == ZCL_MOVE_STEP_MODE_DOWN) {
-    level = 0;
+    level = DEFAULT_MIN_LEVEL;
   } else if (move_mode == ZCL_MOVE_STEP_MODE_UP) {
     level = DEFAULT_MAX_LEVEL;
   }

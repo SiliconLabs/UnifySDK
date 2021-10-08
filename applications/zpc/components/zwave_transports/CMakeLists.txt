@@ -18,6 +18,7 @@ target_link_libraries(zwave_transports
   PUBLIC zwave_controller
          zwave_tx
          zwave_rx
+         zwave_security_validation
          zwave_s0
          transport_service)
 

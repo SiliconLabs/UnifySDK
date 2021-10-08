@@ -36,9 +36,9 @@ int remove_smart_start_entry_main();
 int remove_entry_smart_start_list(const char *dsk_key);
 
 /**
- * @brief Removes a smart start entry
+ * @brief Removes a SmartStart entry
  *
- * The given DSK key provided by user will be removed from the smart start list
+ * The given DSK key provided by user will be removed from the SmartStart list
  * owned by the MQTT broker one are connected to.
  *
  * @ingroup dev_cli_commands Developer CLI commands
@@ -46,13 +46,13 @@ int remove_entry_smart_start_list(const char *dsk_key);
  */
 CommandTemplate
   RemoveSmartStartEntry("removesmartstartentry",
-                        "Removing smart start entry based on dsk key",
+                        "Removing SmartStart entry based on dsk key",
                         "usage: [dev_cli.host *.port *.dsk]",
                         remove_smart_start_entry_main);
 
 int remove_smart_start_entry_main()
 {
-  sl_log_debug(LOG_TAG, "Removing smart start entry from smart start list\n");
+  sl_log_debug(LOG_TAG, "Removing SmartStart entry from SmartStart list\n");
 
   const char *dsk_key = dev_cli_get_config()->dsk;
   // Publishing the dsk key to remove
@@ -60,9 +60,9 @@ int remove_smart_start_entry_main()
 
   // User information
   if (state == 0) {
-    printf("Removed smart start entry: %s\n", dsk_key);
+    printf("Removed SmartStart entry: %s\n", dsk_key);
   } else {
-    printf("Were unable to add dsk key to smart start list DSK: %s\n", dsk_key);
+    printf("Were unable to add dsk key to SmartStart list DSK: %s\n", dsk_key);
   }
 
   // End process
@@ -82,7 +82,7 @@ int remove_entry_smart_start_list(const char *dsk_key)
                      remove,
                      strlen(remove),
                      false);
-    sl_log_debug(LOG_TAG, "published to remove DSK: %s\n", dsk_key);
+    sl_log_debug(LOG_TAG, "Published command to remove DSK: %s\n", dsk_key);
     return 0;
   } else {
     const char *error_msg = "No user input of DSK key ignoring update";

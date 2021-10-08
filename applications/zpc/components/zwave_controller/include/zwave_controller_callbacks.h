@@ -70,7 +70,9 @@ typedef struct {
   /// when this function is called
   /// @param node_id        NodeID of the newly included node.
   /// @param included_by_us Set to true if we included the node, false if another controller included it.
-  void (*on_node_id_assigned)(zwave_node_id_t node_id, bool included_by_us);
+  /// @param inclusion_protocol Set to Z-wave protocol of the inclusion  from \ref zwave_protocol_t
+  void (*on_node_id_assigned)(zwave_node_id_t node_id, bool included_by_us,
+                        zwave_protocol_t inclusion_protocol);
 
   /// A node has been deleted from the network
   /// @param node_id NodeID of the node that was removed from our network.
@@ -90,6 +92,7 @@ typedef struct {
   /// @param dsk DSK of the new node.
   /// @param granted_keys is used to indicate which network keys were granted during bootstrapping.
   /// @param kex_fail_type This field is used to indicate which error occurred in case S2
+  /// @param inclusion_protocol Set to Z-wave protocol of the inclusion 
   /// bootstrapping was not successful
   void (*on_node_added)(sl_status_t status,
                         const zwave_node_info_t *nif,
@@ -154,9 +157,9 @@ typedef struct {
     const uint8_t *frame_data,
     uint16_t frame_length);
 
-  /// A smart start inclusion request was received.
+  /// A SmartStart inclusion request was received.
   ///
-  /// @param home_id           Smart Start DSK derived HomeId of the Smart
+  /// @param home_id           SmartStart DSK derived HomeId of the Smart
   ///                          Start node wanting to be included
   /// @param already_included  Node is already included into another network.
   ///
@@ -208,10 +211,21 @@ typedef sl_status_t (*zwave_controller_reset_step_t)(void);
 
 /**
  * @brief Maximum number of callbacks structures which may be registered
- *
  */
 #define ZWAVE_CONTROLLER_MAXIMUM_CALLBACK_SUBSCRIBERS 20
-#define ZWAVE_CONTROLLER_RESET_STEP_MIN_PRIORITY      0
+/**
+ * @brief Minimum Priority for a reset step
+ */
+#define ZWAVE_CONTROLLER_RESET_STEP_MIN_PRIORITY 0
+
+/// Notify the lifeline destinations that we are resetting.
+#define ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY 1
+/// Clean up the SmartStart as we exit the network
+#define ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY 2
+/// Empty and flush the Tx Queue
+#define ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY 4
+/// reset the network for the Z-Wave API. This should be last.
+#define ZWAVE_CONTROLLER_ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY 5
 
 #ifdef __cplusplus
 extern "C" {

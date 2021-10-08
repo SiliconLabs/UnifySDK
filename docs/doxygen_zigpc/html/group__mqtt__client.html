@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -98,6 +98,8 @@ $(document).ready(function(){initNavTree('group__mqtt__client.html',''); initRes
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ga7c06056c76aa03c3b4d68558065959e0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mqtt__client.html#ga7c06056c76aa03c3b4d68558065959e0">MQTT_CLIENT_POLL_TIMER_MILLISECONDS</a>&#160;&#160;&#160;2000</td></tr>
+<tr class="separator:ga7c06056c76aa03c3b4d68558065959e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga083a671472a0a6c3e18643e50f77965f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mqtt__client.html#ga083a671472a0a6c3e18643e50f77965f">MQTT_CLIENT_KEEP_ALIVE_INTERVAL_MILLISECONDS</a>&#160;&#160;&#160;60000</td></tr>
 <tr class="separator:ga083a671472a0a6c3e18643e50f77965f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa3ed05f361af715572198e761e04f18d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mqtt__client.html#gaa3ed05f361af715572198e761e04f18d">MQTT_CLIENT_MINIMUM_RECONNECT_BACKOFF_MILLISECONDS</a>&#160;&#160;&#160;1000</td></tr>
@@ -172,7 +174,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga41ca8f479c224b7ea467f833bd5ab6a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mqtt__client.html#ga41ca8f479c224b7ea467f833bd5ab6a8">mqtt_client_unsubscribe</a> (<a class="el" href="group__mqtt__client.html#ga57dffc3593ed5dc537ca8d04bc81272c">mqtt_client_t</a> instance, const char *topic, <a class="el" href="mqtt__client_8hpp.html#adaf2076e6465d05fa47091fccf706ab0">message_callback_t</a> callback)</td></tr>
 <tr class="memdesc:ga41ca8f479c224b7ea467f833bd5ab6a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsubscribe from an MQTT-topic.  <a href="group__mqtt__client.html#ga41ca8f479c224b7ea467f833bd5ab6a8">More...</a><br /></td></tr>
 <tr class="separator:ga41ca8f479c224b7ea467f833bd5ab6a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaae35a351b95bd45f1fb79ad6174defed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mqtt__client.html#ga57dffc3593ed5dc537ca8d04bc81272c">mqtt_client_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mqtt__client.html#gaae35a351b95bd45f1fb79ad6174defed">mqtt_client_new</a> (const char *hostname, const uint32_t port, const char *client_id, const char *cafile, const char *certfile, const char *keyfile, int(*event_sender)(const int event, void *procdata), void(*delayed_event_sender)(const int event, const unsigned long milliseconds), int(*event_counter)(const int event, void *procdata))</td></tr>
+<tr class="memitem:gaae35a351b95bd45f1fb79ad6174defed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__mqtt__client.html#ga57dffc3593ed5dc537ca8d04bc81272c">mqtt_client_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mqtt__client.html#gaae35a351b95bd45f1fb79ad6174defed">mqtt_client_new</a> (const char *hostname, const <a class="el" href="classuint32__t.html">uint32_t</a> port, const char *client_id, const char *cafile, const char *certfile, const char *keyfile, int(*event_sender)(const int event, void *procdata), void(*delayed_event_sender)(const int event, const unsigned long milliseconds), int(*event_counter)(const int event, void *procdata))</td></tr>
 <tr class="memdesc:gaae35a351b95bd45f1fb79ad6174defed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates a new <a class="el" href="structmqtt__client.html">mqtt_client</a> instance.  <a href="group__mqtt__client.html#gaae35a351b95bd45f1fb79ad6174defed">More...</a><br /></td></tr>
 <tr class="separator:gaae35a351b95bd45f1fb79ad6174defed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf952a672732455d2d7de74e45bf66497"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mqtt__client.html#gaf952a672732455d2d7de74e45bf66497">mqtt_client_delete</a> (<a class="el" href="group__mqtt__client.html#ga57dffc3593ed5dc537ca8d04bc81272c">mqtt_client_t</a> instance)</td></tr>
@@ -223,6 +225,20 @@ Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define MQTT_CLIENT_MINIMUM_RECONNECT_BACKOFF_MILLISECONDS&#160;&#160;&#160;1000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga7c06056c76aa03c3b4d68558065959e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7c06056c76aa03c3b4d68558065959e0">&#9670;&nbsp;</a></span>MQTT_CLIENT_POLL_TIMER_MILLISECONDS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MQTT_CLIENT_POLL_TIMER_MILLISECONDS&#160;&#160;&#160;2000</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -516,7 +532,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramtype">const <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td>
           <td class="paramname"><em>port</em>, </td>
         </tr>
         <tr>
@@ -958,7 +974,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

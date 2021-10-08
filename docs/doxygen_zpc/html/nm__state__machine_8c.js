@@ -12,6 +12,7 @@ var nm__state__machine_8c =
     [ "network_management_refresh_cached_node_list", "nm__state__machine_8c.html#a7ca6282aededa49fa6472a23794ce30a", null ],
     [ "nm_fsm_post_event", "nm__state__machine_8c.html#ac9fe4041f9ca45bad16c9b6ad7bae02f", null ],
     [ "nm_state_machine_init", "nm__state__machine_8c.html#a4bedb93fa551c5f612efe78db1642309", null ],
+    [ "nm_state_machine_teardown", "nm__state__machine_8c.html#a9cb14e1fc617e0d15c24e08f2474ec5b", null ],
     [ "nop_send_done", "nm__state__machine_8c.html#a4221caf69dfb4cb2cd9e2e0eb4b9f0a6", null ],
     [ "on_dsk_challenge", "nm__state__machine_8c.html#abe186aa0f7d064a03736782299dd8854", null ],
     [ "on_inclusion_complete", "nm__state__machine_8c.html#aa16d1a54542aa167460c883d91ef1b8d", null ],

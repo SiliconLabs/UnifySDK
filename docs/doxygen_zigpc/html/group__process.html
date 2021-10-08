@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -129,8 +129,10 @@ Macros</h2></td></tr>
 <tr class="separator:ga8c1c92ac579df9addba8037625589611"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9ab88d3a6c2d13dd59f9d41e1347ad40"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga9ab88d3a6c2d13dd59f9d41e1347ad40">PROCESS_CONF_NUMEVENTS</a>&#160;&#160;&#160;255</td></tr>
 <tr class="separator:ga9ab88d3a6c2d13dd59f9d41e1347ad40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae866e02394e4c350efce12ad02cebd70"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#gae866e02394e4c350efce12ad02cebd70">PROCESS_CONF_NUMEVENTS_WARN</a>&#160;&#160;&#160;32</td></tr>
-<tr class="separator:gae866e02394e4c350efce12ad02cebd70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga203287c010773e1223347682148a3e0c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga203287c010773e1223347682148a3e0c">PROCESS_CONF_NUMEVENTS_PRINT</a>&#160;&#160;&#160;64</td></tr>
+<tr class="separator:ga203287c010773e1223347682148a3e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga52a36a03fb08b1708d84b421d2b3b962"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga52a36a03fb08b1708d84b421d2b3b962">PROCESS_CONF_NUMEVENTS_ERROR</a>&#160;&#160;&#160;230</td></tr>
+<tr class="separator:ga52a36a03fb08b1708d84b421d2b3b962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga57de891168a2d72f56213461d9fb0cc9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga57de891168a2d72f56213461d9fb0cc9">PROCESS_EVENT_NONE</a>&#160;&#160;&#160;0x80</td></tr>
 <tr class="separator:ga57de891168a2d72f56213461d9fb0cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6c18caccfa1f228ca39b41f1be228f91"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga6c18caccfa1f228ca39b41f1be228f91">PROCESS_EVENT_INIT</a>&#160;&#160;&#160;0x81</td></tr>
@@ -166,7 +168,7 @@ Typedefs</h2></td></tr>
 <tr class="separator:ga4d81d85c09c89d0e97cd0d239728a942"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaacfecee3e853f3904a8e695de0f6649d"><td class="memItemLeft" align="right" valign="top">typedef void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#gaacfecee3e853f3904a8e695de0f6649d">process_data_t</a></td></tr>
 <tr class="separator:gaacfecee3e853f3904a8e695de0f6649d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7434c88e71afb7d2a2da615c016fc7b6"><td class="memItemLeft" align="right" valign="top">typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga7434c88e71afb7d2a2da615c016fc7b6">process_num_events_t</a></td></tr>
+<tr class="memitem:ga7434c88e71afb7d2a2da615c016fc7b6"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga7434c88e71afb7d2a2da615c016fc7b6">process_num_events_t</a></td></tr>
 <tr class="separator:ga7434c88e71afb7d2a2da615c016fc7b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -438,14 +440,28 @@ Functions called by the system and boot-up code</h2></td></tr>
 
 </div>
 </div>
-<a id="gae866e02394e4c350efce12ad02cebd70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae866e02394e4c350efce12ad02cebd70">&#9670;&nbsp;</a></span>PROCESS_CONF_NUMEVENTS_WARN</h2>
+<a id="ga52a36a03fb08b1708d84b421d2b3b962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga52a36a03fb08b1708d84b421d2b3b962">&#9670;&nbsp;</a></span>PROCESS_CONF_NUMEVENTS_ERROR</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PROCESS_CONF_NUMEVENTS_WARN&#160;&#160;&#160;32</td>
+          <td class="memname">#define PROCESS_CONF_NUMEVENTS_ERROR&#160;&#160;&#160;230</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga203287c010773e1223347682148a3e0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga203287c010773e1223347682148a3e0c">&#9670;&nbsp;</a></span>PROCESS_CONF_NUMEVENTS_PRINT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PROCESS_CONF_NUMEVENTS_PRINT&#160;&#160;&#160;64</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1184,7 +1200,7 @@ Functions called by the system and boot-up code</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef uint32_t <a class="el" href="group__process.html#ga7434c88e71afb7d2a2da615c016fc7b6">process_num_events_t</a></td>
+          <td class="memname">typedef <a class="el" href="classuint32__t.html">uint32_t</a> <a class="el" href="group__process.html#ga7434c88e71afb7d2a2da615c016fc7b6">process_num_events_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1861,16 +1877,16 @@ Functions called by the system and boot-up code</h2></td></tr>
 </div><!-- doc-content -->
 <div class="ttc" id="agroup__process_html_ga5d5ebe8593273fc5cb6d4a203879b300"><div class="ttname"><a href="group__process.html#ga5d5ebe8593273fc5cb6d4a203879b300">process_current</a></div><div class="ttdeci">CCIF struct process * process_current</div><div class="ttdef"><b>Definition:</b> process.c:60</div></div>
 <div class="ttc" id="astructtimer_html"><div class="ttname"><a href="structtimer.html">timer</a></div><div class="ttdef"><b>Definition:</b> timer.h:91</div></div>
-<div class="ttc" id="agroup__process_html_gaa355c55e3ff7aa0999f2ae770298b7bb"><div class="ttname"><a href="group__process.html#gaa355c55e3ff7aa0999f2ae770298b7bb">PROCESS_CONTEXT_BEGIN</a></div><div class="ttdeci">#define PROCESS_CONTEXT_BEGIN(p)</div><div class="ttdef"><b>Definition:</b> process.h:457</div></div>
+<div class="ttc" id="agroup__process_html_gaa355c55e3ff7aa0999f2ae770298b7bb"><div class="ttname"><a href="group__process.html#gaa355c55e3ff7aa0999f2ae770298b7bb">PROCESS_CONTEXT_BEGIN</a></div><div class="ttdeci">#define PROCESS_CONTEXT_BEGIN(p)</div><div class="ttdef"><b>Definition:</b> process.h:458</div></div>
 <div class="ttc" id="agroup__clock_html_gae3ced0551b26c9b99cb45a86f34d100a"><div class="ttname"><a href="group__clock.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a></div><div class="ttdeci">#define CLOCK_SECOND</div><div class="ttdef"><b>Definition:</b> clock.h:119</div></div>
-<div class="ttc" id="agroup__process_html_gae4aa7fc8384dfc5416669cc0f712d0ed"><div class="ttname"><a href="group__process.html#gae4aa7fc8384dfc5416669cc0f712d0ed">PROCESS_CONTEXT_END</a></div><div class="ttdeci">#define PROCESS_CONTEXT_END(p)</div><div class="ttdef"><b>Definition:</b> process.h:472</div></div>
+<div class="ttc" id="agroup__process_html_gae4aa7fc8384dfc5416669cc0f712d0ed"><div class="ttname"><a href="group__process.html#gae4aa7fc8384dfc5416669cc0f712d0ed">PROCESS_CONTEXT_END</a></div><div class="ttdeci">#define PROCESS_CONTEXT_END(p)</div><div class="ttdef"><b>Definition:</b> process.h:473</div></div>
 <div class="ttc" id="agroup__etimer_html_gadb6c83643bbca82b614c50b27c586302"><div class="ttname"><a href="group__etimer.html#gadb6c83643bbca82b614c50b27c586302">etimer_set</a></div><div class="ttdeci">void etimer_set(struct etimer *et, clock_time_t interval)</div><div class="ttdoc">Set an event timer.</div><div class="ttdef"><b>Definition:</b> etimer.c:187</div></div>
-<div class="ttc" id="astructprocess_html"><div class="ttname"><a href="structprocess.html">process</a></div><div class="ttdef"><b>Definition:</b> process.h:326</div></div>
-<div class="ttc" id="agroup__process_html_ga64e81621381e2e575fad8959ce7a8496"><div class="ttname"><a href="group__process.html#ga64e81621381e2e575fad8959ce7a8496">PROCESS_CURRENT</a></div><div class="ttdeci">#define PROCESS_CURRENT()</div><div class="ttdef"><b>Definition:</b> process.h:433</div></div>
+<div class="ttc" id="astructprocess_html"><div class="ttname"><a href="structprocess.html">process</a></div><div class="ttdef"><b>Definition:</b> process.h:327</div></div>
+<div class="ttc" id="agroup__process_html_ga64e81621381e2e575fad8959ce7a8496"><div class="ttname"><a href="group__process.html#ga64e81621381e2e575fad8959ce7a8496">PROCESS_CURRENT</a></div><div class="ttdeci">#define PROCESS_CURRENT()</div><div class="ttdef"><b>Definition:</b> process.h:434</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:54 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

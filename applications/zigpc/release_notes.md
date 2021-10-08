@@ -1,6 +1,8 @@
 # ZigPC (Beta) Release Notes
 This document describes the changes between the current and last released ZigPC.
 
+## [1.0.2] - Oct 2021
+
 ## [1.0.1] - Aug 2021
 ### Fixed
 * Build issues
@@ -33,7 +35,6 @@ This document describes the changes between the current and last released ZigPC.
 | Known Issue                                                                                                                                           | Workaround
 |-------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | If connection to the MQTT broker is lost, ZigPC does not re-subscribe to topics                                                                       | Restart ZigPC.                                                                              |
-| Building in Docker may fail due to Xvfb failing.                                                                                                      | Run `Xvfb -ac ${DISPLAY} -screen 0 640x480x8 -nolisten tcp > /dev/null 2>&1 &` in Docker.   |
 | User may experience outdated devices that are still listed from cached data in the browser                                                            | A fresh browser session can remove outdated devices.                                        |
 | Network management state is not published correctly if UPVL is started after ZigPC                                                                    | Start UPVL before ZigPC.                                                                    |
 | The UPVL becomes unresponsive to MQTT messages and will miss MQTT messages published to "ucl/SmartStart/List/Update"                                  | Restart UPVL.                                                                               |

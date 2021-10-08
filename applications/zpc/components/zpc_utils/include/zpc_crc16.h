@@ -30,13 +30,13 @@ extern "C" {
  * @brief Calculation of CRC16-CCITT with Polynomial 0x1021 on data
  *
  * @param crc16             Initial value for CRC 16 calculation algorithm
- * @param data              data
+ * @param data_buf          data
  * @param data_length       Length of the data.
- * @return calculated crc16
+ * @return calculated two byte crc16
  */
 
 uint16_t
-  zpc_crc16(uint16_t crc16, const uint8_t *data_buf, unsigned long data_len);
+  zpc_crc16(uint16_t crc16, const uint8_t *data_buf, unsigned long data_length);
 #ifdef __cplusplus
 }
 #endif

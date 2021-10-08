@@ -30,12 +30,12 @@
 #define DEFAULT_ZWAVE_NORMAL_TX_POWER_DBM                   0
 #define DEFAULT_ZWAVE_MEASURED_0DBM_POWER                   0
 #define DEFAULT_SERIAL_PORT                                 "/dev/ttyUSB0"
-#define DEFAULT_WAKEUP_INTERVAL                             4200
+#define DEFAULT_WAKE_UP_INTERVAL                            4200
 #define DEFAULT_MANUFACTURER_ID                             0x0000
 #define DEFAULT_PRODUCT_TYPE                                0x0005
 #define DEFAULT_PRODUCT_ID                                  0x0001
 #define DEFAULT_HARDWARE_VERSION                            1
-#define DEFAULT_NUMBER_OF_MISSING_WAKEUP_NOTIFICATION       2
+#define DEFAULT_NUMBER_OF_MISSING_WAKE_UP_NOTIFICATION      2
 #define DEFAULT_NUMBER_OF_ACCEPTED_FRAME_TRANSMISSION_ERROR 2
 #define DEFAULT_INCLUSION_PROTOCOL_PREFERENCE               "1,2"
 #define DEFAULT_OTA_CACHE_PATH                              UIC_VAR_DIR "/zpc/ota_cache"
@@ -101,15 +101,15 @@ int zpc_config_init()
                            "it will be applied only with compatible Z-Wave "
                            "APIs.",
                            DEFAULT_ZWAVE_MEASURED_0DBM_POWER);
-  status |= config_add_int("zpc.default_wakeup_interval",
-                           "Default wakeup interval in seconds, which will be "
+  status |= config_add_int("zpc.default_wake_up_interval",
+                           "Default wake up interval in seconds, which will be "
                            "configured on sleeping (NL) Z-Wave nodes after "
                            "inclusion. Used as default only if there are no"
                            " certification requirements. Also note that if the"
                            "sleeping (NL) Z-Wave device does NOT advertise a "
                            "default Wake Up internal in the Wake Up Command "
                            "Class, this value is used.",
-                           DEFAULT_WAKEUP_INTERVAL);
+                           DEFAULT_WAKE_UP_INTERVAL);
 
   status |= config_add_string("zpc.serial_log_file",
                               "If this is set, the ZPC will write a log of the "
@@ -127,11 +127,11 @@ int zpc_config_init()
     DEFAULT_HARDWARE_VERSION);
 
   status |= config_add_int(
-    "zpc.missing_wakeup_notification",
-    "This value represents a maximum number of missing wakeup periods."
-    "If the sleeping nodes missed issuing wakeup notification for more than"
+    "zpc.missing_wake_up_notification",
+    "This value represents a maximum number of missing wake up periods."
+    "If the sleeping nodes missed issuing wake up notification for more than"
     "a value defined here, the node shall be considered as failing node.",
-    DEFAULT_NUMBER_OF_MISSING_WAKEUP_NOTIFICATION);
+    DEFAULT_NUMBER_OF_MISSING_WAKE_UP_NOTIFICATION);
 
   status |= config_add_int(
     "zpc.accepted_transmit_failure",
@@ -212,13 +212,13 @@ sl_status_t zpc_config_fixt_setup()
   config.mqtt_port = config_get_int_safe(CONFIG_KEY_MQTT_PORT);
   config.zwave_measured_0dbm_power
     = config_get_int_safe("zpc.measured_0dbm_power");
-  config.default_wakeup_interval
-    = config_get_int_safe("zpc.default_wakeup_interval");
+  config.default_wake_up_interval
+    = config_get_int_safe("zpc.default_wake_up_interval");
   config.hardware_version = config_get_int_safe("zpc.hardware_version");
   config.accepted_transmit_failure
     = config_get_int_safe("zpc.accepted_transmit_failure");
-  config.missing_wakeup_notification
-    = config_get_int_safe("zpc.missing_wakeup_notification");
+  config.missing_wake_up_notification
+    = config_get_int_safe("zpc.missing_wake_up_notification");
 
   status |= config_get_as_string("zpc.inclusion_protocol_preference",
                                  &config.inclusion_protocol_preference);

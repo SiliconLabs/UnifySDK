@@ -197,7 +197,7 @@ Unify uses GNU99 (C99 with GNU Extensions).
 
 ### 3.1.1.1 C++ standards version (Required) ###
 
-Unify uses C++11 with GNU extensions.
+Unify uses C++17 with GNU extensions.
 
 ### 3.1.2 Support mixing C++ and C (Recommended) ###
 

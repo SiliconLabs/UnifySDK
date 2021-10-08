@@ -51,7 +51,7 @@ def parse(input, output):
         test_str = ""
 
         table_str = "// map<notification_type, map<event_state_value, state>>\n"
-        table_str += "static const std::map<unsigned int, std::map<unsigned int, unsigned int>> notification_event_state_map = {"
+        table_str += "static const std::map<unsigned int, std::map<unsigned int, unsigned int>> notification_event_state_map = {\n"
         for entry in table:
             if len(table[entry]['states']) == 0:
                 continue
@@ -67,6 +67,7 @@ def parse(input, output):
             state_counter = 0
 
             table_str += '{'
+            table_str += "\n"
 
             rules_str += "\n// {}\n".format(notification_str)
             test_str += "\n// {}\n".format(notification_str)
@@ -91,10 +92,12 @@ def parse(input, output):
                     # {event, state},
                     table_str += '{' + str(hex(event_val)) + \
                         ', ' + state_str + '}, '
+                    table_str += "\n"
                 table_str = table_str[:-2]
                 # }
                 state_counter += 1
-                table_str += ', '
+                #table_str += ', '
+                table_str += "\n"
             table_str = table_str[:-2]
             # }
             table_str += '}},'

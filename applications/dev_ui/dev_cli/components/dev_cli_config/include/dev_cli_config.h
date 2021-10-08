@@ -40,11 +40,11 @@ typedef struct {
   const char *mqtt_host;  ///< Hostname of the MQTT broker;
   int mqtt_port;          ///< port of the MQTT broker
   const char *command;
-  const char *dsk;      ///< DSK key to use for smart start list manipulation
+  const char *dsk;      ///< DSK key to use for SmartStart list manipulation
   const char *include;  ///< Include to use for SmartStart list manipulation
-  const char *protocolunid;  ///< protcol controller unid to use for smart start
+  const char *protocolunid;  ///< protcol controller unid to use for SmartStart
                              ///< list manipulation
-  const char *unid;          ///< unid to use for smart start list manipulation
+  const char *unid;          ///< unid to use for SmartStart list manipulation
 } dev_cli_config_t;
 
 /**

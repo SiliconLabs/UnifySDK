@@ -756,6 +756,7 @@ void test_attribute_store()
 void test_attribute_store_persistence()
 {
   // Create a new network.
+  attribute_store_delete_node(attribute_store_get_root());
   uint8_t test_values[] = {0x01, 0x02, 0x03, 0x04};
   attribute_store_node_t root_node;
   root_node = attribute_store_get_root();
@@ -913,7 +914,7 @@ void test_attribute_store_persistence()
                                              DESIRED_ATTRIBUTE,
                                              received_values,
                                              &received_values_size));
-  TEST_ASSERT_EQUAL(1, received_values_size);
+  TEST_ASSERT_EQUAL(3, received_values_size);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(test_values,
                                 received_values,
                                 received_values_size);
@@ -1130,4 +1131,25 @@ void test_attribute_store_delete_nodes_and_try_to_add_a_child()
   // Delete node 1
   attribute_store_delete_node(node_1);
   TEST_ASSERT_EQUAL(1, update_callback_add_child_value_counter);
+}
+
+void test_attribute_store_register_nullptr_callbacks()
+{
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, attribute_store_register_callback(NULL));
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    attribute_store_register_callback_by_type(NULL, 1));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_register_callback_by_type_and_state(NULL,
+                                                        1,
+                                                        REPORTED_ATTRIBUTE));
+
+  // Verify that nothing crashes
+  attribute_store_node_t node_1
+    = attribute_store_add_node(1, attribute_store_get_root());
+  uint8_t test_value = 0x01;
+  attribute_store_set_node_attribute_value(node_1,
+                                           REPORTED_ATTRIBUTE,
+                                           &test_value,
+                                           sizeof(test_value));
 }

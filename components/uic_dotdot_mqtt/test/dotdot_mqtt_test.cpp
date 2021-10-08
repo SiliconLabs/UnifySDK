@@ -189,9 +189,9 @@ void test_dotdot_mqtt_publish_attributes_int()
   TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_desired));
   char result[100];
   mqtt_mock_helper_pop_publish(topic_reported, result);
-  TEST_ASSERT_EQUAL_JSON(R"({"value":"42"})", result);
+  TEST_ASSERT_EQUAL_JSON(R"({"value":42})", result);
   mqtt_mock_helper_pop_publish(topic_desired, result);
-  TEST_ASSERT_EQUAL_JSON(R"({"value":"42"})", result);
+  TEST_ASSERT_EQUAL_JSON(R"({"value":42})", result);
 }
 
 void test_dotdot_mqtt_publish_attributes_enum()
@@ -322,9 +322,9 @@ void test_dotdot_mqtt_publish_attributes_reported_or_desired()
   TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_desired));
   TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_reported));
   mqtt_mock_helper_pop_publish(topic_desired, result);
-  TEST_ASSERT_EQUAL_JSON(R"({"value":"1"})", result);
+  TEST_ASSERT_EQUAL_JSON(R"({"value":1})", result);
   mqtt_mock_helper_pop_publish(topic_reported, result);
-  TEST_ASSERT_EQUAL_JSON(R"({"value":"2"})", result);
+  TEST_ASSERT_EQUAL_JSON(R"({"value":2})", result);
 }
 
 // Test bitmaps desired reported attributes
@@ -605,7 +605,8 @@ void test_dotdot_mqtt_supported_commands()
   mqtt_mock_helper_pop_publish(
     "ucl/by-unid/zw-test-hest/ep0/DoorLock/SupportedCommands",
     result);
-  TEST_ASSERT_EQUAL_STRING(R"({"value": ["LockDoor","ToggleResponse"]})", result);
+  TEST_ASSERT_EQUAL_STRING(R"({"value": ["LockDoor","ToggleResponse"]})",
+                           result);
 }
 
 void test_dotdot_mqtt_write_attributes_badtopic()

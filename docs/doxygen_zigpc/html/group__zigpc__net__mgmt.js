@@ -8,6 +8,7 @@ var group__zigpc__net__mgmt =
       [ "param_eui64_filled", "structzigpc__net__mgmt__state__change__request__t.html#a2789076086b52894935210bd6b2751dc", null ],
       [ "requested_state", "structzigpc__net__mgmt__state__change__request__t.html#ad239bdd3a87278dc3e1ef0905bcacf9c", null ]
     ] ],
+    [ "zigpc_net_mgmt_fsm_state_t", "group__zigpc__net__mgmt.html#gabfe083f1de2b3b27d5601f6a4561f736", null ],
     [ "zigpc_net_mgmt_fsm_state", "group__zigpc__net__mgmt.html#ga41074cd4be64194f1a68da0b7449ba8e", [
       [ "ZIGPC_NET_MGMT_FSM_STATE_MIN_VAL", "group__zigpc__net__mgmt.html#gga41074cd4be64194f1a68da0b7449ba8ea6f5197db89445232db5dbce6a8b68909", null ],
       [ "ZIGPC_NET_MGMT_FSM_STATE_INIT", "group__zigpc__net__mgmt.html#gga41074cd4be64194f1a68da0b7449ba8eae55d3c527781e1ecca7de185c311a9fd", null ],

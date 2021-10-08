@@ -19,6 +19,7 @@
 #include "sl_log.h"
 #include "sl_status.h"
 #include "zwave_controller_command_class_indices.h"
+#include "zwave_controller_utils.h"
 #include "ZW_classcmd.h"
 #include "zwave_command_handler.h"
 #include "zpc_attribute_store_network_helper.h"
@@ -74,7 +75,9 @@ static void zwave_command_class_multilevel_sensor_on_version_attribute_update(
 // Attribute creation functions
 ///////////////////////////////////////////////////////////////////////////////
 static void zwave_command_class_multilevel_sensor_create_type(
-  attribute_store_node_t endpoint_node, uint8_t type)
+  attribute_store_node_t endpoint_node,
+  uint8_t type,
+  uint8_t multilevel_sensor_version)
 {
   // Do we already have the node ?
   attribute_store_node_t type_node
@@ -100,12 +103,22 @@ static void zwave_command_class_multilevel_sensor_create_type(
     return;
   }
 
-  // Add the three other nodes under the type.
-  const attribute_store_type_t additional_nodes[]
-    = {ATTRIBUTE(SUPPORTED_SCALES), ATTRIBUTE(SCALE), ATTRIBUTE(SENSOR_VALUE)};
-  attribute_store_add_if_missing(type_node,
-                                 additional_nodes,
-                                 COUNT_OF(additional_nodes));
+  // Add other nodes under the type. Only supported scales for version >4
+  if (multilevel_sensor_version > 4) {
+    const attribute_store_type_t additional_nodes[]
+      = {ATTRIBUTE(SUPPORTED_SCALES)};
+    attribute_store_add_if_missing(type_node,
+                                   additional_nodes,
+                                   COUNT_OF(additional_nodes));
+  } else {
+    const attribute_store_type_t additional_nodes[]
+      = {ATTRIBUTE(SUPPORTED_SCALES),
+         ATTRIBUTE(SCALE),
+         ATTRIBUTE(SENSOR_VALUE)};
+    attribute_store_add_if_missing(type_node,
+                                   additional_nodes,
+                                   COUNT_OF(additional_nodes));
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -184,10 +197,9 @@ sl_status_t zwave_command_class_multilevel_sensor_supported_scale_get(
                                              0);
 
   uint8_t supporting_node_version = 0;
-  attribute_store_read_value(version_node,
-                             REPORTED_ATTRIBUTE,
-                             &supporting_node_version,
-                             sizeof(supporting_node_version));
+  attribute_store_get_reported(version_node,
+                               &supporting_node_version,
+                               sizeof(supporting_node_version));
 
   if (supporting_node_version == 0) {
     // Something weird happened. Bail out.
@@ -217,10 +229,10 @@ sl_status_t zwave_command_class_multilevel_sensor_supported_scale_get(
     supported_scales_get_frame->cmdClass = COMMAND_CLASS_SENSOR_MULTILEVEL_V11;
     supported_scales_get_frame->cmd = SENSOR_MULTILEVEL_SUPPORTED_GET_SCALE_V11;
     supported_scales_get_frame->sensorType = 0;
-    attribute_store_read_value(type_node,
-                               REPORTED_ATTRIBUTE,
-                               &supported_scales_get_frame->sensorType,
-                               sizeof(supported_scales_get_frame->sensorType));
+    attribute_store_get_reported(
+      type_node,
+      &supported_scales_get_frame->sensorType,
+      sizeof(supported_scales_get_frame->sensorType));
 
     *frame_len = sizeof(ZW_SENSOR_MULTILEVEL_SUPPORTED_GET_SCALE_V11_FRAME);
     return SL_STATUS_OK;
@@ -246,10 +258,9 @@ sl_status_t zwave_command_class_multilevel_sensor_get(
                                              0);
 
   uint8_t supporting_node_version = 0;
-  attribute_store_read_value(version_node,
-                             REPORTED_ATTRIBUTE,
-                             &supporting_node_version,
-                             sizeof(supporting_node_version));
+  attribute_store_get_reported(version_node,
+                               &supporting_node_version,
+                               sizeof(supporting_node_version));
 
   if (supporting_node_version == 0) {
     // Something weird happened. Bail out.
@@ -268,10 +279,12 @@ sl_status_t zwave_command_class_multilevel_sensor_get(
     get_frame->properties1 = 0;  // This will be ignored by the supporting node
   } else {
     if (SL_STATUS_OK
-        != attribute_store_read_value(type_node,
-                                      REPORTED_ATTRIBUTE,
-                                      &get_frame->sensorType,
-                                      sizeof(get_frame->sensorType))) {
+        != attribute_store_get_reported(type_node,
+                                        &get_frame->sensorType,
+                                        sizeof(get_frame->sensorType))) {
+      sl_log_warning(LOG_TAG,
+                     "Cannot read Sensor Type for Attribute %d.",
+                     type_node);
       return SL_STATUS_FAIL;
     }
     attribute_store_node_t supported_scales_node
@@ -279,22 +292,27 @@ sl_status_t zwave_command_class_multilevel_sensor_get(
                                                ATTRIBUTE(SUPPORTED_SCALES),
                                                0);
 
-    int32_t supported_scales = 0;
+    uint32_t supported_scales = 0;
     if (SL_STATUS_OK
-        != attribute_store_read_value(supported_scales_node,
-                                      REPORTED_ATTRIBUTE,
-                                      &supported_scales,
-                                      sizeof(supported_scales))) {
+        != attribute_store_get_reported(supported_scales_node,
+                                        &supported_scales,
+                                        sizeof(supported_scales))) {
+      sl_log_warning(LOG_TAG,
+                     "Unknown supported scales for Attribute %d. "
+                     "Aborting resolution.",
+                     supported_scales_node);
+
       return SL_STATUS_FAIL;
-    };
-    uint8_t first_suported_scale = 0;
+    }
+
+    uint8_t first_supported_scale = 0;
     for (uint8_t i = 0; i < 4; i++) {
       if (supported_scales & (1 << i)) {
-        first_suported_scale = i;
+        first_supported_scale = i;
         break;
       }
     }
-    get_frame->properties1 = first_suported_scale << 3;
+    get_frame->properties1 = first_supported_scale << 3;
   }
 
   *frame_len = sizeof(ZW_SENSOR_MULTILEVEL_GET_V11_FRAME);
@@ -333,7 +351,7 @@ static sl_status_t zwave_command_class_multilevel_sensor_handle_report(
 
   attribute_store_node_t type_node = attribute_store_get_node_child_by_value(
     endpoint_node,
-    ATTRIBUTE_COMMAND_CLASS_SENSOR_MULTILEVEL_SENSOR_TYPE,
+    ATTRIBUTE(SENSOR_TYPE),
     REPORTED_ATTRIBUTE,
     &frame_data[REPORT_SENSOR_TYPE_INDEX],
     sizeof(uint8_t),
@@ -347,19 +365,30 @@ static sl_status_t zwave_command_class_multilevel_sensor_handle_report(
 
   if (type_node == ATTRIBUTE_STORE_INVALID_NODE) {
     if (multilevel_sensor_version > 4) {
-      sl_log_info(LOG_TAG,
-                  "Quirk Detected: sensor reports on type (%d), that wasn't "
-                  "reported as supported",
-                  frame_data[REPORT_SENSOR_TYPE_INDEX]);
+      sl_log_debug(LOG_TAG,
+                   "Quirk Detected: sensor reports on type (%d),"
+                   " that was not reported as supported",
+                   frame_data[REPORT_SENSOR_TYPE_INDEX]);
     }
     // This is how we discover that the type is supported for nodes with version
     // less than 4.
     // For nodes with later versions than 4, we have seen nodes, that doesn't
     // report the sensor type correctly, thus we create it here as a fallback
     // solution
+    if (multilevel_sensor_version <= 4) {
+      // Create a dummy supported bitmask based on the type the node reports.
+      uint8_t bitmask[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+      uint8_t bitmask_size                                  = (scale / 8) + 1;
+      bitmask[(scale / 8)]                                  = 1 << (scale % 8);
+      attribute_store_set_child_reported(endpoint_node,
+                                         ATTRIBUTE(SUPPORTED_SENSOR_TYPES),
+                                         bitmask,
+                                         bitmask_size);
+    }
     zwave_command_class_multilevel_sensor_create_type(
       endpoint_node,
-      frame_data[REPORT_SENSOR_TYPE_INDEX]);
+      frame_data[REPORT_SENSOR_TYPE_INDEX],
+      multilevel_sensor_version);
   }
 
   // Save the scale under the type
@@ -384,12 +413,12 @@ static sl_status_t zwave_command_class_multilevel_sensor_handle_report(
                                     &frame_data[REPORT_SENSOR_VALUE_INDEX]);
 
   sl_log_debug(LOG_TAG,
-               "Current sensor reading for NodeID %03d:%d - Type: 0x%02X, "
-               "reading: %.1f",
+               "Current sensor reading for NodeID %d:%d - Type: 0x%02X, "
+               "reading (3 decimal digits): %d",
                connection_info->remote.node_id,
                connection_info->remote.endpoint_id,
                frame_data[REPORT_SENSOR_TYPE_INDEX],
-               (float)sensor_value);
+               sensor_value);
 
   // Save the value under the type
   attribute_store_set_child_reported(type_node,
@@ -420,11 +449,14 @@ static sl_status_t
                                              ATTRIBUTE(SUPPORTED_SENSOR_TYPES),
                                              0);
 
-  attribute_store_set_node_attribute_value(
-    supported_bitmask_node,
-    REPORTED_ATTRIBUTE,
-    &frame_data[SUPPORTED_REPORT_BITMASK_INDEX],
-    frame_length - SUPPORTED_REPORT_BITMASK_INDEX);
+  attribute_store_set_reported(supported_bitmask_node,
+                               &frame_data[SUPPORTED_REPORT_BITMASK_INDEX],
+                               frame_length - SUPPORTED_REPORT_BITMASK_INDEX);
+
+  uint8_t version
+    = zwave_node_get_command_class_version(COMMAND_CLASS_SENSOR_MULTILEVEL_V11,
+                                           connection_info->remote.node_id,
+                                           connection_info->remote.endpoint_id);
 
   // Now create a type attribute for each supported type
   for (uint8_t byte = 0; byte < frame_length - SUPPORTED_REPORT_BITMASK_INDEX;
@@ -433,7 +465,9 @@ static sl_status_t
       if (frame_data[SUPPORTED_REPORT_BITMASK_INDEX + byte] & (1 << bit)) {
         // This type is supported.
         uint8_t type = byte * 8 + bit + 1;
-        zwave_command_class_multilevel_sensor_create_type(endpoint_node, type);
+        zwave_command_class_multilevel_sensor_create_type(endpoint_node,
+                                                          type,
+                                                          version);
       }
     }
   }
@@ -478,6 +512,19 @@ static sl_status_t
   }
   int32_t scale = frame_data[SUPPORTED_SCALE_REPORT_BITMASK_INDEX];
   attribute_store_set_reported(supported_scale_node, &scale, sizeof(scale));
+
+  uint8_t version
+    = zwave_node_get_command_class_version(COMMAND_CLASS_SENSOR_MULTILEVEL_V11,
+                                           connection_info->remote.node_id,
+                                           connection_info->remote.endpoint_id);
+  if (version > 4) {
+    // Now that we probed the supported scales, as for the Sensor Value
+    const attribute_store_type_t additional_nodes[]
+      = {ATTRIBUTE(SCALE), ATTRIBUTE(SENSOR_VALUE)};
+    attribute_store_add_if_missing(type_node,
+                                   additional_nodes,
+                                   COUNT_OF(additional_nodes));
+  }
 
   return SL_STATUS_OK;
 }

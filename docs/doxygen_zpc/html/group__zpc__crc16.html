@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.1</span>
+   &#160;<span id="projectnumber">1.0.2</span>
    </div>
   </td>
  </tr>
@@ -95,15 +95,15 @@ $(document).ready(function(){initNavTree('group__zpc__crc16.html',''); initResiz
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga9b91051ed79ff5ca771ca834bf961847"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__crc16.html#ga9b91051ed79ff5ca771ca834bf961847">zpc_crc16</a> (uint16_t crc16, const uint8_t *data_buf, unsigned long data_len)</td></tr>
-<tr class="memdesc:ga9b91051ed79ff5ca771ca834bf961847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculation of CRC16-CCITT with Polynomial 0x1021 on data.  <a href="group__zpc__crc16.html#ga9b91051ed79ff5ca771ca834bf961847">More...</a><br /></td></tr>
-<tr class="separator:ga9b91051ed79ff5ca771ca834bf961847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga716637a23c8c1eca940460c96fd7b99d"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__crc16.html#ga716637a23c8c1eca940460c96fd7b99d">zpc_crc16</a> (uint16_t crc16, const uint8_t *data_buf, unsigned long data_length)</td></tr>
+<tr class="memdesc:ga716637a23c8c1eca940460c96fd7b99d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculation of CRC16-CCITT with Polynomial 0x1021 on data.  <a href="group__zpc__crc16.html#ga716637a23c8c1eca940460c96fd7b99d">More...</a><br /></td></tr>
+<tr class="separator:ga716637a23c8c1eca940460c96fd7b99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>CRC16 calculation function. </p>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga9b91051ed79ff5ca771ca834bf961847"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9b91051ed79ff5ca771ca834bf961847">&#9670;&nbsp;</a></span>zpc_crc16()</h2>
+<a id="ga716637a23c8c1eca940460c96fd7b99d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga716637a23c8c1eca940460c96fd7b99d">&#9670;&nbsp;</a></span>zpc_crc16()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -124,7 +124,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned long&#160;</td>
-          <td class="paramname"><em>data_len</em>&#160;</td>
+          <td class="paramname"><em>data_length</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -138,12 +138,12 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">crc16</td><td>Initial value for CRC 16 calculation algorithm </td></tr>
-    <tr><td class="paramname">data</td><td>data </td></tr>
+    <tr><td class="paramname">data_buf</td><td>data </td></tr>
     <tr><td class="paramname">data_length</td><td>Length of the data. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>calculated crc16 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>calculated two byte crc16 </dd></dl>
 
 </div>
 </div>
@@ -152,7 +152,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Aug 30 2021 13:07:55 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Oct 8 2021 09:58:37 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

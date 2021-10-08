@@ -39,17 +39,22 @@ TimeoutHandler::~TimeoutHandler()
   ctimer_stop(&timeout_data->timeout_timer);
 }
 
-std::string TimeoutHandler::get_image_key() const
+std::string TimeoutHandler::get_subscribe_topic() const
 {
-  return timeout_data->key;
+  return timeout_data->subscribe_topic;
 }
 
-bool TimeoutHandler::get_image_poll_state() const
+std::string TimeoutHandler::get_unid() const
+{
+  return timeout_data->unid;
+}
+
+bool TimeoutHandler::get_unid_poll_state() const
 {
   return timeout_data->state;
 }
 
-void TimeoutHandler::set_image_poll_state(bool state)
+void TimeoutHandler::set_unid_poll_state(bool state) const
 {
   timeout_data->state = state;
 }
@@ -63,22 +68,6 @@ ctimer *TimeoutHandler::get_ctimer_pointer() const
 {
   return &timeout_data->timeout_timer;
 }
-
-////////////////////////////////////////////////////////////////////////////////
-// Cache variables
-////////////////////////////////////////////////////////////////////////////////
-static std::map<std::string, uic_ota::meta_t, std::less<>> image_meta;
-static std::map<std::string, std::shared_ptr<TimeoutHandler>, std::less<>>
-  image_keys_poll;
-static std::map<std::string, std::string, std::less<>> image_cache_filepaths;
-static std::map<std::string, std::vector<endpoint_cache_t>, std::less<>>
-  status_published_cache;
-static std::map<std::string, std::vector<std::string>, std::less<>>
-  listening_unids;
-static std::map<
-  std::string,
-  std::vector<std::pair<std::string, uic_ota::image_ready_funct_t>>>
-  listening_unid_on_uiid_all;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Internal functions
@@ -96,6 +85,16 @@ static void set_map(const std::string &key,
   return;
 }
 
+template<typename value_type> static bool check_if_key_is_in_map(
+  const std::string &key,
+  std::map<std::string, value_type, std::less<>> &key_map)
+{
+  if (key_map.find(key) != key_map.end()) {
+    return true;
+  }
+  return false;
+}
+
 static std::string get_file_name(const std::string &path)
 {
   auto fileNameStart = path.find_last_of("/\\");
@@ -106,150 +105,52 @@ static std::string get_file_name(const std::string &path)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Component private cache functions
+// Image File Handler implementation
 ////////////////////////////////////////////////////////////////////////////////
-void set_image_listening_unid_on_uiid(
-  const std::string &uiid,
-  const std::string &unid,
-  uic_ota::image_ready_funct_t image_ready_cb)
-{
-  std::pair<std::string, uic_ota::image_ready_funct_t> value;
-  value.first  = unid;
-  value.second = image_ready_cb;
-  if (listening_unid_on_uiid_all.find(uiid)
-      != listening_unid_on_uiid_all.end()) {
-    listening_unid_on_uiid_all.at(uiid).emplace_back(value);
-  }
-  std::vector<std::pair<std::string, uic_ota::image_ready_funct_t>> values {
-    value};
-  listening_unid_on_uiid_all.emplace(uiid, values);
-}
 
-std::vector<std::pair<std::string, uic_ota::image_ready_funct_t>>
-  get_image_listening_list(const std::string &uiid)
+namespace image_file_handler
 {
-  std::vector<std::pair<std::string, uic_ota::image_ready_funct_t>>
-    unids_callbacks;
-  if (listening_unid_on_uiid_all.find(uiid)
-      != listening_unid_on_uiid_all.end()) {
-    unids_callbacks = listening_unid_on_uiid_all.at(uiid);
-    return unids_callbacks;
-  }
-  return unids_callbacks;
-}
-
-void remove_unids_listening_on_uiid(const std::string &uiid)
-{
-  listening_unid_on_uiid_all.erase(uiid);
-}
+// Cache variables
+static std::map<std::string, uic_ota::meta_t, std::less<>> image_meta_info;
+static std::map<std::string, std::string, std::less<>> image_cache_filepaths;
 
 void set_image_meta_info(const std::string &key,
                          const uic_ota::meta_t &meta_info_data)
 {
-  set_map(key, meta_info_data, image_meta);
+  set_map(key, meta_info_data, image_meta_info);
 }
 
 uic_ota::meta_t get_image_meta_info(const std::string &key)
 {
-  if (image_meta.find(key) != image_meta.end()) {
-    return image_meta.at(key);
+  if (image_meta_info.find(key) != image_meta_info.end()) {
+    return image_meta_info.at(key);
   }
 
-  sl_log_error(LOG_TAG, "Could not find meta info");
+  sl_log_debug(LOG_TAG,
+               "Could not find meta info for image key %s",
+               key.c_str());
   throw std::invalid_argument("Could not find meta info for image key");
 }
 
 void remove_image_meta_info(const std::string &key)
 {
-  image_meta.erase(key);
+  image_meta_info.erase(key);
 }
 
 bool check_if_meta_info_received(const std::string &key)
 {
-  if (image_meta.find(key) != image_meta.end()) {
-    return true;
-  }
-  return false;
-}
-
-void set_unid_listening(const std::string &uiid, const std::string unid)
-{
-  if (listening_unids.find(uiid) != listening_unids.end()) {
-    listening_unids.at(uiid).emplace_back(unid);
-    return;
-  }
-  std::vector<std::string> unids {unid};
-  listening_unids.emplace(uiid, unids);
-}
-
-void remove_unid_listening(const std::string &uiid, const std::string &unid)
-{
-  if (listening_unids.find(uiid) != listening_unids.end()) {
-    sl_log_debug(LOG_TAG, "Removing unid: %s", unid.c_str());
-    std::vector<std::string>::iterator it
-      = std::find(listening_unids.at(uiid).begin(),
-                  listening_unids.at(uiid).end(),
-                  std::string(unid));
-
-    // Remove element by value
-    if (it != listening_unids.at(uiid).end()) {
-      listening_unids.at(uiid).erase(it);
-    }
-
-    // Remove the element completely if empty
-    if (listening_unids.at(uiid).empty()) {
-      listening_unids.erase(uiid);
-    }
-  }
-  return;
-}
-
-std::vector<std::string> get_unids_listening(const std::string &uiid)
-{
-  std::vector<std::string> unids = {};
-  if (listening_unids.find(uiid) != listening_unids.end()) {
-    unids = listening_unids.at(uiid);
-  }
-  return unids;
-}
-
-uint32_t get_unids_listening_count(const std::string &uiid)
-{
-  if (listening_unids.find(uiid) != listening_unids.end()) {
-    return listening_unids.at(uiid).size();
-  }
-  return 0;
-}
-
-void set_image_key_poll(std::shared_ptr<TimeoutHandler> timeout_handler)
-{
-  set_map(timeout_handler->get_image_key(), timeout_handler, image_keys_poll);
-}
-
-void pop_image_key_poll(const std::string &key)
-{
-  image_keys_poll.erase(key);
-}
-
-bool get_image_key_poll_state(const std::string &key)
-{
-  return image_keys_poll.at(key)->get_image_poll_state();
-}
-
-void set_image_key_poll_state_true(const std::string &key)
-{
-  image_keys_poll.at(key)->set_image_poll_state(true);
-}
-
-uic_ota::image_ready_funct_t get_image_callback(const std::string &key)
-{
-  return image_keys_poll.at(key)->get_image_ready_cb();
+  return check_if_key_is_in_map(key, image_meta_info);
 }
 
 void set_images_received_cached_filepath(const std::string &key,
                                          const std::string &filepath)
 {
   set_map(key, filepath, image_cache_filepaths);
+}
+
+std::string get_image_cached_filepath(const std::string &key)
+{
+  return image_cache_filepaths.at(key);
 }
 
 bool is_image_received_and_cached(const std::string &key)
@@ -262,16 +163,139 @@ bool is_image_received_and_cached(const std::string &key)
   return false;
 }
 
-std::string get_image_cached_filepath(const std::string &key)
-{
-  return image_cache_filepaths.at(key);
-}
-
 void clear_images_cache()
 {
+  for (const auto &[image_key, filepath]: image_cache_filepaths) {
+    remove(filepath.c_str());
+  }
   image_cache_filepaths.clear();
 }
+}  // namespace image_file_handler
+////////////////////////////////////////////////////////////////////////////////
+// Unid State Handler
+////////////////////////////////////////////////////////////////////////////////
 
+namespace unid_state_handler
+{
+// Cache variables
+static std::map<std::string, std::vector<std::string>, std::less<>>
+  unids_listening;
+static std::map<std::string, std::shared_ptr<TimeoutHandler>, std::less<>>
+  unids_in_poll;
+static std::map<std::string, std::vector<endpoint_cache_t>, std::less<>>
+  status_published_cache;
+
+// Poll unid handling //
+void set_unid_poll(std::shared_ptr<TimeoutHandler> timeout_handler)
+{
+  set_map(timeout_handler->get_unid(), timeout_handler, unids_in_poll);
+}
+
+void pop_unid_poll(const std::string &unid)
+{
+  unids_in_poll.erase(unid);
+}
+
+bool get_unid_poll_state(const std::string &unid)
+{
+  return unids_in_poll.at(unid)->get_unid_poll_state();
+}
+
+void set_unid_poll_state_true(const std::string &unid)
+{
+  unids_in_poll.at(unid)->set_unid_poll_state(true);
+}
+
+bool is_unid_in_poll(const std::string &unid)
+{
+  return check_if_key_is_in_map(unid, unids_in_poll);
+}
+
+uic_ota::image_ready_funct_t get_unid_callback(const std::string &unid)
+{
+  return unids_in_poll.at(unid)->get_image_ready_cb();
+}
+
+bool is_poll_topic_subscribed(const std::string &topic)
+{
+  for (const auto &[unid, poll_data]: unids_in_poll) {
+    if (poll_data->get_subscribe_topic() == topic) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// Unid management //
+void set_unid_listening(const std::string &uiid, const std::string &unid)
+{
+  if (unids_listening.find(uiid) != unids_listening.end()) {
+    if (std::find(unids_listening.at(uiid).begin(),
+                  unids_listening.at(uiid).end(),
+                  unid)
+        == unids_listening.at(uiid).end()) {
+      unids_listening.at(uiid).emplace_back(unid);
+    }
+    return;
+  }
+
+  std::vector<std::string> unids {unid};
+  unids_listening.try_emplace(uiid, unids);
+}
+
+std::vector<std::string> get_unids_listening(const std::string &uiid)
+{
+  std::vector<std::string> unids = {};
+  if (unids_listening.find(uiid) != unids_listening.end()) {
+    unids = unids_listening.at(uiid);
+  }
+  return unids;
+}
+
+std::size_t get_unids_listening_count(const std::string &uiid)
+{
+  if (unids_listening.find(uiid) != unids_listening.end()) {
+    return unids_listening.at(uiid).size();
+  }
+  return 0;
+}
+
+void remove_unid_listening(const std::string &uiid, const std::string &unid)
+{
+  if (unids_listening.find(uiid) != unids_listening.end()) {
+    sl_log_debug(LOG_TAG,
+                 "Removing UNID %s from the list of UNIDs to monitor.",
+                 unid.c_str());
+    std::vector<std::string>::iterator it
+      = std::find(unids_listening.at(uiid).begin(),
+                  unids_listening.at(uiid).end(),
+                  std::string(unid));
+
+    // Remove element by value
+    if (it != unids_listening.at(uiid).end()) {
+      unids_listening.at(uiid).erase(it);
+    }
+
+    // Remove the element completely if empty
+    if (unids_listening.at(uiid).empty()) {
+      unids_listening.erase(uiid);
+    }
+  }
+  return;
+}
+
+std::vector<std::string> get_uiids_unid_is_listening_to(const std::string &unid)
+{
+  std::vector<std::string> uiids = {};
+  for (const auto &[uiid, unids]: unids_listening) {
+    if (std::find(unids.begin(), unids.end(), unid) != unids.end()) {
+      uiids.push_back(uiid);
+    }
+  }
+  return uiids;
+}
+
+// Unid MQTT management //
 void set_status_published_cached(const dotdot_unid_t &unid,
                                  const dotdot_endpoint_id_t &ep)
 {
@@ -321,3 +345,4 @@ std::vector<endpoint_cache_t>
   }
   return endpoints;
 }
+}  // namespace unid_state_handler

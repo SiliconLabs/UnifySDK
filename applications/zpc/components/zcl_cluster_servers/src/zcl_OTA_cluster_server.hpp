@@ -32,9 +32,9 @@ extern "C" {
 #include "sl_status.h"
 
 /**
- * @brief Initialize the OTA cluster service
+ * @brief Initialize the OTA cluster service.
  * 
- * @return sl_status_t 
+ * @return sl_status_t.
  */
 sl_status_t zcl_OTA_cluster_server_init();
 

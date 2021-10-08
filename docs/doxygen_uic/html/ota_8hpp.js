@@ -29,6 +29,7 @@ var ota_8hpp =
     [ "subscribe_unid", "ota_8hpp.html#a19baf1996e05f7b86a2662722d3f2b5d", null ],
     [ "unretain_ota_status", "ota_8hpp.html#a325a96e27b16e87db94bec196af5d586", null ],
     [ "unretain_ota_status_by_unid", "ota_8hpp.html#af524391f5a1740b1ecf10d72459cb0c1", null ],
+    [ "unsubscribe_all_unids_uiid", "ota_8hpp.html#a3aa2d4d6e0ad5f318e1b3cdf4fde20e4", null ],
     [ "unsubscribe_unid", "ota_8hpp.html#ae6df3aa8dde97490dc31a2f022a57240", null ],
     [ "update_apply_after", "ota_8hpp.html#a5fcce4d8ccd7e14b13d1c8a9b68b7e14", null ],
     [ "update_current_version", "ota_8hpp.html#a63a81db64692667ab509d20fec7df37f", null ],

@@ -6,7 +6,7 @@ target_include_directories(
   PRIVATE src
   PUBLIC include)
 target_link_libraries(
-  zigpc_smartstart PRIVATE zigpc_common zigpc_net_mgmt zigpc_node_mgmt uic_log
+  zigpc_smartstart PRIVATE zigpc_common zigpc_net_mgmt uic_log
                            uic_smartstart_management)
 
 add_subdirectory(test)

@@ -1,4 +1,3 @@
-setup_binding(uic_log ALLOWLIST ".*log.*")
-setup_binding(uic_config ALLOWLIST "conf.*")
-setup_binding(uic_attribute_store ALLOWLIST "attribute_store_.*|ATTRIBUTE_STORE.*" EXT_LIB uic_attribute_resolver)
-setup_binding(uic_mqtt ALLOWLIST ".*mqtt_.*")
+export_target_json(uic_log)
+export_target_json(uic_config)
+export_target_json(uic_attribute_store EXT_LIB uic_attribute_resolver uic_log uic_config uic_contiki)

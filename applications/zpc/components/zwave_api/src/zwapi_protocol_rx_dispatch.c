@@ -148,9 +148,6 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
   switch (pData[IDX_CMD]) {
     case FUNC_ID_ZW_APPLICATION_CONTROLLER_UPDATE: {
       uint8_t bStatus;
-      if (zwave_api_detect_buffer_overflow(pData[IDX_DATA + 2])) {
-        break;
-      }
       if (callbacks->application_controller_update == NULL) {
         break;
       }
@@ -220,6 +217,9 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
         learnNodeInfo.bStatus = pData[current_index++];
         learnNodeInfo.bSource = zwapi_read_node_id(pData, &current_index);
         learnNodeInfo.bLen    = pData[current_index++];
+        if (zwave_api_detect_buffer_overflow(learnNodeInfo.bLen)) {
+          break;
+        }
         // The rest of the data is 3 bytes + the node info content
         for (i = 0; i < learnNodeInfo.bLen + 3; i++) {
           zwapi_command_buffer[i] = pData[current_index + i];

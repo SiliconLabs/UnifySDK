@@ -17,10 +17,12 @@
 #include <sqlite3.h>
 
 // Datastore tables
-#define DATASTORE_TABLE_INT  "uic_kv_int"   // Table for storing integers
-#define DATASTORE_TABLE_BLOB "uic_kv_blob"  // Table for storing arrays
-#define DATASTORE_TABLE_ATTRIBUTES \
-  "zpc_attributes"  // Table for storing the attribute store
+/// Table for storing integers
+#define DATASTORE_TABLE_INT "uic_kv_int"
+/// Table for storing arrays
+#define DATASTORE_TABLE_BLOB "uic_kv_blob"
+/// Table for storing the attribute store
+#define DATASTORE_TABLE_ATTRIBUTES "uic_attributes"
 
 // Private variable shared among this component.
 extern sqlite3 *db;

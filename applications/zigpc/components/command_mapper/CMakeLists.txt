@@ -19,7 +19,7 @@ target_link_libraries(
   PRIVATE zigpc_zcl_util
           zigpc_gateway
           zigpc_common
-          zigpc_node_mgmt
+          zigpc_datastore
           zigpc_group_mgmt
           uic_dotdot_types
           uic_dotdot_mqtt

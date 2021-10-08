@@ -121,7 +121,7 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_VERSION,
                  ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_SWITCH_BINARY))
 
 ///< This this is an umbrella/parent attribute, containing the state of
-/// the binary switch
+/// the binary switch command_status_values_t type
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE,
                  ((COMMAND_CLASS_SWITCH_BINARY << 8) | 0x02))
 
@@ -139,7 +139,7 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_VERSION,
                  ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_SWITCH_MULTILEVEL))
 
 ///< This this is an umbrella/parent attribute, containing the state of
-/// the multilevel switch
+/// the multilevel switch. command_status_values_t type
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_STATE,
                  ((COMMAND_CLASS_SWITCH_MULTILEVEL << 8) | 0x02))
 
@@ -286,29 +286,85 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_NOTIFICATION_V1_ALARM_LEVEL,
                  ((COMMAND_CLASS_NOTIFICATION_V4 << 8) | 0x09))
 
 /////////////////////////////////////////////////
-// Wakeup command class version 1
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKEUP_VERSION,
+// Supervision Command Class
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SUPERVISION_VERSION,
+                 ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_SUPERVISION))
+
+/////////////////////////////////////////////////
+// Thermostat Mode Command Class
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE_VERSION,
+                 ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_THERMOSTAT_MODE))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE,
+                 ((COMMAND_CLASS_THERMOSTAT_MODE << 8) | 0x02))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_MODES,
+                 ((COMMAND_CLASS_THERMOSTAT_MODE << 8) | 0x03))
+
+/////////////////////////////////////////////////
+// Thermostat Setpoint Command Class
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VERSION,
+                 ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_THERMOSTAT_SETPOINT))
+
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_SUPPORTED_SETPOINT_TYPES,
+  ((COMMAND_CLASS_THERMOSTAT_SETPOINT << 8) | 0x02))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_TYPE,
+                 ((COMMAND_CLASS_THERMOSTAT_SETPOINT << 8) | 0x03))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE,
+                 ((COMMAND_CLASS_THERMOSTAT_SETPOINT << 8) | 0x04))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE_SCALE,
+                 ((COMMAND_CLASS_THERMOSTAT_SETPOINT << 8) | 0x05))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE,
+                 ((COMMAND_CLASS_THERMOSTAT_SETPOINT << 8) | 0x06))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE_SCALE,
+                 ((COMMAND_CLASS_THERMOSTAT_SETPOINT << 8) | 0x07))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE,
+                 ((COMMAND_CLASS_THERMOSTAT_SETPOINT << 8) | 0x08))
+
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE_SCALE,
+                 ((COMMAND_CLASS_THERMOSTAT_SETPOINT << 8) | 0x09))
+
+/////////////////////////////////////////////////
+// Wakeup command class
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_VERSION,
                  ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_WAKE_UP_V2))
 
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKEUP_INTERVAL,
+///> Wake Up Configuration umbrella attribute. command_status_values_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_SETTING,
+                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x09))
+
+///> Configured Wake Up Interval for a node. wake_up_interval_t type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
                  ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x02))
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKEUP_NODEID,
+///> Configured Wake Up NodeID for a node. zwave_node_id_t type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_NODE_ID,
                  ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x03))
 
-/////////////////////////////////////////////////
-// Wakeup command class version 2
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKEUP_V2_MINIMUM_INTERVAL,
-                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x04))
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKEUP_V2_MAXIMUM_INTERVAL,
-                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x05))
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKEUP_V2_DEFAULT_INTERVAL,
-                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x06))
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKEUP_V2_INTERVAL_STEP,
-                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x07))
+///> Configured Wake Up NodeID for a node. zwave_node_id_t type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES,
+                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x0A))
 
-/////////////////////////////////////////////////
-// Wakeup command class version 3
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKEUP_V3_WAKE_ON_DEMAND,
+///> Minimum Wake Up Interval for a node. wake_up_interval_t type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_MINIMUM_INTERVAL,
+                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x04))
+///> Maximum Wake Up Interval for a node. wake_up_interval_t type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_MAXIMUM_INTERVAL,
+                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x05))
+///> Default Wake Up Interval for a node. wake_up_interval_t type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_DEFAULT_INTERVAL,
+                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x06))
+///> Step size in between allowed Wake Up Intervals for a node. wake_up_interval_t type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL_STEP,
+                 ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x07))
+///> Bitmask of additional capabilties in the Wake Up Commadn Class. wake_up_bitmask_t type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES_BITMASK,
                  ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x08))
 
 /////////////////////////////////////////////////
@@ -435,22 +491,12 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_LAST_STATUS,
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_EXPIRY_TIME,
                  ((COMMAND_CLASS_FIRMWARE_UPDATE_MD << 8) | 0x11))
 
+///> The indicator attributes are defined in the auto-genrated code
+///> This attribute a meta attribute that is used to calculate the indicator timeout
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_INDICATOR_TIMEOUT, 0x87F0)
+
 // ZigBee specific attributes
 // Suggested range (ZigBee Cluster ID (4 bytes) <<16) | Zigbee attribute ID (4 bytes)
-// OnOff Cluster
-DEFINE_ATTRIBUTE(ATTRIBUTE_ZIGBEE_ON_OFF_CLUSTER_ON_OFF,
-                 ((0x0006 << 16) | 0x0001))
-///< This represents the OnOff attribute in the ZigBee OnOff cluster
-
-// Identify Cluster
-DEFINE_ATTRIBUTE(ATTRIBUTE_ZIGBEE_IDENTIFY_CLUSTER_IDENTIFY_TIME,
-                 ((0x0003 << 16) | 0x0001))
-///< This represents the IdentifyTime attribute in the ZigBee Identify cluster
-
-// OccupancySensing Cluster
-DEFINE_ATTRIBUTE(ATTRIBUTE_ZIGBEE_OCCUPANCY_SENSING_CLUSTER_OCCUPANCY,
-                 ((0x0406 << 16) | 0x0001))
-///< This represents the Occupancy attribute in the ZigBee Occupancy Sensing cluster
 
 // Group Cluster
 ///< This represents a Group identifier. uint16_t
@@ -459,5 +505,5 @@ DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID, 0x00040001)
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME, 0x00040002)
 #endif  //ATTRIBUTE_AUTO_GENERATED
 #endif  //ATTRIBUTE_STORE_TYPES_H
+  /** @} */ //end attribute_types
 
-/** @} end attribute_types */

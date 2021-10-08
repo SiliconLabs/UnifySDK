@@ -18,18 +18,18 @@ In the current state, (**9-28-2020**) the following three commands are implement
 ./applications/dev_ui/dev_cli/dev_cli --dev_cli.command help
 Commands:
     help  - Print commands and usage
-    addsmartstartentry usage: [dev_clu.host *.port *.dsk *.include *.protocolunid *.unid] - Adding a smart start entry
-    getsmartstartlist usage: [dev_cli.host *.port] - Get the smart start list
-    removesmartstartentry usage: [dev_cli.host *.port *.dsk] - Removing smart start entry based on dsk key
+    addsmartstartentry usage: [dev_clu.host *.port *.dsk *.include *.protocolunid *.unid] - Adding a SmartStart entry
+    getsmartstartlist usage: [dev_cli.host *.port] - Get the SmartStart list
+    removesmartstartentry usage: [dev_cli.host *.port *.dsk] - Removing SmartStart entry based on dsk key
 ```
 
 ### Examples
 
-For example, deleting an entry from the smart start list may look like the
+For example, deleting an entry from the SmartStart list may look like the
 following:
 
 ``` bash
 ./dev_cli --dev_cli.command removesmartstartentry --dev_cli.dsk XXXXX
 
-Removed smart start entry: XXXXX
+Removed SmartStart entry: XXXXX
 ```

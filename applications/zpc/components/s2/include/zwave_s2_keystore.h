@@ -29,6 +29,7 @@
 #define ZWAVE_S2_KEYSTORE_H
 
 #include "zwave_controller_types.h"
+#include "sl_log.h"
 
 #include <stdint.h>
 
@@ -78,6 +79,12 @@ uint8_t zwave_s2_keystore_get_assigned_keys();
  * Create new random network keys, which marks all keys as granted.
  */
 void zwave_s2_create_new_network_keys();
+
+/**
+ * Logs the Security Keys using sl_log.
+ * @param log_level   The Log leve to use to log the keys.
+ */
+void zwave_s2_log_security_keys(sl_log_level_t log_level);
 
 #ifdef __cplusplus
 }

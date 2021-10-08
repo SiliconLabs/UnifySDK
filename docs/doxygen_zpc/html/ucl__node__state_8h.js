@@ -10,5 +10,6 @@ var ucl__node__state_8h =
       [ "NODES_STATE_TOPIC_SECURITY_S0", "ucl__node__state_8h.html#a7de690a33d121249cc0a699c8a45b3cbaab0aa020d7cbe10d9905ba1d8f28992f", null ],
       [ "NODES_STATE_TOPIC_SECURITY_LAST", "ucl__node__state_8h.html#a7de690a33d121249cc0a699c8a45b3cba256857928a96882a3fe4eec534af0d6e", null ]
     ] ],
+    [ "get_node_network_status", "ucl__node__state_8h.html#a5e4f4d8fb92990fbe9cedf84bccbcb50", null ],
     [ "PROCESS_NAME", "ucl__node__state_8h.html#abc0ea3501ac38420598a7e9e9f6a9466", null ]
 ];
