@@ -6,7 +6,6 @@ var group__zigpc__components =
     [ "ZigPC Data Storage API", "group__zigpc__datastore.html", "group__zigpc__datastore" ],
     [ "ZigPC Datastore C++ API", "group__zigpc__datastore__hpp.html", "group__zigpc__datastore__hpp" ],
     [ "ZigPC Group Management Interface functions", "group__zigpc__group__mgmt.html", "group__zigpc__group__mgmt" ],
-    [ "ZigPC Node State Monitor", "group__zigpc__node__state.html", "group__zigpc__node__state" ],
     [ "ZigPC OTA functions", "group__ota__zigbee.html", "group__ota__zigbee" ],
     [ "ZigPC SmartStart", "group__zigpc__smartstart.html", "group__zigpc__smartstart" ],
     [ "ZigPC STDIN Interface", "group__zigpc__stdin.html", "group__zigpc__stdin" ],

@@ -3,6 +3,7 @@ var group__zigpc__gateway =
     [ "ZigPC Observer API", "group__zigpc__gateway__notify.html", "group__zigpc__gateway__notify" ],
     [ "ZigPC Gateway Component", "group__zigpc__sleepy__queue.html", "group__zigpc__sleepy__queue" ],
     [ "ZigPC Gateway Process Event API", "group__zigpc__gateway__process__send.html", "group__zigpc__gateway__process__send" ],
+    [ "ZigPC Gateway Request Queue", "group__zigpc__gateway__call.html", "group__zigpc__gateway__call" ],
     [ "zigpc_gateway_add_node_install_code", "group__zigpc__gateway.html#gaddae89c536ca2647bfdf8b9c024896a6", null ],
     [ "zigpc_gateway_add_ota_image", "group__zigpc__gateway.html#gaf5d34b9888658ca11ba56651f575fee8", null ],
     [ "zigpc_gateway_clear_counters", "group__zigpc__gateway.html#ga9e8d3a2574985bfa3a9ad1e91ab1f9e0", null ],

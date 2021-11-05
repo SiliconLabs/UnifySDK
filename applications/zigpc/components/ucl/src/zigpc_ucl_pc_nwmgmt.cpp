@@ -22,6 +22,9 @@
 // UIC shared includes
 #include <sl_log.h>
 
+// ZigPC includes
+#include <zigpc_datastore.h>
+
 // Component includes
 #include "zigpc_ucl_int.hpp"
 
@@ -250,10 +253,10 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
   // Get PC EUI64;
   zigpc_ucl::mqtt::topic_data_t topic_data;
   if (status == SL_STATUS_OK) {
-    zigbee_eui64_t pc_eui64;
-    status = zigpc_net_mgmt_get_protocol_controller_eui64(pc_eui64);
+    zigpc_network_data_t nwk_data;
+    status = zigpc_datastore_read_network(&nwk_data);
     if (status == SL_STATUS_OK) {
-      topic_data.eui64 = zigbee_eui64_to_uint(pc_eui64);
+      topic_data.eui64 = zigbee_eui64_to_uint(nwk_data.gateway_eui64);
     }
   }
 

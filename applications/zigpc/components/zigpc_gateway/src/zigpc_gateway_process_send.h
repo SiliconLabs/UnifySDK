@@ -31,33 +31,6 @@
 
 enum zigpc_gateway_process_event {
   ZIGPC_GW_EVENT_MIN_VAL = 0,
-
-  /**
-   * Call one of the supported Z3Gateway calls. See zigpc_gateway_dispatch_type
-   * for more information.
-   */
-  ZIGPC_GW_EVENT_DISPATCH,
-
-  /**
-   * Dispatch a ZCL Frame via the Z3Gateway API.
-   */
-  ZIGPC_GW_EVENT_ZCL_FRAME,
-
-  /**
-   * Dispatch a ZCL Configure Report message via the Z3Gateway API.
-   */
-  ZIGPC_GW_EVENT_INIT_REPORTS,
-
-  /**
-   * Dispatch a binding request via Z3Gateway API
-   */
-  ZIGPC_GW_EVENT_CONFIG_BINDING,
-
-  /**
-   * Dispatch a file (through it's path) to the OTA server plugin
-   */
-  ZIGPC_GW_EVENT_OTA_FILE,
-
   ZIGPC_GW_EVENT_MAX_VAL,
 };
 

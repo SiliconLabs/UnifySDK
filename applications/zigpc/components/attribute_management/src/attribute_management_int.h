@@ -26,6 +26,9 @@ extern "C" {
 static const unsigned int ZIGPC_ATTR_MGMT_DELAY_READ_ATTRIBUTES
   = CLOCK_SECOND * 5;
 
+static const unsigned int ZIGPC_ATTR_MGMT_POLL_PERIOD_MS
+  = CLOCK_SECOND;  //1000ms
+
 /**
  * @brief Limit of Read Attribute Records to send per ZCL Message
  *
@@ -81,6 +84,12 @@ static const uint16_t ZIGPC_ATTRMGMT_REPORT_INTERVAL_MAX_DEFAULT = 60;
 static const uint32_t ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT = 0x0000;
 
 /**
+ * @brief Default poll list size. The maximum number of clusters that
+ * can be stoed in the poll list
+ */
+static const uint32_t ZIGPC_ATTRMGMT_DEFAULT_POLL_SIZE = 256;
+
+/**
  * attr_mgmt_evt
  *
  * @brief the enum representing the events handled by the attribute
@@ -96,6 +105,7 @@ enum attr_mgmt_evt {
    *
    */
   ZIGPC_ATTR_MGMT_EVT_ATTR_UPDATE,
+  ZIGPC_ATTR_MGMT_EVT_CONFIGURE_RESPONSE,
   ZIGPC_ATTR_MGMT_EVT_READ_ATTRIBUTES_COMMAND,
 };
 
@@ -312,6 +322,24 @@ sl_status_t
                                          bool is_read_response,
                                          const zcl_frame_t *frame);
 
+/**
+ * @brief zigpc_attrmgmt_receive_configure_response_frame
+ * Process a configure attribute response frame
+ * Accepts a ZCL frame for the response to a configure
+ * reports command. On a failed configure, adds the given EUI64,
+ * endpoint and cluster combination to the poll lis
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id       Device endpoint identifier
+ * @param cluster_id        Cluster identifer of the source from
+ * @param frame             ZCL Frame containing configure report response
+ */
+sl_status_t zigpc_attrmgmt_receive_configure_response_frame(
+  const zigbee_eui64_t eui64,
+  zigbee_endpoint_id_t endpoint_id,
+  zcl_cluster_id_t cluster_id,
+  const zcl_frame_t *frame);
+
 #ifdef COMPILE_UNUSED_CODE
 
 /**
@@ -350,6 +378,74 @@ sl_status_t
                                   const zcl_cluster_id_t cluster_id,
                                   const zcl_attribute_id_t attr_id,
                                   const uint8_t *attr_value);
+
+/**
+ * @brief zigpc_attrmgmt_get_poll_list_size
+ *
+ * Get the size of the current list we are polling
+ * with ReadAttributes
+ *
+ * @return the number of clusters on the list we are polling
+ **/
+size_t zigpc_attrmgmt_get_poll_list_current_size();
+
+/**
+ * @brief zigpc_attrmgmt_get_poll_list_Max_size
+ *
+ * Get the maximum size of the polling list
+ *
+ * @return the maximum number of clusters the poll list can contain
+ **/
+size_t zigpc_attrmgmt_get_poll_list_max_size();
+
+/**
+ * @brief zigpc_attrmgmt_send_poll_attributes
+ *
+ * Send a ReadAttribute command to the next entry in
+ * the polling list
+ *
+ * @return SL_STATUS_OK if the command could be sent properly
+ **/
+sl_status_t zigpc_attrmgmt_send_poll_attributes();
+
+/**
+ * @brief zigpc_attrmgmt_add_poll_entry
+ *
+ * Add a new entry to be polled by ReadAttribute commands
+ * Will be put at the end of the list
+ *
+ * @param eui64 - the eui64 of the node
+ * @param endpoint_id - the endpoint specified
+ * @param cluster_id - the cluster specified
+ *
+ * @return SL_STATUS_OK if the new entry could be added properly
+ **/
+sl_status_t zigpc_attrmgmt_add_poll_entry(const zigbee_eui64_t eui64,
+                                          zigbee_endpoint_id_t endpoint_id,
+                                          zcl_cluster_id_t cluster_id);
+
+/**
+ * @briefzigpc_attrmgmt_remove_poll_entry 
+ *
+ * Remove a eui64, endpoint and cluster combination from the poll list
+ *
+ * @param eui64 - the eui64 of the node
+ * @param endpoint_id - the endpoint specified
+ * @param cluster_id - the cluster specified
+ *
+ * @return SL_STATUS_OK if the new entry could be removed properly
+ **/
+sl_status_t zigpc_attrmgmt_remove_poll_entry(const zigbee_eui64_t eui64,
+                                             zigbee_endpoint_id_t endpoint_id,
+                                             zcl_cluster_id_t cluster_id);
+
+/**
+ * @brief zigpc_attrmgmt_empty_poll_list
+ *
+ * Empty the polling list
+ **/
+void zigpc_attrmgmt_empty_poll_list();
+
 #ifdef __cplusplus
 }
 #endif

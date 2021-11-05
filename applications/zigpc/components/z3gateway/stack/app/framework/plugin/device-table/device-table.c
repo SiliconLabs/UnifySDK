@@ -41,9 +41,6 @@
 #include "app/framework/util/util.h"
 #include <stdlib.h>
 
-void emAfDeviceTableSave(void);
-void emAfDeviceTableLoad(void);
-
 // Framework message send global data
 extern uint8_t appZclBuffer[];
 extern uint16_t appZclBufferLen;
@@ -203,7 +200,7 @@ void emberAfDeviceTableClear(void)
   emAfDeviceTableInit();
 #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
   emAfDeviceTableSave();
-#endif /* EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE */
+#endif // #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
   emberAfPluginDeviceTableClearedCallback();
 }
 
@@ -426,7 +423,7 @@ void emberAfPluginDeviceTableInitCallback(void)
   // Load on Init
 #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
   emAfDeviceTableLoad();
-#endif /* EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE */
+#endif // #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
 
   emberAfPluginDeviceTableInitialized();
 }
@@ -448,6 +445,7 @@ void emberAfPluginDeviceTableStackStatusCallback(EmberStatus status)
 
 // --------------------------------
 // Save/Load the devices
+#ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
 void emAfDeviceTableSave(void)
 {
 #if defined(EZSP_HOST) && !defined(EMBER_TEST)
@@ -484,7 +482,9 @@ void emAfDeviceTableSave(void)
 
 #endif // defined(EZSP_HOST) && !defined(EMBER_TEST)
 }
+#endif // #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
 
+#ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
 void emAfDeviceTableLoad(void)
 {
 #if defined(EZSP_HOST) && !defined(EMBER_TEST)
@@ -535,6 +535,7 @@ void emAfDeviceTableLoad(void)
 
 #endif // #if defined(EZSP_HOST) && !defined(EMBER_TEST)
 }
+#endif // #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
 
 // --------------------------------
 // Message send section

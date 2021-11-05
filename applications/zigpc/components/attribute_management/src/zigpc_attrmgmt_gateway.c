@@ -48,6 +48,27 @@ void zigpc_attrmgmt_callback_on_attribute_frame(
   }
 }
 
+void zigpc_attrmgmt_callback_on_configure_response_frame(
+  const zigpc_gateway_on_attribute_reported_t *received_data)
+{
+  if (received_data != NULL) {
+    zigpc_attrmgmt_on_frame_receive_t ev;
+
+    memcpy(ev.eui64, received_data->eui64, ZIGBEE_EUI64_SIZE);
+    ev.endpoint_id = received_data->endpoint_id;
+    ev.cluster_id  = received_data->cluster_id;
+    ev.frame.size  = received_data->frame.size;
+    memcpy(ev.frame.buffer,
+           received_data->frame.buffer,
+           received_data->frame.size);
+
+    zigpc_attrmgmt_process_send_event(
+      ZIGPC_ATTR_MGMT_EVT_CONFIGURE_RESPONSE,
+      (void *)&ev,
+      sizeof(zigpc_attrmgmt_on_frame_receive_t));
+  }
+}
+
 void zigpc_attrmgmt_callback_on_attr_report(void *data)
 {
   if (data != NULL) {
@@ -65,6 +86,14 @@ void zigpc_attrmgmt_callback_on_attr_read_response(void *data)
   }
 }
 
+void zigpc_attrmgmt_callback_on_configure_response(void *data)
+{
+  if (data != NULL) {
+    zigpc_attrmgmt_callback_on_configure_response_frame(
+      (const zigpc_gateway_on_attribute_reported_t *)data);
+  }
+}
+
 sl_status_t attr_mgmt_gateway_init_observer(void)
 {
   sl_status_t result;
@@ -77,6 +106,12 @@ sl_status_t attr_mgmt_gateway_init_observer(void)
     result = zigpc_gateway_register_observer(
       ZIGPC_GATEWAY_NOTIFY_READ_ATTRIBUTE_RESPONSE,
       zigpc_attrmgmt_callback_on_attr_read_response);
+
+    if (result == SL_STATUS_OK) {
+      result = zigpc_gateway_register_observer(
+        ZIGPC_GATEWAY_NOTIFY_CONFIGURE_REPORTING_RESPONSE,
+        zigpc_attrmgmt_callback_on_configure_response);
+    }
   }
 
   return result;

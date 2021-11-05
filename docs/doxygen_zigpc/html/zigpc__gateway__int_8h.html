@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -86,7 +86,6 @@ $(document).ready(function(){initNavTree('zigpc__gateway__int_8h.html',''); init
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -102,27 +101,8 @@ $(document).ready(function(){initNavTree('zigpc__gateway__int_8h.html',''); init
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__zcl__frame__t.html">zigpc_gateway_dispatch_zcl_frame_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__init__report__t.html">zigpc_gateway_dispatch_init_report_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__bind__request__t.html">zigpc_gateway_dispatch_bind_request_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__add__node.html">zigpc_gateway_dispatch_add_node</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__permit__joins__t.html">zigpc_gateway_dispatch_permit_joins_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data for permitting joins to the Zigbee network.  <a href="structzigpc__gateway__dispatch__permit__joins__t.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__remove__node__t.html">zigpc_gateway_dispatch_remove_node_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data for processing node removal.  <a href="structzigpc__gateway__dispatch__remove__node__t.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__interview__node__t.html">zigpc_gateway_dispatch_interview_node_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data for processing node interview.  <a href="structzigpc__gateway__dispatch__interview__node__t.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__add__ota__image__t.html">zigpc_gateway_dispatch_add_ota_image_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__dispatch__event.html">zigpc_gateway_dispatch_event</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data container for dispatch events.  <a href="structzigpc__gateway__dispatch__event.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct____attribute____.html">__attribute__</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Network information.  <a href="struct____attribute____.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -133,52 +113,40 @@ Macros</h2></td></tr>
 <tr class="separator:a5ef9590aa8cbcca8c116393e499d3671"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45c6dbdec25a323a0164051dcfaed586"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a45c6dbdec25a323a0164051dcfaed586">ZIGPC_GATEWAY_STORE_DEVICE_TABLE_CLUSTER_ARR_KEY</a>&#160;&#160;&#160;  &quot;zigpc_gsdk_dt_clusters&quot;</td></tr>
 <tr class="separator:a45c6dbdec25a323a0164051dcfaed586"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7309245ccd94986a946d9f9530e617f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#ae7309245ccd94986a946d9f9530e617f">ZIGPC_GATEWAY_NOTIFICATIONS_MAX</a>&#160;&#160;&#160;(10)</td></tr>
-<tr class="separator:ae7309245ccd94986a946d9f9530e617f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a490438d3ae798a3164e730aa8e642237"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237">zigpc_gateway_dispatch_type</a> { <br />
-&#160;&#160;<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a756a8a17279f1a08876bb9c67bc72398">ZIGPC_GW_DISPATCH_MIN_VAL</a> = 0, 
-<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ae73e8efcea4751a970bb0a3b4f327a66">ZIGPC_GW_DISPATCH_NETWORK_INIT</a>, 
-<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ac4ddeb3f838876a57c3ab20857668826">ZIGPC_GW_DISPATCH_PERMIT_JOINS</a>, 
-<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237ac4e1169bd7d60ca6ab47f849580e3814">ZIGPC_GW_DISPATCH_ADD_NODE_INSTALL_CODE</a>, 
-<br />
-&#160;&#160;<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237afa776a5c5990813fd415d18b27482ec1">ZIGPC_GW_DISPATCH_INTERVIEW_NODE</a>, 
-<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a2fc0554bf73986a2d27b254654eaecf0">ZIGPC_GW_DISPATCH_REMOVE_NODE</a>, 
-<a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237a8a57a67bc5a0025bf853e76705c3822b">ZIGPC_GW_DISPATCH_MAX_VAL</a>
-<br />
- }</td></tr>
-<tr class="separator:a490438d3ae798a3164e730aa8e642237"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae14102df2c2f329e5dd8e5821f605a1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#aae14102df2c2f329e5dd8e5821f605a1">ZIGPC_GATEWAY_NODEID_LIST_KEY</a>&#160;&#160;&#160;&quot;zb_nodeid_list&quot;</td></tr>
+<tr class="separator:aae14102df2c2f329e5dd8e5821f605a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f79885a40129c92a337ef0afa34c931"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a0f79885a40129c92a337ef0afa34c931">ZIGPC_GATEWAY_NODEID_COUNT_KEY</a>&#160;&#160;&#160;&quot;zb_nodeid_count&quot;</td></tr>
+<tr class="separator:a0f79885a40129c92a337ef0afa34c931"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5371574a72a1699d59610137e0359d0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a5371574a72a1699d59610137e0359d0a">zigpc_gateway_reset_observers</a> (void)</td></tr>
 <tr class="memdesc:a5371574a72a1699d59610137e0359d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear registered observers.  <a href="zigpc__gateway__int_8h.html#a5371574a72a1699d59610137e0359d0a">More...</a><br /></td></tr>
 <tr class="separator:a5371574a72a1699d59610137e0359d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8339f5b9eabb12a065f24a10de9cdda8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a8339f5b9eabb12a065f24a10de9cdda8">zigpc_gateway_dispatch</a> (struct <a class="el" href="structzigpc__gateway__dispatch__event.html">zigpc_gateway_dispatch_event</a> *event)</td></tr>
-<tr class="memdesc:a8339f5b9eabb12a065f24a10de9cdda8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward events received to z3gateway.  <a href="zigpc__gateway__int_8h.html#a8339f5b9eabb12a065f24a10de9cdda8">More...</a><br /></td></tr>
-<tr class="separator:a8339f5b9eabb12a065f24a10de9cdda8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc29f552a359e6d43bd7ae929c5f88e7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#abc29f552a359e6d43bd7ae929c5f88e7">zigpc_gateway_dispatch_name</a> (const enum <a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237">zigpc_gateway_dispatch_type</a> type)</td></tr>
-<tr class="memdesc:abc29f552a359e6d43bd7ae929c5f88e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return string representation of dispatch type.  <a href="zigpc__gateway__int_8h.html#abc29f552a359e6d43bd7ae929c5f88e7">More...</a><br /></td></tr>
-<tr class="separator:abc29f552a359e6d43bd7ae929c5f88e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60ae07061f917fc416e4f29c1a79ab2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a60ae07061f917fc416e4f29c1a79ab2e">zigpc_gateway_dispatch_zcl_frame</a> (const <a class="el" href="structzigpc__gateway__dispatch__zcl__frame__t.html">zigpc_gateway_dispatch_zcl_frame_t</a> *zcl_data)</td></tr>
-<tr class="memdesc:a60ae07061f917fc416e4f29c1a79ab2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_gateway_dispatch_zcl_frame Dispatches a ZCL command to be processed by the z3gateway, and sent out on to the zigbee network  <a href="zigpc__gateway__int_8h.html#a60ae07061f917fc416e4f29c1a79ab2e">More...</a><br /></td></tr>
-<tr class="separator:a60ae07061f917fc416e4f29c1a79ab2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcb5e8510e537d6b114518f3cdd44fb1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#afcb5e8510e537d6b114518f3cdd44fb1">zigpc_gateway_dispatch_init_reports</a> (<a class="el" href="structzigpc__gateway__dispatch__init__report__t.html">zigpc_gateway_dispatch_init_report_t</a> *report_data)</td></tr>
-<tr class="memdesc:afcb5e8510e537d6b114518f3cdd44fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_gateway_dispatch_init_reports Dispatches a ZCL configure reports command to a given endpoint  <a href="zigpc__gateway__int_8h.html#afcb5e8510e537d6b114518f3cdd44fb1">More...</a><br /></td></tr>
-<tr class="separator:afcb5e8510e537d6b114518f3cdd44fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abdd83db0cb9c7217f6eea2e10dca5576"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#abdd83db0cb9c7217f6eea2e10dca5576">zigpc_gateway_dispatch_config_binding</a> (<a class="el" href="structzigpc__gateway__dispatch__bind__request__t.html">zigpc_gateway_dispatch_bind_request_t</a> *binding_data)</td></tr>
-<tr class="memdesc:abdd83db0cb9c7217f6eea2e10dca5576"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_gateway_dispatch_config_binding Dispatches a Zigbee message to request to configure a binding on an endpoint  <a href="zigpc__gateway__int_8h.html#abdd83db0cb9c7217f6eea2e10dca5576">More...</a><br /></td></tr>
-<tr class="separator:abdd83db0cb9c7217f6eea2e10dca5576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4feca132525484b77e8f459fee96919"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#ad4feca132525484b77e8f459fee96919">zigpc_gateway_on_ncp_pre_reset</a> (EzspStatus resetStatus)</td></tr>
+<tr class="memdesc:ad4feca132525484b77e8f459fee96919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z3Gatway callback handler to be called before NCP resets.  <a href="zigpc__gateway__int_8h.html#ad4feca132525484b77e8f459fee96919">More...</a><br /></td></tr>
+<tr class="separator:ad4feca132525484b77e8f459fee96919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11da79547bde8599599d73ffffeed1ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a11da79547bde8599599d73ffffeed1ed">zigpc_gateway_on_ncp_post_reset</a> (bool ncpMemConfigureStage)</td></tr>
+<tr class="memdesc:a11da79547bde8599599d73ffffeed1ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z3GAteway callback handler called after NCP resets and is going through initialization.  <a href="zigpc__gateway__int_8h.html#a11da79547bde8599599d73ffffeed1ed">More...</a><br /></td></tr>
+<tr class="separator:a11da79547bde8599599d73ffffeed1ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd8e32e612096ebad19fd8df901955d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#afd8e32e612096ebad19fd8df901955d6">zigpc_gateway_load_device_table_info</a> (void)</td></tr>
+<tr class="memdesc:afd8e32e612096ebad19fd8df901955d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve persisted information related to Z3Gateway and ZigPC Gateway from the datastore. This includes:  <a href="zigpc__gateway__int_8h.html#afd8e32e612096ebad19fd8df901955d6">More...</a><br /></td></tr>
+<tr class="separator:afd8e32e612096ebad19fd8df901955d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1ddc61ca85217141474b4177659236a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#af1ddc61ca85217141474b4177659236a">zigpc_gateway_persist_device_table_info</a> (void)</td></tr>
+<tr class="memdesc:af1ddc61ca85217141474b4177659236a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Persist information related to Z3Gateway and ZigPC Gateway to the datastore. This includes:  <a href="zigpc__gateway__int_8h.html#af1ddc61ca85217141474b4177659236a">More...</a><br /></td></tr>
+<tr class="separator:af1ddc61ca85217141474b4177659236a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6da9b758bef20fac6d90e3ab632b91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#aff6da9b758bef20fac6d90e3ab632b91">zigpc_gateway_load_address_table_info</a> (void)</td></tr>
+<tr class="memdesc:aff6da9b758bef20fac6d90e3ab632b91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load EUI64 to NodeId device ID mappings. This function loads all perisisted EUI64 to NodeId mappings (retrieved from ZigPC datastore) to-be tracked in EmberAf address-table plugin.  <a href="zigpc__gateway__int_8h.html#aff6da9b758bef20fac6d90e3ab632b91">More...</a><br /></td></tr>
+<tr class="separator:aff6da9b758bef20fac6d90e3ab632b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c7228075aec89265a2def0bd757913c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a4c7228075aec89265a2def0bd757913c">zigpc_gateway_persist_address_table_info</a> (void)</td></tr>
+<tr class="memdesc:a4c7228075aec89265a2def0bd757913c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Persist EUI64 to NodeId device ID mappings. This function stores all EUI64 to NodeId mappings from the EmberAf address-table plugin into the ZigPC datstore.  <a href="zigpc__gateway__int_8h.html#a4c7228075aec89265a2def0bd757913c">More...</a><br /></td></tr>
+<tr class="separator:a4c7228075aec89265a2def0bd757913c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bb155a4404cf44da30555b1ac4c56e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a6bb155a4404cf44da30555b1ac4c56e8">zigpc_gateway_load_from_datastore</a> (void)</td></tr>
-<tr class="memdesc:a6bb155a4404cf44da30555b1ac4c56e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve persisted information related to Z3Gateway and ZigPC Gateway from the datastore. This includes:  <a href="zigpc__gateway__int_8h.html#a6bb155a4404cf44da30555b1ac4c56e8">More...</a><br /></td></tr>
+<tr class="memdesc:a6bb155a4404cf44da30555b1ac4c56e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper function to load information to both EmberAf device-table and address-table plugins. Refer to zigpc_gateway_load_device_table_info and zigpc_gateway_load_address_table_info for more information.  <a href="zigpc__gateway__int_8h.html#a6bb155a4404cf44da30555b1ac4c56e8">More...</a><br /></td></tr>
 <tr class="separator:a6bb155a4404cf44da30555b1ac4c56e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f442c37792a5425a7550c27b58a2695"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a5f442c37792a5425a7550c27b58a2695">zigpc_gateway_save_to_datastore</a> (void)</td></tr>
-<tr class="memdesc:a5f442c37792a5425a7550c27b58a2695"><td class="mdescLeft">&#160;</td><td class="mdescRight">Persist information related to Z3Gateway and ZigPC Gateway to the datastore. This includes:  <a href="zigpc__gateway__int_8h.html#a5f442c37792a5425a7550c27b58a2695">More...</a><br /></td></tr>
-<tr class="separator:a5f442c37792a5425a7550c27b58a2695"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add13eaf2d259cd605f5079214e3f577a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#add13eaf2d259cd605f5079214e3f577a">zigpc_gateway_dispatch_ota_image</a> (const <a class="el" href="structzigpc__gateway__dispatch__add__ota__image__t.html">zigpc_gateway_dispatch_add_ota_image_t</a> *ota_image_data)</td></tr>
-<tr class="separator:add13eaf2d259cd605f5079214e3f577a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d0fc19d35645beade8646d9369383be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a0d0fc19d35645beade8646d9369383be">zigpc_gateway_persist_to_datastore</a> (void)</td></tr>
+<tr class="memdesc:a0d0fc19d35645beade8646d9369383be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper function to store information from both EmberAf device-table and address-table plugins into the datastore. Refer to zigpc_gateway_persist_device_table_info and zigpc_gateway_persist_address_table_info for more information.  <a href="zigpc__gateway__int_8h.html#a0d0fc19d35645beade8646d9369383be">More...</a><br /></td></tr>
+<tr class="separator:a0d0fc19d35645beade8646d9369383be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74065d5143c6a14c063cdb374ff30ed8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__int_8h.html#a74065d5143c6a14c063cdb374ff30ed8">zigpc_gateway_unload_sleepy_messages</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
 <tr class="memdesc:a74065d5143c6a14c063cdb374ff30ed8"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_gateway_unload_sleepy_messages A helper function to unload all ZCL frames stored for a given sleepy device, determined by its eui64  <a href="zigpc__gateway__int_8h.html#a74065d5143c6a14c063cdb374ff30ed8">More...</a><br /></td></tr>
 <tr class="separator:a74065d5143c6a14c063cdb374ff30ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,14 +162,28 @@ Variables</h2></td></tr>
 <tr class="separator:a2cf2b7e02d86e03f4d7e9474bdd3679a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ae7309245ccd94986a946d9f9530e617f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7309245ccd94986a946d9f9530e617f">&#9670;&nbsp;</a></span>ZIGPC_GATEWAY_NOTIFICATIONS_MAX</h2>
+<a id="a0f79885a40129c92a337ef0afa34c931"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f79885a40129c92a337ef0afa34c931">&#9670;&nbsp;</a></span>ZIGPC_GATEWAY_NODEID_COUNT_KEY</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ZIGPC_GATEWAY_NOTIFICATIONS_MAX&#160;&#160;&#160;(10)</td>
+          <td class="memname">#define ZIGPC_GATEWAY_NODEID_COUNT_KEY&#160;&#160;&#160;&quot;zb_nodeid_count&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae14102df2c2f329e5dd8e5821f605a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae14102df2c2f329e5dd8e5821f605a1">&#9670;&nbsp;</a></span>ZIGPC_GATEWAY_NODEID_LIST_KEY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZIGPC_GATEWAY_NODEID_LIST_KEY&#160;&#160;&#160;&quot;zb_nodeid_list&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -250,180 +232,49 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a490438d3ae798a3164e730aa8e642237"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a490438d3ae798a3164e730aa8e642237">&#9670;&nbsp;</a></span>zigpc_gateway_dispatch_type</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237">zigpc_gateway_dispatch_type</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237a756a8a17279f1a08876bb9c67bc72398"></a>ZIGPC_GW_DISPATCH_MIN_VAL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237ae73e8efcea4751a970bb0a3b4f327a66"></a>ZIGPC_GW_DISPATCH_NETWORK_INIT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237ac4ddeb3f838876a57c3ab20857668826"></a>ZIGPC_GW_DISPATCH_PERMIT_JOINS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237ac4e1169bd7d60ca6ab47f849580e3814"></a>ZIGPC_GW_DISPATCH_ADD_NODE_INSTALL_CODE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237afa776a5c5990813fd415d18b27482ec1"></a>ZIGPC_GW_DISPATCH_INTERVIEW_NODE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237a2fc0554bf73986a2d27b254654eaecf0"></a>ZIGPC_GW_DISPATCH_REMOVE_NODE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a490438d3ae798a3164e730aa8e642237a8a57a67bc5a0025bf853e76705c3822b"></a>ZIGPC_GW_DISPATCH_MAX_VAL&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a8339f5b9eabb12a065f24a10de9cdda8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8339f5b9eabb12a065f24a10de9cdda8">&#9670;&nbsp;</a></span>zigpc_gateway_dispatch()</h2>
+<a id="aff6da9b758bef20fac6d90e3ab632b91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff6da9b758bef20fac6d90e3ab632b91">&#9670;&nbsp;</a></span>zigpc_gateway_load_address_table_info()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_dispatch </td>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_load_address_table_info </td>
           <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structzigpc__gateway__dispatch__event.html">zigpc_gateway_dispatch_event</a> *&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Forward events received to z3gateway. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">event</td><td>Dispatch event structure </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Load EUI64 to NodeId device ID mappings. This function loads all perisisted EUI64 to NodeId mappings (retrieved from ZigPC datastore) to-be tracked in EmberAf address-table plugin. </p>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on successfully loading each mapping, error in reading/loading otherwise. </dd></dl>
 
 </div>
 </div>
-<a id="abdd83db0cb9c7217f6eea2e10dca5576"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abdd83db0cb9c7217f6eea2e10dca5576">&#9670;&nbsp;</a></span>zigpc_gateway_dispatch_config_binding()</h2>
+<a id="afd8e32e612096ebad19fd8df901955d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd8e32e612096ebad19fd8df901955d6">&#9670;&nbsp;</a></span>zigpc_gateway_load_device_table_info()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_dispatch_config_binding </td>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_load_device_table_info </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structzigpc__gateway__dispatch__bind__request__t.html">zigpc_gateway_dispatch_bind_request_t</a> *&#160;</td>
-          <td class="paramname"><em>binding_data</em></td><td>)</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>zigpc_gateway_dispatch_config_binding Dispatches a Zigbee message to request to configure a binding on an endpoint </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">binding_data</td><td>-a structure containing all the information required to send a zigbee bind request</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the status if the command was successfully parsed and sent </dd></dl>
-
-</div>
-</div>
-<a id="afcb5e8510e537d6b114518f3cdd44fb1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcb5e8510e537d6b114518f3cdd44fb1">&#9670;&nbsp;</a></span>zigpc_gateway_dispatch_init_reports()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_dispatch_init_reports </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structzigpc__gateway__dispatch__init__report__t.html">zigpc_gateway_dispatch_init_report_t</a> *&#160;</td>
-          <td class="paramname"><em>report_data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>zigpc_gateway_dispatch_init_reports Dispatches a ZCL configure reports command to a given endpoint </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">report_data</td><td>-a structure containing all the information required to send a ZCL configure reports command</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the status if the command was successfully parsed and sent </dd></dl>
-
-</div>
-</div>
-<a id="abc29f552a359e6d43bd7ae929c5f88e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc29f552a359e6d43bd7ae929c5f88e7">&#9670;&nbsp;</a></span>zigpc_gateway_dispatch_name()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char* zigpc_gateway_dispatch_name </td>
-          <td>(</td>
-          <td class="paramtype">const enum <a class="el" href="zigpc__gateway__int_8h.html#a490438d3ae798a3164e730aa8e642237">zigpc_gateway_dispatch_type</a>&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return string representation of dispatch type. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type</td><td>Dispatch type </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>const char* String representation of dispatch type. </dd></dl>
-
-</div>
-</div>
-<a id="add13eaf2d259cd605f5079214e3f577a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add13eaf2d259cd605f5079214e3f577a">&#9670;&nbsp;</a></span>zigpc_gateway_dispatch_ota_image()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_dispatch_ota_image </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structzigpc__gateway__dispatch__add__ota__image__t.html">zigpc_gateway_dispatch_add_ota_image_t</a> *&#160;</td>
-          <td class="paramname"><em>ota_image_data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a60ae07061f917fc416e4f29c1a79ab2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60ae07061f917fc416e4f29c1a79ab2e">&#9670;&nbsp;</a></span>zigpc_gateway_dispatch_zcl_frame()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_dispatch_zcl_frame </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structzigpc__gateway__dispatch__zcl__frame__t.html">zigpc_gateway_dispatch_zcl_frame_t</a> *&#160;</td>
-          <td class="paramname"><em>zcl_data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>zigpc_gateway_dispatch_zcl_frame Dispatches a ZCL command to be processed by the z3gateway, and sent out on to the zigbee network </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">zcl_data</td><td>-a structure containing all the information required to send a ZCL command</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the status if the command was successfully parsed and sent </dd></dl>
+<p>Retrieve persisted information related to Z3Gateway and ZigPC Gateway from the datastore. This includes: </p>
+<ul>
+<li>GSDK device-table plugin state: first the number of entries stored in the datastore is retrieved. Then, each datastore entry (and the associated cluster list) is loaded and imported using the z3gateway device table import entry API.</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK if all information was loaded from datastore successfully, error status if not. </dd></dl>
 
 </div>
 </div>
@@ -443,11 +294,126 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Retrieve persisted information related to Z3Gateway and ZigPC Gateway from the datastore. This includes: </p>
+<p>Wrapper function to load information to both EmberAf device-table and address-table plugins. Refer to zigpc_gateway_load_device_table_info and zigpc_gateway_load_address_table_info for more information. </p>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on success, error otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a11da79547bde8599599d73ffffeed1ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11da79547bde8599599d73ffffeed1ed">&#9670;&nbsp;</a></span>zigpc_gateway_on_ncp_post_reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void zigpc_gateway_on_ncp_post_reset </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>ncpMemConfigureStage</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Z3GAteway callback handler called after NCP resets and is going through initialization. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ncpMemConfigureStage</td><td>Flag to indicate NCP configuration stages. TRUE if only memory-configure EZSP messages are accepted at this stage; FALSE if only non-memory-configure EZSP messaged are accepted by the NCP. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad4feca132525484b77e8f459fee96919"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4feca132525484b77e8f459fee96919">&#9670;&nbsp;</a></span>zigpc_gateway_on_ncp_pre_reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void zigpc_gateway_on_ncp_pre_reset </td>
+          <td>(</td>
+          <td class="paramtype">EzspStatus&#160;</td>
+          <td class="paramname"><em>resetStatus</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Z3Gatway callback handler to be called before NCP resets. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resetStatus</td><td>The EZSP reset reason. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4c7228075aec89265a2def0bd757913c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c7228075aec89265a2def0bd757913c">&#9670;&nbsp;</a></span>zigpc_gateway_persist_address_table_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_persist_address_table_info </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Persist EUI64 to NodeId device ID mappings. This function stores all EUI64 to NodeId mappings from the EmberAf address-table plugin into the ZigPC datstore. </p>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on successfully persisting each mapping, error in getting/persisting otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="af1ddc61ca85217141474b4177659236a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1ddc61ca85217141474b4177659236a">&#9670;&nbsp;</a></span>zigpc_gateway_persist_device_table_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_persist_device_table_info </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Persist information related to Z3Gateway and ZigPC Gateway to the datastore. This includes: </p>
 <ul>
-<li>GSDK device-table plugin state: first the number of entries stored in the datastore is retrieved. Then, each datastore entry (and the associated cluster list) is loaded and imported using the z3gateway device table import entry API.</li>
+<li>GSDK device-table plugin state: first the number of entries used by the device table is retrieved. Then, each entry (and the associated cluster list) is exported using the z3gateway API and saved in the datastore as three separate info types: device_table size, device_table_entry[i], and device_table_entry[i].clusterList.</li>
 </ul>
-<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK if all information was loaded from datastore successfully, error status if not. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK if all information was store to datastore successfully, error status if not. </dd></dl>
+
+</div>
+</div>
+<a id="a0d0fc19d35645beade8646d9369383be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d0fc19d35645beade8646d9369383be">&#9670;&nbsp;</a></span>zigpc_gateway_persist_to_datastore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_persist_to_datastore </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wrapper function to store information from both EmberAf device-table and address-table plugins into the datastore. Refer to zigpc_gateway_persist_device_table_info and zigpc_gateway_persist_address_table_info for more information. </p>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on success, error otherwise. </dd></dl>
 
 </div>
 </div>
@@ -468,30 +434,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Clear registered observers. </p>
-
-</div>
-</div>
-<a id="a5f442c37792a5425a7550c27b58a2695"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f442c37792a5425a7550c27b58a2695">&#9670;&nbsp;</a></span>zigpc_gateway_save_to_datastore()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_gateway_save_to_datastore </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Persist information related to Z3Gateway and ZigPC Gateway to the datastore. This includes: </p>
-<ul>
-<li>GSDK device-table plugin state: first the number of entries used by the device table is retrieved. Then, each entry (and the associated cluster list) is exported using the z3gateway API and saved in the datastore as three separate info types: device_table size, device_table_entry[i], and device_table_entry[i].clusterList.</li>
-</ul>
-<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK if all information was store to datastore successfully, error status if not. </dd></dl>
 
 </div>
 </div>
@@ -598,7 +540,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_d9c8a1816f4ea9a94746c6de1ae8e276.html">zigpc_gateway</a></li><li class="navelem"><a class="el" href="dir_1233302668cfc38a9302dcaeddaa7aed.html">src</a></li><li class="navelem"><a class="el" href="zigpc__gateway__int_8h.html">zigpc_gateway_int.h</a></li>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

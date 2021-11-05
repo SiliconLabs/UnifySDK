@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -96,16 +96,8 @@ $(document).ready(function(){initNavTree('group__zigpc__gateway__process__send.h
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ga521fbf9390e25a8d41cfc1d0a9a96844"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway__process__send.html#ga521fbf9390e25a8d41cfc1d0a9a96844">zigpc_gateway_process_event</a> { <br />
-&#160;&#160;<a class="el" href="group__zigpc__gateway__process__send.html#gga521fbf9390e25a8d41cfc1d0a9a96844afddb3dc5d2f6686912462c3a64500af7">ZIGPC_GW_EVENT_MIN_VAL</a> = 0, 
-<a class="el" href="group__zigpc__gateway__process__send.html#gga521fbf9390e25a8d41cfc1d0a9a96844a742e6e04726f8468731ddf287a802baa">ZIGPC_GW_EVENT_DISPATCH</a>, 
-<a class="el" href="group__zigpc__gateway__process__send.html#gga521fbf9390e25a8d41cfc1d0a9a96844acd263d245bd26181dd18f7a156e77b9d">ZIGPC_GW_EVENT_ZCL_FRAME</a>, 
-<a class="el" href="group__zigpc__gateway__process__send.html#gga521fbf9390e25a8d41cfc1d0a9a96844ad63f57af8c68ca050e04ca7c1a792daf">ZIGPC_GW_EVENT_INIT_REPORTS</a>, 
-<br />
-&#160;&#160;<a class="el" href="group__zigpc__gateway__process__send.html#gga521fbf9390e25a8d41cfc1d0a9a96844a7624a62851b753fe8d4be06bfc71dff6">ZIGPC_GW_EVENT_CONFIG_BINDING</a>, 
-<a class="el" href="group__zigpc__gateway__process__send.html#gga521fbf9390e25a8d41cfc1d0a9a96844a5f6cb212ea27eb404cac71d7a1cd348b">ZIGPC_GW_EVENT_OTA_FILE</a>, 
+<tr class="memitem:ga521fbf9390e25a8d41cfc1d0a9a96844"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__gateway__process__send.html#ga521fbf9390e25a8d41cfc1d0a9a96844">zigpc_gateway_process_event</a> { <a class="el" href="group__zigpc__gateway__process__send.html#gga521fbf9390e25a8d41cfc1d0a9a96844afddb3dc5d2f6686912462c3a64500af7">ZIGPC_GW_EVENT_MIN_VAL</a> = 0, 
 <a class="el" href="group__zigpc__gateway__process__send.html#gga521fbf9390e25a8d41cfc1d0a9a96844ad16795ebed8e6aa2270e2c902de7854a">ZIGPC_GW_EVENT_MAX_VAL</a>
-<br />
  }</td></tr>
 <tr class="separator:ga521fbf9390e25a8d41cfc1d0a9a96844"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -132,16 +124,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga521fbf9390e25a8d41cfc1d0a9a96844afddb3dc5d2f6686912462c3a64500af7"></a>ZIGPC_GW_EVENT_MIN_VAL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga521fbf9390e25a8d41cfc1d0a9a96844a742e6e04726f8468731ddf287a802baa"></a>ZIGPC_GW_EVENT_DISPATCH&#160;</td><td class="fielddoc"><p>Call one of the supported Z3Gateway calls. See zigpc_gateway_dispatch_type for more information. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga521fbf9390e25a8d41cfc1d0a9a96844acd263d245bd26181dd18f7a156e77b9d"></a>ZIGPC_GW_EVENT_ZCL_FRAME&#160;</td><td class="fielddoc"><p>Dispatch a ZCL Frame via the Z3Gateway API. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga521fbf9390e25a8d41cfc1d0a9a96844ad63f57af8c68ca050e04ca7c1a792daf"></a>ZIGPC_GW_EVENT_INIT_REPORTS&#160;</td><td class="fielddoc"><p>Dispatch a ZCL Configure Report message via the Z3Gateway API. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga521fbf9390e25a8d41cfc1d0a9a96844a7624a62851b753fe8d4be06bfc71dff6"></a>ZIGPC_GW_EVENT_CONFIG_BINDING&#160;</td><td class="fielddoc"><p>Dispatch a binding request via Z3Gateway API </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga521fbf9390e25a8d41cfc1d0a9a96844a5f6cb212ea27eb404cac71d7a1cd348b"></a>ZIGPC_GW_EVENT_OTA_FILE&#160;</td><td class="fielddoc"><p>Dispatch a file (through it's path) to the OTA server plugin </p>
-</td></tr>
 <tr><td class="fieldname"><a id="gga521fbf9390e25a8d41cfc1d0a9a96844ad16795ebed8e6aa2270e2c902de7854a"></a>ZIGPC_GW_EVENT_MAX_VAL&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
@@ -198,7 +180,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

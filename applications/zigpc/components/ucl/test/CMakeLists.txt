@@ -14,5 +14,16 @@ target_add_unittest(
   SOURCES
   zigpc_ucl_pc_nwmgmt_test.cpp
   DEPENDS
+  zigpc_datastore_mock
   zigpc_net_mgmt_mock
+  uic_mqtt_mock)
+
+target_add_unittest(
+  zigpc_ucl
+  NAME
+  zigpc_ucl_node_state_test
+  SOURCES
+  zigpc_ucl_node_state_test.cpp
+  DEPENDS
+  zigpc_datastore_mock
   uic_mqtt_mock)

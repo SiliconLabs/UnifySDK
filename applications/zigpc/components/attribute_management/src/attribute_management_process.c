@@ -16,6 +16,7 @@
 /* Contiki include */
 #include "process.h"
 #include "sys/ctimer.h"
+#include "sys/etimer.h"
 
 /* Logger includes */
 #include "sl_log.h"
@@ -85,7 +86,11 @@ PROCESS(attribute_management_process, "attribute_management_process");
 
 PROCESS_THREAD(attribute_management_process, ev, data)
 {
+  static struct etimer zigpc_attrmgmt_poll_timer;
+
   PROCESS_BEGIN();
+
+  etimer_set(&zigpc_attrmgmt_poll_timer, ZIGPC_ATTR_MGMT_POLL_PERIOD_MS);
 
   while (1) {
     sl_status_t status = SL_STATUS_INVALID_TYPE;
@@ -138,7 +143,22 @@ PROCESS_THREAD(attribute_management_process, ev, data)
                                                  receive_data->cluster_id,
                                                  receive_data->is_read_response,
                                                  &receive_data->frame);
+    } else if (ev == ZIGPC_ATTR_MGMT_EVT_CONFIGURE_RESPONSE) {
+      const zigpc_attrmgmt_on_frame_receive_t *receive_data
+        = (zigpc_attrmgmt_on_frame_receive_t *)data;
+
+      status = zigpc_attrmgmt_receive_configure_response_frame(
+        receive_data->eui64,
+        receive_data->endpoint_id,
+        receive_data->cluster_id,
+        &receive_data->frame);
+    } else if ((ev == PROCESS_EVENT_TIMER)
+               && (data == &zigpc_attrmgmt_poll_timer)) {
+      status = zigpc_attrmgmt_send_poll_attributes();
+
+      etimer_reset(&zigpc_attrmgmt_poll_timer);
     }
+
     // must be freed!
     // allocated in zigpc_attrmgmt_process_send_event())
     if ((data != NULL) && (ev < PROCESS_EVENT_NONE)) {
@@ -168,6 +188,7 @@ sl_status_t node_send_report_config_cmd(const zigbee_node_t node)
   }
   return status;
 }
+
 #ifdef COMPILE_UNUSED_CODE
 sl_status_t update_attribute_from_report(const attribute_report_t report)
 {

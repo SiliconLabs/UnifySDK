@@ -15,6 +15,7 @@
 
 #include "af_mock.h"
 #include "device-table_mock.h"
+#include "address-table_mock.h"
 
 #include "z3gateway.h"
 #include "z3gateway_common.h"
@@ -142,11 +143,14 @@ void test_send_zcl_frame_unicast_should_handle_unknown_device()
 {
   // ARRANGE
   EmberStatus status;
-  EmberEUI64 eui64;
+  EmberEUI64 eui64 = "\x12\x03\xA7\xBB\x3D\x02\x00\x42";
 
-  emberAfDeviceTableGetNodeIdFromEui64_ExpectAndReturn(
-    eui64,
-    EMBER_AF_PLUGIN_DEVICE_TABLE_NULL_NODE_ID);
+  emberAfSendUnicastToEui64_ExpectAndReturn(eui64,
+                                            NULL,
+                                            appZclBufferLen,
+                                            appZclBuffer,
+                                            EMBER_INVALID_CALL);
+  emberAfSendUnicastToEui64_IgnoreArg_apsFrame();
 
   // ACT
   status = z3gatewaySendZclFrameUnicast(eui64, 1, 0x0001);
@@ -159,18 +163,14 @@ void test_send_zcl_frame_unicast_should_handle_happy_path()
 {
   // ARRANGE
   EmberStatus status;
-  EmberEUI64 eui64;
-  EmberNodeId nodeId = 0x1234;
+  EmberEUI64 eui64 = "\x02\x03\xA7\xBB\x8D\x02\x00\x42";
 
-  emberAfDeviceTableGetNodeIdFromEui64_ExpectAndReturn(eui64, nodeId);
-
-  emberAfSendUnicast_ExpectAndReturn(EMBER_OUTGOING_DIRECT,
-                                     nodeId,
-                                     NULL,
-                                     appZclBufferLen,
-                                     appZclBuffer,
-                                     EMBER_SUCCESS);
-  emberAfSendUnicast_IgnoreArg_apsFrame();
+  emberAfSendUnicastToEui64_ExpectAndReturn(eui64,
+                                            NULL,
+                                            appZclBufferLen,
+                                            appZclBuffer,
+                                            EMBER_SUCCESS);
+  emberAfSendUnicastToEui64_IgnoreArg_apsFrame();
 
   // ACT
   status = z3gatewaySendZclFrameUnicast(eui64, 1, 0x0001);

@@ -14,11 +14,10 @@
 #include PLATFORM_HEADER
 #include EMBER_AF_API_AF_HEADER
 #include EMBER_AF_API_EMBER_TYPES
-#include EMBER_AF_API_DEVICE_TABLE
+#include EMBER_AF_API_ADDRESS_TABLE
 #include EMBER_AF_API_OTA_SERVER_POLICY
 #include EMBER_AF_API_OTA_SERVER
 #include EMBER_AF_API_OTA_STORAGE
-
 
 #include "z3gateway_common.h"
 
@@ -85,11 +84,11 @@ void emberAfPluginOtaServerUpdateStartedCallback(uint16_t manufacturerId,
 
   } else {
     EmberEUI64 eui64;
-    EmberNodeId source = emberAfCurrentCommand()->source;
 
-    bool eui64Found = emberAfDeviceTableGetEui64FromNodeId(source, eui64);
-    if (!eui64Found) {
-      emberAfCorePrintln("Error: Failed to find device EUI64");
+    EmberStatus status = emberAfGetCurrentSenderEui64(eui64);
+    if (status != EMBER_SUCCESS) {
+      emberAfCorePrintln(
+        "Error: Failed to find sender EUI64 for OTA update start event");
     } else {
       z3gwState.callbacks->onOtaUpdateStarted(eui64,
                                               manufacturerId,
@@ -121,9 +120,10 @@ void emberAfPluginOtaServerUpdateCompleteCallback(uint16_t manufacturerId,
   } else {
     EmberEUI64 eui64;
 
-    bool eui64Found = emberAfDeviceTableGetEui64FromNodeId(source, eui64);
-    if (!eui64Found) {
-      emberAfCorePrintln("Error: Failed to find device EUI64");
+    EmberStatus emStatus = emberAfGetCurrentSenderEui64(eui64);
+    if (emStatus != EMBER_SUCCESS) {
+      emberAfCorePrintln(
+        "Error: Failed to find sender EUI64 for OTA update complete event");
     } else {
       z3gwState.callbacks->onOtaUpdateCompleted(eui64,
                                                 manufacturerId,
@@ -134,13 +134,10 @@ void emberAfPluginOtaServerUpdateCompleteCallback(uint16_t manufacturerId,
   }
 }
 
-EmberStatus z3gatewayAddOtaImage(const char* filename)
+EmberStatus z3gatewayAddOtaImage(const char *filename)
 {
+  EmberAfOtaStorageStatus status = emAfOtaStorageAddImageFile(filename);
 
-    EmberAfOtaStorageStatus status =
-        emAfOtaStorageAddImageFile(filename);
-
-    return (status == EMBER_AF_OTA_STORAGE_SUCCESS)?
-            EMBER_SUCCESS:
-            EMBER_ERR_FATAL; 
+  return (status == EMBER_AF_OTA_STORAGE_SUCCESS) ? EMBER_SUCCESS
+                                                  : EMBER_ERR_FATAL;
 }

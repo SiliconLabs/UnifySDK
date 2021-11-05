@@ -26,4 +26,6 @@ EmberStatus emAfInstallCodeToKey(uint8_t *installCode,  // includes CRC
                                  uint8_t length,        // includes CRC length
                                  EmberKeyData *key);
 
+EmberStatus zaTrustCenterSetJoinPolicy(EmberJoinDecision decision);
+
 #endif  // AF_SECURITY_H

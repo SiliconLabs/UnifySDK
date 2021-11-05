@@ -18,6 +18,7 @@ extern "C" {
 #include <unity.h>
 #include <sl_status.h>
 
+#include <zigpc_datastore_mock.h>
 #include <zigpc_net_mgmt_mock.h>
 #include <uic_mqtt_mock.h>
 
@@ -234,13 +235,14 @@ void test_publish_state_should_publish_state_only(void)
   std::string payload
     = R"({"State":"idle","SupportedStateList":[],"RequestedStateParameters":[]})";
 
-  zigbee_eui64_t pc_eui64 = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x00, 0x11, 0x22};
-  zigpc_net_mgmt_get_protocol_controller_eui64_ExpectAndReturn(nullptr,
-                                                               SL_STATUS_OK);
-  zigpc_net_mgmt_get_protocol_controller_eui64_IgnoreArg_eui64();
-  zigpc_net_mgmt_get_protocol_controller_eui64_ReturnArrayThruPtr_eui64(
-    pc_eui64,
-    ZIGBEE_EUI64_SIZE);
+  zigpc_network_data_t nwk_data = {
+    .gateway_eui64 = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x00, 0x11, 0x22},
+  };
+  zigpc_datastore_read_network_ExpectAndReturn(nullptr, SL_STATUS_OK);
+  zigpc_datastore_read_network_IgnoreArg_data();
+  zigpc_datastore_read_network_ReturnMemThruPtr_data(
+    &nwk_data,
+    sizeof(zigpc_network_data_t));
 
   uic_mqtt_publish_Expect(topic.c_str(), payload.c_str(), payload.size(), true);
 
@@ -270,13 +272,14 @@ void test_publish_state_should_publish_next_states(void)
   std::string payload
     = R"({"State":"idle","SupportedStateList":["remove node","add node"],"RequestedStateParameters":[]})";
 
-  zigbee_eui64_t pc_eui64 = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x00, 0x11, 0x22};
-  zigpc_net_mgmt_get_protocol_controller_eui64_ExpectAndReturn(nullptr,
-                                                               SL_STATUS_OK);
-  zigpc_net_mgmt_get_protocol_controller_eui64_IgnoreArg_eui64();
-  zigpc_net_mgmt_get_protocol_controller_eui64_ReturnArrayThruPtr_eui64(
-    pc_eui64,
-    ZIGBEE_EUI64_SIZE);
+  zigpc_network_data_t nwk_data = {
+    .gateway_eui64 = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x00, 0x11, 0x22},
+  };
+  zigpc_datastore_read_network_ExpectAndReturn(nullptr, SL_STATUS_OK);
+  zigpc_datastore_read_network_IgnoreArg_data();
+  zigpc_datastore_read_network_ReturnMemThruPtr_data(
+    &nwk_data,
+    sizeof(zigpc_network_data_t));
 
   uic_mqtt_publish_Expect(topic.c_str(), payload.c_str(), payload.size(), true);
 
@@ -313,13 +316,14 @@ void test_publish_state_should_publish_requested_params(void)
   std::string payload
     = R"({"State":"remove node","SupportedStateList":["idle"],"RequestedStateParameters":["Unid","ExtraFlag"]})";
 
-  zigbee_eui64_t pc_eui64 = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x00, 0x11, 0x22};
-  zigpc_net_mgmt_get_protocol_controller_eui64_ExpectAndReturn(nullptr,
-                                                               SL_STATUS_OK);
-  zigpc_net_mgmt_get_protocol_controller_eui64_IgnoreArg_eui64();
-  zigpc_net_mgmt_get_protocol_controller_eui64_ReturnArrayThruPtr_eui64(
-    pc_eui64,
-    ZIGBEE_EUI64_SIZE);
+  zigpc_network_data_t nwk_data = {
+    .gateway_eui64 = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x00, 0x11, 0x22},
+  };
+  zigpc_datastore_read_network_ExpectAndReturn(nullptr, SL_STATUS_OK);
+  zigpc_datastore_read_network_IgnoreArg_data();
+  zigpc_datastore_read_network_ReturnMemThruPtr_data(
+    &nwk_data,
+    sizeof(zigpc_network_data_t));
 
   uic_mqtt_publish_Expect(topic.c_str(), payload.c_str(), payload.size(), true);
 

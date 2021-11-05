@@ -3,7 +3,8 @@ var zigpc__ucl__int_8hpp =
     [ "topic_data_t", "structzigpc__ucl_1_1mqtt_1_1topic__data__t.html", "structzigpc__ucl_1_1mqtt_1_1topic__data__t" ],
     [ "topic_type_t", "zigpc__ucl__int_8hpp.html#a0ae3f2434936eef3e9855e9437c03292", [
       [ "BY_UNID_PC_NWMGMT", "zigpc__ucl__int_8hpp.html#a0ae3f2434936eef3e9855e9437c03292aeb9d70b8abb8cc33ddb33743c528c28c", null ],
-      [ "BY_UNID_PC_NWMGMT_WRITE", "zigpc__ucl__int_8hpp.html#a0ae3f2434936eef3e9855e9437c03292a0cde6a64c24ecd02af7c7f7807b6a351", null ]
+      [ "BY_UNID_PC_NWMGMT_WRITE", "zigpc__ucl__int_8hpp.html#a0ae3f2434936eef3e9855e9437c03292a0cde6a64c24ecd02af7c7f7807b6a351", null ],
+      [ "BY_UNID_NODE_STATE", "zigpc__ucl__int_8hpp.html#a0ae3f2434936eef3e9855e9437c03292a2bab4fb29c86d3a0f3899ef457902fbc", null ]
     ] ],
     [ "build_topic", "zigpc__ucl__int_8hpp.html#a5f6b0d3f840732a5d93e0140df24c20a", null ],
     [ "on_net_init", "zigpc__ucl__int_8hpp.html#a1b060d96411b3a541b02bea436a71780", null ],

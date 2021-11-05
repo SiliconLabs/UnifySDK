@@ -1,7 +1,7 @@
 var zigpc__gateway__notify_8c =
 [
     [ "zigpc_gateway_hdl_on_cmd_received", "zigpc__gateway__notify_8c.html#a97fb17b434befa16e81ae752dde2d06a", null ],
-    [ "zigpc_gateway_hdl_on_emberaf_stack_init", "zigpc__gateway__notify_8c.html#a5d85694a6fcfd1380f8c5cc4952eaf5f", null ],
+    [ "zigpc_gateway_hdl_on_configure_response", "zigpc__gateway__notify_8c.html#a6372fc6b111809f3a5320e396ebf0696", null ],
     [ "zigpc_gateway_hdl_on_network_initialized", "zigpc__gateway__notify_8c.html#acec8715f227f171437127ccc57590692", null ],
     [ "zigpc_gateway_hdl_on_node_add_complete", "zigpc__gateway__notify_8c.html#a393eb3eaa2bf2115a6f3b5c55d211cf5", null ],
     [ "zigpc_gateway_hdl_on_node_add_start", "zigpc__gateway__notify_8c.html#a948d023262f3eb9db161220ced2dcd15", null ],

@@ -1,6 +1,9 @@
 find_program(ZAP_EXECUTABLE "zap" REQUIRED)
 run_zap(zap/gen-templates.json)
 
+set(Boost_USE_MULTITHREADED ON)
+find_package(Boost REQUIRED)
+
 add_library(
   zigpc_attribute_management
   ${CMAKE_CURRENT_BINARY_DIR}/src/zigpc_attrmgmt_publish.c
@@ -10,7 +13,8 @@ add_library(
   src/zigpc_attrmgmt_gateway.c
   src/zigpc_attrmgmt_receive.c
   src/zigpc_attrmgmt_reporting.cpp
-  src/zigpc_attrmgmt_send.cpp)
+  src/zigpc_attrmgmt_send.cpp
+  src/zigpc_attrmgmt_poll.cpp)
 
 target_include_directories(
   zigpc_attribute_management

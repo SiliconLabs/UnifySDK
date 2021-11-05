@@ -77,6 +77,32 @@ std::string build_unid(zigbee_eui64_uint_t eui64);
 
 }  // namespace mqtt
 
+namespace node_state
+{
+/**
+ * @brief Update the device status with the parameters provided. This handler will
+ * publish the updated device state on MQTT.
+ *
+ * @param eui64             Device identifier.
+ * @param network_status    Device network status.
+ * @param max_cmd_delay     Device maximum command delay.
+ * @return sl_status_t      SL_STATUS_OK on success, or MQTT API error
+ * otherwise.
+ */
+sl_status_t publish_state(zigbee_eui64_uint_t eui64,
+                          zigbee_node_network_status_t network_status,
+                          uint32_t max_cmd_delay);
+
+/**
+ * @brief Unretain all node topics except the node state topic.
+ *
+ * NOTE: This function should only be run on shutdown.
+ *
+ */
+void cleanup_all_node_topics(void);
+
+}  // namespace node_state
+
 }  // namespace zigpc_ucl
 
 #endif /* ZIGPC_UCL_HPP */

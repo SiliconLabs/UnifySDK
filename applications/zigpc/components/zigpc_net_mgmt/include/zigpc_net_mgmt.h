@@ -62,6 +62,17 @@ typedef struct {
 } zigpc_net_mgmt_state_change_request_t;
 
 /**
+ * @brief Request to enable/disable permitting Zigbee devices to join the
+ * network.
+ *
+ * @return sl_status_t          Returns if Network Management can service the
+ * request. If Network management is already going through an node addition
+ * through a state change, the request to disable permit joins is denied by
+ * returning SL_STATUS_BUSY.
+ */
+sl_status_t zigpc_netmgmt_network_permit_joins(bool enable);
+
+/**
  * @brief Request to add a new end device to the Zigbee PAN using Z3 Install Code Method.
  *
  * @param node_eui64            To be added End Device
@@ -115,17 +126,6 @@ sl_status_t zigpc_net_mgmt_remove_node(const zigbee_eui64_t eui64);
  */
 sl_status_t zigpc_net_mgmt_state_change_request(
   const zigpc_net_mgmt_state_change_request_t *request);
-
-/**
- * @brief Get the locally stored EUI64 ( full of zero if the network has not initiated)
- * 
- * @param buffer Destination character array
- * @param size Destination character array
- * @return sl_status_t SL_STATUS_OK on successful get
- * SL_STATUS_NULL_POINTER on invalid inputs, or SL_STATUS_WOULD_OVERFLOW if
- * destination character array is too small to fit the EUI64 array.
- */
-sl_status_t zigpc_net_mgmt_get_protocol_controller_eui64(zigbee_eui64_t eui64);
 
 #ifdef __cplusplus
 }

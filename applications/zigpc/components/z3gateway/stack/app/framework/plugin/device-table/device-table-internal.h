@@ -21,8 +21,10 @@
 uint8_t emAfDeviceTableGetFirstEndpointFromIndex(uint16_t index);
 
 // Internal APIs for printing device information to the CLI
+#ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
 void emAfDeviceTableSave(void);
 void emAfDeviceTableLoad(void);
+#endif // #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
 void emAfDeviceTablePrintEUI64(const uint8_t *eui64);
 void emAfDeviceTablePrintBuffer(const uint8_t *buffer, uint16_t bufLen);
 

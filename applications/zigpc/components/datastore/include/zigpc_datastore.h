@@ -143,7 +143,7 @@ typedef struct {
   zigbee_panid_t panid;
   zigbee_ext_panid_t ext_panid;
   zigbee_radio_channel_t radio_channel;
-} zigpc_network_data_t;
+} __attribute__((__packed__)) zigpc_network_data_t;
 
 /**
  * @brief Device information.
@@ -154,7 +154,7 @@ typedef struct {
   uint32_t max_cmd_delay;
   uint8_t endpoint_total_count;
   uint8_t endpoint_discovered_count;
-} zigpc_device_data_t;
+} __attribute__((__packed__)) zigpc_device_data_t;
 
 /**
  * @brief Device endpoint information.
@@ -162,7 +162,7 @@ typedef struct {
  */
 typedef struct {
   uint8_t zcl_version;
-} zigpc_endpoint_data_t;
+} __attribute__((__packed__)) zigpc_endpoint_data_t;
 
 /**
  * @brief Device endpoint cluster information.
@@ -170,7 +170,7 @@ typedef struct {
  */
 typedef struct {
   uint8_t dummy; /**< placeholder */
-} zigpc_cluster_data_t;
+} __attribute__((__packed__)) zigpc_cluster_data_t;
 
 /**********************************
  **********************************

@@ -1,5 +1,6 @@
 var NAVTREEINDEX27 =
 {
+"zwapi__internal_8h.html#a9ba0980b1f9aefb936ad7b058b87ff53":[19,0,0,0,1,14,4,4,21],
 "zwapi__internal_8h.html#a9e34a8eec16bffc48c5056c3b0f392dd":[19,0,0,0,1,14,4,4,29],
 "zwapi__internal_8h.html#aa286745ca41b6e8a2dd6743dd8298dc4":[19,0,0,0,1,14,4,4,25],
 "zwapi__internal_8h.html#aaa07390e6158db5d82d40510d2ae02d5":[19,0,0,0,1,14,4,4,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX27 =
 "zwave__api__demo__commands_8c.html#ac9a0d4c53d031265675de7bc074b5788":[19,0,0,0,0,1,1,5,6],
 "zwave__api__demo__commands_8c.html#adcda1905e4ae7c89f7e856dfc95ed96f":[19,0,0,0,0,1,1,5,30],
 "zwave__api__demo__commands_8c.html#ae2796a312a43c82513d5e099ec35d0e8":[19,0,0,0,0,1,1,5,22],
-"zwave__api__demo__commands_8c.html#ae44fafdb387f9eab4293b00c4bd9f735":[19,0,0,0,0,1,1,5,5],
-"zwave__api__demo__commands_8c.html#af65135a0a7dc83101128e2a73d4373c3":[19,0,0,0,0,1,1,5,27]
+"zwave__api__demo__commands_8c.html#ae44fafdb387f9eab4293b00c4bd9f735":[19,0,0,0,0,1,1,5,5]
 };

@@ -1,5 +1,6 @@
 var z3gateway_8h =
 [
+    [ "z3gatewayAddAddressTableEntry", "group__z3gateway.html#ga2dd0e1c6571fd2139f71a908aa4ef130", null ],
     [ "z3gatewayAddOtaImage", "group__z3gateway.html#gae26a2ecb86f648c8073be13bf71bfd70", null ],
     [ "z3gatewayClearCounters", "group__z3gateway.html#ga4fc865277e9bbf80f24abf0827b0df10", null ],
     [ "z3gatewayCommandPrintInfo", "group__z3gateway.html#gaded5632ddc0fb8f16c9a274beba99cb7", null ],
@@ -9,6 +10,7 @@ var z3gateway_8h =
     [ "z3gatewayDeviceTableExportEntry", "group__z3gateway.html#ga0c0261cebeb81086d1b470a8ffd9f96b", null ],
     [ "z3gatewayDeviceTableImportEntry", "group__z3gateway.html#gad05439bd58d2f83517d61689e00c0cef", null ],
     [ "z3gatewayFillZclFrame", "group__z3gateway.html#ga76c79325c6d8e5e311646e9fd26ddff3", null ],
+    [ "z3gatewayGetAddressTableEntry", "group__z3gateway.html#gafeced970cd147bc6c1463f9bc6e88545", null ],
     [ "z3gatewayGetCountersList", "group__z3gateway.html#ga906928bf36e3e75fddb35311609014c8", null ],
     [ "z3gatewayGetEmberKey", "group__z3gateway.html#ga4baac82597e3f2afc110a3ce249ada43", null ],
     [ "z3gatewayGetTrustCenterWellKownKey", "group__z3gateway.html#gaedcb3329cc6650e809bf8907ad6c52f3", null ],

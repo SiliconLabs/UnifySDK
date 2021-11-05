@@ -12,13 +12,13 @@
  *
  ******************************************************************************/
 
+#include <cinttypes>
 #include <iomanip>
 #include <string>
 #include <vector>
 
 // Shared UIC includes
 #include <sl_log.h>
-#include <uic_mqtt.h>
 #include <dotdot_mqtt.h>
 
 // ZigPC includes
@@ -39,27 +39,78 @@ namespace zigpc_ctrl
 {
 sl_status_t on_device_announced(const zigbee_eui64_t eui64)
 {
-  sl_status_t status = zigpc_net_mgmt_interview_node(eui64);
+  zigpc_device_data_t device_data;
 
-  return status;
-}
+  sl_status_t status = zigpc_datastore_read_device(eui64, &device_data);
+  if (status == SL_STATUS_OK) {
+    status = zigpc_ucl::node_state::publish_state(zigbee_eui64_to_uint(eui64),
+                                                  device_data.network_status,
+                                                  device_data.max_cmd_delay);
+  }
 
-sl_status_t on_device_interviewed(const zigbee_eui64_t eui64)
-{
-  sl_status_t status = SL_STATUS_OK;
-
-  for (const zigbee_endpoint_id_t &endpoint_id:
-       zigpc_datastore::endpoint::get_id_list(eui64)) {
-    status = on_endpoint_interviewed(eui64, endpoint_id);
+  if (status == SL_STATUS_OK) {
+    status = zigpc_net_mgmt_interview_node(eui64);
   }
 
   return status;
 }
 
-sl_status_t on_endpoint_interviewed(const zigbee_eui64_t eui64,
-                                    zigbee_endpoint_id_t endpoint_id)
+sl_status_t on_device_interview_failed(const zigbee_eui64_t eui64)
 {
-  zigbee_endpoint_t ep_data;
+  zigpc_device_data_t device_data;
+
+  sl_status_t status = zigpc_datastore_read_device(eui64, &device_data);
+  if (status == SL_STATUS_OK) {
+    status = zigpc_ucl::node_state::publish_state(zigbee_eui64_to_uint(eui64),
+                                                  device_data.network_status,
+                                                  device_data.max_cmd_delay);
+  }
+
+  return status;
+}
+
+sl_status_t on_device_interviewed(const zigbee_eui64_t eui64,
+                                  bool configure_endpoint)
+{
+  zigpc_device_data_t device_data;
+  sl_status_t status = zigpc_datastore_read_device(eui64, &device_data);
+  if (status == SL_STATUS_OK) {
+    status = zigpc_ucl::node_state::publish_state(zigbee_eui64_to_uint(eui64),
+                                                  device_data.network_status,
+                                                  device_data.max_cmd_delay);
+  }
+
+  for (const zigbee_endpoint_id_t &endpoint_id:
+       zigpc_datastore::endpoint::get_id_list(eui64)) {
+    if (configure_endpoint == true) {
+      status = perform_endpoint_configuration(eui64, endpoint_id);
+      if (status != SL_STATUS_OK) {
+        sl_log_warning(LOG_TAG,
+                       "Failed to configure endpoint %d: 0x%X",
+                       endpoint_id,
+                       status);
+      }
+    }
+    status = update_endpoint_capabilities(eui64, endpoint_id);
+    if (status != SL_STATUS_OK) {
+      sl_log_warning(
+        LOG_TAG,
+        "Failed to update endpoint %d capabilities: 0x%X (skipping to next "
+        "endpoint configuration)",
+        endpoint_id,
+        status);
+    }
+  }
+
+  return status;
+}
+
+sl_status_t perform_endpoint_configuration(const zigbee_eui64_t eui64,
+                                           zigbee_endpoint_id_t endpoint_id)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  zigbee_endpoint_t ep_data = {};
 
   std::vector<zcl_cluster_id_t> server_cluster_list
     = zigpc_datastore::cluster::get_id_list(eui64,
@@ -72,11 +123,19 @@ sl_status_t on_endpoint_interviewed(const zigbee_eui64_t eui64,
     ep_data.cluster_list[i].cluster_id = server_cluster_list[i];
   }
 
-  sl_status_t status = zigpc_gateway_request_binding_endpoint(eui64, ep_data);
+  status = zigpc_gateway_request_binding_endpoint(eui64, ep_data);
 
   if (status == SL_STATUS_OK) {
     status = configure_attributes_endpoint(eui64, ep_data);
   }
+
+  return status;
+}
+
+sl_status_t update_endpoint_capabilities(const zigbee_eui64_t eui64,
+                                         zigbee_endpoint_id_t endpoint_id)
+{
+  sl_status_t status = SL_STATUS_OK;
 
   // Setup supported commands for endpoint
   if (status == SL_STATUS_OK) {
@@ -104,27 +163,82 @@ sl_status_t on_endpoint_interviewed(const zigbee_eui64_t eui64,
 
   return status;
 }
+void on_startup(void)
+{
+  // Act as in every device discovered has finished interviewing
+  for (auto const &eui64_i: zigpc_datastore::device::get_id_list()) {
+    zigbee_eui64_t eui64;
+    zigpc_device_data_t eui64_data;
+    sl_status_t status = zigbee_uint_to_eui64(eui64_i, eui64);
+    if (status == SL_STATUS_OK) {
+      status = zigpc_datastore_read_device(eui64, &eui64_data);
+    }
+    if (status == SL_STATUS_OK) {
+      eui64_data.network_status = ZIGBEE_NODE_STATUS_INCLUDED;
+
+      status = zigpc_datastore_write_device(eui64, &eui64_data);
+    }
+    if (status == SL_STATUS_OK) {
+      status = on_device_interviewed(eui64, false);
+    }
+    if (status != SL_STATUS_OK) {
+      sl_log_warning(zigpc_ctrl::LOG_TAG,
+                     "Startup device EUI64:%016" PRIX64
+                     " update event handler status: 0x%X",
+                     eui64_i,
+                     status);
+    }
+  }
+}
 
 void on_shutdown(void)
 {
-  std::vector<zigbee_eui64_uint_t> dev_list
-    = zigpc_datastore::device::get_id_list();
-
-  // get Protocol controller UNID to unretain the Protocol controller messages
-  zigpc_network_data_t nwk;
-  sl_status_t status = zigpc_datastore_read_network(&nwk);
-  if (status != SL_STATUS_OK) {
-    sl_log_warning(LOG_TAG,
-                   "Failed to get Gateway UNID to unretain: 0x%X",
+  // Update each device status as not servicable by zigpc
+  for (auto const &eui64_i: zigpc_datastore::device::get_id_list()) {
+    zigbee_eui64_t eui64_array;
+    zigpc_device_data_t data;
+    sl_status_t status = zigbee_uint_to_eui64(eui64_i, eui64_array);
+    if (status != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG,
+                   "Failed to convert EUI64:%016" PRIX64 ": 0x%X",
+                   eui64_i,
                    status);
-  } else {
-    dev_list.push_back(zigbee_eui64_to_uint(nwk.gateway_eui64));
+      continue;
+    }
+
+    status = zigpc_datastore_read_device(eui64_array, &data);
+    if (status != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG,
+                   "Failed to read EUI64:%016" PRIX64 " data: 0x%X",
+                   eui64_i,
+                   status);
+      continue;
+    }
+
+    data.network_status = ZIGBEE_NODE_STATUS_UNAVAILABLE;
+
+    status = zigpc_datastore_write_device(eui64_array, &data);
+    if (status != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG,
+                   "Failed to write EUI64:%016" PRIX64 " data: 0x%X",
+                   eui64_i,
+                   status);
+      continue;
+    }
+
+    status = zigpc_ucl::node_state::publish_state(eui64_i,
+                                                  data.network_status,
+                                                  data.max_cmd_delay);
+    if (status != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG,
+                   "Failed to publish EUI64:%016" PRIX64
+                   " status as unavailable: 0x%X",
+                   eui64_i,
+                   status);
+    }
   }
 
-  for (auto const &eui64: dev_list) {
-    std::string topic = "ucl/by-unid/" + zigpc_ucl::mqtt::build_unid(eui64);
-    uic_mqtt_unretain(topic.c_str());
-  }
+  zigpc_ucl::node_state::cleanup_all_node_topics();
 }
 
 }  // namespace zigpc_ctrl

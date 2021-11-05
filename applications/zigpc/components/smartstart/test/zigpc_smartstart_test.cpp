@@ -97,16 +97,11 @@ void test_smartstart_init_on_net_init(void)
 {
   // ARRANGE
   struct zigpc_net_mgmt_on_network_init data;
+  zigbee_eui64_uint_t eui64_u = 0x0002030405060708;
 
   memcpy(data.pc_eui64, pc_eui64, sizeof(zigbee_eui64_t));
 
-  zigpc_common_eui64_to_unid_ExpectAndReturn(data.pc_eui64,
-                                             NULL,
-                                             unid_len,
-                                             SL_STATUS_OK);
-  zigpc_common_eui64_to_unid_IgnoreArg_dest_unid();
-  zigpc_common_eui64_to_unid_ReturnMemThruPtr_dest_unid((char *)pc_unid_str,
-                                                        unid_len);
+  zigbee_eui64_to_uint_ExpectAndReturn(data.pc_eui64, eui64_u);
 
   uic_mqtt_subscribe_Expect("ucl/SmartStart/List", NULL);
   uic_mqtt_subscribe_IgnoreArg_callback();
@@ -247,6 +242,8 @@ void test_smartstart_manager_should_add_entry_on_matching_pc_unid(void)
                                                    8,
                                                    SL_STATUS_OK);
 
+  zigpc_netmgmt_network_permit_joins_ExpectAndReturn(true, SL_STATUS_OK);
+
   // ACT
   smartstart::Management::get_instance()->update_smartstart_cache(ssl_str);
 
@@ -288,6 +285,8 @@ void test_smartstart_manager_should_add_entry_empty_pc_unid(void)
                                                    8,
                                                    8,
                                                    SL_STATUS_OK);
+
+  zigpc_netmgmt_network_permit_joins_ExpectAndReturn(true, SL_STATUS_OK);
 
   // ACT
   smartstart::Management::get_instance()->update_smartstart_cache(ssl_str);
@@ -347,6 +346,8 @@ void test_smartstart_manager_should_add_both_entries_with_different_install_code
                                                    8,
                                                    SL_STATUS_OK);
 
+  zigpc_netmgmt_network_permit_joins_ExpectAndReturn(true, SL_STATUS_OK);
+
   zigbee_eui64_to_str_ExpectAndReturn(entry_eui64,
                                       NULL,
                                       strlen(entry_eui64_str) + 1,
@@ -368,6 +369,8 @@ void test_smartstart_manager_should_add_both_entries_with_different_install_code
                                                    8,
                                                    8,
                                                    SL_STATUS_OK);
+
+  zigpc_netmgmt_network_permit_joins_ExpectAndReturn(true, SL_STATUS_OK);
 
   // ACT
   smartstart::Management::get_instance()->update_smartstart_cache(ssl_str);
@@ -406,17 +409,11 @@ void test_smartstart_manager_should_update_entry_on_node_added(void)
                              "zb-0011020344AB6677");
   struct zigpc_net_mgmt_on_node_added node_added
     = {.eui64 = {0x00, 0x11, 0x2, 0x3, 0x44, 0xAB, 0x66, 0x77}};
-  char entry_eui64_str[]  = "0011020344AB6677";
-  char unid_str[unid_len] = "zb-0011020344AB6677";
+  char entry_eui64_str[]      = "0011020344AB6677";
+  zigbee_eui64_uint_t eui64_u = 0x0011020344AB6677;
 
   // Behaviour for finding DSK and publishing SSL update
-  zigpc_common_eui64_to_unid_ExpectAndReturn(node_added.eui64,
-                                             NULL,
-                                             unid_len,
-                                             SL_STATUS_OK);
-  zigpc_common_eui64_to_unid_IgnoreArg_dest_unid();
-  zigpc_common_eui64_to_unid_ReturnMemThruPtr_dest_unid((char *)unid_str,
-                                                        unid_len);
+  zigbee_eui64_to_uint_ExpectAndReturn(node_added.eui64, eui64_u);
   zigbee_eui64_to_str_ExpectAndReturn(node_added.eui64,
                                       NULL,
                                       strlen(entry_eui64_str) + 1,
@@ -450,15 +447,9 @@ void test_smartstart_manager_should_not_update_non_existent_node_remove(void)
   // ARRANGE
   zigpc_net_mgmt_on_node_removed_t node_removed
     = {.eui64 = {0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}};
-  char unid_str[unid_len] = "zb-00FFFFFFFFFFFFFF";
+  zigbee_eui64_uint_t eui64_u = 0x00FFFFFFFFFFFFFF;
 
-  zigpc_common_eui64_to_unid_ExpectAndReturn(node_removed.eui64,
-                                             NULL,
-                                             unid_len,
-                                             SL_STATUS_OK);
-  zigpc_common_eui64_to_unid_IgnoreArg_dest_unid();
-  zigpc_common_eui64_to_unid_ReturnMemThruPtr_dest_unid((char *)unid_str,
-                                                        unid_len);
+  zigbee_eui64_to_uint_ExpectAndReturn(node_removed.eui64, eui64_u);
 
   // ACT
   zigpc_smartstart_on_node_removed(&node_removed);
@@ -476,16 +467,11 @@ void test_smartstart_manager_should_update_entry_on_node_removed(void)
                              "");
   zigpc_net_mgmt_on_node_removed_t node_removed
     = {.eui64 = {0x00, 0x11, 0x2, 0x3, 0x44, 0xAB, 0x66, 0x77}};
-  char unid_str[unid_len] = "zb-0011020344AB6677";
+  zigbee_eui64_uint_t eui64_u = 0x0011020344AB6677;
 
   // Behaviour for finding DSK and publishing SSL update
-  zigpc_common_eui64_to_unid_ExpectAndReturn(node_removed.eui64,
-                                             NULL,
-                                             unid_len,
-                                             SL_STATUS_OK);
-  zigpc_common_eui64_to_unid_IgnoreArg_dest_unid();
-  zigpc_common_eui64_to_unid_ReturnMemThruPtr_dest_unid((char *)unid_str,
-                                                        unid_len);
+  zigbee_eui64_to_uint_ExpectAndReturn(node_removed.eui64, eui64_u);
+
   uic_mqtt_publish_Expect("ucl/SmartStart/List/Update",
                           ssl_update_msg.c_str(),
                           ssl_update_msg.length(),

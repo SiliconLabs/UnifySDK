@@ -1,12 +1,8 @@
 # Source
 set(zigpc_net_mgmt_SRC
-    src/zigpc_net_mgmt_fsm.c
-    src/zigpc_net_mgmt_fsm_log.c
-    src/zigpc_net_mgmt_process.c
-    src/zigpc_net_mgmt_gateway.c
-    src/zigpc_net_mgmt.c
-    src/zigpc_net_mgmt_notify.c
-    src/zigpc_net_mgmt_eui64.c)
+    src/zigpc_net_mgmt_fsm.c src/zigpc_net_mgmt_fsm_log.c
+    src/zigpc_net_mgmt_process.c src/zigpc_net_mgmt_gateway.c
+    src/zigpc_net_mgmt.c src/zigpc_net_mgmt_notify.c)
 
 # Library
 add_library(zigpc_net_mgmt ${zigpc_net_mgmt_SRC})

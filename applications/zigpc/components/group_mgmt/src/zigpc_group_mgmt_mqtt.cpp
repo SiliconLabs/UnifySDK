@@ -23,6 +23,12 @@
 
 static const char LOG_TAG[] = "zigpc_groups_mqtt";
 
+/**
+ * @brief MQTT JSON payload format for group name publishing.
+ *
+ */
+const std::string GROUP_NAME_FMTSTR = R"({"value":"%s"})";
+
 sl_status_t
   zigpc_group_mqttpub_grouplist(const zigbee_eui64_t eui64,
                                 const zigbee_endpoint_id_t endpoint_id,
@@ -196,38 +202,53 @@ sl_status_t
                                          const zigbee_endpoint_id_t endpoint_id,
                                          const zigbee_group_id_t group_id,
                                          bool is_reported,
-                                         char *payload_string,
-                                         size_t *payload_size)
+                                         char *const payload_string,
+                                         size_t *const payload_size)
 {
-  sl_status_t status = SL_STATUS_OK;
-  char group_name[ZCL_DEFAULT_STR_LENGTH];
+  if ((eui64 == nullptr) || (payload_string == nullptr)
+      || (payload_size == nullptr)) {
+    return SL_STATUS_NULL_POINTER;
+  }
+
+  size_t group_name_size = ZCL_DEFAULT_STR_LENGTH;
+  char group_name[group_name_size];
 
   zigpc_group_member_t member;
   member.endpoint_id = endpoint_id;
   memcpy(member.eui64, eui64, ZIGBEE_EUI64_SIZE);
 
-  status = zigpc_group_map_retrieve_group_name(member,
-                                               group_id,
-                                               is_reported,
-                                               group_name,
-                                               ZCL_DEFAULT_STR_LENGTH);
+  sl_status_t status = zigpc_group_map_retrieve_group_name(member,
+                                                           group_id,
+                                                           is_reported,
+                                                           group_name,
+                                                           &group_name_size);
 
-  if ((status == SL_STATUS_OK) && (payload_string != NULL)) {
-    std::string payload;
-    payload.append("{\"value\":\"");
-    payload.append(group_name);
-    payload.append("\"}");
-    if (payload.length() > *payload_size) {
-      status = SL_STATUS_FAIL;
-    } else {
-      *payload_size
-        = snprintf(payload_string, *payload_size, "%s", payload.c_str());
+  if ((status == SL_STATUS_OK) || (status == SL_STATUS_EMPTY)) {
+    // Ensure provided payload is sufficient
+    const size_t formatted_payload_size
+      = group_name_size + GROUP_NAME_FMTSTR.size() - 2U;
+    if (formatted_payload_size >= *payload_size) {
+      sl_log_warning(LOG_TAG, "Insufficient space for name payload assembly");
+      return SL_STATUS_WOULD_OVERFLOW;
     }
-  } else {
-    // If group name is not found. return an empty payload.
-    *payload_size = 0U;
-    status        = SL_STATUS_OK;
-  }
 
-  return status;
+    // Ensure empty group name is null-terminated
+    if (status == SL_STATUS_EMPTY) {
+      group_name[0] = '\0';
+    }
+
+    *payload_size = snprintf(payload_string,
+                             *payload_size,
+                             GROUP_NAME_FMTSTR.c_str(),
+                             group_name);
+    return SL_STATUS_OK;
+  } else if (status == SL_STATUS_NOT_FOUND) {
+    // Group name not found, populate empty payload
+    payload_string[0] = '\0';
+    *payload_size     = 0U;
+    return SL_STATUS_OK;
+  } else {
+    // Other name lookup failure case
+    return SL_STATUS_FAIL;
+  }
 }

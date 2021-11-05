@@ -1,6 +1,8 @@
 # ZPC Release Notes
 This document describes the changes between the last released ZPC and the current release.
 
+## [1.0.3] - Nov 2021
+
 ## [1.0.2] - Oct 2021
 ### Added
 * ZPC is Z-Wave Certified against the Z-Wave Specification release 2021A.

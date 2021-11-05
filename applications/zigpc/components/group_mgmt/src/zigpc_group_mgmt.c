@@ -136,13 +136,14 @@ sl_status_t zigpc_group_add_reported(const zigbee_group_id_t group_id,
   //we dont recieve the status of the group name without sending
   //another explicit "ViewGroup" command
   //therefore, we have to check what the expected name is
-  char group_name[ZCL_DEFAULT_STR_LENGTH];
+  size_t group_name_size = ZCL_DEFAULT_STR_LENGTH;
+  char group_name[group_name_size];
   sl_status_t status
     = zigpc_group_map_retrieve_group_name(new_member,
                                           group_id,
                                           ATTR_DIRECTION_DESIRED,
                                           group_name,
-                                          ZCL_DEFAULT_STR_LENGTH);
+                                          &group_name_size);
 
   //if the group name is empty, only add new
   if (SL_STATUS_EMPTY == status) {

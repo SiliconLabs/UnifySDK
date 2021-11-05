@@ -1,12 +1,13 @@
 add_library(
   zigpc_gateway
   src/gateway_sleepy_queue.cpp
-  src/zigpc_gateway.c
+  src/zigpc_gateway.cpp
+  src/zigpc_gateway_bookkeeping.cpp
   src/zigpc_gateway_counters.cpp
   src/zigpc_gateway_datastore.cpp
-  src/zigpc_gateway_dispatch.c
   src/zigpc_gateway_notify.c
-  src/zigpc_gateway_process.c)
+  src/zigpc_gateway_process.cpp
+  src/zigpc_gateway_request_queue.cpp)
 
 target_include_directories(
   zigpc_gateway
@@ -19,6 +20,7 @@ target_link_libraries(
   PRIVATE z3gateway
           zigpc_common
           zigpc_config
+          zigpc_datastore
           zigpc_zcl_util
           zigpc_datastore
           uic_dotdot_mqtt

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -123,6 +123,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a65064a46ee99097caee378717b53a39c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="z3gateway_8c.html#a65064a46ee99097caee378717b53a39c">emberAfMainInitCallback</a> (void)</td></tr>
 <tr class="memdesc:a65064a46ee99097caee378717b53a39c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main Init.  <a href="z3gateway_8c.html#a65064a46ee99097caee378717b53a39c">More...</a><br /></td></tr>
 <tr class="separator:a65064a46ee99097caee378717b53a39c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c7675189c5ef8fbec6f858ebf23b9a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="z3gateway_8c.html#a1c7675189c5ef8fbec6f858ebf23b9a4">emberAfNcpInitCallback</a> (bool memoryAllocation)</td></tr>
+<tr class="memdesc:a1c7675189c5ef8fbec6f858ebf23b9a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ncp Init.  <a href="z3gateway_8c.html#a1c7675189c5ef8fbec6f858ebf23b9a4">More...</a><br /></td></tr>
+<tr class="separator:a1c7675189c5ef8fbec6f858ebf23b9a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ad2fabfefc181655196b50dafb6afed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="z3gateway_8c.html#a2ad2fabfefc181655196b50dafb6afed">emberAfPluginZclFrameworkCoreEzspErrorCallback</a> (EzspStatus status)</td></tr>
+<tr class="memdesc:a2ad2fabfefc181655196b50dafb6afed"><td class="mdescLeft">&#160;</td><td class="mdescRight">EZSP Error Handler.  <a href="z3gateway_8c.html#a2ad2fabfefc181655196b50dafb6afed">More...</a><br /></td></tr>
+<tr class="separator:a2ad2fabfefc181655196b50dafb6afed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -182,6 +188,62 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a1c7675189c5ef8fbec6f858ebf23b9a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c7675189c5ef8fbec6f858ebf23b9a4">&#9670;&nbsp;</a></span>emberAfNcpInitCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void emberAfNcpInitCallback </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>memoryAllocation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ncp Init. </p>
+<p>This function is called when the network coprocessor is being initialized, either at startup or upon reset. It provides applications on opportunity to perform additional configuration of the NCP. The function is always called twice when the NCP is initialized. In the first invocation, memoryAllocation will be true and the application should only issue EZSP commands that affect memory allocation on the NCP. For example, tables on the NCP can be resized in the first call. In the second invocation, memoryAllocation will be false and the application should only issue EZSP commands that do not affect memory allocation. For example, tables on the NCP can be populated in the second call. This callback is not called on SoCs.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">memoryAllocation</td><td>Ver.: always </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2ad2fabfefc181655196b50dafb6afed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad2fabfefc181655196b50dafb6afed">&#9670;&nbsp;</a></span>emberAfPluginZclFrameworkCoreEzspErrorCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool emberAfPluginZclFrameworkCoreEzspErrorCallback </td>
+          <td>(</td>
+          <td class="paramtype">EzspStatus&#160;</td>
+          <td class="paramname"><em>status</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>EZSP Error Handler. </p>
+<p>This callback is fired when the host process receives an error from the EZSP link when talking to the NCP. The return boolean gives the user application the option to reboot the NCP. If this function returns true, the NCP will be rebooted and the connection between the host and NCP will drop. If not, the NCP will continue operating.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>The EzspStatus error code received.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool True to reset NCP, false not to.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This callback is only fired on the host application. It has no use for SoC or NCP applications. </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="a249abb5c32af3421f2daa4e1ecbfc0d7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a249abb5c32af3421f2daa4e1ecbfc0d7">&#9670;&nbsp;</a></span>z3gwState</h2>
@@ -203,7 +265,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_d068be7b5e98c454d73184551add16b7.html">z3gateway</a></li><li class="navelem"><a class="el" href="dir_a711830c5f388e3183ed7da7e736742b.html">src</a></li><li class="navelem"><a class="el" href="z3gateway_8c.html">z3gateway.c</a></li>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

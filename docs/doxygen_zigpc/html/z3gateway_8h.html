@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -91,7 +91,6 @@ $(document).ready(function(){initNavTree('z3gateway_8h.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="z3gateway__callbacks_8h_source.html">z3gateway_callbacks.h</a>&quot;</code><br />
-<code>#include &quot;app/util/ezsp/ezsp-enum.h&quot;</code><br />
 </div>
 <p><a href="z3gateway_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -133,6 +132,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gaf177644ce07de76a0c072549a0a3fe65"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#gaf177644ce07de76a0c072549a0a3fe65">z3gatewayDeviceTableCount</a> (void)</td></tr>
 <tr class="memdesc:gaf177644ce07de76a0c072549a0a3fe65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of <a class="el" href="structz3gatewayDeviceTableStorageEntry.html" title="Structure used to import/export the Z3Gateway device-table plugin state.">z3gatewayDeviceTableStorageEntry</a> needed to store the device-table state.  <a href="group__z3gateway.html#gaf177644ce07de76a0c072549a0a3fe65">More...</a><br /></td></tr>
 <tr class="separator:gaf177644ce07de76a0c072549a0a3fe65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2dd0e1c6571fd2139f71a908aa4ef130"><td class="memItemLeft" align="right" valign="top">EmberStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#ga2dd0e1c6571fd2139f71a908aa4ef130">z3gatewayAddAddressTableEntry</a> (const EmberEUI64 eui64, const EmberNodeId nodeId)</td></tr>
+<tr class="memdesc:ga2dd0e1c6571fd2139f71a908aa4ef130"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add new EUI64 to NodeId mapping to the EmberAf address-table plugin.  <a href="group__z3gateway.html#ga2dd0e1c6571fd2139f71a908aa4ef130">More...</a><br /></td></tr>
+<tr class="separator:ga2dd0e1c6571fd2139f71a908aa4ef130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafeced970cd147bc6c1463f9bc6e88545"><td class="memItemLeft" align="right" valign="top">EmberStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#gafeced970cd147bc6c1463f9bc6e88545">z3gatewayGetAddressTableEntry</a> (const EmberEUI64 eui64, EmberNodeId *const nodeId)</td></tr>
+<tr class="memdesc:gafeced970cd147bc6c1463f9bc6e88545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the NodeId for the EUI64 provided from the address-table plugin.  <a href="group__z3gateway.html#gafeced970cd147bc6c1463f9bc6e88545">More...</a><br /></td></tr>
+<tr class="separator:gafeced970cd147bc6c1463f9bc6e88545"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8c5711e6fd4b57604e73ec1159e9c3f4"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__z3gateway.html#ga8c5711e6fd4b57604e73ec1159e9c3f4">z3gatewayDeviceTableEntryClusterListCount</a> (uint16_t entryIndex)</td></tr>
 <tr class="memdesc:ga8c5711e6fd4b57604e73ec1159e9c3f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current count of cluster list used by the the device-table entry based on index.  <a href="group__z3gateway.html#ga8c5711e6fd4b57604e73ec1159e9c3f4">More...</a><br /></td></tr>
 <tr class="separator:ga8c5711e6fd4b57604e73ec1159e9c3f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,7 +202,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_d068be7b5e98c454d73184551add16b7.html">z3gateway</a></li><li class="navelem"><a class="el" href="dir_c16442e4863db11e03abb5979003dcd4.html">include</a></li><li class="navelem"><a class="el" href="z3gateway_8h.html">z3gateway.h</a></li>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

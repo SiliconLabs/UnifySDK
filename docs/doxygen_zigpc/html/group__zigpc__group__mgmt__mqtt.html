@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -107,9 +107,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga247a66f0ddd1543dffff222b0b42a4f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__group__mgmt__mqtt.html#ga247a66f0ddd1543dffff222b0b42a4f0">zigpc_group_mqtt_assemble_group_payload</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, bool is_reported, char *payload_string, size_t *payload_size)</td></tr>
 <tr class="memdesc:ga247a66f0ddd1543dffff222b0b42a4f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assemble the JSON payload for GroupList attribute. If there are no groupIDs part of a EUI64/endpoint identifer, the payload will be an empty string with payload_size set to 0U; else the payload will be in an array format and the payload_size variable will be set to the resulting payload string size.  <a href="group__zigpc__group__mgmt__mqtt.html#ga247a66f0ddd1543dffff222b0b42a4f0">More...</a><br /></td></tr>
 <tr class="separator:ga247a66f0ddd1543dffff222b0b42a4f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaee4c86765e15e8eeac2c06ae86643bb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__group__mgmt__mqtt.html#gaee4c86765e15e8eeac2c06ae86643bb2">zigpc_group_mqtt_assemble_name_payload</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, const <a class="el" href="group__zigpc__common__zigbee.html#gabe5a6a6a4b79e78e775b6cc6efd57c67">zigbee_group_id_t</a> group_id, bool is_reported, char *payload_string, size_t *payload_size)</td></tr>
-<tr class="memdesc:gaee4c86765e15e8eeac2c06ae86643bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_group_mqtt_assemble_name_payload Assemble the oayload for publishing a group name  <a href="group__zigpc__group__mgmt__mqtt.html#gaee4c86765e15e8eeac2c06ae86643bb2">More...</a><br /></td></tr>
-<tr class="separator:gaee4c86765e15e8eeac2c06ae86643bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga58f6c0bdaec7d7258425eda58622911f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__group__mgmt__mqtt.html#ga58f6c0bdaec7d7258425eda58622911f">zigpc_group_mqtt_assemble_name_payload</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, const <a class="el" href="group__zigpc__common__zigbee.html#gabe5a6a6a4b79e78e775b6cc6efd57c67">zigbee_group_id_t</a> group_id, bool is_reported, char *const payload_string, size_t *const payload_size)</td></tr>
+<tr class="memdesc:ga58f6c0bdaec7d7258425eda58622911f"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_group_mqtt_assemble_name_payload Assemble the payload for publishing a group name. For empty group names, the payload with the value formatting is still populated. For group names not found, an empty string is returned.  <a href="group__zigpc__group__mgmt__mqtt.html#ga58f6c0bdaec7d7258425eda58622911f">More...</a><br /></td></tr>
+<tr class="separator:ga58f6c0bdaec7d7258425eda58622911f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>This header contains the definitions and functionality associated with handling groups MQTT functionality. Functions for publishing to MQTT and helpers are in this module. </p>
@@ -173,8 +173,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gaee4c86765e15e8eeac2c06ae86643bb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaee4c86765e15e8eeac2c06ae86643bb2">&#9670;&nbsp;</a></span>zigpc_group_mqtt_assemble_name_payload()</h2>
+<a id="ga58f6c0bdaec7d7258425eda58622911f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga58f6c0bdaec7d7258425eda58622911f">&#9670;&nbsp;</a></span>zigpc_group_mqtt_assemble_name_payload()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,13 +206,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">char *const&#160;</td>
           <td class="paramname"><em>payload_string</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramtype">size_t *const&#160;</td>
           <td class="paramname"><em>payload_size</em>&#160;</td>
         </tr>
         <tr>
@@ -223,7 +223,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>zigpc_group_mqtt_assemble_name_payload Assemble the oayload for publishing a group name </p>
+<p>zigpc_group_mqtt_assemble_name_payload Assemble the payload for publishing a group name. For empty group names, the payload with the value formatting is still populated. For group names not found, an empty string is returned. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">eui64</td><td>- the eui64 of the endpoint </td></tr>
@@ -234,7 +234,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the payload could be assembled with the group name </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK on valid payload population for group names in either non-empty, empty, or not-found states, SL_STATUS_NULL_POINTER on invalid args passed in, or SL_STATUS_WOULD_OVERFLOW if passed in payload buffer is insufficient. </dd></dl>
 
 </div>
 </div>
@@ -413,7 +413,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

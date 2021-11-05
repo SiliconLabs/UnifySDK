@@ -15,7 +15,6 @@ target_link_libraries(
   zigpc_gateway
   zigpc_net_mgmt
   zigpc_group_mgmt
-  zigpc_node_state
   zigpc_ucl
   zigpc_smartstart
   zigpc_stdin

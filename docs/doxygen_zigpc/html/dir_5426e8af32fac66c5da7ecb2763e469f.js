@@ -6,7 +6,6 @@ var dir_5426e8af32fac66c5da7ecb2763e469f =
     [ "datastore", "dir_fd74d2cee03cec1d978c7e6c3dd4b8d0.html", "dir_fd74d2cee03cec1d978c7e6c3dd4b8d0" ],
     [ "diagnostics", "dir_a2861ded9b7fb5dc8c3ab199aace1921.html", "dir_a2861ded9b7fb5dc8c3ab199aace1921" ],
     [ "group_mgmt", "dir_da573f52735645d8391352cf2ee07004.html", "dir_da573f52735645d8391352cf2ee07004" ],
-    [ "node_state", "dir_259dbf36096bb41d595d08a2300bde60.html", "dir_259dbf36096bb41d595d08a2300bde60" ],
     [ "ota_zigbee", "dir_4cdbeea0c1a48c70f18670be1aa312f5.html", "dir_4cdbeea0c1a48c70f18670be1aa312f5" ],
     [ "smartstart", "dir_b1ac6c8c5af047a6745b0e61d74e1275.html", "dir_b1ac6c8c5af047a6745b0e61d74e1275" ],
     [ "stdin", "dir_23a03060370414fca122c4d74c6dd2aa.html", "dir_23a03060370414fca122c4d74c6dd2aa" ],

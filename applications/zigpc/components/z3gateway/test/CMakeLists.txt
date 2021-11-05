@@ -12,6 +12,7 @@ add_definitions(
   -DEMBER_AF_API_AF_SECURITY_HEADER="app/framework/security/af-security.h"
   -DEMBER_AF_API_EZSP_PROTOCOL="dummy.h"
   -DEMBER_AF_API_EZSP="app/util/ezsp/ezsp.h"
+  -DEMBER_AF_API_ADDRESS_TABLE="plugin/address-table/address-table.h"
   -DEMBER_AF_API_DEVICE_TABLE="plugin/device-table/device-table.h"
   -DEMBER_AF_API_DEVICE_TABLE_INTERNAL="plugin/device-table/device-table-internal.h"
   -DEMBER_AF_API_NETWORK_CREATOR="network-creator.h"
@@ -29,6 +30,7 @@ set(GECKO_SDK_MOCK_HEADERS
     mocks/app/util/ezsp/ezsp.h
     mocks/plugin/network-creator/network-creator.h
     mocks/plugin/network-creator-security/network-creator-security.h
+    mocks/plugin/address-table/address-table.h
     mocks/plugin/device-table/device-table.h)
 
 set(GECKO_SDK_MOCK_INCLUDES ../include ../gen ../stack

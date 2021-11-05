@@ -2164,6 +2164,26 @@ EmberStatus emberAfGenerateRandomKey(EmberKeyData* result);
 EmberStatus emberAfGenerateRandomData(uint8_t* result, uint8_t size);
 /** @} END EZSP Common Plugin Callbacks */
 
+/** @name ZCL Framework Core Plugin Callbacks */
+// @{
+
+/** @brief EZSP Error Handler
+ *
+ * This callback is fired when the host process receives an error from the EZSP
+ * link when talking to the NCP. The return boolean gives the user application
+ * the option to reboot the NCP. If this function returns true, the NCP will be
+ * rebooted and the connection between the host and NCP will drop. If not, the
+ * NCP will continue operating.
+ *
+ * @param status The EzspStatus error code received.
+ *
+ * @return bool True to reset NCP, false not to.
+ *
+ * @note This callback is only fired on the host application. It has no use for
+ * SoC or NCP applications.
+ */
+bool emberAfPluginZclFrameworkCoreEzspErrorCallback(EzspStatus status);
+/** @} END ZCL Framework Core Plugin Callbacks */
 
 /** @} END addtogroup */
 #endif // SILABS_EMBER_AF_CALLBACK_PROTOTYPES

@@ -161,19 +161,22 @@ sl_status_t zigpc_group_map_clear(void);
  * @param member        - the new member to add
  * @param group_id      - the group to add a new member to
  * @param is_reported   - the direction (REPORTED/DESIRED) of the operation
- * @param group_name    - the destination where to copy the name
- * @param group_name_size - the size of group_name
+ * @param group_name    - Reference to buffer to populate name.
+ * @param group_name_size - Reference to buffer size:
+ *                          IN: provided buffer capacity.
+ *                          OUT: actual size of buffer used.
  *
  * @return SL_STATUS_OK if able to retrieve the group name properly
  * SL_STATUS_WOULD_OVERFLOW if the name requested is too large
  * to fit in the destination. SL_STATUS_EMPTY if the group is
- * found but has no name. SL_STATUS_FAIL on all other failures
+ * found but has no name. SL_STATUS_NULL_POINTER on invalid args passed in.
+ * SL_STATUS_FAIL on all other failures.
  */
 sl_status_t zigpc_group_map_retrieve_group_name(zigpc_group_member_t member,
                                                 zigbee_group_id_t group_id,
                                                 bool is_reported,
-                                                char *group_name,
-                                                size_t group_name_size);
+                                                char *const group_name,
+                                                size_t *const group_name_size);
 
 /**
  * @brief zigpc_group_map_set_group_name

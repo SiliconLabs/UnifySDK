@@ -16,6 +16,7 @@
 #include "af_mock.h"
 #include "af-security_mock.h"
 #include "network-creator-security_mock.h"
+#include "address-table_mock.h"
 #include "device-table_mock.h"
 
 #include "z3gateway.h"
@@ -63,7 +64,9 @@ void helper_arrange_for_endpoint_discovered_callback(EmberEUI64 test_eui64,
     .clusterOutStartPosition = 1,
   };
 
-  emberAfDeviceTableGetNodeIdFromEui64_ExpectAndReturn(test_eui64, node_id);
+  emberAfLookupAddressTableEntryByEui64_ExpectAndReturn(test_eui64, 1);
+  emberAfPluginAddressTableLookupNodeIdByIndex_ExpectAndReturn(1, node_id);
+
   emAfDeviceTableFindIndexNodeIdEndpoint_ExpectAndReturn(node_id,
                                                          test_endpoint,
                                                          55);

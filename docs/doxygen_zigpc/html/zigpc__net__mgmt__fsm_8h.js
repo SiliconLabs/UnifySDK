@@ -31,5 +31,6 @@ var zigpc__net__mgmt__fsm_8h =
     [ "zigpc_net_mgmt_fsm_get_timer", "zigpc__net__mgmt__fsm_8h.html#a97b3a4517bffe814dd4db237dad5072f", null ],
     [ "zigpc_net_mgmt_fsm_post_event", "zigpc__net__mgmt__fsm_8h.html#aa29bb3ba9a4fd481342b45a7f7c39dab", null ],
     [ "zigpc_net_mgmt_fsm_reset", "zigpc__net__mgmt__fsm_8h.html#acc297cf0898f218086e07977bcad4545", null ],
-    [ "zigpc_net_mgmt_fsm_state_name", "zigpc__net__mgmt__fsm_8h.html#a8cae3cfa8fef977d34ba31a82ef95386", null ]
+    [ "zigpc_net_mgmt_fsm_state_name", "zigpc__net__mgmt__fsm_8h.html#a8cae3cfa8fef977d34ba31a82ef95386", null ],
+    [ "zigpc_netmgmt_fsm_state_change_in_progress", "zigpc__net__mgmt__fsm_8h.html#a383fd7a0a988a4a25a2fed18d514f3c2", null ]
 ];

@@ -1,5 +1,6 @@
 var NAVTREEINDEX22 =
 {
+"structassociation__set__frame.html#a1d96b360b577c600eeda593d76eafe9f":[16,4,9,7,1,1,2],
 "structassociation__set__frame.html#a72a96addbddfb364c5c30c3e67ac7b4e":[16,4,9,7,1,1,3],
 "structassociation__set__frame.html#ab30d46ad7ba77cafc9e21191d27cb882":[16,4,9,7,1,1,1],
 "structassociation__set__frame.html#ad5aeb81142a5f4c1013b06a38371ea0b":[16,4,9,7,1,1,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX22 =
 "structnvm__config.html#afa54e86f280023f92aa63b3a0c80338f":[16,4,20,0,2],
 "structpower__level__setting.html":[18,0,53],
 "structpower__level__setting.html#a3ac66ea71380545a507dbb527ac31f32":[18,0,53,1],
-"structpower__level__setting.html#a79cef09f89f7a3f6921779ddda61d82d":[18,0,53,0],
-"structpower__level__setting.html#a9afd1d1ba96cc61e8033a466c224b237":[18,0,53,2]
+"structpower__level__setting.html#a79cef09f89f7a3f6921779ddda61d82d":[18,0,53,0]
 };

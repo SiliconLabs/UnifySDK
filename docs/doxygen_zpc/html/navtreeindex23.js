@@ -1,5 +1,6 @@
 var NAVTREEINDEX23 =
 {
+"structpower__level__setting.html#a9afd1d1ba96cc61e8033a466c224b237":[18,0,53,2],
 "structpower__level__test.html":[18,0,54],
 "structpower__level__test.html#a09c9675f191e448cad2785d834d5c092":[18,0,54,4],
 "structpower__level__test.html#a22bbc2e3899cc75d3b15a417acea8151":[18,0,54,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX23 =
 "structzwave__controller__callbacks__t.html#a5e86a63d52f08139149861d8203c878f":[16,4,11,0,0,2],
 "structzwave__controller__callbacks__t.html#a65a4142f931fd7cda75f8af14d9b06c0":[16,4,11,0,0,7],
 "structzwave__controller__callbacks__t.html#a7782a3e1384c2c1dfd1826e23c5767e7":[16,4,11,0,0,4],
-"structzwave__controller__callbacks__t.html#a7beef2c84c22e12175a9d063d0282ab4":[16,4,11,0,0,3],
-"structzwave__controller__callbacks__t.html#a7ed2767264b1e1025479d66c4f425529":[16,4,11,0,0,10]
+"structzwave__controller__callbacks__t.html#a7beef2c84c22e12175a9d063d0282ab4":[16,4,11,0,0,3]
 };

@@ -25,11 +25,26 @@
 #define ZIGPC_ATTRMGMT_INT_HPP
 
 #include <vector>
+#include <list>
 
 #include "sl_status.h"
 
 #include "zcl_attribute_info.h"
 #include "zcl_definitions.h"
+
+#define ZCL_CONFIGURE_STATUS_RESPONSE_SIZE 4
+
+typedef uint8_t configure_response_buffer_t[ZCL_CONFIGURE_STATUS_RESPONSE_SIZE];
+
+/**
+ * @brief the structure representing a configure reporting
+ * response frame
+**/
+typedef struct {
+  uint8_t status;        /**the status if the report was configured*/
+  uint8_t direction;     /**the direction of the report (to client or server)*/
+  uint16_t attribute_id; /**the attribute id of the report*/
+} zigpc_attrmgmt_configure_status_record_t;
 
 /**
  * @brief Build list of ZCL Configure Report Records for a given cluster.
@@ -86,6 +101,51 @@ sl_status_t zigpc_attrmgmt_send_split_read_cmds(
   zcl_cluster_id_t cluster_id,
   const std::vector<zcl_attribute_id_t> &attr_ids);
 
+/**
+ * @brief zigpc_attrmgmt_get_next_poll_entry
+ * Get the next poll entry to be sent
+ *
+ * @param eui64         reference to store eui64 of next entry
+ * @param endpoint_id   reference to store endpoint of next entry
+ * @param cluster_id    reference to store cluster of next entry
+ *
+ * @return SL_STATUS_OK if the information could be retrieved.
+ * SL_STATUS_EMPTY if no entries in the poll list, SL_STATUS_FAIL
+ * if some other error occurred
+ */
+sl_status_t
+  zigpc_attrmgmt_get_next_poll_entry(zigbee_eui64_uint_t &eui64,
+                                     zigbee_endpoint_id_t &endpoint_id,
+                                     zcl_cluster_id_t &cluster_id);
+
+/**
+ * @brief zigpc_attrmgmt_buffer_to_configure_status
+ * Extract a configure report status record from a
+ * buffer of 4 bytes
+ *
+ * @param buffer    4-byte buffer where the record is stored
+ * @param record    destination reference to copy record
+ *
+ * @return SL_STATUS_OK if the operation could complete
+ */
+sl_status_t zigpc_attrmgmt_buffer_to_configure_status(
+  const configure_response_buffer_t buffer,
+  zigpc_attrmgmt_configure_status_record_t &record);
+
+/**
+ * @brief zigpc_attrmgmt_buffer_to_configure_status_list
+ * Extracts a series of records from a buffer of bytes
+ *
+ * @param buffer        buffer of bytes containing configure status records
+ * @param buffer_len    the length of the above buffer
+ * @param record_list   the reference to the list to store the records
+ *
+ * @return SL_STATUS_OK if the buffer could be properly read
+ */
+sl_status_t zigpc_attrmgmt_buffer_to_configure_status_list(
+  const uint8_t *buffer,
+  size_t buffer_len,
+  std::list<zigpc_attrmgmt_configure_status_record_t> &record_list);
 #endif  //ZIGPC_ATTRMGMT_INT_HPP
 
 /** @} end attribute_management_int */

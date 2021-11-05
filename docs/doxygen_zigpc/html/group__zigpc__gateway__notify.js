@@ -65,6 +65,7 @@ var group__zigpc__gateway__notify =
       [ "ZIGPC_GATEWAY_NOTIFY_NODE_ENDPOINT_DISCOVERED", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfca3b4f8eaf6d50f820a23ad9d7ead92013", null ],
       [ "ZIGPC_GATEWAY_NOTIFY_REPORTED_ATTRIBUTE", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfcaa86667d2e41e7e7443f8db2a00714d7c", null ],
       [ "ZIGPC_GATEWAY_NOTIFY_READ_ATTRIBUTE_RESPONSE", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfcad3492860cb3fec8789a2d0cff9146145", null ],
+      [ "ZIGPC_GATEWAY_NOTIFY_CONFIGURE_REPORTING_RESPONSE", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfcad9b81363de92c8460570eab6112317a5", null ],
       [ "ZIGPC_GATEWAY_NOTIFY_ZCL_COMMAND_RECEIVED", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfca5adb8a2c8c2148f7d87faecade294b0a", null ],
       [ "ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_STARTED", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfcac22e316ba6ba014810d0f5ebed1e26ea", null ],
       [ "ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_COMPLETED", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfca947ad9d6d46363cecebe5c7b6e27d4fd", null ],

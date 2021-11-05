@@ -1,6 +1,22 @@
 # ZigPC (Beta) Release Notes
 This document describes the changes between the current and last released ZigPC.
 
+## [1.0.3] - Nov 2021
+
+### Added
+* Add persistence to ZigPC node management using the zigpc datastore component
+* Persist EUI64 and NodeID mappings
+### Changed
+* Updates to network management
+* Improvements in z3gateway EZSP message performance
+* Merge ZigPC node state and ucl handling components
+* Reduce dependence on device table plugin, use address table
+### Fixed
+* Improved ZCL frame error handling and empty string bug fix
+* Node unretain messages bugfix
+* Empty group name bugfix
+* Added polling for unreportable attributes
+
 ## [1.0.2] - Oct 2021
 
 ## [1.0.1] - Aug 2021

@@ -15,6 +15,7 @@
 
 #include "enums.h"
 #include "af_mock.h"
+#include "address-table_mock.h"
 #include "device-table_mock.h"
 
 #include "z3gateway.h"
@@ -84,11 +85,9 @@ void test_z3gateway_cluster_command_received_callback_processed(void)
     .payloadStartIndex = 10,
   };
 
-  emberAfDeviceTableGetEui64FromNodeId_ExpectAndReturn(input_command.source,
-                                                       NULL,
-                                                       true);
-  emberAfDeviceTableGetEui64FromNodeId_ReturnThruPtr_eui64(test_eui64);
-  emberAfDeviceTableGetEui64FromNodeId_IgnoreArg_eui64();
+  emberAfGetCurrentSenderEui64_ExpectAndReturn(NULL, EMBER_SUCCESS);
+  emberAfGetCurrentSenderEui64_IgnoreArg_address();
+  emberAfGetCurrentSenderEui64_ReturnThruPtr_address(test_eui64);
 
   callback_onClusterCommandReceived_ExpectAndReturn(
     test_eui64,

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -88,10 +88,10 @@ $(document).ready(function(){initNavTree('md_applications_zpc_readme_developer.h
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This doucument is intended for Unify developers who are trying to cross compile the ZPC for Raspberry Pi and install and run it on a Raspberry Pi.</p>
-<h1><a class="anchor" id="autotoc_md218"></a>
+<h1><a class="anchor" id="autotoc_md226"></a>
 Build Instructions</h1>
 <p>To cross compile the ZPC for Raspberry Pi, use Docker on your workstation. If you haven't already built the Unify docker image, see <a class="el" href="md_docker_readme_developer.html">readme.md</a>.</p>
-<h2><a class="anchor" id="autotoc_md219"></a>
+<h2><a class="anchor" id="autotoc_md227"></a>
 Cross Compiling for Raspberry Pi Using Docker</h2>
 <blockquote class="doxtable">
 <p>The Raspberry Pi build is supported by Raspberry Pi OS Buster. </p>
@@ -105,7 +105,7 @@ Cross Compiling for Raspberry Pi Using Docker</h2>
 <div class="line">ninja doxygen       # Build doxygen documentation (optional)</div>
 <div class="line">ninja deb           # Build Debian Installers (optional)</div>
 </div><!-- fragment --><p>After running this, the <code>zpc</code> binary is located in <code>./applications/zpc/zpc</code>. The Debian installer path are directly in the build folder <code>./uic-zpc_&lt;version&gt;_armhf.deb</code> and <code>./libuic_&lt;version&gt;_armhf.deb</code></p>
-<h2><a class="anchor" id="autotoc_md220"></a>
+<h2><a class="anchor" id="autotoc_md228"></a>
 Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host</h2>
 <p>You can run the Raspberry Pi unit tests (and ZPC binary) within Docker on the Host machine by using QEMU to emulate the ARM architecture and binfmt in the kernel to tell the Linux OS to run the ARM binaries within QEMU.</p>
 <p>To enable running the unit tests inside Docker on the Host machine, run the following command in the Host (not within the docker container).</p>
@@ -115,7 +115,7 @@ Advanced Feature - Run Raspberry Pi Unit Tests in Docker on the Host</h2>
 </blockquote>
 <p>After enabling this you can run the unit tests by issuing following command in the <code>uic_armhf</code> docker image in the build directory:</p>
 <div class="fragment"><div class="line">ninja test</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md221"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md229"></a>
 Install Instructions</h1>
 <p>Installation is documented in the main <a class="el" href="index.html#md_README">README.md</a> file. </p>
 </div></div><!-- contents -->
@@ -124,7 +124,7 @@ Install Instructions</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:34 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:07 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

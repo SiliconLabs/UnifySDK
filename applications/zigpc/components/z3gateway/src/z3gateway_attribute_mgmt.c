@@ -1,7 +1,6 @@
 #include PLATFORM_HEADER
 #include EMBER_AF_API_AF_HEADER
-#include EMBER_AF_API_DEVICE_TABLE
-#include EMBER_AF_API_DEVICE_TABLE_INTERNAL
+#include EMBER_AF_API_ADDRESS_TABLE
 #include "app/util/zigbee-framework/zigbee-device-common.h"
 #include "gen/callback.h"
 #include "z3gateway.h"
@@ -16,7 +15,6 @@ bool emberAfReportAttributesCallback(EmberAfClusterId clusterId,
 {
   EmberStatus status = EMBER_SUCCESS;
   EmberEUI64 sourceEui64;
-  EmberNodeId sourceNodeId;
   uint8_t sourceEndpoint;
 
   if (!Z3GATEWAY_CALLBACK_EXISTS(z3gwState.callbacks,
@@ -27,14 +25,11 @@ bool emberAfReportAttributesCallback(EmberAfClusterId clusterId,
   }
 
   if (status == EMBER_SUCCESS) {
-    sourceNodeId = emberAfCurrentCommand()->source;
-
-    bool euiStatus
-      = emberAfDeviceTableGetEui64FromNodeId(sourceNodeId, sourceEui64);
-    if (!euiStatus) {
+    status = emberAfGetCurrentSenderEui64(sourceEui64);
+    if (status != EMBER_SUCCESS) {
       status = EMBER_NOT_FOUND;
       emberAfCorePrintln(
-        "Error: Failed to find device eui64 in report attributes command");
+        "Error: Failed to find sender EUI64 for report attributes command");
     }
   }
 
@@ -66,7 +61,6 @@ bool emberAfReadAttributesResponseCallback(EmberAfClusterId clusterId,
 {
   EmberStatus status = EMBER_SUCCESS;
   EmberEUI64 sourceEui64;
-  EmberNodeId sourceNodeId;
   uint8_t sourceEndpoint;
   uint8_t sourceCommandId;
 
@@ -78,14 +72,11 @@ bool emberAfReadAttributesResponseCallback(EmberAfClusterId clusterId,
   }
 
   if (status == EMBER_SUCCESS) {
-    sourceNodeId = emberAfCurrentCommand()->source;
-
-    bool euiStatus
-      = emberAfDeviceTableGetEui64FromNodeId(sourceNodeId, sourceEui64);
-    if (!euiStatus) {
+    status = emberAfGetCurrentSenderEui64(sourceEui64);
+    if (status != EMBER_SUCCESS) {
       status = EMBER_NOT_FOUND;
       emberAfCorePrintln(
-        "Error: Failed to find device eui64 in read attribute response");
+        "Error: Failed to find sender EUI64 for read attribute response");
     }
   }
 
@@ -113,50 +104,88 @@ bool emberAfReadAttributesResponseCallback(EmberAfClusterId clusterId,
   return false;
 }
 
+bool emberAfConfigureReportingResponseCallback(EmberAfClusterId clusterId,
+                                               uint8_t *buffer,
+                                               uint16_t bufLen)
+{
+  EmberStatus status = EMBER_SUCCESS;
+  EmberEUI64 sourceEui64;
+  EmberNodeId sourceNodeId;
+  uint8_t sourceEndpoint;
+  uint8_t sourceCommandId;
+
+  if (!Z3GATEWAY_CALLBACK_EXISTS(z3gwState.callbacks,
+                                 onConfigureReportingResponse)) {
+    emberAfCorePrintln(
+      "Ignoring read attribute response data due to missing callback");
+    status = EMBER_NOT_FOUND;
+  }
+
+  if (status == EMBER_SUCCESS) {
+    sourceNodeId = emberAfCurrentCommand()->source;
+
+    status = emberAfGetCurrentSenderEui64(sourceEui64);
+
+    if (status != EMBER_SUCCESS) {
+      emberAfCorePrintln(
+        "Error: Failed to find device eui64 in read attribute response");
+    }
+  }
+
+  if (status == EMBER_SUCCESS) {
+    sourceCommandId = emberAfCurrentCommand()->commandId;
+    sourceEndpoint  = emberAfCurrentCommand()->apsFrame->sourceEndpoint;
+  }
+
+  if ((status == EMBER_SUCCESS)
+      && (sourceCommandId == ZCL_CONFIGURE_REPORTING_RESPONSE_COMMAND_ID)) {
+    emberAfCorePrint(
+      "Configure attributes response for cluster: %04X buffer: [",
+      clusterId);
+    for (size_t i = 0; i < bufLen; i++) {
+      emberAfCorePrint(" %02X", buffer[i]);
+    }
+    emberAfCorePrintln(" ]");
+
+    z3gwState.callbacks->onConfigureReportingResponse(sourceEui64,
+                                                      sourceEndpoint,
+                                                      clusterId,
+                                                      buffer,
+                                                      bufLen);
+  }
+
+  return false;
+}
+
 EmberStatus z3gatewayInitReporting(const EmberEUI64 eui64,
                                    uint8_t endpoint,
                                    uint16_t clusterId,
                                    const uint8_t *reportRecord,
                                    size_t recordSize)
 {
-  EmberStatus status = EMBER_SUCCESS;
-
-  //get our eui64
-  EmberEUI64 ncpEui64;
-  emberAfGetEui64(ncpEui64);
-
-  //get target NodeId
-  EmberNodeId targetNodeId
-    = (EmberNodeId)emberAfDeviceTableGetNodeIdFromEui64(eui64);
-  if (targetNodeId == EMBER_AF_PLUGIN_DEVICE_TABLE_NULL_NODE_ID) {
-    status = EMBER_NOT_FOUND;
-    emberAfCorePrintln(
-      "Error: Failed to find device to send ZCL buffer on the network: 0x%X",
-      status);
+  emberAfCorePrint("Sending Report Frame: [ ");
+  for (size_t i = 0; i < recordSize; i++) {
+    emberAfCorePrint("%02X ", reportRecord[i]);
   }
+  emberAfCorePrintln("]");
 
-  if (status == EMBER_SUCCESS) {
+  // Assemble "ConfigureReporting" Command
+  emberAfFillExternalBuffer(
+    (ZCL_GLOBAL_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER),
+    clusterId,
+    ZCL_CONFIGURE_REPORTING_COMMAND_ID,
+    "b",
+    reportRecord,
+    recordSize);
 
-    //Assemble "ConfigureReporting" Command
-    emberAfCorePrint("Sending Report Frame: [ ");
-    for (size_t i = 0; i < recordSize; i++) {
-      emberAfCorePrint("%02X ", reportRecord[i]);
-    }
-    emberAfCorePrintln("]");
+  emberAfSetCommandEndpoints(1, endpoint);
 
-    emberAfFillExternalBuffer(
-      (ZCL_GLOBAL_COMMAND | ZCL_FRAME_CONTROL_CLIENT_TO_SERVER),
-      clusterId,
-      ZCL_CONFIGURE_REPORTING_COMMAND_ID,
-      "b",
-      reportRecord,
-      recordSize);
+  EmberEUI64 eui64Dup;
+  memcpy(eui64Dup, eui64, sizeof(EmberEUI64));
 
-    emberAfSetCommandEndpoints(1, endpoint);
+  // Send command via unicast
+  EmberStatus status = emberAfSendCommandUnicastToEui64(eui64Dup);
 
-    //Send command via unicast
-    status = emberAfSendCommandUnicast(EMBER_OUTGOING_DIRECT, targetNodeId);
-  }
   return status;
 }
 
@@ -169,34 +198,28 @@ EmberStatus z3gatewayInitBinding(const EmberEUI64 eui64,
                                  uint16_t clusterId,
                                  uint16_t group_id)
 {
-  EmberStatus status = EMBER_SUCCESS;
-
-  //get our eui64
   EmberEUI64 ncpEui64;
+  EmberNodeId targetNodeId;
+
+  // Get our eui64
   emberAfGetEui64(ncpEui64);
 
-  //get target NodeId
-  EmberNodeId targetNodeId
-    = (EmberNodeId)emberAfDeviceTableGetNodeIdFromEui64(eui64);
-  if (targetNodeId == EMBER_AF_PLUGIN_DEVICE_TABLE_NULL_NODE_ID) {
+  // Get target NodeId
+  EmberStatus status = z3gatewayGetAddressTableEntry(eui64, &targetNodeId);
+  if (status != EMBER_SUCCESS) {
     status = EMBER_NOT_FOUND;
-    emberAfCorePrintln(
-      "Error: Failed to find device to send ZCL buffer on the network: 0x%X",
-      status);
-  }
-
-  if (status == EMBER_SUCCESS) {
+    emberAfCorePrintln("Error: Failed to find target NodeId to send binding "
+                       "request on the network: 0x%X",
+                       status);
+  } else {
     //Bind
     EmberApsOption options = EMBER_AF_DEFAULT_APS_OPTIONS;
-    uint8_t type = 0;
+    uint8_t type           = 0;
 
-    if(group_id == 0)
-    {
-        type = UNICAST_BINDING;
-    }
-    else
-    {
-        type = MULTICAST_BINDING;
+    if (group_id == 0) {
+      type = UNICAST_BINDING;
+    } else {
+      type = MULTICAST_BINDING;
     }
 
     emberBindRequest(targetNodeId,

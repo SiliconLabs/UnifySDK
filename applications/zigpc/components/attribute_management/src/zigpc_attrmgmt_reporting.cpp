@@ -12,6 +12,7 @@
  *****************************************************************************/
 
 #include <vector>
+#include <cstring>
 
 #include "sl_log.h"
 #include "sl_status.h"
@@ -51,6 +52,62 @@ sl_status_t zigpc_attrmgmt_build_configure_report_records(
           record_list.push_back(record);
         }
       }
+    }
+  }
+
+  return status;
+}
+
+sl_status_t zigpc_attrmgmt_buffer_to_configure_status(
+  const configure_response_buffer_t buffer,
+  zigpc_attrmgmt_configure_status_record_t &record)
+{
+  record.status       = buffer[0];
+  record.direction    = buffer[1];
+  record.attribute_id = (buffer[3] << 8) | buffer[2];
+
+  return SL_STATUS_OK;
+}
+
+sl_status_t zigpc_attrmgmt_buffer_to_configure_status_list(
+  const uint8_t *buffer,
+  size_t buffer_len,
+  std::list<zigpc_attrmgmt_configure_status_record_t> &record_list)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  for (unsigned int i = 0; i < buffer_len; i = i + 4) {
+    configure_response_buffer_t temp_buffer;
+    zigpc_attrmgmt_configure_status_record_t record;
+    memcpy(temp_buffer, buffer + i, 4);
+
+    status = zigpc_attrmgmt_buffer_to_configure_status(temp_buffer, record);
+
+    if (status == SL_STATUS_OK) {
+      record_list.push_back(record);
+    }
+  }
+
+  return SL_STATUS_OK;
+}
+
+sl_status_t zigpc_attrmgmt_receive_configure_response_frame(
+  const zigbee_eui64_t eui64,
+  zigbee_endpoint_id_t endpoint_id,
+  zcl_cluster_id_t cluster_id,
+  const zcl_frame_t *frame)
+{
+  sl_status_t status = SL_STATUS_OK;
+  std::list<zigpc_attrmgmt_configure_status_record_t> record_list;
+
+  status = zigpc_attrmgmt_buffer_to_configure_status_list(frame->buffer,
+                                                          frame->size,
+                                                          record_list);
+
+  for (auto record: record_list) {
+    if (record.status != 0) {
+      status = zigpc_attrmgmt_add_poll_entry(eui64, endpoint_id, cluster_id);
+      break;
     }
   }
 

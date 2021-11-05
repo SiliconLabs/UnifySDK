@@ -57,14 +57,14 @@ void zigpc_net_mgmt_callback_on_network_initialized(void *event_data)
 }
 void zigpc_net_mgmt_callback_on_node_add_start(void *event_data)
 {
-  zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-  struct zigpc_gateway_on_node_add *node_add_start
-    = &process_data_fsm.fsm_data.on_node_add_start;
+  const zigpc_gateway_on_node_add_t *node_add
+    = (zigpc_gateway_on_node_add_t *)event_data;
 
-  const struct zigpc_gateway_on_node_add *node_add
-    = (struct zigpc_gateway_on_node_add *)event_data;
+  if (node_add != NULL) {
+    zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
+    zigpc_gateway_on_node_add_t *node_add_start
+      = &process_data_fsm.fsm_data.on_node_add_start;
 
-  if (zigpc_net_mgmt_fsm_get_state() == ZIGPC_NET_MGMT_FSM_STATE_IDLE) {
     memcpy(node_add_start->eui64, node_add->eui64, sizeof(zigbee_eui64_t));
 
     process_data_fsm.fsm_event = ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_START;

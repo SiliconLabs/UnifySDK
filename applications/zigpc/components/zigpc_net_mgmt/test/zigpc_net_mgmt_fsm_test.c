@@ -78,6 +78,18 @@ void test_zigpc_net_mgmt_fsm_should_transition_to_idle_from_init_complete_event(
   zigpc_datastore_write_network_ExpectAndReturn(&nwk, SL_STATUS_OK);
   zigpc_datastore_log_network_IgnoreAndReturn(SL_STATUS_OK);
 
+  zigpc_datastore_remove_device_ExpectAndReturn(
+    test_init_data.on_net_init_complete.zigpc_eui64,
+    SL_STATUS_OK);
+  zigpc_datastore_create_device_ExpectAndReturn(
+    test_init_data.on_net_init_complete.zigpc_eui64,
+    SL_STATUS_OK);
+  zigpc_datastore_write_device_ExpectAndReturn(
+    test_init_data.on_net_init_complete.zigpc_eui64,
+    NULL,
+    SL_STATUS_OK);
+  zigpc_datastore_write_device_IgnoreArg_data();
+
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   zigpc_net_mgmt_notify_network_init_ExpectWithArray(
     test_init_data.on_net_init_complete.zigpc_eui64,
@@ -122,7 +134,6 @@ void test_zigpc_net_mgmt_fsm_should_handle_valid_state_transitions(void)
     sizeof(zigbee_install_code_t),
     add_node_data.node_add_request.install_code_length,
     SL_STATUS_OK);
-  zigpc_gateway_network_permit_joins_ExpectAndReturn(true, SL_STATUS_OK);
 
   // ACT
   sl_status_t test_status
@@ -172,7 +183,6 @@ void test_zigpc_net_mgmt_fsm_node_add_request_should_call_gateway_api(void)
 
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   zigpc_gateway_add_node_install_code_IgnoreAndReturn(SL_STATUS_OK);
-  zigpc_gateway_network_permit_joins_ExpectAndReturn(true, SL_STATUS_OK);
 
   // ACT
   sl_status_t test_status
@@ -264,6 +274,8 @@ void test_zigpc_net_mgmt_fsm_should_handle_timeout_event_from_add_node_state(
 {
   // ARRANGE
   fsm.state = ZIGPC_NET_MGMT_FSM_STATE_NODE_ADD;
+
+  zigpc_gateway_network_permit_joins_ExpectAndReturn(false, SL_STATUS_OK);
 
   zigpc_net_mgmt_notify_clear_requested_parameter_list_Expect();
   zigpc_net_mgmt_notify_state_update_ExpectAndReturn(

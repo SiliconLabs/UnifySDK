@@ -14,26 +14,43 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "sl_status.h"
-#include "sl_log.h"
+// Shared UIC includes
+#include <sl_status.h>
+#include <sl_log.h>
 
-#include "zigpc_common_zigbee.h"
+// ZigPC includes
+#include <zigpc_common_zigbee.h>
+#include <zigpc_gateway.h>
 
+// Component includes
 #include "zigpc_net_mgmt.h"
 #include "zigpc_net_mgmt_fsm.h"
 #include "zigpc_net_mgmt_process_send.h"
+
+sl_status_t zigpc_netmgmt_network_permit_joins(bool enable)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  if (!enable && zigpc_netmgmt_fsm_state_change_in_progress()) {
+    status = SL_STATUS_BUSY;
+  } else {
+    status = zigpc_gateway_network_permit_joins(enable);
+  }
+
+  return status;
+}
 
 sl_status_t zigpc_net_mgmt_add_node(const zigbee_eui64_t eui64,
                                     const zigbee_install_code_t install_code,
                                     const uint8_t install_code_length)
 {
   sl_status_t status = SL_STATUS_OK;
-  zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-  zigpc_net_mgmt_fsm_node_add_t *add_node_data
-    = &process_data_fsm.fsm_data.node_add_request;
-  if (zigpc_net_mgmt_fsm_get_state() != ZIGPC_NET_MGMT_FSM_STATE_IDLE) {
-    status = SL_STATUS_BUSY;
+  if (eui64 == NULL) {
+    status = SL_STATUS_NULL_POINTER;
   } else {
+    zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
+    zigpc_net_mgmt_fsm_node_add_t *add_node_data
+      = &process_data_fsm.fsm_data.node_add_request;
     memcpy(add_node_data->eui64, eui64, sizeof(zigbee_eui64_t));
     memcpy(add_node_data->install_code,
            install_code,

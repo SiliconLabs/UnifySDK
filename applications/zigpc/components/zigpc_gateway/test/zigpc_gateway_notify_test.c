@@ -23,8 +23,6 @@
 
 #include "z3gateway_callbacks.h"
 
-#define TEST_PC_EUI64_STR "0A0B0C0D00000000"
-
 /* Prototypes for notify functions under test */
 void zigpc_gateway_hdl_on_network_initialized(
   const EmberEUI64 eui64_le, const EmberNetworkParameters *network);
@@ -153,11 +151,11 @@ void test_zigpc_gateway_notify_unregister_should_call_common_observer(void)
 void test_zigpc_gateway_network_init_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64 = {0x1, 0x2, 0x3, 0x0};
+  EmberEUI64 test_eui64_le = {0x1, 0x2, 0x3, 0x0};
   EmberNetworkParameters test_network_params
     = {.panId = 0xF8, .extendedPanId = {0xF8, 0}, .radioChannel = 0xAB};
 
-  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64);
+  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64_le);
   zigbee_eui64_copy_switch_endian_IgnoreArg_dst();
 
   zigpc_observable_notify_ExpectAndReturn(&zigpc_gateway_observable,
@@ -167,7 +165,7 @@ void test_zigpc_gateway_network_init_should_call_common_notify(void)
   zigpc_observable_notify_IgnoreArg_data();
 
   // ACT
-  zigpc_gateway_hdl_on_network_initialized(test_eui64, &test_network_params);
+  zigpc_gateway_hdl_on_network_initialized(test_eui64_le, &test_network_params);
 
   // ASSERT (Handled by CMock)
 }
@@ -179,18 +177,15 @@ void test_zigpc_gateway_network_init_should_call_common_notify(void)
 void test_zigpc_gateway_node_start_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64 = {0xA, 0xB, 0xC, 0xD, 0x0};
+  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
 
-  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64);
+  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64_le);
   zigbee_eui64_copy_switch_endian_IgnoreArg_dst();
+  zigbee_eui64_copy_switch_endian_ReturnThruPtr_dst(test_eui64_be);
 
-  zigbee_eui64_to_str_ExpectAndReturn(test_eui64,
-                                      NULL,
-                                      ZIGBEE_EUI64_HEX_STR_LENGTH,
-                                      SL_STATUS_OK);
-  zigbee_eui64_to_str_IgnoreArg_str_buf();
-  zigbee_eui64_to_str_ReturnArrayThruPtr_str_buf(TEST_PC_EUI64_STR,
-                                                 strlen(TEST_PC_EUI64_STR) + 1);
+  zigbee_eui64_to_uint_ExpectAndReturn(test_eui64_be, eui64_uint_be);
 
   zigpc_observable_notify_ExpectAndReturn(&zigpc_gateway_observable,
                                           ZIGPC_GATEWAY_NOTIFY_NODE_ADD_START,
@@ -199,7 +194,7 @@ void test_zigpc_gateway_node_start_should_call_common_notify(void)
   zigpc_observable_notify_IgnoreArg_data();
 
   // ACT
-  zigpc_gateway_hdl_on_node_add_start(test_eui64);
+  zigpc_gateway_hdl_on_node_add_start(test_eui64_le);
 
   // ASSERT Handled by CMock
 }
@@ -211,18 +206,15 @@ void test_zigpc_gateway_node_start_should_call_common_notify(void)
 void test_zigpc_gateway_node_complete_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64 = {0xA, 0xB, 0xC, 0xD, 0x0};
+  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
 
-  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64);
+  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64_le);
   zigbee_eui64_copy_switch_endian_IgnoreArg_dst();
+  zigbee_eui64_copy_switch_endian_ReturnThruPtr_dst(test_eui64_be);
 
-  zigbee_eui64_to_str_ExpectAndReturn(test_eui64,
-                                      NULL,
-                                      ZIGBEE_EUI64_HEX_STR_LENGTH,
-                                      SL_STATUS_OK);
-  zigbee_eui64_to_str_IgnoreArg_str_buf();
-  zigbee_eui64_to_str_ReturnArrayThruPtr_str_buf(TEST_PC_EUI64_STR,
-                                                 strlen(TEST_PC_EUI64_STR) + 1);
+  zigbee_eui64_to_uint_ExpectAndReturn(test_eui64_be, eui64_uint_be);
 
   zigpc_observable_notify_ExpectAndReturn(
     &zigpc_gateway_observable,
@@ -232,7 +224,7 @@ void test_zigpc_gateway_node_complete_should_call_common_notify(void)
   zigpc_observable_notify_IgnoreArg_data();
 
   // ACT
-  zigpc_gateway_hdl_on_node_add_complete(test_eui64);
+  zigpc_gateway_hdl_on_node_add_complete(test_eui64_le);
 
   // ASSERT (Handled by CMock)
 }
@@ -244,27 +236,23 @@ void test_zigpc_gateway_node_complete_should_call_common_notify(void)
 void test_zigpc_gateway_device_discovered_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64 = {0xA, 0xB, 0xC, 0xD, 0x0};
-  uint8_t epCount       = 7;
+  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
+  uint8_t epCount                   = 7;
   zigpc_gateway_on_node_discovered_t test_notify_data
     = {.endpoint_count = epCount};
 
   // Switch Endian to compare result
   for (int i = 0, length = sizeof(zigbee_eui64_t); i < length; i++) {
-    test_notify_data.eui64[i] = test_eui64[length - i - 1];
+    test_notify_data.eui64[i] = test_eui64_le[length - i - 1];
   }
 
-  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64);
+  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64_le);
   zigbee_eui64_copy_switch_endian_IgnoreArg_dst();
+  zigbee_eui64_copy_switch_endian_ReturnThruPtr_dst(test_eui64_be);
 
-  zigbee_eui64_to_str_ExpectAndReturn(NULL,
-                                      NULL,
-                                      ZIGBEE_EUI64_HEX_STR_LENGTH,
-                                      SL_STATUS_OK);
-  zigbee_eui64_to_str_IgnoreArg_eui64();
-  zigbee_eui64_to_str_IgnoreArg_str_buf();
-  zigbee_eui64_to_str_ReturnArrayThruPtr_str_buf(TEST_PC_EUI64_STR,
-                                                 strlen(TEST_PC_EUI64_STR) + 1);
+  zigbee_eui64_to_uint_ExpectAndReturn(test_eui64_be, eui64_uint_be);
 
   zigpc_observable_notify_ExpectAndReturn(&zigpc_gateway_observable,
                                           ZIGPC_GATEWAY_NOTIFY_NODE_DISCOVERED,
@@ -272,7 +260,7 @@ void test_zigpc_gateway_device_discovered_should_call_common_notify(void)
                                           SL_STATUS_OK);
 
   // ACT
-  zigpc_gateway_hdl_on_node_discovered(test_eui64, epCount);
+  zigpc_gateway_hdl_on_node_discovered(test_eui64_le, epCount);
 
   // ASSERT (Handled by CMock)
 }
@@ -284,8 +272,10 @@ void test_zigpc_gateway_device_discovered_should_call_common_notify(void)
 void test_zigpc_gateway_endpoint_discovered_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64                    = {0xA, 0xB, 0xC, 0xD, 0x0};
-  uint16_t epClusterList[]                 = {0x6, 0x4, 0x1};
+  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
+  uint16_t epClusterList[]          = {0x6, 0x4, 0x1};
   struct z3gatewayEndpointInfo test_epinfo = {
     .endpoint           = 123,
     .deviceId           = 0x456,
@@ -293,17 +283,11 @@ void test_zigpc_gateway_endpoint_discovered_should_call_common_notify(void)
     .serverClusterList  = epClusterList,
   };
 
-  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64);
+  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64_le);
   zigbee_eui64_copy_switch_endian_IgnoreArg_dst();
+  zigbee_eui64_copy_switch_endian_ReturnThruPtr_dst(test_eui64_be);
 
-  zigbee_eui64_to_str_ExpectAndReturn(NULL,
-                                      NULL,
-                                      ZIGBEE_EUI64_HEX_STR_LENGTH,
-                                      SL_STATUS_OK);
-  zigbee_eui64_to_str_IgnoreArg_eui64();
-  zigbee_eui64_to_str_IgnoreArg_str_buf();
-  zigbee_eui64_to_str_ReturnArrayThruPtr_str_buf(TEST_PC_EUI64_STR,
-                                                 strlen(TEST_PC_EUI64_STR) + 1);
+  zigbee_eui64_to_uint_ExpectAndReturn(test_eui64_be, eui64_uint_be);
 
   zigpc_observable_notify_ExpectAndReturn(
     &zigpc_gateway_observable,
@@ -313,7 +297,7 @@ void test_zigpc_gateway_endpoint_discovered_should_call_common_notify(void)
   zigpc_observable_notify_IgnoreArg_data();
 
   // ACT
-  zigpc_gateway_hdl_on_node_endpoint_discovered(test_eui64, &test_epinfo);
+  zigpc_gateway_hdl_on_node_endpoint_discovered(test_eui64_le, &test_epinfo);
 
   // ASSERT (Handled by CMock)
 }
@@ -325,18 +309,15 @@ void test_zigpc_gateway_endpoint_discovered_should_call_common_notify(void)
 void test_zigpc_gateway_node_removed_should_call_common_notify(void)
 {
   // ARRANGE
-  EmberEUI64 test_eui64 = {0xA, 0xB, 0xC, 0xD, 0x0};
+  EmberEUI64 test_eui64_le          = {0xA, 0xB, 0xC, 0xD, 0x0};
+  EmberEUI64 test_eui64_be          = {0x0, 0x0, 0x0, 0x0, 0xD, 0xC, 0xB, 0xA};
+  zigbee_eui64_uint_t eui64_uint_be = 0x0A0B0C0D00000000;
 
-  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64);
+  zigbee_eui64_copy_switch_endian_Expect(NULL, test_eui64_le);
   zigbee_eui64_copy_switch_endian_IgnoreArg_dst();
+  zigbee_eui64_copy_switch_endian_ReturnThruPtr_dst(test_eui64_be);
 
-  zigbee_eui64_to_str_ExpectAndReturn(test_eui64,
-                                      NULL,
-                                      ZIGBEE_EUI64_HEX_STR_LENGTH,
-                                      SL_STATUS_OK);
-  zigbee_eui64_to_str_IgnoreArg_str_buf();
-  zigbee_eui64_to_str_ReturnArrayThruPtr_str_buf(TEST_PC_EUI64_STR,
-                                                 strlen(TEST_PC_EUI64_STR) + 1);
+  zigbee_eui64_to_uint_ExpectAndReturn(test_eui64_be, eui64_uint_be);
 
   zigpc_observable_notify_ExpectAndReturn(&zigpc_gateway_observable,
                                           ZIGPC_GATEWAY_NOTIFY_NODE_REMOVED,
@@ -345,7 +326,7 @@ void test_zigpc_gateway_node_removed_should_call_common_notify(void)
   zigpc_observable_notify_IgnoreArg_data();
 
   // ACT
-  zigpc_gateway_hdl_on_node_removed(test_eui64);
+  zigpc_gateway_hdl_on_node_removed(test_eui64_le);
 
   // ASSERT (Handled by CMock)
 }

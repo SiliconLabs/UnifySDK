@@ -108,6 +108,14 @@ enum zigpc_gateway_notify_event {
   ZIGPC_GATEWAY_NOTIFY_READ_ATTRIBUTE_RESPONSE,
 
   /**
+   * @brief Used when handling a configure reporting response.
+   * The protocol controller sends out a configure reporting message
+   * to clusters for expected attributes. The destination node responds
+   * with a 'configure reporting response' ZCL message
+  **/ 
+  ZIGPC_GATEWAY_NOTIFY_CONFIGURE_REPORTING_RESPONSE,
+
+  /**
    * @brief Used when a node on the Gateway has received a ZCL command frame
    * from a node on the network. see zigpc_gateway_on_command_received_t for
    * associated data.

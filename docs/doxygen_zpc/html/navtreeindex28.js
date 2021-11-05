@@ -1,5 +1,6 @@
 var NAVTREEINDEX28 =
 {
+"zwave__api__demo__commands_8c.html#af65135a0a7dc83101128e2a73d4373c3":[19,0,0,0,0,1,1,5,27],
 "zwave__api__demo__commands_8c.html#af766cec3395e596e458c07df1583a32d":[19,0,0,0,0,1,1,5,14],
 "zwave__api__demo__commands_8c.html#afe5b1db9984cd6012ec76daac090bd80":[19,0,0,0,0,1,1,5,17],
 "zwave__api__demo__commands_8h.html":[19,0,0,0,0,1,1,6],
@@ -248,6 +249,5 @@ var NAVTREEINDEX28 =
 "zwave__command__class__notification__types_8h.html#a419bca38c28cf5cabb34139f3615843c":[19,0,0,0,1,15,2,26,43],
 "zwave__command__class__notification__types_8h.html#a421587ef3339dfb37369543e8eb00c7f":[19,0,0,0,1,15,2,26,67],
 "zwave__command__class__notification__types_8h.html#a427e61a3c84897b7efa584e5c782db6c":[19,0,0,0,1,15,2,26,105],
-"zwave__command__class__notification__types_8h.html#a46519f46bf0f956ad0cda32d86cc5362":[19,0,0,0,1,15,2,26,41],
-"zwave__command__class__notification__types_8h.html#a46901e2a6aeecc93afe6a525452136e9":[19,0,0,0,1,15,2,26,80]
+"zwave__command__class__notification__types_8h.html#a46519f46bf0f956ad0cda32d86cc5362":[19,0,0,0,1,15,2,26,41]
 };

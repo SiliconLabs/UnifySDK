@@ -21,7 +21,6 @@
 #include "gateway_sleepy_queue.h"
 
 //quality of life typedefs
-typedef zigpc_gateway_dispatch_zcl_frame_t gateway_frame_t;
 typedef std::queue<gateway_frame_t> sleepy_message_list_t;
 
 //use the string rep of an eui64 as the key
@@ -59,11 +58,15 @@ sl_status_t zigpc_gateway_retrieve_sleepy_frame(const zigbee_eui64_t eui64,
     auto found_device = sleepy_device_map.find(eui64_str);
 
     if (found_device != sleepy_device_map.end()) {
-      gateway_frame_t next_frame = found_device->second.front();
-      memcpy(frame, &next_frame, sizeof(gateway_frame_t));
-      found_device->second.pop();  //remove next_frame
+      if (!found_device->second.empty()) {
+        gateway_frame_t next_frame = found_device->second.front();
+        memcpy(frame, &next_frame, sizeof(gateway_frame_t));
+        found_device->second.pop();  //remove next_frame
 
-      status = SL_STATUS_OK;
+        status = SL_STATUS_OK;
+      } else {
+        status = SL_STATUS_EMPTY;
+      }
     } else {
       status = SL_STATUS_EMPTY;
     }

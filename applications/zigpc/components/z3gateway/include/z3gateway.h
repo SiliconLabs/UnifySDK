@@ -24,7 +24,6 @@
 #define Z3GATEWAY_H
 
 #include "z3gateway_callbacks.h"
-#include "app/util/ezsp/ezsp-enum.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -135,6 +134,36 @@ EmberStatus z3gatewayDeviceTableClear(void);
  * @return uint16_t     Number of device-table entries.
  */
 uint16_t z3gatewayDeviceTableCount(void);
+
+/**
+ * @brief Add new EUI64 to NodeId mapping to the EmberAf address-table plugin.
+ *
+ * NOTE: The address-table is stored on RAM in the NCP (where the NodeId is
+ * retrieved/set). Therefore on NCP reset, the address-table on the NCP will
+ * be cleared.
+ *
+ * @param eui64         Device identifier
+ * @param nodeId        Device network-based identifier
+ * @return EmberStatus EMBER_SUCCESS on successfully adding mapping,
+ * EMBER_BAD_ARGUMENT on any invalid arguments provided,
+ * EMBER_INVALID_CALL if the EUI64 is not tracked by the address-table plugin.
+ */
+EmberStatus z3gatewayAddAddressTableEntry(const EmberEUI64 eui64,
+                                          const EmberNodeId nodeId);
+
+/**
+ * @brief Retrieve the NodeId for the EUI64 provided from the address-table
+ * plugin.
+ *
+ * @param eui64         Device identifier to lookup.
+ * @param nodeId        Reference to network-based identifier to populate,
+ *                      EMBER_UNKNOWN_NODE_ID populated if not found.
+ * @return EmberStatus  EMBER_SUCCESS on successfully retrieving NodeId,
+ * EMBER_BAD_ARGUMENT on any invalid arguments provided,
+ * EMBER_INVALID_CALL if the EUI64 is not tracked by the address-table plugin.
+ */
+EmberStatus z3gatewayGetAddressTableEntry(const EmberEUI64 eui64,
+                                          EmberNodeId *const nodeId);
 
 /**
  * @brief Get the current count of cluster list used by the the device-table

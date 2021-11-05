@@ -34,90 +34,20 @@ static const char LOG_TAG[] = "zigpc_gateway";
 #define ZIGPC_GATEWAY_STORE_DEVICE_TABLE_SIZE_KEY "zigpc_gsdk_dt_size"
 #define ZIGPC_GATEWAY_STORE_DEVICE_TABLE_CLUSTER_ARR_KEY \
   "zigpc_gsdk_dt_clusters"
-
-#define ZIGPC_GATEWAY_NOTIFICATIONS_MAX (10)
-
-enum zigpc_gateway_dispatch_type {
-  ZIGPC_GW_DISPATCH_MIN_VAL = 0,
-  ZIGPC_GW_DISPATCH_NETWORK_INIT,
-  ZIGPC_GW_DISPATCH_PERMIT_JOINS,
-  ZIGPC_GW_DISPATCH_ADD_NODE_INSTALL_CODE,
-  ZIGPC_GW_DISPATCH_INTERVIEW_NODE,
-  ZIGPC_GW_DISPATCH_REMOVE_NODE,
-  ZIGPC_GW_DISPATCH_MAX_VAL,
-};
-
-typedef struct {
-  bool send_as_multicast;
-  zigbee_multicast_id_t multicast_id;
-  zigbee_eui64_t eui64;
-  zigbee_endpoint_id_t endpoint_id;
-  zcl_cluster_id_t cluster_id;
-  zcl_frame_t frame;
-} zigpc_gateway_dispatch_zcl_frame_t;
-
-typedef struct {
-  zigbee_eui64_t eui64;
-  uint8_t endpoint_id;
-  zcl_cluster_id_t cluster_id;
-  uint8_t *report_record;
-  unsigned int record_size;
-} zigpc_gateway_dispatch_init_report_t;
-
-typedef struct {
-  zigbee_eui64_t eui64;
-  uint8_t endpoint_id;
-  zcl_cluster_id_t cluster_id;
-} zigpc_gateway_dispatch_bind_request_t;
-
-struct zigpc_gateway_dispatch_add_node {
-  zigbee_eui64_t eui64;
-  zigbee_install_code_t install_code;
-  uint8_t install_code_length;
-};
+#define ZIGPC_GATEWAY_NODEID_LIST_KEY  "zb_nodeid_list"
+#define ZIGPC_GATEWAY_NODEID_COUNT_KEY "zb_nodeid_count"
 
 /**
- * @brief Data for permitting joins to the Zigbee network.
+ * @brief Container to hold Zigbee device address entries.
+ *
+ * A Zigbee device can be addressed using the long ID (EUI64) or the short
+ * ID (NodeId). This container maps these entries.
  *
  */
 typedef struct {
-  bool enable;
-} zigpc_gateway_dispatch_permit_joins_t;
-
-/**
- * @brief Data for processing node removal.
- *
- */
-typedef struct {
-  zigbee_eui64_t eui64;
-} zigpc_gateway_dispatch_remove_node_t;
-
-/**
- * @brief Data for processing node interview
- *
- */
-typedef struct {
-  zigbee_eui64_t eui64;
-} zigpc_gateway_dispatch_interview_node_t;
-
-typedef struct {
-    char filename[ZCL_DEFAULT_STR_LENGTH];
-    unsigned int filename_size;
-} zigpc_gateway_dispatch_add_ota_image_t;
-
-/**
- * @brief Data container for dispatch events
- *
- */
-struct zigpc_gateway_dispatch_event {
-  enum zigpc_gateway_dispatch_type type;
-  union {
-    struct zigpc_gateway_dispatch_add_node add_node;
-    zigpc_gateway_dispatch_remove_node_t remove_node;
-    zigpc_gateway_dispatch_interview_node_t interview_node;
-    zigpc_gateway_dispatch_permit_joins_t permit_joins;
-  };
-};
+  EmberEUI64 eui64;
+  EmberNodeId node_id;
+} __attribute__((__packed__)) zigpc_gateway_addr_entry_t;
 
 extern struct z3gatewayCallbacks zigpc_gateway_z3gateway_callbacks;
 
@@ -137,62 +67,22 @@ extern struct zigpc_observable zigpc_gateway_observable;
  */
 sl_status_t zigpc_gateway_reset_observers(void);
 
-/*
- * Internal API for dispatch system
+/**
+ * @brief Z3Gatway callback handler to be called before NCP resets.
+ *
+ * @param resetStatus   The EZSP reset reason.
  */
+void zigpc_gateway_on_ncp_pre_reset(EzspStatus resetStatus);
 
 /**
- * @brief Forward events received to z3gateway
+ * @brief Z3GAteway callback handler called after NCP resets and is going
+ * through initialization.
  *
- * @param event             Dispatch event structure
+ * @param ncpMemConfigureStage  Flag to indicate NCP configuration stages. TRUE
+ * if only memory-configure EZSP messages are accepted at this stage; FALSE if
+ * only non-memory-configure EZSP messaged are accepted by the NCP.
  */
-sl_status_t zigpc_gateway_dispatch(struct zigpc_gateway_dispatch_event *event);
-
-/**
- * @brief Return string representation of dispatch type
- *
- * @param type              Dispatch type
- * @return const char*      String representation of dispatch type.
- */
-const char *
-  zigpc_gateway_dispatch_name(const enum zigpc_gateway_dispatch_type type);
-
-/**
- * @brief zigpc_gateway_dispatch_zcl_frame
- * Dispatches a ZCL command to be processed by the z3gateway, and sent out
- * on to the zigbee network
- *
- * @param zcl_data -a structure containing all the information required to
- *                  send a ZCL command
- *
- * @return the status if the command was successfully parsed and sent
-**/
-sl_status_t zigpc_gateway_dispatch_zcl_frame(
-  const zigpc_gateway_dispatch_zcl_frame_t *zcl_data);
-
-/**
- * @brief zigpc_gateway_dispatch_init_reports
- * Dispatches a ZCL configure reports command to a given endpoint
- *
- * @param report_data -a structure containing all the information required to
- *                  send a ZCL configure reports command
- *
- * @return the status if the command was successfully parsed and sent
-**/
-sl_status_t zigpc_gateway_dispatch_init_reports(
-  zigpc_gateway_dispatch_init_report_t *report_data);
-
-/**
- * @brief zigpc_gateway_dispatch_config_binding
- * Dispatches a Zigbee message to request to configure a binding on an endpoint
- *
- * @param binding_data -a structure containing all the information required to
- *                  send a zigbee bind request
- *
- * @return the status if the command was successfully parsed and sent
-**/
-sl_status_t zigpc_gateway_dispatch_config_binding(
-  zigpc_gateway_dispatch_bind_request_t *binding_data);
+void zigpc_gateway_on_ncp_post_reset(bool ncpMemConfigureStage);
 
 /**
  * @brief Retrieve persisted information related to Z3Gateway and ZigPC Gateway
@@ -205,7 +95,7 @@ sl_status_t zigpc_gateway_dispatch_config_binding(
  * @return sl_status_t SL_STATUS_OK if all information was loaded from datastore
  * successfully, error status if not.
  */
-sl_status_t zigpc_gateway_load_from_datastore(void);
+sl_status_t zigpc_gateway_load_device_table_info(void);
 
 /**
  * @brief Persist information related to Z3Gateway and ZigPC Gateway to the
@@ -219,10 +109,46 @@ sl_status_t zigpc_gateway_load_from_datastore(void);
  * @return sl_status_t SL_STATUS_OK if all information was store to datastore
  * successfully, error status if not.
  */
-sl_status_t zigpc_gateway_save_to_datastore(void);
+sl_status_t zigpc_gateway_persist_device_table_info(void);
 
-sl_status_t zigpc_gateway_dispatch_ota_image(
-        const zigpc_gateway_dispatch_add_ota_image_t *ota_image_data);
+/**
+ * @brief Load EUI64 to NodeId device ID mappings.
+ * This function loads all perisisted EUI64 to NodeId mappings (retrieved from
+ * ZigPC datastore) to-be tracked in EmberAf address-table plugin.
+ *
+ * @return sl_status_t SL_STATUS_OK on successfully loading each mapping,
+ * error in reading/loading otherwise.
+ */
+sl_status_t zigpc_gateway_load_address_table_info(void);
+
+/**
+ * @brief Persist EUI64 to NodeId device ID mappings.
+ * This function stores all EUI64 to NodeId mappings from the EmberAf
+ * address-table plugin into the ZigPC datstore.
+ *
+ * @return sl_status_t SL_STATUS_OK on successfully persisting each mapping,
+ * error in getting/persisting otherwise.
+ */
+sl_status_t zigpc_gateway_persist_address_table_info(void);
+
+/**
+ * @brief Wrapper function to load information to both EmberAf device-table and
+ * address-table plugins. Refer to zigpc_gateway_load_device_table_info and
+ * zigpc_gateway_load_address_table_info for more information.
+ *
+ * @return sl_status_t SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t zigpc_gateway_load_from_datastore(void);
+
+/**
+ * @brief Wrapper function to store information from both EmberAf device-table and
+ * address-table plugins into the datastore. Refer to
+ * zigpc_gateway_persist_device_table_info and
+ * zigpc_gateway_persist_address_table_info for more information.
+ *
+ * @return sl_status_t SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t zigpc_gateway_persist_to_datastore(void);
 
 /**
  * @brief zigpc_gateway_unload_sleepy_messages

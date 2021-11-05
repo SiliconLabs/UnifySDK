@@ -24,7 +24,6 @@
 #include "zigpc_diagnostics.h"
 #include "zigpc_smartstart_fixt.h"
 #include "zigpc_ucl_fixt.h"
-#include "zigpc_node_state.h"
 #include "attribute_management_process.h"
 #include "zigpc_controller.h"
 #include "zigpc_group_mgmt.h"
@@ -42,28 +41,27 @@
  * and starting the contiki processes.
  */
 static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
-  {zigpc_config_fixt_setup, "ZIGPC Config"},
+  {zigpc_config_fixt_setup, "ZigPC Config"},
   /**
    * The data-store component depends on the config component for
    * database location.
    */
   {datastore_fixt_setup, "Datastore"},
   {attribute_store_init, "Attribute store"},
-  {zigpc_gateway_process_setup, "ZIGPC Gateway"},
+  {zigpc_gateway_process_setup, "ZigPC Gateway"},
   {zigpc_zclcmdparse_setup, "ZigPC ZCL Command Parser"},
   {zigpc_zcl_profiles_init, "ZigPC ZCL Profiles"},
-  {zigpc_net_mgmt_process_setup, "ZIGPC Network Management"},
-  {zigpc_command_mapper_setup, "ZIGPC Command Mapper"},
-  {zigpc_node_state_setup, "ZIGPC Node State Monitor"},
-  {zigpc_smartstart_setup, "ZIGPC SmartStart"},
-  {attribute_management_setup, "ZIGPC Attribute Management"},
+  {zigpc_net_mgmt_process_setup, "ZigPC Network Management"},
+  {attribute_management_setup, "ZigPC Attribute Management"},
+  {zigpc_command_mapper_setup, "ZigPC Command Mapper"},
+  {zigpc_smartstart_setup, "ZigPC SmartStart"},
+  {zigpc_ota_init, "ZigPC OTA"},
   {zigpc_ctrl_fixt_setup, "ZigPC Controller"},
   {zigpc_diagnostics_init_fixt, " ZigPC Diagnostics"},
-  {zigpc_ucl_fixt_setup, "ZIGPC UCL Util"},
+  {zigpc_ucl_fixt_setup, "ZigPC UCL Util"},
   {uic_mqtt_dotdot_init, " DotDot MQTT Translator"},
-  {zigpc_group_init, "Zigpc Groups Management"},
+  {zigpc_group_init, "ZigPC Groups Management"},
   {zigpc_stdin_setup_fixt, "ZigPC STDIN"},
-  {zigpc_ota_init, "Zigpc OTA"},
   {NULL, "Terminator"},
 };
 
@@ -75,14 +73,13 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
  * been stopped.
  */
 static uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[] = {
-  {zigpc_ucl_fixt_shutdown, "ZIGPC UCL Util"},
-  {zigpc_smartstart_shutdown, "ZIGPC SmartStart"},
-  {zigpc_node_state_shutdown, "ZIGPC Node State Monitor"},
-  {zigpc_net_mgmt_process_shutdown, "ZIGPC Network Management"},
-  {zigpc_gateway_process_shutdown, "ZIGPC Gateway"},
-  {zigpc_command_mapper_shutdown, "ZIGPC Command Mapper"},
-  {attribute_management_shutdown, "ZIGPC Attribute Management"},
+  {zigpc_ucl_fixt_shutdown, "ZigPC UCL Util"},
   {zigpc_ctrl_fixt_shutdown, "ZigPC Controller"},
+  {zigpc_smartstart_shutdown, "ZigPC SmartStart"},
+  {zigpc_command_mapper_shutdown, "ZigPC Command Mapper"},
+  {attribute_management_shutdown, "ZigPC Attribute Management"},
+  {zigpc_net_mgmt_process_shutdown, "ZigPC Network Management"},
+  {zigpc_gateway_process_shutdown, "ZigPC Gateway"},
   {attribute_store_teardown, "Attribute store"},
   {datastore_fixt_teardown, "Datastore"},
   {NULL, "Terminator"},

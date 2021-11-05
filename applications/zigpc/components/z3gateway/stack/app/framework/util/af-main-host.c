@@ -357,10 +357,6 @@ void emAfResetAndInitNCP(void)
   ezspGetRandomNumber(&seed1);
   halStackSeedRandom(((uint32_t)seed1 << 16) | (uint32_t)seed0);
 
-  emberAfSetEzspConfigValue(EZSP_CONFIG_SECURITY_LEVEL,
-                            EMBER_SECURITY_LEVEL,
-                            "security level");
-
   // set the address table size
   emberAfSetEzspConfigValue(EZSP_CONFIG_ADDRESS_TABLE_SIZE,
                             EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE,
@@ -370,11 +366,6 @@ void emAfResetAndInitNCP(void)
   emberAfSetEzspConfigValue(EZSP_CONFIG_TRUST_CENTER_ADDRESS_CACHE_SIZE,
                             EMBER_AF_PLUGIN_ADDRESS_TABLE_TRUST_CENTER_CACHE_SIZE,
                             "TC addr cache");
-
-  // the stack profile is defined in the config file
-  emberAfSetEzspConfigValue(EZSP_CONFIG_STACK_PROFILE,
-                            EMBER_STACK_PROFILE,
-                            "stack profile");
 
   // BUG 14222: If stack profile is 2 (ZigBee Pro), we need to enforce
   // the standard stack configuration values for that feature set.
@@ -913,12 +904,7 @@ void ezspErrorHandler(EzspStatus status)
   emberAfCorePrintln("ERROR: ezspErrorHandler 0x%x", status);
   emberAfCoreFlush();
 
-  // Rather than detect whether or not we can recover from the error,
-  // we just flag the NCP for reboot.
-  // Do not reset if this is a decryption failure, as we ignored the packet.
-  if (status != EZSP_ERROR_SECURITY_PARAMETERS_INVALID) {
-    ncpNeedsResetAndInit = true;
-  }
+  ncpNeedsResetAndInit = emberAfPluginZclFrameworkCoreEzspErrorCallback(status);
 }
 
 EmberStatus emAfSend(EmberOutgoingMessageType type,

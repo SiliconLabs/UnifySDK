@@ -3,23 +3,19 @@ var group__zigpc__datastore =
     [ "ZigPC datastore accessor templates.", "group__zigpc__datastore__accessor.html", "group__zigpc__datastore__accessor" ],
     [ "ZigPC datastore node identifiers.", "group__zigpc__datastore__id.html", "group__zigpc__datastore__id" ],
     [ "ZigPC datastore utility functions.", "group__zigpc__datastore__util.html", "group__zigpc__datastore__util" ],
-    [ "zigpc_network_data_t", "structzigpc__network__data__t.html", [
-      [ "ext_panid", "structzigpc__network__data__t.html#a49fabfe847c986cee315271d2fc83b25", null ],
-      [ "gateway_eui64", "structzigpc__network__data__t.html#ad1fa9c2d10d0d6b10c2824d581add5fd", null ],
-      [ "panid", "structzigpc__network__data__t.html#a288c7a1e8b5c6b20b68c7278cf7121d4", null ],
-      [ "radio_channel", "structzigpc__network__data__t.html#ad10672993ee9c94619dba9e16821715b", null ]
-    ] ],
-    [ "zigpc_device_data_t", "structzigpc__device__data__t.html", [
-      [ "endpoint_discovered_count", "structzigpc__device__data__t.html#ac728de7057a4b95cbcceef4fb0d175a6", null ],
-      [ "endpoint_total_count", "structzigpc__device__data__t.html#a73e478d209c4788a684d5bd3a6bfc089", null ],
-      [ "max_cmd_delay", "structzigpc__device__data__t.html#a389e1e3fca1c5bcbcba7195fad493556", null ],
-      [ "network_status", "structzigpc__device__data__t.html#aa7efbeede361c4ad57a4476782365662", null ]
-    ] ],
-    [ "zigpc_endpoint_data_t", "structzigpc__endpoint__data__t.html", [
-      [ "zcl_version", "structzigpc__endpoint__data__t.html#adc1691c3703383d2eb2720057b2ccfc0", null ]
-    ] ],
-    [ "zigpc_cluster_data_t", "structzigpc__cluster__data__t.html", [
-      [ "dummy", "structzigpc__cluster__data__t.html#acccb165a85bf787d5df2ee0d5c205ea9", null ]
+    [ "__attribute__", "struct____attribute____.html", [
+      [ "dummy", "struct____attribute____.html#ae0b7746cd2a5ecc22d8875fa742406e7", null ],
+      [ "endpoint_discovered_count", "struct____attribute____.html#a125987996db5dff05507bd41a5a71e66", null ],
+      [ "endpoint_total_count", "struct____attribute____.html#a9a4a3971d46b0a958c75f432bf14f698", null ],
+      [ "eui64", "struct____attribute____.html#a0e8274835532a4a006c46775e55bca90", null ],
+      [ "ext_panid", "struct____attribute____.html#a17ece35a0a288a71e581ad13060c5a08", null ],
+      [ "gateway_eui64", "struct____attribute____.html#aab3283ffa89d1092d571b22570fbd9ad", null ],
+      [ "max_cmd_delay", "struct____attribute____.html#aecbf6347e41dee3f8b6f8a306f1f9ebe", null ],
+      [ "network_status", "struct____attribute____.html#a1885800ba3f2f6f1ae53753165a6cfe4", null ],
+      [ "node_id", "struct____attribute____.html#a62568509d69b4cbeb68d00f3f37423d7", null ],
+      [ "panid", "struct____attribute____.html#a9244fa8defd1aeb3002f77150afd9db1", null ],
+      [ "radio_channel", "struct____attribute____.html#aaea3dad6b8bc3039382e3eaa4fc01bb2", null ],
+      [ "zcl_version", "struct____attribute____.html#ad8ae956dcee71dfb05afa7440f6f5d92", null ]
     ] ],
     [ "zigpc_datastore_contains_cluster", "group__zigpc__datastore.html#ga10faddb37f581f12a69757138e00be40", null ],
     [ "zigpc_datastore_create_cluster", "group__zigpc__datastore.html#ga44a4a17d7ceab908db272ee0743d3719", null ],

@@ -32,3 +32,14 @@ target_add_unittest(
   zigpc_zcl_util_mock
   uic_dotdot_mqtt_mock
   zigpc_gateway_mock)
+
+target_add_unittest(
+  zigpc_attribute_management
+  NAME
+  zigpc_attrmgmt_poll_test
+  SOURCES
+  zigpc_attrmgmt_poll_test.cpp
+  DEPENDS
+  zigpc_zcl_profiles_mock
+  zigpc_zcl_util_mock
+  zigpc_gateway_mock)

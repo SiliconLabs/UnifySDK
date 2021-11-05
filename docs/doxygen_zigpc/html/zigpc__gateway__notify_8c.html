@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -90,12 +90,12 @@ $(document).ready(function(){initNavTree('zigpc__gateway__notify_8c.html',''); i
 <div class="title">zigpc_gateway_notify.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;inttypes.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="sl__log_8h_source.html">sl_log.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="sl__status_8h_source.html">sl_status.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="zigpc__common__observable_8h_source.html">zigpc_common_observable.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="zigpc__config_8h_source.html">zigpc_config.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__gateway__notify_8h_source.html">zigpc_gateway_notify.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__gateway__int_8h_source.html">zigpc_gateway_int.h</a>&quot;</code><br />
 </div><table class="memberdecls">
@@ -110,8 +110,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a5371574a72a1699d59610137e0359d0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__notify_8c.html#a5371574a72a1699d59610137e0359d0a">zigpc_gateway_reset_observers</a> (void)</td></tr>
 <tr class="memdesc:a5371574a72a1699d59610137e0359d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear registered observers.  <a href="zigpc__gateway__notify_8c.html#a5371574a72a1699d59610137e0359d0a">More...</a><br /></td></tr>
 <tr class="separator:a5371574a72a1699d59610137e0359d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d85694a6fcfd1380f8c5cc4952eaf5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__notify_8c.html#a5d85694a6fcfd1380f8c5cc4952eaf5f">zigpc_gateway_hdl_on_emberaf_stack_init</a> (void)</td></tr>
-<tr class="separator:a5d85694a6fcfd1380f8c5cc4952eaf5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acec8715f227f171437127ccc57590692"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__notify_8c.html#acec8715f227f171437127ccc57590692">zigpc_gateway_hdl_on_network_initialized</a> (const EmberEUI64 eui64_le, const EmberNetworkParameters *network)</td></tr>
 <tr class="memdesc:acec8715f227f171437127ccc57590692"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z3Gateway handler for network initialization.  <a href="zigpc__gateway__notify_8c.html#acec8715f227f171437127ccc57590692">More...</a><br /></td></tr>
 <tr class="separator:acec8715f227f171437127ccc57590692"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,6 +132,8 @@ Functions</h2></td></tr>
 <tr class="separator:a016a97b42336ac830c1ce8bc74338c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff73133dc0959a8ff964e168c82e9bdd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__notify_8c.html#aff73133dc0959a8ff964e168c82e9bdd">zigpc_gateway_hdl_on_read_attributes</a> (const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t *attribute_status_records, uint16_t attribute_status_records_size)</td></tr>
 <tr class="separator:aff73133dc0959a8ff964e168c82e9bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6372fc6b111809f3a5320e396ebf0696"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__notify_8c.html#a6372fc6b111809f3a5320e396ebf0696">zigpc_gateway_hdl_on_configure_response</a> (const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t *attribute_status_records, uint16_t attribute_status_records_size)</td></tr>
+<tr class="separator:a6372fc6b111809f3a5320e396ebf0696"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97fb17b434befa16e81ae752dde2d06a"><td class="memItemLeft" align="right" valign="top">EmberAfStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__notify_8c.html#a97fb17b434befa16e81ae752dde2d06a">zigpc_gateway_hdl_on_cmd_received</a> (const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t commandId, bool commandFromServerToClient, const uint8_t *buffer, uint16_t bufferLength, uint8_t bufferPayloadStartIndex)</td></tr>
 <tr class="separator:a97fb17b434befa16e81ae752dde2d06a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47c190c848ffe4c173c68bebf3f8aa8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__gateway__notify_8c.html#a47c190c848ffe4c173c68bebf3f8aa8c">zigpc_gateway_hdl_on_ota_update_started</a> (const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, <a class="el" href="classuint32__t.html">uint32_t</a> firmwareVersion)</td></tr>
@@ -214,18 +214,46 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d85694a6fcfd1380f8c5cc4952eaf5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d85694a6fcfd1380f8c5cc4952eaf5f">&#9670;&nbsp;</a></span>zigpc_gateway_hdl_on_emberaf_stack_init()</h2>
+<a id="a6372fc6b111809f3a5320e396ebf0696"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6372fc6b111809f3a5320e396ebf0696">&#9670;&nbsp;</a></span>zigpc_gateway_hdl_on_configure_response()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void zigpc_gateway_hdl_on_emberaf_stack_init </td>
+          <td class="memname">void zigpc_gateway_hdl_on_configure_response </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const EmberEUI64&#160;</td>
+          <td class="paramname"><em>eui64_le</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>endpoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>clusterId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>attribute_status_records</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>attribute_status_records_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -649,7 +677,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">  .onEmberAfStackInitalized        = <a class="code" href="zigpc__gateway__notify_8c.html#a5d85694a6fcfd1380f8c5cc4952eaf5f">zigpc_gateway_hdl_on_emberaf_stack_init</a>,</div>
+<div class="line">  .onEmberAfStackInitalized        = <a class="code" href="group__list.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>,</div>
+<div class="line">  .onEmberAfNcpPreReset            = <a class="code" href="zigpc__gateway__int_8h.html#ad4feca132525484b77e8f459fee96919">zigpc_gateway_on_ncp_pre_reset</a>,</div>
+<div class="line">  .onEmberAfNcpPostReset           = <a class="code" href="zigpc__gateway__int_8h.html#a11da79547bde8599599d73ffffeed1ed">zigpc_gateway_on_ncp_post_reset</a>,</div>
 <div class="line">  .onTrustCenterInitialized        = <a class="code" href="zigpc__gateway__notify_8c.html#acec8715f227f171437127ccc57590692">zigpc_gateway_hdl_on_network_initialized</a>,</div>
 <div class="line">  .onTrustCenterDeviceJoinStart    = <a class="code" href="zigpc__gateway__notify_8c.html#a948d023262f3eb9db161220ced2dcd15">zigpc_gateway_hdl_on_node_add_start</a>,</div>
 <div class="line">  .onTrustCenterDeviceJoinComplete = <a class="code" href="zigpc__gateway__notify_8c.html#a393eb3eaa2bf2115a6f3b5c55d211cf5">zigpc_gateway_hdl_on_node_add_complete</a>,</div>
@@ -657,34 +687,38 @@ Variables</h2></td></tr>
 <div class="line">  .onTrustCenterDeviceDiscovered   = <a class="code" href="zigpc__gateway__notify_8c.html#a535e803392446e55a4256f46bea49d1c">zigpc_gateway_hdl_on_node_discovered</a>,</div>
 <div class="line">  .onTrustCenterDeviceEndpointDiscovered</div>
 <div class="line">  = <a class="code" href="zigpc__gateway__notify_8c.html#ae37197c3cb65b440bdf1179ecd363981">zigpc_gateway_hdl_on_node_endpoint_discovered</a>,</div>
-<div class="line">  .onReportedAttributeChange = <a class="code" href="zigpc__gateway__notify_8c.html#a016a97b42336ac830c1ce8bc74338c57">zigpc_gateway_hdl_on_reported_attribute</a>,</div>
-<div class="line">  .onReadAttributesResponse  = <a class="code" href="zigpc__gateway__notify_8c.html#aff73133dc0959a8ff964e168c82e9bdd">zigpc_gateway_hdl_on_read_attributes</a>,</div>
-<div class="line">  .onClusterCommandReceived  = <a class="code" href="zigpc__gateway__notify_8c.html#a97fb17b434befa16e81ae752dde2d06a">zigpc_gateway_hdl_on_cmd_received</a>,</div>
-<div class="line">  .onOtaUpdateStarted        = <a class="code" href="zigpc__gateway__notify_8c.html#a47c190c848ffe4c173c68bebf3f8aa8c">zigpc_gateway_hdl_on_ota_update_started</a>,</div>
-<div class="line">  .onOtaUpdateCompleted      = <a class="code" href="zigpc__gateway__notify_8c.html#aac512f737b3dc13fab3e5f18ef7e4a63">zigpc_gateway_hdl_on_ota_update_completed</a>,</div>
+<div class="line">  .onReportedAttributeChange    = <a class="code" href="zigpc__gateway__notify_8c.html#a016a97b42336ac830c1ce8bc74338c57">zigpc_gateway_hdl_on_reported_attribute</a>,</div>
+<div class="line">  .onReadAttributesResponse     = <a class="code" href="zigpc__gateway__notify_8c.html#aff73133dc0959a8ff964e168c82e9bdd">zigpc_gateway_hdl_on_read_attributes</a>,</div>
+<div class="line">  .onConfigureReportingResponse = <a class="code" href="zigpc__gateway__notify_8c.html#a6372fc6b111809f3a5320e396ebf0696">zigpc_gateway_hdl_on_configure_response</a>,</div>
+<div class="line">  .onClusterCommandReceived     = <a class="code" href="zigpc__gateway__notify_8c.html#a97fb17b434befa16e81ae752dde2d06a">zigpc_gateway_hdl_on_cmd_received</a>,</div>
+<div class="line">  .onOtaUpdateStarted           = <a class="code" href="zigpc__gateway__notify_8c.html#a47c190c848ffe4c173c68bebf3f8aa8c">zigpc_gateway_hdl_on_ota_update_started</a>,</div>
+<div class="line">  .onOtaUpdateCompleted         = <a class="code" href="zigpc__gateway__notify_8c.html#aac512f737b3dc13fab3e5f18ef7e4a63">zigpc_gateway_hdl_on_ota_update_completed</a>,</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="azigpc__gateway__notify_8c_html_a016a97b42336ac830c1ce8bc74338c57"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a016a97b42336ac830c1ce8bc74338c57">zigpc_gateway_hdl_on_reported_attribute</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_reported_attribute(const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t *attribute_status_records, uint16_t attribute_status_records_size)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:316</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_acec8715f227f171437127ccc57590692"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#acec8715f227f171437127ccc57590692">zigpc_gateway_hdl_on_network_initialized</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_network_initialized(const EmberEUI64 eui64_le, const EmberNetworkParameters *network)</div><div class="ttdoc">Z3Gateway handler for network initialization.</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:99</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_a47c190c848ffe4c173c68bebf3f8aa8c"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a47c190c848ffe4c173c68bebf3f8aa8c">zigpc_gateway_hdl_on_ota_update_started</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_ota_update_started(const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, uint32_t firmwareVersion)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:480</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_a925c0faa93fb1b1b55abd8ea891116e2"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a925c0faa93fb1b1b55abd8ea891116e2">zigpc_gateway_hdl_on_node_removed</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_removed(const EmberEUI64 eui64_le)</div><div class="ttdoc">Notify handler for device removal complete callback.</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:182</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_a948d023262f3eb9db161220ced2dcd15"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a948d023262f3eb9db161220ced2dcd15">zigpc_gateway_hdl_on_node_add_start</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_add_start(const EmberEUI64 eui64_le)</div><div class="ttdoc">Z3Gateway callback handler when a node has started joining the network. This handler will notify any ...</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:127</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_aac512f737b3dc13fab3e5f18ef7e4a63"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#aac512f737b3dc13fab3e5f18ef7e4a63">zigpc_gateway_hdl_on_ota_update_completed</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, uint32_t firmwareVersion, EmberAfStatus otaStatus)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:511</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_a393eb3eaa2bf2115a6f3b5c55d211cf5"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a393eb3eaa2bf2115a6f3b5c55d211cf5">zigpc_gateway_hdl_on_node_add_complete</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_add_complete(const EmberEUI64 eui64_le)</div><div class="ttdoc">Z3Gateway callback handler when a node has finished joining the network. This handler will notify any...</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:156</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_aff73133dc0959a8ff964e168c82e9bdd"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#aff73133dc0959a8ff964e168c82e9bdd">zigpc_gateway_hdl_on_read_attributes</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_read_attributes(const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t *attribute_status_records, uint16_t attribute_status_records_size)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:361</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_ae37197c3cb65b440bdf1179ecd363981"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#ae37197c3cb65b440bdf1179ecd363981">zigpc_gateway_hdl_on_node_endpoint_discovered</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_endpoint_discovered(const EmberEUI64 eui64_le, const struct z3gatewayEndpointInfo *endpointInfo)</div><div class="ttdoc">Notify handler for endpoint discovery containing information about clusters supported.</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:244</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_a5d85694a6fcfd1380f8c5cc4952eaf5f"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a5d85694a6fcfd1380f8c5cc4952eaf5f">zigpc_gateway_hdl_on_emberaf_stack_init</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_emberaf_stack_init(void)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:76</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_a535e803392446e55a4256f46bea49d1c"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a535e803392446e55a4256f46bea49d1c">zigpc_gateway_hdl_on_node_discovered</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_discovered(const EmberEUI64 eui64_le, uint8_t endpointCount)</div><div class="ttdoc">Notify handler for device discovery containing endpoint count.</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:210</div></div>
-<div class="ttc" id="azigpc__gateway__notify_8c_html_a97fb17b434befa16e81ae752dde2d06a"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a97fb17b434befa16e81ae752dde2d06a">zigpc_gateway_hdl_on_cmd_received</a></div><div class="ttdeci">EmberAfStatus zigpc_gateway_hdl_on_cmd_received(const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t commandId, bool commandFromServerToClient, const uint8_t *buffer, uint16_t bufferLength, uint8_t bufferPayloadStartIndex)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:411</div></div>
+<div class="ttc" id="azigpc__gateway__int_8h_html_ad4feca132525484b77e8f459fee96919"><div class="ttname"><a href="zigpc__gateway__int_8h.html#ad4feca132525484b77e8f459fee96919">zigpc_gateway_on_ncp_pre_reset</a></div><div class="ttdeci">void zigpc_gateway_on_ncp_pre_reset(EzspStatus resetStatus)</div><div class="ttdoc">Z3Gatway callback handler to be called before NCP resets.</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_a016a97b42336ac830c1ce8bc74338c57"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a016a97b42336ac830c1ce8bc74338c57">zigpc_gateway_hdl_on_reported_attribute</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_reported_attribute(const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t *attribute_status_records, uint16_t attribute_status_records_size)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:283</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_acec8715f227f171437127ccc57590692"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#acec8715f227f171437127ccc57590692">zigpc_gateway_hdl_on_network_initialized</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_network_initialized(const EmberEUI64 eui64_le, const EmberNetworkParameters *network)</div><div class="ttdoc">Z3Gateway handler for network initialization.</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:84</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_a47c190c848ffe4c173c68bebf3f8aa8c"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a47c190c848ffe4c173c68bebf3f8aa8c">zigpc_gateway_hdl_on_ota_update_started</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_ota_update_started(const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, uint32_t firmwareVersion)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:485</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_a925c0faa93fb1b1b55abd8ea891116e2"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a925c0faa93fb1b1b55abd8ea891116e2">zigpc_gateway_hdl_on_node_removed</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_removed(const EmberEUI64 eui64_le)</div><div class="ttdoc">Notify handler for device removal complete callback.</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:161</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_a948d023262f3eb9db161220ced2dcd15"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a948d023262f3eb9db161220ced2dcd15">zigpc_gateway_hdl_on_node_add_start</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_add_start(const EmberEUI64 eui64_le)</div><div class="ttdoc">Z3Gateway callback handler when a node has started joining the network. This handler will notify any ...</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:112</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_aac512f737b3dc13fab3e5f18ef7e4a63"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#aac512f737b3dc13fab3e5f18ef7e4a63">zigpc_gateway_hdl_on_ota_update_completed</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64, uint16_t manufacturerId, uint16_t imageTypeId, uint32_t firmwareVersion, EmberAfStatus otaStatus)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:510</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_a393eb3eaa2bf2115a6f3b5c55d211cf5"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a393eb3eaa2bf2115a6f3b5c55d211cf5">zigpc_gateway_hdl_on_node_add_complete</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_add_complete(const EmberEUI64 eui64_le)</div><div class="ttdoc">Z3Gateway callback handler when a node has finished joining the network. This handler will notify any...</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:138</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_aff73133dc0959a8ff964e168c82e9bdd"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#aff73133dc0959a8ff964e168c82e9bdd">zigpc_gateway_hdl_on_read_attributes</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_read_attributes(const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t *attribute_status_records, uint16_t attribute_status_records_size)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:329</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_ae37197c3cb65b440bdf1179ecd363981"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#ae37197c3cb65b440bdf1179ecd363981">zigpc_gateway_hdl_on_node_endpoint_discovered</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_endpoint_discovered(const EmberEUI64 eui64_le, const struct z3gatewayEndpointInfo *endpointInfo)</div><div class="ttdoc">Notify handler for endpoint discovery containing information about clusters supported.</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:215</div></div>
+<div class="ttc" id="agroup__list_html_ga070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="group__list.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> list.c:50</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_a535e803392446e55a4256f46bea49d1c"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a535e803392446e55a4256f46bea49d1c">zigpc_gateway_hdl_on_node_discovered</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_node_discovered(const EmberEUI64 eui64_le, uint8_t endpointCount)</div><div class="ttdoc">Notify handler for device discovery containing endpoint count.</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:186</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_a97fb17b434befa16e81ae752dde2d06a"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a97fb17b434befa16e81ae752dde2d06a">zigpc_gateway_hdl_on_cmd_received</a></div><div class="ttdeci">EmberAfStatus zigpc_gateway_hdl_on_cmd_received(const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t commandId, bool commandFromServerToClient, const uint8_t *buffer, uint16_t bufferLength, uint8_t bufferPayloadStartIndex)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:421</div></div>
+<div class="ttc" id="azigpc__gateway__notify_8c_html_a6372fc6b111809f3a5320e396ebf0696"><div class="ttname"><a href="zigpc__gateway__notify_8c.html#a6372fc6b111809f3a5320e396ebf0696">zigpc_gateway_hdl_on_configure_response</a></div><div class="ttdeci">void zigpc_gateway_hdl_on_configure_response(const EmberEUI64 eui64_le, uint8_t endpoint, uint16_t clusterId, uint8_t *attribute_status_records, uint16_t attribute_status_records_size)</div><div class="ttdef"><b>Definition:</b> zigpc_gateway_notify.c:374</div></div>
+<div class="ttc" id="azigpc__gateway__int_8h_html_a11da79547bde8599599d73ffffeed1ed"><div class="ttname"><a href="zigpc__gateway__int_8h.html#a11da79547bde8599599d73ffffeed1ed">zigpc_gateway_on_ncp_post_reset</a></div><div class="ttdeci">void zigpc_gateway_on_ncp_post_reset(bool ncpMemConfigureStage)</div><div class="ttdoc">Z3GAteway callback handler called after NCP resets and is going through initialization.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_d9c8a1816f4ea9a94746c6de1ae8e276.html">zigpc_gateway</a></li><li class="navelem"><a class="el" href="dir_1233302668cfc38a9302dcaeddaa7aed.html">src</a></li><li class="navelem"><a class="el" href="zigpc__gateway__notify_8c.html">zigpc_gateway_notify.c</a></li>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

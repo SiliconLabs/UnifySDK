@@ -154,7 +154,7 @@ sl_status_t zigpc_group_map_retrieve_grouplist(zigpc_group_member_t member,
 
   //set the fail conditions
   if ((found_member == group_map.end()) || (max_groups > num_groups)
-      || (max_groups == 0) || (groups == NULL)) {
+      || (max_groups == 0) || (groups == nullptr)) {
     status = SL_STATUS_FAIL;
   } else {
     group_data_t data_list[num_groups];
@@ -274,42 +274,56 @@ sl_status_t
 sl_status_t zigpc_group_map_retrieve_group_name(zigpc_group_member_t member,
                                                 zigbee_group_id_t group_id,
                                                 bool is_reported,
-                                                char *group_name,
-                                                size_t group_name_size)
+                                                char *const group_name,
+                                                size_t *const group_name_size)
 {
   sl_status_t status = SL_STATUS_OK;
   std::string group_name_str;
-  auto found_member = group_map.find(member);
 
-  if (found_member != group_map.end()) {
-    std::list<group_data_t> group_list;
-
-    if (is_reported) {
-      group_list = found_member->second.reported;
-    } else {
-      group_list = found_member->second.desired;
-    }
-
-    auto group_index
-      = std::find(group_list.begin(), group_list.end(), group_id);
-
-    if (group_index != group_list.end()) {
-      group_data_t data = *group_index;
-      group_name_str    = data.name;
-    } else {
-      status = SL_STATUS_NOT_FOUND;
-    }
+  if ((group_name == nullptr) || (group_name_size == nullptr)) {
+    status = SL_STATUS_NULL_POINTER;
+  } else if (*group_name_size < 1U) {
+    status = SL_STATUS_INVALID_RANGE;
   } else {
-    status = SL_STATUS_NOT_FOUND;
+    auto found_member = group_map.find(member);
+    if (found_member != group_map.end()) {
+      std::list<group_data_t> group_list;
+
+      if (is_reported) {
+        group_list = found_member->second.reported;
+      } else {
+        group_list = found_member->second.desired;
+      }
+
+      auto group_index
+        = std::find(group_list.begin(), group_list.end(), group_id);
+
+      if (group_index != group_list.end()) {
+        group_data_t data = *group_index;
+        group_name_str    = data.name;
+      } else {
+        *group_name_size = 0U;
+        status           = SL_STATUS_NOT_FOUND;
+      }
+    } else {
+      *group_name_size = 0U;
+      status           = SL_STATUS_NOT_FOUND;
+    }
   }
 
-  if ((group_name_str.empty()) && (status == SL_STATUS_OK)) {
-    status = SL_STATUS_EMPTY;
+  // Empty name handling
+  if ((status == SL_STATUS_OK) && (group_name_str.empty())) {
+    group_name[0]    = '\0';
+    *group_name_size = 0U;
+    status           = SL_STATUS_EMPTY;
   }
 
+  // Non-empty name handling
   if (SL_STATUS_OK == status) {
-    if (group_name_str.size() < group_name_size) {
-      snprintf(group_name, group_name_size, "%s", group_name_str.c_str());
+    if (group_name_str.size() < *group_name_size) {
+      // std::string is guaranteed to be null-terminated
+      strcpy(group_name, group_name_str.c_str());
+      *group_name_size = group_name_str.size();
     } else {
       status = SL_STATUS_WOULD_OVERFLOW;
     }

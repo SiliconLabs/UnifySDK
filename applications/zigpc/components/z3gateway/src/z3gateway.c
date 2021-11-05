@@ -123,3 +123,70 @@ void emberAfMainInitCallback(void)
     z3gwState.callbacks->onEmberAfStackInitalized();
   }
 }
+
+/** @brief Ncp Init
+ *
+ * This function is called when the network coprocessor is being initialized,
+ * either at startup or upon reset.  It provides applications on opportunity to
+ * perform additional configuration of the NCP.  The function is always called
+ * twice when the NCP is initialized.  In the first invocation, memoryAllocation
+ * will be true and the application should only issue EZSP commands that affect
+ * memory allocation on the NCP.  For example, tables on the NCP can be resized
+ * in the first call.  In the second invocation, memoryAllocation will be false
+ * and the application should only issue EZSP commands that do not affect memory
+ * allocation.  For example, tables on the NCP can be populated in the second
+ * call.  This callback is not called on SoCs.
+ *
+ * @param memoryAllocation   Ver.: always
+ */
+void emberAfNcpInitCallback(bool memoryAllocation)
+{
+  bool callbackExists
+    = Z3GATEWAY_CALLBACK_EXISTS(z3gwState.callbacks, onEmberAfNcpPostReset);
+  if (callbackExists) {
+    z3gwState.callbacks->onEmberAfNcpPostReset(memoryAllocation);
+  }
+}
+
+/** @brief EZSP Error Handler
+ *
+ * This callback is fired when the host process receives an error from the EZSP
+ * link when talking to the NCP. The return boolean gives the user application
+ * the option to reboot the NCP. If this function returns true, the NCP will be
+ * rebooted and the connection between the host and NCP will drop. If not, the
+ * NCP will continue operating.
+ *
+ * @param status The EzspStatus error code received.
+ *
+ * @return bool True to reset NCP, false not to.
+ *
+ * @note This callback is only fired on the host application. It has no use for
+ * SoC or NCP applications.
+ */
+bool emberAfPluginZclFrameworkCoreEzspErrorCallback(EzspStatus status)
+{
+#if defined EZSP_HOST
+  if (status == EZSP_ERROR_OVERFLOW) {
+    emberAfCorePrintln("WARNING: the NCP has run out of buffers, causing "
+                       "general malfunction. Remediate network congestion, if "
+                       "present.");
+    emberAfCoreFlush();
+  }
+
+  // Do not reset if this is a decryption failure, as we ignored the packet
+  // Do not reset for a callback overflow, as we don't want the device to reboot
+  // under stress
+  // For all other errors, we reset the NCP
+  if ((status != EZSP_ERROR_SECURITY_PARAMETERS_INVALID)
+      && (status != EZSP_ERROR_OVERFLOW)) {
+    bool callbackExists
+      = Z3GATEWAY_CALLBACK_EXISTS(z3gwState.callbacks, onEmberAfNcpPreReset);
+    if (callbackExists) {
+      z3gwState.callbacks->onEmberAfNcpPreReset(status);
+    }
+    return true;
+  }
+#endif  // EZSP_HOST
+
+  return false;
+}

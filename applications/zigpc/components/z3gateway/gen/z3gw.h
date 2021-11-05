@@ -121,7 +121,7 @@
 // Use this macro to check if Address Table plugin is included
 #define EMBER_AF_PLUGIN_ADDRESS_TABLE
 // User options for plugin Address Table
-#define EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE 2
+#define EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE 250
 #define EMBER_AF_PLUGIN_ADDRESS_TABLE_TRUST_CENTER_CACHE_SIZE 2
 
 // Use this macro to check if Concentrator Support plugin is included

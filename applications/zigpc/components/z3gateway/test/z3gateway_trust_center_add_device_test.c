@@ -161,6 +161,10 @@ void test_device_table_trust_center_join_callback_should_invoke_join_start_callb
   EmberEUI64 test_eui64 = {0x1, 0x2, 0x3, 0x4};
   callback_onTrustCenterDeviceJoinStart_Expect(test_eui64);
 
+  emberAfAddAddressTableEntry_ExpectAndReturn(test_eui64,
+                                              EMBER_UNKNOWN_NODE_ID,
+                                              EMBER_SUCCESS);
+
   // ACT
   emberAfPluginDeviceTableTrustCenterJoinCallback(test_eui64);
 

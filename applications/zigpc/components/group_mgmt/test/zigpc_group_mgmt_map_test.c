@@ -11,6 +11,8 @@
  *
  *****************************************************************************/
 
+#include <string.h>
+
 #include "unity.h"
 
 #include "zigpc_group_map.h"
@@ -240,13 +242,14 @@ void test_add_group_with_name(void)
                                                              add_member,
                                                              true);
 
-  char test_name[ZCL_DEFAULT_STR_LENGTH];
+  size_t test_name_size = ZCL_DEFAULT_STR_LENGTH;
+  char test_name[test_name_size];
   sl_status_t retrieve_name_status
     = zigpc_group_map_retrieve_group_name(add_member,
                                           add_group_id,
                                           true,
                                           test_name,
-                                          ZCL_DEFAULT_STR_LENGTH);
+                                          &test_name_size);
 
   unsigned int num_members = zigpc_group_map_get_memberlist_count(add_group_id);
   sl_status_t memberlist_status
@@ -255,6 +258,7 @@ void test_add_group_with_name(void)
   // ASSERT
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, add_status);
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, retrieve_name_status);
+  TEST_ASSERT_EQUAL(strlen(add_name), test_name_size);
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, memberlist_status);
 
   TEST_ASSERT_EQUAL(1, num_members);
@@ -288,24 +292,26 @@ void test_set_group_name_success(void)
                                                              add_member,
                                                              true);
 
-  char test_name[ZCL_DEFAULT_STR_LENGTH];
+  size_t test_name_size = ZCL_DEFAULT_STR_LENGTH;
+  char test_name[test_name_size];
   sl_status_t retrieve_name_status
     = zigpc_group_map_retrieve_group_name(add_member,
                                           add_group_id,
                                           true,
                                           test_name,
-                                          ZCL_DEFAULT_STR_LENGTH);
+                                          &test_name_size);
 
   sl_status_t set_name_status
     = zigpc_group_map_set_group_name(add_member, add_group_id, true, add_name2);
 
-  char test_name2[ZCL_DEFAULT_STR_LENGTH];
+  size_t test_name2_size = ZCL_DEFAULT_STR_LENGTH;
+  char test_name2[test_name2_size];
   sl_status_t retrieve_name_status2
     = zigpc_group_map_retrieve_group_name(add_member,
                                           add_group_id,
                                           true,
                                           test_name2,
-                                          ZCL_DEFAULT_STR_LENGTH);
+                                          &test_name2_size);
 
   unsigned int num_members = zigpc_group_map_get_memberlist_count(add_group_id);
   sl_status_t memberlist_status
@@ -315,7 +321,9 @@ void test_set_group_name_success(void)
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, add_status);
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, set_name_status);
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, retrieve_name_status);
+  TEST_ASSERT_EQUAL(strlen(add_name), test_name_size);
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, retrieve_name_status2);
+  TEST_ASSERT_EQUAL(strlen(add_name2), test_name2_size);
   TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, memberlist_status);
 
   TEST_ASSERT_EQUAL(1, num_members);
@@ -327,4 +335,81 @@ void test_set_group_name_success(void)
   TEST_ASSERT_EQUAL_STRING(add_name2, test_name2);
 
   zigpc_group_map_clear();
+}
+
+void test_retrieving_empty_group_name(void)
+{
+  bool publish_type_reported        = false;
+  zigbee_group_id_t group_id        = 0x05;
+  zigpc_group_member_t group_member = {
+    .eui64       = "\xDE\xAD\xBE\xEF\x02\x34\x7E\xAB",
+    .endpoint_id = 2,
+  };
+  char group_name[] = "";
+
+  // ARRANGE (Nothing to expect)
+
+  // ACT
+  zigpc_group_map_clear();
+  sl_status_t add_status
+    = zigpc_group_map_add_new_with_name(group_id,
+                                        group_name,
+                                        group_member,
+                                        publish_type_reported);
+
+  size_t test_name_size = ZCL_DEFAULT_STR_LENGTH;
+  char test_name[test_name_size];
+  sl_status_t get_status
+    = zigpc_group_map_retrieve_group_name(group_member,
+                                          group_id,
+                                          publish_type_reported,
+                                          test_name,
+                                          &test_name_size);
+
+  // ACT
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, add_status);
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_EMPTY, get_status);
+  TEST_ASSERT_EQUAL_STRING("", test_name);
+  TEST_ASSERT_EQUAL(0U, test_name_size);
+}
+
+void test_retrieving_name_of_removed_group(void)
+{
+  bool publish_type_reported        = false;
+  zigbee_group_id_t group_id        = 0x05;
+  zigpc_group_member_t group_member = {
+    .eui64       = "\xDE\xAD\xBE\xEF\x02\x34\x7E\xAB",
+    .endpoint_id = 2,
+  };
+  char group_name[] = "ToRemove";
+
+  // ARRANGE (Nothing to expect)
+
+  // ACT
+  zigpc_group_map_clear();
+  sl_status_t add_status
+    = zigpc_group_map_add_new_with_name(group_id,
+                                        group_name,
+                                        group_member,
+                                        publish_type_reported);
+
+  sl_status_t remove_status
+    = zigpc_group_map_remove_group(group_id,
+                                   group_member,
+                                   publish_type_reported);
+
+  size_t test_name_size = ZCL_DEFAULT_STR_LENGTH;
+  char test_name[test_name_size];
+  sl_status_t get_status
+    = zigpc_group_map_retrieve_group_name(group_member,
+                                          group_id,
+                                          publish_type_reported,
+                                          test_name,
+                                          &test_name_size);
+
+  // ACT
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, add_status);
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_OK, remove_status);
+  TEST_ASSERT_EQUAL_HEX8(SL_STATUS_NOT_FOUND, get_status);
+  TEST_ASSERT_EQUAL(0U, test_name_size);
 }

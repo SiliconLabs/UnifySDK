@@ -58,10 +58,26 @@ void tearDown(void) {}
 
 void test_device_annouced_sanity(void)
 {
-  zigbee_eui64_t eui64 = {1, 2, 3, 4, 5, 6, 7, 8};
+  zigbee_eui64_t eui64            = {1, 2, 3, 4, 5, 6, 7, 8};
+  zigpc_device_data_t eui64_state = {
+    .network_status = ZIGBEE_NODE_STATUS_NODEID_ASSIGNED,
+    .max_cmd_delay  = 1,
+  };
+
+  std::string topic = "ucl/by-unid/zb-0102030405060708/State";
+  std::string payload
+    = R"({"MaximumCommandDelay":1,"NetworkStatus":"Online interviewing","Security":"Zigbee Z3"})";
 
   // ARRANGE
   zigpc_net_mgmt_interview_node_ExpectAndReturn(eui64, SL_STATUS_OK);
+
+  zigpc_datastore_read_device_ExpectAndReturn(eui64, nullptr, SL_STATUS_OK);
+  zigpc_datastore_read_device_IgnoreArg_data();
+  zigpc_datastore_read_device_ReturnMemThruPtr_data(
+    &eui64_state,
+    sizeof(zigpc_device_data_t));
+
+  uic_mqtt_publish_Expect(topic.c_str(), payload.c_str(), payload.size(), true);
 
   // ACT
   sl_status_t status = zigpc_ctrl::on_device_announced(eui64);
@@ -124,92 +140,83 @@ sl_status_t stub_attr_report_request(const zigbee_eui64_t eui64,
   return SL_STATUS_OK;
 }
 
-/**
- *
- * Stub data + handler for uic_mqtt_dotdot_publish_supported_commands
- *
- */
-
-const char *stub_dotdot_pub_commands_unid;
-zigbee_endpoint_id_t *stub_dotdot_pub_commands_ep;
-void stub_dotdot_pub_commands(dotdot_unid_t unid,
-                              dotdot_endpoint_id_t endpoint,
-                              int cmock_num_calls)
+void helper_expect_endpoint_configure_actions(zigbee_eui64_t dev,
+                                              zigbee_endpoint_t &ep_obj)
 {
-  TEST_ASSERT_EQUAL_STRING(stub_dotdot_pub_commands_unid, unid);
-  TEST_ASSERT_EQUAL(*stub_dotdot_pub_commands_ep, endpoint);
-}
-
-void helper_expect_endpoint_interviewed_actions(zigbee_eui64_t *dev,
-                                                const char *unid,
-                                                zigbee_endpoint_id_t *ep,
-                                                size_t *cl_count,
-                                                zcl_cluster_id_t *cl_list)
-{
-  zigpc_datastore_get_cluster_count_ExpectAndReturn(*dev,
-                                                    *ep,
+  zigpc_datastore_get_cluster_count_ExpectAndReturn(dev,
+                                                    ep_obj.endpoint_id,
                                                     ZCL_CLUSTER_SERVER_SIDE,
-                                                    *cl_count);
-  for (size_t i = 0; i < *cl_count; i++) {
+                                                    ep_obj.cluster_count);
+  for (size_t i = 0; i < ep_obj.cluster_count; i++) {
     zigpc_datastore_find_cluster_by_index_ExpectAndReturn(
-      *dev,
-      *ep,
+      dev,
+      ep_obj.endpoint_id,
       ZCL_CLUSTER_SERVER_SIDE,
       i,
       nullptr,
       SL_STATUS_OK);
     zigpc_datastore_find_cluster_by_index_IgnoreArg_cluster_id();
-    zigpc_datastore_find_cluster_by_index_ReturnThruPtr_cluster_id(&cl_list[i]);
-
-    zigpc_datastore_contains_cluster_ExpectAndReturn(
-      nullptr,
-      *ep,
-      ZCL_CLUSTER_CLIENT_SIDE,
-      ZIGPC_ZCL_CLUSTER_OTA_UPGRADE,
-      cl_list[i] == ZIGPC_ZCL_CLUSTER_OTA_UPGRADE);
-    // FIXME: Ignoring eui64 until CMock integration in Unity is fixed
-    zigpc_datastore_contains_cluster_IgnoreArg_eui64();
-
-    if (cl_list[i] == ZIGPC_ZCL_CLUSTER_OTA_UPGRADE) {
-      zigpc_ota_configure_node_ExpectAndReturn(*dev, SL_STATUS_OK);
-    }
+    zigpc_datastore_find_cluster_by_index_ReturnThruPtr_cluster_id(
+      &ep_obj.cluster_list[i].cluster_id);
   }
 
-  stub_bind_request_dev      = dev;
-  stub_bind_request_ep       = ep;
-  stub_bind_request_cl_count = cl_count;
-  stub_bind_request_cl_list  = cl_list;
-  zigpc_gateway_request_binding_endpoint_StubWithCallback(stub_bind_request);
+  zigpc_gateway_request_binding_endpoint_ExpectAndReturn(dev,
+                                                         ep_obj,
+                                                         SL_STATUS_OK);
 
-  stub_attr_report_request_dev      = dev;
-  stub_attr_report_request_ep       = ep;
-  stub_attr_report_request_cl_count = cl_count;
-  stub_attr_report_request_cl_list  = cl_list;
-  configure_attributes_endpoint_StubWithCallback(stub_attr_report_request);
-
-  stub_dotdot_pub_commands_unid = unid;
-  stub_dotdot_pub_commands_ep   = ep;
-  uic_mqtt_dotdot_publish_supported_commands_StubWithCallback(
-    stub_dotdot_pub_commands);
+  configure_attributes_endpoint_ExpectAndReturn(dev, ep_obj, SL_STATUS_OK);
 }
 
-void test_endpoint_interviewed_sanity(void)
+void helper_expect_endpoint_update_capabilities(zigbee_eui64_t dev,
+                                                zigbee_endpoint_id_t ep,
+                                                bool expect_ota)
 {
-  zigbee_eui64_t dev      = {0x00, 0xAA, 0x42, 0x75, 0x5, 0x99, 0xD, 0x2};
-  char unid[]             = "zb-00AA427505990D02";
-  zigbee_endpoint_id_t ep = 1;
-  size_t cl_count         = 3;
-  zcl_cluster_id_t expected_cl[cl_count] = {0x004, 0x0005, 0x0029};
+  zigpc_datastore_contains_cluster_ExpectAndReturn(
+    dev,
+    ep,
+    ZCL_CLUSTER_CLIENT_SIDE,
+    ZIGPC_ZCL_CLUSTER_OTA_UPGRADE,
+    expect_ota);
+
+  if (expect_ota) {
+    zigpc_ota_configure_node_ExpectAndReturn(dev, SL_STATUS_OK);
+  }
+
+  uic_mqtt_dotdot_publish_supported_commands_Expect(nullptr, ep);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
+}
+
+void test_endpoint_configuration_sanity(void)
+{
+  zigbee_eui64_t dev       = {0x00, 0xAA, 0x42, 0x75, 0x5, 0x99, 0xD, 0x2};
+  zigbee_endpoint_t ep_obj = {
+    .endpoint_id = 1,
+    .cluster_list
+    = {{.cluster_id = 0x004}, {.cluster_id = 0x0005}, {.cluster_id = 0x0029}},
+    .cluster_count = 3,
+  };
 
   // ARRANGE
-  helper_expect_endpoint_interviewed_actions(&dev,
-                                             unid,
-                                             &ep,
-                                             &cl_count,
-                                             expected_cl);
+  helper_expect_endpoint_configure_actions(dev, ep_obj);
 
   // ACT
-  sl_status_t status = zigpc_ctrl::on_endpoint_interviewed(dev, ep);
+  sl_status_t status
+    = zigpc_ctrl::perform_endpoint_configuration(dev, ep_obj.endpoint_id);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+}
+
+void test_endpoint_update_sanity(void)
+{
+  zigbee_eui64_t dev      = {0x00, 0xAA, 0x42, 0x75, 0x5, 0x99, 0xD, 0x12};
+  zigbee_endpoint_id_t ep = 1;
+
+  // ARRANGE
+  helper_expect_endpoint_update_capabilities(dev, ep, false);
+
+  // ACT
+  sl_status_t status = zigpc_ctrl::update_endpoint_capabilities(dev, ep);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
@@ -217,14 +224,32 @@ void test_endpoint_interviewed_sanity(void)
 
 void test_device_interviewed_sanity(void)
 {
-  zigbee_eui64_t dev = {0x00, 0xAA, 0x42, 0x75, 0x5, 0x99, 0xD, 0x2};
-  char unid[]        = "zb-00AA427505990D02";
+  zigbee_eui64_t dev       = {0x00, 0xAA, 0x42, 0x75, 0x5, 0x99, 0xD, 0x2};
+  size_t ep_count          = 1;
+  zigbee_endpoint_t ep_obj = {
+    .endpoint_id   = 1,
+    .cluster_list  = {{.cluster_id = 0x0000},
+                     {.cluster_id = 0x0001},
+                     {.cluster_id = 0x0002},
+                     {.cluster_id = 0x0003},
+                     {.cluster_id = ZIGPC_ZCL_CLUSTER_OTA_UPGRADE}},
+    .cluster_count = 5,
+  };
+  zigpc_device_data_t eui64_state = {
+    .network_status = ZIGBEE_NODE_STATUS_INCLUDED,
+    .max_cmd_delay  = 1,
+  };
+  std::string topic = "ucl/by-unid/zb-00AA427505990D02/State";
+  std::string payload
+    = R"({"MaximumCommandDelay":1,"NetworkStatus":"Online functional","Security":"Zigbee Z3"})";
 
-  size_t ep_count           = 1;
-  zigbee_endpoint_id_t ep_1 = 1;
-  size_t ep1_cl_count       = 5;
-  zcl_cluster_id_t ep1_expected_cl[ep1_cl_count]
-    = {0x0000, 0x0001, 0x0002, 0x0003, ZIGPC_ZCL_CLUSTER_OTA_UPGRADE};
+  zigpc_datastore_read_device_ExpectAndReturn(dev, nullptr, SL_STATUS_OK);
+  zigpc_datastore_read_device_IgnoreArg_data();
+  zigpc_datastore_read_device_ReturnMemThruPtr_data(
+    &eui64_state,
+    sizeof(zigpc_device_data_t));
+
+  uic_mqtt_publish_Expect(topic.c_str(), payload.c_str(), payload.size(), true);
 
   // ARRANGE
   zigpc_datastore_get_endpoint_count_ExpectAndReturn(dev, ep_count);
@@ -233,16 +258,14 @@ void test_device_interviewed_sanity(void)
                                                          nullptr,
                                                          SL_STATUS_OK);
   zigpc_datastore_find_endpoint_by_index_IgnoreArg_endpoint_id();
-  zigpc_datastore_find_endpoint_by_index_ReturnThruPtr_endpoint_id(&ep_1);
+  zigpc_datastore_find_endpoint_by_index_ReturnThruPtr_endpoint_id(
+    &ep_obj.endpoint_id);
 
-  helper_expect_endpoint_interviewed_actions(&dev,
-                                             unid,
-                                             &ep_1,
-                                             &ep1_cl_count,
-                                             ep1_expected_cl);
+  helper_expect_endpoint_configure_actions(dev, ep_obj);
+  helper_expect_endpoint_update_capabilities(dev, ep_obj.endpoint_id, true);
 
   // ACT
-  sl_status_t status = zigpc_ctrl::on_device_interviewed(dev);
+  sl_status_t status = zigpc_ctrl::on_device_interviewed(dev, true);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
@@ -250,20 +273,23 @@ void test_device_interviewed_sanity(void)
 
 void test_controller_shutdown_sanity(void)
 {
-  zigpc_network_data_t nwk = {
-    .gateway_eui64 = {5, 5, 5, 5, 0, 1, 0, 1},
-  };
   size_t dev_count                       = 3;
   zigbee_eui64_t expected_dev[dev_count] = {
     {1, 0, 1, 0, 1, 0, 1, 0},
     {3, 0, 3, 0, 3, 0, 3, 0},
     {9, 0, 9, 0, 9, 0, 9, 0},
   };
-  std::string expected_unretains[dev_count + 1] = {
-    "ucl/by-unid/zb-0100010001000100",
-    "ucl/by-unid/zb-0300030003000300",
-    "ucl/by-unid/zb-0900090009000900",
-    "ucl/by-unid/zb-0505050500010001",
+  std::string expected_state_publish_topics[dev_count + 1] = {
+    "ucl/by-unid/zb-0100010001000100/State",
+    "ucl/by-unid/zb-0300030003000300/State",
+    "ucl/by-unid/zb-0900090009000900/State",
+    "ucl/by-unid/zb-0505050500010001/State",
+  };
+  std::string expected_state_publish_payload
+    = R"({"MaximumCommandDelay":1,"NetworkStatus":"Unavailable","Security":"Zigbee Z3"})";
+  zigpc_device_data_t dev_data = {
+    .network_status = ZIGBEE_NODE_STATUS_INCLUDED,
+    .max_cmd_delay  = 1,
   };
 
   // ARRANGE
@@ -272,18 +298,178 @@ void test_controller_shutdown_sanity(void)
     zigpc_datastore_find_device_by_index_ExpectAndReturn(i, NULL, SL_STATUS_OK);
     zigpc_datastore_find_device_by_index_IgnoreArg_eui64();
     zigpc_datastore_find_device_by_index_ReturnThruPtr_eui64(&expected_dev[i]);
+
+    zigpc_datastore_read_device_ExpectAndReturn(expected_dev[i],
+                                                nullptr,
+                                                SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+    zigpc_datastore_read_device_ReturnMemThruPtr_data(
+      &dev_data,
+      sizeof(zigpc_device_data_t));
+
+    // expects parts of zigpc_ucl::node_state::publish_state call
+    uic_mqtt_publish_Expect(expected_state_publish_topics[i].c_str(),
+                            expected_state_publish_payload.c_str(),
+                            expected_state_publish_payload.size(),
+                            true);
+
+    zigpc_datastore_write_device_ExpectAndReturn(expected_dev[i],
+                                                 nullptr,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
   }
 
-  zigpc_datastore_read_network_ExpectAndReturn(NULL, SL_STATUS_OK);
-  zigpc_datastore_read_network_IgnoreArg_data();
-  zigpc_datastore_read_network_ReturnThruPtr_data(&nwk);
-
-  for (size_t i = 0; i < dev_count + 1; i++) {
-    uic_mqtt_unretain_Expect(expected_unretains[i].c_str());
-  }
+  uic_mqtt_unretain_by_regex_Expect("^(?!ucl\\/by-unid\\/.*\\/State$).*");
 
   // ACT
   zigpc_ctrl::on_shutdown();
+
+  // ASSERT
+}
+
+void test_controller_shutdown_one_failed_publish(void)
+{
+  size_t dev_count                       = 3;
+  size_t failed_dev_index                = 1;
+  zigbee_eui64_t expected_dev[dev_count] = {
+    {1, 0, 1, 0, 1, 0, 1, 0},
+    {3, 0, 3, 0, 3, 0, 3, 0},
+    {9, 0, 9, 0, 9, 0, 9, 0},
+  };
+  std::string expected_state_publish_topics[dev_count + 1] = {
+    "ucl/by-unid/zb-0100010001000100/State",
+    "ucl/by-unid/zb-0300030003000300/State",
+    "ucl/by-unid/zb-0900090009000900/State",
+    "ucl/by-unid/zb-0505050500010001/State",
+  };
+  std::string expected_state_publish_payload
+    = R"({"MaximumCommandDelay":1,"NetworkStatus":"Unavailable","Security":"Zigbee Z3"})";
+  zigpc_device_data_t dev_data = {
+    .network_status = ZIGBEE_NODE_STATUS_INCLUDED,
+    .max_cmd_delay  = 1,
+  };
+
+  // ARRANGE
+  zigpc_datastore_get_device_count_ExpectAndReturn(dev_count);
+  for (size_t i = 0; i < dev_count; i++) {
+    zigpc_datastore_find_device_by_index_ExpectAndReturn(i, NULL, SL_STATUS_OK);
+    zigpc_datastore_find_device_by_index_IgnoreArg_eui64();
+    zigpc_datastore_find_device_by_index_ReturnThruPtr_eui64(&expected_dev[i]);
+
+    zigpc_datastore_read_device_ExpectAndReturn(expected_dev[i],
+                                                nullptr,
+                                                SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+    zigpc_datastore_read_device_ReturnMemThruPtr_data(
+      &dev_data,
+      sizeof(zigpc_device_data_t));
+
+    // Expect 1 device data write to fail, which should prevent the mqtt
+    // publish
+    if (i == failed_dev_index) {
+      zigpc_datastore_write_device_ExpectAndReturn(expected_dev[i],
+                                                   nullptr,
+                                                   SL_STATUS_FAIL);
+
+    } else {
+      // expects parts of zigpc_ucl::node_state::publish_state call
+      uic_mqtt_publish_Expect(expected_state_publish_topics[i].c_str(),
+                              expected_state_publish_payload.c_str(),
+                              expected_state_publish_payload.size(),
+                              true);
+
+      zigpc_datastore_write_device_ExpectAndReturn(expected_dev[i],
+                                                   nullptr,
+                                                   SL_STATUS_OK);
+    }
+    zigpc_datastore_write_device_IgnoreArg_data();
+  }
+
+  uic_mqtt_unretain_by_regex_Expect("^(?!ucl\\/by-unid\\/.*\\/State$).*");
+
+  // ACT
+  zigpc_ctrl::on_shutdown();
+
+  // ASSERT
+}
+
+void test_controller_startup_sanity(void)
+{
+  size_t dev_count                       = 2;
+  size_t ep_count                        = 1;
+  zigbee_eui64_t expected_dev[dev_count] = {
+    {0x2, 0x0, 0x1, 0x0, 0x1, 0xA, 0x1, 0x0},
+    {0x1, 0x0, 0x3, 0x0, 0x3, 0xB, 0x3, 0xC},
+  };
+  zigbee_endpoint_id_t expected_eps[dev_count] = {
+    2,
+    1,
+  };
+  zigpc_device_data_t dev_data = {
+    .network_status = ZIGBEE_NODE_STATUS_INCLUDED,
+    .max_cmd_delay  = 1,
+  };
+  std::string expected_unids[dev_count] = {
+    "zb-02000100010A0100",
+    "zb-01000300030B030C",
+  };
+  std::string expected_state_publish_topics[dev_count] = {
+    "ucl/by-unid/" + expected_unids[0] + "/State",
+    "ucl/by-unid/" + expected_unids[1] + "/State",
+  };
+  std::string expected_state_publish_payload
+    = R"({"MaximumCommandDelay":1,"NetworkStatus":"Online functional","Security":"Zigbee Z3"})";
+
+  // ARRANGE
+  uic_mqtt_dotdot_publish_supported_commands_StubWithCallback(nullptr);
+  zigpc_datastore_get_device_count_ExpectAndReturn(dev_count);
+  for (size_t i = 0; i < dev_count; i++) {
+    zigpc_datastore_find_device_by_index_ExpectAndReturn(i,
+                                                         nullptr,
+                                                         SL_STATUS_OK);
+    zigpc_datastore_find_device_by_index_IgnoreArg_eui64();
+    zigpc_datastore_find_device_by_index_ReturnThruPtr_eui64(&expected_dev[i]);
+
+    zigpc_datastore_read_device_ExpectAndReturn(expected_dev[i],
+                                                nullptr,
+                                                SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+    zigpc_datastore_write_device_ExpectAndReturn(expected_dev[i],
+                                                 nullptr,
+                                                 SL_STATUS_OK);
+    zigpc_datastore_write_device_IgnoreArg_data();
+
+    // expects parts of zigpc_ucl::node_state::on_status_update call
+    zigpc_datastore_read_device_ExpectAndReturn(expected_dev[i],
+                                                nullptr,
+                                                SL_STATUS_OK);
+    zigpc_datastore_read_device_IgnoreArg_data();
+    zigpc_datastore_read_device_ReturnMemThruPtr_data(
+      &dev_data,
+      sizeof(zigpc_device_data_t));
+    uic_mqtt_publish_Expect(expected_state_publish_topics[i].c_str(),
+                            expected_state_publish_payload.c_str(),
+                            expected_state_publish_payload.size(),
+                            true);
+
+    zigpc_datastore_get_endpoint_count_ExpectAndReturn(expected_dev[i],
+                                                       ep_count);
+    zigpc_datastore_find_endpoint_by_index_ExpectAndReturn(expected_dev[i],
+                                                           0,
+                                                           nullptr,
+                                                           SL_STATUS_OK);
+    zigpc_datastore_find_endpoint_by_index_IgnoreArg_endpoint_id();
+    zigpc_datastore_find_endpoint_by_index_ReturnThruPtr_endpoint_id(
+      &expected_eps[i]);
+
+    // expect calls from endpoint enumeration
+    helper_expect_endpoint_update_capabilities(expected_dev[i],
+                                               expected_eps[i],
+                                               true);
+  }
+
+  // ACT
+  zigpc_ctrl::on_startup();
 
   // ASSERT
 }

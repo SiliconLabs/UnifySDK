@@ -29,10 +29,13 @@
 #define SS_FORMAT_HEX(width) \
   std::hex << std::uppercase << std::setw(width) << std::setfill('0')
 
-static constexpr char TOPIC_UCL[]     = "ucl/";
-static constexpr char TOPIC_BY_UNID[] = "by-unid/";
-static constexpr char TOPIC_PC_NWMGMT[]
-  = "/ProtocolController/NetworkManagement";
+namespace topic_part
+{
+constexpr std::string_view UCL        = "ucl/";
+constexpr std::string_view BY_UNID    = "by-unid/";
+constexpr std::string_view NODE_STATE = "/State";
+constexpr std::string_view PC_NWMGMT  = "/ProtocolController/NetworkManagement";
+}  // namespace topic_part
 
 static const std::string UNID_PREFIX = ZIGPC_UNID_PREFIX;
 
@@ -92,15 +95,19 @@ sl_status_t
   sl_status_t status = SL_STATUS_OK;
 
   std::stringstream topic_ss;
-  topic_ss << TOPIC_UCL;
+  topic_ss << topic_part::UCL;
 
   std::string unid = zigpc_ucl::mqtt::build_unid(topic_data.eui64);
   switch (topic_type) {
     case topic_type_t::BY_UNID_PC_NWMGMT:
-      topic_ss << TOPIC_BY_UNID << unid << TOPIC_PC_NWMGMT;
+      topic_ss << topic_part::BY_UNID << unid << topic_part::PC_NWMGMT;
       break;
     case topic_type_t::BY_UNID_PC_NWMGMT_WRITE:
-      topic_ss << TOPIC_BY_UNID << unid << TOPIC_PC_NWMGMT << "/Write";
+      topic_ss << topic_part::BY_UNID << unid << topic_part::PC_NWMGMT
+               << "/Write";
+      break;
+    case topic_type_t::BY_UNID_NODE_STATE:
+      topic_ss << topic_part::BY_UNID << unid << topic_part::NODE_STATE;
       break;
     default:
       status = SL_STATUS_INVALID_TYPE;

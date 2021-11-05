@@ -44,11 +44,19 @@ void zigpc_ctrl_on_device_interview_update(void *event_data)
     const zigpc_net_mgmt_on_node_interview_status_t &int_status
       = *static_cast<zigpc_net_mgmt_on_node_interview_status_t *>(event_data);
 
+    sl_status_t status = SL_STATUS_OK;
     if (int_status.success == true) {
-      sl_status_t status = zigpc_ctrl::on_device_interviewed(int_status.eui64);
+      status = zigpc_ctrl::on_device_interviewed(int_status.eui64, true);
       if (status != SL_STATUS_OK) {
         sl_log_warning(zigpc_ctrl::LOG_TAG,
-                       "Device interviewed event handler status: 0x%X",
+                       "Device interview success event handler status: 0x%X",
+                       status);
+      }
+    } else {
+      status = zigpc_ctrl::on_device_interview_failed(int_status.eui64);
+      if (status != SL_STATUS_OK) {
+        sl_log_warning(zigpc_ctrl::LOG_TAG,
+                       "Device interview fail event handler status: 0x%X",
                        status);
       }
     }
@@ -63,7 +71,9 @@ PROCESS_THREAD(zigpc_ctrl_process, ev, data)
 {
   PROCESS_BEGIN();
   while (1) {
-    if (ev == PROCESS_EVENT_EXIT) {
+    if (ev == PROCESS_EVENT_INIT) {
+      zigpc_ctrl::on_startup();
+    } else if (ev == PROCESS_EVENT_EXIT) {
       zigpc_ctrl::on_shutdown();
     }
     PROCESS_WAIT_EVENT();

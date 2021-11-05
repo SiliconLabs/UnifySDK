@@ -299,7 +299,9 @@ static void newEndpointDiscovered(EmberAfPluginDeviceTableEntry *p_entry)
   // New device is set, time to make the callback to indicate a new device
   // has joined.
   emberAfPluginDeviceTableNewDeviceCallback(p_entry->eui64, p_entry->endpoint);
+#ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
   emAfDeviceTableSave();
+#endif // #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
 }
 
 void emberAfPluginDeviceTableNewDeviceEventHandler(void)
@@ -510,7 +512,9 @@ void emberAfDeviceTableNewDeviceJoinHandler(EmberNodeId newNodeId,
       // has joined.
       emberAfPluginDeviceTableRejoinDeviceCallback(deviceTable[deviceTableIndex].eui64, deviceTable[deviceTableIndex].endpoint);
       // Need to save when the node ID changes.
+#ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
       emAfDeviceTableSave();
+#endif // #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
     }
   }
 }
@@ -546,7 +550,9 @@ static void newDeviceLeftHandler(EmberEUI64 newNodeEui64)
     emAfPluginDeviceTableDeviceLeftCallback(newNodeEui64);
     emAfPluginDeviceTableDeleteEntry(index);
     // Save on Node Left
+#ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
     emAfDeviceTableSave();
+#endif // #ifndef EMBER_AF_PLUGIN_DEVICE_TABLE_DO_NOT_USE_STORAGE
   }
 
   //search and delete any pending task in the taskQueue that matches the eui64

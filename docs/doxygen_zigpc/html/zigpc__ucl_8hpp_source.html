@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -121,24 +121,38 @@ $(document).ready(function(){initNavTree('zigpc__ucl_8hpp_source.html',''); init
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}  <span class="comment">// namespace mqtt</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}  <span class="comment">// namespace zigpc_ucl</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ZIGPC_UCL_HPP */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="namespacezigpc__ucl_1_1node__state.html">   80</a></span>&#160;<span class="keyword">namespace </span>node_state</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="namespacezigpc__ucl_1_1node__state.html#a6ca9a960a8d2de4761a1521e409cfd96">   92</a></span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="namespacezigpc__ucl_1_1node__state.html#a6ca9a960a8d2de4761a1521e409cfd96">publish_state</a>(<a class="code" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> eui64,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                          <a class="code" href="group__zigpc__common__zigbee.html#gaffceb014e946af159060a6492ff413f8">zigbee_node_network_status_t</a> network_status,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                          <a class="code" href="classuint32__t.html">uint32_t</a> max_cmd_delay);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="namespacezigpc__ucl_1_1node__state.html#a36670853e3153e4a7d5d2c5c21b3b84c">  102</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacezigpc__ucl_1_1node__state.html#a36670853e3153e4a7d5d2c5c21b3b84c">cleanup_all_node_topics</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}  <span class="comment">// namespace node_state</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}  <span class="comment">// namespace zigpc_ucl</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ZIGPC_UCL_HPP */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="agroup__zigpc__common__zigbee_html_ga8f3272c35bee4ed0e44533d82440cbe8"><div class="ttname"><a href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a></div><div class="ttdeci">uint64_t zigbee_eui64_uint_t</div><div class="ttdoc">Zigbee Device Identifier (stored as integer)</div><div class="ttdef"><b>Definition:</b> zigpc_common_zigbee.h:178</div></div>
 <div class="ttc" id="anamespacezigpc__ucl_html"><div class="ttname"><a href="namespacezigpc__ucl.html">zigpc_ucl</a></div><div class="ttdoc">UCL topic and payload manipulators in the Zigbee Protocol Controller.</div><div class="ttdef"><b>Definition:</b> zigpc_ucl.hpp:52</div></div>
 <div class="ttc" id="asl__status_8h_html"><div class="ttname"><a href="sl__status_8h.html">sl_status.h</a></div><div class="ttdoc">SL Status Codes.</div></div>
+<div class="ttc" id="anamespacezigpc__ucl_1_1node__state_html_a6ca9a960a8d2de4761a1521e409cfd96"><div class="ttname"><a href="namespacezigpc__ucl_1_1node__state.html#a6ca9a960a8d2de4761a1521e409cfd96">zigpc_ucl::node_state::publish_state</a></div><div class="ttdeci">sl_status_t publish_state(zigbee_eui64_uint_t eui64, zigbee_node_network_status_t network_status, uint32_t max_cmd_delay)</div><div class="ttdoc">Update the device status with the parameters provided. This handler will publish the updated device s...</div></div>
 <div class="ttc" id="anamespacezigpc__ucl_1_1mqtt_html_a0708e9e354961a934712ff0ac08a9192"><div class="ttname"><a href="namespacezigpc__ucl_1_1mqtt.html#a0708e9e354961a934712ff0ac08a9192">zigpc_ucl::mqtt::parse_unid</a></div><div class="ttdeci">sl_status_t parse_unid(std::string unid, zigbee_eui64_uint_t &amp;eui64)</div><div class="ttdoc">Parse a UCL UNID into Zigbee device identifier.</div></div>
 <div class="ttc" id="azigpc__common__zigbee_8h_html"><div class="ttname"><a href="zigpc__common__zigbee_8h.html">zigpc_common_zigbee.h</a></div></div>
 <div class="ttc" id="anamespacezigpc__ucl_1_1mqtt_html_a2bbae71d30f87b2e0bb174c37f519a6f"><div class="ttname"><a href="namespacezigpc__ucl_1_1mqtt.html#a2bbae71d30f87b2e0bb174c37f519a6f">zigpc_ucl::mqtt::build_unid</a></div><div class="ttdeci">std::string build_unid(zigbee_eui64_uint_t eui64)</div><div class="ttdoc">Build a UCL UNID based on the Zigbee device identifier.</div></div>
+<div class="ttc" id="aclassuint32__t_html"><div class="ttname"><a href="classuint32__t.html">uint32_t</a></div></div>
+<div class="ttc" id="anamespacezigpc__ucl_1_1node__state_html_a36670853e3153e4a7d5d2c5c21b3b84c"><div class="ttname"><a href="namespacezigpc__ucl_1_1node__state.html#a36670853e3153e4a7d5d2c5c21b3b84c">zigpc_ucl::node_state::cleanup_all_node_topics</a></div><div class="ttdeci">void cleanup_all_node_topics(void)</div><div class="ttdoc">Unretain all node topics except the node state topic.</div></div>
+<div class="ttc" id="agroup__zigpc__common__zigbee_html_gaffceb014e946af159060a6492ff413f8"><div class="ttname"><a href="group__zigpc__common__zigbee.html#gaffceb014e946af159060a6492ff413f8">zigbee_node_network_status_t</a></div><div class="ttdeci">enum zigbee_node_network_status zigbee_node_network_status_t</div><div class="ttdoc">The possible states that a Zigbee node can be in.</div></div>
 <div class="ttc" id="agroup__sl__status_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:127</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_f364b3eb007aed8fbda9b45cab48719e.html">ucl</a></li><li class="navelem"><a class="el" href="dir_9ad2e6be04f2641d83a29b72b2c562b5.html">include</a></li><li class="navelem"><a class="el" href="zigpc__ucl_8hpp.html">zigpc_ucl.hpp</a></li>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:08 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

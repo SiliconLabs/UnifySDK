@@ -23,7 +23,9 @@
 #define Z3GATEWAY_CALLBACKS_H
 
 #include <stdbool.h>
+#include <stdint.h>
 #define SIGNED_ENUM
+#include "app/util/ezsp/ezsp-enum.h"
 #include "stack/include/ember-types.h"
 #include "enums.h"
 
@@ -48,6 +50,28 @@ struct z3gatewayCallbacks {
    * initialized the stack layer (including any NCP init routines).
    */
   void (*onEmberAfStackInitalized)(void);
+
+  /**
+   * @brief This callback is invoked before the NCP is reset. This occurs after
+   * the host process detects an error via the EZSP link from the NCP.
+   *
+   * @param resetStatus   EZSP error status received from the NCP.
+   */
+  void (*onEmberAfNcpPreReset)(EzspStatus resetStatus);
+
+  /**
+   * @brief This callback is invoked to configure the NCP after it is reset.
+   * This occurs either at startup or after EZSP error-based reset.
+   * 
+   * NOTE: The function is always called twice when the NCP is reset. First
+   * with ncpMemConfigureStage=TRUE and then with
+   * ncpMemConfigureStage=FALSE.
+   * 
+   * @param ncpMemConfigureStage   TRUE if ONLY memory
+   * configurable EZSP commands are accepted by the NCP, FALSE if only
+   * non-memory configurable EZSP commands can be sent to the NCP.
+   */
+  void (*onEmberAfNcpPostReset)(bool ncpMemConfigureStage);
 
   /**
    * @brief This callback is invoked when the network has initialized on the
@@ -191,6 +215,29 @@ struct z3gatewayCallbacks {
                                    uint16_t clusterId,
                                    uint8_t *attribute_status_records,
                                    uint16_t attribute_status_records_size);
+  
+  /**
+   * @brief This callback is invoked when the Gateway receives a ZCL global
+   * configure reporting response message. The response will contain a message
+   * buffer consisting of one or more configure reporting status records. Refer to
+   * ZCL specification section "Configure Reporting Response Command" for more
+   * information.
+   *
+   * @param eui64                         EUI of source device of ZCL message
+   * @param endpointId                    Endpoint identifer of device.
+   * @param clusterId                     ZCL Cluster ID of attributes.
+   * @param configure_status_records      Buffer of configure status records.
+   * @param configure_status_records_size Size of status records buffer.
+   *
+   * @return EmberStatus                  EMBER_SUCCESS if frame is being
+   * handled by a supported cluster, EMBER_NOT_FOUND if the command frame
+   * parsing is not supported.
+   */
+  void (*onConfigureReportingResponse)(const EmberEUI64 eui64,
+                                   uint8_t endpoint,
+                                   uint16_t clusterId,
+                                   uint8_t *configure_status_records,
+                                   uint16_t configure_status_records_size);
 
   /**
    * @brief This callback is invoked when the Gateway receives a ZCL cluster

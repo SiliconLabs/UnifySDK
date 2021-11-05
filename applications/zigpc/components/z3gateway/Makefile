@@ -137,6 +137,7 @@ DEFINES = \
   -DEZSP_ASH \
   -DMBEDTLS_CONFIG_FILE=\"$(APP_BUILDER_DIRECTORY)/mbedtls-config-generated.h\" \
   -DEMBER_AF_PLUGIN_GATEWAY_SUPPORT_MAX_WAIT_FOR_EVENTS_TIMEOUT_MS=10 \
+  -DEMBER_AF_API_ADDRESS_TABLE=\"app/framework/plugin/address-table/address-table.h\" \
   -DEMBER_AF_API_COUNTERS=\"app/framework/plugin/counters/counters.h\" \
   -DEMBER_AF_API_DEVICE_TABLE=\"app/framework/plugin/device-table/device-table.h\" \
   -DEMBER_AF_API_DEVICE_TABLE_INTERNAL=\"app/framework/plugin/device-table/device-table-internal.h\" \
@@ -171,6 +172,7 @@ COMPILER_FLAGS ?= \
 
 APPLICATION_FILES= \
   ./src/z3gateway.c \
+  ./src/z3gateway_address_table.c \
   ./src/z3gateway_attribute_mgmt.c \
   ./src/z3gateway_cli.c \
   ./src/z3gateway_cluster_command_parse.c \

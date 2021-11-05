@@ -87,4 +87,24 @@ EmberStatus emberAfSendMulticast(EmberMulticastId multicastId,
                                  uint16_t messageLength,
                                  uint8_t *message);
 
+/**
+ * @brief Use this function to add an entry for a remote device to the address
+ * table.
+ *
+ * If the EUI64 already exists in the address table, the index of the existing
+ * entry will be returned.  Otherwise, a new entry will be created and the new
+ * new index will be returned.  The framework will remember how many times the
+ * returned index has been referenced.  When the address table entry is no
+ * longer needed, the application should remove its reference by calling
+ * ::emberAfRemoveAddressTableEntry.
+ *
+ * @param longId The EUI64 of the remote device.
+ * @param shortId The node id of the remote device or ::EMBER_UNKNOWN_NODE_ID
+ * if the node id is currently unknown.
+ * @return The index of the address table entry for this remove device or
+ * ::EMBER_NULL_ADDRESS_TABLE_INDEX if an error occurred (e.g., the address
+ * table is full).
+ */
+uint8_t emberAfAddAddressTableEntry(EmberEUI64 longId, EmberNodeId shortId);
+
 #endif  // SILABS_APP_FRAMEWORK_INCLUDE_AF_H

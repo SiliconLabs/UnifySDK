@@ -8,5 +8,7 @@
 #ifdef __cplusplus
 #include <string>
 #include <vector>
+#include "zigpc_attrmgmt_int.hpp"
+
 #endif
 #endif

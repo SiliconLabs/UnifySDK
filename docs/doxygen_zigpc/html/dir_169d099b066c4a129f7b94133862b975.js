@@ -1,8 +1,6 @@
 var dir_169d099b066c4a129f7b94133862b975 =
 [
     [ "zigpc_net_mgmt.c", "zigpc__net__mgmt_8c.html", "zigpc__net__mgmt_8c" ],
-    [ "zigpc_net_mgmt_eui64.c", "zigpc__net__mgmt__eui64_8c.html", "zigpc__net__mgmt__eui64_8c" ],
-    [ "zigpc_net_mgmt_eui64.h", "zigpc__net__mgmt__eui64_8h.html", "zigpc__net__mgmt__eui64_8h" ],
     [ "zigpc_net_mgmt_fsm.c", "zigpc__net__mgmt__fsm_8c.html", "zigpc__net__mgmt__fsm_8c" ],
     [ "zigpc_net_mgmt_fsm.h", "zigpc__net__mgmt__fsm_8h.html", "zigpc__net__mgmt__fsm_8h" ],
     [ "zigpc_net_mgmt_fsm_log.c", "zigpc__net__mgmt__fsm__log_8c.html", "zigpc__net__mgmt__fsm__log_8c" ],

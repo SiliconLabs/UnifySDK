@@ -1,5 +1,6 @@
 var z3gateway__attribute__mgmt_8c =
 [
+    [ "emberAfConfigureReportingResponseCallback", "z3gateway__attribute__mgmt_8c.html#a050f85d8816de12c59cbfbd6b83bc0fb", null ],
     [ "emberAfReadAttributesResponseCallback", "z3gateway__attribute__mgmt_8c.html#a5426d0c0c5824cc64d08e8e7e95e4bde", null ],
     [ "emberAfReportAttributesCallback", "z3gateway__attribute__mgmt_8c.html#af5c78b2b392cc1b2990b9735a5e6b9ac", null ],
     [ "z3gatewayInitBinding", "group__z3gateway.html#gaaaec36cc613b43d6776710b2d8affb58", null ],

@@ -21,7 +21,6 @@
 /*  Refer to <GSDK>/protocol/zigbee/app/util/ezsp/ezsp.h
     for more details.
 */
-
 #define emberAddOrUpdateKeyTableEntry ezspAddOrUpdateKeyTableEntry
 #define emberAddTransientLinkKey      ezspAddTransientLinkKey
 #define emberClearTransientLinkKeys   ezspClearTransientLinkKeys

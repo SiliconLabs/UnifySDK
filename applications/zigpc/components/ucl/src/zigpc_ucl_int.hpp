@@ -61,6 +61,7 @@ namespace mqtt
 enum class topic_type_t {
   BY_UNID_PC_NWMGMT,
   BY_UNID_PC_NWMGMT_WRITE,
+  BY_UNID_NODE_STATE,
 };
 
 /**

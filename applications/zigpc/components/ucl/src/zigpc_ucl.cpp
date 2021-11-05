@@ -19,6 +19,9 @@
 #include <sl_log.h>
 #include <sl_status.h>
 
+// ZigPC includes
+#include <zigpc_datastore.h>
+
 // Component includes
 #include "zigpc_ucl_fixt.h"
 #include "zigpc_ucl_int.hpp"
@@ -28,15 +31,26 @@
  *
  * @param event_data event data containing network information
  */
-void zigpc_ucl_on_net_init(void *event_data)
+void zigpc_ucl_on_nwmgmt_init(void *event_data)
 {
   if (event_data != nullptr) {
     zigpc_net_mgmt_on_network_init_t &net_init
       = *reinterpret_cast<struct zigpc_net_mgmt_on_network_init *>(event_data);
+    zigpc_device_data_t data;
 
-    zigbee_eui64_uint_t eui64 = zigbee_eui64_to_uint(net_init.pc_eui64);
+    zigbee_eui64_uint_t pc_eui64 = zigbee_eui64_to_uint(net_init.pc_eui64);
 
-    sl_status_t status = zigpc_ucl::pc_nwmgmt::on_net_init(eui64);
+    sl_status_t status = zigpc_datastore_read_device(net_init.pc_eui64, &data);
+
+    if (status == SL_STATUS_OK) {
+      status = zigpc_ucl::pc_nwmgmt::on_net_init(pc_eui64);
+    }
+
+    if (status == SL_STATUS_OK) {
+      status = zigpc_ucl::node_state::publish_state(pc_eui64,
+                                                    data.network_status,
+                                                    data.max_cmd_delay);
+    }
     if (status != SL_STATUS_OK) {
       sl_log_warning(zigpc_ucl::LOG_TAG,
                      "Network init event handler status: 0x%X",
@@ -50,7 +64,7 @@ void zigpc_ucl_on_net_init(void *event_data)
  *
  * @param event_data event data containing new state information
  */
-void zigpc_ucl_on_state_update(void *event_data)
+void zigpc_ucl_on_nwmgmt_state_update(void *event_data)
 {
   if (event_data != nullptr) {
     zigpc_net_mgmt_on_network_state_update_t &state_update
@@ -72,12 +86,12 @@ sl_status_t zigpc_ucl_fixt_setup(void)
   sl_status_t status;
 
   status = zigpc_net_mgmt_register_observer(ZIGPC_NET_MGMT_NOTIFY_NETWORK_INIT,
-                                            zigpc_ucl_on_net_init);
+                                            zigpc_ucl_on_nwmgmt_init);
 
   if (status == SL_STATUS_OK) {
     status
       = zigpc_net_mgmt_register_observer(ZIGPC_NET_MGMT_NOTIFY_STATE_UPDATE,
-                                         zigpc_ucl_on_state_update);
+                                         zigpc_ucl_on_nwmgmt_state_update);
   }
 
   if (status != SL_STATUS_OK) {
@@ -92,8 +106,8 @@ sl_status_t zigpc_ucl_fixt_setup(void)
 int zigpc_ucl_fixt_shutdown(void)
 {
   zigpc_net_mgmt_unregister_observer(ZIGPC_NET_MGMT_NOTIFY_NETWORK_INIT,
-                                     zigpc_ucl_on_net_init);
+                                     zigpc_ucl_on_nwmgmt_init);
   zigpc_net_mgmt_unregister_observer(ZIGPC_NET_MGMT_NOTIFY_STATE_UPDATE,
-                                     zigpc_ucl_on_state_update);
+                                     zigpc_ucl_on_nwmgmt_state_update);
   return 0;
 }

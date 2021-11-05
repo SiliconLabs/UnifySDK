@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -108,6 +108,9 @@ $(document).ready(function(){initNavTree('namespacemembers_func.html',''); initR
 </li>
 <li>check_if_meta_info_received()
 : <a class="el" href="namespaceimage__file__handler.html#aa8dae3716c103fbd75d8aa5874c87df1">image_file_handler</a>
+</li>
+<li>cleanup_all_node_topics()
+: <a class="el" href="namespacezigpc__ucl_1_1node__state.html#a36670853e3153e4a7d5d2c5c21b3b84c">zigpc_ucl::node_state</a>
 </li>
 <li>clear_cache()
 : <a class="el" href="namespaceuic__ota.html#a4f4273f25a9f928eb3ac3bb824f95dc6">uic_ota</a>
@@ -211,11 +214,11 @@ $(document).ready(function(){initNavTree('namespacemembers_func.html',''); initR
 <li>on_device_announced()
 : <a class="el" href="namespacezigpc__ctrl.html#a8c1091da24b4594e2d9fbac686f24ba2">zigpc_ctrl</a>
 </li>
-<li>on_device_interviewed()
-: <a class="el" href="namespacezigpc__ctrl.html#a6e9f93adee80a3c9a43aedd91cdebcc8">zigpc_ctrl</a>
+<li>on_device_interview_failed()
+: <a class="el" href="namespacezigpc__ctrl.html#abc44910cd54a72f0547d83ecc5ca612c">zigpc_ctrl</a>
 </li>
-<li>on_endpoint_interviewed()
-: <a class="el" href="namespacezigpc__ctrl.html#ab28ea0fb13b98fbe051385289ffa15ab">zigpc_ctrl</a>
+<li>on_device_interviewed()
+: <a class="el" href="namespacezigpc__ctrl.html#a35849151bec774b6cd3a66900b9d2352">zigpc_ctrl</a>
 </li>
 <li>on_net_init()
 : <a class="el" href="namespacezigpc__ucl_1_1pc__nwmgmt.html#a1b060d96411b3a541b02bea436a71780">zigpc_ucl::pc_nwmgmt</a>
@@ -226,6 +229,9 @@ $(document).ready(function(){initNavTree('namespacemembers_func.html',''); initR
 <li>on_shutdown()
 : <a class="el" href="namespacezigpc__ctrl.html#a17c05e93abfe340868a5edc8955bd00b">zigpc_ctrl</a>
 </li>
+<li>on_startup()
+: <a class="el" href="namespacezigpc__ctrl.html#ac6998c2c672b1ae3e5911d9a73e13163">zigpc_ctrl</a>
+</li>
 <li>on_write_mqtt()
 : <a class="el" href="namespacezigpc__ucl_1_1pc__nwmgmt.html#ade67d950319cbdf61ac4659badd22ea0">zigpc_ucl::pc_nwmgmt</a>
 </li>
@@ -233,7 +239,7 @@ $(document).ready(function(){initNavTree('namespacemembers_func.html',''); initR
 : <a class="el" href="namespaceast.html#a93ecddf19db0dd84661b69c37638397b">ast</a>
 </li>
 <li>operator==()
-: <a class="el" href="namespaceast.html#ada7a47876b86212e3157d132e1a668f6">ast</a>
+: <a class="el" href="namespaceast.html#a3b5da76413c137d026ca17ee12fd1059">ast</a>
 </li>
 </ul>
 
@@ -248,11 +254,17 @@ $(document).ready(function(){initNavTree('namespacemembers_func.html',''); initR
 <li>parse_unid()
 : <a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0708e9e354961a934712ff0ac08a9192">zigpc_ucl::mqtt</a>
 </li>
+<li>perform_endpoint_configuration()
+: <a class="el" href="namespacezigpc__ctrl.html#a9a579aacd5ea96eb657a714677ae1b18">zigpc_ctrl</a>
+</li>
 <li>pop_unid_poll()
 : <a class="el" href="namespaceunid__state__handler.html#a0f40c96fc2a5077ccff6941ac361ba6e">unid_state_handler</a>
 </li>
 <li>publish()
 : <a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a921a55b253600dd4da3c0f31c0fff82d">zigpc_ucl::mqtt</a>
+</li>
+<li>publish_state()
+: <a class="el" href="namespacezigpc__ucl_1_1node__state.html#a6ca9a960a8d2de4761a1521e409cfd96">zigpc_ucl::node_state</a>
 </li>
 </ul>
 
@@ -326,6 +338,9 @@ $(document).ready(function(){initNavTree('namespacemembers_func.html',''); initR
 <li>update_current_version()
 : <a class="el" href="namespaceuic__ota.html#a63a81db64692667ab509d20fec7df37f">uic_ota</a>
 </li>
+<li>update_endpoint_capabilities()
+: <a class="el" href="namespacezigpc__ctrl.html#a472ce403f39bb1eebdf2a939ee664b7a">zigpc_ctrl</a>
+</li>
 <li>update_last_error()
 : <a class="el" href="namespaceuic__ota.html#abe801fabefbdee39e792d30510339cde">uic_ota</a>
 </li>
@@ -347,7 +362,7 @@ $(document).ready(function(){initNavTree('namespacemembers_func.html',''); initR
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:51 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:37 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -40,7 +40,7 @@ extern "C" {
  * @param endpoint_id   - the endpoint on the group
  * @param is_reported   - the direction (REPORTED/DESIRED)
  *
- * @return SL_STATUS_OK if the grouplist could be published successfully 
+ * @return SL_STATUS_OK if the grouplist could be published successfully
  */
 sl_status_t
   zigpc_group_mqttpub_grouplist(const zigbee_eui64_t eui64,
@@ -48,7 +48,7 @@ sl_status_t
                                 bool is_reported);
 
 /**
- * @brief zigpc_group_mqttpub_member_groupname 
+ * @brief zigpc_group_mqttpub_member_groupname
  * Publish the name of a group for a given member
  *
  * @param eui64         - the eui64 of the node
@@ -56,7 +56,7 @@ sl_status_t
  * @param group_id      - the group_id
  * @param is_reported   - the direction (REPORTED/DESIRED)
  *
- * @return SL_STATUS_OK if the grouplist could be published successfully 
+ * @return SL_STATUS_OK if the grouplist could be published successfully
  */
 sl_status_t
   zigpc_group_mqttpub_member_groupname(const zigbee_eui64_t eui64,
@@ -67,7 +67,7 @@ sl_status_t
 /**
  * @brief zigpc_group_mqtt_assemble_topic
  *
- * @param eui64         - the eui64 of the node 
+ * @param eui64         - the eui64 of the node
  * @param endpoint_id   - the endpoint on the group
  * @param base_cstr     - the base topic string
  * @param base_cstr_size- the size of the base topic string
@@ -112,8 +112,10 @@ sl_status_t zigpc_group_mqtt_assemble_group_payload(
   size_t *payload_size);
 
 /**
- * @brief zigpc_group_mqtt_assemble_name_payload 
- * Assemble the oayload for publishing a group name
+ * @brief zigpc_group_mqtt_assemble_name_payload
+ * Assemble the payload for publishing a group name. For empty group names, the
+ * payload with the value formatting is still populated. For group names not
+ * found, an empty string is returned.
  *
  * @param eui64             - the eui64 of the endpoint
  * @param endpoint_id       - the endpoint with a groups cluster
@@ -122,16 +124,19 @@ sl_status_t zigpc_group_mqtt_assemble_group_payload(
  * @param payload_size      - the size of payload_string IN: Capacity, OUT:
  *                            number of characters populated.
  *
- * @return SL_STATUS_OK if the payload could be assembled with the 
- * group name
+ * @return SL_STATUS_OK on valid payload population for group names in either
+ * non-empty, empty, or not-found states, SL_STATUS_NULL_POINTER on invalid
+ * args passed in, or SL_STATUS_WOULD_OVERFLOW if passed in payload buffer is
+ * insufficient.
+ *
  */
 sl_status_t
   zigpc_group_mqtt_assemble_name_payload(const zigbee_eui64_t eui64,
                                          const zigbee_endpoint_id_t endpoint_id,
                                          const zigbee_group_id_t group_id,
                                          bool is_reported,
-                                         char *payload_string,
-                                         size_t *payload_size);
+                                         char *const payload_string,
+                                         size_t *const payload_size);
 
 /** @} end zigpc_group_mgmt_mqtt */
 #ifdef __cplusplus

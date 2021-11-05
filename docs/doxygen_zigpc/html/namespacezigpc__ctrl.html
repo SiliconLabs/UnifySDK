@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -96,14 +96,23 @@ Functions</h2></td></tr>
 <tr class="memitem:a8c1091da24b4594e2d9fbac686f24ba2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ctrl.html#a8c1091da24b4594e2d9fbac686f24ba2">on_device_announced</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
 <tr class="memdesc:a8c1091da24b4594e2d9fbac686f24ba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler when a device has joined the network and has not been interviewed. This function will start the device interview process.  <a href="namespacezigpc__ctrl.html#a8c1091da24b4594e2d9fbac686f24ba2">More...</a><br /></td></tr>
 <tr class="separator:a8c1091da24b4594e2d9fbac686f24ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e9f93adee80a3c9a43aedd91cdebcc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ctrl.html#a6e9f93adee80a3c9a43aedd91cdebcc8">on_device_interviewed</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
-<tr class="memdesc:a6e9f93adee80a3c9a43aedd91cdebcc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handled when a device is included on the network. This function will setup endpoint based configurations, configure OTA support, and invoke UCL supported command list to be published.  <a href="namespacezigpc__ctrl.html#a6e9f93adee80a3c9a43aedd91cdebcc8">More...</a><br /></td></tr>
-<tr class="separator:a6e9f93adee80a3c9a43aedd91cdebcc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab28ea0fb13b98fbe051385289ffa15ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ctrl.html#ab28ea0fb13b98fbe051385289ffa15ab">on_endpoint_interviewed</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> ep_id)</td></tr>
-<tr class="memdesc:ab28ea0fb13b98fbe051385289ffa15ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler when an endpoint is included. This function will setup bindings and configure attribute reporting for each cluster under the endpoint.  <a href="namespacezigpc__ctrl.html#ab28ea0fb13b98fbe051385289ffa15ab">More...</a><br /></td></tr>
-<tr class="separator:ab28ea0fb13b98fbe051385289ffa15ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc44910cd54a72f0547d83ecc5ca612c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ctrl.html#abc44910cd54a72f0547d83ecc5ca612c">on_device_interview_failed</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
+<tr class="memdesc:abc44910cd54a72f0547d83ecc5ca612c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handled when a device fails to interview on the network. This function will update the node state topic.  <a href="namespacezigpc__ctrl.html#abc44910cd54a72f0547d83ecc5ca612c">More...</a><br /></td></tr>
+<tr class="separator:abc44910cd54a72f0547d83ecc5ca612c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35849151bec774b6cd3a66900b9d2352"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ctrl.html#a35849151bec774b6cd3a66900b9d2352">on_device_interviewed</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, bool configure_endpoint)</td></tr>
+<tr class="memdesc:a35849151bec774b6cd3a66900b9d2352"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handled when a device is included on the network. This function will setup endpoint based configurations, configure OTA support, and invoke UCL supported command list to be published.  <a href="namespacezigpc__ctrl.html#a35849151bec774b6cd3a66900b9d2352">More...</a><br /></td></tr>
+<tr class="separator:a35849151bec774b6cd3a66900b9d2352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a579aacd5ea96eb657a714677ae1b18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ctrl.html#a9a579aacd5ea96eb657a714677ae1b18">perform_endpoint_configuration</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> ep_id)</td></tr>
+<tr class="memdesc:a9a579aacd5ea96eb657a714677ae1b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure endpoint under a device. This function will setup bindings and configure attribute reporting for each cluster under the endpoint.  <a href="namespacezigpc__ctrl.html#a9a579aacd5ea96eb657a714677ae1b18">More...</a><br /></td></tr>
+<tr class="separator:a9a579aacd5ea96eb657a714677ae1b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a472ce403f39bb1eebdf2a939ee664b7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ctrl.html#a472ce403f39bb1eebdf2a939ee664b7a">update_endpoint_capabilities</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> ep_id)</td></tr>
+<tr class="memdesc:a472ce403f39bb1eebdf2a939ee664b7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update endpoint capabilities for a device. This function will update the cluster capabilities and configure any OTA capabilities.  <a href="namespacezigpc__ctrl.html#a472ce403f39bb1eebdf2a939ee664b7a">More...</a><br /></td></tr>
+<tr class="separator:a472ce403f39bb1eebdf2a939ee664b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6998c2c672b1ae3e5911d9a73e13163"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ctrl.html#ac6998c2c672b1ae3e5911d9a73e13163">on_startup</a> (void)</td></tr>
+<tr class="memdesc:ac6998c2c672b1ae3e5911d9a73e13163"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler called when ZigPC is initializing. This handler will update all device states to "Online functional" before publishing known device capabilities.  <a href="namespacezigpc__ctrl.html#ac6998c2c672b1ae3e5911d9a73e13163">More...</a><br /></td></tr>
+<tr class="separator:ac6998c2c672b1ae3e5911d9a73e13163"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17c05e93abfe340868a5edc8955bd00b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ctrl.html#a17c05e93abfe340868a5edc8955bd00b">on_shutdown</a> (void)</td></tr>
-<tr class="memdesc:a17c05e93abfe340868a5edc8955bd00b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler for when ZigPC is shutting down.  <a href="namespacezigpc__ctrl.html#a17c05e93abfe340868a5edc8955bd00b">More...</a><br /></td></tr>
+<tr class="memdesc:a17c05e93abfe340868a5edc8955bd00b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler for when ZigPC is shutting down. This handler will update all device states to "Offline" before removing all non-node-state based topics for all nodes serviced from the broker.  <a href="namespacezigpc__ctrl.html#a17c05e93abfe340868a5edc8955bd00b">More...</a><br /></td></tr>
 <tr class="separator:a17c05e93abfe340868a5edc8955bd00b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -139,14 +148,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a6e9f93adee80a3c9a43aedd91cdebcc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e9f93adee80a3c9a43aedd91cdebcc8">&#9670;&nbsp;</a></span>on_device_interviewed()</h2>
+<a id="abc44910cd54a72f0547d83ecc5ca612c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc44910cd54a72f0547d83ecc5ca612c">&#9670;&nbsp;</a></span>on_device_interview_failed()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ctrl::on_device_interviewed </td>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ctrl::on_device_interview_failed </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
           <td class="paramname"><em>eui64</em></td><td>)</td>
@@ -155,8 +164,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Event handled when a device is included on the network. This function will setup endpoint based configurations, configure OTA support, and invoke UCL supported command list to be published. </p>
-<p>NOTE: This function always calls <a class="el" href="namespacezigpc__ctrl.html#ab28ea0fb13b98fbe051385289ffa15ab">on_endpoint_interviewed</a> per endpoint supported.</p>
+<p>Event handled when a device fails to interview on the network. This function will update the node state topic. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">eui64</td><td>Device identifier. </td></tr>
@@ -167,14 +175,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ab28ea0fb13b98fbe051385289ffa15ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab28ea0fb13b98fbe051385289ffa15ab">&#9670;&nbsp;</a></span>on_endpoint_interviewed()</h2>
+<a id="a35849151bec774b6cd3a66900b9d2352"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35849151bec774b6cd3a66900b9d2352">&#9670;&nbsp;</a></span>on_device_interviewed()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ctrl::on_endpoint_interviewed </td>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ctrl::on_device_interviewed </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
           <td class="paramname"><em>eui64</em>, </td>
@@ -182,8 +190,8 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>&#160;</td>
-          <td class="paramname"><em>ep_id</em>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>configure_endpoint</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -193,12 +201,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Event handler when an endpoint is included. This function will setup bindings and configure attribute reporting for each cluster under the endpoint. </p>
-<p>NOTE: This function is always called by <a class="el" href="namespacezigpc__ctrl.html#a6e9f93adee80a3c9a43aedd91cdebcc8">on_device_interviewed</a>.</p>
+<p>Event handled when a device is included on the network. This function will setup endpoint based configurations, configure OTA support, and invoke UCL supported command list to be published. </p>
+<p>NOTE: This function always calls <a class="el" href="namespacezigpc__ctrl.html#a472ce403f39bb1eebdf2a939ee664b7a">update_endpoint_capabilities</a> per endpoint supported.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">eui64</td><td>Device identifier. </td></tr>
-    <tr><td class="paramname">ep_id</td><td>Endpoint identifier. </td></tr>
+    <tr><td class="paramname">configure_endpoint</td><td>Flag to indicate if endpoint needs configuration. </td></tr>
   </table>
   </dd>
 </dl>
@@ -222,7 +230,104 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Event handler for when ZigPC is shutting down. </p>
+<p>Event handler for when ZigPC is shutting down. This handler will update all device states to "Offline" before removing all non-node-state based topics for all nodes serviced from the broker. </p>
+
+</div>
+</div>
+<a id="ac6998c2c672b1ae3e5911d9a73e13163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6998c2c672b1ae3e5911d9a73e13163">&#9670;&nbsp;</a></span>on_startup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void zigpc_ctrl::on_startup </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Event handler called when ZigPC is initializing. This handler will update all device states to "Online functional" before publishing known device capabilities. </p>
+
+</div>
+</div>
+<a id="a9a579aacd5ea96eb657a714677ae1b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a579aacd5ea96eb657a714677ae1b18">&#9670;&nbsp;</a></span>perform_endpoint_configuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ctrl::perform_endpoint_configuration </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
+          <td class="paramname"><em>eui64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>ep_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configure endpoint under a device. This function will setup bindings and configure attribute reporting for each cluster under the endpoint. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eui64</td><td>Device identifier. </td></tr>
+    <tr><td class="paramname">ep_id</td><td>Endpoint identifier. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on successfully configuring the endpoint, error otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a472ce403f39bb1eebdf2a939ee664b7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a472ce403f39bb1eebdf2a939ee664b7a">&#9670;&nbsp;</a></span>update_endpoint_capabilities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ctrl::update_endpoint_capabilities </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
+          <td class="paramname"><em>eui64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>ep_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update endpoint capabilities for a device. This function will update the cluster capabilities and configure any OTA capabilities. </p>
+<p>NOTE: This function is always called by <a class="el" href="namespacezigpc__ctrl.html#a35849151bec774b6cd3a66900b9d2352">on_device_interviewed</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eui64</td><td>Device identifier. </td></tr>
+    <tr><td class="paramname">ep_id</td><td>Endpoint identifier. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on successfully updating capabilities, error otherwise. </dd></dl>
 
 </div>
 </div>
@@ -255,7 +360,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacezigpc__ctrl.html">zigpc_ctrl</a></li>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:48 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

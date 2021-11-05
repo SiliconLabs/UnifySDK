@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -84,18 +84,38 @@ $(document).ready(function(){initNavTree('zigpc__attrmgmt__int_8hpp.html',''); i
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">zigpc_attrmgmt_int.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
 <code>#include &quot;<a class="el" href="sl__status_8h_source.html">sl_status.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zcl__attribute__info_8h_source.html">zcl_attribute_info.h</a>&quot;</code><br />
 <code>#include &quot;zcl_definitions.h&quot;</code><br />
 </div>
 <p><a href="zigpc__attrmgmt__int_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__attrmgmt__configure__status__record__t.html">zigpc_attrmgmt_configure_status_record_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">the structure representing a configure reporting response frame  <a href="structzigpc__attrmgmt__configure__status__record__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gad4f252f590e302c1e7682dd7a2d3540a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#gad4f252f590e302c1e7682dd7a2d3540a">ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:gad4f252f590e302c1e7682dd7a2d3540a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga35f45362ac1a4fe282d7b3c0dadc335a"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#ga35f45362ac1a4fe282d7b3c0dadc335a">configure_response_buffer_t</a>[<a class="el" href="group__attribute__management__int.html#gad4f252f590e302c1e7682dd7a2d3540a">ZCL_CONFIGURE_STATUS_RESPONSE_SIZE</a>]</td></tr>
+<tr class="separator:ga35f45362ac1a4fe282d7b3c0dadc335a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga5a462344f5e118fbcfce4846ce8258ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#ga5a462344f5e118fbcfce4846ce8258ef">zigpc_attrmgmt_build_configure_report_records</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> cluster_id, std::vector&lt; zigpc_zcl_configure_reporting_record_t &gt; &amp;record_list)</td></tr>
@@ -107,6 +127,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ga698df35f6ec603cad50b23a8e059024f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#ga698df35f6ec603cad50b23a8e059024f">zigpc_attrmgmt_send_split_read_cmds</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, <a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> cluster_id, const std::vector&lt; <a class="el" href="group__zigpc__common__zigbee.html#ga004481bfa4498fbb23852d301de9dc54">zcl_attribute_id_t</a> &gt; &amp;attr_ids)</td></tr>
 <tr class="memdesc:ga698df35f6ec603cad50b23a8e059024f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split a list of Attribute Read records into sets of <a class="el" href="attribute__management__int_8h.html#ae412a3d796b4078513543dd59e65abc6">ZIGPC_ATTRMGMT_READ_RECORDS_LIMIT_PER_MESSAGE</a> sized ZCL frames (if needed) and send each ZCL frame to the destination endpoint. The splitting of the attribute read records allow frames to not exceed the maximum ZCL packet size.  <a href="group__attribute__management__int.html#ga698df35f6ec603cad50b23a8e059024f">More...</a><br /></td></tr>
 <tr class="separator:ga698df35f6ec603cad50b23a8e059024f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf06045da40a8548703d2bc632b41b097"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#gaf06045da40a8548703d2bc632b41b097">zigpc_attrmgmt_get_next_poll_entry</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> &amp;eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> &amp;endpoint_id, <a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> &amp;cluster_id)</td></tr>
+<tr class="memdesc:gaf06045da40a8548703d2bc632b41b097"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_get_next_poll_entry Get the next poll entry to be sent  <a href="group__attribute__management__int.html#gaf06045da40a8548703d2bc632b41b097">More...</a><br /></td></tr>
+<tr class="separator:gaf06045da40a8548703d2bc632b41b097"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5c486d71c285299b76f042c708d17d96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#ga5c486d71c285299b76f042c708d17d96">zigpc_attrmgmt_buffer_to_configure_status</a> (const <a class="el" href="group__attribute__management__int.html#ga35f45362ac1a4fe282d7b3c0dadc335a">configure_response_buffer_t</a> buffer, <a class="el" href="structzigpc__attrmgmt__configure__status__record__t.html">zigpc_attrmgmt_configure_status_record_t</a> &amp;record)</td></tr>
+<tr class="memdesc:ga5c486d71c285299b76f042c708d17d96"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_buffer_to_configure_status Extract a configure report status record from a buffer of 4 bytes  <a href="group__attribute__management__int.html#ga5c486d71c285299b76f042c708d17d96">More...</a><br /></td></tr>
+<tr class="separator:ga5c486d71c285299b76f042c708d17d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga594928750f167b071f7eb0ec59a48990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__int.html#ga594928750f167b071f7eb0ec59a48990">zigpc_attrmgmt_buffer_to_configure_status_list</a> (const uint8_t *buffer, size_t buffer_len, std::list&lt; <a class="el" href="structzigpc__attrmgmt__configure__status__record__t.html">zigpc_attrmgmt_configure_status_record_t</a> &gt; &amp;record_list)</td></tr>
+<tr class="memdesc:ga594928750f167b071f7eb0ec59a48990"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_buffer_to_configure_status_list Extracts a series of records from a buffer of bytes  <a href="group__attribute__management__int.html#ga594928750f167b071f7eb0ec59a48990">More...</a><br /></td></tr>
+<tr class="separator:ga594928750f167b071f7eb0ec59a48990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -114,7 +143,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_b6f745f966ae74add2521a551533f539.html">attribute_management</a></li><li class="navelem"><a class="el" href="dir_65cbbcbe9e4af1172428fcc9ed2fe9fe.html">src</a></li><li class="navelem"><a class="el" href="zigpc__attrmgmt__int_8hpp.html">zigpc_attrmgmt_int.hpp</a></li>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

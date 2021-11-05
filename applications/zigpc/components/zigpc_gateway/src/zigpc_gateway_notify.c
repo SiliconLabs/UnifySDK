@@ -11,6 +11,7 @@
  *
  *****************************************************************************/
 
+#include <inttypes.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -20,8 +21,8 @@
 
 // ZigPC includes
 #include <zigpc_common_observable.h>
-#include <zigpc_config.h>
 
+// Component includes
 #include "zigpc_gateway_notify.h"
 #include "zigpc_gateway_int.h"
 
@@ -56,6 +57,7 @@ sl_status_t zigpc_gateway_reset_observers(void)
       ZIGPC_GATEWAY_NOTIFY_NODE_ENDPOINT_DISCOVERED,
       ZIGPC_GATEWAY_NOTIFY_REPORTED_ATTRIBUTE,
       ZIGPC_GATEWAY_NOTIFY_READ_ATTRIBUTE_RESPONSE,
+      ZIGPC_GATEWAY_NOTIFY_CONFIGURE_REPORTING_RESPONSE,
       ZIGPC_GATEWAY_NOTIFY_ZCL_COMMAND_RECEIVED,
       ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_STARTED,
       ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_COMPLETED,
@@ -71,23 +73,6 @@ sl_status_t zigpc_gateway_reset_observers(void)
   }
 
   return result;
-}
-
-void zigpc_gateway_hdl_on_emberaf_stack_init(void)
-{
-  const zigpc_config_t *conf = zigpc_get_config();
-  if (conf->tc_use_well_known_key == false) {
-    EzspStatus status = z3gatewaySetEzspPolicy(
-      EZSP_TRUST_CENTER_POLICY,
-      (EZSP_DECISION_ALLOW_JOINS | EZSP_DECISION_JOINS_USE_INSTALL_CODE_KEY),
-      "Trust Center Policy",
-      "Joins using install code only");
-
-    sl_log_info(
-      LOG_TAG,
-      "Policy set status to allow joins using install code only: 0x%X",
-      status);
-  }
 }
 
 /**
@@ -127,16 +112,13 @@ void zigpc_gateway_hdl_on_network_initialized(
 void zigpc_gateway_hdl_on_node_add_start(const EmberEUI64 eui64_le)
 {
   sl_status_t status;
-  char eui64_str[ZIGBEE_EUI64_HEX_STR_LENGTH];
   static struct zigpc_gateway_on_node_add node_add = {0};
 
   zigbee_eui64_copy_switch_endian(node_add.eui64, eui64_le);
 
-  status
-    = zigbee_eui64_to_str(eui64_le, eui64_str, ZIGBEE_EUI64_HEX_STR_LENGTH);
-  if (status == SL_STATUS_OK) {
-    sl_log_debug(LOG_TAG, "EUI64 %s: Join started", eui64_str);
-  }
+  sl_log_debug(LOG_TAG,
+               "EUI64 %016" PRIX64 ": Device announced",
+               zigbee_eui64_to_uint(node_add.eui64));
 
   status = zigpc_observable_notify(&zigpc_gateway_observable,
                                    ZIGPC_GATEWAY_NOTIFY_NODE_ADD_START,
@@ -156,16 +138,13 @@ void zigpc_gateway_hdl_on_node_add_start(const EmberEUI64 eui64_le)
 void zigpc_gateway_hdl_on_node_add_complete(const EmberEUI64 eui64_le)
 {
   sl_status_t status;
-  char eui64_str[ZIGBEE_EUI64_HEX_STR_LENGTH];
   static struct zigpc_gateway_on_node_add node_add = {0};
 
   zigbee_eui64_copy_switch_endian(node_add.eui64, eui64_le);
 
-  status
-    = zigbee_eui64_to_str(eui64_le, eui64_str, ZIGBEE_EUI64_HEX_STR_LENGTH);
-  if (status == SL_STATUS_OK) {
-    sl_log_debug(LOG_TAG, "EUI64 %s: Add complete", eui64_str);
-  }
+  sl_log_debug(LOG_TAG,
+               "EUI64 %016" PRIX64 ": Key replacement verified",
+               zigbee_eui64_to_uint(node_add.eui64));
 
   status = zigpc_observable_notify(&zigpc_gateway_observable,
                                    ZIGPC_GATEWAY_NOTIFY_NODE_ADD_COMPLETE,
@@ -182,16 +161,13 @@ void zigpc_gateway_hdl_on_node_add_complete(const EmberEUI64 eui64_le)
 void zigpc_gateway_hdl_on_node_removed(const EmberEUI64 eui64_le)
 {
   sl_status_t status;
-  char eui64_str[ZIGBEE_EUI64_HEX_STR_LENGTH];
   static zigpc_gateway_on_node_removed_t node_removed = {0};
 
   zigbee_eui64_copy_switch_endian(node_removed.eui64, eui64_le);
 
-  status
-    = zigbee_eui64_to_str(eui64_le, eui64_str, ZIGBEE_EUI64_HEX_STR_LENGTH);
-  if (status == SL_STATUS_OK) {
-    sl_log_debug(LOG_TAG, "Removed EUI64 %s", eui64_str);
-  }
+  sl_log_debug(LOG_TAG,
+               "EUI64 %016" PRIX64 ": Removed",
+               zigbee_eui64_to_uint(node_removed.eui64));
 
   status = zigpc_observable_notify(&zigpc_gateway_observable,
                                    ZIGPC_GATEWAY_NOTIFY_NODE_REMOVED,
@@ -211,20 +187,15 @@ void zigpc_gateway_hdl_on_node_discovered(const EmberEUI64 eui64_le,
                                           uint8_t endpointCount)
 {
   sl_status_t status;
-  char eui64_str[ZIGBEE_EUI64_HEX_STR_LENGTH];
   static zigpc_gateway_on_node_discovered_t node_disc = {0};
 
   zigbee_eui64_copy_switch_endian(node_disc.eui64, eui64_le);
   node_disc.endpoint_count = endpointCount;
 
-  status
-    = zigbee_eui64_to_str(eui64_le, eui64_str, ZIGBEE_EUI64_HEX_STR_LENGTH);
-  if (status == SL_STATUS_OK) {
-    sl_log_debug(LOG_TAG,
-                 "Discovered EUI64 %s: endpoint count: %u",
-                 eui64_str,
-                 endpointCount);
-  }
+  sl_log_debug(LOG_TAG,
+               "EUI64 %016" PRIX64 ": %u endpoints discovered",
+               zigbee_eui64_to_uint(node_disc.eui64),
+               endpointCount);
 
   status = zigpc_observable_notify(&zigpc_gateway_observable,
                                    ZIGPC_GATEWAY_NOTIFY_NODE_DISCOVERED,
@@ -245,30 +216,26 @@ void zigpc_gateway_hdl_on_node_endpoint_discovered(
   const EmberEUI64 eui64_le, const struct z3gatewayEndpointInfo *endpointInfo)
 {
   sl_status_t status;
-  char eui64_str[ZIGBEE_EUI64_HEX_STR_LENGTH];
   static zigpc_gateway_on_node_endpoint_discovered_t endpoint_discovered = {0};
 
   zigbee_eui64_copy_switch_endian(endpoint_discovered.eui64, eui64_le);
-
-  status = zigbee_eui64_to_str(endpoint_discovered.eui64,
-                               eui64_str,
-                               ZIGBEE_EUI64_HEX_STR_LENGTH);
-  if (status == SL_STATUS_OK) {
-    sl_log_debug(
-      LOG_TAG,
-      "Discovered EUI64 %s: endpoint %u: deviceId: 0x%04X cluster count: %u",
-      eui64_str,
-      endpointInfo->endpoint,
-      endpointInfo->deviceId,
-      endpointInfo->serverClusterCount);
-    for (int i = 0; i < endpointInfo->serverClusterCount; i++) {
-      sl_log_debug(LOG_TAG,
-                   "Discovered EUI64 %s: endpoint %u: cluster %u = 0x%04X",
-                   eui64_str,
-                   endpointInfo->endpoint,
-                   i,
-                   endpointInfo->serverClusterList[i]);
-    }
+  zigbee_eui64_uint_t eui64_uint
+    = zigbee_eui64_to_uint(endpoint_discovered.eui64);
+  sl_log_debug(LOG_TAG,
+               "Discovered EUI64:%016" PRIX64
+               " endpoint %u: deviceId: 0x%04X cluster count: %u",
+               eui64_uint,
+               endpointInfo->endpoint,
+               endpointInfo->deviceId,
+               endpointInfo->serverClusterCount);
+  for (int i = 0; i < endpointInfo->serverClusterCount; i++) {
+    sl_log_debug(LOG_TAG,
+                 "Discovered EUI64 %016" PRIX64
+                 ": endpoint %u: cluster %u = 0x%04X",
+                 eui64_uint,
+                 endpointInfo->endpoint,
+                 i,
+                 endpointInfo->serverClusterList[i]);
   }
 
   endpoint_discovered.endpoint.endpoint_id   = endpointInfo->endpoint;
@@ -341,12 +308,13 @@ void zigpc_gateway_hdl_on_reported_attribute(
            attribute_status_records,
            sizeof(uint8_t) * reported_data.frame.size);
 
-    sl_log_debug(
-      LOG_TAG,
-      "Handle new report with endpoint:%d, cluster:%d, frame_size:%d",
-      reported_data.endpoint_id,
-      reported_data.cluster_id,
-      reported_data.frame.size);
+    sl_log_debug(LOG_TAG,
+                 "Attribute report from EUI64:%016" PRIX64
+                 " endpoint:%d, cluster:%d, frame_size:%d",
+                 zigbee_eui64_to_uint(reported_data.eui64),
+                 reported_data.endpoint_id,
+                 reported_data.cluster_id,
+                 reported_data.frame.size);
 
     status = zigpc_observable_notify(&zigpc_gateway_observable,
                                      ZIGPC_GATEWAY_NOTIFY_REPORTED_ATTRIBUTE,
@@ -366,7 +334,6 @@ void zigpc_gateway_hdl_on_read_attributes(
   uint16_t attribute_status_records_size)
 {
   sl_status_t status = SL_STATUS_OK;
-  char eui64_str[ZIGBEE_EUI64_HEX_STR_LENGTH];
   static zigpc_gateway_on_read_attribute_response_t read_response = {0};
 
   if (attribute_status_records_size > ZCL_FRAME_BUFFER_SIZE_MAX) {
@@ -378,19 +345,15 @@ void zigpc_gateway_hdl_on_read_attributes(
   }
 
   if (status == SL_STATUS_OK) {
-    status
-      = zigbee_eui64_to_str(eui64_le, eui64_str, ZIGBEE_EUI64_HEX_STR_LENGTH);
-  }
-
-  if (status == SL_STATUS_OK) {
-    sl_log_debug(
-      LOG_TAG,
-      "Read Attribute Response from EUI64 %s: endpoint: %u cluster: 0x%04X",
-      eui64_str,
-      endpoint,
-      clusterId);
-
     zigbee_eui64_copy_switch_endian(read_response.eui64, eui64_le);
+
+    sl_log_debug(LOG_TAG,
+                 "Read Attribute Response from EUI64:%016" PRIX64
+                 " endpoint: %u cluster: 0x%04X",
+                 zigbee_eui64_to_uint(read_response.eui64),
+                 endpoint,
+                 clusterId);
+
     read_response.endpoint_id = endpoint;
     read_response.cluster_id  = clusterId;
     read_response.frame.size  = attribute_status_records_size;
@@ -408,6 +371,53 @@ void zigpc_gateway_hdl_on_read_attributes(
   }
 }
 
+void zigpc_gateway_hdl_on_configure_response(
+  const EmberEUI64 eui64_le,
+  uint8_t endpoint,
+  uint16_t clusterId,
+  uint8_t *attribute_status_records,
+  uint16_t attribute_status_records_size)
+{
+  sl_status_t status                                            = SL_STATUS_OK;
+  zigpc_gateway_on_read_attribute_response_t configure_response = {0};
+
+  if (attribute_status_records_size > ZCL_FRAME_BUFFER_SIZE_MAX) {
+    status = SL_STATUS_WOULD_OVERFLOW;
+    sl_log_error(LOG_TAG,
+                 "Cannot copy over read response that is bigger than ZCL frame"
+                 " size allocated: 0x%04X",
+                 status);
+
+    return;
+  }
+
+  if (status == SL_STATUS_OK) {
+    zigbee_eui64_copy_switch_endian(configure_response.eui64, eui64_le);
+    configure_response.endpoint_id = endpoint;
+    configure_response.cluster_id  = clusterId;
+    configure_response.frame.size  = attribute_status_records_size;
+
+    sl_log_debug(LOG_TAG,
+                 "Read Attribute Response from EUI64 %016:" PRIX64
+                 " endpoint: %u cluster: 0x%04X",
+                 zigbee_eui64_to_uint(configure_response.eui64),
+                 endpoint,
+                 clusterId);
+
+    memcpy(configure_response.frame.buffer,
+           attribute_status_records,
+           sizeof(uint8_t) * configure_response.frame.size);
+
+    status = zigpc_observable_notify(
+      &zigpc_gateway_observable,
+      ZIGPC_GATEWAY_NOTIFY_CONFIGURE_REPORTING_RESPONSE,
+      (void *)&configure_response);
+    if (status != SL_STATUS_OK) {
+      sl_log_warning(LOG_TAG, "CONFIGURE_RESPONSE failed: 0x%X", status);
+    }
+  }
+}
+
 EmberAfStatus zigpc_gateway_hdl_on_cmd_received(const EmberEUI64 eui64_le,
                                                 uint8_t endpoint,
                                                 uint16_t clusterId,
@@ -417,8 +427,7 @@ EmberAfStatus zigpc_gateway_hdl_on_cmd_received(const EmberEUI64 eui64_le,
                                                 uint16_t bufferLength,
                                                 uint8_t bufferPayloadStartIndex)
 {
-  sl_status_t status = SL_STATUS_OK;
-  char eui64_str[ZIGBEE_EUI64_HEX_STR_LENGTH];
+  sl_status_t status                                          = SL_STATUS_OK;
   static zigpc_gateway_on_command_received_t command_received = {0};
 
   // Set default ZCL status in case there are no listeners
@@ -433,20 +442,16 @@ EmberAfStatus zigpc_gateway_hdl_on_cmd_received(const EmberEUI64 eui64_le,
   }
 
   if (status == SL_STATUS_OK) {
-    status
-      = zigbee_eui64_to_str(eui64_le, eui64_str, ZIGBEE_EUI64_HEX_STR_LENGTH);
-  }
-
-  if (status == SL_STATUS_OK) {
+    zigbee_eui64_copy_switch_endian(command_received.eui64, eui64_le);
     sl_log_debug(LOG_TAG,
-                 "Received command from EUI64 %s: endpoint: %u cluster: 0x%04X "
+                 "Received command from EUI64:%016" PRIX64
+                 " endpoint: %u cluster: 0x%04X "
                  "command: 0x02X",
-                 eui64_str,
+                 zigbee_eui64_to_uint(command_received.eui64),
                  endpoint,
                  clusterId,
                  commandId);
 
-    zigbee_eui64_copy_switch_endian(command_received.eui64, eui64_le);
     command_received.endpoint_id           = endpoint;
     command_received.cluster_id            = clusterId;
     command_received.command_id            = commandId;
@@ -484,21 +489,15 @@ void zigpc_gateway_hdl_on_ota_update_started(const EmberEUI64 eui64,
 {
   sl_status_t status;
   static zigpc_gateway_on_ota_started_t ota_event;
-  char eui64_str[ZIGBEE_EUI64_HEX_STR_LENGTH];
 
   zigbee_eui64_copy_switch_endian(ota_event.eui64, eui64);
   ota_event.manufacturer_id  = manufacturerId;
   ota_event.image_type_id    = imageTypeId;
   ota_event.firmware_version = firmwareVersion;
 
-  status = zigbee_eui64_to_str(ota_event.eui64,
-                               eui64_str,
-                               ZIGBEE_EUI64_HEX_STR_LENGTH);
-  if (status == SL_STATUS_OK) {
-    sl_log_debug(LOG_TAG,
-                 "Received OTA update start event from EUI64 %s",
-                 eui64_str);
-  }
+  sl_log_debug(LOG_TAG,
+               "Received OTA update start event from EUI64 %016" PRIX64,
+               zigbee_eui64_to_uint(ota_event.eui64));
 
   status = zigpc_observable_notify(&zigpc_gateway_observable,
                                    ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_STARTED,
@@ -516,7 +515,6 @@ void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64,
 {
   sl_status_t status;
   static zigpc_gateway_on_ota_completed_t ota_event;
-  char eui64_str[ZIGBEE_EUI64_HEX_STR_LENGTH];
 
   zigbee_eui64_copy_switch_endian(ota_event.eui64, eui64);
   ota_event.manufacturer_id  = manufacturerId;
@@ -524,14 +522,9 @@ void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64,
   ota_event.firmware_version = firmwareVersion;
   ota_event.status           = otaStatus;
 
-  status = zigbee_eui64_to_str(ota_event.eui64,
-                               eui64_str,
-                               ZIGBEE_EUI64_HEX_STR_LENGTH);
-  if (status == SL_STATUS_OK) {
-    sl_log_debug(LOG_TAG,
-                 "Received OTA update complete event from EUI64 %s",
-                 eui64_str);
-  }
+  sl_log_debug(LOG_TAG,
+               "Received OTA update complete event from EUI64 %016" PRIX64,
+               zigbee_eui64_to_uint(ota_event.eui64));
 
   status = zigpc_observable_notify(&zigpc_gateway_observable,
                                    ZIGPC_GATEWAY_NOTIFY_OTA_UPDATE_COMPLETED,
@@ -542,7 +535,9 @@ void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64,
 }
 
 struct z3gatewayCallbacks zigpc_gateway_z3gateway_callbacks = {
-  .onEmberAfStackInitalized        = zigpc_gateway_hdl_on_emberaf_stack_init,
+  .onEmberAfStackInitalized        = NULL,
+  .onEmberAfNcpPreReset            = zigpc_gateway_on_ncp_pre_reset,
+  .onEmberAfNcpPostReset           = zigpc_gateway_on_ncp_post_reset,
   .onTrustCenterInitialized        = zigpc_gateway_hdl_on_network_initialized,
   .onTrustCenterDeviceJoinStart    = zigpc_gateway_hdl_on_node_add_start,
   .onTrustCenterDeviceJoinComplete = zigpc_gateway_hdl_on_node_add_complete,
@@ -550,9 +545,10 @@ struct z3gatewayCallbacks zigpc_gateway_z3gateway_callbacks = {
   .onTrustCenterDeviceDiscovered   = zigpc_gateway_hdl_on_node_discovered,
   .onTrustCenterDeviceEndpointDiscovered
   = zigpc_gateway_hdl_on_node_endpoint_discovered,
-  .onReportedAttributeChange = zigpc_gateway_hdl_on_reported_attribute,
-  .onReadAttributesResponse  = zigpc_gateway_hdl_on_read_attributes,
-  .onClusterCommandReceived  = zigpc_gateway_hdl_on_cmd_received,
-  .onOtaUpdateStarted        = zigpc_gateway_hdl_on_ota_update_started,
-  .onOtaUpdateCompleted      = zigpc_gateway_hdl_on_ota_update_completed,
+  .onReportedAttributeChange    = zigpc_gateway_hdl_on_reported_attribute,
+  .onReadAttributesResponse     = zigpc_gateway_hdl_on_read_attributes,
+  .onConfigureReportingResponse = zigpc_gateway_hdl_on_configure_response,
+  .onClusterCommandReceived     = zigpc_gateway_hdl_on_cmd_received,
+  .onOtaUpdateStarted           = zigpc_gateway_hdl_on_ota_update_started,
+  .onOtaUpdateCompleted         = zigpc_gateway_hdl_on_ota_update_completed,
 };

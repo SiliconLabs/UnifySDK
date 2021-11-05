@@ -19,9 +19,9 @@
 #include "smartstart_management.hpp"
 
 /* ZigPC includes */
-#include "zigpc_common_unid.h"
-#include "zigpc_net_mgmt.h"
-#include "zigpc_net_mgmt_notify.h"
+#include <zigpc_ucl.hpp>
+#include <zigpc_net_mgmt.h>
+#include <zigpc_net_mgmt_notify.h>
 
 #include "zigpc_smartstart_fixt.h"
 #include "zigpc_smartstart_int.hpp"
@@ -102,24 +102,6 @@ bool operator==(const zigpc_dsk_install_code_t &lhs,
   return equal;
 }
 
-std::string zigpc_smartstart_get_unid(const zigbee_eui64_t eui64)
-{
-  std::string unid = "";
-  size_t unid_len  = ZIGBEE_EUI64_HEX_STR_LENGTH + strlen(ZIGPC_UNID_PREFIX);
-  std::vector<char> unid_cstr(unid_len);
-
-  sl_status_t status
-    = zigpc_common_eui64_to_unid(eui64, unid_cstr.data(), unid_len);
-
-  if (status == SL_STATUS_OK) {
-    unid = unid_cstr.data();
-  } else {
-    sl_log_warning(LOG_TAG, "Unable to convert EUI64 to UNID: 0x%X", status);
-  }
-
-  return unid;
-}
-
 /**
  * @brief Map of DSKs parsed and processed by ZigPC.
  *
@@ -132,7 +114,8 @@ void zigpc_smartstart_on_network_init(void *event_data)
   const struct zigpc_net_mgmt_on_network_init *net_init
     = (struct zigpc_net_mgmt_on_network_init *)event_data;
 
-  std::string unid = zigpc_smartstart_get_unid(net_init->pc_eui64);
+  std::string unid
+    = zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(net_init->pc_eui64));
   if (!unid.empty()) {
     smartstart::Management::get_instance()->init(
       unid,
@@ -154,6 +137,9 @@ void zigpc_smartstart_on_list_update(bool entries_pending_inclusion)
     = smartstart::Management::get_instance()->get_cache_entries(q);
 
   for (smartstart::Entry entry: include_entries) {
+    if (!entry.device_unid.empty()) {
+      continue;
+    }
     zigpc_dsk_install_code_t dsk_content;
     sl_status_t status
       = zigpc_smartstart_dsk_parse_install_code(entry.dsk, dsk_content);
@@ -168,6 +154,9 @@ void zigpc_smartstart_on_list_update(bool entries_pending_inclusion)
         status = zigpc_net_mgmt_add_node(dsk_content.eui64,
                                          dsk_content.install_code,
                                          dsk_content.install_code_length);
+        if (status == SL_STATUS_OK) {
+          status = zigpc_netmgmt_network_permit_joins(true);
+        }
       }
       sl_log_debug(LOG_TAG, "Node addition status: 0x%X", status);
     }
@@ -191,7 +180,8 @@ void zigpc_smartstart_on_node_added(void *event_data)
   }
 
   if (status == SL_STATUS_OK) {
-    std::string unid = zigpc_smartstart_get_unid(node_added->eui64);
+    std::string unid
+      = zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(node_added->eui64));
     if (unid.empty()) {
       status = SL_STATUS_OBJECT_WRITE;
     } else {
@@ -203,11 +193,12 @@ void zigpc_smartstart_on_node_added(void *event_data)
 
   if (status == SL_STATUS_OK) {
     stored_dsk_entries.erase(key);
+    if (stored_dsk_entries.empty()) {
+      status = zigpc_netmgmt_network_permit_joins(false);
+    }
   }
 
-  sl_log_debug(LOG_TAG,
-               "Status of smartstart list node add complete: 0x%X",
-               status);
+  sl_log_debug(LOG_TAG, "Node add event handler status: 0x%X", status);
 }
 
 void zigpc_smartstart_on_node_removed(void *event_data)
@@ -216,7 +207,8 @@ void zigpc_smartstart_on_node_removed(void *event_data)
   const zigpc_net_mgmt_on_node_removed_t *node_removed
     = (zigpc_net_mgmt_on_node_removed_t *)event_data;
 
-  std::string unid = zigpc_smartstart_get_unid(node_removed->eui64);
+  std::string unid
+    = zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(node_removed->eui64));
   if (unid.empty()) {
     status = SL_STATUS_OBJECT_WRITE;
   } else {

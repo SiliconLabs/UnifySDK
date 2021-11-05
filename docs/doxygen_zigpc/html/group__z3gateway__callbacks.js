@@ -10,6 +10,9 @@ var group__z3gateway__callbacks =
     ] ],
     [ "z3gatewayCallbacks", "structz3gatewayCallbacks.html", [
       [ "onClusterCommandReceived", "structz3gatewayCallbacks.html#a0e30b31ec50e4d7490f7a66126ffa4b8", null ],
+      [ "onConfigureReportingResponse", "structz3gatewayCallbacks.html#ae5f64cf4ed5bc73d250333b73d7f0e01", null ],
+      [ "onEmberAfNcpPostReset", "structz3gatewayCallbacks.html#ae7732493322ac203aa9df7e99a878011", null ],
+      [ "onEmberAfNcpPreReset", "structz3gatewayCallbacks.html#a6b5078e0b1bccb01a85c987ba832c4fb", null ],
       [ "onEmberAfStackInitalized", "structz3gatewayCallbacks.html#ac77dd8f69e61a65272947e7c7e660208", null ],
       [ "onOtaUpdateCompleted", "structz3gatewayCallbacks.html#ad4bb9a0fe6e91712319c2afdb7a508fe", null ],
       [ "onOtaUpdateStarted", "structz3gatewayCallbacks.html#adede2d0e13d4bb779373c583854055d3", null ],

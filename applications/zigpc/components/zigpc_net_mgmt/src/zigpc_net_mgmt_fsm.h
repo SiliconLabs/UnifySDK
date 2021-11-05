@@ -26,7 +26,7 @@
  * @brief Duration set for Node Add Process to complete
  *
  */
-#define ZIGPC_NET_MGMT_ADD_TIMEOUT (CLOCK_SECOND * 300)
+#define ZIGPC_NET_MGMT_ADD_TIMEOUT (CLOCK_SECOND * 60)
 
 /**
  * @brief Duration set for Node Remove Process to complete
@@ -38,7 +38,7 @@
  * @brief Duration set for Node Interview Process to complete
  *
  */
-#define ZIGPC_NODE_INTERVIEW_TIMEOUT_MS 5000
+#define ZIGPC_NODE_INTERVIEW_TIMEOUT_MS (CLOCK_SECOND * 60)
 
 /**
  * @brief Network Management FSM Events
@@ -165,6 +165,7 @@ struct zigpc_net_mgmt_fsm {
   zigbee_eui64_t eui64_to_remove;
   zigpc_net_mgmt_state_change_request_t state_change_request;
   struct etimer timer;
+  bool state_change_in_progress;
 };
 
 /**
@@ -229,6 +230,16 @@ enum zigpc_net_mgmt_fsm_state zigpc_net_mgmt_fsm_get_state(void);
  * @return enum struct etimer *
  */
 struct etimer *zigpc_net_mgmt_fsm_get_timer(void);
+
+/**
+ * @brief Indicate if a state change request is currently in progress. This
+ * action is usually performed by NetworkManagement of Node-specific command
+ * handlers.
+ *
+ * @return true   State change in progress(add/remove)
+ * @return false
+ */
+bool zigpc_netmgmt_fsm_state_change_in_progress(void);
 
 /**
  * @brief Return Network Management State Name

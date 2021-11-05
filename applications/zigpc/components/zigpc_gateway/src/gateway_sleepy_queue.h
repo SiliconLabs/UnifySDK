@@ -32,6 +32,13 @@ extern "C" {
 //Max retries when attempting to send a sleepy messages
 const unsigned int MAX_SLEEPY_RETRIES = 64;
 
+typedef struct {
+  zigbee_eui64_t eui64;
+  zigbee_endpoint_id_t endpoint_id;
+  zcl_cluster_id_t cluster_id;
+  zcl_frame_t frame;
+} gateway_frame_t;
+
 /**
  * @brief zigpc_gateway_store_sleepy_frame
  * Stores a new ZCL frame destined to a sleepy end device
@@ -40,8 +47,7 @@ const unsigned int MAX_SLEEPY_RETRIES = 64;
  *
  * @return SL_STATUS_OK if the frame could be stored
  */
-sl_status_t
-  zigpc_gateway_store_sleepy_frame(zigpc_gateway_dispatch_zcl_frame_t frame);
+sl_status_t zigpc_gateway_store_sleepy_frame(gateway_frame_t frame);
 
 /**
  * @brief zigpc_gateway_retrieve_sleepy_frame
@@ -56,8 +62,8 @@ sl_status_t
  * SL_STATUS_EMPTY when no more frames are available. Returns
  * SL_STATUS_FAIL if something went wrong.
  */
-sl_status_t zigpc_gateway_retrieve_sleepy_frame(
-  const zigbee_eui64_t eui64, zigpc_gateway_dispatch_zcl_frame_t *frame);
+sl_status_t zigpc_gateway_retrieve_sleepy_frame(const zigbee_eui64_t eui64,
+                                                gateway_frame_t *frame);
 
 /**
  * @brief zigpc_gateway_retrieve_num_stored

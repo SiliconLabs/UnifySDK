@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.2</span>
+   &#160;<span id="projectnumber">1.0.3</span>
    </div>
   </td>
  </tr>
@@ -121,10 +121,14 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7">attr_mgmt_evt</a> { <a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7aea9becaa433bcab414229cc7b97eeaca">ZIGPC_ATTR_MGMT_EVT_INIT_NODE</a> = 0, 
+<tr class="memitem:a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7">attr_mgmt_evt</a> { <br />
+&#160;&#160;<a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7aea9becaa433bcab414229cc7b97eeaca">ZIGPC_ATTR_MGMT_EVT_INIT_NODE</a> = 0, 
 <a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7a58bbb2422e8ad18e5f38a7e8d7f6cf93">ZIGPC_ATTR_MGMT_EVT_INIT_ENDPOINT</a>, 
 <a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7a57464361fec41c159fdf8699effe1d5c">ZIGPC_ATTR_MGMT_EVT_ATTR_UPDATE</a>, 
-<a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7acefd75a406289bf10b1af9b347932375">ZIGPC_ATTR_MGMT_EVT_READ_ATTRIBUTES_COMMAND</a>
+<a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7a17bbbbda19ffb1963fb9b485deef1bca">ZIGPC_ATTR_MGMT_EVT_CONFIGURE_RESPONSE</a>, 
+<br />
+&#160;&#160;<a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7acefd75a406289bf10b1af9b347932375">ZIGPC_ATTR_MGMT_EVT_READ_ATTRIBUTES_COMMAND</a>
+<br />
  }</td></tr>
 <tr class="memdesc:a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">the enum representing the events handled by the attribute management Contiki process. Entries outside of this data structure are not valid  <a href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7">More...</a><br /></td></tr>
 <tr class="separator:a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,17 +162,39 @@ Functions</h2></td></tr>
 <tr class="memitem:adb2d6ea07775420f88b9b1fc9849c9e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#adb2d6ea07775420f88b9b1fc9849c9e9">zigpc_attrmgmt_receive_attribute_frame</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, <a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> cluster_id, bool is_read_response, const <a class="el" href="structzcl__frame__t.html">zcl_frame_t</a> *frame)</td></tr>
 <tr class="memdesc:adb2d6ea07775420f88b9b1fc9849c9e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process Attribute update response frames received from the a Device. This function is capable of processing the following Response record lists:  <a href="attribute__management__int_8h.html#adb2d6ea07775420f88b9b1fc9849c9e9">More...</a><br /></td></tr>
 <tr class="separator:adb2d6ea07775420f88b9b1fc9849c9e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a879ad34ab387c372e883b113bc93032b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a879ad34ab387c372e883b113bc93032b">zigpc_attrmgmt_receive_configure_response_frame</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, <a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> cluster_id, const <a class="el" href="structzcl__frame__t.html">zcl_frame_t</a> *frame)</td></tr>
+<tr class="memdesc:a879ad34ab387c372e883b113bc93032b"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_receive_configure_response_frame Process a configure attribute response frame Accepts a ZCL frame for the response to a configure reports command. On a failed configure, adds the given EUI64, endpoint and cluster combination to the poll lis  <a href="attribute__management__int_8h.html#a879ad34ab387c372e883b113bc93032b">More...</a><br /></td></tr>
+<tr class="separator:a879ad34ab387c372e883b113bc93032b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69708eb94cb5a881b2e0a2188fbf3b77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a69708eb94cb5a881b2e0a2188fbf3b77">attr_mgmt_gateway_init_observer</a> (void)</td></tr>
 <tr class="memdesc:a69708eb94cb5a881b2e0a2188fbf3b77"><td class="mdescLeft">&#160;</td><td class="mdescRight">attr_mgmt_gateway_init_observer - the function that initiates all observers from the zigpc_gateway. Required to process a ReadAttribute Reponse, an Attribute Report or other data received asynchronously from the Zigbee network.  <a href="attribute__management__int_8h.html#a69708eb94cb5a881b2e0a2188fbf3b77">More...</a><br /></td></tr>
 <tr class="separator:a69708eb94cb5a881b2e0a2188fbf3b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cf71e4a11231e902544af7cb61bb0eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a8cf71e4a11231e902544af7cb61bb0eb">zigpc_attrmgmt_publish_reported</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, const <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, const <a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> cluster_id, const <a class="el" href="group__zigpc__common__zigbee.html#ga004481bfa4498fbb23852d301de9dc54">zcl_attribute_id_t</a> attr_id, const uint8_t *attr_value)</td></tr>
 <tr class="memdesc:a8cf71e4a11231e902544af7cb61bb0eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish Reported Attribute Values.  <a href="attribute__management__int_8h.html#a8cf71e4a11231e902544af7cb61bb0eb">More...</a><br /></td></tr>
 <tr class="separator:a8cf71e4a11231e902544af7cb61bb0eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade5aec66f76805ddc9ec672532a1f6ad"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#ade5aec66f76805ddc9ec672532a1f6ad">zigpc_attrmgmt_get_poll_list_current_size</a> ()</td></tr>
+<tr class="memdesc:ade5aec66f76805ddc9ec672532a1f6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_get_poll_list_size  <a href="attribute__management__int_8h.html#ade5aec66f76805ddc9ec672532a1f6ad">More...</a><br /></td></tr>
+<tr class="separator:ade5aec66f76805ddc9ec672532a1f6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a934a0fb426ac2b8a4f6c6a3830d6bb40"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a934a0fb426ac2b8a4f6c6a3830d6bb40">zigpc_attrmgmt_get_poll_list_max_size</a> ()</td></tr>
+<tr class="memdesc:a934a0fb426ac2b8a4f6c6a3830d6bb40"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_get_poll_list_Max_size  <a href="attribute__management__int_8h.html#a934a0fb426ac2b8a4f6c6a3830d6bb40">More...</a><br /></td></tr>
+<tr class="separator:a934a0fb426ac2b8a4f6c6a3830d6bb40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a3c8e8e4ded27bf12668e5bd46146e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a6a3c8e8e4ded27bf12668e5bd46146e3">zigpc_attrmgmt_send_poll_attributes</a> ()</td></tr>
+<tr class="memdesc:a6a3c8e8e4ded27bf12668e5bd46146e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_send_poll_attributes  <a href="attribute__management__int_8h.html#a6a3c8e8e4ded27bf12668e5bd46146e3">More...</a><br /></td></tr>
+<tr class="separator:a6a3c8e8e4ded27bf12668e5bd46146e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1626f3ce376efa0f1c4e993334777b0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a1626f3ce376efa0f1c4e993334777b0d">zigpc_attrmgmt_add_poll_entry</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, <a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> cluster_id)</td></tr>
+<tr class="memdesc:a1626f3ce376efa0f1c4e993334777b0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_add_poll_entry  <a href="attribute__management__int_8h.html#a1626f3ce376efa0f1c4e993334777b0d">More...</a><br /></td></tr>
+<tr class="separator:a1626f3ce376efa0f1c4e993334777b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada66a3b43b1812541c090fa1ea54483"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#aada66a3b43b1812541c090fa1ea54483">zigpc_attrmgmt_remove_poll_entry</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> endpoint_id, <a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> cluster_id)</td></tr>
+<tr class="separator:aada66a3b43b1812541c090fa1ea54483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ad550fed1ade7462076d2d0a36aefbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a5ad550fed1ade7462076d2d0a36aefbb">zigpc_attrmgmt_empty_poll_list</a> ()</td></tr>
+<tr class="memdesc:a5ad550fed1ade7462076d2d0a36aefbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_attrmgmt_empty_poll_list  <a href="attribute__management__int_8h.html#a5ad550fed1ade7462076d2d0a36aefbb">More...</a><br /></td></tr>
+<tr class="separator:a5ad550fed1ade7462076d2d0a36aefbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a20bcf2bfcc35144748c69b3862e08633"><td class="memItemLeft" align="right" valign="top">static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a20bcf2bfcc35144748c69b3862e08633">ZIGPC_ATTR_MGMT_DELAY_READ_ATTRIBUTES</a> = <a class="el" href="group__clock.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a> * 5</td></tr>
 <tr class="separator:a20bcf2bfcc35144748c69b3862e08633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bd2cc4ab1991c10cf4b21d9151c5cc9"><td class="memItemLeft" align="right" valign="top">static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a4bd2cc4ab1991c10cf4b21d9151c5cc9">ZIGPC_ATTR_MGMT_POLL_PERIOD_MS</a> = <a class="el" href="group__clock.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a></td></tr>
+<tr class="separator:a4bd2cc4ab1991c10cf4b21d9151c5cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae412a3d796b4078513543dd59e65abc6"><td class="memItemLeft" align="right" valign="top">static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#ae412a3d796b4078513543dd59e65abc6">ZIGPC_ATTRMGMT_READ_RECORDS_LIMIT_PER_MESSAGE</a> = 25</td></tr>
 <tr class="memdesc:ae412a3d796b4078513543dd59e65abc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limit of Read Attribute Records to send per ZCL Message.  <a href="attribute__management__int_8h.html#ae412a3d796b4078513543dd59e65abc6">More...</a><br /></td></tr>
 <tr class="separator:ae412a3d796b4078513543dd59e65abc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,6 +210,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a88e72fabd634f2ba9d453fef917b7820"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#a88e72fabd634f2ba9d453fef917b7820">ZIGPC_ATTRMGMT_REPORT_CHANGE_DEFAULT</a> = 0x0000</td></tr>
 <tr class="memdesc:a88e72fabd634f2ba9d453fef917b7820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Configure Reporting Record Reportable Change to allow any change to be reported.  <a href="attribute__management__int_8h.html#a88e72fabd634f2ba9d453fef917b7820">More...</a><br /></td></tr>
 <tr class="separator:a88e72fabd634f2ba9d453fef917b7820"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8d716ea703d5c7976ba876ce2b99f5f"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classuint32__t.html">uint32_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__int_8h.html#ab8d716ea703d5c7976ba876ce2b99f5f">ZIGPC_ATTRMGMT_DEFAULT_POLL_SIZE</a> = 256</td></tr>
+<tr class="memdesc:ab8d716ea703d5c7976ba876ce2b99f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default poll list size. The maximum number of clusters that can be stoed in the poll list.  <a href="attribute__management__int_8h.html#ab8d716ea703d5c7976ba876ce2b99f5f">More...</a><br /></td></tr>
+<tr class="separator:ab8d716ea703d5c7976ba876ce2b99f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7"></a>
@@ -205,6 +234,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7a58bbb2422e8ad18e5f38a7e8d7f6cf93"></a>ZIGPC_ATTR_MGMT_EVT_INIT_ENDPOINT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7a57464361fec41c159fdf8699effe1d5c"></a>ZIGPC_ATTR_MGMT_EVT_ATTR_UPDATE&#160;</td><td class="fielddoc"><p>Event corresponding to a new attribute update message received. </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7a17bbbbda19ffb1963fb9b485deef1bca"></a>ZIGPC_ATTR_MGMT_EVT_CONFIGURE_RESPONSE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7acefd75a406289bf10b1af9b347932375"></a>ZIGPC_ATTR_MGMT_EVT_READ_ATTRIBUTES_COMMAND&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
@@ -303,6 +333,52 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a1626f3ce376efa0f1c4e993334777b0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1626f3ce376efa0f1c4e993334777b0d">&#9670;&nbsp;</a></span>zigpc_attrmgmt_add_poll_entry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_attrmgmt_add_poll_entry </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
+          <td class="paramname"><em>eui64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a>&#160;</td>
+          <td class="paramname"><em>cluster_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>zigpc_attrmgmt_add_poll_entry </p>
+<p>Add a new entry to be polled by ReadAttribute commands Will be put at the end of the list</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eui64</td><td>- the eui64 of the node </td></tr>
+    <tr><td class="paramname">endpoint_id</td><td>- the endpoint specified </td></tr>
+    <tr><td class="paramname">cluster_id</td><td>- the cluster specified</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the new entry could be added properly </dd></dl>
+
+</div>
+</div>
 <a id="a0504d3a2a640feb9605c4b260d4740d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0504d3a2a640feb9605c4b260d4740d8">&#9670;&nbsp;</a></span>zigpc_attrmgmt_configure_reports_for_endpoint()</h2>
 
@@ -338,6 +414,68 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the command was sent successfully, SL_STATUS_FAIL otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a5ad550fed1ade7462076d2d0a36aefbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ad550fed1ade7462076d2d0a36aefbb">&#9670;&nbsp;</a></span>zigpc_attrmgmt_empty_poll_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void zigpc_attrmgmt_empty_poll_list </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>zigpc_attrmgmt_empty_poll_list </p>
+<p>Empty the polling list </p>
+
+</div>
+</div>
+<a id="ade5aec66f76805ddc9ec672532a1f6ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade5aec66f76805ddc9ec672532a1f6ad">&#9670;&nbsp;</a></span>zigpc_attrmgmt_get_poll_list_current_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t zigpc_attrmgmt_get_poll_list_current_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>zigpc_attrmgmt_get_poll_list_size </p>
+<p>Get the size of the current list we are polling with ReadAttributes</p>
+<dl class="section return"><dt>Returns</dt><dd>the number of clusters on the list we are polling </dd></dl>
+
+</div>
+</div>
+<a id="a934a0fb426ac2b8a4f6c6a3830d6bb40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a934a0fb426ac2b8a4f6c6a3830d6bb40">&#9670;&nbsp;</a></span>zigpc_attrmgmt_get_poll_list_max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t zigpc_attrmgmt_get_poll_list_max_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>zigpc_attrmgmt_get_poll_list_Max_size </p>
+<p>Get the maximum size of the polling list</p>
+<dl class="section return"><dt>Returns</dt><dd>the maximum number of clusters the poll list can contain </dd></dl>
 
 </div>
 </div>
@@ -545,6 +683,102 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a879ad34ab387c372e883b113bc93032b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a879ad34ab387c372e883b113bc93032b">&#9670;&nbsp;</a></span>zigpc_attrmgmt_receive_configure_response_frame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_attrmgmt_receive_configure_response_frame </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
+          <td class="paramname"><em>eui64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a>&#160;</td>
+          <td class="paramname"><em>cluster_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structzcl__frame__t.html">zcl_frame_t</a> *&#160;</td>
+          <td class="paramname"><em>frame</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>zigpc_attrmgmt_receive_configure_response_frame Process a configure attribute response frame Accepts a ZCL frame for the response to a configure reports command. On a failed configure, adds the given EUI64, endpoint and cluster combination to the poll lis </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eui64</td><td>Device identifier. </td></tr>
+    <tr><td class="paramname">endpoint_id</td><td>Device endpoint identifier </td></tr>
+    <tr><td class="paramname">cluster_id</td><td>Cluster identifer of the source from </td></tr>
+    <tr><td class="paramname">frame</td><td>ZCL Frame containing configure report response </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aada66a3b43b1812541c090fa1ea54483"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aada66a3b43b1812541c090fa1ea54483">&#9670;&nbsp;</a></span>zigpc_attrmgmt_remove_poll_entry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_attrmgmt_remove_poll_entry </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
+          <td class="paramname"><em>eui64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>&#160;</td>
+          <td class="paramname"><em>endpoint_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a>&#160;</td>
+          <td class="paramname"><em>cluster_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>@briefzigpc_attrmgmt_remove_poll_entry</p>
+<p>Remove a eui64, endpoint and cluster combination from the poll list</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eui64</td><td>- the eui64 of the node </td></tr>
+    <tr><td class="paramname">endpoint_id</td><td>- the endpoint specified </td></tr>
+    <tr><td class="paramname">cluster_id</td><td>- the cluster specified</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the new entry could be removed properly </dd></dl>
+
+</div>
+</div>
 <a id="a634f06d37759254fd3c4911742ddb468"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a634f06d37759254fd3c4911742ddb468">&#9670;&nbsp;</a></span>zigpc_attrmgmt_send_delayed_read_command()</h2>
 
@@ -615,6 +849,27 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a6a3c8e8e4ded27bf12668e5bd46146e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a3c8e8e4ded27bf12668e5bd46146e3">&#9670;&nbsp;</a></span>zigpc_attrmgmt_send_poll_attributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_attrmgmt_send_poll_attributes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>zigpc_attrmgmt_send_poll_attributes </p>
+<p>Send a ReadAttribute command to the next entry in the polling list</p>
+<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the command could be sent properly </dd></dl>
+
+</div>
+</div>
 <a id="a00b19f9da2ceb571c8bbf28020f4a167"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a00b19f9da2ceb571c8bbf28020f4a167">&#9670;&nbsp;</a></span>zigpc_attrmgmt_send_read_attributes_command()</h2>
 
@@ -680,6 +935,52 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4bd2cc4ab1991c10cf4b21d9151c5cc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bd2cc4ab1991c10cf4b21d9151c5cc9">&#9670;&nbsp;</a></span>ZIGPC_ATTR_MGMT_POLL_PERIOD_MS</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const unsigned int ZIGPC_ATTR_MGMT_POLL_PERIOD_MS = <a class="el" href="group__clock.html#gae3ced0551b26c9b99cb45a86f34d100a">CLOCK_SECOND</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab8d716ea703d5c7976ba876ce2b99f5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8d716ea703d5c7976ba876ce2b99f5f">&#9670;&nbsp;</a></span>ZIGPC_ATTRMGMT_DEFAULT_POLL_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classuint32__t.html">uint32_t</a> ZIGPC_ATTRMGMT_DEFAULT_POLL_SIZE = 256</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default poll list size. The maximum number of clusters that can be stoed in the poll list. </p>
 
 </div>
 </div>
@@ -814,7 +1115,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_b6f745f966ae74add2521a551533f539.html">attribute_management</a></li><li class="navelem"><a class="el" href="dir_65cbbcbe9e4af1172428fcc9ed2fe9fe.html">src</a></li><li class="navelem"><a class="el" href="attribute__management__int_8h.html">attribute_management_int.h</a></li>
-    <li class="footer">Generated on Fri Oct 8 2021 09:58:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

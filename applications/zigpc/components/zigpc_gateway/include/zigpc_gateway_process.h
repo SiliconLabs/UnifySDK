@@ -29,6 +29,10 @@
 
 #include "sl_status.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @brief Set up the function for the zigpc_gateway component.
  *
@@ -46,6 +50,10 @@ sl_status_t zigpc_gateway_process_setup(void);
  * @returns Always returns 0.
  */
 int zigpc_gateway_process_shutdown(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  //ZIGPC_GATEWAY_PROCESS_H
 

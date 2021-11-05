@@ -22,10 +22,11 @@
 
 #include "z3gw.h"
 #include EMBER_AF_API_AF_HEADER
-#include EMBER_AF_API_DEVICE_TABLE
+#include EMBER_AF_API_ADDRESS_TABLE
 #include "app/framework/util/util.h"
 #include "stack/include/ember-types.h"
 #include "app/framework/include/af-types.h"
+#include "app/framework/plugin/address-table/address-table.h"
 
 #include "z3gateway.h"
 #include "z3gateway_common.h"
@@ -90,36 +91,33 @@ EmberStatus z3gatewaySendZclFrameUnicast(const EmberEUI64 eui64,
 {
   EmberStatus status = EMBER_SUCCESS;
   static EmberApsFrame localApsFrame;
-  EmberNodeId nodeId;
 
   if ((eui64 == NULL) || (clusterId == ZCL_NULL_CLUSTER_ID)) {
     status = EMBER_BAD_ARGUMENT;
     emberAfCorePrintln("Error: Invalid EUI64 or ZCL clusterId provided: 0x%X",
                        status);
   } else {
-    nodeId = emberAfDeviceTableGetNodeIdFromEui64(eui64);
-    if (nodeId == EMBER_AF_PLUGIN_DEVICE_TABLE_NULL_NODE_ID) {
-      status = EMBER_NOT_FOUND;
-      emberAfCorePrintln(
-        "Error: Failed to find device to send ZCL buffer on the network: 0x%X",
-        status);
-    }
-  }
-
-  if (status == EMBER_SUCCESS) {
     localApsFrame.options             = EMBER_AF_DEFAULT_APS_OPTIONS;
     localApsFrame.clusterId           = clusterId;
     localApsFrame.sourceEndpoint      = Z3GATEWAY_DEFAULT_SRC_ENDPOINT;
     localApsFrame.destinationEndpoint = endpoint;
 
-    status = emberAfSendUnicast(EMBER_OUTGOING_DIRECT,
-                                nodeId,
-                                &localApsFrame,
-                                appZclBufferLen,
-                                appZclBuffer);
-    if (status != EMBER_SUCCESS) {
+    EmberEUI64 eui64Dup;
+    memcpy(eui64Dup, eui64, sizeof(EmberEUI64));
+
+    status = emberAfSendUnicastToEui64(eui64Dup,
+                                       &localApsFrame,
+                                       appZclBufferLen,
+                                       appZclBuffer);
+    if (status == EMBER_INVALID_CALL) {
+      status = EMBER_NOT_FOUND;
       emberAfCorePrintln(
-        "Error: Failed to send ZCL buffer as unicast to destination: 0x%X",
+        "Error: Failed to find device NodeID to send ZCL frame: 0x%X",
+        status);
+
+    } else if (status != EMBER_SUCCESS) {
+      emberAfCorePrintln(
+        "Error: Failed to send ZCL frame as unicast to destination: 0x%X",
         status);
     }
   }

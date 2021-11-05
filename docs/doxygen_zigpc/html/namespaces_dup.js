@@ -8,6 +8,7 @@ var namespaces_dup =
     [ "uic_ota", "namespaceuic__ota.html", null ],
     [ "unid_state_handler", "namespaceunid__state__handler.html", null ],
     [ "UnidStateHandler", "namespaceUnidStateHandler.html", null ],
+    [ "zigpc", "namespacezigpc.html", "namespacezigpc" ],
     [ "zigpc_ctrl", "namespacezigpc__ctrl.html", null ],
     [ "zigpc_datastore", "namespacezigpc__datastore.html", "namespacezigpc__datastore" ],
     [ "zigpc_ucl", "namespacezigpc__ucl.html", "namespacezigpc__ucl" ]

@@ -76,11 +76,7 @@ void z3gatewayTrustCenterDeviceEndpointDiscovered(const EmberEUI64 newNodeEui64,
   const EmberAfPluginDeviceTableEntry *deviceTableEntry;
   static struct z3gatewayEndpointInfo endpointInfo;
 
-  newNodeId = (EmberNodeId)emberAfDeviceTableGetNodeIdFromEui64(newNodeEui64);
-  if (newNodeId == EMBER_AF_PLUGIN_DEVICE_TABLE_NULL_NODE_ID) {
-    status = EMBER_NOT_FOUND;
-  }
-
+  status = z3gatewayGetAddressTableEntry(newNodeEui64, &newNodeId);
   if (status == EMBER_SUCCESS) {
     deviceTableIndex
       = emAfDeviceTableFindIndexNodeIdEndpoint(newNodeId, endpoint);
@@ -204,7 +200,7 @@ EmberStatus z3gatewayTrustCenterJoinOpen(bool openForever)
   } else {
     // 0xFF: forever, 0xFE: 254 seconds
     uint8_t permitDuration = (openForever == true) ? 0xFF : 0xFE;
-
+    zaTrustCenterSetJoinPolicy(EMBER_USE_PRECONFIGURED_KEY);
     status = emAfPermitJoin(permitDuration, true);
   }
 
@@ -220,6 +216,7 @@ EmberStatus z3gatewayTrustCenterJoinClose(void)
     emberAfCorePrintln("Error: Network not up: 0x%X", status);
   } else {
     emberClearTransientLinkKeys();
+    zaTrustCenterSetJoinPolicy(EMBER_ALLOW_REJOINS_ONLY);
     status = emAfPermitJoin(0, true);
   }
 
@@ -265,20 +262,6 @@ EmberStatus z3gatewayTrustCenterInit(void)
     if (status != EMBER_SUCCESS) {
       emberAfCorePrintln("Error: Failed to create trust center network: 0x%X",
                          status);
-    }
-  } else if (networkState == EMBER_JOINED_NETWORK) {
-    EmberEUI64 ncpEui64;
-    EmberNodeType nodeType;
-    EmberNetworkParameters network;
-    emberAfGetEui64(ncpEui64);
-    status = emberAfGetNetworkParameters(&nodeType, &network);
-    if (status != EMBER_SUCCESS) {
-      emberAfCorePrintln(
-        "Error: Failed to get trust center network parameters: 0x%X",
-        status);
-    } else if (Z3GATEWAY_CALLBACK_EXISTS(z3gwState.callbacks,
-                                         onTrustCenterInitialized)) {
-      z3gwState.callbacks->onTrustCenterInitialized(ncpEui64, &network);
     }
   }
 
@@ -354,6 +337,11 @@ void emberAfPluginDeviceTableTrustCenterJoinCallback(const EmberEUI64 eui64)
     = (z3gwState.callbacks != NULL)
       && (z3gwState.callbacks->onTrustCenterDeviceJoinStart != NULL);
   if (callbackExists == true) {
+    /* Start tracking EUI64 in address-table with UNKNOWN_NODE_ID. This will
+     * allow the read NodeId to be read later from the NCP.
+     */
+    z3gatewayAddAddressTableEntry(eui64, EMBER_UNKNOWN_NODE_ID);
+
     z3gwState.callbacks->onTrustCenterDeviceJoinStart(eui64);
   }
 }

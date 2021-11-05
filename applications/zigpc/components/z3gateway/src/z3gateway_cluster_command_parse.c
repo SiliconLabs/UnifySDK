@@ -15,6 +15,7 @@
 #include PLATFORM_HEADER
 #include EMBER_AF_API_AF_HEADER
 #include EMBER_AF_API_AF_SECURITY_HEADER
+#include EMBER_AF_API_EMBER_TYPES
 
 #else /* Z3GATEWAY_TEST defined */
 #include <stddef.h>
@@ -22,7 +23,7 @@
 
 #endif /* Z3GATEWAY_TEST */
 
-#include EMBER_AF_API_DEVICE_TABLE
+#include EMBER_AF_API_ADDRESS_TABLE
 
 #include "z3gateway_common.h"
 
@@ -40,7 +41,6 @@ EmberAfStatus emberAfClusterSpecificCommandParse(EmberAfClusterCommand *cmd)
   EmberStatus status     = EMBER_SUCCESS;
   EmberAfStatus afStatus = EMBER_ZCL_STATUS_UNSUPPORTED_CLUSTER;
   EmberEUI64 sourceEui64;
-  EmberNodeId sourceNodeId;
   uint8_t sourceEndpoint;
   EmberAfClusterId clusterId;
   uint8_t commandId;
@@ -48,20 +48,15 @@ EmberAfStatus emberAfClusterSpecificCommandParse(EmberAfClusterCommand *cmd)
 
   if (!Z3GATEWAY_CALLBACK_EXISTS(z3gwState.callbacks,
                                  onClusterCommandReceived)) {
-    emberAfCorePrintln(
-      "Ignoring command received event due to missing callback");
+    emberAfCorePrintln("Ignoring cluster-specifc command received event due to "
+                       "missing callback");
     status = EMBER_NOT_FOUND;
-  }
-
-  if (status == EMBER_SUCCESS) {
-    sourceNodeId = cmd->source;
-
-    bool euiStatus
-      = emberAfDeviceTableGetEui64FromNodeId(sourceNodeId, sourceEui64);
-    if (!euiStatus) {
+  } else {
+    status = emberAfGetCurrentSenderEui64(sourceEui64);
+    if (status != EMBER_SUCCESS) {
       status = EMBER_NOT_FOUND;
-      emberAfCorePrintln(
-        "Error: Failed to find device eui64 in report attributes command");
+      emberAfCorePrintln("Error: Failed to find sender EUI64 for "
+                         "cluster-specific command parsing");
     }
   }
 
