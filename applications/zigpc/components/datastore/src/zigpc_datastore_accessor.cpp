@@ -110,6 +110,28 @@ std::string EndpointAccessor::to_str(attribute_store_node_t parent,
   return ss.str();
 }
 
+GroupAccessor::GroupAccessor(bool is_reported) :
+  StoreAccessor<zigbee_group_id_t, zigpc_group_data_t>(
+    get_entity_type(is_reported), get_label_type(is_reported)),
+  is_reported(is_reported)
+{}
+
+std::string GroupAccessor::to_str(attribute_store_node_t parent,
+                                  zigbee_group_id_t group_id)
+{
+  std::ostringstream ss;
+  zigpc_group_data_t group_data;
+
+  sl_status_t status = this->read(parent, group_id, &group_data);
+
+  if (SL_STATUS_OK == status) {
+    ss << get_label_type(this->is_reported) << ": GroupId:" << std::dec
+       << static_cast<int>(group_id);
+  }
+
+  return ss.str();
+}
+
 ClusterAccessor::ClusterAccessor(zcl_cluster_side_t cluster_side) :
   StoreAccessor<zcl_cluster_id_t, zigpc_cluster_data_t>(
     get_entity_type(cluster_side), get_label_type(cluster_side)),

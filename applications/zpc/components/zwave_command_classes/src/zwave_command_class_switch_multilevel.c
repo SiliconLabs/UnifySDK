@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -603,6 +603,7 @@ static void on_state_send_data_complete(attribute_store_node_t state_node,
         } else {
           // Else just assume that it worked, we will check on the state
           // when it gets online again.
+          set_reported_value(state_node, state.desired_value);
           set_reported_duration(state_node, state.desired_duration);
           set_state_value(state_node, FINAL_STATE, FINAL_STATE);
         }

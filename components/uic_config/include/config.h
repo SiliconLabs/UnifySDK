@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,10 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file config.h
- * @defgroup config Config
- * @ingroup uic_components
- * @brief UIC Configuration System
+ * @defgroup unify_config Unify Configuration System
+ * @ingroup unify_components
+ * @brief Unify Configuration System
  *
  * Configuration system for UIC Components/Applications.
  * It supports reading configuration from a YAML config file,
@@ -40,18 +39,16 @@ extern "C" {
 #endif
 
 // Configuration keys
-#define CONFIG_KEY_DATASTORE_FILE "datastore.file"
-#define CONFIG_KEY_MQTT_HOST      "mqtt.host"
-#define CONFIG_KEY_MQTT_PORT      "mqtt.port"
-#define CONFIG_KEY_MQTT_CAFILE    "mqtt.cafile"
-#define CONFIG_KEY_MQTT_CERTFILE  "mqtt.certfile"
-#define CONFIG_KEY_MQTT_KEYFILE   "mqtt.keyfile"
-#define CONFIG_KEY_LOG_LEVEL      "log.level"
-#define CONFIG_KEY_LOG_TAG_LEVEL  "log.tag_level"
+#define CONFIG_KEY_MQTT_HOST     "mqtt.host"
+#define CONFIG_KEY_MQTT_PORT     "mqtt.port"
+#define CONFIG_KEY_MQTT_CAFILE   "mqtt.cafile"
+#define CONFIG_KEY_MQTT_CERTFILE "mqtt.certfile"
+#define CONFIG_KEY_MQTT_KEYFILE  "mqtt.keyfile"
+#define CONFIG_KEY_LOG_LEVEL     "log.level"
+#define CONFIG_KEY_LOG_TAG_LEVEL "log.tag_level"
 
 // Default Settings
-#define DEFAULT_CONFIG_PATH    "/etc/uic/uic.cfg"
-#define DEFAULT_DATASTORE_FILE "/var/lib/uic/database.db"
+#define DEFAULT_CONFIG_PATH "/etc/uic/uic.cfg"
 
 typedef enum {
   CONFIG_STATUS_OK             = 0x0,
@@ -107,6 +104,15 @@ config_status_t
   config_add_bool(const char *name, const char *help, bool default_value);
 
 /**
+ * @brief Add a flag configuration.
+ *
+ * @param name Name of the config
+ * @param help Help message (to print to command line)
+ * @return config_status_t CONFIG_STATUS_OK if success
+ */
+config_status_t config_add_flag(const char *name, const char *help);
+
+/**
  * @brief Parse command line arguments to the config system.
  *
  * This must be done before calling any of the config_get functions.
@@ -160,6 +166,16 @@ config_status_t config_get_as_double(const char *name, double *result);
  * @return config_status_t CONFIG_STATUS_OK if success
  */
 config_status_t config_get_as_bool(const char *name, bool *result);
+
+/**
+ * @brief Check is a config paramter exists
+ * 
+ * This is usefull for options which has not arguments, ie flags.
+ * 
+ * @param name Paramter to find
+ * @return config_status_t CONFIG_STATUS_OK if paramter is found
+ */
+config_status_t config_has_flag(const char *name);
 
 /**
  * @brief Reset the config.

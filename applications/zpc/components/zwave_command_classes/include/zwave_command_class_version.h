@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -117,27 +117,27 @@ package "Attribute Store" <<Database>> {
   version_cc_found : value = Desired: [] - Reported: []
 }
 
-node_id *-- endpoint
-node_id *-- version_cc_found
-endpoint *-- version_cc_version
-endpoint *-- version_report_data
+node_id *-down- endpoint
+node_id *-down- version_cc_found
+endpoint *-down- version_cc_version
+endpoint *-down- version_report_data
 version_cc_version -[hidden]--> version_report_data
-version_report_data *-- zwave_library_type
-version_report_data *-- zwave_protocol_version
+version_report_data *-down- zwave_library_type
+version_report_data *-down- zwave_protocol_version
 zwave_protocol_version -[hidden]--> zwave_library_type
 zwave_library_type -[hidden]--> hardware_version
-version_report_data *-- firmware
-firmware *-- firmware_version
-version_report_data *-- hardware_version
+version_report_data *-down- firmware
+firmware *-down- firmware_version
+version_report_data *-down- hardware_version
 
-endpoint *-- zwave_software_get_support
-endpoint *-- sdk_version
-endpoint *-- app_framework_api_version
-endpoint *-- app_framework_build
-endpoint *-- host_interface_version
-endpoint *-- host_interface_build
-endpoint *-- zwave_protocol_build
-endpoint *-- application_build
+endpoint *-down- zwave_software_get_support
+endpoint *-down- sdk_version
+endpoint *-down- app_framework_api_version
+endpoint *-down- app_framework_build
+endpoint *-down- host_interface_version
+endpoint *-down- host_interface_build
+endpoint *-down- zwave_protocol_build
+endpoint *-down- application_build
 
 zwave_software_get_support -[hidden]--> host_interface_version
 sdk_version -[hidden]--> host_interface_build

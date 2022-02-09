@@ -12,7 +12,15 @@ export type BaseClustersProps = {
 }
 
 export type BaseClustersState = {
-  ClusterList: any[]
+  ClusterList: any[],
+  ColorPicker: ColorPickerProps
+}
+
+export type ColorPickerProps = {
+  ShowColorPicker: boolean,
+  ColorPickerValue: any,
+  ColorPickerPosition: any,
+  ProcessedItem: any
 }
 
 export type ClusterViewOverride = {

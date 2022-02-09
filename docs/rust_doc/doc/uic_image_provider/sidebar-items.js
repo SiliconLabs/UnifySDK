@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["APP_NAME",""],["CONFIG_VERSION",""],["IMAGE_PATH",""],["POLL_PERIOD",""]],"fn":[["main",""],["ok_or_exit_with_message",""],["parse_application_arguments",""],["run",""]],"mod":[["image_watcher",""],["mqtt_ota",""]]});

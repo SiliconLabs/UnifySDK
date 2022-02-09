@@ -10,6 +10,5 @@ var structzwave__tx__options =
     [ "qos_priority", "structzwave__tx__options.html#aed5db3a6a7b5e41111530a7a4c5bbb4b", null ],
     [ "rf_power", "structzwave__tx__options.html#afd630f58a249952b4d16694814108530", null ],
     [ "send_follow_ups", "structzwave__tx__options.html#a51b9ba28fbd1b5de28313f7441c66f34", null ],
-    [ "use_parent_frame_options", "structzwave__tx__options.html#a72d7dee3d6d47e4065e7f5823d373470", null ],
     [ "valid_parent_session_id", "structzwave__tx__options.html#aeed246f27d38fc6529f0322782cd26d3", null ]
 ];

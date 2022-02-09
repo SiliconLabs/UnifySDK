@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -107,10 +107,6 @@ void test_zwave_command_class_Security_2_Commands_Supported_Report()
     0,
     test_secure_nif_node);
 
-  zwave_tx_scheme_get_node_highest_security_class_ExpectAndReturn(
-    test_connection_info.remote.node_id,
-    SL_STATUS_OK);
-
   attribute_store_set_node_attribute_value_ExpectAndReturn(test_secure_nif_node,
                                                            REPORTED_ATTRIBUTE,
                                                            &test_frame_data[2],
@@ -162,10 +158,6 @@ void test_zwave_command_class_Security_2_Commands_Supported_ReportEmptyPayload_l
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
     zpc_keyset,
     ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS);
-  zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
-    ZWAVE_CONTROLLER_ENCAPSULATION_NONE,
-    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS,
-    false);
 
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     security_2_handler.control_handler(&test_connection_info,
@@ -211,10 +203,6 @@ void test_zwave_command_class_Security_2_Commands_Supported_ReportEmptyPayload_s
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
     zpc_keyset,
     ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS);
-  zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
-    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS,
-    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS,
-    true);
 
   attribute_store_delete_node_ExpectAndReturn(test_secure_nif_node,
                                               SL_STATUS_OK);

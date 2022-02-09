@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_definitions/include/zwave_command_class_wake_up_types.h Source File</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zpc_attribute_store/include/zwave_command_class_wake_up_types.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -100,32 +100,25 @@ $(document).ready(function(){initNavTree('zwave__command__class__wake__up__types
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifndef ZWAVE_COMMAND_CLASS_WAKE_UP_TYPES_H</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define ZWAVE_COMMAND_CLASS_WAKE_UP_TYPES_H</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="zwave__command__class__wake__up__types_8h.html#a914036069b6899f115b874ca11f557ac">   25</a></span>&#160;<span class="keyword">typedef</span> uint32_t <a class="code" href="zwave__command__class__wake__up__types_8h.html#a914036069b6899f115b874ca11f557ac">wake_up_interval_t</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="zwave__command__class__wake__up__types_8h.html#aed0457bb526b0196ca35d003677435ac">   29</a></span>&#160;<span class="keyword">typedef</span> uint8_t <a class="code" href="zwave__command__class__wake__up__types_8h.html#aed0457bb526b0196ca35d003677435ac">wake_up_bitmask_t</a>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef ZWAVE_COMMAND_CLASS_WAKE_UP_TYPES_H</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define ZWAVE_COMMAND_CLASS_WAKE_UP_TYPES_H</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">   26</a></span>&#160;<span class="keyword">typedef</span> uint32_t <a class="code" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="group__zwave__command__class__wake__up__types.html#gaed0457bb526b0196ca35d003677435ac">   30</a></span>&#160;<span class="keyword">typedef</span> uint8_t <a class="code" href="group__zwave__command__class__wake__up__types.html#gaed0457bb526b0196ca35d003677435ac">wake_up_bitmask_t</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif  //ZWAVE_COMMAND_CLASS_WAKE_UP_TYPES_H</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif  //ZWAVE_COMMAND_CLASS_WAKE_UP_TYPES_H</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="azwave__command__class__wake__up__types_8h_html_aed0457bb526b0196ca35d003677435ac"><div class="ttname"><a href="zwave__command__class__wake__up__types_8h.html#aed0457bb526b0196ca35d003677435ac">wake_up_bitmask_t</a></div><div class="ttdeci">uint8_t wake_up_bitmask_t</div><div class="ttdef"><b>Definition:</b> zwave_command_class_wake_up_types.h:29</div></div>
-<div class="ttc" id="azwave__command__class__wake__up__types_8h_html_a914036069b6899f115b874ca11f557ac"><div class="ttname"><a href="zwave__command__class__wake__up__types_8h.html#a914036069b6899f115b874ca11f557ac">wake_up_interval_t</a></div><div class="ttdeci">uint32_t wake_up_interval_t</div><div class="ttdoc">Value in seconds to represent a Wake Up Period</div><div class="ttdef"><b>Definition:</b> zwave_command_class_wake_up_types.h:25</div></div>
+<div class="ttc" id="agroup__zwave__command__class__wake__up__types_html_ga914036069b6899f115b874ca11f557ac"><div class="ttname"><a href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a></div><div class="ttdeci">uint32_t wake_up_interval_t</div><div class="ttdoc">Value in seconds to represent a Wake Up Period</div><div class="ttdef"><b>Definition:</b> zwave_command_class_wake_up_types.h:26</div></div>
+<div class="ttc" id="agroup__zwave__command__class__wake__up__types_html_gaed0457bb526b0196ca35d003677435ac"><div class="ttname"><a href="group__zwave__command__class__wake__up__types.html#gaed0457bb526b0196ca35d003677435ac">wake_up_bitmask_t</a></div><div class="ttdeci">uint8_t wake_up_bitmask_t</div><div class="ttdef"><b>Definition:</b> zwave_command_class_wake_up_types.h:30</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_8b3751e3435ce49cd79da54f9385a577.html">zwave_definitions</a></li><li class="navelem"><a class="el" href="dir_b8f8fb4a3b310fd257581b98afb5449c.html">include</a></li><li class="navelem"><a class="el" href="zwave__command__class__wake__up__types_8h.html">zwave_command_class_wake_up_types.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_20462f6d7be47578489ee94c8a2b0b2b.html">zpc_attribute_store</a></li><li class="navelem"><a class="el" href="dir_542069e8d36990607394b5241df245e1.html">include</a></li><li class="navelem"><a class="el" href="zwave__command__class__wake__up__types_8h.html">zwave_command_class_wake_up_types.h</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:10 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

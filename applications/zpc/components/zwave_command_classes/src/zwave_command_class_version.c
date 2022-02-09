@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -34,6 +34,7 @@
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "attribute_resolver.h"
+#include "zwave_utils.h"
 
 #include "zwave_unid.h"
 #include "zwave_command_classes_utils.h"

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Unify SDK User Guide: Unify SDK Developer Readme</title>
+<title>Unify SDK User Guide: Unify Developer Guide</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -84,129 +84,31 @@ $(document).ready(function(){initNavTree('md_doc_readme_developer.html',''); ini
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Unify SDK Developer Readme </div>  </div>
+<div class="title">Unify Developer Guide </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md28"></a>
-Directory Structure and File Naming Conventions</h1>
-<h2><a class="anchor" id="autotoc_md29"></a>
-Rules</h2>
-<ul>
-<li>All filenames must be lower case except the following:<ul>
-<li>CMakeLists.txt</li>
-<li>Dockerfile</li>
-<li>Makefile</li>
-<li>Jenkinsfile</li>
-<li>Files provided by external libraries</li>
+<div class="textblock"><p>This is a guide for developers who wish to get started on adding or modifying the Unify SDK source code.</p>
+<p>For instruction on how to build please see</p><ul>
+<li><a class="el" href="md_doc_readme_building.html">Build Instructions</a></li>
 </ul>
-</li>
-<li>Use _ for spaces in file/folder names</li>
+<p>Other Guides related to development is</p><ul>
+<li><a class="el" href="md_doc_overview.html">Library Overview</a></li>
+<li><a class="el" href="md_doc_readme_debug.html">Debugging Guide</a></li>
+<li><a class="el" href="md_doc_readme_rust.html">Rust Developer Guide</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md30"></a>
-Structure of Components (Best Practice)</h2>
-<p>This is a best practice for component folder structure. Note that exceptions exist for this, such as Contiki and libs2.</p>
-<div class="fragment"><div class="line">.</div>
-<div class="line">|-- uic_my_sample_component/</div>
-<div class="line">|   |-- platform/           // Platform specific</div>
-<div class="line">|   |   `-- posix/          // Posix specific</div>
-<div class="line">|   |-- include/            // Public interface of components</div>
-<div class="line">|   |-- resource/           // Various resources, e.g. xml files for code generation etc.</div>
-<div class="line">|   |-- src/                // Source code and private header files</div>
-<div class="line">|   |-- test/               // Unittest for component</div>
-<div class="line">|   |-- tools/              // Tools e.g. for building, python scripts etc.</div>
-<div class="line">|   `-- CMakeLists.txt      // CMakeLists.txt for the component</div>
-</div><!-- fragment --><ul>
-<li>Library names and folders of Unify components are required to be prefixed with uic_, i.e. "uic_my_sample_component".</li>
+<p>API reference is found here:</p><ul>
+<li><a href="../../doxygen_uic/html/index.html">Common Components API</a></li>
+<li><a href="../../doxygen_zpc/html/index.html">ZPC API</a></li>
+<li><a href="../../doxygen_zigpc/html/index.html">ZigPC API</a></li>
+<li><a href="../../reference_ucl_mqtt/html/index.html">UCL MQTT API</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md31"></a>
-Structure</h2>
-<div class="fragment"><div class="line">.</div>
-<div class="line">|-- applications/               // Unify application specific code goes here</div>
-<div class="line">|   |-- zpc/                    // ZPC application code</div>
-<div class="line">|   |   |-- components/         // ZPC components</div>
-<div class="line">|   |   `-- ...</div>
-<div class="line">|   |-- zigpc/                  // ZIGPC application code</div>
-<div class="line">|   |   |-- components/         // ZIGPC components</div>
-<div class="line">|   |   `-- ...</div>
-<div class="line">|   |-- angel/                  // ANGEL application code</div>
-<div class="line">|   |-- upvl/                   // UPVL application code</div>
-<div class="line">|   `-- ...</div>
-<div class="line">|-- cmake/                      // Cmake toolchains, modules and includes</div>
-<div class="line">|   |-- include/</div>
-<div class="line">|   |   `--                     // Various cmake includes e.g. compiler_options.cmake, doxygen.cmake, ...</div>
-<div class="line">|   |-- modules/                // cmake modules</div>
-<div class="line">|   |-- armhf_debian.cmake      // Toolchain files goes here in the format &lt;arch&gt;(_&lt;dist&gt;).cmake</div>
-<div class="line">|-- components/                 // Shared components (components shared between Unify applications)</div>
-<div class="line">|   |-- uic_config/             // config component</div>
-<div class="line">|   |   |-- platform/</div>
-<div class="line">|   |   |   |-- posix/          // Posix platform specific must be in platform/posix folder for all components (except external components, where this is handled differently)</div>
-<div class="line">|   |   |-- include/            // non platform specific public interfaces goes here</div>
-<div class="line">|   |   |-- src/                // non platform specific source code and private interfaces goes here</div>
-<div class="line">|   |   |-- test/               // Unittests for the component goes in here</div>
-<div class="line">|   |   `-- CMakeLists.txt</div>
-<div class="line">|   |-- uic_log/                // Logging framework</div>
-<div class="line">|   |-- uic_mqtt_client/        // MQTT client library</div>
-<div class="line">|   |-- ...</div>
-<div class="line">|   `-- CMakeLists.txt</div>
-<div class="line">|-- dist/                       // Files for the &quot;target&quot; platform goes here e.g. init scripts, config files, etc.</div>
-<div class="line">|   `-- CMakeLists.txt</div>
-<div class="line">|-- doc/                        // Documentation written in markdown format</div>
-<div class="line">|   `-- readme_developer.md     // This document</div>
-<div class="line">|-- docker/Dockerfile           // Dockerfile for compiling and cross-compiling ZPC</div>
-<div class="line">|-- CMakeLists.txt              // Root CMakeLists.txt</div>
-<div class="line">`-- Jenkinsfile                 // Jenkinsfile for CI on Jenkins</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md32"></a>
-Component Templates</h1>
-<p>A <a href="https://cookiecutter.readthedocs.io/">cookiecutter</a> template helps to quickly add the boilerplate code for ZPC-components.</p>
-<p>Cookiecutter is written in Python and the simplest way to install it is from PyPI using <a href="https://pipxproject.github.io/pipx/">pipx</a>.</p>
-<div class="fragment"><div class="line">pip install --user pipx</div>
-</div><!-- fragment --><p>pipx is a utility for installing executable packages (i.e., packages with an entry-point) from PyPI and should be kept in their own virtualenv. When configured correctly, they are placed in your PATH. The pipx installation will tell you what PATH-changes you need to perform.</p>
-<p>After installing and configuring pipx, you can install cookiecutter:</p>
-<div class="fragment"><div class="line">pipx install cookiecutter</div>
-</div><!-- fragment --><p>Then, from your <code>components</code> directory, execute cookiecutter and point it to the template repository (assuming you have your SSH-keys all set up, but you can also use HTTPS):</p>
-<div class="fragment"><div class="line">cookiecutter ssh://git@stash.silabs.com/uic/zpc_cookiecutter.git</div>
-</div><!-- fragment --><p>You will be asked some questions regarding your component, with default values in square-brackets.</p>
-<p>After this is done, manually add your new component subdirectory to the <code>CMakeLists.txt</code> in the <code>components</code> directory.</p>
-<h2><a class="anchor" id="autotoc_md33"></a>
-Demo</h2>
-<p>Here you can see a demo-session of adding a component with cookiecutter.</p>
-<p><em>Note! This Git-repository used in the demo is outdated and did only exist to demonstrate this functionality for the team to consider.</em></p>
-<p><a href="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1">Heres a small video demonstrating how to use the cookiecutter <img src="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1.png" alt="" width="60%" class="inline"/> </a> </p>
-<h1><a class="anchor" id="autotoc_md34"></a>
-Clang-Format (autoformat code)</h1>
-<p>Clang-format is a tool that can format code according to coding style configuration. The <code>.clang-format</code> file in this repository depends on clang-format 10.</p>
-<h2><a class="anchor" id="autotoc_md35"></a>
-Install on Mac</h2>
-<div class="fragment"><div class="line">brew install llvm</div>
-<div class="line">ln -s &quot;$(brew --prefix llvm)/bin/clang-format&quot; &quot;/usr/local/bin/clang-format&quot;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md36"></a>
-Install on Ubuntu</h2>
-<div class="fragment"><div class="line">wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -</div>
-<div class="line">sudo echo &quot;deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main</div>
-<div class="line">deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main&quot; &gt; /etc/apt/sources.list.d/llvm.list</div>
-<div class="line">sudo apt-get update</div>
-<div class="line">sudo apt-get install clang-format-10</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md37"></a>
-Visual Studio Code</h2>
-<p>In Visual Studio Code, you can install clang-format plugin (xaver.clang-format), which allows you to format files with clang-format (also supports format on save). See plugin documentation for details.</p>
-<h2><a class="anchor" id="autotoc_md38"></a>
-Command Line</h2>
-<p>You can run clang-format from the command line.</p>
-<div class="fragment"><div class="line">clang-format -i &lt;filename&gt;  # -i causes to do in-file changes</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md39"></a>
-Pre-commit Hooks</h1>
-<p>The ZPC repository has a config-file for the pre-commit.org git hook system. With the pre-commit hooks, utilities such as clang-format and cmake-format will be run a all files before committing them to the repository.</p>
-<p>The pre-commit hooks must be activated locally on your machine to work.</p>
-<p>First, the pre-commit Python module has to be installed:</p>
-<div class="fragment"><div class="line">python -m pip install pre-commit</div>
-</div><!-- fragment --><p>Second, install the git hook:</p>
-<div class="fragment"><div class="line">python -m pre-commit install</div>
-</div><!-- fragment --><p>From now on, all new files will be formatted before they are committed.</p>
 <h1><a class="anchor" id="autotoc_md40"></a>
-CMake</h1>
-<p>We created additional functions on top of the usual cmake functions which makes it more easier to create new targets. This section explains how to use cmake to create new uic-components, mocks and unit-tests. These functions should cover all possible use-cases. Their semantics is similar to the existing cmake framework, making it easy for developers who are familiar with cmake to understand what they do. A good tip is to also take a look at the current cmake files to find similar constructions which you can use as an example when defining your own.</p>
+Build system and components</h1>
 <h2><a class="anchor" id="autotoc_md41"></a>
-Defining new uic-components</h2>
+CMake</h2>
+<p>We created additional functions on top of the usual cmake functions which makes it more easier to create new targets. This section explains how to use cmake to create new uic-components, mocks and unit-tests. These functions should cover all possible use-cases. Their semantics is similar to the existing cmake framework, making it easy for developers who are familiar with cmake to understand what they do. A good tip is to also take a look at the current cmake files to find similar constructions which you can use as an example when defining your own.</p>
+<h3><a class="anchor" id="autotoc_md42"></a>
+Defining new uic-components</h3>
 <p>Uic-components are declared SHARED using cmake's <code>add_library</code>.</p>
 <p>Newly created components need to comply with the following requirements:</p>
 <ol type="1">
@@ -216,24 +118,24 @@ Defining new uic-components</h2>
 <p>An example:</p>
 <div class="fragment"><div class="line">add_library(uic_my_component SHARED my_source.c)</div>
 </div><!-- fragment --><p>There is scripting in place that will verify if these conditions are met. In the unlikely event you want to suppress these errors, <code>disable_target_check(&lt;my_exception_target&gt;)</code> can be used.</p>
-<h2><a class="anchor" id="autotoc_md42"></a>
-Mock uic-components</h2>
+<h3><a class="anchor" id="autotoc_md43"></a>
+Mock uic-components</h3>
 <p>The cmock framework is used to generate mocks of uic components. More specifically, cmock generates a mock implementation for provided header files. This means no source files are needed to create mocks! To ease the use of mocking in the uic ecosystem we have a cmake function to create mock libraries:</p>
 <div class="fragment"><div class="line">target_add_mock(&lt;target&gt; &lt;additional_headers&gt;)</div>
 </div><!-- fragment --><p>Target_add_mock creates a new cmake shared library named <code>&lt;target&gt;_mock</code> which can be included into unit-test targets. It will <em>only</em> mock headers that are declared <em>public</em> for that given target. Given the following example:</p>
 <div class="fragment"><div class="line">target_include_directories(mytarget PUBLIC include PRIVATE my/private/include/dir)</div>
 <div class="line">target_add_mock(mytarget)</div>
 </div><!-- fragment --><p>will create a library named <code>mytarget_mock</code> containing mock implementations of headers that reside in the folder <code>${CMAKE_CURRENT_LIST_DIR}/include</code>. Headers residing in folder <code>my/private/include/dir</code> are not mocked and therefore not in the mock library.</p>
-<h3><a class="anchor" id="autotoc_md43"></a>
-Additional headers</h3>
+<h4><a class="anchor" id="autotoc_md44"></a>
+Additional headers</h4>
 <p>For further customization <code>target_add_mock</code> has the possibility to add additional headers. Its intended to mock headers that are needed by the test but where declared private or part of an external library that needs to be mocked.</p>
-<h2><a class="anchor" id="autotoc_md44"></a>
-Unit-testing</h2>
+<h3><a class="anchor" id="autotoc_md45"></a>
+Unit-testing</h3>
 <p><code>target_add_unittest</code> is used to create unit-tests for a given target. In it simplest form all you need is</p>
 <div class="fragment"><div class="line">target_add_unittest(uic_my_component SOURCES test.c)</div>
 </div><!-- fragment --><p>In test.c you define your unity test cases. No need to add additional include and link_libraries, they are all deducted from the <code>uic_my_component</code>. What happens internally is that the function relinks the target it creates a test for, in this case <code>uic_my_component</code>. This enable us to link mocks in the production code. the function has a <code>DEPENDS</code> argument that is purposed for that.</p>
-<h3><a class="anchor" id="autotoc_md45"></a>
-DEPENDS</h3>
+<h4><a class="anchor" id="autotoc_md46"></a>
+DEPENDS</h4>
 <p>the DEPENDS argument enables you to switch a dependant library with a mock version. One that is generated with target_add_mock for instance. the <code>DEPENDS</code> argument behaves similar to cmake's <code>target_link_libraries</code>. Given the following situation:</p>
 <div class="fragment"><div class="line">add_library(uic_my_component SHARED mycomponent.c)</div>
 <div class="line">add_library(uic_my_dependant SHARED mysource.c)</div>
@@ -249,8 +151,8 @@ DEPENDS</h3>
 <div class="line">DEPENDS uic_my_dependant_mock</div>
 <div class="line">)</div>
 </div><!-- fragment --><p><b>Note</b> <code>DEPENDS</code> accepts a list of items space separated.</p>
-<h3><a class="anchor" id="autotoc_md46"></a>
-NAME</h3>
+<h4><a class="anchor" id="autotoc_md47"></a>
+NAME</h4>
 <p>With the <code>NAME</code> argument we can give the test a custom name. This way we can build multiple tests of the same component. e.g.</p>
 <div class="fragment"><div class="line">target_add_unittest(uic_my_component </div>
 <div class="line">NAME uic_custom_test1 </div>
@@ -261,8 +163,8 @@ NAME</h3>
 <div class="line">NAME uic_custom_test2</div>
 <div class="line">SOURCES source.c</div>
 <div class="line">)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md47"></a>
-EXCLUDE</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md48"></a>
+EXCLUDE</h3>
 <p>Mocking a header which is part of the same target will not build, as you will get duplicate symbol errors. There is a symbol present in the actual production code, and one in the mock. With <code>EXCLUDE</code> you can easily leave out actual production sources. thereby making your test compile:</p>
 <div class="fragment"><div class="line">add_library(uic_my_component a.c b.c c.c)</div>
 <div class="line">target_add_unittest(uic_my_component</div>
@@ -270,59 +172,294 @@ EXCLUDE</h2>
 <div class="line">DEPENDS a_mock</div>
 <div class="line">EXCLUDE a.c)</div>
 </div><!-- fragment --><p><code>EXCLUDE</code> expects an string that it can match against source files. Typically you want to list the sources files you want to exclude. e.g. <code>a.c</code> or if its nested <code>src/a.c</code> for example. In theory you could exclude a selection of files by specifying, for example, 'network'. this will exclude all source files which contains 'network' from the build.</p>
-<h2><a class="anchor" id="autotoc_md48"></a>
-Stub</h2>
+<h3><a class="anchor" id="autotoc_md49"></a>
+Stub</h3>
 <p>There are some exceptions where a simple mock not suffices. These components typically expose hooks of existing component. These components are post-fixed with _stub. they can be added in the DEPENDS argument. at the moment of writing we have 2:</p>
 <ul>
 <li>uic_contiki_stub, functions to forward time or dequeue the events on the queue.</li>
 <li>uic_mqtt_stub, hooks to show mqtt state.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md49"></a>
-Do's and dont's</h2>
+<h3><a class="anchor" id="autotoc_md50"></a>
+Do's and dont's</h3>
 <ul>
 <li>The <code>NAME</code> argument is optional and doesn't have to be explicitly specified.</li>
 <li>Dont add production sources in the <code>SOURCES</code> section. (e.g. ../src/my_internal_src.c). These objects are already loaded and will probably cause linker errors.</li>
 <li>Do not add the target under test in the <code>DEPENDS</code> section, its already implied because of the first argument. you can leave it out. e.g. dont do this: <code>target_add_unittest(mytarget DEPENDS mytarget)</code></li>
 <li>The <code>DEPENDS</code> section typically contains only dependencies to _mock targets.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md50"></a>
-CMake File Formatting</h2>
+<h3><a class="anchor" id="autotoc_md51"></a>
+CMake File Formatting</h3>
 <p>The ZPC repository includes config-files for formatting of CMake files using the Python module cmake-format. cmake-format can be install using the pip installation utility.</p>
 <div class="fragment"><div class="line">python -m pip install cmake_format</div>
 </div><!-- fragment --><p>To auto-format a CMake file run the command:</p>
 <div class="fragment"><div class="line">python -m cmake_format -i ./&lt;some dir&gt;/CMakeLists.txt</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md51"></a>
-Example</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md52"></a>
+Example</h3>
 <p>Define all test cases in a file, where each test case is a function with the prefix test_,</p>
 <div class="fragment"><div class="line">#include &lt;unity.h&gt;</div>
 <div class="line">#include &quot;foo.h&quot;</div>
 <div class="line">void foo_case1_test() {</div>
 <div class="line">  TEST_ASSERT_TRUE( foo_true() )</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md52"></a>
-References</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md53"></a>
+References</h3>
 <ul>
 <li>Unity <a href="http://www.throwtheswitch.org/unity">http://www.throwtheswitch.org/unity</a></li>
 <li><a href="https://github.com/ThrowTheSwitch/CMock/blob/v2.5.2/docs/CMock_Summary.md">CMock_Summery</a></li>
 <li><a href="http://www.throwtheswitch.org/cmock">http://www.throwtheswitch.org/cmock</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md53"></a>
-Code Coverage</h2>
+<h3><a class="anchor" id="autotoc_md54"></a>
+Code Coverage</h3>
 <p>When making unit tests, code coverage is helpful for determining which parts of the code are tested. When building the Unify project, enable code coverage by adding setting the CMAKE flags: <code>CMAKE_GCOV=True</code> and <code>CMAKE_BUILD_TYPE=Debug</code> by running <code>cmake &lt;other CMAKE flags&gt; -DCMAKE_BUILD_TYPE=Debug -DCMAKE_GCOV=True ..</code> when building. After building and running the unit tests, the tool <code>gcovr</code> can be used to generate coverage reports.</p>
 <p>Within the build folder run:</p>
 <div class="fragment"><div class="line">mkdir -p gcovr &amp;&amp; gcovr -r . -e &#39;.+mock.+&#39; -e &#39;.+test.+&#39; -e &#39;.+unity.+&#39; --html-details --html --output gcovr/gcovr.html</div>
 </div><!-- fragment --><p>Then, open <code>&lt;build_folder&gt;/gcovr/gcovr.html</code> in your favorite browser.</p>
 <p>The code coverage report is also available on Jenkins by clicking the <code>Coverage Report</code> link.</p>
-<h3><a class="anchor" id="autotoc_md54"></a>
-Dependencies</h3>
-<p>Install the <code>gcovr</code> package using <code>apt-get</code> on Ubuntu/Debian or <code>brew</code> on Mac. <code>gcovr</code> is already installed in the Unify docker image. </p>
+<h4><a class="anchor" id="autotoc_md55"></a>
+Dependencies</h4>
+<p>Install the <code>gcovr</code> package using <code>apt-get</code> on Ubuntu/Debian or <code>brew</code> on Mac. <code>gcovr</code> is already installed in the Unify docker image.</p>
+<h1><a class="anchor" id="autotoc_md56"></a>
+Debian Package for a UIC Component</h1>
+<p>The Unify SDK includes some macros for making a debian packages for a component.</p>
+<p>The following steps are needed to make a package:</p>
+<ol type="1">
+<li><p class="startli">Implement add_component_to_uic() function in cmake/include/package.cmake for your component with the following arguments:</p><ul>
+<li>PKG_NAME component package Name</li>
+<li>PKG_FILE_NAME Debian package filename for the component</li>
+<li>PKG_DEPNDS Component debian package dependencies.</li>
+<li>PKG_EXTRA Component debian package Control extra info</li>
+</ul>
+<p class="startli">See the <a href="https://cmake.org/cmake/help/v3.6/module/CPackDeb.html">CPack manual</a> for more information on these fields.</p>
+</li>
+</ol>
+<ol type="1">
+<li>In the component-specific CMakeFile.txt (for application/zpc/CMakeFile.txt) implement a call to cpack_add_component() for filling up the CPack component information.</li>
+</ol>
+<ol type="1">
+<li>Pass "COMPONENT &lt;component name&gt; as an argument to all install() calls for the component (see the application/zpc/CMakeFile.txt for example).</li>
+</ol>
+<ol type="1">
+<li>Add your component name to the following line, as shown in cmake/include/package.cmake. ~~~cmake set(CPACK_COMPONENTS_ALL uic-zpc libuic uic-all &lt;your component&gt;) ~~~</li>
+</ol>
+<ol type="1">
+<li>Add your component name to uic-all component (append name to this list as shown in cmake/include/package.cmake). ~~~cmake add_component_to_uic( uic-all "${CMAKE_PROJECT_NAME}-all" "uic-zpc,libuic, &lt;your component&gt;" "" ) <div class="fragment"><div class="line">## How To Make A New IoT Service {#How_to_make_a_new_IoT_Service}</div>
+<div class="line"> </div>
+<div class="line">To build an IoT Service from scratch, it is recommended to follow the steps</div>
+<div class="line">below. IoT Services come in many forms, and exact steps will depend on the</div>
+<div class="line">detailed requirements of the IoT Service.</div>
+<div class="line"> </div>
+<div class="line">1. Find API and SDK bindings for target service. An IoT service connects the</div>
+<div class="line">   Unify SDK with an external service. Service should be interpreted in the</div>
+<div class="line">   broadest sense; it can be a cloud service, or it can be a UI operated by end</div>
+<div class="line">   users. Or something in between. The first step in writing an IoT Service is</div>
+<div class="line">   determining which APIs and SDKs to use for the target service. If the IoT</div>
+<div class="line">   Service connects to a cloud service, then the cloud service SDK is a good</div>
+<div class="line">   place to start. Alternatively, choosing a framework with good bindings to the</div>
+<div class="line">   cloud service. If the IoT Service is a UI, then a UI framework should be</div>
+<div class="line">   chosen based on the product requirements.</div>
+<div class="line">2. Choose an MQTT client. Now choose an MQTT client based on the programming</div>
+<div class="line">   language and frameworks selected in the previous step. Most MQTT clients</div>
+<div class="line">   should be compatible with the Unify SDK. If encryption is desired, make sure</div>
+<div class="line">   to choose a client that supports certificate-based TLS.</div>
+<div class="line">3. Discover nodes using MQTT topics. Discovering nodes and resources that can be</div>
+<div class="line">   displayed or manipulated is fundamental to any IoT Service. This is achieved</div>
+<div class="line">   by subscribing to particular MQTT topics. See the Service Discovery chapter</div>
+<div class="line">   of the [Unify Specification](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).</div>
+<div class="line">4. Implement Network Management. If the IoT Service needs to do network</div>
+<div class="line">   management, consider which operations are needed and implement them as</div>
+<div class="line">   described in the Network Management chapter of the</div>
+<div class="line">   [Unify Specification](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).</div>
+<div class="line">   Here is [an example of adding a node to a network](#Including_a_Device).</div>
+<div class="line">5. Interact with nodes using MQTT topics. Interacting with the nodes by either</div>
+<div class="line">   reading out status or controlling their state is fundamental to most IoT</div>
+<div class="line">   services. Subscribe and publish to the relevant MQTT topics as described in</div>
+<div class="line">   the Application Level Control chapter of the</div>
+<div class="line">   [Unify Specification](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).</div>
+<div class="line">6. Consider re-using appropriate shared components from the Unify SDK codebase.</div>
+<div class="line">   A valuable feature of Unify is the common components shared by many modules</div>
+<div class="line">   of the SDK. Code reuse saves both development time and offers IoT Service</div>
+<div class="line">   users a uniform experience operating and configuring different IoT services.</div>
+<div class="line"> </div>
+<div class="line">The Unify SDK provides a number of components that are candidates for re-use in</div>
+<div class="line">IoT Services. They are listed below.</div>
+<div class="line"> </div>
+<div class="line">1. Unify MQTT Client. The MQTT client is built on top of Eclipse Mosquitto MQTT</div>
+<div class="line">   and handles MQTT connection, subscribing and publishing. It implements</div>
+<div class="line">   re-connections and caching of published messages, which have been published</div>
+<div class="line">   while the client has been disconnected from the broker. See the section Unify</div>
+<div class="line">   Library Framework/MQTT Client in Unify Documentation for details.</div>
+<div class="line">2. Logging System. The logging system features logging with severity level</div>
+<div class="line">   tagging and log filtering. See the section Unify Library Framework/Logging</div>
+<div class="line">   System in the Unify Documentation for details.</div>
+<div class="line">3. Config System. The config system implements parsing of config files and</div>
+<div class="line">   command line arguments. See the Unify Library Framework/Config System in</div>
+<div class="line">   Unify Documentation for details.</div>
+<div class="line"> </div>
+<div class="line">The UPVL and GMS applications use the shared components and are good examples to</div>
+<div class="line">peruse. They can be found in the Unify source code in the `applications/gms/`</div>
+<div class="line">and `applications/upvl/` directories.</div>
+<div class="line"> </div>
+<div class="line">## Directory Structure and File Naming Conventions</div>
+<div class="line"> </div>
+<div class="line">### Rules</div>
+<div class="line"> </div>
+<div class="line">* All filenames must be lower case except the following:</div>
+<div class="line">  * CMakeLists.txt</div>
+<div class="line">  * Dockerfile</div>
+<div class="line">  * Makefile</div>
+<div class="line">  * Jenkinsfile</div>
+<div class="line">  * Files provided by external libraries</div>
+<div class="line">* Use _ for spaces in file/folder names</div>
+<div class="line"> </div>
+<div class="line">### Structure of Components (Best Practice)</div>
+<div class="line"> </div>
+<div class="line">This is a best practice for component folder structure.</div>
+<div class="line">Note that exceptions exist for this, such as Contiki and libs2.</div>
+</div><!-- fragment --></li>
+</ol>
+<p>|&ndash; uic_my_sample_component/ | |&ndash; platform/ // Platform specific | | `&ndash; posix/ // Posix specific | |&ndash; include/ // Public interface of components | |&ndash; resource/ // Various resources, e.g. xml files for code generation etc. | |&ndash; src/ // Source code and private header files | |&ndash; test/ // Unittest for component | |&ndash; tools/ // Tools e.g. for building, python scripts etc. | `&ndash; CMakeLists.txt // CMakeLists.txt for the component </p><div class="fragment"><div class="line">* Library names and folders of Unify components are required to be prefixed with uic_, </div>
+<div class="line">i.e. &quot;uic_my_sample_component&quot;.</div>
+<div class="line"> </div>
+<div class="line">### Structure</div>
+</div><!-- fragment --><p>|&ndash; applications/ // Unify application specific code goes here | |&ndash; zpc/ // ZPC application code | | |&ndash; components/ // ZPC components | | `&ndash; ... | |&ndash; zigpc/ // ZIGPC application code | | |&ndash; components/ // ZIGPC components | | `&ndash; ... | |&ndash; gms/ // GMS application code | |&ndash; upvl/ // UPVL application code | `&ndash; ... |&ndash; cmake/ // Cmake toolchains, modules and includes | |&ndash; include/ | | `&ndash; // Various cmake includes e.g. compiler_options.cmake, doxygen.cmake, ... | |&ndash; modules/ // cmake modules | |&ndash; armhf_debian.cmake // Toolchain files goes here in the format <code>&lt;arch&gt;(_&lt;dist&gt;).cmake</code> |&ndash; components/ // Shared components (components shared between Unify applications) | |&ndash; uic_config/ // config component | | |&ndash; platform/ | | | |&ndash; posix/ // Posix platform specific must be in platform/posix folder for all components (except external components, where this is handled differently) | | |&ndash; include/ // non platform specific public interfaces goes here | | |&ndash; src/ // non platform specific source code and private interfaces goes here | | |&ndash; test/ // Unittests for the component goes in here | | `&ndash; CMakeLists.txt | |&ndash; uic_log/ // Logging framework | |&ndash; uic_mqtt_client/ // MQTT client library | |&ndash; ... | `&ndash; CMakeLists.txt |&ndash; dist/ // Files for the "target" platform goes here e.g. init scripts, config files, etc. | `&ndash; CMakeLists.txt |&ndash; doc/ // Documentation written in markdown format | `&ndash; readme_developer.md // This document |&ndash; docker/Dockerfile // Dockerfile for compiling and cross-compiling ZPC |&ndash; CMakeLists.txt // Root CMakeLists.txt `&ndash; Jenkinsfile // Jenkinsfile for CI on Jenkins </p><div class="fragment"><div class="line">## Component Templates</div>
+<div class="line"> </div>
+<div class="line">A [cookiecutter](https://cookiecutter.readthedocs.io/) template helps</div>
+<div class="line">to quickly add the boilerplate code for ZPC-components.</div>
+<div class="line"> </div>
+<div class="line">Cookiecutter is written in Python and the simplest way to install it is from PyPI using</div>
+<div class="line">[pipx](https://pipxproject.github.io/pipx/).</div>
+</div><!-- fragment --><p>pip install &ndash;user pipx </p><div class="fragment"><div class="line">pipx is a utility for installing executable packages (i.e., packages with an entry-point)</div>
+<div class="line">from PyPI and should be kept in their own virtualenv.</div>
+<div class="line">When configured correctly, they are placed in your PATH.</div>
+<div class="line">The pipx installation will tell you what PATH-changes you need</div>
+<div class="line">to perform.</div>
+<div class="line"> </div>
+<div class="line">After installing and configuring pipx, you can install cookiecutter:</div>
+<div class="line"> </div>
+<div class="line">~~~ bash</div>
+<div class="line">pipx install cookiecutter</div>
+</div><!-- fragment --><p>Then, from your <code>components</code> directory, execute cookiecutter and point it to the template repository (assuming you have your SSH-keys all set up, but you can also use HTTPS):</p>
+<div class="fragment"><div class="line">cookiecutter ssh://git@stash.silabs.com/uic/zpc_cookiecutter.git</div>
+</div><!-- fragment --><p>You will be asked some questions regarding your component, with default values in square-brackets.</p>
+<p>After this is done, manually add your new component subdirectory to the <code>CMakeLists.txt</code> in the <code>components</code> directory.</p>
+<h2><a class="anchor" id="autotoc_md57"></a>
+Demo</h2>
+<p>Here you can see a demo-session of adding a component with cookiecutter.</p>
+<p><em>Note! This Git-repository used in the demo is outdated and did only exist to demonstrate this functionality for the team to consider.</em></p>
+<p><a href="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1">Heres a small video demonstrating how to use the cookiecutter <img src="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1.png" alt="" width="60%" class="inline"/> </a></p>
+<h1><a class="anchor" id="autotoc_md58"></a>
+Clang-Format (autoformat code)</h1>
+<p>Clang-format is a tool that can format code according to coding style configuration. The <code>.clang-format</code> file in this repository depends on clang-format 10.</p>
+<h2><a class="anchor" id="autotoc_md59"></a>
+Install on Mac</h2>
+<div class="fragment"><div class="line">brew install llvm</div>
+<div class="line">ln -s &quot;$(brew --prefix llvm)/bin/clang-format&quot; &quot;/usr/local/bin/clang-format&quot;</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md60"></a>
+Install on Ubuntu</h2>
+<div class="fragment"><div class="line">wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -</div>
+<div class="line">sudo echo &quot;deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main</div>
+<div class="line">deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main&quot; &gt; /etc/apt/sources.list.d/llvm.list</div>
+<div class="line">sudo apt-get update</div>
+<div class="line">sudo apt-get install clang-format-10</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md61"></a>
+Visual Studio Code</h2>
+<p>In Visual Studio Code, you can install clang-format plugin (xaver.clang-format), which allows you to format files with clang-format (also supports format on save). See plugin documentation for details.</p>
+<h2><a class="anchor" id="autotoc_md62"></a>
+Command Line</h2>
+<p>You can run clang-format from the command line.</p>
+<div class="fragment"><div class="line">clang-format -i &lt;filename&gt;  # -i causes to do in-file changes</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md63"></a>
+Pre-commit Hooks</h1>
+<p>The ZPC repository has a config-file for the pre-commit.org git hook system. With the pre-commit hooks, utilities such as clang-format and cmake-format will be run a all files before committing them to the repository.</p>
+<p>The pre-commit hooks must be activated locally on your machine to work.</p>
+<p>First, the pre-commit Python module has to be installed:</p>
+<div class="fragment"><div class="line">python -m pip install pre-commit</div>
+</div><!-- fragment --><p>Second, install the git hook:</p>
+<div class="fragment"><div class="line">python -m pre-commit install</div>
+</div><!-- fragment --><p>From now on, all new files will be formatted before they are committed.</p>
+<h1><a class="anchor" id="autotoc_md64"></a>
+Creating a New Application</h1>
+<ol type="1">
+<li>Create a new folder in <code>applications</code> folder e.g., <code>applications/my_uic_application</code>.</li>
+<li><p class="startli">Create a main function within the <code>applications/my_uic_application</code> folder.</p>
+<p class="startli">The following is an example of a the bare minimum main.c file to get started. A more comprehensive demo is located in <code>applications/demo_uic_lib</code>, where some of the shared Unify libraries are demonstrated as well, including MQTT client, logging, and the configuration system. </p><pre class="fragment">#include "uic_main.h"
+#include "process.h"
+
+// Demo process definition
+PROCESS(my_uic_application_process, "My Unify Application Process");
+
+// Demo process implementation
+PROCESS_THREAD(my_uic_application_process, ev, data)
+{
+  PROCESS_BEGIN()
+  while (1) {
+    switch (ev) {
+      case PROCESS_EVENT_INIT:
+        // Add Init code here
+        break;
+      case PROCESS_EVENT_EXIT:
+        // Add Exit code here
+        break;
+    }
+    PROCESS_WAIT_EVENT();
+  }
+  PROCESS_END()
+}
+
+// Setup fixture, called on start-up
+sl_status_t my_uic_application_setup(void)
+{
+  // Start the demo process
+  process_start(&amp;my_uic_application_process, NULL);
+  return SL_STATUS_OK;
+}
+
+int main(int argc, char **argv)
+{
+  // Setup fixtures
+  uic_fixt_setup_step_t uic_fixt_setup_steps_list[]
+    = {{my_uic_application_setup, "My Unify Application"}, {NULL, "Terminator"}};
+
+  // Shutdown fixtures
+  uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[]
+    = {{NULL, "Terminator"}};
+
+  // Run uic_main and return result
+  return uic_main(uic_fixt_setup_steps_list,
+                  uic_fixt_shutdown_steps_list,
+                  argc,
+                  argv,
+                  "1.0" /* My application version */);
+}
+</pre></li>
+<li><p class="startli">Hook <code>my_uic_application</code> into the Build System.</p>
+<p class="startli">After adding the main function to a <code>main.c</code> file under <code>applications/my_uic_application</code>, modify the cmake configuration file to include <code>my_uic_application</code> in the build by adding <code>add_subdirectory(my_uic_application)</code> to <code>applications/CMakeLists.txt</code> </p><pre class="fragment">add_executable(my_uic_application main.c)
+target_link_libraries(my_uic_application uic)
+# Include my_uic_application in binary package
+install(TARGETS my_uic_application RUNTIME DESTINATION bin)
+</pre></li>
+<li><p class="startli">Compile</p>
+<p class="startli">Now, everything should be set up to compile my_uic_application as part of the Unify build. To cross compile the application for Raspberry Pi, run following commands in the root of source folder: &gt; NB: Prerequisite is to have the Unify docker image (see &gt; <a class="el" href="md_docker_readme_developer.html">Docker</a>) </p><pre class="fragment">docker run -it --rm  -v`pwd`:`pwd` -w `pwd` uic_armhf
+mkdir build
+cd build
+cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=../cmake/armhf_debian.cmake ..
+ninja
+ninja deb
+</pre></li>
+</ol>
+<h1><a class="anchor" id="autotoc_md65"></a>
+Unify SDK Library (Unify Main) and IPC</h1>
+<p>The Unify SDK library is implemented as an event-driven system. It runs in a single thread and uses the proto-threads from the Contiki OS as an event queue system. The event system is centered around a single select call, which monitors all external file descriptors and is responsible for triggering a timer, which is implemented in the Unify Main component. This design was chosen to avoid concurrency issues between threads.</p>
+<p>The following sequence diagram shows how the Unify Main loop triggers events based on file descriptors in <code>process1</code> and timers in <code>process2</code>.</p>
+<p><img src="sequence_uic_ipc.png" alt="" class="inline" title="Unify Main Events"/>   </p>
+<p>Additional information on this is available in the Unify Library doxygen. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:07 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:33:58 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

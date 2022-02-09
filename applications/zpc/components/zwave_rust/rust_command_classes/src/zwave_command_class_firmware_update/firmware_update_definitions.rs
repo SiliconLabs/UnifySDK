@@ -1,6 +1,6 @@
 use crate::{try_u8slice_to_msb, ZwaveFrameError, ZwaveFrameError::*, MAX_FRAME_LEN};
 use std::convert::{TryFrom, TryInto};
-use zwave_controller::sl_status_t;
+use zwave_controller_sys::sl_status_t;
 
 pub const COMMAND_CLASS_FIRMWARE_UPDATE_MD: u16 = 0x7A;
 pub const COMMAND_CLASS_VERSION: u16 = 0x86;
@@ -609,24 +609,25 @@ DEFINE_ATTRIBUTE!(
 
 extern "C" {
     pub fn postpone_firmware_update_expiry(
-        endpoint_node: uic_attribute_store::attribute_store_node_t,
+        endpoint_node: unify_attribute_store_sys::attribute_store_node_t,
     ) -> sl_status_t;
 
     pub fn node_supports_firmware_activation(
-        ep_node: uic_attribute_store::attribute_store_node_t,
+        ep_node: unify_attribute_store_sys::attribute_store_node_t,
     ) -> bool;
 
-    pub fn node_supports_cc(ep_node: uic_attribute_store::attribute_store_node_t) -> bool;
+    pub fn node_supports_cc(ep_node: unify_attribute_store_sys::attribute_store_node_t) -> bool;
 
-    pub fn is_firmware_update_ongoing(ep_node: uic_attribute_store::attribute_store_node_t)
-        -> bool;
+    pub fn is_firmware_update_ongoing(
+        ep_node: unify_attribute_store_sys::attribute_store_node_t,
+    ) -> bool;
 
     pub fn firmware_transfer_get_theoretical_max_fragment_size(
-        ep_node: uic_attribute_store::attribute_store_node_t,
+        ep_node: unify_attribute_store_sys::attribute_store_node_t,
     ) -> u16;
 
     pub fn set_firmware_transfer_last_status(
-        firmware_transfer_node: uic_attribute_store::attribute_store_node_t,
+        firmware_transfer_node: unify_attribute_store_sys::attribute_store_node_t,
         status: ZwaveFirmwareTransferStatus,
     ) -> sl_status_t;
 }

@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
@@ -16,7 +16,7 @@
  *
  * This component implements default commands like exit, help and log_level.
  * Also it has the basic functionalities of handling these commands and possibility
- * to add more commands to the existing CLI.  
+ * to add more commands to the existing CLI.
  *
  * @{
  */
@@ -40,7 +40,7 @@ sl_status_t uic_stdin_handle_command(const char *command);
 
 /**
  * @brief Command generator for editline
- * 
+ *
  * This function will be called several times when we are trying to
  * autocomplete a word. See man rl_completion_matches
  * @param text   See man rl_completion_matches
@@ -57,7 +57,7 @@ const char *get_prompt_string();
 
 /**
  * @brief Initialize uic stdin/stdout
- * 
+ *
  */
 void uic_stdin_init();
 

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -132,6 +132,23 @@ sl_status_t attribute_store_get_reported(attribute_store_node_t node,
  */
 sl_status_t attribute_store_set_reported_string(attribute_store_node_t node,
                                                 const char *string);
+
+/**
+ * @brief Safely retrieves a String from the Attribute Store
+ *
+ *
+ * @param node          The Attribute store node where a string is saved.
+ * @param string [out]  C char array pointer where the string data will be copied
+ *                      NULL termination is guaranteed.
+ * @param maximum_size  Capacity of the string pointer
+ *
+ * @returns SL_STATUS_OK if the entire string was retrived. ("" string would work)
+ * @returns SL_STATUS_FAIL if the attribute does not exist, value was undefined or
+ * the string could not be copied.
+ */
+sl_status_t attribute_store_get_reported_string(attribute_store_node_t node,
+                                                char *string,
+                                                size_t maximum_size);
 
 /**
  * @brief Set the Desired value to "undefined" (0 size no value)
@@ -321,6 +338,19 @@ sl_status_t
 void attribute_store_add_if_missing(attribute_store_node_t parent_node,
                                     const attribute_store_type_t attributes[],
                                     uint32_t count);
+
+/**
+ * @brief Removes all children of an attribute store node.
+ *
+ * This is a helper function that will make sure a node has no more children.
+ *
+ * @param node Node for which all the children should be deleted
+ *
+ * @returns SL_STATUS_OK if no more children, SL_STATUS_FAIL if an error occurred
+ *          and a child could not be deleted.
+ */
+sl_status_t attribute_store_delete_all_children(attribute_store_node_t node);
+
 
 #ifdef __cplusplus
 }

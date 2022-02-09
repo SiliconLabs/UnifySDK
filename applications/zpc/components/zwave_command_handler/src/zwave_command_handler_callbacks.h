@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -15,17 +15,16 @@
 #define ZWAVE_COMMAND_HANDLER_CALLBACKS_H
 
 #include "zwave_controller_connection_info.h"
-#include "zwave_controller.h"
+#include "zwave_controller_types.h"
 
 /**
- * @file zwave_command_handler_callbacks.h
- * @addtogroup zwave_command_handler_callbacks Callbacks for the Z-Wave Command Handler
+ * @defgroup zwave_command_handler_callbacks Callbacks for the Z-Wave Command Handler
  * @ingroup zwave_command_handler
  * @brief List of callback functions that are registered to the @ref zwave_controller
- * 
- * List of callbacks to register to the @ref zwave_controller. 
+ *
+ * List of callbacks to register to the @ref zwave_controller.
  * Refer to @ref zwave_controller_callbacks_t for details.
- * 
+ *
  * @{
  */
 
@@ -35,7 +34,7 @@ extern "C" {
 
 /**
  * Callback for entering a new network.
- * Refer to @ref zwave_controller_callbacks_t 
+ * Refer to @ref zwave_controller_callbacks_t
  * @ref zwave_controller_callbacks_t.on_new_network_entered for parameter description
  */
 void zwave_command_handler_on_new_network_entered(
@@ -46,7 +45,7 @@ void zwave_command_handler_on_new_network_entered(
 
 /**
  * Callback for receiving a Z-Wave frame.
- * Refer to @ref zwave_controller_callbacks_t 
+ * Refer to @ref zwave_controller_callbacks_t
  * @ref zwave_controller_callbacks_t.on_frame_received for parameter description
  */
 void zwave_command_handler_on_frame_received(

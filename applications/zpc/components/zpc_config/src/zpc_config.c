@@ -1,6 +1,6 @@
 /*******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
@@ -41,6 +41,34 @@
 #define DEFAULT_OTA_CACHE_PATH                              UIC_VAR_DIR "/zpc/ota_cache"
 #define DEFAULT_OTA_CACHE_SIZE                              2 * 1024
 
+// Default setting for zpc.poll.attribute_list_file.
+#define CONFIG_ZWAVE_POLL_ATTRIBUTE_LIST \
+  CONFIG_ZWAVE_POLL_ATTRIBUTE_LIST_DIR "/zwave_poll_config.yaml"
+
+// Config keys
+#define ZPC_SERIAL                        "zpc.serial"
+#define ZPC_RF_REGION                     "zpc.rf_region"
+#define ZPC_MANUFACTURER_ID               "zpc.manufacturer_id"
+#define ZPC_PRODUCT_TYPE                  "zpc.product_type"
+#define ZPC_PRODUCT_ID                    "zpc.product_id"
+#define ZPC_DEVICE_ID                     "zpc.device_id"
+#define ZPC_NORMAL_TX_POWER_DBM           "zpc.normal_tx_power_dbm"
+#define ZPC_MEASURED_0DBM_POWER           "zpc.measured_0dbm_power"
+#define ZPC_SERIAL_LOG_FILE               "zpc.serial_log_file"
+#define ZPC_ACCEPTED_TRANSMIT_FAILURE     "zpc.accepted_transmit_failure"
+#define ZPC_HARDWARE_VERSION              "zpc.hardware_version"
+#define ZPC_DEFAULT_WAKE_UP_INTERVAL      "zpc.default_wake_up_interval"
+#define ZPC_MISSING_WAKE_UP_NOTIFICATION  "zpc.missing_wake_up_notification"
+#define ZPC_INCLUSION_PROTOCOL_PREFERENCE "zpc.inclusion_protocol_preference"
+#define ZPC_OTA_CACHE_PATH                "zpc.ota_chache_path"
+#define ZPC_OTA_CACHE_SIZE                "zpc.ota_chache_size"
+#define ZPC_CONFIG_NCP_VERSION            "zpc.ncp_version"
+#define ZPC_CONFIG_NCP_UPDATE             "zpc.ncp_update"
+
+#define ZPC_POLL_ATTRIBUTE_LIST_FILE "zpc.poll.attribute_list_file"
+#define ZPC_POLL_BACKOFF             "zpc.poll.backoff"
+#define ZPC_POLL_DEFAULT_INTERVAL    "zpc.poll.default_interval"
+
 static zpc_config_t config;
 
 int zpc_config_init()
@@ -49,10 +77,14 @@ int zpc_config_init()
 
   // These are options which are supported both command line and in config file
   config_status_t status = CONFIG_STATUS_OK;
-  status |= config_add_string("zpc.serial",
+
+  status |= config_add_string(CONFIG_KEY_ZPC_DATASTORE_FILE,
+                              "ZPC datastore database file",
+                              DEFAULT_ZPC_DATASTORE_FILE);
+  status |= config_add_string(ZPC_SERIAL,
                               "Serial port where Z-Wave module is connected",
                               DEFAULT_SERIAL_PORT);
-  status |= config_add_string("zpc.rf_region",
+  status |= config_add_string(ZPC_RF_REGION,
                               "Z-Wave RF region setting"
                               "\n  EU: Europe"
                               "\n  US: US"
@@ -66,19 +98,18 @@ int zpc_config_init()
                               "\n  JP: Japan"
                               "\n  KR: Korea",
                               DEFAULT_ZWAVE_RF_REGION);
-  status |= config_add_int("zpc.manufacturer_id",
+  status |= config_add_int(ZPC_MANUFACTURER_ID,
                            "Manufacturer ID (16 bit Decimal)",
                            DEFAULT_MANUFACTURER_ID);
-  status |= config_add_int("zpc.product_type",
+  status |= config_add_int(ZPC_PRODUCT_TYPE,
                            "Product Type (16 bit Decimal)",
                            DEFAULT_PRODUCT_TYPE);
-  status |= config_add_int("zpc.product_id",
+  status |= config_add_int(ZPC_PRODUCT_ID,
                            "Product ID (16 bit Decimal)",
                            DEFAULT_PRODUCT_ID);
-  status |= config_add_string("zpc.device_id",
-                              "Device Specific ID",
-                              get_device_id());
-  status |= config_add_int("zpc.normal_tx_power_dbm",
+  status
+    |= config_add_string(ZPC_DEVICE_ID, "Device Specific ID", get_device_id());
+  status |= config_add_int(ZPC_NORMAL_TX_POWER_DBM,
                            "Z-Wave normal tx power (deci dBm), The power level"
                            " used when transmitting frames at normal power. The"
                            " power level is in deci dBm. E.g. 1dBm output power"
@@ -87,7 +118,7 @@ int zpc_config_init()
                            "modules support this setting and it will be "
                            "applied only with compatible Z-Wave APIs.",
                            DEFAULT_ZWAVE_NORMAL_TX_POWER_DBM);
-  status |= config_add_int("zpc.measured_0dbm_power",
+  status |= config_add_int(ZPC_MEASURED_0DBM_POWER,
                            "Z-Wave measured 0dBm output power (deci dBm). The "
                            " output power measured from the antenna when "
                            "normal_tx_power_dbm is set to 0dBm. The power level"
@@ -101,7 +132,7 @@ int zpc_config_init()
                            "it will be applied only with compatible Z-Wave "
                            "APIs.",
                            DEFAULT_ZWAVE_MEASURED_0DBM_POWER);
-  status |= config_add_int("zpc.default_wake_up_interval",
+  status |= config_add_int(ZPC_DEFAULT_WAKE_UP_INTERVAL,
                            "Default wake up interval in seconds, which will be "
                            "configured on sleeping (NL) Z-Wave nodes after "
                            "inclusion. Used as default only if there are no"
@@ -111,7 +142,7 @@ int zpc_config_init()
                            "Class, this value is used.",
                            DEFAULT_WAKE_UP_INTERVAL);
 
-  status |= config_add_string("zpc.serial_log_file",
+  status |= config_add_string(ZPC_SERIAL_LOG_FILE,
                               "If this is set, the ZPC will write a log of the "
                               "communcation over the serial interface with the "
                               "Z-Wave module to the path provided. "
@@ -119,22 +150,21 @@ int zpc_config_init()
                               "this file, otherwise the file will be created. "
                               "The ZPC will NOT handle log rotation etc.",
                               "");
-
   status |= config_add_int(
-    "zpc.hardware_version",
+    ZPC_HARDWARE_VERSION,
     "A unique hardware version value that identifies "
     "the hardware version of the device where zpc is running on.",
     DEFAULT_HARDWARE_VERSION);
 
   status |= config_add_int(
-    "zpc.missing_wake_up_notification",
+    ZPC_MISSING_WAKE_UP_NOTIFICATION,
     "This value represents a maximum number of missing wake up periods."
     "If the sleeping nodes missed issuing wake up notification for more than"
     "a value defined here, the node shall be considered as failing node.",
     DEFAULT_NUMBER_OF_MISSING_WAKE_UP_NOTIFICATION);
 
   status |= config_add_int(
-    "zpc.accepted_transmit_failure",
+    ZPC_ACCEPTED_TRANSMIT_FAILURE,
     "This value represents a maximum number of accepted frame transmission "
     "failure."
     "If a frame transmission to a given node is failed more than"
@@ -142,7 +172,7 @@ int zpc_config_init()
     DEFAULT_NUMBER_OF_ACCEPTED_FRAME_TRANSMISSION_ERROR);
 
   status |= config_add_string(
-    "zpc.inclusion_protocol_preference",
+    ZPC_INCLUSION_PROTOCOL_PREFERENCE,
     "This value represents a prioritized list of protocols to prefer when "
     "including Z-Wave nodes with SmartStart, when the SmartStart list does "
     "not indicate any preference. The protocols are represented as follow:"
@@ -153,14 +183,47 @@ int zpc_config_init()
     DEFAULT_INCLUSION_PROTOCOL_PREFERENCE);
 
   status |= config_add_string(
-    "zpc.ota_cache_path",
+    ZPC_OTA_CACHE_PATH,
     "Path on the filesystem where the ZPC can cache ota image. If this "
     "path does not exists the ZPC will try to create it",
     DEFAULT_OTA_CACHE_PATH);
 
-  status |= config_add_int("zpc.ota_cache_size",
+  status |= config_add_int(ZPC_OTA_CACHE_SIZE,
                            "Maximum OTA cache size in kb.",
                            DEFAULT_OTA_CACHE_SIZE);
+
+  status |= config_add_string(
+    ZPC_POLL_ATTRIBUTE_LIST_FILE,
+    "A YAML file that contains zwave attribute type names "
+    "list and their polling interval in [s]. The attributes types specified "
+    "here "
+    "MUST have a resolver get rule registered for the system to work properly "
+    "For example: "
+    "    - attribute_type: ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE "
+    "      polling_interval_zwave: 1000 "
+    "      polling_interval_zwave_v1: 1000 "
+    "      polling_interval_zwave_v2: 1000. "
+    "If this file exists, ZPC will read the list of "
+    "attribute types and their polling interval, and then ZPC will "
+    "poll the state of the attribute based on the interval "
+    "defined in the file.",
+    CONFIG_ZWAVE_POLL_ATTRIBUTE_LIST);
+
+  status |= config_add_int(
+    ZPC_POLL_BACKOFF,
+    "Poll Engine minimum backoff interval between 2 polls in [s].",
+    30);
+
+  status |= config_add_int(
+    ZPC_POLL_DEFAULT_INTERVAL,
+    "Poll Engine default poll interval in [s], In case an attribute "
+    "is registered for polling with no interval, this interval is used.",
+    60);
+  status |= config_add_flag(ZPC_CONFIG_NCP_VERSION,
+                            "Print the NCP firmaware version and exit");
+  status |= config_add_string(ZPC_CONFIG_NCP_UPDATE,
+                              "Update the NCP firmware and exit",
+                              "");
 
   return status != CONFIG_STATUS_OK;
 }
@@ -190,19 +253,24 @@ sl_status_t is_hex_string(const char *str)
 static int config_get_int_safe(const char *key)
 {
   int val = 0;
-  assert(SL_STATUS_OK == config_get_as_int(key, &val));
+  if (SL_STATUS_OK != config_get_as_int(key, &val)) {
+    sl_log_error(LOG_TAG, "Failed to get int for key: %s", key);
+    assert(false);
+  }
   return val;
 }
 
 sl_status_t zpc_config_fixt_setup()
 {
   config_status_t status = CONFIG_STATUS_OK;
-  status |= config_get_as_string("zpc.serial", &config.serial_port);
-  status |= config_get_as_string("zpc.rf_region", &config.zwave_rf_region);
-  config.manufacturer_id = config_get_int_safe("zpc.manufacturer_id");
-  config.product_type    = config_get_int_safe("zpc.product_type");
-  config.product_id      = config_get_int_safe("zpc.product_id");
-  status |= config_get_as_string("zpc.device_id", &config.device_id);
+  status |= config_get_as_string(CONFIG_KEY_ZPC_DATASTORE_FILE,
+                                 &config.datastore_file);
+  status |= config_get_as_string(ZPC_SERIAL, &config.serial_port);
+  status |= config_get_as_string(ZPC_RF_REGION, &config.zwave_rf_region);
+  config.manufacturer_id = config_get_int_safe(ZPC_MANUFACTURER_ID);
+  config.product_type    = config_get_int_safe(ZPC_PRODUCT_TYPE);
+  config.product_id      = config_get_int_safe(ZPC_PRODUCT_ID);
+  status |= config_get_as_string(ZPC_DEVICE_ID, &config.device_id);
   status |= is_hex_string(config.device_id);
   status |= config_get_as_string(CONFIG_KEY_MQTT_HOST, &config.mqtt_host);
   status |= config_get_as_string(CONFIG_KEY_MQTT_CAFILE, &config.mqtt_cafile);
@@ -211,23 +279,26 @@ sl_status_t zpc_config_fixt_setup()
   status |= config_get_as_string(CONFIG_KEY_MQTT_KEYFILE, &config.mqtt_keyfile);
   config.mqtt_port = config_get_int_safe(CONFIG_KEY_MQTT_PORT);
   config.zwave_measured_0dbm_power
-    = config_get_int_safe("zpc.measured_0dbm_power");
+    = config_get_int_safe(ZPC_MEASURED_0DBM_POWER);
   config.default_wake_up_interval
-    = config_get_int_safe("zpc.default_wake_up_interval");
-  config.hardware_version = config_get_int_safe("zpc.hardware_version");
+    = config_get_int_safe(ZPC_DEFAULT_WAKE_UP_INTERVAL);
+  config.hardware_version = config_get_int_safe(ZPC_HARDWARE_VERSION);
   config.accepted_transmit_failure
-    = config_get_int_safe("zpc.accepted_transmit_failure");
+    = config_get_int_safe(ZPC_ACCEPTED_TRANSMIT_FAILURE);
   config.missing_wake_up_notification
-    = config_get_int_safe("zpc.missing_wake_up_notification");
+    = config_get_int_safe(ZPC_MISSING_WAKE_UP_NOTIFICATION);
 
-  status |= config_get_as_string("zpc.inclusion_protocol_preference",
+  status |= config_get_as_string(ZPC_INCLUSION_PROTOCOL_PREFERENCE,
                                  &config.inclusion_protocol_preference);
+  status |= config_get_as_string(ZPC_SERIAL_LOG_FILE, &config.serial_log_file);
+
+  status |= config_get_as_string(ZPC_OTA_CACHE_PATH, &config.ota_cache_path);
+  config.ota_cache_size = config_get_int_safe(ZPC_OTA_CACHE_SIZE);
+
+  config.ncp_version
+    = config_has_flag(ZPC_CONFIG_NCP_VERSION) == CONFIG_STATUS_OK;
   status
-    |= config_get_as_string("zpc.serial_log_file", &config.serial_log_file);
-
-  status |= config_get_as_string("zpc.ota_cache_path", &config.ota_cache_path);
-  config.ota_cache_size = config_get_int_safe("zpc.ota_cache_size");
-
+    |= config_get_as_string(ZPC_CONFIG_NCP_UPDATE, &config.ncp_update_filename);
   return status == CONFIG_STATUS_OK ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nextversionpolicy_4817',['NextVersionPolicy',['../ota-server-policy_8c.html#a4378623437d76ba978b65926c1ec91fb',1,'ota-server-policy.c']]]
+  ['operator_5fids_4075',['operator_ids',['../namespaceast.html#a103453ee4c6f922adfc20d135c7f4689',1,'ast']]]
 ];

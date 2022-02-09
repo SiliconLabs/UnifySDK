@@ -1,0 +1,27 @@
+[package]
+name = "uic-nal"
+version = "0.0.1"
+authors = ["root"]
+edition = "2021"
+license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor of this software is Silicon Laboratories Inc. Your use of this\nsoftware is governed by the terms of Silicon Labs Master Software License\nAgreement (MSLA) available at\nwww.silabs.com/about-us/legal/master-software-license-agreement. This\nsoftware is distributed to you in Source Code format and is governed by the\nsections of the MSLA applicable to Source Code."
+description = "The Name and Location Service is a helper MQTT component that allows to perform book-keeping on text names and locations that have been assigned"
+
+[package.metadata.deb]
+name = "uic-nal"
+maintainer = "Silicon Labs"
+depends = "libmosquitto1, libssl1.1, libc6, libgcc1, libsqlite3-0, mosquitto, libuic" # remove unneeded dependencies
+maintainer-scripts = "debconf/"
+systemd-units = { enable = true }
+
+[dependencies]
+rusqlite = "0.26.*"
+json = "0.12.*"
+unify_log_sys = { path = "../../components/uic_rust/unify_log_sys" }
+unify_config_sys = { path = "../../components/uic_rust/unify_config_sys" }
+unify_middleware = {path = "../../components/uic_rust/unify_middleware" }
+unify_sl_status_sys = {path = "../../components/uic_rust/unify_sl_status_sys" }
+
+
+[dev-dependencies]
+mockall= "0.11.*"
+serial_test = "0.5.*"

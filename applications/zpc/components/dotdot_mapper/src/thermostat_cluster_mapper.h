@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,11 +12,10 @@
  *****************************************************************************/
 
 /**
- * @defgroup thermostat_cluster_mapper Thermostat cluster mapper
+ * @defgroup thermostat_cluster_mapper Thermostat Cluster Mapper
  * @ingroup dotdot_mapper
- * @brief Maps the Thermostat cluster to known command classes 
+ * @brief Maps Thermostat Cluster incoming Commands to attribute modifications.
  *
- * 
  * @{
  */
 
@@ -32,16 +31,16 @@ extern "C" {
 
 /**
  * @brief Intitialise the OnOff cluster mapper
- * 
+ *
  * @returns true on success
  * @returns false on failure
- * 
+ *
  */
 bool thermostat_cluster_mapper_init(void);
 
 /**
  * @brief Clears the OnOff cluster mapper from all its content.
- * 
+ *
  */
 int thermostat_cluster_mapper_teardown(void);
 

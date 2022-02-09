@@ -145,7 +145,7 @@ static sl_status_t get_target_info(attribute fw_target,
 
       // Get the nodeid and the endpoint
       zwave_unid_from_node_id(zw_node.reported<zwave_node_id_t>(), unid);
-      endpoint = ep_node.reported<uint8_t>();
+      endpoint = ep_node.reported<zwave_endpoint_id_t>();
 
       return SL_STATUS_OK;
     }
@@ -520,10 +520,8 @@ sl_status_t zcl_OTA_cluster_server_init()
     firmware_version_update,
     ATTRIBUTE_CC_VERSION_FIRMWARE_VERSION);
 
-  attribute_store_register_callback_by_type(
-    firmware_version_update,
-    ATTRIBUTE_CC_VERSION_HARDWARE_VERSION);
-
+  // UIC-1646: FIXME, find a better (e.g. persisted) way to detect when
+  // interview are just completed.
   attribute_store_register_callback_by_type(on_nif_update, ATTRIBUTE_ZWAVE_NIF);
 
   return uic_ota::init(image_available,

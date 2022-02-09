@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -17,6 +17,7 @@
 #include "notification_command_class_defined_notifications.h"
 #include "zwave_controller_command_class_indices.h"
 #include "zwave_command_classes_utils.h"
+#include "zwave_command_class_agi.h"
 
 // Includes from other components
 #include "sl_log.h"
@@ -28,6 +29,7 @@
 #include "zwave_command_handler.h"
 #include "attribute_resolver.h"
 #include "zwave_controller_utils.h"
+#include "zwave_utils.h"
 
 // Generic includes
 #include <assert.h>
@@ -402,10 +404,10 @@ static sl_status_t
     = (report_frame->properties1
        & EVENT_SUPPORTED_REPORT_PROPERTIES1_NUMBER_OF_BIT_MASKS_MASK_V3);
   if (number_of_bytes == 0) {
-    sl_log_warning(LOG_TAG,
-                   "The Notification Type is not supported. It seems that we "
-                   "sent a wrong Get Command or that the supporting node "
-                   "did not report correct data.");
+    sl_log_debug(LOG_TAG,
+                 "The Notification Type is not supported. It seems that we "
+                 "sent a wrong Get Command or that the supporting node "
+                 "did not report correct data.");
     return SL_STATUS_OK;
   }
   // Get the unid of the sending node
@@ -768,6 +770,12 @@ sl_status_t zwave_command_class_notification_init()
     zwave_command_class_notification_on_version_attribute_update,
     ATTRIBUTE(VERSION));
 
+  // Tell AGI that we want to receive Notification Reports
+  // via assocation groups
+  zwave_command_class_agi_request_to_establish_association(
+    COMMAND_CLASS_NOTIFICATION_V3,
+    NOTIFICATION_REPORT_V4);
+
   // Register Notification CC handler to the Z-Wave CC framework
   zwave_command_handler_t handler = {};
   handler.support_handler         = nullptr;
@@ -778,10 +786,10 @@ sl_status_t zwave_command_class_notification_init()
   handler.manual_security_validation = false;
   handler.command_class_name         = "Notification";
   handler.comments                   = "Partial Control: <br>"
-                     "1. No Push/Pull discovery is done.<br>"
-                     "2. No Pull sensor support. <br>"
-                     "3. Unknown types are not supported. <br>"
-                     "4. No Regular probing is done. ";
+                                       "1. No Push/Pull discovery is done.<br>"
+                                       "2. No Pull sensor support. <br>"
+                                       "3. Unknown types are not supported. <br>"
+                                       "4. No Regular probing is done. ";
 
   zwave_command_handler_register_handler(handler);
 

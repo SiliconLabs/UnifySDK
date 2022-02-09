@@ -67,6 +67,7 @@ const dependencies_t &dep_eval_path::operator()(const ast::operand &operand)
 {
   ast::eval evaluator;
   auto value = boost::apply_visitor(evaluator, operand);
+
   if (value) {
     (*this)(value.value());
   } else {

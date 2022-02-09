@@ -18,8 +18,12 @@
 #include <stdio.h>
 
 extern "C" {
+
+#include "sys/sysinfo.h"
+
 // Test framework
 #include "unity.h"
+#include "unity_helpers.h"
 #include "uic_mqtt_mock.h"
 #include "zigpc_gateway_mock.h"
 
@@ -161,7 +165,7 @@ void test_uic_diagnostics_publish_all_metric()
 {
   // ARRANGE
   std::string expected_full_topic
-    = "ucl/by-unid/Unleash_Kraken/ProtocolController/Diagnostics/"
+    = "ucl/by-unid/Unleash_Kraken/ProtocolController/SystemHealth/"
       "SupportedMetrics";
   std::string stub_metric_id   = "SYS_HEALTH_STUB_SYNC";
   std::string expected_message = R"({"value":["SYS_HEALTH_STUB_SYNC"]})";
@@ -204,9 +208,9 @@ void test_uic_diagnostics_counter_metric()
   zigpc_gateway_get_counters_capacity_ExpectAndReturn(3);
 
   zigpc_gateway_get_counters_list_ExpectAndReturn(NULL, 3, SL_STATUS_OK);
-  zigpc_gateway_get_counters_list_IgnoreArg_buffer();
-  zigpc_gateway_get_counters_list_ReturnArrayThruPtr_buffer(mock_counter_array,
-                                                            3);
+  zigpc_gateway_get_counters_list_IgnoreArg_list();
+  zigpc_gateway_get_counters_list_ReturnArrayThruPtr_list(mock_counter_array,
+                                                          3);
 
   zigpc_gateway_get_counters_entry_label_ExpectAndReturn(0, "FIRST");
   zigpc_gateway_get_counters_entry_label_ExpectAndReturn(1, "SECOND");
@@ -215,9 +219,40 @@ void test_uic_diagnostics_counter_metric()
   //ACT
   counter_metric.update_value();
 
-  std::string expected_message = R"({"FIRST" : 1,"SECOND" : 2,"LAST" : 3})";
+  std::string expected_message = R"({"FIRST":1,"SECOND":2,"LAST":3})";
   TEST_ASSERT_TRUE(stub_manager_invoked_flag);
-  TEST_ASSERT_EQUAL_STRING(counter_metric.get_serialized_value().c_str(),
-                           expected_message.c_str());
+  TEST_ASSERT_EQUAL_JSON(expected_message.c_str(),
+                         counter_metric.get_serialized_value().c_str());
 }
+
+void test_uic_diagnostics_cpu_load_metric()
+{
+  // ARRANGE
+  zigpc_diagnostics_stub_manager notif;
+  zigpc_cpu_load_metric cpu_load_metric(notif, "CpuLoad");
+
+  //ACT
+  cpu_load_metric.update_value();
+
+  TEST_ASSERT_TRUE(stub_manager_invoked_flag);
+
+  TEST_ASSERT_TRUE(
+    cpu_load_metric.get_value(zigpc_cpu_load_metric::load_type::AVG_1_MIN)
+    > 0.0);
 }
+
+void test_uic_diagnostics_ram_usage_metric(void)
+{
+  zigpc_diagnostics_stub_manager notif;
+  zigpc_mem_usage_metric metric(notif, "RamUsage");
+
+  // ARRANGE
+
+  // ACT
+  metric.update_value();
+
+  // ASSERT
+  TEST_ASSERT_TRUE(metric.get_value() > 0.0);
+}
+
+}  // extern "C"

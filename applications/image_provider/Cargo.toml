@@ -2,7 +2,7 @@
 name = "uic-image-provider"
 version = "0.0.1"
 authors = ["root"]
-edition = "2018"
+edition = "2021"
 license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor of this software is Silicon Laboratories Inc. Your use of this\nsoftware is governed by the terms of Silicon Labs Master Software License\nAgreement (MSLA) available at\nwww.silabs.com/about-us/legal/master-software-license-agreement. This\nsoftware is distributed to you in Source Code format and is governed by the\nsections of the MSLA applicable to Source Code."
 description = "Unified IOT OTA image provider"
 
@@ -10,17 +10,15 @@ description = "Unified IOT OTA image provider"
 name = "uic-image-provider"
 maintainer = "Silicon Labs"
 depends = "libmosquitto1, libssl1.1, libc6, libgcc1, libuic"
-assets = [
-    ["target/release/uic-image-provider", "usr/bin/", "755"]
-]
 maintainer-scripts = "debconf/"
 systemd-units = { enable = true }
 
 [dependencies]
-mosquitto-client = { git = "https://github.com/jsloth/mosquitto-client" }
-json = "*"
-uic_log = { package = "uic_log_rs", path = "../../components/uic_rust/uic_log_rs" }
-uic_config = { package = "uic_config_rs", path = "../../components/uic_rust/uic_config_rs" }
+json = "0.12.*"
+unify_log_sys = { path = "../../components/uic_rust/unify_log_sys" }
+unify_config_sys = { path = "../../components/uic_rust/unify_config_sys" }
+unify_middleware = { path=  "../../components/uic_rust/unify_middleware" }
+unify_sl_status_sys = { path=  "../../components/uic_rust/unify_sl_status_sys" }
 lazy_static = "1.4.0"
 md5 = "0.7.0"
 base64 = "0.13.0"
@@ -30,6 +28,3 @@ ctrlc = { version = "3.0", features = ["termination"] }
 
 [dev-dependencies]
 serial_test = "*"
-
-[build-dependencies]
-uic_bindgen = { path = "../../components/uic_rust/uic_bindgen" }

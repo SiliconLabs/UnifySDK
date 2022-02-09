@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -88,11 +88,48 @@ $(document).ready(function(){initNavTree('md_applications_zpc_release_notes.html
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This document describes the changes between the last released ZPC and the current release.</p>
-<h1><a class="anchor" id="autotoc_md306"></a>
+<h1><a class="anchor" id="autotoc_md403"></a>
+[1.1.0] - Feb 2022</h1>
+<h2><a class="anchor" id="autotoc_md404"></a>
+Added</h2>
+<ul>
+<li>Full Control for Central Scene Command Class<ul>
+<li>Populating Scene Attributes to reflect the node's capabilities (total number of scenes)</li>
+<li>Central Scene is mapped to the Scene Cluster.</li>
+</ul>
+</li>
+<li>Issuing Generated Commands based on interaction with Z-Wave nodes<ul>
+<li>Issuing RecallScene when receiving Central Scene Notifications.</li>
+<li>Issuing RF Telemetry reports at each transmission when RF Telemetry is enabled</li>
+</ul>
+</li>
+<li>Support for RF Telemetry (reporting transmissions events)</li>
+<li>Monitoring if Offline nodes are responding again with regular NOPs commands.</li>
+<li>Network Polling</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md405"></a>
+Changed</h2>
+<ul>
+<li>ZPC datastore file key has been changed from &ndash;datastore.file to &ndash;zpc.datastore_file</li>
+<li>Default datastore file has been changed from /var/lib/uic/database.db to /var/lib/uic/zpc.db<ul>
+<li>If you used the default configuration, keep your previous database by running <code>mv /var/lib/uic/database.db /var/lib/uic/zpc.db</code></li>
+</ul>
+</li>
+<li>Increased Z-Wave Tx Queue robustness to multiple Tx sessions.</li>
+<li>Communication with Z-Wave Module optimized</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md406"></a>
+Fixed</h2>
+<ul>
+<li>Interviewing an offline node would make it appear online.</li>
+<li>Missing Wake Up Interval Set during interview for door/window sensor</li>
+<li>ZPC hangs and stops resolving attributes when DevGUI sends a MoveWithOnOff command</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md407"></a>
 [1.0.3] - Nov 2021</h1>
-<h1><a class="anchor" id="autotoc_md307"></a>
+<h1><a class="anchor" id="autotoc_md408"></a>
 [1.0.2] - Oct 2021</h1>
-<h2><a class="anchor" id="autotoc_md308"></a>
+<h2><a class="anchor" id="autotoc_md409"></a>
 Added</h2>
 <ul>
 <li>ZPC is Z-Wave Certified against the Z-Wave Specification release 2021A.</li>
@@ -106,26 +143,26 @@ Added</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md309"></a>
+<h2><a class="anchor" id="autotoc_md410"></a>
 Changed</h2>
 <ul>
 <li>OTA UIID has been updated to include hardware revision</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md310"></a>
+<h2><a class="anchor" id="autotoc_md411"></a>
 Fixed</h2>
 <ul>
 <li>Fixed various certification issues</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md311"></a>
+<h1><a class="anchor" id="autotoc_md412"></a>
 [1.0.1] - Aug 2021</h1>
-<h2><a class="anchor" id="autotoc_md312"></a>
+<h2><a class="anchor" id="autotoc_md413"></a>
 Fixed</h2>
 <ul>
 <li>Build issues</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md313"></a>
+<h1><a class="anchor" id="autotoc_md414"></a>
 [1.0.0] - Aug 2021</h1>
-<h2><a class="anchor" id="autotoc_md314"></a>
+<h2><a class="anchor" id="autotoc_md415"></a>
 Added</h2>
 <ul>
 <li>Implementation of Unify specification 1.0</li>
@@ -176,42 +213,80 @@ Added</h2>
 <li>Level</li>
 <li>IlluminanceLevelSensing</li>
 <li>OccupancySensing</li>
-<li>OnOff </li>
+<li>OnOff</li>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md315"></a>
+<h2><a class="anchor" id="autotoc_md416"></a>
 Changed</h2>
 <ul>
 <li>Various bug fixes</li>
 <li>UAM Language updates</li>
-<li>Documentation updates </li>
+<li>Documentation updates</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md316"></a>
+<h1><a class="anchor" id="autotoc_md417"></a>
 Known Bugs</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">ID  </th><th class="markdownTableHeadNone">Known issues  </th><th class="markdownTableHeadNone">Note   </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">UIC-1162  </td><td class="markdownTableBodyNone">When device have multiple functionalities on the Z-Wave end,which is mapped to the same ZigBee attribute, the mapping will be incomplete.  </td><td class="markdownTableBodyNone">Update the UAM file to avoid overlap.   </td></tr>
+<td class="markdownTableBodyNone">UIC-1162  </td><td class="markdownTableBodyNone">When device have multiple functionalities on the Z-Wave end, which is mapped to the same ZigBee attribute, the mapping will be incomplete.  </td><td class="markdownTableBodyNone">Update the UAM file to avoid overlap.   </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">UIC-1088  </td><td class="markdownTableBodyNone">Potentially wrong controller NIF after controller migration.  </td><td class="markdownTableBodyNone">Usually no problem in practice   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">UIC-1175  </td><td class="markdownTableBodyNone">ZPC performs S2 re-synchronisation of all nodes after reboot.  </td><td class="markdownTableBodyNone">After a reboot the ZPC will re-negotiate SPANs and MPANs for all nodes at the first transmission attempt.   </td></tr>
+<td class="markdownTableBodyNone">UIC-1603  </td><td class="markdownTableBodyNone">When ZPC includes a sleeping device, sometimes the node interview does not succeed and therefore, the full functionality of the node will not be presented to the use.  </td><td class="markdownTableBodyNone">Trigger a re-interview of the node to resolve the issue.   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">UIC-1650  </td><td class="markdownTableBodyNone">Very rare race condition gets the ZPC stuck during a reset operation.  </td><td class="markdownTableBodyNone">Restart the ZPC if it did not respawn 20 seconds after reset   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md317"></a>
+<h1><a class="anchor" id="autotoc_md418"></a>
 Z-Wave Certification information</h1>
-<blockquote class="doxtable">
-<p><em>NOTE the ZPC is at this point not certifiable</em> </p>
-</blockquote>
-<p>See <a class="el" href="md_applications_zpc_readme_user.html">ZPC User Guide</a> </p>
+<p>See <a class="el" href="md_applications_zpc_readme_certification.html">ZPC Certification Guide</a></p>
+<h1><a class="anchor" id="autotoc_md419"></a>
+Devices tested with the ZPC</h1>
+<p>Devices which are tested with the ZPC can be found in the list below. Working devices will be marked with an <b>x</b> and none working devices will be marked with an <b>-</b>.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Vendor  </th><th class="markdownTableHeadNone">Name  </th><th class="markdownTableHeadNone">Working (x) or not working (-)  </th><th class="markdownTableHeadNone">Security inclusion   </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Aeotec  </td><td class="markdownTableBodyNone">LED Bulb Multi-White  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S0   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Aeotec  </td><td class="markdownTableBodyNone">Door/Window Sensor  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S0   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Aeotec  </td><td class="markdownTableBodyNone">Water sensor (6 GEN)  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">Non-Secure   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Aeotec  </td><td class="markdownTableBodyNone">Range extender 6  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S0   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Aeotec  </td><td class="markdownTableBodyNone">Door/Window sensor 6  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S0   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Hank  </td><td class="markdownTableBodyNone">Door/Window Sensor  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S2-Unauthenticated   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Hank  </td><td class="markdownTableBodyNone">RGB Bulb  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">Non-Secure   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Hank  </td><td class="markdownTableBodyNone">Smart plug  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S0   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Fibaro  </td><td class="markdownTableBodyNone">Fibaro Flood Sensor  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S0   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Fibaro  </td><td class="markdownTableBodyNone">Heat Controller  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S2-Authenticated   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Philio  </td><td class="markdownTableBodyNone">Smart energy plug-in switch  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S0   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Secure  </td><td class="markdownTableBodyNone">Smart Plug 302  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">Non-Secure   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Ring  </td><td class="markdownTableBodyNone">Alarm motion detector (1 Gen)  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">S2-Authenticated   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Yale real living  </td><td class="markdownTableBodyNone">Door Lock  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S0   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Alarm.com  </td><td class="markdownTableBodyNone">Smart water valve  </td><td class="markdownTableBodyNone">x  </td><td class="markdownTableBodyNone">S2 Authenticated   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Alarm.com  </td><td class="markdownTableBodyNone">Dry contact sensor  </td><td class="markdownTableBodyNone">-  </td><td class="markdownTableBodyNone">Non-Secure   </td></tr>
+</table>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:07 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:00 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

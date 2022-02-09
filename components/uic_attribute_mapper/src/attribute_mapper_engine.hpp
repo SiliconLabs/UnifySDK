@@ -12,9 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file attribute_mapper_engine.hpp
+ * @defgroup attribute_mapper_engine Mapper engine
+ * @ingroup unify_attribute_mapper
  * @brief Mapper engine which defines relations between attributes in the atttribute store.
- *
  *
  * @{
  */

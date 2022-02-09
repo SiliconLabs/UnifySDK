@@ -1,7 +1,7 @@
 var classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest =
 [
     [ "ZCLConfigureReportingRequest", "classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest.html#a443cd4ced81ebd1fd66ffb20c9fb46f4", null ],
-    [ "~ZCLConfigureReportingRequest", "classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest.html#a9aec93648ada1f1489b6ce4779f95f94", null ],
+    [ "~ZCLConfigureReportingRequest", "classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest.html#a8083829e5b70d735998611f8bea171df", null ],
     [ "invoke", "classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest.html#ae508289c4d5f5f2d738cf41f75a399fb", null ],
     [ "cluster_id", "classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest.html#a680175d36a3018a5eca84c08bce98964", null ],
     [ "endpoint_id", "classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest.html#aaa48fde56bad850cc89c0edde39959dc", null ],

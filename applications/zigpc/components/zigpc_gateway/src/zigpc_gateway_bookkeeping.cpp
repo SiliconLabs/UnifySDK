@@ -30,7 +30,7 @@ static inline void zigpc_gateway_ncp_set_ezsp_policies(void)
 {
   const zigpc_config_t *conf = zigpc_get_config();
   if ((conf != nullptr) && (conf->tc_use_well_known_key == false)) {
-    EzspStatus status = z3gatewaySetEzspPolicy(
+    EzspStatus status = zigbeeHostSetEzspPolicy(
       EZSP_TRUST_CENTER_POLICY,
       (EZSP_DECISION_ALLOW_JOINS | EZSP_DECISION_JOINS_USE_INSTALL_CODE_KEY),
       "Trust Center Policy",

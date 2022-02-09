@@ -68,24 +68,6 @@ sl_status_t zigpc_net_mgmt_add_node(const zigbee_eui64_t eui64,
   return status;
 }
 
-sl_status_t zigpc_net_mgmt_interview_node(const zigbee_eui64_t eui64)
-{
-  sl_status_t status = SL_STATUS_OK;
-  zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-  zigpc_net_mgmt_fsm_node_interview_t *interview_node_data
-    = &process_data_fsm.fsm_data.node_interview_request;
-
-  memcpy(interview_node_data->eui64, eui64, sizeof(zigbee_eui64_t));
-
-  process_data_fsm.fsm_event = ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_REQUEST;
-
-  zigpc_net_mgmt_process_send_event(ZIGPC_NET_MGMT_EVENT_FSM,
-                                    (void *)&process_data_fsm,
-                                    sizeof(zigpc_net_mgmt_process_data_fsm_t));
-
-  return status;
-}
-
 sl_status_t zigpc_net_mgmt_remove_node(const zigbee_eui64_t eui64)
 {
   sl_status_t status = SL_STATUS_OK;

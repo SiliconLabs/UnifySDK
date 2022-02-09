@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('md_applications_zigpc_coding_standard_
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
 Purpose of this document</h1>
-<p>This document is intended for developers. It describes the coding standard used in the Zigbee Protocol Controller, which is an adaptation / subset of the <a class="el" href="md_doc_standards_coding-standard.html">Unify Coding Standard</a></p>
+<p>This document is intended for developers. It describes the coding standard used in the Zigbee Protocol Controller, which is an adaptation / subset of the Unify Coding Standard</p>
 <p>This is version <b>1.0</b> of the ZigPC coding standard.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Rules</h1>
@@ -112,7 +112,7 @@ Rules</h1>
 <p>If a component is written entirely in C++, it SHALL define its own namespace under a global zigpc namespace.</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
 4. Functions</h2>
-<p>Functions in the general ZigPC hierarchy SHOULD be written in "snake_case". The exception is when interfacing with stack-level functionality in the z3gateway. In this case, "camelCase" is recommended.</p>
+<p>Functions in the general ZigPC hierarchy SHOULD be written in "snake_case". The exception is when interfacing with stack-level functionality in the zigbee_host library. In this case, "camelCase" is recommended.</p>
 <p>The general format of each function name SHOULD take the form of "zigpc_xxxx_yyyy" where &lt;xxxx&gt; is the name of the module and &lt;yyyy&gt; is the specific name of the function. &lt;yyyy&gt; SHOULD be of the form "verb_noun" or of "noun_verb_noun", as specified in the general coding standard. It is recommended to keep these function name short and concise to improve readibility.</p>
 <h2><a class="anchor" id="autotoc_md7"></a>
 5. Variables</h2>
@@ -133,7 +133,7 @@ Rules</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:18 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -232,7 +232,6 @@ void test_zwave_command_class_switch_binary_probe_state_v2_report()
   attribute_store_undefine_reported(duration_node);
   attribute_store_undefine_desired(duration_node);
 
-  is_node_pending_set_resolution_ExpectAndReturn(state_node, false);
   is_node_pending_set_resolution_ExpectAndReturn(state_node, true);
   attribute_resolver_restart_set_resolution_ExpectAndReturn(state_node,
                                                             SL_STATUS_OK);
@@ -306,9 +305,6 @@ void test_zwave_command_class_switch_binary_probe_state_v1_report()
   attribute_store_undefine_reported(duration_node);
   attribute_store_undefine_desired(duration_node);
 
-  is_node_pending_set_resolution_ExpectAndReturn(state_node, false);
-  is_node_pending_set_resolution_ExpectAndReturn(state_node, false);
-
   binary_handler.control_handler(&connection_info,
                                  incoming_report_frame,
                                  sizeof(incoming_report_frame));
@@ -335,6 +331,7 @@ void test_zwave_command_class_switch_binary_set_state()
 {
   // First check the frame creation.
   TEST_ASSERT_NOT_NULL(binary_set);
+  is_node_pending_set_resolution_IgnoreAndReturn(SL_STATUS_OK);
 
   attribute_store_node_t state_node
     = attribute_store_get_node_child_by_type(endpoint_id_node,
@@ -343,7 +340,6 @@ void test_zwave_command_class_switch_binary_set_state()
 
   attribute_store_node_t value_node
     = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
-
   uint32_t desired_value = 23;
   attribute_store_set_desired(value_node,
                               &desired_value,

@@ -6,8 +6,10 @@
  */
 
 #ifdef __cplusplus
+#include "json_helpers.hpp"
 #include <vector>
 #include <utility>
 #include <string>
+#include <nlohmann/json.hpp>
 #endif
 #endif

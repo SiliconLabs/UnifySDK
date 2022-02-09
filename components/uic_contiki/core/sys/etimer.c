@@ -49,7 +49,12 @@
 
 #include "sys/etimer.h"
 #include "sys/process.h"
+
+#ifdef EFR32ZG
+#include "Assert.h"
+#else
 #include "assert.h"
+#endif
 
 #define data _data
 

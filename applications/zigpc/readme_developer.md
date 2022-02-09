@@ -1,9 +1,7 @@
-# ZigPC (Beta) Developer Guide
+# ZigPC Developer Guide
 
 This readme is intended for Unify SDK developers, who are trying to cross compile,
 install, and run ZigPC on a Raspberry Pi.
-
-> _NOTE: The current version of the Zigbee Protocol Controller is a Beta release._
 
 ## Build Instructions
 
@@ -14,7 +12,7 @@ the Unify docker image, follow the guide in the docker folder
 
 ### Set up Gecko SDK
 
-The Zigbee Protocol controller uses certain functionality in the [Gecko
+The Zigbee Protocol Controller uses certain functionality in the [Gecko
 SDK](https://docs.silabs.com/gecko-platform/latest/). The Gecko SDK can be
 downloaded through [Simplicity
 Studio](https://www.silabs.com/developers/simplicity-studio). The ZigPC uses the
@@ -26,9 +24,16 @@ time or, when creating a new project, select "Manage SDKs" followed by
 "Customize Installation".
 
 After EmberZNet/GeckoSDK is installed, locate its path (e.g.,
-/opt/SimplicityStudio_v5/developer/sdks/gecko_sdk_suite/v3.1). Currently, v3.1
-is the only supported version. Set an environment variable $GSDK_LOCATION for
-this path.
+~/SimplicityStudio/SDKs/gecko_sdk/). Currently, v4.0 is supported. Set the
+environment variable $GSDK_LOCATION to this path.
+
+## Modifying Underlying SLC-based Zigbee Host Library
+The Zigbee Protocol Controller imports a Silicon Labs Configurator based UC
+project as a static library. This project should be configured in combination
+with any ZCL support changes performed.
+
+See the [Zigbee Host Library Readme](components/zigpc_gateway/libs/zigbee_host/readme.libzigbee_host.zigpc.md)
+for more details.
 
 ### Cross Compiling for Raspberry Pi Using Docker
 
@@ -102,9 +107,9 @@ Unify Installation is documented in the main [README.md](../../README.md).
 
 ## Reading Console Logs
 
-ZigPC is built on top of the Z3Gateway, which is the GSDK App Builder project.
-Because Z3Gateway uses the SiLabs Ember Application framework, logs from the
-framework will be shown as a part of ZigPC console logs.
+ZigPC is built on top of the Zigbee Host Wrapper Library. Currently this library
+is implemented as a Silicon Labs SLC project using the SiLabs Ember Application
+framework. Logs from the framework will be shown as a part of ZigPC console logs.
 
 After ZigPC is launched, the logs from ZigPC will be associated with a timestamp, log
 level, and a tag in the following format:
@@ -126,7 +131,7 @@ printed output from the Ember Application framework.
 The following snippet is a snippet of example logs to expect:
 
 ```bash
-zigpc --zigpc.serial /dev/ttyACM0 --mqtt.host 0.0.0.0 --mqtt.port 1883 --datastore.file zigpc.db
+zigpc --zigpc.serial /dev/ttyACM0 --mqtt.host 0.0.0.0 --mqtt.port 1883 --zigpc.datastore_file zigpc.db
 # 2020-11-05 10:55:36:314815 <d> [sl_log] Setting log level to debug
 # 2020-11-05 10:55:36:315475 <d> [uic_component_fixtures] Completed: UIC Signal Handler
 # ...

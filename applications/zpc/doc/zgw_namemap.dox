@@ -1,6 +1,0 @@
-/**
-@page zgw_namemap Legacy Z/IP Gateway Serial-API Names
-@ingroup ZWAPI
-@brief Mapping between the names used in the Z/IP codebase versus the ZPC Z-Wave API
-       names.
-*/

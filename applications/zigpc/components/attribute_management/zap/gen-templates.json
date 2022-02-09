@@ -5,9 +5,9 @@
   "helpers": ["../../zcl_util/zap/addon-helper.js"],
   "templates": [
     {
-      "path": "zigpc_attrmgmt_publish.c.zapt",
+      "path": "zigpc_attrmgmt_publish.cpp.zapt",
       "name": "Attribute Management Publisher",
-      "output": "src/zigpc_attrmgmt_publish.c"
+      "output": "src/zigpc_attrmgmt_publish.cpp"
     }
   ]
 }

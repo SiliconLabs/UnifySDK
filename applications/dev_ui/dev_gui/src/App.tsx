@@ -17,6 +17,11 @@ import Groups from './pages/groups/groups';
 import OTA from './pages/ota/ota';
 import { Image } from "./pages/ota/ota-types";
 import * as IoIcons from 'react-icons/io';
+import RFTelemetryList from './pages/rf-telemetry/rf-telemetry-list/rf-telemetry-list';
+import RFTelemetry from './pages/rf-telemetry/rf-telemetry/rf-telemetry';
+import UPTI from './pages/upti/upti-list/upti-list';
+import UPTITrace from './pages/upti/upti-trace/upti-trace';
+import Locators from './pages/locators/locators';
 
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
@@ -32,14 +37,18 @@ class App extends Component<{}, AppState> {
       NodeList: [],
       GroupList: [],
       SmartStartList: [],
-      OTAImageList: ([] as Image[])
+      OTAImageList: ([] as Image[]),
+      UPTI: { List: [], Trace: {} }
     }
     this.changeHeader = React.createRef();
     this.changeNodes = React.createRef();
     this.changeGroups = React.createRef();
+    this.changeTelemetry = React.createRef();
     this.changeOTA = React.createRef();
     this.changeSmartStart = React.createRef();
     this.changeClusters = React.createRef();
+    this.changeUPTI = React.createRef();
+    this.changeUPTITrace = React.createRef();
     setTimeout(() => this.initWebSocket(), 100);
     this.handleIsConnectedChange = this.handleIsConnectedChange.bind(this);
   }
@@ -47,15 +56,21 @@ class App extends Component<{}, AppState> {
   changeHeader: any;
   changeNodes: any;
   changeGroups: any;
+  changeTelemetry: any;
   changeOTA: any;
   changeSmartStart: any;
   changeClusters: any;
+  changeUPTI: any;
+  changeUPTITrace: any;
+  attemptsCount = 0;
 
   resetState() {
     this.handleNodesChange([]);
     this.handleSmartStartChange([]);
     this.handleOTAChange([]);
     this.handleGroupsChange([]);
+    this.handleUPTIChange([]);
+    this.setState({ UPTI: { List: [], Trace: {} } });
   }
 
   handleIsConnectedChange(isConnected: boolean) {
@@ -91,6 +106,34 @@ class App extends Component<{}, AppState> {
     this.setState({ SmartStartList: list });
     if (this.changeSmartStart.current)
       this.changeSmartStart.current.search([...list]);
+  }
+
+  handleUPTIChange(list: any[]) {
+    let upti = this.state.UPTI;
+    upti.List = list;
+    if (!list.length)
+      upti.Trace = {};
+    this.setState({ UPTI: upti });
+    this.changeUPTI.current?.discoverCompleted();
+  }
+
+  handleUPTITraceChange(newTrace: any) {
+    let upti = this.state.UPTI;
+    if (newTrace.Trace.length === 0) upti.Trace[newTrace.SerialNumber] = [];
+    else {
+      if (!upti.Trace[newTrace.SerialNumber])
+        upti.Trace[newTrace.SerialNumber] = [];
+      upti.Trace[newTrace.SerialNumber].push(newTrace.Trace);
+      if (upti.Trace[newTrace.SerialNumber].length > 200)
+        upti.Trace[newTrace.SerialNumber] = upti.Trace[newTrace.SerialNumber].slice(-200);
+    }
+    this.setState({ UPTI: upti });
+  }
+
+  handleUPTITraceInit(trace: any) {
+    let upti = this.state.UPTI;
+    upti.Trace = trace;
+    this.setState({ UPTI: upti });
   }
 
   handleGroupsChange(list: any) {
@@ -165,6 +208,13 @@ class App extends Component<{}, AppState> {
                   <Route path='/nodes' exact render={() => <Nodes ref={this.changeNodes} {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/groups' exact render={() => <Groups ref={this.changeGroups}  {...baseProps} NodeList={this.state.NodeList} GroupList={this.state.GroupList} />} />
                   <Route path='/smartstart' exact render={() => <SmartStart ref={this.changeSmartStart} {...baseProps} SmartStartList={this.state.SmartStartList} />} />
+                  <Route path='/upti' exact render={() => <UPTI ref={this.changeUPTI}  {...baseProps} UPTI={this.state.UPTI} />} />
+                  <Route path='/upti/:serial' render={(pr) => <UPTITrace ref={this.changeUPTITrace}
+                    IsConnected={this.state.IsConnected || false} UPTI={this.state.UPTI} SerialNumber={pr.match.params.serial} SocketServer={this.state.SocketServer} />} />
+                  <Route path='/rftelemetry' exact render={() => <RFTelemetryList ref={this.changeTelemetry}  {...baseProps} ClusterTypeAttrs={ClusterTypeAttrs.RFTelemetry} NodeList={this.state.NodeList} />} />
+                  <Route path='/rftelemetry/:unid/:dst' exact render={(pr) => <RFTelemetry IsConnected={this.state.IsConnected || false} NodeList={this.state.NodeList} Unid={pr.match.params.unid} DestinationUNID={pr.match.params.dst} SocketServer={this.state.SocketServer} />} />
+                  <Redirect from="/rftelemetry/:unid/" exact to="/rftelemetry/" />
+                  <Route path='/locators' exact render={() => <Locators {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/ota' exact render={() => <OTA ref={this.changeOTA}  {...baseProps} NodeList={this.state.NodeList} />} />
                   {Object.keys(ClusterTypes).map((type, index) =>
                     <Route key={index} path={NavbarItems.find(i => i.name === type)?.path} exact render={() =>
@@ -192,13 +242,21 @@ class App extends Component<{}, AppState> {
 
   initWebSocket() {
     let protocol = window.location.protocol === "https:" ? "wss" : "ws";
-    let connection = new WebSocket(`${protocol}://${window.location.hostname}:1337`);
+    let port = window.location.protocol === "https:" ? "1343" : "1337";
+    let connection = new WebSocket(`${protocol}://${window.location.hostname}:${port}`);
     connection.onopen = function () {
       console.log('Connection established');
     };
     connection.addEventListener("error", (error) => {
       console.log(`Some problem with your connection or the server is down: ${JSON.stringify(error)}`);
       this.toggleConnectState(false);
+      if (window.location.protocol === "https:") {
+        if (this.attemptsCount++ >= 3) {
+          let url = `http://${window.location.hostname}:3080`;
+          console.log("WSS does not support. Redirecting to " + url);
+          window.location.replace(url);
+        }
+      }
     });
     connection.addEventListener("close", (event) => {
       console.log(`Connection closed`);
@@ -249,6 +307,8 @@ class App extends Component<{}, AppState> {
         this.handleGroupsChange(mes.data.Groups);
         this.handleNodesChange(mes.data.Nodes);
         this.handleOTAChange(mes.data.OTA);
+        this.handleUPTIChange(mes.data.UPTI.List);
+        this.handleUPTITraceInit(mes.data.UPTI.Trace);
         break;
       case "smart-start-list":
         this.handleSmartStartChange(mes.data);
@@ -264,6 +324,12 @@ class App extends Component<{}, AppState> {
         break;
       case "protocol-controller-state":
         this.changeNodes.current && this.changeNodes.current.handleProtocolControllerState(mes.data);
+        break;
+      case "upti-trace":
+        this.handleUPTITraceChange(mes.data);
+        break;
+      case "upti-list":
+        this.handleUPTIChange(mes.data);
         break;
     }
   }

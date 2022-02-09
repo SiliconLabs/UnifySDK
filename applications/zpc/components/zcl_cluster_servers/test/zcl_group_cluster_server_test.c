@@ -55,7 +55,7 @@ const char name_support_message[]     = "{\"value\":{\"Supported\":true}}";
 const char empty_group_list_message[] = "{\"value\":[]}";
 const char supported_commands_message[]
   = "{\"value\": [\"AddGroup\", \"RemoveGroup\", "
-    "\"RemoveAllGroups\",\"AddGroupIfIdentifying\"]}";
+    "\"RemoveAllGroups\", \"AddGroupIfIdentifying\"]}";
 const char revision_message[] = "{\"value\": 1}";
 
 static void create_test_network()

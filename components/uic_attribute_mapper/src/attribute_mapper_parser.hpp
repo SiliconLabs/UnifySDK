@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -10,6 +10,15 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
+
+/**
+ * @defgroup attribute_mapper_parser Mapper parser
+ * @ingroup unify_attribute_mapper
+ *
+ * @brief Parses strings/text into Abtract Syntax Trees
+ *
+ * @{
+ */
 
 #ifndef ATTRIBUTE_MAPPER_PARSER_HPP
 #define ATTRIBUTE_MAPPER_PARSER_HPP
@@ -21,10 +30,10 @@ namespace ast
 struct ast_tree;
 /**
  * @brief Parse UAM script and build and AST
- * 
+ *
  * This function is the entry point of the parser, but actual parser logic is
  * defined in attribute_mapper_grammar.hpp
- * 
+ *
  * @param string_to_parse String to parse
  * @param ast Output AST
  * @return true If parse was successfull.
@@ -35,3 +44,4 @@ bool Parse(const std::string &string_to_parse, ast::ast_tree &ast);
 }  // namespace ast
 
 #endif
+/** @} end attribute_mapper_parser */

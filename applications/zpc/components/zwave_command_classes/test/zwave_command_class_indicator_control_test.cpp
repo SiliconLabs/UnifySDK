@@ -19,6 +19,8 @@
 #include "zwave_command_handler.h"
 #include "attribute_resolver.h"
 
+#include "zwave_controller_storage.h"
+
 #include "attribute.hpp"
 #include "attribute_store_defined_attribute_types.h"
 #include "zwave_COMMAND_CLASS_INDICATOR_attribute_id.h"
@@ -33,6 +35,18 @@ extern "C" {
 #include "zwave_network_management_mock.h"
 #include "attribute_resolver_mock.h"
 
+// The callback for zwave_controller_storage APIs are registered
+// This will avoid that when a zwave_contoller components access
+// attribute store there will not be any issue. Since zwave components
+// is isolated from direct accessing of attribute store using the following
+// callbacks.
+static zwave_controller_storage_callback_t zwave_controller_storage_cb_mock = {
+  .on_set_node_as_s2_capable = zwave_security_validation_set_node_as_s2_capable,
+  .on_verify_node_is_s2_capable = zwave_security_validation_is_node_s2_capable,
+  .on_get_node_granted_keys = zwave_get_node_granted_keys,
+  .on_get_inclusion_protocol = zwave_get_inclusion_protocol,
+  .on_zwave_controller_storage_cc_version = zwave_node_get_command_class_version,
+};
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
@@ -49,7 +63,9 @@ int suiteTearDown(int num_failures)
 }
 
 /// Called before each and every test
-void setUp() {}
+void setUp() {
+    zwave_controller_storage_callback_register(&zwave_controller_storage_cb_mock);
+}
 
 static sl_status_t
   attribute_resolver_register_rule_mock(attribute_store_type_t node_type,

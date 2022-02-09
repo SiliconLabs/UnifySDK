@@ -1,13 +1,13 @@
 /******************************************************************************
- * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * # license
+ * <b>copyright 2021 silicon laboratories inc. www.silabs.com</b>
  ******************************************************************************
- * The licensor of this software is Silicon Laboratories Inc. Your use of this
- * software is governed by the terms of Silicon Labs Master Software License
- * Agreement (MSLA) available at
- * www.silabs.com/about-us/legal/master-software-license-agreement. This
- * software is distributed to you in Source Code format and is governed by the
- * sections of the MSLA applicable to Source Code.
+ * the licensor of this software is silicon laboratories inc. your use of this
+ * software is governed by the terms of silicon labs master software license
+ * agreement (msla) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. this
+ * software is distributed to you in source code format and is governed by the
+ * sections of the msla applicable to source code.
  *
  *****************************************************************************/
 
@@ -31,11 +31,14 @@
 #include "zwave_controller_callbacks_mock.h"
 #include "zwave_controller_utils_mock.h"
 #include "zwave_controller_keyset_mock.h"
+#include "zwave_controller_storage_mock.h"
 #include "zwave_utils_mock.h"
+#include "zwave_unid_mock.h"
 #include "zwave_network_management_mock.h"
 #include "zwave_network_management_state.h"
 #include "zwapi_init_mock.h"
 #include "uic_mqtt_mock.h"
+#include "ucl_mqtt_node_interview_mock.h"
 #include "zwave_tx_scheme_selector_mock.h"
 #include "zwave_command_classes_fixt_mock.h"
 #include "zpc_config_mock.h"
@@ -46,6 +49,7 @@
 #include "attribute_resolver_mock.h"
 #include "attribute_store_helper_mock.h"
 #include "zwapi_protocol_basis_mock.h"
+#include "failing_node_monitor_mock.h"
 
 #define LOG_TAG "network_monitor_test"
 
@@ -60,21 +64,29 @@ static zwave_node_id_t nl_node_id  = 56;
 static zwave_keyset_t granted_keys = 0x83;
 static zwave_nodemask_t node_list  = {0x71};  // 0b01110001;
 
-static attribute_store_node_update_callback_t on_nif_update_callback;
+static attribute_store_node_changed_callback_t on_nif_update_callback;
+static attribute_store_node_changed_callback_t
+  my_attribute_store_wakeup_cc_version_update_cb;
 
 static attribute_store_node_t root_node_mock    = 0x39;
 static attribute_store_node_t home_id_node_mock = 0x89bf7;
 static attribute_store_node_t node_id_node_mock = 0x1111;
+
+// Internal function mocks: (tested somewhere else)
+void network_monitor_store_span_table_data() {}
+void network_monitor_restore_span_table_data() {}
+void network_monitor_store_mpan_table_data() {}
+void network_monitor_restore_mpan_table_data() {}
 
 // Attribute Resolver Stubs variables
 void (*attribute_resolver_set_resolution_listener_callback)(
   attribute_store_node_t);
 attribute_store_node_t attribute_resolver_set_resolution_listener_node;
 
-static attribute_store_node_update_callback_t
+static attribute_store_node_changed_callback_t
   my_attribute_store_wakeup_interval_update_cb;
 static sl_status_t attribute_store_register_callback_by_type_and_state_save(
-  attribute_store_node_update_callback_t cb,
+  attribute_store_node_changed_callback_t cb,
   attribute_store_type_t test_type,
   attribute_store_node_value_state_t value_state,
   int n);
@@ -82,9 +94,10 @@ static sl_status_t attribute_store_register_callback_by_type_and_state_save(
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
-  nm_callbacks                                 = NULL;
-  on_nif_update_callback                       = NULL;
-  my_attribute_store_wakeup_interval_update_cb = NULL;
+  nm_callbacks                                   = NULL;
+  on_nif_update_callback                         = NULL;
+  my_attribute_store_wakeup_interval_update_cb   = NULL;
+  my_attribute_store_wakeup_cc_version_update_cb = NULL;
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -93,10 +106,19 @@ int suiteTearDown(int num_failures)
   return num_failures;
 }
 
+void my_zwave_unid_from_node_id(zwave_node_id_t node_id, unid_t unid, int n)
+{
+  snprintf(unid, sizeof(unid_t), "zw-%08X-%04hX", home_id, node_id);
+}
+
 void setUp()
 {
+  zwave_controller_storage_callback_register_IgnoreAndReturn(SL_STATUS_OK);
   contiki_test_helper_init();
   zwave_network_management_get_state_IgnoreAndReturn(NM_IDLE);
+
+  zwave_unid_set_home_id_Ignore();
+  zwave_unid_from_node_id_Stub(my_zwave_unid_from_node_id);
 }
 
 static sl_status_t my_nm_callback_save(const zwave_controller_callbacks_t *cb,
@@ -106,13 +128,17 @@ static sl_status_t my_nm_callback_save(const zwave_controller_callbacks_t *cb,
   return SL_STATUS_OK;
 }
 
-static sl_status_t save_on_nif_update_callback(
-  attribute_store_node_update_callback_t callback_function,
-  attribute_store_type_t type,
-  int num_calls)
+static sl_status_t attribute_store_register_callback_by_type_save(
+  attribute_store_node_changed_callback_t cb,
+  attribute_store_type_t test_type,
+  int n)
 {
-  on_nif_update_callback = callback_function;
-  TEST_ASSERT_EQUAL(ATTRIBUTE_ZWAVE_NIF, type);
+  if (test_type == ATTRIBUTE_COMMAND_CLASS_WAKE_UP_VERSION) {
+    TEST_ASSERT_EQUAL(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_VERSION, test_type);
+    my_attribute_store_wakeup_cc_version_update_cb = cb;
+  } else if (test_type == ATTRIBUTE_ZWAVE_NIF) {
+    on_nif_update_callback = cb;
+  }
   return SL_STATUS_OK;
 }
 
@@ -146,7 +172,7 @@ static void network_monitor_pause_nl_nodes_resolution_verification(
   attribute_store_read_value_IgnoreArg_read_value();
   attribute_store_read_value_ReturnMemThruPtr_read_value(&al_node_id,
                                                          sizeof(al_node_id));
-  get_operating_mode_ExpectAndReturn(al_node_id, OPERATING_MODE_AL);
+  zwave_get_operating_mode_ExpectAndReturn(al_node_id, OPERATING_MODE_AL);
 
   // NL node
   node_id_node++;
@@ -164,7 +190,7 @@ static void network_monitor_pause_nl_nodes_resolution_verification(
   attribute_store_read_value_IgnoreArg_read_value();
   attribute_store_read_value_ReturnMemThruPtr_read_value(&nl_node_id,
                                                          sizeof(nl_node_id));
-  get_operating_mode_ExpectAndReturn(nl_node_id, OPERATING_MODE_NL);
+  zwave_get_operating_mode_ExpectAndReturn(nl_node_id, OPERATING_MODE_NL);
   attribute_resolver_pause_node_resolution_Expect(node_id_node);
 
   // FL node
@@ -183,7 +209,7 @@ static void network_monitor_pause_nl_nodes_resolution_verification(
   attribute_store_read_value_IgnoreArg_read_value();
   attribute_store_read_value_ReturnMemThruPtr_read_value(&fl_node_id,
                                                          sizeof(fl_node_id));
-  get_operating_mode_ExpectAndReturn(fl_node_id, OPERATING_MODE_FL);
+  zwave_get_operating_mode_ExpectAndReturn(fl_node_id, OPERATING_MODE_FL);
 
   // Unkown node
   node_id_node++;
@@ -201,7 +227,7 @@ static void network_monitor_pause_nl_nodes_resolution_verification(
   attribute_store_read_value_IgnoreArg_read_value();
   attribute_store_read_value_ReturnMemThruPtr_read_value(&node_id,
                                                          sizeof(node_id));
-  get_operating_mode_ExpectAndReturn(node_id, OPERATING_MODE_UNKNOWN);
+  zwave_get_operating_mode_ExpectAndReturn(node_id, OPERATING_MODE_UNKNOWN);
 
   // No more nodes, exit the while loop
   attribute_store_get_node_child_by_type_ExpectAndReturn(
@@ -212,7 +238,7 @@ static void network_monitor_pause_nl_nodes_resolution_verification(
 }
 
 static sl_status_t attribute_store_register_callback_by_type_and_state_save(
-  attribute_store_node_update_callback_t cb,
+  attribute_store_node_changed_callback_t cb,
   attribute_store_type_t test_type,
   attribute_store_node_value_state_t value_state,
   int n)
@@ -225,6 +251,10 @@ static sl_status_t attribute_store_register_callback_by_type_and_state_save(
  */
 void test_network_monitor_init()
 {
+  zwave_controller_register_callbacks_Stub(my_nm_callback_save);
+  zwave_controller_register_callbacks_ExpectAndReturn(NULL, SL_STATUS_OK);
+  zwave_controller_register_callbacks_IgnoreArg_callbacks();
+
   attribute_store_register_callback_by_type_and_state_AddCallback(
     attribute_store_register_callback_by_type_and_state_save);
   attribute_store_register_callback_by_type_and_state_ExpectAndReturn(
@@ -234,12 +264,14 @@ void test_network_monitor_init()
     SL_STATUS_OK);
   attribute_store_register_callback_by_type_and_state_IgnoreArg_callback_function();
 
-  zwave_controller_register_callbacks_AddCallback(my_nm_callback_save);
-  zwave_controller_register_callbacks_ExpectAndReturn(NULL, SL_STATUS_OK);
-  zwave_controller_register_callbacks_IgnoreArg_callbacks();
+  attribute_store_register_callback_by_type_Stub(
+    attribute_store_register_callback_by_type_save);
+  attribute_store_register_callback_by_type_ExpectAndReturn(
+    NULL,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_VERSION,
+    SL_STATUS_OK);
+  attribute_store_register_callback_by_type_IgnoreArg_callback_function();
 
-  attribute_store_register_callback_by_type_AddCallback(
-    save_on_nif_update_callback);
   attribute_store_register_callback_by_type_ExpectAndReturn(NULL,
                                                             ATTRIBUTE_ZWAVE_NIF,
                                                             SL_STATUS_OK);
@@ -400,6 +432,7 @@ void test_network_monitor_init()
   attribute_resolver_resume_node_resolution_Expect(home_id_node_mock);
   // end of network_monitor_activate_network_resolution()
 
+  failing_node_monitor_list_clear_Expect();
   // Start the process and let the init call everything
   network_state_monitor_init();
   process_start(&network_monitor_process, 0);
@@ -453,7 +486,9 @@ void test_network_monitor_test_node_id_assigned()
     &network_status,
     sizeof(network_status),
     SL_STATUS_OK);
-  store_protocol_ExpectAndReturn(zwave_node_id, PROTOCOL_ZWAVE, SL_STATUS_OK);
+  zwave_store_inclusion_protocol_ExpectAndReturn(zwave_node_id,
+                                                 PROTOCOL_ZWAVE,
+                                                 SL_STATUS_OK);
   contiki_test_helper_run(0);
 }
 
@@ -589,14 +624,18 @@ void test_network_monitor_on_node_added()
                               granted_keys,
                               kex_fail,
                               PROTOCOL_ZWAVE);
-  store_protocol_ExpectAndReturn(zwave_node_id, PROTOCOL_ZWAVE, SL_STATUS_OK);
+  zwave_store_inclusion_protocol_ExpectAndReturn(zwave_node_id,
+                                                 PROTOCOL_ZWAVE,
+                                                 SL_STATUS_OK);
   contiki_test_helper_run(0);
 }
 
 void test_network_monitor_on_nif_updated()
 {
   TEST_ASSERT_NOT_NULL(on_nif_update_callback);
-
+  attribute_resolver_set_resolution_listener_Stub(
+    (CMOCK_attribute_resolver_set_resolution_listener_CALLBACK)
+      attribute_resolver_set_resolution_listener_stub);
   attribute_store_node_t test_node = 3;
 
   attribute_store_is_value_defined_ExpectAndReturn(test_node,
@@ -615,6 +654,21 @@ void test_network_monitor_on_nif_updated()
     ATTRIBUTE_NETWORK_STATUS,
     0,
     test_network_status_node);
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    test_network_status_node,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  static node_state_topic_state_t my_current_node_status
+    = NODE_STATE_TOPIC_STATE_INCLUDED;
+  static uint8_t my_current_node_status_size = sizeof(node_state_topic_state_t);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value(
+    &my_current_node_status);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(
+    &my_current_node_status_size);
 
   const node_state_topic_state_t network_status = NODE_STATE_TOPIC_INTERVIEWING;
   attribute_store_set_node_attribute_value_ExpectAndReturn(
@@ -658,7 +712,8 @@ void test_non_sleeping_node_failing_status_monitoring_procedure()
   zpc_config_t my_config_mock                        = {0};
   my_config_mock.accepted_transmit_failure           = 2;
   // mock first failure
-  nm_callbacks->on_frame_transmission_failed(my_node_id);
+  zwave_get_operating_mode_ExpectAndReturn(my_node_id, OPERATING_MODE_AL);
+  nm_callbacks->on_frame_transmission(false, NULL, my_node_id);
   contiki_test_helper_run(0);
   // mock for failing transmission
   zpc_get_config_IgnoreAndReturn(&my_config_mock);
@@ -697,7 +752,9 @@ void test_non_sleeping_node_failing_status_monitoring_procedure()
     SL_STATUS_OK);
   attribute_resolver_pause_node_resolution_Expect(my_test_node_node_id);
   // mock the second failure
-  nm_callbacks->on_frame_transmission_failed(my_node_id);
+  zwave_get_operating_mode_ExpectAndReturn(my_node_id, OPERATING_MODE_AL);
+  nm_callbacks->on_frame_transmission(false, NULL, my_node_id);
+  start_monitoring_failing_node_Expect(my_node_id);
   contiki_test_helper_run(0);
   // mock for successful transmission
   attribute_store_set_child_reported_ExpectAndReturn(
@@ -739,7 +796,9 @@ void test_non_sleeping_node_failing_status_monitoring_procedure()
     SL_STATUS_OK);
   attribute_resolver_resume_node_resolution_Expect(my_test_node_node_id);
   // mock the node which is now responding
-  nm_callbacks->on_frame_transmission_success(my_node_id);
+  zwave_get_operating_mode_ExpectAndReturn(my_node_id, OPERATING_MODE_AL);
+  nm_callbacks->on_frame_transmission(true, NULL, my_node_id);
+  stop_monitoring_failing_node_Expect(my_node_id);
   contiki_test_helper_run(0);
 }
 
@@ -891,12 +950,15 @@ void test_sleeping_node_failing_status_monitoring_procedure()
     sizeof(network_status_2),
     SL_STATUS_OK);
   // mock the node which is now responding
-  nm_callbacks->on_frame_transmission_success(my_test_node_id);
+  nm_callbacks->on_frame_transmission(true, NULL, my_test_node_id);
   contiki_test_helper_run(0);
 }
 
 void test_fail_interview_procedure()
 {
+  attribute_resolver_set_resolution_listener_Stub(
+    (CMOCK_attribute_resolver_set_resolution_listener_CALLBACK)
+      attribute_resolver_set_resolution_listener_stub);
   attribute_store_node_t test_nif_node     = 1;
   attribute_store_node_t test_node_id_node = 11;
   attribute_store_is_value_defined_ExpectAndReturn(test_nif_node,
@@ -912,6 +974,23 @@ void test_fail_interview_procedure()
     ATTRIBUTE_NETWORK_STATUS,
     0,
     test_network_status_node);
+
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    test_network_status_node,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  static node_state_topic_state_t my_current_node_status
+    = NODE_STATE_TOPIC_STATE_INCLUDED;
+  static uint8_t my_current_node_status_size = sizeof(node_state_topic_state_t);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value(
+    &my_current_node_status);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(
+    &my_current_node_status_size);
+
   static node_state_topic_state_t network_status
     = NODE_STATE_TOPIC_INTERVIEWING;
   attribute_store_set_node_attribute_value_ExpectAndReturn(
@@ -926,7 +1005,9 @@ void test_fail_interview_procedure()
 
   // Mocking failling frame tranmission
   static zwave_node_id_t test_node_id = 3;
-  nm_callbacks->on_frame_transmission_failed(test_node_id);
+  zwave_get_operating_mode_ExpectAndReturn(test_node_id, OPERATING_MODE_AL);
+  nm_callbacks->on_frame_transmission(false, NULL, test_node_id);
+  start_monitoring_failing_node_Expect(test_node_id);
   contiki_test_helper_run(0);
 
   zpc_config_t my_config_mock              = {0};
@@ -965,6 +1046,228 @@ void test_fail_interview_procedure()
     SL_STATUS_OK);
   attribute_resolver_pause_node_resolution_Expect(test_node_id_node);
   // mock the second failure
-  nm_callbacks->on_frame_transmission_failed(test_node_id);
+  zwave_get_operating_mode_ExpectAndReturn(test_node_id, OPERATING_MODE_AL);
+  nm_callbacks->on_frame_transmission(false, NULL, test_node_id);
+
+  contiki_test_helper_run(0);
+}
+
+void test_offline_node_re_interview_procedure()
+{
+  attribute_resolver_set_resolution_listener_Stub(
+    (CMOCK_attribute_resolver_set_resolution_listener_CALLBACK)
+      attribute_resolver_set_resolution_listener_stub);
+  attribute_store_node_t test_nif_node     = 1;
+  attribute_store_node_t test_node_id_node = 11;
+  zwave_node_id_t test_node_id             = 3;
+  zpc_config_t my_config_mock              = {0};
+  my_config_mock.accepted_transmit_failure = 2;
+  zpc_get_config_IgnoreAndReturn(&my_config_mock);
+  // mock first failure
+  zwave_get_operating_mode_ExpectAndReturn(test_node_id, OPERATING_MODE_AL);
+  nm_callbacks->on_frame_transmission(false, NULL, test_node_id);
+  stop_monitoring_failing_node_Expect(test_node_id);
+  contiki_test_helper_run(0);
+
+  attribute_store_is_value_defined_ExpectAndReturn(test_nif_node,
+                                                   REPORTED_ATTRIBUTE,
+                                                   false);
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_nif_node,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             test_node_id_node);
+  // mocking network_monitor_handle_event_node_interview_initiated
+  attribute_store_node_t test_network_status_node = 2;
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    test_node_id_node,
+    ATTRIBUTE_NETWORK_STATUS,
+    0,
+    test_network_status_node);
+
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    test_network_status_node,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  static node_state_topic_state_t my_current_node_status
+    = NODE_STATE_TOPIC_STATE_OFFLINE;
+  static uint8_t my_current_node_status_size = sizeof(node_state_topic_state_t);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value(
+    &my_current_node_status);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(
+    &my_current_node_status_size);
+
+  static node_state_topic_state_t network_status
+    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  attribute_store_set_node_attribute_value_ExpectAndReturn(
+    test_network_status_node,
+    REPORTED_ATTRIBUTE,
+    &network_status,
+    sizeof(node_state_topic_state_t),
+    SL_STATUS_OK);
+
+  on_nif_update_callback(test_nif_node, ATTRIBUTE_CREATED);
+  contiki_test_helper_run(0);
+
+  // mock to hear successfull tranmission from the failing node
+  attribute_store_set_child_reported_ExpectAndReturn(
+    test_node_id_node,
+    ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
+    NULL,
+    sizeof(unsigned long),
+    SL_STATUS_OK);
+  attribute_store_set_child_reported_IgnoreArg_value();
+  attribute_store_network_helper_get_node_id_node_ExpectAndReturn(
+    NULL,
+    test_node_id_node);
+  attribute_store_network_helper_get_node_id_node_IgnoreArg_node_unid();
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    test_node_id_node,
+    ATTRIBUTE_NETWORK_STATUS,
+    0,
+    test_network_status_node);
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    test_network_status_node,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  static node_state_topic_state_t test_previous_node_status
+    = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  static uint8_t test_previous_node_status_size
+    = sizeof(node_state_topic_state_t);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value(
+    &test_previous_node_status);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(
+    &test_previous_node_status_size);
+
+  const node_state_topic_state_t network_status_2
+    = NODE_STATE_TOPIC_INTERVIEWING;
+  attribute_store_set_node_attribute_value_ExpectAndReturn(
+    test_network_status_node,
+    REPORTED_ATTRIBUTE,
+    &network_status_2,
+    sizeof(network_status_2),
+    SL_STATUS_OK);
+  ucl_mqtt_initiate_node_interview_ExpectAndReturn(NULL, SL_STATUS_OK);
+  ucl_mqtt_initiate_node_interview_IgnoreArg_node_unid();
+  attribute_resolver_resume_node_resolution_Expect(test_node_id_node);
+  // mock the node which is now responding
+  zwave_get_operating_mode_ExpectAndReturn(test_node_id, OPERATING_MODE_AL);
+  nm_callbacks->on_frame_transmission(true, NULL, test_node_id);
+  contiki_test_helper_run(0);
+}
+
+void test_network_monitor_handle_event_node_interview_initiated_catch()
+{
+  attribute_resolver_set_resolution_listener_Stub(
+    (CMOCK_attribute_resolver_set_resolution_listener_CALLBACK)
+      attribute_resolver_set_resolution_listener_stub);
+
+  attribute_store_node_t test_nif_node     = 1;
+  attribute_store_node_t test_node_id_node = 11;
+
+  attribute_store_is_value_defined_ExpectAndReturn(test_nif_node,
+                                                   REPORTED_ATTRIBUTE,
+                                                   false);
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_nif_node,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             test_node_id_node);
+  // mocking network_monitor_handle_event_node_interview_initiated
+  attribute_store_node_t test_network_status_node = 2;
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    test_node_id_node,
+    ATTRIBUTE_NETWORK_STATUS,
+    0,
+    test_network_status_node);
+
+  attribute_store_get_node_attribute_value_ExpectAndReturn(
+    test_network_status_node,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    NULL,
+    SL_STATUS_FAIL);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+
+  static node_state_topic_state_t network_status
+    = NODE_STATE_TOPIC_INTERVIEWING;
+  attribute_store_set_node_attribute_value_ExpectAndReturn(
+    test_network_status_node,
+    REPORTED_ATTRIBUTE,
+    &network_status,
+    sizeof(node_state_topic_state_t),
+    SL_STATUS_OK);
+
+  on_nif_update_callback(test_nif_node, ATTRIBUTE_CREATED);
+  contiki_test_helper_run(0);
+}
+
+void test_network_monitor_on_wake_up_cc_version_update()
+{
+  TEST_ASSERT_NOT_NULL(my_attribute_store_wakeup_cc_version_update_cb);
+  attribute_store_node_t my_test_node         = 1;
+  attribute_store_node_t my_test_node_id_node = 2;
+  static zwave_node_id_t my_test_node_id      = 0x34;
+  static uint8_t my_test_node_id_size         = sizeof(zwave_node_id_t);
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(
+    my_test_node,
+    ATTRIBUTE_NODE_ID,
+    my_test_node_id_node);
+  attribute_store_get_node_attribute_value_ExpectAndReturn(my_test_node_id_node,
+                                                           REPORTED_ATTRIBUTE,
+                                                           NULL,
+                                                           NULL,
+                                                           SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  attribute_store_get_node_attribute_value_ReturnMemThruPtr_value(
+    (uint8_t *)&my_test_node_id,
+    (uint8_t)my_test_node_id_size);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(
+    (uint8_t *)&my_test_node_id_size);
+
+  my_attribute_store_wakeup_cc_version_update_cb(my_test_node,
+                                                 ATTRIBUTE_CREATED);
+  contiki_test_helper_run(0);
+}
+
+void test_get_granted_keys() {}
+
+void test_get_zwave_protocol() {}
+
+void test_network_monitor_handle_rx_frame_event()
+{
+  test_network_monitor_init();
+  TEST_ASSERT_NOT_NULL(nm_callbacks->on_rx_frame_received);
+  zwave_node_id_t zwave_node_id = 0x24;
+  nm_callbacks->on_rx_frame_received(zwave_node_id);
+
+  // TODO: Change to a non-mock test, all these mock expect test are useless.
+
+  // On Rx, we check if the node is failing and act accordingly.
+  // Nothing will happen in this test, apart from attribute store reads.
+  attribute_store_network_helper_get_node_id_node_ExpectAndReturn(
+    NULL,
+    node_id_node_mock);
+  attribute_store_network_helper_get_node_id_node_IgnoreArg_node_unid();
+  attribute_store_set_child_reported_ExpectAndReturn(
+    node_id_node_mock,
+    ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
+    NULL,
+    sizeof(unsigned long),
+    SL_STATUS_OK);
+  attribute_store_set_child_reported_IgnoreArg_value();
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
+    node_id_node_mock,
+    ATTRIBUTE_NETWORK_STATUS,
+    0,
+    ATTRIBUTE_STORE_INVALID_NODE);
+
+  // trigger the event processing
   contiki_test_helper_run(0);
 }

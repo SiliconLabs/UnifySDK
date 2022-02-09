@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -126,23 +126,24 @@ $(document).ready(function(){initNavTree('assert_8h_source.html',''); initResiza
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#ifdef NDEBUG</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#define assert(e) ((void)0)</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="assert_8h.html#ad6d5aaa966ca7424f7cb9bd01f2c838b">   42</a></span>&#160;<span class="preprocessor">#define assert(e) ((e) ? (void)0 : _xassert(__FILE__, __LINE__))</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> <a class="code" href="assert_8h.html#ad5da3a373dcd4e6cb93e6825821f118c">_xassert</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *, <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifndef CTASSERT                </span><span class="comment">/* Allow lint to override */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="assert_8h.html#a8821cdb56135e0c0b55669242856d15a">   47</a></span>&#160;<span class="preprocessor">#define CTASSERT(x)             _CTASSERT(x, __LINE__)</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="assert_8h.html#a035d2305d412a4e9e2b0020b7762f4fb">   48</a></span>&#160;<span class="preprocessor">#define _CTASSERT(x, y)         __CTASSERT(x, y)</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="assert_8h.html#a54fcb6cf374d4d88d3f1d7de89a9a75e">   49</a></span>&#160;<span class="preprocessor">#define __CTASSERT(x, y)        typedef char __assert ## y[(x) ? 1 : -1]</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ASSERT_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// When building without Debug, execute whatever is inside the assert() macro</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#define assert(e) ((e) ? (void)0 : (void)0)</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="assert_8h.html#ad6d5aaa966ca7424f7cb9bd01f2c838b">   43</a></span>&#160;<span class="preprocessor">#define assert(e) ((e) ? (void)0 : _xassert(__FILE__, __LINE__))</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="assert_8h.html#ad5da3a373dcd4e6cb93e6825821f118c">_xassert</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#ifndef CTASSERT </span><span class="comment">/* Allow lint to override */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="assert_8h.html#a8821cdb56135e0c0b55669242856d15a">   48</a></span>&#160;<span class="preprocessor">#define CTASSERT(x)      _CTASSERT(x, __LINE__)</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="assert_8h.html#a035d2305d412a4e9e2b0020b7762f4fb">   49</a></span>&#160;<span class="preprocessor">#define _CTASSERT(x, y)  __CTASSERT(x, y)</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="assert_8h.html#a54fcb6cf374d4d88d3f1d7de89a9a75e">   50</a></span>&#160;<span class="preprocessor">#define __CTASSERT(x, y) typedef char __assert##y[(x) ? 1 : -1]</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ASSERT_H */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aassert_8c_html_ac75bf7f1a530ee529f990562a43c658a"><div class="ttname"><a href="assert_8c.html#ac75bf7f1a530ee529f990562a43c658a">_xassert</a></div><div class="ttdeci">void _xassert(const char *file, int lineno)</div><div class="ttdef"><b>Definition:</b> assert.c:35</div></div>
@@ -151,7 +152,7 @@ $(document).ready(function(){initNavTree('assert_8h_source.html',''); initResiza
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_f1d32ca542c0f43616b5a5e0d1cef42d.html">uic_contiki</a></li><li class="navelem"><a class="el" href="dir_7e2d4b5dbef12d3b4b67dd812c2f2df2.html">core</a></li><li class="navelem"><a class="el" href="dir_276b83d0b84cb6c026aab54c61c24619.html">lib</a></li><li class="navelem"><a class="el" href="assert_8h.html">assert.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:08 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:03 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

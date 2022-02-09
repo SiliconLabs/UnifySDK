@@ -1,0 +1,27 @@
+// Central Scene Command Class
+def zwNUMBER_OF_SCENES 0x5B02
+def zwACTIVE_SCENE     0x5B06
+
+// Scenes Cluster
+def zbSCENE_COUNT   0x00050000
+def zbCURRENT_SCENE 0x00050001
+def zbCURRENT_GROUP 0x00050002
+def zbSCENE_VALID   0x00050003
+def zbSCENES_NAME_SUPPORT  0x00050004
+
+scope 0 {
+
+// Linking reported attributes zwave -> zigbee
+r'zbSCENE_COUNT = r'zwNUMBER_OF_SCENES
+
+r'zbCURRENT_SCENE =
+  if (r'zwACTIVE_SCENE > 0) (r'zwACTIVE_SCENE-1)
+  undefined
+
+r'zbSCENE_VALID = r'zwACTIVE_SCENE > 0
+
+r'zbCURRENT_GROUP = if (e'zwACTIVE_SCENE) 0 undefined
+
+r'zbSCENES_NAME_SUPPORT = if (e'zwACTIVE_SCENE) 0 undefined
+
+}

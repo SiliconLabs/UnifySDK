@@ -278,6 +278,100 @@ void test_changing_manual_intervention_required()
   TEST_ASSERT_EQUAL(status_update, SL_STATUS_NOT_FOUND);
 }
 
+void test_setting_manual_intervention_required_in_json()
+{
+  const std::string true_str  = "true";
+  const std::string false_str = "false";
+
+  const std::string smartstart_list =
+      "{\"value\": [{\"DSK\":\"" + test_entries_with_mostly_true[0].dsk + "\","
+    + "\"Include\":true,"
+    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[0].protocol_controller_unid + "\","
+    + "\"Unid\":\"" + test_entries_with_mostly_true[0].device_unid + "\","
+    + "\"ManualInterventionRequired\":" + true_str + "},"
+    + "{\"DSK\":\"" + test_entries_with_mostly_true[1].dsk + "\","
+    + "\"Include\":true,"
+    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[1].protocol_controller_unid + "\","
+    + "\"Unid\":\"" + test_entries_with_mostly_true[1].device_unid + "\","
+    + "\"ManualInterventionRequired\":" + false_str + "}]}";
+
+  my_mqtt_on_list_update("", smartstart_list.c_str(), smartstart_list.size());
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(smartstart_enable, true);
+
+  smartstart::Query q_true
+    = smartstart::Query(smartstart::QueryType::exact,
+                        smartstart::QueryKey::dsk,
+                        test_entries_with_mostly_true[0].dsk);
+  std::vector<smartstart::Entry> query_result_true
+    = smartstart::Management::get_instance()->get_cache_entries(q_true);
+  TEST_ASSERT_EQUAL_INT(query_result_true[0].manual_intervention_required, true);
+
+  smartstart::Query q_false
+    = smartstart::Query(smartstart::QueryType::exact,
+                        smartstart::QueryKey::dsk,
+                        test_entries_with_mostly_true[1].dsk);
+  std::vector<smartstart::Entry> query_result_false
+    = smartstart::Management::get_instance()->get_cache_entries(q_false);
+  TEST_ASSERT_EQUAL_INT(query_result_false[0].manual_intervention_required, false);
+}
+
+void test_preffered_protocol()
+{
+  const std::string smartstart_list =
+      "{\"value\": [{\"DSK\":\"" + test_entries_with_mostly_true[0].dsk + "\","
+    + "\"Include\":true,"
+    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[0].protocol_controller_unid + "\","
+    + "\"Unid\":\"" + test_entries_with_mostly_true[0].device_unid + "\","
+    + "\"PreferredProtocols\":[\"Z-Wave\"]},"
+    + "{\"DSK\":\"" + test_entries_with_mostly_true[1].dsk + "\","
+    + "\"Include\":true,"
+    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[1].protocol_controller_unid + "\","
+    + "\"Unid\":\"" + test_entries_with_mostly_true[1].device_unid + "\","
+    + "\"PreferredProtocols\":[\"Z-Wave\",\"Z-Wave Long Range\"]},"
+    + "{\"DSK\":\"" + test_entries_with_mostly_true[2].dsk + "\","
+    + "\"Include\":true,"
+    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[2].protocol_controller_unid + "\","
+    + "\"Unid\":\"" + test_entries_with_mostly_true[2].device_unid + "\","
+    + "\"PreferredProtocols\":[\"Z-Wave Long Range\"]}]}";
+
+  my_mqtt_on_list_update("", smartstart_list.c_str(), smartstart_list.size());
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(smartstart_enable, true);
+
+  {
+    smartstart::Query q_1
+      = smartstart::Query(smartstart::QueryType::exact,
+                          smartstart::QueryKey::dsk,
+                          test_entries_with_mostly_true[0].dsk);
+    std::vector<smartstart::Entry> query_result_1
+      = smartstart::Management::get_instance()->get_cache_entries(q_1);
+    TEST_ASSERT_EQUAL_STRING(query_result_1[0].preferred_protocols[0].c_str(), "Z-Wave");
+  }
+
+  {
+    smartstart::Query q_2
+      = smartstart::Query(smartstart::QueryType::exact,
+                          smartstart::QueryKey::dsk,
+                          test_entries_with_mostly_true[1].dsk);
+    std::vector<smartstart::Entry> query_result_2
+      = smartstart::Management::get_instance()->get_cache_entries(q_2);
+    TEST_ASSERT_EQUAL(2, query_result_2[0].preferred_protocols.size());
+    TEST_ASSERT_EQUAL_STRING(query_result_2[0].preferred_protocols[0].c_str(), "Z-Wave");
+    TEST_ASSERT_EQUAL_STRING(query_result_2[0].preferred_protocols[1].c_str(), "Z-Wave Long Range");
+  }
+
+  {
+    smartstart::Query q_3
+      = smartstart::Query(smartstart::QueryType::exact,
+                          smartstart::QueryKey::dsk,
+                          test_entries_with_mostly_true[2].dsk);
+    std::vector<smartstart::Entry> query_result_3
+      = smartstart::Management::get_instance()->get_cache_entries(q_3);
+    TEST_ASSERT_EQUAL_STRING(query_result_3[0].preferred_protocols[0].c_str(), "Z-Wave Long Range");
+  }
+}
+
 /// Test whether handling invalid query correctly
 void test_notify_node_added_removed_rainy_cases()
 {

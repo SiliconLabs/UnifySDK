@@ -1,5 +1,6 @@
 var zigpc__gateway__notify_8h =
 [
+    [ "zigpc_gateway_on_network_init_t", "group__zigpc__gateway__notify.html#ga00ae90f318ee86d24b977cb4e2c2e456", null ],
     [ "zigpc_gateway_on_node_add_t", "group__zigpc__gateway__notify.html#gad109b0fac14a7d637091f8fa42a14a0c", null ],
     [ "zigpc_gateway_notify_event", "group__zigpc__gateway__notify.html#ga68b826da48d6db275d1cd028d9ec0cfc", [
       [ "ZIGPC_GATEWAY_NOTIFY_NETWORK_INIT", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfca146a0cdeae8070b9fbf5e6c0976dbf97", null ],

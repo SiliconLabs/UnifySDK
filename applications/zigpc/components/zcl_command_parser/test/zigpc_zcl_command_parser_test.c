@@ -114,6 +114,33 @@ void listener_stub_view_membership_response(
     stub_cb_data->groups_get_group_membership_response.group_list_count);
 }
 
+void listener_stub_thermostate_get_weekly_schedule_response(
+  const zigbee_eui64_t eui64,
+  const zigbee_endpoint_id_t endpoint,
+  const zigpc_zclcmdparse_callback_data_t *data)
+{
+  stub_cb_num_calls++;
+  TEST_ASSERT_EQUAL_HEX8_ARRAY(stub_cb_eui64, eui64, sizeof(zigbee_eui64_t));
+  TEST_ASSERT_EQUAL(stub_cb_endpoint, endpoint);
+  TEST_ASSERT_EQUAL_HEX8(
+    stub_cb_data->thermostat_get_weekly_schedule_response.number_of_transitions,
+    data->thermostat_get_weekly_schedule_response.number_of_transitions);
+  TEST_ASSERT_EQUAL_HEX8(
+    stub_cb_data->thermostat_get_weekly_schedule_response.day_of_week,
+    data->thermostat_get_weekly_schedule_response.day_of_week);
+  TEST_ASSERT_EQUAL_HEX8(
+    stub_cb_data->thermostat_get_weekly_schedule_response.mode,
+    data->thermostat_get_weekly_schedule_response.mode);
+  TEST_ASSERT_EQUAL_HEX8(
+    stub_cb_data->thermostat_get_weekly_schedule_response.transitions_count,
+    data->thermostat_get_weekly_schedule_response.transitions_count);
+  TEST_ASSERT_EQUAL_MEMORY(
+    stub_cb_data->thermostat_get_weekly_schedule_response.transitions,
+    data->thermostat_get_weekly_schedule_response.transitions,
+    sizeof(zigpc_zcl_transition_type_t)
+      * data->thermostat_get_weekly_schedule_response.transitions_count);
+}
+
 /**
  * Callback registration tests
  **/
@@ -366,6 +393,11 @@ void test_listener_invoked_when_parsing_command_with_string_data_type(void)
   TEST_ASSERT_EQUAL(SL_STATUS_OK, registration_status);
   TEST_ASSERT_EQUAL(ZIGPC_ZCL_STATUS_SUCCESS, test_event.return_status);
   TEST_ASSERT_EQUAL(1, stub_cb_num_calls);
+
+  zigpc_zclcmdparse_remove_callback(
+    ZIGPC_ZCL_CLUSTER_GROUPS,
+    ZIGPC_ZCL_CLUSTER_GROUPS_COMMAND_VIEW_GROUP_RESPONSE,
+    stub_view_group_response_cb);
 }
 
 void test_listener_invoked_when_parsing_command_with_array_data_type(void)
@@ -405,5 +437,58 @@ void test_listener_invoked_when_parsing_command_with_array_data_type(void)
   zigpc_zclcmdparse_remove_callback(
     ZIGPC_ZCL_CLUSTER_GROUPS,
     ZIGPC_ZCL_CLUSTER_GROUPS_COMMAND_VIEW_GROUP_RESPONSE,
-    stub_view_group_response_cb);
+    listener_stub_view_membership_response);
+}
+
+void test_listener_invoked_when_parsing_command_with_struct_array_data_type(
+  void)
+{
+  // ARRANGE
+  zigpc_gateway_on_command_received_t test_event
+    = {.eui64       = "\x34\x00\xFA\x03\x75\x66\xBC\xBB",
+       .endpoint_id = 4,
+       .cluster_id  = ZIGPC_ZCL_CLUSTER_THERMOSTAT,
+       .command_id
+       = ZIGPC_ZCL_CLUSTER_THERMOSTAT_COMMAND_GET_WEEKLY_SCHEDULE_RESPONSE,
+       .from_server_to_client = true,
+       .frame_payload_offset  = 0,
+       .return_status         = -1,
+       .frame                 = {
+         .size   = 16,
+         .buffer = "\x02"                      // 2 transitions
+                   "\x41"                      // Sat+Sun
+                   "\x03"                      // Heat+Cool
+                   "\x68\x01\x00\x00\xE8\x03"  // (6AM,0C-Heat, 10C-Cool)
+                   "\xD0\x02\xE8\x03\xD0\x07",  // (12PM,10C-Heat,20C-Cool)
+       }};
+
+  zigpc_zclcmdparse_callback_data_t expected_data = {
+    .thermostat_get_weekly_schedule_response = {
+      .number_of_transitions = 2,
+      .day_of_week           = 0x41,
+      .mode                  = 0x03,
+      .transitions_count     = 2,
+      .transitions = (zigpc_zcl_transition_type_t *)&test_event.frame.buffer[3],
+    }};
+
+  memcpy(stub_cb_eui64, test_event.eui64, sizeof(zigbee_eui64_t));
+  stub_cb_endpoint  = test_event.endpoint_id;
+  stub_cb_data      = &expected_data;
+  stub_cb_num_calls = 1;
+
+  // ACT
+  sl_status_t registration_status = zigpc_zclcmdparse_register_callback(
+    ZIGPC_ZCL_CLUSTER_THERMOSTAT,
+    ZIGPC_ZCL_CLUSTER_THERMOSTAT_COMMAND_GET_WEEKLY_SCHEDULE_RESPONSE,
+    listener_stub_thermostate_get_weekly_schedule_response);
+  zigpc_zclcmdparse_on_command_received(&test_event);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, registration_status);
+  TEST_ASSERT_EQUAL_HEX(ZIGPC_ZCL_STATUS_SUCCESS, test_event.return_status);
+
+  zigpc_zclcmdparse_remove_callback(
+    ZIGPC_ZCL_CLUSTER_THERMOSTAT,
+    ZIGPC_ZCL_CLUSTER_THERMOSTAT_COMMAND_GET_WEEKLY_SCHEDULE_RESPONSE,
+    listener_stub_thermostate_get_weekly_schedule_response);
 }

@@ -207,7 +207,7 @@ Emergency Alarm;0x0A;State;(Refer to parameters);N/A;State idle;0x00;V4;Notifica
 ;;Event;N/A;N/A;Contact police;0x01;V2;;
 ;;Event;N/A;N/A;Contact fire service;0x02;V2;;
 ;;Event;N/A;N/A;Contact medical service;0x03;V2;;
-;;Event;N/A;N/A;Panic alert;0x04;V8;;This event is used to indicate that a panic/emergency situation occured
+;;Event;N/A;N/A;Panic alert;0x04;V8;;This event is used to indicate that a panic/emergency situation occurred
 ;;N/A;N/A;N/A;Unknown event/state;0xFE;V2;;
 Clock;0x0B;State;(Refer to parameters);N/A;State idle;0x00;V4;Notification value for the state variable going to idle. (V5);
 ;;Event;N/A;N/A;Wake up alert;0x01;V2;;

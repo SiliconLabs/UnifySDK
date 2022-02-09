@@ -22,6 +22,7 @@
 #include "attribute_store_defined_attribute_types.h"
 #include "attribute.hpp"
 #include "zpc_attribute_store_test_helper.h"
+#include "zwave_unid.h"
 
 #include "zwave_unid.h"
 #include "ZW_classcmd.h"
@@ -41,7 +42,7 @@ extern "C" {
 #include "zwave_controller_callbacks_mock.h"
 #include "zwave_controller_utils_mock.h"
 #include "zwave_controller_keyset_mock.h"
-#include "zwave_security_validation_mock.h"
+#include "zwave_controller_storage_mock.h"
 
 #include "unity.h"
 
@@ -110,9 +111,6 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
-  zwave_unid_set_home_id(home_id);
-  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
-  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
 }
 
 static sl_status_t zwave_command_handler_register_handler_stub(
@@ -143,6 +141,10 @@ int suiteTearDown(int num_failures)
 /// Called before each and every test
 void setUp()
 {
+  zwave_unid_set_home_id(home_id);
+  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
+  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
+
   contiki_test_helper_init();
   zwave_controller_register_callbacks_AddCallback(controller_callbacks_save);
   zwave_controller_register_callbacks_ExpectAndReturn(NULL, SL_STATUS_OK);
@@ -170,17 +172,17 @@ void setUp()
     = ZWAVE_NODE_INFO_LISTENING_PROTOCOL_ROUTING_MASK;
   test_nif->optional_protocol = ZWAVE_NODE_INFO_OPTIONAL_PROTOCOL_END_NODE_MASK;
 
-  // setting attribute tree via adding node id node under home id
+  // setting attribute tree via adding node id node under home id (NodeID 2)
   attribute attr_home_id(home_id_node);
-  attr_node_id = attr_home_id.add_node(ATTRIBUTE_NODE_ID);
-  attr_node_id.set_reported<zwave_node_id_t>(test_node_id);
-  attr_endpoint = attr_node_id.add_node(ATTRIBUTE_ENDPOINT_ID);
-  attr_endpoint.set_reported<uint8_t>(test_endpoint);
+  attr_node_id  = attr_home_id.emplace_node(ATTRIBUTE_NODE_ID,
+                                           (zwave_node_id_t)test_node_id);
+  attr_endpoint = attr_node_id.emplace_node(ATTRIBUTE_ENDPOINT_ID,
+                                            (zwave_endpoint_id_t)test_endpoint);
   TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, attr_endpoint);
 
-  // Add the granted keys of the inclusion controller
+  // Add the granted keys of the inclusion controller (Node ID 4)
   attribute_store_node_t granted_keys_node
-    = attribute_store_add_node(node_id_node, ATTRIBUTE_GRANTED_SECURITY_KEYS);
+    = attribute_store_add_node(ATTRIBUTE_GRANTED_SECURITY_KEYS, node_id_node);
   attribute_store_set_reported(granted_keys_node,
                                &test_keyset,
                                sizeof(test_keyset));
@@ -210,7 +212,9 @@ void test_zwave_command_class_inclusion_controller_reject_frame_too_low_security
   // Receive at lower security
   connection.encapsulation
     = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED;
-  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
+  controller_callbacks->on_node_id_assigned(test_node_id,
+                                            false,
+                                            PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -240,7 +244,9 @@ void test_zwave_command_class_inclusion_controller_reject_frame_unkonwn_node()
 {
   // Receive from an unknown node
   connection.remote.node_id = 20;
-  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
+  controller_callbacks->on_node_id_assigned(test_node_id,
+                                            false,
+                                            PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -269,7 +275,9 @@ void test_zwave_command_class_inclusion_controller_reject_frame_unkonwn_node()
 void test_zwave_command_class_inclusion_controller_proxy_inclusion_initiate()
 {
   TEST_ASSERT_NOT_NULL(controller_callbacks->on_node_id_assigned);
-  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
+  controller_callbacks->on_node_id_assigned(test_node_id,
+                                            false,
+                                            PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -283,8 +291,8 @@ void test_zwave_command_class_inclusion_controller_proxy_inclusion_initiate()
     sizeof(frame));
   contiki_test_helper_run(0);
 
-  zwave_security_validation_is_node_s2_capable_ExpectAndReturn(test_node_id,
-                                                               true);
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(test_node_id,
+                                                              true);
   zwave_network_management_start_proxy_inclusion_ExpectAndReturn(
     test_node_id,
     *test_nif,
@@ -327,26 +335,32 @@ void test_zwave_command_class_inclusion_controller_proxy_inclusion_replace()
     reinterpret_cast<const uint8_t *>(&frame),
     sizeof(frame));
   contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(attr_node_id.get<zwave_node_id_t>(REPORTED_ATTRIBUTE),
-                    test_node_id);
-  TEST_ASSERT_TRUE(
-    attr_node_id.child_by_type(ATTRIBUTE_ENDPOINT_ID).is_valid());
-  TEST_ASSERT_TRUE(
-    attr_node_id.child_by_type(ATTRIBUTE_NETWORK_STATUS).is_valid());
-  TEST_ASSERT_TRUE(attr_endpoint.child_by_type(ATTRIBUTE_ZWAVE_NIF).is_valid());
 
-  zwave_security_validation_is_node_s2_capable_ExpectAndReturn(test_node_id,
-                                                               true);
+  attribute attr_home_id(home_id_node);
+  attribute found_node_id
+    = attr_home_id.child_by_type_and_value(ATTRIBUTE_NODE_ID, test_node_id);
+  TEST_ASSERT_TRUE(found_node_id.is_valid());
+
+  TEST_ASSERT_TRUE(
+    found_node_id.child_by_type(ATTRIBUTE_ENDPOINT_ID).is_valid());
+  TEST_ASSERT_TRUE(
+    found_node_id.child_by_type(ATTRIBUTE_NETWORK_STATUS).is_valid());
+  TEST_ASSERT_TRUE(found_node_id.child_by_type(ATTRIBUTE_ENDPOINT_ID)
+                     .child_by_type(ATTRIBUTE_ZWAVE_NIF)
+                     .is_valid());
+
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(test_node_id,
+                                                              true);
   zwave_network_management_start_proxy_inclusion_ExpectAndReturn(
     test_node_id,
     *test_nif,
     INITIATE_PROXY_INCLUSION_REPLACE,
     SL_STATUS_OK);
-  attribute_resolver_pause_node_resolution_Expect(attr_node_id);
+  attribute_resolver_pause_node_resolution_Expect(found_node_id);
   controller_callbacks->on_node_information(test_node_id, test_nif);
   contiki_test_helper_run(0);
 
-  attribute_resolver_resume_node_resolution_Expect(attr_node_id);
+  attribute_resolver_resume_node_resolution_Expect(found_node_id);
   attribute_resolver_set_resolution_listener_Stub(
     (CMOCK_attribute_resolver_set_resolution_listener_CALLBACK)
       attribute_resolver_set_resolution_listener_stub);
@@ -361,15 +375,17 @@ void test_zwave_command_class_inclusion_controller_proxy_inclusion_replace()
 
   // Now trigger the callback, for interview completed via ZPC
   attribute_resolver_clear_resolution_listener_Expect(
-    attr_node_id,
+    found_node_id,
     attribute_resolver_set_resolution_listener_callback);
-  attribute_resolver_set_resolution_listener_callback(attr_node_id);
+  attribute_resolver_set_resolution_listener_callback(found_node_id);
   contiki_test_helper_run(0);
 }
 
 void test_zwave_command_class_inclusion_controller_initiate_command_s0_node()
 {
-  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
+  controller_callbacks->on_node_id_assigned(test_node_id,
+                                            false,
+                                            PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -383,18 +399,8 @@ void test_zwave_command_class_inclusion_controller_initiate_command_s0_node()
     sizeof(frame));
   contiki_test_helper_run(0);
 
-  zwave_security_validation_is_node_s2_capable_ExpectAndReturn(test_node_id,
-                                                               true);
-  zwave_node_supports_command_class_ExpectAndReturn(COMMAND_CLASS_SECURITY,
-                                                    test_node_id,
-                                                    test_endpoint,
-                                                    true);
-  zwave_node_supports_command_class_ExpectAndReturn(
-    COMMAND_CLASS_SECURITY,
-    connection.remote.node_id,
-    connection.remote.endpoint_id,
-    true);
-
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(test_node_id,
+                                                              true);
   zwave_network_management_start_proxy_inclusion_ExpectAndReturn(
     test_node_id,
     *test_nif,
@@ -434,7 +440,9 @@ void test_zwave_command_class_inclusion_controller_initiate_command_s0_node()
 
 void test_zwave_command_class_inclusion_controller_missing_initiate_frame()
 {
-  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
+  controller_callbacks->on_node_id_assigned(test_node_id,
+                                            false,
+                                            PROTOCOL_ZWAVE);
   contiki_test_helper_run(10000);
   TEST_ASSERT_TRUE(attr_endpoint.child_by_type(ATTRIBUTE_ZWAVE_NIF).is_valid());
   TEST_ASSERT_TRUE(
@@ -460,7 +468,9 @@ void test_zwave_command_class_inclusion_controller_missing_on_node_assign_frame(
 
 void test_zwave_command_class_inclusion_controller_missing_nif()
 {
-  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
+  controller_callbacks->on_node_id_assigned(test_node_id,
+                                            false,
+                                            PROTOCOL_ZWAVE);
   contiki_test_helper_run(0);
 
   const ZW_INITIATE_FRAME frame
@@ -481,7 +491,9 @@ void test_zwave_command_class_inclusion_controller_missing_nif()
 // pending inclusion request, it shall be handled
 void test_zwave_command_class_inclusion_controller_nm_state_busy()
 {
-  controller_callbacks->on_node_id_assigned(test_node_id, false, PROTOCOL_ZWAVE);
+  controller_callbacks->on_node_id_assigned(test_node_id,
+                                            false,
+                                            PROTOCOL_ZWAVE);
   contiki_test_helper_run(5000);
 
   const ZW_INITIATE_FRAME frame
@@ -493,10 +505,10 @@ void test_zwave_command_class_inclusion_controller_nm_state_busy()
     &connection,
     reinterpret_cast<const uint8_t *>(&frame),
     sizeof(frame));
-  contiki_test_helper_run(5000);
+  contiki_test_helper_run(1000);
 
-  zwave_security_validation_is_node_s2_capable_ExpectAndReturn(test_node_id,
-                                                               true);
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(test_node_id,
+                                                              true);
   zwave_network_management_start_proxy_inclusion_ExpectAndReturn(
     test_node_id,
     *test_nif,
@@ -504,16 +516,17 @@ void test_zwave_command_class_inclusion_controller_nm_state_busy()
     SL_STATUS_BUSY);
   attribute_resolver_pause_node_resolution_Expect(attr_node_id);
   controller_callbacks->on_node_information(test_node_id, test_nif);
-  contiki_test_helper_run(0);
+  contiki_test_helper_run(5000);
 
-  zwave_security_validation_is_node_s2_capable_ExpectAndReturn(test_node_id,
-                                                               true);
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(test_node_id,
+                                                              true);
   zwave_network_management_start_proxy_inclusion_ExpectAndReturn(
     test_node_id,
     *test_nif,
     INITIATE_PROXY_INCLUSION,
     SL_STATUS_OK);
   controller_callbacks->on_state_updated(NM_IDLE);
+  contiki_test_helper_run(0);
 
   attribute_resolver_resume_node_resolution_Expect(attr_node_id);
   attribute_resolver_set_resolution_listener_Stub(

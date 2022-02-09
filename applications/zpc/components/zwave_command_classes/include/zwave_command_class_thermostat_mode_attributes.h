@@ -1,7 +1,7 @@
 
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -23,7 +23,7 @@
 // Interfaces
 #include "attribute_store_defined_attribute_types.h"
 
-// Generic incldues
+// Generic includes
 #include <stdbool.h>
 
 // Thermostat Mode Command Class
@@ -66,7 +66,7 @@ int32_t command_class_thermostat_mode_get_mode(
  * @param unid
  * @param endpoint
  * @param value_state
- * @param new_mode 
+ * @param new_mode
  *
  * @returns SL_STATUS_OK if it was written
  */

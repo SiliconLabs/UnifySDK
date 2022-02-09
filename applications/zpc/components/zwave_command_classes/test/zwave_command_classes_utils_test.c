@@ -18,7 +18,7 @@
 #include "attribute_store_defined_attribute_types.h"
 
 // Mock includes
-#include "zwave_controller_utils_mock.h"
+#include "zwave_utils_mock.h"
 #include "zpc_attribute_store_network_helper_mock.h"
 #include "attribute_store_mock.h"
 #include "attribute_store_helper_mock.h"
@@ -370,9 +370,6 @@ void test_is_portable_end_node()
                                                SL_STATUS_OK);
   attribute_store_get_reported_IgnoreArg_value();
   attribute_store_get_reported_ReturnThruPtr_value(&test_node_id);
-  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_node_id,
-                                                             ATTRIBUTE_NODE_ID,
-                                                             test_node_id);
   zwave_unid_from_node_id_Expect(test_node_id, NULL);
   zwave_unid_from_node_id_IgnoreArg_unid();
   zwave_unid_from_node_id_ReturnMemThruPtr_unid(test_unid, sizeof(unid_t));

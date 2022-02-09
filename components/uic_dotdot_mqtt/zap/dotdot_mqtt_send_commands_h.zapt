@@ -1,0 +1,91 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+/**
+ * @defgroup dotdot_mqtt_send_commands Dotdot MQTT Send commands
+ * @ingroup dotdot_mqtt
+ * @brief This module allows to issue UCL/MQTT commands to destinations
+ *
+ * Note that user component should verify themselves if the commands that
+ * they issue is supported.
+ *
+ * @{
+ */
+
+#ifndef DOTDOT_MQTT_SEND_COMMANDS_H
+#define DOTDOT_MQTT_SEND_COMMANDS_H
+
+#include "dotdot_mqtt.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
+////////////////////////////////////////////////////////////////////////////////
+// Sending Commands functions
+////////////////////////////////////////////////////////////////////////////////
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+/**
+ * @brief Sends/Publishes a {{label}} command for
+ * the {{parent.label}} cluster to a destination.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints parent.label)}}epID/{{/unless}}{{asPublicationName parent.label}}/Commands/{{label}}
+ *
+ * @param destination_unid      The UNID of the node that should receive the command.
+ * {{#unless (clusterWithoutEndpoints parent.label)}}
+ * @param destination_endpoint  The Endpoint ID of the node that should receive the command.
+ * {{/unless}}
+ * {{#zcl_command_arguments}}{{#first}}
+ * @param fields                Struct pointer with the fields value of the command
+ * {{/first}}{{/zcl_command_arguments}}
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_publish_{{asSnakeCaseLower label}}_command(
+  const dotdot_unid_t destination_unid{{#unless (clusterWithoutEndpoints parent.label)}},
+  const dotdot_endpoint_id_t destination_endpoint{{/unless}}{{#zcl_command_arguments}}{{#first}},
+  const {{asCommandFieldsType parent}} *fields
+  {{/first}}{{/zcl_command_arguments}}
+);
+
+/**
+ * @brief Sends/Publishes a {{label}} command for
+ * the {{parent.label}} cluster to a group.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-group/GroupID/{{parent.label}}/Commands/{{label}}
+ *
+ * @param destination_group_id  The GroupID that should receive the command.
+ * {{#zcl_command_arguments}}{{#first}}
+ * @param fields                Struct pointer with the fields value of the command
+ * {{/first}}{{/zcl_command_arguments}}
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_publish_{{asSnakeCaseLower label}}_command_to_group(
+  uint16_t destination_group_id{{#zcl_command_arguments}}{{#first}},
+  const {{asCommandFieldsType parent}} *fields
+  {{/first}}{{/zcl_command_arguments}}
+);
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
+
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
+#endif // DOTDOT_MQTT_SEND_COMMANDS_H
+/** @} end dotdot_mqtt_send_commands */

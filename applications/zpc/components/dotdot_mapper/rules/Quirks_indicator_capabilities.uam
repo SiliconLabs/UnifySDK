@@ -1,0 +1,85 @@
+// Modify Indicator Command Class capabilities
+
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+
+def ep 0x00000004
+def zwINDICATOR_ID 0x00008703
+def zwPROPERTY_BIT_MASK 0x00008705
+
+def logic_soft_wall_switch ((r'zwMANUFACTURER_ID == 0x0234) & (r'zwPRODUCT_TYPE_ID == 0x3) & (r'zwPRODUCT_ID == 0x010A))
+
+scope 0 {
+
+// Shortcut Endpoints Indicator Capabilities, they are broken and redundant from
+// the root device.
+
+// FIXME: UIC-1341 This does not work, the mapper does not understand
+// the ^ operator properly.
+
+r'^.ep[1].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[1].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[1].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[1].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[2].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[2].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[2].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[2].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[3].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[3].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[3].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[3].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[4].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[4].zwINDICATOR_ID[0x44].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[4].zwINDICATOR_ID[0x45].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+r'^.ep[4].zwINDICATOR_ID[0x46].zwPROPERTY_BIT_MASK =
+  if logic_soft_wall_switch 0
+  undefined
+
+}

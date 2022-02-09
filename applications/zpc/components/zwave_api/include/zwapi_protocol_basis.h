@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -22,8 +22,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "sl_status.h"
-#include "zwave_utils.h"
 #include "zwave_rf_region.h"
+#include "zwave_node_id_definitions.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -31,7 +31,7 @@ extern "C" {
 
 /**
  * @defgroup ZWAPI_BASIS Basis API
- * @ingroup ZWAPI
+ * @ingroup zwave_api
  * @brief Functions in the Z-Wave basis API
  *
  * Interface functions in this module are implemented within all Z-Wave nodes.
@@ -40,26 +40,23 @@ extern "C" {
 
 /// Bitflag definitions for FUNC_ID_SERIAL_API_SETUP command
 typedef enum {
-  SERIAL_API_SETUP_CMD_UNSUPPORTED                   = 0x00,
-  SERIAL_API_SETUP_CMD_SUPPORTED                     = 0x01,
-  SERIAL_API_SETUP_CMD_TX_STATUS_REPORT              = 0x02,
-  SERIAL_API_SETUP_CMD_TX_POWERLEVEL_SET             = 0x04,
-  SERIAL_API_SETUP_CMD_TX_POWERLEVEL_GET             = 0x08,
-  SERIAL_API_SETUP_CMD_MAXIMUM_PAYLOAD_SIZE_GET      = 0x10,
-  SERIAL_API_SETUP_CMD_LR_MAXIMUM_PAYLOAD_SIZE_GET   = 0x11,
-  SERIAL_API_SETUP_CMD_RF_REGION_GET                 = 0x20,
-  SERIAL_API_SETUP_CMD_RF_REGION_SET                 = 0x40,
-  SERIAL_API_SETUP_CMD_NODEID_BASETYPE_SET           = 0x80
+  SERIAL_API_SETUP_CMD_UNSUPPORTED                 = 0x00,
+  SERIAL_API_SETUP_CMD_SUPPORTED                   = 0x01,
+  SERIAL_API_SETUP_CMD_TX_STATUS_REPORT            = 0x02,
+  SERIAL_API_SETUP_CMD_TX_POWERLEVEL_SET           = 0x04,
+  SERIAL_API_SETUP_CMD_TX_POWERLEVEL_GET           = 0x08,
+  SERIAL_API_SETUP_CMD_MAXIMUM_PAYLOAD_SIZE_GET    = 0x10,
+  SERIAL_API_SETUP_CMD_LR_MAXIMUM_PAYLOAD_SIZE_GET = 0x11,
+  SERIAL_API_SETUP_CMD_RF_REGION_GET               = 0x20,
+  SERIAL_API_SETUP_CMD_RF_REGION_SET               = 0x40,
+  SERIAL_API_SETUP_CMD_NODEID_BASETYPE_SET         = 0x80
 } serial_api_setup_cmd_t;
 
 /// @name zwapi_nodeid_basetype_t
 /// These definitions represent possible node id basetype settings for the Z-Wave module
 /// They are used with zwapi_set_node_id_basetype()
 ///@{
-typedef enum {
-  NODEID_8BITS = 1,
-  NODEID_16BITS = 2
-} zwave_node_id_basetype_t;
+typedef enum { NODEID_8BITS = 1, NODEID_16BITS = 2 } zwave_node_id_basetype_t;
 ///@}
 
 /// @name zwapi_get_zw_protocol_status() return value masks

@@ -12,9 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file identify_cluster_mapper.h
- * @brief This file implements the commands in the Identify cluster
- *
+ * @defgroup identify_cluster_mapper Identify Cluster Mapper
+ * @ingroup dotdot_mapper
+ * @brief Maps Identify Cluster incoming Commands to attribute modifications.
  *
  * @{
  */
@@ -28,9 +28,9 @@ extern "C" {
 
 /**
  * @brief Initialize the component
- * 
- * @return true 
- * @return false 
+ *
+ * @return true
+ * @return false
  */
 bool identify_cluster_mapper_init();
 

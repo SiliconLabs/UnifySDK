@@ -172,6 +172,14 @@ typedef struct {
   uint8_t dummy; /**< placeholder */
 } __attribute__((__packed__)) zigpc_cluster_data_t;
 
+/**
+ * @brief Device endpoint group information.
+ *
+ */
+typedef struct {
+  char group_name[ZCL_GROUP_NAME_LENGTH];
+} __attribute__((__packed__)) zigpc_group_data_t;
+
 /**********************************
  **********************************
  *
@@ -398,6 +406,140 @@ sl_status_t zigpc_datastore_write_endpoint(const zigbee_eui64_t eui64,
 sl_status_t zigpc_datastore_remove_endpoint(const zigbee_eui64_t eui64,
                                             zigbee_endpoint_id_t endpoint_id);
 
+/**********************************
+ **********************************
+ *
+ * Group Entity APIs
+ *
+ **********************************
+ **********************************/
+
+/**
+ * @brief Get count of groups persisted under an endpoint.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param is_reported   Look in stored reported/desired state.
+ * @return size_t       Number of groups persisted.
+ */
+size_t zigpc_datastore_get_group_count(const zigbee_eui64_t eui64,
+                                       zigbee_endpoint_id_t endpoint_id,
+                                       bool is_reported);
+
+/**
+ * @brief Find a particular group entity persisted under a device endpoint and
+ * retrieve its search key (group_id) based on an index. See \ref
+ * zigpc_datastore_get_group_count on getting the total number of groupss
+ * persisted under a device endpoint.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param is_reported   Look in stored reported/desired state.
+ * @param index         Index to retrieve.
+ *
+ * @return sl_status_t  SL_STATUS_OK if the endpoint is found,
+ * SL_STATUS_NOT_FOUND if the group node is not found, SL_STATUS_NULL_POINTER
+ * if the provided EUI64 or endpoint_id is invalid, or SL_STATUS_FAIL if the
+ * find process fails.
+ */
+sl_status_t
+  zigpc_datastore_find_group_by_index(const zigbee_eui64_t eui64,
+                                      zigbee_endpoint_id_t endpoint_id,
+                                      bool is_reported,
+                                      size_t index,
+                                      zigbee_group_id_t *group_id);
+
+/**
+ * @brief Determine if a particular group ID is supported under a device
+ * endpoint.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param is_reported   Look in stored reported/desired state.
+ * @param group_id      Reference to group identifier search key to populate.
+
+ * @return bool         TRUE if the group identifier exists under the device
+ * endpoint, FALSE if not.
+ */
+bool zigpc_datastore_contains_group(const zigbee_eui64_t eui64,
+                                    zigbee_endpoint_id_t endpoint_id,
+                                    bool is_reported,
+                                    zigbee_group_id_t group_id);
+
+/**
+ * @brief Create group entity to be persisted under a device endpoint. The
+ * read/write APIs can be used to manipulate the data associated with this
+ * group entity.
+ *
+ * @param eui64         Device identifier to persist under.
+ * @param endpoint_id   Endpoint identifier to persist under.
+ * @param is_reported   Look in stored reported/desired state.
+ * @param group_id      Reference to group identifier search key to populate.
+ *
+ * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_ALREADY_EXISTS if
+ * the group node already exists, SL_STATUS_NOT_INITIALIZED if attribute store
+ * is not initialized or SL_STATUS_FAIL if the creation process fails.
+ */
+sl_status_t zigpc_datastore_create_group(const zigbee_eui64_t eui64,
+                                         zigbee_endpoint_id_t endpoint_id,
+                                         bool is_reported,
+                                         zigbee_group_id_t group_id);
+
+/**
+ * @brief Read data from a persisted group entity.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param is_reported   Look in stored reported/desired state.
+ * @param group_id      Reference to group identifier search key to populate.
+ * @param data          Group data to be read.
+ *
+ * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER
+ * if invalid data object provided, SL_STATUS_NOT_FOUND if the group node
+ * does not exist, SL_STATUS_NOT_INITIALIZED if attribute store is not
+ * initialized, or SL_STATUS_FAIL if the read process fails.
+ */
+sl_status_t zigpc_datastore_read_group(const zigbee_eui64_t eui64,
+                                       zigbee_endpoint_id_t endpoint_id,
+                                       bool is_reported,
+                                       zigbee_group_id_t group_id,
+                                       zigpc_group_data_t *const data);
+
+/**
+ * @brief Write data to a persisted group entity.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param is_reported   Look in stored reported/desired state.
+ * @param group_id      Reference to group identifier search key to populate.
+ * @param data          Group data to be read.
+ *
+ * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NULL_POINTER
+ * if invalid data object provided, SL_STATUS_NOT_FOUND if the group node
+ * does not exist, SL_STATUS_NOT_INITIALIZED if attribute store is not
+ * initialized, or SL_STATUS_FAIL if the write process fails.
+ */
+sl_status_t zigpc_datastore_write_group(const zigbee_eui64_t eui64,
+                                        zigbee_endpoint_id_t endpoint_id,
+                                        bool is_reported,
+                                        zigbee_group_id_t group_id,
+                                        const zigpc_group_data_t *data);
+
+/**
+ * @brief Remove persisted group entity.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_id   Endpoint identifier.
+ * @param is_reported   Look in stored reported/desired state.
+ * @param group_id      Reference to group identifier search key to populate.
+ * @return sl_status_t  SL_STATUS_OK on success, SL_STATUS_NOT_FOUND if the
+ * group node does not exist, SL_STATUS_NOT_INITIALIZED if attribute store
+ * is not initialized, or SL_STATUS_FAIL if the delete process fails.
+ */
+sl_status_t zigpc_datastore_remove_group(const zigbee_eui64_t eui64,
+                                         zigbee_endpoint_id_t endpoint_id,
+                                         bool is_reported,
+                                         zigbee_group_id_t group_id);
 /**********************************
  **********************************
  *

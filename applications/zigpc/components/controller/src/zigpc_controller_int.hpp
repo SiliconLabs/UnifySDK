@@ -15,7 +15,10 @@
 #ifndef ZIGPC_CONTROLLER_INT_HPP
 #define ZIGPC_CONTROLLER_INT_HPP
 
+#include <vector>
+
 // ZigPC includes
+#include <zigpc_discovery.h>
 #include <zigpc_common_zigbee.h>
 
 namespace zigpc_ctrl
@@ -31,7 +34,17 @@ constexpr char LOG_TAG[] = "zigpc_ctrl";
  * @return sl_status_t  SL_STATUS_OK on successfully completing
  * operations, error otherwise.
  */
-sl_status_t on_device_announced(const zigbee_eui64_t eui64);
+sl_status_t on_device_announce(const zigbee_eui64_t eui64);
+
+/**
+ * @brief Event handler when a device has left the network.
+ * process.
+ *
+ * @param eui64         Device identifier.
+ * @return sl_status_t  SL_STATUS_OK on successfully completing
+ * post-remove operations, error otherwise.
+ */
+sl_status_t on_device_leave(const zigbee_eui64_t eui64);
 
 /**
  * @brief Event handled when a device fails to interview on the network.
@@ -76,6 +89,21 @@ sl_status_t perform_endpoint_configuration(const zigbee_eui64_t eui64,
                                            zigbee_endpoint_id_t ep_id);
 
 /**
+ * @brief Update device capabilities. This function will update the active
+ * endpoints published to MQTT.
+ *
+ * NOTE: This function is always called by \ref on_device_interviewed.
+ *
+ * @param eui64         Device identifier.
+ * @param endpoint_list Endpoint list.
+ * @return sl_status_t  SL_STATUS_OK on successfully updating capabilities,
+ * error otherwise.
+ */
+sl_status_t update_device_capabilities(
+  const zigbee_eui64_t eui64,
+  const std::vector<zigbee_endpoint_id_t> &endpoint_list);
+
+/**
  * @brief Update endpoint capabilities for a device. This function
  * will update the cluster capabilities and configure any OTA capabilities.
  *
@@ -88,6 +116,15 @@ sl_status_t perform_endpoint_configuration(const zigbee_eui64_t eui64,
  */
 sl_status_t update_endpoint_capabilities(const zigbee_eui64_t eui64,
                                          zigbee_endpoint_id_t ep_id);
+
+/**
+ * @brief Callback handler for ZigPC device discovery updates.
+ *
+ * @param eui64            Device identifier.
+ * @param discovery_status Discovery status type.
+ */
+void zigpc_discovery_update_callback(zigbee_eui64_uint_t eui64,
+                                     zigpc_discovery_status discovery_status);
 
 /**
  * @brief Event handler called when ZigPC is initializing.

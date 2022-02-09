@@ -31,7 +31,6 @@
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "zwave_unid.h"
-#include "zwave_controller_utils.h"
 
 // Interface includes
 #include "attribute_store_defined_attribute_types.h"
@@ -41,8 +40,11 @@
 
 // Test helpers
 #include "zpc_attribute_store_test_helper.h"
+#include "contiki_test_helper.h"
 
 // Mock includes
+#include "zwave_controller_utils_mock.h"
+#include "zwave_controller_callbacks_mock.h"
 #include "attribute_resolver_mock.h"
 #include "zwave_tx_scheme_selector_mock.h"
 #include "zwave_command_handler_mock.h"
@@ -51,6 +53,9 @@
 
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_##type
+
+// Functions pointers
+static zwave_controller_reset_step_t reset_step = NULL;
 
 // Static variables
 static attribute_resolver_function_t association_set           = NULL;
@@ -123,6 +128,17 @@ static sl_status_t zwave_command_handler_register_handler_stub(
   return SL_STATUS_OK;
 }
 
+static sl_status_t
+  controller_reset_step_save(zwave_controller_reset_step_t step_function,
+                             int32_t priority,
+                             int cmock_num_calls)
+{
+  TEST_ASSERT_EQUAL(ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY,
+                    priority);
+  TEST_ASSERT_NOT_NULL(step_function);
+  reset_step = step_function;
+  return SL_STATUS_OK;
+}
 
 static void init_verification()
 {
@@ -135,6 +151,14 @@ static void init_verification()
 
   // TX interceptions
   zwave_tx_send_data_AddCallback(&zwave_tx_send_data_stub);
+
+  // Z-Wave Controller reset step
+  zwave_controller_register_reset_step_AddCallback(controller_reset_step_save);
+  zwave_controller_register_reset_step_ExpectAndReturn(
+    NULL,
+    ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY,
+    SL_STATUS_OK);
+  zwave_controller_register_reset_step_IgnoreArg_step_function();
 
   // Call init, we need to initialize Multi Channel too,
   // it registers the resolution rules and calls us.
@@ -153,8 +177,7 @@ void suiteSetUp()
   datastore_init(":memory:");
   attribute_store_init();
   zwave_unid_set_home_id(home_id);
-  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
-  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
+  contiki_test_helper_init();
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -168,6 +191,8 @@ int suiteTearDown(int num_failures)
 /// Called before each and every test
 void setUp()
 {
+  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
+  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
   zpc_attribute_store_test_helper_create_network();
   init_verification();
   zwave_network_management_assign_return_route_IgnoreAndReturn(SL_STATUS_OK);
@@ -524,4 +549,38 @@ void test_zwave_command_class_association_control()
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame_4,
                                 received_frame,
                                 received_frame_size);
+}
+
+void test_zwave_controller_reset_step()
+{
+  // Add ourselves to an association group content
+  attribute_store_node_t group_id_node
+    = attribute_store_add_node(ATTRIBUTE(GROUP_ID), endpoint_id_node);
+  attribute_store_node_t group_content_node
+    = attribute_store_add_node(ATTRIBUTE(GROUP_CONTENT), group_id_node);
+
+  // Group content : node 2, node 1, node 1:2, node 2:1
+  uint8_t group_content[] = {0x02, 0x01, 0x00, 0x01, 0x02, 0x02, 0x01};
+
+  attribute_store_set_reported(group_content_node,
+                               group_content,
+                               sizeof(group_content));
+
+  // Trigger the reset step:
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, reset_step());
+  attribute_store_log();
+
+  const uint8_t expected_new_group_content[] = {0x02, 0x00, 0x02, 0x01};
+  attribute_store_get_desired(group_content_node,
+                              group_content,
+                              sizeof(expected_new_group_content));
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_new_group_content,
+                                group_content,
+                                sizeof(expected_new_group_content));
+
+  contiki_test_helper_run(1499);
+  // Nothing happensj just yet.
+  zwave_controller_on_reset_step_complete_Expect(
+    ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY);
+  contiki_test_helper_run(2);
 }

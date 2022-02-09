@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -145,14 +145,14 @@ static sl_status_t
     = (const ZW_POWERLEVEL_SET_FRAME *)frame;
 
   if (frame_length < sizeof(ZW_POWERLEVEL_SET_FRAME)) {
-    sl_log_error(LOG_TAG,
-                 "Powerlevel Set frame length (%d bytes) is shorter than the "
-                 "minimum required. Ignoring\n",
-                 sizeof(ZW_POWERLEVEL_SET_FRAME));
+    sl_log_warning(LOG_TAG,
+                   "Powerlevel Set frame length (%d bytes) is shorter than the "
+                   "minimum required. Ignoring\n",
+                   sizeof(ZW_POWERLEVEL_SET_FRAME));
     return SL_STATUS_NOT_SUPPORTED;
   }
   if (powerlevel_set_frame->powerLevel > MINIMUM_POWER) {
-    sl_log_error(LOG_TAG,
+    sl_log_debug(LOG_TAG,
                  "Powerlevel Set command powerlevel value is unknown"
                  "(value = %d). Ignoring.",
                  powerlevel_set_frame->powerLevel);

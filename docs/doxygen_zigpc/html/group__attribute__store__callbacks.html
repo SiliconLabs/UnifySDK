@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -86,7 +86,7 @@ $(document).ready(function(){initNavTree('group__attribute__store__callbacks.htm
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Attribute Store callbacks registration module<div class="ingroups"><a class="el" href="group__attribute__store.html">Attribute Store</a></div></div>  </div>
+<div class="title">Attribute Store callbacks registration module<div class="ingroups"><a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__attribute__store.html">Attribute Store</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -98,15 +98,24 @@ Functions</h2></td></tr>
 <tr class="memitem:gac1375b787f1abf13b8242e06761e9cd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__callbacks.html#gac1375b787f1abf13b8242e06761e9cd7">attribute_store_invoke_callbacks</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> updated_node, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
 <tr class="memdesc:gac1375b787f1abf13b8242e06761e9cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes all 3 types of callback functions.  <a href="group__attribute__store__callbacks.html#gac1375b787f1abf13b8242e06761e9cd7">More...</a><br /></td></tr>
 <tr class="separator:gac1375b787f1abf13b8242e06761e9cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa83f59b955708182f469c4fed7c6cb0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__callbacks.html#gaa83f59b955708182f469c4fed7c6cb0c">attribute_store_invoke_generic_callbacks</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> updated_node, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
-<tr class="memdesc:gaa83f59b955708182f469c4fed7c6cb0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke all generic callback functions.  <a href="group__attribute__store__callbacks.html#gaa83f59b955708182f469c4fed7c6cb0c">More...</a><br /></td></tr>
-<tr class="separator:gaa83f59b955708182f469c4fed7c6cb0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga794164952e31dc1a2db1ada979bf4244"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__callbacks.html#ga794164952e31dc1a2db1ada979bf4244">attribute_store_invoke_generic_callbacks</a> (<a class="el" href="group__attribute__store__api.html#gaca204b15b76862da3bd0dd6753c18415">attribute_changed_event_t</a> *change_event)</td></tr>
+<tr class="memdesc:ga794164952e31dc1a2db1ada979bf4244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke all generic callback functions.  <a href="group__attribute__store__callbacks.html#ga794164952e31dc1a2db1ada979bf4244">More...</a><br /></td></tr>
+<tr class="separator:ga794164952e31dc1a2db1ada979bf4244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab008e018c68d211669fe3ceb3d7f27e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__callbacks.html#gab008e018c68d211669fe3ceb3d7f27e8">attribute_store_invoke_touch_callbacks</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> touched_node)</td></tr>
+<tr class="memdesc:gab008e018c68d211669fe3ceb3d7f27e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes all types of touch callbacks.  <a href="group__attribute__store__callbacks.html#gab008e018c68d211669fe3ceb3d7f27e8">More...</a><br /></td></tr>
+<tr class="separator:gab008e018c68d211669fe3ceb3d7f27e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaded2a1281e4cd10ac1df3786d0e34fe3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__callbacks.html#gaded2a1281e4cd10ac1df3786d0e34fe3">attribute_store_invoke_touch_generic_callbacks</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> touched_node)</td></tr>
+<tr class="memdesc:gaded2a1281e4cd10ac1df3786d0e34fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes all generic touch callbacks.  <a href="group__attribute__store__callbacks.html#gaded2a1281e4cd10ac1df3786d0e34fe3">More...</a><br /></td></tr>
+<tr class="separator:gaded2a1281e4cd10ac1df3786d0e34fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga60788c0e67f506378942e9705608adc8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__callbacks.html#ga60788c0e67f506378942e9705608adc8">attribute_store_invoke_type_callbacks</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> updated_node, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
 <tr class="memdesc:ga60788c0e67f506378942e9705608adc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke all callback functions associated to an attribute id.  <a href="group__attribute__store__callbacks.html#ga60788c0e67f506378942e9705608adc8">More...</a><br /></td></tr>
 <tr class="separator:ga60788c0e67f506378942e9705608adc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8c529e06c9d093636c19b2312d708a36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__callbacks.html#ga8c529e06c9d093636c19b2312d708a36">attribute_store_invoke_value_callbacks</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> updated_node, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
 <tr class="memdesc:ga8c529e06c9d093636c19b2312d708a36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke all callback functions associated to an attribute id / value state combination.  <a href="group__attribute__store__callbacks.html#ga8c529e06c9d093636c19b2312d708a36">More...</a><br /></td></tr>
 <tr class="separator:ga8c529e06c9d093636c19b2312d708a36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0c29154450a2a5d8146c59063e92c920"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__callbacks.html#ga0c29154450a2a5d8146c59063e92c920">attribute_store_callbacks_init</a> (void)</td></tr>
+<tr class="memdesc:ga0c29154450a2a5d8146c59063e92c920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset resources allocated for the attribute_store_callback module.  <a href="group__attribute__store__callbacks.html#ga0c29154450a2a5d8146c59063e92c920">More...</a><br /></td></tr>
+<tr class="separator:ga0c29154450a2a5d8146c59063e92c920"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1fab6588a92e807e06c92619abedf0e3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__callbacks.html#ga1fab6588a92e807e06c92619abedf0e3">attribute_store_callbacks_teardown</a> (void)</td></tr>
 <tr class="memdesc:ga1fab6588a92e807e06c92619abedf0e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees resources allocated for the attribute_store_callback module.  <a href="group__attribute__store__callbacks.html#ga1fab6588a92e807e06c92619abedf0e3">More...</a><br /></td></tr>
 <tr class="separator:ga1fab6588a92e807e06c92619abedf0e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -114,6 +123,27 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Module handling the registration and invokation of callbacks functions for other components. </p>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga0c29154450a2a5d8146c59063e92c920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0c29154450a2a5d8146c59063e92c920">&#9670;&nbsp;</a></span>attribute_store_callbacks_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_callbacks_init </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset resources allocated for the attribute_store_callback module. </p>
+<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK as it is always successful. </dd></dl>
+
+</div>
+</div>
 <a id="ga1fab6588a92e807e06c92619abedf0e3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga1fab6588a92e807e06c92619abedf0e3">&#9670;&nbsp;</a></span>attribute_store_callbacks_teardown()</h2>
 
@@ -186,8 +216,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gaa83f59b955708182f469c4fed7c6cb0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa83f59b955708182f469c4fed7c6cb0c">&#9670;&nbsp;</a></span>attribute_store_invoke_generic_callbacks()</h2>
+<a id="ga794164952e31dc1a2db1ada979bf4244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga794164952e31dc1a2db1ada979bf4244">&#9670;&nbsp;</a></span>attribute_store_invoke_generic_callbacks()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,19 +225,9 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void attribute_store_invoke_generic_callbacks </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
-          <td class="paramname"><em>updated_node</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#gaca204b15b76862da3bd0dd6753c18415">attribute_changed_event_t</a> *&#160;</td>
+          <td class="paramname"><em>change_event</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a>&#160;</td>
-          <td class="paramname"><em>change</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -215,8 +235,59 @@ Functions</h2></td></tr>
 <p>Invoke all generic callback functions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">updated_node</td><td>The node handle of the node for which something has changed </td></tr>
-    <tr><td class="paramname">change</td><td>The type of change that the node underwent </td></tr>
+    <tr><td class="paramname">change_event</td><td>pointer to attribute meta data which describes what changed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gab008e018c68d211669fe3ceb3d7f27e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab008e018c68d211669fe3ceb3d7f27e8">&#9670;&nbsp;</a></span>attribute_store_invoke_touch_callbacks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void attribute_store_invoke_touch_callbacks </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>touched_node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Invokes all types of touch callbacks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">touched_node</td><td>The node handle of the node that was touched. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gaded2a1281e4cd10ac1df3786d0e34fe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaded2a1281e4cd10ac1df3786d0e34fe3">&#9670;&nbsp;</a></span>attribute_store_invoke_touch_generic_callbacks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void attribute_store_invoke_touch_generic_callbacks </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>touched_node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Invokes all generic touch callbacks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">touched_node</td><td>The node handle of the node that was touched. </td></tr>
   </table>
   </dd>
 </dl>
@@ -323,7 +394,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:21 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

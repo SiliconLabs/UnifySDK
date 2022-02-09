@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+Binding
+This is a custom defined cluster allowing to control Bindings
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD03" revision="1" name="Binding">
+  <classification role="utility" picsCode="UBINDING" />
+
+  <type:type short="BindingObject" name="BindingObject" id="ff">
+    <restriction>
+      <type:sequence>
+        <field name="ClusterName" type="string" />
+        <field name="DestinationUnid" type="string" />
+        <field name="DestinationEp" type="uint8" />
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+
+  <server>
+    <attributes>
+      <attribute id="0000" name="BindingTableFull" type="bool" max="1" required="true" default="0"/>
+      <attribute id="0001" name="BindableClusterList" type="string" array="true" required="true"/>
+      <attribute id="0002" name="BindingTable" type="BindingObject" array="true" required="true" default="0"/>
+    </attributes>
+
+    <commands>
+      <command id="01" name="Bind" required="true">
+        <fields>
+          <field name="ClusterName" type="string" />
+          <field name="DestinationUnid" type="string" />
+          <field name="DestinationEp" type="uint8" />
+        </fields>
+      </command>
+
+      <command id="02" name="Unbind" required="true">
+        <fields>
+          <field name="ClusterName" type="string" />
+          <field name="DestinationUnid" type="string" />
+          <field name="DestinationEp" type="uint8" />
+        </fields>
+      </command>
+
+      <command id="03" name="BindToProtocolController" required="true">
+        <fields>
+          <field name="ClusterName" type="string" />
+        </fields>
+      </command>
+
+      <command id="04" name="UnbindFromProtocolController" required="true">
+        <fields>
+          <field name="ClusterName" type="string" />
+        </fields>
+      </command>
+
+    </commands>
+  </server>
+</zcl:cluster>

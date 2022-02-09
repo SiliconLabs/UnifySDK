@@ -1,6 +1,8 @@
 var zwapi__protocol__basis_8c =
 [
+    [ "zwave_rf_region_cache", "structzwave__rf__region__cache.html", "structzwave__rf__region__cache" ],
     [ "LOG_TAG", "zwapi__protocol__basis_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
+    [ "zwave_rf_region_cache_t", "zwapi__protocol__basis_8c.html#a532366d8d5d0cf62e636c2f2c84f8062", null ],
     [ "zwapi_disable_watchdog", "group__ZWAPI__BASIS.html#gaedea8c5aed6e5c32a7a24a39ed4bec3b", null ],
     [ "zwapi_enable_auto_program_mode", "group__ZWAPI__BASIS.html#ga4d7139c89116c14ead2fdbafde825ea5", null ],
     [ "zwapi_enable_watchdog", "group__ZWAPI__BASIS.html#ga130c04a88c85201bb79b98d0e98dd123", null ],
@@ -34,5 +36,6 @@ var zwapi__protocol__basis_8c =
     [ "zwapi_soft_reset", "group__ZWAPI__BASIS.html#ga45a7a3a57b78698e53c58625f36c909c", null ],
     [ "zwapi_start_watchdog", "group__ZWAPI__BASIS.html#ga1a62f0dbafe12ce1292e9b629f958bd2", null ],
     [ "zwapi_supports_long_range", "group__ZWAPI__BASIS.html#ga17ea6a36c50659bf019a0a7dea77fa9d", null ],
-    [ "node_id_basetype_setting", "zwapi__protocol__basis_8c.html#a33928de5992841d4289c5ad625d48363", null ]
+    [ "node_id_basetype_setting", "zwapi__protocol__basis_8c.html#a33928de5992841d4289c5ad625d48363", null ],
+    [ "rf_region_cache", "zwapi__protocol__basis_8c.html#aca5948bbc8d91af5e8a9c2a5aac8fb75", null ]
 ];

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -16,7 +16,7 @@
 
 /**
  * @defgroup network_monitor Network Monitor
- * @ingroup components
+ * @ingroup zpc_components
  * @brief The Network State Monitor
  *
  * The Network Monitor acts as an interface between the \ref attribute_store and
@@ -89,7 +89,7 @@
  */
 
 #include "process.h"
-#include "sl_enum.h"
+
 /**
  * @brief Name the of @ref contiki process for the Network Monitor.
  *
@@ -101,7 +101,15 @@ PROCESS_NAME(network_monitor_process);
 extern "C" {
 #endif
 
+/**
+ * @brief Initializes the Network Monitor
+ */
 void network_state_monitor_init();
+
+/**
+ * @brief Retuns the cached network node list.
+ */
+uint8_t *network_monitor_get_cached_current_node_list();
 
 #ifdef __cplusplus
 }

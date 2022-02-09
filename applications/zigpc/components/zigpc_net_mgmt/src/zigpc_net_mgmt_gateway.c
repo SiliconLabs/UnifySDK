@@ -17,6 +17,8 @@
 #include <process.h>
 #include <sl_log.h>
 #include <sl_status.h>
+
+#include <zigpc_discovery.h>
 #include "zigpc_net_mgmt_fsm.h"
 #include "zigpc_net_mgmt_gateway.h"
 #include "zigpc_net_mgmt_process.h"
@@ -31,16 +33,17 @@ static const char LOG_TAG[] = "zigpc_net_mgmt_gateway";
 void zigpc_net_mgmt_callback_on_network_initialized(void *event_data)
 {
   zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-  zigpc_net_mgmt_fsm_init_complete_t *init_data
+  zigpc_gateway_on_network_init_t *init_data
     = &process_data_fsm.fsm_data.on_net_init_complete;
 
-  const struct zigpc_gateway_on_network_init *net_init
-    = (struct zigpc_gateway_on_network_init *)event_data;
+  const zigpc_gateway_on_network_init_t *net_init
+    = (zigpc_gateway_on_network_init_t *)event_data;
 
   if (zigpc_net_mgmt_fsm_get_state() == ZIGPC_NET_MGMT_FSM_STATE_INIT) {
     memcpy(init_data->zigpc_eui64,
            net_init->zigpc_eui64,
            sizeof(zigbee_eui64_t));
+    init_data->zigpc_endpoint_id = net_init->zigpc_endpoint_id;
     memcpy(init_data->zigpc_ext_panid,
            net_init->zigpc_ext_panid,
            sizeof(zigbee_eui64_t));
@@ -97,56 +100,18 @@ void zigpc_net_mgmt_callback_on_node_add_complete(void *event_data)
   }
 }
 
-void zigpc_net_mgmt_callback_on_node_discovered(void *event_data)
+void zigpc_net_mgmt_on_discovery_status(
+  zigbee_eui64_uint_t eui64, zigpc_discovery_status_t discovery_status)
 {
-  zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-  zigpc_gateway_on_node_discovered_t *node_discovered_data
-    = &process_data_fsm.fsm_data.on_node_discovered;
+  zigpc_net_mgmt_process_data_fsm_t process_data_fsm = {};
 
-  const zigpc_gateway_on_node_discovered_t *ep_disc
-    = (zigpc_gateway_on_node_discovered_t *)event_data;
+  zigpc_net_mgmt_fsm_interview_status_t *on_node_interview_status
+    = &process_data_fsm.fsm_data.on_node_interview_status;
 
-  memcpy(node_discovered_data->eui64, ep_disc->eui64, sizeof(zigbee_eui64_t));
-  node_discovered_data->endpoint_count = ep_disc->endpoint_count;
+  zigbee_uint_to_eui64(eui64, on_node_interview_status->eui64);
+  on_node_interview_status->discovery_status = discovery_status;
 
-  process_data_fsm.fsm_event = ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEWED;
-
-  zigpc_net_mgmt_process_send_event(ZIGPC_NET_MGMT_EVENT_FSM,
-                                    (void *)&process_data_fsm,
-                                    sizeof(zigpc_net_mgmt_process_data_fsm_t));
-}
-
-void zigpc_net_mgmt_callback_on_node_endpoint_discovered(void *event_data)
-{
-  zigpc_net_mgmt_process_data_fsm_t process_data_fsm;
-  zigpc_gateway_on_node_endpoint_discovered_t *ep_discovered_data
-    = &process_data_fsm.fsm_data.on_node_endpoint_discovered;
-
-  const zigpc_gateway_on_node_endpoint_discovered_t *ep_disc
-    = (zigpc_gateway_on_node_endpoint_discovered_t *)event_data;
-
-  memcpy(ep_discovered_data->eui64, ep_disc->eui64, sizeof(zigbee_eui64_t));
-  ep_discovered_data->endpoint.endpoint_id   = ep_disc->endpoint.endpoint_id;
-  ep_discovered_data->endpoint.cluster_count = ep_disc->endpoint.cluster_count;
-
-  if (ep_discovered_data->endpoint.cluster_count > 0) {
-    memcpy(ep_discovered_data->endpoint.cluster_list,
-           ep_disc->endpoint.cluster_list,
-           sizeof(zcl_cluster_type_t)
-             * ep_discovered_data->endpoint.cluster_count);
-  }
-
-  ep_discovered_data->endpoint.client_cluster_count
-    = ep_disc->endpoint.client_cluster_count;
-  if (ep_discovered_data->endpoint.client_cluster_count > 0) {
-    memcpy(ep_discovered_data->endpoint.client_cluster_list,
-           ep_disc->endpoint.client_cluster_list,
-           sizeof(zcl_cluster_type_t)
-             * ep_discovered_data->endpoint.client_cluster_count);
-  }
-
-  process_data_fsm.fsm_event
-    = ZIGPC_NET_MGMT_FSM_EVENT_NODE_ENDPOINT_INTERVIEWED;
+  process_data_fsm.fsm_event = ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_STATUS;
 
   zigpc_net_mgmt_process_send_event(ZIGPC_NET_MGMT_EVENT_FSM,
                                     (void *)&process_data_fsm,
@@ -197,15 +162,7 @@ sl_status_t zigpc_net_mgmt_gateway_init_observer(void)
   }
 
   if (result == SL_STATUS_OK) {
-    result = zigpc_gateway_register_observer(
-      ZIGPC_GATEWAY_NOTIFY_NODE_DISCOVERED,
-      zigpc_net_mgmt_callback_on_node_discovered);
-  }
-
-  if (result == SL_STATUS_OK) {
-    result = zigpc_gateway_register_observer(
-      ZIGPC_GATEWAY_NOTIFY_NODE_ENDPOINT_DISCOVERED,
-      zigpc_net_mgmt_callback_on_node_endpoint_discovered);
+    result = zigpc_discovery_add_listener(zigpc_net_mgmt_on_discovery_status);
   }
 
   if (result == SL_STATUS_OK) {

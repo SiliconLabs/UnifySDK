@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -20,7 +20,7 @@
 
 /**
  * @defgroup command_classes Z-Wave Command Classes
- * @ingroup components
+ * @ingroup zpc_components
  * @brief List of supported and controlled Z-Wave Command Classes
  *
  */

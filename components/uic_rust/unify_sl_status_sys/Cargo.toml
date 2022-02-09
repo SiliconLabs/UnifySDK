@@ -1,0 +1,8 @@
+[package]
+name = "unify_sl_status_sys"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+regex = "1.5.*"
+convert_case = "0.5.*"

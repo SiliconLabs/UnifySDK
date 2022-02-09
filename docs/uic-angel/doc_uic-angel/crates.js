@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["uic_angel"];

@@ -77,6 +77,13 @@ void on_ota_zigbee_upgrade_start(void *data);
 void on_ota_zigbee_upgrade_complete(void *data);
 
 /**
+ * @brief on_remove_unsubscribe_ota_listeners
+ * Callback for unsubscribing ota image listeners
+ * on a device remove event
+ */
+void on_remove_unsubscribe_ota_listeners( void *data);
+
+/**
  * @brief zigpc_ota_zigbee_image_available 
  * Callback for a new ota image available
  *

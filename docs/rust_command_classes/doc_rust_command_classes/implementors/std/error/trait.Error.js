@@ -1,3 +1,0 @@
-(function() {var implementors = {};
-implementors["uic_config_rs"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.56.1/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"enum\" href=\"uic_config_rs/enum.config_status_t.html\" title=\"enum uic_config_rs::config_status_t\">config_status_t</a>","synthetic":false,"types":["uic_config_rs::uic_config_bindings::config_status_t"]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

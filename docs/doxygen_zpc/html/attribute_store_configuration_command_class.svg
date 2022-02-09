@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="926px" preserveAspectRatio="none" style="width:1183px;height:926px;background:#FFFFFF;" version="1.1" viewBox="0 0 1183 926" width="1183px" zoomAndPan="magnify"><defs><filter height="300%" id="fjqriio1ohs7e" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#DDDDDD" height="26.2969" rx="5" ry="5" style="stroke:#000000;stroke-width:1.0;" width="513" x="328" y="8"/><text fill="#FEFEFE" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="334" y="25.9951">ATTRIBUTE(type)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="379" x="456" y="25.9951">: ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_type</text><!--MD5=[ea3d5de2a0d35296bc751d5a1b771698]
+cluster Attribute Store--><path d="M6,59.2969 C6,49.2969 591,49.2969 591,49.2969 C591,49.2969 1176,49.2969 1176,59.2969 L1176,909.2969 C1176,919.2969 591,919.2969 591,919.2969 C591,919.2969 6,919.2969 6,909.2969 L6,59.2969 " fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" style="stroke:#000000;stroke-width:1.5;"/><path d="M6,59.2969 C6,69.2969 591,69.2969 591,69.2969 C591,69.2969 1176,69.2969 1176,59.2969 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="118" x="532" y="84.292">Attribute Store</text><!--MD5=[f1b02421b27ff65f8bf09530e1c651eb]
+cluster For each Parameter--><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="520" style="stroke:#000000;stroke-width:1.5;" width="1154" x="14" y="391.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="156" x="513" y="406.292">For each Parameter</text><rect fill="#F2FFE6" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="201" x="561.5" y="91.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="639.5" y="104.4355">NodeID</text><line style="stroke:#000000;stroke-width:1.5;" x1="562.5" x2="761.5" y1="109.2656" y2="109.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="189" x="567.5" y="122.5479">Attribute Type = ATTRIBUTE_NODE_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="567.5" y="134.1885">value = Desired: [], Reported: [03]</text><rect fill="#E6FFF7" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="224" x="550" y="200.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="604.5" y="213.4355">Endpoint Attribute</text><line style="stroke:#000000;stroke-width:1.5;" x1="551" x2="773" y1="218.2656" y2="218.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="212" x="556" y="231.5479">Attribute Type = ATTRIBUTE_ENDPOINT_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="556" y="243.1885">value = Desired: [] - Reported: [04]</text><rect fill="#FEFEFE" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="204" x="94" y="309.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="172.5" y="322.4355">Version</text><line style="stroke:#000000;stroke-width:1.5;" x1="95" x2="297" y1="327.2656" y2="327.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="192" x="100" y="340.5479">Attribute Type = ATTRIBUTE(VERSION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="100" y="352.1885">value = Desired: [] - Reported: [2]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="336" x="333" y="309.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="184" x="409" y="322.4355">Next Supported Parameter ID</text><line style="stroke:#000000;stroke-width:1.5;" x1="334" x2="668" y1="327.2656" y2="327.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="324" x="339" y="340.5479">Attribute Type = ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="339" y="352.1885">value = Desired: [] - Reported: [5]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="239" x="703.5" y="309.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="783" y="322.4355">Bulk Support</text><line style="stroke:#000000;stroke-width:1.5;" x1="704.5" x2="941.5" y1="327.2656" y2="327.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="227" x="709.5" y="340.5479">Attribute Type = ATTRIBUTE(BULK_SUPPORT)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="709.5" y="352.1885">value = Desired: [] - Reported: [5]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="236" x="463" y="418.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="82" x="540" y="431.4355">Parameter ID</text><line style="stroke:#000000;stroke-width:1.5;" x1="464" x2="698" y1="436.2656" y2="436.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="224" x="469" y="449.5479">Attribute Type = ATTRIBUTE(PARAMETER_ID)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="469" y="461.1885">value = Desired: [] - Reported: [1]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="248" x="59" y="527.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="171" y="540.4355">Size</text><line style="stroke:#000000;stroke-width:1.5;" x1="60" x2="306" y1="545.2656" y2="545.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="236" x="65" y="558.5479">Attribute Type = ATTRIBUTE(PARAMETER_SIZE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="65" y="570.1885">value = Desired: [] - Reported: [2]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="267" x="855.5" y="527.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="44" x="967" y="540.4355">Format</text><line style="stroke:#000000;stroke-width:1.5;" x1="856.5" x2="1121.5" y1="545.2656" y2="545.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="255" x="861.5" y="558.5479">Attribute Type = ATTRIBUTE(PARAMETER_FORMAT)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="861.5" y="570.1885">value = Desired: [] - Reported: [2]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="256" x="453" y="527.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="36" x="563" y="540.4355">Name</text><line style="stroke:#000000;stroke-width:1.5;" x1="454" x2="708" y1="545.2656" y2="545.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="244" x="459" y="558.5479">Attribute Type = ATTRIBUTE(PARAMETER_NAME)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="232" x="459" y="570.1885">value = Desired: [] - Reported: ["Parameter 1"]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="295" x="22.5" y="636.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="23" x="158.5" y="649.4355">Info</text><line style="stroke:#000000;stroke-width:1.5;" x1="23.5" x2="316.5" y1="654.2656" y2="654.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="238" x="28.5" y="667.5479">Attribute Type = ATTRIBUTE(PARAMETER_INFO)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="283" x="28.5" y="679.1885">value = Desired: [] - Reported: ["Toggles the relay mode"]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="260" x="853" y="636.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="35" x="965.5" y="649.4355">Value</text><line style="stroke:#000000;stroke-width:1.5;" x1="854" x2="1112" y1="654.2656" y2="654.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="248" x="859" y="667.5479">Attribute Type = ATTRIBUTE(PARAMETER_VALUE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="184" x="859" y="679.1885">value = Desired: [12] - Reported: [23]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="285" x="427.5" y="636.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="60" x="540" y="649.4355">Min Value</text><line style="stroke:#000000;stroke-width:1.5;" x1="428.5" x2="711.5" y1="654.2656" y2="654.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="273" x="433.5" y="667.5479">Attribute Type = ATTRIBUTE(PARAMETER_MIN_VALUE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="433.5" y="679.1885">value = Desired: [] - Reported: [0]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="287" x="67.5" y="745.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="63" x="179.5" y="758.4355">Max Value</text><line style="stroke:#000000;stroke-width:1.5;" x1="68.5" x2="353.5" y1="763.2656" y2="763.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="275" x="73.5" y="776.5479">Attribute Type = ATTRIBUTE(PARAMETER_MAX_VALUE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="178" x="73.5" y="788.1885">value = Desired: [] - Reported: [100]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="312" x="827" y="745.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="84" x="941" y="758.4355">Default Value</text><line style="stroke:#000000;stroke-width:1.5;" x1="828" x2="1138" y1="763.2656" y2="763.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="300" x="833" y="776.5479">Attribute Type = ATTRIBUTE(PARAMETER_DEFAULT_VALUE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="833" y="788.1885">value = Desired: [] - Reported: [1]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="285" x="446.5" y="745.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="61" x="558.5" y="758.4355">Advanced</text><line style="stroke:#000000;stroke-width:1.5;" x1="447.5" x2="730.5" y1="763.2656" y2="763.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="273" x="452.5" y="776.5479">Attribute Type = ATTRIBUTE(PARAMETER_ADVANCED)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="452.5" y="788.1885">value = Desired: [] - Reported: [1]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="288" x="157" y="854.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62" x="270" y="867.4355">Read-Only</text><line style="stroke:#000000;stroke-width:1.5;" x1="158" x2="444" y1="872.2656" y2="872.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="276" x="163" y="885.5479">Attribute Type = ATTRIBUTE(PARAMETER_READ_ONLY)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="163" y="897.1885">value = Desired: [] - Reported: [0]</text><rect fill="#FFFFFF" filter="url(#fjqriio1ohs7e)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="351" x="708.5" y="854.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="123" x="822.5" y="867.4355">Altering capabilities</text><line style="stroke:#000000;stroke-width:1.5;" x1="709.5" x2="1058.5" y1="872.2656" y2="872.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="339" x="714.5" y="885.5479">Attribute Type = ATTRIBUTE(PARAMETER_ALTERING_CAPABILITIES)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="714.5" y="897.1885">value = Desired: [] - Reported: [0]</text><!--MD5=[95477c314ce472250aabd32546a8a81f]
+reverse link node to endpoint--><path codeLine="1310" d="M662,153.9265 C662,169.2695 662,186.5206 662,200.161 " fill="none" id="node-backto-endpoint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="662,140.5307,658,146.5307,662,152.5307,666,146.5307,662,140.5307" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c4a4e185f2beba9fb9ec0dd52638d41f]
+reverse link endpoint to version--><path codeLine="1311" d="M544.1898,252.3534 C468.3167,270.1005 370.6697,292.9407 298.1005,309.915 " fill="none" id="endpoint-backto-version" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="557.1301,249.3266,550.3768,246.7983,545.4455,252.0597,552.1988,254.588,557.1301,249.3266" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[96793b32eeab749494e31151b5eec6be]
+reverse link endpoint to next_parameter_id--><path codeLine="1312" d="M614.5312,256.9342 C589.8717,273.6291 560.2092,293.7112 537.3888,309.161 " fill="none" id="endpoint-backto-next_parameter_id" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="625.4666,249.5307,618.2557,249.5822,615.5298,256.2582,622.7407,256.2067,625.4666,249.5307" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[968b32b0af99535f4d8fe2715c81ce82]
+reverse link endpoint to bulk_support--><path codeLine="1313" d="M709.4688,256.9342 C734.1283,273.6291 763.7908,293.7112 786.6112,309.161 " fill="none" id="endpoint-backto-bulk_support" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="698.5334,249.5307,701.2593,256.2067,708.4702,256.2582,705.7443,249.5822,698.5334,249.5307" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2ee9020c08e9d00db3b355228af3b603]
+reverse link endpoint to parameter_id--><path codeLine="1314" d="M787.2598,238.2575 C891.8078,254.6049 1015.4813,289.0835 960,358.2969 C927.6387,398.6679 797.8233,421.0056 699.0575,432.4213 " fill="none" id="endpoint-backto-parameter_id" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="774.2922,236.3054,779.6299,241.154,786.1585,238.0918,780.8208,233.2432,774.2922,236.3054" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[42cf65cd364f084011a906fb80468703]
+link next_parameter_id to parameter_id--><!--MD5=[96f8e689ae89053d729b954cb2466158]
+reverse link parameter_id to parameter_size--><path codeLine="1318" d="M478.279,470.929 C414.5826,488.3735 333.5477,510.5665 272.4885,527.2887 " fill="none" id="parameter_id-backto-parameter_size" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="491.1848,467.3945,484.3413,465.1215,479.611,470.5643,486.4545,472.8373,491.1848,467.3945" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d64b3ecf38c865076a5af7dac7b033b8]
+reverse link parameter_id to parameter_format--><path codeLine="1319" d="M685.6375,470.7515 C750.9954,488.2123 834.3574,510.4831 897.1503,527.2586 " fill="none" id="parameter_id-backto-parameter_format" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="672.8174,467.3266,677.5816,472.7397,684.4108,470.4239,679.6465,465.0108,672.8174,467.3266" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[cbcaf7d690dfc9df43ee2422446c98f5]
+reverse link parameter_id to parameter_name--><path codeLine="1320" d="M581,480.9265 C581,496.2695 581,513.5206 581,527.161 " fill="none" id="parameter_id-backto-parameter_name" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="581,467.5307,577,473.5307,581,479.5307,585,473.5307,581,467.5307" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[721b26374fc598eb652b83c441daeafa]
+link parameter_size to parameter_info--><!--MD5=[5a17129cf975b3b227af0ab6b0cdc03e]
+link parameter_format to parameter_value--><!--MD5=[6ca91415e74fad095ba304632509ed3a]
+link parameter_name to parameter_min_value--><!--MD5=[f373b39556c3fdd52f8db82356da54b3]
+reverse link parameter_id to parameter_info--><path codeLine="1326" d="M449.9752,454.4716 C299.0276,469.2729 68.2683,496.5896 42,527.2969 C8.0822,566.9463 68.7988,610.0504 117.6749,636.2475 " fill="none" id="parameter_id-backto-parameter_info" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="462.9632,453.2096,456.6044,449.8087,451.0195,454.3703,457.3782,457.7712,462.9632,453.2096" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d27e753e796001df686a5cc377f23bf9]
+reverse link parameter_id to parameter_value--><path codeLine="1327" d="M663.362,471.8852 C712.3642,489.9692 769.1264,512.5117 791,527.2969 C816.0008,544.1959 814.2898,557.6303 838,576.2969 C867.5319,599.5468 904.1198,620.8215 933.1538,636.2081 " fill="none" id="parameter_id-backto-parameter_value" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="651.097,467.391,655.3545,473.2111,662.3644,471.5196,658.1069,465.6995,651.097,467.391" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[286b5be3a5ed2c13f5f8d8d340db9212]
+reverse link parameter_id to parameter_min_value--><path codeLine="1328" d="M496.1093,473.2698 C472.4476,486.1357 449.536,503.7419 436,527.2969 C425.1493,546.179 425.4811,557.228 436,576.2969 C450.8785,603.2689 478.3867,622.8142 504.6258,636.2686 " fill="none" id="parameter_id-backto-parameter_min_value" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="507.7476,467.3293,500.585,466.4944,497.0595,472.7849,504.2221,473.6198,507.7476,467.3293" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f0aa1eaae482d8d211ba22767716c7af]
+link parameter_info to parameter_max_value--><!--MD5=[e40626f7f8c5227f57cf06ef78d3ba40]
+link parameter_value to parameter_default_value--><!--MD5=[e86d3038e5e028d054b38ad02cf88f4b]
+link parameter_min_value to parameter_advanced--><!--MD5=[6e55603c667d4a397b03c34c497a96b7]
+reverse link parameter_id to parameter_max_value--><path codeLine="1334" d="M452.8559,472.0179 C422.2994,484.5035 392.387,502.2191 371,527.2969 C324.2653,582.0968 375.5671,625.7866 335,685.2969 C317.4651,711.0198 289.2812,731.1405 264.2109,745.2841 " fill="none" id="parameter_id-backto-parameter_max_value" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="465.04,467.3172,458.0024,465.745,453.8444,471.6366,460.882,473.2088,465.04,467.3172" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[150b790bf4a965f78ce7c2b42a72c5bf]
+reverse link parameter_id to parameter_default_value--><path codeLine="1335" d="M712.0705,453.6843 C868.4563,468.0275 1112.4125,495.2258 1140,527.2969 C1157.8628,548.0629 1157.0788,644.3582 1131,685.2969 C1113.5934,712.6219 1084,732.0311 1055.8299,745.2968 " fill="none" id="parameter_id-backto-parameter_default_value" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="699.0957,452.5053,704.7091,457.0319,711.0465,453.5913,705.4331,449.0647,699.0957,452.5053" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[1cbbfefe1b82f970a38cf685bff961d4]
+reverse link parameter_id to parameter_advanced--><path codeLine="1336" d="M666.0688,473.3776 C689.874,486.2487 713.0347,503.8307 727,527.2969 C751.7844,568.9427 729.3333,587.8387 730,636.2969 C730.2996,658.0726 740.7348,666.3487 730,685.2969 C714.5963,712.4863 686.5731,731.8758 659.5441,745.1636 " fill="none" id="parameter_id-backto-parameter_advanced" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="654.3684,467.4323,657.9055,473.7163,665.0665,472.8682,661.5295,466.5842,654.3684,467.4323" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[cf44dfd00116f3be3a14a538914bb5fa]
+link parameter_max_value to parameter_read_only--><!--MD5=[3cdbe8ce5328b8a99d4ac4ebbd02882c]
+link parameter_default_value to parameter_altering_capabilities--><!--MD5=[9c58669c13bcbc215ee83e1603ecc35d]
+reverse link parameter_id to parameter_read_only--><path codeLine="1341" d="M488.9937,472.9053 C462.702,485.7525 436.4726,503.4397 419,527.2969 C347.8061,624.5057 422.9425,685.1045 372,794.2969 C361.4685,816.8707 343.324,838.3083 328.0143,853.9424 " fill="none" id="parameter_id-backto-parameter_read_only" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="501.0468,467.3384,493.9225,466.2228,490.1527,472.3701,497.277,473.4856,501.0468,467.3384" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2c0e37603fbf1e5d1a756dd0c0842e04]
+reverse link parameter_id to parameter_altering_capabilities--><path codeLine="1342" d="M668.9675,473.0841 C695.4683,486.0673 722.4176,503.7887 741,527.2969 C817.0054,623.4499 752.7429,685.9278 810,794.2969 C821.9337,816.8836 841.0314,838.481 856.8362,854.1872 " fill="none" id="parameter_id-backto-parameter_altering_capabilities" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="656.8547,467.4485,660.6073,473.6062,667.7347,472.5106,663.9821,466.3529,656.8547,467.4485" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0c8353795af821a3f378911f638fa88e]
+@startuml attribute_store_configuration_command_class.svg
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Next Supported Parameter ID" as next_parameter_id #FFFFFF
+  next_parameter_id : Attribute Type = ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID)
+  next_parameter_id : value = Desired: [] - Reported: [5]
+
+  object "Bulk Support" as bulk_support #FFFFFF
+  bulk_support : Attribute Type = ATTRIBUTE(BULK_SUPPORT)
+  bulk_support : value = Desired: [] - Reported: [5]
+
+  package "For each Parameter" <<Rectangle>> {
+
+    object "Parameter ID" as parameter_id #FFFFFF
+    parameter_id : Attribute Type = ATTRIBUTE(PARAMETER_ID)
+    parameter_id : value = Desired: [] - Reported: [1]
+
+    object "Size" as parameter_size #FFFFFF
+    parameter_size : Attribute Type = ATTRIBUTE(PARAMETER_SIZE)
+    parameter_size : value = Desired: [] - Reported: [2]
+
+    object "Format" as parameter_format #FFFFFF
+    parameter_format : Attribute Type = ATTRIBUTE(PARAMETER_FORMAT)
+    parameter_format : value = Desired: [] - Reported: [2]
+
+    object "Name" as parameter_name #FFFFFF
+    parameter_name : Attribute Type = ATTRIBUTE(PARAMETER_NAME)
+    parameter_name : value = Desired: [] - Reported: ["Parameter 1"]
+
+    object "Info" as parameter_info #FFFFFF
+    parameter_info : Attribute Type = ATTRIBUTE(PARAMETER_INFO)
+    parameter_info : value = Desired: [] - Reported: ["Toggles the relay mode"]
+
+    object "Value" as parameter_value #FFFFFF
+    parameter_value : Attribute Type = ATTRIBUTE(PARAMETER_VALUE)
+    parameter_value : value = Desired: [12] - Reported: [23]
+
+    object "Min Value" as parameter_min_value #FFFFFF
+    parameter_min_value : Attribute Type = ATTRIBUTE(PARAMETER_MIN_VALUE)
+    parameter_min_value : value = Desired: [] - Reported: [0]
+
+    object "Max Value" as parameter_max_value #FFFFFF
+    parameter_max_value : Attribute Type = ATTRIBUTE(PARAMETER_MAX_VALUE)
+    parameter_max_value : value = Desired: [] - Reported: [100]
+
+    object "Default Value" as parameter_default_value #FFFFFF
+    parameter_default_value : Attribute Type = ATTRIBUTE(PARAMETER_DEFAULT_VALUE)
+    parameter_default_value : value = Desired: [] - Reported: [1]
+
+    object "Advanced" as parameter_advanced #FFFFFF
+    parameter_advanced : Attribute Type = ATTRIBUTE(PARAMETER_ADVANCED)
+    parameter_advanced : value = Desired: [] - Reported: [1]
+
+    object "Read-Only" as parameter_read_only #FFFFFF
+    parameter_read_only : Attribute Type = ATTRIBUTE(PARAMETER_READ_ONLY)
+    parameter_read_only : value = Desired: [] - Reported: [0]
+
+    object "Altering capabilities" as parameter_altering_capabilities #FFFFFF
+    parameter_altering_capabilities : Attribute Type = ATTRIBUTE(PARAMETER_ALTERING_CAPABILITIES)
+    parameter_altering_capabilities : value = Desired: [] - Reported: [0]
+  }
+
+}
+
+node *- - endpoint
+endpoint *- - version
+endpoint *- - next_parameter_id
+endpoint *- - bulk_support
+endpoint *- - parameter_id
+
+next_parameter_id -[hidden]- parameter_id
+
+parameter_id *- - parameter_size
+parameter_id *- - parameter_format
+parameter_id *- - parameter_name
+
+parameter_size -[hidden]- parameter_info
+parameter_format -[hidden]- parameter_value
+parameter_name -[hidden]- parameter_min_value
+
+parameter_id *- - parameter_info
+parameter_id *- - parameter_value
+parameter_id *- - parameter_min_value
+
+parameter_info -[hidden]- parameter_max_value
+parameter_value -[hidden]- parameter_default_value
+parameter_min_value -[hidden]- parameter_advanced
+
+parameter_id *- - parameter_max_value
+parameter_id *- - parameter_default_value
+parameter_id *- - parameter_advanced
+
+parameter_max_value -[hidden]- parameter_read_only
+parameter_default_value -[hidden]- parameter_altering_capabilities
+
+parameter_id *- - parameter_read_only
+parameter_id *- - parameter_altering_capabilities
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: ANSI_X3.4-1968
+Language: en
+Country: US
+--></g></svg>

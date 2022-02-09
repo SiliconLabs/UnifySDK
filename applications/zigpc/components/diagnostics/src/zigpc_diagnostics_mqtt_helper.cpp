@@ -22,6 +22,8 @@
 #include <stdlib.h>
 #include <memory>
 
+#include <nlohmann/json.hpp>
+
 #include "sl_status.h"
 #include "uic_mqtt.h"
 #include "zigpc_common_unid.h"
@@ -33,18 +35,15 @@
 #include "zigpc_net_mgmt_notify.h"
 #include "zigpc_diagnostics_manager.hpp"
 #include "zigpc_uptime.hpp"
-#include "zigpc_total_virtual_ram.hpp"
-#include "zigpc_used_virtual_ram.hpp"
-#include "zigpc_total_physical_ram.hpp"
-#include "zigpc_used_physical_ram.hpp"
-#include "zigpc_cpu_usage.hpp"
+#include "zigpc_mem_usage_metric.hpp"
+#include "zigpc_cpu_load_metric.hpp"
 #include "zigpc_example_metric.hpp"
 #include "zigpc_counter_plugin_metric.hpp"
 #include "zigpc_gateway.h"
 
 #include "zigpc_diagnostics.h"
 
-constexpr char LOG_TAG[] = "zigpc_diagnostics";
+static constexpr char LOG_TAG[] = "zigpc_diagnostics";
 
 // get unid here :: note this should be a common stuff, this is code replication
 std::string zigpc_diagnostics_get_unid(const zigbee_eui64_t eui64)
@@ -150,7 +149,7 @@ sl_status_t uic_diagnostics_setup(std::string unid)
   process_start(&uic_diagnostics_process, nullptr);
 
   std::string request_topic
-    = "ucl/by-unid/" + unid + "/ProtocolController/Diagnostics/Request";
+    = "ucl/by-unid/" + unid + ZIGPC_DIAGNOSTIC_TOPIC + "Request";
   // Subscribe to an MQTT-topic
   uic_mqtt_subscribe(request_topic.c_str(), uic_diagnostics_mqtt_callback);
 
@@ -165,20 +164,11 @@ void uic_metric_init()
     = zigpc_diagnostics_manager::get_instance();
   zigpc_diagnostics_notification &m_notify = manager;
 
-  std::list<std::shared_ptr<zigpc_diagnostics_metric>> metrics_to_add = {
-    std::make_shared<zigpc_counter_plugin_metric>(m_notify, "Counters"),
-    std::make_shared<zigpc_uptime_metric>(m_notify, "Uptime"),
-    std::make_shared<zigpc_total_physical_ram_metric>(m_notify, "TotalPhysRam"),
-    std::make_shared<zigpc_used_physical_ram_metric>(m_notify, "UsedPhysRam"),
-    std::make_shared<zigpc_total_virtual_ram_metric>(m_notify,
-                                                     "TotalVirtualRam"),
-    std::make_shared<zigpc_used_virtual_ram_metric>(m_notify, "UsedVirtualRam"),
-    std::make_shared<zigpc_cpu_usage>(m_notify, "CpAvgUsage1Min", one_minute),
-    std::make_shared<zigpc_cpu_usage>(m_notify, "CpuAvgUsage5Min", five_minute),
-    std::make_shared<zigpc_cpu_usage>(m_notify,
-                                      "CpuAvgUsage15Min",
-                                      fifthteen_minute),
-  };
+  std::list<std::shared_ptr<zigpc_diagnostics_metric>> metrics_to_add
+    = {std::make_shared<zigpc_counter_plugin_metric>(m_notify, "Counters"),
+       std::make_shared<zigpc_uptime_metric>(m_notify, "Uptime"),
+       std::make_shared<zigpc_mem_usage_metric>(m_notify, "MemUsePercent"),
+       std::make_shared<zigpc_cpu_load_metric>(m_notify, "CpuLoadAverage")};
 
   for (auto &metric: metrics_to_add) {
     manager.add_metric(metric);
@@ -195,26 +185,9 @@ void uic_metric_init()
 std::vector<std::string>
   uic_diagnostic_request_to_strings(std::string *payload_string)
 {
-  // Remove [ ] "
-  payload_string->erase(
-    remove(payload_string->begin(), payload_string->end(), '['),
-    payload_string->end());
-  payload_string->erase(
-    remove(payload_string->begin(), payload_string->end(), ']'),
-    payload_string->end());
-  payload_string->erase(
-    remove(payload_string->begin(), payload_string->end(), '\"'),
-    payload_string->end());
+  nlohmann::json jsn = nlohmann::json::parse(*payload_string);
 
-  // Split
-  std::vector<std::string> metric_ids;
-
-  std::stringstream string_stream(payload_string->c_str());
-  std::string split_metric_id;
-
-  while (getline(string_stream, split_metric_id, ',')) {
-    metric_ids.push_back(split_metric_id);
-  }
+  std::vector<std::string> metric_ids = jsn.get<std::vector<std::string>>();
 
   return metric_ids;
 }

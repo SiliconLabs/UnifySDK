@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -22,8 +22,8 @@
 #include <stdint.h>
 
 // Includes from other components
-#include "zwave_utils.h"
 #include "sl_status.h"
+#include "zwave_node_id_definitions.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -31,7 +31,7 @@ extern "C" {
 
 /**
  * @defgroup ZWAPI_MEM Memory API
- * @ingroup ZWAPI
+ * @ingroup zwave_api
  * @brief Functions to access storage in a Z-Wave module
  *
  * Functions in this module are used to access storage in Z-Wave module.

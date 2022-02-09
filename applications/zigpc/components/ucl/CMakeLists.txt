@@ -1,5 +1,7 @@
 set(Boost_USE_MULTITHREADED ON)
 find_package(Boost REQUIRED)
+# Find nlohmann_json, unfortunately the find_package doesn't work for this when
+# cross compiling, thus we use the simplified method find_path instead
 find_path(nlohmann_json_INCLUDE_DIRS nlohmann/json.hpp REQUIRED)
 
 add_library(zigpc_ucl src/zigpc_ucl.cpp src/zigpc_ucl_mqtt.cpp

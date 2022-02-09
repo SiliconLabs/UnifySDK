@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,10 +89,11 @@ $(document).ready(function(){initNavTree('process_8c.html',''); initResizable();
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">process.c File Reference<div class="ingroups"><a class="el" href="group__contiki.html">The Contiki RTOS</a> &raquo; <a class="el" href="group__sys.html">System</a> &raquo; <a class="el" href="group__process.html">Contiki processes</a></div></div>  </div>
+<div class="title">process.c File Reference<div class="ingroups"><a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__contiki.html">The Contiki RTOS</a> &raquo; <a class="el" href="group__sys.html">System</a> &raquo; <a class="el" href="group__process.html">Contiki processes</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="process_8h_source.html">sys/process.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="clock_8h_source.html">sys/clock.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__log_8h_source.html">sl_log.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -104,7 +105,7 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:ga7ce0df38eb467e59f209470c8f5ac4e6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga7ce0df38eb467e59f209470c8f5ac4e6">LOG_TAG</a>&#160;&#160;&#160;&quot;process.c&quot;</td></tr>
 <tr class="separator:ga7ce0df38eb467e59f209470c8f5ac4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga43a278d13284fb3412e9eee1db1d967e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>&#160;&#160;&#160;_data  /* data is a reserved keyword in Keil C51 */</td></tr>
+<tr class="memitem:ga43a278d13284fb3412e9eee1db1d967e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>&#160;&#160;&#160;_data /* data is a reserved keyword in Keil C51 */</td></tr>
 <tr class="separator:ga43a278d13284fb3412e9eee1db1d967e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga437239861f9ea9ebec1d1226d4d97aa6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga437239861f9ea9ebec1d1226d4d97aa6">PROCESS_STATE_NONE</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:ga437239861f9ea9ebec1d1226d4d97aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,6 +113,10 @@ Macros</h2></td></tr>
 <tr class="separator:ga1a012e4a68ade6aa0eef2ab61b649d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8b440ee2f4859a533b9b2164d252027f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga8b440ee2f4859a533b9b2164d252027f">PROCESS_STATE_CALLED</a>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:ga8b440ee2f4859a533b9b2164d252027f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2bf075ea3a80fa55f95e9fc623006d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#gaa2bf075ea3a80fa55f95e9fc623006d1">EVENT_TIME_WARNING</a>&#160;&#160;&#160;100</td></tr>
+<tr class="separator:gaa2bf075ea3a80fa55f95e9fc623006d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacee0c6bdbc9b71d2de85f04872ccd11e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#gacee0c6bdbc9b71d2de85f04872ccd11e">EVENT_TIME_ERROR</a>&#160;&#160;&#160;300</td></tr>
+<tr class="separator:gacee0c6bdbc9b71d2de85f04872ccd11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad72dbcf6d0153db1b8d8a58001feed83"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#gad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:gad72dbcf6d0153db1b8d8a58001feed83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1f464e950a4fa11e8821b5c725921a15"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__process.html#ga1f464e950a4fa11e8821b5c725921a15">PRINTF</a>(...)</td></tr>
@@ -181,7 +186,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_f1d32ca542c0f43616b5a5e0d1cef42d.html">uic_contiki</a></li><li class="navelem"><a class="el" href="dir_7e2d4b5dbef12d3b4b67dd812c2f2df2.html">core</a></li><li class="navelem"><a class="el" href="dir_cab485229364bacc9038f86019979476.html">sys</a></li><li class="navelem"><a class="el" href="process_8c.html">process.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:08 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:07 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

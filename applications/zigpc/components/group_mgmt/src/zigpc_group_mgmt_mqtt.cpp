@@ -18,6 +18,10 @@
 #include "uic_mqtt.h"
 #include "zigpc_common_zigbee.h"
 #include "zigpc_common_unid.h"
+
+#include "zigpc_datastore.h"
+#include "zigpc_datastore.hpp"
+
 #include "zigpc_group_map.h"
 #include "zigpc_group_mgmt_mqtt.h"
 
@@ -28,6 +32,72 @@ static const char LOG_TAG[] = "zigpc_groups_mqtt";
  *
  */
 const std::string GROUP_NAME_FMTSTR = R"({"value":"%s"})";
+
+sl_status_t zigpc_group_mqttpub_republish()
+{
+    sl_status_t status = SL_STATUS_OK;
+
+    size_t num_devices = 
+        zigpc_datastore_get_device_count();
+
+    if(num_devices == 0)
+    {
+        sl_log_warning(LOG_TAG, "No devices found when republishing groups");
+        return SL_STATUS_OK;
+    }
+ 
+
+    std::vector<zigbee_eui64_uint_t> eui64_list =
+        zigpc_datastore::device::get_id_list();
+    
+    for(auto eui_iter = eui64_list.begin();
+            eui_iter != eui64_list.end();
+            eui_iter++)
+    {
+        zigbee_eui64_t eui64;
+
+        status = zigbee_uint_to_eui64(
+                    *eui_iter, eui64);
+
+        if(status != SL_STATUS_OK)
+        {
+            continue;
+        }
+
+        std::vector<zigbee_endpoint_id_t> 
+            endpoint_list = 
+                zigpc_datastore::endpoint::get_id_list(eui64);
+
+        for(auto endp_iter = endpoint_list.begin();
+                endp_iter != endpoint_list.end();
+                endp_iter++)
+        {
+            status = zigpc_group_mqttpub_grouplist(
+                        eui64,
+                        *endp_iter,
+                        false);
+            
+            if(status != SL_STATUS_OK)
+            {
+                sl_log_warning(LOG_TAG, 
+                        "Error republishing desired grouplist");
+            }
+            
+            status = zigpc_group_mqttpub_grouplist(
+                        eui64,
+                        *endp_iter,
+                        true);
+            
+            if(status != SL_STATUS_OK)
+            {
+                sl_log_warning(LOG_TAG, 
+                        "Error republishing reported grouplist");
+            }
+        }
+    }   
+
+    return SL_STATUS_OK;
+}
 
 sl_status_t
   zigpc_group_mqttpub_grouplist(const zigbee_eui64_t eui64,

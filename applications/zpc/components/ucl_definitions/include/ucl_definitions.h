@@ -13,10 +13,11 @@
 
 /**
  * @defgroup ucl_definitions UCL definitions
+ * @ingroup zpc_components
  * @brief  Type definitions related to the UCL language.
  *
  * This interface module provide all the required type definitions relating to
- * the UCL lanaguae.
+ * the UCL language.
  *
  * @{
  */
@@ -24,7 +25,7 @@
 #ifndef UCL_DEFINITIONS_H
 #define UCL_DEFINITIONS_H
 
-#include "sl_enum.h"
+#include "uic_enum.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -56,7 +57,7 @@ typedef enum {
   /// This element must always be last
   ///
   NODE_STATE_TOPIC_LAST,
-} SL_ENUM8(node_state_topic_state_t);
+} UIC_ENUM8(node_state_topic_state_t);
 
 #ifdef __cplusplus
 }

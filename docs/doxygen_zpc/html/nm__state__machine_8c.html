@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_network_management/src/nm_state_machine.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave/zwave_network_management/src/nm_state_machine.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -105,18 +105,17 @@ $(document).ready(function(){initNavTree('nm__state__machine_8c.html',''); initR
 <code>#include &quot;<a class="el" href="zwave__controller__internal_8h_source.html">zwave_controller_internal.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__controller__types_8h_source.html">zwave_controller_types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__controller__utils_8h_source.html">zwave_controller_utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zwave__controller__storage_8h_source.html">zwave_controller_storage.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__network__management_8h_source.html">zwave_network_management.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__network__management__state_8h_source.html">zwave_network_management_state.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__s0__network_8h_source.html">zwave_s0_network.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__s2__network_8h_source.html">zwave_s2_network.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__s2__keystore_8h_source.html">zwave_s2_keystore.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="zwave__utils_8h_source.html">zwave_utils.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zpc__endian_8h_source.html">zpc_endian.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="process_8h_source.html">process.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="etimer_8h_source.html">sys/etimer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__tx_8h_source.html">zwave_tx.h</a>&quot;</code><br />
 <code>#include &quot;ZW_classcmd.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="zwave__security__validation_8h_source.html">zwave_security_validation.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -140,11 +139,11 @@ Functions</h2></td></tr>
 <tr class="separator:abf1b965ec1c5a35734c8cb5c5824aaf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d552fc6b0125173d0ed560c46e79ffb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a9d552fc6b0125173d0ed560c46e79ffb">add_node_status_update</a> (<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *inf)</td></tr>
 <tr class="separator:a9d552fc6b0125173d0ed560c46e79ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa16d1a54542aa167460c883d91ef1b8d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#aa16d1a54542aa167460c883d91ef1b8d">on_inclusion_complete</a> (<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code)</td></tr>
+<tr class="memitem:aa16d1a54542aa167460c883d91ef1b8d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#aa16d1a54542aa167460c883d91ef1b8d">on_inclusion_complete</a> (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code)</td></tr>
 <tr class="separator:aa16d1a54542aa167460c883d91ef1b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af14bab0aea74138e4c2a1b3690145828"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#af14bab0aea74138e4c2a1b3690145828">on_keys_request</a> (<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> requested_keys, bool csa)</td></tr>
+<tr class="memitem:af14bab0aea74138e4c2a1b3690145828"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#af14bab0aea74138e4c2a1b3690145828">on_keys_request</a> (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> requested_keys, bool csa)</td></tr>
 <tr class="separator:af14bab0aea74138e4c2a1b3690145828"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe186aa0f7d064a03736782299dd8854"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#abe186aa0f7d064a03736782299dd8854">on_dsk_challenge</a> (<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, int dsk_length, <a class="el" href="zwave__controller__types_8h.html#a437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk)</td></tr>
+<tr class="memitem:abe186aa0f7d064a03736782299dd8854"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#abe186aa0f7d064a03736782299dd8854">on_dsk_challenge</a> (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, int dsk_length, <a class="el" href="group__zwave__controller__types.html#ga437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk)</td></tr>
 <tr class="separator:abe186aa0f7d064a03736782299dd8854"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01ca2421a771e3dc040561940140fc19"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a01ca2421a771e3dc040561940140fc19">on_inclusion_started</a> ()</td></tr>
 <tr class="separator:a01ca2421a771e3dc040561940140fc19"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,7 +153,7 @@ Functions</h2></td></tr>
 <tr class="separator:abea8332a6608bd1315ba68682471a486"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a562f8e241d432cc82a8d95a129f2857e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a562f8e241d432cc82a8d95a129f2857e">on_set_default_complete</a> ()</td></tr>
 <tr class="separator:a562f8e241d432cc82a8d95a129f2857e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a264b73bec51cdac6380652a9a8a1dce2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a264b73bec51cdac6380652a9a8a1dce2">is_cc_in_nif</a> (<a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> *nif, uint8_t nif_len, <a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> cc)</td></tr>
+<tr class="memitem:a264b73bec51cdac6380652a9a8a1dce2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a264b73bec51cdac6380652a9a8a1dce2">is_cc_in_nif</a> (<a class="el" href="group__zwave__controller__types.html#gaa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> *nif, uint8_t nif_len, <a class="el" href="group__zwave__controller__types.html#gaa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> cc)</td></tr>
 <tr class="memdesc:a264b73bec51cdac6380652a9a8a1dce2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checking if a given command class is listed in the NIF.  <a href="nm__state__machine_8c.html#a264b73bec51cdac6380652a9a8a1dce2">More...</a><br /></td></tr>
 <tr class="separator:a264b73bec51cdac6380652a9a8a1dce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1af27db11f897fa2a93aca3f74f5d0c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#ae1af27db11f897fa2a93aca3f74f5d0c">network_management_refresh_cached_ids</a> ()</td></tr>
@@ -183,13 +182,13 @@ Functions</h2></td></tr>
 <tr class="separator:a4bedb93fa551c5f612efe78db1642309"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9fe4041f9ca45bad16c9b6ad7bae02f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#ac9fe4041f9ca45bad16c9b6ad7bae02f">nm_fsm_post_event</a> (<a class="el" href="nm__state__machine_8h.html#ad13aadb189cec7c76947756a5a8809d3">nm_event_t</a> ev, void *<a class="el" href="structevent__data.html">event_data</a>)</td></tr>
 <tr class="separator:ac9fe4041f9ca45bad16c9b6ad7bae02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac01bf38badf30f94eac9a04b486cb967"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">zwave_network_management_get_home_id</a> ()</td></tr>
+<tr class="memitem:gac01bf38badf30f94eac9a04b486cb967"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__node__id__definitions.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">zwave_network_management_get_home_id</a> ()</td></tr>
 <tr class="memdesc:gac01bf38badf30f94eac9a04b486cb967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cached home_id.  <a href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">More...</a><br /></td></tr>
 <tr class="separator:gac01bf38badf30f94eac9a04b486cb967"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae265f1e935804f3f0b971755ab0ee61e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">zwave_network_management_get_node_id</a> ()</td></tr>
+<tr class="memitem:gae265f1e935804f3f0b971755ab0ee61e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">zwave_network_management_get_node_id</a> ()</td></tr>
 <tr class="memdesc:gae265f1e935804f3f0b971755ab0ee61e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cached node_id.  <a href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">More...</a><br /></td></tr>
 <tr class="separator:gae265f1e935804f3f0b971755ab0ee61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae30cb70a49076bdf1809f281e63e694c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gae30cb70a49076bdf1809f281e63e694c">zwave_network_management_get_granted_keys</a> ()</td></tr>
+<tr class="memitem:gae30cb70a49076bdf1809f281e63e694c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gae30cb70a49076bdf1809f281e63e694c">zwave_network_management_get_granted_keys</a> ()</td></tr>
 <tr class="memdesc:gae30cb70a49076bdf1809f281e63e694c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the currently granted keys.  <a href="group__zwave__network__management.html#gae30cb70a49076bdf1809f281e63e694c">More...</a><br /></td></tr>
 <tr class="separator:gae30cb70a49076bdf1809f281e63e694c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -204,9 +203,9 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>state machine for zwave_network_management </p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md1"></a>
 License</h1>
-<p><b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b></p>
+<p><b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b></p>
 <p>The licensor of this software is Silicon Laboratories Inc. Your use of this software is governed by the terms of Silicon Labs Master Software License Agreement (MSLA) available at www.silabs.com/about-us/legal/master-software-license-agreement. This software is distributed to you in Source Code format and is governed by the sections of the MSLA applicable to Source Code. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ae39b24f70c491cd30f1820728df65603"></a>
@@ -355,9 +354,9 @@ License</h1>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> is_cc_in_nif </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> is_cc_in_nif </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#gaa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> *&#160;</td>
           <td class="paramname"><em>nif</em>, </td>
         </tr>
         <tr>
@@ -369,7 +368,7 @@ License</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#gaa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a>&#160;</td>
           <td class="paramname"><em>cc</em>&#160;</td>
         </tr>
         <tr>
@@ -487,7 +486,7 @@ License</h1>
 </div><div class="memdoc">
 
 <p>Initialize the Z-Wave network management state machine. </p>
-<p>Sets <a class="el" href="zwave__s2__network_8h.html#a4c03d9d281a119324b565f10c276f0a3">zwave_s2_network_callbacks_t</a> Calls <a class="el" href="zwave__s2__network_8c.html#a7af4fbf520536f7ecdd7732f4c384091">zwave_s2_set_network_callbacks</a> and <a class="el" href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a> Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Print the HomeID, NodeID and DSK to console and Print node list Stops all ongoing Network management operations </p>
+<p>Sets <a class="el" href="group__zwave__s2__network.html#ga4c03d9d281a119324b565f10c276f0a3">zwave_s2_network_callbacks_t</a> Calls <a class="el" href="group__zwave__s2__network.html#ga7af4fbf520536f7ecdd7732f4c384091">zwave_s2_set_network_callbacks</a> and <a class="el" href="group__zwave__s0__network.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a> Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Print the HomeID, NodeID and DSK to console and Print node list Stops all ongoing Network management operations </p>
 
 </div>
 </div>
@@ -564,7 +563,7 @@ License</h1>
         <tr>
           <td class="memname">static void on_dsk_challenge </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td>
           <td class="paramname"><em>granted_keys</em>, </td>
         </tr>
         <tr>
@@ -576,7 +575,7 @@ License</h1>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#a437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a>&#160;</td>
           <td class="paramname"><em>dsk</em>&#160;</td>
         </tr>
         <tr>
@@ -606,7 +605,7 @@ License</h1>
         <tr>
           <td class="memname">static void on_inclusion_complete </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td>
           <td class="paramname"><em>granted_keys</em>, </td>
         </tr>
         <tr>
@@ -667,7 +666,7 @@ License</h1>
         <tr>
           <td class="memname">static void on_keys_request </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td>
           <td class="paramname"><em>requested_keys</em>, </td>
         </tr>
         <tr>
@@ -974,8 +973,8 @@ License</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_c78582d46d403e5e72bac62c6eba612e.html">zwave_network_management</a></li><li class="navelem"><a class="el" href="dir_3116965e3e12e872bafbd186262d685f.html">src</a></li><li class="navelem"><a class="el" href="nm__state__machine_8c.html">nm_state_machine.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_4c7246e6a1b2917f2d670822ca0c83f7.html">zwave_network_management</a></li><li class="navelem"><a class="el" href="dir_140a5582e5dd5795b7b4430df83ea200.html">src</a></li><li class="navelem"><a class="el" href="nm__state__machine_8c.html">nm_state_machine.c</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:22 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

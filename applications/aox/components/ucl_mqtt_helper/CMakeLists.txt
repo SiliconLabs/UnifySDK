@@ -1,0 +1,3 @@
+add_library(ucl_mqtt_helper src/ucl_mqtt_helper.c)
+target_include_directories(ucl_mqtt_helper PUBLIC include)
+target_link_libraries(ucl_mqtt_helper uic_mqtt)

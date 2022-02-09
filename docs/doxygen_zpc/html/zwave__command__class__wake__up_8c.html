@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_command_classes/src/zwave_command_class_wake_up.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave_command_classes/src/zwave_command_class_wake_up.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -107,6 +107,7 @@ $(document).ready(function(){initNavTree('zwave__command__class__wake__up_8c.htm
 <code>#include &quot;<a class="el" href="zwave__tx_8h_source.html">zwave_tx.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zpc__config_8h_source.html">zpc_config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__status_8h_source.html">sl_status.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zwave__utils_8h_source.html">zwave_utils.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__command__class__wake__up__types_8h_source.html">zwave_command_class_wake_up_types.h</a>&quot;</code><br />
 <code>#include &quot;ZW_classcmd.h&quot;</code><br />
 <code>#include &lt;<a class="el" href="assert_8h_source.html">assert.h</a>&gt;</code><br />
@@ -145,13 +146,16 @@ Functions</h2></td></tr>
 <tr class="memitem:ab1683172e412f4f4b4f3090e6e2ac2b8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#ab1683172e412f4f4b4f3090e6e2ac2b8">send_wake_up_no_more</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a19cfbe9566ee0ef7625a5b0bf285ed98">node_id_node</a>)</td></tr>
 <tr class="memdesc:ab1683172e412f4f4b4f3090e6e2ac2b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a Wake Up No more command to a node.  <a href="zwave__command__class__wake__up_8c.html#ab1683172e412f4f4b4f3090e6e2ac2b8">More...</a><br /></td></tr>
 <tr class="separator:ab1683172e412f4f4b4f3090e6e2ac2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7610a0e7b1f581a8a1991541eda124ea"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a7610a0e7b1f581a8a1991541eda124ea">save_reported_interval</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> parent, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, uint8_t interval_1_msb, uint8_t interval_2, uint8_t interval_3_lsb)</td></tr>
+<tr class="memitem:a719d1633ae7a1ff72a7073da6a741c29"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a719d1633ae7a1ff72a7073da6a741c29">verify_if_wake_up_setting_needs_resolution</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_setting_node)</td></tr>
+<tr class="memdesc:a719d1633ae7a1ff72a7073da6a741c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if either NodeID / Wake Up interval settings are still undefined or mismatched and a resolution is needed.  <a href="zwave__command__class__wake__up_8c.html#a719d1633ae7a1ff72a7073da6a741c29">More...</a><br /></td></tr>
+<tr class="separator:a719d1633ae7a1ff72a7073da6a741c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7610a0e7b1f581a8a1991541eda124ea"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a7610a0e7b1f581a8a1991541eda124ea">save_reported_interval</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> parent, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, uint8_t interval_1_msb, uint8_t interval_2, uint8_t interval_3_lsb)</td></tr>
 <tr class="memdesc:a7610a0e7b1f581a8a1991541eda124ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes the 3 bytes of a wake_up_interval_t and saves it in the attribute store.  <a href="zwave__command__class__wake__up_8c.html#a7610a0e7b1f581a8a1991541eda124ea">More...</a><br /></td></tr>
 <tr class="separator:a7610a0e7b1f581a8a1991541eda124ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86fe76f7c6c116734a69cb35ef264f26"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="zwave__command__class__wake__up__types_8h.html#a914036069b6899f115b874ca11f557ac">wake_up_interval_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a86fe76f7c6c116734a69cb35ef264f26">get_maximum_possible_interval</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> endpoint_node)</td></tr>
+<tr class="memitem:a86fe76f7c6c116734a69cb35ef264f26"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a86fe76f7c6c116734a69cb35ef264f26">get_maximum_possible_interval</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> endpoint_node)</td></tr>
 <tr class="memdesc:a86fe76f7c6c116734a69cb35ef264f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the value that would lead to the largest time between Wake Ups for a node.  <a href="zwave__command__class__wake__up_8c.html#a86fe76f7c6c116734a69cb35ef264f26">More...</a><br /></td></tr>
 <tr class="separator:a86fe76f7c6c116734a69cb35ef264f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafee6942702a86d4aaea1f91c18ccce7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="zwave__command__class__wake__up__types_8h.html#a914036069b6899f115b874ca11f557ac">wake_up_interval_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#aafee6942702a86d4aaea1f91c18ccce7">get_closest_supported_interval</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> endpoint_node, <a class="el" href="zwave__command__class__wake__up__types_8h.html#a914036069b6899f115b874ca11f557ac">wake_up_interval_t</a> wished_interval)</td></tr>
+<tr class="memitem:aafee6942702a86d4aaea1f91c18ccce7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#aafee6942702a86d4aaea1f91c18ccce7">get_closest_supported_interval</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> endpoint_node, <a class="el" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a> wished_interval)</td></tr>
 <tr class="memdesc:aafee6942702a86d4aaea1f91c18ccce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the closest supported value for a Wake Up Interval.  <a href="zwave__command__class__wake__up_8c.html#aafee6942702a86d4aaea1f91c18ccce7">More...</a><br /></td></tr>
 <tr class="separator:aafee6942702a86d4aaea1f91c18ccce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa3117b84d0ee4baa2ce7d5807d34f9f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#afa3117b84d0ee4baa2ce7d5807d34f9f">set_default_v2_capabilities</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_capabilities_node)</td></tr>
@@ -160,17 +164,17 @@ Functions</h2></td></tr>
 <tr class="memitem:a9a61799d62b6c368681fb8a80b0ddf43"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a9a61799d62b6c368681fb8a80b0ddf43">set_default_v1_capabilities</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_capabilities_node)</td></tr>
 <tr class="memdesc:a9a61799d62b6c368681fb8a80b0ddf43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes down assumed non-advertised capabilities for a v1 node.  <a href="zwave__command__class__wake__up_8c.html#a9a61799d62b6c368681fb8a80b0ddf43">More...</a><br /></td></tr>
 <tr class="separator:a9a61799d62b6c368681fb8a80b0ddf43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f966daf7a0db642b035c023a4877115"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a8f966daf7a0db642b035c023a4877115">wake_up_capabilities_get</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_capabilities_node, uint8_t *frame, uint16_t *frame_len)</td></tr>
+<tr class="memitem:a8f966daf7a0db642b035c023a4877115"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a8f966daf7a0db642b035c023a4877115">wake_up_capabilities_get</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_capabilities_node, uint8_t *frame, uint16_t *frame_len)</td></tr>
 <tr class="separator:a8f966daf7a0db642b035c023a4877115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a8b027d6bc6ddb6ccfe5f216291fb31"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a9a8b027d6bc6ddb6ccfe5f216291fb31">wake_up_interval_get</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_setting_node, uint8_t *frame, uint16_t *frame_len)</td></tr>
+<tr class="memitem:a9a8b027d6bc6ddb6ccfe5f216291fb31"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a9a8b027d6bc6ddb6ccfe5f216291fb31">wake_up_interval_get</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_setting_node, uint8_t *frame, uint16_t *frame_len)</td></tr>
 <tr class="separator:a9a8b027d6bc6ddb6ccfe5f216291fb31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84e29105d1064d01c7551336860230a7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a84e29105d1064d01c7551336860230a7">wake_up_interval_set</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_setting_node, uint8_t *frame, uint16_t *frame_len)</td></tr>
+<tr class="memitem:a84e29105d1064d01c7551336860230a7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a84e29105d1064d01c7551336860230a7">wake_up_interval_set</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_setting_node, uint8_t *frame, uint16_t *frame_len)</td></tr>
 <tr class="separator:a84e29105d1064d01c7551336860230a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37cb450d8a624bde29f877595e193d16"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a37cb450d8a624bde29f877595e193d16">handle_wake_up_notification</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection)</td></tr>
+<tr class="memitem:a37cb450d8a624bde29f877595e193d16"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a37cb450d8a624bde29f877595e193d16">handle_wake_up_notification</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection)</td></tr>
 <tr class="separator:a37cb450d8a624bde29f877595e193d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a113c3f11c4fb5f5eb6abccec9cf51535"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a113c3f11c4fb5f5eb6abccec9cf51535">handle_wake_up_interval_report</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
+<tr class="memitem:a113c3f11c4fb5f5eb6abccec9cf51535"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a113c3f11c4fb5f5eb6abccec9cf51535">handle_wake_up_interval_report</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
 <tr class="separator:a113c3f11c4fb5f5eb6abccec9cf51535"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f8081a6c4ea47edf7b8345a0689a1c3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a9f8081a6c4ea47edf7b8345a0689a1c3">handle_wake_up_interval_capabilities_report</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
+<tr class="memitem:a9f8081a6c4ea47edf7b8345a0689a1c3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a9f8081a6c4ea47edf7b8345a0689a1c3">handle_wake_up_interval_capabilities_report</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
 <tr class="separator:a9f8081a6c4ea47edf7b8345a0689a1c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaff9153e6b7f2f12495d4528a1e348f5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#aaff9153e6b7f2f12495d4528a1e348f5">configure_wake_up_interval</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> wake_up_capabilities_node)</td></tr>
 <tr class="memdesc:aaff9153e6b7f2f12495d4528a1e348f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the Wake Up Interval setting for a node.  <a href="zwave__command__class__wake__up_8c.html#aaff9153e6b7f2f12495d4528a1e348f5">More...</a><br /></td></tr>
@@ -185,12 +189,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ae5ff8372dbe888c88db63f4ba9198fa2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#ae5ff8372dbe888c88db63f4ba9198fa2">on_desired_wake_up_setting_update</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> updated_node, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
 <tr class="memdesc:ae5ff8372dbe888c88db63f4ba9198fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if either NodeID / Wake Up interval settings have changed and need resolution in this case, we will mismatch the Setting attribute to get a resolution.  <a href="zwave__command__class__wake__up_8c.html#ae5ff8372dbe888c88db63f4ba9198fa2">More...</a><br /></td></tr>
 <tr class="separator:ae5ff8372dbe888c88db63f4ba9198fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88bb847c5b28073f2eebf61a9c6fe6f6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a88bb847c5b28073f2eebf61a9c6fe6f6">wake_up_control_handler</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
+<tr class="memitem:a88bb847c5b28073f2eebf61a9c6fe6f6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__wake__up_8c.html#a88bb847c5b28073f2eebf61a9c6fe6f6">wake_up_control_handler</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
 <tr class="separator:a88bb847c5b28073f2eebf61a9c6fe6f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f21bf48988be7063716ec5cbddd37fa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__class__wake__up.html#ga3f21bf48988be7063716ec5cbddd37fa">zwave_command_class_wake_up_supports_wake_up_on_demand</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a19cfbe9566ee0ef7625a5b0bf285ed98">node_id_node</a>)</td></tr>
 <tr class="memdesc:ga3f21bf48988be7063716ec5cbddd37fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a Node supports the Wake Up on demand functionality.  <a href="group__zwave__command__class__wake__up.html#ga3f21bf48988be7063716ec5cbddd37fa">More...</a><br /></td></tr>
 <tr class="separator:ga3f21bf48988be7063716ec5cbddd37fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga11866ec0935bee3fba386bc3ed28e0b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__class__wake__up.html#ga11866ec0935bee3fba386bc3ed28e0b6">zwave_command_class_wake_up_init</a> ()</td></tr>
+<tr class="memitem:ga11866ec0935bee3fba386bc3ed28e0b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__class__wake__up.html#ga11866ec0935bee3fba386bc3ed28e0b6">zwave_command_class_wake_up_init</a> ()</td></tr>
 <tr class="memdesc:ga11866ec0935bee3fba386bc3ed28e0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the Wake Up Command Class handler.  <a href="group__zwave__command__class__wake__up.html#ga11866ec0935bee3fba386bc3ed28e0b6">More...</a><br /></td></tr>
 <tr class="separator:ga11866ec0935bee3fba386bc3ed28e0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -392,7 +396,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="zwave__command__class__wake__up__types_8h.html#a914036069b6899f115b874ca11f557ac">wake_up_interval_t</a> get_closest_supported_interval </td>
+          <td class="memname">static <a class="el" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a> get_closest_supported_interval </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>endpoint_node</em>, </td>
@@ -400,7 +404,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="zwave__command__class__wake__up__types_8h.html#a914036069b6899f115b874ca11f557ac">wake_up_interval_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a>&#160;</td>
           <td class="paramname"><em>wished_interval</em>&#160;</td>
         </tr>
         <tr>
@@ -439,7 +443,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="zwave__command__class__wake__up__types_8h.html#a914036069b6899f115b874ca11f557ac">wake_up_interval_t</a> get_maximum_possible_interval </td>
+          <td class="memname">static <a class="el" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a> get_maximum_possible_interval </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>endpoint_node</em></td><td>)</td>
@@ -474,9 +478,9 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> handle_wake_up_interval_capabilities_report </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> handle_wake_up_interval_capabilities_report </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection</em>, </td>
         </tr>
         <tr>
@@ -516,9 +520,9 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> handle_wake_up_interval_report </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> handle_wake_up_interval_report </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection</em>, </td>
         </tr>
         <tr>
@@ -558,9 +562,9 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> handle_wake_up_notification </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> handle_wake_up_notification </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection</em></td><td>)</td>
           <td></td>
         </tr>
@@ -753,7 +757,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> save_reported_interval </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> save_reported_interval </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>parent</em>, </td>
@@ -837,7 +841,7 @@ Variables</h2></td></tr>
 <p>Sends a Wake Up No more command to a node. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">resolved_node</td><td>The Attribute Store node for the NODE_ID to send back to sleep. </td></tr>
+    <tr><td class="paramname">node_id_node</td><td>The Attribute Store node for the NODE_ID to send back to sleep. </td></tr>
   </table>
   </dd>
 </dl>
@@ -914,6 +918,41 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a719d1633ae7a1ff72a7073da6a741c29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a719d1633ae7a1ff72a7073da6a741c29">&#9670;&nbsp;</a></span>verify_if_wake_up_setting_needs_resolution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void verify_if_wake_up_setting_needs_resolution </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>wake_up_setting_node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verifies if either NodeID / Wake Up interval settings are still undefined or mismatched and a resolution is needed. </p>
+<p>If the wake_up_setting_node needs resolution, the wake_up_setting_node value will be adjusted to either undefined value or NEEDS_ONE_COMMAND / FINAL_STATE value mismatch, to trigger resolution.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">wake_up_setting_node</td><td>Attribute Store node for the Wake Up Setting. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a8f966daf7a0db642b035c023a4877115"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8f966daf7a0db642b035c023a4877115">&#9670;&nbsp;</a></span>wake_up_capabilities_get()</h2>
 
@@ -924,7 +963,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> wake_up_capabilities_get </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> wake_up_capabilities_get </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>wake_up_capabilities_node</em>, </td>
@@ -966,9 +1005,9 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> wake_up_control_handler </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> wake_up_control_handler </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection</em>, </td>
         </tr>
         <tr>
@@ -1008,7 +1047,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> wake_up_interval_get </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> wake_up_interval_get </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>wake_up_setting_node</em>, </td>
@@ -1050,7 +1089,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> wake_up_interval_set </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> wake_up_interval_set </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>wake_up_setting_node</em>, </td>
@@ -1178,12 +1217,12 @@ Variables</h2></td></tr>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="azwave__command__class__wake__up_8c_html_a3a48b9a3a4b2d94c644107976c45bc72"><div class="ttname"><a href="zwave__command__class__wake__up_8c.html#a3a48b9a3a4b2d94c644107976c45bc72">ATTRIBUTE</a></div><div class="ttdeci">#define ATTRIBUTE(type)</div><div class="ttdef"><b>Definition:</b> zwave_command_class_wake_up.c:51</div></div>
+<div class="ttc" id="azwave__command__class__wake__up_8c_html_a3a48b9a3a4b2d94c644107976c45bc72"><div class="ttname"><a href="zwave__command__class__wake__up_8c.html#a3a48b9a3a4b2d94c644107976c45bc72">ATTRIBUTE</a></div><div class="ttdeci">#define ATTRIBUTE(type)</div><div class="ttdef"><b>Definition:</b> zwave_command_class_wake_up.c:52</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6ac9bb75d77e4d974481da8e3d01cbca.html">zwave_command_classes</a></li><li class="navelem"><a class="el" href="dir_a7413761325a0de7b31d33e30e75f050.html">src</a></li><li class="navelem"><a class="el" href="zwave__command__class__wake__up_8c.html">zwave_command_class_wake_up.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:29 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

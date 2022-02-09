@@ -1,10 +1,30 @@
-
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
 
 #include <iostream>
 #include <iomanip>
 #include "attribute.hpp"
 #include "attribute_mapper_ast.hpp"
 #include "attribute_store_debug.h"
+
+/**
+ * @defgroup attribute_mapper_ast_print Abstract Syntax Tree Print
+ * @ingroup unify_attribute_mapper
+ * @brief Write a description about this
+ *
+ * @{
+ */
+
 namespace ast
 {
 class print
@@ -158,3 +178,5 @@ inline std::ostream &operator<<(std::ostream &s, const attribute &d)
 }
 
 }  // namespace ast
+
+/** @} end attribute_mapper_ast_print */

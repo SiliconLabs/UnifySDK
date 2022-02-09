@@ -12,21 +12,43 @@ set(CONTIKI_SRC
     core/sys/procinit.c
     core/sys/timer.c)
 
-add_library(uic_contiki_platform SHARED platform/${COMPATIBLE_PLATFORM}/clock.c)
-target_include_directories(uic_contiki_platform
-                           PUBLIC core platform/${COMPATIBLE_PLATFORM})
+set(CONTIKI_INC
+    core
+    core/dev
+    core/lib
+    core/sys
+    cpu/native
+    include
+    platform/${COMPATIBLE_PLATFORM})
 
-set(CONTIKI_INC core core/dev core/lib core/sys cpu/native
-                platform/${COMPATIBLE_PLATFORM})
-add_library(uic_contiki SHARED ${CONTIKI_SRC})
+if(ZWAVE_BUILD_SYSTEM EQUAL 1)
+  add_library(uic_contiki ${CONTIKI_SRC})
+else()
+  add_library(uic_contiki SHARED ${CONTIKI_SRC} src/rust_process.c)
+endif()
 
 target_include_directories(uic_contiki PUBLIC ${CONTIKI_INC})
-target_compile_definitions(uic_contiki PUBLIC)
 
-if(NOT APPLE)
-  target_link_libraries(uic_contiki PRIVATE rt uic_contiki_platform uic_log)
+if(ZWAVE_BUILD_SYSTEM EQUAL 1)
+  add_library(uic_contiki_platform platform/${COMPATIBLE_PLATFORM}/clock.c)
 else()
-  target_link_libraries(uic_contiki PRIVATE uic_contiki_platform uic_log)
+  add_library(uic_contiki_platform SHARED
+              platform/${COMPATIBLE_PLATFORM}/clock.c)
+
+  if(ZWAVE_BUILD_SYSTEM EQUAL 1)
+    set(PRIVATE_LIB_LIST "")
+  else()
+    set(PRIVATE_LIB_LIST "rt")
+  endif()
+  if(NOT APPLE)
+    target_link_libraries(uic_contiki_platform PRIVATE ${PRIVATE_LIB_LIST} )
+  endif()
 endif()
+
+target_include_directories(
+  uic_contiki_platform PUBLIC core platform/${COMPATIBLE_PLATFORM} core/sys
+                              cpu/native)
+
+target_link_libraries(uic_contiki PRIVATE uic_contiki_platform uic_log)
 
 add_subdirectory(test)

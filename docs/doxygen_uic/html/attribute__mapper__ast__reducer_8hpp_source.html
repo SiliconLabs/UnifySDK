@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -87,139 +87,153 @@ $(document).ready(function(){initNavTree('attribute__mapper__ast__reducer_8hpp_s
 <div class="title">attribute_mapper_ast_reducer.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="attribute__mapper__ast__reducer_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ATTRIBUTE_MAPPER_AST_REDUCER_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ATTRIBUTE_MAPPER_AST_REDUCER_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="attribute__mapper__ast_8hpp.html">attribute_mapper_ast.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="attribute__mapper__ast__eval_8hpp.html">attribute_mapper_ast_eval.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceast.html">ast</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">struct </span>ast_tree;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// postorder tree traversal, build new tree, with the following cases reduces:</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// - if expression contains 2 or more constants but not all. they will condensed in one</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// - if all children of a expression contain a constanst replace root expression with constant</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceast.html#abb695bf493f084174fcccefbb2c0ba62">reduce_tree</a>(ast_tree &amp;);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classast_1_1reduce__visitor.html">reduce_visitor</a> : <span class="keyword">public</span> boost::static_visitor&lt;&gt;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a3b635e839c71305caf9ef355c4a0170b">   18</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a3b635e839c71305caf9ef355c4a0170b">operator()</a>(<a class="code" href="structast_1_1ast__tree.html">ast::ast_tree</a> &amp;tree)</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;root: tree) {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      boost::apply_visitor(*<span class="keyword">this</span>, root);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  }</div>
+<a href="attribute__mapper__ast__reducer_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * # License</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2021 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ******************************************************************************</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * The licensor of this software is Silicon Laboratories Inc. Your use of this</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * software is governed by the terms of Silicon Labs Master Software License</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * Agreement (MSLA) available at</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * www.silabs.com/about-us/legal/master-software-license-agreement. This</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * software is distributed to you in Source Code format and is governed by the</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * sections of the MSLA applicable to Source Code.</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef ATTRIBUTE_MAPPER_AST_REDUCER_H</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define ATTRIBUTE_MAPPER_AST_REDUCER_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#ac94dae79fd80622aeee9af0af847de45">   25</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#ac94dae79fd80622aeee9af0af847de45">operator()</a>(<a class="code" href="structast_1_1expression.html">expression</a> &amp;x)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">// // for (const auto &amp;op: x.rest) {</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// //   boost::apply_visitor(*this, op.operand_);</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// // }</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// program_visitor visitor;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// boost::apply_visitor(visitor, x);</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// x = visitor.GetOptimizedProgram();</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// // Todo do stuff</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  }</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a986d389d82ce50f1da0b03fbce1986cb">   37</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a986d389d82ce50f1da0b03fbce1986cb">operator()</a>(<a class="code" href="structast_1_1nil.html">nil</a> &amp;n)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// omit, no operation</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a44a8cad5ed5af80755e9c56e2fbbe8d0">   42</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a44a8cad5ed5af80755e9c56e2fbbe8d0">operator()</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;n)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">constant_program</a>.<a class="code" href="structast_1_1expression.html#ab76eaff07b0543b6509affaa0ba5881e">rest</a>.emplace_back(n);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a75231ef46ddb6f5a365b9dab3beaf89d">   47</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a75231ef46ddb6f5a365b9dab3beaf89d">operator()</a>(<a class="code" href="structast_1_1attribute.html">attribute</a> &amp;attr)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// not implemented yet</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="attribute__mapper__ast_8hpp.html">attribute_mapper_ast.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="attribute__mapper__ast__eval_8hpp.html">attribute_mapper_ast_eval.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceast.html">ast</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">struct </span>ast_tree;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// postorder tree traversal, build new tree, with the following cases reduces:</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// - if expression contains 2 or more constants but not all. they will condensed in one</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// - if all children of a expression contain a constanst replace root expression with constant</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceast.html#abb695bf493f084174fcccefbb2c0ba62">reduce_tree</a>(ast_tree &amp;);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="classast_1_1reduce__visitor.html">reduce_visitor</a> : <span class="keyword">public</span> boost::static_visitor&lt;&gt;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a3b635e839c71305caf9ef355c4a0170b">   39</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a3b635e839c71305caf9ef355c4a0170b">operator()</a>(<a class="code" href="structast_1_1ast__tree.html">ast::ast_tree</a> &amp;tree)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;root: tree) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      boost::apply_visitor(*<span class="keyword">this</span>, root);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#ac94dae79fd80622aeee9af0af847de45">   46</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#ac94dae79fd80622aeee9af0af847de45">operator()</a>(<a class="code" href="structast_1_1expression.html">expression</a> &amp;x)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// // for (const auto &amp;op: x.rest) {</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// //   boost::apply_visitor(*this, op.operand_);</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// // }</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#afe926a455d35eb49b91f0268dbe0b567">   52</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#afe926a455d35eb49b91f0268dbe0b567">operator()</a>(<a class="code" href="structast_1_1signed__.html">signed_</a> &amp;sign)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">constant_program</a>.<a class="code" href="structast_1_1expression.html#ab76eaff07b0543b6509affaa0ba5881e">rest</a>.emplace_back(sign);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#aaa4e181a3085c5f1bcb98517469a8b55">   57</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#aaa4e181a3085c5f1bcb98517469a8b55">operator()</a>(<a class="code" href="structast_1_1condition.html">condition</a> &amp;con)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// program_visitor visitor;</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// boost::apply_visitor(visitor, con.cond_value);</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// if (visitor.IsConstant()) {</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">// }</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#aa24b5ce1ac0b94bc70b6f0c6690b0bb2">   65</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#aa24b5ce1ac0b94bc70b6f0c6690b0bb2">operator()</a>(mapping &amp;map)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// ignore</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a9b0fb14d2639ea093dec1b8e9510fe4d">   70</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a9b0fb14d2639ea093dec1b8e9510fe4d">operator()</a>(<a class="code" href="structast_1_1assignment.html">assignment</a> &amp;map)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// ignore</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a1a124ea10eb62b1151da69ef9ab5c1b4">   75</a></span>&#160;  <a class="code" href="structast_1_1expression.html">expression</a> &amp;<a class="code" href="classast_1_1reduce__visitor.html#a1a124ea10eb62b1151da69ef9ab5c1b4">GetOptimizedProgram</a>()</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">// todo</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">constant_program</a>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a78b357426f150ecef2e8eb7533528fa0">   81</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classast_1_1reduce__visitor.html#a78b357426f150ecef2e8eb7533528fa0">IsConstant</a>()</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">//return new_children.empty() &amp;&amp; constant_program.rest.size() &gt; 0;</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">   88</a></span>&#160;  <a class="code" href="structast_1_1expression.html">expression</a> <a class="code" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">constant_program</a>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">//std::list&lt;operation&gt; new_children;</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="namespaceast.html#abb695bf493f084174fcccefbb2c0ba62">   92</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceast.html#abb695bf493f084174fcccefbb2c0ba62">reduce_tree</a>(<a class="code" href="structast_1_1ast__tree.html">ast_tree</a> &amp;tree)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <a class="code" href="classast_1_1reduce__visitor.html">reduce_visitor</a> visitor;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  visitor(tree);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  visitor.<a class="code" href="classast_1_1reduce__visitor.html#a78b357426f150ecef2e8eb7533528fa0">IsConstant</a>();</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}  <span class="comment">// namespace ast</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// program_visitor visitor;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// boost::apply_visitor(visitor, x);</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">// x = visitor.GetOptimizedProgram();</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// // Todo do stuff</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a986d389d82ce50f1da0b03fbce1986cb">   58</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a986d389d82ce50f1da0b03fbce1986cb">operator()</a>(<a class="code" href="structast_1_1nil.html">nil</a> &amp;n)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// omit, no operation</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a44a8cad5ed5af80755e9c56e2fbbe8d0">   63</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a44a8cad5ed5af80755e9c56e2fbbe8d0">operator()</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> &amp;n)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">constant_program</a>.<a class="code" href="structast_1_1expression.html#ab76eaff07b0543b6509affaa0ba5881e">rest</a>.emplace_back(n);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a75231ef46ddb6f5a365b9dab3beaf89d">   68</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a75231ef46ddb6f5a365b9dab3beaf89d">operator()</a>(<a class="code" href="structast_1_1attribute.html">attribute</a> &amp;attr)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// not implemented yet</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#afe926a455d35eb49b91f0268dbe0b567">   73</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#afe926a455d35eb49b91f0268dbe0b567">operator()</a>(<a class="code" href="structast_1_1signed__.html">signed_</a> &amp;sign)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">constant_program</a>.<a class="code" href="structast_1_1expression.html#ab76eaff07b0543b6509affaa0ba5881e">rest</a>.emplace_back(sign);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#aaa4e181a3085c5f1bcb98517469a8b55">   78</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#aaa4e181a3085c5f1bcb98517469a8b55">operator()</a>(<a class="code" href="structast_1_1condition.html">condition</a> &amp;con)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">// program_visitor visitor;</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">// boost::apply_visitor(visitor, con.cond_value);</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">// if (visitor.IsConstant()) {</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// }</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#aa24b5ce1ac0b94bc70b6f0c6690b0bb2">   86</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#aa24b5ce1ac0b94bc70b6f0c6690b0bb2">operator()</a>(mapping &amp;map)</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="comment">// ignore</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a9b0fb14d2639ea093dec1b8e9510fe4d">   91</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classast_1_1reduce__visitor.html#a9b0fb14d2639ea093dec1b8e9510fe4d">operator()</a>(<a class="code" href="structast_1_1assignment.html">assignment</a> &amp;map)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">// ignore</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a1a124ea10eb62b1151da69ef9ab5c1b4">   96</a></span>&#160;  <a class="code" href="structast_1_1expression.html">expression</a> &amp;<a class="code" href="classast_1_1reduce__visitor.html#a1a124ea10eb62b1151da69ef9ab5c1b4">GetOptimizedProgram</a>()</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">// todo</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">constant_program</a>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a78b357426f150ecef2e8eb7533528fa0">  102</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classast_1_1reduce__visitor.html#a78b357426f150ecef2e8eb7533528fa0">IsConstant</a>()</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">//return new_children.empty() &amp;&amp; constant_program.rest.size() &gt; 0;</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">  109</a></span>&#160;  <a class="code" href="structast_1_1expression.html">expression</a> <a class="code" href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">constant_program</a>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="comment">//std::list&lt;operation&gt; new_children;</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="namespaceast.html#abb695bf493f084174fcccefbb2c0ba62">  113</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceast.html#abb695bf493f084174fcccefbb2c0ba62">reduce_tree</a>(<a class="code" href="structast_1_1ast__tree.html">ast_tree</a> &amp;tree)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <a class="code" href="classast_1_1reduce__visitor.html">reduce_visitor</a> visitor;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  visitor(tree);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  visitor.<a class="code" href="classast_1_1reduce__visitor.html#a78b357426f150ecef2e8eb7533528fa0">IsConstant</a>();</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}  <span class="comment">// namespace ast</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_a9b0fb14d2639ea093dec1b8e9510fe4d"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a9b0fb14d2639ea093dec1b8e9510fe4d">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(assignment &amp;map)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:70</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_aa24b5ce1ac0b94bc70b6f0c6690b0bb2"><div class="ttname"><a href="classast_1_1reduce__visitor.html#aa24b5ce1ac0b94bc70b6f0c6690b0bb2">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(mapping &amp;map)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:65</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_a75231ef46ddb6f5a365b9dab3beaf89d"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a75231ef46ddb6f5a365b9dab3beaf89d">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(attribute &amp;attr)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:47</div></div>
-<div class="ttc" id="astructast_1_1assignment_html"><div class="ttname"><a href="structast_1_1assignment.html">ast::assignment</a></div><div class="ttdoc">Assignment.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:178</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_a9061cd9b69e2d5da02e7f3c74f0c2e1d"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">ast::reduce_visitor::constant_program</a></div><div class="ttdeci">expression constant_program</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:88</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_ac94dae79fd80622aeee9af0af847de45"><div class="ttname"><a href="classast_1_1reduce__visitor.html#ac94dae79fd80622aeee9af0af847de45">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(expression &amp;x)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:25</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_a44a8cad5ed5af80755e9c56e2fbbe8d0"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a44a8cad5ed5af80755e9c56e2fbbe8d0">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(unsigned int &amp;n)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:42</div></div>
-<div class="ttc" id="astructast_1_1nil_html"><div class="ttname"><a href="structast_1_1nil.html">ast::nil</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:38</div></div>
-<div class="ttc" id="astructast_1_1condition_html"><div class="ttname"><a href="structast_1_1condition.html">ast::condition</a></div><div class="ttdoc">Condition.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:135</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_a78b357426f150ecef2e8eb7533528fa0"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a78b357426f150ecef2e8eb7533528fa0">ast::reduce_visitor::IsConstant</a></div><div class="ttdeci">bool IsConstant()</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:81</div></div>
-<div class="ttc" id="astructast_1_1attribute_html"><div class="ttname"><a href="structast_1_1attribute.html">ast::attribute</a></div><div class="ttdoc">Attribute.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:163</div></div>
-<div class="ttc" id="astructast_1_1ast__tree_html"><div class="ttname"><a href="structast_1_1ast__tree.html">ast::ast_tree</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:48</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_a1a124ea10eb62b1151da69ef9ab5c1b4"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a1a124ea10eb62b1151da69ef9ab5c1b4">ast::reduce_visitor::GetOptimizedProgram</a></div><div class="ttdeci">expression &amp; GetOptimizedProgram()</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:75</div></div>
-<div class="ttc" id="anamespaceast_html"><div class="ttname"><a href="namespaceast.html">ast</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:35</div></div>
-<div class="ttc" id="astructast_1_1expression_html"><div class="ttname"><a href="structast_1_1expression.html">ast::expression</a></div><div class="ttdoc">Expression.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:122</div></div>
-<div class="ttc" id="anamespaceast_html_abb695bf493f084174fcccefbb2c0ba62"><div class="ttname"><a href="namespaceast.html#abb695bf493f084174fcccefbb2c0ba62">ast::reduce_tree</a></div><div class="ttdeci">void reduce_tree(ast_tree &amp;)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:92</div></div>
-<div class="ttc" id="aattribute__mapper__ast_8hpp_html"><div class="ttname"><a href="attribute__mapper__ast_8hpp.html">attribute_mapper_ast.hpp</a></div><div class="ttdoc">Attribute mapper ast.</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_a3b635e839c71305caf9ef355c4a0170b"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a3b635e839c71305caf9ef355c4a0170b">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(ast::ast_tree &amp;tree)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:18</div></div>
-<div class="ttc" id="astructast_1_1signed___html"><div class="ttname"><a href="structast_1_1signed__.html">ast::signed_</a></div><div class="ttdoc">Uniary sigend operand.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:99</div></div>
-<div class="ttc" id="aattribute__mapper__ast__eval_8hpp_html"><div class="ttname"><a href="attribute__mapper__ast__eval_8hpp.html">attribute_mapper_ast_eval.hpp</a></div><div class="ttdoc">Evaluators that return the value of an AST.</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html"><div class="ttname"><a href="classast_1_1reduce__visitor.html">ast::reduce_visitor</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:16</div></div>
-<div class="ttc" id="astructast_1_1expression_html_ab76eaff07b0543b6509affaa0ba5881e"><div class="ttname"><a href="structast_1_1expression.html#ab76eaff07b0543b6509affaa0ba5881e">ast::expression::rest</a></div><div class="ttdeci">std::list&lt; operation &gt; rest</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:124</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_afe926a455d35eb49b91f0268dbe0b567"><div class="ttname"><a href="classast_1_1reduce__visitor.html#afe926a455d35eb49b91f0268dbe0b567">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(signed_ &amp;sign)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:52</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_a986d389d82ce50f1da0b03fbce1986cb"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a986d389d82ce50f1da0b03fbce1986cb">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(nil &amp;n)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:37</div></div>
-<div class="ttc" id="aclassast_1_1reduce__visitor_html_aaa4e181a3085c5f1bcb98517469a8b55"><div class="ttname"><a href="classast_1_1reduce__visitor.html#aaa4e181a3085c5f1bcb98517469a8b55">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(condition &amp;con)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:57</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_a9b0fb14d2639ea093dec1b8e9510fe4d"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a9b0fb14d2639ea093dec1b8e9510fe4d">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(assignment &amp;map)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:91</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_aa24b5ce1ac0b94bc70b6f0c6690b0bb2"><div class="ttname"><a href="classast_1_1reduce__visitor.html#aa24b5ce1ac0b94bc70b6f0c6690b0bb2">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(mapping &amp;map)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:86</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_a75231ef46ddb6f5a365b9dab3beaf89d"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a75231ef46ddb6f5a365b9dab3beaf89d">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(attribute &amp;attr)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:68</div></div>
+<div class="ttc" id="astructast_1_1assignment_html"><div class="ttname"><a href="structast_1_1assignment.html">ast::assignment</a></div><div class="ttdoc">Assignment.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:179</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_a9061cd9b69e2d5da02e7f3c74f0c2e1d"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a9061cd9b69e2d5da02e7f3c74f0c2e1d">ast::reduce_visitor::constant_program</a></div><div class="ttdeci">expression constant_program</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:109</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_ac94dae79fd80622aeee9af0af847de45"><div class="ttname"><a href="classast_1_1reduce__visitor.html#ac94dae79fd80622aeee9af0af847de45">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(expression &amp;x)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:46</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_a44a8cad5ed5af80755e9c56e2fbbe8d0"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a44a8cad5ed5af80755e9c56e2fbbe8d0">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(unsigned int &amp;n)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:63</div></div>
+<div class="ttc" id="astructast_1_1nil_html"><div class="ttname"><a href="structast_1_1nil.html">ast::nil</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:39</div></div>
+<div class="ttc" id="astructast_1_1condition_html"><div class="ttname"><a href="structast_1_1condition.html">ast::condition</a></div><div class="ttdoc">Condition.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:136</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_a78b357426f150ecef2e8eb7533528fa0"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a78b357426f150ecef2e8eb7533528fa0">ast::reduce_visitor::IsConstant</a></div><div class="ttdeci">bool IsConstant()</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:102</div></div>
+<div class="ttc" id="astructast_1_1attribute_html"><div class="ttname"><a href="structast_1_1attribute.html">ast::attribute</a></div><div class="ttdoc">Attribute.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:164</div></div>
+<div class="ttc" id="astructast_1_1ast__tree_html"><div class="ttname"><a href="structast_1_1ast__tree.html">ast::ast_tree</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:49</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_a1a124ea10eb62b1151da69ef9ab5c1b4"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a1a124ea10eb62b1151da69ef9ab5c1b4">ast::reduce_visitor::GetOptimizedProgram</a></div><div class="ttdeci">expression &amp; GetOptimizedProgram()</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:96</div></div>
+<div class="ttc" id="anamespaceast_html"><div class="ttname"><a href="namespaceast.html">ast</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:36</div></div>
+<div class="ttc" id="astructast_1_1expression_html"><div class="ttname"><a href="structast_1_1expression.html">ast::expression</a></div><div class="ttdoc">Expression.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:123</div></div>
+<div class="ttc" id="anamespaceast_html_abb695bf493f084174fcccefbb2c0ba62"><div class="ttname"><a href="namespaceast.html#abb695bf493f084174fcccefbb2c0ba62">ast::reduce_tree</a></div><div class="ttdeci">void reduce_tree(ast_tree &amp;)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:113</div></div>
+<div class="ttc" id="aattribute__mapper__ast_8hpp_html"><div class="ttname"><a href="attribute__mapper__ast_8hpp.html">attribute_mapper_ast.hpp</a></div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_a3b635e839c71305caf9ef355c4a0170b"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a3b635e839c71305caf9ef355c4a0170b">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(ast::ast_tree &amp;tree)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:39</div></div>
+<div class="ttc" id="astructast_1_1signed___html"><div class="ttname"><a href="structast_1_1signed__.html">ast::signed_</a></div><div class="ttdoc">Uniary sigend operand.</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:100</div></div>
+<div class="ttc" id="aattribute__mapper__ast__eval_8hpp_html"><div class="ttname"><a href="attribute__mapper__ast__eval_8hpp.html">attribute_mapper_ast_eval.hpp</a></div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html"><div class="ttname"><a href="classast_1_1reduce__visitor.html">ast::reduce_visitor</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:37</div></div>
+<div class="ttc" id="astructast_1_1expression_html_ab76eaff07b0543b6509affaa0ba5881e"><div class="ttname"><a href="structast_1_1expression.html#ab76eaff07b0543b6509affaa0ba5881e">ast::expression::rest</a></div><div class="ttdeci">std::list&lt; operation &gt; rest</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:125</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_afe926a455d35eb49b91f0268dbe0b567"><div class="ttname"><a href="classast_1_1reduce__visitor.html#afe926a455d35eb49b91f0268dbe0b567">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(signed_ &amp;sign)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:73</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_a986d389d82ce50f1da0b03fbce1986cb"><div class="ttname"><a href="classast_1_1reduce__visitor.html#a986d389d82ce50f1da0b03fbce1986cb">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(nil &amp;n)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:58</div></div>
+<div class="ttc" id="aclassast_1_1reduce__visitor_html_aaa4e181a3085c5f1bcb98517469a8b55"><div class="ttname"><a href="classast_1_1reduce__visitor.html#aaa4e181a3085c5f1bcb98517469a8b55">ast::reduce_visitor::operator()</a></div><div class="ttdeci">void operator()(condition &amp;con)</div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast_reducer.hpp:78</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_c7bb0fe74842c66edf906a662906edce.html">uic_attribute_mapper</a></li><li class="navelem"><a class="el" href="dir_636ca02ee6dde62d4183f0464b01c4f1.html">src</a></li><li class="navelem"><a class="el" href="attribute__mapper__ast__reducer_8hpp.html">attribute_mapper_ast_reducer.hpp</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:08 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:02 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

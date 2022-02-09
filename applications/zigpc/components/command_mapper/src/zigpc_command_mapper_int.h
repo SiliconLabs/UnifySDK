@@ -30,8 +30,8 @@ extern "C" {
 #endif
 
 // Unify Shared components
-#include "sl_status.h"
-#include "dotdot_mqtt.h"
+#include <sl_status.h>
+#include <uic_typedefs.h>
 
 #include "zcl_util.h"
 #include "zigpc_common_zigbee.h"
@@ -103,14 +103,14 @@ sl_status_t zigpc_command_mapper_send_unicast(
 
 /**
  * @brief Process unicast Groups cluster messages.
- * 
+ *
  * @param eui64             Destination device identifer.
  * @param endpoint          Destination device endpoint.
  * @param cluster_id        Command cluster ID.
  * @param command_id        Command ID.
  * @param command_arg_count Command argument count.
  * @param command_arg_list  Command argument list.
- * @return sl_status_t 
+ * @return sl_status_t
  */
 sl_status_t zigpc_command_mapper_handle_groups(
   zigbee_eui64_t eui64,
@@ -125,14 +125,14 @@ sl_status_t zigpc_command_mapper_handle_groups(
  * (EUI64/endpoint identifiers) associated with a GroupID. For each group
  * member, this function will call zigpc_command_mapper_send_unicast with
  * the EUI64-based UNID and endpoint information.
- * 
+ *
  * @param group_id    GroupId to lookup members.
  * @param frame_type  ZCL frame control data to send.
  * @param cluster_id  Cluster ID to send.
  * @param command_id  Command ID to send.
  * @param command_arg_count Command argument count.
  * @param command_arg_list  Command argument list.
- * @return sl_status_t 
+ * @return sl_status_t
  */
 sl_status_t zigpc_cmdmapper_redirect_to_unicast(
   zigbee_group_id_t group_id,
@@ -162,6 +162,22 @@ sl_status_t zigpc_command_mapper_send_multicast(
   const zcl_command_id_t command_id,
   const size_t command_arg_count,
   const zigpc_zcl_frame_data_t *const command_arg_list);
+
+/**
+ * @brief Setup listeners for ZCL cluster specific commands sent from PAN nodes
+ * to the gateway.
+ *
+ * @return sl_status_t SL_STATUS_OK on successfully registing listeners for all
+ * commands supported, error otherwise.
+ */
+sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void);
+
+/**
+ * @brief Cleanup listeners for ZCL cluster specific commands sent from PAN nodes
+ * to the gateway.
+ *
+ */
+void zigpc_command_mapper_cleanup_gen_cmd_publish_listeners(void);
 
 #ifdef __cplusplus
 }

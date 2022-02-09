@@ -19,8 +19,8 @@
 
 // ZigPC includes
 #include <zcl_definitions.h>
-#include <zigpc_datastore_mock.h>
-#include <z3gateway_mock.h>
+#include "zigpc_datastore_mock.h"
+#include "zigbee_host_mock.h"
 
 // Component includes
 #include "zigpc_gateway.h"
@@ -57,14 +57,14 @@ int suiteTearDown(int num_failures)
 }
 
 /**
- * @brief Mock helper to expect Z3GatewayTicks
+ * @brief Mock helper to expect ZigbeeHostTicks
  *
  * @param defer_cycles RequestQueue defer cycles
  */
-void helper_expect_z3gateway_tick_calls(size_t defer_cycles)
+void helper_expect_zigbee_host_tick_calls(size_t defer_cycles)
 {
   while (defer_cycles--) {
-    z3gatewayTick_Expect();
+    zigbeeHostTick_Expect();
   }
 }
 
@@ -74,14 +74,14 @@ void helper_expect_z3gateway_tick_calls(size_t defer_cycles)
  */
 void setUp(void)
 {
-  z3gateway_mock_Init();
+  zigbee_host_mock_Init();
   contiki_test_helper_init();
   process_start(&zigpc_gateway_process, NULL);
   contiki_test_helper_run(0);
 
   // Expect calls until RequestQueue is ready to send commands
-  z3gatewaySetEzspPolicy_IgnoreAndReturn(EZSP_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_START_BACKOFF);
+  zigbeeHostSetEzspPolicy_IgnoreAndReturn(EZSP_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_START_BACKOFF);
   zigpc_gateway_on_ncp_post_reset(false);
   contiki_test_helper_run_once(TICK_DURATION_MS * DEFER_CYCLES_START_BACKOFF);
 }
@@ -94,15 +94,15 @@ void tearDown(void)
 {
   process_exit(&zigpc_gateway_process);
   contiki_test_helper_run(0);
-  z3gateway_mock_Verify();
-  z3gateway_mock_Destroy();
+  zigbee_host_mock_Verify();
+  zigbee_host_mock_Destroy();
 }
 
 void test_zigpc_gateway_network_init_call(void)
 {
   // ARRANGE
-  z3gatewayTrustCenterInit_ExpectAndReturn(EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  zigbeeHostTrustCenterInit_ExpectAndReturn(EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status = zigpc_gateway_network_init();
@@ -116,11 +116,11 @@ void test_zigpc_gateway_network_init_call(void)
 void test_zigpc_gateway_network_permit_joins_call(void)
 {
   // ARRANGE
-  z3gatewayTrustCenterJoinOpen_ExpectAndReturn(true, EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  zigbeeHostTrustCenterJoinOpen_ExpectAndReturn(true, EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ignoring call to print NWK key
-  z3gatewayGetEmberKey_IgnoreAndReturn(EMBER_NOT_FOUND);
+  zigbeeHostGetEmberKey_IgnoreAndReturn(EMBER_NOT_FOUND);
 
   // ACT
   sl_status_t status = zigpc_gateway_network_permit_joins(true);
@@ -134,8 +134,8 @@ void test_zigpc_gateway_network_permit_joins_call(void)
 void test_zigpc_gateway_network_deny_joins_call(void)
 {
   // ARRANGE
-  z3gatewayTrustCenterJoinClose_ExpectAndReturn(EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  zigbeeHostTrustCenterJoinClose_ExpectAndReturn(EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status = zigpc_gateway_network_permit_joins(false);
@@ -152,11 +152,11 @@ void test_zigpc_gateway_add_node_install_code_call(void)
   uint8_t install_code_length        = 10U;
 
   // ARRANGE
-  z3gatewayTrustCenterAddDeviceInstallCode_ExpectAndReturn(TEST_EUI64_LE,
-                                                           install_code,
-                                                           install_code_length,
-                                                           EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  zigbeeHostTrustCenterAddDeviceInstallCode_ExpectAndReturn(TEST_EUI64_LE,
+                                                            install_code,
+                                                            install_code_length,
+                                                            EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status_null_eui64
@@ -179,16 +179,16 @@ void test_zigpc_gateway_add_node_install_code_call(void)
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
 }
 
-void test_zigpc_gateway_interview_node_call(void)
+void test_zigpc_gateway_discover_device_call(void)
 {
   // ARRANGE
-  z3gatewayTrustCenterStartDiscovery_ExpectAndReturn(TEST_EUI64_LE,
-                                                     EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  zigbeeHostZdoActiveEndpointsRequest_ExpectAndReturn(TEST_EUI64_LE,
+                                                      EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
-  sl_status_t status_null_eui64 = zigpc_gateway_interview_node(NULL);
-  sl_status_t status            = zigpc_gateway_interview_node(TEST_EUI64);
+  sl_status_t status_null_eui64 = zigpc_gateway_discover_device(NULL);
+  sl_status_t status            = zigpc_gateway_discover_device(TEST_EUI64);
 
   contiki_test_helper_run(TICK_DURATION_MS * 2);
 
@@ -200,9 +200,9 @@ void test_zigpc_gateway_interview_node_call(void)
 void test_zigpc_gateway_remove_node_call(void)
 {
   // ARRANGE
-  z3gatewayTrustCenterRemoveDevice_ExpectAndReturn(TEST_EUI64_LE,
-                                                   EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  zigbeeHostNetworkDeviceLeaveRequest_ExpectAndReturn(TEST_EUI64_LE,
+                                                      EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status_null_eui64 = zigpc_gateway_remove_node(NULL);
@@ -229,16 +229,16 @@ void test_zigpc_gateway_send_zcl_command_frame_call(void)
     ZIGPC_ZCL_CLUSTER_POLL_CONTROL,
     false);
 
-  z3gatewayFillZclFrame_ExpectAndReturn(test_zcl_frame.buffer,
-                                        test_zcl_frame.size,
-                                        test_zcl_frame.offset_sequence_id,
-                                        EMBER_SUCCESS);
+  zigbeeHostFillZclFrame_ExpectAndReturn(test_zcl_frame.buffer,
+                                         test_zcl_frame.size,
+                                         test_zcl_frame.offset_sequence_id,
+                                         EMBER_SUCCESS);
 
-  z3gatewaySendZclFrameUnicast_ExpectAndReturn(TEST_EUI64_LE,
-                                               test_endpoint,
-                                               test_zcl_cluster,
-                                               EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  zigbeeHostSendZclFrameUnicast_ExpectAndReturn(TEST_EUI64_LE,
+                                                test_endpoint,
+                                                test_zcl_cluster,
+                                                EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status_null_eui64
@@ -271,15 +271,15 @@ void test_zigpc_gateway_send_zcl_frame_multicast_call(void)
   zcl_frame_t test_zcl_frame        = {0};
 
   // ARRANGE
-  z3gatewayFillZclFrame_ExpectAndReturn(test_zcl_frame.buffer,
-                                        test_zcl_frame.size,
-                                        test_zcl_frame.offset_sequence_id,
-                                        EMBER_SUCCESS);
+  zigbeeHostFillZclFrame_ExpectAndReturn(test_zcl_frame.buffer,
+                                         test_zcl_frame.size,
+                                         test_zcl_frame.offset_sequence_id,
+                                         EMBER_SUCCESS);
 
-  z3gatewaySendZclFrameMulticast_ExpectAndReturn(test_group,
-                                                 test_zcl_cluster,
-                                                 EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  zigbeeHostSendZclFrameMulticast_ExpectAndReturn(test_group,
+                                                  test_zcl_cluster,
+                                                  EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status_null_frame
@@ -306,14 +306,14 @@ void test_zigpc_gateway_configure_reports_call(void)
   test_zcl_frame.size = 10;
 
   // ARRANGE
-  z3gatewayInitReporting_ExpectAndReturn(TEST_EUI64_LE,
-                                         test_endpoint,
-                                         test_zcl_cluster,
-                                         test_zcl_frame.buffer,
-                                         test_zcl_frame.size,
-                                         EMBER_SUCCESS);
+  zigbeeHostInitReporting_ExpectAndReturn(TEST_EUI64_LE,
+                                          test_endpoint,
+                                          test_zcl_cluster,
+                                          test_zcl_frame.buffer,
+                                          test_zcl_frame.size,
+                                          EMBER_SUCCESS);
 
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status_null_eui64
@@ -348,13 +348,13 @@ void test_zigpc_gateway_request_binding_call(void)
   zcl_cluster_id_t test_zcl_cluster  = 0x08;
 
   // ARRANGE
-  z3gatewayInitBinding_ExpectAndReturn(TEST_EUI64_LE,
-                                       test_endpoint,
-                                       test_zcl_cluster,
-                                       0,
-                                       EMBER_SUCCESS);
+  zigbeeHostInitBinding_ExpectAndReturn(TEST_EUI64_LE,
+                                        test_endpoint,
+                                        test_zcl_cluster,
+                                        0,
+                                        EMBER_SUCCESS);
 
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status_null_eui64
@@ -376,9 +376,9 @@ void test_zigpc_gateway_add_ota_image_call(void)
   unsigned int ota_path_size = sizeof(ota_path) / sizeof(char);
 
   // ARRANGE
-  z3gatewayAddOtaImage_ExpectAndReturn(ota_path, EMBER_SUCCESS);
+  zigbeeHostAddOtaImage_ExpectAndReturn(ota_path, EMBER_SUCCESS);
 
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status_null_path
@@ -395,18 +395,19 @@ void test_zigpc_gateway_add_ota_image_call(void)
 void test_zigpc_gateway_too_many_messages_defer_call(void)
 {
   // ARRANGE
-  z3gatewayTrustCenterJoinOpen_ExpectAndReturn(true,
-                                               EMBER_MAX_MESSAGE_LIMIT_REACHED);
+  zigbeeHostTrustCenterJoinOpen_ExpectAndReturn(
+    true,
+    EMBER_MAX_MESSAGE_LIMIT_REACHED);
 
   // ignoring call to print NWK key
-  z3gatewayGetEmberKey_IgnoreAndReturn(EMBER_NOT_FOUND);
+  zigbeeHostGetEmberKey_IgnoreAndReturn(EMBER_NOT_FOUND);
 
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_MESSAGE_LIMIT_REACHED + 3);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_MESSAGE_LIMIT_REACHED + 3);
 
-  z3gatewayTrustCenterJoinOpen_ExpectAndReturn(true, EMBER_SUCCESS);
+  zigbeeHostTrustCenterJoinOpen_ExpectAndReturn(true, EMBER_SUCCESS);
 
   // ignoring call to print NWK key
-  z3gatewayGetEmberKey_IgnoreAndReturn(EMBER_NOT_FOUND);
+  zigbeeHostGetEmberKey_IgnoreAndReturn(EMBER_NOT_FOUND);
 
   // ACT
   sl_status_t status = zigpc_gateway_network_permit_joins(true);
@@ -435,7 +436,7 @@ void test_zigpc_gateway_store_zcl_command_frame_sleepy_call(void)
     ZCL_CLUSTER_SERVER_SIDE,
     ZIGPC_ZCL_CLUSTER_POLL_CONTROL,
     true);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status
@@ -452,19 +453,19 @@ void test_zigpc_gateway_store_zcl_command_frame_sleepy_call(void)
 void test_zigpc_gateway_unload_zcl_command_frame_sleepy_call(void)
 {
   // ARRANGE
-  z3gatewaySendPollingCheckInResponse_ExpectAndReturn(EMBER_SUCCESS);
+  zigbeeHostSendPollingCheckInResponse_ExpectAndReturn(EMBER_SUCCESS);
 
-  z3gatewayFillZclFrame_ExpectAndReturn(
+  zigbeeHostFillZclFrame_ExpectAndReturn(
     test_sleepy_zcl_frame.buffer,
     test_sleepy_zcl_frame.size,
     test_sleepy_zcl_frame.offset_sequence_id,
     EMBER_SUCCESS);
 
-  z3gatewaySendZclFrameUnicast_ExpectAndReturn(TEST_EUI64_LE,
-                                               test_sleepy_endpoint,
-                                               test_sleepy_zcl_cluster,
-                                               EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  zigbeeHostSendZclFrameUnicast_ExpectAndReturn(TEST_EUI64_LE,
+                                                test_sleepy_endpoint,
+                                                test_sleepy_zcl_cluster,
+                                                EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   sl_status_t status = zigpc_gateway_unload_sleepy_messages(TEST_EUI64);
@@ -476,7 +477,7 @@ void test_zigpc_gateway_unload_zcl_command_frame_sleepy_call(void)
   // Check to see if no messages are unloaded again
 
   // ARRANGE
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT
   status = zigpc_gateway_unload_sleepy_messages(TEST_EUI64);
@@ -494,7 +495,7 @@ void test_zigpc_gateway_unload_zcl_command_frame_sleepy_call(void)
 void test_zigpc_gateway_pause_dispatching_on_ncp_reset(void)
 {
   // ARRANGE (pre-reset)
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT (pre-reset)
   // Simulate NCP start resetting
@@ -508,10 +509,10 @@ void test_zigpc_gateway_pause_dispatching_on_ncp_reset(void)
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
 
   // ARRANGE (post-reset)
-  z3gatewayTrustCenterJoinClose_ExpectAndReturn(EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_START_BACKOFF
-                                     + DEFER_CYCLES_DEFAULT);
-  z3gatewaySetEzspPolicy_IgnoreAndReturn(EZSP_SUCCESS);
+  zigbeeHostTrustCenterJoinClose_ExpectAndReturn(EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_START_BACKOFF
+                                       + DEFER_CYCLES_DEFAULT);
+  zigbeeHostSetEzspPolicy_IgnoreAndReturn(EZSP_SUCCESS);
 
   // ACT (post-reset)
   // Simulate NCP complete reset + init
@@ -533,7 +534,7 @@ void test_zigpc_gateway_pause_dispatching_on_ncp_reset(void)
 void test_zigpc_gateway_keep_retrying_on_ncp_not_ready(void)
 {
   // ARRANGE (pre-reset)
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_DEFAULT);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_DEFAULT);
 
   // ACT (pre-reset)
   // Simulate NCP start resetting
@@ -547,10 +548,10 @@ void test_zigpc_gateway_keep_retrying_on_ncp_not_ready(void)
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
 
   // ARRANGE (post-reset-ncp-not-ready)
-  z3gatewaySetEzspPolicy_IgnoreAndReturn(EZSP_SUCCESS);
-  z3gatewayTrustCenterJoinClose_ExpectAndReturn(EZSP_NOT_CONNECTED);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_LOST_CONNECTION
-                                     + DEFER_CYCLES_DEFAULT);
+  zigbeeHostSetEzspPolicy_IgnoreAndReturn(EZSP_SUCCESS);
+  zigbeeHostTrustCenterJoinClose_ExpectAndReturn(EZSP_NOT_CONNECTED);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_LOST_CONNECTION
+                                       + DEFER_CYCLES_DEFAULT);
 
   // ACT (post-reset-ncp-not-ready)
   // Simulate NCP post reset
@@ -561,9 +562,9 @@ void test_zigpc_gateway_keep_retrying_on_ncp_not_ready(void)
   // ASSERT (post-reset-ncp-not-ready): Handled by CMock
 
   // ARRANGE (post-reset-ncp-ready)
-  z3gatewayTrustCenterJoinClose_ExpectAndReturn(EMBER_SUCCESS);
-  helper_expect_z3gateway_tick_calls(DEFER_CYCLES_START_BACKOFF
-                                     + DEFER_CYCLES_DEFAULT);
+  zigbeeHostTrustCenterJoinClose_ExpectAndReturn(EMBER_SUCCESS);
+  helper_expect_zigbee_host_tick_calls(DEFER_CYCLES_START_BACKOFF
+                                       + DEFER_CYCLES_DEFAULT);
 
   // ACT (post-reset-ncp-ready)
   zigpc_gateway_on_ncp_post_reset(false);

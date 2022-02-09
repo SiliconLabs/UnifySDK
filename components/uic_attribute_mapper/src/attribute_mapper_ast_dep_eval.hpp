@@ -12,7 +12,8 @@
  *****************************************************************************/
 
 /**
- * @file attribute_mapper_ast_dep_eval.hpp
+ * @defgroup attribute_mapper_ast_dep_eval Abstract Syntax Tree Dependency Evaluation
+ * @ingroup unify_attribute_mapper
  * @brief Dependency evaluators used by the mapping engine.
  *
  * @{
@@ -33,7 +34,7 @@ typedef std::vector<attribute_dependency_t> dependencies_t;
 
 /**
  * @brief Dependency evaluator
- * 
+ *
  * This evaluator goes through an AST starting with an expression and builds a
  * list of attribute id's that are used if the expression is to be evaluated.
  * Note that this evaluator accumulates a list of dependencies. Ie. each
@@ -60,14 +61,14 @@ class dep_eval
   /**
    * @brief This is the normal entry point of the evaluator.
    *
-   * @param x Top level expression to start from 
+   * @param x Top level expression to start from
    */
   const dependencies_t &operator()(const expression &x);
 
   /**
    * @brief Get the list of dependencies
-   * 
-   * @return const std::vector<attribute_dependency_t>& 
+   *
+   * @return const std::vector<attribute_dependency_t>&
    */
   const dependencies_t &get_dependencies() const;
 
@@ -77,7 +78,7 @@ class dep_eval
 
 /**
  * @brief Attribute path evaluator
- * 
+ *
  * This evaluator build a list of attribute id's present in an
  * attribute path.
  */
@@ -86,9 +87,9 @@ class dep_eval_path
   public:
   /**
    * @brief Construct a new dep eval path object
-   * 
+   *
    * @param global_context Not currently used
-   * @param value_type Desired or reported 
+   * @param value_type Desired or reported
    */
   dep_eval_path(value_type_t value_type);
 
@@ -111,8 +112,8 @@ class dep_eval_path
 
   /**
    * @brief Get the dependencies list
-   * 
-   * @return const std::vector<attribute_dependency_t>& 
+   *
+   * @return const std::vector<attribute_dependency_t>&
    */
   const dependencies_t &get_dependencies() const;
 

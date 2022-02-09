@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -82,7 +82,7 @@ static sl_status_t zwave_{{_name}}(
    sl_status_t rc = zwave_{{_name}}_override(_node, frame, frame_len);
    if( *frame_len > 0 ) {
      return rc;
-  }  
+  }
 
   try {
     uint8_t offset=0;
@@ -90,20 +90,20 @@ static sl_status_t zwave_{{_name}}(
     uint8_t param_offsets[255] = {0}; // To avoid -Wno-maybe-uninitialized
 
     attribute node(_node);
-    attribute parent = node.first_parent(ATTRIBUTE_ENDPOINT_ID);
+    attribute parent;
 
     frame[offset++] = {{_cc_key}};
     frame[offset++] = {{_key}}; // {{_name}}
     {{#param}}
     //parameter {{_name}} {{_type}}
       {{#if has_attr}}
-    node = parent.child_by_type(ATTRIBUTE_{{att.name}});
+    parent = node.first_parent_or_self(ATTRIBUTE_{{att.name}});
           {{#if (equals _length 0) }}
     //parameter is a mask inside a byte
-    frame[offset] |= (node.reported<int32_t>()<< {{_shifter}}) & {{_fieldmask}};
+    frame[offset] |= (parent.reported<int32_t>()<< {{_shifter}}) & {{_fieldmask}};
           {{else}}
     //parameter is {{_length}} bytes long
-    node.get(REPORTED_ATTRIBUTE, &frame[offset], &size );
+    parent.get(REPORTED_ATTRIBUTE, &frame[offset], &size );
           {{/if}}
       {{/if}}
     {{#if _size_key }}
@@ -139,7 +139,7 @@ static sl_status_t zwave_{{_name}}(
    sl_status_t rc = zwave_{{_name}}_override(_node, frame, frame_len);
    if( *frame_len > 0 ) {
      return rc;
-  }  
+  }
 
   try {
     uint8_t offset = 0;
@@ -148,7 +148,8 @@ static sl_status_t zwave_{{_name}}(
     uint8_t param_key = 0;
 
     attribute node(_node);
-    attribute parent = node.first_parent(ATTRIBUTE_ENDPOINT_ID);
+    attribute parent = node.parent();
+    attribute val;
 
     frame[offset++] = {{_cc_key}} ;
     frame[offset++] = {{_key}}; // {{_name}}
@@ -157,13 +158,14 @@ static sl_status_t zwave_{{_name}}(
         {{#if has_attr}}
         {{#if att.parameter}}
     /// {{{this}}}
-    frame[offset] |= (parent.parent().reported<int32_t>()<< {{_shifter}}) & {{_fieldmask}};
+    val = node.first_parent_or_self(ATTRIBUTE_{{att.name}});
+    frame[offset] |= (val.reported<int32_t>()<< {{_shifter}}) & {{_fieldmask}};
         {{else}}
-    node = parent.child_by_type(ATTRIBUTE_{{att.name}});
+    val = parent.child_by_type(ATTRIBUTE_{{att.name}});
           {{#if (equals _length 0) }}
-    frame[offset] |= (node.desired_or_reported<int32_t>()<< {{_shifter}}) & {{_fieldmask}};
+    frame[offset] |= (val.desired_or_reported<int32_t>()<< {{_shifter}}) & {{_fieldmask}};
           {{else}}
-    node.get(DESIRED_OR_REPORTED_ATTRIBUTE, &frame[offset], &size );
+    val.get(DESIRED_OR_REPORTED_ATTRIBUTE, &frame[offset], &size );
           {{/if}}
         {{/if}}
       {{/if}}
@@ -323,7 +325,7 @@ static void {{_name}}_on_version_attribute_update(
 
   zwave_cc_version_t version      = 0;
   attribute updated_node(_updated_node);
-  attribute endpoint_node = updated_node.first_parent(ATTRIBUTE_ENDPOINT_ID);
+  attribute endpoint_node = updated_node.first_parent_or_self(ATTRIBUTE_ENDPOINT_ID);
 
 
   if (is_zwave_command_class_filtered_for_root_device(
@@ -365,11 +367,9 @@ static void {{_name}}_on_version_attribute_update(
 {{#if _parameter }}
 void zwave_{{ ../_name }}_add_{{_name}}( attribute_store_node_t __parent, uint8_t val ) {
   attribute parent(__parent);
-  attribute ep = parent.first_parent( ATTRIBUTE_ENDPOINT_ID );
+  attribute ep = parent.first_parent_or_self( ATTRIBUTE_ENDPOINT_ID );
   attribute version = ep.child_by_type(ATTRIBUTE_{{../_name}}_VERSION);
-  attribute node = parent.add_node( ATTRIBUTE_{{_name}} );
-
-  node.set_reported<uint8_t>(val);
+  attribute node = parent.emplace_node<uint8_t>( ATTRIBUTE_{{_name}},val);
 
   {{#attr_children _name }}
   if( version.reported<uint8_t>() >= {{_version}} )

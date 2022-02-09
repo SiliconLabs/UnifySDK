@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -23,7 +23,6 @@
 #include "zwave_tx_mock.h"
 #include "zwave_command_handler_mock.h"
 #include "zwave_controller_utils_mock.h"
-#include "zwave_controller_utils_mock.h"
 #include "zwave_security_validation_mock.h"
 
 #include "zwave_controller_connection_info.h"
@@ -39,6 +38,8 @@ int suiteTearDown(int num_failures)
 {
   return num_failures;
 }
+
+void setUp() {}
 
 void test_zwave_command_class_manufacturer_specific_get()
 {
@@ -61,12 +62,13 @@ void test_zwave_command_class_manufacturer_specific_get()
     true);
   zwave_security_validation_is_security_valid_for_support_IgnoreArg_connection();
 
-  execute_frame_expect_frame(zwave_command_class_manufacturer_specific_support_handler,
-                             cmd_frame_manufacturer_specific_command,
-                             sizeof(cmd_frame_manufacturer_specific_command),
-                             exp_frame_manufacturer_specific_command,
-                             sizeof(exp_frame_manufacturer_specific_command),
-                             SL_STATUS_OK);
+  execute_frame_expect_frame(
+    zwave_command_class_manufacturer_specific_support_handler,
+    cmd_frame_manufacturer_specific_command,
+    sizeof(cmd_frame_manufacturer_specific_command),
+    exp_frame_manufacturer_specific_command,
+    sizeof(exp_frame_manufacturer_specific_command),
+    SL_STATUS_OK);
 }
 
 void test_zwave_command_class_default_device_specific_get()
@@ -95,31 +97,35 @@ void test_zwave_command_class_default_device_specific_get()
     true);
   zwave_security_validation_is_security_valid_for_support_IgnoreArg_connection();
 
-  execute_frame_expect_frame(zwave_command_class_manufacturer_specific_support_handler,
-                             cmd_frame_device_specific_cmd,
-                             sizeof(cmd_frame_device_specific_cmd),
-                             exp_frame_device_specific_cmd,
-                             sizeof(exp_frame_device_specific_cmd),
-                             SL_STATUS_OK);
+  execute_frame_expect_frame(
+    zwave_command_class_manufacturer_specific_support_handler,
+    cmd_frame_device_specific_cmd,
+    sizeof(cmd_frame_device_specific_cmd),
+    exp_frame_device_specific_cmd,
+    sizeof(exp_frame_device_specific_cmd),
+    SL_STATUS_OK);
 }
 
 void test_zwave_command_class_manufacturer_specific_not_supported_result()
 {
-  execute_frame_expect_result(zwave_command_class_manufacturer_specific_support_handler,
-                              NULL,
-                              0,
-                              SL_STATUS_NOT_SUPPORTED);
-  execute_frame_expect_result(zwave_command_class_manufacturer_specific_support_handler,
-                              NULL,
-                              1,
-                              SL_STATUS_NOT_SUPPORTED);
+  execute_frame_expect_result(
+    zwave_command_class_manufacturer_specific_support_handler,
+    NULL,
+    0,
+    SL_STATUS_NOT_SUPPORTED);
+  execute_frame_expect_result(
+    zwave_command_class_manufacturer_specific_support_handler,
+    NULL,
+    1,
+    SL_STATUS_NOT_SUPPORTED);
   uint8_t cmd_frame_without_command[] = {
     COMMAND_CLASS_MANUFACTURER_SPECIFIC,
   };
-  execute_frame_expect_result(zwave_command_class_manufacturer_specific_support_handler,
-                              cmd_frame_without_command,
-                              sizeof(cmd_frame_without_command),
-                              SL_STATUS_NOT_SUPPORTED);
+  execute_frame_expect_result(
+    zwave_command_class_manufacturer_specific_support_handler,
+    cmd_frame_without_command,
+    sizeof(cmd_frame_without_command),
+    SL_STATUS_NOT_SUPPORTED);
 }
 
 void test_zwave_command_class_manufacturer_specific_ignore_non_relevant_cmd()
@@ -129,10 +135,11 @@ void test_zwave_command_class_manufacturer_specific_ignore_non_relevant_cmd()
     0xFF  // arbitrary Command
   };
 
-  execute_frame_expect_result(zwave_command_class_manufacturer_specific_support_handler,
-                              cmd_frame_unknown,
-                              sizeof(cmd_frame_unknown),
-                              SL_STATUS_NOT_SUPPORTED);
+  execute_frame_expect_result(
+    zwave_command_class_manufacturer_specific_support_handler,
+    cmd_frame_unknown,
+    sizeof(cmd_frame_unknown),
+    SL_STATUS_NOT_SUPPORTED);
 }
 
 void test_zwave_command_class_manufacturer_specific_ignore_non_relevant_cc()
@@ -142,10 +149,11 @@ void test_zwave_command_class_manufacturer_specific_ignore_non_relevant_cc()
     0xFF  // arbitrary Command
   };
 
-  execute_frame_expect_result(zwave_command_class_manufacturer_specific_support_handler,
-                              cmd_frame_unknown,
-                              sizeof(cmd_frame_unknown),
-                              SL_STATUS_NOT_SUPPORTED);
+  execute_frame_expect_result(
+    zwave_command_class_manufacturer_specific_support_handler,
+    cmd_frame_unknown,
+    sizeof(cmd_frame_unknown),
+    SL_STATUS_NOT_SUPPORTED);
 }
 
 static sl_status_t zwave_command_handler_register_handler_CALLBACK(
@@ -156,7 +164,8 @@ static sl_status_t zwave_command_handler_register_handler_CALLBACK(
   expected.command_class      = COMMAND_CLASS_MANUFACTURER_SPECIFIC_V2;
   expected.command_class_name = "Manufacturer Specific";
   expected.version            = MANUFACTURER_SPECIFIC_VERSION_V2;
-  expected.support_handler = &zwave_command_class_manufacturer_specific_support_handler;
+  expected.support_handler
+    = &zwave_command_class_manufacturer_specific_support_handler;
   expected.control_handler = NULL;
 
   TEST_ASSERT_EQUAL_PTR(expected.support_handler, actual.support_handler);
@@ -188,8 +197,9 @@ void test_zwave_command_class_manufacturer_specific_multicast_not_allowed()
     NULL,
     true);
   zwave_security_validation_is_security_valid_for_support_IgnoreArg_connection();
-  assert_dissallow_multicast(zwave_command_class_manufacturer_specific_support_handler,
-                             cmd_frame_device_get_command);
+  assert_dissallow_multicast(
+    zwave_command_class_manufacturer_specific_support_handler,
+    cmd_frame_device_get_command);
 
   uint8_t cmd_frame_manu_spec_get_command[]
     = {COMMAND_CLASS_MANUFACTURER_SPECIFIC_V2, MANUFACTURER_SPECIFIC_GET};
@@ -199,6 +209,7 @@ void test_zwave_command_class_manufacturer_specific_multicast_not_allowed()
     NULL,
     true);
   zwave_security_validation_is_security_valid_for_support_IgnoreArg_connection();
-  assert_dissallow_multicast(zwave_command_class_manufacturer_specific_support_handler,
-                             cmd_frame_manu_spec_get_command);
+  assert_dissallow_multicast(
+    zwave_command_class_manufacturer_specific_support_handler,
+    cmd_frame_manu_spec_get_command);
 }

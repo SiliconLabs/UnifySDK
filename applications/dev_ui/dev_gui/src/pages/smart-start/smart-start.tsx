@@ -194,10 +194,7 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
                         </span>
                       </td>
                       <td className={item.IsEdit ? "" : "padding-5"}>
-                        {item.IsEdit
-                          ? item.ProtocolControllerUnid
-                          : <TextField size="small" className="flex-input" type="text" variant="outlined" label="PC UNID" value={item.ProtocolControllerUnid} onChange={this.updateStateByEvent.bind(this, index, 'ProtocolControllerUnid')} />
-                        }
+                        <TextField size="small" className="flex-input" type="text" variant="outlined" label="PC UNID" value={item.ProtocolControllerUnid} onChange={this.updateStateByEvent.bind(this, index, 'ProtocolControllerUnid')} />
                       </td>
                       <td className="padding-5">
                         <TextField size="small" className="flex-input" type="text" variant="outlined" label="UNID" value={item.Unid} onChange={this.updateStateByEvent.bind(this, index, 'Unid')} />

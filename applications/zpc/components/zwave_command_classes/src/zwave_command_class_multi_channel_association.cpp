@@ -522,13 +522,13 @@ static sl_status_t zwave_command_class_multi_channel_association_set(
     return SL_STATUS_FAIL;
   }
 
-  // Are we by accident trying to resolve ourselves?
+  // Are we trying to resolve ourselves?
   zwave_node_id_t zpc_node_id = zwave_network_management_get_node_id();
   if (zpc_node_id == node_id) {
-    sl_log_warning(LOG_TAG,
-                   "ZPC just updated its Association Group Content desired "
-                   "value. This should not happen !");
-    attribute_store_undefine_desired(node);
+    sl_log_debug(LOG_TAG,
+                 "ZPC just updated its Association Group Content desired "
+                 "value. Accepting it automatically !");
+    attribute_store_set_reported_as_desired(node);
     return SL_STATUS_ALREADY_EXISTS;
   }
 
@@ -728,13 +728,26 @@ void establish_lifeline_association(attribute_store_node_t endpoint_node)
   for (association_group_id_t i = 1;
        i <= get_number_of_groups(node_id, endpoint_id);
        i++) {
-    // Check the group profile, associate ourselves if it is reported (or considered)
-    // a lifeline profile group.
-    // We also accept the N/A profile, some Z-Wave Plus devices do that.
+    // Check if we want to associate ourselve to a group. Reasons include:
+    // 1. it is a lifeline group (LIFELINE profile) (forceful if SIS)
+    // 2. it has no AGI data or NA profile (AGI will set the profile as lifeline) (non-forceful)
+    // 3. it sends some Command Class/commands that somebody wants to receive. (non-forceful)
     // Note: We do not check if the destination is Z-Wave Plus, profile data is enough
+    bool establish_forceful_association = false;
+    bool establish_association = false;
     agi_profile_t profile
       = zwave_command_class_agi_get_group_profile(node_id, endpoint_id, i);
-    if (AGI_LIFELINE_PROFILE != profile && AGI_NA_PROFILE != profile) {
+    if (AGI_LIFELINE_PROFILE == profile) {
+      establish_forceful_association = true;
+    } else if ((AGI_NA_PROFILE == profile)
+               || zwave_command_class_agi_group_contains_listeners(node_id,
+                                                                   endpoint_id,
+                                                                   i)) {
+      establish_association = true;
+    }
+
+    if (establish_association == false
+        && establish_forceful_association == false) {
       continue;
     }
 
@@ -769,25 +782,31 @@ void establish_lifeline_association(attribute_store_node_t endpoint_node)
     if (true
           == zwave_node_supports_command_class(COMMAND_CLASS_MULTI_CHANNEL_V4,
                                                node_id,
-                                               endpoint_id)
+                                               0)
         && zwave_node_get_command_class_version(
              COMMAND_CLASS_MULTI_CHANNEL_ASSOCIATION_V3,
              node_id,
              endpoint_id)
              >= 3) {
+      // Ensure that we are not already present as a NodeID association
+      remove_desired_association(node_id, endpoint_id, i, new_association);
       new_association.type = ENDPOINT;
     }
     // Here we set the return route since ZPC is assigning a lifeline destination to itself
     zwave_network_management_assign_return_route(node_id, zpc_node_id);
 
-    if (zwave_network_management_is_zpc_sis() == true) {
+    if ((zwave_network_management_is_zpc_sis() == true)
+        && (establish_forceful_association == true)) {
       /// CL:008E.01.51.05.1: Bump somebody out only if we are the SIS.
       force_add_desired_association(node_id, endpoint_id, i, new_association);
     } else {
       add_desired_association(node_id, endpoint_id, i, new_association);
     }
+
     sl_log_info(LOG_TAG,
-                "Establishing Lifeline for Node %d:%d Group ID %d.",
+                "Establishing association (type %d) to the ZPC "
+                "for NodeID %d:%d Group ID %d.",
+                new_association.type,
                 node_id,
                 endpoint_id,
                 i);

@@ -34,7 +34,8 @@ fn test_generate_zw_firmware_md_request_get() {
         fragment_size: 1000,
         activation: true,
         hardware_version: 1,
-    }.into();
+    }
+    .into();
 
     assert_eq!(frame.len(), 13);
     let answer: Vec<u8> = vec![

@@ -1,7 +1,7 @@
 
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -31,13 +31,13 @@ extern "C" {
  *
  * This module takes care of the Thermostat Mode Command Class support (none)
  * and control (currently controlling version 3)
- * 
+ *
  * @{
  */
 
 /**
  * @brief Initialize the Thermostat Mode Command Class control.
- * 
+ *
  * @return Always true
  */
 sl_status_t zwave_command_class_thermostat_mode_init();

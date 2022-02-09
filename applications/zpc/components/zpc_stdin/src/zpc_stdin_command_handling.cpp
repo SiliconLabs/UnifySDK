@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -39,6 +39,8 @@
 #include "ucl_mqtt_node_interview.h"
 #include "attribute_store_debug.h"
 #include "attribute.hpp"
+#include "attribute_poll.h"
+#include "zwave_s2_keystore.h"
 // Contiki includes
 #include "clock.h"  // For CLOCK_CONF_SECOND
 
@@ -54,6 +56,7 @@
 #include <stdexcept>
 #include <unistd.h>
 
+constexpr char LOG_TAG[] = "zpc_stdin";
 /// File descripter for output stream
 static int out_stream;
 
@@ -62,10 +65,10 @@ static uint8_t node_reported_dsk[16] = {0};
 
 // Private handler functions
 static sl_status_t handle_zwave_set_default(const handle_args_t &arg);
+static sl_status_t handle_zwave_log_security_keys(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx_association(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx_multi(const handle_args_t &arg);
-static sl_status_t handle_zwave_tx_flush(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx_log(const handle_args_t &arg);
 static sl_status_t
   handle_zwave_command_handler_dispatch(const handle_args_t &arg);
@@ -93,6 +96,8 @@ static sl_status_t handle_cc_versions_log(const handle_args_t &arg);
 static sl_status_t
   handle_zwave_initiate_firmware_update(const handle_args_t &arg);
 static sl_status_t handle_zwave_abort_firmware_update(const handle_args_t &arg);
+static sl_status_t handle_attribute_poll_register(const handle_args_t &arg);
+static sl_status_t handle_attribute_poll_deregister(const handle_args_t &arg);
 
 /// Map that holds all the commands (used for printing help)
 ///
@@ -101,7 +106,8 @@ static sl_status_t handle_zwave_abort_firmware_update(const handle_args_t &arg);
 /// <help_message>: Help message printed to output when "help" is executed
 /// <handler_func>: callback, that is called whenever the command is receied
 const std::map<std::string, std::pair<std::string, handler_func>> commands = {
-  {"zwave_set_default", {"Reset z-wave network", &handle_zwave_set_default}},
+  {"zwave_set_default", {"Reset Z-Wave network", &handle_zwave_set_default}},
+  {"zwave_log_security_keys", {"Log Z-Wave network security keys", &handle_zwave_log_security_keys}},
   {"zwave_remove_failed",
    {COLOR_START "<Node ID >" COLOR_END " :Remove a failing Z-Wave node.",
     &handle_zwave_remove_failed}},
@@ -124,11 +130,6 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
                 " :Send Z-Wave payload to a list of NodeID. The last argument "
                 "will be the hexadecimal payload.",
     &handle_zwave_tx_multi}},
-  {"zwave_tx_flush",
-   {" :Flushes the TX Queue.\033[31;1m <!>\033[0m Use at your own risk. "
-    "This is made for debugging purposes, in case the Z-Wave TX Queue is "
-    "hanging.",
-    &handle_zwave_tx_flush}},
   {"zwave_tx_log",
    {COLOR_START
     "<1|0>" COLOR_END
@@ -140,7 +141,7 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
                 " :Injects a payload to the local Z-Wave dispatch handler.",
     &handle_zwave_command_handler_dispatch}},
   {"zwave_remove_node",
-   {" :Remove a z-wave node from the network", &handle_remove_zwave_node}},
+   {" :Remove a Z-Wave node from the network", &handle_remove_zwave_node}},
   {"attribute_store_log",
    {COLOR_START
     "<Node ID>" COLOR_END
@@ -150,8 +151,8 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
   {"attribute_store_set_all_desired_types",
    {COLOR_START "<type>,<Value>" COLOR_END
                 " :Goes throught the entire attribute store and set all "
-                "attribute types to the indicated value."
-                " Value willl be stored as int32_t. Arguments are in "
+                "attribute types to the indicated value. "
+                "Value will be stored as int32_t. Arguments are in "
                 "hexadecimal format",
     &handle_attribute_store_set_all_desired_types}},
   {"attribute_store_set_desired",
@@ -236,7 +237,14 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
     &handle_zwave_abort_firmware_update}},
   {"zwave_cc_versions_log",
    {"Print the CC version table", &handle_cc_versions_log}},
-};
+  {"attribute_poll_register",
+   {COLOR_START "<NodeID>(,<INTERVAL>)" COLOR_END
+                "Register a <NodeID> to be polled every <INTERVAL> secondes, "
+                "if no <INTERVAL> is supplied, the default interval is used",
+    handle_attribute_poll_register}},
+  {"attribute_poll_deregister",
+   {COLOR_START "<NodeID>" COLOR_END "Deregister <NodeID> for polling",
+    handle_attribute_poll_deregister}}};
 
 // Pre declaration of setup function
 sl_status_t zpc_stdin_command_handling_init();
@@ -255,6 +263,13 @@ static sl_status_t handle_zwave_set_default(const handle_args_t &arg)
   zwave_controller_reset();
   return SL_STATUS_OK;
 }
+
+static sl_status_t handle_zwave_log_security_keys(const handle_args_t &arg)
+{
+  zwave_s2_log_security_keys(SL_LOG_INFO);
+  return SL_STATUS_OK;
+}
+
 
 static sl_status_t handle_zwave_remove_failed(const handle_args_t &arg)
 {
@@ -468,11 +483,6 @@ static sl_status_t handle_zwave_tx_log(const handle_args_t &arg)
   return SL_STATUS_OK;
 }
 
-static sl_status_t handle_zwave_tx_flush(const handle_args_t &arg)
-{
-  return zwave_tx_init();
-}
-
 static sl_status_t
   handle_zwave_command_handler_dispatch(const handle_args_t &arg)
 {
@@ -491,7 +501,7 @@ static sl_status_t
   }
   zwave_controller_connection_info_t connection_info = {{{0}}};
   connection_info.remote.node_id = zwave_network_management_get_node_id();
-  connection_info.encapsulation = zpc_highest_security_class();
+  connection_info.encapsulation  = zpc_highest_security_class();
   return zwave_command_handler_dispatch(&connection_info,
                                         frame_data.data(),
                                         (uint16_t)(arg[1].length() / 2));
@@ -654,7 +664,9 @@ static sl_status_t do_ats_log(attribute_store_node_t n, std::string lead = "")
   attribute_value(line, n, DESIRED_ATTRIBUTE);
   line << std::setfill(' ') << std::setw(80 - line.tellp()) << " "
        << attribute_store_name_by_type(t) << std::endl;
-  write(out_stream, line.str().data(), line.str().length());
+  if (write(out_stream, line.str().data(), line.str().length()) < 0) {
+    sl_log_error(LOG_TAG, "Failed to write to out_stream");
+  };
 
   for (size_t i = 0; i < attribute_store_get_node_child_count(n); i++) {
     do_ats_log(attribute_store_get_node_child(n, i), lead + "  ");
@@ -1008,6 +1020,23 @@ static void
 
     memcpy(node_reported_dsk, dsk, sizeof(zwave_dsk_t));
   }
+}
+
+static sl_status_t handle_attribute_poll_register(const handle_args_t &arg)
+{
+  uint32_t interval = 0;
+  if (arg.size() < 2) {
+    return SL_STATUS_FAIL;
+  } else if (arg.size() == 3) {
+    interval = std::stoul(arg[2].c_str(), nullptr, 10);
+  }
+  attribute_store_node_t node = std::stoul(arg[1].c_str(), nullptr, 10);
+  return attribute_poll_register(node, interval);
+}
+static sl_status_t handle_attribute_poll_deregister(const handle_args_t &arg)
+{
+  attribute_store_node_t node = std::stoul(arg[1].c_str(), nullptr, 10);
+  return attribute_poll_deregister(node);
 }
 
 static zwave_controller_callbacks_t stdin_zwave_controller_cb = {

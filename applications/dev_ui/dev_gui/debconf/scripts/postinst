@@ -1,6 +1,8 @@
 #!/bin/sh
-systemctl --system daemon-reload
-systemctl enable uic-dev-gui-api.service
-systemctl enable uic-dev-gui-server.service
-systemctl start uic-dev-gui-api.service
-systemctl start uic-dev-gui-server.service
+if type "systemctl" > /dev/null; then
+    systemctl --system daemon-reload
+    systemctl enable uic-dev-gui-api.service
+    systemctl enable uic-dev-gui-client.service
+    systemctl start uic-dev-gui-api.service
+    systemctl start uic-dev-gui-client.service
+fi

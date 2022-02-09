@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['dev_20gui_20developer_27s_20guide_3',['Dev GUI Developer&apos;s Guide',['../md_applications_dev_ui_dev_gui_readme_developer.html',1,'']]],
-  ['dev_20gui_20user_27s_20guide_4',['Dev GUI User&apos;s Guide',['../md_applications_dev_ui_dev_gui_readme_user.html',1,'']]],
-  ['dev_20gui_20release_20notes_5',['Dev GUI Release Notes',['../md_applications_dev_ui_dev_gui_release_notes.html',1,'']]]
+  ['coding_2dstandard_2emd_6',['coding-standard.md',['../coding-standard_8md.html',1,'']]]
 ];

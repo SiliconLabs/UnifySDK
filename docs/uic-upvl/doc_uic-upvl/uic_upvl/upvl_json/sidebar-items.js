@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["SmartStartEntry","A type to represent a provision for one device."]]});

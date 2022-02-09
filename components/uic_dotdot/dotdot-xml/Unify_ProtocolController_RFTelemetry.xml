@@ -1,0 +1,60 @@
+﻿<?xml version="1.0"?>
+<!--
+ProtocolController/ZWaveTelemetry
+This is a manufacturer specific cluster.
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD01" revision="1" name="ProtocolController-RFTelemetry">
+  <classification role="utility" picsCode="UPCZWT" />
+
+  <server>
+
+    <attributes>
+      <attribute id="0000" name="TxReportEnabled" type="bool" max="1" required="true" default="1" writable="true"/>
+    </attributes>
+
+    <commands>
+      <command id="01" name="TxReport">
+        <fields>
+          <field name="SourceUNID" type="string" />
+          <field name="DestinationUNID" type="string" />
+          <field name="TransmissionSuccessful" type="bool" />
+          <field name="TransmissionTimeMs" type="uint16" />
+          <field name="TxPowerdBm" type="int8" />
+          <field name="TxChannel" type="uint8" />
+          <field name="RoutingAttempts" type="uint8" />
+          <field name="RouteChanged" type="bool" />
+          <field name="TransmissionSpeed" type="enum8" >
+            <restriction>
+              <type:enumeration value="00" name="Z-Wave-9600-bits-per-second" />
+              <type:enumeration value="01" name="Z-Wave-40-kbits-per-second" />
+              <type:enumeration value="02" name="Z-Wave-100-kbits-per-second" />
+              <type:enumeration value="03" name="Z-WaveLongRange-100-kbits-per-second" />
+              <type:enumeration value="FE" name="Other" />
+              <type:enumeration value="FF" name="Unknown" />
+            </restriction>
+          </field>
+          <field name="MeasuredNoiseFloordBm" type="int8" />
+
+          <field name="LastRouteRepeaters" type="string" array="true" />
+          <field name="IncomingRSSIRepeaters" type="int8" array="true" />
+
+          <field name="AckRSSI" type="int8" />
+          <field name="AckChannel" type="uint8" />
+
+          <field name="LastRouteFailedLinkFunctionalUNID" type="string"/>
+          <field name="LastRouteFailedLinkNonFunctionalUNID" type="string"/>
+
+          <field name="DestinationAckTxPowerdBm" type="int8" />
+          <field name="DestinationAckMeasuredRSSI" type="int8" />
+          <field name="DestinationAckMeasuredNoiseFloor" type="int8" />
+        </fields>
+      </command>
+    </commands>
+  </server>
+</zcl:cluster>

@@ -16,6 +16,7 @@
 
 // UIC Shared components
 #include "config.h"
+#include "uic_version.h"
 
 #include "zigpc_config.h"
 #include "zigpc_config_fixt.h"
@@ -26,6 +27,9 @@ static const char *DEFAULT_SERIAL_PORT          = "/dev/ttyUSB0";
 static const char *CONFIG_KEY_ZIGPC_USE_TC_WELL_KNOWN_KEY
   = "zigpc.tc_use_well_known_key";
 static const bool DEFAULT_USE_TC_WELL_KNOWN_KEY = false;
+
+static const char *CONFIG_KEY_ZIGPC_DATASTORE_FILE = "zigpc.datastore_file";
+static const char *DEFAULT_ZIGPC_DATASTORE_FILE    = UIC_VAR_DIR "/zigpc.db";
 
 static zigpc_config_t config;
 int zigpc_config_init()
@@ -39,9 +43,11 @@ int zigpc_config_init()
    * components/config/platform/posix/config.cpp:
    * - mqtt.host
    * - mqtt.port
-   * - datastore.file
    */
   config_status_t status = CONFIG_STATUS_OK;
+  status |= config_add_string(CONFIG_KEY_ZIGPC_DATASTORE_FILE,
+                              "Datastore database file",
+                              DEFAULT_ZIGPC_DATASTORE_FILE);
   status |= config_add_string(CONFIG_KEY_ZIGPC_SERIAL_PORT,
                               "serial port to use",
                               DEFAULT_SERIAL_PORT);
@@ -60,7 +66,7 @@ sl_status_t zigpc_config_fixt_setup()
   status |= config_get_as_string(CONFIG_KEY_MQTT_HOST, &config.mqtt_host);
   status |= config_get_as_int(CONFIG_KEY_MQTT_PORT, &config.mqtt_port);
   status
-    |= config_get_as_string(CONFIG_KEY_DATASTORE_FILE, &config.datastore_file);
+    |= config_get_as_string(CONFIG_KEY_ZIGPC_DATASTORE_FILE, &config.datastore_file);
   status |= config_get_as_bool(CONFIG_KEY_ZIGPC_USE_TC_WELL_KNOWN_KEY,
                                &config.tc_use_well_known_key);
 

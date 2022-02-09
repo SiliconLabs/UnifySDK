@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_transports/include/zwave_s0_internal.h File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave/zwave_transports/s0/src/zwave_s0_internal.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -83,201 +83,43 @@ $(document).ready(function(){initNavTree('zwave__s0__internal_8h.html',''); init
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">zwave_s0_internal.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Functions used internally in component.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="zwave__utils_8h_source.html">zwave_utils.h</a>&quot;</code><br />
-</div>
 <p><a href="zwave__s0__internal_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:abcc2e68cff658823698aaf43f2170c3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__internal_8h.html#abcc2e68cff658823698aaf43f2170c3f">s0_abort_all_tx_sessions</a> ()</td></tr>
-<tr class="memdesc:abcc2e68cff658823698aaf43f2170c3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort all S0 network TX sessions.  <a href="zwave__s0__internal_8h.html#abcc2e68cff658823698aaf43f2170c3f">More...</a><br /></td></tr>
-<tr class="separator:abcc2e68cff658823698aaf43f2170c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a883ef7108e614b9324f5bc8f5abc7151"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__internal_8h.html#a883ef7108e614b9324f5bc8f5abc7151">free_all_rx_session</a> ()</td></tr>
-<tr class="memdesc:a883ef7108e614b9324f5bc8f5abc7151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free all S0 RX sessions <br  />
-  <a href="zwave__s0__internal_8h.html#a883ef7108e614b9324f5bc8f5abc7151">More...</a><br /></td></tr>
-<tr class="separator:a883ef7108e614b9324f5bc8f5abc7151"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a663245a3c03fdad09e2876bee239376e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__internal_8h.html#a663245a3c03fdad09e2876bee239376e">free_all_tx_sessions</a> ()</td></tr>
-<tr class="memdesc:a663245a3c03fdad09e2876bee239376e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free all S0 Tx sessions <br  />
-  <a href="zwave__s0__internal_8h.html#a663245a3c03fdad09e2876bee239376e">More...</a><br /></td></tr>
-<tr class="separator:a663245a3c03fdad09e2876bee239376e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0b0b624931932e1b3281a6ea87581c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__internal_8h.html#ac0b0b624931932e1b3281a6ea87581c9">free_nonce_block_list</a> ()</td></tr>
-<tr class="memdesc:ac0b0b624931932e1b3281a6ea87581c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free S0 nonce block list.  <a href="zwave__s0__internal_8h.html#ac0b0b624931932e1b3281a6ea87581c9">More...</a><br /></td></tr>
-<tr class="separator:ac0b0b624931932e1b3281a6ea87581c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ee8e04717c754d63b687aca56223930"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__internal_8h.html#a5ee8e04717c754d63b687aca56223930">reset_block_next_elem</a> ()</td></tr>
-<tr class="memdesc:a5ee8e04717c754d63b687aca56223930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset (block_next_elem)s0 block next elem variable.  <a href="zwave__s0__internal_8h.html#a5ee8e04717c754d63b687aca56223930">More...</a><br /></td></tr>
-<tr class="separator:a5ee8e04717c754d63b687aca56223930"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81c97c8e96754051245cfa22cc4fcb43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__internal_8h.html#a81c97c8e96754051245cfa22cc4fcb43">reset_s0_timers</a> ()</td></tr>
-<tr class="memdesc:a81c97c8e96754051245cfa22cc4fcb43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset nonce timer.  <a href="zwave__s0__internal_8h.html#a81c97c8e96754051245cfa22cc4fcb43">More...</a><br /></td></tr>
-<tr class="separator:a81c97c8e96754051245cfa22cc4fcb43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a763b770b770a5f674259ca35f26542"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__internal_8h.html#a1a763b770b770a5f674259ca35f26542">s0_set_key</a> (const uint8_t *netkey)</td></tr>
-<tr class="memdesc:a1a763b770b770a5f674259ca35f26542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the S0 network key. This function is called from S0 init,.  <a href="zwave__s0__internal_8h.html#a1a763b770b770a5f674259ca35f26542">More...</a><br /></td></tr>
-<tr class="separator:a1a763b770b770a5f674259ca35f26542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabcc2e68cff658823698aaf43f2170c3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__internal.html#gabcc2e68cff658823698aaf43f2170c3f">s0_abort_all_tx_sessions</a> ()</td></tr>
+<tr class="memdesc:gabcc2e68cff658823698aaf43f2170c3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort all S0 network TX sessions.  <a href="group__zwave__s0__internal.html#gabcc2e68cff658823698aaf43f2170c3f">More...</a><br /></td></tr>
+<tr class="separator:gabcc2e68cff658823698aaf43f2170c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga883ef7108e614b9324f5bc8f5abc7151"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__internal.html#ga883ef7108e614b9324f5bc8f5abc7151">free_all_rx_session</a> ()</td></tr>
+<tr class="memdesc:ga883ef7108e614b9324f5bc8f5abc7151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free all S0 RX sessions.  <a href="group__zwave__s0__internal.html#ga883ef7108e614b9324f5bc8f5abc7151">More...</a><br /></td></tr>
+<tr class="separator:ga883ef7108e614b9324f5bc8f5abc7151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga663245a3c03fdad09e2876bee239376e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__internal.html#ga663245a3c03fdad09e2876bee239376e">free_all_tx_sessions</a> ()</td></tr>
+<tr class="memdesc:ga663245a3c03fdad09e2876bee239376e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free all S0 Tx sessions.  <a href="group__zwave__s0__internal.html#ga663245a3c03fdad09e2876bee239376e">More...</a><br /></td></tr>
+<tr class="separator:ga663245a3c03fdad09e2876bee239376e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac0b0b624931932e1b3281a6ea87581c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__internal.html#gac0b0b624931932e1b3281a6ea87581c9">free_nonce_block_list</a> ()</td></tr>
+<tr class="memdesc:gac0b0b624931932e1b3281a6ea87581c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free S0 nonce block list.  <a href="group__zwave__s0__internal.html#gac0b0b624931932e1b3281a6ea87581c9">More...</a><br /></td></tr>
+<tr class="separator:gac0b0b624931932e1b3281a6ea87581c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5ee8e04717c754d63b687aca56223930"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__internal.html#ga5ee8e04717c754d63b687aca56223930">reset_block_next_elem</a> ()</td></tr>
+<tr class="memdesc:ga5ee8e04717c754d63b687aca56223930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset (block_next_elem)s0 block next elem variable.  <a href="group__zwave__s0__internal.html#ga5ee8e04717c754d63b687aca56223930">More...</a><br /></td></tr>
+<tr class="separator:ga5ee8e04717c754d63b687aca56223930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga81c97c8e96754051245cfa22cc4fcb43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__internal.html#ga81c97c8e96754051245cfa22cc4fcb43">reset_s0_timers</a> ()</td></tr>
+<tr class="memdesc:ga81c97c8e96754051245cfa22cc4fcb43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset nonce timer.  <a href="group__zwave__s0__internal.html#ga81c97c8e96754051245cfa22cc4fcb43">More...</a><br /></td></tr>
+<tr class="separator:ga81c97c8e96754051245cfa22cc4fcb43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Functions used internally in component. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a883ef7108e614b9324f5bc8f5abc7151"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a883ef7108e614b9324f5bc8f5abc7151">&#9670;&nbsp;</a></span>free_all_rx_session()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void free_all_rx_session </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Free all S0 RX sessions <br  />
- </p>
-<p>Sets the state of all MAX_RXSESSIONS S0 receive sessions to RX_SESSION_DONE </p>
-
-</div>
-</div>
-<a id="a663245a3c03fdad09e2876bee239376e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a663245a3c03fdad09e2876bee239376e">&#9670;&nbsp;</a></span>free_all_tx_sessions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void free_all_tx_sessions </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Free all S0 Tx sessions <br  />
- </p>
-<p>Stops the Nonce Request timer and frees all tx sessions </p>
-
-</div>
-</div>
-<a id="ac0b0b624931932e1b3281a6ea87581c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0b0b624931932e1b3281a6ea87581c9">&#9670;&nbsp;</a></span>free_nonce_block_list()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void free_nonce_block_list </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Free S0 nonce block list. </p>
-<p>Frees all NONCE_BLOCK_LIST_SIZE number of nonce blocks </p>
-
-</div>
-</div>
-<a id="a5ee8e04717c754d63b687aca56223930"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ee8e04717c754d63b687aca56223930">&#9670;&nbsp;</a></span>reset_block_next_elem()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void reset_block_next_elem </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Reset (block_next_elem)s0 block next elem variable. </p>
-
-</div>
-</div>
-<a id="a81c97c8e96754051245cfa22cc4fcb43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81c97c8e96754051245cfa22cc4fcb43">&#9670;&nbsp;</a></span>reset_s0_timers()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void reset_s0_timers </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Reset nonce timer. </p>
-
-</div>
-</div>
-<a id="abcc2e68cff658823698aaf43f2170c3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcc2e68cff658823698aaf43f2170c3f">&#9670;&nbsp;</a></span>s0_abort_all_tx_sessions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void s0_abort_all_tx_sessions </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Abort all S0 network TX sessions. </p>
-<p>This function aborts all NUM_TX_SESSIONS of S0 transmit session and calls the callback with TRANSMIT_COMPLETE_FAIL to notify upper layer for failure </p>
-
-</div>
-</div>
-<a id="a1a763b770b770a5f674259ca35f26542"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a763b770b770a5f674259ca35f26542">&#9670;&nbsp;</a></span>s0_set_key()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void s0_set_key </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>netkey</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the S0 network key. This function is called from S0 init,. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">netkey</td><td>S0 Key (Class 80) read from S2 keystore</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Set the network key </p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_adea59f225018a199b25c065c5cc4ca8.html">zwave_transports</a></li><li class="navelem"><a class="el" href="dir_2f8f4ba1c585320e3fdaf8dbf6a41c22.html">include</a></li><li class="navelem"><a class="el" href="zwave__s0__internal_8h.html">zwave_s0_internal.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_f4b467f0a960798c9a570e0236e928b5.html">zwave_transports</a></li><li class="navelem"><a class="el" href="dir_6fba1e772b51ab46cce9ac80a46e75aa.html">s0</a></li><li class="navelem"><a class="el" href="dir_8db2d843763b048529dd52bcc2b9c1b9.html">src</a></li><li class="navelem"><a class="el" href="zwave__s0__internal_8h.html">zwave_s0_internal.h</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:23 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

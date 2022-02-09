@@ -1,0 +1,78 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+/**
+ * @defgroup dotdot_mqtt_supported_generated_commands Dotdot MQTT Supported Generated commands
+ * @ingroup dotdot_mqtt
+ * @brief This module allows to issue advertise a list of
+ * SupportedGeneratedCommands for a given UNID / Endpoint using UCL/MQTT
+ *
+ * @{
+ */
+
+#ifndef DOTDOT_MQTT_SUPPORTED_GENERATED_COMMANDS_H
+#define DOTDOT_MQTT_SUPPORTED_GENERATED_COMMANDS_H
+
+// Type definitions
+#include <stdbool.h>
+#include "uic_typedefs.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+
+/**
+ * @brief Struct containing the list of commands for {{label}}
+ */
+typedef struct _{{dotdot_prefix}}_{{asSnakeCaseLower label}}_supported_commands_ {
+  {{#zcl_commands}}
+  bool {{asSnakeCaseLower label}};
+  {{/zcl_commands}}
+  bool write_attributes;
+} {{dotdot_prefix}}_{{asSnakeCaseLower label}}_supported_commands_t;
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the {{label}} cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints label)}}epID/{{/unless}}{{asPublicationName label}}/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * {{#unless (clusterWithoutEndpoints label)}}
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * {{/unless}}
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower label}}_publish_supported_generated_commands(
+  const dotdot_unid_t unid{{#unless (clusterWithoutEndpoints label)}},
+  const dotdot_endpoint_id_t endpoint{{/unless}},
+  const {{dotdot_prefix}}_{{asSnakeCaseLower label}}_supported_commands_t *command_list
+);
+
+{{/if}}
+{{/zcl_clusters}}
+
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
+#endif // DOTDOT_MQTT_SUPPORTED_GENERATED_COMMANDS_H
+/** @} end dotdot_mqtt_supported_generated_commands */

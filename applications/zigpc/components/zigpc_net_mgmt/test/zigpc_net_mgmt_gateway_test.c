@@ -14,6 +14,7 @@
 #include "unity.h"
 #include "string.h"
 
+#include "zigpc_discovery_mock.h"
 #include "zigpc_gateway_notify_mock.h"
 #include "zigpc_net_mgmt_fsm_mock.h"
 #include "zigpc_net_mgmt_process_send_mock.h"
@@ -26,8 +27,8 @@
 
 void zigpc_net_mgmt_callback_on_network_initialized(void *event_data);
 void zigpc_net_mgmt_callback_on_node_add_complete(void *event_data);
-void zigpc_net_mgmt_callback_on_node_discovered(void *event_data);
-void zigpc_net_mgmt_callback_on_node_endpoint_discovered(void *event_data);
+void zigpc_net_mgmt_on_discovery_status(
+  zigbee_eui64_uint_t eui64, zigpc_discovery_status_t discovery_status);
 void zigpc_net_mgmt_callback_on_node_removed(void *event_data);
 
 /**
@@ -58,8 +59,6 @@ void test_gateway_registrations_should_succeed(void)
     ZIGPC_GATEWAY_NOTIFY_NETWORK_INIT,
     ZIGPC_GATEWAY_NOTIFY_NODE_ADD_START,
     ZIGPC_GATEWAY_NOTIFY_NODE_ADD_COMPLETE,
-    ZIGPC_GATEWAY_NOTIFY_NODE_DISCOVERED,
-    ZIGPC_GATEWAY_NOTIFY_NODE_ENDPOINT_DISCOVERED,
     ZIGPC_GATEWAY_NOTIFY_NODE_REMOVED,
   };
 
@@ -71,6 +70,9 @@ void test_gateway_registrations_should_succeed(void)
                                                     SL_STATUS_OK);
     zigpc_gateway_register_observer_IgnoreArg_callback();
   }
+  zigpc_discovery_add_listener_ExpectAndReturn(
+    zigpc_net_mgmt_on_discovery_status,
+    SL_STATUS_OK);
 
   // ACT
   sl_status_t test_status = zigpc_net_mgmt_gateway_init_observer();
@@ -117,60 +119,53 @@ void test_gateway_node_added_callback_should_call_process_send(void)
 
   // ASSERT (Handled by CMock)
 }
-/**
- * @brief Check success path of sending FSM event when gateway node discovered
- * event is received
- *
- */
-void test_gateway_node_discovered_callback_should_call_process_send(void)
-{
-  // ARRANGE
-  zigpc_gateway_on_node_discovered_t callback_data = {
-    .eui64          = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF},
-    .endpoint_count = 5,
-  };
 
+void test_discovery_status_callback_should_call_process_send(void)
+{
+  zigbee_eui64_uint_t eui64 = 0x0D0E0A0D0B0E0E0F;
+
+  // ARRANGE
   zigpc_net_mgmt_process_send_event_ExpectAndReturn(
     ZIGPC_NET_MGMT_EVENT_FSM,
     NULL,
     sizeof(zigpc_net_mgmt_process_data_fsm_t),
     SL_STATUS_OK);
   zigpc_net_mgmt_process_send_event_IgnoreArg_data();
-
   // ACT
-  zigpc_net_mgmt_callback_on_node_discovered(&callback_data);
-
+  zigpc_net_mgmt_on_discovery_status(eui64, DISCOVERY_START);
   // ASSERT (Handled by CMock)
-}
 
-/**
- * @brief Check success path of sending FSM event when gateway node endpoint
- * discovered event is received
- *
- */
-void test_gateway_node_endpoint_discovered_callback_should_call_process_send(
-  void)
-{
   // ARRANGE
-  zcl_cluster_type_t test_cluster_list[] = {{.cluster_id = 0x6}};
-  zigpc_gateway_on_node_endpoint_discovered_t callback_data
-    = {.eui64    = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF},
-       .endpoint = {.endpoint_id = 1, .cluster_count = 1}};
-
-  memcpy(callback_data.endpoint.cluster_list,
-         test_cluster_list,
-         sizeof(zcl_cluster_type_t));
-
   zigpc_net_mgmt_process_send_event_ExpectAndReturn(
     ZIGPC_NET_MGMT_EVENT_FSM,
     NULL,
     sizeof(zigpc_net_mgmt_process_data_fsm_t),
     SL_STATUS_OK);
   zigpc_net_mgmt_process_send_event_IgnoreArg_data();
-
   // ACT
-  zigpc_net_mgmt_callback_on_node_endpoint_discovered(&callback_data);
+  zigpc_net_mgmt_on_discovery_status(eui64, DISCOVERY_SUCCESS);
+  // ASSERT (Handled by CMock)
 
+  // ARRANGE
+  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
+    ZIGPC_NET_MGMT_EVENT_FSM,
+    NULL,
+    sizeof(zigpc_net_mgmt_process_data_fsm_t),
+    SL_STATUS_OK);
+  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
+  // ACT
+  zigpc_net_mgmt_on_discovery_status(eui64, DEVICE_DISCOVERY_FAIL);
+  // ASSERT (Handled by CMock)
+
+  // ARRANGE
+  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
+    ZIGPC_NET_MGMT_EVENT_FSM,
+    NULL,
+    sizeof(zigpc_net_mgmt_process_data_fsm_t),
+    SL_STATUS_OK);
+  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
+  // ACT
+  zigpc_net_mgmt_on_discovery_status(eui64, ENDPOINT_DISCOVERY_FAIL);
   // ASSERT (Handled by CMock)
 }
 

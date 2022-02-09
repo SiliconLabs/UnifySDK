@@ -12,12 +12,13 @@
  *****************************************************************************/
 
 /**
- * @defgroup uic_attribute_transitions UIC Attribute transitions
- * @ingroup uic_components
+ * @defgroup unify_attribute_transitions Unify Attribute transitions
+ * @ingroup unify_attribute_utils
  * @brief Attribute transition helper component.
  *
  * Component that performs linear value transitions respecting a given duration
- * for attributes, between the REPORTED and DESIRED values.
+ * for attributes, between the REPORTED and DESIRED values of an
+ * @ref attribute_store attribute.
  *
  * @{
  */

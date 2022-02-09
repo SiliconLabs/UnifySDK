@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['wait_5frestart_5ffrom_5ffirst_5757',['wait_restart_from_first',['../transport__service_8c.html#a4ec123f01e33bb2b4694e48484c6e892',1,'transport_service.c']]],
-  ['wake_5fup_5fcapabilities_5fget_5758',['wake_up_capabilities_get',['../zwave__command__class__wake__up_8c.html#a8f966daf7a0db642b035c023a4877115',1,'zwave_command_class_wake_up.c']]],
-  ['wake_5fup_5fcontrol_5fhandler_5759',['wake_up_control_handler',['../zwave__command__class__wake__up_8c.html#a88bb847c5b28073f2eebf61a9c6fe6f6',1,'zwave_command_class_wake_up.c']]],
-  ['wake_5fup_5finterval_5fget_5760',['wake_up_interval_get',['../zwave__command__class__wake__up_8c.html#a9a8b027d6bc6ddb6ccfe5f216291fb31',1,'zwave_command_class_wake_up.c']]],
-  ['wake_5fup_5finterval_5fset_5761',['wake_up_interval_set',['../zwave__command__class__wake__up_8c.html#a84e29105d1064d01c7551336860230a7',1,'zwave_command_class_wake_up.c']]]
+  ['verify_5fif_5fwake_5fup_5fsetting_5fneeds_5fresolution_6014',['verify_if_wake_up_setting_needs_resolution',['../zwave__command__class__wake__up_8c.html#a719d1633ae7a1ff72a7073da6a741c29',1,'zwave_command_class_wake_up.c']]]
 ];

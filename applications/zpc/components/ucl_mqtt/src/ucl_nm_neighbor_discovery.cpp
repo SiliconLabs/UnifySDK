@@ -129,7 +129,7 @@ static void on_timeout_requested_node_neighbor_update(void *data)
 //////////////////////////////////////////////////////////////////////////////
 void ucl_nm_trigger_node_neighbor_update(zwave_node_id_t node_id)
 {
-  zwave_protocol_t node_protocol = get_protocol(node_id);
+  zwave_protocol_t node_protocol = zwave_get_inclusion_protocol(node_id);
   if (node_protocol == PROTOCOL_ZWAVE_LONG_RANGE) {
     //If the Node is operating on the Z-Wave Long Range PHY/MAC/NWK,
     // we do not perform neighbor discovery.

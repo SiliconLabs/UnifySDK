@@ -39,6 +39,19 @@ extern "C" {
 #define ZIGBEE_EUI64_SIZE 8
 
 /**
+ * @brief EUI64 Invalid Identifier
+ */
+#define ZIGBEE_NULL_EUI64                          \
+  {                                                \
+    0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF \
+  }
+
+/**
+ * @brief EUI64 Invalid Identifier (int variant)
+ */
+#define ZIGBEE_NULL_EUI64_UINT 0xFFFFFFFFFFFFFFFF
+
+/**
  * @brief Size of EUI64 string buffer
  *
  */
@@ -56,10 +69,11 @@ extern "C" {
 #define ZIGBEE_INSTALL_CODE_LENGTH (16 + 2)
 
 /**
- * Zigbee Max Endpoint Number
- * the maximum number of endpoints supported in the Zigbee protocol
-**/
-#define ZIGBEE_MAX_ENDPOINT_NUMBER 256
+ * Maximum number of endpoints supported in the Zigbee protocol
+ * (1-254).
+ *
+ */
+#define ZIGBEE_MAX_ENDPOINT_COUNT 255
 
 /**
  * @brief The default identifier for non-application endpoint identifier
@@ -77,6 +91,12 @@ extern "C" {
  * @brief Default string length for strings used in ZCL
 **/
 #define ZCL_DEFAULT_ARR_LENGTH 16
+
+/**
+ * @brief Expected length of a zigbee group name, as supported
+ * in the ZCL specification
+**/ 
+#define ZCL_GROUP_NAME_LENGTH 16 
 
 /**
  * ZCL Cluster ID Standard Ranges
@@ -135,7 +155,7 @@ extern "C" {
 #define ZCL_MAX_COMMAND_ID 0x7f
 
 /**
- * Maximum size of ZCL frame supported by Z3gateway API.
+ * Maximum size of ZCL frame supported by ZigbeeHost.
  *
  */
 #define ZCL_FRAME_BUFFER_SIZE_MAX 255

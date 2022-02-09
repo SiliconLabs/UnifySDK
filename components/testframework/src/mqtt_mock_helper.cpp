@@ -11,11 +11,16 @@
  *
  *****************************************************************************/
 #include "mqtt_mock_helper.h"
+
+// UIC includes
+#include "sl_log.h"
+
 extern "C" {
 #include "uic_mqtt_mock.h"
 }
-#include <string.h>
 
+// Generic includes
+#include <string>
 #include <map>
 #include <string>
 #include <queue>
@@ -23,6 +28,8 @@ extern "C" {
 #include <string>
 #include <algorithm>
 #include <regex>
+
+constexpr const char *LOG_TAG = "mqtt_mock_helper";
 
 typedef void (*mqtt_subscribe_callback)(const char *topic,
                                         const char *message,
@@ -67,6 +74,7 @@ static void mqtt_mock_helper_mqtt_subscribe_stub(const char *topic,
                                                  mqtt_subscribe_callback cb,
                                                  int ncalls)
 {
+  sl_log_info(LOG_TAG, "Incoming subscription to %s, function %p", topic, cb);
   std::string topic_str(topic);
   if (0 == mqtt_helper_map.count(topic_str)) {
     mqtt_helper_map.insert(std::make_pair(topic_str, mqtt_mock_helper()));
@@ -93,11 +101,27 @@ static void mqtt_mock_helper_mqtt_unsubscribe_stub(const char *topic,
   }
 }
 
+static int uic_mqtt_count_topics_stub(const char *prefix_pattern, int num_calls)
+{
+  int number_of_publications = 0;
+  std::string prefix(prefix_pattern);
+
+  for (auto item: mqtt_helper_map) {
+    if (item.first.find(prefix) != std::string::npos) {
+      number_of_publications += item.second.number_of_publishes;
+    }
+  }
+
+  return number_of_publications;
+}
+
 void mqtt_mock_helper_init()
 {
+  sl_log_info(LOG_TAG, "MQTT Mock helper initialization");
   uic_mqtt_publish_Stub(mqtt_mock_helper_mqtt_publish_stub);
   uic_mqtt_subscribe_Stub(mqtt_mock_helper_mqtt_subscribe_stub);
   uic_mqtt_unsubscribe_Stub(mqtt_mock_helper_mqtt_unsubscribe_stub);
+  uic_mqtt_count_topics_Stub(uic_mqtt_count_topics_stub);
   for (auto &elem: mqtt_helper_map) {
     elem.second.number_of_publishes = 0;
   }
@@ -166,6 +190,13 @@ void mqtt_mock_helper_publish(const char *topic,
   const std::regex unid_ep_re("/\\w+/ep\\d+/");
   std::string wc_topic = std::regex_replace(topic, unid_ep_re, "/+/+/");
 
+  // Replace /Reported or /Desired at the end with /#
+  const std::regex reported_re("/Reported$");
+  wc_topic = std::regex_replace(wc_topic, reported_re, "/#");
+  const std::regex desired_re("/Desired$");
+  wc_topic = std::regex_replace(wc_topic, desired_re, "/#");
+  sl_log_debug(LOG_TAG, "Replaced topic: %s", wc_topic.c_str());
+
   try {
     auto &subscribers = mqtt_helper_map.at(wc_topic).subscribers;
 
@@ -174,6 +205,41 @@ void mqtt_mock_helper_publish(const char *topic,
     }
   } catch (...) {
     // do nothing
+    sl_log_warning(LOG_TAG,
+                   "Mock helper publish received with "
+                   "no subscription for topic %s",
+                   topic);
+  }
+}
+
+void mqtt_mock_helper_group_publish(const char *topic,
+                                    const char *msg,
+                                    size_t msg_len)
+{
+  // replace /1234/ with /+/
+  const std::regex groupid_re("/by-group/\\d+/");
+  std::string wc_topic = std::regex_replace(topic, groupid_re, "/by-group/+/");
+
+  try {
+    auto &subscribers = mqtt_helper_map.at(wc_topic).subscribers;
+
+    for (auto it = subscribers.begin(); it != subscribers.end(); ++it) {
+      try {
+        (*it)(topic, msg, msg_len);
+      } catch (std::exception &e) {
+        sl_log_warning(LOG_TAG,
+                       "Unhandled by-group handler exception for topic %s: %s",
+                       topic,
+                       e.what());
+      }
+    }
+  } catch (std::exception &e) {
+    // do nothing
+    sl_log_warning(LOG_TAG,
+                   "Mock helper by-group publish received with "
+                   "no subscription for topic %s: %s",
+                   topic,
+                   e.what());
   }
 }
 
@@ -181,8 +247,20 @@ void mqtt_mock_helper_publish_to_all_topics(const char *msg, size_t msg_len)
 {
   for (auto &elem: mqtt_helper_map) {
     std::string topic = elem.first;
-    topic.replace(topic.find('+'), 1, "zwDEADBEEF");
-    topic.replace(topic.find('+'), 1, "ep0");
+    // Try to take the topic filter and replace + signs with probable publication
+    // values.
+    try {
+      topic.replace(topic.find('+'), 1, "zwDEADBEEF");
+      topic.replace(topic.find('+'), 1, "ep0");
+    } catch (std::out_of_range const &e) {
+      // Could not replace the endpoint value. Don't do anything about it.
+      sl_log_info(LOG_TAG,
+                  "Could not replace UNID / EP in the "
+                  "topic filter %s. Exception: %s",
+                  elem.first.c_str(),
+                  e.what());
+    }
+
     mqtt_mock_helper_publish(topic.c_str(), msg, msg_len);
   }
 }

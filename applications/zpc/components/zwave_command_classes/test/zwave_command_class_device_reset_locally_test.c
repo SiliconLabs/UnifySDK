@@ -11,7 +11,6 @@
  *
  *****************************************************************************/
 #include "zwave_command_class_device_reset_locally.h"
-#include "zwave_command_class_test_helper.h"
 
 #include "unity.h"
 #include "ZW_classcmd.h"
@@ -50,8 +49,6 @@ void suiteSetUp()
 
   // Ensure we start from scratch before creating our test network.
   attribute_store_delete_node(attribute_store_get_root());
-  zwave_network_management_get_home_id_IgnoreAndReturn(my_home_id);
-  zwave_network_management_get_node_id_IgnoreAndReturn(my_node_id);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -73,7 +70,7 @@ static sl_status_t
                              int32_t priority,
                              int cmock_num_calls)
 {
-  TEST_ASSERT_EQUAL(1, priority);
+  TEST_ASSERT_EQUAL(2, priority);
   TEST_ASSERT_NOT_NULL(step_function);
   reset_step = step_function;
   return SL_STATUS_OK;
@@ -98,6 +95,8 @@ static sl_status_t
 /// Called before each and every test
 void setUp()
 {
+  zwave_network_management_get_home_id_IgnoreAndReturn(my_home_id);
+  zwave_network_management_get_node_id_IgnoreAndReturn(my_node_id);
   reset_step             = NULL;
   lifeline_send_complete = NULL;
   contiki_test_helper_init();
@@ -106,7 +105,7 @@ void setUp()
   zwave_controller_register_callbacks_ExpectAndReturn(NULL, SL_STATUS_OK);
   zwave_controller_register_callbacks_IgnoreArg_callbacks();
   zwave_controller_register_reset_step_AddCallback(controller_reset_step_save);
-  zwave_controller_register_reset_step_ExpectAndReturn(NULL, 1, SL_STATUS_OK);
+  zwave_controller_register_reset_step_ExpectAndReturn(NULL, 2, SL_STATUS_OK);
   zwave_controller_register_reset_step_IgnoreArg_step_function();
   zwave_command_handler_register_handler_IgnoreAndReturn(SL_STATUS_OK);
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
@@ -218,6 +217,6 @@ void test_zwave_command_class_device_reset_locally_lifeline_notification()
 
   // Simulate a transmission OK. The next step of the reset should be invoked
   TEST_ASSERT_NOT_NULL(lifeline_send_complete);
-  zwave_controller_on_reset_step_complete_Expect(1);
+  zwave_controller_on_reset_step_complete_Expect(2);
   lifeline_send_complete(SL_STATUS_OK, NULL);
 }

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: generator.py</title>
+<title>Z-Wave Protocol Controller Refrence: Z-Wave Command Class Handler Generator</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -84,7 +84,7 @@ $(document).ready(function(){initNavTree('md_applications_zpc_components_zwave_c
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">generator.py </div>  </div>
+<div class="title">Z-Wave Command Class Handler Generator </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Application for Z-Wave command class handlers generation.</p>
@@ -148,13 +148,47 @@ $(document).ready(function(){initNavTree('md_applications_zpc_components_zwave_c
 </div><!-- fragment --><p>Package licenses (generated with pip-licenses): </p><div class="fragment"><div class="line">Name           Version  License     </div>
 <div class="line">PyMeta3        0.5.1    MIT License </div>
 <div class="line">pybars3        0.9.7    UNKNOWN     </div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
+Data model</h1>
+<p>Command Class model is Python object with structure: </p><div class="fragment"><div class="line">{</div>
+<div class="line">    &#39;_key&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_version&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_name&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_help&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;cmd&#39;: [&lt;cmd_object&gt;],</div>
+<div class="line">    &#39;attribute&#39;: [&lt;attr_object&gt;]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>cmd_object: </p><div class="fragment"><div class="line">{</div>
+<div class="line">    &#39;_key&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_name&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_help&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_support_mode&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;param&#39;: [&lt;param_object&gt;]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>param_object: </p><div class="fragment"><div class="line">{</div>
+<div class="line">    &#39;_key&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_name&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_type&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_version&#39;: &#39;&#39;, </div>
+<div class="line">    &lt;type_specific_object&gt;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>attr_object: </p><div class="fragment"><div class="line">{</div>
+<div class="line">    &#39;_name&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_version&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_parameter&#39;: bool, </div>
+<div class="line">    &#39;_parent&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_report_func&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_get_func&#39;: &#39;&#39;, </div>
+<div class="line">    &#39;_set_func&#39;: &#39;&#39;,</div>
+<div class="line">    &#39;_key&#39;: &#39;&#39;</div>
+<div class="line">}</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:32 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

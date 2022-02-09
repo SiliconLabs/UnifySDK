@@ -1,0 +1,152 @@
+﻿<?xml version="1.0"?>
+<!--
+Location
+This is a manufacturer specific cluster.
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD10" revision="1" name="AoXLocator">
+  <classification role="application" picsCode="UAOXLOCATOR" />
+
+
+  <type:type short="CoordinateAndOrientation" name="CoordinateAndOrientation" id="01">
+    <restriction>
+      <type:sequence>
+        <field name="CoordinateX" type="double" />  <!-- X-axis coordinate of the locator in meter -->
+        <field name="CoordinateY" type="double" />  <!-- Y-axis coordinate of the locator in meter -->
+        <field name="CoordinateZ" type="double" />  <!-- Z-axis coordinate of the locator in meter -->
+        <field name="OrientationX" type="double" /> <!-- X-axis rotation of the locator (Euler angles) in degrees. -->
+        <field name="OrientationY" type="double" /> <!-- Y-axis rotation of the locator (Euler angles) in degrees. -->
+        <field name="OrientationZ" type="double" /> <!-- Z-axis rotation of the locator (Euler angles) in degrees. -->
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <type:type short="MinMaxPair" name="MinMaxPair" id="02">
+    <restriction>
+      <type:sequence>
+        <field name="Min" type="double" />
+        <field name="Max" type="double" />
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <type:type short="SphericalCoordinates" name="SphericalCoordinates" id="03">
+    <restriction>
+      <type:sequence>
+        <field name="Azimuth" type="double" />   <!-- Angle in degree -->
+        <field name="Elevation" type="double" /> <!-- Angle in degree -->
+        <field name="Distance" type="double" />  <!-- Distance in meter -->
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <server>
+
+    <attributes>
+      <attribute id="0001" name="ReportingMode" type="enum8" writable="true" default="1">
+        <restriction>
+          <type:enumeration value="00" name="IQReport" />
+          <type:enumeration value="01" name="AngleReport" />
+        </restriction>
+      </attribute>
+      <attribute id="0002" name="PositionAndOrientationValid" type="bool" writable="true" required="true" default="0">
+        <!-- This attribute indicates if the PositionAndOrientation is valid
+             and the locator data can be used for position estimations -->
+      </attribute>
+      <attribute id="0003" name="PositionAndOrientation" type="CoordinateAndOrientation" writable="true" required="true" />
+      <attribute id="0005" name="AzimuthMask" type="MinMaxPair" array="true" writable="true" />
+      <attribute id="0006" name="ElevationMask" type="MinMaxPair" array="true" writable="true" />
+      <attribute id="0007" name="AllowList" type="string" array="true" writable="true" />
+      <attribute id="0008" name="AoXMode" type="enum8" writable="true" default="0B">
+        <restriction>
+          <type:enumeration value="03" name="One Shot Basic" />
+          <type:enumeration value="04" name="One Shot Basic Lightweight" />
+          <type:enumeration value="05" name="One Shot Fast Response" />
+          <type:enumeration value="06" name="One Shot High Accuracy" />
+          <type:enumeration value="07" name="One Shot Basic Azimuth Only" />
+          <type:enumeration value="08" name="One Shot Fast Response Azimuth Only" />
+          <type:enumeration value="09" name="One Shot High Accuracy Azimuth Only" />
+          <type:enumeration value="0A" name="Real Time Fast Response" />
+          <type:enumeration value="0B" name="Real Time Basic" />
+          <type:enumeration value="0C" name="Real Time High Accuracy" />
+        </restriction>
+      </attribute>
+      <attribute id="0009" name="AntennaMode" type="enum8" writable="true" >
+        <restriction>
+          <type:enumeration value="00" name="Array 4x4 URA" />
+          <type:enumeration value="01" name="Array 3x3 URA" />
+          <type:enumeration value="02" name="Array 1x4 ULA" />
+          <type:enumeration value="03" name="Array 4x4 DP URA" />
+          <type:enumeration value="04" name="Array COREHW_15x15 DP" />
+          <type:enumeration value="05" name="Array COREHW 12x12 DP" />
+        </restriction>
+      </attribute>
+
+      <attribute id="000A" name="AntennaArray" type="int8" array="true" writable="true" />
+      <attribute id="000B" name="PeriodSamples" type="int8" writable="true" />
+      <attribute id="000C" name="AngleFiltering" type="bool" writable="true" default="true"/>
+      <attribute id="000D" name="AngleFilteringWeight" type="double" writable="true" />
+      <attribute id="000E" name="AngleCorrectionTimeout" type="int8" writable="true" />
+      <attribute id="000F" name="AngleCorrectionDelay" type="int8" writable="true" />
+      <attribute id="0010" name="CTEMode" type="enum8" writable="true" default="0">
+        <restriction>
+          <type:enumeration value="00" name="Silicon Labs" />
+          <type:enumeration value="01" name="Connection" />
+          <type:enumeration value="02" name="Connectionless" />
+        </restriction>
+      </attribute>
+      <attribute id="0011" name="CTESamplingInterval" type="int8" writable="true" />
+      <attribute id="0012" name="CTELength" type="int8" writable="true" />
+      <attribute id="0013" name="SlotDuration" type="int8" writable="true" />
+
+    </attributes>
+
+    <commands>
+      <command id="01" name="IQReport">
+       <!--
+          This command is used for an AoXLocator to report raw IQ data
+          for a radio frame received from an asset tag.
+        -->
+        <fields>
+          <field name="TagUnid" type="string" />
+          <field name="Channel" type="uint8" />
+          <field name="RSSI" type="int8" />
+          <field name="Samples" type="int8" array="true" />
+          <field name="Sequence" type="int32" />
+        </fields>
+      </command>
+
+      <command id="02" name="AngleReport">
+        <!--
+          This command is used for an AoXLocator to report angle data
+          for radio frame received from an asset tag.
+        -->
+        <fields>
+          <field name="TagUnid" type="string" />
+          <field name="Direction" type="SphericalCoordinates" />
+          <field name="Deviation" type="SphericalCoordinates" />
+          <field name="Sequence" type="int32" />
+        </fields>
+      </command>
+
+      <command id="03" name="AngleCorrection">
+        <!--
+          This command is used to indicate the expected direction of an asset
+          tag to a locator.
+        -->
+        <fields>
+          <field name="TagUnid" type="string" />
+          <field name="Direction" type="SphericalCoordinates" />
+          <field name="Deviation" type="SphericalCoordinates" />
+          <field name="Sequence" type="int32" />
+        </fields>
+      </command>
+
+    </commands>
+  </server>
+</zcl:cluster>

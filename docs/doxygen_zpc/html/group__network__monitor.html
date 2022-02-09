@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Network Monitor</title>
+<title>Z-Wave Protocol Controller Refrence: Network Monitor</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -84,39 +84,75 @@ $(document).ready(function(){initNavTree('group__network__monitor.html',''); ini
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Modules</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Network Monitor<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a></div></div>  </div>
+<div class="title">Network Monitor</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>The Network State Monitor.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__failing__node__monitor"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__failing__node__monitor.html">Failing Node Monitor</a></td></tr>
+<tr class="memdesc:group__failing__node__monitor"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Failing node monitor. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__network__monitor__span__persistence"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__network__monitor__span__persistence.html">Network Monitor S2 SPAN persistence</a></td></tr>
+<tr class="memdesc:group__network__monitor__span__persistence"><td class="mdescLeft">&#160;</td><td class="mdescRight">This sub-module provides an API to save and restore SPAN data. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__network__monitor__smart__start"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__network__monitor__smart__start.html">Network Monitor SmartStart list.</a></td></tr>
+<tr class="memdesc:group__network__monitor__smart__start"><td class="mdescLeft">&#160;</td><td class="mdescRight">Monitors network events and updates the SmartStart list accordingly. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga82970b3f9e07310ee43d7caf5231d868"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__network__monitor.html#ga82970b3f9e07310ee43d7caf5231d868">PROCESS_NAME</a> (network_monitor_process)</td></tr>
 <tr class="memdesc:ga82970b3f9e07310ee43d7caf5231d868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name the of <a class="el" href="group__contiki.html">The Contiki RTOS</a> process for the Network Monitor.  <a href="group__network__monitor.html#ga82970b3f9e07310ee43d7caf5231d868">More...</a><br /></td></tr>
 <tr class="separator:ga82970b3f9e07310ee43d7caf5231d868"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga06ced1749dfbcde823b9ce17aca599da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__network__monitor.html#ga06ced1749dfbcde823b9ce17aca599da">network_state_monitor_init</a> ()</td></tr>
+<tr class="memdesc:ga06ced1749dfbcde823b9ce17aca599da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the Network Monitor.  <a href="group__network__monitor.html#ga06ced1749dfbcde823b9ce17aca599da">More...</a><br /></td></tr>
 <tr class="separator:ga06ced1749dfbcde823b9ce17aca599da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga147993a94e5cf6546b69771a1caf7d8c"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__network__monitor.html#ga147993a94e5cf6546b69771a1caf7d8c">network_monitor_get_cached_current_node_list</a> ()</td></tr>
+<tr class="memdesc:ga147993a94e5cf6546b69771a1caf7d8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retuns the cached network node list.  <a href="group__network__monitor.html#ga147993a94e5cf6546b69771a1caf7d8c">More...</a><br /></td></tr>
+<tr class="separator:ga147993a94e5cf6546b69771a1caf7d8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>The Network State Monitor. </p>
 <p>The Network Monitor acts as an interface between the <a class="el" href="group__attribute__store.html">Attribute Store</a> and <a class="el" href="group__zwave__network__management.html">Z-Wave Network Management</a> and the <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a>. It keeps track of the current state of the network. It reacts to events from the zwave_controller component and add/remove nodes to/from the attribute system. It will also sanitize the HomeID and NodeID list of the controller with the HomeID provided and NodeID list in the attribute system. If a mismatch occurs, the component will update the attribute system to reflect the controller information.</p>
 <p>The network state monitor will also keep track of which nodes in the network are unreachable.</p>
 <div class="plantumlgraph">
-<object type="image/svg+xml" data="inline_umlgraph_17.svg"></object>
+<object type="image/svg+xml" data="inline_umlgraph_3.svg"></object>
 <div class="caption">
 Network Monitor Sequence Diagram</div>
 </div>
 <p>The network monitor will also keep track of the nodes being interviewed by monitoring Z-Wave NIF creations in the attribute store.</p>
 <div class="plantumlgraph">
-<object type="image/svg+xml" data="inline_umlgraph_18.svg"></object>
+<object type="image/svg+xml" data="inline_umlgraph_4.svg"></object>
 <div class="caption">
 Network Monitor Interview monitoring</div>
 </div>
  <h2 class="groupheader">Function Documentation</h2>
+<a id="ga147993a94e5cf6546b69771a1caf7d8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga147993a94e5cf6546b69771a1caf7d8c">&#9670;&nbsp;</a></span>network_monitor_get_cached_current_node_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t* network_monitor_get_cached_current_node_list </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retuns the cached network node list. </p>
+
+</div>
+</div>
 <a id="ga06ced1749dfbcde823b9ce17aca599da"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga06ced1749dfbcde823b9ce17aca599da">&#9670;&nbsp;</a></span>network_state_monitor_init()</h2>
 
@@ -131,6 +167,8 @@ Network Monitor Interview monitoring</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes the Network Monitor. </p>
 
 </div>
 </div>
@@ -160,7 +198,7 @@ Network Monitor Interview monitoring</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:32 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

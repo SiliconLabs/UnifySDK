@@ -1,0 +1,13 @@
+[Unit]
+Description=Unified IoT UPTI cap
+After=network.target mosquitto.service
+
+[Service]
+ExecStart=/usr/bin/uic-upti-cap
+Restart=on-failure
+KillMode=process
+User=uic
+Group=uic
+
+[Install]
+WantedBy=multi-user.target

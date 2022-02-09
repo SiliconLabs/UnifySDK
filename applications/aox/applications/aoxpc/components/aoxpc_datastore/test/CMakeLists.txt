@@ -1,0 +1,9 @@
+target_add_unittest(
+  aoxpc_datastore
+  NAME
+  aoxpc_datastore_test
+  SOURCES
+  aoxpc_datastore_test.c
+  DEPENDS
+  uic_config_mock
+  uic_datastore_mock)

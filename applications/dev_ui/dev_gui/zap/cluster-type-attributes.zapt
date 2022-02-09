@@ -7,7 +7,7 @@
 export let ClusterTypeAttrs: any = {
 {{#zcl_clusters}}
   {{#if (isSupportedCluster label)}}
-    {{label}}: {
+    {{getClusterName label}}: {
       server:{
         attributes: [
           {{#zcl_attributes_server}}
@@ -28,6 +28,16 @@ export let ClusterTypeAttrs: any = {
               {{#if (isNotEmpty defaultValue)}}
               default: {{asNumber defaultValue}},
               {{/if}}
+            {{#if (isStruct type)}}
+              struct:[
+                {{#zcl_struct_items_by_struct_name type}}
+                {
+                  name:"{{name}}",
+                  type:"{{castType type}}"
+                }{{listComma this}}
+                {{/zcl_struct_items_by_struct_name}}
+              ],
+            {{/if}}
             {{#if (isEnum type)}}
               enum:[
                 {{#zcl_enums}}
@@ -86,6 +96,16 @@ export let ClusterTypeAttrs: any = {
                   {
                     name: "{{label}}",
                     type: "{{castType type}}",
+                  {{#if (isStruct type)}}
+                    struct:[
+                      {{#zcl_struct_items_by_struct_name type}}
+                      {
+                        name:"{{name}}",
+                        type:"{{castType type}}"
+                      }{{listComma this}}
+                      {{/zcl_struct_items_by_struct_name}}
+                    ],
+                  {{/if}}
                   {{#if (isEnum type)}}
                     enum:[
                       {{#zcl_enums}}

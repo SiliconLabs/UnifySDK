@@ -12,7 +12,7 @@ set(CPACK_PACKAGING_INSTALL_PREFIX "")
 set(CPACK_SOURCE_GENERATOR "TGZ")
 set(CPACK_SOURCE_IGNORE_FILES
     "${PROJECT_SOURCE_DIR}/build.*/"
-    "${PROJECT_SOURCE_DIR}/GeckoSDK/"
+    "${PROJECT_SOURCE_DIR}/GeckoSDK.*/"
     "Jenkinsfile"
     "\\\\.git*"
     "\\\\.pre-commit-config.yaml"
@@ -90,14 +90,9 @@ if(NOT APPLE)
       "${CMAKE_BINARY_DIR}/applications/zpc/debconf/config;\
         ${CMAKE_BINARY_DIR}/applications/zpc/debconf/templates;\
         ${CMAKE_BINARY_DIR}/applications/zpc/debconf/conffiles;\
-        ${CMAKE_BINARY_DIR}/applications/zpc/debconf/postinst")
+        ${CMAKE_BINARY_DIR}/applications/zpc/debconf/postinst;\
+        ${CMAKE_BINARY_DIR}/applications/zpc/debconf/prerm")
     list(APPEND CPACK_COMPONENTS_ALL "uic-zpc")
-  endif()
-
-  if(BUILD_DEV_CLI)
-    add_component_to_uic(uic-dev-cli "${CMAKE_PROJECT_NAME}-dev-cli"
-                         "libboost-log1.67.0" "")
-    list(APPEND CPACK_COMPONENTS_ALL "uic-dev-cli")
   endif()
 
   if(BUILD_DEV_GUI)
@@ -112,13 +107,44 @@ if(NOT APPLE)
   endif()
 
   if(BUILD_ZIGPC)
-    add_component_to_uic(uic-zigpc "${CMAKE_PROJECT_NAME}-zigpc" "libuic" "")
+    add_component_to_uic(
+      uic-zigpc # Package Name
+      "${CMAKE_PROJECT_NAME}-zigpc" # Package Debian filename
+      "libuic" # Package Depends on
+      "${CMAKE_BINARY_DIR}/applications/zigpc/debconf/config;\
+        ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/templates;\
+        ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/conffiles;\
+        ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/postinst;\
+        ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/prerm;\
+        ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/postrm")
     list(APPEND CPACK_COMPONENTS_ALL "uic-zigpc")
   endif()
-  list(JOIN CPACK_COMPONENTS_ALL "," COMPONENTS-ALL)
-  add_component_to_uic(uic-all "${CMAKE_PROJECT_NAME}-all" ${COMPONENTS-ALL} "")
 
-  list(APPEND CPACK_COMPONENTS_ALL uic-all)
+  if(BUILD_AOXPC)
+    add_component_to_uic(
+      uic-aoxpc 
+      "${CMAKE_PROJECT_NAME}-aoxpc"
+      "libuic" 
+      "${CMAKE_BINARY_DIR}/applications/aox/applications/aoxpc/debconf/postinst;\
+      ${CMAKE_BINARY_DIR}/applications/aox/applications/aoxpc/debconf/prerm")
+    list(APPEND CPACK_COMPONENTS_ALL "uic-aoxpc")
+  endif()
+
+  if(BUILD_POSITIONING)
+    add_component_to_uic(
+      uic-positioning 
+      "${CMAKE_PROJECT_NAME}-positioning"                   
+      "libuic" 
+      "${CMAKE_BINARY_DIR}/applications/aox/applications/positioning/debconf/postinst;\
+      ${CMAKE_BINARY_DIR}/applications/aox/applications/positioning/debconf/prerm")
+    list(APPEND CPACK_COMPONENTS_ALL "uic-positioning")
+  endif()
+
+  list(JOIN CPACK_COMPONENTS_ALL "," COMPONENTS-ALL)
+  # add_component_to_uic(uic-all "${CMAKE_PROJECT_NAME}-all" ${COMPONENTS-ALL}
+  # "")
+
+  # list(APPEND CPACK_COMPONENTS_ALL uic-all)
 
   message(STATUS "Components of UIC which will have deb packages"
                  ": ${CPACK_COMPONENTS_ALL}")

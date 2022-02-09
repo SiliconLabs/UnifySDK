@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -10,11 +10,11 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
+
 /**
- * @file zpc_datastore_fixt.h
- * @defgroup zpc_datastore_fixture ZPC Config Fixture
- * @ingroup zpc_datastore
- * @brief ZPC Configuration fixture.
+ * @defgroup zpc_datastore ZPC Datastore Fixture
+ * @ingroup zpc_components
+ * @brief ZPC specific functions using the @ref unify_datastore.
  *
  * Fixture to initialize the zpc_datastore from uic_main,
  * to be used in zpc_datastore

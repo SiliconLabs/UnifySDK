@@ -1,5 +1,5 @@
 // License
-// <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+// <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
 
 // The licensor of this software is Silicon Laboratories Inc. Your use of this
 // software is governed by the terms of Silicon Labs Master Software License
@@ -11,160 +11,91 @@
 // Warn about missing documentation when running cargo doc
 // It doesn't seem to work very well, though.
 // See also https://doc.rust-lang.org/rustdoc/how-to-write-documentation.html
-#![warn(missing_docs)]
-
 //! The UPVL Client manages the SmartStart List topic `ucl/SmartStart/List`.
+#![doc(html_no_source)]
 
-// imports, external crates
-
-// JSON-related imports
-// Serialize/deserialize crate
-extern crate serde;
-// Crate to ser/de-ser into json syntax
-extern crate serde_json;
-
-// Use some "standard libraries"
 use std::ffi::CString;
-use std::str; //TODO: try to avoid using ffi in main
-
-// Import the locally defined modules and types
+use std::str;
 mod upvl_db;
-
 mod upvl_json;
+use unify_config_sys::*;
+use unify_log_sys::*;
+use unify_middleware::unify_mqtt_client::{sl_status_t, MqttClientTrait, UnifyMqttClient};
+use unify_sl_status_sys::*;
+use upvl_db::*;
+mod mqtt_handler;
+use mqtt_handler::*;
 
-mod upvl_mqtt;
+declare_app_name!("upvl_main");
 
-use upvl_log::{self, log_error};
+const DB_FILE: &str = "/var/lib/uic/upvl.db";
+const CONFIG_VERSION: &str = env!("VERSION_STR");
 
-use upvl_conf::*;
-
-const LOG_TAG: &str = "upvl_main";
-const DB_FILE: &str = "upvl_test.db";
-const CLIENT_NAME: &str = "upvl_client";
-
-fn main() -> Result<(), i32> {
-    if parse_application_arguments().is_err() {
-        // error message handled by uic_config
-        return Ok(());
-    }
-
-    let res = get_config();
-    let (mqtt_broker, mqtt_port, db_file, ca_file, cert_file, key_file, log_level) =
-        ok_or_exit_with_message(res, "could not load configuration")?;
-
-    println!("MQTT broker from config: {}", &mqtt_broker);
-    println!("MQTT port number from config: {}", &mqtt_port);
-    println!("UPVL DB filename from config: {}", &db_file);
-    println!("CA Certificate file from config: {}", &ca_file);
-    println!(
-        "Certificate file for this client from config: {}",
-        &cert_file
-    );
-    println!(
-        "Private key file for this client from config: {}",
-        &key_file
-    );
-    println!("Logging level from config: {}", &log_level);
-
-    // Connect to the data store.
-    // This currently lives outside the mqtt module, since we may also
-    // want to store other data than provisions in the data store,
-    // e.g., configuration settings.
-    let db_conn = upvl_db::db_setup(db_file);
-
-    // Debug printout
-    // of the provisions found in the data store.
-    // Useful for the desk tests
-    upvl_db::db_debug_print_provisions(&db_conn);
-
-    // Create a handler to the mqtt client interface (see upvl_mqtt.rs)
-    // Connect to the broker.
-    let mq_ses = upvl_mqtt::UpvlMqttSession::new(
-        &mqtt_broker,
-        mqtt_port as u32,
-        &ca_file,
-        &cert_file,
-        &key_file,
-    );
-
-    // Spawn the demo-thread that publishes the updates to test the
-    // subscriber (see upvl_mqtt.rs)
-    //
-    // To run the demo, include this call and comment out the
-    // #[cfg(test)] in upvl_mqtt.
-    //mq_ses.spawn_test_thread();
-
-    // The mqtt session data contains whatever data we want to mqtt
-    // event handler callbacks to know and share.
-    // The only important data at the moment is a reference to data
-    // store connection.
-    let ses_data = upvl_mqtt::UpvlMqttSessionData::new(&db_conn);
-
-    // Before starting the infinity loop publish the SmartStart list to the
-    // ucl/SmartStart/List topic for anyone listening before update
-    mq_ses.publish_list(upvl_db::db_list_provisions(&db_conn));
-
-    // Start infinity loop
-    mq_ses.run(ses_data);
-
-    // Debug printout of the final contents of the data store.
-    upvl_db::db_debug_print_provisions(&db_conn);
-
-    // Close the mqtt connection
-    mq_ses.disconnect().expect("Disconnect failed.");
-
-    // Close the database
-    upvl_db::db_teardown(db_conn);
-
-    upvl_log::log_info(LOG_TAG, "Goodbye, world!".to_string());
-    Ok(())
-}
-
-fn get_config() -> Result<(String, i32, String, String, String, String, String), config_status_t> {
-    upvl_log::sl_log_read_config();
-
-    let mqtt_broker = config_get_as_string("mqtt.host")?;
-    let mqtt_port = config_get_as_int("mqtt.port")?;
-    let db_file = config_get_as_string("upvl.db_file")?;
-    let ca_file = config_get_as_string("mqtt.cafile")?;
-    let cert_file = config_get_as_string("mqtt.certfile")?;
-    let key_file = config_get_as_string("mqtt.keyfile")?;
-    let log_level = config_get_as_string("log.level")?;
-
-    Ok((
-        mqtt_broker,
-        mqtt_port,
-        db_file,
-        ca_file,
-        cert_file,
-        key_file,
-        log_level,
-    ))
-}
-
-fn parse_application_arguments() -> Result<(), config_status_t> {
-    let version = env!("VERSION_STR");
-
+fn main() -> Result<(), sl_status_t> {
     // Create a vector of strings from cmd line arguments
     let args = std::env::args()
         .map(|arg| CString::new(arg).unwrap())
         .collect::<Vec<CString>>();
 
-    config_add_string("upvl.db_file", "File name of UPVL database", DB_FILE)
-        .or(config_add_string(
-            "mqtt.client_id",
-            "Client ID for MQTT client",
-            CLIENT_NAME,
-        ))
-        .or(upvl_conf::config_parse(args, version))
+    if parse_application_arguments(args).is_err() {
+        // error message handled by unify_config_sys
+        return Ok(());
+    }
+    let upvl_config =
+        ok_or_exit_with_message(UpvlConfig::from_config(), "could not load configuration")?;
+
+    run(upvl_config)
+}
+
+fn run(upvl_config: UpvlConfig) -> Result<(), sl_status_t> {
+    let mqtt_client = UnifyMqttClient::default();
+    mqtt_client.initialize()?;
+    let handler = MqttHandler::new(mqtt_client, upvl_config)?;
+    mqtt_client.mainloop(handler)
+}
+
+fn parse_application_arguments(args: Vec<CString>) -> Result<(), config_status_t> {
+    log_info!("args: {:?}", args);
+    config_add_string(
+        CONFIG_KEY_UPVL_DB_FILE,
+        "File name of UPVL database",
+        DB_FILE,
+    )
+    .and(config_add_string(
+        "mqtt.client_id",
+        "Client ID for MQTT client",
+        APP_NAME,
+    ))
+    .and(config_parse(args, CONFIG_VERSION))
 }
 
 fn ok_or_exit_with_message<T, E: std::fmt::Display>(
-    res: std::result::Result<T, E>,
+    res: Result<T, E>,
     message: &str,
-) -> std::result::Result<T, i32> {
+) -> Result<T, sl_status_t> {
     res.map_err(|e| {
-        log_error(LOG_TAG, format!("{} - {}", e, message));
-        -1
+        log_error!("{} - {}", e, message);
+        SL_STATUS_FAIL
     })
+}
+
+#[cfg(test)]
+mod test {
+
+    use super::*;
+    use crate::CString;
+    use unify_config_sys::config_status_t::{CONFIG_STATUS_DOES_NOT_EXIST, CONFIG_STATUS_ERROR};
+
+    #[test]
+    fn test_parse_application_arguments() {
+        let test_args = vec![
+            CString::new("").expect("CString error"),
+            CString::new("--vsion").expect("CString error"),
+        ];
+        assert_eq!(
+            parse_application_arguments(test_args),
+            Err(CONFIG_STATUS_ERROR)
+        );
+        assert_eq!(UpvlConfig::from_config(), Err(CONFIG_STATUS_DOES_NOT_EXIST));
+    }
 }

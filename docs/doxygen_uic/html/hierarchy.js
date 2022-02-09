@@ -2,6 +2,7 @@ var hierarchy =
 [
     [ "ast::assignment", "structast_1_1assignment.html", null ],
     [ "ast::attribute", "structast_1_1attribute.html", null ],
+    [ "attribute_changed_event", "structattribute__changed__event.html", null ],
     [ "ast::attribute_path_eval", "structast_1_1attribute__path__eval.html", null ],
     [ "ast::attribute_path_subscript", "structast_1_1attribute__path__subscript.html", null ],
     [ "attribute_resolver_config_t", "structattribute__resolver__config__t.html", null ],

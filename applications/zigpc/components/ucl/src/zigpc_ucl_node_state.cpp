@@ -112,6 +112,18 @@ sl_status_t zigpc_ucl::node_state::publish_state(
   return status;
 }
 
+sl_status_t zigpc_ucl::node_state::remove_node_topics(zigbee_eui64_uint_t eui64)
+{
+  zigpc_ucl::mqtt::topic_data_t topic_data;
+  topic_data.eui64 = eui64;
+
+  sl_status_t status
+    = zigpc_ucl::mqtt::unretain(zigpc_ucl::mqtt::topic_type_t::BY_UNID_NODE,
+                                topic_data);
+
+  return status;
+}
+
 void zigpc_ucl::node_state::cleanup_all_node_topics(void)
 {
   //Remove all retained topics except ucl/by-unid/<xxxxx>/State

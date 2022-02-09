@@ -1,1 +1,0 @@
-window.ALL_CRATES = ["rust_command_classes","uic_angel","uic_attribute_store_rs","uic_bindgen","uic_config_rs","uic_image_provider","uic_log_rs","uic_proc_macro_test","uic_upvl","zwave_command_classes","zwave_command_handler","zwave_controller","zwave_tx"];

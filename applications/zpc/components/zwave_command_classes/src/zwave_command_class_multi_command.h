@@ -13,7 +13,6 @@
  *****************************************************************************/
 
 /**
- * @file zwave_command_class_multi_command.h
  * @defgroup multi_command_command_class Multi Command Command Class
  * @ingroup command_classes
  * @brief Multi Command Command Class handlers

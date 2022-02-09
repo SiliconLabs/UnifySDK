@@ -6,7 +6,7 @@ find_package(Boost REQUIRED)
 
 add_library(
   zigpc_attribute_management
-  ${CMAKE_CURRENT_BINARY_DIR}/src/zigpc_attrmgmt_publish.c
+  ${CMAKE_CURRENT_BINARY_DIR}/src/zigpc_attrmgmt_publish.cpp
   src/attribute_management_process.c
   src/attribute_management.c
   src/attribute_map.cpp
@@ -23,7 +23,12 @@ target_include_directories(
 
 target_link_libraries(
   zigpc_attribute_management
-  PRIVATE zigpc_zcl_profiles zigpc_gateway zigpc_common uic_contiki uic_log
+  PRIVATE zigpc_zcl_profiles
+          zigpc_gateway
+          zigpc_common
+          zigpc_ucl
+          uic_contiki
+          uic_log
           uic_dotdot_mqtt)
 
 add_subdirectory(test)

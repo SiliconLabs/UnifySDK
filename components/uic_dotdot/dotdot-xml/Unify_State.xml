@@ -1,0 +1,48 @@
+﻿<?xml version="1.0"?>
+<!--
+State
+This is a manufacturer specific cluster, representing a Node State in our network
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD02" revision="1" name="State">
+  <classification role="utility" picsCode="UNS" />
+
+  <server>
+
+    <attributes>
+      <attribute id="0000" name="EndpointIdList" array="true" type="uint8"/>
+    </attributes>
+
+
+    <commands>
+      <command id="01" name="Remove">
+        <!-- This command is used to trigger a removal of a
+          specific node from the network.
+          The Protocol Controller MUST NOT perform removal
+          of the node without the node's consent. -->
+      </command>
+      <command id="02" name="RemoveOffline">
+        <!-- 	This command is used to trigger a removal of a node
+          which is in "Offline" state from a given network.
+          The Protocol Controller MUST perform removal of the
+          node without the offline node's consent.-->
+      </command>
+      <command id="03" name="DiscoverNeighbors">
+        <!-- 	This command is used to request a node to perform a
+          new neighbor discovery. The information or end-result
+          associated to this operation may not be visible to
+          IoT Services. -->
+      </command>
+      <command id="04" name="Interview">
+        <!-- 	This command is used to instruct a Protocol
+          Controller to interview a node,
+          i.e. discover all its capabilities and states.  -->
+      </command>
+    </commands>
+  </server>
+</zcl:cluster>

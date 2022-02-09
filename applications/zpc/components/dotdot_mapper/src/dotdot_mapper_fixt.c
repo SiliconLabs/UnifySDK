@@ -16,18 +16,23 @@
 
 // Includes from this component
 #include "dotdot_mapper_fixt.h"
+#include "basic_cluster_mapper.h"
 #include "on_off_cluster_mapper.h"
 #include "level_cluster_mapper.h"
 #include "thermostat_cluster_mapper.h"
 #include "sl_status.h"
 #include "door_lock_cluster_mapper.h"
 #include "identify_cluster_mapper.h"
-#include "manufacturer_id_to_name_mapper.h"
 
 sl_status_t dotdot_mapper_init()
 {
   // Initializes all clusters individually.
   // Abort and return false if any of them fails.
+
+  // Basic Cluster
+  if (!basic_cluster_mapper_init()) {
+    return SL_STATUS_FAIL;
+  }
 
   // OnOff Cluster
   if (!on_off_cluster_mapper_init()) {
@@ -54,16 +59,13 @@ sl_status_t dotdot_mapper_init()
     return SL_STATUS_FAIL;
   }
 
-  //Manufacturer ID to Name mapper
-   if (!manufacturer_id_to_name_mapper_init()) {
-    return SL_STATUS_FAIL;
-  } 
-
   return SL_STATUS_OK;
 }
 
 int dotdot_mapper_teardown()
 {
+  // Basic Cluster
+  basic_cluster_mapper_teardown();
   // OnOff Cluster
   on_off_cluster_mapper_teardown();
   // Level Cluster
@@ -72,7 +74,5 @@ int dotdot_mapper_teardown()
   thermostat_cluster_mapper_teardown();
   //DoorLock Cluster
   door_lock_cluster_mapper_teardown();
-  //Manufacturer ID to Name mapper
-  manufacturer_id_to_name_mapper_teardown();
   return 0;
 }

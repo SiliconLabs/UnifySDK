@@ -1,0 +1,29 @@
+// Wrong or missing AGI data
+
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+
+def zwASSOCIATION_GROUP_ID      0x00008503
+def zwASSOCIATION_GROUP_PROFILE 0x00005904
+
+// Device fingerprints
+def aeon_labs_switch ((r'zwMANUFACTURER_ID == 0x86) & (r'zwPRODUCT_TYPE_ID == 0x3) & (r'zwPRODUCT_ID == 0x60))
+
+// AGI profile values
+def LIFELINE_PROFILE 0x0001
+def AGI_PROFILE_CONTROL_KEY_1 0x2001
+
+scope 0 {
+
+// Group 1 profile
+r'zwASSOCIATION_GROUP_ID[1].zwASSOCIATION_GROUP_PROFILE =
+  if (aeon_labs_switch) LIFELINE_PROFILE
+  undefined
+
+// Group 2 profile
+r'zwASSOCIATION_GROUP_ID[2].zwASSOCIATION_GROUP_PROFILE =
+  if (aeon_labs_switch) AGI_PROFILE_CONTROL_KEY_1
+  undefined
+
+}

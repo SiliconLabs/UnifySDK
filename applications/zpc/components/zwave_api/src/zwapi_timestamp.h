@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -13,7 +13,7 @@
 
 /**
  * @file zwapi_timestamp.h
- * @brief Timestamp API allowing to set timestamps and verify if they are 
+ * @brief Timestamp API allowing to set timestamps and verify if they are
  * past/expired
  *
  */
@@ -30,18 +30,18 @@ extern "C" {
 typedef struct zwapi_timestamp zwapi_timestamp_t;
 
 /**
- * @brief get the timestamp 
- * 
- * @param timestamp 
- * @param period_ms 
+ * @brief get the timestamp
+ *
+ * @param timestamp
+ * @param period_ms
  */
 void zwapi_timestamp_get(zwapi_timestamp_t *timestamp, int period_ms);
 
 /**
- * @brief compare the current timestamp with the timestamp passed as an argument 
- * 
- * @param timestamp 
- * 
+ * @brief compare the current timestamp with the timestamp passed as an argument
+ *
+ * @param timestamp
+ *
  * @returns true if the timestamp is greater than the current timestamp
  */
 bool zwapi_is_timestamp_elapsed(const zwapi_timestamp_t *timestamp);

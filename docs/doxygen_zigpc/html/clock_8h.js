@@ -1,7 +1,7 @@
 var clock_8h =
 [
     [ "CLOCK_SECOND", "group__clock.html#gae3ced0551b26c9b99cb45a86f34d100a", null ],
-    [ "clock_delay", "group__clock.html#ga2a4bbf8e0008809dfd6c38040941a536", null ],
+    [ "clock_delay", "group__clock.html#gabe0f181eceefd89df39387bf23ac3fbc", null ],
     [ "clock_fine", "group__clock.html#gadca1ca5f3c484a278d6c4876f7c54bdb", null ],
     [ "clock_fine_max", "group__clock.html#gae57f21c49f465372a8bf2ac3fbe03ba8", null ],
     [ "clock_init", "group__clock.html#ga78ab77b57cf2e00089f0a3a22508524c", null ],

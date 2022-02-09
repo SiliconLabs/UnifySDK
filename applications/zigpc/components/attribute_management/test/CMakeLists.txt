@@ -28,7 +28,6 @@ target_add_unittest(
   SOURCES
   zigpc_attrmgmt_receive_test.cpp
   DEPENDS
-  zigpc_common_mock
   zigpc_zcl_util_mock
   uic_dotdot_mqtt_mock
   zigpc_gateway_mock)

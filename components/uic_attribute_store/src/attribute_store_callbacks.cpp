@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -24,7 +24,7 @@
 #include "sl_log.h"
 
 /// Setup Log tag
-#define LOG_TAG "attribute_store_callbacks"
+constexpr char LOG_TAG[] = "attribute_store_callbacks";
 
 /**
  * @brief A structure that's kept for registering callbacks settings.
@@ -33,33 +33,53 @@
  * - Callback when matching the value-state and type of a node
  */
 
-typedef std::pair<attribute_store_type_t, attribute_store_node_value_state_t>
-  attribute_store_value_callback_setting_t;
+using attribute_store_value_callback_setting_t
+  = std::pair<attribute_store_type_t, attribute_store_node_value_state_t>;
 
-// We have 3 lists of callback functions:
+///////////////////////////////////////////////////////////////////////////////
+// Private variables
+///////////////////////////////////////////////////////////////////////////////
+namespace
+{
+// We have 4 lists of callback functions.
+
 // 1. For any modification in the attribute store
-// 2. For modification of any value for a given node type
-// 3. For modification of a value/state (reported/desired) for a given node type
-static std::set<attribute_store_node_update_callback_t> generic_callbacks;
+std::set<attribute_store_node_update_callback_t> generic_callbacks;
 
-static std::map<attribute_store_type_t,
-                std::set<attribute_store_node_update_callback_t>>
+// 2. For any touch in the attribute store
+std::set<attribute_store_node_touch_callback_t> touch_generic_callbacks;
+
+// 3. For modification of any value for a given node type
+std::map<attribute_store_type_t,
+         std::set<attribute_store_node_changed_callback_t>>
   type_callbacks;
 
-static std::map<attribute_store_value_callback_setting_t,
-                std::set<attribute_store_node_update_callback_t>>
+// 4. For modification of a value/state (reported/desired) for a given node type
+std::map<attribute_store_value_callback_setting_t,
+         std::set<attribute_store_node_changed_callback_t>>
   value_callbacks;
+}  // Private variables namespace
 
 ///////////////////////////////////////////////////////////////////////////////
 // Private functions, shared in the component
 ///////////////////////////////////////////////////////////////////////////////
+void attribute_store_invoke_touch_callbacks(attribute_store_node_t touched_node)
+{
+  attribute_store_invoke_touch_generic_callbacks(touched_node);
+}
+
 void attribute_store_invoke_callbacks(
   attribute_store_node_t updated_node,
   attribute_store_type_t type,
   attribute_store_node_value_state_t value_state,
   attribute_store_change_t change)
 {
-  attribute_store_invoke_generic_callbacks(updated_node, change);
+  attribute_changed_event_t change_event = {.updated_node = updated_node,
+                                            .type         = type,
+                                            .value_state  = value_state,
+                                            .change       = change};
+
+  attribute_store_invoke_generic_callbacks(&change_event);
   attribute_store_invoke_type_callbacks(updated_node, type, change);
   attribute_store_invoke_value_callbacks(updated_node,
                                          type,
@@ -68,11 +88,20 @@ void attribute_store_invoke_callbacks(
 }
 
 void attribute_store_invoke_generic_callbacks(
-  attribute_store_node_t updated_node, attribute_store_change_t change)
+  attribute_changed_event_t *change_event)
 {
   // Call all these functions:
   for (auto callback_function: generic_callbacks) {
-    callback_function(updated_node, change);
+    callback_function(change_event);
+  }
+}
+
+void attribute_store_invoke_touch_generic_callbacks(
+  attribute_store_node_t touched_node)
+{
+  // Call all these functions:
+  for (auto callback_function: touch_generic_callbacks) {
+    callback_function(touched_node);
   }
 }
 
@@ -103,12 +132,24 @@ void attribute_store_invoke_value_callbacks(
   }
 }
 
+sl_status_t attribute_store_callbacks_init(void)
+{
+  // Remove all registered callbacks
+  generic_callbacks.clear();
+  type_callbacks.clear();
+  value_callbacks.clear();
+  touch_generic_callbacks.clear();
+
+  return SL_STATUS_OK;
+}
+
 int attribute_store_callbacks_teardown(void)
 {
   // Remove all registered callbacks
   generic_callbacks.clear();
   type_callbacks.clear();
   value_callbacks.clear();
+  touch_generic_callbacks.clear();
 
   return 0;
 }
@@ -116,6 +157,19 @@ int attribute_store_callbacks_teardown(void)
 ///////////////////////////////////////////////////////////////////////////////
 // Public interface functions
 ///////////////////////////////////////////////////////////////////////////////
+sl_status_t attribute_store_register_touch_notification_callback(
+  attribute_store_node_touch_callback_t callback_function)
+{
+  if (callback_function == nullptr) {
+    sl_log_warning(LOG_TAG,
+                   "Attempt to register a nullptr touch callback for all "
+                   "attributes. Discarding.");
+    return SL_STATUS_FAIL;
+  }
+  touch_generic_callbacks.insert(callback_function);
+  return SL_STATUS_OK;
+}
+
 sl_status_t attribute_store_register_callback(
   attribute_store_node_update_callback_t callback_function)
 {
@@ -130,7 +184,7 @@ sl_status_t attribute_store_register_callback(
 }
 
 sl_status_t attribute_store_register_callback_by_type(
-  attribute_store_node_update_callback_t callback_function,
+  attribute_store_node_changed_callback_t callback_function,
   attribute_store_type_t type)
 {
   if (callback_function == nullptr) {
@@ -146,7 +200,7 @@ sl_status_t attribute_store_register_callback_by_type(
 }
 
 sl_status_t attribute_store_register_callback_by_type_and_state(
-  attribute_store_node_update_callback_t callback_function,
+  attribute_store_node_changed_callback_t callback_function,
   attribute_store_type_t type,
   attribute_store_node_value_state_t value_state)
 {

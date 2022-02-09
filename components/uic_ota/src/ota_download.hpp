@@ -18,7 +18,6 @@
  * This module enables functionality for downloading images through the MQTT
  * broker. The module complies with the Unify spec.
  *
- * @{
 @startuml{ota_internal.png} "OTA internal" width=10cm
 title OTA download from image provider
 
@@ -29,12 +28,12 @@ participant "Image provider" as IP
 
 PC -> API: subscribe_unid(unid, uiid)
 
-alt If no unids listening to uiid 
+alt If no unids listening to uiid
 API -> IP: Subscribe: ucl/OTA/info/uiid/all
 end
 API -> IP: Subscribe: ucl/OTA/info/uiid/unid
 API -> OTAC: unid listening to uiid
-alt #LightBlue specific unid available 
+alt #LightBlue specific unid available
 == image availability ==
 IP -> API: Publish: ucl/OTA/info/uiid/unid
 API -> OTAC: Cache image meta info for uiid/unid
@@ -93,6 +92,8 @@ alt If no more unids listening to uiid
 API -> IP: Unsubscribe: ucl/OTA/info/uiid/all
 end
 @enduml
+ *
+ * @{
  */
 
 #ifndef OTA_DOWNLOAD_HPP
@@ -104,22 +105,22 @@ namespace ota_download
 {
 /**
  * @brief Set the image cache size for download.
- * 
+ *
  * @param cache_size the cache size input. Maximum is 256 Mb.
  */
 void set_image_cache_size(unsigned long int cache_size);
 
 /**
  * @brief Set the image base path where image files are saved.
- * 
+ *
  * @param image_base_path path to directory where images should be saved.
  */
 void set_image_base_path(const std::string &image_base_path);
 
 /**
  * @brief Set the callback called for available images.
- * 
- * @param image_available_cb callback which is called when an image is 
+ *
+ * @param image_available_cb callback which is called when an image is
  * available.
  */
 void set_image_available_callback(
@@ -127,15 +128,15 @@ void set_image_available_callback(
 
 /**
  * @brief Check if available info callback is initialized.
- * 
+ *
  * @returns boolean if available info callback is not a nullptr.
  */
 bool available_info_callback_initialized();
 
 /**
- * @brief Callback function to be called when revceiving image files 
+ * @brief Callback function to be called when revceiving image files
  * information on info topic.
- * 
+ *
  * @param topic info MQTT topic.
  * @param message image file contents transferred.
  * @param message_length size of image file.
@@ -146,13 +147,13 @@ void info_callback(const char *topic,
 
 /**
  * @brief Function for downloading images.
- * 
+ *
  * @param image_key unique image key for downloading for this image.
- * @param subscribe_topic the data topic to subscribe to where image file is 
+ * @param subscribe_topic the data topic to subscribe to where image file is
  * received.
- * @param publish_topic topic to publish to telling image provider to provide 
+ * @param publish_topic topic to publish to telling image provider to provide
  * image file.
- * @param image_ready_cb callback for when image is ready for over the air 
+ * @param image_ready_cb callback for when image is ready for over the air
  * transfer.
  */
 void get(const std::string &image_key,

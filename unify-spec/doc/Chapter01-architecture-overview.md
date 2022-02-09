@@ -143,12 +143,12 @@ Unify with the high-profile
 In addition to the existing Zigbee Clusters, UCL is extended with the necessary
 commands to support all features of the supported PHYs.
 
-## Unified Node IDs
+## UNID: Unified Node IDs
 
 The UNIDs are unique text strings in the MQTT topic hierarchy, which MUST
 follow the MQTT naming limitations.
 
-The Protocol Controller generates the UNID for all nodes in the PAN (or PANs) it
+The Protocol Controllers generate UNID for all nodes in the PAN (or PANs) it
 controls. The UNID MUST consist of a prefix part and a PAN part, separated by a
 minus string character "-".
 
@@ -161,22 +161,21 @@ generate the same UNID and hence keeps them unique.
 
 The following table shows examples of generated UNIDs:
 
-Protocol Controller     | Prefix | Example UNID
+Protocol Controller PHY     | Prefix | Example UNID
 ------------- | ------------- | -------------
-Z-Wave | "zw" | "zw-DEADBEEF-01" for nodeID 01 in homeID 0xDEADBEEF. NodeID is mutable on network reset.
-Zigbee | "zb" | "zg-DEADBEEFC0FFEE12" for node with EUI-64 DEADBEEFC0FFEE12.
-BLE | "ble" |  "ble-ri-11:22:33:44:55:66" for a BLE device with random identifier 11:22:33:44:55:66.
-Z-Wave | "bld42" | "bld42-DEADBEEF-01" for nodeID 01 in homeID 0xDEADBEEF in building 42.
-Z-Wave | "bld99" | "bld99-abcdef0123456789abcdef0123456789" for node with DSK (aka. public key fingerprint) abcdef0123456789abcdef0123456789. DSKs are non-mutable across network resets.
+Z-Wave | "zw" | "zw-DEADBEEF-0001" for NodeID 01 in HomeID 0xDEADBEEF. NodeID is mutable on network reset.
+Zigbee | "zb" | "zb-DEADBEEFC0FFEE12" for node with EUI-64 DEADBEEFC0FFEE12.
+BLE | "ble-sr" |  Static random addresses. "ble-sr-112233445566" for a BLE device with random identifier 11:22:33:44:55:66.
+BLE | "ble-pd" |  Public device addresses. "ble-sr-112233445566" for a BLE device with public address 11:22:33:44:55:66.
 
 For example, Z-Wave UNIDs could be prefixed "zw", zigbee with "zb", and so on.
 The prefix should be short (max 8-10 characters) to keep MQTT topics short.
 
 The UNID PAN parts can be derived from a unique identifier, such as the EUI-64 of a
-Bluetooth LE or Zigbee device, or the unique DSK of an S2 Z-Wave device. For
-devices without a permanent unique identifier, something like the currently
-assigned address on the PAN can be used, for example a combination of HomeID and
-nodeID for Z-Wave nodes without S2.
+Bluetooth LE or Zigbee device. For devices without a permanent unique
+identifier, something like the currently assigned address on the PAN can
+be used, for example a combination of HomeID and
+NodeID in Z-Wave.
 
 Mutable UNID PAN parts may be used instead of permanent identifiers if they
 allow simpler diagnostics and troubleshooting of the system. This may be
@@ -205,14 +204,20 @@ ucl/
                                       ZCL Tables may use more than 1 level. E.g. "SceneTable".
               ../Reported             Reported state for a given attribute. ".." represents several levels. E.g. "SceneTable/1"
               ../Desired              Desired state for a given attribute.
-          SupportedCommands           Array of supported commands in the cluster.
+          SupportedCommands           Array of supported commands accepted by the cluster.
+          SupportedGeneratedCommands  Array of generated commands sent from the cluster.
           Commands                    Namespace for triggering commands used to control a device.
+            <CommandName>             Particular command under a cluster. Example: "MoveToLevel".
+          GeneratedCommands           Namespace for receiving generated commands from a client-type device.
             <CommandName>             Particular command under a cluster. Example: "MoveToLevel".
       ProtocolController
         NetworkManagement             Network Management related topics, see "Network Management Commands" page.
           Write                       Publish here to initiate Network Management operations
-        Diagnostics                   Diagnostic information from the protocol controller is published here.
-          Request                     On-demand diagnostic information is requested by publishing to this topic.
+        RFTelemetry                   Telemetry about RF transmissions
+                                      are published under this topic. The sub
+                                      topics under this "cluster" are identical
+                                      to regular application clusters (Attributes/,
+                                      SupportedCommands, Commands/, etc.)
       State                           Network state, security and command delay of the node (for all endpoints).
         SupportedCommands             List of (Network management) supported
                                       commands attached to a node state, that
@@ -349,11 +354,14 @@ A Protocol Controller MUST implement these interfaces
 
 * PAN interface: NCP, SerialAPI or similar PHY-specific interface.
 
-A IoT Service MUST implement these interfaces
+An IoT Service MUST implement this interface:
 
 * Unify Interface. The interface between the MQTT Broker and each Protocol
   Controller. This is an MQTT pub/sub connection with topics and payloads
   specified by the UCL.
+
+An IoT Service MAY implement this interface:
+
 * Cloud Interface: Interface from Cloud Service to IoT Service module in the
   Unify gateway. The first example is an AWS-IoT IoT Service module. Rules
   Engines can also be seen as special instances of IoT Services. The Cloud
@@ -361,7 +369,8 @@ A IoT Service MUST implement these interfaces
 
 ### Protocol Controller API
 
-Each Protocol Controller connects to the MQTT server. The Protocol Controller subscribes to an MQTT topic:
+Each Protocol Controller connects to the MQTT server.
+The Protocol Controller subscribes for example to an MQTT topic:
 
 > `ucl/by-unid/#`
 
@@ -386,11 +395,16 @@ command MAY result in a sequence of PHY native commands. For example, one UCL co
 may be translated to a sequence of Z-Wave commands and then transmitted through
 the NCP.
 
-When commands are received from the PAN, the Protocol Controller must translate
-and publish to the MQTT topic `ucl/by-unid/<source_UNID>/<CL>/<CMD>/<Attribute>` with a UCL header and
-translated CMD payload in the MQTT payload field. The Protocol Controller must
-fill out the UCL header fields in addition to concatenating with the
-translated payload.
+When commands are received from the PAN, a Protocol Controller must translate
+and publish to the MQTT topic
+`ucl/by-unid/<source_UNID>/ep<ID>/<ClusterName>/Attributes/<AttributeName>/Reported`
+with a UCL header and translated CMD payload in the MQTT payload field.
+The Protocol Controller must fill out the UCL header fields in addition to
+concatenating with the translated payload.
+
+When commands are received from the PAN, a Protocol Controller may
+additionally publish on the MQTT topic:
+`ucl/by-unid/<source_UNID>/ep<ID>/<ClusterName>/GeneratedCommands/<CommandName>`
 
 See [the usage of the Dotdot ZCL in Unify Framework for Application Level Control](doc/Chapter02-ZCL-in-uic.md) for details.
 
@@ -409,8 +423,8 @@ See [the usage of the Dotdot ZCL in Unify Framework for Application Level Contro
 
 ### IoT Service API
 
-When creating IoT Service modules, the main goal is to keep this interface simple and easy to
-implement correctly, securely, and robustly.
+When creating IoT Service modules, the main goal is to keep this
+interface simple and easy to implement correctly, securely, and robustly.
 
 A cloud controller must implement an MQTT Client and TLS transport for the MQTT
 connection. Unify abstracts away the differences between end-nodes on
@@ -430,7 +444,7 @@ An IoT Service MUST implement at least the following API sections.
 An IoT Service that wants to control a command in a cluster on a device with a
 given UNID MUST publish on the topic:
 
-> `ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Commands/&lt;CommandName&gt;`
+> ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Commands/&lt;CommandName&gt;
 
 It should also subscribe to the following topic filter to be notified of any
 state update.
@@ -578,15 +592,36 @@ capabilities of the PAN nodes.
 
 ## Sleepy Devices
 
-Protocol Controller must manage sleepy devices in the optimal way for each PHY. MQTT retained messages SHOULD be used to cache the latest status from a sleepy device.
+Protocol Controller must manage sleepy devices in the optimal way for each PHY.
+MQTT retained messages SHOULD be used to cache the latest status from a sleepy device.
 
 ### Z-Wave Battery Device
 
-A Z-Wave Protocol Controller must handle messages to Sleepy Devices, which are known as Battery Devices or devices implementing the WakeUp Command Class, in the following way:
+A Z-Wave Protocol Controller must handle messages to Sleepy Devices,
+which are known as Battery Devices or devices implementing the
+Wake Up Command Class, in the following way:
 
-Whenever a Battery Device is included in the PAN, the Protocol Controller MUST set itself as the Lifeline of that node (i.e., make the node report all status commands to the Protocol Controller). Now the Battery Node will send Wakeup Notification Commands to the Protocol Controller whenever it is available for two-way communication where the node decides how often. Usually the frequency is selected to achieve a certain battery life.
+Whenever a Battery Device is included in the PAN, the Protocol Controller
+MUST set itself as the Lifeline of that node (if allowed) (i.e., make the node
+report all status commands to the Protocol Controller). The Battery Node
+will send Wake Up Notification Commands to the Protocol Controller whenever
+it is available for two-way communication.
+Usually the frequency is selected to achieve a certain battery life.
 
-After a message for a particular battery device has been published, and again when the message has been delivered and acknowledged on the application layer, the Protocol Controller must publish a state update to the usual ucl/by-unid/&lt;UNID&gt;/&lt;Cluster&gt; topic. The state must be described  both by a ["desired" and "reported" state](https://d1.awsstatic.com/whitepapers/Designing_MQTT_Topics_for_AWS_IoT_Core.pdf). The desired state must be updated when the message has been received by the Protocol Controller. When the message has been application layer acknowledged by the PAN Node ("the garage door is now fully lowered and closed"), another update must be published, this time changing the "reported" state. of the /&lt;Cluster&gt; topic. The Supervision command class can be used to obtain application level confirmations in Z-Wave.
+After a message for a particular battery device has been published, and again
+when the message has been delivered and acknowledged on the application layer,
+the Protocol Controller must publish attribute state updates to their
+respective topics (`ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointIdD&gt;/&lt;ClusterName&gt;/Attributes/Reported`).
+
+The state must be described both by a
+["desired" and "reported" state](https://d1.awsstatic.com/whitepapers/Designing_MQTT_Topics_for_AWS_IoT_Core.pdf).
+
+The desired state must be updated when the message has been received by the
+Protocol Controller. When the message has been application layer acknowledged
+by the PAN Node ("the garage door is now fully lowered and closed"), another
+update must be published, this time changing the "reported" state. of
+the Cluster attrbutes. The Supervision Command Class can be used to
+obtain application level confirmations in Z-Wave.
 
 ### Zigbee Sleepy Device
 
@@ -598,11 +633,25 @@ After a message for a particular battery device has been published, and again wh
 
 ## Mailbox
 
-A mailbox functionality for storing messages to Sleepy devices until they wake up could exist as a shared MQTT module or a PHY specific mailbox could be in each Protocol Controller. It MAY start out PHY specific and move to a shared mailbox in the future.
+Protocol Controllers will let IoT Service issue commands to sleepy devices
+whenever they want to. Protocol Controllers are responsible for reflecting
+the desired state change for the attributes that are affected by the command.
+
+The Protocol Controllers must subsequently issue all pending commands to the
+sleepy devices whenever communication becomes possible again.
+
+IoT Services may expect to wait a delay in seconds (`MaximumCommandDelay`)
+advertised in the state topic `ucl/by-unid/<UNID>State` for each
+node before commands are delivered to the end node.
+
+Refer to the [Service Discovery chapter](doc/Chapter06-service-discovery.md)
+for details about the the node state topic.
 
 ## Reportables/Unsolicited Messages from the PAN
 
-A IoT Service that wants to receive Reportables (a.k.a. unsolicited messages) from a PAN node MUST have a well-defined way to subscribe to all events from a PAN node. A IoT Service must also be able to subscribe to all event notifications from a particular cluster by subscribing to the topic ucl/by-unid/&lt;UNID&gt;/#. The IoT Service will then receive all reportables from the &lt;UNID&gt; device along with all commands sent to it.
+A IoT Service that wants to receive Reportables (a.k.a. unsolicited messages) from a PAN node MUST have a well-defined way to subscribe to all events from a PAN node. An IoT Service must also be able to subscribe to all event notifications from a particular cluster by subscribing to the topic ucl/by-unid/&lt;UNID&gt;/#. The IoT Service will then receive all reportables from the &lt;UNID&gt; device along with all commands sent to it.
+
+<b>NOTE:</b> IOT Services should evaluate the PAN node security level before trusting reportables/unsolicited messages received from the PAN. For
 
 To receive event notifications from multiple devices, MQTT topic wildcards can be used.
 

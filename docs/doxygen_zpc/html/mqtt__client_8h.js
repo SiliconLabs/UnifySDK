@@ -18,6 +18,8 @@ var mqtt__client_8h =
       [ "MQTT_TRANSITION_CONNECTED", "group__mqtt__client.html#ggaca6b39d8cd48e315ea885c3f715a7ff3a56cab266a91b66dd1b83aaac8ce5de0b", null ]
     ] ],
     [ "__attribute__", "group__mqtt__client.html#ga0ca7f88ce34fc77632b52fdc1b7f426a", null ],
+    [ "mqtt_client_after_connect_callback_set", "group__mqtt__client.html#ga9043145a1004e881075d6792cca9b2c5", null ],
+    [ "mqtt_client_before_disconnect_callback_set", "group__mqtt__client.html#ga6343ae0ce4f9d77d88c38d0f676a4400", null ],
     [ "mqtt_client_count_topics", "group__mqtt__client.html#ga4c447862fa17400f908723258127c6cf", null ],
     [ "mqtt_client_delete", "group__mqtt__client.html#gaf952a672732455d2d7de74e45bf66497", null ],
     [ "mqtt_client_disconnect", "group__mqtt__client.html#gae75b3650877693af325efe7b982305bc", null ],

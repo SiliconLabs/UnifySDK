@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -18,8 +18,11 @@
 #define UIC_VERSION_MINOR @VERSION_MINOR@
 #define UIC_VERSION_REV   @VERSION_REV@
 
-#define DEFAULT_RULES_MAPPING_DIR  "@CPACK_PACKAGING_INSTALL_PREFIX@/usr/share/uic/rules"
-#define UIC_VAR_DIR                "@CPACK_PACKAGING_INSTALL_PREFIX@/var/lib/uic"
+#define DEFAULT_RULES_MAPPING_DIR \
+  "@CPACK_PACKAGING_INSTALL_PREFIX@/usr/share/uic/rules"
+#define CONFIG_ZWAVE_POLL_ATTRIBUTE_LIST_DIR \
+  "@CPACK_PACKAGING_INSTALL_PREFIX@/usr/share/uic"
+#define UIC_VAR_DIR "@CPACK_PACKAGING_INSTALL_PREFIX@/var/lib/uic"
 
 #endif /* UIC_VERSION_H */
        /** @} (end addtogroup uic_version_h) */

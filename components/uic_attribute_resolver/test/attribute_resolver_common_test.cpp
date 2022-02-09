@@ -1559,6 +1559,67 @@ void test_attribute_resolver_resolution_notification_on_deletion_while_waiting_f
   contiki_test_helper_run(0);
 }
 
+void test_attribute_resolver_give_up_on_group_get_rule()
+{
+  // Group Node 7 and 9 as "siblings"
+  attribute_resolver_set_attribute_depth(attribute_store_get_node_type(node_7),
+                                         1);
+
+  // Register a rule for type 7
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_7),
+                                   NULL,
+                                   &test_get_resolution_function);
+  // Register the same rule for type 9
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_9),
+                                   NULL,
+                                   &test_get_resolution_function);
+
+  expected_node_for_listening_notification = node_2;
+  attribute_resolver_set_resolution_listener(
+    expected_node_for_listening_notification,
+    &test_resolution_listener_function);
+
+  // Regular get resolution.
+  attribute_store_undefine_reported(node_7);
+  attribute_store_undefine_reported(node_9);
+
+  // Expect a get resolution
+  send_function_return_code    = SL_STATUS_OK;
+  get_function_return_code     = SL_STATUS_OK;
+  expected_node_for_resolution = node_7;
+
+  for (uint8_t i = 0; i < TEST_GET_RETRY_COUNT; i++) {
+    contiki_test_helper_run(1);
+
+    TEST_ASSERT_EQUAL(i + 1, test_send_function_call_count);
+    TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+    TEST_ASSERT_EQUAL(i + 1, test_get_function_call_count);
+
+    // Simulate a send data complete for attempt i
+    TEST_ASSERT_EQUAL(0, test_resolution_listener_function_call_count);
+    on_resolver_send_data_complete(RESOLVER_SEND_STATUS_OK,
+                                   TEST_TRANSMISSION_TIME,
+                                   expected_node_for_resolution,
+                                   RESOLVER_GET_RULE);
+    contiki_test_helper_run(1);  // start the timer
+
+    // Now pass the retry timer:
+    contiki_test_helper_run(TEST_GET_RETRY_TIMEOUT);
+    TEST_ASSERT_EQUAL(i + 1, test_send_function_call_count);
+    TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+    TEST_ASSERT_EQUAL(i + 1, test_get_function_call_count);
+    contiki_test_helper_run(TEST_TRANSMISSION_TIME);
+  }
+
+  contiki_test_helper_run(TEST_GET_RETRY_TIMEOUT + TEST_TRANSMISSION_TIME);
+  TEST_ASSERT_EQUAL(TEST_GET_RETRY_COUNT, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(TEST_GET_RETRY_COUNT, test_get_function_call_count);
+
+  // Now we should have given up on both Node 7 and Node 9
+  TEST_ASSERT_EQUAL(1, test_resolution_listener_function_call_count);
+}
+
 void test_attribute_resolver_rule_get_group_node()
 {
   using namespace attribute_store;

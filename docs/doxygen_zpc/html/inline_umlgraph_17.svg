@@ -1,31 +1,202 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="659px" preserveAspectRatio="none" style="width:818px;height:659px;" version="1.1" viewBox="0 0 818 659" width="818px" zoomAndPan="magnify"><defs><filter height="300%" id="f6m0q2j8cgp3f" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#ADD8E6" height="647.9844" style="stroke:#A80036;stroke-width:1.0;" width="325.5" x="486.5" y="6"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="30" x="634.25" y="18.0669">ZPC</text><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="72" x2="72" y1="60.4297" y2="615.6875"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="553.5" x2="553.5" y1="60.4297" y2="615.6875"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="725" x2="725" y1="60.4297" y2="615.6875"/><rect fill="#FEFECE" filter="url(#f6m0q2j8cgp3f)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="110" x="15" y="25.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="22" y="45.1279">AttributeStore</text><rect fill="#FEFECE" filter="url(#f6m0q2j8cgp3f)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="110" x="15" y="614.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="22" y="634.6826">AttributeStore</text><rect fill="#FEFECE" filter="url(#f6m0q2j8cgp3f)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="123" x="490.5" y="25.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="497.5" y="45.1279">NetworkMonitor</text><rect fill="#FEFECE" filter="url(#f6m0q2j8cgp3f)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="123" x="490.5" y="614.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="497.5" y="634.6826">NetworkMonitor</text><rect fill="#FEFECE" filter="url(#f6m0q2j8cgp3f)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="162" x="642" y="25.1328"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="649" y="45.1279">NetworkManagement</text><rect fill="#FEFECE" filter="url(#f6m0q2j8cgp3f)" height="30.2969" style="stroke:#A80036;stroke-width:1.5;" width="162" x="642" y="614.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="649" y="634.6826">NetworkManagement</text><path d="M5,75.4297 L5,100.4297 L793,100.4297 L793,85.4297 L783,75.4297 L5,75.4297 " fill="#FBFB77" filter="url(#f6m0q2j8cgp3f)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M783,75.4297 L783,85.4297 L793,85.4297 L783,75.4297 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="19" x="383" y="92.4966">Init</text><polygon fill="#A80036" points="83,126.6953,73,130.6953,83,134.6953,79,130.6953" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="77" x2="553" y1="130.6953" y2="130.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="450" x="89" y="125.6294">Create/Set the ZPC Node ID and Security keys nodes in AttributeStore</text><path d="M5,143.6953 L5,168.6953 L793,168.6953 L793,153.6953 L783,143.6953 L5,143.6953 " fill="#FBFB77" filter="url(#f6m0q2j8cgp3f)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M783,143.6953 L783,153.6953 L793,153.6953 L783,143.6953 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="93" x="346" y="160.7622">Node is Added</text><polygon fill="#A80036" points="565,194.9609,555,198.9609,565,202.9609,561,198.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="559" x2="724" y1="198.9609" y2="198.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="147" x="571" y="193.895">on_node_id_assigned()</text><polygon fill="#A80036" points="83,224.0938,73,228.0938,83,232.0938,79,228.0938" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="77" x2="553" y1="228.0938" y2="228.0938"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="249" x="89" y="223.0278">Create Endpoint node in AttributeStore</text><polygon fill="#A80036" points="83,253.2266,73,257.2266,83,261.2266,79,257.2266" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="77" x2="553" y1="257.2266" y2="257.2266"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="287" x="89" y="252.1606">Create NetworkStatus node in AttributeStore</text><polygon fill="#A80036" points="565,282.3594,555,286.3594,565,290.3594,561,286.3594" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="559" x2="724" y1="286.3594" y2="286.3594"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="112" x="571" y="281.2935">on_node_added()</text><polygon fill="#A80036" points="83,311.4922,73,315.4922,83,319.4922,79,315.4922" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="77" x2="553" y1="315.4922" y2="315.4922"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="271" x="89" y="310.4263">Create Security key node in AttributeStore</text><polygon fill="#A80036" points="83,340.625,73,344.625,83,348.625,79,344.625" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="77" x2="553" y1="344.625" y2="344.625"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="321" x="89" y="339.5591">Create NIF under Endpoint nodes in AttributeStore</text><path d="M5,357.625 L5,382.625 L793,382.625 L793,367.625 L783,357.625 L5,357.625 " fill="#FBFB77" filter="url(#f6m0q2j8cgp3f)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M783,357.625 L783,367.625 L793,367.625 L783,357.625 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="112" x="336.5" y="374.6919">Node is Removed</text><polygon fill="#A80036" points="565,408.8906,555,412.8906,565,416.8906,561,412.8906" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="559" x2="724" y1="412.8906" y2="412.8906"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="120" x="571" y="407.8247">on_node_deleted()</text><polygon fill="#A80036" points="83,438.0234,73,442.0234,83,446.0234,79,442.0234" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="77" x2="553" y1="442.0234" y2="442.0234"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="249" x="89" y="436.9575">Remove NodeID node in AttributeStore</text><path d="M5,455.0234 L5,480.0234 L793,480.0234 L793,465.0234 L783,455.0234 L5,455.0234 " fill="#FBFB77" filter="url(#f6m0q2j8cgp3f)" style="stroke:#A80036;stroke-width:1.0;"/><path d="M783,455.0234 L783,465.0234 L793,465.0234 L783,455.0234 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83" x="351" y="472.0903">New Network</text><polygon fill="#A80036" points="565,506.2891,555,510.2891,565,514.2891,561,510.2891" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="559" x2="724" y1="510.2891" y2="510.2891"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="92" x="571" y="505.2231">new_network()</text><polygon fill="#A80036" points="83,535.4219,73,539.4219,83,543.4219,79,539.4219" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="77" x2="553" y1="539.4219" y2="539.4219"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="307" x="89" y="534.356">Delete the oldHomeID node from AttributeStore</text><polygon fill="#A80036" points="83,564.5547,73,568.5547,83,572.5547,79,568.5547" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="77" x2="553" y1="568.5547" y2="568.5547"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="295" x="89" y="563.4888">Create the newHomeID node in AttributeStore</text><polygon fill="#A80036" points="83,593.6875,73,597.6875,83,601.6875,79,597.6875" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="77" x2="553" y1="597.6875" y2="597.6875"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="458" x="89" y="592.6216">Create nodes in the attribute store for all nodes currently in the network</text><!--MD5=[26988e9ebc40e42a4e49a323f3d927d9]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="732px" preserveAspectRatio="none" style="width:1112px;height:732px;background:#FFFFFF;" version="1.1" viewBox="0 0 1112 732" width="1112px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="61.2188" style="stroke:#FFFFFF;stroke-width:0.0;" width="457" x="329.5" y="10"/><text fill="#000000" font-family="Verdana" font-size="22" font-weight="bold" lengthAdjust="spacing" textLength="345" x="385.5" y="35.4209">Z-Wave frame transmission</text><text fill="#000000" font-family="Verdana" font-size="22" font-weight="bold" lengthAdjust="spacing" textLength="447" x="334.5" y="61.0303">Components with processes in grey</text><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="85" x2="85" y1="108.5156" y2="725.7031"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="347" x2="347" y1="108.5156" y2="725.7031"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="653.5" x2="653.5" y1="108.5156" y2="725.7031"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="891.5" x2="891.5" y1="108.5156" y2="725.7031"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1017.5" x2="1017.5" y1="108.5156" y2="725.7031"/><rect fill="#FFFFFF" height="30.2969" style="stroke:#000000;stroke-width:1.0;" width="130" x="20" y="77.2188"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="116" x="27" y="97.2139">User component</text><rect fill="#DEDEDE" height="30.2969" style="stroke:#000000;stroke-width:1.0;" width="88" x="303" y="77.2188"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="74" x="310" y="97.2139">Z-Wave TX</text><rect fill="#FFFFFF" height="30.2969" style="stroke:#000000;stroke-width:1.0;" width="145" x="581.5" y="77.2188"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="131" x="588.5" y="97.2139">Z-Wave Transports</text><rect fill="#FFFFFF" height="30.2969" style="stroke:#000000;stroke-width:1.0;" width="91" x="846.5" y="77.2188"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="77" x="853.5" y="97.2139">Z-Wave API</text><rect fill="#DEDEDE" height="30.2969" style="stroke:#000000;stroke-width:1.0;" width="89" x="973.5" y="77.2188"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="75" x="980.5" y="97.2139">Z-Wave RX</text><polygon fill="#000000" points="335,150.7813,345,154.7813,335,158.7813,339,154.7813" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="85" x2="341" y1="154.7813" y2="154.7813"/><text fill="#000000" font-family="Verdana" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="151" x="92" y="134.5825">zwave_tx_send_data</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="233" x="92" y="149.7153">(frame data, user_callback_function)</text><line style="stroke:#000000;stroke-width:1.0;" x1="347" x2="389" y1="183.9141" y2="183.9141"/><line style="stroke:#000000;stroke-width:1.0;" x1="389" x2="389" y1="183.9141" y2="196.9141"/><line style="stroke:#000000;stroke-width:1.0;" x1="348" x2="389" y1="196.9141" y2="196.9141"/><polygon fill="#000000" points="358,192.9141,348,196.9141,358,200.9141,354,196.9141" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="116" x="354" y="178.8481">Queues the frame</text><polygon fill="#000000" points="96,237.1797,86,241.1797,96,245.1797,92,241.1797" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="90" x2="346" y1="241.1797" y2="241.1797"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="46" x="102" y="220.981">returns</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="238" x="102" y="236.1138">SL_STATUS_OK, zwave_tx_session_id</text><line style="stroke:#000000;stroke-width:1.0;" x1="347" x2="389" y1="285.4453" y2="285.4453"/><line style="stroke:#000000;stroke-width:1.0;" x1="389" x2="389" y1="285.4453" y2="298.4453"/><line style="stroke:#000000;stroke-width:1.0;" x1="348" x2="389" y1="298.4453" y2="298.4453"/><polygon fill="#000000" points="358,294.4453,348,298.4453,358,302.4453,354,298.4453" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="99" x="354" y="265.2466">Process verifies</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="84" x="354" y="280.3794">the TX queue</text><polygon fill="#000000" points="642,338.7109,652,342.7109,642,346.7109,646,342.7109" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="347" x2="648" y1="342.7109" y2="342.7109"/><text fill="#000000" font-family="Verdana" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="283" x="354" y="322.5122">zwave_controller_transport_send_data</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="214" x="354" y="337.645">(frame data, Z-Wave TX Callback)</text><polygon fill="#000000" points="880,382.9766,890,386.9766,880,390.9766,884,386.9766" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="654" x2="886" y1="386.9766" y2="386.9766"/><text fill="#000000" font-family="Verdana" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="127" x="661" y="366.7778">zwapi_send_data</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="214" x="661" y="381.9106">(frame data, Z-Wave TX Callback)</text><polygon fill="#000000" points="665,412.1094,655,416.1094,665,420.1094,661,416.1094" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="659" x2="891" y1="416.1094" y2="416.1094"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="99" x="671" y="411.0435">SL_STATUS_OK</text><polygon fill="#000000" points="358,441.2422,348,445.2422,358,449.2422,354,445.2422" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="352" x2="653" y1="445.2422" y2="445.2422"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="99" x="364" y="440.1763">SL_STATUS_OK</text><line style="stroke:#000000;stroke-width:1.0;" x1="892" x2="934" y1="489.5078" y2="489.5078"/><line style="stroke:#000000;stroke-width:1.0;" x1="934" x2="934" y1="489.5078" y2="502.5078"/><line style="stroke:#000000;stroke-width:1.0;" x1="893" x2="934" y1="502.5078" y2="502.5078"/><polygon fill="#000000" points="903,498.5078,893,502.5078,903,506.5078,899,502.5078" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="112" x="899" y="469.3091">Frame being sent</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="77" x="899" y="484.4419">on the radio</text><line style="stroke:#000000;stroke-width:1.0;" x1="1018" x2="1060" y1="577.0391" y2="577.0391"/><line style="stroke:#000000;stroke-width:1.0;" x1="1060" x2="1060" y1="577.0391" y2="590.0391"/><line style="stroke:#000000;stroke-width:1.0;" x1="1019" x2="1060" y1="590.0391" y2="590.0391"/><polygon fill="#000000" points="1029,586.0391,1019,590.0391,1029,594.0391,1025,590.0391" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="80" x="1025" y="526.5747">continuously</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="57" x="1025" y="541.7075">monitors</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="58" x="1025" y="556.8403">incoming</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="66" x="1025" y="571.9731">messages</text><polygon fill="#000000" points="903,615.1719,893,619.1719,903,623.1719,899,619.1719" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="897" x2="1017" y1="619.1719" y2="619.1719"/><text fill="#000000" font-family="Verdana" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="77" x="909" y="614.106">zwapi_poll</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="10" x="986" y="614.106">()</text><polygon fill="#000000" points="358,674.5703,348,678.5703,358,682.5703,354,678.5703" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="352" x2="891" y1="678.5703" y2="678.5703"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="125" x="364" y="643.2388">Z-Wave TX Callback</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="206" x="364" y="658.3716">(callback registered with last call</text><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="131" x="364" y="673.5044">to zwapi_send_data)</text><polygon fill="#000000" points="96,703.7031,86,707.7031,96,711.7031,92,707.7031" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="90" x2="346" y1="707.7031" y2="707.7031"/><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="85" x="102" y="702.6372">User callback</text><!--MD5=[7d0210f5ba56e125d11f9e3c91f35749]
 @startuml inline_umlgraph_17.svg
-  participant AttributeStore
-  box "ZPC" #LightBlue
-  participant NetworkMonitor
-  participant NetworkManagement
-  end box
+' Style for the diagram
+!theme plain
+hide footbox
+title Z-Wave frame transmission\nComponents with processes in grey
 
-  note over AttributeStore,NetworkManagement: Init
-  NetworkMonitor        -> AttributeStore       : Create/Set the ZPC Node ID and Security keys nodes in AttributeStore
-  note over AttributeStore,NetworkManagement: Node is Added
-  NetworkManagement     -> NetworkMonitor       : on_node_id_assigned()
-  NetworkMonitor        -> AttributeStore       : Create Endpoint node in AttributeStore
-  NetworkMonitor        -> AttributeStore       : Create NetworkStatus node in AttributeStore
-  NetworkManagement     -> NetworkMonitor       : on_node_added()
-  NetworkMonitor        -> AttributeStore       : Create Security key node in AttributeStore
-  NetworkMonitor        -> AttributeStore       : Create NIF under Endpoint nodes in AttributeStore
-  note over AttributeStore,NetworkManagement: Node is Removed
-  NetworkManagement     -> NetworkMonitor       : on_node_deleted()
-  NetworkMonitor        -> AttributeStore       : Remove NodeID node in AttributeStore
-  note over AttributeStore,NetworkManagement: New Network
-  NetworkManagement     -> NetworkMonitor       : new_network()
-  NetworkMonitor        -> AttributeStore       : Delete the oldHomeID node from AttributeStore
-  NetworkMonitor        -> AttributeStore       : Create the newHomeID node in AttributeStore
-  NetworkMonitor        -> AttributeStore       : Create nodes in the attribute store for all nodes currently in the network
+' List of participants
+participant "User component" as u
+participant "Z-Wave TX" as tx #DEDEDE
+participant "Z-Wave Transports" as zwave_transports
+participant "Z-Wave API" as zwapi
+participant "Z-Wave RX" as rx #DEDEDE
+
+u -> tx: <b>zwave_tx_send_data\n(frame data, user_callback_function)
+tx -> tx: Queues the frame
+tx -> u: returns\nSL_STATUS_OK, zwave_tx_session_id
+tx -> tx: Process verifies\nthe TX queue
+tx -> zwave_transports: <b>zwave_controller_transport_send_data\n(frame data, Z-Wave TX Callback)
+zwave_transports -> zwapi: <b>zwapi_send_data\n(frame data, Z-Wave TX Callback)
+zwapi -> zwave_transports : SL_STATUS_OK
+zwave_transports -> tx : SL_STATUS_OK
+zwapi -> zwapi: Frame being sent\non the radio
+rx -> rx: continuously\nmonitors\nincoming\nmessages
+rx -> zwapi: <b>zwapi_poll</b>()
+zwapi -> tx: Z-Wave TX Callback\n(callback registered with last call \nto zwapi_send_data)
+tx -> u: User callback
 @enduml
 
-PlantUML version 1.2021.00(Sun Jan 10 10:25:05 UTC 2021)
+@startuml inline_umlgraph_17.svg
+
+
+
+
+
+
+
+<style>
+  root {
+    BackgroundColor white
+    FontColor black
+    FontName Verdana
+    HyperLinkColor blue
+    LineColor black
+    LineThickness 1
+    Margin 5
+  }
+  caption {
+    LineThickness 0
+  }
+  footer {
+    LineThickness 0
+  }
+  header {
+    LineThickness 0
+  }
+  node {
+    MaximumWidth 300
+  }
+  title {
+    FontSize 22
+    LineThickness 0
+  }
+</style>
+
+skinparam ArrowLollipopColor black
+skinparam BackgroundColor white
+skinparam DefaultFontName Verdana
+skinparam DefaultMonospacedFontName Courier
+skinparam LifelineStrategy nosolid
+skinparam ParticipantPadding 10
+skinparam SequenceLifeLineBorderColor black
+skinparam Shadowing false
+skinparam UseBetaStyle true
+
+skinparam Activity {
+  BackgroundColor white
+  BarColor black
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam Boundary {
+  FontColor black
+}
+skinparam Box {
+  Padding 5
+}
+skinparam CircledCharacter {
+  FontColor black
+  FontName Courier
+  Radius 9
+}
+skinparam Class {
+  BackgroundColor white
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassAttribute {
+  FontColor black
+  FontName Verdana
+}
+skinparam ClassStereotype {
+  FontColor black
+  FontName Verdana
+}
+skinparam Footer {
+  FontColor black
+  FontName Verdana
+}
+skinparam Header {
+  FontColor black
+  FontName Verdana
+}
+skinparam Hyperlink {
+  Color blue
+}
+skinparam IconPackage {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPrivate {
+  Color black
+  BackgroundColor white
+}
+skinparam IconProtected {
+  Color black
+  BackgroundColor white
+}
+skinparam IconPublic {
+  Color black
+  BackgroundColor white
+}
+skinparam Note {
+  FontColor black
+  FontName Verdana
+}
+skinparam Object {
+  BorderColor black
+}
+skinparam Package {
+  BorderColor black
+  FontColor black
+  FontName Verdana
+}
+skinparam State {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeA {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeC {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeE {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeI {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam StereotypeN {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam UseCaseStereoType {
+  FontColor black
+  FontName Verdana
+}
+hide footbox
+title Z-Wave frame transmission\nComponents with processes in grey
+
+participant "User component" as u
+participant "Z-Wave TX" as tx #DEDEDE
+participant "Z-Wave Transports" as zwave_transports
+participant "Z-Wave API" as zwapi
+participant "Z-Wave RX" as rx #DEDEDE
+
+u -> tx: <b>zwave_tx_send_data\n(frame data, user_callback_function)
+tx -> tx: Queues the frame
+tx -> u: returns\nSL_STATUS_OK, zwave_tx_session_id
+tx -> tx: Process verifies\nthe TX queue
+tx -> zwave_transports: <b>zwave_controller_transport_send_data\n(frame data, Z-Wave TX Callback)
+zwave_transports -> zwapi: <b>zwapi_send_data\n(frame data, Z-Wave TX Callback)
+zwapi -> zwave_transports : SL_STATUS_OK
+zwave_transports -> tx : SL_STATUS_OK
+zwapi -> zwapi: Frame being sent\non the radio
+rx -> rx: continuously\nmonitors\nincoming\nmessages
+rx -> zwapi: <b>zwapi_poll</b>()
+zwapi -> tx: Z-Wave TX Callback\n(callback registered with last call \nto zwapi_send_data)
+tx -> u: User callback
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 UTC 2022)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM

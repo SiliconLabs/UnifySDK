@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -76,6 +76,12 @@ void contiki_test_helper_run(clock_time_t ms);
  */
 void contiki_test_helper_run_clock_increases_for_each_event(clock_time_t ms);
 
+/**
+ * @brief Increases the fake test clock with an amount of time.
+ *
+ * @param ms Number of milliseconds to progress time
+ */
+void contiki_test_helper_increase_clock(clock_time_t ms);
 
 #ifdef __cplusplus
 }

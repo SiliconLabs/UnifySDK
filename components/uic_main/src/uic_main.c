@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -33,9 +33,11 @@ int uic_main(const uic_fixt_setup_step_t *fixt_app_setup,
 {
   int res = 0;
 
-  if (!uic_init(fixt_app_setup, argc, argv, version)) {
-    uic_stdin_teardown(); //FIXME reconsider startup and teardown structue
-    return 1;
+  sl_status_t status = uic_init(fixt_app_setup, argc, argv, version);
+
+  if (status != SL_STATUS_OK) {
+    uic_stdin_teardown();  //FIXME reconsider startup and teardown structue
+    return status == SL_STATUS_ABORT ? 2 : 1;
   }
 
   uic_main_loop();

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -96,12 +96,13 @@ void test_uic_main()
   uic_fixt_setup_step_t app_setup_fixt[]
     = {{uic_main_test_setup_fixt, "start uic_main_test_process"}, {NULL, ""}};
   char *argv[] = {"test_uic_main"};
-  TEST_ASSERT_TRUE(uic_init(app_setup_fixt, 1, argv, "test version 1.0"));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_init(app_setup_fixt, 1, argv, "test version 1.0"));
   TEST_ASSERT_EQUAL(1, uic_fixt_setup_test_called);
   TEST_ASSERT_EQUAL(0, uic_fixt_shutdown_test_called);
 
   // Create pipe filedescripters
-  pipe(fildes);
+  TEST_ASSERT_EQUAL(0, pipe(fildes));
 
   uic_main_ext_register_rfd(fildes[0],
                             uic_main_test_fd_handler,

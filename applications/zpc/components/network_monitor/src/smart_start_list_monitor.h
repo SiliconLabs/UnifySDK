@@ -12,7 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file smart_start_list_monitor.h
+ * @defgroup network_monitor_smart_start Network Monitor SmartStart list.
+ * @ingroup network_monitor
+ *
  * @brief Monitors network events and updates the SmartStart list accordingly
  *
  * The SmartStart list monitor is in charge of pushing updates to the SmartStart

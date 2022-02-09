@@ -3,6 +3,7 @@ var annotated_dup =
     [ "ast", "namespaceast.html", "namespaceast" ],
     [ "smartstart", "namespacesmartstart.html", "namespacesmartstart" ],
     [ "uic_ota", "namespaceuic__ota.html", "namespaceuic__ota" ],
+    [ "attribute_changed_event", "structattribute__changed__event.html", "structattribute__changed__event" ],
     [ "attribute_resolver_config_t", "structattribute__resolver__config__t.html", "structattribute__resolver__config__t" ],
     [ "attribute_store_node", "classattribute__store__node.html", "classattribute__store__node" ],
     [ "ctimer", "structctimer.html", "structctimer" ],

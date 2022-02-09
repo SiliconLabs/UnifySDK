@@ -205,7 +205,7 @@ ID;Customer
 0x012B;Reserved
 0x012C;SANAV
 0x012D;Wilshine Holding Co., Ltd
-0x012E;Wuhan NWD�Technology Co., Ltd.
+0x012E;Wuhan NWD Technology Co., Ltd.
 0x012F;Tecom Co., Ltd.
 0x0130;Quby
 0x0131;Zipato
@@ -264,7 +264,7 @@ ID;Customer
 0x0166;CBCC Domotique SAS
 0x0167;SecureNet Technologies
 0x0168;STRATTEC Security Corporation
-0x0169;B�nig und Kallenbach oHG
+0x0169;B nig und Kallenbach oHG
 0x016A;Fantem
 0x016B;Echostar
 0x016C;Advanced Optronic Devices Co.,Ltd
@@ -316,7 +316,7 @@ ID;Customer
 0x019A;Sensative AB
 0x019B;ThermoFloor
 0x019C;Amdocs
-0x019D;MOBILUS MOTOR Sp�_ka z o.o. 
+0x019D;MOBILUS MOTOR Sp _ka z o.o. 
 0x019E;Connectivity Solutions GmbH
 0x019F;Webee Life
 0x0200;Cloud Media
@@ -413,10 +413,10 @@ ID;Customer
 0x025A;GES
 0x025B;AdTrustMedia LLC  dba: eZLO
 0x025C;Hauppauge
-0x025D;Contec intelligent housing�
-0x025E;LUXEASY�technology�company�LTD.
+0x025D;Contec intelligent housing 
+0x025E;LUXEASY technology company LTD.
 0x025F;Huawei Device Co., Ltd. 
-0x0260;Shenzhen�Heiman Technology Co., Ltd
+0x0260;Shenzhen Heiman Technology Co., Ltd
 0x0261;KOOL KONCEPTS
 0x0262;Taiwan Fu Hsing Industrial Co., Ltd.
 0x0263;Viva Labs AS
@@ -491,14 +491,14 @@ ID;Customer
 0x0308;Reserved
 0x0309;Comfortability
 0x030A;Dooya
-0x030B;Shandong�Smart�Life�Data�System�Co�.LTD
+0x030B;Shandong Smart Life Data System Co .LTD
 0x030C;Verizon
 0x030D;Hampoo
 0x030E;Reserved
 0x030F;Vemmio
 0x0310;Reserved
 0x0311;Blaze Automation
-0x0312;NIE�Technology�Co.,�Ltd
+0x0312;NIE Technology Co., Ltd
 0x0313;Hoppe
 0x0314;Raonix Co., Ltd.
 0x0315;zwaveproducts.com
@@ -512,7 +512,7 @@ ID;Customer
 0x031D;Z-Wave Alliance
 0x031E;Inovelli
 0x031F;Eelectron SpA
-0x0320;China Security�&�Fire IOT Sensing CO., LTD�
+0x0320;China Security & Fire IOT Sensing CO., LTD 
 0x0321;Reserved
 0x0322;Paxton Access Ltd
 0x0323;SmartHome Partner GmbH
@@ -524,12 +524,12 @@ ID;Customer
 0x0329;COMAP
 0x032A;AUCEAN TECHNOLOGY. INC
 0x032B;Anchor Tech 
-0x032C;Shenzhen�Saykey�Technology�Co., Ltd�
+0x032C;Shenzhen Saykey Technology Co., Ltd 
 0x032D;Benetek
 0x032E;DEFARO
 0x032F;Reserved
 0x0330;ShenZhen Sunricher Technology Limited
-0x0331;WINKA�ELECTRONIC�CO.,LTD
+0x0331;WINKA ELECTRONIC CO.,LTD
 0x0332;Reserved
 0x0333;Toshiba Visual Solution
 0x0334;Dusun Electron Ltd.
@@ -539,7 +539,7 @@ ID;Customer
 0x0338;International Integrated Systems, Inc. (IISI)
 0x0339;SWYCS
 0x033A;Shenzhen Golden Security Technology Co., Ltd
-0x033B;Tingcore AB� (Info24 AB)
+0x033B;Tingcore AB  (Info24 AB)
 0x033C;Centurylink
 0x033D;Reserved
 0x033E;GE
@@ -552,7 +552,7 @@ ID;Customer
 0x0346;Ring
 0x0347;Reserved
 0x0348;KUNDO xT GmbH
-0x0349;Codeatelier�GmbH
+0x0349;Codeatelier GmbH
 0x034A;AcroComm Corp.
 0x034B;Glamo Inc.
 0x034C;KOCOM
@@ -577,7 +577,7 @@ ID;Customer
 0x035F;KIWILAB
 0x0360;Reserved
 0x0361;NHN Entertainment
-0x0362;Liaoning�Youwang�Lighting�and�Electronic�Technology�Pty�Ltd
+0x0362;Liaoning Youwang Lighting and Electronic Technology Pty Ltd
 0x0363;Nanjing IoTx Intelligent Technology Co., Ltd.
 0x0364;Axis Communications AB 
 0x0365;Golden Mark (HK) Ltd
@@ -588,7 +588,7 @@ ID;Customer
 0x036A;Reserved
 0x036B;NEC Platforms Ltd
 0x036C;Shenzhen Sen5 Technology Co., Ltd.
-0x036D;Luffanet Co. Lte.�
+0x036D;Luffanet Co. Lte. 
 0x036E;Zinno
 0x036F;Evolvere SpA 
 0x0370;Raylios
@@ -614,7 +614,7 @@ ID;Customer
 0x0384;Ameta International Co. Ltd.
 0x0385;Inergy Systems LLC
 0x0386;Reserved
-0x0387;HangZhou iMagic�Technology Co., Ltd
+0x0387;HangZhou iMagic Technology Co., Ltd
 0x0388;Vates
 0x0389;Elear Solutions Tech Pvt. Ltd.
 0x038A;iamsmart
@@ -627,7 +627,7 @@ ID;Customer
 0x0392;Animus Home AB
 0x0393;Embedded Data Systems
 0x0394;SONG JIANG YUN-AN TECHNOLOGY CO., LTD.
-0x0395;Guangzhou_SIMT �Limited
+0x0395;Guangzhou_SIMT  Limited
 0x0396;Bulcraft Control
 0x0397;Teptron AB 
 0x0398;Calix
@@ -647,7 +647,7 @@ ID;Customer
 0x0406;Shenzhen Meian Technology Co. Ltd
 0x0407;LifeSmart Inc.
 0x0408;Gerber Technology
-0x0409;ABUS August Bremicker S�hne KG 
+0x0409;ABUS August Bremicker S hne KG 
 0x040A;Hangzhou Hikvision Digital Technology Co.,Ltd.
 0x040B;Arlo Technologies, Inc.
 0x040C;HEIGHTS TELECOM T LTD
@@ -677,14 +677,14 @@ ID;Customer
 0x0424;Diceworld
 0x0425;ZTE Corporation
 0x0426;JR Automation Technology 
-0x0427;ATSUMI Electric Co.,Ltd.�
+0x0427;ATSUMI Electric Co.,Ltd. 
 0x0428;Ondo Connectivity
 0x0429;Volansys Technologies
 0x042A;Great Connection System Pte. Ltd.
 0x042B;Smart Armor
 0x042C;Walmart, Inc. on behalf of its affiliate Project Franklin, LLC
 0x042D;Environexus Pty. Ltd.
-0x042E;TEDEE Sp�_ka z Ograniczon_ Odpowiedzialno_ci_
+0x042E;TEDEE Sp _ka z Ograniczon_ Odpowiedzialno_ci_
 0x042F;IOTAS
 0x0430;Accel Lab Ltd.
 0x0431;HZC Electric Co., Limited
@@ -716,7 +716,7 @@ ID;Customer
 0x044B;Dongguan Will Power Technology
 0x044C;SmartDHOME S.r.l
 0x044D;CodeTrack AB
-0x044E;Airzone - Corporaci�n Empresarial Altra S.L. 
+0x044E;Airzone - Corporaci n Empresarial Altra S.L. 
 0x044F;GE Appliances 
 0x0450;Yardi Systems, Inc
 0x0451;BBM Corporation

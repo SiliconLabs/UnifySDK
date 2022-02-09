@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -36,7 +36,7 @@
 
 #ifndef MQTT_CLIENT_POLL_TIMER_MILLISECONDS
 #define MQTT_CLIENT_POLL_TIMER_MILLISECONDS 2000
-#endif 
+#endif
 
 #ifndef MQTT_CLIENT_KEEP_ALIVE_INTERVAL_MILLISECONDS
 #define MQTT_CLIENT_KEEP_ALIVE_INTERVAL_MILLISECONDS 60000
@@ -200,12 +200,12 @@ void mqtt_client_unretain(mqtt_client_t instance, const char *prefix_pattern);
 
 /**
    * @brief Count the number of topics published
-   * 
+   *
    * This function counts the number of topics which has been published
    * retained matching a pattern prefix.
    * @param instance Pointer to an mqtt_client instance.
-   * @param prefix_pattern 
-   * @return int 
+   * @param prefix_pattern
+   * @return int
    */
 int mqtt_client_count_topics(mqtt_client_t instance,
                              const char *prefix_pattern);
@@ -298,6 +298,26 @@ void mqtt_client_on_connect_callback_set(
 void mqtt_client_on_disconnect_callback_set(
   mqtt_client_t instance,
   void (*on_disconnect)(mqtt_client_t inst, const int file_descriptor));
+
+/**
+ * @brief Sets a callback for calling before calling disconnect.
+ *
+ * @param instance A pointer to an mqtt_client instance.
+ * @param before_disconnect A function-pointer to the external-function 
+ * before disconnect callback
+ */
+void mqtt_client_before_disconnect_callback_set(mqtt_client_t instance,
+                                                void (*before_disconnect)());
+
+/**
+ * @brief Deletes/frees the mqtt_client instance.
+ *
+ * @param instance A pointer to an mqtt_client instance.
+ * @param after_connect function-pointer to the external-function 
+ * after connect callback
+ */
+void mqtt_client_after_connect_callback_set(mqtt_client_t instance,
+                                            void (*after_connect)());
 
 #ifdef __cplusplus
 }  // extern "C"

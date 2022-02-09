@@ -25,14 +25,14 @@
 constexpr uint16_t DEFAULT_CLUSTER_REVISION = 1;
 
 /**
- * @defgroup image_listener OTA Image Listener
- * @ingroup uic_components
+ * @defgroup image_listener OTA (Over-the-Air) Image Listener
+ * @ingroup unify_components
  * @brief Component that monitors the image provider for new firmware images
  * and publishes ota information over mqtt.
  *
  * The ota abstracts away the communication with the image provider,
  * the authority supplying new images. Secondly, the ota
- * is responsible for providing state information about ota devices over mqtt via
+ * is responsible for providing state information for OTA devices over mqtt via
  * ucl/by-unid/&lt;UNID&gt;/OTA/&lt;UIID&gt;/+.
  *
  * The ota has an internal cache with images, retrieved from the image
@@ -115,7 +115,7 @@ deactivate IL
 PC->IL: unregister(uiid)
 PC->IL: clear_cache()
 @enduml
- * \defgroup ota_listener OTA Listener
+ *
  * @{
  */
 namespace uic_ota
@@ -240,7 +240,7 @@ void subscribe_unid(const std::string &unid, const std::string &uiid);
 
 /**
  * @brief Stop watching specific images.
- * 
+ *
  * Will stop watching specific UIID image and will NOT unretain MQTT topics.
  *
  * @param unid end-note id.
@@ -250,7 +250,7 @@ void unsubscribe_unid(const std::string &unid, const std::string &uiid);
 
 /**
  * @brief Stop watching all images for unid and unretain MQTT messages.
- * 
+ *
  * Will unsubscribe on all image UIIDs and unretain all MQTT topics for the unid.
  *
  * @param unid end-note id.

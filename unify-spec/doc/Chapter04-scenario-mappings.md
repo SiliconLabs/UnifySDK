@@ -27,23 +27,9 @@ The following section shows the Zigbee 3.0 Install Code based commissioning meth
 !pragma teoz true
 
 ' Style for the diagram
-skinparam BoxPadding 0
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign left
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title SmartStart List based commissioning using Z3 Install Code based Device-Specific Keys (DSK)
 
 legend top
@@ -125,67 +111,26 @@ protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/<PC_UNID>/P
 
 NOTE: ZigBee touchlink is not currently supported as a commissioning method.
 
-
-## Retrieving Diagnostic Data from a Network
-
-The following section shows how diagnostic data is retrieved in a Z-Wave PHY via UCL. You can add outlines of mappings to more PHYs using the same MQTT / DotDot interface (i.e., UCL) later.
-
 ## Special Requirements for BLE AoX Protocol Controllers
 
-BLE-based AoX (Angle-of-X) solutions rely on locators to report the angle of
-arrival of beacons transmitted from a tag. Locators typically control radio
-boards connected to one or more antennas. Multi-locators are used to infer the
+BLE-based AoX (Angle-of-X) solutions rely on AoX Locators to report the angle of
+arrival of beacons transmitted from asset tags. AoX Locators typically
+control radio boards connected to one or more antennas.
+
+An additional Positioning helper application is used to infer the
 position of the tag based on the several angle information readings from
 one or more locators.
 
-Locators are Protocol Controllers in the Unify framework. Multi-locators are
-typically IoT Services because they don't control a PHY radio. Both are only
-required to support the Location cluster along with a minimal
-ProtocolController/NetworkManagement topic.
+There are typically no network management operations available for such
+applications. The list of Asset Tags allowed in the Unify network can be configured
+using the AoX Locator cluster.
 
 ### AoX Protocol Controller
 
-All Unify nodes MUST present a `ucl/by-unid/<UNID>/ep<ID>/<CLUSTER>` topic,
-and protocol controllers MUST publish a
-`ucl/by-unid/<UNID>/ProtocolController/NetworkManagement` topic. The AoX
-Protocol Controller MUST present publish both topics for each Locator.
+The AoX Protocol Controller MUST publish a node state
+(`ucl/by-unid/&lt;unid&gt;/State`) for itself.
 
-The endpoint should always be ep0 for an AoX locator because it does not make sense
-to have multiple endpoints for such a device.
+The Endpoint ID should always be 0 for an AoX locator.
 
-The actual Location Data is shared via the
-[Location Cluster](doc/Chapter08-application-clusters.md).
-
-### Forming the Locator and Multi-locator UNID
-
-The Unify spec only requires that UNIDs are unique as specified in
-[the section called Unified Node IDs](doc/Chapter01-architecture-overview.md). A
-good choice for the locator UNID could therefore be `ble-pd-aaaaaaaaaaaa`. Deriving
-the UNID from the Bluetooth address guarantees uniqueness. The multi-locator
-UNID can be any unique string, for example `multilocator-1234-lobby`.
-
-### Network Management for AoX Protocol Controllers
-
-Because an AoX Protocol Controller does not need any network management or
-configuration options, it is enough to publish the following fixed payload for
-each locator. This allows enumerating all nodes connected to a Unify, including
-the AoX locators.
-
-**MQTT topic**: `ucl/by-unid/<LOCATOR_UNID>/ProtocolController/NetworkManagement`
-
-**Payload:**
-
-```json
-{
-   "State": "idle",
-   "SupportedStateList": []
-}
-```
-
-The AoX PC may publish a state of "temporarily unavailable" if it has failure
-modes where it cannot report position data. When entering this mode, it should
-publish a state change to "temporarily unavailable". When normal operation
-resumes, a state change to "idle" should be published.
-
-Note that there are no other supported states because the AoX PC does not
-require any network management functions to operate.
+Details on how the data is reported for AoXPCs is provided in
+[AoX Application](doc/Chapter08-aox-application.md).

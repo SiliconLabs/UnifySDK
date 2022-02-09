@@ -21,6 +21,7 @@
 
 // ZigPC includes
 #include <zigpc_datastore.h>
+#include <zigpc_discovery.h>
 #include <zigpc_gateway.h>
 
 #include "zigpc_net_mgmt_notify_int.h"
@@ -51,7 +52,7 @@ static sl_status_t zigpc_net_mgmt_hdl_init_complete(
 {
   sl_status_t status = SL_STATUS_OK;
 
-  const zigpc_net_mgmt_fsm_init_complete_t *data
+  const zigpc_gateway_on_network_init_t *data
     = &event_data->on_net_init_complete;
   etimer_stop(&fsm.timer);
 
@@ -78,13 +79,21 @@ static sl_status_t zigpc_net_mgmt_hdl_init_complete(
     zigpc_datastore_remove_device(data->zigpc_eui64);
     status = zigpc_datastore_create_device(data->zigpc_eui64);
     if (status == SL_STATUS_OK) {
+      // Since there is no discovery needed for knowing endpoints supported
+      // on the gateway, set the total and discovered fields to 1
+      const uint8_t zigpc_endpoint_count = 1;
+
       zigpc_device_data_t dev = {
         .network_status            = ZIGBEE_NODE_STATUS_INCLUDED,
-        .max_cmd_delay             = 1,
-        .endpoint_total_count      = 0,
-        .endpoint_discovered_count = 0,
+        .max_cmd_delay             = 0,
+        .endpoint_total_count      = zigpc_endpoint_count,
+        .endpoint_discovered_count = zigpc_endpoint_count,
       };
       status = zigpc_datastore_write_device(data->zigpc_eui64, &dev);
+    }
+    if (status == SL_STATUS_OK) {
+      status = zigpc_datastore_create_endpoint(data->zigpc_eui64,
+                                               data->zigpc_endpoint_id);
     }
   }
 
@@ -140,41 +149,6 @@ static sl_status_t zigpc_net_mgmt_hdl_idle_add_start(
   return status;
 }
 
-sl_status_t zigpc_net_mgmt_hdl_idle_interview_request(
-  const zigpc_net_mgmt_fsm_data_t *const event_data)
-{
-  sl_status_t status = SL_STATUS_OK;
-  const zigpc_net_mgmt_fsm_node_interview_t *data
-    = &event_data->node_interview_request;
-
-  if (data == NULL) {
-    status = SL_STATUS_NULL_POINTER;
-  } else {
-    status = zigpc_datastore_remove_device_children(data->eui64);
-  }
-
-  if (status == SL_STATUS_OK) {
-    zigpc_device_data_t dev;
-
-    status = zigpc_datastore_read_device(data->eui64, &dev);
-    if (status == SL_STATUS_OK) {
-      dev.network_status = ZIGBEE_NODE_STATUS_INTERVIEWING;
-      status             = zigpc_datastore_write_device(data->eui64, &dev);
-    }
-  }
-
-  if (status == SL_STATUS_OK) {
-    memcpy(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t));
-    etimer_stop(&fsm.timer);
-    etimer_set(&fsm.timer, ZIGPC_NODE_INTERVIEW_TIMEOUT_MS);
-
-    zigpc_gateway_interview_node(fsm.interview.eui64);
-
-    fsm.state = ZIGPC_NET_MGMT_FSM_STATE_NODE_INTERVIEW;
-  }
-  return status;
-}
-
 static sl_status_t zigpc_net_mgmt_hdl_node_add_complete(
   const zigpc_net_mgmt_fsm_data_t *const event_data)
 {
@@ -211,8 +185,6 @@ static sl_status_t zigpc_net_mgmt_hdl_node_add_complete(
                                SL_LOG_DEBUG,
                                "Device Added (Pre-Interview)",
                                data->eui64);
-
-    memcpy(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t));
 
     zigpc_net_mgmt_notify_node_added(data->eui64);
 
@@ -251,133 +223,38 @@ static sl_status_t zigpc_net_mgmt_hdl_node_add_timeout(
   return SL_STATUS_OK;
 }
 
-static sl_status_t zigpc_net_mgmt_hdl_node_interviewed(
+static sl_status_t zigpc_net_mgmt_hdl_node_interview_status(
   const zigpc_net_mgmt_fsm_data_t *const event_data)
 {
-  sl_status_t status = SL_STATUS_OK;
-  const zigpc_gateway_on_node_discovered_t *data
-    = &event_data->on_node_discovered;
+  if (event_data == NULL) {
+    return SL_STATUS_NULL_POINTER;
+  }
 
-  if (data == NULL) {
-    status = SL_STATUS_NULL_POINTER;
-  } else if (memcmp(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t))) {
-    sl_log_warning(LOG_TAG, "Received unexpected node interviewed event");
-    status = SL_STATUS_NOT_FOUND;
+  const zigpc_net_mgmt_fsm_interview_status_t *interview_status
+    = &event_data->on_node_interview_status;
+
+  etimer_stop(&fsm.timer);
+
+  if (interview_status->discovery_status == DISCOVERY_START) {
+    fsm.state = ZIGPC_NET_MGMT_FSM_STATE_NODE_INTERVIEW;
+
+  } else if (interview_status->discovery_status == DISCOVERY_SUCCESS) {
+    fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
+    zigpc_net_mgmt_notify_node_interview_status(interview_status->eui64, true);
+
+  } else if (interview_status->discovery_status == DEVICE_DISCOVERY_FAIL) {
+    fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
+    zigpc_net_mgmt_notify_node_interview_status(interview_status->eui64, false);
+
+  } else if (interview_status->discovery_status == ENDPOINT_DISCOVERY_FAIL) {
+    fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
+    zigpc_net_mgmt_notify_node_interview_status(interview_status->eui64, false);
+
   } else {
-    zigpc_device_data_t dev;
-
-    status = zigpc_datastore_read_device(data->eui64, &dev);
-    if (status == SL_STATUS_OK) {
-      dev.endpoint_total_count      = data->endpoint_count;
-      dev.endpoint_discovered_count = 0;
-      status = zigpc_datastore_write_device(data->eui64, &dev);
-    }
+    sl_log_warning(LOG_TAG,
+                   "Unknown discovery status received %d",
+                   interview_status->discovery_status);
   }
-
-  if (status == SL_STATUS_OK) {
-    fsm.interview.endpoint_total_count      = data->endpoint_count;
-    fsm.interview.endpoint_discovered_count = 0;
-    sl_log_debug(LOG_TAG,
-                 "Waiting for %d endpoints",
-                 fsm.interview.endpoint_total_count);
-  }
-
-  return status;
-}
-
-static sl_status_t zigpc_net_mgmt_hdl_node_endpoint_interviewed(
-  const zigpc_net_mgmt_fsm_data_t *const event_data)
-{
-  sl_status_t status = SL_STATUS_OK;
-  zigpc_device_data_t dev;
-
-  const zigpc_gateway_on_node_endpoint_discovered_t *data
-    = &event_data->on_node_endpoint_discovered;
-
-  if (data == NULL) {
-    status = SL_STATUS_NULL_POINTER;
-  } else if (memcmp(fsm.interview.eui64, data->eui64, sizeof(zigbee_eui64_t))) {
-    sl_log_warning(LOG_TAG, "Received unexpected node EP interviewed event");
-    status = SL_STATUS_NOT_FOUND;
-  } else {
-    status = zigpc_datastore_read_device(data->eui64, &dev);
-  }
-
-  if (status == SL_STATUS_OK) {
-    const zigbee_endpoint_t *ep = &data->endpoint;
-    status = zigpc_datastore_create_endpoint(data->eui64, ep->endpoint_id);
-    // Populate server clusters under endpoint
-    for (size_t i = 0; (status == SL_STATUS_OK) && (i < ep->cluster_count);
-         i++) {
-      zcl_cluster_id_t cluster_id = ep->cluster_list[i].cluster_id;
-
-      status = zigpc_datastore_create_cluster(data->eui64,
-                                              ep->endpoint_id,
-                                              ZCL_CLUSTER_SERVER_SIDE,
-                                              cluster_id);
-    }
-    // Populate client clusters under endpoint
-    for (size_t i = 0;
-         (status == SL_STATUS_OK) && (i < ep->client_cluster_count);
-         i++) {
-      zcl_cluster_id_t cluster_id = ep->client_cluster_list[i].cluster_id;
-
-      status = zigpc_datastore_create_cluster(data->eui64,
-                                              ep->endpoint_id,
-                                              ZCL_CLUSTER_CLIENT_SIDE,
-                                              cluster_id);
-    }
-  }
-
-  if (status == SL_STATUS_OK) {
-    dev.endpoint_discovered_count++;
-    fsm.interview.endpoint_discovered_count++;
-
-    sl_log_debug(LOG_TAG,
-                 "Waiting for %d endpoints, discovered: %d",
-                 fsm.interview.endpoint_total_count,
-                 fsm.interview.endpoint_discovered_count);
-    if (fsm.interview.endpoint_discovered_count
-        == fsm.interview.endpoint_total_count) {
-      etimer_stop(&fsm.timer);
-
-      zigpc_datastore_log_device(LOG_TAG,
-                                 SL_LOG_DEBUG,
-                                 "Device Interviewed",
-                                 data->eui64);
-
-      fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
-
-      dev.network_status = ZIGBEE_NODE_STATUS_INCLUDED;
-    }
-    status = zigpc_datastore_write_device(data->eui64, &dev);
-    if ((status == SL_STATUS_OK)
-        && (fsm.interview.endpoint_discovered_count
-            == fsm.interview.endpoint_total_count)) {
-      // Notify any listeners after device state has been updated
-      zigpc_net_mgmt_notify_node_interview_status(fsm.interview.eui64, true);
-    }
-  }
-
-  return status;
-}
-
-static sl_status_t zigpc_net_mgmt_hdl_node_int_timeout(
-  const zigpc_net_mgmt_fsm_data_t *const event_data)
-{
-  // TODO: Add action(s) to perform
-  zigpc_net_mgmt_notify_node_interview_status(fsm.interview.eui64, false);
-  fsm.state = ZIGPC_NET_MGMT_FSM_STATE_IDLE;
-
-  zigpc_device_data_t dev;
-  sl_status_t status = zigpc_datastore_read_device(fsm.interview.eui64, &dev);
-  if (status == SL_STATUS_OK) {
-    dev.network_status = ZIGBEE_NODE_STATUS_INTERVIEW_FAIL;
-    status = zigpc_datastore_write_device(fsm.interview.eui64, &dev);
-  }
-
-  /* unused */
-  (void)(event_data);
 
   return SL_STATUS_OK;
 }
@@ -575,7 +452,7 @@ static const zigpc_net_mgmt_hdl zigpc_net_mgmt_fsm_map[ZIGPC_NET_MGMT_FSM_NUM_ST
   },
   [ZIGPC_NET_MGMT_FSM_STATE_IDLE] = {
     [ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_REQUEST] = zigpc_net_mgmt_hdl_idle_add_request,
-    [ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_REQUEST] = zigpc_net_mgmt_hdl_idle_interview_request,
+    [ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_STATUS] = zigpc_net_mgmt_hdl_node_interview_status,
     [ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_START] = zigpc_net_mgmt_hdl_idle_add_start,
     [ZIGPC_NET_MGMT_FSM_EVENT_NODE_REMOVE_REQUEST] = zigpc_net_mgmt_hdl_idle_remove_request,
     [ZIGPC_NET_MGMT_FSM_EVENT_STATE_CHANGE_REQUEST] = zigpc_net_mgmt_hdl_idle_state_change_request,
@@ -593,9 +470,7 @@ static const zigpc_net_mgmt_hdl zigpc_net_mgmt_fsm_map[ZIGPC_NET_MGMT_FSM_NUM_ST
     [ZIGPC_NET_MGMT_FSM_EVENT_STATE_CHANGE_REQUEST] = zigpc_net_mgmt_hdl_remove_state_change_request,
   },
   [ZIGPC_NET_MGMT_FSM_STATE_NODE_INTERVIEW] = {
-    [ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEWED] = zigpc_net_mgmt_hdl_node_interviewed,
-    [ZIGPC_NET_MGMT_FSM_EVENT_NODE_ENDPOINT_INTERVIEWED] = zigpc_net_mgmt_hdl_node_endpoint_interviewed,
-    [ZIGPC_NET_MGMT_FSM_EVENT_TIMEOUT] = zigpc_net_mgmt_hdl_node_int_timeout,
+    [ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_STATUS] = zigpc_net_mgmt_hdl_node_interview_status,
   },
 };
 

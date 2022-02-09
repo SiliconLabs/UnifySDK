@@ -1,0 +1,37 @@
+﻿<?xml version="1.0"?>
+<!--
+Location
+This is a manufacturer specific cluster.
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD11" revision="1" name="AoXPositionEstimation">
+  <classification role="application" picsCode="UAOXLOCATIONESTIMATION" />
+
+  <type:type short="EstimatedPosition" name="EstimatedPosition" id="01">
+    <restriction>
+      <type:sequence>
+        <field name="ApplicationId" type="string" />
+        <field name="X" type="double" />
+        <field name="Y" type="double" />
+        <field name="Z" type="double" />
+        <field name="DeviationX" type="double" />
+        <field name="DeviationY" type="double" />
+        <field name="DeviationZ" type="double" />
+        <field name="Sequence" type="int32" />
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <server>
+
+    <attributes>
+      <attribute id="0001" name="Position" type="EstimatedPosition" required="true"/>
+    </attributes>
+
+  </server>
+</zcl:cluster>

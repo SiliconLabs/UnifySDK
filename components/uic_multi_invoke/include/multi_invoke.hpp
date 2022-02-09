@@ -12,14 +12,16 @@
  *****************************************************************************/
 
 /**
- * @file multi_invoke.hpp
- * @ingroup uic_components
+ * @defgroup unify_multi_invoke Unify Multi Invoke C++ template
+ * @ingroup unify_components
  * @brief Template for multiple invoke callback maps
  *
  * Template that be used for handling callback maps, where each key may contain
  * multiple callback functions.
  *
  * Example of Usage:
+ *
+ * @code{.cpp}
  * void my_cb(int arg) {
  *   std::cout << arg << std:endl;
  * }
@@ -34,6 +36,7 @@
  *   my_multi_invoke(1, 42); // Will call my_cb and my_2nd_cb with "42" as arg
  *   my_multi_invoke.erase(1, my_cb); // remove callback to my_cb under key 1
  * }
+ * @endcode
  *
  * @{
  */

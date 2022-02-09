@@ -12,7 +12,9 @@ This is the specification of the Unify SDK.
 <a class="el" href="md_doc__chapter05-common-ota.html" target="_self">Common OTA FW Update Service</a><br/>
 <a class="el" href="md_doc__chapter06-service-discovery.html" target="_self">Service Discovery</a><br/>
 <a class="el" href="md_doc__chapter07-message-security.html" target="_self">Message Security</a><br/>
-<a class="el" href="md_doc__chapter08-application-clusters.html" target="_self">Application-Level Clusters</a><br/>
+<a class="el" href="md_doc__chapter08-aox-application.html" target="_self">AoX Application</a><br/>
+<a class="el" href="md_doc__chapter09-binding.html" target="_self">Binding</a><br/>
+<a class="el" href="md_doc__chapter10-name-and-location-service.html" target="_self">Name and Location Service</a><br/>
 <a class="el" href="md_doc_references.html" target="_self">References</a><br/>
 
 <!-- The links above work with doxygen 1.8.7, which our buildservers use. They generate invalid links with the newer doxygen 1.9.1.
@@ -25,6 +27,9 @@ In 1.9.1 the following links work, but they fail on 1.8.7:
 [Common OTA FW Update Service](doc/Chapter05-common-ota.md)<br/>
 [Service Discovery](Chapter06-service-discovery.md)<br/>
 [Message Security](doc/Chapter07-message-security.md)<br/>
+[Message Security](doc/Chapter08-aox-application.md)<br/>
+[Message Security](doc/Chapter09-binding.md)<br/>
+[Message Security](doc/Chapter10-name-and-location-service.md)<br/>
 [References](doc/references.md)<br/>
  -->
 

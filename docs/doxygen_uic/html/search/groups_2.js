@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['datastore_2305',['Datastore',['../group__datastore.html',1,'']]],
-  ['device_2306',['Device',['../group__dev.html',1,'']]]
+  ['device_2396',['Device',['../group__dev.html',1,'']]],
+  ['dotdot_20mqtt_20internal_20shared_20functions_2397',['Dotdot MQTT internal shared functions',['../group__dotdot__mqtt__internals.html',1,'']]]
 ];

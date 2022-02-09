@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,7 +12,7 @@
  *****************************************************************************/
 /**
  * @defgroup attribute_resolver Attribute Resolver
- * @ingroup uic_components
+ * @ingroup unify_components
  * @brief The role of the attribute resolver is to locate and resolve missing
  * information in the attribute store.
  *
@@ -59,7 +59,7 @@ typedef struct {
   // Retry timeout for get commands
   clock_time_t get_retry_timeout;
   // Number of times to retry sending a get
-  int get_retry_count;
+  uint8_t get_retry_count;
 } attribute_resolver_config_t;
 
 /**
@@ -258,13 +258,6 @@ bool is_node_pending_set_resolution(attribute_store_node_t node);
  * @brief Log the state of the Attribute Resolver using \ref sl_log.
 */
 void attribute_resolver_state_log();
-
-/**
- * @brief FIXME: Anders writes a comprehensive explanation here.
-*/
-sl_status_t
-  attribute_resolver_set_attribute_depth(attribute_store_type_t node_type,
-                                         int depth);
 
 #ifdef __cplusplus
 }

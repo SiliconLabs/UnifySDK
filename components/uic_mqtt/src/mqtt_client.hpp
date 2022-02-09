@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -43,6 +43,7 @@ typedef void (*message_callback_t)(const char *topic,
 
 typedef std::function<void(mqtt_client_t instance, const int file_descriptor)>
   connection_callback_t;
+typedef std::function<void()> connection_status_callback_t;
 
 struct mqtt_client {
   public:
@@ -96,11 +97,11 @@ struct mqtt_client {
 
   /**
    * @brief Count the number of topics published
-   * 
+   *
    * This function counts the number of topics which has been published
    * retained matching a pattern prefix.
-   * @param prefix_pattern 
-   * @return int 
+   * @param prefix_pattern
+   * @return int
    */
   int count_topics(const std::string &prefix_pattern);
 
@@ -111,6 +112,8 @@ struct mqtt_client {
   // Callbacks to the outside world
   void on_connect_callback_set(connection_callback_t);
   void on_disconnect_callback_set(connection_callback_t);
+  void before_disconnect_callback_set(connection_status_callback_t);
+  void after_connect_callback_set(connection_status_callback_t);
 
   // The MQTT callbacks. Those are called (through wrappers) from
   // the Mosquitto library.
@@ -122,14 +125,20 @@ struct mqtt_client {
                   int message_qos,
                   bool message_retain);
 
+  // Execute after connect and before disconnect callbacks
+  void after_connect_callback_call();
+  void before_disconnect_callback_call();
+
   private:
   const std::string hostname;
   const uint32_t port;
   int socket_file_descriptor;
   std::chrono::milliseconds next_reconnect_backoff;
   std::chrono::milliseconds max_reconnect_backoff;
-  connection_callback_t on_connect_callback    = nullptr;
-  connection_callback_t on_disconnect_callback = nullptr;
+  connection_callback_t on_connect_callback               = nullptr;
+  connection_callback_t on_disconnect_callback            = nullptr;
+  connection_status_callback_t before_disconnect_callback = nullptr;
+  connection_status_callback_t after_connect_callback     = nullptr;
 
   // Message-queueing and routing: Containers and arbitrators. The arbitrators are
   // what allows for an asynchronous implementation of the client.

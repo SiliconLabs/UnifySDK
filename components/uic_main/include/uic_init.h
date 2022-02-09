@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -18,9 +18,9 @@
  */
 struct uic_fixt_setup_step_t;
 
-bool uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
-              int argc,
-              char **argv,
-              const char *version);
+sl_status_t uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
+                     int argc,
+                     char **argv,
+                     const char *version);
 
 #endif

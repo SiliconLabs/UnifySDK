@@ -26,6 +26,7 @@ attribute n1235;
 attribute n0;
 attribute n1;
 attribute n4444;
+attribute n3333;
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
@@ -55,10 +56,10 @@ void setUp()
   */
   attribute::root().delete_node();
 
-  attribute::root()
-    .emplace_node(1234)
-    .emplace_node<uint8_t>(42, 0)
-    .emplace_node(3333);
+  n3333 = attribute::root()
+            .emplace_node(1234)
+            .emplace_node<uint8_t>(42, 0)
+            .emplace_node(3333);
   n4444 = attribute::root()
             .emplace_node(1234)
             .emplace_node<uint8_t>(42, 1)
@@ -179,5 +180,25 @@ void test_const_assignment_check()
       d'1235 = 42
     }
   )"));
+}
+
+void test_parent_operator()
+{
+  MapperEngine &e = MapperEngine::get_instance();
+  e.set_ep_type(attribute::root().type());
+  e.reset();
+
+  TEST_ASSERT_TRUE(e.add_expression(R"(
+    scope 0 {
+      r'4444 = r'^.^.42[0] + 1 
+    }
+  )"));
+
+  n3333.set_reported(42);
+
+  TEST_IGNORE_MESSAGE("Make the hat operator work by beeing cleaver about the "
+                      "depth in which we do evaluations.");
+
+  TEST_ASSERT_EQUAL(43, n4444.reported<int>());
 }
 }

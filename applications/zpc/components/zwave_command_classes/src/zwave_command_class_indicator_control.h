@@ -12,12 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file zwave_command_class_indicator_control.h
-
- * @defgroup zwave_command_class_indicator Indicator  Command Class
+ * @defgroup zwave_command_class_indicator_control Indicator Command Class Control
  * @ingroup command_classes
- * @brief The module handles the control part of the indicator command class
-
+ * @brief The module handles the control part of the Indicator Command Class
  * @{
  */
 
@@ -25,7 +22,7 @@
 #define ZWAVE_COMMAND_CLASS_INDICATOR_CONTROL_H
 
 #include "sl_status.h"
-
+#include "zwave_utils.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -33,10 +30,10 @@ extern "C" {
 /**
  * @brief Regisers this command class handler with the command class
  * handler framework
- * 
+ *
  * For details about the indicator attribute store datamodel see here
  * @ref COMMAND_CLASS_INDICATOR_handler
- * 
+ *
  * @return sl_status_t SL_STATUS_OK on succsess.
  */
 sl_status_t zwave_command_class_indicator_control_init();

@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 /**
- * @file ucl_node_state.h
+ * @defgroup ucl_node_state UCL Node State
  * @ingroup ucl_mqtt
  * @brief Handles publishing node state to `ucl/by-unid/<node>/State` topic
  *

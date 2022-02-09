@@ -63,7 +63,7 @@ void tearDown(void)
 void helper_populate_cluster(zigbee_eui64_t eui64,
                              zigbee_endpoint_id_t endpoint_id,
                              zcl_cluster_side_t cluster_side,
-                             bpt::ptree &pt_endpoint)
+                            nlohmann::json &jsn_endpoint)
 {
   sl_status_t status;
 
@@ -71,9 +71,8 @@ void helper_populate_cluster(zigbee_eui64_t eui64,
                                                                     : "client");
   cluster_str += "_clusters";
 
-  for (auto &pt_server_cluster: pt_endpoint.get_child(cluster_str)) {
-    zcl_cluster_id_t cluster_id
-      = pt_server_cluster.second.get<zcl_cluster_id_t>("cluster_id");
+  for (auto &jsn_cluster: jsn_endpoint[cluster_str]) {
+    zcl_cluster_id_t cluster_id = jsn_cluster["cluster_id"].get<zcl_cluster_id_t>();
 
     status = zigpc_datastore_create_cluster(eui64,
                                             endpoint_id,
@@ -86,9 +85,8 @@ void helper_populate_cluster(zigbee_eui64_t eui64,
 
     // Attribute List
     std::vector<zcl_attribute_id_t> attributes;
-    for (auto &pt_attribute: pt_server_cluster.second.get_child("attributes")) {
-      zcl_attribute_id_t attribute_id
-        = pt_attribute.second.get_value<zcl_attribute_id_t>();
+    for (auto &jsn_attribute: jsn_cluster["attributes"]) {
+      zcl_attribute_id_t attribute_id = static_cast<zcl_attribute_id_t>(jsn_attribute);
       attributes.push_back(attribute_id);
     }
     if (!attributes.empty()) {
@@ -105,10 +103,8 @@ void helper_populate_cluster(zigbee_eui64_t eui64,
 
     // Receieved Command List
     std::vector<zcl_command_id_t> recv_commands;
-    for (auto &pt_command:
-         pt_server_cluster.second.get_child("recv_commands")) {
-      zcl_command_id_t command_id
-        = pt_command.second.get_value<zcl_command_id_t>();
+    for (auto &jsn_command: jsn_cluster["recv_commands"]) {
+      zcl_command_id_t command_id = static_cast<zcl_command_id_t>(jsn_command);
       recv_commands.push_back(command_id);
     }
     if (!recv_commands.empty()) {
@@ -128,9 +124,8 @@ void helper_populate_cluster(zigbee_eui64_t eui64,
 
     // Generated Command List
     std::vector<zcl_command_id_t> gen_commands;
-    for (auto &pt_command: pt_server_cluster.second.get_child("gen_commands")) {
-      zcl_command_id_t command_id
-        = pt_command.second.get_value<zcl_command_id_t>();
+    for (auto &jsn_command: jsn_cluster["gen_commands"]) {
+      zcl_command_id_t command_id = static_cast<zcl_command_id_t>(jsn_command);
       gen_commands.push_back(command_id);
     }
     if (!gen_commands.empty()) {
@@ -155,8 +150,7 @@ void helper_populate_device(zigbee_eui64_t eui64,
 {
   sl_status_t status;
 
-  bpt::ptree pt;
-  bpt::json_parser::read_json(dev_config_str, pt);
+  nlohmann::json jsn = nlohmann::json::parse(dev_config_str);
 
   // Population
   status = zigpc_datastore_create_network();
@@ -172,9 +166,8 @@ void helper_populate_device(zigbee_eui64_t eui64,
                                 status,
                                 "Unable to create device");
 
-  for (auto &pt_endpoint: pt.get_child("endpoints")) {
-    zigbee_endpoint_id_t endpoint_id
-      = pt_endpoint.second.get<zigbee_endpoint_id_t>("endpoint_id");
+  for (auto &jsn_endpoint: jsn["endpoints"]) {
+    zigbee_endpoint_id_t endpoint_id = jsn_endpoint["endpoint_id"].get<zigbee_endpoint_id_t>();
 
     status = zigpc_datastore_create_endpoint(eui64, endpoint_id);
 
@@ -184,11 +177,11 @@ void helper_populate_device(zigbee_eui64_t eui64,
     helper_populate_cluster(eui64,
                             endpoint_id,
                             ZCL_CLUSTER_SERVER_SIDE,
-                            pt_endpoint.second);
+                            jsn_endpoint);
     helper_populate_cluster(eui64,
                             endpoint_id,
                             ZCL_CLUSTER_CLIENT_SIDE,
-                            pt_endpoint.second);
+                            jsn_endpoint);
   }
 }
 const std::string DEV_SINGLE_ENDPOINT_SIMPLE_CONFIG = R"({

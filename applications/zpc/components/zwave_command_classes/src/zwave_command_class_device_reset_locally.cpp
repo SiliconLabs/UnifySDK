@@ -67,9 +67,8 @@ static void on_timeout_device_reset(void *data)
       }
     } else {
       nodes_to_be_removed.erase(it);
-      if (!nodes_to_be_removed.empty()) {
-        ctimer_restart(&timer);
-      }
+      // Iterative call to trigger removing next node (if any) immediately
+      on_timeout_device_reset(nullptr);
     }
   }
 }
@@ -158,7 +157,6 @@ sl_status_t zwave_command_class_device_reset_locally_control_handler(
                  0);
       return SL_STATUS_OK;
 
-      break;
     default:
       return SL_STATUS_NOT_SUPPORTED;
   }

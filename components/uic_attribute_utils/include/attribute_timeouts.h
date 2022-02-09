@@ -12,9 +12,22 @@
  *****************************************************************************/
 
 /**
- * @defgroup uic_attribute_timeouts UIC Attribute timeouts
- * @ingroup uic_components
+ * @defgroup unify_attribute_utils Unify Attribute utilities
+ * @ingroup unify_components
+ * @brief Unify @ref attribute_store utilities
+ *
+ * This component provides a set of utilities or helper functions to manipulate
+ * Attributes using the @ref attribute_store.
+ */
+
+
+/**
+ * @defgroup unify_attribute_timeouts Unify Attribute timeouts
+ * @ingroup unify_attribute_utils
  * @brief Attribute timeout/callback helper component.
+ *
+ * This module provides timers that invoke callbacks for a particular attribute
+ * in the @ref attribute_store.
  * @{
  */
 

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('classzigpc_1_1gateway_1_1RequestQueue.
 </div><!--header-->
 <div class="contents">
 
-<p>The singleton Z3Gateway Request Queue responsible for storing and dispatching calls.  
+<p>The singleton ZigbeeHost Request Queue responsible for storing and dispatching calls.  
  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="zigpc__gateway__request__queue_8hpp_source.html">zigpc_gateway_request_queue.hpp</a>&gt;</code></p>
@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('classzigpc_1_1gateway_1_1RequestQueue.
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html">Entry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class used in the <a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html" title="The singleton Z3Gateway Request Queue responsible for storing and dispatching calls.">RequestQueue</a> to invoke Z3Gateway API calls.  <a href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class used in the <a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html" title="The singleton ZigbeeHost Request Queue responsible for storing and dispatching calls.">RequestQueue</a> to invoke ZigbeeHost API calls.  <a href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -115,16 +115,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abb11eb185c45a35849019b2d1f34e395"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html#abb11eb185c45a35849019b2d1f34e395">operator=</a> (const <a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html">RequestQueue</a> &amp;)=delete</td></tr>
 <tr class="separator:abb11eb185c45a35849019b2d1f34e395"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e0bbfb78336ff5fc8aff67130b6e629"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html#a5e0bbfb78336ff5fc8aff67130b6e629">stopDispatching</a> ()</td></tr>
-<tr class="memdesc:a5e0bbfb78336ff5fc8aff67130b6e629"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent sending any Z3Gateway requests due to the NCP being reset.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#a5e0bbfb78336ff5fc8aff67130b6e629">More...</a><br /></td></tr>
+<tr class="memdesc:a5e0bbfb78336ff5fc8aff67130b6e629"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent sending any ZigbeeHost requests due to the NCP being reset.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#a5e0bbfb78336ff5fc8aff67130b6e629">More...</a><br /></td></tr>
 <tr class="separator:a5e0bbfb78336ff5fc8aff67130b6e629"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe7b5c848b4bbc948ed57ac7df75a686"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html#abe7b5c848b4bbc948ed57ac7df75a686">startDispatching</a> (void)</td></tr>
-<tr class="memdesc:abe7b5c848b4bbc948ed57ac7df75a686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure queue to allow sending Z3Gateway requests.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#abe7b5c848b4bbc948ed57ac7df75a686">More...</a><br /></td></tr>
+<tr class="memdesc:abe7b5c848b4bbc948ed57ac7df75a686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure queue to allow sending ZigbeeHost requests.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#abe7b5c848b4bbc948ed57ac7df75a686">More...</a><br /></td></tr>
 <tr class="separator:abe7b5c848b4bbc948ed57ac7df75a686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1b727ce76684b4fd8d26f92c9805443"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html#ae1b727ce76684b4fd8d26f92c9805443">enqueue</a> (std::shared_ptr&lt; <a class="el" href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html">Entry</a> &gt; call)</td></tr>
-<tr class="memdesc:ae1b727ce76684b4fd8d26f92c9805443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store call data to the queue that is used to dispatch calls to EmberAf/Z3Gateway API.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#ae1b727ce76684b4fd8d26f92c9805443">More...</a><br /></td></tr>
+<tr class="memdesc:ae1b727ce76684b4fd8d26f92c9805443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store call data to the queue that is used to dispatch calls to EmberAf/ZigbeeHost API.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#ae1b727ce76684b4fd8d26f92c9805443">More...</a><br /></td></tr>
 <tr class="separator:ae1b727ce76684b4fd8d26f92c9805443"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab077bb011a0cb023c176d921560d3e7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html#ab077bb011a0cb023c176d921560d3e7a">dispatch</a> (void)</td></tr>
-<tr class="memdesc:ab077bb011a0cb023c176d921560d3e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatch a EmberAf/Z3Gateway call from the queue.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#ab077bb011a0cb023c176d921560d3e7a">More...</a><br /></td></tr>
+<tr class="memitem:ab077bb011a0cb023c176d921560d3e7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html#ab077bb011a0cb023c176d921560d3e7a">dispatch</a> (void)</td></tr>
+<tr class="memdesc:ab077bb011a0cb023c176d921560d3e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatch a EmberAf/ZigbeeHost call from the queue.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#ab077bb011a0cb023c176d921560d3e7a">More...</a><br /></td></tr>
 <tr class="separator:ab077bb011a0cb023c176d921560d3e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
@@ -136,7 +136,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a18e430465a9f73f1ee5becdb6153cf30"><td class="memItemLeft" align="right" valign="top">static const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html#a18e430465a9f73f1ee5becdb6153cf30">DEFER_CYCLES_DEFAULT</a> = 1U</td></tr>
-<tr class="memdesc:a18e430465a9f73f1ee5becdb6153cf30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cycles to defer under normal circumstances. This is used to increase/decrease the number of times <a class="el" href="group__z3gateway.html#ga527ebb2c939008b4fe4ae2b00af9258c" title="Call the Z3Gateway tick function.">z3gatewayTick()</a> is called per 1 Z3Gateway API call.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#a18e430465a9f73f1ee5becdb6153cf30">More...</a><br /></td></tr>
+<tr class="memdesc:a18e430465a9f73f1ee5becdb6153cf30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cycles to defer under normal circumstances. This is used to increase/decrease the number of times zigbeeHostTick() is called per 1 ZigbeeHost API call.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#a18e430465a9f73f1ee5becdb6153cf30">More...</a><br /></td></tr>
 <tr class="separator:a18e430465a9f73f1ee5becdb6153cf30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b60c00e0261b16aaac5a2fd5948b23c"><td class="memItemLeft" align="right" valign="top">static const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html#a4b60c00e0261b16aaac5a2fd5948b23c">DEFER_CYCLES_START_BACKOFF</a> = 20U</td></tr>
 <tr class="memdesc:a4b60c00e0261b16aaac5a2fd5948b23c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cycles to defer when the queue is allowed to send requests either on init or post reset.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#a4b60c00e0261b16aaac5a2fd5948b23c">More...</a><br /></td></tr>
@@ -158,7 +158,7 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a0f8a4ac8f8ebae1af83c76a0141fdbcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The singleton Z3Gateway Request Queue responsible for storing and dispatching calls. </p>
+<div class="textblock"><p>The singleton ZigbeeHost Request Queue responsible for storing and dispatching calls. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a10311af7bdabfcf039577f6cb4c6cf14"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a10311af7bdabfcf039577f6cb4c6cf14">&#9670;&nbsp;</a></span>RequestQueue() <span class="overload">[1/2]</span></h2>
@@ -211,7 +211,7 @@ Private Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc::gateway::RequestQueue::dispatch </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc::gateway::RequestQueue::dispatch </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -220,10 +220,10 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Dispatch a EmberAf/Z3Gateway call from the queue. </p>
-<p>This dispatch routine is responsible for sending calls to the EmberAf/Z3Gateway API.</p>
-<p>NOTE: If dispatching a EmberAf/Z3Gateway call returns EMBER_MAX_MESSAGE_LIMIT_REACHED, the call data is assumed to have failed since there are too many messages in-flight on the Zigbee network. To rectify this, the call is not dequeued and and call-defer-cycle counter is increased to defer making any calls for that many iterations.</p>
-<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on EmberAf/Z3Gateway call success, SL_STATUS_TRANSMIT_BUSY if there are too many messages on the Zigbee network, or SL_STATUS_FAIL if the EmberAf/Z3Gateway call failed. </dd></dl>
+<p>Dispatch a EmberAf/ZigbeeHost call from the queue. </p>
+<p>This dispatch routine is responsible for sending calls to the EmberAf/ZigbeeHost API.</p>
+<p>NOTE: If dispatching a EmberAf/ZigbeeHost call returns EMBER_MAX_MESSAGE_LIMIT_REACHED, the call data is assumed to have failed since there are too many messages in-flight on the Zigbee network. To rectify this, the call is not dequeued and and call-defer-cycle counter is increased to defer making any calls for that many iterations.</p>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on EmberAf/ZigbeeHost call success, SL_STATUS_TRANSMIT_BUSY if there are too many messages on the Zigbee network, or SL_STATUS_FAIL if the EmberAf/ZigbeeHost call failed. </dd></dl>
 
 </div>
 </div>
@@ -243,10 +243,10 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Store call data to the queue that is used to dispatch calls to EmberAf/Z3Gateway API. </p>
+<p>Store call data to the queue that is used to dispatch calls to EmberAf/ZigbeeHost API. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">call</td><td>Shared pointer to Z3Gateway derived call data. </td></tr>
+    <tr><td class="paramname">call</td><td>Shared pointer to ZigbeeHost derived call data. </td></tr>
   </table>
   </dd>
 </dl>
@@ -277,7 +277,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve singleton instance. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html" title="The singleton Z3Gateway Request Queue responsible for storing and dispatching calls.">RequestQueue</a>&amp; </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html" title="The singleton ZigbeeHost Request Queue responsible for storing and dispatching calls.">RequestQueue</a>&amp; </dd></dl>
 
 </div>
 </div>
@@ -323,7 +323,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Configure queue to allow sending Z3Gateway requests. </p>
+<p>Configure queue to allow sending ZigbeeHost requests. </p>
 <p>NOTE: This must be called after initializing the queue. </p>
 
 </div>
@@ -343,7 +343,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Prevent sending any Z3Gateway requests due to the NCP being reset. </p>
+<p>Prevent sending any ZigbeeHost requests due to the NCP being reset. </p>
 
 </div>
 </div>
@@ -367,7 +367,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Number of cycles to defer before dispatching Z3Gateway request(default=0U) </p>
+<p>Number of cycles to defer before dispatching ZigbeeHost request(default=0U) </p>
 
 </div>
 </div>
@@ -391,7 +391,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Number of cycles to defer under normal circumstances. This is used to increase/decrease the number of times <a class="el" href="group__z3gateway.html#ga527ebb2c939008b4fe4ae2b00af9258c" title="Call the Z3Gateway tick function.">z3gatewayTick()</a> is called per 1 Z3Gateway API call. </p>
+<p>Number of cycles to defer under normal circumstances. This is used to increase/decrease the number of times zigbeeHostTick() is called per 1 ZigbeeHost API call. </p>
 
 </div>
 </div>
@@ -488,7 +488,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Indicate if Requests can be dispatched to Z3Gateway layer (default=FALSE) </p>
+<p>Indicate if Requests can be dispatched to ZigbeeHost layer (default=FALSE) </p>
 
 </div>
 </div>
@@ -511,7 +511,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Z3Gateway call data </p>
+<p>ZigbeeHost call data </p>
 
 </div>
 </div>
@@ -524,7 +524,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacezigpc.html">zigpc</a></li><li class="navelem"><a class="el" href="namespacezigpc_1_1gateway.html">gateway</a></li><li class="navelem"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html">RequestQueue</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:31 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:46 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -1,0 +1,66 @@
+# This yaml config file shall contain the Z-Wave Attribute lists
+# where their state shall be polled in a given polling interval [s].
+# It is important that the attributes specified here have a Get Rule
+# registered to the attribute resolver for the system to work properly.
+# Attribute type definitions could be found in:
+# ../zpc_attribute_store/include/attribute_store_defined_attribute_types.h
+# For auto-generated command classes control handler the attribute types are defined:
+# ..<build folder>/applications/zpc/components/zwave_command_classes/src-gen/
+# Keys for polling intervals:
+# ... polling_interval_zwave -> Z-Wave node
+# ... polling_interval_zwave_v1 -> Z-Wave Plus v1 node
+# ... polling_interval_zwave_v2 -> Z-Wave Plus v2 node
+# if there is not polling interval for specific zwave class, it is not required
+# configure a poll interval.
+# Example registering polling interval for Z-Wave and Zwave Plus v1:
+#   - attribute_type: ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE
+#     polling_interval_zwave: 100
+#     polling_interval_zwave_v1: 100
+# Example registering polling interval for all certification programs:
+#  - attribute_type: ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE
+#     polling_interval_zwave: 100
+#     polling_interval_zwave_v1: 100
+#     polling_interval_zwave_v2: 30
+
+## Application Command Classes
+
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_BASIC_VALUE
+  polling_interval_zwave: 3600
+  polling_interval_zwave_v1: 3600
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE
+  polling_interval_zwave: 3600
+  polling_interval_zwave_v1: 3600
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_STATE
+  polling_interval_zwave: 7200
+  polling_interval_zwave_v1: 7200
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE
+  polling_interval_zwave: 7200
+  polling_interval_zwave_v1: 7200
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE
+  polling_interval_zwave: 7200
+  polling_interval_zwave_v1: 7200
+- attribute_type: ATTRIBUTE_DOOR_LOCK_OPERATION_DOOR_LOCK_MODE
+  polling_interval_zwave: 3600
+  polling_interval_zwave_v1: 3600
+
+# Multilevel Sensor values every 6 hours, required by the control specifications.
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_SENSOR_MULTILEVEL_SENSOR_VALUE
+  polling_interval_zwave: 21600
+  polling_interval_zwave_v1: 21600
+  polling_interval_zwave_v2: 21600
+
+## Management Command Classes
+
+# Check on the Wake Up Settings once a week
+# to avoid marking nodes as failing in case it changed
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_WAKE_UP_SETTING
+  polling_interval_zwave: 604800
+  polling_interval_zwave_v1: 604800
+  polling_interval_zwave_v2: 604800
+# Battery level is once a month
+- attribute_type: ATTRIBUTE_BATTERY_BATTERY_LEVEL
+  polling_interval_zwave: 2592000
+  polling_interval_zwave_v1: 2592000
+- attribute_type: ATTRIBUTE_INDICATOR_INDICATOR_VALUE
+  polling_interval_zwave: 7200
+  polling_interval_zwave_v1: 7200

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_rx/src/zwave_rx_zwapi_callbacks.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave/zwave_rx/src/zwave_rx_zwapi_callbacks.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -102,187 +102,26 @@ $(document).ready(function(){initNavTree('zwave__rx__zwapi__callbacks_8c.html','
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a511df59a2e84d200627f25df99f8068c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html#a511df59a2e84d200627f25df99f8068c">zwave_tx_on_frame_received</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const <a class="el" href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a> *rx_options, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
-<tr class="separator:a511df59a2e84d200627f25df99f8068c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a3728de7575bab7ebbd4f1529f8eae4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html#a3a3728de7575bab7ebbd4f1529f8eae4">zwave_rx_map_node_information</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *zwapi_zwave_nif, uint8_t zwapi_zwave_nif_length, <a class="el" href="structzwave__node__info__t.html">zwave_node_info_t</a> *destination_node_info)</td></tr>
-<tr class="memdesc:a3a3728de7575bab7ebbd4f1529f8eae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that converts the data received from the <a class="el" href="group__ZWAPI.html">Z-Wave API</a> to fit in a <a class="el" href="structzwave__node__info__t.html">zwave_node_info_t</a>.  <a href="zwave__rx__zwapi__callbacks_8c.html#a3a3728de7575bab7ebbd4f1529f8eae4">More...</a><br /></td></tr>
+<tr class="memitem:a3a3728de7575bab7ebbd4f1529f8eae4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html#a3a3728de7575bab7ebbd4f1529f8eae4">zwave_rx_map_node_information</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *zwapi_zwave_nif, uint8_t zwapi_zwave_nif_length, <a class="el" href="structzwave__node__info__t.html">zwave_node_info_t</a> *destination_node_info)</td></tr>
+<tr class="memdesc:a3a3728de7575bab7ebbd4f1529f8eae4"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that converts the data received from the <a class="el" href="group__zwave__api.html">Z-Wave API</a> to fit in a <a class="el" href="structzwave__node__info__t.html">zwave_node_info_t</a>.  <a href="zwave__rx__zwapi__callbacks_8c.html#a3a3728de7575bab7ebbd4f1529f8eae4">More...</a><br /></td></tr>
 <tr class="separator:a3a3728de7575bab7ebbd4f1529f8eae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4081a8d944b8daad978322699bc01e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html#ad4081a8d944b8daad978322699bc01e3">zwave_rx_application_command_handler</a> (uint8_t rx_status, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, const uint8_t *zwave_command_payload, uint8_t zwave_command_payload_length, int8_t rssi_value)</td></tr>
-<tr class="memdesc:ad4081a8d944b8daad978322699bc01e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">application_command_handler function for <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>. <a class="el" href="group__ZWAPI.html">Z-Wave API</a> controller libraries will call this function for incoming frames from the Z-Wave nodes (e.g. Basic Report) will be dispatched to this function.  <a href="zwave__rx__zwapi__callbacks_8c.html#ad4081a8d944b8daad978322699bc01e3">More...</a><br /></td></tr>
-<tr class="separator:ad4081a8d944b8daad978322699bc01e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa36427751230efea8a45e11214b73e99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html#aa36427751230efea8a45e11214b73e99">zwave_rx_application_command_handler_bridge</a> (uint8_t rx_status, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, const uint8_t *zwave_command_payload, uint8_t zwave_command_payload_length, int8_t rssi_value)</td></tr>
-<tr class="memdesc:aa36427751230efea8a45e11214b73e99"><td class="mdescLeft">&#160;</td><td class="mdescRight">application_command_handler_bridge function for <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>. <a class="el" href="group__ZWAPI.html">Z-Wave API</a> Bridge libraries will call this function instead of application_command_handler(). Incoming frames from the Z-Wave nodes (e.g. Basic Report) will be dispatched to this function.  <a href="zwave__rx__zwapi__callbacks_8c.html#aa36427751230efea8a45e11214b73e99">More...</a><br /></td></tr>
-<tr class="separator:aa36427751230efea8a45e11214b73e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8a7864d183b913f74d0f18edbf89f36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html#ad8a7864d183b913f74d0f18edbf89f36">zwave_rx_application_controller_update</a> (uint8_t status, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *zwave_nif, uint8_t zwave_nif_length, <a class="el" href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a> nwi_home_id)</td></tr>
-<tr class="memdesc:ad8a7864d183b913f74d0f18edbf89f36"><td class="mdescLeft">&#160;</td><td class="mdescRight">application_controller_update function for <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>. Incoming NIF from the Z-Wave nodes will be dispatched to this function.  <a href="zwave__rx__zwapi__callbacks_8c.html#ad8a7864d183b913f74d0f18edbf89f36">More...</a><br /></td></tr>
-<tr class="separator:ad8a7864d183b913f74d0f18edbf89f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a716dfa7496a25ae66a5068fc21c3ef0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html#a716dfa7496a25ae66a5068fc21c3ef0c">zwave_rx_zwave_api_started</a> (const uint8_t *buffer, uint8_t buffer_length)</td></tr>
-<tr class="memdesc:a716dfa7496a25ae66a5068fc21c3ef0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">functions handling when the Z-Wave API is ready to use. This is called after soft reset. See <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>  <a href="zwave__rx__zwapi__callbacks_8c.html#a716dfa7496a25ae66a5068fc21c3ef0c">More...</a><br /></td></tr>
-<tr class="separator:a716dfa7496a25ae66a5068fc21c3ef0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4330867071a8eb8313b997592fb5d7e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html#a4330867071a8eb8313b997592fb5d7e9">zwave_rx_poll_request</a> ()</td></tr>
-<tr class="memdesc:a4330867071a8eb8313b997592fb5d7e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request call zwapi_poll again.  <a href="zwave__rx__zwapi__callbacks_8c.html#a4330867071a8eb8313b997592fb5d7e9">More...</a><br /></td></tr>
-<tr class="separator:a4330867071a8eb8313b997592fb5d7e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad4081a8d944b8daad978322699bc01e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__rx__zwapi__callbacks.html#gad4081a8d944b8daad978322699bc01e3">zwave_rx_application_command_handler</a> (uint8_t rx_status, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, const uint8_t *zwave_command_payload, uint8_t zwave_command_payload_length, int8_t rssi_value)</td></tr>
+<tr class="memdesc:gad4081a8d944b8daad978322699bc01e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">application_command_handler function for <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>. <a class="el" href="group__zwave__api.html">Z-Wave API</a> controller libraries will call this function for incoming frames from the Z-Wave nodes (e.g. Basic Report) will be dispatched to this function.  <a href="group__zwave__rx__zwapi__callbacks.html#gad4081a8d944b8daad978322699bc01e3">More...</a><br /></td></tr>
+<tr class="separator:gad4081a8d944b8daad978322699bc01e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa36427751230efea8a45e11214b73e99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__rx__zwapi__callbacks.html#gaa36427751230efea8a45e11214b73e99">zwave_rx_application_command_handler_bridge</a> (uint8_t rx_status, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, const uint8_t *zwave_command_payload, uint8_t zwave_command_payload_length, int8_t rssi_value)</td></tr>
+<tr class="memdesc:gaa36427751230efea8a45e11214b73e99"><td class="mdescLeft">&#160;</td><td class="mdescRight">application_command_handler_bridge function for <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>. <a class="el" href="group__zwave__api.html">Z-Wave API</a> Bridge libraries will call this function instead of application_command_handler(). Incoming frames from the Z-Wave nodes (e.g. Basic Report) will be dispatched to this function.  <a href="group__zwave__rx__zwapi__callbacks.html#gaa36427751230efea8a45e11214b73e99">More...</a><br /></td></tr>
+<tr class="separator:gaa36427751230efea8a45e11214b73e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad8a7864d183b913f74d0f18edbf89f36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__rx__zwapi__callbacks.html#gad8a7864d183b913f74d0f18edbf89f36">zwave_rx_application_controller_update</a> (uint8_t status, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *zwave_nif, uint8_t zwave_nif_length, <a class="el" href="group__zwave__node__id__definitions.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a> nwi_home_id)</td></tr>
+<tr class="memdesc:gad8a7864d183b913f74d0f18edbf89f36"><td class="mdescLeft">&#160;</td><td class="mdescRight">application_controller_update function for <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>. Incoming NIF from the Z-Wave nodes will be dispatched to this function.  <a href="group__zwave__rx__zwapi__callbacks.html#gad8a7864d183b913f74d0f18edbf89f36">More...</a><br /></td></tr>
+<tr class="separator:gad8a7864d183b913f74d0f18edbf89f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga716dfa7496a25ae66a5068fc21c3ef0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__rx__zwapi__callbacks.html#ga716dfa7496a25ae66a5068fc21c3ef0c">zwave_rx_zwave_api_started</a> (const uint8_t *buffer, uint8_t buffer_length)</td></tr>
+<tr class="memdesc:ga716dfa7496a25ae66a5068fc21c3ef0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">functions handling when the Z-Wave API is ready to use. This is called after soft reset. See <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>  <a href="group__zwave__rx__zwapi__callbacks.html#ga716dfa7496a25ae66a5068fc21c3ef0c">More...</a><br /></td></tr>
+<tr class="separator:ga716dfa7496a25ae66a5068fc21c3ef0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4330867071a8eb8313b997592fb5d7e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__rx__zwapi__callbacks.html#ga4330867071a8eb8313b997592fb5d7e9">zwave_rx_poll_request</a> ()</td></tr>
+<tr class="memdesc:ga4330867071a8eb8313b997592fb5d7e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request call zwapi_poll again.  <a href="group__zwave__rx__zwapi__callbacks.html#ga4330867071a8eb8313b997592fb5d7e9">More...</a><br /></td></tr>
+<tr class="separator:ga4330867071a8eb8313b997592fb5d7e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ad4081a8d944b8daad978322699bc01e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4081a8d944b8daad978322699bc01e3">&#9670;&nbsp;</a></span>zwave_rx_application_command_handler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_rx_application_command_handler </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>rx_status</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>destination_node_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>source_node_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>zwave_command_payload</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>zwave_command_payload_length</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int8_t&#160;</td>
-          <td class="paramname"><em>rssi_value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>application_command_handler function for <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>. <a class="el" href="group__ZWAPI.html">Z-Wave API</a> controller libraries will call this function for incoming frames from the Z-Wave nodes (e.g. Basic Report) will be dispatched to this function. </p>
-<p>Parameters are described in <a class="el" href="group__ZWAPI__INIT.html#ga8760e50d33250308039ff09a9e8a1674">application_command_handler_function</a> </p>
-
-</div>
-</div>
-<a id="aa36427751230efea8a45e11214b73e99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa36427751230efea8a45e11214b73e99">&#9670;&nbsp;</a></span>zwave_rx_application_command_handler_bridge()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_rx_application_command_handler_bridge </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>rx_status</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>destination_node_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>source_node_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>zwave_command_payload</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>zwave_command_payload_length</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int8_t&#160;</td>
-          <td class="paramname"><em>rssi_value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>application_command_handler_bridge function for <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>. <a class="el" href="group__ZWAPI.html">Z-Wave API</a> Bridge libraries will call this function instead of application_command_handler(). Incoming frames from the Z-Wave nodes (e.g. Basic Report) will be dispatched to this function. </p>
-<p>Parameters are described in <a class="el" href="group__ZWAPI__INIT.html#ga8760e50d33250308039ff09a9e8a1674">application_command_handler_function</a> </p>
-
-</div>
-</div>
-<a id="ad8a7864d183b913f74d0f18edbf89f36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8a7864d183b913f74d0f18edbf89f36">&#9670;&nbsp;</a></span>zwave_rx_application_controller_update()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_rx_application_controller_update </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>status</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>node_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>zwave_nif</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>zwave_nif_length</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a>&#160;</td>
-          <td class="paramname"><em>nwi_home_id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>application_controller_update function for <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>. Incoming NIF from the Z-Wave nodes will be dispatched to this function. </p>
-<p>Parameters are described in <a class="el" href="group__ZWAPI__INIT.html#gaef0e270c77493989cad0a4e48a83e4ab">application_controller_update_function</a> </p>
-
-</div>
-</div>
 <a id="a3a3728de7575bab7ebbd4f1529f8eae4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3a3728de7575bab7ebbd4f1529f8eae4">&#9670;&nbsp;</a></span>zwave_rx_map_node_information()</h2>
 
@@ -295,7 +134,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">static void zwave_rx_map_node_information </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em>, </td>
         </tr>
         <tr>
@@ -329,11 +168,11 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>function that converts the data received from the <a class="el" href="group__ZWAPI.html">Z-Wave API</a> to fit in a <a class="el" href="structzwave__node__info__t.html">zwave_node_info_t</a>. </p>
+<p>function that converts the data received from the <a class="el" href="group__zwave__api.html">Z-Wave API</a> to fit in a <a class="el" href="structzwave__node__info__t.html">zwave_node_info_t</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node_id</td><td>The NodeID for which the NIF is being forwarded. In case of SmartStart frames, NIFs come from foreign netowrks and this parameter must be set to 0 </td></tr>
-    <tr><td class="paramname">zwapi_zwave_nif</td><td>The node info frame data received from <a class="el" href="group__ZWAPI.html">Z-Wave API</a> </td></tr>
+    <tr><td class="paramname">zwapi_zwave_nif</td><td>The node info frame data received from <a class="el" href="group__zwave__api.html">Z-Wave API</a> </td></tr>
     <tr><td class="paramname">zwapi_zwave_nif_length</td><td>The length of the data contained in the zwapi_zwave_nif pointer </td></tr>
     <tr><td class="paramname">destination_node_info</td><td>A pointer to a <a class="el" href="structzwave__node__info__t.html" title="Structure holding a Z-Wave node info frame.">zwave_node_info_t</a> where the converted data will be written </td></tr>
   </table>
@@ -342,109 +181,13 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4330867071a8eb8313b997592fb5d7e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4330867071a8eb8313b997592fb5d7e9">&#9670;&nbsp;</a></span>zwave_rx_poll_request()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_rx_poll_request </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Request call zwapi_poll again. </p>
-
-</div>
-</div>
-<a id="a716dfa7496a25ae66a5068fc21c3ef0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a716dfa7496a25ae66a5068fc21c3ef0c">&#9670;&nbsp;</a></span>zwave_rx_zwave_api_started()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_rx_zwave_api_started </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>buffer_length</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>functions handling when the Z-Wave API is ready to use. This is called after soft reset. See <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a> </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">buffer</td><td>Contains the payload of the currently configured NIF for the Z-Wave module </td></tr>
-    <tr><td class="paramname">buffer_length</td><td>Indicates the length in bytes of the data contained in the buffer pointer. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a511df59a2e84d200627f25df99f8068c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a511df59a2e84d200627f25df99f8068c">&#9670;&nbsp;</a></span>zwave_tx_on_frame_received()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_tx_on_frame_received </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
-          <td class="paramname"><em>connection_info</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a> *&#160;</td>
-          <td class="paramname"><em>rx_options</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>frame_data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>frame_length</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_a975de617c450d130df60752cdfe8b2f.html">zwave_rx</a></li><li class="navelem"><a class="el" href="dir_c1aa75be513d114ee270adc9d31e07e9.html">src</a></li><li class="navelem"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html">zwave_rx_zwapi_callbacks.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_0ae112d56e74946f02cfe5bffaa8cbc8.html">zwave_rx</a></li><li class="navelem"><a class="el" href="dir_67230de944c36a2fe8e46bf0668f7216.html">src</a></li><li class="navelem"><a class="el" href="zwave__rx__zwapi__callbacks_8c.html">zwave_rx_zwapi_callbacks.c</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:23 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

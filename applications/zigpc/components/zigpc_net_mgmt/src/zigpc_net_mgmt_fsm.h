@@ -18,9 +18,12 @@
 #include "sys/clock.h"
 #include "sys/etimer.h"
 #include "sl_status.h"
-#include "zigpc_net_mgmt.h"
+
 #include "zigpc_common_zigbee.h"
+#include <zigpc_discovery.h>
 #include "zigpc_gateway_notify.h"
+
+#include "zigpc_net_mgmt.h"
 
 /**
  * @brief Duration set for Node Add Process to complete
@@ -32,7 +35,7 @@
  * @brief Duration set for Node Remove Process to complete
  *
  */
-#define ZIGPC_NET_MGMT_REMOVE_TIMEOUT (CLOCK_SECOND * 5)
+#define ZIGPC_NET_MGMT_REMOVE_TIMEOUT (CLOCK_SECOND * 60)
 
 /**
  * @brief Duration set for Node Interview Process to complete
@@ -93,47 +96,16 @@ enum zigpc_net_mgmt_fsm_event {
   ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_COMPLETE,
 
   /**
-   * @brief This event is received when calling to interview a node already on
-   * the network. This request can only be processed if the FSM is in an IDLE
-   * state. This will cause the FSM To enter the "node interview" state.
+   * @brief This event is received when discovery status has been received.
    *
    */
-  ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_REQUEST,
+  ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_STATUS,
 
-  /**
-   * @brief This event is received when the gateway has successfully interviewed
-   * the general node information, including how many endpoint interview events
-   * to listen for later (see
-   * ZIGPC_NET_MGMT_FSM_EVENT_NODE_ENDPOINT_INTERVIEWED).If this event is not
-   * received in time (see ZIGPC_NODE_INTERVIEW_TIMEOUT_MS), a timeout event
-   * will be received.
-   *
-   */
-  ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEWED,
-
-  /**
-   * @brief This event is received when the gateway has successfully interviewed
-   * endpoint information for the node (see
-   * ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEWED). The endpoint information is
-   * compared against total number of endpoint interview events to expect. Once
-   * the expected number of endpoint interview information is received, the FSM
-   * will transition into the IDLE state.If this event is not received in time
-   * (see ZIGPC_NODE_INTERVIEW_TIMEOUT_MS), a timeout event will be received.
-   *
-   */
-  ZIGPC_NET_MGMT_FSM_EVENT_NODE_ENDPOINT_INTERVIEWED,
   ZIGPC_NET_MGMT_FSM_EVENT_NODE_REMOVE_REQUEST,
   ZIGPC_NET_MGMT_FSM_EVENT_NODE_REMOVE_COMPLETE,
 
   ZIGPC_NET_MGMT_FSM_EVENT_MAX_VAL,
 };
-
-typedef struct {
-  zigbee_eui64_t zigpc_eui64;
-  zigbee_panid_t zigpc_panid;
-  zigbee_ext_panid_t zigpc_ext_panid;
-  zigbee_radio_channel_t zigpc_radio_channel;
-} zigpc_net_mgmt_fsm_init_complete_t;
 
 typedef struct {
   zigbee_eui64_t eui64;
@@ -151,9 +123,8 @@ typedef struct {
 
 typedef struct {
   zigbee_eui64_t eui64;
-  uint8_t endpoint_total_count;
-  uint8_t endpoint_discovered_count;
-} zigpc_net_mgmt_fsm_interview_t;
+  zigpc_discovery_status_t discovery_status;
+} zigpc_net_mgmt_fsm_interview_status_t;
 
 /**
  * @brief Finite State Machine variables
@@ -161,7 +132,6 @@ typedef struct {
 struct zigpc_net_mgmt_fsm {
   enum zigpc_net_mgmt_fsm_state state;
   zigbee_eui64_t joining_eui64;
-  zigpc_net_mgmt_fsm_interview_t interview;
   zigbee_eui64_t eui64_to_remove;
   zigpc_net_mgmt_state_change_request_t state_change_request;
   struct etimer timer;
@@ -177,7 +147,6 @@ typedef union {
    */
 
   zigpc_net_mgmt_fsm_node_add_t node_add_request;
-  zigpc_net_mgmt_fsm_node_interview_t node_interview_request;
   zigpc_net_mgmt_fsm_node_remove_t node_remove_request;
   zigpc_net_mgmt_state_change_request_t state_change_request;
 
@@ -185,11 +154,10 @@ typedef union {
    * @brief Event data for stimulus received from ZigPC Gateway.
    */
 
-  zigpc_net_mgmt_fsm_init_complete_t on_net_init_complete;
-  struct zigpc_gateway_on_node_add on_node_add_start;
-  struct zigpc_gateway_on_node_add on_node_add_complete;
-  zigpc_gateway_on_node_discovered_t on_node_discovered;
-  zigpc_gateway_on_node_endpoint_discovered_t on_node_endpoint_discovered;
+  zigpc_gateway_on_network_init_t on_net_init_complete;
+  zigpc_gateway_on_node_add_t on_node_add_start;
+  zigpc_gateway_on_node_add_t on_node_add_complete;
+  zigpc_net_mgmt_fsm_interview_status_t on_node_interview_status;
   zigpc_gateway_on_node_removed_t on_node_remove_complete;
 } zigpc_net_mgmt_fsm_data_t;
 

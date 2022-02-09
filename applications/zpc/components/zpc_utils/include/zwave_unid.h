@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,14 +12,13 @@
  *****************************************************************************/
 
 /**
- * @file zwave_unid.h
+ * @defgroup zwave_unid Z-Wave UNID
  * @ingroup zpc_utils
  * @brief UNID mapping functions
  *
  * This module provides utility function for constructing and parsing
  * Unique Node IDentifiers(UNID)
  *
- * @addtogroup zpc_utils
  * @{
  */
 
@@ -30,7 +29,7 @@
 extern "C" {
 #endif
 
-#include "zwave_utils.h"
+#include "zwave_node_id_definitions.h"
 #include "sl_status.h"
 
 typedef char unid_t[17];

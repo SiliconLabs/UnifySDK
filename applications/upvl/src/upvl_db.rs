@@ -1,5 +1,5 @@
 // License
-// <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+// <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
 
 // The licensor of this software is Silicon Laboratories Inc. Your use of this
 // software is governed by the terms of Silicon Labs Master Software License
@@ -25,13 +25,13 @@
 // For some nice hints about using rusqlite:
 // https://tedspence.com/investigating-rust-with-sqlite-53d1f9a41112
 
-use rusqlite::{params, Connection, Error};
-
 use crate::upvl_json::{self, SmartStartEntry};
-use upvl_log::{self};
+use rusqlite::{params, Connection, Error};
+use unify_config_sys::*;
+use unify_log_sys::*;
+pub const CONFIG_KEY_UPVL_DB_FILE: &str = "upvl.datastore_file";
 
-const LOG_TAG: &str = "upvl_db";
-
+declare_app_name!("upvl_db");
 /// Current Database Version.
 /// At startup [db_upgrade] checks this against the "pragma_user_version",
 /// and ensure migrating the database to the current version.
@@ -41,8 +41,24 @@ const CURRENT_DB_VERSION: i32 = 1;
 // add the Debug trait to make the struct printable with :?
 #[derive(Debug)]
 struct UpvlDbEntry {
-    dsk: String,
-    payload: String,
+    _dsk: String,
+    _payload: String,
+}
+
+#[derive(Default, Clone, PartialEq, Debug)]
+pub struct UpvlConfig {
+    db_file: String,
+}
+
+impl ConfigLoader for UpvlConfig {
+    fn from_config() -> Result<Self, unify_config_sys::config_status_t>
+    where
+        Self: Sized,
+    {
+        let db_file = config_get_as_string(CONFIG_KEY_UPVL_DB_FILE)?;
+
+        Ok(UpvlConfig { db_file: db_file })
+    }
 }
 
 /// Checks the database version and upgrades the data within the database if required
@@ -77,10 +93,10 @@ fn db_upgrade(db_conn: &Connection) {
 /// This will **panic** if the database cannot be opened or the
 /// provision table cannot be created
 ///
-pub fn db_setup(db_file: String) -> rusqlite::Connection {
-    upvl_log::log_info(LOG_TAG, format!("Using database file {}", db_file));
+pub fn db_setup(upvl_config: UpvlConfig) -> rusqlite::Connection {
+    log_info!("Using database file {}", &upvl_config.db_file);
     // If UPVL cannot open the database, it exits with an error message.
-    let db_conn = Connection::open(db_file).expect("Cannot open database");
+    let db_conn = Connection::open(&upvl_config.db_file).expect("Cannot open database");
     db_upgrade(&db_conn);
     db_conn
         .execute(
@@ -96,15 +112,6 @@ pub fn db_setup(db_file: String) -> rusqlite::Connection {
         .pragma_update(None, "user_version", &CURRENT_DB_VERSION)
         .expect("Failed to set 'user_version' in database");
     db_conn
-}
-
-/// Close the database connection.
-///
-/// #Panics
-/// This will **panic** if the database connection cannot be closed cleanly.
-///
-pub fn db_teardown(db_conn: Connection) {
-    db_conn.close().expect("Database close failed");
 }
 
 /// Checks if an entry is valid
@@ -139,18 +146,12 @@ pub fn db_upsert_entry(db_conn: &Connection, mut entry: SmartStartEntry) {
         ) {
             entry.Payload = new_payload;
         } else {
-            upvl_log::log_warning(
-                LOG_TAG,
-                format!("Failed to merge SmartStart entries for DSK: {}", entry.DSK),
-            );
+            log_warning!("Failed to merge SmartStart entries for DSK: {}", entry.DSK);
             return;
         }
     }
     if !is_entry_valid(&entry.Payload) {
-        upvl_log::log_warning(
-            LOG_TAG,
-            format!("SmartStart Entry invalid: {}", entry.Payload.to_string()),
-        );
+        log_warning!("SmartStart Entry invalid: {}", entry.Payload.to_string());
         return;
     }
     match db_conn.execute(
@@ -162,11 +163,8 @@ pub fn db_upsert_entry(db_conn: &Connection, mut entry: SmartStartEntry) {
             (":payload", &entry.Payload.to_string()),
         ],
     ) {
-        Ok(_) => upvl_log::log_info(LOG_TAG, format!("Updated database for DSK {}.", entry.DSK)),
-        Err(err) => upvl_log::log_error(
-            LOG_TAG,
-            format!("Error {} when updating table with DSK {}.", err, entry.DSK),
-        ),
+        Ok(_) => log_info!("Updated database for DSK {}.", entry.DSK),
+        Err(err) => log_error!("Error {} when updating table with DSK {}.", err, entry.DSK),
     }
 }
 
@@ -199,17 +197,11 @@ pub fn db_remove_entry(db_conn: &Connection, entry: &upvl_json::SmartStartEntry)
         &[(":dsk", &entry.DSK)],
     ) {
         Ok(deletions) => {
-            upvl_log::log_info(
-                LOG_TAG,
-                format!("Removed {} entries with DSK {}.", deletions, entry.DSK),
-            );
+            log_info!("Removed {} entries with DSK {}.", deletions, entry.DSK);
             deletions
         }
         Err(err) => {
-            upvl_log::log_error(
-                LOG_TAG,
-                format!("Error {} when removing DSK {}.", err, entry.DSK),
-            );
+            log_error!("Error {} when removing DSK {}.", err, entry.DSK);
             0
         }
     }
@@ -249,19 +241,13 @@ pub fn db_list_provisions(db_conn: &Connection) -> Vec<serde_json::Value> {
                 sms_list.push(db_entry.Payload);
             }
             Err(err) => {
-                upvl_log::log_error(
-                    LOG_TAG,
-                    format!("Error in dabatase lookup {}, skipping entry in List", err),
-                );
+                log_error!("Error in dabatase lookup {}, skipping entry in List", err);
             }
         }
     }
-    upvl_log::log_info(
-        LOG_TAG,
-        format!(
-            "To publish: {}",
-            serde_json::to_string(&sms_list).expect("Cannot serialize List")
-        ),
+    log_info!(
+        "To publish: {}",
+        serde_json::to_string(&sms_list).expect("Cannot serialize List")
     );
     // We should probably publish even if there are no entries, eg, if
     // the last received message was a Remove.
@@ -286,20 +272,20 @@ pub fn db_debug_print_provisions(db_conn: &Connection) {
             // 'match' below.
             |row| {
                 Ok(UpvlDbEntry {
-                    dsk: row.get(0)?,
-                    payload: row.get(1)?,
+                    _dsk: row.get(0)?,
+                    _payload: row.get(1)?,
                 })
             },
         )
         .expect("Cannot create iterator");
     for pv in pv_iter {
-        // :? to format something that is not usually printable
+        // :? to format the passed object with the debug trait as opposed to the default Display trait.
         match pv {
             Ok(pv) => {
-                upvl_log::log_info(LOG_TAG, format!("Found provision {:?}", pv));
+                log_info!("Found provision {:?}", pv);
             }
             Err(err) => {
-                upvl_log::log_error(LOG_TAG, format!("Invalid provision {:?}", err));
+                log_error!("Invalid provision {:?}", err);
             }
         }
     }
@@ -307,7 +293,9 @@ pub fn db_debug_print_provisions(db_conn: &Connection) {
 
 #[cfg(test)]
 mod test {
-    use super::{db_list_provisions, db_remove_entry, db_setup, db_upgrade, db_upsert_entry};
+    use super::{
+        db_list_provisions, db_remove_entry, db_setup, db_upgrade, db_upsert_entry, UpvlConfig,
+    };
     use crate::upvl_json::SmartStartEntry;
     use rusqlite::{params, Connection};
     use serde_json::json;
@@ -354,7 +342,9 @@ mod test {
 
         // Currently, setup does not handle errors gracefully, so this
         // is enough to test that it works.
-        db_setup(db_name.to_string());
+        db_setup(UpvlConfig {
+            db_file: db_name.to_string(),
+        });
     }
     // This may not be a good way to create a test database.  If we
     // want to move the db_conn into this module we have to change it.

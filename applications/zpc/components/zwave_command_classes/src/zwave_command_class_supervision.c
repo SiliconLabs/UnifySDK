@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -202,6 +202,16 @@ static sl_status_t zwave_command_class_supervision_handle_supervision_report(
     = frame_data[SUPERVISION_REPORT_MORE_STATUS_INDEX]
       & SUPERVISION_REPORT_PROPERTIES1_MORE_STATUS_UPDATES_BIT_MASK;
   current_session->status = frame_data[SUPERVISION_REPORT_STATUS_INDEX];
+
+  // Print out supervision session data
+  sl_log_debug(LOG_TAG,
+               "Incoming Supervision Report for NodeID %d:%d, group %d, "
+               "Session ID (%d). Status: %d ",
+               current_session->session.node_id,
+               current_session->session.endpoint_id,
+               current_session->session.group_id,
+               current_session->session.session_id,
+               current_session->status);
 
   if (frame_data[SUPERVISION_REPORT_DURATION_INDEX] < 0xFE) {
     current_session->expiry_time
@@ -435,11 +445,9 @@ sl_status_t zwave_command_class_supervision_send_data(
 
   // Supervision Get expect 1 frame (or more) frames in response, if singlecast.
   // Update the tx option accordingly.
-  // If the encapsulated frames was to generate replies,
-  // we conserve this here and increment the number of replies by 1
   zwave_tx_options_t supervision_tx_options = *tx_options;
   if (connection->remote.is_multicast == false) {
-    supervision_tx_options.number_of_responses += 1;
+    supervision_tx_options.number_of_responses = 1;
   } else {
     supervision_tx_options.number_of_responses = 0;
   }

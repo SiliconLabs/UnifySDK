@@ -1,0 +1,13 @@
+[package]
+name = "unify_main_sys"
+version = "0.0.1"
+authors = ["root"]
+edition = "2021"
+license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor of this software is Silicon Laboratories Inc. Your use of this\nsoftware is governed by the terms of Silicon Labs Master Software License\nAgreement (MSLA) available at\nwww.silabs.com/about-us/legal/master-software-license-agreement. This\nsoftware is distributed to you in Source Code format and is governed by the\nsections of the MSLA applicable to Source Code."
+description = "Unify main"
+
+[lib]
+path = "src/unify_main.rs"
+
+[dependencies]
+unify_tools = { path = "../unify_tools" }

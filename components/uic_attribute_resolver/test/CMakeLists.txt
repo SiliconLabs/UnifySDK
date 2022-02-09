@@ -1,3 +1,10 @@
+# Attribute resolver rule mock
+add_mock(uic_attribute_resolver_rule_mock ../include/attribute_resolver_rule.h
+         ../src/attribute_resolver_rule_internal.h)
+target_include_directories(uic_attribute_resolver_rule_mock PUBLIC ../include)
+target_interface_libraries(uic_attribute_resolver_rule_mock uic_contiki
+                           uic_attribute_store)
+
 add_mock(uic_attribute_resolver_rule_test_mock attribute_resolver_rule_test.h)
 target_interface_libraries(uic_attribute_resolver_rule_test_mock uic_contiki
                            uic_attribute_store)

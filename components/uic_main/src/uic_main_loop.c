@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -60,37 +60,46 @@ static clock_time_t uic_main_loop_find_delay(void)
 
 /* Public functions. */
 
-bool uic_main_loop(void)
+bool uic_main_loop_run(void)
 {
   clock_time_t delay = UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY;
 
-  while (1) {
-    int retval = 1;
-    /* Keep going as long as there are events on the event queue or
-     * poll has been requested (process_run() processes all polls
-     * and one event every time it's called).
-     */
-    while (retval > 0) {
-      retval = process_run();
-    }
-
-    /* Bail out if all the processes have stopped running */
-    if (PROCESS_LIST() == NULL) {
-      break;
-    }
-
-    delay = uic_main_loop_find_delay();
-
-    /* Check for external events, e.e., on file descriptors, and
-     * send them to their respective handlers.
-     *
-     * Poll handlers are only expected to read the data and post a
-     * conktiki event to handle it later. */
-    uic_main_ext_select(delay);
-
-    /* Check if there are time-out events by polling etimer. */
-    etimer_request_poll();
+  int retval = 1;
+  /* Keep going as long as there are events on the event queue or
+   * poll has been requested (process_run() processes all polls
+   * and one event every time it's called).
+   */
+  while (retval > 0) {
+    retval = process_run();
   }
 
+  /* Bail out if all the processes have stopped running */
+  if (PROCESS_LIST() == NULL) {
+    return false;
+  }
+
+  delay = uic_main_loop_find_delay();
+
+  /* Check for external events, e.e., on file descriptors, and
+    * send them to their respective handlers.
+    *
+    * Poll handlers are only expected to read the data and post a
+    * conktiki event to handle it later. */
+  uic_main_ext_select(delay);
+
+  /* Check if there are time-out events by polling etimer. */
+  etimer_request_poll();
+
+  return true;
+}
+
+
+bool uic_main_loop(void)
+{
+  while (1) {
+    if(!uic_main_loop_run()) {
+      break;
+    }
+  }
   return true;
 }

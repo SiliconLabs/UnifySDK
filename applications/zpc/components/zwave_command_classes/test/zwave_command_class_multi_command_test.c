@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -86,6 +86,8 @@ int suiteTearDown(int num_failures)
 /// Called before each and every test
 void setUp()
 {
+  zwave_command_handler_dispatch_Stub(zwave_command_handler_dispatch_stub);
+
   happy_case    = 1;
   frame_counter = 0;
 }
@@ -144,8 +146,6 @@ void test_decapsulation_happy_case()
        0x00};
 
   happy_case = 1;
-
-  zwave_command_handler_dispatch_Stub(zwave_command_handler_dispatch_stub);
 
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     multi_command_handler.support_handler(&connection_info,
@@ -227,8 +227,6 @@ void test_decapsulation_not_happy_case()
 
   happy_case = 0;  // Command 1, 3 callback should return SL_STATUS_OK
                    // Command 2 callback should return    SL_STATUS_FAIL
-
-  zwave_command_handler_dispatch_Stub(zwave_command_handler_dispatch_stub);
 
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
                     multi_command_handler.support_handler(&connection_info,

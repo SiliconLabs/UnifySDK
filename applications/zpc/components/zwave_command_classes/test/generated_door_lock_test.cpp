@@ -45,7 +45,7 @@ struct functions {
 
 std::map<attribute_store_type_t, functions> rules;
 std::map<uint32_t, zwave_command_handler_t> handlers;
-std::map<uint32_t, attribute_store_node_update_callback_t> ats_callbacks;
+std::map<uint32_t, attribute_store_node_changed_callback_t> ats_callbacks;
 
 static sl_status_t get_function_ptrs(attribute_store_type_t node_type,
                                      attribute_resolver_function_t set_func,
@@ -64,7 +64,7 @@ static sl_status_t get_handler(zwave_command_handler_t h, int cmock_num_calls)
 }
 
 static sl_status_t
-  get_ats_callbacks(attribute_store_node_update_callback_t callback_function,
+  get_ats_callbacks(attribute_store_node_changed_callback_t callback_function,
                     attribute_store_type_t type,
                     int cmock_num_calls)
 {

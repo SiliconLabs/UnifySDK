@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -11,7 +11,7 @@
  *
  *****************************************************************************/
 
- /**
+/**
  * @defgroup dotdot_mqtt_topics_handler DotDot MQTT Topics Handler
  * @ingroup dotdot_mqtt_topics_handler
  * @brief It reads the ZCL attribute state and publish the state to the MQTT interface.

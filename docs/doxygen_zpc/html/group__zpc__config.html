@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Configuration Extension</title>
+<title>Z-Wave Protocol Controller Refrence: ZPC Configuration Extension</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,11 +89,11 @@ $(document).ready(function(){initNavTree('group__zpc__config.html',''); initResi
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Configuration Extension<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a></div></div>  </div>
+<div class="title">ZPC Configuration Extension</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Add the ZPC-specific fixtures to the Unify <a class="el" href="group__config.html">Config</a> system.  
+<p>Add the ZPC-specific fixtures to the Unify <a class="el" href="zpc__config_8c.html#ad407e1fe528f3ec0ed8153c85c2e8730">config</a> system.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
@@ -115,6 +115,10 @@ Macros</h2></td></tr>
 <tr class="memitem:ga35beb0a78565959e7e90fb04ec52f82a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__config.html#ga35beb0a78565959e7e90fb04ec52f82a">ZWAVE_LONG_RANGE_CONFIG_REPRESENTATION</a>&#160;&#160;&#160;&quot;2&quot;</td></tr>
 <tr class="memdesc:ga35beb0a78565959e7e90fb04ec52f82a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave Long Range.  <a href="group__zpc__config.html#ga35beb0a78565959e7e90fb04ec52f82a">More...</a><br /></td></tr>
 <tr class="separator:ga35beb0a78565959e7e90fb04ec52f82a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2a11132bf4ca146ee661d3fdbe48b29"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__config.html#gaa2a11132bf4ca146ee661d3fdbe48b29">DEFAULT_ZPC_DATASTORE_FILE</a>&#160;&#160;&#160;UIC_VAR_DIR &quot;/zpc.db&quot;</td></tr>
+<tr class="separator:gaa2a11132bf4ca146ee661d3fdbe48b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga04caccc0cfc5449f4de780ad611a6011"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__config.html#ga04caccc0cfc5449f4de780ad611a6011">CONFIG_KEY_ZPC_DATASTORE_FILE</a>&#160;&#160;&#160;&quot;zpc.datastore_file&quot;</td></tr>
+<tr class="separator:ga04caccc0cfc5449f4de780ad611a6011"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -122,14 +126,42 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga84d0f1604693e7387360b16efe24564f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current configuration. This must only be called after zpc_config_init.  <a href="group__zpc__config.html#ga84d0f1604693e7387360b16efe24564f">More...</a><br /></td></tr>
 <tr class="separator:ga84d0f1604693e7387360b16efe24564f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga23352eeb4775cdf2d732da8436a29d35"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__config.html#ga23352eeb4775cdf2d732da8436a29d35">zpc_config_init</a> ()</td></tr>
-<tr class="memdesc:ga23352eeb4775cdf2d732da8436a29d35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register ZPC configurations in <a class="el" href="group__config.html">Config</a>.  <a href="group__zpc__config.html#ga23352eeb4775cdf2d732da8436a29d35">More...</a><br /></td></tr>
+<tr class="memdesc:ga23352eeb4775cdf2d732da8436a29d35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register ZPC configurations in <a class="el" href="zpc__config_8c.html#ad407e1fe528f3ec0ed8153c85c2e8730">config</a>.  <a href="group__zpc__config.html#ga23352eeb4775cdf2d732da8436a29d35">More...</a><br /></td></tr>
 <tr class="separator:ga23352eeb4775cdf2d732da8436a29d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Add the ZPC-specific fixtures to the Unify <a class="el" href="group__config.html">Config</a> system. </p>
+<p>Add the ZPC-specific fixtures to the Unify <a class="el" href="zpc__config_8c.html#ad407e1fe528f3ec0ed8153c85c2e8730">config</a> system. </p>
 <p>This module is the source of all ZPC-specific configuration parameters. The source of the configuration parameters are command line arguments and the configuration file.</p>
 <p>The after initialization the configurations parameters are constant. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga04caccc0cfc5449f4de780ad611a6011"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga04caccc0cfc5449f4de780ad611a6011">&#9670;&nbsp;</a></span>CONFIG_KEY_ZPC_DATASTORE_FILE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CONFIG_KEY_ZPC_DATASTORE_FILE&#160;&#160;&#160;&quot;zpc.datastore_file&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gaa2a11132bf4ca146ee661d3fdbe48b29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa2a11132bf4ca146ee661d3fdbe48b29">&#9670;&nbsp;</a></span>DEFAULT_ZPC_DATASTORE_FILE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFAULT_ZPC_DATASTORE_FILE&#160;&#160;&#160;UIC_VAR_DIR &quot;/zpc.db&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="gabe1ca0d90fd1a527e8fe90ece9b8b00e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gabe1ca0d90fd1a527e8fe90ece9b8b00e">&#9670;&nbsp;</a></span>ZWAVE_CONFIG_REPRESENTATION</h2>
 
@@ -178,7 +210,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Register ZPC configurations in <a class="el" href="group__config.html">Config</a>. </p>
+<p>Register ZPC configurations in <a class="el" href="zpc__config_8c.html#ad407e1fe528f3ec0ed8153c85c2e8730">config</a>. </p>
 <p>This must be called before <a class="el" href="group__uic__main.html">Main Function for Contiki</a>.</p>
 <dl class="section return"><dt>Returns</dt><dd>0 on success. </dd></dl>
 
@@ -208,7 +240,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:33 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

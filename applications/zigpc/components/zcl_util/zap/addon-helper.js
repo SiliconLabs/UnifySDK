@@ -5,6 +5,7 @@ const component_zigpc_profiles_prefix = () => "zigpc_profiles"
 const component_zigpc_zcl_prefix = () => "zigpc_zcl"
 const component_zigpc_cmdmapper_prefix = () => "zigpc_command_mapper"
 const component_dotdot_mqtt_prefix = () => "uic_mqtt_dotdot"
+const component_zigpc_cmdparser_prefix = () => "zigpc_zclcmdparse"
 
 /**
  * List of ZCL structs supported.
@@ -135,6 +136,7 @@ exports.component_zigpc_attrmgmt_prefix = component_zigpc_attrmgmt_prefix
 exports.component_zigpc_profiles_prefix = component_zigpc_profiles_prefix
 exports.component_zigpc_zcl_prefix = component_zigpc_zcl_prefix
 exports.component_zigpc_cmdmapper_prefix = component_zigpc_cmdmapper_prefix
+exports.component_zigpc_cmdparser_prefix = component_zigpc_cmdparser_prefix
 exports.component_dotdot_mqtt_prefix = component_dotdot_mqtt_prefix
 exports.zcl_type_map_set_item = zcl_type_map.set
 exports.zcl_type_map_get_item = zcl_type_map.get
@@ -149,4 +151,7 @@ exports.asZigPCZclClusterType = zigpc_zcl.cluster_type
 exports.asZigPCZclCommandType = zigpc_zcl.command_type
 exports.asZigPCZclAttributeType = zigpc_zcl.attr_type
 exports.asZigPCZclStructType = zigpc_zcl.struct_type
+exports.asDotDotMqttCommandFieldsType = base_helpers.asCommandFieldsType
+exports.asDotDotMqttByGroupCommandCallback = base_helpers.asByGroupCommandCallback
+exports.asDotDotMqttByGroupWriteAttributesCallback = base_helpers.asByGroupWriteAttributesCallback
 // exports.devInspect = (e) => JSON.stringify(e)

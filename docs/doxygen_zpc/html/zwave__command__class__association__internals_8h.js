@@ -16,6 +16,7 @@ var zwave__command__class__association__internals_8h =
       [ "ENDPOINT", "group__zwave__command__class__association__internals.html#gga951ecbb8e0fa138495d1553767e06deea343f3100b8aa50d65ea93ae8e2dd6120", null ]
     ] ],
     [ "add_desired_association", "group__zwave__command__class__association__internals.html#ga543f3154cb65b72160d801fbe6cab68d", null ],
+    [ "add_desired_association_in_all_groups", "group__zwave__command__class__association__internals.html#gaef6288b8b3d32855821289d560f9aaec", null ],
     [ "add_reported_association", "group__zwave__command__class__association__internals.html#ga00a91d35699baa07e51a6e695784e53b", null ],
     [ "force_add_desired_association", "group__zwave__command__class__association__internals.html#ga0be4ac510bb6c9817bccc5b457508af7", null ],
     [ "get_group_capacity", "group__zwave__command__class__association__internals.html#gac0dcfd9535d9a21c0aaf95e4b6f54976", null ],
@@ -27,5 +28,8 @@ var zwave__command__class__association__internals_8h =
     [ "remove_all_reported_associations", "group__zwave__command__class__association__internals.html#ga749e24ab40a272b158f4a1ec8a9cf642", null ],
     [ "remove_all_reported_node_id_associations", "group__zwave__command__class__association__internals.html#ga4626e45991e38bc533603ae5af2db75c", null ],
     [ "remove_desired_association", "group__zwave__command__class__association__internals.html#ga2fab983394295b8766e2a9b3c4793abe", null ],
+    [ "remove_desired_association_in_all_groups", "group__zwave__command__class__association__internals.html#gaf6a063d15d32bd58a607613b86984af1", null ],
+    [ "remove_desired_node_id_from_all_associations", "group__zwave__command__class__association__internals.html#gad10f192ae7a343ce6a6a2df03bdd1720", null ],
+    [ "remove_desired_node_id_from_all_associations_in_network", "group__zwave__command__class__association__internals.html#ga9ba4f9c44ab7c396cbecc98ac287652f", null ],
     [ "remove_reported_association", "group__zwave__command__class__association__internals.html#ga8fffe8d139f721615d0c2a6976bfc033", null ]
 ];

@@ -183,6 +183,19 @@ PROCESS_THREAD(demo_process, ev, data)
 }
 
 /**
+ * @brief Wrapper for the datastore initialization function
+ *
+ */
+sl_status_t uic_demo_datastore_fixt_setup()
+{
+  // Here the application determines which file they want to use for the datastore
+  const char *datastore_file = "/tmp/uic_demo.db";
+
+  // Then initialize the datastore with this file
+  return datastore_fixt_setup(datastore_file);
+}
+
+/**
  * @brief Main function
  *
  * @param argc
@@ -197,8 +210,8 @@ int main(int argc, char **argv)
 
   // Setup fixtures
   uic_fixt_setup_step_t uic_fixt_setup_steps_list[]
-    = {{datastore_fixt_setup, "Datastore"},
-       {demo_setup, "Demo Setup"},
+    = {{&uic_demo_datastore_fixt_setup, "Datastore"},
+       {&demo_setup, "Demo Setup"},
        {NULL, "Terminator"}};
 
   // Shutdown fixtures

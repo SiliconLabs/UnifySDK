@@ -18,9 +18,9 @@ extern "C" {
 #include <unity.h>
 #include <sl_status.h>
 
-#include <zigpc_datastore_mock.h>
-#include <zigpc_net_mgmt_mock.h>
-#include <uic_mqtt_mock.h>
+#include "zigpc_datastore_mock.h"
+#include "zigpc_net_mgmt_mock.h"
+#include "uic_mqtt_mock.h"
 
 // Stubs for state_change API in network_managment
 
@@ -233,7 +233,7 @@ void test_publish_state_should_publish_state_only(void)
   std::string topic
     = "ucl/by-unid/zb-AABBCCDDEE001122/ProtocolController/NetworkManagement";
   std::string payload
-    = R"({"State":"idle","SupportedStateList":[],"RequestedStateParameters":[]})";
+    = R"({"RequestedStateParameters":[],"State":"idle","SupportedStateList":[]})";
 
   zigpc_network_data_t nwk_data = {
     .gateway_eui64 = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x00, 0x11, 0x22},
@@ -270,7 +270,7 @@ void test_publish_state_should_publish_next_states(void)
   std::string topic
     = "ucl/by-unid/zb-AABBCCDDEE001122/ProtocolController/NetworkManagement";
   std::string payload
-    = R"({"State":"idle","SupportedStateList":["remove node","add node"],"RequestedStateParameters":[]})";
+    = R"({"RequestedStateParameters":[],"State":"idle","SupportedStateList":["remove node","add node"]})";
 
   zigpc_network_data_t nwk_data = {
     .gateway_eui64 = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x00, 0x11, 0x22},
@@ -314,7 +314,7 @@ void test_publish_state_should_publish_requested_params(void)
   std::string topic
     = "ucl/by-unid/zb-AABBCCDDEE001122/ProtocolController/NetworkManagement";
   std::string payload
-    = R"({"State":"remove node","SupportedStateList":["idle"],"RequestedStateParameters":["Unid","ExtraFlag"]})";
+    = R"({"RequestedStateParameters":["Unid","ExtraFlag"],"State":"remove node","SupportedStateList":["idle"]})";
 
   zigpc_network_data_t nwk_data = {
     .gateway_eui64 = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0x00, 0x11, 0x22},

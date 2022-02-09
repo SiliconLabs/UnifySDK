@@ -1,5 +1,5 @@
 [target.armv7-unknown-linux-gnueabihf]
-linker = "arm-linux-gnueabihf-gcc"
+linker = "arm-linux-gnueabihf-g++"
 
 [target.mips-unknown-linux-gnu]
 linker = "mips-linux-gnu-gcc"

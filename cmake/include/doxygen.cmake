@@ -8,12 +8,16 @@ if(DOXYGEN_FOUND)
   # Excluding a few large items to reduce the doxygen build time
   set(DOXYGEN_FILE_PATTERNS *.h *.c *.dox *.doxygen *.hpp *.md)
   set(DOXYGEN_EXCLUDE_PATTERNS
-      */test/* */libs/* ZW_classcmd.h */uic_dotdot/**.md */gen/*
-      */uic_attribute_mapper/*/*.md)
-  set(DOXYGEN_HTML_EXTRA_STYLESHEET
-      ${CMAKE_CURRENT_SOURCE_DIR}/doc/doxygen/assets/customdoxygen.css)
-  set(DOXYGEN_HTML_EXTRA_FILES
-      ${CMAKE_CURRENT_SOURCE_DIR}/doc/doxygen/assets/silicon-labs-logo.png)
+      */test/*
+      */libs/*
+      ZW_classcmd.h
+      */uic_dotdot/**.md
+      */gen/*
+      */uic_attribute_mapper/*/*.md
+      *_mock*
+      */templates/*)
+  set(DOXYGEN_HTML_EXTRA_STYLESHEET doc/doxygen/assets/customdoxygen.css)
+  set(DOXYGEN_HTML_EXTRA_FILES doc/doxygen/assets/silicon-labs-logo.png)
   set(DOXYGEN_EXTRACT_ALL YES)
   set(DOXYGEN_GENERATE_TREEVIEW YES)
   # set(DOXYGEN_GENERATE_XML)
@@ -25,7 +29,7 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_LATEX_CMD_NAME "\"pdflatex -interaction=nonstopmode\"")
 
   set(DOXYGEN_HIDE_UNDOC_RELATIONS NO)
-  set(DOXYGEN_BUILTIN_STL_SUPPORT YES)  
+  set(DOXYGEN_BUILTIN_STL_SUPPORT YES)
   set(DOXYGEN_EXTRACT_PRIVATE YES)
   set(DOXYGEN_EXTRACT_PACKAGE YES)
   set(DOXYGEN_EXTRACT_STATIC YES)
@@ -71,15 +75,9 @@ if(DOXYGEN_FOUND)
   endif()
   # Doxygen src for libuic
   set(LIBUIC_DOXYGEN_SRC
-      ${CMAKE_SOURCE_DIR}/components
-      ${CMAKE_CURRENT_BINARY_DIR}/components
-      ${CMAKE_SOURCE_DIR}/include
-      ${CMAKE_SOURCE_DIR}/doc/standards
-      ${CMAKE_SOURCE_DIR}/doc/readme_developer.md
-      ${CMAKE_SOURCE_DIR}/doc/overview.md
-      ${CMAKE_SOURCE_DIR}/docker/readme_developer.md
-      ${CMAKE_SOURCE_DIR}/doc/README_debian_packaging.md
-      ${CMAKE_SOURCE_DIR}/doc/readme_uic_application_developer.md)
+      ${CMAKE_SOURCE_DIR}/components ${CMAKE_CURRENT_BINARY_DIR}/components
+      ${CMAKE_BINARY_DIR}/components/dotdot_mqtt/src
+      ${CMAKE_SOURCE_DIR}/include)
 
   # ############################################################################
   # Create doxygen build target, that includes all other doxygen targets
@@ -94,7 +92,8 @@ if(DOXYGEN_FOUND)
       ADD_DOX
       "PDF" # Boolean Flags
       "TARGET;PROJECT_NAME" # Mono value arguments
-      "SRC_PATHS;IMAGE_PATHS;PLANTUML_PATHS" # Multi-value arguments
+      "TARGET_DEPENDS;SRC_PATHS;IMAGE_PATHS;PLANTUML_PATHS" # Multi-value
+                                                            # arguments
       ${ARGN})
 
     set(DOXYGEN_OUTPUT_DIRECTORY ${ADD_DOX_TARGET})
@@ -103,7 +102,7 @@ if(DOXYGEN_FOUND)
     )
     set(DOXYGEN_PROJECT_NAME ${ADD_DOX_PROJECT_NAME})
     if(ADD_DOX_IMAGE_PATHS)
-      message(STATUS Setting doxygen images path to ${ADD_DOX_IMAGE_PATHS})
+      message(STATUS "Setting doxygen images path to ${ADD_DOX_IMAGE_PATHS}")
       set(DOXYGEN_IMAGE_PATH ${ADD_DOX_IMAGE_PATHS})
     endif()
     if(ADD_DOX_PLANTUML_PATHS)
@@ -119,24 +118,48 @@ if(DOXYGEN_FOUND)
     add_custom_target(
       ${ADD_DOX_TARGET}_zip
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${ADD_DOX_TARGET}
-      DEPENDS ${ADD_DOX_TARGET}
+      DEPENDS ${ADD_DOX_TARGET_DEPENDS} ${ADD_DOX_TARGET}
       COMMAND zip -r -q ${ADD_DOX_TARGET}_${CMAKE_PROJECT_VERSION}.docs.zip
               html)
-    
-    if (${ADD_DOX_PDF}) 
+
+    if(${ADD_DOX_PDF})
       add_custom_target(
         ${ADD_DOX_TARGET}_pdf
-        DEPENDS 
-          ${ADD_DOX_TARGET}
+        DEPENDS ${ADD_DOX_TARGET_DEPENDS} ${ADD_DOX_TARGET}
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${ADD_DOX_TARGET}/latex
-        COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/scripts/build/pdf_latex/compile_latex.sh ${ADD_DOX_TARGET}_${CMAKE_PROJECT_VERSION}
-      )
+        COMMAND
+          ${CMAKE_CURRENT_SOURCE_DIR}/scripts/build/pdf_latex/compile_latex.sh
+          ${ADD_DOX_TARGET}_${CMAKE_PROJECT_VERSION})
 
       add_dependencies(doxygen_pdf ${ADD_DOX_TARGET}_pdf)
-    endif()        
+    endif()
 
     add_dependencies(doxygen_zip ${ADD_DOX_TARGET}_zip)
   endfunction()
+
+  # ############################################################################
+  # Configure Doxygen for UCL MQTT Reference Guide
+  # ############################################################################
+  set(REFERENCE_UCL_MQTT_FILE
+      ${CMAKE_CURRENT_BINARY_DIR}/components/uic_dotdot/readme_ucl_mqtt_reference.md
+  )
+  set(DOXYGEN_USE_MDFILE_AS_MAINPAGE ${REFERENCE_UCL_MQTT_FILE})
+  set_source_files_properties(${REFERENCE_UCL_MQTT_FILE} PROPERTIES GENERATED
+                                                                    TRUE)
+  add_doxygen_target(
+    TARGET
+    reference_ucl_mqtt
+    PROJECT_NAME
+    "Unify SDK UCL MQTT Reference"
+    TARGET_DEPENDS
+    ${REFERENCE_UCL_MQTT_FILE}
+    SRC_PATHS
+    ${REFERENCE_UCL_MQTT_FILE}
+    PDF
+    true)
+  unset(DOXYGEN_USE_MDFILE_AS_MAINPAGE)
+  unset(REFERENCE_UCL_MQTT_FILE)
+
   # ############################################################################
   # Configure Doxygen for libuic
   # ############################################################################
@@ -146,51 +169,35 @@ if(DOXYGEN_FOUND)
     PROJECT_NAME
     "Unify SDK Lib"
     IMAGE_PATHS
-    ${CMAKE_CURRENT_SOURCE_DIR}/doc/assets/img/
+    doc/assets/img/
     SRC_PATHS
     ${CMAKE_SOURCE_DIR}/doc/doxygen
-    ${CMAKE_BINARY_DIR}/components/dotdot_mqtt/src
     ${LIBUIC_DOXYGEN_SRC})
   # ############################################################################
   # Configure Doxygen for ZPC
   # ############################################################################
   # The aliases syntax are pretty ugly. Want to use DOXYGEN_VERBATIM_VARS
-  # feature but it's only available with CMake v3.11+
-  set(DOXYGEN_ALIASES
-      "serial_rx{1}=> *Serial API (ZW &rarr\; host):*&nbsp\;&nbsp\; `\\1`<br/>"
-      "serial_tx{1}=> *Serial API (host &rarr\; ZW):*&nbsp\;&nbsp\; `\\1`<br/>"
-      "zgw_name=\"@xrefitem zgw_namemap \\\"Legacy Z/IP Gateway Serial API Name\\\" \\\"Legacy Z/IP Gateway Serial API Names\\\"\""
-  )
-
+  # feature but it's only available with CMake v3.11+ set(DOXYGEN_ALIASES
+  # "serial_rx{1}=> *Serial API (ZW &rarr\; host):*&nbsp\;&nbsp\; `\\1`<br/>"
+  # "serial_tx{1}=> *Serial API (host &rarr\; ZW):*&nbsp\;&nbsp\; `\\1`<br/>"
+  # "zgw_name=\"@xrefitem zgw_namemap \\\"\\\" \\\"\\\"\"")
   add_doxygen_target(
     TARGET
     doxygen_zpc
     PROJECT_NAME
-    "Z-Wave Protocol Controller"
+    "Z-Wave Protocol Controller Refrence"
     IMAGE_PATHS
-    ${CMAKE_CURRENT_SOURCE_DIR}/doc/assets/img/
-    ${CMAKE_CURRENT_SOURCE_DIR}/applications/zpc/doc/assets/img/
+    doc/assets/img/
+    applications/zpc/doc/assets/img/
     PLANTUML_PATHS
-    ${CMAKE_CURRENT_SOURCE_DIR}/applications/zpc/doc/assets/plantuml/
+    applications/zpc/doc/assets/plantuml/
     SRC_PATHS
-    ${CMAKE_BINARY_DIR}/components/dotdot_mqtt/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/applications/zpc
-    ${CMAKE_BINARY_DIR}/components/dotdot_mqtt/src
     ${CMAKE_BINARY_DIR}/applications/zpc/components/zwave_command_classes/src-gen
+    applications/zpc/components
     ${LIBUIC_DOXYGEN_SRC})
-  # ############################################################################
-  # Configure Doxygen for dev_cli
-  # ############################################################################
-  add_doxygen_target(
-    TARGET
-    doxygen_dev_cli
-    PROJECT_NAME
-    "Developer Command Line Interface"
-    IMAGE_PATHS
-    ${CMAKE_CURRENT_SOURCE_DIR}/doc/assets/img/
-    SRC_PATHS
-    ${CMAKE_CURRENT_SOURCE_DIR}/applications/dev_ui/dev_cli
-    ${LIBUIC_DOXYGEN_SRC})
+
+  unset(DOXYGEN_ALIASES)
+
   # ############################################################################
   # Configure Doxygen for zigpc
   # ############################################################################
@@ -200,7 +207,7 @@ if(DOXYGEN_FOUND)
     PROJECT_NAME
     "Zigbee Protocol Controller"
     IMAGE_PATHS
-    ${CMAKE_CURRENT_SOURCE_DIR}/doc/assets/img/
+    doc/assets/img/
     SRC_PATHS
     ${CMAKE_SOURCE_DIR}/applications/zigpc
     ${CMAKE_CURRENT_BINARY_DIR}/applications/zigpc/components/zcl_command_parser/include
@@ -214,6 +221,8 @@ if(DOXYGEN_FOUND)
   list(FILTER USERGUIDE_MD_FILES1 EXCLUDE REGEX "zigpc.md$")
   file(GLOB USERGUIDE_MD_FILES2 applications/dev_ui/dev_gui/*.md
        LIST_DIRECTORIES true)
+  file(GLOB USERGUIDE_MD_FILES3 applications/aox/applications/*/*.md
+       LIST_DIRECTORIES true)
 
   add_doxygen_target(
     TARGET
@@ -221,20 +230,28 @@ if(DOXYGEN_FOUND)
     PROJECT_NAME
     "Unify SDK User Guide"
     IMAGE_PATHS
-    ${CMAKE_CURRENT_SOURCE_DIR}/doc/assets/img/
-    ${CMAKE_CURRENT_SOURCE_DIR}/applications/dev_ui/dev_gui/doc/assets/img/
-    ${CMAKE_CURRENT_SOURCE_DIR}/applications/zpc/doc/assets/img/
-    ${CMAKE_CURRENT_SOURCE_DIR}/applications/zigpc
+    doc/assets/img/
+    applications/dev_ui/dev_gui/doc/assets/img/
+    applications/zpc/doc/assets/img/
+    applications/zigpc
     SRC_PATHS
     README.md
+    FAQ.md
+    release_notes.md
     doc/readme_developer.md
+    doc/readme_user.md
+    doc/readme_building.md
     doc/overview.md
-    doc/readme_uic_application_developer.md
+    doc/readme_rust.md
+    doc/readme_debug.md
     docker/readme_developer.md
     ${USERGUIDE_MD_FILES2}
     ${USERGUIDE_MD_FILES1}
+    ${USERGUIDE_MD_FILES3}
     doc/standards/known-abbreviations.md
-    PDF 
+    doc/standards/coding-standard.md
+    applications/zigpc/components/zigpc_gateway/libs/zigbee_host/readme.libzigbee_host.zigpc.md
+    PDF
     true)
   unset(DOXYGEN_USE_MDFILE_AS_MAINPAGE)
 

@@ -1,6 +1,6 @@
 [Unit]
 Description=UIC User Interface API
-Requires=mosquitto.service
+After=network.target mosquitto.service
 
 [Service]
 ExecStart=/usr/bin/dev-gui-api
@@ -9,6 +9,11 @@ Restart=on-failure
 KillMode=process
 User=uic
 Group=uic
+StandardOutput=null
+
+Environment=HTTPS=true
+Environment=SSL_CRT_FILE=/var/lib/dev-gui/cert.pem
+Environment=SSL_KEY_FILE=/var/lib/dev-gui/key.pem
 
 [Install]
 WantedBy=multi-user.target

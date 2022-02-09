@@ -148,7 +148,7 @@ sl_status_t
 
 /**
  * @brief zigpc_group_map_clear
- * Clears the group map of all contents
+ * NOTE: DEPRECATED. Note used anymore.
  *
  * @return SL_STATUS_OK if able to empty the map of all contents
  */

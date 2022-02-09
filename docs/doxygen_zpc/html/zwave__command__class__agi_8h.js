@@ -15,6 +15,8 @@ var zwave__command__class__agi_8h =
     [ "association_group_name_report_frame_t", "group__agi__command__class.html#gaa2b9091562c7040a47d714daf483969a", null ],
     [ "zwave_command_class_agi_add_group_commands", "group__agi__command__class.html#ga791dc8783548560ba53938f58d108de2", null ],
     [ "zwave_command_class_agi_get_group_profile", "group__agi__command__class.html#ga7bdc4d2e68ecdba73f654abffc9cdd04", null ],
+    [ "zwave_command_class_agi_group_contains_listeners", "group__agi__command__class.html#gadf5ce7825b9ecdaa8a17f67c02cf98ce", null ],
     [ "zwave_command_class_agi_init", "group__agi__command__class.html#gaa9e6f9d002663692a6e4a70fabea028e", null ],
-    [ "zwave_command_class_agi_is_command_allowed_for_group", "group__agi__command__class.html#ga85c143e8b9ae0f55f3d5b0aecbafe905", null ]
+    [ "zwave_command_class_agi_is_command_allowed_for_group", "group__agi__command__class.html#ga85c143e8b9ae0f55f3d5b0aecbafe905", null ],
+    [ "zwave_command_class_agi_request_to_establish_association", "group__agi__command__class.html#ga37e62fc99515ab2f454c274075d96035", null ]
 ];

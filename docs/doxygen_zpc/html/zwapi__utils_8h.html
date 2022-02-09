@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_api/src/zwapi_utils.h File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave_api/src/zwapi_utils.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -92,16 +92,18 @@ $(document).ready(function(){initNavTree('zwapi__utils_8h.html',''); initResizab
 
 <p>Internal utility helpers for Z-Wave API.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="zwave__utils_8h_source.html">zwave_utils.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="zwave__node__id__definitions_8h_source.html">zwave_node_id_definitions.h</a>&quot;</code><br />
 </div>
 <p><a href="zwapi__utils_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6d88e95211c894df11d77b32fb987108"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwapi__utils_8h.html#a6d88e95211c894df11d77b32fb987108">zwapi_read_node_id</a> (uint8_t *pData, uint8_t *index)</td></tr>
+<tr class="memitem:a6d88e95211c894df11d77b32fb987108"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwapi__utils_8h.html#a6d88e95211c894df11d77b32fb987108">zwapi_read_node_id</a> (uint8_t *pData, uint8_t *index)</td></tr>
 <tr class="memdesc:a6d88e95211c894df11d77b32fb987108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the node ID from buffer based on node ID basetype. Note that this helper also advances the index.  <a href="zwapi__utils_8h.html#a6d88e95211c894df11d77b32fb987108">More...</a><br /></td></tr>
 <tr class="separator:a6d88e95211c894df11d77b32fb987108"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeea16d7db2f976466a2c0f4aa9b0416f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwapi__utils_8h.html#aeea16d7db2f976466a2c0f4aa9b0416f">zwapi_write_node_id</a> (uint8_t *pData, uint8_t *index, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memitem:aeea16d7db2f976466a2c0f4aa9b0416f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwapi__utils_8h.html#aeea16d7db2f976466a2c0f4aa9b0416f">zwapi_write_node_id</a> (uint8_t *pData, uint8_t *index, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="memdesc:aeea16d7db2f976466a2c0f4aa9b0416f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the node ID in buffer based on node ID basetype. Note that this helper also advances the index.  <a href="zwapi__utils_8h.html#aeea16d7db2f976466a2c0f4aa9b0416f">More...</a><br /></td></tr>
 <tr class="separator:aeea16d7db2f976466a2c0f4aa9b0416f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -115,7 +117,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> zwapi_read_node_id </td>
+          <td class="memname"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> zwapi_read_node_id </td>
           <td>(</td>
           <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>pData</em>, </td>
@@ -160,7 +162,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em>&#160;</td>
         </tr>
         <tr>
@@ -181,7 +183,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_9376f99cbc649c5813b13d9244dc2fa3.html">zwave_api</a></li><li class="navelem"><a class="el" href="dir_997db13a0f767278426e906412983c64.html">src</a></li><li class="navelem"><a class="el" href="zwapi__utils_8h.html">zwapi_utils.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:26 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -7,6 +7,7 @@
 // www.silabs.com/about-us/legal/master-software-license-agreement. This
 // software is distributed to you in Source Code format and is governed by the
 // sections of the MSLA applicable to Source Code.
+#![doc(html_no_source)]
 
 use convert_case::{Case, Casing};
 use once_cell::sync::OnceCell;
@@ -32,7 +33,7 @@ static INIT_HANDLERS: OnceCell<Mutex<Vec<String>>> = OnceCell::new();
 ///    ZwaveConnectionInfo,
 ///    ZwaveHandlerConfig,
 /// };
-/// use zwave_controller::zwave_controller_encapsulation_scheme_t;
+/// use zwave_controller_sys::zwave_controller_encapsulation_scheme_t;
 ///
 /// const HANDLER_CONFIG: ZwaveHandlerConfig = ZwaveHandlerConfig {
 ///     minimal_scheme: zwave_controller_encapsulation_scheme_t::ZWAVE_CONTROLLER_ENCAPSULATION_NONE,
@@ -139,6 +140,7 @@ pub fn zwave_command_class(attr: TokenStream, item: TokenStream) -> TokenStream 
         #control_handler
         #support_handler
 
+        #[doc(hidden)]
         pub unsafe fn #init_func() -> sl_status_t {
             static mut initialized: bool = false;
             // Handle multiple initializations e.g. when zwave_set_default is executed
@@ -148,10 +150,10 @@ pub fn zwave_command_class(attr: TokenStream, item: TokenStream) -> TokenStream 
             initialized = true;
             #snake_case.set(#typ::default()).unwrap();
 
-            // fill c zwave_command_handler_t and pass handler
-            let new_handler = zwave_command_handler::zwave_command_handler_t {
-                support_handler: uic_proc_macro::as_extern_c!(#support),
-                control_handler: uic_proc_macro::as_extern_c!(#control),
+            // fill c zwave_command_handler_sys_t and pass handler
+            let new_handler = zwave_command_handler_sys::zwave_command_handler_t {
+                support_handler: unify_proc_macro::as_extern_c!(#support),
+                control_handler: unify_proc_macro::as_extern_c!(#control),
                 minimal_scheme: #config.minimal_scheme,
                 command_class: #config.command_class,
                 command_class_name: #config.command_class_name.as_ptr() as *const std::os::raw::c_char,
@@ -160,7 +162,7 @@ pub fn zwave_command_class(attr: TokenStream, item: TokenStream) -> TokenStream 
                 manual_security_validation: #config.manual_security_validation,
             };
             // Call my init
-            let status = zwave_command_handler::zwave_command_handler_register_handler(new_handler);
+            let status = zwave_command_handler_sys::zwave_command_handler_register_handler(new_handler);
             #snake_case.get_mut().unwrap().on_init(status)
             //status
         }
@@ -179,18 +181,20 @@ fn extern_c_handler(
     func_name: &Ident,
 ) -> proc_macro2::TokenStream {
     quote::quote! {
-        #[uic_proc_macro::generate_extern_c]
+        #[unify_proc_macro::generate_extern_c]
         fn #func_name(
-            connection: *const zwave_controller::zwave_controller_connection_info_t,
+            connection: *const zwave_controller_sys::zwave_controller_connection_info_t,
             data: &[u8],
         ) -> sl_status_t {
             use std::convert::TryInto;
+            use unify_log_sys::{declare_app_name, log_warning};
+            declare_app_name!("rust_command_classes");
             match data.try_into() {
                 Ok(frame) => {
                     unsafe { #name.get_mut().unwrap().#member_name((*connection).into(), frame) }
                 },
                 Err(e) => {
-                    uic_log::log_warning("rust_command_classes", format!("could not convert incoming frame: {}", e));
+                    log_warning!("could not convert incoming frame: {}", e);
                     1
                 }
             }
@@ -213,9 +217,10 @@ pub fn initialize_zwave_command_classes(_item: TokenStream) -> TokenStream {
     let mutex = INIT_HANDLERS.get_or_init(|| Mutex::new(Vec::new()));
     if let Ok(ref mut list) = mutex.try_lock() {
         init_funcs.append_all((*list).iter().map(|fn_name| {
+            let declr_mod = quote::format_ident!("{}", &fn_name[..fn_name.len() - 5]);
             let declr = quote::format_ident!("{}", &fn_name);
             quote::quote! {
-                status |= #declr();
+                status |= #declr_mod::#declr();
             }
         }));
     }
@@ -225,6 +230,8 @@ pub fn initialize_zwave_command_classes(_item: TokenStream) -> TokenStream {
         pub unsafe extern "C" fn zwave_command_class_init_rust_handlers() -> u32 {
             let mut status = 0;
             #init_funcs
+
+
             status
         }
     };

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -277,8 +277,10 @@ void zwapi_serial_put_buffer(uint8_t *c, int len)
       fflush(log_fd);
       log_dir = 1;
     }
-    for (int i = 0; i < n; i++) {
-      fprintf(log_fd, "%02x ", (unsigned int)(c[i] & 0xFF));
+    if (n <= len) {
+      for (int i = 0; i < n; i++) {
+        fprintf(log_fd, "%02x ", (unsigned int)(c[i] & 0xFF));
+      }
     }
     last_time = cur_time;
     fflush(log_fd);
@@ -294,8 +296,11 @@ bool zwapi_serial_is_file_available(void)
   FD_ZERO(&rfds);
   FD_SET(serial_fd, &rfds);
 
+  // From the manpage:
+  // If both fields of the timeval structure are zero, then
+  // select() returns immediately.  (This is useful for polling.)
   tv.tv_sec  = 0;
-  tv.tv_usec = 1000;
+  tv.tv_usec = 0;
 
   retval = select(serial_fd + 1, &rfds, NULL, NULL, &tv);
   // Don't rely on the value of tv now!

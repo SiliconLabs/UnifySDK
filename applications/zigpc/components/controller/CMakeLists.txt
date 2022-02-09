@@ -11,8 +11,10 @@ target_link_libraries(
   PRIVATE zigpc_attribute_management
           zigpc_zcl_util
           zigpc_datastore
+          zigpc_discovery
           zigpc_ota_zigbee
           zigpc_gateway
+          zigpc_group_mgmt
           zigpc_common
           zigpc_net_mgmt
           zigpc_ucl

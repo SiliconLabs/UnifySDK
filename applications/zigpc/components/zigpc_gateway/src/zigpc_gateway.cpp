@@ -119,7 +119,7 @@ sl_status_t zigpc_gateway_unload_sleepy_messages(const zigbee_eui64_t eui64)
 
   //send a check-in response only if there are messages stored
   if (zigpc_gateway_retrieve_num_stored(eui64) > 0) {
-    z3gatewaySendPollingCheckInResponse();
+    zigbeeHostSendPollingCheckInResponse();
   } else {
     status = SL_STATUS_EMPTY;
   }
@@ -247,16 +247,33 @@ sl_status_t zigpc_gateway_remove_node(const zigbee_eui64_t eui64)
   return status;
 }
 
-sl_status_t zigpc_gateway_interview_node(const zigbee_eui64_t eui64)
+sl_status_t zigpc_gateway_discover_device(const zigbee_eui64_t eui64)
 {
   sl_status_t status = SL_STATUS_OK;
 
   if (eui64 == nullptr) {
     status = SL_STATUS_NULL_POINTER;
   } else {
-    auto call = std::make_shared<gw::DeviceInterviewRequest>(eui64);
+    auto disc_dev_request = std::make_shared<gw::DiscoverDeviceRequest>(eui64);
 
-    gw::RequestQueue::getInstance().enqueue(call);
+    gw::RequestQueue::getInstance().enqueue(disc_dev_request);
+  }
+
+  return status;
+}
+
+sl_status_t zigpc_gateway_discover_endpoint(const zigbee_eui64_t eui64,
+                                            zigbee_endpoint_id_t endpoint_id)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  if (eui64 == nullptr) {
+    status = SL_STATUS_NULL_POINTER;
+  } else {
+    auto disc_ep_request
+      = std::make_shared<gw::DiscoverEndpointRequest>(eui64, endpoint_id);
+
+    gw::RequestQueue::getInstance().enqueue(disc_ep_request);
   }
 
   return status;
@@ -281,7 +298,7 @@ sl_status_t zigpc_gateway_add_ota_image(const char *filename,
 
 void zigpc_gateway_command_print_info(void)
 {
-  z3gatewayCommandPrintInfo();
+  zigbeeHostCommandPrintInfo();
 }
 
 void zigpc_gateway_command_print_nwk_key(void)
@@ -289,7 +306,7 @@ void zigpc_gateway_command_print_nwk_key(void)
   EmberKeyStruct nwk_key;
 
   EmberStatus status
-    = z3gatewayGetEmberKey(EMBER_CURRENT_NETWORK_KEY, &nwk_key);
+    = zigbeeHostGetEmberKey(EMBER_CURRENT_NETWORK_KEY, &nwk_key);
   if (status != EMBER_SUCCESS) {
     sl_log_error(LOG_TAG, "Failed to read NWK key: EmberStatus(0x%X)", status);
   } else {
@@ -303,4 +320,16 @@ void zigpc_gateway_command_print_nwk_key(void)
     }
     sl_log_info(LOG_TAG, "NWK Key:%s", nwk_key_str);
   }
+}
+
+bool zigpc_gateway_install_code_is_valid(const uint8_t *install_code,
+                                         uint8_t install_code_length)
+{
+  bool is_valid
+    = zigbeeHostTrustCenterInstallCodeValid(install_code, install_code_length);
+  if (!is_valid) {
+    sl_log_warning(LOG_TAG, "Install code verification failed");
+  }
+
+  return is_valid;
 }

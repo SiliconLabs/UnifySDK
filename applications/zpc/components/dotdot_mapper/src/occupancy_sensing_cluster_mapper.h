@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,13 +12,9 @@
  *****************************************************************************/
 
 /**
- * @defgroup occupancy_sensing_cluster_mapper OccupancySensing cluster mapper
+ * @defgroup occupancy_sensing_cluster_mapper OccupancySensing Cluster Mapper
  * @ingroup dotdot_mapper
- * @brief Maps the OccupancySensing cluster to known command classes
- *
- * This mapper will map the Z-Wave Notification Command Class,
- * events Door Open / Door Close (Type Access Control) to the OccupancySensing cluster,
- * attribute Occupancy
+ * @brief Maps OccupancySensing Cluster incoming Commands to attribute modifications.
  *
  * @{
  */

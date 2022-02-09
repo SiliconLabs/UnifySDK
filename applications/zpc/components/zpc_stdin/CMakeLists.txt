@@ -11,11 +11,13 @@ target_link_libraries(
   PUBLIC zpc_utils
          zwave_controller
          zwave_tx_groups
+         uic_attribute_resolver
+         unify_attribute_poll_target
          zwave_command_classes
+         zwave_command_handler
          ucl_mqtt
          uic_stdin
          uic_mqtt
-  PRIVATE
-    uic_ota)
+  PRIVATE uic_ota)
 
 add_subdirectory(test)

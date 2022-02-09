@@ -17,6 +17,8 @@ var group__process =
     ] ],
     [ "data", "group__process.html#ga43a278d13284fb3412e9eee1db1d967e", null ],
     [ "DEBUG", "group__process.html#gad72dbcf6d0153db1b8d8a58001feed83", null ],
+    [ "EVENT_TIME_ERROR", "group__process.html#gacee0c6bdbc9b71d2de85f04872ccd11e", null ],
+    [ "EVENT_TIME_WARNING", "group__process.html#gaa2bf075ea3a80fa55f95e9fc623006d1", null ],
     [ "LOG_TAG", "group__process.html#ga7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "PRINTF", "group__process.html#ga1f464e950a4fa11e8821b5c725921a15", null ],
     [ "PROCESS", "group__process.html#ga27e9b6fc13f0438e37a198f69b38b4cf", null ],

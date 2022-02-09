@@ -17,7 +17,7 @@
  * @ingroup zigpc_gateway
  * @brief Observer API for getting events from zigpc_gateway
  *
- * In order to listen to events from Z3Gateway, ZigPC Gateway allows components
+ * In order to listen to events from ZigbeeHost, ZigPC Gateway allows components
  * to register observer functions that receive an event type and associated data
  *
  * @{
@@ -112,7 +112,7 @@ enum zigpc_gateway_notify_event {
    * The protocol controller sends out a configure reporting message
    * to clusters for expected attributes. The destination node responds
    * with a 'configure reporting response' ZCL message
-  **/ 
+  **/
   ZIGPC_GATEWAY_NOTIFY_CONFIGURE_REPORTING_RESPONSE,
 
   /**
@@ -144,12 +144,13 @@ enum zigpc_gateway_notify_event {
  * @brief Event data passed after successful Gateway network initialization.
  *
  */
-struct zigpc_gateway_on_network_init {
+typedef struct zigpc_gateway_on_network_init {
   zigbee_eui64_t zigpc_eui64;                 /**< Gateway EUI64 */
+  zigbee_endpoint_id_t zigpc_endpoint_id;     /**< Gateway Endpoint ID */
   zigbee_panid_t zigpc_panid;                 /**< Network PAN ID */
   zigbee_ext_panid_t zigpc_ext_panid;         /**< Network extended Pan ID */
   zigbee_radio_channel_t zigpc_radio_channel; /**<  Network radio channel */
-};
+} zigpc_gateway_on_network_init_t;
 
 /**
  * @brief Event data passed after successful node addition to the Gateway
@@ -175,7 +176,8 @@ typedef struct {
  */
 typedef struct {
   zigbee_eui64_t eui64;   /**< Discovered device EUI64 in big endian */
-  uint8_t endpoint_count; /**< Number of endpoints supported by device */
+  uint8_t endpoint_count; /**< Number of endpoints supported */
+  zigbee_endpoint_id_t *endpoint_list; /**< List of endpoints supported */
 } zigpc_gateway_on_node_discovered_t;
 
 /**
@@ -249,7 +251,7 @@ typedef struct {
 } zigpc_gateway_on_ota_completed_t;
 
 /**
- * @brief Register an observer to be informed of Z3Gateway updates.
+ * @brief Register an observer to be informed of ZigbeeHost updates.
  * If the observer is already registered, nothing will be done.
  *
  * @param event           ZigPC Gateway notify event type
@@ -261,7 +263,7 @@ sl_status_t
                                   zigpc_observer_callback_t callback);
 
 /**
- * @brief Unregister an observer from Z3Gateway updates.
+ * @brief Unregister an observer from ZigbeeHost updates.
  * If the observer is not found, nothing will be done.
  *
  * @param event           ZigPC Gateway notify event type

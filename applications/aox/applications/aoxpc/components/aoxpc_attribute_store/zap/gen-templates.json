@@ -1,0 +1,18 @@
+{
+  "name": "AoX Locator Configuration",
+  "version": "AoXLocator-v1",
+  "override": "../../../../../../../components/uic_dotdot/zap/addon-override.js",
+  "helpers": ["addon-helper.js"],
+  "templates": [
+    {
+      "path": "aoxpc_attribute_store_dotdot_attributes.h.zapt",
+      "name": "Definitions for the Attribute Store helper functions for DotDot attributes",
+      "output": "include/aoxpc_attribute_store_dotdot_attributes.h"
+    },
+    {
+      "path": "aoxpc_attribute_store_dotdot_attributes.c.zapt",
+      "name": "Implementation of the Attribute Store helper functions for DotDot attributes",
+      "output": "src/aoxpc_attribute_store_dotdot_attributes.c"
+    }
+  ]
+}

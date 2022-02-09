@@ -1,6 +1,6 @@
 /*******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
@@ -73,11 +73,10 @@ void test_init()
   TEST_ASSERT_TRUE_MESSAGE(
     create_file_with_content(TEST_CONFIG_FILE, ini_content),
     "Failed to create config file");
-  TEST_ASSERT_EQUAL_MESSAGE(
-    0,
-    zpc_config_init(),
-    "zpc_config_init failed");
-  config_parse(sizeof(argv_inject) / sizeof(char *), argv_inject, "test version");
+  TEST_ASSERT_EQUAL_MESSAGE(0, zpc_config_init(), "zpc_config_init failed");
+  config_parse(sizeof(argv_inject) / sizeof(char *),
+               argv_inject,
+               "test version");
   zpc_config_fixt_setup();
   TEST_ASSERT_EQUAL_STRING("localhost", zpc_get_config()->mqtt_host);
   TEST_ASSERT_EQUAL(2000, zpc_get_config()->mqtt_port);

@@ -1,0 +1,82 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+// Includes from this component
+#include "dotdot_mqtt_supported_generated_commands.h"
+
+// Unify includes
+#include "uic_mqtt.h"
+
+// Generic includes
+#include <string>
+#include <vector>
+#include <nlohmann/json.hpp>
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+
+/**
+ * @brief Sends/Publishes a the SupportedGenerated commands for
+ * the {{label}} cluster for a UNID/Endpoint
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints label)}}epID/{{/unless}}{{asPublicationName label}}/SupportedGeneratedCommands
+ *
+ * @param unid      The UNID of the node on behalf of which the advertisment is made
+ * {{#unless (clusterWithoutEndpoints label)}}
+ * @param endpoint  The Endpoint ID of the node on behalf of which the advertisment is made
+ * {{/unless}}
+ * @param command_list      Struct pointer with the fields value indicating if
+ *                          individual commands can be generated.
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower label}}_publish_supported_generated_commands(
+  const dotdot_unid_t unid{{#unless (clusterWithoutEndpoints label)}},
+  const dotdot_endpoint_id_t endpoint{{/unless}},
+  const {{dotdot_prefix}}_{{asSnakeCaseLower label}}_supported_commands_t *command_list)
+{
+  std::string topic = "ucl/by-unid/" + std::string(unid);
+  {{#if (clusterWithoutEndpoints label)}}
+  // No endpoint for this topic
+  {{else}}
+  topic +=  "/ep"+ std::to_string(endpoint);
+  {{/if}}
+  topic +=  "/{{asPublicationName label}}/SupportedGeneratedCommands";
+
+  // Assemble of vector of strings for the Supported Commands:
+  std::vector<std::string> command_vector;
+  {{#zcl_commands}}
+  if (command_list->{{asSnakeCaseLower label}} == true) {
+    command_vector.push_back(std::string("{{label}}"));
+  }
+  {{/zcl_commands}}
+  if (command_list->write_attributes == true) {
+    command_vector.push_back(std::string("WriteAttributes"));
+  }
+
+  // JSONify, then Stringify
+  nlohmann::json json_payload;
+  json_payload["value"] = command_vector;
+  std::string string_payload = json_payload.dump();
+
+  // Publish to MQTT
+  uic_mqtt_publish(topic.c_str(),
+                   string_payload.c_str(),
+                   string_payload.length(),
+                   true);
+
+}
+
+{{/if}}
+{{/zcl_clusters}}

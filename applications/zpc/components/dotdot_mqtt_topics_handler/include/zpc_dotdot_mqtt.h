@@ -13,7 +13,8 @@
 
 /**
  * @defgroup zpc_dotdot_mqtt ZPC Dotdot MQTT
- * @brief ZPC Specific part of the Dotdot MQTT component.
+ * @ingroup zpc_components
+ * @brief ZPC Specific part of the @ref dotdot_mqtt component.
  *
  * This component is responsible for publishing the state of the ZCL attributes
  * for each unid/endpoint in the ZPC's network

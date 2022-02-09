@@ -18,6 +18,7 @@
 #include "datastore_fixt.h"
 #include "attribute_store_fixt.h"
 #include "config.h"
+#include "zpc_config.h"
 #include "uic_version.h"
 #include "attribute.hpp"
 #include "attribute_store.h"
@@ -40,6 +41,10 @@ static sl_status_t init(int argc, char *argv[], int *target_version)
                  "Version to convert the current datastore file to.",
                  ZPC_DATASTORE_VERSION);
 
+  config_add_string(CONFIG_KEY_ZPC_DATASTORE_FILE,
+                    "ZPC datastore database file",
+                    DEFAULT_ZPC_DATASTORE_FILE);
+
   if (SL_STATUS_OK != config_parse(argc, argv, UIC_VERSION)) {
     sl_log_info(LOG_TAG,
                 "Could not parse configuration. "
@@ -56,7 +61,18 @@ static sl_status_t init(int argc, char *argv[], int *target_version)
     return SL_STATUS_FAIL;
   }
 
-  if (SL_STATUS_OK != datastore_fixt_setup()) {
+  const char *datastore_file;
+  if (SL_STATUS_OK
+      != config_get_as_string(CONFIG_KEY_ZPC_DATASTORE_FILE, &datastore_file)) {
+    sl_log_error(LOG_TAG,
+                 "You need to specify a valid datastore file path. "
+                 "E.g. zpc_database_tool --" CONFIG_KEY_ZPC_DATASTORE_FILE
+                 " " UIC_VAR_DIR "/zpc.db "
+                 "Please verify your configuration.");
+    return SL_STATUS_FAIL;
+  }
+
+  if (SL_STATUS_OK != datastore_fixt_setup(datastore_file)) {
     sl_log_error(LOG_TAG,
                  "Could not initialize the datastore. "
                  "Please verify your configuration.");

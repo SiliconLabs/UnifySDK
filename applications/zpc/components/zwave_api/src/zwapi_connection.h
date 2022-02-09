@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -13,7 +13,7 @@
 
 /**
  * @file zwapi_connection.h
- * @brief API to connect and send frames to the Z-Wave module 
+ * @brief API to connect and send frames to the Z-Wave module
  * using the serial port.
  */
 
@@ -39,14 +39,14 @@ typedef enum {
   ZWAPI_CONNECTION_STATUS_RX_TIMEOUT,      ///< Rx timeout has happened
   ZWAPI_CONNECTION_STATUS_TX_TIMEOUT,  ///< Tx timeout (waiting for ACK) has happened
   ZWAPI_CONNECTION_STATUS_TX_NAK,  ///< A frame was sent and the other end issued a NAK
-  ZWAPI_CONNECTION_STATUS_TX_CAN,  ///< A frame was sent and the other end issued a CAN, i.e. a collision occured
+  ZWAPI_CONNECTION_STATUS_TX_CAN,  ///< A frame was sent and the other end issued a CAN, i.e. a collision occurred
 } zwapi_connection_status_t;
 
 /**
  * @brief Initialize the zwapi_connection to the Z-Wave module.
- * 
+ *
  * @param serial_port String representing the serial device path
- * @returns integer file descriptor for the serial device. 
+ * @returns integer file descriptor for the serial device.
  * the value will be greater than 0 if successful.
  *
  * @zgw_name ConInit
@@ -62,21 +62,21 @@ void zwapi_connection_shutdown();
 
 /**
  * @brief Closes and re-initializes the zwapi_connection to the Z-Wave module.
- * @returns integer file descriptor for the serial device. 
+ * @returns integer file descriptor for the serial device.
  * the value will be greater than 0 if successful.
  *****************************************************************************/
 int zwapi_connection_restart();
 
 /**
  * @brief Transmit a frame via serial port by adding SOF, Len, Type, cmd and Checksum.
- * 
- * @param cmd The command to be executed by the Z-Wave module, using FUNC_ID 
+ *
+ * @param cmd The command to be executed by the Z-Wave module, using FUNC_ID
  * defines
  * @param type The type of frame, either Request 0x00 or Response 0x01
  * @param Buf A pointer to the command payload buffer
  * @param len The length of the data contained in the payload buffer
  * @param ack_needed true if we expect an Ack back for this frame.
- * 
+ *
  * A frame on the serial line consist of:
  * <b><tt>SOF-Len-Type-Cmd-DATA-Chksum</tt></b>, where:
  *  - @b SOF is Start of frame byte

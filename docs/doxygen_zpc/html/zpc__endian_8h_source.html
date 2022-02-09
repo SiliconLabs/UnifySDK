@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zpc_utils/include/zpc_endian.h Source File</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zpc_utils/include/zpc_endian.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('zpc__endian_8h_source.html',''); initR
 <div class="contents">
 <a href="zpc__endian_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * # License</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2020 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2021 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ******************************************************************************</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * The licensor of this software is Silicon Laboratories Inc. Your use of this</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * software is governed by the terms of Silicon Labs Master Software License</span></div>
@@ -109,25 +109,29 @@ $(document).ready(function(){initNavTree('zpc__endian_8h_source.html',''); initR
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define zpc_ntohl(x) ntohl(x)</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define zpc_ntohs(x) ntohs(x)</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;endian.h&gt;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#aa52e12df7e145e965ac2f1ded8b3501d">   35</a></span>&#160;<span class="preprocessor">#define zpc_ntohll(x) be64toh(x)</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#a5ed505084e929ee84239ad80df5e5a7b">   36</a></span>&#160;<span class="preprocessor">#define zpc_ntohl(x)  be32toh(x)</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#a732b0f95d73d1575b39c81a4fdc7dbe4">   37</a></span>&#160;<span class="preprocessor">#define zpc_ntohs(x)  be16toh(x)</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#a4cef7ee0f709ec18384c1d0873245fc6">   40</a></span>&#160;<span class="preprocessor">#define zpc_htohnll(x) zpc_ntohll(x)</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#ab834a238f4a687737bbe8a83a10bb121">   41</a></span>&#160;<span class="preprocessor">#define zpc_htohnl(x) zpc_ntohl(x)</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#ac6c7135c5ebae5a090a93164e9b86311">   42</a></span>&#160;<span class="preprocessor">#define zpc_htohns(x) zpc_ntohs(x)</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#if !defined(ZWAVE_BUILD_SYSTEM)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">  #include &lt;endian.h&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">  #include &lt;c_endianness.h&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif  // ZWAVE_BUILD_SYSTEM</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#aa52e12df7e145e965ac2f1ded8b3501d">   39</a></span>&#160;<span class="preprocessor">#define zpc_ntohll(x) be64toh(x)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#a5ed505084e929ee84239ad80df5e5a7b">   40</a></span>&#160;<span class="preprocessor">#define zpc_ntohl(x)  be32toh(x)</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#a732b0f95d73d1575b39c81a4fdc7dbe4">   41</a></span>&#160;<span class="preprocessor">#define zpc_ntohs(x)  be16toh(x)</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif  //ZPC_ENDIAN_H</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#a4cef7ee0f709ec18384c1d0873245fc6">   44</a></span>&#160;<span class="preprocessor">#define zpc_htohnll(x) zpc_ntohll(x)</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#ab834a238f4a687737bbe8a83a10bb121">   45</a></span>&#160;<span class="preprocessor">#define zpc_htohnl(x) zpc_ntohl(x)</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="zpc__endian_8h.html#ac6c7135c5ebae5a090a93164e9b86311">   46</a></span>&#160;<span class="preprocessor">#define zpc_htohns(x) zpc_ntohs(x)</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif  //ZPC_ENDIAN_H</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_54567e4ebcfe372d0538afdd0fb8ee58.html">zpc_utils</a></li><li class="navelem"><a class="el" href="dir_43f180f3a8900e7bbb11214b04c041fd.html">include</a></li><li class="navelem"><a class="el" href="zpc__endian_8h.html">zpc_endian.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:10 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -24,6 +24,7 @@
 #include "zwave_command_handler.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_controller_utils.h"
+#include "zwave_controller_storage.h"
 #include "zwave_network_management.h"
 #include "zwave_command_classes_utils.h"
 #include "ctimer.h"
@@ -35,7 +36,6 @@
 #include "zwave_unid.h"
 #include "zwave_controller_command_class_indices.h"
 #include "sl_log.h"
-#include "zwave_security_validation.h"
 
 constexpr char LOG_TAG[] = "zwave_command_class_inclusion_controller";
 constexpr clock_time_t ON_NEW_NODE_ADDED_TILL_INITIATE_COMMAND_RECEIVED_TIMEOUT
@@ -136,7 +136,7 @@ static void zwave_command_class_inclusion_controller_trigger_proxy_inclusion(
   zwave_node_id_t node_id, zwave_node_info_t nif)
 {
   auto it = node_ids_inclusion_request.find(node_id);
-  if (zwave_security_validation_is_node_s2_capable(node_id)) {
+  if (zwave_controller_storage_is_node_s2_capable(node_id)) {
     if (SL_STATUS_OK
         == zwave_network_management_start_proxy_inclusion(
           it->first,

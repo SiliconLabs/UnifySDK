@@ -13,7 +13,7 @@
 
 /**
  * @defgroup zcl_group_cluster_server ZCL Group Cluster server
- * @ingroup Pretends that all our nodes support the ZCL Group cluster
+ * @ingroup zcl_cluster_servers
  * @brief Pretends that all our nodes support the ZCL Group cluster
  *
  * This will listen to ucl/by-unid/&lt;unid&gt;/ep&lt;id&gt;/Groups/Commands, save data

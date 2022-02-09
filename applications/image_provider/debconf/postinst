@@ -1,10 +1,12 @@
 #!/bin/sh
-# postinst script for uic_provider
+# postinst script for uic-image-provider
 #
 # see: dh_installdeb(1)
 
 set -e
-UIC_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic-image-provider/"
+UIC_IMP_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic-image-provider/"
+UIC_IMP_METAFILE="images.json"
+UIC_IMP_METAFILE_PATH=$UIC_IMP_VAR_DIR$UIC_IMP_METAFILE
 
 setup_uic_user() {
         if ! getent group uic >/dev/null; then
@@ -12,20 +14,30 @@ setup_uic_user() {
         fi
 
         if ! getent passwd uic >/dev/null; then
-                adduser --quiet --system --no-create-home --ingroup uic --home "$UIC_VAR_DIR" --shell /usr/sbin/nologin uic
+                adduser --quiet --system --no-create-home --ingroup uic --home "$UIC_IMP_VAR_DIR" --shell /usr/sbin/nologin uic
                 usermod -a -G dialout uic
         fi
 }
 
 fix_permissions() {
-        mkdir -p $UIC_VAR_DIR
-        chown uic $UIC_VAR_DIR
+        mkdir -p $UIC_IMP_VAR_DIR
+        chown uic $UIC_IMP_VAR_DIR
+}
+
+create_images_json() {
+        if [ ! -f $UIC_IMP_METAFILE_PATH ]; then
+                echo "{" >> $UIC_IMP_METAFILE_PATH
+                echo '  "Version": "1",' >> $UIC_IMP_METAFILE_PATH
+                echo '  "Images": []' >> $UIC_IMP_METAFILE_PATH
+                echo "}" >> $UIC_IMP_METAFILE_PATH
+        fi
 }
 
 case "$1" in
         configure)
                 setup_uic_user
                 fix_permissions
+                create_images_json
         ;;
 
         abort-upgrade|abort-remove|abort-deconfigure)

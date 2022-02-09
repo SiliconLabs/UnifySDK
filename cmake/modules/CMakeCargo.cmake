@@ -1,382 +1,332 @@
-# Shamelessly (and legally) borrowed from
-# https://github.com/Devolutions/CMakeRust/
-function(cargo_print)
-  execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${ARGN}")
-endfunction()
+include(CargoMeta)
+include(RustBindingGenerator)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
+find_package(Python3 REQUIRED)
 
-# Create target for all cargo tests
-add_custom_target(cargo_test_all)
-add_custom_target(cargo_test_report_all)
-
-# determine libuic_dir. Buildservers can decide to redirect the output path for
-# rust components. Therefore make sure the LIBUIC_DIR set in the environment is
-# leading.
-if(DEFINED ENV{LIBUIC_DIR})
-  set(uic_dir $ENV{LIBUIC_DIR})
-else()
-  set(uic_dir ${CMAKE_BINARY_DIR}/components)
-endif()
-
-# This function handles the following functionality:
-#
-# * creates a cmake build target for the specified target. cmake target name:
-#   <target_name>_target.
-# * creates a cmake test target. cmake target name: <target_name>_test.
-# * creates a cmake test rapport target. cmake target name:
-#   <target_name>_test_report.
-# * creates a cmake doc target. cmake target name: <target_name>_doc_target.
-#
-# Rust targets can be configured in 2 flavors, as executables (default) or as
-# library.
-#
-# With passing the "LIB" flag instructs this function to build a library type.
-# The actual native library type is set inside of the Cargo.toml of the
-# corresponding crate. Couple of important notes!:
-#
-# * Static libraries only are supported at the moment.
-# * C/C++ native dependencies are omitted in the produced library.
-#
-# Implementation note: cargo is not able to build specific libraries in
-# isolation. this means that if 3 library builds are defined, cargo is called 3
-# times to build *all* libraries. As is looks is the additional build cost
-# minimal. cargo defers building if nothing changed. Though it can introduce
-# some unwanted side effects. think of build steps that write and read generated
-# files. the same happens for cargo test and doc targets.
-#
-# possible arguments:
 # cmake-format: off
-# +-----------+----------------------------------------------------------------------+----------+
-# | Argument  |                             Description                              | optional |
-# +-----------+----------------------------------------------------------------------+----------+
-# | NAME      | Target name                                                          |          |
-# | LIB       | Flag to specify the library output type. not specifying means a      | x        |
-# |           | executable is build                                                  |          |
-# | EXT_LIB   | List of cmake targets this target depends on                         | x        |
-# | INTO      | Merge library with specified library                                 | x        |
-# +-----------+----------------------------------------------------------------------+----------+
+# This file specifies the build of rust packages. For usage, skip to function
+# `cargo_build`. The goal designing these scripts was to be able to build rust
+# packages as fast as possible. We try to achieve this by having as less as
+# custom targets as possible. And let cargo do as much as buildsystem work for
+# us. "Dont fight the cargo buildsystem!"
+# 1. Cargo is quite aggressive in flagging packages dirty, a slight change in an
+#    environment variable or configuration will trigger an rebuild. more about
+#    this in Cargo Fingerprinting.
+# 2. Cargo manages a lot of build configuration. based on experience we saw that
+#    its very hard to inject custom configuration via additional flags without
+#    it conflicted or even simply being ignored. Rust builds are dependant on
+#    all native cpp/c dependencies. This means before the start all native cpp/c
+#    libraries are build.
+#
+# Building of these packages is done in several steps.
+# 1. All Rust binaries and libs are build -> cmake target: cargo_build
+# 2. All Rust tests are build             -> cmake target: cargo_test
+# 3. All Rust doc's are build             -> cmake target: cargo_doc
+#
+# In theory you dont have to do anything in order for your new rust package
+# to get build as Cargo will handle this for us. However you still might want
+# to declare your rust packages with `cargo_build` as it enables more
+# features:
+# - export of your rust package as actual cmake targets. see `add_cmake_target`
+#   this means you can integrate it easy into other cmake targets.
+# - debian package generation.
+# - building a single rust package.
+#
+# These targets will be created on top of the cargo_build.
+#
+# # Cargo Fingerprinting
+# Cargo generates fingerprint files which are used to determin if a rebuild
+# should happen. You can view the logging of them by passing the following
+# variable to a cargo build:
+# `CARGO_LOG=cargo::core::compiler::fingerprint=trace' Part of this fingerprint
+# is a metadata hash, you can view it by passing `-vvv` to cargo build and looks
+# like `-C metadata=295d6d3a59043349 -C extra-filename=-295d6d3a59043349`. This
+# hash is based on various things including rust compiler version, rustc binary,
+# environment, package configuration, passed flags etc. Since we have no means
+# to overwrite this metadata hash we are quite limited in what we can do before
+# an rebuild happens. One of the reasons why we went for a cmake target to build
+# everything. We tried to build specific packages as well, but this again gave
+# poor performance.
+#
+# to see more specifically, whats inculded in the hash, you can take a look in
+# the source of cargo metadata:
+# src/cargo/core/compiler/context/compilation_files.rs:compute_metadata
+# https://github.com/rust-lang/cargo/issues/2904
+# https://github.com/rust-lang/cargo/issues/6529
+# https://github.com/rust-lang/cargo/pull/8623
+#
+# # ${PROJECT_SOURCE_DIR}/target
+# rust binaries are build in the target folder rather then the cmake build
+# output folder. Again to keep cargo default behavior. The rust build jobs will
+# symlink binaries to the cmake build output for backwards compatibility
+# reasons.
 # cmake-format: on
-function(cargo_build)
-  cmake_parse_arguments(CARGO "LIB" "NAME;SOURCE_DIR;WORKING_DIRECTORY"
-                        "EXT_LIB;INTO" "" ${ARGN})
-  string(REPLACE "-" "_" LIB_NAME ${CARGO_NAME})
 
-  # export linkage configuration
-  export_target_json(${LIB_NAME} CUSTOM EXT_LIB ${CARGO_EXT_LIB})
+# this function declares a cmake target for a given rust target. name of the
+# cmake target: <rust_name>_target. note: dont make cmake target names that are
+# equal to the imported location filename or output file.
+function(add_cmake_target CARGO_META_PACKAGE)
+  string(JSON CARGO_TARGET_NAME GET ${CARGO_META_PACKAGE} "name")
+  rust_native_target_file(${CARGO_META_PACKAGE} OUT_FILE)
+  rust_source_path(${CARGO_META_PACKAGE} TARGET_SRC)
 
-  if(NOT DEFINED CARGO_SOURCE_DIR)
-    set(CARGO_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-  endif()
-  if(NOT DEFINED CARGO_WORKING_DIRECTORY)
-    set(CARGO_WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-  endif()
-
-  if(WIN32)
-    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-      set(LIB_TARGET "x86_64-pc-windows-msvc")
-    else()
-      set(LIB_TARGET "i686-pc-windows-msvc")
-    endif()
-  elseif(ANDROID)
-    if(ANDROID_SYSROOT_ABI STREQUAL "x86")
-      set(LIB_TARGET "i686-linux-android")
-    elseif(ANDROID_SYSROOT_ABI STREQUAL "x86_64")
-      set(LIB_TARGET "x86_64-linux-android")
-    elseif(ANDROID_SYSROOT_ABI STREQUAL "arm")
-      set(LIB_TARGET "arm-linux-androideabi")
-    elseif(ANDROID_SYSROOT_ABI STREQUAL "arm64")
-      set(LIB_TARGET "aarch64-linux-android")
-    endif()
-  elseif(IOS)
-    set(LIB_TARGET "universal")
-  elseif(CMAKE_SYSTEM_NAME STREQUAL Darwin)
-    set(LIB_TARGET "x86_64-apple-darwin")
-  elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "armhf")
-    set(LIB_TARGET "armv7-unknown-linux-gnueabihf")
-  else()
-    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-      set(LIB_TARGET "x86_64-unknown-linux-gnu")
-    else()
-      set(LIB_TARGET "i686-unknown-linux-gnu")
-    endif()
+  rust_get_build_type(${CARGO_META_PACKAGE} TARGET_TYPE)
+  if(${TARGET_TYPE} STREQUAL "bin")
+    add_executable(${CARGO_TARGET_NAME}_target IMPORTED GLOBAL)
+  elseif(${TARGET_TYPE} STREQUAL "dylib" OR ${TARGET_TYPE} STREQUAL "lib")
+    add_library(${CARGO_TARGET_NAME}_target SHARED IMPORTED GLOBAL)
+  elseif(${TARGET_TYPE} STREQUAL "staticlib")
+    add_library(${CARGO_TARGET_NAME}_target STATIC IMPORTED GLOBAL)
+    # an attempt to add link libraries for a rust target.
+    set_target_properties(${CARGO_TARGET_NAME}_target
+                          PROPERTIES INTERFACE_LINK_LIBRARIES "pthread;dl")
   endif()
 
-  if(NOT CMAKE_BUILD_TYPE)
-    set(LIB_BUILD_TYPE "debug")
-  elseif(${CMAKE_BUILD_TYPE} STREQUAL "Release")
-    set(LIB_BUILD_TYPE "release")
-  else()
-    set(LIB_BUILD_TYPE "debug")
-  endif()
+  # workaround, a cmake target cant have a dependency on file ?!, therefore
+  # create an intermediate target <target>_fwd and let the cmake target depend
+  # on that
+  add_custom_target(${CARGO_TARGET_NAME}_fwd DEPENDS "${OUT_FILE}")
+  add_dependencies(${CARGO_TARGET_NAME}_target ${CARGO_TARGET_NAME}_fwd)
 
-  set(TARGET_OUTPUT
-      "${CMAKE_CURRENT_BINARY_DIR}/${LIB_TARGET}/${LIB_BUILD_TYPE}")
-  set(TARGET_EXECUTABLE ${TARGET_OUTPUT}/${CARGO_NAME})
-  set(LIB_FILE
-      "${TARGET_OUTPUT}/${CMAKE_STATIC_LIBRARY_PREFIX}${LIB_NAME}${CMAKE_STATIC_LIBRARY_SUFFIX}"
-  )
-
-  set(TEST_OUTPUT_FILE
-      "${CMAKE_BINARY_DIR}/Testing/${CARGO_NAME}/Test_rust.xml")
-  set(DOC_FILE "${CMAKE_BINARY_DIR}/doc_${CARGO_NAME}/${LIB_NAME}/index.hml")
-  set(DEB_FILE
-      "${CMAKE_BINARY_DIR}/${CARGO_NAME}_${CMAKE_PROJECT_VERSION_MAJOR}.${CMAKE_PROJECT_VERSION_MINOR}.${CMAKE_PROJECT_VERSION_PATCH}_${CMAKE_SYSTEM_PROCESSOR}.deb"
-  )
-
-  set(CARGO_ARGS "--target" ${LIB_TARGET})
-  if(${LIB_BUILD_TYPE} STREQUAL "release")
-    list(APPEND CARGO_ARGS "--release")
-  endif()
-  file(GLOB_RECURSE LIB_SOURCES "${CARGO_SOURCE_DIR}/*.rs")
-
-  set(APP_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV})
-  set(CARGO_ENV_COMMAND
-      ${CMAKE_COMMAND} -E env "CARGO_TARGET_DIR=${CMAKE_CURRENT_BINARY_DIR}"
-      "VERSION_STR=${APP_VERSION}" "LIBUIC_DIR=${uic_dir}")
-
-  if(CARGO_LIB)
-    set(TARGET_TYPE "--lib")
-    add_custom_command(
-      OUTPUT ${LIB_FILE}
-      COMMAND ${CARGO_ENV_COMMAND} ${CARGO_EXECUTABLE} ARGS build ${CARGO_ARGS}
-              ${TARGET_TYPE}
-      COMMAND
-        CMAKE_AR=${CMAKE_AR} CMAKE_RANLIB=${CMAKE_RANLIB}
-        ${PROJECT_SOURCE_DIR}/scripts/build/rust_strip_cxx_from_library.sh
-        ${LIB_FILE}
-      WORKING_DIRECTORY ${CARGO_WORKING_DIRECTORY}
-      DEPENDS ${LIB_SOURCES} ${CARGO_EXT_LIB}
-      COMMENT "Running: cargo build ${CARGO_NAME}")
-    add_custom_target(${CARGO_NAME}_target ALL DEPENDS ${LIB_FILE})
-    add_library(${CARGO_NAME}_lib STATIC IMPORTED GLOBAL)
-    add_dependencies(${CARGO_NAME}_lib ${CARGO_NAME}_target)
-
-    set_target_properties(${CARGO_NAME}_lib 
-      PROPERTIES IMPORTED_LOCATION ${LIB_FILE}
-      INTERFACE_INCLUDE_DIRECTORIES "")
-
-    if (CARGO_INTO)
-      foreach(target ${CARGO_INTO})
-        add_dependencies(${target} ${CARGO_NAME}_lib)
-        target_link_libraries(${target} PRIVATE Threads::Threads dl)
-        get_target_property(target_type ${target} TYPE)
-        if (target_type MATCHES "STATIC_LIBRARY" OR target_type MATCHES "SHARED_LIBRARY")
-          add_custom_command(TARGET ${target} POST_BUILD
-            COMMAND CMAKE_AR=${CMAKE_AR} 
-                ${PROJECT_SOURCE_DIR}/scripts/build/merge_libs.sh $<TARGET_FILE:${target}> ${LIB_FILE})
-        else()
-          message(WARNING "wrong target type for ${target}. cannot import ${CARGO_NAME}_target into ${target_type}")
-        endif()
-      endforeach()
-    endif()
-  else()
-    set(TARGET_TYPE "--bin" ${CARGO_NAME})
-    add_custom_target(${CARGO_NAME}_target ALL DEPENDS ${TARGET_EXECUTABLE})
-    add_custom_command(
-      OUTPUT ${TARGET_EXECUTABLE}
-      COMMAND ${CARGO_ENV_COMMAND} ${CARGO_EXECUTABLE} ARGS build ${CARGO_ARGS}
-              ${TARGET_TYPE}
-      WORKING_DIRECTORY ${CARGO_WORKING_DIRECTORY}
-      DEPENDS ${LIB_SOURCES} ${CARGO_EXT_LIB}
-      COMMENT "Running: cargo build ${CARGO_NAME}")
-  endif()
-
-  # Create target ${CARGO_NAME}_test to run cargo test on the target and output
-  # to stdout
-  add_custom_target(${CARGO_NAME}_test)
-  add_custom_command(
-    TARGET ${CARGO_NAME}_test
-    COMMAND ${CARGO_ENV_COMMAND} ${CARGO_EXECUTABLE} test ${CARGO_ARGS}
-            ${TARGET_TYPE}
-    WORKING_DIRECTORY ${CARGO_WORKING_DIRECTORY}
-    DEPENDS ${LIB_SOURCES} ${CARGO_EXT_LIB}
-    COMMENT "Running: cargo test ${CARGO_NAME}")
-  add_dependencies(cargo_test_all ${CARGO_NAME}_test)
-
-  # Create target ${CARGO_NAME}_test to run cargo test on the target and output
-  # junit report
-  add_custom_target(${CARGO_NAME}_test_report)
-  add_custom_command(
-    TARGET ${CARGO_NAME}_test_report
-    BYPRODUCTS ${TEST_OUTPUT_FILE}
-    COMMAND ${CMAKE_COMMAND} -E make_directory
-            ${CMAKE_BINARY_DIR}/Testing/${CARGO_NAME}
-    COMMAND
-      ${CARGO_ENV_COMMAND} ${CARGO_EXECUTABLE} test ${CARGO_ARGS} ${TARGET_TYPE}
-      -- -Z unstable-options --format json | cargo2junit > ${TEST_OUTPUT_FILE}
-    WORKING_DIRECTORY ${CARGO_WORKING_DIRECTORY}
-    DEPENDS ${LIB_SOURCES} ${CARGO_EXT_LIB}
-    COMMENT "Running: cargo test report ${CARGO_NAME}")
-  add_dependencies(cargo_test_report_all ${CARGO_NAME}_test_report)
-
-  if (CARGO_EXT_LIB)
-    add_dependencies(${CARGO_NAME}_test ${CARGO_EXT_LIB})
-  add_dependencies(${CARGO_NAME}_test_report ${CARGO_EXT_LIB})
-  endif()
-
-  add_custom_command(
-    OUTPUT ${DOC_FILE}
-    COMMAND ${CARGO_ENV_COMMAND} ${CARGO_EXECUTABLE} ARGS doc --no-deps
-            ${CARGO_ARGS}
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${TARGET_OUTPUT}/../doc
-            ${CMAKE_BINARY_DIR}/doc_${CARGO_NAME}
-    WORKING_DIRECTORY ${CARGO_WORKING_DIRECTORY}
-    DEPENDS ${LIB_SOURCES}
-    COMMENT "Running: cargo doc ${CARGO_NAME}")
-  add_custom_target(${CARGO_NAME}_doc_target DEPENDS ${DOC_FILE})
-
-  if(NOT CARGO_LIB)
-    # the cargo "deb" command expects binaries in the release output folder to
-    # make it work for debug, copy the debug output to the release output
-    #
-    # deb are build with --no-buid, this is because if we let cargo deb build it
-    # will try to release all cargo packages. Also non related crates
-    add_custom_command(
-      OUTPUT ${DEB_FILE}
-      COMMAND
-        LIB_BUILD_TYPE=${LIB_BUILD_TYPE}
-        deb_release_dir=${CMAKE_CURRENT_BINARY_DIR}/${LIB_TARGET}/release
-        binary_dir=${TARGET_OUTPUT}/${CARGO_NAME};
-        ${PROJECT_SOURCE_DIR}/scripts/build/rust_cp_for_cargo_deb.sh
-      COMMAND
-        ${CARGO_ENV_COMMAND} ${CARGO_EXECUTABLE} ARGS deb --no-strip --no-build
-        --deb-version ${APP_VERSION} --output ${DEB_FILE} --target ${LIB_TARGET}
-      WORKING_DIRECTORY ${CARGO_WORKING_DIRECTORY}
-      DEPENDS ${LIB_SOURCES} ${TARGET_EXECUTABLE}
-      COMMENT "Running: cargo deb ${CARGO_NAME}"
-      VERBATIM)
-    add_custom_target(${CARGO_NAME}_deb_target DEPENDS ${DEB_FILE})
-    add_dependencies(deb ${CARGO_NAME}_deb_target)
-  endif()
-
-  add_custom_command(
-    OUTPUT doc_${CARGO_NAME}/${CARGO_NAME}_${CMAKE_PROJECT_VERSION}.docs.zip
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    DEPENDS ${CARGO_NAME}_doc_target
-    COMMAND
-      zip -r -q
-      doc_${CARGO_NAME}/${CARGO_NAME}_${CMAKE_PROJECT_VERSION}.docs.zip
-      doc_${CARGO_NAME})
-
-  add_custom_target(
-    ${CARGO_NAME}_doc_zip_target
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    DEPENDS doc_${CARGO_NAME}/${CARGO_NAME}_${CMAKE_PROJECT_VERSION}.docs.zip
-    COMMAND
-      zip -r -q
-      doc_${CARGO_NAME}/${CARGO_NAME}_${CMAKE_PROJECT_VERSION}.docs.zip
-      doc_${CARGO_NAME})
-
-  add_dependencies(doxygen ${CARGO_NAME}_doc_target)
-  add_dependencies(doxygen_zip ${CARGO_NAME}_doc_zip_target)
+  set_target_properties(
+    ${CARGO_TARGET_NAME}_target
+    PROPERTIES IMPORTED_LOCATION ${OUT_FILE}
+               # rust project dont really have include directories.
+               # for now, just set the root folder of the rust project.
+               INCLUDE_DIRECTORIES ${TARGET_SRC}
+               WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 endfunction()
 
-# This function exports build configuration of specified cmake targets. Its used
-# for 2 Rust related tasks:
+function(rust_add_native_libs CARGO_DEPENDS)
+  list(APPEND new_libs ${CARGO_DEPENDS})
+  get_target_property(NATIVE_LIBS cargo_build NATIVE_LIBS)
+  if(NATIVE_LIBS)
+    list(APPEND new_libs ${NATIVE_LIBS})
+  endif()
+  set_target_properties(cargo_build PROPERTIES NATIVE_LIBS "${new_libs}")
 
-# * The rust compiler uses this data so it knows how to build against these
-#   native libraries.
-# * Rust has a bindings generators that produces binding files based on this
-#   exported data see rust's project: uic_bindgen.
+  foreach(ll ${CARGO_DEPENDS})
+    list(APPEND idirs "$<TARGET_PROPERTY:${ll},INCLUDE_DIRECTORIES>")
+    get_target_property(TARGET_DIR ${ll} BINARY_DIR)
+    list(APPEND new_search_paths ${TARGET_DIR})
+  endforeach()
+
+  get_target_property(includes cargo_build INTERFACE_INCLUDE_DIRECTORIES)
+  list(APPEND includes ${idirs})
+  set_target_properties(cargo_build PROPERTIES INTERFACE_INCLUDE_DIRECTORIES
+                                               "${includes}")
+
+  get_target_property(SEARCH_PATHS cargo_build SEARCH_PATHS)
+  if(SEARCH_PATHS)
+    list(APPEND new_search_paths ${SEARCH_PATHS})
+  endif()
+  set_target_properties(cargo_build PROPERTIES SEARCH_PATHS
+                                               "${new_search_paths}")
+endfunction()
+
+function(rust_add_package_for_build NAME)
+  get_target_property(packages cargo_build BUILD_PACKAGES)
+  if(packages)
+    list(APPEND packages "${NAME}")
+  else()
+    set(packages "${NAME}")
+  endif()
+  set_target_properties(cargo_build PROPERTIES BUILD_PACKAGES "${packages}")
+endfunction()
+
+function(build_rustflags RUSTFLAGS)
+  # warnings as errors
+  string(APPEND ARGS " --deny warnings ")
+
+  # search paths for where to find these libs
+  string(
+    APPEND
+    ARGS
+    " -L native=$<JOIN:$<REMOVE_DUPLICATES:$<TARGET_PROPERTY:cargo_build,SEARCH_PATHS>>, -L native=>"
+  )
+
+  # do not export local file directories into executables in case of non debug
+  # build
+  if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE MATCHES Debug)
+    # add these searchpaths to the binaries to let the dynamic linker know where
+    # to find the libs
+    string(
+      APPEND
+      ARGS
+      " -Clink-arg=-Wl,-rpath,$<JOIN:$<REMOVE_DUPLICATES:$<TARGET_PROPERTY:cargo_build,SEARCH_PATHS>>, -Clink-arg=-Wl,-rpath,>"
+    )
+  endif()
+  set(${RUSTFLAGS}
+      "${ARGS}"
+      PARENT_SCOPE)
+endfunction()
+
+# set cargo build arguments params: --locked    only build specific versions
+# defined in Cargo.lock file. the goal is to get more deterministic builds
+# --target    specify the target triple to build for.
+get_target_triple(CARGO_TARGET_TRIPLE)
+set(CARGO_ARGS "--release --locked --target ${CARGO_TARGET_TRIPLE}")
+
+if(APPLE)
+  set(LD_RUNTIME "DYLD_FALLBACK_LIBRARY_PATH")
+else()
+  set(LD_RUNTIME "LD_LIBRARY_PATH")
+endif()
+
+# set rust environment - improvememt: refactor the version_str out the
+# environment - via RUSTFLAGS all native libraries get passed.
+build_rustflags(RUST_FLAGS)
+
+# TODO Figure out a way to get rid of theese hardcoded flags. UIC-1460
 #
-# These configuration files are .json files that end up in the CMAKE_BINARY_DIR.
-# e.g. `my_configuration_bindings.json` uic_bindgen requires these files to be
-# there in order to function.
-#
-# These configuration files are .json files that end up in the CMAKE_BINARY_DIR.
-# e.g. `my_configuration_bindings.json` uic_bindgen requires these files to be
-# there in order to function.
-#
-# usage: `export_target_json(my_component)` - basic declaration. my_component
-# needs to be an valid cmake target.
-#
-# `export_target_json(my_component ALLOWLIST "my_component$" BLOCKLIST
-# "my_block.*")` - configure the rust binding generator to create bindings for
-# vars, functions and types that end of name "my_components". Dont create
-# bindings for vars, functions, types that start with "my_block" ALLOWLIST and
-# BLOCKLIST both accept regex in order to maniplutate of which items to create
-# bindings for.
-#
-# `export_target_json(my_component EXT_LIB my_depedent_component)` - with
-# EXT_LIB you can define adittional dependencies that are needed in order to
-# help the rust compiler to resolve dependant libraries. On default will
-# `export_target_json` already export all dependencies of the specified target.
-#
-# `export_target_json(my_component CUSTOM)` - flagging this method with CUSTOM
-# generates a configuration file of a non existing target. this can be useful in
-# very specific scnario's. be aware that cmake cannot reslove any link libraries
-# in this mode.
-#
-# possible arguments:
+# set(HARD_CODED_FLAGS "-ldl -lpthread ")
+
+# add cpp symbols. otherwise native libraries using c++lib functions will not be
+# able to link.
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  string(APPEND HARD_CODED_FLAGS " -l dylib=c++")
+else()
+  string(APPEND HARD_CODED_FLAGS " -l dylib=stdc++")
+endif()
+
+# Add linking with GCOV in case of gcov being enabled
+if(CMAKE_GCOV)
+  string(APPEND HARD_CODED_FLAGS " -lgcov")
+endif()
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  string(APPEND ARGS
+         " -Clink-arg=-Wl,--unresolved-symbols=ignore-in-object-files")
+endif()
+
+set(APP_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV})
+
+set(CARGO_ENV_COMMAND
+    ${CMAKE_COMMAND} -E env "VERSION_STR=${APP_VERSION}"
+    "RUSTFLAGS=${HARD_CODED_FLAGS} ${RUST_FLAGS}" "UIC_OUT=${CMAKE_BINARY_DIR}"
+    "${LD_RUNTIME}=$<JOIN:$<TARGET_PROPERTY:cargo_build,SEARCH_PATHS>,:>")
+
+# write environment to a file. developers can source this file to their local
+# shell, so they can execute cargo commands themselves.
+file(
+  GENERATE
+  OUTPUT ${CMAKE_BINARY_DIR}/unify_env.source
+  CONTENT
+    "#!/bin/sh
+    export VERSION_STR=\"${APP_VERSION}\"
+    export UIC_OUT=\"${CMAKE_BINARY_DIR}\"
+    export ${LD_RUNTIME}=\"$<JOIN:$<TARGET_PROPERTY:cargo_build,SEARCH_PATHS>,:>\"
+    export RUSTFLAGS=\"${HARD_CODED_FLAGS} ${RUST_FLAGS}\"")
+
+set(CARGO_PACKAGES
+    "-p $<JOIN:$<TARGET_PROPERTY:cargo_build,BUILD_PACKAGES>, -p >")
+
 # cmake-format: off
-# +-----------+--------------------------------------------------------------------------+----------+
-# | Argument  |                             Description                                  | optional |
-# +-----------+--------------------------------------------------------------------------+----------+
-# | 1st arg   | target to export configuration json for                                  |          |
-# | ALLOWLIST | allowing generation of bindings that match the specified regex string    | x        |
-# | BLOCKLIST | disallowing generation of bindings that match the specified regex string | x        |
-# | CUSTOM    | treat target as a custom target                                          | x        |
-# | EXT_LIB   | Additional link libraries to resolve rust targets                        | x        |
-# +-----------+--------------------------------------------------------------------------+----------+
+# This is the main build target command of all rust components. All declared
+# rust targets are build here. it depends on the bindings files to be generated
+# + the native C libraries to be there. the cargo_build target is also used to
+# bookkeep data. which are stored as properties of `cargo_build`. currently the
+# following properties exist: 
+# - NATIVE_LIBRARIES      a list with all the c libraries needed for a
+#                         successfull rust build.
+# - SEARCH_PATH           a list of all paths to these native c libraries.
+# - CARGO_LIBS            a list with annotated native libaries, similar to
+#                         NATIVE_LIBRARIES, only with KIND=${LIB} prepended
+#                         used to serve rustc compiler .
+# - BUILD_PACKAGES        a list of rust packages to build. passed to cargo
+#                         build.
 # cmake-format: on
-#
-function(export_target_json)
-  list(POP_FRONT ARGV TARGET)
-  cmake_parse_arguments(PARSED_ARGS "CUSTOM" "" "EXT_LIB" ${ARGV})
+add_custom_target(
+  cargo_build
+  COMMAND ${CARGO_ENV_COMMAND} "bash" "-c"
+          "${CARGO_EXECUTABLE} build ${CARGO_PACKAGES} ${CARGO_ARGS}"
+  DEPENDS rust_bindgen "$<TARGET_PROPERTY:cargo_build,NATIVE_LIBS>"
+  COMMENT "Running: cargo build"
+  VERBATIM)
 
-  set(json "{\"target_source_dir\": \"\"}")
-  string(JSON json SET ${json} "name" "\"${TARGET}\"")
+add_custom_target(
+  cargo_test
+  COMMAND ${CARGO_ENV_COMMAND} "bash" "-c"
+          "${CARGO_EXECUTABLE} test ${CARGO_PACKAGES} ${CARGO_ARGS}"
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/target
+  DEPENDS rust_bindgen "$<TARGET_PROPERTY:cargo_build,NATIVE_LIBS>"
+  COMMENT "Running: cargo test")
 
-  if(NOT PARSED_ARGS_CUSTOM)
-    string(JSON json SET ${json} "target_source_dir"
-           "\"$<TARGET_PROPERTY:${TARGET},SOURCE_DIR>\"")
+add_custom_target(
+  cargo_doc
+  COMMAND ${Python3_EXECUTABLE} ../scripts/build/validate_rust_source_code_leaks.py
+  COMMAND ${CARGO_ENV_COMMAND} "bash" "-c"
+          "${CARGO_EXECUTABLE} doc --no-deps ${CARGO_PACKAGES} ${CARGO_ARGS}"
+  COMMAND
+    "ln" "-f" "-s" "${PROJECT_SOURCE_DIR}/target/${CARGO_TARGET_TRIPLE}/doc"
+    "${CMAKE_BINARY_DIR}/doc"
+  COMMAND
+    "zip" "-r" "-q"
+    "${CMAKE_BINARY_DIR}/rust_doc_${CMAKE_PROJECT_VERSION}.docs.zip" "doc/*"
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+  DEPENDS rust_bindgen "$<TARGET_PROPERTY:cargo_build,NATIVE_LIBS>"
+  COMMENT "Running: cargo doc")
+add_dependencies(doxygen_zip cargo_doc)
 
-    get_target_property(target_includes ${TARGET} INCLUDE_DIRECTORIES)
-    get_target_property(target_link_libraries ${TARGET} LINK_LIBRARIES)
-    list(APPEND target_link_libraries ${TARGET})
+function(cargo_build)
+  cmake_parse_arguments(CARGO "" "MANIFEST_FILE" "" "" ${ARGN})
+  if(NOT CARGO_MANIFEST_FILE)
+    message(FATAL_ERROR "MANIFEST_FILE not set in cargo_build(${ARGN})")
   endif()
 
-  list(APPEND target_link_libraries ${PARSED_ARGS_EXT_LIB})
-  set(json_link_libs "[]")
-  foreach(ll ${target_link_libraries})
-    if(TARGET ${ll})
-      get_target_property(target_type ${ll} TYPE)
-      if(target_type MATCHES "UTILITY" OR target_type MATCHES
-                                          "INTERFACE_LIBRARY")
-        get_target_property(dep_target_includes ${ll}
-                            INTERFACE_INCLUDE_DIRECTORIES)
-        if(dep_target_includes)
-          list(APPEND target_includes ${dep_target_includes})
-        endif()
-        continue()
-      elseif(target_type MATCHES "STATIC_LIBRARY")
-        set(typ "static")
-      elseif(target_type MATCHES "SHARED_LIBRARY")
-        set(typ "dylib")
-      endif()
+  # Get the meta-data corresponding the target. Used to configure the rest of
+  # the rust target.
+  rust_target_meta(${CARGO_MANIFEST_FILE} CARGO_META_PACKAGE)
+  string(JSON CARGO_NAME GET ${CARGO_META_PACKAGE} "name")
+  string(JSON CARGO_PACKAGE_MANIFEST GET ${CARGO_META_PACKAGE} "manifest_path")
+  message(DEBUG "Adding rust project ${CARGO_NAME} to cmake")
 
-      get_target_property(dep_target_includes ${ll} INCLUDE_DIRECTORIES)
-      list(APPEND target_includes ${dep_target_includes})
+  rust_glob_sources(${CARGO_META_PACKAGE} RUST_SOURCES)
+  rust_native_target_file(${CARGO_META_PACKAGE} NATIVE_FILE)
+  rust_source_path(${CARGO_META_PACKAGE} TARGET_SRC)
+  add_custom_target(${CARGO_NAME}_sources DEPENDS ${RUST_SOURCES})
+  add_dependencies(cargo_build ${CARGO_NAME}_sources)
+  add_dependencies(cargo_test ${CARGO_NAME}_sources)
 
-      set(json_link_item
-          "{ \"name\": \"${ll}\",\"typ\": \"${typ}\",\"search_path\": \"$<TARGET_FILE_DIR:${ll}>\"}"
-      )
-      string(JSON json_link_libs SET ${json_link_libs} 999 "${json_link_item}")
-    endif()
-  endforeach()
-  string(JSON json SET ${json} "link_libraries" ${json_link_libs})
+  # we build all rust targets with one cargo command. However to facilitate the
+  # permutations builds we need to be able to switch on/off packages. add them
+  # here, the actuall packages will be expanded in the actual cargo_build
+  # command.
+  rust_add_package_for_build(${CARGO_NAME})
 
-  set(json_include_dirs "[]")
-  list(REMOVE_DUPLICATES target_includes)
-  foreach(inc ${target_includes})
-    string(JSON json_include_dirs SET ${json_include_dirs} 999 "\"${inc}\"")
-  endforeach()
-  string(JSON json SET ${json} "include_dirs" ${json_include_dirs})
+  # in the case of a library, add a post step to remove any native symbols that
+  # where linked in.
+  add_custom_command(OUTPUT "${NATIVE_FILE}" DEPENDS cargo_build)
 
-  file(
-    GENERATE
-    OUTPUT ${uic_dir}/${TARGET}_bindgen.json
-    CONTENT ${json})
+  add_cmake_target(${CARGO_META_PACKAGE})
+
+  rust_is_configured_for_deb(${CARGO_META_PACKAGE} HAS_DEB)
+  if(HAS_DEB)
+    # setup deb package generation. this target is added to the cmake target
+    # `deb`
+    set(DEB_FILE
+        "${CMAKE_BINARY_DIR}/${CARGO_NAME}_${CMAKE_PROJECT_VERSION_MAJOR}.${CMAKE_PROJECT_VERSION_MINOR}.${CMAKE_PROJECT_VERSION_PATCH}_${CMAKE_SYSTEM_PROCESSOR}.deb"
+    )
+    add_custom_command(
+      OUTPUT ${DEB_FILE}
+      # Creating symlink to debconf directory is workaround for
+      # https://github.com/mmstick/cargo-deb/issues/151 Without this manually
+      # created maintainer scripts (except service) will be replaced with
+      # autogenerated scripts in *.deb packages
+      COMMAND "ln" "-f" "-s" "${TARGET_SRC}/debconf"
+              "${CMAKE_CURRENT_BINARY_DIR}/debconf"
+      COMMAND
+        ${CARGO_ENV_COMMAND} ${CARGO_EXECUTABLE} "deb" ARGS "-p" "${CARGO_NAME}"
+        "--no-strip" "--no-build" "--deb-version" "${APP_VERSION}" "--output"
+        "${DEB_FILE}" "--target" "${CARGO_TARGET_TRIPLE}" "--manifest-path"
+        "${CARGO_PACKAGE_MANIFEST}"
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      DEPENDS "${CARGO_NAME}_target" "${TARGET_SRC}/Cargo.toml"
+      COMMENT "Running: cargo deb
+${CARGO_NAME}")
+    add_custom_target(${CARGO_NAME}_deb DEPENDS ${DEB_FILE})
+    add_dependencies(deb ${CARGO_NAME}_deb)
+  endif()
 endfunction()

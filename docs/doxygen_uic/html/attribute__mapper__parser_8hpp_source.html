@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('attribute__mapper__parser_8hpp_source.
 <div class="contents">
 <a href="attribute__mapper__parser_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * # License</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2020 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2021 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ******************************************************************************</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * The licensor of this software is Silicon Laboratories Inc. Your use of this</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * software is governed by the terms of Silicon Labs Master Software License</span></div>
@@ -100,29 +100,30 @@ $(document).ready(function(){initNavTree('attribute__mapper__parser_8hpp_source.
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifndef ATTRIBUTE_MAPPER_PARSER_HPP</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define ATTRIBUTE_MAPPER_PARSER_HPP</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceast.html">ast</a></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">struct </span>ast_tree;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespaceast.html#a62b847c39bb09cb61df17d7b303400f7">   33</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespaceast.html#a62b847c39bb09cb61df17d7b303400f7">Parse</a>(<span class="keyword">const</span> std::string &amp;string_to_parse, <a class="code" href="structast_1_1ast__tree.html">ast::ast_tree</a> &amp;<a class="code" href="namespaceast.html">ast</a>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}  <span class="comment">// namespace ast</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifndef ATTRIBUTE_MAPPER_PARSER_HPP</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define ATTRIBUTE_MAPPER_PARSER_HPP</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceast.html">ast</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">struct </span>ast_tree;</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="namespaceast.html#a62b847c39bb09cb61df17d7b303400f7">   42</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespaceast.html#a62b847c39bb09cb61df17d7b303400f7">Parse</a>(<span class="keyword">const</span> std::string &amp;string_to_parse, <a class="code" href="structast_1_1ast__tree.html">ast::ast_tree</a> &amp;<a class="code" href="namespaceast.html">ast</a>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}  <span class="comment">// namespace ast</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astructast_1_1ast__tree_html"><div class="ttname"><a href="structast_1_1ast__tree.html">ast::ast_tree</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:48</div></div>
-<div class="ttc" id="anamespaceast_html"><div class="ttname"><a href="namespaceast.html">ast</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:35</div></div>
+<div class="ttc" id="astructast_1_1ast__tree_html"><div class="ttname"><a href="structast_1_1ast__tree.html">ast::ast_tree</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:49</div></div>
+<div class="ttc" id="anamespaceast_html"><div class="ttname"><a href="namespaceast.html">ast</a></div><div class="ttdef"><b>Definition:</b> attribute_mapper_ast.hpp:36</div></div>
 <div class="ttc" id="anamespaceast_html_a62b847c39bb09cb61df17d7b303400f7"><div class="ttname"><a href="namespaceast.html#a62b847c39bb09cb61df17d7b303400f7">ast::Parse</a></div><div class="ttdeci">bool Parse(const std::string &amp;string_to_parse, ast::ast_tree &amp;ast)</div><div class="ttdoc">Parse UAM script and build and AST.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_c7bb0fe74842c66edf906a662906edce.html">uic_attribute_mapper</a></li><li class="navelem"><a class="el" href="dir_636ca02ee6dde62d4183f0464b01c4f1.html">src</a></li><li class="navelem"><a class="el" href="attribute__mapper__parser_8hpp.html">attribute_mapper_parser.hpp</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:08 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:02 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

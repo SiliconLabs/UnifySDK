@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('zigpc__datastore_8hpp.html',''); initR
 <div class="contents">
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;<a class="el" href="zigpc__common__zigbee_8h_source.html">zigpc_common_zigbee.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="zigpc__datastore_8h_source.html">zigpc_datastore.h</a>&quot;</code><br />
 </div>
 <p><a href="zigpc__datastore_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -105,6 +106,8 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacezigpc__datastore_1_1cluster"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1cluster.html">zigpc_datastore::cluster</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacezigpc__datastore_1_1group"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1group.html">zigpc_datastore::group</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -115,8 +118,11 @@ Functions</h2></td></tr>
 <tr class="memdesc:a081096eb84ad88babf466a381a2a98bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get list of endpoint IDs under a device.  <a href="namespacezigpc__datastore_1_1endpoint.html#a081096eb84ad88babf466a381a2a98bc">More...</a><br /></td></tr>
 <tr class="separator:a081096eb84ad88babf466a381a2a98bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a398b628399a1a366455c13739fc5df11"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1cluster.html#a398b628399a1a366455c13739fc5df11">zigpc_datastore::cluster::get_id_list</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> ep_id, <a class="el" href="group__zigpc__common__zigbee.html#ga228903bf839e931383de417a05dae343">zcl_cluster_side_t</a> cluster_side)</td></tr>
-<tr class="memdesc:a398b628399a1a366455c13739fc5df11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get list of cluster IDs under an endpoint.  <a href="namespacezigpc__datastore_1_1cluster.html#a398b628399a1a366455c13739fc5df11">More...</a><br /></td></tr>
+<tr class="memdesc:a398b628399a1a366455c13739fc5df11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get list of cluster IDs under an endpoint based on the cluser side.  <a href="namespacezigpc__datastore_1_1cluster.html#a398b628399a1a366455c13739fc5df11">More...</a><br /></td></tr>
 <tr class="separator:a398b628399a1a366455c13739fc5df11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a836355e78881abdccbf866ac293515c2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="group__zigpc__common__zigbee.html#gabe5a6a6a4b79e78e775b6cc6efd57c67">zigbee_group_id_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__datastore_1_1group.html#a836355e78881abdccbf866ac293515c2">zigpc_datastore::group::get_group_list</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64, <a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> ep_id, bool is_reported)</td></tr>
+<tr class="memdesc:a836355e78881abdccbf866ac293515c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get list of group IDs under an endpoint based on the report/desired state.  <a href="namespacezigpc__datastore_1_1group.html#a836355e78881abdccbf866ac293515c2">More...</a><br /></td></tr>
+<tr class="separator:a836355e78881abdccbf866ac293515c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -124,7 +130,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_fd74d2cee03cec1d978c7e6c3dd4b8d0.html">datastore</a></li><li class="navelem"><a class="el" href="dir_80fe3481d5903cb87f5f36bba7d2331b.html">include</a></li><li class="navelem"><a class="el" href="zigpc__datastore_8hpp.html">zigpc_datastore.hpp</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:13 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

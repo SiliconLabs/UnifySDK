@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -31,11 +31,11 @@ extern "C" {
 #include "mqtt_client.h"
 #include "mqtt_wrapper_mock.h"
 
-const char *testhost    = "testhost";
-const int testport      = 1337;
-const char *test_cafile = "/test/cafile";
+const char *testhost      = "testhost";
+const int testport        = 1337;
+const char *test_cafile   = "/test/cafile";
 const char *test_certfile = "/test/certfile";
-const char *test_keyfile = "/test/keyfile";
+const char *test_keyfile  = "/test/keyfile";
 
 static char test_id[16];
 static bool single_subscription_received          = false;
@@ -45,6 +45,9 @@ const char *testmessage                           = "This is a test-message.";
 static int sub_callback_count                     = 0;
 static int wildcard_sub_count                     = 0;
 static bool event_loop_enabled                    = true;
+static int on_cb_count                            = 0;
+static bool callback1_called                      = false;
+static bool callback2_called                      = false;
 
 void *connection_instance_mock;
 mqtt_client_t client_instance;
@@ -144,8 +147,8 @@ void subscription_callback_multi(const char *topic,
 }
 
 void subscription_callback_wildcard(const char *topic,
-                                   const char *message,
-                                   const size_t message_length)
+                                    const char *message,
+                                    const size_t message_length)
 {
   sl_log_debug(LOG_TAG, "Subscriber got a message: %s: %s\n", topic, message);
   wildcard_subsciption_message_received = true;
@@ -153,8 +156,8 @@ void subscription_callback_wildcard(const char *topic,
 }
 
 void subscription_callback_wildcard_second(const char *topic,
-                                          const char *message,
-                                          const size_t message_length)
+                                           const char *message,
+                                           const size_t message_length)
 {
   sl_log_debug(LOG_TAG,
                "Subscriber (second) got a message: %s: %s\n",
@@ -162,6 +165,24 @@ void subscription_callback_wildcard_second(const char *topic,
                message);
   wildcard_subsciption_message_received = true;
   wildcard_sub_count++;
+}
+
+void callback_test1(const char *topic,
+                    const char *message,
+                    const size_t message_length)
+{
+  sl_log_debug(LOG_TAG, "Subscriber got a message: %s: %s\n", topic, message);
+  callback1_called = true;
+  on_cb_count++;
+}
+
+void callback_test2(const char *topic,
+                    const char *message,
+                    const size_t message_length)
+{
+  sl_log_debug(LOG_TAG, "Subscriber got a message: %s: %s\n", topic, message);
+  callback2_called = true;
+  on_cb_count++;
 }
 
 // Setup the test suite (called once before all test_xxx functions are called)
@@ -185,6 +206,8 @@ void setUp()
   single_subscription_received          = false;
   wildcard_subsciption_message_received = false;
   multi_subscription_received           = false;
+  callback1_called                      = false;
+  callback2_called                      = false;
   event_loop_enabled                    = true;
 }
 
@@ -324,6 +347,7 @@ void test_mqtt_client_unretain()
   expect_unretain("TopicA/Sub2");
 
   mqtt_client_unretain(client_instance, "TopicA");
+  TEST_ASSERT_EQUAL(1, mqtt_client_count_topics(client_instance, "Topic"));
 
   //Try to unretain something that does not exist
   mqtt_client_unretain(client_instance, "Floppic");
@@ -590,16 +614,9 @@ void test_mqtt_client_subscribe_multiple_callback_happy()
                         "UIC/MQTT/Client/test",
                         subscription_callback);
 
-  // Mock section for the second callback
-  {
-    mqtt_wrapper_subscribe_ExpectAndReturn(connection_instance_mock,
-                                           NULL,
-                                           "UIC/MQTT/Client/test",
-                                           MQTT_CLIENT_QoS,
-                                           SL_STATUS_OK);
-  }
-  // End of mock section
-
+  // The second subscribtion with the same topic shall not trigger
+  // second mqtt_wrapper_subsribe call, rather, it will be added in
+  // the internal routing.
   mqtt_client_test_on_connect(NULL,
                               client_instance,
                               0);  // Connecting succeeded.
@@ -692,7 +709,7 @@ void test_mqtt_client_subscribe_wildcard_happy()
                         "MQTT/Client/#",
                         subscription_callback_wildcard);
 
-  // Mock section for Single Level Wildcard: +
+ //  Mock section for Single Level Wildcard: +
   {
     mqtt_wrapper_subscribe_ExpectAndReturn(connection_instance_mock,
                                            NULL,
@@ -796,16 +813,6 @@ void test_mqtt_client_unsubscribe_callback_happy()
   mqtt_client_subscribe(client_instance,
                         "UIC/MQTT/Client/test",
                         subscription_callback);
-
-  // Mock section for the second callback
-  {
-    mqtt_wrapper_subscribe_ExpectAndReturn(connection_instance_mock,
-                                           NULL,
-                                           "UIC/MQTT/Client/test",
-                                           MQTT_CLIENT_QoS,
-                                           SL_STATUS_OK);
-  }
-  // End of mock section
 
   mqtt_client_test_on_connect(NULL,
                               client_instance,
@@ -1361,22 +1368,6 @@ void test_simple_connect_with_tls_certificate_fail()
                                      client_instance,  // obj
                                      connection_instance_mock);  // return
     mqtt_wrapper_new_IgnoreArg_obj();
-    mqtt_wrapper_socket_ExpectAndReturn(connection_instance_mock, 0);
-    mqtt_wrapper_loop_read_ExpectAndReturn(connection_instance_mock,
-                                           SL_STATUS_OK);
-    mqtt_wrapper_loop_write_ExpectAndReturn(connection_instance_mock,
-                                            SL_STATUS_OK);
-    mqtt_wrapper_loop_misc_ExpectAndReturn(connection_instance_mock,
-                                           SL_STATUS_OK);
-    mqtt_wrapper_connect_ExpectAndReturn(connection_instance_mock,  // instance
-                                         testhost,                  // host
-                                         testport,                  // port
-                                         0,              // keepalive.
-                                         SL_STATUS_OK);  // return
-    mqtt_wrapper_connect_IgnoreArg_keepalive();
-
-    mqtt_wrapper_destroy_Expect(connection_instance_mock);
-    mqtt_wrapper_lib_cleanup_ExpectAndReturn(0);
     mqtt_wrapper_tls_set_ExpectAndReturn(connection_instance_mock,
                                          test_cafile,
                                          test_certfile,
@@ -1393,11 +1384,6 @@ void test_simple_connect_with_tls_certificate_fail()
                                     event_sender,
                                     delayed_event_sender,
                                     event_counter);
-  {  // Mock section
-    mqtt_wrapper_connect_callback_set_Stub(connect_callback_set_stub);
-    mqtt_wrapper_disconnect_callback_set_Stub(disconnect_callback_set_stub);
-    mqtt_wrapper_message_callback_set_Stub(message_callback_set_stub);
-  }  // End of mock section
 
   TEST_ASSERT_EQUAL(mqtt_client_setup(client_instance), SL_STATUS_FAIL);
 
@@ -1408,6 +1394,35 @@ void test_simple_connect_with_tls_certificate_fail()
                                      client_instance,  // obj
                                      connection_instance_mock);  // return
     mqtt_wrapper_new_IgnoreArg_obj();
+  }  // End of mock section
+
+  client_instance = mqtt_client_new(testhost,
+                                    testport,
+                                    test_id,
+                                    test_cafile,
+                                    "",
+                                    "",
+                                    event_sender,
+                                    delayed_event_sender,
+                                    event_counter);
+
+  TEST_ASSERT_EQUAL(mqtt_client_setup(client_instance), SL_STATUS_FAIL);
+}
+
+void test_mqtt_client_subscribe_multiple_callback_with_wildcard()
+{
+  on_cb_count = 0;
+
+  {  // Mock section
+    mqtt_wrapper_lib_init_ExpectAndReturn(0);
+    mqtt_wrapper_new_ExpectAndReturn(test_id,  // (client)id
+                                     true,     // clean_session
+                                     NULL,     // obj
+                                     connection_instance_mock);  // return
+    mqtt_wrapper_new_IgnoreArg_obj();
+
+    mqtt_wrapper_socket_ExpectAndReturn(connection_instance_mock, 0);
+    mqtt_wrapper_socket_ExpectAndReturn(connection_instance_mock, 0);
     mqtt_wrapper_socket_ExpectAndReturn(connection_instance_mock, 0);
     mqtt_wrapper_loop_read_ExpectAndReturn(connection_instance_mock,
                                            SL_STATUS_OK);
@@ -1424,30 +1439,113 @@ void test_simple_connect_with_tls_certificate_fail()
 
     mqtt_wrapper_destroy_Expect(connection_instance_mock);
     mqtt_wrapper_lib_cleanup_ExpectAndReturn(0);
-    mqtt_wrapper_tls_set_ExpectAndReturn(connection_instance_mock,
-                                         test_cafile,
-                                         0,
-                                         0,
-                                         SL_STATUS_FAIL);
   }  // End of mock section
 
   client_instance = mqtt_client_new(testhost,
                                     testport,
                                     test_id,
-                                    test_cafile,
+                                    "",
                                     "",
                                     "",
                                     event_sender,
                                     delayed_event_sender,
                                     event_counter);
-  {  // Mock section
+
+  // Mock section
+  {
     mqtt_wrapper_connect_callback_set_Stub(connect_callback_set_stub);
     mqtt_wrapper_disconnect_callback_set_Stub(disconnect_callback_set_stub);
     mqtt_wrapper_message_callback_set_Stub(message_callback_set_stub);
-  }  // End of mock section
+    mqtt_wrapper_topic_matches_sub_Stub(mqtt_wrapper_topic_matches_sub_stub);
+  }
+  // End of mock section
 
-  TEST_ASSERT_EQUAL(mqtt_client_setup(client_instance), SL_STATUS_FAIL);
+  mqtt_client_setup(client_instance);
+  mqtt_client_event(client_instance, MQTT_EVENT_CONNECT);
 
+  // Mock section for first callback
+  {
+    mqtt_wrapper_subscribe_ExpectAndReturn(connection_instance_mock,
+                                           NULL,
+                                           "Topic1/#",
+                                           MQTT_CLIENT_QoS,
+                                           SL_STATUS_OK);
+  }
+
+  mqtt_client_test_on_connect(NULL,
+                              client_instance,
+                              0);  // Connecting succeeded.
+
+  mqtt_client_subscribe(client_instance, "Topic1/#", callback_test1);
+
+  // Mock section for second callback
+  {
+    mqtt_wrapper_subscribe_ExpectAndReturn(connection_instance_mock,
+                                           NULL,
+                                           "Topic1/item1",
+                                           MQTT_CLIENT_QoS,
+                                           SL_STATUS_OK);
+  }
+
+  mqtt_client_test_on_connect(NULL,
+                              client_instance,
+                              0);  // Connecting succeeded.
+
+  mqtt_client_subscribe(client_instance, "Topic1/item1", callback_test2);
+
+  struct mqtt_message *mock_message
+    = (struct mqtt_message *)malloc(sizeof(struct mqtt_message));
+  mock_message->topic      = "Topic1/item1";
+  mock_message->payload    = (void *)testmessage;
+  mock_message->payloadlen = strlen(testmessage);
+  mock_message->qos        = 0;
+  mock_message->retain     = false;
+
+  mqtt_client_test_on_message(NULL, client_instance, mock_message);
+  free(mock_message);
+  // check that the two registered functions are called
+  TEST_ASSERT_EQUAL_INT(2, on_cb_count);
+  TEST_ASSERT_TRUE_MESSAGE(
+    callback1_called,
+    "test_callback2 is called since it is 'Topic1/item1' message is published");
+  TEST_ASSERT_TRUE_MESSAGE(
+    callback2_called,
+    "test_callback2 is called since it is 'Topic1/item1' message is published");
+
+  callback1_called = false;
+  callback2_called = false;
+  // unsubscribe "Topic1/#"
+  {
+    mqtt_wrapper_unsubscribe_ExpectAndReturn(connection_instance_mock,
+                                             NULL,
+                                             "Topic1/#",
+                                             SL_STATUS_OK);
+  }
+  mqtt_client_test_on_connect(NULL,
+                              client_instance,
+                              0);  // Connecting succeeded.
+
+  mqtt_client_unsubscribe(client_instance, "Topic1/#", callback_test1);
+
+  struct mqtt_message *mock_message_2
+    = (struct mqtt_message *)malloc(sizeof(struct mqtt_message));
+  mock_message_2->topic      = "Topic1/item1";
+  mock_message_2->payload    = (void *)testmessage;
+  mock_message_2->payloadlen = strlen(testmessage);
+  mock_message_2->qos        = 0;
+  mock_message_2->retain     = false;
+
+  mqtt_client_test_on_message(NULL, client_instance, mock_message_2);
+  free(mock_message_2);
+
+  TEST_ASSERT_FALSE_MESSAGE(
+    callback1_called,
+    "test_callback1 is not called since it is 'Toipc1/#' is unsubscribed");
+  TEST_ASSERT_TRUE_MESSAGE(
+    callback2_called,
+    "test_callback2 is called since it is 'Topic1/item1' message is published");
+
+  mqtt_client_teardown(client_instance);
+  mqtt_client_delete(client_instance);
 }
-
 }

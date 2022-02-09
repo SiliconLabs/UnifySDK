@@ -14,7 +14,7 @@
 #include "zpc_attribute_resolver.h"
 
 // Test includes
-#include "zpc_attribute_resolver_test.h"
+#include "zpc_attribute_resolver_test.hpp"
 #include "unity.h"
 
 // UIC Mock includes
@@ -42,7 +42,7 @@
 
 // Static test variables
 static resolver_on_set_rule_registered_t set_rule_notification_function = NULL;
-static attribute_store_node_update_callback_t set_notification_function = NULL;
+static attribute_store_node_changed_callback_t set_notification_function = NULL;
 static attribute_resolver_config_t received_resolver_config             = {};
 static on_zwave_tx_send_data_complete_t received_send_data_complete     = NULL;
 static uint8_t custom_handler_calls                                     = 0;
@@ -73,7 +73,7 @@ static sl_status_t
 }
 
 static sl_status_t attribute_store_register_callback_stub(
-  attribute_store_node_update_callback_t callback_function,
+  attribute_store_node_changed_callback_t callback_function,
   attribute_store_type_t type,
   attribute_store_node_value_state_t value_state,
   int cmock_num_calls)
@@ -609,7 +609,7 @@ void test_zpc_attribute_resolver_group_2_nodes_happy_case()
   attribute_store_network_helper_get_zwave_ids_from_node_ReturnThruPtr_zwave_endpoint_id(
     &zwave_endpoint_id_1);
 
-  get_protocol_ExpectAndReturn(zwave_node_id_2, protocol_1);
+  zwave_get_inclusion_protocol_ExpectAndReturn(zwave_node_id_2, protocol_1);
   zwave_tx_scheme_get_node_highest_security_class_ExpectAndReturn(
     zwave_node_id_2,
     encapsulation_1);
@@ -639,7 +639,7 @@ void test_zpc_attribute_resolver_group_2_nodes_happy_case()
   attribute_store_network_helper_get_zwave_ids_from_node_ReturnThruPtr_zwave_endpoint_id(
     &zwave_endpoint_id_1);
 
-  get_protocol_ExpectAndReturn(zwave_node_id_1, protocol_1);
+  zwave_get_inclusion_protocol_ExpectAndReturn(zwave_node_id_1, protocol_1);
   zwave_tx_scheme_get_node_highest_security_class_ExpectAndReturn(
     zwave_node_id_1,
     encapsulation_1);
@@ -672,7 +672,6 @@ void test_zpc_attribute_resolver_group_2_nodes_happy_case()
   attribute_store_network_helper_get_node_id_from_node_IgnoreArg_zwave_node_id();
   attribute_store_network_helper_get_node_id_from_node_ReturnThruPtr_zwave_node_id(
     &zwave_node_id_2);
-  get_operating_mode_ExpectAndReturn(zwave_node_id_2, OPERATING_MODE_FL);
   attribute_store_network_helper_get_node_id_from_node_ExpectAndReturn(
     test_node_1,
     NULL,
@@ -680,7 +679,6 @@ void test_zpc_attribute_resolver_group_2_nodes_happy_case()
   attribute_store_network_helper_get_node_id_from_node_IgnoreArg_zwave_node_id();
   attribute_store_network_helper_get_node_id_from_node_ReturnThruPtr_zwave_node_id(
     &zwave_node_id_1);
-  get_operating_mode_ExpectAndReturn(zwave_node_id_1, OPERATING_MODE_AL);
 
   zwave_tx_assign_group_ExpectWithArrayAndReturn(node_mask,
                                                  sizeof(node_mask),
@@ -690,7 +688,7 @@ void test_zpc_attribute_resolver_group_2_nodes_happy_case()
   zwave_tx_assign_group_IgnoreArg_group_id();
   zwave_tx_assign_group_ReturnThruPtr_group_id(&group_id_1);
 
-  zwave_tx_scheme_get_node_tx_options_Expect(0xFFFF + 5*10, 0, 0, NULL);
+  zwave_tx_scheme_get_node_tx_options_Expect(0xFFFF + 5 * 10, 0, 0, NULL);
   zwave_tx_scheme_get_node_tx_options_IgnoreArg_tx_options();
   zwave_tx_scheme_get_node_tx_options_ReturnThruPtr_tx_options(&tx_options_1);
 
@@ -726,7 +724,7 @@ void test_zpc_attribute_resolver_group_2_nodes_happy_case()
   attribute_store_network_helper_get_node_id_from_node_IgnoreArg_zwave_node_id();
   attribute_store_network_helper_get_node_id_from_node_ReturnThruPtr_zwave_node_id(
     &zwave_node_id_2);
-  get_operating_mode_ExpectAndReturn(zwave_node_id_2, OPERATING_MODE_FL);
+  zwave_get_operating_mode_ExpectAndReturn(zwave_node_id_2, OPERATING_MODE_FL);
   zwave_command_class_supervision_send_data_AddCallback(
     &zwave_tx_send_data_stub);
   zwave_command_class_supervision_send_data_ExpectAndReturn(
@@ -754,7 +752,7 @@ void test_zpc_attribute_resolver_group_2_nodes_happy_case()
   attribute_store_network_helper_get_node_id_from_node_IgnoreArg_zwave_node_id();
   attribute_store_network_helper_get_node_id_from_node_ReturnThruPtr_zwave_node_id(
     &zwave_node_id_1);
-  get_operating_mode_ExpectAndReturn(zwave_node_id_1, OPERATING_MODE_AL);
+  zwave_get_operating_mode_ExpectAndReturn(zwave_node_id_1, OPERATING_MODE_AL);
 
   zwave_command_class_supervision_send_data_ExpectAndReturn(
     NULL,
@@ -850,7 +848,8 @@ void test_zpc_attribute_resolver_group_unknown_protocol()
   attribute_store_network_helper_get_zwave_ids_from_node_ReturnThruPtr_zwave_endpoint_id(
     &zwave_endpoint_id_1);
 
-  get_protocol_ExpectAndReturn(zwave_node_id_1, protocol_unknown);
+  zwave_get_inclusion_protocol_ExpectAndReturn(zwave_node_id_1,
+                                               protocol_unknown);
   zwave_tx_scheme_get_node_highest_security_class_ExpectAndReturn(
     zwave_node_id_1,
     encapsulation_1);
@@ -980,7 +979,8 @@ void test_zpc_attribute_resolver_group_no_reported_value()
   attribute_store_network_helper_get_zwave_ids_from_node_ReturnThruPtr_zwave_endpoint_id(
     &zwave_endpoint_id_1);
 
-  get_protocol_ExpectAndReturn(zwave_node_id_1, protocol_unknown);
+  zwave_get_inclusion_protocol_ExpectAndReturn(zwave_node_id_1,
+                                               protocol_unknown);
   zwave_tx_scheme_get_node_highest_security_class_ExpectAndReturn(
     zwave_node_id_1,
     encapsulation_1);

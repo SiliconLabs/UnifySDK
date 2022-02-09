@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Col, Dropdown, DropdownButton, Form, InputGroup, Modal, Row, Table } from 'react-bootstrap';
 import * as GrIcons from 'react-icons/gr';
 import * as RiIcons from 'react-icons/ri';
+import * as MdIcons from 'react-icons/md';
 import Tooltip from '@material-ui/core/Tooltip';
 import { NodesProps, NodesState } from './nodes-types';
 import { NodeTypesList } from '../../cluster-types/cluster-types';
@@ -11,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './nodes.css';
 import ClusterTypeTooltip from '../../components/cluster-type-tooltip/cluster-type-tooltip';
 import { MenuItem, TextField } from '@material-ui/core';
+import EditableAttribute from '../../components/editable-attribute/editable-attribute';
 
 export class Nodes extends React.Component<NodesProps, NodesState> {
   constructor(props: NodesProps) {
@@ -78,7 +80,6 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
     this.setState({ Dsk: event.target.value });
   }
 
-
   handleKeyPress(event: any) {
     if (event.key === 'Enter')
       this.setSecurity(true);
@@ -131,6 +132,58 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
       : <></>}
   </>
 
+  getRow = (item: any, index: number, epName: string = "", ep: any = null, indexEp: number = -1, span: number = 1) => {
+    let tdClassName = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
+    return (<tr key={`${index}-${indexEp}`}>
+      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>{item.Unid}</td>
+      <td className={`${tdClassName} vertical-middle`}>{epName}</td>
+      <td className={`${tdClassName} flex padding-v-20`} >{(item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1)
+        ? <><Tooltip title="Protocol Controller" ><span className="icon cursor-defult"><GrIcons.GrNodes /></span></Tooltip>
+          <Tooltip hidden={!item.RFTelemetry} title="RF Telemetry" ><span className="icon cursor-defult"><MdIcons.MdOutlineTransform color="black" /></span></Tooltip></>
+        : ep && <ClusterTypeTooltip Ep={[ep]} />}
+      </td>
+      <td className={`${tdClassName} vertical-middle`}>
+        {item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1
+          ? ""
+          : <EditableAttribute Unid={`${item.Unid}/${epName}`} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} />}
+      </td>
+      <td className={`${tdClassName} vertical-middle`}>
+        {item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1
+          ? ""
+          : <EditableAttribute Unid={`${item.Unid}/${epName}`} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Location" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} />}
+      </td>
+      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>
+        <div className="flex">
+          <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
+          <div> {item.NetworkStatus}</div>
+        </div>
+      </td>
+      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>
+        <div className="flex">
+          <div>
+            <div className={`dot-icon ${item.Security?.toLocaleLowerCase().includes("s2") ? "s2-security" : (item.Security?.toLocaleLowerCase().includes("s0") ? "s0-security" : "none-security")}`}></div>
+          </div>
+          <div>{item.Security}</div>
+        </div>
+      </td>
+      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>{item.MaximumCommandDelay}</td>
+      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>{item.State}</td>
+      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>
+        {this.actionsList(item.SupportedCommands, "Commands", this.runCommand.bind(this, item.Unid, "run-node-command"), "")}
+        {this.actionsList(item.SupportedStateList, "States", this.runStateCommand.bind(this, item.Unid, "run-state-command"), "margin-r-5")}
+      </td>
+    </tr>)
+  }
+
+  getEpRows = (item: any, index: number) => {
+    let endPoints = Object.keys(item.ep);
+    return (<>
+      {endPoints.map((endPoint: any, indexEp: number) => {
+        return this.getRow(item, index, endPoint, item.ep[endPoint], indexEp, endPoints.length)
+      })}
+    </>)
+  }
+
   render() {
     return (
       <>
@@ -151,16 +204,18 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table striped hover>
+          : <Table>
             <thead>
               <tr className="">
-                <th>#</th>
-                <th className="wd-col-2">Unid</th>
-                <th className="wd-col-2">Type</th>
-                <th className="wd-col-1">Status</th>
+                <th>Unid</th>
+                <th>Ep</th>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Status</th>
                 <th>Security</th>
-                <th className="wd-col-1">Max Delay</th>
-                <th className="wd-col-1">State</th>
+                <th>Max Delay</th>
+                <th>State</th>
                 <th>&ensp;</th>
               </tr>
             </thead>
@@ -169,37 +224,14 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
                 let title = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"
                   ? "Node is Offline"
                   : (item.Security?.toLocaleLowerCase().includes("s2") ? "" : "This node using non-secure communication and could be compromised");
-                let tdClassName = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
                 return (
                   <Tooltip key={index} title={title}>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td className={tdClassName}>{item.Unid}</td>
-                      <td className={`${tdClassName} flex`}>{(item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1)
-                        ? <Tooltip title="Protocol Controller" ><span className="icon cursor-defult"><GrIcons.GrNodes /></span></Tooltip>
-                        : <ClusterTypeTooltip Ep={item.ep} />}
-                      </td>
-                      <td className={tdClassName}>
-                        <div className="flex">
-                          <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
-                          <div> {item.NetworkStatus}</div>
-                        </div>
-                      </td>
-                      <td className={tdClassName}>
-                        <div className="flex">
-                          <div>
-                            <div className={`dot-icon ${item.Security?.toLocaleLowerCase().includes("s2") ? "s2-security" : (item.Security?.toLocaleLowerCase().includes("s0") ? "s0-security" : "none-security")}`}></div>
-                          </div>
-                          <div>{item.Security}</div>
-                        </div>
-                      </td>
-                      <td className={tdClassName}>{item.MaximumCommandDelay}</td>
-                      <td className={tdClassName}>{item.State}</td>
-                      <td>
-                        {this.actionsList(item.SupportedCommands, "Commands", this.runCommand.bind(this, item.Unid, "run-node-command"), "")}
-                        {this.actionsList(item.SupportedStateList, "States", this.runStateCommand.bind(this, item.Unid, "run-state-command"), "margin-r-5")}
-                      </td>
-                    </tr>
+                    {
+                      !item.ep
+                        ? this.getRow(item, index)
+                        : this.getEpRows(item, index)
+                    }
+
                   </Tooltip>
                 );
               })}

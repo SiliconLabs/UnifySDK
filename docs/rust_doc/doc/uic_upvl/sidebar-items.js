@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["APP_NAME",""],["CONFIG_VERSION",""],["DB_FILE",""]],"fn":[["main",""],["ok_or_exit_with_message",""],["parse_application_arguments",""],["run",""]],"mod":[["mqtt_handler",""],["upvl_db","UPVL Database Interface"],["upvl_json","Handle JSON conversion to/from internal types"]]});

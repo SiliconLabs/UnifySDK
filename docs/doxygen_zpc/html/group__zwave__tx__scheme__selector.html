@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: A Z-Wave Transmission Scheme Selectors</title>
+<title>Z-Wave Protocol Controller Refrence: Z-Wave TX Scheme Selector</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -87,11 +87,11 @@ $(document).ready(function(){initNavTree('group__zwave__tx__scheme__selector.htm
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">A Z-Wave Transmission Scheme Selectors<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a></div></div>  </div>
+<div class="title">Z-Wave TX Scheme Selector<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A Z-Wave frame transmission security scheme selector.  
+<p>Z-Wave TX Scheme selector.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -102,30 +102,27 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga13b472eb06e679638bad680aa33825db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga13b472eb06e679638bad680aa33825db">zwave_tx_scheme_get_zpc_granted_keys</a> (<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> *keys)</td></tr>
+<tr class="memitem:ga13b472eb06e679638bad680aa33825db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga13b472eb06e679638bad680aa33825db">zwave_tx_scheme_get_zpc_granted_keys</a> (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> *keys)</td></tr>
 <tr class="memdesc:ga13b472eb06e679638bad680aa33825db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a list of security keys which the controller can use.  <a href="group__zwave__tx__scheme__selector.html#ga13b472eb06e679638bad680aa33825db">More...</a><br /></td></tr>
 <tr class="separator:ga13b472eb06e679638bad680aa33825db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2c884bc863b6f63eac2a074fdde828d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga2c884bc863b6f63eac2a074fdde828d8">zwave_tx_scheme_get_node_connection_info</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, uint8_t <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>, <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info)</td></tr>
+<tr class="memitem:ga2c884bc863b6f63eac2a074fdde828d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga2c884bc863b6f63eac2a074fdde828d8">zwave_tx_scheme_get_node_connection_info</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, uint8_t <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>, <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info)</td></tr>
 <tr class="memdesc:ga2c884bc863b6f63eac2a074fdde828d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a connection info parameters for sending a Z-Wave frame.  <a href="group__zwave__tx__scheme__selector.html#ga2c884bc863b6f63eac2a074fdde828d8">More...</a><br /></td></tr>
 <tr class="separator:ga2c884bc863b6f63eac2a074fdde828d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8f8d4442ddf4c165d5a79b9a25d6420d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga8f8d4442ddf4c165d5a79b9a25d6420d">zwave_tx_scheme_get_node_tx_options</a> (uint32_t expected_qos_priority, uint8_t expected_number_of_response, uint32_t expected_discard_timeout_ms, <a class="el" href="group__zwave__tx__interface.html#ga12c249f53157f1b461a0c534a274a72f">zwave_tx_options_t</a> *tx_options)</td></tr>
 <tr class="memdesc:ga8f8d4442ddf4c165d5a79b9a25d6420d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a Z-Wave frame transmission options.  <a href="group__zwave__tx__scheme__selector.html#ga8f8d4442ddf4c165d5a79b9a25d6420d">More...</a><br /></td></tr>
 <tr class="separator:ga8f8d4442ddf4c165d5a79b9a25d6420d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1b28ff5a376c1505c6c3d7c2a0413784"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga1b28ff5a376c1505c6c3d7c2a0413784">zwave_tx_scheme_get_node_granted_keys</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> *keys)</td></tr>
-<tr class="memdesc:ga1b28ff5a376c1505c6c3d7c2a0413784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the granted keys for a node.  <a href="group__zwave__tx__scheme__selector.html#ga1b28ff5a376c1505c6c3d7c2a0413784">More...</a><br /></td></tr>
-<tr class="separator:ga1b28ff5a376c1505c6c3d7c2a0413784"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0efa34ef87df3cef0f14ac47c733d491"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga0efa34ef87df3cef0f14ac47c733d491">zwave_tx_scheme_get_node_highest_security_class</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memitem:ga0efa34ef87df3cef0f14ac47c733d491"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga0efa34ef87df3cef0f14ac47c733d491">zwave_tx_scheme_get_node_highest_security_class</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="memdesc:ga0efa34ef87df3cef0f14ac47c733d491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the Highest security Class of a NodeID.  <a href="group__zwave__tx__scheme__selector.html#ga0efa34ef87df3cef0f14ac47c733d491">More...</a><br /></td></tr>
 <tr class="separator:ga0efa34ef87df3cef0f14ac47c733d491"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab15d83efc0084ff753e16826ce063136"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#gab15d83efc0084ff753e16826ce063136">zwave_tx_scheme_get_max_payload</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memitem:gab15d83efc0084ff753e16826ce063136"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#gab15d83efc0084ff753e16826ce063136">zwave_tx_scheme_get_max_payload</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="memdesc:gab15d83efc0084ff753e16826ce063136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the maximum number of bytes that can be sent to a given NodeID. (lowest layer)  <a href="group__zwave__tx__scheme__selector.html#gab15d83efc0084ff753e16826ce063136">More...</a><br /></td></tr>
 <tr class="separator:gab15d83efc0084ff753e16826ce063136"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6128c675d7c258737616e44ef823516d"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga6128c675d7c258737616e44ef823516d">zwave_tx_scheme_get_max_application_payload</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
+<tr class="memitem:ga6128c675d7c258737616e44ef823516d"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html#ga6128c675d7c258737616e44ef823516d">zwave_tx_scheme_get_max_application_payload</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__zwave__controller__types.html#ga092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
 <tr class="memdesc:ga6128c675d7c258737616e44ef823516d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes how long of a frame can be sent to a given NodeID / Endpoint when queuing a frame at the application level.  <a href="group__zwave__tx__scheme__selector.html#ga6128c675d7c258737616e44ef823516d">More...</a><br /></td></tr>
 <tr class="separator:ga6128c675d7c258737616e44ef823516d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>A Z-Wave frame transmission security scheme selector. </p>
+<p>Z-Wave TX Scheme selector. </p>
 <p>This module selects the right security scheme when sending a Z-Wave frame. This is done by looking up the security scheme from the granted_keys list stored in the attribute system. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ga6f9d1b8df2060b034cab2440d33a1eee"></a>
@@ -154,13 +151,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">uint16_t zwave_tx_scheme_get_max_application_payload </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a>&#160;</td>
           <td class="paramname"><em>endpoint_id</em>&#160;</td>
         </tr>
         <tr>
@@ -192,7 +189,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">uint16_t zwave_tx_scheme_get_max_payload </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -219,7 +216,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void zwave_tx_scheme_get_node_connection_info </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em>, </td>
         </tr>
         <tr>
@@ -231,7 +228,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection_info</em>&#160;</td>
         </tr>
         <tr>
@@ -254,43 +251,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga1b28ff5a376c1505c6c3d7c2a0413784"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1b28ff5a376c1505c6c3d7c2a0413784">&#9670;&nbsp;</a></span>zwave_tx_scheme_get_node_granted_keys()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_tx_scheme_get_node_granted_keys </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>node_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> *&#160;</td>
-          <td class="paramname"><em>keys</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return the granted keys for a node. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">node_id</td><td>Z-Wave NodeID of the node </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">keys</td><td>Pointer where to write granted keys. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="ga0efa34ef87df3cef0f14ac47c733d491"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga0efa34ef87df3cef0f14ac47c733d491">&#9670;&nbsp;</a></span>zwave_tx_scheme_get_node_highest_security_class()</h2>
 
@@ -298,9 +258,9 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> zwave_tx_scheme_get_node_highest_security_class </td>
+          <td class="memname"><a class="el" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> zwave_tx_scheme_get_node_highest_security_class </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -378,7 +338,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void zwave_tx_scheme_get_zpc_granted_keys </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> *&#160;</td>
           <td class="paramname"><em>keys</em></td><td>)</td>
           <td></td>
         </tr>
@@ -401,7 +361,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:35 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

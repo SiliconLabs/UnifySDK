@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Zigbee Protocol Controller: OTA Image Listener</title>
+<title>Zigbee Protocol Controller: OTA (Over-the-Air) Image Listener</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -83,15 +83,24 @@ $(document).ready(function(){initNavTree('group__image__listener.html',''); init
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">OTA Image Listener</div>  </div>
+<div class="title">OTA (Over-the-Air) Image Listener<div class="ingroups"><a class="el" href="group__unify__components.html">Unify Components</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Component that monitors the image provider for new firmware images and publishes ota information over mqtt.  
 <a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceuic__ota"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html">uic_ota</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Component that monitors the image provider for new firmware images and publishes ota information over mqtt. </p>
-<p>The ota abstracts away the communication with the image provider, the authority supplying new images. Secondly, the ota is responsible for providing state information about ota devices over mqtt via ucl/by-unid/&lt;UNID&gt;/OTA/&lt;UIID&gt;/+.</p>
+<p>The ota abstracts away the communication with the image provider, the authority supplying new images. Secondly, the ota is responsible for providing state information for OTA devices over mqtt via ucl/by-unid/&lt;UNID&gt;/OTA/&lt;UIID&gt;/+.</p>
 <p>The ota has an internal cache with images, retrieved from the image provider. Cached images are represented by files on disk.</p>
 <p>Callers are required to let the image listener know about the progress of the firmware update of its clients, see func <code>status_update</code>.</p>
 <p>Images have an <code>apply_after</code> field. it tells when the image is intended to be activated by the clients receiving this image.</p>
@@ -105,7 +114,7 @@ OTA Image Listener component</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:24 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

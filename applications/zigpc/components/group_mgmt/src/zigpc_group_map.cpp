@@ -17,54 +17,14 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "sl_log.h"
+
+#include "zigpc_datastore.h"
+#include "zigpc_datastore.hpp"
+
 #include "zigpc_group_map.h"
 
-bool operator==(const zigpc_group_member_t &a, const zigpc_group_member_t &b)
-{
-  int eui_64_cmp = memcmp(a.eui64, b.eui64, ZIGBEE_EUI64_SIZE);
-
-  bool same_eui64    = (eui_64_cmp == 0);
-  bool same_endpoint = (a.endpoint_id == b.endpoint_id);
-
-  return same_eui64 && same_endpoint;
-}
-
-template<> struct std::hash<zigpc_group_member_t> {
-  std::size_t operator()(const zigpc_group_member_t &key) const
-  {
-    char eui64_cstr[ZIGBEE_EUI64_HEX_STR_LENGTH];
-
-    zigbee_eui64_to_str(key.eui64, eui64_cstr, ZIGBEE_EUI64_HEX_STR_LENGTH);
-
-    std::string eui64_str(eui64_cstr);
-    std::string hash_str = eui64_str + std::to_string(key.endpoint_id);
-
-    return hash<string>()(hash_str);
-  }
-};
-
-typedef struct group_data {
-  group_data() {}
-  group_data(zigbee_group_id_t id)
-  {
-    this->id = id;
-  }
-
-  zigbee_group_id_t id;
-  std::string name;
-} group_data_t;
-
-bool operator==(const group_data_t &a, const group_data_t &b)
-{
-  return (a.id == b.id);
-}
-
-typedef struct {
-  std::list<group_data_t> reported;
-  std::list<group_data_t> desired;
-} group_list_t;
-
-static std::unordered_map<zigpc_group_member_t, group_list_t> group_map;
+#define LOG_TAG "zigpc_group_map"
 
 sl_status_t zigpc_group_map_add_new(zigbee_group_id_t group,
                                     zigpc_group_member_t member,
@@ -88,30 +48,25 @@ sl_status_t zigpc_group_map_add_new_with_name(zigbee_group_id_t group,
   //group_map[group] creates an empty list if it is not in group_map!
   if (nullptr == group_name) {
     status = SL_STATUS_FAIL;
+  } else if (strlen(group_name) >= ZCL_GROUP_NAME_LENGTH) {
+    status = SL_STATUS_WOULD_OVERFLOW;
+  } else {
+    status = zigpc_datastore_create_group(member.eui64,
+                                          member.endpoint_id,
+                                          is_reported,
+                                          group);
   }
 
   if (SL_STATUS_OK == status) {
-    std::list<group_data_t> *group_list;
+    zigpc_group_data_t group_data = {0};
+    strcpy(group_data.group_name, group_name);
+    group_data.group_name[ZCL_GROUP_NAME_LENGTH - 1] = '\0';
 
-    if (is_reported) {
-      group_list = &group_map[member].reported;
-    } else {
-      group_list = &group_map[member].desired;
-    }
-
-    group_data_t data;
-    data.id   = group;
-    data.name = group_name;
-
-    auto found_group = std::find(group_list->begin(), group_list->end(), data);
-
-    if (found_group == group_list->end()) {
-      group_list->push_back(data);
-    } else {
-      // Update the group name if group info is already tracked.
-      // This handles the case of renaming a group
-      found_group->name = group_name;
-    }
+    status = zigpc_datastore_write_group(member.eui64,
+                                         member.endpoint_id,
+                                         is_reported,
+                                         group,
+                                         &group_data);
   }
 
   return status;
@@ -120,18 +75,9 @@ sl_status_t zigpc_group_map_add_new_with_name(zigbee_group_id_t group,
 unsigned int zigpc_group_map_retrieve_num(zigpc_group_member_t member,
                                           bool is_reported)
 {
-  unsigned int list_size = 0;
-
-  auto found_member = group_map.find(member);
-
-  //only get the list size if we found the group!
-  if (found_member != group_map.end()) {
-    if (is_reported) {
-      list_size = found_member->second.reported.size();
-    } else {
-      list_size = found_member->second.desired.size();
-    }
-  }
+  unsigned int list_size = zigpc_datastore_get_group_count(member.eui64,
+                                                           member.endpoint_id,
+                                                           is_reported);
 
   return list_size;
 }
@@ -141,34 +87,25 @@ sl_status_t zigpc_group_map_retrieve_grouplist(zigpc_group_member_t member,
                                                unsigned int num_groups,
                                                bool is_reported)
 {
-  sl_status_t status      = SL_STATUS_FAIL;
-  unsigned int max_groups = 0;
+  sl_status_t status = SL_STATUS_OK;
 
-  auto found_member = group_map.find(member);
-
-  //check that we found the group, then get the max size
-  if (found_member != group_map.end()) {
-    max_groups = zigpc_group_map_retrieve_num(member, is_reported);
-    status     = SL_STATUS_OK;
+  if (groups == nullptr) {
+    status = SL_STATUS_NULL_POINTER;
   }
 
-  //set the fail conditions
-  if ((found_member == group_map.end()) || (max_groups > num_groups)
-      || (max_groups == 0) || (groups == nullptr)) {
-    status = SL_STATUS_FAIL;
-  } else {
-    group_data_t data_list[num_groups];
-    //use copy_n to only copy as many as can be contained
-    //treat num_members as the size of members array
-    if (is_reported) {
-      std::copy_n(found_member->second.reported.begin(), num_groups, data_list);
-    } else {
-      std::copy_n(found_member->second.desired.begin(), num_groups, data_list);
-    }
+  unsigned int expected_size
+    = zigpc_group_map_retrieve_num(member, is_reported);
+  if (expected_size > num_groups) {
+    status = SL_STATUS_WOULD_OVERFLOW;
+  }
 
-    for (unsigned int i = 0; i < num_groups; i++) {
-      groups[i] = data_list[i].id;
-    }
+  if (SL_STATUS_OK == status) {
+    std::vector<zigbee_group_id_t> group_vector
+      = zigpc_datastore::group::get_group_list(member.eui64,
+                                               member.endpoint_id,
+                                               is_reported);
+
+    std::copy(group_vector.begin(), group_vector.end(), groups);
   }
 
   return status;
@@ -179,39 +116,52 @@ sl_status_t zigpc_group_map_remove_group(zigbee_group_id_t group,
                                          bool is_reported)
 {
   sl_status_t status = SL_STATUS_OK;
-  auto found_member  = group_map.find(member);
-
-  //only get the list size if we found the group!
-  if (found_member != group_map.end()) {
-    std::list<group_data_t> *group_list;
-
-    if (is_reported) {
-      group_list = &found_member->second.reported;
-    } else {
-      group_list = &found_member->second.desired;
-    }
-
-    auto group_index = std::find(group_list->begin(), group_list->end(), group);
-
-    //do not set the status
-    //STATUS_OK if the group list does not have the group!
-    if (group_index != group_list->end()) {
-      group_list->erase(group_index);
-    }
-
-    status = SL_STATUS_OK;
-  } else {
-    status = SL_STATUS_FAIL;
-  }
+  status             = zigpc_datastore_remove_group(member.eui64,
+                                        member.endpoint_id,
+                                        is_reported,
+                                        group);
 
   return status;
 }
 
 sl_status_t zigpc_group_map_remove_all(zigpc_group_member_t member)
 {
-  auto found_member = group_map.find(member);
-  if (found_member != group_map.end()) {
-    group_map.erase(found_member);
+  std::vector<zigbee_group_id_t> desired_group_list
+    = zigpc_datastore::group::get_group_list(member.eui64,
+                                             member.endpoint_id,
+                                             false);
+
+  std::vector<zigbee_group_id_t> reported_group_list
+    = zigpc_datastore::group::get_group_list(member.eui64,
+                                             member.endpoint_id,
+                                             true);
+
+  for (auto desired_it = desired_group_list.begin();
+       desired_it != desired_group_list.end();
+       desired_it++) {
+    sl_status_t desired_status
+      = zigpc_datastore_remove_group(member.eui64,
+                                     member.endpoint_id,
+                                     false,
+                                     *desired_it);
+
+    if (SL_STATUS_OK != desired_status) {
+      sl_log_warning(LOG_TAG, "Error removing desired group");
+    }
+  }
+
+  for (auto reported_it = reported_group_list.begin();
+       reported_it != reported_group_list.end();
+       reported_it++) {
+    sl_status_t reported_status
+      = zigpc_datastore_remove_group(member.eui64,
+                                     member.endpoint_id,
+                                     true,
+                                     *reported_it);
+
+    if (SL_STATUS_OK != reported_status) {
+      sl_log_warning(LOG_TAG, "Error removing reported group");
+    }
   }
 
   return SL_STATUS_OK;
@@ -219,7 +169,6 @@ sl_status_t zigpc_group_map_remove_all(zigpc_group_member_t member)
 
 sl_status_t zigpc_group_map_clear(void)
 {
-  group_map.clear();
   return SL_STATUS_OK;
 }
 
@@ -227,13 +176,32 @@ size_t zigpc_group_map_get_memberlist_count(zigbee_group_id_t group_id)
 {
   size_t num_members = 0;
 
-  for (auto it = group_map.begin(); it != group_map.end(); it++) {
-    std::list<group_data_t> group_list = it->second.reported;
-    auto group_index
-      = std::find(group_list.begin(), group_list.end(), group_id);
+  std::vector<zigbee_eui64_uint_t> eui64_list
+    = zigpc_datastore::device::get_id_list();
 
-    if (group_index != group_list.end()) {
-      num_members = num_members + 1;
+  for (auto eui_iter = eui64_list.begin(); eui_iter != eui64_list.end();
+       eui_iter++) {
+    zigbee_eui64_t eui64;
+    sl_status_t status = zigbee_uint_to_eui64(*eui_iter, eui64);
+
+    if (SL_STATUS_OK != status) {
+      sl_log_warning(LOG_TAG, "Error retrieving eui64");
+      continue;
+    } else {
+      std::vector<zigbee_endpoint_id_t> endpoint_list
+        = zigpc_datastore::endpoint::get_id_list(eui64);
+
+      for (auto end_iter = endpoint_list.begin();
+           end_iter != endpoint_list.end();
+           end_iter++) {
+
+        bool has_reported_group
+          = zigpc_datastore_contains_group(eui64, *end_iter, true, group_id);
+
+        if (has_reported_group) {
+          num_members++;
+        }
+      }
     }
   }
 
@@ -245,30 +213,55 @@ sl_status_t
                                        zigpc_group_member_t *const member_list,
                                        size_t member_list_count)
 {
-  sl_status_t status = SL_STATUS_OK;
-  std::list<zigpc_group_member_t> members_internal;
+  unsigned int expected_num = zigpc_group_map_get_memberlist_count(group_id);
 
-  for (auto it = group_map.begin(); it != group_map.end(); it++) {
-    std::list<group_data_t> group_list = it->second.reported;
-    auto group_index
-      = std::find(group_list.begin(), group_list.end(), group_id);
+  if (expected_num == 0U) {
+    return SL_STATUS_NOT_FOUND;
+  }
 
-    if (group_index != group_list.end()) {
-      members_internal.push_back(it->first);
+  if (expected_num > member_list_count) {
+    return SL_STATUS_WOULD_OVERFLOW;
+  }
+
+  if (member_list == nullptr) {
+    return SL_STATUS_NULL_POINTER;
+  }
+
+  std::list<zigpc_group_member_t> member_temp;
+
+  std::vector<zigbee_eui64_uint_t> eui64_list
+    = zigpc_datastore::device::get_id_list();
+
+  for (zigbee_eui64_uint_t eui64_uint: eui64_list) {
+    zigbee_eui64_t eui64;
+    sl_status_t status = zigbee_uint_to_eui64(eui64_uint, eui64);
+
+    if (SL_STATUS_OK != status) {
+      sl_log_warning(LOG_TAG, "Error retrieving eui64");
+      continue;
+    } else {
+      std::vector<zigbee_endpoint_id_t> endpoint_list
+        = zigpc_datastore::endpoint::get_id_list(eui64);
+
+      for( zigbee_endpoint_id_t endpoint_id : endpoint_list)
+      {
+        bool has_reported_group
+          = zigpc_datastore_contains_group(eui64, endpoint_id, true, group_id);
+
+        if (has_reported_group) {
+          zigpc_group_member_t next_member;
+          memcpy(next_member.eui64, eui64, ZIGBEE_EUI64_SIZE);
+          next_member.endpoint_id = endpoint_id;
+
+          member_temp.push_back(next_member);
+        }
+      }
     }
   }
 
-  if ((members_internal.size() > 0)
-      && (members_internal.size() <= member_list_count)) {
-    status = SL_STATUS_OK;
-    std::copy_n(members_internal.begin(), member_list_count, member_list);
-  } else if (members_internal.size() > member_list_count) {
-    status = SL_STATUS_WOULD_OVERFLOW;
-  } else {
-    status = SL_STATUS_NOT_FOUND;
-  }
+  std::copy(member_temp.begin(), member_temp.end(), member_list);
 
-  return status;
+  return SL_STATUS_OK;
 }
 
 sl_status_t zigpc_group_map_retrieve_group_name(zigpc_group_member_t member,
@@ -285,26 +278,16 @@ sl_status_t zigpc_group_map_retrieve_group_name(zigpc_group_member_t member,
   } else if (*group_name_size < 1U) {
     status = SL_STATUS_INVALID_RANGE;
   } else {
-    auto found_member = group_map.find(member);
-    if (found_member != group_map.end()) {
-      std::list<group_data_t> group_list;
+    zigpc_group_data_t group_data;
 
-      if (is_reported) {
-        group_list = found_member->second.reported;
-      } else {
-        group_list = found_member->second.desired;
-      }
+    status = zigpc_datastore_read_group(member.eui64,
+                                        member.endpoint_id,
+                                        is_reported,
+                                        group_id,
+                                        &group_data);
 
-      auto group_index
-        = std::find(group_list.begin(), group_list.end(), group_id);
-
-      if (group_index != group_list.end()) {
-        group_data_t data = *group_index;
-        group_name_str    = data.name;
-      } else {
-        *group_name_size = 0U;
-        status           = SL_STATUS_NOT_FOUND;
-      }
+    if (SL_STATUS_OK == status) {
+      group_name_str = group_data.group_name;
     } else {
       *group_name_size = 0U;
       status           = SL_STATUS_NOT_FOUND;
@@ -341,37 +324,28 @@ sl_status_t zigpc_group_map_set_group_name(zigpc_group_member_t member,
 
   if (nullptr == group_name) {
     status = SL_STATUS_FAIL;
+  } else if (strlen(group_name) >= ZCL_GROUP_NAME_LENGTH) {
+    status = SL_STATUS_WOULD_OVERFLOW;
+  }
+
+  bool has_group = zigpc_datastore_contains_group(member.eui64,
+                                                  member.endpoint_id,
+                                                  is_reported,
+                                                  group_id);
+
+  if ((SL_STATUS_OK == status) && (!has_group)) {
+    status = SL_STATUS_NOT_FOUND;
   }
 
   if (SL_STATUS_OK == status) {
-    auto found_member = group_map.find(member);
-    std::list<group_data_t> group_list;
+    zigpc_group_data_t group_data;
 
-    if (found_member != group_map.end()) {
-      if (is_reported) {
-        group_list = found_member->second.reported;
-      } else {
-        group_list = found_member->second.desired;
-      }
-
-      auto found_group
-        = std::find(group_list.begin(), group_list.end(), group_id);
-
-      if (found_group != group_list.end()) {
-        found_group->name = group_name;
-
-        if (is_reported) {
-          found_member->second.reported = group_list;
-        } else {
-          found_member->second.desired = group_list;
-        }
-
-      } else {
-        status = SL_STATUS_NOT_FOUND;
-      }
-    } else {
-      status = SL_STATUS_NOT_FOUND;
-    }
+    memcpy(group_data.group_name, group_name, ZCL_GROUP_NAME_LENGTH);
+    status = zigpc_datastore_write_group(member.eui64,
+                                         member.endpoint_id,
+                                         is_reported,
+                                         group_id,
+                                         &group_data);
   }
 
   return status;

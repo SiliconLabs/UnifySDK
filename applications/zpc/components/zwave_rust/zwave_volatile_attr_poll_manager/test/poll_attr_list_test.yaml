@@ -1,0 +1,13 @@
+# Volatile Z-Wave Attribute type with polling interval [s].
+# The value 0 means no polling.
+# It is important that the attributes specified here have a Get Rule
+# registered to the attribute resolver for the system to work
+# properly
+# Keys for polling intervals:
+# ... polling_interval_zwave -> Z-Wave v0 node
+# ... polling_interval_zwave_v1 -> Z-Wave Plus v1 node
+# ... polling_interval_zwave_v2 -> Z-Wave Plus v2 node
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE
+  polling_interval_zwave: 100
+  polling_interval_zwave_v1: 1000
+  polling_interval_zwave_v2: 0

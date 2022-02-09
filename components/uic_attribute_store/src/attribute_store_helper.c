@@ -1,7 +1,7 @@
 
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -134,6 +134,41 @@ sl_status_t attribute_store_set_reported_string(attribute_store_node_t node,
     string_length);
 }
 
+sl_status_t attribute_store_get_reported_string(attribute_store_node_t node,
+                                                char *string,
+                                                size_t maximum_size)
+{
+  // Parameter validation
+  if (string == NULL || maximum_size == 0) {
+    return SL_STATUS_FAIL;
+  }
+  // Ensure null termination of the user buffer if we abort:
+  string[0] = '\0';
+  if (false == attribute_store_is_value_defined(node, REPORTED_ATTRIBUTE)) {
+    return SL_STATUS_FAIL;
+  }
+
+  // Retrive the data from the attribute store in our buffer.
+  uint8_t string_length = 0;
+  attribute_store_get_node_attribute_value(node,
+                                           REPORTED_ATTRIBUTE,
+                                           (uint8_t *)received_value,
+                                           &string_length);
+
+  if (string_length > maximum_size) {
+    return SL_STATUS_FAIL;
+  }
+
+  // The attribute store should contain the null terminations, but who knows
+  if (received_value[string_length - 1] != '\0') {
+    return SL_STATUS_FAIL;
+  }
+
+  // Looks safe, copy the data to the user pointer.
+  strncpy(string, (const char*)received_value, maximum_size);
+  return SL_STATUS_OK;
+}
+
 void attribute_store_undefine_desired(attribute_store_node_t node)
 {
   attribute_store_set_node_attribute_value(node, DESIRED_ATTRIBUTE, NULL, 0);
@@ -194,7 +229,7 @@ sl_status_t
                                            received_value,
                                            &received_value_size);
 
-  // If the value is undefined, we return false.
+  // If the value is undefined, we return SL_STATUS_FAIL.
   if (received_value_size == 0) {
     return SL_STATUS_FAIL;
   }
@@ -296,4 +331,17 @@ void attribute_store_add_if_missing(attribute_store_node_t parent_node,
       attribute_store_add_node(attributes[i], parent_node);
     }
   }
+}
+
+sl_status_t attribute_store_delete_all_children(attribute_store_node_t node)
+{
+  attribute_store_node_t child_node = attribute_store_get_node_child(node, 0);
+
+  while (child_node != ATTRIBUTE_STORE_INVALID_NODE) {
+    if (SL_STATUS_OK != attribute_store_delete_node(child_node)) {
+      return SL_STATUS_FAIL;
+    }
+    child_node = attribute_store_get_node_child(node, 0);
+  }
+  return SL_STATUS_OK;
 }

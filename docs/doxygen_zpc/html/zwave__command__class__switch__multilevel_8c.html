@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_command_classes/src/zwave_command_class_switch_multilevel.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave_command_classes/src/zwave_command_class_switch_multilevel.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -161,7 +161,7 @@ Functions</h2></td></tr>
 <tr class="separator:a56620e987a8a31bbe37b5b9bf0c0cd34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61b840814b4ebed1e48e1b62a0e6a645"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#a61b840814b4ebed1e48e1b62a0e6a645">set_state_value</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node, <a class="el" href="group__command__classes__utils.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a> reported, <a class="el" href="group__command__classes__utils.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a> desired)</td></tr>
 <tr class="separator:a61b840814b4ebed1e48e1b62a0e6a645"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cd4e090e971290dd3527991b77d0862"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#a7cd4e090e971290dd3527991b77d0862">get_state</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node, <a class="el" href="zwave__command__class__switch__multilevel_8c.html#a0732bbde7d97c1fcdb05bbb2b52ea09a">multilevel_switch_state_t</a> *state)</td></tr>
+<tr class="memitem:a7cd4e090e971290dd3527991b77d0862"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#a7cd4e090e971290dd3527991b77d0862">get_state</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node, <a class="el" href="zwave__command__class__switch__multilevel_8c.html#a0732bbde7d97c1fcdb05bbb2b52ea09a">multilevel_switch_state_t</a> *<a class="el" href="zwave__api__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a>)</td></tr>
 <tr class="separator:a7cd4e090e971290dd3527991b77d0862"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f57f8e99286b4fa232bbc7457a9268f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#a6f57f8e99286b4fa232bbc7457a9268f">set_desired_on_off</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node, uint32_t on_off)</td></tr>
 <tr class="separator:a6f57f8e99286b4fa232bbc7457a9268f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,15 +177,15 @@ Functions</h2></td></tr>
 <tr class="separator:ad9c702f574d93ec670441aa7b9344375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac87f0660c717946b7e2b72a8c1811b6d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#ac87f0660c717946b7e2b72a8c1811b6d">set_desired_substate_update</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node, uint8_t substate_update)</td></tr>
 <tr class="separator:ac87f0660c717946b7e2b72a8c1811b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c29ee5e01b9818d09448de111541f33"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#a2c29ee5e01b9818d09448de111541f33">zwave_command_class_switch_multilevel_get</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
+<tr class="memitem:a2c29ee5e01b9818d09448de111541f33"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#a2c29ee5e01b9818d09448de111541f33">zwave_command_class_switch_multilevel_get</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
 <tr class="separator:a2c29ee5e01b9818d09448de111541f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad12fd46a7f0bbb6dea5e4724fcdc1968"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#ad12fd46a7f0bbb6dea5e4724fcdc1968">zwave_command_class_switch_multilevel_supported_get</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
+<tr class="memitem:ad12fd46a7f0bbb6dea5e4724fcdc1968"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#ad12fd46a7f0bbb6dea5e4724fcdc1968">zwave_command_class_switch_multilevel_supported_get</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
 <tr class="separator:ad12fd46a7f0bbb6dea5e4724fcdc1968"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abea13be094c4d24c85b84e3cd50f6795"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#abea13be094c4d24c85b84e3cd50f6795">zwave_command_class_switch_multilevel_set</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
+<tr class="memitem:abea13be094c4d24c85b84e3cd50f6795"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#abea13be094c4d24c85b84e3cd50f6795">zwave_command_class_switch_multilevel_set</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
 <tr class="separator:abea13be094c4d24c85b84e3cd50f6795"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1f99263283de8de6f75fd276f5774d2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#ab1f99263283de8de6f75fd276f5774d2">zwave_command_class_switch_multilevel_handle_report</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
+<tr class="memitem:ab1f99263283de8de6f75fd276f5774d2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#ab1f99263283de8de6f75fd276f5774d2">zwave_command_class_switch_multilevel_handle_report</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
 <tr class="separator:ab1f99263283de8de6f75fd276f5774d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69e98a33c83d372e3d13b816bf9a3e77"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#a69e98a33c83d372e3d13b816bf9a3e77">zwave_command_class_switch_multilevel_handle_supported_report</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
+<tr class="memitem:a69e98a33c83d372e3d13b816bf9a3e77"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#a69e98a33c83d372e3d13b816bf9a3e77">zwave_command_class_switch_multilevel_handle_supported_report</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
 <tr class="separator:a69e98a33c83d372e3d13b816bf9a3e77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefdc747956727fa542d10bc6fe464140"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#aefdc747956727fa542d10bc6fe464140">on_state_send_data_complete</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> state_node, <a class="el" href="attribute__resolver__rule_8h.html#a6ae323c64b845f108a676a0731e6d6ea">resolver_rule_type_t</a> rule_type, <a class="el" href="group__zpc__attribute__resolver.html#gaa29dd503ea70c04d5c12e49ab6f302f2">zpc_resolver_event_t</a> event)</td></tr>
 <tr class="separator:aefdc747956727fa542d10bc6fe464140"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,9 +196,9 @@ Functions</h2></td></tr>
 <tr class="separator:a2230cf536d6bdba0265ca6c235afd89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5aa473be6384b76cf418b24586a3ac41"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#a5aa473be6384b76cf418b24586a3ac41">zwave_command_class_switch_multilevel_on_reported_sub_state_update</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
 <tr class="separator:a5aa473be6384b76cf418b24586a3ac41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3088526ca025e0a4f4d75d2c67dab7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#ae3088526ca025e0a4f4d75d2c67dab7a">zwave_command_class_switch_multilevel_control_handler</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
+<tr class="memitem:ae3088526ca025e0a4f4d75d2c67dab7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__switch__multilevel_8c.html#ae3088526ca025e0a4f4d75d2c67dab7a">zwave_command_class_switch_multilevel_control_handler</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
 <tr class="separator:ae3088526ca025e0a4f4d75d2c67dab7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga866d4efa5431c875235b5540a38dcc4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch__multilevel__command__class.html#ga866d4efa5431c875235b5540a38dcc4c">zwave_command_class_switch_multilevel_init</a> ()</td></tr>
+<tr class="memitem:ga866d4efa5431c875235b5540a38dcc4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__switch__multilevel__command__class.html#ga866d4efa5431c875235b5540a38dcc4c">zwave_command_class_switch_multilevel_init</a> ()</td></tr>
 <tr class="memdesc:ga866d4efa5431c875235b5540a38dcc4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initialize the Multilevel Switch Command Class handler.  <a href="group__switch__multilevel__command__class.html#ga866d4efa5431c875235b5540a38dcc4c">More...</a><br /></td></tr>
 <tr class="separator:ga866d4efa5431c875235b5540a38dcc4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -858,9 +858,9 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_control_handler </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_control_handler </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection_info</em>, </td>
         </tr>
         <tr>
@@ -895,7 +895,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_get </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_get </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -937,9 +937,9 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_handle_report </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_handle_report </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection_info</em>, </td>
         </tr>
         <tr>
@@ -979,9 +979,9 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_handle_supported_report </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_handle_supported_report </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection_info</em>, </td>
         </tr>
         <tr>
@@ -1129,7 +1129,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_set </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_set </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -1171,7 +1171,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_supported_get </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_switch_multilevel_supported_get </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -1259,7 +1259,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6ac9bb75d77e4d974481da8e3d01cbca.html">zwave_command_classes</a></li><li class="navelem"><a class="el" href="dir_a7413761325a0de7b31d33e30e75f050.html">src</a></li><li class="navelem"><a class="el" href="zwave__command__class__switch__multilevel_8c.html">zwave_command_class_switch_multilevel.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:28 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -2,8 +2,10 @@ var attribute__store__helper_8c =
 [
     [ "attribute_store_add_if_missing", "group__attribute__store__value__helpers.html#gafbd8072f005dacc2ee797b01f8b46089", null ],
     [ "attribute_store_copy_value", "group__attribute__store__value__helpers.html#gac0bfb5e7a616c3dd0804dacb34949ea3", null ],
+    [ "attribute_store_delete_all_children", "group__attribute__store__value__helpers.html#gae8c7595b27344009488bbd8f288b713e", null ],
     [ "attribute_store_get_desired", "group__attribute__store__value__helpers.html#gae32bcc665b36442ec966a81c49ff1b23", null ],
     [ "attribute_store_get_reported", "group__attribute__store__value__helpers.html#gadbbde4a9941ca0eea52fb973da0fef9c", null ],
+    [ "attribute_store_get_reported_string", "group__attribute__store__value__helpers.html#ga2001f88a850390439c03ef7ed0dac20e", null ],
     [ "attribute_store_is_value_defined", "group__attribute__store__value__helpers.html#gac39c5bdc7c7290dc9abe16948cb848b6", null ],
     [ "attribute_store_is_value_matched", "group__attribute__store__value__helpers.html#ga4f8587c8649ac94509c63e91970bce82", null ],
     [ "attribute_store_read_value", "group__attribute__store__value__helpers.html#ga78d2a9c79ae9f51af5417840decbb295", null ],

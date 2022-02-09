@@ -13,7 +13,7 @@
 
 /**
  * @defgroup attribute_resolver_group_send ZPC Attribute Resolver Group Send
- * @ingroup attribute_resolver_send
+ * @ingroup zpc_attribute_resolver_internals
  * @brief Transmit messages to multiple destinations at once.
  *
  * @startuml zwave_multicast

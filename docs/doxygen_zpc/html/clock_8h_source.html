@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: components/uic_contiki/core/sys/clock.h Source File</title>
+<title>Z-Wave Protocol Controller Refrence: components/uic_contiki/core/sys/clock.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('clock_8h_source.html',''); initResizab
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#ifndef __CLOCK_H__</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#define __CLOCK_H__</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="contiki-conf_8h.html">contiki-conf.h</a>&quot;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#include &quot;contiki-conf.h&quot;</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
@@ -136,48 +136,47 @@ $(document).ready(function(){initNavTree('clock_8h_source.html',''); initResizab
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#define CLOCK_LT(a, b) ((clock_time_t)((a) - (b)) &lt; ((clock_time_t)(~((clock_time_t)0)) &gt;&gt; 1))</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* 0 */</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__clock.html#gaa1e0308c27acc9c12a039e469e4b1293">clock_lte</a>(<a class="code" href="contiki-conf_8h.html#a42fc7b708ad04499c436158fd5f37ed4">clock_time_t</a> t1, <a class="code" href="contiki-conf_8h.html#a42fc7b708ad04499c436158fd5f37ed4">clock_time_t</a> t2);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__clock.html#gaa1e0308c27acc9c12a039e469e4b1293">clock_lte</a>(<a class="code" href="gecko_2contiki-conf_8h.html#a815417fbb97a3a1ec100d1d1b53b619a">clock_time_t</a> t1, <a class="code" href="gecko_2contiki-conf_8h.html#a815417fbb97a3a1ec100d1d1b53b619a">clock_time_t</a> t2);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="group__clock.html#ga78ab77b57cf2e00089f0a3a22508524c">   98</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__clock.html#ga78ab77b57cf2e00089f0a3a22508524c">clock_init</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<a class="code" href="contiki-conf_8h.html#ace2c3395110fad22d5d766b6c2b324d1">CCIF</a> <a class="code" href="contiki-conf_8h.html#a42fc7b708ad04499c436158fd5f37ed4">clock_time_t</a> <a class="code" href="group__clock.html#ga50c22f9b9d60dd1f9e59b63a3a6676b1">clock_time</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<a class="code" href="gecko_2contiki-conf_8h.html#ace2c3395110fad22d5d766b6c2b324d1">CCIF</a> <a class="code" href="gecko_2contiki-conf_8h.html#a815417fbb97a3a1ec100d1d1b53b619a">clock_time_t</a> <a class="code" href="group__clock.html#ga50c22f9b9d60dd1f9e59b63a3a6676b1">clock_time</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__clock.html#ga2a4bbf8e0008809dfd6c38040941a536">clock_delay</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#ifdef CLOCK_CONF_SECOND</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#define CLOCK_SECOND CLOCK_CONF_SECOND</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="group__clock.html#gae3ced0551b26c9b99cb45a86f34d100a">  119</a></span>&#160;<span class="preprocessor">#define CLOCK_SECOND (clock_time_t)32</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="group__clock.html#gae57f21c49f465372a8bf2ac3fbe03ba8">  122</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__clock.html#gae57f21c49f465372a8bf2ac3fbe03ba8">clock_fine_max</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="group__clock.html#gadca1ca5f3c484a278d6c4876f7c54bdb">  123</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="group__clock.html#gadca1ca5f3c484a278d6c4876f7c54bdb">clock_fine</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<a class="code" href="contiki-conf_8h.html#ace2c3395110fad22d5d766b6c2b324d1">CCIF</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__clock.html#ga8bbd5d5a773349139eee79d365af36ab">clock_seconds</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __CLOCK_H__ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__clock.html#gabe0f181eceefd89df39387bf23ac3fbc">clock_delay</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> d);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#ifdef CLOCK_CONF_SECOND</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#define CLOCK_SECOND CLOCK_CONF_SECOND</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="group__clock.html#gae3ced0551b26c9b99cb45a86f34d100a">  127</a></span>&#160;<span class="preprocessor">#define CLOCK_SECOND (clock_time_t)32</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="group__clock.html#gae57f21c49f465372a8bf2ac3fbe03ba8">  130</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__clock.html#gae57f21c49f465372a8bf2ac3fbe03ba8">clock_fine_max</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="group__clock.html#gadca1ca5f3c484a278d6c4876f7c54bdb">  131</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code" href="group__clock.html#gadca1ca5f3c484a278d6c4876f7c54bdb">clock_fine</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<a class="code" href="gecko_2contiki-conf_8h.html#ace2c3395110fad22d5d766b6c2b324d1">CCIF</a> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="group__clock.html#ga8bbd5d5a773349139eee79d365af36ab">clock_seconds</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __CLOCK_H__ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="agroup__clock_html_gabe0f181eceefd89df39387bf23ac3fbc"><div class="ttname"><a href="group__clock.html#gabe0f181eceefd89df39387bf23ac3fbc">clock_delay</a></div><div class="ttdeci">void clock_delay(unsigned int d)</div><div class="ttdef"><b>Definition:</b> clock.c:37</div></div>
 <div class="ttc" id="agroup__clock_html_ga50c22f9b9d60dd1f9e59b63a3a6676b1"><div class="ttname"><a href="group__clock.html#ga50c22f9b9d60dd1f9e59b63a3a6676b1">clock_time</a></div><div class="ttdeci">CCIF clock_time_t clock_time(void)</div><div class="ttdef"><b>Definition:</b> contiki_test_helper.c:24</div></div>
 <div class="ttc" id="agroup__clock_html_ga8bbd5d5a773349139eee79d365af36ab"><div class="ttname"><a href="group__clock.html#ga8bbd5d5a773349139eee79d365af36ab">clock_seconds</a></div><div class="ttdeci">CCIF unsigned long clock_seconds(void)</div><div class="ttdef"><b>Definition:</b> contiki_test_helper.c:41</div></div>
-<div class="ttc" id="agroup__clock_html_gaa1e0308c27acc9c12a039e469e4b1293"><div class="ttname"><a href="group__clock.html#gaa1e0308c27acc9c12a039e469e4b1293">clock_lte</a></div><div class="ttdeci">int clock_lte(clock_time_t t1, clock_time_t t2)</div><div class="ttdef"><b>Definition:</b> clock.c:94</div></div>
+<div class="ttc" id="agroup__clock_html_gaa1e0308c27acc9c12a039e469e4b1293"><div class="ttname"><a href="group__clock.html#gaa1e0308c27acc9c12a039e469e4b1293">clock_lte</a></div><div class="ttdeci">int clock_lte(clock_time_t t1, clock_time_t t2)</div><div class="ttdef"><b>Definition:</b> clock.c:22</div></div>
 <div class="ttc" id="agroup__clock_html_gae57f21c49f465372a8bf2ac3fbe03ba8"><div class="ttname"><a href="group__clock.html#gae57f21c49f465372a8bf2ac3fbe03ba8">clock_fine_max</a></div><div class="ttdeci">int clock_fine_max(void)</div></div>
-<div class="ttc" id="acontiki-conf_8h_html_ace2c3395110fad22d5d766b6c2b324d1"><div class="ttname"><a href="contiki-conf_8h.html#ace2c3395110fad22d5d766b6c2b324d1">CCIF</a></div><div class="ttdeci">#define CCIF</div><div class="ttdef"><b>Definition:</b> contiki-conf.h:51</div></div>
 <div class="ttc" id="agroup__clock_html_gadca1ca5f3c484a278d6c4876f7c54bdb"><div class="ttname"><a href="group__clock.html#gadca1ca5f3c484a278d6c4876f7c54bdb">clock_fine</a></div><div class="ttdeci">unsigned short clock_fine(void)</div></div>
-<div class="ttc" id="acontiki-conf_8h_html"><div class="ttname"><a href="contiki-conf_8h.html">contiki-conf.h</a></div></div>
-<div class="ttc" id="acontiki-conf_8h_html_a42fc7b708ad04499c436158fd5f37ed4"><div class="ttname"><a href="contiki-conf_8h.html#a42fc7b708ad04499c436158fd5f37ed4">clock_time_t</a></div><div class="ttdeci">unsigned long clock_time_t</div><div class="ttdef"><b>Definition:</b> contiki-conf.h:58</div></div>
-<div class="ttc" id="agroup__clock_html_ga2a4bbf8e0008809dfd6c38040941a536"><div class="ttname"><a href="group__clock.html#ga2a4bbf8e0008809dfd6c38040941a536">clock_delay</a></div><div class="ttdeci">void clock_delay(unsigned int)</div><div class="ttdef"><b>Definition:</b> clock.c:106</div></div>
 <div class="ttc" id="agroup__clock_html_ga78ab77b57cf2e00089f0a3a22508524c"><div class="ttname"><a href="group__clock.html#ga78ab77b57cf2e00089f0a3a22508524c">clock_init</a></div><div class="ttdeci">void clock_init(void)</div></div>
+<div class="ttc" id="agecko_2contiki-conf_8h_html_a815417fbb97a3a1ec100d1d1b53b619a"><div class="ttname"><a href="gecko_2contiki-conf_8h.html#a815417fbb97a3a1ec100d1d1b53b619a">clock_time_t</a></div><div class="ttdeci">TickType_t clock_time_t</div><div class="ttdef"><b>Definition:</b> contiki-conf.h:32</div></div>
+<div class="ttc" id="agecko_2contiki-conf_8h_html_ace2c3395110fad22d5d766b6c2b324d1"><div class="ttname"><a href="gecko_2contiki-conf_8h.html#ace2c3395110fad22d5d766b6c2b324d1">CCIF</a></div><div class="ttdeci">#define CCIF</div><div class="ttdef"><b>Definition:</b> contiki-conf.h:25</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_f1d32ca542c0f43616b5a5e0d1cef42d.html">uic_contiki</a></li><li class="navelem"><a class="el" href="dir_7e2d4b5dbef12d3b4b67dd812c2f2df2.html">core</a></li><li class="navelem"><a class="el" href="dir_cab485229364bacc9038f86019979476.html">sys</a></li><li class="navelem"><a class="el" href="clock_8h.html">clock.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:19 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

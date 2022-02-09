@@ -58,7 +58,7 @@ sl_status_t zigpc_zcl_frame_init_command(zcl_frame_t *const frame,
     frame->buffer[frame->size++] = frame_control;
     frame->buffer[frame->size]   = ZIGPC_ZCL_FRAME_SEQUENCE_NUMBER_PLACEHOLDER;
 
-    // Store sequence ID offset to be passed into Z3Gateway API
+    // Store sequence ID offset to be passed into Zigbee Host layer
     frame->offset_sequence_id = frame->size++;
 
     frame->buffer[frame->size++] = command_id;

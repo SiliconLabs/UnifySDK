@@ -16,10 +16,10 @@
 #include <unity.h>
 
 #include <zcl_definitions.h>
-#include <zcl_util_mock.h>
-#include <zigpc_common_zigbee_mock.h>
-#include <zigpc_gateway_mock.h>
-#include <zigpc_datastore_mock.h>
+#include "zcl_util_mock.h"
+#include "zigpc_common_zigbee_mock.h"
+#include "zigpc_gateway_mock.h"
+#include "zigpc_datastore_mock.h"
 
 #include "zigpc_command_mapper_int.h"
 

@@ -1,6 +1,6 @@
 # Unify Dockerfile
 
-This folder contains dockerfiles with recipes for creating a docker image for building the various Unify applications.
+This folder contains docker files with recipes for creating a docker image for building the various Unify applications.
 
 The *Dockerfile* is supporting building all target applications (protocol controllers, UPVL, Developer GUI, etc.).
 

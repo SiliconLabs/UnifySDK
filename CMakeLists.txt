@@ -13,6 +13,7 @@ set(CMAKE_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/include/"
 # ##############################################################################
 include(cmake/include/version.cmake)
 include(cmake/include/build_permutations.cmake)
+include(cmake/include/link_wrap.cmake)
 
 project(
   uic

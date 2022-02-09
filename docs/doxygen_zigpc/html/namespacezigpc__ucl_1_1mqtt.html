@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -103,33 +103,41 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a0ae3f2434936eef3e9855e9437c03292"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">topic_type_t</a> { <a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292aeb9d70b8abb8cc33ddb33743c528c28c">topic_type_t::BY_UNID_PC_NWMGMT</a>, 
+<tr class="memitem:a0ae3f2434936eef3e9855e9437c03292"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">topic_type_t</a> { <br />
+&#160;&#160;<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292aeb9d70b8abb8cc33ddb33743c528c28c">topic_type_t::BY_UNID_PC_NWMGMT</a>, 
 <a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292a0cde6a64c24ecd02af7c7f7807b6a351">topic_type_t::BY_UNID_PC_NWMGMT_WRITE</a>, 
-<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292a2bab4fb29c86d3a0f3899ef457902fbc">topic_type_t::BY_UNID_NODE_STATE</a>
+<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292a2bab4fb29c86d3a0f3899ef457902fbc">topic_type_t::BY_UNID_NODE_STATE</a>, 
+<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292a4f2583a3fec9dea6a329f1b3cd47b2ed">topic_type_t::BY_UNID_NODE</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292a7612b5b128ffe2c81654261d1359e3fd">topic_type_t::BY_UNID_NODE_EP</a>
+<br />
  }</td></tr>
-<tr class="memdesc:a0ae3f2434936eef3e9855e9437c03292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of topics that is supported to be published/subscribed.  <a href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">More...</a><br /></td></tr>
+<tr class="memdesc:a0ae3f2434936eef3e9855e9437c03292"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of specific UCL topics that can be build along with variables passed via mqtt::topic_data_t.  <a href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">More...</a><br /></td></tr>
 <tr class="separator:a0ae3f2434936eef3e9855e9437c03292"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0708e9e354961a934712ff0ac08a9192"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0708e9e354961a934712ff0ac08a9192">parse_unid</a> (std::string unid, <a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> &amp;eui64)</td></tr>
+<tr class="memitem:a5f6b0d3f840732a5d93e0140df24c20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a5f6b0d3f840732a5d93e0140df24c20a">build_topic</a> (<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a> topic_type, <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html">zigpc_ucl::mqtt::topic_data_t</a> topic_data, std::string &amp;topic)</td></tr>
+<tr class="memdesc:a5f6b0d3f840732a5d93e0140df24c20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate the topic string based on the topic type and data passed in.  <a href="namespacezigpc__ucl_1_1mqtt.html#a5f6b0d3f840732a5d93e0140df24c20a">More...</a><br /></td></tr>
+<tr class="separator:a5f6b0d3f840732a5d93e0140df24c20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0708e9e354961a934712ff0ac08a9192"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0708e9e354961a934712ff0ac08a9192">parse_unid</a> (std::string unid, <a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> &amp;eui64)</td></tr>
 <tr class="memdesc:a0708e9e354961a934712ff0ac08a9192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse a UCL UNID into Zigbee device identifier.  <a href="namespacezigpc__ucl_1_1mqtt.html#a0708e9e354961a934712ff0ac08a9192">More...</a><br /></td></tr>
 <tr class="separator:a0708e9e354961a934712ff0ac08a9192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bbae71d30f87b2e0bb174c37f519a6f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a2bbae71d30f87b2e0bb174c37f519a6f">build_unid</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> eui64)</td></tr>
 <tr class="memdesc:a2bbae71d30f87b2e0bb174c37f519a6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a UCL UNID based on the Zigbee device identifier.  <a href="namespacezigpc__ucl_1_1mqtt.html#a2bbae71d30f87b2e0bb174c37f519a6f">More...</a><br /></td></tr>
 <tr class="separator:a2bbae71d30f87b2e0bb174c37f519a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a250e1d55f101037be14c705df35f3996"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a250e1d55f101037be14c705df35f3996">parse_payload</a> (const char *payload, bpt::ptree &amp;<a class="el" href="structpt.html">pt</a>)</td></tr>
-<tr class="memdesc:a250e1d55f101037be14c705df35f3996"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the Incoming JSON payload into the passed in property tree.  <a href="namespacezigpc__ucl_1_1mqtt.html#a250e1d55f101037be14c705df35f3996">More...</a><br /></td></tr>
-<tr class="separator:a250e1d55f101037be14c705df35f3996"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f6b0d3f840732a5d93e0140df24c20a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a5f6b0d3f840732a5d93e0140df24c20a">build_topic</a> (<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a> topic_type, <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html">zigpc_ucl::mqtt::topic_data_t</a> topic_data, std::string &amp;topic)</td></tr>
-<tr class="memdesc:a5f6b0d3f840732a5d93e0140df24c20a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate the topic string based on the topic type and data passed in.  <a href="namespacezigpc__ucl_1_1mqtt.html#a5f6b0d3f840732a5d93e0140df24c20a">More...</a><br /></td></tr>
-<tr class="separator:a5f6b0d3f840732a5d93e0140df24c20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a684dac450566b02786692bb552a6bdd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a684dac450566b02786692bb552a6bdd3">subscribe</a> (<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a> topic_type, <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html">zigpc_ucl::mqtt::topic_data_t</a> topic_data, <a class="el" href="group__uic__mqtt.html#gacf7c8ad274a1b1ced5ae34fef47468c3">mqtt_message_callback_t</a> cb)</td></tr>
+<tr class="memitem:ab100732a9ed8f01b20f5701fec3ff0b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#ab100732a9ed8f01b20f5701fec3ff0b6">parse_payload</a> (const char *payload, nlohmann::json &amp;jsn)</td></tr>
+<tr class="memdesc:ab100732a9ed8f01b20f5701fec3ff0b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the Incoming JSON payload into the passed in property tree.  <a href="namespacezigpc__ucl_1_1mqtt.html#ab100732a9ed8f01b20f5701fec3ff0b6">More...</a><br /></td></tr>
+<tr class="separator:ab100732a9ed8f01b20f5701fec3ff0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a684dac450566b02786692bb552a6bdd3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a684dac450566b02786692bb552a6bdd3">subscribe</a> (<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a> topic_type, <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html">zigpc_ucl::mqtt::topic_data_t</a> topic_data, <a class="el" href="group__uic__mqtt.html#gacf7c8ad274a1b1ced5ae34fef47468c3">mqtt_message_callback_t</a> cb)</td></tr>
 <tr class="memdesc:a684dac450566b02786692bb552a6bdd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribe to a UCL topic based on the type and data passed in.  <a href="namespacezigpc__ucl_1_1mqtt.html#a684dac450566b02786692bb552a6bdd3">More...</a><br /></td></tr>
 <tr class="separator:a684dac450566b02786692bb552a6bdd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a921a55b253600dd4da3c0f31c0fff82d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a921a55b253600dd4da3c0f31c0fff82d">publish</a> (<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a> topic_type, <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html">zigpc_ucl::mqtt::topic_data_t</a> topic_data, const char *payload, size_t payload_size, bool retain)</td></tr>
+<tr class="memitem:a921a55b253600dd4da3c0f31c0fff82d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a921a55b253600dd4da3c0f31c0fff82d">publish</a> (<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a> topic_type, <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html">zigpc_ucl::mqtt::topic_data_t</a> topic_data, const char *payload, size_t payload_size, bool retain)</td></tr>
 <tr class="memdesc:a921a55b253600dd4da3c0f31c0fff82d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish payload to a UCL topic based on the type and data passed in.  <a href="namespacezigpc__ucl_1_1mqtt.html#a921a55b253600dd4da3c0f31c0fff82d">More...</a><br /></td></tr>
 <tr class="separator:a921a55b253600dd4da3c0f31c0fff82d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a7fcb6173ace81268c71d4fc8993a67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a5a7fcb6173ace81268c71d4fc8993a67">unretain</a> (<a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a> topic_type, <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html">zigpc_ucl::mqtt::topic_data_t</a> topic_data)</td></tr>
+<tr class="memdesc:a5a7fcb6173ace81268c71d4fc8993a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unretain a UCL topic based on the specific topic type and topic variables passed in.  <a href="namespacezigpc__ucl_1_1mqtt.html#a5a7fcb6173ace81268c71d4fc8993a67">More...</a><br /></td></tr>
+<tr class="separator:a5a7fcb6173ace81268c71d4fc8993a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>UCL utility functions available to build and parse MQTT topics and payloads. </p>
@@ -154,11 +162,18 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Types of topics that is supported to be published/subscribed. </p>
+<p>Types of specific UCL topics that can be build along with variables passed via <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html" title="Data that is used to build UCL topics.">mqtt::topic_data_t</a>. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0ae3f2434936eef3e9855e9437c03292aeb9d70b8abb8cc33ddb33743c528c28c"></a>BY_UNID_PC_NWMGMT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0ae3f2434936eef3e9855e9437c03292a0cde6a64c24ecd02af7c7f7807b6a351"></a>BY_UNID_PC_NWMGMT_WRITE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0ae3f2434936eef3e9855e9437c03292a2bab4fb29c86d3a0f3899ef457902fbc"></a>BY_UNID_NODE_STATE&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0ae3f2434936eef3e9855e9437c03292aeb9d70b8abb8cc33ddb33743c528c28c"></a>BY_UNID_PC_NWMGMT&#160;</td><td class="fielddoc"><p>Uses <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html" title="Data that is used to build UCL topics.">topic_data_t</a> fields: eui64 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0ae3f2434936eef3e9855e9437c03292a0cde6a64c24ecd02af7c7f7807b6a351"></a>BY_UNID_PC_NWMGMT_WRITE&#160;</td><td class="fielddoc"><p>Uses <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html" title="Data that is used to build UCL topics.">topic_data_t</a> fields: eui64 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0ae3f2434936eef3e9855e9437c03292a2bab4fb29c86d3a0f3899ef457902fbc"></a>BY_UNID_NODE_STATE&#160;</td><td class="fielddoc"><p>Uses <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html" title="Data that is used to build UCL topics.">topic_data_t</a> fields: eui64 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0ae3f2434936eef3e9855e9437c03292a4f2583a3fec9dea6a329f1b3cd47b2ed"></a>BY_UNID_NODE&#160;</td><td class="fielddoc"><p>Uses <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html" title="Data that is used to build UCL topics.">topic_data_t</a> fields: eui64 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a0ae3f2434936eef3e9855e9437c03292a7612b5b128ffe2c81654261d1359e3fd"></a>BY_UNID_NODE_EP&#160;</td><td class="fielddoc"><p>Uses <a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html" title="Data that is used to build UCL topics.">topic_data_t</a> fields: eui64, endpoint_id </p>
+</td></tr>
 </table>
 
 </div>
@@ -171,7 +186,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::build_topic </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::build_topic </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a>&#160;</td>
           <td class="paramname"><em>topic_type</em>, </td>
@@ -236,14 +251,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a250e1d55f101037be14c705df35f3996"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a250e1d55f101037be14c705df35f3996">&#9670;&nbsp;</a></span>parse_payload()</h2>
+<a id="ab100732a9ed8f01b20f5701fec3ff0b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab100732a9ed8f01b20f5701fec3ff0b6">&#9670;&nbsp;</a></span>parse_payload()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::parse_payload </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::parse_payload </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>payload</em>, </td>
@@ -251,8 +266,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bpt::ptree &amp;&#160;</td>
-          <td class="paramname"><em>pt</em>&#160;</td>
+          <td class="paramtype">nlohmann::json &amp;&#160;</td>
+          <td class="paramname"><em>jsn</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -266,7 +281,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">payload</td><td>Incoming character array of payload. </td></tr>
-    <tr><td class="paramname">pt</td><td>Porperty tree to populate payload to. </td></tr>
+    <tr><td class="paramname">jsn</td><td>Json object to populate payload to. </td></tr>
   </table>
   </dd>
 </dl>
@@ -281,7 +296,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::parse_unid </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::parse_unid </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>unid</em>, </td>
@@ -319,7 +334,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::publish </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::publish </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a>&#160;</td>
           <td class="paramname"><em>topic_type</em>, </td>
@@ -378,7 +393,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::subscribe </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::subscribe </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a>&#160;</td>
           <td class="paramname"><em>topic_type</em>, </td>
@@ -416,13 +431,51 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a5a7fcb6173ace81268c71d4fc8993a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a7fcb6173ace81268c71d4fc8993a67">&#9670;&nbsp;</a></span>unretain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::mqtt::unretain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292">zigpc_ucl::mqtt::topic_type_t</a>&#160;</td>
+          <td class="paramname"><em>topic_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structzigpc__ucl_1_1mqtt_1_1topic__data__t.html">zigpc_ucl::mqtt::topic_data_t</a>&#160;</td>
+          <td class="paramname"><em>topic_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unretain a UCL topic based on the specific topic type and topic variables passed in. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">topic_type</td><td>Specific UCL topic type. </td></tr>
+    <tr><td class="paramname">topic_data</td><td>Variables used to populate specific UCL topic type. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on success, or topic building error otherwise. </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacezigpc__ucl.html">zigpc_ucl</a></li><li class="navelem"><a class="el" href="namespacezigpc__ucl_1_1mqtt.html">mqtt</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:52 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

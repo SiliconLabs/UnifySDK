@@ -18,8 +18,8 @@
 #include <zigpc_common_zigbee.h>
 #include <zigpc_config.h>
 
-/* Z3gateway includes */
-#include "z3gateway.h"
+/* ZigbeeHost includes */
+#include <zigbee_host.h>
 
 #include "zigpc_gateway_notify.h"
 
@@ -30,10 +30,6 @@ extern "C" {
 static const char LOG_TAG[] = "zigpc_gateway";
 
 /* Unique keys to use in datastore */
-#define ZIGPC_GATEWAY_STORE_DEVICE_TABLE_ARR_KEY  "zigpc_gsdk_dt"
-#define ZIGPC_GATEWAY_STORE_DEVICE_TABLE_SIZE_KEY "zigpc_gsdk_dt_size"
-#define ZIGPC_GATEWAY_STORE_DEVICE_TABLE_CLUSTER_ARR_KEY \
-  "zigpc_gsdk_dt_clusters"
 #define ZIGPC_GATEWAY_NODEID_LIST_KEY  "zb_nodeid_list"
 #define ZIGPC_GATEWAY_NODEID_COUNT_KEY "zb_nodeid_count"
 
@@ -49,7 +45,7 @@ typedef struct {
   EmberNodeId node_id;
 } __attribute__((__packed__)) zigpc_gateway_addr_entry_t;
 
-extern struct z3gatewayCallbacks zigpc_gateway_z3gateway_callbacks;
+extern struct zigbeeHostCallbacks zigpc_gateway_zigbee_host_callbacks;
 
 /**
  * Internal API for notify system
@@ -75,7 +71,7 @@ sl_status_t zigpc_gateway_reset_observers(void);
 void zigpc_gateway_on_ncp_pre_reset(EzspStatus resetStatus);
 
 /**
- * @brief Z3GAteway callback handler called after NCP resets and is going
+ * @brief ZigbeeHost callback handler called after NCP resets and is going
  * through initialization.
  *
  * @param ncpMemConfigureStage  Flag to indicate NCP configuration stages. TRUE
@@ -83,33 +79,6 @@ void zigpc_gateway_on_ncp_pre_reset(EzspStatus resetStatus);
  * only non-memory-configure EZSP messaged are accepted by the NCP.
  */
 void zigpc_gateway_on_ncp_post_reset(bool ncpMemConfigureStage);
-
-/**
- * @brief Retrieve persisted information related to Z3Gateway and ZigPC Gateway
- * from the datastore. This includes:
- * - GSDK device-table plugin state: first the number of entries stored in the
- * datastore is retrieved. Then, each datastore entry (and the associated
- * cluster list) is loaded and imported using the z3gateway device table import
- * entry API.
- *
- * @return sl_status_t SL_STATUS_OK if all information was loaded from datastore
- * successfully, error status if not.
- */
-sl_status_t zigpc_gateway_load_device_table_info(void);
-
-/**
- * @brief Persist information related to Z3Gateway and ZigPC Gateway to the
- * datastore. This includes:
- * - GSDK device-table plugin state: first the number of entries used by the
- * device table is retrieved. Then, each entry (and the associated cluster
- * list) is exported using the z3gateway API and saved in the datastore as
- * three separate info types: device_table size, device_table_entry[i], and
- * device_table_entry[i].clusterList.
- *
- * @return sl_status_t SL_STATUS_OK if all information was store to datastore
- * successfully, error status if not.
- */
-sl_status_t zigpc_gateway_persist_device_table_info(void);
 
 /**
  * @brief Load EUI64 to NodeId device ID mappings.
@@ -132,19 +101,20 @@ sl_status_t zigpc_gateway_load_address_table_info(void);
 sl_status_t zigpc_gateway_persist_address_table_info(void);
 
 /**
- * @brief Wrapper function to load information to both EmberAf device-table and
- * address-table plugins. Refer to zigpc_gateway_load_device_table_info and
- * zigpc_gateway_load_address_table_info for more information.
+ * @brief Wrapper function to load information from uic_datastore
+ * 
+ * Plugin information loaded:
+ * - emberAf Address Table
  *
  * @return sl_status_t SL_STATUS_OK on success, error otherwise.
  */
 sl_status_t zigpc_gateway_load_from_datastore(void);
 
 /**
- * @brief Wrapper function to store information from both EmberAf device-table and
- * address-table plugins into the datastore. Refer to
- * zigpc_gateway_persist_device_table_info and
- * zigpc_gateway_persist_address_table_info for more information.
+ * @brief Wrapper function to store information to uic_datastore
+ * 
+ * Plugin information loaded:
+ * - emberAf Address Table
  *
  * @return sl_status_t SL_STATUS_OK on success, error otherwise.
  */

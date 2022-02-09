@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -87,9 +87,10 @@ $(document).ready(function(){initNavTree('functions_c.html',''); initResizable()
 
 <h3><a id="index_c"></a>- c -</h3><ul>
 <li>callbacks
-: <a class="el" href="structz3gatewayOpts.html#a87ae8e50f64bdbba358c26ab35b8e604">z3gatewayOpts</a>
-, <a class="el" href="structz3gatewayState.html#ad219812814e92759b77de9f1820bb9c0">z3gatewayState</a>
-, <a class="el" href="structzigpc__observable__event__entry.html#a463bda4c3498b24056292aa61fc17b18">zigpc_observable_event_entry</a>
+: <a class="el" href="structzigpc__observable__event__entry.html#a463bda4c3498b24056292aa61fc17b18">zigpc_observable_event_entry</a>
+</li>
+<li>change
+: <a class="el" href="structattribute__changed__event.html#a6a8c5782fd7bc739b4c33cf184d7a2e3">attribute_changed_event</a>
 </li>
 <li>child_count()
 : <a class="el" href="classStoreAccessor.html#aeafc7ed20e125f4f11ca477af71b82d7">StoreAccessor&lt; search_key_t, data_t &gt;</a>
@@ -103,11 +104,8 @@ $(document).ready(function(){initNavTree('functions_c.html',''); initResizable()
 <li>client_cluster_list
 : <a class="el" href="structzigbee__endpoint__t.html#a9e15322b4ae5b0f4fca659d10f55b86e">zigbee_endpoint_t</a>
 </li>
-<li>clientClusterCount
-: <a class="el" href="structz3gatewayEndpointInfo.html#a321ec1bd0f212469e72c469e552201e8">z3gatewayEndpointInfo</a>
-</li>
-<li>clientClusterList
-: <a class="el" href="structz3gatewayEndpointInfo.html#aabbe538fddcb24d0b7fc484621df0261">z3gatewayEndpointInfo</a>
+<li>client_clusters
+: <a class="el" href="classzigpc__discovery_1_1events_1_1EndpointDiscoverResponse.html#ae95da147c8f0b3c6d5dab02e76ca95d7">zigpc_discovery::events::EndpointDiscoverResponse</a>
 </li>
 <li>cluster_count
 : <a class="el" href="structzigbee__endpoint__t.html#a85cd3da0acafcf9dfd228a37855f2288">zigbee_endpoint_t</a>
@@ -135,7 +133,6 @@ $(document).ready(function(){initNavTree('functions_c.html',''); initResizable()
 </li>
 <li>cluster_name
 : <a class="el" href="structzcl__profile.html#aab57341badbebeb279bb8990715d9742">zcl_profile</a>
-, <a class="el" href="structzigpc__zcl__profiles__topic__t.html#aa4038ecf81f6b072f608a6a58ca98e5f">zigpc_zcl_profiles_topic_t</a>
 </li>
 <li>cluster_side
 : <a class="el" href="classClusterAccessor.html#a998efa43c8412b09f897a79b71dca3e7">ClusterAccessor</a>
@@ -155,24 +152,6 @@ $(document).ready(function(){initNavTree('functions_c.html',''); initResizable()
 <li>ClusterCommandListAccessor()
 : <a class="el" href="classClusterCommandListAccessor.html#ad73a4c9da8e01a1e00750d07618773f3">ClusterCommandListAccessor</a>
 </li>
-<li>clusterIdClientStartIndex
-: <a class="el" href="structz3gatewayDeviceTableStorageEntry.html#a66f86960d27abf59b10f61d464bb9df4">z3gatewayDeviceTableStorageEntry</a>
-</li>
-<li>clusterIdCount
-: <a class="el" href="structz3gatewayDeviceTableStorageEntry.html#a8c3806cfd22a87f86c749991a3fe7a43">z3gatewayDeviceTableStorageEntry</a>
-</li>
-<li>clusterIdList
-: <a class="el" href="structz3gatewayDeviceTableStorageEntry.html#a013b9870f28585b1a78365cd1eeb69e3">z3gatewayDeviceTableStorageEntry</a>
-</li>
-<li>clusterIds
-: <a class="el" href="structEmberAfPluginDeviceTableEntry.html#abaa5082c34a34cb5db9537b90d40159a">EmberAfPluginDeviceTableEntry</a>
-</li>
-<li>clusterOutStartPosition
-: <a class="el" href="structEmberAfPluginDeviceTableEntry.html#aad391f1e9ae0afa66a1d02a7ba53b87b">EmberAfPluginDeviceTableEntry</a>
-</li>
-<li>command
-: <a class="el" href="structzcl__key__value.html#acb30fd48f74c34666119c1f7ddb7e662">zcl_key_value</a>
-</li>
 <li>command_id
 : <a class="el" href="structzcl__command.html#a0cd494c74cc948b1e88977b5feeac4d5">zcl_command</a>
 , <a class="el" href="structzigpc__gateway__on__command__received__t.html#a33372f4fdadcfe7977de37487dd423a5">zigpc_gateway_on_command_received_t</a>
@@ -191,9 +170,6 @@ $(document).ready(function(){initNavTree('functions_c.html',''); initResizable()
 </li>
 <li>condition_rule
 : <a class="el" href="classUAMGrammar.html#ae004285f3f68a4fbfd572dbc1ecb4607">UAMGrammar&lt; IteratorType, Skipper &gt;</a>
-</li>
-<li>config
-: <a class="el" href="classzigpc__cpu__usage.html#af071f4eea951c5f5e852bbd44a49aac9">zigpc_cpu_usage</a>
 </li>
 <li>connect()
 : <a class="el" href="structmqtt__client.html#a00504c318f3ac6a1356d7c21ba9c6f34">mqtt_client</a>
@@ -230,7 +206,7 @@ $(document).ready(function(){initNavTree('functions_c.html',''); initResizable()
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:37 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:56 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

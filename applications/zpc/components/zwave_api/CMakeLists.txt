@@ -23,16 +23,16 @@ target_include_directories(
   zwave_api
   PRIVATE src platform/${COMPATIBLE_PLATFORM}
   PUBLIC include)
+install(TARGETS zwave_api LIBRARY DESTINATION lib)
 
 target_add_mock(zwave_api)
 
 # Mock within the component
-add_mock(zwapi_internal_mock
-src/zwapi_connection.h
-src/zwapi_session.h
-)
+add_mock(zwapi_internal_mock src/zwapi_connection.h src/zwapi_session.h)
 target_interface_libraries(zwapi_internal_mock zpc_utils zwave_api)
 
-add_library(zwapi_protocol_mem_mock ${ZPC_SOURCE_DIR}/components/zwave_api/mocks/zwapi_protocol_mem_mock.c)
+add_library(
+  zwapi_protocol_mem_mock
+  ${ZPC_SOURCE_DIR}/components/zwave_api/mocks/zwapi_protocol_mem_mock.c)
 target_interface_libraries(zwapi_protocol_mem_mock zwave_api)
 add_subdirectory(test)

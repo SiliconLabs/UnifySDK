@@ -23,7 +23,7 @@
 #ifndef ZIGPC_UCL_INT_HPP
 #define ZIGPC_UCL_INT_HPP
 
-#include <boost/property_tree/ptree.hpp>
+#include <nlohmann/json.hpp>
 
 // UIC shared includes
 #include <sl_status.h>
@@ -36,8 +36,6 @@
 
 // Component includes
 #include "zigpc_ucl.hpp"
-
-namespace bpt = boost::property_tree;
 
 /**
  * @brief UCL topic and payload manipulators in the Zigbee Protocol Controller.
@@ -55,46 +53,14 @@ constexpr char LOG_TAG[] = "zigpc_ucl";
 namespace mqtt
 {
 /**
- * @brief Types of topics that is supported to be published/subscribed.
- *
- */
-enum class topic_type_t {
-  BY_UNID_PC_NWMGMT,
-  BY_UNID_PC_NWMGMT_WRITE,
-  BY_UNID_NODE_STATE,
-};
-
-/**
- * @brief Data that is used to build UCL topics.
- *
- */
-typedef struct {
-  zigbee_eui64_uint_t eui64;
-} topic_data_t;
-
-/**
  * @brief Parse the Incoming JSON payload into the passed in property tree.
  *
  * @param payload     Incoming character array of payload.
- * @param pt          Porperty tree to populate payload to.
+ * @param jsn         Json object to populate payload to.
  * @return sl_status_t SL_STATUS_OK on success, SL_STATUS_NULL_POINTER on
  * invalid character array passed in,
  */
-sl_status_t parse_payload(const char *payload, bpt::ptree &pt);
-
-/**
- * @brief Populate the topic string based on the topic type and data passed
- * in.
- *
- * @param topic_type    Topic type.
- * @param topic_data    Data to populate in the topic.
- * @param topic         Topic to populate.
- * @return sl_status_t SL_STATUS_OK on succes, or SL_STATUS_INVALID_TYPE on
- * invalid topic type passed in.
- */
-sl_status_t build_topic(zigpc_ucl::mqtt::topic_type_t topic_type,
-                        zigpc_ucl::mqtt::topic_data_t topic_data,
-                        std::string &topic);
+sl_status_t parse_payload(const char *payload, nlohmann::json &jsn);
 
 /**
  * @brief Subscribe to a UCL topic based on the type and data passed in.
@@ -108,6 +74,7 @@ sl_status_t build_topic(zigpc_ucl::mqtt::topic_type_t topic_type,
 sl_status_t subscribe(zigpc_ucl::mqtt::topic_type_t topic_type,
                       zigpc_ucl::mqtt::topic_data_t topic_data,
                       mqtt_message_callback_t cb);
+
 /**
  * @brief Publish payload to a UCL topic based on the type and data passed in.
  *
@@ -124,6 +91,18 @@ sl_status_t publish(zigpc_ucl::mqtt::topic_type_t topic_type,
                     const char *payload,
                     size_t payload_size,
                     bool retain);
+
+/**
+ * @brief Unretain a UCL topic based on the specific topic type and topic
+ * variables passed in.
+ *
+ * @param topic_type    Specific UCL topic type.
+ * @param topic_data    Variables used to populate specific UCL topic type.
+ * @return sl_status_t  SL_STATUS_OK on success, or topic building error
+ * otherwise.
+ */
+sl_status_t unretain(zigpc_ucl::mqtt::topic_type_t topic_type,
+                     zigpc_ucl::mqtt::topic_data_t topic_data);
 
 }  // namespace mqtt
 

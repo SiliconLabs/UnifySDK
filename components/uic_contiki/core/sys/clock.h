@@ -106,7 +106,15 @@ void clock_init(void);
  */
 CCIF clock_time_t clock_time(void);
 
-void clock_delay(unsigned int);
+/**
+ * This is a asynchronous delay function.
+ *
+ * @attention Due to UNIFY running in the same thread as Z-Wave protocol, a vTaskDelay()
+ * was not a good idea and this function is now returning immediately. No delays are allowed.
+ *
+ * @param d   Delay in seconds.
+ */
+void clock_delay(unsigned int d);
 
 /**
  * A second, measured in system clock time.

@@ -43,6 +43,9 @@ The MQTT Helper
 
 #include <vector>
 
+static const std::string ZIGPC_DIAGNOSTIC_TOPIC =
+    "/ProtocolController/SystemHealth/";
+
 void uic_diagnostics_mqtt_callback(const char *topic,
                                    const char *payload,
                                    size_t payload_size);

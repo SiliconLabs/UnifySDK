@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_tx/src/zwave_tx_follow_ups.h Source File</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave/zwave_tx/src/zwave_tx_follow_ups.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('zwave__tx__follow__ups_8h_source.html'
 <div class="contents">
 <a href="zwave__tx__follow__ups_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * # License</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2020 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2021 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ******************************************************************************</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * The licensor of this software is Silicon Laboratories Inc. Your use of this</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * software is governed by the terms of Silicon Labs Master Software License</span></div>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('zwave__tx__follow__ups_8h_source.html'
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="group__zwave__tx__follow__ups.html#gad20c46ec69dcd6dfa4ab8451c14f164e">   45</a></span>&#160;  <a class="code" href="group__zwave__tx__follow__ups.html#gad20c46ec69dcd6dfa4ab8451c14f164e">zwave_tx_enqueue_follow_ups</a>(<a class="code" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> multicast_frame_tx_id);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
@@ -119,21 +119,21 @@ $(document).ready(function(){initNavTree('zwave__tx__follow__ups_8h_source.html'
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif  // ZWAVE_TX_FOLLOW_UPS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="agroup__sl__status_html_ga642351dcd77b6c1ffef9d663db8a5714"><div class="ttname"><a href="group__sl__status.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a></div><div class="ttdeci">#define SL_STATUS_OK</div><div class="ttdoc">No error.</div><div class="ttdef"><b>Definition:</b> sl_status.h:40</div></div>
-<div class="ttc" id="agroup__zwave__tx__interface_html_ga1938ab567086a053bb3fbd0cddae43c2"><div class="ttname"><a href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a></div><div class="ttdeci">void * zwave_tx_session_id_t</div><div class="ttdoc">Handle that can be used for aborting ongoing transmissions or identifying TX Queue elements.</div><div class="ttdef"><b>Definition:</b> zwave_tx.h:116</div></div>
+<div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:136</div></div>
+<div class="ttc" id="agroup__zwave__tx__fixt_html_ga81ebcfd23d97d34e9edb4deae4638ed1"><div class="ttname"><a href="group__zwave__tx__fixt.html#ga81ebcfd23d97d34e9edb4deae4638ed1">zwave_tx_fixt_setup</a></div><div class="ttdeci">sl_status_t zwave_tx_fixt_setup(void)</div><div class="ttdef"><b>Definition:</b> zwave_tx_fixt.c:16</div></div>
+<div class="ttc" id="agroup__zwave__tx__interface_html_ga1938ab567086a053bb3fbd0cddae43c2"><div class="ttname"><a href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a></div><div class="ttdeci">void * zwave_tx_session_id_t</div><div class="ttdoc">Handle that can be used for aborting ongoing transmissions or identifying TX Queue elements.</div><div class="ttdef"><b>Definition:</b> zwave_tx.h:203</div></div>
 <div class="ttc" id="azwave__tx__process_8h_html"><div class="ttname"><a href="zwave__tx__process_8h.html">zwave_tx_process.h</a></div></div>
-<div class="ttc" id="azwave__tx__fixt_8h_html"><div class="ttname"><a href="zwave__tx__fixt_8h.html">zwave_tx_fixt.h</a></div><div class="ttdoc">Z-Wave TX fixture.</div></div>
+<div class="ttc" id="azwave__tx__fixt_8h_html"><div class="ttname"><a href="zwave__tx__fixt_8h.html">zwave_tx_fixt.h</a></div></div>
 <div class="ttc" id="agroup__list_html_ga070d2ce7b6bb7e5c05602aa8c308d0c4"><div class="ttname"><a href="group__list.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></div><div class="ttdeci">#define NULL</div><div class="ttdef"><b>Definition:</b> list.c:50</div></div>
 <div class="ttc" id="agroup__zwave__tx__follow__ups_html_gad20c46ec69dcd6dfa4ab8451c14f164e"><div class="ttname"><a href="group__zwave__tx__follow__ups.html#gad20c46ec69dcd6dfa4ab8451c14f164e">zwave_tx_enqueue_follow_ups</a></div><div class="ttdeci">sl_status_t zwave_tx_enqueue_follow_ups(zwave_tx_session_id_t multicast_frame_tx_id)</div><div class="ttdoc">Enqueues follow-up frames for a given multicast frame.</div></div>
-<div class="ttc" id="azwave__tx__fixt_8c_html_a81ebcfd23d97d34e9edb4deae4638ed1"><div class="ttname"><a href="zwave__tx__fixt_8c.html#a81ebcfd23d97d34e9edb4deae4638ed1">zwave_tx_fixt_setup</a></div><div class="ttdeci">sl_status_t zwave_tx_fixt_setup(void)</div><div class="ttdef"><b>Definition:</b> zwave_tx_fixt.c:16</div></div>
-<div class="ttc" id="agroup__sl__status_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:127</div></div>
+<div class="ttc" id="agroup__unify__sl__status__codes_html_ga642351dcd77b6c1ffef9d663db8a5714"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a></div><div class="ttdeci">#define SL_STATUS_OK</div><div class="ttdoc">No error.</div><div class="ttdef"><b>Definition:</b> sl_status.h:49</div></div>
 <div class="ttc" id="azwave__tx_8h_html"><div class="ttname"><a href="zwave__tx_8h.html">zwave_tx.h</a></div></div>
-<div class="ttc" id="agroup__process_html_ga6a4607d87381f2f919eb36899fa4de20"><div class="ttname"><a href="group__process.html#ga6a4607d87381f2f919eb36899fa4de20">process_start</a></div><div class="ttdeci">void process_start(struct process *p, const char *arg) CC_REENTRANT_ARG</div><div class="ttdef"><b>Definition:</b> process.c:109</div></div>
+<div class="ttc" id="agroup__process_html_ga6a4607d87381f2f919eb36899fa4de20"><div class="ttname"><a href="group__process.html#ga6a4607d87381f2f919eb36899fa4de20">process_start</a></div><div class="ttdeci">void process_start(struct process *p, const char *arg) CC_REENTRANT_ARG</div><div class="ttdef"><b>Definition:</b> process.c:112</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_485122bb313e636a8cf434575039916c.html">zwave_tx</a></li><li class="navelem"><a class="el" href="dir_8d9032093b9fc5c85b0df1a40eba2c7d.html">src</a></li><li class="navelem"><a class="el" href="zwave__tx__follow__ups_8h.html">zwave_tx_follow_ups.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_99fcbcb75e556cb0c2dfb06eb3d295b0.html">zwave_tx</a></li><li class="navelem"><a class="el" href="dir_bf38dcc82fb35d10639272c6537d4aa5.html">src</a></li><li class="navelem"><a class="el" href="zwave__tx__follow__ups_8h.html">zwave_tx_follow_ups.h</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:13 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

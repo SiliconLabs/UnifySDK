@@ -23,6 +23,7 @@ var zwave__command__class__wake__up_8c =
     [ "send_wake_up_no_more", "zwave__command__class__wake__up_8c.html#ab1683172e412f4f4b4f3090e6e2ac2b8", null ],
     [ "set_default_v1_capabilities", "zwave__command__class__wake__up_8c.html#a9a61799d62b6c368681fb8a80b0ddf43", null ],
     [ "set_default_v2_capabilities", "zwave__command__class__wake__up_8c.html#afa3117b84d0ee4baa2ce7d5807d34f9f", null ],
+    [ "verify_if_wake_up_setting_needs_resolution", "zwave__command__class__wake__up_8c.html#a719d1633ae7a1ff72a7073da6a741c29", null ],
     [ "wake_up_capabilities_get", "zwave__command__class__wake__up_8c.html#a8f966daf7a0db642b035c023a4877115", null ],
     [ "wake_up_control_handler", "zwave__command__class__wake__up_8c.html#a88bb847c5b28073f2eebf61a9c6fe6f6", null ],
     [ "wake_up_interval_get", "zwave__command__class__wake__up_8c.html#a9a8b027d6bc6ddb6ccfe5f216291fb31", null ],

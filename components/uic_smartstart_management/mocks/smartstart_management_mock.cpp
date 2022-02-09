@@ -12,8 +12,8 @@
  *****************************************************************************/
 #include <vector>
 #include <sstream>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+
+#include <nlohmann/json.hpp>
 
 #include "smartstart_management_mock.hpp"
 
@@ -28,13 +28,11 @@ bool notify_node_added_called                = false;
 bool notify_node_removed_called              = false;
 bool set_manual_intervention_required_called = false;
 
-sl_status_t notify_node_removed_return_value   = SL_STATUS_OK;
-sl_status_t notify_node_added_return_value     = SL_STATUS_OK;
+sl_status_t notify_node_removed_return_value     = SL_STATUS_OK;
+sl_status_t notify_node_added_return_value       = SL_STATUS_OK;
 sl_status_t set_manual_intervention_return_value = SL_STATUS_OK;
 
 #define LOG_TAG "smartstart_management"
-
-namespace bpt = boost::property_tree;
 
 PROCESS(smartstart_management_process, "SmartStart");
 
@@ -43,6 +41,11 @@ typedef enum { SMARTSTART_UPDATE_LIST_CACHE } smartstart_events;
 namespace smartstart
 {
 Management *Management::_instance;
+
+const std::unordered_map<std::string, Entry> &Management::get_cache() const
+{
+  return _smartstart_cache;
+}
 
 std::vector<Entry> Management::get_cache_entries(const Query &query)
 {
@@ -131,47 +134,44 @@ sl_status_t Management::set_manual_intervention_required(const std::string &dsk,
 sl_status_t
   Management::update_smartstart_cache(const std::string &smartstart_list)
 {
-  std::stringstream ss;
-  ss << smartstart_list;
-  bpt::ptree pt;
   std::unordered_map<std::string, Entry> _smartstart_cache_temp;
+
   bool has_entries_awaiting_inclusion = false;
 
   try {
-    bpt::json_parser::read_json(ss, pt);
-    for (const bpt::ptree::value_type &e: pt) {
+    nlohmann::json jsn = nlohmann::json::parse(smartstart_list);
+    nlohmann::json value = jsn;
+
+    for (auto& element : value) {
       try {
         std::vector<std::string> preferred_protocols;
 
-        Entry entry = {e.second.get<std::string>("DSK"),
-                       e.second.get<bool>("Include"),
-                       e.second.get<std::string>("ProtocolControllerUnid"),
-                       e.second.get<std::string>("Unid")};
+        Entry entry = {element["DSK"],
+                       element["Include"],
+                       element["ProtocolControllerUnid"],
+                       element["Unid"]};
 
         // PreferredProtocols is an optional field
-        auto pp = e.second.get_child_optional("PreferredProtocols");
-        if (pp) {
-          for (const bpt::ptree::value_type &protocol: pp.get()) {
-            preferred_protocols.push_back(protocol.second.get<std::string>(""));
+        if (!element["PreferredProtocols"].is_null()) {
+          for (auto& prot : element["PreferredProtocols"]) {
+            preferred_protocols.push_back(prot.front());
           }
+
           entry.preferred_protocols = preferred_protocols;
         }
 
         // ManualInterventionRequired is an optional field. Assume false if not present.
-        if (e.second.get_child_optional("ManualInterventionRequired")
-            == boost::none) {
+        if (element["ManualInterventionRequired"].is_null()) {
           entry.manual_intervention_required = false;
         } else {
-          entry.manual_intervention_required
-            = e.second.get<bool>("ManualInterventionRequired");
+          entry.manual_intervention_required = element["ManualInterventionRequired"];
         }
 
         if (entry.protocol_controller_unid.empty()
-            || entry.protocol_controller_unid
-                 == this->_protocol_controller_unid) {
-          _smartstart_cache_temp.insert(
-            std::pair<std::string, Entry>(entry.dsk, entry));
+            || entry.protocol_controller_unid == this->_protocol_controller_unid) {
+          _smartstart_cache_temp.insert(std::pair<std::string, Entry>(entry.dsk, entry));
         }
+
         if (entry.include && entry.device_unid.empty()) {
           has_entries_awaiting_inclusion = true;
         }
@@ -187,9 +187,10 @@ sl_status_t
                    err.what());
     return SL_STATUS_FAIL;
   }
+
   // We've got here with success parsing so update the real cache.
   _smartstart_cache = _smartstart_cache_temp;
-  // Notify that we have entries for inclusion if a function is registered
+  // Notify that we have entries for inclusion
   if (_notify_has_entries_awaiting_inclusion) {
     _notify_has_entries_awaiting_inclusion(has_entries_awaiting_inclusion);
   }

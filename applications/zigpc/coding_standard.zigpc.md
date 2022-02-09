@@ -19,7 +19,7 @@ generic coding standard to see where these rules are derived from.
 Folders are used in the ZigPC to denote components and to describe
 the project hierarchy.
 
-Folder names SHALL follow the general rule of <component_name> without
+Folder names SHALL follow the general rule of &lt;component_name&gt; without
 any prefix of zigpc or uic etc...
 This is to avoid repetition of information - ZigPC is already at the top
 level of the folder hierarchy (uic/applications/zigpc/ etc...)
@@ -36,8 +36,8 @@ a separation of responsibilities.
 
 File names SHALL be in "snake_case" as discussed in [1](1 - Folders).
 
-File names SHALL be of the format "zigpc_xxxx_yyyy" where <xxxx> refers to
-a the module and <yyyy> refers to the responsibility covered by that file.
+File names SHALL be of the format "zigpc_xxxx_yyyy" where &lt;xxxx&gt; refers to
+a the module and &lt;yyyy&gt; refers to the responsibility covered by that file.
 Please balance conciseness with descriptiveness, if possible.
 
 Headers and .c/.cpp files SHOULD match, with the exception where
@@ -55,12 +55,12 @@ own namespace under a global zigpc namespace.
 ### 4. Functions ###
 Functions in the general ZigPC hierarchy SHOULD be written in "snake_case".
 The exception is when interfacing with stack-level functionality in the
-z3gateway. In this case, "camelCase" is recommended.
+zigbee_host library. In this case, "camelCase" is recommended.
 
 The general format of each function name SHOULD take the form of "zigpc_xxxx_yyyy"
-where <xxxx> is the name of the module and <yyyy> is the specific name of
+where &lt;xxxx&gt; is the name of the module and &lt;yyyy&gt; is the specific name of
 the function.
-<yyyy> SHOULD be of the form "verb_noun" or of "noun_verb_noun", as specified in
+&lt;yyyy&gt; SHOULD be of the form "verb_noun" or of "noun_verb_noun", as specified in
 the general coding standard.
 It is recommended to keep these function name short and concise to improve
 readibility.

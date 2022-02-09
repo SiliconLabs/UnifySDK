@@ -86,6 +86,16 @@ void mqtt_mock_helper_publish(const char *topic,
                               size_t msg_len);
 
 /**
+ * @brief Publish a by-group message to a given MQTT topic through the mock
+ *
+ * @param topic Topic to publish on
+ * @param msg Message to publish
+ * @param msg_len Length of message
+ */
+void mqtt_mock_helper_group_publish(const char *topic,
+                                    const char *msg,
+                                    size_t msg_len);
+/**
  * @brief Publish a message to all (subscribed) MQTT topic through the mock
  *
  * @param msg Message to publish

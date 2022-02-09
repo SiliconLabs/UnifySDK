@@ -31,6 +31,7 @@
 #include "zwave_tx.h"
 #include "zpc_config.h"
 #include "sl_status.h"
+#include "zwave_utils.h"
 
 // Interfaces
 #include "zwave_command_class_wake_up_types.h"
@@ -91,6 +92,71 @@ static void send_wake_up_no_more(attribute_store_node_t node_id_node);
 ///////////////////////////////////////////////////////////////////////////////
 // Private helper functions
 ///////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Verifies if either NodeID / Wake Up interval settings are still
+ * undefined or mismatched and a resolution is needed
+ *
+ * If the wake_up_setting_node needs resolution, the wake_up_setting_node
+ * value will be adjusted to either undefined value or NEEDS_ONE_COMMAND / FINAL_STATE
+ * value mismatch, to trigger resolution.
+ *
+ * @param wake_up_setting_node    Attribute Store node for the Wake Up Setting.
+ */
+static void verify_if_wake_up_setting_needs_resolution(
+  attribute_store_node_t wake_up_setting_node)
+{
+  // Do we need a Get ?
+  attribute_store_node_t wake_up_node_id_node
+    = attribute_store_get_node_child_by_type(wake_up_setting_node,
+                                             ATTRIBUTE(NODE_ID),
+                                             0);
+  attribute_store_node_t wake_up_interval_node
+    = attribute_store_get_node_child_by_type(wake_up_setting_node,
+                                             ATTRIBUTE(INTERVAL),
+                                             0);
+
+  if (false
+      == attribute_store_is_value_defined(wake_up_node_id_node,
+                                          REPORTED_ATTRIBUTE)) {
+    attribute_store_undefine_reported(wake_up_setting_node);
+    return;
+  }
+
+  if (false
+      == attribute_store_is_value_defined(wake_up_interval_node,
+                                          REPORTED_ATTRIBUTE)) {
+    attribute_store_undefine_reported(wake_up_setting_node);
+    return;
+  }
+
+  // Do we need a Set?
+  command_status_values_t state = FINAL_STATE;
+  if ((attribute_store_is_value_defined(wake_up_node_id_node, DESIRED_ATTRIBUTE)
+       == true)
+      && (attribute_store_is_value_matched(wake_up_node_id_node) == false)) {
+    // Set resolution needed. Set to FINAL_STATE/NEEDS_ONE_COMMAND
+    attribute_store_set_desired(wake_up_setting_node, &state, sizeof(state));
+    state = NEEDS_ONE_COMMAND;
+    attribute_store_set_reported(wake_up_setting_node, &state, sizeof(state));
+    return;
+  }
+
+  if ((attribute_store_is_value_defined(wake_up_interval_node,
+                                        DESIRED_ATTRIBUTE)
+       == true)
+      && (attribute_store_is_value_matched(wake_up_interval_node) == false)) {
+    // Set resolution needed. Set to FINAL_STATE/NEEDS_ONE_COMMAND
+    attribute_store_set_desired(wake_up_setting_node, &state, sizeof(state));
+    state = NEEDS_ONE_COMMAND;
+    attribute_store_set_reported(wake_up_setting_node, &state, sizeof(state));
+    return;
+  }
+
+  // No resolution needed. Set to FINAL_STATE/FINAL_STATE
+  attribute_store_set_desired(wake_up_setting_node, &state, sizeof(state));
+  attribute_store_set_reported(wake_up_setting_node, &state, sizeof(state));
+}
+
 /**
  * @brief Takes the 3 bytes of a wake_up_interval_t and saves it in the
  * attribute store.
@@ -470,10 +536,9 @@ static sl_status_t handle_wake_up_interval_report(
                                      &node_id,
                                      sizeof(node_id));
 
-  // Just received a report, mark the Wake Up Setting as resolved
-  command_status_values_t state = FINAL_STATE;
-  attribute_store_set_reported(wake_up_setting_node, &state, sizeof(state));
-  attribute_store_undefine_desired(wake_up_setting_node);
+  // Just received a report, check if the setting should still be resolved or
+  // is in its final state:
+  verify_if_wake_up_setting_needs_resolution(wake_up_setting_node);
 
   return SL_STATUS_OK;
 }
@@ -549,7 +614,7 @@ static sl_status_t handle_wake_up_interval_capabilities_report(
 /**
  * @brief Sends a Wake Up No more command to a node.
  *
- * @param resolved_node  The Attribute Store node for the NODE_ID to send back to
+ * @param node_id_node   The Attribute Store node for the NODE_ID to send back to
  *                       sleep.
  */
 static void send_wake_up_no_more(attribute_store_node_t node_id_node)
@@ -824,21 +889,13 @@ static void
   if (change != ATTRIBUTE_UPDATED) {
     return;
   }
+
   // Somebody just updated the Desired value of either the Wake Up NodeID or
   // Wake Up Interval.
   // Verify if we should put the parent in a "to set" state
-  if ((attribute_store_is_value_defined(updated_node, DESIRED_ATTRIBUTE)
-       == true)
-      && (attribute_store_is_value_matched(updated_node) == false)) {
-    attribute_store_node_t wake_up_setting_node
-      = attribute_store_get_first_parent_with_type(updated_node,
-                                                   ATTRIBUTE(SETTING));
-
-    command_status_values_t state = FINAL_STATE;
-    attribute_store_set_desired(wake_up_setting_node, &state, sizeof(state));
-    state = NEEDS_ONE_COMMAND;
-    attribute_store_set_reported(wake_up_setting_node, &state, sizeof(state));
-  }
+  verify_if_wake_up_setting_needs_resolution(
+    attribute_store_get_first_parent_with_type(updated_node,
+                                               ATTRIBUTE(SETTING)));
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -30,10 +30,10 @@
 #include "sl_log.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_tx_groups.h"
-#include "zwave_utils.h"
 
 // Mock includes
-#include "zwave_controller_utils_mock.h"
+#include "zwave_utils_mock.h"
+
 #include "zwave_controller_internal_mock.h"
 #include "zwave_command_handler_mock.h"
 #include "zwave_tx_scheme_selector_mock.h"
@@ -365,14 +365,13 @@ void test_zwave_command_class_supervision_report_handler_happy_case()
   test_connection_info.remote.endpoint_id  = 4;
   test_connection_info.remote.is_multicast = false;
 
-  test_tx_options.number_of_responses      = 0;
-  test_tx_options.discard_timeout_ms       = 300;
-  test_tx_options.qos_priority             = 39485;
-  test_tx_options.use_parent_frame_options = false;
-  test_tx_options.valid_parent_session_id  = false;
-  test_tx_options.parent_session_id        = 0;
-  test_tx_options.is_test_frame            = false;
-  void *test_user                          = (void *)0x9385;
+  test_tx_options.number_of_responses     = 0;
+  test_tx_options.discard_timeout_ms      = 300;
+  test_tx_options.qos_priority            = 39485;
+  test_tx_options.valid_parent_session_id = false;
+  test_tx_options.parent_session_id       = 0;
+  test_tx_options.is_test_frame           = false;
+  void *test_user                         = (void *)0x9385;
 
   zwave_tx_send_data_AddCallback(
     (CMOCK_zwave_tx_send_data_CALLBACK)zwave_tx_send_data_stub);
@@ -411,8 +410,6 @@ void test_zwave_command_class_supervision_report_handler_happy_case()
                         received_tx_options.parent_session_id);
   TEST_ASSERT_EQUAL_UINT32(test_tx_options.qos_priority,
                            received_tx_options.qos_priority);
-  TEST_ASSERT_EQUAL_UINT8(test_tx_options.use_parent_frame_options,
-                          received_tx_options.use_parent_frame_options);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.valid_parent_session_id,
                           received_tx_options.valid_parent_session_id);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.is_test_frame,
@@ -444,9 +441,9 @@ void test_zwave_command_class_supervision_report_handler_happy_case()
                           received_supervision_status);
   TEST_ASSERT_EQUAL_PTR(test_user, received_user);
   // report arrived before tx callback, no tx_info. Don't check every field here.
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bACKChannelNo, 0);
-  TEST_ASSERT_EQUAL_UINT16(received_tx_info.wTransmitTicks, 0);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bLastTxChannelNo, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.ack_channel_number, 0);
+  TEST_ASSERT_EQUAL_UINT16(received_tx_info.transmit_ticks, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.tx_channel_number, 0);
 }
 
 void test_zwave_command_class_supervision_report_handler_multicast_happy_case()
@@ -460,14 +457,13 @@ void test_zwave_command_class_supervision_report_handler_multicast_happy_case()
   test_connection_info.remote.endpoint_id     = 2;
   test_connection_info.remote.is_multicast    = true;
 
-  test_tx_options.number_of_responses      = 4;
-  test_tx_options.discard_timeout_ms       = 800;
-  test_tx_options.qos_priority             = 39;
-  test_tx_options.use_parent_frame_options = true;
-  test_tx_options.valid_parent_session_id  = false;
-  test_tx_options.parent_session_id        = 0;
-  test_tx_options.is_test_frame            = false;
-  void *test_user                          = (void *)0x935;
+  test_tx_options.number_of_responses     = 4;
+  test_tx_options.discard_timeout_ms      = 800;
+  test_tx_options.qos_priority            = 39;
+  test_tx_options.valid_parent_session_id = false;
+  test_tx_options.parent_session_id       = 0;
+  test_tx_options.is_test_frame           = false;
+  void *test_user                         = (void *)0x935;
 
   zwave_tx_send_data_AddCallback(
     (CMOCK_zwave_tx_send_data_CALLBACK)zwave_tx_send_data_stub);
@@ -508,8 +504,6 @@ void test_zwave_command_class_supervision_report_handler_multicast_happy_case()
                         received_tx_options.parent_session_id);
   TEST_ASSERT_EQUAL_UINT32(test_tx_options.qos_priority,
                            received_tx_options.qos_priority);
-  TEST_ASSERT_EQUAL_UINT8(test_tx_options.use_parent_frame_options,
-                          received_tx_options.use_parent_frame_options);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.valid_parent_session_id,
                           received_tx_options.valid_parent_session_id);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.is_test_frame,
@@ -523,9 +517,9 @@ void test_zwave_command_class_supervision_report_handler_multicast_happy_case()
   TEST_ASSERT_EQUAL(0, supervision_complete_calls);
 
   // Simulate zwave_tx callback, here we should be happy:
-  test_tx_info.bACKChannelNo    = 38;
-  test_tx_info.wTransmitTicks   = 0xfa9;
-  test_tx_info.bLastTxChannelNo = 25;
+  test_tx_info.ack_channel_number = 38;
+  test_tx_info.transmit_ticks     = 0xfa9;
+  test_tx_info.tx_channel_number  = 25;
   TEST_ASSERT_NOT_NULL(supervision_on_send_complete);
   supervision_on_send_complete(TRANSMIT_COMPLETE_OK,
                                &test_tx_info,
@@ -589,14 +583,13 @@ void test_zwave_command_class_supervision_report_handler_multicast_transmit_fail
   test_connection_info.remote.endpoint_id     = 2;
   test_connection_info.remote.is_multicast    = true;
 
-  test_tx_options.number_of_responses      = 4;
-  test_tx_options.discard_timeout_ms       = 800;
-  test_tx_options.qos_priority             = 39;
-  test_tx_options.use_parent_frame_options = true;
-  test_tx_options.valid_parent_session_id  = false;
-  test_tx_options.parent_session_id        = 0;
-  test_tx_options.is_test_frame            = false;
-  void *test_user                          = (void *)0x935;
+  test_tx_options.number_of_responses     = 4;
+  test_tx_options.discard_timeout_ms      = 800;
+  test_tx_options.qos_priority            = 39;
+  test_tx_options.valid_parent_session_id = false;
+  test_tx_options.parent_session_id       = 0;
+  test_tx_options.is_test_frame           = false;
+  void *test_user                         = (void *)0x935;
 
   zwave_tx_send_data_AddCallback(
     (CMOCK_zwave_tx_send_data_CALLBACK)zwave_tx_send_data_stub);
@@ -636,8 +629,6 @@ void test_zwave_command_class_supervision_report_handler_multicast_transmit_fail
                         received_tx_options.parent_session_id);
   TEST_ASSERT_EQUAL_UINT32(test_tx_options.qos_priority,
                            received_tx_options.qos_priority);
-  TEST_ASSERT_EQUAL_UINT8(test_tx_options.use_parent_frame_options,
-                          received_tx_options.use_parent_frame_options);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.valid_parent_session_id,
                           received_tx_options.valid_parent_session_id);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.is_test_frame,
@@ -683,14 +674,13 @@ void test_zwave_command_class_supervision_report_handler_zwave_tx_fail()
   test_connection_info.remote.endpoint_id  = 4;
   test_connection_info.remote.is_multicast = false;
 
-  test_tx_options.number_of_responses      = 0;
-  test_tx_options.discard_timeout_ms       = 300;
-  test_tx_options.qos_priority             = 39485;
-  test_tx_options.use_parent_frame_options = false;
-  test_tx_options.valid_parent_session_id  = false;
-  test_tx_options.parent_session_id        = 0;
-  test_tx_options.is_test_frame            = false;
-  void *test_user                          = (void *)0x9385;
+  test_tx_options.number_of_responses     = 0;
+  test_tx_options.discard_timeout_ms      = 300;
+  test_tx_options.qos_priority            = 39485;
+  test_tx_options.valid_parent_session_id = false;
+  test_tx_options.parent_session_id       = 0;
+  test_tx_options.is_test_frame           = false;
+  void *test_user                         = (void *)0x9385;
 
   // Ensure no callback is added, it would shadow the return value from the "ExpectAndReturn"
   zwave_tx_send_data_AddCallback(NULL);
@@ -741,9 +731,9 @@ void test_zwave_command_class_supervision_report_handler_zwave_tx_fail()
   // No callback as the session should have been aborted
   TEST_ASSERT_EQUAL(0, supervision_complete_calls);
   // no Z-Wave TX callback, no tx_info. Don't check every field here.
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bACKChannelNo, 0);
-  TEST_ASSERT_EQUAL_UINT16(received_tx_info.wTransmitTicks, 0);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bLastTxChannelNo, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.ack_channel_number, 0);
+  TEST_ASSERT_EQUAL_UINT16(received_tx_info.transmit_ticks, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.tx_channel_number, 0);
 }
 
 void test_zwave_command_class_supervision_report_handler_working_without_update()
@@ -757,14 +747,13 @@ void test_zwave_command_class_supervision_report_handler_working_without_update(
   test_connection_info.remote.endpoint_id  = 4;
   test_connection_info.remote.is_multicast = false;
 
-  test_tx_options.number_of_responses      = 0;
-  test_tx_options.discard_timeout_ms       = 300;
-  test_tx_options.qos_priority             = 39485;
-  test_tx_options.use_parent_frame_options = false;
-  test_tx_options.valid_parent_session_id  = false;
-  test_tx_options.parent_session_id        = 0;
-  test_tx_options.is_test_frame            = true;
-  void *test_user                          = (void *)0x9385;
+  test_tx_options.number_of_responses     = 0;
+  test_tx_options.discard_timeout_ms      = 300;
+  test_tx_options.qos_priority            = 39485;
+  test_tx_options.valid_parent_session_id = false;
+  test_tx_options.parent_session_id       = 0;
+  test_tx_options.is_test_frame           = true;
+  void *test_user                         = (void *)0x9385;
 
   zwave_tx_send_data_AddCallback(
     (CMOCK_zwave_tx_send_data_CALLBACK)zwave_tx_send_data_stub);
@@ -803,8 +792,6 @@ void test_zwave_command_class_supervision_report_handler_working_without_update(
                         received_tx_options.parent_session_id);
   TEST_ASSERT_EQUAL_UINT32(test_tx_options.qos_priority,
                            received_tx_options.qos_priority);
-  TEST_ASSERT_EQUAL_UINT8(test_tx_options.use_parent_frame_options,
-                          received_tx_options.use_parent_frame_options);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.valid_parent_session_id,
                           received_tx_options.valid_parent_session_id);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.is_test_frame,
@@ -836,14 +823,14 @@ void test_zwave_command_class_supervision_report_handler_working_without_update(
                           received_supervision_status);
   TEST_ASSERT_EQUAL_PTR(test_user, received_user);
   // no Z-Wave TX callback, no tx_info. Don't check every field here.
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bACKChannelNo, 0);
-  TEST_ASSERT_EQUAL_UINT16(received_tx_info.wTransmitTicks, 0);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bLastTxChannelNo, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.ack_channel_number, 0);
+  TEST_ASSERT_EQUAL_UINT16(received_tx_info.transmit_ticks, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.tx_channel_number, 0);
 
   // Simulate zwave_tx callback
-  test_tx_info.bACKChannelNo    = 2;
-  test_tx_info.wTransmitTicks   = 2;
-  test_tx_info.bLastTxChannelNo = 2;
+  test_tx_info.ack_channel_number = 2;
+  test_tx_info.transmit_ticks     = 2;
+  test_tx_info.tx_channel_number  = 2;
   TEST_ASSERT_NOT_NULL(supervision_on_send_complete);
   supervision_on_send_complete(TRANSMIT_COMPLETE_OK,
                                &test_tx_info,
@@ -858,9 +845,9 @@ void test_zwave_command_class_supervision_report_handler_working_without_update(
   TEST_ASSERT_EQUAL(2, supervision_complete_calls);
   TEST_ASSERT_EQUAL_UINT8(SUPERVISION_REPORT_FAIL, received_supervision_status);
   TEST_ASSERT_EQUAL_PTR(test_user, received_user);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bACKChannelNo, 2);
-  TEST_ASSERT_EQUAL_UINT16(received_tx_info.wTransmitTicks, 2);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bLastTxChannelNo, 2);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.ack_channel_number, 2);
+  TEST_ASSERT_EQUAL_UINT16(received_tx_info.transmit_ticks, 2);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.tx_channel_number, 2);
 }
 
 void test_zwave_command_class_supervision_report_handler_working()
@@ -874,14 +861,13 @@ void test_zwave_command_class_supervision_report_handler_working()
   test_connection_info.remote.endpoint_id  = 4;
   test_connection_info.remote.is_multicast = false;
 
-  test_tx_options.number_of_responses      = 0;
-  test_tx_options.discard_timeout_ms       = 300;
-  test_tx_options.qos_priority             = 39485;
-  test_tx_options.use_parent_frame_options = false;
-  test_tx_options.valid_parent_session_id  = false;
-  test_tx_options.parent_session_id        = 0;
-  test_tx_options.is_test_frame            = false;
-  void *test_user                          = (void *)0x9385;
+  test_tx_options.number_of_responses     = 0;
+  test_tx_options.discard_timeout_ms      = 300;
+  test_tx_options.qos_priority            = 39485;
+  test_tx_options.valid_parent_session_id = false;
+  test_tx_options.parent_session_id       = 0;
+  test_tx_options.is_test_frame           = false;
+  void *test_user                         = (void *)0x9385;
 
   zwave_tx_send_data_AddCallback(
     (CMOCK_zwave_tx_send_data_CALLBACK)zwave_tx_send_data_stub);
@@ -920,8 +906,6 @@ void test_zwave_command_class_supervision_report_handler_working()
                         received_tx_options.parent_session_id);
   TEST_ASSERT_EQUAL_UINT32(test_tx_options.qos_priority,
                            received_tx_options.qos_priority);
-  TEST_ASSERT_EQUAL_UINT8(test_tx_options.use_parent_frame_options,
-                          received_tx_options.use_parent_frame_options);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.valid_parent_session_id,
                           received_tx_options.valid_parent_session_id);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.is_test_frame,
@@ -985,9 +969,9 @@ void test_zwave_command_class_supervision_report_handler_working()
   TEST_ASSERT_EQUAL_UINT8(SUPERVISION_REPORT_FAIL, received_supervision_status);
   TEST_ASSERT_EQUAL_PTR(test_user, received_user);
   // no Z-Wave TX callback, no tx_info. Don't check every field here.
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bACKChannelNo, 0);
-  TEST_ASSERT_EQUAL_UINT16(received_tx_info.wTransmitTicks, 0);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bLastTxChannelNo, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.ack_channel_number, 0);
+  TEST_ASSERT_EQUAL_UINT16(received_tx_info.transmit_ticks, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.tx_channel_number, 0);
 }
 
 void test_zwave_command_class_supervision_report_send_data_complete()
@@ -1178,9 +1162,9 @@ void test_zwave_command_class_supervision_report_multi_sessions()
   TEST_ASSERT_EQUAL_UINT8(SUPERVISION_REPORT_SUCCESS,
                           received_supervision_status);
   TEST_ASSERT_EQUAL_PTR(test_user_node_231, received_user);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bACKChannelNo, 0);
-  TEST_ASSERT_EQUAL_UINT16(received_tx_info.wTransmitTicks, 0);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bLastTxChannelNo, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.ack_channel_number, 0);
+  TEST_ASSERT_EQUAL_UINT16(received_tx_info.transmit_ticks, 0);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.tx_channel_number, 0);
 
   // Node 5 tells us it is done now:
   test_connection_info.remote.node_id = 5;
@@ -1204,12 +1188,12 @@ void test_zwave_command_class_supervision_report_multi_sessions()
   TEST_ASSERT_EQUAL_UINT8(SUPERVISION_REPORT_SUCCESS,
                           received_supervision_status);
   TEST_ASSERT_EQUAL_PTR(test_user_node_5, received_user);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bACKChannelNo,
-                          test_tx_info.bACKChannelNo);
-  TEST_ASSERT_EQUAL_UINT16(received_tx_info.wTransmitTicks,
-                           test_tx_info.wTransmitTicks);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bLastTxChannelNo,
-                          test_tx_info.bLastTxChannelNo);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.ack_channel_number,
+                          test_tx_info.ack_channel_number);
+  TEST_ASSERT_EQUAL_UINT16(received_tx_info.transmit_ticks,
+                           test_tx_info.transmit_ticks);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.tx_channel_number,
+                          test_tx_info.tx_channel_number);
 
   // Now timer expires
   // time should be > SUPERVISION_REPORT_TIME + duration
@@ -1219,12 +1203,12 @@ void test_zwave_command_class_supervision_report_multi_sessions()
   TEST_ASSERT_EQUAL_UINT8(SUPERVISION_REPORT_SUCCESS,
                           received_supervision_status);
   TEST_ASSERT_EQUAL_PTR(test_user_node_5, received_user);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bACKChannelNo,
-                          test_tx_info.bACKChannelNo);
-  TEST_ASSERT_EQUAL_UINT16(received_tx_info.wTransmitTicks,
-                           test_tx_info.wTransmitTicks);
-  TEST_ASSERT_EQUAL_UINT8(received_tx_info.bLastTxChannelNo,
-                          test_tx_info.bLastTxChannelNo);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.ack_channel_number,
+                          test_tx_info.ack_channel_number);
+  TEST_ASSERT_EQUAL_UINT16(received_tx_info.transmit_ticks,
+                           test_tx_info.transmit_ticks);
+  TEST_ASSERT_EQUAL_UINT8(received_tx_info.tx_channel_number,
+                          test_tx_info.tx_channel_number);
 }
 
 void test_zwave_command_class_supervision_abort_send_data()
@@ -1841,14 +1825,13 @@ void test_zwave_command_class_supervision_send_data_callback_closes_the_session(
   test_connection_info.remote.endpoint_id  = 4;
   test_connection_info.remote.is_multicast = false;
 
-  test_tx_options.number_of_responses      = 0;
-  test_tx_options.discard_timeout_ms       = 300;
-  test_tx_options.qos_priority             = 39485;
-  test_tx_options.use_parent_frame_options = false;
-  test_tx_options.valid_parent_session_id  = false;
-  test_tx_options.parent_session_id        = 0;
-  test_tx_options.is_test_frame            = false;
-  void *test_user                          = (void *)0x9385;
+  test_tx_options.number_of_responses     = 0;
+  test_tx_options.discard_timeout_ms      = 300;
+  test_tx_options.qos_priority            = 39485;
+  test_tx_options.valid_parent_session_id = false;
+  test_tx_options.parent_session_id       = 0;
+  test_tx_options.is_test_frame           = false;
+  void *test_user                         = (void *)0x9385;
 
   zwave_tx_send_data_AddCallback(
     (CMOCK_zwave_tx_send_data_CALLBACK)zwave_tx_send_data_stub);
@@ -1887,8 +1870,6 @@ void test_zwave_command_class_supervision_send_data_callback_closes_the_session(
                         received_tx_options.parent_session_id);
   TEST_ASSERT_EQUAL_UINT32(test_tx_options.qos_priority,
                            received_tx_options.qos_priority);
-  TEST_ASSERT_EQUAL_UINT8(test_tx_options.use_parent_frame_options,
-                          received_tx_options.use_parent_frame_options);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.valid_parent_session_id,
                           received_tx_options.valid_parent_session_id);
   TEST_ASSERT_EQUAL_UINT8(test_tx_options.is_test_frame,

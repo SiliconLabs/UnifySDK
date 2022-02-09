@@ -1,10 +1,9 @@
 var zigpc__net__mgmt__fsm_8h =
 [
-    [ "zigpc_net_mgmt_fsm_init_complete_t", "structzigpc__net__mgmt__fsm__init__complete__t.html", "structzigpc__net__mgmt__fsm__init__complete__t" ],
     [ "zigpc_net_mgmt_fsm_node_add_t", "structzigpc__net__mgmt__fsm__node__add__t.html", "structzigpc__net__mgmt__fsm__node__add__t" ],
     [ "zigpc_net_mgmt_fsm_node_interview_t", "structzigpc__net__mgmt__fsm__node__interview__t.html", "structzigpc__net__mgmt__fsm__node__interview__t" ],
     [ "zigpc_net_mgmt_fsm_node_remove_t", "structzigpc__net__mgmt__fsm__node__remove__t.html", "structzigpc__net__mgmt__fsm__node__remove__t" ],
-    [ "zigpc_net_mgmt_fsm_interview_t", "structzigpc__net__mgmt__fsm__interview__t.html", "structzigpc__net__mgmt__fsm__interview__t" ],
+    [ "zigpc_net_mgmt_fsm_interview_status_t", "structzigpc__net__mgmt__fsm__interview__status__t.html", "structzigpc__net__mgmt__fsm__interview__status__t" ],
     [ "zigpc_net_mgmt_fsm", "structzigpc__net__mgmt__fsm.html", "structzigpc__net__mgmt__fsm" ],
     [ "zigpc_net_mgmt_fsm_data_t", "unionzigpc__net__mgmt__fsm__data__t.html", "unionzigpc__net__mgmt__fsm__data__t" ],
     [ "zigpc_net_mgmt_process_data_fsm_t", "structzigpc__net__mgmt__process__data__fsm__t.html", "structzigpc__net__mgmt__process__data__fsm__t" ],
@@ -19,9 +18,7 @@ var zigpc__net__mgmt__fsm_8h =
       [ "ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_REQUEST", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3ace36c0bd079f3dd7f1c34855b89da093", null ],
       [ "ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_START", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3a4b259957ede344de4b73b0dc00f6ed92", null ],
       [ "ZIGPC_NET_MGMT_FSM_EVENT_NODE_ADD_COMPLETE", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3a939940f926a20525446c8e155594e207", null ],
-      [ "ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_REQUEST", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3a29fe501391554614c3d7974f0b05d06c", null ],
-      [ "ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEWED", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3a01ea4d674ea6dfa61257e9b2681e01fa", null ],
-      [ "ZIGPC_NET_MGMT_FSM_EVENT_NODE_ENDPOINT_INTERVIEWED", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3a328528f02f300f64808c403e6ec44ae4", null ],
+      [ "ZIGPC_NET_MGMT_FSM_EVENT_NODE_INTERVIEW_STATUS", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3aeee963a5cb36ff0c31994799c4fd14c8", null ],
       [ "ZIGPC_NET_MGMT_FSM_EVENT_NODE_REMOVE_REQUEST", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3a5bf8d632c48b930a270a9621bdb60650", null ],
       [ "ZIGPC_NET_MGMT_FSM_EVENT_NODE_REMOVE_COMPLETE", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3ac268bbf0d1143e6cd1a8458bb2405db4", null ],
       [ "ZIGPC_NET_MGMT_FSM_EVENT_MAX_VAL", "zigpc__net__mgmt__fsm_8h.html#a18d813394e7ba2e2b9e98f53b19c24d3ac3ff99229254ad5b2a01ff04aee46410", null ]

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -95,13 +95,13 @@ $(document).ready(function(){initNavTree('namespacezigpc__ucl_1_1pc__nwmgmt.html
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a1b060d96411b3a541b02bea436a71780"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1pc__nwmgmt.html#a1b060d96411b3a541b02bea436a71780">on_net_init</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> pc_eui64)</td></tr>
+<tr class="memitem:a1b060d96411b3a541b02bea436a71780"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1pc__nwmgmt.html#a1b060d96411b3a541b02bea436a71780">on_net_init</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> pc_eui64)</td></tr>
 <tr class="memdesc:a1b060d96411b3a541b02bea436a71780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler when the network has initialized. This handler will initialized any MQTT subscriptions needed to receieve PC NetworkManagement commands.  <a href="namespacezigpc__ucl_1_1pc__nwmgmt.html#a1b060d96411b3a541b02bea436a71780">More...</a><br /></td></tr>
 <tr class="separator:a1b060d96411b3a541b02bea436a71780"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade67d950319cbdf61ac4659badd22ea0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1pc__nwmgmt.html#ade67d950319cbdf61ac4659badd22ea0">on_write_mqtt</a> (const char *topic, const char *message, const size_t message_length)</td></tr>
 <tr class="memdesc:ade67d950319cbdf61ac4659badd22ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">MQTT subscription handler for receiving network management updates. This function will send a dynamically allocated string from the character array passed in as a the MQTT message.  <a href="namespacezigpc__ucl_1_1pc__nwmgmt.html#ade67d950319cbdf61ac4659badd22ea0">More...</a><br /></td></tr>
 <tr class="separator:ade67d950319cbdf61ac4659badd22ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2088722fd62dd50c0159f89da44f933"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1pc__nwmgmt.html#ae2088722fd62dd50c0159f89da44f933">on_net_state_update</a> (<a class="el" href="group__zigpc__net__mgmt__notify.html#gab487b9af83bec792e800f2034c72d9b7">zigpc_net_mgmt_on_network_state_update_t</a> &amp;state)</td></tr>
+<tr class="memitem:ae2088722fd62dd50c0159f89da44f933"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezigpc__ucl_1_1pc__nwmgmt.html#ae2088722fd62dd50c0159f89da44f933">on_net_state_update</a> (<a class="el" href="group__zigpc__net__mgmt__notify.html#gab487b9af83bec792e800f2034c72d9b7">zigpc_net_mgmt_on_network_state_update_t</a> &amp;state)</td></tr>
 <tr class="memdesc:ae2088722fd62dd50c0159f89da44f933"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event handler when the network state has been updated. This handler will update the NetworkManagement MQTT topic based on the data received.  <a href="namespacezigpc__ucl_1_1pc__nwmgmt.html#ae2088722fd62dd50c0159f89da44f933">More...</a><br /></td></tr>
 <tr class="separator:ae2088722fd62dd50c0159f89da44f933"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -119,7 +119,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::pc_nwmgmt::on_net_init </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::pc_nwmgmt::on_net_init </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a>&#160;</td>
           <td class="paramname"><em>pc_eui64</em></td><td>)</td>
@@ -146,7 +146,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::pc_nwmgmt::on_net_state_update </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_ucl::pc_nwmgmt::on_net_state_update </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__zigpc__net__mgmt__notify.html#gab487b9af83bec792e800f2034c72d9b7">zigpc_net_mgmt_on_network_state_update_t</a> &amp;&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
@@ -216,7 +216,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacezigpc__ucl.html">zigpc_ucl</a></li><li class="navelem"><a class="el" href="namespacezigpc__ucl_1_1pc__nwmgmt.html">pc_nwmgmt</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:36 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:52 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -29,14 +29,14 @@ extern "C" {
 #endif
 
 /**
- * @brief Read data from the command line (stdin) and copies it in the user 
+ * @brief Read data from the command line (stdin) and copies it in the user
  * buffer. It strips the line return characters from the input.
  * @param user_buffer buffer for the data to be copied in, if any
- * @param user_buffer_length Length of the user buffer. If the user_buffer is 
+ * @param user_buffer_length Length of the user buffer. If the user_buffer is
  * too small to contain the input data, only the fitting size of bytes will be
  * copied
- * @param timeout Maximum time to wait in ms for input. 
- * @returns the length of the input data copied into the user buffer. Will be 0 
+ * @param timeout Maximum time to wait in ms for input.
+ * @returns the length of the input data copied into the user buffer. Will be 0
  * if no data was copied or if timed out waiting for command line input.
  */
 uint16_t read_command_line(char *user_buffer,

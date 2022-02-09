@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -15,24 +15,24 @@
 #include "uic_component_fixtures.h"
 
 /**
- * \defgroup uic_main Main Function for Contiki
- * \ingroup uic_components
+ * @defgroup uic_main Main Function for Contiki
+ * @ingroup unify_components
  * This component contains the a "main" function for using Contiki.
  *
  * It is a supporting component, that initializes the Contiki OS
  * and provides the execution loop for the Contiki scheduling mechanism.
  *
  * It supports initializing other components through setup fixture functions,
- * see \ref uic_fixt_setup_t.
- * These functions are either added to the \ref uic_fixt_setup_steps array,
- * if the component is part of the UIC library, or supplied the \ref uic_main
+ * see @ref uic_fixt_setup_t.
+ * These functions are either added to the @ref uic_fixt_setup_steps array,
+ * if the component is part of the UIC library, or supplied the @ref uic_main
  * function, if it resides outside the UIC library
  *
  * If a component is implemented with a Contiki process, that process
- * shall be started in the component setup fixture using \ref process_start
+ * shall be started in the component setup fixture using @ref process_start
  *
- * In addition, functions waking up the main process based on events on 
- * sockets are described in \ref uic_main_ext
+ * In addition, functions waking up the main process based on events on
+ * sockets are described in @ref uic_main_ext
  */
 
 /** Struct to hold the component pre-initializers (fixture setup).

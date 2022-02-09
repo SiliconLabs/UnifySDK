@@ -137,7 +137,6 @@ static sl_status_t register_send_event_handler_stub(
   return SL_STATUS_OK;
 }
 
-
 static void init_verification()
 {
   // Resolution functions
@@ -169,8 +168,6 @@ void suiteSetUp()
   datastore_init(":memory:");
   attribute_store_init();
   zwave_unid_set_home_id(home_id);
-  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
-  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -184,6 +181,8 @@ int suiteTearDown(int num_failures)
 /// Called before each and every test
 void setUp()
 {
+  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
+  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
   zpc_attribute_store_test_helper_create_network();
   init_verification();
   zwave_unid_set_home_id(home_id);
@@ -598,4 +597,76 @@ void test_zwave_command_class_multi_channel_association_control()
     attribute_store_is_value_defined(group_content_node, REPORTED_ATTRIBUTE));
   TEST_ASSERT_FALSE(
     attribute_store_is_value_defined(group_content_node, DESIRED_ATTRIBUTE));
+}
+
+void test_zwave_command_class_multi_channel_association_association_to_relevant_groups()
+{
+  // We want to get associate ourselves to these groups:
+  zwave_command_class_agi_request_to_establish_association(0x33, 0x33);
+
+  attribute_store_node_t group_id_node
+    = attribute_store_add_node(ATTRIBUTE(GROUP_ID), endpoint_id_node);
+  association_group_id_t group_id = 3;
+  attribute_store_set_reported(group_id_node, &group_id, sizeof(group_id));
+
+  uint8_t group_command_list[] = {1, 2, 1, 4, 0x33, 0x33};
+  attribute_store_node_t group_command_list_node
+    = attribute_store_get_node_child_by_type(group_id_node,
+                                             ATTRIBUTE(GROUP_COMMAND_LIST),
+                                             0);
+  attribute_store_set_reported(group_command_list_node,
+                               group_command_list,
+                               sizeof(group_command_list));
+  attribute_store_node_t supported_groupings_node
+    = attribute_store_add_node(ATTRIBUTE(SUPPORTED_GROUPINGS),
+                               endpoint_id_node);
+
+  association_group_count_t number_of_groups = 3;
+  attribute_store_set_reported(supported_groupings_node,
+                               &number_of_groups,
+                               sizeof(number_of_groups));
+
+  // Set the group profile to something else than NA or Lifeline
+  attribute_store_node_t group_profile_node
+    = attribute_store_get_node_child_by_type(group_id_node,
+                                             ATTRIBUTE(GROUP_PROFILE),
+                                             0);
+  const agi_profile_t group_profile = 0x2020;
+  attribute_store_set_reported(group_profile_node,
+                               &group_profile,
+                               sizeof(group_profile));
+  attribute_store_node_t group_capacity_node
+    = attribute_store_add_node(ATTRIBUTE(MAX_NODES_SUPPORTED), group_id_node);
+  association_group_capacity_t group_capacity = 20;
+  attribute_store_set_reported(group_capacity_node,
+                               &group_capacity,
+                               sizeof(group_capacity));
+
+  // Check that AGI likes the group content:
+  TEST_ASSERT_TRUE(
+    zwave_command_class_agi_group_contains_listeners(node_id, endpoint_id, 3));
+
+  // Make sure the group content exists
+  attribute_store_node_t group_content_node
+    = attribute_store_add_node(ATTRIBUTE(GROUP_CONTENT), group_id_node);
+
+  //Trigger lifeline establishment
+  attribute_resolver_clear_resolution_listener_Expect(
+    endpoint_id_node,
+    &establish_lifeline_association);
+  zwave_network_management_is_zpc_sis_ExpectAndReturn(true);
+  zwave_network_management_assign_return_route_IgnoreAndReturn(SL_STATUS_OK);
+  establish_lifeline_association(endpoint_id_node);
+
+  // Verify the desired value:
+  const uint8_t expected_associations[] = {0x01};
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(group_content_node, DESIRED_ATTRIBUTE));
+  uint8_t actual_associations[sizeof(expected_associations)] = {};
+  attribute_store_get_desired(group_content_node,
+                              actual_associations,
+                              sizeof(actual_associations));
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_associations,
+                                actual_associations,
+                                sizeof(expected_associations));
 }

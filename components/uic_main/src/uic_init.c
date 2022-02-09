@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -13,14 +13,15 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
+
 /* contiki includes */
 #include "process.h"
 #include "procinit.h"
 #include "autostart.h"
 #include "sys/ctimer.h"
-#include "uic_version.h"
 
 /* Includes from other components */
+#include "uic_version.h"
 #include "sl_log.h"
 #include "config.h"
 
@@ -57,20 +58,20 @@ static void uic_main_contiki_setup(void)
  * Read in the configuration parameters. Initialize and start up
  * contiki OS.  Initialize and start up the UIC processes.
  */
-bool uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
-              int argc,
-              char **argv,
-              const char *version)
+sl_status_t uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
+                     int argc,
+                     char **argv,
+                     const char *version)
 {
   int ret = 0;
   /* Import the system configuration. */
-  printf("# uic build: %s\n", UIC_VERSION);
+  sl_log_info(LOG_TAG, "# Unify build: %s\n", UIC_VERSION);
   ret = config_parse(argc, argv, version);
   if (ret) {
-    if (ret != CONFIG_STATUS_NOK) {
+    if (ret != CONFIG_STATUS_OK) {
       sl_log_critical(LOG_TAG, "Cannot initialize UIC Main - goodbye!\n");
     }
-    return false;
+    return SL_STATUS_FAIL;
   }
   // Init log as early as possible after parsing config
   sl_log_read_config(NULL);
@@ -80,12 +81,5 @@ bool uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
     *
     * If set-up works, initialize contiki OS and start autostart
     * processes. */
-  if (uic_fixt_setup_loop(fixt_app_setup)) {
-    /* Initialize contiki OS - timers and processes. */
-
-    return true;
-  } else {
-    return false;
-    sl_log_critical(LOG_TAG, "Cannot initialize UIC Main - goodbye!\n");
-  }
+  return uic_fixt_setup_loop(fixt_app_setup);
 }

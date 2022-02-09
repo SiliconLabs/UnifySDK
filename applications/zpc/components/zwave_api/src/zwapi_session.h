@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -13,7 +13,7 @@
 
 /**
  * @file zwapi_session.h
- * @brief Session level handling such as retries and request/response for 
+ * @brief Session level handling such as retries and request/response for
  * commands using the zwapi_connection.
  */
 
@@ -43,7 +43,7 @@ extern "C" {
 
 /**
  * @brief Initialize a zwapi_session with the Z-Wave module.
- * 
+ *
  * @param serial_port String representing the serial device path
  * @returns integer file descriptor for the serial device. the value will be
  * greater than 0 if successful.
@@ -57,10 +57,10 @@ void zwapi_session_shutdown();
 
 /**
  * @brief Closes and re-initializes the zwapi_session to the Z-Wave module.
- * 
- * @returns integer file descriptor for the serial device. 
+ *
+ * @returns integer file descriptor for the serial device.
  * the value will be greater than 0 if successful.
- * 
+ *
  * If no access to hard reset is available, it is recommended to issue a
  * FUNC_ID_SERIAL_API_SOFT_RESET command to the Z-Wave module after restarting
  * a session, and subsequently wait 1500ms before resuming operations.
@@ -74,9 +74,9 @@ int zwapi_session_restart();
  * @param command       Z-Wave Serial API Command (zwapi_func_ids.h)
  * @param payload_buffer Byte array with serial API command parameters
  * @param payload_buffer_length Length in bytes of parameter array
- * It may take up to RX_ACK_TIMEOUT_DEFAULT ms to receive a ACK 
+ * It may take up to RX_ACK_TIMEOUT_DEFAULT ms to receive a ACK
  * from the Z-Wave module
- * @returns SL_STATUS_OK if the frame sent and Ack'ed by the module. 
+ * @returns SL_STATUS_OK if the frame sent and Ack'ed by the module.
  * SL_STATUS_FAIL otherwise
  */
 sl_status_t zwapi_session_send_frame(uint8_t command,
@@ -95,7 +95,7 @@ sl_status_t zwapi_session_send_frame(uint8_t command,
  * @param response_len  ouput Length of response copied to response_buf.
  * It may take up to RX_ACK_TIMEOUT_DEFAULT ms to receive a ACK
  * It may take up to RX_BYTE_TIMEOUT_DEFAULT ms to receive a RES frame
- * @returns SL_STATUS_OK if the frame sent and Ack'ed by the module and the 
+ * @returns SL_STATUS_OK if the frame sent and Ack'ed by the module and the
  * corresponding Response frame was received. SL_STATUS_FAIL otherwise
  *
  * @zgw_name SendFrameWithResponse
@@ -114,9 +114,9 @@ sl_status_t
  * @param payload_buffer        Byte array with serial API command parameters
  * @param payload_buffer_length Length in bytes of parameter array
  * @returns SL_STATUS_OK if the frame has been sent.
- * 
- * Does not wait for any ACK. Can be used e.g. if the Z-Wave module is 
- * expected to restart 
+ *
+ * Does not wait for any ACK. Can be used e.g. if the Z-Wave module is
+ * expected to restart
  */
 sl_status_t zwapi_session_send_frame_no_ack(uint8_t command,
                                             const uint8_t *payload_buffer,
@@ -132,8 +132,8 @@ void zwapi_session_enqueue_rx_frames(void);
 
 /**
  * @brief Get the next frame from the zwapi_session receive queue
- * 
- * @param frame_ptr Pointer to frame data. This is set to NULL if no frame was 
+ *
+ * @param frame_ptr Pointer to frame data. This is set to NULL if no frame was
  * available Must be deallocated with free() after use.
  * @param frame_len length of frame. This is set to 0 if no frame was available
  * @returns true the receive queue still contains more frames

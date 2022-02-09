@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_security_validation/include/zwave_security_validation.h File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave/zwave_security_validation/include/zwave_security_validation.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -91,35 +91,28 @@ $(document).ready(function(){initNavTree('zwave__security__validation_8h.html','
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="zwave__controller__connection__info_8h_source.html">zwave_controller_connection_info.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__status_8h_source.html">sl_status.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="zwave__utils_8h_source.html">zwave_utils.h</a>&quot;</code><br />
 </div>
 <p><a href="zwave__security__validation_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga8f0224aa1344af06e424ee8e86214f6a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__security__validation.html#ga8f0224aa1344af06e424ee8e86214f6a">zwave_security_validation_is_security_valid_for_support</a> (<a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> minimal_scheme, const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection)</td></tr>
+<tr class="memitem:ga8f0224aa1344af06e424ee8e86214f6a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__security__validation.html#ga8f0224aa1344af06e424ee8e86214f6a">zwave_security_validation_is_security_valid_for_support</a> (<a class="el" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> minimal_scheme, const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection)</td></tr>
 <tr class="memdesc:ga8f0224aa1344af06e424ee8e86214f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a frame supported by us can be accepted based on the security it was received on.  <a href="group__zwave__security__validation.html#ga8f0224aa1344af06e424ee8e86214f6a">More...</a><br /></td></tr>
 <tr class="separator:ga8f0224aa1344af06e424ee8e86214f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga88e833788fe114c71de5fca53f572c1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__security__validation.html#ga88e833788fe114c71de5fca53f572c1e">zwave_security_validation_is_security_valid_for_control</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection)</td></tr>
+<tr class="memitem:ga88e833788fe114c71de5fca53f572c1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__security__validation.html#ga88e833788fe114c71de5fca53f572c1e">zwave_security_validation_is_security_valid_for_control</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection)</td></tr>
 <tr class="memdesc:ga88e833788fe114c71de5fca53f572c1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a frame supported by another node can be accepted based on the security it was received on.  <a href="group__zwave__security__validation.html#ga88e833788fe114c71de5fca53f572c1e">More...</a><br /></td></tr>
 <tr class="separator:ga88e833788fe114c71de5fca53f572c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga83d2429dc872b553f71b3ca3d1ff1108"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__security__validation.html#ga83d2429dc872b553f71b3ca3d1ff1108">zwave_security_validation_is_s2_nif_downgrade_attack_detected</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *nif, uint8_t nif_length)</td></tr>
+<tr class="memitem:ga83d2429dc872b553f71b3ca3d1ff1108"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__security__validation.html#ga83d2429dc872b553f71b3ca3d1ff1108">zwave_security_validation_is_s2_nif_downgrade_attack_detected</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *nif, uint8_t nif_length)</td></tr>
 <tr class="memdesc:ga83d2429dc872b553f71b3ca3d1ff1108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a the S2 Command Class has disappeared from the NIF, whereas it was reported as supported previously.  <a href="group__zwave__security__validation.html#ga83d2429dc872b553f71b3ca3d1ff1108">More...</a><br /></td></tr>
 <tr class="separator:ga83d2429dc872b553f71b3ca3d1ff1108"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga45c2f13cc52763102c4016d07576cbc4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__security__validation.html#ga45c2f13cc52763102c4016d07576cbc4">zwave_security_validation_is_node_s2_capable</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
-<tr class="memdesc:ga45c2f13cc52763102c4016d07576cbc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if we registered a node as supporting S2.  <a href="group__zwave__security__validation.html#ga45c2f13cc52763102c4016d07576cbc4">More...</a><br /></td></tr>
-<tr class="separator:ga45c2f13cc52763102c4016d07576cbc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga65be55bf46158201858695ec961f5b52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__security__validation.html#ga65be55bf46158201858695ec961f5b52">zwave_security_validation_set_node_as_s2_capable</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
-<tr class="memdesc:ga65be55bf46158201858695ec961f5b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a node as S2 capable, meaning that we know it supports S2, and it will forever do.  <a href="group__zwave__security__validation.html#ga65be55bf46158201858695ec961f5b52">More...</a><br /></td></tr>
-<tr class="separator:ga65be55bf46158201858695ec961f5b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_4a8cb7a53ada8eb6878175fb0f0b91c9.html">zwave_security_validation</a></li><li class="navelem"><a class="el" href="dir_a35ec4e645d0864f524d6a5dd4066b37.html">include</a></li><li class="navelem"><a class="el" href="zwave__security__validation_8h.html">zwave_security_validation.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_c555c22730fd06747a384ffdde9de6e8.html">zwave_security_validation</a></li><li class="navelem"><a class="el" href="dir_cdc8c47edc27745c7e173f83df106520.html">include</a></li><li class="navelem"><a class="el" href="zwave__security__validation_8h.html">zwave_security_validation.h</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:23 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

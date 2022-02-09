@@ -17,15 +17,18 @@ All automatic setup steps that a Protocol Controller does, should actually be do
 
 ## Generic APIs for Network Management
 
-Four distinct network management categories are defined that must be
-applied to any Protocol Controller.
+Two distinct network management categories can be used by IoT Services:
 
 * Network Management
 * SmartStart List Management
-* Diagnostics
-* Configuration (PHY or Protocol Controller specific configuration parameters)
 
-From MQTT broker/client perspective, these four categories should be mapped into topics, as follows:
+Additionally, the following functionality may be made available by Protocol
+Controllers:
+
+* Telemetry data
+
+From an MQTT broker/client perspective, these functionalities categories are mapped
+into topics, as follows:
 
 <table>
 <caption>MQTT topics for Network Management functionalities</caption>
@@ -40,14 +43,9 @@ From MQTT broker/client perspective, these four categories should be mapped into
 <td>None</td>
 </tr>
 <tr>
-<td>ucl/by-unid/+/ProtocolController/Diagnostics/#</td>
-<td>Diagnostic reporting</td>
-<td>Diagnostics (0x0B05), but needs attributes addition.</td>
-</tr>
-<tr>
-<td>ucl/by-unid/+/ProtocolController/Configuration/#</td>
-<td>PHY Specific configuration attributes that normally happens only once before setting up the first network.</td>
-<td>None</td>
+<td>ucl/by-unid/+/ProtocolController/RFTelemetry/#</td>
+<td>RF telemetry</td>
+<td>ProtocolController/RFTelemetry (0xFC01)</td>
 </tr>
 <tr>
 <td>ucl/SmartStart/+</td>
@@ -429,21 +427,10 @@ The JSON payload of the MQTT publish message is sometimes simplified for readabi
 \anchor anchor_add_node_figure
 
 \startuml
+
 'Style matching the other figures in chapter.
-'Switch to more legible color theme when all figures are ported to plantuml
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #001111
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-hide footbox
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
 ' Allows to do simultaneous transmissions
 !pragma teoz true
@@ -530,7 +517,7 @@ Therefore, some of the network management functionalities will be located under
 the state of the node themselves.
 
 > Topic: <em>ucl/by-unid/&lt;UNID&gt;/State/SupportedCommands</em><br/>
-> Topic: <em>ucl/by-unid/&lt;UNID&gt;/State/Commands//&lt;CommandName&gt;</em><br/>
+> Topic: <em>ucl/by-unid/&lt;UNID&gt;/State/Commands/&lt;CommandName&gt;</em><br/>
 
 Note that the State is located directly under the UNID and not under endpoints.
 However, as for any other cluster, the SupportedCommands will be an array of
@@ -538,7 +525,7 @@ supported commands, which can be issued by IoT Services under the
 Commands topic namespace.
 
 When an IoT service issues a Command at
-<em>ucl/by-unid/&lt;UNID&gt;/State/Commands//&lt;CommandName&gt;</em>, the effect
+<em>ucl/by-unid/&lt;UNID&gt;/State/Commands/&lt;CommandName&gt;</em>, the effect
 of the command may be published in either:
 
 * The servicing ProtocolController network management state: <em>ucl/by-unid/&lt;UNID&gt;/ProtocolController/NetworkManagement</em>
@@ -605,22 +592,9 @@ the MQTT publications could look like this:
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Initiating a Network Management command (Remove) on a node itself (1)
 
 legend top
@@ -681,22 +655,9 @@ the MQTT publications could look like this:
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Initiating a Network Management command (RemoveOffline) on a node itself (2)
 
 legend top
@@ -754,22 +715,9 @@ will be handled intelligently (queued or discarded) in the Protocol Controller t
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Initiating a Network Management command (DiscoverNeighbors) on a node itself (3)
 
 legend top
@@ -822,22 +770,9 @@ interview is completed:
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Initiating a Network Management command (Interview) on a node itself (3)
 
 legend top
@@ -1125,23 +1060,10 @@ The figure below shows an example of a SmartStart based node inclusion into a PA
 
 ' Allows to do simultaneous transmissions
 !pragma teoz true
+
 'Style matching the other figures in chapter.
-'Switch to more legible color theme when all figures are ported to plantuml
-skinparam classFontColor black
-skinparam classFontSize 14
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign left
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
-hide footbox
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
 legend top
 <font color=#0039FB>MQTT Subscription</font>
@@ -1168,7 +1090,7 @@ upvl-> dev_ui: <font color=#00003C> ucl/SmartStart/List\n {"value":[{\n\t"DSK": 
 & upvl-> protocol_controller:
 
 rnote over dev_ui: Remove the node \nfrom Provisioning list
-dev_ui -> upvl:  <font color=#6C2A0D> ucl/SmartStart/List/Remove \n {"value":{"DSK": "24859-64107-46202"}}
+dev_ui -> upvl:  <font color=#6C2A0D> ucl/SmartStart/List/Remove \n {"DSK": "24859-64107-46202"}
 rnote over upvl: Accepts the \nupdate and \npublishes it back
 upvl -> dev_ui: <font color=#00003C> ucl/SmartStart/List\n { "value": [] }
 & upvl -> protocol_controller
@@ -1177,24 +1099,15 @@ rnote over protocol_controller: The node stays in the \nnetwork but will not \nb
 \enduml
 
 #### Example: Adding a Node Using SmartStart, while the Node Requires Manual Intervention to Enable to be Included
-For example, in a Z-Wave network, manual intervention needed indicates that the end node needs to be excluded from another network before it can be included in a new network.
+
+For example, in a Z-Wave network, manual intervention needed indicates that
+the end node needs to be excluded from another network before it can be
+included in a new network.
 
 \startuml
 'Style matching the other figures in chapter.
-'Switch to more legible color theme when all figures are ported to plantuml
-skinparam classFontColor black
-skinparam classFontSize 14
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign left
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #001111
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-hide footbox
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
 ' Allows to do simultaneous transmissions
 !pragma teoz true
@@ -1236,20 +1149,8 @@ upvl -> dev_ui: <font color=#00003C>ucl/SmartStart/List \n {"value":[{\n\t"DSK":
 
 \startuml
 'Style matching the other figures in chapter.
-'Switch to more legible color theme when all figures are ported to plantuml
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign left
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #001111
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-hide footbox
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
 ' Allows to do simultaneous transmissions
 !pragma teoz true
@@ -1289,8 +1190,10 @@ rnote over protocol_controller2: PC2 sees that \nthe unid is non-empty\nso PC2 D
 
 ## Diagnostics
 
-This functionality enables retrieving statistics to assess the network health and other properties. It is based on the existing Diagnostics (Cluster ID 0x0B05).
+This functionality enables retrieving statistics to assess the network health
+and other properties. It is based on the existing Diagnostics (Cluster ID 0x0B05).
 
+Refer to the XML file for the list of attributes available in this Cluster.
 ### MQTT Topics and Parameters
 
 <table>
@@ -1300,140 +1203,191 @@ This functionality enables retrieving statistics to assess the network health an
 <th>Description</th>
 </tr>
 <tr>
-<td>ucl/by-unid/+/ProtocolController/Commands/RequestDiagnostics</td>
-<td>Requests an updated publication of network diagnostics</td>
+<td>ucl/by-unid/+/+/Diagnostics/Commands/</td>
+<td>Command topic space. IoT services can publish under this topic.
+    See the XML file for command definitions.
+</td>
 </tr>
 <tr>
-<td>ucl/by-unid/+/ProtocolController/Attributes/Diagnostics/Reported</td>
-<td>Used to publish the latest diagnostics measured by a Protocol Controller</td>
+<td>ucl/by-unid/+/+/Diagnostics/Attributes/&lt;AttributeName&gt;/Reported</td>
+<td>Used to publish the standard and additionnal attributes of the cluster.
+    See the XML file for standard attributes definitions.</td>
+</tr>
+<tr>
+<td>ucl/by-unid/+/+/Diagnostics/Attributes/&lt;AttributeName&gt;/Desired</td>
+<td>Used to publish the standard and additionnal attributes of the cluster.
+    See the XML file for standard attributes definitions.</td>
+</tr>
+<tr>
+<td>ucl/by-unid/+/+/Diagnostics/SupportedCommands</td>
+<td>Used to publish the supported commands.</td>
+</tr>
+<tr>
+<td>ucl/by-unid/+/+/Diagnostics/SupportedGeneratedCommands</td>
+<td>Used to publish the generated commands.</td>
+</tr>
+<tr>
+<td>ucl/by-unid/+/+/Diagnostics/GeneratedCommands/&lt;CommandName&gt;</td>
+<td>Topic used to publish generated commands.</td>
 </tr>
 </table>
+
 
 #### Requesting Diagnostics
 
-An MQTT client only needs to publish an empty payload on the following topic to request a Protocol Controller to report its latest measured diagnostic data:
+Protocol Controllers SHOULD request Diagnostics from nodes regularly, but
+the polling interval may be large to minimize traffic. Protocol Controllers
+SHOULD allow IoT Service to request fresh diagnostics data for a
+UNID/Endpoint by advertising the **ForceReadAttributes** command as supported
+for this cluster.
 
-> Topic: <em>ucl/by-unid/\<ProtocolControllerUnid\>/ProtocolController/Commands/RequestDiagnostics</em><br/>
-> Payload: {}
+An IoT Service can ask a Protocol Controller to request updated diagnostics
+data by using the special ForceReadAttributes command.
 
-#### Advertising Diagnostics
+**Topic::** `ucl/by-unid/&lt;Unid&gt;/Ep&lt;EndPointID&gt;/Diagnostics/Commands/ForceReadAttributes`
 
-A Protocol Controller that supports some diagnostics will subscribe to its matching topic <em>ucl/by-unid/\<ProtocolControllerUnid\>/ProtocolController/Commands/RequestDiagnostics</em> and publish its recorded data to the <em>ucl/by-unid/\<ProtocolControllerUnid\>/ProtocolController/Attributes/Diagnostics/Reported</em> topic whenever a new request came in. The list of parameters in the payload is shown below.
+**Payload:**
+
+```json
+{
+  "value" :[]
+}
+```
+
+## ProtocolController/RFTelemetry
+
+RFTelemetry is a telemetry cluster functionality, using a custom XML
+file definition. It uses a Manufacturer specific ZigBee Cluster ID.
+
+Measurement data about the last RF transmissions will be published under this
+cluster. A TxReport Command will be generated for this cluster at every
+transmission attempt, if the command can be generated and the *ReportingEnabled*
+attribute is set to true.
+
+No aggregation is provided for this cluster.
+
+See the Unify_ProtocolController_RFTelemetry.xml cluster in the dotdot-xml folder.
+
+### MQTT Topics and Parameters
 
 <table>
-<caption>Diagnostics attribute</caption>
+<caption>RF Telemetry MQTT Topics</caption>
 <tr>
-<th>Parameter</th>
-<th>Type and possible values</th>
+<th>MQTT Topic</th>
+<th>Description</th>
 </tr>
 <tr>
-<td>NumberOfResets</td>
-<td>type="uint16" max="65535" default="0"</td>
+<td>ucl/by-unid/+/ProtocolController/RFTelemetry/Commands/</td>
+<td>Command topic space. IoT services can publish under this topic.
+    See the XML file for command definitions.
+</td>
 </tr>
 <tr>
-<td>PersistentMemoryWrites</td>
-<td>type="uint16" max="65535" default="0"</td>
+<td>ucl/by-unid/+/ProtocolController/RFTelemetry/Attributes/&lt;AttributeName&gt;/Reported</td>
+<td>Used to publish the standard attributes of the cluster.
+    See the XML file for attributes definitions.</td>
 </tr>
 <tr>
-<td>MacRxBcast</td>
-<td>type="uint32" max="4294967295" default="0"</td>
+<td>ucl/by-unid/+/ProtocolController/RFTelemetry/Attributes/&lt;AttributeName&gt;/Desired</td>
+<td>Used to publish the standard attributes of the cluster.
+    See the XML file for attributes definitions.</td>
 </tr>
 <tr>
-<td>MacTxBcast</td>
-<td>type="uint32" max="4294967295" default="0"</td>
+<td>ucl/by-unid/+/ProtocolController/RFTelemetry/SupportedCommands</td>
+<td>Used to publish the supported commands.</td>
 </tr>
 <tr>
-<td colspan="2">Refer to the ZigBee cluster for the complete list</td>
+<td>ucl/by-unid/+/ProtocolController/RFTelemetry/SupportedGeneratedCommands</td>
+<td>Used to publish the generated commands.</td>
+</tr>
+<tr>
+<td>ucl/by-unid/+/ProtocolController/GeneratedCommands/TxReport</td>
+<td>Topic used to publish the transmission data.</td>
 </tr>
 </table>
 
-The table below shows an example of new attributes added to the ZigBee diagnostics cluster to support Z-Wave nodes.
-<table>
-<caption>Additional diagnostic attributes</caption>
-<tr>
-<th>Parameter</th>
-<th>Type and possible values</th>
-</tr>
-<tr>
-<td>ListOfNeighbors</td>
-<td>type="uint16" type="attribId" array="true" arrayLengthSize="0"</td>
-</tr>
-<tr>
-<td>SumOfTransmissionTimes</td>
-<td>type="uint32" max="4294967295" default="0"<br/>
-Represents the cumulated time in ms used for performing <br/>all transmissions given by "NumberOfTransmittedFrames"</td>
-</tr>
-<tr>
-<td>SumOfTransmissionTimeSquared</td>
-<td>type="uint32" max="4294967295" default="0"<br/>
-Represents the sum of transmission time squared in ms^2 used for <br/>performing all transmissions given by "NumberOfTransmittedFrames"</td>
-</tr>
-<tr>
-<td>NumberOfRouteChanges</td>
-<td>type="uint8" max="255" default="0"</td>
-</tr>
-<tr>
-<td>NumberOfTransmittedFrames</td>
-<td>type="uint32" max="4294967295" default="0"</td>
-</tr>
-<tr>
-<td>NumberOfTransmissionErrors</td>
-<td>type="uint32" max="4294967295" default="0"</td>
-</tr>
-<tr>
-<td>NumberOfRoutes</td>
-<td>type="uint8" max="255" default="1"</td>
-</tr>
-<tr>
-<td>TimeSinceLastSuccessfulTransmission</td>
-<td>type="uint32" max="4294967295"</td>
-</tr>
-<tr>
-<td>TimeSinceLastSuccessfulReception</td>
-<td>type="uint32" max="4294967295"</td>
-</tr>
-</table>
 
-Statistics/diagnostic data needs to be advertised on a per end node basis. Therefore, modify the ZigBee diagnostic cluster to present the list of attributes. A protocol controller supporting diagnostic data must map this data as it was supported by the node itself.
+For example, the publications for the ProtocolController/RFTelemetry
+could be as follow:
 
-For example, if a protocol controller has two nodes in its network, it will publish its own diagnostics together with the diagnostics measured for the two other nodes using the following:
+```mqtt
+ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/SupportedCommands {"value": ["WriteAttributes"]}
+ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/SupportedGeneratedCommands {"value": ["TxReport"]}
+ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/Reported {"value": true}
+ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/Attributes/TxReportEnabled/Desired {"value": true}
+ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/Attributes/ClusterRevision/Reported {"value": 1}
+ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/Attributes/ClusterRevision/Desired {"value": 1}
+```
 
-> Topic: <em>ucl/by-unid/\<ProtocolControllerUnid\>/ProtocolController/Attributes/Diagnostics</em><br/>
-> Payload:<br/>
->
-> ```json
-> {
->   "value":
->   [
->     {
->        "Unid": "<ProtocolControllerUnid>",
->        "Diagnostics": {
->          "LastMessageRSSI": -90,
->          "PHYToMACQueueLimitReached": 3
->        }
->      },
->      {
->        "Unid": "zw123456",
->        "Diagnostics": {
->          "NumberOfResets": 2,
->          "PersistentMemoryWrites": 4,
->          "NumberOfRouteChanges": 10
->      }
->      },
->      {
->        "Unid": "zw924365",
->        "Diagnostics": {
->           "NumberOfResets": 0,
->           "PersistentMemoryWrites": 20,
->           "ListOfNeighbors": [
->             1,
->             2,
->             3,
->             7,
->             230
->           ]
->         }
->      }
->    ]
-> }
-> ```
+If the *TxReportEnabled* is set to true, the ProtocolController will generate
+an incoming command at every transmission attempt.
+
+Not all fields may be available for all RF Protocols. A protocol Controller
+MUST use the following values to indicate unknown data for the following
+data types:
+
+* **string**: Use the value *""*
+* **uint8**: Use the value *0*
+* **int8**: Use the value *127*
+
+For example it could publish:
+
+```mqtt
+ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/GeneratedCommands/TxReport
+{
+  "SourceUNID": "zw-DCE2F035-0001",
+  "DestinationUNID": "zw-DCE2F035-0003",
+  "TransmissionSuccessful": true,
+  "TransmissionTimeMs": 299,
+  "TxPowerdBm": 10,
+  "TxChannel": 1,
+  "RoutingAttempts": 0,
+  "RouteChanged": false,
+  "TransmissionSpeed": "Z-WaveLongRange-100-kbits-per-second",
+  "MeasuredNoiseFloordBm": -120,
+  "LastRouteRepeaters": [
+    "zw-DCE2F035-0003",
+    "zw-DCE2F035-00A5"
+  ],
+  "IncomingRSSIRepeaters": [
+    -85,
+    -90
+  ],
+  "AckRSSI": -85,
+  "DestinationAckTxPowerdBm": 10,
+  "DestinationAckMeasuredRSSI": -95,
+  "DestinationAckMeasuredNoiseFloor": -110
+}
+```
+
+An example with a transmission failure could be:
+
+```mqtt
+ucl/by-unid/zw-DCE2F035-0001/ProtocolController/RFTelemetry/GeneratedCommands/TxReport
+{
+  "SourceUNID": "zw-DCE2F035-0001",
+  "DestinationUNID": "zw-DCE2F035-0005",
+  "TransmissionSuccessful": false,
+  "TransmissionTimeMs": 862,
+  "TxPowerdBm": 10,
+  "TxChannel": 1,
+  "RoutingAttempts": 3,
+  "RouteChanged": true,
+  "TransmissionSpeed": "Other",
+  "MeasuredNoiseFloordBm": 127,
+  "LastRouteRepeaters": [
+    "zw-DCE2F035-0003",
+    "zw-DCE2F035-00A5"
+  ],
+  "IncomingRSSIRepeaters": [
+    127,
+    127
+  ],
+  "LastRouteFailedLinkFunctionalUNID" : "zw-DCE2F035-00A5"
+  "LastRouteFailedLinkNonFunctionalUNID" : "zw-DCE2F035-0005"
+  "AckRSSI": 127,
+  "DestinationAckTxPowerdBm": 127,
+  "DestinationAckMeasuredRSSI": 127,
+  "DestinationAckMeasuredNoiseFloor": 127
+}
+```

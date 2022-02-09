@@ -1,0 +1,84 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+/**
+ *
+ * @file dotdot_mqtt_group_commands.h
+ * @defgroup dotdot_mqtt_group_commands DotDot ByGroup Listeners
+ * @ingroup dotdot_mqtt
+ *
+ * @brief This component provides helper functions for parsing UCL by-group commands.
+ *
+ * @{
+ */
+
+#ifndef DOTDOT_MQTT_GROUP_COMMANDS_H
+#define DOTDOT_MQTT_GROUP_COMMANDS_H
+
+#include <stdint.h>
+
+// Unify includes
+#include "sl_status.h"
+#include "uic_typedefs.h"
+#include "zap-types.h"
+
+#include "dotdot_mqtt.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
+{{#zcl_clusters}}{{#if (supportedCluster label)}}{{#unless (clusterWithoutEndpoints label)}}
+{{#zcl_commands}}
+
+/**
+ * @brief Callback signature for by-group {{parent.label}}::{{label}} command.
+ */
+typedef void (*{{asByGroupCommandCallback this}}_t)(
+    const dotdot_group_id_t group_id{{#zcl_command_arguments}}{{#first}},
+    const {{asCommandFieldsType parent}} *fields{{/first}}{{/zcl_command_arguments}}
+);
+
+/**
+ * Setup handler to be called when a
+ * ucl/by-group/+/{{parent.label}}/{{asSnakeCaseLower label}} is received.
+ * Setting this callback will overwrite the previous set callback.
+ *
+ */
+void {{asByGroupCommandCallback this}}_set(const {{asByGroupCommandCallback this}}_t callback);
+{{/zcl_commands}}
+
+typedef void (*{{asByGroupWriteAttributesCallback this}}_t)(
+    const dotdot_group_id_t group_id,
+    {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t,
+    {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t
+);
+
+/**
+ * Setup a callback for WriteAttribute to be called when a
+ * ucl/by-group/+/{{asSnakeCaseLower label}}/Commands/WriteAttributes is received.
+ * Setting this callback will overwrite any previously set callback.
+ */
+void {{asByGroupWriteAttributesCallback this}}_set(
+  const {{asByGroupWriteAttributesCallback this}}_t callback
+);
+
+{{/unless}}{{/if}}{{/zcl_clusters}}
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
+#endif // DOTDOT_MQTT_GROUP_COMMANDS_H
+/** @} end dotdot_mqtt_group_commands */

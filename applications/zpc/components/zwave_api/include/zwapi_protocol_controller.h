@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -22,7 +22,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "sl_status.h"
-#include "zwave_utils.h"
 #include "zwapi_protocol_transport.h"  //We need zwapi_tx_report_t here
 
 #ifdef __cplusplus
@@ -31,7 +30,7 @@ extern "C" {
 
 /**
  * @defgroup ZWAPI_CONTROLLER Controller API
- * @ingroup ZWAPI
+ * @ingroup zwave_api
  * @brief Functions in the Z-Wave controller API
  *
  * Functions in this module are generally used by Z-Wave controllers.
@@ -144,16 +143,16 @@ extern "C" {
 
 /// @name application_controller_update_function() callback status values
 ///@{
-#define UPDATE_STATE_SUC_ID                            0x10
-#define UPDATE_STATE_DELETE_DONE                       0x20
-#define UPDATE_STATE_NEW_ID_ASSIGNED                   0x40
-#define UPDATE_STATE_ROUTING_PENDING                   0x80
-#define UPDATE_STATE_NODE_INFO_REQ_FAILED              0x81
-#define UPDATE_STATE_NODE_INFO_REQ_DONE                0x82
-#define UPDATE_STATE_NOP_POWER_RECEIVED                0x83
-#define UPDATE_STATE_NODE_INFO_RECEIVED                0x84
-#define UPDATE_STATE_NODE_INFO_FOREIGN_HOMEID_RECEIVED 0x85
-#define UPDATE_STATE_INCLUDED_NODE_INFO_RECEIVED       0x86
+#define UPDATE_STATE_SUC_ID                                  0x10
+#define UPDATE_STATE_DELETE_DONE                             0x20
+#define UPDATE_STATE_NEW_ID_ASSIGNED                         0x40
+#define UPDATE_STATE_ROUTING_PENDING                         0x80
+#define UPDATE_STATE_NODE_INFO_REQ_FAILED                    0x81
+#define UPDATE_STATE_NODE_INFO_REQ_DONE                      0x82
+#define UPDATE_STATE_NOP_POWER_RECEIVED                      0x83
+#define UPDATE_STATE_NODE_INFO_RECEIVED                      0x84
+#define UPDATE_STATE_NODE_INFO_FOREIGN_HOMEID_RECEIVED       0x85
+#define UPDATE_STATE_INCLUDED_NODE_INFO_RECEIVED             0x86
 #define UPDATE_STATE_NODE_INFO_SMARTSTART_HOMEID_RECEIVED_LR 0x87
 ///@}
 
@@ -641,7 +640,7 @@ sl_status_t
  * @zgw_name ZW_RequestNodeNeighborUpdate
  */
 sl_status_t zwapi_request_neighbor_update(zwave_node_id_t bNodeID,
-                                           void (*completedFunc)(uint8_t));
+                                          void (*completedFunc)(uint8_t));
 
 /**
  * @brief Query whether the controller is a primary controller or a secondary
@@ -852,7 +851,8 @@ sl_status_t zwapi_set_max_source_route(uint8_t maxRouteTries);
  * @zgw_name ZW_GetPriorityRoute
  * @zgw_name ZW_GetLastWorkingRoute
  */
-uint8_t zwapi_get_priority_route(zwave_node_id_t bNodeID, uint8_t *pPriorityRoute);
+uint8_t zwapi_get_priority_route(zwave_node_id_t bNodeID,
+                                 uint8_t *pPriorityRoute);
 
 /**
  * @brief Set the Last Working Route (LWR) for a destination node.
@@ -890,7 +890,8 @@ uint8_t zwapi_get_priority_route(zwave_node_id_t bNodeID, uint8_t *pPriorityRout
  * @zgw_name ZW_SetPriorityRoute
  * @zgw_name ZW_SetLastWorkingRoute
  */
-sl_status_t zwapi_set_priority_route(zwave_node_id_t bNodeID, uint8_t *pPriorityRoute);
+sl_status_t zwapi_set_priority_route(zwave_node_id_t bNodeID,
+                                     uint8_t *pPriorityRoute);
 
 /**
  * @brief Enable/disable learn mode for a virtual node.
@@ -918,7 +919,9 @@ sl_status_t zwapi_set_priority_route(zwave_node_id_t bNodeID, uint8_t *pPriority
 sl_status_t zwapi_set_virtual_node_to_learn_mode(
   zwave_node_id_t node,
   uint8_t mode,
-  void (*learnFunc)(uint8_t bStatus, zwave_node_id_t orgID, zwave_node_id_t newID));
+  void (*learnFunc)(uint8_t bStatus,
+                    zwave_node_id_t orgID,
+                    zwave_node_id_t newID));
 
 /**
  * @brief Request nodemask containing virtual nodes in controller bridge.

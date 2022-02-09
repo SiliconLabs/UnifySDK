@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Member List</title>
+<title>Z-Wave Protocol Controller Refrence: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -94,9 +94,9 @@ $(document).ready(function(){initNavTree('classdotdot__bitmap.html',''); initRes
   <tr><td class="entry"><a class="el" href="classdotdot__bitmap.html#aa5a055a43bc5ecfd3d79bcbfeb66a371">bitmap_data</a></td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classdotdot__bitmap.html#ab5faccc5e96ba9e84756efca8baaa55f">convert_hex_string_to_uint32_t</a>(const std::string &amp;hex) const</td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr><td class="entry"><a class="el" href="classdotdot__bitmap.html#a9c28d1fff4e46cf90d9663337f7a2c70">dotdot_bitmap</a>(const std::string &amp;input_attribute_name, const std::string &amp;input_map_type, const std::vector&lt; std::pair&lt; std::vector&lt; std::string &gt;, std::vector&lt; std::vector&lt; std::string &gt;&gt;&gt;&gt; &amp;input_bitmap_data)</td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classdotdot__bitmap.html#a8fb6bad5cdf1fd940bcdcabd330829d6">get_bitmap_state_value_from_json_tree</a>(const boost::property_tree::ptree &amp;bitmap_tree) const</td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classdotdot__bitmap.html#a406bd8df1b4c95c2a59e2017b652c10e">get_bitmap_state_value_from_json_tree</a>(nlohmann::json &amp;bitmap_jsn) const</td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classdotdot__bitmap.html#ac99e844027f3d71e29137e44e681feae">get_bitmap_values</a>(uint32_t bitmap_value) const</td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classdotdot__bitmap.html#a6bf121ee471a36c7039ed2089f648ef0">get_bitmap_values_as_json_tree</a>(uint32_t bitmap_value) const</td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classdotdot__bitmap.html#ae0e716fad905d9b2764be06ff65d1af6">get_bitmap_values_as_json_tree</a>(uint32_t bitmap_value) const</td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classdotdot__bitmap.html#a42085a594cfd9b65c4a58fc13626a5fd">get_enum_name_of_element_by_value</a>(std::vector&lt; std::vector&lt; std::string &gt;&gt; enum_element, uint32_t enum_idx) const</td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classdotdot__bitmap.html#a7e4ab42e585455031756022003cda1be">get_enum_value_of_element_by_name</a>(std::vector&lt; std::vector&lt; std::string &gt;&gt; enum_element, const std::string &amp;name) const</td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr><td class="entry"><a class="el" href="classdotdot__bitmap.html#a776be7addbb5ee6c8d8ce3502738300f">idx_mask</a></td><td class="entry"><a class="el" href="classdotdot__bitmap.html">dotdot_bitmap</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
@@ -109,7 +109,7 @@ $(document).ready(function(){initNavTree('classdotdot__bitmap.html',''); initRes
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:38 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -3,7 +3,7 @@
  * @brief SL Status Codes.
  *
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
@@ -20,9 +20,18 @@
 
 #include <stdint.h>
 
+
 /**
- * @addtogroup sl_status Status Codes
- * @ingroup uic_components
+ * @defgroup unify_definitions Unify definitions
+ * @ingroup unify_components
+ * @brief Type definitions and macros for Unify components and applications.
+ */
+
+
+/**
+ * @defgroup unify_sl_status_codes Status Codes
+ * @ingroup unify_definitions
+ * @brief Status codes used to indicate the outcome of a function.
  * @{
  */
 
@@ -140,6 +149,6 @@ extern "C" {
 }
 #endif
 
-/** @} (end addtogroup sl_status) */
+/** @} (end unify_sl_status_codes) */
 
 #endif /* SL_STATUS_H */

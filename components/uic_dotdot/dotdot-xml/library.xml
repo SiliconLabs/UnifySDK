@@ -474,4 +474,12 @@ applicable to this document can be found in the LICENSE.md file.
   <xi:include href="OTAUpgrade.xml" parse="xml" />
   <xi:include href="ConcentrationMeasurement.xml" parse="xml"/>
 
+  <xi:include href="Unify_ProtocolController_RFTelemetry.xml" parse="xml"/>
+  <xi:include href="Unify_State.xml" parse="xml"/>
+  <xi:include href="Unify_Binding.xml" parse="xml"/>
+  <xi:include href="Unify_NameAndLocation.xml" parse="xml"/>
+  <xi:include href="Unify_AoXLocator.xml" parse="xml"/>
+  <xi:include href="Unify_AoXPositionEstimation.xml" parse="xml"/>
+  <xi:include href="Unify_ConfigurationParameters.xml" parse="xml"/>
+
 </zcl:library>

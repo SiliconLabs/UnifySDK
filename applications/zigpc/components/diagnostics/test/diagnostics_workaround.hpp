@@ -16,11 +16,8 @@
 #include "zigpc_diagnostics_metric.hpp"
 
 #include "zigpc_uptime.hpp"
-#include "zigpc_total_virtual_ram.hpp"
-#include "zigpc_used_virtual_ram.hpp"
-#include "zigpc_total_physical_ram.hpp"
-#include "zigpc_used_physical_ram.hpp"
-#include "zigpc_cpu_usage.hpp"
+#include "zigpc_mem_usage_metric.hpp"
+#include "zigpc_cpu_load_metric.hpp"
 #include "zigpc_example_metric.hpp"
 #include "zigpc_counter_plugin_metric.hpp"
 #endif

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -101,9 +101,9 @@ $(document).ready(function(){initNavTree('structmqtt__client.html',''); initResi
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5c336e85117b9a8edb92c04b64c14501"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a5c336e85117b9a8edb92c04b64c14501">mqtt_client</a> (const std::string &amp;<a class="el" href="structmqtt__client.html#afc85ed5fe07733bb69265ea6d924df15">hostname</a>, const uint32_t <a class="el" href="structmqtt__client.html#a864ae50e074c2cffef9b7ac4d2bfefdd">port</a>, const std::string &amp;client_id, const std::string &amp;cafile, const std::string &amp;certfile, const std::string &amp;keyfile, std::function&lt; int(const int, void *)&gt; <a class="el" href="structmqtt__client.html#a9212bad4d25cd1c51b5dbc2b5cfd1183">event_sender</a>, std::function&lt; void(const int, const unsigned long)&gt; <a class="el" href="structmqtt__client.html#a5c44ebc0782a5a0cbee4d6c252ac6d67">delayed_event_sender</a>, std::function&lt; int(const int, void *)&gt; <a class="el" href="structmqtt__client.html#a524836e19595f554fa927452630dbced">event_counter</a>)</td></tr>
 <tr class="separator:a5c336e85117b9a8edb92c04b64c14501"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50c1125f962434d481f9b8ddd3101699"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a50c1125f962434d481f9b8ddd3101699">setup</a> ()</td></tr>
+<tr class="memitem:a50c1125f962434d481f9b8ddd3101699"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a50c1125f962434d481f9b8ddd3101699">setup</a> ()</td></tr>
 <tr class="separator:a50c1125f962434d481f9b8ddd3101699"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26949923566579b6ced1fc48646f27c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a26949923566579b6ced1fc48646f27c3">teardown</a> ()</td></tr>
+<tr class="memitem:a26949923566579b6ced1fc48646f27c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a26949923566579b6ced1fc48646f27c3">teardown</a> ()</td></tr>
 <tr class="separator:a26949923566579b6ced1fc48646f27c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5897a5c38897dafc87cf6ac6a94a1858"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a5897a5c38897dafc87cf6ac6a94a1858">file_descriptor</a> ()</td></tr>
 <tr class="separator:a5897a5c38897dafc87cf6ac6a94a1858"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,12 +134,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a10abd09506ce8ba54355a5eeebb3c012"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86c8b43be56f923190ac654baa67af11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a86c8b43be56f923190ac654baa67af11">on_disconnect_callback_set</a> (<a class="el" href="mqtt__client_8hpp.html#a61c7385469ae06687e64450a07875e71">connection_callback_t</a>)</td></tr>
 <tr class="separator:a86c8b43be56f923190ac654baa67af11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9cd688f2fb2555cb037ff47eeb01cc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#af9cd688f2fb2555cb037ff47eeb01cc7">before_disconnect_callback_set</a> (<a class="el" href="mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048">connection_status_callback_t</a>)</td></tr>
+<tr class="separator:af9cd688f2fb2555cb037ff47eeb01cc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c0f45de53d2bde7920e7b89f15edaf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#ac5c0f45de53d2bde7920e7b89f15edaf">after_connect_callback_set</a> (<a class="el" href="mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048">connection_status_callback_t</a>)</td></tr>
+<tr class="separator:ac5c0f45de53d2bde7920e7b89f15edaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa43be0ab7c0138b2f4a7a2ae974944aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#aa43be0ab7c0138b2f4a7a2ae974944aa">on_connect</a> (int return_code)</td></tr>
 <tr class="separator:aa43be0ab7c0138b2f4a7a2ae974944aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa542d14adc619cbc30c403c3e7ddf103"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#aa542d14adc619cbc30c403c3e7ddf103">on_disconnect</a> (int return_code)</td></tr>
 <tr class="separator:aa542d14adc619cbc30c403c3e7ddf103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e3d240dcd42a62f799dc545c69241e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a7e3d240dcd42a62f799dc545c69241e1">on_message</a> (const std::string &amp;topic, const std::string &amp;message, size_t message_length, int message_qos, bool message_retain)</td></tr>
 <tr class="separator:a7e3d240dcd42a62f799dc545c69241e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa18f8c4e0f9f1aa1677502cdb8a19067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#aa18f8c4e0f9f1aa1677502cdb8a19067">after_connect_callback_call</a> ()</td></tr>
+<tr class="separator:aa18f8c4e0f9f1aa1677502cdb8a19067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a039a2f9c7460be8420457d778688ea13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a039a2f9c7460be8420457d778688ea13">before_disconnect_callback_call</a> ()</td></tr>
+<tr class="separator:a039a2f9c7460be8420457d778688ea13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -154,15 +162,15 @@ Public Attributes</h2></td></tr>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:af18ed55735aa0dad24a63f8faeb07f76"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#af18ed55735aa0dad24a63f8faeb07f76">publish_messages_waiting</a> ()</td></tr>
 <tr class="separator:af18ed55735aa0dad24a63f8faeb07f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8136109703d859e5da021892092a953d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a8136109703d859e5da021892092a953d">publish_to_broker</a> (bool flushing=false)</td></tr>
+<tr class="memitem:a8136109703d859e5da021892092a953d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a8136109703d859e5da021892092a953d">publish_to_broker</a> (bool flushing=false)</td></tr>
 <tr class="separator:a8136109703d859e5da021892092a953d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88a8d1fe493bd2812a006ec7594ae278"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a88a8d1fe493bd2812a006ec7594ae278">subscription_messages_waiting</a> ()</td></tr>
 <tr class="separator:a88a8d1fe493bd2812a006ec7594ae278"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada2fdc753bf27a0e2474c25ac486eab9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#ada2fdc753bf27a0e2474c25ac486eab9">subscribe_to_topic</a> ()</td></tr>
+<tr class="memitem:ada2fdc753bf27a0e2474c25ac486eab9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#ada2fdc753bf27a0e2474c25ac486eab9">subscribe_to_topic</a> ()</td></tr>
 <tr class="separator:ada2fdc753bf27a0e2474c25ac486eab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c3b0651f2909148ae60fce26402e4cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a5c3b0651f2909148ae60fce26402e4cf">unsubscription_messages_waiting</a> ()</td></tr>
 <tr class="separator:a5c3b0651f2909148ae60fce26402e4cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad34bdf5c61dd8b52b8831f20e57af9a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#ad34bdf5c61dd8b52b8831f20e57af9a3">unsubscribe_from_topic</a> ()</td></tr>
+<tr class="memitem:ad34bdf5c61dd8b52b8831f20e57af9a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#ad34bdf5c61dd8b52b8831f20e57af9a3">unsubscribe_from_topic</a> ()</td></tr>
 <tr class="separator:ad34bdf5c61dd8b52b8831f20e57af9a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acca3482df61f99003a5399859b54f779"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#acca3482df61f99003a5399859b54f779">send_event</a> (const int outgoing_event, void *procdata)</td></tr>
 <tr class="separator:acca3482df61f99003a5399859b54f779"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,7 +178,7 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a7ebda8065c2208c6dab6da7b6b9c8393"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b743b386ce7b3021ffa8b1ede9a2993"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a7b743b386ce7b3021ffa8b1ede9a2993">transition</a> (<a class="el" href="classmqtt__client__fsm.html">mqtt_client_fsm</a> &amp;new_state)</td></tr>
 <tr class="separator:a7b743b386ce7b3021ffa8b1ede9a2993"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00504c318f3ac6a1356d7c21ba9c6f34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a00504c318f3ac6a1356d7c21ba9c6f34">connect</a> ()</td></tr>
+<tr class="memitem:a00504c318f3ac6a1356d7c21ba9c6f34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a00504c318f3ac6a1356d7c21ba9c6f34">connect</a> ()</td></tr>
 <tr class="separator:a00504c318f3ac6a1356d7c21ba9c6f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -189,6 +197,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a9372f0d22c22fe095187553d19bde7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ae56dee55b65012becfbe24f9e0ab8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="mqtt__client_8hpp.html#a61c7385469ae06687e64450a07875e71">connection_callback_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a3ae56dee55b65012becfbe24f9e0ab8c">on_disconnect_callback</a> = nullptr</td></tr>
 <tr class="separator:a3ae56dee55b65012becfbe24f9e0ab8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c79c369ee1e67feaef519661ad6db48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048">connection_status_callback_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a2c79c369ee1e67feaef519661ad6db48">before_disconnect_callback</a> = nullptr</td></tr>
+<tr class="separator:a2c79c369ee1e67feaef519661ad6db48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c602b9c6af0fc980c73fba4321ed0dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048">connection_status_callback_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a7c602b9c6af0fc980c73fba4321ed0dd">after_connect_callback</a> = nullptr</td></tr>
+<tr class="separator:a7c602b9c6af0fc980c73fba4321ed0dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5997c2a32fa64f6238f3ccf769d1f9c1"><td class="memItemLeft" align="right" valign="top">std::deque&lt; <a class="el" href="structmessage__queue__element__t.html">message_queue_element_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#a5997c2a32fa64f6238f3ccf769d1f9c1">publishing_queue</a></td></tr>
 <tr class="separator:a5997c2a32fa64f6238f3ccf769d1f9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae90330fbc504f4b4075b599875e83cad"><td class="memItemLeft" align="right" valign="top">std::queue&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__client.html#ae90330fbc504f4b4075b599875e83cad">subscription_queue</a></td></tr>
@@ -293,6 +305,76 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa18f8c4e0f9f1aa1677502cdb8a19067"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa18f8c4e0f9f1aa1677502cdb8a19067">&#9670;&nbsp;</a></span>after_connect_callback_call()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_client::after_connect_callback_call </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5c0f45de53d2bde7920e7b89f15edaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5c0f45de53d2bde7920e7b89f15edaf">&#9670;&nbsp;</a></span>after_connect_callback_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_client::after_connect_callback_set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048">connection_status_callback_t</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a039a2f9c7460be8420457d778688ea13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a039a2f9c7460be8420457d778688ea13">&#9670;&nbsp;</a></span>before_disconnect_callback_call()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_client::before_disconnect_callback_call </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9cd688f2fb2555cb037ff47eeb01cc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9cd688f2fb2555cb037ff47eeb01cc7">&#9670;&nbsp;</a></span>before_disconnect_callback_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_client::before_disconnect_callback_set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048">connection_status_callback_t</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a00504c318f3ac6a1356d7c21ba9c6f34"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a00504c318f3ac6a1356d7c21ba9c6f34">&#9670;&nbsp;</a></span>connect()</h2>
 
@@ -303,7 +385,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::connect </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::connect </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -607,7 +689,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::publish_to_broker </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::publish_to_broker </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>flushing</em> = <code>false</code></td><td>)</td>
@@ -719,7 +801,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::setup </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::setup </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -767,7 +849,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::subscribe_to_topic </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::subscribe_to_topic </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -814,7 +896,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::teardown </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::teardown </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -940,7 +1022,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::unsubscribe_from_topic </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> mqtt_client::unsubscribe_from_topic </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1048,6 +1130,50 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a7c602b9c6af0fc980c73fba4321ed0dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c602b9c6af0fc980c73fba4321ed0dd">&#9670;&nbsp;</a></span>after_connect_callback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048">connection_status_callback_t</a> mqtt_client::after_connect_callback = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2c79c369ee1e67feaef519661ad6db48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c79c369ee1e67feaef519661ad6db48">&#9670;&nbsp;</a></span>before_disconnect_callback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048">connection_status_callback_t</a> mqtt_client::before_disconnect_callback = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aedafd7b9f1bc39c3d8f7e8ff2b7ca209"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aedafd7b9f1bc39c3d8f7e8ff2b7ca209">&#9670;&nbsp;</a></span>current_state</h2>
 
@@ -1495,7 +1621,7 @@ Friends</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structmqtt__client.html">mqtt_client</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:14 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -19,7 +19,11 @@
 #ifndef ZWAPI_UTILS_H
 #define ZWAPI_UTILS_H
 
-#include "zwave_utils.h"
+// Generic includes
+#include <stdint.h>
+#include <stdbool.h>
+
+#include "zwave_node_id_definitions.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,7 +40,9 @@ zwave_node_id_t zwapi_read_node_id(uint8_t *pData, uint8_t *index);
  * @brief Write the node ID in buffer based on node ID basetype. Note that
  *        this helper also advances the index.
  */
-void zwapi_write_node_id(uint8_t *pData, uint8_t *index, zwave_node_id_t node_id);
+void zwapi_write_node_id(uint8_t *pData,
+                         uint8_t *index,
+                         zwave_node_id_t node_id);
 
 #ifdef __cplusplus
 }

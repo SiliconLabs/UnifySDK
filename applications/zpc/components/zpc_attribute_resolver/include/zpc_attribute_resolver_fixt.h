@@ -10,13 +10,13 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
+
 /**
-* @file zpc_attribute_resolver_fixt.h
-* @defgroup zpc_attribute_resolver ZPC Attribute Resolver
-* @ingroup components
+* @defgroup zpc_attribute_resolver_fixt ZPC Attribute Resolver Fixtured
+* @ingroup zpc_attribute_resolver
 * @brief ZPC Attribute Resolver fixtures
 *
-* Setup and Teardown fixtures for ZPC Attribute Resolver
+* Setup and Teardown fixtures for the @ref zpc_attribute_resolver
 *
 * @{
 */

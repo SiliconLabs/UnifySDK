@@ -1,4 +1,5 @@
 export type CommandAttrsState = {
     Payload: any,
-    Command: any
+    Command: any,
+    ReadOnly: boolean
 }

@@ -10,6 +10,8 @@ var uic__mqtt_8c =
     [ "uic_mqtt_process_post", "uic__mqtt_8c.html#a280866965ea6b6966daa6bc4fc9529e0", null ],
     [ "uic_mqtt_process_post_delayed", "uic__mqtt_8c.html#ab6d96c9de06f851f029e2bf9bfa3db2f", null ],
     [ "uic_mqtt_publish", "group__uic__mqtt.html#ga6cab2f0af6353ba4cb9a4bc810ba0ad0", null ],
+    [ "uic_mqtt_set_after_connect_callback", "group__uic__mqtt.html#gacc9eff67ac8ed62e455a130e4e6c4def", null ],
+    [ "uic_mqtt_set_before_disconnect_callback", "group__uic__mqtt.html#gae2e2e942f76c2d0143ed907b2d413bb2", null ],
     [ "uic_mqtt_setup", "group__uic__mqtt.html#ga96105a8b2fec3cad9f3d9901cf9bbf95", null ],
     [ "uic_mqtt_subscribe", "uic__mqtt_8c.html#a053d0b579a5a20837b2438f0451be806", null ],
     [ "uic_mqtt_teardown", "group__uic__mqtt.html#ga5d6e500f05988e7f1070d81054c277d5", null ],

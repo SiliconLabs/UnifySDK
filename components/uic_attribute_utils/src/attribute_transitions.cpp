@@ -20,7 +20,7 @@
 // Contiki
 #include "etimer.h"
 
-// Generic incldues
+// Generic includes
 #include <map>
 #include <vector>
 

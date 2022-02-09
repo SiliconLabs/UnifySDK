@@ -21,6 +21,9 @@
 #include "contiki_test_helper.h"
 #include "mqtt_mock_helper.h"
 #include "zwave_unid.h"
+#include "process.h"
+
+PROCESS_NAME(ucl_network_management_process);
 
 extern "C" {
 // Mocks (must be included under extern "C")
@@ -120,7 +123,7 @@ void test_ucl_network_management_exit()
     mqtt_mock_helper_get_num_subscribers(ucl_nm_state_write_topic),
     "ucl_network_management shall unsubscribe to this topic on exit");
   TEST_ASSERT_EQUAL_JSON(
-    R"({"State":"temporarily offline", "SupportedStateList": []})",
+    R"({"State":"idle", "SupportedStateList": []})",
     mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
   TEST_ASSERT_EQUAL_MESSAGE(2,
                             mqtt_mock_helper_get_num_publish(ucl_nm_topic),

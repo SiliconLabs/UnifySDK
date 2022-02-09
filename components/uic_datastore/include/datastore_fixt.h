@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,9 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file datastore_fixt.h
- * @addtogroup datastore
- * @brief Persistent Datastore
+ * @defgroup datastore_fixt Unify Datastore Fixture
+ * @ingroup unify_datastore
+ * @brief Persistent Datastore fixture
  *
  * Fixture to initialize the datastore from uic_main,
  * in order to enable the Datastore in a UIC application,
@@ -47,9 +47,11 @@ extern "C" {
  * then calls \ref datastore_table_init
  * And calls datastore_attribure_init
  *
+ * @param datastore_file path for the datastore file.
+ *
  * @return SL_STATUS_OK for success, SL_STATUS_FAIL if an error occurred
  */
-sl_status_t datastore_fixt_setup(void);
+sl_status_t datastore_fixt_setup(const char *datastore_file);
 
 /**
  * @brief Fixture to tear down the datastore.
@@ -77,9 +79,14 @@ int datastore_fixt_teardown();
  * and writes the current UIC version in generic table
  * and calls datastore_attribure_init to initialize attribute store
  *
+ *  @param datastore_file path for the datastore file.
+ *  @param db_version                Expected version number for the database file
+ *
  * @return SL_STATUS_OK for success, SL_STATUS_FAIL if an error occurred
  */
-sl_status_t datastore_fixt_setup_and_handle_version(int64_t db_version);
+sl_status_t
+  datastore_fixt_setup_and_handle_version(const char *datastore_file,
+                                          int64_t db_version);
 #ifdef __cplusplus
 }
 #endif

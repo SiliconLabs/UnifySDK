@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,7 +12,7 @@
  *****************************************************************************/
 /**
  * @file device_id.h
- * @brief API to get device ID 
+ * @brief API to get device ID
  */
 
 #ifndef DEVICE_ID_H
@@ -20,7 +20,7 @@
 /**
  * @brief Get unique reboot persistent device id
  *
- * Can be used in identifying the device, ZPC is running on 
+ * Can be used in identifying the device, ZPC is running on
  * for e.g. in Device specific report Command class
  *
  */

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('zigpc__config_8c.html',''); initResiza
 <div class="contents">
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
+<code>#include &quot;uic_version.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__config_8h_source.html">zigpc_config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__config__fixt_8h_source.html">zigpc_config_fixt.h</a>&quot;</code><br />
 </div><table class="memberdecls">
@@ -100,7 +101,7 @@ Functions</h2></td></tr>
 <tr class="memitem:gaf9984b866f0e55fdb2c0c361d3b2776c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__config.html#gaf9984b866f0e55fdb2c0c361d3b2776c">zigpc_config_init</a> ()</td></tr>
 <tr class="memdesc:gaf9984b866f0e55fdb2c0c361d3b2776c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the configuration module.  <a href="group__zigpc__config.html#gaf9984b866f0e55fdb2c0c361d3b2776c">More...</a><br /></td></tr>
 <tr class="separator:gaf9984b866f0e55fdb2c0c361d3b2776c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1c8e61bf283a2413bc33b15dc057444c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__config.html#ga1c8e61bf283a2413bc33b15dc057444c">zigpc_config_fixt_setup</a> ()</td></tr>
+<tr class="memitem:ga1c8e61bf283a2413bc33b15dc057444c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__config.html#ga1c8e61bf283a2413bc33b15dc057444c">zigpc_config_fixt_setup</a> ()</td></tr>
 <tr class="memdesc:ga1c8e61bf283a2413bc33b15dc057444c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixture for setting up the zigpc_config component.  <a href="group__zigpc__config.html#ga1c8e61bf283a2413bc33b15dc057444c">More...</a><br /></td></tr>
 <tr class="separator:ga1c8e61bf283a2413bc33b15dc057444c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaab3f36b68ca239c4d42aeb2e78e7233f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structzigpc__config__t.html">zigpc_config_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__config.html#gaab3f36b68ca239c4d42aeb2e78e7233f">zigpc_get_config</a> (void)</td></tr>
@@ -117,6 +118,10 @@ Variables</h2></td></tr>
 <tr class="separator:a11fd270470b1cf7d99cf3c244d5cdfa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a667d1e18d76c3f3eb5477fa24ba41b45"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a667d1e18d76c3f3eb5477fa24ba41b45">DEFAULT_USE_TC_WELL_KNOWN_KEY</a> = false</td></tr>
 <tr class="separator:a667d1e18d76c3f3eb5477fa24ba41b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57c93bb6e677dc4120f195bc770d627a"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a57c93bb6e677dc4120f195bc770d627a">CONFIG_KEY_ZIGPC_DATASTORE_FILE</a> = &quot;zigpc.datastore_file&quot;</td></tr>
+<tr class="separator:a57c93bb6e677dc4120f195bc770d627a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37e1749d5bd9ffc7417cbf9a3547ab75"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#a37e1749d5bd9ffc7417cbf9a3547ab75">DEFAULT_ZIGPC_DATASTORE_FILE</a> = UIC_VAR_DIR &quot;/zigpc.db&quot;</td></tr>
+<tr class="separator:a37e1749d5bd9ffc7417cbf9a3547ab75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd8f3a54ad32cdaf11de346297362859"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structzigpc__config__t.html">zigpc_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__config_8c.html#afd8f3a54ad32cdaf11de346297362859">config</a></td></tr>
 <tr class="separator:afd8f3a54ad32cdaf11de346297362859"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -132,6 +137,28 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="structzigpc__config__t.html">zigpc_config_t</a> config</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57c93bb6e677dc4120f195bc770d627a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57c93bb6e677dc4120f195bc770d627a">&#9670;&nbsp;</a></span>CONFIG_KEY_ZIGPC_DATASTORE_FILE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* CONFIG_KEY_ZIGPC_DATASTORE_FILE = &quot;zigpc.datastore_file&quot;</td>
         </tr>
       </table>
   </td>
@@ -231,13 +258,35 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a37e1749d5bd9ffc7417cbf9a3547ab75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37e1749d5bd9ffc7417cbf9a3547ab75">&#9670;&nbsp;</a></span>DEFAULT_ZIGPC_DATASTORE_FILE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* DEFAULT_ZIGPC_DATASTORE_FILE = UIC_VAR_DIR &quot;/zigpc.db&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_dfd589449ec80b8bfaf793b62bd7da62.html">zigpc_config</a></li><li class="navelem"><a class="el" href="dir_6ad7f00040ebed4321e5af4b28de275f.html">src</a></li><li class="navelem"><a class="el" href="zigpc__config_8c.html">zigpc_config.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:14 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

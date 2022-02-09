@@ -75,7 +75,10 @@ sl_status_t zigpc_group_init()
     ZIGPC_ZCL_CLUSTER_GROUPS_COMMAND_REMOVE_GROUP_RESPONSE,
     zigpc_group_handle_remove_response);
 
-  return SL_STATUS_OK;
+  sl_status_t status =
+    zigpc_group_mqttpub_republish();
+
+  return status;
 }
 
 sl_status_t zigpc_group_add_desired(const zigbee_group_id_t group_id,

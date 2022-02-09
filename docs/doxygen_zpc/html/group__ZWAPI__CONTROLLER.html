@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Controller API</title>
+<title>Z-Wave Protocol Controller Refrence: Controller API</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('group__ZWAPI__CONTROLLER.html',''); in
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Controller API<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__ZWAPI.html">Z-Wave API</a></div></div>  </div>
+<div class="title">Controller API<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__api.html">Z-Wave API</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -130,100 +130,100 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga7ef8d649ec5781b3d6bb698eb75acd1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga7ef8d649ec5781b3d6bb698eb75acd1e">zwapi_replication_receive_complete</a> (void)</td></tr>
+<tr class="memitem:ga7ef8d649ec5781b3d6bb698eb75acd1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga7ef8d649ec5781b3d6bb698eb75acd1e">zwapi_replication_receive_complete</a> (void)</td></tr>
 <tr class="memdesc:ga7ef8d649ec5781b3d6bb698eb75acd1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send command completed to primary controller.  <a href="group__ZWAPI__CONTROLLER.html#ga7ef8d649ec5781b3d6bb698eb75acd1e">More...</a><br /></td></tr>
 <tr class="separator:ga7ef8d649ec5781b3d6bb698eb75acd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga734abfb9b36e04870b6e3b09a1887003"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga734abfb9b36e04870b6e3b09a1887003">zwapi_send_controller_replication</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destNodeID, const uint8_t *pData, uint8_t dataLength, uint8_t txOptions, void(*completedFunc)(uint8_t))</td></tr>
+<tr class="memitem:ga734abfb9b36e04870b6e3b09a1887003"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga734abfb9b36e04870b6e3b09a1887003">zwapi_send_controller_replication</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destNodeID, const uint8_t *pData, uint8_t dataLength, uint8_t txOptions, void(*completedFunc)(uint8_t))</td></tr>
 <tr class="memdesc:ga734abfb9b36e04870b6e3b09a1887003"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send the payload and expect the receiver to respond with a command complete message.  <a href="group__ZWAPI__CONTROLLER.html#ga734abfb9b36e04870b6e3b09a1887003">More...</a><br /></td></tr>
 <tr class="separator:ga734abfb9b36e04870b6e3b09a1887003"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga36f9cc653f890606e5d482ecef45a6b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga36f9cc653f890606e5d482ecef45a6b8">zwapi_get_protocol_info</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__ZWAPI__CONTROLLER.html#gaad5cc41ebf2d4ad67f95f155838df3b2">zwapi_node_info_header_t</a> *node_info_header)</td></tr>
+<tr class="memitem:ga36f9cc653f890606e5d482ecef45a6b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga36f9cc653f890606e5d482ecef45a6b8">zwapi_get_protocol_info</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__ZWAPI__CONTROLLER.html#gaad5cc41ebf2d4ad67f95f155838df3b2">zwapi_node_info_header_t</a> *node_info_header)</td></tr>
 <tr class="memdesc:ga36f9cc653f890606e5d482ecef45a6b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the Node's current protocol information from the non-volatile memory.  <a href="group__ZWAPI__CONTROLLER.html#ga36f9cc653f890606e5d482ecef45a6b8">More...</a><br /></td></tr>
 <tr class="separator:ga36f9cc653f890606e5d482ecef45a6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga24e72d86451ee46100056cb87f06ad2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga24e72d86451ee46100056cb87f06ad2e">zwapi_assign_return_route</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bSrcNodeID, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bDstNodeID, void(*completedFunc)(uint8_t bStatus))</td></tr>
+<tr class="memitem:ga24e72d86451ee46100056cb87f06ad2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga24e72d86451ee46100056cb87f06ad2e">zwapi_assign_return_route</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bSrcNodeID, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bDstNodeID, void(*completedFunc)(uint8_t bStatus))</td></tr>
 <tr class="memdesc:ga24e72d86451ee46100056cb87f06ad2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign static return routes within a Routing End Node.  <a href="group__ZWAPI__CONTROLLER.html#ga24e72d86451ee46100056cb87f06ad2e">More...</a><br /></td></tr>
 <tr class="separator:ga24e72d86451ee46100056cb87f06ad2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2e533669381543286cdc6c26c1a2a532"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga2e533669381543286cdc6c26c1a2a532">zwapi_delete_return_route</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> nodeID, void(*completedFunc)(uint8_t bStatus))</td></tr>
+<tr class="memitem:ga2e533669381543286cdc6c26c1a2a532"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga2e533669381543286cdc6c26c1a2a532">zwapi_delete_return_route</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> nodeID, void(*completedFunc)(uint8_t bStatus))</td></tr>
 <tr class="memdesc:ga2e533669381543286cdc6c26c1a2a532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete static return routes within a Routing End Node.  <a href="group__ZWAPI__CONTROLLER.html#ga2e533669381543286cdc6c26c1a2a532">More...</a><br /></td></tr>
 <tr class="separator:ga2e533669381543286cdc6c26c1a2a532"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1115444ea0d3fcec24e731f25264836f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga1115444ea0d3fcec24e731f25264836f">zwapi_set_default</a> (void(*completedFunc)(void))</td></tr>
+<tr class="memitem:ga1115444ea0d3fcec24e731f25264836f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga1115444ea0d3fcec24e731f25264836f">zwapi_set_default</a> (void(*completedFunc)(void))</td></tr>
 <tr class="memdesc:ga1115444ea0d3fcec24e731f25264836f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all Nodes and timers from the EEPROM memory.  <a href="group__ZWAPI__CONTROLLER.html#ga1115444ea0d3fcec24e731f25264836f">More...</a><br /></td></tr>
 <tr class="separator:ga1115444ea0d3fcec24e731f25264836f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab3e61d986c2d186deb45b535cefabb38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gab3e61d986c2d186deb45b535cefabb38">zwapi_is_node_failed</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> nodeID)</td></tr>
+<tr class="memitem:gab3e61d986c2d186deb45b535cefabb38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gab3e61d986c2d186deb45b535cefabb38">zwapi_is_node_failed</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> nodeID)</td></tr>
 <tr class="memdesc:gab3e61d986c2d186deb45b535cefabb38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a node is in the failed nodes table.  <a href="group__ZWAPI__CONTROLLER.html#gab3e61d986c2d186deb45b535cefabb38">More...</a><br /></td></tr>
 <tr class="separator:gab3e61d986c2d186deb45b535cefabb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac21344422be9ce06ad84438f12c1e466"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gac21344422be9ce06ad84438f12c1e466">zwapi_remove_failed_node</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> NodeID, void(*completedFunc)(uint8_t))</td></tr>
+<tr class="memitem:gac21344422be9ce06ad84438f12c1e466"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gac21344422be9ce06ad84438f12c1e466">zwapi_remove_failed_node</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> NodeID, void(*completedFunc)(uint8_t))</td></tr>
 <tr class="memdesc:gac21344422be9ce06ad84438f12c1e466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a node from the failed node list, if it already exist.  <a href="group__ZWAPI__CONTROLLER.html#gac21344422be9ce06ad84438f12c1e466">More...</a><br /></td></tr>
 <tr class="separator:gac21344422be9ce06ad84438f12c1e466"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6bdb986d70074914e25a21d17c54a1bc"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga6bdb986d70074914e25a21d17c54a1bc">zwapi_replace_failed_node</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, bool bNormalPower, void(*completedFunc)(uint8_t))</td></tr>
+<tr class="memitem:ga6bdb986d70074914e25a21d17c54a1bc"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga6bdb986d70074914e25a21d17c54a1bc">zwapi_replace_failed_node</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, bool bNormalPower, void(*completedFunc)(uint8_t))</td></tr>
 <tr class="memdesc:ga6bdb986d70074914e25a21d17c54a1bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace a node from the failed node list.  <a href="group__ZWAPI__CONTROLLER.html#ga6bdb986d70074914e25a21d17c54a1bc">More...</a><br /></td></tr>
 <tr class="separator:ga6bdb986d70074914e25a21d17c54a1bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6d91d2887a006b8da28f68961174ae54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga6d91d2887a006b8da28f68961174ae54">zwapi_set_suc_node_id</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> nodeID, uint8_t SUCState, uint8_t bTxOption, uint8_t bCapabilities, void(*completedFunc)(uint8_t txStatus))</td></tr>
+<tr class="memitem:ga6d91d2887a006b8da28f68961174ae54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga6d91d2887a006b8da28f68961174ae54">zwapi_set_suc_node_id</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> nodeID, uint8_t SUCState, uint8_t bTxOption, uint8_t bCapabilities, void(*completedFunc)(uint8_t txStatus))</td></tr>
 <tr class="memdesc:ga6d91d2887a006b8da28f68961174ae54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable/disable the Static Update Controller functionality in a specified static controller.  <a href="group__ZWAPI__CONTROLLER.html#ga6d91d2887a006b8da28f68961174ae54">More...</a><br /></td></tr>
 <tr class="separator:ga6d91d2887a006b8da28f68961174ae54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab4889f7c87ff9da037203fb99a6e5189"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gab4889f7c87ff9da037203fb99a6e5189">zwapi_get_suc_node_id</a> (void)</td></tr>
+<tr class="memitem:gab4889f7c87ff9da037203fb99a6e5189"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gab4889f7c87ff9da037203fb99a6e5189">zwapi_get_suc_node_id</a> (void)</td></tr>
 <tr class="memdesc:gab4889f7c87ff9da037203fb99a6e5189"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the currently registered SUC node ID.  <a href="group__ZWAPI__CONTROLLER.html#gab4889f7c87ff9da037203fb99a6e5189">More...</a><br /></td></tr>
 <tr class="separator:gab4889f7c87ff9da037203fb99a6e5189"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad659a161bf6bf468119f4b85d3752f9f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gad659a161bf6bf468119f4b85d3752f9f">zwapi_request_network_update</a> (void(*completedFunc)(uint8_t txStatus))</td></tr>
+<tr class="memitem:gad659a161bf6bf468119f4b85d3752f9f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gad659a161bf6bf468119f4b85d3752f9f">zwapi_request_network_update</a> (void(*completedFunc)(uint8_t txStatus))</td></tr>
 <tr class="memdesc:gad659a161bf6bf468119f4b85d3752f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request network topology updates from the SUC/SIS node.  <a href="group__ZWAPI__CONTROLLER.html#gad659a161bf6bf468119f4b85d3752f9f">More...</a><br /></td></tr>
 <tr class="separator:gad659a161bf6bf468119f4b85d3752f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadb62adc6d3463f3db9d3691e254caf5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gadb62adc6d3463f3db9d3691e254caf5b">zwapi_assign_suc_return_route</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bSrcNodeID, void(*completedFunc)(uint8_t bStatus))</td></tr>
+<tr class="memitem:gadb62adc6d3463f3db9d3691e254caf5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gadb62adc6d3463f3db9d3691e254caf5b">zwapi_assign_suc_return_route</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bSrcNodeID, void(*completedFunc)(uint8_t bStatus))</td></tr>
 <tr class="memdesc:gadb62adc6d3463f3db9d3691e254caf5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign static return routes within a Routing End Node.  <a href="group__ZWAPI__CONTROLLER.html#gadb62adc6d3463f3db9d3691e254caf5b">More...</a><br /></td></tr>
 <tr class="separator:gadb62adc6d3463f3db9d3691e254caf5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7c9f83313e331baac94727e4e1b67088"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga7c9f83313e331baac94727e4e1b67088">zwapi_delete_suc_return_route</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, void(*completedFunc)(uint8_t bStatus))</td></tr>
+<tr class="memitem:ga7c9f83313e331baac94727e4e1b67088"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga7c9f83313e331baac94727e4e1b67088">zwapi_delete_suc_return_route</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, void(*completedFunc)(uint8_t bStatus))</td></tr>
 <tr class="memdesc:ga7c9f83313e331baac94727e4e1b67088"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the (Static Update Controller -SUC-) static return routes within a Routing End Node.  <a href="group__ZWAPI__CONTROLLER.html#ga7c9f83313e331baac94727e4e1b67088">More...</a><br /></td></tr>
 <tr class="separator:ga7c9f83313e331baac94727e4e1b67088"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac2f0350721c0485f44682d9369262528"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gac2f0350721c0485f44682d9369262528">zwapi_request_neighbor_update</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, void(*completedFunc)(uint8_t))</td></tr>
+<tr class="memitem:gac2f0350721c0485f44682d9369262528"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gac2f0350721c0485f44682d9369262528">zwapi_request_neighbor_update</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, void(*completedFunc)(uint8_t))</td></tr>
 <tr class="memdesc:gac2f0350721c0485f44682d9369262528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start neighbor discovery for bNodeID.  <a href="group__ZWAPI__CONTROLLER.html#gac2f0350721c0485f44682d9369262528">More...</a><br /></td></tr>
 <tr class="separator:gac2f0350721c0485f44682d9369262528"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad2510dfcd8ed49f52c05ea5421626f1b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gad2510dfcd8ed49f52c05ea5421626f1b">zwapi_is_node_primary_ctrl</a> (void)</td></tr>
 <tr class="memdesc:gad2510dfcd8ed49f52c05ea5421626f1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query whether the controller is a primary controller or a secondary controller in the network.  <a href="group__ZWAPI__CONTROLLER.html#gad2510dfcd8ed49f52c05ea5421626f1b">More...</a><br /></td></tr>
 <tr class="separator:gad2510dfcd8ed49f52c05ea5421626f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2a38e3dba5c1528326bfa2747eb0b4c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga2a38e3dba5c1528326bfa2747eb0b4c9">zwapi_create_new_primary_ctrl</a> (uint8_t bMode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
+<tr class="memitem:ga2a38e3dba5c1528326bfa2747eb0b4c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga2a38e3dba5c1528326bfa2747eb0b4c9">zwapi_create_new_primary_ctrl</a> (uint8_t bMode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
 <tr class="memdesc:ga2a38e3dba5c1528326bfa2747eb0b4c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new primary controller.  <a href="group__ZWAPI__CONTROLLER.html#ga2a38e3dba5c1528326bfa2747eb0b4c9">More...</a><br /></td></tr>
 <tr class="separator:ga2a38e3dba5c1528326bfa2747eb0b4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1c8e6e8d406243318e491e21b6ceb838"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga1c8e6e8d406243318e491e21b6ceb838">zwapi_get_controller_capabilities</a> (void)</td></tr>
 <tr class="memdesc:ga1c8e6e8d406243318e491e21b6ceb838"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get capabilities of a controller.  <a href="group__ZWAPI__CONTROLLER.html#ga1c8e6e8d406243318e491e21b6ceb838">More...</a><br /></td></tr>
 <tr class="separator:ga1c8e6e8d406243318e491e21b6ceb838"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7f0684275070545db6dfb2b534e93b01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga7f0684275070545db6dfb2b534e93b01">zwapi_request_node_info</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memitem:ga7f0684275070545db6dfb2b534e93b01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga7f0684275070545db6dfb2b534e93b01">zwapi_request_node_info</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="memdesc:ga7f0684275070545db6dfb2b534e93b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request node information from a node.  <a href="group__ZWAPI__CONTROLLER.html#ga7f0684275070545db6dfb2b534e93b01">More...</a><br /></td></tr>
 <tr class="separator:ga7f0684275070545db6dfb2b534e93b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6e50a93518af078f107923bca22a6880"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga6e50a93518af078f107923bca22a6880">zwapi_set_learn_mode</a> (uint8_t mode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
+<tr class="memitem:ga6e50a93518af078f107923bca22a6880"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga6e50a93518af078f107923bca22a6880">zwapi_set_learn_mode</a> (uint8_t mode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
 <tr class="memdesc:ga6e50a93518af078f107923bca22a6880"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable/disable Z-Wave Learn Mode.  <a href="group__ZWAPI__CONTROLLER.html#ga6e50a93518af078f107923bca22a6880">More...</a><br /></td></tr>
 <tr class="separator:ga6e50a93518af078f107923bca22a6880"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0cb52b0caf7e30cb792032c6a814b148"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga0cb52b0caf7e30cb792032c6a814b148">zwapi_add_node_to_network</a> (uint8_t bMode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
+<tr class="memitem:ga0cb52b0caf7e30cb792032c6a814b148"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga0cb52b0caf7e30cb792032c6a814b148">zwapi_add_node_to_network</a> (uint8_t bMode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
 <tr class="memdesc:ga0cb52b0caf7e30cb792032c6a814b148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add any type of node to the network.  <a href="group__ZWAPI__CONTROLLER.html#ga0cb52b0caf7e30cb792032c6a814b148">More...</a><br /></td></tr>
 <tr class="separator:ga0cb52b0caf7e30cb792032c6a814b148"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3e5775eb9485817712be83dc69d644e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga3e5775eb9485817712be83dc69d644e4">zwapi_remove_node_from_network</a> (uint8_t bMode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
+<tr class="memitem:ga3e5775eb9485817712be83dc69d644e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga3e5775eb9485817712be83dc69d644e4">zwapi_remove_node_from_network</a> (uint8_t bMode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
 <tr class="memdesc:ga3e5775eb9485817712be83dc69d644e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove any type of node from the network.  <a href="group__ZWAPI__CONTROLLER.html#ga3e5775eb9485817712be83dc69d644e4">More...</a><br /></td></tr>
 <tr class="separator:ga3e5775eb9485817712be83dc69d644e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga356c149dccb761a880b100cb41e2eea9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga356c149dccb761a880b100cb41e2eea9">zwapi_transfer_primary_ctrl_role</a> (uint8_t bMode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
+<tr class="memitem:ga356c149dccb761a880b100cb41e2eea9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga356c149dccb761a880b100cb41e2eea9">zwapi_transfer_primary_ctrl_role</a> (uint8_t bMode, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
 <tr class="memdesc:ga356c149dccb761a880b100cb41e2eea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transfer the role as primary controller to another controller.  <a href="group__ZWAPI__CONTROLLER.html#ga356c149dccb761a880b100cb41e2eea9">More...</a><br /></td></tr>
 <tr class="separator:ga356c149dccb761a880b100cb41e2eea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaeff8b34f127a1722a6352172a624ed5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gaeff8b34f127a1722a6352172a624ed5c">zwapi_set_max_source_route</a> (uint8_t maxRouteTries)</td></tr>
+<tr class="memitem:gaeff8b34f127a1722a6352172a624ed5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gaeff8b34f127a1722a6352172a624ed5c">zwapi_set_max_source_route</a> (uint8_t maxRouteTries)</td></tr>
 <tr class="memdesc:gaeff8b34f127a1722a6352172a624ed5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the maximum number of source routing attempts before the explorer frame mechanism kicks in.  <a href="group__ZWAPI__CONTROLLER.html#gaeff8b34f127a1722a6352172a624ed5c">More...</a><br /></td></tr>
 <tr class="separator:gaeff8b34f127a1722a6352172a624ed5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga96d2223f3b07ebcdea76c9719518a83a"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga96d2223f3b07ebcdea76c9719518a83a">zwapi_get_priority_route</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, uint8_t *pPriorityRoute)</td></tr>
+<tr class="memitem:ga96d2223f3b07ebcdea76c9719518a83a"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga96d2223f3b07ebcdea76c9719518a83a">zwapi_get_priority_route</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, uint8_t *pPriorityRoute)</td></tr>
 <tr class="memdesc:ga96d2223f3b07ebcdea76c9719518a83a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Last Working Route (LWR) for a destination node if any exist.  <a href="group__ZWAPI__CONTROLLER.html#ga96d2223f3b07ebcdea76c9719518a83a">More...</a><br /></td></tr>
 <tr class="separator:ga96d2223f3b07ebcdea76c9719518a83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafb261017b1c4da4fbddf07019b6852ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gafb261017b1c4da4fbddf07019b6852ca">zwapi_set_priority_route</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, uint8_t *pPriorityRoute)</td></tr>
+<tr class="memitem:gafb261017b1c4da4fbddf07019b6852ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gafb261017b1c4da4fbddf07019b6852ca">zwapi_set_priority_route</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, uint8_t *pPriorityRoute)</td></tr>
 <tr class="memdesc:gafb261017b1c4da4fbddf07019b6852ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Last Working Route (LWR) for a destination node.  <a href="group__ZWAPI__CONTROLLER.html#gafb261017b1c4da4fbddf07019b6852ca">More...</a><br /></td></tr>
 <tr class="separator:gafb261017b1c4da4fbddf07019b6852ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaeb8063b47eb7b36f8a1d0491d00d0f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gaaeb8063b47eb7b36f8a1d0491d00d0f2">zwapi_set_virtual_node_to_learn_mode</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> node, uint8_t mode, void(*learnFunc)(uint8_t bStatus, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> orgID, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> newID))</td></tr>
+<tr class="memitem:gaaeb8063b47eb7b36f8a1d0491d00d0f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gaaeb8063b47eb7b36f8a1d0491d00d0f2">zwapi_set_virtual_node_to_learn_mode</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> node, uint8_t mode, void(*learnFunc)(uint8_t bStatus, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> orgID, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> newID))</td></tr>
 <tr class="memdesc:gaaeb8063b47eb7b36f8a1d0491d00d0f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable/disable learn mode for a virtual node.  <a href="group__ZWAPI__CONTROLLER.html#gaaeb8063b47eb7b36f8a1d0491d00d0f2">More...</a><br /></td></tr>
 <tr class="separator:gaaeb8063b47eb7b36f8a1d0491d00d0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6b5f90bf16a067c34951b6d40dfc3206"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga6b5f90bf16a067c34951b6d40dfc3206">zwapi_get_virtual_nodes</a> (uint8_t *nodeMask)</td></tr>
+<tr class="memitem:ga6b5f90bf16a067c34951b6d40dfc3206"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga6b5f90bf16a067c34951b6d40dfc3206">zwapi_get_virtual_nodes</a> (uint8_t *nodeMask)</td></tr>
 <tr class="memdesc:ga6b5f90bf16a067c34951b6d40dfc3206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request nodemask containing virtual nodes in controller bridge.  <a href="group__ZWAPI__CONTROLLER.html#ga6b5f90bf16a067c34951b6d40dfc3206">More...</a><br /></td></tr>
 <tr class="separator:ga6b5f90bf16a067c34951b6d40dfc3206"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaac34a04ebe6b6ab18a1b755d787aea8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gaac34a04ebe6b6ab18a1b755d787aea8c">zwapi_get_old_routing_info</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, uint8_t *buf, uint8_t bRemoveBad, uint8_t bRemoveNonReps)</td></tr>
+<tr class="memitem:gaac34a04ebe6b6ab18a1b755d787aea8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gaac34a04ebe6b6ab18a1b755d787aea8c">zwapi_get_old_routing_info</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, uint8_t *buf, uint8_t bRemoveBad, uint8_t bRemoveNonReps)</td></tr>
 <tr class="memdesc:gaac34a04ebe6b6ab18a1b755d787aea8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read out neighbor information.  <a href="group__ZWAPI__CONTROLLER.html#gaac34a04ebe6b6ab18a1b755d787aea8c">More...</a><br /></td></tr>
 <tr class="separator:gaac34a04ebe6b6ab18a1b755d787aea8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga44badac698ec42e20807a0d8420e7383"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga44badac698ec42e20807a0d8420e7383">zwapi_enable_suc</a> (uint8_t state, uint8_t capabilities)</td></tr>
+<tr class="memitem:ga44badac698ec42e20807a0d8420e7383"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga44badac698ec42e20807a0d8420e7383">zwapi_enable_suc</a> (uint8_t <a class="el" href="zwave__api__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a>, uint8_t capabilities)</td></tr>
 <tr class="memdesc:ga44badac698ec42e20807a0d8420e7383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable the SUC functionality in a controller.  <a href="group__ZWAPI__CONTROLLER.html#ga44badac698ec42e20807a0d8420e7383">More...</a><br /></td></tr>
 <tr class="separator:ga44badac698ec42e20807a0d8420e7383"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafe2d222c52badfd5264d04f8d7a47dfd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gafe2d222c52badfd5264d04f8d7a47dfd">zwapi_add_smartstart_node_to_network</a> (uint8_t bMode, const uint8_t *dsk, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
+<tr class="memitem:gafe2d222c52badfd5264d04f8d7a47dfd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gafe2d222c52badfd5264d04f8d7a47dfd">zwapi_add_smartstart_node_to_network</a> (uint8_t bMode, const uint8_t *dsk, void(*completedFunc)(<a class="el" href="structLEARN__INFO.html">LEARN_INFO</a> *))</td></tr>
 <tr class="memdesc:gafe2d222c52badfd5264d04f8d7a47dfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add any type of node to the network and accept prekit inclusion.  <a href="group__ZWAPI__CONTROLLER.html#gafe2d222c52badfd5264d04f8d7a47dfd">More...</a><br /></td></tr>
 <tr class="separator:gafe2d222c52badfd5264d04f8d7a47dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9e0642c989ca000cc00bb872d1a5f60d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga9e0642c989ca000cc00bb872d1a5f60d">zwapi_set_virtual_node_application_node_information</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> dstNode, uint8_t listening, const <a class="el" href="structnode__type__t.html">node_type_t</a> *node_type, uint8_t *nodeParm, uint8_t parmLength)</td></tr>
+<tr class="memitem:ga9e0642c989ca000cc00bb872d1a5f60d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga9e0642c989ca000cc00bb872d1a5f60d">zwapi_set_virtual_node_application_node_information</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> dstNode, uint8_t listening, const <a class="el" href="structnode__type__t.html">node_type_t</a> *node_type, uint8_t *nodeParm, uint8_t parmLength)</td></tr>
 <tr class="memdesc:ga9e0642c989ca000cc00bb872d1a5f60d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Application Node Information data for all virtual nodes owned by the Z-Wave API Module.  <a href="group__ZWAPI__CONTROLLER.html#ga9e0642c989ca000cc00bb872d1a5f60d">More...</a><br /></td></tr>
 <tr class="separator:ga9e0642c989ca000cc00bb872d1a5f60d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -288,7 +288,7 @@ zwapi_remove_node_from_network() mode values</h2></td></tr>
 <tr class="separator:gab7f191b6082a951d2e7155b550227f52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga405d25439d184f3c817ac972bca7c6ec"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga405d25439d184f3c817ac972bca7c6ec">REMOVE_NODE_END_NODE</a>&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#ga29a23b4ea1676e705ee509d8b72c899f">ADD_NODE_END_NODE</a></td></tr>
 <tr class="separator:ga405d25439d184f3c817ac972bca7c6ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga20c81aefaae9bd1c6323efc151584aab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga20c81aefaae9bd1c6323efc151584aab">REMOVE_NODE_STOP</a>&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#a4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td></tr>
+<tr class="memitem:ga20c81aefaae9bd1c6323efc151584aab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga20c81aefaae9bd1c6323efc151584aab">REMOVE_NODE_STOP</a>&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#ga4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td></tr>
 <tr class="separator:ga20c81aefaae9bd1c6323efc151584aab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
@@ -322,18 +322,18 @@ zwapi_remove_node_from_network() callback status values</h2></td></tr>
 zwapi_create_new_primary_ctrl() mode values</h2></td></tr>
 <tr class="memitem:gab6aa0be4a098f5ceb488c3b62a986af9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gab6aa0be4a098f5ceb488c3b62a986af9">CREATE_PRIMARY_START</a>&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#gaca4db10e36482781739ad43ed05258dd">ADD_NODE_CONTROLLER</a></td></tr>
 <tr class="separator:gab6aa0be4a098f5ceb488c3b62a986af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7f0c33491947cf202f62dbbaedc676b0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga7f0c33491947cf202f62dbbaedc676b0">CREATE_PRIMARY_STOP</a>&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#a4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td></tr>
+<tr class="memitem:ga7f0c33491947cf202f62dbbaedc676b0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga7f0c33491947cf202f62dbbaedc676b0">CREATE_PRIMARY_STOP</a>&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#ga4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td></tr>
 <tr class="separator:ga7f0c33491947cf202f62dbbaedc676b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac76c535556eec0c4082cb721e52856cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gac76c535556eec0c4082cb721e52856cb">CREATE_PRIMARY_STOP_FAILED</a>&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#ace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a></td></tr>
+<tr class="memitem:gac76c535556eec0c4082cb721e52856cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gac76c535556eec0c4082cb721e52856cb">CREATE_PRIMARY_STOP_FAILED</a>&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#gace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a></td></tr>
 <tr class="separator:gac76c535556eec0c4082cb721e52856cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 zwapi_transfer_primary_ctrl_role() mode values</h2></td></tr>
 <tr class="memitem:ga76662f8180e2cb3f0db3e8868965a4f2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga76662f8180e2cb3f0db3e8868965a4f2">CONTROLLER_CHANGE_START</a>&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#gaca4db10e36482781739ad43ed05258dd">ADD_NODE_CONTROLLER</a></td></tr>
 <tr class="separator:ga76662f8180e2cb3f0db3e8868965a4f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad175ba06f353a211579b8d7bdad8a695"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gad175ba06f353a211579b8d7bdad8a695">CONTROLLER_CHANGE_STOP</a>&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#a4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td></tr>
+<tr class="memitem:gad175ba06f353a211579b8d7bdad8a695"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gad175ba06f353a211579b8d7bdad8a695">CONTROLLER_CHANGE_STOP</a>&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#ga4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td></tr>
 <tr class="separator:gad175ba06f353a211579b8d7bdad8a695"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3ade7a421e2df33c348c67848d2b7024"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga3ade7a421e2df33c348c67848d2b7024">CONTROLLER_CHANGE_STOP_FAILED</a>&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#ace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a></td></tr>
+<tr class="memitem:ga3ade7a421e2df33c348c67848d2b7024"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga3ade7a421e2df33c348c67848d2b7024">CONTROLLER_CHANGE_STOP_FAILED</a>&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#gace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a></td></tr>
 <tr class="separator:ga3ade7a421e2df33c348c67848d2b7024"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
@@ -973,7 +973,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CONTROLLER_CHANGE_STOP&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#a4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td>
+          <td class="memname">#define CONTROLLER_CHANGE_STOP&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#ga4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -987,7 +987,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CONTROLLER_CHANGE_STOP_FAILED&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#ace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a></td>
+          <td class="memname">#define CONTROLLER_CHANGE_STOP_FAILED&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#gace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1085,7 +1085,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CREATE_PRIMARY_STOP&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#a4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td>
+          <td class="memname">#define CREATE_PRIMARY_STOP&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#ga4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1099,7 +1099,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CREATE_PRIMARY_STOP_FAILED&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#ace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a></td>
+          <td class="memname">#define CREATE_PRIMARY_STOP_FAILED&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#gace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1408,7 +1408,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define REMOVE_NODE_STOP&#160;&#160;&#160;<a class="el" href="nm__state__machine_8c.html#a4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td>
+          <td class="memname">#define REMOVE_NODE_STOP&#160;&#160;&#160;<a class="el" href="group__ZWAPI__CONTROLLER.html#ga4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2421,7 +2421,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_add_node_to_network </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_add_node_to_network </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>bMode</em>, </td>
@@ -2447,8 +2447,8 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga0798e3f200788d048d02be6eeac5efd3">ADD_NODE_ANY</a> Add any node to the network</li>
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#gaca4db10e36482781739ad43ed05258dd">ADD_NODE_CONTROLLER</a> Add a controller to the network</li>
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga29a23b4ea1676e705ee509d8b72c899f">ADD_NODE_END_NODE</a> Add an End Node to the network</li>
-<li><a class="el" href="nm__state__machine_8c.html#a4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a> Stop learn mode without reporting an error.</li>
-<li><a class="el" href="nm__state__machine_8c.html#ace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a> Stop learn mode and report an error to the new controller.</li>
+<li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga4120c21034987e03fa5583eb7958fc7d">ADD_NODE_STOP</a> Stop learn mode without reporting an error.</li>
+<li><a class="el" href="group__ZWAPI__CONTROLLER.html#gace46a0a1deffc7ee590c4bf2972ac5c3">ADD_NODE_STOP_FAILED</a> Stop learn mode and report an error to the new controller.</li>
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#gab4e6406045728b628cb22ed88a445906">ADD_NODE_OPTION_NORMAL_POWER</a> Set this flag in bMode for High Power inclusion. </li>
 </ul>
 </td></tr>
@@ -2457,7 +2457,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000071">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_AddNodeToNetwork </dd></dl>
+<p>@zgw_name ZW_AddNodeToNetwork </p>
 
 </div>
 </div>
@@ -2468,7 +2468,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_add_smartstart_node_to_network </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_add_smartstart_node_to_network </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>bMode</em>, </td>
@@ -2496,7 +2496,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <p>Add any type of node to the network and accept prekit inclusion. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">bMode</td><td>inclusion mode. Must always be <a class="el" href="nm__state__machine_8c.html#ae39b24f70c491cd30f1820728df65603">ADD_NODE_HOME_ID</a>, potentially coupled with these flags:<ul>
+    <tr><td class="paramname">bMode</td><td>inclusion mode. Must always be <a class="el" href="group__ZWAPI__CONTROLLER.html#gae39b24f70c491cd30f1820728df65603">ADD_NODE_HOME_ID</a>, potentially coupled with these flags:<ul>
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#gab4e6406045728b628cb22ed88a445906">ADD_NODE_OPTION_NORMAL_POWER</a> Set this flag in bMode for High Power inclusion.</li>
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga9e808cd9218b237186996ad477caaa0a">ADD_NODE_OPTION_NETWORK_WIDE</a> Set this flag in bMode for Network wide inclusion </li>
 </ul>
@@ -2508,7 +2508,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This should be called after receiving a application_controller_update_function with a whitelisted DSK.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000083">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_AddNodeToNetworkSmartStart </dd></dl>
+<p>@zgw_name ZW_AddNodeToNetworkSmartStart </p>
 
 </div>
 </div>
@@ -2519,15 +2519,15 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_assign_return_route </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_assign_return_route </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>bSrcNodeID</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>bDstNodeID</em>, </td>
         </tr>
         <tr>
@@ -2555,7 +2555,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns true if assign return route was initiated, or false if a return route assign/delete is already active</dd></dl>
 <p>Calculate the shortest transport routes from the Routing End Node to the route destination node and transmit the return routes to the Routing End Node.</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000054">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_AssignReturnRoute </dd></dl>
+<p>@zgw_name ZW_AssignReturnRoute </p>
 
 </div>
 </div>
@@ -2566,9 +2566,9 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_assign_suc_return_route </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_assign_suc_return_route </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>bSrcNodeID</em>, </td>
         </tr>
         <tr>
@@ -2597,7 +2597,7 @@ Bit mask for multiDestsOffset_NodeMaskLen byte in the ZW_MULTI_DEST structure</h
 <dd>
 SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <p>Calculate the shortest transport routes to a Routing End Node from the Static Update Controller (SUC) Node and transmit the return routes to the Routing End Node.</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000063">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_AssignSUCReturnRoute </dd></dl>
+<p>@zgw_name ZW_AssignSUCReturnRoute </p>
 
 </div>
 </div>
@@ -2608,7 +2608,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_create_new_primary_ctrl </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_create_new_primary_ctrl </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>bMode</em>, </td>
@@ -2642,7 +2642,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000067">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_CreateNewPrimaryCtrl </dd></dl>
+<p>@zgw_name ZW_CreateNewPrimaryCtrl </p>
 
 </div>
 </div>
@@ -2653,9 +2653,9 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_delete_return_route </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_delete_return_route </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>nodeID</em>, </td>
         </tr>
         <tr>
@@ -2682,7 +2682,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns true if delete return routes was initiated, or false if not</dd></dl>
 <p>Transmits "NULL" routes to the Routing End Node.</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000055">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_DeleteReturnRoute </dd></dl>
+<p>@zgw_name ZW_DeleteReturnRoute </p>
 
 </div>
 </div>
@@ -2693,9 +2693,9 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_delete_suc_return_route </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_delete_suc_return_route </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>bNodeID</em>, </td>
         </tr>
         <tr>
@@ -2724,7 +2724,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <dd>
 SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <p>Transmit "NULL" routes to the Routing End Node.</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000064">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_DeleteSUCReturnRoute </dd></dl>
+<p>@zgw_name ZW_DeleteSUCReturnRoute </p>
 
 </div>
 </div>
@@ -2735,7 +2735,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_enable_suc </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_enable_suc </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>state</em>, </td>
@@ -2769,7 +2769,7 @@ SL_STATUS_FAIL if a return route assign/delete is already active.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the SUC functionality was enabled/disabled. </dd>
 <dd>
 SL_STATUS_FAIL potentially attempting to disable a running SUC, not allowed.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000082">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_EnableSUC </dd></dl>
+<p>@zgw_name ZW_EnableSUC </p>
 
 </div>
 </div>
@@ -2795,7 +2795,7 @@ SL_STATUS_FAIL potentially attempting to disable a running SUC, not allowed.</dd
  = CONTROLLER_IS_SUC : If this bit is set then this controller is a SUC <br  />
  = CONTROLLER_NODEID_SERVER_PRESENT : If this bit is set then there is a SUC ID server (SIS) in the network and this controller can therefore include/exclude nodes in the network (inclusion controller). <br  />
  = CONTROLLER_IS_REAL_PRIMARY : = CONTROLLER_IS_SUC : = NO_NODES_INCLUDED :</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000068">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_GetControllerCapabilities </dd></dl>
+<p>@zgw_name ZW_GetControllerCapabilities </p>
 
 </div>
 </div>
@@ -2806,9 +2806,9 @@ SL_STATUS_FAIL potentially attempting to disable a running SUC, not allowed.</dd
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_old_routing_info </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_old_routing_info </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>bNodeID</em>, </td>
         </tr>
         <tr>
@@ -2857,7 +2857,7 @@ SL_STATUS_FAIL potentially attempting to disable a running SUC, not allowed.</dd
 <li>ZW_GET_ROUTING_INFO_40K - Return nodes supporting 40k</li>
 <li>ZW_GET_ROUTING_INFO_100K - Return nodes supporting 100k</li>
 </ul>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000081">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_GetRoutingInfo_old </dd></dl>
+<p>@zgw_name ZW_GetRoutingInfo_old </p>
 
 </div>
 </div>
@@ -2870,7 +2870,7 @@ SL_STATUS_FAIL potentially attempting to disable a running SUC, not allowed.</dd
         <tr>
           <td class="memname">uint8_t zwapi_get_priority_route </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>bNodeID</em>, </td>
         </tr>
         <tr>
@@ -2916,16 +2916,9 @@ false if No LWR found for bNodeID.</dd></dl>
 <li><code>0, 0, 0, 0, ZW_PRIORITY_ROUTE_SPEED_100K</code> &rarr; Direct 100K</li>
 <li><code>2, 3, 0, 0, ZW_PRIORITY_ROUTE_SPEED_40K</code> &rarr; 40K route through repeaters 2 and 3</li>
 </ul>
-<blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
-<blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000075">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_GetPriorityRoute </dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000076">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_GetLastWorkingRoute </dd></dl>
+<p>@serial_tx{REQ | 0x92 | bNodeID}</p>
+<p>@serial_rx{RES | 0x92 | bNodeID | retVal | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}</p>
+<p>@zgw_name ZW_GetPriorityRoute @zgw_name ZW_GetLastWorkingRoute </p>
 
 </div>
 </div>
@@ -2936,9 +2929,9 @@ false if No LWR found for bNodeID.</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_protocol_info </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_protocol_info </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em>, </td>
         </tr>
         <tr>
@@ -2963,7 +2956,7 @@ false if No LWR found for bNodeID.</dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000053">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_GetNodeProtocolInfo </dd></dl>
+<p>@zgw_name ZW_GetNodeProtocolInfo </p>
 
 </div>
 </div>
@@ -2974,7 +2967,7 @@ false if No LWR found for bNodeID.</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> zwapi_get_suc_node_id </td>
+          <td class="memname"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> zwapi_get_suc_node_id </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -2985,7 +2978,7 @@ false if No LWR found for bNodeID.</dd></dl>
 
 <p>Get the currently registered SUC node ID. </p>
 <dl class="section return"><dt>Returns</dt><dd>returns the SUC node ID, and ZERO if no SUC available</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000061">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_GetSUCNodeID </dd></dl>
+<p>@zgw_name ZW_GetSUCNodeID </p>
 
 </div>
 </div>
@@ -2996,7 +2989,7 @@ false if No LWR found for bNodeID.</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_virtual_nodes </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_virtual_nodes </td>
           <td>(</td>
           <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>nodeMask</em></td><td>)</td>
@@ -3013,7 +3006,7 @@ false if No LWR found for bNodeID.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000080">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_GetVirtualNodes </dd></dl>
+<p>@zgw_name ZW_GetVirtualNodes </p>
 
 </div>
 </div>
@@ -3026,7 +3019,7 @@ false if No LWR found for bNodeID.</dd></dl>
         <tr>
           <td class="memname">bool zwapi_is_node_failed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>nodeID</em></td><td>)</td>
           <td></td>
         </tr>
@@ -3041,7 +3034,7 @@ false if No LWR found for bNodeID.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns true if node in failed node table, else false</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000057">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_isFailedNode </dd></dl>
+<p>@zgw_name ZW_isFailedNode </p>
 
 </div>
 </div>
@@ -3065,7 +3058,7 @@ false if No LWR found for bNodeID.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true when the controller is a primary controller in the network </dd>
 <dd>
 false when the controller is a secondary controller in the network.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000066">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_IsPrimaryCtrl </dd></dl>
+<p>@zgw_name ZW_IsPrimaryCtrl </p>
 
 </div>
 </div>
@@ -3078,7 +3071,7 @@ false when the controller is a secondary controller in the network.</dd></dl>
         <tr>
           <td class="memname">uint8_t zwapi_remove_failed_node </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>NodeID</em>, </td>
         </tr>
         <tr>
@@ -3118,7 +3111,7 @@ One or more of the following bit flags If the removing process can not be starte
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#ga627b5070463752f3a3723b2b8daeed53">ZW_FAILED_NODE_REMOVED</a> The failed node was removed from the failed nodes list</li>
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#gada8273213487e5c790c8dc593cb3d9f2">ZW_FAILED_NODE_NOT_REMOVED</a> The failed node was not removed</li>
 </ul>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000058">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_RemoveFailedNode </dd></dl>
+<p>@zgw_name ZW_RemoveFailedNode </p>
 
 </div>
 </div>
@@ -3129,7 +3122,7 @@ One or more of the following bit flags If the removing process can not be starte
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_remove_node_from_network </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_remove_node_from_network </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>bMode</em>, </td>
@@ -3164,7 +3157,7 @@ One or more of the following bit flags If the removing process can not be starte
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000072">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_RemoveNodeFromNetwork </dd></dl>
+<p>@zgw_name ZW_RemoveNodeFromNetwork </p>
 
 </div>
 </div>
@@ -3177,7 +3170,7 @@ One or more of the following bit flags If the removing process can not be starte
         <tr>
           <td class="memname">uint8_t zwapi_replace_failed_node </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>bNodeID</em>, </td>
         </tr>
         <tr>
@@ -3226,7 +3219,7 @@ One or more of the following flags if the replace process can not be started:<ul
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#gad0b95dfd183534fa8ec4434444d45d60">ZW_FAILED_NODE_REPLACE_DONE</a> The failed node has been replaced.</li>
 <li><a class="el" href="group__ZWAPI__CONTROLLER.html#gaae3f7a3ff0bdd80ba5282700d9b6c927">ZW_FAILED_NODE_REPLACE_FAILED</a> The failed node has not been replaced.</li>
 </ul>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000059">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_ReplaceFailedNode </dd></dl>
+<p>@zgw_name ZW_ReplaceFailedNode </p>
 
 </div>
 </div>
@@ -3237,7 +3230,7 @@ One or more of the following flags if the replace process can not be started:<ul
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_replication_receive_complete </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_replication_receive_complete </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -3248,7 +3241,7 @@ One or more of the following flags if the replace process can not be started:<ul
 
 <p>Send command completed to primary controller. </p>
 <dl class="section note"><dt>Note</dt><dd>Called in replication mode when a command from the sender has been processed.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000051">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_ReplicationReceiveComplete </dd></dl>
+<p>@zgw_name ZW_ReplicationReceiveComplete </p>
 
 </div>
 </div>
@@ -3259,9 +3252,9 @@ One or more of the following flags if the replace process can not be started:<ul
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_request_neighbor_update </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_request_neighbor_update </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>bNodeID</em>, </td>
         </tr>
         <tr>
@@ -3287,7 +3280,7 @@ One or more of the following flags if the replace process can not be started:<ul
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK (neighbor discovery started) or SL_STATUS_FAIL</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000065">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_RequestNodeNeighborUpdate </dd></dl>
+<p>@zgw_name ZW_RequestNodeNeighborUpdate </p>
 
 </div>
 </div>
@@ -3298,7 +3291,7 @@ One or more of the following flags if the replace process can not be started:<ul
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_request_network_update </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_request_network_update </td>
           <td>(</td>
           <td class="paramtype">void(*)(uint8_t txStatus)&#160;</td>
           <td class="paramname"><em>completedFunc</em></td><td>)</td>
@@ -3330,19 +3323,10 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 <dl class="section note"><dt>Note</dt><dd>The SUC can only handle one network update at a time, so care should be taken not to have all the controllers in the network ask for updates at the same time.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>This API call will generate a lot of network activity that will use bandwidth and stress the SUC in the network. Therefore, network updates should be requested as seldom as possible and never more often that once every hour from a controller.</dd></dl>
 <p>Timeout: 65 s. Exception recovery: Resume normal operation, no recovery needed.</p>
-<blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
-<blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
-<blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000062">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_RequestNetWorkUpdate </dd></dl>
+<p>@serial_tx{REQ | 0x53 | funcID}</p>
+<p>@serial_rx{RES | 0x53 | retVal}</p>
+<p>@serial_rx{REQ | 0x53 | funcID | txStatus}</p>
+<p>@zgw_name ZW_RequestNetWorkUpdate </p>
 
 </div>
 </div>
@@ -3353,9 +3337,9 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_request_node_info </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_request_node_info </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -3370,7 +3354,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000069">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_RequestNodeInfo </dd></dl>
+<p>@zgw_name ZW_RequestNodeInfo </p>
 
 </div>
 </div>
@@ -3381,9 +3365,9 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_controller_replication </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_controller_replication </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>destNodeID</em>, </td>
         </tr>
         <tr>
@@ -3431,7 +3415,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Used when the controller is replication mode</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000052">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_ReplicationSend </dd></dl>
+<p>@zgw_name ZW_ReplicationSend </p>
 
 </div>
 </div>
@@ -3442,7 +3426,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_default </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_default </td>
           <td>(</td>
           <td class="paramtype">void(*)(void)&#160;</td>
           <td class="paramname"><em>completedFunc</em></td><td>)</td>
@@ -3458,7 +3442,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
   </table>
   </dd>
 </dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000056">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SetDefault </dd></dl>
+<p>@zgw_name ZW_SetDefault </p>
 
 </div>
 </div>
@@ -3469,7 +3453,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_learn_mode </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_learn_mode </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>mode</em>, </td>
@@ -3505,7 +3489,7 @@ SL_STATUS_FAIL if the requesting controller is the SUC node or the SUC node is u
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the requested operation was accepted and has started </dd>
 <dd>
 SL_STATUS_FAIL if the requested operation has not been started</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000070">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SetLearnMode </dd></dl>
+<p>@zgw_name ZW_SetLearnMode </p>
 
 </div>
 </div>
@@ -3516,7 +3500,7 @@ SL_STATUS_FAIL if the requested operation has not been started</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_max_source_route </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_max_source_route </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>maxRouteTries</em></td><td>)</td>
@@ -3534,7 +3518,7 @@ SL_STATUS_FAIL if the requested operation has not been started</dd></dl>
 </dl>
 <p>A ZDK 4.5 controller uses the routing algorithm from 5.02 to address nodes from ZDK's not supporting explorer frame.</p>
 <p>The routing algorithm from 5.02 ignores the transmit option TRANSMIT_OPTION_EXPLORE flag and maximum number of source routing attempts value (maxRouteTries)</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000074">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SetRoutingMAX </dd></dl>
+<p>@zgw_name ZW_SetRoutingMAX </p>
 
 </div>
 </div>
@@ -3545,9 +3529,9 @@ SL_STATUS_FAIL if the requested operation has not been started</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_priority_route </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_priority_route </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>bNodeID</em>, </td>
         </tr>
         <tr>
@@ -3583,16 +3567,9 @@ false if the specified bNodeID was not valid and no LWR was set.</dd></dl>
 <li><code>2, 3, 0, 0, ZW_PRIORITY_ROUTE_SPEED_40K</code> &rarr; 40K Priority route through repeaters 2 and 3</li>
 <li><code>2, 3, 4, 0, ZW_PRIORITY_ROUTE_SPEED_9600</code> &rarr; 9600 Priority route through repeaters 2, 3 and 4</li>
 </ul>
-<blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
-<blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000077">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SetPriorityRoute </dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000078">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SetLastWorkingRoute </dd></dl>
+<p>@serial_tx{REQ | 0x93 | bNodeID | repeater0 | repeater1 | repeater2 | repeater3 | routespeed}</p>
+<p>@serial_rx{RES | 0x93 | bNodeID | retVal}</p>
+<p>@zgw_name ZW_SetPriorityRoute @zgw_name ZW_SetLastWorkingRoute </p>
 
 </div>
 </div>
@@ -3603,9 +3580,9 @@ false if the specified bNodeID was not valid and no LWR was set.</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_suc_node_id </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_suc_node_id </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>nodeID</em>, </td>
         </tr>
         <tr>
@@ -3654,7 +3631,7 @@ false if the specified bNodeID was not valid and no LWR was set.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if success. </dd>
 <dd>
 SL_STATUS_FAIL if failed (e.g. if the target is not a static controller)</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000060">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SetSUCNodeID </dd></dl>
+<p>@zgw_name ZW_SetSUCNodeID </p>
 
 </div>
 </div>
@@ -3665,9 +3642,9 @@ SL_STATUS_FAIL if failed (e.g. if the target is not a static controller)</dd></d
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_virtual_node_application_node_information </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_virtual_node_application_node_information </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>dstNode</em>, </td>
         </tr>
         <tr>
@@ -3714,7 +3691,7 @@ SL_STATUS_FAIL if failed (e.g. if the target is not a static controller)</dd></d
   </dd>
 </dl>
 <p>This takes effect for all virtual nodes, regardless of dstNode value.</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000084">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_ApplicationSlaveNodeInformation </dd></dl>
+<p>@zgw_name SerialAPI_ApplicationSlaveNodeInformation </p>
 
 </div>
 </div>
@@ -3725,9 +3702,9 @@ SL_STATUS_FAIL if failed (e.g. if the target is not a static controller)</dd></d
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_virtual_node_to_learn_mode </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_virtual_node_to_learn_mode </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node</em>, </td>
         </tr>
         <tr>
@@ -3739,7 +3716,7 @@ SL_STATUS_FAIL if failed (e.g. if the target is not a static controller)</dd></d
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*)(uint8_t bStatus, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> orgID, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> newID)&#160;</td>
+          <td class="paramtype">void(*)(uint8_t bStatus, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> orgID, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> newID)&#160;</td>
           <td class="paramname"><em>learnFunc</em>&#160;</td>
         </tr>
         <tr>
@@ -3773,7 +3750,7 @@ SL_STATUS_FAIL if node is invalid or controller is primary.</dd></dl>
 <li>If the received ID's are zero the stored ID's will be set to zero.</li>
 </ul>
 <p>The learnFunc is called when the received assign command has been handled. The newID parameter is the learned Node ID.</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000079">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SetSlaveLearnMode </dd></dl>
+<p>@zgw_name ZW_SetSlaveLearnMode </p>
 
 </div>
 </div>
@@ -3784,7 +3761,7 @@ SL_STATUS_FAIL if node is invalid or controller is primary.</dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_transfer_primary_ctrl_role </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_transfer_primary_ctrl_role </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>bMode</em>, </td>
@@ -3818,7 +3795,7 @@ SL_STATUS_FAIL if node is invalid or controller is primary.</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000073">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_ControllerChange </dd></dl>
+<p>@zgw_name ZW_ControllerChange </p>
 
 </div>
 </div>
@@ -3827,7 +3804,7 @@ SL_STATUS_FAIL if node is invalid or controller is primary.</dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:36 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

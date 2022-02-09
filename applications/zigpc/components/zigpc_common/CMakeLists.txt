@@ -1,8 +1,6 @@
 # Source/Include
-set(zigpc_common_SRC
-    src/callback_map.c src/hash_map.c src/zigpc_common_zigbee.c
-    src/zigpc_common_observable.c src/zigpc_common_ucl.c
-    src/zigpc_common_zcl_frame.c)
+set(zigpc_common_SRC src/zigpc_common_zigbee.c src/zigpc_common_observable.c
+                     src/zigpc_common_zcl_frame.c)
 
 # Lib
 add_library(zigpc_common STATIC ${zigpc_common_SRC})

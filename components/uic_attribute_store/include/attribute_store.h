@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -51,8 +51,8 @@ typedef uint32_t attribute_store_type_t;
 
 /**
  * @defgroup attribute_store Attribute Store
- * @ingroup uic_components
- * @brief Storage for DotDot/Z-Wave attributes.
+ * @ingroup unify_components
+ * @brief Attribute store.
  *
  * The Attribute store is a tree of attributes stored to save the state
  * of an object in the current network/environment.
@@ -116,12 +116,6 @@ typedef enum {
 } attribute_store_change_t;
 
 /**
- * @brief Attribute store callback type for tree node updates
- */
-typedef void (*attribute_store_node_update_callback_t)(
-  attribute_store_node_t, attribute_store_change_t);
-
-/**
  * @brief This is the value state of a value.
  */
 typedef enum {
@@ -130,6 +124,35 @@ typedef enum {
   DESIRED_OR_REPORTED_ATTRIBUTE,  ///< Retrieve the desired value if it exists if not then provide the reported attribute only used for readding.
 } attribute_store_node_value_state_t;
 
+/**
+ * @brief Attribute store callback type for tree node updates
+ */
+typedef void (*attribute_store_node_changed_callback_t)(
+  attribute_store_node_t, attribute_store_change_t);
+
+/**
+ * @brief Attribute store callback type for "touch" events
+ */
+typedef void (*attribute_store_node_touch_callback_t)(
+  attribute_store_node_t);
+
+/**
+ * @brief structure that contains information about the current state
+ * of a given node in the attribute store.
+ */
+typedef struct attribute_changed_event {
+  attribute_store_node_t updated_node;
+  attribute_store_type_t type;
+  attribute_store_node_value_state_t value_state;
+  attribute_store_change_t change;
+} attribute_changed_event_t;
+
+/**
+ * @brief Attribute store callback type for tree node updates
+ */
+typedef void (*attribute_store_node_update_callback_t)(
+  attribute_changed_event_t *event_data);
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -137,8 +160,8 @@ extern "C" {
 /**
  * @brief Retrieve the root node of the tree.
  *
- * @returns NULL                    If the tree is not initialized, or there is
- *                                  no root node
+ * @returns ATTRIBUTE_STORE_INVALID_NODE If the tree is not initialized, or
+ *                                  there is no root node
  * @returns attribute_store_node_t  handle for the root node
  */
 attribute_store_node_t attribute_store_get_root();
@@ -348,6 +371,20 @@ attribute_store_node_t attribute_store_get_node_child_by_value(
 sl_status_t attribute_store_register_callback(
   attribute_store_node_update_callback_t callback_function);
 
+
+/**
+ * @brief Register a callback function that will be called on touch events.
+ *
+ * NOTE: Use this function only if necessary, as it may trigger a lot
+ * of touched callbacks
+ *
+ * @param callback_function The function to invoke when a node desired or
+ *                          reported value is touched.
+ * @returns SL_STATUS_OK    If the callback was registered successfully.
+ */
+sl_status_t attribute_store_register_touch_notification_callback(
+  attribute_store_node_touch_callback_t callback_function);
+
 /**
  * @brief Register a callback function to any node with a given type.
  *
@@ -358,7 +395,7 @@ sl_status_t attribute_store_register_callback(
  * @returns SL_STATUS_OK    If the callback was registered successfully.
  */
 sl_status_t attribute_store_register_callback_by_type(
-  attribute_store_node_update_callback_t callback_function,
+  attribute_store_node_changed_callback_t callback_function,
   attribute_store_type_t type);
 
 /**
@@ -374,7 +411,7 @@ sl_status_t attribute_store_register_callback_by_type(
  * @returns SL_STATUS_OK    If the callback was registered successfully.
  */
 sl_status_t attribute_store_register_callback_by_type_and_state(
-  attribute_store_node_update_callback_t callback_function,
+  attribute_store_node_changed_callback_t callback_function,
   attribute_store_type_t type,
   attribute_store_node_value_state_t value_state);
 

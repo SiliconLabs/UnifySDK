@@ -38,6 +38,13 @@ var group__zigpc__datastore__accessor =
       [ "EndpointAccessor", "classEndpointAccessor.html#a4cdc18aecfa036002437a534a1176377", null ],
       [ "to_str", "classEndpointAccessor.html#a58fa6bb8d6a54326d95ee03e31ca17c0", null ]
     ] ],
+    [ "GroupAccessor", "classGroupAccessor.html", [
+      [ "GroupAccessor", "classGroupAccessor.html#aab58192a0b47401b58679dc986d0b8d8", null ],
+      [ "get_entity_type", "classGroupAccessor.html#ae04383273a6acaa2621a5677ab878fb9", null ],
+      [ "get_label_type", "classGroupAccessor.html#aee2df69ea96e350f673f60f28017cd73", null ],
+      [ "to_str", "classGroupAccessor.html#a3ee4601c8a04b92d17b72aedbbe2c74c", null ],
+      [ "is_reported", "classGroupAccessor.html#a32ba84eaf8fd2182efe4a6a7b49cf87c", null ]
+    ] ],
     [ "ClusterAccessor", "classClusterAccessor.html", [
       [ "ClusterAccessor", "classClusterAccessor.html#ad73f406b62317ddee8574a016fea64c3", null ],
       [ "get_entity_type", "classClusterAccessor.html#a75a3708fbe5fa706d3ad8e79a1b07e70", null ],

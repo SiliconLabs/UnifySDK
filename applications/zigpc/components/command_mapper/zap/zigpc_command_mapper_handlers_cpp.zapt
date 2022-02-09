@@ -40,6 +40,8 @@
 #include "zigpc_command_mapper_int.h"
 
 static constexpr char LOG_TAG[] = "zigpc_cmdmapper";
+static constexpr char LOG_FMT_INVALID_FIELDS[] = "%s::%s: Invalid fields passed in";
+static constexpr char LOG_FMT_INVALID_FIELD_LIST[] = "%s::%s: Invalid %s list passed in";
 
 /**
  * @brief Populate Write Attribute record to a frame data buffer.
@@ -235,6 +237,7 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label
  * @param endpoint  UIC device endpoint identifier
  * @param callback_type Callback type
 {{#zcl_command_arguments}}
+{{#if isArray}} * @param {{asSnakeCaseLower label}}_count  Count of {{asUnderlyingType type}} items{{/if}}
  * @param {{asSnakeCaseLower label}}  Command argument of type {{asUnderlyingType type}}
 {{/zcl_command_arguments}}
  * @return SL_STATUS_OK if callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL and call is successful
@@ -245,7 +248,12 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint,
   {{component_dotdot_mqtt_prefix}}_callback_call_type_t callback_type{{#zcl_command_arguments}}{{#first}},{{/first}}
-  {{asUnderlyingType type}} {{asSnakeCaseLower label}}{{listComma this}}{{/zcl_command_arguments}}
+{{#if isArray}}
+    uint8_t {{asSnakeCaseLower label}}_count,
+    {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}} *{{asSnakeCaseLower label}}{{listComma this}}
+{{else}}
+    {{asUnderlyingType type}} {{asSnakeCaseLower label}}{{listComma this}}
+{{/if}}{{/zcl_command_arguments}}
 ) {
   sl_status_t status = SL_STATUS_OK;
 
@@ -257,28 +265,69 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label
     return status;
   }
 
-  const size_t cmd_arg_count = {{zcl_command_arguments_count id}};
+{{! check for list argument validity}}
 {{#zcl_command_arguments}}
-{{#if (supportedStruct type)}}
-  // Copy fields to packed struct
-  {{asZigPCZclStructType type}} zigpc_{{asSnakeCaseLower label}};
-{{#zcl_struct_items_by_struct_name type}}
-  zigpc_{{asSnakeCaseLower parent.label}}.{{asSnakeCaseLower label}} = {{asSnakeCaseLower parent.label}}.{{label}};
-{{/zcl_struct_items_by_struct_name}}
-
+{{#if isArray}}
+  if (({{asSnakeCaseLower label}}_count > 0U) && ({{asSnakeCaseLower label}} == nullptr)) {
+    sl_log_warning(LOG_TAG, LOG_FMT_INVALID_FIELD_LIST, "{{parent.parent.label}}", "{{parent.label}}", "{{label}}");
+    return SL_STATUS_INVALID_PARAMETER;
+  }
 {{/if}}
 {{/zcl_command_arguments}}
+
+{{! Copy structs passed in}}
+{{#zcl_command_arguments}}
+{{#if (supportedStruct type)}}
+  {{! Struct array}}
+  {{#if isArray}}
+  std::vector< {{asZigPCZclStructType type}} > zigpc_{{asSnakeCaseLower label}}_vec;
+
+  for(uint8_t i = 0; i < {{asSnakeCaseLower label}}_count; i++) {
+    zigpc_{{asSnakeCaseLower label}}_vec.push_back({
+    {{#zcl_struct_items_by_struct_name type}}
+      .{{asSnakeCaseLower label}} = {{asSnakeCaseLower parent.label}}[i].{{label}},
+    {{/zcl_struct_items_by_struct_name}}
+    });
+  }
+  {{! Struct non-array}}
+  {{else}}
+  {{asZigPCZclStructType type}} zigpc_{{asSnakeCaseLower label}} = {
+    {{#zcl_struct_items_by_struct_name type}}
+    .{{asSnakeCaseLower label}} = {{asSnakeCaseLower parent.label}}.{{label}},
+    {{/zcl_struct_items_by_struct_name}}
+  };
+  {{/if}}
+{{/if}}
+{{/zcl_command_arguments}}
+
+{{! build frame using argument list}}
 {{#zcl_command_arguments}}
 {{#first}}
-  {{component_zigpc_zcl_prefix}}_frame_data_t cmd_arg_list[cmd_arg_count] = {
+  std::vector< {{component_zigpc_zcl_prefix}}_frame_data_t > cmd_arg_list;
 {{/first}}
-    {
-      .type = {{asZigPCZclDataType (zcl_type_map_get_item type)}},
-      .data = {{#if (isString type)}} {{asSnakeCaseLower label}} {{else if (supportedStruct type)}} &zigpc_{{asSnakeCaseLower label}} {{else}} &{{asSnakeCaseLower label}} {{/if}}
-    },
-{{#last}}
-  };
-{{/last}}
+{{! populate string types}}
+{{#if (isString type)}}
+  cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, {{asSnakeCaseLower label}} });
+{{! populate struct types}}
+{{else if (supportedStruct type)}}
+  {{#if isArray}}
+  {{! NOTE: commands that send struct arrays do not send a 1-byte prefixed length field. This is omitted here}}
+  for(uint8_t i = 0U; i < {{asSnakeCaseLower label}}_count; i++) {
+    cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, &zigpc_{{asSnakeCaseLower label}}_vec[i] });
+  }
+  {{else}}
+  cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, &zigpc_{{asSnakeCaseLower label}} });
+  {{/if}}
+{{! populate array types}}
+{{else if isArray}}
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &{{asSnakeCaseLower label}}_count });
+  for(uint8_t i = 0U; i < {{asSnakeCaseLower label}}_count; i++) {
+    cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, &{{asSnakeCaseLower label}}[i] });
+  }
+{{! populate non-string, non-array, non-struct types}}
+{{else}}
+  cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, &{{asSnakeCaseLower label}} });
+{{/if}}
 {{/zcl_command_arguments}}
 
   if (status == SL_STATUS_OK) {
@@ -288,13 +337,14 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label
       ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
       {{asZigPCZclClusterType parent}},
       {{asZigPCZclCommandType parent this}},
-      cmd_arg_count,
 {{#zcl_command_arguments}}
 {{#first}}
-      cmd_arg_list
+      cmd_arg_list.size(),
+      cmd_arg_list.data()
 {{/first}}
 {{else}}
-      NULL
+      0,
+      nullptr
 {{/zcl_command_arguments}}
     );
   }

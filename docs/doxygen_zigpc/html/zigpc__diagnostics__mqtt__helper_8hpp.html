@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -84,7 +84,8 @@ $(document).ready(function(){initNavTree('zigpc__diagnostics__mqtt__helper_8hpp.
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">zigpc_diagnostics_mqtt_helper.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -99,12 +100,17 @@ $(document).ready(function(){initNavTree('zigpc__diagnostics__mqtt__helper_8hpp.
 Functions</h2></td></tr>
 <tr class="memitem:a7db7774a1591e8be8a279a3ef0596d05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__diagnostics__mqtt__helper_8hpp.html#a7db7774a1591e8be8a279a3ef0596d05">uic_diagnostics_mqtt_callback</a> (const char *topic, const char *payload, size_t payload_size)</td></tr>
 <tr class="separator:a7db7774a1591e8be8a279a3ef0596d05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a872cb8414f8a3b480c022bc588926f70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__diagnostics__mqtt__helper_8hpp.html#a872cb8414f8a3b480c022bc588926f70">uic_diagnostics_setup</a> (std::string unid)</td></tr>
+<tr class="memitem:a872cb8414f8a3b480c022bc588926f70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__diagnostics__mqtt__helper_8hpp.html#a872cb8414f8a3b480c022bc588926f70">uic_diagnostics_setup</a> (std::string unid)</td></tr>
 <tr class="separator:a872cb8414f8a3b480c022bc588926f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8df80df059d26dbd5a0ce7a27ac1c669"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__diagnostics__mqtt__helper_8hpp.html#a8df80df059d26dbd5a0ce7a27ac1c669">uic_metric_init</a> ()</td></tr>
 <tr class="separator:a8df80df059d26dbd5a0ce7a27ac1c669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a207ce599db705b375cea923dc65a94b2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__diagnostics__mqtt__helper_8hpp.html#a207ce599db705b375cea923dc65a94b2">uic_diagnostic_request_to_strings</a> (std::string *payload_string)</td></tr>
 <tr class="separator:a207ce599db705b375cea923dc65a94b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a23d91389c4b8f2fa75029f500af2baa3"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__diagnostics__mqtt__helper_8hpp.html#a23d91389c4b8f2fa75029f500af2baa3">ZIGPC_DIAGNOSTIC_TOPIC</a></td></tr>
+<tr class="separator:a23d91389c4b8f2fa75029f500af2baa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a207ce599db705b375cea923dc65a94b2"></a>
@@ -166,7 +172,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> uic_diagnostics_setup </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> uic_diagnostics_setup </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>unid</em></td><td>)</td>
@@ -194,13 +200,38 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a23d91389c4b8f2fa75029f500af2baa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23d91389c4b8f2fa75029f500af2baa3">&#9670;&nbsp;</a></span>ZIGPC_DIAGNOSTIC_TOPIC</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string ZIGPC_DIAGNOSTIC_TOPIC</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">    <span class="stringliteral">&quot;/ProtocolController/SystemHealth/&quot;</span></div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_a2861ded9b7fb5dc8c3ab199aace1921.html">diagnostics</a></li><li class="navelem"><a class="el" href="dir_597d772ceb64ffa9f35ce5bafafac095.html">src</a></li><li class="navelem"><a class="el" href="zigpc__diagnostics__mqtt__helper_8hpp.html">zigpc_diagnostics_mqtt_helper.hpp</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:13 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

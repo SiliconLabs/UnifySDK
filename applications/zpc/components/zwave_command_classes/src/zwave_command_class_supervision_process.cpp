@@ -1,7 +1,7 @@
 
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -305,9 +305,14 @@ sl_status_t zwave_command_class_supervision_assign_session_tx_id(
   }
 
   sl_log_debug(LOG_TAG,
-               "Assigning Z-Wave Tx Session %p to Supervision Session %d",
+               "Assigning Z-Wave Tx Session %p to Supervision Session %d "
+               "(local SessionID %d with NodeID %d:%d, group %d)",
                tx_session_id,
-               supervision_id);
+               supervision_id,
+               session->session.session_id,
+               session->session.node_id,
+               session->session.endpoint_id,
+               session->session.group_id);
 
   session->tx_session_valid = true;
   session->tx_session_id    = tx_session_id;

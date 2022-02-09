@@ -181,7 +181,7 @@ static sl_status_t assign_multicast_pool(attribute_store_node_t node)
     return SL_STATUS_FAIL;
   }
 
-  zwave_protocol_t protocol = get_protocol(node_id);
+  zwave_protocol_t protocol = zwave_get_inclusion_protocol(node_id);
   zwave_controller_encapsulation_scheme_t encapsulation
     = zwave_tx_scheme_get_node_highest_security_class(node_id);
 
@@ -343,7 +343,7 @@ static void zpc_attribute_resolver_send_singlecast_follow_ups(
       options.is_first_follow_up = is_first_follow_up;
       options.group_id           = it->group_id;
 
-      if (get_operating_mode(node_id) == OPERATING_MODE_FL) {
+      if (zwave_get_operating_mode(node_id) == OPERATING_MODE_FL) {
         options.fasttrack = true;
         options.qos_priority += FL_NODE_QOS_BOOST;
       }

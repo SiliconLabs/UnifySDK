@@ -14,13 +14,10 @@
 
 // Boost
 #include <boost/algorithm/string.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-
+#include <nlohmann/json.hpp>
 // standard library
 #include <algorithm>
-
-namespace bpt = boost::property_tree;
+#include <limits>
 
 uint32_t
   dotdot_bitmap::convert_hex_string_to_uint32_t(const std::string &hex) const
@@ -59,31 +56,53 @@ std::vector<std::pair<std::string, std::string>>
   return bitmap_representation;
 }
 
-bpt::ptree dotdot_bitmap::get_bitmap_values_as_json_tree(
-  uint32_t bitmap_decimal_value) const
+nlohmann::json dotdot_bitmap::get_bitmap_values_as_json_tree(uint32_t bitmap_decimal_value) const
 {
-  bpt::ptree resulting_tree;
+  nlohmann::json result_jsn;
+
   std::vector<std::pair<std::string, std::string>> bitmap_values
     = this->get_bitmap_values(bitmap_decimal_value);
 
   for (const auto &[value_name, value]: bitmap_values) {
-    resulting_tree.add(value_name, value);
+    result_jsn[value_name] = value;
   }
-  return resulting_tree;
+
+  return result_jsn;
 }
 
-uint32_t dotdot_bitmap::get_bitmap_state_value_from_json_tree(
-  const bpt::ptree &bitmap_tree) const
+
+uint32_t dotdot_bitmap::get_bitmap_state_value_from_json_tree(nlohmann::json &bitmap_jsn) const
 {
   uint32_t resulting_value = 0;
   for (const auto &[element, enum_data]: this->bitmap_data) {
-    std::string type  = element[idx_type];
-    std::string value = bitmap_tree.get<std::string>(element[idx_name]);
+    const std::string type = element[idx_type];
 
-    if (type == "bool" && value == "true") {
-      resulting_value |= convert_hex_string_to_uint32_t(element[idx_mask]);
-    } else if (type.find("enum") != std::string::npos) {
-      resulting_value |= get_enum_value_of_element_by_name(enum_data, value);
+    if (bitmap_jsn[element[idx_name]].is_null()) {
+      resulting_value = std::numeric_limits<uint32_t>::max();
+      break;
+    }
+
+    if (bitmap_jsn[element[idx_name]].is_boolean()) {
+      const bool value = bitmap_jsn[element[idx_name]].get<bool>();
+
+      if (type == std::string("bool") && value == true) {
+        resulting_value |= convert_hex_string_to_uint32_t(element[idx_mask]);
+      } else if (type.find("enum") != std::string::npos) {
+        try {
+          resulting_value |= get_enum_value_of_element_by_name(enum_data, (value == true ? std::string("true") : std::string("false")));
+        } catch ([[maybe_unused]] const std::invalid_argument &e) {
+          resulting_value = std::numeric_limits<uint32_t>::max();
+          break;
+        }
+      }
+    } else if (bitmap_jsn[element[idx_name]].is_string()) {
+      const std::string value = bitmap_jsn[element[idx_name]].get<std::string>();
+
+      if (type == std::string("bool") && value == std::string("true")) {
+        resulting_value |= convert_hex_string_to_uint32_t(element[idx_mask]);
+      } else if (type.find("enum") != std::string::npos) {
+        resulting_value |= get_enum_value_of_element_by_name(enum_data, value);
+      }
     }
   }
 

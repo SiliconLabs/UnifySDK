@@ -1,14 +1,46 @@
-# ZigPC (Beta) Release Notes
+# ZigPC Release Notes
 This document describes the changes between the current and last released ZigPC.
+
+## [1.1.0] - Feb 2022
+
+### Added
+* Debian Installer also configures ZigPC to run as a system service
+* Ability to get ZigPC specific diagnostic information (uptime, CPU use, memory
+use, Zigbee stack counters) from the host and the coordinator
+* ZAP and SLC_CLI has been integrated as project dependencies for Zigbee host
+library generation
+* Attribute polling if report configuration fails
+* Publishing GeneratedCommands sent from Zigbee devices as responses or as
+unsolicited events
+
+### Changed
+* Migrate Zigbee-Host library (EmberZNet-based) from Appbuilder project
+  (GeckoSDK 3.1) to SLC project (GeckoSDK 4.0). See
+  [Zigbee Host Library Readme](components/zigpc_gateway/libs/zigbee_host/readme.libzigbee_host.zigpc.md)
+  for more details. NOTE: In order to listen to new ZCL cluster messages, the
+  SLC project configuration should be changed in addition to the ZAP dotdot helpers
+* ZigPC datastore file key has been changed from --datastore.file to --zigpc.datastore_file
+* Default datastore file has been changed from /var/lib/uic/database.db to /var/lib/uic/zigpc.db
+If you used the default configuration, keep your previous database by running `mv /var/lib/uic/database.db /var/lib/uic/zigpc.db`
+
+### Removed
+* Use of EmafDeviceTablePlugin in Zigbee-Host library to manage device discovery;
+This is now performed within ZigPC
+
+### Fixed
+* Persisted information cleanup on device leaving the network
+* JSON payloads accepted for commands and attributes to be UCL compliant
+
 
 ## [1.0.3] - Nov 2021
 
 ### Added
-* Add persistence to ZigPC node management using the zigpc datastore component
-* Persist EUI64 and NodeID mappings
+* Add persistence of Zigbee device discovery information to allow servicing
+devices after ZigPC reboots
+* Use of NCP address-table to manage EUI64 to NodeId mappings
 ### Changed
 * Updates to network management
-* Improvements in z3gateway EZSP message performance
+* Improvements in Zigbee Host EZSP message performance
 * Merge ZigPC node state and ucl handling components
 * Reduce dependence on device table plugin, use address table
 ### Fixed
@@ -62,13 +94,17 @@ This document describes the changes between the current and last released ZigPC.
 | ZigPC is able to service the DotDot Color Control cluster (0x0300) but not publish any attribute changes.                                             |                                                                                             |
 | ZigPC does not persist any network information. devices previously connected to the ZigPC network will not be reachable after ZigPC restarts.         | Ensure the devices have left the ZigPC Zigbee network after ZigPC restarts.                 |
 | ZigPC only supports "Remove" and "Idle" PC state change requests via the Node List view in DevUI. "Add" and "Reset" options are not supported.        | To add nodes to the Zigbee network, using the Smartstart DSK process outlined in the readme.|
+| ZigPC can fail at initialization if the NCP image is based on GSDK 4.0 without ADDRESS_TABLE being set to 250                                         | Set macro `EMBER_ADDRESS_TABLE_SIZE=250` in NCP studio project before building NCP image.   |
+| When using Gecko SDK 4.0, OTA updates using the image provider may be unstable                                                                        | Use the Gecko SDK 3.X to generate OTA files                                                 |
 
 ### Zigbee Devices Used for Testing
 | Vendor    | Name                                   | Device Type         | Working | Notes                                                                                                                                                          |
 | --------- | ---------------------------------------| ------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Silabs    | xG12 or xG21 radio (NCP w/ EZSP-UART)  | <br/>               | Yes     | <br/>                                                                                                                                                          |
 | Silabs    | xG12 or xG21 radio                     | Z3Light             | Yes     | <br/>                                                                                                                                                          |
-| Silabs    | xG12 or xG21 radio                     | Z3Switch            | Yes     | Since Z3Switch only has a OnOff client cluster, attribute reports and commands are not supported for this cluster.                                             |
+| Silabs    | xG12 or xG21 radio                     | Z3Switch            | Yes     | <br/>                                                                                                                                                          |
+| Silabs    | xG12 or xG21 radio                     | Z3Thermostat        | Yes     | <br/>                                                                                                                                                          |
+| Silabs    | xG12 or xG21 radio                     | Z3DoorLock          | Yes     | <br/>                                                                                                                                                          |
 
 # Zigbee Certification information
 > _NOTE the ZigPC is at this point not certifiable_

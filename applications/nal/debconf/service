@@ -1,0 +1,13 @@
+[Unit]
+Description=Name and location service
+After=network.target mosquitto.service
+
+[Service]
+ExecStart=/usr/bin/uic-nal --nal.datastore_file /var/lib/uic/nal.db
+Restart=on-failure
+KillMode=process
+User=uic
+Group=uic
+
+[Install]
+WantedBy=multi-user.target

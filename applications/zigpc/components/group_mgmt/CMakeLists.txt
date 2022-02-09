@@ -8,7 +8,7 @@ target_include_directories(
 
 target_link_libraries(
   zigpc_group_mgmt
-  PRIVATE zigpc_common zigpc_zcl_util zigpc_zcl_command_parser uic_log uic_mqtt)
+  PRIVATE zigpc_common zigpc_datastore zigpc_zcl_util zigpc_zcl_command_parser uic_log uic_mqtt)
 
 add_subdirectory(test)
 

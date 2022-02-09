@@ -92,7 +92,7 @@ void on_resolver_zwave_send_data_complete(uint8_t status,
 
   resolver_rule_type_t current_rule_type
     = nodes_under_resolution[current_node].rule_type;
-  clock_time_t transmission_time = tx_info ? tx_info->wTransmitTicks * 10 : 0;
+  clock_time_t transmission_time = tx_info ? tx_info->transmit_ticks * 10 : 0;
 
   // Do we have a custom handler for this type?
   auto it
@@ -154,7 +154,7 @@ void on_resolver_zwave_supervision_complete(uint8_t supervision_status,
 
   resolver_rule_type_t current_rule_type
     = nodes_under_resolution[current_node].rule_type;
-  clock_time_t transmission_time = tx_info ? tx_info->wTransmitTicks * 10 : 0;
+  clock_time_t transmission_time = tx_info ? tx_info->transmit_ticks * 10 : 0;
 
   // Do we have a custom handler for this type?
   auto it

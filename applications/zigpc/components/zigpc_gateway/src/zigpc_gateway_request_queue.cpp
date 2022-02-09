@@ -28,6 +28,7 @@
 
 #define LOG_PREFIX_GATEWAY          "Gateway "
 #define LOG_PREFIX_EUI64            "Eui64:%016" PRIX64 " "
+#define LOG_PREFIX_EUI64_EP         "Eui64:%016" PRIX64 ",Ep:%u "
 #define LOG_PREFIX_EUI64_EP_CLUSTER "Eui64:%016" PRIX64 ",Ep:%u,Cluster:0x%04X "
 #define LOG_PREFIX_GROUP_CLUSTER    "Group:0x%04X,Cluster:0x%04X "
 
@@ -132,7 +133,7 @@ sl_status_t RequestQueue::dispatch(void)
     }
   }
   // Request EmberAf Tick loop even if there is no call to dispatch
-  z3gatewayTick();
+  zigbeeHostTick();
 
   return status;
 }
@@ -143,7 +144,7 @@ NetworkInitRequest::NetworkInitRequest(void) :
 
 EmberStatus NetworkInitRequest::invoke(void)
 {
-  EmberStatus status = z3gatewayTrustCenterInit();
+  EmberStatus status = zigbeeHostTrustCenterInit();
 
   sl_log(LOG_TAG,
          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
@@ -166,18 +167,18 @@ EmberStatus PermitJoinRequest::invoke(void)
     if (conf->tc_use_well_known_key == true) {
       EmberEUI64 wildcardEui64
         = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-      EmberKeyData centralizedKey = z3gatewayGetTrustCenterWellKownKey();
+      EmberKeyData centralizedKey = zigbeeHostGetTrustCenterWellKownKey();
       status
-        = z3gatewayTrustCenterAddLinkKey(wildcardEui64, &centralizedKey, true);
+        = zigbeeHostTrustCenterAddLinkKey(wildcardEui64, &centralizedKey, true);
       sl_log(LOG_TAG,
              (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
              LOG_PREFIX_GATEWAY "Well-known link key add EmberAfStatus: 0x%X",
              status);
     }
-    status = z3gatewayTrustCenterJoinOpen(true);
+    status = zigbeeHostTrustCenterJoinOpen(true);
     zigpc_gateway_command_print_nwk_key();
   } else {
-    status = z3gatewayTrustCenterJoinClose();
+    status = zigbeeHostTrustCenterJoinClose();
   }
 
   sl_log(LOG_TAG,
@@ -207,9 +208,9 @@ EmberStatus AddInstallCodeRequest::invoke(void)
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
   EmberStatus status
-    = z3gatewayTrustCenterAddDeviceInstallCode(eui64_le,
-                                               this->install_code,
-                                               this->install_code_length);
+    = zigbeeHostTrustCenterAddDeviceInstallCode(eui64_le,
+                                                this->install_code,
+                                                this->install_code_length);
 
   sl_log(LOG_TAG,
          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
@@ -220,21 +221,43 @@ EmberStatus AddInstallCodeRequest::invoke(void)
   return status;
 }
 
-DeviceInterviewRequest::DeviceInterviewRequest(const zigbee_eui64_t eui64) :
+DiscoverDeviceRequest::DiscoverDeviceRequest(const zigbee_eui64_t eui64) :
   RequestQueue::Entry("Device Interview")
 {
   std::copy(eui64, eui64 + sizeof(zigbee_eui64_t), this->eui64);
 }
 
-EmberStatus DeviceInterviewRequest::invoke(void)
+EmberStatus DiscoverDeviceRequest::invoke(void)
 {
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
-  EmberStatus status = z3gatewayTrustCenterStartDiscovery(eui64_le);
+  EmberStatus status = zigbeeHostZdoActiveEndpointsRequest(eui64_le);
 
   sl_log(LOG_TAG,
          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
          LOG_PREFIX_EUI64 "Interview EmberAfStatus: 0x%X",
+         zigbee_eui64_to_uint(this->eui64),
+         status);
+  return status;
+}
+
+DiscoverEndpointRequest::DiscoverEndpointRequest(
+  const zigbee_eui64_t eui64, zigbee_endpoint_id_t endpoint_id) :
+  RequestQueue::Entry("Endpoint Discover"), endpoint_id(endpoint_id)
+{
+  std::copy(eui64, eui64 + sizeof(zigbee_eui64_t), this->eui64);
+}
+
+EmberStatus DiscoverEndpointRequest::invoke(void)
+{
+  zigbee_eui64_t eui64_le;
+  zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
+  EmberStatus status
+    = zigbeeHostZdoSimpleDescriptorRequest(eui64_le, endpoint_id);
+
+  sl_log(LOG_TAG,
+         (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
+         LOG_PREFIX_EUI64_EP " Discover EmberAfStatus: 0x%X",
          zigbee_eui64_to_uint(this->eui64),
          status);
   return status;
@@ -250,7 +273,7 @@ EmberStatus DeviceRemoveRequest::invoke(void)
 {
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
-  EmberStatus status = z3gatewayTrustCenterRemoveDevice(eui64_le);
+  EmberStatus status = zigbeeHostNetworkDeviceLeaveRequest(eui64_le);
 
   sl_log(LOG_TAG,
          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
@@ -275,10 +298,11 @@ EmberStatus BindingRequestRequest::invoke(void)
 {
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
-  EmberStatus status = z3gatewayInitBinding(eui64_le,
-                                            this->endpoint_id,
-                                            this->cluster_id,
-                                            0);  //only unicast bindings for now
+  EmberStatus status
+    = zigbeeHostInitBinding(eui64_le,
+                            this->endpoint_id,
+                            this->cluster_id,
+                            0);  //only unicast bindings for now
 
   sl_log(LOG_TAG,
          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
@@ -315,11 +339,11 @@ EmberStatus ZCLConfigureReportingRequest::invoke(void)
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
 
   unsigned int report_size = static_cast<unsigned int>(this->frame.size);
-  EmberStatus status       = z3gatewayInitReporting(eui64_le,
-                                              this->endpoint_id,
-                                              this->cluster_id,
-                                              this->frame.buffer,
-                                              report_size);
+  EmberStatus status       = zigbeeHostInitReporting(eui64_le,
+                                               this->endpoint_id,
+                                               this->cluster_id,
+                                               this->frame.buffer,
+                                               report_size);
 
   sl_log(LOG_TAG,
          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,
@@ -350,14 +374,14 @@ EmberStatus ZCLFrameUnicastRequest::invoke(void)
 {
   zigbee_eui64_t eui64_le;
   zigbee_eui64_copy_switch_endian(eui64_le, this->eui64);
-  EmberStatus status = z3gatewayFillZclFrame(this->frame.buffer,
-                                             this->frame.size,
-                                             this->frame.offset_sequence_id);
+  EmberStatus status = zigbeeHostFillZclFrame(this->frame.buffer,
+                                              this->frame.size,
+                                              this->frame.offset_sequence_id);
 
   if (status == EMBER_SUCCESS) {
-    status = z3gatewaySendZclFrameUnicast(eui64_le,
-                                          this->endpoint_id,
-                                          this->cluster_id);
+    status = zigbeeHostSendZclFrameUnicast(eui64_le,
+                                           this->endpoint_id,
+                                           this->cluster_id);
 
     sl_log(LOG_TAG,
            (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_WARNING,
@@ -386,12 +410,12 @@ ZCLFrameMulticastRequest::ZCLFrameMulticastRequest(zigbee_group_id_t group_id,
 
 EmberStatus ZCLFrameMulticastRequest::invoke(void)
 {
-  EmberStatus status = z3gatewayFillZclFrame(this->frame.buffer,
-                                             this->frame.size,
-                                             this->frame.offset_sequence_id);
+  EmberStatus status = zigbeeHostFillZclFrame(this->frame.buffer,
+                                              this->frame.size,
+                                              this->frame.offset_sequence_id);
 
   if (status == EMBER_SUCCESS) {
-    status = z3gatewaySendZclFrameMulticast(this->group_id, this->cluster_id);
+    status = zigbeeHostSendZclFrameMulticast(this->group_id, this->cluster_id);
 
     sl_log(LOG_TAG,
            (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_WARNING,
@@ -415,7 +439,7 @@ AddOTAImageRequest::AddOTAImageRequest(std::string &filename) :
 
 EmberStatus AddOTAImageRequest::invoke(void)
 {
-  EmberStatus status = z3gatewayAddOtaImage(this->filename.c_str());
+  EmberStatus status = zigbeeHostAddOtaImage(this->filename.c_str());
 
   sl_log(LOG_TAG,
          (status == EMBER_SUCCESS) ? SL_LOG_INFO : SL_LOG_ERROR,

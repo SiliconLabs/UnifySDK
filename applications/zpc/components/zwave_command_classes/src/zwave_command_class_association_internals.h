@@ -292,6 +292,60 @@ bool is_desired_group_full(zwave_node_id_t node_id,
                            zwave_endpoint_id_t endpoint_id,
                            association_group_id_t group_id);
 
+/**
+ * @brief Attempts to remove a NodeID for all associations groups in the
+ * current network.
+ *
+ * @param node_id   Z-Wave Node ID to remove from
+ *                  any and all association groups
+ *
+ */
+void remove_desired_node_id_from_all_associations_in_network(
+  zwave_node_id_t node_id);
+
+/**
+ * @brief Attempts to add an Association for all associations groups for a given
+ * NodeID/Ep.
+ *
+ * @param node_id             Z-Wave Node ID for which the
+ *                            association groups get added an association
+ * @param endpoint_id         Endpoint for which the
+ *                            association groups get added an association
+ * @param association         The Association object to add
+ */
+void add_desired_association_in_all_groups(zwave_node_id_t node_id,
+                                           zwave_endpoint_id_t endpoint_id,
+                                           association_t association);
+
+/**
+ * @brief Attempts to remove an Association for all associations groups for a given
+ * NodeID/Ep.
+ *
+ * @param node_id             Z-Wave Node ID for which the
+ *                            association groups get added an association
+ * @param endpoint_id         Endpoint for which the
+ *                            association groups get added an association
+ * @param association         The Association object to add
+ */
+void remove_desired_association_in_all_groups(zwave_node_id_t node_id,
+                                              zwave_endpoint_id_t endpoint_id,
+                                              association_t association);
+
+/**
+ * @brief Attempts to remove a NodeID for all associations groups for a given
+ * NodeID/Ep.
+ *
+ * @param node_id_to_remove   Z-Wave Node ID to remove from a given NodeID/Endpoint
+ * @param node_id             Z-Wave Node ID for which the
+ *                            association groups get cleaned up
+ * @param endpoint_id         Endpoint for which the
+ *                            association groups get cleaned up
+ */
+void remove_desired_node_id_from_all_associations(
+  zwave_node_id_t node_id_to_remove,
+  zwave_node_id_t node_id,
+  zwave_endpoint_id_t endpoint_id);
+
 #ifdef __cplusplus
 }
 #endif

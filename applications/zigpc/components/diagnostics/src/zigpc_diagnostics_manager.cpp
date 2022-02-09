@@ -14,16 +14,10 @@
 #include <sstream>
 
 #include <uic_mqtt.h>
+#include <nlohmann/json.hpp>
 
+#include "zigpc_diagnostics_mqtt_helper.hpp"
 #include "zigpc_diagnostics_manager.hpp"
-
-#include "zigpc_uptime.hpp"
-#include "zigpc_total_virtual_ram.hpp"
-#include "zigpc_used_virtual_ram.hpp"
-#include "zigpc_total_physical_ram.hpp"
-#include "zigpc_used_physical_ram.hpp"
-#include "zigpc_cpu_usage.hpp"
-#include "zigpc_example_metric.hpp"
 
 /**
  * @brief Stores and manages metrics and handle information requests from mqtt helper / diagnostic process
@@ -42,11 +36,17 @@ void zigpc_diagnostics_manager::notify(std::string metric_id)
 {
   auto search = metric_map.find(metric_id);
   if (search != metric_map.end()) {
-    std::string data       = search->second->get_serialized_value();
-    std::string full_topic = "ucl/by-unid/" + unid
-                             + "/ProtocolController/Diagnostics/"
+    std::stringstream value_ss;
+    value_ss << R"({"value":)" << search->second->get_serialized_value() << "}";
+    std::string full_topic = "ucl/by-unid/" + unid + ZIGPC_DIAGNOSTIC_TOPIC  
                              + search->second->get_metric_id();
-    uic_mqtt_publish(full_topic.c_str(), data.c_str(), data.size(), false);
+
+    const std::string metric_value(value_ss.str());
+
+    uic_mqtt_publish(full_topic.c_str(),
+                     metric_value.c_str(),
+                     metric_value.size(),
+                     false);
   }
 }
 
@@ -54,18 +54,16 @@ void zigpc_diagnostics_manager::publish_metric_list()
 {
   // if the metric map is not empty publish entire list
   if (!metric_map.empty()) {
-    std::stringstream json_payload;
-    json_payload << R"({"value":[)";
-    std::string sep("");
+    nlohmann::json jsn;
+    jsn["value"] = nlohmann::json::array();
+
     for (auto const &metric: metric_map) {
-      json_payload << sep << "\"" << metric.first << "\"";
-      sep = ",";
+      jsn["value"].push_back(metric.first);
     }
-    json_payload << "]}";
-    std::string full_topic
-      = "ucl/by-unid/" + unid
-        + "/ProtocolController/Diagnostics/SupportedMetrics";
-    std::string payload(json_payload.str());
+
+    std::string full_topic = "ucl/by-unid/" + unid + ZIGPC_DIAGNOSTIC_TOPIC + "SupportedMetrics";
+    std::string payload = jsn.dump();
+
     uic_mqtt_publish(full_topic.c_str(), payload.c_str(), payload.size(), true);
   }
 }

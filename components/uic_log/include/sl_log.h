@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,14 +12,13 @@
  *****************************************************************************/
 
 /**
- * @file sl_log.h
- * @defgroup sl_log Log
- * @ingroup uic_components
- * @brief Logging library for UIC
+ * @defgroup sl_log Unify Logging system
+ * @ingroup unify_components
+ * @brief Logging library for Unify applications and components.
  *
- * Logging library for UIC based on boost::log and wrapped with C headers. The
- * logging system features log scoping and filtering. All UIC components should use
- * the logging system for printing messages.
+ * Logging library for Unify based on boost::log and wrapped with C headers. The
+ * logging system features log scoping and filtering. All Unify components
+ * should use the logging system for printing messages.
  *
  * @{
  */
@@ -43,6 +42,29 @@ typedef enum sl_log_level {
   SL_LOG_ERROR,
   SL_LOG_CRITICAL
 } sl_log_level_t;
+
+// TODO: move array to string(hex) to utility function instead
+/** log a byte array as hex string. */
+#define sl_log_byte_arr(tag, lvl, _arr, _arr_len)                             \
+  {                                                                           \
+    char _tmp_log_arr[_arr_len * 2 + 1] = {0};                                \
+    char *_cur_log_arr_idx              = _tmp_log_arr;                       \
+    for (unsigned int _log_arr_count = 0; _log_arr_count < _arr_len;          \
+         _log_arr_count++) {                                                  \
+      _cur_log_arr_idx                                                        \
+        += snprintf(_cur_log_arr_idx,                                         \
+                    sizeof(_tmp_log_arr) - (_cur_log_arr_idx - _tmp_log_arr), \
+                    "%02X",                                                   \
+                    (_arr)[_log_arr_count]);                                  \
+    }                                                                         \
+    sl_log(tag, lvl, "%s\n", _tmp_log_arr);                                   \
+  }
+
+#if (ZWAVE_BUILD_SYSTEM == 1)
+
+#include "sl_log_gecko.h"
+
+#else
 
 /**
  * @brief Set log level.
@@ -118,22 +140,7 @@ void sl_log(const char *const tag,
 #define sl_log_critical(tag, fmtstr, ...) \
   sl_log(tag, SL_LOG_CRITICAL, fmtstr, ##__VA_ARGS__)
 
-// TODO: move array to string(hex) to utility function instead
-/** log a byte array as hex string. */
-#define sl_log_byte_arr(tag, lvl, _arr, _arr_len)                             \
-  {                                                                           \
-    char _tmp_log_arr[_arr_len * 2 + 1] = {0};                                \
-    char *_cur_log_arr_idx              = _tmp_log_arr;                       \
-    for (unsigned int _log_arr_count = 0; _log_arr_count < _arr_len;          \
-         _log_arr_count++) {                                                  \
-      _cur_log_arr_idx                                                        \
-        += snprintf(_cur_log_arr_idx,                                         \
-                    sizeof(_tmp_log_arr) - (_cur_log_arr_idx - _tmp_log_arr), \
-                    "%02X",                                                   \
-                    (_arr)[_log_arr_count]);                                  \
-    }                                                                         \
-    sl_log(tag, lvl, "%s\n", _tmp_log_arr);                                   \
-  }
+#endif  // (ZWAVE_BUILD_SYSTEM == 1)
 
 #ifdef __cplusplus
 }

@@ -20,7 +20,6 @@ extern "C" {
 
 #include "zcl_attribute_info_mock.h"
 #include "zigpc_common_zigbee_mock.h"
-#include "zcl_profiles_mock.h"
 #include "zcl_util_mock.h"
 #include "zcl_definitions.h"
 #include "zigpc_gateway_mock.h"

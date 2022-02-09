@@ -1,18 +1,24 @@
 let supportedClusters = [
+    "AoXLocator",
+    "AoXPositionEstimation",
     "Basic",
     "ColorControl",
     "DoorLock",
     "IASZone",
     "Identify",
     "Level",
+    "NameAndLocation",
     "OccupancySensing",
     "OnOff",
+    "Scenes",
     "Thermostat",
-    "PowerConfiguration"
+    "PowerConfiguration",
+    "ProtocolController-RFTelemetry"
 ];
 
 const enums = new Set();
 const bitmaps = new Set();
+const unifyClusters = ["ProtocolController-RFTelemetry", "NameAndLocation", "AoXLocator", "AoXPositionEstimation"];
 
 function initEnums(enumItem) {
     enums.add(enumItem);
@@ -31,11 +37,15 @@ function isBitmap(type) {
 }
 
 function getClusterTypesEnum() {
-    return supportedClusters.map((i) => `${i} = "${i}"`).join(', \n\t');
+    return supportedClusters.filter(i => unifyClusters.indexOf(i) === -1).map((i) => `${i} = "${i}"`).join(', \n\t');
 }
 
 function getSupportedClusters() {
-    return supportedClusters.map((i) => `${i}: "${i}"`).join(', \n\t');
+    return supportedClusters.filter(i => i !== "ProtocolController-RFTelemetry").map((i) => `${i}: "${i}"`).join(', \n\t');
+}
+
+function getClusterName(name) {
+    return name === "ProtocolController-RFTelemetry" ? "RFTelemetry" : name;
 }
 
 function isSupportedCluster(cluster) {
@@ -73,6 +83,7 @@ function castType(arg) {
         case "int32":
         case "int64":
         case "attribId":
+        case "double":
             return "number"
         case "enum8":
         case "enum16":
@@ -85,11 +96,15 @@ function castType(arg) {
             return "bitmap"
         default:
             {
-                if (enums.has(arg)) return "enum"
-                if (bitmaps.has(arg)) return "bitmap"
-                return arg
+                if (enums.has(arg)) return "enum";
+                if (bitmaps.has(arg)) return "bitmap";
+                return "struct";
             }
     }
+}
+
+function isStruct(type) {
+    return castType(type) === "struct";
 }
 
 function asNumber(value) {
@@ -128,3 +143,5 @@ exports.isCurrentType = isCurrentType
 exports.not = not
 exports.isCurrentBitmapEnum = isCurrentBitmapEnum
 exports.getClusterTypesEnum = getClusterTypesEnum
+exports.getClusterName = getClusterName
+exports.isStruct = isStruct

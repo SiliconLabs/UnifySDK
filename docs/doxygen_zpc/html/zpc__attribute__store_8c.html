@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zpc_attribute_store/src/zpc_attribute_store.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zpc_attribute_store/src/zpc_attribute_store.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -92,9 +92,11 @@ $(document).ready(function(){initNavTree('zpc__attribute__store_8c.html',''); in
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="zpc__attribute__store_8h_source.html">zpc_attribute_store.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="attribute__store__defined__attribute__types_8h_source.html">attribute_store_defined_attribute_types.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="zpc__attribute__store__debug_8h_source.html">zpc_attribute_store_debug.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zpc__attribute__store__attr__type__name__helper_8h_source.html">zpc_attribute_store_attr_type_name_helper.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="ucl__definitions_8h_source.html">ucl_definitions.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__network__management_8h_source.html">zwave_network_management.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="attribute__store__helper_8h_source.html">attribute_store_helper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__log_8h_source.html">sl_log.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -104,23 +106,26 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aabb0477455a85ee31737f3d503acd3b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#aabb0477455a85ee31737f3d503acd3b9">is_zpc_unid</a> (const <a class="el" href="group__zpc__utils.html#gae80c42e828f74022c10bf530a612d22e">unid_t</a> unid)</td></tr>
-<tr class="memdesc:aabb0477455a85ee31737f3d503acd3b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if a UNID is the ZPC's UNID.  <a href="zpc__attribute__store_8c.html#aabb0477455a85ee31737f3d503acd3b9">More...</a><br /></td></tr>
-<tr class="separator:aabb0477455a85ee31737f3d503acd3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa77e8f9b18958337bb68279c8c53ccdc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#aa77e8f9b18958337bb68279c8c53ccdc">get_zpc_network_node</a> ()</td></tr>
-<tr class="memdesc:aa77e8f9b18958337bb68279c8c53ccdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the HomeID (attribute store) node of our current network.  <a href="zpc__attribute__store_8c.html#aa77e8f9b18958337bb68279c8c53ccdc">More...</a><br /></td></tr>
-<tr class="separator:aa77e8f9b18958337bb68279c8c53ccdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c4a364eb42142672d0a42f3c09b43b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#a4c4a364eb42142672d0a42f3c09b43b4">get_zpc_node_id_node</a> ()</td></tr>
-<tr class="memdesc:a4c4a364eb42142672d0a42f3c09b43b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the NodeID (attribute store) node of our current network / NodeID.  <a href="zpc__attribute__store_8c.html#a4c4a364eb42142672d0a42f3c09b43b4">More...</a><br /></td></tr>
-<tr class="separator:a4c4a364eb42142672d0a42f3c09b43b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff3429ac79dfe4ddd5452d8c51545d4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#aff3429ac79dfe4ddd5452d8c51545d4c">get_zpc_endpoint_id_node</a> (<a class="el" href="zwave__controller__types_8h.html#a092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
-<tr class="memdesc:aff3429ac79dfe4ddd5452d8c51545d4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Endpoint ID (attribute store) node of our current network / NodeID for a specified Endpoint ID.  <a href="zpc__attribute__store_8c.html#aff3429ac79dfe4ddd5452d8c51545d4c">More...</a><br /></td></tr>
-<tr class="separator:aff3429ac79dfe4ddd5452d8c51545d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebdd95d6a01728cc094e969460ac397b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#aebdd95d6a01728cc094e969460ac397b">invoke_update_callbacks_in_network</a> ()</td></tr>
+<tr class="memitem:a78448575395f9b85aff5200fb1d9ce16"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#a78448575395f9b85aff5200fb1d9ce16">zpc_attribute_store_update_all_network_statuses</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#aabcfbf97deef75c5e5c0445f80b21f1b">home_id_node</a>, node_state_topic_state_t old_value, node_state_topic_state_t new_value)</td></tr>
+<tr class="memdesc:a78448575395f9b85aff5200fb1d9ce16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all NodeIDs network statuses with one value and change them to a new one.  <a href="zpc__attribute__store_8c.html#a78448575395f9b85aff5200fb1d9ce16">More...</a><br /></td></tr>
+<tr class="separator:a78448575395f9b85aff5200fb1d9ce16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaabb0477455a85ee31737f3d503acd3b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__store.html#gaabb0477455a85ee31737f3d503acd3b9">is_zpc_unid</a> (const <a class="el" href="group__zwave__unid.html#gae80c42e828f74022c10bf530a612d22e">unid_t</a> unid)</td></tr>
+<tr class="memdesc:gaabb0477455a85ee31737f3d503acd3b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if a UNID is the ZPC's UNID.  <a href="group__zpc__attribute__store.html#gaabb0477455a85ee31737f3d503acd3b9">More...</a><br /></td></tr>
+<tr class="separator:gaabb0477455a85ee31737f3d503acd3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa77e8f9b18958337bb68279c8c53ccdc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__store.html#gaa77e8f9b18958337bb68279c8c53ccdc">get_zpc_network_node</a> ()</td></tr>
+<tr class="memdesc:gaa77e8f9b18958337bb68279c8c53ccdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the HomeID (attribute store) node of our current network.  <a href="group__zpc__attribute__store.html#gaa77e8f9b18958337bb68279c8c53ccdc">More...</a><br /></td></tr>
+<tr class="separator:gaa77e8f9b18958337bb68279c8c53ccdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c4a364eb42142672d0a42f3c09b43b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__store.html#ga4c4a364eb42142672d0a42f3c09b43b4">get_zpc_node_id_node</a> ()</td></tr>
+<tr class="memdesc:ga4c4a364eb42142672d0a42f3c09b43b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the NodeID (attribute store) node of our current network / NodeID.  <a href="group__zpc__attribute__store.html#ga4c4a364eb42142672d0a42f3c09b43b4">More...</a><br /></td></tr>
+<tr class="separator:ga4c4a364eb42142672d0a42f3c09b43b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga58edca7aa1fe5cbfce65d71ef5656827"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__store.html#ga58edca7aa1fe5cbfce65d71ef5656827">get_zpc_endpoint_id_node</a> (<a class="el" href="group__zwave__controller__types.html#ga092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
+<tr class="memdesc:ga58edca7aa1fe5cbfce65d71ef5656827"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Endpoint ID (attribute store) node of our current network / NodeID for a specified Endpoint ID.  <a href="group__zpc__attribute__store.html#ga58edca7aa1fe5cbfce65d71ef5656827">More...</a><br /></td></tr>
+<tr class="separator:ga58edca7aa1fe5cbfce65d71ef5656827"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebdd95d6a01728cc094e969460ac397b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#aebdd95d6a01728cc094e969460ac397b">invoke_update_callbacks_in_network</a> ()</td></tr>
 <tr class="separator:aebdd95d6a01728cc094e969460ac397b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa75ded831ebe399f56b1841aa5bdff12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zpc__attribute__store_8c.html#aa75ded831ebe399f56b1841aa5bdff12">zpc_attribute_store_init</a> ()</td></tr>
-<tr class="memdesc:aa75ded831ebe399f56b1841aa5bdff12"><td class="mdescLeft">&#160;</td><td class="mdescRight">FIXME: Change uin8_t to zwave_endpoint_id_t.  <a href="zpc__attribute__store_8c.html#aa75ded831ebe399f56b1841aa5bdff12">More...</a><br /></td></tr>
-<tr class="separator:aa75ded831ebe399f56b1841aa5bdff12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1f08b0b6d9756d2620808216f0961a54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__store.html#ga1f08b0b6d9756d2620808216f0961a54">zpc_attribute_store_init</a> ()</td></tr>
+<tr class="memdesc:ga1f08b0b6d9756d2620808216f0961a54"><td class="mdescLeft">&#160;</td><td class="mdescRight">FIXME: Change uin8_t to zwave_endpoint_id_t.  <a href="group__zpc__attribute__store.html#ga1f08b0b6d9756d2620808216f0961a54">More...</a><br /></td></tr>
+<tr class="separator:ga1f08b0b6d9756d2620808216f0961a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a7ce0df38eb467e59f209470c8f5ac4e6"></a>
@@ -138,69 +143,6 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aff3429ac79dfe4ddd5452d8c51545d4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff3429ac79dfe4ddd5452d8c51545d4c">&#9670;&nbsp;</a></span>get_zpc_endpoint_id_node()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> get_zpc_endpoint_id_node </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>endpoint_id</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the Endpoint ID (attribute store) node of our current network / NodeID for a specified Endpoint ID. </p>
-<p>NOTE: This function requires network management to be initialized to work properly. </p><dl class="section return"><dt>Returns</dt><dd>The Endpoint ID attribute store node. ATTRIBUTE_STORE_INVALID_NODE if the attribute store does not have our HomeID, NodeID or Endpoint ID node. </dd></dl>
-
-</div>
-</div>
-<a id="aa77e8f9b18958337bb68279c8c53ccdc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa77e8f9b18958337bb68279c8c53ccdc">&#9670;&nbsp;</a></span>get_zpc_network_node()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> get_zpc_network_node </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the HomeID (attribute store) node of our current network. </p>
-<p>NOTE: This function requires network management to be initialized to work properly. </p><dl class="section return"><dt>Returns</dt><dd>The HomeID attribute store node. ATTRIBUTE_STORE_INVALID_NODE if the attribute store does not have our HomeID node. </dd></dl>
-
-</div>
-</div>
-<a id="a4c4a364eb42142672d0a42f3c09b43b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c4a364eb42142672d0a42f3c09b43b4">&#9670;&nbsp;</a></span>get_zpc_node_id_node()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> get_zpc_node_id_node </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the NodeID (attribute store) node of our current network / NodeID. </p>
-<p>NOTE: This function requires network management to be initialized to work properly. </p><dl class="section return"><dt>Returns</dt><dd>The HomeID attribute store node. ATTRIBUTE_STORE_INVALID_NODE if the attribute store does not have our HomeID node. </dd>
-<dd>
-The NodeID attribute store node. ATTRIBUTE_STORE_INVALID_NODE if the attribute store does not have our HomeID or NodeID node. </dd></dl>
-
-</div>
-</div>
 <a id="aebdd95d6a01728cc094e969460ac397b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aebdd95d6a01728cc094e969460ac397b">&#9670;&nbsp;</a></span>invoke_update_callbacks_in_network()</h2>
 
@@ -211,7 +153,7 @@ The NodeID attribute store node. ATTRIBUTE_STORE_INVALID_NODE if the attribute s
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> invoke_update_callbacks_in_network </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> invoke_update_callbacks_in_network </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -226,56 +168,56 @@ The NodeID attribute store node. ATTRIBUTE_STORE_INVALID_NODE if the attribute s
 
 </div>
 </div>
-<a id="aabb0477455a85ee31737f3d503acd3b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabb0477455a85ee31737f3d503acd3b9">&#9670;&nbsp;</a></span>is_zpc_unid()</h2>
+<a id="a78448575395f9b85aff5200fb1d9ce16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78448575395f9b85aff5200fb1d9ce16">&#9670;&nbsp;</a></span>zpc_attribute_store_update_all_network_statuses()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool is_zpc_unid </td>
+          <td class="memname">static void zpc_attribute_store_update_all_network_statuses </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zpc__utils.html#gae80c42e828f74022c10bf530a612d22e">unid_t</a>&#160;</td>
-          <td class="paramname"><em>unid</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>home_id_node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">node_state_topic_state_t&#160;</td>
+          <td class="paramname"><em>old_value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">node_state_topic_state_t&#160;</td>
+          <td class="paramname"><em>new_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Verify if a UNID is the ZPC's UNID. </p>
-<p>NOTE: This function requires network management to be initialized to work properly.</p>
+<p>Finds all NodeIDs network statuses with one value and change them to a new one. </p>
+<p>Network status nodes will be updated only if they currently have the "old_value" reported value.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">unid</td><td>The UNID to compare with our UNID. </td></tr>
+    <tr><td class="paramname">home_id_node</td><td>The attribute Store node for the HomeID. </td></tr>
+    <tr><td class="paramname">old_value</td><td>Network status previous value </td></tr>
+    <tr><td class="paramname">new_value</td><td>Network status new value </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the unid passed in argument is our unid. false otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="aa75ded831ebe399f56b1841aa5bdff12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa75ded831ebe399f56b1841aa5bdff12">&#9670;&nbsp;</a></span>zpc_attribute_store_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zpc_attribute_store_init </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>FIXME: Change uin8_t to zwave_endpoint_id_t. </p>
-<p>Initialize attribute store specifically for ZPC</p>
-<p>Refreshes all callbacks for HOME_ID children.</p>
-<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if all callbacks was initialized. </dd>
-<dd>
-SL_STATUS_FAIL if invokking any callback fails. </dd></dl>
 
 </div>
 </div>
@@ -285,7 +227,7 @@ SL_STATUS_FAIL if invokking any callback fails. </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_20462f6d7be47578489ee94c8a2b0b2b.html">zpc_attribute_store</a></li><li class="navelem"><a class="el" href="dir_d05a7313d6cef34ba22a32cf13babf65.html">src</a></li><li class="navelem"><a class="el" href="zpc__attribute__store_8c.html">zpc_attribute_store.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:20 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

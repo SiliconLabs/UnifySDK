@@ -17,9 +17,14 @@ static unsigned int {{asCommandCallback this}}_count;
 static sl_status_t {{asCommandCallback this}}_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
-    uic_mqtt_dotdot_callback_call_type_t callback_type{{#zcl_command_arguments}},
-    {{asUnderlyingType type}} {{asSnakeCaseLower label}}{{/zcl_command_arguments}})
-{
+    uic_mqtt_dotdot_callback_call_type_t callback_type{{#zcl_command_arguments}}{{#first}},{{/first}}
+{{#if isArray}}
+    uint8_t {{asSnakeCaseLower label}}_count,
+    {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}} *{{asSnakeCaseLower label}}{{listComma this}}
+{{else}}
+    {{asUnderlyingType type}} {{asSnakeCaseLower label}}{{listComma this}}
+{{/if}}{{/zcl_command_arguments}}
+) {
   {{asCommandCallback this}}_count++;
   num_command_callbacks++;
   return SL_STATUS_OK;

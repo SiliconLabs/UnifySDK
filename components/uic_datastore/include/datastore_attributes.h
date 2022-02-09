@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -13,7 +13,7 @@
 
 /**
  * @defgroup datastore_attributes Attributes storage.
- * @ingroup datastore
+ * @ingroup unify_datastore
  * @brief Datastore API for Attributes (from the @ref attribute_store)
  *
  * Persistent datastore, that allows for storing our @ref attribute_store.

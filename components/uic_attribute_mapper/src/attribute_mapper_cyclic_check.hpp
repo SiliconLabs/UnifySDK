@@ -12,7 +12,8 @@
  *****************************************************************************/
 
 /**
- * @file attribute_mapper_cyclic_check.hpp
+ * @defgroup attribute_mapper_cyclic_check Mapper cyclic dependency checker
+ * @ingroup unify_attribute_mapper
  * @brief Component cyclic dependency checker
  *
  * @{
@@ -29,9 +30,9 @@ namespace ast
 {
 /**
  * @brief Check if a list of relations contain cyclic dependencies.
- * 
+ *
  * @param relations reference to relation table
- * @param ast 
+ * @param ast
  *
  * @return true cyclic dependencies are detected
  * @return false cyclic dependencies are not detected.

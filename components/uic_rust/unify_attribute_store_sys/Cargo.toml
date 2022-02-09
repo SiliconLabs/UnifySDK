@@ -1,0 +1,24 @@
+[package]
+name = "unify_attribute_store_sys"
+version = "0.0.1"
+authors = ["root"]
+edition = "2021"
+license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor of this software is Silicon Laboratories Inc. Your use of this\nsoftware is governed by the terms of Silicon Labs Master Software License\nAgreement (MSLA) available at\nwww.silabs.com/about-us/legal/master-software-license-agreement. This\nsoftware is distributed to you in Source Code format and is governed by the\nsections of the MSLA applicable to Source Code."
+description = "uic attribute_store rust wrapper"
+
+[lib]
+path = "src/uic_attribute_store_lib.rs"
+
+[dev-dependencies]
+serial_test = "0.5.*"
+
+[dependencies]
+unify_tools = { path = "../unify_tools" }
+unify_proc_macro = { path = "../unify_proc_macro" }
+unify_log_sys = { path = "../unify_log_sys" }
+unify_sl_status_sys = { path = "../unify_sl_status_sys" }
+
+bincode = "*"
+serde = { version="*", features = ["derive"] }
+once_cell= "1.9.*"
+multimap = "0.8.*"

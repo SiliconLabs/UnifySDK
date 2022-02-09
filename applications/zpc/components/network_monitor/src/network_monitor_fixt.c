@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -13,11 +13,15 @@
 #include "network_monitor_fixt.h"
 #include "network_monitor.h"
 #include "smart_start_list_monitor.h"
+#include "failing_node_monitor.h"
+#include "zwave_poll_manager.h"
 
 sl_status_t network_monitor_setup_fixt(void)
 {
   network_state_monitor_init();
   process_start(&network_monitor_process, NULL);
   smart_start_list_monitor_init();
+  failing_node_monitor_list_load();
+  zwave_poll_manager_init();
   return SL_STATUS_OK;
 }

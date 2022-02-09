@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,8 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file zwave_smartstart_management_fixt.h
- * @brief Fixtures for zwave_smartstart_management
+ * @defgroup zwave_smartstart_management_fixt Z-Wave SmartStart Management Fixture
+ * @ingroup zwave_smartstart_management
+ * @brief Fixtures for Z-Wave SmarStart Management
  *
  * @{
  */
@@ -25,17 +26,18 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
 /**
  * @brief Initialize the Z-Wave SmartStart Management Module.
  *
- * Calls zwave_controller_register_callbacks() to set following callbacks 
+ * Calls zwave_controller_register_callbacks() to set following callbacks
  *  .on_node_deleted
  *  .on_node_added
  *  .on_smart_start_inclusion_request
- * and then starts the smartstart_management_process Contiki process and 
+ * and then starts the smartstart_management_process Contiki process and
  * notifies to the process that there are some SmartStart entries awaiting
  * inclusion.
- * @returns SL_STATUS_OK
+ * @returns SL_STATUS_OK on success, other codes in case of error
  */
 
 sl_status_t zwave_smartstart_management_setup_fixt(void);

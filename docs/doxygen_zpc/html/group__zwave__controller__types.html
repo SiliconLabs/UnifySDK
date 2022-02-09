@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Z-Wave Controller types</title>
+<title>Z-Wave Protocol Controller Refrence: Z-Wave Controller Types</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -83,16 +83,211 @@ $(document).ready(function(){initNavTree('group__zwave__controller__types.html',
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#groups">Modules</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">Z-Wave Controller types</div>  </div>
+<div class="title">Z-Wave Controller Types<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__controller__component.html">Z-Wave Controller Component</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Z-Wave Controller shared type definitions.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__zwave__controller__connection__info"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__connection__info.html">Z-Wave Controller Connection Info type</a></td></tr>
+<tr class="memdesc:group__zwave__controller__connection__info"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave Controller Connection Info type definition. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__node__info__t.html">zwave_node_info_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure holding a Z-Wave node info frame.  <a href="structzwave__node__info__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gae0f25d7f5c4688bb3d6454c348572a84"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#gae0f25d7f5c4688bb3d6454c348572a84">ZWAVE_DSK_LENGTH</a>&#160;&#160;&#160;16</td></tr>
+<tr class="memdesc:gae0f25d7f5c4688bb3d6454c348572a84"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO: move this.  <a href="group__zwave__controller__types.html#gae0f25d7f5c4688bb3d6454c348572a84">More...</a><br /></td></tr>
+<tr class="separator:gae0f25d7f5c4688bb3d6454c348572a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga58d7c7198608279a9f7c526a21c1ecbc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#ga58d7c7198608279a9f7c526a21c1ecbc">ZWAVE_NODE_MASK_LENGTH</a>&#160;&#160;&#160;29</td></tr>
+<tr class="separator:ga58d7c7198608279a9f7c526a21c1ecbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7d3231e6630f389d0a0feac81a16dd38"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#ga7d3231e6630f389d0a0feac81a16dd38">ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH</a>&#160;&#160;&#160;150</td></tr>
+<tr class="separator:ga7d3231e6630f389d0a0feac81a16dd38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga437b381aa677af21a3c25f4587bda65b"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#ga437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a>[<a class="el" href="group__zwave__controller__types.html#gae0f25d7f5c4688bb3d6454c348572a84">ZWAVE_DSK_LENGTH</a>]</td></tr>
+<tr class="separator:ga437b381aa677af21a3c25f4587bda65b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0da7d0c2a6bcbb0b614c9d624d505d3e"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#ga0da7d0c2a6bcbb0b614c9d624d505d3e">zwave_node_list_t</a></td></tr>
+<tr class="separator:ga0da7d0c2a6bcbb0b614c9d624d505d3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga41bca753476be7f6dbd63ff627381083"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a></td></tr>
+<tr class="separator:ga41bca753476be7f6dbd63ff627381083"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabdce6a30dd05643fe69bca63c10e067d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__zwave__rf__region.html#ga95b50c6130340b3acb22cc85b1c2600a">zwave_rf_region_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#gabdce6a30dd05643fe69bca63c10e067d">zwave_controller_region_t</a></td></tr>
+<tr class="separator:gabdce6a30dd05643fe69bca63c10e067d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga092c5878990b4dcf6037d4375ca63564"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#ga092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a></td></tr>
+<tr class="separator:ga092c5878990b4dcf6037d4375ca63564"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa509d092fd5a99593f1868cab633a5b6"><td class="memItemLeft" align="right" valign="top">typedef uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#gaa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a></td></tr>
+<tr class="separator:gaa509d092fd5a99593f1868cab633a5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaab58cd227d9d65e56978c2f9b2067d9a"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__types.html#gaab58cd227d9d65e56978c2f9b2067d9a">zwave_command_t</a></td></tr>
+<tr class="separator:gaab58cd227d9d65e56978c2f9b2067d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Z-Wave Controller shared type definitions. </p>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ga7d3231e6630f389d0a0feac81a16dd38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7d3231e6630f389d0a0feac81a16dd38">&#9670;&nbsp;</a></span>ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH&#160;&#160;&#160;150</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gae0f25d7f5c4688bb3d6454c348572a84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae0f25d7f5c4688bb3d6454c348572a84">&#9670;&nbsp;</a></span>ZWAVE_DSK_LENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZWAVE_DSK_LENGTH&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>TODO: move this. </p>
+<p>This is a temporary resting place for special z-wave types. These should be documents and some types may need a specific api. </p>
+
+</div>
+</div>
+<a id="ga58d7c7198608279a9f7c526a21c1ecbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga58d7c7198608279a9f7c526a21c1ecbc">&#9670;&nbsp;</a></span>ZWAVE_NODE_MASK_LENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZWAVE_NODE_MASK_LENGTH&#160;&#160;&#160;29</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="gaa509d092fd5a99593f1868cab633a5b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa509d092fd5a99593f1868cab633a5b6">&#9670;&nbsp;</a></span>zwave_command_class_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint16_t <a class="el" href="group__zwave__controller__types.html#gaa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gaab58cd227d9d65e56978c2f9b2067d9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaab58cd227d9d65e56978c2f9b2067d9a">&#9670;&nbsp;</a></span>zwave_command_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint8_t <a class="el" href="group__zwave__controller__types.html#gaab58cd227d9d65e56978c2f9b2067d9a">zwave_command_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="gabdce6a30dd05643fe69bca63c10e067d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabdce6a30dd05643fe69bca63c10e067d">&#9670;&nbsp;</a></span>zwave_controller_region_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="group__zwave__rf__region.html#ga95b50c6130340b3acb22cc85b1c2600a">zwave_rf_region_t</a> <a class="el" href="group__zwave__rf__region.html#ga95b50c6130340b3acb22cc85b1c2600a">zwave_controller_region_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga437b381aa677af21a3c25f4587bda65b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga437b381aa677af21a3c25f4587bda65b">&#9670;&nbsp;</a></span>zwave_dsk_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint8_t zwave_dsk_t[<a class="el" href="group__zwave__controller__types.html#gae0f25d7f5c4688bb3d6454c348572a84">ZWAVE_DSK_LENGTH</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga092c5878990b4dcf6037d4375ca63564"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga092c5878990b4dcf6037d4375ca63564">&#9670;&nbsp;</a></span>zwave_endpoint_id_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint8_t <a class="el" href="group__zwave__controller__types.html#ga092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga41bca753476be7f6dbd63ff627381083"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga41bca753476be7f6dbd63ff627381083">&#9670;&nbsp;</a></span>zwave_multicast_group_id_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint8_t <a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ga0da7d0c2a6bcbb0b614c9d624d505d3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0da7d0c2a6bcbb0b614c9d624d505d3e">&#9670;&nbsp;</a></span>zwave_node_list_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> <a class="el" href="group__zwave__controller__types.html#ga0da7d0c2a6bcbb0b614c9d624d505d3e">zwave_node_list_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:33 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

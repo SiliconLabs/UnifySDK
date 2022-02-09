@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -36,7 +36,7 @@ extern uic_fixt_shutdown_step_t *uic_fixt_shutdown_steps;
  *
  * \return false if any of the set-up steps return false.
  */
-bool uic_fixt_setup_loop(const uic_fixt_setup_step_t *fixt_app_setup);
+sl_status_t uic_fixt_setup_loop(const uic_fixt_setup_step_t *fixt_app_setup);
 
 /** Loop over the tear-down steps.
  *

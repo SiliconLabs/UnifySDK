@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -14,13 +14,8 @@
 /**
  * @defgroup on_off_cluster_mapper OnOff cluster mapper
  * @ingroup dotdot_mapper
- * @brief Maps the OnOff cluster to known command classes 
+ * @brief Maps OnOff Cluster incoming Commands to attribute modifications.
  *
- * This module is used to parse attributes regarding OnOff cluster commands 
- * coming from dotdot serializer, and perform attribute write to the attribute store.
- * The module is also expected to register a callback regarding OnOff attrbite update
- * and pass the report to dotdot serializer.
- * 
  * @{
  */
 
@@ -35,16 +30,16 @@ extern "C" {
 
 /**
  * @brief Intitialise the OnOff cluster mapper
- * 
+ *
  * @returns true on success
  * @returns false on failure
- * 
+ *
  */
 bool on_off_cluster_mapper_init(void);
 
 /**
  * @brief Clears the OnOff cluster mapper from all its content.
- * 
+ *
  */
 int on_off_cluster_mapper_teardown(void);
 

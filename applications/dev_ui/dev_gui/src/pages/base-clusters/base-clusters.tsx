@@ -3,18 +3,28 @@ import React from 'react';
 import { Button, Col, OverlayTrigger, Popover, Row, Spinner, Table } from 'react-bootstrap';
 import * as AiIcons from 'react-icons/ai';
 import * as RiIcons from 'react-icons/ri';
-import { BaseClustersProps, BaseClustersState } from './base-cluster-types';
+import * as MdIcons from 'react-icons/md'
+import { BaseClustersProps, BaseClustersState, ColorPickerProps } from './base-cluster-types';
 import CommandDlg from '../../components/command-dlg/command-dlg';
 import ClusterAttr from '../../components/cluster-attributes/cluster-attributes';
 import ScenesDlg from '../../components/scenes-dlg/scenes-dlg';
 import EditGroupDlg from '../../components/edit-group-dlg/edit-group-dlg';
 import { Group } from '../groups/groups-types';
+import EditableAttribute from '../../components/editable-attribute/editable-attribute';
+import { ChromePicker } from 'react-color';
+
 
 export class BaseClusters extends React.Component<BaseClustersProps, BaseClustersState> {
   constructor(props: BaseClustersProps) {
     super(props);
     this.state = {
-      ClusterList: this.getClusterList(this.props.NodeList) || []
+      ClusterList: this.getClusterList(this.props.NodeList) || [],
+      ColorPicker: {
+        ShowColorPicker: false,
+        ColorPickerValue: { hex: '#fff' },
+        ColorPickerPosition: { top: 250, left: 250 },
+        ProcessedItem: {}
+      } as ColorPickerProps
     };
 
     this.changeEditGroupDlg = React.createRef();
@@ -40,6 +50,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
             cluster.Unid = i.Unid;
             cluster.NetworkStatus = i.NetworkStatus;
             cluster.Ep = item;
+            cluster.NameAndLocation = i.ep[item].Clusters.NameAndLocation;
             clusters.push(cluster);
           }
         })
@@ -118,6 +129,74 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
     return updatingProperties;
   }
 
+  handleColorPickerClose = () => {
+    let picker = this.state.ColorPicker;
+    picker.ShowColorPicker = false
+    this.setState({ ColorPicker: picker });
+  }
+
+  handleColorChangeComplete = (color: any) => {
+    if (!this.state.ColorPicker?.ProcessedItem) return;
+    if (color.hsl.h !== this.state.ColorPicker.ColorPickerValue.hsl?.h || color.hsl.s !== this.state.ColorPicker.ColorPickerValue.hsl?.s) {
+      this.props.SocketServer.send(JSON.stringify(
+        {
+          type: "run-cluster-command",
+          data: {
+            Unid: this.state.ColorPicker.ProcessedItem.Unid,
+            ClusterType: this.props.ClusterType,
+            Cmd: "MoveToHueAndSaturation",
+            Payload: {
+              Hue: Math.round(color.hsl.h),
+              Saturation: Math.round(color.hsl.s * 100),
+              TransitionTime: 0,
+              OptionsMask: { ExecuteIfOff: false },
+              OptionsOverride: { ExecuteIfOff: false }
+            }
+          }
+        }));
+    }
+    if (color.hsl.l !== this.state.ColorPicker.ColorPickerValue.hsl?.l) {
+      this.props.SocketServer.send(JSON.stringify(
+        {
+          type: "run-cluster-command",
+          data: {
+            Unid: this.state.ColorPicker.ProcessedItem.Unid,
+            ClusterType: "Level",
+            Cmd: "MoveToLevel",
+            Payload: {
+              Level: Math.round(color.hsl.l * 100),
+              TransitionTime: 0,
+              OptionsMask: {
+                ExecuteIfOff: false,
+                CoupleColorTempToLevel: false
+              },
+              OptionsOverride: {
+                ExecuteIfOff: false,
+                CoupleColorTempToLevel: false
+              }
+            }
+          }
+        }));
+    }
+    let picker = this.state.ColorPicker;
+    picker.ColorPickerValue = color;
+    this.setState({ ColorPicker: picker });
+  };
+
+  getColorPicker = (item: any) => {
+    return <Tooltip title="Set Hue, Saturation and Level">
+      <span className="pointer">
+        <MdIcons.MdInvertColors color="#007bff" onClick={(event: any) => {
+          let picker = this.state.ColorPicker;
+          picker.ShowColorPicker = !this.state.ColorPicker.ShowColorPicker;
+          picker.ColorPickerPosition = { top: event.clientY, left: event.clientX };
+          picker.ProcessedItem = item;
+          this.setState({ ColorPicker: picker })
+        }} />
+      </span>
+    </Tooltip>
+  }
+
   render() {
     let attrNames: string[] = this.props.ClusterViewOverrides?.ViewTable?.map(i => i.Name) || [];
     if (!attrNames.length && this.state.ClusterList && this.state.ClusterList.length) {
@@ -132,6 +211,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
       });
     }
     let sceneAttrs = this.props.ClusterTypeAttrs.server.attributes.filter((i: any) => i.sceneRequired === true);
+
     return (
       <>
         <h3>{this.props.ClusterViewOverrides?.NavbarItem?.title || this.props.ClusterType}</h3>
@@ -149,7 +229,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
           : <Table striped hover>
             <thead>
               <tr>
-                <th>Unid</th>
+                <th>Name</th>
                 {attrNames.map((item, index) => {
                   return <th key={index}>{item}</th>
                 })}
@@ -173,10 +253,10 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
                   <tr className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable") ? "disabled" : ""}>
                     <td>
                       <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
-                      {item.Unid}/{item.Ep}
+                      <EditableAttribute Unid={`${item.Unid}/${item.Ep}`} Cluster={item.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} />
                     </td>
                     {this.props.ClusterViewOverrides?.ViewTable?.map((column, colIndex) => {
-                      return <td key={colIndex}>{column.Value(item)}</td>
+                      return <td key={colIndex}>{column.Value(item, this.getColorPicker)}</td>
                     })
                       || attrNames.map((column, colIndex) => {
                         return <td key={colIndex}>{item.Attributes && item.Attributes[column] && item.Attributes[column].Reported !== null && item.Attributes[column].Reported !== undefined ? JSON.stringify(item.Attributes[column].Reported) : "-"}</td>
@@ -210,6 +290,14 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
             </tbody>
           </Table>
         }
+
+        <div className="color-picker-container" hidden={!this.state.ColorPicker.ShowColorPicker} style={{
+          top: this.state.ColorPicker.ColorPickerPosition.top - 96,
+          left: this.state.ColorPicker.ColorPickerPosition.left - 34
+        }}>
+          <div className='cover' onClick={this.handleColorPickerClose} />
+          <ChromePicker disableAlpha={true} color={this.state.ColorPicker.ColorPickerValue.hex} onChangeComplete={this.handleColorChangeComplete} />
+        </div>
 
         <EditGroupDlg ref={this.changeEditGroupDlg}
           SocketServer={this.props.SocketServer}

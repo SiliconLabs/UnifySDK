@@ -112,17 +112,11 @@ PROCESS_THREAD(zigpc_net_mgmt_process, ev, data)
                                     &process_data->fsm_data);
     }
 
-    switch (ev) {
-      case ZIGPC_NET_MGMT_EVENT_FSM:
-        // NOTE: dynamically allocated
-        // allocated in zigpc_net_mgmt_process_send_event()
-        if (data != NULL) {
-          free(data);
-          data = NULL;
-        }
-        break;
-      default:
-        break;
+    if ((ev < PROCESS_EVENT_NONE) && (data != NULL)) {
+      // NOTE: dynamically allocated
+      // allocated in zigpc_net_mgmt_process_send_event()
+      free(data);
+      data = NULL;
     }
     PROCESS_WAIT_EVENT();
   }

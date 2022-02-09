@@ -19,3 +19,34 @@ target_add_unittest(
   zigpc_zcl_util_mock
   zigpc_group_mgmt_mock
   zigpc_gateway_mock)
+
+target_add_unittest(
+  zigpc_command_mapper
+  NAME
+  zigpc_command_gen_cmd_publish_test
+  SOURCES
+  zigpc_command_gen_cmd_publish_test.cpp
+  DEPENDS
+  zigpc_zcl_command_parser_mock
+  uic_dotdot_mqtt_mock)
+
+target_add_unittest(
+  zigpc_command_mapper
+  NAME
+  zigpc_cmdmapper_gen_unid_handlers_test
+  SOURCES
+  zigpc_cmdmapper_gen_unid_handlers_test.cpp
+  DEPENDS
+  zigpc_zcl_util_mock
+  zigpc_gateway_mock)
+
+target_add_unittest(
+  zigpc_command_mapper
+  NAME
+  zigpc_cmdmapper_gen_bygroup_handlers_test
+  SOURCES
+  zigpc_cmdmapper_gen_bygroup_handlers_test.cpp
+  DEPENDS
+  zigpc_zcl_util_mock
+  zigpc_group_mgmt_mock
+  zigpc_gateway_mock)

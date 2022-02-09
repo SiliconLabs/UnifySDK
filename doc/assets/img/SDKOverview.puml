@@ -1,0 +1,50 @@
+@startuml SDKOverview
+
+skinparam roundCorner 15
+
+top to bottom direction
+
+cloud "IoT Services" as IOTService {
+    rectangle "Developer GUI"
+    rectangle "UPTICap"
+}
+
+rectangle "IoT Gateway" {
+
+    package "Unify SDK services" as services {
+        rectangle "NAL" as NAL
+        rectangle "UPVL" as UPVL
+        rectangle "Image provider" as IMP
+        rectangle "GMS" as GMS
+        rectangle "AoX Positioning" as positioning
+    }
+
+    rectangle "MQTT Broker" as Broker {
+        rectangle "Unify Controller Language (UCL)" as ABLayer
+    }
+
+    ABLayer <-> services
+
+    GMS -[hidden]r-> IMP
+    IMP -[hidden]r-> NAL
+    NAL -[hidden]d-> GMS
+    UPVL -[hidden]d-> positioning
+
+    package "Unify SDK protocol controllers" as PCS {
+        rectangle "Z-Wave - ZPC" as ZPC
+        rectangle "Zigbee - ZigPC" as ZIGPC
+        rectangle "Angle of X - AoXPC" as AOX
+    }
+}
+
+ZPC -[hidden]r-> ZIGPC
+ZIGPC -[hidden]r-> AOX
+
+' Relation between Protocol controllers and MQTT abstration layer
+ABLayer <-d-> PCS
+
+' IoT Services relation to the rest
+IOTService <-d-> ABLayer
+
+
+@enduml

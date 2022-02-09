@@ -13,4 +13,5 @@ DEPENDS
   zwave_tx_mock
   zwave_unid_mock
   zwave_tx_groups_mock
+  zwave_s2_mock
 )

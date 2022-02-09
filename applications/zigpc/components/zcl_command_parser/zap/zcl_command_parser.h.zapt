@@ -89,7 +89,8 @@ extern "C" {
 typedef struct {
 {{#zcl_command_arguments}}
 {{#if (supportedStruct type)}}
-  {{asZigPCZclStructType type}} {{#if isArray}}*{{/if}}{{asSnakeCaseLower label}};
+  {{#if isArray}}uint8_t {{asSnakeCaseLower label}}_count; /**< Count of elements for list of {{type}} */{{/if}}
+  {{asZigPCZclStructType type}} {{#if isArray}}*{{/if}}{{asSnakeCaseLower label}}; /**< {{caption}} */
 {{else if isArray}}
   uint8_t {{asSnakeCaseLower label}}_count; /**< Count of elements for list of {{type}} */
   {{asUnderlyingType (zcl_type_map_get_item type)}} *{{asSnakeCaseLower label}}; /**< {{caption}} */

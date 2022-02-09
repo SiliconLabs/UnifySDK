@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -58,8 +58,10 @@
  *
  *  \ingroup uic_fixt
  *
- * The function should returns SL_STATUS_FAIL if the Unify GW cannot start,
- * SL_STATUS_OK otherwise.
+ * The function should returns SL_STATUS_FAIL if the Unify GW cannot start
+ * due to an error. If the component whish to abort the boot sequence
+ * but not due to an error SL_STATUS_ABORT should be returned. If boot
+ * should proceed normally SL_STATUS_OK should be returned
  */
 typedef sl_status_t (*uic_fixt_setup_t)(void);
 

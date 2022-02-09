@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_api/platform/posix/zwapi_serial.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave_api/platform/posix/zwapi_serial.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -126,10 +126,10 @@ Functions</h2></td></tr>
 <tr class="separator:a07b09de97f4932d882fc77e191c44638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0accbbf7ddb7aeab10f5df1fe3df6642"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwapi__serial_8c.html#a0accbbf7ddb7aeab10f5df1fe3df6642">zwapi_serial_log_timestamp</a> (const struct timeval *cur_time)</td></tr>
 <tr class="separator:a0accbbf7ddb7aeab10f5df1fe3df6642"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga19ca53cd3504cee1b52370e44a8cb887"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga19ca53cd3504cee1b52370e44a8cb887">zwapi_log_to_file_enable</a> (const char *filename)</td></tr>
+<tr class="memitem:ga19ca53cd3504cee1b52370e44a8cb887"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga19ca53cd3504cee1b52370e44a8cb887">zwapi_log_to_file_enable</a> (const char *filename)</td></tr>
 <tr class="memdesc:ga19ca53cd3504cee1b52370e44a8cb887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable logging of serial data to a file.  <a href="group__ZWAPI__INIT.html#ga19ca53cd3504cee1b52370e44a8cb887">More...</a><br /></td></tr>
 <tr class="separator:ga19ca53cd3504cee1b52370e44a8cb887"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga256d0ca55a0e5388cf665a3630d28fe0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga256d0ca55a0e5388cf665a3630d28fe0">zwapi_log_to_file_disable</a> ()</td></tr>
+<tr class="memitem:ga256d0ca55a0e5388cf665a3630d28fe0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga256d0ca55a0e5388cf665a3630d28fe0">zwapi_log_to_file_disable</a> ()</td></tr>
 <tr class="memdesc:ga256d0ca55a0e5388cf665a3630d28fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable/stop logging serial data to file.  <a href="group__ZWAPI__INIT.html#ga256d0ca55a0e5388cf665a3630d28fe0">More...</a><br /></td></tr>
 <tr class="separator:ga256d0ca55a0e5388cf665a3630d28fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae586785021ac9a605cd77651429f0c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwapi__serial_8c.html#aae586785021ac9a605cd77651429f0c9">zwapi_serial_close</a> (void)</td></tr>
@@ -244,7 +244,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>De-Initialize the serial port. </p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000107">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialClose </dd></dl>
+<p>@zgw_name SerialClose </p>
 
 </div>
 </div>
@@ -266,7 +266,7 @@ Variables</h2></td></tr>
 
 <p>Flush the serial output if using buffered output. </p>
 <p>This function calls tcdrain, which waits that the TTY buffer data has been written to the hardware.</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000114">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialFlush </dd></dl>
+<p>@zgw_name SerialFlush </p>
 
 </div>
 </div>
@@ -305,7 +305,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The length of the data copied in the buffer.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000111">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialGetBuffer </dd></dl>
+<p>@zgw_name SerialGetBuffer </p>
 
 </div>
 </div>
@@ -333,7 +333,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 if no characters are available, otherwise this returns 1 (length of the read data)</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000109">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialGetByte </dd></dl>
+<p>@zgw_name SerialGetByte </p>
 
 </div>
 </div>
@@ -355,7 +355,7 @@ Variables</h2></td></tr>
 
 <p>Initialize the serial port to 115200 BAUD 8N1. </p>
 <dl class="section return"><dt>Returns</dt><dd>the file descriptor for the serial device.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000106">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialInit </dd></dl>
+<p>@zgw_name SerialInit </p>
 
 </div>
 </div>
@@ -377,7 +377,7 @@ Variables</h2></td></tr>
 
 <p>Check the file descriptor for the serial device is available for I/O operations. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if the file is available, false if not or if an error occurred.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000113">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialCheck </dd></dl>
+<p>@zgw_name SerialCheck </p>
 
 </div>
 </div>
@@ -441,7 +441,7 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000112">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialPutBuffer </dd></dl>
+<p>@zgw_name SerialPutBuffer </p>
 
 </div>
 </div>
@@ -462,7 +462,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Write a byte to serial port device. </p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000110">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialPutByte </dd></dl>
+<p>@zgw_name SerialPutByte </p>
 
 </div>
 </div>
@@ -484,7 +484,7 @@ Variables</h2></td></tr>
 
 <p>Closes and re-initialize the last open serial port. </p>
 <dl class="section return"><dt>Returns</dt><dd>the file descriptor for the serial device.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000108">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialRestart </dd></dl>
+<p>@zgw_name SerialRestart </p>
 
 </div>
 </div>
@@ -644,7 +644,7 @@ false if a is greater or equal to b + ms </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_9376f99cbc649c5813b13d9244dc2fa3.html">zwave_api</a></li><li class="navelem"><a class="el" href="dir_f36dd6b9fac7edd4bbb7482a40f5ea50.html">platform</a></li><li class="navelem"><a class="el" href="dir_0637d7db4a955448d2cc2fada0e91dac.html">posix</a></li><li class="navelem"><a class="el" href="zwapi__serial_8c.html">zwapi_serial.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:25 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -1,0 +1,9 @@
+target_add_unittest(
+  zigpc_uic_datastore_fixt
+  NAME
+  zigpc_uic_datastore_fixt_test
+  SOURCES
+  zigpc_uic_datastore_fixt_test.c
+  DEPENDS
+  zigpc_config_mock
+  uic_datastore_mock)

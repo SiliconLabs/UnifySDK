@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -17,7 +17,6 @@
 // Includes from other components
 #include "sl_status.h"
 #include "sl_log.h"
-#include "config.h"
 #include "datastore_fixt.h"
 
 // Test includes
@@ -28,11 +27,15 @@ static int update_callback_1_counter          = 0;
 static int update_callback_1_creation_counter = 0;
 static int update_callback_1_update_counter   = 0;
 static int update_callback_1_deletion_counter = 0;
+static int update_callback_delete_node_counter = 0;
+static int touch_callback_counter              = 0;
 static attribute_store_node_t received_callback_1_node
   = ATTRIBUTE_STORE_INVALID_NODE;
 
 static int update_callback_2_counter = 0;
 static attribute_store_node_t received_callback_2_node
+  = ATTRIBUTE_STORE_INVALID_NODE;
+static attribute_store_node_t received_touched_node
   = ATTRIBUTE_STORE_INVALID_NODE;
 
 static int update_callback_read_deleted_value_counter = 0;
@@ -42,6 +45,19 @@ static int update_callback_add_child_value_counter    = 0;
 #define ATTRIBUTE_NODE_ID                            102
 #define ATTRIBUTE_ENDPOINT_ID                        103
 #define ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID 104
+
+void update_callback_1_event(attribute_changed_event_t * event)
+{
+  received_callback_1_node = event->updated_node;
+  update_callback_1_counter++;
+  if (event->change == ATTRIBUTE_CREATED) {
+    update_callback_1_creation_counter++;
+  } else if (event->change == ATTRIBUTE_UPDATED) {
+    update_callback_1_update_counter++;
+  } else if (event->change == ATTRIBUTE_DELETED) {
+    update_callback_1_deletion_counter++;
+  }
+}
 
 void update_callback_1(attribute_store_node_t test,
                        attribute_store_change_t change)
@@ -62,6 +78,12 @@ void update_callback_2(attribute_store_node_t test,
 {
   received_callback_2_node = test;
   update_callback_2_counter++;
+}
+
+void touch_callback(attribute_store_node_t touched_node)
+{
+  received_touched_node = touched_node;
+  touch_callback_counter++;
 }
 
 void update_callback_read_deleted_value(attribute_store_node_t node,
@@ -113,6 +135,15 @@ void update_callback_add_child(attribute_store_node_t node,
   }
 }
 
+void update_callback_delete_node(attribute_store_node_t node,
+                                 attribute_store_change_t change)
+{
+  // I am an evil callback that deletes stuffs in the attribute store
+  // Also if the node is already under deletion
+  attribute_store_delete_node(node);
+  update_callback_delete_node_counter++;
+}
+
 static void set_counters_to_zero()
 {
   update_callback_1_counter                  = 0;
@@ -122,25 +153,24 @@ static void set_counters_to_zero()
   update_callback_1_creation_counter         = 0;
   update_callback_1_update_counter           = 0;
   update_callback_1_deletion_counter         = 0;
+  update_callback_delete_node_counter        = 0;
   update_callback_read_deleted_value_counter = 0;
   update_callback_add_child_value_counter    = 0;
+  touch_callback_counter                     = 0;
 }
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
-  char *argv_inject[3]
-    = {"attribute_store_test", "--datastore.file", "attribute_store.db"};
-  config_parse(sizeof(argv_inject) / sizeof(char *), argv_inject, "");
-  datastore_fixt_setup();
-  attribute_store_init();
-  set_counters_to_zero();
+  datastore_fixt_setup("attribute_store.db");
 }
 
 // Before every test, ensure to clean up the datastore file, else it will grow for ever
 void setUp()
 {
   // This trigger a deletion of everything before each test
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_init());
+  set_counters_to_zero();
   attribute_store_delete_node(attribute_store_get_root());
 }
 
@@ -660,11 +690,11 @@ void test_attribute_store()
   // Test the register_callback() functionality
   ///////////////////////////////////////////////////
   attribute_store_teardown();  // that's the only way to unregister callbacks
-  attribute_store_init();
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_init());
 
   // Register callback 1 for all updates:
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
-                    attribute_store_register_callback(update_callback_1));
+                    attribute_store_register_callback(update_callback_1_event));
 
   // Modify a value, any value
   test_values[0] = 0x54;
@@ -803,7 +833,7 @@ void test_attribute_store_persistence()
   attribute_store_teardown();
 
   // Call init again, it will load up from the datastore
-  attribute_store_init();
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_init());
 
   // Now our attribute store has been restored.
   // If we traverse the tree we should find IDs and values identical
@@ -929,7 +959,6 @@ void test_attribute_store_set_node_value()
 
   attribute_store_node_t home_id;
   home_id = attribute_store_add_node(ATTRIBUTE_HOME_ID, root_node);
-
   TEST_ASSERT_EQUAL(
     SL_STATUS_FAIL,
     attribute_store_set_node_attribute_value(home_id,
@@ -1084,9 +1113,6 @@ void test_uninitialized_attribute_store()
                                                             0,
                                                             0));
   TEST_ASSERT_EQUAL(false, attribute_store_node_exists(test_node));
-
-  // Initialize the attribute store again, for the other tests.
-  attribute_store_init();
 }
 
 void test_attribute_store_delete_nodes_and_read_their_value()
@@ -1152,4 +1178,88 @@ void test_attribute_store_register_nullptr_callbacks()
                                            REPORTED_ATTRIBUTE,
                                            &test_value,
                                            sizeof(test_value));
+}
+
+void test_attribute_store_double_delete()
+{
+  attribute_store_delete_node(attribute_store_get_root());
+  attribute_store_node_t node_1
+    = attribute_store_add_node(1, attribute_store_get_root());
+  attribute_store_node_t node_2 = attribute_store_add_node(2, node_1);
+  attribute_store_add_node(3, node_1);
+  attribute_store_add_node(4, node_2);
+
+  // Register callbacks.
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_callback_by_type(&update_callback_delete_node, 2));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_register_callback(&update_callback_1_event));
+
+  // Trigger a full refresh, node 2 gets clipped as part of the callback.
+  attribute_store_refresh_node_and_children_callbacks(node_1);
+
+  // Node 1,2 triggered a callback. 3 does not get detected due to tree change.
+  TEST_ASSERT_EQUAL(2, update_callback_1_update_counter);
+  // Node 2 update + delete triggered callbacks to the update_callback_delete_node
+  TEST_ASSERT_EQUAL(2, update_callback_delete_node_counter);
+  // Node 2 deletion made 2 callbacks, deletion of node 2 and node 4.
+  TEST_ASSERT_EQUAL(2, update_callback_1_deletion_counter);
+}
+
+void test_attribute_store_touch_generic_callbacks()
+{
+  attribute_store_delete_node(attribute_store_get_root());
+  attribute_store_node_t node_1
+    = attribute_store_add_node(1, attribute_store_get_root());
+  attribute_store_node_t node_2 = attribute_store_add_node(2, node_1);
+  attribute_store_node_t node_3 = attribute_store_add_node(3, node_1);
+  attribute_store_node_t node_4 = attribute_store_add_node(4, node_2);
+
+  // Register callbacks.
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    attribute_store_register_touch_notification_callback(NULL));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_touch_notification_callback(&touch_callback));
+
+  TEST_ASSERT_EQUAL(0, touch_callback_counter);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, received_touched_node);
+
+  // Trigger a full refresh, no touch notifications
+  attribute_store_refresh_node_and_children_callbacks(node_1);
+  TEST_ASSERT_EQUAL(0, touch_callback_counter);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, received_touched_node);
+
+  // Set node 2 to nothing, same value as before.
+  attribute_store_set_node_attribute_value(node_2, DESIRED_ATTRIBUTE, NULL, 0);
+  TEST_ASSERT_EQUAL(1, touch_callback_counter);
+  TEST_ASSERT_EQUAL(node_2, received_touched_node);
+
+  // Set node 3 to nothing, same value as before.
+  attribute_store_set_node_attribute_value(node_3, REPORTED_ATTRIBUTE, NULL, 0);
+  TEST_ASSERT_EQUAL(2, touch_callback_counter);
+  TEST_ASSERT_EQUAL(node_3, received_touched_node);
+
+  // Set node 4 to something, expect no touch callback
+  uint8_t value = 23;
+  attribute_store_set_node_attribute_value(node_4,
+                                           REPORTED_ATTRIBUTE,
+                                           &value,
+                                           sizeof(value));
+  TEST_ASSERT_EQUAL(2, touch_callback_counter);
+  TEST_ASSERT_EQUAL(node_3, received_touched_node);
+
+  // Set node 4 to the same again, now we get a touch notification
+  attribute_store_set_node_attribute_value(node_4,
+                                           REPORTED_ATTRIBUTE,
+                                           &value,
+                                           sizeof(value));
+  TEST_ASSERT_EQUAL(3, touch_callback_counter);
+  TEST_ASSERT_EQUAL(node_4, received_touched_node);
+
+  // Delete node 3
+  attribute_store_delete_node(node_3);
+  TEST_ASSERT_EQUAL(3, touch_callback_counter);
+  TEST_ASSERT_EQUAL(node_4, received_touched_node);
 }

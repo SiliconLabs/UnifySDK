@@ -1,19 +1,19 @@
 # Dev GUI User's Guide
 
 The _Unify SDK Developer GUI_ is a Web service that runs on the
-_UIC_ gateway. It provides a graphical interface to operate the various features
-of the _UIC_ gateway, such as network management, smartstart, multicast, and so on.
+_Unify_ gateway. It provides a graphical interface to operate the various features
+of the _Unify_ gateway, such as network management, smartstart, multicast, and so on.
 
 ## Access Developer GUI
 
 The developer GUI (_Dev GUI_) can be accessed via any browser that can
-reach the _UIC_ gateway over TCP/IP. Enter the hostname or IP address of
-the target running _UIC_ and port 3000, which is the default port for _Dev GUI_.
+reach the _Unify_ gateway over TCP/IP. Enter the hostname or IP address of
+the target running _Unify_ and port 3080, which is the default port for _Dev GUI_.
 This process is shown in the image below where the hostname of a Raspberry is
 raspberrypi.local:
 
-> In addition to port 3000, the Dev GUI also depends on port 1337, which has to
-> be accessible on the target running the _UIC_.
+> In addition to port 3080, the Dev GUI also depends on port 1337, which has to
+> be accessible on the target running the _Unify_.
 
 ![Browser Access](doc/assets/img/browser_url.PNG)
 
@@ -23,9 +23,9 @@ After entering the URL, you should see this front page:
 
 ## Connecting the Developer GUI
 
-Click connect in the top bar to start operating the _UIC_. Because of the
-modular nature of the developer GUI, you can connect it to other _UIC's_.
-In most cases, you want to connect to the actual _UIC_ that the
+Click connect in the top bar to start operating the _Unify_. Because of the
+modular nature of the developer GUI, you can connect it to other _Unify's_.
+In most cases, you want to connect to the actual _Unify_ that the
 developer UI is running on, therefore leaving it on _localhost_.
 
 After clicking connect, check that the status says **Connected** and, after
@@ -60,17 +60,26 @@ inclusion may look like this:
 
 ![SmartStart List](doc/assets/img/save_smart_start_device.PNG)
 
-After filling in the **DSK** key and checking include, click save. If the _UIC
+After filling in the **DSK** key and checking include, click save. If the _Unify
 UPVL_ is running, it will be saved to the SmartStart list.
 
-## Devices
+## Clusters
 
-The following are the currently (2021-04-28) supported devices of the _Dev GUI_:
+The following are the currently (2022-02-09) supported clusters of the _Dev GUI_:
 
 - On/Off switch
 - Binary sensor
 - Door lock
 - Thermostat
+- Color Control
+- Level Control
+- Identify
+- Name and Location
+- Scenes
+- Locator and Position Estimation
+- Basic
+- IASZone
+- Power Configuration
 
 ### On/Off Switch
 
@@ -133,3 +142,15 @@ looks like following.
 This enables selecting the command you want to send to the group. Clicking _Send_
 will issue the command. In the above example, it will turn all the binary
 switches in the group off.
+
+## Name and Location
+
+The Dev GUI allows the user to set name and location for each device and help recognize
+them. The following image shows the dialog when user clicks the corresponding name and
+location column.
+
+![Name and Location Dialog](doc/assets/img/name_location_dialog.PNG)
+
+After clicking _Update_, the page will look like this.
+
+![Name and Location Overview](doc/assets/img/name_location_nodes.PNG)

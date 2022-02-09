@@ -11,6 +11,7 @@ var zwave__tx_8h =
     [ "zwave_tx_options_t", "group__zwave__tx__interface.html#ga12c249f53157f1b461a0c534a274a72f", null ],
     [ "zwave_tx_session_id_t", "group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2", null ],
     [ "zwave_tx_abort_transmission", "group__zwave__tx__interface.html#ga1ae23f85745ab1fae9a52ca0424e3ee5", null ],
+    [ "zwave_tx_get_number_of_responses", "group__zwave__tx__interface.html#gac836d5cd04dd631c0bb53f4065026076", null ],
     [ "zwave_tx_init", "group__zwave__tx__interface.html#gaecd18ffa418c0db342d7af2132b6c92f", null ],
     [ "zwave_tx_log_queue", "group__zwave__tx__interface.html#ga4b1785eddaa2ebfc6a702d9b4d0b27a3", null ],
     [ "zwave_tx_send_data", "group__zwave__tx__interface.html#gad1538f36d226fe8147c5e538625568df", null ],

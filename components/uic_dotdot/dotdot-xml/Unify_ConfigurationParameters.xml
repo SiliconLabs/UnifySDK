@@ -1,0 +1,62 @@
+﻿<?xml version="1.0"?>
+<!--
+ConfigurationParameters
+This is a manufacturer specific cluster.
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD07" revision="1" name="ConfigurationParameters">
+  <classification role="utility" picsCode="UCONFPARAMS" />
+
+  <type:type short="ConfigurationParameter" name="ConfigurationParameter" id="01">
+    <restriction>
+      <type:sequence>
+        <field name="ParameterId" type="uint16" />
+        <field name="Value" type="int64" />
+        <field name="Name" type="string" />
+        <field name="Info" type="string" />
+        <field name="MinimumValue" type="int64" />
+        <field name="MaximumValue" type="int64" />
+        <field name="DefaultValue" type="int64" />
+        <field name="DisplayFormat" type="enum8" >
+          <restriction>
+            <type:enumeration value="00" name="Signed integer" />
+            <type:enumeration value="01" name="Unsigned integer" />
+            <type:enumeration value="02" name="Enumerated (Radio buttons)" />
+            <type:enumeration value="03" name="Bit field (Checkboxes)" />
+          </restriction>
+        </field>
+        <field name="ReadOnly" type="bool" />
+        <field name="Advanced" type="bool" />
+        <field name="AlteringCapabilities" type="bool" />
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <server>
+    <attributes>
+      <attribute id="0000" name="ConfigurationParameters" type="ConfigurationParameter" array="true" required="true"/>
+    </attributes>
+
+    <commands>
+      <command id="01" name="DiscoverParameter">
+        <fields>
+          <field name="ParameterId" type="uint16" />
+        </fields>
+      </command>
+      <command id="02" name="DefaultResetAllParameters">
+      </command>
+      <command id="03" name="SetParameter">
+        <fields>
+          <field name="ParameterId" type="uint16" />
+          <field name="Value" type="int64" />
+        </fields>
+      </command>
+
+    </commands>
+  </server>
+</zcl:cluster>

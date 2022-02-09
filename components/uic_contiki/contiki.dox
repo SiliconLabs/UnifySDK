@@ -1,7 +1,7 @@
 /**
 
 @defgroup contiki The Contiki RTOS
-@ingroup uic_components
+@ingroup unify_components
 @{
 
   @defgroup pt Protothreads

@@ -14,11 +14,13 @@
 #include <stddef.h>
 #include "uic_main.h"
 #include "datastore_fixt.h"
+#include "zigpc_uic_datastore_fixt.h"
 #include "attribute_store_fixt.h"
 #include "dotdot_mqtt.h"
 
 #include "zigpc_config.h"
 #include "zigpc_config_fixt.h"
+#include "zigpc_discovery.h"
 #include "zigpc_net_mgmt_process.h"
 #include "zigpc_command_mapper.h"
 #include "zigpc_diagnostics.h"
@@ -46,11 +48,12 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
    * The data-store component depends on the config component for
    * database location.
    */
-  {datastore_fixt_setup, "Datastore"},
+  {zigpc_uic_datastore_fixt_setup, "Datastore"},
   {attribute_store_init, "Attribute store"},
   {zigpc_gateway_process_setup, "ZigPC Gateway"},
   {zigpc_zclcmdparse_setup, "ZigPC ZCL Command Parser"},
   {zigpc_zcl_profiles_init, "ZigPC ZCL Profiles"},
+  {zigpc_discovery_fixt_setup, "ZigPC Discovery"},
   {zigpc_net_mgmt_process_setup, "ZigPC Network Management"},
   {attribute_management_setup, "ZigPC Attribute Management"},
   {zigpc_command_mapper_setup, "ZigPC Command Mapper"},
@@ -79,6 +82,7 @@ static uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[] = {
   {zigpc_command_mapper_shutdown, "ZigPC Command Mapper"},
   {attribute_management_shutdown, "ZigPC Attribute Management"},
   {zigpc_net_mgmt_process_shutdown, "ZigPC Network Management"},
+  {zigpc_discovery_fixt_shutdown, "ZigPC Discovery"},
   {zigpc_gateway_process_shutdown, "ZigPC Gateway"},
   {attribute_store_teardown, "Attribute store"},
   {datastore_fixt_teardown, "Datastore"},

@@ -39,7 +39,7 @@ sl_status_t zigpc_gateway_process_setup(void)
 {
   sl_status_t result = SL_STATUS_OK;
   const zigpc_config_t *zigpc_config;
-  struct z3gatewayOpts z3gw_opts;
+  struct zigbeeHostOpts z3gw_opts;
 
   result = zigpc_gateway_reset_observers();
 
@@ -48,10 +48,10 @@ sl_status_t zigpc_gateway_process_setup(void)
 
     z3gw_opts.serialPort = (char *)zigpc_config->serial_port;
 
-    z3gw_opts.callbacks = &zigpc_gateway_z3gateway_callbacks;
+    z3gw_opts.callbacks = &zigpc_gateway_zigbee_host_callbacks;
 
-    result = (z3gatewayInit(&z3gw_opts) == EMBER_SUCCESS) ? SL_STATUS_OK
-                                                          : SL_STATUS_FAIL;
+    result = (zigbeeHostInit(&z3gw_opts) == EMBER_SUCCESS) ? SL_STATUS_OK
+                                                           : SL_STATUS_FAIL;
   }
   if (result == SL_STATUS_OK) {
     result = zigpc_gateway_load_from_datastore();
@@ -80,12 +80,12 @@ int zigpc_gateway_process_shutdown(void)
                  status);
   }
 
-  status = z3gatewayTrustCenterJoinClose();
+  status = zigbeeHostTrustCenterJoinClose();
   if (status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG, "Failed to close network: 0x%X", status);
   }
 
-  z3gatewayShutdown();
+  zigbeeHostShutdown();
   return 0;
 }
 

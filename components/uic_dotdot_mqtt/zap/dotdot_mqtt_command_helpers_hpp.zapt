@@ -1,0 +1,86 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+/**
+ * @defgroup dotdot_mqtt_command_helpers Internal C++ Command parsing helpers
+ * @ingroup dotdot_mqtt
+ * @brief C++ Helpers and definitions for parsing DotDot MQTT commands
+ *
+ * @{
+ */
+
+#ifndef DOTDOT_MQTT_COMMAND_HELPERS_HPP
+#define DOTDOT_MQTT_COMMAND_HELPERS_HPP
+
+#include "dotdot_mqtt.h"
+#include <string>
+
+////////////////////////////////////////////////////////////////////////////////
+// Sending Commands functions
+////////////////////////////////////////////////////////////////////////////////
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+
+/**
+ * @brief Private helper function that will create a JSON string based on the
+ * fields of a {{asPublicationName parent.label}}::{{label}} command
+ * {{#zcl_command_arguments}}{{#first}}
+ * @param fields       Struct pointer with the list of fields for the command
+ * {{/first}}{{/zcl_command_arguments}}
+ * @returns std::string that contains JSON payload
+ */
+std::string get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_command(
+  {{#zcl_command_arguments}}{{#first}}
+  const {{asCommandFieldsType parent}} *fields
+  {{/first}}{{/zcl_command_arguments}}
+);
+
+{{#zcl_command_arguments}}{{#first}}
+/**
+ * @brief JSON parser for {{parent.parent.label}}::{{parent.label}} command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void {{asCommandParseFunction parent}}(
+  nlohmann::json &jsn,{{/first}}
+{{#if isArray}}
+  std::vector<{{asUnderlyingType type}}> &{{asSnakeCaseLower label}}{{listComma this}}
+{{else}}
+  {{asUnderlyingType type}} &{{asSnakeCaseLower label}}{{listComma this}}
+{{/if}}{{#last}}
+);
+{{/last}}{{/zcl_command_arguments}}
+
+{{/zcl_commands}}
+
+/**
+ * @brief JSON parser for {{label}}::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void {{asWriteAttributesParseFunction this}}(
+  nlohmann::json &jsn,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t &new_state,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t &new_updated_state{{#zcl_attributes}}{{#if isWritable}}{{#if (isMonotonousArray label)}},
+  std::vector<{{asUnderlyingType type}}> &{{asSnakeCaseLower label}}{{/if}}{{/if}}{{/zcl_attributes}}
+);
+
+{{/if}}
+{{/zcl_clusters}}
+
+
+#endif  //DOTDOT_MQTT_COMMAND_HELPERS_HPP
+/** @} end dotdot_mqtt_command_helpers */

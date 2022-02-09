@@ -18,7 +18,8 @@ target_link_libraries(
   ucl_definitions
   ucl_mqtt_node_interview
   ucl_network_management
-  zwave_definitions)
+  zwave_definitions
+  uic_dotdot_mqtt)
 target_interface_libraries(ucl_node_state zwave_controller)
 
 # UCL network management
@@ -33,7 +34,7 @@ target_link_libraries(ucl_network_management zwave_controller zpc_utils
 add_library(ucl_nm_neighbor_discovery src/ucl_nm_neighbor_discovery.cpp)
 target_include_directories(ucl_nm_neighbor_discovery PRIVATE src)
 target_link_libraries(ucl_nm_neighbor_discovery zwave_controller zpc_utils
-                      zwave_network_management)
+                      uic_contiki zwave_network_management zpc_attribute_store)
 
 # UCL MQTT Node interview
 add_library(ucl_mqtt_node_interview src/ucl_mqtt_node_interview.c)
@@ -58,5 +59,5 @@ target_interface_libraries(ucl_mqtt_node_interview_mock zpc_utils
                            zwave_controller)
 
 add_mock(ucl_nm_neighbor_discovery_mock src/ucl_nm_neighbor_discovery.h)
-target_interface_libraries(ucl_nm_neighbor_discovery_mock zwave_controller
-                           zpc_utils zwave_network_management)
+target_interface_libraries(ucl_nm_neighbor_discovery_mock zwave_controller_mock
+                           zpc_utils zwave_network_management zpc_attribute_store_mock)

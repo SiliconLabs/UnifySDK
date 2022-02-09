@@ -1,6 +1,10 @@
 var structmqtt__client =
 [
     [ "mqtt_client", "structmqtt__client.html#a5c336e85117b9a8edb92c04b64c14501", null ],
+    [ "after_connect_callback_call", "structmqtt__client.html#aa18f8c4e0f9f1aa1677502cdb8a19067", null ],
+    [ "after_connect_callback_set", "structmqtt__client.html#ac5c0f45de53d2bde7920e7b89f15edaf", null ],
+    [ "before_disconnect_callback_call", "structmqtt__client.html#a039a2f9c7460be8420457d778688ea13", null ],
+    [ "before_disconnect_callback_set", "structmqtt__client.html#af9cd688f2fb2555cb037ff47eeb01cc7", null ],
     [ "connect", "structmqtt__client.html#a00504c318f3ac6a1356d7c21ba9c6f34", null ],
     [ "count_topics", "structmqtt__client.html#a5a6f2c33337f413b9ea82f7db87806e1", null ],
     [ "disconnect", "structmqtt__client.html#aa04bdd74835d9ab8b757bb3268b2efd2", null ],
@@ -32,6 +36,8 @@ var structmqtt__client =
     [ "mqtt_client_fsm_connected", "structmqtt__client.html#a8c1e778626f8fd02db4e02caaeed715e", null ],
     [ "mqtt_client_fsm_connecting", "structmqtt__client.html#aa8c887ba0843e7bccb0c8af6e77695b4", null ],
     [ "mqtt_client_fsm_disconnected", "structmqtt__client.html#a34b94659bddbb18a83ef667db39afa80", null ],
+    [ "after_connect_callback", "structmqtt__client.html#a7c602b9c6af0fc980c73fba4321ed0dd", null ],
+    [ "before_disconnect_callback", "structmqtt__client.html#a2c79c369ee1e67feaef519661ad6db48", null ],
     [ "current_state", "structmqtt__client.html#aedafd7b9f1bc39c3d8f7e8ff2b7ca209", null ],
     [ "delayed_event_sender", "structmqtt__client.html#a5c44ebc0782a5a0cbee4d6c252ac6d67", null ],
     [ "event_counter", "structmqtt__client.html#a524836e19595f554fa927452630dbced", null ],

@@ -14,7 +14,12 @@
 #include "zwave_command_classes_utils.h"
 
 // ZPC Includes
+#include "zpc_attribute_store.h"
 #include "attribute_store_defined_attribute_types.h"
+#include "zpc_attribute_store_network_helper.h"
+
+// Z-Wave Controller includes
+#include "zwave_network_management.h"
 
 // UIC includes
 #include "attribute_store_helper.h"
@@ -31,8 +36,17 @@ using namespace attribute_store;
 ///////////////////////////////////////////////////////////////////////////////
 // Private functions helper functions
 ///////////////////////////////////////////////////////////////////////////////
-static bool is_association_valid(association_t association)
+/**
+ * @brief Indicates if the values in an association struct are a valid Z-Wave
+ * assocation the list of Endpoints attributes in our network.
+ *
+ * @return true if valid, false if invalid
+ */
+bool is_association_valid(association_t association)
 {
+  if (association.type != NODE_ID && association.type != ENDPOINT) {
+    return false;
+  }
   if (association.node_id == 0) {
     return false;
   }
@@ -40,6 +54,71 @@ static bool is_association_valid(association_t association)
     return false;
   }
   return true;
+}
+
+/**
+ * @brief Remove all association containing a NodeID from an association set
+ *
+ * @param [in] node_id      NodeID to find and remove from all associations
+ * @param [out] set         Association Set to modify.
+ *
+ */
+static void remove_node_id_from_association_set(zwave_node_id_t node_id,
+                                                association_set &set)
+{
+  bool search_more = false;
+  for (association_t association: set) {
+    if (association.node_id == node_id) {
+      // Iterator invalidated
+      set.erase(association);
+      search_more = true;
+      break;
+    }
+  }
+
+  // Make recursive calls as long as we find the NodeID in the set.
+  if (search_more == true) {
+    remove_node_id_from_association_set(node_id, set);
+  }
+}
+
+/**
+ * @brief Returns the list of Endpoints attributes in our network.
+ *
+ * @return std::vector<attribute>
+ */
+static std::vector<attribute> endpoint_id_attribute_list()
+{
+  std::vector<attribute> endpoint_list;
+  attribute network_node(get_zpc_network_node());
+
+  for (attribute node_id: network_node.children(ATTRIBUTE_NODE_ID)) {
+    for (attribute endpoint_id: node_id.children(ATTRIBUTE_ENDPOINT_ID)) {
+      endpoint_list.push_back(endpoint_id);
+    }
+  }
+  return endpoint_list;
+}
+
+/**
+ * @brief Returns groups nodes for a given set of Endpoint attributes
+ *
+ * @return std::vector<attribute>
+ */
+static std::vector<attribute>
+  group_content_attribute_list(std::vector<attribute> endpoint_id_nodes)
+{
+  std::vector<attribute> group_content_node_list;
+  for (auto endpoint_node: endpoint_id_nodes) {
+    for (attribute group_id_node: endpoint_node.children(ATTRIBUTE(GROUP_ID))) {
+      attribute group_content_node(
+        group_id_node.child_by_type(ATTRIBUTE(GROUP_CONTENT)));
+      if (group_content_node.is_valid()) {
+        group_content_node_list.push_back(group_content_node);
+      }
+    }
+  }
+  return group_content_node_list;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -319,7 +398,7 @@ sl_status_t force_add_desired_association(zwave_node_id_t node_id,
       bool somebody_was_removed = false;
       for (auto association: associations) {
         // Do not remove ourselves.
-        if (association.node_id == node_id) {
+        if (association.node_id == zwave_network_management_get_node_id()) {
           continue;
         }
         associations.erase(association);
@@ -559,5 +638,109 @@ bool is_desired_group_full(zwave_node_id_t node_id,
       "Failed to evaluate if reported association group is full: %s\n",
       err.what());
     return false;
+  }
+}
+
+void remove_desired_node_id_from_all_associations_in_network(zwave_node_id_t node_id)
+{
+  for (auto group_content_node:
+       group_content_attribute_list(endpoint_id_attribute_list())) {
+    try {
+      // Read the Desired assocation group bytestream from the attribute store
+      association_bytes bytestream = group_content_node.get<association_bytes>(
+        DESIRED_OR_REPORTED_ATTRIBUTE);
+
+      // Convert into a set of associations
+      association_set associations;
+      get_association_list(bytestream, associations);
+
+      // Eradicate the presence of the NodeID in this group
+      remove_node_id_from_association_set(node_id, associations);
+
+      //Convert back to Bytestream
+      bytestream.clear();
+      get_association_bytestream(associations, bytestream);
+
+      // Write to the attribute store:
+      group_content_node.set<association_bytes>(DESIRED_ATTRIBUTE, bytestream);
+
+    } catch (const std::exception &err) {
+      sl_log_warning(LOG_TAG,
+                     "Failed to update association group content: %s\n",
+                     err.what());
+    }
+  }
+}
+
+void add_desired_association_in_all_groups(zwave_node_id_t node_id,
+                                           zwave_endpoint_id_t endpoint_id,
+                                           association_t association)
+{
+  association_group_count_t group_count
+    = get_number_of_groups(node_id, endpoint_id);
+
+  for (association_group_id_t current_group_id = 1;
+       current_group_id <= group_count;
+       current_group_id++) {
+    add_desired_association(node_id,
+                            endpoint_id,
+                            current_group_id,
+                            association);
+  }
+}
+
+void remove_desired_association_in_all_groups(zwave_node_id_t node_id,
+                                              zwave_endpoint_id_t endpoint_id,
+                                              association_t association)
+{
+  association_group_count_t group_count
+    = get_number_of_groups(node_id, endpoint_id);
+
+  for (association_group_id_t current_group_id = 1;
+       current_group_id <= group_count;
+       current_group_id++) {
+    remove_desired_association(node_id,
+                               endpoint_id,
+                               current_group_id,
+                               association);
+  }
+}
+
+void remove_desired_node_id_from_all_associations(
+  zwave_node_id_t node_id_to_remove,
+  zwave_node_id_t node_id,
+  zwave_endpoint_id_t endpoint_id)
+{
+  association_group_count_t group_count
+    = get_number_of_groups(node_id, endpoint_id);
+
+  for (association_group_id_t current_group_id = 1;
+       current_group_id <= group_count;
+       current_group_id++) {
+    try {
+      attribute group(
+        get_group_content_node(node_id, endpoint_id, current_group_id));
+      association_bytes bytestream
+        = group.get<association_bytes>(DESIRED_OR_REPORTED_ATTRIBUTE);
+
+      // Convert into a set of associations
+      association_set associations;
+      get_association_list(bytestream, associations);
+
+      // Eradicate the presence of the NodeID in this group
+      remove_node_id_from_association_set(node_id_to_remove, associations);
+
+      // Convert back to Bytestream
+      bytestream.clear();
+      get_association_bytestream(associations, bytestream);
+
+      // Write to the attribute store:
+      group.set<association_bytes>(DESIRED_ATTRIBUTE, bytestream);
+
+    } catch (const std::exception &err) {
+      sl_log_warning(LOG_TAG,
+                     "Failed to update association group content: %s\n",
+                     err.what());
+    }
   }
 }

@@ -2,6 +2,7 @@ var contiki__test__helper_8c =
 [
     [ "clock_seconds", "group__clock.html#ga8bbd5d5a773349139eee79d365af36ab", null ],
     [ "clock_time", "group__clock.html#ga50c22f9b9d60dd1f9e59b63a3a6676b1", null ],
+    [ "contiki_test_helper_increase_clock", "contiki__test__helper_8c.html#aceeb0a73d13bcef46e54a1cbefe5f8fb", null ],
     [ "contiki_test_helper_init", "contiki__test__helper_8c.html#a0e3872a9e05050732d9fb83f5b7c3cc7", null ],
     [ "contiki_test_helper_run", "contiki__test__helper_8c.html#ac5683519dae42ba1818cb0459a875ba9", null ],
     [ "contiki_test_helper_run_clock_increases_for_each_event", "contiki__test__helper_8c.html#abc28acd23eaa2dece39c9488410d0821", null ],

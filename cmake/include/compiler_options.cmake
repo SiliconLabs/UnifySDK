@@ -12,6 +12,7 @@ set(CMAKE_CXX_EXTENSIONS ON) # Enable gnu++11 extentions
 # Set compiler Flags
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pipe -Werror -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -Werror -Wall")
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Only add code coverage when CMAKE_GCOV is True
 if(CMAKE_GCOV)

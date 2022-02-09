@@ -19,6 +19,10 @@ function atomicType(arg) {
     case "bitmap8": return "uint8_t"
     case "key128": return "const char*"
     case "single": return "float"
+    case "double": return "double"
+    case "EUI64": return "EUI64"
+    case "UTC": return "UTC"
+    case "clusterId": return "clusterId"
   }
   throw "not overriding anything"
 }

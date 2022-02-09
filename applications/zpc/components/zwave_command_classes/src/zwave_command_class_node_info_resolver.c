@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -24,7 +24,6 @@
 #include "zwave_controller.h"
 #include "zwave_controller_utils.h"
 #include "zwave_controller_command_class_indices.h"
-#include "zwave_tx_scheme_selector.h"
 #include "attribute_store.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_attribute_store_network_helper.h"
@@ -33,6 +32,7 @@
 #include "attribute_resolver.h"
 #include "zwave_unid.h"
 #include "zwave_security_validation.h"
+#include "zwave_utils.h"
 
 #include "sl_log.h"
 #define LOG_TAG "zwave_command_class_node_info_resolver"
@@ -57,7 +57,7 @@ static void create_secure_nifs_if_missing(attribute_store_node_t node_id_node)
   // If S0 or S2 keys have been granted, then we create this secure NIF
   // We don't really care if the S0/S2 CCs are present in the non-secure NIF.
   zwave_keyset_t supporting_node_keys;
-  zwave_tx_scheme_get_node_granted_keys(node_id, &supporting_node_keys);
+  zwave_get_node_granted_keys(node_id, &supporting_node_keys);
   zwave_controller_encapsulation_scheme_t supporting_node_scheme
     = zwave_controller_get_highest_encapsulation(supporting_node_keys);
 
@@ -198,7 +198,7 @@ static sl_status_t resolve_secure_node_info(attribute_store_node_t node,
   }
 
   zwave_keyset_t supporting_node_keys;
-  zwave_tx_scheme_get_node_granted_keys(node_id, &supporting_node_keys);
+  zwave_get_node_granted_keys(node_id, &supporting_node_keys);
 
   zwave_controller_encapsulation_scheme_t supporting_node_scheme
     = zwave_controller_get_highest_encapsulation(supporting_node_keys);

@@ -1,0 +1,5 @@
+#!/bin/sh
+if type "systemctl" > /dev/null; then
+    systemctl stop uic-positioning.service
+    systemctl disable uic-positioning.service
+fi

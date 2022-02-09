@@ -50,8 +50,6 @@ void test_gateway_node_add_should_call_process_send(void)
   zigbee_install_code_t test_install_code = {0xA};
   uint8_t test_install_code_length        = 12;
 
-  zigpc_net_mgmt_fsm_get_state_ExpectAndReturn(ZIGPC_NET_MGMT_FSM_STATE_IDLE);
-
   zigpc_net_mgmt_process_send_event_ExpectAndReturn(
     ZIGPC_NET_MGMT_EVENT_FSM,
     NULL,
@@ -63,31 +61,6 @@ void test_gateway_node_add_should_call_process_send(void)
   sl_status_t test_status = zigpc_net_mgmt_add_node(test_eui64,
                                                     test_install_code,
                                                     test_install_code_length);
-
-  // ASSERT
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, test_status);
-}
-
-/**
- * @brief Check success path of sending node interview request.
- *
- */
-void test_gateway_node_interview_should_call_process_send(void)
-{
-  // ARRANGE
-  zigbee_eui64_t test_eui64 = {0xD, 0xE, 0xA, 0xD, 0xB, 0xE, 0xE, 0xF};
-
-  zigpc_net_mgmt_fsm_get_state_ExpectAndReturn(ZIGPC_NET_MGMT_FSM_STATE_IDLE);
-
-  zigpc_net_mgmt_process_send_event_ExpectAndReturn(
-    ZIGPC_NET_MGMT_EVENT_FSM,
-    NULL,
-    sizeof(zigpc_net_mgmt_process_data_fsm_t),
-    SL_STATUS_OK);
-  zigpc_net_mgmt_process_send_event_IgnoreArg_data();
-
-  // ACT
-  sl_status_t test_status = zigpc_net_mgmt_interview_node(test_eui64);
 
   // ASSERT
   TEST_ASSERT_EQUAL(SL_STATUS_OK, test_status);

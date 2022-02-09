@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -51,9 +51,8 @@ extern void (*zwapi_assign_suc_return_route_callback)(uint8_t bStatus);
 extern void (*zwapi_delete_suc_return_route_callback)(uint8_t bStatus);
 extern void (*zwapi_delete_return_route_callback)(uint8_t bStatus);
 extern void (*zwapi_set_learn_mode_callback)(struct LEARN_INFO *);
-extern void (*zwapi_set_virtual_node_to_learn_mode_callback)(uint8_t bStatus,
-                                                             zwave_node_id_t orgID,
-                                                             zwave_node_id_t newID);
+extern void (*zwapi_set_virtual_node_to_learn_mode_callback)(
+  uint8_t bStatus, zwave_node_id_t orgID, zwave_node_id_t newID);
 extern void (*zwapi_request_neighbor_update_callback)(uint8_t bStatus);
 extern void (*zwapi_set_suc_node_id_callback)(uint8_t bStatus);
 extern void (*zwapi_request_network_update_callback)(uint8_t txStatus);
@@ -124,7 +123,7 @@ sl_status_t zwapi_send_command(uint8_t command,
  * Ack'ed by the module and the corresponding Response frame has been received.
  * SL_STATUS_NOT_SUPPORTED if the particular command is not supported
  * by the Z-Wave API.
- * SL_STATUS_FAIL if an error occured.
+ * SL_STATUS_FAIL if an error occurred.
  *
  * Verifies that the command is supported by the Z-Wave module, sends the
  * command data frame to the Z-Wave module, wait for ACK and a Response frame

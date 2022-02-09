@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -33,11 +33,7 @@ typedef uint32_t zwave_home_id_t;
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
-  char *argv_inject[3] = {"attribute_store_helper_test",
-                          "--datastore.file",
-                          "attribute_store_helper.db"};
-  config_parse(sizeof(argv_inject) / sizeof(char *), argv_inject, "");
-  datastore_fixt_setup();
+  datastore_fixt_setup(":memory:");
   attribute_store_init();
 
   // Ensure we start from scratch before creating our test network.
@@ -422,6 +418,129 @@ void test_attribute_store_set_reported_string_no_null_termination_case()
                                    - 1]);  // Appended NULL termination
 }
 
+void test_attribute_store_get_reported_string_happy_case()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  char string[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = "HelloAoXPC";
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported_string(test_node, string));
+
+  // Read back
+  char received_string[20];
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_get_reported_string(test_node, received_string, 20));
+
+  TEST_ASSERT_EQUAL_STRING(string, received_string);
+}
+
+void test_attribute_store_get_reported_string_null_pointer()
+{
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_get_reported_string(ATTRIBUTE_STORE_INVALID_NODE, NULL, 1));
+}
+
+void test_attribute_store_get_reported_string_no_size()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  char string[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = "HelloAoXPC";
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported_string(test_node, string));
+
+  char received_string[20];
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_get_reported_string(test_node, received_string, 0));
+}
+
+void test_attribute_store_get_reported_string_undefined_value()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  // Value is undefined
+  // Read back
+  char received_string[20];
+  received_string[0] = 'a';
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_get_reported_string(test_node, received_string, 20));
+
+  TEST_ASSERT_EQUAL('\0',
+                    received_string[0]);  // Appended NULL termination
+}
+
+void test_attribute_store_get_reported_string_too_small_buffer()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  char string[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH]
+    = "This is a string that is way too long";
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported_string(test_node, string));
+
+  // Value is undefined
+  // Read back
+  char received_string[10];
+  received_string[0] = 'a';
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_get_reported_string(test_node, received_string, 10));
+
+  TEST_ASSERT_EQUAL('\0',
+                    received_string[0]);  // Appended NULL termination
+}
+
+void test_attribute_store_get_reported_string_no_null_termination_in_attribute_store()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  uint8_t value[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+  // Write the data that has no NULL termination
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_node_attribute_value(test_node,
+                                             REPORTED_ATTRIBUTE,
+                                             value,
+                                             (uint8_t)sizeof(value)));
+
+  // Read back
+  char received_string[10];
+  received_string[0] = 'a';
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_get_reported_string(test_node, received_string, 10));
+
+  TEST_ASSERT_EQUAL('\0',
+                    received_string[0]);  // Appended NULL termination
+}
+
 void test_attribute_store_set_child_reported()
 {
   attribute_store_node_t root_node = attribute_store_get_root();
@@ -556,4 +675,34 @@ void test_attribute_store_set_child_desired()
                                        ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
                                        &value,
                                        sizeof(value)));
+}
+
+void test_attribute_store_delete_all_children()
+{
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_delete_all_children(ATTRIBUTE_STORE_INVALID_NODE));
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_delete_all_children(attribute_store_get_root()));
+
+  // Create a few nodes
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node_1
+    = attribute_store_add_node(0xAAAA, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node_1);
+  attribute_store_node_t test_node_2
+    = attribute_store_add_node(0x02, test_node_1);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node_2);
+  attribute_store_node_t test_node_3
+    = attribute_store_add_node(0x02, test_node_1);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node_3);
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_delete_all_children(test_node_1));
+
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(test_node_1));
 }

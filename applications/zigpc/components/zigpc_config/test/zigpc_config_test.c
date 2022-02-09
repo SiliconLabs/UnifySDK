@@ -61,8 +61,7 @@ void test_init()
   const char *ini_content = "zigpc:\n"
                             "    - serial: /dev/ttyUSB0\n"
                             "    - tc_use_well_known_key: true\n"
-                            "datastore:\n"
-                            "    - file: /var/lib/uic/zigpc.db\n"
+                            "    - datastore_file: /tmp/database_file.db\n"
                             "mqtt:\n"
                             "    - host: localhost\n"
                             "    - port: 2000\n";
@@ -77,7 +76,7 @@ void test_init()
   TEST_ASSERT_EQUAL_STRING("localhost", zigpc_get_config()->mqtt_host);
   TEST_ASSERT_EQUAL(2000, zigpc_get_config()->mqtt_port);
   TEST_ASSERT_EQUAL_STRING("/dev/ttyUSB0", zigpc_get_config()->serial_port);
-  TEST_ASSERT_EQUAL_STRING("/var/lib/uic/zigpc.db",
+  TEST_ASSERT_EQUAL_STRING("/tmp/database_file.db",
                            zigpc_get_config()->datastore_file);
   TEST_ASSERT_TRUE(zigpc_get_config()->tc_use_well_known_key);
 }

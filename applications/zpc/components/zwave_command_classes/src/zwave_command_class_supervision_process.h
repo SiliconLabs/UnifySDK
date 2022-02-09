@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -81,7 +81,7 @@ typedef struct supervised_session {
  * @param session_id The Supervision Session ID to find among the
  *                   supervised sessions.
  * @param node_id
- * @param endpoint_id 
+ * @param endpoint_id
  *
  * @returns
  * - supervised_session_t Pointer of the found supervised session if the ID

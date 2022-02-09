@@ -1,7 +1,7 @@
 
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -17,9 +17,9 @@
  * @ingroup notification_command_class
  * @brief List of Notifications for the Notification Command Class
  *
- * This group contains the definition of the assigned Notifications event and types 
+ * This group contains the definition of the assigned Notifications event and types
  * defined in SDS13713.
- * 
+ *
  * @{
  */
 

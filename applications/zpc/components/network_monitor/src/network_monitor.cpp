@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -19,6 +19,7 @@
 
 // Includes from this component
 #include "network_monitor.h"
+#include "network_monitor_span_persistence.h"
 
 // Interfaces
 #include "ucl_definitions.h"
@@ -43,6 +44,8 @@
 #include "sys/ctimer.h"
 #include "zpc_config.h"
 #include "ucl_mqtt_node_interview.h"
+#include "zwave_controller_storage.h"
+#include "zcl_cluster_servers.h"
 
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
@@ -50,6 +53,8 @@
 #include "attribute_resolver.h"
 
 #include "attribute.hpp"
+#include "failing_node_monitor.h"
+
 // Setup the logging
 #define LOG_TAG "network_monitor"
 
@@ -74,7 +79,9 @@ typedef enum {
   /// Frame transmission failed
   NODE_FRAME_TRANSMISSION_FAILED_EVENT,
   /// successful Frame Transmission
-  NODE_FRAME_TRANSMISSION_SUCCESS_EVENT
+  NODE_FRAME_TRANSMISSION_SUCCESS_EVENT,
+  /// Frame Rx
+  NODE_FRAME_RX_EVENT
 } network_monitor_events_t;
 
 /**
@@ -100,15 +107,13 @@ struct node_added_event_data {
   zwave_protocol_t inclusion_protocol;
 };
 
-
 /**
  * @brief Struct used for sending event data with event \ref NODE_ID_ASSIGNED_EVENT.
  */
 struct node_id_assigned_event_data {
-  zwave_node_id_t node_id;              ///< Node ID
+  zwave_node_id_t node_id;  ///< Node ID
   zwave_protocol_t inclusion_protocol;
 };
-
 
 struct network_monitor_sleeping_node_info {
   struct ctimer timer;
@@ -175,25 +180,35 @@ static void network_monitor_wakeup_interval_attribute_update(
 static void
   network_monitor_sleeping_nodes_network_status_controller(void *data);
 
-static void network_monitor_on_frame_received(
-  const zwave_controller_connection_info_t *connection_info,
-  const zwave_rx_receive_options_t *rx_options,
-  const uint8_t *frame_data,
-  uint16_t frame_length);
+static void network_monitor_on_frame_received(zwave_node_id_t node_id);
 
 static void network_monitor_handle_event_success_frame_transmission(
   zwave_node_id_t node_id);
 
-static zwave_controller_callbacks_t network_monitor_callbacks = {
-  .on_node_id_assigned          = network_monitor_on_node_id_assigned,
-  .on_node_deleted              = network_monitor_on_node_deleted,
-  .on_node_added                = network_monitor_on_node_added,
-  .on_new_network_entered       = network_monitor_on_new_network_entered,
-  .on_frame_received            = network_monitor_on_frame_received,
-  .on_frame_transmission_failed = network_monitor_on_frame_transmission_failed,
-  .on_frame_transmission_success
-  = network_monitor_on_frame_transmission_success,
-};
+static void
+  network_monitor_on_frame_transmission(bool transmission_successful,
+                                        const zwapi_tx_report_t *tx_report,
+                                        zwave_node_id_t node_id);
+
+static zwave_controller_callbacks_t network_monitor_callbacks
+  = {.on_node_id_assigned    = &network_monitor_on_node_id_assigned,
+     .on_node_deleted        = &network_monitor_on_node_deleted,
+     .on_node_added          = &network_monitor_on_node_added,
+     .on_new_network_entered = &network_monitor_on_new_network_entered,
+     .on_frame_transmission  = &network_monitor_on_frame_transmission,
+     .on_rx_frame_received   = &network_monitor_on_frame_received};
+
+static void
+  network_monitor_on_frame_transmission(bool transmission_successful,
+                                        const zwapi_tx_report_t *tx_report,
+                                        zwave_node_id_t node_id)
+{
+  if (transmission_successful) {
+    network_monitor_on_frame_transmission_success(node_id);
+  } else {
+    network_monitor_on_frame_transmission_failed(node_id);
+  }
+}
 
 static attribute_store_node_t
   attribute_store_node_from_zwave_node(zwave_node_id_t node_id)
@@ -216,10 +231,7 @@ static void
   event_data->node_id            = node_id;
   event_data->inclusion_protocol = inclusion_protocol;
 
-
-  process_post(&network_monitor_process,
-               NODE_ID_ASSIGNED_EVENT,
-               event_data);
+  process_post(&network_monitor_process, NODE_ID_ASSIGNED_EVENT, event_data);
 }
 
 static void network_monitor_on_nif_updated(attribute_store_node_t updated_node,
@@ -308,16 +320,13 @@ static void
 }
 
 // On frame received callback handler
-static void network_monitor_on_frame_received(
-  const zwave_controller_connection_info_t *connection_info,
-  const zwave_rx_receive_options_t *rx_options,
-  const uint8_t *frame_data,
-  uint16_t frame_length)
+static void network_monitor_on_frame_received(zwave_node_id_t node_id)
 {
   // ZPC received a frame from a given node. If this node is in the failing list,
   // we remove the node from failing list
-  network_monitor_handle_event_success_frame_transmission(
-    connection_info->remote.node_id);
+  process_post(&network_monitor_process,
+               NODE_FRAME_RX_EVENT,
+               (void *)(intptr_t)node_id);
 }
 
 /**
@@ -382,7 +391,7 @@ static void network_monitor_pause_nl_nodes_resolution(
                                REPORTED_ATTRIBUTE,
                                &node_id,
                                sizeof(zwave_node_id_t));
-    if (OPERATING_MODE_NL == get_operating_mode(node_id)) {
+    if (OPERATING_MODE_NL == zwave_get_operating_mode(node_id)) {
       sl_log_debug(LOG_TAG,
                    "Pausing attribute resolution for NL node: NodeID %d",
                    node_id);
@@ -640,12 +649,15 @@ static void
     // Reinitialize our command class handlers, it we entered a new network.
     // This is for our supported CCs that write in the attribute store under the ZPC node.
     zwave_command_classes_init();
+    // Tell the ZCL Cluster servers to init in our new network.
+    zcl_cluster_servers_init();
   }
 
   delete event_data;
   // Cleaning data structures that contains the zwave_node_id key
   failed_transmission_data.clear();
   sleeping_nodes_status.clear();
+  failing_node_monitor_list_clear();
 }
 
 static void network_monitor_handle_event_node_id_assigned(
@@ -654,7 +666,8 @@ static void network_monitor_handle_event_node_id_assigned(
   network_monitor_add_attribute_store_node(
     event_data->node_id,
     NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED);
-  store_protocol(event_data->node_id, event_data->inclusion_protocol);
+  zwave_store_inclusion_protocol(event_data->node_id,
+                                 event_data->inclusion_protocol);
 }
 
 static void
@@ -664,7 +677,8 @@ static void
   // did not happen before this event, we ensure the node exists in the attribute store.
   network_monitor_update_new_node_attribute_store(*event_data);
 
-  store_protocol(event_data->node_id, event_data->inclusion_protocol);
+  zwave_store_inclusion_protocol(event_data->node_id,
+                                 event_data->inclusion_protocol);
 
   // Finally we want to update our local cache of the node list:
   zwapi_get_full_node_list(current_node_list);
@@ -676,11 +690,26 @@ static void network_monitor_handle_event_node_interview_initiated(
   attribute_store_node_t node_id_node)
 {
   attribute att(node_id_node);
-
-  if (attribute network_status = att.child_by_type(ATTRIBUTE_NETWORK_STATUS);
-      network_status.is_valid()) {
-    network_status.set_reported<node_state_topic_state_t>(
-      NODE_STATE_TOPIC_INTERVIEWING);
+  attribute network_status = att.child_by_type(ATTRIBUTE_NETWORK_STATUS);
+  if (network_status.is_valid()) {
+    try {
+      node_state_topic_state_t node_state
+        = network_status.reported<node_state_topic_state_t>();
+      if (node_state == NODE_STATE_TOPIC_STATE_OFFLINE) {
+        network_status.set_reported<node_state_topic_state_t>(
+          NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL);
+      } else {
+        network_status.set_reported<node_state_topic_state_t>(
+          NODE_STATE_TOPIC_INTERVIEWING);
+      }
+    } catch (std::exception &ex) {
+      network_status.set_reported<node_state_topic_state_t>(
+        NODE_STATE_TOPIC_INTERVIEWING);
+      sl_log_warning(LOG_TAG,
+                     "Cannot read the previous network status of a node. "
+                     "Current status set to 'Interviewing' %s",
+                     ex.what());
+    }
   }
 
   // Register the listener for the node interview
@@ -723,9 +752,10 @@ static void network_monitor_handle_event_node_deleted(zwave_node_id_t node_id)
   // Remove the node from the attribute store
   network_monitor_remove_attribute_store_node(node_id);
   // Cleaning data structures that contains the zwave_node_id key
-  auto it_failed_tranmission = failed_transmission_data.find(node_id);
-  if (it_failed_tranmission != failed_transmission_data.end()) {
-    failed_transmission_data.erase(it_failed_tranmission);
+  auto it_failed_transmission = failed_transmission_data.find(node_id);
+  if (it_failed_transmission != failed_transmission_data.end()) {
+    stop_monitoring_failing_node(node_id);
+    failed_transmission_data.erase(it_failed_transmission);
   }
   auto it_sleeping_node = sleeping_nodes_status.find(node_id);
   if (it_sleeping_node != sleeping_nodes_status.end()) {
@@ -733,42 +763,56 @@ static void network_monitor_handle_event_node_deleted(zwave_node_id_t node_id)
   }
 }
 
-static void network_monitor_hanlde_event_failed_frame_transmission(
+static void network_monitor_handle_event_failed_frame_transmission(
   zwave_node_id_t node_id)
 {
-  auto failing_list_it = sleeping_nodes_status.find(node_id);
-  // If the node is sleeping node, we should not update the network status
-  // here since the sleeping node monitor using the wakeup period.
-  if (failing_list_it == sleeping_nodes_status.end()) {
-    auto it = failed_transmission_data.find(node_id);
-    if (it == failed_transmission_data.end()) {
-      failed_transmission_data.insert(
-        std::pair<zwave_node_id_t, uint8_t>(node_id, 1));
-    } else {
-      it->second++;
-      if (it->second == zpc_get_config()->accepted_transmit_failure) {
-        // If the network status was interviewing and the frame transmission is failed
-        // the network status shall be NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL.
-        attribute_store_node_t node_id_node
-          = attribute_store_node_from_zwave_node(node_id);
-        attribute attr(node_id_node);
-        attribute network_status = attr.child_by_type(ATTRIBUTE_NETWORK_STATUS);
-        if (network_status.is_valid()) {
-          if (network_status.reported<node_state_topic_state_t>()
-              == NODE_STATE_TOPIC_INTERVIEWING) {
-            network_status.set_reported<node_state_topic_state_t>(
-              NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL);
-          } else {
-            sl_log_info(LOG_TAG,
-                        "NodeID %d is now considered as failing/offline",
-                        node_id);
-            network_status.set_reported<node_state_topic_state_t>(
-              NODE_STATE_TOPIC_STATE_OFFLINE);
-          }
-          attribute_resolver_pause_node_resolution(node_id_node);
-        }
-      }
+  zwave_operating_mode_t operating_mode = zwave_get_operating_mode(node_id);
+
+  // Look for the node in failed transmission 
+  auto it = failed_transmission_data.find(node_id);
+  // if the node was not in failed transmission list insert it and return
+  if (it == failed_transmission_data.end()) {
+    failed_transmission_data.insert(
+      std::pair<zwave_node_id_t, uint8_t>(node_id, 1));
+    return;
+  }
+
+  //Increase failure count
+  it->second++;
+  //If the failure count is not equal to accepted transmit failures, its ok, return
+  if (it->second != zpc_get_config()->accepted_transmit_failure) {
+    return;
+  }
+
+  attribute_store_node_t node_id_node
+    = attribute_store_node_from_zwave_node(node_id);
+  attribute attr(node_id_node);
+  attribute network_status = attr.child_by_type(ATTRIBUTE_NETWORK_STATUS);
+  if (!network_status.is_valid()) {
+    return;
+  }
+
+  // If the network status was interviewing and the frame transmission is failed
+  // the network status shall be NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL.
+  if (network_status.reported<node_state_topic_state_t>()
+      == NODE_STATE_TOPIC_INTERVIEWING) {
+    network_status.set_reported<node_state_topic_state_t>(
+      NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL);
+  } else {
+   // If the node is sleeping node, we should not update the network status
+   // here since the sleeping node monitor does that using the wakeup period.
+    if (OPERATING_MODE_NL != operating_mode) {
+      sl_log_info(LOG_TAG,
+                  "NodeID %d is now considered as failing/offline",
+                  node_id);
+      network_status.set_reported<node_state_topic_state_t>(
+        NODE_STATE_TOPIC_STATE_OFFLINE);
     }
+  }
+  attribute_resolver_pause_node_resolution(node_id_node);
+  // Failing node monitor does not monitor NL nodes
+  if (OPERATING_MODE_NL != operating_mode) {
+    start_monitoring_failing_node(node_id);
   }
 }
 
@@ -784,7 +828,7 @@ static void network_monitor_handle_event_success_frame_transmission(
     attribute network_status = attr.child_by_type(ATTRIBUTE_NETWORK_STATUS);
     unid_t unid;
     zwave_unid_from_node_id(node_id, unid);
-    // None sleeping nodes
+    // Non-Sleeping nodes
     auto it = failed_transmission_data.find(node_id);
     if (it != failed_transmission_data.end()) {
       // If the network status was NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL,
@@ -801,6 +845,10 @@ static void network_monitor_handle_event_success_frame_transmission(
       }
       attribute_resolver_resume_node_resolution(node_id_node);
       failed_transmission_data.erase(it);
+      // Failing node monitor does not monitor NL nodes so no need of stopping
+      if (OPERATING_MODE_NL != zwave_get_operating_mode(node_id)) {
+        stop_monitoring_failing_node(node_id);
+      }
     }
 
     // Sleeping node
@@ -869,6 +917,33 @@ static void network_monitor_wakeup_interval_attribute_update(
   }
 }
 
+static void network_monitor_on_wake_up_cc_version_update(
+  attribute_store_node_t updated_node, attribute_store_change_t change)
+{
+  if (change == ATTRIBUTE_DELETED) {
+    return;
+  }
+
+  try {
+    attribute attr(updated_node);
+    attribute node_id_node  = attr.first_parent(ATTRIBUTE_NODE_ID);
+    zwave_node_id_t node_id = node_id_node.reported<zwave_node_id_t>();
+    auto it_sleeping_node   = sleeping_nodes_status.find(node_id);
+    if (it_sleeping_node == sleeping_nodes_status.end()) {
+      std::shared_ptr<network_monitor_sleeping_node_info> wakeup_node_info
+        = std::make_shared<network_monitor_sleeping_node_info>();
+      wakeup_node_info->wakeup_interval = 0;
+      wakeup_node_info->node_id         = node_id;
+      wakeup_node_info->network_status  = true;
+      sleeping_nodes_status.try_emplace(node_id, wakeup_node_info);
+    }
+  } catch (std::exception &ex) {
+    sl_log_warning(LOG_TAG,
+                   "Cannot read the Wake CC Version Attribute. %s",
+                   ex.what());
+  }
+}
+
 static void network_monitor_sleeping_nodes_network_status_controller(void *data)
 {
   network_monitor_sleeping_node_info *read_data
@@ -914,12 +989,29 @@ static void network_monitor_sleeping_nodes_network_status_controller(void *data)
 ////////////////////////////////////////////////////////////////////////////////
 void network_state_monitor_init()
 {
+  static zwave_controller_storage_callback_t zwave_controller_storage_callbacks
+    = {
+      .on_set_node_as_s2_capable
+      = zwave_security_validation_set_node_as_s2_capable,
+      .on_verify_node_is_s2_capable
+      = zwave_security_validation_is_node_s2_capable,
+      .on_get_node_granted_keys  = zwave_get_node_granted_keys,
+      .on_get_inclusion_protocol = zwave_get_inclusion_protocol,
+      .on_zwave_controller_storage_cc_version
+      = zwave_node_get_command_class_version,
+    };
+  zwave_controller_storage_callback_register(
+    &zwave_controller_storage_callbacks);
   // Register for ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL attribute
   // update that enables monitoring the sleeping nodes
   attribute_store_register_callback_by_type_and_state(
     network_monitor_wakeup_interval_attribute_update,
     ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
     REPORTED_ATTRIBUTE);
+
+  attribute_store_register_callback_by_type(
+    network_monitor_on_wake_up_cc_version_update,
+    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_VERSION);
 
   zwave_controller_register_callbacks(&network_monitor_callbacks);
   memset(current_node_list, 0, sizeof(zwave_nodemask_t));
@@ -942,6 +1034,15 @@ void network_state_monitor_init()
   // initializing right after are depending on us doing the job
   network_monitor_handle_event_new_network(
     static_cast<new_network_entered_data *>(data));
+
+  // Restore the SPAN/MPAN data to S2
+  network_monitor_restore_span_table_data();
+  network_monitor_restore_mpan_table_data();
+}
+
+uint8_t *network_monitor_get_cached_current_node_list()
+{
+  return current_node_list;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -959,6 +1060,8 @@ PROCESS_THREAD(network_monitor_process, ev, data)
 
       case PROCESS_EVENT_EXIT:
         sl_log_info(LOG_TAG, "network_monitor_process is exiting.\n");
+        network_monitor_store_span_table_data();
+        network_monitor_store_mpan_table_data();
         break;
 
       case PROCESS_EVENT_EXITED:
@@ -972,7 +1075,7 @@ PROCESS_THREAD(network_monitor_process, ev, data)
 
       case NODE_ID_ASSIGNED_EVENT:
         network_monitor_handle_event_node_id_assigned(
-          static_cast<node_id_assigned_event_data*>(data));
+          static_cast<node_id_assigned_event_data *>(data));
         break;
 
       case NODE_ADDED_EVENT:
@@ -997,11 +1100,16 @@ PROCESS_THREAD(network_monitor_process, ev, data)
         break;
 
       case NODE_FRAME_TRANSMISSION_FAILED_EVENT:
-        network_monitor_hanlde_event_failed_frame_transmission(
+        network_monitor_handle_event_failed_frame_transmission(
           static_cast<zwave_node_id_t>(reinterpret_cast<intptr_t>(data)));
         break;
 
       case NODE_FRAME_TRANSMISSION_SUCCESS_EVENT:
+        network_monitor_handle_event_success_frame_transmission(
+          static_cast<zwave_node_id_t>(reinterpret_cast<intptr_t>(data)));
+        break;
+
+      case NODE_FRAME_RX_EVENT:
         network_monitor_handle_event_success_frame_transmission(
           static_cast<zwave_node_id_t>(reinterpret_cast<intptr_t>(data)));
         break;

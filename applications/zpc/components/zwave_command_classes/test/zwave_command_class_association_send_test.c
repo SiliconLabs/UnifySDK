@@ -102,10 +102,6 @@ void suiteSetUp()
   datastore_init(":memory:");
   attribute_store_init();
   zwave_unid_set_home_id(home_id);
-  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
-  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
-  zwave_tx_scheme_get_zpc_granted_keys_Stub(
-    &stub_zwave_tx_scheme_get_zpc_granted_keys);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -119,6 +115,10 @@ int suiteTearDown(int num_failures)
 /// Called before each and every test
 void setUp()
 {
+  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
+  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
+  zwave_tx_scheme_get_zpc_granted_keys_Stub(
+    &stub_zwave_tx_scheme_get_zpc_granted_keys);
   zpc_attribute_store_test_helper_create_network();
 
   // Init our association groups

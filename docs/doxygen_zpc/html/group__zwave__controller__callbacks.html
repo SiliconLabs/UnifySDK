@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Z-Wave Controller callbacks</title>
+<title>Z-Wave Protocol Controller Refrence: Z-Wave Controller Callbacks</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('group__zwave__controller__callbacks.ht
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Z-Wave Controller callbacks<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a></div></div>  </div>
+<div class="title">Z-Wave Controller Callbacks<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__controller__component.html">Z-Wave Controller Component</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -110,10 +110,13 @@ Macros</h2></td></tr>
 <tr class="memitem:ga67730d6979cf7f616ffbd41dba465fa2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga67730d6979cf7f616ffbd41dba465fa2">ZWAVE_CONTROLLER_RESET_STEP_MIN_PRIORITY</a>&#160;&#160;&#160;0</td></tr>
 <tr class="memdesc:ga67730d6979cf7f616ffbd41dba465fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum Priority for a reset step.  <a href="group__zwave__controller__callbacks.html#ga67730d6979cf7f616ffbd41dba465fa2">More...</a><br /></td></tr>
 <tr class="separator:ga67730d6979cf7f616ffbd41dba465fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5dff7aa68712022861b11db0d0ed48ee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga5dff7aa68712022861b11db0d0ed48ee">ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:gaaea51c9e70d7965bb15ed5b29b0bc695"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#gaaea51c9e70d7965bb15ed5b29b0bc695">ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:gaaea51c9e70d7965bb15ed5b29b0bc695"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean-up Associations to ourselves in the network.  <a href="group__zwave__controller__callbacks.html#gaaea51c9e70d7965bb15ed5b29b0bc695">More...</a><br /></td></tr>
+<tr class="separator:gaaea51c9e70d7965bb15ed5b29b0bc695"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5dff7aa68712022861b11db0d0ed48ee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga5dff7aa68712022861b11db0d0ed48ee">ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY</a>&#160;&#160;&#160;2</td></tr>
 <tr class="memdesc:ga5dff7aa68712022861b11db0d0ed48ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify the lifeline destinations that we are resetting.  <a href="group__zwave__controller__callbacks.html#ga5dff7aa68712022861b11db0d0ed48ee">More...</a><br /></td></tr>
 <tr class="separator:ga5dff7aa68712022861b11db0d0ed48ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9d47b901a05c30859bea3ce34ce36c89"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga9d47b901a05c30859bea3ce34ce36c89">ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:ga9d47b901a05c30859bea3ce34ce36c89"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga9d47b901a05c30859bea3ce34ce36c89">ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY</a>&#160;&#160;&#160;3</td></tr>
 <tr class="memdesc:ga9d47b901a05c30859bea3ce34ce36c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up the SmartStart as we exit the network.  <a href="group__zwave__controller__callbacks.html#ga9d47b901a05c30859bea3ce34ce36c89">More...</a><br /></td></tr>
 <tr class="separator:ga9d47b901a05c30859bea3ce34ce36c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gacf03c126e4680e51fd814c06ab389134"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#gacf03c126e4680e51fd814c06ab389134">ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY</a>&#160;&#160;&#160;4</td></tr>
@@ -125,18 +128,18 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga19a2f7ef3376c01ae1e1ff8439b70be0"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga19a2f7ef3376c01ae1e1ff8439b70be0">zwave_controller_reset_step_t</a>) (void)</td></tr>
+<tr class="memitem:ga19a2f7ef3376c01ae1e1ff8439b70be0"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga19a2f7ef3376c01ae1e1ff8439b70be0">zwave_controller_reset_step_t</a>) (void)</td></tr>
 <tr class="separator:ga19a2f7ef3376c01ae1e1ff8439b70be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga12b82fdf317e0eb3bf314a037c7ae855"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga12b82fdf317e0eb3bf314a037c7ae855">zwave_controller_register_callbacks</a> (const <a class="el" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *<a class="el" href="zwapi__internal_8h.html#afc8113e4f1b79c8443755893466cefe2">callbacks</a>)</td></tr>
+<tr class="memitem:ga12b82fdf317e0eb3bf314a037c7ae855"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga12b82fdf317e0eb3bf314a037c7ae855">zwave_controller_register_callbacks</a> (const <a class="el" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *<a class="el" href="zwapi__internal_8h.html#afc8113e4f1b79c8443755893466cefe2">callbacks</a>)</td></tr>
 <tr class="memdesc:ga12b82fdf317e0eb3bf314a037c7ae855"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let another component register its callbacks for Z-Wave Controller events.  <a href="group__zwave__controller__callbacks.html#ga12b82fdf317e0eb3bf314a037c7ae855">More...</a><br /></td></tr>
 <tr class="separator:ga12b82fdf317e0eb3bf314a037c7ae855"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga309588a69b22d3b1667e19e82fce835c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">zwave_controller_deregister_callbacks</a> (const <a class="el" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *<a class="el" href="zwapi__internal_8h.html#afc8113e4f1b79c8443755893466cefe2">callbacks</a>)</td></tr>
+<tr class="memitem:ga309588a69b22d3b1667e19e82fce835c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">zwave_controller_deregister_callbacks</a> (const <a class="el" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *<a class="el" href="zwapi__internal_8h.html#afc8113e4f1b79c8443755893466cefe2">callbacks</a>)</td></tr>
 <tr class="memdesc:ga309588a69b22d3b1667e19e82fce835c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let another component deregister its callbacks for Z-Wave Controller events.  <a href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">More...</a><br /></td></tr>
 <tr class="separator:ga309588a69b22d3b1667e19e82fce835c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga03053680af8662ef6fe9edf17d790eca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga03053680af8662ef6fe9edf17d790eca">zwave_controller_register_reset_step</a> (const <a class="el" href="group__zwave__controller__callbacks.html#ga19a2f7ef3376c01ae1e1ff8439b70be0">zwave_controller_reset_step_t</a> step_function, int32_t priority)</td></tr>
+<tr class="memitem:ga03053680af8662ef6fe9edf17d790eca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#ga03053680af8662ef6fe9edf17d790eca">zwave_controller_register_reset_step</a> (const <a class="el" href="group__zwave__controller__callbacks.html#ga19a2f7ef3376c01ae1e1ff8439b70be0">zwave_controller_reset_step_t</a> step_function, int32_t priority)</td></tr>
 <tr class="memdesc:ga03053680af8662ef6fe9edf17d790eca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Let another component register a step to perform when being reset.  <a href="group__zwave__controller__callbacks.html#ga03053680af8662ef6fe9edf17d790eca">More...</a><br /></td></tr>
 <tr class="separator:ga03053680af8662ef6fe9edf17d790eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabc2b2fe46f23b718d3abd1b879a162b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html#gabc2b2fe46f23b718d3abd1b879a162b2">zwave_controller_on_reset_step_complete</a> (int32_t priority)</td></tr>
@@ -156,6 +159,22 @@ Functions</h2></td></tr>
  my_callbacks.on_new_suc = NULL;<br  />
  </code> </div><p> The user component must de-register callbacks if the variable is to be destroyed </p><div> <code> zwave_controller_deregister_callbacks(my_callbacks);<br  />
  // Now my_callbacks can be destroyed </code> </div> <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="gaaea51c9e70d7965bb15ed5b29b0bc695"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaea51c9e70d7965bb15ed5b29b0bc695">&#9670;&nbsp;</a></span>ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clean-up Associations to ourselves in the network. </p>
+
+</div>
+</div>
 <a id="ga5dff7aa68712022861b11db0d0ed48ee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga5dff7aa68712022861b11db0d0ed48ee">&#9670;&nbsp;</a></span>ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY</h2>
 
@@ -163,7 +182,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY&#160;&#160;&#160;1</td>
+          <td class="memname">#define ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY&#160;&#160;&#160;2</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -211,7 +230,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY&#160;&#160;&#160;2</td>
+          <td class="memname">#define ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY&#160;&#160;&#160;3</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -260,7 +279,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(* zwave_controller_reset_step_t) (void)</td>
+          <td class="memname">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(* zwave_controller_reset_step_t) (void)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -295,7 +314,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_controller_deregister_callbacks </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_controller_deregister_callbacks </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *&#160;</td>
           <td class="paramname"><em>callbacks</em></td><td>)</td>
@@ -311,9 +330,9 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__sl__status.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> if the callback pointer has been deregistered or was already unregistered. </dd>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__unify__sl__status__codes.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> if the callback pointer has been deregistered or was already unregistered. </dd>
 <dd>
-<a class="el" href="group__sl__status.html#ga8d4ff3e970d8ef29a01f6b5dc3185c20">SL_STATUS_FAIL</a> if an error happened e.g. invalid value. </dd></dl>
+<a class="el" href="group__unify__sl__status__codes.html#ga8d4ff3e970d8ef29a01f6b5dc3185c20">SL_STATUS_FAIL</a> if an error happened e.g. invalid value. </dd></dl>
 
 </div>
 </div>
@@ -350,7 +369,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_controller_register_callbacks </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_controller_register_callbacks </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *&#160;</td>
           <td class="paramname"><em>callbacks</em></td><td>)</td>
@@ -372,11 +391,11 @@ Functions</h2></td></tr>
 <p>The caller may provide a callback struct pointer containing a set of NULL and valid functions. The <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> Component keeps the pointer value, so a component can subsequently deregister a function by changing it to NULL or a new value in its <a class="el" href="structzwave__controller__callbacks__t.html" title="The following structure holds all the callbacks this module will emit.">zwave_controller_callbacks_t</a> variable.</p>
 <p>If all functions are NULL in a <a class="el" href="structzwave__controller__callbacks__t.html" title="The following structure holds all the callbacks this module will emit.">zwave_controller_callbacks_t</a> variable, the component should deregister its callback variable by calling <a class="el" href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">zwave_controller_deregister_callbacks</a>.</p>
 <p>Components must deregister their callbacks before shutting down and destroying the <a class="el" href="structzwave__controller__callbacks__t.html" title="The following structure holds all the callbacks this module will emit.">zwave_controller_callbacks_t</a> variables passed to this function.</p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__sl__status.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> if the callback pointer has been registered. </dd>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__unify__sl__status__codes.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> if the callback pointer has been registered. </dd>
 <dd>
-<a class="el" href="group__sl__status.html#ga8d4ff3e970d8ef29a01f6b5dc3185c20">SL_STATUS_FAIL</a> if the callback pointer is invalid </dd>
+<a class="el" href="group__unify__sl__status__codes.html#ga8d4ff3e970d8ef29a01f6b5dc3185c20">SL_STATUS_FAIL</a> if the callback pointer is invalid </dd>
 <dd>
-<a class="el" href="group__sl__status.html#gad163e84f427eb6af6f872c4f3b409c21">SL_STATUS_NO_MORE_RESOURCE</a> if the maximum number of subscribers registered callbacks. </dd></dl>
+<a class="el" href="group__unify__sl__status__codes.html#gad163e84f427eb6af6f872c4f3b409c21">SL_STATUS_NO_MORE_RESOURCE</a> if the maximum number of subscribers registered callbacks. </dd></dl>
 
 </div>
 </div>
@@ -387,7 +406,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_controller_register_reset_step </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_controller_register_reset_step </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__zwave__controller__callbacks.html#ga19a2f7ef3376c01ae1e1ff8439b70be0">zwave_controller_reset_step_t</a>&#160;</td>
           <td class="paramname"><em>step_function</em>, </td>
@@ -423,7 +442,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:33 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

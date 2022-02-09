@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -133,6 +133,7 @@ sl_status_t uic_mqtt_setup()
                                       uic_mqtt_process_on_connect);
   mqtt_client_on_disconnect_callback_set(client_instance,
                                          uic_mqtt_process_on_disconnect);
+
   process_start(&uic_mqtt_process, NULL);
   return mqtt_client_setup(client_instance);
 }
@@ -184,6 +185,17 @@ void uic_mqtt_unsubscribe(const char *topic,
                                            const size_t message_length))
 {
   mqtt_client_unsubscribe(client_instance, topic, callBack);
+}
+
+void uic_mqtt_set_before_disconnect_callback(void (*before_disconnect)())
+{
+  mqtt_client_before_disconnect_callback_set(client_instance,
+                                             before_disconnect);
+}
+
+void uic_mqtt_set_after_connect_callback(void (*after_connect)())
+{
+  mqtt_client_after_connect_callback_set(client_instance, after_connect);
 }
 
 // Contiki process implementation

@@ -1,6 +1,7 @@
 var group__zigpc__gateway__notify =
 [
     [ "zigpc_gateway_on_network_init", "structzigpc__gateway__on__network__init.html", [
+      [ "zigpc_endpoint_id", "structzigpc__gateway__on__network__init.html#a0fa563a4fb75f55e69380e222e151c29", null ],
       [ "zigpc_eui64", "structzigpc__gateway__on__network__init.html#ad113b5f4e40b60601fed1b9895f07262", null ],
       [ "zigpc_ext_panid", "structzigpc__gateway__on__network__init.html#a763f295281fe09743c9028dc397dd821", null ],
       [ "zigpc_panid", "structzigpc__gateway__on__network__init.html#ad17f57707cb325ad12c8f66cd4f4aab4", null ],
@@ -14,6 +15,7 @@ var group__zigpc__gateway__notify =
     ] ],
     [ "zigpc_gateway_on_node_discovered_t", "structzigpc__gateway__on__node__discovered__t.html", [
       [ "endpoint_count", "structzigpc__gateway__on__node__discovered__t.html#a5d36b803eba9742a14d6413b77718391", null ],
+      [ "endpoint_list", "structzigpc__gateway__on__node__discovered__t.html#ad2a2fe801951be0584fb2bfd0e16ee5e", null ],
       [ "eui64", "structzigpc__gateway__on__node__discovered__t.html#a50f5d5d406716bea484834c707592296", null ]
     ] ],
     [ "zigpc_gateway_on_node_endpoint_discovered_t", "structzigpc__gateway__on__node__endpoint__discovered__t.html", [
@@ -55,6 +57,7 @@ var group__zigpc__gateway__notify =
       [ "manufacturer_id", "structzigpc__gateway__on__ota__completed__t.html#a97d2249da0572ed39d3cd4f67dbcd445", null ],
       [ "status", "structzigpc__gateway__on__ota__completed__t.html#a544d6f77c760e24ea4108354c2cb5a07", null ]
     ] ],
+    [ "zigpc_gateway_on_network_init_t", "group__zigpc__gateway__notify.html#ga00ae90f318ee86d24b977cb4e2c2e456", null ],
     [ "zigpc_gateway_on_node_add_t", "group__zigpc__gateway__notify.html#gad109b0fac14a7d637091f8fa42a14a0c", null ],
     [ "zigpc_gateway_notify_event", "group__zigpc__gateway__notify.html#ga68b826da48d6db275d1cd028d9ec0cfc", [
       [ "ZIGPC_GATEWAY_NOTIFY_NETWORK_INIT", "group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfca146a0cdeae8070b9fbf5e6c0976dbf97", null ],

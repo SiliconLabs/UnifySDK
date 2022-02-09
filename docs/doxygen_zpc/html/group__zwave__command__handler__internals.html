@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Internal definitions for the Z-Wave Command Handler</title>
+<title>Z-Wave Protocol Controller Refrence: Internal definitions for the Z-Wave Command Handler</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('group__zwave__command__handler__intern
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">Internal definitions for the Z-Wave Command Handler<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__zwave__command__handler.html">Z-Wave Application Command Class Handler</a></div></div>  </div>
+<div class="title">Internal definitions for the Z-Wave Command Handler<div class="ingroups"><a class="el" href="group__zwave__command__handler.html">Z-Wave Application Command Class Handler</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -110,13 +110,13 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga5fad9a290e46d9f66f468fe9c3b1110f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler__internals.html#ga5fad9a290e46d9f66f468fe9c3b1110f">supports_frame_at_security_level</a> (<a class="el" href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">zwave_command_handler_it_t</a> it, <a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> scheme)</td></tr>
+<tr class="memitem:ga5fad9a290e46d9f66f468fe9c3b1110f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler__internals.html#ga5fad9a290e46d9f66f468fe9c3b1110f">supports_frame_at_security_level</a> (<a class="el" href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">zwave_command_handler_it_t</a> it, <a class="el" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> scheme)</td></tr>
 <tr class="memdesc:ga5fad9a290e46d9f66f468fe9c3b1110f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a Command Class is supported at a certain Security level.  <a href="group__zwave__command__handler__internals.html#ga5fad9a290e46d9f66f468fe9c3b1110f">More...</a><br /></td></tr>
 <tr class="separator:ga5fad9a290e46d9f66f468fe9c3b1110f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga61c04e8d2474fecab69927e6c7fe9f21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler__internals.html#ga61c04e8d2474fecab69927e6c7fe9f21">zpc_highest_scheme</a></td></tr>
+<tr class="memitem:ga61c04e8d2474fecab69927e6c7fe9f21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler__internals.html#ga61c04e8d2474fecab69927e6c7fe9f21">zpc_highest_scheme</a></td></tr>
 <tr class="separator:ga61c04e8d2474fecab69927e6c7fe9f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga7ef9478d91c0baba3efc62c91803b237"><td class="memItemLeft" align="right" valign="top">std::multiset&lt; <a class="el" href="structzwave__command__handler__t.html">zwave_command_handler_t</a>, <a class="el" href="structzwave__command__handler__compare.html">zwave_command_handler_compare</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__handler__internals.html#ga7ef9478d91c0baba3efc62c91803b237">command_handler_list</a></td></tr>
 <tr class="separator:ga7ef9478d91c0baba3efc62c91803b237"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,7 +154,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a>&#160;</td>
           <td class="paramname"><em>scheme</em>&#160;</td>
         </tr>
         <tr>
@@ -213,7 +213,7 @@ false if the Command Class is not supported for the given scheme </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> zpc_highest_scheme</td>
+          <td class="memname"><a class="el" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> zpc_highest_scheme</td>
         </tr>
       </table>
   </td>
@@ -230,7 +230,7 @@ false if the Command Class is not supported for the given scheme </dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:37 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

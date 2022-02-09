@@ -1,4 +1,5 @@
 import { Image } from "./pages/ota/ota-types";
+import { UPTI } from "./pages/upti/upti-list/upti-list-types";
 
 export type AppState = {
   SocketServer: WebSocket,
@@ -7,7 +8,8 @@ export type AppState = {
   NodeList: any[],
   GroupList: any[],
   SmartStartList: any[],
-  OTAImageList: Image[]
+  OTAImageList: Image[],
+  UPTI: UPTI
 }
 
 export type LocalStorage = {

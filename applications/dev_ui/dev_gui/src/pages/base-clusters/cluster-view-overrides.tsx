@@ -140,6 +140,30 @@ export let ClusterViewOverrides = {
         } as NavbarItem,
     } as ClusterViewOverride,
     ColorControl: {
+        ViewTable: [
+            {
+                Name: ``,
+                Value: (item: any, colorPicker: any) => item.SupportedCommands?.indexOf("MoveToHueAndSaturation") > -1 ?
+                    colorPicker(item)
+                    : ""
+            },
+            {
+                Name: `Current Hue`,
+                Value: (item: any) => item.Attributes?.CurrentHue?.Reported || "-"
+            },
+            {
+                Name: `Current Saturation`,
+                Value: (item: any) => item.Attributes?.CurrentSaturation?.Reported || "-"
+            },
+            {
+                Name: `Remaining Time`,
+                Value: (item: any) => item.Attributes?.RemainingTime?.Reported || "-"
+            },
+            {
+                Name: `Drift Compensation`,
+                Value: (item: any) => item.Attributes?.DriftCompensation?.Reported || "-"
+            }
+        ],
         NodesTooltip: (endpoint: string, attr: any) => <Tooltip title={`${endpoint}: Color Control`}><span className="cursor-defult"><MdIcons.MdInvertColors /></span></Tooltip>,
         NavbarItem: {
             name: ClusterTypes.ColorControl,
@@ -202,6 +226,24 @@ export let ClusterViewOverrides = {
             path: '/battery',
             icon: <MdIcons.MdBatteryStd />,
             cName: 'nav-text'
-        } as NavbarItem,
+        } as NavbarItem
+    } as ClusterViewOverride,
+    RFTelemetry: {
+        NavbarItem: {
+            name: 'RF Telemetry',
+            title: 'RF Telemetry',
+            path: '/rftelemetry',
+            icon: <MdIcons.MdOutlineTransform />,
+            cName: 'nav-text'
+        } as NavbarItem
+    } as ClusterViewOverride,
+    NameAndLocation: {
+        NodesTooltip: (endpoint: string, attr: any) => <Tooltip title="NameAndLocation"><span className="cursor-defult"><MdIcons.MdBookmarks /></span></Tooltip>
+    } as ClusterViewOverride,
+    AoXLocator: {
+        NodesTooltip: () => <Tooltip title="AoXLocator"><span className="cursor-defult"><IoIcons.IoIosLocate /></span></Tooltip>
+    } as ClusterViewOverride,
+    AoXPositionEstimation: {
+        NodesTooltip: () => <Tooltip title="AoXPositionEstimation"><span className="cursor-defult"><IoIcons.IoMdLocate /></span></Tooltip>
     } as ClusterViewOverride
 }

@@ -1,8 +1,8 @@
 Template: uic-zpc/serial_port
 Type: string
-Default: /dev/ttyACM0
+Default: /dev/ttyUSB0
 Description: The serial port where z-wave controller is connected.
- (default: /dev/ttyACM0)
+ (default: /dev/ttyUSB0)
 
 Template: uic-zpc/region
 Type: select
@@ -13,6 +13,6 @@ Description: Z-wave Frequency region to work on
 
 Template: uic-zpc/datastore_file
 Type: string
-Default: ${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/database.db
+Default: ${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/zpc.db
 Description: The datastore file
- (default: ${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/database.db)
+ (default: ${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/zpc.db)

@@ -17,7 +17,7 @@ extern "C" {
 
 #include <unity.h>
 #include <sl_status.h>
-#include <uic_mqtt_mock.h>
+#include "uic_mqtt_mock.h"
 
 /**
  * @brief Setup the test suite (called once before all test_xxx functions are called)
@@ -111,12 +111,12 @@ void test_mqtt_parse_unid_should_detect_invalid_signature(void)
 
 void test_parse_payload_should_reject_invalid_json(void)
 {
-  bpt::ptree pt;
+  nlohmann::json jsn;
 
   // ACT
-  sl_status_t status_null    = zigpc_ucl::mqtt::parse_payload(nullptr, pt);
-  sl_status_t status_empty   = zigpc_ucl::mqtt::parse_payload("", pt);
-  sl_status_t status_invalid = zigpc_ucl::mqtt::parse_payload("{", pt);
+  sl_status_t status_null    = zigpc_ucl::mqtt::parse_payload(nullptr, jsn);
+  sl_status_t status_empty   = zigpc_ucl::mqtt::parse_payload("", jsn);
+  sl_status_t status_invalid = zigpc_ucl::mqtt::parse_payload("{", jsn);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_NULL_POINTER, status_null);
@@ -126,27 +126,27 @@ void test_parse_payload_should_reject_invalid_json(void)
 
 void test_parse_payload_should_accept_empty_json(void)
 {
-  bpt::ptree pt;
+  nlohmann::json jsn;
 
   // ACT
-  sl_status_t status = zigpc_ucl::mqtt::parse_payload("{}", pt);
+  sl_status_t status = zigpc_ucl::mqtt::parse_payload("{}", jsn);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
-  TEST_ASSERT_TRUE(pt.empty());
+  TEST_ASSERT_TRUE(jsn.empty());
 }
 
 void test_parse_payload_should_accept_valid_json(void)
 {
-  bpt::ptree pt;
+  nlohmann::json jsn;
 
   // ACT
-  sl_status_t status = zigpc_ucl::mqtt::parse_payload("{\"a\": 2}", pt);
+  sl_status_t status = zigpc_ucl::mqtt::parse_payload("{\"a\": 2}", jsn);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
-  TEST_ASSERT_FALSE(pt.empty());
-  TEST_ASSERT_EQUAL(2, pt.get<int>("a"));
+  TEST_ASSERT_FALSE(jsn.empty());
+  TEST_ASSERT_EQUAL(2, jsn["a"].get<int>());
 }
 
 void test_build_topic_sanity(void)
@@ -167,6 +167,26 @@ void test_build_topic_sanity(void)
   TEST_ASSERT_EQUAL_STRING(
     "ucl/by-unid/zb-1234567812345678/ProtocolController/NetworkManagement",
     topic.c_str());
+}
+
+void test_build_topic_ep_sanity(void)
+{
+  std::string topic;
+  zigpc_ucl::mqtt::topic_data_t data = {
+    .eui64       = 0x1234567812345678,
+    .endpoint_id = 123,
+  };
+
+  // ACT
+  sl_status_t status = zigpc_ucl::mqtt::build_topic(
+    zigpc_ucl::mqtt::topic_type_t::BY_UNID_NODE_EP,
+    data,
+    topic);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+  TEST_ASSERT_EQUAL_STRING("ucl/by-unid/zb-1234567812345678/ep123",
+                           topic.c_str());
 }
 
 void test_subscribe_reject_invalid_args(void)
@@ -233,6 +253,24 @@ void test_publish_sanity(void)
                                payload.c_str(),
                                payload.size(),
                                true);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+}
+
+void test_unretain_sanity(void)
+{
+  // ARRANGE
+  zigpc_ucl::mqtt::topic_data_t data = {
+    .eui64 = 0x1234567812345678,
+  };
+
+  uic_mqtt_unretain_Expect("ucl/by-unid/zb-1234567812345678");
+
+  // ACT
+  sl_status_t status
+    = zigpc_ucl::mqtt::unretain(zigpc_ucl::mqtt::topic_type_t::BY_UNID_NODE,
+                                data);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);

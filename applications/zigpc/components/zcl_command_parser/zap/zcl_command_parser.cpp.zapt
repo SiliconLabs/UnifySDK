@@ -32,17 +32,12 @@
 #include "zcl_command_parser_int.h"
 
 constexpr char LOG_TAG[] = "{{component_cmdparser_prefix}}";
+constexpr char LOG_FMT_MALFORMED_FIELD[] = "%s/%s malformed field %s";
+constexpr char LOG_FMT_PARSE_SUCCESS[] ="%s/%s parsed successfully";
 
 {{zcl_commands_filtered_reset}}
-{{#zcl_clusters}}
-{{#zcl_commands}}
-{{#if (supportedCluster parent.label)}}
-{{#if (isEqual source "client")}}
-{{zcl_commands_filtered_add}}
-{{/if}}
-{{/if}}
-{{/zcl_commands}}
-{{/zcl_clusters}}
+{{#zcl_clusters}}{{#zcl_commands}}{{#if (supportedCluster parent.label)}}{{#if (isEqual source "client")}}{{zcl_commands_filtered_add}}{{/if}}{{/if}}{{/zcl_commands}}{{/zcl_clusters}}
+
 {{!-- Wait till the above operation has been processed by ZAP --}}
 {{#after}}
 /**
@@ -120,14 +115,18 @@ bool {{component_cmdparser_prefix}}_cluster_command_supported(zcl_cluster_id_t c
       // Unable to get size of parameter
       status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_UNSUP_CLUSTER_COMMAND;
     } else if (cmd->frame.size < (payload_offset + arg_size)) {
+      sl_log_warning(LOG_TAG, LOG_FMT_MALFORMED_FIELD, "{{paren.parent.label}}","{{parent.label}}", "{{label}}");
       status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_MALFORMED_COMMAND;
     } else {
-{{#if isArray}}
-      data->{{asSnakeCaseLower label}} = ({{asZigPCZclStructType type}} *) &cmd->frame.buffer;
-{{else}}
+  {{#if isArray}}
+      // NOTE: ZCL Struct arrays occupy the rest of the message
+      data->{{asSnakeCaseLower label}}_count = (cmd->frame.size - payload_offset) / arg_size;
+      data->{{asSnakeCaseLower label}} = ({{asZigPCZclStructType type}} *) (cmd->frame.buffer + payload_offset);
+      payload_offset += arg_size * data->{{asSnakeCaseLower label}}_count;
+  {{else}}
       memcpy(data->{{asSnakeCaseLower label}}, &cmd->frame.buffer[payload_offset], arg_size);
-{{/if}}
       payload_offset += arg_size;
+  {{/if}}
     }
   }
 {{else if isArray}}
@@ -138,7 +137,7 @@ bool {{component_cmdparser_prefix}}_cluster_command_supported(zcl_cluster_id_t c
     if (arg_size == 0) {
       // Unable to get size of parameter
       status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_UNSUP_CLUSTER_COMMAND;
-    } else if (cmd->frame.size < (payload_offset + (arg_size * arg_array_count)) + 1) {
+    } else if (cmd->frame.size < (payload_offset + (arg_size * arg_array_count) + 1)) {
       status = {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_MALFORMED_COMMAND;
     } else {
       data->{{asSnakeCaseLower label}}_count = arg_array_count;
@@ -183,7 +182,7 @@ bool {{component_cmdparser_prefix}}_cluster_command_supported(zcl_cluster_id_t c
   if (status == {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_STATUS_SUCCESS) {
     result->cluster_id = {{asZigPCZclClusterType parent}};
     result->command_id = {{asZigPCZclCommandType parent this}};
-    sl_log_debug(LOG_TAG, "{{parent.label}}/{{label}} parsed successfully");
+    sl_log_debug(LOG_TAG, LOG_FMT_PARSE_SUCCESS, "{{parent.label}}", "{{label}}");
   }
   return status;
 }

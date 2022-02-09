@@ -143,6 +143,39 @@ bool zwave_command_class_agi_is_command_allowed_for_group(
   zwave_command_class_t command_class,
   zwave_command_t command);
 
+/**
+ * @brief Registers a Command Class / Command pair that we want to make
+ * sure to receive via Associations.
+ *
+ * The AGI/Association command classes will make sure to associate the ZPC
+ * (in a non-forceful manner, i.e. without the help of Association Remove)
+ * to any group containing the Command Class / Command pairs indicated by
+ * user components using this API.
+ *
+ * Note: once a request is made, it cannot be undone.
+ *
+ * @param command_class   Command Class Identifier
+ * @param command         Command Identifier
+ *
+ */
+void zwave_command_class_agi_request_to_establish_association(
+  zwave_command_class_t command_class, zwave_command_t command);
+
+/**
+ * @brief Verifies if a Group ID sends some Command Class/Command information
+ * that we want to listen to (and therefore should establish an association)
+ *
+ * @param node_id   Command Class Identifier
+ * @param command         Command Identifier
+ *
+ * @returns true if association must be established
+ *          false if we do not particularly have to make an association
+ */
+bool zwave_command_class_agi_group_contains_listeners(
+  zwave_node_id_t node_id,
+  zwave_endpoint_id_t endpoint_id,
+  association_group_id_t group_id);
+
 #ifdef __cplusplus
 }
 #endif

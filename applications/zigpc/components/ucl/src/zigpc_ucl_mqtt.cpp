@@ -12,8 +12,9 @@
  *****************************************************************************/
 
 #include <string>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+#include <iomanip>
+#include <sstream>
+#include <nlohmann/json.hpp>
 
 // UIC libraries
 #include <sl_log.h>
@@ -33,6 +34,7 @@ namespace topic_part
 {
 constexpr std::string_view UCL        = "ucl/";
 constexpr std::string_view BY_UNID    = "by-unid/";
+constexpr std::string_view BY_EP      = "/ep";
 constexpr std::string_view NODE_STATE = "/State";
 constexpr std::string_view PC_NWMGMT  = "/ProtocolController/NetworkManagement";
 }  // namespace topic_part
@@ -106,6 +108,13 @@ sl_status_t
       topic_ss << topic_part::BY_UNID << unid << topic_part::PC_NWMGMT
                << "/Write";
       break;
+    case topic_type_t::BY_UNID_NODE:
+      topic_ss << topic_part::BY_UNID << unid;
+      break;
+    case topic_type_t::BY_UNID_NODE_EP:
+      topic_ss << topic_part::BY_UNID << unid << topic_part::BY_EP << std::dec
+               << static_cast<int>(topic_data.endpoint_id);
+      break;
     case topic_type_t::BY_UNID_NODE_STATE:
       topic_ss << topic_part::BY_UNID << unid << topic_part::NODE_STATE;
       break;
@@ -162,31 +171,37 @@ sl_status_t zigpc_ucl::mqtt::publish(zigpc_ucl::mqtt::topic_type_t topic_type,
   return status;
 }
 
-sl_status_t zigpc_ucl::mqtt::parse_payload(const char *payload, bpt::ptree &pt)
+sl_status_t zigpc_ucl::mqtt::unretain(zigpc_ucl::mqtt::topic_type_t topic_type,
+                                      zigpc_ucl::mqtt::topic_data_t topic_data)
+{
+  std::string topic;
+
+  sl_status_t status
+    = zigpc_ucl::mqtt::build_topic(topic_type, topic_data, topic);
+  if (status == SL_STATUS_OK) {
+    uic_mqtt_unretain(topic.c_str());
+  }
+
+  return status;
+}
+
+sl_status_t zigpc_ucl::mqtt::parse_payload(const char *payload, nlohmann::json &jsn)
 {
   sl_status_t status = SL_STATUS_OK;
-  std::stringstream payload_ss;
 
   if (payload == nullptr) {
     status = SL_STATUS_NULL_POINTER;
-  } else {
-    std::string payload_str(payload);
-
-    if (payload_str.empty()) {
-      status = SL_STATUS_EMPTY;
-    } else {
-      payload_ss << payload_str;
-    }
+  } else if (std::char_traits<char>::length(payload) == 0) {
+    status = SL_STATUS_EMPTY;
   }
 
   if (status == SL_STATUS_OK) {
     try {
-      bpt::json_parser::read_json(payload_ss, pt);
-    } catch (const bpt::json_parser_error &err) {
+      jsn = nlohmann::json::parse(payload);
+    } catch (const nlohmann::json::parse_error& err) {
       sl_log_warning(zigpc_ucl::LOG_TAG,
                      "Failed to parse payload: %s",
                      err.what());
-      pt.clear();
       status = SL_STATUS_OBJECT_READ;
     }
   }

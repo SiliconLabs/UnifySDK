@@ -136,6 +136,8 @@ void zigpc_smartstart_on_list_update(bool entries_pending_inclusion)
   std::vector<smartstart::Entry> include_entries
     = smartstart::Management::get_instance()->get_cache_entries(q);
 
+  size_t install_codes_added = 0U;
+
   for (smartstart::Entry entry: include_entries) {
     if (!entry.device_unid.empty()) {
       continue;
@@ -154,11 +156,22 @@ void zigpc_smartstart_on_list_update(bool entries_pending_inclusion)
         status = zigpc_net_mgmt_add_node(dsk_content.eui64,
                                          dsk_content.install_code,
                                          dsk_content.install_code_length);
-        if (status == SL_STATUS_OK) {
-          status = zigpc_netmgmt_network_permit_joins(true);
+        if (status != SL_STATUS_OK) {
+          sl_log_warning(LOG_TAG,
+                         "Failed to add DSK-based Install Code: 0x%X",
+                         status);
+        } else {
+          ++install_codes_added;
         }
       }
-      sl_log_debug(LOG_TAG, "Node addition status: 0x%X", status);
+      sl_log_debug(LOG_TAG, "Install code add status: 0x%X", status);
+    }
+  }
+
+  if (install_codes_added > 0U) {
+    sl_status_t status = zigpc_netmgmt_network_permit_joins(true);
+    if (status != SL_STATUS_OK) {
+      sl_log_warning(LOG_TAG, "Failed to open network: 0x%X", status);
     }
   }
 }

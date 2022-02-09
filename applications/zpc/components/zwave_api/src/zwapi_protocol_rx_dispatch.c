@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -122,6 +122,40 @@ static const char *zwapi_frame_to_string(const uint8_t *buffer,
       += snprintf(message + index, sizeof(message) - index, "%02X ", buffer[i]);
   }
   return message;
+}
+
+/**
+ * @brief Fills default values in the Tx Report in case it is too short or
+ * incomplete coming from the Z-Wave API
+ *
+ * @param tx_report [out] Pointer to the struct where the default values are written.
+ */
+static void fill_default_tx_report_values(zwapi_tx_report_t *tx_report)
+{
+  tx_report->transmit_ticks                            = 0;
+  tx_report->number_of_repeaters                       = 0;
+  tx_report->ack_rssi                                  = RSSI_NOT_AVAILABLE;
+  tx_report->rssi_values.incoming[0]                   = RSSI_NOT_AVAILABLE;
+  tx_report->rssi_values.incoming[1]                   = RSSI_NOT_AVAILABLE;
+  tx_report->rssi_values.incoming[2]                   = RSSI_NOT_AVAILABLE;
+  tx_report->rssi_values.incoming[3]                   = RSSI_NOT_AVAILABLE;
+  tx_report->ack_channel_number                        = 0;
+  tx_report->tx_channel_number                         = 0;
+  tx_report->last_route_repeaters[0]                   = 0;
+  tx_report->last_route_repeaters[1]                   = 0;
+  tx_report->last_route_repeaters[2]                   = 0;
+  tx_report->last_route_repeaters[3]                   = 0;
+  tx_report->beam_250ms                                = false;
+  tx_report->beam_1000ms                               = false;
+  tx_report->last_route_speed                          = UNKNOWN_SPEED;
+  tx_report->routing_attempts                          = 0;
+  tx_report->last_failed_link.from                     = 0;
+  tx_report->last_failed_link.to                       = 0;
+  tx_report->tx_power                                  = RSSI_NOT_AVAILABLE;
+  tx_report->measured_noise_floor                      = RSSI_NOT_AVAILABLE;
+  tx_report->destination_ack_mpdu_tx_power             = RSSI_NOT_AVAILABLE;
+  tx_report->destination_ack_mpdu_measured_rssi        = RSSI_NOT_AVAILABLE;
+  tx_report->destination_ack_mpdu_measured_noise_floor = RSSI_NOT_AVAILABLE;
 }
 
 void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
@@ -328,7 +362,8 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
     case FUNC_ID_ZW_SEND_DATA_BRIDGE:
     case FUNC_ID_ZW_SEND_DATA:
     case FUNC_ID_SEND_NOP: {
-      zwapi_tx_report_t txStatusReport;
+      zwapi_tx_report_t txStatusReport = {};
+      fill_default_tx_report_values(&txStatusReport);
       uint8_t *p       = &pData[IDX_DATA + 1];
       uint8_t txStatus = *p++;
 
@@ -344,31 +379,61 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
       }
 
       if (len >= 24) {
-        txStatusReport.wTransmitTicks = (p[0] << 8) | (p[1] << 0);
+        txStatusReport.transmit_ticks = (p[0] << 8) | (p[1] << 0);
         p += 2;
-        txStatusReport.bRepeaters              = *p++;
+        txStatusReport.number_of_repeaters = *p++;
+        txStatusReport.ack_rssi            = *p++;
+
+        // Byte 5..8, RSSI values for each repeater.
         txStatusReport.rssi_values.incoming[0] = *p++;
         txStatusReport.rssi_values.incoming[1] = *p++;
         txStatusReport.rssi_values.incoming[2] = *p++;
         txStatusReport.rssi_values.incoming[3] = *p++;
-        txStatusReport.rssi_values.incoming[4] = *p++;
-        txStatusReport.bACKChannelNo           = *p++;
-        txStatusReport.bLastTxChannelNo        = *p++;
-        txStatusReport.bRouteSchemeState       = *p++;
-        txStatusReport.pLastUsedRoute[0]       = *p++;
-        txStatusReport.pLastUsedRoute[1]       = *p++;
-        txStatusReport.pLastUsedRoute[2]       = *p++;
-        txStatusReport.pLastUsedRoute[3]       = *p++;
-        txStatusReport.pLastUsedRoute[4]       = *p++;
-        txStatusReport.bRouteTries             = *p++;
-        txStatusReport.bLastFailedLink.from    = *p++;
-        txStatusReport.bLastFailedLink.to      = *p++;
+        txStatusReport.ack_channel_number      = *p++;
+        txStatusReport.tx_channel_number       = *p++;
+        txStatusReport.route_scheme_state      = *p++;
+
+        // Byte 12..15, repeaters NodeIDs, encoded 8 bit no matter what.
+        txStatusReport.last_route_repeaters[0] = *p++;
+        txStatusReport.last_route_repeaters[1] = *p++;
+        txStatusReport.last_route_repeaters[2] = *p++;
+        txStatusReport.last_route_repeaters[3] = *p++;
+
+        // Byte 16, beam and last route speed
+        txStatusReport.beam_1000ms      = (*p) | (1 << 6);
+        txStatusReport.beam_250ms       = (*p) | (1 << 5);
+        txStatusReport.last_route_speed = (*p++) & 0x7;
+
+        txStatusReport.routing_attempts        = *p++;
+        txStatusReport.last_failed_link.from   = *p++;
+        txStatusReport.last_failed_link.to     = *p++;
+
+        if (len >= 25) {
+          txStatusReport.tx_power = *p++;
+        }
+
+        if (len >= 26) {
+          txStatusReport.measured_noise_floor = *p++;
+        }
+
+        if (len >= 27) {
+          txStatusReport.destination_ack_mpdu_tx_power = *p++;
+        }
+
+        if (len >= 28) {
+          txStatusReport.destination_ack_mpdu_measured_rssi = *p++;
+        }
+
+        if (len >= 29) {
+          txStatusReport.destination_ack_mpdu_measured_noise_floor = *p++;
+        }
+
         if (f) {
           f(txStatus, &txStatusReport);
         }
       } else {
         if (f) {
-          f(txStatus, 0);
+          f(txStatus, NULL);
         }
       }
     } break;

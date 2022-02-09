@@ -15,7 +15,7 @@
 #include "uic_mqtt.h"
 #include "sl_log.h"
 #include "sl_status.h"
-#include "dotdot_bitmap.hpp"
+#include "json_helpers.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -26,104 +26,33 @@
 #include <stdexcept>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
 
 #include "dotdot_mqtt.h"
+#include "dotdot_mqtt.hpp"
+#include "dotdot_bitmap.hpp"
+#include "dotdot_mqtt_command_helpers.hpp"
+#include "dotdot_mqtt_internals.hpp"
+#include "dotdot_mqtt_attributes.h"
 #include "dotdot_mqtt_translators.h"
 
-namespace bpt = boost::property_tree;
+#include <nlohmann/json.hpp>
 
-#define LOG_TAG "dotdot_mqtt"
-
-// Use std namespace to allow extending to_string methods below
-using namespace std;
-
-// All bitmaps are defined as the cluster label for the bitmap plus the command/attribute name
-{{#zcl_bitmaps}}
-
-const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> {{label}}_bitmap_data {
-  {{#zcl_bitmap_items}}
-{ {"{{label}}", "{{checkSpecialTypeBitmapsEnum type}}", "{{mask}}", "{{asOffset mask}}"}, {
-  {{#if_is_enum type}}
-    {{#zcl_enums}}
-      {{#if (isSubstringInString parent.label label)}}
-        {{#zcl_enum_items}}
-{"{{label}}", "{{value}}"}{{listComma this}}
-        {{/zcl_enum_items}}
-      {{/if}}
-    {{/zcl_enums}}
-  {{/if_is_enum}}
-} }{{listComma this}}
-  {{/zcl_bitmap_items}}
-};
-dotdot_bitmap {{label}}("{{label}}", "{{type}}", {{label}}_bitmap_data);
-{{/zcl_bitmaps}}
-
-uint32_t get_bitmap_decimal_value(std::string key, bpt::ptree &pt, dotdot_bitmap bitmap_handler) {
-  std::string payload_value(pt.get<std::string>(key));
-  try {
-    uint32_t value = std::stoi(payload_value, nullptr, 0);
-    sl_log_warning(LOG_TAG, "Accepted a decimal value as bitmap argument.");
-    return value;
-
-  } catch (std::invalid_argument &e) {
-    bpt::ptree &sub_tree = pt.get_child(key);
-    return bitmap_handler.get_bitmap_state_value_from_json_tree(sub_tree);
-  }
-}
-
-template<typename Type>
-Type get_enum_decimal_value(std::string key, bpt::ptree &pt) {
-  std::string payload_value(pt.get<std::string>(key));
-  boost::replace_all(payload_value, "\"", "");
-  try {
-    Type value = (Type)std::stoi(payload_value, nullptr, 0);
-    sl_log_warning(LOG_TAG, "Accepted a decimal value as enum argument.");
-    return value;
-  }
-  catch (std::invalid_argument &e) {
-    return pt.get<Type>(key);
-  }
-}
-
-// Implementation of key128 to_string
-std::string to_string(const key128 &A)
-{
-  return A;
-}
-#include<iostream>
- /**
- * Helper function to extract unid and endpoint form a topic string
- *
- * returns true if topic could be parsed
- */
-static bool parse_topic(const std::string& topic,std::string & unid, uint8_t& endpoint) {
-  std::vector<std::string> topic_elements;
-  boost::algorithm::split(topic_elements, topic, boost::is_any_of("/"));
-
-  if(topic_elements.size()< 5) return false;
-  unid = topic_elements[2];
-  const std::string& ep = topic_elements[3];
-  if( (ep.size() < 3) || ep.at(0) !='e' || ep.at(1) !='p') return false;
-  int n = std::stoi( topic_elements[3].substr(2) );
-  if((n < 0) || (n > 255)) return false;
-  endpoint = n;
-  return true;
-}
+static constexpr char LOG_TAG[] = "dotdot_mqtt";
+static constexpr char LOG_FMT_JSON_PARSE_FAIL[] = "by-unid %s::%s: Unable to parse JSON payload: check payload syntax";
+static constexpr char LOG_FMT_JSON_ERROR[] = "by-unid %s::%s: Unable to parse JSON payload: %s";
 
 
-static group_dispatch_t group_dispatch_callback = nullptr;
 
 {{#zcl_clusters}}
 {{#if (supportedCluster label)}}
 
 // Callbacks pointers
 {{#zcl_commands}}
-static {{asCommandCallback this}}_t {{asCommandCallback this}};
+{{asCommandCallback this}}_t {{asCommandCallback this}} = nullptr;
+static {{asCommandCallback this}}_t {{asGeneratedCommandCallback this}} = nullptr;
 {{/zcl_commands}}
-static {{asWriteAttributesCallback this}}_t {{asWriteAttributesCallback this}};
-static {{asForceReadAttributesCallback this}}_t {{asForceReadAttributesCallback this}};
+{{asWriteAttributesCallback this}}_t {{asWriteAttributesCallback this}} = nullptr;
+static {{asForceReadAttributesCallback this}}_t {{asForceReadAttributesCallback this}} = nullptr;
 
 // Callbacks setters
 {{#zcl_commands}}
@@ -131,6 +60,11 @@ void {{asCommandCallback this}}_set(const {{asCommandCallback this}}_t callback)
 {
   {{asCommandCallback this}} = callback;
 }
+void {{asGeneratedCommandCallback this}}_set(const {{asCommandCallback this}}_t callback)
+{
+  {{asGeneratedCommandCallback this}} = callback;
+}
+
 {{/zcl_commands}}
 
 void {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_write_attributes_callback(
@@ -146,263 +80,260 @@ void {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_force_read_attributes_call
 }
 
 {{#zcl_commands}}
-// Callback function for incoming publications on ucl/by-unid/#
-static void {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}(
+
+// Callback function for incoming publications on ucl/by-unid/+/+/{{parent.label}}/Commands/{{label}}
+void {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  uint8_t endpoint;
-  std::string unid;
-
-  if (message_length == 0) {
+  if (message_length == 0 || ({{asCommandCallback this}} == nullptr)) {
     return;
   }
 
-  if(! parse_topic(topic,unid,endpoint)) {
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  {{#if (clusterWithoutEndpoints parent.label)}}
+  if(! uic_dotdot_mqtt::parse_topic_no_endpoint(topic,unid)) {
     sl_log_debug(LOG_TAG,
-                "Error parsing Endpoint ID from topic %s. Ignoring",
+                "Error parsing UNID from topic %s. Ignoring",
                 topic);
     return;
   }
+  {{else}}
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+  {{/if}}
 
+{{#zcl_command_arguments}}
+{{#if isArray}}
+  std::vector<{{asUnderlyingType type}}> {{asSnakeCaseLower label}};
+{{else}}
+  {{asUnderlyingType type}} {{asSnakeCaseLower label}};
+{{/if}}{{/zcl_command_arguments}}
+
+  nlohmann::json jsn;
   try {
-    std::stringstream ss;
-    bpt::ptree pt;
-    ss << std::string(message, message_length);
+    jsn = nlohmann::json::parse(std::string(message));
 
-    bpt::json_parser::read_json(ss, pt);
-
-    if({{asCommandCallback this}}) {
-
-      {{#zcl_command_arguments}}
-      if (pt.count("{{label}}") == 0) {
-        sl_log_debug(LOG_TAG, "{{parent.parent.label}}::{{parent.label}}: Missing command-argument: {{label}}\n");
-        return;
-      }
-      {{/zcl_command_arguments}}
-
-      {{asCommandCallback this}}(
-        static_cast<dotdot_unid_t>(unid.c_str()),
-        endpoint,
-        {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_NORMAL{{#zcl_command_arguments}}{{#first}},{{/first}}
-        {{#if_is_bitmap type}}
-          {{#if (isUnknownBitmap label)}}
-        pt.get<{{asUnderlyingType type}}>("{{label}}"){{listComma this}}
-          {{else}}
-        ({{asUnderlyingType type}})get_bitmap_decimal_value("{{label}}", pt, {{chooseTypeOrBitmapName type parent.label label}}){{listComma this}}
-          {{/if}}
-        {{else}}
-          {{#if_is_enum type}}
-        get_enum_decimal_value<{{asUnderlyingType type}}>("{{label}}", pt){{listComma this}}
-          {{else}}
-        pt.get<{{asUnderlyingType type}}>("{{label}}"){{listComma this}}
-          {{/if_is_enum}}
-        {{/if_is_bitmap}}
-        {{/zcl_command_arguments}}
+  {{#zcl_command_arguments}}{{#first}}
+    {{asCommandParseFunction parent}}(
+      jsn,{{/first}}
+      {{asSnakeCaseLower label}}{{listComma this}}
+{{#last}}
       );
-    }
-  } catch (...) {
-    sl_log_debug(LOG_TAG, "{{label}}: Unable to parse JSON payload.\n");
+{{/last}}{{/zcl_command_arguments}}
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "{{parent.label}}", "{{label}}");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{parent.label}}", "{{label}}", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{parent.label}}", "{{label}}", "");
     return;
   }
 
+  {{asCommandCallback this}}(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_NORMAL{{#zcl_command_arguments}}{{#first}},{{/first}}
+{{#if isArray}}
+    {{asSnakeCaseLower label}}.size(),
+    {{asSnakeCaseLower label}}.data(){{listComma this}}
+{{else}}
+    {{asSnakeCaseLower label}}{{listComma this}}
+{{/if}}{{/zcl_command_arguments}}
+  );
+
 }
 
-// Callback function for incoming publications on ucl/by-group/#
-static void {{dotdot_prefix}}_on_group_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}(
+// Callback function for incoming publications on ucl/by-unid/+/+/{{parent.label}}/GeneratedCommands/{{label}}
+static void {{dotdot_prefix}}_on_generated_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  if (group_dispatch_callback == nullptr) {
-    return;
-  }
-  if (message_length == 0) {
+  if (message_length == 0 || ({{asGeneratedCommandCallback this}} == nullptr)) {
     return;
   }
 
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  {{#if (clusterWithoutEndpoints parent.label)}}
+  if(! uic_dotdot_mqtt::parse_topic_no_endpoint(topic,unid)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+  {{else}}
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+  {{/if}}
+
+{{#zcl_command_arguments}}
+{{#if isArray}}
+  std::vector<{{asUnderlyingType type}}> {{asSnakeCaseLower label}};
+{{else}}
+  {{asUnderlyingType type}} {{asSnakeCaseLower label}};
+{{/if}}{{/zcl_command_arguments}}
+
+  nlohmann::json jsn;
   try {
-    std::stringstream ss;
-    bpt::ptree pt;
-    ss << std::string(message, message_length);
+    jsn = nlohmann::json::parse(std::string(message));
 
-    bpt::json_parser::read_json(ss, pt);
-
-    if({{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_callback) {
-
-      {{#zcl_command_arguments}}
-      if (pt.count("{{label}}") == 0) {
-        sl_log_debug(LOG_TAG, "{{parent.parent.label}}::{{parent.label}}: Missing command-argument: {{label}}\n");
-        return;
-      }
-      {{/zcl_command_arguments}}
-
-      std::string topic_string(topic);
-      std::vector<std::string> topic_elements;
-
-      boost::algorithm::split(topic_elements, topic_string, boost::is_any_of("/"));
-
-      uint16_t group_id = 0;
-      if (0 == sscanf(topic_elements[2].c_str(), "%" SCNu16, &group_id)) {
-        sl_log_debug(LOG_TAG,
-                    "Error parsing Group ID from topic %s. Ignoring",
-                    topic);
-        return;
-      }
-
-      group_dispatch_callback(group_id,
-                              "{{asSnakeCaseLower label}}",
-                              topic_elements.back().c_str(),
-                              message,
-                              message_length,
-                              {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}});
-
-
-	  }
-  } catch (...) {
-    sl_log_debug(LOG_TAG, "{{label}}: Unable to parse JSON payload.\n");
+  {{#zcl_command_arguments}}{{#first}}
+    {{asCommandParseFunction parent}}(
+      jsn,{{/first}}
+      {{asSnakeCaseLower label}}{{listComma this}}
+{{#last}}
+      );
+{{/last}}{{/zcl_command_arguments}}
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "{{parent.label}}", "{{label}}");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{parent.label}}", "{{label}}", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{parent.label}}", "{{label}}", "");
     return;
   }
+
+  {{asGeneratedCommandCallback this}}(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_NORMAL{{#zcl_command_arguments}}{{#first}},{{/first}}
+{{#if isArray}}
+    {{asSnakeCaseLower label}}.size(),
+    {{asSnakeCaseLower label}}.data(){{listComma this}}
+{{else}}
+    {{asSnakeCaseLower label}}{{listComma this}}
+{{/if}}{{/zcl_command_arguments}}
+  );
+
 }
+
 {{/zcl_commands}}
 
-static void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes(
+// Callback function for incoming publications on ucl/by-unid/+/+/{{label}}/Commands/WriteAttributes
+void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  uint8_t endpoint;
-  std::string unid;
+  if ({{asWriteAttributesCallback this}} == nullptr) {
+    return;
+  }
 
   if (message_length == 0) {
     return;
   }
 
-  if(! parse_topic(topic,unid,endpoint)) {
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  {{#if (clusterWithoutEndpoints label)}}
+  if(! uic_dotdot_mqtt::parse_topic_no_endpoint(topic,unid)) {
     sl_log_debug(LOG_TAG,
-                "Error parsing Endpoint ID from topic %s. Ignoring",
+                "Error parsing UNID from topic %s. Ignoring",
                 topic);
     return;
   }
+  {{else}}
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+  {{/if}}
 
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t new_state = {};
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t new_updated_state = {};
+{{#zcl_attributes}}{{#if isWritable}}{{#if (isMonotonousArray label)}}
+  std::vector<{{asUnderlyingType type}}> {{asSnakeCaseLower label}};
+{{/if}}{{/if}}{{/zcl_attributes}}
+
+  nlohmann::json jsn;
   try {
-    std::stringstream ss;
-    bpt::ptree pt;
-    ss << std::string(message,message_length);
+    jsn = nlohmann::json::parse(std::string(message));
 
-    bpt::json_parser::read_json(ss, pt);
-
-    if ( {{asWriteAttributesCallback this}} ) {
-      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t new_state = {0};
-      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t new_updated_state = {0};
-
-      {{#zcl_attributes}}
-      {{#if isWritable }}
-      if (pt.count("{{label}}") > 0) {
-        {{#if_is_enum type}}
-        new_state.{{asSnakeCaseLower label}} = get_enum_decimal_value<{{chooseTypeOrEnumName type parent.label label}}>("{{label}}", pt);
-        {{else}}
-          {{#if_is_bitmap type}}
-        new_state.{{asSnakeCaseLower label}} = get_bitmap_decimal_value("{{label}}", pt, {{chooseTypeOrBitmapName type parent.label label}});
-          {{else}}
-        new_state.{{asSnakeCaseLower label}} = pt.get<{{asUnderlyingType type}}>("{{label}}");
-          {{/if_is_bitmap}}
-        {{/if_is_enum}}
-        new_updated_state.{{asSnakeCaseLower label}} = true;
-      }
-      {{/if}}
-      {{/zcl_attributes}}
-
-      {{asWriteAttributesCallback this}}(
-        static_cast<dotdot_unid_t>(unid.c_str()),
-        endpoint,
-        {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_NORMAL,
-        new_state,
-        new_updated_state
-      );
-    }
-  } catch (...) {
-    sl_log_debug(LOG_TAG, "{{label}}: Unable to parse JSON payload.\n");
+    {{asWriteAttributesParseFunction this}}(
+      jsn,
+      new_state,
+      new_updated_state{{#zcl_attributes}}{{#if isWritable}}{{#if (isMonotonousArray label)}},
+      {{asSnakeCaseLower label}}{{/if}}{{/if}}{{/zcl_attributes}}
+    );
+  } catch (const nlohmann::json::parse_error& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "{{label}}", "WriteAttributes");
+    return;
+  } catch (const nlohmann::json::exception& e) {
+    // Catch JSON object field parsing errors
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{label}}", "WriteAttributes", e.what());
+    return;
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{label}}", "WriteAttributes", "");
     return;
   }
+
+  {{asWriteAttributesCallback this}}(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_NORMAL,
+    new_state,
+    new_updated_state
+  );
+
 }
-
-static void {{dotdot_prefix}}_on_group_{{asSnakeCaseLower label}}_WriteAttributes(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  if (group_dispatch_callback == nullptr) {
-    return;
-  }
-  if (message_length == 0) {
-    return;
-  }
-  try {
-    std::stringstream ss;
-    bpt::ptree pt;
-    ss << std::string(message,message_length);
-
-    bpt::json_parser::read_json(ss, pt);
-
-    if( {{asWriteAttributesCallback this}} ) {
-
-      std::string topic_string(topic);
-      std::vector<std::string> topic_elements;
-
-      boost::algorithm::split(topic_elements, topic_string, boost::is_any_of("/"));
-
-      uint16_t group_id = 0;
-      if (0 == sscanf(topic_elements[2].c_str(), "%" SCNu16, &group_id)) {
-        sl_log_debug(LOG_TAG,
-                    "Error parsing Group ID from topic %s. Ignoring",
-                    topic);
-        return;
-      }
-      group_dispatch_callback(group_id,
-                              "WriteAttributes",
-                              topic_elements.back().c_str(),
-                              message,
-                              message_length,
-                              {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes);
-
-    }
-  } catch (...) {
-    sl_log_debug(LOG_TAG, "{{label}}: Unable to parse JSON payload.\n");
-    return;
-  }
-}
-
 
 static void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_force_read_attributes(
   const char *topic,
   const char *message,
   const size_t message_length)
 {
-  uint8_t endpoint;
+  uint8_t endpoint = 0;
   std::string unid;
 
   if (message_length == 0) {
     return;
   } else if ( {{asForceReadAttributesCallback this}} ) {
 
-    if(!parse_topic(topic,unid,endpoint)) {
+    {{#if (clusterWithoutEndpoints parent.label)}}
+    if(! uic_dotdot_mqtt::parse_topic_no_endpoint(topic, unid)) {
       sl_log_debug(LOG_TAG,
-                  "Error parsing Endpoint ID from topic %s. Ignoring", topic);
+                  "Error parsing UNID from topic %s. Ignoring",
+                  topic);
       return;
     }
+    {{else}}
+    if(! uic_dotdot_mqtt::parse_topic(topic, unid, endpoint)) {
+      sl_log_debug(LOG_TAG,
+                  "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                  topic);
+      return;
+    }
+    {{/if}}
 
     try {
-      std::stringstream ss;
-      bpt::ptree pt;
-      ss << std::string(message,message_length);
-
-      bpt::json_parser::read_json(ss, pt);
       {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t force_update = {0};
-
       bool trigger_handler = false;
-      auto attributes = pt.get_child("value");
+
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      std::vector<std::string> attributes = jsn["value"].get<std::vector<std::string>>();
 
       // Assume all attributes to be read on empty array received
       if (attributes.size() == 0) {
@@ -418,8 +349,7 @@ static void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_force_read_attribute
         };
 
         for (auto& attribute : attributes) {
-          std::string attr = attribute.second.get_value<std::string>();
-          auto found_attr = supported_attrs.find(attr);
+          auto found_attr = supported_attrs.find(attribute);
           if (found_attr != supported_attrs.end()) {
             *(found_attr->second) = true;
             trigger_handler = true;
@@ -445,60 +375,103 @@ static void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_force_read_attribute
 {{#zcl_attributes}}
 sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
   const char *base_topic,
+  {{#if (isMonotonousArray label)}}
+  uint8_t value_count,
+  {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}}* value,
+  {{else}}
   {{asUnderlyingType type}} value,
+  {{/if}}
   {{dotdot_prefix}}_attribute_publish_type_t publish_type
 )
 {
-  bpt::ptree doc;
-  {{#if_is_enum type}}
-  doc.add("value", static_cast<{{chooseTypeOrEnumName type parent.label label}}>(value));
-  {{else}}
-    {{#if (isString type)}}
-  doc.add("value", value);
+  nlohmann::json jsn;
+
+  {{#if (isMonotonousArray label)}}
+  // This is a variable size array of the same known type.
+  // Create an array under the value {"value":[]}
+  jsn["value"] = nlohmann::json::array();
+
+  for (uint8_t i = 0; i<value_count;i++){
+    {{#if_is_enum type}}
+    #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
+    jsn["value"].push_back(({{asUnderlyingType type}}){{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name((uint32_t)value[i]));
+    #else
+    jsn["value"].push_back(static_cast<{{chooseTypeOrEnumName type parent.label label}}>(value[i]));
+    #endif
     {{else}}
-  // This looks a bit odd, but Boost PropertyTree insists on representing
-  // atomic types as strings, e.g. int 5 becomes "5", true becomes "true"
-  // and there's no easy way around it. So atomic types become this placeholder,
-  // which then is replaced further down, after the JSON payload has been constructed.
-      {{#if (isBool type)}}
-  doc.add("value", ":BoolPlaceHolder");
-      {{else}}
-        {{#if_is_bitmap type}}
-          {{#if (isUnknownBitmap label)}}
-  doc.add("value", ":PlaceHolder");
-          {{else}}
-  bpt::ptree bitmap_values = {{chooseTypeOrBitmapName type parent.label label}}.get_bitmap_values_as_json_tree((uint32_t)value);
-  doc.add_child("value", bitmap_values);
-          {{/if}}
+      {{#if_is_bitmap type}}
+        {{#if (isUnknownBitmap label)}}
+    // Unknown bitmap
+    jsn["value"].push_back(str(value[i]));
         {{else}}
-  doc.add("value", ":PlaceHolder");
-        {{/if_is_bitmap}}
-      {{/if}}
-    {{/if}}
-  {{/if_is_enum}}
-
-
-
-  std::stringstream ss;
-  bpt::write_json(ss, doc);
-  std::string payload_str(ss.str());
-  {{#if_is_enum type}}
-  {{else}}
-    {{#unless (isString type)}}
-      {{#if (isBool type)}}
-  boost::replace_all(payload_str, "\":BoolPlaceHolder\"", value ? "true" : "false");
+    // Known bitmap
+    jsn["value"].push_back({{chooseTypeOrBitmapName type parent.label label}}.get_bitmap_values_as_json_tree((uint32_t)value[i]));
+        {{/if}}
       {{else}}
-        {{#if_is_bitmap type}}
+        {{#if (isString type)}}
+    // String type
+    jsn["value"].push_back(std::string(value[i]));
+        {{else}}
+          {{#if (isStruct type)}}
+    // Struct type
+    nlohmann::json json_object = nlohmann::json::object();
+            {{#zcl_struct_items_by_struct_name type}}
+    json_object["{{label}}"] = value[i].{{label}};
+            {{/zcl_struct_items_by_struct_name}}
+    jsn["value"].push_back(json_object);
+          {{else}}
+    jsn["value"].push_back(value[i]);
+          {{/if}}
+        {{/if}}
+      {{/if_is_bitmap}}
+    {{/if_is_enum}}
+  }
+
+
+  {{else}}
+  // This is a single value
+
+  {{#if_is_enum type}}
+  #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
+  jsn["value"] = {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name((uint32_t)value);
+  #else
+  jsn["value"] = static_cast<{{chooseTypeOrEnumName type parent.label label}}>(value);
+  #endif
+  {{else}}
+    {{#if_is_bitmap type}}
+      {{#if (isUnknownBitmap label)}}
+  jsn["value"] = std::to_string(value);
+      {{else}}
+  nlohmann::json bitmap_values = {{chooseTypeOrBitmapName type parent.label label}}.get_bitmap_values_as_json_tree((uint32_t)value);
+  jsn["value"] = bitmap_values;
+      {{/if}}
+    {{else}}
+      {{#if (isString type)}}
+  jsn["value"] = std::string(value);
+      {{else}}
+        {{#if (isStruct type)}}
+  nlohmann::json json_object = nlohmann::json::object();
+  {{#zcl_struct_items_by_struct_name type}}
+   json_object["{{label}}"] = value.{{label}};
+  {{/zcl_struct_items_by_struct_name}}
+  jsn["value"]= json_object;
+         {{else}}
+  jsn["value"] = value;
+         {{/if}}
+        {{/if}}
+      {{/if_is_bitmap}}
+    {{/if_is_enum}}
+
+  {{/if}}
+
+  std::string payload_str = jsn.dump();
+
+  {{#if_is_bitmap type}}
   boost::replace_all(payload_str, "\"true\"", "true");
   boost::replace_all(payload_str, "\"false\"", "false");
-        {{else}}
-  boost::replace_all(payload_str, "\":PlaceHolder\"", to_string(value));
-        {{/if_is_bitmap}}
-      {{/if}}
-    {{/unless}}
-  {{/if_is_enum}}
+  {{/if_is_bitmap}}
 
-  std::string topic = std::string(base_topic) + "/{{parent.label}}/Attributes/{{label}}";
+  std::string topic = std::string(base_topic) + "/{{asPublicationName parent.label}}/Attributes/{{label}}";
   if (publish_type & UCL_MQTT_PUBLISH_TYPE_DESIRED)
   {
     std::string topic_desired = topic + "/Desired";
@@ -521,40 +494,45 @@ sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLow
 
 sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower label}}_init()
 {
+  {{#if (clusterWithoutEndpoints label)}}
+  std::string base_topic = "ucl/by-unid/+/";
+  {{else}}
+  std::string base_topic = "ucl/by-unid/+/+/";
+  {{/if}}
+
+  std::string subscription_topic;
   if({{asWriteAttributesCallback this}}) {
-    uic_mqtt_subscribe("ucl/by-unid/+/+/{{label}}/Commands/WriteAttributes", {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes);
+    subscription_topic = base_topic + "{{asPublicationName label}}/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes);
   }
+
   if({{asForceReadAttributesCallback this}}) {
-    uic_mqtt_subscribe("ucl/by-unid/+/+/{{label}}/Commands/ForceReadAttributes", {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_force_read_attributes);
+    subscription_topic = base_topic + "{{asPublicationName label}}/Commands/ForceReadAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_force_read_attributes);
   }
-{{#zcl_commands}}
+  {{#zcl_commands}}
   if ({{asCommandCallback this}}) {
-    uic_mqtt_subscribe("ucl/by-unid/+/+/{{parent.label}}/Commands/{{label}}", {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}});
+    subscription_topic = base_topic + "{{asPublicationName parent.label}}/Commands/{{label}}";
+    uic_mqtt_subscribe(subscription_topic.c_str(), {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}});
   }
-{{/zcl_commands}}
+  if ({{asGeneratedCommandCallback this}}) {
+    subscription_topic = base_topic + "{{asPublicationName parent.label}}/GeneratedCommands/{{label}}";
+    uic_mqtt_subscribe(subscription_topic.c_str(), {{dotdot_prefix}}_on_generated_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}});
+  }
+  {{/zcl_commands}}
+
+  // Init the attributes for that cluster
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_attributes_init();
+
+  {{#unless (clusterWithoutEndpoints label)}}
+  {{dotdot_prefix}}_by_group_{{asSnakeCaseLower label}}_init();
+  {{/unless}}
+
   return SL_STATUS_OK;
 }
 {{/if}}
 {{/zcl_clusters}}
 
-void {{dotdot_prefix}}_set_group_dispatch_callback(group_dispatch_t callback)
-{
-  // Check for uninitialized value in order to subscribe with on_group handlers
-  // only once.
-  if (group_dispatch_callback == nullptr) {
-{{#zcl_clusters}}
-{{#if (supportedCluster label)}}
-    uic_mqtt_subscribe("ucl/by-group/+/{{label}}/Commands/WriteAttributes", {{dotdot_prefix}}_on_group_{{asSnakeCaseLower label}}_WriteAttributes);
-{{#zcl_commands}}
-    uic_mqtt_subscribe("ucl/by-group/+/{{parent.label}}/Commands/{{label}}", {{dotdot_prefix}}_on_group_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}});
-{{/zcl_commands}}
-{{/if}}
-{{/zcl_clusters}}
-  }
-
-  group_dispatch_callback = callback;
-
-}
 
 sl_status_t {{dotdot_prefix}}_init() {
 
@@ -586,83 +564,112 @@ void {{dotdot_prefix}}_publish_supported_commands(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint)
 {
+  std::stringstream ss;
+  bool first_command;
   {{#zcl_clusters}}
+  // {{label}} cluster
   {{#if (supportedCluster label)}}
-  {{#zcl_commands}}
-  {{#first}}
-  {
-    std::stringstream ss;
-  {{/first}}
-    // check if there is calback
+  { // Reset our SupportedCommand stream for each cluster.
+    ss.str("");
+    first_command = true;
+    {{#zcl_commands}}
+    // check if there is callback for each command
     if ({{asCommandCallback this}}) {
       {{#zcl_command_arguments}}
-      {{asUnderlyingType type}} {{label}}_value;
-      memset(&{{label}}_value, 0x00, sizeof({{label}}_value));
-      {{/zcl_command_arguments}}
+      {{#unless isArray}}
+        {{asUnderlyingType type}} {{asSnakeCaseLower label}}_value;
+        memset(&{{asSnakeCaseLower label}}_value, 0x00, sizeof({{asSnakeCaseLower label}}_value));
+      {{/unless}}{{/zcl_command_arguments}}
+
       if ( {{asCommandCallback this}}(
               unid,
               endpoint,
-              {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_SUPPORT_CHECK{{#zcl_command_arguments}},
-              {{label}}_value{{/zcl_command_arguments}}
+              {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_SUPPORT_CHECK{{#zcl_command_arguments}}{{#first}},{{/first}}
+{{#if isArray}}
+              0,
+              nullptr{{listComma this}}
+{{else}}
+              {{asSnakeCaseLower label}}_value{{listComma this}}
+{{/if}}{{/zcl_command_arguments}}
           ) == SL_STATUS_OK) {
-        if (ss.rdbuf()->in_avail() != 0) {
-          ss << ",";
+        if (first_command == false) {
+          ss << ", ";
         }
+        first_command = false;
         ss << R"("{{label}}")";
       }
     }
-  {{#last}}
+    {{/zcl_commands}}
+    // Check for a WriteAttributes Callback
+    if({{asWriteAttributesCallback this}}) {
+      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t {{asSnakeCaseLower label}}_new_state = {0};
+      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t {{asSnakeCaseLower label}}_new_updated_state = {0};
 
-    if({{asWriteAttributesCallback parent}}) {
-      {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_state_t {{asSnakeCaseLower parent.label}}_new_state = {0};
-      {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_updated_state_t {{asSnakeCaseLower parent.label}}_new_updated_state = {0};
-
-      if({{asWriteAttributesCallback parent}}(
+      if({{asWriteAttributesCallback this}}(
             unid,
             endpoint,
             {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_SUPPORT_CHECK,
-            {{asSnakeCaseLower parent.label}}_new_state,
-            {{asSnakeCaseLower parent.label}}_new_updated_state
+            {{asSnakeCaseLower label}}_new_state,
+            {{asSnakeCaseLower label}}_new_updated_state
         ) == SL_STATUS_OK) {
-        if (ss.rdbuf()->in_avail() != 0) {
-          ss << ",";
+        if (first_command == false) {
+          ss << ", ";
         }
+        first_command = false;
         ss << R"("WriteAttributes")";
       }
     }
 
+    // Check for a ForceReadAttributes Callback
+    if({{asForceReadAttributesCallback this}}) {
+      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t {{asSnakeCaseLower label}}_force_update = {0};
 
-    if({{asForceReadAttributesCallback parent}}) {
-      {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_updated_state_t {{asSnakeCaseLower parent.label}}_force_update = {0};
-
-      if({{asForceReadAttributesCallback parent}}(
+      if({{asForceReadAttributesCallback this}}(
             unid,
             endpoint,
             {{asSnakeCaseUpper (dotdot_prefix)}}_CALLBACK_TYPE_SUPPORT_CHECK,
-            {{asSnakeCaseLower parent.label}}_force_update
+            {{asSnakeCaseLower label}}_force_update
         ) == SL_STATUS_OK) {
-        if (ss.rdbuf()->in_avail() != 0) {
-          ss << ",";
+        if (first_command == false) {
+          ss << ", ";
         }
+        first_command = false;
         ss << R"("ForceReadAttributes")";
       }
     }
 
-    //Publish supported commands
-    if (ss.rdbuf()->in_avail() != 0){
-      std::stringstream ss_value;
-      ss_value << R"("value")" << ": ";
-      std::string payload_str("{" + ss_value.str() + "[" + ss.str() + "]" + "}");
-      std::string topic = "ucl/by-unid/" + std::string(unid) +
-                          "/ep" + std::to_string(endpoint) + "/{{parent.label}}/SupportedCommands";
-      uic_mqtt_publish(topic.c_str() ,
-                payload_str.c_str(),
-                payload_str.length(),
-                true);
+    // Publish supported commands
+    std::string topic = "ucl/by-unid/" + std::string(unid);
+    {{#if (clusterWithoutEndpoints label)}}
+    // No endpoint for this topic
+    {{else}}
+    topic +=  "/ep"+ std::to_string(endpoint);
+    {{/if}}
+    topic +=  "/{{asPublicationName label}}/SupportedCommands";
+    std::string payload_str("{\"value\": [" + ss.str() + "]" + "}");
+    if (first_command == false) {
+      uic_mqtt_publish(topic.c_str(),
+                       payload_str.c_str(),
+                       payload_str.length(),
+                       true);
     }
-  }
-  {{/last}}
-  {{/zcl_commands}}
+
+    // Make sure we publish some SupportedCommands if any attribute has been
+    // published
+    if (uic_mqtt_count_topics(topic.c_str()) == 0) {
+      std::string attributes_topic = "ucl/by-unid/" + std::string(unid) + "/ep"
+                                     + std::to_string(endpoint)
+                                     + "/{{asPublicationName label}}/Attributes";
+      if (uic_mqtt_count_topics(attributes_topic.c_str()) > 0) {
+        uic_mqtt_publish(topic.c_str(),
+                         payload_str.c_str(),
+                         payload_str.length(),
+                         true);
+      }
+    }
+
+  } // End of scope
+
   {{/if}}
   {{/zcl_clusters}}
 }
@@ -672,7 +679,7 @@ void {{dotdot_prefix}}_publish_supported_commands(
   // Publishing Cluster Revision
   void {{dotdot_prefix}}_{{asSnakeCaseLower label}}_publish_cluster_revision(const char* base_topic, uint16_t value)
   {
-    std::string cluster_topic = std::string(base_topic) + "/{{label}}/Attributes/ClusterRevision";
+    std::string cluster_topic = std::string(base_topic) + "/{{asPublicationName label}}/Attributes/ClusterRevision";
     // Publish Desired
     std::string pub_topic_des = cluster_topic + "/Desired";
     std::string payload = std::string(R"({"value": )")
@@ -688,5 +695,55 @@ void {{dotdot_prefix}}_publish_supported_commands(
                      payload.size(),
                      true);
   }
+{{/if}}
+{{/zcl_clusters}}
+
+////////////////////////////////////////////////////////////////////////////////
+// Generated Commands publications functions
+////////////////////////////////////////////////////////////////////////////////
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+/**
+ * @brief Publishes an incoming/generated {{label}} command for
+ * the {{parent.label}} cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints parent.label)}}epID/{{/unless}}{{asPublicationName parent.label}}/GeneratedCommands/{{label}}
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * {{#unless (clusterWithoutEndpoints parent.label)}}
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * {{/unless}}
+ * {{#zcl_command_arguments}}{{#first}}
+ * @param fields                Struct pointer with the fields value of the command
+ * {{/first}}{{/zcl_command_arguments}}
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_publish_generated_{{asSnakeCaseLower label}}_command(
+  const dotdot_unid_t unid{{#unless (clusterWithoutEndpoints parent.label)}},
+  const dotdot_endpoint_id_t endpoint{{/unless}}{{#zcl_command_arguments}}{{#first}},
+  const {{asCommandFieldsType parent}} *fields
+  {{/first}}{{/zcl_command_arguments}}
+) {
+  // Create the topic
+  {{#if (clusterWithoutEndpoints parent.label)}}
+  std::string topic = "ucl/by-unid/" + std::string(unid) + "/";
+  {{else}}
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  {{/if}}
+  topic += "{{asPublicationName parent.label}}/GeneratedCommands/{{label}}";
+
+  std::string payload =
+    get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_command(
+    {{#zcl_command_arguments}}{{#first}}fields{{/first}}{{/zcl_command_arguments}});
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+{{/zcl_commands}}
 {{/if}}
 {{/zcl_clusters}}

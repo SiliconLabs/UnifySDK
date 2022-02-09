@@ -348,6 +348,13 @@ static void on_version_attribute_update(attribute_store_node_t _updated_node,
     return;
   }
 
+  if (is_zwave_command_class_filtered_for_root_device(
+        COMMAND_CLASS_INDICATOR_V3,
+        _updated_node)
+      == true) {
+    return;
+  }
+
   uint8_t version = 0;
   attribute updated_node(_updated_node);
   attribute endpoint_node = updated_node.parent();

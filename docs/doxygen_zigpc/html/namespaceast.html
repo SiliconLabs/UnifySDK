@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('namespaceast.html',''); initResizable(
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">ast Namespace Reference</div>  </div>
+<div class="title">ast Namespace Reference<div class="ingroups"><a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__unify__attribute__mapper.html">Unify Attribute Mapper</a> &raquo; <a class="el" href="group__attribute__mapper__ast.html">Abstract Syntax Tree</a> &#124; <a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__unify__attribute__mapper.html">Unify Attribute Mapper</a> &raquo; <a class="el" href="group__attribute__mapper__ast__dep__eval.html">Abstract Syntax Tree Dependency Evaluation</a> &#124; <a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__unify__attribute__mapper.html">Unify Attribute Mapper</a> &raquo; <a class="el" href="group__attribute__mapper__ast__eval.html">Abstract Syntax Tree Evaluation</a> &#124; <a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__unify__attribute__mapper.html">Unify Attribute Mapper</a> &raquo; <a class="el" href="group__attribute__mapper__ast__print.html">Abstract Syntax Tree Print</a> &#124; <a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__unify__attribute__mapper.html">Unify Attribute Mapper</a> &raquo; <a class="el" href="group__attribute__mapper__ast__reducer.html">Abstract Syntax Tree Reducer</a> &#124; <a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__unify__attribute__mapper.html">Unify Attribute Mapper</a> &raquo; <a class="el" href="group__attribute__mapper__cyclic__check.html">Mapper cyclic dependency checker</a> &#124; <a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__unify__attribute__mapper.html">Unify Attribute Mapper</a> &raquo; <a class="el" href="group__attribute__mapper__parser.html">Mapper parser</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
@@ -146,12 +146,12 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a038555ebe7383907b19a81325bd00ee5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a038555ebe7383907b19a81325bd00ee5">ast_node</a> = boost::variant&lt; <a class="el" href="structast_1_1scope.html">ast::scope</a> &gt;</td></tr>
 <tr class="separator:a038555ebe7383907b19a81325bd00ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7e91a12dd90bd5831e728018770f7af"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#af7e91a12dd90bd5831e728018770f7af">operand</a> = x3::variant&lt; <a class="el" href="structast_1_1nil.html">nil</a>, unsigned int, x3::forward_ast&lt; <a class="el" href="structast_1_1attribute.html">attribute</a> &gt;, x3::forward_ast&lt; <a class="el" href="structast_1_1signed__.html">signed_</a> &gt;, x3::forward_ast&lt; <a class="el" href="structast_1_1expression.html">expression</a> &gt;, x3::forward_ast&lt; <a class="el" href="structast_1_1condition.html">condition</a> &gt; &gt;</td></tr>
-<tr class="memdesc:af7e91a12dd90bd5831e728018770f7af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operands.  <a href="namespaceast.html#af7e91a12dd90bd5831e728018770f7af">More...</a><br /></td></tr>
-<tr class="separator:af7e91a12dd90bd5831e728018770f7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e9c7b18153da02eb386d908e7b56058"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a4e9c7b18153da02eb386d908e7b56058">attribute_path_element</a> = boost::variant&lt; <a class="el" href="namespaceast.html#af7e91a12dd90bd5831e728018770f7af">ast::operand</a>, unsigned int, <a class="el" href="structast_1_1attribute__path__subscript.html">attribute_path_subscript</a> &gt;</td></tr>
-<tr class="memdesc:a4e9c7b18153da02eb386d908e7b56058"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attribute path element.  <a href="namespaceast.html#a4e9c7b18153da02eb386d908e7b56058">More...</a><br /></td></tr>
-<tr class="separator:a4e9c7b18153da02eb386d908e7b56058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e777c0163f8daac51e4ed676d05eb70"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a9e777c0163f8daac51e4ed676d05eb70">operand</a> = x3::variant&lt; <a class="el" href="structast_1_1nil.html">ast::nil</a>, unsigned int, x3::forward_ast&lt; <a class="el" href="structast_1_1attribute.html">attribute</a> &gt;, x3::forward_ast&lt; <a class="el" href="structast_1_1signed__.html">signed_</a> &gt;, x3::forward_ast&lt; <a class="el" href="structast_1_1expression.html">expression</a> &gt;, x3::forward_ast&lt; <a class="el" href="structast_1_1condition.html">condition</a> &gt; &gt;</td></tr>
+<tr class="memdesc:a9e777c0163f8daac51e4ed676d05eb70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operands.  <a href="namespaceast.html#a9e777c0163f8daac51e4ed676d05eb70">More...</a><br /></td></tr>
+<tr class="separator:a9e777c0163f8daac51e4ed676d05eb70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addf8041d159d1ed5881d08d45769ad05"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#addf8041d159d1ed5881d08d45769ad05">attribute_path_element</a> = boost::variant&lt; <a class="el" href="structast_1_1nil.html">ast::nil</a>, <a class="el" href="namespaceast.html#a9e777c0163f8daac51e4ed676d05eb70">ast::operand</a>, unsigned int, <a class="el" href="structast_1_1attribute__path__subscript.html">attribute_path_subscript</a> &gt;</td></tr>
+<tr class="memdesc:addf8041d159d1ed5881d08d45769ad05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attribute path element.  <a href="namespaceast.html#addf8041d159d1ed5881d08d45769ad05">More...</a><br /></td></tr>
+<tr class="separator:addf8041d159d1ed5881d08d45769ad05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94a74eef22bd0db806b70da094c8ffab"><td class="memItemLeft" align="right" valign="top">typedef char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a94a74eef22bd0db806b70da094c8ffab">value_type_t</a></td></tr>
 <tr class="separator:a94a74eef22bd0db806b70da094c8ffab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accf202c9a5e9a1bf3dab9ace8075ccc1"><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>, <a class="el" href="namespaceast.html#a94a74eef22bd0db806b70da094c8ffab">value_type_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#accf202c9a5e9a1bf3dab9ace8075ccc1">attribute_dependency_t</a></td></tr>
@@ -186,7 +186,7 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a1c9db80cb78cf2630ec99d3503eea30b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a1c9db80cb78cf2630ec99d3503eea30b">operator==</a> (const <a class="el" href="structast_1_1nil.html">nil</a> &amp;a, const <a class="el" href="structast_1_1nil.html">nil</a> &amp;b)</td></tr>
 <tr class="separator:a1c9db80cb78cf2630ec99d3503eea30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a460327ff86b3e358cf99c99c1e5d3a46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a460327ff86b3e358cf99c99c1e5d3a46">operator==</a> (const <a class="el" href="namespaceast.html#af7e91a12dd90bd5831e728018770f7af">operand</a> &amp;a, const <a class="el" href="namespaceast.html#af7e91a12dd90bd5831e728018770f7af">operand</a> &amp;b)</td></tr>
+<tr class="memitem:a460327ff86b3e358cf99c99c1e5d3a46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a460327ff86b3e358cf99c99c1e5d3a46">operator==</a> (const <a class="el" href="namespaceast.html#a9e777c0163f8daac51e4ed676d05eb70">operand</a> &amp;a, const <a class="el" href="namespaceast.html#a9e777c0163f8daac51e4ed676d05eb70">operand</a> &amp;b)</td></tr>
 <tr class="separator:a460327ff86b3e358cf99c99c1e5d3a46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eb1457c9aa971a1c57effd4b7f00de4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceast.html#a3eb1457c9aa971a1c57effd4b7f00de4">operator==</a> (const <a class="el" href="structast_1_1signed__.html">signed_</a> &amp;a, const <a class="el" href="structast_1_1signed__.html">signed_</a> &amp;b)</td></tr>
 <tr class="separator:a3eb1457c9aa971a1c57effd4b7f00de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -246,14 +246,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4e9c7b18153da02eb386d908e7b56058"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e9c7b18153da02eb386d908e7b56058">&#9670;&nbsp;</a></span>attribute_path_element</h2>
+<a id="addf8041d159d1ed5881d08d45769ad05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addf8041d159d1ed5881d08d45769ad05">&#9670;&nbsp;</a></span>attribute_path_element</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespaceast.html#a4e9c7b18153da02eb386d908e7b56058">ast::attribute_path_element</a> = typedef boost::variant&lt;<a class="el" href="namespaceast.html#af7e91a12dd90bd5831e728018770f7af">ast::operand</a>, unsigned int, <a class="el" href="structast_1_1attribute__path__subscript.html">attribute_path_subscript</a>&gt;</td>
+          <td class="memname">using <a class="el" href="namespaceast.html#addf8041d159d1ed5881d08d45769ad05">ast::attribute_path_element</a> = typedef boost:: variant&lt;<a class="el" href="structast_1_1nil.html">ast::nil</a>, <a class="el" href="namespaceast.html#a9e777c0163f8daac51e4ed676d05eb70">ast::operand</a>, unsigned int, <a class="el" href="structast_1_1attribute__path__subscript.html">attribute_path_subscript</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -277,14 +277,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af7e91a12dd90bd5831e728018770f7af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7e91a12dd90bd5831e728018770f7af">&#9670;&nbsp;</a></span>operand</h2>
+<a id="a9e777c0163f8daac51e4ed676d05eb70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e777c0163f8daac51e4ed676d05eb70">&#9670;&nbsp;</a></span>operand</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespaceast.html#af7e91a12dd90bd5831e728018770f7af">ast::operand</a> = typedef x3::variant&lt;<a class="el" href="structast_1_1nil.html">nil</a>, unsigned int, x3::forward_ast&lt;<a class="el" href="structast_1_1attribute.html">attribute</a>&gt;, x3::forward_ast&lt;<a class="el" href="structast_1_1signed__.html">signed_</a>&gt;, x3::forward_ast&lt;<a class="el" href="structast_1_1expression.html">expression</a>&gt;, x3::forward_ast&lt;<a class="el" href="structast_1_1condition.html">condition</a>&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="namespaceast.html#a9e777c0163f8daac51e4ed676d05eb70">ast::operand</a> = typedef x3::variant&lt;<a class="el" href="structast_1_1nil.html">ast::nil</a>, unsigned int, x3::forward_ast&lt;<a class="el" href="structast_1_1attribute.html">attribute</a>&gt;, x3::forward_ast&lt;<a class="el" href="structast_1_1signed__.html">signed_</a>&gt;, x3::forward_ast&lt;<a class="el" href="structast_1_1expression.html">expression</a>&gt;, x3::forward_ast&lt;<a class="el" href="structast_1_1condition.html">condition</a>&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -679,13 +679,13 @@ false cyclic dependencies are not detected. </dd></dl>
         <tr>
           <td class="memname">bool ast::operator== </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespaceast.html#af7e91a12dd90bd5831e728018770f7af">operand</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespaceast.html#a9e777c0163f8daac51e4ed676d05eb70">operand</a> &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespaceast.html#af7e91a12dd90bd5831e728018770f7af">operand</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespaceast.html#a9e777c0163f8daac51e4ed676d05eb70">operand</a> &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -781,7 +781,7 @@ false cyclic dependencies are not detected. </dd></dl>
 </div><div class="memdoc">
 
 <p>Parse UAM script and build and AST. </p>
-<p>This function is the entry point of the parser, but actual parser logic is defined in <a class="el" href="attribute__mapper__grammar_8hpp.html" title="describes the grammar rules of .uam files">attribute_mapper_grammar.hpp</a></p>
+<p>This function is the entry point of the parser, but actual parser logic is defined in <a class="el" href="attribute__mapper__grammar_8hpp.html">attribute_mapper_grammar.hpp</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">string_to_parse</td><td>String to parse </td></tr>
@@ -819,7 +819,7 @@ false False is parse did not succeed. </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceast.html">ast</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:21 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:40 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

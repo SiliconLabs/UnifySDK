@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -214,11 +214,11 @@ void zwapi_demo_send_data_callback(uint8_t tx_status,
       index += snprintf(message + index,
                         sizeof(message) - index,
                         "Repeaters : %d - ",
-                        tx_status_report->bRepeaters);
+                        tx_status_report->number_of_repeaters);
       index += snprintf(message + index,
                         sizeof(message) - index,
                         "Route tries : %d)",
-                        tx_status_report->bRouteTries);
+                        tx_status_report->routing_attempts);
       break;
 
     case TRANSMIT_COMPLETE_NO_ACK:
@@ -250,11 +250,11 @@ void zwapi_demo_request_nif_callback(uint8_t tx_status,
       index += snprintf(message + index,
                         sizeof(message) - index,
                         "Repeaters : %d - ",
-                        tx_status_report->bRepeaters);
+                        tx_status_report->number_of_repeaters);
       index += snprintf(message + index,
                         sizeof(message) - index,
                         "Route tries : %d",
-                        tx_status_report->bRouteTries);
+                        tx_status_report->routing_attempts);
       break;
 
     case TRANSMIT_COMPLETE_NO_ACK:

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__uic__stdin.html',''); initResiz
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Unify Stdin</div>  </div>
+<div class="title">Unify Stdin<div class="ingroups"><a class="el" href="group__unify__components.html">Unify Components</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -99,7 +99,7 @@ Typedefs</h2></td></tr>
 <tr class="memitem:gacf1ba285cfb23de27cf6997b522fba80"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a></td></tr>
 <tr class="memdesc:gacf1ba285cfb23de27cf6997b522fba80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arguments type.  <a href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">More...</a><br /></td></tr>
 <tr class="separator:gacf1ba285cfb23de27cf6997b522fba80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf2e355ac61e6583e7e7d8123d13eab6d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">handler_func</a>) (const <a class="el" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a> &amp;arg)</td></tr>
+<tr class="memitem:gaf2e355ac61e6583e7e7d8123d13eab6d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">handler_func</a>) (const <a class="el" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a> &amp;arg)</td></tr>
 <tr class="memdesc:gaf2e355ac61e6583e7e7d8123d13eab6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler function callback type.  <a href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">More...</a><br /></td></tr>
 <tr class="separator:gaf2e355ac61e6583e7e7d8123d13eab6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -114,10 +114,10 @@ Functions</h2></td></tr>
 <tr class="memitem:gae47a6c88b804f228bf1832cb013bb0af"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gae47a6c88b804f228bf1832cb013bb0af">uic_stdin_get_output_fd</a> ()</td></tr>
 <tr class="memdesc:gae47a6c88b804f228bf1832cb013bb0af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get stdout file number.  <a href="group__uic__stdin.html#gae47a6c88b804f228bf1832cb013bb0af">More...</a><br /></td></tr>
 <tr class="separator:gae47a6c88b804f228bf1832cb013bb0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad349cbdec1a224f71d114cbe90e2848e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gad349cbdec1a224f71d114cbe90e2848e">uic_stdin_handle_command</a> (const char *command)</td></tr>
+<tr class="memitem:gad349cbdec1a224f71d114cbe90e2848e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gad349cbdec1a224f71d114cbe90e2848e">uic_stdin_handle_command</a> (const char *command)</td></tr>
 <tr class="memdesc:gad349cbdec1a224f71d114cbe90e2848e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a command manually from CLI.  <a href="group__uic__stdin.html#gad349cbdec1a224f71d114cbe90e2848e">More...</a><br /></td></tr>
 <tr class="separator:gad349cbdec1a224f71d114cbe90e2848e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga51559a1005a5a6ead588a500b333db7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#ga51559a1005a5a6ead588a500b333db7d">uic_stdin_setup</a> ()</td></tr>
+<tr class="memitem:ga51559a1005a5a6ead588a500b333db7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#ga51559a1005a5a6ead588a500b333db7d">uic_stdin_setup</a> ()</td></tr>
 <tr class="memdesc:ga51559a1005a5a6ead588a500b333db7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">UIC interface to Contiki STDIN feature.  <a href="group__uic__stdin.html#ga51559a1005a5a6ead588a500b333db7d">More...</a><br /></td></tr>
 <tr class="separator:ga51559a1005a5a6ead588a500b333db7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gafd5b4961cd30c27c0fa7ba12332fc0a1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gafd5b4961cd30c27c0fa7ba12332fc0a1">uic_stdin_teardown</a> ()</td></tr>
@@ -151,7 +151,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(* handler_func) (const <a class="el" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a> &amp;arg)</td>
+          <td class="memname">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(* handler_func) (const <a class="el" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a> &amp;arg)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -219,7 +219,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> uic_stdin_handle_command </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> uic_stdin_handle_command </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>command</em></td><td>)</td>
@@ -265,7 +265,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> uic_stdin_setup </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> uic_stdin_setup </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -307,7 +307,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:24 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

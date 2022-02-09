@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: components/uic_main_fd/include/uic_main_externals.h Source File</title>
+<title>Z-Wave Protocol Controller Refrence: components/uic_main_fd/include/uic_main_externals.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('uic__main__externals_8h_source.html','
 </div><!--header-->
 <div class="contents">
 <a href="uic__main__externals_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* # License</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2020 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2021 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * The licensor of this software is Silicon Laboratories Inc. Your use of this</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * software is governed by the terms of Silicon Labs Master Software License</span></div>
@@ -114,11 +114,11 @@ $(document).ready(function(){initNavTree('uic__main__externals_8h_source.html','
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="group__uic__main__ext.html#gab44cb2967e3cc4b9984ea590f571f927">   73</a></span>&#160;<span class="keyword">typedef</span> bool (*<a class="code" href="group__uic__main__ext.html#gab44cb2967e3cc4b9984ea590f571f927">uic_ext_event_handler_t</a>)(int);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__uic__main__ext.html#ga50ad17fd7cdc37ffc7c988a48362b984">uic_main_ext_register_rfd</a>(<span class="keywordtype">int</span> fdr,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__uic__main__ext.html#ga50ad17fd7cdc37ffc7c988a48362b984">uic_main_ext_register_rfd</a>(<span class="keywordtype">int</span> fdr,</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                      <a class="code" href="group__uic__main__ext.html#gab44cb2967e3cc4b9984ea590f571f927">uic_ext_event_handler_t</a> ev_hndl_func,</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                                      <span class="keyword">struct</span> <a class="code" href="structprocess.html">process</a> *ev_hndl_process);</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__uic__main__ext.html#gaad8143a8ac0866d9de5e24ad7a3292e6">uic_main_ext_unregister_rfd</a>(<span class="keywordtype">int</span> fdr);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__uic__main__ext.html#gaad8143a8ac0866d9de5e24ad7a3292e6">uic_main_ext_unregister_rfd</a>(<span class="keywordtype">int</span> fdr);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
@@ -128,17 +128,17 @@ $(document).ready(function(){initNavTree('uic__main__externals_8h_source.html','
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="agroup__uic__main__ext_html_ga50ad17fd7cdc37ffc7c988a48362b984"><div class="ttname"><a href="group__uic__main__ext.html#ga50ad17fd7cdc37ffc7c988a48362b984">uic_main_ext_register_rfd</a></div><div class="ttdeci">sl_status_t uic_main_ext_register_rfd(int fdr, uic_ext_event_handler_t ev_hndl_func, struct process *ev_hndl_process)</div><div class="ttdef"><b>Definition:</b> uic_main_externals.c:44</div></div>
+<div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:136</div></div>
 <div class="ttc" id="asl__status_8h_html"><div class="ttname"><a href="sl__status_8h.html">sl_status.h</a></div><div class="ttdoc">SL Status Codes.</div></div>
 <div class="ttc" id="aprocess_8h_html"><div class="ttname"><a href="process_8h.html">process.h</a></div></div>
 <div class="ttc" id="agroup__uic__main__ext_html_gaad8143a8ac0866d9de5e24ad7a3292e6"><div class="ttname"><a href="group__uic__main__ext.html#gaad8143a8ac0866d9de5e24ad7a3292e6">uic_main_ext_unregister_rfd</a></div><div class="ttdeci">sl_status_t uic_main_ext_unregister_rfd(int fdr)</div><div class="ttdef"><b>Definition:</b> uic_main_externals.c:70</div></div>
 <div class="ttc" id="astructprocess_html"><div class="ttname"><a href="structprocess.html">process</a></div><div class="ttdef"><b>Definition:</b> process.h:327</div></div>
 <div class="ttc" id="agroup__uic__main__ext_html_gab44cb2967e3cc4b9984ea590f571f927"><div class="ttname"><a href="group__uic__main__ext.html#gab44cb2967e3cc4b9984ea590f571f927">uic_ext_event_handler_t</a></div><div class="ttdeci">bool(* uic_ext_event_handler_t)(int)</div><div class="ttdef"><b>Definition:</b> uic_main_externals.h:73</div></div>
-<div class="ttc" id="agroup__sl__status_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:127</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_fd4d87a5ee3c8a23cc42ed41cb761920.html">uic_main_fd</a></li><li class="navelem"><a class="el" href="dir_f61b044ddb949531a404c9c1ecd85883.html">include</a></li><li class="navelem"><a class="el" href="uic__main__externals_8h.html">uic_main_externals.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:19 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

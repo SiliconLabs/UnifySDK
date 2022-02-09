@@ -25,17 +25,10 @@
 // Standard library
 #include <map>
 #include <typeinfo>
-
-// Third party components
-#include <boost/algorithm/string.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include <filesystem>
 
 // Constants
 constexpr char LOG_TAG[] = "uic_ota";
-
-namespace bpt = boost::property_tree;
 
 namespace uic_ota
 {

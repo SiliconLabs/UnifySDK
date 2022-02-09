@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,12 +12,14 @@
  *****************************************************************************/
 
 /**
- * @file attribute_mapper_grammar.hpp
+ * @defgroup attribute_mapper_grammar Mapper grammar
+ * @ingroup unify_attribute_mapper
+ *
  * @brief describes the grammar rules of .uam files
  *
  * This file contains the definition of two grammes
  * which are used by the mail UAM parser.
- * 
+ *
  * A skipper parse which parses whitspaces and comments
  * and a UAM Grammer parser.
  *
@@ -42,14 +44,21 @@ namespace qi = boost::spirit::qi;
 struct term_rule_operators_ : qi::symbols<char, ast::operator_ids> {
   term_rule_operators_()
   {
-    add("*", ast::operator_ids::operator_mult)
-    ("/",ast::operator_ids::operator_div)
-    ("<",ast::operator_ids::operator_left_shift)
-    (">",ast::operator_ids::operator_right_shift)
-    ("|",ast::operator_ids::operator_bitor)
-    ("&",ast::operator_ids::operator_bitand)
-    ("^",ast::operator_ids::operator_bitxor)
-    ("or",ast::operator_ids::operator_or);
+    add("*", ast::operator_ids::operator_mult)("/",
+                                               ast::operator_ids::operator_div)(
+      "<",
+      ast::operator_ids::
+        operator_left_shift)(">",
+                             ast::operator_ids::
+                               operator_right_shift)("|",
+                                                     ast::operator_ids::
+                                                       operator_bitor)("&",
+                                                                       ast::operator_ids::
+                                                                         operator_bitand)("^",
+                                                                                          ast::operator_ids::
+                                                                                            operator_bitxor)("or",
+                                                                                                             ast::operator_ids::
+                                                                                                               operator_or);
   }
 } term_rule_operators;
 
@@ -67,11 +76,11 @@ struct expr_rule_operators_ : qi::symbols<char, ast::operator_ids> {
 
 /**
  * @brief Skipper grammer
- * 
+ *
  * This parser parses whitespaces and comments.
  * The skipper does not produce any output.
- * 
- * @tparam IteratorType 
+ *
+ * @tparam IteratorType
  */
 template<typename IteratorType> class SkipperGrammar :
   public qi::grammar<IteratorType>
@@ -95,17 +104,17 @@ template<typename IteratorType> class SkipperGrammar :
 
 /**
  * @brief Main UAM grammer
- * 
+ *
  * This class defines the UAM grammer and is closely coupled with data types
- * in the AST. This class does not in it self produce anything but a grammer 
+ * in the AST. This class does not in it self produce anything but a grammer
  * definition, but when used with the boost::qi:parse_phrase function a text document can
  * be transformed into a AST data structure.
- * 
+ *
  * For details on how this works see
  * https://www.boost.org/doc/libs/1_76_0/libs/spirit/doc/html/spirit/qi/tutorials/employee___parsing_into_structs.html
- * 
+ *
  * @tparam IteratorType
- * @tparam Skipper 
+ * @tparam Skipper
  */
 template<typename IteratorType, typename Skipper> class UAMGrammar :
   public qi::grammar<IteratorType, ast::ast_tree(), Skipper>
@@ -138,7 +147,7 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
 
     // elements of an attribute path
     attribute_path_element_rule
-      = '^' | (operand_rule >> '[' > operand_rule > ']') | operand_rule;
+      = '^' | (operand_rule >> '[' >> operand_rule >> ']') | operand_rule;
 
     // the whole attribute path, example d'1245.6666[3].9999
     attribute_rule = char_("dre") >> '\'' >> attribute_path_element_rule % '.';

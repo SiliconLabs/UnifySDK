@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -121,7 +121,7 @@ sl_status_t zwapi_refresh_capabilities(void)
 
   if (capabilities_status != SL_STATUS_OK) {
     sl_log_error(LOG_TAG,
-                 "Failed to fetch capabilties from the Z-Wave module\n");
+                 "Failed to fetch capabilities from the Z-Wave module\n");
     assert(false);
     return capabilities_status;
   }

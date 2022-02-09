@@ -10,20 +10,27 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-#include "process.h"
-#include "sl_log.h"
-#include "sl_status.h"
 #include "ucl_network_management.h"
-#include "uic_mqtt.h"
+#include "ucl_nm_neighbor_discovery.h"
+
+// ZPC includes
 #include "zpc_converters.h"
+#include "zwave_controller.h"
 #include "zwave_controller_callbacks.h"
 #include "zwave_network_management.h"
 #include "zwave_unid.h"
-#include "sys/etimer.h"
-#include "ucl_nm_neighbor_discovery.h"
 
+// Contiki
+#include "process.h"
+#include "sys/etimer.h"
+
+// UIC includes
+#include "uic_mqtt.h"
+#include "sl_log.h"
+#include "sl_status.h"
+
+// Generic includes
 #include <boost/iostreams/stream.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <nlohmann/json.hpp>
 #include <cstddef>
@@ -36,6 +43,11 @@
 // Defines and types
 ////////////////////////////////////////////////////////////////////////////////
 #define LOG_TAG "ucl_network_management"
+
+////////////////////////////////////////////////////////////////////////////////
+// Contiki Process
+////////////////////////////////////////////////////////////////////////////////
+PROCESS(ucl_network_management_process, "ucl_network_management_process");
 
 namespace bpt = boost::property_tree;
 
@@ -302,12 +314,12 @@ constexpr std::string_view UCL_NM_TOPIC_NETWORK_REPAIR_STR = "network repair";
 constexpr std::string_view UCL_NM_TOPIC_NETWORK_UPDATE_STR = "network update";
 constexpr std::string_view UCL_NM_TOPIC_RESET_STR          = "reset";
 constexpr std::string_view UCL_NM_TOPIC_TEMPORARILY_OFFLINE_STR
-  = "temporarily offline";
+  = "idle";
 constexpr std::string_view UCL_NM_TOPIC_SCAN_MODE_STR = "scan mode";
 
 // Use boost::property_tree::detail::less_nocase as comperator
 // to make map keys case insensitive
-static const std::map<std::string_view,
+static const std::multimap<std::string_view,
                       ucl_network_management_state_t,
                       bpt::detail::less_nocase<std::string_view>>
   ucl_network_management_state_map = {
@@ -512,28 +524,66 @@ static std::string get_topic(const unid_t unid)
   return "ucl/by-unid/" + std::string(unid) + "/ProtocolController";
 }
 
+/**
+ * @brief Helper function for getting the json value with case-insensitive key. I.e. :
+ * @code
+ * {
+ *   "StAtE": "aDd nOdE",
+ *   "StaTeParamEtErs": {
+ *     "UsErAcCepT": true,
+ *     "SecuRItyCOde" : "12345-44510-61374-04097-44510-61374-61183-00256",
+ *     "AllowMultipleInclusions": true
+ *   }
+ * }
+ * @endcode
+ * Using this function you may get the "StAtE" value even if passed key differs in letters cases:
+ * @code
+ * nlohmann::json state_json = get_case_insensitive_json (src_json, std::string("state"));
+ * @endcode
+ * If there is not a value with a passed key - the empty nlohmann::json object is returned.
+ *
+ * @param[in] jsn already parsed json object
+ * @param[in] key the key of the value, we are searching for
+ *
+ * @return nlohmann::json object with data if OK, empty nlohmann::json object in a case of failure.
+ */
+static nlohmann::json get_case_insensitive_json(const nlohmann::json &jsn, const std::string &key)
+{
+  auto jsn_map = jsn.get<std::map<std::string, nlohmann::json, bpt::detail::less_nocase<std::string> >>();
+
+  auto res_iter = jsn_map.find(key);
+
+  if (jsn_map.end() == res_iter) {
+    nlohmann::json empty_jsn;
+    return empty_jsn;
+  }
+
+  return res_iter->second;
+}
+
 static sl_status_t write_topic_received(const std::string &message)
 {
-  std::stringstream ss;
-  ss << message;
-  bpt::iptree root_tree;
+  nlohmann::json jsn;
+
   try {
-    bpt::json_parser::read_json(ss, root_tree);
-  } catch (const bpt::json_parser_error &e) {
+    jsn = nlohmann::json::parse(message);
+  } catch (const nlohmann::json::exception &err) {
     sl_log_debug(LOG_TAG,
                  "Failed to parse JSON message: '%s', error: %s",
                  message.c_str(),
-                 e.what());
+                 err.what());
     return SL_STATUS_FAIL;
   }
+
   try {
-    std::string mesg = root_tree.get<std::string>("State");
-    sl_log_debug(LOG_TAG, "State: '%s' received", mesg.c_str());
-    auto state = ucl_network_management_state_map.find(mesg);
+    std::string state_msg = get_case_insensitive_json(jsn, std::string("State"));
+    sl_log_debug(LOG_TAG, "State: '%s' received", state_msg.c_str());
+
+    auto state = ucl_network_management_state_map.find(state_msg);
     if (state == ucl_network_management_state_map.end()) {
       sl_log_debug(LOG_TAG,
                    "Invalid state: %s, ignoring command.",
-                   mesg.c_str());
+                   state_msg.c_str());
       return SL_STATUS_FAIL;
     }
 
@@ -543,48 +593,56 @@ static sl_status_t write_topic_received(const std::string &message)
         zwave_network_management_abort();
         break;
       case UCL_NM_TOPIC_ADD_NODE: {
-        if (auto state_parameters = root_tree.get_child_optional(
-              "StateParameters")) {  // User have supplied StateParameters
-          allow_multiple_inclusions
-            = state_parameters.get()
-                .get_optional<bool>("AllowMultipleInclusions")
-                .get_value_or(allow_multiple_inclusions);
-          if (boost::optional<bool> user_accept
-              = state_parameters.get().get_optional<bool>(
-                "UserAccept")) {      // User have supplied UserAccepted
-            if (user_accept.get()) {  // UserAccepted is true
-              sl_log_debug(LOG_TAG, "User accepted node add");
-              if (auto dsk_str
-                  = state_parameters.get().get_optional<std::string>(
-                    "SecurityCode")) {  // User have supplied SecurityCode
-                zwave_dsk_t zwave_dsk;
-                if (SL_STATUS_OK
-                    == zpc_converters_dsk_str_to_internal(dsk_str.get().c_str(),
-                                                          zwave_dsk)) {
-                  zwave_network_management_dsk_set(zwave_dsk);
-                } else {  // Failed to parse dsk
-                  sl_log_debug(LOG_TAG,
-                               "Failed to parse DSK: '%s'",
-                               dsk_str.get().c_str());
-                }
-              } else {  // UserAccepted is true, but SecurityCode is not supplied
-                sl_log_debug(
-                  LOG_TAG,
-                  "\"State\": \"add node\" is missing \"StateParameters\" "
-                  "\"SecurityCode\", discarding command: %s",
-                  message.c_str());
-              }
-            } else {  // UserAccepted is false
-              sl_log_debug(
-                LOG_TAG,
-                "User rejected node add operation (UserAccepted = false).");
-              zwave_network_management_abort();
-            }
-          } else {  // UserAccept have not been supplied
-            zwave_network_management_add_node();
-          }
-        } else {  // User have not supplied StateParameters, assuming add node
+        nlohmann::json jsn_state_param = get_case_insensitive_json(jsn, std::string("StateParameters"));
+
+        if (jsn_state_param.is_null()) {  // User have not supplied StateParameters, assuming add node
           zwave_network_management_add_node();
+          break;
+        }
+
+        // User have supplied StateParameters
+        nlohmann::json jsn_allow_mult_inc = get_case_insensitive_json(jsn_state_param, std::string("AllowMultipleInclusions"));
+        nlohmann::json jsn_user_accept    = get_case_insensitive_json(jsn_state_param, std::string("UserAccept"));
+        nlohmann::json jsn_secur_code     = get_case_insensitive_json(jsn_state_param, std::string("SecurityCode"));
+
+        if (!jsn_allow_mult_inc.is_null()) {
+          allow_multiple_inclusions = jsn_allow_mult_inc;
+        }
+
+        if (jsn_user_accept.is_null()) { // UserAccept have not been supplied
+          zwave_network_management_add_node();
+          break;
+        }
+
+        // User have supplied UserAccepted
+        bool user_accept = jsn_user_accept;
+
+        if (user_accept) {  // UserAccepted is true
+          sl_log_debug(LOG_TAG, "User accepted node add");
+
+          if (jsn_secur_code.is_null()) {  // UserAccepted is true, but SecurityCode is not supplied
+            sl_log_debug(
+              LOG_TAG,
+              "\"State\": \"add node\" is missing \"StateParameters\" "
+              "\"SecurityCode\", discarding command: %s",
+              message.c_str());
+              break;
+          }
+
+          // User have supplied SecurityCode
+          std::string dsk_str = jsn_secur_code;
+          zwave_dsk_t zwave_dsk;
+
+          if (SL_STATUS_OK == zpc_converters_dsk_str_to_internal(dsk_str.c_str(), zwave_dsk)) {
+            zwave_network_management_dsk_set(zwave_dsk);
+          } else {  // Failed to parse dsk
+            sl_log_debug(LOG_TAG, "Failed to parse DSK: '%s'", dsk_str.c_str());
+          }
+        } else {  // UserAccepted is false
+          sl_log_debug(
+            LOG_TAG,
+            "User rejected node add operation (UserAccepted = false).");
+          zwave_network_management_abort();
         }
       } break;
       case UCL_NM_TOPIC_REMOVE_NODE:
@@ -614,11 +672,11 @@ static sl_status_t write_topic_received(const std::string &message)
                        state->second);
         break;
     }
-  } catch (const bpt::ptree_error &e) {
+  } catch (const nlohmann::json::exception &err) {
     sl_log_error(LOG_TAG,
                  "JSON payload invalid %s, Error: %s",
                  message.c_str(),
-                 e.what());
+                 err.what());
   }
   return SL_STATUS_OK;
 }
@@ -708,7 +766,7 @@ static sl_status_t state_topic_update(
       nlohmann::json root;
       // State
       root["State"] = it->first;
-
+      
       // SupportedStateList
       root["SupportedStateList"] = get_supported_states(it->second);
 
@@ -852,10 +910,6 @@ sl_status_t
 
   return SL_STATUS_OK;
 }
-////////////////////////////////////////////////////////////////////////////////
-// Contiki Process
-////////////////////////////////////////////////////////////////////////////////
-PROCESS(ucl_network_management_process, "ucl_network_management_process");
 
 PROCESS_THREAD(ucl_network_management_process, ev, data)
 {

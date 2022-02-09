@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -25,6 +25,7 @@
 #include "attribute_resolver_mock.h"
 
 #include "zwave_controller_utils_mock.h"
+#include "zwave_utils_mock.h"
 #include "zwave_command_handler_mock.h"
 #include "zwave_unid_mock.h"
 #include "zwave_controller_connection_info.h"
@@ -75,9 +76,9 @@ static sl_status_t
   return SL_STATUS_OK;
 }
 
-static attribute_store_node_update_callback_t notification_version_callback;
+static attribute_store_node_changed_callback_t notification_version_callback;
 static sl_status_t attribute_store_register_callback_by_type_stub(
-  attribute_store_node_update_callback_t callback_function,
+  attribute_store_node_changed_callback_t callback_function,
   attribute_store_type_t type,
   int cmock_num_calls)
 {
@@ -1040,7 +1041,6 @@ void test_zwave_command_class_support_notification_supported_state_event_types_r
     .bitMask1         = 0,
   };
 
-  // Test with frame too small
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     command_handler.control_handler(&test_connection_info,
                                                     (const uint8_t *)&frame,
@@ -1066,7 +1066,6 @@ void test_zwave_command_class_support_notification_supported_state_event_types_r
     test_connection_info.remote.endpoint_id,
     ATTRIBUTE_STORE_INVALID_NODE);
 
-  // Test with frame too small
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     command_handler.control_handler(&test_connection_info,
                                                     (const uint8_t *)&frame,
@@ -1092,7 +1091,7 @@ void test_zwave_command_class_support_notification_supported_state_event_types_r
   attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
     test_unid,
     test_connection_info.remote.endpoint_id,
-    ATTRIBUTE_STORE_INVALID_NODE);
+    endpoint_node);
 
   attribute_store_get_node_child_by_value_ExpectAndReturn(
     endpoint_node,
@@ -1103,7 +1102,6 @@ void test_zwave_command_class_support_notification_supported_state_event_types_r
     0,
     ATTRIBUTE_STORE_INVALID_NODE);
 
-  // Test with frame too small
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     command_handler.control_handler(&test_connection_info,
                                                     (const uint8_t *)&frame,
@@ -1130,7 +1128,7 @@ void test_zwave_command_class_support_notification_supported_state_event_types_r
   attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
     test_unid,
     test_connection_info.remote.endpoint_id,
-    ATTRIBUTE_STORE_INVALID_NODE);
+    endpoint_node);
 
   attribute_store_get_node_child_by_value_ExpectAndReturn(
     endpoint_node,
@@ -1147,7 +1145,6 @@ void test_zwave_command_class_support_notification_supported_state_event_types_r
     0,
     ATTRIBUTE_STORE_INVALID_NODE);
 
-  // Test with frame too small
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     command_handler.control_handler(&test_connection_info,
                                                     (const uint8_t *)&frame,

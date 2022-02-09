@@ -25,6 +25,7 @@
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
 #include "zwave_tx_scheme_selector.h"
+#include "zwave_controller_storage.h"
 #include "ota_time.h"
 
 // Interface includes
@@ -53,6 +54,20 @@ static uint16_t received_frame_size = 0;
 static uint8_t u8_value        = 0;
 static uint32_t u32_value      = 0;
 static clock_time_t time_value = 0;
+
+// The callback for zwave_controller_storage APIs are registered
+// This will avoid that when a zwave_contoller components access
+// attribute store there will not be any issue. Since zwave components
+// is isolated from direct accessing of attribute store using the following
+// callbacks.
+static zwave_controller_storage_callback_t zwave_controller_storage_cb_mock = {
+  .on_set_node_as_s2_capable = zwave_security_validation_set_node_as_s2_capable,
+  .on_verify_node_is_s2_capable = zwave_security_validation_is_node_s2_capable,
+  .on_get_node_granted_keys     = zwave_get_node_granted_keys,
+  .on_get_inclusion_protocol    = zwave_get_inclusion_protocol,
+  .on_zwave_controller_storage_cc_version
+  = zwave_node_get_command_class_version,
+};
 
 static void create_firmware_file(const char *file_name, size_t file_size)
 {
@@ -97,6 +112,7 @@ void setUp()
   zpc_attribute_store_test_helper_create_network();
   zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
   zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
+  zwave_controller_storage_callback_register(&zwave_controller_storage_cb_mock);
 }
 
 void test_zwave_command_class_firmware_update_configure_and_cancel()

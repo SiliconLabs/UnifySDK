@@ -1,6 +1,11 @@
 var uic__stdin__process_8c =
 [
     [ "LOG_TAG", "uic__stdin__process_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
+    [ "RTIMER_OK", "group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba45385eb6ec5fbc3179702f8516c48c99", null ],
+    [ "RTIMER_ERR_FULL", "group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55bade68e86389e0531689232ff133ade6b7", null ],
+    [ "RTIMER_ERR_TIME", "group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba27ae4cfb3cd9e0d4279ceba3efbf5017", null ],
+    [ "RTIMER_ERR_ALREADY_SCHEDULED", "group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba6158ceaa4e727bb58a633d59a3cac417", null ],
+    [ "STARTUP", "group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba56f275913421aac16b5efff541f5dfc4", null ],
     [ "completer", "uic__stdin__process_8c.html#a59020ba1777d9f65d796b36bb3dafd48", null ],
     [ "handle_signals", "uic__stdin__process_8c.html#a97127bec638e7e92e9ecb30ec5ac2094", null ],
     [ "PROCESS", "uic__stdin__process_8c.html#acfecdbe8356bc8f016125b201c8ff46d", null ],

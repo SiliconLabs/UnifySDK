@@ -5,8 +5,9 @@ target_interface_libraries(zigpc_net_mgmt_process_send_mock zigpc_common_mock)
 
 add_mock(zigpc_net_mgmt_fsm_mock ../src/zigpc_net_mgmt_fsm.h)
 target_include_directories(zigpc_net_mgmt_fsm_mock PRIVATE ../include)
-target_interface_libraries(zigpc_net_mgmt_fsm_mock zigpc_common_mock
-                           zigpc_gateway_mock uic_contiki_stub)
+target_interface_libraries(
+  zigpc_net_mgmt_fsm_mock zigpc_common_mock zigpc_discovery_mock
+  zigpc_gateway_mock uic_contiki_stub)
 
 add_mock(zigpc_net_mgmt_notify_mock ../src/zigpc_net_mgmt_notify_int.h)
 target_include_directories(zigpc_net_mgmt_notify_mock PRIVATE ../include)
@@ -14,8 +15,14 @@ target_interface_libraries(zigpc_net_mgmt_notify_mock zigpc_net_mgmt_fsm_mock
                            zigpc_common_mock zigpc_gateway_mock)
 
 # FSM Log Tests
-target_add_unittest(zigpc_net_mgmt NAME zigpc_net_mgmt_fsm_log_test SOURCES
-                    zigpc_net_mgmt_fsm_log_test.c)
+target_add_unittest(
+  zigpc_net_mgmt
+  NAME
+  zigpc_net_mgmt_fsm_log_test
+  SOURCES
+  zigpc_net_mgmt_fsm_log_test.c
+  DEPENDS
+  zigpc_gateway_mock)
 
 # FSM Tests
 target_add_unittest(
@@ -24,6 +31,8 @@ target_add_unittest(
   zigpc_net_mgmt_fsm_test
   SOURCES
   zigpc_net_mgmt_fsm_test.c
+  EXCLUDE
+  zigpc_net_mgmt_notify.c
   DEPENDS
   zigpc_net_mgmt_notify_mock
   zigpc_datastore_mock
@@ -52,7 +61,7 @@ target_add_unittest(
   DEPENDS
   zigpc_net_mgmt_process_send_mock
   zigpc_net_mgmt_fsm_mock
-  zigpc_common_mock
+  zigpc_discovery_mock
   zigpc_gateway_mock
   uic_log)
 
@@ -69,4 +78,5 @@ target_add_unittest(
   DEPENDS
   zigpc_net_mgmt_process_send_mock
   zigpc_net_mgmt_fsm_mock
+  zigpc_gateway_mock
   zigpc_common_mock)

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -20,8 +20,9 @@
 #define ZWAPI_PROTOCOL_TRANSPORT_H
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "sl_status.h"
-#include "zwave_utils.h"
+#include "zwave_node_id_definitions.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,7 +30,7 @@ extern "C" {
 
 /**
  * @defgroup ZWAPI_TRANSPORT Transport API
- * @ingroup ZWAPI
+ * @ingroup zwave_api
  * @brief Functions used to send data to Z-Wave nodes.
  *
  * Functions in this module are used to transmit commands to Z-Wave nodes using
@@ -150,7 +151,6 @@ extern "C" {
 #define LAST_USED_ROUTE_REPEATER_1_INDEX 1
 #define LAST_USED_ROUTE_REPEATER_2_INDEX 2
 #define LAST_USED_ROUTE_REPEATER_3_INDEX 3
-#define LAST_USED_ROUTE_CONF_INDEX       4
 ///@}
 
 /// @name RSSI feedback constants
@@ -172,7 +172,7 @@ extern "C" {
 /// RSSI value array used in zwapi_tx_report_t. Each value is an RSSI feedback
 /// constant defined above.
 struct rssi_val {
-  signed char incoming[MAX_REPEATERS + 1];
+  int8_t incoming[MAX_REPEATERS + 1];
 };
 
 typedef struct _S_ROUTE_LINK_ {
@@ -191,7 +191,16 @@ typedef enum _E_ROUTING_SCHEME_ {
   ROUTINGSCHEME_ROUTE          = 5,  ///< ReturnRoute/controllerAutoRoute
   ROUTINGSCHEME_RESORT_DIRECT  = 6,  ///< directResort
   ROUTINGSCHEME_RESORT_EXPLORE = 7   ///< Explore
-} E_ROUTING_SCHEME;
+} e_routing_scheme_t;
+
+/// List of possible link speeds / protocols
+typedef enum last_route_speed {
+  UNKNOWN_SPEED                = 0,
+  ZWAVE_9_6_KBITS_S            = 1,  ///< Z-Wave 9.6 kbits/s
+  ZWAVE_40_KBITS_S             = 2,  ///< Z-Wave 40 kbits/s
+  ZWAVE_100_KBITS_S            = 3,  ///< Z-Wave 100 kbits/s
+  ZWAVE_LONG_RANGE_100_KBITS_S = 4,  ///< Z-Wave Long Range 100 kbits/s
+} last_route_speed_t;
 
 /**
  * @brief Detailed report and data about Z-Wave transmissions
@@ -199,17 +208,39 @@ typedef enum _E_ROUTING_SCHEME_ {
  *
  */
 typedef struct zwapi_tx_report {
-  uint16_t wTransmitTicks;  ///< Passed 10 ms ticks
-  uint8_t bRepeaters;       ///< Repeaters in route, zero for direct range
+  ///< Passed 10 ms ticks
+  uint16_t transmit_ticks;
+  /// Repeaters in route, zero for direct range
   /// rssi_values per hop for direct and routed frames. Contains repeaters + 1
   /// values.
+  uint8_t number_of_repeaters;
+  // This field is used to indicate ythe RSSI value of the acknowledgement frame
+  int8_t ack_rssi;
   struct rssi_val rssi_values;
-  uint8_t bACKChannelNo;
-  uint8_t bLastTxChannelNo;
-  E_ROUTING_SCHEME bRouteSchemeState;
-  uint8_t pLastUsedRoute[LAST_USED_ROUTE_SIZE];
-  uint8_t bRouteTries;
-  S_ROUTE_LINK bLastFailedLink;
+  // This field is used to indicate the channel number where the ACK received from.
+  uint8_t ack_channel_number;
+  // This field is used to indicate the channel number that is used to transmit the data.
+  uint8_t tx_channel_number;
+  e_routing_scheme_t route_scheme_state;
+  uint8_t last_route_repeaters[LAST_USED_ROUTE_SIZE];
+  // This field indicates if a 250ms beam was used to wake up the destination.
+  bool beam_250ms;
+  // This field indicates if a 1000ms beam was used to wake up the destination.
+  bool beam_1000ms;
+  last_route_speed_t last_route_speed;
+  uint8_t routing_attempts;
+  S_ROUTE_LINK last_failed_link;
+  // This field is used to indicate the transmit power used for the transmission
+  // The value 127 MUST indicate that the value is not available
+  int8_t tx_power;
+  // This field is used to indicate the measured noise floor during the outgoing transmission.
+  int8_t measured_noise_floor;
+  // This field is used to advertise the Tx Power used by the destination in its Ack MPDU frame.
+  int8_t destination_ack_mpdu_tx_power;
+  // This field is used to advertise the Tx Power used by the destination in its Ack MPDU frame.
+  int8_t destination_ack_mpdu_measured_rssi;
+  // This field is used to indicate the measured RSSI of the acknowledgement frame received from the destination.
+  int8_t destination_ack_mpdu_measured_noise_floor;
 } zwapi_tx_report_t;
 
 /**

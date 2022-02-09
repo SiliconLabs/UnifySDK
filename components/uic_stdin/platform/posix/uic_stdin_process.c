@@ -1,6 +1,6 @@
 /*
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
@@ -43,6 +43,8 @@
 
 // Globals
 PROCESS(uic_stdin_process, "Unify Stdin");
+//Startup event
+enum { STARTUP };
 
 static pthread_t stdin_thread;
 pthread_cond_t cond   = PTHREAD_COND_INITIALIZER;
@@ -70,7 +72,10 @@ static void handle_signals(int signo)
 {
   if (signo == SIGINT) {
     sl_log_debug(LOG_TAG, "You pressed Ctrl+C\n");
-    write(fildes[1], "exit", 5);
+    if (write(fildes[1], "exit", 5) < 0) {
+      sl_log_error(LOG_TAG, "Failed to write to pipe");
+      exit(1);
+    }
   }
 }
 
@@ -97,14 +102,20 @@ static void *readline_loop(void *d)
         }
         add_history(buf);
         //Send the buffer, +1 to include the 0 termination.
-        write(fildes[1], buf, len + 1);
+        if (write(fildes[1], buf, len + 1) < 0) {
+          sl_log_error(LOG_TAG, "Failed to write to pipe");
+          exit(1);
+        }
         //Wait for the contiki process to process the line
         pthread_cond_wait(&cond, &mutex);
       }
       free(buf);
     } else {
       //CTRL-D was pressed
-      write(fildes[1], "exit", 5);
+      if (write(fildes[1], "exit", 5) < 0) {
+        sl_log_error(LOG_TAG, "Failed to write to pipe");
+        exit(1);
+      }
     }
   }
 
@@ -127,15 +138,18 @@ PROCESS_THREAD(uic_stdin_process, ev, data)
   PROCESS_POLLHANDLER(uic_stdin_poll());
   PROCESS_BEGIN();
   while (1) {
-    if (ev == PROCESS_EVENT_INIT) {
+    if (ev == STARTUP) {
       uic_stdin_init();
       if (isatty(STDIN_FILENO)) {
         //We use a pipe to send line string from readline thread to the contiki
         //process.
-        pipe(fildes);
+        if (0 != pipe(fildes)) {
+          sl_log_error(LOG_TAG, "Failed to create pipe");
+          exit(1);
+        }
         uic_main_ext_register_rfd(fildes[0], 0, &uic_stdin_process);
 
-        sl_log_debug(LOG_TAG, "Registering stdin fileno %d\n", fildes[0]);
+        sl_log_info(LOG_TAG, "Registering stdin fileno %d\n", fildes[0]);
         // As readlines support for non-blocking io is very broken, we run the
         // console parset in a separate thread.
         thread_running = true;
@@ -155,6 +169,10 @@ PROCESS_THREAD(uic_stdin_process, ev, data)
 sl_status_t uic_stdin_setup(void)
 {
   process_start(&uic_stdin_process, NULL);
+  // Wait with the actual initialization to after all components has started
+  // as another component might abort the boot and we don't want to keep the
+  // thread dangling
+  process_post(&uic_stdin_process, STARTUP, 0);
   return SL_STATUS_OK;
 }
 

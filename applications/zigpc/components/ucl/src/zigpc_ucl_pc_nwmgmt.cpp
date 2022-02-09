@@ -16,8 +16,7 @@
 #include <vector>
 #include <unordered_map>
 #include <boost/algorithm/string.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+#include <nlohmann/json.hpp>
 
 // UIC shared includes
 #include <sl_log.h>
@@ -54,41 +53,42 @@ static constexpr char KEY_STATE_PARAMETER_UNID[] = "Unid";
  * @brief Helper to parse requested state from MQTT JSON payload into the
  * state change request object.
  *
- * @param payload_obj   JSON payload parsed as property tree.
+ * @param payload_jsn   JSON payload parsed as nlohmann::json object.
  * @param state_change  State change object to poulate.
  * @return sl_status_t  SL_STATUS_OK on success,
  * SL_STATUS_INVALID_CONFIGURATION on missing state field, or
  * SL_STATUS_INVALID_TYPE on unknown state label parsed.
  */
 static sl_status_t helper_parse_requested_state(
-  bpt::ptree &payload_obj, zigpc_net_mgmt_state_change_request_t &state_change)
+  nlohmann::json &payload_jsn, zigpc_net_mgmt_state_change_request_t &state_change)
 {
   sl_status_t status = SL_STATUS_OK;
 
-  auto state_field = payload_obj.get_optional<std::string>(KEY_STATE);
-  if (state_field == boost::none) {
+  if (payload_jsn.count(KEY_STATE) == 0) {
     status = SL_STATUS_INVALID_CONFIGURATION;
     sl_log_warning(zigpc_ucl::LOG_TAG,
                    "Required State field missing from message: 0x%X",
                    status);
-  } else {
-    for (auto &state_entry: STATE_TYPE_MAP) {
-      if (state_entry.second == *state_field) {
-        state_change.requested_state = state_entry.first;
-        break;
-      }
-    }
+    return status;
+  }
 
-    if (state_change.requested_state == ZIGPC_NET_MGMT_FSM_STATE_MIN_VAL) {
-      status = SL_STATUS_INVALID_TYPE;
-      sl_log_warning(zigpc_ucl::LOG_TAG,
-                     "Unknown state requested: 0x%X",
-                     status);
-    } else {
-      sl_log_debug(zigpc_ucl::LOG_TAG,
-                   "Requesting state change to '%s'",
-                   state_field->c_str());
+  std::string state_field = payload_jsn[KEY_STATE].get<std::string>();
+  for (auto &state_entry: STATE_TYPE_MAP) {
+    if (state_entry.second == state_field) {
+      state_change.requested_state = state_entry.first;
+      break;
     }
+  }
+
+  if (state_change.requested_state == ZIGPC_NET_MGMT_FSM_STATE_MIN_VAL) {
+    status = SL_STATUS_INVALID_TYPE;
+    sl_log_warning(zigpc_ucl::LOG_TAG,
+                    "Unknown state requested: 0x%X",
+                    status);
+  } else {
+    sl_log_debug(zigpc_ucl::LOG_TAG,
+                  "Requesting state change to '%s'",
+                  state_field.c_str());
   }
 
   return status;
@@ -98,35 +98,38 @@ static sl_status_t helper_parse_requested_state(
  * @brief Helper to parse recognized state paramters from MQTT JSON payload
  * into the state change request object.
  *
- * @param payload_obj   JSON payload parsed as property tree.
+ * @param payload_jsn   JSON payload parsed as nlohmann::json object.
  * @param state_change  State change object to poulate.
  * @return sl_status_t  SL_STATUS_OK on success,
  * SL_STATUS_INVALID_SIGNATURE if the Unid parameter is not recognized.
  */
 static sl_status_t helper_parse_state_parameters(
-  bpt::ptree &payload_obj, zigpc_net_mgmt_state_change_request_t &state_change)
+  nlohmann::json &payload_jsn, zigpc_net_mgmt_state_change_request_t &state_change)
 {
   sl_status_t status = SL_STATUS_OK;
 
-  auto state_parameters_obj
-    = payload_obj.get_child_optional(KEY_STATE_PARAMETERS);
+  if (payload_jsn.count(KEY_STATE_PARAMETERS) == 0 || payload_jsn[KEY_STATE_PARAMETERS].is_null()) {
+    return status;
+  }
+
+  nlohmann::json state_parameters_obj = payload_jsn[KEY_STATE_PARAMETERS];
 
   // Extract state parameters object if populated
-  if ((state_parameters_obj != boost::none) && !state_parameters_obj->empty()) {
-    auto unid_field = state_parameters_obj->get_optional<std::string>(
-      KEY_STATE_PARAMETER_UNID);
-    if (unid_field != boost::none) {
-      zigbee_eui64_uint_t eui64;
-      status = zigpc_ucl::mqtt::parse_unid(*unid_field, eui64);
-      status |= zigbee_uint_to_eui64(eui64, state_change.param_eui64);
-      if (status != SL_STATUS_OK) {
-        sl_log_warning(zigpc_ucl::LOG_TAG,
-                       "Unable to parse UNID: 0x%X",
-                       status);
-      } else {
-        state_change.param_eui64_filled = true;
-      }
-    }
+  if (state_parameters_obj.count(KEY_STATE_PARAMETER_UNID) == 0) {
+    return status;
+  }
+
+  std::string unid_field = state_parameters_obj[KEY_STATE_PARAMETER_UNID].get<std::string>();
+
+  zigbee_eui64_uint_t eui64;
+  status = zigpc_ucl::mqtt::parse_unid(unid_field, eui64);
+  status |= zigbee_uint_to_eui64(eui64, state_change.param_eui64);
+  if (status != SL_STATUS_OK) {
+    sl_log_warning(zigpc_ucl::LOG_TAG,
+                    "Unable to parse UNID: 0x%X",
+                    status);
+  } else {
+    state_change.param_eui64_filled = true;
   }
 
   return status;
@@ -146,15 +149,15 @@ void zigpc_ucl::pc_nwmgmt::on_write_mqtt(const char *topic,
                                          const size_t message_length)
 {
   sl_status_t status = SL_STATUS_OK;
-  bpt::ptree payload_obj;
+  nlohmann::json payload_jsn;
 
   if (message == nullptr) {
     status = SL_STATUS_NULL_POINTER;
   } else {
-    status = zigpc_ucl::mqtt::parse_payload(message, payload_obj);
+    status = zigpc_ucl::mqtt::parse_payload(message, payload_jsn);
   }
 
-  if ((status == SL_STATUS_OK) && (payload_obj.empty())) {
+  if ((status == SL_STATUS_OK) && (payload_jsn.empty())) {
     status = SL_STATUS_EMPTY;
   }
 
@@ -162,14 +165,14 @@ void zigpc_ucl::pc_nwmgmt::on_write_mqtt(const char *topic,
     .requested_state    = ZIGPC_NET_MGMT_FSM_STATE_MIN_VAL,
     .param_eui64_filled = false,
   };
-  boost::optional<std::string> state_field = boost::none;
+
   // Extract required state field
   if (status == SL_STATUS_OK) {
-    status = helper_parse_requested_state(payload_obj, state_change);
+    status = helper_parse_requested_state(payload_jsn, state_change);
   }
 
   if (status == SL_STATUS_OK) {
-    status = helper_parse_state_parameters(payload_obj, state_change);
+    status = helper_parse_state_parameters(payload_jsn, state_change);
   }
 
   if (status == SL_STATUS_OK) {
@@ -190,7 +193,7 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
 {
   sl_status_t status = SL_STATUS_OK;
 
-  bpt::ptree payload;
+  nlohmann::json payload_jsn;
 
   // Populate new state
   if (status == SL_STATUS_OK) {
@@ -201,7 +204,7 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
                      "Unknown state to publish: 0x%X",
                      status);
     } else {
-      payload.put(KEY_STATE, found_new_state->second);
+      payload_jsn[KEY_STATE] = found_new_state->second;
     }
   }
 
@@ -211,7 +214,7 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
       state.next_supported_states_list,
       state.next_supported_states_list + state.next_supported_states_count);
 
-    bpt::ptree arr;
+    nlohmann::json arr_jsn = nlohmann::json::array();
     for (auto &supported_state: supported_states) {
       auto found_state = STATE_TYPE_MAP.find(supported_state);
       if (found_state == STATE_TYPE_MAP.end()) {
@@ -220,14 +223,14 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
                        "Unknown next state to publish: 0x%X",
                        status);
       } else {
-        arr.push_back(bpt::ptree::value_type("", found_state->second));
+        arr_jsn.push_back(found_state->second);
       }
     }
 
-    if (arr.empty()) {
-      payload.put(KEY_STATE_LIST, "[]");
+    if (arr_jsn.empty()) {
+      payload_jsn[KEY_STATE_LIST] = "[]";
     } else {
-      payload.add_child(KEY_STATE_LIST, arr);
+      payload_jsn[KEY_STATE_LIST] = arr_jsn;
     }
   }
 
@@ -238,15 +241,15 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
       state.requested_state_parameter_list
         + state.requested_state_parameter_count);
 
-    bpt::ptree arr;
+    nlohmann::json arr_jsn = nlohmann::json::array();
     for (auto &param: req_params) {
-      arr.push_back(bpt::ptree::value_type("", std::string(param)));
+      arr_jsn.push_back(std::string(param));
     }
 
-    if (arr.empty()) {
-      payload.put(KEY_REQ_STATE_PARAMETER_LIST, "[]");
+    if (arr_jsn.empty()) {
+      payload_jsn[KEY_REQ_STATE_PARAMETER_LIST] = "[]";
     } else {
-      payload.add_child(KEY_REQ_STATE_PARAMETER_LIST, arr);
+      payload_jsn[KEY_REQ_STATE_PARAMETER_LIST] = arr_jsn;
     }
   }
 
@@ -261,10 +264,8 @@ sl_status_t zigpc_ucl::pc_nwmgmt::on_net_state_update(
   }
 
   if (status == SL_STATUS_OK) {
-    std::stringstream ss;
-    bpt::write_json(ss, payload, false);
+    std::string payload_str = payload_jsn.dump();
 
-    std::string payload_str = ss.str();
     boost::replace_all(payload_str, "\"[]\"", "[]");
     boost::replace_all(payload_str, "\n", "");
 

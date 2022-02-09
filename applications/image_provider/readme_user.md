@@ -1,5 +1,6 @@
 # Image Provider User's Guide
 
+## Description
 The Image Provider is a generic application that allows storing and
 distributing OTA Firmware images for Protocol Controllers over MQTT.
 
@@ -12,36 +13,36 @@ access firmware images for a given node. Protocol Controllers running without
 the Image Provider application available will most likely not be able to provide
 OTA functionalities.
 
+## Installation
+
+Please refer to  [Unify SDK User guide](../../doc/readme_user.md).
+
 ## Running the Image Provider
 
 ### Using Systemd Service
 
 The best way to run the Image Provider is using the Systemd service that is
 installed with the Debian installer.
-For more information, see [README.md](../../README.md).
+For more information, see [Unify SDK User guide](../../doc/readme_user.md).
 
 ### Using the Command Line
 
 Alternatively, you can run the Image Provider by executing `uic-image-provider`.
 You can configure the MQTT server, database path, through command line options.
-For details about options, run the following command:
-
-```bash
-pi@unify:uic-image-provider --help
-```
+For details about options, run `uic-image-provider --help` command:
 
 Make sure that you do not run the Image Provider both as a service and using the
 command line.
 
 ```bash
 pi@unify:~ $ service uic-image-provider status
-● uic-image-provider.service - Unified IoT OTA Image Provider
+* uic-image-provider.service - Unified IoT OTA Image Provider
    Loaded: loaded (/lib/systemd/system/uic-image-provider.service; enabled; vendor preset: enabled)
    Active: active (running) since Tue 2021-08-17 14:50:26 CEST; 1 day 20h ago
  Main PID: 13235 (uic-image-provi)
     Tasks: 2 (limit: 4915)
    CGroup: /system.slice/uic-image-provider.service
-           └─13235 /usr/bin/uic-image-provider
+           |─13235 /usr/bin/uic-image-provider
 ```
 
 If the service is running, stop it using the following command before
@@ -64,10 +65,10 @@ to the MQTT broker/Protocol Controllers.
 ```bash
 pi@unify:/var/lib/uic-image-provider $ tree
 .
-├── images.json
-└── updates
-    ├── ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl
-    └── ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl
+|── images.json
+|── updates
+    |── ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl
+    |── ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl
 ```
 
 ### Metadata File Name and Format
@@ -203,54 +204,3 @@ The checksum string can also be created using openssl:
 ```bash
 cat ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl | openssl dgst -binary -md5 | openssl base64
 ```
-
-### Output Examples
-
-```bash
-pi@unify:~ $ uic-image-provider --help
-
-Usage: uic-image-provider [Options]
-
-Options:
-  --conf arg (=/etc/uic/uic.cfg)        Config file in YAML format
-  --help                                Print this help message and quit
-  --sample_conf_file                    Print sample YAML config file that can
-                                        be passed to --conf option
-  --version                             Print version information and quit
-
-Following options can also be in a Config file.
- Options and values passed on command line here take precedence over the options and values in config file:
-  --mqtt.host arg (=localhost)          MQTT broker hostname or IP
-  --mqtt.port arg (=1883)               MQTT broker port
-  --log.level arg (=d)                  Log Level (d,i,w,e,c)
-  --log.tag_level arg                   Tag based log level
-                                        Format: <tag>:<severity>,
-                                        <tag>:<severity>, ...
-  --datastore.file arg (=/var/lib/uic/database.db)
-                                        Datastore database file
-  --mqtt.client_id arg (=uic-image-provider)
-                                        override mqtt client name
-  --provider.image_path arg (=/var/lib/uic-image-provider)
-                                        image path
-  --provider.poll_period arg (=15)      poll period
-
-```
-
-```bash
-pi@unify:~ $ uic-image-provider
-2021-07-07 16:37:37:790401 <d> [sl_log] Setting log level to debug
-2021-07-07 16:37:37:799641 <i> [mqtt_client] connecting to "localhost" port:1883
-2021-07-07 16:37:37:802863 <i> [image_watcher] Image storage path /var/lib/uic-image-provider
-2021-07-07 16:37:37:803377 <i> [mqtt_client] subscribing to "ucl/OTA/data/+/+/get" qos:0
-2021-07-07 16:37:37:805596 <i> [image_watcher] Publishing image announce to "ucl/OTA/info/ZWave-000-002-003_EU/all"
-2021-07-07 16:37:37:806087 <i> [image_watcher] Publishing image announce to "ucl/OTA/info/ZWave-002-002-003_EU/zw-C87E6FB8-0006"
-2021-07-07 16:37:37:806471 <i> [image_watcher] Publishing image announce to "ucl/OTA/info/ZWave-002-002-003_EU/zw-C87E6FB8-0007"
-2021-07-07 16:37:37:806863 <i> [image_watcher] Publishing image announce to "ucl/OTA/info/ZWave-001-002-003_EU/zw-C87E6FB8-0005"
-2021-07-07 16:37:41:296142 <i> [image_watcher] Image requested for ZWave-002-002-003_EU/zw-C87E6FB8-0006
-2021-07-07 16:37:41:297280 <i> [mqtt_handler] Publishing binary payload to "ucl/OTA/data/ZWave-002-002-003_EU/zw-C87E6FB8-0006"
-
-```
-
-
-
-

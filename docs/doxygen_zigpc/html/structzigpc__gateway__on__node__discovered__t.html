@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -102,6 +102,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a50f5d5d406716bea484834c707592296"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d36b803eba9742a14d6413b77718391"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__on__node__discovered__t.html#a5d36b803eba9742a14d6413b77718391">endpoint_count</a></td></tr>
 <tr class="separator:a5d36b803eba9742a14d6413b77718391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2a2fe801951be0584fb2bfd0e16ee5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzigpc__gateway__on__node__discovered__t.html#ad2a2fe801951be0584fb2bfd0e16ee5e">endpoint_list</a></td></tr>
+<tr class="separator:ad2a2fe801951be0584fb2bfd0e16ee5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Event data passed when receiving count of endpoint discovery events to wait for a particular node on the network. </p>
@@ -117,7 +119,22 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Number of endpoints supported by device </p>
+<p>Number of endpoints supported </p>
+
+</div>
+</div>
+<a id="ad2a2fe801951be0584fb2bfd0e16ee5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2a2fe801951be0584fb2bfd0e16ee5e">&#9670;&nbsp;</a></span>endpoint_list</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__zigpc__common__zigbee.html#gad9d2260edacca80ad45c43f94f53ae2a">zigbee_endpoint_id_t</a>* zigpc_gateway_on_node_discovered_t::endpoint_list</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>List of endpoints supported </p>
 
 </div>
 </div>
@@ -145,7 +162,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structzigpc__gateway__on__node__discovered__t.html">zigpc_gateway_on_node_discovered_t</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:19 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:39 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

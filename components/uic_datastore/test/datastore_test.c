@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -10,17 +10,23 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
+// Includes from this component
 #include "datastore.h"
-#include "sl_status.h"
+#include "datastore_fixt.h"
+
+// Test includes
 #include "unity.h"
+
+// Unify components
+#include "sl_status.h"
 #include "sl_log.h"
+#include "uic_version.h"
+
+// Generic includes
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "datastore_fixt.h"
-#include "config.h"
-#include "uic_version.h"
 
 #define DATASTORE_VERSION_V1 1
 /// Setup the test suite (called once before all test_xxx functions are called)
@@ -185,13 +191,10 @@ void test_datastore_missing_init()
 
 void test_datastore_fixt_setup()
 {
-  char *argv_inject[3]
-    = {"attribute_store_test", "--datastore.file", "datastore.db"};
-  config_parse(sizeof(argv_inject) / sizeof(char *), argv_inject, "");
-  datastore_fixt_setup_and_handle_version(DATASTORE_VERSION_V1);
+  datastore_fixt_setup_and_handle_version("datastore.db",DATASTORE_VERSION_V1);
   uint8_t fetched_uic_version[UIC_VERSION_MAX_LEN] = {0};
   unsigned int fetched_uic_version_size = UIC_VERSION_MAX_LEN;
- 
+
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_OK,
     datastore_fetch_arr("uic_version", fetched_uic_version, &fetched_uic_version_size),
@@ -211,7 +214,7 @@ void test_datastore_fixt_setup()
   //Write incompatible version number in datastore
   datastore_store_int("version", 100);
   //Check if it fails or not
-  TEST_ASSERT_EQUAL(datastore_fixt_setup_and_handle_version(DATASTORE_VERSION_V1), SL_STATUS_FAIL);
+  TEST_ASSERT_EQUAL(datastore_fixt_setup_and_handle_version("datastore.db",DATASTORE_VERSION_V1), SL_STATUS_FAIL);
   //Remove the datastore.db or in next run the test case will fail
    TEST_ASSERT_EQUAL_MESSAGE(0,
                             remove("datastore.db"),

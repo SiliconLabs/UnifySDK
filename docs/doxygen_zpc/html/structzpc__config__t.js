@@ -1,6 +1,7 @@
 var structzpc__config__t =
 [
     [ "accepted_transmit_failure", "structzpc__config__t.html#a030046f92542ed8f1a67a75d394d6a58", null ],
+    [ "datastore_file", "structzpc__config__t.html#acb143e191b9ce0cd03ab28a935bb19c4", null ],
     [ "default_wake_up_interval", "structzpc__config__t.html#a8b2694e05ab926f7d851d2cf8166dbea", null ],
     [ "device_id", "structzpc__config__t.html#a770ac4f68d187c809e9b018f8af46e51", null ],
     [ "hardware_version", "structzpc__config__t.html#adae03697815a4218fcb34de520452e8c", null ],
@@ -14,6 +15,8 @@ var structzpc__config__t =
     [ "mqtt_host", "structzpc__config__t.html#a00271d0eca332dc0d61e97ec5f8812ee", null ],
     [ "mqtt_keyfile", "structzpc__config__t.html#a08e9236cfa3a09b52c11188daac5bff2", null ],
     [ "mqtt_port", "structzpc__config__t.html#a3fbafaf0ac13e3415ef01cc3a99fda08", null ],
+    [ "ncp_update_filename", "structzpc__config__t.html#a88354b91b593face91e5356cd49c4e74", null ],
+    [ "ncp_version", "structzpc__config__t.html#a256cb757315aaa7cee48d6cde5f9603e", null ],
     [ "ota_cache_path", "structzpc__config__t.html#aba8952dbe65fded21c213365334c0e50", null ],
     [ "ota_cache_size", "structzpc__config__t.html#a40a3bcf5eba3790d2e6738d50d8cb0ad", null ],
     [ "product_id", "structzpc__config__t.html#a6b52354f0699d07d8c890ca9e0c19963", null ],

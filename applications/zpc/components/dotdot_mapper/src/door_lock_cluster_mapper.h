@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,12 +12,13 @@
  *****************************************************************************/
 
 /**
- * @file door_lock_cluster_mapper.h
- * @brief This module maps the zigbee Door Lock cluster to
- *        Z-Wave Door Lock CC and vs.
+ * @defgroup door_lock_cluster_mapper Door Lock Cluster Mapper
+ * @ingroup dotdot_mapper
+ * @brief Maps Door Lock Cluster incoming Commands to attribute modifications.
+ *
  * @{
  */
- 
+
 #ifndef DOOR_LOCK_CLUSTER_MAPPER_H
 #define DOOR_LOCK_CLUSTER_MAPPER_H
 
@@ -35,16 +36,16 @@ extern "C" {
 
 /**
  * @brief Intitialise the DoorLock cluster mapper
- * 
+ *
  * @returns true on success
  * @returns false on failure
- * 
+ *
  */
 bool door_lock_cluster_mapper_init(void);
 
 /**
  * @brief Clears the DoorLock cluster mapper from all its content.
- * 
+ *
  */
 int door_lock_cluster_mapper_teardown(void);
 #ifdef __cplusplus

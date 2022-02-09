@@ -1,0 +1,127 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+/**
+ * @defgroup dotdot_mqtt_hpp Internal C++ ZAP definitions
+ * @brief C++ Helpers and definitions for DotDot MQTT
+ *
+ * @{
+ */
+
+#ifndef DOTDOT_MQTT_HPP
+#define DOTDOT_MQTT_HPP
+
+#include "dotdot_mqtt.h"
+#include "dotdot_bitmap.hpp"
+
+#include <map>
+#include <string>
+
+{{#zcl_clusters}}{{#if (supportedCluster label)}}{{#unless (clusterWithoutEndpoints label)}}
+/**
+ * @brief Initialize {{asPublicationName label}} dotdot bygroup command handlers
+ *
+ * @returns SL_STATUS_OK on success, error otherwise.
+ */
+sl_status_t {{dotdot_prefix}}_by_group_{{asSnakeCaseLower label}}_init();
+{{/unless}}{{/if}}{{/zcl_clusters}}
+
+{{#zcl_clusters}}{{#if (supportedCluster label)}}
+
+{{#zcl_commands}}
+
+/**
+ * @brief Callback pointer for by-unid {{parent.label}}/Commands/{{label}} messages
+ */
+extern {{asCommandCallback this}}_t {{asCommandCallback this}};
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/{{parent.label}}/Commands/{{label}}
+ */
+void {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+{{/zcl_commands}}
+
+/**
+ * @brief Callback pointer for by-unid {{parent.label}}/Commands/WriteAttributes messages
+ */
+extern {{asWriteAttributesCallback this}}_t {{asWriteAttributesCallback this}};
+
+/**
+ * @brief MQTT Subscribe handler for incoming publications on:
+ * ucl/by-unid/+/+/{{label}}/Commands/WriteAttributes
+ */
+void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length);
+
+{{/if}}{{/zcl_clusters}}
+
+// Create a map of enums and their name label.
+{{#zcl_enums}}
+
+// Enum string map for for {{label}}
+#define {{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE 1
+const std::map<uint32_t, const char*> {{asSnakeCaseLower label}}_enum_data {
+  {{#zcl_enum_items}}
+  { {{value}}, "{{label}}" },
+  {{/zcl_enum_items}}
+};
+
+/**
+ * @brief Finds the name of a field for the {{label}} enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string {{asSnakeCaseLower label}}_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the {{label}} enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t {{asSnakeCaseLower label}}_get_enum_value_number(std::string str);
+
+{{/zcl_enums}}
+
+
+// All bitmaps are defined as the cluster label for the bitmap plus the command/attribute name
+{{#zcl_bitmaps}}
+
+const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> {{label}}_bitmap_data {
+  {{#zcl_bitmap_items}}
+{ {"{{label}}", "{{checkSpecialTypeBitmapsEnum type}}", "{{mask}}", "{{asOffset mask}}"}, {
+  {{#if_is_enum type}}
+    {{#zcl_enums}}
+      {{#if (isSubstringInString parent.label label)}}
+        {{#zcl_enum_items}}
+{"{{label}}", "{{value}}"}{{listComma this}}
+        {{/zcl_enum_items}}
+      {{/if}}
+    {{/zcl_enums}}
+  {{/if_is_enum}}
+} }{{listComma this}}
+  {{/zcl_bitmap_items}}
+};
+const dotdot_bitmap {{label}}("{{label}}", "{{type}}", {{label}}_bitmap_data);
+{{/zcl_bitmaps}}
+
+#endif  //DOTDOT_MQTT_HPP
+/** @} end dotdot_mqtt_hpp */

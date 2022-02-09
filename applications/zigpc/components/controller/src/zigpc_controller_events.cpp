@@ -28,7 +28,9 @@
 #include <zigpc_common_unid.h>
 #include <zigpc_datastore.h>
 #include <zigpc_datastore.hpp>
+#include <zigpc_discovery.h>
 #include <zigpc_gateway.h>
+#include <zigpc_group_mgmt.h>
 #include <zigpc_net_mgmt.h>
 #include <zigpc_ota_zigbee.h>
 #include <zigpc_ucl.hpp>
@@ -37,20 +39,77 @@
 
 namespace zigpc_ctrl
 {
-sl_status_t on_device_announced(const zigbee_eui64_t eui64)
+void zigpc_discovery_update_callback(zigbee_eui64_uint_t eui64,
+                                     zigpc_discovery_status discovery_status)
+{
+  zigbee_eui64_t eui64_a;
+  zigbee_uint_to_eui64(eui64, eui64_a);
+
+  if (discovery_status == zigpc_discovery_status::DISCOVERY_START) {
+    // IGNORE: discovery start updates
+  } else if (discovery_status == zigpc_discovery_status::DISCOVERY_SUCCESS) {
+    sl_status_t status = zigpc_ctrl::on_device_interviewed(eui64_a, true);
+
+    if (status != SL_STATUS_OK) {
+      sl_log_warning(zigpc_ctrl::LOG_TAG,
+                     "Device interview success event handler status: 0x%X",
+                     status);
+    }
+
+  } else {
+    sl_status_t status = zigpc_ctrl::on_device_interview_failed(eui64_a);
+
+    if (status != SL_STATUS_OK) {
+      sl_log_warning(zigpc_ctrl::LOG_TAG,
+                     "Device interview fail event handler status: 0x%X",
+                     status);
+    }
+  }
+}
+
+sl_status_t on_device_announce(const zigbee_eui64_t eui64)
 {
   zigpc_device_data_t device_data;
 
+  zigbee_eui64_uint_t eui64_i = zigbee_eui64_to_uint(eui64);
+
   sl_status_t status = zigpc_datastore_read_device(eui64, &device_data);
   if (status == SL_STATUS_OK) {
-    status = zigpc_ucl::node_state::publish_state(zigbee_eui64_to_uint(eui64),
+    status = zigpc_ucl::node_state::publish_state(eui64_i,
                                                   device_data.network_status,
                                                   device_data.max_cmd_delay);
   }
 
   if (status == SL_STATUS_OK) {
-    status = zigpc_net_mgmt_interview_node(eui64);
+    status = zigpc_discovery_interview_device(eui64_i,
+                                              zigpc_discovery_update_callback);
   }
+
+  return status;
+}
+
+sl_status_t on_device_leave(const zigbee_eui64_t eui64)
+{
+  sl_status_t status = SL_STATUS_OK;
+
+  for (const zigbee_endpoint_id_t &endpoint_id:
+       zigpc_datastore::endpoint::get_id_list(eui64)) {
+    status = zigpc_group_remove_all(eui64, endpoint_id);
+    if (status != SL_STATUS_OK) {
+      sl_log_warning(LOG_TAG,
+                     "Failed to remove all groups for device %016" PRIX64
+                     " endpoint %u: 0x%X (skipping to next "
+                     "endpoint)",
+                     zigbee_eui64_to_uint(eui64),
+                     endpoint_id,
+                     status);
+    }
+  }
+
+  // TODO: Unsubscribe listening to OTA images for this device
+
+  status
+    = zigpc_ucl::node_state::remove_node_topics(zigbee_eui64_to_uint(eui64));
 
   return status;
 }
@@ -80,8 +139,10 @@ sl_status_t on_device_interviewed(const zigbee_eui64_t eui64,
                                                   device_data.max_cmd_delay);
   }
 
-  for (const zigbee_endpoint_id_t &endpoint_id:
-       zigpc_datastore::endpoint::get_id_list(eui64)) {
+  std::vector<zigbee_endpoint_id_t> endpoint_list
+    = zigpc_datastore::endpoint::get_id_list(eui64);
+
+  for (const zigbee_endpoint_id_t &endpoint_id: endpoint_list) {
     if (configure_endpoint == true) {
       status = perform_endpoint_configuration(eui64, endpoint_id);
       if (status != SL_STATUS_OK) {
@@ -100,6 +161,11 @@ sl_status_t on_device_interviewed(const zigbee_eui64_t eui64,
         endpoint_id,
         status);
     }
+  }
+
+  status = update_device_capabilities(eui64, endpoint_list);
+  if (status != SL_STATUS_OK) {
+    sl_log_warning(LOG_TAG, "Failed to update device capabilities");
   }
 
   return status;
@@ -128,6 +194,22 @@ sl_status_t perform_endpoint_configuration(const zigbee_eui64_t eui64,
   if (status == SL_STATUS_OK) {
     status = configure_attributes_endpoint(eui64, ep_data);
   }
+
+  return status;
+}
+
+sl_status_t update_device_capabilities(
+  const zigbee_eui64_t eui64,
+  const std::vector<zigbee_endpoint_id_t> &endpoint_list)
+{
+  std::string topic_prefix
+    = "ucl/by-unid/" + zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64));
+
+  sl_status_t status
+    = uic_mqtt_dotdot_state_endpoint_id_list_publish(topic_prefix.c_str(),
+                                                     endpoint_list.size(),
+                                                     endpoint_list.data(),
+                                                     UCL_MQTT_PUBLISH_TYPE_ALL);
 
   return status;
 }

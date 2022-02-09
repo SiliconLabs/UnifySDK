@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -88,22 +88,14 @@ $(document).ready(function(){initNavTree('multi__invoke_8hpp.html',''); initResi
 </div><!--header-->
 <div class="contents">
 
-<p>Template for multiple invoke callback maps.  
-<a href="#details">More...</a></p>
-
 <p><a href="multi__invoke_8hpp_source.html">Go to the source code of this file.</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Template for multiple invoke callback maps. </p>
-<p>Template that be used for handling callback maps, where each key may contain multiple callback functions.</p>
-<p>Example of Usage: void my_cb(int arg) { std::cout &lt;&lt; arg &lt;&lt; std:endl; } void my_2nd_cb(int arg) { std::cout &lt;&lt; arg &lt;&lt; std:endl; }</p>
-<p>void my_init() { multi_invoke&lt;int, int&gt; my_multi_invoke; my_multi_invoke.add(1, my_cb); my_multi_invoke.add(1, my_2nd_cb); my_multi_invoke(1, 42); // Will call my_cb and my_2nd_cb with "42" as arg my_multi_invoke.erase(1, my_cb); // remove callback to my_cb under key 1 } </p>
-</div></div><!-- contents -->
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_ee655ab378d5be1a0261b37f91892852.html">uic_multi_invoke</a></li><li class="navelem"><a class="el" href="dir_d6073a110013edf509e06e3f216a062c.html">include</a></li><li class="navelem"><a class="el" href="multi__invoke_8hpp.html">multi_invoke.hpp</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:08 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:08 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

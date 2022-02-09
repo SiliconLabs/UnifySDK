@@ -12,7 +12,6 @@
  *****************************************************************************/
 
 /**
- * @file ucl_mqtt_node_interview.h
  * @defgroup ucl_mqtt_node_interview UCL MQTT Node/Endpoint interview
  * @ingroup ucl_mqtt
  * @brief This submodule provides APIs to initiate a node re-interview

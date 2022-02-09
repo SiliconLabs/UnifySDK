@@ -31,12 +31,11 @@
 
 //Generic includes
 #include <string>
+#include <sstream>
 #include <map>
 #include <vector>
 #include <boost/algorithm/string.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-namespace bpt = boost::property_tree;
+#include <nlohmann/json.hpp>
 
 constexpr char LOG_TAG[] = "zcl_group_cluster_server";
 
@@ -214,6 +213,54 @@ sl_status_t remove_all_groups(const std::string &unid,
   return SL_STATUS_OK;
 }
 
+/**
+ * @brief Helper function that parses json message and adds a group
+ *
+ * @param[in] message string with json message that will be parsed
+ * @param[in] unid group UNID
+ * @param[in] endpoint_id endpoint ID
+ * @param[in] cmd_name a command name identifier that should present in log messages
+ *                     in the case of any error ("AddGroup" or "AddGroupIfIdentifying")
+ */
+static sl_status_t
+  parse_json_and_add_group(const char *message,
+                           std::string &unid,
+                           const zwave_endpoint_id_t endpoint_id,
+                           const char *cmd_name)
+{
+  try {
+    nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+    if (jsn["GroupId"].is_null()) {
+      sl_log_debug(LOG_TAG, "ZCL %s:: Missing field: GroupId\n", cmd_name);
+      return SL_STATUS_FAIL;
+    } else if (jsn["GroupName"].is_null()) {
+      sl_log_debug(LOG_TAG, "ZCL %s:: Missing field: GroupName\n", cmd_name);
+      return SL_STATUS_FAIL;
+    }
+
+    const sl_status_t retval = add_group(unid,
+                                         endpoint_id,
+                                         jsn["GroupId"].get<uint16_t>(),
+                                         jsn["GroupName"].get<std::string>());
+    if (SL_STATUS_OK != retval) {
+      sl_log_debug(LOG_TAG,
+                   "ZCL %s:: Failed to add a new group, error code: %i\n",
+                   cmd_name,
+                   static_cast<int>(retval));
+      return retval;
+    }
+  } catch (const std::exception &exception) {
+    sl_log_debug(LOG_TAG,
+                 "ZCL %s Command: Unable to parse JSON payload :'%s'. %s\n",
+                 cmd_name,
+                 message,
+                 exception.what());
+    return SL_STATUS_FAIL;
+  }
+
+  return SL_STATUS_OK;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // MQTT callback functions
 //////////////////////////////////////////////////////////////////////////////
@@ -239,28 +286,8 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
 
   if (command == "AddGroup") {
     // Parse the message. Mandatory fields are GroupId and GroupName
-    try {
-      std::stringstream ss;
-      bpt::ptree pt;
-      ss << std::string(message, message_length);
-      bpt::json_parser::read_json(ss, pt);
-      if (pt.count("GroupId") == 0) {
-        sl_log_debug(LOG_TAG, "ZCL AddGroup:: Missing field: GroupId\n");
-        return;
-      } else if (pt.count("GroupName") == 0) {
-        sl_log_debug(LOG_TAG, "ZCL AddGroup:: Missing field: GroupName\n");
-        return;
-      }
-
-      // Add the group:
-      add_group(unid,
-                endpoint_id,
-                pt.get<uint16_t>("GroupId"),
-                pt.get<std::string>("GroupName"));
-    } catch (const std::exception &exception) {
-      sl_log_debug(LOG_TAG,
-                   "ZCL AddGroup Command: Unable to parse JSON payload. %s\n",
-                   exception.what());
+    if (SL_STATUS_OK
+        != parse_json_and_add_group(message, unid, endpoint_id, "AddGroup")) {
       return;
     }
   } else if (command == "ViewGroup") {
@@ -269,17 +296,14 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
     // publish the group again?
   } else if (command == "RemoveGroup") {
     try {
-      std::stringstream ss;
-      bpt::ptree pt;
-      ss << std::string(message, message_length);
-
-      bpt::json_parser::read_json(ss, pt);
-      if (pt.count("GroupId") == 0) {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      if (jsn["GroupId"].is_null()) {
         sl_log_debug(LOG_TAG, "ZCL RemoveGroup:: Missing field: GroupId\n");
         return;
       }
+
       // remove the group:
-      remove_group(unid, endpoint_id, pt.get<uint16_t>("GroupId"));
+      remove_group(unid, endpoint_id, jsn["GroupId"].get<uint16_t>());
     } catch (const std::exception &exception) {
       sl_log_debug(LOG_TAG,
                    "ZCL RemoveGroup Command: Unable to parse JSON payload.%s\n",
@@ -297,30 +321,11 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
       return;
     }
     // The node is identifying. Same procedure as the Add Group command.
-    try {
-      std::stringstream ss;
-      bpt::ptree pt;
-      ss << std::string(message, message_length);
-      bpt::json_parser::read_json(ss, pt);
-      if (pt.count("GroupId") == 0) {
-        sl_log_debug(LOG_TAG,
-                     "ZCL AddGroupIfIdentifying:: Missing field: GroupId\n");
-        return;
-      } else if (pt.count("GroupName") == 0) {
-        sl_log_debug(LOG_TAG,
-                     "ZCL AddGroupIfIdentifying:: Missing field: GroupName\n");
-        return;
-      }
-
-      // Add the group:
-      add_group(unid,
-                endpoint_id,
-                pt.get<uint16_t>("GroupId"),
-                pt.get<std::string>("GroupName"));
-    } catch (const std::exception &exception) {
-      sl_log_debug(LOG_TAG,
-                   "ZCL RemoveGroup Command: Unable to parse JSON payload.%s\n",
-                   exception.what());
+    if (SL_STATUS_OK
+        != parse_json_and_add_group(message,
+                                    unid,
+                                    endpoint_id,
+                                    "AddGroupIfIdentifying")) {
       return;
     }
   } else {
@@ -557,7 +562,7 @@ void publish_group_cluster_supported_commands(const std::string &unid,
                       + std::to_string(endpoint_id)
                       + "/Groups/SupportedCommands";
   std::string message
-    = R"({"value": ["AddGroup", "RemoveGroup", "RemoveAllGroups","AddGroupIfIdentifying"]})";
+    = R"({"value": ["AddGroup", "RemoveGroup", "RemoveAllGroups", "AddGroupIfIdentifying"]})";
   uic_mqtt_publish(topic.c_str(), message.c_str(), message.size(), true);
 }
 

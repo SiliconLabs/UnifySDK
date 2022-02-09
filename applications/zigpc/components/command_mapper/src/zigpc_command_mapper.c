@@ -79,16 +79,14 @@ sl_status_t zigpc_command_mapper_send_unicast(
   const size_t command_arg_count,
   const zigpc_zcl_frame_data_t *const command_arg_list)
 {
-  sl_status_t status = SL_STATUS_OK;
   zigbee_eui64_t eui64;
   zcl_frame_t zcl_frame;
 
   if (unid == NULL) {
-    status = SL_STATUS_NULL_POINTER;
-  } else {
-    status = zigpc_command_mapper_populate_eui64(unid, eui64);
+    return SL_STATUS_NULL_POINTER;
   }
 
+  sl_status_t status = zigpc_command_mapper_populate_eui64(unid, eui64);
   if (status == SL_STATUS_OK) {
     status = zigpc_zcl_build_command_frame(&zcl_frame,
                                            frame_type,
@@ -195,10 +193,11 @@ sl_status_t zigpc_command_mapper_handle_groups(
            && (command_id == zigpc_group_removeall_get_id())) {
     status = zigpc_group_remove_all(eui64, endpoint);
   } else {
-    sl_log_warning(LOG_TAG,
-                   "Unrecognized cluster/command id: cluster:%d, command%d",
-                   cluster_id,
-                   command_id);
+    sl_log_debug(
+      LOG_TAG,
+      "Ignoring unsupported GroupMgmt cluster[0x%04X] command[0x%02X]",
+      cluster_id,
+      command_id);
   }
 
   return status;
@@ -341,10 +340,15 @@ sl_status_t zigpc_command_mapper_setup(void)
     status = zigpc_command_mapper_mqtt_bygroup_handlers_init();
   }
 
+  if (status == SL_STATUS_OK) {
+    status = zigpc_command_mapper_setup_gen_cmd_publish_listeners();
+  }
+
   return status;
 }
 
 int zigpc_command_mapper_shutdown(void)
 {
+  zigpc_command_mapper_cleanup_gen_cmd_publish_listeners();
   return 0;
 }

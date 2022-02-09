@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,8 +12,10 @@
  *****************************************************************************/
 
 /**
- * @file attribute_mapper_ast_eval.hpp
+ * @defgroup attribute_mapper_ast_eval Abstract Syntax Tree Evaluation
+ * @ingroup unify_attribute_mapper
  * @brief Evaluators that return the value of an AST
+ *
  * @{
  */
 
@@ -54,21 +56,21 @@ struct assignment;
  *
  * If the evaluation context is an invalid attribute all evaluations involving
  * an attribute will return no value.
- * 
- * The AST evaluators are implemented as a functor (a function object). This 
- * because this allows us to use the boost::apply_visitor, which is able to 
+ *
+ * The AST evaluators are implemented as a functor (a function object). This
+ * because this allows us to use the boost::apply_visitor, which is able to
  * evaluate the boost::variant objects using functors, through the operator()
  * overloading. The use of the boost::apply_visitor is
  * boost::apply_visitor( functor, variant ), this will call the appropiate
- * operator() overloading for the data type in the variant. 
- * See https://www.boost.org/doc/libs/1_76_0/doc/html/boost/apply_visitor.html 
+ * operator() overloading for the data type in the variant.
+ * See https://www.boost.org/doc/libs/1_76_0/doc/html/boost/apply_visitor.html
  * for details.
  */
 struct eval {
   public:
   /**
    * @brief Construct a new eval object
-   * 
+   *
    * @param context Context in which this evaluator should work.
    */
   eval(const attribute_store::attribute context = 0);
@@ -87,11 +89,11 @@ struct eval {
   result_type operator()(const attribute &a) const;
 
   /**
-   * @brief An operation 
-   * 
+   * @brief An operation
+   *
    * An operation which should be applied to the current result,
-   * can be any operation +,-,*,/,&,| etc. 
-   * 
+   * can be any operation +,-,*,/,&,| etc.
+   *
    * @param x The operation
    * @param lhs Left hand side of the operation
    */
@@ -102,8 +104,8 @@ struct eval {
   result_type operator()(const signed_ &x) const;
   /**
    * @brief Condition
-   * 
-   * for if statements 
+   *
+   * for if statements
    */
   result_type operator()(const condition &x) const;
 
@@ -118,16 +120,16 @@ struct eval {
 
 /**
    * @brief The attribute path evaluator evalues a full attribute path
-   * and returns the matching attribute store attribute for that attribute 
+   * and returns the matching attribute store attribute for that attribute
    * path.
-   * 
+   *
    * The evaluation is done in the context context.
-   * 
+   *
    */
 struct attribute_path_eval {
   /**
    * @brief Construct a new attribute path eval object
-   * 
+   *
    * @param context parent on the attribute store
    */
   attribute_path_eval(const attribute_store::attribute context);

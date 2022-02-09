@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: zwave_s2_network_callbacks Struct Reference</title>
+<title>Z-Wave Protocol Controller Refrence: zwave_s2_network_callbacks Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('structzwave__s2__network__callbacks.ht
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structzwave__s2__network__callbacks-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">zwave_s2_network_callbacks Struct Reference</div>  </div>
+<div class="title">zwave_s2_network_callbacks Struct Reference<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__transports.html">Z-Wave Transports</a> &raquo; <a class="el" href="group__zwave__s2__network.html">Security 2 Network</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -97,11 +97,11 @@ $(document).ready(function(){initNavTree('structzwave__s2__network__callbacks.ht
 Public Attributes</h2></td></tr>
 <tr class="memitem:a762de301995ffbab56f5679ec6b41d80"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__s2__network__callbacks.html#a762de301995ffbab56f5679ec6b41d80">on_inclusion_started</a> )()</td></tr>
 <tr class="separator:a762de301995ffbab56f5679ec6b41d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adaba42bdd46df9aef65071f5629e96c5"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__s2__network__callbacks.html#adaba42bdd46df9aef65071f5629e96c5">on_inclusion_complete</a> )(<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code)</td></tr>
+<tr class="memitem:adaba42bdd46df9aef65071f5629e96c5"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__s2__network__callbacks.html#adaba42bdd46df9aef65071f5629e96c5">on_inclusion_complete</a> )(<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code)</td></tr>
 <tr class="separator:adaba42bdd46df9aef65071f5629e96c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac87805239f4756d2db7e70e4904a5c18"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__s2__network__callbacks.html#ac87805239f4756d2db7e70e4904a5c18">on_keys_request</a> )(<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> requested_keys, bool csa)</td></tr>
+<tr class="memitem:ac87805239f4756d2db7e70e4904a5c18"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__s2__network__callbacks.html#ac87805239f4756d2db7e70e4904a5c18">on_keys_request</a> )(<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> requested_keys, bool csa)</td></tr>
 <tr class="separator:ac87805239f4756d2db7e70e4904a5c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa81ce6dbe9241a4ffe91d565ee33b46"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__s2__network__callbacks.html#aaa81ce6dbe9241a4ffe91d565ee33b46">on_dsk_challenge</a> )(<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, int num_blank_bytes, <a class="el" href="zwave__controller__types_8h.html#a437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk)</td></tr>
+<tr class="memitem:aaa81ce6dbe9241a4ffe91d565ee33b46"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__s2__network__callbacks.html#aaa81ce6dbe9241a4ffe91d565ee33b46">on_dsk_challenge</a> )(<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, int num_blank_bytes, <a class="el" href="group__zwave__controller__types.html#ga437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk)</td></tr>
 <tr class="separator:aaa81ce6dbe9241a4ffe91d565ee33b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -112,7 +112,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* zwave_s2_network_callbacks::on_dsk_challenge) (<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, int num_blank_bytes, <a class="el" href="zwave__controller__types_8h.html#a437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk)</td>
+          <td class="memname">void(* zwave_s2_network_callbacks::on_dsk_challenge) (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, int num_blank_bytes, <a class="el" href="group__zwave__controller__types.html#ga437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -134,7 +134,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* zwave_s2_network_callbacks::on_inclusion_complete) (<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code)</td>
+          <td class="memname">void(* zwave_s2_network_callbacks::on_inclusion_complete) (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_code)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -170,7 +170,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* zwave_s2_network_callbacks::on_keys_request) (<a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> requested_keys, bool csa)</td>
+          <td class="memname">void(* zwave_s2_network_callbacks::on_keys_request) (<a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> requested_keys, bool csa)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -185,7 +185,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>applications/zpc/components/s2/include/<a class="el" href="zwave__s2__network_8h_source.html">zwave_s2_network.h</a></li>
+<li>applications/zpc/components/zwave/zwave_transports/s2/include/<a class="el" href="zwave__s2__network_8h_source.html">zwave_s2_network.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -193,7 +193,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structzwave__s2__network__callbacks.html">zwave_s2_network_callbacks</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:18 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:43 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

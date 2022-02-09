@@ -1,0 +1,14 @@
+[Unit]
+Description=Unify Zigbee Protocol Controller
+After=network.target mosquitto.service
+
+[Service]
+ExecStart=/usr/bin/zigpc --conf /etc/uic/uic.cfg
+Restart=on-failure
+KillMode=mixed
+KillSignal=SIGINT
+User=uic
+Group=uic
+
+[Install]
+WantedBy=multi-user.target

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -27,7 +27,7 @@ extern "C" {
 
 /**
  * @defgroup ZWAPI_NVM NVM API
- * @ingroup ZWAPI
+ * @ingroup zwave_api
  * @brief Functions to access the NVM in a Z-Wave module.
  *
  * Functions in this module are used to access Non-Volatile memory in aZ-Wave

@@ -16,11 +16,14 @@
 #include <sstream>
 #include <string>
 
-/* Shared component includes */
-#include "sl_log.h"
-#include "smartstart_management.hpp"
+// Shared component includes
+#include <sl_log.h>
+#include <smartstart_management.hpp>
 
-/* ZigPC includes */
+// ZigPC includes
+#include <zigpc_gateway.h>
+
+// Component includes
 #include "zigpc_smartstart_int.hpp"
 
 /**
@@ -53,6 +56,7 @@ sl_status_t
     }
   }
   if (status == SL_STATUS_OK) {
+    dsk_content.install_code_length = 0U;
     /* Install code parsing (variable length) */
     for (uint8_t i = 0U;
          (status == SL_STATUS_OK) && (i < ZIGBEE_INSTALL_CODE_LENGTH);
@@ -69,6 +73,19 @@ sl_status_t
         }
         dsk_iss.ignore(1, DSK_SEP);
       }
+    }
+    if (dsk_content.install_code_length == 0U) {
+      return SL_STATUS_FAIL;
+    }
+  }
+
+  // Verify install code format
+  if (status == SL_STATUS_OK) {
+    bool is_valid
+      = zigpc_gateway_install_code_is_valid(dsk_content.install_code,
+                                            dsk_content.install_code_length);
+    if (is_valid == false) {
+      status = SL_STATUS_INVALID_SIGNATURE;
     }
   }
 

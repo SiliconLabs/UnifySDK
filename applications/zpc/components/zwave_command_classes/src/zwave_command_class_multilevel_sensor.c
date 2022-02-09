@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -27,6 +27,7 @@
 #include "attribute_store_helper.h"
 #include "attribute_store.h"
 #include "attribute_resolver.h"
+#include "zwave_utils.h"
 
 // Generic includes
 #include <assert.h>
@@ -596,12 +597,11 @@ sl_status_t zwave_command_class_multilevel_sensor_init()
   handler.support_handler         = NULL;
   handler.control_handler
     = zwave_command_class_multilevel_sensor_control_handler;
-  handler.minimal_scheme     = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
-  handler.command_class      = COMMAND_CLASS_SENSOR_MULTILEVEL_V11;
-  handler.command_class_name = "Multilevel Sensor";
-  handler.comments           = "Partial control: <br>"
-                     "1. Not all scales are supported <br>"
-                     "2. No regular probing is done ";
+  handler.minimal_scheme             = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+  handler.command_class              = COMMAND_CLASS_SENSOR_MULTILEVEL_V11;
+  handler.command_class_name         = "Multilevel Sensor";
+  handler.comments                   = "Partial control: <br>"
+                                       "1. Not all scales are supported ";
   handler.version                    = SENSOR_MULTILEVEL_VERSION_V11;
   handler.manual_security_validation = false;
 

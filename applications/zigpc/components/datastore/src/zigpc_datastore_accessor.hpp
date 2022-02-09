@@ -598,6 +598,54 @@ class EndpointAccessor :
                      zigbee_endpoint_id_t endpoint_id) override;
 };
 
+class GroupAccessor :
+    public StoreAccessor<zigbee_group_id_t, zigpc_group_data_t>
+{
+    private:
+        bool is_reported;
+
+    public:
+        explicit GroupAccessor( bool is_reported); 
+  
+   /**
+   * @brief Get the label type of the group.
+   *
+   * @param is_reported - the reported or desired direction of the group
+   * @return std::string
+   */
+        static inline std::string get_label_type(bool is_reported)
+        {
+            return is_reported ? "ReportedGroup" : "DesiredGroup";
+        }
+        
+  /**
+   * @brief Retrieve the attribute store node type of the group based on the
+   * reported/desired type received.
+   *
+   * @param is_reported
+   * @return attribute_store_type_t ZIGPC_DS_TYPE_SERVER_CLUSTER for server side
+   * or ZIGPC_DS_TYPE_CLIENT_CLUSTER otherwise.
+   */
+        static inline attribute_store_type_t
+            get_entity_type(bool is_reported)
+            {
+                return is_reported ? ZIGPC_DS_TYPE_GROUP_REPORTED : ZIGPC_DS_TYPE_GROUP_DESIRED; 
+            }
+  
+  /**
+   * @brief Return string representation of group entity.
+   *
+   * @param parent        Parent of group entity (endpoint entity).
+   * @param group_id    Group identifer to search.
+   * @return std::string  Group data in string form, else empty string if
+   * entity is not stored.
+   */
+        std::string to_str(attribute_store_node_t parent,
+                     zigbee_group_id_t group_id) override;
+
+
+};
+
 class ClusterAccessor :
   public StoreAccessor<zcl_cluster_id_t, zigpc_cluster_data_t>
 {
@@ -673,6 +721,7 @@ class ClusterAttributeListAccessor :
    */
   std::string to_str(attribute_store_node_t parent, size_t list_count) override;
 };
+
 
 class ClusterCommandListAccessor : public StoreListAccessor<zcl_command_id_t>
 {

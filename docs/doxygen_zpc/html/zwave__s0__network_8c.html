@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/s0/src/zwave_s0_network.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave/zwave_transports/s0/src/zwave_s0_network.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -104,14 +104,14 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga27e4137188b19b88cf40318f7fea87dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0.html#ga27e4137188b19b88cf40318f7fea87dc">zwave_s0_start_bootstrapping</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, uint8_t is_controller)</td></tr>
-<tr class="memdesc:ga27e4137188b19b88cf40318f7fea87dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the S0 add node process.  <a href="group__zwave__s0.html#ga27e4137188b19b88cf40318f7fea87dc">More...</a><br /></td></tr>
+<tr class="memitem:ga27e4137188b19b88cf40318f7fea87dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__network.html#ga27e4137188b19b88cf40318f7fea87dc">zwave_s0_start_bootstrapping</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, uint8_t is_controller)</td></tr>
+<tr class="memdesc:ga27e4137188b19b88cf40318f7fea87dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the S0 add node process.  <a href="group__zwave__s0__network.html#ga27e4137188b19b88cf40318f7fea87dc">More...</a><br /></td></tr>
 <tr class="separator:ga27e4137188b19b88cf40318f7fea87dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga62613f2673f05d300b1f7c8b09d981da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network_init</a> ()</td></tr>
-<tr class="memdesc:ga62613f2673f05d300b1f7c8b09d981da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the S0 network layer.  <a href="group__zwave__s0.html#ga62613f2673f05d300b1f7c8b09d981da">More...</a><br /></td></tr>
+<tr class="memitem:ga62613f2673f05d300b1f7c8b09d981da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__network.html#ga62613f2673f05d300b1f7c8b09d981da">zwave_s0_network_init</a> ()</td></tr>
+<tr class="memdesc:ga62613f2673f05d300b1f7c8b09d981da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the S0 network layer.  <a href="group__zwave__s0__network.html#ga62613f2673f05d300b1f7c8b09d981da">More...</a><br /></td></tr>
 <tr class="separator:ga62613f2673f05d300b1f7c8b09d981da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga87da65496dd77458d5c14dbe30209d82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a> (const <a class="el" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a> <a class="el" href="structcb.html">cb</a>)</td></tr>
-<tr class="memdesc:ga87da65496dd77458d5c14dbe30209d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set callback function for the S0 inclusion. This function ptr is saved internally in s0.  <a href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">More...</a><br /></td></tr>
+<tr class="memitem:ga87da65496dd77458d5c14dbe30209d82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__network.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a> (const <a class="el" href="group__zwave__s0__network.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a> <a class="el" href="structcb.html">cb</a>)</td></tr>
+<tr class="memdesc:ga87da65496dd77458d5c14dbe30209d82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set callback function for the S0 inclusion. This function ptr is saved internally in s0.  <a href="group__zwave__s0__network.html#ga87da65496dd77458d5c14dbe30209d82">More...</a><br /></td></tr>
 <tr class="separator:ga87da65496dd77458d5c14dbe30209d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -134,8 +134,8 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_755ae2411314d71b54e2ffe5b00038d7.html">s0</a></li><li class="navelem"><a class="el" href="dir_a574612eed7c27ed0dbfd75f745bb010.html">src</a></li><li class="navelem"><a class="el" href="zwave__s0__network_8c.html">zwave_s0_network.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_f4b467f0a960798c9a570e0236e928b5.html">zwave_transports</a></li><li class="navelem"><a class="el" href="dir_6fba1e772b51ab46cce9ac80a46e75aa.html">s0</a></li><li class="navelem"><a class="el" href="dir_8db2d843763b048529dd52bcc2b9c1b9.html">src</a></li><li class="navelem"><a class="el" href="zwave__s0__network_8c.html">zwave_s0_network.c</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:23 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

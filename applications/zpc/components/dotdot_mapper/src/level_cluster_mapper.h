@@ -12,9 +12,9 @@
  *****************************************************************************/
 
 /**
- * @defgroup level_cluster_mapper Level cluster mapper
+ * @defgroup level_cluster_mapper Level Cluster Mapper
  * @ingroup dotdot_mapper
- * @brief Maps the Level cluster to known command classes
+ * @brief Maps Level Cluster incoming Commands to attribute modifications.
  *
  * This module is used to register callbacks for incoming Level Cluster Commands
  * and update the corresponding ZCL attributes in the @ref attribute_store .

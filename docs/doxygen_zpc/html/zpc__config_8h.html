@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zpc_config/include/zpc_config.h File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zpc_config/include/zpc_config.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -92,6 +92,8 @@ $(document).ready(function(){initNavTree('zpc__config_8h.html',''); initResizabl
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &quot;uic_version.h&quot;</code><br />
 </div>
 <p><a href="zpc__config_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -108,6 +110,10 @@ Macros</h2></td></tr>
 <tr class="memitem:ga35beb0a78565959e7e90fb04ec52f82a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__config.html#ga35beb0a78565959e7e90fb04ec52f82a">ZWAVE_LONG_RANGE_CONFIG_REPRESENTATION</a>&#160;&#160;&#160;&quot;2&quot;</td></tr>
 <tr class="memdesc:ga35beb0a78565959e7e90fb04ec52f82a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave Long Range.  <a href="group__zpc__config.html#ga35beb0a78565959e7e90fb04ec52f82a">More...</a><br /></td></tr>
 <tr class="separator:ga35beb0a78565959e7e90fb04ec52f82a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa2a11132bf4ca146ee661d3fdbe48b29"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__config.html#gaa2a11132bf4ca146ee661d3fdbe48b29">DEFAULT_ZPC_DATASTORE_FILE</a>&#160;&#160;&#160;UIC_VAR_DIR &quot;/zpc.db&quot;</td></tr>
+<tr class="separator:gaa2a11132bf4ca146ee661d3fdbe48b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga04caccc0cfc5449f4de780ad611a6011"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__config.html#ga04caccc0cfc5449f4de780ad611a6011">CONFIG_KEY_ZPC_DATASTORE_FILE</a>&#160;&#160;&#160;&quot;zpc.datastore_file&quot;</td></tr>
+<tr class="separator:ga04caccc0cfc5449f4de780ad611a6011"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -115,7 +121,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga84d0f1604693e7387360b16efe24564f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current configuration. This must only be called after zpc_config_init.  <a href="group__zpc__config.html#ga84d0f1604693e7387360b16efe24564f">More...</a><br /></td></tr>
 <tr class="separator:ga84d0f1604693e7387360b16efe24564f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga23352eeb4775cdf2d732da8436a29d35"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__config.html#ga23352eeb4775cdf2d732da8436a29d35">zpc_config_init</a> ()</td></tr>
-<tr class="memdesc:ga23352eeb4775cdf2d732da8436a29d35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register ZPC configurations in <a class="el" href="group__config.html">Config</a>.  <a href="group__zpc__config.html#ga23352eeb4775cdf2d732da8436a29d35">More...</a><br /></td></tr>
+<tr class="memdesc:ga23352eeb4775cdf2d732da8436a29d35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register ZPC configurations in <a class="el" href="zpc__config_8c.html#ad407e1fe528f3ec0ed8153c85c2e8730">config</a>.  <a href="group__zpc__config.html#ga23352eeb4775cdf2d732da8436a29d35">More...</a><br /></td></tr>
 <tr class="separator:ga23352eeb4775cdf2d732da8436a29d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
@@ -124,7 +130,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_8d1bf46fc0d19bf25ff00546b2658a9b.html">zpc_config</a></li><li class="navelem"><a class="el" href="dir_a7620d25756c0e602a0b471b2f14b7d0.html">include</a></li><li class="navelem"><a class="el" href="zpc__config_8h.html">zpc_config.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:20 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

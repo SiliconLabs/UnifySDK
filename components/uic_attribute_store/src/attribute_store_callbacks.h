@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -54,12 +54,26 @@ void attribute_store_invoke_callbacks(
 /**
  * @brief Invoke all generic callback functions
  *
- * @param updated_node  The node handle of the node for which something
- *                      has changed
- * @param change        The type of change that the node underwent
+ * @param change_event  pointer to attribute meta data which describes what changed
  */
 void attribute_store_invoke_generic_callbacks(
-  attribute_store_node_t updated_node, attribute_store_change_t change);
+  attribute_changed_event_t *change_event);
+
+/**
+ * @brief Invokes all types of touch callbacks.
+ *
+ * @param touched_node    The node handle of the node that was touched.
+ */
+void attribute_store_invoke_touch_callbacks(
+  attribute_store_node_t touched_node);
+
+/**
+ * @brief Invokes all generic touch callbacks
+ *
+ * @param touched_node    The node handle of the node that was touched.
+ */
+void attribute_store_invoke_touch_generic_callbacks(
+  attribute_store_node_t touched_node);
 
 /**
  * @brief Invoke all callback functions associated to an
@@ -89,6 +103,12 @@ void attribute_store_invoke_value_callbacks(
   attribute_store_type_t type,
   attribute_store_node_value_state_t value_state,
   attribute_store_change_t change);
+
+/**
+ * @brief Reset resources allocated for the attribute_store_callback module
+ * @returns SL_STATUS_OK as it is always successful.
+ */
+sl_status_t attribute_store_callbacks_init(void);
 
 /**
  * @brief Frees resources allocated for the attribute_store_callback module

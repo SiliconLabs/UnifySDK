@@ -38,8 +38,18 @@ fix_permissions() {
 }
 
 reload_udev() {
-  udevadm control --reload-rules
-  udevadm trigger
+  if type "udevadm" > /dev/null; then
+    udevadm control --reload-rules
+    udevadm trigger
+  fi
+}
+
+enable_start_uic_zpc() {
+  if type "systemctl" > /dev/null; then
+    systemctl --system daemon-reload
+    systemctl enable uic-zpc.service
+    systemctl start uic-zpc.service
+  fi
 }
 
 handle_conf() {
@@ -47,72 +57,70 @@ handle_conf() {
     then
       mkdir -p $UIC_CONFDIR
       echo "zpc:" >>  $UIC_CONFFILE
-      echo "  serial: /dev/ttyACM0" >> $UIC_CONFFILE
+      echo "  serial: /dev/ttyUSB0" >> $UIC_CONFFILE
       echo "  rf_region: EU" >> $UIC_CONFFILE
-    fi
-    if ! grep -q "datastore:" $UIC_CONFFILE
-    then
-      echo "datastore:" >> $UIC_CONFFILE
-      echo "  file: ${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/zpc.db" >> $UIC_CONFFILE
+      echo "  datastore_file: ${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/zpc.db" >> $UIC_CONFFILE
     fi
 
     db_get uic-zpc/serial_port
     PORT="$RET"
     if [ "$RET" = "" ]; then
-    	PORT="/dev/ttyACM0"
+    	PORT="/dev/ttyUSB0"
     fi
-    
+
     db_go
     db_get uic-zpc/region
     REGION="$RET"
     if [ "$RET" = "" ]; then
     	REGION="EU"
     fi
-    
+
     db_go
     db_get uic-zpc/datastore_file
     DSTORE="$RET"
     if [ "$RET" = "" ]; then
-    	DSTORE="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/database.db"
+    	DSTORE="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/zpc.db"
     fi
 
     # Update configuration file with oucome of configuration
     # This is a small state machine that can update the UIC config file, which is written in YAML
     state=""
-    
+
     while IFS= read line #Read IFS https://en.wikipedia.org/wiki/Input_Field_Separators
     do
       # Set the state depending on the line read from the config file
       case "$line" in
-        "zpc:" | *"serial"* | *"rf_region"*)           # State: zpc
+        "zpc:" )   # State: zpc
           state="zpc"
           ;;
-        "datastore:" | *"file"*)     # State datastore
-          state="datastore"
+        " "* | "-"* )   # Lines starting with '-' or ' ' don't trigger state change.
+          # Do nothing.
           ;;
         *) state="" ;;    # Set state to empty, Any unknown text, that doesn't begin with '-' or ' '
       esac
-      # STM to update entries under 'zpc:' or 'datastore:' (more may be added later)
+      leftside=$(echo "$line" | cut -f1 -d":")
+      # STM to update entries under 'zpc:'
       case $state in
-        "zpc" | "datastore")
+        "zpc" )
           case "$line" in
-          "zpc:" | "datastore:")
-            echo "$line" ;;                   # Datastore and zpc should not be indented
+          "zpc:" )
+            echo "$line" ;;                   # zpc should not be indented
           *"serial:"*)
-            echo "  serial: $PORT" ;;
+            echo "$leftside: $PORT" ;;
           *"rf_region:"*)
-            echo "  rf_region: $REGION" ;;
-          *"file:"*)
-            echo "  file: $DSTORE" ;;
+            echo "$leftside: $REGION" ;;
+          *"datastore_file:"*)
+            echo "$leftside: $DSTORE" ;;
           *)
-            echo "  $line" ;;                 # Anything inside zpc or datastore we indent
+            echo "$line" ;;                 # Anything inside zpc we indent
           esac ;;
         *)
           echo "$line" ;;                     # Anything else we just echo the line
                           # Without IFS= , echo here would remove the leading spaces and ruin the yaml formatting
       esac
     done < "$UIC_CONFFILE" > "$UIC_CONFFILE.tmp"
-    cat "$UIC_CONFFILE.tmp"
+
+#    cat "$UIC_CONFFILE.tmp"
     mv "$UIC_CONFFILE.tmp" "$UIC_CONFFILE"
 }
 
@@ -140,5 +148,8 @@ if [ -f "$APP_PROFILE" ] && aa-status --enabled 2>/dev/null; then
 fi
 
 #DEBHELPER#
+
+# Enable and start UIC_ZPC daemon
+enable_start_uic_zpc
 
 exit 0

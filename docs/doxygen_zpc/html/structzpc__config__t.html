@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: zpc_config_t Struct Reference</title>
+<title>Z-Wave Protocol Controller Refrence: zpc_config_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('structzpc__config__t.html',''); initRe
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structzpc__config__t-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">zpc_config_t Struct Reference<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__zpc__config.html">Configuration Extension</a></div></div>  </div>
+<div class="title">zpc_config_t Struct Reference<div class="ingroups"><a class="el" href="group__zpc__config.html">ZPC Configuration Extension</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -96,35 +96,40 @@ $(document).ready(function(){initNavTree('structzpc__config__t.html',''); initRe
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a00271d0eca332dc0d61e97ec5f8812ee"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a00271d0eca332dc0d61e97ec5f8812ee">mqtt_host</a></td></tr>
-<tr class="memdesc:a00271d0eca332dc0d61e97ec5f8812ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hostname of the MQTT broker;.  <a href="structzpc__config__t.html#a00271d0eca332dc0d61e97ec5f8812ee">More...</a><br /></td></tr>
+<tr class="memdesc:a00271d0eca332dc0d61e97ec5f8812ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hostname of the MQTT broker.  <a href="structzpc__config__t.html#a00271d0eca332dc0d61e97ec5f8812ee">More...</a><br /></td></tr>
 <tr class="separator:a00271d0eca332dc0d61e97ec5f8812ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca51bafb7da3c32d3edd6609f1b52765"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#aca51bafb7da3c32d3edd6609f1b52765">mqtt_cafile</a></td></tr>
-<tr class="memdesc:aca51bafb7da3c32d3edd6609f1b52765"><td class="mdescLeft">&#160;</td><td class="mdescRight">path to a file containing the PEM encoded trusted CA certificate files.  <a href="structzpc__config__t.html#aca51bafb7da3c32d3edd6609f1b52765">More...</a><br /></td></tr>
+<tr class="memdesc:aca51bafb7da3c32d3edd6609f1b52765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to a file containing the PEM encoded trusted CA certificate files.  <a href="structzpc__config__t.html#aca51bafb7da3c32d3edd6609f1b52765">More...</a><br /></td></tr>
 <tr class="separator:aca51bafb7da3c32d3edd6609f1b52765"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa994305c1ca4cc888368f31ddc498f57"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#aa994305c1ca4cc888368f31ddc498f57">mqtt_certfile</a></td></tr>
-<tr class="memdesc:aa994305c1ca4cc888368f31ddc498f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">path to a file containing the PEM encoded certificate file for this client.  <a href="structzpc__config__t.html#aa994305c1ca4cc888368f31ddc498f57">More...</a><br /></td></tr>
+<tr class="memdesc:aa994305c1ca4cc888368f31ddc498f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to a file containing the PEM encoded certificate file for this client.  <a href="structzpc__config__t.html#aa994305c1ca4cc888368f31ddc498f57">More...</a><br /></td></tr>
 <tr class="separator:aa994305c1ca4cc888368f31ddc498f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08e9236cfa3a09b52c11188daac5bff2"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a08e9236cfa3a09b52c11188daac5bff2">mqtt_keyfile</a></td></tr>
+<tr class="memdesc:a08e9236cfa3a09b52c11188daac5bff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Path to a file containing the PEM encoded unencrypted private key for this client.  <a href="structzpc__config__t.html#a08e9236cfa3a09b52c11188daac5bff2">More...</a><br /></td></tr>
 <tr class="separator:a08e9236cfa3a09b52c11188daac5bff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7886795bb6a14fe9c72fd0e925b79499"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a7886795bb6a14fe9c72fd0e925b79499">mqtt_client_id</a></td></tr>
-<tr class="memdesc:a7886795bb6a14fe9c72fd0e925b79499"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; path to a file containing the PEM encoded unencrypted private key for this client.  <a href="structzpc__config__t.html#a7886795bb6a14fe9c72fd0e925b79499">More...</a><br /></td></tr>
+<tr class="memdesc:a7886795bb6a14fe9c72fd0e925b79499"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client ID for MQTT Client for TLS Authentication and encryption.  <a href="structzpc__config__t.html#a7886795bb6a14fe9c72fd0e925b79499">More...</a><br /></td></tr>
 <tr class="separator:a7886795bb6a14fe9c72fd0e925b79499"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab464d7dddb5d38f3235e3650af93d5b6"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#ab464d7dddb5d38f3235e3650af93d5b6">mqtt_client_psk</a></td></tr>
 <tr class="memdesc:ab464d7dddb5d38f3235e3650af93d5b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre shared Key for MQTT Client for TLS Authentication and encryption.  <a href="structzpc__config__t.html#ab464d7dddb5d38f3235e3650af93d5b6">More...</a><br /></td></tr>
 <tr class="separator:ab464d7dddb5d38f3235e3650af93d5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fbafaf0ac13e3415ef01cc3a99fda08"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a3fbafaf0ac13e3415ef01cc3a99fda08">mqtt_port</a></td></tr>
-<tr class="memdesc:a3fbafaf0ac13e3415ef01cc3a99fda08"><td class="mdescLeft">&#160;</td><td class="mdescRight">port of the MQTT broker  <a href="structzpc__config__t.html#a3fbafaf0ac13e3415ef01cc3a99fda08">More...</a><br /></td></tr>
+<tr class="memdesc:a3fbafaf0ac13e3415ef01cc3a99fda08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Port of the MQTT broker.  <a href="structzpc__config__t.html#a3fbafaf0ac13e3415ef01cc3a99fda08">More...</a><br /></td></tr>
 <tr class="separator:a3fbafaf0ac13e3415ef01cc3a99fda08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb143e191b9ce0cd03ab28a935bb19c4"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#acb143e191b9ce0cd03ab28a935bb19c4">datastore_file</a></td></tr>
+<tr class="memdesc:acb143e191b9ce0cd03ab28a935bb19c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">File name for persistent storage.  <a href="structzpc__config__t.html#acb143e191b9ce0cd03ab28a935bb19c4">More...</a><br /></td></tr>
+<tr class="separator:acb143e191b9ce0cd03ab28a935bb19c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89128ef1a0ded2a21602e95617092c3e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a89128ef1a0ded2a21602e95617092c3e">serial_port</a></td></tr>
 <tr class="memdesc:a89128ef1a0ded2a21602e95617092c3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the serial port of the Z-Wave module.  <a href="structzpc__config__t.html#a89128ef1a0ded2a21602e95617092c3e">More...</a><br /></td></tr>
 <tr class="separator:a89128ef1a0ded2a21602e95617092c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f7e7809d60794b7053f8a422b3d0565"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a1f7e7809d60794b7053f8a422b3d0565">serial_log_file</a></td></tr>
+<tr class="memdesc:a1f7e7809d60794b7053f8a422b3d0565"><td class="mdescLeft">&#160;</td><td class="mdescRight">If set the Serial log will be written here.  <a href="structzpc__config__t.html#a1f7e7809d60794b7053f8a422b3d0565">More...</a><br /></td></tr>
 <tr class="separator:a1f7e7809d60794b7053f8a422b3d0565"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc6e06c70499276d7392f8fd04caa61d"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#afc6e06c70499276d7392f8fd04caa61d">zwave_rf_region</a></td></tr>
 <tr class="memdesc:afc6e06c70499276d7392f8fd04caa61d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave RF Region setting. It can be one of the following:  <a href="structzpc__config__t.html#afc6e06c70499276d7392f8fd04caa61d">More...</a><br /></td></tr>
 <tr class="separator:afc6e06c70499276d7392f8fd04caa61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a461c5ea918036482de96bde79b30f9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a8a461c5ea918036482de96bde79b30f9">zwave_normal_tx_power_dbm</a></td></tr>
-<tr class="memdesc:a8a461c5ea918036482de96bde79b30f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmit power for the Z-Wave module. Refer to <a class="el" href="zwave__rx__internals_8h.html#a23b029d768b63440116e9cd5e2775fcf">zwave_rx_init</a>.  <a href="structzpc__config__t.html#a8a461c5ea918036482de96bde79b30f9">More...</a><br /></td></tr>
+<tr class="memdesc:a8a461c5ea918036482de96bde79b30f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmit power for the Z-Wave module. Refer to <a class="el" href="group__zwave__rx__internals.html#ga23b029d768b63440116e9cd5e2775fcf">zwave_rx_init</a>.  <a href="structzpc__config__t.html#a8a461c5ea918036482de96bde79b30f9">More...</a><br /></td></tr>
 <tr class="separator:a8a461c5ea918036482de96bde79b30f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9b826b5a3f21d370901f4e171427f07"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#ab9b826b5a3f21d370901f4e171427f07">zwave_measured_0dbm_power</a></td></tr>
 <tr class="memdesc:ab9b826b5a3f21d370901f4e171427f07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default wake up interval to be used when including wake up nodes.  <a href="structzpc__config__t.html#ab9b826b5a3f21d370901f4e171427f07">More...</a><br /></td></tr>
@@ -156,7 +161,13 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:aba8952dbe65fded21c213365334c0e50"><td class="mdescLeft">&#160;</td><td class="mdescRight">OTA cache size in kb.  <a href="structzpc__config__t.html#aba8952dbe65fded21c213365334c0e50">More...</a><br /></td></tr>
 <tr class="separator:aba8952dbe65fded21c213365334c0e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40a3bcf5eba3790d2e6738d50d8cb0ad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a40a3bcf5eba3790d2e6738d50d8cb0ad">ota_cache_size</a></td></tr>
+<tr class="memdesc:a40a3bcf5eba3790d2e6738d50d8cb0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should we return the NCP version and exit?  <a href="structzpc__config__t.html#a40a3bcf5eba3790d2e6738d50d8cb0ad">More...</a><br /></td></tr>
 <tr class="separator:a40a3bcf5eba3790d2e6738d50d8cb0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a256cb757315aaa7cee48d6cde5f9603e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a256cb757315aaa7cee48d6cde5f9603e">ncp_version</a></td></tr>
+<tr class="separator:a256cb757315aaa7cee48d6cde5f9603e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88354b91b593face91e5356cd49c4e74"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzpc__config__t.html#a88354b91b593face91e5356cd49c4e74">ncp_update_filename</a></td></tr>
+<tr class="memdesc:a88354b91b593face91e5356cd49c4e74"><td class="mdescLeft">&#160;</td><td class="mdescRight">If not zero length we should flash the NCP firmware and exit.  <a href="structzpc__config__t.html#a88354b91b593face91e5356cd49c4e74">More...</a><br /></td></tr>
+<tr class="separator:a88354b91b593face91e5356cd49c4e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a030046f92542ed8f1a67a75d394d6a58"></a>
@@ -172,6 +183,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Prioritized list of protocols to use for SmartStart inclusions. </p>
+
+</div>
+</div>
+<a id="acb143e191b9ce0cd03ab28a935bb19c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb143e191b9ce0cd03ab28a935bb19c4">&#9670;&nbsp;</a></span>datastore_file</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* zpc_config_t::datastore_file</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>File name for persistent storage. </p>
 
 </div>
 </div>
@@ -279,7 +306,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>path to a file containing the PEM encoded trusted CA certificate files. </p>
+<p>Path to a file containing the PEM encoded trusted CA certificate files. </p>
 
 </div>
 </div>
@@ -295,7 +322,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>path to a file containing the PEM encoded certificate file for this client. </p>
+<p>Path to a file containing the PEM encoded certificate file for this client. </p>
 
 </div>
 </div>
@@ -311,8 +338,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>&lt; path to a file containing the PEM encoded unencrypted private key for this client. </p>
-<p>Client ID for MQTT Client for TLS Authentication and encryption </p>
+<p>Client ID for MQTT Client for TLS Authentication and encryption. </p>
 
 </div>
 </div>
@@ -344,7 +370,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Hostname of the MQTT broker;. </p>
+<p>Hostname of the MQTT broker. </p>
 
 </div>
 </div>
@@ -360,6 +386,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Path to a file containing the PEM encoded unencrypted private key for this client. </p>
+
 </div>
 </div>
 <a id="a3fbafaf0ac13e3415ef01cc3a99fda08"></a>
@@ -374,7 +402,37 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>port of the MQTT broker </p>
+<p>Port of the MQTT broker. </p>
+
+</div>
+</div>
+<a id="a88354b91b593face91e5356cd49c4e74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88354b91b593face91e5356cd49c4e74">&#9670;&nbsp;</a></span>ncp_update_filename</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* zpc_config_t::ncp_update_filename</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>If not zero length we should flash the NCP firmware and exit. </p>
+
+</div>
+</div>
+<a id="a256cb757315aaa7cee48d6cde5f9603e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a256cb757315aaa7cee48d6cde5f9603e">&#9670;&nbsp;</a></span>ncp_version</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool zpc_config_t::ncp_version</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -405,6 +463,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Should we return the NCP version and exit? </p>
 
 </div>
 </div>
@@ -447,7 +507,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>If set the Serial log will be written here </p>
+
+<p>If set the Serial log will be written here. </p>
 
 </div>
 </div>
@@ -480,7 +541,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Default wake up interval to be used when including wake up nodes. </p>
-<p>Measured 0dBm output power for the Z-Wave module. Refer to <a class="el" href="zwave__rx__internals_8h.html#a23b029d768b63440116e9cd5e2775fcf">zwave_rx_init</a> </p>
+<p>Measured 0dBm output power for the Z-Wave module. Refer to <a class="el" href="group__zwave__rx__internals.html#ga23b029d768b63440116e9cd5e2775fcf">zwave_rx_init</a> </p>
 
 </div>
 </div>
@@ -496,7 +557,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Transmit power for the Z-Wave module. Refer to <a class="el" href="zwave__rx__internals_8h.html#a23b029d768b63440116e9cd5e2775fcf">zwave_rx_init</a>. </p>
+<p>Transmit power for the Z-Wave module. Refer to <a class="el" href="group__zwave__rx__internals.html#ga23b029d768b63440116e9cd5e2775fcf">zwave_rx_init</a>. </p>
 
 </div>
 </div>
@@ -525,7 +586,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="structzpc__config__t.html">zpc_config_t</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:18 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:42 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

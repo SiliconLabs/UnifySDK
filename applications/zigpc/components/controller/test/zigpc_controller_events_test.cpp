@@ -18,16 +18,20 @@ extern "C" {
 // Shared UIC includes
 #include <unity.h>
 #include <sl_status.h>
-#include <dotdot_mqtt_mock.h>
-#include <uic_mqtt_mock.h>
+#include "uic_mqtt_mock.h"
 
 // ZigPC includes
-#include <attribute_management_mock.h>
 #include <zcl_definitions.h>
-#include <zigpc_datastore_mock.h>
-#include <zigpc_gateway_mock.h>
-#include <zigpc_net_mgmt_mock.h>
-#include <zigpc_ota_zigbee_mock.h>
+
+// Mocks
+#include "dotdot_mqtt_mock.h"
+#include "attribute_management_mock.h"
+#include "zigpc_datastore_mock.h"
+#include "zigpc_discovery_mock.h"
+#include "zigpc_gateway_mock.h"
+#include "zigpc_group_mgmt_mock.h"
+#include "zigpc_net_mgmt_mock.h"
+#include "zigpc_ota_zigbee_mock.h"
 
 /**
  * @brief Setup the test suite (called once before all test_xxx functions are called)
@@ -69,7 +73,10 @@ void test_device_annouced_sanity(void)
     = R"({"MaximumCommandDelay":1,"NetworkStatus":"Online interviewing","Security":"Zigbee Z3"})";
 
   // ARRANGE
-  zigpc_net_mgmt_interview_node_ExpectAndReturn(eui64, SL_STATUS_OK);
+  zigpc_discovery_interview_device_ExpectAndReturn(
+    zigbee_eui64_to_uint(eui64),
+    zigpc_ctrl::zigpc_discovery_update_callback,
+    SL_STATUS_OK);
 
   zigpc_datastore_read_device_ExpectAndReturn(eui64, nullptr, SL_STATUS_OK);
   zigpc_datastore_read_device_IgnoreArg_data();
@@ -80,7 +87,7 @@ void test_device_annouced_sanity(void)
   uic_mqtt_publish_Expect(topic.c_str(), payload.c_str(), payload.size(), true);
 
   // ACT
-  sl_status_t status = zigpc_ctrl::on_device_announced(eui64);
+  sl_status_t status = zigpc_ctrl::on_device_announce(eui64);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
@@ -222,6 +229,27 @@ void test_endpoint_update_sanity(void)
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
 }
 
+void test_device_update_capabilities_sanity(void)
+{
+  zigbee_eui64_t dev = {0x00, 0xAA, 0x42, 0x75, 0x5, 0x99, 0xD, 0x12};
+  std::vector<zigbee_endpoint_id_t> ep_list = {1, 3, 4, 7};
+  std::string base_topic("ucl/by-unid/zb-00AA427505990D12");
+
+  // ARRANGE
+  uic_mqtt_dotdot_state_endpoint_id_list_publish_ExpectAndReturn(
+    base_topic.c_str(),
+    ep_list.size(),
+    ep_list.data(),
+    UCL_MQTT_PUBLISH_TYPE_ALL,
+    SL_STATUS_OK);
+
+  // ACT
+  sl_status_t status = zigpc_ctrl::update_device_capabilities(dev, ep_list);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+}
+
 void test_device_interviewed_sanity(void)
 {
   zigbee_eui64_t dev       = {0x00, 0xAA, 0x42, 0x75, 0x5, 0x99, 0xD, 0x2};
@@ -239,7 +267,8 @@ void test_device_interviewed_sanity(void)
     .network_status = ZIGBEE_NODE_STATUS_INCLUDED,
     .max_cmd_delay  = 1,
   };
-  std::string topic = "ucl/by-unid/zb-00AA427505990D02/State";
+  std::string topic_unid = "ucl/by-unid/zb-00AA427505990D02";
+  std::string topic      = topic_unid + "/State";
   std::string payload
     = R"({"MaximumCommandDelay":1,"NetworkStatus":"Online functional","Security":"Zigbee Z3"})";
 
@@ -264,8 +293,47 @@ void test_device_interviewed_sanity(void)
   helper_expect_endpoint_configure_actions(dev, ep_obj);
   helper_expect_endpoint_update_capabilities(dev, ep_obj.endpoint_id, true);
 
+  uic_mqtt_dotdot_state_endpoint_id_list_publish_ExpectWithArrayAndReturn(
+    topic_unid.c_str(),
+    1,
+    &ep_obj.endpoint_id,
+    1,
+    UCL_MQTT_PUBLISH_TYPE_ALL,
+    SL_STATUS_OK);
+
   // ACT
   sl_status_t status = zigpc_ctrl::on_device_interviewed(dev, true);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+}
+
+void test_device_leave_sanity(void)
+{
+  zigbee_eui64_t dev = {0x00, 0xAA, 0x42, 0x75, 0x5, 0x9A, 0xD, 0x2};
+  size_t ep_count    = 2;
+  zigbee_endpoint_id_t ep_list[ep_count] = {1, 3};
+
+  std::string topic = "ucl/by-unid/zb-00AA4275059A0D02";
+
+  // ARRANGE
+  zigpc_datastore_get_endpoint_count_ExpectAndReturn(dev, ep_count);
+  for (size_t i = 0; i < ep_count; i++) {
+    zigpc_datastore_find_endpoint_by_index_ExpectAndReturn(dev,
+                                                           i,
+                                                           nullptr,
+                                                           SL_STATUS_OK);
+    zigpc_datastore_find_endpoint_by_index_IgnoreArg_endpoint_id();
+    zigpc_datastore_find_endpoint_by_index_ReturnThruPtr_endpoint_id(
+      &ep_list[i]);
+
+    zigpc_group_remove_all_ExpectAndReturn(dev, ep_list[i], SL_STATUS_OK);
+  }
+
+  uic_mqtt_unretain_Expect(topic.c_str());
+
+  // ACT
+  sl_status_t status = zigpc_ctrl::on_device_leave(dev);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
@@ -410,12 +478,12 @@ void test_controller_startup_sanity(void)
     .max_cmd_delay  = 1,
   };
   std::string expected_unids[dev_count] = {
-    "zb-02000100010A0100",
-    "zb-01000300030B030C",
+    "ucl/by-unid/zb-02000100010A0100",
+    "ucl/by-unid/zb-01000300030B030C",
   };
   std::string expected_state_publish_topics[dev_count] = {
-    "ucl/by-unid/" + expected_unids[0] + "/State",
-    "ucl/by-unid/" + expected_unids[1] + "/State",
+    expected_unids[0] + "/State",
+    expected_unids[1] + "/State",
   };
   std::string expected_state_publish_payload
     = R"({"MaximumCommandDelay":1,"NetworkStatus":"Online functional","Security":"Zigbee Z3"})";
@@ -466,6 +534,14 @@ void test_controller_startup_sanity(void)
     helper_expect_endpoint_update_capabilities(expected_dev[i],
                                                expected_eps[i],
                                                true);
+
+    uic_mqtt_dotdot_state_endpoint_id_list_publish_ExpectWithArrayAndReturn(
+      expected_unids[i].c_str(),
+      1,
+      &expected_eps[i],
+      1,
+      UCL_MQTT_PUBLISH_TYPE_ALL,
+      SL_STATUS_OK);
   }
 
   // ACT

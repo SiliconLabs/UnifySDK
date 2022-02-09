@@ -2,26 +2,33 @@
 name = "rust_command_classes"
 version = "0.0.1"
 authors = ["root"]
-edition = "2018"
+edition = "2021"
 license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor of this software is Silicon Laboratories Inc. Your use of this\nsoftware is governed by the terms of Silicon Labs Master Software License\nAgreement (MSLA) available at\nwww.silabs.com/about-us/legal/master-software-license-agreement. This\nsoftware is distributed to you in Source Code format and is governed by the\nsections of the MSLA applicable to Source Code."
-description = "firmware update command class"
+description = "rust command classes"
 
 [dependencies]
-once_cell="*"
-zwave_tx = { path = "../zwave_tx" }
-zwave_controller = { path = "../zwave_controller" }
-zwave_command_classes = { path = "../zwave_command_classes" }
-zwave_command_handler = { path = "../zwave_command_handler" }
+serde = { version = "1.0", features = ["derive"] }
+once_cell="1.9.*"
+zwave_rust_cc_gen = { path = "../zwave_rust_cc_gen" }
+zwave_tx_sys = { path = "../zwave_tx_sys" }
+zwave_controller_sys = { path = "../zwave_controller_sys" }
+zwave_command_classes_sys = { path = "../zwave_command_classes_sys" }
+zwave_command_handler_sys = { path = "../zwave_command_handler_sys" }
 zwave_rust_proc_macros = { path = "../zwave_rust_proc_macros" }
-uic_attribute_store = { package = "uic_attribute_store_rs", path = "../../../../../components/uic_rust/uic_attribute_store_rs" }
-uic_log = { package = "uic_log_rs", path = "../../../../../components/uic_rust/uic_log_rs" }
-uic_config = { package = "uic_config_rs", path = "../../../../../components/uic_rust/uic_config_rs" }
-uic_proc_macro = { path = "../../../../../components/uic_rust/uic_proc_macro" }
+unify_attribute_store_sys = { path = "../../../../../components/uic_rust/unify_attribute_store_sys" }
+unify_middleware =  { path = "../../../../../components/uic_rust/unify_middleware" }
+unify_log_sys = { path = "../../../../../components/uic_rust/unify_log_sys" }
+unify_sl_status_sys = { path = "../../../../../components/uic_rust/unify_sl_status_sys" }
+unify_config_sys = { path = "../../../../../components/uic_rust/unify_config_sys" }
+unify_proc_macro = { path = "../../../../../components/uic_rust/unify_proc_macro" }
 crc16 = "0.4.*"
-serde="*"
+futures = "0.3.*"
 
 [build-dependencies]
-uic_bindgen = { path = "../../../../../components/uic_rust/uic_bindgen" }
+unify_tools = { path = "../../../../../components/uic_rust/unify_tools" }
 
 [lib]
 crate-type = ["staticlib"]
+
+[dev-dependencies]
+serial_test = "*"

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<!--
+ProtocolController/ZWaveTelemetry
+This is a manufacturer specific cluster.
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD06" revision="1" name="NameAndLocation">
+  <classification role="utility" picsCode="UNAMELOCATION" />
+
+  <server>
+
+    <attributes>
+      <attribute id="0000" name="Name" type="string" required="true" writable="true"/>
+      <attribute id="0001" name="Location" type="string" required="true" writable="true"/>
+    </attributes>
+
+  </server>
+</zcl:cluster>

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -139,19 +139,16 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga678175109b10fb1376eae2e610097433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga678175109b10fb1376eae2e610097433">zigpc_netmgmt_network_permit_joins</a> (bool enable)</td></tr>
+<tr class="memitem:ga678175109b10fb1376eae2e610097433"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga678175109b10fb1376eae2e610097433">zigpc_netmgmt_network_permit_joins</a> (bool enable)</td></tr>
 <tr class="memdesc:ga678175109b10fb1376eae2e610097433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to enable/disable permitting Zigbee devices to join the network.  <a href="group__zigpc__net__mgmt.html#ga678175109b10fb1376eae2e610097433">More...</a><br /></td></tr>
 <tr class="separator:ga678175109b10fb1376eae2e610097433"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9ce4ef77782dbe443ccf8287b939acc2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga9ce4ef77782dbe443ccf8287b939acc2">zigpc_net_mgmt_add_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> node_eui64, const <a class="el" href="group__zigpc__common__zigbee.html#ga6258d1d49049c645af7e91d6122b1d51">zigbee_install_code_t</a> install_code, const uint8_t install_code_length)</td></tr>
+<tr class="memitem:ga9ce4ef77782dbe443ccf8287b939acc2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga9ce4ef77782dbe443ccf8287b939acc2">zigpc_net_mgmt_add_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> node_eui64, const <a class="el" href="group__zigpc__common__zigbee.html#ga6258d1d49049c645af7e91d6122b1d51">zigbee_install_code_t</a> install_code, const uint8_t install_code_length)</td></tr>
 <tr class="memdesc:ga9ce4ef77782dbe443ccf8287b939acc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to add a new end device to the Zigbee PAN using Z3 Install Code Method.  <a href="group__zigpc__net__mgmt.html#ga9ce4ef77782dbe443ccf8287b939acc2">More...</a><br /></td></tr>
 <tr class="separator:ga9ce4ef77782dbe443ccf8287b939acc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafbea6fbf57e15c4debe108f9a2f68cbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#gafbea6fbf57e15c4debe108f9a2f68cbf">zigpc_net_mgmt_interview_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
-<tr class="memdesc:gafbea6fbf57e15c4debe108f9a2f68cbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to interview a node already on the network. This request can only be fullfilled if the FSM is in an idle state. The FSM, if successful, will transition the FSM to the "node interview" state. If the node is not on the network, or if the interview process has not completed, a node interview timeout will expire which will transition back the FSM to the idle state.  <a href="group__zigpc__net__mgmt.html#gafbea6fbf57e15c4debe108f9a2f68cbf">More...</a><br /></td></tr>
-<tr class="separator:gafbea6fbf57e15c4debe108f9a2f68cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga68a052a418455f87b473f09ac5e29137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga68a052a418455f87b473f09ac5e29137">zigpc_net_mgmt_remove_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
+<tr class="memitem:ga68a052a418455f87b473f09ac5e29137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga68a052a418455f87b473f09ac5e29137">zigpc_net_mgmt_remove_node</a> (const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a> eui64)</td></tr>
 <tr class="memdesc:ga68a052a418455f87b473f09ac5e29137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request to remove a node already on the network. This request can only be fullfilled if the FSM is in an idle state. The request, if successful, will transition the FSM to the "remove node" state. If the node is not on the network, or if the interview process has not completed, a node interview timeout will expire which will transition back the FSM to the idle state.  <a href="group__zigpc__net__mgmt.html#ga68a052a418455f87b473f09ac5e29137">More...</a><br /></td></tr>
 <tr class="separator:ga68a052a418455f87b473f09ac5e29137"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6a3162c4a400126e6d0a32e0877cda34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga6a3162c4a400126e6d0a32e0877cda34">zigpc_net_mgmt_state_change_request</a> (const <a class="el" href="structzigpc__net__mgmt__state__change__request__t.html">zigpc_net_mgmt_state_change_request_t</a> *request)</td></tr>
+<tr class="memitem:ga6a3162c4a400126e6d0a32e0877cda34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__net__mgmt.html#ga6a3162c4a400126e6d0a32e0877cda34">zigpc_net_mgmt_state_change_request</a> (const <a class="el" href="structzigpc__net__mgmt__state__change__request__t.html">zigpc_net_mgmt_state_change_request_t</a> *request)</td></tr>
 <tr class="memdesc:ga6a3162c4a400126e6d0a32e0877cda34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request a state change request external to Protocol Controller. This request is usually sent by the Unify MQTT facing components to manually transition to a particular network managment state to perform an action such as add node, remove node, etc. Passing the "idle" state to this request will abort any on-going requests.  <a href="group__zigpc__net__mgmt.html#ga6a3162c4a400126e6d0a32e0877cda34">More...</a><br /></td></tr>
 <tr class="separator:ga6a3162c4a400126e6d0a32e0877cda34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -208,7 +205,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_net_mgmt_add_node </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_net_mgmt_add_node </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
           <td class="paramname"><em>node_eui64</em>, </td>
@@ -246,33 +243,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gafbea6fbf57e15c4debe108f9a2f68cbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gafbea6fbf57e15c4debe108f9a2f68cbf">&#9670;&nbsp;</a></span>zigpc_net_mgmt_interview_node()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_net_mgmt_interview_node </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
-          <td class="paramname"><em>eui64</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Request to interview a node already on the network. This request can only be fullfilled if the FSM is in an idle state. The FSM, if successful, will transition the FSM to the "node interview" state. If the node is not on the network, or if the interview process has not completed, a node interview timeout will expire which will transition back the FSM to the idle state. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">eui64</td><td>Identifier of the node to be interviewed </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK if the request has been accepted, SL_STATUS_BUSY if the network is busy to service the request </dd></dl>
-
-</div>
-</div>
 <a id="ga68a052a418455f87b473f09ac5e29137"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga68a052a418455f87b473f09ac5e29137">&#9670;&nbsp;</a></span>zigpc_net_mgmt_remove_node()</h2>
 
@@ -280,7 +250,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_net_mgmt_remove_node </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_net_mgmt_remove_node </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__zigpc__common__zigbee.html#ga1dd3aa9ba77ef41c08b14a12d084c734">zigbee_eui64_t</a>&#160;</td>
           <td class="paramname"><em>eui64</em></td><td>)</td>
@@ -307,7 +277,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_net_mgmt_state_change_request </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_net_mgmt_state_change_request </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structzigpc__net__mgmt__state__change__request__t.html">zigpc_net_mgmt_state_change_request_t</a> *&#160;</td>
           <td class="paramname"><em>request</em></td><td>)</td>
@@ -334,7 +304,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_netmgmt_network_permit_joins </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_netmgmt_network_permit_joins </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>enable</em></td><td>)</td>
@@ -353,7 +323,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:20 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

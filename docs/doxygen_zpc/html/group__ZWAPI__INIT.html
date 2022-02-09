@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Initialization</title>
+<title>Z-Wave Protocol Controller Refrence: Initialization</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('group__ZWAPI__INIT.html',''); initResi
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Initialization<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__ZWAPI.html">Z-Wave API</a></div></div>  </div>
+<div class="title">Initialization<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__api.html">Z-Wave API</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -117,10 +117,10 @@ Macros</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga1aeecf221cc8cd299bd6854ba9056c40"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct__zwapi__protocol__version__information__t__.html">_zwapi_protocol_version_information_t_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga1aeecf221cc8cd299bd6854ba9056c40">zwapi_protocol_version_information_t</a></td></tr>
 <tr class="separator:ga1aeecf221cc8cd299bd6854ba9056c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8760e50d33250308039ff09a9e8a1674"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga8760e50d33250308039ff09a9e8a1674">application_command_handler_function</a>) (uint8_t rx_status, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, const uint8_t *received_frame, uint8_t received_frame_length, int8_t rssi_value)</td></tr>
+<tr class="memitem:ga8760e50d33250308039ff09a9e8a1674"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga8760e50d33250308039ff09a9e8a1674">application_command_handler_function</a>) (uint8_t rx_status, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, const uint8_t *received_frame, uint8_t received_frame_length, int8_t rssi_value)</td></tr>
 <tr class="memdesc:ga8760e50d33250308039ff09a9e8a1674"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application command handler function type definition.  <a href="group__ZWAPI__INIT.html#ga8760e50d33250308039ff09a9e8a1674">More...</a><br /></td></tr>
 <tr class="separator:ga8760e50d33250308039ff09a9e8a1674"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaef0e270c77493989cad0a4e48a83e4ab"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gaef0e270c77493989cad0a4e48a83e4ab">application_controller_update_function</a>) (uint8_t status, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *zwave_nif, uint8_t zwave_nif_length, <a class="el" href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a> nwi_home_id)</td></tr>
+<tr class="memitem:gaef0e270c77493989cad0a4e48a83e4ab"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gaef0e270c77493989cad0a4e48a83e4ab">application_controller_update_function</a>) (uint8_t status, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *zwave_nif, uint8_t zwave_nif_length, <a class="el" href="group__zwave__node__id__definitions.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a> nwi_home_id)</td></tr>
 <tr class="memdesc:gaef0e270c77493989cad0a4e48a83e4ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application controller update function type definition.  <a href="group__ZWAPI__INIT.html#gaef0e270c77493989cad0a4e48a83e4ab">More...</a><br /></td></tr>
 <tr class="separator:gaef0e270c77493989cad0a4e48a83e4ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga240174e53d3983b404914a6942fc5361"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structzwapi__callbacks.html">zwapi_callbacks</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga240174e53d3983b404914a6942fc5361">zwapi_callbacks_t</a></td></tr>
@@ -129,15 +129,15 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga503a76a5835c274e4b7610e2f80f5e6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga503a76a5835c274e4b7610e2f80f5e6f">zwapi_init</a> (const char *serial_port, int *<a class="el" href="zwapi__serial_8c.html#a08c9783fbb7e427a35de1f672681f6bd">serial_fd</a>, const <a class="el" href="group__ZWAPI__INIT.html#ga240174e53d3983b404914a6942fc5361">zwapi_callbacks_t</a> *<a class="el" href="zwapi__internal_8h.html#afc8113e4f1b79c8443755893466cefe2">callbacks</a>)</td></tr>
+<tr class="memitem:ga503a76a5835c274e4b7610e2f80f5e6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga503a76a5835c274e4b7610e2f80f5e6f">zwapi_init</a> (const char *serial_port, int *<a class="el" href="zwapi__serial_8c.html#a08c9783fbb7e427a35de1f672681f6bd">serial_fd</a>, const <a class="el" href="group__ZWAPI__INIT.html#ga240174e53d3983b404914a6942fc5361">zwapi_callbacks_t</a> *<a class="el" href="zwapi__internal_8h.html#afc8113e4f1b79c8443755893466cefe2">callbacks</a>)</td></tr>
 <tr class="separator:ga503a76a5835c274e4b7610e2f80f5e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga87ccde341e5cf630064d51222bf56fb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga87ccde341e5cf630064d51222bf56fb9">zwapi_destroy</a> (void)</td></tr>
 <tr class="memdesc:ga87ccde341e5cf630064d51222bf56fb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shut down the Z-Wave API and close the communication ports.  <a href="group__ZWAPI__INIT.html#ga87ccde341e5cf630064d51222bf56fb9">More...</a><br /></td></tr>
 <tr class="separator:ga87ccde341e5cf630064d51222bf56fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga19ca53cd3504cee1b52370e44a8cb887"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga19ca53cd3504cee1b52370e44a8cb887">zwapi_log_to_file_enable</a> (const char *filename)</td></tr>
+<tr class="memitem:ga19ca53cd3504cee1b52370e44a8cb887"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga19ca53cd3504cee1b52370e44a8cb887">zwapi_log_to_file_enable</a> (const char *filename)</td></tr>
 <tr class="memdesc:ga19ca53cd3504cee1b52370e44a8cb887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable logging of serial data to a file.  <a href="group__ZWAPI__INIT.html#ga19ca53cd3504cee1b52370e44a8cb887">More...</a><br /></td></tr>
 <tr class="separator:ga19ca53cd3504cee1b52370e44a8cb887"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga256d0ca55a0e5388cf665a3630d28fe0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga256d0ca55a0e5388cf665a3630d28fe0">zwapi_log_to_file_disable</a> ()</td></tr>
+<tr class="memitem:ga256d0ca55a0e5388cf665a3630d28fe0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga256d0ca55a0e5388cf665a3630d28fe0">zwapi_log_to_file_disable</a> ()</td></tr>
 <tr class="memdesc:ga256d0ca55a0e5388cf665a3630d28fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable/stop logging serial data to file.  <a href="group__ZWAPI__INIT.html#ga256d0ca55a0e5388cf665a3630d28fe0">More...</a><br /></td></tr>
 <tr class="separator:ga256d0ca55a0e5388cf665a3630d28fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad44a77c9f06a6a5b81d5b3fd1f38e6b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gad44a77c9f06a6a5b81d5b3fd1f38e6b1">zwapi_poll</a> (void)</td></tr>
@@ -149,13 +149,13 @@ Functions</h2></td></tr>
 <tr class="memitem:ga647114dcb008816008cf9389548b1a12"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga647114dcb008816008cf9389548b1a12">zwapi_support_setup_func</a> (<a class="el" href="group__ZWAPI__BASIS.html#gad708019b653bba6f9ced8204f11ad080">serial_api_setup_cmd_t</a> setup_cmd)</td></tr>
 <tr class="memdesc:ga647114dcb008816008cf9389548b1a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if one of the serial API setup commands is supported.  <a href="group__ZWAPI__INIT.html#ga647114dcb008816008cf9389548b1a12">More...</a><br /></td></tr>
 <tr class="separator:ga647114dcb008816008cf9389548b1a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab39e440bdb6435b04e754771c5ad41b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gab39e440bdb6435b04e754771c5ad41b5">zwapi_refresh_capabilities</a> (void)</td></tr>
+<tr class="memitem:gab39e440bdb6435b04e754771c5ad41b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gab39e440bdb6435b04e754771c5ad41b5">zwapi_refresh_capabilities</a> (void)</td></tr>
 <tr class="memdesc:gab39e440bdb6435b04e754771c5ad41b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the whole <a class="el" href="structzwapi__chip__data__t.html">zwapi_chip_data_t</a> structure from the Z-Wave module.  <a href="group__ZWAPI__INIT.html#gab39e440bdb6435b04e754771c5ad41b5">More...</a><br /></td></tr>
 <tr class="separator:gab39e440bdb6435b04e754771c5ad41b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf72f3e780e6152b385987b0c075675f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gaf72f3e780e6152b385987b0c075675f7">zwapi_get_init_data</a> (uint8_t *ver, uint8_t *capabilities, uint8_t *len, <a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> <a class="el" href="zwave__api__demo__commands_8c.html#a07540cc49c29462caf22240c0e042917">node_list</a>, uint8_t *chip_type, uint8_t *chip_version)</td></tr>
+<tr class="memitem:gaf72f3e780e6152b385987b0c075675f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gaf72f3e780e6152b385987b0c075675f7">zwapi_get_init_data</a> (uint8_t *ver, uint8_t *capabilities, uint8_t *len, <a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> node_list, uint8_t *chip_type, uint8_t *chip_version)</td></tr>
 <tr class="memdesc:gaf72f3e780e6152b385987b0c075675f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get zwave_api initialization data from the remote side (Enhanced Z-Wave module).  <a href="group__ZWAPI__INIT.html#gaf72f3e780e6152b385987b0c075675f7">More...</a><br /></td></tr>
 <tr class="separator:gaf72f3e780e6152b385987b0c075675f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9df52f3ca75c3aa5b8aae50a7f58ad1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga9df52f3ca75c3aa5b8aae50a7f58ad1b">zwapi_get_node_list</a> (<a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> <a class="el" href="zwave__api__demo__commands_8c.html#a07540cc49c29462caf22240c0e042917">node_list</a>)</td></tr>
+<tr class="memitem:ga9df52f3ca75c3aa5b8aae50a7f58ad1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga9df52f3ca75c3aa5b8aae50a7f58ad1b">zwapi_get_node_list</a> (<a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> node_list)</td></tr>
 <tr class="memdesc:ga9df52f3ca75c3aa5b8aae50a7f58ad1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh the node list from the Z-Wave protocol and copy in into the node_list pointer.  <a href="group__ZWAPI__INIT.html#ga9df52f3ca75c3aa5b8aae50a7f58ad1b">More...</a><br /></td></tr>
 <tr class="separator:ga9df52f3ca75c3aa5b8aae50a7f58ad1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeb0651d0effa49459616b58cc026e80b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gaeb0651d0effa49459616b58cc026e80b">zwapi_get_chip_type_version</a> (uint8_t *type, uint8_t *version)</td></tr>
@@ -170,13 +170,13 @@ Functions</h2></td></tr>
 <tr class="memitem:ga347e74a3d3fa874fb48cc294a16a9d05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__ZWAPI__INIT.html#gac7251b59e0baa6557772f8821def7108">zwapi_library_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga347e74a3d3fa874fb48cc294a16a9d05">zwapi_get_library_type</a> ()</td></tr>
 <tr class="memdesc:ga347e74a3d3fa874fb48cc294a16a9d05"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the cached value of the library type for the module  <a href="group__ZWAPI__INIT.html#ga347e74a3d3fa874fb48cc294a16a9d05">More...</a><br /></td></tr>
 <tr class="separator:ga347e74a3d3fa874fb48cc294a16a9d05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf13ded01e7cae8823db451f5526a0dc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gaf13ded01e7cae8823db451f5526a0dc9">zwapi_get_protocol_version</a> (<a class="el" href="group__ZWAPI__INIT.html#ga1aeecf221cc8cd299bd6854ba9056c40">zwapi_protocol_version_information_t</a> *protocol_version)</td></tr>
+<tr class="memitem:gaf13ded01e7cae8823db451f5526a0dc9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gaf13ded01e7cae8823db451f5526a0dc9">zwapi_get_protocol_version</a> (<a class="el" href="group__ZWAPI__INIT.html#ga1aeecf221cc8cd299bd6854ba9056c40">zwapi_protocol_version_information_t</a> *protocol_version)</td></tr>
 <tr class="memdesc:gaf13ded01e7cae8823db451f5526a0dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves versioning data from the Z-Wave API Module.  <a href="group__ZWAPI__INIT.html#gaf13ded01e7cae8823db451f5526a0dc9">More...</a><br /></td></tr>
 <tr class="separator:gaf13ded01e7cae8823db451f5526a0dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa3a708044fe3a6c284a4f9adf000601a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__ZWAPI__INIT.html#gad267e6ca53583e5a4dddb08f56633e44">zwave_lr_channel_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#gaa3a708044fe3a6c284a4f9adf000601a">zwapi_get_zwave_lr_channel</a> ()</td></tr>
 <tr class="memdesc:gaa3a708044fe3a6c284a4f9adf000601a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the currently configured Z-Wave Long Range Channel.  <a href="group__ZWAPI__INIT.html#gaa3a708044fe3a6c284a4f9adf000601a">More...</a><br /></td></tr>
 <tr class="separator:gaa3a708044fe3a6c284a4f9adf000601a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4b9748e3273a22a02d08e545f8c39d14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga4b9748e3273a22a02d08e545f8c39d14">zwapi_set_zwave_lr_channel</a> (<a class="el" href="group__ZWAPI__INIT.html#gad267e6ca53583e5a4dddb08f56633e44">zwave_lr_channel_t</a> new_channel)</td></tr>
+<tr class="memitem:ga4b9748e3273a22a02d08e545f8c39d14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga4b9748e3273a22a02d08e545f8c39d14">zwapi_set_zwave_lr_channel</a> (<a class="el" href="group__ZWAPI__INIT.html#gad267e6ca53583e5a4dddb08f56633e44">zwave_lr_channel_t</a> new_channel)</td></tr>
 <tr class="memdesc:ga4b9748e3273a22a02d08e545f8c39d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the desired Z-Wave Long Range Channel configuration.  <a href="group__ZWAPI__INIT.html#ga4b9748e3273a22a02d08e545f8c39d14">More...</a><br /></td></tr>
 <tr class="separator:ga4b9748e3273a22a02d08e545f8c39d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0d64e939eee44f18c29803d6314b9477"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__INIT.html#ga0d64e939eee44f18c29803d6314b9477">zwapi_generate_sdk_version_from_protocol_version</a> (const char *version_string)</td></tr>
@@ -341,7 +341,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* application_command_handler_function) (uint8_t rx_status, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, const uint8_t *received_frame, uint8_t received_frame_length, int8_t rssi_value)</td>
+          <td class="memname">typedef void(* application_command_handler_function) (uint8_t rx_status, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, const uint8_t *received_frame, uint8_t received_frame_length, int8_t rssi_value)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -379,15 +379,8 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
   </table>
   </dd>
 </dl>
-<blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
-<p>When a foreign frame is received in promiscuous mode: </p><blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
-<p>The destNode parameter is only valid for singlecast frames.</p>
+<p>@serial_rx{REQ | 0x04 | rxStatus | sourceNode | cmdLength | pCmd[ ] | rxRSSIVal }</p>
+<p>When a foreign frame is received in promiscuous mode: @serial_rx{REQ | 0xD1 | rxStatus | sourceNode | cmdLength | pCmd[ ] | destNode} The destNode parameter is only valid for singlecast frames.</p>
 <p>The Z-Wave API will call the <a class="el" href="group__ZWAPI__INIT.html#ga8760e50d33250308039ff09a9e8a1674">application_command_handler_function</a> function registered with <a class="el" href="group__ZWAPI__INIT.html#ga503a76a5835c274e4b7610e2f80f5e6f">zwapi_init()</a> when an application command or request has been received from another node. The receive buffer is released when returning from this function. The type of frame used by the request can be determined (single cast, multicast, or broadcast frame). This is used to avoid flooding the network by responding on a multicast or broadcast. In order not to disrupt the radio communication and the protocol, no application function must execute code for more than 5 ms without returning. </p>
 
 </div>
@@ -399,7 +392,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* application_controller_update_function) (uint8_t status, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *zwave_nif, uint8_t zwave_nif_length, <a class="el" href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a> nwi_home_id)</td>
+          <td class="memname">typedef void(* application_controller_update_function) (uint8_t status, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const uint8_t *zwave_nif, uint8_t zwave_nif_length, <a class="el" href="group__zwave__node__id__definitions.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a> nwi_home_id)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -429,10 +422,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <p>A controller application may send a <a class="el" href="group__ZWAPI__CONTROLLER.html#gad659a161bf6bf468119f4b85d3752f9f" title="Request network topology updates from the SUC/SIS node.">zwapi_request_network_update()</a> command to a SIS or SIS node. In response, the SIS MUST return update information for each node change since the last update handled by the requesting controller node. The application of the requesting controller node may receive multiple calls to <a class="el" href="group__ZWAPI__INIT.html#gaef0e270c77493989cad0a4e48a83e4ab">application_controller_update_function</a> in response to <a class="el" href="group__ZWAPI__CONTROLLER.html#gad659a161bf6bf468119f4b85d3752f9f" title="Request network topology updates from the SUC/SIS node.">zwapi_request_network_update()</a>.</p>
 <p>The Z Wave protocol most not call <a class="el" href="group__ZWAPI__INIT.html#gaef0e270c77493989cad0a4e48a83e4ab">application_controller_update_function</a> in a controller node acting as primary controller or inclusion controller when a node is added or deleted.</p>
 <p>Any controller application MUST implement this function.</p>
-<blockquote class="doxtable">
-<p></p>
-<p></p>
-</blockquote>
+<p>\serial_rx{REQ | 0x49 | bStatus | bNodeID | bLen | basic | generic | specific | commandclasses[ ]}</p>
 <p>application_controller_update_function via the Z-Wave API also have the possibility for receiving the status UPDATE_STATE_NODE_INFO_REQ_FAILED, which means that a node did not acknowledge a <a class="el" href="group__ZWAPI__CONTROLLER.html#ga7f0684275070545db6dfb2b534e93b01" title="Request node information from a node.">zwapi_request_node_info()</a> call. </p>
 
 </div>
@@ -451,7 +441,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 
 <p>Structure holding the application callback functions. </p>
 <p>The application callback functions must be registered to the Z-Wave API with <a class="el" href="group__ZWAPI__INIT.html#ga503a76a5835c274e4b7610e2f80f5e6f">zwapi_init()</a>. The functions will be invoked by the Z-Wave API at specific times.</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000001">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_Callbacks </dd></dl>
+<p>@zgw_name SerialAPI_Callbacks </p>
 
 </div>
 </div>
@@ -482,25 +472,25 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a5789076342f93457595696fd21307d16"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER_STATIC&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000013">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_CONTROLLER_STATIC </dd></dl>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a5789076342f93457595696fd21307d16"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER_STATIC&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_CONTROLLER_STATIC </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108afd31e7dc2115b39b3f8ff4aaab09f99a"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000014">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_CONTROLLER </dd></dl>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108afd31e7dc2115b39b3f8ff4aaab09f99a"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_CONTROLLER </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ad0f24e48735f2003f792ffca0559a760"></a>ZWAVE_LIBRARY_TYPE_END_NODE_ENHANCED&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000015">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_SLAVE_ENHANCED </dd></dl>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ad0f24e48735f2003f792ffca0559a760"></a>ZWAVE_LIBRARY_TYPE_END_NODE_ENHANCED&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_SLAVE_ENHANCED </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a7506b467575ae5889a88c244189cae54"></a>ZWAVE_LIBRARY_TYPE_END_NODE&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000016">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_SLAVE </dd></dl>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a7506b467575ae5889a88c244189cae54"></a>ZWAVE_LIBRARY_TYPE_END_NODE&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_SLAVE </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ab4f5c48dd86cdb8cb28b03634ea2e1f0"></a>ZWAVE_LIBRARY_TYPE_INSTALLER&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000017">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_INSTALLER </dd></dl>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ab4f5c48dd86cdb8cb28b03634ea2e1f0"></a>ZWAVE_LIBRARY_TYPE_INSTALLER&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_INSTALLER </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a285654fd01306b8b25cb03b4e31f1b4e"></a>ZWAVE_LIBRARY_TYPE_END_NODE_ROUTING&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000018">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_SLAVE_ROUTING </dd></dl>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a285654fd01306b8b25cb03b4e31f1b4e"></a>ZWAVE_LIBRARY_TYPE_END_NODE_ROUTING&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_SLAVE_ROUTING </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a0689c0c111b28eb947b0af7ca064132e"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER_BRIDGE&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000019">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_CONTROLLER_BRIDGE </dd></dl>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a0689c0c111b28eb947b0af7ca064132e"></a>ZWAVE_LIBRARY_TYPE_CONTROLLER_BRIDGE&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_CONTROLLER_BRIDGE </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a97e7aad5c75d33d8b4e235fe28436dd6"></a>ZWAVE_LIBRARY_TYPE_DUT&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000020">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_DUT </dd></dl>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108a97e7aad5c75d33d8b4e235fe28436dd6"></a>ZWAVE_LIBRARY_TYPE_DUT&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_DUT </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108aa31ba07d7270eb74f6be76d1f9a02ad8"></a>ZWAVE_LIBRARY_TYPE_AVREMOTE&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000021">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_AVREMOTE </dd></dl>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108aa31ba07d7270eb74f6be76d1f9a02ad8"></a>ZWAVE_LIBRARY_TYPE_AVREMOTE&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_AVREMOTE </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ac11fa08cc23e69984ad45af1300c02fa"></a>ZWAVE_LIBRARY_TYPE_AVDEVICE&#160;</td><td class="fielddoc"><dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000022">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LIB_AVDEVICE </dd></dl>
+<tr><td class="fieldname"><a id="ggac7251b59e0baa6557772f8821def7108ac11fa08cc23e69984ad45af1300c02fa"></a>ZWAVE_LIBRARY_TYPE_AVDEVICE&#160;</td><td class="fielddoc"><p>@zgw_name ZW_LIB_AVDEVICE </p>
 </td></tr>
 </table>
 
@@ -546,7 +536,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Shut down the Z-Wave API and close the communication ports. </p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000003">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_Destroy </dd></dl>
+<p>@zgw_name SerialAPI_Destroy </p>
 
 </div>
 </div>
@@ -585,7 +575,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>nvm_id (e.g., bridge6.81)</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000012">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>GenerateNvmIdFromSdkVersion </dd></dl>
+<p>@zgw_name GenerateNvmIdFromSdkVersion </p>
 
 </div>
 </div>
@@ -613,7 +603,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>returns SDK version (e.g., "6.81.00")</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000011">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>GenerateSdkVersionFromProtocolVersion </dd></dl>
+<p>@zgw_name GenerateSdkVersionFromProtocolVersion </p>
 
 </div>
 </div>
@@ -651,7 +641,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000009">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>Get_SerialAPI_AppVersion </dd></dl>
+<p>@zgw_name Get_SerialAPI_AppVersion </p>
 
 </div>
 </div>
@@ -717,7 +707,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000008">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_GetChipTypeAndVersion </dd></dl>
+<p>@zgw_name SerialAPI_GetChipTypeAndVersion </p>
 
 </div>
 </div>
@@ -728,7 +718,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_init_data </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_init_data </td>
           <td>(</td>
           <td class="paramtype">uint8_t *&#160;</td>
           <td class="paramname"><em>ver</em>, </td>
@@ -748,7 +738,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
           <td class="paramname"><em>node_list</em>, </td>
         </tr>
         <tr>
@@ -790,7 +780,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the initialization data was retrieved and parsed correctly. SL_STATUS_FAIL otherwise</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000007">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_GetInitData </dd></dl>
+<p>@zgw_name SerialAPI_GetInitData </p>
 
 </div>
 </div>
@@ -827,9 +817,9 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_node_list </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_node_list </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
           <td class="paramname"><em>node_list</em></td><td>)</td>
           <td></td>
         </tr>
@@ -854,7 +844,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_protocol_version </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_protocol_version </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__ZWAPI__INIT.html#ga1aeecf221cc8cd299bd6854ba9056c40">zwapi_protocol_version_information_t</a> *&#160;</td>
           <td class="paramname"><em>protocol_version</em></td><td>)</td>
@@ -865,7 +855,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 
 <p>Retrieves versioning data from the Z-Wave API Module. </p>
 <dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK or SL_STATUS_FAIL.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000010">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_GetProtocolVersion </dd></dl>
+<p>@zgw_name ZW_GetProtocolVersion </p>
 
 </div>
 </div>
@@ -896,7 +886,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_init </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_init </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>serial_port</em>, </td>
@@ -925,12 +915,12 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">serial_port</td><td>is the name of the serial port to use (on Linux i.e., "/dev/ttyS1") </td></tr>
     <tr><td class="paramname">serial_fd</td><td>pointer where the serial file descriptor will be written </td></tr>
-    <tr><td class="paramname">callbacks</td><td>is a callback function to be used by the <a class="el" href="group__ZWAPI.html">Z-Wave API</a>. </td></tr>
+    <tr><td class="paramname">callbacks</td><td>is a callback function to be used by the <a class="el" href="group__zwave__api.html">Z-Wave API</a>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__sl__status.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> if all initialization was successfully completed. It includes initializing the Z-Wave module serial port, reading the module's capabilities and its version. <a class="el" href="group__sl__status.html#ga8d4ff3e970d8ef29a01f6b5dc3185c20">SL_STATUS_FAIL</a> otherwise</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000002">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_Init </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__unify__sl__status__codes.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> if all initialization was successfully completed. It includes initializing the Z-Wave module serial port, reading the module's capabilities and its version. <a class="el" href="group__unify__sl__status__codes.html#ga8d4ff3e970d8ef29a01f6b5dc3185c20">SL_STATUS_FAIL</a> otherwise</dd></dl>
+<p>@zgw_name SerialAPI_Init </p>
 
 </div>
 </div>
@@ -941,7 +931,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_log_to_file_disable </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_log_to_file_disable </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -951,7 +941,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 
 <p>Disable/stop logging serial data to file. </p>
 <p>This will stop the logging of serial data to file.</p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__sl__status.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> on success </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__unify__sl__status__codes.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> on success </dd></dl>
 
 </div>
 </div>
@@ -962,7 +952,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_log_to_file_enable </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_log_to_file_enable </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>filename</em></td><td>)</td>
@@ -979,11 +969,11 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__sl__status.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> on success. </dd>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="group__unify__sl__status__codes.html#ga642351dcd77b6c1ffef9d663db8a5714">SL_STATUS_OK</a> on success. </dd>
 <dd>
-<a class="el" href="group__sl__status.html#ga57d85e0bd5326419118f71404e34a53c">SL_STATUS_ALREADY_INITIALIZED</a> if log to file is already enabled. </dd>
+<a class="el" href="group__unify__sl__status__codes.html#ga57d85e0bd5326419118f71404e34a53c">SL_STATUS_ALREADY_INITIALIZED</a> if log to file is already enabled. </dd>
 <dd>
-<a class="el" href="group__sl__status.html#ga8d4ff3e970d8ef29a01f6b5dc3185c20">SL_STATUS_FAIL</a> if other failure (e.g. folder doesn't exist, lacking permissions, etc.). </dd></dl>
+<a class="el" href="group__unify__sl__status__codes.html#ga8d4ff3e970d8ef29a01f6b5dc3185c20">SL_STATUS_FAIL</a> if other failure (e.g. folder doesn't exist, lacking permissions, etc.). </dd></dl>
 
 </div>
 </div>
@@ -1007,7 +997,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>returns true if there are still more frames to process in the receive queue.</dd></dl>
 <p>This function must be called from some application main loop. This is what drives the serial data receive handling. <a class="el" href="group__ZWAPI__INIT.html#gad44a77c9f06a6a5b81d5b3fd1f38e6b1" title="Main poll loop for the Z-Wave API.">zwapi_poll()</a> checks the serial port for new data and handles timers and all other async callbacks. I.e., all Z-Wave API callbacks are called from within this function.</p>
 <p>TODO: It would be nice to have zwapi_poll return the minimum number of system ticks to parse before a timer times out. In this way we don't need to call zwapi_poll unless we got a receive interrupt from the uart or if a timer has timed out. This means that the system would be able to go into low power mode between zwapi_poll calls.</p>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000004">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_Poll </dd></dl>
+<p>@zgw_name SerialAPI_Poll </p>
 
 </div>
 </div>
@@ -1018,7 +1008,7 @@ Flags used in FUNC_ID_SERIAL_API_GET_INIT_DATA functionality</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_refresh_capabilities </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_refresh_capabilities </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -1042,7 +1032,7 @@ SL_STATUS_FAIL otherwise </dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_zwave_lr_channel </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_set_zwave_lr_channel </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__ZWAPI__INIT.html#gad267e6ca53583e5a4dddb08f56633e44">zwave_lr_channel_t</a>&#160;</td>
           <td class="paramname"><em>new_channel</em></td><td>)</td>
@@ -1090,7 +1080,7 @@ SL_STATUS_FAIL otherwise </dd></dl>
 <dd>
 false if the command is NOT supported</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>A Z-Wave API session must have been opened with <a class="el" href="group__ZWAPI__INIT.html#ga503a76a5835c274e4b7610e2f80f5e6f">zwapi_init()</a> before calling this function.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000005">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_SupportsCommand_func </dd></dl>
+<p>@zgw_name SerialAPI_SupportsCommand_func </p>
 
 </div>
 </div>
@@ -1118,7 +1108,7 @@ false if the command is NOT supported</dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the command is supported, false otherwise.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000006">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SupportsSerialAPISetup_func </dd></dl>
+<p>@zgw_name SupportsSerialAPISetup_func </p>
 
 </div>
 </div>
@@ -1127,7 +1117,7 @@ false if the command is NOT supported</dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:35 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

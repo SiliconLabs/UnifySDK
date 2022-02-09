@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -20,6 +20,8 @@
 
 // Mock includes
 #include "zwave_controller_utils_mock.h"
+#include "zwave_controller_keyset_mock.h"
+#include "zwave_utils_mock.h"
 #include "zwave_controller_callbacks_mock.h"
 #include "zwave_controller_keyset_mock.h"
 #include "attribute_store_mock.h"
@@ -28,7 +30,7 @@
 #include "attribute_resolver_mock.h"
 #include "attribute_store_helper_mock.h"
 #include "zwave_unid_mock.h"
-#include "zwave_tx_scheme_selector_mock.h"
+#include "zwave_utils_mock.h"
 #include "zwave_security_validation_mock.h"
 
 // Static test variables
@@ -74,10 +76,9 @@ static void create_secure_nifs_if_missing_happy_case_verification(
   get_zpc_node_id_node_ExpectAndReturn(2);
 
   test_supporting_node_keys = 0x34;
-  zwave_tx_scheme_get_node_granted_keys_Expect(test_node_id, NULL);
-  zwave_tx_scheme_get_node_granted_keys_IgnoreArg_keys();
-  zwave_tx_scheme_get_node_granted_keys_ReturnThruPtr_keys(
-    &test_supporting_node_keys);
+  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
+  zwave_get_node_granted_keys_IgnoreArg_keys();
+  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
 
   test_supporting_node_scheme = 38;
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
@@ -341,10 +342,9 @@ void test_zwave_command_class_resolve_secure_node_info_s2_happy_case()
     &test_node_id);
 
   test_supporting_node_keys = 0x12;
-  zwave_tx_scheme_get_node_granted_keys_Expect(test_node_id, NULL);
-  zwave_tx_scheme_get_node_granted_keys_IgnoreArg_keys();
-  zwave_tx_scheme_get_node_granted_keys_ReturnThruPtr_keys(
-    &test_supporting_node_keys);
+  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
+  zwave_get_node_granted_keys_IgnoreArg_keys();
+  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
 
   test_supporting_node_scheme
     = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_AUTHENTICATED;
@@ -391,10 +391,9 @@ void test_zwave_command_class_resolve_secure_node_info_s0_happy_case()
     &test_node_id);
 
   test_supporting_node_keys = 0x80;
-  zwave_tx_scheme_get_node_granted_keys_Expect(test_node_id, NULL);
-  zwave_tx_scheme_get_node_granted_keys_IgnoreArg_keys();
-  zwave_tx_scheme_get_node_granted_keys_ReturnThruPtr_keys(
-    &test_supporting_node_keys);
+  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
+  zwave_get_node_granted_keys_IgnoreArg_keys();
+  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
 
   test_supporting_node_scheme = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
@@ -438,10 +437,9 @@ void test_zwave_command_class_resolve_secure_node_info_no_granted_keys()
     &test_node_id);
 
   test_supporting_node_keys = 0x80;
-  zwave_tx_scheme_get_node_granted_keys_Expect(test_node_id, NULL);
-  zwave_tx_scheme_get_node_granted_keys_IgnoreArg_keys();
-  zwave_tx_scheme_get_node_granted_keys_ReturnThruPtr_keys(
-    &test_supporting_node_keys);
+  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
+  zwave_get_node_granted_keys_IgnoreArg_keys();
+  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
 
   test_supporting_node_scheme = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
@@ -486,10 +484,9 @@ void test_create_secure_nifs_no_security()
   get_zpc_node_id_node_ExpectAndReturn(2);
 
   test_supporting_node_keys = 0x43;
-  zwave_tx_scheme_get_node_granted_keys_Expect(test_node_id, NULL);
-  zwave_tx_scheme_get_node_granted_keys_IgnoreArg_keys();
-  zwave_tx_scheme_get_node_granted_keys_ReturnThruPtr_keys(
-    &test_supporting_node_keys);
+  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
+  zwave_get_node_granted_keys_IgnoreArg_keys();
+  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
 
   test_supporting_node_scheme = 0x83;
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(

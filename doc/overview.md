@@ -1,4 +1,4 @@
-# Unify SDK Library Overview
+# Unify Library Overview
 
 This page describes the Unify SDK library. The purpose of the Unify SDK
 library is to share code among the Unify components developed by Silicon Labs and
@@ -32,9 +32,9 @@ Package "Packaging framework"
 Package "Coding Standard"
 @enduml
 
-## Base Platform 
+## Base Platform
 
-The Base Platform provides a number of components which can be shared among Unify 
+The Base Platform provides a number of components which can be shared among Unify
 applications. Applications are totally free to use a subset of these components.
 but Unify application should avoid duplicating the functionality of these Unify
 components.
@@ -58,8 +58,8 @@ component "Datastore" as datastore
 component "Attribute Store" as attribute_store
 component "Attribute Mapper" as attribute_mapper
 component "Console Interface"  as console_interface
-component "SmartStart" 
-component "Node State Topic" 
+component "SmartStart"
+component "Node State Topic"
 component "Protocol Controller MQTT"
 component "OTA MQTT Client"
 
@@ -74,7 +74,7 @@ attribute_mapper -u-> attribute_store
 
 
 
-### Main loop 
+### Main loop
 
 The main loop component implements as the name hints a main loop which can be
 used as the event system of a Unify application. The main loop components does not
@@ -83,14 +83,14 @@ the main loop. The main loop uses the event system from the Contiki operating
 system and implements a select loop that reacts on events on a set of file
 descriptors. The main loop also implements a framework to initialize and
 shutdown other components as well as a posix signal handler to shut down the
-application in a controlled manner. 
+application in a controlled manner.
 
-The main loop is hardcoded to use the config system component to parse  
-config options and command line arguments and the logging system printing 
+The main loop is hardcoded to use the config system component to parse
+config options and command line arguments and the logging system printing
 log messages.
 
 Details on how to build a new application using the main loop component can be
-found [here](readme_uic_application_developer.md).
+found [here](readme_developer.md).
 
 [Main loop API documentation](@ref uic_main)
 
@@ -100,7 +100,7 @@ The config system implements parsing of config files and command line arguments.
 All Unify applications should use the config system to present a uniform look and
 feel across all applications.
 
-[Config system API documentation](@ref config)
+[Config system API documentation](@ref unify_config)
 
 ### Logging System
 
@@ -110,12 +110,12 @@ uniform look and feel across all applications.
 
 [Logging System API documentation](@ref sl_log)
 
-### MQTT Client 
+### MQTT Client
 
 The MQTT client is build on top a Eclipse Mosquitto MQTT and handles MQTT
 connection, subscribing and publishing. It implements re-connections and
 caching of publish messages which has been published which the client has
-been disconnected from the broker. 
+been disconnected from the broker.
 
 [MQTT Client API documentation](@ref uic_mqtt)
 
@@ -126,7 +126,7 @@ are sent and received over the MQTT interface.
 
 [DotDot Serializer API documentation] (@ref dotdot_mqtt)
 
-### DotDot Attributes 
+### DotDot Attributes
 
 This components will automatically publish MQTT messages based on changes in the
 Attribute Store and handles write MQTT messages and update
@@ -155,7 +155,7 @@ other. The mapper is using a scripting langrage to perform the mapping. Complex
 mappings are supported, where one attribute might depend on multiple other
 attributes.
 
-### Console Interface 
+### Console Interface
 
 The Console Interface serves as an optional debugging interface to the Unify
 components. It features help menus and auto completion.
@@ -172,7 +172,7 @@ remove events.
 
 ### Node State Topic
 
-_We need to investigate how much of this code can be shared._ 
+_We need to investigate how much of this code can be shared._
 
 The role of the Network Monitor is to keep track of the network state and in
 particular the node states.
@@ -183,15 +183,13 @@ monitor will check if nodes are responsive and update their states accordingly.
 At boot the Network Monitor will check if the node list reported by the
 controller matches the data in the Attribute System. If a mismatch is found the
 the Attribute Store is updated by deleting or inserting nodes. The attribute
-resolver will make sure to resolve newly added nodes. 
+resolver will make sure to resolve newly added nodes.
 
 ### Protocol Controller MQTT
 
 The Protocol Controller MQTT component manages the following MQTT topics:
 
 - ucl/by-unid/+/ProtocolController/NetworkManagement/#
-- ucl/by-unid/+/ProtocolController/Diagnostics/#
-- ucl/by-unid/+/ProtocolController/Configuration/#
 
 It provides an interface for protocol controllers to publish their state and for
 registering callbacks when state changes are requested from the MQTT side.
@@ -201,7 +199,7 @@ registering callbacks when state changes are requested from the MQTT side.
 This component handles OTA related MQTT topics that are used to announces OTA
 images availability and OTA status.
 
-## Test Framework 
+## Test Framework
 
 The Test Framework consists of the the _Throw the Switch Unity_ and  _Throw the
 Switch CMOCK_ frameworks for making unit tests and mocks. The two libraries has
@@ -210,7 +208,7 @@ generation for C header files.
 
 See [Developer documentation.](readme_developer.md)
 
-## Build System 
+## Build System
 
 The Unify SDK Library provides a Build System based on the CMAKE build system.
 Various cmake macros has been defined for making mocks, unit tests and packages.

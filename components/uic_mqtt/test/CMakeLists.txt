@@ -1,11 +1,11 @@
 target_add_unittest(uic_mqtt_client
-SOURCES mqtt_client_test.cpp 
+SOURCES mqtt_client_test.cpp
 DEPENDS
     uic_mqtt_wrapper_mock cmock)
 target_include_directories(uic_mqtt_client PRIVATE ../src)
 
-target_add_unittest(uic_mqtt 
-SOURCES uic_mqtt_test.c 
+target_add_unittest(uic_mqtt
+SOURCES uic_mqtt_test.c
 DEPENDS
     uic_contiki_stub
     uic_config_mock

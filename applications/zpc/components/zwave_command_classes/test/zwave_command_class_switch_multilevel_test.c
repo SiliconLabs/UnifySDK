@@ -137,6 +137,7 @@ void setUp()
   received_frame_size = 0;
   u8_value            = 0;
   u32_value           = 0;
+  is_attribute_transition_ongoing_IgnoreAndReturn(false);
 }
 
 void test_zwave_command_class_switch_multilevel_init()
@@ -278,7 +279,6 @@ void test_zwave_command_class_switch_multilevel_probe_state()
 
   is_attribute_transition_ongoing_IgnoreAndReturn(false);
 
-  is_node_pending_set_resolution_ExpectAndReturn(state_node, false);
   is_node_pending_set_resolution_ExpectAndReturn(state_node, true);
   attribute_resolver_restart_set_resolution_ExpectAndReturn(state_node,
                                                             SL_STATUS_OK);
@@ -357,8 +357,6 @@ void test_zwave_command_class_switch_multilevel_set_state()
   // Ask the multilevel Switch Set to make a payload for it:
 
   attribute_transition_get_remaining_duration_ExpectAndReturn(value_node, 0);
-  attribute_stop_transition_ExpectAndReturn(value_node, SL_STATUS_OK);
-
   multilevel_set(state_node, received_frame, &received_frame_size);
   const uint8_t expected_frame[] = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
                                     SWITCH_MULTILEVEL_SET_V4,
@@ -408,6 +406,7 @@ void test_zwave_command_class_switch_multilevel_switch_off_during_transition()
 {
   // First check the frame creation.
   TEST_ASSERT_NOT_NULL(multilevel_set);
+  is_node_pending_set_resolution_IgnoreAndReturn(false);
 
   attribute_store_node_t state_node
     = attribute_store_get_node_child_by_type(endpoint_id_node,
@@ -515,7 +514,6 @@ void test_zwave_command_class_switch_multilevel_switch_on_during_transition()
 
   // Now simulate that we get a Supervision OK:
   TEST_ASSERT_NOT_NULL(on_send_complete);
-  attribute_stop_transition_ExpectAndReturn(value_node, SL_STATUS_OK);
   on_send_complete(state_node,
                    RESOLVER_SET_RULE,
                    FRAME_SENT_EVENT_OK_SUPERVISION_SUCCESS);

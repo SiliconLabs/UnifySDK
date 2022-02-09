@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -84,18 +84,25 @@ $(document).ready(function(){initNavTree('group__attribute__store__api.html','')
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Attribute Store Public Interface<div class="ingroups"><a class="el" href="group__attribute__store.html">Attribute Store</a></div></div>  </div>
+<div class="title">Attribute Store Public Interface<div class="ingroups"><a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__attribute__store.html">Attribute Store</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>Public functions from the attribute store. It allows other components to manipulate the <a class="el" href="group__attribute__store.html">Attribute Store</a> tree. and register callbacks for <a class="el" href="group__attribute__store.html">Attribute Store</a> updates.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structattribute__changed__event.html">attribute_changed_event</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">structure that contains information about the current state of a given node in the attribute store.  <a href="structattribute__changed__event.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ga02c19100d96c1bba10647b12b46ac7c6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga02c19100d96c1bba10647b12b46ac7c6">ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH</a>&#160;&#160;&#160;255</td></tr>
@@ -110,9 +117,18 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga66c4c40720e5271c527c718924261fc6"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__datastore__attributes.html#ga5918f3c1eb857df59e4b33c9032bf10a">datastore_attribute_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a></td></tr>
 <tr class="memdesc:ga66c4c40720e5271c527c718924261fc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle to identify attribute store nodes.  <a href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">More...</a><br /></td></tr>
 <tr class="separator:ga66c4c40720e5271c527c718924261fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaee26807fd7be052efb7be4a24414aff"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff">attribute_store_node_update_callback_t</a>) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a>)</td></tr>
-<tr class="memdesc:gaaee26807fd7be052efb7be4a24414aff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attribute store callback type for tree node updates.  <a href="group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff">More...</a><br /></td></tr>
-<tr class="separator:gaaee26807fd7be052efb7be4a24414aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9b1c2d32e839ca14103b5997e1c85b7e"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga9b1c2d32e839ca14103b5997e1c85b7e">attribute_store_node_changed_callback_t</a>) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a>)</td></tr>
+<tr class="memdesc:ga9b1c2d32e839ca14103b5997e1c85b7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attribute store callback type for tree node updates.  <a href="group__attribute__store__api.html#ga9b1c2d32e839ca14103b5997e1c85b7e">More...</a><br /></td></tr>
+<tr class="separator:ga9b1c2d32e839ca14103b5997e1c85b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga25811535897f6c0208fb9d6f2cff2992"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga25811535897f6c0208fb9d6f2cff2992">attribute_store_node_touch_callback_t</a>) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>)</td></tr>
+<tr class="memdesc:ga25811535897f6c0208fb9d6f2cff2992"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attribute store callback type for "touch" events.  <a href="group__attribute__store__api.html#ga25811535897f6c0208fb9d6f2cff2992">More...</a><br /></td></tr>
+<tr class="separator:ga25811535897f6c0208fb9d6f2cff2992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaca204b15b76862da3bd0dd6753c18415"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structattribute__changed__event.html">attribute_changed_event</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gaca204b15b76862da3bd0dd6753c18415">attribute_changed_event_t</a></td></tr>
+<tr class="memdesc:gaca204b15b76862da3bd0dd6753c18415"><td class="mdescLeft">&#160;</td><td class="mdescRight">structure that contains information about the current state of a given node in the attribute store.  <a href="group__attribute__store__api.html#gaca204b15b76862da3bd0dd6753c18415">More...</a><br /></td></tr>
+<tr class="separator:gaca204b15b76862da3bd0dd6753c18415"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa94d2a99c932593c452f87ede9546064"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gaa94d2a99c932593c452f87ede9546064">attribute_store_node_update_callback_t</a>) (<a class="el" href="group__attribute__store__api.html#gaca204b15b76862da3bd0dd6753c18415">attribute_changed_event_t</a> *<a class="el" href="structevent__data.html">event_data</a>)</td></tr>
+<tr class="memdesc:gaa94d2a99c932593c452f87ede9546064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attribute store callback type for tree node updates.  <a href="group__attribute__store__api.html#gaa94d2a99c932593c452f87ede9546064">More...</a><br /></td></tr>
+<tr class="separator:gaa94d2a99c932593c452f87ede9546064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -137,7 +153,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga55e7b0226a2ef3b90c25babb4ba0d37c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga55e7b0226a2ef3b90c25babb4ba0d37c">attribute_store_add_node</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> parent_node)</td></tr>
 <tr class="memdesc:ga55e7b0226a2ef3b90c25babb4ba0d37c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new node in the current attribute store.  <a href="group__attribute__store__api.html#ga55e7b0226a2ef3b90c25babb4ba0d37c">More...</a><br /></td></tr>
 <tr class="separator:ga55e7b0226a2ef3b90c25babb4ba0d37c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac4ee35086ac5aaf717a76e17fd819108"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gac4ee35086ac5aaf717a76e17fd819108">attribute_store_delete_node</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
+<tr class="memitem:gac4ee35086ac5aaf717a76e17fd819108"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gac4ee35086ac5aaf717a76e17fd819108">attribute_store_delete_node</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
 <tr class="memdesc:gac4ee35086ac5aaf717a76e17fd819108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a node and all its children from the attribute store.  <a href="group__attribute__store__api.html#gac4ee35086ac5aaf717a76e17fd819108">More...</a><br /></td></tr>
 <tr class="separator:gac4ee35086ac5aaf717a76e17fd819108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2d26761e26d14154029710bea435ae85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga2d26761e26d14154029710bea435ae85">attribute_store_get_node_parent</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
@@ -146,10 +162,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ga846055a3339cee6d81496fd1efbbc2ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga846055a3339cee6d81496fd1efbbc2ff">attribute_store_get_first_parent_with_type</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> parent_type)</td></tr>
 <tr class="memdesc:ga846055a3339cee6d81496fd1efbbc2ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse up the tree from a node and finds the first parent with a given type.  <a href="group__attribute__store__api.html#ga846055a3339cee6d81496fd1efbbc2ff">More...</a><br /></td></tr>
 <tr class="separator:ga846055a3339cee6d81496fd1efbbc2ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad28e15ea78932b2cac3ac7326aab4ea3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gad28e15ea78932b2cac3ac7326aab4ea3">attribute_store_set_node_attribute_value</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state, const uint8_t *value, uint8_t value_size)</td></tr>
+<tr class="memitem:gad28e15ea78932b2cac3ac7326aab4ea3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gad28e15ea78932b2cac3ac7326aab4ea3">attribute_store_set_node_attribute_value</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state, const uint8_t *value, uint8_t value_size)</td></tr>
 <tr class="memdesc:gad28e15ea78932b2cac3ac7326aab4ea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the attribute value of a node in the current attribute store tree.  <a href="group__attribute__store__api.html#gad28e15ea78932b2cac3ac7326aab4ea3">More...</a><br /></td></tr>
 <tr class="separator:gad28e15ea78932b2cac3ac7326aab4ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga26fbf2b6a4f27bbd46d39b0685c1c502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga26fbf2b6a4f27bbd46d39b0685c1c502">attribute_store_get_node_attribute_value</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state, uint8_t *value, uint8_t *value_size)</td></tr>
+<tr class="memitem:ga26fbf2b6a4f27bbd46d39b0685c1c502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga26fbf2b6a4f27bbd46d39b0685c1c502">attribute_store_get_node_attribute_value</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state, uint8_t *value, uint8_t *value_size)</td></tr>
 <tr class="memdesc:ga26fbf2b6a4f27bbd46d39b0685c1c502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the attribute value of a node.  <a href="group__attribute__store__api.html#ga26fbf2b6a4f27bbd46d39b0685c1c502">More...</a><br /></td></tr>
 <tr class="separator:ga26fbf2b6a4f27bbd46d39b0685c1c502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa56b6047b70100c29aa666e9b5fe893e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gaa56b6047b70100c29aa666e9b5fe893e">attribute_store_get_node_type</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
@@ -167,26 +183,29 @@ Functions</h2></td></tr>
 <tr class="memitem:ga75cb79c1e772c4a0396c7887929ecdb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga75cb79c1e772c4a0396c7887929ecdb0">attribute_store_get_node_child_by_value</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> child_type, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state, const uint8_t *value, uint8_t value_size, uint32_t child_index)</td></tr>
 <tr class="memdesc:ga75cb79c1e772c4a0396c7887929ecdb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the node handle of a child of a node with a certain type and value.  <a href="group__attribute__store__api.html#ga75cb79c1e772c4a0396c7887929ecdb0">More...</a><br /></td></tr>
 <tr class="separator:ga75cb79c1e772c4a0396c7887929ecdb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5ce6c785aac6d5cefd494814888074fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga5ce6c785aac6d5cefd494814888074fa">attribute_store_register_callback</a> (<a class="el" href="group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff">attribute_store_node_update_callback_t</a> callback_function)</td></tr>
+<tr class="memitem:ga5ce6c785aac6d5cefd494814888074fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga5ce6c785aac6d5cefd494814888074fa">attribute_store_register_callback</a> (<a class="el" href="group__attribute__store__api.html#gaa94d2a99c932593c452f87ede9546064">attribute_store_node_update_callback_t</a> callback_function)</td></tr>
 <tr class="memdesc:ga5ce6c785aac6d5cefd494814888074fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback function to any node change.  <a href="group__attribute__store__api.html#ga5ce6c785aac6d5cefd494814888074fa">More...</a><br /></td></tr>
 <tr class="separator:ga5ce6c785aac6d5cefd494814888074fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5a02d200bf94b3f366bb8062fb900c30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga5a02d200bf94b3f366bb8062fb900c30">attribute_store_register_callback_by_type</a> (<a class="el" href="group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff">attribute_store_node_update_callback_t</a> callback_function, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type)</td></tr>
-<tr class="memdesc:ga5a02d200bf94b3f366bb8062fb900c30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback function to any node with a given type.  <a href="group__attribute__store__api.html#ga5a02d200bf94b3f366bb8062fb900c30">More...</a><br /></td></tr>
-<tr class="separator:ga5a02d200bf94b3f366bb8062fb900c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac873d6eac22ae497ed44c62d3ba1d958"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gac873d6eac22ae497ed44c62d3ba1d958">attribute_store_register_callback_by_type_and_state</a> (<a class="el" href="group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff">attribute_store_node_update_callback_t</a> callback_function, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state)</td></tr>
-<tr class="memdesc:gac873d6eac22ae497ed44c62d3ba1d958"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback function to any node with a given type for a given value_state update.  <a href="group__attribute__store__api.html#gac873d6eac22ae497ed44c62d3ba1d958">More...</a><br /></td></tr>
-<tr class="separator:gac873d6eac22ae497ed44c62d3ba1d958"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac84f5f8fccd89d5e0a3fe4e58a8b4fce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gac84f5f8fccd89d5e0a3fe4e58a8b4fce">attribute_store_register_touch_notification_callback</a> (<a class="el" href="group__attribute__store__api.html#ga25811535897f6c0208fb9d6f2cff2992">attribute_store_node_touch_callback_t</a> callback_function)</td></tr>
+<tr class="memdesc:gac84f5f8fccd89d5e0a3fe4e58a8b4fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback function that will be called on touch events.  <a href="group__attribute__store__api.html#gac84f5f8fccd89d5e0a3fe4e58a8b4fce">More...</a><br /></td></tr>
+<tr class="separator:gac84f5f8fccd89d5e0a3fe4e58a8b4fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacee67224ca9bba595b1ed59d28e8f052"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gacee67224ca9bba595b1ed59d28e8f052">attribute_store_register_callback_by_type</a> (<a class="el" href="group__attribute__store__api.html#ga9b1c2d32e839ca14103b5997e1c85b7e">attribute_store_node_changed_callback_t</a> callback_function, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type)</td></tr>
+<tr class="memdesc:gacee67224ca9bba595b1ed59d28e8f052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback function to any node with a given type.  <a href="group__attribute__store__api.html#gacee67224ca9bba595b1ed59d28e8f052">More...</a><br /></td></tr>
+<tr class="separator:gacee67224ca9bba595b1ed59d28e8f052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad09f44846a42b1713e18f4fee290fe2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#gad09f44846a42b1713e18f4fee290fe2a">attribute_store_register_callback_by_type_and_state</a> (<a class="el" href="group__attribute__store__api.html#ga9b1c2d32e839ca14103b5997e1c85b7e">attribute_store_node_changed_callback_t</a> callback_function, <a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__attribute__store__api.html#ga296998251b25382f24977825b7193e18">attribute_store_node_value_state_t</a> value_state)</td></tr>
+<tr class="memdesc:gad09f44846a42b1713e18f4fee290fe2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a callback function to any node with a given type for a given value_state update.  <a href="group__attribute__store__api.html#gad09f44846a42b1713e18f4fee290fe2a">More...</a><br /></td></tr>
+<tr class="separator:gad09f44846a42b1713e18f4fee290fe2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0a6a16080300de09ec285be55bd06e25"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga0a6a16080300de09ec285be55bd06e25">attribute_store_node_exists</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
 <tr class="memdesc:ga0a6a16080300de09ec285be55bd06e25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify whether a node is in the Attribute Store.  <a href="group__attribute__store__api.html#ga0a6a16080300de09ec285be55bd06e25">More...</a><br /></td></tr>
 <tr class="separator:ga0a6a16080300de09ec285be55bd06e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3d90c653643bd4ef9d55b8d2034227ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga3d90c653643bd4ef9d55b8d2034227ae">attribute_store_refresh_node_and_children_callbacks</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
+<tr class="memitem:ga3d90c653643bd4ef9d55b8d2034227ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga3d90c653643bd4ef9d55b8d2034227ae">attribute_store_refresh_node_and_children_callbacks</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
 <tr class="memdesc:ga3d90c653643bd4ef9d55b8d2034227ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoking update of callbacks for the given node and all children nodes.  <a href="group__attribute__store__api.html#ga3d90c653643bd4ef9d55b8d2034227ae">More...</a><br /></td></tr>
 <tr class="separator:ga3d90c653643bd4ef9d55b8d2034227ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2b7e18d0efb27747221103e461fa8de3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga2b7e18d0efb27747221103e461fa8de3">attribute_store_log</a> (void)</td></tr>
-<tr class="memdesc:ga2b7e18d0efb27747221103e461fa8de3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the content of the Attribute Store tree using <a class="el" href="group__sl__log.html">Log</a>.  <a href="group__attribute__store__api.html#ga2b7e18d0efb27747221103e461fa8de3">More...</a><br /></td></tr>
+<tr class="memdesc:ga2b7e18d0efb27747221103e461fa8de3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the content of the Attribute Store tree using <a class="el" href="group__sl__log.html">Unify Logging system</a>.  <a href="group__attribute__store__api.html#ga2b7e18d0efb27747221103e461fa8de3">More...</a><br /></td></tr>
 <tr class="separator:ga2b7e18d0efb27747221103e461fa8de3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1f00448b41fd90c913518f5641c12c49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__api.html#ga1f00448b41fd90c913518f5641c12c49">attribute_store_log_node</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, bool log_children)</td></tr>
-<tr class="memdesc:ga1f00448b41fd90c913518f5641c12c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the content of the Attribute Store tree using <a class="el" href="group__sl__log.html">Log</a> from a given node.  <a href="group__attribute__store__api.html#ga1f00448b41fd90c913518f5641c12c49">More...</a><br /></td></tr>
+<tr class="memdesc:ga1f00448b41fd90c913518f5641c12c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the content of the Attribute Store tree using <a class="el" href="group__sl__log.html">Unify Logging system</a> from a given node.  <a href="group__attribute__store__api.html#ga1f00448b41fd90c913518f5641c12c49">More...</a><br /></td></tr>
 <tr class="separator:ga1f00448b41fd90c913518f5641c12c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -225,6 +244,38 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="gaca204b15b76862da3bd0dd6753c18415"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaca204b15b76862da3bd0dd6753c18415">&#9670;&nbsp;</a></span>attribute_changed_event_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structattribute__changed__event.html">attribute_changed_event</a> <a class="el" href="group__attribute__store__api.html#gaca204b15b76862da3bd0dd6753c18415">attribute_changed_event_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>structure that contains information about the current state of a given node in the attribute store. </p>
+
+</div>
+</div>
+<a id="ga9b1c2d32e839ca14103b5997e1c85b7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9b1c2d32e839ca14103b5997e1c85b7e">&#9670;&nbsp;</a></span>attribute_store_node_changed_callback_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* attribute_store_node_changed_callback_t) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attribute store callback type for tree node updates. </p>
+
+</div>
+</div>
 <a id="ga66c4c40720e5271c527c718924261fc6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga66c4c40720e5271c527c718924261fc6">&#9670;&nbsp;</a></span>attribute_store_node_t</h2>
 
@@ -241,14 +292,30 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gaaee26807fd7be052efb7be4a24414aff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaee26807fd7be052efb7be4a24414aff">&#9670;&nbsp;</a></span>attribute_store_node_update_callback_t</h2>
+<a id="ga25811535897f6c0208fb9d6f2cff2992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga25811535897f6c0208fb9d6f2cff2992">&#9670;&nbsp;</a></span>attribute_store_node_touch_callback_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* attribute_store_node_update_callback_t) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a>)</td>
+          <td class="memname">typedef void(* attribute_store_node_touch_callback_t) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attribute store callback type for "touch" events. </p>
+
+</div>
+</div>
+<a id="gaa94d2a99c932593c452f87ede9546064"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa94d2a99c932593c452f87ede9546064">&#9670;&nbsp;</a></span>attribute_store_node_update_callback_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* attribute_store_node_update_callback_t) (<a class="el" href="group__attribute__store__api.html#gaca204b15b76862da3bd0dd6753c18415">attribute_changed_event_t</a> *<a class="el" href="structevent__data.html">event_data</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -351,7 +418,7 @@ ATTRIBUTE_STORE_INVALID_NODE in case of error </dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_delete_node </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_delete_node </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
@@ -423,7 +490,7 @@ attribute_store_node_t handle for the parent node on success </dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_get_node_attribute_value </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_get_node_attribute_value </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -728,7 +795,7 @@ ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE if the node does not exist </dd></dl>
 </div><div class="memdoc">
 
 <p>Retrieve the root node of the tree. </p>
-<dl class="section return"><dt>Returns</dt><dd>NULL If the tree is not initialized, or there is no root node </dd>
+<dl class="section return"><dt>Returns</dt><dd>ATTRIBUTE_STORE_INVALID_NODE If the tree is not initialized, or there is no root node </dd>
 <dd>
 attribute_store_node_t handle for the root node </dd></dl>
 
@@ -750,7 +817,7 @@ attribute_store_node_t handle for the root node </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Log the content of the Attribute Store tree using <a class="el" href="group__sl__log.html">Log</a>. </p>
+<p>Log the content of the Attribute Store tree using <a class="el" href="group__sl__log.html">Unify Logging system</a>. </p>
 
 </div>
 </div>
@@ -780,7 +847,7 @@ attribute_store_node_t handle for the root node </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Log the content of the Attribute Store tree using <a class="el" href="group__sl__log.html">Log</a> from a given node. </p>
+<p>Log the content of the Attribute Store tree using <a class="el" href="group__sl__log.html">Unify Logging system</a> from a given node. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node</td><td>The node handle of the node for which the tree will be printed out. </td></tr>
@@ -827,7 +894,7 @@ false if the Node ID is in the Attribute Store </dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_refresh_node_and_children_callbacks </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_refresh_node_and_children_callbacks </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
@@ -857,9 +924,9 @@ SL_STATUS_FAIL if invoking update callbacks on any node fails </dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_register_callback </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_register_callback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff">attribute_store_node_update_callback_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#gaa94d2a99c932593c452f87ede9546064">attribute_store_node_update_callback_t</a>&#160;</td>
           <td class="paramname"><em>callback_function</em></td><td>)</td>
           <td></td>
         </tr>
@@ -867,7 +934,7 @@ SL_STATUS_FAIL if invoking update callbacks on any node fails </dd></dl>
 </div><div class="memdoc">
 
 <p>Register a callback function to any node change. </p>
-<p>WARNING: Do not use this function, unless you are a component that really wants to know about almost all updates in the attribute store. See <a class="el" href="group__attribute__store__api.html#ga5a02d200bf94b3f366bb8062fb900c30">attribute_store_register_callback_by_type</a> and <a class="el" href="group__attribute__store__api.html#gac873d6eac22ae497ed44c62d3ba1d958">attribute_store_register_callback_by_type_and_state</a></p>
+<p>WARNING: Do not use this function, unless you are a component that really wants to know about almost all updates in the attribute store. See <a class="el" href="group__attribute__store__api.html#gacee67224ca9bba595b1ed59d28e8f052">attribute_store_register_callback_by_type</a> and <a class="el" href="group__attribute__store__api.html#gad09f44846a42b1713e18f4fee290fe2a">attribute_store_register_callback_by_type_and_state</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">callback_function</td><td>The function to invoke when the node's value is updated. </td></tr>
@@ -878,16 +945,16 @@ SL_STATUS_FAIL if invoking update callbacks on any node fails </dd></dl>
 
 </div>
 </div>
-<a id="ga5a02d200bf94b3f366bb8062fb900c30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5a02d200bf94b3f366bb8062fb900c30">&#9670;&nbsp;</a></span>attribute_store_register_callback_by_type()</h2>
+<a id="gacee67224ca9bba595b1ed59d28e8f052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacee67224ca9bba595b1ed59d28e8f052">&#9670;&nbsp;</a></span>attribute_store_register_callback_by_type()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_register_callback_by_type </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_register_callback_by_type </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff">attribute_store_node_update_callback_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga9b1c2d32e839ca14103b5997e1c85b7e">attribute_store_node_changed_callback_t</a>&#160;</td>
           <td class="paramname"><em>callback_function</em>, </td>
         </tr>
         <tr>
@@ -916,16 +983,16 @@ SL_STATUS_FAIL if invoking update callbacks on any node fails </dd></dl>
 
 </div>
 </div>
-<a id="gac873d6eac22ae497ed44c62d3ba1d958"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac873d6eac22ae497ed44c62d3ba1d958">&#9670;&nbsp;</a></span>attribute_store_register_callback_by_type_and_state()</h2>
+<a id="gad09f44846a42b1713e18f4fee290fe2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad09f44846a42b1713e18f4fee290fe2a">&#9670;&nbsp;</a></span>attribute_store_register_callback_by_type_and_state()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_register_callback_by_type_and_state </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_register_callback_by_type_and_state </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff">attribute_store_node_update_callback_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga9b1c2d32e839ca14103b5997e1c85b7e">attribute_store_node_changed_callback_t</a>&#160;</td>
           <td class="paramname"><em>callback_function</em>, </td>
         </tr>
         <tr>
@@ -961,6 +1028,34 @@ SL_STATUS_FAIL if invoking update callbacks on any node fails </dd></dl>
 
 </div>
 </div>
+<a id="gac84f5f8fccd89d5e0a3fe4e58a8b4fce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac84f5f8fccd89d5e0a3fe4e58a8b4fce">&#9670;&nbsp;</a></span>attribute_store_register_touch_notification_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_register_touch_notification_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga25811535897f6c0208fb9d6f2cff2992">attribute_store_node_touch_callback_t</a>&#160;</td>
+          <td class="paramname"><em>callback_function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register a callback function that will be called on touch events. </p>
+<p>NOTE: Use this function only if necessary, as it may trigger a lot of touched callbacks</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback_function</td><td>The function to invoke when a node desired or reported value is touched. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK If the callback was registered successfully. </dd></dl>
+
+</div>
+</div>
 <a id="gad28e15ea78932b2cac3ac7326aab4ea3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gad28e15ea78932b2cac3ac7326aab4ea3">&#9670;&nbsp;</a></span>attribute_store_set_node_attribute_value()</h2>
 
@@ -968,7 +1063,7 @@ SL_STATUS_FAIL if invoking update callbacks on any node fails </dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_set_node_attribute_value </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_store_set_node_attribute_value </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -1022,7 +1117,7 @@ SL_STATUS_NOT_INITIALIZED if the attribute store is not initialized properly </d
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:08 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:09 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

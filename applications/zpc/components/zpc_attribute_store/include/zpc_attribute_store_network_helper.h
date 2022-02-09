@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -23,9 +23,10 @@
 #include "zwave_controller_types.h"  // for zwave_endpoint_id_t
 
 /**
- * @defgroup attribute_store_network_helpers Attribute Store Z-Wave Network Helpers
- * @ingroup attribute_store
- * @brief Helper functions to read find out HomeID / NodeID / Endpoints nodes in the @ref attribute_store
+ * @defgroup zpc_attribute_store_network_helpers ZPC Attribute Store Z-Wave Network Helpers
+ * @ingroup zpc_attribute_store
+ * @brief Helper functions to read find out HomeID / NodeID / Endpoints
+ * nodes in the @ref attribute_store
  *
  * These helper functions return the attribute store nodes for a given UNID.
  * Note that if requested node does not exist in the @ref attribute_store, they will

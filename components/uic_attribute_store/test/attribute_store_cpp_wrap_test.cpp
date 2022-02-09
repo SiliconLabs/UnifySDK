@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -14,19 +14,15 @@
 #include "attribute.hpp"
 
 #include "attribute_store_fixt.h"
-#include "config.h"
 #include "datastore_fixt.h"
-#include "attribute_store_cpp_wrap_test_help.h"
+#include "attribute_store_cpp_wrap_test_help.hpp"
 
 extern "C" {
 using namespace attribute_store;
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
-  const char *argv_inject[3]
-    = {"attribute_store_network_helper_test", "--datastore.file", ":memory:"};
-  config_parse(sizeof(argv_inject) / sizeof(char *), (char **)argv_inject, "");
-  datastore_fixt_setup();
+  datastore_fixt_setup(":memory:");
   attribute_store_init();
 
   // Ensure we start from scratch before creating our test network.

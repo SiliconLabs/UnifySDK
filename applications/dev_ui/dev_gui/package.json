@@ -1,9 +1,9 @@
 {
-    "name": "dev-gui-server",
+    "name": "dev-gui-client",
     "version": "0.0.0",
     "description": "Developer GUI for testing and debugging UIC",
     "private": true,
-    "bin": "./src/server.js",
+    "bin": "./src/client.js",
     "pkg": {
         "assets": [
             "./build/index.html",
@@ -14,6 +14,7 @@
     "devDependencies": {
         "@material-ui/core": "^4.11.3",
         "@types/react": "^17.0.2",
+        "@types/react-color": "^3.0.6",
         "@types/react-dom": "^17.0.2",
         "@types/react-qr-reader": "^2.1.4",
         "@types/react-router-dom": "^5.1.7",
@@ -21,6 +22,7 @@
         "env-cmd": "^10.1.0",
         "pkg": "^4.5.1",
         "react-bootstrap": "^1.5.2",
+        "react-color": "^2.19.3",
         "react-icons": "^4.2.0",
         "react-qr-reader": "^2.2.1",
         "react-scripts": "^3.4.3",
@@ -39,17 +41,16 @@
     "homepage": "./",
     "main": "src/main.js",
     "scripts": {
+        "run-zap": "echo hello",
         "start": "env-cmd -f ./assets/.env react-scripts start",
-        "start-server": "env-cmd -f ./assets/.env node ./src/dev-gui-api.js",
+        "start-api": "env-cmd -f ./assets/.env node ./src/dev-gui-api/main.js",
         "start-react": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
         "dev": "nf start -p 3000",
-        "dev-gui-api-build-armhf": "pkg ./src/dev-gui-api.js --target=node12.2.0-linux-armv7 --no-bytecode --public-packages '*' --public",
-        "dev-gui-server-build-armhf": "pkg package.json --target=node12.2.0-linux-armv7 --no-bytecode --public-packages '*' --public",
-        "dev-gui-api-build-x86_64": "pkg ./src/dev-gui-api.js --target=node12.2.0-linux-x64 --no-bytecode --public-packages '*' --public",
-        "dev-gui-server-build-x86_64": "pkg package.json --target=node12.2.0-linux-x64 --no-bytecode --public-packages '*' --public"
+        "dev-gui-api-build": "pkg ./src/dev-gui-api/main.js --output=dev-gui-api --target=node12.2.0-${TARGET} --no-bytecode --public-packages '*' --public",
+        "dev-gui-client-build": "pkg package.json --target=node12.2.0-linux-${TARGET} --no-bytecode --public-packages '*' --public"
     },
     "browserslist": {
         "production": [

@@ -1,30 +1,36 @@
-target_add_unittest(network_monitor
-SOURCES
+target_add_unittest(
+  network_monitor
+  SOURCES
   network_monitor_test.c
-DEPENDS
+  DEPENDS
   uic_contiki_stub
   zwapi_protocol_mem_mock
-  zwave_controller_mock
   zwave_network_management_mock
   zwave_api_mock
   uic_mqtt_mock
   zwave_tx_scheme_selector_mock
   zwave_command_classes_mock
+  zwave_controller_mock
   uic_attribute_store_mock
   zpc_attribute_store_mock
   uic_attribute_resolver_mock
-  zpc_utils_mock
   zpc_config_mock
+  zpc_utils_mock
+  zwave_unid_mock
   ucl_mqtt_node_interview_mock
-)
+  failing_node_monitor_mock
+  EXCLUDE
+  failing_node_monitor.cpp
+  network_monitor_span_persistence.c)
 
 # SmartStart list monitor test
-target_add_unittest(network_monitor
-NAME
+target_add_unittest(
+  network_monitor
+  NAME
   smart_start_list_monitor_test
-SOURCES
+  SOURCES
   smart_start_list_monitor_test.cpp
-DEPENDS
+  DEPENDS
   zwave_controller_mock
   zwave_network_management_mock
   uic_smartstart_management_mock
@@ -32,4 +38,42 @@ DEPENDS
   zpc_attribute_store_test_helper
   uic_attribute_store
   zpc_attribute_store
-)
+  EXCLUDE
+  network_monitor_span_persistence.c
+  network_monitor_fixt.c
+  network_monitor.cpp)
+
+# SPAN/MPAN persistence test
+target_add_unittest(
+  network_monitor
+  NAME
+  network_monitor_span_persistence_test
+  SOURCES
+  network_monitor_span_persistence_test.c
+  DEPENDS
+  zwave_tx_groups_mock
+  zwave_network_management_mock
+  zwave_s2_mock
+  zpc_attribute_store_test_helper
+  uic_attribute_store
+  zpc_attribute_store
+  EXCLUDE
+  network_monitor.cpp
+  network_monitor_fixt.c)
+
+# Failing node monitor test 
+target_add_unittest(
+  network_monitor
+  NAME
+  failing_node_monitor_test 
+  SOURCES
+  failing_node_monitor_test.cpp
+  DEPENDS
+  zwave_tx_mock
+  uic_contiki_stub
+  zwave_network_management_mock
+  EXCLUDE
+  network_monitor.cpp
+  network_monitor_span_persistence.c
+  network_monitor_fixt.c
+  )

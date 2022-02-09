@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Z-Wave Controller</title>
+<title>Z-Wave Protocol Controller Refrence: Z-Wave Controller</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -84,189 +84,60 @@ $(document).ready(function(){initNavTree('group__zwave__controller.html',''); in
 
 <div class="header">
   <div class="summary">
-<a href="#groups">Modules</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#groups">Modules</a>  </div>
   <div class="headertitle">
-<div class="title">Z-Wave Controller<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a></div></div>  </div>
+<div class="title">Z-Wave Controller</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>The zwave_controller super is a layer on top of the zwave_api.  
+<p>The <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> super is a layer providing a set of components that allow to build a Z-Wave Controller application.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
 Modules</h2></td></tr>
-<tr class="memitem:group__zwave__controller__callbacks"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__callbacks.html">Z-Wave Controller callbacks</a></td></tr>
-<tr class="memdesc:group__zwave__controller__callbacks"><td class="mdescLeft">&#160;</td><td class="mdescRight">zwave_controller callbacks registration system. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__zwave__controller__internal"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__internal.html">Z-Wave Controller Internal definitions</a></td></tr>
-<tr class="memdesc:group__zwave__controller__internal"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO: Write brief for zwave_controller_internal. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__zwave__controller__keyset"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__keyset.html">Z-Wave Controller keyset utility</a></td></tr>
-<tr class="memdesc:group__zwave__controller__keyset"><td class="mdescLeft">&#160;</td><td class="mdescRight">Small utility allowing to process keyset structures. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__zwave__controller__transport"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__transport.html">Z-Wave Controller Transport</a></td></tr>
-<tr class="memdesc:group__zwave__controller__transport"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave controller transport framework. <br /></td></tr>
+<tr class="memitem:group__zwave__controller__component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__component.html">Z-Wave Controller Component</a></td></tr>
+<tr class="memdesc:group__zwave__controller__component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave Controller component, glueing all the subcomponent of the <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> super component. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:group__zwave__controller__utils"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__utils.html">Z-Wave Controller Utils</a></td></tr>
 <tr class="memdesc:group__zwave__controller__utils"><td class="mdescLeft">&#160;</td><td class="mdescRight">Various utilities for the Z-Wave Controller. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:group__zwave__tx__interface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html">Z-Wave TX interface</a></td></tr>
-<tr class="memdesc:group__zwave__tx__interface"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the public interface for the Z-Wave TX component. <br /></td></tr>
+<tr class="memitem:group__zwave__definitions"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__definitions.html">Generic Z-Wave definitions</a></td></tr>
+<tr class="memdesc:group__zwave__definitions"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type definitions and constants for Z-Wave. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga35c0407648757629f7e74017fe81cfb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller.html#ga35c0407648757629f7e74017fe81cfb2">zwave_controller_set_application_nif</a> (const uint8_t *command_classes, uint8_t command_classes_length)</td></tr>
-<tr class="memdesc:ga35c0407648757629f7e74017fe81cfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the application part of the node information frame (NIF).  <a href="group__zwave__controller.html#ga35c0407648757629f7e74017fe81cfb2">More...</a><br /></td></tr>
-<tr class="separator:ga35c0407648757629f7e74017fe81cfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9bb84d2fd8efe19d2f01cb431b3a3d27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller.html#ga9bb84d2fd8efe19d2f01cb431b3a3d27">zwave_controller_set_secure_application_nif</a> (const uint8_t *command_classes, uint8_t command_classes_length)</td></tr>
-<tr class="memdesc:ga9bb84d2fd8efe19d2f01cb431b3a3d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the secure node information.  <a href="group__zwave__controller.html#ga9bb84d2fd8efe19d2f01cb431b3a3d27">More...</a><br /></td></tr>
-<tr class="separator:ga9bb84d2fd8efe19d2f01cb431b3a3d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0178c4d14827e2028441460f1c9802e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller.html#ga0178c4d14827e2028441460f1c9802e3">zwave_controller_get_dsk</a> (<a class="el" href="zwave__controller__types_8h.html#a437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> *dsk)</td></tr>
-<tr class="memdesc:ga0178c4d14827e2028441460f1c9802e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the DSK of the controller.  <a href="group__zwave__controller.html#ga0178c4d14827e2028441460f1c9802e3">More...</a><br /></td></tr>
-<tr class="separator:ga0178c4d14827e2028441460f1c9802e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga003007299b737f9636f1a99442e22c3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller.html#ga003007299b737f9636f1a99442e22c3a">zwave_controller_reset</a> ()</td></tr>
-<tr class="memdesc:ga003007299b737f9636f1a99442e22c3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instructs the Z-Wave Controller to initiate a Set Default / Reset operation.  <a href="group__zwave__controller.html#ga003007299b737f9636f1a99442e22c3a">More...</a><br /></td></tr>
-<tr class="separator:ga003007299b737f9636f1a99442e22c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zwave__network__management"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html">Z-Wave Network Management</a></td></tr>
+<tr class="memdesc:group__zwave__network__management"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave network management component. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zwave__rx"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__rx.html">Z-Wave RX</a></td></tr>
+<tr class="memdesc:group__zwave__rx"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component responsible for initializing the <a class="el" href="group__zwave__api.html">Z-Wave API</a>, listening to incoming frames, and dispatching them. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zwave__security__validation"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__security__validation.html">Z-Wave Security Validation</a></td></tr>
+<tr class="memdesc:group__zwave__security__validation"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility to verify if a frame should be discarded or kept based on its security level. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zwave__transports"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__transports.html">Z-Wave Transports</a></td></tr>
+<tr class="memdesc:group__zwave__transports"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encapsulation/Decapsulation Z-Wave Command Class services. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zwave__tx"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx.html">Z-Wave TX</a></td></tr>
+<tr class="memdesc:group__zwave__tx"><td class="mdescLeft">&#160;</td><td class="mdescRight">This component is responsible transmission of application frames. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zwave__tx__groups"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html">Z-Wave TX Groups</a></td></tr>
+<tr class="memdesc:group__zwave__tx__groups"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns GroupIDs to a list of nodes. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zwave__tx__scheme__selector"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__scheme__selector.html">Z-Wave TX Scheme Selector</a></td></tr>
+<tr class="memdesc:group__zwave__tx__scheme__selector"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave TX Scheme selector. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zwave__api"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__api.html">Z-Wave API</a></td></tr>
+<tr class="memdesc:group__zwave__api"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the serial API of a Z-Wave module. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>The zwave_controller super is a layer on top of the zwave_api. </p>
-<p>The zwave_controller super is a layer on top of the zwave_api which implements low level Z-Wave functionality which could be argued should have been implemented in the Z-Wave controller firmware. The zwave_controller super component has not need for a persistent storage. It performs transport encapsulations and has a FSM for network operations. All in all it simplifies the more low-level zwave_api </p>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ga0178c4d14827e2028441460f1c9802e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0178c4d14827e2028441460f1c9802e3">&#9670;&nbsp;</a></span>zwave_controller_get_dsk()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_controller_get_dsk </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#a437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> *&#160;</td>
-          <td class="paramname"><em>dsk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Retrieve the DSK of the controller. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">dsk</td><td>The DSK </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ga003007299b737f9636f1a99442e22c3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga003007299b737f9636f1a99442e22c3a">&#9670;&nbsp;</a></span>zwave_controller_reset()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_controller_reset </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Instructs the Z-Wave Controller to initiate a Set Default / Reset operation. </p>
-
-</div>
-</div>
-<a id="ga35c0407648757629f7e74017fe81cfb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga35c0407648757629f7e74017fe81cfb2">&#9670;&nbsp;</a></span>zwave_controller_set_application_nif()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_controller_set_application_nif </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>command_classes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>command_classes_length</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the application part of the node information frame (NIF). </p>
-<p>This sets the application part of the node information frame. The full node information frame may include additional command classes such as</p><ul>
-<li>COMMAND_CLASS_SECURITY</li>
-<li>COMMAND_CLASS_SECURITY2</li>
-<li>COMMAND_CLASS_TRANSPORT_SERVICE</li>
-<li>COMMAND_CLASS_CRC16 which will added to the actual NIF.</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">command_classes</td><td>List of command classes </td></tr>
-    <tr><td class="paramname">command_classes_length</td><td>Length of command class list </td></tr>
-  </table>
-  </dd>
-</dl>
-<p>FIXME: I guess the node_type should be defined somewhere else than in this function ?</p>
-
-</div>
-</div>
-<a id="ga9bb84d2fd8efe19d2f01cb431b3a3d27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9bb84d2fd8efe19d2f01cb431b3a3d27">&#9670;&nbsp;</a></span>zwave_controller_set_secure_application_nif()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_controller_set_secure_application_nif </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>command_classes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>command_classes_length</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the secure node information. </p>
-<p>This sets the secure node information command class list. This list is the contents of the SECURE_COMMANDS_SUPPORTED frames for S0 and S2.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">command_classes</td><td>List of command classes </td></tr>
-    <tr><td class="paramname">command_classes_length</td><td>Length of command class list </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
+<p>The <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> super is a layer providing a set of components that allow to build a Z-Wave Controller application. </p>
+<p>The <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> super is a layer on top of the zwave_api which implements low level Z-Wave functionality which could be argued should have been implemented in the Z-Wave controller firmware. The zwave_controller super component has not need for a persistent storage. It performs transport encapsulations and has a FSM for network operations. All in all it simplifies the more low-level zwave_api </p>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:33 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

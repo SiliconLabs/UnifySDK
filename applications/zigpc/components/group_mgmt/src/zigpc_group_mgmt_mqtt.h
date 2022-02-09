@@ -33,6 +33,18 @@ extern "C" {
 #endif
 
 /**
+ * @brief zigpc_group_mqttpub_republish
+ *
+ * Republishes the grouplist for every available node
+ *
+ * @return SL_STATUS_OK if able to properly republish
+ * the grouplist
+ *
+ **/
+sl_status_t
+    zigpc_group_mqttpub_republish();
+
+/**
  * @brief zigpc_group_mqttpub_grouplist
  * Publish on the MQTT groups list topic for either REPORTED or DESIRED
  *
@@ -40,7 +52,7 @@ extern "C" {
  * @param endpoint_id   - the endpoint on the group
  * @param is_reported   - the direction (REPORTED/DESIRED)
  *
- * @return SL_STATUS_OK if the grouplist could be published successfully
+ * @return SL_STATUS_OK if the grouplist could be published successfully 
  */
 sl_status_t
   zigpc_group_mqttpub_grouplist(const zigbee_eui64_t eui64,
@@ -48,7 +60,7 @@ sl_status_t
                                 bool is_reported);
 
 /**
- * @brief zigpc_group_mqttpub_member_groupname
+ * @brief zigpc_group_mqttpub_member_groupname 
  * Publish the name of a group for a given member
  *
  * @param eui64         - the eui64 of the node
@@ -56,7 +68,7 @@ sl_status_t
  * @param group_id      - the group_id
  * @param is_reported   - the direction (REPORTED/DESIRED)
  *
- * @return SL_STATUS_OK if the grouplist could be published successfully
+ * @return SL_STATUS_OK if the grouplist could be published successfully 
  */
 sl_status_t
   zigpc_group_mqttpub_member_groupname(const zigbee_eui64_t eui64,
@@ -67,7 +79,7 @@ sl_status_t
 /**
  * @brief zigpc_group_mqtt_assemble_topic
  *
- * @param eui64         - the eui64 of the node
+ * @param eui64         - the eui64 of the node 
  * @param endpoint_id   - the endpoint on the group
  * @param base_cstr     - the base topic string
  * @param base_cstr_size- the size of the base topic string
@@ -115,8 +127,7 @@ sl_status_t zigpc_group_mqtt_assemble_group_payload(
  * @brief zigpc_group_mqtt_assemble_name_payload
  * Assemble the payload for publishing a group name. For empty group names, the
  * payload with the value formatting is still populated. For group names not
- * found, an empty string is returned.
- *
+ * found, an empty string is returned
  * @param eui64             - the eui64 of the endpoint
  * @param endpoint_id       - the endpoint with a groups cluster
  * @param group_id          - the group id with a name
@@ -128,7 +139,6 @@ sl_status_t zigpc_group_mqtt_assemble_group_payload(
  * non-empty, empty, or not-found states, SL_STATUS_NULL_POINTER on invalid
  * args passed in, or SL_STATUS_WOULD_OVERFLOW if passed in payload buffer is
  * insufficient.
- *
  */
 sl_status_t
   zigpc_group_mqtt_assemble_name_payload(const zigbee_eui64_t eui64,

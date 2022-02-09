@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -16,7 +16,7 @@
  *
  * @file dotdot_mqtt.h
  * @defgroup dotdot_mqtt DotDot Serializer
- * @ingroup uic_components
+ * @ingroup unify_components
  *
  * @brief This component provides helper functions for parsing and generates UIC
  * json payloads sent over MQTT.
@@ -111,18 +111,32 @@ typedef sl_status_t (*{{asCommandCallback this}}_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     {{dotdot_prefix}}_callback_call_type_t call_type{{#zcl_command_arguments}}{{#first}},{{/first}}
+{{#if isArray}}
+    uint8_t {{asSnakeCaseLower label}}_count,
+    {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}} *{{asSnakeCaseLower label}}{{listComma this}}
+{{else}}
     {{asUnderlyingType type}} {{asSnakeCaseLower label}}{{listComma this}}
-    {{/zcl_command_arguments}}
+{{/if}}{{/zcl_command_arguments}}
 );
 {{/zcl_commands}}
 
 typedef struct {
   {{#zcl_attributes}}
-    {{#if_is_enum type}}
+    {{#if (isMonotonousArray label)}}
+      {{#if_is_enum type}}
+  size_t {{asSnakeCaseLower label}}_count;
   {{enumType type}} {{asSnakeCaseLower label}};
+        {{else}}
+  size_t {{asSnakeCaseLower label}}_count;
+  {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}}* {{asSnakeCaseLower label}};
+        {{/if_is_enum}}
     {{else}}
+      {{#if_is_enum type}}
+  {{enumType type}} {{asSnakeCaseLower label}};
+      {{else}}
   {{asUnderlyingType type}} {{asSnakeCaseLower label}};
-    {{/if_is_enum}}
+      {{/if_is_enum}}
+    {{/if}}
   {{else}}
   uint8_t {{dotdot_prefix}}_{{asSnakeCaseLower label}}_dummy;
   {{/zcl_attributes}}
@@ -151,21 +165,38 @@ typedef sl_status_t (*{{asForceReadAttributesCallback this}}_t)(
     {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t
 );
 
+{{#zcl_commands}}{{#zcl_command_arguments}}
+{{#first}}
+/**
+ * @brief Command fields for {{parent.parent.label}}/{{parent.label}}
+ */
 typedef struct {
-{{#zcl_commands}}
-  bool {{asSnakeCaseLower label}};
+{{/first}}
+{{#if isArray}}
+  uint8_t {{asSnakeCaseLower label}}_count;
+  {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}} *{{asSnakeCaseLower label}};
 {{else}}
-  bool dummy;
-{{/zcl_commands}}
-} {{dotdot_prefix}}_{{asSnakeCaseLower label}}_supported_commands_t;
+  {{asUnderlyingType type}} {{asSnakeCaseLower label}};
+{{/if}}
+{{#last}}
+} {{asCommandFieldsType parent}};
+{{/last}}
+{{/zcl_command_arguments}}{{/zcl_commands}}
+
 {{#zcl_commands}}
 /**
  * Setup callback to be called when a
- * +/{{parent.label}}/{{asSnakeCaseLower label}} is received. Setting
+ * {{parent.label}}/Commands/{{asSnakeCaseLower label}} is received. Setting
  * this callback will overwrite the previous set callback
  */
 void {{asCommandCallback this}}_set(const {{asCommandCallback this}}_t callback);
 
+/**
+ * Setup callback to be called when a
+ * +/{{parent.label}}/GeneratedCommands/{{asSnakeCaseLower label}} is received.
+ * Setting this callback will overwrite the previous set callback
+ */
+void {{asGeneratedCommandCallback this}}_set(const {{asCommandCallback this}}_t callback);
 {{/zcl_commands}}
 /**
  * Setup a callback for WriteAttribute to be called when a
@@ -191,13 +222,22 @@ void {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_force_read_attributes_call
  *
  * @param base_topic    topic prefix to publish, /{{asSnakeCaseLower label}}
  *                      will be appended
+{{#if (isMonotonousArray label)}}
+ * @param value_count   Size of the array contained at value
+{{/if}}
  * @param value         Value to publish
  * @param publish_type  Whether to publish as Desired, Reported, or Both.
- * @return SL_STATUS_OK on success
+ *
+ * @returns SL_STATUS_OK on success
  */
 sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
   const char *base_topic,
+  {{#if (isMonotonousArray label)}}
+  uint8_t value_count,
+  {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}}* value,
+  {{else}}
   {{asUnderlyingType type}} value,
+  {{/if}}
   {{dotdot_prefix}}_attribute_publish_type_t publish_type
 );
 
@@ -263,6 +303,36 @@ typedef void (*group_dispatch_t)(uint16_t group_id,
  * @param callback
  */
 void {{dotdot_prefix}}_set_group_dispatch_callback(group_dispatch_t callback);
+
+
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+/**
+ * @brief Publishes an incoming/generated {{label}} command for
+ * the {{parent.label}} cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints parent.label)}}epID/{{/unless}}{{asPublicationName parent.label}}/GeneratedCommands/{{label}}
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * {{#unless (clusterWithoutEndpoints parent.label)}}
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * {{/unless}}
+ * {{#zcl_command_arguments}}{{#first}}
+ * @param fields                Struct pointer with the fields value of the command
+ * {{/first}}{{/zcl_command_arguments}}
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_publish_generated_{{asSnakeCaseLower label}}_command(
+  const dotdot_unid_t unid{{#unless (clusterWithoutEndpoints parent.label)}},
+  const dotdot_endpoint_id_t endpoint{{/unless}}{{#zcl_command_arguments}}{{#first}},
+  const {{asCommandFieldsType parent}} *fields
+  {{/first}}{{/zcl_command_arguments}}
+);
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
 
 #ifdef __cplusplus
 }

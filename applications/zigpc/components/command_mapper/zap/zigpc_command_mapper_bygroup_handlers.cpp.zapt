@@ -17,41 +17,28 @@
 {{#zcl_bitmaps}}{{#if type}}{{zcl_type_map_set_item this.label this.type}}{{/if}}{{/zcl_bitmaps}}
 {{#after}}
 
-// FIXME: Integrate this command handling logic under uic_dotdot_mqtt
 // TODO: Investigate using 1 bygroup dispatch callback with ZCL types used
 
-#include <iostream>
-#include <sstream>
-#include <string>
+#include <list>
 #include <vector>
-#include <set>
-#include <inttypes.h>
-#include <stdexcept>
+#include <nlohmann/json.hpp>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-
-// UIC shared components
-#include "sl_status.h"
-#include "sl_log.h"
-#include "uic_mqtt.h"
-#include "zap-types.h"
-#include "dotdot_mqtt_translators.h"
+// Unify shared components
+#include <sl_log.h>
+#include <sl_status.h>
+#include <dotdot_mqtt_group_commands.h>
 
 // ZigPC components
-#include "zigpc_gateway.h"
-#include "zigpc_common_zigbee.h"
-#include "zcl_definitions.h"
+#include <zigpc_gateway.h>
+#include <zigpc_common_zigbee.h>
+#include <zcl_definitions.h>
 
 // Internal includes
 #include "zigpc_command_mapper_int.h"
 
-constexpr char LOG_TAG[] = "zigpc_cmdmapper";
-constexpr char LOG_FMTSTR_GROUPID_MISSING[] = "Error parsing Group ID from topic %s. Request ignored";
-constexpr char LOG_FMTSTR_ARG_PARSE_FAILED[] = "Error parsing argument %s from payload. Request ignored";
-
-namespace bpt = boost::property_tree;
+static constexpr char LOG_TAG[] = "zigpc_cmdmapper";
+static constexpr char LOG_FMT_INVALID_FIELDS[] = "%s::%s: Invalid fields passed in";
+static constexpr char LOG_FMT_INVALID_FIELD_LIST[] = "%s::%s: Invalid %s list passed in";
 
 extern void {{component_zigpc_cmdmapper_prefix}}_populate_write_attr_record(
   std::vector<{{component_zigpc_zcl_prefix}}_frame_data_t> &write_attr_data,
@@ -62,222 +49,155 @@ extern void {{component_zigpc_cmdmapper_prefix}}_populate_write_attr_record(
   void *attribute_data
 );
 
-static sl_status_t {{component_zigpc_cmdmapper_prefix}}_extract_group_id(const char* topic, uint16_t *group_id)
-{
-  sl_status_t status = SL_STATUS_OK;
-  std::string topic_string(topic);
-  std::vector<std::string> topic_elements;
-
-  boost::algorithm::split(topic_elements, topic_string, boost::is_any_of("/"));
-
-  if (0 == sscanf(topic_elements[2].c_str(), "%" SCNu16, group_id)) {
-    sl_log_debug(LOG_TAG, LOG_FMTSTR_GROUPID_MISSING, topic);
-    status = SL_STATUS_INVALID_PARAMETER;
-  }
-
-  return status;
-}
-
-static sl_status_t {{component_zigpc_cmdmapper_prefix}}_check_all_args_exist(bpt::ptree *pt, std::vector<std::string> &arg_keys)
-{
-  sl_status_t status = SL_STATUS_OK;
-
-  for (size_t i = 0; (status == SL_STATUS_OK) && (i < arg_keys.size()); i++) {
-    if (pt->count(arg_keys[i]) == 0) {
-      sl_log_debug(LOG_TAG, "Missing command-argument: %s", arg_keys[i].c_str());
-      status = SL_STATUS_INVALID_CONFIGURATION;
-    }
-  }
-  return status;
-}
-
-static sl_status_t {{component_zigpc_cmdmapper_prefix}}_read_payload(bpt::ptree *pt, const char* message, const size_t message_length)
-{
-  sl_status_t status = SL_STATUS_OK;
-  std::stringstream ss;
-  ss << std::string(message, message_length);
-  try {
-    bpt::json_parser::read_json(ss, *pt);
-  } catch (...) {
-    sl_log_debug(LOG_TAG, "Unable to parse JSON payload.\n");
-    status = SL_STATUS_INVALID_CONFIGURATION;
-  }
-
-  return status;
-}
 {{#zcl_clusters}}
 {{#if (supportedCluster label)}}
 {{#zcl_attributes}}
 {{#first}}
-static void {{component_zigpc_cmdmapper_prefix}}_bygroup_{{asSnakeCaseLower parent.label}}_write_attributes_handler(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-
-  sl_status_t status = SL_STATUS_OK;
-  uint16_t group_id = 0;
-  bpt::ptree pt;
+void {{component_zigpc_cmdmapper_prefix}}_bygroup_{{asSnakeCaseLower parent.label}}_write_attributes_handler(
+  const dotdot_group_id_t group_id,
+  {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_state_t values,
+  {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_updated_state_t values_to_write
+) {
   std::vector<{{component_zigpc_zcl_prefix}}_frame_data_t> write_attr_data;
   std::list<zcl_attribute_id_t> attr_id_list;
   std::list<zigpc_zcl_data_type_t> attr_data_type_list;
 
-  if ((topic == nullptr) || (message == nullptr) || (message_length == 0)) {
-    status = SL_STATUS_EMPTY;
-  }
-
-  if (status == SL_STATUS_OK) {
-    status = {{component_zigpc_cmdmapper_prefix}}_extract_group_id(topic, &group_id);
-  }
-
-  if (status == SL_STATUS_OK) {
-    status = {{component_zigpc_cmdmapper_prefix}}_read_payload(&pt, message, message_length);
-  }
-
 {{/first}}
 {{#if isWritable }}
-  if (pt.count("{{label}}") > 0) {
-    {{#if (isEnum type)}}
-    {{asUnderlyingType type}} value;
-    try {
-      std::string payload_value(pt.get<std::string>("{{label}}"));
-      boost::replace_all(payload_value, "\"", "");
-      value = std::stoi(payload_value, nullptr, 0);
-    }
-    catch (std::invalid_argument &e) {
-      value = pt.get<{{asType parent.label}}{{asType label}}>("{{label}}");
-    }
-    {{else}}
-    {{asUnderlyingType type}} value = pt.get<{{asUnderlyingType type}}>("{{label}}");
-    {{/if}}
-
+  if (values_to_write.{{asSnakeCaseLower label}} == true) {
     {{component_zigpc_cmdmapper_prefix}}_populate_write_attr_record(
       write_attr_data,
       attr_id_list,
       attr_data_type_list,
       {{asZigPCZclAttributeType parent this}},
       {{asZigPCZclDataType (zcl_type_map_get_item type)}},
-      &value
+      &values.{{asSnakeCaseLower label}}
     );
   }
 
 {{/if}}
 {{#last}}
-  if ((status == SL_STATUS_OK) && (write_attr_data.size() > 0)) {
+  if (write_attr_data.size() > 0) {
     {{component_zigpc_cmdmapper_prefix}}_send_multicast(
       group_id,
       ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
-      {{asSnakeCaseUpper (component_zigpc_zcl_prefix)}}_CLUSTER_{{asSnakeCaseUpper parent.label}},
+      {{asZigPCZclClusterType parent}},
       ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
       write_attr_data.size(),
-      write_attr_data.data());
+      write_attr_data.data()
+    );
   }
 
 }
 {{/last}}
 {{/zcl_attributes}}
 
+
+
 {{#zcl_commands}}
 {{#if (isEqual source "server")}}
+/**
+ * @brief DotDot MQTT by-group handler for {{parent.label}}/{{label}} command.
+ *
+ * @param group_id  UCL group identifier.
+{{#zcl_command_arguments}}{{#first}}
+ * @param fields    Command fields data.
+{{/first}}{{/zcl_command_arguments}}
+ */
+void {{component_zigpc_cmdmapper_prefix}}_bygroup_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_handler(
+  const dotdot_group_id_t group_id{{#zcl_command_arguments}}{{#first}},
+  const {{asDotDotMqttCommandFieldsType parent}} *fields
+  {{/first}}{{/zcl_command_arguments}}
+) {
 
-static void {{component_zigpc_cmdmapper_prefix}}_bygroup_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_handler(
-  const char *topic,
-  const char *message,
-  const size_t message_length)
-{
-  sl_status_t status = SL_STATUS_OK;
-  uint16_t group_id = 0;
-  bpt::ptree pt;
-  const size_t cmd_arg_count = {{zcl_command_arguments_count id}};
+{{! check for list argument validity}}
 {{#zcl_command_arguments}}
 {{#first}}
-  static struct {
+  if (fields == nullptr) {
+    sl_log_warning(LOG_TAG, LOG_FMT_INVALID_FIELDS, "{{parent.label}}", "{{label}}");
+  }
 {{/first}}
-    {{asUnderlyingType type}} {{asSnakeCaseLower label}};
-{{#last}}
-  } cmd_args;
-{{/last}}
-{{/zcl_command_arguments}}
-
-
-  if ((topic == nullptr) || (message == nullptr) || (message_length == 0)) {
-    status = SL_STATUS_EMPTY;
+{{#if isArray}}
+  if ((fields->{{asSnakeCaseLower label}}_count > 0U) && (fields->{{asSnakeCaseLower label}} == nullptr)) {
+    sl_log_warning(LOG_TAG, LOG_FMT_INVALID_FIELD_LIST, "{{parent.parent.label}}", "{{parent.label}}", "{{label}}");
+    return;
   }
-
-  if (status == SL_STATUS_OK) {
-    status = {{component_zigpc_cmdmapper_prefix}}_extract_group_id(topic, &group_id);
-  }
-
-{{#zcl_command_arguments}}
-{{#first}}
-  if (status == SL_STATUS_OK) {
-    status = {{component_zigpc_cmdmapper_prefix}}_read_payload(&pt, message, message_length);
-  }
-
-  // validate if all argument keys exist
-  if (status == SL_STATUS_OK) {
-    std::vector<std::string> arg_keys = {
-{{/first}}
-        "{{label}}",
-{{#last}}
-    };
-{{/last}}
-{{/zcl_command_arguments}}
-{{#zcl_command_arguments}}
-{{#first}}
-    status = {{component_zigpc_cmdmapper_prefix}}_check_all_args_exist(&pt, arg_keys);
-  }
-
-{{/first}}
-  if (status == SL_STATUS_OK) {
-    try {
-      cmd_args.{{asSnakeCaseLower label}} = pt.get<{{asUnderlyingType type}}>("{{label}}");
-    } catch (...) {
-      sl_log_debug(LOG_TAG, LOG_FMTSTR_ARG_PARSE_FAILED, "{{label}}");
-      status = SL_STATUS_OBJECT_READ;
-    }
-  }
-{{/zcl_command_arguments}}
-{{#zcl_command_arguments}}
-{{#if (supportedStruct type)}}
-  // Copy fields to packed struct
-  {{asZigPCZclStructType type}} zigpc_{{asSnakeCaseLower label}};
-{{#zcl_struct_items_by_struct_name type}}
-  zigpc_{{asSnakeCaseLower parent.label}}.{{asSnakeCaseLower label}} = cmd_args.{{asSnakeCaseLower parent.label}}.{{label}};
-{{/zcl_struct_items_by_struct_name}}
-
 {{/if}}
 {{/zcl_command_arguments}}
-{{#zcl_command_arguments}}
-{{#first}}
 
-    {{component_zigpc_zcl_prefix}}_frame_data_t cmd_arg_data[cmd_arg_count] = {
-{{/first}}
-      {
-        .type = {{asZigPCZclDataType (zcl_type_map_get_item type)}},
-        .data = {{#if (isString type)}} cmd_args.{{asSnakeCaseLower label}} {{else if (supportedStruct type)}} &zigpc_{{asSnakeCaseLower label}} {{else}} &cmd_args.{{asSnakeCaseLower label}} {{/if}}
-      },
-{{#last}}
-    };
-{{/last}}
+{{! Copy structs passed in}}
+{{#zcl_command_arguments}}
+{{#if (supportedStruct type)}}
+  {{! Struct array}}
+  {{#if isArray}}
+  std::vector< {{asZigPCZclStructType type}} > zigpc_{{asSnakeCaseLower label}}_vec;
+
+  for(uint8_t i = 0; i < fields->{{asSnakeCaseLower label}}_count; i++) {
+    zigpc_{{asSnakeCaseLower label}}_vec.push_back({
+    {{#zcl_struct_items_by_struct_name type}}
+      .{{asSnakeCaseLower label}} = fields->{{asSnakeCaseLower parent.label}}[i].{{label}},
+    {{/zcl_struct_items_by_struct_name}}
+    });
+  }
+  {{! Struct non-array}}
+  {{else}}
+  {{asZigPCZclStructType type}} zigpc_{{asSnakeCaseLower label}} = {
+    {{#zcl_struct_items_by_struct_name type}}
+    .{{asSnakeCaseLower label}} = fields->{{asSnakeCaseLower parent.label}}.{{label}},
+    {{/zcl_struct_items_by_struct_name}}
+  };
+  {{/if}}
+{{/if}}
 {{/zcl_command_arguments}}
 
-  if (status == SL_STATUS_OK) {
-    {{component_zigpc_cmdmapper_prefix}}_send_multicast(
-      group_id,
-      ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
-      {{asZigPCZclClusterType parent}},
-      {{asZigPCZclCommandType parent this}},
-      cmd_arg_count,
+{{! build frame using argument list}}
 {{#zcl_command_arguments}}
 {{#first}}
-      cmd_arg_data);
+  std::vector< {{component_zigpc_zcl_prefix}}_frame_data_t > cmd_arg_list;
+{{/first}}
+{{! populate string types}}
+{{#if (isString type)}}
+  cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, fields->{{asSnakeCaseLower label}} });
+{{! populate struct types}}
+{{else if (supportedStruct type)}}
+  {{#if isArray}}
+  {{! NOTE: commands that send struct arrays do not send a 1-byte prefixed length field. This is omitted here}}
+  for(uint8_t i = 0U; i < fields->{{asSnakeCaseLower label}}_count; i++) {
+    cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, &zigpc_{{asSnakeCaseLower label}}_vec[i] });
+  }
+  {{else}}
+  cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, &zigpc_{{asSnakeCaseLower label}} });
+  {{/if}}
+{{! populate array types}}
+{{else if isArray}}
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &fields->{{asSnakeCaseLower label}}_count });
+  for(uint8_t i = 0U; i < fields->{{asSnakeCaseLower label}}_count; i++) {
+    cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, &fields->{{asSnakeCaseLower label}}[i] });
+  }
+{{! populate non-string, non-array, non-struct types}}
+{{else}}
+  cmd_arg_list.push_back({ {{asZigPCZclDataType (zcl_type_map_get_item type)}}, &fields->{{asSnakeCaseLower label}} });
+{{/if}}
+{{/zcl_command_arguments}}
+
+  {{component_zigpc_cmdmapper_prefix}}_send_multicast(
+    group_id,
+    ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+    {{asZigPCZclClusterType parent}},
+    {{asZigPCZclCommandType parent this}},
+{{#zcl_command_arguments}}
+{{#first}}
+    cmd_arg_list.size(),
+    cmd_arg_list.data()
 {{/first}}
 {{else}}
-      nullptr);
+    0,
+    nullptr
 {{/zcl_command_arguments}}
-  }
+  );
+
 }
+
 {{/if}}
 {{/zcl_commands}}
 {{/if}}
@@ -287,10 +207,10 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_mqtt_bygroup_handlers_init(void
 {
 {{#zcl_clusters}}
 {{#if (supportedCluster label)}}
-  uic_mqtt_subscribe("ucl/by-group/+/{{label}}/Commands/WriteAttributes", {{component_zigpc_cmdmapper_prefix}}_bygroup_{{asSnakeCaseLower label}}_write_attributes_handler);
+  {{asDotDotMqttByGroupWriteAttributesCallback this}}_set({{component_zigpc_cmdmapper_prefix}}_bygroup_{{asSnakeCaseLower label}}_write_attributes_handler);
 {{#zcl_commands}}
 {{#if (isEqual source "server")}}
-  uic_mqtt_subscribe("ucl/by-group/+/{{parent.label}}/Commands/{{label}}", {{component_zigpc_cmdmapper_prefix}}_bygroup_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_handler);
+  {{asDotDotMqttByGroupCommandCallback this}}_set({{component_zigpc_cmdmapper_prefix}}_bygroup_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_handler);
 {{/if}}
 {{/zcl_commands}}
 {{/if}}

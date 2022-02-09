@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -22,7 +22,8 @@
 
 #define LOG_TAG "uic_component_fixtures"
 
-static bool uic_fixt_setup_loop_list(const uic_fixt_setup_step_t *fixt_list)
+static sl_status_t
+  uic_fixt_setup_loop_list(const uic_fixt_setup_step_t *fixt_list)
 {
   uint8_t ii = 0;
   while (fixt_list[ii].func != NULL) {
@@ -30,22 +31,31 @@ static bool uic_fixt_setup_loop_list(const uic_fixt_setup_step_t *fixt_list)
     if (fixture_result == SL_STATUS_OK) {
       sl_log_info(LOG_TAG, "Completed: %s\n", fixt_list[ii].description);
       ii++;
+    } else if (fixture_result == SL_STATUS_ABORT) {
+      sl_log_debug(LOG_TAG,
+                   "Startup sequence aborted by: %s.\n",
+                   fixt_list[ii].description);
+      return fixture_result;
     } else {
       sl_log_critical(LOG_TAG,
                       "Failed  [%d]: %s.\n",
                       fixture_result,
                       fixt_list[ii].description);
-      return false;
+      return fixture_result;
     }
   }
-  return true;
+  return SL_STATUS_OK;
 }
 
 /* Run the set-up functions for the UIC components. */
-bool uic_fixt_setup_loop(const uic_fixt_setup_step_t *fixt_app_setup)
+sl_status_t uic_fixt_setup_loop(const uic_fixt_setup_step_t *fixt_app_setup)
 {
-  return uic_fixt_setup_loop_list(uic_fixt_setup_steps)
-         && uic_fixt_setup_loop_list(fixt_app_setup);
+  sl_status_t status = uic_fixt_setup_loop_list(uic_fixt_setup_steps);
+  if (status != SL_STATUS_OK) {
+    return status;
+  }
+
+  return uic_fixt_setup_loop_list(fixt_app_setup);
 }
 
 static int
@@ -69,6 +79,7 @@ int uic_fixt_shutdown_loop(const uic_fixt_shutdown_step_t *fixt_app_shutdown)
   // The uic_fixt_shutdown_steps needs to be executed after, because some
   // of the application-shutdown fixtures might use some UIC features in order
   // to gracefully shut down (e.g. OnOffCluster requires MQTT).
-  return uic_fixt_shutdown_loop_helper(fixt_app_shutdown)
-         + uic_fixt_shutdown_loop_helper(uic_fixt_shutdown_steps);
+  int status = uic_fixt_shutdown_loop_helper(fixt_app_shutdown);
+  status += uic_fixt_shutdown_loop_helper(uic_fixt_shutdown_steps);
+  return status;
 }

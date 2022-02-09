@@ -17,17 +17,27 @@
 #include "zpc_config.h"
 #include "zwave_unid.h"
 #include "zwave_utils.h"
-#include "sl_log.h"
 #include "zwave_controller_callbacks.h"
+#include "zwave_controller.h"
 #include "s2_keystore.h"
+
+// Contiki includes
 #include "sys/ctimer.h"
 #include "sys/clock.h"
 
+// Generic includes
 #include <arpa/inet.h>
 #include <string>
 #include <vector>
 #include <map>
 #include <boost/algorithm/string.hpp>
+
+// UIC includes
+#include "sl_log.h"
+#include "attribute_store.h"
+#include "attribute_store_defined_attribute_types.h"
+#include "attribute.hpp"
+#include "zpc_attribute_store.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -345,7 +355,6 @@ static void zwave_smartstart_management_on_inclusion_request(
                      zwave_get_protocol_name(protocol),
                      home_id);
         return;
-        break;
       }
 
       case DISCOVERED_ONE: {
@@ -378,7 +387,6 @@ static void zwave_smartstart_management_on_inclusion_request(
             home_id);
           return;
         }
-        break;
       }
 
       case DISCOVERED_ALL: {
@@ -389,7 +397,6 @@ static void zwave_smartstart_management_on_inclusion_request(
         // This should not happen.
         sl_log_warning(LOG_TAG, "Invalid protocol discovery state %d", state);
         return;
-        break;
       }
     }
 
@@ -487,9 +494,100 @@ static zwave_controller_callbacks_t smartstart_callbacks = {
   = zwave_smartstart_management_on_inclusion_request,
 };
 
+/**
+ * @brief Verify if a given DSK is already in our network.
+ *
+ * @param dsk_internal the DSK to look up in our network.
+ *
+ * @returns true if a node with the same DSK is included in our current network
+ * false if no match were found
+ */
+static bool is_dsk_already_included_in_current_network(const zwave_dsk_t &dsk_internal) {
+  using namespace attribute_store;
+  attribute home_id_node = get_zpc_network_node();
+  attribute dsk_node;
+  // Iterate over NODE_ID, find DSK
+  for (auto node_id_node: home_id_node.children(ATTRIBUTE_NODE_ID)) {
+    dsk_node = node_id_node.child_by_type(ATTRIBUTE_S2_DSK, 0);
+    if (!dsk_node.is_valid()) {
+      // No DSK information, no luck.
+      continue;
+    }
+    std::vector<uint8_t> dsk_data;
+    try {
+      dsk_data = dsk_node.reported<std::vector<uint8_t>>();
+    } catch (const std::invalid_argument &e) {
+      sl_log_warning(
+        LOG_TAG,
+        "Failed to read the DSK reported value for attribute %d: %s",
+        e.what(),
+        dsk_node);
+      continue;
+    }
+    // Compare DSK. If DSK already in network, get UNID
+    if (0 == memcmp(&dsk_data[0], &dsk_internal[0], sizeof(dsk_internal))) {
+      unid_t n_unid;
+      zwave_node_id_t node_id_data = node_id_node.reported<uint16_t>();
+
+      zwave_unid_from_node_id(node_id_data, n_unid);
+
+      char dsk_str[100];
+      zpc_converters_dsk_to_str(dsk_internal, dsk_str, sizeof(dsk_str));
+
+      sl_log_info(
+        LOG_TAG,
+        "DSK %s added in the provisioning list is already in the network (UNID: %s). No inclusion will take place.",
+        dsk_str,
+        n_unid);
+      Management::get_instance()->notify_node_added(std::string(dsk_str),
+                                                    std::string(n_unid));
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * @brief Verify if DSKs are already in the network.
+ *
+ * Iterate through the SmartStart list and verify if some DSK are not already in
+ * our network. When that's the case, they will be updated with the correct UNID.
+ *
+ * @returns true if SmartStart should be enabled and at least 1 DSK is not in the network
+ * false otherwise.
+ */
+static bool does_one_entry_need_inclusion()
+{
+  bool has_dsk_awaiting_inclusion = false;
+  zwave_dsk_t dsk_internal        = {0};
+
+  for (const auto &[key, value]: Management::get_instance()->get_cache()) {
+    if (SL_STATUS_OK
+          == zpc_converters_dsk_str_to_internal(value.dsk.c_str(), dsk_internal)
+        && value.device_unid.empty()) {
+      if (!is_dsk_already_included_in_current_network(dsk_internal)) {
+        has_dsk_awaiting_inclusion = true;
+      }
+    }
+  }
+  return has_dsk_awaiting_inclusion;
+}
+
 void has_entries_awaiting_inclusion(bool value)
 {
-  zwave_network_management_smart_start_enable(value);
+  if (value) {
+    // Lets iterate over Entry and check if DSK already in network
+    bool activate_smart_start = true;
+
+    // Do not do anything with SmartStart if we are resetting.
+    if (!zwave_controller_is_reset_ongoing()) {
+      activate_smart_start = does_one_entry_need_inclusion();
+    }
+
+    zwave_network_management_smart_start_enable(activate_smart_start);
+  } else {
+    zwave_network_management_smart_start_enable(false);
+  }
 }
 
 sl_status_t zwave_smartstart_management_setup_fixt(void)

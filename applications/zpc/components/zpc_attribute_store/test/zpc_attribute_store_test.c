@@ -51,10 +51,9 @@ int suiteTearDown(int num_failures)
 /// Called before each and every test
 void SetUp() {}
 
-void callback_test(attribute_store_node_t updated_node,
-                   attribute_store_change_t change)
+void callback_test(attribute_changed_event_t* change)
 {
-  if (change == ATTRIBUTE_UPDATED) {
+  if (change->change == ATTRIBUTE_UPDATED) {
     callback_counter++;
   }
 }

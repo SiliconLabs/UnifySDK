@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -100,58 +100,58 @@ $(document).ready(function(){initNavTree('attribute__timeouts_8h_source.html',''
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifndef ATTRIBUTE_TIMEOUTS_H</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define ATTRIBUTE_TIMEOUTS_H</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// Includes from other UIC components</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sl__status_8h.html">sl_status.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="attribute__store_8h.html">attribute_store.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// Contiki</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="clock_8h.html">clock.h</a>&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="group__uic__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">   34</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="group__uic__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a>)(<a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="group__uic__attribute__timeouts.html#gae4d44c5cca7188fd9d226b65b25d7683">   67</a></span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__uic__attribute__timeouts.html#gae4d44c5cca7188fd9d226b65b25d7683">attribute_timeout_set_callback</a>(</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="contiki-conf_8h.html#a42fc7b708ad04499c436158fd5f37ed4">clock_time_t</a> duration,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <a class="code" href="group__uic__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a> callback_function);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="group__uic__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">   81</a></span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__uic__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">attribute_timeout_cancel_callback</a>(</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="code" href="group__uic__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a> callback_function);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="group__uic__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">   89</a></span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__uic__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">attribute_timeouts_init</a>();</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="group__uic__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">   95</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__uic__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">attribute_timeouts_teardown</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#ifndef ATTRIBUTE_TIMEOUTS_H</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#define ATTRIBUTE_TIMEOUTS_H</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// Includes from other UIC components</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sl__status_8h.html">sl_status.h</a>&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="attribute__store_8h.html">attribute_store.h</a>&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Contiki</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="clock_8h.html">clock.h</a>&quot;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">   47</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="group__unify__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a>)(<a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#gae4d44c5cca7188fd9d226b65b25d7683">   80</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__unify__attribute__timeouts.html#gae4d44c5cca7188fd9d226b65b25d7683">attribute_timeout_set_callback</a>(</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="gecko_2contiki-conf_8h.html#a815417fbb97a3a1ec100d1d1b53b619a">clock_time_t</a> duration,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <a class="code" href="group__unify__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a> callback_function);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">   94</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__unify__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">attribute_timeout_cancel_callback</a>(</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="code" href="group__unify__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a> callback_function);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#endif  //ATTRIBUTE_TIMEOUTS_H</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">  102</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__unify__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">attribute_timeouts_init</a>();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="group__unify__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">  108</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__unify__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">attribute_timeouts_teardown</a>();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif  //ATTRIBUTE_TIMEOUTS_H</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aattribute__store_8h_html"><div class="ttname"><a href="attribute__store_8h.html">attribute_store.h</a></div></div>
+<div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:136</div></div>
 <div class="ttc" id="agroup__attribute__store__api_html_ga66c4c40720e5271c527c718924261fc6"><div class="ttname"><a href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a></div><div class="ttdeci">datastore_attribute_id_t attribute_store_node_t</div><div class="ttdoc">Handle to identify attribute store nodes.</div><div class="ttdef"><b>Definition:</b> attribute_store.h:101</div></div>
-<div class="ttc" id="agroup__uic__attribute__timeouts_html_gac547a38d5ae010d6f094265ae35071b7"><div class="ttname"><a href="group__uic__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a></div><div class="ttdeci">void(* attribute_timeout_callback_t)(attribute_store_node_t)</div><div class="ttdoc">Function prototype callback functions.</div><div class="ttdef"><b>Definition:</b> attribute_timeouts.h:34</div></div>
-<div class="ttc" id="agroup__uic__attribute__timeouts_html_gaac3e9c367a090a9f713b47d70a1d7ce2"><div class="ttname"><a href="group__uic__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">attribute_timeouts_init</a></div><div class="ttdeci">sl_status_t attribute_timeouts_init()</div><div class="ttdoc">Initializes the UIC attribute timeouts component.</div></div>
+<div class="ttc" id="agroup__unify__attribute__timeouts_html_ga63a383c7d992d7896de75455e73624a0"><div class="ttname"><a href="group__unify__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">attribute_timeouts_teardown</a></div><div class="ttdeci">int attribute_timeouts_teardown()</div><div class="ttdoc">Teardown the UIC attribute timeouts component.</div></div>
+<div class="ttc" id="agroup__unify__attribute__timeouts_html_gae4d44c5cca7188fd9d226b65b25d7683"><div class="ttname"><a href="group__unify__attribute__timeouts.html#gae4d44c5cca7188fd9d226b65b25d7683">attribute_timeout_set_callback</a></div><div class="ttdeci">sl_status_t attribute_timeout_set_callback(attribute_store_node_t node, clock_time_t duration, attribute_timeout_callback_t callback_function)</div><div class="ttdoc">Sets a callback to be called after a duration for an attribute.</div></div>
 <div class="ttc" id="asl__status_8h_html"><div class="ttname"><a href="sl__status_8h.html">sl_status.h</a></div><div class="ttdoc">SL Status Codes.</div></div>
 <div class="ttc" id="aclock_8h_html"><div class="ttname"><a href="clock_8h.html">clock.h</a></div></div>
-<div class="ttc" id="agroup__uic__attribute__timeouts_html_gaabf87d99516792615d624442789a9f64"><div class="ttname"><a href="group__uic__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">attribute_timeout_cancel_callback</a></div><div class="ttdeci">sl_status_t attribute_timeout_cancel_callback(attribute_store_node_t node, attribute_timeout_callback_t callback_function)</div><div class="ttdoc">Cancels a callback to be called after a duration for an attribute.</div></div>
-<div class="ttc" id="acontiki-conf_8h_html_a42fc7b708ad04499c436158fd5f37ed4"><div class="ttname"><a href="contiki-conf_8h.html#a42fc7b708ad04499c436158fd5f37ed4">clock_time_t</a></div><div class="ttdeci">unsigned long clock_time_t</div><div class="ttdef"><b>Definition:</b> contiki-conf.h:58</div></div>
-<div class="ttc" id="agroup__uic__attribute__timeouts_html_gae4d44c5cca7188fd9d226b65b25d7683"><div class="ttname"><a href="group__uic__attribute__timeouts.html#gae4d44c5cca7188fd9d226b65b25d7683">attribute_timeout_set_callback</a></div><div class="ttdeci">sl_status_t attribute_timeout_set_callback(attribute_store_node_t node, clock_time_t duration, attribute_timeout_callback_t callback_function)</div><div class="ttdoc">Sets a callback to be called after a duration for an attribute.</div></div>
-<div class="ttc" id="agroup__uic__attribute__timeouts_html_ga63a383c7d992d7896de75455e73624a0"><div class="ttname"><a href="group__uic__attribute__timeouts.html#ga63a383c7d992d7896de75455e73624a0">attribute_timeouts_teardown</a></div><div class="ttdeci">int attribute_timeouts_teardown()</div><div class="ttdoc">Teardown the UIC attribute timeouts component.</div></div>
-<div class="ttc" id="agroup__sl__status_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:127</div></div>
+<div class="ttc" id="agroup__unify__attribute__timeouts_html_gac547a38d5ae010d6f094265ae35071b7"><div class="ttname"><a href="group__unify__attribute__timeouts.html#gac547a38d5ae010d6f094265ae35071b7">attribute_timeout_callback_t</a></div><div class="ttdeci">void(* attribute_timeout_callback_t)(attribute_store_node_t)</div><div class="ttdoc">Function prototype callback functions.</div><div class="ttdef"><b>Definition:</b> attribute_timeouts.h:47</div></div>
+<div class="ttc" id="agroup__unify__attribute__timeouts_html_gaac3e9c367a090a9f713b47d70a1d7ce2"><div class="ttname"><a href="group__unify__attribute__timeouts.html#gaac3e9c367a090a9f713b47d70a1d7ce2">attribute_timeouts_init</a></div><div class="ttdeci">sl_status_t attribute_timeouts_init()</div><div class="ttdoc">Initializes the UIC attribute timeouts component.</div></div>
+<div class="ttc" id="agroup__unify__attribute__timeouts_html_gaabf87d99516792615d624442789a9f64"><div class="ttname"><a href="group__unify__attribute__timeouts.html#gaabf87d99516792615d624442789a9f64">attribute_timeout_cancel_callback</a></div><div class="ttdeci">sl_status_t attribute_timeout_cancel_callback(attribute_store_node_t node, attribute_timeout_callback_t callback_function)</div><div class="ttdoc">Cancels a callback to be called after a duration for an attribute.</div></div>
+<div class="ttc" id="agecko_2contiki-conf_8h_html_a815417fbb97a3a1ec100d1d1b53b619a"><div class="ttname"><a href="gecko_2contiki-conf_8h.html#a815417fbb97a3a1ec100d1d1b53b619a">clock_time_t</a></div><div class="ttdeci">TickType_t clock_time_t</div><div class="ttdef"><b>Definition:</b> contiki-conf.h:32</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_7ae99e22e7f2630b0926b8e8347da62e.html">uic_attribute_utils</a></li><li class="navelem"><a class="el" href="dir_33d00ec0ddc6a53e379204f6ad540127.html">include</a></li><li class="navelem"><a class="el" href="attribute__timeouts_8h.html">attribute_timeouts.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:08 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

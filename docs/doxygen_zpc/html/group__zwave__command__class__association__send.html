@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Association Group transport</title>
+<title>Z-Wave Protocol Controller Refrence: Association Group transport</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -87,7 +87,7 @@ $(document).ready(function(){initNavTree('group__zwave__command__class__associat
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Association Group transport<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__command__classes.html">Z-Wave Command Classes</a> &raquo; <a class="el" href="group__association__command__class.html">Association Command Class</a></div></div>  </div>
+<div class="title">Association Group transport<div class="ingroups"><a class="el" href="group__command__classes.html">Z-Wave Command Classes</a> &raquo; <a class="el" href="group__association__command__class.html">Association Command Class</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -96,13 +96,13 @@ $(document).ready(function(){initNavTree('group__zwave__command__class__associat
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:gab9ec8a844eb91d11504d504f90722813"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__class__association__send.html#gab9ec8a844eb91d11504d504f90722813">on_group_send_complete_t</a>) (<a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> status, void *user)</td></tr>
+<tr class="memitem:gab9ec8a844eb91d11504d504f90722813"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__class__association__send.html#gab9ec8a844eb91d11504d504f90722813">on_group_send_complete_t</a>) (<a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> status, void *user)</td></tr>
 <tr class="memdesc:gab9ec8a844eb91d11504d504f90722813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function for zwave_association_send_to_group, indicating the result of the operation.  <a href="group__zwave__command__class__association__send.html#gab9ec8a844eb91d11504d504f90722813">More...</a><br /></td></tr>
 <tr class="separator:gab9ec8a844eb91d11504d504f90722813"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga054ee1c075f35fc8358669532241c29c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__class__association__send.html#ga054ee1c075f35fc8358669532241c29c">zwave_association_send_to_group</a> (<a class="el" href="group__zwave__command__class__association__internals.html#gae21b908b2b1b88902cc885a23582f399">association_group_id_t</a> group_id, uint16_t frame_size, const uint8_t *frame, bool supporting, const <a class="el" href="group__zwave__tx__interface.html#ga12c249f53157f1b461a0c534a274a72f">zwave_tx_options_t</a> *tx_options, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> excluded_node, <a class="el" href="group__zwave__command__class__association__send.html#gab9ec8a844eb91d11504d504f90722813">on_group_send_complete_t</a> <a class="el" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>, void *user)</td></tr>
+<tr class="memitem:ga054ee1c075f35fc8358669532241c29c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__command__class__association__send.html#ga054ee1c075f35fc8358669532241c29c">zwave_association_send_to_group</a> (<a class="el" href="group__zwave__command__class__association__internals.html#gae21b908b2b1b88902cc885a23582f399">association_group_id_t</a> group_id, uint16_t frame_size, const uint8_t *frame, bool supporting, const <a class="el" href="group__zwave__tx__interface.html#ga12c249f53157f1b461a0c534a274a72f">zwave_tx_options_t</a> *tx_options, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> excluded_node, <a class="el" href="group__zwave__command__class__association__send.html#gab9ec8a844eb91d11504d504f90722813">on_group_send_complete_t</a> <a class="el" href="zwave__s0__transport_8c.html#a800e1cc61a01bde0fe6d9a3eddb91b5e">callback</a>, void *user)</td></tr>
 <tr class="memdesc:ga054ee1c075f35fc8358669532241c29c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a command to an Association Group.  <a href="group__zwave__command__class__association__send.html#ga054ee1c075f35fc8358669532241c29c">More...</a><br /></td></tr>
 <tr class="separator:ga054ee1c075f35fc8358669532241c29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -118,7 +118,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* on_group_send_complete_t) (<a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> status, void *user)</td>
+          <td class="memname">typedef void(* on_group_send_complete_t) (<a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> status, void *user)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -143,7 +143,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_association_send_to_group </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_association_send_to_group </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__zwave__command__class__association__internals.html#gae21b908b2b1b88902cc885a23582f399">association_group_id_t</a>&#160;</td>
           <td class="paramname"><em>group_id</em>, </td>
@@ -175,7 +175,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>excluded_node</em>, </td>
         </tr>
         <tr>
@@ -222,7 +222,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:36 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

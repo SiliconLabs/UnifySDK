@@ -1,0 +1,12 @@
+.trace-list .icon {
+    line-height: 27px;
+    font-size: 25px;
+}
+
+td {
+    word-break: break-word;
+}
+
+.time {
+    min-width: 115px;
+}

@@ -88,7 +88,7 @@ extern "C" {
 #endif
 
 /**
- * @brief This function initialize the Multilevel Switch Command Class handler
+ * @brief This function initialize the Binary Switch Command Class handler
  *
  * @return SL_STATUS_OK on success, any other error code for an error.
  */

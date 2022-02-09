@@ -13,24 +13,27 @@ def zwASSOCIATION_GROUP_ID      0x00008503
 def zwASSOCIATION_GROUP_PROFILE 0x00005904
 
 // AGI profile value to establish the lifeline or not.
-def ESTABLISH_LIFELINE 0x0001
-def NO_LIFELINE        0xFFFF
+def ESTABLISH_ASSOCIATION 0x0000
+def ESTABLISH_LIFELINE    0x0001
+def NO_LIFELINE           0xFFFF
+
+// device fingerprint
+def powerstrip_sample_app ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x05))
 
 scope 0 {
-
-// To fingerprint this device, we match the following:
+// Simple fingerprints should be composed as a minimum of:
 // * Manufacturer ID
 // * Product Type ID
 // * Product ID
 
 r'zwASSOCIATION_GROUP_ID[1].zwASSOCIATION_GROUP_PROFILE =
-  if ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x05)) ESTABLISH_LIFELINE
+  if (powerstrip_sample_app) ESTABLISH_LIFELINE
   if ((r'zwMANUFACTURER_ID == 0x86) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x50)) ESTABLISH_LIFELINE
   undefined
 
-// Establish a lifeline for Association Group 2 of the PowerStrip sample application
+// Establish an association to Group 2 of the PowerStrip sample application
 r'zwASSOCIATION_GROUP_ID[2].zwASSOCIATION_GROUP_PROFILE =
-  if ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x05)) ESTABLISH_LIFELINE
+  if (powerstrip_sample_app) ESTABLISH_ASSOCIATION
   undefined
 
 }

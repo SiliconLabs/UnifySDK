@@ -11,6 +11,7 @@ var group__zwave__tx__groups__internal =
     [ "zwave_tx_groups", "classzwave__tx__groups.html", [
       [ "zwave_tx_groups", "classzwave__tx__groups.html#a9c4d04e5ea110a31132ccd28115061d0", null ],
       [ "~zwave_tx_groups", "classzwave__tx__groups.html#a5e2adff10d91086015f836ad0aaa8cbd", null ],
+      [ "add_node_to_group", "classzwave__tx__groups.html#a75516224eeb16124c6e35f3defb2378c", null ],
       [ "analyze_group_suitability", "classzwave__tx__groups.html#ab6c0e63d475a0b9e4922bb5c3bc1937e", null ],
       [ "assign_group", "classzwave__tx__groups.html#a3aa6e7cc39d3d07e2c4f835fee103ff7", null ],
       [ "create_or_update_group", "classzwave__tx__groups.html#a2b7f118a3722c3b847b449b701fac3ca", null ],

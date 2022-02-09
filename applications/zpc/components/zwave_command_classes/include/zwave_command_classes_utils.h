@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -17,20 +17,21 @@
 // Generic includes
 #include <stdbool.h>
 
-// Includes from other components
+// UIC includes
 #include "sl_status.h"
 #include "zwave_controller_connection_info.h"
+#include "zwave_generic_types.h"
 #include "attribute_store.h"
+#include "zwave_utils.h"
+
+// ZPC includes
+#include "zwave_controller_connection_info.h"
+
+// Interfaces
+#include "zwave_generic_types.h"
 
 // Contiki timing includes
 #include "clock.h"
-
-/**
- * @defgroup command_classes Z-Wave Command Classes
- * @ingroup components
- * @brief List of supported and controlled Z-Wave Command Classes
- *
- */
 
 /**
  * @defgroup command_classes_utils Command Classes utils

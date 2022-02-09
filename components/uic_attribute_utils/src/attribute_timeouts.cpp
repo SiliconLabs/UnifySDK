@@ -19,7 +19,7 @@
 // Contiki
 #include "ctimer.h"
 
-// Generic incldues
+// Generic includes
 #include <map>
 #include <vector>
 
@@ -28,8 +28,7 @@ constexpr char LOG_TAG[] = "attribute_timeouts";
 // Private functions prototypes
 static void attribute_timeout_restart_watch_timer();
 static void attribute_timeout_invoke_timeout_functions(void *user);
-static void on_attribute_node_deleted(attribute_store_node_t node,
-                                      attribute_store_change_t change);
+static void on_attribute_node_deleted(attribute_changed_event *event);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Local definitions
@@ -57,15 +56,17 @@ static struct ctimer watch_timer;
 static void attribute_timeout_restart_watch_timer()
 {
   // Find out among all timeouts, who is next to "expire"
-  clock_time_t next_timeout = 0;
-  clock_time_t now          = clock_time();
+  clock_time_t next_timeout                  = 0;
+  clock_time_t now                           = clock_time();
+  attribute_store_node_t next_node_to_expire = ATTRIBUTE_STORE_INVALID_NODE;
 
   // Go through all the nodes pending a Get Command response
   for (auto item: attribute_timeouts) {
     clock_time_t timeout = item.second.timestamp;
 
     if ((timeout > now) && ((next_timeout == 0) || (timeout < next_timeout))) {
-      next_timeout = timeout;
+      next_timeout        = timeout;
+      next_node_to_expire = item.first;
     }
   }
 
@@ -77,9 +78,11 @@ static void attribute_timeout_restart_watch_timer()
                &attribute_timeout_invoke_timeout_functions,
                nullptr);
 
-    sl_log_debug(LOG_TAG,
-                 "(Re-)Started attribute watch timer for %u ms",
-                 time_until_new_timeout);
+    sl_log_debug(
+      LOG_TAG,
+      "(Re-)Started attribute watch timer for %u ms. Next node to expire: %d",
+      time_until_new_timeout,
+      next_node_to_expire);
   }
 }
 
@@ -119,16 +122,17 @@ static void attribute_timeout_invoke_timeout_functions(void *user)
   attribute_timeout_restart_watch_timer();
 }
 
-static void on_attribute_node_deleted(attribute_store_node_t node,
-                                      attribute_store_change_t change)
+static void on_attribute_node_deleted(attribute_changed_event *event)
 {
-  if (change != ATTRIBUTE_DELETED) {
+  if (event->change != ATTRIBUTE_DELETED) {
     return;
   }
-  // Cancel all the callbacks for that node.
-  attribute_timeouts.erase(node);
-  // Check if that affects our timer:
-  attribute_timeout_restart_watch_timer();
+  // Cancel all the callbacks for that node, if we had any.
+  if (attribute_timeouts.count(event->updated_node)) {
+    attribute_timeouts.erase(event->updated_node);
+    // Check if that affects our timer:
+    attribute_timeout_restart_watch_timer();
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['sl_5flog_5flevel_4823',['sl_log_level',['../group__sl__log.html#gaf7788b8693561747f76339f6537ff8ab',1,'sl_log.h']]],
-  ['status_5ft_4824',['status_t',['../namespaceuic__ota.html#a15a593e80817e9c52f1d5dc96871921b',1,'uic_ota']]]
+  ['topic_5ftype_5ft_4082',['topic_type_t',['../namespacezigpc__ucl_1_1mqtt.html#a0ae3f2434936eef3e9855e9437c03292',1,'zigpc_ucl::mqtt']]]
 ];

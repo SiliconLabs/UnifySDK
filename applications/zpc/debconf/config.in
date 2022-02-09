@@ -9,19 +9,46 @@ UIC_CONFFILE=$UIC_CONFDIR/uic.cfg
 
 
 if [ -e $UIC_CONFFILE ]; then
-    # Replace : With =", append " to each line, Remove all spaces,
-    # Remove lines having "", Remove line who do not match "serial|rf_region|file"
-    sed -e 's/:/="/g;s/$/"/g;s/ //g;/""/d;/^\(serial\|rf_region\|file\)/!d' $UIC_CONFFILE > $UIC_CONFFILE.sh
+  while IFS= read line #Read IFS https://en.wikipedia.org/wiki/Input_Field_Separators
+  do
+    # Set the state depending on the line read from the config file
+    case "$line" in
+      "zpc:" )   # State: zpc
+        state="zpc"
+        ;;
+      " "* | "-"* )   # Lines starting with '-' or ' ' don't trigger state change.
+        # Do nothing.
+        ;;
+      *) state="" ;;    # Set state to empty, Any unknown text, that doesn't begin with '-' or ' '
+    esac
+    # STM to update entries under 'zpc:'
+    case $state in
+      "zpc" )
+        case "$line" in
+        *"serial:"* | *"rf_region:"* | *"datastore_file:"*)
+          echo "$line" ;;
+        *)
+          ;;                 # Anything else inside zpc we skip 
+        esac ;;
+      *)
+        ;;
+    esac
+  done < "$UIC_CONFFILE" > "$UIC_CONFFILE.sh.tmp"
 
-    cat $UIC_CONFFILE.sh
+  # Replace : With =", append " to each line, Remove all spaces,
+  # Remove - in the beginning of the line
+  # Remove lines having "",
+  sed -e 's/:/="/g;s/$/"/g;s/ //g;s/^-//g;/""/d' $UIC_CONFFILE.sh.tmp > $UIC_CONFFILE.sh
 
-    #Source the file to set $serial, $rf_region and $file
-    . $UIC_CONFFILE.sh || true
+  cat $UIC_CONFFILE.sh
+  #Source the file to set $serial, $rf_region and $file
+  . $UIC_CONFFILE.sh || true
+  rm $UIC_CONFFILE.sh $UIC_CONFFILE.sh.tmp
 
-    #Preload debconf with what was in the conf file
-    db_set uic-zpc/serial_port "$serial" 
-    db_set uic-zpc/region "$rf_region"
-    db_set uic-zpc/datastore_file "$file" 
+  #Preload debconf with what was in the conf file
+  db_set uic-zpc/serial_port "$serial"
+  db_set uic-zpc/region "$rf_region"
+  db_set uic-zpc/datastore_file "$file"
 fi
 
 

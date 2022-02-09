@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -27,8 +27,7 @@
 #include <string>
 
 /**
- * @file zwave_command_handler_internals.h
- * @addtogroup zwave_command_handler_internals Internal definitions for the Z-Wave Command Handler
+ * @defgroup zwave_command_handler_internals Internal definitions for the Z-Wave Command Handler
  * @ingroup zwave_command_handler
  * @brief Shared internal functions and variables for the Z-Wave Command Handler.
  *  *

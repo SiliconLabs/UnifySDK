@@ -1,0 +1,42 @@
+#!/bin/sh
+# postinst script for uic_gms
+#
+# see: dh_installdeb(1)
+
+set -e
+UIC_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/"
+
+setup_uic_user() {
+        if ! getent group uic >/dev/null; then
+                addgroup --quiet --system uic
+        fi
+
+        if ! getent passwd uic >/dev/null; then
+                adduser --quiet --system --no-create-home --ingroup uic --home "$UIC_VAR_DIR" --shell /usr/sbin/nologin uic
+                usermod -a -G dialout uic
+        fi
+}
+
+fix_permissions() {
+        mkdir -p $UIC_VAR_DIR
+        chown uic $UIC_VAR_DIR
+}
+
+case "$1" in
+        configure)
+                setup_uic_user
+                fix_permissions
+        ;;
+
+        abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+        *)
+                echo "postinst called with unknown argument \`$1'" >&2
+                exit 1
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

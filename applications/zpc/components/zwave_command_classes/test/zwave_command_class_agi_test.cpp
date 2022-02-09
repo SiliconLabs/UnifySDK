@@ -72,10 +72,6 @@ void suiteSetUp()
   datastore_init(":memory:");
   attribute_store_init();
   zwave_unid_set_home_id(home_id);
-  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
-  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
-  attribute_resolver_register_rule_IgnoreAndReturn(SL_STATUS_OK);
-  attribute_resolver_register_rule_Stub(&attribute_resolver_register_rule_stub);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -104,6 +100,10 @@ static sl_status_t zwave_command_handler_register_handler_stub(
 /// Called before each and every test
 void setUp()
 {
+  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
+  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
+  attribute_resolver_register_rule_IgnoreAndReturn(SL_STATUS_OK);
+  attribute_resolver_register_rule_Stub(&attribute_resolver_register_rule_stub);
   zpc_attribute_store_test_helper_create_network();
   // Handler registration
   zwave_command_handler_register_handler_Stub(
@@ -656,5 +656,48 @@ void test_zwave_command_class_agi_handle_group_command_list_get()
   zwave_tx_send_data_IgnoreArg_session();
   zwave_tx_send_data_IgnoreArg_connection();
   agi_handler.support_handler(&connection, get_frame, sizeof(get_frame));
+}
+
+void test_zwave_command_class_agi_register_listeners()
+{
+  // Should all be false when nothing is in the attribute store
+  TEST_ASSERT_FALSE(
+    zwave_command_class_agi_group_contains_listeners(node_id, endpoint_id, 3));
+
+  // We want to get information about these groups:
+  zwave_command_class_agi_request_to_establish_association(0x01, 0x03);
+  zwave_command_class_agi_request_to_establish_association(0xFECA, 0x02);
+
+  attribute_store_node_t group_id_node
+    = attribute_store_add_node(ATTRIBUTE(GROUP_ID), endpoint_id_node);
+  association_group_id_t group_id = 3;
+  attribute_store_set_reported(group_id_node, &group_id, sizeof(group_id));
+
+  uint8_t group_command_list[] = {1, 2, 1, 4, 1, 5, 0xFE, 0xCB, 2, 1, 6};
+  attribute_store_node_t group_command_list_node
+    = attribute_store_get_node_child_by_type(group_id_node,
+                                             ATTRIBUTE(GROUP_COMMAND_LIST),
+                                             0);
+  attribute_store_set_reported(group_command_list_node,
+                               group_command_list,
+                               sizeof(group_command_list));
+
+  TEST_ASSERT_FALSE(
+    zwave_command_class_agi_group_contains_listeners(node_id, endpoint_id, 3));
+
+  group_command_list[10] = 3;  // Last pair becomes 1/3, which we listen to
+  attribute_store_set_reported(group_command_list_node,
+                               group_command_list,
+                               sizeof(group_command_list));
+  TEST_ASSERT_TRUE(
+    zwave_command_class_agi_group_contains_listeners(node_id, endpoint_id, 3));
+
+  group_command_list[10] = 6;     // Last pair becomes 1/6, not matching
+  group_command_list[7]  = 0xCA;  // penultimate pair becomes 0xFECB/2, matching
+  attribute_store_set_reported(group_command_list_node,
+                               group_command_list,
+                               sizeof(group_command_list));
+  TEST_ASSERT_TRUE(
+    zwave_command_class_agi_group_contains_listeners(node_id, endpoint_id, 3));
 }
 }

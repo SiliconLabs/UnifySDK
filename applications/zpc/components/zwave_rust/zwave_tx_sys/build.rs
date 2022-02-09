@@ -1,0 +1,7 @@
+fn main() {
+    // these exports are only used when an exe is compiled. e.g. integration
+    // tests or final binaries!
+    println!("cargo:rustc-link-lib=dylib=zwave");
+    println!("cargo:rustc-link-lib=dylib=uic_contiki");
+    println!("cargo:rustc-link-lib=dylib=uic_contiki_platform");
+}

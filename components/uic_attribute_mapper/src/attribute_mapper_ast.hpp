@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,8 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file attribute_mapper_ast.hpp
- * @brief Attribute mapper ast
+ * @defgroup attribute_mapper_ast Abstract Syntax Tree
+ * @ingroup unify_attribute_mapper
+ * @brief Attribute Mapper Abstract Syntax Tree
  *
  * The datastructures defined below are all the structures which makes up
  * the atttribute mapping ast. All UAM files are parsed into theese
@@ -75,7 +76,7 @@ enum operator_ids {
  * holds the data of one of the operand types together with information
  * about which type the objects actually is.
  */
-using operand = x3::variant<nil,
+using operand = x3::variant<ast::nil,
                             unsigned int,
                             x3::forward_ast<attribute>,
                             x3::forward_ast<signed_>,
@@ -88,8 +89,8 @@ using operand = x3::variant<nil,
  * an operand ( like a integer constant ) or a subscript ( 1234[4] )
  *
  */
-using attribute_path_element
-  = boost::variant<ast::operand, unsigned int, attribute_path_subscript>;
+using attribute_path_element = boost::
+  variant<ast::nil, ast::operand, unsigned int, attribute_path_subscript>;
 
 /**
  * @brief Uniary sigend operand

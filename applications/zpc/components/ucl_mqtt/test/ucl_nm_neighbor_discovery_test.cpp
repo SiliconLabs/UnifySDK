@@ -30,6 +30,11 @@ int suiteTearDown(int num_failures)
   return num_failures;
 }
 
+void tearDown()
+{
+  nm_neighbor_discovery_callbacks->on_request_neighbor_update(3);
+}
+
 /// Called before each and every test
 void setUp()
 {
@@ -58,20 +63,20 @@ void test_ucl_nm_trigger_node_neighbor_update()
   zwave_network_management_request_node_neighbor_discovery_ExpectAndReturn(
     node_id_test,
     SL_STATUS_OK);
-  get_protocol_ExpectAndReturn(node_id_test, PROTOCOL_ZWAVE);
+  zwave_get_inclusion_protocol_ExpectAndReturn(node_id_test, PROTOCOL_ZWAVE);
   ucl_nm_trigger_node_neighbor_update(node_id_test);
 }
 
 void test_ucl_nm_trigger_node_neighbor_update_with_cb_trigger()
 {
-  zwave_node_id_t node_id_test   = 0x33;
-  zwave_node_id_t node_id_test_2 = 0x33;
+  zwave_node_id_t node_id_test   = 0x12;
+  zwave_node_id_t node_id_test_2 = 0x34;
   zwave_network_management_get_state_ExpectAndReturn(NM_WAITING_FOR_ADD);
-  get_protocol_ExpectAndReturn(node_id_test, PROTOCOL_ZWAVE);
+  zwave_get_inclusion_protocol_ExpectAndReturn(node_id_test, PROTOCOL_ZWAVE);
   ucl_nm_trigger_node_neighbor_update(node_id_test);
 
   zwave_network_management_get_state_ExpectAndReturn(NM_WAITING_FOR_ADD);
-  get_protocol_ExpectAndReturn(node_id_test_2, PROTOCOL_ZWAVE);
+  zwave_get_inclusion_protocol_ExpectAndReturn(node_id_test_2, PROTOCOL_ZWAVE);
   ucl_nm_trigger_node_neighbor_update(node_id_test_2);
 
   zwave_network_management_request_node_neighbor_discovery_ExpectAndReturn(
@@ -89,7 +94,8 @@ void test_ucl_nm_trigger_node_neighbor_update_with_cb_trigger()
 void test_ucl_nm_trigger_node_neighbor_update_long_range_node()
 {
   zwave_node_id_t node_id_test = 0x100;
-  get_protocol_ExpectAndReturn(node_id_test, PROTOCOL_ZWAVE_LONG_RANGE);
+  zwave_get_inclusion_protocol_ExpectAndReturn(node_id_test,
+                                               PROTOCOL_ZWAVE_LONG_RANGE);
   ucl_nm_trigger_node_neighbor_update(node_id_test);
 }
 }

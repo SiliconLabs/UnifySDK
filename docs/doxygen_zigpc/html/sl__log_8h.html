@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -99,6 +99,8 @@ $(document).ready(function(){initNavTree('sl__log_8h.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ga77ee21add654ae817f039ca9ffce84fd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sl__log.html#ga77ee21add654ae817f039ca9ffce84fd">sl_log_byte_arr</a>(tag,  lvl,  _arr,  _arr_len)</td></tr>
+<tr class="separator:ga77ee21add654ae817f039ca9ffce84fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa51d463a602f2a4d6d50df2860c47469"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sl__log.html#gaa51d463a602f2a4d6d50df2860c47469">COLOR_START</a>&#160;&#160;&#160;&quot;\033[32;1m&quot;</td></tr>
 <tr class="separator:gaa51d463a602f2a4d6d50df2860c47469"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0ef5fd78a051792b1a266b5ed90481c7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sl__log.html#ga0ef5fd78a051792b1a266b5ed90481c7">COLOR_END</a>&#160;&#160;&#160;&quot;\033[0m&quot;</td></tr>
@@ -113,8 +115,6 @@ Macros</h2></td></tr>
 <tr class="separator:ga9f10c1dd2f7a05a8ccba92b0c1ce9dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3f62e87ad64f94f78f10cbbce654d039"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sl__log.html#ga3f62e87ad64f94f78f10cbbce654d039">sl_log_critical</a>(tag,  fmtstr, ...)&#160;&#160;&#160;  <a class="el" href="group__sl__log.html#ga71d4ca2794003b2b1f6d1fc371cf99b6">sl_log</a>(tag, <a class="el" href="group__sl__log.html#ggaf7788b8693561747f76339f6537ff8aba66b9e4aabb177ed4bf5ac6371e84d58d">SL_LOG_CRITICAL</a>, fmtstr, ##__VA_ARGS__)</td></tr>
 <tr class="separator:ga3f62e87ad64f94f78f10cbbce654d039"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga77ee21add654ae817f039ca9ffce84fd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sl__log.html#ga77ee21add654ae817f039ca9ffce84fd">sl_log_byte_arr</a>(tag,  lvl,  _arr,  _arr_len)</td></tr>
-<tr class="separator:ga77ee21add654ae817f039ca9ffce84fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -147,7 +147,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga2da1655973f247ca7995f7c6519bfdfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sl__log.html#ga2da1655973f247ca7995f7c6519bfdfd">sl_log_unset_tag_level</a> (const char *tag)</td></tr>
 <tr class="memdesc:ga2da1655973f247ca7995f7c6519bfdfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove tag specific log level for tag.  <a href="group__sl__log.html#ga2da1655973f247ca7995f7c6519bfdfd">More...</a><br /></td></tr>
 <tr class="separator:ga2da1655973f247ca7995f7c6519bfdfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga06a96e2c5770ed84e8958eaa08152dde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sl__log.html#ga06a96e2c5770ed84e8958eaa08152dde">sl_log_level_from_string</a> (const char *level, <a class="el" href="group__sl__log.html#gacd69524374ffb27db69ca4d5ed0e6851">sl_log_level_t</a> *result)</td></tr>
+<tr class="memitem:ga06a96e2c5770ed84e8958eaa08152dde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sl__log.html#ga06a96e2c5770ed84e8958eaa08152dde">sl_log_level_from_string</a> (const char *level, <a class="el" href="group__sl__log.html#gacd69524374ffb27db69ca4d5ed0e6851">sl_log_level_t</a> *result)</td></tr>
 <tr class="memdesc:ga06a96e2c5770ed84e8958eaa08152dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert sl_log_level as string to sl_log_level_t.  <a href="group__sl__log.html#ga06a96e2c5770ed84e8958eaa08152dde">More...</a><br /></td></tr>
 <tr class="separator:ga06a96e2c5770ed84e8958eaa08152dde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga91bfcc3c4d2cd80b49b0de6baa727a96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sl__log.html#ga91bfcc3c4d2cd80b49b0de6baa727a96">sl_log_read_config</a> ()</td></tr>
@@ -163,7 +163,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_5f2c90d192337826b3478703dff57157.html">uic_log</a></li><li class="navelem"><a class="el" href="dir_177062261e4484979082bb11a57758ef.html">include</a></li><li class="navelem"><a class="el" href="sl__log_8h.html">sl_log.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:16 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

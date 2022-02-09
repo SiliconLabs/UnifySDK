@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -13,10 +13,10 @@
 
 /**
  * @defgroup ZWAVE_API_DEMO Z-Wave API Demo
- * @ingroup APPLICATIONS 
+ * @ingroup zpc_applications
  * @brief Small application showcasing how to use the Z-Wave API.
  *
- * This small application connects to the Z-Wave Module, initializes it and 
+ * This small application connects to the Z-Wave Module, initializes it and
  * offers the possibility for a user to enter commands that will invoke
  * well-known Z-Wave API calls, such as add nodes, remove nodes, etc.
  */
@@ -37,7 +37,6 @@
 #include "command_line_input.h"
 #include "zwave_api_demo_callbacks.h"
 #include "zwave_api_demo_commands.h"
-#include "zwave_utils.h"
 #include "sl_status.h"
 #include "sl_log.h"
 

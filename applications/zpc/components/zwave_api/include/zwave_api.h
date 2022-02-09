@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -20,9 +20,9 @@
 #define ZWAVE_API_H
 
 /**
- * @defgroup ZWAPI Z-Wave API
+ * @defgroup zwave_api Z-Wave API
+ * @ingroup zwave_controller
  * @brief Access to the serial API of a Z-Wave module
- * @ingroup components
  *
  * The Z-Wave API is a set of interface functions and supporting datatypes used
  * to access the serial API of an attached Z-Wave module.
@@ -43,4 +43,10 @@
 #include "zwapi_protocol_nvm.h"
 #include "zwapi_protocol_transport.h"
 
+/**
+* @page zgw_namemap Legacy Z/IP Gateway Serial-API Names
+* @ingroup zwave_api
+* @brief Mapping between the names used in the Z/IP codebase versus the ZPC Z-Wave API
+*       names.
+*/
 #endif  // ZWAVE_API_H

@@ -16,6 +16,7 @@
 #include "attribute_transitions.h"
 #include "attribute_timeouts.h"
 #include "attribute_mapper.h"
+#include "attribute_poll.h"
 #include "datastore_fixt.h"
 #include "dotdot_mqtt_topics_handler.h"
 #include "dotdot_mapper_fixt.h"
@@ -37,7 +38,12 @@
 #include "zcl_cluster_servers.h"
 #include "zpc_dotdot_mqtt.h"
 #include "zpc_datastore_fixt.h"
-
+#include "zwave_rust_handlers.h"
+#include "request_poller.h"
+#include "zpc_attribute_store_attr_type_name_helper.h"
+#include "zpc_ncp_update_fixt.h"
+#include "rust_contiki_fixt.h"
+#include "rust_attribute_store.h"
 
 // Z-Wave Command Classes
 #include "zwave_command_classes_fixt.h"
@@ -45,10 +51,10 @@
 static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
   /** Initialize zpc_config. NB: This shall be first in the setup fixtures list */
   {&zpc_config_fixt_setup, "ZPC Config"},
+  {&zpc_ncp_update_fixt_setup, "ZPC NCP update"},
   /** Initialize data store.  The data-store component depends on the
    * configuration component for file locations. */
   {&zpc_datastore_fixt_setup, "Datastore"},
-
   /** Connect to the Z-Wave API interface and start up the RX part.
    * The Z-Wave API depends on the configuration component. */
   {&zwave_rx_fixt_setup, "Z-Wave RX"},
@@ -60,11 +66,21 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
   /** Start Z-Wave S2 */
   {&zwave_s2_fixt_setup, "Z-Wave S2"},
 
+  {&initialize_request_poller_process, "Rust task executor"},
+
+  /** Initializes all Z-Wave transports */
+  {&zwave_transports_init, "Z-Wave Transports"},
+
   /**
    * Initialize the attribute store library.
    * Z-Wave RX, TX and the datastore shall be initialized first.
    */
   {&attribute_store_init, "Attribute store"},
+  /**
+   * Initialize the rust attribute store library. need to be called
+   * post attribute_store_init
+   */
+  {&rust_attribute_store_init, "Rust attribute store"},
 
   /**
    * Initializes the attribute transitions functionality.
@@ -84,6 +100,19 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
    * in order to get proper paused/enabled resolution right after init.
    */
   {&zpc_attribute_resolver_init, "ZPC attribute resolver"},
+
+  /**
+   * Initialize the Attribute Poll Engine, this shall be initialized before
+   * registering any attributes for polling.
+   */
+  {&attribute_poll_init, "Attribute Poll Engine"},
+
+  /**
+   * Initialize the module to register all attribute used by the zpc and 
+   * enable the APIs to convert the attribute type name to attribute type id.
+   */
+  {&zpc_attribute_store_attr_type_name_helper_init,
+   "ZPC Attribute type name to id convertor"},
 
   /**
    * Network monitor starts, sets our UNID to zwave_unid
@@ -107,33 +136,33 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
   {&dotdot_mapper_init, "DotDot mapper"},
 
   /**
-   * Initialize DotDot MQTT hanlder that serializer and deserializer
+   * Initialize ZCL Cluster servers (simulated clusters
+   * that the ZPC serves on behalf of the nodes)
+   */
+  {&zcl_cluster_servers_init, "ZCL Cluster servers"},
+
+  /**
+   * UCL MQTT initialize all ucl mqtt handlers.
+   */
+  {&ucl_mqtt_setup_fixt, "UCL MQTT"},
+
+  /**
+   * Initialize DotDot MQTT handler that serializes and deserializes
    * dotdot messages.
    * All components registering callbacks to MQTT MUST be initialized before
    * this component.
    */
   {&uic_mqtt_dotdot_init, "DotDot MQTT"},
 
-  /**
-   * Initialize ZCL Cluster servers (simulated clusters
-   * that the ZPC serves on behalf of the nodes)
-   */
-  {&zcl_cluster_servers_init, "ZCL Cluster servers"},
-
-  /** Initializes all Z-Wave transport (Encapsulation CCs)*/
-  {&zwave_transports_init, "Z-Wave Transports"},
-
   /** Initializes all supported / controlled CCs */
+  {&zwave_command_class_init_rust_handlers, "Z-Wave Rust Command Classes"},
   {&zwave_command_classes_init, "Z-Wave Command Classes"},
 
   /** Initialize the Z-Wave Command handler framework after the Command Classes */
   {&zwave_command_handler_init, "Z-Wave Command Handler framework"},
 
   {&zwave_smartstart_management_setup_fixt, "Z-Wave SmartStart Management"},
-  /**
-   * UCL MQTT initialize all ucl mqtt handlers.
-   */
-  {&ucl_mqtt_setup_fixt, "UCL MQTT"},
+
   {&zpc_stdin_setup_fixt, "ZPC Stdin"},
   {&attribute_mapper_init, "Attribute Mapper"},
 
@@ -144,6 +173,7 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
    * It should be initialized last.
    */
   {&zpc_attribute_store_init, "ZPC Attribute Store"},
+
   {NULL, "Terminator"}};
 
 /** Final tear-down steps.
@@ -163,6 +193,7 @@ static uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[] = {
   {&zwave_rx_fixt_teardown, "Z-Wave RX"},
   {&attribute_transitions_teardown, "Attribute transitions"},
   {&attribute_timeouts_teardown, "Attribute timeouts"},
+  {&rust_contiki_teardown, "Rust Mainloop"},
   {&attribute_store_teardown, "Attribute store"},
   {&datastore_fixt_teardown, "Datastore"},
   {&dotdot_mapper_teardown, "DotDot mapper"},

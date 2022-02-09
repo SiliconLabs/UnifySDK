@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["config_status_t",""]],"fn":[["config_add_bool",""],["config_add_double",""],["config_add_int",""],["config_add_string",""],["config_get_as_bool",""],["config_get_as_double",""],["config_get_as_int",""],["config_get_as_string",""],["config_parse",""],["config_reset",""]]});

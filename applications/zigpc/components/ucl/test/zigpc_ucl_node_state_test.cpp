@@ -19,10 +19,10 @@ extern "C" {
 #include <sl_status.h>
 
 // Shared includes
-#include <uic_mqtt_mock.h>
+#include "uic_mqtt_mock.h"
 
 // ZigPC includes
-#include <zigpc_datastore_mock.h>
+#include "zigpc_datastore_mock.h"
 
 /**
  * @brief Setup the test suite (called once before all test_xxx functions are called)
@@ -96,6 +96,21 @@ void test_node_state_on_device_update_functional_nwk_status(void)
     = zigpc_ucl::node_state::publish_state(eui64,
                                            eui64_state.network_status,
                                            eui64_state.max_cmd_delay);
+
+  // ASSERT
+  TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);
+}
+
+void test_remove_node_topics_sanity(void)
+{
+  zigbee_eui64_uint_t eui64 = 0xA0B3CCDDEE00112A;
+  char unretain_pattern[]   = "ucl/by-unid/zb-A0B3CCDDEE00112A";
+
+  // ARRANGE
+  uic_mqtt_unretain_Expect(unretain_pattern);
+
+  // ACT
+  sl_status_t status = zigpc_ucl::node_state::remove_node_topics(eui64);
 
   // ASSERT
   TEST_ASSERT_EQUAL_HEX(SL_STATUS_OK, status);

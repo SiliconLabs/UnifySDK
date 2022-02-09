@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -24,7 +24,6 @@
 #include <stdbool.h>
 #include "sl_status.h"
 #include "zwapi_protocol_basis.h"
-#include "zwave_utils.h"
 #include "zwave_rf_region.h"
 #ifdef __cplusplus
 extern "C" {
@@ -32,7 +31,7 @@ extern "C" {
 
 /**
  * @defgroup ZWAPI_INIT Initialization
- * @ingroup ZWAPI
+ * @ingroup zwave_api
  * @brief Initialization of the Z-Wave API
  *
  * This module contains functions to both initialize and shut down the Z-Wave
@@ -272,7 +271,7 @@ typedef struct zwapi_callbacks {
  * @param serial_port is the name of the serial port to use (on Linux i.e.,
  * "/dev/ttyS1")
  * @param serial_fd pointer where the serial file descriptor will be written
- * @param callbacks is a callback function to be used by the \ref ZWAPI.
+ * @param callbacks is a callback function to be used by the @ref zwave_api.
  * @returns \ref SL_STATUS_OK if all initialization was successfully completed. It
  * includes initializing the Z-Wave module serial port, reading the module's
  * capabilities and its version. \ref SL_STATUS_FAIL otherwise

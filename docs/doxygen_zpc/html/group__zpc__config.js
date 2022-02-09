@@ -3,6 +3,7 @@ var group__zpc__config =
     [ "ZPC Config Fixture", "group__zpc__config__fixture.html", "group__zpc__config__fixture" ],
     [ "zpc_config_t", "structzpc__config__t.html", [
       [ "accepted_transmit_failure", "structzpc__config__t.html#a030046f92542ed8f1a67a75d394d6a58", null ],
+      [ "datastore_file", "structzpc__config__t.html#acb143e191b9ce0cd03ab28a935bb19c4", null ],
       [ "default_wake_up_interval", "structzpc__config__t.html#a8b2694e05ab926f7d851d2cf8166dbea", null ],
       [ "device_id", "structzpc__config__t.html#a770ac4f68d187c809e9b018f8af46e51", null ],
       [ "hardware_version", "structzpc__config__t.html#adae03697815a4218fcb34de520452e8c", null ],
@@ -16,6 +17,8 @@ var group__zpc__config =
       [ "mqtt_host", "structzpc__config__t.html#a00271d0eca332dc0d61e97ec5f8812ee", null ],
       [ "mqtt_keyfile", "structzpc__config__t.html#a08e9236cfa3a09b52c11188daac5bff2", null ],
       [ "mqtt_port", "structzpc__config__t.html#a3fbafaf0ac13e3415ef01cc3a99fda08", null ],
+      [ "ncp_update_filename", "structzpc__config__t.html#a88354b91b593face91e5356cd49c4e74", null ],
+      [ "ncp_version", "structzpc__config__t.html#a256cb757315aaa7cee48d6cde5f9603e", null ],
       [ "ota_cache_path", "structzpc__config__t.html#aba8952dbe65fded21c213365334c0e50", null ],
       [ "ota_cache_size", "structzpc__config__t.html#a40a3bcf5eba3790d2e6738d50d8cb0ad", null ],
       [ "product_id", "structzpc__config__t.html#a6b52354f0699d07d8c890ca9e0c19963", null ],
@@ -26,6 +29,8 @@ var group__zpc__config =
       [ "zwave_normal_tx_power_dbm", "structzpc__config__t.html#a8a461c5ea918036482de96bde79b30f9", null ],
       [ "zwave_rf_region", "structzpc__config__t.html#afc6e06c70499276d7392f8fd04caa61d", null ]
     ] ],
+    [ "CONFIG_KEY_ZPC_DATASTORE_FILE", "group__zpc__config.html#ga04caccc0cfc5449f4de780ad611a6011", null ],
+    [ "DEFAULT_ZPC_DATASTORE_FILE", "group__zpc__config.html#gaa2a11132bf4ca146ee661d3fdbe48b29", null ],
     [ "ZWAVE_CONFIG_REPRESENTATION", "group__zpc__config.html#gabe1ca0d90fd1a527e8fe90ece9b8b00e", null ],
     [ "ZWAVE_LONG_RANGE_CONFIG_REPRESENTATION", "group__zpc__config.html#ga35beb0a78565959e7e90fb04ec52f82a", null ],
     [ "zpc_config_init", "group__zpc__config.html#ga23352eeb4775cdf2d732da8436a29d35", null ],

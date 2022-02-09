@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,9 +12,8 @@
  *****************************************************************************/
 
 /**
- * @file zpc_config.h
- * @addtogroup zpc_config Configuration Extension
- * @ingroup components
+ * @defgroup zpc_config ZPC Configuration Extension
+ * @ingroup zpc_components
  *
  * @brief Add the ZPC-specific fixtures to the Unify \ref config system.
  *
@@ -30,7 +29,11 @@
 #if !defined(ZPC_CONFIG_H)
 #define ZPC_CONFIG_H
 
+// Generic includes
 #include <stdint.h>
+#include <stdbool.h>
+// Unify includes
+#include "uic_version.h"
 
 // Inclusion protocol preference values
 /// Z-Wave
@@ -38,25 +41,36 @@
 /// Z-Wave Long Range
 #define ZWAVE_LONG_RANGE_CONFIG_REPRESENTATION "2"
 
+// Default setting for the zpc.datastore_file.
+#define DEFAULT_ZPC_DATASTORE_FILE UIC_VAR_DIR "/zpc.db"
+// Config key for the ZPC datastore file
+#define CONFIG_KEY_ZPC_DATASTORE_FILE "zpc.datastore_file"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 typedef struct {
-  const char *mqtt_host;  ///< Hostname of the MQTT broker;
-  const char *
-    mqtt_cafile;  ///< path to a file containing the PEM encoded trusted CA certificate files.
-  const char *
-    mqtt_certfile;  ///< path to a file containing the PEM encoded certificate file for this client.
-  const char *
-    mqtt_keyfile;  /// < path to a file containing the PEM encoded unencrypted private key for this client.
-  const char *
-    mqtt_client_id;  ///< Client ID for MQTT Client for TLS Authentication and encryption
-  const char *
-    mqtt_client_psk;  ///< Pre shared Key for MQTT Client for TLS Authentication and encryption
-  int mqtt_port;            ///< port of the MQTT broker
-  const char *serial_port;  ///< Name of the serial port of the Z-Wave module
-  const char *serial_log_file;  ///< If set the Serial log will be written here
+  /// Hostname of the MQTT broker
+  const char *mqtt_host;
+  /// Path to a file containing the PEM encoded trusted CA certificate files.
+  const char *mqtt_cafile;
+  /// Path to a file containing the PEM encoded certificate file for this client.
+  const char *mqtt_certfile;
+  /// Path to a file containing the PEM encoded unencrypted private key for this client.
+  const char *mqtt_keyfile;
+  /// Client ID for MQTT Client for TLS Authentication and encryption
+  const char *mqtt_client_id;
+  /// Pre shared Key for MQTT Client for TLS Authentication and encryption
+  const char *mqtt_client_psk;
+  /// Port of the MQTT broker
+  int mqtt_port;
+  /// File name for persistent storage
+  const char *datastore_file;
+  /// Name of the serial port of the Z-Wave module
+  const char *serial_port;
+  /// If set the Serial log will be written here
+  const char *serial_log_file;
   /// Z-Wave RF Region setting. It can be one of the following:
   // "EU", "US","ANZ", HK", "IN", "IL", "RU", "CN", "JP", "KR"
   const char *zwave_rf_region;
@@ -83,6 +97,11 @@ typedef struct {
   const char *ota_cache_path;
   ///< OTA cache size in kb
   int ota_cache_size;
+
+  ///< Should we return the NCP version and exit?
+  bool ncp_version;
+  /// If not zero length we should flash the NCP firmware and exit
+  const char *ncp_update_filename;
 } zpc_config_t;
 
 /**

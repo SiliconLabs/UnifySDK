@@ -1,0 +1,13 @@
+[Unit]
+Description=Unified IoT Group Manager
+After=network.target mosquitto.service
+
+[Service]
+ExecStart=/usr/bin/uic-gms
+Restart=on-failure
+KillMode=process
+User=uic
+Group=uic
+
+[Install]
+WantedBy=multi-user.target

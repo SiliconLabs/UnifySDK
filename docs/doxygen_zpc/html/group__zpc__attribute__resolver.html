@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: ZPC Attribute Resolver</title>
+<title>Z-Wave Protocol Controller Refrence: ZPC Attribute Resolver</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -84,17 +84,27 @@ $(document).ready(function(){initNavTree('group__zpc__attribute__resolver.html',
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Modules</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">ZPC Attribute Resolver<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a></div></div>  </div>
+<div class="title">ZPC Attribute Resolver</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>ZPC part of the attribute resolver.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__zpc__attribute__resolver__fixt"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver__fixt.html">ZPC Attribute Resolver Fixtured</a></td></tr>
+<tr class="memdesc:group__zpc__attribute__resolver__fixt"><td class="mdescLeft">&#160;</td><td class="mdescRight">ZPC Attribute Resolver fixtures. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zpc__attribute__resolver__internals"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver__internals.html">ZPC Attribute Resolver Internals</a></td></tr>
+<tr class="memdesc:group__zpc__attribute__resolver__internals"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal functions for the <a class="el" href="group__zpc__attribute__resolver.html">ZPC Attribute Resolver</a>. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga8a3a2f9734b97f62588063bbc0def553"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver.html#ga8a3a2f9734b97f62588063bbc0def553">zpc_resolver_event_notification_function_t</a>) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="attribute__resolver__rule_8h.html#a6ae323c64b845f108a676a0731e6d6ea">resolver_rule_type_t</a> rule_type, <a class="el" href="group__zpc__attribute__resolver.html#gaa29dd503ea70c04d5c12e49ab6f302f2">zpc_resolver_event_t</a> event)</td></tr>
@@ -116,24 +126,16 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga6b06a7863343b85f1a8882394124e820"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver.html#ga6b06a7863343b85f1a8882394124e820">register_send_event_handler</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__zpc__attribute__resolver.html#ga8a3a2f9734b97f62588063bbc0def553">zpc_resolver_event_notification_function_t</a> function)</td></tr>
+<tr class="memitem:ga6b06a7863343b85f1a8882394124e820"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver.html#ga6b06a7863343b85f1a8882394124e820">register_send_event_handler</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__zpc__attribute__resolver.html#ga8a3a2f9734b97f62588063bbc0def553">zpc_resolver_event_notification_function_t</a> function)</td></tr>
 <tr class="memdesc:ga6b06a7863343b85f1a8882394124e820"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a custom function for sent events. The ZPC Resolver will call this function and will not execute the default sent data complete handling for a given type when a handler is registered.  <a href="group__zpc__attribute__resolver.html#ga6b06a7863343b85f1a8882394124e820">More...</a><br /></td></tr>
 <tr class="separator:ga6b06a7863343b85f1a8882394124e820"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaecdf0eae4ca1689dc466c0df4b845d22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver.html#gaecdf0eae4ca1689dc466c0df4b845d22">unregister_send_event_handler</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__zpc__attribute__resolver.html#ga8a3a2f9734b97f62588063bbc0def553">zpc_resolver_event_notification_function_t</a> function)</td></tr>
+<tr class="memitem:gaecdf0eae4ca1689dc466c0df4b845d22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver.html#gaecdf0eae4ca1689dc466c0df4b845d22">unregister_send_event_handler</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> type, <a class="el" href="group__zpc__attribute__resolver.html#ga8a3a2f9734b97f62588063bbc0def553">zpc_resolver_event_notification_function_t</a> function)</td></tr>
 <tr class="memdesc:gaecdf0eae4ca1689dc466c0df4b845d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">unregisters a custom function for sent events.  <a href="group__zpc__attribute__resolver.html#gaecdf0eae4ca1689dc466c0df4b845d22">More...</a><br /></td></tr>
 <tr class="separator:gaecdf0eae4ca1689dc466c0df4b845d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga50dc081eb97c7ba1ec9259257613cfc4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver.html#ga50dc081eb97c7ba1ec9259257613cfc4">zpc_attribute_resolver_init</a> ()</td></tr>
-<tr class="memdesc:ga50dc081eb97c7ba1ec9259257613cfc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the ZPC attribute resolver, which in turn calls Unify attribute resolver init.  <a href="group__zpc__attribute__resolver.html#ga50dc081eb97c7ba1ec9259257613cfc4">More...</a><br /></td></tr>
-<tr class="separator:ga50dc081eb97c7ba1ec9259257613cfc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac8356795150fc28706a671953826f6c3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zpc__attribute__resolver.html#gac8356795150fc28706a671953826f6c3">zpc_attribute_resolver_teardown</a> ()</td></tr>
-<tr class="memdesc:gac8356795150fc28706a671953826f6c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Teardown the ZPC attribute resolver It will also teardown the Unify Attribute resolver.  <a href="group__zpc__attribute__resolver.html#gac8356795150fc28706a671953826f6c3">More...</a><br /></td></tr>
-<tr class="separator:gac8356795150fc28706a671953826f6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>ZPC part of the attribute resolver. </p>
-<p>ZPC Attribute Resolver fixtures.</p>
-<p>The ZPC Attribute resolver is in charge of sending frames and listening for Send data callbacks in the context of resolving attributes. It then relays resolution information to the <a class="el" href="group__attribute__resolver.html">Attribute Resolver</a></p>
-<p>Setup and Teardown fixtures for ZPC Attribute Resolver </p>
+<p>The ZPC Attribute resolver is in charge of sending frames and listening for Send data callbacks in the context of resolving attributes. It then relays resolution information to the <a class="el" href="group__attribute__resolver.html">Attribute Resolver</a> </p>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ga8a3a2f9734b97f62588063bbc0def553"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga8a3a2f9734b97f62588063bbc0def553">&#9670;&nbsp;</a></span>zpc_resolver_event_notification_function_t</h2>
@@ -186,7 +188,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> register_send_event_handler </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> register_send_event_handler </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td>
           <td class="paramname"><em>type</em>, </td>
@@ -224,7 +226,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> unregister_send_event_handler </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> unregister_send_event_handler </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td>
           <td class="paramname"><em>type</em>, </td>
@@ -255,52 +257,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga50dc081eb97c7ba1ec9259257613cfc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga50dc081eb97c7ba1ec9259257613cfc4">&#9670;&nbsp;</a></span>zpc_attribute_resolver_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zpc_attribute_resolver_init </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Initialize the ZPC attribute resolver, which in turn calls Unify attribute resolver init. </p>
-<dl class="section return"><dt>Returns</dt><dd>sl_status_t indicating the outcome of initialization </dd></dl>
-
-</div>
-</div>
-<a id="gac8356795150fc28706a671953826f6c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac8356795150fc28706a671953826f6c3">&#9670;&nbsp;</a></span>zpc_attribute_resolver_teardown()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int zpc_attribute_resolver_teardown </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Teardown the ZPC attribute resolver It will also teardown the Unify Attribute resolver. </p>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, any other value in case of error </dd></dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:32 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

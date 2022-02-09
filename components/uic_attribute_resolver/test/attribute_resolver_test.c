@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -82,7 +82,7 @@ void setUp()
   received_node       = ATTRIBUTE_STORE_INVALID_NODE;
   node_listener_calls = 0;
   abort_calls         = 0;
-  datastore_fixt_setup();
+  datastore_fixt_setup(":memory:");
   attribute_store_init();
   attribute_resolver_rule_busy_IgnoreAndReturn(false);
 }
@@ -492,6 +492,8 @@ void test_attribute_resolver_on_node_deletion_test()
   TEST_ASSERT_EQUAL(0, node_listener_calls);
 
   // Now we just delete the attribute store.
+  attribute_resolver_rule_abort_Expect(endpoint_id_node);
+  attribute_resolver_rule_abort_Expect(home_id_node);
   attribute_store_delete_node(root_node);
   contiki_test_helper_run(0);
 
@@ -628,9 +630,7 @@ void test_attribute_resolver_restart_set_func()
   TEST_ASSERT_FALSE(is_node_pending_set_resolution(root_node));
   attribute_resolver_state_log();
   attribute_resolver_restart_set_resolution(home_id_node);
-  attribute_resolver_rule_execute_ExpectAndReturn(home_id_node,
-                                                  true,
-                                                  SL_STATUS_OK);
+
   TEST_ASSERT_EQUAL(1, abort_calls);
   contiki_test_helper_run(0);
 }

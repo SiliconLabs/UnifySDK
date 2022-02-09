@@ -1,0 +1,272 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+#include "uic_mqtt.h"
+#include "sl_log.h"
+#include "sl_status.h"
+#include "dotdot_bitmap.hpp"
+#include "json_helpers.hpp"
+
+#include <string>
+#include <vector>
+#include <inttypes.h>
+
+#include <boost/algorithm/string.hpp>
+
+#include "dotdot_mqtt.h"
+#include "dotdot_mqtt.hpp"
+#include "dotdot_mqtt_internals.hpp"
+#include "dotdot_mqtt_attributes.h"
+#include "dotdot_mqtt_translators.h"
+
+#include <nlohmann/json.hpp>
+
+static constexpr char LOG_TAG[] = "dotdot_mqtt_attributes";
+static constexpr char LOG_FMT_JSON_ERROR[] = "%s: Unable to parse JSON payload: %s";
+
+// Use std namespace to allow extending to_string methods below
+using namespace std;
+
+
+template<typename Type>
+Type get_enum_decimal_value(std::string key, nlohmann::json &jsn)
+{
+  if (jsn[key].is_number_integer()) {
+    return jsn[key].get<Type>();
+  } else if (jsn[key].is_string()) {
+    try {
+      std::string payload_value = jsn[key].get<std::string>();
+      boost::replace_all(payload_value, "\"", "");
+      Type value = static_cast<Type>(std::stoi(payload_value, nullptr, 0));
+      sl_log_warning(LOG_TAG,
+                     "Accepted a decimal value '%s' as enum argument.",
+                     payload_value.c_str());
+      return value;
+    } catch (std::invalid_argument &e) {
+      return std::numeric_limits<Type>::max();
+    }
+  } else {
+    sl_log_error(LOG_TAG, "Failed to parse JSON message, invalid Json value");
+    return std::numeric_limits<Type>::max();
+  }
+}
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback pointers for {{label}}
+///////////////////////////////////////////////////////////////////////////////
+{{#zcl_attributes}}
+static {{asAttributeCallback this}}_t {{asAttributeCallback this}} = nullptr;
+{{/zcl_attributes}}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute update handlers for {{label}}
+///////////////////////////////////////////////////////////////////////////////
+{{#zcl_attributes}}
+static void {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_attribute_update(
+  const char *topic,
+  const char *message,
+  const size_t message_length) {
+  if ({{asAttributeCallback this}} == nullptr) {
+    return;
+  }
+
+  std::string unid;
+  uint8_t endpoint = 0; // Default value for endpoint-less topics.
+  {{#if (clusterWithoutEndpoints label)}}
+  if(! uic_dotdot_mqtt::parse_topic_no_endpoint(topic,unid)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+  {{else}}
+  if(! uic_dotdot_mqtt::parse_topic(topic,unid,endpoint)) {
+    sl_log_debug(LOG_TAG,
+                "Error parsing UNID / Endpoint ID from topic %s. Ignoring",
+                topic);
+    return;
+  }
+  {{/if}}
+
+  std::string last_item;
+  if (SL_STATUS_OK != uic_dotdot_mqtt::get_topic_last_item(topic,last_item)){
+    sl_log_debug(LOG_TAG,
+                "Error parsing last item from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  uic_mqtt_dotdot_attribute_update_type_t update_type;
+  if (last_item == "Reported") {
+    update_type = UCL_REPORTED_UPDATED;
+  } else if (last_item == "Desired") {
+    update_type = UCL_DESIRED_UPDATED;
+  } else {
+    sl_log_debug(LOG_TAG,
+                "Unknown value type (neither Desired/Reported) for topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Empty message means unretained value.
+  bool unretained = false;
+  if (message_length == 0) {
+    unretained = true;
+  }
+
+
+{{#if (isMonotonousArray label)}}
+  std::vector<{{asUnderlyingType type}}> {{asSnakeCaseLower label}};
+  size_t {{asSnakeCaseLower label}}_count = 0;
+{{else}}
+  {{asUnderlyingType type}} {{asSnakeCaseLower label}} = {};
+{{/if}}
+
+  nlohmann::json json_payload;
+  try {
+
+    if (unretained == false) {
+      json_payload = nlohmann::json::parse(std::string(message));
+
+      if (json_payload.find("value") == json_payload.end()) {
+        sl_log_debug(LOG_TAG, "{{parent.label}}::{{label}}: Missing attribute element: 'value'\n");
+        return;
+      }
+// Start parsing value
+{{#if (isMonotonousArray label)}}
+  {{#if_is_enum type}}
+      sl_log_error(LOG_TAG,"Enum array parsing not supported");
+      return;
+  {{else}}
+      auto &{{asSnakeCaseLower label}}_json = json_payload.at("value");
+      for (size_t i = 0; i < {{asSnakeCaseLower label}}_json.size(); i++) {
+    {{#if_is_bitmap type}}
+        {{asSnakeCaseLower label}}.push_back(uic_dotdot_mqtt::get_bitmap_decimal_value_from_array(i, {{asSnakeCaseLower label}}_json, {{chooseTypeOrBitmapName type parent.label label}}));
+    {{else if (isString type)}}
+        {{asSnakeCaseLower label}}.push_back({{asSnakeCaseLower label}}_json.at(i).get_ptr<const std::string*>()->c_str());
+    {{else if (isBool type)}}
+        {{asSnakeCaseLower label}}.push_back(get_bool_from_json_array({{asSnakeCaseLower label}}_jsn, i));
+    {{else if (isStruct type)}}
+        {{asUnderlyingType type}} element = {};
+      {{#zcl_struct_items_by_struct_name type}}
+      {{#if (isString type)}}
+        element.{{label}} = {{asSnakeCaseLower parent.label}}_json.at(i).at("{{label}}").get_ptr<const std::string*>()->c_str();
+      {{else}}
+        element.{{label}} = {{asSnakeCaseLower parent.label}}_json.at(i).at("{{label}}").get<{{asUnderlyingType type}}>();
+      {{/if}}
+      {{/zcl_struct_items_by_struct_name}}
+        {{asSnakeCaseLower label}}.push_back(element);
+    {{else}}
+        {{asSnakeCaseLower label}}.push_back({{asSnakeCaseLower label}}_json.at(i).get<{{asUnderlyingType type}}>());
+    {{/if_is_bitmap}}
+      }
+  {{/if_is_enum}}
+      // Take our vector and pack it into the updated state
+      {{asSnakeCaseLower label}}_count = {{asSnakeCaseLower label}}.size();
+  {{! parse non-array attribute}}
+{{else}}
+  {{#if_is_enum type}}
+      uint32_t tmp = get_enum_decimal_value<{{chooseTypeOrEnumName type parent.label label}}>("value", json_payload);
+      if (tmp == numeric_limits<{{chooseTypeOrEnumName type parent.label label}}>::max()) {
+      #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
+        tmp = {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_number(json_payload.at("value").get<std::string>());
+      #elif defined({{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE)
+        tmp = {{asSnakeCaseLower label}}_get_enum_value_number(json_payload.at("value").get<std::string>());
+      #endif
+      }
+      {{asSnakeCaseLower label}} = static_cast<{{asUnderlyingType type}}>(tmp);
+  {{else}}
+    {{#if_is_bitmap type}}
+      {{asSnakeCaseLower label}} = uic_dotdot_mqtt::get_bitmap_decimal_value("value", json_payload, {{chooseTypeOrBitmapName type parent.label label}});
+    {{else if (isString type)}}
+      {{asSnakeCaseLower label}} = json_payload.at("value").get_ptr<const std::string*>()->c_str();
+    {{else if (isBool type)}}
+      {{asSnakeCaseLower label}} = get_bool_from_json(json_payload, "value");
+    {{else if (isStruct type)}}
+      {{#zcl_struct_items_by_struct_name type}}
+      {{#if (isString type)}}
+      {{asSnakeCaseLower parent.label}}.{{label}} = json_payload.at("value").at("{{label}}").get_ptr<const std::string*>()->c_str();
+      {{else}}
+      {{asSnakeCaseLower parent.label}}.{{label}} = json_payload.at("value").at("{{label}}").get<{{asUnderlyingType type}}>();
+      {{/if}}
+      {{/zcl_struct_items_by_struct_name}}
+    {{else}}
+      {{asSnakeCaseLower label}} = json_payload.at("value").get<{{asUnderlyingType type}}>();
+    {{/if_is_bitmap}}
+  {{/if_is_enum}}
+{{/if}}{{! (isMonotonousArray label)}}
+    // End parsing value
+    }
+
+  } catch (const std::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "value", message);
+    return;
+  }
+
+  {{asAttributeCallback this}}(
+    static_cast<dotdot_unid_t>(unid.c_str()),
+    endpoint,
+    unretained,
+    update_type,
+    {{#if (isMonotonousArray label)}}
+    {{asSnakeCaseLower label}}_count,
+    {{asSnakeCaseLower label}}.data()
+    {{else}}
+    {{asSnakeCaseLower label}}
+    {{/if}}
+  );
+
+}
+{{/zcl_attributes}}
+
+///////////////////////////////////////////////////////////////////////////////
+// Attribute init functions for {{label}}
+///////////////////////////////////////////////////////////////////////////////
+sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower label}}_attributes_init()
+{
+  {{#if (clusterWithoutEndpoints label)}}
+  std::string base_topic = "ucl/by-unid/+/";
+  {{else}}
+  std::string base_topic = "ucl/by-unid/+/+/";
+  {{/if}}
+
+  std::string subscription_topic;
+  {{#zcl_attributes}}
+  if({{asAttributeCallback this}}) {
+    subscription_topic = base_topic + "{{asPublicationName parent.label}}/Attributes/{{label}}/#";
+    uic_mqtt_subscribe(subscription_topic.c_str(), &{{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_attribute_update);
+  }
+  {{/zcl_attributes}}
+
+  return SL_STATUS_OK;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Callback setters and getters for {{label}}
+///////////////////////////////////////////////////////////////////////////////
+{{#zcl_attributes}}
+void {{asAttributeCallback this}}_set(const {{asAttributeCallback this}}_t callback)
+{
+  {{asAttributeCallback this}} = callback;
+}
+{{/zcl_attributes}}
+
+// End of supported cluster.
+{{/if}}
+{{/zcl_clusters}}
+

@@ -1,3 +1,0 @@
-(function() {var implementors = {};
-implementors["uic_angel"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.56.1/core/clone/trait.Clone.html\" title=\"trait core::clone::Clone\">Clone</a> for <a class=\"struct\" href=\"uic_angel/cache/struct.EntryChanged.html\" title=\"struct uic_angel::cache::EntryChanged\">EntryChanged</a>","synthetic":false,"types":["uic_angel::cache::EntryChanged"]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

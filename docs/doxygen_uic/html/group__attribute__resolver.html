@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK Lib
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('group__attribute__resolver.html',''); 
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Attribute Resolver</div>  </div>
+<div class="title">Attribute Resolver<div class="ingroups"><a class="el" href="group__unify__components.html">Unify Components</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -112,22 +112,22 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga1142d2eecafcaca3744a6a4d66d39fcc"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a>) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_len)</td></tr>
+<tr class="memitem:ga1142d2eecafcaca3744a6a4d66d39fcc"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a>) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_len)</td></tr>
 <tr class="memdesc:ga1142d2eecafcaca3744a6a4d66d39fcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generator function for building PAN frames.  <a href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">More...</a><br /></td></tr>
 <tr class="separator:ga1142d2eecafcaca3744a6a4d66d39fcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga9b0ec14c67049440c068de76d41639f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga9b0ec14c67049440c068de76d41639f5">attribute_resolver_init</a> (<a class="el" href="structattribute__resolver__config__t.html">attribute_resolver_config_t</a> resolver_config)</td></tr>
+<tr class="memitem:ga9b0ec14c67049440c068de76d41639f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga9b0ec14c67049440c068de76d41639f5">attribute_resolver_init</a> (<a class="el" href="structattribute__resolver__config__t.html">attribute_resolver_config_t</a> resolver_config)</td></tr>
 <tr class="memdesc:ga9b0ec14c67049440c068de76d41639f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the attribute resolver. This function will clear the rulebook and reset the resolver state.  <a href="group__attribute__resolver.html#ga9b0ec14c67049440c068de76d41639f5">More...</a><br /></td></tr>
 <tr class="separator:ga9b0ec14c67049440c068de76d41639f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaad926dec80fd09bd159b1f2fa0cdf38a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gaad926dec80fd09bd159b1f2fa0cdf38a">attribute_resolver_teardown</a> ()</td></tr>
 <tr class="memdesc:gaad926dec80fd09bd159b1f2fa0cdf38a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Teardown the attribute resolver.  <a href="group__attribute__resolver.html#gaad926dec80fd09bd159b1f2fa0cdf38a">More...</a><br /></td></tr>
 <tr class="separator:gaad926dec80fd09bd159b1f2fa0cdf38a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadf861538dd5cb124bd6d0a83526e327c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gadf861538dd5cb124bd6d0a83526e327c">attribute_resolver_register_rule</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> node_type, <a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a> set_func, <a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a> get_func)</td></tr>
+<tr class="memitem:gadf861538dd5cb124bd6d0a83526e327c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gadf861538dd5cb124bd6d0a83526e327c">attribute_resolver_register_rule</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> node_type, <a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a> set_func, <a class="el" href="group__attribute__resolver.html#ga1142d2eecafcaca3744a6a4d66d39fcc">attribute_resolver_function_t</a> get_func)</td></tr>
 <tr class="memdesc:gadf861538dd5cb124bd6d0a83526e327c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register an attribute rule.  <a href="group__attribute__resolver.html#gadf861538dd5cb124bd6d0a83526e327c">More...</a><br /></td></tr>
 <tr class="separator:gadf861538dd5cb124bd6d0a83526e327c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga36150b164bf3a1a4bdd7b5c762999473"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga36150b164bf3a1a4bdd7b5c762999473">attribute_resolver_set_attribute_depth</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> node_type, int depth)</td></tr>
+<tr class="memitem:ga36150b164bf3a1a4bdd7b5c762999473"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga36150b164bf3a1a4bdd7b5c762999473">attribute_resolver_set_attribute_depth</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> node_type, int depth)</td></tr>
 <tr class="memdesc:ga36150b164bf3a1a4bdd7b5c762999473"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the relative depth of an attribute in the attribute tree.  <a href="group__attribute__resolver.html#ga36150b164bf3a1a4bdd7b5c762999473">More...</a><br /></td></tr>
 <tr class="separator:ga36150b164bf3a1a4bdd7b5c762999473"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2be726f603b349975aab0498d1457202"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga2be726f603b349975aab0498d1457202">attribute_resolver_pause_node_resolution</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
@@ -142,7 +142,7 @@ Functions</h2></td></tr>
 <tr class="memitem:ga32ba1de96bf63ae5a918e3dbc1e42f03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga32ba1de96bf63ae5a918e3dbc1e42f03">attribute_resolver_clear_resolution_listener</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, void(*callback)(<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>))</td></tr>
 <tr class="memdesc:ga32ba1de96bf63ae5a918e3dbc1e42f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a node resolve listener.  <a href="group__attribute__resolver.html#ga32ba1de96bf63ae5a918e3dbc1e42f03">More...</a><br /></td></tr>
 <tr class="separator:ga32ba1de96bf63ae5a918e3dbc1e42f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga99ff84b41f526fb7a9cfa45b153f9fa8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga99ff84b41f526fb7a9cfa45b153f9fa8">attribute_resolver_restart_set_resolution</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
+<tr class="memitem:ga99ff84b41f526fb7a9cfa45b153f9fa8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga99ff84b41f526fb7a9cfa45b153f9fa8">attribute_resolver_restart_set_resolution</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
 <tr class="memdesc:ga99ff84b41f526fb7a9cfa45b153f9fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instructs the resolver to try to resolve a set rule that was pending.  <a href="group__attribute__resolver.html#ga99ff84b41f526fb7a9cfa45b153f9fa8">More...</a><br /></td></tr>
 <tr class="separator:ga99ff84b41f526fb7a9cfa45b153f9fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5c79128630d7e8a30f45f82a62fa1813"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structattribute__resolver__config__t.html">attribute_resolver_config_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga5c79128630d7e8a30f45f82a62fa1813">attribute_resolver_get_config</a> ()</td></tr>
@@ -158,7 +158,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if a node is pending a set resolution. i.e. command has been sent and we are waiting for a state update in the attribute store.  <a href="group__attribute__resolver.html#gad167230e6bf706a5e1bde2d8b75a2b38">More...</a><br /></td></tr>
 <tr class="separator:gad167230e6bf706a5e1bde2d8b75a2b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa3536d271edf4bd224afc20fc1253d08"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#gaa3536d271edf4bd224afc20fc1253d08">attribute_resolver_state_log</a> ()</td></tr>
-<tr class="memdesc:gaa3536d271edf4bd224afc20fc1253d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the state of the Attribute Resolver using <a class="el" href="group__sl__log.html">Log</a>.  <a href="group__attribute__resolver.html#gaa3536d271edf4bd224afc20fc1253d08">More...</a><br /></td></tr>
+<tr class="memdesc:gaa3536d271edf4bd224afc20fc1253d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the state of the Attribute Resolver using <a class="el" href="group__sl__log.html">Unify Logging system</a>.  <a href="group__attribute__resolver.html#gaa3536d271edf4bd224afc20fc1253d08">More...</a><br /></td></tr>
 <tr class="separator:gaa3536d271edf4bd224afc20fc1253d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -176,7 +176,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(* attribute_resolver_function_t) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_len)</td>
+          <td class="memname">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(* attribute_resolver_function_t) (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_len)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -264,7 +264,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_resolver_init </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_resolver_init </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structattribute__resolver__config__t.html">attribute_resolver_config_t</a>&#160;</td>
           <td class="paramname"><em>resolver_config</em></td><td>)</td>
@@ -345,7 +345,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_resolver_register_rule </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_resolver_register_rule </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td>
           <td class="paramname"><em>node_type</em>, </td>
@@ -391,7 +391,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_resolver_restart_set_resolution </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_resolver_restart_set_resolution </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
@@ -445,7 +445,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_resolver_set_attribute_depth </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> attribute_resolver_set_attribute_depth </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td>
           <td class="paramname"><em>node_type</em>, </td>
@@ -465,7 +465,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set the relative depth of an attribute in the attribute tree. </p>
-<p>FIXME: Anders writes a comprehensive explanation here.</p>
 <p>This functions sets the relative depth of an attribute, this is used when the attribute resolver tries to detect if multiple attributes will be resolved by the same set frame. Normally the resolver will assume that all resolved attribute in a frame are siblings (depth=1), however once an a while the a frame will resolve attribute which are on deeper levels, ie cousins and grand cousins. It is assumed that all attributes resolved in a frame are all on the same level, ie all are siblings.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -532,7 +531,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Log the state of the Attribute Resolver using <a class="el" href="group__sl__log.html">Log</a>. </p>
+<p>Log the state of the Attribute Resolver using <a class="el" href="group__sl__log.html">Unify Logging system</a>. </p>
 
 </div>
 </div>
@@ -615,7 +614,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:08 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:09 for Unify SDK Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

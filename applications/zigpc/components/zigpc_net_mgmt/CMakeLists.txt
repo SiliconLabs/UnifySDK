@@ -11,8 +11,8 @@ target_include_directories(
   PUBLIC include
   PRIVATE src)
 target_link_libraries(
-  zigpc_net_mgmt PRIVATE zigpc_common zigpc_gateway zigpc_datastore uic_log
-                         uic_contiki)
+  zigpc_net_mgmt PRIVATE zigpc_common zigpc_discovery zigpc_gateway
+                         zigpc_datastore uic_log uic_contiki)
 
 target_add_mock(zigpc_net_mgmt)
 

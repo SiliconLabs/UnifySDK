@@ -1,0 +1,11 @@
+[package]
+name = "unify_tools"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+mockall_double = "0.2.*"
+once_cell = "1.9.*"
+
+[dev-dependencies]
+mockall = "0.11.*"

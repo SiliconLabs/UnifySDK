@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -93,17 +93,17 @@ $(document).ready(function(){initNavTree('zigpc__gateway__request__queue_8hpp.ht
 <div class="textblock"><code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;queue&gt;</code><br />
 <code>#include &lt;<a class="el" href="zigpc__common__zigbee_8h_source.html">zigpc_common_zigbee.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="z3gateway_8h_source.html">z3gateway.h</a>&gt;</code><br />
+<code>#include &lt;zigbee_host.h&gt;</code><br />
 </div>
 <p><a href="zigpc__gateway__request__queue_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html">zigpc::gateway::RequestQueue</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The singleton Z3Gateway Request Queue responsible for storing and dispatching calls.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The singleton ZigbeeHost Request Queue responsible for storing and dispatching calls.  <a href="classzigpc_1_1gateway_1_1RequestQueue.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html">zigpc::gateway::RequestQueue::Entry</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class used in the <a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html" title="The singleton Z3Gateway Request Queue responsible for storing and dispatching calls.">RequestQueue</a> to invoke Z3Gateway API calls.  <a href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class used in the <a class="el" href="classzigpc_1_1gateway_1_1RequestQueue.html" title="The singleton ZigbeeHost Request Queue responsible for storing and dispatching calls.">RequestQueue</a> to invoke ZigbeeHost API calls.  <a href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1NetworkInitRequest.html">zigpc::gateway::NetworkInitRequest</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call to initialize the network.  <a href="classzigpc_1_1gateway_1_1NetworkInitRequest.html#details">More...</a><br /></td></tr>
@@ -114,8 +114,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1AddInstallCodeRequest.html">zigpc::gateway::AddInstallCodeRequest</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call to add install code to the gateway.  <a href="classzigpc_1_1gateway_1_1AddInstallCodeRequest.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1DeviceInterviewRequest.html">zigpc::gateway::DeviceInterviewRequest</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call to interview device on the network.  <a href="classzigpc_1_1gateway_1_1DeviceInterviewRequest.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1DiscoverDeviceRequest.html">zigpc::gateway::DiscoverDeviceRequest</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call to interview device on the network.  <a href="classzigpc_1_1gateway_1_1DiscoverDeviceRequest.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1DiscoverEndpointRequest.html">zigpc::gateway::DiscoverEndpointRequest</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call to discover endpoint on the network.  <a href="classzigpc_1_1gateway_1_1DiscoverEndpointRequest.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1DeviceRemoveRequest.html">zigpc::gateway::DeviceRemoveRequest</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call to remove device on the network.  <a href="classzigpc_1_1gateway_1_1DeviceRemoveRequest.html#details">More...</a><br /></td></tr>
@@ -149,7 +152,7 @@ Namespaces</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_d9c8a1816f4ea9a94746c6de1ae8e276.html">zigpc_gateway</a></li><li class="navelem"><a class="el" href="dir_1233302668cfc38a9302dcaeddaa7aed.html">src</a></li><li class="navelem"><a class="el" href="zigpc__gateway__request__queue_8hpp.html">zigpc_gateway_request_queue.hpp</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:14 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

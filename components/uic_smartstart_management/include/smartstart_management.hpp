@@ -12,10 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file smartstart_management.hpp
- * @defgroup smartstart SmartStart
- * @ingroup uic_components
- * @brief SmartStart management component
+ * @defgroup unify_smartstart_management Unify SmartStart Management
+ * @ingroup unify_components
+ * @brief Unify SmartStart management component
  *
  * This component is responsible for reacting on SmartStart network updates
  * and keeping a local SmartStart cache updated as well as ucl/SmartStart/List

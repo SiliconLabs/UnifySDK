@@ -1,3 +1,5 @@
+add_subdirectory(libs)
+
 add_library(
   zigpc_gateway
   src/gateway_sleepy_queue.cpp
@@ -17,13 +19,12 @@ target_include_directories(
 target_link_libraries(
   zigpc_gateway
   INTERFACE zigpc_zcl_util
-  PRIVATE z3gateway
+  PRIVATE zigbee_host
           zigpc_common
           zigpc_config
           zigpc_datastore
           zigpc_zcl_util
           zigpc_datastore
-          uic_dotdot_mqtt
           uic_contiki
           uic_datastore
           uic_log)

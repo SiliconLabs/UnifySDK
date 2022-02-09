@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -46,7 +46,8 @@ PROCESS_THREAD(uic_signal_handler_process, ev, data)
     if(ev == PROCESS_EVENT_INIT) {
       process_post(&uic_signal_handler_process,SIGNAL_INIT,0);
     } else if(ev == SIGNAL_INIT) {
-      signal(SIGINT, interrupt_handler);
+      signal(SIGINT, &interrupt_handler);
+      signal(SIGTERM, &interrupt_handler);
     }
     PROCESS_WAIT_EVENT();
   }

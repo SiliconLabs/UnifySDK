@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_command_classes/src/zwave_command_class_node_info_resolver.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave_command_classes/src/zwave_command_class_node_info_resolver.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -100,7 +100,6 @@ $(document).ready(function(){initNavTree('zwave__command__class__node__info__res
 <code>#include &quot;<a class="el" href="zwave__controller_8h_source.html">zwave_controller.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__controller__utils_8h_source.html">zwave_controller_utils.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__controller__command__class__indices_8h_source.html">zwave_controller_command_class_indices.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="zwave__tx__scheme__selector_8h_source.html">zwave_tx_scheme_selector.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="attribute__store_8h_source.html">attribute_store.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="attribute__store__defined__attribute__types_8h_source.html">attribute_store_defined_attribute_types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zpc__attribute__store__network__helper_8h_source.html">zpc_attribute_store_network_helper.h</a>&quot;</code><br />
@@ -109,6 +108,7 @@ $(document).ready(function(){initNavTree('zwave__command__class__node__info__res
 <code>#include &quot;<a class="el" href="attribute__resolver_8h_source.html">attribute_resolver.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__unid_8h_source.html">zwave_unid.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zwave__security__validation_8h_source.html">zwave_security_validation.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zwave__utils_8h_source.html">zwave_utils.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sl__log_8h_source.html">sl_log.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -124,13 +124,13 @@ Functions</h2></td></tr>
 <tr class="separator:a3922df75d3ca3f6b2feb8ef5c43418f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1432f8191a83b8d0ad5906bc65dfc243"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__node__info__resolver_8c.html#a1432f8191a83b8d0ad5906bc65dfc243">on_granted_security_key_update</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> updated_node, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
 <tr class="separator:a1432f8191a83b8d0ad5906bc65dfc243"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a477d2057fb3dde2000ac80351d9e5c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__node__info__resolver_8c.html#a7a477d2057fb3dde2000ac80351d9e5c">resolve_node_info</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
+<tr class="memitem:a7a477d2057fb3dde2000ac80351d9e5c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__node__info__resolver_8c.html#a7a477d2057fb3dde2000ac80351d9e5c">resolve_node_info</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
 <tr class="separator:a7a477d2057fb3dde2000ac80351d9e5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17a378ba062b28606c84948c3fba8559"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__node__info__resolver_8c.html#a17a378ba062b28606c84948c3fba8559">resolve_secure_node_info</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
+<tr class="memitem:a17a378ba062b28606c84948c3fba8559"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__node__info__resolver_8c.html#a17a378ba062b28606c84948c3fba8559">resolve_secure_node_info</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, uint8_t *frame, uint16_t *frame_length)</td></tr>
 <tr class="separator:a17a378ba062b28606c84948c3fba8559"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf800d8f937ec37f13207cb2d7172b81"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__node__info__resolver_8c.html#aaf800d8f937ec37f13207cb2d7172b81">on_node_information_update</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const <a class="el" href="structzwave__node__info__t.html">zwave_node_info_t</a> *node_info)</td></tr>
+<tr class="memitem:aaf800d8f937ec37f13207cb2d7172b81"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__node__info__resolver_8c.html#aaf800d8f937ec37f13207cb2d7172b81">on_node_information_update</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, const <a class="el" href="structzwave__node__info__t.html">zwave_node_info_t</a> *node_info)</td></tr>
 <tr class="separator:aaf800d8f937ec37f13207cb2d7172b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae3d7718b1013ff52f8ea4984621b762c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__nif__resolver.html#gae3d7718b1013ff52f8ea4984621b762c">zwave_command_class_node_info_resolver_init</a> ()</td></tr>
+<tr class="memitem:gae3d7718b1013ff52f8ea4984621b762c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__nif__resolver.html#gae3d7718b1013ff52f8ea4984621b762c">zwave_command_class_node_info_resolver_init</a> ()</td></tr>
 <tr class="memdesc:gae3d7718b1013ff52f8ea4984621b762c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers callbacks to the attribute store and rules to the attribute resolver to be able to resolve Node's capabilities.  <a href="group__zwave__nif__resolver.html#gae3d7718b1013ff52f8ea4984621b762c">More...</a><br /></td></tr>
 <tr class="separator:gae3d7718b1013ff52f8ea4984621b762c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -229,7 +229,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void on_node_information_update </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em>, </td>
         </tr>
         <tr>
@@ -299,7 +299,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> resolve_node_info </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> resolve_node_info </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -341,7 +341,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> resolve_secure_node_info </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> resolve_secure_node_info </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em>, </td>
@@ -402,7 +402,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6ac9bb75d77e4d974481da8e3d01cbca.html">zwave_command_classes</a></li><li class="navelem"><a class="el" href="dir_a7413761325a0de7b31d33e30e75f050.html">src</a></li><li class="navelem"><a class="el" href="zwave__command__class__node__info__resolver_8c.html">zwave_command_class_node_info_resolver.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:27 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -20,7 +20,7 @@ extern "C" {
 #include <sl_status.h>
 
 // ZigPC includes
-#include <zigpc_group_map_mock.h>
+#include "zigpc_group_map_mock.h"
 
 #include <zigpc_group_mgmt_mqtt.h>
 

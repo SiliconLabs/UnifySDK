@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -57,10 +57,7 @@ attribute_resolver_config_t attribute_resolver_config = {
 
 void suiteSetUp()
 {
-  char *argv_inject[3]
-    = {"attribute_resolver_benchmark_test", "--datastore.file", DB_FILENAME};
-  config_parse(sizeof(argv_inject) / sizeof(char *), argv_inject, "");
-  datastore_fixt_setup();
+  datastore_fixt_setup(DB_FILENAME);
   attribute_store_init();
 }
 

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_command_handler/src/zwave_command_handler_internals.h Source File</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave_command_handler/src/zwave_command_handler_internals.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('zwave__command__handler__internals_8h_
 <div class="contents">
 <a href="zwave__command__handler__internals_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * # License</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2020 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2021 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ******************************************************************************</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * The licensor of this software is Silicon Laboratories Inc. Your use of this</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * software is governed by the terms of Silicon Labs Master Software License</span></div>
@@ -115,70 +115,70 @@ $(document).ready(function(){initNavTree('zwave__command__handler__internals_8h_
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;set&gt;</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// Our shared variables between source files in this module:</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">extern</span> <a class="code" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> <a class="code" href="group__zwave__command__handler__internals.html#ga61c04e8d2474fecab69927e6c7fe9f21">zpc_highest_scheme</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// Compare 2 command class handlers.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structzwave__command__handler__compare.html">   46</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structzwave__command__handler__compare.html">zwave_command_handler_compare</a> {</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="structzwave__command__handler__compare.html#ab36e9f394eceddae6ebf4524804403ef">   47</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structzwave__command__handler__compare.html#ab36e9f394eceddae6ebf4524804403ef">operator()</a>(<span class="keyword">const</span> <a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a> &amp;a,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                  <span class="keyword">const</span> <a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a> &amp;b)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> a.<a class="code" href="structzwave__command__handler__t.html#a3ac321c0cf2ab90d11dc9fda4356b046">command_class</a> &lt; b.<a class="code" href="structzwave__command__handler__t.html#a3ac321c0cf2ab90d11dc9fda4356b046">command_class</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="structzwave__command__handler__compare__alphabetic.html">   54</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structzwave__command__handler__compare__alphabetic.html">zwave_command_handler_compare_alphabetic</a> {</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structzwave__command__handler__compare__alphabetic.html#ad0b6b5906f534c149e595996fc742527">   55</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structzwave__command__handler__compare__alphabetic.html#ad0b6b5906f534c149e595996fc742527">operator()</a>(<span class="keyword">const</span> <a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a> &amp;a,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                  <span class="keyword">const</span> <a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a> &amp;b)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> (std::string(a.<a class="code" href="structzwave__command__handler__t.html#a1e3c9469fd565363f59a2853497c3b2f">command_class_name</a>)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            &lt; std::string(b.<a class="code" href="structzwave__command__handler__t.html#a1e3c9469fd565363f59a2853497c3b2f">command_class_name</a>));</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">typedef</span> std::set&lt;<a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a>,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                 <a class="code" href="structzwave__command__handler__compare.html">zwave_command_handler_compare</a>&gt;::iterator</div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">   65</a></span>&#160;  <a class="code" href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">zwave_command_handler_it_t</a>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">// The command class handler list (shared amongst files in the component)</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">extern</span> std::multiset&lt;zwave_command_handler_t, zwave_command_handler_compare&gt;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="group__zwave__command__handler__internals.html#ga7ef9478d91c0baba3efc62c91803b237">command_handler_list</a>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="group__zwave__command__handler__internals.html#ga5fad9a290e46d9f66f468fe9c3b1110f">   85</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__zwave__command__handler__internals.html#ga5fad9a290e46d9f66f468fe9c3b1110f">supports_frame_at_security_level</a>(</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <a class="code" href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">zwave_command_handler_it_t</a> it,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <a class="code" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> scheme);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif  //ZWAVE_COMMAND_HANDLER_INTERNALS_H</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Our shared variables between source files in this module:</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">extern</span> <a class="code" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> <a class="code" href="group__zwave__command__handler__internals.html#ga61c04e8d2474fecab69927e6c7fe9f21">zpc_highest_scheme</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// Compare 2 command class handlers.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structzwave__command__handler__compare.html">   45</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structzwave__command__handler__compare.html">zwave_command_handler_compare</a> {</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="structzwave__command__handler__compare.html#ab36e9f394eceddae6ebf4524804403ef">   46</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structzwave__command__handler__compare.html#ab36e9f394eceddae6ebf4524804403ef">operator()</a>(<span class="keyword">const</span> <a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a> &amp;a,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                  <span class="keyword">const</span> <a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a> &amp;b)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> a.<a class="code" href="structzwave__command__handler__t.html#a3ac321c0cf2ab90d11dc9fda4356b046">command_class</a> &lt; b.<a class="code" href="structzwave__command__handler__t.html#a3ac321c0cf2ab90d11dc9fda4356b046">command_class</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="structzwave__command__handler__compare__alphabetic.html">   53</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structzwave__command__handler__compare__alphabetic.html">zwave_command_handler_compare_alphabetic</a> {</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="structzwave__command__handler__compare__alphabetic.html#ad0b6b5906f534c149e595996fc742527">   54</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structzwave__command__handler__compare__alphabetic.html#ad0b6b5906f534c149e595996fc742527">operator()</a>(<span class="keyword">const</span> <a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a> &amp;a,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                  <span class="keyword">const</span> <a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a> &amp;b)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> (std::string(a.<a class="code" href="structzwave__command__handler__t.html#a1e3c9469fd565363f59a2853497c3b2f">command_class_name</a>)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            &lt; std::string(b.<a class="code" href="structzwave__command__handler__t.html#a1e3c9469fd565363f59a2853497c3b2f">command_class_name</a>));</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">typedef</span> std::set&lt;<a class="code" href="structzwave__command__handler__t.html">zwave_command_handler_t</a>,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                 <a class="code" href="structzwave__command__handler__compare.html">zwave_command_handler_compare</a>&gt;::iterator</div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">   64</a></span>&#160;  <a class="code" href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">zwave_command_handler_it_t</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">// The command class handler list (shared amongst files in the component)</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">extern</span> std::multiset&lt;zwave_command_handler_t, zwave_command_handler_compare&gt;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="group__zwave__command__handler__internals.html#ga7ef9478d91c0baba3efc62c91803b237">command_handler_list</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="group__zwave__command__handler__internals.html#ga5fad9a290e46d9f66f468fe9c3b1110f">   84</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__zwave__command__handler__internals.html#ga5fad9a290e46d9f66f468fe9c3b1110f">supports_frame_at_security_level</a>(</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <a class="code" href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">zwave_command_handler_it_t</a> it,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <a class="code" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> scheme);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#endif  //ZWAVE_COMMAND_HANDLER_INTERNALS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astructzwave__command__handler__compare__alphabetic_html_ad0b6b5906f534c149e595996fc742527"><div class="ttname"><a href="structzwave__command__handler__compare__alphabetic.html#ad0b6b5906f534c149e595996fc742527">zwave_command_handler_compare_alphabetic::operator()</a></div><div class="ttdeci">bool operator()(const zwave_command_handler_t &amp;a, const zwave_command_handler_t &amp;b) const</div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:55</div></div>
+<div class="ttc" id="astructzwave__command__handler__compare__alphabetic_html_ad0b6b5906f534c149e595996fc742527"><div class="ttname"><a href="structzwave__command__handler__compare__alphabetic.html#ad0b6b5906f534c149e595996fc742527">zwave_command_handler_compare_alphabetic::operator()</a></div><div class="ttdeci">bool operator()(const zwave_command_handler_t &amp;a, const zwave_command_handler_t &amp;b) const</div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:54</div></div>
 <div class="ttc" id="agroup__zwave__command__handler__internals_html_ga61c04e8d2474fecab69927e6c7fe9f21"><div class="ttname"><a href="group__zwave__command__handler__internals.html#ga61c04e8d2474fecab69927e6c7fe9f21">zpc_highest_scheme</a></div><div class="ttdeci">zwave_controller_encapsulation_scheme_t zpc_highest_scheme</div></div>
 <div class="ttc" id="agroup__zwave__command__handler__internals_html_ga7ef9478d91c0baba3efc62c91803b237"><div class="ttname"><a href="group__zwave__command__handler__internals.html#ga7ef9478d91c0baba3efc62c91803b237">command_handler_list</a></div><div class="ttdeci">std::multiset&lt; zwave_command_handler_t, zwave_command_handler_compare &gt; command_handler_list</div></div>
 <div class="ttc" id="astructzwave__command__handler__t_html"><div class="ttname"><a href="structzwave__command__handler__t.html">zwave_command_handler_t</a></div><div class="ttdoc">Z-Wave Command Class handler object.</div><div class="ttdef"><b>Definition:</b> zwave_command_handler.h:82</div></div>
-<div class="ttc" id="astructzwave__command__handler__compare_html_ab36e9f394eceddae6ebf4524804403ef"><div class="ttname"><a href="structzwave__command__handler__compare.html#ab36e9f394eceddae6ebf4524804403ef">zwave_command_handler_compare::operator()</a></div><div class="ttdeci">bool operator()(const zwave_command_handler_t &amp;a, const zwave_command_handler_t &amp;b) const</div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:47</div></div>
+<div class="ttc" id="astructzwave__command__handler__compare_html_ab36e9f394eceddae6ebf4524804403ef"><div class="ttname"><a href="structzwave__command__handler__compare.html#ab36e9f394eceddae6ebf4524804403ef">zwave_command_handler_compare::operator()</a></div><div class="ttdeci">bool operator()(const zwave_command_handler_t &amp;a, const zwave_command_handler_t &amp;b) const</div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:46</div></div>
+<div class="ttc" id="agroup__zwave__controller__connection__info_html_gac38c2bd49271bc28734fffab49c9e18c"><div class="ttname"><a href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a></div><div class="ttdeci">zwave_controller_encapsulation_scheme_t</div><div class="ttdef"><b>Definition:</b> zwave_controller_connection_info.h:34</div></div>
 <div class="ttc" id="azwave__controller__connection__info_8h_html"><div class="ttname"><a href="zwave__controller__connection__info_8h.html">zwave_controller_connection_info.h</a></div></div>
 <div class="ttc" id="astructzwave__command__handler__t_html_a3ac321c0cf2ab90d11dc9fda4356b046"><div class="ttname"><a href="structzwave__command__handler__t.html#a3ac321c0cf2ab90d11dc9fda4356b046">zwave_command_handler_t::command_class</a></div><div class="ttdeci">zwave_command_class_t command_class</div><div class="ttdef"><b>Definition:</b> zwave_command_handler.h:98</div></div>
 <div class="ttc" id="azwave__controller_8h_html"><div class="ttname"><a href="zwave__controller_8h.html">zwave_controller.h</a></div></div>
-<div class="ttc" id="agroup__zwave__command__handler__internals_html_gadca8628617985dc075b34bb50329681a"><div class="ttname"><a href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">zwave_command_handler_it_t</a></div><div class="ttdeci">std::set&lt; zwave_command_handler_t, zwave_command_handler_compare &gt;::iterator zwave_command_handler_it_t</div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:65</div></div>
+<div class="ttc" id="agroup__zwave__command__handler__internals_html_gadca8628617985dc075b34bb50329681a"><div class="ttname"><a href="group__zwave__command__handler__internals.html#gadca8628617985dc075b34bb50329681a">zwave_command_handler_it_t</a></div><div class="ttdeci">std::set&lt; zwave_command_handler_t, zwave_command_handler_compare &gt;::iterator zwave_command_handler_it_t</div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:64</div></div>
 <div class="ttc" id="agroup__zwave__command__handler__internals_html_ga5fad9a290e46d9f66f468fe9c3b1110f"><div class="ttname"><a href="group__zwave__command__handler__internals.html#ga5fad9a290e46d9f66f468fe9c3b1110f">supports_frame_at_security_level</a></div><div class="ttdeci">bool supports_frame_at_security_level(zwave_command_handler_it_t it, zwave_controller_encapsulation_scheme_t scheme)</div><div class="ttdoc">Verifies if a Command Class is supported at a certain Security level.</div></div>
-<div class="ttc" id="agroup__zwave__tx__interface_html_gac38c2bd49271bc28734fffab49c9e18c"><div class="ttname"><a href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a></div><div class="ttdeci">zwave_controller_encapsulation_scheme_t</div><div class="ttdef"><b>Definition:</b> zwave_controller_connection_info.h:35</div></div>
 <div class="ttc" id="azwave__command__handler_8h_html"><div class="ttname"><a href="zwave__command__handler_8h.html">zwave_command_handler.h</a></div></div>
-<div class="ttc" id="astructzwave__command__handler__compare__alphabetic_html"><div class="ttname"><a href="structzwave__command__handler__compare__alphabetic.html">zwave_command_handler_compare_alphabetic</a></div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:54</div></div>
+<div class="ttc" id="astructzwave__command__handler__compare__alphabetic_html"><div class="ttname"><a href="structzwave__command__handler__compare__alphabetic.html">zwave_command_handler_compare_alphabetic</a></div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:53</div></div>
 <div class="ttc" id="astructzwave__command__handler__t_html_a1e3c9469fd565363f59a2853497c3b2f"><div class="ttname"><a href="structzwave__command__handler__t.html#a1e3c9469fd565363f59a2853497c3b2f">zwave_command_handler_t::command_class_name</a></div><div class="ttdeci">const char * command_class_name</div><div class="ttdef"><b>Definition:</b> zwave_command_handler.h:102</div></div>
-<div class="ttc" id="astructzwave__command__handler__compare_html"><div class="ttname"><a href="structzwave__command__handler__compare.html">zwave_command_handler_compare</a></div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:46</div></div>
+<div class="ttc" id="astructzwave__command__handler__compare_html"><div class="ttname"><a href="structzwave__command__handler__compare.html">zwave_command_handler_compare</a></div><div class="ttdef"><b>Definition:</b> zwave_command_handler_internals.h:45</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6c51242b7cad75c3861876e326d428a6.html">zwave_command_handler</a></li><li class="navelem"><a class="el" href="dir_6645a113100fb7698c9a88135ba1895b.html">src</a></li><li class="navelem"><a class="el" href="zwave__command__handler__internals_8h.html">zwave_command_handler_internals.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:18 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

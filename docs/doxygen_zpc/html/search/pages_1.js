@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['deprecated_20list_8284',['Deprecated List',['../deprecated.html',1,'']]]
+  ['legacy_20z_2fip_20gateway_20serial_2dapi_20names_8722',['Legacy Z/IP Gateway Serial-API Names',['../group__zwave__api.html',1,'']]]
 ];

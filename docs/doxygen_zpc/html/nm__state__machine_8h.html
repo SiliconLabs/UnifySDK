@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/zwave_network_management/src/nm_state_machine.h File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave/zwave_network_management/src/nm_state_machine.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -440,7 +440,7 @@ Variables</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="ad13aadb189cec7c76947756a5a8809d3ac8a769361be2d0118a07b15941b9ef10"></a>NM_EV_ADD_SECURITY_KEY_CHALLENGE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ad13aadb189cec7c76947756a5a8809d3a22fa9dd42d844e7e5ff8256248defb14"></a>NM_EV_NODE_ADD_S2&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad13aadb189cec7c76947756a5a8809d3a5651143c89c5d1ca9ba0ad4ccd1093e2"></a>NM_EV_ADD_SECURITY_KEYS_SET&#160;</td><td class="fielddoc"><p>NM_EV_ADD_SECURITY_KEYS_SET event is triggered when the user grants keys with <a class="el" href="group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6" title="Inform an S2 bootstrapping controller which keys must be granted to the node being bootstrapped.">zwave_network_management_keys_set()</a> NM FSM calls <a class="el" href="zwave__s2__network_8h.html#afee8e85a3e9eddca7008a078bcc06a25" title="Must be called as a response to the on_keys_request callback.">zwave_s2_key_grant()</a> to notify S2 about the granted keys </p>
+<tr><td class="fieldname"><a id="ad13aadb189cec7c76947756a5a8809d3a5651143c89c5d1ca9ba0ad4ccd1093e2"></a>NM_EV_ADD_SECURITY_KEYS_SET&#160;</td><td class="fielddoc"><p>NM_EV_ADD_SECURITY_KEYS_SET event is triggered when the user grants keys with <a class="el" href="group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6" title="Inform an S2 bootstrapping controller which keys must be granted to the node being bootstrapped.">zwave_network_management_keys_set()</a> NM FSM calls <a class="el" href="group__zwave__s2__network.html#gafee8e85a3e9eddca7008a078bcc06a25" title="Must be called as a response to the on_keys_request callback.">zwave_s2_key_grant()</a> to notify S2 about the granted keys </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ad13aadb189cec7c76947756a5a8809d3a8ac98ab71fd143de5517beea0350b558"></a>NM_EV_ADD_SECURITY_DSK_SET&#160;</td><td class="fielddoc"><p>NM_EV_ADD_SECURITY_DSK_SET is triggered (from zwave_network_management_dsk_set) to Indicate to the S2 bootstrapping controller whether the DSK is accepted and report the user input when needed </p>
 </td></tr>
@@ -524,7 +524,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the Z-Wave network management state machine. </p>
-<p>Sets <a class="el" href="zwave__s2__network_8h.html#a4c03d9d281a119324b565f10c276f0a3">zwave_s2_network_callbacks_t</a> Calls <a class="el" href="zwave__s2__network_8c.html#a7af4fbf520536f7ecdd7732f4c384091">zwave_s2_set_network_callbacks</a> and <a class="el" href="group__zwave__s0.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a> Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Print the HomeID, NodeID and DSK to console and Print node list Stops all ongoing Network management operations </p>
+<p>Sets <a class="el" href="group__zwave__s2__network.html#ga4c03d9d281a119324b565f10c276f0a3">zwave_s2_network_callbacks_t</a> Calls <a class="el" href="group__zwave__s2__network.html#ga7af4fbf520536f7ecdd7732f4c384091">zwave_s2_set_network_callbacks</a> and <a class="el" href="group__zwave__s0__network.html#ga87da65496dd77458d5c14dbe30209d82">zwave_s0_set_network_callbacks</a> Resets <a class="el" href="nm__state__machine_8h.html#ab37cc698b284daa0cb26dcdfb65c7616">network_mgmt_state_t</a> nms Sets the Network Management state to <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a6ba40fa12cade5baa49edfc331869a8b">NM_IDLE</a> Print the HomeID, NodeID and DSK to console and Print node list Stops all ongoing Network management operations </p>
 
 </div>
 </div>
@@ -575,8 +575,8 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_c78582d46d403e5e72bac62c6eba612e.html">zwave_network_management</a></li><li class="navelem"><a class="el" href="dir_3116965e3e12e872bafbd186262d685f.html">src</a></li><li class="navelem"><a class="el" href="nm__state__machine_8h.html">nm_state_machine.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_4c7246e6a1b2917f2d670822ca0c83f7.html">zwave_network_management</a></li><li class="navelem"><a class="el" href="dir_140a5582e5dd5795b7b4430df83ea200.html">src</a></li><li class="navelem"><a class="el" href="nm__state__machine_8h.html">nm_state_machine.h</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:22 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

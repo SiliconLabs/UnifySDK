@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -14,7 +14,6 @@
 #include <stdbool.h>
 #include <string.h>
 // Contiki test resources
-#include "mqtt_client.h"
 #include "sys/process.h"
 #include "contiki_test_helper.h"
 
@@ -31,14 +30,17 @@
 
 PROCESS_NAME(uic_mqtt_process);
 
-
-const char *message  = "test";
-const char *testhost = "testhost1";
-const int testport   = 1337;
-static const char *test_cafile = "/home/test/cafile";
+const char *message              = "test";
+const char *testhost             = "testhost1";
+const int testport               = 1337;
+static const char *test_cafile   = "/home/test/cafile";
 static const char *test_certfile = "/home/test/certfile";
-static const char *test_keyfile = "/home/test/keyfile";
+static const char *test_keyfile  = "/home/test/keyfile";
 static char test_id_uid[16];
+
+// Connect callbacks variables
+static bool after_connect_called     = false;
+static bool before_disconnect_called = false;
 
 // This is for making sure the callback-signature stays valid.
 static void subscribe_topic_callback(const char *topic,
@@ -53,10 +55,20 @@ void suiteSetUp()
   mqtt_client_mock_Init();
 }
 
+// Testing callbacks on disconnect and connect
+void after_connect_callback()
+{
+  after_connect_called = true;
+}
+
+void before_disconnect_cabllback()
+{
+  before_disconnect_called = true;
+}
+
 // Tear-down the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
-
   mqtt_client_mock_Destroy();
   return num_failures;
 }
@@ -70,13 +82,15 @@ void setUp()
 // Test the initialization and teardown of an UIC MQTT Client process
 void test_uic_client_process_init_teardown()
 {
-  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_HOST, 0, CONFIG_STATUS_OK);
+  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_HOST,
+                                       0,
+                                       CONFIG_STATUS_OK);
   config_get_as_string_IgnoreArg_result();
   config_get_as_string_ReturnThruPtr_result(&testhost);
 
   config_get_as_int_ExpectAndReturn(CONFIG_KEY_MQTT_PORT, 0, CONFIG_STATUS_OK);
   config_get_as_int_IgnoreArg_result();
-  config_get_as_int_ReturnThruPtr_result((int*) &testport);
+  config_get_as_int_ReturnThruPtr_result((int *)&testport);
 
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CAFILE,
                                        0,
@@ -95,7 +109,6 @@ void test_uic_client_process_init_teardown()
                                        CONFIG_STATUS_OK);
   config_get_as_string_IgnoreArg_result();
   config_get_as_string_ReturnThruPtr_result(&test_keyfile);
-
   mqtt_client_event_Expect(NULL, MQTT_EVENT_CONNECT);
   mqtt_client_file_descriptor_IgnoreAndReturn(0);
   mqtt_client_new_ExpectAndReturn(testhost,
@@ -118,18 +131,24 @@ void test_uic_client_process_init_teardown()
   contiki_test_helper_run(0);
   uic_mqtt_setup();
   process_exit(&uic_mqtt_process);
+
+  // Testing init and teardown callbacks before disconnect and after connecting
+  sl_log_debug("Test", "Testing here %d", after_connect_called);
+  sl_log_debug("Test", "Testing here %d", before_disconnect_called);
 }
 
 // Test the initialization and teardown of an UIC MQTT Client process
 void test_uic_client_process_init_teardown_no_client_id()
 {
-  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_HOST, 0, CONFIG_STATUS_OK);
+  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_HOST,
+                                       0,
+                                       CONFIG_STATUS_OK);
   config_get_as_string_IgnoreArg_result();
   config_get_as_string_ReturnThruPtr_result(&testhost);
 
   config_get_as_int_ExpectAndReturn(CONFIG_KEY_MQTT_PORT, 0, CONFIG_STATUS_OK);
   config_get_as_int_IgnoreArg_result();
-  config_get_as_int_ReturnThruPtr_result((int*) &testport);
+  config_get_as_int_ReturnThruPtr_result((int *)&testport);
 
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CAFILE,
                                        0,
@@ -149,7 +168,10 @@ void test_uic_client_process_init_teardown_no_client_id()
   config_get_as_string_IgnoreArg_result();
   config_get_as_string_ReturnThruPtr_result(&test_keyfile);
 
- 
+  mqtt_client_after_connect_callback_set_Expect(NULL, after_connect_callback);
+  mqtt_client_before_disconnect_callback_set_Expect(
+    NULL,
+    before_disconnect_cabllback);
   mqtt_client_event_Expect(NULL, MQTT_EVENT_CONNECT);
   mqtt_client_file_descriptor_IgnoreAndReturn(0);
   mqtt_client_new_ExpectAndReturn(testhost,
@@ -168,23 +190,26 @@ void test_uic_client_process_init_teardown_no_client_id()
   mqtt_client_on_disconnect_callback_set_Expect(NULL,
                                                 uic_mqtt_process_on_disconnect);
   uic_main_ext_register_rfd_IgnoreAndReturn(SL_STATUS_OK);
+  uic_mqtt_set_after_connect_callback(after_connect_callback);
+  uic_mqtt_set_before_disconnect_callback(before_disconnect_cabllback);
   process_start(&uic_mqtt_process, NULL);
   contiki_test_helper_run(0);
   uic_mqtt_setup();
   process_exit(&uic_mqtt_process);
 }
 
-
 // Make sure uic_mqtt_setup() does its business of fetching configuration, trying
 // to connect to a broker.
 void test_uic_client_setup_happy()
 {
-  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_HOST, 0, CONFIG_STATUS_OK);
+  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_HOST,
+                                       0,
+                                       CONFIG_STATUS_OK);
   config_get_as_string_IgnoreArg_result();
   config_get_as_string_ReturnThruPtr_result(&testhost);
   config_get_as_int_ExpectAndReturn(CONFIG_KEY_MQTT_PORT, 0, CONFIG_STATUS_OK);
   config_get_as_int_IgnoreArg_result();
-  config_get_as_int_ReturnThruPtr_result((int*) &testport);
+  config_get_as_int_ReturnThruPtr_result((int *)&testport);
 
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CAFILE,
                                        0,
@@ -204,7 +229,6 @@ void test_uic_client_setup_happy()
   config_get_as_string_IgnoreArg_result();
   config_get_as_string_ReturnThruPtr_result(&test_keyfile);
 
- 
   mqtt_client_new_ExpectAndReturn(testhost,
                                   testport,
                                   test_id_uid,

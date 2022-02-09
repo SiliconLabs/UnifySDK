@@ -13,7 +13,7 @@
 
 /**
  * @file attribute_transitions_process.h
- * @brief Contiki Process definition for the \ref uic_attribute_transitions
+ * @brief Contiki Process definition for the \ref unify_attribute_transitions
  *
  * @{
  */
@@ -24,7 +24,7 @@
 #include "process.h"
 
 /**
- * @brief Name the of \ref contiki process for the \ref uic_attribute_transitions
+ * @brief Name the of \ref contiki process for the \ref unify_attribute_transitions
  */
 PROCESS_NAME(attribute_transitions_process);
 

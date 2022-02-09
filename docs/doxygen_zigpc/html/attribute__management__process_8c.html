@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -107,21 +107,21 @@ $(document).ready(function(){initNavTree('attribute__management__process_8c.html
 Functions</h2></td></tr>
 <tr class="memitem:ac96a40ddbcad2a3c149162f54fcad732"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__process_8c.html#ac96a40ddbcad2a3c149162f54fcad732">PROCESS_NAME</a> (attribute_management_process)</td></tr>
 <tr class="separator:ac96a40ddbcad2a3c149162f54fcad732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad7ce6704d6e4d6d7fcdb120ff2f2ff95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__process.html#gad7ce6704d6e4d6d7fcdb120ff2f2ff95">attribute_management_setup</a> (void)</td></tr>
+<tr class="memitem:gad7ce6704d6e4d6d7fcdb120ff2f2ff95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__process.html#gad7ce6704d6e4d6d7fcdb120ff2f2ff95">attribute_management_setup</a> (void)</td></tr>
 <tr class="memdesc:gad7ce6704d6e4d6d7fcdb120ff2f2ff95"><td class="mdescLeft">&#160;</td><td class="mdescRight">attribute_management_setup - sets up the parts of the software used by the attribute manager  <a href="group__attribute__management__process.html#gad7ce6704d6e4d6d7fcdb120ff2f2ff95">More...</a><br /></td></tr>
 <tr class="separator:gad7ce6704d6e4d6d7fcdb120ff2f2ff95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3ba085b4c9039907863c74a51c728a70"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__management__process.html#ga3ba085b4c9039907863c74a51c728a70">attribute_management_shutdown</a> (void)</td></tr>
 <tr class="memdesc:ga3ba085b4c9039907863c74a51c728a70"><td class="mdescLeft">&#160;</td><td class="mdescRight">attribute_management_shutdown - graceful shuts down all parts of the attribute_management component, expected to be called before the program exits  <a href="group__attribute__management__process.html#ga3ba085b4c9039907863c74a51c728a70">More...</a><br /></td></tr>
 <tr class="separator:ga3ba085b4c9039907863c74a51c728a70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e01c38de3ec14296472895a7aaf4979"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__process_8c.html#a3e01c38de3ec14296472895a7aaf4979">zigpc_attrmgmt_process_send_event</a> (const enum <a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7">attr_mgmt_evt</a> event, const void *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, size_t data_size)</td></tr>
+<tr class="memitem:a3e01c38de3ec14296472895a7aaf4979"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__process_8c.html#a3e01c38de3ec14296472895a7aaf4979">zigpc_attrmgmt_process_send_event</a> (const enum <a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7">attr_mgmt_evt</a> event, const void *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, size_t data_size)</td></tr>
 <tr class="memdesc:a3e01c38de3ec14296472895a7aaf4979"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send an event and associated data to the attribute management Contiki process. Based on the data and data_size passed in, memory will be dynamically allocated in the heap and sent in order to be processed.  <a href="attribute__management__process_8c.html#a3e01c38de3ec14296472895a7aaf4979">More...</a><br /></td></tr>
 <tr class="separator:a3e01c38de3ec14296472895a7aaf4979"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a847b44022ab1fe2af8189777e648b451"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__process_8c.html#a847b44022ab1fe2af8189777e648b451">PROCESS</a> (attribute_management_process, &quot;attribute_management_process&quot;)</td></tr>
 <tr class="separator:a847b44022ab1fe2af8189777e648b451"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81e2ab4beb94a969a55819dad5ec672f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__process_8c.html#a81e2ab4beb94a969a55819dad5ec672f">PROCESS_THREAD</a> (attribute_management_process, ev, <a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>)</td></tr>
 <tr class="separator:a81e2ab4beb94a969a55819dad5ec672f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace9d028957d6bdb0423ea62c03259c70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__process_8c.html#ace9d028957d6bdb0423ea62c03259c70">node_send_report_config_cmd</a> (const <a class="el" href="structzigbee__node__t.html">zigbee_node_t</a> node)</td></tr>
-<tr class="memdesc:ace9d028957d6bdb0423ea62c03259c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">node_send_report_config_cmd - API for sending a ZCL command to the zigpc_gateway / z3gateway to configure reports for a node. This is an internal API, expected to be abstracted away.  <a href="attribute__management__process_8c.html#ace9d028957d6bdb0423ea62c03259c70">More...</a><br /></td></tr>
+<tr class="memitem:ace9d028957d6bdb0423ea62c03259c70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attribute__management__process_8c.html#ace9d028957d6bdb0423ea62c03259c70">node_send_report_config_cmd</a> (const <a class="el" href="structzigbee__node__t.html">zigbee_node_t</a> node)</td></tr>
+<tr class="memdesc:ace9d028957d6bdb0423ea62c03259c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">node_send_report_config_cmd - API for sending a ZCL command to the zigpc_gateway to configure reports for a node. This is an internal API, expected to be abstracted away.  <a href="attribute__management__process_8c.html#ace9d028957d6bdb0423ea62c03259c70">More...</a><br /></td></tr>
 <tr class="separator:ace9d028957d6bdb0423ea62c03259c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -137,7 +137,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> node_send_report_config_cmd </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> node_send_report_config_cmd </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structzigbee__node__t.html">zigbee_node_t</a>&#160;</td>
           <td class="paramname"><em>node</em></td><td>)</td>
@@ -146,7 +146,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>node_send_report_config_cmd - API for sending a ZCL command to the zigpc_gateway / z3gateway to configure reports for a node. This is an internal API, expected to be abstracted away. </p>
+<p>node_send_report_config_cmd - API for sending a ZCL command to the zigpc_gateway to configure reports for a node. This is an internal API, expected to be abstracted away. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">node</td><td>- the node, whose endpoints should be configured for reports</td></tr>
@@ -244,7 +244,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_attrmgmt_process_send_event </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_attrmgmt_process_send_event </td>
           <td>(</td>
           <td class="paramtype">const enum <a class="el" href="attribute__management__int_8h.html#a0e7fcaf8e34cf0a5980c5f7e0f6a4eb7">attr_mgmt_evt</a>&#160;</td>
           <td class="paramname"><em>event</em>, </td>
@@ -312,7 +312,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_b6f745f966ae74add2521a551533f539.html">attribute_management</a></li><li class="navelem"><a class="el" href="dir_65cbbcbe9e4af1172428fcc9ed2fe9fe.html">src</a></li><li class="navelem"><a class="el" href="attribute__management__process_8c.html">attribute_management_process.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:12 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

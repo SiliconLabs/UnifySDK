@@ -235,6 +235,7 @@ void MapperEngine::on_attribute_updated(
     * FIXME: this is not the optimal solution. It would be better to
     * store the path depth in the relations such that we could just
     * go a number of levels up the the tree to find the common parent.
+    * This is also the reason why the evaluation of the ^ operator fails.
     *
     * Right releation r'aaa = r'bbb only works if the parent of aaa and bbb is
     * of type ep_type.

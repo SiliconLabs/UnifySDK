@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,9 +12,15 @@
  *****************************************************************************/
 
 /**
+ * @defgroup zpc_attribute_resolver_internals ZPC Attribute Resolver Internals
+ * @ingroup zpc_attribute_resolver
+ * @brief Internal functions for the @ref zpc_attribute_resolver.
+ */
+
+/**
  * @defgroup attribute_resolver_send ZPC Attribute Resolver send
- * @ingroup components
- * @brief Send frames when instructed by the \ref attribute_resolver
+ * @ingroup zpc_attribute_resolver_internals
+ * @brief Send frames when instructed by the @ref attribute_resolver
  *
  * @{
  */

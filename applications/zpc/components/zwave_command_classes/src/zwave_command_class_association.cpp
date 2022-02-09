@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -27,19 +27,26 @@
 #include <algorithm>
 #include <vector>
 
-// Includes from other components
+// UIC Includes
 #include "sl_log.h"
+#include "attribute.hpp"
+#include "attribute_resolver.h"
+
+// Contiki includes
+#include "ctimer.h"
+
+// ZPC Components
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "attribute_store_helper.h"
-#include "attribute.hpp"
-#include "ZW_classcmd.h"
 #include "zwave_unid.h"
 #include "zwave_tx.h"
 #include "zwave_controller_keyset.h"
 #include "zwave_tx_scheme_selector.h"
 #include "zwave_command_handler.h"
-#include "attribute_resolver.h"
+
+// Interfaces
+#include "ZW_classcmd.h"
 
 // Log tag
 #define LOG_TAG "zwave_command_association"
@@ -48,6 +55,12 @@
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_##type
 
 using namespace attribute_store;
+
+// Declare our timer object
+static struct ctimer association_clean_up_timer;
+
+// How long we will let the resolver try to clean up associations (ms)
+constexpr int ASSOCIATION_CLEAN_UP_TIMEOUT = 1500;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Private functions, used to handle individual incoming commands.
@@ -621,6 +634,33 @@ sl_status_t zwave_command_class_association_get(attribute_store_node_t node,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+// Z-Wave Controller reset steps
+///////////////////////////////////////////////////////////////////////////////
+void zwave_command_class_association_clean_up_on_zpc_reset_complete(void *)
+{
+  sl_log_debug(LOG_TAG, "Reset step: Associations clean-up completed.");
+  zwave_controller_on_reset_step_complete(
+    ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY);
+}
+
+sl_status_t zwave_command_class_association_clean_up_on_zpc_reset()
+{
+  sl_log_info(LOG_TAG, "Reset step: Associations clean-up");
+  // We are leaving the network, try to undefine the Lifeline associations
+  remove_desired_node_id_from_all_associations_in_network(
+    zwave_network_management_get_node_id());
+
+  ctimer_set(&association_clean_up_timer,
+             ASSOCIATION_CLEAN_UP_TIMEOUT,
+             &zwave_command_class_association_clean_up_on_zpc_reset_complete,
+             nullptr);
+
+  // We want to give 2 seconds to the resolver to try setting stuff, before we
+  // move on
+  return SL_STATUS_OK;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // Public interface functions
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -630,6 +670,11 @@ sl_status_t zwave_command_class_association_init()
   attribute_store_register_callback_by_type(
     zwave_command_class_association_on_version_attribute_update,
     ATTRIBUTE(VERSION));
+
+  // Tell the Z-Wave Controller that we have to do something on reset
+  zwave_controller_register_reset_step(
+    &zwave_command_class_association_clean_up_on_zpc_reset,
+    ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY);
 
   // Register our handler to the Z-Wave CC framework:
   zwave_command_handler_t handler = {};

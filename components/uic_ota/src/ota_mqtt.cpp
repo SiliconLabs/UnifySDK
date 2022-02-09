@@ -22,10 +22,7 @@
 
 // Third party
 #include <boost/algorithm/string.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-
-namespace bpt = boost::property_tree;
+#include <nlohmann/json.hpp>
 
 // Base topics of relevant MQTT topics
 constexpr std::string_view ota_by_unid_base_topic = "ucl/by-unid";
@@ -64,7 +61,7 @@ std::string convert_status_to_label(uic_ota::status_t status)
 ////////////////////////////////////////////////////////////////////////////////
 
 static void publish_supported_commands(const dotdot_unid_t &unid,
-                                       dotdot_endpoint_id_t &ep)
+                                       const dotdot_endpoint_id_t &ep)
 {
   std::string payload = R"({"value": []})";
   std::string topic   = std::string(ota_by_unid_base_topic) + "/"
@@ -105,27 +102,10 @@ static void publish_cluster_revision(const dotdot_unid_t &unid,
 
 template<typename value> static std::string format_status_payload(value val)
 {
-  bpt::ptree doc;
+  nlohmann::json jsn;
+  jsn["value"] = val;
 
-  // Needed for removing qotation marks "" around an integer on payload
-  bool atomic_type = typeid(value) == typeid(uint32_t)
-                     || typeid(value) == typeid(unsigned long);
-
-  if (atomic_type) {
-    doc.add("value", ":PlaceHolder");
-  } else {
-    doc.add("value", val);
-  }
-  std::stringstream ss;
-  bpt::write_json(ss, doc);
-  std::string payload_str(ss.str());
-
-  if (atomic_type) {
-    std::stringstream number;
-    number << val;
-    std::string number_string(number.str());
-    boost::replace_all(payload_str, "\":PlaceHolder\"", number_string);
-  }
+  std::string payload_str = jsn.dump();
 
   return payload_str;
 }

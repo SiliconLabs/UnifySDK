@@ -1378,3 +1378,95 @@ void test_zwave_command_class_wake_up_verify_wake_up_capability_trigger()
 
   TEST_ASSERT_NOT_NULL(configure_wake_up_interval);
 }
+
+void test_zwave_command_class_wake_up_verify_if_resolution_is_needed()
+{
+  TEST_ASSERT_NOT_NULL(wake_up_handler.control_handler);
+  zwave_controller_connection_info_t connection_info = {};
+  attribute_store_get_reported(node_id_node,
+                               &(connection_info.remote.node_id),
+                               sizeof(connection_info.remote.node_id));
+  attribute_store_get_reported(endpoint_id_node,
+                               &(connection_info.remote.endpoint_id),
+                               sizeof(connection_info.remote.endpoint_id));
+
+  //Create a Wake Up Version, it will create capabilities/settings:
+  attribute_store_node_t wake_up_version_node
+    = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
+  zwave_cc_version_t version = 3;
+  attribute_store_set_reported(wake_up_version_node, &version, sizeof(version));
+
+  // Incoming report, will create reported values
+  wake_up_interval_t expected_interval = 283741;
+  zwave_node_id_t expected_node_id     = 232;
+  const uint8_t incoming_frame[]       = {COMMAND_CLASS_WAKE_UP,
+                                    WAKE_UP_INTERVAL_REPORT,
+                                    (expected_interval >> 16) & 0xFF,
+                                    (expected_interval >> 8) & 0xFF,
+                                    (expected_interval)&0xFF,
+                                    (uint8_t)(expected_node_id)};
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    wake_up_handler.control_handler(&connection_info,
+                                                    incoming_frame,
+                                                    sizeof(incoming_frame)));
+
+  // Verifications:
+  attribute_store_node_t wake_up_setting_node
+    = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                             ATTRIBUTE(SETTING),
+                                             0);
+
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(wake_up_setting_node, REPORTED_ATTRIBUTE));
+
+  // Undefine the Wake up Interval, it should undefine the Setting.
+  attribute_store_node_t wake_up_interval_node
+    = attribute_store_get_node_child_by_type(wake_up_setting_node,
+                                             ATTRIBUTE(INTERVAL),
+                                             0);
+  attribute_store_undefine_reported(wake_up_interval_node);
+  attribute_store_set_desired(wake_up_interval_node,
+                              &expected_interval,
+                              sizeof(expected_interval));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(wake_up_setting_node, REPORTED_ATTRIBUTE));
+
+  // update the desired to re-evalute if we need resolution:
+  attribute_store_set_reported(wake_up_interval_node,
+                               &expected_interval,
+                               sizeof(expected_interval));
+  expected_interval -= 1;
+  attribute_store_set_desired(wake_up_interval_node,
+                              &expected_interval,
+                              sizeof(expected_interval));
+
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(wake_up_setting_node, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_matched(wake_up_setting_node));
+
+  attribute_store_set_reported(wake_up_interval_node,
+                               &expected_interval,
+                               sizeof(expected_interval));
+
+  attribute_store_node_t wake_up_node_id_node
+    = attribute_store_get_node_child_by_type(wake_up_setting_node,
+                                             ATTRIBUTE(NODE_ID),
+                                             0);
+  attribute_store_undefine_reported(wake_up_node_id_node);
+  attribute_store_set_desired(wake_up_node_id_node,
+                              &expected_node_id,
+                              sizeof(expected_node_id));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(wake_up_setting_node, REPORTED_ATTRIBUTE));
+  attribute_store_set_reported(wake_up_node_id_node,
+                               &expected_node_id,
+                               sizeof(expected_node_id));
+  expected_node_id -= 1;
+  attribute_store_set_desired(wake_up_node_id_node,
+                              &expected_node_id,
+                              sizeof(expected_node_id));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(wake_up_setting_node, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(attribute_store_is_value_matched(wake_up_setting_node));
+}

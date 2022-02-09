@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,12 +12,13 @@
  *****************************************************************************/
 
 /**
- * @file attribute_mapper.h
- * @ingroup uic_components
- * @addtogroup attribute_mapper
- * @brief TODO: Write brief for attribute_mapper
+ * @defgroup unify_attribute_mapper Unify Attribute Mapper
+ * @ingroup unify_components
+ * @brief Automatic attribute manipulation component
  *
- * TODO: Write component description for attribute_mapper
+ * This component offers a text file system that allows to define Attribute
+ * relations, allowing automatic rules and attribute manipulations based
+ * on text script files.
  *
  * @{
  */
@@ -31,7 +32,18 @@
 extern "C" {
 #endif
 
+/**
+ * @brief Initializes the Attribute Mapper engine.
+ *
+ * @return sl_status_t SL_STATUS_OK on success, any other code in case of error.
+ */
 sl_status_t attribute_mapper_init();
+
+/**
+ * @brief Adds the required configuration to the @ref unify_config for the
+ * @ref unify_attribute_mapper.
+ *
+ */
 void attribute_mapper_config_init();
 
 #ifdef __cplusplus

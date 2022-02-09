@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/s2/src/zwave_s2_process.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave/zwave_transports/s2/src/zwave_s2_process.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -112,15 +112,17 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
-&#160;&#160;<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba5f7720096a8b1cd6f9bd4fc57796bcbd">S2_TIMER</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55bab94a2d4404427acb3946832e72cb2b36">S2_TIMER_STOP</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55bace570de242b7936fbc7d121e0340ed7f">S2_INCLUSION_TIMER</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba7716af0e974c1d5f0698c0d801e2cb81">S2_INCLUSION_TIMER_STOP</a>, 
+&#160;&#160;<a class="el" href="group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba5f7720096a8b1cd6f9bd4fc57796bcbd">S2_TIMER</a>, 
+<a class="el" href="group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55bab94a2d4404427acb3946832e72cb2b36">S2_TIMER_STOP</a>, 
+<a class="el" href="group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55bace570de242b7936fbc7d121e0340ed7f">S2_INCLUSION_TIMER</a>, 
+<a class="el" href="group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba7716af0e974c1d5f0698c0d801e2cb81">S2_INCLUSION_TIMER_STOP</a>, 
 <br />
-&#160;&#160;<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba45385eb6ec5fbc3179702f8516c48c99">RTIMER_OK</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55bade68e86389e0531689232ff133ade6b7">RTIMER_ERR_FULL</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba27ae4cfb3cd9e0d4279ceba3efbf5017">RTIMER_ERR_TIME</a>, 
-<a class="el" href="group__rt.html#gga06fc87d81c62e9abb8790b6e5713c55ba6158ceaa4e727bb58a633d59a3cac417">RTIMER_ERR_ALREADY_SCHEDULED</a>
+&#160;&#160;<a class="el" href="group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba45385eb6ec5fbc3179702f8516c48c99">RTIMER_OK</a>, 
+<a class="el" href="group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55bade68e86389e0531689232ff133ade6b7">RTIMER_ERR_FULL</a>, 
+<a class="el" href="group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba27ae4cfb3cd9e0d4279ceba3efbf5017">RTIMER_ERR_TIME</a>, 
+<a class="el" href="group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba6158ceaa4e727bb58a633d59a3cac417">RTIMER_ERR_ALREADY_SCHEDULED</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__rt.html#ga06fc87d81c62e9abb8790b6e5713c55ba56f275913421aac16b5efff541f5dfc4">STARTUP</a>
 <br />
  }</td></tr>
 <tr class="separator:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,7 +139,7 @@ Functions</h2></td></tr>
 <tr class="separator:ad2a18168c048d7eb245437440deed436"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a007a7f6e40512e59f28b6dd9723d91cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__process_8c.html#a007a7f6e40512e59f28b6dd9723d91cd">S2_set_timeout</a> (struct S2 *ctxt, uint32_t interval)</td></tr>
 <tr class="separator:a007a7f6e40512e59f28b6dd9723d91cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a517b0574bf5a727ab367104eb856efaf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__process_8c.html#a517b0574bf5a727ab367104eb856efaf">zwave_s2_on_new_network_entered</a> (<a class="el" href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a> <a class="el" href="zwave__unid_8c.html#ad0471edca9947b357d22142c6453b26b">home_id</a>, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_type)</td></tr>
+<tr class="memitem:a517b0574bf5a727ab367104eb856efaf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__process_8c.html#a517b0574bf5a727ab367104eb856efaf">zwave_s2_on_new_network_entered</a> (<a class="el" href="group__zwave__node__id__definitions.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a> <a class="el" href="zwave__unid_8c.html#ad0471edca9947b357d22142c6453b26b">home_id</a>, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys, <a class="el" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_type)</td></tr>
 <tr class="separator:a517b0574bf5a727ab367104eb856efaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51f51bd8129a84a685510bf2aaa812a9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s2__process_8c.html#a51f51bd8129a84a685510bf2aaa812a9">zwave_s2_init</a> ()</td></tr>
 <tr class="separator:a51f51bd8129a84a685510bf2aaa812a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,14 +181,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba5f7720096a8b1cd6f9bd4fc57796bcbd"></a>S2_TIMER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55bab94a2d4404427acb3946832e72cb2b36"></a>S2_TIMER_STOP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55bace570de242b7936fbc7d121e0340ed7f"></a>S2_INCLUSION_TIMER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba7716af0e974c1d5f0698c0d801e2cb81"></a>S2_INCLUSION_TIMER_STOP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba45385eb6ec5fbc3179702f8516c48c99"></a>RTIMER_OK&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55bade68e86389e0531689232ff133ade6b7"></a>RTIMER_ERR_FULL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba27ae4cfb3cd9e0d4279ceba3efbf5017"></a>RTIMER_ERR_TIME&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="gga06fc87d81c62e9abb8790b6e5713c55ba6158ceaa4e727bb58a633d59a3cac417"></a>RTIMER_ERR_ALREADY_SCHEDULED&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ga06fc87d81c62e9abb8790b6e5713c55ba5f7720096a8b1cd6f9bd4fc57796bcbd"></a>S2_TIMER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ga06fc87d81c62e9abb8790b6e5713c55bab94a2d4404427acb3946832e72cb2b36"></a>S2_TIMER_STOP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ga06fc87d81c62e9abb8790b6e5713c55bace570de242b7936fbc7d121e0340ed7f"></a>S2_INCLUSION_TIMER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ga06fc87d81c62e9abb8790b6e5713c55ba7716af0e974c1d5f0698c0d801e2cb81"></a>S2_INCLUSION_TIMER_STOP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ga06fc87d81c62e9abb8790b6e5713c55ba45385eb6ec5fbc3179702f8516c48c99"></a>RTIMER_OK&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ga06fc87d81c62e9abb8790b6e5713c55bade68e86389e0531689232ff133ade6b7"></a>RTIMER_ERR_FULL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ga06fc87d81c62e9abb8790b6e5713c55ba27ae4cfb3cd9e0d4279ceba3efbf5017"></a>RTIMER_ERR_TIME&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ga06fc87d81c62e9abb8790b6e5713c55ba6158ceaa4e727bb58a633d59a3cac417"></a>RTIMER_ERR_ALREADY_SCHEDULED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ga06fc87d81c62e9abb8790b6e5713c55ba56f275913421aac16b5efff541f5dfc4"></a>STARTUP&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -383,19 +386,19 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">static void zwave_s2_on_new_network_entered </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a>&#160;</td>
           <td class="paramname"><em>home_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>node_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__controller__keyset.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a>&#160;</td>
           <td class="paramname"><em>granted_keys</em>, </td>
         </tr>
         <tr>
@@ -469,8 +472,8 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_7865c04e95e3af91f230df5bcfa47762.html">s2</a></li><li class="navelem"><a class="el" href="dir_5a84bbd2dc954749314d7bf6843a3ac7.html">src</a></li><li class="navelem"><a class="el" href="zwave__s2__process_8c.html">zwave_s2_process.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_f4b467f0a960798c9a570e0236e928b5.html">zwave_transports</a></li><li class="navelem"><a class="el" href="dir_c5857c108563b07d75b703edd6e82189.html">s2</a></li><li class="navelem"><a class="el" href="dir_72b30d30b797094cfcbfd1cdd0f6c1d5.html">src</a></li><li class="navelem"><a class="el" href="zwave__s2__process_8c.html">zwave_s2_process.c</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:23 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

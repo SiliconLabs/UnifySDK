@@ -12,8 +12,17 @@
  *****************************************************************************/
 
 /**
+ * @defgroup unify_components Unify Components
+ * @brief Shared Unify components to be used by multiple applications
+ *
+ * The Unify components is a set of components aimed at being reused my multiple
+ * applications.
+ *
+ */
+
+/**
  * @file uic_typedefs.h
- * @brief Generic type definitions for UIC
+ * @brief Generic type definitions for Unify
  *
  * Generic type definitions used by multiple UIC components.
  *
@@ -26,9 +35,10 @@
 #ifndef UIC_TYPEDEFS_H
 #define UIC_TYPEDEFS_H
 
-typedef const uint8_t dotdot_endpoint_id_t;
+typedef uint8_t dotdot_endpoint_id_t;
 typedef const char *dotdot_unid_t;
 typedef const char *ota_uiid_t;
+typedef uint16_t dotdot_group_id_t;
 
 #endif  //UIC_TYPEDEFS_H
 /** @} end uic_typedefs */

@@ -15,6 +15,8 @@
 
 // Generic includes
 #include <assert.h>
+#include <vector>
+#include <set>
 
 // Interface includes
 #include "zwave_controller_command_class_indices.h"
@@ -32,11 +34,19 @@
 #include "attribute_resolver.h"
 #include "sl_log.h"
 
-#include <vector>
-
 // Note, Multi Channel Association shares attributes with Association
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_##type
 constexpr char LOG_TAG[] = "command_class_agi";
+
+///////////////////////////////////////////////////////////////////////////////
+// Private variables
+///////////////////////////////////////////////////////////////////////////////
+namespace
+{
+// List of Command Class/Command pairs that, if sent by association groups,
+// we want to make sure to try to associate ourselves to.
+std::set<std::pair<zwave_command_class_t, zwave_command_t>> agi_listeners;
+}  // Private variables namespace
 
 // Function prototypes
 static void zwave_command_class_agi_zpc_group_init();
@@ -49,6 +59,11 @@ static void
 ///////////////////////////////////////////////////////////////////////////////
 // Private functions
 ///////////////////////////////////////////////////////////////////////////////
+
+/**
+ * @brief Initializes and configures the AGI for the ZPC.
+ *
+ */
 static void zwave_command_class_agi_zpc_configuration_init()
 {
   zwave_command_class_agi_zpc_group_init();
@@ -60,6 +75,10 @@ static void zwave_command_class_agi_zpc_configuration_init()
                                                 AGI_LIFELINE_PROFILE);
 }
 
+/**
+ * @brief Initializes the ZPC group data and writes it down in the attribute store.
+ *
+ */
 static void zwave_command_class_agi_zpc_group_init()
 {
   attribute_store_node_t endpoint_node = get_zpc_endpoint_id_node(0);
@@ -147,6 +166,12 @@ static void zwave_command_class_agi_zpc_group_init()
   }
 }
 
+/**
+ * @brief Sets the Association Group profile for the ZPC.
+ *
+ * @param group_id  Group ID to set the association group profile
+ * @param profile   Group Profile to assign to the association group
+ */
 static void
   zwave_command_class_agi_set_zpc_group_profile(association_group_id_t group_id,
                                                 agi_profile_t profile)
@@ -168,6 +193,13 @@ static void
   attribute_store_set_reported(group_profile_node, &profile, sizeof(profile));
 }
 
+/**
+ * @brief Sets the Association Group name for the ZPC.
+ *
+ * @param group_id        Group ID to set the association group name
+ * @param name            The name to assign to the association group
+ * @param name_size       The Length of the name string.
+ */
 static void zwave_command_class_agi_set_zpc_group_name(
   association_group_id_t group_id, const char *name, uint8_t name_size)
 {
@@ -188,7 +220,18 @@ static void zwave_command_class_agi_set_zpc_group_name(
   attribute_store_set_reported(group_name_node, name, name_size);
 }
 
-static bool is_command_is_array(zwave_command_class_t command_class,
+/**
+ * @brief Searches if a Command Class/Command pair is in a byte array of
+ * Command class/command pairs
+ *
+ * @param command_class         The Command Class to look for
+ * @param command               The Command to look for
+ * @param command_list          Pointer to the Command Class/Command byte array
+ * @param command_list_length   Length of the command_list array (in bytes)
+ *
+ * @returns true if the COmmand Class/Command pair has been found, false if not found
+ */
+static bool is_command_in_array(zwave_command_class_t command_class,
                                 zwave_command_t command,
                                 const uint8_t *command_list,
                                 uint8_t command_list_length)
@@ -226,6 +269,43 @@ static bool is_command_is_array(zwave_command_class_t command_class,
     }
   }
   return command_found;
+}
+
+/**
+ * @brief Find under which Association Group ID is an attribute store Node located.
+ *
+ * @param node    The node for which the Association Group ID is to be found
+ * @returns 0 the node is not located under a valid Group ID. Else the value of
+ *          the association group id.
+ */
+static association_group_id_t get_group_id(const attribute_store_node_t node)
+{
+  attribute_store_node_t group_id_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE(GROUP_ID));
+  association_group_id_t group_id = 0;
+  attribute_store_get_reported(group_id_node, &group_id, sizeof(group_id));
+  return group_id;
+}
+
+/**
+ * @brief Verifies if the an Attribute is located under a NodeID/EP that
+ * supports the AGI Command CLass
+ *
+ * @param node      Attribute store node to verify if the NodeID/EP
+ *                  parent supports AGI
+ * @return true if AGI is supported, false otherwise (or unknown)
+ */
+static bool is_agi_supported_for_node(const attribute_store_node_t node)
+{
+  // Now, does the node support AGI ?
+  zwave_node_id_t node_id         = 0;
+  zwave_endpoint_id_t endpoint_id = 0;
+  attribute_store_network_helper_get_zwave_ids_from_node(node,
+                                                         &node_id,
+                                                         &endpoint_id);
+  return zwave_node_supports_command_class(COMMAND_CLASS_ASSOCIATION_GRP_INFO,
+                                           node_id,
+                                           endpoint_id);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -303,7 +383,7 @@ sl_status_t zwave_command_class_agi_add_group_commands(
                                            &command_list_length);
 
   if (true
-      == is_command_is_array(command_class,
+      == is_command_in_array(command_class,
                              command,
                              command_list,
                              command_list_length)) {
@@ -359,33 +439,62 @@ bool zwave_command_class_agi_is_command_allowed_for_group(
                                            REPORTED_ATTRIBUTE,
                                            command_list,
                                            &command_list_length);
-  return is_command_is_array(command_class,
+  return is_command_in_array(command_class,
                              command,
                              command_list,
                              command_list_length);
 }
 
-static association_group_id_t get_group_id(const attribute_store_node_t node)
+void zwave_command_class_agi_request_to_establish_association(
+  zwave_command_class_t command_class, zwave_command_t command)
 {
-  attribute_store_node_t group_id_node
-    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE(GROUP_ID));
-  association_group_id_t group_id = 0;
-  attribute_store_get_reported(group_id_node, &group_id, sizeof(group_id));
-  return group_id;
+  // The list is only additive, we never clear it.
+  agi_listeners.insert(std::make_pair(command_class, command));
 }
 
-static bool is_agi_supported_for_node(const attribute_store_node_t node)
+bool zwave_command_class_agi_group_contains_listeners(
+  zwave_node_id_t node_id,
+  zwave_endpoint_id_t endpoint_id,
+  association_group_id_t group_id)
 {
-  // Now, does the node support AGI ?
-  zwave_node_id_t node_id         = 0;
-  zwave_endpoint_id_t endpoint_id = 0;
-  attribute_store_network_helper_get_zwave_ids_from_node(node,
-                                                         &node_id,
-                                                         &endpoint_id);
-  return zwave_node_supports_command_class(COMMAND_CLASS_ASSOCIATION_GRP_INFO,
-                                           node_id,
-                                           endpoint_id);
+  attribute_store_node_t command_list_node
+    = get_group_child_node(node_id,
+                           endpoint_id,
+                           group_id,
+                           ATTRIBUTE(GROUP_COMMAND_LIST));
+  uint8_t group_command_list[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  uint8_t group_command_list_length = 0;
+  attribute_store_get_node_attribute_value(command_list_node,
+                                           REPORTED_ATTRIBUTE,
+                                           group_command_list,
+                                           &group_command_list_length);
+
+  // Is there a Command Class / Command pair that we want to listen to ?
+  for (auto [command_class, command]: agi_listeners) {
+    if (true
+        == is_command_in_array(command_class,
+                               command,
+                               group_command_list,
+                               group_command_list_length)) {
+      sl_log_debug(LOG_TAG,
+                   "We have listeners for NodeID %d:%d - "
+                   "Group ID %d. Recommending to establish association.",
+                   node_id,
+                   endpoint_id,
+                   group_id);
+      return true;
+    }
+  }
+
+  sl_log_debug(LOG_TAG,
+               "We are not interested in Association Group ID %d "
+               "for NodeID %d:%d.",
+               group_id,
+               node_id,
+               endpoint_id);
+  return false;
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute resolution functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -833,6 +942,12 @@ static sl_status_t zwave_command_class_agi_control_handler(
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute update callbacks
 ///////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Reacts to updates Assocation Group ID updates and creates AGI data
+ *
+ * @param updated_node    Association Group ID node that was updated.
+ * @param change          Attribute Store changed peformed on the node.
+ */
 static void
   zwave_command_class_association_group_information_on_group_id_attribute_update(
     attribute_store_node_t updated_node, attribute_store_change_t change)

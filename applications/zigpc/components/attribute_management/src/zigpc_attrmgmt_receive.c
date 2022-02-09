@@ -63,7 +63,7 @@ sl_status_t
 
         size_t attr_data_size = zigpc_zcl_get_data_type_size(attr_type);
 
-        status = zigpc_attrmgmt_publish_reported(eui64,
+        status = zigpc_attrmgmt_publish_reported(zigbee_eui64_to_uint(eui64),
                                                  endpoint_id,
                                                  cluster_id,
                                                  attr_id,

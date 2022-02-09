@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -137,7 +137,7 @@ void test_on_frame_received_supported_cc()
     &connection_info_frame_non_secure,
     true);
   // Receive a frame
-  zwave_controller_callbacks->on_frame_received(
+  zwave_controller_callbacks->on_application_frame_received(
     &connection_info_frame_non_secure,
     NULL,
     frame_data_1,
@@ -154,7 +154,7 @@ void test_security_levels()
     ZWAVE_CONTROLLER_ENCAPSULATION_NONE,
     &connection_info_frame_security_2_access,
     true);
-  zwave_controller_callbacks->on_frame_received(
+  zwave_controller_callbacks->on_application_frame_received(
     &connection_info_frame_security_2_access,
     NULL,
     frame_data_1,
@@ -168,7 +168,7 @@ void test_security_levels()
     ZWAVE_CONTROLLER_ENCAPSULATION_NONE,
     &connection_info_frame_security_2_access,
     false);
-  zwave_controller_callbacks->on_frame_received(
+  zwave_controller_callbacks->on_application_frame_received(
     &connection_info_frame_security_2_authenticated,
     NULL,
     frame_data_1,
@@ -181,7 +181,7 @@ void test_command_class_not_supported()
 {
   zwave_command_handler_init_test_helper();
 
-  zwave_controller_callbacks->on_frame_received(
+  zwave_controller_callbacks->on_application_frame_received(
     &connection_info_frame_security_2_authenticated,
     NULL,
     frame_data_3,

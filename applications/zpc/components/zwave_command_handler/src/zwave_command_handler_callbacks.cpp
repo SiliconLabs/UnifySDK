@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -231,14 +231,12 @@ void zwave_command_handler_on_frame_received(
   switch (status) {
     case SL_STATUS_OK:
       sl_log_debug(LOG_TAG, "Command was handled successfully.");
-      return;
       break;
 
     case SL_STATUS_FAIL:
       sl_log_debug(LOG_TAG,
                    "Command had an error during handling. "
                    "Not all parameters were accepted");
-      return;
       break;
 
     case SL_STATUS_BUSY:
@@ -247,21 +245,18 @@ void zwave_command_handler_on_frame_received(
       sl_log_error(
         LOG_TAG,
         "Frame handler is busy and could not handle frame correctly.");
-      return;
       break;
 
     case SL_STATUS_NOT_SUPPORTED:
       sl_log_info(LOG_TAG,
                   "Command got rejected because it is not supported. "
                   "It was possibly also rejected due to security filtering\n");
-      return;
       break;
 
     default:
       sl_log_warning(LOG_TAG,
                      "Command had an unexpected return status: 0x%04X\n",
                      status);
-      return;
       break;
   }
 }

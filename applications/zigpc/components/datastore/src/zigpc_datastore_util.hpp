@@ -116,7 +116,7 @@ void log_attributes_under_cluster(attribute_store_node_t cluster_parent,
  * @param ep_parent     Parent entity node ID (Device).
  * @param endpoint      Endpoint Accessor.
  * @param endpoint_id   Endpoint identifier.
- * @param clsuter_side  Cluster side (server/client).
+ * @param cluster_side  Cluster side (server/client).
  */
 void log_clusters_under_ep(attribute_store_node_t ep_parent,
                            EndpointAccessor &endpoint,

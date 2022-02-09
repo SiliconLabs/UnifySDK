@@ -23,7 +23,7 @@ var attribute__management__int_8h =
     [ "zigpc_attrmgmt_get_poll_list_max_size", "attribute__management__int_8h.html#a934a0fb426ac2b8a4f6c6a3830d6bb40", null ],
     [ "zigpc_attrmgmt_get_records_to_send_in_message", "attribute__management__int_8h.html#ac4a663f07b9e165c2596d0f19f83bd82", null ],
     [ "zigpc_attrmgmt_process_send_event", "attribute__management__int_8h.html#a3e01c38de3ec14296472895a7aaf4979", null ],
-    [ "zigpc_attrmgmt_publish_reported", "attribute__management__int_8h.html#a8cf71e4a11231e902544af7cb61bb0eb", null ],
+    [ "zigpc_attrmgmt_publish_reported", "attribute__management__int_8h.html#a01021487312902d3ca730b8ae6f1841a", null ],
     [ "zigpc_attrmgmt_receive_attribute_frame", "attribute__management__int_8h.html#adb2d6ea07775420f88b9b1fc9849c9e9", null ],
     [ "zigpc_attrmgmt_receive_configure_response_frame", "attribute__management__int_8h.html#a879ad34ab387c372e883b113bc93032b", null ],
     [ "zigpc_attrmgmt_remove_poll_entry", "attribute__management__int_8h.html#aada66a3b43b1812541c090fa1ea54483", null ],

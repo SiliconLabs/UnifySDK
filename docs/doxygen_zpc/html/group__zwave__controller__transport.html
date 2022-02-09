@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Z-Wave Controller Transport</title>
+<title>Z-Wave Protocol Controller Refrence: Z-Wave Controller Transport Framework</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -84,17 +84,24 @@ $(document).ready(function(){initNavTree('group__zwave__controller__transport.ht
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Modules</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Z-Wave Controller Transport<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a></div></div>  </div>
+<div class="title">Z-Wave Controller Transport Framework<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__controller__component.html">Z-Wave Controller Component</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Z-Wave controller transport framework.  
+<p>Z-Wave Controller Transport Framework.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__zwave__controller__transport__internal"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__transport__internal.html">Z-Wave Controller Transport internals.</a></td></tr>
+<tr class="memdesc:group__zwave__controller__transport__internal"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal Z-Wave Controller transport related functions. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structzwave__controller__transport.html">zwave_controller_transport</a></td></tr>
@@ -109,16 +116,16 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga7d336fb70a955271e1c958ce52885c9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__transport.html#ga7d336fb70a955271e1c958ce52885c9d">zwave_controller_transport_register</a> (const <a class="el" href="group__zwave__controller__transport.html#gaf72b6c663101c48945fda0c4c31c0c61">zwave_controller_transport_t</a> *transport)</td></tr>
+<tr class="memitem:ga7d336fb70a955271e1c958ce52885c9d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__transport.html#ga7d336fb70a955271e1c958ce52885c9d">zwave_controller_transport_register</a> (const <a class="el" href="group__zwave__controller__transport.html#gaf72b6c663101c48945fda0c4c31c0c61">zwave_controller_transport_t</a> *transport)</td></tr>
 <tr class="memdesc:ga7d336fb70a955271e1c958ce52885c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Must be called to register a transport.  <a href="group__zwave__controller__transport.html#ga7d336fb70a955271e1c958ce52885c9d">More...</a><br /></td></tr>
 <tr class="separator:ga7d336fb70a955271e1c958ce52885c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac2a2517636452c80d8b6384fbc6963ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__command__class__version__types_8h.html#aad4ed685a718abe0fd70f07f949a4907">zwave_cc_version_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__transport.html#gac2a2517636452c80d8b6384fbc6963ac">zwave_controller_transport_is_encapsulation_cc</a> (<a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> command_class)</td></tr>
+<tr class="memitem:gac2a2517636452c80d8b6384fbc6963ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__command__class__version__types.html#gaad4ed685a718abe0fd70f07f949a4907">zwave_cc_version_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__controller__transport.html#gac2a2517636452c80d8b6384fbc6963ac">zwave_controller_transport_is_encapsulation_cc</a> (<a class="el" href="group__zwave__controller__types.html#gaa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a> command_class)</td></tr>
 <tr class="memdesc:gac2a2517636452c80d8b6384fbc6963ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">check if a command class is registered as an encapsulation cc in Z-Wave controller transport framework. If it does, the module will retrun the version of the encapsulation command class.  <a href="group__zwave__controller__transport.html#gac2a2517636452c80d8b6384fbc6963ac">More...</a><br /></td></tr>
 <tr class="separator:gac2a2517636452c80d8b6384fbc6963ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Z-Wave controller transport framework. </p>
-<p>The purpose of the Z-wave controller transport framework, is to have a simple API witch handles integration of all Z-Wave transport command classes. Each encapsulation command class will register its command handlers and send data function to the controller. The controller module will make sure that the right handler will be executed when appropriate.</p>
+<p>Z-Wave Controller Transport Framework. </p>
+<p>The purpose of the Z-Wave Controller Transport Framework, is to have a simple API witch handles integration of all Z-Wave transport command classes. Each encapsulation command class will register its command handlers and send data function to the controller. The controller module will make sure that the right handler will be executed when appropriate.</p>
 <p>Each transport can be single session when sending.</p>
 <p>All transport must use the <a class="el" href="group__zwave__tx__interface.html#gad1538f36d226fe8147c5e538625568df">zwave_tx_send_data</a> function when sending frames. It is important the the transport handlers use the zwave_tx_parent_session_id parameter in zwave_tx_options_t when sending frames.</p>
 <p>When a frame is de-encapsulated it must be forwarded using the <a class="el" href="group__zwave__controller__internal.html#ga79b433f95d08d541cd2a4d74ed27fd65">zwave_controller_on_frame_received</a> function.</p>
@@ -155,9 +162,9 @@ Transport plugin interactions</div></div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="zwave__command__class__version__types_8h.html#aad4ed685a718abe0fd70f07f949a4907">zwave_cc_version_t</a> zwave_controller_transport_is_encapsulation_cc </td>
+          <td class="memname"><a class="el" href="group__zwave__command__class__version__types.html#gaad4ed685a718abe0fd70f07f949a4907">zwave_cc_version_t</a> zwave_controller_transport_is_encapsulation_cc </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#aa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#gaa509d092fd5a99593f1868cab633a5b6">zwave_command_class_t</a>&#160;</td>
           <td class="paramname"><em>command_class</em></td><td>)</td>
           <td></td>
         </tr>
@@ -182,7 +189,7 @@ Transport plugin interactions</div></div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_controller_transport_register </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_controller_transport_register </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group__zwave__controller__transport.html#gaf72b6c663101c48945fda0c4c31c0c61">zwave_controller_transport_t</a> *&#160;</td>
           <td class="paramname"><em>transport</em></td><td>)</td>
@@ -208,7 +215,7 @@ Transport plugin interactions</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:33 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

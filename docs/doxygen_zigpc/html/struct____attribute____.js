@@ -6,6 +6,7 @@ var struct____attribute____ =
     [ "eui64", "struct____attribute____.html#a0e8274835532a4a006c46775e55bca90", null ],
     [ "ext_panid", "struct____attribute____.html#a17ece35a0a288a71e581ad13060c5a08", null ],
     [ "gateway_eui64", "struct____attribute____.html#aab3283ffa89d1092d571b22570fbd9ad", null ],
+    [ "group_name", "struct____attribute____.html#a13d13e3f0a8f7dbd450c45a15c5efdd6", null ],
     [ "max_cmd_delay", "struct____attribute____.html#aecbf6347e41dee3f8b6f8a306f1f9ebe", null ],
     [ "network_status", "struct____attribute____.html#a1885800ba3f2f6f1ae53753165a6cfe4", null ],
     [ "node_id", "struct____attribute____.html#a62568509d69b4cbeb68d00f3f37423d7", null ],

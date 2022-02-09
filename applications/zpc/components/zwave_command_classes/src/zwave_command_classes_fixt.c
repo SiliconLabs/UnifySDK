@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -16,6 +16,7 @@
 #include "zwave_command_class_association.h"
 #include "zwave_command_class_agi.h"
 #include "zwave_command_class_binary_switch.h"
+#include "zwave_command_class_central_scene.h"
 #include "zwave_command_class_indicator.h"
 #include "zwave_command_class_manufacturer_specific.h"
 #include "zwave_command_class_multilevel_sensor.h"
@@ -40,6 +41,7 @@
 #include "zwave_command_class_multi_command.h"
 #include "zwave_command_class_transport_service.h"
 #include "zwave_command_class_indicator_control.h"
+#include "zwave_command_class_manufacturer_specific_control.h"
 // Generic includes
 #include <stdbool.h>
 
@@ -51,14 +53,9 @@
 #include "sl_log.h"
 
 #include "zwave_COMMAND_CLASS_DOOR_LOCK_handlers.h"
-#include "zwave_COMMAND_CLASS_MANUFACTURER_SPECIFIC_handlers.h"
 #include "zwave_COMMAND_CLASS_ZWAVEPLUS_INFO_handlers.h"
 #include "zwave_COMMAND_CLASS_BATTERY_handlers.h"
-#include "zwave_COMMAND_CLASS_SWITCH_BINARY_handlers.h"
 #include "zwave_COMMAND_CLASS_SENSOR_BINARY_handlers.h"
-
-// defined in rust project rust_command_classes
-extern sl_status_t zwave_command_class_init_rust_handlers();
 
 sl_status_t zwave_command_classes_init()
 {
@@ -70,6 +67,7 @@ sl_status_t zwave_command_classes_init()
   initialization_status |= zwave_command_class_agi_init();
   initialization_status |= zwave_command_class_association_init();
   initialization_status |= zwave_command_class_binary_switch_init();
+  initialization_status |= zwave_command_class_central_scene_init();
   initialization_status |= zwave_command_class_indicator_init();
   initialization_status |= zwave_command_class_manufacturer_specific_init();
   initialization_status |= zwave_command_class_multi_channel_init();
@@ -93,17 +91,15 @@ sl_status_t zwave_command_classes_init()
   initialization_status |= zwave_command_class_multi_command_init();
   initialization_status |= zwave_command_class_transport_service_init();
   initialization_status |= zwave_command_class_inclusion_controller_init();
-  initialization_status |= zwave_command_class_init_rust_handlers();
   initialization_status |= zwave_command_class_indicator_control_init();
+  initialization_status
+    |= zwave_command_class_manufacturer_specific_control_init();
 
   // Auto-generated handlers
   initialization_status |= zwave_COMMAND_CLASS_DOOR_LOCK_init();
-  initialization_status |= zwave_COMMAND_CLASS_MANUFACTURER_SPECIFIC_init();
   initialization_status |= zwave_COMMAND_CLASS_ZWAVEPLUS_INFO_init();
   initialization_status |= zwave_COMMAND_CLASS_BATTERY_init();
   initialization_status |= zwave_COMMAND_CLASS_SENSOR_BINARY_init();
-  // De-activated Binary Switch for now. We can play with it after cert again.
-  //initialization_status |= zwave_COMMAND_CLASS_SWITCH_BINARY_init();
 
   zwave_command_handler_print_info(-1);
   return initialization_status;

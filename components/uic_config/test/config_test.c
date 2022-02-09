@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -116,6 +116,20 @@ void test_bool_arg()
                             config_get_as_bool("myflag", &res),
                             "Failed to get myflag");
   TEST_ASSERT_TRUE_MESSAGE(res, "bool argument doesn't match");
+}
+
+void test_flag()
+{
+  config_add_flag("myflag", "My flag");
+  char *argv_inject[] = {"test_config", "--conf", TEST_CONFIG_FILE, "--myflag"};
+  TEST_ASSERT_EQUAL_MESSAGE(
+    CONFIG_STATUS_OK,
+    config_parse(sizeof(argv_inject) / sizeof(char *), argv_inject, "1.0"),
+    "zpc_config_init failed");
+
+  TEST_ASSERT_EQUAL_MESSAGE(CONFIG_STATUS_OK,
+                            config_has_flag("myflag"),
+                            "Failed to get myflag");
 }
 
 void test_config_file()
@@ -340,7 +354,6 @@ void test_config_tls_certs()
   TEST_ASSERT_EQUAL(CONFIG_STATUS_OK,
                     config_get_as_string(CONFIG_KEY_MQTT_KEYFILE, &keyfile));
   TEST_ASSERT_EQUAL_STRING("/tmp/keyfile", keyfile);
-
 }
 
 void test_config_tls_certs_default()
@@ -367,7 +380,4 @@ void test_config_tls_certs_default()
   TEST_ASSERT_EQUAL(CONFIG_STATUS_OK,
                     config_get_as_string(CONFIG_KEY_MQTT_KEYFILE, &keyfile));
   TEST_ASSERT_EQUAL_STRING("", keyfile);
-
 }
-
-

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -73,7 +73,7 @@ void mqtt_wrapper_destroy(void *instance);
  */
 int mqtt_wrapper_socket(void *instance);
 /**
- * @brief Configure the client for Certficate based TLS support 
+ * @brief Configure the client for Certficate based TLS support
  *
  * Wrapper to mosquitto_tls_set()
  *
@@ -90,16 +90,16 @@ sl_status_t mqtt_wrapper_tls_set(void *instance,
                                  const char *certfile,
                                  const char *keyfile);
 /**
- * @brief Configure the client for pre-shared-key based TLS support 
+ * @brief Configure the client for pre-shared-key based TLS support
  *
  * Wrapper to mosquitto_tls_psk_set()
  *
  * @param instance Pointer to a client-instance.
  * @param psk the pre-shared-key in hex format with no leading “0x”.
- * @param id the identity of this client. 
- * @param ciphers a string describing the PSK ciphers available for use.  
- *        See the “openssl ciphers” tool for more information. 
- *        If NULL, the default ciphers will be used. 
+ * @param id the identity of this client.
+ * @param ciphers a string describing the PSK ciphers available for use.
+ *        See the “openssl ciphers” tool for more information.
+ *        If NULL, the default ciphers will be used.
  * @return \ref SL_STATUS_OK \copybrief SL_STATUS_OK
  * @return \ref SL_STATUS_INVALID_PARAMETER \copybrief SL_STATUS_INVALID_PARAMETER
  * @return \ref SL_STATUS_ERRNO \copybrief SL_STATUS_ERRNO

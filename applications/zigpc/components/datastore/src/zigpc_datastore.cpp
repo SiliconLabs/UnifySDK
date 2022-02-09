@@ -205,7 +205,107 @@ sl_status_t zigpc_datastore_remove_endpoint(const zigbee_eui64_t eui64,
 
   return endpoint.remove(parent, endpoint_id);
 }
+/*********/
 
+size_t zigpc_datastore_get_group_count(const zigbee_eui64_t eui64,
+                                       zigbee_endpoint_id_t endpoint_id,
+                                       bool is_reported)
+{
+  zigbee_eui64_uint_t eui64_i = zigbee_eui64_to_uint(eui64);
+  attribute_store_node_t parent
+    = zigpc_datastore::util::get_endpoint_parent(eui64_i);
+  EndpointAccessor endpoint;
+
+  return endpoint.child_count(parent,
+                              endpoint_id,
+                              GroupAccessor::get_entity_type(is_reported));
+}
+
+sl_status_t
+  zigpc_datastore_find_group_by_index(const zigbee_eui64_t eui64,
+                                      zigbee_endpoint_id_t endpoint_id,
+                                      bool is_reported,
+                                      size_t index,
+                                      zigbee_group_id_t *group_id)
+{
+  zigbee_eui64_uint_t eui64_i = zigbee_eui64_to_uint(eui64);
+  attribute_store_node_t parent
+    = zigpc_datastore::util::get_cluster_parent(eui64_i, endpoint_id);
+  GroupAccessor group(is_reported);
+
+  return group.find_by_index(parent, index, group_id);
+}
+
+bool zigpc_datastore_contains_group(const zigbee_eui64_t eui64,
+                                    zigbee_endpoint_id_t endpoint_id,
+                                    bool is_reported,
+                                    zigbee_group_id_t group_id)
+{
+  zigbee_eui64_uint_t eui64_i = zigbee_eui64_to_uint(eui64);
+  attribute_store_node_t parent
+    = zigpc_datastore::util::get_cluster_parent(eui64_i, endpoint_id);
+  GroupAccessor group(is_reported);
+
+  attribute_store_node_t group_node = group.find(parent, group_id);
+
+  bool is_found = !(group_node == ATTRIBUTE_STORE_INVALID_NODE);
+
+  return is_found;
+}
+
+sl_status_t zigpc_datastore_create_group(const zigbee_eui64_t eui64,
+                                         zigbee_endpoint_id_t endpoint_id,
+                                         bool is_reported,
+                                         zigbee_group_id_t group_id)
+{
+  zigbee_eui64_uint_t eui64_i = zigbee_eui64_to_uint(eui64);
+  attribute_store_node_t parent
+    = zigpc_datastore::util::get_cluster_parent(eui64_i, endpoint_id);
+  GroupAccessor group(is_reported);
+
+  return group.create(parent, group_id);
+}
+
+sl_status_t zigpc_datastore_read_group(const zigbee_eui64_t eui64,
+                                       zigbee_endpoint_id_t endpoint_id,
+                                       bool is_reported,
+                                       zigbee_group_id_t group_id,
+                                       zigpc_group_data_t *const data)
+{
+  zigbee_eui64_uint_t eui64_i = zigbee_eui64_to_uint(eui64);
+  attribute_store_node_t parent
+    = zigpc_datastore::util::get_cluster_parent(eui64_i, endpoint_id);
+  GroupAccessor group(is_reported);
+
+  return group.read(parent, group_id, data);
+}
+
+sl_status_t zigpc_datastore_write_group(const zigbee_eui64_t eui64,
+                                        zigbee_endpoint_id_t endpoint_id,
+                                        bool is_reported,
+                                        zigbee_group_id_t group_id,
+                                        const zigpc_group_data_t *data)
+{
+  zigbee_eui64_uint_t eui64_i = zigbee_eui64_to_uint(eui64);
+  attribute_store_node_t parent
+    = zigpc_datastore::util::get_cluster_parent(eui64_i, endpoint_id);
+  GroupAccessor group(is_reported);
+
+  return group.write(parent, group_id, data);
+}
+
+sl_status_t zigpc_datastore_remove_group(const zigbee_eui64_t eui64,
+                                         zigbee_endpoint_id_t endpoint_id,
+                                         bool is_reported,
+                                         zigbee_group_id_t group_id)
+{
+  zigbee_eui64_uint_t eui64_i = zigbee_eui64_to_uint(eui64);
+  attribute_store_node_t parent
+    = zigpc_datastore::util::get_cluster_parent(eui64_i, endpoint_id);
+  GroupAccessor group(is_reported);
+
+  return group.remove(parent, group_id);
+}
 /**********************************
  **********************************
  *

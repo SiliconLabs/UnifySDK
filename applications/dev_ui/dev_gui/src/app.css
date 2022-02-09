@@ -1,3 +1,7 @@
+.no-brake-word {
+    word-break: normal;
+}
+
 .split1 {
     float: left;
     width: 230px;
@@ -91,6 +95,10 @@
     width: 40px;
 }
 
+.wd-120px {
+    width: 120px;
+}
+
 .pointer {
     cursor: pointer !important;
 }
@@ -101,6 +109,11 @@
 
 .no-padding {
     padding: 0 !important;
+}
+
+.no-padding-v {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 .no-padding-h {
@@ -116,6 +129,10 @@
     padding-left: 0 !important;
 }
 
+.padding-2 {
+    padding: 2px !important;
+}
+
 .padding-5 {
     padding: 5px !important;
 }
@@ -127,6 +144,11 @@
 
 .padding-l-5 {
     padding-left: 5px;
+}
+
+.padding-v-20 {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
 }
 
 .no-content {
@@ -179,8 +201,8 @@
     height: 30px;
 }
 
-.table.table-striped th,
-.table.table-striped td {
+.table th,
+.table td {
     vertical-align: middle;
     line-height: 17px;
 }
@@ -197,6 +219,14 @@
 
 .error-border {
     border-color: #dc3545;
+}
+
+.error-background {
+    background-color: hsl(355, 100%, 90%) !important;
+}
+
+.warning-background {
+    background-color: hsla(27, 98%, 54%, 0.233) !important;
 }
 
 .icon {
@@ -274,6 +304,45 @@
     overflow: hidden;
     width: calc(100% - 46px);
     text-overflow: ellipsis;
+}
+
+.vertical-middle {
+    vertical-align: middle !important;
+}
+
+.editable-field {
+    color: #007bff;
+    cursor: pointer;
+}
+
+.group-modal.modal-header .close {
+    padding: 0rem 0rem;
+    margin: 0;
+}
+
+.group-popup-input.MuiFormControl-root {
+    margin-left: 10px;
+    margin-top: 4px;
+}
+
+.group-popup-input .MuiInputBase-input {
+    padding: 6px 0 7px;
+    font-size: 20px;
+    color: #007bff !important;
+    cursor: pointer;
+}
+
+.color-picker-container {
+    position: absolute;
+    z-index: 2;
+}
+
+.color-picker-container .cover {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
 }
 
 @keyframes blinker {

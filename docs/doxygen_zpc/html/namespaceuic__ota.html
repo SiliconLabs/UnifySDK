@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: uic_ota Namespace Reference</title>
+<title>Z-Wave Protocol Controller Refrence: uic_ota Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('namespaceuic__ota.html',''); initResiz
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">uic_ota Namespace Reference<div class="ingroups"><a class="el" href="group__ota__listener.html">OTA Listener</a></div></div>  </div>
+<div class="title">uic_ota Namespace Reference<div class="ingroups"><a class="el" href="group__unify__components.html">Unify Components</a> &raquo; <a class="el" href="group__image__listener.html">OTA (Over-the-Air) Image Listener</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
@@ -142,7 +142,7 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a68bb2448e182a4afdc37048777fb0789"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a68bb2448e182a4afdc37048777fb0789">init</a> (const <a class="el" href="namespaceuic__ota.html#ae6ebb5b487964684aa56019a2730acfc">image_available_func_t</a> &amp;image_available_cb, const std::string &amp;image_base_path, unsigned long int cache_size, uint32_t timeout_s, uint16_t cluster_revision=<a class="el" href="ota_8hpp.html#a1ea1d1572ae491988fc7603931932210">DEFAULT_CLUSTER_REVISION</a>)</td></tr>
+<tr class="memitem:a68bb2448e182a4afdc37048777fb0789"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a68bb2448e182a4afdc37048777fb0789">init</a> (const <a class="el" href="namespaceuic__ota.html#ae6ebb5b487964684aa56019a2730acfc">image_available_func_t</a> &amp;image_available_cb, const std::string &amp;image_base_path, unsigned long int cache_size, uint32_t timeout_s, uint16_t cluster_revision=<a class="el" href="ota_8hpp.html#a1ea1d1572ae491988fc7603931932210">DEFAULT_CLUSTER_REVISION</a>)</td></tr>
 <tr class="memdesc:a68bb2448e182a4afdc37048777fb0789"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialize ota_listener  <a href="namespaceuic__ota.html#a68bb2448e182a4afdc37048777fb0789">More...</a><br /></td></tr>
 <tr class="separator:a68bb2448e182a4afdc37048777fb0789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19baf1996e05f7b86a2662722d3f2b5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a19baf1996e05f7b86a2662722d3f2b5d">subscribe_unid</a> (const std::string &amp;unid, const std::string &amp;uiid)</td></tr>
@@ -157,25 +157,25 @@ Functions</h2></td></tr>
 <tr class="memitem:afa78b130295055d35342f5e3206efad9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#afa78b130295055d35342f5e3206efad9">get_by_unid</a> (const std::string &amp;unid, const std::string &amp;uiid, const <a class="el" href="namespaceuic__ota.html#adc5ba0ea65ca5b359fd4d8e585a042fb">image_ready_funct_t</a> &amp;get_ready_cb)</td></tr>
 <tr class="memdesc:afa78b130295055d35342f5e3206efad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">After an image_available call is triggered.  <a href="namespaceuic__ota.html#afa78b130295055d35342f5e3206efad9">More...</a><br /></td></tr>
 <tr class="separator:afa78b130295055d35342f5e3206efad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f805f5bda1874c3b0f87a6db76f1596"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a9f805f5bda1874c3b0f87a6db76f1596">update_status</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const <a class="el" href="namespaceuic__ota.html#a15a593e80817e9c52f1d5dc96871921b">status_t</a> status)</td></tr>
+<tr class="memitem:a9f805f5bda1874c3b0f87a6db76f1596"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a9f805f5bda1874c3b0f87a6db76f1596">update_status</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const <a class="el" href="namespaceuic__ota.html#a15a593e80817e9c52f1d5dc96871921b">status_t</a> status)</td></tr>
 <tr class="memdesc:a9f805f5bda1874c3b0f87a6db76f1596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Status update of firmware upgrade OTA MQTT for the image_listener component specific for a UIID, UNID, and endpoint device.  <a href="namespaceuic__ota.html#a9f805f5bda1874c3b0f87a6db76f1596">More...</a><br /></td></tr>
 <tr class="separator:a9f805f5bda1874c3b0f87a6db76f1596"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcf4364953f5bb5aff5a1445154e3cf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#abcf4364953f5bb5aff5a1445154e3cf5">update_size</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const size_t size_file)</td></tr>
+<tr class="memitem:abcf4364953f5bb5aff5a1445154e3cf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#abcf4364953f5bb5aff5a1445154e3cf5">update_size</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const size_t size_file)</td></tr>
 <tr class="memdesc:abcf4364953f5bb5aff5a1445154e3cf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size file of firmware upgrade OTA MQTT for the image_listener component specific for a UIID, UNID, and endpoint device.  <a href="namespaceuic__ota.html#abcf4364953f5bb5aff5a1445154e3cf5">More...</a><br /></td></tr>
 <tr class="separator:abcf4364953f5bb5aff5a1445154e3cf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a782679138a6a48f2c06612ef2e0cc6f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a782679138a6a48f2c06612ef2e0cc6f9">update_offset</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const size_t offset)</td></tr>
+<tr class="memitem:a782679138a6a48f2c06612ef2e0cc6f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a782679138a6a48f2c06612ef2e0cc6f9">update_offset</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const size_t offset)</td></tr>
 <tr class="memdesc:a782679138a6a48f2c06612ef2e0cc6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Offset update of firmware upgrade OTA MQTT for the image_listener component specific for a UIID, UNID and endpoint device.  <a href="namespaceuic__ota.html#a782679138a6a48f2c06612ef2e0cc6f9">More...</a><br /></td></tr>
 <tr class="separator:a782679138a6a48f2c06612ef2e0cc6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe801fabefbdee39e792d30510339cde"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#abe801fabefbdee39e792d30510339cde">update_last_error</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const <a class="el" href="namespaceuic__ota.html#a061d9131ad0a8a302d543c11819b0394">last_error_t</a> last_error)</td></tr>
+<tr class="memitem:abe801fabefbdee39e792d30510339cde"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#abe801fabefbdee39e792d30510339cde">update_last_error</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const <a class="el" href="namespaceuic__ota.html#a061d9131ad0a8a302d543c11819b0394">last_error_t</a> last_error)</td></tr>
 <tr class="memdesc:abe801fabefbdee39e792d30510339cde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last error update of firmware upgrade OTA MQTT for the image_listener component specific for a UIID, UNID, and endpoint device.  <a href="namespaceuic__ota.html#abe801fabefbdee39e792d30510339cde">More...</a><br /></td></tr>
 <tr class="separator:abe801fabefbdee39e792d30510339cde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fcce4d8ccd7e14b13d1c8a9b68b7e14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a5fcce4d8ccd7e14b13d1c8a9b68b7e14">update_apply_after</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const time_t apply_after)</td></tr>
+<tr class="memitem:a5fcce4d8ccd7e14b13d1c8a9b68b7e14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a5fcce4d8ccd7e14b13d1c8a9b68b7e14">update_apply_after</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const time_t apply_after)</td></tr>
 <tr class="memdesc:a5fcce4d8ccd7e14b13d1c8a9b68b7e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply after update of firmware upgrade OTA MQTT for the image_listener component specific for a UIID, UNID, and endpoint device.  <a href="namespaceuic__ota.html#a5fcce4d8ccd7e14b13d1c8a9b68b7e14">More...</a><br /></td></tr>
 <tr class="separator:a5fcce4d8ccd7e14b13d1c8a9b68b7e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63a81db64692667ab509d20fec7df37f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a63a81db64692667ab509d20fec7df37f">update_current_version</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const std::string &amp;current_version)</td></tr>
+<tr class="memitem:a63a81db64692667ab509d20fec7df37f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a63a81db64692667ab509d20fec7df37f">update_current_version</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const std::string &amp;current_version)</td></tr>
 <tr class="memdesc:a63a81db64692667ab509d20fec7df37f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current version update of firmware upgrade OTA MQTT for the image_listener component specific for a UIID, UNID, and endpoint device.  <a href="namespaceuic__ota.html#a63a81db64692667ab509d20fec7df37f">More...</a><br /></td></tr>
 <tr class="separator:a63a81db64692667ab509d20fec7df37f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17ad81af8126ee06c9e45e64da41b005"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a17ad81af8126ee06c9e45e64da41b005">update_target_version</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const std::string &amp;target_version)</td></tr>
+<tr class="memitem:a17ad81af8126ee06c9e45e64da41b005"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a17ad81af8126ee06c9e45e64da41b005">update_target_version</a> (const <a class="el" href="uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395">dotdot_unid_t</a> &amp;unid, const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;endpoint, const <a class="el" href="uic__typedefs_8h.html#a71b0fac3436ede36d15b34f05a76095c">ota_uiid_t</a> &amp;uiid, const std::string &amp;target_version)</td></tr>
 <tr class="memdesc:a17ad81af8126ee06c9e45e64da41b005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Target version update of firmware upgrade OTA MQTT for the image_listener component specific for a UIID, UNID, and endpoint device.  <a href="namespaceuic__ota.html#a17ad81af8126ee06c9e45e64da41b005">More...</a><br /></td></tr>
 <tr class="separator:a17ad81af8126ee06c9e45e64da41b005"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f4273f25a9f928eb3ac3bb824f95dc6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceuic__ota.html#a4f4273f25a9f928eb3ac3bb824f95dc6">clear_cache</a> ()</td></tr>
@@ -396,7 +396,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> uic_ota::init </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> uic_ota::init </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="namespaceuic__ota.html#ae6ebb5b487964684aa56019a2730acfc">image_available_func_t</a> &amp;&#160;</td>
           <td class="paramname"><em>image_available_cb</em>, </td>
@@ -605,7 +605,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
@@ -657,7 +657,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
@@ -709,7 +709,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
@@ -761,7 +761,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
@@ -813,7 +813,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
@@ -865,7 +865,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
@@ -917,7 +917,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#a7ee31247504c57f0aedd274473757ae5">dotdot_endpoint_id_t</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2">dotdot_endpoint_id_t</a> &amp;&#160;</td>
           <td class="paramname"><em>endpoint</em>, </td>
         </tr>
         <tr>
@@ -960,7 +960,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceuic__ota.html">uic_ota</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:19 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:46 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

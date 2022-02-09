@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -88,162 +88,101 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> Latest released version of the Unify SDK Overview is available online <a href="https://siliconlabs.github.io/UnifySDK/userguide/html/index.html">here</a>.</p>
-<p>The Unify SDK provides software source and binary packages for Raspberry Pi 4 to help build an IoT gateway product. The Unify SDK enables an IoT service to control and manage end nodes in several wireless PHY radios (e.g., Z-Wave, Zigbee, and so on) supported by Silicon Labs. The Unify SDK uses the Unify Controller Language (UCL) as an internal abstraction layer to seamlessly control various end nodes that are enabled with multiple wireless PHY radios. The detailed architecture of the Unify SDK is discussed in the Unify SDK Specification.</p>
-<p>The Unify SDK uses Unify SDK library to decouple API modules from the PHY drivers. This facilitates code reuse and enables easily adding new high-level APIs without the need to modify the PHY drivers. The library provides a number of components that simplify the task of writing a PHY driver also known as a Protocol Controller.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Applications References</h1>
-<ul>
-<li>ANGEL<ul>
-<li><a class="el" href="md_applications_angel_readme_user.html">User guide</a></li>
-<li><a class="el" href="md_applications_angel_readme_developer.html">Developer guide</a></li>
-<li><a class="el" href="md_applications_angel_release_notes.html">Release notes</a></li>
-</ul>
-</li>
-<li>Dev GUI<ul>
-<li><a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">User guide</a></li>
-<li><a class="el" href="md_applications_dev_ui_dev_gui_readme_developer.html">Developer guide</a></li>
-<li><a class="el" href="md_applications_dev_ui_dev_gui_release_notes.html">Release notes</a></li>
-</ul>
-</li>
-<li>OTA Image Provider<ul>
-<li><a class="el" href="md_applications_image_provider_readme_user.html">User guide</a></li>
-<li><a class="el" href="md_applications_image_provider_readme_developer.html">Developer guide</a></li>
-<li><a class="el" href="md_applications_image_provider_release_notes.html">Release notes</a></li>
-</ul>
-</li>
-<li>UPVL<ul>
-<li><a class="el" href="md_applications_upvl_readme_user.html">User guide</a></li>
-<li><a class="el" href="md_applications_upvl_readme_developer.html">Developer guide</a></li>
-<li><a class="el" href="md_applications_upvl_release_notes.html">Release notes</a></li>
-</ul>
-</li>
-<li>ZigPC (Beta)<ul>
-<li><a class="el" href="md_applications_zigpc_readme_user.html">User guide</a></li>
-<li><a class="el" href="md_applications_zigpc_readme_developer.html">Developer guide</a></li>
-<li><a class="el" href="md_applications_zigpc_release_notes.html">Release notes</a></li>
-</ul>
-</li>
-<li>ZPC<ul>
-<li><a class="el" href="md_applications_zpc_readme_user.html">User guide</a></li>
-<li><a class="el" href="md_applications_zpc_readme_developer.html">Developer guide</a></li>
-<li><a class="el" href="md_applications_zpc_release_notes.html">Release notes</a></li>
-</ul>
-</li>
-</ul>
+Introduction</h1>
+<p>The Unify SDK provides software source code and binary packages for Raspberry Pi 4 to help build an IoT gateway product. The Unify SDK enables an IoT service to control and manage end nodes in several wireless PHY radios (e.g., Z-Wave, Zigbee, and so on) supported by Silicon Labs. The Unify SDK uses the Unify Controller Language (UCL) as an internal abstraction layer to seamlessly control various end nodes that are enabled with multiple wireless PHY radios. The detailed architecture of the Unify SDK is discussed in the <a href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify SDK Specification</a>.</p>
+<p>The Unify SDK uses Unify SDK library to decouple API modules from the PHY drivers. This facilitates code reuse and enables easily adding new high-level APIs without the need to modify the PHY drivers. The library provides a number of components that simplify the task of writing a PHY driver also known as a Protocol Controller.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
-API References</h1>
-<p>All of these API references points to latest version online. Specific versions of the APIs are located in the docs folder in the source repository.</p>
-<ul>
-<li><a href="https://siliconlabs.github.io/UnifySDK/uic-angel/doc_uic-angel/uic_angel/index.html">ANGEL</a></li>
-<li><a href="https://siliconlabs.github.io/UnifySDK/uic-image-provider/doc_uic-image-provider/uic_image_provider/index.html">Unify SDK OTA Image Provider</a></li>
-<li><a href="https://siliconlabs.github.io/UnifySDK/doxygen_uic/html/index.html">Unify SDK Library</a></li>
-<li><a href="https://siliconlabs.github.io/UnifySDK/uic-upvl/doc_uic-upvl/uic_upvl/index.html">UPVL</a></li>
-<li><a href="https://siliconlabs.github.io/UnifySDK/doxygen_zigpc/html/index.html">ZigPC</a></li>
-<li><a href="https://siliconlabs.github.io/UnifySDK/doxygen_zpc/html/index.html">ZPC</a></li>
-<li><a href="https://siliconlabs.github.io/UnifySDK/libs2/html/index.html">ZPC libs2</a></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md3"></a>
-Unify SDK Components</h1>
+Systems Overview</h1>
 <p>A Unify gateway consists of a Message Queuing Telemetry Transport (MQTT) broker and a number of MQTT clients. The Unify SDK uses the Mosquitto MQTT broker.</p>
 <p>The Unify MQTT clients can be grouped into several applications:</p>
 <ul>
-<li>Z-Wave Protocol controller (ZPC)</li>
-<li>Zigbee Protocol Controller (ZigPC)</li>
+<li>Z-Wave Protocol Controller (ZPC)</li>
+<li>ZigBee Protocol Controller (ZigPC)</li>
 <li>Unify SDK SmartStart Provisioning list (UPVL)</li>
-<li>Unify SDK Group Manager (ANGEL)</li>
+<li>Unify SDK Group Management Service (GMS)</li>
+<li>Unify Name and Location Service (NAL)</li>
 <li>Unify SDK OTA Image Provider (Image Provider)</li>
-<li>IoT Services (i.e., DEV GUI)</li>
+<li>IoT Services (e.g. Developer GUI, UPTICap)</li>
 </ul>
 <p><img src="SDKOverview.png" alt="" class="inline" title="SDK Overview"/>   </p>
 <p>The Unify SDK was previously known as Unified IoT Controller or UIC for short. The old name can still be found in some parts of the SDK.</p>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Core Unify Components</h2>
 <p>The Unify SDK contains the following core components:</p>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<h3><a class="anchor" id="autotoc_md4"></a>
 Protocol Controllers</h3>
-<p>The Unify SDK currently includes two protocol controllers:</p>
+<p>The Unify SDK currently includes the following protocol controllers:</p>
 <ul>
 <li>Z-Wave Protocol Controller (<a class="el" href="md_applications_zpc_readme_user.html">ZPC</a>)</li>
-<li>Zigbee Protocol Controller (Beta) (<a class="el" href="md_applications_zigpc_readme_user.html">ZigPC</a>)</li>
+<li>ZigBee Protocol Controller (<a class="el" href="md_applications_zigpc_readme_user.html">ZigPC</a>)</li>
+<li>Angle of Arrival/Departure Protocol Controller (<a class="el" href="md_applications_aox_applications_aoxpc_readme_user.html">AoXPC</a>)</li>
 </ul>
-<p>Each protocol controller interfaces with its radio hardware and implements a translation between its own wireless protocol and the <em>Unified Command Language</em> (UCL), which is defined in the Unify SDK Specification. In addition, these protocol controllers implement best practices regarding message delivery, and adherence to regulatory requirements. Protocol-specific implementation details can be found in the user guide for each protocol controller.</p>
-<h3><a class="anchor" id="autotoc_md6"></a>
+<p>Each protocol controller interfaces with its radio hardware and implements a translation between its own wireless protocol and the <em>Unified Command Language</em> (UCL), which is defined in the <a href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify SDK Specification</a>. In addition, these protocol controllers implement best practices regarding message delivery, and adherence to regulatory requirements. Protocol-specific implementation details can be found in the user guide for each protocol controller.</p>
+<h3><a class="anchor" id="autotoc_md5"></a>
 The Unified SDK Provisioning List (UPVL)</h3>
 <p><a class="el" href="md_applications_upvl_readme_user.html">The UPVL</a> serves the SmartStart Provisioning list to perform SmartStart Security 2 (S2) inclusions and maintains the ucl/SmartStart MQTT topic.</p>
+<h3><a class="anchor" id="autotoc_md6"></a>
+The Unify SDK Group Manager (GMS)</h3>
+<p><a class="el" href="md_applications_gms_readme_user.html">GMS</a> manages groups and bookkeeping between protocol controllers, and also publishes group state changes to the ucl/by-group MQTT topic.</p>
 <h3><a class="anchor" id="autotoc_md7"></a>
-The Unify SDK Group Manager (ANGEL)</h3>
-<p><a class="el" href="md_applications_angel_readme_user.html">ANGEL</a> is an application that manages groups and bookkeeping between protocol controllers, and also publishes group state changes to the ucl/by-group MQTT topic.</p>
+The Unify Name and Location service (NAL)</h3>
+<p><a class="el" href="md_applications_nal_readme_user.html">NAL</a> is a helper MQTT component that allows to perform book-keeping on text names and locations that have been assigned. This functionality allows IoT Services to assign and readback a Name and a Location for each node/endpoint.</p>
 <h3><a class="anchor" id="autotoc_md8"></a>
 The Unify SDK OTA Image Provider</h3>
-<p><a class="el" href="md_applications_image_provider_readme_user.html">OTA Image Provider</a> is an application that announces OTA images available in OTA storage and publishes OTA binary on request.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<p><a class="el" href="md_applications_image_provider_readme_user.html">OTA Image Provider</a> announces OTA images available in OTA storage and publishes OTA binary on request.</p>
+<h3><a class="anchor" id="autotoc_md9"></a>
+The Unify AoX Positioning Application</h3>
+<p><a class="el" href="md_applications_aox_applications_positioning_readme_user.html">AoX Positioning application</a> reads configuration and data from AoXPCs and publish the calculated position of asset tags in the system.</p>
+<h2><a class="anchor" id="autotoc_md10"></a>
 IoT Services</h2>
-<p>Currently, one IoT service is provided, as follows:</p>
-<ul>
-<li><a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Developer UI (dev_ui)</a></li>
-</ul>
-<p>The dev_ui service is a graphical user interface provided for operating and provisioning IoT devices using UCL. The dev_ui can be used as a reference for basic Unify concepts, such as device provisioning and control. The user interface is provided strictly for test and demonstration purposes only and is not suitable for production.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
-Getting Started</h1>
-<p>This section describe how to install the Unify SDK components on a Raspberry Pi 4 (RPi4) and test basic functionality.</p>
-<h2><a class="anchor" id="autotoc_md11"></a>
-Prerequisites</h2>
-<ul>
-<li>An RPi4 preinstalled with Debian Linux Version 10 ('Buster')</li>
-<li>One of the following, supported wireless radios is connected to the RPi4 via USB:<ul>
-<li>UZB 7 serial dongle for Z-Wave</li>
-<li>EFR32MG12 running NCP Firmware for ZigBee</li>
-</ul>
-</li>
-</ul>
-<p>If these prerequisites are not fulfilled, follow the setup instructions in the <a href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up">Official Raspberry Pi User Guide</a>, and ensure a supported radio module is attached to your RPi4.</p>
-<h2><a class="anchor" id="autotoc_md12"></a>
-Installation</h2>
-<p>First, download the released debian packages from the github <a href="https://github.com/SiliconLabs/UnifySDK/releases">release page</a>, and place them in a folder called <code>deb-packages</code>.</p>
-<p>Copy all the packages to your RPi4 and login via ssh:</p>
-<div class="fragment"><div class="line">scp -r deb-packages pi@&lt;pi_address&gt;:/home/pi</div>
-<div class="line">ssh pi@&lt;pi_address&gt;</div>
-</div><!-- fragment --><p>&lt;pi_address&gt; is the address of your RPi4.</p>
-<p>Once logged into the Raspberry Pi, the easiest way to install the Unify components on the Raspberry Pi is to install all packages using the apt command as this will also fetch dependencies:</p>
-<div class="fragment"><div class="line">curl -s http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key | sudo apt-key add -</div>
-<div class="line">sudo curl -s  http://repo.mosquitto.org/debian/mosquitto-buster.list -o /etc/apt/sources.list.d/mosquitto-buster.list</div>
-<div class="line">sudo apt update</div>
-<div class="line">sudo apt install mosquitto mosquitto-clients</div>
-<div class="line">sudo apt install ./deb-packages/*.deb</div>
-</div><!-- fragment --><p>Use <code>sudo apt reinstall ./deb-packages/*.deb</code> to update previously installed packages to a newer version. Repeated use of <code>apt install</code> has been known to skip updating some packages.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
-Configuration</h2>
-<p>If this is the first time the Unify SDK is installed, you will be prompted with configuration options.</p>
-<p>After setting the first-time configuration options, configure system to restart Unify components automatically on every boot with the following commands:</p>
-<div class="fragment"><div class="line">sudo systemctl enable uic-zpc</div>
-<div class="line">sudo systemctl start uic-zpc</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md14"></a>
-Evaluation</h2>
-<p>The Unify dev_ui can be accessed from a browser on <a href="http://raspberrypi.local:3000">http://raspberrypi.local:3000</a>.</p>
-<p><em>Note</em> that the Unify user interface needs TCP access to the port 3000 and 1337 on the Raspberry Pi.</p>
-<p>See the <a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Dev-UI manual</a> for more information about using this interface.</p>
-<h2><a class="anchor" id="autotoc_md15"></a>
-Building</h2>
-<p>Use the command following command to get the latest sources. </p><div class="fragment"><div class="line">git clone https://github.com/SiliconLabs/UnifySDK.git</div>
-</div><!-- fragment --><p>The sources can also be downloaded from a .tar.gz file on the github <a href="https://github.com/SiliconLabs/UnifySDK/releases">release page</a>.</p>
-<p>Please read the <code>Developer guides</code> for each component on how to build. </p>
-<h1><a class="anchor" id="autotoc_md16"></a>
-Communication Overview</h1>
+<h3><a class="anchor" id="autotoc_md11"></a>
+The Developer UI</h3>
+<p><a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Developer GUI (dev_gui)</a></p>
+<p>The dev_gui service is a graphical user interface provided for operating and provisioning IoT devices using UCL. The dev_gui can be used as a reference for basic Unify concepts, such as device provisioning and control. The user interface is provided strictly for test and demonstration purposes only and is not suitable for production.</p>
+<h3><a class="anchor" id="autotoc_md12"></a>
+The UPTICap</h3>
+<p><a class="el" href="md_applications_upti_cap_readme_user.html">UPTICap (upti_cap)</a> is an application to communicate with Silicon Labs WSTK adapters, to capture data from adapters debug channel and to publish captured data as MQTT messages. Application provided strictly for test and demonstration purposes only and is not suitable for production.</p>
+<h1><a class="anchor" id="autotoc_md13"></a>
+Applications Overview</h1>
+<p>The Unify SDK consists of several components including Protocol Controllers, IoT Services (e.g. Developer GUI, UPTICap) and multiple application services that facilitate various functionalities such as SmartStart Provisioning, Group Management, Name and Location Service and OTA Image Provider.</p>
+<p>Please read the <a class="el" href="md_doc_readme_user.html">Unify User Guide</a> on details on general running and configuration of the Unify components.</p>
+<p>Please read the <a class="el" href="md_doc_readme_building.html">Unify Build Guide</a> on details on building the unify SDK.</p>
+<p>The following table presents the relation between generic unify applications to the Unify Protocol Controller. If a given application service is supported via a Protocol Controller, it will be marked as [x].</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone"></th><th class="markdownTableHeadLeft"><a class="el" href="md_applications_zpc_readme_user.html">ZPC</a>  </th><th class="markdownTableHeadLeft"><a class="el" href="md_applications_zigpc_readme_user.html">ZigPC</a>  </th><th class="markdownTableHeadLeft"><a class="el" href="md_applications_aox_applications_aoxpc_readme_user.html">AoXPC</a>   </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="md_applications_upvl_readme_user.html">UPVL</a>  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="md_applications_gms_readme_user.html">GMS</a>  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="md_applications_nal_readme_user.html">NAL</a>  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft">[x]   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="md_applications_image_provider_readme_user.html">OTA Image Provider</a>  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Dev GUI</a>  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft">[x]   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="md_applications_upti_cap_readme_user.html">UPTICap</a>  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft">[x]  </td><td class="markdownTableBodyLeft"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="md_applications_aox_applications_positioning_readme_user.html">AoX Positioning </a>  </td><td class="markdownTableBodyLeft"></td><td class="markdownTableBodyLeft"></td><td class="markdownTableBodyLeft">[x]   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md14"></a>
+Communication Overview</h2>
 <p>All individual Unify components communicate via MQTT. In this reference implementation, the Mosquitto MQTT broker is used which does not support clustering. As a result, all nodes connect to a single central broker.</p>
 <p>MQTT implements a publisher-subscriber model, where all payloads are published to topics to which zero, one, or many clients can subscribe to. By default, publishers can publish to any topic and all subscribers can subscribe to any topic. MQTT has the notion of access-control but that functionality is currently not used by Unify.</p>
 <p>A publisher does not get notified (by the broker) if a subscriber has received its message. All QoS functionality is handled by the broker.</p>
 <p>MQTT has the notion of message-retention, i.e., a message can be retained on a topic and delivered to any future subscribers. Only a single message is retained on a given topic at a time. Publishing an MQTT-message with an empty (zero bytes) payload to a topic will clear its previously retained message.</p>
 <p>In Unify, all message payloads are JSON-objects. Some of the Unify topics (e.g., commands) may not require any data, but they will require at least an empty JSON object (e.g., {}).</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
-Communication Use Cases (Advanced)</h1>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Communication Use Cases (Advanced)</h2>
 <p>The purpose of this section is to give advanced users information about the communication flow between the Unify components and the physical IoT devices. A couple of use cases are provided with sequence diagrams describing the frame flow. The examples require the Mosquitto command-line utilities to be installed.</p>
-<p>For a more basic introduction, see the Dev-UI.</p>
-<h2><a class="anchor" id="Including_a_Device"></a>
-Including a Device</h2>
+<h3><a class="anchor" id="Including_a_Device"></a>
+Including a Device</h3>
 <p>In the following example, the message flow for including a non secure Z-Wave device is considered.</p>
-<p>To start with, locate the Z-Wave Protocol Controller. All protocol controllers can be found by subscribing to /ProtocolController/NetworkManagement and the /State topictMQTT topics.</p>
+<p>To start with, locate the Z-Wave Protocol Controller. All protocol controllers can be found by subscribing to /ProtocolController/NetworkManagement and the /State MQTT topics.</p>
 <div class="fragment"><div class="line">mosquitto_sub -v -t ucl/by-unid/+/ProtocolController/NetworkManagement -t ucl/by-unid/+/State</div>
-</div><!-- fragment --><p>On your terminal, you will see something like the following:</p>
+</div><!-- fragment --><p>On your terminal, you will see something similar to the following:</p>
 <div class="fragment"><div class="line">ucl/by-unid/zw-C6739552-0001/ProtocolController/NetworkManagement {</div>
 <div class="line">    &quot;State&quot;: &quot;idle&quot;</div>
 <div class="line">}</div>
@@ -276,49 +215,45 @@ Including a Device</h2>
 <div class="line">ucl/by-unid/zw-C6739552-0001/ProtocolController/NetworkManagement {</div>
 <div class="line">    &quot;State&quot;: &quot;idle&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The device has now been included.</p>
-<h2><a class="anchor" id="autotoc_md18"></a>
+</div><!-- fragment --><p>The device is now included.</p>
+<h2><a class="anchor" id="autotoc_md16"></a>
 Turning on a Light</h2>
-<p>After this device has been included, it can be operated by sending the OnOff cluster commands. For example, the following topic and payload will turn on the light:</p>
+<p>After this device is included, it can be operated by sending the OnOff cluster commands. For example, the following topic and payload will turn on the light:</p>
 <div class="fragment"><div class="line">mosquitto_pub -t ucl/by-unid/zw-C6739552-0003/Commands/OnOff/On -m &#39;{}&#39;</div>
-</div><!-- fragment --><h1><a class="anchor" id="How_to_make_a_new_IoT_Service"></a>
-How To Make A New IoT Service</h1>
-<p>To build an IoT Service from scratch, it is recommended to follow the steps below. IoT Services come in many forms, and exact steps will depend on the detailed requirements of the IoT Service.</p>
-<ol type="1">
-<li>Find API and SDK bindings for target service. An IoT service connects the Unify SDK with an external service. Service should be interpreted in the broadest sense; it can be a cloud service, or it can be a UI operated by end users. Or something in between. The first step in writing an IoT Service is determining which APIs and SDKs to use for the target service. If the IoT Service connects to a cloud service, then the cloud service SDK is a good place to start. Alternatively, choosing a framework with good bindings to the cloud service. If the IoT Service is a UI, then a UI framework should be chosen based on the product requirements.</li>
-<li>Choose an MQTT client. Now choose an MQTT client based on the programming language and frameworks selected in the previous step. Most MQTT clients should be compatible with the Unify SDK. If encryption is desired, make sure to choose a client that supports certificate-based TLS.</li>
-<li>Discover nodes using MQTT topics. Discovering nodes and resources that can be displayed or manipulated is fundamental to any IoT Service. This is achieved by subscribing to particular MQTT topics. See the Service Discovery chapter of the Unify Specification.</li>
-<li>Implement Network Management. If the IoT Service needs to do network management, consider which operations are needed and implement them as described in the Network Management chapter of the Unify Specification. Here is <a href="#Including_a_Device">an example of adding a node to a network</a>.</li>
-<li>Interact with nodes using MQTT topics. Interacting with the nodes by either reading out status or controlling their state is fundamental to most IoT services. Subscribe and publish to the relevant MQTT topics as described in the Application Level Control chapter of the Unify Specification.</li>
-<li>Consider re-using appropriate shared components from the Unify SDK codebase. A valuable feature of Unify is the common components shared by many modules of the SDK. Code reuse saves both development time and offers IoT Service users a uniform experience operating and configuring different IoT services.</li>
-</ol>
-<p>The Unify SDK provides a nubmer of C-based components that are candidates for re-use in IoT Services. They are listed below.</p>
-<ol type="1">
-<li>Unify MQTT Client. The MQTT client is built on top of Eclipse Mosquitto MQTT and handles MQTT connection, subscribing and publishing. It implements re-connections and caching of published messages, which have been published while the client has been disconnected from the broker. See the section Unify Library Framework/MQTT Client in Unify Documentation for details.</li>
-<li>Logging System. The logging system features logging with severity level tagging and log filtering. See the section Unify Library Framework/Logging System in the Unify Documentation for details.</li>
-<li>Config System. The config system implements parsing of config files and command line arguments. See the Unify Library Framework/Config System in Unify Documentation for details.</li>
-</ol>
-<p>The UPVL and ANGEL applications use the shared components and are good examples to peruse. They can be found in the Unify source code in the <code>applications/angel/</code> and <code>applications/upvl/</code> directories.</p>
-<h1><a class="anchor" id="autotoc_md19"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
+Further examples</h2>
+<p>More examples of MQTT payloads can be found in the <a href="https://siliconlabs.github.io/UnifySDK/reference_ucl_mqtt/html/index.html">UCL MQTT Reference</a></p>
+<h1><a class="anchor" id="autotoc_md18"></a>
 System Requirements</h1>
-<p>The Unify SDK is at the moment only implemented for the Linux OS. The table below shows the resource usage of the individual components measured using <a href="https://valgrind.org/">Valgrind</a> on a i686 architecture, compiled without debugging information.</p>
+<p>The Unify SDK is at the moment only implemented for the Linux OS. The table below shows the resource usage of the individual components measured on armhf release binaries. No debug symbols included. RAM figures are indicative and measured using <code>pmap</code>. </p><blockquote class="doxtable">
+<p></p>
+<p>&gt;- Release binaries are compiled with <code>-O2 -s</code> &gt;- RAM size = stack + heap + .text + .rodata </p>
+</blockquote>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Component  </th><th class="markdownTableHeadNone">Flash  </th><th class="markdownTableHeadNone">RAM   </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">libuic  </td><td class="markdownTableBodyNone">4085 kb  </td><td class="markdownTableBodyNone">NA   </td></tr>
+<td class="markdownTableBodyNone">libuic  </td><td class="markdownTableBodyNone">6551 kB  </td><td class="markdownTableBodyNone">NA   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">uic-zigpc  </td><td class="markdownTableBodyNone">1880 kb  </td><td class="markdownTableBodyNone">1900 kb + 8 kb pr node   </td></tr>
+<td class="markdownTableBodyNone">uic-aoxpc  </td><td class="markdownTableBodyNone">474 kB  </td><td class="markdownTableBodyNone">800 kB + 60 B per asset tag   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">uic-zpc  </td><td class="markdownTableBodyNone">5888 kb  </td><td class="markdownTableBodyNone">1500 kb + 8 kb pr node   </td></tr>
+<td class="markdownTableBodyNone">uic-zigpc  </td><td class="markdownTableBodyNone">1122 kB  </td><td class="markdownTableBodyNone">2000 kB + 8 kB per node   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">uic-angel  </td><td class="markdownTableBodyNone">3220 kb  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
+<td class="markdownTableBodyNone">uic-zpc  </td><td class="markdownTableBodyNone">3054 kB  </td><td class="markdownTableBodyNone">3200 kB + 8 kB per node   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">uic-image-provider  </td><td class="markdownTableBodyNone">3281 kb  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
+<td class="markdownTableBodyNone">uic-gms  </td><td class="markdownTableBodyNone">410 kB  </td><td class="markdownTableBodyNone">680 kB   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">uic-upvl  </td><td class="markdownTableBodyNone">3339 kb  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
+<td class="markdownTableBodyNone">uic-nal  </td><td class="markdownTableBodyNone">420 kB  </td><td class="markdownTableBodyNone">630 kB   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">uic-dev-gui  </td><td class="markdownTableBodyNone">95 MB  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
+<td class="markdownTableBodyNone">uic-positioning  </td><td class="markdownTableBodyNone">270 kB  </td><td class="markdownTableBodyNone">500 kB   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">uic-upti-cap  </td><td class="markdownTableBodyNone">446 kB  </td><td class="markdownTableBodyNone">650 kB   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">uic-image-provider  </td><td class="markdownTableBodyNone">426 kB  </td><td class="markdownTableBodyNone">650 kb   </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">uic-upvl  </td><td class="markdownTableBodyNone">482 kB  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">uic-dev-gui  </td><td class="markdownTableBodyNone">100 MB  </td><td class="markdownTableBodyNone">1000 kb   </td></tr>
 </table>
 <p>The SDK depends on the following debian packages:</p>
 <ul>
@@ -329,113 +264,20 @@ System Requirements</h1>
 <li>libboost-log1.67.0</li>
 <li>libboost-program-options1.67.0</li>
 </ul>
+<h1><a class="anchor" id="autotoc_md19"></a>
+Unify SDK Release Notes</h1>
+<p>The SDK release notes includes chronologically ordered list of changes from the oldest release to the newest. All the relese notes can be found <a class="el" href="md_release_notes.html">here</a>.</p>
 <h1><a class="anchor" id="autotoc_md20"></a>
-Porting the Unify SDK</h1>
-<p>Porting the Unify SDK to new platform using Debian Linux should be straight forward. However, if components are ported to other Linux distributions it may be necessary to update the startup scripts of the components. The Debian packages provided with the Unify SDK all uses the system service <code>systemd</code> which takes care of startup and shutdown of the components. For example, the file <a href="applications/zpc/scripts/systemd/uic-zpc.service">uic-zpc.service</a> is as systemd config script. When porting to a new Linux system the systemd config files should be used for reference. It is very important that all the Unify components runs as a dedicated system user to prevent attackers from compromising the entire system. Also note that most components need write access to parts of the filesystem. The default path for writing files is <code>/var/lib/uic</code>. </p>
+Unify SDK Developer Guides</h1>
+<p>The developer guides for the Unify SDK includes two developer guides. One general guide called the <a class="el" href="md_doc_readme_developer.html">Unify developer guide</a>. In addition, a general documented overview of the Unify SDK Library can be found <a class="el" href="md_doc_overview.html">here</a>. </p>
 <h1><a class="anchor" id="autotoc_md21"></a>
 FAQ</h1>
-<ul>
-<li><em>How can I see if the Unify components are running?</em><br  />
- Unify applications are running as Linux <code>systemd</code> services. To get a status overview of all installed Unify components, run the following command:<br  />
- <div class="fragment"><div class="line">systemctl status `ls /lib/systemd/system/uic-*.service | xargs -n 1 basename`</div>
-</div><!-- fragment --></li>
-</ul>
-<p>The output of this command will tell if the service is loaded and/or is active: </p><div class="fragment"><div class="line">● uic-dev-gui-api.service - Unify User Interface API</div>
-<div class="line">   Loaded: loaded (/lib/systemd/system/uic-dev-gui-api.service; enabled; vendor preset: enabled)</div>
-<div class="line">   Active: active (running) since Sun 2021-07-25 12:17:05 BST; 21min ago</div>
-</div><!-- fragment --><ul>
-<li><em>How do I get logging of a specific Unify component?</em><br  />
- Logging is collected via Linux <code>systemd</code>. In the terminal <code>journalctl</code> is able to print the collected logs from all Unify components. Getting the log of, for instance <code>uic-upvl</code>, is done via command: <div class="fragment"><div class="line">journalctl -u uic-upvl</div>
-</div><!-- fragment --></li>
-<li><em>How do I clear Unify caches and databases?</em><br  />
- Execute the following command in a terminal on the Unify gateway: <div class="fragment"><div class="line">unify_services=`ls /lib/systemd/system/uic-*.service | xargs -n 1 basename`; sudo systemctl stop mosquitto $unify_services &amp;&amp; sudo rm /var/lib/mosquitto/mosquitto.db /var/lib/uic/database.db /var/lib/uic/upvl.db &amp;&amp; sudo systemctl start mosquitto $unify_services</div>
-</div><!-- fragment --></li>
-</ul>
-<p>Note: database paths can vary depending on your configuration</p><ul>
-<li><em>I cant access the Dev UI/ the Dev UI is not responding anymore!</em><br  />
-</li>
-</ul>
-<ol type="1">
-<li>Test if the gateway can still be reached over TCP/IP. Ping the ip address of the gateway.</li>
-</ol>
-<ol type="1">
-<li>Open a terminal on the Unify gateway, check the current status of the <code>uic-dev-gui-api</code> and <code>uic-dev-gui-server</code>. (See previous questions how to print the status)<br  />
-</li>
-<li>If status is inactive, restart the UI: <div class="fragment"><div class="line">sudo systemctl restart uic-dev-gui-*</div>
-</div><!-- fragment --></li>
-</ol>
-<ul>
-<li><em>My Z-Wave device doesn't seem to include with my gateway</em></li>
-</ul>
-<ol type="1">
-<li>Make sure your device and gateway match frequency region. i.e., an EU device is incompatible with an US gateway. Information of the region can be find on the packaging of the device.<br  />
- To verify the rf region on your gateway, execute the following command in your gateway terminal: <div class="fragment"><div class="line">cat /etc/uic/uic.cfg</div>
-</div><!-- fragment --></li>
-</ol>
-<p>It outputs the configured rf_region: </p><div class="fragment"><div class="line">pi@raspberrypi:/etc/uic $ cat uic.cfg</div>
-<div class="line">zpc:</div>
-<div class="line">  serial: /dev/ttyUSB0</div>
-<div class="line">  rf_region: US</div>
-<div class="line">datastore:</div>
-<div class="line">  file: /var/lib/uic/database.db</div>
-</div><!-- fragment --><ol type="1">
-<li>Make sure your device isn't still connected to a previous network. To remove a previous inclusion, hit the action button on your product and put the gateway in remove state.</li>
-<li>Power-cycling your device could make it to include.</li>
-<li>To change the frequency region of the gateway, see the startup options for the ZPC.</li>
-</ol>
-<ul>
-<li><em>The gateway doesn't respond anymore!</em><br  />
-</li>
-</ul>
-<ol type="1">
-<li>It could be that the gateway experiences some delays while communicating with the Z-Wave node (missing Acknowledgment/Report, routing issues...). In this case, it may look like the gateway does not react to IoT Services commands. You could verify that the gateway still responds by modifying the state of another Z-Wave device in the gateway and see if the gateway responds to these changes. A way to modify state is to open MQTT explorer and to publish a command to a cluster for a particular node.</li>
-<li>As last resort, try to restart the Unify gateway.</li>
-</ol>
-<ul>
-<li><em>How do I run the ZPC in isolation?</em><br  />
- Stop the ZPC systemd service: <div class="fragment"><div class="line">sudo systemctl stop uic-zpc</div>
-</div><!-- fragment --></li>
-</ul>
-<p>run: </p><div class="fragment"><div class="line">/usr/bin/zpc --zpc.serial /dev/ttyUSB0</div>
-</div><!-- fragment --><p>Replace the serial argument with the port the Z-Wave controller is connected to.</p><ul>
-<li><em>I have an old Z-Wave device, is it still supported?</em><br  />
- Yes. However, older devices may be inconsistent in reporting their actual state. This usually means that operating the same command for a second time, the state get updated correctly.</li>
-<li><em>Can I get detailed diagnostics about devices, its clusters and the network?</em><br  />
- Using application <a href="http://mqtt-explorer.com"><code>mqtt explorer</code></a> can give more insights in your Unify network.</li>
-<li><em>How do I determine the root cause for my failed firmware update?</em><br  />
- The lastError field in the OTA tab of the dev_gui is giving a rough error code. The logging of the uic-zpc usually gives a more detailed explanation of the reason why a firmware update is not accepted.</li>
-<li><em>My device shows up with more clusters than expected!</em><br  />
- This is intended behavior. A protocol cluster can overlap in functionality with multiple UCL clusters. Rather then mapping to one, The Unify gateway exposes the protocol cluster to multiple clusters. </li>
-</ul>
-<h2><a class="anchor" id="autotoc_md22"></a>
-Development</h2>
-<ul>
-<li><em>Can I build with Rust's cargo manually?</em><br  />
- Yes. use the following command in the project root dir: <div class="fragment"><div class="line">LIBUIC_DIR=/Users/unifyuser/git/uic/build/components VERSION_STR=&quot;local_build&quot; cargo build</div>
-</div><!-- fragment --></li>
-</ul>
-<p>Change LIBUIC_DIR to match your path.</p><ul>
-<li><em>Is mac supported for developing?</em><br  />
- Our software should build and run on a mac machine. However, it is not officially supported. </li>
-</ul>
-<h2><a class="anchor" id="autotoc_md23"></a>
-ZPC</h2>
-<ul>
-<li><em>ZPC complains about etc/uic/database.db permissions, How do I fix it?</em><br  />
- This means your probably running the ZPC as an executable and not as a <code>systemd</code> service. Advised is to run ZPC with a database path that is writable in this case: <div class="fragment"><div class="line">/usr/bin/zpc --datastore.file ~/zpc.db</div>
-</div><!-- fragment --></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md24"></a>
-UPVL - ANGEL - IMAGE_PROVIDER</h2>
-<ul>
-<li><em>Inclusion of a device keeps failing</em> try to reset the UPVL database: <div class="fragment"><div class="line">sudo systemctl stop uic-upvl &amp;&amp; rm /var/lib/uic/upvl.db &amp;&amp; sudo systemctl start uic-upvl</div>
-</div><!-- fragment --></li>
-</ul>
-<h1><a class="anchor" id="autotoc_md25"></a>
+<p>Frequently asked questions for the Unify SDKcan be found in the FAQ section <a class="el" href="md_FAQ.html">here</a>.</p>
+<h1><a class="anchor" id="autotoc_md22"></a>
 License</h1>
 <p><b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b></p>
 <p>The licensor of this software is Silicon Laboratories Inc. Your use of this software is governed by the terms of Silicon Labs Master Software License Agreement (MSLA) available at www.silabs.com/about-us/legal/master-software-license-agreement. This software is distributed to you in Source Code format and is governed by the sections of the MSLA applicable to Source Code.</p>
-<h1><a class="anchor" id="autotoc_md26"></a>
+<h1><a class="anchor" id="autotoc_md23"></a>
 Third party libraries and code</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -467,7 +309,7 @@ Third party libraries and code</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:07 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:01 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

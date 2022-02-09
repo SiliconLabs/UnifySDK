@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -21,8 +21,9 @@
 
 #define LOG_TAG "zwapi_session"
 
-#define TIMEOUT_TIME        1600
-#define MAX_RX_QUEUE_LENGTH 10
+#define TIMEOUT_TIME 1600
+// This number should be higher than the MAX_TRANSMISSION_RETRIES
+#define MAX_RX_QUEUE_LENGTH 30
 // CLEANUP: MAX_TRANSMISSION_RETRIES used to be 20 in send_frame()
 // Find out what our strategy should be, INS12350 says it should be 3
 #define MAX_TRANSMISSION_RETRIES           20
@@ -193,12 +194,12 @@ sl_status_t zwapi_session_send_frame(uint8_t command,
       case ZWAPI_CONNECTION_STATUS_FRAME_RECEIVED:
         consecutive_tx_timeout_count = 0;
         zwapi_session_enqueue_frame();
-        sl_log_warning(LOG_TAG, "Received a frame while trying to send\n");
+        sl_log_debug(LOG_TAG, "Received a frame while trying to send\n");
         /* If we received a frame here then we were both sending. The embedded target will have
           * queued a CAN at this point, since we have been sending a frame to the uart buffer.
           * before ACK'ing the received frame.
           */
-        continue; /*Go back, there should be more*/
+        break;
 
       case ZWAPI_CONNECTION_STATUS_TX_CAN:
         sl_log_debug(LOG_TAG, "Frame collision detected.\n");
@@ -217,13 +218,21 @@ sl_status_t zwapi_session_send_frame(uint8_t command,
         }
         break;
 
+      case ZWAPI_CONNECTION_STATUS_RX_TIMEOUT:
+        // Nothing special to do here, we are missing an Ack.
+        // Try again without back-off
+        continue;
+
       default:
+        sl_log_error(LOG_TAG,
+                     "Unknown Z-Wave API connection state: %d. Ignoring\n",
+                     connection_status);
         break;
     }
-    //SER_PRINTF("Retransmission %i of %2x %s\n",i,command, zwapi_connection_status_to_string(ret));
+
     sl_log_debug(LOG_TAG,
                  "Retransmission %d/%d of 0x%02x\n",
-                 i,
+                 i + 1,
                  MAX_TRANSMISSION_RETRIES,
                  command);
 
@@ -231,7 +240,7 @@ sl_status_t zwapi_session_send_frame(uint8_t command,
       * the magnitude of the backoff seem very large... this is to be analyzed. */
     // CLEANUP: INS12350 says it should be 100 + i * 1000. But this is probably not doable here.
     static zwapi_timestamp_t session_timer;
-    zwapi_timestamp_get(&session_timer, 10 + i * 100);
+    zwapi_timestamp_get(&session_timer, 20);
     while (!zwapi_is_timestamp_elapsed(&session_timer)) {
       zwapi_session_enqueue_rx_frames();
     }

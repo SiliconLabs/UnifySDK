@@ -1,6 +1,5 @@
 var group__zwave__command__handler =
 [
-    [ "Z-Wave Security Validation", "group__zwave__security__validation.html", "group__zwave__security__validation" ],
     [ "Callbacks for the Z-Wave Command Handler", "group__zwave__command__handler__callbacks.html", "group__zwave__command__handler__callbacks" ],
     [ "Internal definitions for the Z-Wave Command Handler", "group__zwave__command__handler__internals.html", "group__zwave__command__handler__internals" ],
     [ "zwave_command_handler_t", "structzwave__command__handler__t.html", [

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Z-Wave TX Groups</title>
+<title>Z-Wave Protocol Controller Refrence: Z-Wave TX Groups</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('group__zwave__tx__groups.html',''); in
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Z-Wave TX Groups<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a></div></div>  </div>
+<div class="title">Z-Wave TX Groups<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -103,28 +103,31 @@ Modules</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ga10968d83fcec71012516156fc378077c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga10968d83fcec71012516156fc378077c">ZWAVE_TX_INVALID_GROUP</a>&#160;&#160;&#160;((<a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>)0)</td></tr>
+<tr class="memitem:ga10968d83fcec71012516156fc378077c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga10968d83fcec71012516156fc378077c">ZWAVE_TX_INVALID_GROUP</a>&#160;&#160;&#160;((<a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>)0)</td></tr>
 <tr class="memdesc:ga10968d83fcec71012516156fc378077c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Group ID returned in case of error.  <a href="group__zwave__tx__groups.html#ga10968d83fcec71012516156fc378077c">More...</a><br /></td></tr>
 <tr class="separator:ga10968d83fcec71012516156fc378077c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gab209453ed454c07419ed6b2dc7e155a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#gab209453ed454c07419ed6b2dc7e155a4">zwave_tx_assign_group</a> (const <a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> nodes, <a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> *group_id)</td></tr>
+<tr class="memitem:ga8b6bf3bec23ef001de22f3075018a90d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga8b6bf3bec23ef001de22f3075018a90d">zwave_tx_add_node_to_group</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
+<tr class="memdesc:ga8b6bf3bec23ef001de22f3075018a90d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a NodeID to a Group ID.  <a href="group__zwave__tx__groups.html#ga8b6bf3bec23ef001de22f3075018a90d">More...</a><br /></td></tr>
+<tr class="separator:ga8b6bf3bec23ef001de22f3075018a90d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab209453ed454c07419ed6b2dc7e155a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#gab209453ed454c07419ed6b2dc7e155a4">zwave_tx_assign_group</a> (const <a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> nodes, <a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> *group_id)</td></tr>
 <tr class="memdesc:gab209453ed454c07419ed6b2dc7e155a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns/returns a Group ID to the list of NodeIDs.  <a href="group__zwave__tx__groups.html#gab209453ed454c07419ed6b2dc7e155a4">More...</a><br /></td></tr>
 <tr class="separator:gab209453ed454c07419ed6b2dc7e155a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga03f0e364d262928c9617a70b656755e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga03f0e364d262928c9617a70b656755e7">zwave_tx_get_nodes</a> (<a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> nodes, <a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
+<tr class="memitem:ga03f0e364d262928c9617a70b656755e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga03f0e364d262928c9617a70b656755e7">zwave_tx_get_nodes</a> (<a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> nodes, <a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
 <tr class="memdesc:ga03f0e364d262928c9617a70b656755e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the list of NodeIDs part of a group.  <a href="group__zwave__tx__groups.html#ga03f0e364d262928c9617a70b656755e7">More...</a><br /></td></tr>
 <tr class="separator:ga03f0e364d262928c9617a70b656755e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9e34c87b8d58aba0353252e5e42ef510"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga9e34c87b8d58aba0353252e5e42ef510">zwave_tx_lock_group</a> (<a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
+<tr class="memitem:ga9e34c87b8d58aba0353252e5e42ef510"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga9e34c87b8d58aba0353252e5e42ef510">zwave_tx_lock_group</a> (<a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
 <tr class="memdesc:ga9e34c87b8d58aba0353252e5e42ef510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instructs the Z-Wave TX Group not to alter the list of NodeIDs part of a group, until the group is unlocked again.  <a href="group__zwave__tx__groups.html#ga9e34c87b8d58aba0353252e5e42ef510">More...</a><br /></td></tr>
 <tr class="separator:ga9e34c87b8d58aba0353252e5e42ef510"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga08693ca0195e6f5921a7065a733ca324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga08693ca0195e6f5921a7065a733ca324">zwave_tx_unlock_group</a> (<a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
+<tr class="memitem:ga08693ca0195e6f5921a7065a733ca324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga08693ca0195e6f5921a7065a733ca324">zwave_tx_unlock_group</a> (<a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
 <tr class="memdesc:ga08693ca0195e6f5921a7065a733ca324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instructs the Z-Wave TX Group that the list of NodeIDs part of a group can be modified.  <a href="group__zwave__tx__groups.html#ga08693ca0195e6f5921a7065a733ca324">More...</a><br /></td></tr>
 <tr class="separator:ga08693ca0195e6f5921a7065a733ca324"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4564da4d3bf46283337efcf25c34b13e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga4564da4d3bf46283337efcf25c34b13e">zwave_tx_is_group_locked</a> (<a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
+<tr class="memitem:ga4564da4d3bf46283337efcf25c34b13e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga4564da4d3bf46283337efcf25c34b13e">zwave_tx_is_group_locked</a> (<a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
 <tr class="memdesc:ga4564da4d3bf46283337efcf25c34b13e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a group is locked.  <a href="group__zwave__tx__groups.html#ga4564da4d3bf46283337efcf25c34b13e">More...</a><br /></td></tr>
 <tr class="separator:ga4564da4d3bf46283337efcf25c34b13e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5d16e68e369fb5bc91f819b7a1db1349"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga5d16e68e369fb5bc91f819b7a1db1349">zwave_tx_group_log</a> (<a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
+<tr class="memitem:ga5d16e68e369fb5bc91f819b7a1db1349"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__groups.html#ga5d16e68e369fb5bc91f819b7a1db1349">zwave_tx_group_log</a> (<a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> group_id)</td></tr>
 <tr class="memdesc:ga5d16e68e369fb5bc91f819b7a1db1349"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs the content / state of the group using sl_log.  <a href="group__zwave__tx__groups.html#ga5d16e68e369fb5bc91f819b7a1db1349">More...</a><br /></td></tr>
 <tr class="separator:ga5d16e68e369fb5bc91f819b7a1db1349"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -139,7 +142,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ZWAVE_TX_INVALID_GROUP&#160;&#160;&#160;((<a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>)0)</td>
+          <td class="memname">#define ZWAVE_TX_INVALID_GROUP&#160;&#160;&#160;((<a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>)0)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -149,6 +152,44 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga8b6bf3bec23ef001de22f3075018a90d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8b6bf3bec23ef001de22f3075018a90d">&#9670;&nbsp;</a></span>zwave_tx_add_node_to_group()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_tx_add_node_to_group </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramname"><em>node_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
+          <td class="paramname"><em>group_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a NodeID to a Group ID. </p>
+<p>This function should only be used at initialization to restore groups. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">node_id</td><td>Nodemask for the list of nodes for which a GroupID is needed. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">group_id</td><td>the Group ID assigned for the list of nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK if the group was created/found and returned in the group_id pointer. SL_STATUS_FAIL if the nodes cannot be part of the same group and the group_id variable is not to be used. </dd></dl>
+
+</div>
+</div>
 <a id="gab209453ed454c07419ed6b2dc7e155a4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab209453ed454c07419ed6b2dc7e155a4">&#9670;&nbsp;</a></span>zwave_tx_assign_group()</h2>
 
@@ -156,15 +197,15 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_tx_assign_group </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_tx_assign_group </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
           <td class="paramname"><em>nodes</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a> *&#160;</td>
           <td class="paramname"><em>group_id</em>&#160;</td>
         </tr>
         <tr>
@@ -176,7 +217,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Assigns/returns a Group ID to the list of NodeIDs. </p>
-<p>The following checks are performed:</p><ol type="1">
+<p>The following checks must be performed by the application before grouping nodes:</p><ol type="1">
 <li>Are the nodes all included with the same protocol</li>
 <li>Do the nodes share the same highest granted class (S0/Non-secure are accepted)</li>
 </ol>
@@ -198,15 +239,15 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_tx_get_nodes </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_tx_get_nodes </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
           <td class="paramname"><em>nodes</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
           <td class="paramname"><em>group_id</em>&#160;</td>
         </tr>
         <tr>
@@ -238,7 +279,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void zwave_tx_group_log </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
           <td class="paramname"><em>group_id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -264,7 +305,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">bool zwave_tx_is_group_locked </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
           <td class="paramname"><em>group_id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -289,9 +330,9 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_tx_lock_group </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_tx_lock_group </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
           <td class="paramname"><em>group_id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -317,9 +358,9 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_tx_unlock_group </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_tx_unlock_group </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="zwave__controller__types_8h.html#a41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a>&#160;</td>
           <td class="paramname"><em>group_id</em></td><td>)</td>
           <td></td>
         </tr>
@@ -343,7 +384,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:35 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

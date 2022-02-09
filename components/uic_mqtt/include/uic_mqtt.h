@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,8 +12,8 @@
  *****************************************************************************/
 
 /**
- * @defgroup uic_mqtt UIC MQTT Client
- * @ingroup uic_components
+ * @defgroup uic_mqtt Unify MQTT Client
+ * @ingroup unify_components
  * @brief MQTT client interface
  *
  * This component implement an mqtt client interface. The the mqtt client
@@ -53,6 +53,12 @@
 typedef void (*mqtt_message_callback_t)(const char *topic,
                                         const char *message,
                                         const size_t message_length);
+
+/**
+ * @brief A callback type for a before disconnect and after connect.
+ *
+ */
+typedef void (*mqtt_connection_callbacks_t)();
 
 #ifdef __cplusplus
 extern "C" {
@@ -95,7 +101,7 @@ void uic_mqtt_publish(const char *topic,
  *
  * This will send an empty retained message for all previously
  * published retained topics which has the given prefix.
- * 
+ *
  * Example: If retained topics are ["a/b", "a/b/c", "b"] and prefix_pattern is "a",
  * then the following topics will be unretained: ["a/b", "a/b/c"]
  *
@@ -108,11 +114,11 @@ void uic_mqtt_unretain(const char *prefix_pattern);
 
 /**
    * @brief Count the number of topics published
-   * 
+   *
    * This function counts the number of topics which has been published
    * retained matching a pattern prefix.
-   * @param prefix_pattern 
-   * @return int 
+   * @param prefix_pattern
+   * @return int
    */
 int uic_mqtt_count_topics(const char *prefix_pattern);
 
@@ -143,6 +149,23 @@ void uic_mqtt_subscribe(const char *topic, mqtt_message_callback_t callback);
  *
  */
 void uic_mqtt_unsubscribe(const char *topic, mqtt_message_callback_t callback);
+
+/**
+ * @brief Set a callback which will be executed before calling a disconnect.
+ *
+ * @param callback A callback function to be executed before calling disconnect.
+ *
+ */
+void uic_mqtt_set_before_disconnect_callback(
+  mqtt_connection_callbacks_t callback);
+
+/**
+ * @brief Set a callback which will be executed after having connected.
+ *
+ * @param callback A callback function to be executed after having connected.
+ *
+ */
+void uic_mqtt_set_after_connect_callback(mqtt_connection_callbacks_t callback);
 
 #ifdef __cplusplus
 }

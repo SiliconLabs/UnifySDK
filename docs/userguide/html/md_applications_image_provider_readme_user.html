@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -87,42 +87,46 @@ $(document).ready(function(){initNavTree('md_applications_image_provider_readme_
 <div class="title">Image Provider User's Guide </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The Image Provider is a generic application that allows storing and distributing OTA Firmware images for Protocol Controllers over MQTT.</p>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md174"></a>
+Description</h1>
+<p>The Image Provider is a generic application that allows storing and distributing OTA Firmware images for Protocol Controllers over MQTT.</p>
 <p>For more details about the interactions between the Image Provider and Protocol Controllers, see the Unify specifications - Common OTA FW Update Service chapter.</p>
 <p>The Image Provider application is required for most Protocol Controller to access firmware images for a given node. Protocol Controllers running without the Image Provider application available will most likely not be able to provide OTA functionalities.</p>
-<h1><a class="anchor" id="autotoc_md121"></a>
+<h1><a class="anchor" id="autotoc_md175"></a>
+Installation</h1>
+<p>Please refer to <a class="el" href="md_doc_readme_user.html">Unify SDK User guide</a>.</p>
+<h1><a class="anchor" id="autotoc_md176"></a>
 Running the Image Provider</h1>
-<h2><a class="anchor" id="autotoc_md122"></a>
+<h2><a class="anchor" id="autotoc_md177"></a>
 Using Systemd Service</h2>
-<p>The best way to run the Image Provider is using the Systemd service that is installed with the Debian installer. For more information, see <a class="el" href="index.html#md_README">README.md</a>.</p>
-<h2><a class="anchor" id="autotoc_md123"></a>
+<p>The best way to run the Image Provider is using the Systemd service that is installed with the Debian installer. For more information, see <a class="el" href="md_doc_readme_user.html">Unify SDK User guide</a>.</p>
+<h2><a class="anchor" id="autotoc_md178"></a>
 Using the Command Line</h2>
-<p>Alternatively, you can run the Image Provider by executing <code>uic-image-provider</code>. You can configure the MQTT server, database path, through command line options. For details about options, run the following command:</p>
-<div class="fragment"><div class="line">pi@unify:uic-image-provider --help</div>
-</div><!-- fragment --><p>Make sure that you do not run the Image Provider both as a service and using the command line.</p>
+<p>Alternatively, you can run the Image Provider by executing <code>uic-image-provider</code>. You can configure the MQTT server, database path, through command line options. For details about options, run <code>uic-image-provider --help</code> command:</p>
+<p>Make sure that you do not run the Image Provider both as a service and using the command line.</p>
 <div class="fragment"><div class="line">pi@unify:~ $ service uic-image-provider status</div>
-<div class="line">● uic-image-provider.service - Unified IoT OTA Image Provider</div>
+<div class="line">* uic-image-provider.service - Unified IoT OTA Image Provider</div>
 <div class="line">   Loaded: loaded (/lib/systemd/system/uic-image-provider.service; enabled; vendor preset: enabled)</div>
 <div class="line">   Active: active (running) since Tue 2021-08-17 14:50:26 CEST; 1 day 20h ago</div>
 <div class="line"> Main PID: 13235 (uic-image-provi)</div>
 <div class="line">    Tasks: 2 (limit: 4915)</div>
 <div class="line">   CGroup: /system.slice/uic-image-provider.service</div>
-<div class="line">           └─13235 /usr/bin/uic-image-provider</div>
+<div class="line">           |─13235 /usr/bin/uic-image-provider</div>
 </div><!-- fragment --><p>If the service is running, stop it using the following command before you run the application manually:</p>
 <div class="fragment"><div class="line">pi@unify:~ $ service uic-image-provider stop</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md124"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md179"></a>
 Using the Image Provider</h1>
-<h2><a class="anchor" id="autotoc_md125"></a>
+<h2><a class="anchor" id="autotoc_md180"></a>
 OTA Folder Structure</h2>
 <p>The Image Provider will use the configured <b>image_provider.image_path</b> to store a JSON file that will represent the list of available images.</p>
 <p>The <em>images.json</em> file must be configured to indicate which images to advertise to the MQTT broker/Protocol Controllers.</p>
 <div class="fragment"><div class="line">pi@unify:/var/lib/uic-image-provider $ tree</div>
 <div class="line">.</div>
-<div class="line">├── images.json</div>
-<div class="line">└── updates</div>
-<div class="line">    ├── ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl</div>
-<div class="line">    └── ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md126"></a>
+<div class="line">|── images.json</div>
+<div class="line">|── updates</div>
+<div class="line">    |── ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl</div>
+<div class="line">    |── ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md181"></a>
 Metadata File Name and Format</h2>
 <p>The filename for the metadata is static and must stay <em>images.json</em>.</p>
 <p>The Image Provider will poll the images.json for changes with a configurable period. It will then advertise images.</p>
@@ -215,59 +219,20 @@ Metadata File Name and Format</h2>
 <li><b>ApplyAfter</b> : A timestamp encoded using RFC 3339, that will indicate when to first attempt to apply the Firmware Update. A date in the past will instruct Protocol Controllers to initiate the firmware update as soon as possible.</li>
 <li><b>Md5</b> : A checksum that will verify that the data located in the <em>fileName</em> is coherent with what we expect.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md127"></a>
+<h3><a class="anchor" id="autotoc_md182"></a>
 Md5 Checksum calculation</h3>
 <p>The Md5 checksum value must be set to a base64 encoded md5 digest of image file.</p>
 <p>In Rust, the checksum can be generated like this:</p>
 <div class="fragment"><div class="line">base64::encode(md5::compute(buffer).to_vec());</div>
 </div><!-- fragment --><p>The checksum string can also be created using openssl:</p>
 <div class="fragment"><div class="line">cat ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl | openssl dgst -binary -md5 | openssl base64</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md128"></a>
-Output Examples</h2>
-<div class="fragment"><div class="line">pi@unify:~ $ uic-image-provider --help</div>
-<div class="line"> </div>
-<div class="line">Usage: uic-image-provider [Options]</div>
-<div class="line"> </div>
-<div class="line">Options:</div>
-<div class="line">  --conf arg (=/etc/uic/uic.cfg)        Config file in YAML format</div>
-<div class="line">  --help                                Print this help message and quit</div>
-<div class="line">  --sample_conf_file                    Print sample YAML config file that can</div>
-<div class="line">                                        be passed to --conf option</div>
-<div class="line">  --version                             Print version information and quit</div>
-<div class="line"> </div>
-<div class="line">Following options can also be in a Config file.</div>
-<div class="line"> Options and values passed on command line here take precedence over the options and values in config file:</div>
-<div class="line">  --mqtt.host arg (=localhost)          MQTT broker hostname or IP</div>
-<div class="line">  --mqtt.port arg (=1883)               MQTT broker port</div>
-<div class="line">  --log.level arg (=d)                  Log Level (d,i,w,e,c)</div>
-<div class="line">  --log.tag_level arg                   Tag based log level</div>
-<div class="line">                                        Format: &lt;tag&gt;:&lt;severity&gt;,</div>
-<div class="line">                                        &lt;tag&gt;:&lt;severity&gt;, ...</div>
-<div class="line">  --datastore.file arg (=/var/lib/uic/database.db)</div>
-<div class="line">                                        Datastore database file</div>
-<div class="line">  --mqtt.client_id arg (=uic-image-provider)</div>
-<div class="line">                                        override mqtt client name</div>
-<div class="line">  --provider.image_path arg (=/var/lib/uic-image-provider)</div>
-<div class="line">                                        image path</div>
-<div class="line">  --provider.poll_period arg (=15)      poll period</div>
-</div><!-- fragment --><div class="fragment"><div class="line">pi@unify:~ $ uic-image-provider</div>
-<div class="line">2021-07-07 16:37:37:790401 &lt;d&gt; [sl_log] Setting log level to debug</div>
-<div class="line">2021-07-07 16:37:37:799641 &lt;i&gt; [mqtt_client] connecting to &quot;localhost&quot; port:1883</div>
-<div class="line">2021-07-07 16:37:37:802863 &lt;i&gt; [image_watcher] Image storage path /var/lib/uic-image-provider</div>
-<div class="line">2021-07-07 16:37:37:803377 &lt;i&gt; [mqtt_client] subscribing to &quot;ucl/OTA/data/+/+/get&quot; qos:0</div>
-<div class="line">2021-07-07 16:37:37:805596 &lt;i&gt; [image_watcher] Publishing image announce to &quot;ucl/OTA/info/ZWave-000-002-003_EU/all&quot;</div>
-<div class="line">2021-07-07 16:37:37:806087 &lt;i&gt; [image_watcher] Publishing image announce to &quot;ucl/OTA/info/ZWave-002-002-003_EU/zw-C87E6FB8-0006&quot;</div>
-<div class="line">2021-07-07 16:37:37:806471 &lt;i&gt; [image_watcher] Publishing image announce to &quot;ucl/OTA/info/ZWave-002-002-003_EU/zw-C87E6FB8-0007&quot;</div>
-<div class="line">2021-07-07 16:37:37:806863 &lt;i&gt; [image_watcher] Publishing image announce to &quot;ucl/OTA/info/ZWave-001-002-003_EU/zw-C87E6FB8-0005&quot;</div>
-<div class="line">2021-07-07 16:37:41:296142 &lt;i&gt; [image_watcher] Image requested for ZWave-002-002-003_EU/zw-C87E6FB8-0006</div>
-<div class="line">2021-07-07 16:37:41:297280 &lt;i&gt; [mqtt_handler] Publishing binary payload to &quot;ucl/OTA/data/ZWave-002-002-003_EU/zw-C87E6FB8-0006&quot;</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:07 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:33:59 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

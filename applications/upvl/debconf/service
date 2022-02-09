@@ -3,7 +3,7 @@ Description=Unify SDK Provisioning List
 After=network.target mosquitto.service
 
 [Service]
-ExecStart=/usr/bin/uic-upvl --upvl.db_file /var/lib/uic/upvl.db
+ExecStart=/usr/bin/uic-upvl --upvl.datastore_file /var/lib/uic/upvl.db
 Restart=on-failure
 KillMode=process
 User=uic

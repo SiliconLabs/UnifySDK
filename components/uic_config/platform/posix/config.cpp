@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -58,17 +58,15 @@ class Config
                      std::string(""));
     this->config_add(CONFIG_KEY_MQTT_KEYFILE,
                      "Path to a file containing the PEM encoded unencrypted "
-                     "private key for this client", std::string(""));
-   this->config_add(CONFIG_KEY_LOG_LEVEL,
+                     "private key for this client",
+                     std::string(""));
+    this->config_add(CONFIG_KEY_LOG_LEVEL,
                      "Log Level (d,i,w,e,c)",
                      std::string("i"));
     this->config_add(
       CONFIG_KEY_LOG_TAG_LEVEL,
       "Tag based log level\nFormat: <tag>:<severity>, <tag>:<severity>, ...",
       std::string(""));
-    this->config_add(CONFIG_KEY_DATASTORE_FILE,
-                     "Datastore database file",
-                     std::string(DEFAULT_DATASTORE_FILE));
   }
 
   template<typename T> config_status_t
@@ -77,6 +75,12 @@ class Config
     general.add_options()(name,
                           po::value<T>()->default_value(default_value),
                           help);
+    return CONFIG_STATUS_OK;
+  }
+
+  config_status_t config_add(const char *name, const char *help)
+  {
+    general.add_options()(name, help);
     return CONFIG_STATUS_OK;
   }
 
@@ -179,6 +183,11 @@ class Config
     return CONFIG_STATUS_OK;
   }
 
+  config_status_t has_flag(const char *name)
+  {
+    return vm.count(name) ? CONFIG_STATUS_OK : CONFIG_STATUS_ERROR;
+  }
+
   template<typename T> config_status_t config_get(const char *name, T &result)
   {
     try {
@@ -228,6 +237,7 @@ class Config_singleton
   ~Config_singleton()
   {
     delete config_object;
+    config_object = nullptr;
   }
 };
 static Config_singleton config_singleton;
@@ -263,6 +273,11 @@ config_status_t
   return config_object->config_add(name, help, default_value);
 }
 
+config_status_t config_add_flag(const char *name, const char *help)
+{
+  return config_object->config_add(name, help);
+}
+
 config_status_t config_parse(int argc, char **argv, const char *version)
 {
   return config_object->config_parse(argc, argv, version);
@@ -286,4 +301,9 @@ config_status_t config_get_as_double(const char *name, double *result)
 config_status_t config_get_as_bool(const char *name, bool *result)
 {
   return config_object->config_get(name, *result);
+}
+
+config_status_t config_has_flag(const char *name)
+{
+  return config_object->has_flag(name);
 }

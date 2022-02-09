@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -11,13 +11,18 @@
  *
  *****************************************************************************/
 
+/**
+ * @defgroup zwave_command_class_indicator_support Indicator Command Class Support
+ * @ingroup command_classes
+ * @brief The module handles the support part of the Indicator Command Class
+ * @{
+ */
+
 #ifndef ZWAVE_COMMAND_CLASS_INDICATOR_H
 #define ZWAVE_COMMAND_CLASS_INDICATOR_H
 
 #include "sl_status.h"
 #include "zwave_rx.h"
-
-struct zwave_controller_connection_info_t;
 
 /**
  * @brief setup for indicator command class
@@ -48,3 +53,4 @@ sl_status_t zwave_command_class_indicator_support_handler(
   uint16_t frame_length);
 
 #endif  //ZWAVE_COMMAND_CLASS_INDICATOR_H
+        /** @} end zwave_command_class_indicator_support */

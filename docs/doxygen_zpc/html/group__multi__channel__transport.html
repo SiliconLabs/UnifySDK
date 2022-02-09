@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Multi Channel Transport</title>
+<title>Z-Wave Protocol Controller Refrence: Multi Channel Transport</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -86,7 +86,7 @@ $(document).ready(function(){initNavTree('group__multi__channel__transport.html'
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Multi Channel Transport<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__command__classes.html">Z-Wave Command Classes</a> &raquo; <a class="el" href="group__multi__channel__command__class.html">Multi Channel Command Class</a></div></div>  </div>
+<div class="title">Multi Channel Transport<div class="ingroups"><a class="el" href="group__command__classes.html">Z-Wave Command Classes</a> &raquo; <a class="el" href="group__multi__channel__command__class.html">Multi Channel Command Class</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -98,12 +98,14 @@ Functions</h2></td></tr>
 <tr class="memitem:gac2dd449dae4a65aeea0d7f537a0a1124"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__multi__channel__transport.html#gac2dd449dae4a65aeea0d7f537a0a1124">on_multi_channel_send_complete</a> (uint8_t status, const <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_info, void *user)</td></tr>
 <tr class="memdesc:gac2dd449dae4a65aeea0d7f537a0a1124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function registered to Z-Wave TX <a class="el" href="group__zwave__tx__interface.html#gad1538f36d226fe8147c5e538625568df">zwave_tx_send_data</a>.  <a href="group__multi__channel__transport.html#gac2dd449dae4a65aeea0d7f537a0a1124">More...</a><br /></td></tr>
 <tr class="separator:gac2dd449dae4a65aeea0d7f537a0a1124"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadbc0fe6c66a35dcf6c060b166137d3e2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__multi__channel__transport.html#gadbc0fe6c66a35dcf6c060b166137d3e2">zwave_command_class_multi_channel_send_data</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection, uint16_t data_length, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, const <a class="el" href="group__zwave__tx__interface.html#ga12c249f53157f1b461a0c534a274a72f">zwave_tx_options_t</a> *tx_options, const <a class="el" href="group__zwave__tx__interface.html#gabfbc700a89ba6dce9c1f38fa3ed41789">on_zwave_tx_send_data_complete_t</a> on_multi_channel_complete, void *user, <a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> parent_session_id)</td></tr>
+<tr class="memitem:gadbc0fe6c66a35dcf6c060b166137d3e2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__multi__channel__transport.html#gadbc0fe6c66a35dcf6c060b166137d3e2">zwave_command_class_multi_channel_send_data</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection, uint16_t data_length, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, const <a class="el" href="group__zwave__tx__interface.html#ga12c249f53157f1b461a0c534a274a72f">zwave_tx_options_t</a> *tx_options, const <a class="el" href="group__zwave__tx__interface.html#gabfbc700a89ba6dce9c1f38fa3ed41789">on_zwave_tx_send_data_complete_t</a> on_multi_channel_complete, void *user, <a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> parent_session_id)</td></tr>
 <tr class="memdesc:gadbc0fe6c66a35dcf6c060b166137d3e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encapsulates with Multi Channel and send a frame to the Z-Wave TX queue.  <a href="group__multi__channel__transport.html#gadbc0fe6c66a35dcf6c060b166137d3e2">More...</a><br /></td></tr>
 <tr class="separator:gadbc0fe6c66a35dcf6c060b166137d3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga165d494c164d63ae0ad3b95fdc9eb39f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__multi__channel__transport.html#ga165d494c164d63ae0ad3b95fdc9eb39f">zwave_command_class_multi_channel_decapsulate</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const <a class="el" href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a> *rx_options, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
+<tr class="memitem:ga165d494c164d63ae0ad3b95fdc9eb39f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__multi__channel__transport.html#ga165d494c164d63ae0ad3b95fdc9eb39f">zwave_command_class_multi_channel_decapsulate</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const <a class="el" href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a> *rx_options, const uint8_t *frame_data, uint16_t frame_length)</td></tr>
 <tr class="memdesc:ga165d494c164d63ae0ad3b95fdc9eb39f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decapsulate Multi Channel encapsulation and inject the frame back to the Z-Wave Controller.  <a href="group__multi__channel__transport.html#ga165d494c164d63ae0ad3b95fdc9eb39f">More...</a><br /></td></tr>
 <tr class="separator:ga165d494c164d63ae0ad3b95fdc9eb39f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8ad949c643e996faf258815078ecf91d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__multi__channel__transport.html#ga8ad949c643e996faf258815078ecf91d">zwave_command_class_multi_channel_abort_send_data</a> (<a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> session_id)</td></tr>
+<tr class="separator:ga8ad949c643e996faf258815078ecf91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Multi Channel encapsulation and decapsulation module. </p>
@@ -154,11 +156,37 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">status</td><td>Indicates how the transmission operation was completed. Refer for <a class="el" href="group__zwapi__transmit__complete__codes.html">Z-Wave API send_data return codes</a> for details. </td></tr>
-    <tr><td class="paramname">tx_info</td><td>zwapi_tx_report_t reported by the <a class="el" href="group__ZWAPI.html">Z-Wave API</a>. It contains transmission details, refer to <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a>. </td></tr>
+    <tr><td class="paramname">tx_info</td><td>zwapi_tx_report_t reported by the <a class="el" href="group__zwave__api.html">Z-Wave API</a>. It contains transmission details, refer to <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a>. </td></tr>
     <tr><td class="paramname">user</td><td>User pointer provided in <a class="el" href="group__multi__channel__transport.html#gadbc0fe6c66a35dcf6c060b166137d3e2">zwave_command_class_multi_channel_send_data()</a> </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ga8ad949c643e996faf258815078ecf91d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8ad949c643e996faf258815078ecf91d">&#9670;&nbsp;</a></span>zwave_command_class_multi_channel_abort_send_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_multi_channel_abort_send_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a>&#160;</td>
+          <td class="paramname"><em>session_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -172,9 +200,9 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_multi_channel_decapsulate </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_multi_channel_decapsulate </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection_info</em>, </td>
         </tr>
         <tr>
@@ -240,9 +268,9 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_multi_channel_send_data </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_command_class_multi_channel_send_data </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
           <td class="paramname"><em>connection</em>, </td>
         </tr>
         <tr>
@@ -323,7 +351,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:34 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

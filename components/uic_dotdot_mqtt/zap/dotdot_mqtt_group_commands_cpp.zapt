@@ -1,0 +1,281 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+#include <string>
+#include <vector>
+#include <cinttypes>
+
+#include <nlohmann/json.hpp>
+
+// Unify includes
+#include "sl_log.h"
+#include "sl_status.h"
+#include "uic_mqtt.h"
+#include "uic_typedefs.h"
+
+// Component inclues
+#include "dotdot_mqtt.h"
+#include "dotdot_mqtt.hpp"
+#include "dotdot_mqtt_group_commands.h"
+#include "dotdot_mqtt_command_helpers.hpp"
+#include "dotdot_mqtt_internals.hpp"
+
+static constexpr char LOG_TAG[] = "dotdot_mqtt";
+static constexpr char LOG_FMT_JSON_PARSE_FAIL[] = "by-group %s::%s: Unable to parse JSON payload: check payload syntax";
+static constexpr char LOG_FMT_JSON_ERROR[] = "by-group %s::%s: Unable to parse JSON payload: %s";
+
+static const char TOPIC_BY_GROUP_PREFIX[] = "ucl/by-group/+/";
+
+ /**
+ * @brief Function that dispatches incoming commands to an entire group.
+ **/
+static group_dispatch_t group_dispatch_callback = nullptr;
+
+// Callbacks pointers
+{{#zcl_clusters}}{{#if (supportedCluster label)}}{{#unless (clusterWithoutEndpoints label)}}
+{{#zcl_commands}}
+static {{asByGroupCommandCallback this}}_t {{asByGroupCommandCallback this}} = nullptr;
+{{/zcl_commands}}
+static {{asByGroupWriteAttributesCallback this}}_t {{asByGroupWriteAttributesCallback this}} = nullptr;
+
+{{/unless}}{{/if}}{{/zcl_clusters}}{{#zcl_clusters}}{{#if (supportedCluster label)}}{{#unless (clusterWithoutEndpoints label)}}
+
+// Callbacks setters
+{{!-- START OF Callback setters --}}
+{{#zcl_commands}}
+
+void {{asByGroupCommandCallback this}}_set(const {{asByGroupCommandCallback this}}_t callback)
+{
+  {{asByGroupCommandCallback this}} = callback;
+}
+
+{{/zcl_commands}}
+void {{asByGroupWriteAttributesCallback this}}_set(
+  const {{asByGroupWriteAttributesCallback this}}_t callback)
+{
+  {{asByGroupWriteAttributesCallback this}} = callback;
+}
+
+{{/unless}}{{/if}}{{/zcl_clusters}}{{#zcl_clusters}}{{#if (supportedCluster label)}}{{#unless (clusterWithoutEndpoints label)}}
+
+{{#zcl_commands}}
+
+// Callback function for incoming publications on ucl/by-group/+/{{parent.label}}/Commands/{{label}}
+static void {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+  if ((group_dispatch_callback == nullptr) && ({{asByGroupCommandCallback this}} == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  // Pass to command-specific callback if set. Otherwise, pass to
+  // group-dispatch callback
+  if ({{asByGroupCommandCallback this}} != nullptr) {
+
+    {{#zcl_command_arguments}}{{#first}}
+    {{asCommandFieldsType parent}} fields;
+    {{/first}}
+    {{#if isArray}}
+      std::vector<{{asUnderlyingType type}}> {{asSnakeCaseLower label}};
+    {{/if}}{{/zcl_command_arguments}}
+
+      nlohmann::json jsn;
+      try {
+        jsn = nlohmann::json::parse(std::string(message));
+
+      {{#zcl_command_arguments}}{{#first}}
+        {{asCommandParseFunction parent}}(
+          jsn,{{/first}}
+        {{#if isArray}}
+          {{asSnakeCaseLower label}}{{listComma this}}
+        {{else}}
+          fields.{{asSnakeCaseLower label}}{{listComma this}}
+        {{/if}}
+      {{#last}});{{/last}}{{/zcl_command_arguments}}
+
+      // Populate list fields from vector types
+      {{#zcl_command_arguments}}{{#if isArray}}
+        fields.{{asSnakeCaseLower label}}_count = {{asSnakeCaseLower label}}.size();
+        fields.{{asSnakeCaseLower label}} = {{asSnakeCaseLower label}}.data();
+      {{/if}}{{/zcl_command_arguments}}
+
+      } catch (const nlohmann::json::parse_error& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "{{parent.label}}", "{{label}}");
+        return;
+      } catch (const nlohmann::json::exception& e) {
+        // Catch JSON object field parsing errors
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{parent.label}}", "{{label}}", e.what());
+        return;
+      } catch (const std::exception& e) {
+        sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{parent.label}}", "{{label}}", "");
+        return;
+      }
+
+      {{asByGroupCommandCallback this}}(
+        group_id{{#zcl_command_arguments}}{{#first}},
+        &fields{{/first}}{{/zcl_command_arguments}}
+      );
+  } else if ((group_dispatch_callback != nullptr) && ({{asCommandCallback this}} != nullptr)) {
+    // group-dispatch callback only called if the command-specific by-unid
+    // callback is set
+    try {
+      nlohmann::json jsn = nlohmann::json::parse(std::string(message));
+      {{#zcl_command_arguments}}
+      if (jsn.find("{{label}}") == jsn.end()) {
+        sl_log_debug(LOG_TAG, "{{parent.parent.label}}::{{parent.label}}: Missing command-argument: {{label}}\n");
+        return;
+      }
+      {{/zcl_command_arguments}}
+
+      group_dispatch_callback(
+        group_id,
+        "{{parent.label}}",
+        "{{label}}",
+        message,
+        message_length,
+        {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}});
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "{{label}}: Unable to parse JSON payload.\n");
+      return;
+    }
+  }
+
+}
+{{/zcl_commands}}
+
+static void {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower label}}_WriteAttributes(
+  const char *topic,
+  const char *message,
+  const size_t message_length)
+{
+
+  if ((group_dispatch_callback == nullptr) && ({{asByGroupWriteAttributesCallback this}} == nullptr)) {
+    return;
+  }
+  if (message_length == 0) {
+    return;
+  }
+
+  dotdot_group_id_t group_id = 0U;
+  if(!uic_dotdot_mqtt::parse_topic_group_id(topic,group_id)) {
+    sl_log_debug(LOG_TAG,
+                "Failed to parse GroupId from topic %s. Ignoring",
+                topic);
+    return;
+  }
+
+  if ((group_dispatch_callback != nullptr) && ({{asWriteAttributesCallback this}} != nullptr)) {
+    try {
+
+      group_dispatch_callback(group_id,
+                              "{{label}}",
+                              "WriteAttributes",
+                              message,
+                              message_length,
+                              {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes);
+
+    } catch (...) {
+      sl_log_debug(LOG_TAG, "{{label}}: Unable to parse JSON payload.\n");
+      return;
+    }
+  } else if ({{asByGroupWriteAttributesCallback this}} != nullptr) {
+
+    {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t new_state = {};
+    {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t new_updated_state = {};
+    {{#zcl_attributes}}{{#if isWritable}}{{#if (isMonotonousArray label)}}
+      std::vector<{{asUnderlyingType type}}> {{asSnakeCaseLower label}};
+    {{/if}}{{/if}}{{/zcl_attributes}}
+
+    nlohmann::json jsn;
+    try {
+      jsn = nlohmann::json::parse(std::string(message));
+
+      {{asWriteAttributesParseFunction this}}(
+        jsn,
+        new_state,
+        new_updated_state{{#zcl_attributes}}{{#if isWritable}}{{#if (isMonotonousArray label)}},
+        {{asSnakeCaseLower label}}{{/if}}{{/if}}{{/zcl_attributes}}
+      );
+    } catch (const nlohmann::json::parse_error& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_PARSE_FAIL, "{{label}}", "WriteAttributes");
+      return;
+    } catch (const nlohmann::json::exception& e) {
+      // Catch JSON object field parsing errors
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{label}}", "WriteAttributes", e.what());
+      return;
+    } catch (const std::exception& e) {
+      sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{label}}", "WriteAttributes", "");
+      return;
+    }
+
+    {{asByGroupWriteAttributesCallback this}}(
+      group_id,
+      new_state,
+      new_updated_state
+    );
+  }
+}
+
+sl_status_t {{dotdot_prefix}}_by_group_{{asSnakeCaseLower label}}_init()
+{
+  std::string subscription_topic;
+  const std::string topic_bygroup = TOPIC_BY_GROUP_PREFIX;
+  if({{asByGroupWriteAttributesCallback this}}) {
+    subscription_topic = topic_bygroup + "{{asPublicationName label}}/Commands/WriteAttributes";
+    uic_mqtt_subscribe(subscription_topic.c_str(), {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower label}}_WriteAttributes);
+  }
+  {{#zcl_commands}}
+  if ({{asByGroupCommandCallback this}}) {
+    subscription_topic = topic_bygroup + "{{asPublicationName parent.label}}/Commands/{{label}}";
+    uic_mqtt_subscribe(subscription_topic.c_str(), {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}});
+  }
+  {{/zcl_commands}}
+
+  return SL_STATUS_OK;
+}
+
+{{/unless}}{{/if}}{{/zcl_clusters}}
+
+void {{dotdot_prefix}}_set_group_dispatch_callback(group_dispatch_t callback)
+{
+  // Check for uninitialized value in order to subscribe with on_group handlers
+  // only once.
+  if (group_dispatch_callback == nullptr) {
+{{#zcl_clusters}}{{#if (supportedCluster label)}}{{#unless (clusterWithoutEndpoints label)}}
+    uic_mqtt_subscribe("ucl/by-group/+/{{asPublicationName label}}/Commands/WriteAttributes", {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower label}}_WriteAttributes);
+  {{#zcl_commands}}
+    uic_mqtt_subscribe("ucl/by-group/+/{{asPublicationName parent.label}}/Commands/{{label}}", {{dotdot_prefix}}_on_by_group_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}});
+  {{/zcl_commands}}
+{{/unless}}{{/if}}{{/zcl_clusters}}
+  }
+
+  group_dispatch_callback = callback;
+
+}

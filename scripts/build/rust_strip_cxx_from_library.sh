@@ -11,17 +11,15 @@
 # * sections of the MSLA applicable to Source Code.
 # *
 # *****************************************************************************/
-
-# Rust links native static libraries as public. This means, if we want to link the produced library into a binary,
-# we would have 'duplicate symbols' linking errors.
-# This script removes all the o files that where linked in at this point. 
-# Because we know that our native libraries are c/c++ sources. 
-# we simply glob all c/c++ symbols in the produced library and remove them.
-ofiles=`${CMAKE_AR} -t $1 | grep -E '.cpp.o$$|.c.o$$'`
-if [ ! -z "$ofiles" ]; then
-    ${CMAKE_AR} -d $1 $ofiles
-fi
-
-# In consecutive runs, cargo decides to update the archive index back to before stripping.
-# As workaround, run ranlib explicitly to make sure the archive index is up to date with the archive content.
-${CMAKE_RANLIB} $1
+# Rust links native static libraries as public. This means, if we want to link
+# the produced library into a binary, we would have 'duplicate symbols' linking
+# errors. This script removes all the o files that where linked in at this
+# point. Because we know that our native libraries are c/c++ sources. we simply
+# glob all c/c++ symbols in the produced library and remove them.
+for lib in $@
+do
+    ofiles=`${CMAKE_AR} -t $lib | grep -E '.cpp.o$$|.c.o$$'`
+    if [ ! -z "$ofiles" ]; then
+        ${CMAKE_AR} -d $lib $ofiles 2> /dev/null
+    fi
+done

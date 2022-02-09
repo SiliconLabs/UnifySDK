@@ -19,17 +19,18 @@
 // ZigPC includes
 #include <zigpc_common_zigbee.h>
 #include <zigpc_net_mgmt_notify.h>
+#include <zigpc_gateway_notify.h>
 
 #include "zigpc_controller.h"
 #include "zigpc_controller_int.hpp"
 
-void zigpc_ctrl_on_device_announced(void *event_data)
+void zigpc_ctrl_on_device_announce(void *event_data)
 {
   if (event_data != nullptr) {
     const zigpc_net_mgmt_on_node_added_t &dev_added
       = *static_cast<zigpc_net_mgmt_on_node_added_t *>(event_data);
 
-    sl_status_t status = zigpc_ctrl::on_device_announced(dev_added.eui64);
+    sl_status_t status = zigpc_ctrl::on_device_announce(dev_added.eui64);
     if (status != SL_STATUS_OK) {
       sl_log_warning(zigpc_ctrl::LOG_TAG,
                      "Device announced event handler status: 0x%X",
@@ -38,27 +39,17 @@ void zigpc_ctrl_on_device_announced(void *event_data)
   }
 }
 
-void zigpc_ctrl_on_device_interview_update(void *event_data)
+void zigpc_ctrl_on_device_leave(void *event_data)
 {
   if (event_data != nullptr) {
-    const zigpc_net_mgmt_on_node_interview_status_t &int_status
-      = *static_cast<zigpc_net_mgmt_on_node_interview_status_t *>(event_data);
+    const zigpc_gateway_on_node_removed_t &dev_left
+      = *static_cast<zigpc_gateway_on_node_removed_t *>(event_data);
 
-    sl_status_t status = SL_STATUS_OK;
-    if (int_status.success == true) {
-      status = zigpc_ctrl::on_device_interviewed(int_status.eui64, true);
-      if (status != SL_STATUS_OK) {
-        sl_log_warning(zigpc_ctrl::LOG_TAG,
-                       "Device interview success event handler status: 0x%X",
-                       status);
-      }
-    } else {
-      status = zigpc_ctrl::on_device_interview_failed(int_status.eui64);
-      if (status != SL_STATUS_OK) {
-        sl_log_warning(zigpc_ctrl::LOG_TAG,
-                       "Device interview fail event handler status: 0x%X",
-                       status);
-      }
+    sl_status_t status = zigpc_ctrl::on_device_leave(dev_left.eui64);
+    if (status != SL_STATUS_OK) {
+      sl_log_warning(zigpc_ctrl::LOG_TAG,
+                     "Device left event handler status: 0x%X",
+                     status);
     }
   }
 }
@@ -83,14 +74,15 @@ PROCESS_THREAD(zigpc_ctrl_process, ev, data)
 
 sl_status_t zigpc_ctrl_fixt_setup(void)
 {
-  sl_status_t status = zigpc_net_mgmt_register_observer(
-    ZIGPC_NET_MGMT_NOTIFY_NODE_INTERVIEW_STATUS,
-    zigpc_ctrl_on_device_interview_update);
+  sl_status_t status
+    = zigpc_net_mgmt_register_observer(ZIGPC_NET_MGMT_NOTIFY_NODE_ADDED,
+                                       zigpc_ctrl_on_device_announce);
 
   if (status == SL_STATUS_OK) {
-    status = zigpc_net_mgmt_register_observer(ZIGPC_NET_MGMT_NOTIFY_NODE_ADDED,
-                                              zigpc_ctrl_on_device_announced);
+    status = zigpc_gateway_register_observer(ZIGPC_GATEWAY_NOTIFY_NODE_REMOVED,
+                                             zigpc_ctrl_on_device_leave);
   }
+
   if (status == SL_STATUS_OK) {
     process_start(&zigpc_ctrl_process, NULL);
   }

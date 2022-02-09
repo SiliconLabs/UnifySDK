@@ -1,0 +1,116 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+#include <string>
+
+// UIC shared components
+#include <sl_log.h>
+#include <dotdot_mqtt.h>
+
+// ZigPC components
+#include <zigpc_common_zigbee.h>
+#include <zigpc_ucl.hpp>
+#include <zcl_command_parser.h>
+
+// Component includes
+#include "zigpc_command_mapper_int.h"
+
+static constexpr char LOG_TAG[] = "zigpc_cmdmapper";
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+{{#if (isEqual source "client")}}
+static void {{component_zigpc_cmdmapper_prefix}}_publish_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}(
+  const zigbee_eui64_t eui64,
+  const zigbee_endpoint_id_t endpoint_id,
+  const {{component_zigpc_cmdparser_prefix}}_callback_data_t *data
+) {
+  std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
+
+{{#zcl_command_arguments}}
+{{#first}}
+  {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.parent.label}}_command_{{asSnakeCaseLower parent.label}}_fields_t fields = {
+{{/first}}
+{{#if (supportedStruct type)}}
+    (uint8_t) data->{{asSnakeCaseLower parent.parent.label}}_{{asSnakeCaseLower parent.label}}.{{asSnakeCaseLower label}}_count,
+    ({{asUnderlyingType type}} *) data->{{asSnakeCaseLower parent.parent.label}}_{{asSnakeCaseLower parent.label}}.{{asSnakeCaseLower label}}{{listComma this}}
+{{else if isArray}}
+    (uint8_t) data->{{asSnakeCaseLower parent.parent.label}}_{{asSnakeCaseLower parent.label}}.{{asSnakeCaseLower label}}_count,
+    ({{asUnderlyingType type}} *) data->{{asSnakeCaseLower parent.parent.label}}_{{asSnakeCaseLower parent.label}}.{{asSnakeCaseLower label}}{{listComma this}}
+{{else}}
+    ({{asUnderlyingType type}}) data->{{asSnakeCaseLower parent.parent.label}}_{{asSnakeCaseLower parent.label}}.{{asSnakeCaseLower label}}{{listComma this}}
+{{/if}}
+{{#last}}
+  };
+{{/last}}
+{{/zcl_command_arguments}}
+
+  {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_publish_generated_{{asSnakeCaseLower label}}_command(
+    unid.c_str(),
+    endpoint_id{{#zcl_command_arguments}}{{#first}},
+    &fields{{/first}}{{/zcl_command_arguments}}
+  );
+}
+
+{{/if}}
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
+
+static constexpr char CMDPARSE_REGISTER_ERR_FMT_STR[] = "Failed to listen to %s/%s cmd parsing: 0x%X";
+
+sl_status_t {{component_zigpc_cmdmapper_prefix}}_setup_gen_cmd_publish_listeners(void) {
+    sl_status_t status = SL_STATUS_OK;
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+{{#if (isEqual source "client")}}
+
+  status = {{component_zigpc_cmdparser_prefix}}_register_callback(
+    {{asZigPCZclClusterType parent}},
+    {{asZigPCZclCommandType parent this}},
+    {{component_zigpc_cmdmapper_prefix}}_publish_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}
+  );
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"{{parent.label}}","{{label}}", status);
+    return status;
+  }
+{{/if}}
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
+
+  return status;
+}
+
+
+void {{component_zigpc_cmdmapper_prefix}}_cleanup_gen_cmd_publish_listeners(void) {
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+{{#if (isEqual source "client")}}
+
+  {{component_zigpc_cmdparser_prefix}}_remove_callback(
+    {{asZigPCZclClusterType parent}},
+    {{asZigPCZclCommandType parent this}},
+    {{component_zigpc_cmdmapper_prefix}}_publish_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}
+  );
+{{/if}}
+{{/zcl_commands}}
+{{/if}}
+{{/zcl_clusters}}
+}
+

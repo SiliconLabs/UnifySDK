@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -49,8 +49,8 @@ std::multiset<zwave_command_handler_t, zwave_command_handler_compare>
 
 // Private variables
 static zwave_controller_callbacks_t zwave_command_handler_callbacks = {
-  .on_new_network_entered = zwave_command_handler_on_new_network_entered,
-  .on_frame_received      = zwave_command_handler_on_frame_received,
+  .on_new_network_entered        = zwave_command_handler_on_new_network_entered,
+  .on_application_frame_received = zwave_command_handler_on_frame_received,
 };
 
 ///////////////////////////////////////////////////////////////////////////////

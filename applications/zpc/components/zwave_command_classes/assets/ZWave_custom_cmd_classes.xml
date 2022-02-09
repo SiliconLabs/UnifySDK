@@ -4908,7 +4908,7 @@
       <param key="0x07" name="Minute Local Time" type="BYTE" />
       <param key="0x08" name="Second Local Time" type="BYTE" />
       <variant_group key="0x09" name="vg" paramOffs="0x00" sizemask="0xFF" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties2" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Current Scale" fieldmask="0x1F" />
           <bitfield key="0x01" fieldname="Current Precision" fieldmask="0xE0" shifter="5" />
         </param>
@@ -5051,7 +5051,7 @@
       <param key="0x07" name="Minute Local Time" type="BYTE" />
       <param key="0x08" name="Second Local Time" type="BYTE" />
       <variant_group key="0x09" name="vg" paramOffs="0x00" sizemask="0xFF" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties2" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Current Scale" fieldmask="0x1F" />
           <bitfield key="0x01" fieldname="Current Precision" fieldmask="0xE0" shifter="5" />
         </param>
@@ -5195,7 +5195,7 @@
       <param key="0x07" name="Minute Local Time" type="BYTE" />
       <param key="0x08" name="Second Local Time" type="BYTE" />
       <variant_group key="0x09" name="vg" paramOffs="0x00" sizemask="0xFF" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties2" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Current Scale" fieldmask="0x1F" />
           <bitfield key="0x01" fieldname="Current Precision" fieldmask="0xE0" shifter="5" />
         </param>
@@ -5233,7 +5233,7 @@
       <param key="0x07" name="Minute Local Time" type="BYTE" />
       <param key="0x08" name="Second Local Time" type="BYTE" />
       <variant_group key="0x09" name="vg" paramOffs="0x00" sizemask="0xFF" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties2" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Historical Scale" fieldmask="0x1F" />
           <bitfield key="0x01" fieldname="Historical Precision" fieldmask="0xE0" shifter="5" />
         </param>
@@ -6338,7 +6338,7 @@
       </param>
       <param key="0x03" name="Number of Members" type="BYTE" />
       <variant_group key="0x04" name="vg1" paramOffs="0xFF" sizemask="0x00" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties2" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Member Endpoint" fieldmask="0x7F" />
           <bitflag key="0x01" flagname="Reserved2" flagmask="0x80" />
         </param>
@@ -6450,7 +6450,7 @@
       </param>
       <param key="0x03" name="Number of Members" type="BYTE" />
       <variant_group key="0x04" name="vg1" paramOffs="0xFF" sizemask="0x00" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties2" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Member Endpoint" fieldmask="0x7F" />
           <bitflag key="0x01" flagname="Reserved2" flagmask="0x80" />
         </param>
@@ -7997,7 +7997,7 @@
         <bitflag key="0x03" flagname="More Data" flagmask="0x80" />
       </param>
       <variant_group key="0x01" name="vg" paramOffs="0xFF" sizemask="0x00" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties2" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Line Number" fieldmask="0x0F" />
           <bitflag key="0x01" flagname="Clear" flagmask="0x10" />
           <bitfield key="0x02" fieldname="Line Settings" fieldmask="0xE0" shifter="5" />
@@ -8023,7 +8023,7 @@
         <bitflag key="0x03" flagname="More Data" flagmask="0x80" />
       </param>
       <variant_group key="0x01" name="vg" paramOffs="0xFF" sizemask="0x00" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties3" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Line Number" fieldmask="0x0F" />
           <bitflag key="0x01" flagname="Clear" flagmask="0x10" />
           <bitfield key="0x02" fieldname="Line Settings" fieldmask="0xE0" shifter="5" />
@@ -8047,7 +8047,7 @@
         <bitflag key="0x03" flagname="More Data" flagmask="0x80" />
       </param>
       <variant_group key="0x01" name="vg" paramOffs="0xFF" sizemask="0x00" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties3" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Line Number" fieldmask="0x0F" />
           <bitflag key="0x01" flagname="Clear" flagmask="0x10" />
           <bitfield key="0x02" fieldname="Line Settings" fieldmask="0xE0" shifter="5" />
@@ -12839,14 +12839,14 @@
     <cmd key="0x01" name="NODE_INFO" help="Node Info" support_mode="RX" comment="SDS10264-2">
       <param key="0x00" name="Properties1" type="STRUCT_BYTE">
         <fieldenum key="0x00" fieldname="Protocol Version" fieldmask="0x07">
-          <fieldenum value="Reserved" />
+          <fieldenum value="Reserved1" />
           <fieldenum value="Z-Wave Version 2.0" />
           <fieldenum value="Z-Wave version ZDK 5.0x, ZDK 4.2x" />
           <fieldenum value="Z-Wave version ZDK 4.5x and ZDK 6.0x" />
-          <fieldenum value="Reserved" />
-          <fieldenum value="Reserved" />
-          <fieldenum value="Reserved" />
-          <fieldenum value="Reserved" />
+          <fieldenum value="Reserved2" />
+          <fieldenum value="Reserved3" />
+          <fieldenum value="Reserved4" />
+          <fieldenum value="Reserved5" />
         </fieldenum>
         <fieldenum key="0x01" fieldname="Max baud rate" fieldmask="0x38" shifter="3">
           <fieldenum value="Reserved" />
@@ -14960,7 +14960,7 @@
       </param>
       <variant_group key="0x02" name="vg1" paramOffs="0xFF" sizemask="0x00" sizeoffs="0x00" optionaloffs="0x01" optionalmask="0x01" moretofollowoffs="0x01" moretofollowmask="0x80">
         <param key="0x00" name="Extension Length" type="BYTE" />
-        <param key="0x01" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x01" name="Properties2" type="STRUCT_BYTE">
           <bitfield key="0x00" fieldname="Type" fieldmask="0x3F" />
           <bitflag key="0x01" flagname="Critical" flagmask="0x40" />
           <bitflag key="0x02" flagname="More to follow" flagmask="0x80" />
@@ -15916,7 +15916,7 @@
         <variant paramoffs="1" sizemask="0x1F" />
       </param>
       <variant_group key="0x03" name="vg1" paramOffs="0xFF" sizemask="0x00" sizeoffs="0x00">
-        <param key="0x00" name="Properties1" type="STRUCT_BYTE">
+        <param key="0x00" name="Properties2" type="STRUCT_BYTE">
           <bitflag key="0x00" flagname="Critical" flagmask="0x01" />
           <bitfield key="0x01" fieldname="Meta Data Type" fieldmask="0xFE" shifter="1" />
         </param>

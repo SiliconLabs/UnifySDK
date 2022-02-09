@@ -9,8 +9,6 @@ All MQTT Clients (possibly including Protocol Controllers) must be able to find 
 Some high-level functionalities will be expected to be present at the MQTT broker from the beginning, as follows:
 
 * ucl/by-unid/#
-* ucl/by-location/#
-* ucl/by-type/#
 * ucl/by-group/#
 
 More than this can be appended to the initial list in future versions.
@@ -50,8 +48,6 @@ published about the node. The topic is <em>ucl/by-unid/&lt;unid&gt;/State</em>.
 
 The state topic is a JSON object that MUST follow the following JSON Schema.
 
-> FIXME: Here we need the other PHYs/protocols to fill up the Security enum.
-
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -76,7 +72,8 @@ The state topic is a JSON object that MUST follow the following JSON Schema.
         "Z-Wave S0",
         "Z-Wave S2 Unauthenticated",
         "Z-Wave S2 Authenticated",
-        "Z-Wave S2 Access Control"
+        "Z-Wave S2 Access Control",
+        "Zigbee Z3"
       ]
     },
     "MaximumCommandDelay": {
@@ -281,6 +278,19 @@ This can happen, for example if the Protocol Controller reboots or is offline.</
 within expected delays. The node has a connectivity issue.</td>
 </tr>
 </table>
+
+### List of endpoints available for nodes
+
+Protocol Controller SHOULD advertise the list of available endpoints for a
+given node and themselves under the topics:
+
+* **ucl/by-unid/&lt;unid&gt;/State/Attributes/EndpointIdList/Reported**
+* **ucl/by-unid/&lt;unid&gt;/State/Attributes/EndpointIdList/Desired**
+
+IoT Services cannot assume that the Endpoint ID list will always be available.
+
+IoT Services can also deduce Endpoints ID based on publications made to the
+application clusters for a each endpoint.
 
 ## MQTT Client Controlling Examples
 
@@ -509,18 +519,12 @@ When a node is removed from the network, the ResourceDirectory MQTT Client will 
 
 The by-type namespace is postponed for now, because few PHYs use it. It is always possible to iterate over the by-unid namespace and filter by Cluster or derive the types manually.
 
-The type is based on the ZCL Device Type. The ZCL device ID type is read-only and cannot be changed. In ZigBee, it can be read using the Simple_Desc_Req for each endpoint. The Simple_Desc_rsp contains a 2-byte field named "Application device identifier". This group should work in a similar fashion as the by-location group, except that it is read-only and clients cannot change the device type of a given node.
-
-For example, when a Protocol Controller includes a Door Lock in a network (device identifier 0x000A), it will read its device identifier and will publish its unid/endpoint under the corresponding Device Type:
-
-> Topic: <em>ucl/by-type/DoorLock/32049351/ep0</em><br/>
-> Payload:
-> ```json
-> {
->  "unid" : "32049351",
->  "endpoint":"0"
-> }
-> ```
+The type is based on the ZCL Device Type. The ZCL device ID type is
+read-only and cannot be changed. In ZigBee, it can be read using the
+Simple_Desc_Req for each endpoint. The Simple_Desc_rsp contains a 2-byte
+field named "Application device identifier". This group should work in a
+similar fashion as the by-location group, except that it is read-only and
+clients cannot change the device type of a given node.
 
 ### By Group
 
@@ -532,7 +536,7 @@ If an IoT Service wants to control a set of nodes that belong to the same group,
 it can issue the commands directly to the GroupId topic.
 
 
-An helper component is used to keep track of group membership and capabilities,
+A helper component is used to keep track of group membership and capabilities,
 mimicking the behavior in the `by-unid` space.
 
 **Topic:** `ucl/by-group/&lt;GroupID&gt;/&lt;ClusterName&gt;/Commands/+`
@@ -621,22 +625,9 @@ of several groups.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Controlling PAN nodes using the group topics
 
 legend top
@@ -797,22 +788,9 @@ An example for the Group Manager logic is shown in the diagram below.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Group manager updates
 
 legend top
@@ -890,22 +868,9 @@ at `ucl/by-group/3/GroupName`.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Group usage example using the UCL / Unify Framework
 
 legend top

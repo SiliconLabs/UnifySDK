@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -101,7 +101,7 @@ Inheritance diagram for zigpc::gateway::NetworkInitRequest:</div>
  <div class="center">
   <img src="classzigpc_1_1gateway_1_1NetworkInitRequest.png" usemap="#zigpc::gateway::NetworkInitRequest_map" alt=""/>
   <map id="zigpc::gateway::NetworkInitRequest_map" name="zigpc::gateway::NetworkInitRequest_map">
-<area href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html" title="Base class used in the RequestQueue to invoke Z3Gateway API calls." alt="zigpc::gateway::RequestQueue::Entry" shape="rect" coords="0,0,219,24"/>
+<area href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html" title="Base class used in the RequestQueue to invoke ZigbeeHost API calls." alt="zigpc::gateway::RequestQueue::Entry" shape="rect" coords="0,0,219,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -109,10 +109,10 @@ Inheritance diagram for zigpc::gateway::NetworkInitRequest:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8bca4a383778fbe674bbeff0b72b0e32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1NetworkInitRequest.html#a8bca4a383778fbe674bbeff0b72b0e32">NetworkInitRequest</a> (void)</td></tr>
 <tr class="separator:a8bca4a383778fbe674bbeff0b72b0e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec61fda839234a244363b1d529eefccf"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1NetworkInitRequest.html#aec61fda839234a244363b1d529eefccf">~NetworkInitRequest</a> ()=default</td></tr>
-<tr class="separator:aec61fda839234a244363b1d529eefccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fa580ef7fe978e7d25f314ec2d325e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1NetworkInitRequest.html#aa2fa580ef7fe978e7d25f314ec2d325e">~NetworkInitRequest</a> () override=default</td></tr>
+<tr class="separator:aa2fa580ef7fe978e7d25f314ec2d325e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6e24d04d36a6d8c387600d4559bea63"><td class="memItemLeft" align="right" valign="top">EmberStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1NetworkInitRequest.html#ac6e24d04d36a6d8c387600d4559bea63">invoke</a> (void) override</td></tr>
-<tr class="memdesc:ac6e24d04d36a6d8c387600d4559bea63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke/execute the Z3Gateway call using the infomation stored in the object.  <a href="classzigpc_1_1gateway_1_1NetworkInitRequest.html#ac6e24d04d36a6d8c387600d4559bea63">More...</a><br /></td></tr>
+<tr class="memdesc:ac6e24d04d36a6d8c387600d4559bea63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke/execute the ZigbeeHost call using the infomation stored in the object.  <a href="classzigpc_1_1gateway_1_1NetworkInitRequest.html#ac6e24d04d36a6d8c387600d4559bea63">More...</a><br /></td></tr>
 <tr class="separator:ac6e24d04d36a6d8c387600d4559bea63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classzigpc_1_1gateway_1_1RequestQueue_1_1Entry"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classzigpc_1_1gateway_1_1RequestQueue_1_1Entry')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html">zigpc::gateway::RequestQueue::Entry</a></td></tr>
 <tr class="memitem:a34fd8f8faf4ff625ba246d95a967eeca inherit pub_methods_classzigpc_1_1gateway_1_1RequestQueue_1_1Entry"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html#a34fd8f8faf4ff625ba246d95a967eeca">Entry</a> (const char *<a class="el" href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html#a2e34f8644a65c97154f16da13d675345">label</a>)</td></tr>
@@ -137,6 +137,9 @@ Public Member Functions</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">zigpc::gateway::NetworkInitRequest::NetworkInitRequest </td>
@@ -146,12 +149,17 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aec61fda839234a244363b1d529eefccf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec61fda839234a244363b1d529eefccf">&#9670;&nbsp;</a></span>~NetworkInitRequest()</h2>
+<a id="aa2fa580ef7fe978e7d25f314ec2d325e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2fa580ef7fe978e7d25f314ec2d325e">&#9670;&nbsp;</a></span>~NetworkInitRequest()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -160,7 +168,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual zigpc::gateway::NetworkInitRequest::~NetworkInitRequest </td>
+          <td class="memname">zigpc::gateway::NetworkInitRequest::~NetworkInitRequest </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -168,7 +176,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -200,7 +208,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Invoke/execute the Z3Gateway call using the infomation stored in the object. </p>
+<p>Invoke/execute the ZigbeeHost call using the infomation stored in the object. </p>
 <dl class="section return"><dt>Returns</dt><dd>EmberStatus </dd></dl>
 
 <p>Implements <a class="el" href="classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html#a7bf3da838d69eb145efe797d2ca691c5">zigpc::gateway::RequestQueue::Entry</a>.</p>
@@ -216,7 +224,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacezigpc.html">zigpc</a></li><li class="navelem"><a class="el" href="namespacezigpc_1_1gateway.html">gateway</a></li><li class="navelem"><a class="el" href="classzigpc_1_1gateway_1_1NetworkInitRequest.html">NetworkInitRequest</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:30 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:45 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

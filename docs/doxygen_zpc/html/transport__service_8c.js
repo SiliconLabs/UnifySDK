@@ -12,7 +12,6 @@ var transport__service_8c =
     [ "log_debug", "transport__service_8c.html#a48c62d40275748e5ebda1fb2575495d5", null ],
     [ "log_error", "transport__service_8c.html#a78915f4d8cc01f5cbf1ef2166c86468e", null ],
     [ "LOG_TAG", "transport__service_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
-    [ "offsetof", "transport__service_8c.html#ad89ebe5fe5ad08c683f0871118ea8e2f", null ],
     [ "PAYLOAD_SIZE_MAX", "transport__service_8c.html#a987a85f2d5878bc256ec22d091633943", null ],
     [ "RESET_TIME", "transport__service_8c.html#abc83f110373bf0ab264aa8ffe232ee20", null ],
     [ "SUBSEQ_FRAG_NONPAYLOAD_LENGTH", "transport__service_8c.html#a0abff1af955babdc5a248b1124090042", null ],

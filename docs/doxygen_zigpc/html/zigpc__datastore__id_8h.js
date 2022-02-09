@@ -10,6 +10,8 @@ var zigpc__datastore__id_8h =
       [ "ZIGPC_DS_TYPE_CLIENT_CLUSTER", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a3185b4348a3155bca42395d4602ea9f7", null ],
       [ "ZIGPC_DS_TYPE_CLUSTER_ATTRIBUTE", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358acb6a2b48df1f57c5c1ebc1ba4586410b", null ],
       [ "ZIGPC_DS_TYPE_CLUSTER_GENERATED_COMMAND", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358addc740f9d38c2f79a1e010a73f3a3621", null ],
-      [ "ZIGPC_DS_TYPE_CLUSTER_RECEIVED_COMMAND", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358ae5fd79c728ac0ee9acb8d3674b9b365d", null ]
+      [ "ZIGPC_DS_TYPE_CLUSTER_RECEIVED_COMMAND", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358ae5fd79c728ac0ee9acb8d3674b9b365d", null ],
+      [ "ZIGPC_DS_TYPE_GROUP_REPORTED", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358a2cedf272caa50b28d6e11dd0110eb9c7", null ],
+      [ "ZIGPC_DS_TYPE_GROUP_DESIRED", "group__zigpc__datastore__id.html#gga579b23fd09f2270bba5c5458fef07358ada96b98f6079d25f1de27223b0e2e63c", null ]
     ] ]
 ];

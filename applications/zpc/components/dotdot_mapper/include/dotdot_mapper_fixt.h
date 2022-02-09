@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -13,7 +13,7 @@
 
 /**
  * @defgroup dotdot_mapper Dotdot Mapper
- * @ingroup components
+ * @ingroup zpc_components
  * @brief Maps the DotDot clusters to known command classes
  *
  * @{

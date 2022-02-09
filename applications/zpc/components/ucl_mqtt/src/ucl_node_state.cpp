@@ -22,10 +22,11 @@
 #include "zpc_attribute_store.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "sl_log.h"
+#include "sl_status.h"
 #include "uic_mqtt.h"
 #include "attribute.hpp"
 #include "zwave_command_class_wake_up_types.h"
-
+#include "zwave_utils.h"
 // Interfaces (only using typedefs from here)
 #include "zwave_controller_keyset.h"
 #include "ucl_definitions.h"
@@ -40,14 +41,21 @@
 
 #include <boost/algorithm/string.hpp>
 
+// Includes from auto-generated files
+#include "dotdot_mqtt.h"
+
 constexpr char LOG_TAG[] = "ucl_node_state_topic";
+
+/**
+ * @brief Name the of @ref contiki process for the Ucl Network Management.
+ *
+ * This is used to register the name of the Ucl Network Management Process.
+ */
+PROCESS_NAME(ucl_network_management_process);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Defines and types
 ////////////////////////////////////////////////////////////////////////////////
-static std::map<attribute_store_node_t, std::string> nodes_in_network;
-typedef std::map<attribute_store_node_t, std::string>::iterator
-  nodes_in_network_iterator_t;
 
 // Theese strings must follow definitions in node_state_topic_state_t
 static const char *state_names[] = {
@@ -175,7 +183,7 @@ static uint32_t
     return MAX_COMMAND_DELAY_UNKNOWN;
   }
 
-  switch (get_operating_mode(node_id)) {
+  switch (zwave_get_operating_mode(node_id)) {
     case OPERATING_MODE_AL:
       return 1;
     case OPERATING_MODE_FL:
@@ -191,33 +199,61 @@ static uint32_t
 ///////////////////////////////////////////////////////////////////////////////
 // MQTT callback functions
 //////////////////////////////////////////////////////////////////////////////
-void on_ucl_node_state_command_received(const char *topic,
-                                        const char *message,
-                                        size_t message_length)
+static sl_status_t ucl_node_state_interview_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_callback_call_type_t callback_type)
 {
-  std::vector<std::string> topic_elements;
-  boost::algorithm::split(topic_elements, topic, boost::is_any_of("/"));
-  std::string unid    = topic_elements[2];
-  std::string command = topic_elements.back();
-
-  if (command == "Interview") {
-    ucl_mqtt_initiate_node_interview(unid.c_str());
-  } else if (command == "RemoveOffline") {
-    zwave_node_id_t node_id = 0x00;
-    if (SL_STATUS_OK == zwave_unid_to_node_id(unid.c_str(), &node_id)) {
-      ucl_network_management_remove_offline_node(node_id);
-    }
-  } else if (command == "DiscoverNeighbors") {
-    zwave_node_id_t node_id = 0x00;
-    if (SL_STATUS_OK == zwave_unid_to_node_id(unid.c_str(), &node_id)) {
-      ucl_network_management_request_node_neighbor_update(node_id);
-    }
-  } else {
-    sl_log_debug(LOG_TAG,
-                 "Received unsupported State command %s for unid %s. Ignoring.",
-                 message,
-                 unid.c_str());
+  if (true == is_zpc_unid(unid)) {
+    return SL_STATUS_NOT_SUPPORTED;
   }
+
+  if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == callback_type) {
+    return SL_STATUS_OK;
+  }
+
+  return ucl_mqtt_initiate_node_interview(unid);
+}
+
+static sl_status_t ucl_node_state_remove_offline_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_callback_call_type_t callback_type)
+{
+  if (true == is_zpc_unid(unid)) {
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
+  if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == callback_type) {
+    return SL_STATUS_OK;
+  }
+
+  zwave_node_id_t node_id = 0x00;
+  if (SL_STATUS_OK == zwave_unid_to_node_id(unid, &node_id)) {
+    return ucl_network_management_remove_offline_node(node_id);
+  }
+
+  return SL_STATUS_OK;
+}
+
+static sl_status_t ucl_node_state_discover_neighbors_command(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  const uic_mqtt_dotdot_callback_call_type_t callback_type)
+{
+  if (true == is_zpc_unid(unid)) {
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
+  if (UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK == callback_type) {
+    return SL_STATUS_OK;
+  }
+
+  zwave_node_id_t node_id = 0x00;
+  if (SL_STATUS_OK == zwave_unid_to_node_id(unid, &node_id)) {
+    return ucl_network_management_request_node_neighbor_update(node_id);
+  }
+  return SL_STATUS_OK;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -234,16 +270,18 @@ static sl_status_t publish_node_state(attribute_store_node_t node_id_node,
   uint32_t maximum_command_delay = get_node_maximum_command_delay(node_id_node);
 
   std::string topic = "ucl/by-unid/";
-  topic.append(nodes_in_network[node_id_node].c_str());
+  unid_t unid;
+  attribute_store_network_helper_get_unid_from_node(node_id_node, unid);
+  topic.append(unid);
   topic.append("/State");
   std::string cmd_delay;
 
   if (network_status >= NODE_STATE_TOPIC_LAST) {
-    sl_log_error(LOG_TAG, "Invalid topic state\n");
+    sl_log_debug(LOG_TAG, "Invalid topic state\n");
     return SL_STATUS_FAIL;
   }
   if (security >= NODES_STATE_TOPIC_SECURITY_LAST) {
-    sl_log_error(LOG_TAG, "Invalid topic security\n");
+    sl_log_debug(LOG_TAG, "Invalid topic security\n");
     return SL_STATUS_FAIL;
   }
 
@@ -265,35 +303,14 @@ static sl_status_t publish_node_state(attribute_store_node_t node_id_node,
   return SL_STATUS_OK;
 }
 
-static void publish_node_state_supported_commands(const std::string &unid)
-{
-  // Do not publish any state supported commands for ourselves.
-  // Perhaps we should publish an empty array?
-  if (true == is_zpc_unid(unid.c_str())) {
-    return;
-  }
-
-  // For now all nodes only support re-interview.
-  std::string topic = "ucl/by-unid/" + unid + "/State/SupportedCommands";
-  std::string message
-    = R"({"value": ["Interview","RemoveOffline","DiscoverNeighbors"]})";
-  uic_mqtt_publish(topic.c_str(), message.c_str(), message.size(), true);
-}
-
 static void unretain_node_publications(attribute_store_node_t node)
 {
-  nodes_in_network_iterator_t it = nodes_in_network.find(node);
-  if (it != nodes_in_network.end()) {
-    std::string pattern = "ucl/by-unid/" + it->second;
-    uic_mqtt_unretain(pattern.data());
-    nodes_in_network.erase(it);
-  }
-}
-
-static void subscribe_to_node_state_commands(const std::string &unid)
-{
-  std::string topic_filter = "ucl/by-unid/" + unid + "/State/Commands/+";
-  uic_mqtt_subscribe(topic_filter.c_str(), on_ucl_node_state_command_received);
+  unid_t unid;
+  attribute_store_network_helper_get_unid_from_node(node, unid);
+  std::string pattern = "ucl/by-unid/";
+  pattern.append(unid);
+  pattern.append("/State");
+  uic_mqtt_unretain(pattern.data());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -328,36 +345,6 @@ static void
 }
 
 /**
- * @brief Verifies if an updated NodeIDs needs to be added in our network cache
- */
-static void on_node_status_update(attribute_store_node_t node_id_node)
-{
-  if (false
-      == attribute_store_is_value_defined(node_id_node, REPORTED_ATTRIBUTE)) {
-    return;
-  }
-
-  unid_t unid;
-  if (SL_STATUS_OK
-      != attribute_store_network_helper_get_unid_from_node(node_id_node,
-                                                           unid)) {
-    return;
-  }
-
-  // Ensure this node is in our local list and publish its state
-  // and subscribe to commands
-  nodes_in_network_iterator_t it = nodes_in_network.find(node_id_node);
-  if (it == nodes_in_network.end()) {
-    nodes_in_network.insert(
-      std::pair<attribute_store_node_t, std::string>(node_id_node,
-                                                     std::string(unid)));
-    publish_node_state(node_id_node, true);
-    publish_node_state_supported_commands(unid);
-    subscribe_to_node_state_commands(unid);
-  }
-}
-
-/**
  * @brief callback function for new NodeIDs updates in the network
  */
 static void on_pan_node_update(attribute_store_node_t node_id_node,
@@ -367,8 +354,9 @@ static void on_pan_node_update(attribute_store_node_t node_id_node,
     unretain_node_publications(node_id_node);
     return;
   }
-
-  on_node_status_update(node_id_node);
+  if (attribute_store_is_value_defined(node_id_node, REPORTED_ATTRIBUTE)) {
+    publish_node_state(node_id_node, true);
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -395,21 +383,33 @@ sl_status_t ucl_node_state_init()
     ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
     REPORTED_ATTRIBUTE);
 
+  uic_mqtt_dotdot_state_interview_callback_set(
+    ucl_node_state_interview_command);
+
+  uic_mqtt_dotdot_state_remove_offline_callback_set(
+    ucl_node_state_remove_offline_command);
+
+  uic_mqtt_dotdot_state_discover_neighbors_callback_set(
+    ucl_node_state_discover_neighbors_command);
+
   return SL_STATUS_OK;
 }
 
 void ucl_node_state_teardown()
 {
-  for (nodes_in_network_iterator_t it = nodes_in_network.begin();
-       it != nodes_in_network.end();
-       ++it) {
-    publish_node_state(it->first, false);
+  // get node list and publish the node state unavailable
+  attribute_store_node_t home_id_node = get_zpc_network_node();
+  attribute_store_node_t node_id_node = ATTRIBUTE_STORE_INVALID_NODE;
+  size_t num_child = attribute_store_get_node_child_count(home_id_node);
+  for (size_t i = 0; i < num_child; i++) {
+    node_id_node = attribute_store_get_node_child_by_type(home_id_node,
+                                                          ATTRIBUTE_NODE_ID,
+                                                          i);
+    publish_node_state(node_id_node, false);
   }
 
   //Remove all retained topics except ucl/by-unid/<xxxxx>/State
   uic_mqtt_unretain_by_regex("^(?!ucl\\/by-unid\\/.*\\/State$).*");
-
-  nodes_in_network.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

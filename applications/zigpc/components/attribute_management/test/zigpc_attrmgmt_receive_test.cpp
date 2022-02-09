@@ -17,10 +17,11 @@ extern "C" {
 
 #include <unity.h>
 
-#include <dotdot_mqtt_mock.h>
-#include <zigpc_common_zigbee_mock.h>
-#include <zcl_util_mock.h>
+#include <zigpc_common_zigbee.h>
 #include <zcl_definitions.h>
+
+#include "dotdot_mqtt_mock.h"
+#include "zcl_util_mock.h"
 
 #include "attribute_management_int.h"
 
@@ -49,10 +50,7 @@ int suiteTearDown(int num_failures)
  * @brief Setup before each test case
  *
  */
-void setUp(void)
-{
-  zcl_util_mock_Init();
-}
+void setUp(void) {}
 
 /**
  * @brief Teardown after each test case
@@ -70,13 +68,6 @@ void tearDown(void) {}
 void helper_expect_unid_and_type(zigpc_zcl_data_type_t type, size_t return_size)
 {
   zigpc_zcl_get_data_type_size_ExpectAndReturn(type, return_size);
-
-  zigpc_common_eui64_to_unid_ExpectAndReturn(TEST_EUI64, NULL, 0, SL_STATUS_OK);
-  zigpc_common_eui64_to_unid_IgnoreArg_dest_unid();
-  zigpc_common_eui64_to_unid_IgnoreArg_dest_unid_length();
-  zigpc_common_eui64_to_unid_ReturnMemThruPtr_dest_unid(
-    const_cast<char *>(TEST_EUI64_STR.c_str()),
-    TEST_EUI64_STR.size() + 1);
 }
 
 void test_receive_attribute_frame_should_sanitize_inputs(void)

@@ -12,9 +12,6 @@
  *****************************************************************************/
 #include <string>
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-
 // UIC libraries
 #include <sl_log.h>
 #include <sl_status.h>

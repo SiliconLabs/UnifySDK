@@ -12,14 +12,13 @@
  *****************************************************************************/
 
 /**
- * @file ucl_nm_neighbor_discovery.h
- * @defgroup ucl_nm_neighbor_discovery ucl network management node neighbor discovery submodule
+ * @defgroup ucl_nm_neighbor_discovery UCL Network Management Node Neighbor Discovery
  * @ingroup ucl_mqtt
  * @brief This submodule provides APIs to trigger a node neighbor discovery
- * *
+ *
  * @{
  */
- 
+
 #include "zwave_utils.h"
 
 #ifndef UCL_NM_NEIGHBOR_DISCOVERY_H
@@ -31,7 +30,7 @@ extern "C" {
 /**
  * @brief Trigger the request node neighbor discovery
  * @param node_id The NodeID of the node for which the node neighbor discovery is requested.
- */ 
+ */
 void ucl_nm_trigger_node_neighbor_update(zwave_node_id_t node_id);
 
 /// intialize ucl network management node neighbor discovery submodule

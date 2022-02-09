@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -59,9 +59,10 @@ static sl_status_t handle_set_log_level(const handle_args_t &arg);
 static std::map<std::string, std::pair<std::string, handler_func>> commands
   = {{"help", {" :Prints help", handle_help}},
      {"exit", {" :Exit the application", handle_exit}},
-     {"log_level", {COLOR_START "d|i||w|e|c" COLOR_END ":Set log level"
-      "DEBUG | INFO | WARNING | ERROR | CRITICAL",
-      handle_set_log_level}}};
+     {"log_level",
+      {COLOR_START "d|i||w|e|c" COLOR_END ":Set log level"
+                   "DEBUG | INFO | WARNING | ERROR | CRITICAL",
+       handle_set_log_level}}};
 
 // The prompt string for the command line interface
 std::string prompt_string = "UIC> ";
@@ -99,8 +100,8 @@ void uic_stdin_init()
 static sl_status_t handle_help(const handle_args_t &arg)
 {
   dprintf(out_stream, "==================================================\n");
-  dprintf(out_stream, COLOR_START "UIC Command line interface Help:\n"
-          COLOR_END);
+  dprintf(out_stream,
+          COLOR_START "UIC Command line interface Help:\n" COLOR_END);
   dprintf(out_stream, "==================================================\n");
   for (auto elem: commands) {
     dprintf(out_stream,
@@ -109,7 +110,8 @@ static sl_status_t handle_help(const handle_args_t &arg)
             elem.second.first.c_str());
   }
   dprintf(out_stream, "==================================================\n");
-  dprintf(out_stream, "Tip: log_level c to reduce the"
+  dprintf(out_stream,
+          "Tip: log_level c to reduce the"
           " verbosity of log\n");
   dprintf(out_stream, "==================================================\n");
   return SL_STATUS_OK;

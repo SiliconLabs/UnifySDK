@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,13 +12,12 @@
  *****************************************************************************/
 
 /**
- * @file zpc_config_fixt.h
  * @defgroup zpc_config_fixture ZPC Config Fixture
  * @ingroup zpc_config
  * @brief ZPC Configuration fixture.
  *
  * Fixture to initialize the zpc_config from uic_main,
- * to be used in \ref zpc_config
+ * to be used in @ref zpc_config
  *
  * @{
  */

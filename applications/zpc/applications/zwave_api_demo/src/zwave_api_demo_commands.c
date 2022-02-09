@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -395,7 +395,7 @@ static sl_status_t get_maximum_payload_size()
   uint8_t maximum_size       = 0;
   sl_status_t command_status = zwapi_get_maximum_payload_size(&maximum_size);
   if (command_status == SL_STATUS_OK) {
-    sl_log_info(LOG_TAG, "Maximum Z-Wave paylaod size: %d\n", maximum_size);
+    sl_log_info(LOG_TAG, "Maximum Z-Wave payload size: %d\n", maximum_size);
   }
   return command_status;
 }
@@ -406,7 +406,7 @@ static sl_status_t get_lr_maximum_payload_size()
   sl_status_t command_status = zwapi_get_lr_maximum_payload_size(&maximum_size);
   if (command_status == SL_STATUS_OK) {
     sl_log_info(LOG_TAG,
-                "Maximum Z-Wave Long Range paylaod size: %d\n",
+                "Maximum Z-Wave Long Range payload size: %d\n",
                 maximum_size);
   }
   return command_status;

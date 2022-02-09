@@ -13,10 +13,10 @@
 
 /**
  * @defgroup zpc_attribute_resolver_callbacks ZPC Attribute Resolver callbacks
- * @ingroup attribute_resolver_send
- * @brief Collects send data callbacks from \ref attribute_resolver_send and
- * \ref attribute_resolver_group_send and relays them to the
- * \ref attribute_resolver
+ * @ingroup zpc_attribute_resolver_internals
+ * @brief Collects send data callbacks from @ref attribute_resolver_send and
+ * @ref attribute_resolver_group_send and relays them to the
+ * @ref attribute_resolver
  *
  * @{
  */
@@ -53,9 +53,9 @@ void attribute_resolver_callbacks_reset();
  * encapsulation.
  *
  * @param status  Indicates how the transmission operation was completed.
- *                Refer for \ref zwapi_transmit_complete_codes for details.
- * @param tx_info zwapi_tx_report_t reported by the \ref ZWAPI. It
- *                contains transmission details, refer to \ref zwapi_tx_report_t.
+ *                Refer for @ref zwapi_transmit_complete_codes for details.
+ * @param tx_info zwapi_tx_report_t reported by the @ref zwave_api. It
+ *                contains transmission details, refer to @ref zwapi_tx_report_t.
  * @param user    User pointer provided in from this component.
  *                Must be a resolution_map_t pointer
  */
@@ -68,7 +68,7 @@ void on_resolver_zwave_send_data_complete(uint8_t status,
  * encapsulation.
  *
  * @param supervision_status  Supervision status returned by the node.
- * @param tx_info             zwapi_tx_report_t reported by the \ref ZWAPI. It
+ * @param tx_info             zwapi_tx_report_t reported by the @ref zwave_api. It
  *                            contains transmission details, refer to
  *                            \ref zwapi_tx_report_t.
  * @param user                User pointer provided in from this component.

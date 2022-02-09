@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wake_20up_20command_20class_8232',['Wake Up Command Class',['../group__zwave__command__class__wake__up.html',1,'']]]
+  ['version_20command_20class_8648',['Version Command Class',['../group__zwave__command__class__version.html',1,'']]]
 ];

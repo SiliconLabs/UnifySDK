@@ -22,6 +22,9 @@
         },
         {
           "include": "#des_attribute"
+        },
+        {
+          "include": "#existence_of_attribute"
         }
 
       ]
@@ -32,6 +35,10 @@
     },
     "des_attribute": {
       "match": "d'[\\.\\[\\]\\w]+",
+      "name": "support.type"
+    },
+    "existence_of_attribute": {
+      "match": "e'[\\.\\[\\]\\w]+",
       "name": "support.type"
     },
     "comment": {

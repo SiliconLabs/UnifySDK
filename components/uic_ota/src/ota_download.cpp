@@ -13,6 +13,7 @@
 
 // Standard library
 #include <filesystem>
+#include <fstream>
 
 // This component
 #include "ota.hpp"
@@ -26,11 +27,8 @@
 #include "uic_mqtt.h"
 
 // Third party library
-#include <boost/property_tree/ptree.hpp>
 #include <boost/algorithm/string.hpp>
-#include <boost/property_tree/json_parser.hpp>
-
-namespace bpt = boost::property_tree;
+#include <nlohmann/json.hpp>
 
 // Constants
 constexpr char LOG_TAG[] = "uic_ota_download";
@@ -129,11 +127,11 @@ static std::string get_uiid_by_topic(const char *topic)
   return topic_elements[3];
 }
 
-static time_t parse_time_from_meta_info(const bpt::ptree &pt)
+static time_t parse_time_from_meta_info(nlohmann::json &jsn)
 {
   std::string time_str;
   try {
-    time_str = pt.get<std::string>("ApplyAfter");
+    time_str = jsn["ApplyAfter"].get<std::string>();
   } catch (...) {
     return 0;
   }
@@ -147,20 +145,12 @@ static std::string parse_image_key(const std::string &unid,
   return unid_in_topic ? uiid + "/" + unid : uiid;
 }
 
-static void
-  parse_json(const char *message, const size_t message_length, bpt::ptree &pt)
-{
-  std::stringstream ss;
-  ss << std::string(message, message_length);
-  bpt::json_parser::read_json(ss, pt);
-}
-
-static std::string parse_filename_json(const bpt::ptree &pt,
+static std::string parse_filename_json(nlohmann::json &jsn,
                                        const std::string &unid,
                                        const std::string &uiid)
 {
   try {
-    return pt.get<std::string>("Filename");
+    return jsn["Filename"].get<std::string>();
   } catch (...) {
     return "Firmware_image_" + unid + "_" + uiid;
   }
@@ -325,38 +315,18 @@ void info_callback(const char *topic,
   }
 
   // Parse payload data
-  bpt::ptree pt;
+  nlohmann::json jsn;
   try {
-    parse_json(message, message_length, pt);
-  } catch (std::exception const &ex) {
-    sl_log_error(LOG_TAG,
-                 "Unable to parse JSON payload on topic %s. Error is: %s",
-                 topic,
-                 ex.what());
-    return;
-  } catch (...) {
-    sl_log_error(LOG_TAG,
-                 "Unable to parse JSON payload on topic %s. Unknown error");
+    jsn = nlohmann::json::parse(std::string(message, message_length));
+  } catch (const nlohmann::json::parse_error& e) {
+    sl_log_error(LOG_TAG, "Unable to parse JSON payload on topic '%s', error: '%s'.", topic, e.what());
     return;
   }
 
   try {
-    meta_info.apply_after = parse_time_from_meta_info(pt);
-    meta_info.version     = pt.get<std::string>("Version");
-    meta_info.filename
-      = parse_filename_json(pt, meta_info.unid, meta_info.uiid);
-  } catch (std::invalid_argument const &ex) {
-    sl_log_error(LOG_TAG,
-                 "Error parsing OTA meta data JSON payload %s - error: %s",
-                 message,
-                 ex.what());
-    return;
-  } catch (const std::exception &ex) {
-    sl_log_error(LOG_TAG,
-                 "Error parsing OTA meta data JSON payload %s - error: %s",
-                 message,
-                 ex.what());
-    return;
+    meta_info.apply_after = parse_time_from_meta_info(jsn);
+    meta_info.version     = jsn["Version"].get<std::string>();
+    meta_info.filename    = parse_filename_json(jsn, meta_info.unid, meta_info.uiid);
   } catch (...) {
     sl_log_error(LOG_TAG,
                  "Error parsing OTA meta data JSON payload %s - unknown error",

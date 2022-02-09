@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: applications/zpc/components/s0/src/zwave_s0_sm.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: applications/zpc/components/zwave/zwave_transports/s0/src/zwave_s0_sm.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -165,13 +165,13 @@ Enumerations</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a0dc7eb896bebdab4882a3d4fb89e5ad5"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a0dc7eb896bebdab4882a3d4fb89e5ad5">s0_event_name</a> (<a class="el" href="zwave__s0__sm_8c.html#ab7af4242e0c959864eab8bc62bca55a0">s0_bootstrap_event_t</a> ev)</td></tr>
 <tr class="separator:a0dc7eb896bebdab4882a3d4fb89e5ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00ff81b246bf8cb1115793c817f34350"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a00ff81b246bf8cb1115793c817f34350">s0_incl_state_name</a> (<a class="el" href="zwave__s0__sm_8h.html#ad2d6d1f7df1c779897c6bd0b69e40ea2">s0_bootstrap_state_t</a> state)</td></tr>
+<tr class="memitem:a00ff81b246bf8cb1115793c817f34350"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a00ff81b246bf8cb1115793c817f34350">s0_incl_state_name</a> (<a class="el" href="group__zwave__s0__inclusion__state__machine.html#gad2d6d1f7df1c779897c6bd0b69e40ea2">s0_bootstrap_state_t</a> <a class="el" href="zwave__api__transport_8c.html#a9ad7ce1c8d5add698d70903b7db6d795">state</a>)</td></tr>
 <tr class="separator:a00ff81b246bf8cb1115793c817f34350"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a691bf153768d1b3db454bc51f11fc9c0"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a691bf153768d1b3db454bc51f11fc9c0">s0_action_name</a> (<a class="el" href="zwave__s0__sm_8c.html#a9bad29ff29b3775317a9f5b32f9bef2c">s0_action_t</a> action)</td></tr>
 <tr class="separator:a691bf153768d1b3db454bc51f11fc9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f16899e498cbd0eeb2e3e52a732decf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a6f16899e498cbd0eeb2e3e52a732decf">s0_scheme_report_received</a> (const uint8_t scheme, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> from_node)</td></tr>
-<tr class="memdesc:a6f16899e498cbd0eeb2e3e52a732decf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to notify the S0 Inclusion state machine that S0 Scheme report frame was received.  <a href="zwave__s0__sm_8c.html#a6f16899e498cbd0eeb2e3e52a732decf">More...</a><br /></td></tr>
-<tr class="separator:a6f16899e498cbd0eeb2e3e52a732decf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga27a97b6299c3fda3115f715b23902a60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__inclusion__state__machine.html#ga27a97b6299c3fda3115f715b23902a60">s0_scheme_report_received</a> (const uint8_t scheme, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> from_node)</td></tr>
+<tr class="memdesc:ga27a97b6299c3fda3115f715b23902a60"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to notify the S0 Inclusion state machine that S0 Scheme report frame was received.  <a href="group__zwave__s0__inclusion__state__machine.html#ga27a97b6299c3fda3115f715b23902a60">More...</a><br /></td></tr>
+<tr class="separator:ga27a97b6299c3fda3115f715b23902a60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4101f12d142bd597954a665c6acc700"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#ab4101f12d142bd597954a665c6acc700">s0_handle_net_key_verify</a> ()</td></tr>
 <tr class="separator:ab4101f12d142bd597954a665c6acc700"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84e7be6182bb4e2f919fb2a3733e6ca1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a84e7be6182bb4e2f919fb2a3733e6ca1">s0_sm_process_event</a> (uint16_t evt)</td></tr>
@@ -184,30 +184,30 @@ Functions</h2></td></tr>
 <tr class="separator:aaf909f4fdf4e6d4d910f4ab30f2e9c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f4ada1cafbd76ff9d9af5fab6fe23eb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a4f4ada1cafbd76ff9d9af5fab6fe23eb">s0_send_data_callback</a> (uint8_t status, const <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *tx_info, void *user)</td></tr>
 <tr class="separator:a4f4ada1cafbd76ff9d9af5fab6fe23eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad13d142fc4acb596e25c9e0b0afa6b8a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#ad13d142fc4acb596e25c9e0b0afa6b8a">s0_bootstrap_frames_generic_send</a> (<a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> en, const uint8_t *frame, uint8_t frame_len)</td></tr>
+<tr class="memitem:ad13d142fc4acb596e25c9e0b0afa6b8a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#ad13d142fc4acb596e25c9e0b0afa6b8a">s0_bootstrap_frames_generic_send</a> (<a class="el" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a> en, const uint8_t *frame, uint8_t frame_len)</td></tr>
 <tr class="separator:ad13d142fc4acb596e25c9e0b0afa6b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a042415cb1b240d0867977bb22cd4e0a7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a042415cb1b240d0867977bb22cd4e0a7">s0_send_scheme_inherit</a> ()</td></tr>
+<tr class="memitem:a042415cb1b240d0867977bb22cd4e0a7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a042415cb1b240d0867977bb22cd4e0a7">s0_send_scheme_inherit</a> ()</td></tr>
 <tr class="separator:a042415cb1b240d0867977bb22cd4e0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18d289e278b9c3e3e7b023fb315bff7e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a18d289e278b9c3e3e7b023fb315bff7e">s0_send_key_set</a> ()</td></tr>
+<tr class="memitem:a18d289e278b9c3e3e7b023fb315bff7e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a18d289e278b9c3e3e7b023fb315bff7e">s0_send_key_set</a> ()</td></tr>
 <tr class="separator:a18d289e278b9c3e3e7b023fb315bff7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3efb68081afc5686d48ee8ee23696a1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#aa3efb68081afc5686d48ee8ee23696a1">s0_send_scheme_get</a> ()</td></tr>
+<tr class="memitem:aa3efb68081afc5686d48ee8ee23696a1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#aa3efb68081afc5686d48ee8ee23696a1">s0_send_scheme_get</a> ()</td></tr>
 <tr class="separator:aa3efb68081afc5686d48ee8ee23696a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4d6768672314f24fe46c7d19b5b433f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#af4d6768672314f24fe46c7d19b5b433f">s0_bootstrapping_start</a> (const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *conn, uint8_t is_controller)</td></tr>
-<tr class="memdesc:af4d6768672314f24fe46c7d19b5b433f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the S0 add node process.  <a href="zwave__s0__sm_8c.html#af4d6768672314f24fe46c7d19b5b433f">More...</a><br /></td></tr>
-<tr class="separator:af4d6768672314f24fe46c7d19b5b433f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a324baa22838a503a6e1df7375e7deaaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a324baa22838a503a6e1df7375e7deaaa">s0_network_key_verify_received</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> from_node)</td></tr>
-<tr class="memdesc:a324baa22838a503a6e1df7375e7deaaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to notify the S0 Inclusion state machine that S0 network key verify frame was received.  <a href="zwave__s0__sm_8c.html#a324baa22838a503a6e1df7375e7deaaa">More...</a><br /></td></tr>
-<tr class="separator:a324baa22838a503a6e1df7375e7deaaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaf5d8d5af75e0b10cf0e6dd2ecba1c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#aeaf5d8d5af75e0b10cf0e6dd2ecba1c1">s0_set_callback</a> (<a class="el" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a> <a class="el" href="structcb.html">cb</a>)</td></tr>
-<tr class="memdesc:aeaf5d8d5af75e0b10cf0e6dd2ecba1c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set callback function for the S0 bootstrap. This callback function is copied internally into S0 and called when S0 bootstrap is complete.  <a href="zwave__s0__sm_8c.html#aeaf5d8d5af75e0b10cf0e6dd2ecba1c1">More...</a><br /></td></tr>
-<tr class="separator:aeaf5d8d5af75e0b10cf0e6dd2ecba1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98819b0a7889e8df757b121542897086"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zwave__s0__sm_8h.html#ad2d6d1f7df1c779897c6bd0b69e40ea2">s0_bootstrap_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#a98819b0a7889e8df757b121542897086">get_s0_sm_state</a> ()</td></tr>
-<tr class="memdesc:a98819b0a7889e8df757b121542897086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the state of S0 Bootstrap state machine.  <a href="zwave__s0__sm_8c.html#a98819b0a7889e8df757b121542897086">More...</a><br /></td></tr>
-<tr class="separator:a98819b0a7889e8df757b121542897086"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf4d6768672314f24fe46c7d19b5b433f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__inclusion__state__machine.html#gaf4d6768672314f24fe46c7d19b5b433f">s0_bootstrapping_start</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *conn, uint8_t is_controller)</td></tr>
+<tr class="memdesc:gaf4d6768672314f24fe46c7d19b5b433f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the S0 add node process.  <a href="group__zwave__s0__inclusion__state__machine.html#gaf4d6768672314f24fe46c7d19b5b433f">More...</a><br /></td></tr>
+<tr class="separator:gaf4d6768672314f24fe46c7d19b5b433f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga324baa22838a503a6e1df7375e7deaaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__inclusion__state__machine.html#ga324baa22838a503a6e1df7375e7deaaa">s0_network_key_verify_received</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> from_node)</td></tr>
+<tr class="memdesc:ga324baa22838a503a6e1df7375e7deaaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to notify the S0 Inclusion state machine that S0 network key verify frame was received.  <a href="group__zwave__s0__inclusion__state__machine.html#ga324baa22838a503a6e1df7375e7deaaa">More...</a><br /></td></tr>
+<tr class="separator:ga324baa22838a503a6e1df7375e7deaaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaeaf5d8d5af75e0b10cf0e6dd2ecba1c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__inclusion__state__machine.html#gaeaf5d8d5af75e0b10cf0e6dd2ecba1c1">s0_set_callback</a> (<a class="el" href="group__zwave__s0__network.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a> <a class="el" href="structcb.html">cb</a>)</td></tr>
+<tr class="memdesc:gaeaf5d8d5af75e0b10cf0e6dd2ecba1c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set callback function for the S0 bootstrap. This callback function is copied internally into S0 and called when S0 bootstrap is complete.  <a href="group__zwave__s0__inclusion__state__machine.html#gaeaf5d8d5af75e0b10cf0e6dd2ecba1c1">More...</a><br /></td></tr>
+<tr class="separator:gaeaf5d8d5af75e0b10cf0e6dd2ecba1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga98819b0a7889e8df757b121542897086"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__s0__inclusion__state__machine.html#gad2d6d1f7df1c779897c6bd0b69e40ea2">s0_bootstrap_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__inclusion__state__machine.html#ga98819b0a7889e8df757b121542897086">get_s0_sm_state</a> ()</td></tr>
+<tr class="memdesc:ga98819b0a7889e8df757b121542897086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the state of S0 Bootstrap state machine.  <a href="group__zwave__s0__inclusion__state__machine.html#ga98819b0a7889e8df757b121542897086">More...</a><br /></td></tr>
+<tr class="separator:ga98819b0a7889e8df757b121542897086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:acda24344d0a14289bbaf2daf130eb3cb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#acda24344d0a14289bbaf2daf130eb3cb">s0_on_bootstrapping_complete_callback</a> = <a class="el" href="cc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="memitem:acda24344d0a14289bbaf2daf130eb3cb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__zwave__s0__network.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#acda24344d0a14289bbaf2daf130eb3cb">s0_on_bootstrapping_complete_callback</a> = <a class="el" href="cc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
 <tr class="separator:acda24344d0a14289bbaf2daf130eb3cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0700307326b59aa8dea1a169baf5636"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structs0__sm__t.html">s0_sm_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__s0__sm_8c.html#ae0700307326b59aa8dea1a169baf5636">s0_sm</a></td></tr>
 <tr class="separator:ae0700307326b59aa8dea1a169baf5636"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -216,7 +216,7 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>S0 Bootstrapping state machine. </p>
-<h1><a class="anchor" id="autotoc_md0"></a>
+<h1><a class="anchor" id="autotoc_md3"></a>
 License</h1>
 <p><b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b></p>
 <p>The licensor of this software is Silicon Laboratories Inc. Your use of this software is governed by the terms of Silicon Labs Master Software License Agreement (MSLA) available at www.silabs.com/about-us/legal/master-software-license-agreement. This software is distributed to you in Source Code format and is governed by the sections of the MSLA applicable to Source Code. </p>
@@ -370,25 +370,6 @@ License</h1>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a98819b0a7889e8df757b121542897086"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98819b0a7889e8df757b121542897086">&#9670;&nbsp;</a></span>get_s0_sm_state()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="zwave__s0__sm_8h.html#ad2d6d1f7df1c779897c6bd0b69e40ea2">s0_bootstrap_state_t</a> get_s0_sm_state </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the state of S0 Bootstrap state machine. </p>
-
-</div>
-</div>
 <a id="add560d910f441570d80bd78fb591f7f0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add560d910f441570d80bd78fb591f7f0">&#9670;&nbsp;</a></span>reset_s0_sm()</h2>
 
@@ -467,9 +448,9 @@ License</h1>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> s0_bootstrap_frames_generic_send </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> s0_bootstrap_frames_generic_send </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__tx__interface.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__controller__connection__info.html#gac38c2bd49271bc28734fffab49c9e18c">zwave_controller_encapsulation_scheme_t</a>&#160;</td>
           <td class="paramname"><em>en</em>, </td>
         </tr>
         <tr>
@@ -496,44 +477,6 @@ License</h1>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="af4d6768672314f24fe46c7d19b5b433f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4d6768672314f24fe46c7d19b5b433f">&#9670;&nbsp;</a></span>s0_bootstrapping_start()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void s0_bootstrapping_start </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__zwave__tx__interface.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *&#160;</td>
-          <td class="paramname"><em>conn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>is_controller</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Start the S0 add node process. </p>
-<p>Calling this function will make the S0 FSM start the bootstrap process of a newly added node. This must be called right after ADD_NODE_DONE event for nodes supporting COMMAND_CLASS_SECURITY</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">conn</td><td>zwave_controller_connection_info_t structure </td></tr>
-    <tr><td class="paramname">is_controller</td><td>If the node being included controller. To do extra S0 boot strapping steps for controllers </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -581,62 +524,12 @@ License</h1>
         <tr>
           <td class="memname">const char* s0_incl_state_name </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="zwave__s0__sm_8h.html#ad2d6d1f7df1c779897c6bd0b69e40ea2">s0_bootstrap_state_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__s0__inclusion__state__machine.html#gad2d6d1f7df1c779897c6bd0b69e40ea2">s0_bootstrap_state_t</a>&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a324baa22838a503a6e1df7375e7deaaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a324baa22838a503a6e1df7375e7deaaa">&#9670;&nbsp;</a></span>s0_network_key_verify_received()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void s0_network_key_verify_received </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>from_node</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function is used to notify the S0 Inclusion state machine that S0 network key verify frame was received. </p>
-
-</div>
-</div>
-<a id="a6f16899e498cbd0eeb2e3e52a732decf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f16899e498cbd0eeb2e3e52a732decf">&#9670;&nbsp;</a></span>s0_scheme_report_received()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void s0_scheme_report_received </td>
-          <td>(</td>
-          <td class="paramtype">const uint8_t&#160;</td>
-          <td class="paramname"><em>scheme</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
-          <td class="paramname"><em>from_node</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function is used to notify the S0 Inclusion state machine that S0 Scheme report frame was received. </p>
 
 </div>
 </div>
@@ -692,7 +585,7 @@ License</h1>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> s0_send_key_set </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> s0_send_key_set </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -717,7 +610,7 @@ License</h1>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> s0_send_scheme_get </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> s0_send_scheme_get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -742,7 +635,7 @@ License</h1>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> s0_send_scheme_inherit </td>
+          <td class="memname">static <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> s0_send_scheme_inherit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -754,26 +647,6 @@ License</h1>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="aeaf5d8d5af75e0b10cf0e6dd2ecba1c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeaf5d8d5af75e0b10cf0e6dd2ecba1c1">&#9670;&nbsp;</a></span>s0_set_callback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void s0_set_callback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a>&#160;</td>
-          <td class="paramname"><em>cb</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set callback function for the S0 bootstrap. This callback function is copied internally into S0 and called when S0 bootstrap is complete. </p>
 
 </div>
 </div>
@@ -840,7 +713,7 @@ License</h1>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__zwave__s0.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a> s0_on_bootstrapping_complete_callback = <a class="el" href="cc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
+          <td class="memname"><a class="el" href="group__zwave__s0__network.html#ga76fa676b152471a413e32cc25d8f56c9">s0_on_bootstrapping_complete_cb</a> s0_on_bootstrapping_complete_callback = <a class="el" href="cc_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
         </tr>
       </table>
   </td>
@@ -893,8 +766,8 @@ License</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_755ae2411314d71b54e2ffe5b00038d7.html">s0</a></li><li class="navelem"><a class="el" href="dir_a574612eed7c27ed0dbfd75f745bb010.html">src</a></li><li class="navelem"><a class="el" href="zwave__s0__sm_8c.html">zwave_s0_sm.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_f4b467f0a960798c9a570e0236e928b5.html">zwave_transports</a></li><li class="navelem"><a class="el" href="dir_6fba1e772b51ab46cce9ac80a46e75aa.html">s0</a></li><li class="navelem"><a class="el" href="dir_8db2d843763b048529dd52bcc2b9c1b9.html">src</a></li><li class="navelem"><a class="el" href="zwave__s0__sm_8c.html">zwave_s0_sm.c</a></li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:23 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

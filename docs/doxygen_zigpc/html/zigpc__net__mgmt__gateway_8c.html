@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('zigpc__net__mgmt__gateway_8c.html','')
 <code>#include &lt;<a class="el" href="process_8h_source.html">process.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="sl__log_8h_source.html">sl_log.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="sl__status_8h_source.html">sl_status.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="zigpc__discovery_8h_source.html">zigpc_discovery.h</a>&gt;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__net__mgmt__fsm_8h_source.html">zigpc_net_mgmt_fsm.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__net__mgmt__gateway_8h_source.html">zigpc_net_mgmt_gateway.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__net__mgmt__process_8h_source.html">zigpc_net_mgmt_process.h</a>&quot;</code><br />
@@ -110,13 +111,11 @@ Functions</h2></td></tr>
 <tr class="separator:a5d4effafd07f87c987240ec8af84d799"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af235ca6438c56ed1a5d18b4ab25584dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__net__mgmt__gateway_8c.html#af235ca6438c56ed1a5d18b4ab25584dd">zigpc_net_mgmt_callback_on_node_add_complete</a> (void *<a class="el" href="structevent__data.html">event_data</a>)</td></tr>
 <tr class="separator:af235ca6438c56ed1a5d18b4ab25584dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b3f22fce954db1db44194574600309b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__net__mgmt__gateway_8c.html#a5b3f22fce954db1db44194574600309b">zigpc_net_mgmt_callback_on_node_discovered</a> (void *<a class="el" href="structevent__data.html">event_data</a>)</td></tr>
-<tr class="separator:a5b3f22fce954db1db44194574600309b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf8a12cdf5d5b5e5163880668ad4ae48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__net__mgmt__gateway_8c.html#acf8a12cdf5d5b5e5163880668ad4ae48">zigpc_net_mgmt_callback_on_node_endpoint_discovered</a> (void *<a class="el" href="structevent__data.html">event_data</a>)</td></tr>
-<tr class="separator:acf8a12cdf5d5b5e5163880668ad4ae48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ebb5d2b1c457594442fd6c3b83f3e69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__net__mgmt__gateway_8c.html#a4ebb5d2b1c457594442fd6c3b83f3e69">zigpc_net_mgmt_on_discovery_status</a> (<a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a> eui64, <a class="el" href="group__zigpc__discovery.html#ga543d71d18dc98f5df14473697240f16d">zigpc_discovery_status_t</a> discovery_status)</td></tr>
+<tr class="separator:a4ebb5d2b1c457594442fd6c3b83f3e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff271f9e7e5094db924cea62fac97e6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__net__mgmt__gateway_8c.html#aff271f9e7e5094db924cea62fac97e6a">zigpc_net_mgmt_callback_on_node_removed</a> (void *<a class="el" href="structevent__data.html">event_data</a>)</td></tr>
 <tr class="separator:aff271f9e7e5094db924cea62fac97e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a455ad2fa9e5e391a01f52585266b9ebf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__net__mgmt__gateway_8c.html#a455ad2fa9e5e391a01f52585266b9ebf">zigpc_net_mgmt_gateway_init_observer</a> (void)</td></tr>
+<tr class="memitem:a455ad2fa9e5e391a01f52585266b9ebf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zigpc__net__mgmt__gateway_8c.html#a455ad2fa9e5e391a01f52585266b9ebf">zigpc_net_mgmt_gateway_init_observer</a> (void)</td></tr>
 <tr class="memdesc:a455ad2fa9e5e391a01f52585266b9ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup listeners to receive ZigPC Gateway events.  <a href="zigpc__net__mgmt__gateway_8c.html#a455ad2fa9e5e391a01f52585266b9ebf">More...</a><br /></td></tr>
 <tr class="separator:a455ad2fa9e5e391a01f52585266b9ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -180,42 +179,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a5b3f22fce954db1db44194574600309b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b3f22fce954db1db44194574600309b">&#9670;&nbsp;</a></span>zigpc_net_mgmt_callback_on_node_discovered()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zigpc_net_mgmt_callback_on_node_discovered </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>event_data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="acf8a12cdf5d5b5e5163880668ad4ae48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf8a12cdf5d5b5e5163880668ad4ae48">&#9670;&nbsp;</a></span>zigpc_net_mgmt_callback_on_node_endpoint_discovered()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zigpc_net_mgmt_callback_on_node_endpoint_discovered </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>event_data</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aff271f9e7e5094db924cea62fac97e6a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aff271f9e7e5094db924cea62fac97e6a">&#9670;&nbsp;</a></span>zigpc_net_mgmt_callback_on_node_removed()</h2>
 
@@ -241,7 +204,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_net_mgmt_gateway_init_observer </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zigpc_net_mgmt_gateway_init_observer </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -252,6 +215,34 @@ Variables</h2></td></tr>
 
 <p>Setup listeners to receive ZigPC Gateway events. </p>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK on success, if not there is an error in initializing observables </dd></dl>
+
+</div>
+</div>
+<a id="a4ebb5d2b1c457594442fd6c3b83f3e69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ebb5d2b1c457594442fd6c3b83f3e69">&#9670;&nbsp;</a></span>zigpc_net_mgmt_on_discovery_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void zigpc_net_mgmt_on_discovery_status </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a>&#160;</td>
+          <td class="paramname"><em>eui64</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zigpc__discovery.html#ga543d71d18dc98f5df14473697240f16d">zigpc_discovery_status_t</a>&#160;</td>
+          <td class="paramname"><em>discovery_status</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -284,7 +275,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_7b189aaf47a96c1e4899d8f435cf7fbc.html">zigpc_net_mgmt</a></li><li class="navelem"><a class="el" href="dir_169d099b066c4a129f7b94133862b975.html">src</a></li><li class="navelem"><a class="el" href="zigpc__net__mgmt__gateway_8c.html">zigpc_net_mgmt_gateway.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:15 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

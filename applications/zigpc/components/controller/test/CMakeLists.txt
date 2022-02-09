@@ -9,7 +9,9 @@ target_add_unittest(
   DEPENDS
   zigpc_attribute_management_mock
   zigpc_datastore_mock
+  zigpc_discovery_mock
   zigpc_gateway_mock
+  zigpc_group_mgmt_mock
   zigpc_net_mgmt_mock
   zigpc_ota_zigbee_mock
   uic_mqtt_mock

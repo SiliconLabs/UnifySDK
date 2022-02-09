@@ -12,9 +12,9 @@
  *****************************************************************************/
 
 /**
- * @file zpc_attribute_store.h
- * @brief Attribute store functions specifically for ZPC
- *
+ * @defgroup zpc_attribute_store ZPC Attribute Store
+ * @ingroup zpc_components
+ * @brief @ref attribute_store functions specifically for ZPC
  *
  * @{
  */

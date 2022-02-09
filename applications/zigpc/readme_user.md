@@ -1,10 +1,8 @@
-# ZigPC (Beta) User's Guide
+# ZigPC User's Guide
 
 This document is a user guide for the Zigbee Protocol controller (ZigPC).
 The primary role of ZigPC is to allow Zigbee devices to be monitored and
 controlled using the Unify Controller Language (UCL).
-
-> _NOTE: The current version of the Zigbee Protocol Controller is a Beta release._
 
 <br><br>
 
@@ -48,8 +46,9 @@ Supported EZSP protocol: UART (SPI not officially supported)
 
 ### PAN Zigbee Device
 
-Currently supported Zigbee device configurations:
+Currently supported Zigbee device provisioning methods:
 - Zigbee 3.0 with Install Code
+- Zigbee 3.0 with Well-Known-Key
 
 See the Appendix section at the bottom of the guide for steps to configure
 example NCP and Z3Light device FW images.
@@ -58,7 +57,7 @@ example NCP and Z3Light device FW images.
 
 ## Installing ZigPC
 
-All of the Unify components below (MQTT Broker, UPVL client and ANGEL client)
+All of the Unify components below (MQTT Broker, UPVL client and GMS client)
 should be installed before running the ZigPC. Running Unify with ZigPC requires
 using an MQTT Broker. Unify currently supports using Mosquitto MQTT
 (https://mosquitto.org/).
@@ -85,7 +84,7 @@ MQTT broker by providing a topic and a message payload (if publishing).
 #### libuic.so
 This library contains the runtime dependencies used by some Unify components
 (including ZigPC). See
-[Unify SDK Library Developer Guide](doc/readme_uic_application_developer.md)
+[Unify SDK Library Developer Guide](doc/readme_developer.md)
 for more details.
 
 #### uic-upvl
@@ -94,10 +93,10 @@ maintains the UCL SmartStart topics (and its List, Update, and Remove
 subtopics. See [UPVL User Guide](applications/upvl/readme_user.md) for more
 details.
 
-#### uic-angel
+#### uic-gms
 Unify IoT service that book-keeps groups data among different Protocol
 Controllers. It manages the ucl/by-group/# topic space. See
-[ANGEL User Guide](applications/angel/readme_user.md) for more details.
+[GMS User Guide](applications/gms/readme_user.md) for more details.
 
 #### uic-image-provider
 Unify IoT service that stores and distributes OTA Firmware images for Protocol
@@ -105,7 +104,7 @@ Controllers over UCL. It manages the ucl/OTA/# topic space. See
 [Image Provider User's Guide](applications/image_provider/readme_user.md) for
 more details.
 
-#### ZigPC
+#### zigpc
 The Zigbee Protocol Controller application connects to the Mosquitto MQTT
 broker, sets up a PAN as a Zigbee Coordinator, and relays messages using the
 Zigbee NCP connected on a serial port.
@@ -126,7 +125,7 @@ journalctl -u mosquitto
 2. Run the UPVL application on the Raspberry Pi by following instructions in
    the [UPVL User Guide](applications/upvl/readme_user.md).
 ```bash
-# Make sure your uic-upvl is running
+# Make sure uic-upvl is running
 sudo systemctl status uic-upvl
 
 # NOTE: If it has stopped or not running, run the following commands:
@@ -134,20 +133,20 @@ sudo systemctl status uic-upvl
 #     sudo systemctl start uic-upvl
 ```
 
-3. Run the Angel application on the Raspberry Pi by following instructions in
-   the [ANGEL User Guide](applications/angel/readme_user.md).
+3. Run the Group Management Service application on the Raspberry Pi by following instructions in
+   the [GMS User Guide](applications/gms/readme_user.md).
 ```bash
-# Make sure your uic-angel is running
-sudo systemctl status uic-angel
+# Make sure uic-gms is running
+sudo systemctl status uic-gms
 
 # NOTE: If it has stopped or not running, run the following commands:
-#     sudo systemctl enable uic-angel
-#     sudo systemctl start uic-angel
+#     sudo systemctl enable uic-gms
+#     sudo systemctl start uic-gms
 ```
 4. Run the Image provider application on the Raspberry Pi by following instructions in
    the [Image Provider User Guide](applications/image_provider/readme_user.md).
 ```bash
-# Make sure your uic-image-provider is running
+# Make sure uic-image-provider is running
 sudo systemctl status uic-image-provider
 
 # NOTE: If it has stopped or not running, run the following commands:
@@ -156,13 +155,33 @@ sudo systemctl status uic-image-provider
 ```
 
 5. Run ZigPC on the Raspberry Pi with the serial port to the flashed Zigbee NCP.
+**Running ZigPC as a system service**
+Once installed, ZigPC will be configured to run as a system service by default.
 ```bash
-zigpc --zigpc.serial /dev/ttyACM0 --mqtt.host 0.0.0.0 --mqtt.port 1883 --datastore.file zigpc.db
+# Make sure uic-zigpc is running
+sudo systemctl status uic-zigpc
+
+# NOTE: If it has stopped or not running, run the following commands:
+#     sudo systemctl enable uic-zigpc
+#     sudo systemctl start uic-zigpc
+
+# NOTE: To stop running zigpc as a system service, run the following commands:
+#     sudo systemctl stop uic-zigpc
+#     sudo systemctl disable uic-zigpc
+```
+The configuration used by the service can be found at `etc/uic/uic.cfg`
+
+**Running ZigPC on the command line**
+If ZigPC is not running a system service
+```bash
+zigpc --zigpc.serial /dev/ttyACM0 --mqtt.host 0.0.0.0 --mqtt.port 1883 --zigpc.datastore_file zigpc.db
 
 ```
 > _NOTE: Run `zigpc --help` to see a full list of supported parameters_
 
 > _NOTE: ZigPC serial argument point to the UART-EZSP port exposed by the Zigbee NCP. This path will be different based on the configuration of tty devices connected to your Raspberry Pi_
+
+> _NOTE: Ensure ZigPC is only running as a system service or via the CLI and not both_
 
 <br><br>
 
@@ -213,10 +232,24 @@ ZigPC will validate using the Install Code based Link key extracted and allow
 the device to join the network.
 
 See (AN1089: Using Installation Codes with
-Zigbee Devices)[https://www.silabs.com/documents/public/application-notes/an1089-using-installation-codes-with-zigbee-devices.pdf] for more details on how to setup Z3 Install Codes on joining devices.
+Zigbee Devices)[https://www.silabs.com/documents/public/application-notes/an1089-using-installation-codes-with-zigbee-devices.pdf]
+for more details on how to setup Z3 Install Codes on joining devices.
 
 UCL topics used:
 - Subscribing to the current list of SmartStart entries: `ucl/SmartStart/List`
+
+#### Well-Known-Key Based Provisioning
+
+The ZigPC network can be configured to accept device joins using the well-known
+key. ZigPC will open up the network and allow well-known key based joins when
+the NetworkManagement state `add node` is requested:
+
+UCL topics used:
+- Subscribing to Network Management state change requests:
+`ucl/by-unid/<DEVICE_UNID>/ProtocolController/NetworkManagement/Write`
+- Publishing Network Management state changes:
+`ucl/by-unid/<DEVICE_UNID>/ProtocolController/NetworkManagement`
+
 
 ### Device State Updates
 ZigPC publishes the network status of devices through inclusion, interview,
@@ -225,6 +258,8 @@ and regular function stages.
 UCL topics used:
 - Publishing device state updates:
 `ucl/by-unid/<DEVICE_UNID>/State`
+- Publishing endpoints active under device:
+`ucl/by-unid/<DEVICE_UNID>/State/Attributes/EndpointIdList/Reported`
 
 
 ### Device Discovery
@@ -249,11 +284,22 @@ UCL topics used:
 `ucl/by-unid/<DEVICE_UNID>/ep<ENDPOINT_ID>/<CLUSTER_NAME>/Commands/<COMMAND_NAME>`
 
 
+### Device GeneratedCommand Updates
+ZigPC is able to publish commands generated by devices (either as command
+responses or as unsolicted stimuli) to the Unify broer. The ZCL command is
+parsed and mapped to UCL command before publishing under the device, endpoint,
+cluster combination.
+
+UCL topics used:
+- Publishing to UCL cluster generated commands received to Unify gateway:
+`ucl/by-unid/<DEVICE_UNID>/ep<ENDPOINT_ID>/<CLUSTER_NAME>/GeneratedCommands/<COMMAND_NAME>`
+
+
 ### Device Attribute Updates
 Zigbee devices with attribute reporting configured will send ZigPC attribute reports for each attribute supported in each ZCL cluster under each endpoint. These attribute updates are published under the UCL `Reported` topic when changes occur of after a timeout.
 
 UCL topics used:
-- Publishing UCL cluster attribute updates:
+- Publishing reported UCL cluster attribute updates:
 `ucl/by-unid/<DEVICE_UNID>/ep<ENDPOINT_ID>/<CLUSTER_NAME>/Attributes/<ATTRIBUTE_NAME>/Reported`
 
 
@@ -265,7 +311,7 @@ After an endpoint is added to the group using the UCL Groups/AddGroup
 command, ZigPC publishes the list of groups the endpoint is part of.
 
 ZigPC uses the functionality provided by the Unify Group manager component
-called uic-angel. Once the group list is published by ZigPC, the uic-angel
+called uic-gms. Once the group list is published by ZigPC, the uic-gms
 manages the group commands that can be sent through the Unify gateway.
 
 ZigPC listens to the by-group topic space and services any groupIDs that is
@@ -298,6 +344,22 @@ PollControl server sends ZigPC a PollControl/CheckIn message. ZigPC will send
 a PollControl/CheckInrResponse as a reply to transition SED into fast-polling
 mode. This will allow ZigPC to unload/send any queued messages to the SED.
 
+### Protocol Controller Diagnostics
+ZigPC publishing information related to the host process and NCP information to
+provide usage statistics to customers. The following metrics are being published
+currently:
+- System uptime
+- System CPU load average
+- Process CPU usage
+- Process memory usage
+- Zigbee stack counters
+
+UCL topics used:
+- Publishing supported diagnostic metrics:
+`ucl/by-unid/<DEVICE_UNID>/ProtocolController/SystemHealth/SupportedMetrics`
+- Subscribing to metric requests:
+`ucl/by-unid/<DEVICE_UNID>/ProtocolController/SystemHealth/Request`
+
 <br><br>
 
 ## Getting Started with Including Zigbee 3.0 Device to ZigPC
@@ -320,30 +382,11 @@ run on the host machine, connect to the MQTT broker on the Raspberry Pi.
 To perform the below steps using the Unify Dev GUI tool, see
 [Dev GUI User Guide](applications/dev_ui/dev_gui/readme_user.md).
 
-### Adding Zigbee Device to the ZigPC Network
+### Adding Zigbee Device to the ZigPC Network via Install-Code Method
 NOTE: The following steps use the command line interface (CLI) exposed by Simplicity
 Commander stand-alone tool.
 
-1. Ensure ZigPC has started:
-   ```bash
-   ## command ##
-   RaspberryPi> zigpc --zigpc.serial /dev/ttyACM0 --mqtt.host 0.0.0.0 --mqtt.port 1883 --datastore.file zigpc.db
-
-   ## sample output ##
-   # uic build: XXXXXXXX
-   # 2021-Sep-17 13:09:30.225367 <i> [uic_component_fixtures] Completed: Unify Signal Handler
-   # 2021-Sep-17 13:09:30.226845 <d> [mqtt_wrapper_mosquitto] Initializing Mosquitto library: 1.6.12
-   # 2021-Sep-17 13:09:30.235265 <i> [uic_component_fixtures] Completed: Unify MQTT Client
-   # 2021-Sep-17 13:09:30.236246 <d> [uic_stdin_process] Registering stdin fileno 5
-   # 2021-Sep-17 13:09:30.237239 <i> [uic_component_fixtures] Completed: Unify STDIN
-   # 2021-Sep-17 13:09:30.238070 <i> [uic_component_fixtures] Completed: ZIGPC Config
-   # 2021-Sep-17 13:09:30.238927 <i> [datastore_fixt] Using datastore file: zigpc.db
-   # ...
-   # ...
-
-   ```
-
-2. Create a random HEX sequence of 6,8,12, or 16 bytes (12, 16, 24, 32
+1. Create a random HEX sequence of 6,8,12, or 16 bytes (12, 16, 24, 32
    characters respectively) and put it in a file containing the following text:
    `Install Code: <RANDOM_HEX_SEQUENCE>`
    ```bash
@@ -354,16 +397,16 @@ Commander stand-alone tool.
 
    ```
 
-3. Connect the Zigbee device to your host machine via USB.
+2. Connect the Zigbee device to your host machine via USB.
 
-4. Use the Simplicity Commander CLI to flash the Install code to the Zigbee Device:
+3. Use the Simplicity Commander CLI to flash the Install code to the Zigbee Device:
    ```bash
    ## command ##
    Host> commander flash --tokengroup znet --tokenfile /tmp/install-code.txt --device efr32mg12p
 
    ```
 
-5. Validate the install code is present and extract the CRC corresponding to the
+4. Validate the install code is present and extract the CRC corresponding to the
    install code by running the following command:
    ```bash
    ## command ##
@@ -380,7 +423,11 @@ Commander stand-alone tool.
 
    ```
 
-6. Format the SmartStart DSK using the Z3Device's EUI64, install code, and
+
+
+> _NOTE: Ensure ZigPC is running by this step._
+
+5. Format the SmartStart DSK using the Z3Device's EUI64, install code, and
    install code CRC.
     - Example EUI64 in big endian = `01-02-03-04-05-06-07-08`
     - Install code in big endian =
@@ -392,7 +439,7 @@ Commander stand-alone tool.
    NOTE: Ensure the EUI64 used above corresponds to the device that is
    joining, not the example EUI64 used as an example`.
 
-7. Access the Zigbee device EmberCLI using Studio or a serial terminal to perform cleanup of the device state.
+6. Access the Zigbee device EmberCLI using Studio or a serial terminal to perform cleanup of the device state.
    ```bash
    ## command ##
    Z3Device> plugin reporting clear
@@ -419,8 +466,8 @@ Commander stand-alone tool.
 
    ```
 
-8. Validate that a new MQTT topic has been published showing the Protocol
-   Controller Network Management state as IDLE:
+7. Validate that a new MQTT topic has been published showing the Protocol
+   Controller Network Management state as `idle`:
    ```bash
    ## command ##
    RaspberryPi> mosquitto_sub -h 0.0.0.0 -p 1883 -t 'ucl/by-unid/+/ProtocolController/NetworkManagement'
@@ -429,14 +476,14 @@ Commander stand-alone tool.
    # ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {"State": "idle", "SupportedStateList": ["add node", "remove node"], "RequestedStateParameters": []}
 
    ```
-   Topic the output above, the ZigPC Gateway UNID can be seen from the topic
+   in the output above, the ZigPC Gateway UNID can be seen from the topic
    as `zb-AAAAAAAAAAAAAAAA`
 
    **Dev GUI Method**: Go to the Nodes tab to see the Protocol Controller UNID and state.
 
    ![](doc/assets/user_guide-devgui-nodes-init.png)
 
-9. Use the Mosquitto publish tool to add a SmartStart entry using the DSK
+8. Use the Mosquitto publish tool to add a SmartStart entry using the DSK
    created above.
 
    OPTIONAL: you can also specify the EUI64 of the ZigPC Gateway NCP (see
@@ -454,17 +501,17 @@ Commander stand-alone tool.
 
    ![](doc/assets/user_guide-devgui-smartstart-dsk-add.png)
 
-10. Once ZigPC detects the new SmartStart entry, it will open the network to permit the Z3Device to
+9. Once ZigPC detects the new SmartStart entry, it will open the network to permit the Z3Device to
     join using the install code configured.
 
-11. In the Z3Device, start the Network Steering plugin process by entering `plugin
+10. In the Z3Device, start the Network Steering plugin process by entering `plugin
    network-steering start 0` on the Z3Device Ember CLI:
    ```bash
    ## command ##
    Z3Device> plugin network-steering start 0
    ```
 
-12. Z3Device should join the ZigPC network and assign a UNID using the
+11. Z3Device should join the ZigPC network and assign a UNID using the
    following format: `zb-<Z3DEVICE_EUI64_BE>`.
    ```bash
 
@@ -474,7 +521,7 @@ Commander stand-alone tool.
 
    ```
 
-13. Validate that the UNID has been assigned by checking the Unify SmartStart list
+12. Validate that the UNID has been assigned by checking the Unify SmartStart list
     using the Mosquitto subscribe tool:
    ```bash
    ## command ##
@@ -490,7 +537,7 @@ Commander stand-alone tool.
 
    ![](doc/assets/user_guide-devgui-smartstart-dsk-used.png)
 
-14. Validate that the ZigPC NetworkManagement state has transitioned back to
+13. Validate that the ZigPC NetworkManagement state has transitioned back to
    idle (previous MQTT messages would have shown the NetworkManagement state
    has transitioned from "idle" -> "add node" -> "node interview" -> "idle"):
    ```bash
@@ -502,7 +549,7 @@ Commander stand-alone tool.
 
    ```
 
-15. Validate that a new MQTT topic has been published showing Z3Device is online and functional:
+14. Validate that a new MQTT topic has been published showing Z3Device is online and functional:
    ```bash
    ## command ##
    RaspberryPi> mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t 'ucl/by-unid/zb-0102030405060708/State'
@@ -516,6 +563,92 @@ Commander stand-alone tool.
 
    ![](doc/assets/user_guide-devgui-nodes-included.png)
 
+
+### Adding Zigbee Device to the ZigPC Network using Well-Known Key
+NOTE: The following steps use the command line interface (CLI) exposed by Simplicity
+Commander stand-alone tool.
+
+1. Configure and run ZigPC to allow accepting well-known key based joins:
+- Using CLI with argument `--zigpc.tc_use_well_known_key true`
+- Using system service configuration in `etc/uic/uic.cfg`:
+```yaml
+zigpc:
+  ...
+  tc_use_well_known_key: true
+```
+
+2. Validate the following MQTT topic has been published showing the Protocol
+   Controller Network Management state as `idle`:
+   ```bash
+   ## command ##
+   RaspberryPi> mosquitto_sub -h 0.0.0.0 -p 1883 -t 'ucl/by-unid/+/ProtocolController/NetworkManagement'
+
+   ## sample output ##
+   # ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {"State": "idle", "SupportedStateList": ["add node", "remove node"], "RequestedStateParameters": []}
+
+   ```
+   
+   in the output above, the ZigPC Gateway UNID can be seen from the topic
+   as `zb-AAAAAAAAAAAAAAAA`
+
+   **Dev GUI Method**: Go to the Nodes tab to see the Protocol Controller UNID and state.
+
+   ![](doc/assets/user_guide-devgui-nodes-init.png)
+
+3. Use the Mosquitto publish tool to request a Network Management state change to `add node`:
+   ```bash
+   ## command ##
+   RaspberryPi> mosquitto_pub -h 0.0.0.0 -p 1883 -t 'ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement/Write' -m '{"State": "add node"}'
+
+   ```
+   **Dev GUI Method**: Go to the Nodes tab and click on the "States" dropdown and select the "add node" item.
+
+   ![](doc/assets/user_guide-devgui-netmgmt-add-node.png.png)
+
+   ZigPC will now open the network to permit the Z3Device to join using the well-known key.
+
+4. In the Z3Device, start the Network Steering plugin process by entering `plugin
+   network-steering start 0` on the Z3Device Ember CLI:
+   ```bash
+   ## command ##
+   Z3Device> plugin network-steering start 0
+   ```
+
+5. Z3Device should join the ZigPC network and assign a UNID using the
+   following format: `zb-<Z3DEVICE_EUI64_BE>`.
+   ```bash
+
+   ## Sample format ##
+   # Z3Device EUI64(BE): 0102030405060708
+   # Z3Device UNID: zb-0102030405060708
+
+   ```
+
+6. Validate that the ZigPC NetworkManagement state has transitioned back to
+   idle (previous MQTT messages would have shown the NetworkManagement state
+   has transitioned from "idle" -> "add node" -> "node interview" -> "idle"):
+   ```bash
+   ## command ##
+   RaspberryPi> mosquitto_sub -h 0.0.0.0 -p 1883 -t 'ucl/by-unid/+/ProtocolController/NetworkManagement'
+
+   ## sample output ##
+   # ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {"State": "idle", "SupportedStateList": ["add node", "remove node", "node interview"], "RequestedStateParameters": []}
+
+   ```
+
+7. Validate that a new MQTT topic has been published showing Z3Device is online and functional:
+   ```bash
+   ## command ##
+   RaspberryPi> mosquitto_sub -h 0.0.0.0 -p 1883 -W 1 -v -t 'ucl/by-unid/zb-0102030405060708/State'
+
+   ## sample output ##
+   # ucl/by-unid/zb-0102030405060708/State { "Security": "Zigbee Z3.0", "MaximumCommandDelay": "1", "NetworkStatus": "Online functional" }
+
+   ```
+
+   **Dev GUI Method**: Go to the Nodes tab and see the updated Z3Device entry.
+
+   ![](doc/assets/user_guide-devgui-nodes-included.png)
 
 ### Discovering UCL Cluster Command Support for Z3Device
 NOTE: The Zigbee device must be added using the SmartStart addition process
@@ -764,6 +897,43 @@ To initialize an OTA update, you need the following:
    version running on the Zigbee node can be verified. The OTA process is now
    complete.
 
+### Retrieving Diagnostic information from ZigPC
+
+ZigPC has exposed the `ProtocolController/SystemHealth` topic space to enable
+the publishing of information related to the ZigPC system, process, and Zigbee stack.
+
+The following metrics are available:
+- Uptime: The amount of seconds the system has been online.
+- CpuLoadAverage: The system CPU load average.
+- MemUsePercent: The percent memory use of the ZigPC process.
+- Counters: The Zigbee stack counters information.
+
+
+#### Steps to enable this behaviour:
+1. Retrieve the metrics supported by the protocol controller diagnostics topic space.
+   ```bash
+   ## command ##
+   RaspberryPi> mosquitto_sub -h 0.0.0.0 -p 1883 -t 'ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/SupportedMetrics'
+
+   ## sample output ##
+   # ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/SupportedMetrics {"value": ["Uptime", "CpuLoadAverage", "MemUsePercent", "Counters"]}
+   ```
+
+2. Enable a metric using the `Request` subtopic:
+   ```bash
+   ## command ##
+   RaspberryPi> mosquitto_pub -h 0.0.0.0 -p 1883 -t 'ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/Request' -m '{"value": ["MemUsePercent"]}'
+   ```
+
+3. Validate metric requested being updated regularly:
+   ```bash
+   ## command ##
+   RaspberryPi> mosquitto_sub -h 0.0.0.0 -p 1883 -t 'ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/MemUsePercent'
+
+   ## sample output ##
+   # ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/SystemHealth/MemUsePercent {"value": 0.12}
+   ```
+
 <br><br>
 
 ## Technical Specifications
@@ -805,11 +975,11 @@ ZigPC should have a Zigbee NCP attached via the serial UART connection.
 
 EFR32MG1X or EFR32MG2X are the supported NCP Radios.
 
-NCP Image supported by ZigPC from GSDK v3.1:
+NCP Image supported by ZigPC from GSDK v4.0:
 * ncp-uart-hw
 * ncp-uart-sw
 
-ZigPC currently uses the following functionality using Gecko SDK v3.1:
+ZigPC currently uses the following functionality using Gecko SDK v4.0:
 * Communication with Zigbee NCP using EZSP over Serial (UART)
 * Network formation as a Zigbee Trust Center
 * Device addition using Z3 Install Code Method
@@ -840,10 +1010,7 @@ There are two ways to get the NCP image:
 A single radio should be designated as a Zigbee Gateway NCP that ZigPC connects
 to.
 
-The Gecko SDK provides ready-made NCP images available under the following path:
-`<GECKO_SDK>/protocol/zigbee/ncp-images/*`
-
-The folders underneath are distinguished by the format: <part_number>-<board_number>
+The Gecko SDK provides ready-made NCP images available under the demo-applications package.
 
 #### Building NCP FW Images Using Studio
 

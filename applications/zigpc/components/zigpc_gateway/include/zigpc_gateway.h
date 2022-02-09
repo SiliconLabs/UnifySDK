@@ -121,6 +121,18 @@ sl_status_t zigpc_gateway_request_binding(const zigbee_eui64_t eui64,
 sl_status_t
   zigpc_gateway_request_binding_endpoint(const zigbee_eui64_t eui64,
                                          const zigbee_endpoint_t endpoint);
+
+/**
+ * @brief Validate if install code can be accepted by EmberAf layer.
+ *
+ * @param install_code          Install code data.
+ * @param install_code_length   Install code length.
+ * @return true                 Is valid and can be accepted.
+ * @return false                Is not valid.
+ */
+bool zigpc_gateway_install_code_is_valid(const uint8_t *install_code,
+                                         uint8_t install_code_length);
+
 /**
  * @brief Request to add a node to the Zigbee Network using the Z3 Install Code
  * Method.
@@ -162,21 +174,36 @@ sl_status_t zigpc_gateway_remove_node(const zigbee_eui64_t eui64);
  * @return sl_status_t          SL_STATUS_OK on request accepted by ZigPC
  * Gateway, or error in reading and preparing data to be sent to ZigPC Gateway.
  */
-sl_status_t zigpc_gateway_interview_node(const zigbee_eui64_t eui64);
+sl_status_t zigpc_gateway_discover_device(const zigbee_eui64_t eui64);
+
+/**
+ * @brief Request to interview device endpoint on the Zigbee Network. If the
+ * device is not on the Zigbee network, zero endpoint discovery information
+ * will be received as a response.
+ *
+ * NOTE: Callers should use a timeout to respond to failure in interviewing a
+ * device if no notifications are sent within that timeout.
+ *
+ * @param eui64                 Device identifier.
+ * @param endpoint              Endpoint identifier.
+ * @return sl_status_t          SL_STATUS_OK on request accepted by ZigPC
+ * Gateway, or error in reading and preparing data to be sent to EmberAf.
+ */
+sl_status_t zigpc_gateway_discover_endpoint(const zigbee_eui64_t eui64,
+                                            zigbee_endpoint_id_t endpoint_id);
 
 /**
  * @brief zigpc_gateway_add_ota_image - add an OTA image to the ota-server plugin
- * 
+ *
  * @param filename - the filepath of the requested OTA image
  *
  * @return SL_STATUS_SUCCESS if able to add the filename properly
- **/ 
-sl_status_t zigpc_gateway_add_ota_image(
-                const char* filename,
-                unsigned int filename_size);
+ **/
+sl_status_t zigpc_gateway_add_ota_image(const char *filename,
+                                        unsigned int filename_size);
 
 /**
- * @brief Send command to print Z3Gateway info.
+ * @brief Send command to print ZigbeeHost info.
  *
  */
 void zigpc_gateway_command_print_info(void);
@@ -188,32 +215,34 @@ void zigpc_gateway_command_print_info(void);
 void zigpc_gateway_command_print_nwk_key(void);
 
 /**
- * @brief Get the counters list array of values
- * 
- * @param buffer the array to be filled
- * @param size number of index in the array
- * @return sl_status SL_STATUS_OK on success or error on fail
+ * @brief Populate counters values to list provided.
+ *
+ * @param list  List provided.
+ * @param size  Capcity of list passed in.
+ * @return sl_status SL_STATUS_OK on successful retrieval,
+ * SL_STATUS_NULL_POINTER on invalid input, or SL_STATUS_WOULD_OVERFLOW
+ * on insufficient capacity in list passed in.
  */
-sl_status_t zigpc_gateway_get_counters_list(uint16_t *buffer, size_t count);
+sl_status_t zigpc_gateway_get_counters_list(uint16_t *list, size_t count);
 
 /**
  * @brief Get the label of the counters entry based on the offset passed in.
- * 
+ *
  * @param offset counter entry offset to get label for.
- * @return const char* counter entry label if valid, "NOT FOUND" otherwise.
+ * @return const char* counter entry label if valid, NULL otherwise.
  */
 const char *zigpc_gateway_get_counters_entry_label(size_t offset);
 
 /**
  * @brief Get the counters capacity
- * 
+ *
  * @return size_t capacity
  */
 size_t zigpc_gateway_get_counters_capacity();
 
 /**
  * @brief clear the counter plugin tokens
- * 
+ *
  */
 void zigpc_gateway_clear_counters();
 

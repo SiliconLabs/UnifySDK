@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('datastore__fixt_8h_source.html',''); i
 <div class="contents">
 <a href="datastore__fixt_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * # License</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2020 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * &lt;b&gt;Copyright 2021 Silicon Laboratories Inc. www.silabs.com&lt;/b&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ******************************************************************************</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * The licensor of this software is Silicon Laboratories Inc. Your use of this</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * software is governed by the terms of Silicon Labs Master Software License</span></div>
@@ -110,29 +110,31 @@ $(document).ready(function(){initNavTree('datastore__fixt_8h_source.html',''); i
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="group__datastore.html#gaf8f53f9a972f142a44775daa78d8d95f">   40</a></span>&#160;<span class="preprocessor">#define UIC_VERSION_MAX_LEN 100</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="group__datastore__fixt.html#gaf8f53f9a972f142a44775daa78d8d95f">   40</a></span>&#160;<span class="preprocessor">#define UIC_VERSION_MAX_LEN 100</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__datastore.html#ga773629100622f127a5577e52e0ff2ce7">datastore_fixt_setup</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__datastore.html#ga373160cc3a345e23f2adef4dbc0654bf">datastore_fixt_teardown</a>();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<a class="code" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__datastore.html#ga150d11fe4b3bafcb95acc9e4ea6a36b1">datastore_fixt_setup_and_handle_version</a>(int64_t db_version);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif  // DATASTORE_FIXT_H</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__datastore__fixt.html#ga60e9c8dbdf53cd0fbc17cdf508a8db78">datastore_fixt_setup</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *datastore_file);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__datastore__fixt.html#ga373160cc3a345e23f2adef4dbc0654bf">datastore_fixt_teardown</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <a class="code" href="group__datastore__fixt.html#ga42e7a84b800830ebedc35da6ba84e6a7">datastore_fixt_setup_and_handle_version</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *datastore_file,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                                          int64_t db_version);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif  // DATASTORE_FIXT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="agroup__datastore__fixt_html_ga373160cc3a345e23f2adef4dbc0654bf"><div class="ttname"><a href="group__datastore__fixt.html#ga373160cc3a345e23f2adef4dbc0654bf">datastore_fixt_teardown</a></div><div class="ttdeci">int datastore_fixt_teardown()</div><div class="ttdoc">Fixture to tear down the datastore.</div><div class="ttdef"><b>Definition:</b> datastore_fixt.c:211</div></div>
+<div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:136</div></div>
 <div class="ttc" id="asl__status_8h_html"><div class="ttname"><a href="sl__status_8h.html">sl_status.h</a></div><div class="ttdoc">SL Status Codes.</div></div>
-<div class="ttc" id="agroup__datastore_html_ga150d11fe4b3bafcb95acc9e4ea6a36b1"><div class="ttname"><a href="group__datastore.html#ga150d11fe4b3bafcb95acc9e4ea6a36b1">datastore_fixt_setup_and_handle_version</a></div><div class="ttdeci">sl_status_t datastore_fixt_setup_and_handle_version(int64_t db_version)</div><div class="ttdoc">Function for setting up the datastore component handling the datastore version.</div><div class="ttdef"><b>Definition:</b> datastore_fixt.c:139</div></div>
-<div class="ttc" id="agroup__datastore_html_ga773629100622f127a5577e52e0ff2ce7"><div class="ttname"><a href="group__datastore.html#ga773629100622f127a5577e52e0ff2ce7">datastore_fixt_setup</a></div><div class="ttdeci">sl_status_t datastore_fixt_setup(void)</div><div class="ttdoc">Fixture for setting up the datastore component.</div><div class="ttdef"><b>Definition:</b> datastore_fixt.c:207</div></div>
-<div class="ttc" id="agroup__sl__status_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:127</div></div>
-<div class="ttc" id="agroup__datastore_html_ga373160cc3a345e23f2adef4dbc0654bf"><div class="ttname"><a href="group__datastore.html#ga373160cc3a345e23f2adef4dbc0654bf">datastore_fixt_teardown</a></div><div class="ttdeci">int datastore_fixt_teardown()</div><div class="ttdoc">Fixture to tear down the datastore.</div><div class="ttdef"><b>Definition:</b> datastore_fixt.c:231</div></div>
+<div class="ttc" id="agroup__datastore__fixt_html_ga42e7a84b800830ebedc35da6ba84e6a7"><div class="ttname"><a href="group__datastore__fixt.html#ga42e7a84b800830ebedc35da6ba84e6a7">datastore_fixt_setup_and_handle_version</a></div><div class="ttdeci">sl_status_t datastore_fixt_setup_and_handle_version(const char *datastore_file, int64_t db_version)</div><div class="ttdoc">Function for setting up the datastore component handling the datastore version.</div><div class="ttdef"><b>Definition:</b> datastore_fixt.c:138</div></div>
+<div class="ttc" id="agroup__datastore__fixt_html_ga60e9c8dbdf53cd0fbc17cdf508a8db78"><div class="ttname"><a href="group__datastore__fixt.html#ga60e9c8dbdf53cd0fbc17cdf508a8db78">datastore_fixt_setup</a></div><div class="ttdeci">sl_status_t datastore_fixt_setup(const char *datastore_file)</div><div class="ttdoc">Fixture for setting up the datastore component.</div><div class="ttdef"><b>Definition:</b> datastore_fixt.c:197</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_cede68330374af30fa0e69b6643738da.html">uic_datastore</a></li><li class="navelem"><a class="el" href="dir_70cf91d447ce6173c50d57146e768801.html">include</a></li><li class="navelem"><a class="el" href="datastore__fixt_8h.html">datastore_fixt.h</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:09 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:10 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

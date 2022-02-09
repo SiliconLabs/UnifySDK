@@ -24,14 +24,11 @@
 #ifndef DOTDOT_BITMAP_HPP
 #define DOTDOT_BITMAP_HPP
 
-// UIC Components
-#include "sl_log.h"
-
 // Standard library
 #include <vector>
 #include <map>
 #include <string>
-#include <boost/property_tree/ptree.hpp>
+#include <nlohmann/json.hpp>
 
 class dotdot_bitmap
 {
@@ -67,12 +64,13 @@ class dotdot_bitmap
     map_type_string(input_map_type),
     bitmap_data(input_bitmap_data) {};
 
-  std::vector<std::pair<std::string, std::string>>
-    get_bitmap_values(uint32_t bitmap_value) const;
-  boost::property_tree::ptree
-    get_bitmap_values_as_json_tree(uint32_t bitmap_value) const;
-  uint32_t get_bitmap_state_value_from_json_tree(
-    const boost::property_tree::ptree &bitmap_tree) const;
+  std::vector<std::pair<std::string, std::string>>get_bitmap_values(uint32_t bitmap_value) const;
+
+  nlohmann::json get_bitmap_values_as_json_tree(uint32_t bitmap_value) const;
+
+  // bitmap_jsn param can't be a const because of limitations of the "const []" operator,
+  // overloaded for nlohmann::json class
+  uint32_t get_bitmap_state_value_from_json_tree(nlohmann::json &bitmap_jsn) const;
 };
 
 #endif  //DOTDOT_BITMAP_HPP

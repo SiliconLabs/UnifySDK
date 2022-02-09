@@ -6,9 +6,11 @@ export type EditGroupDlgState = {
     PristineGroupName: string,
     IsGroupValid: boolean,
     EndpointList: any[],
+    Filter: string,
     ShowModal: boolean,
     CheckedAll: boolean,
-    ClusterType: ClusterTypes | null
+    ClusterType: ClusterTypes | null,
+    Updates: any
 }
 
 export type EditGroupDlgProps = {

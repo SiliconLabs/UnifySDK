@@ -11,8 +11,8 @@ var attribute__mapper__ast_8hpp =
     [ "assignment", "structast_1_1assignment.html", "structast_1_1assignment" ],
     [ "scope", "structast_1_1scope.html", "structast_1_1scope" ],
     [ "ast_node", "attribute__mapper__ast_8hpp.html#a038555ebe7383907b19a81325bd00ee5", null ],
-    [ "attribute_path_element", "attribute__mapper__ast_8hpp.html#a4e9c7b18153da02eb386d908e7b56058", null ],
-    [ "operand", "attribute__mapper__ast_8hpp.html#af7e91a12dd90bd5831e728018770f7af", null ],
+    [ "attribute_path_element", "attribute__mapper__ast_8hpp.html#addf8041d159d1ed5881d08d45769ad05", null ],
+    [ "operand", "attribute__mapper__ast_8hpp.html#a9e777c0163f8daac51e4ed676d05eb70", null ],
     [ "operator_ids", "attribute__mapper__ast_8hpp.html#a103453ee4c6f922adfc20d135c7f4689", [
       [ "operator_plus", "attribute__mapper__ast_8hpp.html#a103453ee4c6f922adfc20d135c7f4689ab1c75fd3802ae603c4a17a6e60e7c497", null ],
       [ "operator_minus", "attribute__mapper__ast_8hpp.html#a103453ee4c6f922adfc20d135c7f4689a50b2c841949046e1deb68f0f18ec8c5d", null ],

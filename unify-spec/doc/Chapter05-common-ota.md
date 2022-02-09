@@ -46,11 +46,11 @@ The table below shows suggestions how to generate different UIID strings.
 > This specification only dictates that the UIID should be prefixed with a protocol-specific code.
 > How the string is constructed is protocol specific.
 
-Technology    | UIID components                                  | Suggestion
-------------- | ------------------------------------------------ | -------------
-ZigBee        |  "ZigBee"+ManufacturerCode+ImageType             | ZigBee010103
-Z-Wave        |  "ZWave"+ManufacturerId+ProductID+FirmwareTarget | ZWave0001000100
-Bluetooth     |  "BT"+ CompanyID+VendorInfo                      | TBD
+Technology    | UIID components                                                            | Suggestion
+------------- | -------------------------------------------------------------------------- | -------------
+ZigBee        |  "ZigBee"+ManufacturerCode+ImageType                                       | ZigBee010103
+Z-Wave        |  ZWave-ManufacturerID-ProductType-ProductID-FirmwareTarget-HardwareVersion | ZWave-0000-0002-0004-00-01
+Bluetooth     |  "BT"+ CompanyID+VendorInfo                                                | TBD
 
 
 ## UCL OTA Communication Protocol
@@ -282,20 +282,8 @@ If the node does not support delayed activations, the ZPC SHOULD indicate it.
 
 \startuml
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
 ' Allows to do simultaneous transmissions
 !pragma teoz true

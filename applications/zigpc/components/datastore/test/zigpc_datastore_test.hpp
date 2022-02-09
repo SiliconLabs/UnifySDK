@@ -20,12 +20,9 @@
 
 #ifdef __cplusplus
 #include <sstream>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+#include <nlohmann/json.hpp>
 
 #include "zigpc_datastore.hpp"
-
-namespace bpt = boost::property_tree;
 
 #endif
 #endif  // ZIGPC_DATASTORE_TEST_HPP

@@ -1,0 +1,282 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+#include <string>
+#include <vector>
+#include <inttypes.h>
+
+#include <boost/algorithm/string.hpp>
+#include <nlohmann/json.hpp>
+
+#include "uic_mqtt.h"
+#include "sl_log.h"
+#include "sl_status.h"
+
+#include "dotdot_bitmap.hpp"
+#include "json_helpers.hpp"
+#include "dotdot_mqtt.h"
+#include "dotdot_mqtt.hpp"
+#include "dotdot_mqtt_command_helpers.hpp"
+#include "dotdot_mqtt_internals.hpp"
+#include "dotdot_mqtt_translators.h"
+
+static constexpr char LOG_TAG[] = "dotdot_mqtt";
+
+// Create a map of enums and their name label.
+// Functions are declared in dotdot_mqtt.hpp
+{{#zcl_enums}}
+
+std::string {{asSnakeCaseLower label}}_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = {{asSnakeCaseLower label}}_enum_data.find(value);
+  if (it != {{asSnakeCaseLower label}}_enum_data.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t {{asSnakeCaseLower label}}_get_enum_value_number(std::string str)
+{
+  for (auto it = {{asSnakeCaseLower label}}_enum_data.begin();
+        it != {{asSnakeCaseLower label}}_enum_data.end(); ++it) {
+    if (std::string(it->second) == str) {
+      return static_cast<uint32_t>(it->first);
+    }
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+{{/zcl_enums}}
+
+template<typename Type>
+Type get_enum_decimal_value(std::string key, nlohmann::json &jsn)
+{
+  if (jsn[key].is_number_integer()) {
+    return jsn[key].get<Type>();
+  } else if (jsn[key].is_string()) {
+    try {
+      std::string payload_value = jsn[key].get<std::string>();
+      boost::replace_all(payload_value, "\"", "");
+      Type value = static_cast<Type>(std::stoi(payload_value, nullptr, 0));
+      sl_log_debug(LOG_TAG,
+                     "Accepted a decimal value '%s' as enum argument.",
+                     payload_value.c_str());
+      return value;
+    } catch (std::invalid_argument &e) {
+      return std::numeric_limits<Type>::max();
+    }
+  } else {
+    sl_log_debug(LOG_TAG, "Failed to parse JSON message, invalid Json value");
+    return std::numeric_limits<Type>::max();
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Command fields parsing functions
+////////////////////////////////////////////////////////////////////////////////
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+
+std::string get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_command(
+  {{#zcl_command_arguments}}{{#first}}
+  const {{asCommandFieldsType parent}} *fields
+  {{/first}}{{/zcl_command_arguments}}
+){
+  bool command_with_no_fields = true;
+
+  // Create a JSON payload from all the parameters
+  nlohmann::json json_payload;
+  {{#zcl_command_arguments}}
+  command_with_no_fields = false;
+  {{#if isArray}}
+  // We assume arrays are Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["{{label}}"] = std::vector< {{asUnderlyingType type}} >(
+    fields->{{asSnakeCaseLower label}},
+    fields->{{asSnakeCaseLower label}} + fields->{{asSnakeCaseLower label}}_count);
+
+  {{else}}
+  // Single Value
+    {{#if_is_bitmap type}}
+      {{#if (isUnknownBitmap label)}}
+  // Unknown bitmask: we write the value directly.
+  json_payload["{{label}}"] = fields->{{asSnakeCaseLower label}};
+      {{else}}
+  // Known bitmask, pull the list of "names" from the value
+  json_payload["{{label}}"] = uic_dotdot_mqtt::get_bitmap_value_names(
+                                (uint32_t)fields->{{asSnakeCaseLower label}},
+                                {{chooseTypeOrBitmapName type parent.label label}});
+      {{/if}}
+    {{else}}
+      {{#if_is_enum type}}
+  // Enum {{parent.label}} / {{label}}
+  #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
+  // Pick up the name from the value.
+  json_payload["{{label}}"] =
+    {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name(
+      (uint32_t)fields->{{asSnakeCaseLower label}});
+  #else
+  // If there is no name value for the enum, just write it directly.
+  json_payload["{{label}}"] = fields->{{asSnakeCaseLower label}};
+  #endif
+      {{else}}
+  // Non-enum and non-bitmask (struct, string or scalar)
+  json_payload["{{label}}"] = nlohmann::json(fields->{{asSnakeCaseLower label}});
+    {{/if_is_enum}}
+  {{/if_is_bitmap}}
+  {{/if}}
+  {{/zcl_command_arguments}}
+
+  // Get the string
+  if (command_with_no_fields == true) {
+    return std::string("{}");
+  }
+  return json_payload.dump();
+}
+
+{{!-- START OF Command parser template --}}
+{{#zcl_command_arguments}}{{#first}}
+void {{asCommandParseFunction parent}}(
+  nlohmann::json &jsn,{{/first}}
+  {{#if isArray}}
+  std::vector<{{asUnderlyingType type}}> &{{asSnakeCaseLower label}}{{listComma this}}
+  {{else}}
+  {{asUnderlyingType type}} &{{asSnakeCaseLower label}}{{listComma this}}
+  {{/if}}{{#last}}
+) {
+{{/last}}{{/zcl_command_arguments}}
+{{! transform enum respresetation to value }}
+{{#zcl_command_arguments}}
+  {{#if_is_enum type}}
+  uint32_t {{label}}_enum_val = get_enum_decimal_value<{{asUnderlyingType type}}>("{{label}}", jsn);
+  if ({{label}}_enum_val == std::numeric_limits<{{asUnderlyingType type}}>::max()) {
+    #ifdef {{asSnakeCaseUpper type}}_ENUM_NAME_AVAILABLE
+    {{label}}_enum_val = {{asSnakeCaseLower type}}_get_enum_value_number(jsn.at("{{label}}").get<std::string>());
+    #endif
+  }
+  {{/if_is_enum}}
+{{/zcl_command_arguments}}
+{{! populate arguments from JSON object }}
+{{#zcl_command_arguments}}
+  {{#if_is_bitmap type}}
+      {{#if (isUnknownBitmap label)}}
+  {{asSnakeCaseLower label}} = jsn.at("{{label}}").get<{{asUnderlyingType type}}>();
+      {{else}}
+  {{asSnakeCaseLower label}} = ({{asUnderlyingType type}})uic_dotdot_mqtt::get_bitmap_decimal_value("{{label}}", jsn, {{chooseTypeOrBitmapName type parent.label label}});
+      {{/if}}
+  {{else}}
+    {{#if_is_enum type}}
+  {{asSnakeCaseLower label}} = static_cast<{{asUnderlyingType type}}>({{label}}_enum_val);
+    {{else if isArray}}
+      {{#if (isString type)}} {{! list string type}}
+  for (auto &{{label}}_el : jsn.at("{{label}}")) {
+    {{asSnakeCaseLower label}}.push_back({{label}}_el.get_ptr<const std::string*>()->c_str());
+  }
+      {{else}}  {{! list non-string type}}
+  {{asSnakeCaseLower label}} = jsn.at("{{label}}").get< std::vector< {{asUnderlyingType type}} >>();
+      {{/if}}
+    {{else}}
+      {{#if (isString type)}} {{! single string type}}
+  {{asSnakeCaseLower label}} = jsn.at("{{label}}").get_ptr<const std::string*>()->c_str();
+      {{else}}  {{! single non-string type}}
+  {{asSnakeCaseLower label}} = jsn.at("{{label}}").get< {{asUnderlyingType type}} >();
+      {{/if}}
+    {{/if_is_enum}}
+  {{/if_is_bitmap}}
+{{#last}}
+}
+{{/last}}
+{{/zcl_command_arguments}}
+{{!-- END OF Command parser template --}}
+
+{{/zcl_commands}}
+
+{{!-- START OF WriteAttribute parser template --}}
+/**
+ * @brief JSON parser for {{parent.label}}::WriteAttributes command arguments.
+ *
+ * Parse incoming JSON object to populate command arguments passed in by reference.
+ */
+void {{asWriteAttributesParseFunction this}}(
+  nlohmann::json &jsn,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t &new_state,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t &new_updated_state{{#zcl_attributes}}{{#if isWritable}}{{#if (isMonotonousArray label)}},
+  std::vector<{{asUnderlyingType type}}> &{{asSnakeCaseLower label}}{{/if}}{{/if}}{{/zcl_attributes}}
+) {
+
+{{#zcl_attributes}}{{#if isWritable}}
+  if (jsn.find("{{label}}") != jsn.end()) {
+
+  {{! parse array-type attribute}}
+  {{#if (isMonotonousArray label)}}
+    {{#if_is_enum type}}
+    sl_log_warning(LOG_TAG,"{{label}} enum array parsing not supported");
+    throw std::exception("{{label}} enum array parsing not supported");
+    {{else}}
+    auto &{{asSnakeCaseLower label}}_jsn = jsn.at("{{label}}");
+    for (size_t i = 0; i < {{asSnakeCaseLower label}}_jsn.size(); i++) {
+      {{#if_is_bitmap type}}
+      {{asSnakeCaseLower label}}.push_back(uic_dotdot_mqtt::get_bitmap_decimal_value_from_array(i, {{asSnakeCaseLower label}}_jsn, {{chooseTypeOrBitmapName type parent.label label}}));
+      {{else if (isString type)}}
+      {{asSnakeCaseLower label}}.push_back({{asSnakeCaseLower label}}_jsn.at(i).get_ptr<const std::string*>()->c_str());
+      {{else if (isBool type)}}
+      {{asSnakeCaseLower label}}.push_back(get_bool_from_json_array({{asSnakeCaseLower label}}_jsn, i));
+      {{else}}
+      {{asSnakeCaseLower label}}.push_back({{asSnakeCaseLower label}}_jsn.at(i).get<{{asUnderlyingType type}}>());
+      {{/if_is_bitmap}}
+    }
+    {{/if_is_enum}}
+    // Take our vector and pack it into the updated state
+    new_state.{{asSnakeCaseLower label}}_count = {{asSnakeCaseLower label}}.size();
+    new_state.{{asSnakeCaseLower label}} = {{asSnakeCaseLower label}}.data();
+  {{! parse non-array attribute}}
+  {{else}}
+    {{#if_is_enum type}}
+    uint32_t tmp = get_enum_decimal_value<{{chooseTypeOrEnumName type parent.label label}}>("{{label}}", jsn);
+    if (tmp == std::numeric_limits<{{chooseTypeOrEnumName type parent.label label}}>::max()) {
+      #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
+      tmp = {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_number(jsn.at("{{label}}").get<std::string>());
+      #elif defined({{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE)
+      tmp = {{asSnakeCaseLower label}}_get_enum_value_number(jsn.at("{{label}}").get<std::string>());
+      #endif
+    }
+    new_state.{{asSnakeCaseLower label}} = tmp;
+    {{else}}
+      {{#if_is_bitmap type}}
+    new_state.{{asSnakeCaseLower label}} = uic_dotdot_mqtt::get_bitmap_decimal_value("{{label}}", jsn, {{chooseTypeOrBitmapName type parent.label label}});
+      {{else if (isString type)}}
+    new_state.{{asSnakeCaseLower label}} = jsn.at("{{label}}").get_ptr<const std::string*>()->c_str();
+      {{else if (isBool type)}}
+    new_state.{{asSnakeCaseLower label}} = get_bool_from_json(jsn, "{{label}}");
+      {{else}}
+    new_state.{{asSnakeCaseLower label}} = jsn.at("{{label}}").get<{{asUnderlyingType type}}>();
+      {{/if_is_bitmap}}
+    {{/if_is_enum}}
+  {{/if}}{{! (isMonotonousArray label)}}
+    new_updated_state.{{asSnakeCaseLower label}} = true;
+  }
+{{/if}}{{/zcl_attributes}}
+
+}
+{{!-- END OF WriteAttribute parser template --}}
+
+{{/if}}
+{{/zcl_clusters}}

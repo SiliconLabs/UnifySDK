@@ -1,0 +1,139 @@
+project_name: "libzigbee_host"
+label: "libzigbee_host"
+package: "Zigbee"
+category: "ZigBee Host Library"
+quality: "development"
+
+config_file:
+  - path: "config/zcl/zcl_config.zap"
+
+description: |-
+  This is a Zigbee 3.0 gateway library for a Unix host to be used by the Unify
+  SDK.
+
+component:
+  - id: "native"
+  - id: "linux_arch_32"
+  - id: "iostream_stdio"
+  - id: "zigbee_address_table"
+  - id: "zigbee_basic"
+  - id: "zigbee_concentrator"
+  - id: "zigbee_counters"
+  - id: "zigbee_ezsp"
+  - id: "zigbee_ezsp_uart"
+  - id: "zigbee_file_descriptor_dispatch"
+  - id: "zigbee_ncp_configuration"
+  - id: "zigbee_network_creator"
+  - id: "zigbee_network_creator_security"
+  - id: "zigbee_network_steering"
+  - id: "zigbee_ota_server"
+  - id: "zigbee_ota_server_policy"
+  - id: "zigbee_ota_common"
+  - id: "zigbee_ota_storage_common"
+  - id: "zigbee_ota_storage_posix_filesystem"
+  - id: "zigbee_reporting"
+  - id: "zigbee_scan_dispatch"
+  - id: "zigbee_update_tc_link_key"
+  - id: "zigbee_trust_center_nwk_key_update_periodic"
+  - id: "zigbee_trust_center_nwk_key_update_unicast"
+  - id: "zigbee_debug_print"
+
+configuration:
+  - name: SL_BOARD_ENABLE_VCOM
+    value: 1
+  - name: SL_IOSTREAM_USART_VCOM_FLOW_CONTROL_TYPE
+    value: usartHwFlowControlCtsAndRts
+  - name: SLI_ZIGBEE_PRIMARY_NETWORK_DEVICE_TYPE
+    value: SLI_ZIGBEE_NETWORK_DEVICE_TYPE_COORDINATOR_OR_ROUTER
+  - name: SLI_ZIGBEE_PRIMARY_NETWORK_SECURITY_TYPE
+    value: SLI_ZIGBEE_NETWORK_SECURITY_TYPE_3_0
+  - name: EMBER_KEY_TABLE_SIZE
+    value: 4
+  - name: EMBER_AF_PLUGIN_ZCL_FRAMEWORK_CORE_CLI_ENABLED
+    value: 0
+  - name: EMBER_AF_PLUGIN_GATEWAY_MAX_WAIT_FOR_EVENT_TIMEOUT_MS
+    value: 10
+  - name: EMBER_TRANSIENT_KEY_TIMEOUT_S
+    value: 65535
+  - name: EMBER_AF_PLUGIN_NETWORK_CREATOR_SECURITY_NETWORK_OPEN_TIME_S
+    value: 65535
+  - name: EMBER_AF_PLUGIN_ADDRESS_TABLE_SIZE
+    value: 32
+
+define:
+  # FIXME: Workaround for EMBER_AF_PLUGIN_GATEWAY_MAX_WAIT_FOR_EVENT_TIMEOUT_MS
+  - name: EMBER_AF_PLUGIN_GATEWAY_SUPPORT_MAX_WAIT_FOR_EVENTS_TIMEOUT_MS
+    value: 10
+  # NOTE: zigbee_poll_control_client NOT USED. fast poll timeout provided as macro
+  - name: EMBER_AF_PLUGIN_POLL_CONTROL_CLIENT_DEFAULT_FAST_POLL_TIMEOUT
+    value: 32
+
+include:
+  - path: "./"
+  - path: "../include"
+
+source:
+  - path: "zigbee_host.c"
+  - path: "zigbee_host_address_table.c"
+  - path: "zigbee_host_attribute_mgmt.c"
+  - path: "zigbee_host_cli.c"
+  - path: "zigbee_host_cluster_command_parse.c"
+  - path: "zigbee_host_common.h"
+  - path: "zigbee_host_counters.c"
+  - path: "zigbee_host_discovery.c"
+  - path: "zigbee_host_ota_server.c"
+  - path: "zigbee_host_poll_checkin.c"
+  - path: "zigbee_host_trust_center.c"
+  - path: "zigbee_host_util.c"
+  - path: "zigbee_host_zcl_frame.c"
+
+toolchain_settings:
+- option: gcc_c_compiler_option
+  value: "-std=c11"
+- option: gcc_c++_compiler_option
+  value: "-std=c++11"
+
+template_contribution:
+  - name: zigbee_af_callback
+    value:
+      callback_type: ncp_init
+      function_name: emberAfNcpInitCallback
+  - name: zigbee_af_callback
+    value:
+      callback_type: read_attributes_response
+      function_name: emberAfReadAttributesResponseCallback
+  - name: zigbee_af_callback
+    value:
+      callback_type: report_attributes
+      function_name: emberAfReportAttributesCallback
+##########################
+# ZCL Command Parse Handler Registration
+# Redirect the following cluster commands to the collector function:
+# emberAfClusterServiceCallback()
+##########################
+  # Identify
+  - {name: cluster_service, value: {cluster_id: "0x0003", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0003", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  # Groups
+  - {name: cluster_service, value: {cluster_id: "0x0004", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0004", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  # OnOff
+  - {name: cluster_service, value: {cluster_id: "0x0006", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0006", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  # LevelControl
+  - {name: cluster_service, value: {cluster_id: "0x0008", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0008", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  # PollControl
+  - {name: cluster_service, value: {cluster_id: "0x0020", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  # DoorLock
+  - {name: cluster_service, value: {cluster_id: "0x0101", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0101", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  # Thermostat
+  - {name: cluster_service, value: {cluster_id: "0x0201", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0201", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  # ColorControl
+  - {name: cluster_service, value: {cluster_id: "0x0300", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0300", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  # OccupancySensing
+  - {name: cluster_service, value: {cluster_id: "0x0406", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0406", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}

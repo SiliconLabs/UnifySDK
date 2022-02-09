@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -17,7 +17,6 @@
 // Includes from other components
 #include "sl_status.h"
 #include "sl_log.h"
-#include "config.h"
 #include "datastore_fixt.h"
 
 // Generic includes for random numbers
@@ -50,9 +49,7 @@ static attribute_store_node_t root_node = ATTRIBUTE_STORE_INVALID_NODE;
 void suiteSetUp()
 {
   // Component initialization
-  char *argv_inject[3] = {"attribute_store_benchmark_test","--datastore.file", "attribute_store_benchmark.db"};
-  config_parse(sizeof(argv_inject)/sizeof(char *), argv_inject, "");
-  datastore_fixt_setup();
+  datastore_fixt_setup("attribute_store_benchmark.db");
   attribute_store_init();
   // Initialize the Randon Number Generator
   srand(time(NULL));

@@ -81,12 +81,12 @@ RUN curl -L https://github.com/doxygen/doxygen/archive/Release_1_8_20.zip --outp
 
 # Install doxygen latex had to install additional packages to accomodate for doxygen 1.8.20 version
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y cm-super-minimal ghostscript texlive-extra-utils \ 
+  && apt-get install --no-install-recommends -y cm-super-minimal ghostscript texlive-extra-utils \
   texlive-font-utils texlive-fonts-recommended texlive-latex-extra \
-  texlive-latex-recommended texlive-plain-generic 
+  texlive-latex-recommended texlive-plain-generic
 
 
-# manually compile and install mosquitto v2.0.11. 
+# manually compile and install mosquitto v2.0.11.
 ARG armhf_cmake_params='-DCMAKE_C_COMPILER=/usr/bin/arm-linux-gnueabihf-gcc -DCMAKE_CXX_COMPILER=/usr/bin/arm-linux-gnueabihf-g++ -DPACK_DEBIAN_PACKAGE_ARCHITECTURE=armhf \
   -DCPACK_FILE_NAME_EXTRA=buster -DPKG_CONFIG_EXECUTABLE=usr/bin/arm-linux-gnueabihf-pkg-config -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=armhf -DCONFIGURE_HOST=arm-linux'
 
@@ -114,7 +114,8 @@ RUN curl https://sh.rustup.rs -sSf --output /tmp/sh.rustup.rs \
   && if [[ $ARCH == *"amd64"* ]]; then export RUST_TRIPLES="$RUST_TRIPLES x86_64-unknown-linux-gnu"; fi \
   && ./sh.rustup.rs -y --profile minimal --target ${RUST_TRIPLES} \
   && rm /tmp/sh.rustup.rs \
-  && /opt/cargo-home/bin/cargo install cargo-deb cargo2junit \
+  && /opt/cargo-home/bin/cargo install cargo2junit \
+  && /opt/cargo-home/bin/cargo install cargo-deb \
   && chmod -R a+rw ${RUSTUP_HOME} ${CARGO_HOME} \
   && find ${RUSTUP_HOME} ${CARGO_HOME} -type d -exec chmod a+x {} \;
 ENV PATH="${CARGO_HOME}/bin:${PATH}"
@@ -129,29 +130,40 @@ RUN curl -sL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/son
 ENV PATH="/opt/sonar-scanner-cli/bin:${PATH}"
 
 # Plantuml
-RUN curl -L https://sourceforge.net/projects/plantuml/files/1.2021.0/plantuml.1.2021.0.jar/download --output /opt/plantuml.jar \
-  && echo 40446bb1307c18ef81f0366497546eaeef41c3eb8bf688d06c9df6d6c6ea230b /opt/plantuml.jar > /tmp/plantuml.jar.sha256 \
+RUN curl -L https://github.com/plantuml/plantuml/releases/download/v1.2022.0/plantuml-1.2022.0.jar --output /opt/plantuml.jar \
+  && echo f1070c42b20e6a38015e52c10821a9db13bedca6b5d5bc6a6192fcab6e612691  /opt/plantuml.jar > /tmp/plantuml.jar.sha256 \
   && sha256sum -c /tmp/plantuml.jar.sha256
 ENV PLANTUML_JAR_PATH=/opt/plantuml.jar
 
 # DEV_UI dependencies
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
-  && apt-get update \
+RUN apt-get update \
   && apt-get install --no-install-recommends -y curl  ca-certificates git dpkg fakeroot \
   && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
   && apt-get install --no-install-recommends -y nodejs rpm \
-  && apt-get install --no-install-recommends -y yarn \
   && rm -rf /var/lib/apt/lists/*
 
 # Install ZAP and dependencies
 # TODO: replace this zap package with one only containing zap generate,
 # and remove weird dependencies to X, asound and xvfb when this is done
-COPY uic-resources/deb/zap_0.99.6_amd64.deb /tmp/zap_0.99.6_amd64.deb
+COPY uic-resources/linux/zap_2022.1.10_amd64.deb /tmp/zap_2022.1.10_amd64.deb
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends /tmp/zap_0.99.6_amd64.deb \
+  && apt-get install -y --no-install-recommends /tmp/zap_2022.1.10_amd64.deb \
   && apt-get install -y --no-install-recommends libx11-xcb1 libxcb-dri3-0 libdrm2 libgbm1 libasound2 xvfb xauth \
   && rm -rf /var/lib/apt/lists/*
+
+# Unpack ZAP Adapter Pack
+COPY uic-resources/linux/zap_apack_linux.zip /tmp/zap_apack_linux.zip
+RUN unzip /tmp/zap_apack_linux.zip -d /opt/zap_apack \
+  && chmod +x /opt/zap_apack/zap \
+  && rm /tmp/zap_apack_linux.zip
+ENV STUDIO_ADAPTER_PACK_PATH="/opt/zap_apack"
+
+# Unpack SLC CLI
+COPY uic-resources/linux/slc_cli_linux.zip /tmp/slc_cli_linux.zip
+RUN unzip /tmp/slc_cli_linux.zip -d /opt \
+  && chmod +x /opt/slc_cli/slc \
+  && rm /tmp/slc_cli_linux.zip
+ENV PATH="/opt/slc_cli:${PATH}"
 
 # Install Clang toolchain
 RUN if [ "$CLANG" = true ] ; then \

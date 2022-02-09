@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -18,7 +18,6 @@
 // Includes from other components
 #include "sl_log.h"
 #include "sl_status.h"
-#include "config.h"
 #include "uic_version.h"
 
 // Generic includes
@@ -136,18 +135,9 @@ sl_status_t datastore_teardown()
   return SL_STATUS_OK;
 }
 
-sl_status_t datastore_fixt_setup_and_handle_version(int64_t db_version)
+sl_status_t datastore_fixt_setup_and_handle_version(const char *datastore_file,
+                                                    int64_t db_version)
 {
-  const char *datastore_file;
-  config_status_t config_status
-    = config_get_as_string(CONFIG_KEY_DATASTORE_FILE, &datastore_file);
-  if (config_status != CONFIG_STATUS_OK) {
-    sl_log_error(LOG_TAG,
-                 "Failed to get %s from configuration",
-                 CONFIG_KEY_DATASTORE_FILE);
-    return SL_STATUS_FAIL;
-  }
-
   sl_status_t ret = datastore_open(datastore_file);
   if (ret != SL_STATUS_OK) {
     return ret;
@@ -204,18 +194,8 @@ sl_status_t datastore_fixt_setup_and_handle_version(int64_t db_version)
 // Fixtures for uic_main integration
 ////////////////////////////////////////////////////////////////////////////////
 
-sl_status_t datastore_fixt_setup(void)
+sl_status_t datastore_fixt_setup(const char *datastore_file)
 {
-  const char *datastore_file;
-  config_status_t config_status
-    = config_get_as_string(CONFIG_KEY_DATASTORE_FILE, &datastore_file);
-  if (config_status != CONFIG_STATUS_OK) {
-    sl_log_error(LOG_TAG,
-                 "Failed to get %s from configuration",
-                 CONFIG_KEY_DATASTORE_FILE);
-    return SL_STATUS_FAIL;
-  }
-
   sl_status_t ret = datastore_open(datastore_file);
   if (ret != SL_STATUS_OK) {
     return ret;

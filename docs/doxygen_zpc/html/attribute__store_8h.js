@@ -5,8 +5,11 @@ var attribute__store_8h =
     [ "ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH", "group__attribute__store__api.html#ga02c19100d96c1bba10647b12b46ac7c6", null ],
     [ "ATTRIBUTE_TREE_ROOT", "attribute__store_8h.html#ac4e0368d17a3688cf724b30823e49d22", null ],
     [ "DEFINE_ATTRIBUTE", "attribute__store_8h.html#a46346b8a08a6ba498f1d9550d72f18f8", null ],
+    [ "attribute_changed_event_t", "group__attribute__store__api.html#gaca204b15b76862da3bd0dd6753c18415", null ],
+    [ "attribute_store_node_changed_callback_t", "group__attribute__store__api.html#ga9b1c2d32e839ca14103b5997e1c85b7e", null ],
     [ "attribute_store_node_t", "group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6", null ],
-    [ "attribute_store_node_update_callback_t", "group__attribute__store__api.html#gaaee26807fd7be052efb7be4a24414aff", null ],
+    [ "attribute_store_node_touch_callback_t", "group__attribute__store__api.html#ga25811535897f6c0208fb9d6f2cff2992", null ],
+    [ "attribute_store_node_update_callback_t", "group__attribute__store__api.html#gaa94d2a99c932593c452f87ede9546064", null ],
     [ "attribute_store_type_t", "attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160", null ],
     [ "attribute_store_change_t", "group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699", [
       [ "ATTRIBUTE_CREATED", "group__attribute__store__api.html#gga27a25d4910253f286d7e355ad9874699a28a7d9e74bd9e8ee5a9853fb1e6c74ae", null ],
@@ -34,7 +37,8 @@ var attribute__store_8h =
     [ "attribute_store_node_exists", "group__attribute__store__api.html#ga0a6a16080300de09ec285be55bd06e25", null ],
     [ "attribute_store_refresh_node_and_children_callbacks", "group__attribute__store__api.html#ga3d90c653643bd4ef9d55b8d2034227ae", null ],
     [ "attribute_store_register_callback", "group__attribute__store__api.html#ga5ce6c785aac6d5cefd494814888074fa", null ],
-    [ "attribute_store_register_callback_by_type", "group__attribute__store__api.html#ga5a02d200bf94b3f366bb8062fb900c30", null ],
-    [ "attribute_store_register_callback_by_type_and_state", "group__attribute__store__api.html#gac873d6eac22ae497ed44c62d3ba1d958", null ],
+    [ "attribute_store_register_callback_by_type", "group__attribute__store__api.html#gacee67224ca9bba595b1ed59d28e8f052", null ],
+    [ "attribute_store_register_callback_by_type_and_state", "group__attribute__store__api.html#gad09f44846a42b1713e18f4fee290fe2a", null ],
+    [ "attribute_store_register_touch_notification_callback", "group__attribute__store__api.html#gac84f5f8fccd89d5e0a3fe4e58a8b4fce", null ],
     [ "attribute_store_set_node_attribute_value", "group__attribute__store__api.html#gad28e15ea78932b2cac3ac7326aab4ea3", null ]
 ];

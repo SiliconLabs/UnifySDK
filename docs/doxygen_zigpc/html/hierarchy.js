@@ -3,27 +3,32 @@ var hierarchy =
     [ "__attribute__", "struct____attribute____.html", null ],
     [ "ast::assignment", "structast_1_1assignment.html", null ],
     [ "ast::attribute", "structast_1_1attribute.html", null ],
+    [ "attribute_changed_event", "structattribute__changed__event.html", null ],
     [ "attribute_key", "structattribute__key.html", null ],
     [ "ast::attribute_path_eval", "structast_1_1attribute__path__eval.html", null ],
     [ "ast::attribute_path_subscript", "structast_1_1attribute__path__subscript.html", null ],
     [ "attribute_report_t", "structattribute__report__t.html", null ],
     [ "attribute_resolver_config_t", "structattribute__resolver__config__t.html", null ],
     [ "attribute_store_node", "classattribute__store__node.html", null ],
-    [ "callback_map", "structcallback__map.html", null ],
     [ "ast::condition", "structast_1_1condition.html", null ],
     [ "ctimer", "structctimer.html", null ],
     [ "ast::dep_eval", "classast_1_1dep__eval.html", null ],
     [ "ast::dep_eval_path", "classast_1_1dep__eval__path.html", null ],
-    [ "DeviceTableQueueEntry", "structDeviceTableQueueEntry.html", null ],
+    [ "zigpc_discovery::events::DiscoverEvent", "classzigpc__discovery_1_1events_1_1DiscoverEvent.html", [
+      [ "zigpc_discovery::events::DeviceDiscoverRequest", "classzigpc__discovery_1_1events_1_1DeviceDiscoverRequest.html", null ],
+      [ "zigpc_discovery::events::DeviceDiscoverResponse", "classzigpc__discovery_1_1events_1_1DeviceDiscoverResponse.html", null ],
+      [ "zigpc_discovery::events::EndpointDiscoverRequest", "classzigpc__discovery_1_1events_1_1EndpointDiscoverRequest.html", null ],
+      [ "zigpc_discovery::events::EndpointDiscoverResponse", "classzigpc__discovery_1_1events_1_1EndpointDiscoverResponse.html", null ]
+    ] ],
     [ "dotdot_bitmap", "classdotdot__bitmap.html", null ],
-    [ "EmberAfPluginDeviceTableEntry", "structEmberAfPluginDeviceTableEntry.html", null ],
     [ "endpoint_config_report_data_t", "structendpoint__config__report__data__t.html", null ],
     [ "zigpc::gateway::RequestQueue::Entry", "classzigpc_1_1gateway_1_1RequestQueue_1_1Entry.html", [
       [ "zigpc::gateway::AddInstallCodeRequest", "classzigpc_1_1gateway_1_1AddInstallCodeRequest.html", null ],
       [ "zigpc::gateway::AddOTAImageRequest", "classzigpc_1_1gateway_1_1AddOTAImageRequest.html", null ],
       [ "zigpc::gateway::BindingRequestRequest", "classzigpc_1_1gateway_1_1BindingRequestRequest.html", null ],
-      [ "zigpc::gateway::DeviceInterviewRequest", "classzigpc_1_1gateway_1_1DeviceInterviewRequest.html", null ],
       [ "zigpc::gateway::DeviceRemoveRequest", "classzigpc_1_1gateway_1_1DeviceRemoveRequest.html", null ],
+      [ "zigpc::gateway::DiscoverDeviceRequest", "classzigpc_1_1gateway_1_1DiscoverDeviceRequest.html", null ],
+      [ "zigpc::gateway::DiscoverEndpointRequest", "classzigpc_1_1gateway_1_1DiscoverEndpointRequest.html", null ],
       [ "zigpc::gateway::NetworkInitRequest", "classzigpc_1_1gateway_1_1NetworkInitRequest.html", null ],
       [ "zigpc::gateway::PermitJoinRequest", "classzigpc_1_1gateway_1_1PermitJoinRequest.html", null ],
       [ "zigpc::gateway::ZCLConfigureReportingRequest", "classzigpc_1_1gateway_1_1ZCLConfigureReportingRequest.html", null ],
@@ -40,7 +45,6 @@ var hierarchy =
       [ "SkipperGrammar< IteratorType >", "classSkipperGrammar.html", null ],
       [ "UAMGrammar< IteratorType, Skipper >", "classUAMGrammar.html", null ]
     ] ],
-    [ "hash_map", "structhash__map.html", null ],
     [ "list", "structlist.html", null ],
     [ "smartstart::Management", "classsmartstart_1_1Management.html", null ],
     [ "MapperEngine", "classMapperEngine.html", null ],
@@ -54,7 +58,6 @@ var hierarchy =
       [ "mqtt_client_fsm_disconnected", "classmqtt__client__fsm__disconnected.html", null ]
     ] ],
     [ "mqtt_message", "structmqtt__message.html", null ],
-    [ "NetworkCache", "structNetworkCache.html", null ],
     [ "ast::nil", "structast_1_1nil.html", null ],
     [ "node_config_report_data_t", "structnode__config__report__data__t.html", null ],
     [ "ast::operation", "structast_1_1operation.html", null ],
@@ -69,7 +72,6 @@ var hierarchy =
     [ "rtimer", "structrtimer.html", null ],
     [ "ast::scope", "structast_1_1scope.html", null ],
     [ "ast::signed_", "structast_1_1signed__.html", null ],
-    [ "simple_map", "structsimple__map.html", null ],
     [ "static_visitor", null, [
       [ "ast::reduce_visitor", "classast_1_1reduce__visitor.html", null ]
     ] ],
@@ -88,6 +90,9 @@ var hierarchy =
     ] ],
     [ "StoreAccessor< zigbee_eui64_uint_t, zigpc_device_data_t >", "classStoreAccessor.html", [
       [ "DeviceAccessor", "classDeviceAccessor.html", null ]
+    ] ],
+    [ "StoreAccessor< zigbee_group_id_t, zigpc_group_data_t >", "classStoreAccessor.html", [
+      [ "GroupAccessor", "classGroupAccessor.html", null ]
     ] ],
     [ "StoreListAccessor< list_entry_t >", "classStoreListAccessor.html", null ],
     [ "StoreListAccessor< zcl_attribute_id_t >", "classStoreListAccessor.html", [
@@ -111,16 +116,10 @@ var hierarchy =
       [ "ast::ast_tree", "structast_1_1ast__tree.html", null ]
     ] ],
     [ "yaml_parser", "classyaml__parser.html", null ],
-    [ "z3gatewayCallbacks", "structz3gatewayCallbacks.html", null ],
-    [ "z3gatewayDeviceTableStorageEntry", "structz3gatewayDeviceTableStorageEntry.html", null ],
-    [ "z3gatewayEndpointInfo", "structz3gatewayEndpointInfo.html", null ],
-    [ "z3gatewayOpts", "structz3gatewayOpts.html", null ],
-    [ "z3gatewayState", "structz3gatewayState.html", null ],
     [ "zcl_attribute", "structzcl__attribute.html", null ],
     [ "zcl_cluster_type_t", "structzcl__cluster__type__t.html", null ],
     [ "zcl_command", "structzcl__command.html", null ],
     [ "zcl_frame_t", "structzcl__frame__t.html", null ],
-    [ "zcl_key_value", "structzcl__key__value.html", null ],
     [ "zcl_profile", "structzcl__profile.html", null ],
     [ "zigbee_endpoint_t", "structzigbee__endpoint__t.html", null ],
     [ "zigbee_node_t", "structzigbee__node__t.html", null ],
@@ -131,13 +130,10 @@ var hierarchy =
     [ "zigpc_config_t", "structzigpc__config__t.html", null ],
     [ "zigpc_diagnostics_metric", "classzigpc__diagnostics__metric.html", [
       [ "zigpc_counter_plugin_metric", "classzigpc__counter__plugin__metric.html", null ],
-      [ "zigpc_cpu_usage", "classzigpc__cpu__usage.html", null ],
+      [ "zigpc_cpu_load_metric", "classzigpc__cpu__load__metric.html", null ],
       [ "zigpc_example_metric", "classzigpc__example__metric.html", null ],
-      [ "zigpc_total_physical_ram_metric", "classzigpc__total__physical__ram__metric.html", null ],
-      [ "zigpc_total_virtual_ram_metric", "classzigpc__total__virtual__ram__metric.html", null ],
-      [ "zigpc_uptime_metric", "classzigpc__uptime__metric.html", null ],
-      [ "zigpc_used_physical_ram_metric", "classzigpc__used__physical__ram__metric.html", null ],
-      [ "zigpc_used_virtual_ram_metric", "classzigpc__used__virtual__ram__metric.html", null ]
+      [ "zigpc_mem_usage_metric", "classzigpc__mem__usage__metric.html", null ],
+      [ "zigpc_uptime_metric", "classzigpc__uptime__metric.html", null ]
     ] ],
     [ "zigpc_diagnostics_notification", "classzigpc__diagnostics__notification.html", [
       [ "zigpc_diagnostics_manager", "classzigpc__diagnostics__manager.html", null ]
@@ -156,8 +152,7 @@ var hierarchy =
     [ "zigpc_group_member_t", "structzigpc__group__member__t.html", null ],
     [ "zigpc_net_mgmt_fsm", "structzigpc__net__mgmt__fsm.html", null ],
     [ "zigpc_net_mgmt_fsm_data_t", "unionzigpc__net__mgmt__fsm__data__t.html", null ],
-    [ "zigpc_net_mgmt_fsm_init_complete_t", "structzigpc__net__mgmt__fsm__init__complete__t.html", null ],
-    [ "zigpc_net_mgmt_fsm_interview_t", "structzigpc__net__mgmt__fsm__interview__t.html", null ],
+    [ "zigpc_net_mgmt_fsm_interview_status_t", "structzigpc__net__mgmt__fsm__interview__status__t.html", null ],
     [ "zigpc_net_mgmt_fsm_node_add_t", "structzigpc__net__mgmt__fsm__node__add__t.html", null ],
     [ "zigpc_net_mgmt_fsm_node_interview_t", "structzigpc__net__mgmt__fsm__node__interview__t.html", null ],
     [ "zigpc_net_mgmt_fsm_node_remove_t", "structzigpc__net__mgmt__fsm__node__remove__t.html", null ],
@@ -171,8 +166,6 @@ var hierarchy =
     [ "zigpc_observable", "structzigpc__observable.html", null ],
     [ "zigpc_observable_event_entry", "structzigpc__observable__event__entry.html", null ],
     [ "zigpc_zcl_frame_data_t", "structzigpc__zcl__frame__data__t.html", null ],
-    [ "zigpc_zcl_profiles_command_field_t", "structzigpc__zcl__profiles__command__field__t.html", null ],
-    [ "zigpc_zcl_profiles_topic_t", "structzigpc__zcl__profiles__topic__t.html", null ],
     [ "ast_node", "classast__node.html", null ],
     [ "uint32_t", "classuint32__t.html", null ]
 ];

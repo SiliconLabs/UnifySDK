@@ -71,7 +71,6 @@ void platform_exec(const char *file,
       /* We should never get here. If we do execev failed. */
 
       _Exit(EXIT_FAILURE);
-      break;
 
     default: /* Parent process */
 

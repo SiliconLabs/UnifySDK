@@ -36,7 +36,7 @@ sl_status_t zigpc_common_zcl_frame_init_command(zcl_frame_t *const frame,
     frame->buffer[frame->size++] = frame_control;
     frame->buffer[frame->size]   = ZCL_FRAME_SEQUENCE_NUMBER_PLACEHOLDER;
 
-    // Store sequence ID offset to be passed into Z3Gateway API
+    // Store sequence ID offset to be passed into ZigbeeHost
     frame->offset_sequence_id = frame->size++;
 
     frame->buffer[frame->size++] = command_id;
@@ -93,28 +93,23 @@ sl_status_t zigpc_common_zcl_frame_fill_data(zcl_frame_t *const frame,
   return status;
 }
 
-sl_status_t zigpc_common_zcl_frame_fill_raw( zcl_frame_t *const frame,
-                                             const uint8_t * const data,
-                                             unsigned int data_size)
+sl_status_t zigpc_common_zcl_frame_fill_raw(zcl_frame_t *const frame,
+                                            const uint8_t *const data,
+                                            unsigned int data_size)
 {
-    sl_status_t status = SL_STATUS_OK;
-    if(frame == NULL || data == NULL)
-    {
-        status = SL_STATUS_NULL_POINTER;
-    }
+  sl_status_t status = SL_STATUS_OK;
+  if (frame == NULL || data == NULL) {
+    status = SL_STATUS_NULL_POINTER;
+  }
 
-    if(status == SL_STATUS_OK)
-    {
-        if((frame->size + data_size) < ZCL_FRAME_BUFFER_SIZE_MAX)
-        {
-            memcpy(&frame->buffer[frame->size], data, data_size);
-            frame->size = frame->size + data_size;
-        }
-        else
-        {
-            status = SL_STATUS_WOULD_OVERFLOW;
-        }
+  if (status == SL_STATUS_OK) {
+    if ((frame->size + data_size) < ZCL_FRAME_BUFFER_SIZE_MAX) {
+      memcpy(&frame->buffer[frame->size], data, data_size);
+      frame->size = frame->size + data_size;
+    } else {
+      status = SL_STATUS_WOULD_OVERFLOW;
     }
+  }
 
-    return status;
+  return status;
 }

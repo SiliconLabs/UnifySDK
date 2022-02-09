@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -30,15 +30,19 @@ void mqtt_client_fsm_connected::enter(mqtt_client *client_instance)
 
   // See if we have any queued up messages (subscription, publish, unsubscription)
   // that need to be sent.
-  if (client_instance->subscription_messages_waiting()) {
+  if (client_instance->subscription_messages_waiting()
+      && (client_instance->event_counter(MQTT_EVENT_SUBSCRIBE, nullptr) == 0)) {
     client_instance->send_event(MQTT_EVENT_SUBSCRIBE, nullptr);
   }
 
-  if (client_instance->publish_messages_waiting()) {
+  if (client_instance->publish_messages_waiting()
+      && (client_instance->event_counter(MQTT_EVENT_PUBLISH, nullptr) == 0)) {
     client_instance->send_event(MQTT_EVENT_PUBLISH, nullptr);
   }
 
-  if (client_instance->unsubscription_messages_waiting()) {
+  if (client_instance->unsubscription_messages_waiting()
+      && (client_instance->event_counter(MQTT_EVENT_UNSUBSCRIBE, nullptr)
+          == 0)) {
     client_instance->send_event(MQTT_EVENT_UNSUBSCRIBE, nullptr);
   }
 }

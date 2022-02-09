@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -140,7 +140,7 @@ int mqtt_client::file_descriptor()
 
 void mqtt_client::poll()
 {
-  if(current_state == &mqtt_client_fsm_disconnected::get_instance()) {
+  if (current_state == &mqtt_client_fsm_disconnected::get_instance()) {
     return;
   }
   // We have already select()ed on the socket, so we're going to run the individual
@@ -256,15 +256,19 @@ void mqtt_client::publish(const std::string &topic,
     // And replace message content and message_length
     // Try to find retained message with same topic,
     // change message content and message_length
-    for (auto it = publishing_queue.begin(); it != publishing_queue.end(); ++it) {
+    for (auto it = publishing_queue.begin(); it != publishing_queue.end();
+         ++it) {
       if ((*it).retain && (*it).topic.compare(topic) == 0) {
-          // variant1: modify content of existing message
-          (*it).message.assign(message);
-          (*it).message_length = message_length;
-          enqueue_message = false;
-          break;
+        // variant1: modify content of existing message
+        (*it).message.assign(message);
+        (*it).message_length = message_length;
+        enqueue_message      = false;
+        break;
       }
     }
+  } else {
+    //Remove is this as non-retained
+    retained_topics.erase(topic);
   }
 
   if (enqueue_message) {
@@ -275,7 +279,7 @@ void mqtt_client::publish(const std::string &topic,
     new_message.retain         = retain;
     publishing_queue.push_back(std::move(new_message));
   }
-    
+
   if (event_counter(MQTT_EVENT_PUBLISH, nullptr) == 0) {
     // We will only send publish-events if there aren't any.
     send_event(MQTT_EVENT_PUBLISH, nullptr);
@@ -301,12 +305,13 @@ int mqtt_client::count_topics(const std::string &prefix_pattern)
     end++;
     count++;
   }
-  if (full_match) {
-    return count;
-  } else {
+
+  if (!full_match) {
     retained_topics.erase(start);
-    return count - 1;
+    count = count - 1;
   }
+
+  return count;
 }
 
 void mqtt_client::unretain(const std::string &prefix_pattern)
@@ -316,21 +321,28 @@ void mqtt_client::unretain(const std::string &prefix_pattern)
   // get an iterator which would point to the first potential match.
   // Then we do a substring match of the consecutive candidates,
   // until there are no more matches.
-  //
-  auto start = retained_topics.insert(prefix_pattern).first;
-  auto end   = start;
-  while ((end != retained_topics.end())
-         && (*end).rfind(prefix_pattern, 0) == 0) {
-    end++;
-  }
-  // Add topics to the publishing_queue, skip the first since its our probe.
-  for (auto it = (start); it != end; it++) {
-    if (it == start)
-      continue;
-    publishing_queue.push_back({*it, "", 0, true});
+
+  auto [start, inserted] = retained_topics.insert(prefix_pattern);
+  auto end               = start;
+  // Check if we already have topic in retained_topics set
+  if (!inserted) {
+    publishing_queue.push_back({prefix_pattern, "", 0, true});
+  } else {
+    while ((end != retained_topics.end())
+           && (*end).rfind(prefix_pattern, 0) == 0) {
+      end++;
+    }
+    // Add topics to the publishing_queue, skip the first since its our probe.
+    for (auto it = (start); it != end; it++) {
+      if (it == start)
+        continue;
+      publishing_queue.push_back({*it, "", 0, true});
+    }
   }
   retained_topics.erase(start, end);
-  send_event(MQTT_EVENT_PUBLISH, nullptr);
+  if (event_counter(MQTT_EVENT_PUBLISH, nullptr) == 0) {
+    send_event(MQTT_EVENT_PUBLISH, nullptr);
+  }
 }
 
 void mqtt_client::unretain_by_regex(const std::string &pattern)
@@ -344,7 +356,9 @@ void mqtt_client::unretain_by_regex(const std::string &pattern)
       it++;
     }
   }
-  send_event(MQTT_EVENT_PUBLISH, nullptr);
+  if (event_counter(MQTT_EVENT_PUBLISH, nullptr) == 0) {
+    send_event(MQTT_EVENT_PUBLISH, nullptr);
+  }
 }
 
 bool mqtt_client::publish_messages_waiting()
@@ -384,7 +398,8 @@ sl_status_t mqtt_client::publish_to_broker(bool flushing)
     return publish_retval;
   }
 
-  if (publish_messages_waiting() && !flushing) {
+  if (publish_messages_waiting() && (!flushing)
+      && (event_counter(MQTT_EVENT_PUBLISH, nullptr) == 0)) {
     // When we're flushing the queue, that means we're disconnecting and
     // probably shutting down and don't have an event-loop anymore.
     send_event(MQTT_EVENT_PUBLISH, nullptr);
@@ -417,6 +432,15 @@ void mqtt_client::subscribe(const std::string &topic,
             return;
           }
         }
+        // Here, we have a matching topic-string with different pointer to
+        // the callback-function. So, we added the callback to the internal
+        // routing without sending subscription-message to the broker.
+        if (strcmp(pair.first.c_str(), topic.c_str()) == 0) {
+          auto pr = subscription_callbacks.insert(
+            make_pair(topic, std::vector<message_callback_t>()));
+          pr.first->second.push_back(callback);
+          return;
+        }
       }
     }
   }
@@ -439,7 +463,8 @@ void mqtt_client::resubscribe()
   for (const auto &pair: subscription_callbacks) {
     subscription_queue.push(pair.first);
   }
-  if (subscription_callbacks.size() > 0) {
+  if ((subscription_callbacks.size() > 0)
+      && (event_counter(MQTT_EVENT_SUBSCRIBE, nullptr) == 0)) {
     send_event(MQTT_EVENT_SUBSCRIBE, nullptr);
   }
 }
@@ -480,7 +505,8 @@ sl_status_t mqtt_client::subscribe_to_topic()
     on_disconnect(subscribe_retval);
     return subscribe_retval;
   }
-  if (subscription_messages_waiting()) {
+  if (subscription_messages_waiting()
+      && (event_counter(MQTT_EVENT_SUBSCRIBE, nullptr) == 0)) {
     send_event(MQTT_EVENT_SUBSCRIBE, nullptr);
   }
   return subscribe_retval;
@@ -552,7 +578,8 @@ sl_status_t mqtt_client::unsubscribe_from_topic()
     on_disconnect(unsubscribe_retval);
     return unsubscribe_retval;
   }
-  if (unsubscription_messages_waiting()) {
+  if (unsubscription_messages_waiting()
+      && (event_counter(MQTT_EVENT_UNSUBSCRIBE, nullptr) == 0)) {
     send_event(MQTT_EVENT_UNSUBSCRIBE, nullptr);
   }
   return unsubscribe_retval;
@@ -591,6 +618,18 @@ void mqtt_client::on_disconnect_callback_set(
   on_disconnect_callback = callback_function;
 }
 
+void mqtt_client::before_disconnect_callback_set(
+  connection_status_callback_t callback_function)
+{
+  before_disconnect_callback = callback_function;
+}
+
+void mqtt_client::after_connect_callback_set(
+  connection_status_callback_t callback_function)
+{
+  after_connect_callback = callback_function;
+}
+
 sl_status_t mqtt_client::connect()
 {
   int retval
@@ -604,6 +643,7 @@ sl_status_t mqtt_client::connect()
                   "Connection to MQTT broker %s:%d established.\n",
                   hostname.c_str(),
                   port);
+      this->after_connect_callback_call();
       break;
     case SL_STATUS_INVALID_PARAMETER:
       sl_log_error(LOG_TAG, "Invalid input-parameters (hostname or port).\n");
@@ -615,8 +655,8 @@ sl_status_t mqtt_client::connect()
       break;
     default:
       sl_log_error(LOG_TAG,
-                      "MQTT-wrapper returned an invalid status-code: 0x%04x\n",
-                      retval);
+                   "MQTT-wrapper returned an invalid status-code: 0x%04x\n",
+                   retval);
       break;
   }
   poll();
@@ -665,6 +705,7 @@ void mqtt_client::on_disconnect(int result_code)
     send_event(MQTT_TRANSITION_DISCONNECTED, nullptr);
     send_delayed_event(MQTT_EVENT_CONNECT, next_reconnect_backoff);
   }
+
   if (on_disconnect_callback != nullptr) {
     on_disconnect_callback(this, socket_file_descriptor);
   }
@@ -708,6 +749,20 @@ void mqtt_client::on_message(const std::string &topic,
   }
 }
 
+void mqtt_client::after_connect_callback_call()
+{
+  if (this->after_connect_callback != nullptr) {
+    this->after_connect_callback();
+  }
+}
+
+void mqtt_client::before_disconnect_callback_call()
+{
+  if (this->before_disconnect_callback != nullptr) {
+    this->before_disconnect_callback();
+  }
+}
+
 // C interface implementation.
 // All of those functions/functionalities have a counterpart in C++-land.
 mqtt_client_t mqtt_client_new(
@@ -735,12 +790,19 @@ mqtt_client_t mqtt_client_new(
 
 sl_status_t mqtt_client_setup(mqtt_client_t instance)
 {
-  return instance->setup();
+  if (instance)
+    return instance->setup();
+  else
+    return SL_STATUS_NULL_POINTER;
 }
 
 void mqtt_client_disconnect(mqtt_client_t instance)
 {
-  instance->disconnect();
+  if (instance)
+    instance->before_disconnect_callback_call();
+
+  if (instance)
+    instance->disconnect();
 }
 
 sl_status_t mqtt_client_teardown(mqtt_client_t instance)
@@ -757,18 +819,23 @@ void mqtt_client_delete(mqtt_client_t instance)
 
 int mqtt_client_file_descriptor(mqtt_client_t instance)
 {
-  sl_log_debug(LOG_TAG, "Returning socket file-descriptor.\n");
-  return instance->file_descriptor();
+  if (instance) {
+    sl_log_debug(LOG_TAG, "Returning socket file-descriptor.\n");
+    return instance->file_descriptor();
+  }
+  return -1;
 }
 
 void mqtt_client_poll(mqtt_client_t instance)
 {
-  instance->poll();
+  if (instance)
+    instance->poll();
 }
 
 void mqtt_client_event(mqtt_client_t instance, const int incoming_event)
 {
-  instance->event(incoming_event);
+  if (instance)
+    instance->event(incoming_event);
 }
 
 void mqtt_client_publish(mqtt_client_t instance,
@@ -777,26 +844,33 @@ void mqtt_client_publish(mqtt_client_t instance,
                          const size_t message_length,
                          bool retain)
 {
-  instance->publish(std::string(topic),
-                    std::string(message, message_length),
-                    message_length,
-                    retain);
+  if (instance)
+    instance->publish(std::string(topic),
+                      std::string(message, message_length),
+                      message_length,
+                      retain);
 }
 
 int mqtt_client_count_topics(mqtt_client_t instance, const char *prefix_pattern)
 {
-  return instance->count_topics(std::string(prefix_pattern));
+  if (instance) {
+    return instance->count_topics(std::string(prefix_pattern));
+  } else {
+    return 0;
+  }
 }
 
 void mqtt_client_unretain(mqtt_client_t instance, const char *prefix_pattern)
 {
-  instance->unretain(std::string(prefix_pattern));
+  if (instance)
+    instance->unretain(std::string(prefix_pattern));
 }
 
 void mqtt_client_unretain_by_regex(mqtt_client_t instance,
                                    const char *prefix_pattern)
 {
-  instance->unretain_by_regex(std::string(prefix_pattern));
+  if (instance)
+    instance->unretain_by_regex(std::string(prefix_pattern));
 }
 
 void mqtt_client_subscribe(mqtt_client_t instance,
@@ -805,7 +879,8 @@ void mqtt_client_subscribe(mqtt_client_t instance,
                                             const char *message,
                                             const size_t message_length))
 {
-  instance->subscribe(std::string(topic), callback);
+  if (instance)
+    instance->subscribe(std::string(topic), callback);
 }
 
 void mqtt_client_unsubscribe(mqtt_client_t instance,
@@ -814,21 +889,38 @@ void mqtt_client_unsubscribe(mqtt_client_t instance,
                                               const char *message,
                                               const size_t message_length))
 {
-  instance->unsubscribe(std::string(topic), callback);
+  if (instance)
+    instance->unsubscribe(std::string(topic), callback);
 }
 
 void mqtt_client_on_connect_callback_set(
   mqtt_client_t instance,
   void (*on_connect)(mqtt_client_t inst, const int file_descriptor))
 {
-  instance->on_connect_callback_set(on_connect);
+  if (instance)
+    instance->on_connect_callback_set(on_connect);
 }
 
 void mqtt_client_on_disconnect_callback_set(
   mqtt_client_t instance,
   void (*on_disconnect)(mqtt_client_t inst, const int file_descriptor))
 {
-  instance->on_disconnect_callback_set(on_disconnect);
+  if (instance)
+    instance->on_disconnect_callback_set(on_disconnect);
+}
+
+void mqtt_client_before_disconnect_callback_set(mqtt_client_t instance,
+                                                void (*before_disconnect)())
+{
+  if (instance)
+    instance->before_disconnect_callback_set(before_disconnect);
+}
+
+void mqtt_client_after_connect_callback_set(mqtt_client_t instance,
+                                            void (*after_connect)())
+{
+  if (instance)
+    instance->after_connect_callback_set(after_connect);
 }
 
 // C interface for Mosquitto-callbacks

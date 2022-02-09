@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -13,7 +13,7 @@
 
 /**
  * @file zwapi_serial.h
- * @brief Serial Port API for the Z-Wave module. 
+ * @brief Serial Port API for the Z-Wave module.
  * Used for low level read/write functions to the serial port.
  */
 
@@ -56,8 +56,8 @@ int zwapi_serial_restart(void);
 /**
  * @brief Reads a byte from the serial port device.
  * @param c char  to store data from serial port to.
- * @returns 0 if no characters are available, otherwise this returns 1 
- * (length of the read data) 
+ * @returns 0 if no characters are available, otherwise this returns 1
+ * (length of the read data)
  *
  * @zgw_name SerialGetByte
  */
@@ -71,7 +71,7 @@ int zwapi_serial_get_byte(uint8_t *c);
 void zwapi_serial_put_byte(uint8_t c);
 
 /**
- * @brief Reads the output of the serial port device and stores the content in 
+ * @brief Reads the output of the serial port device and stores the content in
  * a buffer.
  * @param c buffer to store data from serial port to.
  * @param len length of buffer.
@@ -92,7 +92,7 @@ int zwapi_serial_get_buffer(uint8_t *c, int len);
 void zwapi_serial_put_buffer(uint8_t *c, int len);
 
 /**
- * @brief Check the file descriptor for the serial device is available for I/O 
+ * @brief Check the file descriptor for the serial device is available for I/O
  * operations.
  *
  * @returns true if the file is available, false if not or if an error occurred.
@@ -104,7 +104,7 @@ bool zwapi_serial_is_file_available(void);
 /**
  * @brief Flush the serial output if using buffered output.
  *
- * This function calls tcdrain, which waits that the TTY buffer data has been 
+ * This function calls tcdrain, which waits that the TTY buffer data has been
  * written to the hardware.
  *
  * @zgw_name SerialFlush

@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,8 +12,8 @@
  *****************************************************************************/
 
 /**
- * @defgroup attribute_types List of defined attributes types
- * @ingroup attribute_store
+ * @defgroup zpc_attribute_types List of defined attributes types
+ * @ingroup zpc_attribute_store
  * @brief List of defines Attribute Types for the attribute store.
  *
  * <b>Attribute Type Ranges:</b>
@@ -78,6 +78,18 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP, 0x000F)
 DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_INCLUSION_PROTOCOL, 0x0010)
 ///< This is a token shown if a node is S2 capable. No value, it's a token
 DEFINE_ATTRIBUTE(ATTRIBUTE_NODE_IS_S2_CAPABLE, 0x0011)
+///< This is the S2 SPAN data for a node. span_entry_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_S2_SPAN_ENTRY, 0x0012)
+///< This is the S2 MPAN table for the ZPC. No type.
+DEFINE_ATTRIBUTE(ATTRIBUTE_S2_MPAN_TABLE, 0x0013)
+///< This is one entry of the S2 MPAN table for the ZPC. mpan_entry_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_S2_MPAN_ENTRY, 0x0014)
+///< This is an attribute that keeps a list of assigned groups. no type
+DEFINE_ATTRIBUTE(ATTRIBUTE_MULTICAST_GROUP_LIST, 0x0015)
+///< This is an assigned Multicast group. zwave_multicast_group_id_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_MULTICAST_GROUP, 0x0016)
+///< This is the interval for sending NOPs to failing node clock_time_t 
+DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL, 0x0017)
 
 // Generic endpoint attributes, should be attached under endpoints
 // Suggested range 0x100..0x1FF (using Z-Wave Protocol CC identifier)
@@ -132,6 +144,37 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_VALUE,
 ///< This represents the duration (to reach the desired value). uint32_t (due to mapper)
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_DURATION,
                  ((COMMAND_CLASS_SWITCH_BINARY << 8) | 0x04))
+
+///////////////////////////////////
+// Central Scene Command Class
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_VERSION,
+                 ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_CENTRAL_SCENE))
+
+///< This represents the total number of scenes supported by the node.
+///< central_scene_scene_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_NUMBER_OF_SCENES,
+                 ((COMMAND_CLASS_CENTRAL_SCENE << 8) | 0x02))
+
+///< This represents the maximum number of key attributes per scene.
+///< central_scene_key_attribute_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_MAX_KEY_ATTRIBUTE,
+                 ((COMMAND_CLASS_CENTRAL_SCENE << 8) | 0x03))
+
+///< This represents the Slow Refresh setting.
+///< central_scene_slow_refresh_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_SLOW_REFRESH,
+                 ((COMMAND_CLASS_CENTRAL_SCENE << 8) | 0x04))
+
+///< This represents the active scene.
+///< central_scene_scene_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_ACTIVE_SCENE,
+                 ((COMMAND_CLASS_CENTRAL_SCENE << 8) | 0x06))
+
+///< This represents the sequence number received for the active scene.
+///< central_scene_sequence_number_t type
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_ACTIVE_SCENE_SEQUENCE_NUMBER,
+  ((COMMAND_CLASS_CENTRAL_SCENE << 8) | 0x07))
 
 ///////////////////////////////////
 // Multilevel Switch Command Class
@@ -505,5 +548,4 @@ DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID, 0x00040001)
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME, 0x00040002)
 #endif  //ATTRIBUTE_AUTO_GENERATED
 #endif  //ATTRIBUTE_STORE_TYPES_H
-  /** @} */ //end attribute_types
-
+/** @} */  //end attribute_types

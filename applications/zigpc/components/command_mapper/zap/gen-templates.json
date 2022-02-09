@@ -13,6 +13,11 @@
       "path": "zigpc_command_mapper_bygroup_handlers.cpp.zapt",
       "name": "ZigPC Command Mapper by-group Command Handlers",
       "output": "src/zigpc_command_mapper_bygroup_handlers.cpp"
+    },
+    {
+      "path": "zigpc_cmdmapper_gen_cmd_publish.cpp.zapt",
+      "name": "ZigPC Command Mapper Generated Command Publisher",
+      "output": "src/zigpc_cmdmapper_gen_cmd_publish.cpp"
     }
   ]
 }

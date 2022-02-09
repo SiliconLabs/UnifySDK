@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -31,7 +31,11 @@
 #define zpc_ntohl(x) ntohl(x)
 #define zpc_ntohs(x) ntohs(x)
 #else
-#include <endian.h>
+#if !defined(ZWAVE_BUILD_SYSTEM)
+  #include <endian.h>
+#else
+  #include <c_endianness.h>
+#endif  // ZWAVE_BUILD_SYSTEM
 #define zpc_ntohll(x) be64toh(x)
 #define zpc_ntohl(x)  be32toh(x)
 #define zpc_ntohs(x)  be16toh(x)

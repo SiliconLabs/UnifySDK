@@ -30,68 +30,32 @@ Services to read the state and control a given device.
 
 There are three main spaces in a cluster MQTT topic, as follows:
 
-* `ucl/by-unid/+/+/&lt;ClusterName&gt;/Attributes/#` : This represents the
+* `ucl/by-unid/+/+/<ClusterName>/Attributes/#` : This represents the
   cluster attributes state.
-* `ucl/by-unid/+/+/&lt;ClusterName&gt;/SupportedCommands`: This represents the
+* `ucl/by-unid/+/+/<ClusterName>/SupportedCommands`: This represents the
   list of commands that the node can receive for this cluster.
-* `ucl/by-unid/+/+/&lt;ClusterName&gt;/Commands/+` : This is the topic where
+* `ucl/by-unid/+/+/<ClusterName>/Commands/+` : This is the topic where
   IoT Services issue commands.
+* `ucl/by-unid/+/+/<ClusterName>/SupportedGeneratedCommands`: This represents
+  the list of commands that the node can generate for this cluster.
+* `ucl/by-unid/+/+/<ClusterName>/GeneratedCommands/+` : This is the topic where
+  IoT Services receives commands from PAN nodes.
 
 The `/+/+` wildcards can be replaced with a specific UNID and endpoint to
 control/monitor only a single endpoint.
 
 An overview of these topics is shown in the table below.
 
-<table>
-<caption>MQTT Topics</caption>
-<tr>
-<th>MQTT Topic</th>
-<th>Protocol<br/>Controllers</th>
-<th>IoT Services</th>
-<th>Description</th>
-</tr>
-<tr>
-<td>`ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Attributes/&lt;AttributeName&gt;/Reported`</td>
-<td>Publish (retained)</td>
-<td>Subscribe</td>
-<td>Advertises the reported value of an attribute for the Cluster</td>
-</tr>
-<tr>
-<td>`ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Attributes/&lt;AttributeName&gt;/Desired`</td>
-<td>Publish (retained)</td>
-<td>Subscribe</td>
-<td>Advertises the desired value of an attribute for the Cluster</td>
-</tr>
-<tr>
-<td>
-`ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Attributes/#`</td>
-<td>Publish (retained)</td>
-<td>Subscribe</td>
-<td>
-  Advertises the reported/desired value of a non-standard attribute for the
-  Cluster. Non-standard attributes are defined in this specification.
-  The last level of this topic space will always be /Reported or /Desired.
-</td>
-</tr>
-<tr>
-<td>`ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/SupportedCommands`</td>
-<td>Publish (retained)</td>
-<td>Subscribe</td>
-<td>
-  Advertises an array of commands that can be published under the Commands/namespace
-  by IoT Services to control the device.
-</td>
-</tr>
-<tr>
-<td>`ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Commands/&lt;CommandName&gt;`</td>
-<td>Subscribe</td>
-<td>Publish (unretained)</td>
-<td>
-  Instruct a Protocol Controller to send a command to the UNID/endpoint cluster
-  server
-</td>
-</tr>
-</table>
+
+MQTT Topic                | Protocol<br>Controllers | IoT<br>Services | Description
+------------------------- | -------------------- | -------------|-------------
+`ucl/by-unid/<UNID>/ep<EndPointID>/<ClusterName>/Attributes/<AttributeName>/Reported` | Publish<br/>(retained) | Subscribe | Advertises the reported value of an attribute for the Cluster.
+`ucl/by-unid/<UNID>/ep<EndPointID>/<ClusterName>/Attributes/<AttributeName>/Desired` | Publish<br/>(retained) | Subscribe | Advertises the desired value of an attribute for the Cluster.
+`ucl/by-unid/<UNID>/ep<EndPointID>/<ClusterName>/Attributes/#` | Publish<br/>(retained) | Subscribe | Advertises the reported/desired value of a non-standard attribute for the Cluster. Non-standard attributes are defined in this specification. The last level of this topic space will always be /Reported or /Desired.
+`ucl/by-unid/<UNID>/ep<EndPointID>/<ClusterName>/SupportedCommands` | Publish<br/>(retained) | Subscribe | Advertises an array of commands that can be published under the Commands/# namespace by IoT Services to control the device.
+`ucl/by-unid/<UNID>/ep<EndPointID>/<ClusterName>/Commands/<CommandName>` | Subscribe | Publish<br/>(unretained) | Instruct a Protocol Controller to send a command to the UNID/endpoint server cluster.
+`ucl/by-unid/<UNID>/ep<EndPointID>/<ClusterName>/SupportedGeneratedCommands` | Publish<br/>(retained) | Subscribe | Advertises an array of commands that can be generated under the GeneratedCommands/# namespace by Protocol Controller as commands sent from the device.
+`ucl/by-unid/<UNID>/ep<EndPointID>/<ClusterName>/GeneratedCommands/<CommandName>` | Publish<br/>(unretained) | Subscribe | Receive commands sent from the UNID/endpoint cluster to Unify.
 
 ### Reported and Desired
 
@@ -108,19 +72,20 @@ device/endpoint to reach. The *reported value* indicates the state confirmed by
 the device/endpoint itself.
 
 More information about the 'desired' and 'reported' state description can be
-found in the [Amazon AWS Specification]
-(https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-document-syntax.html#device-shadow-example-request-json).
+found in the [Amazon AWS Specification](https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-document-syntax.html#device-shadow-example-request-json).
 
 ### Cluster MQTT Topics
 
-The non-protocol controller IoT Services (Cloud Service connectors,
-Middleware Translator, and Rules Engines) should subscribe to the following topic
-filter to get any application message corresponding to the state of given
-cluster from any PAN node in the unified network:
+IoT Services (Cloud Service connectors, Middleware Translator, and Rules Engines)
+should subscribe to the following topic filter to get any application message
+corresponding to the state of given cluster from any PAN node in the
+Unify network:
 
-> `ucl/by-unid/+/+/&lt;ClusterName&gt;/#`
+```mqtt
+  ucl/by-unid/+/+/<ClusterName>/#
+```
 
-The Protocol Controller MUST then publish to the following topics to advertise
+The Protocol Controllers MUST then publish to the following topics to advertise
 the supported attributes of a PAN Node and also when the attributes state is
 updated:
 
@@ -141,10 +106,10 @@ For example, a Protocol Controller advertising the state of a device/endpoint
 being a OnOff and Level cluster server will publish the following:
 
 ```mqtt
-  ucl/by-unid/zw-23485/ep0/OnOff/Attributes/OnOff/Desired { "value": true}
-  ucl/by-unid/zw-23485/ep0/OnOff/Attributes/OnOff/Reported { "value": true}
-  ucl/by-unid/zw-23485/ep0/Level/Attributes/CurrentLevel/Desired { "value": 50}
-  ucl/by-unid/zw-23485/ep0/Level/Attributes/CurrentLevel/Reported { "value": 100}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired { "value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported { "value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/CurrentLevel/Desired { "value": 50}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Level/Attributes/CurrentLevel/Reported { "value": 100}
 ```
 
 Furthermore, in the example above, the PAN node is dimming its level from 100% to
@@ -158,7 +123,7 @@ For example, the *LockState* attribute of a door lock MUST be published as
 follows:
 
 ```mqtt
-  ucl/by-unid/zw-23485/ep0/Lock/Attributes/LockState/Desired { "value": "Locked"}
+  ucl/by-unid/<UNID>/ep<EndpointId>/Lock/Attributes/LockState/Desired { "value": "Locked"}
 ```
 
 If the individual values do not have a description string name, their value MUST
@@ -170,7 +135,9 @@ defined in the ZCL Cluster Library [ZCL2018](doc/references.md). Numbers MUST
 NOT be used in this case. For example, the ColorCapabilities attribute of the
 ColorControl cluster MUST be represented as follows:
 
-> ucl/by-unid/zw-23485/ep0/ColorControl/Attributes/ColorCapabilities/Reported
+```mqtt
+  ucl/by-unid/<UNID>/ep<EndpointId>/ColorControl/Attributes/ColorCapabilities/Reported
+```
 
 ```json
 {
@@ -196,10 +163,10 @@ that the *OnOff* attribute will be published, however, the
 *GlobalSceneControl* will be published only if supported by the PAN node.
 
 ```mqtt
-  ucl/by-unid/zw-23485/ep0/OnOff/Attributes/OnOff/Desired { "value": true}
-  ucl/by-unid/zw-23485/ep0/OnOff/Attributes/OnOff/Reported { "value": true}
-  ucl/by-unid/zw-23485/ep0/OnOff/Attributes/GlobalSceneControl/Desired { "value": true}
-  ucl/by-unid/zw-23485/ep0/OnOff/Attributes/GlobalSceneControl/Reported { "value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired { "value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported { "value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/GlobalSceneControl/Desired { "value": true}
+  ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/GlobalSceneControl/Reported { "value": true}
 ```
 
 #### Missing Mandatory Cluster Attributes
@@ -217,21 +184,21 @@ In this case, the value of the attribute MUST be set to a null JSON type. For
 instance, a thermostat without local temperature MAY be published as follows:
 
 ```mqtt
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/LocalTemperature/Desired { "value": null}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/LocalTemperature/Reported { "value": null}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/OccupiedCoolingSetpoint/Desired { "value": 2600}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/OccupiedCoolingSetpoint/Reported { "value": 2600}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/OccupiedHeatingSetpoint/Desired { "value": 2100}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/OccupiedHeatingSetpoint/Reported { "value": 2100}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/SystemMode/Desired { "value": "Auto"}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/SystemMode/Reported { "value": "Auto"}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ThermostatProgrammingOperationMode/Desired { "value": 0}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ThermostatProgrammingOperationMode/Reported { "value": 0}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ControlSequenceOfOperation/Desired { "value": 4}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ControlSequenceOfOperation/Reported { "value": 4}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/LocalTemperature/Desired { "value": null}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/LocalTemperature/Reported { "value": null}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/OccupiedCoolingSetpoint/Desired { "value": 2600}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/OccupiedCoolingSetpoint/Reported { "value": 2600}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/OccupiedHeatingSetpoint/Desired { "value": 2100}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/OccupiedHeatingSetpoint/Reported { "value": 2100}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/SystemMode/Desired { "value": "Auto"}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/SystemMode/Reported { "value": "Auto"}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ThermostatProgrammingOperationMode/Desired { "value": 0}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ThermostatProgrammingOperationMode/Reported { "value": 0}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ControlSequenceOfOperation/Desired { "value": 4}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ControlSequenceOfOperation/Reported { "value": 4}
 ```
 
-In any case, a Protocol Controller MUST publish the *LocalTemperature* attribute
+In any case, a Protocol Controller SHOULD publish the *LocalTemperature* attribute
 state when publishing a node as a Thermostat Cluster server because it is a
 mandatory attribute.
 
@@ -259,10 +226,10 @@ The ClusterRevision is a read-only attribute.
 For example, publishing the cluster revision of an OnOff node:
 
 ```mqtt
-ucl/by-unid/zw-23485/ep0/OnOff/Attributes/OnOff/Desired {"value": true}
-ucl/by-unid/zw-23485/ep0/OnOff/Attributes/OnOff/Reported {"value": true}
-ucl/by-unid/zw-23485/ep0/OnOff/Attributes/ClusterRevision/Desired {"value": 2}
-ucl/by-unid/zw-23485/ep0/OnOff/Attributes/ClusterRevision/Reported {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired {"value": true}
+ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported {"value": true}
+ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/ClusterRevision/Desired {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/ClusterRevision/Reported {"value": 2}
 ```
 
 #### Additional Attributes
@@ -287,7 +254,7 @@ is advertised to the IoT Services using a UCL-specific definition. Non-standard
 attributes MUST be represented using object JSON types. This specification
 will provide a JSON schema for all non-standard attributes.
 
-**Topic:** `ucl/by-unid/zw-23485/ep0/Scenes/Attributes/SceneTable/1/Desired`
+**Topic:** `ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/SceneTable/1/Desired`
 
 **Payload:**
 
@@ -313,19 +280,19 @@ will provide a JSON schema for all non-standard attributes.
 }
 ```
 
-#### Supported Commands
+#### Commands Supported by PAN Node
 
-IoT Services MUST be able to read the commands that are supported for a Cluster
-server to use them.
+IoT Services MUST be able to read the commands that are supported for a cluster
+server under a UNID/Endpoint to control them.
 
-The list of supported Commands for each PAN node MUST advertised by the Protocol
+The list of supported Commands for each PAN node MUST be advertised by the Protocol
 Controllers in the *SupportedCommands* topic under the Cluster level.
 
 The list of supported Commands MUST be advertised using a JSON array containing
 strings. For example, the list of supported commands for the OnOff cluster could
 look like this:
 
-**Topic:** `ucl/by-unid/zw-23485/ep0/OnOff/SupportedCommands`
+**Topic:** `ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/SupportedCommands`
 
 **Payload:**
 
@@ -340,7 +307,8 @@ It is OPTIONAL for a Protocol Controller to publish the availability of the
 for all clusters advertised by a Protocol Controller.
 
   Note: A ProtocolController MAY publish an empty array for the SupportedCommands
-  of a cluster. In this case, IoT Services can only use the WriteAttributes commands.
+  of a cluster. In this case, IoT Services can only use the WriteAttributes commands
+  if the cluster contains writable attributes.
 
   Note 2: IoT Services MUST NOT wait for a feedback after sending a ForceReadAttributes command.
   This command is used to *force* an update on the usual feedback channels - i.e.,
@@ -364,25 +332,13 @@ one readable attribute that is of a type not of an integer or floating point typ
 Protocol Controller SHOULD advertise the *ForceReadAttributes* Command for all
 endpoints with readable mandatory attributes, as supported in the ZCL cluster definition.
 
-#### ZCLversion
-
-IoT Services can identify the ZCL version of each PAN Node for any of its clusters
-by reading the ZCLversion attribute of the Basic Cluster.
-
-This helps to track the cluster version supported by the Protocol Controller
-and/or end node. In addition, this could be needed if a certain cluster version
-can't be mapped from another PHY.
-
-By default, if no version information is provided, an IoT service SHOULD assume
-version 3.
-
-### Command MQTT Topic
+#### Sending Supported Commands to PAN Node
 
 When a PAN node is included to the network, a Protocol Controller servicing
 the node MUST subscribe to the following topic filter to receive
 incoming Commands:
 
-> `ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Commands/+`
+> `ucl/by-unid/<UNID>/ep<EndpointId>/<ClusterName>/Commands/+`
 
 It is OPTIONAL for a Protocol Controller to subscribe to the command topic
 filter only if the PAN node supports no commands and all attributes are read-only
@@ -392,7 +348,7 @@ When the IoT Services (AWS IoT connectors, Web-based UIs, Rules Engines,
 Data Loggers, and so on.) want a PAN node to execute a given command, the Clients can
 publish a command payload using the respective command topic:
 
-**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Commands/&lt;CommandName&gt;`
+**Topic:** `ucl/by-unid/<UNID>/ep<EndpointId>/<ClusterName>/Commands/<CommandName>`
 
 **Payload:**
 
@@ -402,6 +358,61 @@ publish a command payload using the respective command topic:
   "FieldName2": "value"
 }
 ```
+
+#### Commands Generated by PAN Node
+
+IoT Services SHOULD be able to read the commands that are generated by a
+cluster under a UNID/Endpoint to listen to unsolicited events and responses.
+
+The list of generated commands for each PAN node SHOULD be advertised by the
+Protocol Controllers in the *SupportedGeneratedCommands* topic under the Cluster level.
+
+The list of generated commands SHOULD be advertised using a JSON array
+containing strings. For example, the list of generated commands for the OnOff
+client cluster could look like this:
+
+**Topic:** `ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/SupportedGeneratedCommands`
+
+**Payload:**
+
+```json
+{
+  "value": ["On","Off","Toggle"]
+}
+```
+
+Note: No publications to this topic is equivalent to the Protocol Controller
+publishing an empty array of strings to indicate no commands can be generated
+by this PAN node.
+
+#### Receiving Generated Commands from PAN Node
+
+When a PAN node is included to the network, an IoT Service monitoring
+the node SHOULD subscribe to the following topic filter to receive
+incoming commands from the PAN node:
+
+> `ucl/by-unid/<UNID>/ep<EndpointId>/<ClusterName>/GeneratedCommands/+`
+
+It is OPTIONAL for a Protocol Controller to publish to the command topic
+since not all PAN nodes can generate commands. IoT Services SHOULD NOT expect
+to see publications for all PAN nodes on this topic filter.
+
+When the IoT Services (AWS IoT connectors, Web-based UIs, Rules Engines,
+Data Loggers, and so on.) want to receive commands from a PAN node, the Clients can
+subscribe to the topic and parse the command payload:
+
+**Topic:** `ucl/by-unid/<UNID>/ep<EndpointId>/<ClusterName>/GeneratedCommands/<CommandName>`
+
+**Payload:**
+
+```json
+{
+  "FieldName1": "value",
+  "FieldName2": "value"
+}
+```
+
+#### Command Payloads
 
 If the command does not have any mandatory fields, an empty JSON object
 (i.e., {}) MUST be sent as a payload.
@@ -432,7 +443,9 @@ NOT be used in this case. For example, the UpdateFlags field of the
 ColorLoopSet command in the ColorControl cluster MUST be represented as
 follows:
 
-> ucl/by-unid/zw-23485/ep0/ColorControl/Commands/ColorLoopSet
+```mqtt
+  ucl/by-unid/<UNID>/ep<EndpointId>/ColorControl/Commands/ColorLoopSet
+```
 
 ```json
 {
@@ -458,7 +471,7 @@ An attribute state can be changed in three ways:
 For example, an IoT Service MAY issue the following payload to modify
 the desired values of writable attributes directly:
 
-**Topic:** `ucl/by_unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Commands/WriteAttributes`
+**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/Commands/WriteAttributes`
 
 **Payload:**
 
@@ -576,25 +589,25 @@ Each group is identified using a 16 bits unsigned integer value.
 Below is an example of a PAN node Group Cluster server:
 
 ```mqtt
-ucl/by-unid/zw-23485/ep0/Groups/Attributes/ClusterRevision/Desired {"value": 2}
-ucl/by-unid/zw-23485/ep0/Groups/Attributes/ClusterRevision/Reported {"value": 2}
-ucl/by-unid/zw-23485/ep0/Groups/Attributes/NameSupport/Desired {"value": {"Supported":true}}
-ucl/by-unid/zw-23485/ep0/Groups/Attributes/NameSupport/Reported {"value": {"Supported":true}}
-ucl/by-unid/zw-23485/ep0/Groups/Attributes/GroupList/Desired {"value": [1, 2] }
-ucl/by-unid/zw-23485/ep0/Groups/Attributes/GroupList/Reported {"value": [1] }
-ucl/by-unid/zw-23485/ep0/Groups/Attributes/1/Name/Desired {"value": "Kitchen nodes"}
-ucl/by-unid/zw-23485/ep0/Groups/Attributes/1/Name/Reported {"value": "Kitchen nodes"}
-ucl/by-unid/zw-23485/ep0/Groups/Attributes/2/Name/Desired {"value": "Light bulbs"}
-ucl/by-unid/zw-23485/ep0/Groups/SupportedCommands {"value": ["AddGroup", "ViewGroup", "GetGroupMembership", "RemoveGroup", "RemoveAllGroups", "AddGroupIfIdentifying"] }
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/Attributes/ClusterRevision/Desired {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/Attributes/ClusterRevision/Reported {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/Attributes/NameSupport/Desired {"value": {"Supported":true}}
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/Attributes/NameSupport/Reported {"value": {"Supported":true}}
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/Attributes/GroupList/Desired {"value": [1, 2] }
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/Attributes/GroupList/Reported {"value": [1] }
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/Attributes/1/Name/Desired {"value": "Kitchen nodes"}
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/Attributes/1/Name/Reported {"value": "Kitchen nodes"}
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/Attributes/2/Name/Desired {"value": "Light bulbs"}
+ucl/by-unid/<UNID>/ep<EndpointId>/Groups/SupportedCommands {"value": ["AddGroup", "ViewGroup", "GetGroupMembership", "RemoveGroup", "RemoveAllGroups", "AddGroupIfIdentifying"] }
 ```
 
 The only mandatory attribute in the group cluster is the NameSupport attribute.
 If a PAN node supports name for groups, it will advertise the assigned names
 for each of its groups under the following topics:
 
-**Topic:** `ucl/by_unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/&lt;GroupID&gt;/Name/Reported`
+**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/&lt;GroupID&gt;/Name/Reported`
 
-**Topic:** `ucl/by_unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/&lt;GroupID&gt;/Name/Desired`
+**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/&lt;GroupID&gt;/Name/Desired`
 
 The names assigned to each group will be a value containing a string as if
 the name was a regular string attribute.
@@ -621,7 +634,7 @@ the name was a regular string attribute.
 The list of groups that a node is part of will be advertised under the GroupList
 topic. Note that GroupID 0 is not a valid group and MUST NOT be used.
 
-**Topic:** `ucl/by_unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/GroupList/Desired`
+**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Groups/Attributes/GroupList/Desired`
 
 **JSON Schema:**
 
@@ -661,19 +674,19 @@ by its defined attributes. See [ZCL2018](doc/references.md) for the
 Below is an example of a PAN node Scene Cluster server:
 
 ```mqtt
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/ClusterRevision/Desired {"value": 2}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/ClusterRevision/Reported {"value": 2}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/SceneCount/Desired {"value": 5}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/SceneCount/Reported {"value": 5}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/CurrentScene/Desired {"value": 2}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/CurrentScene/Reported {"value": 2}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/CurrentGroup/Desired {"value": 1}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/CurrentGroup/Reported {"value": 1}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/SceneValid/Desired {"value": true}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/SceneValid/Reported {"value": true}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/NameSupport/Desired {"value": true}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/NameSupport/Reported {"value": true}
-ucl/by-unid/zw-23485/ep0/Scenes/SupportedCommands {"value" :["AddScene", "ViewScene", "RemoveScene", "RemoveAllScenes", "StoreScene", "RecallScene", "GetSceneMembership", "WriteAttributes"] }
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/ClusterRevision/Desired {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/ClusterRevision/Reported {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/SceneCount/Desired {"value": 5}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/SceneCount/Reported {"value": 5}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/CurrentScene/Desired {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/CurrentScene/Reported {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/CurrentGroup/Desired {"value": 1}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/CurrentGroup/Reported {"value": 1}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/SceneValid/Desired {"value": true}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/SceneValid/Reported {"value": true}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/NameSupport/Desired {"value": true}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/NameSupport/Reported {"value": true}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/SupportedCommands {"value" :["AddScene", "ViewScene", "RemoveScene", "RemoveAllScenes", "StoreScene", "RecallScene", "GetSceneMembership", "WriteAttributes"] }
 ```
 
 Note that in the example above, the *ViewScene* and *GetSceneMembership* commands
@@ -689,9 +702,9 @@ In this case, a Protocol Controller SHOULD remove these commands from the
 
 The Scene Table data is represented using this topic hierarchy:
 
-**Topic:** `ucl/by_unid/&lt;UNID&gt;/ep&lt;id&gt;/Scenes/Attributes/SceneTable/&lt;SceneNumber&gt;/Reported`
+**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Scenes/Attributes/SceneTable/&lt;SceneNumber&gt;/Reported`
 
-**Topic:** `ucl/by_unid/&lt;UNID&gt;/ep&lt;id&gt;/Scenes/Attributes/SceneTable/&lt;SceneNumber&gt;/Desired`
+**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep&lt;id&gt;/Scenes/Attributes/SceneTable/&lt;SceneNumber&gt;/Desired`
 
 The payload of the JSON data published for a scene entry are defined in
 in the following JSON schema:
@@ -754,36 +767,48 @@ An example of a scene object is shown below.
 }
 ```
 
-#### Scenes Actuators
+#### (Z-Wave) Scenes Actuators
 
 Scenes actuators do not support any of the ZCL required "SupportedCommands",
 and instead use the Scene Cluster attributes to indicate which scene they
-wish to activate. An MQTT client can therefore decide to activate scenes in a
+wish to activate. Such devices are both Scene Cluster servers and clients.
+
+An MQTT client can therefore decide to activate scenes in a
 number of devices/endpoints based on the spontaneous changes made by these
 scenes actuator devices/endpoints.
 
 For example, a wall switch with four buttons and three possible gestures for each button
 may be presented as a scene device, supporting twelve read-only scenes that would
 transition automatically (i.e., *CurrentScene* attribute will be updated in a
-read-only fashion). The Scene table will stay empty and will not be writable
-by MQTT Clients.
+read-only fashion). At each activation, the wall switch will aditionally generate
+a Recall Scene command that will be forwarded to the IoT Services.
+The Scene table will stay empty and will not be writable by IoT Services.
+
+In this case, the wall switch Scenes numbers will not "match" the configured
+scenes in other devices. IoT Services SHOULD interpret the Scene ID as a unique
+combination with the UNID/ep to decide what to do.
+
+IoT Services SHOULD pay attention to the security level (see the "Security" in
+the State topic) of a UNID before modifying the state (or sending commands) of
+other PAN nodes based on Generated Commands from a PAN node.
 
 Note that the GroupID can be set to 0 if it is not used.
 
 ```mqtt
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/ClusterRevision/Desired {"value": 2}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/ClusterRevision/Reported {"value": 2}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/SceneCount/Desired {"value": 12}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/SceneCount/Reported {"value": 12}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/CurrentScene/Desired {"value": 2}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/CurrentScene/Reported {"value": 2}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/CurrentGroup/Desired {"value": 0}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/CurrentGroup/Reported {"value": 0}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/SceneValid/Desired {"value": true}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/SceneValid/Reported {"value": true}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/NameSupport/Desired {"value": false}
-ucl/by-unid/zw-23485/ep0/Scenes/Attributes/NameSupport/Reported {"value": false}
-ucl/by-unid/zw-23485/ep0/Scenes/SupportedCommands {"value":[ ] }
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/ClusterRevision/Desired {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/ClusterRevision/Reported {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/SceneCount/Desired {"value": 12}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/SceneCount/Reported {"value": 12}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/CurrentScene/Desired {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/CurrentScene/Reported {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/CurrentGroup/Desired {"value": 0}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/CurrentGroup/Reported {"value": 0}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/SceneValid/Desired {"value": true}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/SceneValid/Reported {"value": true}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/NameSupport/Desired {"value": false}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/Attributes/NameSupport/Reported {"value": false}
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/SupportedCommands {"value":[ ] }
+ucl/by-unid/<UNID>/ep<EndpointId>/Scenes/SupportedGeneratedCommands {"value":["RecallScene"] }
 ```
 
 #### Scenes Supporting Nodes
@@ -804,7 +829,7 @@ clusters marked as *sceneRequired="true"* in the
 
 For example, a properly formed *AddScene* command could be as follows:
 
-**Topic:** `ucl/by_unid/&lt;UNID&gt;/ep<id>/Cluster/Scenes/AddScene`
+**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep<id>/Cluster/Scenes/AddScene`
 
 **Payload:**
 
@@ -953,20 +978,20 @@ Read only attributes:
 Typically, the state topic for the Thermostat cluster will look like this:
 
 ```mqtt
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ClusterRevision/Desired {"value": 2}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ClusterRevision/Reported {"value": 2}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/LocalTemperature/Desired {"value": 2300}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/LocalTemperature/Reported {"value": 2300}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/OccupiedCoolingSetpoint/Desired {"value": 2600}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/OccupiedCoolingSetpoint/Reported {"value": 2600}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/OccupiedHeatingSetpoint/Desired {"value": 2100}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/OccupiedHeatingSetpoint/Reported {"value": 2100}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/SystemMode/Desired {"value": "Auto"}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/SystemMode/Reported {"value": "Auto"}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ThermostatProgrammingOperationMode/Desired {"value": 0}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ThermostatProgrammingOperationMode/Reported {"value": 0}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ControlSequenceOfOperation/Desired {"value": 4}
-ucl/by-unid/zw-23485/ep0/Thermostat/Attributes/ControlSequenceOfOperation/Reported {"value": 4}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ClusterRevision/Desired {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ClusterRevision/Reported {"value": 2}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/LocalTemperature/Desired {"value": 2300}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/LocalTemperature/Reported {"value": 2300}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/OccupiedCoolingSetpoint/Desired {"value": 2600}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/OccupiedCoolingSetpoint/Reported {"value": 2600}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/OccupiedHeatingSetpoint/Desired {"value": 2100}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/OccupiedHeatingSetpoint/Reported {"value": 2100}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/SystemMode/Desired {"value": "Auto"}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/SystemMode/Reported {"value": "Auto"}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ThermostatProgrammingOperationMode/Desired {"value": 0}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ThermostatProgrammingOperationMode/Reported {"value": 0}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ControlSequenceOfOperation/Desired {"value": 4}
+ucl/by-unid/<UNID>/ep<EndpointId>/Thermostat/Attributes/ControlSequenceOfOperation/Reported {"value": 4}
 ```
 
 #### Mandatory Commands
@@ -980,7 +1005,7 @@ setpoints.
 This command is used to change the Mode and adjust the setpoint(s).
 For example, to change to heat mode and increase by 1 degree:
 
-**Topic:** `ucl/by_unid/&lt;UNID&gt;/ep<id>/Thermostat/Commands/SetpointRaiseOrLower`
+**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep<id>/Thermostat/Commands/SetpointRaiseOrLower`
 
 **Payload:**
 
@@ -1007,7 +1032,7 @@ If the Mode field is set to Cool or Auto, the OccupiedCoolingSetpoint
 
 This command can be used to directly modify the writable attributes.
 
-**Topic:** `ucl/by_unid/&lt;UNID&gt;/ep<id>/Thermostat/Commands/WriteAttributes`
+**Topic:** `ucl/by-unid/&lt;UNID&gt;/ep<id>/Thermostat/Commands/WriteAttributes`
 
 **Payload:**
 
@@ -1052,20 +1077,9 @@ Unify framework.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title On Off node control example using the UCL / Unify Framework
 
 legend top
@@ -1092,7 +1106,7 @@ protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0
 protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/OnOff/Attributes/OnOff/Reported \n<font color=#00003C><b>{ "value": false }</b>
 & mqtt_broker -> iot_service
 
-protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/OnOff/SupportedCommands \n<font color=#00003C><b>{"value":[ "On", "Off", "Toggle", "WriteAttributes" ]}</b>
+protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/OnOff/SupportedCommands \n<font color=#00003C><b>{"value":[ "On", "Off", "Toggle"]}</b>
 & mqtt_broker -> iot_service
 
 iot_service -> mqtt_broker
@@ -1120,20 +1134,9 @@ Clusters server.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Dimmer node example using the UCL / Unify Framework
 
 legend top
@@ -1199,7 +1202,7 @@ protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0
 
 \enduml
 
-### Basic DoorLock Operation Using Unify Framework
+### DoorLock Operation Using Unify Framework
 
 The following diagram shows an example of a Door Lock controlled using the
 Unify Framework.
@@ -1210,20 +1213,9 @@ Unify Framework.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Door Lock node control example using the UCL / Unify Framework
 
 legend top
@@ -1240,7 +1232,9 @@ participant "PAN Node" as pan_node
 
 iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/Attributes/#</font>
 iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/SupportedCommands</font>
+iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/SupportedGeneratedCommands</font>
 protocol_controller -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/Commands/+</font>
+iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/GeneratedCommands/+</font>
 
 rnote over iot_service, pan_node: Node inclusion and capabilities discovery
 
@@ -1264,18 +1258,73 @@ protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0
 
 protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/DoorLock/SupportedCommands \n<font color=#00003C><b>{"value":[ "LockDoor", "UnlockDoor", "WriteAttributes" ]}</b>
 & mqtt_broker -> iot_service
+protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/DoorLock/SupportedGeneratedCommands \n<font color=#00003C><b>{"value":[ "LockDoorResponse", "UnlockDoorResponse"]}</b>
+& mqtt_broker -> iot_service
 
 iot_service -> mqtt_broker
 & mqtt_broker -> protocol_controller : <font color=#6C2A0D>ucl/by-unid/zw-1234/ep0/DoorLock/Commands/LockDoor \n<font color=#6C2A0D><b>{ "PINOrRFIDCode": "1234" }</b>
-
 protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/DoorLock/Attributes/LockState/Desired \n<font color=#00003C><b>{ "value": "Locked" }</b>
 & mqtt_broker -> iot_service
 
 protocol_controller -> pan_node : PHY command
 pan_node -> protocol_controller : PHY command
 
+protocol_controller -> mqtt_broker : <font color=#6C2A0D>ucl/by-unid/zw-1234/ep0/DoorLock/GeneratedCommands/LockDoorResponse \n<font color=#6C2A0D><b>{ "Status": "SUCCESS" }</b>
+& mqtt_broker -> iot_service
+
 protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/DoorLock/Attributes/LockState/Reported \n<font color=#00003C><b>{ "value": "Locked" }</b>
 & mqtt_broker -> iot_service
+
+\enduml
+
+
+### DoorLockController Operation Using Unify Framework
+
+The following diagram shows an example of a Door Lock Controller being used in the
+Unify Framework.
+
+\startuml
+
+' Allows to do simultaneous transmissions
+!pragma teoz true
+
+' Style for the diagram
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
+
+title Door Lock node control example using the UCL / Unify Framework
+
+legend top
+<font color=#0039FB>MQTT Subscription</font>
+<font color=#00003C>Retained MQTT Publication</font>
+<font color=#6C2A0D>Unretained MQTT Publication</font>
+endlegend
+
+' List of participants
+participant "IoT Service" as iot_service
+participant "MQTT Broker" as mqtt_broker
+participant "Protocol Controller" as protocol_controller
+participant "PAN Node" as pan_node
+
+iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/Attributes/#</font>
+iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/GeneratedCommands</font>
+iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/SupportedCommands</font>
+protocol_controller -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/Commands/+</font>
+iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/DoorLock/GeneratedCommands/+</font>
+
+rnote over iot_service, pan_node: Node inclusion and capabilities discovery
+
+protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/DoorLock/SupportedCommands \n<font color=#00003C><b>{"value":[ "LockDoorResponse", "UnlockDoorResponse"]}</b>
+& mqtt_broker -> iot_service
+protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/DoorLock/SupportedGeneratedCommands \n<font color=#00003C><b>{"value":[ "LockDoor", "UnlockDoor"]}</b>
+& mqtt_broker -> iot_service
+...
+rnote over iot_service, pan_node: Lock Door command initiated from a stimulus (button pressed)
+
+pan_node -> protocol_controller : LockDoor command sent over PHY
+protocol_controller -> mqtt_broker : <font color=#6C2A0D>ucl/by-unid/zw-1234/ep0/DoorLock/GeneratedCommands/LockDoor \n<font color=#6C2A0D><b>{ "PINOrRFIDCode": "4567" }</b>
+& mqtt_broker -> iot_service
+rnote over iot_service, pan_node: IoT Service processes LockDoor command (assuming the IoT Service evaluates the security level of the PAN node as acceptable)
 
 \enduml
 
@@ -1290,20 +1339,9 @@ represented as an OccupancySensing Cluster server with the Unify framework.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Occupancy Sensing example using the UCL / Unify Framework
 
 legend top
@@ -1376,20 +1414,9 @@ and the `LocationDescription` is a writable attribute.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Writing to attributes with the WriteAttributes Command.
 
 legend top
@@ -1435,20 +1462,9 @@ using the Unify framework.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Scene and On/Off node control example using the UCL / Unify Framework
 
 legend top
@@ -1591,22 +1607,9 @@ supporting any of the actuator functionalities.
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Scene only PAN node example using the UCL / Unify Framework
 
 legend top
@@ -1624,6 +1627,8 @@ Actor "User" as end_user
 
 iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/Scenes/Attributes/#</font>
 iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/Scenes/SupportedCommands</font>
+iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/Scenes/SupportedGeneratedCommands</font>
+iot_service -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/Scenes/GeneratedCommands/+</font>
 protocol_controller -> mqtt_broker: <font color=#0039FB>ucl/by-unid/+/+/Scenes/Commands/+</font>
 
 rnote over iot_service, pan_node: Node inclusion and capabilities discovery
@@ -1640,26 +1645,15 @@ protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0
 protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentScene/Reported \n<font color=#00003C><b>{ "value": 0 }</b>
 & mqtt_broker -> iot_service
 
-protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentGroup/Desired \n<font color=#00003C><b>{ "value": 0 }</b>
-& mqtt_broker -> iot_service
-
-protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentGroup/Reported \n<font color=#00003C><b>{ "value": 0 }</b>
-& mqtt_broker -> iot_service
-
-protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/Attributes/SceneValid/Desired \n<font color=#00003C><b>{ "value": false }</b>
-& mqtt_broker -> iot_service
-
-protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/Attributes/SceneValid/Reported \n<font color=#00003C><b>{ "value": false }</b>
-& mqtt_broker -> iot_service
-
-protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/Attributes/NameSupport/Desired \n<font color=#00003C><b>{ "value": false }</b>
-& mqtt_broker -> iot_service
-
-protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/Attributes/NameSupport/Reported \n<font color=#00003C><b>{ "value": false }</b>
-& mqtt_broker -> iot_service
+rnote over iot_service, protocol_controller: Skipping additional Attribute Publications
 
 protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/SupportedCommands \n<font color=#00003C><b>{"value":[ ]}
 & mqtt_broker -> iot_service
+
+protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/SupportedGeneratedCommands \n<font color=#00003C><b>{"value":[ "RecallScene"]}
+& mqtt_broker -> iot_service
+
+== ==
 
 end_user -> pan_node : Activate scene 5 button
 pan_node -> protocol_controller : PHY command
@@ -1668,6 +1662,17 @@ protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0
 & mqtt_broker -> iot_service
 
 protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentScene/Reported \n<font color=#00003C><b>{ "value": 5 }</b>
+& mqtt_broker -> iot_service
+
+protocol_controller -> mqtt_broker : <font color=#6C2A0D>ucl/by-unid/zw-1234/ep0/Scenes/GeneratedCommands/RecallScene \n<font color=#6C2A0D><b>{ "GroupID": 0, "SceneID": 5, "TransitionTime":0 }</b>
+& mqtt_broker -> iot_service
+
+== ==
+
+end_user -> pan_node : Activate scene 5 button again
+pan_node -> protocol_controller : PHY command
+
+protocol_controller -> mqtt_broker : <font color=#6C2A0D>ucl/by-unid/zw-1234/ep0/Scenes/GeneratedCommands/RecallScene \n<font color=#6C2A0D><b>{ "GroupID": 0, "SceneID": 5, "TransitionTime":0 }</b>
 & mqtt_broker -> iot_service
 
 == ==
@@ -1681,6 +1686,8 @@ protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0
 protocol_controller -> mqtt_broker : <font color=#00003C>ucl/by-unid/zw-1234/ep0/Scenes/Attributes/CurrentScene/Reported \n<font color=#00003C><b>{ "value": 2 }</b>
 & mqtt_broker -> iot_service
 
+protocol_controller -> mqtt_broker : <font color=#6C2A0D>ucl/by-unid/zw-1234/ep0/Scenes/GeneratedCommands/RecallScene \n<font color=#6C2A0D><b>{ "GroupID": 0, "SceneID": 2, "TransitionTime":0 }</b>
+& mqtt_broker -> iot_service
 
 \enduml
 
@@ -1696,22 +1703,9 @@ node
 !pragma teoz true
 
 ' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
+!theme plain
+skinparam LegendBackgroundColor #F0F0F0
 
-hide footbox
 title Group membership manipulation with the Group Cluster using the UCL / Unify Framework
 
 legend top

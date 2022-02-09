@@ -223,7 +223,7 @@ size_t zigpc_attrmgmt_get_records_to_send_in_message(size_t start_index,
 
 /**
  * @brief zigpc_attrmgmt_configure_reports_for_endpoint - API for sending a ZCL command
- * to the zigpc_gateway / z3gateway to configure reports for a single
+ * to the zigpc_gateway to configure reports for a single
  * endpoint. This is an internal API, expected to be abstracted away.
  *
  * @param eui64     - the eui64, whose endpoints should be configured for
@@ -238,7 +238,7 @@ sl_status_t zigpc_attrmgmt_configure_reports_for_endpoint(
 
 /**
  * @brief node_send_report_config_cmd - API for sending a ZCL command
- * to the zigpc_gateway / z3gateway to configure reports for a node. This
+ * to the zigpc_gateway to configure reports for a node. This
  * is an internal API, expected to be abstracted away.
  *
  * @param node - the node, whose endpoints should be configured for reports
@@ -373,7 +373,7 @@ sl_status_t attr_mgmt_gateway_init_observer(void);
  * another error if not.
  */
 sl_status_t
-  zigpc_attrmgmt_publish_reported(const zigbee_eui64_t eui64,
+  zigpc_attrmgmt_publish_reported(const zigbee_eui64_uint_t eui64,
                                   const zigbee_endpoint_id_t endpoint_id,
                                   const zcl_cluster_id_t cluster_id,
                                   const zcl_attribute_id_t attr_id,

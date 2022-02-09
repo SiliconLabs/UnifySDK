@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: Transport API</title>
+<title>Z-Wave Protocol Controller Refrence: Transport API</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('group__ZWAPI__TRANSPORT.html',''); ini
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Transport API<div class="ingroups"><a class="el" href="group__components.html">ZPC components</a> &raquo; <a class="el" href="group__ZWAPI.html">Z-Wave API</a></div></div>  </div>
+<div class="title">Transport API<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__api.html">Z-Wave API</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -132,9 +132,12 @@ Macros</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:gae3301f35fd3b25ac67d4730e29a481c0"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct__S__ROUTE__LINK__.html">_S_ROUTE_LINK_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gae3301f35fd3b25ac67d4730e29a481c0">S_ROUTE_LINK</a></td></tr>
 <tr class="separator:gae3301f35fd3b25ac67d4730e29a481c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9cde00c79cb9e9ca162e94a920a9c7dd"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__ZWAPI__TRANSPORT.html#ga4e5f107bf559b3761ce591b4fc991902">_E_ROUTING_SCHEME_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga9cde00c79cb9e9ca162e94a920a9c7dd">E_ROUTING_SCHEME</a></td></tr>
-<tr class="memdesc:ga9cde00c79cb9e9ca162e94a920a9c7dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transport routing scheme state define definitions.  <a href="group__ZWAPI__TRANSPORT.html#ga9cde00c79cb9e9ca162e94a920a9c7dd">More...</a><br /></td></tr>
-<tr class="separator:ga9cde00c79cb9e9ca162e94a920a9c7dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga54bca03cc4f1046186ffea9a171977a3"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__ZWAPI__TRANSPORT.html#ga4e5f107bf559b3761ce591b4fc991902">_E_ROUTING_SCHEME_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga54bca03cc4f1046186ffea9a171977a3">e_routing_scheme_t</a></td></tr>
+<tr class="memdesc:ga54bca03cc4f1046186ffea9a171977a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transport routing scheme state define definitions.  <a href="group__ZWAPI__TRANSPORT.html#ga54bca03cc4f1046186ffea9a171977a3">More...</a><br /></td></tr>
+<tr class="separator:ga54bca03cc4f1046186ffea9a171977a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9dcd8ba3175c6a535ab72ca1f654c741"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="group__ZWAPI__TRANSPORT.html#ga5dc1ccd95f0cdf3b8c5123252b653bd9">last_route_speed</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga9dcd8ba3175c6a535ab72ca1f654c741">last_route_speed_t</a></td></tr>
+<tr class="memdesc:ga9dcd8ba3175c6a535ab72ca1f654c741"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of possible link speeds / protocols.  <a href="group__ZWAPI__TRANSPORT.html#ga9dcd8ba3175c6a535ab72ca1f654c741">More...</a><br /></td></tr>
+<tr class="separator:ga9dcd8ba3175c6a535ab72ca1f654c741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga600d8ed870197cf883a88ac6066634ef"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structzwapi__tx__report.html">zwapi_tx_report</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a></td></tr>
 <tr class="memdesc:ga600d8ed870197cf883a88ac6066634ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detailed report and data about Z-Wave transmissions.  <a href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">More...</a><br /></td></tr>
 <tr class="separator:ga600d8ed870197cf883a88ac6066634ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,28 +158,39 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ga4e5f107bf559b3761ce591b4fc991902"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transport routing scheme state define definitions.  <a href="group__ZWAPI__TRANSPORT.html#ga4e5f107bf559b3761ce591b4fc991902">More...</a><br /></td></tr>
 <tr class="separator:ga4e5f107bf559b3761ce591b4fc991902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5dc1ccd95f0cdf3b8c5123252b653bd9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga5dc1ccd95f0cdf3b8c5123252b653bd9">last_route_speed</a> { <br />
+&#160;&#160;<a class="el" href="group__ZWAPI__TRANSPORT.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9aa53f9634cf21bd6983e8c3baea28489d">UNKNOWN_SPEED</a> = 0, 
+<a class="el" href="group__ZWAPI__TRANSPORT.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9ad845423f894b04b4b42cb82908b26f1f">ZWAVE_9_6_KBITS_S</a> = 1, 
+<a class="el" href="group__ZWAPI__TRANSPORT.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9a4569edf20de10db7880227471fa632d1">ZWAVE_40_KBITS_S</a> = 2, 
+<a class="el" href="group__ZWAPI__TRANSPORT.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9a0aa0acb935d03e586cdc19d4bc182b6e">ZWAVE_100_KBITS_S</a> = 3, 
+<br />
+&#160;&#160;<a class="el" href="group__ZWAPI__TRANSPORT.html#gga5dc1ccd95f0cdf3b8c5123252b653bd9af447d982faff74dba9b9f6f087e72d23">ZWAVE_LONG_RANGE_100_KBITS_S</a> = 4
+<br />
+ }</td></tr>
+<tr class="memdesc:ga5dc1ccd95f0cdf3b8c5123252b653bd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of possible link speeds / protocols.  <a href="group__ZWAPI__TRANSPORT.html#ga5dc1ccd95f0cdf3b8c5123252b653bd9">More...</a><br /></td></tr>
+<tr class="separator:ga5dc1ccd95f0cdf3b8c5123252b653bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga95d031567ad7f9296403d11ce2b9a148"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga95d031567ad7f9296403d11ce2b9a148">zwapi_lock_route</a> (bool lock)</td></tr>
+<tr class="memitem:ga95d031567ad7f9296403d11ce2b9a148"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga95d031567ad7f9296403d11ce2b9a148">zwapi_lock_route</a> (bool lock)</td></tr>
 <tr class="memdesc:ga95d031567ad7f9296403d11ce2b9a148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lock and unlock a response route for a specific node.  <a href="group__ZWAPI__TRANSPORT.html#ga95d031567ad7f9296403d11ce2b9a148">More...</a><br /></td></tr>
 <tr class="separator:ga95d031567ad7f9296403d11ce2b9a148"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga49e55cd554c976315f80fa0d605debf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga49e55cd554c976315f80fa0d605debf9">zwapi_send_data_bridge</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, <a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, uint8_t data_length, uint8_t tx_options, void(*callback_function)(uint8_t, <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *))</td></tr>
+<tr class="memitem:ga49e55cd554c976315f80fa0d605debf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga49e55cd554c976315f80fa0d605debf9">zwapi_send_data_bridge</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, uint8_t data_length, uint8_t tx_options, void(*callback_function)(uint8_t, <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *))</td></tr>
 <tr class="memdesc:ga49e55cd554c976315f80fa0d605debf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transmit data buffer to a single ZW-node or all ZW-nodes (broadcast) in bridge mode.  <a href="group__ZWAPI__TRANSPORT.html#ga49e55cd554c976315f80fa0d605debf9">More...</a><br /></td></tr>
 <tr class="separator:ga49e55cd554c976315f80fa0d605debf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga550a9c5891598a986c28487f36d6e24c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga550a9c5891598a986c28487f36d6e24c">zwapi_send_data</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, uint8_t data_length, uint8_t tx_options, void(*callback_function)(uint8_t, <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *))</td></tr>
+<tr class="memitem:ga550a9c5891598a986c28487f36d6e24c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga550a9c5891598a986c28487f36d6e24c">zwapi_send_data</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination_node_id, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, uint8_t data_length, uint8_t tx_options, void(*callback_function)(uint8_t, <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *))</td></tr>
 <tr class="memdesc:ga550a9c5891598a986c28487f36d6e24c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to a Z-Wave node or to the broadcast destination.  <a href="group__ZWAPI__TRANSPORT.html#ga550a9c5891598a986c28487f36d6e24c">More...</a><br /></td></tr>
 <tr class="separator:ga550a9c5891598a986c28487f36d6e24c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaba4d318f684708cdee3b6cae1a1ce1ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gaba4d318f684708cdee3b6cae1a1ce1ba">zwapi_abort_send_data</a> (void)</td></tr>
+<tr class="memitem:gaba4d318f684708cdee3b6cae1a1ce1ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gaba4d318f684708cdee3b6cae1a1ce1ba">zwapi_abort_send_data</a> (void)</td></tr>
 <tr class="memdesc:gaba4d318f684708cdee3b6cae1a1ce1ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort the ongoing transmit started with <a class="el" href="group__ZWAPI__TRANSPORT.html#ga550a9c5891598a986c28487f36d6e24c" title="Send data to a Z-Wave node or to the broadcast destination.">zwapi_send_data()</a> or <a class="el" href="group__ZWAPI__TRANSPORT.html#ga49e55cd554c976315f80fa0d605debf9" title="Transmit data buffer to a single ZW-node or all ZW-nodes (broadcast) in bridge mode.">zwapi_send_data_bridge()</a>  <a href="group__ZWAPI__TRANSPORT.html#gaba4d318f684708cdee3b6cae1a1ce1ba">More...</a><br /></td></tr>
 <tr class="separator:gaba4d318f684708cdee3b6cae1a1ce1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga117c122b8c680198f198acdf737adf15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga117c122b8c680198f198acdf737adf15">zwapi_send_data_multi</a> (<a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> destination_node_mask, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, uint8_t data_length, uint8_t tx_options, void(*callback_function)(uint8_t tx_status))</td></tr>
+<tr class="memitem:ga117c122b8c680198f198acdf737adf15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga117c122b8c680198f198acdf737adf15">zwapi_send_data_multi</a> (<a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> destination_node_mask, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, uint8_t data_length, uint8_t tx_options, void(*callback_function)(uint8_t tx_status))</td></tr>
 <tr class="memdesc:ga117c122b8c680198f198acdf737adf15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to a list of Z-Wave Nodes (multicast frame).  <a href="group__ZWAPI__TRANSPORT.html#ga117c122b8c680198f198acdf737adf15">More...</a><br /></td></tr>
 <tr class="separator:ga117c122b8c680198f198acdf737adf15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga98a99d5a85b10bc6bd51e68233142b52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga98a99d5a85b10bc6bd51e68233142b52">zwapi_send_data_multi_bridge</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, <a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> destination_node_mask, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, uint8_t data_length, uint8_t tx_options, void(*callback_function)(uint8_t tx_status))</td></tr>
+<tr class="memitem:ga98a99d5a85b10bc6bd51e68233142b52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga98a99d5a85b10bc6bd51e68233142b52">zwapi_send_data_multi_bridge</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> source_node_id, <a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> destination_node_mask, const uint8_t *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>, uint8_t data_length, uint8_t tx_options, void(*callback_function)(uint8_t tx_status))</td></tr>
 <tr class="memdesc:ga98a99d5a85b10bc6bd51e68233142b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to a list of Z-Wave Nodes (multicast frame) in bridge mode.  <a href="group__ZWAPI__TRANSPORT.html#ga98a99d5a85b10bc6bd51e68233142b52">More...</a><br /></td></tr>
 <tr class="separator:ga98a99d5a85b10bc6bd51e68233142b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2475e2eb87efe6379c0e58840465cda4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga2475e2eb87efe6379c0e58840465cda4">zwapi_send_nop</a> (<a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination, uint8_t tx_options, void(*callback_function)(uint8_t, <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *))</td></tr>
+<tr class="memitem:ga2475e2eb87efe6379c0e58840465cda4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga2475e2eb87efe6379c0e58840465cda4">zwapi_send_nop</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> destination, uint8_t tx_options, void(*callback_function)(uint8_t, <a class="el" href="group__ZWAPI__TRANSPORT.html#ga600d8ed870197cf883a88ac6066634ef">zwapi_tx_report_t</a> *))</td></tr>
 <tr class="memdesc:ga2475e2eb87efe6379c0e58840465cda4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a NOP to a NodeID destination.  <a href="group__ZWAPI__TRANSPORT.html#ga2475e2eb87efe6379c0e58840465cda4">More...</a><br /></td></tr>
 <tr class="separator:ga2475e2eb87efe6379c0e58840465cda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -274,8 +288,6 @@ zwapi_tx_report_t Last Used Route array index definitions</h2></td></tr>
 <tr class="separator:gadfc36ad3a95d22582710713a123b6d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae3381744bfc0f507162e6e69e42ca745"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#gae3381744bfc0f507162e6e69e42ca745">LAST_USED_ROUTE_REPEATER_3_INDEX</a>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:gae3381744bfc0f507162e6e69e42ca745"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga718a0b45cf52f20d6a98c394e0ee2c86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__TRANSPORT.html#ga718a0b45cf52f20d6a98c394e0ee2c86">LAST_USED_ROUTE_CONF_INDEX</a>&#160;&#160;&#160;4</td></tr>
-<tr class="separator:ga718a0b45cf52f20d6a98c394e0ee2c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
 RSSI feedback constants</h2></td></tr>
@@ -297,20 +309,6 @@ RSSI feedback constants</h2></td></tr>
 <p>Functions used to send data to Z-Wave nodes. </p>
 <p>Functions in this module are used to transmit commands to Z-Wave nodes using single-cast and multi-cast. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ga718a0b45cf52f20d6a98c394e0ee2c86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga718a0b45cf52f20d6a98c394e0ee2c86">&#9670;&nbsp;</a></span>LAST_USED_ROUTE_CONF_INDEX</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define LAST_USED_ROUTE_CONF_INDEX&#160;&#160;&#160;4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="gacf4e8c982f34bf1d1b8cbf09b013abb9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gacf4e8c982f34bf1d1b8cbf09b013abb9">&#9670;&nbsp;</a></span>LAST_USED_ROUTE_CONF_SIZE</h2>
 
@@ -868,19 +866,35 @@ RSSI feedback constants</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="ga9cde00c79cb9e9ca162e94a920a9c7dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9cde00c79cb9e9ca162e94a920a9c7dd">&#9670;&nbsp;</a></span>E_ROUTING_SCHEME</h2>
+<a id="ga54bca03cc4f1046186ffea9a171977a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga54bca03cc4f1046186ffea9a171977a3">&#9670;&nbsp;</a></span>e_routing_scheme_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef enum <a class="el" href="group__ZWAPI__TRANSPORT.html#ga4e5f107bf559b3761ce591b4fc991902">_E_ROUTING_SCHEME_</a> <a class="el" href="group__ZWAPI__TRANSPORT.html#ga9cde00c79cb9e9ca162e94a920a9c7dd">E_ROUTING_SCHEME</a></td>
+          <td class="memname">typedef enum <a class="el" href="group__ZWAPI__TRANSPORT.html#ga4e5f107bf559b3761ce591b4fc991902">_E_ROUTING_SCHEME_</a> <a class="el" href="group__ZWAPI__TRANSPORT.html#ga54bca03cc4f1046186ffea9a171977a3">e_routing_scheme_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Transport routing scheme state define definitions. </p>
+
+</div>
+</div>
+<a id="ga9dcd8ba3175c6a535ab72ca1f654c741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9dcd8ba3175c6a535ab72ca1f654c741">&#9670;&nbsp;</a></span>last_route_speed_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="group__ZWAPI__TRANSPORT.html#ga5dc1ccd95f0cdf3b8c5123252b653bd9">last_route_speed</a> <a class="el" href="group__ZWAPI__TRANSPORT.html#ga9dcd8ba3175c6a535ab72ca1f654c741">last_route_speed_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>List of possible link speeds / protocols. </p>
 
 </div>
 </div>
@@ -948,6 +962,33 @@ RSSI feedback constants</h2></td></tr>
 
 </div>
 </div>
+<a id="ga5dc1ccd95f0cdf3b8c5123252b653bd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5dc1ccd95f0cdf3b8c5123252b653bd9">&#9670;&nbsp;</a></span>last_route_speed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__ZWAPI__TRANSPORT.html#ga5dc1ccd95f0cdf3b8c5123252b653bd9">last_route_speed</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>List of possible link speeds / protocols. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga5dc1ccd95f0cdf3b8c5123252b653bd9aa53f9634cf21bd6983e8c3baea28489d"></a>UNKNOWN_SPEED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga5dc1ccd95f0cdf3b8c5123252b653bd9ad845423f894b04b4b42cb82908b26f1f"></a>ZWAVE_9_6_KBITS_S&#160;</td><td class="fielddoc"><p>Z-Wave 9.6 kbits/s. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga5dc1ccd95f0cdf3b8c5123252b653bd9a4569edf20de10db7880227471fa632d1"></a>ZWAVE_40_KBITS_S&#160;</td><td class="fielddoc"><p>Z-Wave 40 kbits/s. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga5dc1ccd95f0cdf3b8c5123252b653bd9a0aa0acb935d03e586cdc19d4bc182b6e"></a>ZWAVE_100_KBITS_S&#160;</td><td class="fielddoc"><p>Z-Wave 100 kbits/s. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga5dc1ccd95f0cdf3b8c5123252b653bd9af447d982faff74dba9b9f6f087e72d23"></a>ZWAVE_LONG_RANGE_100_KBITS_S&#160;</td><td class="fielddoc"><p>Z-Wave Long Range 100 kbits/s. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="gaba4d318f684708cdee3b6cae1a1ce1ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaba4d318f684708cdee3b6cae1a1ce1ba">&#9670;&nbsp;</a></span>zwapi_abort_send_data()</h2>
@@ -956,7 +997,7 @@ RSSI feedback constants</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_abort_send_data </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_abort_send_data </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -968,7 +1009,7 @@ RSSI feedback constants</h2></td></tr>
 <p>Abort the ongoing transmit started with <a class="el" href="group__ZWAPI__TRANSPORT.html#ga550a9c5891598a986c28487f36d6e24c" title="Send data to a Z-Wave node or to the broadcast destination.">zwapi_send_data()</a> or <a class="el" href="group__ZWAPI__TRANSPORT.html#ga49e55cd554c976315f80fa0d605debf9" title="Transmit data buffer to a single ZW-node or all ZW-nodes (broadcast) in bridge mode.">zwapi_send_data_bridge()</a> </p>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If an ongoing transmission is aborted, the callback function from the send call will return with the status TRANSMIT_COMPLETE_NO_ACK.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000098">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SendDataAbort </dd></dl>
+<p>@zgw_name ZW_SendDataAbort </p>
 
 </div>
 </div>
@@ -979,7 +1020,7 @@ RSSI feedback constants</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_lock_route </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_lock_route </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>lock</em></td><td>)</td>
@@ -996,7 +1037,7 @@ RSSI feedback constants</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000095">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_LockRoute </dd></dl>
+<p>@zgw_name ZW_LockRoute </p>
 
 </div>
 </div>
@@ -1007,9 +1048,9 @@ RSSI feedback constants</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_data </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_data </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>destination_node_id</em>, </td>
         </tr>
         <tr>
@@ -1062,7 +1103,7 @@ RSSI feedback constants</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>: A bridge controller library MUST NOT send to a virtual node that belongs to the bridge itself.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000097">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SendData </dd></dl>
+<p>@zgw_name ZW_SendData </p>
 
 </div>
 </div>
@@ -1073,15 +1114,15 @@ RSSI feedback constants</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_data_bridge </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_data_bridge </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>source_node_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>destination_node_id</em>, </td>
         </tr>
         <tr>
@@ -1134,7 +1175,7 @@ RSSI feedback constants</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000096">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>ZW_SendData_Bridge </dd></dl>
+<p>@zgw_name ZW_SendData_Bridge </p>
 
 </div>
 </div>
@@ -1145,9 +1186,9 @@ RSSI feedback constants</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_data_multi </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_data_multi </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
           <td class="paramname"><em>destination_node_mask</em>, </td>
         </tr>
         <tr>
@@ -1195,7 +1236,7 @@ RSSI feedback constants</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This function has been adapted so that both bridge and non-bridge Z-Wave API libraries can call it. In case of a bridge library, the function will send from its actual NodeID.</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000099">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_ZW_SendDataMulti </dd></dl>
+<p>@zgw_name SerialAPI_ZW_SendDataMulti </p>
 
 </div>
 </div>
@@ -1206,15 +1247,15 @@ RSSI feedback constants</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_data_multi_bridge </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_data_multi_bridge </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>source_node_id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
           <td class="paramname"><em>destination_node_mask</em>, </td>
         </tr>
         <tr>
@@ -1263,7 +1304,7 @@ RSSI feedback constants</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>sl_status_t</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This function should be used also when the ZPC is the source node because the function <a class="el" href="group__ZWAPI__TRANSPORT.html#ga117c122b8c680198f198acdf737adf15" title="Send data to a list of Z-Wave Nodes (multicast frame).">zwapi_send_data_multi()</a> is not available on a chip with bridge controller library (which is what the ZPC uses).</dd></dl>
-<dl class="zgw_namemap"><dt><b><a class="el" href="zgw_namemap.html#_zgw_namemap000100">Legacy Z/IP Gateway Serial API Name:</a></b></dt><dd>SerialAPI_ZW_SendDataMulti_Bridge </dd></dl>
+<p>@zgw_name SerialAPI_ZW_SendDataMulti_Bridge </p>
 
 </div>
 </div>
@@ -1274,9 +1315,9 @@ RSSI feedback constants</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_nop </td>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_send_nop </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__utils.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
           <td class="paramname"><em>destination</em>, </td>
         </tr>
         <tr>
@@ -1309,7 +1350,7 @@ RSSI feedback constants</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:11 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:36 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

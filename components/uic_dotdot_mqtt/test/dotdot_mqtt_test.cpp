@@ -27,9 +27,12 @@ extern "C" {
 
 #include "dotdot_mqtt_test.include"
 
+static int callback_count = 0;
+
 /// Called before each and every test
 void setUp()
 {
+  callback_count = 0;
   mqtt_mock_helper_init();
   unset_all_callbacks();
   reset_callback_counters();
@@ -173,6 +176,16 @@ void test_dotdot_mqtt_write_attributes_bool()
   payload = R"({"EnableLogging": 0})";
   mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_FALSE_MESSAGE(doorlock_enablelogging, "Test bool as integer");
+
+  payload = R"({"EnableLogging": "0"})";
+  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_FALSE_MESSAGE(doorlock_enablelogging,
+                            "Test bool as string with number '0' inside");
+
+  payload = R"({"EnableLogging": "123"})";
+  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_TRUE_MESSAGE(doorlock_enablelogging,
+                           "Test bool as string with number '123' inside");
 }
 
 // Publish attributes tests
@@ -213,10 +226,10 @@ void test_dotdot_mqtt_publish_attributes_enum()
   TEST_ASSERT_EQUAL_JSON(R"({"value":"ApplyUpgradeAfterTimeout"})", result);
 }
 
-uint16_t user_id_value     = 0;
-uint8_t user_status_value  = 0;
-uint8_t user_type_value    = 0;
-std::string pin_code_value = "";
+static uint16_t user_id_value     = 0;
+static uint8_t user_status_value  = 0;
+static uint8_t user_type_value    = 0;
+static std::string pin_code_value = "";
 static sl_status_t uic_mqtt_dotdot_door_lock_setpin_code_test_callback(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
@@ -450,7 +463,7 @@ void test_dotdot_mqtt_write_attributes_bitmap()
   mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(0xff,
                                 thermostat_programming_operation_mode,
-                                "Test bitmap as int");
+                                "Test JSON with incorrect keys");
 }
 
 void test_dotdot_mqtt_bitmap_interpretation_publish_and_read()
@@ -605,7 +618,7 @@ void test_dotdot_mqtt_supported_commands()
   mqtt_mock_helper_pop_publish(
     "ucl/by-unid/zw-test-hest/ep0/DoorLock/SupportedCommands",
     result);
-  TEST_ASSERT_EQUAL_STRING(R"({"value": ["LockDoor","ToggleResponse"]})",
+  TEST_ASSERT_EQUAL_STRING(R"({"value": ["LockDoor", "ToggleResponse"]})",
                            result);
 }
 
@@ -636,5 +649,792 @@ void test_dotdot_mqtt_write_attributes_badtopic()
   TEST_ASSERT_EQUAL_INT_MESSAGE(0,
                                 thermostat_systemmode,
                                 "Test enum as int string");
+}
+
+// Force read attributes test
+uic_mqtt_dotdot_thermostat_updated_state_t thermostat_updated = {0};
+sl_status_t thermostat_ForceReadAttributes_callback(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_thermostat_updated_state_t updated)
+{
+  thermostat_updated = updated;
+  return SL_STATUS_OK;
+}
+
+// Test WriteAttributes accept enum as integer string
+void test_dotdot_mqtt_force_read_attributes()
+{
+  uic_mqtt_dotdot_set_thermostat_force_read_attributes_callback(
+    thermostat_ForceReadAttributes_callback);
+  uic_mqtt_dotdot_init();
+  const char topic[]
+    = "ucl/by-unid/zwDEADBEEF/ep0/Thermostat/Commands/ForceReadAttributes";
+
+  // Test empty json
+  std::string payload = R"({"value": []})";
+  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  // If an empty json is passed - all fields of "thermostat_updated" struct
+  // should be set to "true". So if at least one of them is false - the test should fail
+  bool test_value
+    = thermostat_updated.local_temperature
+      && thermostat_updated.outdoor_temperature && thermostat_updated.occupancy
+      && thermostat_updated.abs_min_heat_setpoint_limit
+      && thermostat_updated.abs_max_heat_setpoint_limit
+      && thermostat_updated.abs_min_cool_setpoint_limit
+      && thermostat_updated.abs_max_cool_setpoint_limit
+      && thermostat_updated.pi_cooling_demand
+      && thermostat_updated.pi_heating_demand
+      && thermostat_updated.hvac_system_type_configuration
+      && thermostat_updated.local_temperature_calibration
+      && thermostat_updated.occupied_cooling_setpoint
+      && thermostat_updated.occupied_heating_setpoint
+      && thermostat_updated.unoccupied_cooling_setpoint
+      && thermostat_updated.unoccupied_heating_setpoint
+      && thermostat_updated.min_heat_setpoint_limit
+      && thermostat_updated.max_heat_setpoint_limit
+      && thermostat_updated.min_cool_setpoint_limit
+      && thermostat_updated.max_cool_setpoint_limit
+      && thermostat_updated.min_setpoint_dead_band
+      && thermostat_updated.remote_sensing
+      && thermostat_updated.control_sequence_of_operation
+      && thermostat_updated.system_mode && thermostat_updated.alarm_mask
+      && thermostat_updated.thermostat_running_mode
+      && thermostat_updated.start_of_week
+      && thermostat_updated.number_of_weekly_transitions
+      && thermostat_updated.number_of_daily_transitions
+      && thermostat_updated.temperature_setpoint_hold
+      && thermostat_updated.temperature_setpoint_hold_duration
+      && thermostat_updated.thermostat_programming_operation_mode
+      && thermostat_updated.thermostat_running_state
+      && thermostat_updated.setpoint_change_source
+      && thermostat_updated.setpoint_change_amount
+      && thermostat_updated.setpoint_change_source_timestamp
+      && thermostat_updated.occupied_setback
+      && thermostat_updated.occupied_setback_min
+      && thermostat_updated.occupied_setback_max
+      && thermostat_updated.unoccupied_setback
+      && thermostat_updated.unoccupied_setback_min
+      && thermostat_updated.unoccupied_setback_max
+      && thermostat_updated.emergency_heat_delta && thermostat_updated.ac_type
+      && thermostat_updated.ac_capacity
+      && thermostat_updated.ac_refrigerant_type
+      && thermostat_updated.ac_compressor_type
+      && thermostat_updated.ac_error_code
+      && thermostat_updated.ac_louver_position
+      && thermostat_updated.ac_coil_temperature
+      && thermostat_updated.ac_capacity_format;
+  TEST_ASSERT_TRUE_MESSAGE(test_value, "Test empty json");
+
+  // Test one value array json
+  payload = R"({"value": ["AbsMinCoolSetpointLimit"]})";
+  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_TRUE_MESSAGE(thermostat_updated.abs_min_cool_setpoint_limit,
+                           "Test one value array json");
+
+  // Test multiple values array json
+  payload
+    = R"({"value": ["AbsMinCoolSetpointLimit", "LocalTemperatureCalibration"]})";
+  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_TRUE_MESSAGE(thermostat_updated.abs_min_cool_setpoint_limit,
+                           "Test multiple values array json");
+  TEST_ASSERT_TRUE_MESSAGE(thermostat_updated.local_temperature_calibration,
+                           "Test multiple values array json");
+}
+
+void test_dotdot_mqtt_arbitrary_types_json()
+{
+  const uint8_t arr_size = 3;
+
+  // test TransitionType struct serialisation
+  TransitionType transition_arr[arr_size] = {
+    {.TransitionTime = 1, .HeatSetPoint = 2, .CoolSetPoint = 3},
+    {.TransitionTime = 4, .HeatSetPoint = 5, .CoolSetPoint = 6},
+    {.TransitionTime = 7, .HeatSetPoint = 8, .CoolSetPoint = 9},
+  };
+
+  nlohmann::json transition_jsn_reported
+    = add_transitions_to_json_obj(transition_arr, arr_size);
+
+  const char *transition_jsn_desired = R"(
+    [
+      {
+    	"CoolSetPoint": 3,
+    	"HeatSetPoint": 2,
+    	"TransitionTime": 1
+      },
+      {
+        "CoolSetPoint": 6,
+        "HeatSetPoint": 5,
+        "TransitionTime": 4
+      },
+      {
+        "CoolSetPoint": 9,
+        "HeatSetPoint": 8,
+        "TransitionTime": 7
+      }
+    ]
+  )";
+
+  TEST_ASSERT_EQUAL_JSON(transition_jsn_desired,
+                         transition_jsn_reported.dump().c_str());
+
+  // test SExtensionFieldSetList struct serialisation
+  SExtensionFieldSetList ext_field_set_arr[arr_size]
+    = {{.ClusterId = 1, .ExtensionFieldSet = "one"},
+       {.ClusterId = 2, .ExtensionFieldSet = "two"},
+       {.ClusterId = 3, .ExtensionFieldSet = "three"}};
+
+  nlohmann::json ext_field_set_jsn_reported
+    = add_extension_field_to_json_obj(ext_field_set_arr, arr_size);
+
+  const char *ext_field_set_jsn_desired = R"(
+    [
+      {
+        "ClusterId": 1,
+        "ExtensionFieldSet": "one"
+      },
+      {
+        "ClusterId": 2,
+        "ExtensionFieldSet": "two"
+      },
+      {
+        "ClusterId": 3,
+        "ExtensionFieldSet": "three"
+      }
+    ]
+  )";
+
+  TEST_ASSERT_EQUAL_JSON(ext_field_set_jsn_desired,
+                         ext_field_set_jsn_reported.dump().c_str());
+}
+
+void test_dotdot_mqtt_test_publish_integer_monotonous_string_array_attribute()
+{
+  const char *base_topic = "ucl/by-location/kitchen";
+  uint8_t cluster_count  = 3;
+  const char *value[cluster_count];
+  value[0] = "OnOff";
+  value[1] = "Level";
+  value[2] = "NewClusterInTown";
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_mqtt_dotdot_binding_bindable_cluster_list_publish(
+                      base_topic,
+                      cluster_count,
+                      value,
+                      UCL_MQTT_PUBLISH_TYPE_DESIRED));
+
+  const char *expected_topic
+    = "ucl/by-location/kitchen/Binding/Attributes/BindableClusterList/Desired";
+
+  char published_message[1000] = {};
+  TEST_ASSERT_NOT_NULL(
+    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+
+  const char expected_published_message[]
+    = R"({"value": ["OnOff","Level","NewClusterInTown"]})";
+
+  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
+}
+
+void test_dotdot_mqtt_test_publish_integer_monotonous_struct_array_attribute()
+{
+  const char *base_topic                 = "ucl/by-location/desk";
+  const uint8_t value_count              = 3;
+  const BindingObject value[value_count] = {
+    {.ClusterName = "OnOff", .DestinationUnid = "node_1", .DestinationEp = 4},
+    {.ClusterName = "Level", .DestinationUnid = "node_1", .DestinationEp = 3},
+    {.ClusterName = "OnOff", .DestinationUnid = "node_1", .DestinationEp = 3}};
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_mqtt_dotdot_binding_binding_table_publish(
+                      base_topic,
+                      value_count,
+                      value,
+                      UCL_MQTT_PUBLISH_TYPE_REPORTED));
+
+  const char *expected_topic
+    = "ucl/by-location/desk/Binding/Attributes/BindingTable/Reported";
+
+  char published_message[1000] = {};
+  TEST_ASSERT_NOT_NULL(
+    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+
+  const char expected_published_message[] = R"({ "value":[
+            { "ClusterName":"OnOff",
+              "DestinationEp":4,
+              "DestinationUnid":"node_1"},
+            { "ClusterName":"Level",
+              "DestinationEp":3,
+              "DestinationUnid":"node_1"},
+            { "ClusterName":"OnOff",
+              "DestinationEp":3,
+              "DestinationUnid":"node_1"}
+            ]
+          })";
+
+  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
+}
+
+void test_dotdot_mqtt_test_publish_integer_monotonous_integer_array_attribute()
+{
+  const char *base_topic = "ucl/by-group/2";
+  const uint8_t value[]  = {0, 23, 55, 3, 10};
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_mqtt_dotdot_state_endpoint_id_list_publish(
+                      base_topic,
+                      sizeof(value),
+                      value,
+                      UCL_MQTT_PUBLISH_TYPE_REPORTED));
+
+  const char *expected_topic
+    = "ucl/by-group/2/State/Attributes/EndpointIdList/Reported";
+
+  char published_message[1000] = {};
+  TEST_ASSERT_NOT_NULL(
+    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+
+  const char expected_published_message[] = R"({ "value":[ 0, 23, 55, 3, 10]})";
+
+  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
+}
+
+void test_aox_locator_position_and_orientation_publish()
+{
+  const char *base_topic = "ucl/by-unid/ble2222/ep0";
+  CoordinateAndOrientation value = {.CoordinateX  = 2.3,
+                                    .CoordinateY  = -34,
+                                    .CoordinateZ  = -59.6,
+                                    .OrientationX = 0.1,
+                                    .OrientationY = 22,
+                                    .OrientationZ = 1.111112};
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    uic_mqtt_dotdot_aox_locator_position_and_orientation_publish(
+      base_topic,
+      value,
+      UCL_MQTT_PUBLISH_TYPE_REPORTED));
+
+  // Verify that it did its job:
+  const char *expected_topic = "ucl/by-unid/ble2222/ep0/AoXLocator/Attributes/"
+                               "PositionAndOrientation/Reported";
+
+  char published_message[1000] = {};
+  TEST_ASSERT_NOT_NULL(
+    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+
+  const char expected_published_message[]
+    = R"({"value":{"CoordinateX":2.3,"CoordinateY":-34.0,"CoordinateZ":-59.6,"OrientationX":0.1,"OrientationY":22.0,"OrientationZ":1.111112}})";
+
+  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
+}
+
+void test_dotdot_mqtt_test_publish_monotonous_struct_array_attribute()
+{
+  const char *base_topic = "ucl/by-location/Kitchen";
+  const ConfigurationParameter value[]
+    = {{
+         .ParameterId = 1,
+         .Value       = 23,
+         .Name        = "Parameter 1",
+         .Info = "This parameter toggles the behavior of the main button",
+         .MinimumValue         = 0,
+         .MaximumValue         = 100,
+         .DefaultValue         = 1,
+         .DisplayFormat        = 0,
+         .ReadOnly             = false,
+         .Advanced             = false,
+         .AlteringCapabilities = false,
+       },
+       {
+         .ParameterId          = 2,
+         .Value                = 24,
+         .Name                 = "Parameter 2",
+         .Info                 = "Play with this param at your own risks",
+         .MinimumValue         = 0,
+         .MaximumValue         = 1,
+         .DefaultValue         = 40,
+         .DisplayFormat        = 0,
+         .ReadOnly             = false,
+         .Advanced             = true,
+         .AlteringCapabilities = true,
+       }};
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    uic_mqtt_dotdot_configuration_parameters_configuration_parameters_publish(
+      base_topic,
+      2,
+      value,
+      UCL_MQTT_PUBLISH_TYPE_REPORTED));
+
+  const char *expected_topic
+    = "ucl/by-location/Kitchen/ConfigurationParameters/Attributes/"
+      "ConfigurationParameters/Reported";
+
+  char published_message[1000] = {};
+  TEST_ASSERT_NOT_NULL(
+    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+
+  const char expected_published_message[] = R"({
+  "value": [
+    {
+      "ParameterId": 1,
+      "Value": 23,
+      "Name": "Parameter 1",
+      "Info": "This parameter toggles the behavior of the main button",
+      "DisplayFormat": 0,
+      "MinimumValue": 0,
+      "MaximumValue": 100,
+      "DefaultValue": 1,
+      "ReadOnly": false,
+      "Advanced": false,
+      "AlteringCapabilities": false
+    },
+    {
+      "ParameterId": 2,
+      "Value": 24,
+      "Name": "Parameter 2",
+      "Info": "Play with this param at your own risks",
+      "DisplayFormat": 0,
+      "MinimumValue": 0,
+      "DefaultValue": 40,
+      "MaximumValue": 1,
+      "ReadOnly": false,
+      "Advanced": true,
+      "AlteringCapabilities": true
+    }
+  ]
+})";
+
+  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
+}
+
+void test_dotdot_mqtt_test_publish_generated_aox_angle_report()
+{
+  const dotdot_unid_t unid      = "ble-1334";
+  dotdot_endpoint_id_t endpoint = 0;
+  uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t fields;
+  fields.tag_unid                    = "ble-tag-23";
+  fields.direction.Azimuth   = 34.2354563;
+  fields.direction.Elevation = 3.00078;
+  fields.direction.Distance  = 45.02;
+  fields.deviation.Azimuth     = 0.001;
+  fields.deviation.Elevation   = 0.002;
+  fields.deviation.Distance    = 0.00015;
+  fields.sequence                    = -10;
+
+  // Ask DotDot MQTT to publish.
+  uic_mqtt_dotdot_aox_locator_publish_generated_angle_report_command(unid,
+                                                                     endpoint,
+                                                                     &fields);
+
+  // Verify that it did its job:
+  const char *expected_topic
+    = "ucl/by-unid/ble-1334/ep0/AoXLocator/GeneratedCommands/AngleReport";
+
+  char published_message[1000] = {};
+  TEST_ASSERT_NOT_NULL(
+    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+
+  const char expected_published_message[] = R"(
+    {
+      "Deviation": {
+        "Azimuth": 0.001,
+        "Distance": 0.00015,
+        "Elevation": 0.002
+      },
+      "Direction": {
+        "Azimuth": 34.2354563,
+        "Distance": 45.02,
+        "Elevation": 3.00078
+      },
+      "Sequence": -10,
+      "TagUnid": "ble-tag-23"
+    }
+    )";
+
+  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
+}
+
+// Test function
+static sl_status_t uic_mqtt_dotdot_aox_locator_generated_angle_report_test_callback(
+    dotdot_unid_t unid,
+    dotdot_endpoint_id_t endpoint,
+    uic_mqtt_dotdot_callback_call_type_t call_type,
+    const char* tag_unid,
+    SphericalCoordinates measurement,
+    SphericalCoordinates deviation,
+    int32_t sequence)
+{
+  TEST_ASSERT_EQUAL_STRING("ble1334", unid);
+  TEST_ASSERT_EQUAL_UINT8(12, endpoint);
+  TEST_ASSERT_EQUAL_UINT8(UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL, call_type);
+  TEST_ASSERT_EQUAL_STRING("TestTagUnid", tag_unid);
+  TEST_ASSERT_EQUAL_DOUBLE(12.12, measurement.Azimuth);
+  TEST_ASSERT_EQUAL_DOUBLE(21.21, measurement.Elevation);
+  TEST_ASSERT_EQUAL_DOUBLE(5.6, measurement.Distance);
+  TEST_ASSERT_EQUAL_DOUBLE(12.34, deviation.Azimuth);
+  TEST_ASSERT_EQUAL_DOUBLE(1.012, deviation.Elevation);
+  TEST_ASSERT_EQUAL_DOUBLE(6.5, deviation.Distance);
+  TEST_ASSERT_EQUAL_INT32(34, sequence);
+  callback_count += 1;
+  return SL_STATUS_OK;
+}
+
+void test_aox_locator_receive_generated_angle_report_command()
+{
+  // Configure a callback for the apply correction:
+  uic_mqtt_dotdot_aox_locator_generated_angle_report_callback_set(
+    &uic_mqtt_dotdot_aox_locator_generated_angle_report_test_callback);
+
+  // Get Dotdot MQTT started
+  uic_mqtt_dotdot_init();
+
+  //Generate an incoming command published on MQTT:
+  const char topic[]
+    = "ucl/by-unid/ble1334/ep12/AoXLocator/GeneratedCommands/AngleReport";
+
+  // Test AngleReport payload
+  std::string payload = R"({
+    "TagUnid" : "TestTagUnid",
+    "Direction": {
+      "Azimuth": 12.12,
+      "Elevation": 21.21,
+      "Distance": 5.6},
+    "Deviation":{
+      "Azimuth": 12.34,
+      "Elevation": 1.012,
+      "Distance": 6.5},
+    "Sequence": 34})";
+
+  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_EQUAL(1, callback_count);
+}
+
+
+void test_dotdot_mqtt_test_publish_generated_aox_iq_report()
+{
+  const dotdot_unid_t unid      = "ble-1334";
+  dotdot_endpoint_id_t endpoint = 0;
+  int8_t sample_array[]         = {1, -2, 3, -4, 5};
+  uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t fields;
+  fields.tag_unid      = "ble-tag-23";
+  fields.channel       = 2;
+  fields.rssi          = -90;
+  fields.sequence      = -32;
+  fields.samples_count = 5;
+  fields.samples       = sample_array;
+
+  // Ask DotDot MQTT to publish.
+  uic_mqtt_dotdot_aox_locator_publish_generated_iq_report_command(unid,
+                                                                  endpoint,
+                                                                  &fields);
+
+  // Verify that it did its job:
+  const char *expected_topic
+    = "ucl/by-unid/ble-1334/ep0/AoXLocator/GeneratedCommands/IQReport";
+
+  char published_message[1000] = {};
+  TEST_ASSERT_NOT_NULL(
+    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+
+  const char expected_published_message[] = R"(
+    {"Channel":2,
+    "RSSI":-90,
+    "Samples":[1,-2,3,-4,5],
+    "Sequence":-32,
+    "TagUnid":"ble-tag-23"}
+    )";
+
+  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
+}
+
+// Test function
+static sl_status_t uic_mqtt_dotdot_aox_locator_angle_correction_test_callback(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  const char *tag_unid,
+  SphericalCoordinates direction,
+  SphericalCoordinates deviation,
+  int32_t sequence)
+{
+  TEST_ASSERT_EQUAL_STRING("ble1334", unid);
+  TEST_ASSERT_EQUAL_UINT8(4, endpoint);
+  TEST_ASSERT_EQUAL_UINT8(UIC_MQTT_DOTDOT_CALLBACK_TYPE_NORMAL, call_type);
+  TEST_ASSERT_EQUAL_STRING("TestTagUnid", tag_unid);
+  TEST_ASSERT_EQUAL_FLOAT(12.12, direction.Azimuth);
+  TEST_ASSERT_EQUAL_FLOAT(21.21, direction.Elevation);
+  TEST_ASSERT_EQUAL_FLOAT(5.6, direction.Distance);
+  TEST_ASSERT_EQUAL_FLOAT(12.34, deviation.Azimuth);
+  TEST_ASSERT_EQUAL_FLOAT(1.012, deviation.Elevation);
+  TEST_ASSERT_EQUAL_FLOAT(6.5, deviation.Distance);
+  TEST_ASSERT_EQUAL_UINT8(34, sequence);
+  callback_count += 1;
+  return SL_STATUS_OK;
+}
+
+void test_aox_apply_correction_callback()
+{
+  // Configure a callback for the apply correction:
+  uic_mqtt_dotdot_aox_locator_angle_correction_callback_set(
+    &uic_mqtt_dotdot_aox_locator_angle_correction_test_callback);
+
+  // Get Dotdot MQTT started
+  uic_mqtt_dotdot_init();
+
+  //Generate an incoming command published on MQTT:
+  const char topic[]
+    = "ucl/by-unid/ble1334/ep4/AoXLocator/Commands/AngleCorrection";
+
+  // Test ApplyCorrection payload
+  std::string payload = R"({
+    "TagUnid" : "TestTagUnid",
+    "Direction": {
+      "Azimuth": 12.12,
+      "Elevation": 21.21,
+      "Distance": 5.6},
+    "Deviation":{
+      "Azimuth": 12.34,
+      "Elevation": 1.012,
+      "Distance": 6.5} ,"Sequence": 34})";
+  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_EQUAL(1, callback_count);
+}
+
+static sl_status_t uic_mqtt_dotdot_aox_locator_write_attributes_test_callback(
+  const dotdot_unid_t unid,
+  const dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uic_mqtt_dotdot_aox_locator_state_t new_state,
+  uic_mqtt_dotdot_aox_locator_updated_state_t updated_state)
+{
+  TEST_ASSERT_TRUE(updated_state.azimuth_mask);
+  TEST_ASSERT_EQUAL(2, new_state.azimuth_mask_count);
+  TEST_ASSERT_EQUAL_DOUBLE(12.12, new_state.azimuth_mask[0].Min);
+  TEST_ASSERT_EQUAL_DOUBLE(21.21, new_state.azimuth_mask[0].Max);
+  TEST_ASSERT_EQUAL(5, new_state.azimuth_mask[1].Min);
+  TEST_ASSERT_EQUAL(6, new_state.azimuth_mask[1].Max);
+  TEST_ASSERT_TRUE(updated_state.cte_mode);
+  TEST_ASSERT_EQUAL(0, new_state.cte_mode);
+  TEST_ASSERT_TRUE(updated_state.position_and_orientation);
+  TEST_ASSERT_EQUAL_DOUBLE(-4.5,
+                           new_state.position_and_orientation.CoordinateX);
+  TEST_ASSERT_EQUAL_DOUBLE(98, new_state.position_and_orientation.CoordinateY);
+  TEST_ASSERT_EQUAL_DOUBLE(9, new_state.position_and_orientation.CoordinateZ);
+  TEST_ASSERT_EQUAL_DOUBLE(1.1,
+                           new_state.position_and_orientation.OrientationX);
+  TEST_ASSERT_EQUAL_DOUBLE(2.2,
+                           new_state.position_and_orientation.OrientationY);
+  TEST_ASSERT_EQUAL_DOUBLE(3.3,
+                           new_state.position_and_orientation.OrientationZ);
+  TEST_ASSERT_TRUE(updated_state.antenna_array);
+  TEST_ASSERT_EQUAL(4, new_state.antenna_array_count);
+  TEST_ASSERT_EQUAL(1, new_state.antenna_array[0]);
+  TEST_ASSERT_EQUAL(2, new_state.antenna_array[1]);
+  TEST_ASSERT_EQUAL(3, new_state.antenna_array[2]);
+  TEST_ASSERT_EQUAL(-15, new_state.antenna_array[3]);
+  TEST_ASSERT_TRUE(updated_state.angle_filtering);
+  TEST_ASSERT_TRUE(new_state.angle_filtering);
+  TEST_ASSERT_TRUE(updated_state.antenna_mode);
+  TEST_ASSERT_EQUAL(3, new_state.antenna_mode);  //Array 4x4 DP URA
+  TEST_ASSERT_TRUE(updated_state.reporting_mode);
+  TEST_ASSERT_EQUAL(1, new_state.reporting_mode);  // Angle Reports
+  callback_count += 1;
+  return SL_STATUS_OK;
+}
+
+void test_aox_locator_write_attributes_callback()
+{
+  // Configure a callback for the apply correction:
+  uic_mqtt_dotdot_set_aox_locator_write_attributes_callback(
+    &uic_mqtt_dotdot_aox_locator_write_attributes_test_callback);
+
+  // Get Dotdot MQTT started
+  uic_mqtt_dotdot_init();
+
+  //Generate an incoming command published on MQTT:
+  const char topic[]
+    = "ucl/by-unid/ble1334/ep4/AoXLocator/Commands/WriteAttributes";
+
+  // Test WriteAttribute payload
+  std::string payload = R"({
+  "AzimuthMask": [{
+    "Min": 12.12,
+    "Max": 21.21
+  },
+  {
+    "Min": 5,
+    "Max": 6
+  }],
+  "CTEMode": "Silicon Labs",
+  "PositionAndOrientation": {
+    "CoordinateX": -4.5,
+    "CoordinateY": 98,
+    "CoordinateZ": 9,
+    "OrientationX": 1.1,
+    "OrientationY": 2.2,
+    "OrientationZ": 3.3
+  },
+  "AntennaArray": [
+    1,
+    2,
+    3,
+    -15
+  ],
+  "AngleFiltering": true,
+  "AntennaMode": "Array 4x4 DP URA",
+  "ReportingMode": "AngleReport"
+})";
+  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_EQUAL(1, callback_count);
+}
+
+uic_mqtt_dotdot_thermostat_command_set_weekly_schedule_fields_t
+  stub_set_sched_cmd
+  = {0};
+bool stub_set_sched_called = false;
+static sl_status_t stub_struct_array_set_weekly_schedule_cb(
+  dotdot_unid_t unid,
+  dotdot_endpoint_id_t endpoint,
+  uic_mqtt_dotdot_callback_call_type_t call_type,
+  uint8_t number_of_transitions,
+  uint8_t day_of_week,
+  uint8_t mode,
+  uint8_t transitions_count,
+  const TransitionType *transitions)
+{
+  TEST_ASSERT_EQUAL_STRING("zwDEADBEEF", unid);
+  TEST_ASSERT_EQUAL(5, endpoint);
+
+  TEST_ASSERT_EQUAL_HEX8(stub_set_sched_cmd.number_of_transitions,
+                         number_of_transitions);
+  TEST_ASSERT_EQUAL_HEX8(stub_set_sched_cmd.day_of_week, day_of_week);
+  TEST_ASSERT_EQUAL_HEX8(stub_set_sched_cmd.mode, mode);
+  TEST_ASSERT_EQUAL_HEX8(stub_set_sched_cmd.transitions_count,
+                         transitions_count);
+  for (uint8_t i = 0; i < transitions_count; i++) {
+    TEST_ASSERT_EQUAL_UINT16(stub_set_sched_cmd.transitions[i].TransitionTime,
+                             transitions[i].TransitionTime);
+    TEST_ASSERT_EQUAL_INT16(stub_set_sched_cmd.transitions[i].HeatSetPoint,
+                            transitions[i].HeatSetPoint);
+    TEST_ASSERT_EQUAL_INT16(stub_set_sched_cmd.transitions[i].CoolSetPoint,
+                            transitions[i].CoolSetPoint);
+  }
+
+  stub_set_sched_called = true;
+
+  return SL_STATUS_OK;
+}
+
+// Test command with struct array argument
+void test_command_argument_struct_array_callback(void)
+{
+  uic_mqtt_dotdot_thermostat_set_weekly_schedule_callback_set(
+    &stub_struct_array_set_weekly_schedule_cb);
+
+  // Get Dotdot MQTT started
+  uic_mqtt_dotdot_init();
+
+  TransitionType mock_transitions[2] = {
+    {10000, 1100, 3300},
+    {5000, 1200, 2700},
+  };
+  stub_set_sched_cmd.number_of_transitions = 2;
+  stub_set_sched_cmd.day_of_week           = 0x41;
+  stub_set_sched_cmd.mode                  = 0x3;
+  stub_set_sched_cmd.transitions_count     = 2;
+  stub_set_sched_cmd.transitions           = mock_transitions;
+  stub_set_sched_called                    = false;
+
+  std::string payload = R"({
+  "NumberOfTransitions": 2,
+  "DayOfWeek": {
+    "Sunday": true,
+    "Monday": false,
+    "Tuesday": false,
+    "Wednesday": false,
+    "Thursday": false,
+    "Friday": false,
+    "Saturday": true,
+    "AwayOrVacation": false
+  },
+  "Mode": { "Heat": true, "Cool": true },
+  "Transitions": [
+    { "TransitionTime": 10000, "HeatSetPoint": 1100, "CoolSetPoint": 3300 },
+    { "TransitionTime": 5000, "HeatSetPoint": 1200, "CoolSetPoint": 2700 }
+  ]
+})";
+  mqtt_mock_helper_publish(
+    "ucl/by-unid/zwDEADBEEF/ep5/Thermostat/Commands/SetWeeklySchedule",
+    payload.c_str(),
+    payload.length());
+
+  TEST_ASSERT_TRUE(stub_set_sched_called);
+}
+
+uic_mqtt_dotdot_door_lock_state_t dl_writeattr_state = {0};
+bool stub_dl_writeattr_called                        = false;
+static sl_status_t
+  stub_dl_writeattr_cb(const dotdot_unid_t unid,
+                       const dotdot_endpoint_id_t endpoint,
+                       uic_mqtt_dotdot_callback_call_type_t call_type,
+                       uic_mqtt_dotdot_door_lock_state_t state,
+                       uic_mqtt_dotdot_door_lock_updated_state_t updated)
+{
+  TEST_ASSERT_TRUE(updated.language);
+  TEST_ASSERT_EQUAL_STRING(dl_writeattr_state.language, state.language);
+
+  TEST_ASSERT_TRUE(updated.operating_mode);
+  TEST_ASSERT_EQUAL_UINT8(dl_writeattr_state.operating_mode,
+                          state.operating_mode);
+
+  TEST_ASSERT_TRUE(updated.sound_volume);
+  TEST_ASSERT_EQUAL_UINT8(dl_writeattr_state.sound_volume, state.sound_volume);
+
+  TEST_ASSERT_TRUE(updated.alarm_mask);
+  TEST_ASSERT_EQUAL_UINT16(dl_writeattr_state.alarm_mask, state.alarm_mask);
+
+  stub_dl_writeattr_called = true;
+
+  return SL_STATUS_OK;
+}
+
+// Test WriteAttributes command with string, enum, and bitmap types
+void test_dotdot_mqtt_write_attributes_string_bitmap_enum(void)
+{
+  uic_mqtt_dotdot_set_door_lock_write_attributes_callback(stub_dl_writeattr_cb);
+  uic_mqtt_dotdot_init();
+
+  dl_writeattr_state.language       = "Universal";
+  dl_writeattr_state.operating_mode = ZCL_DRLK_OPER_MODE_VACATION;
+  dl_writeattr_state.sound_volume   = 2;
+  dl_writeattr_state.alarm_mask     = 0x0011;
+  stub_dl_writeattr_called          = false;
+
+  std::string payload = R"({
+    "Language": "Universal",
+    "SoundVolume": 2,
+    "OperatingMode": 1,
+    "AlarmMask": {
+      "DeadboltJammed": true,
+      "LockResetToFactoryDefaults": false,
+      "RFPowerModuleCycled": false,
+      "TamperAlarmWrongCodeEntryLimit": true,
+      "TamperAlarmFrontEscutcheonRemovedFromMain": false,
+      "ForcedDoorOpenUnderDoorLockedCondition": false
+    }
+  })";
+  mqtt_mock_helper_publish(
+    "ucl/by-unid/zwDEADBEEF/ep0/DoorLock/Commands/WriteAttributes",
+    payload.c_str(),
+    payload.length());
+
+  TEST_ASSERT_TRUE(stub_dl_writeattr_called);
 }
 }

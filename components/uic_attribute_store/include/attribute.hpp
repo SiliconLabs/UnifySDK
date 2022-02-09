@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -89,6 +89,21 @@ class attribute
                                                         value_type,
                                                         buffer,
                                                         size));
+  }
+
+  /**
+   * Get the first parrent of a give type. If this node match the type
+   * this node is returned.
+   * @ref attribute_store_get_first_parent_with_type
+   */
+  inline attribute
+    first_parent_or_self(attribute_store_type_t parent_type) const
+  {
+    if (type() == parent_type) {
+      return *this;
+    } else {
+      return first_parent(parent_type);
+    }
   }
 
   /**

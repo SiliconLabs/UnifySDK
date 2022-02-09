@@ -47,16 +47,17 @@
 //#include <stdio.h>
 
 #include "sys/process.h"
+#include "sys/clock.h"
 #include "sl_log.h"
 
 #define LOG_TAG "process.c"
 
-#define data _data  /* data is a reserved keyword in Keil C51 */
+#define data _data /* data is a reserved keyword in Keil C51 */
 
 /*
  * Pointer to the currently running process structure.
  */
-struct process *process_list = NULL;
+struct process *process_list    = NULL;
 struct process *process_current = NULL;
 
 static process_event_t lastevent;
@@ -79,52 +80,55 @@ process_num_events_t process_maxevents;
 
 static volatile unsigned char poll_requested;
 
-#define PROCESS_STATE_NONE        0
-#define PROCESS_STATE_RUNNING     1
-#define PROCESS_STATE_CALLED      2
+#define PROCESS_STATE_NONE    0
+#define PROCESS_STATE_RUNNING 1
+#define PROCESS_STATE_CALLED  2
 
-static void call_process(struct process *p, process_event_t ev, process_data_t data) CC_REENTRANT_ARG;
+#define EVENT_TIME_WARNING 100
+#define EVENT_TIME_ERROR   300
+
+static void call_process(struct process *p,
+                         process_event_t ev,
+                         process_data_t data) CC_REENTRANT_ARG;
 
 #define DEBUG 0
 #if DEBUG
-#if ! CC_NO_VA_ARGS
+#if !CC_NO_VA_ARGS
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
 #endif
 #else /* DEBUG */
-#if ! CC_NO_VA_ARGS
+#if !CC_NO_VA_ARGS
 #define PRINTF(...)
 #endif
 #endif
 
-
 /*---------------------------------------------------------------------------*/
-process_event_t
-process_alloc_event(void)
+process_event_t process_alloc_event(void)
 {
   return lastevent++;
 }
 /*---------------------------------------------------------------------------*/
-void
-process_start(struct process *p, const char *arg) CC_REENTRANT_ARG
+void process_start(struct process *p, const char *arg) CC_REENTRANT_ARG
 {
   struct process *q;
 
   /* First make sure that we don't try to start a process that is
      already running. */
-  for(q = process_list; q != p && q != NULL; q = q->next);
+  for (q = process_list; q != p && q != NULL; q = q->next)
+    ;
 
   /* If we found the process on the process list, we bail out. */
-  if(q == p) {
+  if (q == p) {
     return;
   }
   /* Put on the procs list.*/
-  p->next = process_list;
+  p->next      = process_list;
   process_list = p;
-  p->state = PROCESS_STATE_RUNNING;
+  p->state     = PROCESS_STATE_RUNNING;
   PT_INIT(&p->pt);
 
-#if ! CC_NO_VA_ARGS
+#if !CC_NO_VA_ARGS
   PRINTF("process: starting '%s'\n", PROCESS_NAME_STRING(p));
 #endif
 
@@ -132,24 +136,25 @@ process_start(struct process *p, const char *arg) CC_REENTRANT_ARG
   process_post_synch(p, PROCESS_EVENT_INIT, (process_data_t)arg);
 }
 /*---------------------------------------------------------------------------*/
-static void
-exit_process(struct process *p, struct process *fromprocess) CC_REENTRANT_ARG
+static void exit_process(struct process *p,
+                         struct process *fromprocess) CC_REENTRANT_ARG
 {
   register struct process *q;
   struct process *old_current = process_current;
 
-#if ! CC_NO_VA_ARGS
+#if !CC_NO_VA_ARGS
   PRINTF("process: exit_process '%s'\n", PROCESS_NAME_STRING(p));
 #endif
 
   /* Make sure the process is in the process list before we try to
      exit it. */
-  for(q = process_list; q != p && q != NULL; q = q->next);
-  if(q == NULL) {
+  for (q = process_list; q != p && q != NULL; q = q->next)
+    ;
+  if (q == NULL) {
     return;
   }
 
-  if(process_is_running(p)) {
+  if (process_is_running(p)) {
     /* Process was running */
     p->state = PROCESS_STATE_NONE;
 
@@ -158,26 +163,26 @@ exit_process(struct process *p, struct process *fromprocess) CC_REENTRANT_ARG
      * this process is about to exit. This will allow services to
      * deallocate state associated with this process.
      */
-    for(q = process_list; q != NULL; q = q->next) {
-      if(p != q) {
-	call_process(q, PROCESS_EVENT_EXITED, (process_data_t)p);
+    for (q = process_list; q != NULL; q = q->next) {
+      if (p != q) {
+        call_process(q, PROCESS_EVENT_EXITED, (process_data_t)p);
       }
     }
 
-    if(p->thread != NULL && p != fromprocess) {
+    if (p->thread != NULL && p != fromprocess) {
       /* Post the exit event to the process that is about to exit. */
       process_current = p;
       p->thread(&p->pt, PROCESS_EVENT_EXIT, NULL);
     }
   }
 
-  if(p == process_list) {
+  if (p == process_list) {
     process_list = process_list->next;
   } else {
-    for(q = process_list; q != NULL; q = q->next) {
-      if(q->next == p) {
-	q->next = p->next;
-	break;
+    for (q = process_list; q != NULL; q = q->next) {
+      if (q->next == p) {
+        q->next = p->next;
+        break;
       }
     }
   }
@@ -185,55 +190,63 @@ exit_process(struct process *p, struct process *fromprocess) CC_REENTRANT_ARG
   process_current = old_current;
 }
 /*---------------------------------------------------------------------------*/
-static void
-call_process(struct process *p, process_event_t ev, process_data_t data) CC_REENTRANT_ARG
+static void call_process(struct process *p,
+                         process_event_t ev,
+                         process_data_t data) CC_REENTRANT_ARG
 {
   int ret;
 
 #if DEBUG
-  if(p->state == PROCESS_STATE_CALLED) {
-#if ! CC_NO_VA_ARGS
-    printf("process: process '%s' called again with event %bu\n", PROCESS_NAME_STRING(p), ev);
+  if (p->state == PROCESS_STATE_CALLED) {
+#if !CC_NO_VA_ARGS
+    printf("process: process '%s' called again with event %bu\n",
+           PROCESS_NAME_STRING(p),
+           ev);
 #endif
   }
 #endif /* DEBUG */
 
-  if((p->state & PROCESS_STATE_RUNNING) &&
-     p->thread != NULL) {
-#if ! CC_NO_VA_ARGS
-    PRINTF("process: calling process '%s' with event %bu\n", PROCESS_NAME_STRING(p), ev);
+  clock_time_t start_time = clock_time();
+
+  if ((p->state & PROCESS_STATE_RUNNING) && p->thread != NULL) {
+#if !CC_NO_VA_ARGS
+    PRINTF("process: calling process '%s' with event %bu\n",
+           PROCESS_NAME_STRING(p),
+           ev);
 #endif
     process_current = p;
-    p->state = PROCESS_STATE_CALLED;
-    ret = p->thread(&p->pt, ev, data);
-    if(ret == PT_EXITED ||
-       ret == PT_ENDED ||
-       ev == PROCESS_EVENT_EXIT) {
+    p->state        = PROCESS_STATE_CALLED;
+    ret             = p->thread(&p->pt, ev, data);
+    if (ret == PT_EXITED || ret == PT_ENDED || ev == PROCESS_EVENT_EXIT) {
       exit_process(p, p);
     } else {
       p->state = PROCESS_STATE_RUNNING;
     }
   }
-#if 0
-  else
-  {
-     printf("call_process: can't call process %s.\r\n", PROCESS_NAME_STRING(p));
-     if (p->thread == NULL) {
-          printf("call_process: can't call process %s because thread is NULL.\n",
-                 PROCESS_NAME_STRING(p));
-     }
+
+  clock_time_t elapsed_timed = clock_time() - start_time;
+
+  if (elapsed_timed > EVENT_TIME_ERROR) {
+    sl_log_debug(LOG_TAG,
+                 "Process %s took %lu ms to execute event %d. ",
+                 p->name,
+                 elapsed_timed,
+                 ev);
+  } else if (elapsed_timed > EVENT_TIME_WARNING) {
+    sl_log_debug(LOG_TAG,
+                 "Process %s took %lu ms to execute event %d. ",
+                 p->name,
+                 elapsed_timed,
+                 ev);
   }
-#endif
 }
 /*---------------------------------------------------------------------------*/
-void
-process_exit(struct process *p) CC_REENTRANT_ARG
+void process_exit(struct process *p) CC_REENTRANT_ARG
 {
   exit_process(p, PROCESS_CURRENT());
 }
 /*---------------------------------------------------------------------------*/
-void
-process_init(void)
+void process_init(void)
 {
   lastevent = PROCESS_EVENT_MAX;
 
@@ -249,16 +262,15 @@ process_init(void)
  * Call each process' poll handler.
  */
 /*---------------------------------------------------------------------------*/
-static void
-do_poll(void) CC_REENTRANT_ARG
+static void do_poll(void) CC_REENTRANT_ARG
 {
   struct process *p;
 
   poll_requested = 0;
   /* Call the processes that needs to be polled. */
-  for(p = process_list; p != NULL; p = p->next) {
-    if(p->needspoll) {
-      p->state = PROCESS_STATE_RUNNING;
+  for (p = process_list; p != NULL; p = p->next) {
+    if (p->needspoll) {
+      p->state     = PROCESS_STATE_RUNNING;
       p->needspoll = 0;
       call_process(p, PROCESS_EVENT_POLL, NULL);
     }
@@ -270,8 +282,7 @@ do_poll(void) CC_REENTRANT_ARG
  * listening processes.
  */
 /*---------------------------------------------------------------------------*/
-static void
-do_event(void) CC_REENTRANT_ARG
+static void do_event(void) CC_REENTRANT_ARG
 {
   static process_event_t ev;
   static process_data_t data;
@@ -286,12 +297,11 @@ do_event(void) CC_REENTRANT_ARG
    * call the poll handlers inbetween.
    */
 
-  if(nevents > 0) {
-
+  if (nevents > 0) {
     /* There are events that we should deliver. */
     ev = events[fevent].ev;
 
-    data = events[fevent].data;
+    data     = events[fevent].data;
     receiver = events[fevent].p;
 
     /* Since we have seen the new event, we move pointer upwards
@@ -301,23 +311,22 @@ do_event(void) CC_REENTRANT_ARG
 
     /* If this is a broadcast event, we deliver it to all events, in
        order of their priority. */
-    if(receiver == PROCESS_BROADCAST) {
-      for(p = process_list; p != NULL; p = p->next) {
-
-	/* If we have been requested to poll a process, we do this in
+    if (receiver == PROCESS_BROADCAST) {
+      for (p = process_list; p != NULL; p = p->next) {
+        /* If we have been requested to poll a process, we do this in
 	   between processing the broadcast event. */
-	if(poll_requested) {
-	  do_poll();
-	}
-	call_process(p, ev, data);
+        if (poll_requested) {
+          do_poll();
+        }
+        call_process(p, ev, data);
       }
     } else {
       /* This is not a broadcast event, so we deliver it to the
 	 specified process. */
       /* If the event was an INIT event, we should also update the
 	 state of the process. */
-      if(ev == PROCESS_EVENT_INIT) {
-	receiver->state = PROCESS_STATE_RUNNING;
+      if (ev == PROCESS_EVENT_INIT) {
+        receiver->state = PROCESS_STATE_RUNNING;
       }
 
       /* Make sure that the process actually is running. */
@@ -326,11 +335,10 @@ do_event(void) CC_REENTRANT_ARG
   }
 }
 /*---------------------------------------------------------------------------*/
-int
-process_run(void)
+int process_run(void)
 {
   /* Process poll events. */
-  if(poll_requested) {
+  if (poll_requested) {
     do_poll();
   }
 
@@ -340,46 +348,59 @@ process_run(void)
   return nevents + poll_requested;
 }
 /*---------------------------------------------------------------------------*/
-int
-process_nevents(void)
+int process_nevents(void)
 {
   return nevents + poll_requested;
 }
 /*---------------------------------------------------------------------------*/
-int
-process_post(struct process *p, process_event_t ev, process_data_t data) CC_REENTRANT_ARG
+int process_post(struct process *p,
+                 process_event_t ev,
+                 process_data_t data) CC_REENTRANT_ARG
 {
   static process_num_events_t snum;
 
-  if(PROCESS_CURRENT() == NULL) {
-#if ! CC_NO_VA_ARGS
-    PRINTF("process_post: NULL process posts event %d to process '%s', nevents %d\n",
-	   ev,PROCESS_NAME_STRING(p), nevents);
+  if (PROCESS_CURRENT() == NULL) {
+#if !CC_NO_VA_ARGS
+    PRINTF(
+      "process_post: NULL process posts event %d to process '%s', nevents %d\n",
+      ev,
+      PROCESS_NAME_STRING(p),
+      nevents);
 #endif
   } else {
-#if ! CC_NO_VA_ARGS
-    PRINTF("process_post: Process '%s' posts event %d to process '%s', nevents %d\n",
-	   PROCESS_NAME_STRING(PROCESS_CURRENT()), ev,
-	   p == PROCESS_BROADCAST? "<broadcast>": PROCESS_NAME_STRING(p), nevents);
+#if !CC_NO_VA_ARGS
+    PRINTF(
+      "process_post: Process '%s' posts event %d to process '%s', nevents %d\n",
+      PROCESS_NAME_STRING(PROCESS_CURRENT()),
+      ev,
+      p == PROCESS_BROADCAST ? "<broadcast>" : PROCESS_NAME_STRING(p),
+      nevents);
 #endif
   }
 
-  if(nevents == PROCESS_CONF_NUMEVENTS) {
+  if (nevents == PROCESS_CONF_NUMEVENTS) {
 #if DEBUG
-    if(p == PROCESS_BROADCAST) {
-#if ! CC_NO_VA_ARGS
-      printf("soft panic: event queue is full when broadcast event %d was posted from %s\n", ev, PROCESS_NAME_STRING(process_current));
+    if (p == PROCESS_BROADCAST) {
+#if !CC_NO_VA_ARGS
+      printf("soft panic: event queue is full when broadcast event %d was "
+             "posted from %s\n",
+             ev,
+             PROCESS_NAME_STRING(process_current));
 #endif
     } else {
-#if ! CC_NO_VA_ARGS
-      printf("soft panic: event queue is full when event %d was posted to %s frpm %s\n", ev, PROCESS_NAME_STRING(p), PROCESS_NAME_STRING(process_current));
+#if !CC_NO_VA_ARGS
+      printf("soft panic: event queue is full when event %d was posted to %s "
+             "frpm %s\n",
+             ev,
+             PROCESS_NAME_STRING(p),
+             PROCESS_NAME_STRING(process_current));
 #endif
     }
 #endif /* DEBUG */
-   return PROCESS_ERR_FULL;
+    return PROCESS_ERR_FULL;
   }
 
-    if (nevents > PROCESS_CONF_NUMEVENTS_ERROR) {
+  if (nevents > PROCESS_CONF_NUMEVENTS_ERROR) {
     sl_log_error(LOG_TAG,
                  "Contiki Event queue usage is too high: %d events. "
                  "Last event %d was posted to %s from %s.\n",
@@ -400,13 +421,13 @@ process_post(struct process *p, process_event_t ev, process_data_t data) CC_REEN
   }
 
   snum = (process_num_events_t)(fevent + nevents) % PROCESS_CONF_NUMEVENTS;
-  events[snum].ev = ev;
+  events[snum].ev   = ev;
   events[snum].data = data;
-  events[snum].p = p;
+  events[snum].p    = p;
   ++nevents;
 
 #if PROCESS_CONF_STATS
-  if(nevents > process_maxevents) {
+  if (nevents > process_maxevents) {
     process_maxevents = nevents;
   }
 #endif /* PROCESS_CONF_STATS */
@@ -431,8 +452,9 @@ int process_count_events(const struct process *p,
   return counter;
 }
 /*---------------------------------------------------------------------------*/
-void
-process_post_synch(struct process *p, process_event_t ev, process_data_t data) CC_REENTRANT_ARG
+void process_post_synch(struct process *p,
+                        process_event_t ev,
+                        process_data_t data) CC_REENTRANT_ARG
 {
   struct process *caller = process_current;
 
@@ -440,20 +462,17 @@ process_post_synch(struct process *p, process_event_t ev, process_data_t data) C
   process_current = caller;
 }
 /*---------------------------------------------------------------------------*/
-void
-process_poll(struct process *p) CC_REENTRANT_ARG
+void process_poll(struct process *p) CC_REENTRANT_ARG
 {
-  if(p != NULL) {
-    if(p->state == PROCESS_STATE_RUNNING ||
-       p->state == PROCESS_STATE_CALLED) {
-      p->needspoll = 1;
+  if (p != NULL) {
+    if (p->state == PROCESS_STATE_RUNNING || p->state == PROCESS_STATE_CALLED) {
+      p->needspoll   = 1;
       poll_requested = 1;
     }
   }
 }
 /*---------------------------------------------------------------------------*/
-int
-process_is_running(struct process *p) CC_REENTRANT_ARG
+int process_is_running(struct process *p) CC_REENTRANT_ARG
 {
   return p->state != PROCESS_STATE_NONE;
 }

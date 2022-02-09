@@ -13,7 +13,7 @@
 
 /**
  * @defgroup zcl_cluster_servers ZCL Cluster Servers
- * @ingroup components
+ * @ingroup zpc_components
  * @brief List of ZCL Clusters that the Protocol Controller provides on behalf
  * of its PAN Nodes.
  *

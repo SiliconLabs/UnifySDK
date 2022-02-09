@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -22,10 +22,28 @@
 
 #define LOG_TAG "zwapi_protocol_basis"
 
+/**
+ * @brief Struct that helps us cache the RF Region and avoid
+ *        querying the Z-Wave API all the time for something that
+ *        does not change.
+ *
+ */
+typedef struct zwave_rf_region_cache {
+  // Indicates if the cached RF region is valid or should be queried again.
+  bool valid;
+  // Indicates which RF region was reported by the Z-Wave API.
+  zwave_rf_region_t rf_region;
+} zwave_rf_region_cache_t;
+
+// Static variables
 static zwave_node_id_basetype_t node_id_basetype_setting = NODEID_8BITS;
+static zwave_rf_region_cache_t rf_region_cache
+  = {.valid = false, .rf_region = ZWAVE_RF_REGION_UNDEFINED};
 
 sl_status_t zwapi_soft_reset(void)
 {
+  rf_region_cache.valid     = false;
+  rf_region_cache.rf_region = ZWAVE_RF_REGION_UNDEFINED;
   return zwapi_send_command(FUNC_ID_SERIAL_API_SOFT_RESET, NULL, 0);
 }
 
@@ -234,6 +252,10 @@ sl_status_t zwapi_set_rf_region(zwave_rf_region_t rfregion)
     return SL_STATUS_NOT_SUPPORTED;
   }
 
+  // If we try to change the RF Region, mark the cached value as invalid
+  rf_region_cache.valid     = false;
+  rf_region_cache.rf_region = ZWAVE_RF_REGION_UNDEFINED;
+
   uint8_t response_length = 0, index = 0;
   uint8_t request_buffer[REQUEST_BUFFER_SIZE] = {0},
           response_buffer[FRAME_LENGTH_MAX]   = {0};
@@ -258,6 +280,11 @@ sl_status_t zwapi_set_rf_region(zwave_rf_region_t rfregion)
 
 zwave_rf_region_t zwapi_get_rf_region(void)
 {
+  // Use the previously cached value, if available.
+  if (rf_region_cache.valid == true) {
+    return rf_region_cache.rf_region;
+  }
+
   if (!zwapi_support_setup_func(SERIAL_API_SETUP_CMD_RF_REGION_GET)) {
     return ZWAVE_RF_REGION_UNDEFINED;
   }
@@ -275,7 +302,9 @@ zwave_rf_region_t zwapi_get_rf_region(void)
                                        &response_length);
 
   if (send_command_status == SL_STATUS_OK && response_length > (IDX_DATA + 1)) {
-    return response_buffer[IDX_DATA + 1];
+    rf_region_cache.valid     = true;
+    rf_region_cache.rf_region = response_buffer[IDX_DATA + 1];
+    return rf_region_cache.rf_region;
   }
 
   return ZWAVE_RF_REGION_UNDEFINED;

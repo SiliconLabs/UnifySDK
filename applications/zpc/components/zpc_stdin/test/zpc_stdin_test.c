@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
@@ -39,6 +39,7 @@
 #include "zwave_tx_groups_mock.h"
 #include "zwave_command_class_association_send_mock.h"
 #include "zwave_command_class_firmware_update_mock.h"
+#include "zwave_s2_keystore_mock.h"
 
 // Standard
 #include <stdbool.h>
@@ -47,8 +48,8 @@
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
 {
-  // Setup CLI with ZPC application
   zwave_controller_register_callbacks_IgnoreAndReturn(SL_STATUS_OK);
+  // Setup CLI with ZPC application
   zpc_stdin_setup_fixt();
 }
 
@@ -159,19 +160,6 @@ void test_zwave_tx_log()
 
   zwave_tx_log_queue_Expect(true);
   state = uic_stdin_handle_command("zwave_tx_log 435,4j,re09j4r,");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-}
-
-void test_zwave_tx_flush()
-{
-  sl_status_t state;
-
-  zwave_tx_init_ExpectAndReturn(SL_STATUS_TRANSMIT_BUSY);
-  state = uic_stdin_handle_command("zwave_tx_flush not,a,valid,command");
-  TEST_ASSERT_EQUAL(SL_STATUS_TRANSMIT_BUSY, state);
-
-  zwave_tx_init_ExpectAndReturn(SL_STATUS_OK);
-  state = uic_stdin_handle_command("zwave_tx_flush");
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }
 
@@ -419,6 +407,7 @@ void test_attribute_resolver_log()
 
 void test_zwave_initiate_interview()
 {
+  zwave_unid_from_node_id_Ignore();
   sl_status_t state;
   state = uic_stdin_handle_command("zwave_initiate_interview");
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
@@ -477,6 +466,13 @@ void test_handle_cc_versions_log()
   zwave_command_handler_print_info_Expect(0);
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     uic_stdin_handle_command("zwave_cc_versions_log"));
+}
+
+void test_handle_zwave_s2_log_security_keys()
+{
+  zwave_s2_log_security_keys_Expect(1);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_stdin_handle_command("zwave_log_security_keys"));
 }
 
 void test_zwave_tx_association()

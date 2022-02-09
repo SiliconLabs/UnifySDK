@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -12,9 +12,8 @@
  *****************************************************************************/
 
 /**
- * @file zpc_hex_to_int.h
- * @defgroup zpc_utils ZPC Utilities
- * @ingroup components
+ * @defgroup zpc_hex_to_int ZPC Hex to Int conversion utility
+ * @ingroup zpc_utils
  * @brief hex to int convert functions and macros for ZPC
  *
   * @{
@@ -27,10 +26,10 @@ extern "C" {
 #endif
 
 /**
- * @brief Convert a hex character to its int value 
+ * @brief Convert a hex character to its int value
  *
  * @param c: hex character
- * @return integer value of the character. On error return 0 
+ * @return integer value of the character. On error return 0
  */
 
 int zpc_hex2int(char c);

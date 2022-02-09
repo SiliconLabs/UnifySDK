@@ -1,5 +1,5 @@
 /* # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -28,5 +28,11 @@
  * - poll contiki etimer.
  */
 bool uic_main_loop(void);
+
+/**
+ * Run the main process loop in gecko.
+ * @see uic_main_loop for more info.
+ */
+bool uic_main_loop_run(void);
 
 #endif

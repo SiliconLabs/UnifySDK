@@ -58,6 +58,42 @@ namespace zigpc_ucl
 namespace mqtt
 {
 /**
+ * @brief Types of specific UCL topics that can be build along with variables
+ * passed via mqtt::topic_data_t.
+ *
+ */
+enum class topic_type_t {
+  BY_UNID_PC_NWMGMT,       /**< Uses topic_data_t fields: eui64 */
+  BY_UNID_PC_NWMGMT_WRITE, /**< Uses topic_data_t fields: eui64 */
+  BY_UNID_NODE_STATE,      /**< Uses topic_data_t fields: eui64 */
+  BY_UNID_NODE,            /**< Uses topic_data_t fields: eui64 */
+  BY_UNID_NODE_EP,         /**< Uses topic_data_t fields: eui64, endpoint_id */
+};
+
+/**
+ * @brief Data that is used to build UCL topics.
+ *
+ */
+typedef struct {
+  zigbee_eui64_uint_t eui64;
+  zigbee_endpoint_id_t endpoint_id;
+} topic_data_t;
+
+/**
+ * @brief Populate the topic string based on the topic type and data passed
+ * in.
+ *
+ * @param topic_type    Topic type.
+ * @param topic_data    Data to populate in the topic.
+ * @param topic         Topic to populate.
+ * @return sl_status_t SL_STATUS_OK on succes, or SL_STATUS_INVALID_TYPE on
+ * invalid topic type passed in.
+ */
+sl_status_t build_topic(zigpc_ucl::mqtt::topic_type_t topic_type,
+                        zigpc_ucl::mqtt::topic_data_t topic_data,
+                        std::string &topic);
+
+/**
  * @brief Parse a UCL UNID into Zigbee device identifier.
  *
  * @param unid          UNID string to parse.
@@ -92,6 +128,15 @@ namespace node_state
 sl_status_t publish_state(zigbee_eui64_uint_t eui64,
                           zigbee_node_network_status_t network_status,
                           uint32_t max_cmd_delay);
+
+/**
+ * @brief Unretain all topic for a particular device.
+ *
+ * @param eui64             Device identifier.
+ * @return sl_status_t      SL_STATUS_OK on success, or MQTT API error
+ * otherwise.
+ */
+sl_status_t remove_node_topics(zigbee_eui64_uint_t eui64);
 
 /**
  * @brief Unretain all node topics except the node state topic.

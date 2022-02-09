@@ -1,6 +1,6 @@
 /******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  ******************************************************************************
  * The licensor of this software is Silicon Laboratories Inc. Your use of this
  * software is governed by the terms of Silicon Labs Master Software License
@@ -35,7 +35,8 @@ constexpr char LOG_TAG[] = "attribute_resolver";
 #include <map>
 #include <string>
 #include <sstream>
-
+#include <inttypes.h>
+#include <cassert>
 using namespace attribute_store;
 
 typedef enum {
@@ -56,7 +57,7 @@ static attribute_resolver_config_t attribute_resolver_config;
  */
 typedef struct {
   clock_time_t send_timeout;
-  int count;
+  uint8_t count;
 } pending_get_t;
 
 // Pending Get resolutions
@@ -72,8 +73,7 @@ static bool scan_requested;
 static bool needs_get(attribute_store_node_t node);
 static bool needs_set(attribute_store_node_t node);
 static void resolver_find_next_resolve();
-static void on_resolver_node_update(attribute_store_node_t node,
-                                    attribute_store_change_t change);
+static void on_resolver_node_update(attribute_changed_event_t *event_data);
 static void on_resolver_node_deleted(attribute_store_node_t node);
 
 /**
@@ -150,6 +150,14 @@ static void scan_node(attribute_store_node_t node_to_scan);
  *            false if the node does not need to be scanned
  */
 static bool is_node_to_be_scanned(attribute_store_node_t node);
+
+/**
+ * @brief Marks all nodes of a resolution group as "given up" if we gave up
+ * trying to resolve one.
+ *
+ * @param node Node that we gave up on.
+ */
+static void give_up_get_resolution_on_group(attribute_store_node_t node);
 
 // Declare the Contiki Process for the Attribute Resolver
 PROCESS(attribute_resolver_process, "attribute_resolver_process");
@@ -284,7 +292,7 @@ void attribute_resolver_state_log()
        it != pending_get_resolutions.end();
        ++it) {
     sl_log_debug(LOG_TAG,
-                 "\t Node %d, timeout: %llu, retries: %d",
+                 "\t Node %d, timeout: %lu, retries: %" PRIu8,
                  it->first,
                  it->second.send_timeout,
                  it->second.count);
@@ -343,6 +351,15 @@ static bool resolution_already_queued(resolver_rule_type_t rule_type,
   return false;
 }
 
+static void give_up_get_resolution_on_group(attribute_store_node_t node)
+{
+  for (attribute a:
+       attribute_resolver_rule_get_group_nodes(RESOLVER_GET_RULE, node)) {
+    pending_get_resolutions[a]
+      = {.send_timeout = 0, .count = attribute_resolver_config.get_retry_count};
+  }
+}
+
 /**
  * @brief Helper function executing a Get rule.
  *
@@ -357,10 +374,6 @@ static sl_status_t execute_get(attribute_store_node_t node)
     if (pending_get_resolutions[node].count
         >= attribute_resolver_config.get_retry_count) {
       //If we exceed the retry count don't try this anymore
-      sl_log_info(LOG_TAG,
-                  "Maximum amount of retries reached for Attribute ID "
-                  "%d. Giving up.\n",
-                  node);
       return SL_STATUS_ABORT;
     } else if ((clock_time() > pending_get_resolutions[node].send_timeout)
                && (pending_get_resolutions[node].send_timeout != 0)) {
@@ -561,38 +574,39 @@ static bool needs_set(attribute_store_node_t node)
 /**
  * @brief Callback function registered to attribute store when node has updates
  */
-static void on_resolver_node_update(attribute_store_node_t node,
-                                    attribute_store_change_t change)
+static void on_resolver_node_update(attribute_changed_event_t *event_data)
 {
+  assert(event_data);
   //If the node has been deleted make sure to clear it from our watch
-  if ((change == ATTRIBUTE_DELETED)
-      || (attribute_store_get_node_type(node)
+  if ((event_data->change == ATTRIBUTE_DELETED)
+      || (attribute_store_get_node_type(event_data->updated_node)
           == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE)) {
-    on_resolver_node_deleted(node);
+    on_resolver_node_deleted(event_data->updated_node);
     return;
   }
   // If the node is blocked due to maximum retry count and it was just updated
   // try to see if resolution is needed or if it works now.
-  if ((!needs_get(node))
-      || (is_node_get_resolution_max_retries_reached(node) == true)) {
-    pending_get_resolutions.erase(node);
+  if ((!needs_get(event_data->updated_node))
+      || (is_node_get_resolution_max_retries_reached(event_data->updated_node)
+          == true)) {
+    pending_get_resolutions.erase(event_data->updated_node);
   }
 
   // If the node was updated and does not need a set anymore, we remove it from
   // the pending sets
-  if (!needs_set(node)) {
-    pending_set_resolutions.erase(node);
+  if (!needs_set(event_data->updated_node)) {
+    pending_set_resolutions.erase(event_data->updated_node);
   }
 
   // See if we need to scan something.
   // if somebody is waiting for a resolution notification, (possibly above the current node)
   // ensure that the node gets scanned again
   attribute_store_node_t parent_with_listener
-    = get_highest_parent_with_resolution_listener(node);
+    = get_highest_parent_with_resolution_listener(event_data->updated_node);
   if (parent_with_listener != ATTRIBUTE_STORE_INVALID_NODE) {
     scan_node(parent_with_listener);
-  } else if (is_node_to_be_scanned(node)) {
-    scan_node(node);
+  } else if (is_node_to_be_scanned(event_data->updated_node)) {
+    scan_node(event_data->updated_node);
   }
 }
 
@@ -611,11 +625,7 @@ static void on_resolver_node_deleted(attribute_store_node_t node)
   // See if we need to scan something.
   // if somebody is waiting for a resolution notification, (above the current node)
   // ensure that the node gets scanned again
-  attribute_store_node_t parent_with_listener
-    = get_highest_parent_with_resolution_listener(node);
-  if (parent_with_listener != ATTRIBUTE_STORE_INVALID_NODE) {
-    scan_node(parent_with_listener);
-  }
+  scan_node(get_highest_parent_with_resolution_listener(node));
 }
 
 static bool is_node_under_resolution(attribute_store_node_t node)
@@ -667,12 +677,14 @@ static void set_common_parent_stack_index_zero(attribute_store_node_t node)
 
 static void scan_node(attribute_store_node_t node_to_scan)
 {
+  if (node_to_scan == ATTRIBUTE_STORE_INVALID_NODE) {
+    return;
+  }
   // If a scan is progress, we search the
   // common parent node in the stack and set he child_index of the common parent to 0,
   // this will cause do updated node to be visited.
   if (!stack.empty()) {
     set_common_parent_stack_index_zero(node_to_scan);
-    //process_post(&attribute_resolver_process, RESOLVER_NEXT_EVENT, nullptr);
   } else if (scan_requested == false) {
     scan_requested = true;
     process_post(&attribute_resolver_process, RESOLVER_NEXT_EVENT, nullptr);
@@ -780,6 +792,7 @@ static bool is_node_to_be_scanned(attribute_store_node_t node)
 void on_resolver_rule_execute_complete(attribute_store_node_t node,
                                        clock_time_t transmission_time)
 {
+  // Get rule is complete, check if we want to wait for a retry
   if (pending_get_resolutions.count(node) && needs_get(node)) {
     clock_time_t retry_time
       = transmission_time + attribute_resolver_config.get_retry_timeout;
@@ -787,13 +800,27 @@ void on_resolver_rule_execute_complete(attribute_store_node_t node,
 
     // Ensure that the timer is running
     attribute_resolver_restart_pending_get_nodes_timer();
+
+    // Did we just reach the last retry, verify if there is some parent waiting for it.
+    if (pending_get_resolutions[node].count
+        >= attribute_resolver_config.get_retry_count) {
+      sl_log_debug(LOG_TAG,
+                   "Maximum amount of retries reached for Attribute ID "
+                   "%d. Giving up.\n",
+                   node);
+      give_up_get_resolution_on_group(node);
+      scan_node(get_highest_parent_with_resolution_listener(node));
+    }
   }
+
+  // Is it a multi frame set rule?
   if (pending_set_resolutions.count(node)
       && (pending_set_resolutions[node] == true)) {
     // Multi-frame resolutions, just remove it from the pending sets and try again.
     pending_set_resolutions.erase(node);
     scan_node(node);
   }
+
   // Resolution of this node is done (everything is resolved or we gave up trying)
   if (listeners.contains(node)
       && !attribute_resolver_node_or_child_needs_resolution(node)) {

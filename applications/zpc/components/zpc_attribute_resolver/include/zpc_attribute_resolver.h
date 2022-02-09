@@ -13,7 +13,7 @@
 
 /**
  * @defgroup zpc_attribute_resolver ZPC Attribute Resolver
- * @ingroup components
+ * @ingroup zpc_components
  * @brief ZPC part of the attribute resolver
  *
  * The ZPC Attribute resolver is in charge of sending frames and listening for Send

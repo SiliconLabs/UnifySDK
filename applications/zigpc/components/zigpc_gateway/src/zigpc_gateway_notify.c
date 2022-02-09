@@ -76,17 +76,21 @@ sl_status_t zigpc_gateway_reset_observers(void)
 }
 
 /**
- * @brief Z3Gateway handler for network initialization
+ * @brief ZigbeeHost handler for network initialization
  *
- * @param eui64_le  Trust Center device EUI64
- * @param network   Trust Center network properties
+ * @param network     Network properties.
  */
 void zigpc_gateway_hdl_on_network_initialized(
-  const EmberEUI64 eui64_le, const EmberNetworkParameters *network)
+  const EmberNetworkParameters *network)
 {
   static struct zigpc_gateway_on_network_init network_init = {0};
 
+  EmberEUI64 eui64_le;
+  zigbeeHostGetEui64(eui64_le);
   zigbee_eui64_copy_switch_endian(network_init.zigpc_eui64, eui64_le);
+
+  network_init.zigpc_endpoint_id = zigbeeHostGetPrimaryEndpointId();
+
   network_init.zigpc_panid = network->panId;
   memcpy(network_init.zigpc_ext_panid,
          network->extendedPanId,
@@ -103,7 +107,7 @@ void zigpc_gateway_hdl_on_network_initialized(
 }
 
 /**
- * @brief Z3Gateway callback handler when a node has started joining
+ * @brief ZigbeeHost callback handler when a node has started joining
  * the network. This handler will notify any listening components of
  * the node that has started the join process.
  *
@@ -129,7 +133,7 @@ void zigpc_gateway_hdl_on_node_add_start(const EmberEUI64 eui64_le)
 }
 
 /**
- * @brief Z3Gateway callback handler when a node has finished joining
+ * @brief ZigbeeHost callback handler when a node has finished joining
  * the network. This handler will notify any listening components of
  * the node that has completed the join process.
  *
@@ -182,41 +186,70 @@ void zigpc_gateway_hdl_on_node_removed(const EmberEUI64 eui64_le)
  *
  * @param eui64_le      Device identifier.
  * @param endpointCount Number of endpoints discovery events to expect.
+ * @param endpointList  List of endpoints discovered.
  */
-void zigpc_gateway_hdl_on_node_discovered(const EmberEUI64 eui64_le,
-                                          uint8_t endpointCount)
+void zigpc_gateway_hdl_on_device_endpoints_discovered(
+  const EmberEUI64 eui64_le, uint8_t endpointCount, const uint8_t *endpointList)
 {
-  sl_status_t status;
-  static zigpc_gateway_on_node_discovered_t node_disc = {0};
+  if ((eui64_le == NULL) || ((endpointCount > 0U) && (endpointList == NULL))) {
+    return;
+  }
+
+  zigpc_gateway_on_node_discovered_t node_disc = {0};
 
   zigbee_eui64_copy_switch_endian(node_disc.eui64, eui64_le);
   node_disc.endpoint_count = endpointCount;
+
+  if (endpointCount == 0U) {
+    // Notify and return early if no endpoints are active
+    node_disc.endpoint_list = NULL;
+
+    sl_status_t status
+      = zigpc_observable_notify(&zigpc_gateway_observable,
+                                ZIGPC_GATEWAY_NOTIFY_NODE_DISCOVERED,
+                                (void *)&node_disc);
+    if (status != SL_STATUS_OK) {
+      sl_log_warning(LOG_TAG, "NOTIFY_NODE_DISCOVER failed: 0x%X", status);
+    }
+
+    return;
+  }
+
+  zigbee_endpoint_id_t endpoint_list[endpointCount];
+  memcpy(endpoint_list,
+         endpointList,
+         sizeof(zigbee_endpoint_id_t) * endpointCount);
+  node_disc.endpoint_list = endpoint_list;
 
   sl_log_debug(LOG_TAG,
                "EUI64 %016" PRIX64 ": %u endpoints discovered",
                zigbee_eui64_to_uint(node_disc.eui64),
                endpointCount);
 
-  status = zigpc_observable_notify(&zigpc_gateway_observable,
-                                   ZIGPC_GATEWAY_NOTIFY_NODE_DISCOVERED,
-                                   (void *)&node_disc);
+  sl_status_t status
+    = zigpc_observable_notify(&zigpc_gateway_observable,
+                              ZIGPC_GATEWAY_NOTIFY_NODE_DISCOVERED,
+                              (void *)&node_disc);
   if (status != SL_STATUS_OK) {
     sl_log_warning(LOG_TAG, "NOTIFY_NODE_DISCOVER failed: 0x%X", status);
   }
 }
 
 /**
- * @brief Notify handler for endpoint discovery containing information about
- * clusters supported
+ * @brief Notify handler for ZDO simple descriptor response containing
+ * endpoint discovery information.
  *
  * @param eui64_le      Device identifier
- * @param endpointInfo  Device endpoint information
+ * @param endpointInfo  Discovered endpoint information
  */
-void zigpc_gateway_hdl_on_node_endpoint_discovered(
-  const EmberEUI64 eui64_le, const struct z3gatewayEndpointInfo *endpointInfo)
+void zigpc_gateway_hdl_on_endpoint_clusters_discovered(
+  const EmberEUI64 eui64_le, const EmberAfClusterList *endpointInfo)
 {
-  sl_status_t status;
-  static zigpc_gateway_on_node_endpoint_discovered_t endpoint_discovered = {0};
+  if ((eui64_le == NULL) || (endpointInfo == NULL)) {
+    return;
+  }
+
+  zigpc_gateway_on_node_endpoint_discovered_t endpoint_discovered = {0};
 
   zigbee_eui64_copy_switch_endian(endpoint_discovered.eui64, eui64_le);
   zigbee_eui64_uint_t eui64_uint
@@ -227,56 +260,51 @@ void zigpc_gateway_hdl_on_node_endpoint_discovered(
                eui64_uint,
                endpointInfo->endpoint,
                endpointInfo->deviceId,
-               endpointInfo->serverClusterCount);
-  for (int i = 0; i < endpointInfo->serverClusterCount; i++) {
+               endpointInfo->inClusterCount);
+  for (int i = 0; i < endpointInfo->inClusterCount; i++) {
     sl_log_debug(LOG_TAG,
                  "Discovered EUI64 %016" PRIX64
                  ": endpoint %u: cluster %u = 0x%04X",
                  eui64_uint,
                  endpointInfo->endpoint,
                  i,
-                 endpointInfo->serverClusterList[i]);
+                 endpointInfo->inClusterList[i]);
   }
 
   endpoint_discovered.endpoint.endpoint_id   = endpointInfo->endpoint;
-  endpoint_discovered.endpoint.cluster_count = endpointInfo->serverClusterCount;
+  endpoint_discovered.endpoint.cluster_count = endpointInfo->inClusterCount;
 
-  if (endpointInfo->serverClusterCount > 0) {
-    for (size_t cluster_index = 0;
-         cluster_index < endpointInfo->serverClusterCount;
-         cluster_index++) {
-      endpoint_discovered.endpoint.cluster_list[cluster_index].cluster_id
-        = endpointInfo->serverClusterList[cluster_index];
-    }
+  for (size_t cluster_index = 0; cluster_index < endpointInfo->inClusterCount;
+       cluster_index++) {
+    endpoint_discovered.endpoint.cluster_list[cluster_index].cluster_id
+      = endpointInfo->inClusterList[cluster_index];
   }
 
   endpoint_discovered.endpoint.client_cluster_count
-    = endpointInfo->clientClusterCount;
-  if (endpointInfo->clientClusterCount > 0) {
-    for (size_t cluster_index = 0;
-         cluster_index < endpointInfo->clientClusterCount;
-         cluster_index++) {
-      endpoint_discovered.endpoint.client_cluster_list[cluster_index].cluster_id
-        = endpointInfo->clientClusterList[cluster_index];
+    = endpointInfo->outClusterCount;
+  for (size_t cluster_index = 0; cluster_index < endpointInfo->outClusterCount;
+       cluster_index++) {
+    endpoint_discovered.endpoint.client_cluster_list[cluster_index].cluster_id
+      = endpointInfo->outClusterList[cluster_index];
 
-      if (endpointInfo->clientClusterList[cluster_index]
-          == ZIGPC_ZCL_CLUSTER_OTA_UPGRADE) {
-        endpoint_discovered.endpoint
-          .cluster_list[endpointInfo->serverClusterCount]
-          .cluster_id
-          = endpointInfo->clientClusterList[cluster_index];
+    if (endpointInfo->outClusterList[cluster_index]
+        == ZIGPC_ZCL_CLUSTER_OTA_UPGRADE) {
+      endpoint_discovered.endpoint.cluster_list[endpointInfo->inClusterCount]
+        .cluster_id
+        = endpointInfo->outClusterList[cluster_index];
 
-        endpoint_discovered.endpoint.cluster_count++;
-      }
+      endpoint_discovered.endpoint.cluster_count++;
     }
   }
 
-  status
+  sl_status_t status
     = zigpc_observable_notify(&zigpc_gateway_observable,
                               ZIGPC_GATEWAY_NOTIFY_NODE_ENDPOINT_DISCOVERED,
                               (void *)&endpoint_discovered);
   if (status != SL_STATUS_OK) {
-    sl_log_warning(LOG_TAG, "NODE_ENDPOINT_DISCOVERED failed: 0x%X", status);
+    sl_log_warning(LOG_TAG,
+                   "Notify NODE_ENDPOINT_DISCOVERED failed: 0x%X",
+                   status);
   }
 }
 
@@ -534,17 +562,18 @@ void zigpc_gateway_hdl_on_ota_update_completed(const EmberEUI64 eui64,
   }
 }
 
-struct z3gatewayCallbacks zigpc_gateway_z3gateway_callbacks = {
+struct zigbeeHostCallbacks zigpc_gateway_zigbee_host_callbacks = {
   .onEmberAfStackInitalized        = NULL,
   .onEmberAfNcpPreReset            = zigpc_gateway_on_ncp_pre_reset,
   .onEmberAfNcpPostReset           = zigpc_gateway_on_ncp_post_reset,
-  .onTrustCenterInitialized        = zigpc_gateway_hdl_on_network_initialized,
-  .onTrustCenterDeviceJoinStart    = zigpc_gateway_hdl_on_node_add_start,
+  .onNetworkInitialized            = zigpc_gateway_hdl_on_network_initialized,
+  .onNetworkDeviceJoin             = zigpc_gateway_hdl_on_node_add_start,
   .onTrustCenterDeviceJoinComplete = zigpc_gateway_hdl_on_node_add_complete,
-  .onTrustCenterDeviceRemoved      = zigpc_gateway_hdl_on_node_removed,
-  .onTrustCenterDeviceDiscovered   = zigpc_gateway_hdl_on_node_discovered,
-  .onTrustCenterDeviceEndpointDiscovered
-  = zigpc_gateway_hdl_on_node_endpoint_discovered,
+  .onNetworkDeviceLeaveResponse    = zigpc_gateway_hdl_on_node_removed,
+  .onZdoActiveEndpointsResponse
+  = zigpc_gateway_hdl_on_device_endpoints_discovered,
+  .onZdoSimpleDescriptorResponse
+  = zigpc_gateway_hdl_on_endpoint_clusters_discovered,
   .onReportedAttributeChange    = zigpc_gateway_hdl_on_reported_attribute,
   .onReadAttributesResponse     = zigpc_gateway_hdl_on_read_attributes,
   .onConfigureReportingResponse = zigpc_gateway_hdl_on_configure_response,

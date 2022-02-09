@@ -1,36 +1,35 @@
 # ZPC User's Guide
 
-ZPC translates the Unify Controller Language(UCL) into Z-Wave commands and
-communicates with Z-Wave devices in a Z-Wave network.
+This user guide will guide the reader on how to install, configure and run the
+Z-Wave Protocol Controller (ZPC).
 
-## Installation
-
-The ZPC is installed on a Debian Buster platform using the uic-zpc Debian
-package provided with the SDK.
-
-```bash
-apt install uic-zpc_<version>_armhf.deb
-```
+The ZPC translates the Unify Controller Language(UCL) into Z-Wave commands and
+communicates with Z-Wave devices in a Z-Wave network and is a full certifiable
+Z-Wave controller.
 
 ### Files
 
 The Debian package of the ZPC contains the following files:
 
-| Path                                       | Description                       |
-| ------------------------------------------ | ----------------------------------|
-| /lib/systemd/system/uic-zpc.service        | Systemd service file              |
-| /usr/bin/zpc                               | ZPC application                   |
-| /usr/share/bash-completion/completions/zpc | script for bash auto completion   |
-| /usr/share/doc/uic-zpc/copyright           | copyright notice                  |
-| /etc/uic/uic.cfg                           | Default location of config file   |
-| /var/lib/uic/database.db                   | Default location of database      |
-| /usr/share/uic/rules                       | Default location of mapping rules |
+| Path                                       | Description                                        |
+| ------------------------------------------ | -------------------------------------------------- |
+| /lib/systemd/system/uic-zpc.service        | Systemd service file                               |
+| /usr/bin/zpc                               | ZPC application                                    |
+| /usr/bin/zpc_database_tool                 | Tool for database manipulation                     |
+| /usr/bin/zpc_database_recover_tool         | Tool for triggering a re-interview of all nodes    |
+| /usr/share/bash-completion/completions/zpc | script for bash auto completion                    |
+| /usr/local/zpc/node_identify_rpi4_led.sh   | script used by the indicator CC                    |
+| /usr/share/doc/uic-zpc/copyright           | copyright notice                                   |
+| /etc/uic/uic.cfg                           | Default location of config file                    |
+| /var/lib/uic/zpc.db                        | Default location of database                       |
+| /usr/share/uic/rules                       | Default location of mapping rules                  |
+| /usr/share/uic/zwave_poll_config.yaml      | Default location of network polling attribute list |
 
 #### Configuration File
 
 The configuration file is written in YAML and is used to set up the ZPC.
-The ZPC can dump the running configuration, which can be used as a starting
-point for the config file.
+The ZPC can dump the running configuration using the command line option `--dump`.
+The dumped file can be used as a starting point a config file.
 
 Configuration file example:
 
@@ -38,8 +37,6 @@ Configuration file example:
 $ zpc --dump-config
 # Unify sample conf file
 
-datastore:
-  - file:'/var/lib/uic/database.db'
 log:
   - level:'d'
   - tag_level:'uic_main:debug'
@@ -48,6 +45,7 @@ mqtt:
   - host:'localhost'
   - port:1883
 zpc:
+  - datastore_file: '/var/lib/uic/zpc.db'
   - accepted_transmit_failure:2
   - default_wakeup_interval:4200
   - device_id:'36833760FCEF5E5C8E66077764918592'
@@ -61,44 +59,30 @@ zpc:
   - rf_region:'EU'
   - serial:'/dev/ttyUSB0'
   - serial_log_file:''
+  - poll:
+    - attribute_list_file:'/usr/share/uic/zwave_poll_config.yaml'
+    - backoff: 30
+    - default_interval: 60
 ```
 
 #### Database File
 
 The ZPC uses a sqlite database for storing network information. The default
-location of the database is /var/lib/uic/database.db. The database must be located
+location of the database is /var/lib/uic/zpc.db. The database must be located
 in a writable part of the file system. If the database is lost, the ZPC will lose
 vital information about the network and need to probe all nodes in the network.
 
-## Running ZPC
+> WARNING: the ZPC is not able to recover all lost information by re-interviewing,
+> ie. the granted security keys for the nodes.
 
-You can run the ZPC either by using the
-systemd service, that is installed through the Debian package, or by
-running the ZPC from the command line.
-
-### Running ZPC Using Systemd
-
-Normally, the ZPC, which is installed as a systemd service, should be run as a
-service.
-
-You can start and stop the ZPC service with the
-systemctl command (see systemctl linux manual for details).
-
-```bash
-sudo systemctl start uic-zpc
-sudo systemctl stop uic-zpc
-```
-
-To see the logs of the ZPC when it runs as a service, use the following command:
-
-```bash
-journalctl -u uic-zpc.service
-```
+The best way to run ZPC is using the Systemd service that is
+installed with the Debian installer.
+For more information, see [README.md](../../README.md).
 
 ### Running ZPC From the Command Line
 
-Running the ZPC from the command line provides a Command Line Interface (CLI)
-that supports various debugging commands. To get more information about the
+When running the ZPC from the command line provides an interactive Command Line Interface (CLI)
+is available. To get more information about the
 commands, type `help` in the CLI.
 
 These are the steps to run the ZPC from the command line:
@@ -107,146 +91,273 @@ These are the steps to run the ZPC from the command line:
    mosquitto` or by running `mosquitto -d` in a terminal.
 2. Run `/usr/bin/zpc`.
 
-> To get more information about command line arguments for ZPC, run `/usr/bin/zpc --help`.
+> NOTE: To get more information about command line arguments for ZPC, run `/usr/bin/zpc --help`.
 
 Note that the default permissions for the ZPC database file located in
-/var/lib/uic/database.db is only writable for the _uic_ system user (which is
+/var/lib/uic/zpc.db is only writable for the _uic_ system user (which is
 created upon installation). If you run the zpc as another user,
 select a different database location.
 
 For example,
 
 ```bash
-zpc --zpc.serial /dev/ttyUSB0 --zpc.rf_region EU --datastore.file mydatabase.db --mapdir rules
+zpc --zpc.serial /dev/ttyUSB0 --zpc.rf_region EU --zpc.datastore_file mydatabase.db --mapdir rules
 ```
 
-#### (Advanced) Configuring ZPC to Use TLS Certificate-Based Encryption
-##### Self Signed Certificate Generation
+## Updating the NCP firmware
+The ZPC is able to update the NCP firmware over the serial(USB) link. The
+firmware update is performed by providing a Gecko Boot loader file(GBL) at the
+command line when booting the ZPC.
 
-The following script can generate and self sign the necessary certificates for connection ZPC to
-MQTT broker in the directory format shown below.
+There are two command line options to be aware of, `--zpc.ncp_version` and
+`--zpc.ncp_update`.
+
+`--zpc.ncp_version` will print the chip and software version of the
+SerialAPI and exit immediately. This can be used to determine if the firmware
+should be applied or not.
+```
+zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
+# uic build: ver_1.0.2_cert-196-g7d2caffd
+2022-Jan-05 14:48:25.728069 <i> [uic_component_fixtures] Completed: Unify Signal Handler
+2022-Jan-05 14:48:25.728548 <i> [uic_component_fixtures] Completed: Unify MQTT Client
+2022-Jan-05 14:48:25.728627 <i> [uic_component_fixtures] Completed: Unify STDIN
+2022-Jan-05 14:48:25.728714 <i> [uic_component_fixtures] Completed: ZPC Config
+2022-Jan-05 14:48:25.765728 <i> [zpc_ncp_update] chip_hardware_type     :     7
+2022-Jan-05 14:48:25.765847 <i> [zpc_ncp_update] chip_hardware_revision :     0
+2022-Jan-05 14:48:25.765908 <i> [zpc_ncp_update] chip_serial_api_version:  7.15
+```
+
+`--zpc.ncp_update` performs a firmware update and exits the application when the
+update is completed.
+```
+zpc --zpc.serial /dev/ttyUSB0 --zpc.ncp_update new_firmware.gbl
+```
+
+If the firmware update succeeds the the exit code of the zpc will be _2_ and if
+the update fails the exit code will be _1_.
+
+---
+***NOTE*** for the NCP update to work, a Gecko Bootloader and possibly signing
+certificates needs to be installed.
+
+---
+
+In the event that the firmware upload process get interrupted, the NCP may be
+left in bootloader. The ZPC will not be able to re-flash because it requires a
+functional serial API. In this case the device can be flashed manually using the
+xmodem tool _sx_ from the debian package lrzsx:
 
 ```bash
-scripts/tls-certificates-generation.sh <broker IP/hostname>
-```
-Default: localhost (MQTT broker and ZPC are running on the same machine)
-
-```
-$ tree .
-├── broker
-│   ├── broker.crt
-│   └── broker.key
-├── ca
-│   ├── ca.crt
-│   ├── ca.key
-│   └── ca.srl
-└── client
-    ├── client.crt
-    └── client.key
+  sudo apt install lrzsz
+  stty -F /dev/ttyUSB0 115200
+  echo 1 > /dev/ttyUSB0
+  sx ZW_SerialAPI_Controller_7.15.4_256_EFR32ZG14_REGION_EU.gbl < /dev/ttyUSB0 > /dev/ttyUSB0
+  echo 2 > /dev/ttyUSB0
 ```
 
-Passing `--mqtt.cafile (ca/ca.crt)`, `--mqtt.certfile (client/client.crt)` and
-`--mqtt.keyfile (client/client.key)` enables the TLS support in ZPC.
+## Performing Firmware Updates of End Devices
 
-Having the config options: `"cafile" (client/ca.crt)`, `"certfile"
-(broker/broker.crt)` and `"keyfile" (broker/broker.key)` in Mosquitto Broker
-config file will make Broker communicate with ZPC with TLS encryption.
+The ZPC has the capability to perform Firmware Updates of end devices.
+Performing firmware updates requires [Image
+Provider](../../applications/image_provider/readme_user.md) application to be
+run and configured correctly. The section below discusses on how to construct
+UIID and VERSION information that are required to perform firmware update of an
+end device.
 
-##### Broker Configurations
+Firmware updates can be triggered by providing the [Image Provider](../../applications/image_provider/readme_user.md)
+with compatible firmware images and meta data information.
 
-Configure the Mosquitto broker with the following parameters to enable
-TLS support. Broker can support TLS and non-TLS communication simultaneously
-on two different ports. For example, in the following mosquitto.conf, Mosquitto Broker
-will accept non-TLS communication on port 1883.
+Once the a firmware update is successfully performed on an end device, the ZPC
+will automatically re-interview the device and present the capabilities of the
+device to the IoT services.
+### OTA UIID Construction
 
-While on port 8883 Mosquitto Broker will need ZPC to pass correct --mqtt.cafile,
---mqtt.certfile and --mqtt.keyfile on command line to connect to TLS encrypted
-communication with ZPC.
+To upload an image for a Z-Wave node, compute a Unique Image Identifier (UIID)
+for this device.
 
-This will allow UPVL and DEV_GUI and other MQTT Clients to have non-DTLS
-connection to Broker on port 1883 while ZPC can have TLS connection to Broker
-on port 8883.
+The UIID for the ZPC is a string that can be constructed using the
+following information:
 
-###### mosquitto.conf
+* The Manufacturer ID (Manufacturer Specific Command Class, 2 bytes)
+* The Product Type (Manufacturer Specific Command Class, 2 bytes)
+* The Product ID (Manufacturer Specific Command Class, 2 bytes)
+* The Firmware Target (Firmware Update Command Class, 1 byte)
+* The Hardware version (Version Command Class, 1 byte)
+
+The string must be formatted using the following format with all values in
+hexadecimal:
+**ZWave-&lt;ManufacturerID&gt;-&lt;ProductType&gt;-&lt;ProductID&gt;-&lt;FirmwareTarget&gt;-&lt;HardwareVersion&gt;**
+
+### UIID/UNID Association
+
+When the ZPC interviews a node, it will publish the detected firmware targets
+under the UIID space in the OTA cluster:
+`ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/#`
+
+For more details about available attributes under each UIID, see the
+the Unify specification - Common OTA FW Update Service chapter.
+
+```
+ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/CurrentVersion/Reported
+```
+
+For example, if a node has 2 Firmware Targets, the publications may look as follows:
+
+```
+ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-00-01/CurrentVersion/Reported - {"value": "3.2.0"}
+ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-01-01/CurrentVersion/Reported - {"value": "3.2.0"}
+```
+
+UIID *ZWave-010f-1002-0b01-00-01* can be used to firmware update target 0.
+UIID *ZWave-010f-1002-0b01-01-01* can be used to firmware update target 1.
+
+### Version String Calculation
+
+The version of a firmware is determined based on the data reported by the
+Z-Wave node using the Version Command Class.
+
+The version string will be composed of three decimal digits following
+[semantic versioning](https://semver.org/). By default, the version
+for a given firmware will be fetched in the Version Command Class,
+in the Version Report Command. Only the Major and Minor digits can be retrieved
+from this report.
+
+For example, if a node sends a Version Report with
+
+* Firmware 0 Version = 3
+* Firmware 0 Sub Version = 14
+
+The resulting version string will be "3.14.0". No patch version number is
+available.
+
+If a node supports the Version Z-Wave Software Report Command, the version string
+for Firmware 0 will be replaced by the Application Version field. For example,
+if a node sends a Version Z-Wave Software Report Command with:
+
+* Application Version 1 (MSB) = 3
+* Application Version 2 = 14
+* Application Version 3 (LSB) = 15
+
+The resulting version string will be "3.14.15".
+
+### Examples
+
+This sections provides an example using the [Image Provider](../../applications/image_provider/readme_user.md) and [Developer GUI](../../applications/dev_ui/dev_gui/readme_user.md) to perform a firmware update of a PowerStrip sample application.
+
+First, make sure that the ZPC, [Image Provider](../../applications/image_provider/readme_user.md) and [Developer GUI](../../applications/dev_ui/dev_gui/readme_user.md)
+are running.
+
+Flash a PowerStrip application on a Z-Wave module with the OTA bootloader
+and GBL encryption keys. See the Z-Wave/Gecko SDK documentation in
+[Simplicity Studio](https://www.silabs.com/developers/simplicity-studio)
+
+Start the DevGUI and include a PowerStrip (or any other) sample application.
+At the end of the interview, the OTA Cluster page will show the UIID of the PowerStrip.
+
+![PowerStrip UIID in DevGUI](doc/assets/img/powerstrip_uiid_dev_gui.png)
+
+Prepare a GBL file with a newer firmware version that you upload to the Image
+Provider application. It will require several versions of the Z-Wave/Gecko SDK
+installed to access binaries with older or newer versions.
+
+You can also perform the operation with an identical firmware image (or older)
+but the end node will reject the upgrade operation after the transfer.
+
+Verify that your images are ready and readable:
 
 ```bash
-port 1883
-allow_anonymous true
-per_listener_settings true
-
-listener 8883
-cafile ca/ca.crt
-certfile broker/broker.crt
-keyfile broker/broker.key
-require_certificate true
+pi@unify:/var/lib/uic-image-provider/updates $ ls -l
+-rw-r--r-- 1 pi  pi   171380 Aug 17 14:52 powerstrip.gbl
+-rw-r--r-- 1 pi  pi   168036 Aug 17 14:52 sensor_pir.gbl
 ```
 
-##### ZPC command line options
+Then, use the found UIID to configure the *image.json* file from the image
+provider. Remember to set a version string as well as calculate the Md5 as
+described in the [Image Provider User Guide](../../applications/image_provider/readme_user.md):
 
-###### CA File
-
-Path to file containing the PEM encoded CA certificate to connect to Mosquitto
-MQTT broker for TLS encryption
-```bash
---mqtt.cafile arg
+```json
+{
+  "Version": "1",
+  "Images": [
+    {
+      "FileName": "updates/powerstrip.gbl",
+      "Uiid": "ZWave-0000-0005-0004-0000",
+      "Unid": ["zw-DB9E8293-0002"],
+      "Version": "10.16.4",
+      "ApplyAfter": "2021-06-29T16:39:57+02:00",
+      "Md5": "4XbdcGq2iXOD1EcZ905XxQ=="
+    }
+  ]
+}
 ```
 
-###### Client Certificate File
+Shortly after, the Image Provider will announce the image(s) over MQTT and the
+ZPC will download this image, if some nodes in its network have matching UIIDs.
+The Dev GUI will show the Image Provider announcement under the "Images" tabs
+in the OTA cluster page:
 
-Path to file containing the PEM encoded client certificate to connect to
-Mosquitto MQTT broker for TLS encryption
+![PowerStrip UIID image available in DevGUI](doc/assets/img/powerstrip_image_available_dev_gui.png)
 
-```bash
-  --mqtt.certfile arg
+
+As soon as the ApplyAfter timestamp is passed, you will be able to observe
+the firmware transfer operation under the DevGUI:
+
+![PowerStrip firmware transfer in DevGUI](doc/assets/img/dev_gui_powerstrip_firmware_transfer.png)
+
+
+When the firmware update is finished and successful, it will look as follows:
+
+![PowerStrip firmware transfer completed in DevGUI](doc/assets/img/dev_gui_powerstrip_firmware_transfer_complete.png)
+
+The following conditions have to be met for a successful firmware transfer:
+
+* The Size/Offset attributes are non-zero and set to the same value (The DevGUi will show 100%)
+* The LastError attribute is set to "Success"
+* The Status attribute is back to "Idle"
+
+for example:
+
+```txt
+ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/Offset/Reported - {"value": 171380}
+ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/Size/Reported - {"value": 171380}
+ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/LastError/Reported - {"value": "Success"}
+ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/Status/Reported - {"value": "Idle"}
 ```
 
-###### Client Private Key File
+This state will only be visible for a very short time, as the ZPC will
+re-interview the node and will unpublish its state and capabilities for the
+time of the interview.
 
-Path to file containing the PEM encoded CA certificate to connect to Mosquitto
-MQTT broker for TLS encryption
+![Re-interview button in DevGUI](doc/assets/img/dev_gui_node_interview_button.png)
 
-```bash
---mqtt.keyfile arg
-```
+### Possible Errors
 
-Note: ZPC does not support encrypted keyfile
+There are a few possible errors described in the Unify specification.
+The *LastError* attribute indicates the status of the last Firmware
+Update/transfer attempt.
 
-TLS support example:
+![Errors during Firmware Update](doc/assets/img/dev_gui_possible_firmware_udpate_errors.png)
 
-```bash
-zpc --zpc.serial /dev/ttyUSB0 --zpc.rf_region EU --datastore.file mydatabase.db --mapdir rules --mqtt.cafile ca/ca.crt --mqtt.certfile client/client.crt --mqtt.keyfile client/client.key
-```
+* __InvalidImage__
+This error happens if the node rejected the image. Reasons can include the
+signature verification, the version downgrade protection or a wrong checksum.
+* __NotSupported__
+This error happens if the node's firmware is not upgradable. This error will be
+reported by the end node before any transfer is attempted.
+* __Aborted__
+This error can happen if the transfer could not complete without a timeout.
 
-When the ZPC starts, the log is printed to stdout, as follows:
-
-```
-+ 2020-11-11 14:18:52:276827 <d> [sl_log] Setting log level to debug
-+ 2020-11-11 14:18:52:277573 <d> [uic_component_fixtures] Completed: UIC Signal Handler
-+ 2020-11-11 14:18:52:277631 <d> [mqtt_client] Constructing new mqtt_client instance.
-+ 2020-11-11 14:18:52:277696 <d> [mqtt_wrapper_mosquitto] Initializing Mosquitto library.
-```
-
-The general log format is as follows:
-
-```
-<timestamp> <severity> [tag] <message>
-```
-
-The log level can be set globally and per tag.
-
-For example:
-
-```bash
-zpc  --log.level i --log.tag_level uic_component_fixtures:d,mqtt_client:d
-```
-
-This will set the global log level to info but it enables the debug on the two
-components such as the following: mqtt_client and uic_component_fixtures.
+In the case of an abort, you can retry a Firmware Update by modifying the Image
+Provider list of images. Remove the UIID(/UNID) combination, wait for the image
+Provider to advertise that the image is no longer available, and modify back the
+image list with the desired UIID(/UNID) combination.
 
 ## Understanding how the ZPC Works
 
 The purpose of this section is to explain the ZPC behavior and how to correlate
 frames seen on a Z-Wave Zniffer with operations performed by the ZPC.
+
+### Discovery and Operation
 
 The ZPC performs network discovery and operation of for both listening and non
 listening devices using a software component called the attribute system.
@@ -267,7 +378,7 @@ what the value is, the reported value is unresolved.
 The desired value is the user-preferred attribute value, such as _user wants the
 light to be off_. Note that it does not make sense for all attributes to have a
 desired value. In other words, a smoke detector should not have a desired value
-to prevent a user from turning if off or setting the smoke to go away.
+to prevent a user from turning it off or setting the smoke to go away.
 
 The ZPC attribute system is used to resolve an unresolved attribute using a set
 of rules. For instance, you can get the binary switch value of a Z-Wave Binary
@@ -275,7 +386,7 @@ Switch node by sending the Z-Wave BINARY_SWITCH_GET command. If the attribute
 system notices that the desired value of an attribute is different than the
 reported value, the ZPC will issue a Z-Wave SET command.
 
-> Note that the ZPC will only send a SET command if it notices that the reported
+> NOTE the ZPC will only send a SET command if it notices that the reported
 > value of an attribute is different than the desired. The ZPC will do its best
 > to make sure that it has the right reported value by setting up Lifeline
 > associations, but there may be situations where the ZPC has outdated
@@ -293,41 +404,548 @@ update the reported value.
 > this on the MQTT side. The reported value will be updated on MQTT side when
 > the supervision state OK/FAILED is received.
 
+In the event that a node does not adapt a set value or does not answer a get command
+the ZPC will try the ZPC command 3 times with a 20 second interval.
+
+
+## Wake up device support
+
 The Z-Wave Wake up devices are supported by pausing node resolution when
 the device is sleeping, which means that if the temperature of a thermostat is
 changed multiple times while the device is sleeping, the ZPC will only send the
-latest change using thermostat setpoint command. The ZPC will send wake up
-no-more information when there is nothing
-more to resolve regarding the node.
+latest change using thermostat set point command. The ZPC will send wake up
+no-more information when there is nothing more to resolve regarding the node.
+
+The default wake up interval used by the ZPC can be configured with the
+option `zpc.default_wake_up_interval`.
+
+## Failing nodes
+
+The ZPC has a mechanism to detect if nodes in the network has become
+unresponsive. If consecutive transmissions to node has failed for a number of
+times, or if consecutive wake up information's has been missed from a node, that
+node has become failing and the ZPC will update the node _State_ topic to
+_FAILING_. As soon as a frame, either application frame or Z-Wave
+acknowledgement frame, has been received from the node the ZPC will revert the
+node state to _INCLUDED_. The ZPC will periodically send _NOP_ frames to
+listening and FLIRS failing nodes to check if they are resounding again.
+
+The NOP interval of failing nodes is
+-  4 * 2^n for Listening devices
+- 40 * 4^n for FLiRS devices
+
+The threshold values for the number of failed transmissions and missing wake up
+notifications can be configured with the options, zpc.accepted_transmit_failure
+and zpc.missing_wake_up_notification
+
+## Network Polling
+
+The ZPC relies on reports from the Z-Wave nodes in order to keep the state the
+network. However, some devices may not report state updates when there are
+change in the network. To fill this gap, The ZPC SDK includes network polling
+feature where the state of a given attributes are periodically updated via
+sending a request to the Z-Wave node.
+
+To enable the network polling feature, the user shall provide a list of
+attributes and their expected polling interval in yaml configuration file. If
+the controlling node get the attribute state update due to the user request or
+unsolicited report, the polling will be postponed. Note that the polling
+interval represents the maximum 'age' of a given attribute state. The polling
+interval value shall be presented in seconds and the interval should be included
+distinctly for the Z-Wave Device Types:
+* polling_interval_zwave: represents Z-Wave Devices that are not represented in
+  Z-Wave Plus or Z-Wave Plus v2 Device Types
+* polling_interval_zwave_v1: represents Z-Wave Plus Device Type
+* polling_interval_zwave_v2: represents Z-Wave Plus v2 Device Type
+
+If there is not any polling interval for specific Z-Wave device type, the
+polling interval should not included for that specific device type. It is also
+important here to specify attributes types that have a resolver get rule
+registered.
+
+The Z-Wave attribute lists yaml configuration file example:
+
+```
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE
+  polling_interval_zwave: 3600
+  polling_interval_zwave_v1: 3600
+- attribute_type: ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE
+  polling_interval_zwave: 7200
+  polling_interval_zwave_v1: 7200
+  polling_interval_zwave_v2: 7200
+```
+Attribute types can be provided either as their name like above, or with their
+type id, like _attribute_type:0x002502_
+
+When the ZPC is installed on the Debian Buster platform the sample configuration
+(i.e., the sample contains the recommended attribute types that may require periodic
+polling based on the device type) file will be located in:
+```bash
+/usr/share/uic/zwave_poll_config.yaml
+```
+
+Besides, the user would also configure the minimum interval between two
+consecutive poll request (i.e., zpc.poll.backoff) and default polling interval
+(i.e., zpc.poll.default_interval) incase the attribute is registered to be
+polled without an interval. These values should be included in [Configuration
+File used to set up the ZPC](#configuration-file). The default backoff interval
+is set to 30 seconds. This value is selected based on experience and a user can
+configure a value above 1 second based on their network needs. Note that the
+minimum rate limit between two consecutive poll request is 1 second  as it is
+discussed in the Z-Wave Plus role Type Specification in Polling Devices section.
 
 ## Dotdot Cluster to Z-Wave Command Class Mapping
 
+### Overview
+
 The ZPC maps dotdot clusters to Z-Wave command classes and vice versa.
 All maps are defined by a set of configuration files which the ZPC loads as boot.
-However, default files are installed in the folder /usr/share/uic/rules. The mapping
-file extension is *.uam which is short for Unified Attribute Map.
+Default files are installed in the `/usr/share/uic/rules` directory.
+The mapping file extension is *.uam which is short for **Unify Attribute Map**.
 
-The following table has a brief description of how ZCL clusters are mapped to Z-Wave
-command classes.
+The following table has a brief description of how ZCL clusters are mapped to Z-Wave command classes, by default.
 
 
-| DotDot Cluster          | Z-Wave Command Classes                                         | Notes                                                                                                                      |
-| ----------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| OnOff                   | Binary Switch <br> Basic <br> Multilevel Switch                | The DotDot OnOff commands (On and Off) are mapped to Z-Wave Binary Switch Set command  or Basic SET                        |
-| OccupancySensing        | Notification                                                   | The Z-Wave Notification Report command is mapped to Occupancy and OccupacyType DotDot attributes                           |
-| IASZone                 | Notification                                                   |                                                                                                                            |
-| Illumiance level sensing| Notification                                                   |                                                                                                                            |
-| DoorLock                | Door Lock                                                       | The DotDot DoorLock commands (LockDoor and UnlockDoor) are mapped to Z-Wave Door Lock Set command                          |
-| Thermostat              | Multilevel Sensor<br> Thermostat Setpoint <br> Thermostat Mode | The DotDot SetpointRaiseOrLower and WriteAttribute commands are mapped to Thermostat Setpoint and Thermostat Mode Commands |
-| TemperatureMeasurement  | Multilevel Sensor                                              |                                                                                                                            |
-| Level                   | Multilevel Switch                                             |                                                                                                                            |
-| IASZone                 | Battery                                                        |                                                                                                                            |
+| DotDot Cluster           | Z-Wave Command Classes                                         | Notes                                                                                                                      |
+| ------------------------ | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| OnOff                    | Binary Switch <br> Basic <br> Multilevel Switch                | The DotDot OnOff commands (On and Off) are mapped to Z-Wave Binary Switch Set command  or Basic SET                        |
+| OccupancySensing         | Notification                                                   | The Z-Wave Notification Report command is mapped to Occupancy and OccupacyType DotDot attributes                           |
+| IASZone                  | Notification                                                   |                                                                                                                            |
+| Illumiance level sensing | Notification                                                   |                                                                                                                            |
+| DoorLock                 | Door Lock                                                      | The DotDot DoorLock commands (LockDoor and UnlockDoor) are mapped to Z-Wave Door Lock Set command                          |
+| Thermostat               | Multilevel Sensor<br> Thermostat Setpoint <br> Thermostat Mode | The DotDot SetpointRaiseOrLower and WriteAttribute commands are mapped to Thermostat Setpoint and Thermostat Mode Commands |
+| TemperatureMeasurement   | Multilevel Sensor                                              |                                                                                                                            |
+| Level                    | Multilevel Switch                                              |                                                                                                                            |
+| IASZone                  | Battery                                                        |                                                                                                                            |
+
+
+### Configuring maps
+
+Additional maps can be added, or the existing default maps can be modified
+as needed. Maps are normally used for dotdot/Z-Wave value conversion, but
+they can also be used to:
+
+* Fill device data automatically, and skip interviewing known properties
+* Configure/Set certain values automatically
+
+#### Mapper file structure
+
+A mapper file template could be as follow:
+
+```uam
+// this is a comment
+
+def <name1> expression
+def <name2> expression
+
+scope 0 {
+  <attribute1> = <expression1>
+  <attribute2> = <expression2>
+}
+```
+
+#### Mapper grammar and keywords
+
+The mapper allows to manipulate attributes that are stored as 32-bit signed
+integer values. Each attribute can use the following "value states":
+
+* `r` for reported value
+* `d` for desired value
+* `e` for the existence of the attribute. (evaluates to true/false depending on if the attribute exists)
+
+The value states must be used in front of attribute types, using a `'` character.
+To perform an assignment, the `=` sign can be used. For example, if the reported
+value of attribute type 1 should take the desired value of attribute type 2,
+the following expression can be used:
+
+```uam
+r'1 = d'2
+```
+
+Note: Assignments to reported values will trigger attribute creations
+in the attribute store.
+
+* `d'1 = r'2` will not create attribute type 1 and set its desired value
+  if it does not exist.
+* `r'1 = r'2` will create attribute type 1 and set its reported value
+  if it does not exist.
+
+The mapper constantly monitor attribute updates, so whenever
+the desired value of attribute 2 is updated, the reported value of attribute
+1 will be adjusted.
+
+To avoid using raw type values, the mapper allows to define value substitutions
+using the `def` keyword. For example, the example above could be expressed as:
+
+```uam
+def zwave_state 1
+def zigbee_state 2
+r'zwave_state = d'zigbee_state
+```
+
+Regular operators can be used to modify the value. The available operators are:
+
+| Operator | Name           |
+|----------|----------------|
+| +        | Addition       |
+| -        | Subtraction    |
+| *        | Multiplication |
+| /        | Division       |
+| &        | bitwise AND    |
+| \|       | bitwise OR     |
+
+For example, if a value needs to be multiplicated by 2 and incremented by 1:
+
+```uam
+def zwave_state 1
+def zigbee_state 2
+r'zwave_state = ((d'zigbee_state * 2) + 1)
+```
+
+It is **strongly recommended** to use parentheses around operations, as
+no priority handling is implemented in the mapper.
+
+Conditional statements are also available for maps. The available comparison
+operators are:
+
+| Operator | Name         |
+|----------|--------------|
+| ==       | Equal to     |
+| >        | Greater than |
+| <        | Less than    |
+
+These operators should be used with `if` statements. The `if` synthax is as
+follows: `if condition value`. A switch-like statement can be made using
+multiple `if` statements.
+
+```uam
+// If the desired value of attribute 2 is 0, set reported of 1 to 1
+// If the reported value of attribute 3 is 3, set reported of 1 to 2
+// if none of the previous conditions is true, set the reported of 1 to 0.
+r'1 =
+  if (d'2 == 0) 1
+  if (r'3 == 3) 2
+  0
+```
+
+Note in the example above that line breaks and indentation does not have any
+impact, and are just used for readability. The statement can be written in one
+line too. This is an example from the ZPC default maps, which determines if the
+reported value of the battery low flag should go to 1 or 0 based on the
+reported battery percentage.
+
+```uam
+// [...] Skipping def statements
+r'zbBATTERY_LOW =
+  if (r'zwBATTERY < 10) 1
+  if (r'zwBATTERY == 0xFF) 1
+  0
+```
+
+Note that bitwise operators `&` and `|` can be used for evaluating a set of
+boolean expressions:
+
+```uam
+r'1 =
+  if ((d'2 == 0) & (r'3 == 3)) 12
+  if (d'2 == 0) 1
+  if (r'3 == 3) 2
+  0
+```
+
+A special `undefined` keyword can be used to abort assignment evaluations.
+For example, to set the reported value of an attribute **only if** another
+attribute exists, the following map can be used:
+
+```uam
+// If attribute type 2 exists, set the value to 1, else do not do anything
+r'1 =
+  if (e'2) 1
+  undefined
+```
+
+Additionally, a special `or` keyword can be used for fallback values:
+
+```uam
+// If attribute type 2 has a reported value, set the reported value of 1 to this value
+// else set it to the (reported value of attribute type 3) + 2
+r'1 = r'2 or (r'3 + 2)
+```
+
+```uam
+// If attribute type 2 exists, set the value to 1, else do not do anything
+r'1 =
+  if (e'2) 1
+  undefined
+```
+
+Tree navigation operators can be used to navigate the attribute store tree,
+for when attributes are organized in a more complicated manner.
+
+| Operator | Name                       |
+|----------|----------------------------|
+| []       | Reported value navigation  |
+| .        | Child navigation           |
+| ^        | Parent navigation          |
+
+> [!WARNING]
+> Parent navigation operator is currently not working.
+
+```uam
+// If the desired value of (attribute 3 placed under attribute 2 with reported value 1) is greater than 0, set reported of 1 to 1
+r'1 =
+  if (d'2[1].3 > 0) 1
+  undefined
+```
+
+All attributes are placed under an attribute representing an endpoint.
+If trying to navigate up the tree, the parent is the endpoint attribute.
+
+```uam
+def ep 0x00000004
+// Set the reported value of attribute 1 to the reported value of attribute 1 under endpoint ID 1 to the same value under endpoint 0.
+r'^.ep[1].1 = r'^.ep[0].1
+```
+
+Finally, all map assignment must have a scope. Multiple scopes for a given map
+file are not yet supported, but it will allow in the future to prioritize
+set of instructions.
+
+```uam
+// Defines
+def zwave_state 1
+def zigbee_state 2
+
+// Mapping
+scope 0 {
+r'zwave_state = r'zigbee_state
+}
+```
+
+#### Attribute types
+
+To configure a map, the attribute types that will be mapped must be identifed
+first. Each Command Class has a set of defined attribute types that it
+allocates in the attribute store under endpoints.
+
+The CLI can be used on a running ZPC to print out the attribute store and
+its contents. It is an easy and quick way to find out the list of
+attribute types and their values for a given NodeID. For example, showing
+the attribute store data for NodeID 4:
+
+```txt
+ZPC>attribute_store_log 4
+id:  4080 type: 0x00000003: reported: [04,00] desired: []                       ATTRIBUTE_NODE_ID
+  id:  4081 type: 0x00000004: reported: [00] desired: []                        ATTRIBUTE_ENDPOINT_ID
+    id:  4087 type: 0x00000102: reported: [86,72,5a,87,73,80,62,63,85,8e,59,7a] desired: [] ATTRIBUTE_ZWAVE_SECURE_NIF
+    id:  4091 type: 0xba5c0007: reported: [03,00,00,00] desired: []             DOTDOT_ATTRIBUTE_ID_BASIC_POWER_SOURCE
+    id:  4093 type: 0x00000101: reported: [5e,55,98,9f,6c] desired: []          ATTRIBUTE_ZWAVE_NIF
+    id:  4095 type: 0x00008601: reported: [03] desired: []                      ATTRIBUTE_COMMAND_CLASS_VERSION_VERSION
+    id:  4096 type: 0x00007201: reported: [02] desired: []                      ATTRIBUTE_COMMAND_CLASS_MANUFACTURER_SPECIFIC_VERSION
+    id:  4097 type: 0x00005a01: reported: [01] desired: []                      0x00005a01
+    id:  4098 type: 0x00008701: reported: [03] desired: []                      ATTRIBUTE_COMMAND_CLASS_INDICATOR_VERSION
+    id:  4099 type: 0x00007301: reported: [01] desired: []                      0x00007301
+    id:  4100 type: 0x00008001: reported: [01] desired: []                      ATTRIBUTE_COMMAND_CLASS_BATTERY_VERSION
+    id:  4101 type: 0x00006201: reported: [04] desired: []                      ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_VERSION
+    id:  4102 type: 0x00006301: reported: [01] desired: []                      0x00006301
+[...]
+```
+
+##### Z-Wave Attributes
+
+Most Z-Wave attributes types are defined in the `attribute_store_defined_attribute_types.h` header file. Most of the time,
+attributes are stored directly under the endpoint. In this case, the attribute
+can simply be referred to with its type.
+
+For example, the Basic Value reported in the Basic Command Class is defined
+here:
+
+```c
+///< This represents the current state/value.
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_BASIC_VALUE,
+                 ((COMMAND_CLASS_BASIC << 8) | 0x02))
+```
+
+The value of `ATTRIBUTE_COMMAND_CLASS_BASIC_VALUE` is 8194 or (0x2002), so it
+can be referred to as follow in a `uam` file:
+
+```uam
+// Z-Wave Basic value
+def zwBasicValue 0x2002
+```
+
+Some attributes are defined as part of the auto-generated code. The list
+of command classes using auto-generated code can be found in the list of
+supported/controlled command classes. If a command class is auto-generated,
+there will be a header file in the build folder containing attribute type
+definitions. For example, for the Door Lock Command Class, refer to
+`zwave_COMMAND_CLASS_DOOR_LOCK_attribute_id.h`
+
+When mapping, we have to be aware of the tree structure. Sometimes,
+attributes are placed a few levels under the endpoint.  When this is the case,
+command class handlers describe how the tree structure is organized in a
+PlantUML diagram included in their header files.
+
+In general, it is recommended to reuse the attribute types defined in the
+existing maps, rather than investigate how attribute may be stored in the
+attribute tree.
+
+##### DotDot Attributes
+
+Dotdot attributes are automatically determined by their Cluster ID / Attribute ID. They are in most cases placed directly under the endpoint.
+
+The 32 bits values is composed by doing `cluster_id<<16 + attribute_id`.
+For example, the OnOff attribute (id = `0`) of the OnOff Cluster (id= `0x0006`) is `0x00060000`.
+
+The Basic Cluster (cluster id = 0) is an exception, to avoid collisions
+with Z-Wave attributes. Instead, cluster id `0xba5c` is used for the Basic
+Cluster.
+
+If some non-standard attributes are saved (e.g. group ID and Group names for
+the group cluster, their definitions is added to
+`attribute_store_defined_attribute_types.h`)
+
+### Device fingerprints
+
+A few of the default maps give examples of device fingerprints.
+It is recommended to use the Manufacturer ID, Product Type and Product ID,
+as a minimum.
+
+```uam
+// Substitutions
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+
+// Simple fingerprint
+def powerstrip_sample_app ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x05))
+
+// Set the Z-Wave Plus Info Version to 10 for PowerStrips
+def zw_ZWAVE_PLUS_VERSION 0x00005e02
+
+scope 0 {
+r'zw_ZWAVE_PLUS_VERSION =
+ if (powerstrip_sample_app) 10
+ undefined
+}
+
+```
+
+A more complete fingerprint can include the version of a product, as well
+as its hardware version. This is equivalent to the fingerprinting of devices
+prior to perform OTA firmware updates.
+
+The firmware version is stored as `(major << 16) | (minor << 8) | patch`.
+
+```uam
+// Substitutions
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+def zwVERSION_REPORT            0x00008602
+def zwFIRMWARE_ID               0x00008605
+def zwFIRMWARE_VERSION          0x00008606
+def zwHARDWARE_VERSION          0x0000860f
+
+// Complete fingerprint
+def door_lock_sample_app_v10_17_0_1 ((r'zwMANUFACTURER_ID == 0x00) &  (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x01) & (r'zwVERSION_REPORT[1].zwFIRMWARE_ID[0].zwFIRMWARE_VERSION == 0x000A1100) & (r'zwVERSION_REPORT[1].zwHARDWARE_VERSION == 1))
+
+// Set the Z-Wave Plus Info Version to 10 for DoorLock v10.17.0 hw version 1
+def zw_ZWAVE_PLUS_VERSION 0x00005e02
+
+scope 0 {
+r'zw_ZWAVE_PLUS_VERSION =
+ if (door_lock_sample_app_v10_17_0_1) 10
+ undefined
+}
+```
+
+### Mapping between Z-Wave and DotDot
+
+To establish a map that reports data on DotDot, we usually need to set
+reported value of the DotDot attribute to match the reported value or the
+Z-Wave Attribute.
+
+DotDot attributes, once set, are detected and published automatically on MQTT.
+This map will for example publish an OnOff attribute for a Binary Switch
+value.
+
+```uam
+// Binary switch Command Class
+def zwCOMMAND_CLASS_SWITCH_BINARY_VERSION 0x2501
+def zwSWITCH_BINARY_STATE 0x2502
+def zwSWITCH_BINARY_VALUE 0x2503
+
+// OnOff Cluster
+def zbON_OFF_CLUSTER_SWITCH 0x00060000
+
+scope 0 {
+// Linking reported attributes zwave -> zigbee
+r'zbON_OFF_CLUSTER_SWITCH = r'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE
+}
+```
+
+Given that only the reported is mapped, if an MQTT client tries to set the
+DotDot OnOff attribute with a command, nothing will happen on the Z-Wave
+side.
+
+To make Z-Wave values updates based on DotDot commands, the desired value
+change of a dotdot attribute should be mapped to an update of the desired
+Z-Wave value:
+
+```uam
+// Linking desired attributes zigbee -> zwave
+d'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE = d'zbON_OFF_CLUSTER_SWITCH
+```
+
+### Automatic lifeline/association establishment
+
+The ZPC can be configured through maps to establish associations. The ZPC
+associates itself whenever the AGI group profile of an association group
+is set to 0x01 or 0x00.
+
+If the ZPC is the SIS and the AGI profile is set to 0x0001, it will establish
+an association forcefully, i.e. it will remove nodes from the association
+if this group is already full to get associated itself.
+
+In any other cases (ZPC is not the SIS or group profile is set to 0x0000),
+the ZPC will associate itself only if there is capacity left in the
+association group.
+
+```uam
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+
+def zwASSOCIATION_GROUP_ID      0x00008503
+def zwASSOCIATION_GROUP_PROFILE 0x00005904
+
+// device fingerprint
+def powerstrip_sample_app ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x05))
+
+// AGI profile value to establish an association or not.
+def ESTABLISH_ASSOCIATION 0x0000
+def ESTABLISH_LIFELINE    0x0001
+def NO_LIFELINE           0xFFFF
+
+scope 0 {
+// Establish Lifeline association for group 1:
+r'zwASSOCIATION_GROUP_ID[1].zwASSOCIATION_GROUP_PROFILE =
+  if (powerstrip_sample_app) ESTABLISH_LIFELINE
+  undefined
+
+// Establish a regular association Association Group 2 of the PowerStrip sample application
+r'zwASSOCIATION_GROUP_ID[2].zwASSOCIATION_GROUP_PROFILE =
+  if (powerstrip_sample_app) ESTABLISH_ASSOCIATION
+  undefined
+}
+```
 
 ## Migrating to ZPC from Z/IP Gateway
 
 This section describes how to migrate to a ZPC from a Z/IP gateway. If migration
-from a third party gateway is desired, the first step in the migration process is
-to migrate to a Z/IP Gateway.
+from a third party gateway is desired, the first step in the migration process
+is to migrate to a Z/IP Gateway.
 
 To successfully migrate, the following Z/IP Gateway SDK tools are needed.
 - `zw_programmer` Is required for programming new firmware on the Z-Wave modules
@@ -336,18 +954,17 @@ To successfully migrate, the following Z/IP Gateway SDK tools are needed.
   protocol versions. The tool can be use to migrate from a 500 series Z-Wave
   chip to a 700 series chip.
 
-You can get Z/IP Gateway through Simplicity Studio. Read the
-Z/IP Gateway SDK user guide on how to compile and install the Z/IP gateway on
-your platform.
+You can get Z/IP Gateway through Simplicity Studio. Read the Z/IP Gateway SDK
+user guide on how to compile and install the Z/IP gateway on your platform.
 
-For Z-Wave Long Range support, the ZPC requires a Z-Wave API
-controller version 7.16 or higher. For details about migrating
-between protocol versions see the Z/IP Gateway manual, _Migration Support Tools_
+For Z-Wave Long Range support, the ZPC requires a Z-Wave API controller version
+7.16 or higher. For details about migrating between protocol versions see the
+Z/IP Gateway manual, _Migration Support Tools_
 
 To ensure that the ZPC is working correctly, it must have access to the network
 encryption keys as well has information about which security keys have been
-granted to each node in the network. The Z/IP Gateway stores the encryption
-keys in the right place in the module NVM for the ZPC to read.
+granted to each node in the network. The Z/IP Gateway stores the encryption keys
+in the right place in the module NVM for the ZPC to read.
 
 In general, the ZPC will query all network information from the nodes in the
 network on the first boot, but it needs to know which network keys have been
@@ -358,11 +975,11 @@ The easiest way to set the granted key information is to do the following:
 1. Migrate the Z-Wave controller using the Z/IP Gateway SDK tools as described
    above.
 2. Start the ZPC with the migrated Z-Wave controller module but with an empty
-   database file. `zpc --datastore.file datastore.db`
+   database file. `zpc --zpc.datastore_file datastore.db`
 3. Shut down the ZPC by typing `exit` on the console. The ZPC will now have
    created an initial database which matches the Z-Wave network.
 4. Use the zpc_database_tool to export the database to a JSON file
-   `zpc_database_tool --datastore.file datastore.db --export datastore.json`
+   `zpc_database_tool --zpc.datastore_file datastore.db --export datastore.json`
 5. Open and edit the JSON file and locate the following attributes under each
    ATTRIBUTE_NODE_ID object:
    -  ATTRIBUTE_NETWORK_STATUS must be set to "reported": "00"
@@ -377,12 +994,12 @@ The easiest way to set the granted key information is to do the following:
      desired or reported values.
    -  ATTRIBUTE_GRANTED_SECURITY_KEYS is a bitmask of which network keys a node
       have been granted the following keys are currently defined:
-      |  Key                                   | Mask |
-      |----------------------------------------|------|
-      | ZWAVE_CONTROLLER_S0_KEY                | 0x80 |
-      | ZWAVE_CONTROLLER_S2_UNAUTHENTICATED_KEY| 0x01 |
-      | ZWAVE_CONTROLLER_S2_AUTHENTICATED_KEY  | 0x02 |
-      | ZWAVE_CONTROLLER_S2_ACCESS_KEY         | 0x04 |
+      | Key                                     | Mask |
+      | --------------------------------------- | ---- |
+      | ZWAVE_CONTROLLER_S0_KEY                 | 0x80 |
+      | ZWAVE_CONTROLLER_S2_UNAUTHENTICATED_KEY | 0x01 |
+      | ZWAVE_CONTROLLER_S2_AUTHENTICATED_KEY   | 0x02 |
+      | ZWAVE_CONTROLLER_S2_ACCESS_KEY          | 0x04 |
 
       Ie if a node has all keys the granted keys attribute should be
       `{
@@ -390,7 +1007,7 @@ The easiest way to set the granted key information is to do the following:
       "reported": "87"}
       `
 
-6. With the updated JSON file, a new database can be constructed with zpc_database_tool. `zpc_database_tool --datastore.file datastore.db --import modified_datastore.json`
+6. With the updated JSON file, a new database can be constructed with zpc_database_tool. `zpc_database_tool --zpc.datastore_file datastore.db --import modified_datastore.json`
 7. You can now start the ZPC as usual. The ZPC will start probing all nodes, sleeping devices will be probed
   when they wake up.
 
@@ -477,7 +1094,20 @@ The easiest way to set the granted key information is to do the following:
   ]
 }
 ```
+## Transitioning from Z/IP Gateway + Z-Ware
 
+The ZPC provides a subset of Z-Wave features compared to the Z/IP Gateway.
+
+* The ZPC is based on Generic Controller Device type
+* Does not support Learn Mode that enables it to be included to other networks.
+* Does not allow to establish arbitrary Associations and only establishes Lifeline Association.
+* Does not control all Command Classes fully, but only provides partial control
+  Z-Wave Command Classes where the ZPC provides partial control include:
+  + Switch Multilevel, version 4,
+  + Multilevel Sensor, version 11,
+  + Thermostat Mode, version 3,
+  + Thermostat Setpoint, version 3 and
+  + Notification, version 11.
 
 ## Performing Backup and Restore
 
@@ -516,7 +1146,7 @@ ZPC datastore tools
 ### Recovering a Database
 
 If you wish to keep the previous datastore file, you can use the
-**zpc_database_recover_tool**. This tool will remove all information under all
+`zpc_database_recover_tool`. This tool will remove all information under all
 endpoints and keep the minimum in the datastore.
 
 After running the recover tool, the ZPC will re-interview all devices in the
@@ -526,15 +1156,15 @@ Stop the ZPC and make a database backup:
 
 ```bash
 pi@unify:/var/lib/uic $ service uic-zpc stop
-pi@unify:/var/lib/uic $ cp database.db database_back_up.db
+pi@unify:/var/lib/uic $ cp zpc.db zpc_back_up.db
 ```
 
 Run the recover tool. Specifying the target version is optional:
 
 ```bash
-pi@unify:/var/lib/uic $ zpc_database_recover_tool --target_version 2 --datastore.file /var/lib/uic/database.db
+pi@unify:/var/lib/uic $ zpc_database_recover_tool --target_version 2 --zpc.datastore_file /var/lib/uic/zpc.db
 
-<i> [datastore_fixt] Using datastore file: /var/lib/uic/database.db
+<i> [datastore_fixt] Using datastore file: /var/lib/uic/zpc.db
 <d> [datastore_fixt] SQLITE Version: 3.28.0
 <i> [zpc_database_recover_tool] Datastore version reported from the datastore file: 3
 <i> [zpc_database_recover_tool] Erasing endpoint data in the datastore.
@@ -553,931 +1183,5 @@ If this step does not work and the network cannot be used, you have 2 options:
 * Create a new database file using the migration tool.
 * Reset the network.
 
-
-## Performing Firmware Updates
-
-The ZPC has the capability to perform Firmware Updates. It requires to
-run and configure the
-[Image Provider](../../applications/image_provider/readme_user.md) application.
-
-### UIID Construction
-
-To upload an image for a Z-Wave node, compute a Unique Image Identifier (UIID)
-for this device.
-
-The UIID for the ZPC is a string that can be constructed using the
-following information:
-
-* The Manufacturer ID (Manufacturer Specific Command Class, 2 bytes)
-* The Product Type (Manufacturer Specific Command Class, 2 bytes)
-* The Product ID (Manufacturer Specific Command Class, 2 bytes)
-* The Firmware Target (Firmware Update Command Class, 1 byte)
-* The Hardware version (Version Command Class, 1 byte)
-
-The string must be formatted using the following format with all values in
-hexadecimal:
-**ZWave-&lt;ManufacturerID&gt;-&lt;ProductType&gt;-&lt;ProductID&gt;-&lt;FirmwareTarget&gt;-&lt;HardwareVersion&gt;**
-
-### UIID/UNID Association
-
-When the ZPC interviews a node, it will publish the detected firmware targets
-under the UIID space in the OTA cluster:
-`ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/#`
-
-For more details about available attributes under each UIID, see the
-the Unify specification - Common OTA FW Update Service chapter.
-
-```
-ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/CurrentVersion/Reported
-```
-
-For example, if a node has 2 Firmware Targets, the publications may look as follows:
-
-```
-ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-00-01/CurrentVersion/Reported - {"value": "3.2.0"}
-ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-01-01/CurrentVersion/Reported - {"value": "3.2.0"}
-```
-
-UIID *ZWave-010f-1002-0b01-00-01* can be used to firmware update target 0.
-UIID *ZWave-010f-1002-0b01-01-01* can be used to firmware update target 1.
-
-### Version String Calculation
-
-The version of a firmware is determined based on the data reported by the
-Z-Wave node using the Version Command Class.
-
-The version string will be composed of three decimal digits following
-[semantic versioning](https://semver.org/). By default, the version
-for a given firmware will be fetched in the Version Command Class,
-in the Version Report Command. Only the Major and Minor digits can be retrieved
-from this report.
-
-For example, if a node sends a Version Report with
-
-* Firmware 0 Version = 3
-* Firmware 0 Sub Version = 14
-
-The resulting version string will be "3.14.0". No patch version number is
-available.
-
-If a node supports the Version Z-Wave Software Report Command, the version string
-for Firmware 0 will be replaced by the Application Version field. For example,
-if a node sends a Version Z-Wave Software Report Command with:
-
-* Application Version 1 (MSB) = 3
-* Application Version 2 = 14
-* Application Version 3 (LSB) = 15
-
-The resulting version string will be "3.14.15".
-
-### Triggering a Firmware Update
-
-The ZPC will download the available images from the
-[Image Provider](../../applications/image_provider/readme_user.md) whenever a
-matching UIID (and optional UNID) is advertised as available.
-
-To initiate a firmware update, configure the
-[Image Provider](../../applications/image_provider/readme_user.md)
-with a compatible image.
-
-The ZPC will initiate a firmware update operation immediately and start publishing
-the transfer progress in OTA attributes under the UIID space in the OTA cluster.
-
-The ZPC is capable of performing any number of concurrent firmware updates.
-To avoid network congestion, configure the [Image Provider](../../applications/image_provider/readme_user.md)
-meta data to specify UIID and UNID to control when to apply the firmware of individual nodes.
-
-The *ApplyAfter* parameter can also be used to delay firmware transfers.
-
-### Aborting a Firmware Update
-
-There is currently no way to abort an ongoing Firmware Update.
-
-### After a Successful Firmware Update
-
-The ZPC will automatically re-interview a node that was OTA firmware updated.
-The firmware transfer data will disappear and the node information and capabilities will re-appear after the interview.
-
-### Examples
-
-This sections provides an example using the [Image Provider](../../applications/image_provider/readme_user.md) and [Developer GUI](../../applications/dev_ui/dev_gui/readme_user.md) to perform a firmware update of a PowerStrip sample application.
-
-First, make sure that the ZPC, [Image Provider](../../applications/image_provider/readme_user.md) and [Developer GUI](../../applications/dev_ui/dev_gui/readme_user.md)
-are running.
-
-Flash a PowerStrip application on a Z-Wave module with the OTA bootloader
-and GBL encryption keys. See the Z-Wave/Gecko SDK documentation in
-[Simplicity Studio](https://www.silabs.com/developers/simplicity-studio)
-
-Start the DevGUI and include a PowerStrip (or any other) sample application.
-At the end of the interview, the OTA Cluster page will show the UIID of the PowerStrip.
-
-![PowerStrip UIID in DevGUI](doc/assets/img/powerstrip_uiid_dev_gui.png)
-
-Prepare a GBL file with a newer firmware version that you upload to the Image
-Provider application. It will require several versions of the Z-Wave/Gecko SDK
-installed to access binaries with older or newer versions.
-
-You can also perform the operation with an identical firmware image (or older)
-but the end node will reject the upgrade operation after the transfer.
-
-Verify that your images are ready and readable:
-
-```bash
-pi@unify:/var/lib/uic-image-provider/updates $ ls -l
--rw-r--r-- 1 pi  pi   171380 Aug 17 14:52 powerstrip.gbl
--rw-r--r-- 1 pi  pi   168036 Aug 17 14:52 sensor_pir.gbl
-```
-
-Then, use the found UIID to configure the *image.json* file from the image
-provider. Remember to set a version string as well as calculate the Md5 as
-described in the [Image Provider User Guide](../../applications/image_provider/readme_user.md):
-
-```json
-{
-  "Version": "1",
-  "Images": [
-    {
-      "FileName": "updates/powerstrip.gbl",
-      "Uiid": "ZWave-0000-0005-0004-0000",
-      "Unid": ["zw-DB9E8293-0002"],
-      "Version": "10.16.4",
-      "ApplyAfter": "2021-06-29T16:39:57+02:00",
-      "Md5": "4XbdcGq2iXOD1EcZ905XxQ=="
-    }
-  ]
-}
-```
-
-Shortly after, the Image Provider will anounce the image(s) over MQTT and the
-ZPC will download this image, if some nodes in its network have matching UIIDs.
-The Dev GUI will show the Image Provider announcement under the "Images" tabs
-in the OTA cluster page:
-
-![PowerStrip UIID image available in DevGUI](doc/assets/img/powerstrip_image_available_dev_gui.png)
-
-
-As soon as the ApplyAfter timestamp is passed, you will be able to observe
-the firmware transfer operation under the DevGUI:
-
-![PowerStrip firmware transfer in DevGUI](doc/assets/img/dev_gui_powerstrip_firmware_transfer.png)
-
-
-When the firmware update is finished and successful, it will look as follows:
-
-![PowerStrip firmware transfer completed in DevGUI](doc/assets/img/dev_gui_powerstrip_firmware_transfer_complete.png)
-
-The following conditions have to be met for a successful firmware transfer:
-
-* The Size/Offset attributes are non-zero and set to the same value (The DevGUi will show 100%)
-* The LastError attribute is set to "Success"
-* The Status attribute is back to "Idle"
-
-for example:
-
-```txt
-ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/Offset/Reported - {"value": 171380}
-ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/Size/Reported - {"value": 171380}
-ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/LastError/Reported - {"value": "Success"}
-ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/Status/Reported - {"value": "Idle"}
-```
-
-This state will only be visible for a very short time, as the ZPC will
-re-interview the node and will unpublish its state and capabilities for the
-time of the interview.
-
-![Re-interview button in DevGUI](doc/assets/img/dev_gui_node_interview_button.png)
-
-### Possible Errors
-
-There are a few possible errors described in the Unify specification.
-The *LastError* attribute indicates the status of the last Firmware
-Update/transfer attempt.
-
-![Errors during Firmware Update](doc/assets/img/dev_gui_possible_firmware_udpate_errors.png)
-
-* __InvalidImage__
-This error happens if the node rejected the image. Reasons can include the
-signature verification, the version downgrade protection or a wrong checksum.
-* __NotSupported__
-This error happens if the node's firmware is not upgradable. This error will be
-reported by the end node before any transfer is attempted.
-* __Aborted__
-This error can happen if the transfer could not complete without a timeout.
-
-In the case of an abort, you can retry a Firmware Update by modifying the Image
-Provider list of images. Remove the UIID(/UNID) combination, wait for the image
-Provider to advertise that the image is no longer available, and modify back the
-image list with the desired UIID(/UNID) combination.
-
-## Z-Wave Certification Information
-
-### Z-Wave Protocol Interoperability
-
-This product can be operated in any Z-Wave network with other Z-Wave-certified
-devices from other manufacturers. All mains operated nodes within the network
-will act as repeaters regardless of vendor to increase reliability of the
-network.
-
-### Device Type and Role Type
-
-The ZPC has a Generic Controller Device type and uses the following device classes:
-
-  * GENERIC_TYPE_GENERIC_CONTROLLER
-  * SPECIFIC_TYPE_NOT_USED
-
-The ZPC uses the Central Static Controller (CSC) role type, which
-supports and takes the SIS role by default.
-
-The ZPC does not support the following network functionalities:
-
-  * Learn Mode
-  * Failed Replace
-
-### Manufacturer-Specific Information
-
-The ZPC uses the following manufacturer-specific information:
-
-  * Manufacturer ID : 0x0000
-  * Product Type    : 0x0005
-  * Product ID      : 0x0001
-  * Firmware ID     : 0x0001
-
-### Z-Wave Plus Info Information
-
-The ZPC uses the following Z-Wave Plus Info information:
-
-  * Role Type           : 0x0000 (CSC)
-  * Node Type           : 0x0000
-  * Installer Icon Type : 0x0100
-  * User Icon Type      : 0x0100
-
-### Network Management Information
-
-#### Network Management
-
-The [Dev GUI User's Guide](./md_applications_dev_ui_dev_gui_readme_user.html)
-describes how to perform the following operations:
-
-*  Direct range and Network-Wide Inclusion (Add) of other nodes in the network.
-*  Direct range and Network-Wide Exclusion (remove) of other nodes (in any network).
-
-Learn Mode and Controller Replication are not available.
-
-##### Adding a Node
-
-To add a new node in the current network, select the ZPC entry in the node list
-and locate the "States" button. Select the "Add node" option.
-
-![Dev GUI Add node button](doc/assets/img/dev_gui_add_node.png)
-
-The ZPC will go from Idle to Add node. Activate learn mode on the node that
-you want to include in the network. When the network inclusion happens, a new
-node will appear in the list of nodes.
-
-To cancel an inclusion attempt, select the "Idle" option under the "States" button.
-
-##### Removing a Node
-
-To remove a node from its network (it can be either the ZPC's network or a
-foreign network), select the ZPC entry in the node list
-and locate the "States" button. Select the "Remove node" option.
-
-![Dev GUI Remove node button](doc/assets/img/dev_gui_remove_node.png)
-
-The ZPC will go from Idle to Remove node. Activate learn mode on the node that
-you want to exclude from its network. When the network exclusion happens, the ZPC
-state will return to Idle. The ZPC state will return to idle automatically
-after excluding a node.
-
-To cancel an exclusion attempt, select the "Idle" option under the "States" button.
-
-##### Management Operations for Individual Nodes
-
-When a network management is to be targetted for a particular node, the list of
-available commands is available in the node list page, under the **Commands** button.
-
-![Dev GUI action button](doc/assets/img/dev_gui_action_button.png)
-
-* Interview will perform a new node Interview
-* RemoveOffline will perform a Z-Wave Remove Failed Node.
-* DiscoverNeighbors will request Z-Wave node to perform a neighbor discovery. It will have no effect for nodes includes with Z-Wave Long Range.
-
-
-While a node is under interview, its status will be *Online interviewing*. When
-The interview is over, its status moves back to *Online functional*.
-
-When performing a RemoveOffline on a node, no visible update is made on the node
-status, however, the ZPC node entry will move its network management state to
-"Remove node".
-
-When requesting a DiscoverNeighbors, no visible feedback will be available
-on the UI.
-
-### Command Class Information
-
-The following table shows supported and controlled Z-Wave Command Classes by the ZPC.
-
-| Command Class                  | Version | Support | Control | Security Level              | Comment |
-| ------------------------------ | ------- | ------- | ------- | --------------------------- | ------- |
-| Association                    |       2 |       x |       x | Network Scheme              |         |
-| Association Group Info (AGI)   |       3 |       x |       x | Network Scheme              |         |
-| Basic                          |       2 |         |       x | N/A                         |         |
-| Battery                        |       3 |         |       x | N/A                         | Control Part is auto-generated. |
-| Binary Sensor                  |       1 |         |       x | N/A                         | Control Part is auto-generated. |
-| Binary Switch                  |       2 |         |       x | N/A                         |         |
-| Device Reset Locally           |       1 |       x |       x | Network Scheme              |         |
-| Door Lock                      |       2 |         |       x | N/A                         | Control Part is auto-generated. |
-| Firmware Update                |       7 |       x |       x | Network Scheme              |         |
-| Inclusion Controller           |       1 |       x |       x | Unencrypted                 |         |
-| Indicator                      |       3 |       x |       x | Network Scheme              |         |
-| Manufacturer Specific          |       2 |       x |       x | Network Scheme              |         |
-| Multi Channel                  |       4 |         |       x | N/A                         |         |
-| Multi Channel Association      |       3 |       x |       x | Network Scheme              |         |
-| Multi Command                  |       1 |       x |         | Unencrypted                 |         |
-| Multilevel Sensor              |      11 |         |       x | N/A                         | Partial control: <br>1. Not all scales are supported <br>2. No regular probing is done  |
-| Multilevel Switch              |       4 |         |       x | N/A                         | Partial control: <br>1. we do not use start/stop level change.<br>2. we do not support the 0xFF duration |
-| Notification                   |       3 |         |       x | N/A                         | Partial Control: <br>1. No Push/Pull discovery is done.<br>2. No Pull sensor support. <br>3. Unknown types are not supported. <br>4. No Regular probing is done.  |
-| Powerlevel                     |       1 |       x |         | Network Scheme              |         |
-| Security 0                     |       1 |       x |       x | Unencrypted                 |         |
-| Security 2                     |       1 |       x |       x | Unencrypted                 |         |
-| Supervision                    |       2 |       x |       x | Unencrypted                 |         |
-| Thermostat Mode                |       3 |         |       x | N/A                         | Partial Control: Not all modes can be set |
-| Thermostat Setpoint            |       3 |         |       x | N/A                         | Partial Control: <br>1. No discovery of ambiguous types in v1-v2 <br>2. Only a few setpoints can be configured. <br>3. Precision/size fields in the set are determined <br>automatically by the controller.  |
-| Time                           |       1 |       x |         | Unencrypted                 |         |
-| Transport Service              |       2 |       x |       x | Unencrypted                 |         |
-| Version                        |       3 |       x |       x | Network Scheme              |         |
-| Wake Up                        |       3 |         |       x | N/A                         |         |
-| Z-Wave Plus Info               |       2 |       x |       x | Unencrypted                 |         |
-
-#### Association / Multi Channel Association Command Classes Information
-
-The ZPC supports the following Association Groups
-| Grouping Identifier            | Maximum Number of Associations | Group Name | Usage/Trigger     |
-| ------------------------------ | ------------------------------ | ---------- | ----------------- |
-| 1                              | 10                             | Lifeline   | Lifeline reports. |
-
-The ZPC also controls the Association and Multi Channel Association. It only
-establishes lifeline associations.
-
-##### Node status
-
-It is not possible to see association groups state from the Dev GUI.
-
-##### Sending commands
-
-It is not possible to issue Assocation / Multi Channel Association commands
-from the Dev GUI.
-
-#### Basic Command Class Information
-
-The ZPC controls the Basic Command Class. It is possible to set and
-see the current state of an unknown actuator node using Basic.
-
-Basic will be used, only if the supporting node does not support any actuator
-command classes that the ZPC controls (fully or partially). In this case, the
-ZPC will attempt to discover if the Basic Command Class is supported by issuing
-a Basic Get Command. If the node replies, the Basic functionality will be
-presented as an OnOff functionality.
-
-It is not possible to see if the ZPC is using Binary Switch or Basic Command
-Class.
-
-##### Node status
-
-To see the state of the Basic Command Class, select the OnOff page
-from the left menu on the Dev GUI.
-
-![Dev GUI OnOff Cluster](./doc/assets/img/dev_gui_on_off_cluster.png)
-
-The state of the node is displayed for each entry, it only consist in
-a single On/Off state, represented with a small light bulb.
-
-![Dev GUI OnOff node State](./doc/assets/img/dev_gui_on_off_node_state.png)
-
-##### Sending commands
-
-To trigger a Basic Set, select one of the 3 available commands.
-(On, Off, Toggle).
-
-These command will have an effect only if there is a difference between the
-reported state and the command indication. i.e. the On command for a node already
-on will not trigger any command to be sent.
-
-#### Battery Command Class Information
-
-The ZPC controls the Battery Command Class. It is possible to
-see the current Battery state for supporting nodes.
-
-##### Node status
-
-To see the state of the Battery Command Class, select the Battery page
-from the left menu on the Dev GUI.
-
-![Dev GUI Power Configuration Cluster](./doc/assets/img/dev_gui_power_configuration_cluster.png)
-
-The last reported battery percentage will be visible on the attribute list.
-The Battery Low indication will be set to "true" if the battery level is less
-than 10% or if the node has reported a battery = 0xFF notification.
-
-![Dev GUI Power Configuration node State](./doc/assets/img/dev_gui_power_configuration_node_state.png)
-
-##### Sending commands
-
-It is not possible to send Battery Commands to supporting nodes.
-
-#### Binary Switch Command Class Information
-
-The ZPC controls the Binary Switch Command Class. It is possible to set and
-see the current level of a binary switch supporting node.
-
-##### Node status
-
-To see the state of the Binary Switch Command Class, select the OnOff page
-from the left menu on the Dev GUI.
-
-![Dev GUI OnOff Cluster](./doc/assets/img/dev_gui_on_off_cluster.png)
-
-The state of the node is displayed for each entry, it only consist in
-a single On/Off state, represented with a small light bulb.
-
-![Dev GUI OnOff node State](./doc/assets/img/dev_gui_on_off_node_state.png)
-
-##### Sending commands
-
-To trigger a Binary Switch Set, select one of the 3 available commands.
-(On, Off, Toggle).
-
-These command will have an effect only if there is a difference between the
-reported state and the command indication. i.e. the On command for a node already
-on will not trigger any command to be sent.
-
-#### Device Reset Locally Command Class Information
-
-The ZPC can be reset to default. The operation is available with other Network
-Management operations in the Dev GUI main page.
-
-![Dev GUI Reset device locally](./doc/assets/img/dev_gui_reset_the_zpc.png)
-
-When initiating a reset operation, the ZPC will change it state to "Reset"
-
-![Dev GUI Reset device locally](./doc/assets/img/dev_gui_zpc_reset_ongoing.png)
-
-The ZPC will attempt to notify the lifeline destination for a short while and
-reset its network afterwards. The ZPC node entry and all the nodes in its
-network will disappear from the UI when the reset operation is completed.
-
-The ZPC will then create a new network and re-spawn as a new node.
-
-When a node is notifying that it has been reset, the ZPC will perform a Remove
-Failed Node operation.
-
-##### Door Lock Command Class Information
-
-The ZPC controls the Door Lock Command Class. It is possible to see and change
-the state of nodes supporting the Door Lock Command Class.
-
-It is not possible to configure the Door Lock (Door Lock Configuration Commands).
-
-##### Node status
-
-To see the state of a Door Lock, open the Lock menu on the left hand side.
-
-![Dev GUI Lock Cluster](./doc/assets/img/dev_gui_lock_cluster.png)
-
-The state of the node will be displayed for each entry.
-
-* A green door icon means that the door is secured.
-* A red door icon means that the door is unsecured.
-
-![Dev GUI lock node State](./doc/assets/img/dev_gui_lock_node_state.png)
-
-##### Sending commands
-
-To trigger a Door Lock Operation Set, select either the LockDoor or UnLockDoor command.
-A pop-up will appear, asking about a PINOrRFIDCode. This parameter is for ZigBee
-nodes, and can be ignored for Z-Wave nodes. Press send without filling anything.
-
-![Dev GUI Lock send Set Command](./doc/assets/img/dev_gui_send_lock_command.png)
-
-#### Indicator Command Class Information
-
-The ZPC both supports and controls the Indicator Command Class.
-
-##### Support
-
-The ZPC supports identifying itself using an on-board green LED on the top-side of the
-Raspberry-Pi reference platform. On a Raspberry-Pi 4, the LED is located next to the
-red power-LED, both of which are located next to the USB-C power-connector. Please note
-that some Raspberry-Pi cases are opaque and some of those do not expose those
-LEDs to the outside (e.g. with a light-pipe), so the top-cover may need to be removed in
-order to see the LEDs.
-
-##### Node status
-
-To see the state of a Indicator, open the Identify menu on the left hand side.
-
-![Dev GUI Identify Cluster](./doc/assets/img/dev_gui_identify_cluster.png)
-
-The state of each identify indicator will be displayed for each entry.
-It will only display the duration, in seconds, that the node is identifying.
-For example, a node identifying for 66 seconds will be shown as follows:
-
-![Dev GUI Identify node State](./doc/assets/img/dev_gui_identify_node_state.png)
-
-##### Sending commands
-
-To trigger an Identify command, select the Identify command.
-A pop-up will appear, asking about the duration. Set the value to 3 in order
-to trigger the Identify command.
-
-![Dev GUI Identify Command](./doc/assets/img/dev_gui_send_identify_command.png)
-
-#### Multilevel Switch Command Class Information
-
-The ZPC controls the Multilevel Switch Command Class. It is possible to set and
-see the current level of a multilevel switch supporting node.
-
-However, the model on which the Unify system and
-[Dev GUI](./md_applications_dev_ui_dev_gui_readme_user.html) operate is based on
-The Dotdot model.
-
-This means that Multilevel Switch supporting node will be represented with both
-an OnOff and a Level functionality. The Level setting can be changed
-independently, but will be interpreted in conjunction with the OnOff State.
-
-In short:
-
-* If OnOff is off, the Multilevel Switch value at the end node will
-be 0, no matter what the current level shows.
-
-* If OnOff is on, the Multilevel Switch value at the end node will be according
-to the level setting.
-
-##### Node status
-
-To see the state of the Multilevel Switch Command Class, select the Level page
-from the left menu on the Dev GUI.
-
-![Dev GUI level Cluster](./doc/assets/img/dev_gui_level_cluster.png)
-
-The state of the node will be displayed for each entry. The following attributes
-are available:
-
-* CurrentLevel represents the Multilevel Switch Level
-* OnOffTransitionTime represents the Multilevel Switch duration
-
-![Dev GUI level node State](./doc/assets/img/dev_gui_level_node_state.png)
-
-##### Sending commands
-
-To trigger a Multilevel Switch Set, select the MoveToLevelWithOnOff command.
-A pop-up will appear, asking about the parameters.
-
-* CurrentLevel: Multilevel Switch Level, from 0 to 99.
-* OnOffTransitionTime: Transition time, in tenth of seconds, from 0 to 65534.
-The transition time will be floored to the nearest Z-Wave supported value.
-
-For example, this command will instruct to go to 50% in 25 seconds.
-![Dev GUI level send a Set Command](./doc/assets/img/dev_gui_send_multilevel_command.png)
-
-
-#### Security 0 - Security 2 Command Classes Information
-
-The ZPC supports and controls the Security 2 and Security 0 Command Classes.
-As the ZPC does not support Learn Mode, the set of granted keys is always as
-shown in the following table:
-
-| Security Class                 | Protocol                                    |
-| ------------------------------ | ------------------------------------------- |
-| S2 Access Control              | Z-Wave and Z-Wave Long Range                |
-| S2 Authenticated               | Z-Wave and Z-Wave Long Range                |
-| S2 Unauthenticated             | Z-Wave                                      |
-| S0                             | Z-Wave                                      |
-
-##### Node status
-
-It is possible to see the highest granted key of each node in the network,
-using the DevGUI, on the node page.
-
-![Dev GUI security level](./doc/assets/img/dev_gui_security_level.png)
-
-The Security information will not indicate if a node operates with the Z-Wave
-or Z-Wave Long Range protocol.
-
-##### Sending commands
-
-It is not possible to issue S0/S2 commands using the DevGUI.
-
-#### Thermostat Setpoint and Thermostat Mode Command Classes Information
-
-The ZPC controls the Thermostat Setpoint and Thermostat Mode Command Classes.
-It is possible to set the mode and setpoints of supporting nodes.
-
-##### Node status
-
-The state of Multilevel Sensor (temperature sensor), Thermostat Setpoint and
-Thermostat Mode Command Classes is aggregated in the Thermostat page
-located on the left menu in the Dev GUI.
-
-![Dev GUI Thermostat Cluster](./doc/assets/img/dev_gui_thermostat_cluster.png)
-
-The combined state of these command classes will be presented in the UI:
-
-* Temperature represents the Multilevel Sensor reported temperature (Sensor type 0x01).
-* Heating Setpoint represents the Heat Setpoint from the Thermostat Setpoint Command Class.
-* Cooling Setpoint represents the Cool Setpoint from the Thermostat Setpoint Command Class.
-* System Mode represents the current mode of from the Thermostat Mode Command
-Class.
-
-![Dev GUI Thermostat node State](./doc/assets/img/dev_gui_thermostat_node_state.png)
-
-##### Sending commands
-
-To change the Thermostat Mode, you have to click on the wrench icon and modify
-the attributes values in the dialog.
-
-
-![Dev GUI Thermostat send Set Command](./doc/assets/img/dev_gui_send_thermostat_command.png)
-
-* Heating Setpoint will trigger a Thermostat Setpoint Set with the temperature
-for the indicated mode.
-* Cooling Setpoint will trigger a Thermostat Setpoint Set with the temperature
-for the indicated mode.
-* System Mode will trigger a Thermostat Mode Set with the indicated mode.
-
-All temperatures are in centi-celcius (1/100 of a Celcius degree)
-
-### SmartStart Information
-
-The ZPC supports including other nodes using SmartStart. Detailed
-steps to manipulate the SmartStart list are also given in the
-[Dev GUI User's Guide](./md_applications_dev_ui_dev_gui_readme_user.html).
-
-#### SmartStart List Format
-
-The SmartStart list is present in the Dev GUI using the SmartStart button in
-the left menu.
-
-![Dev GUI SmartStart list](./doc/assets/img/dev_gui_smart_start_list.png)
-
-The SmartStart list will be displayed as shown below.
-
-![Dev GUI SmartStart list format](./doc/assets/img/dev_gui_smart_start_list_format.png)
-
-The **DSK** indicates the DSK of the node.
-The **Include** tickmark indicates if the node should be included or not.
-In the example above, the third entry will not be included upon inclusion requests.
-
-The **Unid** field indicates the unique identifier assigned to the node.
-A non-empty value means that it is included in our network.
-
-#### Modifying SmartStart List Entries
-
-Click on the little pen icon to modify an entry. You will be able to change
-the Include tickbox and the Unid.
-
-It is not recommended to remove the Unid, unless you know that the node has left
-the network silently.
-
-Click on the Save Icon to save the modifications.
-
-![Dev GUI Modify SmartStart list](./doc/assets/img/dev_gui_modify_smart_start_list.png)
-
-#### Removing SmartStart List Entries
-
-Click on the little trash can icon to remove an entry.
-
-Note that it the entry has a Unid assigned, it will stay in the network until
-reset to default or excluded.
-
-![Dev GUI Erase SmartStart list entry](./doc/assets/img/dev_gui_erase_smart_start_list.png)
-
-#### Z-Wave Long Range Support
-
-The ZPC can operate as a Z-Wave Long Range controller, operating both on
-Z-Wave and Z-Wave Long Range PHY/MAC.
-
-Nodes can be included using Z-Wave Long Range, if the ZPC runs with the
-US_LR RF region.
-
-Go to the SmartStart list and add an entry, then click the heart icon to select
-the preferred protocol for inclusion.
-
-![Dev GUI SmartStart preferred protocol](./doc/assets/img/dev_gui_smart_start_preferred_protocol.png)
-
-Pick Z-Wave Long Range in the pop-up. The SmartSart inclusion will now be
-performed using Z-Wave Long Range.
-
-![Dev GUI SmartStart preferred protocol list](./doc/assets/img/dev_gui_smart_start_preferred_protocol_list.png)
-
-The order of the protocols matters only if you select both Z-Wave and Z-Wave
-Long Range.
-
-#### SmartStart Supported Protocol Detection
-
-The ZPC can perform SmartStart inclusions both for Z-Wave and Z-Wave
-Long Range nodes.
-
-The list of supported protocols for a DSK entry is not advertised in
-the Unify SmartStart list, which means that the ZPC, in some cases, needs to discover
-which protocols are supported/in range for the SmartStart entry.
-
-If the PreferredProtocols in the SmartStart list entry is contains a single value,
-the ZPC will only attempt to include the node with the protocol indicated in the
-PreferredProtocols, without any discovery.
-
-If PreferredProtocols contains no value, the ZPC will use its default configured
-priority list for inclusion protocols.
-
-If PreferredProtocols contains more than one value, the ZPC will use this list to
-attempt to include the node.
-
-If the ZPC has several inclusion protocols candidates either from the
-PreferredProtocols or based on its configuration, it will first listen for
-SmartStart Prime commands to detect which protocols are available
-from the node.
-
-In the following use case, the node supports all protocols among two candidates:
-
-\startuml
-
-' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
-
-hide footbox
-title Inclusion Protocol candidate discovery
-
-' List of participants
-participant "SmartStart list" as upvl
-participant "ZPC" as zpc
-participant "End node" as node
-
-upvl -> zpc: New Entry in the SmartStart list.\n 2 possible inclusion protocols.
-
-rnote over zpc, node: <b>Initiate protocol discovery</b>
-
-rnote left of zpc: known protocols: none
-
-node -> zpc: Z-Wave Long Range\n<b>SmartStart Prime
-
-rnote left of zpc: known protocols:\n1. Z-Wave Long Range
-
-node -> zpc: Z-Wave\n<b>SmartStart Prime
-
-rnote left of zpc: known protocols:\n1. Z-Wave Long Range\n2. Z-Wave
-
-rnote over zpc, node: <b>All candidates received\n<b>Stopping Protocol discovery.
-
-rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request.
-
-\enduml
-
-Example, if the node supports only 1 protocol among 2 candidates:
-
-\startuml
-
-' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
-
-hide footbox
-title Inclusion Protocol candidate discovery
-
-' List of participants
-participant "SmartStart list" as upvl
-participant "ZPC" as zpc
-participant "End node" as node
-
-upvl -> zpc: New Entry in the SmartStart list.\n 2 possible inclusion protocols.
-
-rnote over zpc, node: <b>Initiate protocol discovery</b>
-
-rnote left of zpc: known protocols: none
-
-node -> zpc: Z-Wave Long Range\n<b>SmartStart Prime
-
-rnote left of zpc: known protocols:\n1. Z-Wave Long Range
-
-node -> zpc: Z-Wave Long Range\n<b>SmartStart Prime
-
-rnote left of zpc: known protocols:\n1. Z-Wave Long Range
-
-rnote over zpc, node: <b>Cycle detected for supported protocols\n<b>Stopping Protocol discovery.
-
-rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request.
-
-\enduml
-
-The result of this procedure (protocol discovery) will not be saved and will be
-performed at every SmartStart inclusion attempt. It allows to re-assess, every
-time if a protocol became available. The list of protocols may change due to
-firmware update or simply due to radio conditions. Z-Wave nodes may
-come within NWI range after including more nodes in the network, and subsequently join themselves.
-Therefore, this protocol discovery procedure may happen at every inclusion attempt.
-
-In a Z-Wave network, NWI will be enabled when listening to SmartStart Primes messages
-and repeated frames will be received by the ZPC. To prevent
-repeated frames from triggering an early conclusion on which protocols are supported, the
-ZPC will apply a back-off after receiving a prime message. The back-off should be
-larger than two seconds.
-
-\startuml
-
-' Style for the diagram
-skinparam classFontColor black
-skinparam classFontSize 10
-skinparam classFontName Helvetica
-skinparam sequenceMessageAlign center
-skinparam shadowing false
-skinparam ArrowColor #000000
-skinparam ParticipantBackgroundColor #FFFFFF
-skinparam ParticipantBorderColor #480509
-skinparam SequenceLifeLineBorderColor #001111
-skinparam SequenceLifeLineBorderThickness 2
-skinparam NoteBackgroundColor #FFFFFF
-skinparam NoteBorderColor #000000
-skinparam ActorBackgroundColor #FFFFFF
-skinparam ActorBorderColor #480509
-
-!pragma teoz true
-
-hide footbox
-title Inclusion Protocol with NWI repeaters
-
-' List of participants
-participant "SmartStart list" as upvl
-participant "ZPC" as zpc
-participant "NWI Repeater" as repeater
-participant "End node" as node
-
-upvl -> zpc: New Entry in the SmartStart list.\n 2 possible inclusion protocols.
-
-rnote over zpc, node: <b>Initiate protocol discovery</b>
-
-rnote left of zpc: known protocols: none
-
-node -> zpc: Z-Wave\n<b>SmartStart Prime
-&node -> repeater
-
-rnote left of zpc: known protocols:\n1. Z-Wave
-rnote left of zpc: Start back-off for Z-Wave
-activate zpc
-
-repeater -> zpc: Z-Wave\n<b>SmartStart Prime
-rnote left of zpc: Ignoring repeater\nmessage in back-off
-
-
-zpc -> zpc: end of back-off for Z-Wave
-deactivate zpc
-
-node -> zpc: Z-Wave\n<b>SmartStart Prime
-
-rnote left of zpc: known protocols:\n1. Z-Wave
-rnote over zpc, node: <b>Cycle detected for supported protocols\n<b>Stopping Protocol discovery.
-
-rnote over zpc, node: Initiate SmartStart Inclusion \nat the next SmartStart Inclusion Request.
-
-\enduml
-
-## Transitioning from Z/IP Gateway + Z-Ware
-
-The ZPC provides a subset of Z-Wave features compared to the Z/IP Gateway.
-
-* The ZPC is based on Generic Controller Device type and it does not support Learn Mode that enables
-  it to be included to other networks.
-* The ZPC does not contain Installation and Maintenance Framework that provides a method for gathering
-  statistics and performing network maintenance.
-* The ZPC does not allow to establish arbitrary Associations and only establishes Lifeline Association.
-* The ZPC does not control all Command Classes fully. For some, the ZPC only provides partial control.
-  Z-Wave Command Classes where the ZPC provides partial control include:
-  + Switch Multilevel, version 4,
-  + Multilevel Sensor, version 11,
-  + Thermostat Mode, version 3,
-  + Thermostat Setpoint, version 3 and
-  + Notification, version 11.
+## Z-Wave Certification
+For information relevant to Z-Wave please read [ZPC Z-Wave Certification Guide](readme_certification.md)

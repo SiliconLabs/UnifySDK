@@ -1,22 +1,24 @@
-import { MenuItem, TextField } from '@material-ui/core';
+import { MenuItem, TextField, Tooltip, InputAdornment } from '@material-ui/core';
 import * as React from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { CommandAttrsState } from './command-attrs-types';
+import * as FiIcons from 'react-icons/fi';
 
 class CommandAttrs extends React.Component<{}, CommandAttrsState> {
     constructor(props: {}) {
         super(props);
         this.state = {
             Payload: {},
-            Command: {}
+            Command: {},
+            ReadOnly: false
         };
     }
 
-    updateState(command: any) {
+    updateState(command: any, payload: any = null, readOnly: boolean = false) {
         this.setState({
             Payload: {},
             Command: {}
-        }, () => this.setState({ Payload: this.getPayload(command), Command: command }));
+        }, () => this.setState({ Payload: payload || this.getPayload(command), Command: command, ReadOnly: readOnly }));
     }
 
     getPayload(command: any) {
@@ -32,33 +34,54 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
                     else
                         payload[i.name][b.name] = b.default !== undefined ? b.default : (b.type === "boolean" ? false : (b.type === "text" ? "" : 0));
                 });
-            }
-            else
-                payload[i.name] = i.default !== undefined ? i.default : (i.type === "boolean" ? false : (i.type === "text" ? "" : 0));
+            } else if (i.struct && i.struct.length) {
+                let item: any = {}
+                i.struct.forEach((s: any) => {
+                    item[s.name] = s.type === "boolean" ? false : (s.type === "number" ? 0 : "");
+                });
+                payload[i.name] = i.isArray ? [] : item;
+            } else
+                payload[i.name] = i.isArray ? [] : (i.default !== undefined ? i.default : (i.type === "boolean" ? false : (i.type === "text" ? "" : 0)));
         });
         return payload;
     }
 
-    handleChange(isCheckBox: boolean, event: any) {
-        let tempData = { ...this.state.Payload };
-        tempData[event.target.name] = isCheckBox ? event.target.checked : event.target.value;
-        this.setState({ Payload: tempData });
-    }
-
-    handleBitmapChange(attr: any, isCheckBox: boolean, event: any) {
-        let tempData = this.state.Payload[attr.name];
-        tempData[event.target.name] = isCheckBox ? event.target.checked : event.target.value;
+    handleChange(prefixNames: string[], isCheckBox: boolean, isNumber: boolean, event: any) {
+        let tempData = this.state.Payload;
+        prefixNames.forEach((i: any) => tempData = tempData[i]);
+        tempData[event.target.name] = isCheckBox ? event.target.checked : (isNumber ? event.target.valueAsNumber : event.target.value);
         this.setState({ Payload: this.state.Payload });
     }
 
-    render() {
-        return (<>
-            {this.state.Command && this.state.Command.fields && this.state.Command.fields.map((i: any, index: number) => {
-                if (i.enum && i.enum.length) {
+    addArrayItem(attrArray: any[], attrInfo: any) {
+        if (attrInfo.type === "struct") {
+            let newItem: any = {};
+            attrInfo.struct.forEach((i: any) => {
+                newItem[i.name] = i.type === "number" ? 0 : "";
+            });
+            attrArray.push(newItem);
+        } else
+            attrArray.push(attrInfo.type === "number" ? 0 : "");
+        this.setState({ Payload: this.state.Payload });
+    }
+
+    removeArrayItem(attr: any[], arrayIndex: number) {
+        attr.splice(arrayIndex, 1);
+        this.setState({ Payload: this.state.Payload });
+    }
+
+    renderField = (item: any, payload: any, prefixNames: any[], index: any) => {
+        switch (item.type) {
+            case "enum":
+                if (item.enum && item.enum.length) {
                     return (
                         <div key={index} className="col-sm-6 inline margin-v-10">
-                            <TextField size="small" className="flex-input" fullWidth={true} select label={i.name} name={i.name} value={this.state.Payload[i.name]} onChange={this.handleChange.bind(this, false)} variant="outlined">
-                                {i.enum.map((j: any, ind: number) => {
+                            <TextField size="small" className="flex-input" fullWidth={true} select label={item.name} name={item.name}
+                                value={payload} onChange={this.handleChange.bind(this, prefixNames, false, false)} variant="outlined"
+                                inputProps={
+                                    { readOnly: this.state.ReadOnly }
+                                }>
+                                {item.enum.map((j: any, ind: number) => {
                                     return <MenuItem key={ind} value={j.name}>
                                         {j.name}
                                     </MenuItem>
@@ -66,15 +89,21 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
                             </TextField>
                         </div>
                     )
-                } else if (i.bitmap && i.bitmap.length) {
+                }
+                break;
+            case "bitmap":
+                if (item.bitmap && item.bitmap.length) {
                     return <Card key={index} className="inline margin-v-10">
-                        <Card.Header>{i.name}</Card.Header>
+                        <Card.Header>{item.name}</Card.Header>
                         <Card.Body>
-                            {i.bitmap.map((b: any, bIndex: number) => {
+                            {item.bitmap.map((b: any, bIndex: number) => {
                                 switch (b.type) {
                                     case "enum":
                                         return <div key={`${index}:${bIndex}`} className="col-sm-6 inline margin-v-10">
-                                            <TextField size="small" className="flex-input" fullWidth={true} select label={b.name} name={b.name} value={this.state.Payload[i.name][b.name] ?? 0} defaultValue={this.state.Payload[i.name][b.name] ?? 0} onChange={this.handleBitmapChange.bind(this, i, false)} variant="outlined">
+                                            <TextField size="small" className="flex-input" fullWidth={true} select label={b.name} name={b.name} value={payload[b.name] ?? 0}
+                                                defaultValue={payload[b.name] ?? 0} onChange={this.handleChange.bind(this, prefixNames.concat(item.name), false, false)} variant="outlined" inputProps={
+                                                    { readOnly: this.state.ReadOnly }
+                                                }>
                                                 {b.enum.map((option: any) => {
                                                     return <MenuItem key={option.name} value={option.name}>
                                                         {option.name}
@@ -87,42 +116,122 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
                                             <div className="col-sm-12">
                                                 <Form.Label column sm="11">
                                                     <div className="check-container">
-                                                        <Form.Check name={b.name} defaultChecked={this.state.Payload[i.name][b.name] ?? false} onChange={this.handleBitmapChange.bind(this, i, true)} />
+                                                        {this.state.ReadOnly
+                                                            ? <Form.Check readOnly checked={payload[b.name] ?? false} />
+                                                            : <Form.Check name={b.name} defaultChecked={payload[b.name] ?? false} onChange={this.handleChange.bind(this, prefixNames.concat(item.name), true, false)} />}
                                                     </div>
                                                     {b.name}</Form.Label>
                                             </div>
                                         </div>
                                     default:
                                         return <div key={`${index}:${bIndex}`} className="col-sm-6 inline margin-v-10">
-                                            <TextField size="small" className="flex-input" fullWidth={true} label={b.name} name={b.name} variant="outlined" type={b.type} defaultValue={this.state.Payload[i.name][b.name]} onChange={this.handleBitmapChange.bind(this, i, false)} onFocus={(event) => event.target.select()} />
+                                            <TextField size="small" className="flex-input" fullWidth={true} label={b.name} name={b.name} variant="outlined" type={b.type}
+                                                defaultValue={payload[b.name]} onChange={this.handleChange.bind(this, prefixNames.concat(item.name), false, b.type === "number")} onFocus={(event) => event.target.select()}
+                                                inputProps={
+                                                    { readOnly: this.state.ReadOnly }
+                                                } />
                                         </div>
                                 }
                             })
                             }
                         </Card.Body>
                     </Card>
-                } else
-                    switch (i.type) {
-                        case "boolean":
-                            return (
-                                <div key={index} className="col-sm-6 inline margin-v-10">
-                                    <div className="col-sm-12">
-                                        <Form.Label column sm="11">
-                                            <div className="check-container">
-                                                <Form.Check name={i.name} defaultChecked={this.state.Payload[i.name] ?? false} checked={this.state.Payload[i.name]} onChange={this.handleChange.bind(this, true)} />
-                                            </div>
-                                            {i.name}</Form.Label>
+                }
+                break;
+            case "struct":
+                if (item.struct && item.struct.length) {
+                    return <Card key={index} className="inline margin-v-10">
+                        <Card.Header>{item.name}
+                            {item.isArray
+                                ? <span className="pointer icon">
+                                    <Tooltip title={`Add Item`} className="float-right">
+                                        <span className="pointer icon">
+                                            <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, payload, item)} />
+                                        </span>
+                                    </Tooltip>
+                                </span>
+                                : <></>}
+                        </Card.Header>
+                        <Card.Body className='col-sm-12 no-padding'>
+                            {item.isArray
+                                ? payload.map((arrayItem: any, arrayIndex: number) => {
+                                    return <div key={`${index}-${arrayIndex}`} className='col-sm-6 inline'>
+                                        <Card className="margin-v-10 flex-input">
+                                            <Card.Header className='padding-2'>[{arrayIndex}]<span className="pointer icon"><FiIcons.FiMinus className="float-right" onClick={this.removeArrayItem.bind(this, payload, arrayIndex)} /></span></Card.Header>
+                                            <Card.Body className="col-sm-12 no-padding">
+                                                {
+                                                    item.struct.map((field: any, sIndex: number) => {
+                                                        return this.renderField(field, arrayItem[field.name], prefixNames.concat(item.name).concat(arrayIndex), `${index}-${arrayIndex}-${sIndex}`);
+                                                    })
+                                                }
+                                            </Card.Body>
+                                        </Card>
                                     </div>
+                                })
+                                : item.struct.map((field: any, sIndex: number) => {
+                                    return this.renderField(field, payload[field.name], prefixNames.concat(item.name), `${index}-${sIndex}`);
+                                })
+                            }
+                        </Card.Body>
+                    </Card>
+
+                }
+                break;
+            case "boolean":
+                return (
+                    <div key={index} className="col-sm-6 inline margin-v-10">
+                        <div className="col-sm-12">
+                            <Form.Label column sm="11">
+                                <div className="check-container">
+                                    {this.state.ReadOnly
+                                        ? <Form.Check readOnly checked={payload} />
+                                        : <Form.Check name={item.name} defaultChecked={payload ?? false} checked={payload} onChange={this.handleChange.bind(this, prefixNames, true, false)} />}
                                 </div>
-                            )
-                        default:
-                            return (
-                                <div key={index} className="col-sm-6 inline margin-v-10">
-                                    <TextField size="small" className="flex-input" fullWidth={true} label={i.name} name={i.name} variant="outlined" type={i.type} defaultValue={this.state.Payload[i.name]} onChange={this.handleChange.bind(this, false)} onFocus={(event) => event.target.select()} />
-                                </div>
-                            )
-                    }
-            })}
+                                {item.name}</Form.Label>
+                        </div>
+                    </div>
+                )
+            default:
+                return (item.isArray
+                    ? <Card key={index} className="inline margin-v-10">
+                        <Card.Header>{item.name}
+                            <Tooltip title={`Add Item`} className="float-right">
+                                <span className="pointer icon">
+                                    <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, payload, item)} />
+                                </span>
+                            </Tooltip>
+                        </Card.Header>
+                        <div className='col-sm-12 no-padding'>
+                            {payload.map((arrayItem: any, arrayIndex: number) => {
+                                return <Card.Body key={`${index}-${arrayIndex}`} className="col-sm-6 inline no-padding-v margin-v-10">
+                                    <TextField size="small" className="flex-input" label={`[${arrayIndex}]`} name={arrayIndex.toString()} variant="outlined" type={item.type}
+                                        value={arrayItem} onChange={this.handleChange.bind(this, prefixNames.concat(item.name), false, item.type === "number")}
+                                        onFocus={(event) => event.target.select()} InputProps={{
+                                            endAdornment: <InputAdornment position="end">
+                                                <Tooltip title={`Remove Item`}>
+                                                    <span className="pointer icon">
+                                                        <FiIcons.FiMinus onClick={this.removeArrayItem.bind(this, payload, arrayIndex)} />
+                                                    </span>
+                                                </Tooltip>
+                                            </InputAdornment>
+                                        }} />
+                                </Card.Body>
+                            })}
+                        </div>
+                    </Card>
+                    : <div key={index} className={`col-sm-6 inline margin-v-10`}>
+                        <TextField size="small" className="flex-input" fullWidth={true} label={item.name} name={item.name} variant="outlined" type={item.type}
+                            value={payload} onChange={this.handleChange.bind(this, prefixNames, false, item.type === "number")} onFocus={(event) => event.target.select()} inputProps={
+                                { readOnly: this.state.ReadOnly }
+                            } />
+                    </div>
+                )
+        }
+    }
+
+    render() {
+        return (<>
+            {this.state.Command && this.state.Command.fields && this.state.Command.fields.map((i: any, index: number) => this.renderField(i, this.state.Payload[i.name], [], index))}
         </>);
     }
 }

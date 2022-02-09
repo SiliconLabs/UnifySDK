@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Z-Wave Protocol Controller: components/uic_mqtt/src/uic_mqtt.c File Reference</title>
+<title>Z-Wave Protocol Controller Refrence: components/uic_mqtt/src/uic_mqtt.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,8 +26,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Z-Wave Protocol Controller
-   &#160;<span id="projectnumber">1.0.3</span>
+   <div id="projectname">Z-Wave Protocol Controller Refrence
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -122,7 +122,7 @@ Functions</h2></td></tr>
 <tr class="separator:a2d3087a6b8541d33376701af0e03476a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b065eb21aba54c913a934e514ac6632"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uic__mqtt_8c.html#a4b065eb21aba54c913a934e514ac6632">uic_mqtt_process_on_disconnect</a> (<a class="el" href="group__mqtt__client.html#ga57dffc3593ed5dc537ca8d04bc81272c">mqtt_client_t</a> instance, const int file_descriptor)</td></tr>
 <tr class="separator:a4b065eb21aba54c913a934e514ac6632"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga96105a8b2fec3cad9f3d9901cf9bbf95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__sl__status.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__mqtt.html#ga96105a8b2fec3cad9f3d9901cf9bbf95">uic_mqtt_setup</a> ()</td></tr>
+<tr class="memitem:ga96105a8b2fec3cad9f3d9901cf9bbf95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__mqtt.html#ga96105a8b2fec3cad9f3d9901cf9bbf95">uic_mqtt_setup</a> ()</td></tr>
 <tr class="separator:ga96105a8b2fec3cad9f3d9901cf9bbf95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5d6e500f05988e7f1070d81054c277d5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__mqtt.html#ga5d6e500f05988e7f1070d81054c277d5">uic_mqtt_teardown</a> ()</td></tr>
 <tr class="separator:ga5d6e500f05988e7f1070d81054c277d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,6 +142,12 @@ Functions</h2></td></tr>
 <tr class="separator:ga9bfb92b8adac21024f6f865228d2c86a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5b1eacd2665a3e94179523b635198a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uic__mqtt_8c.html#ab5b1eacd2665a3e94179523b635198a1">uic_mqtt_unsubscribe</a> (const char *topic, void(*callBack)(const char *topic, const char *message, const size_t message_length))</td></tr>
 <tr class="separator:ab5b1eacd2665a3e94179523b635198a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae2e2e942f76c2d0143ed907b2d413bb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__mqtt.html#gae2e2e942f76c2d0143ed907b2d413bb2">uic_mqtt_set_before_disconnect_callback</a> (void(*before_disconnect)())</td></tr>
+<tr class="memdesc:gae2e2e942f76c2d0143ed907b2d413bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a callback which will be executed before calling a disconnect.  <a href="group__uic__mqtt.html#gae2e2e942f76c2d0143ed907b2d413bb2">More...</a><br /></td></tr>
+<tr class="separator:gae2e2e942f76c2d0143ed907b2d413bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacc9eff67ac8ed62e455a130e4e6c4def"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__mqtt.html#gacc9eff67ac8ed62e455a130e4e6c4def">uic_mqtt_set_after_connect_callback</a> (void(*after_connect)())</td></tr>
+<tr class="memdesc:gacc9eff67ac8ed62e455a130e4e6c4def"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a callback which will be executed after having connected.  <a href="group__uic__mqtt.html#gacc9eff67ac8ed62e455a130e4e6c4def">More...</a><br /></td></tr>
+<tr class="separator:gacc9eff67ac8ed62e455a130e4e6c4def"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1b0bc6a321773fe74857fec0ececa0b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uic__mqtt_8c.html#ae1b0bc6a321773fe74857fec0ececa0b">PROCESS_THREAD</a> (uic_mqtt_process, ev, <a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>)</td></tr>
 <tr class="separator:ae1b0bc6a321773fe74857fec0ececa0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -541,7 +547,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_4bf479fad80bec7ec7959953963ae340.html">uic_mqtt</a></li><li class="navelem"><a class="el" href="dir_cec1e73942c85e15cdf8a64e3ff92346.html">src</a></li><li class="navelem"><a class="el" href="uic__mqtt_8c.html">uic_mqtt.c</a></li>
-    <li class="footer">Generated on Fri Nov 5 2021 19:42:10 for Z-Wave Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Feb 9 2022 14:34:31 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

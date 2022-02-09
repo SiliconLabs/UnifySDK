@@ -85,20 +85,6 @@ sl_status_t zigpc_net_mgmt_add_node(const zigbee_eui64_t node_eui64,
                                     const uint8_t install_code_length);
 
 /**
- * @brief Request to interview a node already on the network. This request
- * can only be fullfilled if the FSM is in an idle state. The FSM, if
- * successful, will transition the FSM to the "node interview" state. If the
- * node is not on the network, or if the interview process has not completed,
- * a node interview timeout will expire which will transition back the FSM to
- * the idle state.
- *
- * @param eui64                 Identifier of the node to be interviewed
- * @return sl_status_t          SL_STATUS_OK if the request has been accepted,
- * SL_STATUS_BUSY if the network is busy to service the request
- */
-sl_status_t zigpc_net_mgmt_interview_node(const zigbee_eui64_t eui64);
-
-/**
  * @brief Request to remove a node already on the network. This request
  * can only be fullfilled if the FSM is in an idle state. The request, if
  * successful, will transition the FSM to the "remove node" state. If the

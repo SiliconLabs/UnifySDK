@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["APP_NAME",""],["EMPTY_ARRAY_VALUE",""]],"fn":[["get_unid_ep_of_topic","parse group topic message and extract unid and endpoint id"]],"struct":[["MqttGroupHandler","MqttGroupHandler handles subscription messages related to UIC groups. It subscribes to listen to the correct topics and is to be passed to the mosquitto client"]]});
