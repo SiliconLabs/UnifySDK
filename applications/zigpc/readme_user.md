@@ -90,7 +90,7 @@ for more details.
 #### uic-upvl
 The Unify SDK Provisioning List (UPVL)
 maintains the UCL SmartStart topics (and its List, Update, and Remove
-subtopics. See [UPVL User Guide](applications/upvl/readme_user.md) for more
+subtopics. See [UPVL User Guide](../../applications/upvl/readme_user.md) for more
 details.
 
 #### uic-gms
@@ -101,7 +101,7 @@ Controllers. It manages the ucl/by-group/# topic space. See
 #### uic-image-provider
 Unify IoT service that stores and distributes OTA Firmware images for Protocol
 Controllers over UCL. It manages the ucl/OTA/# topic space. See
-[Image Provider User's Guide](applications/image_provider/readme_user.md) for
+[Image Provider User's Guide](../../applications/image_provider/readme_user.md) for
 more details.
 
 #### zigpc
@@ -123,7 +123,7 @@ journalctl -u mosquitto
 ```
 
 2. Run the UPVL application on the Raspberry Pi by following instructions in
-   the [UPVL User Guide](applications/upvl/readme_user.md).
+   the [UPVL User Guide](../../applications/upvl/readme_user.md).
 ```bash
 # Make sure uic-upvl is running
 sudo systemctl status uic-upvl
@@ -134,7 +134,7 @@ sudo systemctl status uic-upvl
 ```
 
 3. Run the Group Management Service application on the Raspberry Pi by following instructions in
-   the [GMS User Guide](applications/gms/readme_user.md).
+   the [GMS User Guide](../../applications/gms/readme_user.md).
 ```bash
 # Make sure uic-gms is running
 sudo systemctl status uic-gms
@@ -144,7 +144,7 @@ sudo systemctl status uic-gms
 #     sudo systemctl start uic-gms
 ```
 4. Run the Image provider application on the Raspberry Pi by following instructions in
-   the [Image Provider User Guide](applications/image_provider/readme_user.md).
+   the [Image Provider User Guide](../../applications/image_provider/readme_user.md).
 ```bash
 # Make sure uic-image-provider is running
 sudo systemctl status uic-image-provider
@@ -380,7 +380,7 @@ and install the [MQTT Explorer tool](https://mqtt-explorer.com/). After it is
 run on the host machine, connect to the MQTT broker on the Raspberry Pi.
 
 To perform the below steps using the Unify Dev GUI tool, see
-[Dev GUI User Guide](applications/dev_ui/dev_gui/readme_user.md).
+[Dev GUI User Guide](../../applications/dev_ui/dev_gui/readme_user.md).
 
 ### Adding Zigbee Device to the ZigPC Network via Install-Code Method
 NOTE: The following steps use the command line interface (CLI) exposed by Simplicity
