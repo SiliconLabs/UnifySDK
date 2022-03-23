@@ -128,7 +128,6 @@ void test_aox_locator_configuration_test()
     &uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_stub);
 
   // Init our AoXLocator component
-  attributes_publish_verifications();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, aox_locator_configuration_init());
   TEST_ASSERT_NOT_NULL(write_attributes_callback);
 
@@ -224,7 +223,6 @@ void test_aox_locator_configuration_publication_test()
     &uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_stub);
 
   // Init our AoXLocator component
-  attributes_publish_verifications();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, aox_locator_configuration_init());
   TEST_ASSERT_NOT_NULL(write_attributes_callback);
 
@@ -251,7 +249,6 @@ void test_aox_locator_configuration_wrong_unid_test()
     &uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_stub);
 
   // Init our AoXLocator component
-  attributes_publish_verifications();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, aox_locator_configuration_init());
   TEST_ASSERT_NOT_NULL(write_attributes_callback);
 
@@ -279,7 +276,6 @@ void test_aox_locator_configuration_support_check_test()
     &uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_stub);
 
   // Init our AoXLocator component
-  attributes_publish_verifications();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, aox_locator_configuration_init());
   TEST_ASSERT_NOT_NULL(write_attributes_callback);
 
@@ -307,7 +303,6 @@ void test_aox_locator_configuration_wrong_endpoint_test()
     &uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_stub);
 
   // Init our AoXLocator component
-  attributes_publish_verifications();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, aox_locator_configuration_init());
   TEST_ASSERT_NOT_NULL(write_attributes_callback);
 
@@ -335,7 +330,6 @@ void test_aox_locator_set_position_and_orientation_test()
     &uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_stub);
 
   // Init our AoXLocator component
-  attributes_publish_verifications();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, aox_locator_configuration_init());
 
   // Set our Coordinates configuration
@@ -379,7 +373,6 @@ void test_aox_locator_set_position_and_orientation_valid_test()
     &uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_stub);
 
   // Init our AoXLocator component
-  attributes_publish_verifications();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, aox_locator_configuration_init());
 
   // Set our Coordinates configuration
@@ -407,7 +400,6 @@ void test_aox_locator_set_azimuth_mask_test()
     &uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_stub);
 
   // Init our AoXLocator component
-  attributes_publish_verifications();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, aox_locator_configuration_init());
 
   // Set our Azimuth mask configuration
@@ -483,7 +475,6 @@ void test_aox_locator_set_allow_list_test()
     &uic_mqtt_dotdot_set_aox_locator_write_attributes_callback_stub);
 
   // Init our AoXLocator component
-  attributes_publish_verifications();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, aox_locator_configuration_init());
 
   // Set our AllowList configuration

@@ -406,13 +406,13 @@ static sl_status_t
   zwave_unid_from_node_id(info->remote.node_id, node_unid);
   if (received_active_scene > NO_SCENE_ACTIVE) {
     uic_mqtt_dotdot_scenes_command_recall_scene_fields_t fields = {};
-    fields.groupid                                       = 0;
+    fields.groupid                                              = 0;
     fields.sceneid         = received_active_scene - 1;
     fields.transition_time = 0;
-     uic_mqtt_dotdot_scenes_publish_generated_recall_scene_command(
-       node_unid,
-       (dotdot_endpoint_id_t)info->remote.endpoint_id,
-       &fields);
+    uic_mqtt_dotdot_scenes_publish_generated_recall_scene_command(
+      node_unid,
+      (dotdot_endpoint_id_t)info->remote.endpoint_id,
+      &fields);
   }
 
   return SL_STATUS_OK;
@@ -719,7 +719,7 @@ static sl_status_t zwave_command_class_central_scene_configuration_set(
 static void zwave_command_class_central_scene_on_version_attribute_update(
   attribute_store_node_t updated_node, attribute_store_change_t change)
 {
-  if (change == ATTRIBUTE_DELETED) {
+  if (change != ATTRIBUTE_UPDATED) {
     return;
   }
 
@@ -730,7 +730,7 @@ static void zwave_command_class_central_scene_on_version_attribute_update(
     return;
   }
 
-  uint8_t supporting_node_version = 0;
+  zwave_cc_version_t supporting_node_version = 0;
   attribute_store_get_reported(updated_node,
                                &supporting_node_version,
                                sizeof(supporting_node_version));
@@ -810,7 +810,7 @@ sl_status_t zwave_command_class_central_scene_init()
   handler.command_class              = COMMAND_CLASS_CENTRAL_SCENE_V3;
   handler.version                    = CENTRAL_SCENE_VERSION_V3;
   handler.command_class_name         = "Central Scene";
-  handler.comments                   = "";
+  handler.comments                   = "Partial control: key attributes are not displayed in the UI.";
 
   zwave_command_handler_register_handler(handler);
 

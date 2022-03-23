@@ -272,3 +272,46 @@ sl_status_t
   }
   return SL_STATUS_OK;
 }
+
+wake_up_interval_t zwave_get_wake_up_interval(zwave_node_id_t node_id)
+{
+  attribute_store_node_t node_id_node
+    = attribute_store_network_helper_get_zwave_node_id_node(node_id);
+
+  uint32_t endpoint_id_child_index = 0;
+  attribute_store_node_t endpoint_id_node
+    = attribute_store_get_node_child_by_type(node_id_node,
+                                             ATTRIBUTE_ENDPOINT_ID,
+                                             endpoint_id_child_index);
+
+  wake_up_interval_t wake_up_interval = 0;
+
+  while (endpoint_id_node != ATTRIBUTE_STORE_INVALID_NODE
+         && wake_up_interval == 0) {
+    // Find if there is a Wake Up Setting:
+    // Set up the Wake Up Interval
+    attribute_store_node_t wake_up_setting_node
+      = attribute_store_get_node_child_by_type(
+        endpoint_id_node,
+        ATTRIBUTE_COMMAND_CLASS_WAKE_UP_SETTING,
+        0);
+    attribute_store_node_t wake_up_interval_node
+      = attribute_store_get_node_child_by_type(
+        wake_up_setting_node,
+        ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
+        0);
+
+    attribute_store_get_reported(wake_up_interval_node,
+                                 &wake_up_interval,
+                                 sizeof(wake_up_interval));
+
+    // Move to the next Endpoint
+    endpoint_id_child_index += 1;
+    endpoint_id_node
+      = attribute_store_get_node_child_by_type(node_id_node,
+                                               ATTRIBUTE_ENDPOINT_ID,
+                                               endpoint_id_child_index);
+  }
+
+  return wake_up_interval;
+}

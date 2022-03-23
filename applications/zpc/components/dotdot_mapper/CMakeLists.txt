@@ -32,6 +32,6 @@ target_link_libraries(
   dotdot_mapper
   PUBLIC uic_dotdot_mqtt dotdot_attributes dotdot_mqtt_topics_handler
          zpc_attribute_store
-  PRIVATE zwave_handlers zwave_network_management zwave_definitions)
+  PRIVATE zwave_handlers zwave_network_management zwave_definitions ucl_definitions)
 
 add_subdirectory(test)

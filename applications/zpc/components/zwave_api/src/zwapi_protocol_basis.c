@@ -667,9 +667,9 @@ sl_status_t zwapi_get_long_range_nodes(uint16_t *number_of_bytes,
       }
       start_offset++;
     } else {
-      sl_log_info(
-        LOG_TAG,
-        "Failed to retrieve extended NodeID list from the Z-Wave API");
+      sl_log_debug(LOG_TAG,
+                   "Failed to retrieve extended NodeID "
+                   "list from the Z-Wave API");
       return command_status;
     }
   }

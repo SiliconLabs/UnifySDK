@@ -151,6 +151,50 @@ sl_status_t attribute_store_get_reported_string(attribute_store_node_t node,
                                                 size_t maximum_size);
 
 /**
+ * @brief Safely retrieves a String from the Attribute Store
+ *
+ * @param node          The Attribute store node where a string is saved.
+ * @param string [out]  C char array pointer where the string data will be copied
+ *                      NULL termination is guaranteed.
+ * @param maximum_size  Capacity of the string pointer
+ *
+ * @returns SL_STATUS_OK if the entire string was retrived. ("" string would work)
+ * @returns SL_STATUS_FAIL if the attribute does not exist, value was undefined or
+ * the string could not be copied.
+ */
+sl_status_t attribute_store_get_desired_string(attribute_store_node_t node,
+                                               char *string,
+                                               size_t maximum_size);
+
+/**
+ * @brief Safely retrieves a String from the Attribute Store
+ *
+ * @param node          The Attribute store node where a string is saved.
+ * @param string [out]  C char array pointer where the string data will be copied
+ *                      NULL termination is guaranteed.
+ * @param maximum_size  Capacity of the string pointer
+ *
+ * @returns SL_STATUS_OK if the entire string was retrived. ("" string would work)
+ * @returns SL_STATUS_FAIL if the attribute does not exist, value was undefined or
+ * the string could not be copied.
+ */
+sl_status_t attribute_store_get_desired_else_reported_string(
+  attribute_store_node_t node, char *string, size_t maximum_size);
+
+/**
+ * @brief Safely concatenate a string to a String attribute in the Attribute Store
+ *
+ * @param node          The Attribute store node under
+ *                      which the value must be concatenated
+ * @param string        C char array containing a String
+ *
+ * @returns sl_status_t returned by @ref attribute_store_set_node_attribute_value
+ */
+sl_status_t
+  attribute_store_concatenate_to_reported_string(attribute_store_node_t node,
+                                                 const char *string);
+
+/**
  * @brief Set the Desired value to "undefined" (0 size no value)
  *
  * @param node        The Attribute store node for which DESIRED
@@ -189,6 +233,23 @@ sl_status_t attribute_store_set_desired(attribute_store_node_t node,
 sl_status_t attribute_store_get_desired(attribute_store_node_t node,
                                         void *value,
                                         size_t expected_size);
+
+/**
+ * @brief Reads the desired value of an attribute store node, or the reported if
+ * desired is undefined.
+ *
+ * @param node          The Attribute store node under
+ *                      which the value must be retrieved
+ * @param value         Pointer where to copy the value
+ * @param expected_size  The size of the pointer of read_value
+ *
+ * @returns SL_STATUS_OK    if the read value has the expected size and
+ *                          has been copied to the pointer.
+ * @returns SL_STATUS_FAIL  if the value is undefined, has not the expected
+ *                          size or has not been copied to the pointer.
+ */
+sl_status_t attribute_store_get_desired_else_reported(
+  attribute_store_node_t node, void *value, size_t expected_size);
 
 /**
  * @brief Copy the value from a node to another.
@@ -340,6 +401,22 @@ void attribute_store_add_if_missing(attribute_store_node_t parent_node,
                                     uint32_t count);
 
 /**
+ * @brief Loop helper that register the same callback function for many attribute
+ * types
+ *
+ * @param callback_function The function to invoke when the node's
+ *                          value is updated.
+ * @param types             Array of attribute types for which a
+ *                          callback will be registered.
+ * @param types_count       The number of elements in the types array.
+ * @returns SL_STATUS_OK    If the callbacks were registered successfully.
+ */
+sl_status_t attribute_store_register_callback_by_type_to_array(
+  attribute_store_node_changed_callback_t callback_function,
+  const attribute_store_type_t types[],
+  uint32_t types_count);
+
+/**
  * @brief Removes all children of an attribute store node.
  *
  * This is a helper function that will make sure a node has no more children.
@@ -350,7 +427,6 @@ void attribute_store_add_if_missing(attribute_store_node_t parent_node,
  *          and a child could not be deleted.
  */
 sl_status_t attribute_store_delete_all_children(attribute_store_node_t node);
-
 
 #ifdef __cplusplus
 }

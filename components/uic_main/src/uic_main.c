@@ -35,7 +35,10 @@ int uic_main(const uic_fixt_setup_step_t *fixt_app_setup,
 
   sl_status_t status = uic_init(fixt_app_setup, argc, argv, version);
 
-  if (status != SL_STATUS_OK) {
+  if (status == SL_STATUS_PRINT_INFO_MESSAGE) {
+    uic_stdin_teardown();  //FIXME reconsider startup and teardown structue
+    return 0;
+  } else if (status != SL_STATUS_OK) {
     uic_stdin_teardown();  //FIXME reconsider startup and teardown structue
     return status == SL_STATUS_ABORT ? 2 : 1;
   }

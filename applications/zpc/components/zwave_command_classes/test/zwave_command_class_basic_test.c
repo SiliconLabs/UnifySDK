@@ -38,6 +38,8 @@
 #include "zwave_command_handler_mock.h"
 #include "zwave_tx_mock.h"
 #include "zwave_tx_scheme_selector_mock.h"
+#include "dotdot_mqtt_mock.h"
+#include "dotdot_mqtt_supported_generated_commands_mock.h"
 
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_BASIC_##type
@@ -699,4 +701,98 @@ void test_zwave_command_class_basic_handle_report_weird_length()
   // Probe status
   attribute_store_get_reported(basic_probe_node, &u32_value, sizeof(u32_value));
   TEST_ASSERT_EQUAL(2, u32_value);  //ANSWERED
+}
+
+void test_zwave_command_class_basic_publish_incoming_set_too_short()
+{
+  TEST_ASSERT_NOT_NULL(basic_handler.control_handler);
+  zwave_controller_connection_info_t connection_info = {};
+  attribute_store_get_reported(node_id_node,
+                               &(connection_info.remote.node_id),
+                               sizeof(connection_info.remote.node_id));
+  attribute_store_get_reported(endpoint_id_node,
+                               &(connection_info.remote.endpoint_id),
+                               sizeof(connection_info.remote.endpoint_id));
+
+  // Just receive a Basic Set:
+  const uint8_t incoming_report_frame[]
+    = {COMMAND_CLASS_BASIC_V2, BASIC_SET_V2};
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    basic_handler.control_handler(&connection_info,
+                                  incoming_report_frame,
+                                  sizeof(incoming_report_frame)));
+}
+
+void test_zwave_command_class_basic_publish_incoming_set_on()
+{
+  TEST_ASSERT_NOT_NULL(basic_handler.control_handler);
+  zwave_controller_connection_info_t connection_info = {};
+  attribute_store_get_reported(node_id_node,
+                               &(connection_info.remote.node_id),
+                               sizeof(connection_info.remote.node_id));
+  attribute_store_get_reported(endpoint_id_node,
+                               &(connection_info.remote.endpoint_id),
+                               sizeof(connection_info.remote.endpoint_id));
+
+  // Just receive a Basic Set:
+  const uint8_t incoming_report_frame[]
+    = {COMMAND_CLASS_BASIC_V2, BASIC_SET_V2, 0xAA};
+
+  // Push it to MQTT
+  uic_mqtt_dotdot_on_off_supported_commands_t expected_commands
+    = {.on = true, .off = true};
+  uic_mqtt_dotdot_on_off_publish_supported_generated_commands_ExpectWithArray(
+    NULL,
+    connection_info.remote.endpoint_id,
+    &expected_commands,
+    sizeof(expected_commands));
+  uic_mqtt_dotdot_on_off_publish_supported_generated_commands_IgnoreArg_unid();
+  uic_mqtt_dotdot_on_off_publish_generated_on_command_Expect(
+    NULL,
+    connection_info.remote.endpoint_id);
+  uic_mqtt_dotdot_on_off_publish_generated_on_command_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    basic_handler.control_handler(&connection_info,
+                                  incoming_report_frame,
+                                  sizeof(incoming_report_frame)));
+}
+
+void test_zwave_command_class_basic_publish_incoming_set_off()
+{
+  TEST_ASSERT_NOT_NULL(basic_handler.control_handler);
+  zwave_controller_connection_info_t connection_info = {};
+  attribute_store_get_reported(node_id_node,
+                               &(connection_info.remote.node_id),
+                               sizeof(connection_info.remote.node_id));
+  attribute_store_get_reported(endpoint_id_node,
+                               &(connection_info.remote.endpoint_id),
+                               sizeof(connection_info.remote.endpoint_id));
+
+  // Just receive a Basic Set:
+  const uint8_t incoming_report_frame[]
+    = {COMMAND_CLASS_BASIC_V2, BASIC_SET_V2, 0x00};
+
+  // Push it to MQTT
+  uic_mqtt_dotdot_on_off_supported_commands_t expected_commands
+    = {.on = true, .off = true};
+  uic_mqtt_dotdot_on_off_publish_supported_generated_commands_ExpectWithArray(
+    NULL,
+    connection_info.remote.endpoint_id,
+    &expected_commands,
+    sizeof(expected_commands));
+  uic_mqtt_dotdot_on_off_publish_supported_generated_commands_IgnoreArg_unid();
+  uic_mqtt_dotdot_on_off_publish_generated_off_command_Expect(
+    NULL,
+    connection_info.remote.endpoint_id);
+  uic_mqtt_dotdot_on_off_publish_generated_off_command_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    basic_handler.control_handler(&connection_info,
+                                  incoming_report_frame,
+                                  sizeof(incoming_report_frame)));
 }

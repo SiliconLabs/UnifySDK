@@ -360,6 +360,16 @@ UCL topics used:
 - Subscribing to metric requests:
 `ucl/by-unid/<DEVICE_UNID>/ProtocolController/SystemHealth/Request`
 
+### Updating NCP Firmware
+
+The Zigbee Protocol Controller has the capability of updating the
+NCP radio it uses. In the configuration (either YAML file or command
+line argument, see configuration section for details), enable the
+"--zigpc.ncp_update" flag and set the "--zigpc.ncp_firmware_path"
+appropriately. The Protocol Controller will startup and
+automatically update the NCP with specified firmware. Run zigpc in
+debug mode to show progress updates.
+
 <br><br>
 
 ## Getting Started with Including Zigbee 3.0 Device to ZigPC

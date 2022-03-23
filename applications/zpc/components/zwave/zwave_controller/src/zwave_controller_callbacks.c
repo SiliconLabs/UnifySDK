@@ -281,16 +281,17 @@ void zwave_controller_on_dsk_report(uint8_t input_length,
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_dsk_report, input_length, dsk, keys)
 }
 
+void zwave_controller_on_frame_reception(zwave_node_id_t node_id)
+{  // Inform listeners that we just had an Rx with a node
+  ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_rx_frame_received, node_id)
+}
+
 void zwave_controller_on_frame_received(
   const zwave_controller_connection_info_t *connection_info,
   const zwave_rx_receive_options_t *rx_options,
   const uint8_t *frame_data,
   uint16_t frame_length)
 {
-  // Inform listeners that we just had an Rx with a node
-  ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_rx_frame_received,
-                                      connection_info->remote.node_id)
-
   sl_status_t status
     = zwave_controller_transport_on_frame_received(connection_info,
                                                    rx_options,
@@ -323,7 +324,6 @@ void zwave_controller_on_node_information(zwave_node_id_t node_id,
                                           const zwave_node_info_t *node_info)
 {
   zwave_sl_log_nif_data(node_id, node_info);
-  ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_rx_frame_received, node_id)
   ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_node_information, node_id, node_info)
 }
 

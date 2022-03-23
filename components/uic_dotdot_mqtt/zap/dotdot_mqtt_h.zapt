@@ -233,7 +233,7 @@ void {{dotdot_prefix}}_set_{{asSnakeCaseLower label}}_force_read_attributes_call
 sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
   const char *base_topic,
   {{#if (isMonotonousArray label)}}
-  uint8_t value_count,
+  size_t value_count,
   {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}}* value,
   {{else}}
   {{asUnderlyingType type}} value,

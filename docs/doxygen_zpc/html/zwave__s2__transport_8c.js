@@ -29,6 +29,7 @@ var zwave__s2__transport_8c =
     [ "S2_send_frame_multi", "zwave__s2__transport_8c.html#a0df6b7e67110e70743e8870dd6f5f99e", null ],
     [ "S2_send_frame_no_cb", "zwave__s2__transport_8c.html#a250e164567c355a54653b737574ed498", null ],
     [ "send_frame_callback", "zwave__s2__transport_8c.html#aa8349729129a9416cfc1b9a5587f8446", null ],
+    [ "zwave_s2_abort_send_data", "group__zwave__s2__internal.html#ga9c0918392e4e456fa0fdd12873b3fb19", null ],
     [ "zwave_s2_on_frame_received", "group__zwave__s2__internal.html#ga98eccab8e2cd831c0286fd3e41bfaea5", null ],
     [ "zwave_s2_on_on_multicast_group_deleted", "group__zwave__s2__internal.html#gaf92b7deb5d2067a1d879c0930ce98c05", null ],
     [ "zwave_s2_send_data", "group__zwave__s2__internal.html#ga3ed55d2315fdd494c0e209f5e31986f9", null ],

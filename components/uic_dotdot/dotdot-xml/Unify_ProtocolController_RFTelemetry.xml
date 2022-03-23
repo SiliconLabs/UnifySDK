@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0"?>
 <!--
-ProtocolController/ZWaveTelemetry
+ProtocolController/RFTelemetry
 This is a manufacturer specific cluster.
 -->
 <zcl:cluster
@@ -15,7 +15,14 @@ This is a manufacturer specific cluster.
   <server>
 
     <attributes>
-      <attribute id="0000" name="TxReportEnabled" type="bool" max="1" required="true" default="1" writable="true"/>
+      <!-- This attribute is used to control if TxReport commands will be generated
+           for each RF transmission in the PAN.
+           It should be enabled only for debugging purposes and disabled if not needed. -->
+      <attribute id="0000" name="TxReportEnabled" type="bool" max="1" default="0" writable="true"/>
+      <!-- This attribute is used to control if PTI is enabled or not.
+           It should be enabled only for debugging purposes and disabled if not needed. -->
+      <attribute id="0001" name="PTIEnabled" type="bool" max="1" default="0" writable="true"/>
+
     </attributes>
 
     <commands>

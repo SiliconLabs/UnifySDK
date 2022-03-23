@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('main_8c.html',''); initResizable(); })
 <div class="contents">
 <div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="uic__main_8h_source.html">uic_main.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="datastore__fixt_8h_source.html">datastore_fixt.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__uic__datastore__fixt_8h_source.html">zigpc_uic_datastore_fixt.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="attribute__store__fixt_8h_source.html">attribute_store_fixt.h</a>&quot;</code><br />
@@ -111,6 +112,7 @@ $(document).ready(function(){initNavTree('main_8c.html',''); initResizable(); })
 <code>#include &quot;zcl_command_parser.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="zcl__attribute__info_8h_source.html">zcl_attribute_info.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__ota__zigbee_8h_source.html">zigpc_ota_zigbee.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="zigpc__ncp__updater_8h_source.html">zigpc_ncp_updater.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="zigpc__gateway__process_8h_source.html">zigpc_gateway_process.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -126,6 +128,10 @@ Variables</h2></td></tr>
 <tr class="memitem:a7ec981be90f5ef2a6857ae0219dcfd21"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__uic__fixt__int.html#ga1c0a91ce79228a7dac4ab8ae1b690d8c">uic_fixt_shutdown_step_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a7ec981be90f5ef2a6857ae0219dcfd21">uic_fixt_shutdown_steps_list</a> []</td></tr>
 <tr class="memdesc:a7ec981be90f5ef2a6857ae0219dcfd21"><td class="mdescLeft">&#160;</td><td class="mdescRight">ZigPC Final tear-down steps.  <a href="main_8c.html#a7ec981be90f5ef2a6857ae0219dcfd21">More...</a><br /></td></tr>
 <tr class="separator:a7ec981be90f5ef2a6857ae0219dcfd21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ad83316e9193eb1bace5426c24f9f57"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__uic__fixt__int.html#gac3ab173658087cf394d1c7b2793caf50">uic_fixt_setup_step_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a1ad83316e9193eb1bace5426c24f9f57">zigpc_ncp_updater_setup_list</a> []</td></tr>
+<tr class="separator:a1ad83316e9193eb1bace5426c24f9f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ce0968bda58ba0a408da60475b32b78"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__uic__fixt__int.html#ga1c0a91ce79228a7dac4ab8ae1b690d8c">uic_fixt_shutdown_step_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a7ce0968bda58ba0a408da60475b32b78">zigpc_ncp_updater_shutdown_list</a> []</td></tr>
+<tr class="separator:a7ce0968bda58ba0a408da60475b32b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
@@ -242,19 +248,77 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a1ad83316e9193eb1bace5426c24f9f57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ad83316e9193eb1bace5426c24f9f57">&#9670;&nbsp;</a></span>zigpc_ncp_updater_setup_list</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__uic__fixt__int.html#gac3ab173658087cf394d1c7b2793caf50">uic_fixt_setup_step_t</a> zigpc_ncp_updater_setup_list[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">{</div>
+<div class="line">  {<a class="code" href="group__zigpc__gateway.html#ga383d8cf0d9193e533fcbfac152ff1fe2">zigpc_gateway_process_setup</a>, <span class="stringliteral">&quot;ZigPC Gateway&quot;</span>},</div>
+<div class="line">  {<a class="code" href="group__zigpc__ncp__updater.html#gafb044d3fb185a5baec84ca712b11d04a">zigpc_ncp_updater_setup</a>, <span class="stringliteral">&quot;ZigPC NCP Updater&quot;</span>},</div>
+<div class="line">  {<a class="code" href="group__list.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, <span class="stringliteral">&quot;TERMINATOR&quot;</span>}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7ce0968bda58ba0a408da60475b32b78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ce0968bda58ba0a408da60475b32b78">&#9670;&nbsp;</a></span>zigpc_ncp_updater_shutdown_list</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__uic__fixt__int.html#ga1c0a91ce79228a7dac4ab8ae1b690d8c">uic_fixt_shutdown_step_t</a> zigpc_ncp_updater_shutdown_list[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">{</div>
+<div class="line">  {<a class="code" href="group__zigpc__gateway.html#gaa014dc2e7ebd7edb4fc399b84ee4ba70">zigpc_gateway_process_shutdown</a>, <span class="stringliteral">&quot;ZigPC Gateway&quot;</span>},</div>
+<div class="line">  {<a class="code" href="group__zigpc__ncp__updater.html#ga2ea27e0ed5fdf7cbdc0f140519828ab6">zigpc_ncp_updater_shutdown</a>, <span class="stringliteral">&quot;ZigPC NCP Updater&quot;</span>},</div>
+<div class="line">  {<a class="code" href="group__list.html#ga070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, <span class="stringliteral">&quot;TERMINATOR&quot;</span>}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="agroup__attribute__store__fixt_html_ga97a838c2d31c83650be7846cec9f85ba"><div class="ttname"><a href="group__attribute__store__fixt.html#ga97a838c2d31c83650be7846cec9f85ba">attribute_store_init</a></div><div class="ttdeci">sl_status_t attribute_store_init(void)</div><div class="ttdoc">Initialize the Attribute store.</div></div>
 <div class="ttc" id="agroup__command__mapper_html_gac617332bdd583bed22054a7facf94ee7"><div class="ttname"><a href="group__command__mapper.html#gac617332bdd583bed22054a7facf94ee7">zigpc_command_mapper_setup</a></div><div class="ttdeci">sl_status_t zigpc_command_mapper_setup(void)</div><div class="ttdoc">zigpc_command_mapper_setup - sets up the parts of the software used by the command mapper</div><div class="ttdef"><b>Definition:</b> zigpc_command_mapper.c:335</div></div>
-<div class="ttc" id="agroup__datastore__fixt_html_ga373160cc3a345e23f2adef4dbc0654bf"><div class="ttname"><a href="group__datastore__fixt.html#ga373160cc3a345e23f2adef4dbc0654bf">datastore_fixt_teardown</a></div><div class="ttdeci">int datastore_fixt_teardown()</div><div class="ttdoc">Fixture to tear down the datastore.</div><div class="ttdef"><b>Definition:</b> datastore_fixt.c:211</div></div>
+<div class="ttc" id="agroup__datastore__fixt_html_ga373160cc3a345e23f2adef4dbc0654bf"><div class="ttname"><a href="group__datastore__fixt.html#ga373160cc3a345e23f2adef4dbc0654bf">datastore_fixt_teardown</a></div><div class="ttdeci">int datastore_fixt_teardown()</div><div class="ttdoc">Fixture to tear down the datastore.</div><div class="ttdef"><b>Definition:</b> datastore_fixt.c:209</div></div>
 <div class="ttc" id="agroup__zigpc__datastore__fixture_html_ga33960390dd8d8a014a09b65cf6eeeda6"><div class="ttname"><a href="group__zigpc__datastore__fixture.html#ga33960390dd8d8a014a09b65cf6eeeda6">zigpc_uic_datastore_fixt_setup</a></div><div class="ttdeci">sl_status_t zigpc_uic_datastore_fixt_setup(void)</div><div class="ttdoc">Fixture for setting up the zigpc_datastore component.</div><div class="ttdef"><b>Definition:</b> zigpc_uic_datastore_fixt.c:26</div></div>
 <div class="ttc" id="agroup__ota__zigbee_html_gad089932798e75baee2bd9c4ca103cb19"><div class="ttname"><a href="group__ota__zigbee.html#gad089932798e75baee2bd9c4ca103cb19">zigpc_ota_init</a></div><div class="ttdeci">sl_status_t zigpc_ota_init()</div></div>
 <div class="ttc" id="agroup__attribute__store__fixt_html_gaffc96d7892ae2a9fefcb521cda3712dc"><div class="ttname"><a href="group__attribute__store__fixt.html#gaffc96d7892ae2a9fefcb521cda3712dc">attribute_store_teardown</a></div><div class="ttdeci">int attribute_store_teardown(void)</div><div class="ttdoc">Clears up the Attribute Store from all its content.</div></div>
 <div class="ttc" id="agroup__zigpc__discovery_html_gaa9eddfaa55a0ffacb1759d87ed44259a"><div class="ttname"><a href="group__zigpc__discovery.html#gaa9eddfaa55a0ffacb1759d87ed44259a">zigpc_discovery_fixt_setup</a></div><div class="ttdeci">sl_status_t zigpc_discovery_fixt_setup(void)</div><div class="ttdoc">Setup fixture for zigpc discovery component.</div></div>
+<div class="ttc" id="agroup__zigpc__ncp__updater_html_ga2ea27e0ed5fdf7cbdc0f140519828ab6"><div class="ttname"><a href="group__zigpc__ncp__updater.html#ga2ea27e0ed5fdf7cbdc0f140519828ab6">zigpc_ncp_updater_shutdown</a></div><div class="ttdeci">int zigpc_ncp_updater_shutdown(void)</div></div>
 <div class="ttc" id="agroup__zigpc__gateway_html_ga383d8cf0d9193e533fcbfac152ff1fe2"><div class="ttname"><a href="group__zigpc__gateway.html#ga383d8cf0d9193e533fcbfac152ff1fe2">zigpc_gateway_process_setup</a></div><div class="ttdeci">sl_status_t zigpc_gateway_process_setup(void)</div><div class="ttdoc">Set up the function for the zigpc_gateway component.</div></div>
+<div class="ttc" id="agroup__zigpc__ncp__updater_html_gafb044d3fb185a5baec84ca712b11d04a"><div class="ttname"><a href="group__zigpc__ncp__updater.html#gafb044d3fb185a5baec84ca712b11d04a">zigpc_ncp_updater_setup</a></div><div class="ttdeci">sl_status_t zigpc_ncp_updater_setup(void)</div></div>
 <div class="ttc" id="agroup__zigpc__net__mgmt__process_html_ga47d7a4ef202563bd8d19d8763828b277"><div class="ttname"><a href="group__zigpc__net__mgmt__process.html#ga47d7a4ef202563bd8d19d8763828b277">zigpc_net_mgmt_process_shutdown</a></div><div class="ttdeci">int zigpc_net_mgmt_process_shutdown(void)</div><div class="ttdef"><b>Definition:</b> zigpc_net_mgmt_process.c:54</div></div>
 <div class="ttc" id="agroup__zigpc__discovery_html_ga9a19168553e85c8d1c3e98cf541ad14f"><div class="ttname"><a href="group__zigpc__discovery.html#ga9a19168553e85c8d1c3e98cf541ad14f">zigpc_discovery_fixt_shutdown</a></div><div class="ttdeci">int zigpc_discovery_fixt_shutdown(void)</div><div class="ttdoc">Shutdown fixture for zigpc discovery component.</div></div>
-<div class="ttc" id="agroup__zigpc__config_html_ga1c8e61bf283a2413bc33b15dc057444c"><div class="ttname"><a href="group__zigpc__config.html#ga1c8e61bf283a2413bc33b15dc057444c">zigpc_config_fixt_setup</a></div><div class="ttdeci">sl_status_t zigpc_config_fixt_setup(void)</div><div class="ttdoc">Fixture for setting up the zigpc_config component.</div><div class="ttdef"><b>Definition:</b> zigpc_config.c:62</div></div>
+<div class="ttc" id="agroup__zigpc__config_html_ga1c8e61bf283a2413bc33b15dc057444c"><div class="ttname"><a href="group__zigpc__config.html#ga1c8e61bf283a2413bc33b15dc057444c">zigpc_config_fixt_setup</a></div><div class="ttdeci">sl_status_t zigpc_config_fixt_setup(void)</div><div class="ttdoc">Fixture for setting up the zigpc_config component.</div><div class="ttdef"><b>Definition:</b> zigpc_config.c:73</div></div>
 <div class="ttc" id="agroup__zigpc__gateway_html_gaa014dc2e7ebd7edb4fc399b84ee4ba70"><div class="ttname"><a href="group__zigpc__gateway.html#gaa014dc2e7ebd7edb4fc399b84ee4ba70">zigpc_gateway_process_shutdown</a></div><div class="ttdeci">int zigpc_gateway_process_shutdown(void)</div><div class="ttdoc">Tear-down function for the zigpc_gateway component.</div></div>
 <div class="ttc" id="agroup__zigpc__smartstart_html_gaea83840e406f2b7bfd8598fd81c66c66"><div class="ttname"><a href="group__zigpc__smartstart.html#gaea83840e406f2b7bfd8598fd81c66c66">zigpc_smartstart_shutdown</a></div><div class="ttdeci">int zigpc_smartstart_shutdown(void)</div><div class="ttdoc">Shut down function for the ZigPC SmartStart Component.</div></div>
 <div class="ttc" id="agroup__attribute__management__process_html_gad7ce6704d6e4d6d7fcdb120ff2f2ff95"><div class="ttname"><a href="group__attribute__management__process.html#gad7ce6704d6e4d6d7fcdb120ff2f2ff95">attribute_management_setup</a></div><div class="ttdeci">sl_status_t attribute_management_setup(void)</div><div class="ttdoc">attribute_management_setup - sets up the parts of the software used by the attribute manager</div><div class="ttdef"><b>Definition:</b> attribute_management_process.c:38</div></div>
@@ -275,7 +339,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="main_8c.html">main.c</a></li>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:15 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:31 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

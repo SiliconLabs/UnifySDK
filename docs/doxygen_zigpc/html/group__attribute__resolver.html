@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -142,6 +142,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga32ba1de96bf63ae5a918e3dbc1e42f03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga32ba1de96bf63ae5a918e3dbc1e42f03">attribute_resolver_clear_resolution_listener</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, void(*callback)(<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>))</td></tr>
 <tr class="memdesc:ga32ba1de96bf63ae5a918e3dbc1e42f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear a node resolve listener.  <a href="group__attribute__resolver.html#ga32ba1de96bf63ae5a918e3dbc1e42f03">More...</a><br /></td></tr>
 <tr class="separator:ga32ba1de96bf63ae5a918e3dbc1e42f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0746c7462cffee017f64cd573fa352fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga0746c7462cffee017f64cd573fa352fa">attribute_resolver_set_resolution_give_up_listener</a> (<a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a> node_type, void(*callback)(<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>))</td></tr>
+<tr class="memdesc:ga0746c7462cffee017f64cd573fa352fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a listener that will be informed if we give up trying to perform a Get resolution on a node.  <a href="group__attribute__resolver.html#ga0746c7462cffee017f64cd573fa352fa">More...</a><br /></td></tr>
+<tr class="separator:ga0746c7462cffee017f64cd573fa352fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga99ff84b41f526fb7a9cfa45b153f9fa8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__resolver.html#ga99ff84b41f526fb7a9cfa45b153f9fa8">attribute_resolver_restart_set_resolution</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
 <tr class="memdesc:ga99ff84b41f526fb7a9cfa45b153f9fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instructs the resolver to try to resolve a set rule that was pending.  <a href="group__attribute__resolver.html#ga99ff84b41f526fb7a9cfa45b153f9fa8">More...</a><br /></td></tr>
 <tr class="separator:ga99ff84b41f526fb7a9cfa45b153f9fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -477,6 +480,43 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga0746c7462cffee017f64cd573fa352fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0746c7462cffee017f64cd573fa352fa">&#9670;&nbsp;</a></span>attribute_resolver_set_resolution_give_up_listener()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void attribute_resolver_set_resolution_give_up_listener </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="attribute__store_8h.html#ab7b43e61cc3128952b765dc99020b160">attribute_store_type_t</a>&#160;</td>
+          <td class="paramname"><em>node_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>)&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Registers a listener that will be informed if we give up trying to perform a Get resolution on a node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_type</td><td>to be informed about </td></tr>
+    <tr><td class="paramname">callback</td><td>Function to invoke when the node resolution has been given up </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ga4e89504e8607d0621899f4c1961c7fb8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga4e89504e8607d0621899f4c1961c7fb8">&#9670;&nbsp;</a></span>attribute_resolver_set_resolution_listener()</h2>
 
@@ -614,7 +654,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:20 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:35 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

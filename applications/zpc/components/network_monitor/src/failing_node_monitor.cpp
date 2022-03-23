@@ -78,17 +78,18 @@ static std::list<failing_node_t> ping_list;
 using namespace attribute_store;
 static void send_nop()
 {
-  zwave_node_id_t node_id = 0;
-  if (!ping_list.empty()) {
-    node_id = ping_list.begin()->node_id;
-  } else {
-    sl_log_error(LOG_TAG, "Failing node monitor list empty");
+  if (ping_list.empty()) {
+    sl_log_warning(LOG_TAG,
+                   "Failing node list empty. No NOP will be sent out.");
     return;
   }
 
+  zwave_node_id_t node_id = 0;
+  node_id                 = ping_list.begin()->node_id;
+
   // No need to setup callback here. If the NOP succeeds, Network Monitor
   // will detect it and will call stop_monitoring_failing_node()
-  zwave_send_nop_to_node(node_id, 0, 0);
+  zwave_send_nop_to_node(node_id, nullptr, nullptr);
 
   for (auto it = ping_list.begin(); it != ping_list.end(); ++it) {
     // Existing node, double the back off time
@@ -106,17 +107,17 @@ static void send_nop()
                            : it->next_ping_in;
 
       it->last_ping_in = it->next_ping_in;
-   }
+    }
     if (zwave_store_failing_node_ping_interval(it->node_id, it->next_ping_in)
         != SL_STATUS_OK) {
       sl_log_error(LOG_TAG,
                    "Error persisting the failing node interval in Attribute "
-                   "Store for node: %d\n",
+                   "Store for NodeID %d\n",
                    it->node_id);
     } else {
       sl_log_debug(LOG_TAG,
                    "Persisted the failing node interval in Attribute Store "
-                   "for node: %d\n",
+                   "for NodeID %d\n",
                    it->node_id);
     }
   }
@@ -144,21 +145,14 @@ void stop_monitoring_failing_node(zwave_node_id_t node_id)
       if (ping_list.empty()) {
         ctimer_stop(&ping_timer);
       }
-      if (zwave_remove_failing_node_ping_interval_from_attribute_store(node_id)
-          != SL_STATUS_OK) {
-        sl_log_warning(LOG_TAG,
-                       "Node: %d not found in attribute store to remove",
-                       node_id);
-      }
       sl_log_debug(LOG_TAG,
-                   "Removing Node: %d from failing node monitor list:",
+                   "Removing NodeID %d from failing node monitor list.",
                    node_id);
+      zwave_remove_failing_node_ping_interval_from_attribute_store(node_id);
       return;
     }
   }
-  sl_log_debug(LOG_TAG,
-                 "Node: %d was not failing",
-                 node_id);
+  sl_log_debug(LOG_TAG, "NodeID %d was not failing", node_id);
   return;
 }
 
@@ -201,12 +195,6 @@ sl_status_t zwave_remove_failing_node_ping_interval_from_attribute_store(
   attribute node_id_node
     = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
-  if (!node_id_node.is_valid()) {
-    sl_log_error(LOG_TAG,
-                 "Node id: %d was not found in attribute store",
-                 node_id);
-    return SL_STATUS_FAIL;
-  }
   try {
     attribute failing_node_interval_node
       = node_id_node.child_by_type(ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL);
@@ -224,9 +212,11 @@ sl_status_t zwave_store_failing_node_ping_interval(zwave_node_id_t node_id,
     = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
   if (!node_id_node.is_valid()) {
-    sl_log_error(LOG_TAG,
-                 "Node id: %d was not found in attribute store",
+    sl_log_debug(LOG_TAG,
+                 "Error: NodeID %d was not found in attribute store. "
+                 "Removing from the monitor list.",
                  node_id);
+    stop_monitoring_failing_node(node_id);
     return SL_STATUS_FAIL;
   }
   try {
@@ -274,31 +264,31 @@ void start_monitoring_failing_node(zwave_node_id_t node_id)
 {
   zwave_operating_mode_t mode = zwave_get_operating_mode(node_id);
   if (mode == OPERATING_MODE_NL) {
-    sl_log_debug(LOG_TAG, "Monitoring Non-Listening Zwave nodes not supported");
+    sl_log_debug(LOG_TAG,
+                 "NodeID %d is Non Listening. Skipping regular NOP retries.",
+                 node_id);
     return;
   }
 
   sl_log_debug(LOG_TAG,
-               "Adding Node id: %d to failing node monitor list",
+               "Adding NodeID %d to failing node monitor list",
                node_id);
+
   for (auto it = ping_list.begin(); it != ping_list.end(); ++it) {
     // Existing node, remove it here and it will be added again to the list below
     if (it->node_id == node_id) {
       ping_list.erase(it);
-      sl_log_debug(LOG_TAG, "Readding Failing Node: %d", node_id);
       break;
     }
   }
 
-  adjust_next_ping_for_whole_list();
   //New node, begin from 4 seconds interval for sending NOP
-
   failing_node_t n = {};
   if ((mode == OPERATING_MODE_AL) || (mode == OPERATING_MODE_UNKNOWN)) {
     n.next_ping_in = ALWAYS_LISTENING_PING_TIME_INTERVAL;
   } else if (mode == OPERATING_MODE_FL) {
     n.next_ping_in = FREQUENTLY_LISTENING_PING_TIME_INTERVAL;
-  } else { // Safety to handle new zwave operating modes
+  } else {  // Safety to handle new zwave operating modes
     n.next_ping_in = ALWAYS_LISTENING_PING_TIME_INTERVAL;
   }
 
@@ -309,13 +299,13 @@ void start_monitoring_failing_node(zwave_node_id_t node_id)
   if (zwave_store_failing_node_ping_interval(node_id, n.next_ping_in)
       != SL_STATUS_OK) {
     sl_log_error(LOG_TAG,
-                 "Error persisting the failing node interval in Attribute "
-                 "Store for node: %d\n",
+                 "Error writing the failing node interval in Attribute "
+                 "Store for NodeID %d\n",
                  node_id);
   } else {
     sl_log_debug(
       LOG_TAG,
-      "Persisted the failing node interval in Attribute Store for node: %d\n",
+      "Saved the failing node interval in Attribute Store for NodeID %d\n",
       node_id);
   }
 
@@ -326,6 +316,7 @@ void start_monitoring_failing_node(zwave_node_id_t node_id)
                n.next_ping_in / CLOCK_SECOND);
   // sort the list, so that the timer is set for the minimum next_ping_in timeout.
   ping_list.sort();
+  adjust_next_ping_for_whole_list();
 
   ctimer_set(&ping_timer,
              ping_list.begin()->next_ping_in,

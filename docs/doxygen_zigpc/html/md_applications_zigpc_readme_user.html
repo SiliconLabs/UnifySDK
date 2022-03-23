@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -299,10 +299,13 @@ Protocol Controller Diagnostics</h2>
 <li>Publishing supported diagnostic metrics: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/ProtocolController/SystemHealth/SupportedMetrics</code></li>
 <li>Subscribing to metric requests: <code>ucl/by-unid/&lt;DEVICE_UNID&gt;/ProtocolController/SystemHealth/Request</code></li>
 </ul>
+<h2><a class="anchor" id="autotoc_md59"></a>
+Updating NCP Firmware</h2>
+<p>The Zigbee Protocol Controller has the capability of updating the NCP radio it uses. In the configuration (either YAML file or command line argument, see configuration section for details), enable the "--zigpc.ncp_update" flag and set the "--zigpc.ncp_firmware_path" appropriately. The Protocol Controller will startup and automatically update the NCP with specified firmware. Run zigpc in debug mode to show progress updates.</p>
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md59"></a>
+<h1><a class="anchor" id="autotoc_md60"></a>
 Getting Started with Including Zigbee 3.0 Device to ZigPC</h1>
 <p>For the following example, the UNID addresses used are as follows:</p>
 <p><b>ZigPC Gateway UNID: zb-AAAAAAAAAAAAAAAA</b></p>
@@ -314,7 +317,7 @@ Getting Started with Including Zigbee 3.0 Device to ZigPC</h1>
 </ol>
 <p>OPTIONAL: To see all messages sent to the broker, follow the steps to download and install the <a href="https://mqtt-explorer.com/">MQTT Explorer tool</a>. After it is run on the host machine, connect to the MQTT broker on the Raspberry Pi.</p>
 <p>To perform the below steps using the Unify Dev GUI tool, see Dev GUI User Guide.</p>
-<h2><a class="anchor" id="autotoc_md60"></a>
+<h2><a class="anchor" id="autotoc_md61"></a>
 Adding Zigbee Device to the ZigPC Network via Install-Code Method</h2>
 <p>NOTE: The following steps use the command line interface (CLI) exposed by Simplicity Commander stand-alone tool.</p>
 <ol type="1">
@@ -418,7 +421,7 @@ Adding Zigbee Device to the ZigPC Network via Install-Code Method</h2>
 <p class="startli"><img src="doc/assets/user_guide-devgui-nodes-included.png" alt="" class="inline"/></p>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md61"></a>
+<h2><a class="anchor" id="autotoc_md62"></a>
 Adding Zigbee Device to the ZigPC Network using Well-Known Key</h2>
 <p>NOTE: The following steps use the command line interface (CLI) exposed by Simplicity Commander stand-alone tool.</p>
 <ol type="1">
@@ -469,7 +472,7 @@ Adding Zigbee Device to the ZigPC Network using Well-Known Key</h2>
 <p class="startli"><img src="doc/assets/user_guide-devgui-nodes-included.png" alt="" class="inline"/></p>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md62"></a>
+<h2><a class="anchor" id="autotoc_md63"></a>
 Discovering UCL Cluster Command Support for Z3Device</h2>
 <p>NOTE: The Zigbee device must be added using the SmartStart addition process discussed above. NOTE: ZigPC will publish the UCL cluster command support under for all endpoints discovered in the interview process.</p>
 <ol type="1">
@@ -492,7 +495,7 @@ Discovering UCL Cluster Command Support for Z3Device</h2>
 <p class="startli"><img src="doc/assets/user_guide-devgui-nodes-included.png" alt="" class="inline"/></p>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md63"></a>
+<h2><a class="anchor" id="autotoc_md64"></a>
 Discovering UCL Cluster Attribute Updates for Z3Device</h2>
 <p>NOTE: The Zigbee device must be added using the SmartStart addition process discussed above. NOTE: ZigPC will publish the UCL cluster support under for all endpoints discovered in the interview process.</p>
 <ol type="1">
@@ -517,7 +520,7 @@ Discovering UCL Cluster Attribute Updates for Z3Device</h2>
 <p class="startli"><img src="doc/assets/user_guide-devgui-onoff-discovery.png" alt="" class="inline"/></p>
 </li>
 </ol>
-<h2><a class="anchor" id="autotoc_md64"></a>
+<h2><a class="anchor" id="autotoc_md65"></a>
 Sending a UCL Cluster Command to Z3Device to see Attribute Update</h2>
 <p>The UCL command format translates 1:1 to ZCL messages that is recognized by ZCL compliant Zigbee devices. To know the exact format of the UCL command, see the Unify specification and the DotDot specification.</p>
 <ol type="1">
@@ -563,7 +566,7 @@ Sending a UCL Cluster Command to Z3Device to see Attribute Update</h2>
 <div class="line"># ucl/by-unid/zb-0102030405060708/ep1/OnOff/Attributes/OnOff/Reported { &quot;value&quot;: false }</div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md65"></a>
+<h2><a class="anchor" id="autotoc_md66"></a>
 Removing a Device Already in the ZigPC Network</h2>
 <p>NOTE: The Zigbee device must be added using the SmartStart addition process discussed above.</p>
 <ol type="1">
@@ -598,7 +601,7 @@ Removing a Device Already in the ZigPC Network</h2>
 <div class="line"># ucl/by-unid/zb-AAAAAAAAAAAAAAAA/ProtocolController/NetworkManagement {&quot;State&quot;: &quot;idle&quot;, &quot;SupportedStateList&quot;: [&quot;add node&quot;, &quot;remove node&quot;, &quot;node interview&quot;], &quot;RequestedStateParameters&quot;: []}</div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md66"></a>
+<h2><a class="anchor" id="autotoc_md67"></a>
 Updating Zigbee Device Firmware already on the ZigPC Network</h2>
 <p>To initialize an OTA update, you need the following:</p><ul>
 <li>A working end-device with a ZCL OTA client cluster enabled.</li>
@@ -606,7 +609,7 @@ Updating Zigbee Device Firmware already on the ZigPC Network</h2>
 <li>Sufficient storage space on both host and end device for the firmware image.</li>
 <li>(Optional) An ota-files directory created in the location where the ZigPC will be run.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md67"></a>
+<h3><a class="anchor" id="autotoc_md68"></a>
 Instructions on how to start an OTA update:</h3>
 <ol type="1">
 <li>Run the Zigbee Protocol Controller, as specified above in this document</li>
@@ -618,7 +621,7 @@ Instructions on how to start an OTA update:</h3>
 <p class="startli"><em>NOTE: The image-provider's images.json file needs to be updated <b>after</b> ZigPC is running to ensure that ZigPC receives the "image announce" message. Updating the images.json file automatically triggers this process.</em></p>
 </li>
 </ol>
-<h3><a class="anchor" id="autotoc_md68"></a>
+<h3><a class="anchor" id="autotoc_md69"></a>
 Once the Unify Image Provider recognizes changes to images.json, the following actions will occur:</h3>
 <ol type="1">
 <li>ZigPC will recognize any supported OTA image metadata and the image should be automatically copied to the 'ota-files' directory.</li>
@@ -628,7 +631,7 @@ Once the Unify Image Provider recognizes changes to images.json, the following a
 <li>The OTA image transfer from ZigPC to the Zigbee node should start. Do not interrupt the OTA process to ensure proper operation. Debug messages on the ZigPC can be enabled at startup with the option '-d', which can help verify that the messages are being sent.</li>
 <li>After the OTA image upload and installation is complete, the new firmware version running on the Zigbee node can be verified. The OTA process is now complete.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md69"></a>
+<h2><a class="anchor" id="autotoc_md70"></a>
 Retrieving Diagnostic information from ZigPC</h2>
 <p>ZigPC has exposed the <code>ProtocolController/SystemHealth</code> topic space to enable the publishing of information related to the ZigPC system, process, and Zigbee stack.</p>
 <p>The following metrics are available:</p><ul>
@@ -637,7 +640,7 @@ Retrieving Diagnostic information from ZigPC</h2>
 <li>MemUsePercent: The percent memory use of the ZigPC process.</li>
 <li>Counters: The Zigbee stack counters information.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md70"></a>
+<h3><a class="anchor" id="autotoc_md71"></a>
 Steps to enable this behaviour:</h3>
 <ol type="1">
 <li>Retrieve the metrics supported by the protocol controller diagnostics topic space. <div class="fragment"><div class="line">## command ##</div>
@@ -659,14 +662,14 @@ Steps to enable this behaviour:</h3>
 <p><br  />
 <br  />
 </p>
-<h1><a class="anchor" id="autotoc_md71"></a>
+<h1><a class="anchor" id="autotoc_md72"></a>
 Technical Specifications</h1>
-<h2><a class="anchor" id="autotoc_md72"></a>
+<h2><a class="anchor" id="autotoc_md73"></a>
 Device UNID Format</h2>
 <p>ZigPC uses the following format for the UNID: zb-&lt;EUI64-IN-BIG-ENDIAN&gt;</p>
 <p>where "zb-" is the current fixed prefix (subject to be configurable in later releases)</p>
 <p>For example, the following Zigbee device having a EUI64 of 01 23 45 67 89 AB CD EF has the following device UNID <code>zb-0123456789ABCDEF</code>.</p>
-<h2><a class="anchor" id="autotoc_md73"></a>
+<h2><a class="anchor" id="autotoc_md74"></a>
 Recognized SmartStart DSK Format</h2>
 <p>ZigPC supports the following SmartStart Device-Specific Key (DSK) format:</p>
 <p><code>&lt;NODE_EUI64&gt;</code>-<code>&lt;Z3_INSTALL_CODE&gt;</code>-<code>&lt;Z3_INSTALL_CODE_CRC&gt;</code></p>
@@ -681,7 +684,7 @@ Recognized SmartStart DSK Format</h2>
 <li>for <b>8-byte</b> Z3 Install code variant: <code>00-11-22-33-44-55-66-77-AA-BB-CC-DD-EE-FF-00-11-88-99</code></li>
 <li>for <b>16-byte</b> Z3 Install code variant: <code>00-11-22-33-44-55-66-77-AA-BB-CC-DD-EE-FF-00-11-22-33-44-55-66-77-88-99-12-34</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md74"></a>
+<h2><a class="anchor" id="autotoc_md75"></a>
 Zigbee Device Support</h2>
 <p>ZigPC should have a Zigbee NCP attached via the serial UART connection.</p>
 <p>EFR32MG1X or EFR32MG2X are the supported NCP Radios.</p>
@@ -710,19 +713,19 @@ Zigbee Device Support</h2>
 <li>(0x0300) ColorControl</li>
 <li>(0x0406) OccupancySensing</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md75"></a>
+<h1><a class="anchor" id="autotoc_md76"></a>
 Appendix</h1>
-<h2><a class="anchor" id="autotoc_md76"></a>
+<h2><a class="anchor" id="autotoc_md77"></a>
 Setting Up the Zigbee NCP Connected to ZigPC</h2>
 <p>There are two ways to get the NCP image:</p>
-<h3><a class="anchor" id="autotoc_md77"></a>
+<h3><a class="anchor" id="autotoc_md78"></a>
 Using Pre-built NCP FW Images</h3>
 <p>A single radio should be designated as a Zigbee Gateway NCP that ZigPC connects to.</p>
 <p>The Gecko SDK provides ready-made NCP images available under the demo-applications package.</p>
-<h3><a class="anchor" id="autotoc_md78"></a>
+<h3><a class="anchor" id="autotoc_md79"></a>
 Building NCP FW Images Using Studio</h3>
 <p>Follow section 2 from the following application note to build a NCP application using the Simplicity Studio IDE: <a href="https://www.silabs.com/documents/public/application-notes/an1010-customized-ncp.pdf">AN1010: Building a Customized NCP Application</a></p>
-<h2><a class="anchor" id="autotoc_md79"></a>
+<h2><a class="anchor" id="autotoc_md80"></a>
 Setting Up the Sample Zigbee Z3Light FW Image</h2>
 <p>A Zigbee 3.0 Light device FW is used as an example device that can join the ZigPC network.</p>
 <p>Follow the instructions in <em>Section 4: Starting an Example Application</em> in <a href="https://www.silabs.com/documents/public/quick-start-guides/qsg106-efr32-zigbee-pro.pdf">QSG106: Zigbee EmberZNet PRO Quick-Start Guide</a> to create a <b>Z3Light</b> Application.</p>
@@ -740,7 +743,7 @@ Library" plugin is bigger is considerable enough to accommodate ZCL groups (uses
 <p><em>NOTE: If the reporting table size is not sufficient to support all attributes, Unify IoT Services will need to use the ForceReadAttributes command to get updated attribute states</em> </p>
 </blockquote>
 <p>Follow the steps below to create and flash the Zigbee Z3Light Image:</p>
-<h2><a class="anchor" id="autotoc_md80"></a>
+<h2><a class="anchor" id="autotoc_md81"></a>
 Flashing Zigbee Devices</h2>
 <p>For flashing device firmware onto the Zigbee radios, see <em>Section 4.4: Compiling and Flashing the Application</em> in <a href="https://www.silabs.com/documents/public/quick-start-guides/qsg106-efr32-zigbee-pro.pdf">QSG106: Zigbee EmberZNet PRO Quick-Start Guide</a>. </p>
 </div></div><!-- contents -->
@@ -749,7 +752,7 @@ Flashing Zigbee Devices</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:18 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:33 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

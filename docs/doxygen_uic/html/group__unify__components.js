@@ -16,5 +16,6 @@ var group__unify__components =
     [ "Unify SmartStart Management", "group__unify__smartstart__management.html", "group__unify__smartstart__management" ],
     [ "Unify Stdin", "group__uic__stdin.html", "group__uic__stdin" ],
     [ "Attribute Poll Engine", "group__attribute__poll.html", "group__attribute__poll" ],
+    [ "Unify Validator component", "group__uic__validator.html", "group__uic__validator" ],
     [ "Unify definitions", "group__unify__definitions.html", "group__unify__definitions" ]
 ];

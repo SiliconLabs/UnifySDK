@@ -257,14 +257,17 @@ static sl_status_t zwave_command_class_binary_switch_handle_report(
     if ((target_value == OFF) || (target_value == ON)) {
       set_desired_value(state_node, target_value);
     }
+  } else {
+    // No target value, align the reported and desired:
+    set_desired_value(state_node, current_value);
   }
 
   // Current/target value adjustments based on the reported duration.
   attribute_timeout_cancel_callback(state_node, &align_current_to_target_value);
-  if (attribute_store_is_value_defined(value_node, DESIRED_ATTRIBUTE)) {
+  if (attribute_store_is_value_defined(value_node, DESIRED_ATTRIBUTE)
+      && false == attribute_store_is_value_matched(value_node)) {
     attribute_timeout_set_callback(state_node,
-                                   zwave_duration_to_time((uint8_t)duration)
-                                     + PROBE_BACK_OFF,
+                                   zwave_duration_to_time((uint8_t)duration),
                                    &align_current_to_target_value);
   }
 
@@ -409,7 +412,7 @@ static void update_node_state(attribute_store_node_t state_node)
 static void zwave_command_class_binary_switch_on_reported_sub_state_update(
   attribute_store_node_t node, attribute_store_change_t change)
 {
-  if (change == ATTRIBUTE_DELETED) {
+  if (change != ATTRIBUTE_UPDATED) {
     return;
   }
 
@@ -422,7 +425,7 @@ static void zwave_command_class_binary_switch_on_reported_sub_state_update(
 static void zwave_command_class_binary_switch_on_desired_sub_state_update(
   attribute_store_node_t node, attribute_store_change_t change)
 {
-  if (change == ATTRIBUTE_DELETED) {
+  if (change != ATTRIBUTE_UPDATED) {
     return;
   }
 

@@ -32,7 +32,7 @@
 constexpr char LOG_TAG[] = "zwave_command_class_device_reset_locally";
 // Maximum time trying to notify Lifeline destinations that we are resetting, in ms
 // We will wait 30 seconds, then move on.
-constexpr uint32_t maximum_time_for_reset_notifiation = 30000;
+constexpr uint32_t MAXIMUM_TIME_FOR_RESET_NOTIFICATION = 30000;
 
 static std::map<zwave_node_id_t, uint8_t> nodes_to_be_removed;
 struct ctimer timer;
@@ -92,7 +92,7 @@ static void on_reset_notification_send_complete(sl_status_t status, void *user)
 static sl_status_t zwave_command_class_device_reset_on_zpc_reset()
 {
   sl_log_info(LOG_TAG,
-              "Reset step: Queuing a Device Reset Locally Notification "
+              "Reset step: Sending a Device Reset Locally Notification "
               "to the lifeline destinations.");
 
   // We leave our network behind, don't care about nodes to be removed.
@@ -102,7 +102,7 @@ static sl_status_t zwave_command_class_device_reset_on_zpc_reset()
   const uint8_t reset_notification[]
     = {COMMAND_CLASS_DEVICE_RESET_LOCALLY, DEVICE_RESET_LOCALLY_NOTIFICATION};
   zwave_tx_options_t tx_options = {};
-  tx_options.discard_timeout_ms = maximum_time_for_reset_notifiation;
+  tx_options.discard_timeout_ms = MAXIMUM_TIME_FOR_RESET_NOTIFICATION;
   tx_options.qos_priority = ZWAVE_TX_QOS_RECOMMENDED_TIMING_CRITICAL_PRIORITY;
   tx_options.number_of_responses = 0;
 

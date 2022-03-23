@@ -1,5 +1,6 @@
 let supportedClusters = [
     "AoXLocator",
+    "ConfigurationParameters",
     "AoXPositionEstimation",
     "Basic",
     "ColorControl",
@@ -18,7 +19,30 @@ let supportedClusters = [
 
 const enums = new Set();
 const bitmaps = new Set();
-const unifyClusters = ["ProtocolController-RFTelemetry", "NameAndLocation", "AoXLocator", "AoXPositionEstimation"];
+const unifyClusters = ["ProtocolController-RFTelemetry", "NameAndLocation", "AoXLocator", "AoXPositionEstimation", "ConfigurationParameters"];
+const clusterArayAttributes = [
+    "Groups.GetGroupMembership.GroupList",
+    "Groups.GetGroupMembershipResponse.GroupList",
+    "Scenes.AddScene.ExtensionFieldSets",
+    "Scenes.AddScene.ExtensionFieldSets.ExtensionFieldSet",
+    "Scenes.EnhancedAddScene.ExtensionFieldSets",
+    "Scenes.EnhancedAddScene.ExtensionFieldSets.ExtensionFieldSet",
+    "Scenes.ViewSceneResponse.ExtensionFieldSets",
+    "Scenes.ViewSceneResponse.ExtensionFieldSets.ExtensionFieldSet",
+    "Scenes.GetSceneMembershipResponse.SceneList",
+    "Scenes.EnhancedViewSceneResponse.ExtensionFieldSets",
+    "Scenes.EnhancedViewSceneResponse.ExtensionFieldSets.ExtensionFieldSet",
+    "Thermostat.SetWeeklySchedule.Transitions",
+    "Thermostat.GetWeeklyScheduleResponse.Transitions",
+    "AoXLocator.AzimuthMask",
+    "AoXLocator.ElevationMask",
+    "AoXLocator.AllowList",
+    "AoXLocator.AntennaArray",
+    "AoXLocator.IQReport.Samples",
+    "ConfigurationParameters.ConfigurationParameters",
+    "ProtocolController-RFTelemetry.TxReport.LastRouteRepeaters",
+    "ProtocolController-RFTelemetry.TxReport.IncomingRSSIRepeaters"
+];
 
 function initEnums(enumItem) {
     enums.add(enumItem);
@@ -34,6 +58,14 @@ function initBitmaps(bitmapItem) {
 
 function isBitmap(type) {
     return (castType(type) === "bitmap") || bitmaps.has(type);
+}
+
+function isArray() {
+    let indexes = Object.keys(arguments);
+    indexes.pop();
+    let label = arguments[indexes.shift()];
+    indexes.forEach(i => label = label.concat(".").concat(arguments[i]));
+    return clusterArayAttributes.indexOf(label) > -1;
 }
 
 function getClusterTypesEnum() {
@@ -145,3 +177,4 @@ exports.isCurrentBitmapEnum = isCurrentBitmapEnum
 exports.getClusterTypesEnum = getClusterTypesEnum
 exports.getClusterName = getClusterName
 exports.isStruct = isStruct
+exports.isArray = isArray

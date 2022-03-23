@@ -104,6 +104,8 @@ RUN mkdir -p /dummyroot/etc
 RUN touch /dummyroot/etc/ld.so.cache
 ENV QEMU_LD_PREFIX=/dummyroot
 
+# Rust Version to install
+ENV RUST_VERSION=1.58.1
 # Rust and Cargo home directories
 ENV RUSTUP_HOME=/opt/rustup-home
 ENV CARGO_HOME=/opt/cargo-home
@@ -112,10 +114,11 @@ RUN curl https://sh.rustup.rs -sSf --output /tmp/sh.rustup.rs \
   && cd /tmp && chmod +x sh.rustup.rs \
   && if [[ $ARCH == *"armhf"* ]]; then export RUST_TRIPLES="$RUST_TRIPLES armv7-unknown-linux-gnueabihf"; fi \
   && if [[ $ARCH == *"amd64"* ]]; then export RUST_TRIPLES="$RUST_TRIPLES x86_64-unknown-linux-gnu"; fi \
-  && ./sh.rustup.rs -y --profile minimal --target ${RUST_TRIPLES} \
+  && ./sh.rustup.rs -y --profile minimal --target ${RUST_TRIPLES} --default-toolchain ${RUST_VERSION}\
   && rm /tmp/sh.rustup.rs \
   && /opt/cargo-home/bin/cargo install cargo2junit \
-  && /opt/cargo-home/bin/cargo install cargo-deb \
+  # remove the main branch reference once the maintainer tagged 81d73b4
+  && /opt/cargo-home/bin/cargo install cargo-deb --git https://github.com/kornelski/cargo-deb.git --branch main \ 
   && chmod -R a+rw ${RUSTUP_HOME} ${CARGO_HOME} \
   && find ${RUSTUP_HOME} ${CARGO_HOME} -type d -exec chmod a+x {} \;
 ENV PATH="${CARGO_HOME}/bin:${PATH}"

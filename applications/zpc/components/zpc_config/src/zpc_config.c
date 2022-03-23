@@ -60,14 +60,13 @@
 #define ZPC_DEFAULT_WAKE_UP_INTERVAL      "zpc.default_wake_up_interval"
 #define ZPC_MISSING_WAKE_UP_NOTIFICATION  "zpc.missing_wake_up_notification"
 #define ZPC_INCLUSION_PROTOCOL_PREFERENCE "zpc.inclusion_protocol_preference"
-#define ZPC_OTA_CACHE_PATH                "zpc.ota_chache_path"
-#define ZPC_OTA_CACHE_SIZE                "zpc.ota_chache_size"
+#define ZPC_OTA_CACHE_PATH                "zpc.ota.cache_path"
+#define ZPC_OTA_CACHE_SIZE                "zpc.ota.cache_size"
 #define ZPC_CONFIG_NCP_VERSION            "zpc.ncp_version"
 #define ZPC_CONFIG_NCP_UPDATE             "zpc.ncp_update"
-
-#define ZPC_POLL_ATTRIBUTE_LIST_FILE "zpc.poll.attribute_list_file"
-#define ZPC_POLL_BACKOFF             "zpc.poll.backoff"
-#define ZPC_POLL_DEFAULT_INTERVAL    "zpc.poll.default_interval"
+#define ZPC_POLL_ATTRIBUTE_LIST_FILE      "zpc.poll.attribute_list_file"
+#define ZPC_POLL_BACKOFF                  "zpc.poll.backoff"
+#define ZPC_POLL_DEFAULT_INTERVAL         "zpc.poll.default_interval"
 
 static zpc_config_t config;
 

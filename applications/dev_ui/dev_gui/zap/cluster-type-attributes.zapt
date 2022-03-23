@@ -14,7 +14,7 @@ export let ClusterTypeAttrs: any = {
             {                
               id: {{id}},
               name: "{{label}}",
-              type: "{{castType type}}",
+              type: "{{castType type}}",            
               {{#if (isNotEmpty max)}}
               max: {{asNumber max}},
               {{/if}}
@@ -25,6 +25,7 @@ export let ClusterTypeAttrs: any = {
               reportRequired: {{isReportable}},
               sceneRequired: {{asBoolean isSceneRequired}},
               writable: {{isWritable}},
+              isArray: {{isArray parent.label label}},
               {{#if (isNotEmpty defaultValue)}}
               default: {{asNumber defaultValue}},
               {{/if}}
@@ -33,7 +34,22 @@ export let ClusterTypeAttrs: any = {
                 {{#zcl_struct_items_by_struct_name type}}
                 {
                   name:"{{name}}",
-                  type:"{{castType type}}"
+                  type:"{{castType type}}",
+                  isArray: {{isArray parent.parent.label parent.label label}},
+                  {{#if (isEnum type)}}
+                    enum:[
+                      {{#zcl_enums}}
+                        {{#if (isCurrentType parent label)}}
+                          {{#zcl_enum_items}}
+                            {
+                              name: "{{label}}",
+                              value: {{asNumber value}}
+                            }{{listComma this}}
+                          {{/zcl_enum_items}}
+                        {{/if}}                  
+                      {{/zcl_enums}}
+                    ],
+                  {{/if}}
                 }{{listComma this}}
                 {{/zcl_struct_items_by_struct_name}}
               ],
@@ -96,12 +112,14 @@ export let ClusterTypeAttrs: any = {
                   {
                     name: "{{label}}",
                     type: "{{castType type}}",
+                    isArray: {{isArray parent.parent.label parent.label label}},
                   {{#if (isStruct type)}}
                     struct:[
                       {{#zcl_struct_items_by_struct_name type}}
                       {
                         name:"{{name}}",
-                        type:"{{castType type}}"
+                        type:"{{castType type}}",
+                        isArray: {{isArray parent.parent.parent.label parent.parent.label parent.label label}}
                       }{{listComma this}}
                       {{/zcl_struct_items_by_struct_name}}
                     ],

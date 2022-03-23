@@ -1181,6 +1181,7 @@ var NAVTREE =
     [ "ProtocolController/RFTelemetry Cluster", "protocol_controller_rf_telemetry.html", [
       [ "ProtocolController/RFTelemetry Attributes", "protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_attrs", [
         [ "ProtocolController-RFTelemetry/TxReportEnabled Attribute", "protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_attr_tx_report_enabled", null ],
+        [ "ProtocolController-RFTelemetry/PTIEnabled Attribute", "protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_attr_pti_enabled", null ],
         [ "ProtocolController/RFTelemetry/ClusterRevision Attribute", "protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_attr_cluster_revision", null ]
       ] ],
       [ "ProtocolController/RFTelemetry Command Support", "protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_recv_cmd_support", null ],
@@ -1480,8 +1481,8 @@ var NAVTREEINDEX =
 "device_temperature_configuration.html",
 "electrical_measurement.html#electrical_measurement_attr_phase_harmonic_current_multiplier",
 "ota_upgrade.html#ota_upgrade_attr_upgrade_serverid",
-"thermostat.html#thermostat_attr_abs_min_heat_setpoint_limit",
-"ucl_enums.html#enum_trigger_effect_effect_identifier"
+"thermostat.html#thermostat_attr_abs_min_cool_setpoint_limit",
+"ucl_enums.html#enum_tl_zigbee_information_logical_type"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

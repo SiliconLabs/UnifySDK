@@ -10,12 +10,12 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
-///
+use crate::attribute_poll_trait::AttributePollTrait;
+use crate::attribute_poll_trait::IntervalType;
+use crate::attribute_watcher::AttributeWatcher;
 use crate::poll_engine::PollEngine;
 use crate::poll_engine::PollEngineCommand;
 use crate::poll_entries::PollEntries;
-use crate::AttributePollTrait;
-use crate::IntervalType;
 use crate::PollEngineConfig;
 use futures::channel::mpsc::unbounded;
 use futures::channel::mpsc::UnboundedSender;
@@ -39,28 +39,17 @@ impl AttributePollTrait for AttributePoll {
             return;
         }
 
-        let (mut sender, receiver) = unbounded();
+        let ( sender, receiver) = unbounded();
         SENDER
             .set(sender.clone())
             .expect("should only be called once");
 
         // task running the actual poll engine
-        let engine_sender = sender.clone();
         contiki_spawn(async {
-            PollEngine::new(
-                ContikiPlatform::default(),
-                PollEntries::new(ContikiPlatform::default()),
-                receiver,
-                engine_sender,
-            )
-            .run()
-            .await;
+            let context = PollEngine::new(ContikiPlatform::default(), PollEntries::new(), config);
+            PollEngine::run(context, AttributeWatcher::new(), receiver).await;
             log_info!("exiting the poll engine");
         });
-
-        sender
-            .start_send(PollEngineCommand::Initialize { config })
-            .unwrap();
     }
 
     fn register(&self, attribute: Attribute, interval: IntervalType) {
@@ -84,7 +73,7 @@ impl AttributePollTrait for AttributePoll {
         }
     }
 
-    fn queue(&self, attribute: Attribute) {
+    fn schedule_now(&self, attribute: Attribute) {
         if let Some(sender) = SENDER.get() {
             sender
                 .clone()

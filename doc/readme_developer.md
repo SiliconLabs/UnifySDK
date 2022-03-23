@@ -1,6 +1,6 @@
 # Unify Developer Guide
 This is a guide for developers who wish to get started on adding or modifying the
-Unify SDK source code. 
+Unify SDK source code.
 
 For instruction on how to build please see
 - [Build Instructions](readme_building.md)
@@ -20,18 +20,18 @@ API reference is found here:
 
 ### CMake
 
-We created additional functions on top of the usual cmake functions which makes
-it more easier to create new targets. This section explains how to use cmake to
-create new uic-components, mocks and unit-tests. These functions should cover 
-all possible use-cases. Their semantics is similar to the existing cmake
-framework, making it easy for developers who are familiar with cmake to
-understand what they do. A good tip is to also take a look at the current cmake
+We created additional functions on top of the usual CMake functions which makes
+it easier to create new targets. This section explains how to use CMake to
+create new Unify-components, mocks and unit-tests. These functions should cover
+all possible use-cases. Their semantics is similar to the existing CMake
+framework, making it easy for developers who are familiar with CMake to
+understand what they do. A good tip is to also take a look at the current CMake
 files to find similar constructions which you can use as an example when
 defining your own.
 
 #### Defining new uic-components
 
-Uic-components are declared SHARED using cmake's `add_library`.
+Unify-components are declared SHARED using CMake's `add_library`.
 
 Newly created components need to comply with the following requirements:
 
@@ -53,14 +53,14 @@ the unlikely event you want to suppress these errors,
 The cmock framework is used to generate mocks of uic components. More
 specifically, cmock generates a mock implementation for provided header files.
 This means no source files are needed to create mocks!
-To ease the use of mocking in the uic ecosystem we have a cmake function to
+To ease the use of mocking in the Unify ecosystem we have a CMake function to
 create mock libraries:
 
 ~~~ cmake
 target_add_mock(<target> <additional_headers>)
 ~~~
 
-Target_add_mock creates a new cmake shared library named `<target>_mock` which
+Target_add_mock creates a new CMake shared library named `<target>_mock` which
 can be included into unit-test targets. It will *only* mock headers that are
 declared *public* for that given target.
 Given the following example:
@@ -100,7 +100,7 @@ production code. the function has a `DEPENDS` argument that is purposed for that
 
 the DEPENDS argument enables you to switch a dependant library with a mock
 version. One that is generated with target_add_mock for instance. the `DEPENDS`
-argument behaves similar to cmake's `target_link_libraries`. Given the
+argument behaves similar to CMake's `target_link_libraries`. Given the
 following situation:
 
 ~~~ cmake
@@ -124,7 +124,7 @@ get selected first. Thus, the mock version is used instead of the actual
 dependency:
 
 ~~~ cmake
-target_add_unittest(uic_my_component 
+target_add_unittest(uic_my_component
 SOURCES source.c
 DEPENDS uic_my_dependant_mock
 )
@@ -138,12 +138,12 @@ With the `NAME` argument we can give the test a custom name. This way we can
 build multiple tests of the same component. e.g.
 
 ~~~ cmake
-target_add_unittest(uic_my_component 
-NAME uic_custom_test1 
+target_add_unittest(uic_my_component
+NAME uic_custom_test1
 SOURCES source.c
 )
 
-target_add_unittest(uic_my_component 
+target_add_unittest(uic_my_component
 NAME uic_custom_test2
 SOURCES source.c
 )
@@ -168,7 +168,7 @@ EXCLUDE a.c)
 you want to list the sources files you want to exclude. e.g. `a.c` or if its
 nested `src/a.c` for example. In theory you could exclude a selection of files
 by specifying, for example, 'network'. this will exclude all source files which
-contains 'network' from the build. 
+contains 'network' from the build.
 
 #### Stub
 
@@ -259,7 +259,7 @@ with the following arguments:
     - PKG_FILE_NAME Debian package filename for the component
     - PKG_DEPNDS    Component debian package dependencies.
     - PKG_EXTRA     Component debian package Control extra info
-  
+
     See the [CPack manual](https://cmake.org/cmake/help/v3.6/module/CPackDeb.html) for more information on these fields.
 
 1. In the component-specific CMakeFile.txt (for application/zpc/CMakeFile.txt)
@@ -373,7 +373,7 @@ Note that exceptions exist for this, such as Contiki and libs2.
 |   `-- CMakeLists.txt      // CMakeLists.txt for the component
 ~~~
 
-* Library names and folders of Unify components are required to be prefixed with uic_, 
+* Library names and folders of Unify components are required to be prefixed with uic_,
 i.e. "uic_my_sample_component".
 
 ### Structure
@@ -392,8 +392,8 @@ i.e. "uic_my_sample_component".
 |   `-- ...
 |-- cmake/                      // Cmake toolchains, modules and includes
 |   |-- include/
-|   |   `--                     // Various cmake includes e.g. compiler_options.cmake, doxygen.cmake, ...
-|   |-- modules/                // cmake modules
+|   |   `--                     // Various CMake includes e.g. compiler_options.cmake, doxygen.cmake, ...
+|   |-- modules/                // CMake modules
 |   |-- armhf_debian.cmake      // Toolchain files goes here in the format `<arch>(_<dist>).cmake`
 |-- components/                 // Shared components (components shared between Unify applications)
 |   |-- uic_config/             // config component
@@ -462,7 +462,7 @@ Here you can see a demo-session of adding a component with cookiecutter.
 to demonstrate this functionality for the team to consider.*
 
 
-<a href=https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1> 
+<a href=https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1>
   Heres a small video demonstrating how to use the cookiecutter<br/>
   <img src="https://asciinema.org/a/WwG0ZZEHk5f2EzWVjlJeGENK1.png" width="60%">
 </a>
@@ -588,7 +588,7 @@ From now on, all new files will be formatted before they are committed.
 
 3. Hook `my_uic_application` into the Build System.
 
-    After adding the main function to a `main.c` file under `applications/my_uic_application`, modify the cmake 
+    After adding the main function to a `main.c` file under `applications/my_uic_application`, modify the cmake
     configuration file to include `my_uic_application` in the build by adding `add_subdirectory(my_uic_application)` to `applications/CMakeLists.txt`
 
         add_executable(my_uic_application main.c)
@@ -596,7 +596,7 @@ From now on, all new files will be formatted before they are committed.
         # Include my_uic_application in binary package
         install(TARGETS my_uic_application RUNTIME DESTINATION bin)
 
-    
+
 
 4. Compile
 

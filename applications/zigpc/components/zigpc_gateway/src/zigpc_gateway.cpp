@@ -333,3 +333,12 @@ bool zigpc_gateway_install_code_is_valid(const uint8_t *install_code,
 
   return is_valid;
 }
+
+sl_status_t zigpc_gateway_bootload_restart()
+{
+    EmberStatus status = 
+        zigbeeHostLaunchBootloader();
+    
+    return (status == EMBER_SUCCESS) ? 
+                SL_STATUS_OK : SL_STATUS_FAIL;
+}

@@ -1,3 +1,15 @@
+///////////////////////////////////////////////////////////////////////////////
+// # License
+// <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
+// The licensor of this software is Silicon Laboratories Inc. Your use of this
+// software is governed by the terms of Silicon Labs Master Software License
+// Agreement (MSLA) available at
+// www.silabs.com/about-us/legal/master-software-license-agreement. This
+// software is distributed to you in Source Code format and is governed by the
+// sections of the MSLA applicable to Source Code.
+//
+///////////////////////////////////////////////////////////////////////////////
 use crate::cache::Cache;
 use std::collections::BTreeMap;
 use std::collections::HashSet;
@@ -5,6 +17,7 @@ use unify_log_sys::*;
 use unify_middleware::unify_mqtt_client::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
 };
+use unify_validator_sys::*;
 
 const EMPTY_ARRAY_VALUE: &str = "{\"value\":[]}";
 /// MqttGroupHandler handles subscription messages related to UIC groups.
@@ -25,7 +38,9 @@ impl<T: MqttClientTrait> MqttClientCallbacksTrait for MqttGroupHandler<T> {
     /// public function to be called by the mosquitto fwk on a received message.
     fn on_message(&mut self, msg: MosqMessage) {
         if let Err(e) = self.process_message(msg) {
-            log_error!("{}", e);
+            if !e.is_empty() {
+                log_error!("{}", e);
+            }
         }
     }
     fn before_disconnect(&mut self) {}
@@ -109,6 +124,9 @@ impl<T: MqttClientTrait> MqttGroupHandler<T> {
         json: json::JsonValue,
     ) -> std::result::Result<(), String> {
         let (unid, ep) = get_unid_ep_of_topic(topic)?;
+        if false == validate_unid(unid.as_str()) {
+            return Err(String::from("Invalid UNID provided"));
+        }
         let value = &json["value"];
         let group_list: Vec<u16> = value.members().filter_map(|v| v.as_u16()).collect();
         let changes = self.cache.set_group_list_for_node(&unid, ep, &group_list);
@@ -254,6 +272,9 @@ impl<T: MqttClientTrait> MqttGroupHandler<T> {
         json: json::JsonValue,
     ) -> std::result::Result<(), String> {
         let (unid, ep) = get_unid_ep_of_topic(topic)?;
+        if false == validate_unid(unid.as_str()) {
+            return Err(String::from("Invalid UNID provided"));
+        }
         let cluster_name = topic.split_terminator('/').collect::<Vec<&str>>()[4];
         let value = &json["value"];
         let command_names: HashSet<String> = value.members().map(|c| c.to_string()).collect();
@@ -304,9 +325,7 @@ impl<T: MqttClientTrait> MqttGroupHandler<T> {
 fn get_unid_ep_of_topic(topic: &str) -> std::result::Result<(String, u16), String> {
     let list = topic.split_terminator('/').collect::<Vec<&str>>();
     let unid = list[2];
-    let stripped = list[3]
-        .strip_prefix("ep")
-        .ok_or(format!("invalid ep formatting of {}", list[3]))?;
+    let stripped = list[3].strip_prefix("ep").ok_or("")?;
     let ep_number = stripped
         .parse::<u16>()
         .map_err(|e| format!("could not parse {} to integer. {}", stripped, e))?;
@@ -347,10 +366,26 @@ mod tests {
     }
     #[test]
     fn test_get_unid_ep_of_topic() {
-        let test_topic = "ucl/by-unid/zw-33/ep0/Groups/Attributes/GroupList/Reported";
-        let (unid_test, ep_test) = get_unid_ep_of_topic(test_topic).unwrap();
-        assert_eq!(unid_test, "zw-33".to_string());
-        assert_eq!(ep_test, 0);
+        {
+            let test_topic = "ucl/by-unid/zw-33/ep0/Groups/Attributes/GroupList/Reported";
+            let (unid_test, ep_test) = get_unid_ep_of_topic(test_topic).unwrap();
+            assert_eq!(unid_test, "zw-33".to_string());
+            assert_eq!(ep_test, 0);
+        }
+        {
+            let test_topic = "ucl/by-unid/zw-33/invalid_ep_id/Groups/Attributes/GroupList/Reported";
+            assert_eq!(get_unid_ep_of_topic(test_topic), Err(String::from("")));
+        }
+        {
+            let test_topic =
+                "ucl/by-unid/zw-33/epinvaliddecimanvalue/Groups/Attributes/GroupList/Reported";
+            assert_eq!(
+                get_unid_ep_of_topic(test_topic),
+                Err(String::from(
+                    "could not parse invaliddecimanvalue to integer. invalid digit found in string"
+                ))
+            );
+        }
     }
 
     #[test]
@@ -523,5 +558,18 @@ mod tests {
         mqtt_group_handler
             .on_supported_commands(topic_test, json_object)
             .unwrap();
+    }
+    #[test]
+    fn test_on_supported_commands_invalid_unid() {
+        let mut mqtt_group_handler = create_mocked_mqtt_handler();
+        let topic_invalid_unid = "ucl/by-unid/-_-/ep0/Groups/SupportedCommands";
+        let json_object = json::object! {
+            "value" => json::JsonValue::from(vec!["AddGroup"]),
+        };
+
+        assert_eq!(
+            mqtt_group_handler.on_supported_commands(topic_invalid_unid, json_object),
+            Err(String::from("Invalid UNID provided"))
+        );
     }
 }

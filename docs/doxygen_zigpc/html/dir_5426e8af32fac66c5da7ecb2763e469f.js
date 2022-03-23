@@ -7,6 +7,7 @@ var dir_5426e8af32fac66c5da7ecb2763e469f =
     [ "diagnostics", "dir_a2861ded9b7fb5dc8c3ab199aace1921.html", "dir_a2861ded9b7fb5dc8c3ab199aace1921" ],
     [ "discovery", "dir_230f9dd927ba5928bbd82e95d3004149.html", "dir_230f9dd927ba5928bbd82e95d3004149" ],
     [ "group_mgmt", "dir_da573f52735645d8391352cf2ee07004.html", "dir_da573f52735645d8391352cf2ee07004" ],
+    [ "ncp_updater", "dir_2c08e6b45466072b23725ec079e9a684.html", "dir_2c08e6b45466072b23725ec079e9a684" ],
     [ "ota_zigbee", "dir_4cdbeea0c1a48c70f18670be1aa312f5.html", "dir_4cdbeea0c1a48c70f18670be1aa312f5" ],
     [ "smartstart", "dir_b1ac6c8c5af047a6745b0e61d74e1275.html", "dir_b1ac6c8c5af047a6745b0e61d74e1275" ],
     [ "stdin", "dir_23a03060370414fca122c4d74c6dd2aa.html", "dir_23a03060370414fca122c4d74c6dd2aa" ],

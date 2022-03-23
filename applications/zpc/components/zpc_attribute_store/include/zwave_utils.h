@@ -29,6 +29,7 @@
 #include "zwave_controller_keyset.h"
 #include "zwave_keyset_definitions.h"
 #include "zwave_command_class_version_types.h"
+#include "zwave_command_class_wake_up_types.h"
 
 /**
  * @ingroup zpc_utils
@@ -153,6 +154,20 @@ bool zwave_security_validation_is_node_s2_capable(zwave_node_id_t node_id);
  */
 sl_status_t
   zwave_security_validation_set_node_as_s2_capable(zwave_node_id_t node_id);
+
+/**
+ * @brief Navigates the attribute store to find out what is the Wake Up Interval
+ *  of a node.
+ *
+ * It will search under all endpoints, (despite that the setting should be under
+ * endpoint 0) and return the first found value.
+ *
+ * @param node_id       The Z-Wave NodeID for which we want to find out the
+ *                      Wake Up Interval.
+ * @returns The value of the Wake Up interval. 0 is returned if there is no
+ *          Wake up interval of if it is unknown.
+ */
+wake_up_interval_t zwave_get_wake_up_interval(zwave_node_id_t node_id);
 
 /** @} (end addtogroup zwave_utils) */
 /** @} (end addtogroup zpc_utils) */

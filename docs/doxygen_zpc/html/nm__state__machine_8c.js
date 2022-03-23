@@ -5,7 +5,7 @@ var nm__state__machine_8c =
     [ "ADD_NODE_STOP_FAILED", "nm__state__machine_8c.html#ace46a0a1deffc7ee590c4bf2972ac5c3", null ],
     [ "LOG_TAG", "nm__state__machine_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "add_node_status_update", "nm__state__machine_8c.html#a9d552fc6b0125173d0ed560c46e79ffb", null ],
-    [ "dispatch_node_added", "nm__state__machine_8c.html#a1b5c26f6c71ac08e30c67ffa7b07b8de", null ],
+    [ "dispatch_node_added", "nm__state__machine_8c.html#af9725af53f46d47041ed76276f01b39c", null ],
     [ "get_event_for_learn_status", "nm__state__machine_8c.html#abf1b965ec1c5a35734c8cb5c5824aaf9", null ],
     [ "is_cc_in_nif", "nm__state__machine_8c.html#a264b73bec51cdac6380652a9a8a1dce2", null ],
     [ "network_management_refresh_cached_ids", "nm__state__machine_8c.html#ae1af27db11f897fa2a93aca3f74f5d0c", null ],

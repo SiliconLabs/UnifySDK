@@ -1,11 +1,15 @@
-// License
-// <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
+// # License
+// <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
 // The licensor of this software is Silicon Laboratories Inc. Your use of this
 // software is governed by the terms of Silicon Labs Master Software License
 // Agreement (MSLA) available at
 // www.silabs.com/about-us/legal/master-software-license-agreement. This
 // software is distributed to you in Source Code format and is governed by the
 // sections of the MSLA applicable to Source Code.
+//
+///////////////////////////////////////////////////////////////////////////////
 
 //! This module reads yaml configuration file that contains attribute types and
 //! its polling interval values in [seconds] as follow: Keys for polling
@@ -39,10 +43,9 @@ mod zwave_poll_config;
 
 extern crate alloc;
 
-use futures::stream::LocalBoxStream;
 use futures::StreamExt;
+use unify_attribute_poll::attribute_poll_trait::AttributePollTrait;
 use unify_attribute_poll::AttributePoll;
-use unify_attribute_poll::AttributePollTrait;
 use unify_log_sys::*;
 use unify_middleware::contiki::contiki_spawn;
 use unify_middleware::AttributeStoreExtTrait;
@@ -51,6 +54,7 @@ use unify_middleware::{Attribute, AttributeStoreTrait, AttributeTypeId};
 use unify_middleware::{AttributeEvent, AttributeEventType};
 use unify_sl_status_sys::*;
 use zpc_attribute_store::AttributeStreamExt;
+use zpc_attribute_store::NetworkAttributesTrait;
 use zwave_poll_config::read_config_yaml_to_map;
 use zwave_poll_config::AttributePollMap;
 
@@ -60,6 +64,7 @@ declare_app_name!("zwave_poll_manager");
 type sl_status_t = u32;
 
 const ATTRIBUTE_ZWAVEPLUS_INFO_Z_WAVE_VERSION: AttributeTypeId = (0x5E << 8) | 0x2;
+const ATTRIBUTE_HOME_ID: AttributeTypeId = 0x2;
 const ATTRIBUTE_ENDPOINT_ID: AttributeTypeId = 0x4;
 
 //< This represents the Network Status of a node. node_state_topic_state_t
@@ -82,16 +87,33 @@ impl PollRegister {
         }
     }
 
-    /// configure a attribute stream that listens for newly included zwave nodes
-    /// in the attribute store
-    fn create_network_status_stream(&self) -> LocalBoxStream<'static, AttributeEvent> {
-        let network_status_update = |event: &AttributeEvent| {
-            event.attribute.type_of() == ATTRIBUTE_NETWORK_STATUS
-                && event.event_type == AttributeEventType::ATTRIBUTE_UPDATED
-                && event.value_state == AttributeValueState::REPORTED_ATTRIBUTE
-                && event.attribute.get_reported::<u8>() == Ok(NODE_STATE_TOPIC_STATE_INCLUDED)
+    // Verify for an event if the Attribute should be part of the polling.
+    // It will verify that the Attribute is located in our HomeID and that
+    // the node is "Online functional"
+    fn should_node_be_polled<T: NetworkAttributesTrait>(event: &AttributeEvent) -> bool {
+        // Get our HomeID attribute. If it cannot be found, nothing will be polled.
+        let home_id_attribute = match T::get_home_id() {
+            Ok(value) => value,
+            Err(_) => {
+                return false;
+            }
         };
-        Attribute::attribute_changed_replayed(network_status_update)
+
+        // Verify that attributes are under our HomeID attribute.
+        let mut is_in_home_id: bool = false;
+        if let Ok(atr) = event
+            .attribute
+            .get_first_parent_with_type(ATTRIBUTE_HOME_ID)
+        {
+            is_in_home_id = atr == home_id_attribute;
+        }
+
+        // Additional verifications, node has to be Online functional.
+        event.attribute.type_of() == ATTRIBUTE_NETWORK_STATUS
+            && event.event_type == AttributeEventType::ATTRIBUTE_UPDATED
+            && event.value_state == AttributeValueState::REPORTED_ATTRIBUTE
+            && event.attribute.get_reported::<u8>() == Ok(NODE_STATE_TOPIC_STATE_INCLUDED)
+            && is_in_home_id
     }
 
     /// Start the [PollRegister].
@@ -102,7 +124,10 @@ impl PollRegister {
     ///   call the [PollRegister] object is moved into this function
     fn run(mut self) {
         let task = async move {
-            let mut network_status_update_stream = self.create_network_status_stream().fuse();
+            let mut network_status_update_stream = Attribute::attribute_changed_replayed(
+                PollRegister::should_node_be_polled::<Attribute>,
+            )
+            .fuse();
 
             loop {
                 let event = network_status_update_stream.select_next_some().await;
@@ -198,4 +223,51 @@ pub extern "C" fn zwave_poll_manager_init() -> sl_status_t {
 
 /// Test
 #[cfg(test)]
-mod poll_manager_test {}
+mod poll_manager_test {
+    use super::*;
+    use crate::PollRegister;
+    use unify_middleware::{Attribute, AttributeStoreError};
+
+    struct MockObject;
+    // Mock implementation for the ZPC network nodes
+    // Handle 1 is HomeID, 2 is NodeID, 3 is endpoint ID.
+    impl zpc_attribute_store::NetworkAttributesTrait for MockObject {
+        fn get_home_id() -> Result<Attribute, AttributeStoreError> {
+            Attribute::new_from_handle(1)
+        }
+        // Retrieves the NodeID attribute of the ZPC in its current network
+        fn get_zpc_node_id() -> Result<Attribute, AttributeStoreError> {
+            Attribute::new_from_handle(2)
+        }
+        // Retrives the Endpoint ID (0) of the ZPC NodeID in its current network.
+        fn get_zpc_endpoint_id() -> Result<Attribute, AttributeStoreError> {
+            Attribute::new_from_handle(3)
+        }
+    }
+
+    #[test]
+    fn should_node_be_polled_test() {
+        let mut test_event: AttributeEvent = AttributeEvent::default();
+        assert_eq!(
+            false,
+            PollRegister::should_node_be_polled::<MockObject>(&test_event)
+        );
+
+        // HomeID should not do anything either
+        test_event.attribute.handle = 1;
+        assert_eq!(
+            false,
+            PollRegister::should_node_be_polled::<MockObject>(&test_event)
+        );
+
+        // Desired update should not trigger evaluation for polling
+        test_event.value_state = AttributeValueState::DESIRED_ATTRIBUTE;
+        assert_eq!(
+            false,
+            PollRegister::should_node_be_polled::<MockObject>(&test_event)
+        );
+
+        // TODO: Can't get it to return true unless we create a real attribute store.
+        // or mock the `get_first_parent_with_type()` function
+    }
+}

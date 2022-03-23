@@ -376,7 +376,7 @@ static void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_force_read_attribute
 sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
   const char *base_topic,
   {{#if (isMonotonousArray label)}}
-  uint8_t value_count,
+  size_t value_count,
   {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}}* value,
   {{else}}
   {{asUnderlyingType type}} value,
@@ -391,7 +391,7 @@ sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLow
   // Create an array under the value {"value":[]}
   jsn["value"] = nlohmann::json::array();
 
-  for (uint8_t i = 0; i<value_count;i++){
+  for (size_t i = 0; i<value_count;i++){
     {{#if_is_enum type}}
     #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
     jsn["value"].push_back(({{asUnderlyingType type}}){{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name((uint32_t)value[i]));

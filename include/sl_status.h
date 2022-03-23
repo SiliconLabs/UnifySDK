@@ -129,6 +129,9 @@
 #define SL_STATUS_NET_MQTT_QOS_NOT_SUPPORTED    ((sl_status_t)0x084B) ///< The requested QoS level is not supported by the broker.
 #define SL_STATUS_NET_MQTT_OVERSIZE_PACKET      ((sl_status_t)0x084C) ///< Resulting packet will become larger than the broker supports.
 
+// Other codes
+#define SL_STATUS_PRINT_INFO_MESSAGE            ((sl_status_t)0x0900) ///< Only information message should be printed, without starting an application
+
 /*
  ********************************   DATA TYPES   *******************************
  */

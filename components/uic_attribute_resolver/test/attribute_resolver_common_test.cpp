@@ -49,18 +49,20 @@ static uint32_t expected_value = 0;
 #define TEST_GET_RETRY_COUNT   4
 #define TEST_TRANSMISSION_TIME 23
 
-static int test_send_init_function_call_count           = 0;
-static int test_send_function_call_count                = 0;
-static int test_abort_function_call_count               = 0;
-static int test_set_function_call_count                 = 0;
-static int test_get_function_call_count                 = 0;
-static int test_resolution_listener_function_call_count = 0;
-static int test_set_rule_listener_function_call_count   = 0;
+static int test_send_init_function_call_count            = 0;
+static int test_send_function_call_count                 = 0;
+static int test_abort_function_call_count                = 0;
+static int test_set_function_call_count                  = 0;
+static int test_get_function_call_count                  = 0;
+static int test_resolution_listener_function_call_count  = 0;
+static int test_set_rule_listener_function_call_count    = 0;
+static int test_get_give_up_listener_function_call_count = 0;
 
-static attribute_store_node_t expected_node_for_resolution             = 0;
-static attribute_store_node_t expected_node_for_listening_notification = 0;
-static attribute_store_node_t expected_node_for_abort                  = 0;
-static attribute_store_type_t expected_type_for_listening_notification = 0;
+static attribute_store_node_t expected_node_for_resolution               = 0;
+static attribute_store_node_t expected_node_for_listening_notification   = 0;
+static attribute_store_node_t expected_node_for_abort                    = 0;
+static attribute_store_type_t expected_type_for_listening_notification   = 0;
+static attribute_store_node_t expected_node_for_get_give_up_notification = 0;
 static sl_status_t send_function_return_code = SL_STATUS_OK;
 static sl_status_t set_function_return_code  = SL_STATUS_OK;
 static sl_status_t get_function_return_code  = SL_STATUS_OK;
@@ -134,6 +136,15 @@ static void
     TEST_ASSERT_EQUAL(expected_type_for_listening_notification, type);
   }
   test_set_rule_listener_function_call_count += 1;
+}
+
+static void test_get_give_up_listener_function(attribute_store_type_t node)
+{
+  if (expected_node_for_get_give_up_notification
+      != ATTRIBUTE_STORE_INVALID_NODE) {
+    TEST_ASSERT_EQUAL(expected_node_for_get_give_up_notification, node);
+  }
+  test_get_give_up_listener_function_call_count += 1;
 }
 
 /// Setup the test suite (called once before all test_xxx functions are called)
@@ -229,21 +240,23 @@ void setUp()
   // Ensure we start from scratch before creating our test network.
   create_test_attribute_store_network();
 
-  test_send_init_function_call_count           = 0;
-  test_send_function_call_count                = 0;
-  test_abort_function_call_count               = 0;
-  test_set_rule_listener_function_call_count   = 0;
-  expected_node_for_resolution                 = ATTRIBUTE_STORE_INVALID_NODE;
-  expected_node_for_listening_notification     = ATTRIBUTE_STORE_INVALID_NODE;
-  expected_node_for_abort                      = ATTRIBUTE_STORE_INVALID_NODE;
-  send_function_return_code                    = SL_STATUS_OK;
-  set_function_return_code                     = SL_STATUS_OK;
-  get_function_return_code                     = SL_STATUS_OK;
-  test_set_function_call_count                 = 0;
-  test_get_function_call_count                 = 0;
-  test_resolution_listener_function_call_count = 0;
-  value                                        = 0;
-  expected_value                               = 0;
+  test_send_init_function_call_count            = 0;
+  test_send_function_call_count                 = 0;
+  test_abort_function_call_count                = 0;
+  test_set_rule_listener_function_call_count    = 0;
+  test_get_give_up_listener_function_call_count = 0;
+  expected_node_for_resolution                  = ATTRIBUTE_STORE_INVALID_NODE;
+  expected_node_for_listening_notification      = ATTRIBUTE_STORE_INVALID_NODE;
+  expected_node_for_abort                       = ATTRIBUTE_STORE_INVALID_NODE;
+  expected_node_for_get_give_up_notification    = ATTRIBUTE_STORE_INVALID_NODE;
+  send_function_return_code                     = SL_STATUS_OK;
+  set_function_return_code                      = SL_STATUS_OK;
+  get_function_return_code                      = SL_STATUS_OK;
+  test_set_function_call_count                  = 0;
+  test_get_function_call_count                  = 0;
+  test_resolution_listener_function_call_count  = 0;
+  value                                         = 0;
+  expected_value                                = 0;
   expected_type_for_listening_notification
     = ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE;
 
@@ -358,6 +371,11 @@ void test_attribute_resolver_common_get_max_retries()
   // Regular get resolution, undefine this before rule registration
   attribute_store_undefine_reported(node_2);
 
+  // I want to get notified if we give up on a get.
+  attribute_resolver_set_resolution_give_up_listener(
+    2,
+    &test_get_give_up_listener_function);
+
   // Register a rule for type 10
   attribute_resolver_register_rule(attribute_store_get_node_type(node_2),
                                    NULL,
@@ -371,9 +389,10 @@ void test_attribute_resolver_common_get_max_retries()
     &test_resolution_listener_function);
 
   // Expect a get resolution
-  send_function_return_code    = SL_STATUS_OK;
-  get_function_return_code     = SL_STATUS_OK;
-  expected_node_for_resolution = node_2;
+  send_function_return_code                  = SL_STATUS_OK;
+  get_function_return_code                   = SL_STATUS_OK;
+  expected_node_for_resolution               = node_2;
+  expected_node_for_get_give_up_notification = node_2;
 
   for (uint8_t attempt = 1; attempt <= TEST_GET_RETRY_COUNT; attempt++) {
     contiki_test_helper_run(1);  // execute the get
@@ -389,8 +408,10 @@ void test_attribute_resolver_common_get_max_retries()
     TEST_ASSERT_EQUAL(attempt, test_get_function_call_count);
     if (attempt < TEST_GET_RETRY_COUNT) {
       TEST_ASSERT_EQUAL(0, test_resolution_listener_function_call_count);
+      TEST_ASSERT_EQUAL(0, test_get_give_up_listener_function_call_count);
     } else {
       TEST_ASSERT_EQUAL(1, test_resolution_listener_function_call_count);
+      TEST_ASSERT_EQUAL(1, test_get_give_up_listener_function_call_count);
     }
 
     TEST_ASSERT_FALSE(

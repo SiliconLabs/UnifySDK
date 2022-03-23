@@ -23,6 +23,28 @@ target_add_unittest(
   failing_node_monitor.cpp
   network_monitor_span_persistence.c)
 
+## Network monitor test with real attribute store
+target_add_unittest(
+  network_monitor
+  NAME zwave_network_monitor_test
+  SOURCES
+  zwave_network_monitor_test.c
+  DEPENDS
+  ucl_definitions
+  zwave_definitions
+  uic_contiki_stub
+  zpc_attribute_store_test_helper
+  uic_attribute_utils_test_helper
+  zpc_config_mock
+  uic_mqtt_mock
+  zwave_controller_mock
+  zwave_network_management_mock
+  zwave_api_mock
+  uic_attribute_store
+  EXCLUDE
+  network_monitor_span_persistence.c
+)
+
 # SmartStart list monitor test
 target_add_unittest(
   network_monitor
@@ -61,11 +83,11 @@ target_add_unittest(
   network_monitor.cpp
   network_monitor_fixt.c)
 
-# Failing node monitor test 
+# Failing node monitor test
 target_add_unittest(
   network_monitor
   NAME
-  failing_node_monitor_test 
+  failing_node_monitor_test
   SOURCES
   failing_node_monitor_test.cpp
   DEPENDS

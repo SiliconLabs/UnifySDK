@@ -426,7 +426,26 @@ void test_ucl_network_status_attribute_update_happy_case()
   attribute_store_network_helper_get_unid_from_node_ReturnMemThruPtr_unid(
     test_unid,
     sizeof(unid_t));
-
+  // Mock for publish endpoint list
+  get_node_network_status_verification(test_node_id_node,
+                                       NODE_STATE_TOPIC_STATE_INCLUDED);
+  attribute_store_network_helper_get_unid_from_node_ExpectAndReturn(
+    test_node_id_node,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_network_helper_get_unid_from_node_IgnoreArg_unid();
+  attribute_store_network_helper_get_unid_from_node_ReturnMemThruPtr_unid(
+    test_unid,
+    sizeof(unid_t));
+  attribute_store_get_node_child_count_IgnoreAndReturn(0);
+  const static char expected_base_topic_endpoint_id_list[]
+    = "ucl/by-unid/zw-DEADBEEF-0009";
+  uic_mqtt_dotdot_state_endpoint_id_list_publish_ExpectAndReturn(
+    expected_base_topic_endpoint_id_list,
+    0,
+    NULL,
+    0xFF,
+    SL_STATUS_OK);
   uic_mqtt_publish_Expect(expected_state_topic,
                           expected_state_message_2,
                           sizeof(expected_state_message_2) - 1,
@@ -560,4 +579,79 @@ void test_teardown()
   // Kick the process exit
   process_exit(&ucl_node_state_process);
   contiki_test_helper_run(0);
+}
+
+void test_ucl_publish_endpoint_list()
+{
+  TEST_ASSERT_NOT_NULL(network_status_update_callback_save);
+
+  test_ucl_node_state_init();
+  attribute_store_node_t test_updated_node = 0xABCD;
+  test_node_id_node                        = node_id_in_network_1;
+  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_updated_node,
+                                                             ATTRIBUTE_NODE_ID,
+                                                             test_node_id_node);
+
+  get_node_network_status_verification(test_node_id_node,
+                                       NODE_STATE_TOPIC_STATE_INCLUDED);
+  get_node_security_verification(test_node_id_node, 0x87);
+  get_get_node_maximum_command_delay_verification(test_node_id_node,
+                                                  MAX_COMMAND_DELAY_UNKNOWN);
+  attribute_store_network_helper_get_unid_from_node_ExpectAndReturn(
+    test_node_id_node,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_network_helper_get_unid_from_node_IgnoreArg_unid();
+  attribute_store_network_helper_get_unid_from_node_ReturnMemThruPtr_unid(
+    test_unid,
+    sizeof(unid_t));
+  // Mock for publish endpoint list
+  get_node_network_status_verification(test_node_id_node,
+                                       NODE_STATE_TOPIC_STATE_INCLUDED);
+  attribute_store_network_helper_get_unid_from_node_ExpectAndReturn(
+    test_node_id_node,
+    NULL,
+    SL_STATUS_OK);
+  attribute_store_network_helper_get_unid_from_node_IgnoreArg_unid();
+  attribute_store_network_helper_get_unid_from_node_ReturnMemThruPtr_unid(
+    test_unid,
+    sizeof(unid_t));
+  attribute_store_get_node_child_count_IgnoreAndReturn(1);
+  attribute_store_node_t test_ep_node = 0xAFCD;
+  attribute_store_get_node_child_ExpectAndReturn(test_node_id_node,
+                                                 0,
+                                                 test_ep_node);
+  attribute_store_get_node_type_ExpectAndReturn(test_ep_node,
+                                                ATTRIBUTE_ENDPOINT_ID);
+  attribute_store_get_node_child_ExpectAndReturn(test_node_id_node,
+                                                 0,
+                                                 test_ep_node);
+  attribute_store_is_value_defined_ExpectAndReturn(test_ep_node,
+                                                   REPORTED_ATTRIBUTE,
+                                                   1);
+  attribute_store_get_node_attribute_value_ExpectAndReturn(test_ep_node,
+                                                           REPORTED_ATTRIBUTE,
+                                                           NULL,
+                                                           NULL,
+                                                           SL_STATUS_OK);
+  attribute_store_get_node_attribute_value_IgnoreArg_value();
+  attribute_store_get_node_attribute_value_IgnoreArg_value_size();
+  static zwave_endpoint_id_t test_endpoint = 3;
+  static uint8_t test_endpoint_size        = sizeof(zwave_endpoint_id_t);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value(&test_endpoint);
+  attribute_store_get_node_attribute_value_ReturnThruPtr_value_size(
+    &test_endpoint_size);
+  const static char expected_base_topic_endpoint_id_list[]
+    = "ucl/by-unid/zw-DEADBEEF-0009";
+  uic_mqtt_dotdot_state_endpoint_id_list_publish_ExpectAndReturn(
+    expected_base_topic_endpoint_id_list,
+    test_endpoint_size,
+    &test_endpoint,
+    0xFF,
+    SL_STATUS_OK);
+  uic_mqtt_publish_Expect(expected_state_topic,
+                          expected_state_message_2,
+                          sizeof(expected_state_message_2) - 1,
+                          true);
+  network_status_update_callback_save(test_updated_node, ATTRIBUTE_UPDATED);
 }

@@ -68,10 +68,12 @@ sl_status_t uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
   sl_log_info(LOG_TAG, "# Unify build: %s\n", UIC_VERSION);
   ret = config_parse(argc, argv, version);
   if (ret) {
-    if (ret != CONFIG_STATUS_OK) {
+    if (ret == CONFIG_STATUS_INFO_MESSAGE) {
+      return SL_STATUS_PRINT_INFO_MESSAGE;
+    } else if (ret != CONFIG_STATUS_OK) {
       sl_log_critical(LOG_TAG, "Cannot initialize UIC Main - goodbye!\n");
+      return SL_STATUS_FAIL;
     }
-    return SL_STATUS_FAIL;
   }
   // Init log as early as possible after parsing config
   sl_log_read_config(NULL);

@@ -82,9 +82,9 @@ sl_status_t positioning_config_init(void)
                         "Configuration file containing positioning parameters",
                         "");
   status
-    |= config_add_string(CONFIG_KEY_POSITIONING_ANGLE_CORRECTION,
-                         "Enable/disable angle correction feedback feature",
-                         "");
+    |= config_add_bool(CONFIG_KEY_POSITIONING_ANGLE_CORRECTION,
+                       "Enable/disable angle correction feedback feature",
+                       true);
 
   if (status != CONFIG_STATUS_OK) {
     return SL_STATUS_FAIL;
@@ -403,6 +403,13 @@ void aoa_loc_on_correction_ready(aoa_asset_tag_t *tag,
                                  uint32_t loc_idx,
                                  aoa_correction_t *correction)
 {
+  bool enabled = true;
+  config_get_as_bool(CONFIG_KEY_POSITIONING_ANGLE_CORRECTION, &enabled);
+  if (!enabled) {
+    // Angle correction feedback is disabled.
+    return;
+  }
+
   const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t fields
     = {.direction.Azimuth   = correction->direction.azimuth,
        .direction.Elevation = correction->direction.elevation,

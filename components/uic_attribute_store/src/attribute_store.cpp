@@ -88,7 +88,7 @@ static inline void log_attribute_store_not_initialized()
 static inline void
   log_attribute_store_node_not_found(attribute_store_node_t node)
 {
-  sl_log_warning(LOG_TAG, "Cannot find ID %d in the Attribute Store.", node);
+  sl_log_debug(LOG_TAG, "Cannot find ID %d in the Attribute Store.", node);
 }
 
 /**

@@ -17,10 +17,23 @@
 // Unify component includes
 #include "datastore_fixt.h"
 #include "zpc_config.h"
+#include "datastore.h"
+#include "sl_log.h"
+
+#define LOG_TAG "zpc_datastore_fixt"
+sl_status_t print_recover_tool_info_if_needed();
 
 sl_status_t zpc_datastore_fixt_setup()
 {
-  return datastore_fixt_setup_and_handle_version(
-    zpc_get_config()->datastore_file,
-    ZPC_DATASTORE_VERSION);
+  sl_status_t res
+    = datastore_fixt_setup_and_handle_version(zpc_get_config()->datastore_file,
+                                              ZPC_DATASTORE_VERSION);
+
+  if (res != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG,
+                 "Please erase or recover your datastore using the ZPC "
+                 "datastore tools");
+  }
+
+  return res;
 }

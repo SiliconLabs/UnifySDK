@@ -85,7 +85,7 @@ To cancel an exclusion attempt, select the "Idle" option under the "States" butt
 When a network management is to be targetted for a particular node, the list of
 available commands is available in the node list page, under the **Commands** button.
 
-![Dev GUI action button](doc/assets/img/dev_gui_action_button.png)
+![Dev GUI commands button](doc/assets/img/dev_gui_commands_button.png)
 
 * Interview will perform a new node Interview
 * RemoveOffline will perform a Z-Wave Remove Failed Node.
@@ -114,7 +114,8 @@ The following table shows supported and controlled Z-Wave Command Classes by the
 | Battery                        |       3 |         |       x | N/A                         | Control Part is auto-generated. |
 | Binary Sensor                  |       1 |         |       x | N/A                         | Control Part is auto-generated. |
 | Binary Switch                  |       2 |         |       x | N/A                         |         |
-| Central Scene                  |       3 |         |       x | N/A                         |         |
+| Central Scene                  |       3 |         |       x | N/A                         | Partial control: key attributes are not displayed in the UI. |
+| Configuration                  |       4 |         |       x | N/A                         |         |
 | Device Reset Locally           |       1 |       x |       x | Network Scheme              |         |
 | Door Lock                      |       2 |         |       x | N/A                         | Control Part is auto-generated. |
 | Firmware Update                |       7 |       x |       x | Network Scheme              |         |
@@ -124,9 +125,9 @@ The following table shows supported and controlled Z-Wave Command Classes by the
 | Multi Channel                  |       4 |         |       x | N/A                         |         |
 | Multi Channel Association      |       3 |       x |       x | Network Scheme              |         |
 | Multi Command                  |       1 |       x |         | Unencrypted                 |         |
-| Multilevel Sensor              |      11 |         |       x | N/A                         |         |
+| Multilevel Sensor              |      11 |         |       x | N/A                         | Partial control: <br>1. Not all scales are supported<br>2. Not all types are shown in the UI. |
 | Multilevel Switch              |       4 |         |       x | N/A                         | Partial control: <br>1. we do not use start/stop level change.<br>2. we do not support the 0xFF duration |
-| Notification                   |       3 |         |       x | N/A                         | Partial Control: <br>1. No Push/Pull discovery is done.<br>2. No Pull sensor support. <br>3. Unknown types are not supported. <br>4. No Regular probing is done.  |
+| Notification                   |       8 |         |       x | N/A                         | Partial Control: <br>1. No Push/Pull discovery is done.<br>2. No Pull sensor support. <br>3. Unknown types are not supported. <br>4. No Regular probing is done.  |
 | Powerlevel                     |       1 |       x |         | Network Scheme              |         |
 | Security 0                     |       1 |       x |       x | Unencrypted                 |         |
 | Security 2                     |       1 |       x |       x | Unencrypted                 |         |
@@ -142,12 +143,13 @@ The following table shows supported and controlled Z-Wave Command Classes by the
 ### Association / Multi Channel Association Command Classes Information
 
 The ZPC supports the following Association Groups
-| Grouping Identifier            | Maximum Number of Associations | Group Name | Usage/Trigger     |
-| ------------------------------ | ------------------------------ | ---------- | ----------------- |
-| 1                              | 10                             | Lifeline   | Lifeline reports. |
+| Grouping Identifier            | Maximum Number of Associations | Group Name | Usage/Trigger                                       |
+| ------------------------------ | ------------------------------ | ---------- | --------------------------------------------------- |
+| 1                              | 10                             | Lifeline   | ZPC reset will issue a Device Reset Locally Command |
 
 The ZPC also controls the Association and Multi Channel Association. It only
-establishes lifeline associations.
+establishes lifeline associations or establishes association if some
+controlled command classes require it. (i.e. Notification, Central Scene, etc.)
 
 #### Node status
 
@@ -255,20 +257,56 @@ from the left menu on the Dev GUI.
 The state of the node is displayed for each entry, it only consist in
 the following attributes:
 
-* **SceneCount**: The total number of scenes/key attributes combinations that could
+* **Number of Scenes**: The total number of scenes/key attributes combinations that could
 be used by the supporting node.
-* **CurrentScene**: The active or last active scene. This is a unique number
-derived from the Scene Number and Key attribute combination.
+* **Current Scene**: The active or last active scene. This is a unique number
+derived from the Scene Number and Key attribute combination, it is in the range
+[0 ; **Number of Scenes** - 1]. The Scene is calculated as follow:
+*Current Scene = ((SceneID - 1) * Max Key Attribute) + (Key Attribute);*
 If no Central Scene Notification has been received yet, this value stays undefined.
-* **SceneValid**: Indicates if the Scene is active, meaning that the scene was
-activated within the last 5 seconds or is being activated (e.g. button is being
-held down). When this is set to false, it means that the *CurrentScene* attribute
-represents the last active scene.
+* **Current Scene valid**: Indicates if the Current Scene is active,
+meaning that the scene was activated within the last 5 seconds or is being
+activated (e.g. button is being held down). When this is set to false,
+it means that the *Current Scene* attribute represents the last active scene.
 
 
 #### Sending commands
 
 It is not possible to issue Central Scene commands to supporting nodes.
+
+### Configuration Command Class Information
+
+The ZPC controls the Configuration Command Class. It is possible to discover
+configuration parameters and set the parameter values. In addition, it is also
+possible to reset all configuration parameter values to their default values.
+
+#### Node status
+
+To see the state of the Configuration Command Class, one could select
+the Configuration Parameters page on the left menu of the Dev GUI.
+
+![Dev GUI Configuration Parameters Cluster](./doc/assets/img/dev_gui_configuration_parameters_cluster.png)
+
+The state of the node is displayed for each entry representing supported
+configuration parameter IDs. An example is shown in the following figure:
+
+![Dev GUI Configuration Parameters attribute state](./doc/assets/img/dev_gui_configuration_parameters_node_state.png)
+
+If the device support Configuration Command Class version 1 or 2, the user
+must initiate the discovery of the configuration parameters by using the
+DiscoverParameters command and indicate the configuration parameter IDs
+that are expected to be supported by the supporting node.
+
+![Dev GUI DiscoverParameters command](./doc/assets/img/dev_gui_configuration_discover_parameters_command.png)
+
+#### Sending commands
+
+To set the configuration parameter value, one could select SetParameter command
+and insert the configuration parameter ID and desired value. However, it is not
+possible to set the parameter to its default value using "Default" bit flag.
+
+The DefaultResetAllParameters is available from version 4 and will request
+the supporting node to reset all its configuration parameters to their default value.
 
 ### Device Reset Locally Command Class Information
 
@@ -413,9 +451,86 @@ A pop-up will appear, asking about the parameters.
 * OnOffTransitionTime: Transition time, in tenth of seconds, from 0 to 65534.
 The transition time will be floored to the nearest Z-Wave supported value.
 
+It is not possible to specify the 0xFF duration for Multilevel Switch Set
+Commands.
+
 For example, this command will instruct to go to 50% in 25 seconds.
+
 ![Dev GUI level send a Set Command](./doc/assets/img/dev_gui_send_multilevel_command.png)
 
+It is not possible to issue Multilevel Switch Start/Stop level change.
+
+### Notification Command Class Information
+
+The ZPC controls the Notification Command Class partially.
+It is possible to get some information from nodes sending notifications
+states/events to the ZPC.
+
+Due to the very diverse nature of the Notifications states and events that
+can be reported via the Command Class, information from the command class is
+displayed in a few different places in the
+[Dev GUI](./md_applications_dev_ui_dev_gui_readme_user.html).
+
+
+#### Node status
+
+The following event/states are visible in the Dev GUI.
+
+##### OccupancySensing
+
+The following notifications states/events will be shown in the OccupancySensing
+cluster (displayed as Binary Sensors):
+
+![Dev GUI Occupancy Sensing Cluster](./doc/assets/img/dev_gui_occupancy_sensing_cluster.png)
+
+The occupancy sensing attribute is shown in the **State** column of the
+table:
+
+![Dev GUI Occupancy Sensing Occupied](./doc/assets/img/dev_gui_occupancy_sensing_occupied.png)
+![Dev GUI Occupancy Sensing UnOccupied](./doc/assets/img/dev_gui_occupancy_sensing_unoccupied.png)
+
+
+The occupancy sensing will be shown as Occupied when receiving:
+
+* Home Security - Motion Detection
+* Home Security - Motion Detection with location
+* Home Security - Intrusion
+* Home Security - Intrusion (location provided)
+* Acces Control - Door window open
+
+
+The occupancy sensing will be shown as UnOccupied when receiving:
+
+* Home Security - State Idle (Motion Detection)
+* Home Security - State Idle (Motion Detection with location)
+* Home Security - State Idle (Intrusion)
+* Home Security - State Idle (Intrusion location provided)
+* Acces Control - Door window closed
+
+##### IASZone
+
+The following notifications states/events will be shown in the IASZone
+cluster.
+
+![Dev GUI Occupancy IASZone Cluster](./doc/assets/img/dev_gui_ias_zone_cluster.png)
+
+The state of an IASZone is shown in the **Zone Status** column of the
+table, with a JSON representation:
+
+![Dev GUI Occupancy IASZone zone status](./doc/assets/img/dev_gui_ias_zone_status.png)
+
+The following notification will be mapped to the following bits:
+
+* CO alarm - Carbon Monoxide detected -> Alarm1
+* Smoke alarm - Smoke detected -> Alarm1
+* Home Security - Motion detected -> Alarm2
+* Home Security - Intrusion -> Alarm1
+* Home Security - Tampering -> Tamper
+* Water Alarm - Leak detected -> Alarm1
+
+#### Sending commands
+
+It is not possible to send commands for the Notification Command Class.
 
 ### Security 0 - Security 2 Command Classes Information
 
@@ -469,19 +584,43 @@ Class.
 
 #### Sending commands
 
-To change the Thermostat Mode, you have to click on the wrench icon and modify
-the attributes values in the dialog.
+There are 2 available commands for Thermotats by default:
+* WriteAttributes (wrench icon)
+* SetpointRaiseOrLower
 
+##### WriteAttributes Command
+
+To change the Thermostat Mode and/or setpoints, you have to click on the
+wrench icon and modify the attributes values in the dialog.
 
 ![Dev GUI Thermostat send Set Command](./doc/assets/img/dev_gui_send_thermostat_command.png)
+
+In the Thermostat Attributes dialog,
+all temperatures are in centi-celcius (1/100 of a Celcius degree)
 
 * Heating Setpoint will trigger a Thermostat Setpoint Set with the temperature
 for the indicated mode.
 * Cooling Setpoint will trigger a Thermostat Setpoint Set with the temperature
 for the indicated mode.
-* System Mode will trigger a Thermostat Mode Set with the indicated mode.
+* System Mode will trigger a Thermostat Mode Set with the indicated mode. The
+  Following values can be configured (and will be sent to the device if supported):
+  * Off
+  * Auto
+  * Cool
+  * Heat
 
-All temperatures are in centi-celcius (1/100 of a Celcius degree)
+##### SetpointRaiseOrLower Command
+
+The SetpointRaiseOrLower command will apply an offset to the current
+setpoint(s).
+
+![Dev GUI Thermostat send Set Command](./doc/assets/img/dev_gui_send_thermostat_raise_or_lower_command.png)
+
+The "Amount" is the offset in deci-celcius (1/10 of a Celcius degree) to offset
+the current cool, heat or both setpoints. For example, if a user selects
+Both and -17 in the amount, it will lower both the cool and heat setpoints
+by 1.7 degrees.
+
 
 ## SmartStart Information
 
@@ -506,6 +645,12 @@ In the example above, the third entry will not be included upon inclusion reques
 
 The **Unid** field indicates the unique identifier assigned to the node.
 A non-empty value means that it is included in our network.
+
+If the ZPC detected that the node is included in another network and needs to be
+either excluded manually or reset to default before joining our network,
+a small warning icon will be shown in the "Include" column.
+
+![Dev GUI SmartStart list manual intervention required](./doc/assets/img/dev_gui_smart_start_list_manual_intervention_required.png)
 
 ### Modifying SmartStart List Entries
 

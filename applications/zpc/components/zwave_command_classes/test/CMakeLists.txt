@@ -27,9 +27,7 @@ target_add_unittest(
   NAME
   zwave_command_classes_fixt_test
   SOURCES
-  zwave_command_classes_fixt.c
-  DEPENDS
-  ${MOCK_LIBS})
+  zwave_command_classes_fixt_test.c)
 
 target_add_unittest(
   zwave_command_classes
@@ -205,7 +203,8 @@ target_add_unittest(
   zpc_attribute_resolver_mock
   zpc_config_mock
   zwave_tx_scheme_selector_mock
-  zwave_tx_mock)
+  zwave_tx_mock
+  uic_dotdot_mqtt_mock)
 
 # Device Reset Locally test
 target_add_unittest(
@@ -238,6 +237,25 @@ target_add_unittest(
   zwave_tx_mock
   zwave_unid_mock)
 
+# Z-Wave Command Class generic tests with real attribute store.
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_classes_generic_tests
+  SOURCES
+  zwave_command_classes_generic_tests.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_command_handler_mock
+  zwave_controller_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zpc_config_mock
+  zwave_tx_scheme_selector_mock
+  zwave_tx_mock
+)
+
 # Central Scene Command Class test
 target_add_unittest(
   zwave_command_classes
@@ -257,6 +275,21 @@ target_add_unittest(
   zwave_tx_scheme_selector_mock
   zwave_tx_mock
   uic_dotdot_mqtt_mock)
+
+# Configuration Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_configuration_control_test
+  SOURCES
+  zwave_command_class_configuration_control_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zwave_network_management_mock)
 
 # Z-Wave Multilevel Switch Command Class test
 target_add_unittest(

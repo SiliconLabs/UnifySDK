@@ -25,8 +25,7 @@ add_custom_command(
   COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/. .
   COMMAND ${NPM_EXECUTABLE} version
           ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV}
-  COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps --loglevel
-          silent # With yarn 38s with npm 69s change
+  COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps # With yarn 38s with npm 69s change
   COMMAND ${NPM_EXECUTABLE} run build
   USES_TERMINAL)
 

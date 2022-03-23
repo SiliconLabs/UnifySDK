@@ -29,6 +29,15 @@ include(cmake/include/package.cmake)
 include(cmake/include/uic_helper.cmake)
 
 enable_language(Rust)
+set(RUST_MIN_VERSION 1.58.1)
+if(CMAKE_Rust_COMPILER_VERSION VERSION_LESS RUST_MIN_VERSION)
+  message(
+    FATAL_ERROR
+      "Rust version is ${CMAKE_Rust_COMPILER_VERSION}, expect at least ${RUST_MIN_VERSION},
+      please update using 'rustup update' or similar,
+      see https://www.rust-lang.org/tools/install documentation for further details."
+  )
+endif()
 include(CMakeCargo)
 # ##############################################################################
 # Global includes

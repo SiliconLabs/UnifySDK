@@ -33,21 +33,9 @@ target_include_directories(
 
 install(TARGETS zwave_s2 LIBRARY DESTINATION lib)
 
-if(ZWAVE_BUILD_SYSTEM EQUAL 1)
-
-  target_include_directories(
-    zwave_s2
-    PUBLIC ${SUPER_DIR}/protocol/z-wave/Components/Assert
-    PRIVATE
-      ${SUBTREE_LIBS2}/include
-      ${SUPER_DIR}/util/third_party/crypto/mbedtls/3rdparty/everest/include/everest/kremlin
-  )
-
-else() # UNIFY SECTION
-
+IF(NOT ZWAVE_BUILD_SYSTEM EQUAL 1)
   add_subdirectory(libs/zw-libs2)
-
-endif() # End of differentiation
+ENDIF()
 
 target_link_libraries(
   zwave_s2

@@ -54,6 +54,22 @@ function(get_target_triple CARGO_TARGET_TRIPLE)
   endif()
 endfunction()
 
+function(rust_build_profile CARGO_PROFILE)
+  if(CMAKE_BUILD_TYPE MATCHES "Release")
+    set(CARGO_PROFILE
+        "release"
+        PARENT_SCOPE)
+  elseif(CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
+    set(CARGO_PROFILE
+        "RelWithDebInfo"
+        PARENT_SCOPE)
+  else()
+    set(CARGO_PROFILE
+        "dev"
+        PARENT_SCOPE)
+  endif()
+endfunction()
+
 function(rust_output_filename CARGO_META_PACKAGE OUT_FILE)
   string(JSON TARGET_NAME GET ${CARGO_META_PACKAGE} "name")
   rust_get_build_type(${CARGO_META_PACKAGE} TARGET_TYPE)
@@ -85,11 +101,14 @@ function(rust_output_file CARGO_META_PACKAGE OUT_FILE)
 endfunction()
 
 function(rust_native_target_dir CARGO_META_PACKAGE OUT_DIR)
-  set(BUILD_TYPE "release")
+  rust_build_profile(CARGO_PROFILE)
+  if(CARGO_PROFILE MATCHES "dev")
+    set(CARGO_PROFILE "debug")
+  endif()
 
   string(JSON CARGO_NATIVE_TARGET_DIR GET ${CARGO_METADATA} "target_directory")
   set(${OUT_DIR}
-      "${CARGO_NATIVE_TARGET_DIR}/${CARGO_TARGET_TRIPLE}/${BUILD_TYPE}"
+      "${CARGO_NATIVE_TARGET_DIR}/${CARGO_TARGET_TRIPLE}/${CARGO_PROFILE}"
       PARENT_SCOPE)
 endfunction()
 

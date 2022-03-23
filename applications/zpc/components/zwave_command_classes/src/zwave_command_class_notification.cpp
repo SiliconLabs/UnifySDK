@@ -572,7 +572,7 @@ static sl_status_t zwave_command_class_notification_control_handler(
   if (frame_length <= COMMAND_INDEX) {
     return SL_STATUS_FAIL;
   }
-  if (frame_data[COMMAND_CLASS_INDEX] != COMMAND_CLASS_NOTIFICATION_V4) {
+  if (frame_data[COMMAND_CLASS_INDEX] != COMMAND_CLASS_NOTIFICATION_V8) {
     return SL_STATUS_NOT_SUPPORTED;
   }
 
@@ -616,7 +616,7 @@ void zwave_command_class_notification_on_version_attribute_update(
   }
 
   if (is_zwave_command_class_filtered_for_root_device(
-        COMMAND_CLASS_NOTIFICATION_V3,
+        COMMAND_CLASS_NOTIFICATION_V8,
         updated_node)
       == true) {
     return;
@@ -665,8 +665,8 @@ static sl_status_t zwave_command_class_notification_get(
 {
   auto notification_get_frame
     = reinterpret_cast<ZW_NOTIFICATION_GET_V4_FRAME *>(frame);
-  notification_get_frame->cmdClass    = COMMAND_CLASS_NOTIFICATION_V4;
-  notification_get_frame->cmd         = NOTIFICATION_GET_V4;
+  notification_get_frame->cmdClass    = COMMAND_CLASS_NOTIFICATION_V8;
+  notification_get_frame->cmd         = NOTIFICATION_GET_V8;
   notification_get_frame->v1AlarmType = 0x00;
   // read the Notification type
   uint8_t notification_type;
@@ -720,8 +720,8 @@ static sl_status_t zwave_command_class_supported_event_get(
 {
   ZW_EVENT_SUPPORTED_GET_V4_FRAME *supported_event_get_frame
     = (ZW_EVENT_SUPPORTED_GET_V4_FRAME *)frame;
-  supported_event_get_frame->cmdClass = COMMAND_CLASS_NOTIFICATION_V4;
-  supported_event_get_frame->cmd      = EVENT_SUPPORTED_GET_V4;
+  supported_event_get_frame->cmdClass = COMMAND_CLASS_NOTIFICATION_V8;
+  supported_event_get_frame->cmd      = EVENT_SUPPORTED_GET_V8;
   // read the Notification type
   uint8_t notification_type;
   attribute_store_read_value(attribute_store_get_node_parent(node),
@@ -738,8 +738,8 @@ static sl_status_t zwave_command_class_supported_notification_types_get(
 {
   ZW_NOTIFICATION_SUPPORTED_GET_V4_FRAME *supported_notification_get_frame
     = (ZW_NOTIFICATION_SUPPORTED_GET_V4_FRAME *)frame;
-  supported_notification_get_frame->cmdClass = COMMAND_CLASS_NOTIFICATION_V4;
-  supported_notification_get_frame->cmd      = NOTIFICATION_SUPPORTED_GET_V4;
+  supported_notification_get_frame->cmdClass = COMMAND_CLASS_NOTIFICATION_V8;
+  supported_notification_get_frame->cmd      = NOTIFICATION_SUPPORTED_GET_V8;
   *frame_len = sizeof(ZW_NOTIFICATION_SUPPORTED_GET_V4_FRAME);
   return SL_STATUS_OK;
 }
@@ -773,16 +773,16 @@ sl_status_t zwave_command_class_notification_init()
   // Tell AGI that we want to receive Notification Reports
   // via assocation groups
   zwave_command_class_agi_request_to_establish_association(
-    COMMAND_CLASS_NOTIFICATION_V3,
-    NOTIFICATION_REPORT_V4);
+    COMMAND_CLASS_NOTIFICATION_V8,
+    NOTIFICATION_REPORT_V8);
 
   // Register Notification CC handler to the Z-Wave CC framework
   zwave_command_handler_t handler = {};
   handler.support_handler         = nullptr;
   handler.control_handler = &zwave_command_class_notification_control_handler;
   handler.minimal_scheme  = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
-  handler.command_class   = COMMAND_CLASS_NOTIFICATION_V3;
-  handler.version         = NOTIFICATION_VERSION_V3;
+  handler.command_class   = COMMAND_CLASS_NOTIFICATION_V8;
+  handler.version         = NOTIFICATION_VERSION_V8;
   handler.manual_security_validation = false;
   handler.command_class_name         = "Notification";
   handler.comments                   = "Partial Control: <br>"

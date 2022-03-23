@@ -1,19 +1,22 @@
-// License
-// <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
-
+///////////////////////////////////////////////////////////////////////////////
+// # License
+// <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
 // The licensor of this software is Silicon Laboratories Inc. Your use of this
 // software is governed by the terms of Silicon Labs Master Software License
 // Agreement (MSLA) available at
 // www.silabs.com/about-us/legal/master-software-license-agreement. This
 // software is distributed to you in Source Code format and is governed by the
 // sections of the MSLA applicable to Source Code.
+//
+///////////////////////////////////////////////////////////////////////////////
 #![doc(html_no_source)]
 
 extern crate glob;
 use self::glob::glob;
 
 mod logging;
-use clap::{App, Arg};
+use clap::{Arg, Command};
 use logging::Logging;
 use serde::{Deserialize, Serialize};
 use std::env;
@@ -45,7 +48,7 @@ impl Display for ReadError {
 }
 
 fn main() {
-    let matches = App::new("Unify Binding generator")
+    let matches = Command::new("Unify Binding generator")
             .about("generates rust binding files based on an input config. this config is generated from cmake code. see cmake function `generate_bindings`")
             .arg(Arg::new("verbose")
             .short('v')
@@ -174,7 +177,9 @@ impl BindingsTarget {
             .clang_arg("-v")
             .respect_cxx_access_specs(true)
             .layout_tests(false)
-            .generate_comments(false);
+            .generate_comments(false)
+            .use_core()
+            .ctypes_prefix("ctypes");
 
         if let Some(allow) = &self.allow_list {
             bindings = bindings

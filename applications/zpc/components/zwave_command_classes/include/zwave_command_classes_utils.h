@@ -26,6 +26,7 @@
 
 // ZPC includes
 #include "zwave_controller_connection_info.h"
+#include "zwave_command_class_generic_types.h"
 
 // Interfaces
 #include "zwave_generic_types.h"
@@ -49,13 +50,6 @@ typedef struct zwave_minimum_frame {
   uint8_t command_class;
   uint8_t command;
 } zwave_minimum_frame_t;
-
-///< Values that can be used for "Umbrella" attributes
-typedef enum {
-  FINAL_STATE             = 0,
-  NEEDS_ONE_COMMAND       = 1,
-  NEEDS_MULTIPLE_COMMANDS = 2,
-} command_status_values_t;
 
 // Helper macros
 #define FAHRENHEIT_TO_DEGREES(value) ((value - 32.0F) * 5 / 9);
@@ -101,6 +95,37 @@ attribute_store_node_t zwave_command_class_get_node_id_node(
 attribute_store_node_t
   zwave_command_class_get_endpoint_id_node(zwave_node_id_t node_id,
                                            zwave_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Verifies if a node has some Reports to Follow.
+ *
+ * @param node  Attribute Store node under which we want to check if there
+ *              are some reports to follow.
+ * @returns true if there is at least 1 report to follow. False otherwise
+ */
+bool has_reports_to_follow(attribute_store_node_t node);
+
+/**
+ * @brief Gets the number of Reports to Follow for a node.
+ *
+ * @param node  Attribute Store node under which we want to check if there
+ *              are some reports to follow.
+ * @returns A value if there is at least 1 report to follow. 0 otherwise
+ */
+reports_to_follow_t get_reports_to_follow(attribute_store_node_t node);
+
+/**
+ * @brief Places a ATTRIBUTE_REPORTS_TO_FOLLOW attribute under an attribute if
+ * it does not exist and set it to the requested reports_to_follow value
+ *
+ * @param node                  Attribute Store node under which to set a
+ *                              reports to follow value.
+ * @param reports_to_follow     The value to set in the
+ *                              ATTRIBUTE_REPORTS_TO_FOLLOW attribute
+ * @returns sl_status_t
+ */
+sl_status_t set_reports_to_follow(attribute_store_node_t node,
+                                  reports_to_follow_t reports_to_follow);
 
 /**
  * @brief function to send report frames with default tx options.

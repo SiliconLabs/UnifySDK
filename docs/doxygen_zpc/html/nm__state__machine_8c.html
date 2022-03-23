@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -160,9 +160,11 @@ Functions</h2></td></tr>
 <tr class="memdesc:ae1af27db11f897fa2a93aca3f74f5d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">a helper function that referesh nms cashed home_id.  <a href="nm__state__machine_8c.html#ae1af27db11f897fa2a93aca3f74f5d0c">More...</a><br /></td></tr>
 <tr class="separator:ae1af27db11f897fa2a93aca3f74f5d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ca6282aededa49fa6472a23794ce30a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a7ca6282aededa49fa6472a23794ce30a">network_management_refresh_cached_node_list</a> ()</td></tr>
+<tr class="memdesc:a7ca6282aededa49fa6472a23794ce30a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Asks the Z-Wave API about the list of NodeIDs in our network.  <a href="nm__state__machine_8c.html#a7ca6282aededa49fa6472a23794ce30a">More...</a><br /></td></tr>
 <tr class="separator:a7ca6282aededa49fa6472a23794ce30a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b5c26f6c71ac08e30c67ffa7b07b8de"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#a1b5c26f6c71ac08e30c67ffa7b07b8de">dispatch_node_added</a> (bool refresh_node_cache)</td></tr>
-<tr class="separator:a1b5c26f6c71ac08e30c67ffa7b07b8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9725af53f46d47041ed76276f01b39c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#af9725af53f46d47041ed76276f01b39c">dispatch_node_added</a> ()</td></tr>
+<tr class="memdesc:af9725af53f46d47041ed76276f01b39c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tell the Z-Wave Controller that a Network Inclusion operation has completed and returns the NM state machine to IDLE.  <a href="nm__state__machine_8c.html#af9725af53f46d47041ed76276f01b39c">More...</a><br /></td></tr>
+<tr class="separator:af9725af53f46d47041ed76276f01b39c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcdc17538148dcf4141793a866836aae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nm__state__machine_8c.html#abcdc17538148dcf4141793a866836aae">on_new_network</a> (<a class="el" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail)</td></tr>
 <tr class="memdesc:abcdc17538148dcf4141793a866836aae"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called at the end of a set default or after learnmode.  <a href="nm__state__machine_8c.html#abcdc17538148dcf4141793a866836aae">More...</a><br /></td></tr>
 <tr class="separator:abcdc17538148dcf4141793a866836aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -292,8 +294,8 @@ License</h1>
 
 </div>
 </div>
-<a id="a1b5c26f6c71ac08e30c67ffa7b07b8de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b5c26f6c71ac08e30c67ffa7b07b8de">&#9670;&nbsp;</a></span>dispatch_node_added()</h2>
+<a id="af9725af53f46d47041ed76276f01b39c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9725af53f46d47041ed76276f01b39c">&#9670;&nbsp;</a></span>dispatch_node_added()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -304,8 +306,7 @@ License</h1>
         <tr>
           <td class="memname">static void dispatch_node_added </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>refresh_node_cache</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -315,6 +316,8 @@ License</h1>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Tell the Z-Wave Controller that a Network Inclusion operation has completed and returns the NM state machine to IDLE. </p>
 
 </div>
 </div>
@@ -437,6 +440,9 @@ License</h1>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Asks the Z-Wave API about the list of NodeIDs in our network. </p>
+<p>Should be used only when necessary, as communicating with the Z-Wave API is slow. </p>
 
 </div>
 </div>
@@ -974,7 +980,7 @@ License</h1>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_4c7246e6a1b2917f2d670822ca0c83f7.html">zwave_network_management</a></li><li class="navelem"><a class="el" href="dir_140a5582e5dd5795b7b4430df83ea200.html">src</a></li><li class="navelem"><a class="el" href="nm__state__machine_8c.html">nm_state_machine.c</a></li>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:22 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:41 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

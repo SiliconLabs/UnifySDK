@@ -204,3 +204,16 @@ bool emberAfPluginZclFrameworkCoreEzspErrorCallback(EzspStatus status)
 
   return false;
 }
+
+//STANDALONE_BOOTLOADER_RESET_MODE is 0
+//STANDALONE_BOOTLOADER_NORMAL_MODE is 1
+EmberStatus zigbeeHostLaunchBootloader()
+{
+    EmberStatus status = 
+        ezspLaunchStandaloneBootloader(1);
+
+    ezspClose();
+    //emberAfCoreFlush(); alternatively will work
+
+    return status;
+}

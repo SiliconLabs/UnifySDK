@@ -21,11 +21,13 @@ target_link_libraries(network_monitor
     uic_mqtt
     zpc_utils
     ucl_mqtt_node_interview
+    ucl_node_state
     zcl_cluster_servers
     ucl_definitions
     zwave_controller
     uic_smartstart_management
     zwave_volatile_attr_poll_manager_target
+    uic_attribute_utils
 )
 
 add_subdirectory(test)

@@ -36,10 +36,11 @@ left saying **Nodes**. At that point, the page should look like this:
 
 ## Node Inclusion
 
-After connecting you should be able to see current running the protocol controllers
+After connecting you should be able to see the discovered protocol controllers (_PC_)
 in the nodes list, as shown in the image above.
-You can do a normal node inclusion by pressing **Add** on the table for the
-_PC_. This will set the _PC_ in inclusion mode. After activating inclusion mode
+You can do a normal node inclusion by pressing **Add** in the dropdown,
+on the right hand side of the row for the _PC_.
+This will set the _PC_ in inclusion mode. After activating inclusion mode
 on the end device, a secure inclusion window may pop up depending on the
 security capabilities of the device:
 
@@ -111,7 +112,7 @@ lock:
 
 The thermostat can change mode and change set point temperatures.
 
-![Door Lock Pin](doc/assets/img/thermostat_modes.PNG)
+![Thermostat Set attributes](doc/assets/img/thermostat_modes.PNG)
 
 ## Groups
 

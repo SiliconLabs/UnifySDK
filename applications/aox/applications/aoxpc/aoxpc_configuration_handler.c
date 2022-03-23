@@ -100,6 +100,9 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
   aoa_cte_type_t cte_mode;
   struct sl_rtl_loc_locator_item item;
   CoordinateAndOrientation position = {};
+  uint8_t *antenna_switch_pattern = NULL;
+  uint8_t antenna_switch_pattern_size = 0;
+  enum sl_rtl_aox_array_type antenna_array_type;
 
 #ifdef AOA_ANGLE
   float mask_min                   = 0;
@@ -154,33 +157,45 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
                 aox_mode_string[angle_config->aox_mode]);
     // TBD: AoX Mode is not supported in MQTT; do nothing?
   }
+#endif
 
-  sc = aoa_parse_antenna_mode(&angle_config->array_type, locator_unid);
+  sc = aoa_parse_antenna_mode(&antenna_array_type, locator_unid);
   if (sc == SL_STATUS_OK) {
     sl_log_info(LOG_TAG,
                 "Antenna mode set to: %s",
-                antenna_type_string[angle_config->array_type]);
+                antenna_type_string[antenna_array_type]);
     // TBD: Antenna Mode is not supported in MQTT; do nothing?
-  }
+#ifdef AOA_ANGLE
+    sc = antenna_array_init(&angle_config->antenna_array, antenna_array_type);
+    if (sc != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG,
+                   "antenna_array_init failed for %s",
+                    antenna_type_string[antenna_array_type]);
+    }
 #endif
+  }
 
-  sc = aoa_parse_antenna_array(&aoa_cte_config.switching_pattern,
-                               &aoa_cte_config.switching_pattern_length,
+  sc = aoa_parse_antenna_array(&antenna_switch_pattern,
+                               &antenna_switch_pattern_size,
                                locator_unid);
 
   if (sc == SL_STATUS_OK) {
-#ifdef AOA_ANGLE
-    sc = aoa_parse_antenna_array(&angle_config->switching_pattern,
-                                 &angle_config->switching_pattern_length,
-                                 locator_unid);
-#endif
-    if (sc == SL_STATUS_OK) {
-      sl_log_info(LOG_TAG, "Antenna array set to: ");
-      for (uint8_t i = 0; i < aoa_cte_config.switching_pattern_length; i++) {
-        sl_log_info(LOG_TAG, "%d,", aoa_cte_config.switching_pattern[i]);
-      }
-      // TBD: Antenna array is not supported in MQTT; do nothing?
+    sl_log_info(LOG_TAG, "Antenna array set to: ");
+    for (uint8_t i = 0; i < antenna_switch_pattern_size; i++) {
+      sl_log_info(LOG_TAG, "%d,", antenna_switch_pattern[i]);
     }
+    // TBD: Antenna array is not supported in MQTT; do nothing?
+#ifdef ANGLE
+    sc = antenna_array_set_pattern(&angle_config->antenna_array,
+                                  antenna_switch_pattern,
+                                  antenna_switch_pattern_size);
+    if (sc != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG,
+                   "antenna_array_set_pattern failed with size %d",
+                   antenna_switch_pattern_size);
+    }
+#endif
+    free(antenna_switch_pattern);
   }
 
 #ifdef AOA_ANGLE
@@ -199,16 +214,6 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
                 "Angle filtering weight set to: %f",
                 angle_config->angle_filtering_weight);
     // TBD: Angle filtering weight is not supported in MQTT; do nothing?
-  }
-
-  sc = aoa_parse_simple_config(&angle_config->period_samples,
-                               "periodSamples",
-                               locator_unid);
-  if (sc == SL_STATUS_OK) {
-    sl_log_info(LOG_TAG,
-                "Sample period set to: %d",
-                angle_config->period_samples);
-    // TBD: Sample period is not supported in MQTT; do nothing?
   }
 
   sc = aoa_parse_simple_config(&angle_config->angle_correction_timeout,

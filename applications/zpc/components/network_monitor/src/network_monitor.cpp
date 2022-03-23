@@ -20,12 +20,25 @@
 // Includes from this component
 #include "network_monitor.h"
 #include "network_monitor_span_persistence.h"
+#include "failing_node_monitor.h"
 
 // Interfaces
 #include "ucl_definitions.h"
 #include "zwave_command_class_wake_up_types.h"
+#include "attribute_store_defined_attribute_types.h"
 
-// Includes from other components
+// Unify Components
+#include "uic_mqtt.h"
+#include "sl_log.h"
+#include "attribute_store_helper.h"
+#include "attribute.hpp"
+#include "attribute_timeouts.h"
+#include "attribute_resolver.h"
+
+// Contiki
+#include "sys/clock.h"
+
+// ZPC components
 #include "zpc_endian.h"
 #include "zwave_api.h"
 #include "zwave_utils.h"
@@ -36,24 +49,15 @@
 #include "zwave_controller_utils.h"
 #include "zwave_command_classes_fixt.h"
 #include "zwave_unid.h"
-#include "sl_log.h"
 #include "zwave_tx_scheme_selector.h"
-#include "uic_mqtt.h"
 #include "zpc_converters.h"
-#include "sys/clock.h"
-#include "sys/ctimer.h"
 #include "zpc_config.h"
 #include "ucl_mqtt_node_interview.h"
 #include "zwave_controller_storage.h"
 #include "zcl_cluster_servers.h"
+#include "ucl_node_state.h"
 
 #include "zpc_attribute_store_network_helper.h"
-#include "attribute_store_defined_attribute_types.h"
-#include "attribute_store_helper.h"
-#include "attribute_resolver.h"
-
-#include "attribute.hpp"
-#include "failing_node_monitor.h"
 
 // Setup the logging
 #define LOG_TAG "network_monitor"
@@ -115,25 +119,7 @@ struct node_id_assigned_event_data {
   zwave_protocol_t inclusion_protocol;
 };
 
-struct network_monitor_sleeping_node_info {
-  struct ctimer timer;
-  wake_up_interval_t wakeup_interval;
-  zwave_node_id_t node_id;
-  bool
-    network_status;  // Status that represents the availability of the sleeping node
-                     // if the node is not responding this flag shall be false.
-
-  ~network_monitor_sleeping_node_info()
-  {
-    //make sure there is no running timers on this object when its deleted
-    ctimer_stop(&timer);
-  }
-};
-
 static std::map<zwave_node_id_t, uint8_t> failed_transmission_data;
-static std::map<zwave_node_id_t,
-                std::shared_ptr<network_monitor_sleeping_node_info>>
-  sleeping_nodes_status;
 
 // Private variables
 static unid_t zpc_unid;
@@ -148,7 +134,7 @@ static void network_monitor_on_node_deleted(zwave_node_id_t node_id);
 static void network_monitor_on_node_added(sl_status_t status,
                                           const zwave_node_info_t *nif,
                                           zwave_node_id_t node_id,
-                                          zwave_dsk_t dsk,
+                                          const zwave_dsk_t dsk,
                                           zwave_keyset_t granted_keys,
                                           zwave_kex_fail_type_t kex_fail_type,
                                           zwave_protocol_t inclusion_protocol);
@@ -173,12 +159,6 @@ static void
 
 static void
   network_monitor_on_frame_transmission_success(zwave_node_id_t node_id);
-
-static void network_monitor_wakeup_interval_attribute_update(
-  attribute_store_node_t updated_node, attribute_store_change_t change);
-
-static void
-  network_monitor_sleeping_nodes_network_status_controller(void *data);
 
 static void network_monitor_on_frame_received(zwave_node_id_t node_id);
 
@@ -208,16 +188,6 @@ static void
   } else {
     network_monitor_on_frame_transmission_failed(node_id);
   }
-}
-
-static attribute_store_node_t
-  attribute_store_node_from_zwave_node(zwave_node_id_t node_id)
-{
-  // Convert our node_id to a UNID:
-  unid_t unid;
-  zwave_unid_from_node_id(node_id, unid);
-  // Find out attribute store node based on the UNID
-  return attribute_store_network_helper_get_node_id_node(unid);
 }
 
 static void
@@ -264,7 +234,7 @@ static void network_monitor_on_node_deleted(zwave_node_id_t node_id)
 static void network_monitor_on_node_added(sl_status_t status,
                                           const zwave_node_info_t *nif,
                                           zwave_node_id_t node_id,
-                                          zwave_dsk_t dsk,
+                                          const zwave_dsk_t dsk,
                                           zwave_keyset_t granted_keys,
                                           zwave_kex_fail_type_t kex_fail_type,
                                           zwave_protocol_t inclusion_protocol)
@@ -479,7 +449,7 @@ static void network_monitor_remove_attribute_store_node(zwave_node_id_t node_id)
                node_id);
   // Find out attribute store node based on the zwave_node_id_t
   attribute_store_node_t node_id_node
-    = attribute_store_node_from_zwave_node(node_id);
+    = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
   // Clear resolution listener on the node
   attribute_resolver_clear_resolution_listener(
@@ -498,10 +468,10 @@ static void network_monitor_remove_attribute_store_node(zwave_node_id_t node_id)
 static attribute network_monitor_add_attribute_store_node(
   zwave_node_id_t node_id, node_state_topic_state_t network_status)
 {
-  sl_log_debug(
-    LOG_TAG,
-    "Making sure that NodeID %d (with endpoint 0) is in the Attribute Store.",
-    node_id);
+  sl_log_debug(LOG_TAG,
+               "Making sure that NodeID %d (with endpoint 0) "
+               "is in the Attribute Store.",
+               node_id);
   unid_t unid;
   zwave_unid_from_node_id(node_id, unid);
   attribute attr_node_id_node(
@@ -517,6 +487,99 @@ static attribute network_monitor_add_attribute_store_node(
       .set_reported<node_state_topic_state_t>(network_status);
   }
   return attr_node_id_node;
+}
+
+/**
+ * @brief Checks if we had a long tx/rx inactivity that would result in
+ * an NL node falling asleep.
+ *
+ * @param node_id         Attribute Store Node for the NodeID
+ *
+ * @returns true if the last tx/rx is too old and we should consider the node
+ *          asleep now.
+ */
+static bool network_monitor_is_node_asleep_due_to_inactivity(
+  attribute_store_node_t node_id_node)
+{
+  unsigned long current_time = clock_seconds();
+  unsigned long last_rx_tx   = 0;
+  attribute_store_node_t last_tx_rx_node
+    = attribute_store_get_node_child_by_type(
+      node_id_node,
+      ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
+      0);
+  attribute_store_get_reported(last_tx_rx_node,
+                               &last_rx_tx,
+                               sizeof(last_rx_tx));
+
+  return ((current_time - last_rx_tx) > 10);
+}
+
+/**
+ * @brief Makes the Network status transition to Offline for a node
+ *
+ * If the node is interviewing, it will be placed in "offline interview failed",
+ * else just offline.
+ *
+ * @param node_id_node Attribute Store Node for the NodeID
+ */
+static void
+  network_monitor_mark_node_as_offline(attribute_store_node_t node_id_node)
+{
+  zwave_node_id_t node_id = 0;
+  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
+  sl_log_debug(LOG_TAG,
+               "NodeID %d is now considered as failing/offline",
+               node_id);
+
+  node_state_topic_state_t network_status
+    = get_node_network_status(node_id_node);
+  node_state_topic_state_t new_status = NODE_STATE_TOPIC_STATE_OFFLINE;
+  if (network_status == NODE_STATE_TOPIC_INTERVIEWING) {
+    // If the network status was interviewing and the frame transmission failed
+    // Set it to Failed interview, so we try again a ful interview when it responds again
+    new_status = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  }
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &new_status,
+                                     sizeof(new_status));
+}
+
+/**
+ * @brief Makes the Network status transition to Online
+ * (functional or interviewing) for a node
+ *
+ * If the node's previous state was interviewing, it will be placed back in
+ * interviewing. Else it will be placed in Online Functional
+ *
+ * @param node_id_node Attribute Store Node for the NodeID
+ * @param unid         The UNID of the node
+ */
+static void
+  network_monitor_mark_node_as_online(attribute_store_node_t node_id_node,
+                                      const unid_t unid)
+{
+  node_state_topic_state_t network_status
+    = get_node_network_status(node_id_node);
+
+  // Don't modify anything if the node is not offline.
+  if (network_status != NODE_STATE_TOPIC_STATE_OFFLINE
+      && network_status != NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL) {
+    return;
+  }
+
+  node_state_topic_state_t new_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  if (network_status == NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL) {
+    // If the network status was interviewing and the frame transmission failed
+    // Set it to Failed interview, so we try again a ful interview when it responds again
+    new_status = NODE_STATE_TOPIC_INTERVIEWING;
+    ucl_mqtt_initiate_node_interview(unid);
+  }
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &new_status,
+                                     sizeof(new_status));
 }
 
 /**
@@ -536,91 +599,50 @@ static void network_monitor_update_new_node_attribute_store(
   attribute_store_node_t node_id_node
     = attribute_store_network_helper_create_node_id_node(unid);
 
-  // Find the granted keys for that node.
-  attribute_store_node_t new_node
-    = attribute_store_get_node_child_by_type(node_id_node,
-                                             ATTRIBUTE_GRANTED_SECURITY_KEYS,
-                                             0);
-
-  if (new_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    new_node
-      = attribute_store_add_node(ATTRIBUTE_GRANTED_SECURITY_KEYS, node_id_node);
-  }
-
-  // Write the granted keys
-  attribute_store_set_node_attribute_value(new_node,
-                                           REPORTED_ATTRIBUTE,
-                                           &node_added_data.granted_keys,
-                                           sizeof(zwave_keyset_t));
+  // Write down the granted keys for that node
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_GRANTED_SECURITY_KEYS,
+                                     &node_added_data.granted_keys,
+                                     sizeof(zwave_keyset_t));
 
   // Find the KEX Fail type for that node
-  new_node = attribute_store_get_node_child_by_type(node_id_node,
-                                                    ATTRIBUTE_KEX_FAIL_TYPE,
-                                                    0);
-  if (new_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    new_node = attribute_store_add_node(ATTRIBUTE_KEX_FAIL_TYPE, node_id_node);
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_KEX_FAIL_TYPE,
+                                     &node_added_data.kex_fail_type,
+                                     sizeof(zwave_kex_fail_type_t));
+
+  // Find the DSK for that node if it has S2 capabilities
+  if (zwave_security_validation_is_node_s2_capable(node_added_data.node_id)) {
+    // Write the S2 DSK for that node
+    attribute_store_set_child_reported(node_id_node,
+                                       ATTRIBUTE_S2_DSK,
+                                       node_added_data.dsk,
+                                       sizeof(zwave_dsk_t));
   }
-
-  // Write the KEX Fail type
-  attribute_store_set_node_attribute_value(
-    new_node,
-    REPORTED_ATTRIBUTE,
-    reinterpret_cast<const uint8_t *>(&node_added_data.kex_fail_type),
-    sizeof(uint8_t));
-
-  // Find the DSK for that node
-  new_node
-    = attribute_store_get_node_child_by_type(node_id_node, ATTRIBUTE_S2_DSK, 0);
-  if (new_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    new_node = attribute_store_add_node(ATTRIBUTE_S2_DSK, node_id_node);
-  }
-
-  // Write the S2 DSK for that node
-  attribute_store_set_node_attribute_value(new_node,
-                                           REPORTED_ATTRIBUTE,
-                                           node_added_data.dsk,
-                                           sizeof(zwave_dsk_t));
 
   // Find the protocol listening byte from the NIF
-  new_node
-    = attribute_store_get_node_child_by_type(node_id_node,
-                                             ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING,
-                                             0);
-  if (new_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    new_node = attribute_store_add_node(ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING,
-                                        node_id_node);
-  }
-  // Write the protocol listening byte from the NIF
-  attribute_store_set_node_attribute_value(
-    new_node,
-    REPORTED_ATTRIBUTE,
+  attribute_store_set_child_reported(
+    node_id_node,
+    ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING,
     &node_added_data.nif.listening_protocol,
     sizeof(node_added_data.nif.listening_protocol));
 
   // Find the optional protocol byte from the NIF
-  new_node
-    = attribute_store_get_node_child_by_type(node_id_node,
-                                             ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL,
-                                             0);
-  if (new_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    new_node = attribute_store_add_node(ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL,
-                                        node_id_node);
-  }
-  // Write the protocol listening byte from the NIF
-  attribute_store_set_node_attribute_value(
-    new_node,
-    REPORTED_ATTRIBUTE,
+  attribute_store_set_child_reported(
+    node_id_node,
+    ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL,
     &node_added_data.nif.optional_protocol,
     sizeof(node_added_data.nif.optional_protocol));
 
   // Find the Non-secure NIF for the node/endpoint 0
   attribute_store_node_t endpoint_id_node
     = attribute_store_network_helper_get_endpoint_node(unid, 0);
-  new_node = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                                    ATTRIBUTE_ZWAVE_NIF,
-                                                    0);
-  if (new_node == ATTRIBUTE_STORE_INVALID_NODE) {
-    new_node = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
+  attribute_store_node_t nif_node
+    = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                             ATTRIBUTE_ZWAVE_NIF,
+                                             0);
+  if (nif_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
   }
 }
 
@@ -656,7 +678,6 @@ static void
   delete event_data;
   // Cleaning data structures that contains the zwave_node_id key
   failed_transmission_data.clear();
-  sleeping_nodes_status.clear();
   failing_node_monitor_list_clear();
 }
 
@@ -668,6 +689,8 @@ static void network_monitor_handle_event_node_id_assigned(
     NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED);
   zwave_store_inclusion_protocol(event_data->node_id,
                                  event_data->inclusion_protocol);
+
+  delete event_data;
 }
 
 static void
@@ -714,7 +737,7 @@ static void network_monitor_handle_event_node_interview_initiated(
 
   // Register the listener for the node interview
   attribute_resolver_set_resolution_listener(
-    att,
+    node_id_node,
     network_monitor_node_id_resolution_listener);
 }
 
@@ -751,24 +774,49 @@ static void network_monitor_handle_event_node_deleted(zwave_node_id_t node_id)
 
   // Remove the node from the attribute store
   network_monitor_remove_attribute_store_node(node_id);
+
   // Cleaning data structures that contains the zwave_node_id key
   auto it_failed_transmission = failed_transmission_data.find(node_id);
   if (it_failed_transmission != failed_transmission_data.end()) {
     stop_monitoring_failing_node(node_id);
     failed_transmission_data.erase(it_failed_transmission);
   }
-  auto it_sleeping_node = sleeping_nodes_status.find(node_id);
-  if (it_sleeping_node != sleeping_nodes_status.end()) {
-    sleeping_nodes_status.erase(it_sleeping_node);
-  }
+
+  // Unretain anything we published about the node:
+  unid_t unid = {};
+  zwave_unid_from_node_id(node_id, unid);
+  std::string topic_regex = "ucl/by-unid/" + std::string(unid);
+  uic_mqtt_unretain(topic_regex.c_str());
 }
 
 static void network_monitor_handle_event_failed_frame_transmission(
   zwave_node_id_t node_id)
 {
   zwave_operating_mode_t operating_mode = zwave_get_operating_mode(node_id);
+  attribute_store_node_t node_id_node
+    = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
-  // Look for the node in failed transmission 
+  // Node does not exist, did we try to transmit to a non-existing node?
+  if (node_id_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    sl_log_debug(LOG_TAG,
+                 "Warning: transmission failure with a non-existing "
+                 "NodeID %d from the Attribute Store. This should not happen.",
+                 node_id);
+    return;
+  }
+
+  // Sleeping node: consider them asleep again if communication failed
+  // and we did not manage to talk to them in the last 10s.
+  if (operating_mode == OPERATING_MODE_NL) {
+    if (true
+        == network_monitor_is_node_asleep_due_to_inactivity(node_id_node)) {
+      sl_log_debug(LOG_TAG, "NodeID %d is now considered asleep", node_id);
+      attribute_resolver_pause_node_resolution(node_id_node);
+    }
+    return;
+  }
+
+  // Else look if we have an history of failures with the node:
   auto it = failed_transmission_data.find(node_id);
   // if the node was not in failed transmission list insert it and return
   if (it == failed_transmission_data.end()) {
@@ -779,208 +827,118 @@ static void network_monitor_handle_event_failed_frame_transmission(
 
   //Increase failure count
   it->second++;
-  //If the failure count is not equal to accepted transmit failures, its ok, return
-  if (it->second != zpc_get_config()->accepted_transmit_failure) {
+  // Check if we are within the accepted number of failures.
+  if (it->second < zpc_get_config()->accepted_transmit_failure) {
     return;
   }
 
-  attribute_store_node_t node_id_node
-    = attribute_store_node_from_zwave_node(node_id);
-  attribute attr(node_id_node);
-  attribute network_status = attr.child_by_type(ATTRIBUTE_NETWORK_STATUS);
-  if (!network_status.is_valid()) {
-    return;
-  }
-
-  // If the network status was interviewing and the frame transmission is failed
-  // the network status shall be NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL.
-  if (network_status.reported<node_state_topic_state_t>()
-      == NODE_STATE_TOPIC_INTERVIEWING) {
-    network_status.set_reported<node_state_topic_state_t>(
-      NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL);
-  } else {
-   // If the node is sleeping node, we should not update the network status
-   // here since the sleeping node monitor does that using the wakeup period.
-    if (OPERATING_MODE_NL != operating_mode) {
-      sl_log_info(LOG_TAG,
-                  "NodeID %d is now considered as failing/offline",
-                  node_id);
-      network_status.set_reported<node_state_topic_state_t>(
-        NODE_STATE_TOPIC_STATE_OFFLINE);
-    }
-  }
+  // Mark the node as offline:
+  network_monitor_mark_node_as_offline(node_id_node);
   attribute_resolver_pause_node_resolution(node_id_node);
-  // Failing node monitor does not monitor NL nodes
-  if (OPERATING_MODE_NL != operating_mode) {
-    start_monitoring_failing_node(node_id);
-  }
+  start_monitoring_failing_node(node_id);
 }
 
 static void network_monitor_handle_event_success_frame_transmission(
   zwave_node_id_t node_id)
 {
+  // Gather information about the node:
   attribute_store_node_t node_id_node
-    = attribute_store_node_from_zwave_node(node_id);
+    = attribute_store_network_helper_get_zwave_node_id_node(node_id);
+  unid_t unid;
+  zwave_unid_from_node_id(node_id, unid);
   // Save that we got a successful transmission.
   update_last_received_frame_timestamp(node_id_node);
-  try {
-    attribute attr(node_id_node);
-    attribute network_status = attr.child_by_type(ATTRIBUTE_NETWORK_STATUS);
-    unid_t unid;
-    zwave_unid_from_node_id(node_id, unid);
-    // Non-Sleeping nodes
-    auto it = failed_transmission_data.find(node_id);
-    if (it != failed_transmission_data.end()) {
-      // If the network status was NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL,
-      // we trigger a new interview (ucl_mqtt_initiate_node_interview()).
-      if (network_status.reported<node_state_topic_state_t>()
-          == NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL) {
-        network_status.set_reported<node_state_topic_state_t>(
-          NODE_STATE_TOPIC_INTERVIEWING);
-        ucl_mqtt_initiate_node_interview(unid);
-      } else {
-        sl_log_info(LOG_TAG, "NodeID %d is online again", node_id);
-        network_status.set_reported<node_state_topic_state_t>(
-          NODE_STATE_TOPIC_STATE_INCLUDED);
-      }
-      attribute_resolver_resume_node_resolution(node_id_node);
-      failed_transmission_data.erase(it);
-      // Failing node monitor does not monitor NL nodes so no need of stopping
-      if (OPERATING_MODE_NL != zwave_get_operating_mode(node_id)) {
-        stop_monitoring_failing_node(node_id);
-      }
-    }
 
-    // Sleeping node
-    // Sleeping node may send other command first and then wakeup info
-    // therefore we are handling the sleeping node successful transmission as
-    // none sleeping nodes
-    auto failing_list_it = sleeping_nodes_status.find(node_id);
-    if (failing_list_it != sleeping_nodes_status.end()) {
-      if (!(failing_list_it->second.get()->network_status)) {
-        if (network_status.reported<node_state_topic_state_t>()
-            == NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL) {
-          network_status.set_reported<node_state_topic_state_t>(
-            NODE_STATE_TOPIC_INTERVIEWING);
-          ucl_mqtt_initiate_node_interview(unid);
-        } else {
-          sl_log_info(LOG_TAG, "NodeID %d is online again", node_id);
-          network_status.set_reported<node_state_topic_state_t>(
-            NODE_STATE_TOPIC_STATE_INCLUDED);
-        }
-        clock_time_t timeout = zpc_get_config()->missing_wake_up_notification
-                               * failing_list_it->second.get()->wakeup_interval;
-        failing_list_it->second.get()->network_status = true;
-        ctimer_set(&failing_list_it->second.get()->timer,
-                   timeout * CLOCK_SECOND,
-                   network_monitor_sleeping_nodes_network_status_controller,
-                   failing_list_it->second.get());
-      }
+  // Non-Sleeping nodes
+  auto it = failed_transmission_data.find(node_id);
+  if (it != failed_transmission_data.end()) {
+    failed_transmission_data.erase(it);
+    // Failing node monitor does not monitor NL nodes so no need of stopping
+    if (OPERATING_MODE_NL != zwave_get_operating_mode(node_id)) {
+      attribute_resolver_resume_node_resolution(node_id_node);
+      stop_monitoring_failing_node(node_id);
     }
-  } catch (std::exception &ex) {
-    sl_log_warning(LOG_TAG,
-                   "Cannot update network status for a sleeping node. %s",
-                   ex.what());
   }
+
+  // In any case, mark the node as online when we tx or rx successfully.
+  network_monitor_mark_node_as_online(node_id_node, unid);
 }
 
-static void network_monitor_wakeup_interval_attribute_update(
+/**
+ * @brief Callback on Wake Up Interval updates. It will start a timer to
+ * consider the node as offline if we don't hear from it in the configured
+ * number of missed Wake Up Periods.
+ *
+ * @param updated_node Wake Up interval node
+ * @param change       Attribute Store change.
+ */
+static void network_monitor_on_wake_up_interval_attribute_update(
   attribute_store_node_t updated_node, attribute_store_change_t change)
 {
   if (change != ATTRIBUTE_UPDATED) {
     return;
   }
 
-  try {
-    attribute attr(updated_node);
-    wake_up_interval_t wakeup_interval = attr.reported<wake_up_interval_t>();
-    // If the wakeup interval is set 0 means the node only be awake due to user action,
-    // and we can not really monitor such nodes.
-    if (wakeup_interval != 0) {
-      attribute node_id_node = attr.first_parent(ATTRIBUTE_NODE_ID);
-      std::shared_ptr<network_monitor_sleeping_node_info> wakeup_node_info
-        = std::make_shared<network_monitor_sleeping_node_info>();
-      wakeup_node_info->wakeup_interval = wakeup_interval;
-      wakeup_node_info->node_id = node_id_node.reported<zwave_node_id_t>();
-      wakeup_node_info->network_status = true;
-      clock_time_t timeout = zpc_get_config()->missing_wake_up_notification
-                             * wakeup_node_info->wakeup_interval;
-      ctimer_set(&wakeup_node_info.get()->timer,
-                 timeout * CLOCK_SECOND,
-                 network_monitor_sleeping_nodes_network_status_controller,
-                 wakeup_node_info.get());
-      sleeping_nodes_status.try_emplace(wakeup_node_info->node_id,
-                                        wakeup_node_info);
-    }
-  } catch (std::exception &ex) {
-    return;
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(updated_node,
+                                                 ATTRIBUTE_NODE_ID);
+
+  wake_up_interval_t wake_up_interval = 0;
+  attribute_store_get_reported(updated_node,
+                               &wake_up_interval,
+                               sizeof(wake_up_interval));
+
+  // The result of a multiplication is 0 only if one of its factors is 0
+  clock_time_t timeout = zpc_get_config()->missing_wake_up_notification
+                         * wake_up_interval * CLOCK_SECOND;
+
+  // So here, if either missing_wake_up_notification is set to 0 or wake up
+  // interval is 0, do not start a timer to consider the node offline.
+  if (timeout != 0) {
+    attribute_timeout_set_callback(node_id_node,
+                                   timeout,
+                                   &network_monitor_mark_node_as_offline);
+  } else {
+    // Make sure that the previous timer is stopped.
+    attribute_timeout_cancel_callback(node_id_node,
+                                      &network_monitor_mark_node_as_offline);
   }
 }
 
-static void network_monitor_on_wake_up_cc_version_update(
-  attribute_store_node_t updated_node, attribute_store_change_t change)
+/**
+ * @brief Callback on last Tx/Rx frame. It will start a timer for NL nodes to
+ * consider the node as offline if we don't hear from it in the configured
+ * number of missed Wake Up Periods.
+ *
+ * @param updated_node Last Tx/Rx attribute
+ * @param change       Attribute Store change.
+ */
+static void
+  network_monitor_on_last_tx_rx_update(attribute_store_node_t updated_node,
+                                       attribute_store_change_t change)
 {
-  if (change == ATTRIBUTE_DELETED) {
+  if (change != ATTRIBUTE_UPDATED) {
     return;
   }
 
-  try {
-    attribute attr(updated_node);
-    attribute node_id_node  = attr.first_parent(ATTRIBUTE_NODE_ID);
-    zwave_node_id_t node_id = node_id_node.reported<zwave_node_id_t>();
-    auto it_sleeping_node   = sleeping_nodes_status.find(node_id);
-    if (it_sleeping_node == sleeping_nodes_status.end()) {
-      std::shared_ptr<network_monitor_sleeping_node_info> wakeup_node_info
-        = std::make_shared<network_monitor_sleeping_node_info>();
-      wakeup_node_info->wakeup_interval = 0;
-      wakeup_node_info->node_id         = node_id;
-      wakeup_node_info->network_status  = true;
-      sleeping_nodes_status.try_emplace(node_id, wakeup_node_info);
-    }
-  } catch (std::exception &ex) {
-    sl_log_warning(LOG_TAG,
-                   "Cannot read the Wake CC Version Attribute. %s",
-                   ex.what());
-  }
-}
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(updated_node,
+                                                 ATTRIBUTE_NODE_ID);
+  zwave_node_id_t node_id = 0;
+  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
 
-static void network_monitor_sleeping_nodes_network_status_controller(void *data)
-{
-  network_monitor_sleeping_node_info *read_data
-    = static_cast<network_monitor_sleeping_node_info *>(data);
-  if (read_data->network_status) {
-    attribute node_id_node
-      = attribute_store_node_from_zwave_node(read_data->node_id);
-    attribute last_awaked_timestamp_node
-      = node_id_node.child_by_type(ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP);
-    unsigned long last_awake_timestamp = 0;
-    if (SL_STATUS_OK
-        != attribute_store_read_value(last_awaked_timestamp_node,
-                                      REPORTED_ATTRIBUTE,
-                                      &last_awake_timestamp,
-                                      sizeof(last_awake_timestamp))) {
-      unsigned long current_time_stamp = clock_seconds();
-      unsigned long diff = current_time_stamp - last_awake_timestamp;
-      if (diff >= (zpc_get_config()->missing_wake_up_notification
-                   * read_data->wakeup_interval)) {
-        // If the network status was interviewing and the frame transmission is failed
-        // the network status shall be NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL.
-        attribute network_status
-          = node_id_node.child_by_type(ATTRIBUTE_NETWORK_STATUS);
-        if (network_status.reported<node_state_topic_state_t>()
-            == NODE_STATE_TOPIC_INTERVIEWING) {
-          network_status.set_reported<node_state_topic_state_t>(
-            NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL);
-        } else {
-          network_status.set_reported<node_state_topic_state_t>(
-            NODE_STATE_TOPIC_STATE_OFFLINE);
-        }
-        read_data->network_status = false;
-        ctimer_stop(&read_data->timer);
-        return;
-      }
-    }
-    ctimer_restart(&read_data->timer);
+  wake_up_interval_t wake_up_interval = zwave_get_wake_up_interval(node_id);
+
+  // The result of a multiplication is 0 only if one of its factors is 0
+  clock_time_t timeout = zpc_get_config()->missing_wake_up_notification
+                         * wake_up_interval * CLOCK_SECOND;
+
+  // So here, if either missing_wake_up_notification is set to 0 or wake up
+  // interval is 0, do not start a timer to consider the node offline.
+  if (timeout != 0) {
+    attribute_timeout_set_callback(node_id_node,
+                                   timeout,
+                                   &network_monitor_mark_node_as_offline);
   }
 }
 
@@ -1002,16 +960,18 @@ void network_state_monitor_init()
     };
   zwave_controller_storage_callback_register(
     &zwave_controller_storage_callbacks);
-  // Register for ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL attribute
-  // update that enables monitoring the sleeping nodes
+
+  // Monitor if NL nodes should be considered as failed, listening to
+  // Wake Up interval settings and Last Rx/Tx timestampts
   attribute_store_register_callback_by_type_and_state(
-    network_monitor_wakeup_interval_attribute_update,
+    &network_monitor_on_wake_up_interval_attribute_update,
     ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
     REPORTED_ATTRIBUTE);
 
-  attribute_store_register_callback_by_type(
-    network_monitor_on_wake_up_cc_version_update,
-    ATTRIBUTE_COMMAND_CLASS_WAKE_UP_VERSION);
+  attribute_store_register_callback_by_type_and_state(
+    &network_monitor_on_last_tx_rx_update,
+    ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
+    REPORTED_ATTRIBUTE);
 
   zwave_controller_register_callbacks(&network_monitor_callbacks);
   memset(current_node_list, 0, sizeof(zwave_nodemask_t));

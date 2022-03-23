@@ -1,12 +1,15 @@
-// License
-// <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
-
+///////////////////////////////////////////////////////////////////////////////
+// # License
+// <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
 // The licensor of this software is Silicon Laboratories Inc. Your use of this
 // software is governed by the terms of Silicon Labs Master Software License
 // Agreement (MSLA) available at
 // www.silabs.com/about-us/legal/master-software-license-agreement. This
 // software is distributed to you in Source Code format and is governed by the
 // sections of the MSLA applicable to Source Code.
+//
+///////////////////////////////////////////////////////////////////////////////
 
 //! This module wraps the c-library unify_config_sys.
 //! It requires dylib unify_config_sys in order to build.
@@ -32,6 +35,7 @@ impl std::fmt::Display for config_status_t {
             config_status_t::CONFIG_STATUS_ERROR => write!(f, "Error(2)"),
             config_status_t::CONFIG_STATUS_INVALID_TYPE => write!(f, "Invalid type(3)"),
             config_status_t::CONFIG_STATUS_DOES_NOT_EXIST => write!(f, "Does not exist(4)"),
+            config_status_t::CONFIG_STATUS_INFO_MESSAGE => write!(f, "Info message(5)"),
         }
     }
 }
@@ -186,7 +190,7 @@ mod test {
         // Parse cmd line arguments
         assert_eq!(
             config_parse(args, "1.1.0"),
-            Err(config_status_t::CONFIG_STATUS_NOK)
+            Err(config_status_t::CONFIG_STATUS_INFO_MESSAGE)
         );
         config_reset();
     }

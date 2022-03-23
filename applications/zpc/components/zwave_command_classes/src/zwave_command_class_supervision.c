@@ -56,9 +56,9 @@ static sl_status_t zwave_command_class_supervision_handle_supervision_get(
   const uint8_t *frame_data,
   uint16_t frame_length)
 {
-  // We expect at least 2 bytes of encapsulated command (Command Class + Command).
+  // We expect at least 1 bytes of encapsulated command according to the spec.
   // Else it's just a fail.
-  if (frame_length <= SUPERVISION_GET_ENCAPSULATED_COMMANDS_LENGTH_INDEX + 2) {
+  if (frame_length <= SUPERVISION_GET_ENCAPSULATED_COMMANDS_LENGTH_INDEX + 1) {
     return SL_STATUS_FAIL;
   }
   // Duplicate detection for the support of supervision_get command

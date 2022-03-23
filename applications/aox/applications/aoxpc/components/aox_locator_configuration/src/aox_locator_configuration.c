@@ -21,7 +21,7 @@
 
 #define LOG_TAG "aox_locator_configuration"
 
-// callback for the configuration udpates
+// callback for the configuration updates
 static aox_locator_on_configuration_updated_t configuration_update_callback
   = NULL;
 
@@ -49,8 +49,6 @@ sl_status_t aox_locator_configuration_init()
   // Register a callback to DotDot MQTT for WriteAttributes commands:
   uic_mqtt_dotdot_set_aox_locator_write_attributes_callback(
     &aox_locator_write_attributes_callback);
-
-  publish_aox_locator_attributes_to_mqtt();
 
   return SL_STATUS_OK;
 }

@@ -1,12 +1,15 @@
-// License
-// <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
-
+///////////////////////////////////////////////////////////////////////////////
+// # License
+// <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
 // The licensor of this software is Silicon Laboratories Inc. Your use of this
 // software is governed by the terms of Silicon Labs Master Software License
 // Agreement (MSLA) available at
 // www.silabs.com/about-us/legal/master-software-license-agreement. This
 // software is distributed to you in Source Code format and is governed by the
 // sections of the MSLA applicable to Source Code.
+//
+///////////////////////////////////////////////////////////////////////////////
 
 use core::task::Poll::Ready;
 
@@ -24,8 +27,8 @@ use crate::{
 declare_app_name!("attribute_stream");
 
 /// Attribute stream which streams all current items in the attribute store
-/// first before continueing as a normal AttributeChangedStream. it does so by
-/// queue-ing a new task on the eventloop which will walk through the attribute
+/// first before continuing as a normal AttributeChangedStream. it does so by
+/// queue-ing a new task on the event-loop which will walk through the attribute
 /// store and queue updates over an channel. Every time the stream gets polled,
 /// it will first check if there are items left in this channel. If so it will
 /// return these items, otherwise poll the AttributeChangedStream

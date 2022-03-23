@@ -242,15 +242,15 @@ void zwave_command_handler_on_frame_received(
     case SL_STATUS_BUSY:
       // This should not happen, or if it happens, we should be able to return
       // an application busy message or similar.
-      sl_log_error(
+      sl_log_warning(
         LOG_TAG,
         "Frame handler is busy and could not handle frame correctly.");
       break;
 
     case SL_STATUS_NOT_SUPPORTED:
-      sl_log_info(LOG_TAG,
-                  "Command got rejected because it is not supported. "
-                  "It was possibly also rejected due to security filtering\n");
+      sl_log_debug(LOG_TAG,
+                   "Command got rejected because it is not supported. "
+                   "It was possibly also rejected due to security filtering\n");
       break;
 
     default:

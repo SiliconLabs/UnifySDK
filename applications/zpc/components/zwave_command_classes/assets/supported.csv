@@ -1,0 +1,606 @@
+Command Class;Command;Identifier;value;sending node is;receiving node is;Additional comments
+Alarm Command Class;Alarm Get;ALARM_GET;0x04;controlling;supporting;-
+;Alarm Report;ALARM_REPORT;0x05;supporting;controlling;-
+;Alarm Set;ALARM_SET;0x06;controlling;supporting;-
+;Alarm Type Supported Get;ALARM_TYPE_SUPPORTED_GET;0x07;controlling;supporting;-
+;Alarm Type Supported Report;ALARM_TYPE_SUPPORTED_REPORT;0x08;supporting;controlling;-
+Alarm Sensor Command Class;Alarm Sensor Get;SENSOR_ALARM_GET;0x01;controlling;supporting;-
+;Alarm Sensor Report;SENSOR_ALARM_REPORT;0x02;supporting;controlling;-
+;Alarm Sensor Supported Get;SENSOR_ALARM_SUPPORTED_GET;0x03;controlling;supporting;-
+;Alarm Sensor Supported Report;SENSOR_ALARM_SUPPORTED_REPORT;0x04;supporting;controlling;-
+Alarm Silence Command Class;Alarm Silence Set;SENSOR_ALARM_SET;0x01;controlling;supporting;-
+All Switch Command Class;All Switch Set;SWITCH_ALL_SET;0x01;controlling;supporting;-
+;All Switch Get;SWITCH_ALL_GET;0x02;controlling;supporting;-
+;All Switch Report;SWITCH_ALL_REPORT;0x03;supporting;controlling;-
+;All Switch On;SWITCH_ALL_ON;0x04;controlling;supporting;-
+;All Switch Off;SWITCH_ALL_OFF;0x05;controlling;supporting;-
+Anti-theft Command Class;Anti-theft Set;ANTITHEFT_SET;0x01;controlling;supporting;-
+;Anti-theft Get;ANTITHEFT_GET;0x02;controlling;supporting;-
+;Anti-theft Report;ANTITHEFT_REPORT;0x03;supporting;controlling;-
+Application Capability Command Class;Not Supported Command Class;COMMAND_COMMAND_CLASS_NOT_SUPPORTED;0x01;supporting;controlling;-
+Application Status Command Class;Application Busy;APPLICATION_BUSY;0x01;supporting;controlling;-
+;Application Rejected Request;APPLICATION_REJECTED_REQUEST;0x02;supporting;controlling;-
+Association Command Class;Association Set;ASSOCIATION_SET;0x01;controlling;supporting;-
+;Association Get;ASSOCIATION_GET;0x02;controlling;supporting;-
+;Association Report;ASSOCIATION_REPORT;0x03;supporting;controlling;-
+;Association Remove;ASSOCIATION_REMOVE;0x04;controlling;supporting;-
+;Association Supported Groupings Get;ASSOCIATION_GROUPINGS_GET;0x05;controlling;supporting;-
+;Association Supported Groupings Report;ASSOCIATION_GROUPINGS_REPORT;0x06;supporting;controlling;-
+;Association Specific Group Get;ASSOCIATION_SPECIFIC_GROUP_GET;0x0B;controlling;supporting;-
+;Association Specific Group Report;ASSOCIATION_SPECIFIC_GROUP_REPORT;0x0C;supporting;controlling;-
+Association Command Configuration Command Class;Command Records Supported Get;COMMAND_RECORDS_SUPPORTED_GET;0x01;controlling;supporting;-
+;Command Records Supported Report;COMMAND_RECORDS_SUPPORTED_REPORT;0x02;supporting;controlling;-
+;Command Configuration Set;COMMAND_CONFIGURATION_SET;0x03;controlling;supporting;-
+;Command Configuration Get;COMMAND_CONFIGURATION_GET;0x04;controlling;supporting;-
+;Command Configuration Report;COMMAND_CONFIGURATION_REPORT;0x05;supporting;controlling;-
+Association Group Information (AGI) Command Class;Association group Name Get;ASSOCIATION_GROUP_NAME_GET;0x01;controlling;supporting;-
+;Association Group Name Report;ASSOCIATION_GROUP_NAME_REPORT;0x02;supporting;controlling;-
+;Association Group Info Get;ASSOCIATION_GROUP_INFO_GET;0x03;controlling;supporting;-
+;Association Group Info Report;ASSOCIATION_GROUP_INFO_REPORT;0x04;supporting;controlling;-
+;Association group Command List Get;ASSOCIATION_GROUP_COMMAND_LIST_GET;0x05;controlling;supporting;-
+;Association Group Command List Report;ASSOCIATION_GROUP_COMMAND_LIST_REPORT;0x06;supporting;controlling;-
+Barrier Operator Command Class;Barrier Operator Set;BARRIER_OPERATOR_SET;0x01;controlling;supporting;-
+;Barrier Operator Get;BARRIER_OPERATOR_GET;0x02;controlling;supporting;-
+;Barrier Operator Report;BARRIER_OPERATOR_REPORT;0x03;supporting;controlling;-
+;Barrier Operator Get Signaling Capabilities Supported;BARRIER_OPERATOR_SIGNAL_SUPPORTED_GET;0x04;controlling;supporting;-
+;Barrier Operator Report Event Signaling Capabilities Supported;BARRIER_OPERATOR_SIGNAL_SUPPORTED_REPORT;0x05;supporting;controlling;-
+;Barrier Operator Event Signal Set;BARRIER_OPERATOR_SIGNAL_SET;0x06;controlling;supporting;-
+;Barrier Operator Event Signaling Get;BARRIER_OPERATOR_SIGNAL_GET;0x07;controlling;supporting;-
+;Barrier Operator Event Signaling Report;BARRIER_OPERATOR_SIGNAL_REPORT;0x08;supporting;controlling;-
+Basic Command Class;Basic Set;BASIC_SET ;0x01;controlling;supporting;-
+;Basic Get;BASIC_GET;0x02;controlling;supporting;-
+;Basic Report;BASIC_REPORT;0x03;supporting;controlling;-
+Basic Tariff Information Command Class;Basic Tariff Information Get;BASIC_TARIFF_INFO_GET;0x01;controlling;supporting;-
+;Basic Tariff Information Report;BASIC_TARIFF_INFO_REPORT;0x02;supporting;controlling;-
+Basic Window Covering Command Class;Basic Window Covering Start Level Change;BASIC_WINDOW_COVERING_START_LEVEL_CHANGE;0x01;controlling;supporting;-
+;Basic Window covering Stop Level Change;BASIC_WINDOW_COVERING_STOP_LEVEL_CHANGE;0x02;controlling;supporting;-
+Battery Command Class;Battery Get;BATTERY_GET;0x02;controlling;supporting;-
+;Battery Set;BATTERY_REPORT;0x03;supporting;controlling;-
+;Battery Health Get Command;BATTERY_HEALTH_GET;0x04;controlling;supporting;-
+;Battery Health Report Command;BATTERY_HEALTH_REPORT;0x05;supporting;controlling;-
+Binary Sensor Command Class;Binary Sensor Get;SENSOR_BINARY_GET;0x02;controlling;supporting;-
+;Binary Sensor Set;SENSOR_BINARY_REPORT;0x03;supporting;controlling;-
+;Binary Sensor Get supported Sensor;SENSOR_BINARY_SUPPORTED_GET_SENSOR;0x01;controlling;supporting;-
+;Binary Sensor Supported Sensor Report;SENSOR_BINARY_SUPPORTED_SENSOR_REPORT;0x04;supporting;controlling;-
+Binary Switch Command Class;Binary Switch Set;SWITCH_BINARY_SET;0x01;controlling;supporting;-
+;Binary Switch Get;SWITCH_BINARY_GET;0x02;controlling;supporting;-
+;Binary Switch Report;SWITCH_BINARY_REPORT;0x03;supporting;controlling;-
+Binary Toggle Switch Command Class;Binary Toggle Switch Set;SWITCH_TOGGLE_BINARY_SET;0x01;controlling;supporting;-
+;Binary Toggle Switch Get;SWITCH_TOGGLE_BINARY_GET;0x02;controlling;supporting;-
+;Binary Toggle Switch Report;SWITCH_TOGGLE_BINARY_REPORT;0x03;supporting;controlling;-
+Climate Control Schedule Command Class;Schedule Set;SCHEDULE_SET;0x01;controlling;supporting;-
+;Schedule Get;SCHEDULE_GET;0x02;controlling;supporting;-
+;Schedule Report;SCHEDULE_REPORT;0x03;supporting;controlling;-
+;Schedule Changed Get;SCHEDULE_CHANGED_GET;0x04;controlling;supporting;-
+;Schedule Changed Report;SCHEDULE_CHANGED_REPORT;0x05;supporting;controlling;-
+;Schedule Override Set;SCHEDULE_OVERRIDE_SET;0x06;controlling;supporting;-
+;Schedule Override Get;SCHEDULE_OVERRIDE_GET;0x07;controlling;supporting;-
+;Schedule Override Report;SCHEDULE_OVERRIDE_REPORT;0x08;supporting;controlling;-
+Central Scene Command Class;Central Scene Supported Get;CENTRAL_SCENE_SUPPORTED_GET;0x01;controlling;supporting;-
+;Central Scene Supported Report;CENTRAL_SCENE_SUPPORTED_REPORT;0x02;supporting;controlling;-
+;Central Scene Notification;CENTRAL_SCENE_NOTIFICATION;0x03;supporting;controlling;-
+;Central Scene Configuration Set;CENTRAL_SCENE_CONFIGURATION_SET;0x04;controlling;supporting;-
+;Central Scene Configuration Get;CENTRAL_SCENE_CONFIGURATION_GET;0x05;controlling;supporting;-
+;Central Scene Configuration Report;CENTRAL_SCENE_CONFIGURATION_REPORT;0x06;supporting;controlling;-
+Clock Command Class;Clock Set;CLOCK_SET;0x04;controlling;supporting;-
+;Clock Get;CLOCK_GET;0x05;controlling;supporting;-
+;Clock Report;CLOCK_REPORT;0x06;supporting;controlling;-
+Color Switch Command Class;Color Switch Supported Get;SWITCH_COLOR_SUPPORTED_GET;0x01;controlling;supporting;-
+;Color Switch Supported Report;SWITCH_COLOR_SUPPORTED_REPORT;0x02;supporting;controlling;-
+;Color Switch Get;SWITCH_COLOR_GET;0x03;controlling;supporting;-
+;Color Switch Report;SWITCH_COLOR_REPORT;0x04;supporting;controlling;-
+;Color Switch Set;SWITCH_COLOR_SET;0x05;controlling;supporting;-
+;Color Switch Start Level Change;SWITCH_COLOR_START_LEVEL_CHANGE;0x06;controlling;supporting;-
+;Color Switch Stop Level Change;SWITCH_COLOR_STOP_LEVEL_CHANGE;0x07;controlling;supporting;-
+Configuration Command Class;Configuration Set;CONFIGURATION_SET;0x04;controlling;supporting;-
+;Configuration Get;CONFIGURATION_GET;0x05;controlling;supporting;-
+;Configuration Report;CONFIGURATION_REPORT;0x06;supporting;controlling;-
+;Configuration Bulk Set;CONFIGURATION_BULK_SET;0x07;controlling;supporting;-
+;Configuration Bulk Get;CONFIGURATION_BULK_GET;0x08;controlling;supporting;-
+;Configuration Bulk Report;CONFIGURATION_BULK_REPORT;0x09;supporting;controlling;-
+;Configuration Name Get;CONFIGURATION_NAME_GET;0x0A;controlling;supporting;-
+;Configuration Name Report;CONFIGURATION_NAME_REPORT;0x0B;supporting;controlling;-
+;Configuration Info Get;CONFIGURATION_INFO_GET;0x0C;controlling;supporting;-
+;Configuration Info Report;CONFIGURATION_INFO_REPORT;0x0D;supporting;controlling;-
+;Configuration Properties Get;CONFIGURATION_PROPERTIES_GET;0x0E;controlling;supporting;-
+;Configuration Properties Report;CONFIGURATION_PROPERTIES_REPORT;0x0F;supporting;controlling;-
+;Configuration Default Reset;CONFIGURATION_DEFAULT_RESET;0x01;controlling;supporting;-
+Controller Replication Command Class;Transfer Group;CTRL_REPLICATION_TRANSFER_GROUP;0x31;controlling;supporting;-
+;Transfer Group Name;CTRL_REPLICATION_TRANSFER_GROUP_NAME;0x32;controlling;supporting;-
+;Transfer Scene;CTRL_REPLICATION_TRANSFER_SCENE;0x33;controlling;supporting;-
+;Transfer Scene Name;CTRL_REPLICATION_TRANSFER_SCENE_NAME;0x34;controlling;supporting;-
+CRC-16 Encapsulation Command Class;CRC-16 Encapsulated;CRC_16_ENCAP;0x01;controlling;supporting;-
+Demand Control Plan Configuration Command Class;DCP List Supported Get;DCP_LIST_SUPPORTED_GET;0x01;controlling;supporting;-
+;DCP List Supported report;DCP_LIST_SUPPORTED_REPORT;0x02;supporting;controlling;-
+;DCP List Set;DCP_LIST_SET;0x03;controlling;supporting;-
+;DCP List Remove;DCP_LIST_REMOVE;0x04;controlling;supporting;-
+Demand Control Plan Monitor Command Class ;DCP List Get;DCP_LIST_GET;0x01;controlling;supporting;-
+;DCP List Report;DCP_LIST_REPORT;0x02;supporting;controlling;-
+;DCP Event Status Get;DCP_EVENT_STATUS_GET;0x03;controlling;supporting;-
+;DCP Event Status Report;DCP_EVENT_STATUS_REPORT;0x04;supporting;controlling;-
+Device Reset Locally Command Class;Device Reset Locally Notification;DEVICE_RESET_LOCALLY_NOTIFICATION;0x01;supporting;controlling;-
+Door Lock Command Class;Door Lock Operation Set;DOOR_LOCK_OPERATION_SET;0x01;controlling;supporting;-
+;Door Lock Operation Get;DOOR_LOCK_OPERATION_GET;0x02;controlling;supporting;-
+;Door Lock Operation Report;DOOR_LOCK_OPERATION_REPORT;0x03;supporting;controlling;-
+;Door Lock Configuration Set;DOOR_LOCK_CONFIGURATION_SET;0x04;controlling;supporting;-
+;Door Lock Configuration Get;DOOR_LOCK_CONFIGURATION_GET;0x05;controlling;supporting;-
+;Door Lock Configuration Report;DOOR_LOCK_CONFIGURATION_REPORT;0x06;supporting;controlling;-
+;Door Lock Capabilities Get;DOOR_LOCK_CAPABILITIES_GET ;0x07;controlling;supporting;-
+;Door Lock Capabilities Report;DOOR_LOCK_CAPABILITIES_REPORT;0x08;supporting;controlling;-
+Door Lock Logging Command Class;Door Lock Logging Records Supported Get;DOOR_LOCK_LOGGING_RECORDS_SUPPORTED_GET;0x01;controlling;supporting;-
+;Door Lock Logging Records Supported Report;DOOR_LOCK_LOGGING_RECORDS_SUPPORTED_REPORT;0x02;supporting;controlling;-
+;Door Lock Logging Record Get;RECORD_GET;0x03;controlling;supporting;-
+;Door Lock Logging Record Report;RECORD_REPORT;0x04;supporting;controlling;-
+Energy Production Command Class;Energy Production Get;ENERGY_PRODUCTION_GET;0x02;controlling;supporting;-
+;Energy Production Report;ENERGY_PRODUCTION_REPORT;0x03;supporting;controlling;-
+Entry Control Command Class;Entry Control Notification;ENTRY_CONTROL_NOTIFICATION;0x01;supporting;controlling;-
+;Entry Control Key Supported Get;ENTRY_CONTROL_KEY_SUPPORTED_GET;0x02;controlling;supporting;-
+;Entry Control Key Supported Report;ENTRY_CONTROL_KEY_SUPPORTED_REPORT;0x03;supporting;controlling;-
+;Entry Control Event Supported Get;ENTRY_CONTROL_EVENT_SUPPORTED_GET;0x04;controlling;supporting;-
+;Entry Control Event Supported Report;ENTRY_CONTROL_EVENT_SUPPORTED_REPORT;0x05;supporting;controlling;-
+;Entry Control Configuration Set;ENTRY_CONTROL_CONFIGURATION_SET;0x06;controlling;supporting;-
+;Entry Control Configuration Get;ENTRY_CONTROL_CONFIGURATION_GET;0x07;controlling;supporting;-
+;Entry Control Configuration Report;ENTRY_CONTROL_CONFIGURATION_REPORT;0x08;supporting;controlling;-
+Firmware Update Meta Data Command Class;Firmware Meta Data Get;FIRMWARE_MD_GET;0x01;controlling;supporting;-
+;Firmware Meta Data Report;FIRMWARE_MD_REPORT;0x02;supporting;controlling;-
+;Firmware Update Meta Data Request Get;FIRMWARE_UPDATE_MD_REQUEST_GET;0x03;controlling;supporting;-
+;Firmware Update Meta Data Request Report;FIRMWARE_UPDATE_MD_REQUEST_REPORT;0x04;supporting;controlling;-
+;Firmware Update Meta Data Get;FIRMWARE_UPDATE_MD_GET;0x05;supporting;controlling;controlling and supporting must be swapped in case of a FW upload
+;Firmware Update Meta Data Report;FIRMWARE_UPDATE_MD_REPORT;0x06;controlling;supporting;controlling and supporting must be swapped in case of a FW upload
+;Firmware Update Meta Data Status Report;FIRMWARE_UPDATE_MD_STATUS_REPORT;0x07;supporting;controlling;-
+;Firmware Update Activation Set;FIRMWARE_UPDATE_ACTIVATION_SET;0x08;controlling;supporting;-
+;Firmware Update Activation Report;FIRMWARE_UPDATE_ACTIVATION_STATUS_REPORT;0x09;supporting;controlling;-
+;Firmware Update Meta Data Prepare Get;FIRMWARE_UPDATE_MD_PREPARE_GET;0x0A;controlling;supporting;-
+;Firmware Update Meta Data Prepare Report;FIRMWARE_UPDATE_MD_PREPARE_REPORT;0x0B;supporting;controlling;-
+Geographic Location Command Class;Geographic Location Set;GEOGRAPHIC_LOCATION_SET;0x01;controlling;supporting;-
+;Geographic Location Get;GEOGRAPHIC_LOCATION_GET;0x02;controlling;supporting;-
+;Geographic Location Report;GEOGRAPHIC_LOCATION_REPORT;0x03;supporting;controlling;-
+Grouping Name Command Class;Grouping Name Set;GROUPING_NAME_SET;0x01;controlling;supporting;-
+;Grouping Name Get;GROUPING_NAME_GET;0x02;controlling;supporting;-
+;Grouping Name Report;GROUPING_NAME_REPORT;0x03;supporting;controlling;-
+Hail Command Class;Hail;HAIL;0x01;supporting;controlling;-
+HRV Status Command Class;HRV Status Get;HRV_STATUS_GET;0x01;controlling;supporting;-
+;HRV Status Report;HRV_STATUS_REPORT;0x02;supporting;controlling;-
+;HRV Status Supported Get;HRV_STATUS_SUPPORTED_GET;0x03;controlling;supporting;-
+;HRV Status Supported Report;HRV_STATUS_SUPPORTED_REPORT;0x04;supporting;controlling;-
+HRV Control Command Class;HRV Mode Set;HRV_CONTROL_MODE_SET;0x01;controlling;supporting;-
+;HRV Mode Get;HRV_CONTROL_MODE_GET;0x02;controlling;supporting;-
+;HRV Mode Report;HRV_CONTROL_MODE_REPORT;0x03;supporting;controlling;-
+;HRV Bypass Set;HRV_CONTROL_BYPASS_SET;0x04;controlling;supporting;-
+;HRV Bypass Get;HRV_CONTROL_BYPASS_GET;0x05;controlling;supporting;-
+;HRV Bypass Report;HRV_CONTROL_BYPASS_REPORT;0x06;supporting;controlling;-
+;HRV Ventilation Rate Set;HRV_CONTROL_VENTILATION_RATE_SET;0x07;controlling;supporting;-
+;HRV Ventilation Rate Get;HRV_CONTROL_VENTILATION_RATE_GET;0x08;controlling;supporting;-
+;HRV Ventilation Rate Report;HRV_CONTROL_VENTILATION_RATE_REPORT;0x09;supporting;controlling;-
+;HRV Mode Supported Get;HRV_CONTROL_MODE_SUPPORTED_GET;0x0A;controlling;supporting;-
+;HRV Mode Supported Report;HRV_CONTROL_MODE_SUPPORTED_REPORT;0x0B;supporting;controlling;-
+Humidity Control Mode Command Class;Humidity Control Mode Set;HUMIDITY_CONTROL_MODE_SET;0x01;controlling;supporting;-
+;Humidity Control Mode Get;HUMIDITY_CONTROL_MODE_GET;0x02;controlling;supporting;-
+;Humidity Control Mode Report;HUMIDITY_CONTROL_MODE_REPORT;0x03;supporting;controlling;-
+;Humidity Control Mode Supported Get;HUMIDITY_CONTROL_MODE_SUPPORTED_GET;0x04;controlling;supporting;-
+;Humidity Control Mode Supported Report;HUMIDITY_CONTROL_MODE_SUPPORTED_REPORT;0x05;supporting;controlling;-
+Humidity Control Operating State Command Class;Humidity Control Operating State Get;HUMIDITY_CONTROL_OPERATING_STATE_GET;0x01;controlling;supporting;-
+;Humidity Control Operating State Report;HUMIDITY_CONTROL_OPERATING_STATE_REPORT;0x02;supporting;controlling;-
+Humidity Control Setpoint Command Class;Humidity Control Setpoint Set;HUMIDITY_CONTROL_SETPOINT_SET;0x01;controlling;supporting;-
+;Humidity Control Setpoint Get;HUMIDITY_CONTROL_SETPOINT_GET;0x02;controlling;supporting;-
+;Humidity Control Setpoint Report;HUMIDITY_CONTROL_SETPOINT_REPORT;0x03;supporting;controlling;-
+;Humidity Control Setpoint Supported Get;HUMIDITY_CONTROL_SETPOINT_SUPPORTED_GET;0x04;controlling;supporting;-
+;Humidity Control Setpoint Supported Report;HUMIDITY_CONTROL_SETPOINT_SUPPORTED_REPORT;0x05;supporting;controlling;-
+;Humidity Control Setpoint Scale Supported Get;HUMIDITY_CONTROL_SETPOINT_SCALE_SUPPORTED_GET;0x06;controlling;supporting;-
+;Humidity Control Setpoint Scale Supported Report;HUMIDITY_CONTROL_SETPOINT_SCALE_SUPPORTED_REPORT;0x07;supporting;controlling;-
+;Humidity Control Setpoint Capabilities Get;HUMIDITY_CONTROL_SETPOINT_CAPABILITIES_GET;0x08;controlling;supporting;-
+;Humidity Control Setpoint Capabilities Report;HUMIDITY_CONTROL_SETPOINT_CAPABILITIES_REPORT;0x09;supporting;controlling;-
+Inclusion Controller Command Class;Inclusion Controller Initiate;INITIATE;0x01;supporting;supporting;Both supporting
+;Inclusion Controller Complete;COMPLETE;0x02;supporting;supporting;Both supporting
+Indicator Command Class;Indicator Set;INDICATOR_SET;0x01;controlling;supporting;-
+;Indicator Get;INDICATOR_GET;0x02;controlling;supporting;-
+;Indicator Report;INDICATOR_REPORT;0x03;supporting;controlling;-
+;Indicator Supported Get;INDICATOR_SUPPORTED_GET;0x04;controlling;supporting;-
+;Indicator Supported Report;INDICATOR_SUPPORTED_REPORT;0x05;supporting;controlling;-
+;Indicator Description Get;INDICATOR_DESCRIPTION_GET;0x06;controlling;supporting;-
+;Indicator Description Report;INDICATOR_DESCRIPTION_REPORT;0x07;supporting;controlling;-
+IP Configuration Command Class;IP Configuration Set;IP_CONFIGURATION_SET;0x01;controlling;supporting;-
+;IP Configuration Get;IP_CONFIGURATION_GET;0x02;controlling;supporting;-
+;IP Configuration Report;IP_CONFIGURATION_REPORT;0x03;supporting;controlling;-
+;IP Configuration DHCP Release;IP_CONFIGURATION_RELEASE;0x04;controlling;supporting;-
+;IP Configuration DHCP Renew;IP_CONFIGURATION_RENEW;0x05;controlling;supporting;-
+Irrigation Command Class;Irrigation System Info Get;IRRIGATION_SYSTEM_INFO_GET;0x01;controlling;supporting;-
+;Irrigation System Info Report;IRRIGATION_SYSTEM_INFO_REPORT;0x02;supporting;controlling;-
+;Irrigation System Status Get;IRRIGATION_SYSTEM_STATUS_GET;0x03;controlling;supporting;-
+;Irrigation System Status Report;IRRIGATION_SYSTEM_STATUS_REPORT;0x04;supporting;controlling;-
+;Irrigation System Config Set;IRRIGATION_SYSTEM_CONFIG_SET;0x05;controlling;supporting;-
+;Irrigation System Config Get;IRRIGATION_SYSTEM_CONFIG_GET;0x06;controlling;supporting;-
+;Irrigation System Config Report;IRRIGATION_SYSTEM_CONFIG_REPORT;0x07;supporting;controlling;-
+;Irrigation Valve Info Get;IRRIGATION_VALVE_INFO_GET;0x08;controlling;supporting;-
+;Irrigation Valve Info Report;IRRIGATION_VALVE_INFO_REPORT;0x09;supporting;controlling;-
+;Irrigation Valve Config Set;IRRIGATION_VALVE_CONFIG_SET;0x0A;controlling;supporting;-
+;Irrigation Valve Config Get;IRRIGATION_VALVE_CONFIG_GET;0x0B;controlling;supporting;-
+;Irrigation Valve Config Report;IRRIGATION_VALVE_CONFIG_REPORT;0x0C;supporting;controlling;-
+;Irrigation Valve Run;IRRIGATION_VALVE_RUN;0x0D;controlling;supporting;-
+;Irrigation Valve Table Set;IRRIGATION_VALVE_TABLE_SET;0x0E;controlling;supporting;-
+;Irrigation Valve Table Get;IRRIGATION_VALVE_TABLE_GET;0x0F;controlling;supporting;-
+;Irrigation Valve Table Report;IRRIGATION_VALVE_TABLE_REPORT;0x10;supporting;controlling;-
+;Irrigation Valve Table Run;IRRIGATION_VALVE_TABLE_RUN;0x11;controlling;supporting;-
+;Irrigation System Shutoff;IRRIGATION_SYSTEM_SHUTOFF;0x12;controlling;supporting;-
+Language Command Class;Language Set;LANGUAGE_SET;0x01;controlling;supporting;-
+;Language Get;LANGUAGE_GET;0x02;controlling;supporting;-
+;Language Report;LANGUAGE_REPORT;0x03;supporting;controlling;-
+Lock Command Class;Lock Set;LOCK_SET;0x01;controlling;supporting;-
+;Lock Get;LOCK_GET;0x02;controlling;supporting;-
+;Lock Report;LOCK_REPORT;0x03;supporting;controlling;-
+Mailbox Command Class;Mailbox Configuration Get;MAILBOX_CONFIGURATION_GET;0x01;controlling;supporting;-
+;Mailbox Configuration Set;MAILBOX_CONFIGURATION_SET;0x02;controlling;supporting;-
+;Mailbox Configuration Report;MAILBOX_CONFIGURATION_REPORT;0x03;supporting;controlling;-
+;Mailbox Queue;MAILBOX_QUEUE;0x04;supporting;supporting;Both supporting
+;Mailbox Wake Up Notification;MAILBOX_WAKEUP_NOTIFICATION;0x05;supporting;supporting;Both supporting
+;Mailbox Failling Node;MAILBOX_NODE_FAILING;0x06;supporting;supporting;Both supporting
+Manufacturer Specific Command Class;Manufacturer Specific Get;MANUFACTURER_SPECIFIC_GET;0x04;controlling;supporting;-
+;Manufacturer Specific Report;MANUFACTURER_SPECIFIC_REPORT;0x05;supporting;controlling;-
+;Device Specific Get;DEVICE_SPECIFIC_GET;0x06;controlling;supporting;-
+;Device Specific Report;DEVICE_SPECIFIC_REPORT;0x07;supporting;controlling;-
+Meter Command Class;Meter Get;METER_GET;0x01;controlling;supporting;-
+;Meter Report;METER_REPORT;0x02;supporting;controlling;-
+;Meter Supported Get;METER_SUPPORTED_GET;0x03;controlling;supporting;-
+;Meter Supported Report;METER_SUPPORTED_REPORT;0x04;supporting;controlling;-
+;Meter Reset;METER_RESET;0x05;controlling;supporting;-
+Meter Table Configuration Command Class;Meter Table Point Adm Number Set;METER_TBL_TABLE_POINT_ADM_NO_SET;0x01;controlling;supporting;-
+Meter Table Monitor Command Class;Meter Table Point Adm Number Get;METER_TBL_TABLE_POINT_ADM_NO_GET;0x01;controlling;supporting;-
+;Meter Table Point Adm Number Report;METER_TBL_TABLE_POINT_ADM_NO_REPORT;0x02;supporting;controlling;-
+;Meter Table ID Get;METER_TBL_TABLE_ID_GET;0x03;controlling;supporting;-
+;Meter Table ID Report;METER_TBL_TABLE_ID_REPORT;0x04;supporting;controlling;-
+;Meter Table Capability Get;METER_TBL_TABLE_CAPABILITY_GET;0x05;controlling;supporting;-
+;Meter Table Capability Report;METER_TBL_REPORT;0x06;supporting;controlling;-
+;Meter Table Status Supported Get;METER_TBL_STATUS_SUPPORTED_GET;0x07;controlling;supporting;-
+;Meter Table Status Supported Report;METER_TBL_STATUS_SUPPORTED_REPORT;0x08;supporting;controlling;-
+;Meter Table Status Depth Get;METER_TBL_STATUS_DEPTH_GET;0x09;controlling;supporting;-
+;Meter Table Status Date Get;METER_TBL_STATUS_DATE_GET;0x0A;controlling;supporting;-
+;Meter Table Status Report;METER_TBL_STATUS_REPORT;0x0B;supporting;controlling;-
+;Meter Table Current Data Get;METER_TBL_CURRENT_DATA_GET;0x0C;controlling;supporting;-
+;Meter Table Current Data Report;METER_TBL_CURRENT_DATA_REPORT;0x0D;supporting;controlling;-
+;Meter Table Historical Data Get;METER_TBL_HISTORICAL_DATA_GET;0x0E;controlling;supporting;-
+;Meter Table Historical Data Report;METER_TBL_HISTORICAL_DATA_REPORT;0x0F;supporting;controlling;-
+Meter Table Push Configuration Command Class;Meter Table Push Configuration Set;METER_TBL_PUSH_CONFIGURATION_SET;0x01;controlling;supporting;-
+;Meter Table Push Configuration Get;METER_TBL_PUSH_CONFIGURATION_GET;0x02;controlling;supporting;-
+;Meter Table Push Configuration Report;METER_TBL_PUSH_CONFIGURATION_REPORT;0x03;supporting;controlling;-
+Move To Position Window Covering Command Class;Move To Position Set;MOVE_TO_POSITION_SET;0x01;controlling;supporting;-
+;Move To Position Get;MOVE_TO_POSITION_GET;0x02;controlling;supporting;-
+;Move To Position Report;MOVE_TO_POSITION_REPORT;0x03;supporting;controlling;-
+Multi Channel Command Class;Multi Channel End Point Get;MULTI_CHANNEL_END_POINT_GET;0x07;controlling;supporting;-
+;Multi Channel End Point Report;MULTI_CHANNEL_END_POINT_REPORT;0x08;supporting;controlling;-
+;Multi Channel Capability Get;MULTI_CHANNEL_CAPABILITY_GET;0x09;controlling;supporting;-
+;Multi Channel Capability Report;MULTI_CHANNEL_CAPABILITY_REPORT;0x0A;supporting;controlling;-
+;Multi Channel End Point Find;MULTI_CHANNEL_END_POINT_FIND;0x0B;controlling;supporting;-
+;Multi Channel End Point Find Report;MULTI_CHANNEL_END_POINT_FIND_REPORT;0x0C;supporting;controlling;-
+;Multi Channel Command Encapsulation;MULTI_CHANNEL_CMD_ENCAP;0x0D;supporting;controlling;If Destination End Point is set to 0
+;;;;controlling;supporting;If Source End Point is set to 0
+;;;;supporting;supporting;In all other cases
+;Multi Channel Aggregated Members Get;MULTI_CHANNEL_AGGREGATED_MEMBERS_GET;0x0E;controlling;supporting;-
+;Multi Channel Aggregated Members Report;MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT;0x0F;supporting;controlling;-
+Multi Channel Association Command Class;Multi Channel Association Set;MULTI_CHANNEL_ASSOCIATION_SET;0x01;controlling;supporting;-
+;Multi Channel Association Get;MULTI_CHANNEL_ASSOCIATION_GET;0x02;controlling;supporting;-
+;Multi Channel Association Report;MULTI_CHANNEL_ASSOCIATION_REPORT;0x03;supporting;controlling;-
+;Multi Channel Association Remove;MULTI_CHANNEL_ASSOCIATION_REMOVE;0x04;controlling;supporting;-
+;Multi Channel Association Groupings Get;MULTI_CHANNEL_ASSOCIATION_GROUPINGS_GET;0x05;controlling;supporting;-
+;Multi Channel Association Groupings Report;MULTI_CHANNEL_ASSOCIATION_GROUPINGS_REPORT;0x06;supporting;controlling;-
+Multi Command Command Class;Multi Command Encapsulated;MULTI_CMD_ENCAP;0x01;controlling;supporting;-
+Multilevel Sensor Command Class;Multilevel Sensor Get Supported Sensor;SENSOR_MULTILEVEL_SUPPORTED_GET_SENSOR;0x01;controlling;supporting;-
+;Multilevel Sensor Supported Sensor Report;SENSOR_MULTILEVEL_SUPPORTED_SENSOR_REPORT;0x02;supporting;controlling;-
+;Multilevel Sensor Get Supported Scale;SENSOR_MULTILEVEL_SUPPORTED_GET_SCALE;0x03;controlling;supporting;-
+;Multilevel Sensor Get;SENSOR_MULTILEVEL_GET;0x04;controlling;supporting;-
+;Multilevel Sensor Report;SENSOR_MULTILEVEL_REPORT;0x05;supporting;controlling;-
+;Multilevel Sensor Supported Scale Report;SENSOR_MULTILEVEL_SUPPORTED_SCALE_REPORT;0x06;supporting;controlling;-
+Multilevel Switch Command Class;Multilevel Switch Set;SWITCH_MULTILEVEL_SET;0x01;controlling;supporting;-
+;Multilevel Switch Get;SWITCH_MULTILEVEL_GET;0x02;controlling;supporting;-
+;Multilevel Switch Report;SWITCH_MULTILEVEL_REPORT;0x03;supporting;controlling;-
+;Multilevel Switch Start Level Change;SWITCH_MULTILEVEL_START_LEVEL_CHANGE;0x04;controlling;supporting;-
+;Multilevel Switch Stop Level Change;SWITCH_MULTILEVEL_STOP_LEVEL_CHANGE;0x05;controlling;supporting;-
+;Multilevel Switch Supported Get;SWITCH_MULTILEVEL_SUPPORTED_GET;0x06;controlling;supporting;-
+;Multilevel Switch Supported Report;SWITCH_MULTILEVEL_SUPPORTED_REPORT;0x07;supporting;controlling;-
+Multilevel Toggle Switch Command Class;Multilevel Toggle Switch Set;SWITCH_TOGGLE_MULTILEVEL_SET;0x01;controlling;supporting;-
+;Multilevel Toggle Switch Get;SWITCH_TOGGLE_MULTILEVEL_GET;0x02;controlling;supporting;-
+;Multilevel Toggle Switch Report;SWITCH_TOGGLE_MULTILEVEL_REPORT;0x03;supporting;controlling;-
+;Multilevel Toggle Switch Start Level Change;SWITCH_TOGGLE_MULTILEVEL_START_LEVEL_CHANGE;0x04;controlling;supporting;-
+;Multilevel Toggle Switch Stop Level Change;SWITCH_TOGGLE_MULTILEVEL_STOP_LEVEL_CHANGE;0x05;controlling;supporting;-
+Network Management Basic Node Command Class;Learn Mode Set;COMMAND_LEARN_MODE_SET;0x01;controlling;supporting;-
+;Learn Mode Set Status;COMMAND_LEARN_MODE_SET_STATUS;0x02;supporting;controlling;-
+;Network Update Request;COMMAND_NETWORK_UPDATE_REQUEST;0x03;controlling;supporting;-
+;Network Update Request Status;COMMAND_NETWORK_UPDATE_REQUEST_STATUS;0x04;supporting;controlling;-
+;Node Information Send;COMMAND_NODE_INFORMATION_SEND;0x05;controlling;supporting;-
+;Default Set;COMMAND_DEFAULT_SET;0x06;controlling;supporting;-
+;Default Set Complete;COMMAND_DEFAULT_SET_COMPLETE;0x07;supporting;controlling;-
+;DSK Get;COMMAND_DSK_GET;0x08;controlling;supporting;-
+;DSK Report;COMMAND_DSK_REPORT;0x09;supporting;controlling;-
+Network Management Inclusion Command Class;Node Add;COMMAND_NODE_ADD;0x01;controlling;supporting;-
+;Node Add Status;COMMAND_NODE_ADD_STATUS;0x02;supporting;controlling;-
+;Node Remove;COMMAND_NODE_REMOVE;0x03;controlling;supporting;-
+;Node Remove Status;COMMAND_NODE_REMOVE_STATUS;0x04;supporting;controlling;-
+;Failed Node Remove;COMMAND_FAILED_NODE_REMOVE;0x07;controlling;supporting;-
+;Failed Node Remove Status;COMMAND_FAILED_NODE_REMOVE_STATUS;0x08;supporting;controlling;-
+;Failed Node Replace;COMMAND_FAILED_NODE_REPLACE;0x09;controlling;supporting;-
+;Failed Node Replace Status;COMMAND_FAILED_NODE_REPLACE_STATUS;0x0A;supporting;controlling;-
+;Node Neighbor Update Request;COMMAND_NODE_NEIGHBOR_UPDATE_REQUEST;0x0B;controlling;supporting;-
+;Node Neighbor Update Status;COMMAND_NODE_NEIGHBOR_UPDATE_STATUS;0x0C;supporting;controlling;-
+;Return Route Assign;COMMAND_RETURN_ROUTE_ASSIGN;0x0D;controlling;supporting;-
+;Return Route Assign Complete;COMMAND_RETURN_ROUTE_ASSIGN_COMPLETE;0x0E;supporting;controlling;-
+;Return Route Delete;COMMAND_RETURN_ROUTE_DELETE;0x0F;controlling;supporting;-
+;Return Route Delete Complete;COMMAND_RETURN_ROUTE_DELETE_COMPLETE;0x10;supporting;controlling;-
+;Node Add Keys Report;COMMAND_NODE_ADD_KEYS_REPORT;0x11;supporting;controlling;-
+;Node Add Keys Set;COMMAND_NODE_ADD_KEYS_SET;0x12;controlling;supporting;-
+;Node Add DSK Report;COMMAND_NODE_ADD_DSK_REPORT;0x13;supporting;controlling;-
+;Node Add DSK Set;COMMAND_NODE_ADD_DSK_SET;0x14;controlling;supporting;-
+;Included Node Information Frame Report;COMMAND_INCLUDED_NIF_REPORT;0x19;supporting;controlling;-
+;Smart Start Join Started;COMMAND_SMART_START_JOIN_STARTED_REPORT;0x15;supporting;controlling;-
+Network Management Installation and Maintenance Command Class;Last Working Route Set;LAST_WORKING_ROUTE_SET;0x01;controlling;supporting;-
+;Last Working Route Get;LAST_WORKING_ROUTE_GET;0x02;controlling;supporting;-
+;Last Working Route Report;LAST_WORKING_ROUTE_REPORT;0x03;supporting;controlling;-
+;Statistics Get;STATISTICS_GET;0x04;controlling;supporting;-
+;Statistics Report;STATISTICS_REPORT;0x05;supporting;controlling;-
+;Statistics Clear;STATISTICS_CLEAR;0x06;controlling;supporting;-
+;RSSI Get;COMMAND_RSSI_GET;0x07;controlling;supporting;-
+;RSSI Report;COMMAND_RSSI_REPORT;0x08;supporting;controlling;-
+Network Management Primary Command Class;Controller Change;COMMAND_CONTROLLER_CHANGE;0x01;controlling;supporting;-
+;Controller Change Status;COMMAND_CONTROLLER_CHANGE_STATUS;0x02;supporting;controlling;-
+Network Management Proxy Command Class;Node List Get;COMMAND_NODE_LIST_GET;0x01;controlling;supporting;-
+;Node List Report;COMMAND_NODE_LIST_REPORT;0x02;supporting;controlling;-
+;Node List Cached Get;COMMAND_NODE_INFO_CACHED_GET;0x03;controlling;supporting;-
+;Node List Cached Report;COMMAND_NODE_INFO_CACHED_REPORT;0x04;supporting;controlling;-
+;Network Management Multi Channel End Point Get;NM_MULTI_CHANNEL_END_POINT_GET;0x05;controlling;supporting;-
+;Network Management Multi Channel End Point Report;NM_MULTI_CHANNEL_END_POINT_REPORT;0x06;supporting;controlling;-
+;Network Management Multi Channel Capability Get;NM_MULTI_CHANNEL_CAPABILITY_GET;0x07;controlling;supporting;-
+;Network Management Multi Channel Capability Report;NM_MULTI_CHANNEL_CAPABILITY_REPORT;0x08;supporting;controlling;-
+;Network Management Multi Channel Aggregated Members Get;NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_GET;0x09;controlling;supporting;-
+;Network Management Multi Channel Aggregated Members Report;NM_MULTI_CHANNEL_AGGREGATED_MEMBERS_REPORT;0x0A;supporting;controlling;-
+Node Naming and Location Command Class;Node Name Set;NODE_NAMING_NODE_NAME_SET;0x01;controlling;supporting;-
+;Node Name Get;NODE_NAMING_NODE_NAME_GET;0x02;controlling;supporting;-
+;Node Name Report;NODE_NAMING_NODE_NAME_REPORT;0x03;supporting;controlling;-
+;Node Location Set;NODE_NAMING_NODE_LOCATION_SET;0x04;controlling;supporting;-
+;Node Location Get;NODE_NAMING_NODE_LOCATION_GET;0x05;controlling;supporting;-
+;Node Location Report;NODE_NAMING_NODE_LOCATION_REPORT;0x06;supporting;controlling;-
+Node Provisioning Command Class;Node Provisioning Set;COMMAND_NODE_PROVISIONING_SET;0x01;controlling;supporting;-
+;Node Provisioning Delete;COMMAND_NODE_PROVISIONING_DELETE;0x02;controlling;supporting;-
+;Node Provisioning Get;COMMAND_NODE_PROVISIONING_GET;0x05;controlling;supporting;-
+;Node Provisioning Report;COMMAND_NODE_PROVISIONING_REPORT;0x06;supporting;controlling;-
+;Node Provisioning List Iteration Get;COMMAND_NODE_PROVISIONING_LIST_ITERATION_GET;0x03;controlling;supporting;-
+;Node Provisioning List Iteration Report;COMMAND_NODE_PROVISIONING_LIST_ITERATION_REPORT;0x04;supporting;controlling;-
+Notification Command Class;Event Supported Get;EVENT_SUPPORTED_GET;0x01;controlling;supporting;-
+;Event Supported Report;EVENT_SUPPORTED_REPORT;0x02;supporting;controlling;-
+;Notification Get;NOTIFICATION_GET;0x04;controlling;supporting;-
+;Notification Report;NOTIFICATION_REPORT;0x05;supporting;controlling;-
+;Notification Set;NOTIFICATION_SET;0x06;controlling;supporting;-
+;Notification Supported Get;NOTIFICATION_SUPPORTED_GET;0x07;controlling;supporting;-
+;Notification Supported Report;NOTIFICATION_SUPPORTED_REPORT;0x08;supporting;controlling;-
+Powerlevel Command Class;Powerlevel Set;POWERLEVEL_SET;0x01;controlling;supporting;-
+;Powerlevel Get;POWERLEVEL_GET;0x02;controlling;supporting;-
+;Powerlevel Report;POWERLEVEL_REPORT;0x03;supporting;controlling;-
+;Powerlevel Test Node Set;POWERLEVEL_TEST_NODE_SET;0x04;controlling;supporting;-
+;Powerlevel Test Node Get;POWERLEVEL_TEST_NODE_GET;0x05;controlling;supporting;-
+;Powerlevel Test Node Report;POWERLEVEL_TEST_NODE_REPORT;0x06;supporting;controlling;-
+Prepayment Command Class;Prepayment Balance Get;PREPAYMENT_BALANCE_GET;0x01;controlling;supporting;-
+;Prepayment Balance Report;PREPAYMENT_BALANCE_REPORT;0x02;supporting;controlling;-
+;Prepayment Supported Get;PREPAYMENT_SUPPORTED_GET;0x03;controlling;supporting;-
+;Prepayment Supported Report;PREPAYMENT_SUPPORTED_REPORT;0x04;supporting;controlling;-
+Prepayment Encapsulation Command Class;Prepayment Encapsulation;CMD_ENCAPSULATION;0x01;controlling;supporting;-
+Proprietary Command Class;Proprietary Set;PROPRIETARY_SET;0x01;controlling;supporting;-
+;Proprietary Get;PROPRIETARY_GET;0x02;controlling;supporting;-
+;Proprietary Report;PROPRIETARY_REPORT;0x03;supporting;controlling;-
+Protection Command Class;Protection Set;PROTECTION_SET;0x01;controlling;supporting;-
+;Protection Get;PROTECTION_GET;0x02;controlling;supporting;-
+;Protection Report;PROTECTION_REPORT;0x03;supporting;controlling;-
+;Protection Supported Get;PROTECTION_SUPPORTED_GET;0x04;controlling;supporting;-
+;Protection Supported Report;PROTECTION_SUPPORTED_REPORT;0x05;supporting;controlling;-
+;Protection Exclusive Control Set;PROTECTION_EC_SET;0x06;controlling;supporting;-
+;Protection Exclusive Control Get;PROTECTION_EC_GET;0x07;controlling;supporting;-
+;Protection Exclusive Control Report;PROTECTION_EC_REPORT;0x08;supporting;controlling;-
+;Protection Timeout Set;PROTECTION_TIMEOUT_SET;0x09;controlling;supporting;-
+;Protection Timeout Get;PROTECTION_TIMEOUT_GET;0x0A;controlling;supporting;-
+;Protection Timeout Report;PROTECTION_TIMEOUT_REPORT;0x0B;supporting;controlling;-
+Pulse Meter Command Class;Pulse Meter Get;METER_PULSE_GET;0x04;controlling;supporting;-
+;Pulse Meter Report;METER_PULSE_REPORT;0x05;supporting;controlling;-
+Rate Table Configuration Command Class;Rate Table Set;RATE_TBL_SET;0x01;controlling;supporting;-
+;Rate Table Remove;RATE_TBL_REMOVE;0x02;controlling;supporting;-
+Rate Table Monitor Command Class;Rate Table Supported Get;RATE_TBL_SUPPORTED_GET;0x01;controlling;supporting;-
+;Rate Table Supported Report;RATE_TBL_SUPPORTED_REPORT;0x02;supporting;controlling;-
+;Rate Table Get;RATE_TBL_GET;0x03;controlling;supporting;-
+;Rate Table Report;RATE_TBL_REPORT;0x04;supporting;controlling;-
+;Rate Table Active Rate Get;RATE_TBL_ACTIVE_RATE_GET;0x05;controlling;supporting;-
+;Rate Table Active Rate Report;RATE_TBL_ACTIVE_RATE_REPORT;0x06;supporting;controlling;-
+;Rate Table Current Data Get;RATE_TBL_CURRENT_DATA_GET;0x07;controlling;supporting;-
+;Rate Table Current Data Report;RATE_TBL_CURRENT_DATA_REPORT;0x08;supporting;controlling;-
+;Rate Table Historical Data Get;RATE_TBL_HISTORICAL_DATA_GET;0x09;controlling;supporting;-
+;Rate Table Historical Data Report;RATE_TBL_HISTORICAL_DATA_REPORT;0x0A;supporting;controlling;-
+Remote Association Activation Command Class;Remote Association Activate;REMOTE_ASSOCIATION_ACTIVATE;0x01;controlling;supporting;-
+Remote Association Configuration Command Class;Remote Association Configuration Set;REMOTE_ASSOCIATION_CONFIGURATION_SET;0x01;controlling;supporting;-
+;Remote Association Configuration Get;REMOTE_ASSOCIATION_CONFIGURATION_GET;0x02;controlling;supporting;-
+;Remote Association Configuration Report;REMOTE_ASSOCIATION_CONFIGURATION_REPORT;0x03;supporting;controlling;-
+Scene Activation Command Class;Scene Activation Set;SCENE_ACTIVATION_SET;0x01;controlling;supporting;-
+Scene Actuator Configuration Command Class;Scene Actuator Configuration Set;SCENE_ACTUATOR_CONF_SET;0x01;controlling;supporting;-
+;Scene Actuator Configuration Get;SCENE_ACTUATOR_CONF_GET;0x02;controlling;supporting;-
+;Scene Actuator Configuration Report;SCENE_ACTUATOR_CONF_REPORT;0x03;supporting;controlling;-
+Scene Controller Configuration Command Class;Scene Controller Configuration Set;SCENE_CONTROLLER_CONF_SET;0x01;controlling;supporting;-
+;Scene Controller Configuration Get;SCENE_CONTROLLER_CONF_GET;0x02;controlling;supporting;-
+;Scene Controller Configuration Report;SCENE_CONTROLLER_CONF_REPORT;0x03;supporting;controlling;-
+Schedule Command Class;Schedule Supported Get;SCHEDULE_SUPPORTED_GET;0x01;controlling;supporting;-
+;Schedule Supported Report;SCHEDULE_SUPPORTED_REPORT;0x02;supporting;controlling;-
+;Schedule Set;COMMAND_SCHEDULE_SET;0x03;controlling;supporting;-
+;Schedule Get;COMMAND_SCHEDULE_GET;0x04;controlling;supporting;-
+;Schedule Report;COMMAND_SCHEDULE_REPORT;0x05;supporting;controlling;-
+;Schedule Remove;SCHEDULE_REMOVE;0x06;controlling;supporting;-
+;Schedule State Set;SCHEDULE_STATE_SET;0x07;controlling;supporting;-
+;Schedule State Get;SCHEDULE_STATE_GET;0x08;controlling;supporting;-
+;Schedule State Report;SCHEDULE_STATE_REPORT;0x09;supporting;controlling;-
+;Schedule Supported Commands Get;SCHEDULE_SUPPORTED_COMMANDS_GET;0x0A;controlling;supporting;-
+;Schedule Supported Commands Report;SCHEDULE_SUPPORTED_COMMANDS_REPORT;0x0B;supporting;controlling;-
+Schedule Entry Lock Command Class;Schedule Entry Lock Enable Set;SCHEDULE_ENTRY_LOCK_ENABLE_SET;0x01;controlling;supporting;-
+;Schedule Entry Lock Enable All Set;SCHEDULE_ENTRY_LOCK_ENABLE_ALL_SET;0x02;controlling;supporting;-
+;Schedule Entry Lock Week Day Schedule Set;SCHEDULE_ENTRY_LOCK_WEEK_DAY_SET;0x03;controlling;supporting;-
+;Schedule Entry Lock Week Days Schedule Get;SCHEDULE_ENTRY_LOCK_WEEK_DAY_GET;0x04;controlling;supporting;-
+;Schedule Entry Lock Week Day Schedule Report;SCHEDULE_ENTRY_LOCK_WEEK_DAY_REPORT;0x05;supporting;controlling;-
+;Schedule Entry Lock Year Day Schedule Set;SCHEDULE_ENTRY_LOCK_YEAR_DAY_SET;0x06;controlling;supporting;-
+;Schedule Entry Lock Year Day Schedule Get;SCHEDULE_ENTRY_LOCK_YEAR_DAY_GET;0x07;controlling;supporting;-
+;Schedule Entry Lock Year Day Schedule Report;SCHEDULE_ENTRY_LOCK_YEAR_DAY_REPORT;0x08;supporting;controlling;-
+;Schedule Entry Lock Supported Get;SCHEDULE_ENTRY_TYPE_SUPPORTED_GET;0x09;controlling;supporting;-
+;Schedule Entry Lock Supported Report;SCHEDULE_ENTRY_TYPE_SUPPORTED_REPORT;0x0A;supporting;controlling;-
+;Schedule Entry Lock Time Offset Get;SCHEDULE_ENTRY_LOCK_TIME_OFFSET_GET;0x0B;controlling;supporting;-
+;Schedule Entry Lock Time Offset Report;SCHEDULE_ENTRY_LOCK_TIME_OFFSET_REPORT;0x0C;supporting;controlling;-
+;Schedule Entry Lock Time Offset Set;SCHEDULE_ENTRY_LOCK_TIME_OFFSET_SET;0x0D;controlling;supporting;-
+;Schedule Entry Lock Daily Repeating Get;SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_GET;0x0E;controlling;supporting;-
+;Schedule Entry Lock Daily Repeating Report;SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_REPORT;0x0F;supporting;controlling;-
+;Schedule Entry Lock Daily Repeating Set;SCHEDULE_ENTRY_LOCK_DAILY_REPEATING_SET;0x10;controlling;supporting;-
+Screen Attributes Command Class;Screen Attributes Get;SCREEN_ATTRIBUTES_GET;0x01;controlling;supporting;-
+;Screen Attributes Report;SCREEN_ATTRIBUTES_REPORT;0x02;supporting;controlling;-
+Screen Meta Data Command Class;Screen Meta Data Get;SCREEN_MD_GET;0x01;controlling;supporting;-
+;Screen Meta Data Report;SCREEN_MD_REPORT;0x02;supporting;controlling;-
+Security 0 Command Class;Security Commands Supported Get;SECURITY_COMMANDS_SUPPORTED_GET;0x02;controlling;supporting;-
+;Security Commands Supported Report;SECURITY_COMMANDS_SUPPORTED_REPORT;0x03;supporting;controlling;-
+;Security Scheme Get;SECURITY_SCHEME_GET;0x04;controlling;supporting;-
+;Security Scheme Report;SECURITY_SCHEME_REPORT;0x05;supporting;controlling;-
+;Network Key Set;NETWORK_KEY_SET;0x06;controlling;supporting;-
+;Network Key Verify;NETWORK_KEY_VERIFY;0x07;supporting;controlling;-
+;Security Scheme Inherit;SECURITY_SCHEME_INHERIT;0x08;controlling;supporting;-
+;Nonce Challenge Request;SECURITY_NONCE_GET;0x40;supporting;supporting;Both supporting
+;Nonce Challenge Response;SECURITY_NONCE_REPORT;0x80;supporting;supporting;Both supporting
+;Security Message Encapsulation;SECURITY_MESSAGE_ENCAPSULATION;0x81;supporting;supporting;Both supporting
+;Security Message Encapsulation;SECURITY_MESSAGE_ENCAPSULATION_NONCE_GET;0xC1;supporting;supporting;Both supporting
+Security 2 Command Class;Security 2 Nonce Get;SECURITY_2_NONCE_GET;0x01;controlling;supporting;-
+;Security 2 Nonce Report;SECURITY_2_NONCE_REPORT;0x02;supporting;controlling;-
+;Security 2 Message Encapsulation;SECURITY_2_MESSAGE_ENCAPSULATION;0x03;supporting;supporting;-
+;Security 2 KEX Get;KEX_GET;0x04;controlling;supporting;-
+;Security 2 KEX Report;KEX_REPORT;0x05;supporting;controlling;-
+;Security 2 KEX Set;KEX_SET;0x06;controlling;supporting;-
+;Security 2 KEX Fail;KEX_FAIL;0x07;supporting;supporting;Both supporting
+;Security 2 Public Key Report;PUBLIC_KEY_REPORT;0x08;supporting;supporting;Both supporting
+;Security 2 Network Key Get;SECURITY_2_NETWORK_KEY_GET;0x09;supporting;controlling;-
+;Security 2 Network Key Report;SECURITY_2_NETWORK_KEY_REPORT;0x0A;controlling;supporting;-
+;Security 2 Network Key Verify;SECURITY_2_NETWORK_KEY_VERIFY;0x0B;supporting;controlling;-
+;Security 2 Transfer End;SECURITY_2_TRANSFER_END;0x0C;supporting;supporting;Both supporting
+;Security 2 Commands Supported Get ;SECURITY_2_COMMANDS_SUPPORTED_GET;0x0D;controlling;supporting;-
+;Security 2 Commands Supported Report;SECURITY_2_COMMANDS_SUPPORTED_REPORT;0x0E;supporting;controlling;-
+Sensor Configuration Command Class;Sensor Trigger Level Set;SENSOR_TRIGGER_LEVEL_SET;0x01;controlling;supporting;-
+;Sensor Trigger Level Get;SENSOR_TRIGGER_LEVEL_GET;0x02;controlling;supporting;-
+;Sensor Trigger Level Report;SENSOR_TRIGGER_LEVEL_REPORT;0x03;supporting;controlling;-
+Simple AV Control Command Class;Simple AV Control Set;SIMPLE_AV_CONTROL_SET;0x01;controlling;supporting;-
+;Simple AV Control Get;SIMPLE_AV_CONTROL_GET;0x02;controlling;supporting;-
+;Simple AV Control Report;SIMPLE_AV_CONTROL_REPORT;0x03;supporting;controlling;-
+;Simple AV Control Supported Get;SIMPLE_AV_CONTROL_SUPPORTED_GET;0x04;controlling;supporting;-
+;Simple AV Control Supported Report;SIMPLE_AV_CONTROL_SUPPORTED_REPORT;0x05;supporting;controlling;-
+Sound Switch Command Class;Sound Switch Tones Number Get;SOUND_SWITCH_TONES_NUMBER_GET;0x01;controlling;supporting;-
+;Sound Switch Tones Number Report;SOUND_SWITCH_TONES_NUMBER_REPORT;0x02;supporting;controlling;-
+;Sound Switch Tone Info Get;SOUND_SWITCH_TONE_INFO_GET;0x03;controlling;supporting;-
+;Sound Switch Tone Info Report;SOUND_SWITCH_TONE_INFO_REPORT;0x04;supporting;controlling;-
+;Sound Switch Configuration Set;SOUND_SWITCH_CONFIGURATION_SET;0x05;controlling;supporting;-
+;Sound Switch Configuration Get;SOUND_SWITCH_CONFIGURATION_GET;0x06;controlling;supporting;-
+;Sound Switch Configuration Report;SOUND_SWITCH_CONFIGURATION_REPORT;0x07;supporting;controlling;-
+;Sound Switch Tone Play Set;SOUND_SWITCH_TONE_PLAY_SET;0x08;controlling;supporting;-
+;Sound Switch Tone Play Get;SOUND_SWITCH_TONE_PLAY_GET;0x09;controlling;supporting;-
+;Sound Switch Tone Play Report;SOUND_SWITCH_TONE_PLAY_REPORT;0x0A;supporting;controlling;-
+Supervision Command Class;Supervision Get;SUPERVISION_GET;0x01;controlling;supporting;-
+;Supervision Report;SUPERVISION_REPORT;0x02;supporting;controlling;-
+Tariff Table Configuration Command Class;Tariff Table Supplier Set;TARIFF_TBL_SUPPLIER_SET;0x01;controlling;supporting;-
+;Tariff Table Set;TARIFF_TBL_SET;0x02;controlling;supporting;-
+;Tariff Table Remove;TARIFF_TBL_REMOVE;0x03;controlling;supporting;-
+Tariff Table Monitor Command Class;Tariff Table Supplier Get;TARIFF_TBL_SUPPLIER_GET;0x01;controlling;supporting;-
+;Tariff Table Supplier Report;TARIFF_TBL_SUPPLIER_REPORT;0x02;supporting;controlling;-
+;Tariff Table Get;TARIFF_TBL_GET;0x03;controlling;supporting;-
+;Tariff Table Report;TARIFF_TBL_REPORT;0x04;supporting;controlling;-
+;Tariff Table Cost Get;TARIFF_TBL_COST_GET;0x05;controlling;supporting;-
+;Tariff Table Cost Report;TARIFF_TBL_COST_REPORT;0x06;supporting;controlling;-
+Thermostat Fan Mode Command Class;Thermostat Fan Mode Set;THERMOSTAT_FAN_MODE_SET;0x01;controlling;supporting;-
+;Thermostat Fan Mode Get;THERMOSTAT_FAN_MODE_GET;0x02;controlling;supporting;-
+;Thermostat Fan Mode Report;THERMOSTAT_FAN_MODE_REPORT;0x03;supporting;controlling;-
+;Thermostat Fan Mode Supported Get;THERMOSTAT_FAN_MODE_SUPPORTED_GET;0x04;controlling;supporting;-
+;Thermostat Fan Mode Supported Report;THERMOSTAT_FAN_MODE_SUPPORTED_REPORT;0x05;supporting;controlling;-
+Thermostat Fan State Command Class;Thermostat Fan State Get;THERMOSTAT_FAN_STATE_GET;0x02;controlling;supporting;-
+;Thermostat Fan State Report;THERMOSTAT_FAN_STATE_REPORT;0x03;supporting;controlling;-
+Thermostat Mode Command Class;Thermostat Mode Set;THERMOSTAT_MODE_SET;0x01;controlling;supporting;-
+;Thermostat Mode Get;THERMOSTAT_MODE_GET;0x02;controlling;supporting;-
+;Thermostat Mode Report;THERMOSTAT_MODE_REPORT;0x03;supporting;controlling;-
+;Thermostat Mode Supported Get;THERMOSTAT_MODE_SUPPORTED_GET;0x04;controlling;supporting;-
+;Thermostat Mode Supported Report;THERMOSTAT_MODE_SUPPORTED_REPORT;0x05;supporting;controlling;-
+Thermostat Operating State Command Class;Thermostat Operating State Get;THERMOSTAT_OPERATING_STATE_GET;0x02;controlling;supporting;-
+;Thermostat Operating State Report;THERMOSTAT_OPERATING_STATE_REPORT;0x03;supporting;controlling;-
+;Thermostat Operating State Logging Supported Get;THERMOSTAT_OPERATING_STATE_LOGGING_SUPPORTED_GET;0x01;controlling;supporting;-
+;Thermostat Operating State Logging Supported Report;THERMOSTAT_OPERATING_LOGGING_SUPPORTED_REPORT;0x04;supporting;controlling;-
+;Thermostat Operating State Logging Get;THERMOSTAT_OPERATING_STATE_LOGGING_GET;0x05;controlling;supporting;-
+;Thermostat Operating State Logging Report;THERMOSTAT_OPERATING_STATE_LOGGING_REPORT;0x06;supporting;controlling;-
+Thermostat Setback Command Class;Thermostat Setback Set;THERMOSTAT_SETBACK_SET;0x01;controlling;supporting;-
+;Thermostat Setback Get;THERMOSTAT_SETBACK_GET;0x02;controlling;supporting;-
+;Thermostat Setback Report;THERMOSTAT_SETBACK_REPORT;0x03;supporting;controlling;-
+Thermostat Setpoint Command Class;Thermostat Setpoint Set;THERMOSTAT_SETPOINT_SET;0x01;controlling;supporting;-
+;Thermostat Setpoint Get;THERMOSTAT_SETPOINT_GET;0x02;controlling;supporting;-
+;Thermostat Setpoint Report;THERMOSTAT_SETPOINT_REPORT;0x03;supporting;controlling;-
+;Thermostat Setpoint Supported Get;THERMOSTAT_SETPOINT_SUPPORTED_GET;0x04;controlling;supporting;-
+;Thermostat Setpoint Supported Report;THERMOSTAT_SETPOINT_SUPPORTED_REPORT;0x05;supporting;controlling;-
+;Thermostat Setpoint Capabilities Get;THERMOSTAT_SETPOINT_CAPABILITIES_GET;0x09;controlling;supporting;-
+;Thermostat Setpoint Capabilities Report;THERMOSTAT_SETPOINT_CAPABILITIES_REPORT;0x0A;supporting;controlling;-
+Time Command Class;Time Get;TIME_GET;0x01;controlling;supporting;-
+;Time Report;TIME_REPORT;0x02;supporting;controlling;-
+;Date Get;DATE_GET;0x03;controlling;supporting;-
+;Date Report;DATE_REPORT;0x04;supporting;controlling;-
+;Time Offset Set;TIME_OFFSET_SET;0x05;controlling;supporting;-
+;Time Offset Get;TIME_OFFSET_GET;0x06;controlling;supporting;-
+;Time Offset Report;TIME_OFFSET_REPORT;0x07;supporting;controlling;-
+Time Parameters Command Class;Time Parameters Set;TIME_PARAMETERS_SET;0x01;controlling;supporting;-
+;Time Parameters Get;TIME_PARAMETERS_GET;0x02;controlling;supporting;-
+;Time Parameters Report;TIME_PARAMETERS_REPORT;0x03;supporting;controlling;-
+Transport Service Command Class;First Segment;COMMAND_FIRST_FRAGMENT;0xC0;controlling;supporting;-
+;Segment Complete;COMMAND_FRAGMENT_COMPLETE;0xE8;supporting;controlling;-
+;Segment Request;COMMAND_FRAGMENT_REQUEST;0xC8;supporting;controlling;-
+;Segment Wait;COMMAND_FRAGMENT_WAIT;0xF0;supporting;controlling;-
+;Subsequent segment;COMMAND_SUBSEQUENT_FRAGMENT;0xE0;controlling;supporting;-
+User Code Command Class;User Code Set;USER_CODE_SET;0x01;controlling;supporting;-
+;User Code Get;USER_CODE_GET;0x02;controlling;supporting;-
+;User Code Report;USER_CODE_REPORT;0x03;supporting;controlling;-
+;Users Number Get;USERS_NUMBER_GET;0x04;controlling;supporting;-
+;Users Number Report;USERS_NUMBER_REPORT;0x05;supporting;controlling;-
+Version Command Class;Version Get;VERSION_GET;0x11;controlling;supporting;-
+;Version Report;VERSION_REPORT;0x12;supporting;controlling;-
+;Version Command Class Get;VERSION_COMMAND_CLASS_GET;0x13;controlling;supporting;-
+;Version Command Class Report;VERSION_COMMAND_CLASS_REPORT;0x14;supporting;controlling;-
+;Version Capabilities Get;VERSION_CAPABILITIES_GET;0x15;controlling;supporting;-
+;Version Capabilities Report;VERSION_CAPABILITIES_REPORT;0x16;supporting;controlling;-
+;Version Z-Wave Software Get;VERSION_ZWAVE_SOFTWARE_GET;0x17;controlling;supporting;-
+;Version Z-Wave Software Report;VERSION_ZWAVE_SOFTWARE_REPORT;0x18;supporting;controlling;-
+Wake Up Command Class;Wake Up Interval Set;WAKE_UP_INTERVAL_SET;0x04;controlling;supporting;-
+;Wake Up Interval Get;WAKE_UP_INTERVAL_GET;0x05;controlling;supporting;-
+;Wake Up Interval Report;WAKE_UP_INTERVAL_REPORT;0x06;supporting;controlling;-
+;Wake Up Notification;WAKE_UP_NOTIFICATION;0x07;supporting;controlling;-
+;Wake Up No More Information;WAKE_UP_NO_MORE_INFORMATION;0x08;controlling;supporting;-
+;Wake Up Interval Capabilities Get;WAKE_UP_INTERVAL_CAPABILITIES_GET;0x09;controlling;supporting;-
+;Wake Up Interval Capabilities Report;WAKE_UP_INTERVAL_CAPABILITIES_REPORT;0x0A;supporting;controlling;-
+Window Covering Command Class;Window Covering Supported Get;WINDOW_COVERING_SUPPORTED_GET;0x01;controlling;supporting;-
+;Window Covering Supported Report;WINDOW_COVERING_SUPPORTED_REPORT;0x02;supporting;controlling;-
+;Window Covering Get;WINDOW_COVERING_GET;0x03;controlling;supporting;-
+;Window Covering Report;WINDOW_COVERING_REPORT;0x04;supporting;controlling;-
+;Window Covering Set;WINDOW_COVERING_SET;0x05;controlling;supporting;-
+;Window Covering Start Level Change;WINDOW_COVERING_START_LEVEL_CHANGE;0x06;controlling;supporting;-
+;Window Covering Stop Level Change;WINDOW_COVERING_STOP_LEVEL_CHANGE;0x07;controlling;supporting;-
+Z/IP Command Class;Z/IP Packet;COMMAND_ZIP_PACKET;0x02;controlling;supporting;-
+;Z/IP Keep Alive;COMMAND_ZIP_KEEP_ALIVE;0x03;controlling;supporting;-
+Z/IP Gateway Command Class;Gateway Mode Set;GATEWAY_MODE_SET;0x01;controlling;supporting;-
+;Gateway Mode Get;GATEWAY_MODE_GET;0x02;controlling;supporting;-
+;Gateway Mode Report;GATEWAY_MODE_REPORT;0x03;supporting;controlling;-
+;Gateway Peer Set;GATEWAY_PEER_SET;0x04;controlling;supporting;-
+;Gateway Peer Get;GATEWAY_PEER_GET;0x05;controlling;supporting;-
+;Gateway Peer Report;GATEWAY_PEER_REPORT;0x06;supporting;controlling;-
+;Gateway Lock Set;GATEWAY_LOCK_SET;0x07;controlling;supporting;-
+;Unsolicited Destination Set;UNSOLICITED_DESTINATION_SET;0x08;controlling;supporting;-
+;Unsolicited Destination Get;UNSOLICITED_DESTINATION_GET;0x09;controlling;supporting;-
+;Unsolicited Destination Report;UNSOLICITED_DESTINATION_REPORT;0x0A;supporting;controlling;-
+;Application Node Info Set;COMMAND_APPLICATION_NODE_INFO_SET;0x0B;controlling;supporting;-
+;Application Node Info Get;COMMAND_APPLICATION_NODE_INFO_GET;0x0C;controlling;supporting;-
+;Application Node Info Report;COMMAND_APPLICATION_NODE_INFO_REPORT;0x0D;supporting;controlling;-
+Z/IP Naming and Location Command Class;Z/IP Name Set;ZIP_NAMING_NAME_SET;0x01;controlling;supporting;-
+;Z/IP Name Get;ZIP_NAMING_NAME_GET;0x02;controlling;supporting;-
+;Z/IP Name Report;ZIP_NAMING_NAME_REPORT;0x03;supporting;controlling;-
+;Z/IP Location Set;ZIP_NAMING_LOCATION_SET;0x04;controlling;supporting;-
+;Z/IP Location Get;ZIP_NAMING_LOCATION_GET;0x05;controlling;supporting;-
+;Z/IP Location Report;ZIP_NAMING_LOCATION_REPORT;0x06;supporting;controlling;-
+Z/IP ND Command Class;Z/IP Node Advertisement;ZIP_NODE_ADVERTISEMENT;0x01;supporting;controlling;-
+;Z/IP Node Solicitation;ZIP_NODE_SOLICITATION;0x03;controlling;supporting;-
+;Z/IP Inverse Node Solicitation;ZIP_INV_NODE_SOLICITATION;0x04;controlling;supporting;-
+Z/IP Portal Command Class;Gateway Configuration Set;GATEWAY_CONFIGURATION_SET;0x01;controlling;supporting;-
+;Gateway Configuration Status;GATEWAY_CONFIGURATION_STATUS;0x02;supporting;controlling;-
+;Gateway Configuration Get;GATEWAY_CONFIGURATION_GET;0x03;controlling;supporting;-
+;Gateway Configuration Report;GATEWAY_CONFIGURATION_REPORT;0x04;supporting;controlling;-
+Z-Wave Plus Info Command Class;Z-Wave Plus Info Get;ZWAVEPLUS_INFO_GET;0x01;controlling;supporting;-
+;Z-Wave Plus Info Report;ZWAVEPLUS_INFO_REPORT;0x02;supporting;controlling;-

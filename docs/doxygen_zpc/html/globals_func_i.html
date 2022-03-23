@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -112,6 +112,9 @@ $(document).ready(function(){initNavTree('globals_func_i.html',''); initResizabl
 <li>is_attribute_transition_ongoing()
 : <a class="el" href="group__unify__attribute__transitions.html#gaa12885a992af7e3dab14b382806f78dc">attribute_transitions.h</a>
 </li>
+<li>is_bulk_supported()
+: <a class="el" href="zwave__command__class__configuration__control_8c.html#af292e55991d5074417182a6fdec5337b">zwave_command_class_configuration_control.c</a>
+</li>
 <li>is_cc_in_nif()
 : <a class="el" href="nm__state__machine_8c.html#a264b73bec51cdac6380652a9a8a1dce2">nm_state_machine.c</a>
 </li>
@@ -152,6 +155,9 @@ $(document).ready(function(){initNavTree('globals_func_i.html',''); initResizabl
 <li>is_node_pending_set_resolution()
 : <a class="el" href="group__attribute__resolver.html#gad167230e6bf706a5e1bde2d8b75a2b38">attribute_resolver.h</a>
 </li>
+<li>is_parameter_read_only()
+: <a class="el" href="zwave__command__class__configuration__control_8c.html#a9f749ae4cecc27243961595d0b1467d4">zwave_command_class_configuration_control.c</a>
+</li>
 <li>is_portable_end_node()
 : <a class="el" href="group__command__classes__utils.html#ga7dd7a32346c549c1f82f97037625db40">zwave_command_classes_utils.h</a>
 , <a class="el" href="group__command__classes__utils.html#ga7dd7a32346c549c1f82f97037625db40">zwave_command_classes_utils.c</a>
@@ -169,20 +175,20 @@ $(document).ready(function(){initNavTree('globals_func_i.html',''); initResizabl
 : <a class="el" href="group__zcl__group__cluster__server.html#gaa63ea774b4183213fa78117b0ef7499c">zcl_group_cluster_server.h</a>
 </li>
 <li>is_using_zpc_highest_security_class()
-: <a class="el" href="group__command__classes__utils.html#ga9c5cc33bc4f4b02b55abb6d39878d1fe">zwave_command_classes_utils.h</a>
-, <a class="el" href="group__command__classes__utils.html#ga9c5cc33bc4f4b02b55abb6d39878d1fe">zwave_command_classes_utils.c</a>
+: <a class="el" href="group__command__classes__utils.html#ga9c5cc33bc4f4b02b55abb6d39878d1fe">zwave_command_classes_utils.c</a>
+, <a class="el" href="group__command__classes__utils.html#ga9c5cc33bc4f4b02b55abb6d39878d1fe">zwave_command_classes_utils.h</a>
 </li>
 <li>is_version_cc_found()
-: <a class="el" href="group__zwave__command__class__version.html#ga6d1fd9e5a91e2a18487d313684db45b3">zwave_command_class_version.c</a>
-, <a class="el" href="group__zwave__command__class__version.html#ga6d1fd9e5a91e2a18487d313684db45b3">zwave_command_class_version.h</a>
+: <a class="el" href="group__zwave__command__class__version.html#ga6d1fd9e5a91e2a18487d313684db45b3">zwave_command_class_version.h</a>
+, <a class="el" href="group__zwave__command__class__version.html#ga6d1fd9e5a91e2a18487d313684db45b3">zwave_command_class_version.c</a>
 </li>
 <li>is_zpc_unid()
-: <a class="el" href="group__zpc__attribute__store.html#gaabb0477455a85ee31737f3d503acd3b9">zpc_attribute_store.h</a>
-, <a class="el" href="group__zpc__attribute__store.html#gaabb0477455a85ee31737f3d503acd3b9">zpc_attribute_store.c</a>
+: <a class="el" href="group__zpc__attribute__store.html#gaabb0477455a85ee31737f3d503acd3b9">zpc_attribute_store.c</a>
+, <a class="el" href="group__zpc__attribute__store.html#gaabb0477455a85ee31737f3d503acd3b9">zpc_attribute_store.h</a>
 </li>
 <li>is_zwave_command_class_filtered_for_root_device()
-: <a class="el" href="group__command__classes__utils.html#gab8c8edb0b4667b409c3ec1e67ae71361">zwave_command_classes_utils.h</a>
-, <a class="el" href="group__command__classes__utils.html#gab8c8edb0b4667b409c3ec1e67ae71361">zwave_command_classes_utils.c</a>
+: <a class="el" href="group__command__classes__utils.html#gab8c8edb0b4667b409c3ec1e67ae71361">zwave_command_classes_utils.c</a>
+, <a class="el" href="group__command__classes__utils.html#gab8c8edb0b4667b409c3ec1e67ae71361">zwave_command_classes_utils.h</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -190,7 +196,7 @@ $(document).ready(function(){initNavTree('globals_func_i.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:54 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:50:14 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -26,6 +26,11 @@ clock_time_t clock_time(void)
   return test_time;
 }
 
+unsigned long clock_seconds(void)
+{
+  return clock_time() / 1000;
+}
+
 PROCESS(test_process, "Test Process");
 
 PROCESS_THREAD(test_process, ev, data)
@@ -37,18 +42,13 @@ PROCESS_THREAD(test_process, ev, data)
   PROCESS_END();
 }
 
-unsigned long
-clock_seconds(void)
-{
-  return clock_time() / 1000;
-}
-
 void contiki_test_helper_increase_clock(clock_time_t ms)
 {
   test_time += ms;
 }
 
-void contiki_test_helper_run_once(clock_time_t ms) {
+void contiki_test_helper_run_once(clock_time_t ms)
+{
   PROCESS_CURRENT() = NULL;
 
   test_time += ms;
@@ -84,8 +84,8 @@ void contiki_test_helper_run_clock_increases_for_each_event(clock_time_t ms)
 void contiki_test_helper_init()
 {
   test_time = 0;
-  ctimer_init();
   process_init();
+  ctimer_init();
   process_start(&etimer_process, 0);
   process_start(&test_process, 0);
   contiki_test_helper_run(0);

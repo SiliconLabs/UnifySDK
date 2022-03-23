@@ -26,3 +26,15 @@ target_include_directories(
          "$<TARGET_PROPERTY:zpc_utils,INTERFACE_INCLUDE_DIRECTORIES>")
 add_subdirectory(test)
 add_subdirectory(test_helper)
+
+
+# Rust bindings for ZPC attribute store
+generate_rust_bindings(
+  NAME
+  zpc_attribute_store
+  ALLOW_LIST
+  "get_zpc_.*"
+  HEADERS
+  "$<TARGET_PROPERTY:zpc_attribute_store,SOURCE_DIR>/include/*.h"
+  DEPENDS
+  "zpc_attribute_store")

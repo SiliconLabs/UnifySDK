@@ -176,6 +176,10 @@ void uic_mqtt_unretain(const char *prefix)
 
 void uic_mqtt_unretain_by_regex(const char *regex)
 {
+  sl_log_debug(LOG_TAG,
+               "Removing all topics (retained empty MQTT publish message) "
+               "matching regex : %s",
+               regex);
   mqtt_client_unretain_by_regex(client_instance, regex);
 }
 

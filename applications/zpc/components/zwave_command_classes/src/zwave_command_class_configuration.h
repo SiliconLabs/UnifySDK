@@ -53,7 +53,11 @@ package "Attribute Store" <<Database>> {
 
   object "Bulk Support" as bulk_support #FFFFFF
   bulk_support : Attribute Type = ATTRIBUTE(BULK_SUPPORT)
-  bulk_support : value = Desired: [] - Reported: [5]
+  bulk_support : value = Desired: [] - Reported: [1]
+
+  object "Default Reset Requested" as default_reset_requested #FFFFFF
+  default_reset_requested : Attribute Type = ATTRIBUTE(DEFAULT_RESET_REQUESTED)
+  default_reset_requested : value = Desired: [1] - Reported: [0]
 
   package "For each Parameter" <<Rectangle>> {
 
@@ -112,6 +116,7 @@ node *-- endpoint
 endpoint *-- version
 endpoint *-- next_parameter_id
 endpoint *-- bulk_support
+endpoint *-- default_reset_requested
 endpoint *-- parameter_id
 
 next_parameter_id -[hidden]- parameter_id
@@ -154,6 +159,11 @@ parameter_id *-- parameter_altering_capabilities
 
 #include "sl_status.h"
 
+#define PARAMETER_FORMAT_SIGNED_INTEGER   0
+#define PARAMETER_FORMAT_UNSIGNED_INTEGER 1
+#define PARAMETER_FORMAT_ENUM             2
+#define PARAMETER_FORMAT_BIT_FIELD        3
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -163,7 +173,7 @@ extern "C" {
  *
  * @return SL_STATUS_OK on success, any other error code for an error.
  */
-//sl_status_t zwave_command_class_configuration_init();
+sl_status_t zwave_command_class_configuration_init();
 
 #ifdef __cplusplus
 }

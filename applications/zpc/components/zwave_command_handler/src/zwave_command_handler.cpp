@@ -28,6 +28,7 @@
 // Interface includes
 #include "ZW_classcmd.h"
 #include "zwave_command_class_version_types.h"
+#include "zwave_command_type.hpp"
 
 // Generic includes
 #include <iomanip>
@@ -87,6 +88,14 @@ sl_status_t zwave_command_handler_dispatch(
   zwave_command_handler_t handler_to_invoke = {};
   handler_to_invoke.command_class           = frame_data[0];
   sl_status_t rc                            = SL_STATUS_NOT_SUPPORTED;
+
+  //Check if this frame is a multicast get
+  if (connection->local.is_multicast) {
+    if( ZwaveCommandClassType::get_type(frame_data[0],frame_data[1]) == ZwaveCommandClassType::type_t::GET ) {
+        sl_log_debug(LOG_TAG,"Multicast get frame dropped");
+        return SL_STATUS_NOT_SUPPORTED;
+      }
+  }
 
   auto [it, end] = command_handler_list.equal_range(handler_to_invoke);
   for (; it != end; it++) {

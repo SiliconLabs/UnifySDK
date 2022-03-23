@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('md_applications_aox_applications_posit
 <div class="contents">
 <div class="textblock"><p>This user guide will guide the reader on how to install, configure and run the Positioning IoT Service.</p>
 <p>Readers of this document should be familiar with the <a class="el" href="md_applications_aox_applications_aoxpc_readme_user.html">AoXPC</a>, because the position estimation service is based on the angle data provided by the AoXPC instances.</p>
-<h1><a class="anchor" id="autotoc_md442"></a>
+<h1><a class="anchor" id="autotoc_md482"></a>
 Operation</h1>
 <p>The positioning service starts automatically as a systemd service. For more information on installation and systemd services, see <a class="el" href="md_doc_readme_user.html">Unify User guide</a>.</p>
 <p>The service detects the locators connected to the system automatically. Locators need to be configured as described in the <a class="el" href="md_applications_aox_applications_aoxpc_readme_user.html">AoXPC User Guide</a>. The locator configuration is considered valid if the <code>PositionAndOrientationValid</code> attribute is set to <code>true</code>.</p>
@@ -107,11 +107,11 @@ Operation</h1>
 <div class="line">    &quot;Z&quot;: 0.8335742950439453</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md443"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md483"></a>
 Position Estimation with One Locator</h2>
 <p>The positioning service allows to estimate position even with one locator. To achieve this, RSSI based distance estimation is used. If the received signal strength of the incoming signal is altered for any other reason than the distance between the TX and RX itself, it will lead to incorrect distance measurement and it will lead to incorrect position estimates.</p>
 <p>Therefore, using multiple locators is advised for accurate position estimation.</p>
-<h1><a class="anchor" id="autotoc_md444"></a>
+<h1><a class="anchor" id="autotoc_md484"></a>
 Configuration</h1>
 <p>The positioning service can be configured with the same JSON config file as the AoXPC. The path of the config file can be specified with the <code>--positioning.config</code> CLI option.</p>
 <p>These are the configuration parameters that are relevant for the positioning service, with their default values:</p>
@@ -126,27 +126,27 @@ Configuration</h1>
 <div class="line">  &quot;maximumSequenceIdDiffs&quot;:20,</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Let's see these parameters in detail. </p>
-<h2><a class="anchor" id="autotoc_md445"></a>
+<h2><a class="anchor" id="autotoc_md485"></a>
 id</h2>
 <p>This parameter controls the <code>ApplicationId</code> field of the <code>Position</code> attribute. The default value is derived from the process ID. It can be replaced with any string.</p>
-<h2><a class="anchor" id="autotoc_md446"></a>
+<h2><a class="anchor" id="autotoc_md486"></a>
 estimationModeLocation</h2>
 <p>Estimation mode used by the position estimation algorithm.</p>
 <p>For more details, see <a href="https://docs.silabs.com/rtl-lib/latest/group-sl-rtl-loc#gacf5978113a013aa36cbdb85bfc937aed">sl_rtl_loc_set_mode</a>.</p>
-<h2><a class="anchor" id="autotoc_md447"></a>
+<h2><a class="anchor" id="autotoc_md487"></a>
 validationModeLocation</h2>
 <p>The positioning service implements an angle correction mechanism for a deviating locator whose angle reports are far off the expected one, and thus is not pointing to the same direction where all other locators see the tag. The correction feedback provides the locator with the information in which direction it is supposed to see the tag. This helps locators that locked up on a reflection signal which is stronger than the one coming in the line-of sight direction.</p>
 <p>The <code>validationModeLocation</code> parameter determines the sensitivity of the angle correction mechanism.</p>
 <p>For more details, see <a href="https://docs.silabs.com/rtl-lib/latest/group-sl-rtl-loc#ga424290857cf7416aef48d72ed31d84a2">sl_rtl_loc_set_measurement_validation</a>.</p>
-<h2><a class="anchor" id="autotoc_md448"></a>
+<h2><a class="anchor" id="autotoc_md488"></a>
 estimationIntervalSec</h2>
 <p>Estimation interval in seconds. This value should approximate the time interval between two consecutive CTEs received from an asset tag.</p>
 <p>For more details, see <a href="https://docs.silabs.com/rtl-lib/latest/group-sl-rtl-loc#gaa2a04c7e40ec23d2451cd63d0a6024db">sl_rtl_loc_process</a>.</p>
-<h2><a class="anchor" id="autotoc_md449"></a>
+<h2><a class="anchor" id="autotoc_md489"></a>
 locationFiltering, locationFilteringWeight</h2>
 <p>An optional filter can be applied on the position coordinates, <code>X</code>, <code>Y</code> and <code>Z</code> to reduce noise. Filter weight ranges from 0 to 1.</p>
 <p>For more details, see <a href="https://docs.silabs.com/rtl-lib/latest/group-sl-rtl-util#ga41610abd68f01bc6871e084fc28ed000">sl_rtl_util_filter</a>.</p>
-<h2><a class="anchor" id="autotoc_md450"></a>
+<h2><a class="anchor" id="autotoc_md490"></a>
 numberOfSequenceIds, maximumSequenceIdDiffs</h2>
 <p>The CTE signals can be identified by their sequence ID which is a monotonic increasing number. When the positioning service receives an angle report estimated from that CTE, it knows</p><ul>
 <li>the transmitter of the CTE (asset tag)</li>
@@ -171,7 +171,7 @@ numberOfSequenceIds, maximumSequenceIdDiffs</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:00 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

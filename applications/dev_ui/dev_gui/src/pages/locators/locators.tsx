@@ -55,7 +55,7 @@ class Locators extends React.Component<LocatorsProps, LocatorsState> {
                             if (!cluster) return null;
                             return (
                                 <tr key={`${index}-${indexEp}`}>
-                                    <td className="vertical-middle"><EditableAttribute Unid={`${node.Unid}/${ep}`} Cluster={node.ep[ep].Clusters.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} /></td>
+                                    <td className="vertical-middle"><EditableAttribute Node={node} EpName={ep} Cluster={node.ep[ep].Clusters.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={node.NetworkStatus === "Offline" || node.NetworkStatus === "Unavailable"} /></td>
                                     <td className="vertical-middle">{cluster.Attributes?.Position?.Reported?.ApplicationId}</td>
                                     <td className="vertical-middle">{cluster.Attributes?.Position?.Reported
                                         ? `X:${cluster.Attributes.Position.Reported.X?.toFixed(4)}, Y:${cluster.Attributes.Position.Reported.Y?.toFixed(4)}, Z:${cluster.Attributes.Position.Reported.Z?.toFixed(4)}`
@@ -105,7 +105,7 @@ class Locators extends React.Component<LocatorsProps, LocatorsState> {
                             let reportCommand = reportName && cluster.GeneratedCommands && cluster.GeneratedCommands[reportName];
                             return (
                                 <tr key={`${index}-${indexEp}`}>
-                                    <td className="vertical-middle"><EditableAttribute Unid={`${node.Unid}/${ep}`} Cluster={node.ep[ep].Clusters.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} /></td>
+                                    <td className="vertical-middle"><EditableAttribute Node={node} EpName={ep} Cluster={node.ep[ep].Clusters.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={node.NetworkStatus === "Offline" || node.NetworkStatus === "Unavailable"} /></td>
                                     <td className="vertical-middle">{cluster?.Attributes?.ReportingMode?.Reported || "-"}</td>
                                     <td className="text-center">{cluster?.Attributes?.PositionAndOrientationValid?.Reported === true ? <FiIcons.FiCheck color="#28a745" /> : (cluster?.Attributes?.AoXLocatorConfigured?.Reported === false ? <FiIcons.FiXCircle color="#6c757d" /> : "-")}</td>
                                     <td>{this.getObjectFieldValue(cluster?.Attributes?.PositionAndOrientation?.Reported)}</td>
@@ -114,7 +114,7 @@ class Locators extends React.Component<LocatorsProps, LocatorsState> {
                                     <td>{this.getObjectFieldValue(cluster?.Attributes?.AllowList?.Reported)}</td>
                                     <td>
                                         <Tooltip title="Customize Attributes" className="float-right">
-                                            <span className={(node.NetworkStatus === "Offline" || node.NetworkStatus === "Unavailable" || !cluster?.Attributes) ? "margin-h-5 icon cursor-defult disabled" : "margin-h-5 icon"}>
+                                            <span className={(node.NetworkStatus === "Offline" || node.NetworkStatus === "Unavailable" || !cluster?.Attributes) ? "margin-h-5 icon cursor-default disabled" : "margin-h-5 icon"}>
                                                 <AiIcons.AiOutlineTool onClick={() => this.showClusterAttr(node, ep, cluster)} />
                                             </span>
                                         </Tooltip>

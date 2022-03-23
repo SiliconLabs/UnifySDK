@@ -7,6 +7,7 @@ var zwave__command__class__basic_8c =
     [ "REPORT_DURATION_INDEX", "zwave__command__class__basic_8c.html#aaa046728cc48e7051dce195be3674f68", null ],
     [ "REPORT_TARGET_VALUE_INDEX", "zwave__command__class__basic_8c.html#af56f69a689bbb813f1adf9e30e52392a", null ],
     [ "REPORT_VALUE_INDEX", "zwave__command__class__basic_8c.html#a78115cf0be234f687fddf416a4daee9b", null ],
+    [ "SET_VALUE_INDEX", "zwave__command__class__basic_8c.html#af35ca22bcfe2543c51ab5966fc9e9ac1", null ],
     [ "basic_probe_status_t", "zwave__command__class__basic_8c.html#a231f92ecd99dbf86641ec41d0b812a04", [
       [ "NOT_REQUESTED", "zwave__command__class__basic_8c.html#a231f92ecd99dbf86641ec41d0b812a04aca27dcc667953489ee712a3a2c6349a6", null ],
       [ "REQUESTED", "zwave__command__class__basic_8c.html#a231f92ecd99dbf86641ec41d0b812a04a09eb653c7a2263eb32e79d5b71ff048b", null ],
@@ -21,6 +22,7 @@ var zwave__command__class__basic_8c =
     [ "zwave_command_class_basic_control_handler", "zwave__command__class__basic_8c.html#a9bfdc42dbc2abe60e4a0a70ffeb05985", null ],
     [ "zwave_command_class_basic_get", "zwave__command__class__basic_8c.html#aef5ee8dd153155384694950f0bca1460", null ],
     [ "zwave_command_class_basic_handle_report", "zwave__command__class__basic_8c.html#a3da5f1f2ae5cfe60e041dea68a68a0ba", null ],
+    [ "zwave_command_class_basic_handle_set", "zwave__command__class__basic_8c.html#a2ea1da83ffcbed24b19575a97648d1ab", null ],
     [ "zwave_command_class_basic_init", "group__zwave__command__class__basic.html#ga6780c7bc2310c30c76e7a54aa101604f", null ],
     [ "zwave_command_class_basic_set", "zwave__command__class__basic_8c.html#a47620b790225261625cd5b97964fe298", null ],
     [ "v1_attributes", "zwave__command__class__basic_8c.html#a1b53774e0b19ff46dc9641260e6ec427", null ]

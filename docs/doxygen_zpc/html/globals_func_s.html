@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -216,6 +216,9 @@ $(document).ready(function(){initNavTree('globals_func_s.html',''); initResizabl
 <li>S2_stop_timeout()
 : <a class="el" href="zwave__s2__process_8c.html#ad2a18168c048d7eb245437440deed436">zwave_s2_process.c</a>
 </li>
+<li>save_parameter_value()
+: <a class="el" href="zwave__command__class__configuration__control_8c.html#a244ada7bd51321a86eb2b03a88a957cd">zwave_command_class_configuration_control.c</a>
+</li>
 <li>save_reported_interval()
 : <a class="el" href="zwave__command__class__wake__up_8c.html#a7610a0e7b1f581a8a1991541eda124ea">zwave_command_class_wake_up.c</a>
 </li>
@@ -252,11 +255,17 @@ $(document).ready(function(){initNavTree('globals_func_s.html',''); initResizabl
 <li>SerialAPI_AES128_Encrypt()
 : <a class="el" href="ext__transport__security_8h.html#a09ed72a172adf326252c264003495346">ext_transport_security.h</a>
 </li>
+<li>set_all_parameters_to_their_default_value()
+: <a class="el" href="zwave__command__class__configuration__control_8c.html#a8f6da52fd5824c2c8773caf21c6f4535">zwave_command_class_configuration_control.c</a>
+</li>
 <li>set_basic_probe_status()
 : <a class="el" href="zwave__command__class__basic_8c.html#a6215b1131af3db05bf8c1e5a06a7493c">zwave_command_class_basic.c</a>
 </li>
 <li>Set_Default_Callback()
 : <a class="el" href="ext__nvm__tools_8c.html#aadb1e608f8fad0a06946bb2e4d93985c">ext_nvm_tools.c</a>
+</li>
+<li>set_default_parameter_properties()
+: <a class="el" href="zwave__command__class__configuration__control_8c.html#a1223d03c608c7bb10a384acefb70f507">zwave_command_class_configuration_control.c</a>
 </li>
 <li>set_default_v1_capabilities()
 : <a class="el" href="zwave__command__class__wake__up_8c.html#a9a61799d62b6c368681fb8a80b0ddf43">zwave_command_class_wake_up.c</a>
@@ -286,15 +295,18 @@ $(document).ready(function(){initNavTree('globals_func_s.html',''); initResizabl
 , <a class="el" href="group__zwave__command__class__firmware__update__internals.html#gab86aadb90742bb9d3d954a1def8290ad">zwave_command_class_firmware_update_internals.h</a>
 </li>
 <li>set_firmware_transfer_fragment_size()
-: <a class="el" href="group__zwave__command__class__firmware__update__internals.html#ga53a41379bc0348edd498d92c04d94cd6">zwave_command_class_firmware_update.c</a>
-, <a class="el" href="group__zwave__command__class__firmware__update__internals.html#ga53a41379bc0348edd498d92c04d94cd6">zwave_command_class_firmware_update_internals.h</a>
+: <a class="el" href="group__zwave__command__class__firmware__update__internals.html#ga53a41379bc0348edd498d92c04d94cd6">zwave_command_class_firmware_update_internals.h</a>
+, <a class="el" href="group__zwave__command__class__firmware__update__internals.html#ga53a41379bc0348edd498d92c04d94cd6">zwave_command_class_firmware_update.c</a>
 </li>
 <li>set_firmware_transfer_last_status()
-: <a class="el" href="group__zwave__command__class__firmware__update__internals.html#gaceef2cdf638ab78917324cb54fbfcc39">zwave_command_class_firmware_update.c</a>
-, <a class="el" href="group__zwave__command__class__firmware__update__internals.html#gaceef2cdf638ab78917324cb54fbfcc39">zwave_command_class_firmware_update_internals.h</a>
+: <a class="el" href="group__zwave__command__class__firmware__update__internals.html#gaceef2cdf638ab78917324cb54fbfcc39">zwave_command_class_firmware_update_internals.h</a>
+, <a class="el" href="group__zwave__command__class__firmware__update__internals.html#gaceef2cdf638ab78917324cb54fbfcc39">zwave_command_class_firmware_update.c</a>
 </li>
 <li>set_indicator_value0()
 : <a class="el" href="zwave__command__class__indicator_8c.html#a0668453715098a687b70377cc1068db2">zwave_command_class_indicator.c</a>
+</li>
+<li>set_parameter_value_in_buffer()
+: <a class="el" href="zwave__command__class__configuration__control_8c.html#a66f66d87963333a409b3645c9f566240">zwave_command_class_configuration_control.c</a>
 </li>
 <li>set_power_level()
 : <a class="el" href="zwave__command__class__powerlevel_8c.html#a41c9cf0a97c1b6f6249486895fc97abf">zwave_command_class_powerlevel.c</a>
@@ -309,6 +321,10 @@ $(document).ready(function(){initNavTree('globals_func_s.html',''); initResizabl
 <li>set_reported_value()
 : <a class="el" href="zwave__command__class__switch__multilevel_8c.html#acc9175dc30996e464bf423af23dd6418">zwave_command_class_switch_multilevel.c</a>
 , <a class="el" href="zwave__command__class__binary__switch_8c.html#acc9175dc30996e464bf423af23dd6418">zwave_command_class_binary_switch.c</a>
+</li>
+<li>set_reports_to_follow()
+: <a class="el" href="group__command__classes__utils.html#gae5b058ae65bbc7ee9ab4b959db376513">zwave_command_classes_utils.c</a>
+, <a class="el" href="group__command__classes__utils.html#gae5b058ae65bbc7ee9ab4b959db376513">zwave_command_classes_utils.h</a>
 </li>
 <li>set_state()
 : <a class="el" href="zwave__command__class__central__scene_8c.html#a079a67bbf5e8146531fe23b3d07fa87f">zwave_command_class_central_scene.c</a>
@@ -369,7 +385,7 @@ $(document).ready(function(){initNavTree('globals_func_s.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:54 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:50:14 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

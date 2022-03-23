@@ -279,6 +279,7 @@ below shows the resource usage of the individual components measured on armhf re
 The SDK depends on the following debian packages:
 
 - libedit2
+- libssl1.1
 - libsqlite3-0
 - libmosquitto1
 - libyaml-cpp0.6

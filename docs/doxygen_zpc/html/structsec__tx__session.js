@@ -7,6 +7,7 @@ var structsec__tx__session =
     [ "data", "structsec__tx__session.html#ac287873b0a2f5eb6640a53cbe99d4855", null ],
     [ "data_len", "structsec__tx__session.html#a2b831ed7f194cb4f335e5560860b5790", null ],
     [ "seq", "structsec__tx__session.html#aedc406d40840fbede4a7b5ae4a9e60b8", null ],
+    [ "session_id", "structsec__tx__session.html#a38b5acacfdcac6f324c3559870bf4662", null ],
     [ "state", "structsec__tx__session.html#aa642588917f61e9b72998254d88e010d", null ],
     [ "timer", "structsec__tx__session.html#aace59ea2a4e46c7e5be0ffce6fbdd867", null ],
     [ "transition_time", "structsec__tx__session.html#acf46e2baa96ea0769dfc63f3e08fbccf", null ],

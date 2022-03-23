@@ -29,7 +29,6 @@ static int zwave_controller_on_rx_frame_received_count          = 0;
 static int zwave_controller_on_application_frame_received_count = 0;
 static zwave_controller_connection_info_t info                  = {};
 static zwave_rx_receive_options_t rx_options                    = {};
-static zwave_node_info_t node_info = {};
 const uint8_t frame_data[]                                      = {0x00};
 const uint8_t transport_frame_data[]                            = {0xbb};
 static sl_status_t transport_return_code                        = SL_STATUS_OK;
@@ -60,7 +59,8 @@ static void zwave_controller_on_frame_transmission_test(
   zwave_controller_on_frame_transmission_call_count += 1;
 }
 
-static void zwave_controller_on_rx_frame_received(zwave_node_id_t node_id)
+static void
+  zwave_controller_on_rx_frame_received_callback(zwave_node_id_t node_id)
 {
   zwave_controller_on_rx_frame_received_count += 1;
 }
@@ -183,15 +183,38 @@ void test_zwave_controller_on_controller_new_suc_happy()
 
 void test_zwave_controller_on_controller_rx_frames()
 {
+  // Rx frame is ignored without callbacks.
+  zwave_controller_on_frame_reception(20);
+  TEST_ASSERT_EQUAL(0, zwave_controller_on_rx_frame_received_count);
+
+  callbacks.on_rx_frame_received
+    = &zwave_controller_on_rx_frame_received_callback;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_controller_register_callbacks(&callbacks));
+
+  zwave_controller_on_frame_reception(20);
+  TEST_ASSERT_EQUAL(1, zwave_controller_on_rx_frame_received_count);
+
+  zwave_controller_on_frame_reception(20);
+  TEST_ASSERT_EQUAL(0, zwave_controller_on_application_frame_received_count);
+  TEST_ASSERT_EQUAL(2, zwave_controller_on_rx_frame_received_count);
+
+  // remove callbacks:
+  callbacks.on_rx_frame_received = NULL;
+}
+
+void test_zwave_controller_on_controller_application_frames()
+{
   // We need to inject a valid frame, as this will go through the transports
   zwave_controller_on_frame_received(&info,
-                                     &rx_options,
-                                     frame_data,
-                                     sizeof(frame_data));
+                                      &rx_options,
+                                      frame_data,
+                                      sizeof(frame_data));
   TEST_ASSERT_EQUAL(0, zwave_controller_on_rx_frame_received_count);
   TEST_ASSERT_EQUAL(0, zwave_controller_on_application_frame_received_count);
 
-  callbacks.on_rx_frame_received = &zwave_controller_on_rx_frame_received;
+  callbacks.on_rx_frame_received
+    = &zwave_controller_on_rx_frame_received_callback;
   callbacks.on_application_frame_received
     = &zwave_controller_on_application_frame_received;
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
@@ -202,37 +225,32 @@ void test_zwave_controller_on_controller_rx_frames()
                                      frame_data,
                                      sizeof(frame_data));
   TEST_ASSERT_EQUAL(1, zwave_controller_on_application_frame_received_count);
-  TEST_ASSERT_EQUAL(1, zwave_controller_on_rx_frame_received_count);
+  TEST_ASSERT_EQUAL(0, zwave_controller_on_rx_frame_received_count);
 
   zwave_controller_on_frame_received(&info,
-                                     &rx_options,
-                                     frame_data,
-                                     sizeof(frame_data));
+                                      &rx_options,
+                                      frame_data,
+                                      sizeof(frame_data));
   TEST_ASSERT_EQUAL(2, zwave_controller_on_application_frame_received_count);
-  TEST_ASSERT_EQUAL(2, zwave_controller_on_rx_frame_received_count);
+  TEST_ASSERT_EQUAL(0, zwave_controller_on_rx_frame_received_count);
 
   // Try a frame absorbed by transports
   zwave_controller_on_frame_received(&info,
-                                     &rx_options,
-                                     transport_frame_data,
-                                     sizeof(transport_frame_data));
+                                      &rx_options,
+                                      transport_frame_data,
+                                      sizeof(transport_frame_data));
   TEST_ASSERT_EQUAL(2, zwave_controller_on_application_frame_received_count);
-  TEST_ASSERT_EQUAL(3, zwave_controller_on_rx_frame_received_count);
+  TEST_ASSERT_EQUAL(0, zwave_controller_on_rx_frame_received_count);
 
   // Try again, with the transport frame rejected by the transport.
   // Then it goes to the application layer
   transport_return_code = SL_STATUS_NOT_FOUND;
   zwave_controller_on_frame_received(&info,
-                                     &rx_options,
-                                     transport_frame_data,
-                                     sizeof(transport_frame_data));
+                                      &rx_options,
+                                      transport_frame_data,
+                                      sizeof(transport_frame_data));
   TEST_ASSERT_EQUAL(3, zwave_controller_on_application_frame_received_count);
-  TEST_ASSERT_EQUAL(4, zwave_controller_on_rx_frame_received_count);
-
-  // Receiving a NIF is a RX event
-  zwave_controller_on_node_information(10, &node_info);
-  TEST_ASSERT_EQUAL(3, zwave_controller_on_application_frame_received_count);
-  TEST_ASSERT_EQUAL(5, zwave_controller_on_rx_frame_received_count);
+  TEST_ASSERT_EQUAL(0, zwave_controller_on_rx_frame_received_count);
 
   // remove these callbacks:
   callbacks.on_rx_frame_received          = NULL;

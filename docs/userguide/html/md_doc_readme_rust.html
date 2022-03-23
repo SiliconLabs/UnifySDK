@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('md_doc_readme_rust.html',''); initResi
 <blockquote class="doxtable">
 <p>The docker images provided by the Unify SDK contain already everything you need to program Rust. </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md105"></a>
+<h1><a class="anchor" id="autotoc_md108"></a>
 Overview</h1>
 <p>Rust has its own ecosystem regarding building and package management, see <a href="https://doc.rust-lang.org/cargo/">Cargo</a>. We tried to integrate this as best as possible to our own cmake build environment. The overall philosophy is to keep the amount of changes and configurations we need to do to cargo as simple as possible. This means we can leverage from cargo tooling without interference of our build-system. <br  />
  At the moment of writing we have 2 components that make use of Rust and buildup with different rust crates:</p>
@@ -100,14 +100,14 @@ Overview</h1>
 <li>Unify libraries, &lt;project_root&gt;/components/uic_rust</li>
 </ul>
 <p>But mix and matching Rust and C libraries is possible with little effort.</p>
-<h1><a class="anchor" id="autotoc_md106"></a>
+<h1><a class="anchor" id="autotoc_md109"></a>
 Building</h1>
 <p>rust packages can be build by using the command in your build output folder (assuming ninja is used as build generator):</p>
 <div class="fragment"><div class="line">ninja cargo_build</div>
 </div><!-- fragment --><p>or for building and running rust tests:</p>
 <div class="fragment"><div class="line">ninja cargo_test</div>
 </div><!-- fragment --><p>take a look at <a href="##Using-cargo-standalone">Using cargo standalone</a> for information about how to setup your environment to use native cargo commands.</p>
-<h1><a class="anchor" id="autotoc_md107"></a>
+<h1><a class="anchor" id="autotoc_md110"></a>
 Build Chain</h1>
 <p>This section explains briefly the order in which rust components are build by the build system. As mentioned before, rust packages are build as one target. A full run of the build-system usually contains the following sequence of rust related build tasks, which are executed in the following order:<br  />
 </p>
@@ -120,13 +120,13 @@ Build Chain</h1>
 <blockquote class="doxtable">
 <p>Even though the majority of rust libraries dont require this, all dependencies of the <code>cargo_build</code> target are build prior. Making a split between packages that require linkage and those who dont would provide more flexibility. This is something we want to investigate in the future. </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md108"></a>
+<h1><a class="anchor" id="autotoc_md111"></a>
 Using cargo standalone</h1>
 <p>Using cargo natively can be preferable as it provides more flexibility for your workflows. It comes with some caveats though, which will be described in more detail in this paragraph. Note that the official way of building remains via the cmake build-system. Therefore calling cargo directly should only be done in local development scenarios.</p>
 <blockquote class="doxtable">
 <p>Make sure to do a full build via cmake prior using cargo standalone. This way you are sure all the native libs are present on your hard drive. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md109"></a>
+<h2><a class="anchor" id="autotoc_md112"></a>
 Setting up environment</h2>
 <p>On the first time cmake is run, a script (<code>unify_env.source</code>) is generated which describes the environment the build system uses to compile rust sources. Since we are going to bypass the build-system, we need to replicate this environment. You have a couple of options on how to source this environment, which depends on your preference. There are a couple of things to take into consideration before choosing:</p>
 <ul>
@@ -151,7 +151,7 @@ Setting up environment</h2>
 <div class="line">0</div>
 <div class="line">sourced!</div>
 </div><!-- fragment --><p>You should be good to go after sourcing the environment. From here on refer to the official <a href="https://doc.rust-lang.org/book/ch01-03-hello-cargo.html">Cargo documentation</a></p>
-<h1><a class="anchor" id="autotoc_md110"></a>
+<h1><a class="anchor" id="autotoc_md113"></a>
 Creating a new rust project</h1>
 <ol type="1">
 <li>Use the <code>cargo init &lt;project_name&gt;</code> command to setup an empty rust project. Use <code>--lib</code> argument to init a library type.</li>
@@ -160,16 +160,16 @@ Creating a new rust project</h1>
 <blockquote class="doxtable">
 <p>When creating a new sys crate, post-pend the name with *_sys*! </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md111"></a>
+<h2><a class="anchor" id="autotoc_md114"></a>
 Creating Unit tests</h2>
 <ul>
 <li>Inside Rust there is a distinction between integration test and unit-tests, familiarize yourself with the concept <a href="https://doc.rust-lang.org/book/ch11-03-test-organization.html">here</a>. Please follow up on the recommendations and put integration tests inside <code>rust_project/tests</code></li>
 <li>Usually unit tests blow up the source files quite quickly, to put unit tests in a separate file could help you maintaining order in your source files.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md112"></a>
+<h1><a class="anchor" id="autotoc_md115"></a>
 C/C++ to Rust</h1>
 <p>In order to use C in rust some steps need to be taken. You can read more about the overall concept <a href="https://docs.rust-embedded.org/book/interoperability/c-with-rust.html">here</a>. In short, we want to create a small wrapper project that imports the c symbols so that they can referenced correctly in Rust. Next to that, we need to tell the rust compiler how to link towards these symbols. The "cargo-bindgen" is a tool that generates this symbol definitions for you. In the next paragraph is explained how to declare the C libraries in rust as well as how to configure the binding generator.</p>
-<h2><a class="anchor" id="autotoc_md113"></a>
+<h2><a class="anchor" id="autotoc_md116"></a>
 Binding generator</h2>
 <p>The binding generator is configured and run by the cmake build-system. As input this generator requires a configuration file, which describes what c symbols to generate bindings for. See <code>generate_rust_bindings</code> documentation on usage. Inside rust we have an macro which can easily import the generated bindings file as source code to your source file. Take a look at <code>unify_tools::include_binding</code> inside cargo doc. </p><blockquote class="doxtable">
 <p>Every time you update the <code>DEPENDS</code> argument of the binding configuration. resource your unify environment file! </p>
@@ -177,7 +177,7 @@ Binding generator</h2>
 <blockquote class="doxtable">
 <p>The binding generator will install itself on your system the first time you run a build. You can run it manually on the command line execute <code>cargo bindgen -h</code> on the commandline for more info on the usage. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md114"></a>
+<h2><a class="anchor" id="autotoc_md117"></a>
 Declaring native libraries</h2>
 <p>link dependencies need to be declared as dictated by the official cargo documentation. <a href="https://docs.rust-embedded.org/book/interoperability/c-with-rust.html">read more</a>. Since the our build environment already resolves all paths to unify libraries, only library names have to be passed as followed:</p>
 <ul>
@@ -191,10 +191,10 @@ Declaring native libraries</h2>
 <div class="line">}</div>
 </div><!-- fragment --><p>(here uic_log is taken as an example)<br  />
  your project should now build correctly!</p>
-<h2><a class="anchor" id="autotoc_md115"></a>
+<h2><a class="anchor" id="autotoc_md118"></a>
 _sys crates</h2>
 <p>A good practice is to create a separate project which handles the import and linkage of a particular C library. The name of such a project is typically post-fixed with <code>_sys</code>. This way the transition between C to Rust stays contained in one place. Other projects can depend on this _sys crate to interface with C.</p>
-<h1><a class="anchor" id="autotoc_md116"></a>
+<h1><a class="anchor" id="autotoc_md119"></a>
 Rust to C/C++</h1>
 <p>Linking of rust libraries inside C is also possible. An example is the <code>rust_command_classes</code> project. The following steps need to be executed to successfully link Rust libraries to C:</p>
 <ul>
@@ -214,7 +214,7 @@ Rust to C/C++</h1>
 <blockquote class="doxtable">
 <p>At the moment C headers have to be written manually, we don't have a generator in place to generate them. </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md117"></a>
+<h1><a class="anchor" id="autotoc_md120"></a>
 Crate types</h1>
 <p>We define 4 different kinds of rust crates (build targets) in our code-base:<br  />
 </p>
@@ -224,7 +224,7 @@ Crate types</h1>
 <li><b>Library crates</b>. Output rust library files (.rlib), Examples: unify_middleware.</li>
 <li><b>Native library crates</b>. Libraries that build into native library format. (e.g. librust_command_classes.a) so that they can be used in C code.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md118"></a>
+<h1><a class="anchor" id="autotoc_md121"></a>
 Cmake targets</h1>
 <p>the following build targets are available in cmake:</p>
 <ul>
@@ -232,7 +232,7 @@ Cmake targets</h1>
 <li><code>cargo_test</code></li>
 <li><code>cargo_doc</code></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md119"></a>
+<h1><a class="anchor" id="autotoc_md122"></a>
 Appendix: Generating test coverage report</h1>
 <p>Generating test reports is currently not part of the buildsystem, like we have for our C/C++. However it can be enabled if desired by using the following steps: <br  />
 </p>
@@ -249,7 +249,7 @@ Appendix: Generating test coverage report</h1>
  E.g. <code>npx cobertura-merge -o gcov_results.xml package1=c_cobertura.xml package2=rust_cobertura.xml</code></li>
 <li>(Optional) Feed the final xml report to SonarQube</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md120"></a>
+<h2><a class="anchor" id="autotoc_md123"></a>
 Limitations</h2>
 <ul>
 <li>Branch is not supported yet (ref: <a href="https://github.com/taiki-e/cargo-llvm-cov/issues/8">https://github.com/taiki-e/cargo-llvm-cov/issues/8</a> and <a href="https://github.com/rust-lang/rust/issues/79649">https://github.com/rust-lang/rust/issues/79649</a>)</li>
@@ -261,7 +261,7 @@ Limitations</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:33:59 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

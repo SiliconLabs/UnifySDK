@@ -8,12 +8,13 @@ The Name and Location Service is a helper MQTT component that allows to perform 
 It subscribes to 2 topics:
 
 * `ucl/by-unid/+/State`
+* `ucl/by-unid/+/State/Attributes/EndpointIdList/Reported`
 * `ucl/by-unid/+/+/#`
 
 But, actually, it processes such topics:
 
-* `ucl/by-unid/<UNID>/State` - to add/delete node
-* `ucl/by-unid/<UNID>/<endpoint_id>/#` - to detect a new endpoint
+* `ucl/by-unid/<UNID>/State` - to register UNID / delete all nodes with such UNID
+* `ucl/by-unid/<UNID>/State/Attributes/EndpointIdList/Reported` - to create nodes for all possible endpoints for such UNID
 * `ucl/by-unid/<UNID>/<endpoint_id>/NameAndLocation/Commands/WriteAttributes` - to update Name or Location attribute
 * `ucl/by-unid/<UNID>/<endpoint_id>/Basic/Attributes/LocationDescription/<Desired/Reported>` - to implement a proxying over Protocol Controller
 
@@ -42,17 +43,19 @@ options. For more details about the options, run `uic-nal --help`.
 ### How to create a node with two endpoints, update it's Name and Location attributes and delete a node
 
 ``` bash
-username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State" -m 'some_dummy_data' # create a node with unid "node_test", endpoint 0
-username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep1/Basic/Attributes/PowerSource/Reported" -m '{"any_json":"payload"}' # add a node with unid "node_test", endpoint 1
-username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes" -m '{"Name":"new_name"}' # write Name attribute for node with unid "node_test", endpoint 1
-username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes" -m '{"Location":"new_location"}' # write Location attribute for node with unid "node_test", endpoint 1
-username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State" -m '' # remove all endpoints with unid "node_test"
+username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State" -m 'some_dummy_data' # register UNID "node_test"
+username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported" -m '{"value":[1,2,3]}' # create 3 nodes with UNID "node_test" and endpoints 1,2,3
+username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep1/Basic/Attributes/PowerSource/Reported" -m '{"any_json":"payload"}' # add a node with UNID "node_test", endpoint 1
+username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes" -m '{"Name":"new_name"}' # write Name attribute for node with UNID "node_test", endpoint 1
+username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes" -m '{"Location":"new_location"}' # write Location attribute for node with UNID "node_test", endpoint 1
+username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State" -m '' # remove all endpoints with UNID "node_test"
 ```
 
 ### How to test a proxying feature
 
 ``` bash
-username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State" -m 'some_dummy_data' # create a node with unid "node_test", endpoint 0
+username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State" -m 'some_dummy_data' # register UNID "node_test"
+username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported" -m '{"value":[0]}' # create a node with UNID "node_test" and endpoints 0
 username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep0/Basic/Attributes/LocationDescription/Desired" -m '{"value":"Rooftop"}' # after receiving a "LocationDescription" message - the node is "proxied" and couldn't perform the Location attribute update without Protocol Controller
 ```
 

@@ -29,13 +29,10 @@ sl_status_t zpc_attribute_resolver_init()
     = {.send_init = &attribute_resolver_send_init,
        .send      = &attribute_resolver_send,
        .abort     = &attribute_resolver_abort_pending_resolution,
-       // Minimal timespan before retryting a get
-       // RT:00.11.001A.1 (timer should be more than 10s)
-       // During initial interview there can be many commands and we do not
-       // want to retry too fast
-       .get_retry_timeout = 20000,
+       // Minimal timespan before retrying a get
+       .get_retry_timeout = 3000,
        // Number of times to retry sending a get
-       .get_retry_count = 3};
+       .get_retry_count = 5};
   init_status |= attribute_resolver_init(attribute_resolver_config);
   return init_status;
 }

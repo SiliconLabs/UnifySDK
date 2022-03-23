@@ -16,19 +16,25 @@ def zbLEVEL_CLUSTER_TRANSITION_TIME   0x00080010
 def zbLEVEL_CLUSTER_MIN_LEVEL 0x00080002
 def zbLEVEL_CLUSTER_MAX_LEVEL 0x00080003
 
+// Constants
+def min_level 0
+def max_level 99
+
 scope 0 {
 
 // Constants. Trick around else they get mapped in random other nodes.
-r'zbLEVEL_CLUSTER_MIN_LEVEL = if ( e'zwVERSION ) 0 undefined
-r'zbLEVEL_CLUSTER_MAX_LEVEL = if ( e'zwVERSION ) 99 undefined
+r'zbLEVEL_CLUSTER_MIN_LEVEL = if ( e'zwVERSION ) min_level undefined
+r'zbLEVEL_CLUSTER_MAX_LEVEL = if ( e'zwVERSION ) max_level undefined
 
 // Linking reported attributes zwave -> zigbee
 r'zbON_OFF_CLUSTER_ON_OFF = r'zwSTATE.zwON_OFF
 
-r'zbLEVEL_CLUSTER_LEVEL = (r'zwSTATE.zwVALUE)
+r'zbLEVEL_CLUSTER_LEVEL =
+  if (r'zwSTATE.zwVALUE < min_level) min_level
+  if (r'zwSTATE.zwVALUE > max_level) max_level
+  r'zwSTATE.zwVALUE
 
 r'zbLEVEL_CLUSTER_TRANSITION_TIME =
-  if ( r'zwVERSION < 2 ) 0
   if ( r'zwSTATE.zwDURATION == 0 ) 0
   if ( r'zwSTATE.zwDURATION == 0xFF ) 0
   if ( r'zwSTATE.zwDURATION == 0xFE ) 0
@@ -46,7 +52,6 @@ d'zwSTATE.zwVALUE =
 d'zwSTATE.zwON_OFF = d'zbON_OFF_CLUSTER_ON_OFF
 
 d'zwSTATE.zwDURATION =
-  if ( r'zwVERSION < 2 ) undefined
   if ( d'zbLEVEL_CLUSTER_TRANSITION_TIME < 10) 0
   if ( d'zbLEVEL_CLUSTER_TRANSITION_TIME < 1270 ) (d'zbLEVEL_CLUSTER_TRANSITION_TIME / 10)
   (127 + d'zbLEVEL_CLUSTER_TRANSITION_TIME / 600)

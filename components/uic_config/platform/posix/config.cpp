@@ -11,10 +11,12 @@
  *
  *****************************************************************************/
 #include "config.h"
+#include <boost/algorithm/string.hpp>
 #include <boost/program_options.hpp>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <iomanip>
 #include "yaml_parser.hpp"
 namespace po = boost::program_options;
@@ -85,34 +87,31 @@ class Config
   }
 
   /**
-   * @brief Dump the current configuration in YAML format
+   * @brief Dump a YAML key/value with indentation to an ostream
    *
-   * @param out Stream to dump config to
+   * This is a recursive function that handles printing key/values as YAML. This
+   * serves as a helper function for \ref dump_config.
+   *
+   * @param out output stream
+   * @param key_parts The config key split on every '.' character in reverse
+   * order, e.g. "log.level" key shall be ["level", "log"]
+   * @param last_key_parts Previous key (last time this function was called) in
+   * reverse order, same as key_parts
+   * @param value Value to store for the key.
+   * @param indent Indentation level, when calling first time this is usualy 0
    */
-  void dump_config(std::ostream &out) const
+  static void dump_yaml_key_value(std::ostream &out,
+                                  std::vector<std::string> key_parts,
+                                  std::vector<std::string> last_key_parts,
+                                  boost::any value,
+                                  size_t indent)
   {
-    std::string last_prefix;
-
-    out << "# UIC sample conf file\n" << std::endl;
-    for (const auto &[key, var]: vm) {
-      if (var.empty() || (key == "dump-config")) {
-        continue;
+    // If there is only one keypart, write it and print the value
+    if (key_parts.size() == 1) {
+      if (indent > 0) {  // print indentation if any
+        out << std::setfill(' ') << std::setw(indent * 2) << ' ';
       }
-      auto value = var.value();
-
-      size_t last_dot
-        = key.find_last_of('.');  //Location of the last dot in the string
-      if (last_dot != std::string::npos) {
-        std::string prefix = key.substr(0, last_dot);
-        if (prefix != last_prefix) {
-          out << key.substr(0, last_dot) << ": " << std::endl;
-        }
-        last_prefix = prefix;
-        out << "  " << key.substr(last_dot + 1, key.size()) << ": ";
-      } else {
-        out << key << ": ";
-      }
-
+      out << key_parts.at(0) << ": ";
       if (value.type() == typeid(int)) {
         out << boost::any_cast<int>(value);
       } else if (value.type() == typeid(std::string)) {
@@ -122,14 +121,73 @@ class Config
       } else if (value.type() == typeid(bool)) {
         out << boost::any_cast<bool>(value);
       } else {
-        //Implement me
         assert(0);
       }
       out << std::endl;
+    } else {  // There are multiple keyparts
+      // Test if current keypart and last_keypart share a level
+      if (last_key_parts.back() == key_parts.back()) {
+        // In this case all that is done is popping the key_parts and increasing
+        // indentation before calling the recursive function again.
+        // Example:
+        //   if last key was "log.level" the last_keyparts was ["level", "log"],
+        //   and the new key is "log.tag_level" (i.e. ["tag_level", "log"]),
+        //   then  this would pop "log" of both last_keyparts and key_parts and
+        //   increase indentation.
+        last_key_parts.pop_back();
+      } else {
+        // In this case the last_key_part doesn't match the key_part, in which
+        // case we print the part
+        if (indent > 0) {  // print indentation if any
+          out << std::setfill(' ') << std::setw(indent * 2) << ' ';
+        }
+        out << key_parts.back() << ":" << std::endl;
+      }
+      key_parts.pop_back();
+      indent++;
+      dump_yaml_key_value(out, key_parts, last_key_parts, value, indent);
+    }
+  }
+  /**
+   * @brief Dump the current configuration in YAML format
+   *
+   * Example following internal config:
+   * vm["zpc.serial"] = "/dev/ttyUSB0"
+   * vm["zpc.poll.backoff"] = 42
+   * vm["zpc.poll.default_interval"] = 500
+   * vm["zpc.qos"] = 2
+   * Output following YAML config:
+   * zpc:
+   *   poll:
+   *     backoff: 42
+   *     default_interval: 500
+   *   qos: 2
+   *   serial: "/dev/ttyUSB0"
+   * @param out Stream to dump config to
+   */
+  void dump_config(std::ostream &out) const
+  {
+    std::vector<std::string> last_key_parts;
+    out << "# Unify sample conf file" << std::endl << std::endl;
+    YAML::Emitter emitter(out);
+    YAML::Node yaml_config;
+
+    for (const auto &[key, var]: vm) {
+      if (var.empty() || (key == "dump-config")) {
+        continue;
+      }
+      auto value = var.value();
+
+      std::vector<std::string> key_parts;  // ["zpc", "poll", "backoff"]
+      boost::split(key_parts, key, boost::is_any_of("."));
+      std::reverse(key_parts.begin(), key_parts.end());
+      dump_yaml_key_value(out, key_parts, last_key_parts, value, 0);
+      last_key_parts = key_parts;
     }
   }
 
-  config_status_t config_parse(int argc, char **argv, const char *version)
+  config_status_t
+    config_parse(int argc, char **argv, const char *version, std::ostream &out)
   {
     bool dump_requested = false;
     vm.clear();
@@ -150,15 +208,14 @@ class Config
       // Parse the command line arguments
       po::store(po::parse_command_line(argc, argv, cmdline), vm);
       if (vm.count("help")) {
-        std::cout << "\nUsage: " << argv[0] << " [Options]\n" << std::endl;
-        std::cout << cmdline << std::endl;
-        // When we print help, we don't parse the other options,
-        // thus we return NOK
-        return CONFIG_STATUS_NOK;
+        out << "\nUsage: " << argv[0] << " [Options]\n" << std::endl;
+        out << cmdline << std::endl;
+        // return CONFIG_STATUS_INFO_MESSAGE to not try to start Contiki
+        return CONFIG_STATUS_INFO_MESSAGE;
       } else if (vm.count("version")) {
-        std::cout << "Version: " << version << std::endl;
-        // Same as with "help", we want to return NOK after printing version.
-        return CONFIG_STATUS_NOK;
+        out << "Version: " << version << std::endl;
+        // return CONFIG_STATUS_INFO_MESSAGE to not try to start Contiki
+        return CONFIG_STATUS_INFO_MESSAGE;
       } else if (vm.count("dump-config")) {
         dump_requested = true;
       } else if (vm.count("conf")) {
@@ -177,8 +234,9 @@ class Config
       return CONFIG_STATUS_ERROR;
     }
     if (dump_requested) {
-      dump_config(std::cout);
-      return CONFIG_STATUS_NOK;
+      dump_config(out);
+      // return CONFIG_STATUS_INFO_MESSAGE to not try to start Contiki
+      return CONFIG_STATUS_INFO_MESSAGE;
     }
     return CONFIG_STATUS_OK;
   }
@@ -278,9 +336,17 @@ config_status_t config_add_flag(const char *name, const char *help)
   return config_object->config_add(name, help);
 }
 
+config_status_t config_parse_with_output(int argc,
+                                         char **argv,
+                                         const char *version,
+                                         std::ostream &out)
+{
+  return config_object->config_parse(argc, argv, version, out);
+}
+
 config_status_t config_parse(int argc, char **argv, const char *version)
 {
-  return config_object->config_parse(argc, argv, version);
+  return config_parse_with_output(argc, argv, version, std::cout);
 }
 
 config_status_t config_get_as_string(const char *name, const char **result)

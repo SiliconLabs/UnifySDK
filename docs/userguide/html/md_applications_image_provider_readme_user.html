@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -87,20 +87,20 @@ $(document).ready(function(){initNavTree('md_applications_image_provider_readme_
 <div class="title">Image Provider User's Guide </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md174"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md181"></a>
 Description</h1>
 <p>The Image Provider is a generic application that allows storing and distributing OTA Firmware images for Protocol Controllers over MQTT.</p>
 <p>For more details about the interactions between the Image Provider and Protocol Controllers, see the Unify specifications - Common OTA FW Update Service chapter.</p>
 <p>The Image Provider application is required for most Protocol Controller to access firmware images for a given node. Protocol Controllers running without the Image Provider application available will most likely not be able to provide OTA functionalities.</p>
-<h1><a class="anchor" id="autotoc_md175"></a>
+<h1><a class="anchor" id="autotoc_md182"></a>
 Installation</h1>
 <p>Please refer to <a class="el" href="md_doc_readme_user.html">Unify SDK User guide</a>.</p>
-<h1><a class="anchor" id="autotoc_md176"></a>
+<h1><a class="anchor" id="autotoc_md183"></a>
 Running the Image Provider</h1>
-<h2><a class="anchor" id="autotoc_md177"></a>
+<h2><a class="anchor" id="autotoc_md184"></a>
 Using Systemd Service</h2>
 <p>The best way to run the Image Provider is using the Systemd service that is installed with the Debian installer. For more information, see <a class="el" href="md_doc_readme_user.html">Unify SDK User guide</a>.</p>
-<h2><a class="anchor" id="autotoc_md178"></a>
+<h2><a class="anchor" id="autotoc_md185"></a>
 Using the Command Line</h2>
 <p>Alternatively, you can run the Image Provider by executing <code>uic-image-provider</code>. You can configure the MQTT server, database path, through command line options. For details about options, run <code>uic-image-provider --help</code> command:</p>
 <p>Make sure that you do not run the Image Provider both as a service and using the command line.</p>
@@ -114,9 +114,9 @@ Using the Command Line</h2>
 <div class="line">           |─13235 /usr/bin/uic-image-provider</div>
 </div><!-- fragment --><p>If the service is running, stop it using the following command before you run the application manually:</p>
 <div class="fragment"><div class="line">pi@unify:~ $ service uic-image-provider stop</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md179"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md186"></a>
 Using the Image Provider</h1>
-<h2><a class="anchor" id="autotoc_md180"></a>
+<h2><a class="anchor" id="autotoc_md187"></a>
 OTA Folder Structure</h2>
 <p>The Image Provider will use the configured <b>image_provider.image_path</b> to store a JSON file that will represent the list of available images.</p>
 <p>The <em>images.json</em> file must be configured to indicate which images to advertise to the MQTT broker/Protocol Controllers.</p>
@@ -126,7 +126,7 @@ OTA Folder Structure</h2>
 <div class="line">|── updates</div>
 <div class="line">    |── ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl</div>
 <div class="line">    |── ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md181"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md188"></a>
 Metadata File Name and Format</h2>
 <p>The filename for the metadata is static and must stay <em>images.json</em>.</p>
 <p>The Image Provider will poll the images.json for changes with a configurable period. It will then advertise images.</p>
@@ -219,7 +219,7 @@ Metadata File Name and Format</h2>
 <li><b>ApplyAfter</b> : A timestamp encoded using RFC 3339, that will indicate when to first attempt to apply the Firmware Update. A date in the past will instruct Protocol Controllers to initiate the firmware update as soon as possible.</li>
 <li><b>Md5</b> : A checksum that will verify that the data located in the <em>fileName</em> is coherent with what we expect.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md182"></a>
+<h3><a class="anchor" id="autotoc_md189"></a>
 Md5 Checksum calculation</h3>
 <p>The Md5 checksum value must be set to a base64 encoded md5 digest of image file.</p>
 <p>In Rust, the checksum can be generated like this:</p>
@@ -232,7 +232,7 @@ Md5 Checksum calculation</h3>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:33:59 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

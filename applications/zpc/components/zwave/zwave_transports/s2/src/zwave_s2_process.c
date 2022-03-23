@@ -86,13 +86,14 @@ static void zwave_s2_init()
     .command_class     = COMMAND_CLASS_SECURITY_2,
     .version           = COMMAND_CLASS_SECURITY_2_VERSION,
     .send_data         = zwave_s2_send_data,
+    .abort_send_data   = zwave_s2_abort_send_data,
     .on_frame_received = zwave_s2_on_frame_received,
   };
   zwave_controller_transport_register(&transport);
 
+  zwave_s2_keystore_init();
   zwave_s2_network_init();
   zwave_s2_transport_init();
-  zwave_s2_keystore_init();
 }
 
 PROCESS_THREAD(zwave_s2_process, ev, ev_data)

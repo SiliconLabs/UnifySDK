@@ -97,59 +97,64 @@ var NAVTREE =
         [ "Group Message Handling", "md_applications_zigpc_readme_user.html#autotoc_md55", null ],
         [ "Zigbee OTA Firmware Upgrade Support", "md_applications_zigpc_readme_user.html#autotoc_md56", null ],
         [ "Zigbee Sleepy End Device Support", "md_applications_zigpc_readme_user.html#autotoc_md57", null ],
-        [ "Protocol Controller Diagnostics", "md_applications_zigpc_readme_user.html#autotoc_md58", null ]
+        [ "Protocol Controller Diagnostics", "md_applications_zigpc_readme_user.html#autotoc_md58", null ],
+        [ "Updating NCP Firmware", "md_applications_zigpc_readme_user.html#autotoc_md59", null ]
       ] ],
-      [ "Getting Started with Including Zigbee 3.0 Device to ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md59", [
-        [ "Adding Zigbee Device to the ZigPC Network via Install-Code Method", "md_applications_zigpc_readme_user.html#autotoc_md60", null ],
-        [ "Adding Zigbee Device to the ZigPC Network using Well-Known Key", "md_applications_zigpc_readme_user.html#autotoc_md61", null ],
-        [ "Discovering UCL Cluster Command Support for Z3Device", "md_applications_zigpc_readme_user.html#autotoc_md62", null ],
-        [ "Discovering UCL Cluster Attribute Updates for Z3Device", "md_applications_zigpc_readme_user.html#autotoc_md63", null ],
-        [ "Sending a UCL Cluster Command to Z3Device to see Attribute Update", "md_applications_zigpc_readme_user.html#autotoc_md64", null ],
-        [ "Removing a Device Already in the ZigPC Network", "md_applications_zigpc_readme_user.html#autotoc_md65", null ],
-        [ "Updating Zigbee Device Firmware already on the ZigPC Network", "md_applications_zigpc_readme_user.html#autotoc_md66", [
-          [ "Instructions on how to start an OTA update:", "md_applications_zigpc_readme_user.html#autotoc_md67", null ],
-          [ "Once the Unify Image Provider recognizes changes to images.json, the following actions will occur:", "md_applications_zigpc_readme_user.html#autotoc_md68", null ]
+      [ "Getting Started with Including Zigbee 3.0 Device to ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md60", [
+        [ "Adding Zigbee Device to the ZigPC Network via Install-Code Method", "md_applications_zigpc_readme_user.html#autotoc_md61", null ],
+        [ "Adding Zigbee Device to the ZigPC Network using Well-Known Key", "md_applications_zigpc_readme_user.html#autotoc_md62", null ],
+        [ "Discovering UCL Cluster Command Support for Z3Device", "md_applications_zigpc_readme_user.html#autotoc_md63", null ],
+        [ "Discovering UCL Cluster Attribute Updates for Z3Device", "md_applications_zigpc_readme_user.html#autotoc_md64", null ],
+        [ "Sending a UCL Cluster Command to Z3Device to see Attribute Update", "md_applications_zigpc_readme_user.html#autotoc_md65", null ],
+        [ "Removing a Device Already in the ZigPC Network", "md_applications_zigpc_readme_user.html#autotoc_md66", null ],
+        [ "Updating Zigbee Device Firmware already on the ZigPC Network", "md_applications_zigpc_readme_user.html#autotoc_md67", [
+          [ "Instructions on how to start an OTA update:", "md_applications_zigpc_readme_user.html#autotoc_md68", null ],
+          [ "Once the Unify Image Provider recognizes changes to images.json, the following actions will occur:", "md_applications_zigpc_readme_user.html#autotoc_md69", null ]
         ] ],
-        [ "Retrieving Diagnostic information from ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md69", [
-          [ "Steps to enable this behaviour:", "md_applications_zigpc_readme_user.html#autotoc_md70", null ]
+        [ "Retrieving Diagnostic information from ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md70", [
+          [ "Steps to enable this behaviour:", "md_applications_zigpc_readme_user.html#autotoc_md71", null ]
         ] ]
       ] ],
-      [ "Technical Specifications", "md_applications_zigpc_readme_user.html#autotoc_md71", [
-        [ "Device UNID Format", "md_applications_zigpc_readme_user.html#autotoc_md72", null ],
-        [ "Recognized SmartStart DSK Format", "md_applications_zigpc_readme_user.html#autotoc_md73", null ],
-        [ "Zigbee Device Support", "md_applications_zigpc_readme_user.html#autotoc_md74", null ]
+      [ "Technical Specifications", "md_applications_zigpc_readme_user.html#autotoc_md72", [
+        [ "Device UNID Format", "md_applications_zigpc_readme_user.html#autotoc_md73", null ],
+        [ "Recognized SmartStart DSK Format", "md_applications_zigpc_readme_user.html#autotoc_md74", null ],
+        [ "Zigbee Device Support", "md_applications_zigpc_readme_user.html#autotoc_md75", null ]
       ] ],
-      [ "Appendix", "md_applications_zigpc_readme_user.html#autotoc_md75", [
-        [ "Setting Up the Zigbee NCP Connected to ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md76", [
-          [ "Using Pre-built NCP FW Images", "md_applications_zigpc_readme_user.html#autotoc_md77", null ],
-          [ "Building NCP FW Images Using Studio", "md_applications_zigpc_readme_user.html#autotoc_md78", null ]
+      [ "Appendix", "md_applications_zigpc_readme_user.html#autotoc_md76", [
+        [ "Setting Up the Zigbee NCP Connected to ZigPC", "md_applications_zigpc_readme_user.html#autotoc_md77", [
+          [ "Using Pre-built NCP FW Images", "md_applications_zigpc_readme_user.html#autotoc_md78", null ],
+          [ "Building NCP FW Images Using Studio", "md_applications_zigpc_readme_user.html#autotoc_md79", null ]
         ] ],
-        [ "Setting Up the Sample Zigbee Z3Light FW Image", "md_applications_zigpc_readme_user.html#autotoc_md79", null ],
-        [ "Flashing Zigbee Devices", "md_applications_zigpc_readme_user.html#autotoc_md80", null ]
+        [ "Setting Up the Sample Zigbee Z3Light FW Image", "md_applications_zigpc_readme_user.html#autotoc_md80", null ],
+        [ "Flashing Zigbee Devices", "md_applications_zigpc_readme_user.html#autotoc_md81", null ]
       ] ]
     ] ],
     [ "ZigPC Release Notes", "md_applications_zigpc_release_notes.html", [
-      [ "[1.1.0] - Feb 2022", "md_applications_zigpc_release_notes.html#autotoc_md82", [
-        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md83", null ],
-        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md84", null ],
-        [ "Removed", "md_applications_zigpc_release_notes.html#autotoc_md85", null ],
-        [ "Fixed", "md_applications_zigpc_release_notes.html#autotoc_md86", null ]
+      [ "[1.1.1] - March 2022", "md_applications_zigpc_release_notes.html#autotoc_md83", [
+        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md84", null ],
+        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md85", null ]
       ] ],
-      [ "[1.0.3] - Nov 2021", "md_applications_zigpc_release_notes.html#autotoc_md87", [
-        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md88", null ],
-        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md89", null ],
+      [ "[1.1.0] - Feb 2022", "md_applications_zigpc_release_notes.html#autotoc_md86", [
+        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md87", null ],
+        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md88", null ],
+        [ "Removed", "md_applications_zigpc_release_notes.html#autotoc_md89", null ],
         [ "Fixed", "md_applications_zigpc_release_notes.html#autotoc_md90", null ]
       ] ],
-      [ "[1.0.2] - Oct 2021", "md_applications_zigpc_release_notes.html#autotoc_md91", null ],
-      [ "[1.0.1] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md92", [
-        [ "Fixed", "md_applications_zigpc_release_notes.html#autotoc_md93", null ]
+      [ "[1.0.3] - Nov 2021", "md_applications_zigpc_release_notes.html#autotoc_md91", [
+        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md92", null ],
+        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md93", null ],
+        [ "Fixed", "md_applications_zigpc_release_notes.html#autotoc_md94", null ]
       ] ],
-      [ "[1.0.0] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md94", [
-        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md95", null ],
-        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md96", null ]
+      [ "[1.0.2] - Oct 2021", "md_applications_zigpc_release_notes.html#autotoc_md95", null ],
+      [ "[1.0.1] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md96", [
+        [ "Fixed", "md_applications_zigpc_release_notes.html#autotoc_md97", null ]
       ] ],
-      [ "Known Issues", "md_applications_zigpc_release_notes.html#autotoc_md97", null ],
-      [ "Zigbee Certification information", "md_applications_zigpc_release_notes.html#autotoc_md99", null ]
+      [ "[1.0.0] - Aug 2021", "md_applications_zigpc_release_notes.html#autotoc_md98", [
+        [ "Added", "md_applications_zigpc_release_notes.html#autotoc_md99", null ],
+        [ "Changed", "md_applications_zigpc_release_notes.html#autotoc_md100", null ]
+      ] ],
+      [ "Known Issues", "md_applications_zigpc_release_notes.html#autotoc_md101", null ],
+      [ "Zigbee Certification information", "md_applications_zigpc_release_notes.html#autotoc_md103", null ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
@@ -193,23 +198,24 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classGroupAccessor.html#a3ee4601c8a04b92d17b72aedbbe2c74c",
-"classzigpc_1_1gateway_1_1BindingRequestRequest.html#a34e91c18a3eed679c89087b7ecb56aa9",
-"dir_1258395076e871e9609ba7f43babf823.html",
-"globals_defs_d.html",
-"group__attribute__store__value__helpers.html#ga2179ceede1afad2f87c6dbe35809b6ab",
-"group__lc.html#ga3983e0c026396d5c4506779d770007ba",
-"group__process.html#ga4159c99c908ca521cf8b9fdda4b7f64c",
-"group__sl__log.html#ggaf7788b8693561747f76339f6537ff8aba08914048403ca38994c4ca9e2eb5bfb5",
-"group__unify__datastore.html#ga94ec0317094e42566008726743f2ebfe",
-"group__zigpc__common__zigbee.html#ga28289aa16ec1ca2fea5ac65394369748",
-"group__zigpc__datastore.html#ga35abd88c58baeb185ecd2f073b52138a",
-"group__zigpc__group__map.html#ga6374b901901d04d0dffdbbda5e084285",
-"md_applications_zigpc_readme_developer.html#autotoc_md27",
-"posix_2contiki-conf_8h.html#a306501617396cc95a2d8a85e8a99dfb7",
-"structmqtt__client.html#a8a17fa4fbd2cbf13e94eba9c10ecd740",
-"structzigpc__zcl__frame__data__t.html",
-"zigpc__discovery__events_8hpp.html#a74f62ebef56649faf5f875cce02ed65f"
+"classGroupAccessor.html#a32ba84eaf8fd2182efe4a6a7b49cf87c",
+"classzigpc_1_1gateway_1_1BindingRequestRequest.html#a31ed2d90e86a0cc28f67b738b28b6c5a",
+"dir_1233302668cfc38a9302dcaeddaa7aed.html",
+"globals_a.html",
+"group__attribute__store__fixt.html#ga97a838c2d31c83650be7846cec9f85ba",
+"group__etimer.html#ga94628979920ab92a3cc0e69e537bef7d",
+"group__process.html#ga203287c010773e1223347682148a3e0c",
+"group__sl__log.html#ga3f62e87ad64f94f78f10cbbce654d039",
+"group__unify__config.html#gab6dc511b499e865e3ba3147d058ae622",
+"group__zigpc__common__zigbee.html#ga11ce1a659aa35b00e3b487d752ae2903",
+"group__zigpc__config.html#ga1c8e61bf283a2413bc33b15dc057444c",
+"group__zigpc__gateway__notify.html#gga68b826da48d6db275d1cd028d9ec0cfca947ad9d6d46363cecebe5c7b6e27d4fd",
+"index.html#ZigPC",
+"ota__cache_8hpp.html#a178f8f66256ed0b2c9fadffe047e39d0",
+"structgateway__frame__t.html#a061e16682489bfd2deee42a67bc914e9",
+"structzigpc__gateway__on__read__attribute__response__t.html#a6932828fba973937d8fdb0aef698b123",
+"zigpc__controller__int_8hpp.html#ac6998c2c672b1ae3e5911d9a73e13163",
+"zigpc__stdin__fixt_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

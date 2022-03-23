@@ -166,9 +166,7 @@ sl_status_t datastore_fixt_setup_and_handle_version(const char *datastore_file,
     if (version_fetched != db_version) {
       sl_log_error(LOG_TAG,
                    "Datastore version: %" PRId64 " in datastore file is non "
-                   "compatible with the ZPC datastore version: %" PRId64 ". "
-                   "Please erase or recover your ZPC datastore using the ZPC "
-                   "datastore tools",
+                   "compatible with the datastore version: %" PRId64 ". ",
                    version_fetched,
                    db_version);
       return SL_STATUS_FAIL;

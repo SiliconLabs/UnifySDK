@@ -14,6 +14,7 @@ unify_sl_status_sys = { path = "../uic_rust/unify_sl_status_sys" }
 futures = "0.3.*"
 once_cell = "1.9.*"
 mockall = "0.11.*"
+async-trait = "0.1.*"
 
 [lib]
 crate-type = ["lib","staticlib"]

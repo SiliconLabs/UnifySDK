@@ -56,6 +56,7 @@ typedef enum {
   CONFIG_STATUS_ERROR          = 0x2,
   CONFIG_STATUS_INVALID_TYPE   = 0x4,
   CONFIG_STATUS_DOES_NOT_EXIST = 0x8,
+  CONFIG_STATUS_INFO_MESSAGE   = 0x10,
 } config_status_t;
 
 /**
@@ -188,6 +189,15 @@ void config_reset();
 
 #ifdef __cplusplus
 }
+#include <ostream>
+/**
+ * @brief Same as \ref config_parse but with added out param, where the output
+ * is written.
+ */
+config_status_t config_parse_with_output(int argc,
+                                         char **argv,
+                                         const char *version,
+                                         std::ostream &out);
 #endif
 
 #endif  //CONFIG_H

@@ -465,7 +465,7 @@ static void
   zwave_smartstart_management_on_node_added(sl_status_t status,
                                             const zwave_node_info_t *nif,
                                             zwave_node_id_t node_id,
-                                            zwave_dsk_t dsk,
+                                            const zwave_dsk_t dsk,
                                             zwave_keyset_t granted_keys,
                                             zwave_kex_fail_type_t kex_fail_type,
                                             zwave_protocol_t inclusion_protocol)

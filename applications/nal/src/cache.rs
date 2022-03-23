@@ -1,14 +1,17 @@
-// License
-// <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
-
+///////////////////////////////////////////////////////////////////////////////
+// # License
+// <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
 // The licensor of this software is Silicon Laboratories Inc. Your use of this
 // software is governed by the terms of Silicon Labs Master Software License
 // Agreement (MSLA) available at
 // www.silabs.com/about-us/legal/master-software-license-agreement. This
 // software is distributed to you in Source Code format and is governed by the
 // sections of the MSLA applicable to Source Code.
+//
+///////////////////////////////////////////////////////////////////////////////
 
-//! Cache is an object that bookkeeps UNID, endpoint ID and it's attributes
+//! Cache is an object that bookkeeps UNID, endpoint_ID and it's attributes
 //! (name and location). The storage is implemented with SQLite DB - so it is persistent.
 
 use rusqlite::{params, Connection, Error, Statement};
@@ -49,8 +52,10 @@ pub struct Attributes {
     pub is_proxied: bool,
 }
 
-/// Checks that the unid field of key struct (of type NodeEpKey)
-/// is not an empty string. If it is empty - returns error.
+/// # Description
+///
+/// Checks that the unid field of key struct (of type NodeEpKey) is not an empty string.
+/// If it is empty - returns error.
 macro_rules! CHECK_UNID_NOT_EMPTY {
     ($key:ident) => {
         if $key.unid.is_empty() {
@@ -64,10 +69,15 @@ pub struct Cache {
 }
 
 impl Cache {
+    /// # Description
+    ///
     /// Creates a new Cache instance. Try to open a database file.
     /// If file not exists - try to create it.
-    /// If there already present "nal_map" table and "idx_key" in DB - does nothing.
-    /// If not - creates it.
+    /// If tables in database not present - creates them.
+    ///
+    /// # Arguments
+    ///
+    /// * _nal_config_ - path to database file is given from here
     pub fn new(nal_config: NALConfig) -> Self {
         log_info!("Using database file {}", &nal_config.db_file);
         // if NAL cannot open the database, it exits with an error message
@@ -97,12 +107,24 @@ impl Cache {
                 unid    TEXT NOT NULL,
                 topic   TEXT NOT NULL,
                 payload TEXT NOT NULL,
+                priority INTEGER NOT NULL,
                 CHECK(unid <> ''),
                 CHECK(topic <> '')
             );",
                 params![],
             )
             .expect("Cannot create nal_delayed_messages table");
+
+        db_conn
+            .execute(
+                "CREATE TABLE IF NOT EXISTS unids (
+                unid TEXT NOT NULL,
+                endpoint_id_list_received INTEGER NOT NULL,
+                CHECK(unid <> '')
+            );",
+                params![],
+            )
+            .expect("Cannot create unids table");
 
         db_conn
             .execute("DELETE from nal_delayed_messages;", params![])
@@ -113,7 +135,16 @@ impl Cache {
         cache
     }
 
-    /// Gets a single value from DB row.
+    // "nal_map" table API
+
+    /// # Description
+    ///
+    /// Gets a single value from a row from `nal_map` table.
+    ///
+    /// # Arguments
+    ///
+    /// * _key_ - UNID and endpoint_id to search a node are given from here
+    /// * _column_name_ - the name of column in a table to get the data from
     fn db_get_single_row_val(&mut self, key: &NodeEpKey, column_name: &str) -> String {
         let query_str = format!(
             "SELECT {} from nal_map WHERE unid = '{}' AND endpoint_id = {}",
@@ -130,7 +161,9 @@ impl Cache {
         return String::from("");
     }
 
-    /// Checks if node presents in cache.
+    /// # Description
+    ///
+    /// Checks if node presents in database.
     pub fn node_presents(&mut self, key: &NodeEpKey) -> bool {
         // unid column in DB can't be empty
         // if db_get_single_row_val(..., "unid") function returned empty string - no node with such key exists in database
@@ -168,7 +201,9 @@ impl Cache {
         Ok(())
     }
 
-    /// Updates a value for the given key.
+    /// # Description
+    ///
+    /// Updates attributes of node with provided key.
     /// If node with such key doesn't present in DB - creates it.
     pub fn node_set(
         &mut self,
@@ -197,24 +232,18 @@ impl Cache {
         );
 
         match self.db_conn.execute(&query_str, []) {
-            Ok(_) => log_info!(
-                "Updated database for node key ({}, {}).",
-                &key.unid,
-                &key.ep_id
-            ),
-            Err(err) => log_error!(
-                "Error {} when updating table with node key ({}, {}).",
-                err,
-                &key.unid,
-                &key.ep_id
-            ),
+            Ok(_) => Ok(()),
+            Err(err) => Err(format!(
+                "Failed to update 'nal_map' table with node with key ({}, {}), error: '{}'.",
+                &key.unid, &key.ep_id, err
+            )),
         }
-
-        Ok(())
     }
 
-    /// Removes a node from the cache.
-    /// Here is no necessity to check if node presents in cache.
+    /// # Description
+    ///
+    /// Removes a node from the database.
+    /// Here is no necessity to check if node presents in database.
     pub fn node_remove(&mut self, key: &NodeEpKey) -> std::result::Result<(), String> {
         let query_str = format!(
             "DELETE from nal_map where unid = '{unid}' AND endpoint_id = {ep_id}",
@@ -223,19 +252,17 @@ impl Cache {
         );
 
         match self.db_conn.execute(&query_str, []) {
-            Ok(_) => log_info!("Removed node with key ({}, {}).", &key.unid, &key.ep_id),
-            Err(err) => log_error!(
-                "Error {} when removing node with key ({}, {}).",
-                err,
-                &key.unid,
-                &key.ep_id
-            ),
+            Ok(_) => Ok(()),
+            Err(err) => Err(format!(
+                "Failed to remove from 'nal_map' table  node with key ({}, {}), error: '{}'.",
+                &key.unid, &key.ep_id, err
+            )),
         }
-
-        Ok(())
     }
 
-    /// Returns a vector of all nodes that present in database
+    /// # Description
+    ///
+    /// Returns a vector of all nodes that present in database.
     pub fn get_all_nodes(&mut self) -> Result<Vec<NodeEpKey>, Error> {
         let query_str = format!("SELECT unid, endpoint_id FROM nal_map");
         let mut stmt: Statement = self.db_conn.prepare(query_str.as_str())?;
@@ -250,15 +277,16 @@ impl Cache {
                 ep_id: ep_id_i32 as u16,
             };
 
-            log_debug!("got such node: '{}, {}'", key.unid, key.ep_id);
-
             ret_keys.push(key.clone());
         }
 
         Ok(ret_keys)
     }
 
-    /// Returns a vector of node keys with requested UNID that presence in DB.
+    /// # Description
+    ///
+    /// Returns a vector of tuples (UNID, endpoint_id).
+    /// The vector contains all nodes that present in database with provided UNID.
     pub fn get_all_nodes_match_name(&mut self, unid: &str) -> Result<Vec<NodeEpKey>, Error> {
         let query_str = format!(
             "SELECT unid, endpoint_id FROM nal_map WHERE unid = '{}'",
@@ -281,33 +309,43 @@ impl Cache {
         Ok(ret_keys)
     }
 
-    /// Adds a delayed message row to the nal_delayed_messages table
+    // "nal_delayed_messages" table API
+
+    /// # Description
+    ///
+    /// Adds a delayed message to `nal_delayed_messages` table.
     pub fn add_delayed_message(
         &mut self,
         unid: &str,
         topic: &str,
         payload: &str,
+        priority: u32,
     ) -> std::result::Result<(), String> {
         let query_str = format!(
-            "INSERT INTO nal_delayed_messages (unid, topic, payload) VALUES ('{unid}', '{topic}', '{payload}');",
-            unid    = &unid,
-            topic   = &topic,
-            payload = &payload
+            "INSERT INTO nal_delayed_messages (unid, topic, payload, priority) VALUES ('{unid}', '{topic}', '{payload}', {priority});",
+            unid     = &unid,
+            topic    = &topic,
+            payload  = &payload,
+            priority = priority
         );
 
         match self.db_conn.execute(&query_str, []) {
             Ok(_) => return Ok(()),
-            Err(_) => return Err(format!("Can't execute such query: '{}'", query_str)),
+            Err(err) => {
+                return Err(format!(
+                    "Can't execute such query: '{}', error: '{}'",
+                    query_str, err
+                ))
+            }
         }
     }
 
-    /// Gets all delayed messages data (topic, payload) with requested UNID.
-    /// Deletes all these messages trom the table.
+    /// # Description
+    ///
+    /// Returns a vector of tuples (topic, payload).
+    /// Tuples are contains delayed messages with provided UNID, sorted by `priority` value in ascendent order.
     pub fn get_all_delayed_messages(&mut self, unid: &str) -> Result<Vec<(String, String)>, Error> {
-        let query_str = format!(
-            "SELECT topic, payload FROM nal_delayed_messages WHERE unid = '{}'",
-            unid
-        );
+        let query_str = format!("SELECT topic, payload FROM nal_delayed_messages WHERE unid = '{}' ORDER BY priority ASC", unid);
         let mut stmt: Statement = self.db_conn.prepare(query_str.as_str())?;
         let mut rows = stmt.query([])?;
 
@@ -318,11 +356,130 @@ impl Cache {
             ret_msgs.push((topic.clone(), payload.clone()));
         }
 
-        // the messages we got will be processed - so now we have to delete them
-        let delete_query_str = format!("DELETE from nal_delayed_messages where unid = '{}'", unid);
-        self.db_conn.execute(&delete_query_str, [])?;
-
         Ok(ret_msgs)
+    }
+
+    /// # Description
+    ///
+    /// Deletes all delayed messages with provided UNID from `delayed_messages` table.
+    pub fn delete_all_delayed_messages(&mut self, unid: &str) -> Result<(), String> {
+        let delete_query_str = format!("DELETE FROM nal_delayed_messages WHERE unid = '{}';", unid);
+
+        match self.db_conn.execute(&delete_query_str, []) {
+            Ok(_) => return Ok(()),
+            Err(err) => {
+                return Err(format!(
+                    "Can't delete delayed messages for UNID '{}', error: '{}'",
+                    unid, err
+                ))
+            }
+        }
+    }
+
+    // "unids" table API
+
+    /// # Description
+    ///
+    /// Checks if a State topic has been received for specified UNID
+    /// (if it was - the row with such `unid` value should present in `unids` table).
+    pub fn is_unid_registered(&mut self, unid: &str) -> bool {
+        let query_str = format!("SELECT unid from unids");
+        let mut stmt: Statement = self.db_conn.prepare(query_str.as_str()).unwrap();
+        let mut rows = stmt.query([]).unwrap();
+
+        while let Some(row) = rows.next().unwrap() {
+            let unid_got: String = row.get(0).unwrap();
+
+            if String::from(unid) == unid_got {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// # Description
+    ///
+    /// Checks if an EndpointIdList topic has been received for specified UNID
+    /// (if it was - the row with such `unid` value should present in `unids` table and it's `endpoint_id_list_received` value should be `1`).
+    pub fn is_epidlist_received(&mut self, unid: &str) -> bool {
+        let query_str = format!(
+            "SELECT endpoint_id_list_received FROM unids WHERE unid = '{}';",
+            unid
+        );
+        let mut stmt: Statement = self.db_conn.prepare(query_str.as_str()).unwrap();
+        let mut rows = stmt.query([]).unwrap();
+
+        let row = rows.next().unwrap();
+
+        // this is_none() check prevents error that should never happen in production usage, but it occurs
+        // in unit-tests - so don't pay attention
+        if row.is_none() {
+            return false;
+        }
+
+        let value: i32 = row.unwrap().get(0).unwrap();
+
+        if value == 1 {
+            return true;
+        }
+
+        return false;
+    }
+
+    /// # Description
+    ///
+    /// Register UNID, received with a State topic.
+    /// Adds a row to `unids` table with `endpoint_id_list_received` set to 0.
+    /// This function should be called from the State topic handler only.
+    pub fn register_unid(&mut self, unid: &str) -> std::result::Result<(), String> {
+        let query_str = format!(
+            "INSERT INTO unids (unid, endpoint_id_list_received) VALUES ('{}', 0);",
+            unid
+        );
+
+        match self.db_conn.execute(&query_str, []) {
+            Ok(_) => Ok(()),
+            Err(err) => Err(format!(
+                "Failed to add to 'unids' table UNID '{}', error: '{}'.",
+                unid, err
+            )),
+        }
+    }
+
+    /// # Description
+    ///
+    /// Register receiving EndpointIdList for specified UNID.
+    /// Sets `endpoint_id_list_received` value of row with specified UNID to `1`.
+    /// This function should be called from the EndpointIdList topic handler only.
+    pub fn register_received_epidlist(&mut self, unid: &str) -> std::result::Result<(), String> {
+        let query_str = format!(
+            "UPDATE unids SET endpoint_id_list_received = 1 WHERE unid = '{}';",
+            unid
+        );
+
+        match self.db_conn.execute(&query_str, []) {
+            Ok(_) => Ok(()),
+            Err(err) => Err(format!(
+                "Failed to update 'unids' table with UNID '{}', error: '{}'.",
+                unid, err
+            )),
+        }
+    }
+
+    /// # Description
+    ///
+    /// Removes a row with specified UNID from the `unids` table.
+    pub fn remove_unid(&mut self, unid: &str) -> std::result::Result<(), String> {
+        let delete_query_str = format!("DELETE from unids where unid = '{}'", unid);
+
+        match self.db_conn.execute(&delete_query_str, []) {
+            Ok(_) => Ok(()),
+            Err(err) => Err(format!(
+                "Failed to delete a row with UNID '{}' from 'unids' table, error: '{}'.",
+                unid, err
+            )),
+        }
     }
 }
 
@@ -339,7 +496,7 @@ mod tests {
         /// this function should be used in unit tests ONLY
         pub fn new_for_unit_tests() -> Self {
             NALConfig {
-                db_file: String::from(":memory"),
+                db_file: String::from(":memory:"),
             }
         }
     }
@@ -354,6 +511,10 @@ mod tests {
             self.db_conn
                 .execute("DELETE from nal_delayed_messages;", params![])
                 .expect("Cannot clean up nal_delayed_messages table");
+
+            self.db_conn
+                .execute("DELETE from unids;", params![])
+                .expect("Cannot clean up unids table");
         }
     }
 
@@ -580,5 +741,96 @@ mod tests {
             cache.get_all_nodes_match_name("test_node_1").unwrap(),
             vec![key_1_0, key_1_1, key_1_2]
         );
+    }
+
+    #[test]
+    #[serial]
+    fn test_delayed_messages() {
+        let mut cache = Cache::new(NALConfig::new_for_unit_tests());
+        cache.clean_up_db_for_unit_tests();
+
+        let unid_1 = "test_node_1";
+        let unid_2 = "test_node_2";
+        let topic_1_1 = "ucl/by-unid/test_node_1/ep1/NameAndLocation/Commands/WriteAttributes";
+        let topic_1_2 = "ucl/by-unid/test_node_1/ep2/NameAndLocation/Commands/WriteAttributes";
+        let topic_2_1 = "ucl/by-unid/test_node_2/ep1/NameAndLocation/Commands/WriteAttributes";
+        let topic_2_2 = "ucl/by-unid/test_node_2/ep2/NameAndLocation/Commands/WriteAttributes";
+        let msg_1_1 = "payload_1_1";
+        let msg_1_2 = "payload_1_2";
+        let msg_2_1 = "payload_2_1";
+        let msg_2_2 = "payload_2_2";
+
+        assert_eq!(
+            cache.add_delayed_message(unid_1, topic_1_1, msg_1_1, 1),
+            Ok(())
+        );
+        assert_eq!(
+            cache.add_delayed_message(unid_1, topic_1_2, msg_1_2, 0),
+            Ok(())
+        );
+        assert_eq!(
+            cache.add_delayed_message(unid_2, topic_2_1, msg_2_1, 0),
+            Ok(())
+        );
+        assert_eq!(
+            cache.add_delayed_message(unid_2, topic_2_2, msg_2_2, 1),
+            Ok(())
+        );
+
+        // test insert messages
+        {
+            let vec_1_real: Vec<(String, String)> = cache.get_all_delayed_messages(unid_1).unwrap();
+            let vec_2_real: Vec<(String, String)> = cache.get_all_delayed_messages(unid_2).unwrap();
+
+            let vec_1_expected: Vec<(String, String)> = vec![
+                (String::from(topic_1_2), String::from(msg_1_2)),
+                (String::from(topic_1_1), String::from(msg_1_1)),
+            ];
+            let vec_2_expected: Vec<(String, String)> = vec![
+                (String::from(topic_2_1), String::from(msg_2_1)),
+                (String::from(topic_2_2), String::from(msg_2_2)),
+            ];
+
+            assert_eq!(vec_1_real, vec_1_expected);
+            assert_eq!(vec_2_real, vec_2_expected);
+        }
+
+        // test deletion of messages
+        {
+            assert_eq!(cache.delete_all_delayed_messages(unid_1), Ok(()));
+
+            let vec_1_real: Vec<(String, String)> = cache.get_all_delayed_messages(unid_1).unwrap();
+            let vec_2_real: Vec<(String, String)> = cache.get_all_delayed_messages(unid_2).unwrap();
+
+            let vec_1_expected: Vec<(String, String)> = vec![];
+            let vec_2_expected: Vec<(String, String)> = vec![
+                (String::from(topic_2_1), String::from(msg_2_1)),
+                (String::from(topic_2_2), String::from(msg_2_2)),
+            ];
+
+            assert_eq!(vec_1_real, vec_1_expected);
+            assert_eq!(vec_2_real, vec_2_expected);
+        }
+    }
+
+    #[test]
+    #[serial]
+    fn test_unids() {
+        let mut cache = Cache::new(NALConfig::new_for_unit_tests());
+        cache.clean_up_db_for_unit_tests();
+
+        let unid_1 = "test_node_1";
+        let unid_2 = "test_node_2";
+
+        assert_eq!(cache.register_unid(unid_1), Ok(()));
+        assert_eq!(cache.register_unid(unid_2), Ok(()));
+
+        assert_eq!(cache.is_unid_registered(unid_1), true);
+        assert_eq!(cache.is_unid_registered(unid_2), true);
+
+        assert_eq!(cache.remove_unid(unid_2), Ok(()));
+
+        assert_eq!(cache.is_unid_registered(unid_1), true);
+        assert_eq!(cache.is_unid_registered(unid_2), false);
     }
 }

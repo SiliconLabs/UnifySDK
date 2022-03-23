@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -128,6 +128,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga0751a5b8e725df3e789789230b886395"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__transport.html#ga0751a5b8e725df3e789789230b886395">s0_set_key</a> (const uint8_t *network_key)</td></tr>
 <tr class="memdesc:ga0751a5b8e725df3e789789230b886395"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the S0 network key.  <a href="group__zwave__s0__transport.html#ga0751a5b8e725df3e789789230b886395">More...</a><br /></td></tr>
 <tr class="separator:ga0751a5b8e725df3e789789230b886395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga397253265d758fee27dfed5a449737b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__s0__transport.html#ga397253265d758fee27dfed5a449737b9">zwave_s0_on_abort_send_data</a> (<a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> session_id)</td></tr>
+<tr class="memdesc:ga397253265d758fee27dfed5a449737b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z-Wave controller transport callback function which will be triggered when S0 frame tranmission is aborted.  <a href="group__zwave__s0__transport.html#ga397253265d758fee27dfed5a449737b9">More...</a><br /></td></tr>
+<tr class="separator:ga397253265d758fee27dfed5a449737b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Transport for Security 0. </p>
@@ -185,6 +188,35 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>Set the network key </p>
+
+</div>
+</div>
+<a id="ga397253265d758fee27dfed5a449737b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga397253265d758fee27dfed5a449737b9">&#9670;&nbsp;</a></span>zwave_s0_on_abort_send_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwave_s0_on_abort_send_data </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a>&#160;</td>
+          <td class="paramname"><em>session_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Z-Wave controller transport callback function which will be triggered when S0 frame tranmission is aborted. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">session_id</td><td>The session id of the frame which has been aborted.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>SL_STATUS_OK to indicate that ongoing session are aborted. </dd>
+<dd>
+SL_STATUS_NOT_FOUND to indicate that no transmission was ongoing. </dd></dl>
 
 </div>
 </div>
@@ -356,7 +388,7 @@ SL_STATUS_FAIL if an error occurred in <a class="el" href="group__zwave__s0__net
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:34 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:50:00 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

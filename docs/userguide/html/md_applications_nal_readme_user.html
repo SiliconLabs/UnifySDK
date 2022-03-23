@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -88,44 +88,47 @@ $(document).ready(function(){initNavTree('md_applications_nal_readme_user.html',
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>NAL is an acronym for <em>Name and Location service</em>.</p>
-<h1><a class="anchor" id="autotoc_md192"></a>
+<h1><a class="anchor" id="autotoc_md200"></a>
 Description</h1>
 <p>The Name and Location Service is a helper MQTT component that allows to perform book-keeping on text names and locations that have been assigned. This functionality allows IoT Services to assign and readback a Name and a Location for each node/endpoint. It subscribes to 2 topics:</p>
 <ul>
 <li><code>ucl/by-unid/+/State</code></li>
+<li><code>ucl/by-unid/+/State/Attributes/EndpointIdList/Reported</code></li>
 <li><code>ucl/by-unid/+/+/#</code></li>
 </ul>
 <p>But, actually, it processes such topics:</p>
 <ul>
-<li><code>ucl/by-unid/&lt;UNID&gt;/State</code> - to add/delete node</li>
-<li><code>ucl/by-unid/&lt;UNID&gt;/&lt;endpoint_id&gt;/#</code> - to detect a new endpoint</li>
+<li><code>ucl/by-unid/&lt;UNID&gt;/State</code> - to register UNID / delete all nodes with such UNID</li>
+<li><code>ucl/by-unid/&lt;UNID&gt;/State/Attributes/EndpointIdList/Reported</code> - to create nodes for all possible endpoints for such UNID</li>
 <li><code>ucl/by-unid/&lt;UNID&gt;/&lt;endpoint_id&gt;/NameAndLocation/Commands/WriteAttributes</code> - to update Name or Location attribute</li>
 <li><code>ucl/by-unid/&lt;UNID&gt;/&lt;endpoint_id&gt;/Basic/Attributes/LocationDescription/&lt;Desired/Reported&gt;</code> - to implement a proxying over Protocol Controller</li>
 </ul>
 <p>NAL provides persistent storage for its data using SQLite database.</p>
-<h1><a class="anchor" id="autotoc_md193"></a>
+<h1><a class="anchor" id="autotoc_md201"></a>
 Installation</h1>
 <p>Please refer to <a class="el" href="md_doc_readme_user.html">Unify SDK User guide</a>.</p>
-<h1><a class="anchor" id="autotoc_md194"></a>
+<h1><a class="anchor" id="autotoc_md202"></a>
 Running the NAL</h1>
-<h2><a class="anchor" id="autotoc_md195"></a>
+<h2><a class="anchor" id="autotoc_md203"></a>
 Using Systemd Service</h2>
 <p>The best way to run the NAL is using the Systemd service that is installed with the Debian installer. For more information, see <a class="el" href="md_doc_readme_user.html">Unify SDK User guide</a>.</p>
-<h2><a class="anchor" id="autotoc_md196"></a>
+<h2><a class="anchor" id="autotoc_md204"></a>
 Using Command Line</h2>
 <p>Alternatively, the NAL may be run by executing <code>nal</code>. It is possible to configure the MQTT broker Hostname or IP, NAL database path, through command line options. For more details about the options, run <code>uic-nal --help</code>.</p>
-<h1><a class="anchor" id="autotoc_md197"></a>
+<h1><a class="anchor" id="autotoc_md205"></a>
 How to use it</h1>
-<h2><a class="anchor" id="autotoc_md198"></a>
+<h2><a class="anchor" id="autotoc_md206"></a>
 How to create a node with two endpoints, update it's Name and Location attributes and delete a node</h2>
-<div class="fragment"><div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/State&quot; -m &#39;some_dummy_data&#39; # create a node with unid &quot;node_test&quot;, endpoint 0</div>
-<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/ep1/Basic/Attributes/PowerSource/Reported&quot; -m &#39;{&quot;any_json&quot;:&quot;payload&quot;}&#39; # add a node with unid &quot;node_test&quot;, endpoint 1</div>
-<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes&quot; -m &#39;{&quot;Name&quot;:&quot;new_name&quot;}&#39; # write Name attribute for node with unid &quot;node_test&quot;, endpoint 1</div>
-<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes&quot; -m &#39;{&quot;Location&quot;:&quot;new_location&quot;}&#39; # write Location attribute for node with unid &quot;node_test&quot;, endpoint 1</div>
-<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/State&quot; -m &#39;&#39; # remove all endpoints with unid &quot;node_test&quot;</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md199"></a>
+<div class="fragment"><div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/State&quot; -m &#39;some_dummy_data&#39; # register UNID &quot;node_test&quot;</div>
+<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported&quot; -m &#39;{&quot;value&quot;:[1,2,3]}&#39; # create 3 nodes with UNID &quot;node_test&quot; and endpoints 1,2,3</div>
+<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/ep1/Basic/Attributes/PowerSource/Reported&quot; -m &#39;{&quot;any_json&quot;:&quot;payload&quot;}&#39; # add a node with UNID &quot;node_test&quot;, endpoint 1</div>
+<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes&quot; -m &#39;{&quot;Name&quot;:&quot;new_name&quot;}&#39; # write Name attribute for node with UNID &quot;node_test&quot;, endpoint 1</div>
+<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/ep1/NameAndLocation/Commands/WriteAttributes&quot; -m &#39;{&quot;Location&quot;:&quot;new_location&quot;}&#39; # write Location attribute for node with UNID &quot;node_test&quot;, endpoint 1</div>
+<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/State&quot; -m &#39;&#39; # remove all endpoints with UNID &quot;node_test&quot;</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md207"></a>
 How to test a proxying feature</h2>
-<div class="fragment"><div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/State&quot; -m &#39;some_dummy_data&#39; # create a node with unid &quot;node_test&quot;, endpoint 0</div>
+<div class="fragment"><div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/State&quot; -m &#39;some_dummy_data&#39; # register UNID &quot;node_test&quot;</div>
+<div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported&quot; -m &#39;{&quot;value&quot;:[0]}&#39; # create a node with UNID &quot;node_test&quot; and endpoints 0</div>
 <div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/ep0/Basic/Attributes/LocationDescription/Desired&quot; -m &#39;{&quot;value&quot;:&quot;Rooftop&quot;}&#39; # after receiving a &quot;LocationDescription&quot; message - the node is &quot;proxied&quot; and couldn&#39;t perform the Location attribute update without Protocol Controller</div>
 </div><!-- fragment --><p>Now a user wants to update a Location attribute by publishing to "WriteAttributes" topic:</p>
 <div class="fragment"><div class="line">username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t &quot;ucl/by-unid/node_test/ep0/NameAndLocation/Commands/WriteAttributes&quot; -m &#39;{&quot;Location&quot;:&quot;updated_location&quot;}&#39;</div>
@@ -151,7 +154,7 @@ How to test a proxying feature</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:33:59 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

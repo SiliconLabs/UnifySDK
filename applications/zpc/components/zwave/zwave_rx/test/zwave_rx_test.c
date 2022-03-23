@@ -336,6 +336,9 @@ void test_zwave_rx_on_frame_received()
     .encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE,
   };
 
+  // RX event
+  zwave_controller_on_frame_reception_Expect(ZWAVE_RX_TEST_SOURCE_NODE_ID);
+  // Frame dispatch
   zwave_controller_on_frame_received_ExpectWithArray(
     &conn,
     sizeof(conn),
@@ -401,6 +404,9 @@ void test_zwave_rx_on_node_information()
   // Init:
   rx_init_successful_test_helper();
 
+  // Rx event
+  zwave_controller_on_frame_reception_Expect(ZWAVE_RX_TEST_SOURCE_NODE_ID);
+
   // Callbacks containing NIFs will trigger a call to zwapi_get_protocol_info.
   zwapi_get_protocol_info_Stub(
     (CMOCK_zwapi_get_protocol_info_CALLBACK)zwapi_get_protocol_info_stub_ok);
@@ -425,7 +431,9 @@ void test_zwave_rx_on_node_information()
     sizeof(expected_node_info_array_1),
     0);
 
-  // Chang the get_protocol_info to return a failure
+   // Rx event
+  zwave_controller_on_frame_reception_Expect(ZWAVE_RX_TEST_DESTINATION_NODE_ID);
+  // Change the get_protocol_info to return a failure
   zwapi_get_protocol_info_Stub(
     (CMOCK_zwapi_get_protocol_info_CALLBACK)zwapi_get_protocol_info_stub_fail);
 

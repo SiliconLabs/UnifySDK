@@ -21,7 +21,7 @@ struct ctimer {
   void *ptr;
 };
 
-uint16_t clock_time(void)
+uint32_t clock_time(void)
 {
   return 0;
 }

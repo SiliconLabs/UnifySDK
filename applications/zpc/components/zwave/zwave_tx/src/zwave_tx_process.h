@@ -16,7 +16,6 @@
 
 #include "zwave_tx.h"
 #include "process.h"
-
 /**
  * @defgroup zwave_tx_process Z-Wave TX Process
  * @ingroup zwave_tx

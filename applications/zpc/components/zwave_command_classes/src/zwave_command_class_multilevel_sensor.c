@@ -601,7 +601,8 @@ sl_status_t zwave_command_class_multilevel_sensor_init()
   handler.command_class              = COMMAND_CLASS_SENSOR_MULTILEVEL_V11;
   handler.command_class_name         = "Multilevel Sensor";
   handler.comments                   = "Partial control: <br>"
-                                       "1. Not all scales are supported ";
+                                       "1. Not all scales are supported<br>"
+                                       "2. Not all types are shown in the UI.";
   handler.version                    = SENSOR_MULTILEVEL_VERSION_V11;
   handler.manual_security_validation = false;
 

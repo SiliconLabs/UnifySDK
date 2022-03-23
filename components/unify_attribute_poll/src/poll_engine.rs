@@ -10,22 +10,20 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
-use super::IntervalType;
-use crate::attribute_watcher::run_attribute_watcher;
-use crate::poll_entries::PollQueueTrait;
+use crate::attribute_poll_trait::IntervalType;
+use crate::attribute_watcher_trait::AttributeWatcherTrait;
+use crate::poll_queue_trait::PollQueueTrait;
 use crate::PollEngineConfig;
-use alloc::rc::Rc;
-use core::cell::RefCell;
-use futures::channel::mpsc::{UnboundedReceiver, UnboundedSender};
-use futures::{select, FutureExt, StreamExt};
+use futures::channel::mpsc::UnboundedReceiver;
+use futures::{select_biased, FutureExt, StreamExt};
 use unify_log_sys::*;
 use unify_middleware::contiki::PlatformTrait;
-use unify_middleware::{Attribute, AttributeStoreTrait};
+use unify_middleware::{Attribute, AttributeEvent, AttributeEventType, AttributeStoreTrait};
 declare_app_name!("poll_engine");
 
 #[derive(Debug)]
 /// Enum with commands send send to the PollEngine
-pub(crate) enum PollEngineCommand {
+pub enum PollEngineCommand {
     Register {
         attribute: Attribute,
         interval: IntervalType,
@@ -41,12 +39,12 @@ pub(crate) enum PollEngineCommand {
     },
     Enable,
     Disable,
-    Deleted {
-        attribute: Attribute,
-    },
-    Initialize {
-        config: PollEngineConfig,
-    },
+}
+
+enum PollEngineDispatch {
+    PollEngineCommand(PollEngineCommand),
+    PollTimeout,
+    AttributeUpdated(AttributeEvent),
 }
 
 /// The [PollEngine] is a state-machine that contains the core logic of the
@@ -63,23 +61,18 @@ pub(crate) enum PollEngineCommand {
 /// The [PollEngine] is controlled via a mpsc channel. In Which
 /// [PollEngineCommand] objects can be passed.
 ///
-/// The [PollEngine::run()] does not exit and consumes self
-///
 /// The rules for timer scheduling are:
 /// * If deadline of `next` entry < `last_poll` + `backoff`, queue timeout for
 ///   in `backoff` seconds,
 /// * else queue timeout for deadline of `next` entry in [PollEntries].
 ///
-/// When an attribute is removed, the [PollEngine] deletes the entry from
-/// [PollEntries](crate::poll_entries::PollEntries).
+/// The PollEngine is aware of state changes inside the attribute store. There
+/// is no need for explicitly deleting the entries on the event of a delete
+/// node.
 pub(crate) struct PollEngine {
-    config: Option<PollEngineConfig>,
-    // poll_queue declared as Rc<RefCell<>> as it needs
-    // to be shared to the attribute_watcher
-    poll_queue: Rc<RefCell<dyn PollQueueTrait>>,
+    config: PollEngineConfig,
+    poll_queue: Box<dyn PollQueueTrait>,
     platform: Box<dyn PlatformTrait>,
-    command_receiver: UnboundedReceiver<PollEngineCommand>,
-    command_sender: UnboundedSender<PollEngineCommand>,
     last_poll: u64,
     running: bool,
 }
@@ -88,26 +81,23 @@ impl PollEngine {
     pub fn new(
         platform: impl PlatformTrait + 'static,
         poll_queue: impl PollQueueTrait + 'static,
-        command_receiver: UnboundedReceiver<PollEngineCommand>,
-        command_sender: UnboundedSender<PollEngineCommand>,
+        config: PollEngineConfig,
     ) -> Self {
         PollEngine {
-            config: None,
-            poll_queue: Rc::new(RefCell::new(poll_queue)),
+            config,
+            poll_queue: Box::new(poll_queue),
             platform: Box::new(platform),
+
             last_poll: 0,
-            command_receiver,
-            command_sender,
-            running: false,
+            running: true,
         }
     }
 
     fn next_poll_timeout(&self) -> Option<u64> {
-        let upcoming_deadline = self.poll_queue.borrow().upcoming()?.1;
-        let config = self.config.as_ref()?;
+        let upcoming_deadline = self.poll_queue.upcoming()?.1;
         let now = self.platform.clock_seconds();
         let next_timeout = calculate_poll_time(
-            config.backoff.into(),
+            self.config.backoff.into(),
             upcoming_deadline,
             now,
             self.last_poll,
@@ -115,85 +105,153 @@ impl PollEngine {
         Some(next_timeout)
     }
 
-    // Run the PollEngine, this call is blocking. It waits for either incoming
-    // [PollEngineCommand] through the [UnboundedReceiver<PollEngineCommand>] or for
-    // timeout for the next poll using [Timer].
-    pub async fn run(mut self) {
-        unsafe { run_attribute_watcher(self.command_sender.clone(), self.poll_queue.clone()) };
+    /// (run)[PollEngine::run] is the main entry point of the [PollEngine] and
+    /// is required to be called before executing any command.
+    ///
+    /// This async function will never return and its lifetime will span the
+    /// whole application. Therefore make sure that calling this function will
+    /// not starve the program. Run this in a separate task
+    /// with [unify_middleware::contiki::contiki_spawn]
+    ///
+    /// Note that the PollEngine is moved by value. this means that after this
+    /// function the instance of [PollEngine] is consumed by the run function
+    /// and does not exist any more.
+    pub async fn run(
+        mut context: PollEngine,
+        mut attribute_watcher: impl AttributeWatcherTrait,
+        mut command_receiver: UnboundedReceiver<PollEngineCommand>,
+    ) {
         loop {
-            // There are 2 states in the PollEngine:
-            // * There is an attribute in the poll-queue, and a poll timer needs to be scheduled
-            // * Wait for a new command. There is nothing in the poll-queue or the PollEngine is paused.
-            match self.running.then(|| self.next_poll_timeout()).flatten() {
-                // if the poll engine is running and there is an available timeout to
-                // be polled, handle it
-                Some(timeout) => self.handle_available_timeout(timeout).await,
-                // if there is nothing in the poll queue. start listening for
-                // incoming commands
-                None => {
-                    let cmd = self.command_receiver.select_next_some().await;
-                    self.on_handle_command(cmd);
+            // select_biased! awaits 3 functions:
+            // * a wait function until there is an incoming [PollEngineCommand]
+            //   send to the pollEngine. e.g to register an attribute for
+            //   polling
+            // * a wait for a change in the attribute store, if the attribute is
+            //   currently in the poll engine we want to update our bookkeeping
+            //   if for instance its gets deleted
+            // * wait until a scheduled poll timer goes off. in this case we
+            //   want to clear the value for the upcoming attribute in the queue
+            //
+            // select_biased functions the same as a select! block. The only
+            // difference is that when multiple items are ready, the item
+            // highest in the order of declaration will be picked. for select!
+            // on the other hand its undefined which item will be picked.
+            //
+            // when one of the awaited functions produces an value, we exit the
+            // selected_biased block so we can process it. This means that the
+            // other functions inside the select block will not be polled
+            // anymore and go out of scope as well. for instance, the timer
+            // inside the schedule poll will be stopped and all the stack
+            // allocations made inside of the `schedule_poll()` will be
+            // released.
+            //
+            // we cannot process the selected future inside of the
+            // selected_biased block since we require to have an mutable borrow
+            // of the context object. And according rust we can have only one
+            // mutable borrower or several immutable borrowers at once. Doing
+            // something immutable inside of the select_biased block in our case
+            // would be completely fine.
+            //
+            // functions that are being awaited inside `select!` blocks need to
+            // be `fused`. A requirement enforced by select!. Fusing an future
+            // means that after the future completed and is returned, its fuse
+            // is to be broken and will therefore not be polled anymore by the
+            // select! block. In our case its not relevant since we create
+            // and fuse our futures inside the select block. i.e. we always have
+            // a fresh `FusedFuture`. Would one of the futures for instance be
+            // initialized outside of the loop, and its returned by the
+            // select block, then it will never be polled anymore in successive
+            // iterations of the while loop and therefore never be triggered
+            // again.
+            let dispatch_cmd = select_biased! {
+                res = command_receiver.select_next_some() => PollEngineDispatch::PollEngineCommand(res),
+                res = PollEngine::find_updated_attribute(&context, &mut attribute_watcher).fuse() => res,
+                res = PollEngine::schedule_poll(&context).fuse() => res,
+            };
+
+            // At this point one of the awaited functions went off and produced
+            // an [PollEngineDispatch] command which needs to be executed. since
+            // we don't have any immutable borrowers any more we borrow mutable
+            // here and call mutable functions on the context object!
+            match dispatch_cmd {
+                PollEngineDispatch::PollEngineCommand(cmd) => context.on_handle_command(cmd),
+                PollEngineDispatch::PollTimeout => context.do_poll(),
+                PollEngineDispatch::AttributeUpdated(event) => {
+                    context.on_handle_attribute_update(event)
                 }
+            }
+            // we are finished dispatching the internal data. we loop back again
+            // to await again for a produced result on one of the 3 functions
+        }
+    }
+
+    /// This function will schedule a poll timeout and will return as soon as
+    /// the timeout occurs. The exact timeout is retrieved by looking up the
+    /// upcoming deadline inside the [PollEntries] poll queue.
+    ///
+    /// *This function will never return in the case when the engine is paused
+    /// or if number of attribute in the poll queue equals 0!*
+    ///
+    /// # Returns
+    ///
+    /// `Some(PollTimeout)`    when an timeout on the poll timer occurred
+    /// `BLOCKING`             nothing to be polled or the engine is paused     
+    async fn schedule_poll(&self) -> PollEngineDispatch {
+        if let Some(timeout) = self.is_running_and_upcoming_timeout() {
+            // the timer stops automatically when the timer object goes out of
+            // scope. therefore, we don't have to manually cleanup the timer
+            // object.
+            let timer = self.platform.get_timer_object();
+            timer
+                .on_timeout(core::time::Duration::from_secs(timeout))
+                .await;
+            return PollEngineDispatch::PollTimeout;
+        }
+        // if there is nothing to poll, schedule a future that always returns
+        // std::task::Poll::Pending state. e.g it will never complete
+        log_debug!("no poll scheduled");
+        futures::future::pending().await
+    }
+
+    /// Listens to the attribute store for status updates of attributes It will
+    /// only return an update if the attribute is present in the poll queue. In
+    /// this case we might want to update our bookkeeping accordingly.
+    ///
+    /// # Arguments
+    ///
+    /// * `attribute_watcher`   a watcher that watches for attribute DELETED and
+    ///   UPDATED events as well as touch UPDATED events
+    ///
+    /// # Returns
+    ///
+    /// * `PollEngineDispatch::AttributeUpdated(event)` when an update is found
+    ///   AttributeUpdated is returned with the event specifics as its argument.
+    async fn find_updated_attribute(
+        &self,
+        attribute_watcher: &mut impl AttributeWatcherTrait,
+    ) -> PollEngineDispatch {
+        loop {
+            let event = attribute_watcher.next_change().await;
+            if event.attribute.exists() && self.poll_queue.contains(&event.attribute) {
+                return PollEngineDispatch::AttributeUpdated(event);
             }
         }
     }
 
-    /// Handle the sub state of the PollEngine.
-    async fn handle_available_timeout(&mut self, timeout: u64) {
-        match self.process_poll(timeout).await {
-            Ok(false) => log_warning!("timer stopped externally"),
-            Ok(true) => self.do_poll(),
-            Err(cmd) => self.on_handle_command(cmd),
-        }
-    }
-
-    /// Wait for the timeout to happen. Or for a command to be called while we
-    /// where waiting. In the latter, the command is returned with Err(cmd) but
-    /// not yet process. Any command can mutate the poll queue which means that
-    /// we require to reschedule a new poll timer.
-    ///
-    /// the timer stops automatically when the timer object goes out of scope.
-    /// therefore, we dont have to manually cleanup the timer object once we
-    /// for instance, receive a new command.
-    ///
-    /// # Arguments
-    ///
-    /// * timeout   interval in seconds from now when the next attribute needs
-    ///             polling.
-    ///
-    /// # Returns
-    ///
-    /// * Ok(true)  Timeout happened
-    /// * Ok(false) Timer got cancelled prematurely
-    /// * Err(cmd)  a command was received. this needs to be processed before we can
-    ///             handling timeouts again.
-    async fn process_poll(&mut self, timeout: u64) -> Result<bool, PollEngineCommand> {
-        log_debug!("awaking in {} seconds", timeout);
-
-        let timer = self.platform.get_timer_object();
-        let mut timeout = timer
-            .on_timeout(core::time::Duration::from_secs(timeout))
-            .fuse();
-
-        select! {
-            cmd = self.command_receiver.select_next_some() => Err(cmd),
-            result = timeout => {
-                 match result{
-                     Some(_) => Ok(true),
-                     None => Ok(false),
-                }
-            },
-        }
+    /// * Returns `Some(timeout)` (in sec) when the engine is running and there
+    /// is an upcoming poll interval calculated.
+    /// * Returns None if the engine is paused or there are no items in the poll
+    ///   queue.
+    fn is_running_and_upcoming_timeout(&self) -> Option<u64> {
+        self.running.then(|| self.next_poll_timeout()).flatten()
     }
 
     /// This function does 2 things:
     /// * Clears the reported value of the attribute that needs polling.
-    /// * Stores te last time such a poll action was executed.
+    /// * Stores te last time this poll action was executed.
     fn do_poll(&mut self) {
-        let mut poll_queue = self.poll_queue.borrow_mut();
-
-        let attribute = match poll_queue.upcoming() {
-            Some(x) => x.0,
+        let (attribute, interval) = match self.poll_queue.pop_next() {
+            Some(x) => x,
             None => {
                 log_error!(
                     "scheduled timer for upcoming attribute. but queue appears to be empty!"
@@ -202,17 +260,14 @@ impl PollEngine {
             }
         };
 
-        log_debug!("Clearing reported for {}", attribute);
         if let Err(e) = attribute.set_reported(None as Option<u32>) {
             log_warning!("Failed to clear reported for {} {}", attribute, e);
+        } else {
+            let now = self.platform.clock_seconds();
+            self.last_poll = now;
+            self.poll_queue.queue(attribute, interval, now);
+            log_debug!("Cleared reported for {}", attribute);
         }
-
-        poll_queue.requeue(attribute);
-
-        // work-around to prevent the attribute watcher from triggering a touch event
-        // on an attribute update that we just triggered ourselves.
-        poll_queue.set_flag(attribute);
-        self.last_poll = self.platform.clock_seconds();
     }
 
     /// handles the incoming commands of the engine.
@@ -227,38 +282,63 @@ impl PollEngine {
             PollEngineCommand::Restart { attribute } => self.on_restart(attribute),
             PollEngineCommand::Enable => self.on_enable(),
             PollEngineCommand::Disable => self.on_disable(),
-            PollEngineCommand::Deleted { attribute } => self.on_deleted(attribute),
-            PollEngineCommand::Initialize { config } => self.on_initialize(config),
         }
 
-        log_debug!("{}", self.poll_queue.borrow());
+        #[cfg(not(test))]
+        log_debug!("{}", self.poll_queue);
+    }
+
+    fn on_handle_attribute_update(&mut self, event: AttributeEvent) {
+        match event.event_type {
+            AttributeEventType::ATTRIBUTE_DELETED => {
+                if !self.poll_queue.remove(&event.attribute) {
+                    log_warning!(
+                        "could not delete {}. not in the poll_queue anymore",
+                        &event.attribute
+                    );
+                }
+            }
+            AttributeEventType::ATTRIBUTE_UPDATED => {
+                if self
+                    .poll_queue
+                    .requeue(event.attribute, self.platform.clock_seconds())
+                {
+                    log_debug!("updated {} in poll-queue", &event.attribute);
+                }
+            }
+            e => {
+                log_error!("did not subscribe for {:?}", e);
+            }
+        }
     }
 
     fn on_register(&mut self, attribute: Attribute, interval: u32) {
-        if let Some(cfg) = &self.config {
-            let used_interval = default_if_zero(cfg, interval);
-            log_debug!("Register {} with interval {}s", attribute, used_interval);
-            self.poll_queue.borrow_mut().queue(attribute, used_interval);
-        } else {
-            log_error!("not initialized yet");
-        }
+        let used_interval = default_if_zero(&self.config, interval);
+        log_debug!("Register {} with interval {}s", attribute, used_interval);
+
+        let now = self.platform.clock_seconds();
+        self.poll_queue.queue(attribute, used_interval, now);
     }
 
     fn on_deregister(&mut self, attribute: Attribute) {
         log_debug!("Remove {}", attribute);
-        if !self.poll_queue.borrow_mut().remove(&attribute) {
+        if !self.poll_queue.remove(&attribute) {
             log_warning!("didn't remove {}", attribute);
         }
     }
 
     fn on_schedule(&mut self, attribute: Attribute) {
         log_debug!("Register {} with interval {}s", attribute, 0);
-        self.poll_queue.borrow_mut().queue(attribute, 0u64);
+        let now = self.platform.clock_seconds();
+        self.poll_queue.queue(attribute, 0, now);
     }
 
     fn on_restart(&mut self, attribute: Attribute) {
         log_debug!("Restart {}", attribute);
-        if !self.poll_queue.borrow_mut().requeue(attribute) {
+        if !self
+            .poll_queue
+            .requeue(attribute, self.platform.clock_seconds())
+        {
             log_warning!("cannot restart, attribute {} not present", attribute);
         }
     }
@@ -271,25 +351,6 @@ impl PollEngine {
     fn on_disable(&mut self) {
         log_debug!("suspending poll engine");
         self.running = false;
-    }
-
-    fn on_deleted(&mut self, attribute: Attribute) {
-        if !self.poll_queue.borrow_mut().remove(&attribute) {
-            log_warning!(
-                "could not delete {}. not in the poll_queue anymore",
-                attribute
-            );
-        }
-    }
-
-    fn on_initialize(&mut self, config: PollEngineConfig) {
-        if self.config.is_some() {
-            log_debug!("already initialized");
-            return;
-        }
-
-        self.config = Some(config);
-        self.running = true;
     }
 }
 
@@ -315,20 +376,31 @@ fn calculate_poll_time(backoff: u64, upcoming_entry: u64, now: u64, last_poll: u
 
 #[cfg(test)]
 mod tests {
+    use crate::poll_queue_trait::MockPollQueueTrait;
+
     use super::*;
-    //use crate::poll_entries::MockPollQueueTrait;
-    // use futures::channel::mpsc::unbounded;
-    // use futures::pin_mut;
-    // use futures::stream;
-    // use futures_test::assert_stream_pending;
-    // use futures_test::future::FutureTestExt;
-    // use mockall::predicate::eq;
-    // use mockall::Sequence;
-    // use serial_test::serial;
-    // use std::time::Duration;
-    // use unify_middleware::contiki::MockPlatformTrait;
-    // use unify_middleware::contiki::MockTimerTrait;
-    // use unify_middleware::contiki::TimeoutSuccess;
+    use async_trait::async_trait;
+
+    use futures::channel::mpsc::unbounded;
+    use futures::pin_mut;
+    use futures::stream;
+    use futures_test::assert_stream_pending;
+    use futures_test::future::FutureTestExt;
+    use mockall::predicate::eq;
+    use mockall::Sequence;
+    use serial_test::serial;
+    use std::time::Duration;
+    use unify_middleware::contiki::MockPlatformTrait;
+    use unify_middleware::contiki::MockTimerTrait;
+    use unify_middleware::contiki::TimeoutSuccess;
+    struct NoValueAttributeWatcher;
+
+    #[async_trait]
+    impl AttributeWatcherTrait for NoValueAttributeWatcher {
+        async fn next_change(&mut self) -> AttributeEvent {
+            futures::future::pending().await
+        }
+    }
 
     #[test]
     fn minimum_deadline() {
@@ -356,395 +428,219 @@ mod tests {
         assert_eq!(default_if_zero(&cfg, 44), 44);
     }
 
-    // We need a proper mocking library which can handle our needs
-    // #[test]
-    // #[serial(poll_engine)]
+    #[test]
+    #[serial(poll_engine)]
 
-    // fn engine_does_nothing_on_creation() {
-    //     let contiki_clock_mock = MockPlatformTrait::new();
-    //     let poll_queue_mock = MockPollQueueTrait::new();
+    fn engine_does_nothing_on_creation() {
+        let contiki_clock_mock = MockPlatformTrait::new();
+        let mut poll_queue_mock = MockPollQueueTrait::new();
+        let attribute_watcher_mock = NoValueAttributeWatcher;
+        let cfg = PollEngineConfig {
+            backoff: 0,
+            default_interval: 0,
+        };
 
-    //     let (sender, receiver) = unbounded();
-    //     let engine = PollEngine::new(contiki_clock_mock, poll_queue_mock, receiver, sender);
+        let mut sequence = Sequence::new();
 
-    //     let stream = stream::once(engine.run().pending_once());
-    //     pin_mut!(stream);
+        poll_queue_mock
+            .expect_upcoming()
+            .with()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .return_const(None);
 
-    //     // does not matter how much we poll the engine, nothing is happening
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
-    // }
+        let (_, receiver) = unbounded();
+        let engine = PollEngine::new(contiki_clock_mock, poll_queue_mock, cfg);
 
-    // #[test]
-    // #[serial(poll_engine)]
+        let stream =
+            stream::once(PollEngine::run(engine, attribute_watcher_mock, receiver).pending_once());
+        pin_mut!(stream);
 
-    // fn initialize_engine() {
-    //     let contiki_clock_mock = MockPlatformTrait::new();
-    //     let mut poll_queue_mock = MockPollQueueTrait::new();
-    //     poll_queue_mock.expect_upcoming().with().return_const(None);
+        // does not matter how much we poll the engine, nothing is happening
+        assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
+    }
 
-    //     let (mut sender, receiver) = unbounded();
-    //     let engine = PollEngine::new(
-    //         contiki_clock_mock,
-    //         poll_queue_mock,
-    //         receiver,
-    //         sender.clone(),
-    //     );
+    #[test]
+    #[serial(poll_engine)]
+    fn do_poll_is_connected() {
+        let mut contiki_clock_mock = MockPlatformTrait::new();
+        contiki_clock_mock
+            .expect_clock_seconds()
+            .with()
+            .return_const(0u64);
 
-    //     let stream = stream::once(engine.run().pending_once());
-    //     pin_mut!(stream);
+        let (mut timeout_sender, mut timeout_receiver) = unbounded::<Option<TimeoutSuccess>>();
+        let timeout_result_fut = Box::pin(async move { timeout_receiver.select_next_some().await });
+        let mut timer_mock = Box::new(MockTimerTrait::new());
+        timer_mock
+            .expect_on_timeout()
+            .withf(|d| d == &Duration::from_secs(22))
+            .return_once(|_| timeout_result_fut);
+        contiki_clock_mock
+            .expect_get_timer_object()
+            .with()
+            .return_once(move || timer_mock);
 
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
+        let cfg = PollEngineConfig {
+            backoff: 0,
+            default_interval: 0,
+        };
 
-    //     sender
-    //         .start_send(PollEngineCommand::Initialize {
-    //             config: PollEngineConfig {
-    //                 backoff: 3,
-    //                 default_interval: 1,
-    //             },
-    //         })
-    //         .unwrap();
+        let mut sequence = Sequence::new();
+        let mut poll_queue_mock = MockPollQueueTrait::new();
+        poll_queue_mock
+            .expect_upcoming()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .with()
+            .return_const(Some((Attribute::new(1, 1).unwrap(), 22u64)));
+        poll_queue_mock
+            .expect_pop_next()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .with()
+            .return_const((Attribute::new(1, 1).unwrap(), 22));
+        poll_queue_mock
+            .expect_upcoming()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .with()
+            .return_const(None);
 
-    //     assert_stream_pending!(stream);
-    // }
+        let (_, receiver) = unbounded();
+        let engine = PollEngine::new(contiki_clock_mock, poll_queue_mock, cfg);
 
-    // #[test]
-    // #[serial(poll_engine)]
+        let stream =
+            stream::once(PollEngine::run(engine, NoValueAttributeWatcher, receiver).pending_once());
+        pin_mut!(stream);
 
-    // fn register_and_timeout_attribute() {
-    //     let mut contiki_clock_mock = MockPlatformTrait::new();
-    //     contiki_clock_mock
-    //         .expect_clock_seconds()
-    //         .with()
-    //         .return_const(0u64);
+        assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
 
-    //     let (mut timeout_sender, mut timeout_receiver) = unbounded::<Option<TimeoutSuccess>>();
-    //     let timeout_result_fut = Box::pin(async move { timeout_receiver.select_next_some().await });
-    //     let mut timer_mock = Box::new(MockTimerTrait::new());
-    //     timer_mock
-    //         .expect_on_timeout()
-    //         .withf(|d| d == &Duration::from_secs(22))
-    //         .return_once(|_| timeout_result_fut);
+        timeout_sender.start_send(Some(TimeoutSuccess)).unwrap();
+        assert_stream_pending!(stream);
+    }
 
-    //     contiki_clock_mock
-    //         .expect_get_timer_object()
-    //         .with()
-    //         .return_once(move || timer_mock);
+    #[test]
+    #[serial(poll_engine)]
+    fn disable_does_not_schedule_poll() {
+        let mut contiki_clock_mock = MockPlatformTrait::new();
+        contiki_clock_mock
+            .expect_clock_seconds()
+            .with()
+            .return_const(0u64);
 
-    //     let mut poll_queue_mock = MockPollQueueTrait::new();
-    //     let mut sequence = Sequence::new();
-    //     poll_queue_mock
-    //         .expect_upcoming()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with()
-    //         .return_const(None);
-    //     poll_queue_mock
-    //         .expect_queue()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with(eq(Attribute::new(1, 1).unwrap()), eq(22))
-    //         .returning(|_, _| true);
-    //     poll_queue_mock
-    //         .expect_upcoming()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with()
-    //         .return_const(Some((Attribute::new(1, 1).unwrap(), 22u64)));
-    //     poll_queue_mock
-    //         .expect_pop_next()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with()
-    //         .return_const(Attribute::new(1, 1).unwrap());
-    //     poll_queue_mock
-    //         .expect_upcoming()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with()
-    //         .return_const(None);
+        let (_, mut timeout_receiver) = unbounded::<Option<TimeoutSuccess>>();
+        let timeout_result_fut = Box::pin(async move { timeout_receiver.select_next_some().await });
+        let mut timer_mock = Box::new(MockTimerTrait::new());
+        timer_mock
+            .expect_on_timeout()
+            .withf(|d| d == &Duration::from_secs(22))
+            .return_once(|_| timeout_result_fut);
+        contiki_clock_mock
+            .expect_get_timer_object()
+            .with()
+            .return_once(move || timer_mock);
 
-    //     let (mut sender, receiver) = unbounded();
-    //     let engine = PollEngine::new(
-    //         contiki_clock_mock,
-    //         poll_queue_mock,
-    //         receiver,
-    //         sender.clone(),
-    //     );
+        let cfg = PollEngineConfig {
+            backoff: 0,
+            default_interval: 0,
+        };
 
-    //     let stream = stream::once(engine.run().pending_once());
-    //     pin_mut!(stream);
+        let mut poll_queue_mock = MockPollQueueTrait::new();
+        poll_queue_mock
+            .expect_upcoming()
+            .times(1)
+            .with()
+            .return_const(None);
 
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
+        let (mut sender, receiver) = unbounded();
+        let engine = PollEngine::new(contiki_clock_mock, poll_queue_mock, cfg);
 
-    //     sender
-    //         .start_send(PollEngineCommand::Initialize {
-    //             config: PollEngineConfig {
-    //                 backoff: 3,
-    //                 default_interval: 1,
-    //             },
-    //         })
-    //         .unwrap();
+        let stream =
+            stream::once(PollEngine::run(engine, NoValueAttributeWatcher, receiver).pending_once());
+        pin_mut!(stream);
 
-    //     assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
 
-    //     sender
-    //         .start_send(PollEngineCommand::Register {
-    //             attribute: Attribute::new(1, 1).unwrap(),
-    //             interval: 22,
-    //         })
-    //         .unwrap();
+        sender.start_send(PollEngineCommand::Disable).unwrap();
 
-    //     assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
+        sender.start_send(PollEngineCommand::Enable).unwrap();
+    }
 
-    //     timeout_sender.start_send(Some(TimeoutSuccess)).unwrap();
-    //     assert_stream_pending!(stream);
-    // }
+    #[test]
+    #[serial(poll_engine)]
+    fn register_is_connected() {
+        let mut contiki_clock_mock = MockPlatformTrait::new();
+        contiki_clock_mock
+            .expect_clock_seconds()
+            .with()
+            .return_const(0u64);
 
-    // #[test]
-    // #[should_panic]
-    // #[serial(poll_engine)]
+        let (_, mut timeout_receiver) = unbounded::<Option<TimeoutSuccess>>();
+        let timeout_result_fut = Box::pin(async move { timeout_receiver.select_next_some().await });
+        let mut timer_mock = Box::new(MockTimerTrait::new());
+        timer_mock
+            .expect_on_timeout()
+            .withf(|d| d == &Duration::from_secs(22))
+            .return_once(|_| timeout_result_fut);
+        contiki_clock_mock
+            .expect_get_timer_object()
+            .with()
+            .return_once(move || timer_mock);
 
-    // fn register_and_timeout_fails() {
-    //     let mut contiki_clock_mock = MockPlatformTrait::new();
-    //     contiki_clock_mock
-    //         .expect_clock_seconds()
-    //         .with()
-    //         .return_const(0u64);
+        let cfg = PollEngineConfig {
+            backoff: 0,
+            default_interval: 0,
+        };
 
-    //     let (mut timeout_sender, mut timeout_receiver) = unbounded::<Option<TimeoutSuccess>>();
-    //     let timeout_result_fut = Box::pin(async move { timeout_receiver.select_next_some().await });
-    //     let mut timer_mock = Box::new(MockTimerTrait::new());
-    //     timer_mock
-    //         .expect_on_timeout()
-    //         .withf(|d| d == &Duration::from_secs(22))
-    //         .return_once(|_| timeout_result_fut);
+        let mut sequence = Sequence::new();
+        let mut poll_queue_mock = MockPollQueueTrait::new();
+        poll_queue_mock
+            .expect_queue()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .with(eq(Attribute::new(1, 1).unwrap()), eq(22), eq(0))
+            .returning(|_, _, _| true);
 
-    //     contiki_clock_mock
-    //         .expect_get_timer_object()
-    //         .with()
-    //         .return_once(move || timer_mock);
+        poll_queue_mock
+            .expect_remove()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .with(eq(Attribute::new(1, 1).unwrap()))
+            .returning(|_| true);
 
-    //     let mut poll_queue_mock = MockPollQueueTrait::new();
-    //     let mut sequence = Sequence::new();
-    //     poll_queue_mock
-    //         .expect_upcoming()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with()
-    //         .return_const(None);
-    //     poll_queue_mock
-    //         .expect_queue()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with(eq(Attribute::new(1, 1).unwrap()), eq(22))
-    //         .returning(|_, _| true);
-    //     poll_queue_mock
-    //         .expect_upcoming()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with()
-    //         .return_const(Some((Attribute::new(1, 1).unwrap(), 22u64)));
+        let (mut sender, receiver) = unbounded();
+        let engine = PollEngine::new(contiki_clock_mock, poll_queue_mock, cfg);
 
-    //     let (mut sender, receiver) = unbounded();
-    //     let engine = PollEngine::new(
-    //         contiki_clock_mock,
-    //         poll_queue_mock,
-    //         receiver,
-    //         sender.clone(),
-    //     );
+        let stream =
+            stream::once(PollEngine::run(engine, NoValueAttributeWatcher, receiver).pending_once());
+        pin_mut!(stream);
 
-    //     let stream = stream::once(engine.run().pending_once());
-    //     pin_mut!(stream);
+        sender.start_send(PollEngineCommand::Disable).unwrap();
 
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
 
-    //     sender
-    //         .start_send(PollEngineCommand::Initialize {
-    //             config: PollEngineConfig {
-    //                 backoff: 3,
-    //                 default_interval: 1,
-    //             },
-    //         })
-    //         .unwrap();
+        sender
+            .start_send(PollEngineCommand::Register {
+                attribute: Attribute::new(1, 1).unwrap(),
+                interval: 22,
+            })
+            .unwrap();
+        sender
+            .start_send(PollEngineCommand::Deregister {
+                attribute: Attribute::new(1, 1).unwrap(),
+            })
+            .unwrap();
 
-    //     assert_stream_pending!(stream);
-
-    //     sender
-    //         .start_send(PollEngineCommand::Register {
-    //             attribute: Attribute::new(1, 1).unwrap(),
-    //             interval: 22,
-    //         })
-    //         .unwrap();
-
-    //     assert_stream_pending!(stream);
-
-    //     timeout_sender.start_send(None).unwrap();
-    //     assert_stream_pending!(stream);
-    // }
-
-    // #[test]
-    // #[serial(poll_engine)]
-    // fn command_between_timeout() {
-    //     let mut contiki_clock_mock = MockPlatformTrait::new();
-    //     contiki_clock_mock
-    //         .expect_clock_seconds()
-    //         .with()
-    //         .return_const(0u64);
-
-    //     let mut poll_queue_mock = MockPollQueueTrait::new();
-    //     let mut sequence = Sequence::new();
-    //     poll_queue_mock
-    //         .expect_upcoming()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with()
-    //         .return_const(None);
-    //     poll_queue_mock
-    //         .expect_queue()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with(eq(Attribute::new(1, 1).unwrap()), eq(22))
-    //         .returning(|_, _| true);
-    //     poll_queue_mock
-    //         .expect_upcoming()
-    //         .times(1)
-    //         .in_sequence(&mut sequence)
-    //         .with()
-    //         .return_const(None);
-
-    //     let (mut sender, receiver) = unbounded();
-    //     let engine = PollEngine::new(
-    //         contiki_clock_mock,
-    //         poll_queue_mock,
-    //         receiver,
-    //         sender.clone(),
-    //     );
-
-    //     let stream = stream::once(engine.run().pending_once());
-    //     pin_mut!(stream);
-
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
-
-    //     sender
-    //         .start_send(PollEngineCommand::Initialize {
-    //             config: PollEngineConfig {
-    //                 backoff: 3,
-    //                 default_interval: 1,
-    //             },
-    //         })
-    //         .unwrap();
-
-    //     assert_stream_pending!(stream);
-
-    //     sender
-    //         .start_send(PollEngineCommand::Register {
-    //             attribute: Attribute::new(1, 1).unwrap(),
-    //             interval: 22,
-    //         })
-    //         .unwrap();
-
-    //     assert_stream_pending!(stream);
-
-    //     sender.start_send(PollEngineCommand::Disable).unwrap();
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
-    // }
-
-    // #[test]
-    // #[serial(poll_engine)]
-    // fn delete_called() {
-    //     let contiki_clock_mock = MockPlatformTrait::new();
-    //     let mut poll_queue_mock = MockPollQueueTrait::new();
-    //     poll_queue_mock.expect_upcoming().with().return_const(None);
-    //     poll_queue_mock
-    //         .expect_remove()
-    //         .with(eq(Attribute::new(1, 1).unwrap()))
-    //         .returning(|_| true);
-
-    //     let (mut sender, receiver) = unbounded();
-    //     let engine = PollEngine::new(
-    //         contiki_clock_mock,
-    //         poll_queue_mock,
-    //         receiver,
-    //         sender.clone(),
-    //     );
-
-    //     let stream = stream::once(engine.run().pending_once());
-    //     pin_mut!(stream);
-
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
-
-    //     sender
-    //         .start_send(PollEngineCommand::Initialize {
-    //             config: PollEngineConfig {
-    //                 backoff: 3,
-    //                 default_interval: 1,
-    //             },
-    //         })
-    //         .unwrap();
-
-    //     assert_stream_pending!(stream);
-
-    //     sender
-    //         .start_send(PollEngineCommand::Deleted {
-    //             attribute: Attribute::new(1, 1).unwrap(),
-    //         })
-    //         .unwrap();
-
-    //     assert_stream_pending!(stream);
-    // }
-
-    // #[test]
-    // #[serial(poll_engine)]
-    // fn schedule_called() {
-    //     let contiki_clock_mock = MockPlatformTrait::new();
-    //     let mut poll_queue_mock = MockPollQueueTrait::new();
-    //     poll_queue_mock.expect_upcoming().with().return_const(None);
-    //     poll_queue_mock
-    //         .expect_queue()
-    //         .with(eq(Attribute::new(1, 1).unwrap()), eq(0))
-    //         .returning(|_, _| true);
-
-    //     let (mut sender, receiver) = unbounded();
-    //     let engine = PollEngine::new(
-    //         contiki_clock_mock,
-    //         poll_queue_mock,
-    //         receiver,
-    //         sender.clone(),
-    //     );
-
-    //     let stream = stream::once(engine.run().pending_once());
-    //     pin_mut!(stream);
-
-    //     assert_stream_pending!(stream);
-    //     assert_stream_pending!(stream);
-
-    //     sender
-    //         .start_send(PollEngineCommand::Initialize {
-    //             config: PollEngineConfig {
-    //                 backoff: 3,
-    //                 default_interval: 1,
-    //             },
-    //         })
-    //         .unwrap();
-
-    //     assert_stream_pending!(stream);
-
-    //     sender
-    //         .start_send(PollEngineCommand::Schedule {
-    //             attribute: Attribute::new(1, 1).unwrap(),
-    //         })
-    //         .unwrap();
-
-    //     assert_stream_pending!(stream);
-    // }
+        assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
+    }
 }

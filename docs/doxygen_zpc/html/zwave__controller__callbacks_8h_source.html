@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -121,10 +121,10 @@ $(document).ready(function(){initNavTree('zwave__controller__callbacks_8h_source
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structzwave__controller__callbacks__t.html#a7ed2767264b1e1025479d66c4f425529">   88</a></span>&#160;  void (*on_node_deleted)(<a class="code" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="code" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="structzwave__controller__callbacks__t.html#afd3dad357221cdea96ac8dc541e99ceb">  103</a></span>&#160;  void (*on_node_added)(<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> status,</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="structzwave__controller__callbacks__t.html#aebffe16bcd2f56cdeb1bad38d3efac10">  103</a></span>&#160;  void (*on_node_added)(<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> status,</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                        <span class="keyword">const</span> <a class="code" href="structzwave__node__info__t.html">zwave_node_info_t</a> *nif,</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                        <a class="code" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="code" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>,</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                        <a class="code" href="group__zwave__controller__types.html#ga437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                        <span class="keyword">const</span> <a class="code" href="group__zwave__controller__types.html#ga437b381aa677af21a3c25f4587bda65b">zwave_dsk_t</a> dsk,</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                        <a class="code" href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a> granted_keys,</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                        <a class="code" href="group__zwave__network__management.html#ga9b8e934334335348e5cf74df4ece6847">zwave_kex_fail_type_t</a> kex_fail_type,</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                        <a class="code" href="group__zwave__generic__types.html#gaf5484bdd20ebce433593702cc9c26b9b">zwave_protocol_t</a> inclusion_protocol);</div>
@@ -172,42 +172,41 @@ $(document).ready(function(){initNavTree('zwave__controller__callbacks_8h_source
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
 <div class="line"><a name="l00232"></a><span class="lineno"><a class="line" href="group__zwave__controller__callbacks.html#ga67730d6979cf7f616ffbd41dba465fa2">  232</a></span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_RESET_STEP_MIN_PRIORITY 0</span></div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="group__zwave__controller__callbacks.html#gaaea51c9e70d7965bb15ed5b29b0bc695">  236</a></span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY 1</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY 2</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY 3</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY 4</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY 5</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__zwave__controller__callbacks.html#ga12b82fdf317e0eb3bf314a037c7ae855">zwave_controller_register_callbacks</a>(</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="keyword">const</span> <a class="code" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *<a class="code" href="zwave__s2__network_8c.html#a8142abdd583082cd31031bcb2ff1775b">callbacks</a>);</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">zwave_controller_deregister_callbacks</a>(</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;  <span class="keyword">const</span> <a class="code" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *<a class="code" href="zwave__s2__network_8c.html#a8142abdd583082cd31031bcb2ff1775b">callbacks</a>);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__zwave__controller__callbacks.html#ga03053680af8662ef6fe9edf17d790eca">zwave_controller_register_reset_step</a>(</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;  <span class="keyword">const</span> <a class="code" href="group__zwave__controller__callbacks.html#ga19a2f7ef3376c01ae1e1ff8439b70be0">zwave_controller_reset_step_t</a> step_function, int32_t priority);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zwave__controller__callbacks.html#gabc2b2fe46f23b718d3abd1b879a162b2">zwave_controller_on_reset_step_complete</a>(int32_t priority);</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zwave__controller__callbacks.html#gafb29674d2b018e2c069e1932f5179673">zwave_controller_callbacks_init</a>();</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;}</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="preprocessor">#endif  //ZWAVE_CONTROLLER_CALLBACKS_H</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="group__zwave__controller__callbacks.html#gaaea51c9e70d7965bb15ed5b29b0bc695">  235</a></span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY 1</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_DEVICE_RESET_LOCALLY_STEP_PRIORITY 2</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_SMART_START_LIST_UPDATE_STEP_PRIORITY 3</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY 4</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="preprocessor">#define ZWAVE_CONTROLLER_ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY 5</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__zwave__controller__callbacks.html#ga12b82fdf317e0eb3bf314a037c7ae855">zwave_controller_register_callbacks</a>(</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  <span class="keyword">const</span> <a class="code" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *<a class="code" href="zwave__s2__network_8c.html#a8142abdd583082cd31031bcb2ff1775b">callbacks</a>);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__zwave__controller__callbacks.html#ga309588a69b22d3b1667e19e82fce835c">zwave_controller_deregister_callbacks</a>(</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  <span class="keyword">const</span> <a class="code" href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a> *<a class="code" href="zwave__s2__network_8c.html#a8142abdd583082cd31031bcb2ff1775b">callbacks</a>);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__zwave__controller__callbacks.html#ga03053680af8662ef6fe9edf17d790eca">zwave_controller_register_reset_step</a>(</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  <span class="keyword">const</span> <a class="code" href="group__zwave__controller__callbacks.html#ga19a2f7ef3376c01ae1e1ff8439b70be0">zwave_controller_reset_step_t</a> step_function, int32_t priority);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zwave__controller__callbacks.html#gabc2b2fe46f23b718d3abd1b879a162b2">zwave_controller_on_reset_step_complete</a>(int32_t priority);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__zwave__controller__callbacks.html#gafb29674d2b018e2c069e1932f5179673">zwave_controller_callbacks_init</a>();</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;}</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="preprocessor">#endif  //ZWAVE_CONTROLLER_CALLBACKS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="agroup__zwave__controller__callbacks_html_gafb29674d2b018e2c069e1932f5179673"><div class="ttname"><a href="group__zwave__controller__callbacks.html#gafb29674d2b018e2c069e1932f5179673">zwave_controller_callbacks_init</a></div><div class="ttdeci">void zwave_controller_callbacks_init()</div><div class="ttdoc">Reset all callback structures.</div><div class="ttdef"><b>Definition:</b> zwave_controller_callbacks.c:141</div></div>
 <div class="ttc" id="agroup__zwave__network__management_html_ga151fc4231aa100f1acc0542648a17694"><div class="ttname"><a href="group__zwave__network__management.html#ga151fc4231aa100f1acc0542648a17694">zwave_network_management_state_t</a></div><div class="ttdeci">zwave_network_management_state_t</div><div class="ttdoc">States of the Network Management module.</div><div class="ttdef"><b>Definition:</b> zwave_network_management_state.h:31</div></div>
 <div class="ttc" id="agroup__zwave__keyset__definitions_html_gaa3cfbf3467d02ec3ba1b4313b3e2834a"><div class="ttname"><a href="group__zwave__keyset__definitions.html#gaa3cfbf3467d02ec3ba1b4313b3e2834a">zwave_keyset_t</a></div><div class="ttdeci">uint8_t zwave_keyset_t</div><div class="ttdef"><b>Definition:</b> zwave_keyset_definitions.h:34</div></div>
 <div class="ttc" id="agroup__zwave__node__id__definitions_html_ga4afdc83ff2cd0daf56a53dac916a11c2"><div class="ttname"><a href="group__zwave__node__id__definitions.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a></div><div class="ttdeci">uint32_t zwave_home_id_t</div><div class="ttdoc">Z-Wave HomeID type.</div><div class="ttdef"><b>Definition:</b> zwave_node_id_definitions.h:84</div></div>
-<div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:136</div></div>
+<div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:139</div></div>
 <div class="ttc" id="astructzwave__rx__receive__options__t_html"><div class="ttname"><a href="structzwave__rx__receive__options__t.html">zwave_rx_receive_options_t</a></div><div class="ttdoc">Describing receive parameters of a frame.</div><div class="ttdef"><b>Definition:</b> zwave_rx.h:53</div></div>
 <div class="ttc" id="astructzwave__controller__callbacks__t_html"><div class="ttname"><a href="structzwave__controller__callbacks__t.html">zwave_controller_callbacks_t</a></div><div class="ttdoc">The following structure holds all the callbacks this module will emit.</div><div class="ttdef"><b>Definition:</b> zwave_controller_callbacks.h:64</div></div>
 <div class="ttc" id="agroup__zwave__controller__types_html_ga41bca753476be7f6dbd63ff627381083"><div class="ttname"><a href="group__zwave__controller__types.html#ga41bca753476be7f6dbd63ff627381083">zwave_multicast_group_id_t</a></div><div class="ttdeci">uint8_t zwave_multicast_group_id_t</div><div class="ttdef"><b>Definition:</b> zwave_controller_types.h:50</div></div>
@@ -237,7 +236,7 @@ $(document).ready(function(){initNavTree('zwave__controller__callbacks_8h_source
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_3fdbfed0850fd95dbe3b2b1a1a1ffa0e.html">zwave_controller</a></li><li class="navelem"><a class="el" href="dir_5e918a0890738d653e155e5a1534e576.html">include</a></li><li class="navelem"><a class="el" href="zwave__controller__callbacks_8h.html">zwave_controller_callbacks.h</a></li>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:10 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:32 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

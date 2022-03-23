@@ -15,6 +15,7 @@ var modules =
     [ "Z-Wave Controller", "group__zwave__controller.html", "group__zwave__controller" ],
     [ "Z-Wave Command Classes", "group__command__classes.html", "group__command__classes" ],
     [ "Z-Wave Application Command Class Handler", "group__zwave__command__handler.html", "group__zwave__command__handler" ],
+    [ "Zwave_command_type", "group__zwave__command__type.html", "group__zwave__command__type" ],
     [ "Zwave_poll_manager", "group__zwave__poll__manager.html", "group__zwave__poll__manager" ],
     [ "Z-Wave SmartStart Management", "group__zwave__smartstart__management.html", "group__zwave__smartstart__management" ],
     [ "Unify Components", "group__unify__components.html", "group__unify__components" ],

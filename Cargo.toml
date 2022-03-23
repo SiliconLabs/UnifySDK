@@ -6,6 +6,7 @@ members = [
     "applications/image_provider",
     "applications/nal",
     "applications/upti_cap",
+    "applications/upti_writer",
     "applications/zpc/components/zwave_rust/rust_command_classes",
     "applications/zpc/components/zwave_rust/zwave_rust_proc_macros",
     "applications/zpc/components/zwave_rust/zwave_controller_sys",
@@ -30,7 +31,11 @@ members = [
 # release bins are required to package .deb files.
 [profile.release]
 debug-assertions = true
-overflow-checks = true
-debug = true
-incremental = true
-codegen-units = 256
+lto = true
+
+[profile.RelWithDebInfo]
+inherits = "dev"
+opt-level = 3
+
+[profile.dev]
+rpath = true

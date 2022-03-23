@@ -126,6 +126,17 @@ sl_status_t zwave_INDICATOR_SET_override(attribute_store_node_t _node,
   frame[offset++]      = 0x00;  // Value 0
 
   offset++;  //skip the object count field for nor
+  attribute version_attr_node
+    = node.first_parent(ATTRIBUTE_ENDPOINT_ID)
+        .child_by_type(ATTRIBUTE_COMMAND_CLASS_INDICATOR_VERSION);
+  zwave_cc_version_t version = 0;
+  try {
+    version = version_attr_node.reported<zwave_cc_version_t>();
+  } catch (std::exception &ex) {
+    sl_log_debug(LOG_TAG,
+                 "Cannot read the Indicator Command Class Version %s",
+                 ex.what());
+  }
 
   for (attribute indicator_property:
        indicator.children(ATTRIBUTE_INDICATOR_PROPERTY_ID)) {
@@ -137,7 +148,7 @@ sl_status_t zwave_INDICATOR_SET_override(attribute_store_node_t _node,
             .desired_or_reported<indicator_value_t>();
       frame[offset++] = value;
       // For V1 compatiblity we set the value to FF if there are any properties which has non zero value
-      if (value != 0) {
+      if (value != 0 && version == 1) {
         frame[2] = 0xff;
       }
       object_count++;

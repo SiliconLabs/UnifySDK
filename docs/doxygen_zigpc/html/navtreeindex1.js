@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classGroupAccessor.html#a32ba84eaf8fd2182efe4a6a7b49cf87c":[7,2,3,0,5,4],
 "classGroupAccessor.html#a3ee4601c8a04b92d17b72aedbbe2c74c":[7,2,3,0,5,3],
 "classGroupAccessor.html#aab58192a0b47401b58679dc986d0b8d8":[7,2,3,0,5,0],
 "classGroupAccessor.html#ae04383273a6acaa2621a5677ab878fb9":[7,2,3,0,5,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classzigpc_1_1gateway_1_1AddOTAImageRequest.html#a8984d1cdb738263e4b99525ce09809cb":[9,0,3,0,1,0],
 "classzigpc_1_1gateway_1_1BindingRequestRequest.html":[9,0,3,0,2],
 "classzigpc_1_1gateway_1_1BindingRequestRequest.html#a2b5480453ddc10243e51248f3dc7a866":[9,0,3,0,2,5],
-"classzigpc_1_1gateway_1_1BindingRequestRequest.html#a2cd8c9ba0e53dcbade80d76cf9ed1d51":[9,0,3,0,2,4],
-"classzigpc_1_1gateway_1_1BindingRequestRequest.html#a31ed2d90e86a0cc28f67b738b28b6c5a":[9,0,3,0,2,3]
+"classzigpc_1_1gateway_1_1BindingRequestRequest.html#a2cd8c9ba0e53dcbade80d76cf9ed1d51":[9,0,3,0,2,4]
 };

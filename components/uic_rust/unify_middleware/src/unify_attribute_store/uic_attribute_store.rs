@@ -1,12 +1,15 @@
-// License
-// <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
-
+///////////////////////////////////////////////////////////////////////////////
+// # License
+// <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
 // The licensor of this software is Silicon Laboratories Inc. Your use of this
 // software is governed by the terms of Silicon Labs Master Software License
 // Agreement (MSLA) available at
 // www.silabs.com/about-us/legal/master-software-license-agreement. This
 // software is distributed to you in Source Code format and is governed by the
 // sections of the MSLA applicable to Source Code.
+//
+///////////////////////////////////////////////////////////////////////////////
 
 use core::{
     any::{Any, TypeId},
@@ -20,18 +23,19 @@ use serde::{de::DeserializeOwned, Serialize};
 use std::fmt::Debug;
 use std::{ffi::CString, fmt::Display};
 use unify_sl_status_sys::*;
+use unify_tools::waker_cache::WakerCache;
 
 use crate::{
-    initialize_attribute_changes, AttributeChangeListener, AttributeEvent, AttributeEventType,
-    AttributeStoreExtTrait, AttributeStoreTrait, AttributeTypeId, AttributeValueState,
-    UicAttributeStoreIterator, UicAttributeStoreIteratorDFS,
+    initialize_attribute_changes, AttributeEvent, AttributeEventType, AttributeStoreExtTrait,
+    AttributeStoreTrait, AttributeTypeId, AttributeValueState, UicAttributeStoreIterator,
+    UicAttributeStoreIteratorDFS,
 };
 use futures::stream::LocalBoxStream;
 
 use super::attribute_stream::{self};
 
 // Constants that should have been mapped
-const ATTRIBUTE_STORE_INVALID_NODE: u32 = 0;
+const ATTRIBUTE_STORE_INVALID_NODE: AttributeStoreHandle = 0;
 const ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE: u32 = 0;
 static ATTR_STORE_INIT: Lazy<unify_attribute_store_sys::sl_status_t> =
     Lazy::new(|| unsafe { unify_attribute_store_sys::attribute_store_init() });
@@ -39,7 +43,7 @@ static ATTR_STORE_INIT: Lazy<unify_attribute_store_sys::sl_status_t> =
 #[no_mangle]
 pub unsafe extern "C" fn rust_attribute_store_init() -> u32 {
     if SL_STATUS_OK == *Lazy::force(&ATTR_STORE_INIT) {
-        initialize_attribute_changes(AttributeChangeListener::default())
+        initialize_attribute_changes(WakerCache::<AttributeEvent>::default())
     } else {
         SL_STATUS_FAIL
     }
@@ -144,10 +148,10 @@ impl Display for Attribute {
             ))
         }
         .to_str();
-        let type_str = if c_str.is_ok() {
-            c_str.unwrap().to_owned()
-        } else {
-            format!("{}", self.type_id)
+
+        let type_str = match c_str.map(ToOwned::to_owned) {
+            Ok(str) => str,
+            Err(_) => self.type_id.to_string(),
         };
 
         write!(f, "{}[{}]", type_str, self.handle)

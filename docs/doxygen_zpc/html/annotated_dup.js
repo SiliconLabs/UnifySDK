@@ -116,5 +116,6 @@ var annotated_dup =
     [ "zwave_tx_groups", "classzwave__tx__groups.html", "classzwave__tx__groups" ],
     [ "zwave_tx_options", "structzwave__tx__options.html", "structzwave__tx__options" ],
     [ "zwave_tx_queue", "classzwave__tx__queue.html", "classzwave__tx__queue" ],
-    [ "zwave_tx_queue_element", "structzwave__tx__queue__element.html", "structzwave__tx__queue__element" ]
+    [ "zwave_tx_queue_element", "structzwave__tx__queue__element.html", "structzwave__tx__queue__element" ],
+    [ "ZwaveCommandClassType", "classZwaveCommandClassType.html", "classZwaveCommandClassType" ]
 ];

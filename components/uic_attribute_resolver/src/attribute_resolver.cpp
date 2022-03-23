@@ -45,10 +45,21 @@ typedef enum {
   RESOLVER_TIMER_SET_EVENT,
 } attribute_resolver_worker_event_t;
 
-static std::deque<std::pair<attribute_store_node_t, uint32_t>> stack;
-static std::unordered_set<attribute_store_node_t> paused_nodes;
-static multi_invoke<attribute_store_node_t, attribute_store_node_t> listeners;
+// Private variables
+namespace
+{
+// A stack of node that need either Set or Get resolution
+std::deque<std::pair<attribute_store_node_t, uint32_t>> stack;
+// A list of nodes that are paused and should not be resolved until they are resumed.
+std::unordered_set<attribute_store_node_t> paused_nodes;
+// List of callbacks to invoke when a resolution has been performed on a subtree.
+multi_invoke<attribute_store_node_t, attribute_store_node_t> listeners;
+// List of callback functions that want to be informed when we give up trying to
+// make a get resolution on a node.
+multi_invoke<attribute_store_type_t, attribute_store_node_t>
+  get_give_up_listeners;
 static attribute_resolver_config_t attribute_resolver_config;
+}  // namespace
 
 /*
  * Set of nodes for which we have sent a get. The value of the map
@@ -202,6 +213,12 @@ void attribute_resolver_clear_resolution_listener(
   listeners.remove(node, callback);
 }
 
+void attribute_resolver_set_resolution_give_up_listener(
+  attribute_store_type_t node_type, void (*callback)(attribute_store_node_t))
+{
+  get_give_up_listeners.add(node_type, callback);
+}
+
 sl_status_t
   attribute_resolver_restart_set_resolution(attribute_store_node_t node)
 {
@@ -318,6 +335,21 @@ void attribute_resolver_state_log()
                "Nodes pending Set resolution: %lu - [%s]",
                pending_set_resolutions.size(),
                message.c_str());
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Private functions
+///////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Invokes all the get_give_up listeners for a given node
+ *
+ * @param node    The attribute store node on which we gave up.
+ */
+static void invoke_give_up_listeners(attribute_store_node_t node)
+{
+  attribute_store_type_t node_type = attribute_store_get_node_type(node);
+  // Invoke all the callbacks matching the type
+  get_give_up_listeners(node_type, node);
 }
 
 /**
@@ -517,6 +549,14 @@ static void resolver_find_next_resolve()
       if (rule_status == SL_STATUS_IS_WAITING) {
         sl_log_debug(LOG_TAG,
                      "Attribute ID %d resolution is working. Skipping\n",
+                     node);
+        continue;
+      }
+
+      if (rule_status == SL_STATUS_NOT_READY) {
+        sl_log_debug(LOG_TAG,
+                     "Send function is not ready to send. "
+                     "Skipping attribute ID %d resolution.\n",
                      node);
         continue;
       }
@@ -809,6 +849,7 @@ void on_resolver_rule_execute_complete(attribute_store_node_t node,
                    "%d. Giving up.\n",
                    node);
       give_up_get_resolution_on_group(node);
+      invoke_give_up_listeners(node);
       scan_node(get_highest_parent_with_resolution_listener(node));
     }
   }
@@ -874,6 +915,7 @@ sl_status_t attribute_resolver_init(attribute_resolver_config_t resolver_config)
 {
   // Set everything to 0
   listeners.clear();
+  get_give_up_listeners.clear();
   paused_nodes.clear();
   pending_get_resolutions.clear();
   pending_set_resolutions.clear();

@@ -40,6 +40,9 @@ Apache License 2.0 https://github.com/theturtle32/WebSocket-Node/blob/master/LIC
 material-ui
 MIT License https://github.com/mui-org/material-ui/blob/HEAD/LICENSE
 
+@emotion/react
+MIT License https://github.com/emotion-js/emotion/blob/main/packages/react/LICENSE
+
 react-bootstrap
 MIT License https://github.com/react-bootstrap/react-bootstrap/blob/master/LICENSE
 

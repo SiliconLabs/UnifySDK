@@ -129,7 +129,8 @@ var NAVTREEINDEX3 =
 "pressure_measurement.html#pressure_measurement_recv_cmd_support":[27,1],
 "pressure_measurement.html#pressure_measurement_write_attr_cmd":[27,2,0],
 "protocol_controller_rf_telemetry.html":[39],
-"protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_attr_cluster_revision":[39,0,1],
+"protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_attr_cluster_revision":[39,0,2],
+"protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_attr_pti_enabled":[39,0,1],
 "protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_attr_tx_report_enabled":[39,0,0],
 "protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_attrs":[39,0],
 "protocol_controller_rf_telemetry.html#protocol_controller_rf_telemetry_cmds":[39,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "temperature_measurement.html#temperature_measurement_write_attr_cmd":[26,2,0],
 "thermostat.html":[18],
 "thermostat.html#thermostat_attr_abs_max_cool_setpoint_limit":[18,0,6],
-"thermostat.html#thermostat_attr_abs_max_heat_setpoint_limit":[18,0,4],
-"thermostat.html#thermostat_attr_abs_min_cool_setpoint_limit":[18,0,5]
+"thermostat.html#thermostat_attr_abs_max_heat_setpoint_limit":[18,0,4]
 };

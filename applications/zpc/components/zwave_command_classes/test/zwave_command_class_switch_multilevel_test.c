@@ -570,3 +570,73 @@ void test_zwave_command_class_switch_multilevel_virtual_transition()
 
   TEST_ASSERT_EQUAL(0, received_frame_size);
 }
+
+void test_zwave_command_class_switch_multilevel_supervision_success_when_we_want_a_transition()
+{
+  // First check the frame creation.
+  TEST_ASSERT_NOT_NULL(multilevel_set);
+
+  attribute_store_node_t state_node
+    = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                             ATTRIBUTE(STATE),
+                                             0);
+
+  attribute_store_node_t value_node
+    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
+  is_node_pending_set_resolution_IgnoreAndReturn(false);
+
+  uint32_t desired_value = 30;
+  attribute_store_set_desired(value_node,
+                              &desired_value,
+                              sizeof(desired_value));
+  attribute_store_node_t duration_node
+    = attribute_store_get_node_child_by_type(state_node,
+                                             ATTRIBUTE(DURATION),
+                                             0);
+  uint32_t desired_duration = 50;
+  is_node_pending_set_resolution_IgnoreAndReturn(false);
+  attribute_store_set_desired(duration_node,
+                              &desired_duration,
+                              sizeof(desired_duration));
+  attribute_store_node_t on_off_node
+    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(ON_OFF), 0);
+  u32_value = 0xFF;
+  attribute_store_set_reported(on_off_node, &u32_value, sizeof(u32_value));
+  attribute_store_set_desired(on_off_node, &u32_value, sizeof(u32_value));
+
+  // The state of the test node is already "mismatched" in the attribute store.
+  // Ask the multilevel Switch Set to make a payload for it:
+
+  attribute_transition_get_remaining_duration_ExpectAndReturn(value_node, 0);
+  multilevel_set(state_node, received_frame, &received_frame_size);
+  const uint8_t expected_frame[] = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
+                                    SWITCH_MULTILEVEL_SET_V4,
+                                    (uint8_t)desired_value,
+                                    (uint8_t)desired_duration};
+  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
+                                received_frame,
+                                received_frame_size);
+
+  // Now simulate that we get a Supervision Success directly
+  // we will start a transition.
+  clock_time_t expected_time
+    = zwave_duration_to_time((uint8_t)desired_duration);
+  TEST_ASSERT_NOT_NULL(on_send_complete);
+  attribute_stop_transition_ExpectAndReturn(value_node, SL_STATUS_OK);
+  attribute_start_transition_ExpectAndReturn(value_node,
+                                             expected_time,
+                                             SL_STATUS_OK);
+  attribute_timeout_set_callback_ExpectAndReturn(
+    state_node,
+    expected_time + PROBE_BACK_OFF,
+    &attribute_store_undefine_reported,
+    SL_STATUS_OK);
+  on_send_complete(state_node,
+                   RESOLVER_SET_RULE,
+                   FRAME_SENT_EVENT_OK_SUPERVISION_SUCCESS);
+
+  // Now simulate that we get a Supervision OK:
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(state_node, REPORTED_ATTRIBUTE));
+}

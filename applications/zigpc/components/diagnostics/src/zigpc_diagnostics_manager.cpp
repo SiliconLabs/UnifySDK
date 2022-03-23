@@ -76,6 +76,11 @@ void zigpc_diagnostics_manager::publish_metric_list()
 void zigpc_diagnostics_manager::handle_metricID_request(
   std::vector<std::string> metric_id_vector)
 {
+    //if the input is empty, do nothing
+    if(metric_id_vector.empty())
+    {
+        return;
+    }
   //remove duplicates
   sort(metric_id_vector.begin(), metric_id_vector.end());
   metric_id_vector.erase(

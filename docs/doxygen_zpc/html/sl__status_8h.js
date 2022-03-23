@@ -61,6 +61,7 @@ var sl__status_8h =
     [ "SL_STATUS_OK", "group__unify__sl__status__codes.html#ga642351dcd77b6c1ffef9d663db8a5714", null ],
     [ "SL_STATUS_OWNERSHIP", "group__unify__sl__status__codes.html#gaec926f254dd9a6a7e9f7ccb59a120719", null ],
     [ "SL_STATUS_PERMISSION", "group__unify__sl__status__codes.html#ga9e04ec96097d5b79f0755b7d0e638296", null ],
+    [ "SL_STATUS_PRINT_INFO_MESSAGE", "group__unify__sl__status__codes.html#ga4f842abe99c41dfd49ab00a03b827b0c", null ],
     [ "SL_STATUS_RECEIVE", "group__unify__sl__status__codes.html#ga3adcd35a4152acb7c6c6dcc8d6e4c54a", null ],
     [ "SL_STATUS_SUSPENDED", "group__unify__sl__status__codes.html#gaeb73607d31f1488c4a58629de1743434", null ],
     [ "SL_STATUS_TIMEOUT", "group__unify__sl__status__codes.html#ga1202855a75f05eb5b1c65030de0c9237", null ],

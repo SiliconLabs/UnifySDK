@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -115,6 +115,9 @@ $(document).ready(function(){initNavTree('group__zwave__utils.html',''); initRes
 <tr class="memitem:ga65be55bf46158201858695ec961f5b52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga65be55bf46158201858695ec961f5b52">zwave_security_validation_set_node_as_s2_capable</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="memdesc:ga65be55bf46158201858695ec961f5b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a node as S2 capable, meaning that we know it supports S2, and it will forever do.  <a href="group__zwave__utils.html#ga65be55bf46158201858695ec961f5b52">More...</a><br /></td></tr>
 <tr class="separator:ga65be55bf46158201858695ec961f5b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0ad75528325bb49c7689ac86548625a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__utils.html#ga0ad75528325bb49c7689ac86548625a3">zwave_get_wake_up_interval</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memdesc:ga0ad75528325bb49c7689ac86548625a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Navigates the attribute store to find out what is the Wake Up Interval of a node.  <a href="group__zwave__utils.html#ga0ad75528325bb49c7689ac86548625a3">More...</a><br /></td></tr>
+<tr class="separator:ga0ad75528325bb49c7689ac86548625a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
@@ -237,6 +240,34 @@ $(document).ready(function(){initNavTree('group__zwave__utils.html',''); initRes
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A string pointer to the name of the Z-Wave Protocol. </dd></dl>
+
+</div>
+</div>
+<a id="ga0ad75528325bb49c7689ac86548625a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0ad75528325bb49c7689ac86548625a3">&#9670;&nbsp;</a></span>zwave_get_wake_up_interval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__zwave__command__class__wake__up__types.html#ga914036069b6899f115b874ca11f557ac">wake_up_interval_t</a> zwave_get_wake_up_interval </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramname"><em>node_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Navigates the attribute store to find out what is the Wake Up Interval of a node. </p>
+<p>It will search under all endpoints, (despite that the setting should be under endpoint 0) and return the first found value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_id</td><td>The Z-Wave NodeID for which we want to find out the Wake Up Interval. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the Wake Up interval. 0 is returned if there is no Wake up interval of if it is unknown. </dd></dl>
 
 </div>
 </div>
@@ -430,7 +461,7 @@ $(document).ready(function(){initNavTree('group__zwave__utils.html',''); initRes
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:38 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:50:02 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

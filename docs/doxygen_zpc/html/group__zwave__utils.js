@@ -4,6 +4,7 @@ var group__zwave__utils =
     [ "zwave_get_node_granted_keys", "group__zwave__utils.html#ga0419a6dc8b195016ac1010d4dd7d85e0", null ],
     [ "zwave_get_operating_mode", "group__zwave__utils.html#gae01839dd8d6ea9f4a4b40ede5dc45b99", null ],
     [ "zwave_get_protocol_name", "group__zwave__utils.html#ga236a6e748ebea2aa6b2c48e5f1e8e307", null ],
+    [ "zwave_get_wake_up_interval", "group__zwave__utils.html#ga0ad75528325bb49c7689ac86548625a3", null ],
     [ "zwave_node_get_command_class_version", "group__zwave__utils.html#ga1fb87a67860c11e6e89930eb51fda21f", null ],
     [ "zwave_node_supports_command_class", "group__zwave__utils.html#gaaa5d4e371acabd40b10dcf27edd993ff", null ],
     [ "zwave_security_validation_is_node_s2_capable", "group__zwave__utils.html#ga45c2f13cc52763102c4016d07576cbc4", null ],

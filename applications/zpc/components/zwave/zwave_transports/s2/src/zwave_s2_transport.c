@@ -279,11 +279,11 @@ void S2_msg_received_event(struct S2 *ctxt,
   info.encapsulation       = class_to_encapsulation(src->class_id);
   info.local.node_id       = src->l_node;
   info.local.endpoint_id   = 0;
-  info.local.is_multicast  = 0;
+  info.local.is_multicast = (src->rx_options & S2_RXOPTION_MULTICAST) != 0;
+
   info.remote.node_id      = src->r_node;
   info.remote.endpoint_id  = 0;
-  info.remote.is_multicast = 0;
-
+  
   options.rssi         = src->zw_rx_RSSIval;
   options.status_flags = src->zw_rx_status;
 
@@ -578,4 +578,18 @@ void zwave_s2_on_on_multicast_group_deleted(zwave_multicast_group_id_t group_id)
 {
   sl_log_debug(LOG_TAG, "Deleting MPAN Group ID %d", group_id);
   S2_free_mpan(s2_ctx, 0, group_id);
+}
+
+sl_status_t zwave_s2_abort_send_data(zwave_tx_session_id_t session_id)
+{
+  if (zwave_tx_parent_session_id == session_id) {
+    sl_log_debug(LOG_TAG,
+                 "Aborting S2 send session for frame id=%p",
+                 session_id);
+    zwave_tx_parent_session_id       = NULL;
+    zwave_tx_valid_parent_session_id = false;
+    send_frame_callback(TRANSMIT_COMPLETE_FAIL, &s2_send_tx_status, NULL);
+    return SL_STATUS_OK;
+  }
+  return SL_STATUS_NOT_FOUND;
 }

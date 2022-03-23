@@ -1,3 +1,15 @@
+///////////////////////////////////////////////////////////////////////////////
+// # License
+// <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
+// The licensor of this software is Silicon Laboratories Inc. Your use of this
+// software is governed by the terms of Silicon Labs Master Software License
+// Agreement (MSLA) available at
+// www.silabs.com/about-us/legal/master-software-license-agreement. This
+// software is distributed to you in Source Code format and is governed by the
+// sections of the MSLA applicable to Source Code.
+//
+///////////////////////////////////////////////////////////////////////////////
 use crate::{ZwaveHandlerConfig, MAX_FRAME_LEN};
 use std::{
     convert::TryInto,
@@ -41,6 +53,10 @@ fn zwave_firmware_update_send_abort_frame(
 }
 
 fn zwave_firmware_update_initiate_interview(transfer_node: attribute_store_node_t) -> sl_status_t {
+    log_debug!(
+        "Initiating interview after successful Firmware Update for transfer node {}",
+        transfer_node
+    );
     unsafe {
         let node_id_node =
             attribute_store_get_first_parent_with_type(transfer_node, ATTRIBUTE_NODE_ID);
@@ -1270,42 +1286,42 @@ fn handle_fwu_md_status_report(
     let last_status;
     let current_transfer_state: ZwaveFirmwareTransferState;
     match status_report.status {
-        0xff => {
-            // Skipping reboot state as waittime is 0.
-            if status_report.wait_time == 0 {
-                current_transfer_state = ZwaveFirmwareTransferState::IDLE;
-                last_status = ZwaveFirmwareTransferStatus::SUCCESS;
-                log_debug!(
-                    "New firmware was successfully stored in temporary non volatile memory."
-                );
-            } else {
-                current_transfer_state = ZwaveFirmwareTransferState::WAITING_FOR_REBOOT;
-                last_status = ZwaveFirmwareTransferStatus::SUCCESS;
-
-                // Save the waittime to EXPIRY_TIME
-                let expiry_node: unify_attribute_store_sys::attribute_store_node_t = unsafe {
-                    attribute_store_get_node_child_by_type(
-                        transfer_node,
-                        ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_EXPIRY_TIME,
-                        0,
-                    )
-                };
-                if unsafe { attribute_store_node_exists(expiry_node) } {
-                    attribute_store::write_attribute(
-                        expiry_node,
-                        attribute_store_node_value_state_t::REPORTED_ATTRIBUTE,
-                        status_report.wait_time as u64,
-                    )
-                    .unwrap();
-                }
-                log_debug!("New firmware was successfully stored in temporary non volatile memory. The device may have restarted itself. Wait for {} seconds for the deivce to be ready.", status_report.wait_time);
-            }
-        }
-        0xfe => {
-            current_transfer_state = ZwaveFirmwareTransferState::IDLE;
+        0xff | 0xfe => {
+            current_transfer_state = ZwaveFirmwareTransferState::WAITING_FOR_REBOOT;
             last_status = ZwaveFirmwareTransferStatus::SUCCESS;
 
-            log_debug!("New firmware was successfully stored in temporary non volatile memory.");
+            let wait_time;
+            // If the node does not reboot, wait 1 second before re-interviewing.
+            if status_report.wait_time == 0 {
+                wait_time = 1;
+            } else {
+                wait_time = status_report.wait_time;
+            }
+
+            log_debug!(
+                "Firmware update firmware was successfully completed. \
+                 Waiting {} seconds before interviewing the node again.",
+                wait_time
+            );
+            // FIXME: The C component stores Expiry time as clock_time() and this
+            // rust component stored a number of seconds, like 3 for waiting 3 seconds from now.
+            // They should just do the same
+            // Save time to wait for reboot in the Expiry time attribute
+            let expiry_node: unify_attribute_store_sys::attribute_store_node_t = unsafe {
+                attribute_store_get_node_child_by_type(
+                    transfer_node,
+                    ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_EXPIRY_TIME,
+                    0,
+                )
+            };
+            if unsafe { attribute_store_node_exists(expiry_node) } {
+                attribute_store::write_attribute(
+                    expiry_node,
+                    attribute_store_node_value_state_t::REPORTED_ATTRIBUTE,
+                    wait_time as u64,
+                )
+                .unwrap();
+            }
         }
         0xfd => {
             current_transfer_state = ZwaveFirmwareTransferState::WAITING_FOR_ACTIVATION;
@@ -1362,7 +1378,7 @@ fn handle_fwu_md_status_report(
             current_transfer_state = ZwaveFirmwareTransferState::IDLE;
             last_status = ZwaveFirmwareTransferStatus::ABORTED;
             log_warning!(
-                "The firmware udpate process was failed. Status: {}",
+                "The firmware udpate process has failed. Status: {}",
                 status_report.status
             );
         }
@@ -1607,7 +1623,7 @@ unsafe fn on_fwu_waiting_timer(node: u32, change: attribute_store_change_t) {
                 return;
             }
         }
-        log_info!("Device is rebooting after firmware update. Scheduling of reboot timer callback for attribute node: {:#04}", node);
+        log_debug!("Device is rebooting after firmware update. Scheduling of reboot timer callback for attribute node: {:#04}", node);
         if let Err(e) = attribute_store::set_callback_on_timeout(
             node,
             std::time::Duration::from_secs(expiry_time as u64),

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -87,10 +87,21 @@ $(document).ready(function(){initNavTree('md_applications_zigpc_release_notes.ht
 <div class="title">ZigPC Release Notes </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This document describes the changes between the current and last released ZigPC.</p>
-<h1><a class="anchor" id="autotoc_md295"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md316"></a>
+[1.1.1] - March 2022</h1>
+<h2><a class="anchor" id="autotoc_md317"></a>
+Added</h2>
+<ul>
+<li>The NCP firmware update component to enable upgrading the NCP firmware using the zigbee protocol controller</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md318"></a>
+Changed</h2>
+<ul>
+<li>Fixed a bug where the zigbee protocol controller would crash on malformed JSON</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md319"></a>
 [1.1.0] - Feb 2022</h1>
-<h2><a class="anchor" id="autotoc_md296"></a>
+<h2><a class="anchor" id="autotoc_md320"></a>
 Added</h2>
 <ul>
 <li>Debian Installer also configures ZigPC to run as a system service</li>
@@ -99,33 +110,33 @@ Added</h2>
 <li>Attribute polling if report configuration fails</li>
 <li>Publishing GeneratedCommands sent from Zigbee devices as responses or as unsolicited events</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md297"></a>
+<h2><a class="anchor" id="autotoc_md321"></a>
 Changed</h2>
 <ul>
 <li>Migrate Zigbee-Host library (EmberZNet-based) from Appbuilder project (GeckoSDK 3.1) to SLC project (GeckoSDK 4.0). See <a class="el" href="md_applications_zigpc_components_zigpc_gateway_libs_zigbee_host_readme_8libzigbee_host_8zigpc.html">Zigbee Host Library Readme</a> for more details. NOTE: In order to listen to new ZCL cluster messages, the SLC project configuration should be changed in addition to the ZAP dotdot helpers</li>
 <li>ZigPC datastore file key has been changed from &ndash;datastore.file to &ndash;zigpc.datastore_file</li>
 <li>Default datastore file has been changed from /var/lib/uic/database.db to /var/lib/uic/zigpc.db If you used the default configuration, keep your previous database by running <code>mv /var/lib/uic/database.db /var/lib/uic/zigpc.db</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md298"></a>
+<h2><a class="anchor" id="autotoc_md322"></a>
 Removed</h2>
 <ul>
 <li>Use of EmafDeviceTablePlugin in Zigbee-Host library to manage device discovery; This is now performed within ZigPC</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md299"></a>
+<h2><a class="anchor" id="autotoc_md323"></a>
 Fixed</h2>
 <ul>
 <li>Persisted information cleanup on device leaving the network</li>
 <li>JSON payloads accepted for commands and attributes to be UCL compliant</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md300"></a>
+<h1><a class="anchor" id="autotoc_md324"></a>
 [1.0.3] - Nov 2021</h1>
-<h2><a class="anchor" id="autotoc_md301"></a>
+<h2><a class="anchor" id="autotoc_md325"></a>
 Added</h2>
 <ul>
 <li>Add persistence of Zigbee device discovery information to allow servicing devices after ZigPC reboots</li>
 <li>Use of NCP address-table to manage EUI64 to NodeId mappings </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md302"></a>
+<h2><a class="anchor" id="autotoc_md326"></a>
 Changed</h2>
 <ul>
 <li>Updates to network management</li>
@@ -133,7 +144,7 @@ Changed</h2>
 <li>Merge ZigPC node state and ucl handling components</li>
 <li>Reduce dependence on device table plugin, use address table </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md303"></a>
+<h2><a class="anchor" id="autotoc_md327"></a>
 Fixed</h2>
 <ul>
 <li>Improved ZCL frame error handling and empty string bug fix</li>
@@ -141,18 +152,18 @@ Fixed</h2>
 <li>Empty group name bugfix</li>
 <li>Added polling for unreportable attributes</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md304"></a>
+<h1><a class="anchor" id="autotoc_md328"></a>
 [1.0.2] - Oct 2021</h1>
-<h1><a class="anchor" id="autotoc_md305"></a>
+<h1><a class="anchor" id="autotoc_md329"></a>
 [1.0.1] - Aug 2021</h1>
-<h2><a class="anchor" id="autotoc_md306"></a>
+<h2><a class="anchor" id="autotoc_md330"></a>
 Fixed</h2>
 <ul>
 <li>Build issues</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md307"></a>
+<h1><a class="anchor" id="autotoc_md331"></a>
 [1.0.0] - Aug 2021</h1>
-<h2><a class="anchor" id="autotoc_md308"></a>
+<h2><a class="anchor" id="autotoc_md332"></a>
 Added</h2>
 <ul>
 <li>Implementation of Unify specification 1.0</li>
@@ -176,13 +187,13 @@ Added</h2>
 </li>
 <li>Zigbee Host-NCP EZSP-UART Support </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md309"></a>
+<h2><a class="anchor" id="autotoc_md333"></a>
 Changed</h2>
 <ul>
 <li>Various bug fixes</li>
 <li>Documentation updates</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md310"></a>
+<h1><a class="anchor" id="autotoc_md334"></a>
 Known Issues</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -198,25 +209,17 @@ Known Issues</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Including a node using the SmartStart list is only effective for 18 hours  </td><td class="markdownTableBodyNone">Ensure that a node is added within 18 hours of being put in the SmartStart List.   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">When performing network-steering, the device will either fail node addition or node interview partially.  </td><td class="markdownTableBodyNone">In the device's EmberCLI, enter the commands <code>network leave</code> and <code>keys clear</code> then retry.   </td></tr>
+<td class="markdownTableBodyNone">When performing network-steering, the device can either fail node addition or node interview partially.  </td><td class="markdownTableBodyNone">In the device's EmberCLI, enter the commands <code>network leave</code> and <code>keys clear</code> then retry.   </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">When excluding devices, the protocol UNID is not removed from the node's SmartStart entry. This will cause the ZigPC to refuse to re-include the node.  </td><td class="markdownTableBodyNone">Clear the ZigPC UNID from the SmartStart entry using the Dev UI.   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">After completing node removal, the node state information is not cleared from the MQTT topics previously used to service the node.  </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ZigPC does not set the desired attribute values for the DotDot clusters serviced.  </td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">ZigPC is able to service the DotDot Color Control cluster (0x0300) but not publish any attribute changes.  </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ZigPC does not persist any network information. devices previously connected to the ZigPC network will not be reachable after ZigPC restarts.  </td><td class="markdownTableBodyNone">Ensure the devices have left the ZigPC Zigbee network after ZigPC restarts.   </td></tr>
-<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">ZigPC only supports "Remove" and "Idle" PC state change requests via the Node List view in DevUI. "Add" and "Reset" options are not supported.  </td><td class="markdownTableBodyNone">To add nodes to the Zigbee network, using the Smartstart DSK process outlined in the readme.   </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ZigPC can fail at initialization if the NCP image is based on GSDK 4.0 without ADDRESS_TABLE being set to 250  </td><td class="markdownTableBodyNone">Set macro <code>EMBER_ADDRESS_TABLE_SIZE=250</code> in NCP studio project before building NCP image.   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">When using Gecko SDK 4.0, OTA updates using the image provider may be unstable  </td><td class="markdownTableBodyNone">Use the Gecko SDK 3.X to generate OTA files   </td></tr>
+<td class="markdownTableBodyNone">ZigPC can fail at initialization if the NCP image is based on GSDK 4.0 without ADDRESS_TABLE being set to 250  </td><td class="markdownTableBodyNone">Set macro <code>EMBER_ADDRESS_TABLE_SIZE=250</code> in NCP studio project before building NCP image.   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md311"></a>
+<h3><a class="anchor" id="autotoc_md335"></a>
 Zigbee Devices Used for Testing</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -238,7 +241,7 @@ Zigbee Devices Used for Testing</h3>
 <td class="markdownTableBodyNone">Silabs  </td><td class="markdownTableBodyNone">xG12 or xG21 radio  </td><td class="markdownTableBodyNone">Z3DoorLock  </td><td class="markdownTableBodyNone">Yes  </td><td class="markdownTableBodyNone"><br  />
    </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md312"></a>
+<h1><a class="anchor" id="autotoc_md336"></a>
 Zigbee Certification information</h1>
 <blockquote class="doxtable">
 <p><em>NOTE the ZigPC is at this point not certifiable</em> </p>
@@ -249,7 +252,7 @@ Zigbee Certification information</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:00 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

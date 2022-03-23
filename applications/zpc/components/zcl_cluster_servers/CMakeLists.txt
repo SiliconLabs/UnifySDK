@@ -47,6 +47,16 @@ target_link_libraries(
   PRIVATE uic_dotdot_mqtt dotdot_mapper zwave_controller zwave_api)
 
 
+add_library(configuration_parameter_cluster_server src/configuration_parameter_cluster_server.cpp)
+target_include_directories(
+  configuration_parameter_cluster_server
+  PUBLIC include
+  PRIVATE src)
+target_link_libraries(
+  configuration_parameter_cluster_server
+  PUBLIC uic_dotdot_mqtt zpc_attribute_store
+  PRIVATE zwave_definitions)
+
 # ZCL Cluster server library
 add_library(zcl_cluster_servers src/zcl_cluster_servers.cpp
 src/zcl_cluster_servers_helpers.cpp)
@@ -57,9 +67,8 @@ target_include_directories(
 
 target_link_libraries(
   zcl_cluster_servers PRIVATE zcl_OTA_cluster_server zcl_group_cluster_server
-                              zcl_rf_telemetry_cluster_server zwave_handlers)
-
-
+                              zcl_rf_telemetry_cluster_server configuration_parameter_cluster_server zwave_handlers)
+                              
 # Unit tests
 add_subdirectory(test)
 

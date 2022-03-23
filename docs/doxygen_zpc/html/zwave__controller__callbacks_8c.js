@@ -8,6 +8,7 @@ var zwave__controller__callbacks_8c =
     [ "zwave_controller_on_dsk_report", "group__zwave__controller__internal.html#ga0afcbfc774350542747870d3c0cf9a63", null ],
     [ "zwave_controller_on_error", "group__zwave__controller__internal.html#ga1583638c085e036ee7bf29b8aeb5aed0", null ],
     [ "zwave_controller_on_frame_received", "group__zwave__controller__internal.html#ga79b433f95d08d541cd2a4d74ed27fd65", null ],
+    [ "zwave_controller_on_frame_reception", "group__zwave__controller__internal.html#ga0506463c57c08bf5c3782ba7f126c22b", null ],
     [ "zwave_controller_on_frame_transmission", "group__zwave__controller__internal.html#ga37f3eb5b079a43384fe3158cdc563a8d", null ],
     [ "zwave_controller_on_keys_report", "group__zwave__controller__internal.html#ga1561be00f27229a3032e09dfbc0aa868", null ],
     [ "zwave_controller_on_multicast_group_deleted", "group__zwave__controller__internal.html#ga71b33f4713533e9a8fc752119f5a060e", null ],

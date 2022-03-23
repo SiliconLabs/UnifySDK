@@ -24,6 +24,7 @@
 #include "attribute.hpp"
 #include "attribute_store_helper.h"
 #include "sl_log.h"
+#include "ucl_definitions.h"
 #include <sstream>
 #include <iomanip>
 // Interfaces
@@ -35,53 +36,108 @@ using namespace attribute_store;
 #include "manufacturer_id_name_list.inc"
 
 /**
- * @brief Maps the Listening/optional protocol bits to Basic cluster power source
- *
- * @param updated_node    Attribute Store node for the Listening or Optional flag.
- * @param change          Attribute store change that occurred.
+ * @brief Set the Basic Cluster serial number attribute
+ *        if Device Specific Device Data attribute presents
+ *        under endpoint attribute on a Z-Wave domain
+ * @param endpoint_id Attribute Store node for endpoint.
  */
-void on_nif_update_set_power_source(attribute_store_node_t updated_node,
-                                    attribute_store_change_t change)
+static void set_basic_cluster_serial_num(attribute endpoint_node)
 {
-  if (change != ATTRIBUTE_UPDATED) {
-    return;
+  attribute device_id_type_node
+    = endpoint_node.child_by_type(ATTRIBUTE_DEVICE_SPECIFIC_DEVICE_ID_TYPE);
+  attribute device_id_node = device_id_type_node.child_by_type(
+    ATTRIBUTE_DEVICE_SPECIFIC_DEVICE_ID_DATA);
+  attribute device_id_format_node = device_id_type_node.child_by_type(
+    ATTRIBUTE_DEVICE_SPECIFIC_DEVICE_ID_DATA_FORMAT);
+
+  if (device_id_node.reported_exists()
+      && device_id_format_node.reported_exists()) {
+    std::stringstream ss;
+    switch (device_id_format_node.reported<uint32_t>()) {
+      case 0x00:  //the Device ID Data MUST be in UTF-8 format.
+        ss << device_id_node.reported<std::string>();
+        break;
+      case 0x01:  //The Device ID Data is in plain binary format and MUST be displayed as hexadecimal values e.g. 0x30, 0x31, 0x32, 0x33 MUST be displayed as h’30313233.
+        ss << "h'" << std::setw(2) << std::setfill('0') << std::hex
+           << std::uppercase;
+        for (auto c: device_id_node.reported<std::vector<uint8_t>>()) {
+          ss << (int)c;
+        }
+        break;
+      default:
+        sl_log_error(LOG_TAG, "Unknown format id");
+        return;
+    }
+    attribute dotdot_serial
+      = endpoint_node.child_by_type(DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
+    if (!dotdot_serial.is_valid()) {
+      dotdot_serial
+        = endpoint_node.add_node(DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
+    }
+    dotdot_serial.set_reported(ss.str());
   }
+}
 
-  attribute_store_node_t node_id_node
-    = attribute_store_get_first_parent_with_type(updated_node,
-                                                 ATTRIBUTE_NODE_ID);
+/**
+ * @brief Create and set the value for the Basic Cluster HW version attribute
+ *        if HARDWARE_VERSION attribute exist under endpoint attribute on Z-Wave domain
+ * @param endpoint_node Attribute Store node for a Z-Wave node endpoint.
+ */
+static void set_basic_cluster_hardware_version(attribute endpoint_node)
+{
+  attribute version_report_node
+    = endpoint_node.child_by_type(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA);
+  attribute hardware_version_node
+    = version_report_node.child_by_type(ATTRIBUTE_CC_VERSION_HARDWARE_VERSION);
 
-  zwave_node_id_t node_id = 0;
-  if (attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id))
-      != SL_STATUS_OK) {
-    sl_log_warning(LOG_TAG,
-                   "Cannot determine NodeID from attribute store node %d",
-                   updated_node);
-    return;
-  }
-
-  if (node_id == zwave_network_management_get_node_id()) {
-    return;
-  }
-
-  int32_t power_source = 0;
-  switch (zwave_get_operating_mode(node_id)) {
-    case OPERATING_MODE_AL:
-      power_source = 4;
-      break;
-    case OPERATING_MODE_NL:
-    case OPERATING_MODE_FL:
-      power_source = 3;
-      break;
-    default:
-      power_source = 0;
-      break;
-  }
-
-  // Create if not existing and set the value of the Basic Power Source for all endpoints.
-  for (attribute endpoint_node:
-       attribute(node_id_node).children(ATTRIBUTE_ENDPOINT_ID)) {
+  try {
+    zwave_version_hardware_version_t hardware_version
+      = hardware_version_node.reported<zwave_version_hardware_version_t>();
+    int32_t zcl_hardware_version = hardware_version;
     attribute_store_set_child_reported(endpoint_node,
+                                       DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION,
+                                       &zcl_hardware_version,
+                                       sizeof(zcl_hardware_version));
+  } catch (const std::exception &e) {
+    sl_log_debug(
+      LOG_TAG,
+      "Cannot get the hardware version value from attribute store node %d. "
+      "Basic Hardware version will not be published for Endpoint Node %d",
+      hardware_version_node,
+      endpoint_node);
+  }
+}
+
+/**
+ * @brief Set the value of the Basic cluster Power Source.
+ *
+ * @param endpoint_node The endpoint attribute node.
+ * @param node_id The Z-Wave Node ID.
+ */
+static void set_basic_cluster_power_source(attribute endpoint_id,
+                                           zwave_node_id_t node_id)
+{
+  // We only set the Basic cluster power source if Listening/Optional protocol
+  // bits are configured in a Z-Wave node NIF.
+  attribute node_id_node = endpoint_id.first_parent(ATTRIBUTE_NODE_ID);
+  if (node_id_node.child_by_type(ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING)
+        .reported_exists()
+      || node_id_node.child_by_type(ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL)
+           .reported_exists()) {
+    int32_t power_source = 0;
+    switch (zwave_get_operating_mode(node_id)) {
+      case OPERATING_MODE_AL:
+        power_source = 4;
+        break;
+      case OPERATING_MODE_NL:
+      case OPERATING_MODE_FL:
+        power_source = 3;
+        break;
+      default:
+        power_source = 0;
+        break;
+    }
+    attribute_store_set_child_reported(endpoint_id,
                                        DOTDOT_ATTRIBUTE_ID_BASIC_POWER_SOURCE,
                                        &power_source,
                                        sizeof(power_source));
@@ -89,127 +145,75 @@ void on_nif_update_set_power_source(attribute_store_node_t updated_node,
 }
 
 /**
- * @brief Maps Version CC Hardware version Basic cluster Hardware version
+ * @brief Set a Manufacturer Name on dotdot domain if Manufacturer ID present in
+ *        under endpoint attribute on Z-Wave domain.
  *
- * @param updated_node    Attribute Store node for the Hardware version
- * @param change          Attribute store change that occurred.
+ * @param endpoint_node Attribute Store node for a endpoint node.
  */
-void on_hardware_version_update(attribute_store_node_t updated_node,
-                                attribute_store_change_t change)
+static void set_manufacturer_name(attribute endpoint_node)
 {
-  if (change != ATTRIBUTE_UPDATED) {
-    return;
-  }
-
-  zwave_version_hardware_version_t hardware_version = 0;
-  if (attribute_store_get_reported(updated_node,
-                                   &hardware_version,
-                                   sizeof(hardware_version))
-      != SL_STATUS_OK) {
-    sl_log_warning(LOG_TAG,
-                   "Cannot HW version value from attribute store node %d",
-                   updated_node);
-    return;
-  }
-
-  attribute_store_node_t node_id_node
-    = attribute_store_get_first_parent_with_type(updated_node,
-                                                 ATTRIBUTE_NODE_ID);
-
-  // Create if not existing and set the value for the HW version for all endpoints
-  int32_t zcl_hardware_version = hardware_version;
-  for (attribute endpoint_node:
-       attribute(node_id_node).children(ATTRIBUTE_ENDPOINT_ID)) {
-    attribute_store_set_child_reported(endpoint_node,
-                                       DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION,
-                                       &zcl_hardware_version,
-                                       sizeof(zcl_hardware_version));
+  if (endpoint_node
+        .child_by_type(ATTRIBUTE_MANUFACTURER_SPECIFIC_MANUFACTURER_ID)
+        .reported_exists()) {
+    attribute manufacturer_id_node = endpoint_node.child_by_type(
+      ATTRIBUTE_MANUFACTURER_SPECIFIC_MANUFACTURER_ID,
+      0);
+    try {
+      std::string manufacturer_name = manufacturer_id_name_map.at(
+        manufacturer_id_node.reported<uint32_t>());
+      attribute dotdot_man_node = endpoint_node.emplace_node(
+        DOTDOT_ATTRIBUTE_ID_BASIC_MANUFACTURER_NAME);
+      attribute_store_set_reported_string(dotdot_man_node,
+                                          manufacturer_name.c_str());
+    } catch (const std::exception &e) {
+      sl_log_debug(LOG_TAG,
+                   "Cannot read Manufacturer ID for node %d. "
+                   "Assuming Unknown Manufacturer ID.\n",
+                   manufacturer_id_node);
+    }
   }
 }
 
-/**
- * @brief Creates a Manufacturer Name from the Manufacturer ID.
- *
- * @param updated_node
- * @param change
- */
-static void device_id_attribute_update(attribute_store_node_t updated_node,
-                                       attribute_store_change_t change)
+// A callback that will be called when a Network Status Attribute is
+// updated.
+static void network_status_attribute_update(attribute_store_node_t updated_node,
+                                            attribute_store_change_t change)
 {
   if (change != ATTRIBUTE_UPDATED) {
     return;
   }
-
-  attribute device_id_node(updated_node);
-  attribute ep     = device_id_node.first_parent(ATTRIBUTE_ENDPOINT_ID);
-  attribute format = device_id_node.parent().child_by_type(
-    ATTRIBUTE_DEVICE_SPECIFIC_DEVICE_ID_DATA_FORMAT);
-
-  if (!format.reported_exists() || !device_id_node.reported_exists()) {
-    sl_log_warning(LOG_TAG, "Missing Data format attribute");
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+  attribute_store_get_reported(updated_node,
+                               &network_status,
+                               sizeof(network_status));
+  if (network_status != NODE_STATE_TOPIC_STATE_INCLUDED) {
     return;
   }
-
-  std::stringstream ss;
-  switch (format.reported<uint32_t>()) {
-    case 0x00:  //the Device ID Data MUST be in UTF-8 format.
-      ss << device_id_node.reported<std::string>();
-      break;
-    case 0x01:  //The Device ID Data is in plain binary format and MUST be displayed as hexadecimal values e.g. 0x30, 0x31, 0x32, 0x33 MUST be displayed as h’30313233.
-      ss << "h'" << std::setw(2) << std::setfill('0') << std::hex
-         << std::uppercase;
-      for (auto c: device_id_node.reported<std::vector<uint8_t>>()) {
-        ss << (int)c;
-      }
-      break;
-    default:
-      sl_log_error(LOG_TAG, "Unknown format id");
-      return;
-  }
-
-  attribute dotdot_serial
-    = ep.child_by_type(DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
-  if (!dotdot_serial.is_valid()) {
-    dotdot_serial = ep.add_node(DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
-  }
-  dotdot_serial.set_reported(ss.str());
-}
-
-/**
- * @brief Creates a Manufacturer Name from the Manufacturer ID.
- *
- * @param updated_node
- * @param change
- */
-static void
-  manufacturer_id_attribute_update(attribute_store_node_t updated_node,
-                                   attribute_store_change_t change)
-{
-  if (change != ATTRIBUTE_UPDATED) {
-    return;
-  }
-
-  attribute manufacturer_id_node(updated_node);
-  // Get the Customer name from the lookup table
-  std::string manufacturer_name = "Unknown Manufacturer";
+  attribute network_status_node(updated_node);
+  attribute node_id_node  = network_status_node.first_parent(ATTRIBUTE_NODE_ID);
+  zwave_node_id_t node_id = 0;
   try {
-    manufacturer_name
-      = manufacturer_id_name_map.at(manufacturer_id_node.reported<uint32_t>());
-  } catch (const std::exception &e) {
-    sl_log_debug(LOG_TAG,
-                 "Cannot read Manufacturer ID for node %d. "
-                 "Assuming Unknown Manufacturer ID.\n",
-                 manufacturer_id_node);
+    node_id = node_id_node.reported<zwave_node_id_t>();
+    if (node_id == zwave_network_management_get_node_id()) {
+      return;
+    }
+  } catch (std::exception &e) {
+    sl_log_warning(LOG_TAG,
+                   "Cannot determine NodeID from attribute store node %d",
+                   node_id_node);
   }
 
-  attribute node_id_node = manufacturer_id_node.first_parent(ATTRIBUTE_NODE_ID);
-
+  // set the dotdot Basic Cluster attributes
   for (attribute endpoint_node: node_id_node.children(ATTRIBUTE_ENDPOINT_ID)) {
-    attribute dotdot_manf_node
-      = endpoint_node.emplace_node(DOTDOT_ATTRIBUTE_ID_BASIC_MANUFACTURER_NAME);
+    // set a Manufacturer Name on dotdot domain
+    set_manufacturer_name(endpoint_node);
+    // Set the Basic Cluster serial number attribute value.
+    set_basic_cluster_serial_num(endpoint_node);
+    // Create and set the value for the Basic Cluster hardware version attribute value
+    set_basic_cluster_hardware_version(endpoint_node);
 
-    attribute_store_set_reported_string(dotdot_manf_node,
-                                        manufacturer_name.c_str());
+    // Set the Basic cluster Power Source attribute value for all endpoints.
+    set_basic_cluster_power_source(endpoint_node, node_id);
   }
 }
 
@@ -220,32 +224,10 @@ bool basic_cluster_mapper_init()
 {
   sl_log_debug(LOG_TAG, "Basic Cluster Mapper initialization");
 
-  // Listen to Manufacturer ID attributes to publish the manufacturer name.
+  // Listen to updates: Network Status attribute
   attribute_store_register_callback_by_type_and_state(
-    manufacturer_id_attribute_update,
-    ATTRIBUTE_MANUFACTURER_SPECIFIC_MANUFACTURER_ID,
-    REPORTED_ATTRIBUTE);
-
-  // Listen to NIF updates: Power Source
-  attribute_store_register_callback_by_type_and_state(
-    &on_nif_update_set_power_source,
-    ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING,
-    REPORTED_ATTRIBUTE);
-  attribute_store_register_callback_by_type_and_state(
-    &on_nif_update_set_power_source,
-    ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL,
-    REPORTED_ATTRIBUTE);
-
-  // Listen to updates: Hardware version
-  attribute_store_register_callback_by_type_and_state(
-    &on_hardware_version_update,
-    ATTRIBUTE_CC_VERSION_HARDWARE_VERSION,
-    REPORTED_ATTRIBUTE);
-
-  // Listen to updates: Device id data
-  attribute_store_register_callback_by_type_and_state(
-    &device_id_attribute_update,
-    ATTRIBUTE_DEVICE_SPECIFIC_DEVICE_ID_DATA,
+    &network_status_attribute_update,
+    ATTRIBUTE_NETWORK_STATUS,
     REPORTED_ATTRIBUTE);
 
   return true;

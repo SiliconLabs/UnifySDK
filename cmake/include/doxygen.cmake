@@ -236,6 +236,7 @@ if(DOXYGEN_FOUND)
     applications/zigpc
     SRC_PATHS
     README.md
+    readme_user.md
     FAQ.md
     release_notes.md
     doc/readme_developer.md

@@ -9,7 +9,7 @@ import * as GrIcons from 'react-icons/gr';
 class ClusterTypeTooltip extends React.Component<ClusterTypeTooltipProps, {}> {
     getTooltip(endpoint: string, type: string, attr: any) {
         if (type === NodeTypesList.ProtocolController)
-            return <Tooltip title="Protocol Controller" ><span className="icon cursor-defult"><GrIcons.GrNodes /></span></Tooltip>
+            return <Tooltip title="Protocol Controller" ><span className="icon cursor-default"><GrIcons.GrNodes /></span></Tooltip>
         return (ClusterViewOverrides as any)[type]?.NodesTooltip(endpoint, attr) || (NodeTypesList as any)[type] || "Unknown";
     }
 

@@ -75,7 +75,7 @@ message (STATUS "Build number will be: " ${GIT_VERSION})
 string(REGEX REPLACE "^ver_([0-9]+).*" "\\1" VERSION_MAJOR "${GIT_VERSION}")
 string(REGEX REPLACE "^ver_[0-9]+.([0-9]+).*" "\\1" VERSION_MINOR "${GIT_VERSION}")
 string(REGEX REPLACE "^ver_[0-9]+.[0-9]+.([0-9]+).*" "\\1" VERSION_REV "${GIT_VERSION}")
-string(REGEX REPLACE "^ver_[0-9]+.[0-9]+.[0-9]+-([0-9]+).*" "\\1" VERSION_PATCH "${GIT_VERSION}")
+string(REGEX REPLACE "^ver_[0-9]+.[0-9]+.[0-9]+-(.*)" "\\1" VERSION_PATCH "${GIT_VERSION}")
 
 # Generating version info file for CI and release packaging
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/version-info.json.in

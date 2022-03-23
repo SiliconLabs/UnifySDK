@@ -1,6 +1,6 @@
 /***************************************************************************//**
  * @file
- * @brief Configuration values for AoA angle estimation.
+ * @brief Default configuration values for AoA angle estimation.
  *******************************************************************************
  * # License
  * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
@@ -33,10 +33,12 @@
 
 #include <math.h>
 #include "sl_rtl_clib_api.h"
-#include "aoa_board.h"
 
 // AoA estimator mode
 #define AOA_ANGLE_AOX_MODE                       SL_RTL_AOX_MODE_REAL_TIME_BASIC
+
+// Antenna array type
+#define AOA_ANGLE_ANTENNA_ARRAY_TYPE             SL_RTL_AOX_ARRAY_TYPE_4x4_URA
 
 // Reference RSSI value of the asset tag at 1.0 m distance in dBm.
 #define AOA_ANGLE_TAG_TX_POWER                   (-45.0)

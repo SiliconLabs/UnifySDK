@@ -15,7 +15,7 @@
 /* contiki includes */
 #include "contiki-conf.h"
 #include "process.h"
-#include "list.h"
+#include "lib/list.h"
 
 #include "uic_main_externals.h"
 

@@ -239,8 +239,8 @@
     color: #003e81;
 }
 
-.cursor-defult {
-    cursor: default;
+.cursor-default {
+    cursor: default !important;
 }
 
 .spinner-border.spinner-border-sm {
@@ -302,8 +302,13 @@
 
 .cluster-attributes .MuiInputLabel-outlined.MuiInputLabel-marginDense {
     overflow: hidden;
-    width: calc(100% - 46px);
+    /* width: calc(100% - 46px); */
+    background: white;
     text-overflow: ellipsis;
+}
+
+.MuiAutocomplete-root .MuiOutlinedInput-root {
+    padding: 1px !important;
 }
 
 .vertical-middle {
@@ -343,6 +348,19 @@
     right: 0px;
     bottom: 0px;
     left: 0px;
+}
+
+.margin-top--1 {
+    margin-top: -1px;
+}
+
+.wd-500 {
+    width: 500px;
+}
+
+.cluster-info {
+    background-color: rgba(0, 0, 0, 0.05);
+    font-size: 12px;
 }
 
 @keyframes blinker {

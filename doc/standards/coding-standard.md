@@ -39,9 +39,9 @@ Additionally, please make sure that your commit has a good commit message.
 ### 1.3.1 Versioning ###
 
 Whenever a new coding standard is released, a PR will be merged back in the
-`master` branch and the version number of the standard will be incremented.
+`develop` branch and the version number of the standard will be incremented.
 
-Therefore, each commit on the `master` branch will be a new, stable version of
+Therefore, each commit on the `develop` branch will be a new, stable version of
 this coding standard. For small additions to the standard, only the minor number
 version should be incremented. For versions not compatible with previous ones,
 the major version number should be incremented.
@@ -55,12 +55,11 @@ be created, the notification should also mention it.
 
 ### 1.3.2 Review committee ###
 
-The pull request to merge in to `master` needs to be approved by
+The pull request to merge in to `develop` needs to be approved by
 one of the following people:
 
 * Jonas Roum-Møller
 * Anders Esbensen
-* Jakob Buron
 
 Additionally, the following people should be on the review list:
 

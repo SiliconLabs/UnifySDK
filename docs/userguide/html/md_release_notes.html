@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -97,6 +97,7 @@ $(document).ready(function(){initNavTree('md_release_notes.html',''); initResiza
 <li><a class="el" href="md_applications_zigpc_release_notes.html">ZigPC</a></li>
 <li><a class="el" href="md_applications_zpc_release_notes.html">ZPC</a></li>
 <li><a class="el" href="md_applications_upti_cap_release_notes.html">UPTICap</a></li>
+<li><a class="el" href="md_applications_upti_writer_release_notes.html">UPTIWriter</a></li>
 <li><a class="el" href="md_applications_aox_applications_aoxpc_release_notes.html">AoXPC</a></li>
 <li><a class="el" href="md_applications_aox_applications_positioning_release_notes.html">AoX Positioning application</a></li>
 </ul>
@@ -104,20 +105,37 @@ $(document).ready(function(){initNavTree('md_release_notes.html',''); initResiza
 Unify SDK shared components release notes</h1>
 <p>This document describes changes which affects all applications based on the Unify SDK. Below are the changes between the released versions of the Unify SDK and the current release.</p>
 <h1><a class="anchor" id="autotoc_md34"></a>
-[1.1.0] - Feb 2022</h1>
+[1.1.1] - Mar 2022</h1>
 <h2><a class="anchor" id="autotoc_md35"></a>
+Fixed</h2>
+<ul>
+<li>Running with command line parameter<code>--dump-config</code> now dumps proper YAML. Before it would only dump max 2 level objects, e.g. <code>zpc.poll.xxx</code> parameters was before dumped as:</li>
+</ul>
+<div class="fragment"><div class="line">zpc:</div>
+<div class="line">  poll.attribute_list_file: &quot;/usr/share/uic/zwave_poll_config.yaml&quot;</div>
+<div class="line">  poll.backoff: 30</div>
+<div class="line">  poll.default_interval: 60</div>
+</div><!-- fragment --><p>and now it is dumped as:</p>
+<div class="fragment"><div class="line">zpc:</div>
+<div class="line">  poll:</div>
+<div class="line">    attribute_list_file: &quot;/usr/share/uic/zwave_poll_config.yaml&quot;</div>
+<div class="line">    backoff: 30</div>
+<div class="line">    default_interval: 60</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md36"></a>
+[1.1.0] - Feb 2022</h1>
+<h2><a class="anchor" id="autotoc_md37"></a>
 Added</h2>
 <ul>
-<li>A new component, Gecko Bootloader Interace (uic_gbl_interface), for performing OTA updates</li>
+<li>A new component, Gecko Bootloader Interface (uic_gbl_interface), for performing OTA updates</li>
 <li>A new component, Attribute Polling Engine (unify_attribute_poll), supplies the functionality of polling attribute reported values with a supplied interval.</li>
 <li>A new application, Name and Location (nal), for devices name and location management.</li>
 <li>A new application, Unify Packet Trace Interface Capture (upti_cap), to communicate with Silicon Labs WSTK adapters and publish debug channel messages to a MQTT broker.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md36"></a>
-Changed</h2>
-<h2><a class="anchor" id="autotoc_md37"></a>
-Fixed</h2>
 <h2><a class="anchor" id="autotoc_md38"></a>
+Changed</h2>
+<h2><a class="anchor" id="autotoc_md39"></a>
+Fixed</h2>
+<h2><a class="anchor" id="autotoc_md40"></a>
 Known issues</h2>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
@@ -125,7 +143,7 @@ Known issues</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:33:58 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

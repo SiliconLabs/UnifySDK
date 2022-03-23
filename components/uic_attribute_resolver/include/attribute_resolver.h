@@ -200,6 +200,16 @@ void attribute_resolver_clear_resolution_listener(
   attribute_store_node_t node, void (*callback)(attribute_store_node_t));
 
 /**
+ * @brief Registers a listener that will be informed if we give up trying to
+ * perform a Get resolution on a node.
+ *
+ * @param node_type to be informed about
+ * @param callback Function to invoke when the node resolution has been given up
+ */
+void attribute_resolver_set_resolution_give_up_listener(
+  attribute_store_type_t node_type, void (*callback)(attribute_store_node_t));
+
+/**
  * @brief Instructs the resolver to try to resolve a set rule that was pending
  *
  * This function will have no effect if the node is not in the pending sets.

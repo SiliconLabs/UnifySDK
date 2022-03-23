@@ -20,15 +20,13 @@ gecko-sdk.zip . Currently, v4.0.1 is the only supported version. Set an
 environment variable GSDK_LOCATION for this path.
 
 ### Getting the source
+
 There are two ways to obtain the Unify source code, the simplest way is
-to download the file uic-\<version\>-Source.tar.gz from the [GitHub release
+to download the file uic-\<version\>.tar.gz from the [GitHub release
 assets](https://github.com/SiliconLabs/UnifySDK/releases).
 
-> WARNING: Don't ues the _Source code_ zip or tar.gz links form the assets of 
-> the release thees will not provide all the dependencies.
-
 Alternatively the source can be downloaded using git directly. Note that
-git clients needs to have _git-lfs_ support and the git client needs to 
+git clients needs to have _git-lfs_ support and the git client needs to
 have authentication with github.
 
 ```

@@ -1,5 +1,16 @@
 # AoXPC Release Notes
 
+## [1.1.1] - Mar 2022
+
+### Added
+
+* Publish the EndpointIdList attribute under the State for each node.
+
+### Fixed
+
+* Fix attributes not published to MQTT on first startup issue.
+* Fixed incorrect RTL lib antenna switch pattern for reduced antenna arrays (3x3 URA, 1x4 ULA).
+
 ## [1.1.0] - Feb 2022
 
 ### Added
@@ -8,9 +19,3 @@
 * Support for parsing AngleCorrection commands
 * Support for publishing AngleReport commands
 * Persistent storage of the AoX Locator configuration
-
-# Known Issues
-
-| Known Issue | Workaround |
-|-------------|------------|
-| If `--aoxpc.datastore_file` option points to a file that doesn't exist, and `--aoxpc.config` is not provided either, then the AoXLocator attributes are not published. | Restart AoXPC with the same options (during the first run, the datastore file is created). |

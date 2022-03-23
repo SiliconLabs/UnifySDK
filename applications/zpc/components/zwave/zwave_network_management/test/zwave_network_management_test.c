@@ -1128,10 +1128,17 @@ void test_zwave_network_management_add_node_self_destruct_timeout()
   contiki_test_helper_run(SMART_START_SELF_DESTRUCT_TIMEOUT);
   my_zwave_tx_send_data_cb(TRANSMIT_COMPLETE_FAIL, 0, 0);
   contiki_test_helper_run(0);
+  zwave_controller_on_node_added_ExpectWithArray(
+    SL_STATUS_OK,
+    (zwave_node_info_t *)sample_nif,
+    sizeof(nif_buffer),
+    node_id,
+    dsk,
+    sizeof(dsk),
+    granted_keys,
+    ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN,
+    PROTOCOL_ZWAVE);
 
-  /*Expect error returned ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_FAIL*/
-  zwave_controller_on_error_Expect(
-    ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_SECURITY_FAIL);
   contiki_test_helper_run(SEND_DATA_TIMEOUT);
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
@@ -1174,9 +1181,16 @@ void test_zwave_network_management_add_node_self_destruct_failed()
                                            0,
                                            !ZW_FAILED_NODE_REMOVE_STARTED);
   zwapi_remove_failed_node_IgnoreArg_completedFunc();
-  /* Expect ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_SECURITY_FAIL */
-  zwave_controller_on_error_Expect(
-    ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_SECURITY_FAIL);
+  zwave_controller_on_node_added_ExpectWithArray(
+    SL_STATUS_OK,
+    (zwave_node_info_t *)sample_nif,
+    sizeof(nif_buffer),
+    node_id,
+    dsk,
+    sizeof(dsk),
+    granted_keys,
+    ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN,
+    PROTOCOL_ZWAVE);
 
   /* Transition from NM_WAIT_FOR_SECURE_ADD to NM_WAIT_FOR_SECURE_ADD*/
   contiki_test_helper_run(SMART_START_SELF_DESTRUCT_TIMEOUT);

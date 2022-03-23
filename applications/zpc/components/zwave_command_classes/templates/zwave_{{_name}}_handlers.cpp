@@ -371,15 +371,18 @@ void zwave_{{ ../_name }}_add_{{_name}}( attribute_store_node_t __parent, uint8_
   attribute version = ep.child_by_type(ATTRIBUTE_{{../_name}}_VERSION);
   attribute node = parent.emplace_node<uint8_t>( ATTRIBUTE_{{_name}},val);
 
-  {{#attr_children _name }}
-  if( version.reported<uint8_t>() >= {{_version}} )
-  {
-    attribute value_node = node.child_by_type(ATTRIBUTE_{{_name}});
-    if(! value_node.is_valid()) {
-      node.add_node(ATTRIBUTE_{{_name}});
-    }
-  }
-  {{/attr_children}}
+  try { 
+      {{#attr_children _name }}
+      if( version.reported<zwave_cc_version_t>() >= {{_version}} )
+      {
+        attribute value_node = node.child_by_type(ATTRIBUTE_{{_name}});
+        if(! value_node.is_valid()) {
+          node.add_node(ATTRIBUTE_{{_name}});
+        }
+      }
+      {{/attr_children}}
+  } catch(...) {}
+
 }
 {{/if}}
 {{/each}}

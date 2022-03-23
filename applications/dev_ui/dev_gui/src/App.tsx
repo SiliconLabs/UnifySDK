@@ -22,12 +22,14 @@ import RFTelemetry from './pages/rf-telemetry/rf-telemetry/rf-telemetry';
 import UPTI from './pages/upti/upti-list/upti-list';
 import UPTITrace from './pages/upti/upti-trace/upti-trace';
 import Locators from './pages/locators/locators';
+import ConfigurationParamsList from './pages/configuration-params/configuration-params-list/configuration-params-list';
+import ConfigurationParams from './pages/configuration-params/configuration-params/configuration-params';
 
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props)
-    if (!localStorage.uic)
-      localStorage.uic = JSON.stringify({});
+    if (!localStorage.unify)
+      localStorage.unify = JSON.stringify({});
 
     this.onMessage = this.onMessage.bind(this);
     this.state = {
@@ -86,10 +88,15 @@ class App extends Component<{}, AppState> {
 
         if (currentNode && currentNode.NetworkStatus !== i.NetworkStatus && !this.changeNodes.current?.state.InclusionProccess
           && ((currentNode as any).NetworkStatus === "Offline" || (currentNode as any).NetworkStatus === "Unavailable"
-            || i.NetworkStatus === "Offline" || i.NetworkStatus === "Unavailable"))
+            || i.NetworkStatus === "Offline" || i.NetworkStatus === "Unavailable")) {
+          let names: string[] = [];
+          currentNode?.ep && Object.keys(currentNode.ep).forEach(ep => {
+            names.push(currentNode.ep[ep].Clusters?.NameAndLocation?.Attributes?.Name?.Reported || `${currentNode.Unid}/${ep}`);
+          });
           i.NetworkStatus === "Offline" || i.NetworkStatus === "Unavailable"
-            ? toast(`${currentNode.ClusterTypes.join(", ") || ""} [${currentNode.Unid}] went offline`, { type: "warning" })
-            : toast(`${currentNode.ClusterTypes.join(", ") || ""} [${currentNode.Unid}] is back online`, { type: "success" });
+            ? toast(`[${names.join(", ")}] went offline`, { type: "warning" })
+            : toast(`[${names.join(", ")}] is back online`, { type: "success" });
+        }
       });
     this.setState({ NodeList: list });
     if (this.changeNodes.current)
@@ -163,18 +170,18 @@ class App extends Component<{}, AppState> {
   getLocalStorage = () => {
     let storage: any;
     try {
-      storage = JSON.parse(localStorage.uic);
+      storage = JSON.parse(localStorage.unify);
     } catch (error) {
       storage = {};
-      localStorage.uic = JSON.stringify(storage);
+      localStorage.unify = JSON.stringify(storage);
     }
     return storage;
   }
 
   setLocalStorage = (name: string, value: any) => {
-    let storage = JSON.parse(localStorage.uic);
+    let storage = JSON.parse(localStorage.unify);
     storage[name] = value;
-    localStorage.uic = JSON.stringify(storage);
+    localStorage.unify = JSON.stringify(storage);
   }
 
   toggleSideBar = () => {
@@ -211,13 +218,17 @@ class App extends Component<{}, AppState> {
                   <Route path='/upti' exact render={() => <UPTI ref={this.changeUPTI}  {...baseProps} UPTI={this.state.UPTI} />} />
                   <Route path='/upti/:serial' render={(pr) => <UPTITrace ref={this.changeUPTITrace}
                     IsConnected={this.state.IsConnected || false} UPTI={this.state.UPTI} SerialNumber={pr.match.params.serial} SocketServer={this.state.SocketServer} />} />
-                  <Route path='/rftelemetry' exact render={() => <RFTelemetryList ref={this.changeTelemetry}  {...baseProps} ClusterTypeAttrs={ClusterTypeAttrs.RFTelemetry} NodeList={this.state.NodeList} />} />
+                  <Route path='/rftelemetry' exact render={() => <RFTelemetryList ref={this.changeTelemetry}  {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/rftelemetry/:unid/:dst' exact render={(pr) => <RFTelemetry IsConnected={this.state.IsConnected || false} NodeList={this.state.NodeList} Unid={pr.match.params.unid} DestinationUNID={pr.match.params.dst} SocketServer={this.state.SocketServer} />} />
                   <Redirect from="/rftelemetry/:unid/" exact to="/rftelemetry/" />
                   <Route path='/locators' exact render={() => <Locators {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/ota' exact render={() => <OTA ref={this.changeOTA}  {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Route path='/configurationparameters' exact render={() => <ConfigurationParamsList {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Route path='/configurationparameters/:unid/:ep/:paramId' exact render={(pr) => <ConfigurationParams IsConnected={this.state.IsConnected || false} NodeList={this.state.NodeList} Unid={pr.match.params.unid} EndPoint={pr.match.params.ep} ParamId={pr.match.params.paramId} SocketServer={this.state.SocketServer} />} />
+                  <Redirect from="/configurationparameters/:unid/:ep/" exact to="/configurationparameters/" />
+                  <Redirect from="/configurationparameters/:unid/" exact to="/configurationparameters/" />
                   {Object.keys(ClusterTypes).map((type, index) =>
-                    <Route key={index} path={NavbarItems.find(i => i.name === type)?.path} exact render={() =>
+                    <Route key={index} path={NavbarItems.find(i => i.name === type)?.path} render={() =>
                       <BaseClusters key={index} ref={this.changeClusters} {...this.getClusterProps(type)} />} />
                   )}
                   <Redirect from="/" to="/nodes" />

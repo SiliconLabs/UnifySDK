@@ -458,12 +458,17 @@ static sl_status_t zwave_command_class_switch_multilevel_handle_report(
       // The node just told it it is in a transition that we do not know about.
       set_desired_value(state_node, target_value);
     }
+  } else {
+    set_desired_value(state_node, current_value);
   }
+
   if (duration == 0) {
     // Ensure no mismatch between reported/desired if duration is 0.
     attribute_store_set_reported_as_desired(value_node);
+    attribute_stop_transition(value_node);
   }
-  if (duration > 0 && false == is_attribute_transition_ongoing(value_node)) {
+  if (duration > 0 && false == attribute_store_is_value_matched(value_node)
+      && false == is_attribute_transition_ongoing(value_node)) {
     clock_time_t clock_duration = zwave_duration_to_time((uint8_t)duration);
     attribute_start_transition(value_node, clock_duration);
     // Probe again after that duration.
@@ -520,6 +525,8 @@ static void on_state_send_data_complete(attribute_store_node_t state_node,
   get_state(state_node, &state);
   attribute_store_node_t value_node
     = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
+  clock_time_t zwave_desired_duration
+    = zwave_duration_to_time((uint8_t)state.desired_duration);
 
   switch (event) {
     case FRAME_SENT_EVENT_OK_SUPERVISION_WORKING:
@@ -533,19 +540,38 @@ static void on_state_send_data_complete(attribute_store_node_t state_node,
 
       // Start our transition for the first WORKING status.
       if (!is_attribute_transition_ongoing(value_node)) {
-        attribute_start_transition(
-          value_node,
-          zwave_duration_to_time((uint8_t)state.desired_duration));
+        attribute_start_transition(value_node, zwave_desired_duration);
       }
       break;
 
     case FRAME_SENT_EVENT_OK_SUPERVISION_SUCCESS:
+      // Align the OnOff state first.
+      if (state.desired_substate_update & SUBSTATE_ON_OFF) {
+        set_reported_on_off(state_node, state.desired_on_off);
+      }
+
+      if ((state.desired_duration > 0)
+          && (state.desired_substate_update & SUBSTATE_DURATION)) {
+        sl_log_debug(LOG_TAG,
+                     "Node reports Supervision Success with a "
+                     "non-instantaneous command. "
+                     "Assuming we received a WORKING status.");
+        // Duration was accepted but success? (should have been working)
+        // Be tolerant to this and accept that they say success to a transition
+        set_reported_duration(state_node, state.desired_duration);
+        // Start a transition
+        attribute_stop_transition(value_node);
+        attribute_start_transition(value_node, zwave_desired_duration);
+        // Probe again when the transition is over.
+        attribute_timeout_set_callback(state_node,
+                                       zwave_desired_duration + PROBE_BACK_OFF,
+                                       &attribute_store_undefine_reported);
+        set_state_value(state_node, FINAL_STATE, FINAL_STATE);
+        break;
+      }
       // Successfully arrived at the target value.
       if (state.desired_substate_update & SUBSTATE_VALUE) {
         set_reported_value(state_node, state.desired_value);
-      }
-      if (state.desired_substate_update & SUBSTATE_ON_OFF) {
-        set_reported_on_off(state_node, state.desired_on_off);
       }
 
       // After a success, we verify if there are still desired mismatches
@@ -581,18 +607,14 @@ static void on_state_send_data_complete(attribute_store_node_t state_node,
 
       if (state.desired_duration != 0) {
         // Start an alleged transition.
-        attribute_start_transition(
-          value_node,
-          zwave_duration_to_time((uint8_t)state.desired_duration));
+        attribute_start_transition(value_node, zwave_desired_duration);
         // Assume final state until the next probe
         set_state_value(state_node, FINAL_STATE, FINAL_STATE);
 
         // Probe again after this duration
-        attribute_timeout_set_callback(
-          state_node,
-          zwave_duration_to_time((uint8_t)state.desired_duration)
-            + PROBE_BACK_OFF,
-          &attribute_store_undefine_reported);
+        attribute_timeout_set_callback(state_node,
+                                       zwave_desired_duration + PROBE_BACK_OFF,
+                                       &attribute_store_undefine_reported);
 
       } else if (state.desired_substate_update & SUBSTATE_VALUE) {
         // It was an instantaneous change.
@@ -861,8 +883,8 @@ sl_status_t zwave_command_class_switch_multilevel_init()
   handler.version                    = SWITCH_MULTILEVEL_VERSION_V4;
   handler.command_class_name         = "Multilevel Switch";
   handler.comments                   = "Partial control: <br>"
-                     "1. we do not use start/stop level change.<br>"
-                     "2. we do not support the 0xFF duration";
+                                       "1. we do not use start/stop level change.<br>"
+                                       "2. we do not support the 0xFF duration";
 
   zwave_command_handler_register_handler(handler);
 

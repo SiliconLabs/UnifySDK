@@ -57,6 +57,9 @@ void zwave_rx_application_command_handler(uint8_t rx_status,
                                            .rssi               = rssi_value,
                                            .nodes_in_multicast = {0}};
 
+  // Tell the controller about the Rx event
+  zwave_controller_on_frame_reception(source_node_id);
+
   // Pass the frame on to the Z-Wave controller module
   zwave_controller_on_frame_received(&connection_info,
                                      &rx_options,
@@ -105,6 +108,8 @@ void zwave_rx_application_controller_update(uint8_t status,
       break;
 
     case UPDATE_STATE_NODE_INFO_RECEIVED:  // NIF has been received
+      // NIF means we received a frame from that node.
+      zwave_controller_on_frame_reception(node_id);
       // Assemble the NIF data first
       zwave_rx_map_node_information(node_id,
                                     zwave_nif,

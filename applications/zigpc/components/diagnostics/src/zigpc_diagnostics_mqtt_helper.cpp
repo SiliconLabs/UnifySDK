@@ -185,9 +185,22 @@ void uic_metric_init()
 std::vector<std::string>
   uic_diagnostic_request_to_strings(std::string *payload_string)
 {
-  nlohmann::json jsn = nlohmann::json::parse(*payload_string);
+  std::vector<std::string> metric_ids = {};
+  
+  try
+  {
+    nlohmann::json jsn = nlohmann::json::parse(*payload_string);
 
-  std::vector<std::string> metric_ids = jsn.get<std::vector<std::string>>();
+    metric_ids = jsn.get<std::vector<std::string>>();
+  }
+  catch (const char* message)
+  {
+    sl_log_warning(
+            "Diagnostics", 
+            "Unable to handle or parse JSON string: %s with error message : %s", 
+            payload_string->c_str(), 
+            message);
+  }
 
   return metric_ids;
 }

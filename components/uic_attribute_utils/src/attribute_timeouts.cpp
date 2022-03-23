@@ -78,11 +78,11 @@ static void attribute_timeout_restart_watch_timer()
                &attribute_timeout_invoke_timeout_functions,
                nullptr);
 
-    sl_log_debug(
-      LOG_TAG,
-      "(Re-)Started attribute watch timer for %u ms. Next node to expire: %d",
-      time_until_new_timeout,
-      next_node_to_expire);
+    sl_log_debug(LOG_TAG,
+                 "(Re-)Started attribute watch timer for %u ms. "
+                 "Next node to expire: %d",
+                 time_until_new_timeout,
+                 next_node_to_expire);
   }
 }
 

@@ -71,6 +71,7 @@ var zwave__s0__transport_8c =
     [ "s0_state_name", "zwave__s0__transport_8c.html#a20f43508fd693122a975aa360c39b424", null ],
     [ "s0_timeout", "zwave__s0__transport_8c.html#adb0e729c11b7fdb81d7c2f776453e8ab", null ],
     [ "tx_session_state_set", "zwave__s0__transport_8c.html#ab8425b35b3d704f2108b438158fad2f1", null ],
+    [ "zwave_s0_on_abort_send_data", "group__zwave__s0__transport.html#ga397253265d758fee27dfed5a449737b9", null ],
     [ "zwave_s0_on_frame_received", "group__zwave__s0__transport.html#ga075cd6959f4f2b9cbd757c5d43f97820", null ],
     [ "zwave_s0_send_data", "group__zwave__s0__transport.html#gae1fe787c412080fb3f718d5a18e006ea", null ],
     [ "zwave_s0_transport_init", "group__zwave__s0__transport.html#ga7fcd7083b5fe3b6b2838d0d64f815f53", null ],

@@ -37,3 +37,15 @@ target_add_unittest(
   zwave_network_management_mock
   uic_dotdot_mqtt_mock
 )
+
+# Configuration Parameter Cluster Cluster Mapper test
+target_add_unittest(
+  configuration_parameter_cluster_server
+  SOURCES
+    configuration_parameter_cluster_server_test.cpp
+  DEPENDS
+    zpc_attribute_store_test_helper
+    uic_attribute_store
+    zpc_attribute_store
+    uic_dotdot_mqtt_mock
+)

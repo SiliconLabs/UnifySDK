@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('md_applications_dev_ui_dev_gui_readme_
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>The <em>Unify SDK Developer GUI</em> is a Web service that runs on the <em>Unify</em> gateway. It provides a graphical interface to operate the various features of the <em>Unify</em> gateway, such as network management, smartstart, multicast, and so on.</p>
-<h1><a class="anchor" id="autotoc_md141"></a>
+<h1><a class="anchor" id="autotoc_md144"></a>
 Access Developer GUI</h1>
 <p>The developer GUI (<em>Dev GUI</em>) can be accessed via any browser that can reach the <em>Unify</em> gateway over TCP/IP. Enter the hostname or IP address of the target running <em>Unify</em> and port 3080, which is the default port for <em>Dev GUI</em>. This process is shown in the image below where the hostname of a Raspberry is raspberrypi.local:</p>
 <blockquote class="doxtable">
@@ -97,23 +97,23 @@ Access Developer GUI</h1>
 <p><img src="browser_url.PNG" alt="" class="inline" title="Browser Access"/>   </p>
 <p>After entering the URL, you should see this front page:</p>
 <p><img src="very_start.PNG" alt="" class="inline" title="Front Page"/>   </p>
-<h1><a class="anchor" id="autotoc_md142"></a>
+<h1><a class="anchor" id="autotoc_md145"></a>
 Connecting the Developer GUI</h1>
 <p>Click connect in the top bar to start operating the <em>Unify</em>. Because of the modular nature of the developer GUI, you can connect it to other <em>Unify's</em>. In most cases, you want to connect to the actual <em>Unify</em> that the developer UI is running on, therefore leaving it on <em>localhost</em>.</p>
 <p>After clicking connect, check that the status says <b>Connected</b> and, after this, the page will still be blank. Then, click on the navigation bar on the left saying <b>Nodes</b>. At that point, the page should look like this:</p>
 <p><img src="connect.PNG" alt="" class="inline" title="Display Nodes"/>   </p>
-<h1><a class="anchor" id="autotoc_md143"></a>
+<h1><a class="anchor" id="autotoc_md146"></a>
 Node Inclusion</h1>
-<p>After connecting you should be able to see current running the protocol controllers in the nodes list, as shown in the image above. You can do a normal node inclusion by pressing <b>Add</b> on the table for the <em>PC</em>. This will set the <em>PC</em> in inclusion mode. After activating inclusion mode on the end device, a secure inclusion window may pop up depending on the security capabilities of the device:</p>
+<p>After connecting you should be able to see the discovered protocol controllers (<em>PC</em>) in the nodes list, as shown in the image above. You can do a normal node inclusion by pressing <b>Add</b> in the dropdown, on the right hand side of the row for the <em>PC</em>. This will set the <em>PC</em> in inclusion mode. After activating inclusion mode on the end device, a secure inclusion window may pop up depending on the security capabilities of the device:</p>
 <p><img src="secure_inclusion_pop_up.PNG" alt="" class="inline" title="Display Nodes"/>   </p>
 <p>For secure inclusion, input the first five digits of the DSK key. For unsecure inclusion, click <b>Reject</b>. Following is an example of a nodelist, where different security schemes are displayed:</p>
 <p><img src="secure_node_list_inclusion.PNG" alt="" class="inline" title="Secure Node"/>   </p>
-<h1><a class="anchor" id="autotoc_md144"></a>
+<h1><a class="anchor" id="autotoc_md147"></a>
 SmartStart List</h1>
 <p>The SmartStart list enables including devices easily. A page of the smart start list enables editing and inputting <b>DSK</b> keys of devices. When a device starts up or resets, it will automatically get included. A SmartStart entry and inclusion may look like this:</p>
 <p><img src="save_smart_start_device.PNG" alt="" class="inline" title="SmartStart List"/>   </p>
 <p>After filling in the <b>DSK</b> key and checking include, click save. If the <em>Unify UPVL</em> is running, it will be saved to the SmartStart list.</p>
-<h1><a class="anchor" id="autotoc_md145"></a>
+<h1><a class="anchor" id="autotoc_md148"></a>
 Clusters</h1>
 <p>The following are the currently (2022-02-09) supported clusters of the <em>Dev GUI</em>:</p>
 <ul>
@@ -131,41 +131,41 @@ Clusters</h1>
 <li>IASZone</li>
 <li>Power Configuration</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md146"></a>
+<h2><a class="anchor" id="autotoc_md149"></a>
 On/Off Switch</h2>
 <p>After inclusion of an <b>On/Off</b> switch and navigating to the switches page, the page will look something like this:</p>
 <p><img src="on_off.PNG" alt="" class="inline" title="On/Off Switch"/>   </p>
 <p>This can control an <b>On/Off</b> switch.</p>
-<h2><a class="anchor" id="autotoc_md147"></a>
+<h2><a class="anchor" id="autotoc_md150"></a>
 Binary Sensor</h2>
 <p>After including a <b>Binary sensor</b>, a page will look like this:</p>
 <p><img src="occupancy_sensor.PNG" alt="" class="inline" title="Occupancy Sensor"/>   </p>
-<h2><a class="anchor" id="autotoc_md148"></a>
+<h2><a class="anchor" id="autotoc_md151"></a>
 Door Lock</h2>
 <p>The door lock requires secure inclusion to work. The page will look like this:</p>
 <p><img src="door_lock.PNG" alt="" class="inline" title="Door Lock"/>   </p>
 <p>When unlocking or locking the door lock, a pop up will ask for a pin to the door lock:</p>
 <p><img src="door_lock_pin.PNG" alt="" class="inline" title="Door Lock Pin"/>   </p>
-<h2><a class="anchor" id="autotoc_md149"></a>
+<h2><a class="anchor" id="autotoc_md152"></a>
 Thermostat</h2>
 <p>The thermostat can change mode and change set point temperatures.</p>
-<p><img src="thermostat_modes.PNG" alt="" class="inline" title="Door Lock Pin"/>   </p>
-<h1><a class="anchor" id="autotoc_md150"></a>
+<p><img src="thermostat_modes.PNG" alt="" class="inline" title="Thermostat Set attributes"/>   </p>
+<h1><a class="anchor" id="autotoc_md153"></a>
 Groups</h1>
 <p>The Groups pane allows the user to create groups of endpoint devices. Groups may be used if you have a devices that support the same Commands, that you want to control as groups. A common use case for this is light bulbs or binary switches.</p>
 <p><img src="groups.PNG" alt="" class="inline" title="Groups"/>   </p>
-<h2><a class="anchor" id="autotoc_md151"></a>
+<h2><a class="anchor" id="autotoc_md154"></a>
 Create Group</h2>
 <p>Groups are created by pressing the <em>Create Group</em> button. The following image shows how to create a group with four binary switches.</p>
 <p><img src="groups_create.PNG" alt="" class="inline" title="Groups Create"/>   </p>
 <p>After clicking <em>Save</em>, the groups page will look like following:</p>
 <p><img src="groups_overview_1_group.PNG" alt="" class="inline" title="Groups 1 created"/>   </p>
-<h2><a class="anchor" id="autotoc_md152"></a>
+<h2><a class="anchor" id="autotoc_md155"></a>
 Sending Command to Group</h2>
 <p>Click the <em>Run Command</em> button to open the <em>Send Group Command</em> pop-up, which looks like following.</p>
 <p><img src="groups_send_command.PNG" alt="" class="inline" title="Send Command"/>   </p>
 <p>This enables selecting the command you want to send to the group. Clicking <em>Send</em> will issue the command. In the above example, it will turn all the binary switches in the group off.</p>
-<h1><a class="anchor" id="autotoc_md153"></a>
+<h1><a class="anchor" id="autotoc_md156"></a>
 Name and Location</h1>
 <p>The Dev GUI allows the user to set name and location for each device and help recognize them. The following image shows the dialog when user clicks the corresponding name and location column.</p>
 <p><img src="name_location_dialog.PNG" alt="" class="inline" title="Name and Location Dialog"/>   </p>
@@ -177,7 +177,7 @@ Name and Location</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:33:59 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

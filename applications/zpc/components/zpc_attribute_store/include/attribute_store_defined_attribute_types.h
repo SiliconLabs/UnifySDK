@@ -88,7 +88,7 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_S2_MPAN_ENTRY, 0x0014)
 DEFINE_ATTRIBUTE(ATTRIBUTE_MULTICAST_GROUP_LIST, 0x0015)
 ///< This is an assigned Multicast group. zwave_multicast_group_id_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_MULTICAST_GROUP, 0x0016)
-///< This is the interval for sending NOPs to failing node clock_time_t 
+///< This is the interval for sending NOPs to failing node clock_time_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL, 0x0017)
 
 // Generic endpoint attributes, should be attached under endpoints
@@ -103,6 +103,10 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_BASIC_DEVICE_CLASS, 0x0103)
 DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS, 0x0104)
 /** This represents the Z-Wave Specific Device Type of a node/endpoint. */
 DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_SPECIFIC_DEVICE_CLASS, 0x0105)
+
+// Generic attributes that can be placed anywhere under an endpoint.
+/** This indicates if more reports are expected to "complete" the value of an attribute */
+DEFINE_ATTRIBUTE(ATTRIBUTE_REPORTS_TO_FOLLOW, 0x0201)
 
 //This macro definition allows for auto-generated attributes to co-exists with old definitions
 #ifndef ATTRIBUTE_AUTO_GENERATED
@@ -266,6 +270,87 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_SUPPORTED_GROUPINGS,
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_MAX_NODES_SUPPORTED,
                  ((COMMAND_CLASS_ASSOCIATION << 8) | 0x06))
 
+///////////////////////////////////
+// Configuration Command Class
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_VERSION,
+                 ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_CONFIGURATION))
+
+// Next Parameter ID to try to discover. configuration_parameter_id_t type
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_NEXT_SUPPORTED_PARAMETER_ID,
+  ((COMMAND_CLASS_CONFIGURATION << 8) | 0x02))
+
+// If the node supports Bulk Commands. configuration_bulk_support_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_BULK_SUPPORT,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x03))
+
+// Configuration parameter ID (parameter number). configuration_parameter_id_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_ID,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x04))
+
+// Configuration parameter size. configuration_parameter_size_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_SIZE,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x05))
+
+// Configuration parameter format. configuration_parameter_format_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_FORMAT,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x06))
+
+// Configuration parameter name. String type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_NAME,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x07))
+
+// Configuration parameter information. String type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_INFO,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x08))
+
+// Configuration parameter current value. configuration_parameter_value_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_VALUE,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x09))
+
+// Configuration parameter minimum value. configuration_parameter_value_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_MIN_VALUE,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x0A))
+
+// Configuration parameter maximum value. configuration_parameter_value_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_MAX_VALUE,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x0B))
+
+// Configuration parameter default value. configuration_parameter_value_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_DEFAULT_VALUE,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x0C))
+
+// Configuration parameter advanced flag. configuration_parameter_flag_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_ADVANCED,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x0D))
+
+// Configuration parameter read-only flag. configuration_parameter_flag_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_READ_ONLY,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x0E))
+
+// Configuration parameter altering capabilities flag. configuration_parameter_flag_t type
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETER_ALTERING_CAPABILITIES,
+  ((COMMAND_CLASS_CONFIGURATION << 8) | 0x0F))
+
+// Default Reset all parameter have been requested. command_status_values_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_DEFAULT_RESET_REQUESTED,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x10))
+
+// Attribute used to store underneath a list of configuration parameters ID
+// that we need to discover. This attribute is used by the ZCL cluster server
+// it has no value. A set of ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_NEXT_SUPPORTED_PARAMETER_ID
+// are stored under this attribute
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETERS_TO_DISCOVER,
+                 ((COMMAND_CLASS_CONFIGURATION << 8) | 0x11))
+
+/////////////////////////////////////////////////
+// Device Reset Locally Command Class
+///< This represents the version of the Device Reset Locally Command class.
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DEVICE_RESET_LOCALLY_VERSION,
+                 ((COMMAND_CLASS_DEVICE_RESET_LOCALLY << 8) | 0x01))
+
 /////////////////////////////////////////////////
 // Multi Channel Association Command Class
 DEFINE_ATTRIBUTE(
@@ -423,6 +508,19 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SECURITY_2_VERSION,
 /// < This represent the version of the Security 2 Command Class
 
 /////////////////////////////////////////////////
+// Transport Service Command Class
+///< This represents the version of the Transport Service Command class. zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_TRANSPORT_SERVICE_VERSION,
+                 ((COMMAND_CLASS_TRANSPORT_SERVICE << 8) | 0x01))
+
+/////////////////////////////////////////////////
+// Powerlevel Command Class
+///< This represents the version of the Powerlevel Command class.
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_COMMAND_CLASS_POWERLEVEL_VERSION,
+                 ((COMMAND_CLASS_POWERLEVEL << 8) | 0x01))
+
+/////////////////////////////////////////////////
 // Z-Wave Plus Info CC
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_ZWAVEPLUS_INFO_VERSION,
                  ((COMMAND_CLASS_ZWAVEPLUS_INFO << 8) | 0x01))
@@ -546,6 +644,6 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_INDICATOR_TIMEOUT, 0x87F0)
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID, 0x00040001)
 ///< This represents a Group name. String representation with Null termination.
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME, 0x00040002)
-#endif  //ATTRIBUTE_AUTO_GENERATED
-#endif  //ATTRIBUTE_STORE_TYPES_H
+#endif     //ATTRIBUTE_AUTO_GENERATED
+#endif     //ATTRIBUTE_STORE_TYPES_H
 /** @} */  //end attribute_types

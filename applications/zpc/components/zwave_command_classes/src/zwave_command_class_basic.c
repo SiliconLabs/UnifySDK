@@ -31,6 +31,9 @@
 // Includes from other UIC Component
 #include "attribute_store_helper.h"
 #include "attribute_resolver.h"
+#include "attribute_timeouts.h"
+#include "dotdot_mqtt.h"
+#include "dotdot_mqtt_supported_generated_commands.h"
 #include "sl_log.h"
 
 // Log tag
@@ -47,6 +50,7 @@ static const attribute_store_type_t v1_attributes[]
 #define REPORT_VALUE_INDEX        2
 #define REPORT_TARGET_VALUE_INDEX 3
 #define REPORT_DURATION_INDEX     4
+#define SET_VALUE_INDEX           2
 
 // Constants
 #define ON  0xFF
@@ -243,6 +247,51 @@ static sl_status_t zwave_command_class_basic_set(attribute_store_node_t node,
 ///////////////////////////////////////////////////////////////////////////////
 // Frame parsing functions
 ///////////////////////////////////////////////////////////////////////////////
+
+/**
+ * @brief Handles incoming Basic Set Commands.
+ *
+ * It will convert it into a Generated OnOff command (either On or Off)
+ *
+ * @param connection_info   Connection information with the sender
+ * @param frame_data        Pointer to a frame data
+ * @param frame_length      Length of the data that can be read in the frame_data
+ *                          pointer.
+ *
+ * @return Always SL_STATUS_NOT_SUPPORTED as this command is not supported.
+ */
+static sl_status_t zwave_command_class_basic_handle_set(
+  const zwave_controller_connection_info_t *connection_info,
+  const uint8_t *frame_data,
+  uint16_t frame_length)
+{
+  // We expect to have at least 1 byte of value.
+  if (frame_length <= SET_VALUE_INDEX) {
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
+  unid_t node_unid;
+  zwave_unid_from_node_id(connection_info->remote.node_id, node_unid);
+  dotdot_endpoint_id_t endpoint_id = connection_info->remote.endpoint_id;
+
+  // Make sure we advertised that this node will send this type of commands
+  uic_mqtt_dotdot_on_off_supported_commands_t commands
+    = {.on = true, .off = true};
+  uic_mqtt_dotdot_on_off_publish_supported_generated_commands(node_unid,
+                                                              endpoint_id,
+                                                              &commands);
+  // Indicate if the node is trying to set on or off.
+  bool received_value = frame_data[SET_VALUE_INDEX];
+  if (received_value) {
+    uic_mqtt_dotdot_on_off_publish_generated_on_command(node_unid, endpoint_id);
+  } else {
+    uic_mqtt_dotdot_on_off_publish_generated_off_command(node_unid,
+                                                         endpoint_id);
+  }
+
+  return SL_STATUS_NOT_SUPPORTED;
+}
+
 static sl_status_t zwave_command_class_basic_handle_report(
   const zwave_controller_connection_info_t *connection_info,
   const uint8_t *frame_data,
@@ -288,6 +337,10 @@ static sl_status_t zwave_command_class_basic_handle_report(
                                  sizeof(current_value));
   }
 
+  // Make sure to cancel previous value probes
+  attribute_timeout_cancel_callback(value_node,
+                                    &attribute_store_undefine_reported);
+
   // Duration:
   uint32_t duration = 0;  // Assumed value if no duration is provided.
   if (frame_length > REPORT_DURATION_INDEX) {
@@ -330,8 +383,11 @@ static sl_status_t zwave_command_class_basic_handle_report(
     }
   }
   if (duration > 0) {
-    // FIXME: UIC-805
     // here we want to probe the value again after that duration.
+    attribute_timeout_set_callback(value_node,
+                                   zwave_duration_to_time((uint8_t)duration)
+                                     + PROBE_BACK_OFF,
+                                   &attribute_store_undefine_reported);
   }
 
   return SL_STATUS_OK;
@@ -428,6 +484,12 @@ sl_status_t zwave_command_class_basic_control_handler(
   assert(frame_data[COMMAND_CLASS_INDEX] == COMMAND_CLASS_BASIC_V2);
 
   switch (frame_data[COMMAND_INDEX]) {
+    case BASIC_SET_V2:
+      // Note: This command is not supported, but we want to indicate
+      // to the application that we received it.
+      return zwave_command_class_basic_handle_set(connection_info,
+                                                  frame_data,
+                                                  frame_length);
     case BASIC_REPORT_V2:
       return zwave_command_class_basic_handle_report(connection_info,
                                                      frame_data,

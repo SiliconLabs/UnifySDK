@@ -134,6 +134,7 @@ typedef struct sec_tx_session {
   const zwapi_tx_report_t
     *tx_ext_status;  // Extended TX status, most notably IMA
                      // information
+  zwave_tx_session_id_t session_id;
 } sec_tx_session_t;
 
 typedef struct _authdata_ {
@@ -259,7 +260,11 @@ static u8_t
     for (uint8_t i = 0; i < NONCE_TABLE_SIZE; i++) {
       if (nonce_table[i].reply_nonce && nonce_table[i].timeout > 0
           && nonce_table[i].src == src && nonce_table[i].dst == dst) {
-        sl_log_debug(LOG_TAG, "Reply nonce overwritten\n");
+        sl_log_debug(LOG_TAG,
+                     "Reply nonce overwritten %d->%d slot:%d\n",
+                     src,
+                     dst,
+                     i);
         memcpy(nonce_table[i].nonce, nonce, 8);
         nonce_table[i].timeout = NONCE_TIMEOUT;
         return 1;
@@ -274,6 +279,7 @@ static u8_t
       nonce_table[i].reply_nonce = reply_nonce;
       memcpy(nonce_table[i].nonce, nonce, 8);
       nonce_table[i].timeout = NONCE_TIMEOUT;
+      sl_log_debug(LOG_TAG, "Nonce registered %d->%d slot:%d\n", src, dst, i);
       return 1;
     }
   }
@@ -315,6 +321,11 @@ static void nonce_clear(u8_t src, u8_t dst)
     if ((nonce_table[i].timeout) && (nonce_table[i].src == src)
         && (nonce_table[i].dst == dst)) {
       nonce_table[i].timeout = 0;
+      sl_log_debug(LOG_TAG,
+                   "%d -> %d nonce cleared slot: %d\n",
+                   nonce_table[i].src,
+                   nonce_table[i].dst,
+                   i);
     }
   }
 }
@@ -325,6 +336,13 @@ static void nonce_timer_timeout(void *data)
   for (uint8_t i = 0; i < NONCE_TABLE_SIZE; i++) {
     if (nonce_table[i].timeout > 0) {
       nonce_table[i].timeout--;
+      if (nonce_table[i].timeout == 0) {
+        sl_log_debug(LOG_TAG,
+                     "%d -> %d nonce timed out slot: %d\n",
+                     nonce_table[i].src,
+                     nonce_table[i].dst,
+                     i);
+      }
     }
   }
   ctimer_set(&nonce_timer, 1000, nonce_timer_timeout, 0);
@@ -710,7 +728,7 @@ sl_status_t
 
   // S0 multicast will be a silent frame. Just pretend we did it by
   // invoking the callback immediately.
-  // Tx Queue will then ask us for individuall follow ups.
+  // Tx Queue will then ask us for individual follow ups.
   if (conn_info->remote.is_multicast == true) {
     if (on_send_complete) {
       on_send_complete(TRANSMIT_COMPLETE_OK, NULL, user);
@@ -740,7 +758,8 @@ sl_status_t
 
   for (uint8_t i = 0; i < NUM_TX_SESSIONS; i++) {
     if (tx_sessions[i].conn_info.remote.node_id == 0) {
-      s = &tx_sessions[i];
+      s                         = &tx_sessions[i];
+      tx_sessions[i].session_id = zwave_tx_parent_session_id;
       break;
     }
   }
@@ -767,7 +786,6 @@ sl_status_t
  */
 static void s0_register_nonce(uint8_t src, uint8_t dst, const uint8_t *nonce)
 {
-  sl_log_debug(LOG_TAG, "Registering Nonce for NodeIDs %d -> %d\n", src, dst);
   sec_tx_session_t *s;
   if (s0_is_nonce_blocked(src, dst, nonce)) {
     sl_log_warning(LOG_TAG,
@@ -909,10 +927,6 @@ void s0_send_nonce(const zwave_controller_connection_info_t *conn_info)
                          0,
                          0)
       == SL_STATUS_OK) {
-    sl_log_debug(LOG_TAG,
-                 "Registering Nonce from %d -> %d\n",
-                 conn_info->local.node_id,
-                 conn_info->remote.node_id);
     register_nonce(conn_info->local.node_id,
                    conn_info->remote.node_id,
                    false,
@@ -1023,12 +1037,6 @@ uint8_t
         == 0) {
       //First frame
       s->seq_nr = flags & 0xF;
-      sl_log_error(
-        LOG_TAG,
-        "State is %d, received sequence number is %u while we expected %u\n",
-        (int)s->state,
-        flags & 0xF,
-        s->seq_nr);
       s->msg_len = frame_length - 20;
       s->state   = RX_ENC1;
       memcpy(s->msg, enc_payload + 1, s->msg_len);
@@ -1232,6 +1240,27 @@ void reset_s0_timers()
   ctimer_set(&nonce_timer, 1000, nonce_timer_timeout, 0);
 }
 
+sl_status_t zwave_s0_on_abort_send_data(zwave_tx_session_id_t session_id)
+{
+  if (zwave_tx_parent_session_id == session_id) {
+    sl_log_debug(LOG_TAG,
+                 "Aborting S0 send session for frame id=%p",
+                 session_id);
+    zwave_tx_parent_session_id       = NULL;
+    zwave_tx_valid_parent_session_id = false;
+    for (uint8_t i = 0; i < NUM_TX_SESSIONS; i++) {
+      if (tx_sessions[i].session_id == session_id) {
+        callback(TRANSMIT_COMPLETE_FAIL,
+                 tx_sessions[i].tx_ext_status,
+                 &tx_sessions[i]);
+        break;
+      }
+    }
+    return SL_STATUS_OK;
+  }
+  return SL_STATUS_NOT_FOUND;
+}
+
 sl_status_t zwave_s0_transport_init()
 {
   static zwave_controller_transport_t transport = {
@@ -1239,6 +1268,7 @@ sl_status_t zwave_s0_transport_init()
     .command_class     = COMMAND_CLASS_SECURITY,
     .version           = COMMAND_CLASS_SECURITY_VERSION,
     .send_data         = zwave_s0_send_data,
+    .abort_send_data   = zwave_s0_on_abort_send_data,
     .on_frame_received = zwave_s0_on_frame_received,
   };
 

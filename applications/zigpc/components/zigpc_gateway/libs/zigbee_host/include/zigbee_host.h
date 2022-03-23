@@ -376,6 +376,7 @@ EzspStatus zigbeeHostSetEzspPolicy(EzspPolicyId policyId,
                                    const char *policyName,
                                    const char *decisionName);
 
+EmberStatus zigbeeHostLaunchBootloader();
 #ifdef __cplusplus
 }
 #endif

@@ -50,3 +50,7 @@ endif()
 if (BUILD_UPTI_CAP MATCHES ON)
   add_subdirectory(upti_cap)
 endif()
+
+if (BUILD_UPTI_WRITER MATCHES ON)
+  add_subdirectory(upti_writer)
+endif()

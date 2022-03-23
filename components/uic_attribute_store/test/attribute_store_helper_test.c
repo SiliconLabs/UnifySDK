@@ -378,6 +378,142 @@ void test_attribute_store_set_reported_string_happy_case()
                    - 1]);  // not Appended NULL termination, string was correct
 }
 
+void test_attribute_store_concatenate_reported_string_happy_case()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const char *string_1 = "Hello";
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported_string(test_node, string_1));
+
+  const char *string_2 = ", World!";
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_concatenate_to_reported_string(test_node, string_2));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH - 1]     = 10;
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           REPORTED_ATTRIBUTE,
+                                           (uint8_t *)&received_value,
+                                           &received_value_size);
+
+  TEST_ASSERT_EQUAL(14, received_value_size);
+  TEST_ASSERT_EQUAL('H', received_value[0]);
+  TEST_ASSERT_EQUAL('e', received_value[1]);
+  TEST_ASSERT_EQUAL('l', received_value[2]);
+  TEST_ASSERT_EQUAL('l', received_value[3]);
+  TEST_ASSERT_EQUAL('o', received_value[4]);
+  TEST_ASSERT_EQUAL(',', received_value[5]);
+  TEST_ASSERT_EQUAL(' ', received_value[6]);
+  TEST_ASSERT_EQUAL('W', received_value[7]);
+  TEST_ASSERT_EQUAL('o', received_value[8]);
+  TEST_ASSERT_EQUAL('r', received_value[9]);
+  TEST_ASSERT_EQUAL('l', received_value[10]);
+  TEST_ASSERT_EQUAL('d', received_value[11]);
+  TEST_ASSERT_EQUAL('!', received_value[12]);
+  TEST_ASSERT_EQUAL('\0', received_value[13]);
+  TEST_ASSERT_EQUAL(
+    10,
+    received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH
+                   - 1]);  // not Appended NULL termination, string was correct
+}
+
+void test_attribute_store_concatenate_reported_string_undefined_previous_value()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const char *string_1 = "Hello";
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_concatenate_to_reported_string(test_node, string_1));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           REPORTED_ATTRIBUTE,
+                                           (uint8_t *)&received_value,
+                                           &received_value_size);
+
+  TEST_ASSERT_EQUAL_STRING(string_1, (const char *)received_value);
+}
+
+void test_attribute_store_concatenate_reported_empty_string()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const char *string_1 = "Hello";
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported_string(test_node, string_1));
+
+  const char *string_2 = "";
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_concatenate_to_reported_string(test_node, string_2));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           REPORTED_ATTRIBUTE,
+                                           (uint8_t *)&received_value,
+                                           &received_value_size);
+
+  TEST_ASSERT_EQUAL_STRING(string_1, (const char *)received_value);
+}
+
+void test_attribute_store_concatenate_overflow()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const char *string_1
+    = "Hello, this is a long string. It aims at checking that we do not choke "
+      "if a string larger than the maximum capacity of the attribute store is "
+      "attempted to be saved. Ideally, it will ... ";
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported_string(test_node, string_1));
+
+  const char *string_2 = "clip this string and append a NULL termination, so "
+                         "the program and everybody is happy :-)";
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_concatenate_to_reported_string(test_node, string_2));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           REPORTED_ATTRIBUTE,
+                                           (uint8_t *)&received_value,
+                                           &received_value_size);
+
+  TEST_ASSERT_EQUAL_STRING(
+    "Hello, this is a long string. It aims at checking that we do not choke if "
+    "a string larger than the maximum capacity of the attribute store is "
+    "attempted to be saved. Ideally, it will ... clip this string and append a "
+    "NULL termination, so the program and e",
+    (const char *)received_value);
+}
+
 void test_attribute_store_set_reported_string_no_null_termination_case()
 {
   attribute_store_node_t root_node = attribute_store_get_root();
@@ -436,6 +572,58 @@ void test_attribute_store_get_reported_string_happy_case()
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     attribute_store_get_reported_string(test_node, received_string, 20));
+
+  TEST_ASSERT_EQUAL_STRING(string, received_string);
+}
+
+void test_attribute_store_get_desired_else_reported_string_happy_case()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  char string[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH]
+    = "HelloConfigurationParameters";
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_node_attribute_value(test_node,
+                                                             DESIRED_ATTRIBUTE,
+                                                             (uint8_t *)string,
+                                                             29));
+
+  // Read back
+  char received_string[29];
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_get_desired_else_reported_string(test_node,
+                                                     received_string,
+                                                     29));
+
+  TEST_ASSERT_EQUAL_STRING(string, received_string);
+}
+
+void test_attribute_store_get_desired_else_reported_string_only_reported_defined()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  char string[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = "HelloZigPC";
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_reported_string(test_node, string));
+
+  // Read back
+  char received_string[11];
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_get_desired_else_reported_string(test_node,
+                                                     received_string,
+                                                     11));
 
   TEST_ASSERT_EQUAL_STRING(string, received_string);
 }
@@ -622,9 +810,9 @@ void test_attribute_store_set_child_desired()
   uint32_t value = 9393;
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     attribute_store_set_child_desired(test_node,
-                                                       0xBBBB,
-                                                       &value,
-                                                       sizeof(value)));
+                                                      0xBBBB,
+                                                      &value,
+                                                      sizeof(value)));
 
   attribute_store_node_t created_node
     = attribute_store_get_node_child_by_type(test_node, 0xBBBB, 0);
@@ -647,9 +835,9 @@ void test_attribute_store_set_child_desired()
   value = 42;
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     attribute_store_set_child_desired(test_node,
-                                                       0xBBBB,
-                                                       &value,
-                                                       sizeof(value)));
+                                                      0xBBBB,
+                                                      &value,
+                                                      sizeof(value)));
 
   // Read back, from the created node in the first set
   attribute_store_get_node_attribute_value(created_node,
@@ -664,17 +852,17 @@ void test_attribute_store_set_child_desired()
   TEST_ASSERT_EQUAL(
     SL_STATUS_FAIL,
     attribute_store_set_child_desired(ATTRIBUTE_STORE_INVALID_NODE,
-                                       0xBBBB,
-                                       &value,
-                                       sizeof(value)));
+                                      0xBBBB,
+                                      &value,
+                                      sizeof(value)));
 
   // Also try the invalid type
   TEST_ASSERT_EQUAL(
     SL_STATUS_FAIL,
     attribute_store_set_child_desired(test_node,
-                                       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
-                                       &value,
-                                       sizeof(value)));
+                                      ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+                                      &value,
+                                      sizeof(value)));
 }
 
 void test_attribute_store_delete_all_children()
@@ -705,4 +893,55 @@ void test_attribute_store_delete_all_children()
                     attribute_store_delete_all_children(test_node_1));
 
   TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(test_node_1));
+}
+
+void test_attribute_store_get_reported_test()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const int64_t value = -12394;
+
+  // Write the value
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_node_attribute_value(test_node,
+                                             REPORTED_ATTRIBUTE,
+                                             (uint8_t *)&value,
+                                             (uint8_t)sizeof(value)));
+
+  // Read back with the get reported:
+  int64_t received_value = 0;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_get_reported(test_node,
+                                                 &received_value,
+                                                 sizeof(received_value)));
+
+  TEST_ASSERT_EQUAL(value, received_value);
+
+  // Should give the same with desired_else_reported:
+  received_value = 0;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_get_desired_else_reported(test_node,
+                                              &received_value,
+                                              sizeof(received_value)));
+
+  TEST_ASSERT_EQUAL(value, received_value);
+
+  // Finally, try with the desired value only being set:
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_desired_as_reported(test_node));
+  attribute_store_undefine_reported(test_node);
+
+  received_value = 0;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_get_desired_else_reported(test_node,
+                                              &received_value,
+                                              sizeof(received_value)));
+  TEST_ASSERT_EQUAL(value, received_value);
 }

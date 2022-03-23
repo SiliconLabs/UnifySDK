@@ -1,3 +1,4 @@
+add_subdirectory(antenna_array)
 add_subdirectory(aoa_angle)
 add_subdirectory(aoa_parse)
 add_subdirectory(aoa_types)

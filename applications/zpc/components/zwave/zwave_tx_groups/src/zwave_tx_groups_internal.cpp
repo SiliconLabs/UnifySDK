@@ -159,7 +159,9 @@ sl_status_t
 
   // Insert the new group data.
   this->groups.insert(new_group);
+#ifndef ZWAVE_BUILD_SYSTEM
   this->log(new_group.group_id);
+#endif  // ZWAVE_BUILD_SYSTEM
   return SL_STATUS_OK;
 }
 

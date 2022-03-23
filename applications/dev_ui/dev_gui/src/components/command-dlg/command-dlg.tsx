@@ -12,7 +12,8 @@ class CommandDlg extends React.Component<CommandDlgProps, CommandDlgState> {
         this.state = {
             Command: {},
             Unid: "",
-            ShowModal: false
+            ShowModal: false,
+            ClusterType: props.ClusterType
         };
         this.changeCommandAttrs = React.createRef();
     }
@@ -22,21 +23,24 @@ class CommandDlg extends React.Component<CommandDlgProps, CommandDlgState> {
         this.setState({ ShowModal: value });
     }
 
-    updateState(unid: string, command: any, showModal: boolean) {
+    updateState(unid: string, command: any, showModal: boolean, clusterType?: any) {
+        if (clusterType !== undefined)
+            this.setState({ ClusterType: clusterType });
         this.setState({ Unid: unid, Command: command, ShowModal: showModal }, () => this.changeCommandAttrs.current.updateState(this.state.Command));
     }
 
     sendCommand() {
-        this.props.SocketServer.send(JSON.stringify(
-            {
-                type: "run-cluster-command",
-                data: {
-                    Unid: this.state.Unid,
-                    ClusterType: this.props.ClusterType,
-                    Cmd: this.state.Command.name,
-                    Payload: this.changeCommandAttrs.current.state.Payload
-                }
-            }));
+        if (this.state.ClusterType !== undefined)
+            this.props.SocketServer.send(JSON.stringify(
+                {
+                    type: "run-cluster-command",
+                    data: {
+                        Unid: this.state.Unid,
+                        ClusterType: this.state.ClusterType,
+                        Cmd: this.state.Command.name,
+                        Payload: this.changeCommandAttrs.current.state.Payload
+                    }
+                }));
     }
 
     render() {

@@ -76,6 +76,17 @@ static const zwave_tx_options_t test_tx_options_2
      .is_first_follow_up  = false,
      .send_follow_ups     = false};
 
+static const zwave_tx_options_t test_tx_options_2_multi_responses
+  = {.number_of_responses = 3,
+     .discard_timeout_ms  = 400,
+     .qos_priority        = 20,
+     .fasttrack           = false,
+     .is_test_frame       = false,
+     .rf_power            = NORMAL_POWER,
+     .group_id            = ZWAVE_TX_INVALID_GROUP,
+     .is_first_follow_up  = false,
+     .send_follow_ups     = false};
+
 static const zwave_tx_options_t test_tx_options_3
   = {.number_of_responses = 0,
      .discard_timeout_ms  = 0,
@@ -97,17 +108,6 @@ static const zwave_tx_options_t test_tx_options_test_frame
      .group_id            = ZWAVE_TX_INVALID_GROUP,
      .is_first_follow_up  = false,
      .send_follow_ups     = false};
-
-static const zwave_tx_options_t test_tx_options_with_follow_up
-  = {.number_of_responses = 1,
-     .discard_timeout_ms  = 0,
-     .qos_priority        = 123,
-     .fasttrack           = false,
-     .is_test_frame       = false,
-     .rf_power            = NORMAL_POWER,
-     .group_id            = ZWAVE_TX_INVALID_GROUP,
-     .is_first_follow_up  = false,
-     .send_follow_ups     = true};
 
 static const zwave_tx_options_t test_tx_options_group_id
   = {.number_of_responses = 1,

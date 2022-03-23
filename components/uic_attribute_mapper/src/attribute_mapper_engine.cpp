@@ -269,8 +269,8 @@ void MapperEngine::on_attribute_updated(
 
     if (value) {
       std::stringstream ss;
-      ss << "Match expression: " << assignment << " triggered by attribute "
-         << original_node;
+      ss << "Match expression: " << assignment << " triggered by attribute ID "
+         << std::dec << original_node;
       sl_log_debug(LOG_TAG, ss.str().c_str());
 
       // Find the destination, start from the Endpoint node.

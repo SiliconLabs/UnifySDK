@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"thermostat.html#thermostat_attr_abs_min_cool_setpoint_limit":[18,0,5],
 "thermostat.html#thermostat_attr_abs_min_heat_setpoint_limit":[18,0,3],
 "thermostat.html#thermostat_attr_ac_capacity":[18,0,43],
 "thermostat.html#thermostat_attr_ac_capacity_format":[18,0,49],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "ucl_enums.html#enum_thermostatac_refrigerant_type":[47,87],
 "ucl_enums.html#enum_thermostatac_type":[47,88],
 "ucl_enums.html#enum_tl_key_index":[47,81],
-"ucl_enums.html#enum_tl_status":[47,82],
-"ucl_enums.html#enum_tl_zigbee_information_logical_type":[47,83]
+"ucl_enums.html#enum_tl_status":[47,82]
 };

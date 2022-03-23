@@ -5,7 +5,7 @@
 This document outlines the JSON definitions for UCL cluster commands and
 attributes.
 
-Some data types are structs, enums, and bitmaps. See the UCL Stucts, Enums and Bitmaps
+Some data types are structs, enums and bitmaps. See the UCL Structs, Enums and Bitmaps
 sections at the end of the document to see these definitions.
 
 > NOTE: Unify Protocol Controller and IoT Service support may vary.

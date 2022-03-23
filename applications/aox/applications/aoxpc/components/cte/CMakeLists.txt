@@ -14,7 +14,7 @@ target_include_directories(cte
   src
 )
 
-target_link_libraries(cte ncp db aoa_types aoa_utils)
+target_link_libraries(cte ncp db aoa_types aoa_utils antenna_array)
 
 set_target_properties(cte PROPERTIES
   INTERFACE_COMPILE_DEFINITIONS "AOA_CTE"

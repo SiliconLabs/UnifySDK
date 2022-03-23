@@ -134,9 +134,54 @@ sl_status_t attribute_store_set_reported_string(attribute_store_node_t node,
     string_length);
 }
 
-sl_status_t attribute_store_get_reported_string(attribute_store_node_t node,
-                                                char *string,
-                                                size_t maximum_size)
+sl_status_t
+  attribute_store_concatenate_to_reported_string(attribute_store_node_t node,
+                                                 const char *string)
+{
+  // Read the existing string in our local buffer
+  uint8_t string_length = 0;
+  attribute_store_get_node_attribute_value(node,
+                                           REPORTED_ATTRIBUTE,
+                                           (uint8_t *)received_value,
+                                           &string_length);
+
+  // Previous value was undefined, just set the new string value.
+  if (string_length == 0) {
+    return attribute_store_set_reported_string(node, string);
+  }
+
+  // Now try to append as much as possible from the new string to the old string
+  strncat((char *)received_value,
+          string,
+          sizeof(received_value) - string_length);
+  // Ensure NULL termination
+  received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH - 1] = '\0';
+
+  // Push it to the attribute store:
+  string_length = (uint8_t)(strlen((char *)received_value) + sizeof(char));
+  return attribute_store_set_node_attribute_value(
+    node,
+    REPORTED_ATTRIBUTE,
+    (const uint8_t *)received_value,
+    string_length);
+}
+
+/**
+ * @brief Helper function that fetches the Reported or Desired value of a string
+ *
+ * Note: Does not work with the DESIRED_OR_REPORTED attribute value type.
+ *
+ * @param node            Attribute Store node to read the value from
+ * @param string          Pointer where to store the read value
+ * @param maximum_size    Maximum capacity of the pointer.
+ * @param value_state     Attribute value state, reported or desired.
+ * @return sl_status_t
+ */
+static sl_status_t
+  attribute_store_get_string(attribute_store_node_t node,
+                             char *string,
+                             size_t maximum_size,
+                             attribute_store_node_value_state_t value_state)
 {
   // Parameter validation
   if (string == NULL || maximum_size == 0) {
@@ -144,14 +189,14 @@ sl_status_t attribute_store_get_reported_string(attribute_store_node_t node,
   }
   // Ensure null termination of the user buffer if we abort:
   string[0] = '\0';
-  if (false == attribute_store_is_value_defined(node, REPORTED_ATTRIBUTE)) {
+  if (false == attribute_store_is_value_defined(node, value_state)) {
     return SL_STATUS_FAIL;
   }
 
   // Retrive the data from the attribute store in our buffer.
   uint8_t string_length = 0;
   attribute_store_get_node_attribute_value(node,
-                                           REPORTED_ATTRIBUTE,
+                                           value_state,
                                            (uint8_t *)received_value,
                                            &string_length);
 
@@ -165,8 +210,38 @@ sl_status_t attribute_store_get_reported_string(attribute_store_node_t node,
   }
 
   // Looks safe, copy the data to the user pointer.
-  strncpy(string, (const char*)received_value, maximum_size);
+  strncpy(string, (const char *)received_value, maximum_size);
   return SL_STATUS_OK;
+}
+
+sl_status_t attribute_store_get_reported_string(attribute_store_node_t node,
+                                                char *string,
+                                                size_t maximum_size)
+{
+  return attribute_store_get_string(node,
+                                    string,
+                                    maximum_size,
+                                    REPORTED_ATTRIBUTE);
+}
+
+sl_status_t attribute_store_get_desired_string(attribute_store_node_t node,
+                                               char *string,
+                                               size_t maximum_size)
+{
+  return attribute_store_get_string(node,
+                                    string,
+                                    maximum_size,
+                                    DESIRED_ATTRIBUTE);
+}
+
+sl_status_t attribute_store_get_desired_else_reported_string(
+  attribute_store_node_t node, char *string, size_t maximum_size)
+{
+  if (attribute_store_is_value_defined(node, DESIRED_ATTRIBUTE)) {
+    return attribute_store_get_desired_string(node, string, maximum_size);
+  } else {
+    return attribute_store_get_reported_string(node, string, maximum_size);
+  }
 }
 
 void attribute_store_undefine_desired(attribute_store_node_t node)
@@ -190,6 +265,15 @@ sl_status_t attribute_store_get_desired(attribute_store_node_t node,
 {
   return attribute_store_read_value(node,
                                     DESIRED_ATTRIBUTE,
+                                    value,
+                                    expected_size);
+}
+
+sl_status_t attribute_store_get_desired_else_reported(
+  attribute_store_node_t node, void *value, size_t expected_size)
+{
+  return attribute_store_read_value(node,
+                                    DESIRED_OR_REPORTED_ATTRIBUTE,
                                     value,
                                     expected_size);
 }
@@ -258,9 +342,9 @@ sl_status_t attribute_store_set_child_reported(attribute_store_node_t parent,
 }
 
 sl_status_t attribute_store_set_child_desired(attribute_store_node_t parent,
-                                               attribute_store_type_t type,
-                                               const void *value,
-                                               uint8_t value_size)
+                                              attribute_store_type_t type,
+                                              const void *value,
+                                              uint8_t value_size)
 {
   attribute_store_node_t child_node
     = attribute_store_get_node_child_by_type(parent, type, 0);
@@ -331,6 +415,19 @@ void attribute_store_add_if_missing(attribute_store_node_t parent_node,
       attribute_store_add_node(attributes[i], parent_node);
     }
   }
+}
+
+sl_status_t attribute_store_register_callback_by_type_to_array(
+  attribute_store_node_changed_callback_t callback_function,
+  const attribute_store_type_t types[],
+  uint32_t types_count)
+{
+  sl_status_t status = SL_STATUS_OK;
+  for (uint32_t i = 0; i < types_count; i++) {
+    status
+      |= attribute_store_register_callback_by_type(callback_function, types[i]);
+  }
+  return status;
 }
 
 sl_status_t attribute_store_delete_all_children(attribute_store_node_t node)

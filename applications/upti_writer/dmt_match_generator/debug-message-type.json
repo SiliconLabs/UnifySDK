@@ -1,0 +1,397 @@
+{
+  "description": "This file contains the valid debug message type codes for the Silicon Labs Debug Message protocol.",
+  "featureLevel": "22",
+  "featureDate": "2022.1.8",
+  "types": {
+    "TIME_SYNC": {
+      "code": "0x0000",
+      "shortDescription": "TimeSync",
+      "longDescription": "Time synchronization notice",
+      "status": ""
+    },
+    "RESET_INFO": {
+      "code": "0x0001",
+      "shortDescription": "Reset",
+      "longDescription": "Reset notice",
+      "status": ""
+    },
+    "PRINTF": {
+      "code": "0x0002",
+      "shortDescription": "Printf",
+      "longDescription": "Application printf",
+      "status": ""
+    },
+    "API_TRACE": {
+      "code": "0x0003",
+      "shortDescription": "APITrace",
+      "longDescription": "API trace",
+      "status": ""
+    },
+    "ASSERT": {
+      "code": "0x0004",
+      "shortDescription": "Assert",
+      "longDescription": "Assertion notice",
+      "status": ""
+    },
+    "CORE_DUMP": {
+      "code": "0x0005",
+      "shortDescription": "CoreDump",
+      "longDescription": "Core dump",
+      "status": ""
+    },
+    "PHY_RX": {
+      "code": "0x0006",
+      "shortDescription": "phy_rx",
+      "longDescription": "phy_rx",
+      "status": ""
+    },
+    "API_RX": {
+      "code": "0x0007",
+      "shortDescription": "api_rx",
+      "longDescription": "api_rx",
+      "status": ""
+    },
+    "PHY_TX": {
+      "code": "0x0008",
+      "shortDescription": "phy_tx",
+      "longDescription": "phy_tx",
+      "status": ""
+    },
+    "API_TX": {
+      "code": "0x0009",
+      "shortDescription": "api_tx",
+      "longDescription": "api_tx",
+      "status": ""
+    },
+    "PACKET_TRACE": {
+      "code": "0x000A",
+      "shortDescription": "Packet",
+      "longDescription": "Sniffer packet",
+      "status": ""
+    },
+    "ERROR": {
+      "code": "0x000B",
+      "shortDescription": "Error",
+      "longDescription": "Adapter error",
+      "status": ""
+    },
+    "STATS": {
+      "code": "0x000C",
+      "shortDescription": "Stats",
+      "longDescription": "Statistics",
+      "status": ""
+    },
+    "TIME_SYNC_TEST": {
+      "code": "0x000D",
+      "shortDescription": "time_sync_test",
+      "longDescription": "time_sync_test",
+      "status": ""
+    },
+    "RADIO_REBOOT_COUNT": {
+      "code": "0x000E",
+      "shortDescription": "radio_reboot_count",
+      "longDescription": "radio_reboot_count",
+      "status": ""
+    },
+    "VIRTUAL_UART_TX": {
+      "code": "0x0011",
+      "shortDescription": "UART",
+      "longDescription": "Virtual UART Tx",
+      "status": ""
+    },
+    "VIRTUAL_UART_RX": {
+      "code": "0x0012",
+      "shortDescription": "UART",
+      "longDescription": "Virtual UART Rx",
+      "status": ""
+    },
+    "PACKET_TRACE_EM2420_TX": {
+      "code": "0x0020",
+      "shortDescription": "Packet",
+      "longDescription": "2420 Tx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_EM2420_RX": {
+      "code": "0x0021",
+      "shortDescription": "Packet",
+      "longDescription": "2420 Rx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_EM2XX_TX": {
+      "code": "0x0022",
+      "shortDescription": "Packet",
+      "longDescription": "250 Tx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_EM2XX_RX": {
+      "code": "0x0023",
+      "shortDescription": "Packet",
+      "longDescription": "250 Rx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_EM3XX_TX": {
+      "code": "0x0024",
+      "shortDescription": "Packet",
+      "longDescription": "350 Tx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_EM3XX_RX": {
+      "code": "0x0025",
+      "shortDescription": "Packet",
+      "longDescription": "350 Rx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_PRO2P_TX": {
+      "code": "0x0026",
+      "shortDescription": "Packet",
+      "longDescription": "Pro2+ Tx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_PRO2P_RX": {
+      "code": "0x0027",
+      "shortDescription": "Packet",
+      "longDescription": "Pro2+ Rx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_PRO2P_OTHER": {
+      "code": "0x0028",
+      "shortDescription": "Packet",
+      "longDescription": "Pro2+ debug packet",
+      "status": ""
+    },
+    "PACKET_TRACE_EFR_TX": {
+      "code": "0x0029",
+      "shortDescription": "Packet",
+      "longDescription": "EFR Tx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_EFR_RX": {
+      "code": "0x002A",
+      "shortDescription": "Packet",
+      "longDescription": "EFR Rx packet",
+      "status": ""
+    },
+    "PACKET_TRACE_EFR_OTHER": {
+      "code": "0x002B",
+      "shortDescription": "PTI",
+      "longDescription": "EFR additional PTI data",
+      "status": ""
+    },
+    "FLASH_READ_REQUEST": {
+      "code": "0x0030",
+      "shortDescription": "flash_read_request",
+      "longDescription": "flash_read_request",
+      "status": ""
+    },
+    "FLASH_READ_RESPONSE": {
+      "code": "0x0031",
+      "shortDescription": "flash_read_response",
+      "longDescription": "flash_read_response",
+      "status": ""
+    },
+    "EEPROM_READ_REQUEST": {
+      "code": "0x0032",
+      "shortDescription": "eeprom_read_request",
+      "longDescription": "eeprom_read_request",
+      "status": ""
+    },
+    "EEPROM_READ_RESPONSE": {
+      "code": "0x0033",
+      "shortDescription": "eeprom_read_response",
+      "longDescription": "eeprom_read_response",
+      "status": ""
+    },
+    "EEPROM_WRITE_REQUEST": {
+      "code": "0x0034",
+      "shortDescription": "eeprom_write_request",
+      "longDescription": "eeprom_write_request",
+      "status": ""
+    },
+    "EEPROM_WRITE_RESPONSE": {
+      "code": "0x0035",
+      "shortDescription": "eeprom_write_response",
+      "longDescription": "eeprom_write_response",
+      "status": ""
+    },
+    "RAM_READ_REQUEST": {
+      "code": "0x0036",
+      "shortDescription": "ram_read_request",
+      "longDescription": "ram_read_request",
+      "status": ""
+    },
+    "RAM_READ_RESPONSE": {
+      "code": "0x0037",
+      "shortDescription": "ram_read_response",
+      "longDescription": "ram_read_response",
+      "status": ""
+    },
+    "RAM_WRITE_REQUEST": {
+      "code": "0x0038",
+      "shortDescription": "ram_write_request",
+      "longDescription": "ram_write_request",
+      "status": ""
+    },
+    "RAM_WRITE_RESPONSE": {
+      "code": "0x0039",
+      "shortDescription": "ram_write_response",
+      "longDescription": "ram_write_response",
+      "status": ""
+    },
+    "INFO_REQUEST": {
+      "code": "0x003A",
+      "shortDescription": "info_request",
+      "longDescription": "info_request",
+      "status": ""
+    },
+    "INFO_RESPONSE": {
+      "code": "0x003B",
+      "shortDescription": "NodeInfo",
+      "longDescription": "Node information",
+      "status": ""
+    },
+    "EZSP": {
+      "code": "0x003C",
+      "shortDescription": "EZSP",
+      "longDescription": "EmberZNet Serial Protocol",
+      "status": ""
+    },
+    "EZSP_UART": {
+      "code": "0x003D",
+      "shortDescription": "ASH",
+      "longDescription": "ASH protocol",
+      "status": ""
+    },
+    "DAG_TRACE": {
+      "code": "0x003E",
+      "shortDescription": "DagTrace",
+      "longDescription": "DAG trace",
+      "status": ""
+    },
+    "SIMULATED_EZSP_CALLBACK_READY": {
+      "code": "0x003F",
+      "shortDescription": "EZSP_RDY",
+      "longDescription": "Simulated NCP Callback ready",
+      "status": ""
+    },
+    "SIMULATED_WAKEUP_NCP": {
+      "code": "0x0040",
+      "shortDescription": "NCP_WAKEUP",
+      "longDescription": "Simulated Wakeup signal to NCP",
+      "status": ""
+    },
+    "SIMULATED_NCP_IS_AWAKE": {
+      "code": "0x0041",
+      "shortDescription": "NCP_AWAKE",
+      "longDescription": "Simulated signal to host that NCP is awake",
+      "status": ""
+    },
+    "INFO_ZNET_VERSION": {
+      "code": "0x0042",
+      "shortDescription": "ZnetVer",
+      "longDescription": "Ember ZNet stack version",
+      "status": ""
+    },
+    "INFO_ZIP_VERSION": {
+      "code": "0x0043",
+      "shortDescription": "ZipVer",
+      "longDescription": "Ember IP stack version",
+      "status": ""
+    },
+    "TIME": {
+      "code": "0x0044",
+      "shortDescription": "Time",
+      "longDescription": "Current time information",
+      "status": ""
+    },
+    "HEAP_STACK": {
+      "code": "0x0045",
+      "shortDescription": "MemInfo",
+      "longDescription": "Memory use information",
+      "status": ""
+    },
+    "MUSTANG": {
+      "code": "0x0046",
+      "shortDescription": "Mustang",
+      "longDescription": "Mustang API message",
+      "status": ""
+    },
+    "LATENCY": {
+      "code": "0x0047",
+      "shortDescription": "latency",
+      "longDescription": "latency",
+      "status": ""
+    },
+    "TMSP": {
+      "code": "0x0048",
+      "shortDescription": "tmsp",
+      "longDescription": "tmsp",
+      "status": ""
+    },
+    "AEM_SAMPLE": {
+      "code": "0x0050",
+      "shortDescription": "AEMSample",
+      "longDescription": "AEM Sample",
+      "status": ""
+    },
+    "AEM_COUNTER": {
+      "code": "0x0051",
+      "shortDescription": "AEMCounter",
+      "longDescription": "AEM Counters Snapshot",
+      "status": ""
+    },
+    "AEM_REQUEST": {
+      "code": "0x0060",
+      "shortDescription": "AEMRequest",
+      "longDescription": "AEM Request",
+      "status": ""
+    },
+    "AEM_RESPONSE": {
+      "code": "0x0061",
+      "shortDescription": "AEMResponse",
+      "longDescription": "AEM Response",
+      "status": ""
+    },
+    "AEM_CURRENT_PACKET": {
+      "code": "0x0062",
+      "shortDescription": "AEMPacket",
+      "longDescription": "AEM Current Packet",
+      "status": ""
+    },
+    "AEM_CURRENT_PACKET_V2": {
+      "code": "0x0063",
+      "shortDescription": "aem_current_packet_v2",
+      "longDescription": "aem_current_packet_v2",
+      "status": ""
+    },
+    "PC_SAMPLE_PACKET": {
+      "code": "0x0064",
+      "shortDescription": "pc_sample_packet",
+      "longDescription": "pc_sample_packet",
+      "status": ""
+    },
+    "EXCEPTION_PACKET": {
+      "code": "0x0065",
+      "shortDescription": "exception_packet",
+      "longDescription": "exception_packet",
+      "status": ""
+    },
+    "CPU_USAGE": {
+      "code": "0x0070",
+      "shortDescription": "cpu_usage",
+      "longDescription": "cpu_usage",
+      "status": ""
+    },
+    "USER_COMMAND": {
+      "code": "0xFFFE",
+      "shortDescription": "UserCmd",
+      "longDescription": "User command",
+      "status": ""
+    },
+    "USER_RESPONSE": {
+      "code": "0xFFFF",
+      "shortDescription": "UserResp",
+      "longDescription": "User response",
+      "status": ""
+    }
+  }
+}

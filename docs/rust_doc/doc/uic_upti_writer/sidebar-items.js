@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["APP_NAME",""],["CONFIG_VERSION",""],["IPS",""],["LOG_PATH",""],["UNID",""]],"fn":[["main",""],["ok_or_exit_with_message",""],["parse_application_arguments",""],["run",""]],"mod":[["log_formatter",""],["mqtt_handler",""]]});

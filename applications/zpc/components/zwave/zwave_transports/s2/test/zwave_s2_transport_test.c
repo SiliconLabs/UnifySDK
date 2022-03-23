@@ -240,3 +240,50 @@ void test_S2_msg_received_event()
   TEST_ASSERT_EQUAL(sizeof(cmd_data), my_frame_length);
   TEST_ASSERT_EQUAL_CHAR_ARRAY(cmd_data, my_frame_data, sizeof(cmd_data));
 }
+
+void test_zwave_s2_abort_send_data()
+{
+  //Setup S2 frame transmission
+  zwave_controller_connection_info_t connection = {};
+  uint8_t cmd_data[]                            = "HelloWorld";
+  zwave_tx_options_t tx_options                 = {};
+  zwave_tx_session_id_t session                 = (void *)23;
+  connection.encapsulation  = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS;
+  connection.local.node_id  = 1;
+  connection.remote.node_id = 2;
+  s2_connection_t s2c       = {};
+  s2c.l_node                = 1;
+  s2c.r_node                = 2;
+  s2c.zw_tx_options         = 0;
+  s2c.class_id              = 2;
+
+  // Aborting before triggering a tranmission
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_FOUND, zwave_s2_abort_send_data(session));
+
+  //get_protocol_ExpectAndReturn(s2c.r_node, PROTOCOL_ZWAVE);
+  S2_send_data_singlecast_with_keyset_ExpectWithArrayAndReturn(
+    0,
+    0,
+    &s2c,
+    sizeof(s2_connection_t),
+    UNKNOWN_KEYSET,
+    cmd_data,
+    sizeof(cmd_data),
+    sizeof(cmd_data),
+    1);
+
+  //Test without verify delivery
+  zwave_tx_get_number_of_responses_ExpectAndReturn(session, 0);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s2_send_data(&connection,
+                                       sizeof(cmd_data),
+                                       cmd_data,
+                                       &tx_options,
+                                       on_zwave_tx_send_data_complete,
+                                       (void *)0x42,
+                                       session));
+
+  S2_send_frame_done_notify_Ignore();
+  //Abort the tranmission
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_s2_abort_send_data(session));
+}

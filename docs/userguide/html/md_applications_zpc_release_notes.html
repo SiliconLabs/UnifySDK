@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -87,13 +87,42 @@ $(document).ready(function(){initNavTree('md_applications_zpc_release_notes.html
 <div class="title">ZPC Release Notes </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This document describes the changes between the last released ZPC and the current release.</p>
-<h1><a class="anchor" id="autotoc_md403"></a>
-[1.1.0] - Feb 2022</h1>
-<h2><a class="anchor" id="autotoc_md404"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md437"></a>
+[1.1.1] - Mar 2022</h1>
+<h2><a class="anchor" id="autotoc_md438"></a>
 Added</h2>
 <ul>
-<li>Full Control for Central Scene Command Class<ul>
+<li>Full control for Configuration Command Class, version 4</li>
+<li>Added generated OnOff cluster commands for nodes issuing Basic Set commands to the ZPC.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md439"></a>
+Changed</h2>
+<ul>
+<li>Changed configuration keys for OTA config, if these have been specified in the ZPC config file, they need to be updated to the new keys manually<ul>
+<li>Changed <code>zpc.ota_chache_path</code> to <code>zpc.ota.cache_path</code></li>
+<li>Changed <code>zpc.ota_chache_size</code> to <code>zpc.ota.cache_size</code></li>
+</ul>
+</li>
+<li>Default get retry timer is lowered to 3s instead of 20s to mitigate against Wake Up nodes falling asleep during node interviews.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md440"></a>
+Fixed</h2>
+<ul>
+<li>ZPC gets stuck at reset in some rare cases.</li>
+<li>ZPC stops controlling OnOff if Binary Switch Set without supervision failed.</li>
+<li>ZPC stops granting S2 keys in some cases after a reset.</li>
+<li>ZPC does not let Iot Services control/remove a node after SmartStart self-destruct failure.</li>
+<li>ZPC consider Wake Up node failings if they fell asleep while communicating with them</li>
+<li>Re-interview a Wake Up leads to a difficult to recover situation</li>
+<li>Not all MQTT publications unretained after a node exclusion.</li>
+<li>S2 DSK of the previous node saved again with the next node if it does not support S2.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md441"></a>
+[1.1.0] - Feb 2022</h1>
+<h2><a class="anchor" id="autotoc_md442"></a>
+Added</h2>
+<ul>
+<li>Partial Control for Central Scene Command Class<ul>
 <li>Populating Scene Attributes to reflect the node's capabilities (total number of scenes)</li>
 <li>Central Scene is mapped to the Scene Cluster.</li>
 </ul>
@@ -107,7 +136,7 @@ Added</h2>
 <li>Monitoring if Offline nodes are responding again with regular NOPs commands.</li>
 <li>Network Polling</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md405"></a>
+<h2><a class="anchor" id="autotoc_md443"></a>
 Changed</h2>
 <ul>
 <li>ZPC datastore file key has been changed from &ndash;datastore.file to &ndash;zpc.datastore_file</li>
@@ -118,18 +147,18 @@ Changed</h2>
 <li>Increased Z-Wave Tx Queue robustness to multiple Tx sessions.</li>
 <li>Communication with Z-Wave Module optimized</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md406"></a>
+<h2><a class="anchor" id="autotoc_md444"></a>
 Fixed</h2>
 <ul>
 <li>Interviewing an offline node would make it appear online.</li>
 <li>Missing Wake Up Interval Set during interview for door/window sensor</li>
 <li>ZPC hangs and stops resolving attributes when DevGUI sends a MoveWithOnOff command</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md407"></a>
+<h1><a class="anchor" id="autotoc_md445"></a>
 [1.0.3] - Nov 2021</h1>
-<h1><a class="anchor" id="autotoc_md408"></a>
+<h1><a class="anchor" id="autotoc_md446"></a>
 [1.0.2] - Oct 2021</h1>
-<h2><a class="anchor" id="autotoc_md409"></a>
+<h2><a class="anchor" id="autotoc_md447"></a>
 Added</h2>
 <ul>
 <li>ZPC is Z-Wave Certified against the Z-Wave Specification release 2021A.</li>
@@ -143,26 +172,26 @@ Added</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md410"></a>
+<h2><a class="anchor" id="autotoc_md448"></a>
 Changed</h2>
 <ul>
 <li>OTA UIID has been updated to include hardware revision</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md411"></a>
+<h2><a class="anchor" id="autotoc_md449"></a>
 Fixed</h2>
 <ul>
 <li>Fixed various certification issues</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md412"></a>
+<h1><a class="anchor" id="autotoc_md450"></a>
 [1.0.1] - Aug 2021</h1>
-<h2><a class="anchor" id="autotoc_md413"></a>
+<h2><a class="anchor" id="autotoc_md451"></a>
 Fixed</h2>
 <ul>
 <li>Build issues</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md414"></a>
+<h1><a class="anchor" id="autotoc_md452"></a>
 [1.0.0] - Aug 2021</h1>
-<h2><a class="anchor" id="autotoc_md415"></a>
+<h2><a class="anchor" id="autotoc_md453"></a>
 Added</h2>
 <ul>
 <li>Implementation of Unify specification 1.0</li>
@@ -217,14 +246,14 @@ Added</h2>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md416"></a>
+<h2><a class="anchor" id="autotoc_md454"></a>
 Changed</h2>
 <ul>
 <li>Various bug fixes</li>
 <li>UAM Language updates</li>
 <li>Documentation updates</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md417"></a>
+<h1><a class="anchor" id="autotoc_md455"></a>
 Known Bugs</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -234,14 +263,15 @@ Known Bugs</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">UIC-1088  </td><td class="markdownTableBodyNone">Potentially wrong controller NIF after controller migration.  </td><td class="markdownTableBodyNone">Usually no problem in practice   </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">UIC-1603  </td><td class="markdownTableBodyNone">When ZPC includes a sleeping device, sometimes the node interview does not succeed and therefore, the full functionality of the node will not be presented to the use.  </td><td class="markdownTableBodyNone">Trigger a re-interview of the node to resolve the issue.   </td></tr>
+<td class="markdownTableBodyNone">UIC-1603  </td><td class="markdownTableBodyNone">When ZPC includes a sleeping device, sometimes the node interview does not succeed and therefore, the full functionality of the node will not be presented to the use.  </td><td class="markdownTableBodyNone">Wait until the next Wake Up or re-include the node   </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">UIC-1650  </td><td class="markdownTableBodyNone">Very rare race condition gets the ZPC stuck during a reset operation.  </td><td class="markdownTableBodyNone">Restart the ZPC if it did not respawn 20 seconds after reset   </td></tr>
+<td class="markdownTableBodyNone">UIC-1697  </td><td class="markdownTableBodyNone">Nodes with S2 granted keys sending Reports to Follow will trigger a SPAN increase out-of-sync situation.  </td><td class="markdownTableBodyNone">No workaround.   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md418"></a>
+<p>| UIC-1785 | Wake Up Nodes sending a Wake Up Notification during bootstrapping get put to sleep without interview. | Exclude and re-include the node if it happens. | | UIC-1798 |&#160;ZPC not able to compile with CMAKE_BUILD_TYPE=Release | Build with CMAKE_BUILD_TYPE=RelWithDebInfo instead | </p>
+<h1><a class="anchor" id="autotoc_md456"></a>
 Z-Wave Certification information</h1>
 <p>See <a class="el" href="md_applications_zpc_readme_certification.html">ZPC Certification Guide</a></p>
-<h1><a class="anchor" id="autotoc_md419"></a>
+<h1><a class="anchor" id="autotoc_md457"></a>
 Devices tested with the ZPC</h1>
 <p>Devices which are tested with the ZPC can be found in the list below. Working devices will be marked with an <b>x</b> and none working devices will be marked with an <b>-</b>.</p>
 <table class="markdownTable">
@@ -286,7 +316,7 @@ Devices tested with the ZPC</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:00 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

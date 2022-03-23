@@ -1,12 +1,38 @@
 # ZPC Release Notes
 
-This document describes the changes between the last released ZPC and the current release.
+## [1.1.1] - Mar 2022
+
+### Added
+
+* Full control for Configuration Command Class, version 4
+* Added generated OnOff cluster commands for nodes issuing Basic Set commands to the ZPC.
+
+### Changed
+
+* Changed configuration keys for OTA config, if these have been specified in
+  the ZPC config file, they need to be updated to the new keys manually
+  * Changed `zpc.ota_chache_path` to `zpc.ota.cache_path`
+  * Changed `zpc.ota_chache_size` to `zpc.ota.cache_size`
+
+* Default get retry timer is lowered to 3s instead of 20s to mitigate against Wake
+  Up nodes falling asleep during node interviews.
+
+### Fixed
+
+* ZPC gets stuck at reset in some rare cases.
+* ZPC stops controlling OnOff if Binary Switch Set without supervision failed.
+* ZPC stops granting S2 keys in some cases after a reset.
+* ZPC does not let Iot Services control/remove a node after SmartStart self-destruct failure.
+* ZPC consider Wake Up node failings if they fell asleep while communicating with them
+* Re-interview a Wake Up leads to a difficult to recover situation
+* Not all MQTT publications unretained after a node exclusion.
+* S2 DSK of the previous node saved again with the next node if it does not support S2.
 
 ## [1.1.0] - Feb 2022
 
 ### Added
 
-* Full Control for Central Scene Command Class
+* Partial Control for Central Scene Command Class
   * Populating Scene Attributes to reflect the node's capabilities (total number of scenes)
   * Central Scene is mapped to the Scene Cluster.
 
@@ -121,9 +147,11 @@ This document describes the changes between the last released ZPC and the curren
 |-----------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------|
 | UIC-1162  | When device have multiple functionalities on the Z-Wave end, which is mapped to the same ZigBee attribute, the mapping will be incomplete.   | Update the UAM file to avoid overlap.           |
 | UIC-1088  | Potentially wrong controller NIF after controller migration.                                          | Usually no problem in practice                  |
-| UIC-1603  | When ZPC includes a sleeping device, sometimes the node interview does not succeed and therefore, the full functionality of the node will not be presented to the use. | Trigger a re-interview of the node to resolve the issue. |
-| UIC-1650  | Very rare race condition gets the ZPC stuck during a reset operation. | Restart the ZPC if it did not respawn 20 seconds after reset |
-
+| UIC-1603  | When ZPC includes a sleeping device, sometimes the node interview does not succeed and therefore, the full functionality of the node will not be presented to the use. | Wait until the next Wake Up or re-include the node |
+| UIC-1697  | Nodes with S2 granted keys sending Reports to Follow will trigger a SPAN increase out-of-sync situation. | No workaround.                               |
+| UIC-1785  | Wake Up Nodes sending a Wake Up Notification during bootstrapping get put to sleep without interview.
+| Exclude and re-include the node if it happens. |
+| UIC-1798  | ZPC not able to compile with CMAKE_BUILD_TYPE=Release | Build with CMAKE_BUILD_TYPE=RelWithDebInfo instead |
 # Z-Wave Certification information
 
 See [ZPC Certification Guide](readme_certification.md)

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('md_applications_upti_cap_readme_user.h
 <div class="contents">
 <div class="textblock"><p>UPTI CAP is acronym for Unify Packet Trace Interface Capture</p>
 <p><em><b>NOTE</b></em> To make UPTI CAP work, Silicon Labs WSTK adapters needs a special PTI enabled firmware</p>
-<h1><a class="anchor" id="autotoc_md203"></a>
+<h1><a class="anchor" id="autotoc_md213"></a>
 Description</h1>
 <p>The <em>UPTI_CAP</em> is an application to communicate with Silicon Labs WSTK adapters, to capture data from adapters debug channel and to publish captured data as MQTT messages.</p>
 <p>The types of data depend from application loaded on wireless SoC and debug adapter (it can includes energy consumption data, network packet data or any other data available over the debug channel).</p>
@@ -101,7 +101,7 @@ Description</h1>
 <p>Capturing and publishing data from debug channel is disabled by default.</p>
 <p>To start/stop capturing data and publishing trace packages an IoT Service MUST publish control message to <code>ucl/UPTIСap/&lt;SerialNumber&gt;/Toggle</code> topic.</p>
 <p>Dev GUI application allows user to initiate adapters discovery, to start/stop trace packages capturing and visualize trace packages.</p>
-<h1><a class="anchor" id="autotoc_md204"></a>
+<h1><a class="anchor" id="autotoc_md214"></a>
 MQTT Topics and messages format</h1>
 <ul>
 <li><code>ucl/UPTIСap/Discover</code> - topic to control PTI compatible devices discovery. Message payload - empty JSON. <div class="fragment"><div class="line">{</div>
@@ -312,16 +312,16 @@ MQTT Topics and messages format</h1>
 <div class="line">        91,33,0,2,0,10,222,80,110,5,0,42,0,170,248,196,230,184,133,1,1,2,13,255,1,8,5,28,249,45,1,2,6,81,93</div>
 <div class="line">    ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md205"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md215"></a>
 Installation</h1>
 <p>Please refer to <a class="el" href="md_doc_readme_user.html">Unify SDK User guide</a>.</p>
-<h1><a class="anchor" id="autotoc_md206"></a>
+<h1><a class="anchor" id="autotoc_md216"></a>
 Running the UPTI CAP</h1>
-<h2><a class="anchor" id="autotoc_md207"></a>
+<h2><a class="anchor" id="autotoc_md217"></a>
 Using Systemd Service</h2>
 <p>The best way to run the UPTI CAP is using the Systemd service that is installed with</p>
 <p>the Debian installer. For more information, see <a class="el" href="md_doc_readme_user.html">Unify SDK User guide</a>.</p>
-<h2><a class="anchor" id="autotoc_md208"></a>
+<h2><a class="anchor" id="autotoc_md218"></a>
 Using Command Line</h2>
 <p>Alternatively, you can run the UPTICAP by executing <code>uic-upti-cap</code>. You can configure the MQTT server, database path, through command line options. For details about options, run <code>uic-upti-cap --help</code> command:</p>
 <p>Make sure that you do not run the UPTICAP both as a service and using the command line.</p>
@@ -341,7 +341,7 @@ Using Command Line</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:33:59 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

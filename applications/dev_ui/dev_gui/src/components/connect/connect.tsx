@@ -127,7 +127,7 @@ class Connect extends React.Component<ConnectionProps, ConnectionState> {
                         : <Button variant="primary" className="float-right" disabled={!this.state.Host || !this.state.Port || this.props.IsConnected === null} type="button" onMouseDown={this.connect}>Connect</Button>}
                 </div>
                 : <div className="col-sm-10 float-left">
-                    <h5 className="margin-b-0">UIC MQTT broker connection</h5>
+                    <h5 className="margin-b-0">Unify MQTT broker connection</h5>
                     <div className="con-container col-sm-12">
                         <div className="col-sm-12 flex">
                             <Form.Label column className="col-sm-5p"></Form.Label>

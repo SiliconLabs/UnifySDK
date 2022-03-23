@@ -1,14 +1,17 @@
-// License
-// <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
-
+///////////////////////////////////////////////////////////////////////////////
+// # License
+// <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
+///////////////////////////////////////////////////////////////////////////////
 // The licensor of this software is Silicon Laboratories Inc. Your use of this
 // software is governed by the terms of Silicon Labs Master Software License
 // Agreement (MSLA) available at
 // www.silabs.com/about-us/legal/master-software-license-agreement. This
 // software is distributed to you in Source Code format and is governed by the
 // sections of the MSLA applicable to Source Code.
+//
+///////////////////////////////////////////////////////////////////////////////
 
-use crate::{contiki::contiki_register_shutdown_callback, AttributeEvent, AttributeStreamCache};
+use crate::{contiki::contiki_register_shutdown_callback, AttributeEvent};
 use core::task::Poll::{Pending, Ready};
 use futures::Stream;
 use mockall_double::double;
@@ -17,6 +20,7 @@ use unify_log_sys::*;
 use unify_sl_status_sys::*;
 declare_app_name!("attribute_stream");
 
+use unify_tools::waker_cache_trait::WakerCacheTrait;
 #[double]
 use wrapped_c::inner;
 
@@ -32,12 +36,12 @@ pub type AttributeValueState = attribute_store_node_value_state_t;
 pub type AttributeEventType = attribute_store_change_t;
 
 /// Static struct that book-keeps attribute change subscriptions.
-static mut CHANGE_LISTENER: Option<Box<dyn AttributeStreamCache>> = None;
+static mut CHANGE_LISTENER: Option<Box<dyn WakerCacheTrait<AttributeEvent>>> = None;
 
 #[allow(unused_variables)]
 pub fn initialize_attribute_changes<Cache>(attr_cache: Cache) -> u32
 where
-    Cache: AttributeStreamCache + 'static,
+    Cache: WakerCacheTrait<AttributeEvent> + 'static,
 {
     unsafe {
         // workaround: other test-cases will call this init function
@@ -249,8 +253,6 @@ mod wrapped_c {
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::AttributeChangeListener;
-    use crate::MockAttributeStreamCache;
     use crate::{contiki::rust_contiki_teardown, Attribute};
     use futures::task::noop_waker;
     use mockall::{
@@ -259,6 +261,8 @@ mod test {
     };
     use serial_test::serial;
     use std::{pin::Pin, task::Context};
+    use unify_tools::waker_cache::WakerCache;
+    use unify_tools::waker_cache_trait::MockWakerCacheTrait;
 
     fn teardown_change_listeners() {
         unsafe {
@@ -275,9 +279,11 @@ mod test {
         let ctx = inner::register_callback_context();
         ctx.expect().withf(|f| f.is_some()).return_const(0u32);
 
-        unsafe { CHANGE_LISTENER = Some(Box::new(AttributeChangeListener::default())) };
+        unsafe {
+            CHANGE_LISTENER = Some(Box::new(MockWakerCacheTrait::<AttributeEvent>::default()))
+        };
 
-        let mut listener = AttributeChangeListener::default();
+        let mut listener = WakerCache::<AttributeEvent>::default();
         assert_eq!(0, listener.register(noop_waker(), Box::new(|_| true)));
 
         // also consecutive times
@@ -325,7 +331,7 @@ mod test {
         assert_eq!(Pin::new(&mut stream).poll_next(&mut context), Ready(None));
 
         let mut seq = Sequence::new();
-        let mut mock = MockAttributeStreamCache::new();
+        let mut mock = MockWakerCacheTrait::<AttributeEvent>::new();
 
         mock.expect_register()
             .with(predicate::always(), predicate::always())
@@ -394,7 +400,7 @@ mod test {
         // no cache initialized
         assert_eq!(Pin::new(&mut stream).poll_next(&mut context), Ready(None));
 
-        let mut mock = MockAttributeStreamCache::new();
+        let mut mock = MockWakerCacheTrait::<AttributeEvent>::new();
         mock.expect_register()
             .with(predicate::always(), predicate::always())
             .return_const(2u64)
@@ -418,7 +424,7 @@ mod test {
     #[test]
     #[serial(change_listener)]
     fn teardown_forces_wake() {
-        let mut mock = MockAttributeStreamCache::new();
+        let mut mock = MockWakerCacheTrait::<AttributeEvent>::new();
         mock.expect_force_wake_all().returning(|| ());
         unsafe { CHANGE_LISTENER = Some(Box::new(mock)) };
 

@@ -13,6 +13,7 @@
 // Includes from the component being tested
 #include "zwave_tx_callbacks.h"
 #include "zwave_tx_fixt.h"
+#include "zwave_tx_state_logging.h"
 
 // Generic includes
 #include <stdbool.h>
@@ -27,6 +28,7 @@
 #include "zwave_network_management_mock.h"
 #include "zwave_controller_internal_mock.h"
 #include "zwave_controller_transport_mock.h"
+#include "zwave_tx_groups_mock.h"
 
 // Includes from the Z-Wave TX
 #include "zwave_tx_process.h"
@@ -52,6 +54,7 @@ static zwave_tx_session_id_t test_tx_session_id_2;
 static zwave_tx_session_id_t test_tx_session_id_3;
 static sl_status_t stub_status;
 static zwapi_tx_report_t test_tx_report;
+static zwave_nodemask_t test_nodemask;
 
 static void send_data_callback(uint8_t status,
                                const zwapi_tx_report_t *tx_status,
@@ -116,6 +119,7 @@ void setUp()
   zwave_transport_send_data_save = NULL;
   stub_status                    = SL_STATUS_OK;
   tx_flush_reset_step            = NULL;
+  memset(test_nodemask, 0, sizeof(zwave_nodemask_t));
 
   zwave_controller_transport_send_data_StopIgnore();
   zwave_controller_transport_send_data_AddCallback(
@@ -217,7 +221,7 @@ void test_zwave_tx_send_data_happy_case()
 
   // Transport informs it is done.
   TEST_ASSERT_NOT_NULL(zwave_transport_send_data_save);
-  zwave_transport_send_data_save(TRANSMIT_COMPLETE_OK,
+  zwave_transport_send_data_save(TRANSMIT_COMPLETE_VERIFIED,
                                  &test_tx_report,
                                  test_tx_session_id);
 
@@ -227,7 +231,7 @@ void test_zwave_tx_send_data_happy_case()
 
   // Verify that it looks looks as expected
   TEST_ASSERT_EQUAL(1, send_done_count);
-  TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_OK, send_done_status);
+  TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_VERIFIED, send_done_status);
   // We expect that the transmission time is copied from TX
   // Contiki made a clock jump of DEFAULT_CONTIKI_CLOCK_JUMP for each event
   send_done_tx_status.transmit_ticks = 0;
@@ -243,7 +247,7 @@ void test_zwave_tx_send_data_happy_case()
 
   // Nothing should have changed
   TEST_ASSERT_EQUAL(1, send_done_count);
-  TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_OK, send_done_status);
+  TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_VERIFIED, send_done_status);
   TEST_ASSERT_EQUAL_MEMORY(&test_tx_report,
                            &send_done_tx_status,
                            sizeof(zwapi_tx_report_t));
@@ -456,7 +460,7 @@ void test_zwave_tx_priority_and_back_off()
   contiki_test_helper_run(DEFAULT_CONTIKI_CLOCK_JUMP);
 
   // call the callback from the transport:
-  on_zwave_transport_send_data_complete(TRANSMIT_COMPLETE_OK,
+  on_zwave_transport_send_data_complete(TRANSMIT_COMPLETE_VERIFIED,
                                         NULL,
                                         test_tx_session_id_2);
 
@@ -967,6 +971,57 @@ void test_zwave_tx_queue_flush_while_in_back_off()
   contiki_test_helper_run(DEFAULT_CONTIKI_CLOCK_JUMP);
 }
 
+void test_zwave_tx_queue_flush_while_in_back_off_for_last_frame()
+{
+  // Queue just 1 frame with back-off
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_tx_send_data(&test_connection_2,
+                                       sizeof(test_expected_frame_data_2),
+                                       test_expected_frame_data_2,
+                                       &test_tx_options_2,
+                                       send_data_callback,
+                                       NULL,
+                                       &test_tx_session_id_2));
+
+  // Tx Queue tries to send our frame
+  zwave_controller_transport_send_data_ExpectWithArrayAndReturn(
+    &test_connection_2,
+    sizeof(test_connection_2),
+    sizeof(test_expected_frame_data_2),
+    test_expected_frame_data_2,
+    sizeof(test_expected_frame_data_2),
+    &test_tx_options_2,
+    sizeof(test_tx_options_2),
+    NULL,
+    NULL,
+    sizeof(void *),
+    NULL,
+    SL_STATUS_OK);
+  // Connection is modified by the Tx Queue, ignore this here
+  zwave_controller_transport_send_data_IgnoreArg_connection();
+  zwave_controller_transport_send_data_IgnoreArg_session();
+  zwave_controller_transport_send_data_IgnoreArg_on_send_complete();
+  zwave_controller_transport_send_data_IgnoreArg_user();
+
+  contiki_test_helper_run(0);
+
+  // call the callback from the transport:
+  on_zwave_transport_send_data_complete(TRANSMIT_COMPLETE_OK,
+                                        NULL,
+                                        test_tx_session_id_2);
+
+  // We are in back-off, waiting for an answer, flush the queue
+  contiki_test_helper_run(DEFAULT_CONTIKI_CLOCK_JUMP);
+
+  // Now we expect to be notified that Tx Queue flush is completed immediately,
+  // because we were in back-off for the last element
+  zwave_controller_on_reset_step_complete_Expect(
+    ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY);
+
+  TEST_ASSERT_NOT_NULL(tx_flush_reset_step);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, tx_flush_reset_step());
+}
+
 void test_zwave_tx_queue_flush_while_transmission_ongoing_transport_aborts()
 {
   // Frame 2
@@ -1137,6 +1192,260 @@ void test_zwave_tx_queue_flush_while_transmission_ongoing_transport_no_abort()
     ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY);
 
   contiki_test_helper_run(DEFAULT_CONTIKI_CLOCK_JUMP);
+}
+
+void test_zwave_tx_queue_flush_with_auto_follow_up_frame()
+{
+  // Prepare a multicast frame with automatic follow-ups
+  const zwave_tx_options_t test_tx_options_with_follow_up
+    = {.number_of_responses = 1,
+       .qos_priority        = 123,
+       .is_first_follow_up  = false,
+       .send_follow_ups     = true};
+
+  // test connection_info structures
+  const zwave_controller_connection_info_t test_connection
+    = {.local  = {.node_id = 1, .endpoint_id = 0, .is_multicast = false},
+       .remote = {.multicast_group = 1, .endpoint_id = 2, .is_multicast = true},
+       .encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE};
+
+  // Frame 2
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_tx_send_data(&test_connection,
+                                       sizeof(test_expected_frame_data_2),
+                                       test_expected_frame_data_2,
+                                       &test_tx_options_with_follow_up,
+                                       send_data_callback,
+                                       NULL,
+                                       &test_tx_session_id_2));
+
+  // Tx Queue sends our frame
+  zwave_controller_transport_send_data_ExpectWithArrayAndReturn(
+    &test_connection,
+    sizeof(test_connection),
+    sizeof(test_expected_frame_data_2),
+    test_expected_frame_data_2,
+    sizeof(test_expected_frame_data_2),
+    &test_tx_options_with_follow_up,
+    sizeof(test_tx_options_with_follow_up),
+    NULL,
+    NULL,
+    sizeof(void *),
+    NULL,
+    SL_STATUS_OK);
+  // Connection is modified by the Tx Queue, ignore this here
+  zwave_controller_transport_send_data_IgnoreArg_connection();
+  zwave_controller_transport_send_data_IgnoreArg_session();
+  zwave_controller_transport_send_data_IgnoreArg_on_send_complete();
+  zwave_controller_transport_send_data_IgnoreArg_user();
+  zwave_controller_transport_send_data_IgnoreArg_tx_options();
+
+  // We are now waiting for more frames, or a transport callback.
+  contiki_test_helper_run_once(1);
+
+  on_zwave_transport_send_data_complete(TRANSMIT_COMPLETE_OK,
+                                        NULL,
+                                        test_tx_session_id_2);
+
+  zwave_controller_transport_abort_send_data_ExpectAndReturn(
+    test_tx_session_id_2,
+    SL_STATUS_OK);
+  TEST_ASSERT_NOT_NULL(tx_flush_reset_step);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, tx_flush_reset_step());
+
+  // Reach an empty Tx Queue immmediately
+  zwave_controller_on_reset_step_complete_Expect(
+    ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY);
+
+  // Now the Tx queue will not enqueue a bunch of follow-up frames
+  contiki_test_helper_run_once(1);
+  zwave_tx_process_log_state();
+}
+
+void test_zwave_tx_queue_send_automatic_follow_up_frames()
+{
+  // Build a group of 3 nodes
+  ZW_ADD_NODE_TO_MASK(1, test_nodemask);
+  ZW_ADD_NODE_TO_MASK(2, test_nodemask);
+  ZW_ADD_NODE_TO_MASK(3, test_nodemask);
+  // Prepare a multicast frame with automatic follow-ups
+  const zwave_tx_options_t test_tx_options_with_follow_up
+    = {.number_of_responses = 1,
+       .qos_priority        = 123,
+       .is_first_follow_up  = false,
+       .send_follow_ups     = true};
+
+  // test connection_info structures
+  const zwave_controller_connection_info_t test_connection
+    = {.local  = {.node_id = 1, .endpoint_id = 0, .is_multicast = false},
+       .remote = {.multicast_group = 1, .endpoint_id = 2, .is_multicast = true},
+       .encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE};
+
+  // Frame 2
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_tx_send_data(&test_connection,
+                                       sizeof(test_expected_frame_data_2),
+                                       test_expected_frame_data_2,
+                                       &test_tx_options_with_follow_up,
+                                       send_data_callback,
+                                       NULL,
+                                       &test_tx_session_id_2));
+
+  // Tx Queue sends our frame
+  zwave_controller_transport_send_data_ExpectWithArrayAndReturn(
+    &test_connection,
+    sizeof(test_connection),
+    sizeof(test_expected_frame_data_2),
+    test_expected_frame_data_2,
+    sizeof(test_expected_frame_data_2),
+    &test_tx_options_with_follow_up,
+    sizeof(test_tx_options_with_follow_up),
+    NULL,
+    NULL,
+    sizeof(void *),
+    NULL,
+    SL_STATUS_OK);
+  // Connection is modified by the Tx Queue, ignore this here
+  zwave_controller_transport_send_data_IgnoreArg_connection();
+  zwave_controller_transport_send_data_IgnoreArg_session();
+  zwave_controller_transport_send_data_IgnoreArg_on_send_complete();
+  zwave_controller_transport_send_data_IgnoreArg_user();
+  zwave_controller_transport_send_data_IgnoreArg_tx_options();
+
+  // We are now waiting for more frames, or a transport callback.
+  contiki_test_helper_run_once(DEFAULT_CONTIKI_CLOCK_JUMP);
+
+  on_zwave_transport_send_data_complete(TRANSMIT_COMPLETE_OK,
+                                        NULL,
+                                        test_tx_session_id_2);
+
+  // Now the Tx queue will enqueue a bunch of follow-up frames
+  zwave_tx_get_nodes_ExpectAndReturn(NULL,
+                                     test_connection.remote.multicast_group,
+                                     SL_STATUS_OK);
+  zwave_tx_get_nodes_IgnoreArg_nodes();
+  zwave_tx_get_nodes_ReturnMemThruPtr_nodes(test_nodemask,
+                                            sizeof(zwave_nodemask_t));
+
+  contiki_test_helper_run_once(DEFAULT_CONTIKI_CLOCK_JUMP);
+
+  // Now we should start trying to send our follow-up frames.
+  // Tx Queue sends our first follow-up frame
+  zwave_controller_transport_send_data_ExpectAndReturn(
+    &test_connection,
+    sizeof(test_expected_frame_data_2),
+    test_expected_frame_data_2,
+    &test_tx_options_with_follow_up,
+    NULL,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  // Connection is modified by the Tx Queue, ignore this here
+  zwave_controller_transport_send_data_IgnoreArg_connection();
+  zwave_controller_transport_send_data_IgnoreArg_session();
+  zwave_controller_transport_send_data_IgnoreArg_on_send_complete();
+  zwave_controller_transport_send_data_IgnoreArg_user();
+  zwave_controller_transport_send_data_IgnoreArg_tx_options();
+
+  contiki_test_helper_run(DEFAULT_CONTIKI_CLOCK_JUMP);
+
+  // Can't really test farther than this, we do not know the sessionIDs
+  // of the follow-up frames
+  TEST_ASSERT_EQUAL(0, send_done_count);
+
+  // Try a bonus Tx Queue Flush.
+  zwave_controller_transport_abort_send_data_ExpectAndReturn(NULL,
+                                                             SL_STATUS_FAIL);
+  zwave_controller_transport_abort_send_data_IgnoreArg_session_id();
+
+  TEST_ASSERT_NOT_NULL(tx_flush_reset_step);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, tx_flush_reset_step());
+
+  contiki_test_helper_run_once(1);
+  // Followup 2
+  zwave_controller_transport_send_data_ExpectAndReturn(
+    &test_connection,
+    sizeof(test_expected_frame_data_2),
+    test_expected_frame_data_2,
+    &test_tx_options_with_follow_up,
+    NULL,
+    NULL,
+    NULL,
+    SL_STATUS_OK);
+  // Connection is modified by the Tx Queue, ignore this here
+  zwave_controller_transport_send_data_IgnoreArg_connection();
+  zwave_controller_transport_send_data_IgnoreArg_session();
+  zwave_controller_transport_send_data_IgnoreArg_on_send_complete();
+  zwave_controller_transport_send_data_IgnoreArg_user();
+  zwave_controller_transport_send_data_IgnoreArg_tx_options();
+
+  contiki_test_helper_run_once(1);
+}
+
+void test_zwave_tx_queue_send_automatic_follow_up_cannot_read_group_members()
+{
+  // Prepare a multicast frame with automatic follow-ups
+  const zwave_tx_options_t test_tx_options_with_follow_up
+    = {.number_of_responses = 1,
+       .qos_priority        = 123,
+       .is_first_follow_up  = false,
+       .send_follow_ups     = true};
+
+  // test connection_info structures
+  const zwave_controller_connection_info_t test_connection
+    = {.local  = {.node_id = 1, .endpoint_id = 0, .is_multicast = false},
+       .remote = {.multicast_group = 1, .endpoint_id = 2, .is_multicast = true},
+       .encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE};
+
+  // Frame 2
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_tx_send_data(&test_connection,
+                                       sizeof(test_expected_frame_data_2),
+                                       test_expected_frame_data_2,
+                                       &test_tx_options_with_follow_up,
+                                       send_data_callback,
+                                       NULL,
+                                       &test_tx_session_id_2));
+
+  // Tx Queue sends our frame
+  zwave_controller_transport_send_data_ExpectWithArrayAndReturn(
+    &test_connection,
+    sizeof(test_connection),
+    sizeof(test_expected_frame_data_2),
+    test_expected_frame_data_2,
+    sizeof(test_expected_frame_data_2),
+    &test_tx_options_with_follow_up,
+    sizeof(test_tx_options_with_follow_up),
+    NULL,
+    NULL,
+    sizeof(void *),
+    NULL,
+    SL_STATUS_OK);
+  // Connection is modified by the Tx Queue, ignore this here
+  zwave_controller_transport_send_data_IgnoreArg_connection();
+  zwave_controller_transport_send_data_IgnoreArg_session();
+  zwave_controller_transport_send_data_IgnoreArg_on_send_complete();
+  zwave_controller_transport_send_data_IgnoreArg_user();
+  zwave_controller_transport_send_data_IgnoreArg_tx_options();
+
+  // We are now waiting for more frames, or a transport callback.
+  contiki_test_helper_run_once(DEFAULT_CONTIKI_CLOCK_JUMP);
+
+  on_zwave_transport_send_data_complete(TRANSMIT_COMPLETE_OK,
+                                        NULL,
+                                        test_tx_session_id_2);
+
+  // Now the Tx queue will enqueue a bunch of follow-up frames
+  zwave_tx_get_nodes_ExpectAndReturn(NULL,
+                                     test_connection.remote.multicast_group,
+                                     SL_STATUS_FAIL);
+  zwave_tx_get_nodes_IgnoreArg_nodes();
+  // No follow-up should be there.
+  contiki_test_helper_run(DEFAULT_CONTIKI_CLOCK_JUMP);
+
+  // We should get a callback for our Multicast, because no follow-up could happen.
+  TEST_ASSERT_EQUAL(1, send_done_count);
+  TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_OK, send_done_status);
 }
 
 void test_zwave_tx_send_test_frame_happy_case()
@@ -1709,4 +2018,208 @@ void test_zwave_tx_resume_from_back_off()
   // Test we received the correct data in the callback
   TEST_ASSERT_EQUAL(2, send_done_count);
   TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_OK, send_done_status);
+}
+
+void test_zwave_tx_receive_only_one_response_during_backoff()
+{
+  // Queue 2 different frames, the first one (frame 2) needs 1 answer.
+  // Frame 3
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_tx_send_data(&test_connection_3,
+                                       sizeof(test_expected_frame_data_3),
+                                       test_expected_frame_data_3,
+                                       &test_tx_options_3,
+                                       send_data_callback,
+                                       &test_tx_session_id_3,
+                                       &test_tx_session_id_3));
+
+  // Frame 2
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_tx_send_data(&test_connection_2,
+                                       sizeof(test_expected_frame_data_2),
+                                       test_expected_frame_data_2,
+                                       &test_tx_options_2_multi_responses,
+                                       send_data_callback,
+                                       NULL,
+                                       &test_tx_session_id_2));
+
+  // We are not transmitting yet, so if an answer comes now from the destination
+  // we ignore
+  TEST_ASSERT_NOT_NULL(zwave_controller_callbacks->on_rx_frame_received);
+  zwave_controller_callbacks->on_rx_frame_received(
+    test_connection_2.remote.node_id);
+
+  // Tx Queue sends frame 2 first
+  zwave_controller_transport_send_data_ExpectWithArrayAndReturn(
+    &test_connection_2,
+    sizeof(test_connection_2),
+    sizeof(test_expected_frame_data_2),
+    test_expected_frame_data_2,
+    sizeof(test_expected_frame_data_2),
+    &test_tx_options_2_multi_responses,
+    sizeof(test_tx_options_2_multi_responses),
+    NULL,
+    NULL,
+    sizeof(void *),
+    NULL,
+    SL_STATUS_OK);
+  // Connection is modified by the Tx Queue, ignore this here
+  zwave_controller_transport_send_data_IgnoreArg_connection();
+  zwave_controller_transport_send_data_IgnoreArg_session();
+  zwave_controller_transport_send_data_IgnoreArg_on_send_complete();
+  zwave_controller_transport_send_data_IgnoreArg_user();
+
+  // We are now waiting for more frames, or a transport callback.
+  contiki_test_helper_run(DEFAULT_CONTIKI_CLOCK_JUMP);
+
+  // Transmit ok
+  // call the callback from the transport for element 1:
+  on_zwave_transport_send_data_complete(TRANSMIT_COMPLETE_OK,
+                                        NULL,
+                                        test_tx_session_id_2);
+
+  // We should be in back-off.
+  contiki_test_helper_run(10);
+
+  // Receive a frame from another NodeID in the meantime:
+  zwave_controller_callbacks->on_rx_frame_received(
+    test_connection_2.remote.node_id + 1);
+
+  // We should still be in back-off.
+  contiki_test_helper_run(10);
+
+  // Receive a frame from our NodeID
+  zwave_controller_callbacks->on_rx_frame_received(
+    test_connection_2.remote.node_id);
+
+  // We should still be in back-off, we need 3 responses
+  contiki_test_helper_run(20);
+
+  // Tx Queue should try to send frame 3 now, back-off is over due to answer
+  zwave_controller_transport_send_data_ExpectWithArrayAndReturn(
+    &test_connection_3,
+    sizeof(test_connection_3),
+    sizeof(test_expected_frame_data_3),
+    test_expected_frame_data_3,
+    sizeof(test_expected_frame_data_3),
+    &test_tx_options_3,
+    sizeof(test_tx_options_3),
+    NULL,
+    NULL,
+    sizeof(void *),
+    NULL,
+    SL_STATUS_OK);
+  // Connection is modified by the Tx Queue, ignore this here
+  zwave_controller_transport_send_data_IgnoreArg_connection();
+  zwave_controller_transport_send_data_IgnoreArg_session();
+  zwave_controller_transport_send_data_IgnoreArg_on_send_complete();
+  zwave_controller_transport_send_data_IgnoreArg_user();
+
+  // Just run through the back-off here.
+  contiki_test_helper_run(TX_BACKOFF_CONTIKI_CLOCK_JUMP);
+
+  // There should be no effect if we receive a frame from a node while
+  // transmitting, when we don't expect any answer
+  zwave_controller_callbacks->on_rx_frame_received(
+    test_connection_3.remote.node_id);
+
+  // Get the clock incremented between transmit and callback
+  contiki_test_helper_run(DEFAULT_CONTIKI_CLOCK_JUMP);
+
+  // call the callback from the transport:
+  on_zwave_transport_send_data_complete(TRANSMIT_COMPLETE_OK,
+                                        NULL,
+                                        test_tx_session_id_3);
+
+  contiki_test_helper_run(0);
+
+  // Test we received the correct data in the callback
+  TEST_ASSERT_EQUAL(2, send_done_count);
+  TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_OK, send_done_status);
+}
+
+void test_reject_too_long_frames()
+{
+  // Try to send a frame of 65000 bytes. Should be rejected
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_tx_send_data(&test_connection_2,
+                                       65000,
+                                       test_expected_frame_data_2,
+                                       &test_tx_options_2_multi_responses,
+                                       send_data_callback,
+                                       NULL,
+                                       &test_tx_session_id_2));
+}
+
+void test_reject_frame_with_invalid_parent()
+{
+  // Try to send a frame whose parent is valid but not in the queue
+  const zwave_tx_options_t test_tx_options
+    = {.number_of_responses     = 1,
+       .discard_timeout_ms      = 400,
+       .qos_priority            = 20,
+       .fasttrack               = false,
+       .is_test_frame           = false,
+       .rf_power                = NORMAL_POWER,
+       .group_id                = ZWAVE_TX_INVALID_GROUP,
+       .is_first_follow_up      = false,
+       .send_follow_ups         = false,
+       .parent_session_id       = (zwave_tx_session_id_t)20,
+       .valid_parent_session_id = true};
+
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_tx_send_data(&test_connection_2,
+                                       sizeof(test_expected_frame_data_2),
+                                       test_expected_frame_data_2,
+                                       &test_tx_options,
+                                       send_data_callback,
+                                       NULL,
+                                       &test_tx_session_id_2));
+}
+
+void test_reject_frame_with_our_node_id_as_destination()
+{
+  // Make a connection with our NodeID as destination
+  const zwave_controller_connection_info_t test_connection = {
+    .local  = {.node_id = 1, .endpoint_id = 0, .is_multicast = false},
+    .remote = {.node_id = our_node_id, .endpoint_id = 2, .is_multicast = false},
+    .encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE,
+  };
+
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_tx_send_data(&test_connection,
+                                       sizeof(test_expected_frame_data_2),
+                                       test_expected_frame_data_2,
+                                       &test_tx_options_2,
+                                       send_data_callback,
+                                       NULL,
+                                       &test_tx_session_id_2));
+}
+
+void test_tx_logging_functions()
+{
+  // clang-format off
+  // This is just for shiny coverage numbers.
+
+  // Log the name of the tx state
+  TEST_ASSERT_EQUAL_STRING("ZWAVE_TX_STATE_IDLE", zwave_tx_state_name(ZWAVE_TX_STATE_IDLE));
+  TEST_ASSERT_EQUAL_STRING("ZWAVE_TX_STATE_TRANSMISSION_ONGOING", zwave_tx_state_name(ZWAVE_TX_STATE_TRANSMISSION_ONGOING));
+  TEST_ASSERT_EQUAL_STRING("ZWAVE_TX_STATE_BACKOFF", zwave_tx_state_name(ZWAVE_TX_STATE_BACKOFF));
+  TEST_ASSERT_EQUAL_STRING("23", zwave_tx_state_name(23));
+
+  // Log the name of the contiki events
+  TEST_ASSERT_EQUAL_STRING("ZWAVE_TX_SEND_NEXT_MESSAGE", zwave_tx_event_name(ZWAVE_TX_SEND_NEXT_MESSAGE));
+  TEST_ASSERT_EQUAL_STRING("ZWAVE_TX_SEND_OPERATION_COMPLETE", zwave_tx_event_name(ZWAVE_TX_SEND_OPERATION_COMPLETE));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_NONE", zwave_tx_event_name(PROCESS_EVENT_NONE));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_INIT", zwave_tx_event_name(PROCESS_EVENT_INIT));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_POLL", zwave_tx_event_name(PROCESS_EVENT_POLL));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_EXIT", zwave_tx_event_name(PROCESS_EVENT_EXIT));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_SERVICE_REMOVED", zwave_tx_event_name(PROCESS_EVENT_SERVICE_REMOVED));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_CONTINUE", zwave_tx_event_name(PROCESS_EVENT_CONTINUE));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_MSG", zwave_tx_event_name(PROCESS_EVENT_MSG));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_EXITED", zwave_tx_event_name(PROCESS_EVENT_EXITED));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_TIMER", zwave_tx_event_name(PROCESS_EVENT_TIMER));
+  TEST_ASSERT_EQUAL_STRING("PROCESS_EVENT_COM", zwave_tx_event_name(PROCESS_EVENT_COM));
+  TEST_ASSERT_EQUAL_STRING("20", zwave_tx_event_name(20));
+  // clang-format on
 }

@@ -312,8 +312,11 @@ void test_zwave_command_class_switch_binary_probe_state_v1_report()
   // Verify that the data is according to the report frame
   attribute_store_get_reported(value_node, &u32_value, sizeof(u32_value));
   TEST_ASSERT_EQUAL(0xFF, u32_value);
-  TEST_ASSERT_FALSE(
+
+  // No target value, the desired will be aligned with the reported.
+  TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(value_node, DESIRED_ATTRIBUTE));
+  TEST_ASSERT_TRUE(attribute_store_is_value_matched(value_node));
 
   TEST_ASSERT_FALSE(
     attribute_store_is_value_defined(duration_node, REPORTED_ATTRIBUTE));

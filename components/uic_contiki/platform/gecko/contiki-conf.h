@@ -10,6 +10,7 @@
 
 #include <inttypes.h>
 #include "FreeRTOSConfig.h"
+#include "projdefs.h"
 #include "portmacro.h"
 
 #define CC_CONF_REGISTER_ARGS           1

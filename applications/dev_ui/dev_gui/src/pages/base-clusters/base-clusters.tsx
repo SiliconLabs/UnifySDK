@@ -253,7 +253,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
                   <tr className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable") ? "disabled" : ""}>
                     <td>
                       <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
-                      <EditableAttribute Unid={`${item.Unid}/${item.Ep}`} Cluster={item.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} />
+                      <EditableAttribute Node={item} EpName={item.Ep} Cluster={item.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
                     </td>
                     {this.props.ClusterViewOverrides?.ViewTable?.map((column, colIndex) => {
                       return <td key={colIndex}>{column.Value(item, this.getColorPicker)}</td>
@@ -273,7 +273,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
                     </td>
                     <td className="text-center">
                       <Tooltip title="Customize Attributes">
-                        <span className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" || !item.Attributes) ? "margin-h-5 icon cursor-defult disabled" : "margin-h-5 icon"}>
+                        <span className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" || !item.Attributes) ? "margin-h-5 icon cursor-default disabled" : "margin-h-5 icon"}>
                           <AiIcons.AiOutlineTool onClick={() => this.showClusterAttr(item)} />
                         </span>
                       </Tooltip>

@@ -44,6 +44,13 @@ export const NavbarItems: NavbarItem[] = [
     cName: 'nav-text'
   },
   {
+    name: 'Configuration Parameters',
+    title: 'Configuration Parameters',
+    path: '/configurationparameters',
+    icon: <MdIcons.MdOutlineSettingsApplications />,
+    cName: 'nav-text'
+  },
+  {
     name: 'Locators',
     title: 'Locators',
     path: '/locators',

@@ -154,7 +154,7 @@ static void {{asSnakeCaseLower label}}_cluster_attrs_reported_state_publisher_ca
               base_topic.str().c_str(),
               static_cast<{{asUnderlyingType type}}>( str_reported.c_str() ),
               attr.desired_exists() ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
-          {{else}}           
+          {{else}}
             {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
               base_topic.str().c_str(),
               static_cast<{{asUnderlyingType type}}>(attr.reported<int32_t>()),
@@ -269,11 +269,11 @@ static void {{asSnakeCaseLower label}}_cluster_attrs_creation_callback(
   }
 
   if (change == ATTRIBUTE_DELETED) {
-    // If the an attribute under a given cluster is deleted, we beleive
+    // If the an attribute under a given cluster is deleted, we believe
     // that the mapper engine will delete all attributes per the cluster
-    // therefore we unretain the ClusterRevision mqtt publish
+    // therefore we unretain the ClusterRevision mqtt publication
      if ((uic_mqtt_count_topics(revision_topic.str().c_str()) != 0)) {
-      uic_mqtt_unretain_by_regex(revision_topic.str().c_str());
+      uic_mqtt_unretain(revision_topic.str().c_str());
     }
   }
 }
@@ -351,7 +351,7 @@ static void on_pan_node_interview_done(attribute_store_node_t updated_node,
             uic_mqtt_publish(topic_no_commands.c_str(), message.c_str(), message.size(), true);
           }
           {{else}}
-          uic_mqtt_unretain_by_regex(topic_no_commands.c_str());
+          uic_mqtt_unretain(topic_no_commands.c_str());
           {{/if}}
       }
       {{/zcl_clusters}}

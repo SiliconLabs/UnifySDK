@@ -7,4 +7,6 @@ license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor
 [dependencies]
 unify_middleware = { path = "../../../../components/uic_rust/unify_middleware" }
 unify_log_sys = { path = "../../../../components/uic_rust/unify_log_sys" }
+unify_tools = { path = "../../../../components/uic_rust/unify_tools" }
+mockall = "0.11.*"
 futures = "0.3.*"

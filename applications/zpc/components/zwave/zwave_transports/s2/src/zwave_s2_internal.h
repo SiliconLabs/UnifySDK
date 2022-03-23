@@ -88,7 +88,18 @@ sl_status_t zwave_s2_on_frame_received(
  *
  * @param group_id        The Z-Wave Group ID that is to be re-shuffled
  */
-void zwave_s2_on_on_multicast_group_deleted(zwave_multicast_group_id_t group_id);
+void zwave_s2_on_on_multicast_group_deleted(
+  zwave_multicast_group_id_t group_id);
+
+/**
+ * @brief Z-Wave controller transport callback function which
+ *        will be triggered when S2 frame tranmission is aborted.
+ * @param session_id The session id of the frame which has been aborted.
+ *
+ * @return SL_STATUS_OK to indicate that ongoing session are aborted.
+ * @return SL_STATUS_NOT_FOUND to indicate that no transmission was ongoing.
+ */
+sl_status_t zwave_s2_abort_send_data(zwave_tx_session_id_t session_id);
 
 #ifdef __cplusplus
 }

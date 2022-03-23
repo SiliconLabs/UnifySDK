@@ -43,6 +43,7 @@
 //! ```rust, no_run
 //! # use unify_attribute_poll::*;
 //! # use unify_middleware::unify_attribute_store::Attribute;
+//! # use crate::unify_attribute_poll::attribute_poll_trait::AttributePollTrait;
 //! # // Initialize the Poll Engine, this shall only be done once.
 //! let attribute_poll = AttributePoll::default();
 //! # attribute_poll.initialize(PollEngineConfig{backoff: 30, default_interval: 60});
@@ -55,49 +56,22 @@
 //! // Stop polling the attribute
 //! attribute_poll.deregister(my_attribute.clone());
 //! ```
-//!
 extern crate alloc;
 mod attribute_poll;
+pub mod attribute_poll_trait;
 mod attribute_watcher;
+mod attribute_watcher_trait;
+mod c_interface;
 mod poll_engine;
 mod poll_entries;
+mod poll_queue_trait;
 
 #[doc(inline)]
 pub use attribute_poll::AttributePoll;
+use attribute_poll_trait::IntervalType;
 use unify_attribute_store_sys::*;
 use unify_middleware::Attribute;
 use unify_sl_status_sys::*;
-
-/// Type for time intervals in seconds
-type IntervalType = u32;
-
-#[mockall::automock]
-/// Interface for the Attribute Poll engine.
-pub trait AttributePollTrait {
-    /// initializes the `Poll Engine`. Secondarily it will set the state of to
-    /// running. e.g. `resume` is not required to be explicitly called. With the
-    /// configuration file the poll behavior can be influenced; The rules for
-    /// timer scheduling are:
-    /// * If deadline of `next` entry < `last_poll` + `backoff`, queue timeout
-    ///   for in `backoff` seconds,
-    /// * else queue timeout for deadline of `next` entry.
-    fn initialize(&self, config: PollEngineConfig);
-    /// Adds a [Attribute] to the `Poll Engine` with a given interval.
-    /// Internally it will recalculate the next deadline and reschedule poll
-    /// timeouts accordingly
-    fn register(&self, attribute: Attribute, interval: IntervalType);
-    /// removes an attribute from the `Poll Engine`. Does nothing if the entry
-    /// does not exist.
-    fn deregister(&self, attribute: Attribute);
-    /// similar to register, only that no interval is given, meaning the attribute will be polled on the first available moment
-    fn queue(&self, attribute: Attribute);
-    /// re-inserts the attribute at the current time to the poll queue with the interval it was given at time of registering.
-    fn restart(&self, attribute: Attribute);
-    /// no attributes will be polled. When the `Poll Engine` is paused it can still receive other commands
-    fn pause(&self);
-    /// attributes will be polled again.
-    fn resume(&self);
-}
 
 /// Configuration for the PollEngine
 #[derive(Debug)]
@@ -106,77 +80,4 @@ pub struct PollEngineConfig {
     pub backoff: IntervalType,
     /// Default "ideal" poll interval
     pub default_interval: IntervalType,
-}
-
-/// C interface for the Attribute Poll Engine wrapping (inlcude/attribute_poll.h)
-mod c_interface {
-    use super::*;
-
-    #[no_mangle]
-    pub unsafe extern "C" fn attribute_poll_register(
-        handle: attribute_store_node_t,
-        interval: IntervalType,
-    ) -> sl_status_t {
-        if let Ok(attribute) = Attribute::new_from_handle(handle) {
-            AttributePoll::default().register(attribute, interval);
-            SL_STATUS_OK
-        } else {
-            SL_STATUS_FAIL
-        }
-    }
-
-    #[no_mangle]
-    pub unsafe extern "C" fn attribute_poll_deregister(
-        handle: attribute_store_node_t,
-    ) -> sl_status_t {
-        if let Ok(attribute) = Attribute::new_from_handle(handle) {
-            AttributePoll::default().deregister(attribute);
-            SL_STATUS_OK
-        } else {
-            SL_STATUS_FAIL
-        }
-    }
-
-    #[no_mangle]
-    pub unsafe extern "C" fn attribute_poll_schedule(
-        handle: attribute_store_node_t,
-    ) -> sl_status_t {
-        if let Ok(attribute) = Attribute::new_from_handle(handle) {
-            AttributePoll::default().queue(attribute);
-            SL_STATUS_OK
-        } else {
-            SL_STATUS_FAIL
-        }
-    }
-
-    #[no_mangle]
-    pub extern "C" fn attribute_poll_init() -> sl_status_t {
-        // Fixme:Both backoff and default interval config should be parameters of
-        // the init function instead of reading from config. (will be fixed in UIC-1526).
-        // FYI: Currently, the Poll Engine is used only via ZPC.
-        if let Ok(backoff) = unify_config_sys::config_get_as_int("zpc.poll.backoff") {
-            if let Ok(default_interval) =
-                unify_config_sys::config_get_as_int("zpc.poll.default_interval")
-            {
-                AttributePoll::default().initialize(PollEngineConfig {
-                    backoff: backoff as u32,
-                    default_interval: default_interval as u32,
-                });
-                return SL_STATUS_OK;
-            }
-        }
-        SL_STATUS_FAIL
-    }
-
-    #[no_mangle]
-    pub unsafe extern "C" fn attribute_poll_disable() -> sl_status_t {
-        AttributePoll::default().pause();
-        SL_STATUS_OK
-    }
-
-    #[no_mangle]
-    pub unsafe extern "C" fn attribute_poll_enable() -> sl_status_t {
-        AttributePoll::default().resume();
-        SL_STATUS_OK
-    }
 }

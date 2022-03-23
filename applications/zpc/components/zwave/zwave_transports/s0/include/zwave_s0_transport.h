@@ -29,7 +29,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#define COMMAND_CLASS_SECURITY 0x98
+#define COMMAND_CLASS_SECURITY         0x98
 #define COMMAND_CLASS_SECURITY_VERSION 1
 /**
  * @brief Sending an S0 encapsulated frame.
@@ -100,6 +100,16 @@ sl_status_t zwave_s0_transport_init(void);
  * @param network_key S0 Key (Class 80) read from S2 keystore
  */
 void s0_set_key(const uint8_t *network_key);
+
+/**
+ * @brief Z-Wave controller transport callback function which
+ *        will be triggered when S0 frame tranmission is aborted.
+ * @param session_id The session id of the frame which has been aborted.
+ *
+ * @return SL_STATUS_OK to indicate that ongoing session are aborted.
+ * @return SL_STATUS_NOT_FOUND to indicate that no transmission was ongoing.
+ */
+sl_status_t zwave_s0_on_abort_send_data(zwave_tx_session_id_t session_id);
 
 #ifdef __cplusplus
 }

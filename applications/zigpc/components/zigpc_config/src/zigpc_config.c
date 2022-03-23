@@ -30,6 +30,8 @@ static const bool DEFAULT_USE_TC_WELL_KNOWN_KEY = false;
 
 static const char *CONFIG_KEY_ZIGPC_DATASTORE_FILE = "zigpc.datastore_file";
 static const char *DEFAULT_ZIGPC_DATASTORE_FILE    = UIC_VAR_DIR "/zigpc.db";
+static const char *CONFIG_KEY_ZIGPC_NCP_FIRMWARE_PATH = "zigpc.ncp_firmware_path";
+static const char *CONFIG_FLAG_ZIGPC_NCP_UPDATE = "zigpc.ncp_update";
 
 static zigpc_config_t config;
 int zigpc_config_init()
@@ -55,6 +57,15 @@ int zigpc_config_init()
     |= config_add_bool(CONFIG_KEY_ZIGPC_USE_TC_WELL_KNOWN_KEY,
                        "Allow Trust Center joins using well-known link key",
                        DEFAULT_USE_TC_WELL_KNOWN_KEY);
+
+  status |= config_add_flag(
+                CONFIG_FLAG_ZIGPC_NCP_UPDATE, 
+                "Flag to initiate an NCP firmware update");
+
+  status |= config_add_string(
+                CONFIG_KEY_ZIGPC_NCP_FIRMWARE_PATH,
+                "Path to firmware to update NCP",
+                ""); //No default path
 
   return status != CONFIG_STATUS_OK;
 }

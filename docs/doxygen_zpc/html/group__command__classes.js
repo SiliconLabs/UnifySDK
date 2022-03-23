@@ -11,7 +11,7 @@ var group__command__classes =
     [ "Basic Command Class", "group__zwave__command__class__basic.html", "group__zwave__command__class__basic" ],
     [ "Binary Switch Command Class", "group__binary__switch__command__class.html", "group__binary__switch__command__class" ],
     [ "Central Scene Command Class", "group__zwave__command__class__central__scene.html", "group__zwave__command__class__central__scene" ],
-    [ "Configuration Command Class", "group__zwave__command__class__configuration.html", null ],
+    [ "Configuration Command Class", "group__zwave__command__class__configuration.html", "group__zwave__command__class__configuration" ],
     [ "Device Reset Locally Command Class", "group__device__reset__locally__command__class.html", "group__device__reset__locally__command__class" ],
     [ "Inclusion Controller Command Class", "group__zwave__command__class__inclusion__controller.html", "group__zwave__command__class__inclusion__controller" ],
     [ "Indicator Command Class Support", "group__zwave__command__class__indicator__support.html", "group__zwave__command__class__indicator__support" ],

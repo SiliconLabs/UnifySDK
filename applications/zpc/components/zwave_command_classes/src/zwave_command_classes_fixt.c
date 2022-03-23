@@ -17,6 +17,7 @@
 #include "zwave_command_class_agi.h"
 #include "zwave_command_class_binary_switch.h"
 #include "zwave_command_class_central_scene.h"
+#include "zwave_command_class_configuration.h"
 #include "zwave_command_class_indicator.h"
 #include "zwave_command_class_manufacturer_specific.h"
 #include "zwave_command_class_multilevel_sensor.h"
@@ -68,6 +69,7 @@ sl_status_t zwave_command_classes_init()
   initialization_status |= zwave_command_class_association_init();
   initialization_status |= zwave_command_class_binary_switch_init();
   initialization_status |= zwave_command_class_central_scene_init();
+  initialization_status |= zwave_command_class_configuration_init();
   initialization_status |= zwave_command_class_indicator_init();
   initialization_status |= zwave_command_class_manufacturer_specific_init();
   initialization_status |= zwave_command_class_multi_channel_init();

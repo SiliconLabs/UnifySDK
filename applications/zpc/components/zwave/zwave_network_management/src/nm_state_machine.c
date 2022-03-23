@@ -256,12 +256,23 @@ static void network_management_refresh_cached_ids()
   zwapi_memory_get_ids(&nms.cached_home_id, &nms.cached_local_node_id);
 }
 
+/**
+ * @brief Asks the Z-Wave API about the list of NodeIDs in our network
+ *
+ * Should be used only when necessary, as communicating with the Z-Wave API
+ * is slow.
+ */
 static void network_management_refresh_cached_node_list()
 {
   zwapi_get_full_node_list(nms.cached_node_list);
 }
 
-static void dispatch_node_added(bool refresh_node_cache)
+/**
+ * @brief Tell the Z-Wave Controller that a Network Inclusion operation
+ * has completed and returns the NM state machine to IDLE.
+ *
+ */
+static void dispatch_node_added()
 {
   zwave_controller_on_node_added(SL_STATUS_OK,
                                  &nms.node_info,
@@ -270,9 +281,7 @@ static void dispatch_node_added(bool refresh_node_cache)
                                  nms.granted_keys,
                                  nms.kex_fail_type,
                                  nms.inclusion_protocol);
-  if (refresh_node_cache) {
-    network_management_refresh_cached_node_list();
-  }
+  network_management_refresh_cached_node_list();
   nms.state                = NM_IDLE;
   nms.proxy_inclusion_step = 0;
 }
@@ -722,14 +731,24 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           on_remove_failed_status_update(ZW_FAILED_NODE_NOT_REMOVED);
         }
       } else if (ev == NM_EV_TIMEOUT) {
-        sl_log_error(LOG_TAG,
-                     "Timed out in getting any kind of callback in"
-                     " response to sending NOP to NodeID: %d\n",
-                     nms.node_id_being_handled);
-        on_remove_failed_status_update(ZW_FAILED_NODE_NOT_REMOVED);
+        if (nms.state == NM_WAIT_FOR_TX_TO_SELF_DESTRUCT) {
+          nms.kex_fail_type = ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN;
+          dispatch_node_added();
+        } else {
+          sl_log_error(LOG_TAG,
+                       "Timed out in getting any kind of callback in"
+                       " response to sending NOP to NodeID: %d\n",
+                       nms.node_id_being_handled);
+          on_remove_failed_status_update(ZW_FAILED_NODE_NOT_REMOVED);
+        }
         nms.state = NM_IDLE;
       } else if (ev == NM_EV_NOP_SUCCESS) {
-        on_remove_failed_status_update(ZW_FAILED_NODE_NOT_REMOVED);
+        if (nms.state == NM_WAIT_FOR_TX_TO_SELF_DESTRUCT) {
+          nms.kex_fail_type = ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN;
+          dispatch_node_added();
+        } else {
+          on_remove_failed_status_update(ZW_FAILED_NODE_NOT_REMOVED);
+        }
         nms.state = NM_IDLE;
       } else if (ev == NM_EV_ABORT) {
         // Abort the Remove Failed Operation
@@ -874,7 +893,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           // None secure inclusion is performed, therefore, we set the granted key to zero
           nms.granted_keys  = 0;
           nms.kex_fail_type = 0;
-          dispatch_node_added(false);
+          dispatch_node_added();
         }
       } else if (ev == NM_EV_TIMEOUT || ev == NM_EV_ADD_FAILED
                  || ev == NM_EV_ADD_NOT_PRIMARY) {
@@ -899,13 +918,13 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
     case NM_WAIT_FOR_SECURE_ADD:
       if (ev == NM_EV_SECURITY_DONE) {
         if (nms.kex_fail_type == ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE) {
-          dispatch_node_added(true);
+          dispatch_node_added();
         } else if (nms.flags & NMS_FLAG_SMART_START_INCLUSION) {
           nms.state = NM_SEND_NOP;
           etimer_set(&nms.timer, SMART_START_SELF_DESTRUCT_TIMEOUT);
           break;
         } else {
-          dispatch_node_added(true);
+          dispatch_node_added();
         }
       } else if (ev == NM_EV_ADD_SECURITY_REQ_KEYS) {  //kex report arrived
         // We dont leave the NM_WAIT_FOR_SECURE_ADD here because
@@ -1082,8 +1101,8 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
                      "Self Destruct/Removal Failed operation "
                      "failed\n");
         if (nms.state == NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL) {
-          zwave_controller_on_error(
-            ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_SECURITY_FAIL);
+          nms.kex_fail_type = ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN;
+          dispatch_node_added();
         } else {
           zwave_controller_on_error(
             ZWAVE_NETWORK_MANAGEMENT_ERROR_FAILED_NODE_REMOVE_FAIL);
@@ -1096,8 +1115,8 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
                      "Timed out waiting for zwapi_remove_failed_node() of "
                      "self-destruct/remove-failed node\n");
         if (nms.state == NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL) {
-          zwave_controller_on_error(
-            ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_SECURITY_FAIL);
+          nms.kex_fail_type = ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN;
+          dispatch_node_added();
         } else {
           zwave_controller_on_error(
             ZWAVE_NETWORK_MANAGEMENT_ERROR_FAILED_NODE_REMOVE_FAIL);
@@ -1179,6 +1198,11 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
     nms.node_id_being_handled = 0;
     nms.flags                 = 0;
     nms.inclusion_protocol    = PROTOCOL_ZWAVE;
+    nms.requested_csa         = 0;
+    nms.requested_keys        = 0;
+    nms.kex_fail_type         = 0;
+    memset(nms.reported_dsk, 0, sizeof(zwave_dsk_t));
+    memset(nms.expected_dsk, 0, sizeof(zwave_dsk_t));
 
     // Restart SmartStart on the Z-Wave module if idle and SmartStart is enabled.
     if (nms.smart_start_enabled) {

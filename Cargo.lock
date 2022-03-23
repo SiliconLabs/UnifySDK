@@ -32,6 +32,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "async-trait"
+version = "0.1.52"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "061a7acccaa286c011ddc30970520b98fa40e00c9d644633fb26b5fc63a265e3"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "atty"
 version = "0.2.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -103,7 +114,7 @@ name = "cargo-bindgen"
 version = "0.0.1"
 dependencies = [
  "bindgen",
- "clap 3.0.10",
+ "clap 3.1.0",
  "exitcode",
  "gag",
  "glob",
@@ -173,9 +184,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "3.0.10"
+version = "3.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a30c3bf9ff12dfe5dae53f0a96e0febcd18420d1c0e7fad77796d9d5c4b5375"
+checksum = "e5f1fea81f183005ced9e59cdb01737ef2423956dac5a6d731b06b2ecfaa3467"
 dependencies = [
  "atty",
  "bitflags",
@@ -1155,6 +1166,7 @@ dependencies = [
  "unify_log_sys",
  "unify_middleware",
  "unify_sl_status_sys",
+ "unify_validator_sys",
 ]
 
 [[package]]
@@ -1179,14 +1191,16 @@ dependencies = [
 name = "uic-nal"
 version = "0.0.1"
 dependencies = [
- "json",
  "mockall",
+ "regex",
  "rusqlite",
+ "serde_json",
  "serial_test",
  "unify_config_sys",
  "unify_log_sys",
  "unify_middleware",
  "unify_sl_status_sys",
+ "unify_validator_sys",
 ]
 
 [[package]]
@@ -1200,6 +1214,19 @@ dependencies = [
  "lazy_static",
  "serial_test",
  "stoppable_thread",
+ "unify_config_sys",
+ "unify_log_sys",
+ "unify_middleware",
+ "unify_sl_status_sys",
+]
+
+[[package]]
+name = "uic-upti-writer"
+version = "0.0.1"
+dependencies = [
+ "chrono",
+ "json",
+ "mockall",
  "unify_config_sys",
  "unify_log_sys",
  "unify_middleware",
@@ -1237,6 +1264,7 @@ checksum = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
 name = "unify_attribute_poll"
 version = "0.1.0"
 dependencies = [
+ "async-trait",
  "futures",
  "futures-test",
  "mockall",
@@ -1353,6 +1381,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "unify_validator_sys"
+version = "0.0.1"
+dependencies = [
+ "unify_tools",
+]
+
+[[package]]
 name = "vcpkg"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1438,8 +1473,10 @@ name = "zpc_attribute_store"
 version = "0.1.0"
 dependencies = [
  "futures",
+ "mockall",
  "unify_log_sys",
  "unify_middleware",
+ "unify_tools",
 ]
 
 [[package]]

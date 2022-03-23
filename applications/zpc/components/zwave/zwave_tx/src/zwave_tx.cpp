@@ -53,7 +53,7 @@ sl_status_t
   }
 
   // Copy all the user parameters in a queue element
-  zwave_tx_queue_element_t new_element = {0};
+  zwave_tx_queue_element_t new_element = {};
 
   // Frame length validation.
   if (data_length > sizeof(new_element.data)) {
@@ -139,7 +139,7 @@ sl_status_t
   }
 
   if (SL_STATUS_OK == tx_queue.enqueue(new_element, session)) {
-    process_post(&zwave_tx_process, ZWAVE_TX_SEND_NEXT_MESSAGE, 0);
+    process_post(&zwave_tx_process, ZWAVE_TX_SEND_NEXT_MESSAGE, nullptr);
     return SL_STATUS_OK;
   }
 

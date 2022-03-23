@@ -20,6 +20,7 @@ unify_log_sys = { path = "../../components/uic_rust/unify_log_sys" }
 unify_config_sys = { path = "../../components/uic_rust/unify_config_sys" }
 unify_middleware = {path = "../../components/uic_rust/unify_middleware" }
 unify_sl_status_sys = {path = "../../components/uic_rust/unify_sl_status_sys" }
+unify_validator_sys = { path = "../../components/uic_rust/unify_validator_sys" }
 
 
 [dev-dependencies]

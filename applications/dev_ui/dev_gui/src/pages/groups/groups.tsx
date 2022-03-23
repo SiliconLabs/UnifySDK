@@ -182,13 +182,13 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
                     </td>
                     <td>
                       <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={failedPopover}>
-                        <span hidden={!item.FailedNodes.length} className="icon margin-h-5 cursor-defult"><AiIcons.AiOutlineWarning color="orange" /></span>
+                        <span hidden={!item.FailedNodes.length} className="icon margin-h-5 cursor-default"><AiIcons.AiOutlineWarning color="orange" /></span>
                       </OverlayTrigger>
                       {item.Count}
                     </td>
                     <td className="text-center">
                       <Tooltip title="Run Command">
-                        <span className={item.FailedNodes.length === item.Count ? `cursor-defult disabled margin-h-5 icon` : `margin-h-5 icon`} >
+                        <span className={item.FailedNodes.length === item.Count ? `cursor-default disabled margin-h-5 icon` : `margin-h-5 icon`} >
                           <FiIcons.FiCommand onClick={() => { if (item.FailedNodes.length !== item.Count) this.choiceGroupCommand(item) }} />
                         </span>
                       </Tooltip>

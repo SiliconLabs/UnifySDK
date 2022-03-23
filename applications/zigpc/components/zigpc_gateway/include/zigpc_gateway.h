@@ -246,6 +246,8 @@ size_t zigpc_gateway_get_counters_capacity();
  */
 void zigpc_gateway_clear_counters();
 
+sl_status_t zigpc_gateway_bootload_restart();
+
 #ifdef __cplusplus
 }
 #endif

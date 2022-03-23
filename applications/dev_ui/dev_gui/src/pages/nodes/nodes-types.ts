@@ -1,7 +1,12 @@
+import { LocalStorage } from "../../app-types";
+
+export const DeviceTypes = new Map<string, string>([["Any", "Any"], ["ble", "Bluetooth"], ["zb", "Zigbee"], ["zw", "ZWave"]]);
+
 export type NodesProps = {
   NodeList: any[],
   SocketServer: WebSocket,
-  IsConnected: boolean | null
+  IsConnected: boolean | null,
+  Storage: LocalStorage
 }
 
 export type NodesState = {
@@ -13,5 +18,10 @@ export type NodesState = {
   RequestedData: any,
   Filter: string,
   ProcessingNode: string | null,
-  InclusionProccess: boolean
+  InclusionProccess: boolean,
+  DeviceTypes: Map<string, string>;
+  DeviceType: string;
+  SortName: string,
+  IsSortAcs: boolean,
+  IsExtendedView: boolean
 }

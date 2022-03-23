@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Button, Col, Dropdown, DropdownButton, Form, InputGroup, Modal, Row, Table } from 'react-bootstrap';
 import * as GrIcons from 'react-icons/gr';
+import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
 import * as MdIcons from 'react-icons/md';
 import Tooltip from '@material-ui/core/Tooltip';
-import { NodesProps, NodesState } from './nodes-types';
+import { DeviceTypes, NodesProps, NodesState } from './nodes-types';
 import { NodeTypesList } from '../../cluster-types/cluster-types';
 import { ClusterViewOverrides } from '../base-clusters/cluster-view-overrides';
 import { toast } from 'react-toastify';
@@ -13,6 +14,10 @@ import './nodes.css';
 import ClusterTypeTooltip from '../../components/cluster-type-tooltip/cluster-type-tooltip';
 import { MenuItem, TextField } from '@material-ui/core';
 import EditableAttribute from '../../components/editable-attribute/editable-attribute';
+import { Link } from 'react-router-dom';
+//import { FormControlLabel, Switch } from '@mui/material';
+import { ClusterTypeAttrs } from '../../cluster-types/cluster-type-attributes';
+import CommandDlg from '../../components/command-dlg/command-dlg';
 
 export class Nodes extends React.Component<NodesProps, NodesState> {
   constructor(props: NodesProps) {
@@ -26,13 +31,21 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
       RequestedData: {},
       Filter: "",
       ProcessingNode: null,
-      InclusionProccess: false
+      InclusionProccess: false,
+      SortName: "Unid",
+      IsSortAcs: true,
+      DeviceTypes: DeviceTypes,
+      DeviceType: "Any",
+      IsExtendedView: props.Storage.Get()?.IsExtendedView || false
     };
     this.search = this.search.bind(this);
     this.handleDskChange = this.handleDskChange.bind(this);
     this.getDSK = this.getDSK.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.changeCommandDlg = React.createRef();
   }
+  changeCommandDlg: any;
+  ClusterTypeAttrs = ClusterTypeAttrs;
 
   searchEvent(event: any) {
     this.setState({ Filter: event.target.value }, () => this.search(this.props.NodeList));
@@ -57,9 +70,31 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
         this.setState({ RequestedData: data, ShowRemoveModal: true });
   }
 
-  search(list: any[]) {
-    let filtered = list.filter(i => i.Unid.toLowerCase().includes(this.state.Filter.toLowerCase()));
-    this.setState({ NodeList: filtered });
+  search(list: any[], deviceType?: string) {
+    let filtered: any[] = [];
+    let deviceTypes: Map<string, string> = DeviceTypes;
+    deviceType = deviceType || this.state.DeviceType;
+    list.forEach(i => {
+      let deviceFilter = [...DeviceTypes].find(([k, v]) => v === deviceType);
+      let devType = (deviceFilter && deviceFilter[0]) || deviceType?.toLowerCase();
+      if ((!deviceType || deviceType === "Any" || i.Unid.toLowerCase().startsWith(devType)) && (i.Unid.toLowerCase().includes(this.state.Filter.toLowerCase())
+        || (
+          i.ep !== undefined && Object.keys(i.ep).filter(
+            (ep: any) => i.ep[ep].Clusters?.NameAndLocation?.Attributes?.Name?.Reported?.toLowerCase().includes(this.state.Filter.toLowerCase())
+              || i.ep[ep].Clusters?.NameAndLocation?.Attributes?.Location?.Reported?.toLowerCase().includes(this.state.Filter.toLowerCase())).length > 0
+        )))
+        filtered.push(i);
+      let parsedUnid = i.Unid.split("-");
+      if (parsedUnid.length > 1 && !deviceTypes.has(parsedUnid[0].toLowerCase()))
+        deviceTypes.set(parsedUnid[0].toLowerCase(), parsedUnid[0].toUpperCase());
+    });
+
+    filtered = filtered.sort((i, j) => {
+      return i[this.state.SortName].localeCompare(j[this.state.SortName]);
+    });
+    if (!this.state.IsSortAcs)
+      filtered = filtered.reverse();
+    this.setState({ NodeList: filtered, DeviceTypes: deviceTypes, DeviceType: deviceType });
   }
 
   runStateCommand(unid: string, cmdType: string, cmd: string) {
@@ -109,8 +144,17 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
   getTooltip(type: any) {
     if (type === NodeTypesList.ProtocolController)
-      return <Tooltip title="Protocol Controller"><span className="icon cursor-defult"><GrIcons.GrNodes /></span></Tooltip>
+      return <Tooltip title="Protocol Controller"><span className="icon cursor-default"><GrIcons.GrNodes /></span></Tooltip>
     return (ClusterViewOverrides as any)[type]?.NodesTooltip || (NodeTypesList as any)[type] || "Unknown";
+  }
+
+  getLocationList = () => {
+    let list: Set<string> = new Set<string>();
+    this.state.NodeList.forEach(node => node.ep && Object.keys(node.ep).forEach(endPoint => {
+      if (node.ep[endPoint].Clusters?.NameAndLocation?.Attributes?.Location?.Reported)
+        list.add(node.ep[endPoint].Clusters.NameAndLocation.Attributes.Location.Reported);
+    }));
+    return [...list];
   }
 
   getDSK() {
@@ -132,56 +176,120 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
       : <></>}
   </>
 
-  getRow = (item: any, index: number, epName: string = "", ep: any = null, indexEp: number = -1, span: number = 1) => {
+  getRow = (item: any, index: number, epName: string = "", ep: any = null, indexEp: number = -1, endPointsCount: number = 1, clustersCount: number = 0) => {
     let tdClassName = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
-    return (<tr key={`${index}-${indexEp}`}>
-      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>{item.Unid}</td>
-      <td className={`${tdClassName} vertical-middle`}>{epName}</td>
-      <td className={`${tdClassName} flex padding-v-20`} >{(item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1)
-        ? <><Tooltip title="Protocol Controller" ><span className="icon cursor-defult"><GrIcons.GrNodes /></span></Tooltip>
-          <Tooltip hidden={!item.RFTelemetry} title="RF Telemetry" ><span className="icon cursor-defult"><MdIcons.MdOutlineTransform color="black" /></span></Tooltip></>
-        : ep && <ClusterTypeTooltip Ep={[ep]} />}
-      </td>
-      <td className={`${tdClassName} vertical-middle`}>
-        {item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1
-          ? ""
-          : <EditableAttribute Unid={`${item.Unid}/${epName}`} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} />}
-      </td>
-      <td className={`${tdClassName} vertical-middle`}>
-        {item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1
-          ? ""
-          : <EditableAttribute Unid={`${item.Unid}/${epName}`} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Location" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} />}
-      </td>
-      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>
-        <div className="flex">
-          <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
-          <div> {item.NetworkStatus}</div>
-        </div>
-      </td>
-      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>
-        <div className="flex">
-          <div>
-            <div className={`dot-icon ${item.Security?.toLocaleLowerCase().includes("s2") ? "s2-security" : (item.Security?.toLocaleLowerCase().includes("s0") ? "s0-security" : "none-security")}`}></div>
+
+    return (<Fragment key={`${index}-${indexEp}`}>
+      <tr>
+        <td className={`${tdClassName} vertical-middle`} rowSpan={endPointsCount + clustersCount} hidden={indexEp > 0}>{item.Unid}</td>
+        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView && ep?.Clusters ? Object.keys(ep.Clusters).length + 1 : 1}>{epName}</td>
+        <td className={`${tdClassName} flex padding-v-20`} >{(item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1)
+          ? <><Tooltip title="Protocol Controller" ><span className="icon cursor-default"><GrIcons.GrNodes /></span></Tooltip>
+            <Tooltip hidden={!item.RFTelemetry} title="RF Telemetry" ><span className="icon cursor-default"><Link to={`/rftelemetry`}><MdIcons.MdOutlineTransform color="black" /></Link></span></Tooltip></>
+          : ep && <ClusterTypeTooltip Ep={[ep]} />}
+        </td>
+        <td className={`${tdClassName} vertical-middle`}>
+          <EditableAttribute Node={item} EpName={epName} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name"
+            SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
+        </td>
+        <td className={`${tdClassName} vertical-middle`}>
+          <EditableAttribute Node={item} EpName={epName} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Location"
+            SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} GetOptions={this.getLocationList} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
+        </td>
+        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>
+          <div className="flex">
+            <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
+            <div> {item.NetworkStatus}</div>
           </div>
-          <div>{item.Security}</div>
-        </div>
-      </td>
-      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>{item.MaximumCommandDelay}</td>
-      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>{item.State}</td>
-      <td className={`${tdClassName} vertical-middle`} rowSpan={span} hidden={indexEp > 0}>
-        {this.actionsList(item.SupportedCommands, "Commands", this.runCommand.bind(this, item.Unid, "run-node-command"), "")}
-        {this.actionsList(item.SupportedStateList, "States", this.runStateCommand.bind(this, item.Unid, "run-state-command"), "margin-r-5")}
-      </td>
-    </tr>)
+        </td>
+        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>
+          <div className="flex">
+            <div>
+              <div className={`dot-icon ${item.Security?.toLocaleLowerCase().includes("s2") ? "s2-security" : (item.Security?.toLocaleLowerCase().includes("s0") ? "s0-security" : "none-security")}`}></div>
+            </div>
+            <div>{item.Security}</div>
+          </div>
+        </td>
+        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>{item.MaximumCommandDelay}</td>
+        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>{item.State}</td>
+        <td className="vertical-middle" rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>
+          {this.actionsList(item.SupportedCommands, "Commands", this.runCommand.bind(this, item.Unid, "run-node-command"), "")}
+          {this.actionsList(item.SupportedStateList, "States", this.runStateCommand.bind(this, item.Unid, "run-state-command"), "margin-r-5")}
+        </td>
+      </tr>
+      {this.state.IsExtendedView && ep?.Clusters !== undefined
+        ? Object.keys(ep.Clusters).map((cluster, clIndex) => {
+          let tableRow = (ClusterViewOverrides as any)[cluster]?.ViewTable;
+          return (
+            <tr key={`${index}-${indexEp}-${clIndex}`} className={`${tdClassName} cluster-info`}>
+              <td><b>{cluster}</b></td>
+              {[...Array(6).keys()].map((i, iKey) => {
+                let attributes = ep.Clusters[cluster].Attributes && Object.keys(ep.Clusters[cluster].Attributes);
+                return (
+                  <td key={`${index}-${indexEp}-${clIndex}-${iKey}`}>
+                    {tableRow
+                      ? (tableRow[i] ? <span><b><i>{tableRow[i].Name}</i></b>: {tableRow[i].Value(ep.Clusters[cluster])}</span> : null)
+                      : <span>{attributes[i] !== undefined ? <span><b><i>{attributes[i]}</i></b>: {JSON.stringify(ep.Clusters[cluster].Attributes[attributes[i]]?.Reported || "")} </span> : null}</span>
+                    }
+                  </td>
+                )
+              }
+              )}
+              <td>
+                {this.actionsList(ep.Clusters[cluster].SupportedCommands && ep.Clusters[cluster].SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes"), "Commands", this.preSendCommand.bind(this, item, epName, cluster), "")}
+              </td>
+            </tr>)
+        })
+        : null
+      }
+    </Fragment>
+    )
   }
 
-  getEpRows = (item: any, index: number) => {
+
+  preSendCommand(node: any, epName: string, clusterType: string, cmd: string) {
+    let command = this.ClusterTypeAttrs[clusterType].server.commands.find((i: { name: string; }) => i.name === cmd);
+    if (!command)
+      return;
+
+    if (command && command.fields && command.fields.length) {
+      this.changeCommandDlg.current.updateState(`${node.Unid}/${epName}`, command, true, clusterType);
+    } else
+      this.props.SocketServer.send(JSON.stringify(
+        {
+          type: "run-cluster-command",
+          data: {
+            Unid: `${node.Unid}/${epName}`,
+            ClusterType: clusterType,
+            Cmd: command.name,
+            Payload: {}
+          }
+        }));
+  }
+
+  getEndPoints = (item: any, index: number) => {
     let endPoints = Object.keys(item.ep);
+    let clustersCount = this.state.IsExtendedView ? endPoints.reduce((i, j: any) => (i + (item.ep[j].Clusters !== undefined ? Object.keys(item.ep[j].Clusters).length : 0)), 0) : 0;
     return (<>
       {endPoints.map((endPoint: any, indexEp: number) => {
-        return this.getRow(item, index, endPoint, item.ep[endPoint], indexEp, endPoints.length)
+        return this.getRow(item, index, endPoint, item.ep[endPoint], indexEp, endPoints.length, clustersCount);
       })}
     </>)
+  }
+
+  sort = (name: string) => {
+    if (this.state.SortName === name)
+      this.setState({ IsSortAcs: !this.state.IsSortAcs }, () => this.search(this.props.NodeList));
+    else
+      this.setState({ SortName: name, IsSortAcs: true }, () => this.search(this.props.NodeList));
+  }
+
+  handleDeviceTypeChange = (event: any) => {
+    this.search(this.props.NodeList, event.target.value)
+  }
+
+  toggleView = () => {
+    this.setState({ IsExtendedView: !this.state.IsExtendedView }, () => { this.props.Storage.Set("IsExtendedView", this.state.IsExtendedView) });
   }
 
   render() {
@@ -190,12 +298,26 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
         <h3>Node List</h3>
         <Row hidden={!this.props.IsConnected} >
           <Col xs={12}>
-            <Form.Group as={Row} className="float-right">
-              <Form.Label column sm="5" className="float-right">Find Unid key:</Form.Label>
-              <Col>
-                <Form.Control type="text" placeholder="key" onKeyUp={this.searchEvent.bind(this)} />
-              </Col>
-            </Form.Group>
+            <TextField className="float-left flex-input col-sm-2" select label="Device Type" size="small" defaultValue="Any" disabled={this.state.DeviceTypes.size === 1}
+              onChange={this.handleDeviceTypeChange} variant="outlined" >
+              {[...this.state.DeviceTypes].map((option: any) => {
+                return <MenuItem key={option[0]} value={option[0]} className={option[0] === "Any" ? "disabled" : ""}>
+                  {option[1]}
+                </MenuItem>
+              })}
+            </TextField>
+            {/*
+            UIC-1724: Re-enable this when the view is fixed. Note that the toggle should be per node.
+            <FormControlLabel className="float-left flex-input col-sm-2" control={<Switch checked={this.state.IsExtendedView} onChange={this.toggleView} />} label={'Extended View'} />
+            */}
+            <Tooltip title="Search by 'Unid', 'Name' or 'Location'">
+              <Form.Group as={Row} className="float-right">
+                <Form.Label column sm="3" className="float-right">Search:</Form.Label>
+                <Col>
+                  <Form.Control type="text" placeholder="Search" onKeyUp={this.searchEvent.bind(this)} />
+                </Col>
+              </Form.Group>
+            </Tooltip>
           </Col>
         </Row>
         {(!this.state.NodeList || !this.state.NodeList.length)
@@ -207,7 +329,14 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
           : <Table>
             <thead>
               <tr className="">
-                <th>Unid</th>
+                <th>Unid
+                  <span onClick={() => this.sort("Unid")}>
+                    {this.state.IsSortAcs
+                      ? <BsIcons.BsSortDownAlt size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
+                      : <BsIcons.BsSortUp size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
+                    }
+                  </span>
+                </th>
                 <th>Ep</th>
                 <th>Type</th>
                 <th>Name</th>
@@ -229,7 +358,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
                     {
                       !item.ep
                         ? this.getRow(item, index)
-                        : this.getEpRows(item, index)
+                        : this.getEndPoints(item, index)
                     }
 
                   </Tooltip>
@@ -276,6 +405,9 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
             <Button variant="outline-primary" onClick={this.setRemoveData.bind(this, false)}>Reject</Button>
           </Modal.Footer>
         </Modal>
+
+        <CommandDlg ref={this.changeCommandDlg}
+          SocketServer={this.props.SocketServer} />
       </>
     )
   };

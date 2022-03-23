@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -87,31 +87,36 @@ $(document).ready(function(){initNavTree('md_applications_aox_applications_aoxpc
 <div class="title">AoXPC Release Notes </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md436"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md474"></a>
+[1.1.1] - Mar 2022</h1>
+<h2><a class="anchor" id="autotoc_md475"></a>
+Added</h2>
+<ul>
+<li>Publish the EndpointIdList attribute under the State for each node.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md476"></a>
+Fixed</h2>
+<ul>
+<li>Fix attributes not published to MQTT on first startup issue.</li>
+<li>Fixed incorrect RTL lib antenna switch pattern for reduced antenna arrays (3x3 URA, 1x4 ULA).</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md477"></a>
 [1.1.0] - Feb 2022</h1>
-<h2><a class="anchor" id="autotoc_md437"></a>
+<h2><a class="anchor" id="autotoc_md478"></a>
 Added</h2>
 <ul>
 <li>Support for AoX Locator configuration via config file or via MQTT.</li>
 <li>Support for parsing AngleCorrection commands</li>
 <li>Support for publishing AngleReport commands</li>
-<li>Persistent storage of the AoX Locator configuration</li>
+<li>Persistent storage of the AoX Locator configuration </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md438"></a>
-Known Issues</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Known Issue  </th><th class="markdownTableHeadNone">Workaround   </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">If <code>--aoxpc.datastore_file</code> option points to a file that doesn't exist, and <code>--aoxpc.config</code> is not provided either, then the AoXLocator attributes are not published.  </td><td class="markdownTableBodyNone">Restart AoXPC with the same options (during the first run, the datastore file is created).   </td></tr>
-</table>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:00 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

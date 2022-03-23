@@ -15,6 +15,7 @@ add_library(
   src/zwave_command_class_basic.c
   src/zwave_command_class_binary_switch.c
   src/zwave_command_class_central_scene.c
+  src/zwave_command_class_configuration_control.c
   src/zwave_command_class_device_reset_locally.cpp
   src/zwave_command_class_firmware_update.c
   src/zwave_command_class_indicator.c

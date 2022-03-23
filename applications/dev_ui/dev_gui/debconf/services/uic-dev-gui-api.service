@@ -1,5 +1,5 @@
 [Unit]
-Description=UIC User Interface API
+Description=Unify User Interface API
 After=network.target mosquitto.service
 
 [Service]

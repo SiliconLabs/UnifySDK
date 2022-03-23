@@ -178,8 +178,9 @@ var NAVTREEINDEX0 =
 "attribute__store__fixt_8h.html":[10,0,1,3,0,3],
 "attribute__store__fixt_8h_source.html":[10,0,1,3,0,3],
 "attribute__store__helper_8c.html":[10,0,1,3,1,1],
-"attribute__store__helper_8c.html#a3606f2c5f6150473c4a1173688734497":[10,0,1,3,1,1,22],
-"attribute__store__helper_8c.html#a85e6ccdc9640e5dad7ae5c56249d82c3":[10,0,1,3,1,1,21],
+"attribute__store__helper_8c.html#a3606f2c5f6150473c4a1173688734497":[10,0,1,3,1,1,28],
+"attribute__store__helper_8c.html#a85e6ccdc9640e5dad7ae5c56249d82c3":[10,0,1,3,1,1,27],
+"attribute__store__helper_8c.html#ae1a11f4800d9de217ab0129181358abe":[10,0,1,3,1,1,10],
 "attribute__store__helper_8h.html":[10,0,1,3,0,4],
 "attribute__store__helper_8h_source.html":[10,0,1,3,0,4],
 "attribute__store__internals_8h.html":[10,0,1,3,1,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classEndpointAccessor.html":[7,2,3,0,4],
 "classEndpointAccessor.html#a4cdc18aecfa036002437a534a1176377":[7,2,3,0,4,0],
 "classEndpointAccessor.html#a58fa6bb8d6a54326d95ee03e31ca17c0":[7,2,3,0,4,1],
-"classGroupAccessor.html":[7,2,3,0,5],
-"classGroupAccessor.html#a32ba84eaf8fd2182efe4a6a7b49cf87c":[7,2,3,0,5,4]
+"classGroupAccessor.html":[7,2,3,0,5]
 };

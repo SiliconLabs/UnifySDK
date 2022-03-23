@@ -43,9 +43,10 @@ extern "C" {
 static zwave_controller_storage_callback_t zwave_controller_storage_cb_mock = {
   .on_set_node_as_s2_capable = zwave_security_validation_set_node_as_s2_capable,
   .on_verify_node_is_s2_capable = zwave_security_validation_is_node_s2_capable,
-  .on_get_node_granted_keys = zwave_get_node_granted_keys,
-  .on_get_inclusion_protocol = zwave_get_inclusion_protocol,
-  .on_zwave_controller_storage_cc_version = zwave_node_get_command_class_version,
+  .on_get_node_granted_keys     = zwave_get_node_granted_keys,
+  .on_get_inclusion_protocol    = zwave_get_inclusion_protocol,
+  .on_zwave_controller_storage_cc_version
+  = zwave_node_get_command_class_version,
 };
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
@@ -63,8 +64,9 @@ int suiteTearDown(int num_failures)
 }
 
 /// Called before each and every test
-void setUp() {
-    zwave_controller_storage_callback_register(&zwave_controller_storage_cb_mock);
+void setUp()
+{
+  zwave_controller_storage_callback_register(&zwave_controller_storage_cb_mock);
 }
 
 static sl_status_t
@@ -277,7 +279,7 @@ void test_zwave_command_class_indicator_control_test()
 
   //Can we do a set of indicator 50 ?
   const uint8_t indicator50_set[]
-    = {0x87, 0x01, 0xff, 0x2, 0x50, 0x1, 0xaa, 0x50, 0x3, 0xbb};
+    = {0x87, 0x01, 0x00, 0x2, 0x50, 0x1, 0xaa, 0x50, 0x3, 0xbb};
 
   auto indicator50_1_value
     = indicator50

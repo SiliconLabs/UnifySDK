@@ -53,16 +53,9 @@ sl_status_t aox_locator_write_attributes_callback(
 /**
  * @brief Resets the AoX Locator attributes to 0.
  *
- * @return SL_STATUS_OK if successsful, any other code otherwise.
- */
-sl_status_t aox_locator_reset_configuration();
-
-/**
- * @brief Pushes our Attribute configuration to MQTT
- *
  * @return SL_STATUS_OK if successful, any other code otherwise.
  */
-sl_status_t publish_aox_locator_attributes_to_mqtt();
+sl_status_t aox_locator_reset_configuration();
 
 /**
  * @brief Invokes the registered callback for AoXLocator attribute updates

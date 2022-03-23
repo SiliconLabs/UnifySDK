@@ -55,7 +55,7 @@ if (process.env && process.env.HTTPS !== undefined && JSON.parse(process.env.HTT
         (new webSocketServer({ httpServer: secureServer })).on('request', onRequest);
     } catch (e) {
         console.log(`Could not start https api: ${e.message}`);
-        return;
+        process.exit(1);
     }
 }
 
@@ -68,7 +68,7 @@ try {
     (new webSocketServer({ httpServer: server })).on('request', onRequest);
 } catch (e) {
     console.log(`Could not start https api: ${e.message}`);
-    return;
+    process.exit(1);
 }
 
 function onRequest(request) {

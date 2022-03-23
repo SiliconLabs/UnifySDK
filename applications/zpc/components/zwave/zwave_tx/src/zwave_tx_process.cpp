@@ -28,18 +28,29 @@
 #include "zwave_controller_internal.h"
 #include "zwave_controller_transport.h"
 
-#define LOG_TAG "zwave_tx_process"
+// Helper macro to determine if a transmit status indicates that the tramission
+// was successful.
+#define IS_TRANSMISSION_SUCCESSFUL(status) \
+  ((status == TRANSMIT_COMPLETE_OK) || (status == TRANSMIT_COMPLETE_VERIFIED))
 
-// Our local variables.
-static zwave_tx_state_t state;
-static struct etimer backoff_timer;
-static bool queue_flush_ongoing = false;
+// Constants
+static constexpr char LOG_TAG[] = "zwave_tx_process";
+
+// Our private variables.
+namespace
+{
+// Tx Queue state
+zwave_tx_state_t state;
+// back-off timer, used to decide when to send the next frame
+struct etimer backoff_timer;
+// Private variable indicating if a Tx Queue flush is ongoing
+bool queue_flush_ongoing = false;
+// The frame currently being handled
+zwave_tx_session_id_t current_tx_session_id;
+}  // namespace
 
 // The Z-Wave TX queue
 zwave_tx_queue tx_queue;  // zwave_tx.cpp uses the tx_queue.
-
-// The frame currently being handled
-zwave_tx_session_id_t current_tx_session_id;
 
 // Forward declarations
 static void zwave_tx_message_transmission_completed_step(
@@ -96,6 +107,13 @@ static void zwave_tx_finalize_element(zwave_tx_session_id_t session_id)
   // We are done (for ever!) with the element, so we delete it from the queue.
   sl_log_debug(LOG_TAG, "Removing id=%p from the queue", session_id);
   tx_queue.pop(session_id);
+
+  // Did we just reach an empty queue while waiting for a queue flush?
+  if (zwave_tx_process_queue_flush_is_ongoing() && tx_queue.empty()) {
+    sl_log_info(LOG_TAG, "Reset step: Tx Queue flush completed");
+    zwave_controller_on_reset_step_complete(
+      ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY);
+  }
 }
 
 /**
@@ -230,10 +248,10 @@ static void zwave_tx_process_send_next_message_step()
     // just refused the frame.
     // Or the transport cannot handle the new frame
     // Discard the "Excess" frames for now.
-    sl_log_error(LOG_TAG,
-                 "Transport cannot handle new frame (id=%p). "
-                 "Discarding to avoid a stall.",
-                 current_tx_session_id);
+    sl_log_warning(LOG_TAG,
+                   "Transport cannot handle new frame (id=%p). "
+                   "Discarding to avoid a stall.",
+                   current_tx_session_id);
     zwave_tx_drop_unsent_current_message();
     return;
   }
@@ -262,12 +280,14 @@ static void
   }
 
   // Did the element fail and need to be requeued ? (fasttrack)
-  if (completed_element.send_data_status != TRANSMIT_COMPLETE_OK
+  if ((false == IS_TRANSMISSION_SUCCESSFUL(completed_element.send_data_status))
       && (completed_element.zwave_tx_options.fasttrack == true)
       && (!zwave_tx_process_queue_flush_is_ongoing())) {
-    sl_log_info(LOG_TAG,
-                "Fastrack transmit attempt failed. Requeueing element %p\n",
-                completed_element.zwave_tx_session_id);
+    sl_log_debug(LOG_TAG,
+                 "Fastrack transmit attempt failed (status = %d). "
+                 "Requeueing element %p\n",
+                 completed_element.send_data_status,
+                 completed_element.zwave_tx_session_id);
     tx_queue.disable_fasttack(completed_element.zwave_tx_session_id);
     // Reset the transmission timestamp, so that it gets discarded
     // if has spent too long in the queue from enqueuing to 2nd transmit attempt.
@@ -280,6 +300,7 @@ static void
   // Do we need to send some follow-up frames ?
   if ((completed_element.connection_info.remote.is_multicast == true)
       && (completed_element.zwave_tx_options.send_follow_ups == true)
+      && (!zwave_tx_process_queue_flush_is_ongoing())
       && (SL_STATUS_OK
           == zwave_tx_enqueue_follow_ups(
             completed_element.zwave_tx_session_id))) {
@@ -296,7 +317,7 @@ static void
   }
 
   // Apply backoff if it was successful singlecast and we expect replies.
-  if (completed_element.send_data_status == TRANSMIT_COMPLETE_OK
+  if (IS_TRANSMISSION_SUCCESSFUL(completed_element.send_data_status)
       && completed_element.zwave_tx_options.number_of_responses > 0
       && completed_element.connection_info.remote.is_multicast == false
       && (!zwave_tx_process_queue_flush_is_ongoing())
@@ -307,7 +328,7 @@ static void
         * (completed_element.transmission_time + CLOCK_SECOND);
     sl_log_debug(LOG_TAG,
                  "Starting Z-Wave TX backoff for frame sent to NodeID %d, "
-                 "backoff time: %lu ms.\n",
+                 "backoff time: %u ms.\n",
                  completed_element.connection_info.remote.node_id,
                  backoff_time);
     state                 = ZWAVE_TX_STATE_BACKOFF;
@@ -323,17 +344,8 @@ static void
   // Remove from the queue and make the correct state transision.
   zwave_tx_finalize_element(completed_element.zwave_tx_session_id);
 
-  // Did we just reach an empty queue while waiting for a queue flush?
-  if (zwave_tx_process_queue_flush_is_ongoing() && tx_queue.empty()) {
-    sl_log_info(LOG_TAG, "Reset step: Tx Queue flush completed");
-    zwave_controller_on_reset_step_complete(
-      ZWAVE_CONTROLLER_TX_FLUSH_RESET_STEP_PRIORITY);
-    state = ZWAVE_TX_STATE_IDLE;
-    return;
-  } else {
-    // Check if there is more work to do
-    zwave_tx_process_check_queue();
-  }
+  // Check if there is more work to do
+  zwave_tx_process_check_queue();
 }
 
 static void zwave_tx_resume_from_backoff_step()
@@ -477,7 +489,7 @@ sl_status_t zwave_tx_process_flush_queue_reset_step()
 void zwave_tx_process_check_queue()
 {
   if (ZWAVE_TX_STATE_BACKOFF != state && !tx_queue.empty()) {
-    process_post(&zwave_tx_process, ZWAVE_TX_SEND_NEXT_MESSAGE, 0);
+    process_post(&zwave_tx_process, ZWAVE_TX_SEND_NEXT_MESSAGE, nullptr);
   }
 }
 

@@ -250,7 +250,9 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                     </Card.Body>
                 </Card>
             case "enum":
-                return <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
+                if (i.enum && i.enum.length) {
+                return (
+                    <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
                     {writable && supported
                         ? <TextField size="small" className="writable flex-input" fullWidth={true} select label={i.name} name={i.name} value={attr ?? ""}
                             defaultValue={attr ?? ""} onChange={this.handleChange.bind(this.props, prefixNames, false, false)} variant="outlined" onBlur={this.validateAttr.bind(this, i, prefixNames)} InputProps={adornment} >
@@ -264,16 +266,54 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                             value={attr} variant="outlined" InputProps={adornment} />
                     }
                     {this.getHintText(i)}
-                </div>
+                    </div>
+                    )
+                } else {
+                    return (
+                        <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
+                        {(writable && supported) ?
+                            <TextField  size="small"
+                                        className="writable flex-input"
+                                        fullWidth={true}
+                                        label={i.name}
+                                        name={i.name}
+                                        variant="outlined"
+                                        type={i.type}
+                                        value={attr || ""}
+                                        onChange={this.handleChange.bind(this, prefixNames, false, i.type === "number")}
+                                        onBlur={this.validateAttr.bind(this, i, prefixNames)}
+                                        onFocus={(event) => event.target.select()}
+                                        InputProps={adornment}
+                                        />
+
+                        :
+                            <TextField  size="small"
+                                        className="flex-input"
+                                        fullWidth={true}
+                                        inputProps={{ readOnly: true }}
+                                        disabled={!supported}
+                                        label={i.name}
+                                        value={attr}
+                                        variant="outlined"
+                                        InputProps={adornment} />
+                        }
+                        {this.getHintText(i)}
+                        </div>
+                    )
+                }
+
             case "struct":
                 return <Card key={index} className="inline margin-v-10">
                     <Card.Header>{i.name} {i.isArray
                         ? <span className="pointer icon">
-                            <Tooltip title={`Add Item`} className="float-right">
-                                <span className="pointer icon">
-                                    <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, prefixNames.concat(i.name), attr, i)} />
-                                </span>
-                            </Tooltip>
+                            {writable
+                                ? <Tooltip title={`Add Item`} className="float-right">
+                                    <span className="pointer icon">
+                                        <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, prefixNames.concat(i.name), attr, i)} />
+                                    </span>
+                                </Tooltip>
+                                : null
+                            }
                             <Tooltip className="float-right" title={`Force Read Attribute ${isForceReadAttrSupported ? "" : "(maybe not supported)"}`}>
                                 <span className={`${isForceReadAttrSupported ? "" : "disabled pointer"} icon`}>
                                     <MdIcons.MdRefresh onClick={() => this.forceRead(i.name)} />
@@ -289,7 +329,11 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                 : attr.map((arrayItem: any, arrayIndex: number) => {
                                     return <div key={`${index}-${arrayIndex}`} className='col-sm-6 inline'>
                                         <Card className="margin-v-10 flex-input">
-                                            <Card.Header className='padding-2'>[{arrayIndex}]<span className="pointer icon"><FiIcons.FiMinus className="float-right" onClick={this.removeArrayItem.bind(this, prefixNames.concat(i.name), attr, arrayIndex)} /></span></Card.Header>
+                                            <Card.Header className='padding-2'>[{arrayIndex}]
+                                                {writable
+                                                    ? <span className="pointer icon"><FiIcons.FiMinus className="float-right" onClick={this.removeArrayItem.bind(this, prefixNames.concat(i.name), attr, arrayIndex)} /></span>
+                                                    : null}
+                                            </Card.Header>
                                             <Card.Body className="col-sm-12 no-padding">
                                                 {
                                                     i.struct.map((field: any, sIndex: number) => {
@@ -314,11 +358,13 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                             ? <div key={index}></div>
                             : <Card key={index} className="inline margin-v-10">
                                 <Card.Header>{i.name}
-                                    <Tooltip title={`Add Item`} className="float-right">
-                                        <span className="pointer icon">
-                                            <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, prefixNames.concat(i.name), attr, i)} />
-                                        </span>
-                                    </Tooltip>
+                                    {writable
+                                        ? <Tooltip title={`Add Item`} className="float-right">
+                                            <span className="pointer icon">
+                                                <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, prefixNames.concat(i.name), attr, i)} />
+                                            </span>
+                                        </Tooltip>
+                                        : null}
                                     <Tooltip className="float-right" title={`Force Read Attribute ${isForceReadAttrSupported ? "" : "(maybe not supported)"}`}>
                                         <span className={`${isForceReadAttrSupported ? "" : "disabled pointer"} icon`}>
                                             <MdIcons.MdRefresh onClick={() => this.forceRead(i.name)} />
@@ -332,11 +378,13 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                                 value={arrayItem} onChange={this.handleChange.bind(this, prefixNames.concat(i.name), false, i.type === "number")} onBlur={this.validateAttr.bind(this, i, prefixNames)}
                                                 onFocus={(event) => event.target.select()} InputProps={{
                                                     endAdornment: <InputAdornment position="end">
-                                                        <Tooltip title={`Remove Item`}>
-                                                            <span className="pointer icon">
-                                                                <FiIcons.FiMinus onClick={this.removeArrayItem.bind(this, prefixNames.concat(i.name), attr, arrayIndex)} />
-                                                            </span>
-                                                        </Tooltip>
+                                                        {writable
+                                                            ? <Tooltip title={`Remove Item`}>
+                                                                <span className="pointer icon">
+                                                                    <FiIcons.FiMinus onClick={this.removeArrayItem.bind(this, prefixNames.concat(i.name), attr, arrayIndex)} />
+                                                                </span>
+                                                            </Tooltip>
+                                                            : null}
                                                     </InputAdornment>
                                                 }} />
                                         </Card.Body>

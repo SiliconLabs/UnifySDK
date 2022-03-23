@@ -22,6 +22,7 @@ target_link_libraries(
   zigpc_stdin
   zigpc_zcl_command_parser
   zigpc_ota_zigbee
+  zigpc_ncp_updater
   uic_attribute_store
   uic_datastore
   uic_dotdot_mqtt

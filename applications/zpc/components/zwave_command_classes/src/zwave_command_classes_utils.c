@@ -86,6 +86,41 @@ attribute_store_node_t
     0);
 }
 
+bool has_reports_to_follow(attribute_store_node_t node)
+{
+  reports_to_follow_t reports = 0;
+  attribute_store_get_reported(
+    attribute_store_get_node_child_by_type(node,
+                                           ATTRIBUTE_REPORTS_TO_FOLLOW,
+                                           0),
+    &reports,
+    sizeof(reports));
+
+  return (reports > 0);
+}
+
+reports_to_follow_t get_reports_to_follow(attribute_store_node_t node)
+{
+  reports_to_follow_t reports = 0;
+  attribute_store_get_reported(
+    attribute_store_get_node_child_by_type(node,
+                                           ATTRIBUTE_REPORTS_TO_FOLLOW,
+                                           0),
+    &reports,
+    sizeof(reports));
+
+  return reports;
+}
+
+sl_status_t set_reports_to_follow(attribute_store_node_t node,
+                                  reports_to_follow_t reports_to_follow)
+{
+  return attribute_store_set_child_reported(node,
+                                            ATTRIBUTE_REPORTS_TO_FOLLOW,
+                                            &reports_to_follow,
+                                            sizeof(reports_to_follow));
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Tx helper functions
 ///////////////////////////////////////////////////////////////////////////////

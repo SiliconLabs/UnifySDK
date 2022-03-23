@@ -60,7 +60,7 @@ typedef enum sl_log_level {
     sl_log(tag, lvl, "%s\n", _tmp_log_arr);                                   \
   }
 
-#if (ZWAVE_BUILD_SYSTEM == 1)
+#ifdef ZWAVE_BUILD_SYSTEM
 
 #include "sl_log_gecko.h"
 
@@ -140,7 +140,7 @@ void sl_log(const char *const tag,
 #define sl_log_critical(tag, fmtstr, ...) \
   sl_log(tag, SL_LOG_CRITICAL, fmtstr, ##__VA_ARGS__)
 
-#endif  // (ZWAVE_BUILD_SYSTEM == 1)
+#endif  // ZWAVE_BUILD_SYSTEM
 
 #ifdef __cplusplus
 }

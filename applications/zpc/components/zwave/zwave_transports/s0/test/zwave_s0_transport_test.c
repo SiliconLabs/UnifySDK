@@ -413,14 +413,14 @@ void test_zwave_s0_new()
   connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
   const zwave_tx_options_t tx_options;
   //Ask s0 to send version report
-  TEST_ASSERT_EQUAL(zwave_s0_send_data(&connection_info,
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s0_send_data(&connection_info,
                                        sizeof(version_report),
                                        version_report,
                                        &tx_options,
                                        on_zwave_tx_send_data_complete_success,
                                        0,
-                                       0),
-                    SL_STATUS_OK);
+                                       0));
 
   // Tell S0 that nonce_get was sent successfully on zwave_tx
   my_on_send_complete(TRANSMIT_COMPLETE_OK, 0, my_user);
@@ -889,4 +889,51 @@ void test_zwave_s0_on_frame_received_s0_command_supported_get()
                                                (const uint8_t *)&frame_data,
                                                sizeof(frame_data)),
                     SL_STATUS_OK);
+}
+
+void test_zwave_s0_on_abort_send_data()
+{
+  zwave_tx_session_id_t session = (void *)23;
+  // Aborting before triggering a tranmission
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_FOUND, zwave_s0_on_abort_send_data(session));
+
+  uint8_t cmd_data[]             = "HelloWorld";
+  zwave_tx_options_t tx_options  = {};
+  connection_info.local.node_id  = 1;
+  connection_info.remote.node_id = 2;
+
+  setup_connection_info();
+  //Expect nonce get sent on zwave_tx by S0 as we will ask S0 to send
+  zwave_tx_send_data_ExpectWithArrayAndReturn(NULL,
+                                              0,
+                                              sizeof(nonce_get),
+                                              nonce_get,
+                                              sizeof(nonce_get),
+                                              NULL,
+                                              0,
+                                              NULL,
+                                              NULL,
+                                              0,
+                                              NULL,
+                                              0,
+                                              SL_STATUS_OK);
+
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_on_send_complete();
+  zwave_tx_send_data_IgnoreArg_user();
+  zwave_tx_send_data_IgnoreArg_session();
+  zwave_tx_send_data_IgnoreArg_connection();
+  zwave_tx_send_data_AddCallback(my_callback);
+
+  connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_s0_send_data(&connection_info,
+                                       sizeof(cmd_data),
+                                       cmd_data,
+                                       &tx_options,
+                                       on_zwave_tx_send_data_complete_failure,
+                                       (void *)0x42,
+                                       session));
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_s0_on_abort_send_data(session));
 }

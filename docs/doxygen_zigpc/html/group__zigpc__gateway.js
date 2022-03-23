@@ -6,6 +6,7 @@ var group__zigpc__gateway =
     [ "ZigPC Gateway Request Queue", "group__zigpc__gateway__call.html", "group__zigpc__gateway__call" ],
     [ "zigpc_gateway_add_node_install_code", "group__zigpc__gateway.html#gaddae89c536ca2647bfdf8b9c024896a6", null ],
     [ "zigpc_gateway_add_ota_image", "group__zigpc__gateway.html#gaf5d34b9888658ca11ba56651f575fee8", null ],
+    [ "zigpc_gateway_bootload_restart", "group__zigpc__gateway.html#ga952b523b3af1a79d22b23ac63b999c96", null ],
     [ "zigpc_gateway_clear_counters", "group__zigpc__gateway.html#ga9e8d3a2574985bfa3a9ad1e91ab1f9e0", null ],
     [ "zigpc_gateway_command_print_info", "group__zigpc__gateway.html#ga31760b57cce4b9777a99e77a1d0f770c", null ],
     [ "zigpc_gateway_command_print_nwk_key", "group__zigpc__gateway.html#ga0e4dae9031ba0b3b57aca0ef0f9db3b9", null ],

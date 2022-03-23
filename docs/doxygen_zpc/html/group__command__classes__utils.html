@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -87,7 +87,6 @@ $(document).ready(function(){initNavTree('group__command__classes__utils.html','
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Command Classes utils<div class="ingroups"><a class="el" href="group__command__classes.html">Z-Wave Command Classes</a></div></div>  </div>
@@ -124,14 +123,6 @@ Typedefs</h2></td></tr>
  <a href="group__command__classes__utils.html#gac5379e9db79c10ecde10c6980aecd304">More...</a><br /></td></tr>
 <tr class="separator:gac5379e9db79c10ecde10c6980aecd304"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:gafb8d304ba182570dc688ef06a555e8e0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a> { <a class="el" href="group__command__classes__utils.html#ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac">FINAL_STATE</a> = 0, 
-<a class="el" href="group__command__classes__utils.html#ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285">NEEDS_ONE_COMMAND</a> = 1, 
-<a class="el" href="group__command__classes__utils.html#ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4">NEEDS_MULTIPLE_COMMANDS</a> = 2
- }</td></tr>
-<tr class="separator:gafb8d304ba182570dc688ef06a555e8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:gaff12f5d1f5b9eed08201efab5854190c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#gaff12f5d1f5b9eed08201efab5854190c">zwave_command_class_get_endpoint_node</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info)</td></tr>
@@ -143,6 +134,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ga39def804d7d68ac6f534f61a9528c8be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#ga39def804d7d68ac6f534f61a9528c8be">zwave_command_class_get_endpoint_id_node</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>, <a class="el" href="group__zwave__controller__types.html#ga092c5878990b4dcf6037d4375ca63564">zwave_endpoint_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a352c17f92a89fc8fdf459c2afbb39fd2">endpoint_id</a>)</td></tr>
 <tr class="memdesc:ga39def804d7d68ac6f534f61a9528c8be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the Attribute Store Endpoint ID node for a given Z-Wave NodeID / Endpoint ID in our network.  <a href="group__command__classes__utils.html#ga39def804d7d68ac6f534f61a9528c8be">More...</a><br /></td></tr>
 <tr class="separator:ga39def804d7d68ac6f534f61a9528c8be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaab1f34d57be57099899a282f21b0598f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#gaab1f34d57be57099899a282f21b0598f">has_reports_to_follow</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
+<tr class="memdesc:gaab1f34d57be57099899a282f21b0598f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if a node has some Reports to Follow.  <a href="group__command__classes__utils.html#gaab1f34d57be57099899a282f21b0598f">More...</a><br /></td></tr>
+<tr class="separator:gaab1f34d57be57099899a282f21b0598f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga602693931f1bb21a72aebe825ff94bd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__command__class__generic__types.html#gacde31fbcd1e13f9a6f6f9f51590eb5c8">reports_to_follow_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#ga602693931f1bb21a72aebe825ff94bd7">get_reports_to_follow</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node)</td></tr>
+<tr class="memdesc:ga602693931f1bb21a72aebe825ff94bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the number of Reports to Follow for a node.  <a href="group__command__classes__utils.html#ga602693931f1bb21a72aebe825ff94bd7">More...</a><br /></td></tr>
+<tr class="separator:ga602693931f1bb21a72aebe825ff94bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae5b058ae65bbc7ee9ab4b959db376513"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#gae5b058ae65bbc7ee9ab4b959db376513">set_reports_to_follow</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node, <a class="el" href="group__zwave__command__class__generic__types.html#gacde31fbcd1e13f9a6f6f9f51590eb5c8">reports_to_follow_t</a> reports_to_follow)</td></tr>
+<tr class="memdesc:gae5b058ae65bbc7ee9ab4b959db376513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Places a ATTRIBUTE_REPORTS_TO_FOLLOW attribute under an attribute if it does not exist and set it to the requested reports_to_follow value.  <a href="group__command__classes__utils.html#gae5b058ae65bbc7ee9ab4b959db376513">More...</a><br /></td></tr>
+<tr class="separator:gae5b058ae65bbc7ee9ab4b959db376513"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9a9c99943bf863fde841149699d15593"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__command__classes__utils.html#ga9a9c99943bf863fde841149699d15593">zwave_command_class_send_report</a> (const <a class="el" href="group__zwave__controller__connection__info.html#ga7ca9a06245fe8c754f57b1b894b3b3fa">zwave_controller_connection_info_t</a> *connection_info, const uint16_t report_size, const uint8_t *const report_data)</td></tr>
 <tr class="memdesc:ga9a9c99943bf863fde841149699d15593"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to send report frames with default tx options.  <a href="group__command__classes__utils.html#ga9a9c99943bf863fde841149699d15593">More...</a><br /></td></tr>
 <tr class="separator:ga9a9c99943bf863fde841149699d15593"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -243,27 +243,6 @@ Functions</h2></td></tr>
 <p>Minimal Z-Wave Frame that can be sent (Command Class / Command). </p>
 </blockquote>
 </p>
-<p>Values that can be used for "Umbrella" attributes </p>
-
-</div>
-</div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="gafb8d304ba182570dc688ef06a555e8e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gafb8d304ba182570dc688ef06a555e8e0">&#9670;&nbsp;</a></span>command_status_values_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="group__command__classes__utils.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac"></a>FINAL_STATE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285"></a>NEEDS_ONE_COMMAND&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4"></a>NEEDS_MULTIPLE_COMMANDS&#160;</td><td class="fielddoc"></td></tr>
-</table>
 
 </div>
 </div>
@@ -313,6 +292,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga602693931f1bb21a72aebe825ff94bd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga602693931f1bb21a72aebe825ff94bd7">&#9670;&nbsp;</a></span>get_reports_to_follow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__zwave__command__class__generic__types.html#gacde31fbcd1e13f9a6f6f9f51590eb5c8">reports_to_follow_t</a> get_reports_to_follow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the number of Reports to Follow for a node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Attribute Store node under which we want to check if there are some reports to follow. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A value if there is at least 1 report to follow. 0 otherwise </dd></dl>
+
+</div>
+</div>
 <a id="gaf1fbb6a0e57bf5218e97120ed7adc966"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaf1fbb6a0e57bf5218e97120ed7adc966">&#9670;&nbsp;</a></span>get_zwave_node_role_type()</h2>
 
@@ -337,6 +343,33 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the Role Type of a node </dd></dl>
+
+</div>
+</div>
+<a id="gaab1f34d57be57099899a282f21b0598f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaab1f34d57be57099899a282f21b0598f">&#9670;&nbsp;</a></span>has_reports_to_follow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool has_reports_to_follow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifies if a node has some Reports to Follow. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Attribute Store node under which we want to check if there are some reports to follow. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if there is at least 1 report to follow. False otherwise </dd></dl>
 
 </div>
 </div>
@@ -463,6 +496,44 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the handler must not create attributes and filter the command class. false if the handler must go ahead and create its attributes. </dd></dl>
+
+</div>
+</div>
+<a id="gae5b058ae65bbc7ee9ab4b959db376513"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae5b058ae65bbc7ee9ab4b959db376513">&#9670;&nbsp;</a></span>set_reports_to_follow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> set_reports_to_follow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__zwave__command__class__generic__types.html#gacde31fbcd1e13f9a6f6f9f51590eb5c8">reports_to_follow_t</a>&#160;</td>
+          <td class="paramname"><em>reports_to_follow</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Places a ATTRIBUTE_REPORTS_TO_FOLLOW attribute under an attribute if it does not exist and set it to the requested reports_to_follow value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Attribute Store node under which to set a reports to follow value. </td></tr>
+    <tr><td class="paramname">reports_to_follow</td><td>The value to set in the ATTRIBUTE_REPORTS_TO_FOLLOW attribute </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t </dd></dl>
 
 </div>
 </div>
@@ -664,7 +735,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:36 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:50:00 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

@@ -146,5 +146,6 @@ var hierarchy =
     [ "zwave_tx_groups", "classzwave__tx__groups.html", null ],
     [ "zwave_tx_options", "structzwave__tx__options.html", null ],
     [ "zwave_tx_queue_element", "structzwave__tx__queue__element.html", null ],
+    [ "ZwaveCommandClassType", "classZwaveCommandClassType.html", null ],
     [ "ast_node", "classast__node.html", null ]
 ];

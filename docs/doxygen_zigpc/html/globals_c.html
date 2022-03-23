@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -242,6 +242,9 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>config_add_string()
 : <a class="el" href="group__unify__config.html#ga044cd9dfc614de9b614fc5f2569735aa">config.h</a>
 </li>
+<li>CONFIG_FLAG_ZIGPC_NCP_UPDATE
+: <a class="el" href="zigpc__config_8c.html#ad6e1498ef0d3b291ae8434fae40ab242">zigpc_config.c</a>
+</li>
 <li>config_get_as_bool()
 : <a class="el" href="group__unify__config.html#ga58bace51aa3598b3435028dc9d5dfbf3">config.h</a>
 </li>
@@ -281,6 +284,9 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>CONFIG_KEY_ZIGPC_DATASTORE_FILE
 : <a class="el" href="zigpc__config_8c.html#a57c93bb6e677dc4120f195bc770d627a">zigpc_config.c</a>
 </li>
+<li>CONFIG_KEY_ZIGPC_NCP_FIRMWARE_PATH
+: <a class="el" href="zigpc__config_8c.html#a1c2475d8638874915dccefd8b274c9b0">zigpc_config.c</a>
+</li>
 <li>CONFIG_KEY_ZIGPC_SERIAL_PORT
 : <a class="el" href="zigpc__config_8c.html#a985c56dce5a3f1d48d9d05a80fba84f6">zigpc_config.c</a>
 </li>
@@ -299,6 +305,9 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <li>CONFIG_STATUS_ERROR
 : <a class="el" href="group__unify__config.html#gga3b41bf466c6ddabc6c1ce4aca94ab582a45bdb6b048c41091a0a308292b2f44b3">config.h</a>
 </li>
+<li>CONFIG_STATUS_INFO_MESSAGE
+: <a class="el" href="group__unify__config.html#gga3b41bf466c6ddabc6c1ce4aca94ab582a32e5394de2802245ec9f1010d5d767ce">config.h</a>
+</li>
 <li>CONFIG_STATUS_INVALID_TYPE
 : <a class="el" href="group__unify__config.html#gga3b41bf466c6ddabc6c1ce4aca94ab582a1f16e8cbdcf49924c6dbae21df4f857c">config.h</a>
 </li>
@@ -316,8 +325,8 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 , <a class="el" href="group__attribute__management.html#ga1b27479b3760a513b0bfabc0ad1ca9cd">attribute_management.c</a>
 </li>
 <li>configure_attributes_node()
-: <a class="el" href="group__attribute__management.html#ga7c65f180b7ed7e0be015c9e72f945bdd">attribute_management.h</a>
-, <a class="el" href="group__attribute__management.html#ga7c65f180b7ed7e0be015c9e72f945bdd">attribute_management.c</a>
+: <a class="el" href="group__attribute__management.html#ga7c65f180b7ed7e0be015c9e72f945bdd">attribute_management.c</a>
+, <a class="el" href="group__attribute__management.html#ga7c65f180b7ed7e0be015c9e72f945bdd">attribute_management.h</a>
 </li>
 <li>configure_response_buffer_t
 : <a class="el" href="group__attribute__management__int.html#ga35f45362ac1a4fe282d7b3c0dadc335a">zigpc_attrmgmt_int.hpp</a>
@@ -329,24 +338,24 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 : <a class="el" href="mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048">mqtt_client.hpp</a>
 </li>
 <li>contiki_test_helper_increase_clock()
-: <a class="el" href="contiki__test__helper_8c.html#aceeb0a73d13bcef46e54a1cbefe5f8fb">contiki_test_helper.c</a>
-, <a class="el" href="contiki__test__helper_8h.html#aceeb0a73d13bcef46e54a1cbefe5f8fb">contiki_test_helper.h</a>
+: <a class="el" href="contiki__test__helper_8h.html#aceeb0a73d13bcef46e54a1cbefe5f8fb">contiki_test_helper.h</a>
+, <a class="el" href="contiki__test__helper_8c.html#aceeb0a73d13bcef46e54a1cbefe5f8fb">contiki_test_helper.c</a>
 </li>
 <li>contiki_test_helper_init()
-: <a class="el" href="contiki__test__helper_8c.html#a0e3872a9e05050732d9fb83f5b7c3cc7">contiki_test_helper.c</a>
-, <a class="el" href="contiki__test__helper_8h.html#a0e3872a9e05050732d9fb83f5b7c3cc7">contiki_test_helper.h</a>
+: <a class="el" href="contiki__test__helper_8h.html#a0e3872a9e05050732d9fb83f5b7c3cc7">contiki_test_helper.h</a>
+, <a class="el" href="contiki__test__helper_8c.html#a0e3872a9e05050732d9fb83f5b7c3cc7">contiki_test_helper.c</a>
 </li>
 <li>contiki_test_helper_run()
-: <a class="el" href="contiki__test__helper_8c.html#ac5683519dae42ba1818cb0459a875ba9">contiki_test_helper.c</a>
-, <a class="el" href="contiki__test__helper_8h.html#ac5683519dae42ba1818cb0459a875ba9">contiki_test_helper.h</a>
+: <a class="el" href="contiki__test__helper_8h.html#ac5683519dae42ba1818cb0459a875ba9">contiki_test_helper.h</a>
+, <a class="el" href="contiki__test__helper_8c.html#ac5683519dae42ba1818cb0459a875ba9">contiki_test_helper.c</a>
 </li>
 <li>contiki_test_helper_run_clock_increases_for_each_event()
 : <a class="el" href="contiki__test__helper_8c.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.c</a>
 , <a class="el" href="contiki__test__helper_8h.html#abc28acd23eaa2dece39c9488410d0821">contiki_test_helper.h</a>
 </li>
 <li>contiki_test_helper_run_once()
-: <a class="el" href="contiki__test__helper_8h.html#a84f3131d248842aa2fb5af6678ddd63c">contiki_test_helper.h</a>
-, <a class="el" href="contiki__test__helper_8c.html#a84f3131d248842aa2fb5af6678ddd63c">contiki_test_helper.c</a>
+: <a class="el" href="contiki__test__helper_8c.html#a84f3131d248842aa2fb5af6678ddd63c">contiki_test_helper.c</a>
+, <a class="el" href="contiki__test__helper_8h.html#a84f3131d248842aa2fb5af6678ddd63c">contiki_test_helper.h</a>
 </li>
 <li>CONTIKI_VERSION_STRING
 : <a class="el" href="contiki-version_8h.html#a63c4c28fe517f6d19ef5620c50f57802">contiki-version.h</a>
@@ -373,8 +382,8 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 , <a class="el" href="group__zigpc__common__zigbee.html#ga0a3a7102d7c9fe56015e848f2d0965ea">zigpc_common_zigbee.h</a>
 </li>
 <li>copy_endpoint()
-: <a class="el" href="group__zigpc__common__zigbee.html#ga8ee76c2d86bdb89475a2e92601697fce">zigpc_common_zigbee.c</a>
-, <a class="el" href="group__zigpc__common__zigbee.html#ga8ee76c2d86bdb89475a2e92601697fce">zigpc_common_zigbee.h</a>
+: <a class="el" href="group__zigpc__common__zigbee.html#ga8ee76c2d86bdb89475a2e92601697fce">zigpc_common_zigbee.h</a>
+, <a class="el" href="group__zigpc__common__zigbee.html#ga8ee76c2d86bdb89475a2e92601697fce">zigpc_common_zigbee.c</a>
 </li>
 <li>copy_endpoint_list()
 : <a class="el" href="group__zigpc__common__zigbee.html#gab4dd0b616ed444bd4eacbea38d407d43">zigpc_common_zigbee.h</a>
@@ -420,7 +429,7 @@ $(document).ready(function(){initNavTree('globals_c.html',''); initResizable(); 
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:57 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:50:14 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

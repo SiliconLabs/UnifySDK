@@ -27,6 +27,8 @@
 #include "attribute.hpp"
 #include "zwave_command_class_wake_up_types.h"
 #include "zwave_utils.h"
+#include "dotdot_mqtt.h"
+
 // Interfaces (only using typedefs from here)
 #include "zwave_controller_keyset.h"
 #include "ucl_definitions.h"
@@ -34,6 +36,7 @@
 //Generic include
 #include <stddef.h>
 #include <map>
+#include <vector>
 #include <assert.h>
 #include <string.h>
 #include <stdio.h>
@@ -44,6 +47,7 @@
 // Includes from auto-generated files
 #include "dotdot_mqtt.h"
 
+using namespace attribute_store;
 constexpr char LOG_TAG[] = "ucl_node_state_topic";
 
 /**
@@ -303,6 +307,47 @@ static sl_status_t publish_node_state(attribute_store_node_t node_id_node,
   return SL_STATUS_OK;
 }
 
+// Publish the endpoint list per node when the node state topic is
+// NODE_STATE_TOPIC_STATE_INCLUDED
+static void publish_endpoint_list(attribute_store_node_t node_id_node)
+{
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+  network_status = get_node_network_status(node_id_node);
+
+  if (network_status >= NODE_STATE_TOPIC_LAST) {
+    sl_log_error(LOG_TAG, "Invalid topic state\n");
+    return;
+  }
+  if (network_status != NODE_STATE_TOPIC_STATE_INCLUDED) {
+    return;
+  }
+  std::string topic_basic = "ucl/by-unid/";
+  unid_t unid;
+  attribute_store_network_helper_get_unid_from_node(node_id_node, unid);
+  topic_basic.append(unid);
+  // Get endpoint lists
+  std::vector<zwave_endpoint_id_t> endpoint_list;
+  attribute attr_node(node_id_node);
+  for (attribute endpoint_node: attr_node.children(ATTRIBUTE_ENDPOINT_ID)) {
+    if (endpoint_node.reported_exists()) {
+      try {
+        zwave_endpoint_id_t ep = endpoint_node.reported<zwave_endpoint_id_t>();
+        endpoint_list.push_back(ep);
+      } catch (std::exception &e) {
+        sl_log_warning(
+          LOG_TAG,
+          "Failed to read the endpoint reported value for attribute  %s",
+          e.what());
+      }
+    }
+  }
+  // Publish the EndpointidList
+  uic_mqtt_dotdot_state_endpoint_id_list_publish(topic_basic.c_str(),
+                                                 endpoint_list.size(),
+                                                 &endpoint_list[0],
+                                                 UCL_MQTT_PUBLISH_TYPE_ALL);
+}
+
 static void unretain_node_publications(attribute_store_node_t node)
 {
   unid_t unid;
@@ -341,6 +386,7 @@ static void
 
   if (node_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
     publish_node_state(node_id_node, true);
+    publish_endpoint_list(node_id_node);
   }
 }
 

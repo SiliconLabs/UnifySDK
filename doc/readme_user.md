@@ -37,7 +37,11 @@ The Unify distribution is targeted a Debian Buster platform. A binary debian
 packages for a raspberry pi 4 are provided with the SDK and they are available
 on github [release page](https://github.com/SiliconLabs/UnifySDK/releases). 
 
-The simplest way to install the Unify components is to use the `apt` tool: 
+The simplest way to install the Unify components is to use the `apt` tool.
+Transfer the .deb packages to the target via eg. SCP.
+Make sure to use either a local relative path with './' or an absolute paths.
+Otherwise apt will look for the package in the wrong place and fail. 
+For example:
 
 ```bash
 sudo apt install uic-<component>_<version>_armhf.deb
@@ -218,3 +222,18 @@ to enable the TLS encrypted connection. The option can be provided from command 
 config file of the components.
 
 >NOTE: the DevUI will need the certificates as input from the user interface itself.
+
+
+## Evaluation
+
+Once all Unify Application components are installed and configured, one can
+evaluate the system via running IoT service such as Unify dev_gui.
+
+The Unify dev_gui can be accessed from a browser on
+[http://raspberrypi.local:3080](http://raspberrypi.local:3080).
+
+_Note_ that the Unify user interface needs TCP access to the port 3080 and 1337
+on the Raspberry Pi.
+
+See the [Dev-GUI manual](applications/dev_ui/dev_gui/readme_user.md) for more
+information about using this interface.

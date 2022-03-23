@@ -8,6 +8,7 @@ target_link_libraries(aoxpc
   uic_log
   uic_main
   ncp
+  antenna_array
   aoa_angle
   aoa_utils
   aoa_parse

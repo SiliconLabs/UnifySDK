@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"ucl_enums.html#enum_tl_zigbee_information_logical_type":[47,83],
 "ucl_enums.html#enum_trigger_effect_effect_identifier":[47,99],
 "ucl_enums.html#enum_trigger_effect_effect_variant":[47,100],
 "ucl_enums.html#enum_tx_report_transmission_speed":[47,101],

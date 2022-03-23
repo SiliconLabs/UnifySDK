@@ -3,6 +3,14 @@ set(Boost_USE_MULTITHREADED ON)
 find_package(Boost COMPONENTS program_options)
 find_package(Yaml-cpp REQUIRED)
 
+if(NOT YAML_CPP_LIBRARIES)
+  # On most machines the yaml-cpp configuration doesnt set YAML_CPP_LIBRARIES,
+  # YAML_CPP_FOUND and YAML_CPP_INCL_DIRS even though it seems that a find
+  # package config is found and some environment is set. explicitly set
+  # '-lyaml-cpp' so that we can fallback on PKG-CONFIG to resolve our dependency
+  set(YAML_CPP_LIBRARIES "yaml-cpp")
+endif()
+
 # Library
 set(CONFIG_SRC platform/${COMPATIBLE_PLATFORM}/config.cpp)
 set(CONFIG_INCLUDE include/)
@@ -15,14 +23,6 @@ target_include_directories(
 target_link_libraries(uic_config ${CONFIG_DEPS})
 target_compile_definitions(
   uic_config PRIVATE CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
-
-# Test
-target_add_unittest(uic_config
-SOURCES test/config_test.c)
-
-target_compile_definitions(
-  uic_config_test PRIVATE CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}"
-                      CONFIG_UNITTEST)
 
 
 add_subdirectory(test)

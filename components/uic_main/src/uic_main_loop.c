@@ -64,6 +64,11 @@ bool uic_main_loop_run(void)
 {
   clock_time_t delay = UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY;
 
+#ifdef ZWAVE_BUILD_SYSTEM
+  /* Check if there are time-out events by polling etimer. */
+  etimer_request_poll();
+#endif
+
   int retval = 1;
   /* Keep going as long as there are events on the event queue or
    * poll has been requested (process_run() processes all polls
@@ -87,8 +92,10 @@ bool uic_main_loop_run(void)
     * conktiki event to handle it later. */
   uic_main_ext_select(delay);
 
+#ifndef ZWAVE_BUILD_SYSTEM
   /* Check if there are time-out events by polling etimer. */
   etimer_request_poll();
+#endif
 
   return true;
 }

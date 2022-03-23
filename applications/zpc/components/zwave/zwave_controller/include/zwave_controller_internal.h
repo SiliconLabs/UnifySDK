@@ -44,13 +44,21 @@ void zwave_controller_on_node_deleted(zwave_node_id_t node_id);
 /// see @ref zwave_controller_callbacks_t
 void zwave_controller_on_node_info_req_failed(zwave_node_id_t node_id);
 /// see @ref zwave_controller_callbacks_t
-void zwave_controller_on_frame_transmission_failed(zwave_node_id_t node_id);
-/// see @ref zwave_controller_callbacks_t
-void zwave_controller_on_frame_transmission_success(zwave_node_id_t node_id);
-/// see @ref zwave_controller_callbacks_t
 void zwave_controller_on_frame_transmission(bool transmission_successful,
                                             const zwapi_tx_report_t *tx_status,
                                             zwave_node_id_t node_id);
+
+/**
+ * @brief Tell the Z-Wave Controller that we received a frame (Rx)
+ * from a NodeID
+ *
+ * The Z-Wave Controller will invoke the on_rx_frame_received functions
+ * from the @ref zwave_controller_callbacks_t
+ *
+ * @param node_id The NodeID that sent the frame.
+ */
+void zwave_controller_on_frame_reception(zwave_node_id_t node_id);
+
 /// see @ref zwave_controller_callbacks_t
 void zwave_controller_on_node_added(sl_status_t status,
                                     const zwave_node_info_t *nif,

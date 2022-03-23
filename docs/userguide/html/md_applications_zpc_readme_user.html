@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify SDK User Guide
-   &#160;<span id="projectnumber">1.1.0</span>
+   &#160;<span id="projectnumber">1.1.1</span>
    </div>
   </td>
  </tr>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('md_applications_zpc_readme_user.html',
 <div class="contents">
 <div class="textblock"><p>This user guide will guide the reader on how to install, configure and run the Z-Wave Protocol Controller (ZPC).</p>
 <p>The ZPC translates the Unify Controller Language(UCL) into Z-Wave commands and communicates with Z-Wave devices in a Z-Wave network and is a full certifiable Z-Wave controller.</p>
-<h2><a class="anchor" id="autotoc_md366"></a>
+<h2><a class="anchor" id="autotoc_md400"></a>
 Files</h2>
 <p>The Debian package of the ZPC contains the following files:</p>
 <table class="markdownTable">
@@ -118,7 +118,7 @@ Files</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">/usr/share/uic/zwave_poll_config.yaml  </td><td class="markdownTableBodyNone">Default location of network polling attribute list   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md367"></a>
+<h3><a class="anchor" id="autotoc_md401"></a>
 Configuration File</h3>
 <p>The configuration file is written in YAML and is used to set up the ZPC. The ZPC can dump the running configuration using the command line option <code>--dump</code>. The dumped file can be used as a starting point a config file.</p>
 <p>Configuration file example:</p>
@@ -151,14 +151,14 @@ Configuration File</h3>
 <div class="line">    - attribute_list_file:&#39;/usr/share/uic/zwave_poll_config.yaml&#39;</div>
 <div class="line">    - backoff: 30</div>
 <div class="line">    - default_interval: 60</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md368"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md402"></a>
 Database File</h3>
 <p>The ZPC uses a sqlite database for storing network information. The default location of the database is /var/lib/uic/zpc.db. The database must be located in a writable part of the file system. If the database is lost, the ZPC will lose vital information about the network and need to probe all nodes in the network.</p>
 <blockquote class="doxtable">
 <p>WARNING: the ZPC is not able to recover all lost information by re-interviewing, ie. the granted security keys for the nodes. </p>
 </blockquote>
 <p>The best way to run ZPC is using the Systemd service that is installed with the Debian installer. For more information, see <a class="el" href="index.html#md_README">README.md</a>.</p>
-<h2><a class="anchor" id="autotoc_md369"></a>
+<h2><a class="anchor" id="autotoc_md403"></a>
 Running ZPC From the Command Line</h2>
 <p>When running the ZPC from the command line provides an interactive Command Line Interface (CLI) is available. To get more information about the commands, type <code>help</code> in the CLI.</p>
 <p>These are the steps to run the ZPC from the command line:</p>
@@ -172,7 +172,7 @@ Running ZPC From the Command Line</h2>
 <p>Note that the default permissions for the ZPC database file located in /var/lib/uic/zpc.db is only writable for the <em>uic</em> system user (which is created upon installation). If you run the zpc as another user, select a different database location.</p>
 <p>For example,</p>
 <div class="fragment"><div class="line">zpc --zpc.serial /dev/ttyUSB0 --zpc.rf_region EU --zpc.datastore_file mydatabase.db --mapdir rules</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md370"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md404"></a>
 Updating the NCP firmware</h1>
 <p>The ZPC is able to update the NCP firmware over the serial(USB) link. The firmware update is performed by providing a Gecko Boot loader file(GBL) at the command line when booting the ZPC.</p>
 <p>There are two command line options to be aware of, <code>--zpc.ncp_version</code> and <code>--zpc.ncp_update</code>.</p>
@@ -196,12 +196,12 @@ Updating the NCP firmware</h1>
 <div class="line">echo 1 &gt; /dev/ttyUSB0</div>
 <div class="line">sx ZW_SerialAPI_Controller_7.15.4_256_EFR32ZG14_REGION_EU.gbl &lt; /dev/ttyUSB0 &gt; /dev/ttyUSB0</div>
 <div class="line">echo 2 &gt; /dev/ttyUSB0</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md373"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md407"></a>
 Performing Firmware Updates of End Devices</h1>
 <p>The ZPC has the capability to perform Firmware Updates of end devices. Performing firmware updates requires <a class="el" href="md_applications_image_provider_readme_user.html">Image</a>Provider" application to be run and configured correctly. The section below discusses on how to construct UIID and VERSION information that are required to perform firmware update of an end device.</p>
 <p>Firmware updates can be triggered by providing the <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider</a> with compatible firmware images and meta data information.</p>
 <p>Once the a firmware update is successfully performed on an end device, the ZPC will automatically re-interview the device and present the capabilities of the device to the IoT services. </p>
-<h2><a class="anchor" id="autotoc_md374"></a>
+<h2><a class="anchor" id="autotoc_md408"></a>
 OTA UIID Construction</h2>
 <p>To upload an image for a Z-Wave node, compute a Unique Image Identifier (UIID) for this device.</p>
 <p>The UIID for the ZPC is a string that can be constructed using the following information:</p>
@@ -213,7 +213,7 @@ OTA UIID Construction</h2>
 <li>The Hardware version (Version Command Class, 1 byte)</li>
 </ul>
 <p>The string must be formatted using the following format with all values in hexadecimal: <b>ZWave-&lt;ManufacturerID&gt;-&lt;ProductType&gt;-&lt;ProductID&gt;-&lt;FirmwareTarget&gt;-&lt;HardwareVersion&gt;</b></p>
-<h2><a class="anchor" id="autotoc_md375"></a>
+<h2><a class="anchor" id="autotoc_md409"></a>
 UIID/UNID Association</h2>
 <p>When the ZPC interviews a node, it will publish the detected firmware targets under the UIID space in the OTA cluster: <code>ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/#</code></p>
 <p>For more details about available attributes under each UIID, see the the Unify specification - Common OTA FW Update Service chapter.</p>
@@ -222,7 +222,7 @@ UIID/UNID Association</h2>
 <div class="fragment"><div class="line">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-00-01/CurrentVersion/Reported - {&quot;value&quot;: &quot;3.2.0&quot;}</div>
 <div class="line">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-01-01/CurrentVersion/Reported - {&quot;value&quot;: &quot;3.2.0&quot;}</div>
 </div><!-- fragment --><p>UIID <em>ZWave-010f-1002-0b01-00-01</em> can be used to firmware update target 0. UIID <em>ZWave-010f-1002-0b01-01-01</em> can be used to firmware update target 1.</p>
-<h2><a class="anchor" id="autotoc_md376"></a>
+<h2><a class="anchor" id="autotoc_md410"></a>
 Version String Calculation</h2>
 <p>The version of a firmware is determined based on the data reported by the Z-Wave node using the Version Command Class.</p>
 <p>The version string will be composed of three decimal digits following <a href="https://semver.org/">semantic versioning</a>. By default, the version for a given firmware will be fetched in the Version Command Class, in the Version Report Command. Only the Major and Minor digits can be retrieved from this report.</p>
@@ -239,7 +239,7 @@ Version String Calculation</h2>
 <li>Application Version 3 (LSB) = 15</li>
 </ul>
 <p>The resulting version string will be "3.14.15".</p>
-<h2><a class="anchor" id="autotoc_md377"></a>
+<h2><a class="anchor" id="autotoc_md411"></a>
 Examples</h2>
 <p>This sections provides an example using the <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider</a> and <a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Developer GUI</a> to perform a firmware update of a PowerStrip sample application.</p>
 <p>First, make sure that the ZPC, <a class="el" href="md_applications_image_provider_readme_user.html">Image Provider</a> and <a class="el" href="md_applications_dev_ui_dev_gui_readme_user.html">Developer GUI</a> are running.</p>
@@ -285,7 +285,7 @@ Examples</h2>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported - {<span class="stringliteral">&quot;value&quot;</span>: <span class="stringliteral">&quot;Idle&quot;</span>}</div>
 </div><!-- fragment --><p>This state will only be visible for a very short time, as the ZPC will re-interview the node and will unpublish its state and capabilities for the time of the interview.</p>
 <p><img src="dev_gui_node_interview_button.png" alt="" class="inline" title="Re-interview button in DevGUI"/>   </p>
-<h2><a class="anchor" id="autotoc_md378"></a>
+<h2><a class="anchor" id="autotoc_md412"></a>
 Possible Errors</h2>
 <p>There are a few possible errors described in the Unify specification. The <em>LastError</em> attribute indicates the status of the last Firmware Update/transfer attempt.</p>
 <p><img src="dev_gui_possible_firmware_udpate_errors.png" alt="" class="inline" title="Errors during Firmware Update"/>   </p>
@@ -295,10 +295,10 @@ Possible Errors</h2>
 <li><b>Aborted</b> This error can happen if the transfer could not complete without a timeout.</li>
 </ul>
 <p>In the case of an abort, you can retry a Firmware Update by modifying the Image Provider list of images. Remove the UIID(/UNID) combination, wait for the image Provider to advertise that the image is no longer available, and modify back the image list with the desired UIID(/UNID) combination.</p>
-<h1><a class="anchor" id="autotoc_md379"></a>
+<h1><a class="anchor" id="autotoc_md413"></a>
 Understanding how the ZPC Works</h1>
 <p>The purpose of this section is to explain the ZPC behavior and how to correlate frames seen on a Z-Wave Zniffer with operations performed by the ZPC.</p>
-<h2><a class="anchor" id="autotoc_md380"></a>
+<h2><a class="anchor" id="autotoc_md414"></a>
 Discovery and Operation</h2>
 <p>The ZPC performs network discovery and operation of for both listening and non listening devices using a software component called the attribute system.</p>
 <p>The basic idea of the attribute system is that all network state parameters have a reported value and a desired value. The following are examples of state parameters:</p>
@@ -319,11 +319,11 @@ Discovery and Operation</h2>
 <p>Currently, when the ZPC sends a SET command with supervision encapsulation and the device reports the supervision state working, the ZPC will not reflect this on the MQTT side. The reported value will be updated on MQTT side when the supervision state OK/FAILED is received. </p>
 </blockquote>
 <p>In the event that a node does not adapt a set value or does not answer a get command the ZPC will try the ZPC command 3 times with a 20 second interval.</p>
-<h1><a class="anchor" id="autotoc_md381"></a>
+<h1><a class="anchor" id="autotoc_md415"></a>
 Wake up device support</h1>
 <p>The Z-Wave Wake up devices are supported by pausing node resolution when the device is sleeping, which means that if the temperature of a thermostat is changed multiple times while the device is sleeping, the ZPC will only send the latest change using thermostat set point command. The ZPC will send wake up no-more information when there is nothing more to resolve regarding the node.</p>
 <p>The default wake up interval used by the ZPC can be configured with the option <code>zpc.default_wake_up_interval</code>.</p>
-<h1><a class="anchor" id="autotoc_md382"></a>
+<h1><a class="anchor" id="autotoc_md416"></a>
 Failing nodes</h1>
 <p>The ZPC has a mechanism to detect if nodes in the network has become unresponsive. If consecutive transmissions to node has failed for a number of times, or if consecutive wake up information's has been missed from a node, that node has become failing and the ZPC will update the node <em>State</em> topic to <em>FAILING</em>. As soon as a frame, either application frame or Z-Wave acknowledgement frame, has been received from the node the ZPC will revert the node state to <em>INCLUDED</em>. The ZPC will periodically send <em>NOP</em> frames to listening and FLIRS failing nodes to check if they are resounding again.</p>
 <p>The NOP interval of failing nodes is</p><ul>
@@ -331,7 +331,7 @@ Failing nodes</h1>
 <li>40 * 4^n for FLiRS devices</li>
 </ul>
 <p>The threshold values for the number of failed transmissions and missing wake up notifications can be configured with the options, zpc.accepted_transmit_failure and zpc.missing_wake_up_notification</p>
-<h1><a class="anchor" id="autotoc_md383"></a>
+<h1><a class="anchor" id="autotoc_md417"></a>
 Network Polling</h1>
 <p>The ZPC relies on reports from the Z-Wave nodes in order to keep the state the network. However, some devices may not report state updates when there are change in the network. To fill this gap, The ZPC SDK includes network polling feature where the state of a given attributes are periodically updated via sending a request to the Z-Wave node.</p>
 <p>To enable the network polling feature, the user shall provide a list of attributes and their expected polling interval in yaml configuration file. If the controlling node get the attribute state update due to the user request or unsolicited report, the polling will be postponed. Note that the polling interval represents the maximum 'age' of a given attribute state. The polling interval value shall be presented in seconds and the interval should be included distinctly for the Z-Wave Device Types:</p><ul>
@@ -351,9 +351,9 @@ Network Polling</h1>
 </div><!-- fragment --><p>Attribute types can be provided either as their name like above, or with their type id, like <em>attribute_type:0x002502</em></p>
 <p>When the ZPC is installed on the Debian Buster platform the sample configuration (i.e., the sample contains the recommended attribute types that may require periodic polling based on the device type) file will be located in: </p><div class="fragment"><div class="line">/usr/share/uic/zwave_poll_config.yaml</div>
 </div><!-- fragment --><p>Besides, the user would also configure the minimum interval between two consecutive poll request (i.e., zpc.poll.backoff) and default polling interval (i.e., zpc.poll.default_interval) incase the attribute is registered to be polled without an interval. These values should be included in <a href="#configuration-file">Configuration File used to set up the ZPC</a>. The default backoff interval is set to 30 seconds. This value is selected based on experience and a user can configure a value above 1 second based on their network needs. Note that the minimum rate limit between two consecutive poll request is 1 second as it is discussed in the Z-Wave Plus role Type Specification in Polling Devices section.</p>
-<h1><a class="anchor" id="autotoc_md384"></a>
+<h1><a class="anchor" id="autotoc_md418"></a>
 Dotdot Cluster to Z-Wave Command Class Mapping</h1>
-<h2><a class="anchor" id="autotoc_md385"></a>
+<h2><a class="anchor" id="autotoc_md419"></a>
 Overview</h2>
 <p>The ZPC maps dotdot clusters to Z-Wave command classes and vice versa. All maps are defined by a set of configuration files which the ZPC loads as boot. Default files are installed in the <code>/usr/share/uic/rules</code> directory. The mapping file extension is *.uam which is short for <b>Unify Attribute Map</b>.</p>
 <p>The following table has a brief description of how ZCL clusters are mapped to Z-Wave command classes, by default.</p>
@@ -383,14 +383,14 @@ Overview</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">IASZone  </td><td class="markdownTableBodyNone">Battery  </td><td class="markdownTableBodyNone"></td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md386"></a>
+<h2><a class="anchor" id="autotoc_md420"></a>
 Configuring maps</h2>
 <p>Additional maps can be added, or the existing default maps can be modified as needed. Maps are normally used for dotdot/Z-Wave value conversion, but they can also be used to:</p>
 <ul>
 <li>Fill device data automatically, and skip interviewing known properties</li>
 <li>Configure/Set certain values automatically</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md387"></a>
+<h3><a class="anchor" id="autotoc_md421"></a>
 Mapper file structure</h3>
 <p>A mapper file template could be as follow:</p>
 <div class="fragment"><div class="line">// this is a comment</div>
@@ -402,7 +402,7 @@ Mapper file structure</h3>
 <div class="line">  &lt;attribute1&gt; = &lt;expression1&gt;</div>
 <div class="line">  &lt;attribute2&gt; = &lt;expression2&gt;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md388"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md422"></a>
 Mapper grammar and keywords</h3>
 <p>The mapper allows to manipulate attributes that are stored as 32-bit signed integer values. Each attribute can use the following "value states":</p>
 <ul>
@@ -519,7 +519,7 @@ Mapper grammar and keywords</h3>
 <div class="line">scope 0 {</div>
 <div class="line">r&#39;zwave_state = r&#39;zigbee_state</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md389"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md423"></a>
 Attribute types</h3>
 <p>To configure a map, the attribute types that will be mapped must be identifed first. Each Command Class has a set of defined attribute types that it allocates in the attribute store under endpoints.</p>
 <p>The CLI can be used on a running ZPC to print out the attribute store and its contents. It is an easy and quick way to find out the list of attribute types and their values for a given NodeID. For example, showing the attribute store data for NodeID 4:</p>
@@ -538,7 +538,7 @@ Attribute types</h3>
 <div class="line">    id:  4101 type: 0x00006201: reported: [04] desired: []                      ATTRIBUTE_COMMAND_CLASS_DOOR_LOCK_VERSION</div>
 <div class="line">    id:  4102 type: 0x00006301: reported: [01] desired: []                      0x00006301</div>
 <div class="line">[...]</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md390"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md424"></a>
 Z-Wave Attributes</h4>
 <p>Most Z-Wave attributes types are defined in the <code>attribute_store_defined_attribute_types.h</code> header file. Most of the time, attributes are stored directly under the endpoint. In this case, the attribute can simply be referred to with its type.</p>
 <p>For example, the Basic Value reported in the Basic Command Class is defined here:</p>
@@ -550,13 +550,13 @@ Z-Wave Attributes</h4>
 </div><!-- fragment --><p>Some attributes are defined as part of the auto-generated code. The list of command classes using auto-generated code can be found in the list of supported/controlled command classes. If a command class is auto-generated, there will be a header file in the build folder containing attribute type definitions. For example, for the Door Lock Command Class, refer to <code>zwave_COMMAND_CLASS_DOOR_LOCK_attribute_id.h</code></p>
 <p>When mapping, we have to be aware of the tree structure. Sometimes, attributes are placed a few levels under the endpoint. When this is the case, command class handlers describe how the tree structure is organized in a PlantUML diagram included in their header files.</p>
 <p>In general, it is recommended to reuse the attribute types defined in the existing maps, rather than investigate how attribute may be stored in the attribute tree.</p>
-<h4><a class="anchor" id="autotoc_md391"></a>
+<h4><a class="anchor" id="autotoc_md425"></a>
 DotDot Attributes</h4>
 <p>Dotdot attributes are automatically determined by their Cluster ID / Attribute ID. They are in most cases placed directly under the endpoint.</p>
 <p>The 32 bits values is composed by doing <code>cluster_id&lt;&lt;16 + attribute_id</code>. For example, the OnOff attribute (id = <code>0</code>) of the OnOff Cluster (id= <code>0x0006</code>) is <code>0x00060000</code>.</p>
 <p>The Basic Cluster (cluster id = 0) is an exception, to avoid collisions with Z-Wave attributes. Instead, cluster id <code>0xba5c</code> is used for the Basic Cluster.</p>
 <p>If some non-standard attributes are saved (e.g. group ID and Group names for the group cluster, their definitions is added to <code>attribute_store_defined_attribute_types.h</code>)</p>
-<h2><a class="anchor" id="autotoc_md392"></a>
+<h2><a class="anchor" id="autotoc_md426"></a>
 Device fingerprints</h2>
 <p>A few of the default maps give examples of device fingerprints. It is recommended to use the Manufacturer ID, Product Type and Product ID, as a minimum.</p>
 <div class="fragment"><div class="line">// Substitutions</div>
@@ -597,7 +597,7 @@ Device fingerprints</h2>
 <div class="line"> if (door_lock_sample_app_v10_17_0_1) 10</div>
 <div class="line"> undefined</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md393"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md427"></a>
 Mapping between Z-Wave and DotDot</h2>
 <p>To establish a map that reports data on DotDot, we usually need to set reported value of the DotDot attribute to match the reported value or the Z-Wave Attribute.</p>
 <p>DotDot attributes, once set, are detected and published automatically on MQTT. This map will for example publish an OnOff attribute for a Binary Switch value.</p>
@@ -617,7 +617,7 @@ Mapping between Z-Wave and DotDot</h2>
 <p>To make Z-Wave values updates based on DotDot commands, the desired value change of a dotdot attribute should be mapped to an update of the desired Z-Wave value:</p>
 <div class="fragment"><div class="line">// Linking desired attributes zigbee -&gt; zwave</div>
 <div class="line">d&#39;zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE = d&#39;zbON_OFF_CLUSTER_SWITCH</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md394"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md428"></a>
 Automatic lifeline/association establishment</h2>
 <p>The ZPC can be configured through maps to establish associations. The ZPC associates itself whenever the AGI group profile of an association group is set to 0x01 or 0x00.</p>
 <p>If the ZPC is the SIS and the AGI profile is set to 0x0001, it will establish an association forcefully, i.e. it will remove nodes from the association if this group is already full to get associated itself.</p>
@@ -648,7 +648,7 @@ Automatic lifeline/association establishment</h2>
 <div class="line">  if (powerstrip_sample_app) ESTABLISH_ASSOCIATION</div>
 <div class="line">  undefined</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md395"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md429"></a>
 Migrating to ZPC from Z/IP Gateway</h1>
 <p>This section describes how to migrate to a ZPC from a Z/IP gateway. If migration from a third party gateway is desired, the first step in the migration process is to migrate to a Z/IP Gateway.</p>
 <p>To successfully migrate, the following Z/IP Gateway SDK tools are needed.</p><ul>
@@ -689,7 +689,7 @@ Migrating to ZPC from Z/IP Gateway</h1>
 <li>With the updated JSON file, a new database can be constructed with zpc_database_tool. <code>zpc_database_tool --zpc.datastore_file datastore.db --import modified_datastore.json</code></li>
 <li>You can now start the ZPC as usual. The ZPC will start probing all nodes, sleeping devices will be probed when they wake up.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md396"></a>
+<h2><a class="anchor" id="autotoc_md430"></a>
 ZPC Database JSON Example</h2>
 <div class="fragment"><div class="line">   {</div>
 <div class="line">  &quot;type&quot;: &quot;0x00000001&quot;,</div>
@@ -771,7 +771,7 @@ ZPC Database JSON Example</h2>
 <div class="line">    }</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md397"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md431"></a>
 Transitioning from Z/IP Gateway + Z-Ware</h1>
 <p>The ZPC provides a subset of Z-Wave features compared to the Z/IP Gateway.</p>
 <ul>
@@ -787,7 +787,7 @@ Transitioning from Z/IP Gateway + Z-Ware</h1>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md398"></a>
+<h1><a class="anchor" id="autotoc_md432"></a>
 Performing Backup and Restore</h1>
 <p>The backup and restore process works under the assumption that the controller firmware version for the backup and restore is identical.</p>
 <p>The following are the backup steps:</p><ul>
@@ -802,7 +802,7 @@ Performing Backup and Restore</h1>
 <li>Use zw_programmer to restore the NVM to the Z-Wave module. Copy a backup of the SQLite database to an active SQLite database.</li>
 <li>Start the ZPC again.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md399"></a>
+<h1><a class="anchor" id="autotoc_md433"></a>
 Datastore Versioning</h1>
 <p>The ZPC defines a revision of the datastore. Every time a non-compatible change will be made in a new version, the ZPC datastore version will be incremented.</p>
 <p>The ZPC will automatically refuse to start if it detects a version mismatch between its ZPC datastore version and the version written in the datastore file.</p>
@@ -810,7 +810,7 @@ Datastore Versioning</h1>
 <div class="line">with the ZPC datastore version: 2. Please convert your ZPC datastore <span class="keyword">using</span> the</div>
 <div class="line">ZPC datastore tools</div>
 <div class="line">&lt;C&gt; [uic_component_fixtures] Failed  [1]: Datastore.</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md400"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md434"></a>
 Recovering a Database</h2>
 <p>If you wish to keep the previous datastore file, you can use the <code>zpc_database_recover_tool</code>. This tool will remove all information under all endpoints and keep the minimum in the datastore.</p>
 <p>After running the recover tool, the ZPC will re-interview all devices in the network, as if a migration was performed.</p>
@@ -833,7 +833,7 @@ Recovering a Database</h2>
 <li>Create a new database file using the migration tool.</li>
 <li>Reset the network.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md401"></a>
+<h1><a class="anchor" id="autotoc_md435"></a>
 Z-Wave Certification</h1>
 <p>For information relevant to Z-Wave please read <a class="el" href="md_applications_zpc_readme_certification.html">ZPC Z-Wave Certification Guide</a> </p>
 </div></div><!-- contents -->
@@ -842,7 +842,7 @@ Z-Wave Certification</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Feb 9 2022 14:34:00 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Mar 23 2022 08:49:23 for Unify SDK User Guide by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

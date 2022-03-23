@@ -65,7 +65,6 @@ sl_status_t aoxpc_fixt_setup(void)
 {
   process_start(&aoxpc_process, NULL);
   ncp_set_cb(sl_bt_on_event);
-  aoa_cte_init();
   aox_locator_register_on_configuration_updated_callback(
     &aoxpc_configuration_handler_on_aox_locator_configuration_updated);
   return SL_STATUS_OK;
@@ -193,6 +192,8 @@ static void sl_bt_on_event(sl_bt_msg_t *evt)
         #ifdef AOA_ANGLE
         aoa_angle_config_t *config;
         aoa_angle_add_config(locator_unid, &config);
+        // Share antenna array configuration with the CTE component.
+        aoa_cte_config.antenna_array = &config->antenna_array;
         #endif // AOA_ANGLE
 
         // Load the previous AoXLocator configuration from the attribute store
@@ -221,6 +222,10 @@ static void sl_bt_on_event(sl_bt_msg_t *evt)
           // attribute store
           aoxpc_configuration_handler_on_aox_locator_configuration_updated();
         }
+
+        // Make sure that the attributes are published at startup even if
+        // the database file is empty and no config file is provided.
+        publish_aox_locator_attributes_to_mqtt();
 
         // Assuming all dotdot MQTT callbacks are set, ask to publish our
         // supported commands for all clusters.

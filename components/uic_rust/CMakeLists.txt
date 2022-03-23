@@ -53,7 +53,6 @@ generate_rust_bindings(
   DEPENDS
   uic_mqtt)
 
-
 generate_rust_bindings(
   NAME
   uic_main
@@ -65,3 +64,13 @@ generate_rust_bindings(
   DEPENDS
   "uic_main"
   "uic_stdin")
+
+generate_rust_bindings(
+  NAME
+  unify_validator
+  ALLOW_LIST
+  ".*valid.*"
+  HEADERS
+  "$<TARGET_PROPERTY:unify_validator,SOURCE_DIR>/include/*.h"
+  DEPENDS
+  unify_validator)
