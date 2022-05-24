@@ -3,6 +3,7 @@ Description=Unify Zigbee Protocol Controller
 After=network.target mosquitto.service
 
 [Service]
+WorkingDirectory=/var/lib/uic
 ExecStart=/usr/bin/zigpc --conf /etc/uic/uic.cfg
 Restart=on-failure
 KillMode=mixed
