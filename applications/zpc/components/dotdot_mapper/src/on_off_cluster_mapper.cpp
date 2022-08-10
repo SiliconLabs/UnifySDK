@@ -14,9 +14,12 @@
 #include "on_off_cluster_mapper.h"
 #include "dotdot_attributes.h"
 
-// Includes from UIC
+// Includes from Unify
 #include "sl_log.h"
 #include "sl_status.h"
+#include "attribute_store_helper.h"
+#include "zpc_attribute_store_network_helper.h"
+#include "ucl_definitions.h"
 
 // Includes from auto-generated files
 #include "dotdot_mqtt.h"
@@ -24,40 +27,9 @@
 // Setup Log ID
 #define LOG_TAG "on_off_cluster_mapper"
 
-constexpr int32_t ON_VALUE  = 0xFF;
-constexpr int32_t OFF_VALUE = 0x00;
-
-///////////////////////////////////////////////////////////////////////////////
-// Forward declarations
-///////////////////////////////////////////////////////////////////////////////
-sl_status_t
-  on_off_cluster_mapper_on(const dotdot_unid_t unid,
-                           const dotdot_endpoint_id_t endpoint,
-                           uic_mqtt_dotdot_callback_call_type_t callback_type);
-sl_status_t
-  on_off_cluster_mapper_off(const dotdot_unid_t unid,
-                            const dotdot_endpoint_id_t endpoint,
-                            uic_mqtt_dotdot_callback_call_type_t callback_type);
-sl_status_t on_off_cluster_mapper_toggle(
-  const dotdot_unid_t unid,
-  const dotdot_endpoint_id_t endpoint,
-  uic_mqtt_dotdot_callback_call_type_t callback_type);
-///////////////////////////////////////////////////////////////////////////////
-// Helper function
-///////////////////////////////////////////////////////////////////////////////
-static void set_on_off_cluster(const dotdot_unid_t unid,
-                               const dotdot_endpoint_id_t endpoint,
-                               int32_t value)
-{
-  if (dotdot_is_supported_on_off_on_off(unid, endpoint)) {
-    dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, value);
-  }
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // Control functions
 ///////////////////////////////////////////////////////////////////////////////
-
 sl_status_t
   on_off_cluster_mapper_on(const dotdot_unid_t unid,
                            const dotdot_endpoint_id_t endpoint,
@@ -67,8 +39,7 @@ sl_status_t
     return dotdot_is_supported_on_off_on_off(unid, endpoint) ? SL_STATUS_OK
                                                              : SL_STATUS_FAIL;
   }
-  set_on_off_cluster(unid, endpoint, ON_VALUE);
-  return SL_STATUS_OK;
+  return dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, true);
 }
 
 sl_status_t
@@ -79,10 +50,9 @@ sl_status_t
   if (callback_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
     return dotdot_is_supported_on_off_on_off(unid, endpoint) ? SL_STATUS_OK
                                                              : SL_STATUS_FAIL;
-    ;
   }
-  set_on_off_cluster(unid, endpoint, OFF_VALUE);
-  return SL_STATUS_OK;
+
+  return dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, false);
 }
 
 sl_status_t on_off_cluster_mapper_toggle(
@@ -94,15 +64,37 @@ sl_status_t on_off_cluster_mapper_toggle(
     return dotdot_is_supported_on_off_on_off(unid, endpoint) ? SL_STATUS_OK
                                                              : SL_STATUS_FAIL;
   }
-  int32_t set_value
-    = (dotdot_get_on_off_on_off(unid, endpoint, REPORTED_ATTRIBUTE) == ON_VALUE)
-        ? OFF_VALUE
-        : ON_VALUE;
+  bool set_value
+    = !dotdot_get_on_off_on_off(unid, endpoint, REPORTED_ATTRIBUTE);
 
-  dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, set_value);
-  return SL_STATUS_OK;
+  return dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, set_value);
 }
 
+// The basic value is usually created after the node interview is done.
+// Therefore, we fist check the node interview is done. Then, we check
+// if the corrsponding dotdot attribute is created if it does we republish
+// the supported commands to enure that OnOff cluster is publish as supported
+// one a given node is only supporting Basic command class and it maped to
+// dotdot OnOff cluster attribute.
+static void
+  on_onoff_attribute_created_due_to_basic_value(attribute_store_node_t node,
+                                                attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_CREATED) {
+    return;
+  }
+  node_state_topic_state_t network_status
+    = attribute_store_network_helper_get_network_status(node);
+  if (network_status != NODE_STATE_TOPIC_STATE_INCLUDED) {
+    return;
+  }
+  unid_t unid;
+  zwave_endpoint_id_t endpoint_id;
+  attribute_store_network_helper_get_unid_endpoint_from_node(node,
+                                                             unid,
+                                                             &endpoint_id);
+  uic_mqtt_dotdot_publish_supported_commands(unid, endpoint_id);
+}
 ///////////////////////////////////////////////////////////////////////////////
 // Init and teardown functions
 ///////////////////////////////////////////////////////////////////////////////
@@ -113,6 +105,11 @@ bool on_off_cluster_mapper_init()
   uic_mqtt_dotdot_on_off_on_callback_set(on_off_cluster_mapper_on);
   uic_mqtt_dotdot_on_off_off_callback_set(on_off_cluster_mapper_off);
   uic_mqtt_dotdot_on_off_toggle_callback_set(on_off_cluster_mapper_toggle);
+
+  // Listen to the BASIC Value attribute is created
+  attribute_store_register_callback_by_type(
+    on_onoff_attribute_created_due_to_basic_value,
+    DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_OFF);
 
   return true;
 }

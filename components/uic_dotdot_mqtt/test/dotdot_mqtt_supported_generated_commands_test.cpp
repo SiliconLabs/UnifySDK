@@ -24,7 +24,7 @@
 #include "sl_status.h"
 
 // Mock includes
-#include "mqtt_mock_helper.h"
+#include "mqtt_test_helper.h"
 
 extern "C" {
 // Component being tested
@@ -33,7 +33,7 @@ extern "C" {
 /// Called before each and every test
 void setUp()
 {
-  mqtt_mock_helper_init();
+  mqtt_test_helper_init();
 }
 
 void test_aox_locator_publish_scene_supported_generated_commands()
@@ -55,7 +55,7 @@ void test_aox_locator_publish_scene_supported_generated_commands()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[]
     = R"({"value": ["AddScene","ViewSceneResponse","RecallScene"]})";
@@ -83,7 +83,7 @@ void test_aox_locator_publish_carbon_monoxide_supported_generated_commands()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"({"value": ["WriteAttributes"]})";
 
@@ -109,7 +109,7 @@ void test_aox_locator_publish_rf_telemetry_supported_generated_commands_no_endpo
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"({"value": ["TxReport"]})";
 
@@ -135,7 +135,7 @@ void test_aox_locator_publish_aox_locator_empty_supported_generated_commands()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"({"value": []})";
 

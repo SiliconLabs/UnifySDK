@@ -17,7 +17,7 @@
 #include "ota_mqtt.hpp"
 #include "ota_download.hpp"
 
-// UIC Components
+// Unify Components
 #include "uic_mqtt.h"
 #include "sl_log.h"
 #include "sys/ctimer.h"

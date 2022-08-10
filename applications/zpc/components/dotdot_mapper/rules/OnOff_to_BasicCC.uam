@@ -7,9 +7,11 @@ def zbON_OFF_CLUSTER_SWITCH 0x00060000
 scope 0 {
 
 // Linking reported attributes zwave -> zigbee
-r'zbON_OFF_CLUSTER_SWITCH = r'zwBASIC_CURRENT_VALUE
+r'zbON_OFF_CLUSTER_SWITCH = if (r'zwBASIC_CURRENT_VALUE>0) 1 0
 
 // Linking desired attributes zigbee -> zwave
-d'zwBASIC_CURRENT_VALUE = d'zbON_OFF_CLUSTER_SWITCH
-
+d'zwBASIC_CURRENT_VALUE =
+  if (d'zbON_OFF_CLUSTER_SWITCH == 0) 0
+  if (d'zbON_OFF_CLUSTER_SWITCH == 1) 255
+  undefined
 }

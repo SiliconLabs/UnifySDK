@@ -41,14 +41,26 @@ sl_status_t zwave_s0_network_init()
   reset_block_next_elem();
   reset_s0_timers();
   if (keystore_network_key_read(KEY_CLASS_S0, key) == false) {
-    sl_log_error(LOG_TAG, "Error reading KEY_CLASS_S0 from keystore\n");
-    return SL_STATUS_FAIL;
+    sl_log_warning(LOG_TAG, "Could not read KEY_CLASS_S0 from keystore\n");
+    return SL_STATUS_OK;
+  } else {
+    s0_set_key(key);
+    return SL_STATUS_OK;
   }
-  s0_set_key(key);
-  return SL_STATUS_OK;
 }
 
 void zwave_s0_set_network_callbacks(const s0_on_bootstrapping_complete_cb cb)
 {
   s0_set_callback(cb);
+}
+
+
+void zwave_s0_stop_bootstrapping() {
+  s0_bootstrapping_stop();
+}
+
+
+void zwave_s0_start_learn_mode(zwave_node_id_t our_nodeid) {
+  (void)(our_nodeid);
+  sl_log_warning(LOG_TAG,"S0 learn mode bootstrapping is not implemented ");
 }

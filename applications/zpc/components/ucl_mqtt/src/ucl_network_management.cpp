@@ -24,7 +24,7 @@
 #include "process.h"
 #include "sys/etimer.h"
 
-// UIC includes
+// Unify includes
 #include "uic_mqtt.h"
 #include "sl_log.h"
 #include "sl_status.h"
@@ -55,16 +55,12 @@ namespace bpt = boost::property_tree;
  * @brief @ref Contiki Event definitions for the Network Monitor Process.
  */
 typedef enum {
-  /// The ZPC entered a new network
-  NEW_NETWORK_EVENT,
   /// A new node was added to the network
   NODE_ADDED_EVENT,
   /// Node interview done
   NODE_DELETED_EVENT,
   ///
   MQTT_CB_EVENT,
-  /// Update the UclNetworkManagement State (on MQTT)
-  UPDATE_STATE_EVENT,
   /// Trigger removing offline node
   UCL_NM_REMOVE_OFFLINE_EVENT,
   /// Trigger node neighbor request update
@@ -110,17 +106,6 @@ typedef enum {
 } ucl_network_management_state_t;
 
 /**
- * @brief Struct used for sending event data with event \ref NEW_NETWORK_EVENT.
- */
-struct new_network_entered_data {
-  zwave_home_id_t home_id;              ///< Home ID
-  zwave_node_id_t node_id;              ///< Node ID
-  zwave_keyset_t granted_keys;          ///< Granted Keys
-  zwave_kex_fail_type_t kex_fail_type;  ///< Kex Fail type.
-  bool remove_old_network;              ///< Set to true to remove old network
-};
-
-/**
  * @brief Struct used for sending event data with event \ref NODE_ADDED_EVENT.
  */
 struct node_added_event_data {
@@ -142,7 +127,7 @@ class UclNetworkManagementStateData
   const std::vector<std::string> requested_state_parameters;
 
   /**
-   * @brief Construct a new Uic State Topic Update Data object
+   * @brief Construct a new Unify State Topic Update Data object
    *
    * @param state
    * @param state_parameters
@@ -158,7 +143,7 @@ class UclNetworkManagementStateData
   {}
 
   /**
-   * @brief Construct a new Uic State Topic Update Data object
+   * @brief Construct a new Unify State Topic Update Data object
    *
    * @param state
    * @param state_parameters
@@ -171,7 +156,7 @@ class UclNetworkManagementStateData
   {}
 
   /**
-   * @brief Construct a new Uic State Topic Update Data object
+   * @brief Construct a new Unify State Topic Update Data object
    *
    * @param state
    */
@@ -185,7 +170,7 @@ class UclNetworkManagementStateData
   {}
 
   /**
-   * @brief Construct a new Uic State Topic Update Data object
+   * @brief Construct a new Unify State Topic Update Data object
    *
    * @param state
    */
@@ -254,6 +239,18 @@ static sl_status_t
                                            const char *message,
                                            const size_t message_length));
 
+static void ucl_network_management_mqtt_callback(const char *topic,
+                                                 const char *message,
+                                                 const size_t message_length);
+
+/**
+ * @brief Builds a full MQTT topic prefix with our current UNID.
+ *
+ * @param unid            The UNID of the Z-Wave Controller
+ * @return std::string topic prefix for NetworkManagement.
+ */
+static std::string get_topic(const unid_t unid);
+
 /**
  * @brief publish a new ZPC network management state
  *
@@ -280,11 +277,10 @@ static void ucl_network_management_on_keys_report(bool csa,
 static void ucl_network_management_on_dsk_report(uint8_t input_length,
                                                  zwave_dsk_t dsk,
                                                  zwave_keyset_t keys);
-static void ucl_network_management_on_new_network_entered(
-  zwave_home_id_t __home_id,
-  zwave_node_id_t __node_id,
-  zwave_keyset_t __granted_keys,
-  zwave_kex_fail_type_t kex_fail_type);
+
+static void
+  ucl_network_management_on_network_address_update(zwave_home_id_t home_id,
+                                                   zwave_node_id_t node_id);
 
 static void
   ucl_network_management_on_node_added(sl_status_t status,
@@ -296,11 +292,8 @@ static void
                                        zwave_protocol_t inclusion_protocol);
 
 // Contiki event helper handler functions
-
 static void ucl_network_management_init();
 static void ucl_network_management_exit();
-static void
-  ucl_network_management_new_network_ev(new_network_entered_data *event_data);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Local Variables and Consts
@@ -316,7 +309,7 @@ constexpr std::string_view UCL_NM_TOPIC_RESET_STR          = "reset";
 constexpr std::string_view UCL_NM_TOPIC_TEMPORARILY_OFFLINE_STR = "idle";
 constexpr std::string_view UCL_NM_TOPIC_SCAN_MODE_STR           = "scan mode";
 
-// Use boost::property_tree::detail::less_nocase as comperator
+// Use boost::property_tree::detail::less_nocase as comparator
 // to make map keys case insensitive
 static const std::multimap<std::string_view,
                            ucl_network_management_state_t,
@@ -335,11 +328,12 @@ static const std::multimap<std::string_view,
 };
 
 static const zwave_controller_callbacks_t ucl_network_management_callbacks = {
-  .on_state_updated       = ucl_network_management_on_state_updated,
-  .on_node_added          = ucl_network_management_on_node_added,
-  .on_new_network_entered = ucl_network_management_on_new_network_entered,
-  .on_keys_report         = ucl_network_management_on_keys_report,
-  .on_dsk_report          = ucl_network_management_on_dsk_report,
+  .on_state_updated = &ucl_network_management_on_state_updated,
+  .on_node_added    = &ucl_network_management_on_node_added,
+  .on_network_address_update
+  = &ucl_network_management_on_network_address_update,
+  .on_keys_report = &ucl_network_management_on_keys_report,
+  .on_dsk_report  = &ucl_network_management_on_dsk_report,
 };
 
 static bool allow_multiple_inclusions = false;
@@ -354,7 +348,7 @@ static unid_t zpc_unid;
 static void ucl_network_management_on_state_updated(
   zwave_network_management_state_t nm_state)
 {
-  static ucl_network_management_state_t ucl_nm_state;
+  ucl_network_management_state_t ucl_nm_state = UCL_NM_TOPIC_LAST;
   switch (nm_state) {
     case NM_IDLE:
       ucl_nm_state = UCL_NM_TOPIC_IDLE;
@@ -377,7 +371,6 @@ static void ucl_network_management_on_state_updated(
     case NM_LEARN_MODE:
     case NM_LEARN_MODE_STARTED:
     case NM_WAIT_FOR_SECURE_LEARN:
-    case NM_WAIT_FOR_PROBE_BY_SIS:
       ucl_nm_state = UCL_NM_TOPIC_JOIN_NETWORK;
       break;
     case NM_WAITING_FOR_NODE_REMOVAL:
@@ -391,15 +384,19 @@ static void ucl_network_management_on_state_updated(
     case NM_FAILED_NODE_REMOVE:
       ucl_nm_state = UCL_NM_TOPIC_REMOVE_NODE;
       break;
+    case NM_ASSIGNING_RETURN_ROUTE:
+      ucl_nm_state = UCL_NM_TOPIC_NETWORK_REPAIR;
+      break;
     default:
       sl_log_warning(LOG_TAG,
                      "Unhandled Network Management state: %d",
                      nm_state);
       break;
   }
-  process_post(&ucl_network_management_process,
-               UPDATE_STATE_EVENT,
-               new UclNetworkManagementStateData(ucl_nm_state));
+
+  if (ucl_nm_state != UCL_NM_TOPIC_LAST) {
+    state_topic_update(zpc_unid, UclNetworkManagementStateData(ucl_nm_state));
+  }
 }
 
 /**
@@ -419,18 +416,18 @@ static void ucl_network_management_on_keys_report(bool csa, zwave_keyset_t keys)
   }
 }
 
-static void ucl_network_management_on_new_network_entered(
-  zwave_home_id_t home_id,
-  zwave_node_id_t node_id,
-  zwave_keyset_t granted_keys,
-  zwave_kex_fail_type_t kex_fail_type)
+static void
+  ucl_network_management_on_network_address_update(zwave_home_id_t home_id,
+                                                   zwave_node_id_t node_id)
 {
-  new_network_entered_data *data = new new_network_entered_data;
-  data->node_id                  = node_id;
-  data->home_id                  = home_id;
-  data->granted_keys             = granted_keys;
-  data->remove_old_network       = true;
-  process_post(&ucl_network_management_process, NEW_NETWORK_EVENT, data);
+  // UNID just changed, we un-subscribe, re-subscribe:
+  uic_mqtt_unretain((get_topic(zpc_unid) + "/NetworkManagement").c_str());
+  write_topic_unsubscribe(zpc_unid, ucl_network_management_mqtt_callback);
+
+  // Set up the new network:
+  zwave_unid_set_home_id(home_id);
+  zwave_unid_from_node_id(node_id, zpc_unid);
+  write_topic_subscribe(zpc_unid, ucl_network_management_mqtt_callback);
 }
 
 /**
@@ -484,13 +481,14 @@ static void ucl_network_management_on_dsk_report(uint8_t input_length,
         dsk_str[index + j] = 'x';
       }
     }
-    process_post(&ucl_network_management_process,
-                 UPDATE_STATE_EVENT,
-                 new UclNetworkManagementStateData(
-                   UCL_NM_TOPIC_ADD_NODE,
-                   {{"ProvisioningMode", "ZWaveDSK"},
-                    {"SecurityCode", std::string(dsk_str)}},
-                   {"SecurityCode", "UserAccept", "AllowMultipleInclusions"}));
+
+    state_topic_update(
+      zpc_unid,
+      UclNetworkManagementStateData(
+        UCL_NM_TOPIC_ADD_NODE,
+        {{"ProvisioningMode", "ZWaveDSK"},
+         {"SecurityCode", std::string(dsk_str)}},
+        {"SecurityCode", "UserAccept", "AllowMultipleInclusions"}));
   } else {
     // If the highest requested key is unauthenticated, we accept the received DSK directly
     // since the inclusion does not need authentication.
@@ -507,9 +505,10 @@ static void
                                        zwave_kex_fail_type_t kex_fail_type,
                                        zwave_protocol_t inclusion_protocol)
 {
-  process_post(&ucl_network_management_process,
-               UPDATE_STATE_EVENT,
-               new UclNetworkManagementStateData(UCL_NM_TOPIC_IDLE));
+  // When node addition is completed, we are back to IDLE and ready to carry
+  // New operations.
+  state_topic_update(zpc_unid,
+                     UclNetworkManagementStateData(UCL_NM_TOPIC_IDLE));
 }
 
 // MQTT handler function
@@ -663,7 +662,6 @@ static sl_status_t write_topic_received(const std::string &message)
       } break;
       case UCL_NM_TOPIC_REMOVE_NODE:
         zwave_network_management_remove_node();
-
         break;
       case UCL_NM_TOPIC_JOIN_NETWORK:
         break;
@@ -745,7 +743,7 @@ nlohmann::json get_supported_states(ucl_network_management_state_t state)
     case UCL_NM_TOPIC_NODE_INTERVIEW:
       break;
     case UCL_NM_TOPIC_NETWORK_REPAIR:
-      break;
+      return nlohmann::json::array({UCL_NM_TOPIC_IDLE_STR});
     case UCL_NM_TOPIC_NETWORK_UPDATE:
       break;
     case UCL_NM_TOPIC_RESET:
@@ -836,14 +834,11 @@ static void ucl_network_management_init()
          "ucl_network_management_state_t"
          && ucl_network_management_state_map.size() != UCL_NM_TOPIC_LAST - 1);
   zwave_controller_register_callbacks(&ucl_network_management_callbacks);
-  new_network_entered_data *data = new new_network_entered_data;
-  data->node_id                  = zwave_network_management_get_node_id();
-  data->home_id                  = zwave_network_management_get_home_id();
-  // At init, if our keys are not in the datastore, we do not want
-  // to create a wrong granted_key data, so we ask zwave_network_management()
-  data->granted_keys       = zwave_network_management_get_granted_keys();
-  data->remove_old_network = false;
-  ucl_network_management_new_network_ev(data);
+
+  // Make sure UNID is configured.
+  zwave_unid_set_home_id(zwave_network_management_get_home_id());
+  zwave_unid_from_node_id(zwave_network_management_get_node_id(), zpc_unid);
+  write_topic_subscribe(zpc_unid, ucl_network_management_mqtt_callback);
   ucl_network_management_on_state_updated(zwave_network_management_get_state());
   /// intialize ucl network management node neighbor discovery submodule
   ucl_nm_neighbor_discovery_init();
@@ -858,28 +853,18 @@ static void ucl_network_management_exit()
   uic_mqtt_unretain((get_topic(zpc_unid) + "/NetworkManagement").c_str());
 }
 
-static void
-  ucl_network_management_new_network_ev(new_network_entered_data *event_data)
-{
-  // If we just started, do not try to clean up the old network
-  if (event_data->remove_old_network) {
-    // Stop MQTT subscription to the previous network
-    write_topic_unsubscribe(zpc_unid, ucl_network_management_mqtt_callback);
-  }
-  // Configure our new HomeID
-  zwave_unid_set_home_id(event_data->home_id);
-  //Subscribe to our new network management topic
-  zwave_unid_from_node_id(event_data->node_id, zpc_unid);
-  write_topic_subscribe(zpc_unid, ucl_network_management_mqtt_callback);
-  delete event_data;
-}
-
 static void ucl_network_management_remove_offline_node_manager()
 {
   if (zwave_network_management_get_state() == NM_IDLE) {
     zwave_network_management_remove_failed(offline_node_list.front());
     offline_node_list.pop_front();
   } else {
+    sl_log_debug(LOG_TAG,
+                 "Network management state is not idle. Will retry the Remove "
+                 "Offline operation of Node: %d in a second \n",
+                 offline_node_list.front());
+  }
+  if (!offline_node_list.empty()) {
     etimer_restart(&offline_node_timer);
   }
 }
@@ -893,8 +878,16 @@ static void
   std::deque<zwave_node_id_t>::iterator it
     = find(offline_node_list.begin(), offline_node_list.end(), node_id);
   if (it == offline_node_list.end()) {
+    sl_log_debug(LOG_TAG,
+                 "NodeID %d NOT found in offline node list. Adding it\n",
+                 node_id);
     offline_node_list.push_back(node_id);
     ucl_network_management_remove_offline_node_manager();
+  } else {
+    sl_log_debug(
+      LOG_TAG,
+      "NodeID %d is already in offline node list. It will be removed shortly",
+      node_id);
   }
 }
 
@@ -944,20 +937,10 @@ PROCESS_THREAD(ucl_network_management_process, ev, data)
         // Do not do anything with this event, just wait to go down.
         break;
 
-      case NEW_NETWORK_EVENT:
-        ucl_network_management_new_network_ev(
-          static_cast<new_network_entered_data *>(data));
-        break;
       case MQTT_CB_EVENT: {
         std::string *str_data = static_cast<std::string *>(data);
         write_topic_received(*str_data);
         delete str_data;
-      } break;
-      case UPDATE_STATE_EVENT: {
-        UclNetworkManagementStateData *ucl_nm_state_data
-          = static_cast<UclNetworkManagementStateData *>(data);
-        state_topic_update(zpc_unid, *ucl_nm_state_data);
-        delete ucl_nm_state_data;
       } break;
       case UCL_NM_REMOVE_OFFLINE_EVENT: {
         zwave_node_id_t *node_id = static_cast<zwave_node_id_t *>(data);
@@ -968,6 +951,7 @@ PROCESS_THREAD(ucl_network_management_process, ev, data)
         if (!offline_node_list.empty()) {
           ucl_network_management_remove_offline_node_manager();
         } else {
+          sl_log_debug(LOG_TAG, "Stopping the offline node timer\n");
           etimer_stop(&offline_node_timer);
         }
       } break;

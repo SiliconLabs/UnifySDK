@@ -130,13 +130,15 @@ impl PollQueueTrait for PollEntries {
 #[cfg(test)]
 mod poll_entries_test {
     use super::*;
+    use unify_middleware::{AttributeStore, AttributeStoreTrait};
 
     #[test]
     fn one_item_in_queue() {
+        let attribute_store = AttributeStore::new().unwrap();
         let mut entries = PollEntries::new();
         assert_eq!(entries.upcoming(), None);
 
-        let attribute1 = Attribute::new(1, 1).unwrap();
+        let attribute1 = attribute_store.from_handle_and_type(1, 1);
 
         assert!(entries.queue(attribute1, 22, 0));
         assert_eq!(entries.upcoming(), Some((attribute1, 22)));
@@ -146,8 +148,9 @@ mod poll_entries_test {
 
     #[test]
     fn cannot_readd_via_queue() {
+        let attribute_store = AttributeStore::new().unwrap();
         let mut entries = PollEntries::new();
-        let attribute1 = Attribute::new(1, 1).unwrap();
+        let attribute1 = attribute_store.from_handle_and_type(1, 1);
 
         assert!(entries.queue(attribute1, 22, 0));
         assert!(!entries.queue(attribute1, 22, 0));
@@ -155,85 +158,115 @@ mod poll_entries_test {
 
     #[test]
     fn dequeue_multiple() {
+        let attribute_store = AttributeStore::new().unwrap();
         let mut entries = PollEntries::new();
-        assert!(entries.queue(Attribute::new(2, 2).unwrap(), 4, 0));
-        assert!(entries.queue(Attribute::new(0, 0).unwrap(), 2, 0));
-        assert!(entries.queue(Attribute::new(1, 1).unwrap(), 3, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(2, 2), 4, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(0, 0), 2, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(1, 1), 3, 0));
 
-        assert_eq!(entries.upcoming(), Some((Attribute::new(0, 0).unwrap(), 2)));
-        assert!(entries.remove(&Attribute::new(0, 0).unwrap()));
+        assert_eq!(
+            entries.upcoming(),
+            Some((attribute_store.from_handle_and_type(0, 0), 2))
+        );
+        assert!(entries.remove(&attribute_store.from_handle_and_type(0, 0)));
 
-        assert_eq!(entries.upcoming(), Some((Attribute::new(1, 1).unwrap(), 3)));
-        assert!(entries.remove(&Attribute::new(1, 1).unwrap()));
+        assert_eq!(
+            entries.upcoming(),
+            Some((attribute_store.from_handle_and_type(1, 1), 3))
+        );
+        assert!(entries.remove(&attribute_store.from_handle_and_type(1, 1)));
 
-        assert_eq!(entries.upcoming(), Some((Attribute::new(2, 2).unwrap(), 4)));
-        assert_eq!(entries.pop_next(), Some((Attribute::new(2, 2).unwrap(), 4)));
+        assert_eq!(
+            entries.upcoming(),
+            Some((attribute_store.from_handle_and_type(2, 2), 4))
+        );
+        assert_eq!(
+            entries.pop_next(),
+            Some((attribute_store.from_handle_and_type(2, 2), 4))
+        );
     }
 
     #[test]
     fn requeue() {
+        let attribute_store = AttributeStore::new().unwrap();
         let mut entries: Box<dyn PollQueueTrait> = Box::new(PollEntries::new());
         let mut now = 0;
-        assert!(entries.queue(Attribute::new(2, 2).unwrap(), 4, now));
-        assert!(entries.queue(Attribute::new(0, 0).unwrap(), 2, now));
-        assert!(entries.queue(Attribute::new(1, 1).unwrap(), 3, now));
+        assert!(entries.queue(attribute_store.from_handle_and_type(2, 2), 4, now));
+        assert!(entries.queue(attribute_store.from_handle_and_type(0, 0), 2, now));
+        assert!(entries.queue(attribute_store.from_handle_and_type(1, 1), 3, now));
         now += 2;
-        assert!(entries.requeue(Attribute::new(0, 0).unwrap(), now));
+        assert!(entries.requeue(attribute_store.from_handle_and_type(0, 0), now));
 
-        assert_eq!(entries.upcoming(), Some((Attribute::new(1, 1).unwrap(), 3)));
-        assert!(!entries.requeue(Attribute::new(33, 0).unwrap(), 2));
-        assert_eq!(entries.upcoming(), Some((Attribute::new(1, 1).unwrap(), 3)));
+        assert_eq!(
+            entries.upcoming(),
+            Some((attribute_store.from_handle_and_type(1, 1), 3))
+        );
+        assert!(!entries.requeue(attribute_store.from_handle_and_type(33, 0), 2));
+        assert_eq!(
+            entries.upcoming(),
+            Some((attribute_store.from_handle_and_type(1, 1), 3))
+        );
     }
 
     #[test]
     fn remove_test() {
+        let attribute_store = AttributeStore::new().unwrap();
         let mut entries = PollEntries::new();
-        assert!(entries.queue(Attribute::new(2, 2).unwrap(), 2, 0));
-        assert!(entries.queue(Attribute::new(0, 0).unwrap(), 0, 0));
-        assert!(entries.queue(Attribute::new(1, 1).unwrap(), 1, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(2, 2), 2, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(0, 0), 0, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(1, 1), 1, 0));
 
-        assert!(entries.remove(&Attribute::new(0, 0).unwrap()));
-        assert_eq!(entries.upcoming(), Some((Attribute::new(1, 1).unwrap(), 1)));
+        assert!(entries.remove(&attribute_store.from_handle_and_type(0, 0)));
+        assert_eq!(
+            entries.upcoming(),
+            Some((attribute_store.from_handle_and_type(1, 1), 1))
+        );
 
-        assert!(entries.remove(&Attribute::new(2, 2).unwrap()));
-        assert_eq!(entries.upcoming(), Some((Attribute::new(1, 1).unwrap(), 1)));
+        assert!(entries.remove(&attribute_store.from_handle_and_type(2, 2)));
+        assert_eq!(
+            entries.upcoming(),
+            Some((attribute_store.from_handle_and_type(1, 1), 1))
+        );
 
-        assert!(entries.remove(&Attribute::new(1, 1).unwrap()));
+        assert!(entries.remove(&attribute_store.from_handle_and_type(1, 1)));
         assert_eq!(entries.upcoming(), None);
     }
 
     #[test]
     fn test_find_of_queue() {
+        let attribute_store = AttributeStore::new().unwrap();
         let mut entries = PollEntries::new();
-        assert!(entries.queue(Attribute::new(86, 1).unwrap(), 7200, 0));
-        assert!(entries.queue(Attribute::new(88, 1).unwrap(), 7200, 0));
-        assert!(entries.queue(Attribute::new(90, 1).unwrap(), 7200, 0));
-        assert!(!entries.queue(Attribute::new(90, 1).unwrap(), 7200, 0));
-        assert!(!entries.queue(Attribute::new(90, 1).unwrap(), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(86, 1), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(88, 1), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(90, 1), 7200, 0));
+        assert!(!entries.queue(attribute_store.from_handle_and_type(90, 1), 7200, 0));
+        assert!(!entries.queue(attribute_store.from_handle_and_type(90, 1), 7200, 0));
     }
 
     #[test]
     fn test_restart() {
+        let attribute_store = AttributeStore::new().unwrap();
         let mut entries = PollEntries::new();
-        assert!(entries.queue(Attribute::new(186, 34562).unwrap(), 7200, 0));
-        assert!(entries.queue(Attribute::new(184, 34562).unwrap(), 7200, 0));
-        assert!(entries.queue(Attribute::new(182, 34562).unwrap(), 7200, 0));
-        assert!(entries.queue(Attribute::new(86, 34562).unwrap(), 7200, 0));
-        assert!(entries.queue(Attribute::new(88, 34562).unwrap(), 7200, 0));
-        assert!(entries.queue(Attribute::new(90, 34562).unwrap(), 7200, 0));
-        assert!(entries.queue(Attribute::new(143, 9474).unwrap(), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(186, 34562), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(184, 34562), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(182, 34562), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(86, 34562), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(88, 34562), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(90, 34562), 7200, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(143, 9474), 7200, 0));
 
-        assert!(entries.requeue(Attribute::new(186, 34562).unwrap(), 1));
-        assert!(entries.requeue(Attribute::new(184, 34562).unwrap(), 2));
-        assert!(entries.requeue(Attribute::new(182, 34562).unwrap(), 3));
-        assert!(!entries.queue(Attribute::new(186, 34562).unwrap(), 7200, 100));
-        assert!(!entries.queue(Attribute::new(184, 34562).unwrap(), 7200, 2000));
+        assert!(entries.requeue(attribute_store.from_handle_and_type(186, 34562), 1));
+        assert!(entries.requeue(attribute_store.from_handle_and_type(184, 34562), 2));
+        assert!(entries.requeue(attribute_store.from_handle_and_type(182, 34562), 3));
+        assert!(!entries.queue(attribute_store.from_handle_and_type(186, 34562), 7200, 100));
+        assert!(!entries.queue(attribute_store.from_handle_and_type(184, 34562), 7200, 2000));
     }
 
     #[test]
     fn test_overflowing() {
+        let attribute_store = AttributeStore::new().unwrap();
         let mut entries = PollEntries::new();
-        assert!(entries.queue(Attribute::new(88, 34562).unwrap(), 10, 0));
+        assert!(entries.queue(attribute_store.from_handle_and_type(88, 34562), 10, 0));
         println!("{}", &entries as &dyn PollQueueTrait);
     }
 }

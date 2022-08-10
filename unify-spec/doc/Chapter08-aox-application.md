@@ -77,11 +77,10 @@ positioning_service -up-> mqtt_broker : tags estimated position
 
 \enduml
 
-
 ## AoX Clusters
 
 This section defines how to represent Angle-of-X (e.g, Angle of Arrival) IQ
-report, Angle, and Position data in the Unify SDK.
+report, Angle, and Position data in the Unify Framework.
 
 The AoX system relies on several new clusters:
 
@@ -217,13 +216,11 @@ legend top
 <font color=#000000>PHY messages</font>
 endlegend
 
-
 ' List of participants
 participant "IoT Service" as iot_service
 
 participant "AoX Protocol Controller\nUNID: pc" as protocol_controller
 participant "Asset Tag 1\nUNID: tag_1" as tag_1
-
 
 protocol_controller -> iot_service: <font color=#00003C>ucl/by-unid/pc/ep0/AoXLocator/Attributes/ReportingMode/Reported \n<font color=#00003C><b>{"value": "IQReport"}
 
@@ -245,7 +242,6 @@ protocol_controller -> iot_service: <font color=#00003C>ucl/by-unid/pc/ep0/AoXLo
 
 protocol_controller -> iot_service: <font color=#00003C>ucl/by-unid/pc/ep0/AoXLocator/SupportedGeneratedCommands \n<font color=#00003C><b>{"value": ["AngleReport"]}
 
-
 rnote over protocol_controller: AoX Locator\nis configured to\nsend AngleReport
 
 tag_1 -> protocol_controller: Beacon
@@ -264,7 +260,6 @@ will indicate what values are expected for a given asset tag to an AoX locator.
 Details on applying angle correction are given in
 [Silicon Labs RTL Library: Get expected direction](https://docs.silabs.com/rtl-lib/latest/group-sl-rtl-loc#ga788dcffb47a4bbb26b110bb9e817b0e5)
 
-
 ### AoXPositionEstimation cluster
 
 A Positioning Service helper MQTT client can be used to listen to MQTT
@@ -282,7 +277,6 @@ MQTT broker, and performs the following actions:
 
 2. Listen to incoming IQReport or AngleReports by subscribing to:
 `ucl/by-unid/+/+/AoXLocator/GeneratedCommands/+`
-
 
 Whenever position data for a tag is available, the Positioning Service MUST
 publish the calculated Position attribute in the AoXPositionEstimation Cluster.
@@ -326,6 +320,7 @@ ucl/by-unid/<TAG_UNID>/State
 
 When a Positioning Service application shuts down, it MUST unretain
 all the AoXPositionEstimation and State data that it published for tags.
+
 ### Positioning Service
 
 The Positioning Service is a helper component that can determine
@@ -341,5 +336,3 @@ for details about UNID composition.
 Static random addresses can be abbreviated **sr** and public device addresses **pd**.
 
 An example of a public device address UNID is `ble-pd-842E1431C9F0`.
-
-

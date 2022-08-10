@@ -15,18 +15,18 @@
 //! Application to save trace packages, published by UPTI_CAP, to file in Network Analyzer compatible format.
 #![doc(html_no_source)]
 
-mod mqtt_handler;
 mod log_formatter;
+mod mqtt_handler;
 use mqtt_handler::*;
 use unify_config_sys::*;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{sl_status_t, MqttClientTrait, UnifyMqttClient};
+use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 use unify_sl_status_sys::*;
 
 use std::ffi::CString;
 use std::str;
 
-declare_app_name!("upti_writer");
+declare_app_name!("unify-upti-writer");
 const UNID: &'static str = "upti_w";
 const IPS: &'static str = "";
 const CONFIG_VERSION: &str = env!("VERSION_STR");
@@ -38,8 +38,10 @@ fn main() -> std::result::Result<(), sl_status_t> {
         return Ok(());
     }
 
-    let writer_config =
-        ok_or_exit_with_message(UptiWriterConfig::from_config(), "could not load configuration")?;
+    let writer_config = ok_or_exit_with_message(
+        UptiWriterConfig::from_config(),
+        "could not load configuration",
+    )?;
 
     ok_or_exit_with_message(run(writer_config), "init error")
 }
@@ -50,12 +52,11 @@ fn parse_application_arguments() -> std::result::Result<(), config_status_t> {
         .map(|arg| CString::new(arg).unwrap())
         .collect::<Vec<CString>>();
 
-        config_add_string("mqtt.client_id", "Client ID for MQTT client", APP_NAME)
-        .and(config_add_string(
+        config_add_string(
             "upti_writer.unid",
             "Controller unid",
             UNID,
-        ))
+        )
         .and(config_add_string(
             "upti_writer.log_path",
             "Log path",

@@ -123,7 +123,7 @@
 #ifndef ZIGPC_DATASTORE_H
 #define ZIGPC_DATASTORE_H
 
-// Shared UIC includes
+// Shared Unify includes
 #include <sl_status.h>
 #include <sl_log.h>
 

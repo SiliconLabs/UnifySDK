@@ -32,7 +32,7 @@ const char* gbl_menu[] =
 /// Test of uic_gbl_interface_get_name()
 void test_uic_gbl_interfaces()
 {
-  // FIXME: How do I test this?.....
+  // UIC-2215 How do I test this?.....
   // maybe with a pipe to a script emulating the gbl ?
   TEST_IGNORE_MESSAGE("Testcase not implemented");
 }

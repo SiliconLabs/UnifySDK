@@ -12,6 +12,29 @@ This is a manufacturer specific cluster, representing a Node State in our networ
 	id="FD02" revision="1" name="State">
   <classification role="utility" picsCode="UNS" />
 
+  <type:type id="30" short="NodeStateNetworkStatus" name="Node State Network Status" discrete="true"
+    inheritsFrom="enum8">
+    <restriction>
+      <type:enumeration value="00" name="Online functional" />
+      <type:enumeration value="01" name="Online interviewing" />
+      <type:enumeration value="02" name="Online non-functional" />
+      <type:enumeration value="03" name="Unavailable" />
+      <type:enumeration value="04" name="Offline" />
+    </restriction>
+  </type:type>
+
+  <type:type id="30" short="NodeStateSecurity" name="Node State Security" discrete="true"
+    inheritsFrom="enum8">
+    <restriction>
+      <type:enumeration value="00" name="None" />
+      <type:enumeration value="01" name="Z-Wave S0" />
+      <type:enumeration value="02" name="Z-Wave S2 Unauthenticated" />
+      <type:enumeration value="03" name="Z-Wave S2 Authenticated" />
+      <type:enumeration value="04" name="Z-Wave S2 Access Control" />
+      <type:enumeration value="05" name="Zigbee Z3" />
+    </restriction>
+  </type:type>
+
   <server>
 
     <attributes>

@@ -23,7 +23,7 @@
  * set up before the component can work and maybe also cleaned up
  * afterwards.
  *
- * In the Unify SDK, most of what the components need are provided by other
+ * In the Unify Framework, most of what the components need are provided by other
  * components or by the Contiki OS.
  * However, there are key features that are needed by a few of the
  * components and that are not provided by Unify itself.  This may
@@ -60,8 +60,10 @@
  *
  * The function should returns SL_STATUS_FAIL if the Unify GW cannot start
  * due to an error. If the component whish to abort the boot sequence
- * but not due to an error SL_STATUS_ABORT should be returned. If boot
- * should proceed normally SL_STATUS_OK should be returned
+ * but not due to an error SL_STATUS_ABORT should be returned. If the
+ * component failed in a non-critical way or is optional, 
+ * SL_STATUS_NOT_AVAILABLE should be returned. If boot should proceed 
+ * normally SL_STATUS_OK should be returned
  */
 typedef sl_status_t (*uic_fixt_setup_t)(void);
 

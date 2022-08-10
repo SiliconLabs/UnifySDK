@@ -15,7 +15,7 @@
 
 extern "C" {
 
-// UIC shared includes
+// Unify shared includes
 #include <unity.h>
 
 // ZigPC includes

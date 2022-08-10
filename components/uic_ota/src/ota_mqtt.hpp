@@ -29,7 +29,7 @@
 // This component
 #include "ota.hpp"
 
-// UIC Components
+// Unify Components
 #include "uic_typedefs.h"
 #include "sl_status.h"
 

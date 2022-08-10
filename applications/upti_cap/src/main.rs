@@ -19,7 +19,7 @@ mod pti_sniffer;
 use mqtt_handler::*;
 use unify_config_sys::*;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{sl_status_t, MqttClientTrait, UnifyMqttClient};
+use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 use unify_sl_status_sys::*;
 
 use std::ffi::CString;
@@ -28,7 +28,7 @@ use std::str;
 #[macro_use]
 extern crate lazy_static;
 
-declare_app_name!("upti_cap");
+declare_app_name!("unify-upti-cap");
 const UNID: &'static str = "upti";
 const IPS: &'static str = "";
 const CONFIG_VERSION: &str = env!("VERSION_STR");

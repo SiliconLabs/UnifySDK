@@ -85,6 +85,18 @@ typedef enum {
 } zwave_tx_events_t;
 
 /**
+ * @brief List of reasons for going into a Tx Back-off-
+ */
+typedef enum {
+  /// Back-off has been initiated due to the current_tx_session_id expecting
+  /// some responses
+  BACKOFF_CURRENT_SESSION_ID,
+  /// Back-off has been initiated due to the application telling us of expected
+  /// incoming frames.
+  BACKOFF_EXPECTED_ADDITIONAL_FRAMES
+} zwave_tx_backoff_reason_t;
+
+/**
  * @brief The Z-Wave TX Process states.
  */
 typedef enum zwave_tx_state {
@@ -142,6 +154,16 @@ bool zwave_tx_process_queue_flush_is_ongoing();
  * event to the Z-Wave TX Process
  */
 void zwave_tx_process_check_queue();
+
+/**
+ * @brief Tells the Z-Wave TX process that more frames are to be expected f
+ *        from some NodeIDs.
+ *
+ * @param remote_node_id              The remote NodeID that will send us >1 frame(s)
+ * @param number_of_incoming_frames   The number of frames to add.
+ */
+void zwave_tx_process_set_expected_frames(zwave_node_id_t remote_node_id,
+                                          uint8_t number_of_incoming_frames);
 
 /**
  * @brief Logs the state of the Z-Wave TX Process using sl_log

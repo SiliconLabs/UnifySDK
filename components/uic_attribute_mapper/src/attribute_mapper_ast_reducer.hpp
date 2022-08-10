@@ -22,102 +22,221 @@
 #ifndef ATTRIBUTE_MAPPER_AST_REDUCER_H
 #define ATTRIBUTE_MAPPER_AST_REDUCER_H
 
+#include <string>
+#include <map>
+#include <iostream>
+#include <boost/optional.hpp>
+#include "attribute.hpp"
 #include "attribute_mapper_ast.hpp"
 #include "attribute_mapper_ast_eval.hpp"
 
 namespace ast
 {
-struct ast_tree;
-// postorder tree traversal, build new tree, with the following cases reduces:
-// - if expression contains 2 or more constants but not all. they will condensed in one
-// - if all children of a expression contain a constanst replace root expression with constant
-void reduce_tree(ast_tree &);
-
-class reduce_visitor : public boost::static_visitor<>
+/**
+ * @brief AST reducer
+ *
+ * This class is an ast evaluator which outputs a copy of the ast in reduced
+ * form.
+ *
+ * The ast reducer works by going though the ast and try evaluate operands with
+ * a normal value evaluator which has an undefined context. This means that the
+ * evaluator will only succeed if the operand is a constant, ie does not depend
+ * on an attribute.
+ *
+ * As the other evaluators this evaluator operates on a functor which uses
+ * pattern matchin to evaluate the boost::variant ast components using the
+ * boost::apply_visitor.
+ */
+class reducer
 {
   public:
-  void operator()(ast::ast_tree &tree)
+  reducer() : evaluator(ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE) {};
+
+  operand operator()(const nil &x) const
   {
-    for (auto &root: tree) {
-      boost::apply_visitor(*this, root);
+    return operand(x);  //Cannot be reduced
+  }
+
+  operand operator()(uint32_t n) const
+  {
+    return operand(n);  //Cannot be reduced
+  }
+
+  operand operator()(float n) const
+  {
+    return operand(n);  //Cannot be reduced
+  }
+
+  operand operator()(const attribute &a) const
+  {
+    return operand(a);  //Cannot be reduced
+  }
+
+  operand operator()(const signed_ &x) const
+  {
+    if (x.sign == '+') {  // Unary + can just be replaced by its operand
+      return boost::apply_visitor(*this, x.operand_);
+    } else {
+      signed_ s;
+      s.sign     = x.sign;
+      s.operand_ = boost::apply_visitor(*this, x.operand_);
+      return operand(s);
     }
   }
 
-  void operator()(expression &x)
+  operand operator()(const condition &x) const
   {
-    // // for (const auto &op: x.rest) {
-    // //   boost::apply_visitor(*this, op.operand_);
-    // // }
-
-    // program_visitor visitor;
-    // boost::apply_visitor(visitor, x);
-    // x = visitor.GetOptimizedProgram();
-    // // Todo do stuff
+    //Check if we can statically reduce cond_value
+    auto val = boost::apply_visitor(evaluator, x.cond_value);
+    if (val) {
+      return val.value() ? x.cond_true : x.cond_false;
+    } else {
+      condition cond;
+      cond.cond_value = boost::apply_visitor(*this, x.cond_value);
+      cond.cond_true  = boost::apply_visitor(*this, x.cond_true);
+      cond.cond_false = boost::apply_visitor(*this, x.cond_false);
+      return operand(cond);
+    }
   }
 
-  void operator()(nil &n)
+  operand operator()(const expression &x) const
   {
-    // omit, no operation
+    return operand(reduce_expression(x));
   }
 
-  void operator()(unsigned int &n)
+  /**
+   * @brief This function reduces an operation
+   *
+   * this is not one of the boost::variant operators since the operation data type
+   * is not an operand
+   *
+   * @param x  input operation
+   * @return reduced operation
+   */
+  operation reduce_operation(const operation &x) const
   {
-    constant_program.rest.emplace_back(n);
+    operation o = x;
+    auto val    = boost::apply_visitor(evaluator, x.operand_);
+    if (val) {
+      o.operand_ = operand(val.value());
+    } else {
+      o.operand_ = boost::apply_visitor(*this, x.operand_);
+    }
+    return o;
   }
 
-  void operator()(attribute &attr)
+  /**
+   * @brief Reduce an expression
+   *
+   * This is the main entrypoint of reducer. An expession is also a operand
+   * though the pattern "( <expression> )". So this reducer is accessed
+   * though the operator()(const expression &x).
+   *
+   * @param x input expression
+   * @return reduced expression
+   */
+  expression reduce_expression(const expression &x) const
   {
-    // not implemented yet
+    expression reduced_expr;
+    operator_ids unity_operation = ast::operator_plus;
+    //Accumulator to store collected constants
+    result_type_t acc = 0;
+    bool substitute   = false;
+
+    reduced_expr.first = boost::apply_visitor(*this, x.first);
+
+    if (x.rest.empty()) {
+      return reduced_expr;
+    }
+
+    // We only try to substitute + - and * /
+    switch (x.rest.begin()->operator_) {
+      case ast::operator_plus:
+      case ast::operator_minus:
+        acc             = 0;
+        substitute      = true;
+        unity_operation = ast::operator_plus;
+        break;
+      case ast::operator_mult:
+      case ast::operator_div:
+        acc             = 1;
+        substitute      = true;
+        unity_operation = ast::operator_mult;
+        break;
+      default:
+        acc = 0;
+        //We dont are substituing the other operators
+        substitute = false;
+    }
+
+    // If the first operand is a constant then we can use this for the inital
+    // accumulator value
+    auto lhs = boost::apply_visitor(evaluator, reduced_expr.first);
+    if (lhs) {
+      acc = lhs.value();
+    }
+
+    // Go though all terms, if they are constant merge them into the accumulator
+    for (const auto &op: x.rest) {
+      auto val = evaluator(op, acc);
+      // Don't substitute the div operator due to risk of rounding errors
+      if (substitute && val && (op.operator_ != ast::operator_div)) {
+        acc = val.value();
+      } else {
+        reduced_expr.rest.push_back(reduce_operation(op));
+      }
+    }
+
+    if (substitute) {
+      if (lhs) {
+        reduced_expr.first = acc;
+      } else {
+        if (acc < 0) {
+          signed_ s;
+          s.sign             = '-';
+          s.operand_         = operand(-acc);
+          operation const_op = {unity_operation, operand(s)};
+          reduced_expr.rest.push_back(const_op);
+        } else {
+          operation const_op = {unity_operation, operand(acc)};
+          reduced_expr.rest.push_back(const_op);
+        }
+      }
+    }
+    return reduced_expr;
   }
 
-  void operator()(signed_ &sign)
+  //Reduce the assignment by reducing the right hand side
+  assignment operator()(const assignment &x) const
   {
-    constant_program.rest.emplace_back(sign);
+    assignment reduced = x;
+    reduced.rhs        = reduce_expression(x.rhs);
+    return reduced;
   }
 
-  void operator()(condition &con)
+  //Reduce the assignments in a scope
+  scope operator()(const scope &x) const
   {
-    // program_visitor visitor;
-    // boost::apply_visitor(visitor, con.cond_value);
-    // if (visitor.IsConstant()) {
-    // }
+    scope reduced = x;
+    for (auto &a: reduced.assignments) {
+      a = (*this)(a);
+    }
+    return reduced;
   }
 
-  void operator()(mapping &map)
+  //Go though the ast an reduce each element
+  ast_tree operator()(const ast_tree ast) const
   {
-    // ignore
-  }
-
-  void operator()(assignment &map)
-  {
-    // ignore
-  }
-
-  expression &GetOptimizedProgram()
-  {
-    // todo
-    return constant_program;
-  }
-
-  bool IsConstant()
-  {
-    return false;
-    //return new_children.empty() && constant_program.rest.size() > 0;
+    ast_tree reduced = ast;
+    for (auto &ast_element: reduced) {
+      ast_element = boost::apply_visitor(*this, ast_element);
+    }
+    return reduced;
   }
 
   private:
-  expression constant_program;
-  //std::list<operation> new_children;
+  eval<result_type_t> evaluator;
 };
-
-void reduce_tree(ast_tree &tree)
-{
-  reduce_visitor visitor;
-  visitor(tree);
-  visitor.IsConstant();
-}
-
 }  // namespace ast
-
 #endif
 /** @} end attribute_mapper_ast_reducer */

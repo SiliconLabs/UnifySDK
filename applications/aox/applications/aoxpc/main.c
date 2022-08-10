@@ -12,13 +12,15 @@
  *****************************************************************************/
 
 #include "uic_main.h"
-#include "ncp_fixt.h"
-#include "ncp.h"
+#include "aoxpc_ncp_core_fixt.h"
+#include "aoxpc_ncp_process_fixt.h"
+#include "aoxpc_ncp_update_fixt.h"
 #include "aoxpc.h"
 #include "aoxpc_correction.h"
 #include "aox_locator_configuration.h"
 #include "aoxpc_datastore_fixt.h"
 #include "aoxpc_config.h"
+#include "aoxpc_attribute_store_attr_type_name_helper.h"
 
 // Unify shared components
 #include "dotdot_mqtt.h"
@@ -35,7 +37,15 @@ int main(int argc, char **argv)
     = {/*
         * Establish connection with the Bluetooth Network Co-Processor.
         */
-       {&ncp_fixt_setup, "NCP"},
+       {&aoxpc_ncp_core_fixt_setup, "NCP Core"},
+       /*
+        * Check for firmware update request and execute it.
+        */
+       {&aoxpc_ncp_update_fixt_setup, "NCP Update"},
+       /*
+        * Start receiving NCP events in its own process.
+        */
+       {&aoxpc_ncp_process_fixt_setup, "NCP Process"},
        /*
         * Initialize AoXPC datastore for persistent storage
         */
@@ -45,6 +55,11 @@ int main(int argc, char **argv)
         * Datastore MUST be initialized first.
         */
        {&attribute_store_init, "Attribute store"},
+       /**
+        * Initialize the module to register all attribute used by the AoXPC and
+        * enable the APIs to convert the attribute type name to attribute type id.
+        */
+       {&aoxpc_attribute_store_attr_type_name_helper_init, "AoXPC Attribute type name to id convertor"},
        /*
        * Initialize AoXLocator cluster resources.
        * Attribute Store MUST be initialized before.
@@ -71,7 +86,7 @@ int main(int argc, char **argv)
   uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[]
     = {{&attribute_store_teardown, "Attribute store"},
        {&datastore_fixt_teardown, "Datastore"},
-       {&ncp_fixt_shutdown, "NCP"},
+       {&aoxpc_ncp_core_fixt_shutdown, "NCP Core"},
        {NULL, "Terminator"}};
 
   // Initialize all configurations

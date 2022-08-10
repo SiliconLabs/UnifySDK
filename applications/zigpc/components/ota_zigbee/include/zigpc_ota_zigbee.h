@@ -27,7 +27,7 @@
 #ifndef OTA_ZIGBEE_H
 #define OTA_ZIGBEE_H
 
-// Shared UIC includes
+// Shared Unify includes
 #include <sl_status.h>
 
 // ZigPC includes

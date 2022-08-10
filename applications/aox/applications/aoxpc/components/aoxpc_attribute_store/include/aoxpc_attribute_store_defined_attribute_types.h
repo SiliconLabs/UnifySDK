@@ -29,10 +29,6 @@
 #ifndef ATTRIBUTE_STORE_TYPES_H
 #define ATTRIBUTE_STORE_TYPES_H
 
-#include "attribute_store.h"
-
-#define ATTRIBUTE_TYPE_MAP
-
 #include "aoxpc_attribute_store_dotdot_attributes.h"
 
 ///< Set the proper name for the Root,
@@ -46,5 +42,5 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_BLE_UNID, 0x0002)
 ///< This represents a endpoint. dotdot_endpoint_id_t type.
 DEFINE_ATTRIBUTE(ATTRIBUTE_ENDPOINT_ID, 0x0003)
 
-#endif     //ATTRIBUTE_STORE_TYPES_H
+#endif  // ATTRIBUTE_STORE_TYPES_H
 /** @} */  //end attribute_types

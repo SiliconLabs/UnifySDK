@@ -95,7 +95,7 @@ impl TimerTrait for Timer {
     /// This function restarts the timer with the same interval that was given
     /// on construction. The callback timer will start at the current time.
     /// > note A periodic timer will drift if this function is used to reset it.
-    /// For periodic timers, use the [reset] function instead.
+    /// For periodic timers, use the [Timer::reset] function instead.
     fn restart(&self) {
         let ptr = Rc::as_ptr(&self.timer_handle) as *mut _;
         unsafe { ctimer_restart(ptr) }

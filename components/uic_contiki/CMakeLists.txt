@@ -23,11 +23,12 @@ set(CONTIKI_INC
 
 if(ZWAVE_BUILD_SYSTEM EQUAL 1)
   add_library(uic_contiki ${CONTIKI_SRC})
+  target_include_directories(uic_contiki PUBLIC ${CONTIKI_INC} ${ZW_ROOT}/ZWave)
 else()
   add_library(uic_contiki SHARED ${CONTIKI_SRC} src/rust_process.c)
+  target_include_directories(uic_contiki PUBLIC ${CONTIKI_INC})
 endif()
 
-target_include_directories(uic_contiki PUBLIC ${CONTIKI_INC})
 
 if(ZWAVE_BUILD_SYSTEM EQUAL 1)
   add_library(uic_contiki_platform platform/${COMPATIBLE_PLATFORM}/clock.c)
@@ -50,5 +51,26 @@ target_include_directories(
                               cpu/native)
 
 target_link_libraries(uic_contiki PRIVATE uic_contiki_platform uic_log)
+
+# Install headers under uic/include, uic/include/lib uic/include/sys
+install (
+  FILES platform/posix/contiki-conf.h
+  DESTINATION include/uic
+  COMPONENT libuic-dev
+)
+
+file(GLOB_RECURSE PUBLIC_CONTIKI1 core/lib/*.h)
+install (
+  FILES ${PUBLIC_CONTIKI1}
+  DESTINATION include/uic/lib
+  COMPONENT libuic-dev
+)
+
+file(GLOB_RECURSE PUBLIC_CONTIKI2 core/sys/*.h)
+install (
+  FILES ${PUBLIC_CONTIKI2}
+  DESTINATION include/uic/sys
+  COMPONENT libuic-dev
+)
 
 add_subdirectory(test)

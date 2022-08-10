@@ -18,7 +18,7 @@
 // System-wide libraries
 #include <mosquitto.h>
 
-// UIC components
+// Unify components
 #include "sl_status.h"
 #include "sl_log.h"
 

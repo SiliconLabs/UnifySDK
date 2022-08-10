@@ -12,6 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 #![doc(html_no_source)]
 unify_tools::include_binding!(uic_attribute_store);
+unify_tools::include_binding!(uic_attribute_utils);
 
 #[cfg(test)]
 mod uic_attribute_store_tests;
@@ -38,6 +39,7 @@ pub enum AttributeStoreError {
     NulTerminationError(std::ffi::FromBytesWithNulError),
 }
 
+// FIXME: All this is Unify Resolver stuff, it should be a different package/crate.
 /// attribute_resolver_callback type
 #[allow(non_camel_case_types)]
 pub type attribute_resolver_function_t = Option<
@@ -63,6 +65,32 @@ pub fn attribute_resolver_register_rule(
     get_func: attribute_resolver_function_t,
 ) -> uic_attribute_store::sl_status_t {
     unsafe { attribute_resolver_register_rule_extern_c(node_type, set_func, get_func) }
+}
+
+extern "C" {
+    #[link_name = "is_node_pending_set_resolution"]
+    fn is_node_pending_set_resolution_extern_c(
+        node: uic_attribute_store::attribute_store_node_t,
+    ) -> bool;
+}
+
+pub fn is_node_pending_set_resolution(node: uic_attribute_store::attribute_store_node_t) -> bool {
+    unsafe { is_node_pending_set_resolution_extern_c(node) }
+}
+
+extern "C" {
+    #[link_name = "attribute_resolver_restart_set_resolution"]
+    fn attribute_resolver_restart_set_resolution_extern_c(
+        node: uic_attribute_store::attribute_store_node_t,
+    ) -> uic_attribute_store::sl_status_t;
+}
+
+pub fn attribute_resolver_restart_set_resolution(
+    node: uic_attribute_store::attribute_store_node_t,
+) {
+    unsafe {
+        let _ = attribute_resolver_restart_set_resolution_extern_c(node);
+    }
 }
 
 //binding-generator has issues generating this define. hence declare it manual
@@ -189,7 +217,7 @@ pub mod attribute_store {
     /// "i know what im doing". Dont replicate this construction.
     /// this static caches Rust closures in order to map them to
     /// timeout callbacks from C.
-    /// Since we know that UIC runs synchroniously, we can never
+    /// Since we know that Unify runs synchroniously, we can never
     /// come into a race condition.
     static mut PENDING_TIMEOUT_CALLBACKS: OnceCell<
         MultiMap<

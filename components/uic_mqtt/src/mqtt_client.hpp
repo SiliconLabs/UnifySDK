@@ -22,7 +22,7 @@
 #include <vector>
 #include <chrono>
 
-// UIC components
+// Unify components
 #include "sl_status.h"
 
 // This component

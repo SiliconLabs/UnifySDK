@@ -10,7 +10,7 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-// UIC components
+// Unify components
 #include "sl_log.h"
 
 // This component

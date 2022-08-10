@@ -12,16 +12,24 @@
  *
  ******************************************************************************/
 
+// Includes from this component
 #include "zpc_config.h"
 #include "device_id.h"
+
+// Unify Components
 #include "config.h"
-#include <string.h>
 #include "sl_log.h"
+
+// Generic includes
+#include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <time.h>
 #include <assert.h>
+
+// Interfaces
 #include "uic_version.h"
+#include "ZW_classcmd.h"
 
 #define LOG_TAG "zpc_config"
 
@@ -67,6 +75,10 @@
 #define ZPC_POLL_ATTRIBUTE_LIST_FILE      "zpc.poll.attribute_list_file"
 #define ZPC_POLL_BACKOFF                  "zpc.poll.backoff"
 #define ZPC_POLL_DEFAULT_INTERVAL         "zpc.poll.default_interval"
+
+#define ZPC_BASIC_DEVICE_TYPE    "zpc.device_type.basic"
+#define ZPC_GENERIC_DEVICE_TYPE  "zpc.device_type.generic"
+#define ZPC_SPECIFIC_DEVICE_TYPE "zpc.device_type.specific"
 
 static zpc_config_t config;
 
@@ -224,6 +236,19 @@ int zpc_config_init()
                               "Update the NCP firmware and exit",
                               "");
 
+  status |= config_add_int(ZPC_BASIC_DEVICE_TYPE,
+                           "The ZPC Basic Device Type identification that will "
+                           "be used in the ZPC Node Information Frames",
+                           BASIC_TYPE_STATIC_CONTROLLER);
+  status |= config_add_int(ZPC_GENERIC_DEVICE_TYPE,
+                           "The ZPC Generic Device Type identification that "
+                           "will be used in the ZPC Node Information Frame",
+                           GENERIC_TYPE_GENERIC_CONTROLLER);
+  status |= config_add_int(ZPC_SPECIFIC_DEVICE_TYPE,
+                           "The ZPC Specific Device Type identification that "
+                           "will be used in the ZPC Node Information Frame",
+                           SPECIFIC_TYPE_NOT_USED);
+
   return status != CONFIG_STATUS_OK;
 }
 
@@ -279,6 +304,8 @@ sl_status_t zpc_config_fixt_setup()
   config.mqtt_port = config_get_int_safe(CONFIG_KEY_MQTT_PORT);
   config.zwave_measured_0dbm_power
     = config_get_int_safe(ZPC_MEASURED_0DBM_POWER);
+  config.zwave_normal_tx_power_dbm
+    = config_get_int_safe(ZPC_NORMAL_TX_POWER_DBM);
   config.default_wake_up_interval
     = config_get_int_safe(ZPC_DEFAULT_WAKE_UP_INTERVAL);
   config.hardware_version = config_get_int_safe(ZPC_HARDWARE_VERSION);
@@ -298,6 +325,14 @@ sl_status_t zpc_config_fixt_setup()
     = config_has_flag(ZPC_CONFIG_NCP_VERSION) == CONFIG_STATUS_OK;
   status
     |= config_get_as_string(ZPC_CONFIG_NCP_UPDATE, &config.ncp_update_filename);
+
+  config.zpc_basic_device_type
+    = (uint8_t)config_get_int_safe(ZPC_BASIC_DEVICE_TYPE);
+  config.zpc_generic_device_type
+    = (uint8_t)config_get_int_safe(ZPC_GENERIC_DEVICE_TYPE);
+  config.zpc_specific_device_type
+    = (uint8_t)config_get_int_safe(ZPC_SPECIFIC_DEVICE_TYPE);
+
   return status == CONFIG_STATUS_OK ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 

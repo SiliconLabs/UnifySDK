@@ -61,7 +61,6 @@ typedef struct zwave_s2_network_callbacks {
                            zwave_dsk_t dsk);
 } zwave_s2_network_callbacks_t;
 
-
 /**
  * @brief Initialize the S2 network layer.
  *
@@ -106,7 +105,6 @@ void zwave_s2_neighbor_discovery_complete();
  */
 void zwave_s2_start_add_node(zwave_node_id_t node_id);
 
-
 /**
  * @brief Must be called as a response to the on_keys_request callback.
  *
@@ -130,6 +128,19 @@ void zwave_s2_dsk_accept(bool accept, uint8_t *dsk, uint8_t len);
  * be called when the inclusion has stopped.
  */
 void zwave_s2_abort_join();
+
+/**
+ * @brief Update the homeID for the S2 engine
+ *
+ * During learn mode we can get into the situation where
+ * the home id changes durring the first part of the S2 bootstrapping
+ * This function allows for setting the home id while the inclusion FSM is
+ * running.
+ *
+ * @param current_home_id Our current HomeID
+ *
+ */
+void zwave_s2_refresh_home_id(zwave_home_id_t current_home_id);
 
 #ifdef __cplusplus
 }

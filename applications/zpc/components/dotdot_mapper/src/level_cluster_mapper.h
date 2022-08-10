@@ -43,6 +43,7 @@ bool level_cluster_mapper_init(void);
 /**
  * @brief Clears the Level cluster mapper from all its content.
  *
+ * @returns 0 on success, any other value on failure.
  */
 int level_cluster_mapper_teardown(void);
 

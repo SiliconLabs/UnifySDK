@@ -11,3 +11,6 @@ path = "src/unify_main.rs"
 
 [dependencies]
 unify_tools = { path = "../unify_tools" }
+
+[build-dependencies]
+unify_build_utils = { path = "../unify_build_utils" }

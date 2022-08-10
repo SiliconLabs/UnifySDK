@@ -45,6 +45,14 @@ bool zwave_security_validation_is_security_valid_for_support(
       || (minimal_scheme == ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0)) {
     if (!zwave_controller_encapsulation_scheme_greater_equal(zpc_scheme,
                                                              minimal_scheme)) {
+      sl_log_debug(
+        LOG_TAG,
+        "ZPC highest encapsulation scheme %d is not greater or "
+        "equal to %d which is minimal scheme for the command class support "
+        "handler, Rejecting the frame\n",
+        zpc_scheme,
+        minimal_scheme);
+
       return false;
     }
   }
@@ -61,8 +69,13 @@ bool zwave_security_validation_is_security_valid_for_support(
     // If we can't find the keys of the remote in our attribute store,
     // do not accept the frame!
     if (SL_STATUS_OK
-        != zwave_controller_storage_get_node_granted_keys(connection->remote.node_id,
-                                                 &remote_node_keys)) {
+        != zwave_controller_storage_get_node_granted_keys(
+          connection->remote.node_id,
+          &remote_node_keys)) {
+      sl_log_debug(LOG_TAG,
+                     "Granted keys are unknown for NodeID %d, Rejecting "
+                     "commands at all security levels",
+                     connection->remote.node_id);
       return false;
     }
 
@@ -90,21 +103,37 @@ bool zwave_security_validation_is_security_valid_for_control(
   if (false
       == zwave_controller_storage_is_node_s2_capable(
         connection->remote.node_id)) {
+    sl_log_debug(LOG_TAG,
+                   "NodeID %d does not support S2, Accepting "
+                   "commands at all security levels",
+                   connection->remote.node_id);
     return true;
   }
 
   // 2. If the node supports S2, only at the highest key.
   zwave_keyset_t remote_node_keys;
   if (SL_STATUS_OK
-      != zwave_controller_storage_get_node_granted_keys(connection->remote.node_id,
-                                               &remote_node_keys)) {
-    return false;
+      != zwave_controller_storage_get_node_granted_keys(
+        connection->remote.node_id,
+        &remote_node_keys)) {
+    // If granted keys are unknown (e.g. due to discovery, we accept anything)
+    sl_log_debug(LOG_TAG,
+                   "Granted keys are unknown for NodeID %d, Accepting "
+                   "commands at all security levels",
+                   connection->remote.node_id);
+    return true;
   }
   if (connection->encapsulation
       == zwave_controller_get_highest_encapsulation(remote_node_keys)) {
     return true;
   }
 
+  sl_log_debug(LOG_TAG,
+               "Rejecting incoming command from NodeID %d. Used encapsulation: "
+               "%d, expected encapsulation: %d",
+               connection->remote.node_id,
+               connection->encapsulation,
+               zwave_controller_get_highest_encapsulation(remote_node_keys));
   return false;
 }
 

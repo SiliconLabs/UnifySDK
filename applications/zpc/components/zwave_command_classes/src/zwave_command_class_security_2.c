@@ -12,8 +12,9 @@
  *****************************************************************************/
 // Includes from this component
 #include "zwave_command_class_security_2.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_command_classes_utils.h"
+#include "zwave_command_class_granted_keys_resolver.h"
 
 // Generic includes
 #include <assert.h>
@@ -27,8 +28,9 @@
 #include "zpc_attribute_store.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "ZW_classcmd.h"
+#include "zwave_tx_scheme_selector.h"
 
-// UIC includes
+// Unify includes
 #include "sl_log.h"
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
@@ -46,30 +48,30 @@ static sl_status_t zwave_command_class_security_2_commands_supported_report(
   const uint8_t *frame_data,
   uint16_t frame_length)
 {
-  if (frame_length < 2) {
-    sl_log_debug(LOG_TAG,
-                 "S2 Commands Supported Report Frame Length is too short\n");
-    return SL_STATUS_OK;
-  }
-
   attribute_store_node_t endpoint_node
     = zwave_command_class_get_endpoint_node(connection);
 
+  // We just received a report, it means that the key/protocol
+  // combination that we are trying are working.
+  zwave_command_class_mark_key_protocol_as_supported(
+    attribute_store_get_first_parent_with_type(endpoint_node,
+                                               ATTRIBUTE_NODE_ID),
+    connection->encapsulation);
+
   // Get the Secure NIF atribute node under the endpoint
   attribute_store_node_t secure_nif_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE_ZWAVE_SECURE_NIF,
-                                             0);
-  if (frame_length == 2) {
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+  if (frame_length <= SECURE_SUPPORTED_COMMAND_CLASSES_INDEX) {
     // Empty payload, if security scheme is equal to or higher than the ZPC
     // highest security scheme then delete the attribute
     // ATTRIBUTE_ZWAVE_SECURE_NIF. This is e.g. the case with CTT v3.
     if (is_using_zpc_highest_security_class(connection)) {
       attribute_store_delete_node(secure_nif_node);
-      sl_log_debug(
-        LOG_TAG,
-        "Received empty S2 Commands Supported Report with security scheme "
-        "greater or equal to ZPC, deleting ATTRIBUTE_ZWAVE_SECURE_NIF");
+      sl_log_debug(LOG_TAG,
+                   "Received empty S2 Commands Supported Report with an equal "
+                   "or higher security scheme than the ZPC, deleting the "
+                   "Secure NIF from the Attribute Store");
       return SL_STATUS_OK;
     } else {
       sl_log_debug(LOG_TAG,
@@ -81,14 +83,22 @@ static sl_status_t zwave_command_class_security_2_commands_supported_report(
     // Note that Securely Supported CC list will not be larger than 255
     uint8_t supported_cc_len
       = frame_length - SECURE_SUPPORTED_COMMAND_CLASSES_INDEX;
-    if (!supported_cc_len) {
-      sl_log_debug(LOG_TAG, "S2 supported command report list was empty\n");
+
+    // Accept the capabilities only if it is received at the highest granted key
+    if (connection->encapsulation
+        != zwave_tx_scheme_get_node_highest_security_class(
+          connection->remote.node_id)) {
+      // Here it could be a downgrade attack, where we receive a non-secure
+      // S2 Command Supported Report. Do not accept the contents!
+      sl_log_warning(LOG_TAG,
+                     "Received S2 Commands Supported Report with "
+                     "content on a 'non-secure' level. Discarding.");
       return SL_STATUS_OK;
     }
 
-    attribute_store_set_node_attribute_value(
-      secure_nif_node,
-      REPORTED_ATTRIBUTE,
+    attribute_store_set_child_reported(
+      endpoint_node,
+      ATTRIBUTE_ZWAVE_SECURE_NIF,
       &frame_data[SECURE_SUPPORTED_COMMAND_CLASSES_INDEX],
       supported_cc_len);
   }

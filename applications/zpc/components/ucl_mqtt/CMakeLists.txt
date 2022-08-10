@@ -6,14 +6,12 @@ find_path(nlohmann_json_include nlohmann/json.hpp REQUIRED)
 
 # UCL node state
 add_library(ucl_node_state src/ucl_node_state.cpp)
-target_include_directories(ucl_node_state PUBLIC include $ {
-                                                 Boost_INCLUDE_DIRS})
+target_include_directories(ucl_node_state PUBLIC include ${Boost_INCLUDE_DIRS})
 target_link_libraries(
   ucl_node_state
   uic_contiki
   uic_attribute_store
   zpc_attribute_store
-  zpc_utils
   uic_mqtt
   ucl_definitions
   ucl_mqtt_node_interview
@@ -26,21 +24,21 @@ target_interface_libraries(ucl_node_state zwave_controller)
 add_library(ucl_network_management src/ucl_network_management.cpp)
 target_include_directories(
   ucl_network_management PUBLIC include ${Boost_INCLUDE_DIRS}
-                                ${nlohmann_json_include})
-target_link_libraries(ucl_network_management zwave_controller zpc_utils
+                               PRIVATE ${nlohmann_json_include})
+target_link_libraries(ucl_network_management zwave_controller
                       uic_mqtt ucl_nm_neighbor_discovery)
 
 # UCL network management neighbor discovery
 add_library(ucl_nm_neighbor_discovery src/ucl_nm_neighbor_discovery.cpp)
 target_include_directories(ucl_nm_neighbor_discovery PRIVATE src)
-target_link_libraries(ucl_nm_neighbor_discovery zwave_controller zpc_utils
-                      uic_contiki zwave_network_management zpc_attribute_store)
+target_link_libraries(ucl_nm_neighbor_discovery zwave_controller
+                      uic_contiki zpc_attribute_store)
 
 # UCL MQTT Node interview
 add_library(ucl_mqtt_node_interview src/ucl_mqtt_node_interview.c)
 target_include_directories(ucl_mqtt_node_interview PUBLIC include)
 target_link_libraries(ucl_mqtt_node_interview zpc_attribute_store
-                      zwave_controller zpc_utils)
+                      zwave_controller)
 
 # The main UCL MQTT library
 add_library(ucl_mqtt src/ucl_mqtt.c)

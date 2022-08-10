@@ -4,7 +4,6 @@ add_library(
   src/zwave_tx.cpp
   src/zwave_tx_callbacks.cpp
   src/zwave_tx_fixt.c
-  src/zwave_tx_follow_ups.cpp
   src/zwave_tx_process.cpp
   src/zwave_tx_queue.cpp
   src/zwave_tx_state_logging.c)
@@ -16,7 +15,7 @@ target_include_directories(
 
 target_link_libraries(
   zwave_tx
-  PUBLIC uic_contiki zwave_tx_groups zwave_definitions zwave_api
+  PUBLIC uic_contiki uic_log zwave_tx_groups zwave_definitions zwave_api
   PRIVATE zwave_controller)
 install(TARGETS zwave_tx LIBRARY DESTINATION lib)
 

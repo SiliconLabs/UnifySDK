@@ -16,6 +16,7 @@ target_link_libraries(
           zigpc_gateway
           zigpc_group_mgmt
           zigpc_common
+          zigpc_config
           zigpc_net_mgmt
           zigpc_ucl
           uic_log

@@ -1,0 +1,56 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+{{zap_header}}
+
+/**
+ * @defgroup dotdot_mqtt_helpers DotDot MQTT Helpers
+ * @ingroup dotdot_mqtt
+ * @brief Various helper functions C interface for \ref dotdot_mqtt
+ *
+ * @{
+ */
+
+#ifndef DOTDOT_MQTT_HELPERS_H
+#define DOTDOT_MQTT_HELPERS_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
+{{#zcl_enums}}
+#define {{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE 1
+
+/** Get {{asSnakeCaseLower label}} string representation from enum. */
+char *{{asSnakeCaseLower label}}_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size);
+/** Get {{asSnakeCaseLower label}} enum representation from string. */
+uint32_t {{asSnakeCaseLower label}}_get_enum_value_number_c(const char *str);
+{{/zcl_enums}}
+
+/**
+ * @brief Get UNID from MQTT topic.
+ *
+ * @param topic Topic string
+ * @param result String to contain result
+ * @param max_result_size sizeof result
+ * @return UNID or NULL if unable to parse UNID from topic.
+ */
+char * unid_from_mqtt_topic_c(const char *topic, char *result, size_t max_result_size);
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
+
+#endif  //DOTDOT_MQTT_HELPERS_H
+/** @} end dotdot_mqtt_helpers */

@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Specification
-   &#160;<span id="projectnumber">ver1_0_RC11_20211006-12-g5cdaf55</span>
+   &#160;<span id="projectnumber">ver1_0_RC11_20211006-19-g32c28c7</span>
    </div>
   </td>
  </tr>
@@ -67,11 +67,11 @@ $(function() {
 <div class="title">Dotdot ZCL in Unify Framework for Application Level Control </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md44"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md40"></a>
 Introduction</h1>
 <p>This chapter provides application examples about the usage of the DotDot Zigbee cluster library specification <a class="el" href="md_doc_references.html">ZCL2018</a> in the Unify framework considering that the node capabilities have been discovered (i.e., the supported clusters, commands and attributes). The Unify framework uses MQTT transport protocol as an internal message transportation between Clients (IoT Service API, Protocol Controller, and so on), and unified controller application language that enables seamless communications across a Unify network.</p>
 <p>In the Unify framework, every Protocol Controller must discover the capability of the PAN nodes in its network and advertise the capabilities of each node (supported commands and attributes) to interested parties (i.e., IoT Service for a cloud service like AWS-IOT) using MQTT protocol. This procedure known as <a class="el" href="md_doc__chapter06-service-discovery.html">service discovery</a>. After the PAN nodes capabilities have been discovered, the IoT service MQTT clients can control and observe the behavior of the nodes using the unified controller application language. The unified application language is based on a publish/subscribe messaging transport protocol and the dotdot/ZigBee Cluster library (ZCL) specification.</p>
-<h1><a class="anchor" id="autotoc_md45"></a>
+<h1><a class="anchor" id="autotoc_md41"></a>
 MQTT Topics</h1>
 <p>The MQTT topics are divided into sub-spaces for each device to allow a Protocol Controller to advertise state and capabilities of a given device and IoT Services to read the state and control a given device.</p>
 <p>There are three main spaces in a cluster MQTT topic, as follows:</p>
@@ -111,12 +111,12 @@ Services </th><th class="markdownTableHeadNone">Description  </th></tr>
 <td class="markdownTableBodyNone"><code>ucl/by-unid/&lt;UNID&gt;/ep&lt;EndPointID&gt;/&lt;ClusterName&gt;/GeneratedCommands/&lt;CommandName&gt;</code> </td><td class="markdownTableBodyNone">Publish<br  />
 (unretained) </td><td class="markdownTableBodyNone">Subscribe </td><td class="markdownTableBodyNone">Receive commands sent from the UNID/endpoint cluster to Unify.  </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md46"></a>
+<h2><a class="anchor" id="autotoc_md42"></a>
 Reported and Desired</h2>
 <p>The state of a cluster for a device/endpoint is represented by a list of attributes, additional (non-standard) attributes, and a list of supported commands.</p>
 <p>A PAN node may perform state transitions or delays may occur between an IoT Service issuing an MQTT command and the device itself confirming that its state matches what the IoT Service wished to accomplish. For that purpose, each attribute in a Cluster has two values, a <em>desired</em> and a <em>reported</em> value. The <em>desired value</em> indicates what the Protocol Controller attempts to get device/endpoint to reach. The <em>reported value</em> indicates the state confirmed by the device/endpoint itself.</p>
 <p>More information about the 'desired' and 'reported' state description can be found in the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-document-syntax.html#device-shadow-example-request-json">Amazon AWS Specification</a>.</p>
-<h2><a class="anchor" id="autotoc_md47"></a>
+<h2><a class="anchor" id="autotoc_md43"></a>
 Cluster MQTT Topics</h2>
 <p>IoT Services (Cloud Service connectors, Middleware Translator, and Rules Engines) should subscribe to the following topic filter to get any application message corresponding to the state of given cluster from any PAN node in the Unify network:</p>
 <div class="fragment"><div class="line">ucl/by-unid/+/+/&lt;ClusterName&gt;/#</div>
@@ -150,7 +150,7 @@ Cluster MQTT Topics</h2>
 <div class="line">    &quot;ColorTemperatureSupported&quot;: true</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md48"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md44"></a>
 Mandatory Cluster Attributes</h3>
 <p>PAN Nodes may support more than the minimum mandatory set of attributes for a given cluster. When a node is interviewed and its capabilities are discovered, a Protocol Controller MUST, at a minimum, publish all attributes for a cluster that are specified as <em>mandatory</em> in the ZigBee Cluster library.</p>
 <p>For example, for a PAN Node supporting the OnOff cluster, it will be guaranteed that the <em>OnOff</em> attribute will be published, however, the <em>GlobalSceneControl</em> will be published only if supported by the PAN node.</p>
@@ -158,7 +158,7 @@ Mandatory Cluster Attributes</h3>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported { &quot;value&quot;: true}</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/GlobalSceneControl/Desired { &quot;value&quot;: true}</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/GlobalSceneControl/Reported { &quot;value&quot;: true}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md49"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md45"></a>
 Missing Mandatory Cluster Attributes</h3>
 <p>Because of multiple PHYs and the application level variety between them, a node might be shown as a ZCL cluster server, despite missing a mandatory attribute.</p>
 <p>For example, in Z-Wave, it is possible to have Thermostats without a local temperature reading. These thermostats can nonetheless be controlled by MQTT clients and the lack of a temperature reading should not prevent the exposition of such a device to the IoT Services.</p>
@@ -177,7 +177,7 @@ Missing Mandatory Cluster Attributes</h3>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Thermostat/Attributes/ControlSequenceOfOperation/Reported { &quot;value&quot;: 4}</div>
 </div><!-- fragment --><p>In any case, a Protocol Controller SHOULD publish the <em>LocalTemperature</em> attribute state when publishing a node as a Thermostat Cluster server because it is a mandatory attribute.</p>
 <p>When a reported state is updated from the PAN node, the Protocol Controllers MUST update both the reported and desired values of the corresponding attributes. In this case, Protocol Controllers SHOULD publish the desired part of the updated state first.</p>
-<h3><a class="anchor" id="autotoc_md50"></a>
+<h3><a class="anchor" id="autotoc_md46"></a>
 Cluster Revisions</h3>
 <p>A special attribute under every cluster called ClusterRevision is used to advertise the ZCL revision of the cluster that the node and/or Protocol Controller are using.</p>
 <p>ProtocolControllers MUST publish this information for all clusters of all nodes they advertise.</p>
@@ -188,7 +188,7 @@ Cluster Revisions</h3>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/OnOff/Reported {&quot;value&quot;: true}</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/ClusterRevision/Desired {&quot;value&quot;: 2}</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/OnOff/Attributes/ClusterRevision/Reported {&quot;value&quot;: 2}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md51"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md47"></a>
 Additional Attributes</h3>
 <p>Additional attributes under a cluster state can be used to advertise state information that is not standardized as Cluster attributes.</p>
 <p>The format of this additional state information is UCL-specific and defined in this specification. It follows as closely as possible the data models described in the ZCL Cluster Library <a class="el" href="md_doc_references.html">ZCL2018</a>.</p>
@@ -216,7 +216,7 @@ Additional Attributes</h3>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md52"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md48"></a>
 Commands Supported by PAN Node</h3>
 <p>IoT Services MUST be able to read the commands that are supported for a cluster server under a UNID/Endpoint to control them.</p>
 <p>The list of supported Commands for each PAN node MUST be advertised by the Protocol Controllers in the <em>SupportedCommands</em> topic under the Cluster level.</p>
@@ -233,7 +233,7 @@ Commands Supported by PAN Node</h3>
 <p>Protocol Controllers SHOULD NOT advertise the availability of the <em>WriteAttributes</em> Command in the SupportedCommands topic when there is no writable attribute supported by the PAN node for the cluster. IoT Services MAY use this command but it will have no effect.</p>
 <p>Protocol Controllers SHOULD explicitly advertise the availability of the <em>ForceReadAttributes</em> Command in the SupportedCommands topic when there is at least one readable attribute that is of a type not of an integer or floating point type (i.e., an attribute of type "String" or other complex data types).</p>
 <p>Protocol Controller SHOULD advertise the <em>ForceReadAttributes</em> Command for all endpoints with readable mandatory attributes, as supported in the ZCL cluster definition.</p>
-<h3><a class="anchor" id="autotoc_md53"></a>
+<h3><a class="anchor" id="autotoc_md49"></a>
 Sending Supported Commands to PAN Node</h3>
 <p>When a PAN node is included to the network, a Protocol Controller servicing the node MUST subscribe to the following topic filter to receive incoming Commands:</p>
 <blockquote class="doxtable">
@@ -247,7 +247,7 @@ Sending Supported Commands to PAN Node</h3>
 <div class="line">  &quot;FieldName1&quot;: &quot;value&quot;,</div>
 <div class="line">  &quot;FieldName2&quot;: &quot;value&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md54"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md50"></a>
 Commands Generated by PAN Node</h3>
 <p>IoT Services SHOULD be able to read the commands that are generated by a cluster under a UNID/Endpoint to listen to unsolicited events and responses.</p>
 <p>The list of generated commands for each PAN node SHOULD be advertised by the Protocol Controllers in the <em>SupportedGeneratedCommands</em> topic under the Cluster level.</p>
@@ -258,7 +258,7 @@ Commands Generated by PAN Node</h3>
 <div class="line">  &quot;value&quot;: [&quot;On&quot;,&quot;Off&quot;,&quot;Toggle&quot;]</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Note: No publications to this topic is equivalent to the Protocol Controller publishing an empty array of strings to indicate no commands can be generated by this PAN node.</p>
-<h3><a class="anchor" id="autotoc_md55"></a>
+<h3><a class="anchor" id="autotoc_md51"></a>
 Receiving Generated Commands from PAN Node</h3>
 <p>When a PAN node is included to the network, an IoT Service monitoring the node SHOULD subscribe to the following topic filter to receive incoming commands from the PAN node:</p>
 <blockquote class="doxtable">
@@ -272,7 +272,7 @@ Receiving Generated Commands from PAN Node</h3>
 <div class="line">  &quot;FieldName1&quot;: &quot;value&quot;,</div>
 <div class="line">  &quot;FieldName2&quot;: &quot;value&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md56"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md52"></a>
 Command Payloads</h3>
 <p>If the command does not have any mandatory fields, an empty JSON object (i.e., {}) MUST be sent as a payload.</p>
 <p>If the command has mandatory fields, the payload MUST contain all of them. For example, in the 'Level' cluster, the 'MoveToLevel' command consists of two mandatory fields (i.e., 'Level' and 'Transition Time' ). In this case, the payload MUST be: <code>{"Level": 100, "TransitionTime": 0}</code>.</p>
@@ -296,7 +296,7 @@ Command Payloads</h3>
 <div class="line">    &quot;UpdateStartHue&quot;: false</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md57"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md53"></a>
 WriteAttributes Generic Command</h3>
 <p>A Protocol Controller MUST always publish the desired/reported state of all mandatory attributes in a cluster, using the Cluster state topic space. An attribute state can be changed in three ways:</p>
 <ul>
@@ -314,7 +314,7 @@ WriteAttributes Generic Command</h3>
 </div><!-- fragment --><p>Note that all PAN nodes, which support writable attributes MUST be writable directly using the <em>WriteAttributes</em> Command. Read-only attributes received in this Command will be ignored. See <a class="el" href="md_doc_references.html">ZCL2018</a> for details about writable/read-only attributes.</p>
 <p>To ensure an end-to-end quality of service, a Protocol Controller MUST always publish the attributes desired/reported state when it detects a state update. IoT Services can therefore see the effect of their published commands by subscribing to the cluster <em>Attributes</em> space.</p>
 <p>Non-standard attribute cannot be updated or modified using the <em>WriteAttributes</em> command.</p>
-<h2><a class="anchor" id="autotoc_md58"></a>
+<h2><a class="anchor" id="autotoc_md54"></a>
 ForceReadAttributes Generic Command</h2>
 <p>The <em>ForceReadAttributes</em> command is used to force an update of specified attributes that may not be properly reported using standard reporting mechanisms. On reception of this command, the Protocol Controller SHOULD request the latest available data from the network for each attribute specified in the command. The data SHOULD be published on the <em>reported</em> MQTT topic for each attribute.</p>
 <p>ForceReadAttributes should be used sparingly because it can generate significant radio traffic. The default behavior of the protocol controllers already guarantee a good trade off between timely updates and radio traffic without the use of ForceReadAttributes.</p>
@@ -343,11 +343,11 @@ ForceReadAttributes Generic Command</h2>
 </div><!-- fragment --><p>In response, the Protocol Controller should update ALL available attributes for <em>ClusterName</em>, as specified in <a class="el" href="md_doc_references.html">ZCL2018</a>.</p>
 <p><em>ForceReadAttribute</em> support for non-standard ZCL cluster attributes is optional.</p>
 <p><em>ForceReadAttribute</em> is EXPLICITLY not supported for groups or multicast due to network performance considerations.</p>
-<h1><a class="anchor" id="autotoc_md59"></a>
+<h1><a class="anchor" id="autotoc_md55"></a>
 Clusters for Lights, Switches, DoorLock, Thermostat, and Occupancy Sensor Applications</h1>
 <p>The following subsections provide specific cluster examples using the Cluster state and Commands topics, such as Dimmer lighting, Switch, Door Lock, Thermostat, and Occupancy Sensor applications. The detailed description of each cluster can be found in <a class="el" href="md_doc_references.html">ZCL2018</a>.</p>
 <p>Each cluster has a list of mandatory attributes and commands. All mandatory attributes in a given cluster MUST be advertised by a Protocol Controller for all devices/endpoints. All mandatory Commands SHOULD be advertised in the SupportedCommand topic, when possible.</p>
-<h2><a class="anchor" id="autotoc_md60"></a>
+<h2><a class="anchor" id="autotoc_md56"></a>
 Groups Cluster (0x0004)</h2>
 <p>This cluster is used to define group memberships for PAN nodes.</p>
 <p>This cluster requires additional attributes, because the <em>Group list</em> is not captured by its defined attributes. See <a class="el" href="md_doc_references.html">ZCL2018</a> for the <em>Groups</em> cluster definition.</p>
@@ -403,7 +403,7 @@ Groups Cluster (0x0004)</h2>
 <div class="line">    &quot;value&quot;</div>
 <div class="line">  ]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md61"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md57"></a>
 Scenes Cluster (0x0005)</h2>
 <p>This cluster is used to define scene and configuration of each device/endpoint. In the Unify context, it can be used both for scene controlling devices (e.g., wall controller button) and for activating scenes for other nodes (e.g., light dimmer).</p>
 <p>This cluster requires additional attributes because the <em>Scene Table</em> is not captured by its defined attributes. See <a class="el" href="md_doc_references.html">ZCL2018</a> for the <em>Scene Table</em> definition.</p>
@@ -476,7 +476,7 @@ Scenes Cluster (0x0005)</h2>
 <div class="line">    }</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md62"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md58"></a>
 (Z-Wave) Scenes Actuators</h3>
 <p>Scenes actuators do not support any of the ZCL required "SupportedCommands", and instead use the Scene Cluster attributes to indicate which scene they wish to activate. Such devices are both Scene Cluster servers and clients.</p>
 <p>An MQTT client can therefore decide to activate scenes in a number of devices/endpoints based on the spontaneous changes made by these scenes actuator devices/endpoints.</p>
@@ -498,7 +498,7 @@ Scenes Cluster (0x0005)</h2>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/Attributes/NameSupport/Reported {&quot;value&quot;: false}</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/SupportedCommands {&quot;value&quot;:[ ] }</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Scenes/SupportedGeneratedCommands {&quot;value&quot;:[&quot;RecallScene&quot;] }</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md63"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md59"></a>
 Scenes Supporting Nodes</h3>
 <p>Protocol Controller MUST advertise the Scene Table attribute for PAN nodes that can be configured to react and change state based on scenes.</p>
 <p>All PAN nodes/endpoints supporting attributes marked as <em>sceneRequired="true"</em> in the <a href="https://zigbeealliance.org/solution/dotdot/">dotdot definitions</a> SHOULD be presented as a Scene cluster server by Protocol Controllers.</p>
@@ -523,7 +523,7 @@ Scenes Supporting Nodes</h3>
 <div class="line">}</div>
 </div><!-- fragment --><p>In this case, the "ExtensionFieldSets" data will be parsed and copied into the "SceneTableExtensions" object of the Scene Table.</p>
 <p>Only Cluster Attributes marked as <code>sceneRequired="true"</code> MUST be used by MQTT Client in the <code>ExtensionFieldSets</code> JSON object. Protocol Controllers MUST accept any CLuster/attribute combination in the <code>ExtensionFieldSets</code> JSON object as long as they are marked as <code>sceneRequired="true"</code>.</p>
-<h2><a class="anchor" id="autotoc_md64"></a>
+<h2><a class="anchor" id="autotoc_md60"></a>
 On/Off Cluster (0x0006)</h2>
 <p>Mandatory Attributes:</p>
 <ul>
@@ -535,7 +535,7 @@ On/Off Cluster (0x0006)</h2>
 <li>On (0x01): when a device receive this command, the device should enter to "On" state.</li>
 <li>Toggle (0x02): when a device receive this command, the device should enter to "On" state if it was on " Off" state and vice versa.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md65"></a>
+<h2><a class="anchor" id="autotoc_md61"></a>
 Level Cluster(0x0008)</h2>
 <p>The level cluster controls the light brightness level, the door closure level, or the heater power output.</p>
 <p>Mandatory attributes:</p>
@@ -562,7 +562,7 @@ Level Cluster(0x0008)</h2>
 <li>StepWithOnOff (0x06)</li>
 </ul>
 <p>Note that the the behavior of these commands is similar to the above mandatory commands. The main difference is the MoveToLevelWithOnOff, MovewithOnOff, and StepWithOnOff commands impact the On/Off Attribute of the device if On/Off Cluster is also supported. If the targeted level value is higher than the minimum level, the On/Off attribute should be set to "On" (light bulb). If the target level is set to the minimum level allowed by the device, the OnOff attribute should be set to "Off" (grey lightbulb).</p>
-<h2><a class="anchor" id="autotoc_md66"></a>
+<h2><a class="anchor" id="autotoc_md62"></a>
 Door Lock Cluster (0x0101)</h2>
 <p>This cluster is used as a generic interface to secure a door. The ZCL Door Lock cluster contains a lot of optional attributes, such as logging events, alarms, security setting, and so on and commands, such as setting user PIN, getting log events, setting schedules, and so on. However, this section lists only the mandatory attributes and commands used for basic door operations.</p>
 <p>Mandatory Attributes:</p>
@@ -577,13 +577,13 @@ Door Lock Cluster (0x0101)</h2>
 <li>UnlockDoor( 0x01): a command used to unlock the door with PINOrRFIDCode Code.</li>
 </ul>
 <p>Note if the PIN or RFID is not defined on the device, the PINOrRFIDCode field value can be empty string (i.e., " ").</p>
-<h2><a class="anchor" id="autotoc_md67"></a>
+<h2><a class="anchor" id="autotoc_md63"></a>
 Thermostat Cluster (0x0201)</h2>
 <p>This cluster defines the interface to thermostats. The ZCL Thermostat cluster contains a lot of optional attributes, such as Outdoor Temperature, Occupancy, PID configuration, and so on, and a few optional commands used primarily for scheduling. However, this section only covers the (only) mandatory attribute, LocalTemperature, as well as the (only) mandatory command, Setpoint Raise/Lower.</p>
 <blockquote class="doxtable">
 <p>Note that for the ZCL Thermostat Cluster, all temperatures are in <b>Celcius (°C)</b> and any necessary conversion to/from, for example, Fahrenheit °F must be done by the Unify components (Protocol Controllers and GUI). </p>
 </blockquote>
-<h3><a class="anchor" id="autotoc_md68"></a>
+<h3><a class="anchor" id="autotoc_md64"></a>
 Fingerprinting of Z-Wave Nodes</h3>
 <p>For example, to map a Z-Wave node's functionalities to the Thermostat Cluster, a protocol Controller may expect the following conditions to be met before it exposes a Node as a Thermostat Cluster server:</p>
 <ul>
@@ -597,7 +597,7 @@ Fingerprinting of Z-Wave Nodes</h3>
 </ul>
 </li>
 </ul>
-<h3><a class="anchor" id="autotoc_md69"></a>
+<h3><a class="anchor" id="autotoc_md65"></a>
 Mandatory Attributes</h3>
 <p>The following attributes are mandatory for the ZigBee thermostat cluster.</p>
 <ul>
@@ -626,7 +626,7 @@ Mandatory Attributes</h3>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Thermostat/Attributes/ThermostatProgrammingOperationMode/Reported {&quot;value&quot;: 0}</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Thermostat/Attributes/ControlSequenceOfOperation/Desired {&quot;value&quot;: 4}</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Thermostat/Attributes/ControlSequenceOfOperation/Reported {&quot;value&quot;: 4}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md70"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md66"></a>
 Mandatory Commands</h3>
 <p>Only one command is mandatory command (alongside WriteAttributes), which allows changing the operating mode and applying an offset to the currently-configured setpoints.</p>
 <ul>
@@ -655,7 +655,7 @@ Mandatory Commands</h3>
 <div class="line">  &quot;OccupiedHeatingSetpoint&quot;: 2200</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Note that it is not possible to detect which SystemModes are supported or if the setpoints will be accepted. For example, in most cases the <code>ControlSequenceOfOperation</code> will have only 1 valid value. In this case, the cluster state topic will reflect back that no change was applied.</p>
-<h2><a class="anchor" id="autotoc_md71"></a>
+<h2><a class="anchor" id="autotoc_md67"></a>
 Occupancy Sensing Cluster (0x0406)</h2>
 <p>The cluster defines an interface to occupancy sensing functionality including configuration and getting the occupancy status. Here, only the mandatory attributes that can enable the basic functionality of occupancy sensing are described.</p>
 <p>Mandatory Attributes:</p>
@@ -664,58 +664,58 @@ Occupancy Sensing Cluster (0x0406)</h2>
 <li>OccupancySensorType (0x0001): defines the occupancy sensor, and the values can be PIR (0x00), Ultrasonic(0x01), PIR and ultrasonic(0x02) and Physical contact(0x03).</li>
 </ul>
 <p>There are no supported command for Occupancy Sensing cluster. The <em>WriteAttributes</em> command will have no effect.</p>
-<h1><a class="anchor" id="autotoc_md72"></a>
+<h1><a class="anchor" id="autotoc_md68"></a>
 Examples of Application Level Control Using Unify Framework</h1>
-<h2><a class="anchor" id="autotoc_md73"></a>
+<h2><a class="anchor" id="autotoc_md69"></a>
 Turning On the On/Off Light Device using Unify Framework</h2>
 <p>The following diagram shows an example of On/Off Cluster control using the Unify framework.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_1.png" />
 </div>
-<h2><a class="anchor" id="autotoc_md74"></a>
+<h2><a class="anchor" id="autotoc_md70"></a>
 Changing the Brightness Level of the Light Using Unify Framework</h2>
 <p>The following diagram shows an example of a device with both On/Off and Level Clusters server.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_2.png" />
 </div>
-<h2><a class="anchor" id="autotoc_md75"></a>
+<h2><a class="anchor" id="autotoc_md71"></a>
 DoorLock Operation Using Unify Framework</h2>
 <p>The following diagram shows an example of a Door Lock controlled using the Unify Framework.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_3.png" />
 </div>
-<h2><a class="anchor" id="autotoc_md76"></a>
+<h2><a class="anchor" id="autotoc_md72"></a>
 DoorLockController Operation Using Unify Framework</h2>
 <p>The following diagram shows an example of a Door Lock Controller being used in the Unify Framework.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_4.png" />
 </div>
-<h2><a class="anchor" id="autotoc_md77"></a>
+<h2><a class="anchor" id="autotoc_md73"></a>
 PIR Sensor Notification Application Using Unify Framework</h2>
 <p>The following diagram shows an example of PIR Sensor device represented as an OccupancySensing Cluster server with the Unify framework.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_5.png" />
 </div>
-<h2><a class="anchor" id="autotoc_md78"></a>
+<h2><a class="anchor" id="autotoc_md74"></a>
 Using the WriteAttributes Generic Topics</h2>
 <p>Scenario: A device supports the <code>ManufacturerName</code> and <code>LocationDescription</code> attributes in the Basic Cluster. An MQTT Client wants to update the location of the device using the <em>WriteAttributes</em> Command.</p>
 <p>Note that the <code>ManufacturerName</code> is a read only attribute and the <code>LocationDescription</code> is a writable attribute.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_6.png" />
 </div>
-<h2><a class="anchor" id="autotoc_md79"></a>
+<h2><a class="anchor" id="autotoc_md75"></a>
 On/Off and Scene-Capable PAN Node</h2>
 <p>The following diagram shows an example of On/Off and Scene Cluster control using the Unify framework.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_7.png" />
 </div>
-<h2><a class="anchor" id="autotoc_md80"></a>
+<h2><a class="anchor" id="autotoc_md76"></a>
 Scene PAN Node without Actuator Capabilities</h2>
 <p>The following diagram shows an example of a node using scenes without supporting any of the actuator functionalities.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_8.png" />
 </div>
-<h2><a class="anchor" id="autotoc_md81"></a>
+<h2><a class="anchor" id="autotoc_md77"></a>
 Manipulating PAN Node Group Membership</h2>
 <p>The following diagram shows an example of adding/removing groups for a PAN node</p>
 <div class="plantumlgraph">

@@ -20,7 +20,7 @@
 
 #include "sl_status.h"
 
-#include "mqtt_mock_helper.h"
+#include "mqtt_test_helper.h"
 
 extern "C" {
 #include "dotdot_mqtt.h"
@@ -33,7 +33,7 @@ static int callback_count = 0;
 void setUp()
 {
   callback_count = 0;
-  mqtt_mock_helper_init();
+  mqtt_test_helper_init();
 }
 
 // Test function
@@ -50,7 +50,7 @@ static sl_status_t
   TEST_ASSERT_FALSE(unretained);
   TEST_ASSERT_EQUAL(UCL_REPORTED_UPDATED, update_type);
   TEST_ASSERT_TRUE(position_and_orientation_valid);
-  callback_count+=1;
+  callback_count += 1;
   return SL_STATUS_OK;
 }
 
@@ -70,8 +70,8 @@ void test_aox_locator_receive_position_and_orientation_valid_update()
   // Test payload
   std::string payload = R"({"value" : true})";
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
-  TEST_ASSERT_EQUAL(1,callback_count);
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_EQUAL(1, callback_count);
 
   // Unset for following tests.
   uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback_set(
@@ -97,7 +97,7 @@ static sl_status_t
   TEST_ASSERT_EQUAL_DOUBLE(-1.1, position.OrientationX);
   TEST_ASSERT_EQUAL_DOUBLE(-2.00002, position.OrientationY);
   TEST_ASSERT_EQUAL_DOUBLE(-32.23, position.OrientationZ);
-  callback_count+=1;
+  callback_count += 1;
   return SL_STATUS_OK;
 }
 
@@ -127,11 +127,12 @@ void test_aox_locator_receive_aox_locator_position_and_orientation_update()
     }
   })";
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
-  TEST_ASSERT_EQUAL(1,callback_count);
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_EQUAL(1, callback_count);
 
   // Unset for following tests.
-  uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback_set(NULL);
+  uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_callback_set(
+    NULL);
 }
 
 // Test function
@@ -148,7 +149,7 @@ static sl_status_t
   TEST_ASSERT_TRUE(unretained);
   TEST_ASSERT_EQUAL(UCL_REPORTED_UPDATED, update_type);
   TEST_ASSERT_EQUAL_INT8(0, period_samples);
-  callback_count+=1;
+  callback_count += 1;
   return SL_STATUS_OK;
 }
 
@@ -168,8 +169,8 @@ void test_aox_locator_receive_aox_locator_period_sample_update_unretained()
   // Test payload
   std::string payload = "";
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), 0);
-  TEST_ASSERT_EQUAL(1,callback_count);
+  mqtt_test_helper_publish(topic, payload.c_str(), 0);
+  TEST_ASSERT_EQUAL(1, callback_count);
 
   // Unset for following tests.
   uic_mqtt_dotdot_aox_locator_attribute_period_samples_callback_set(NULL);
@@ -196,7 +197,7 @@ static sl_status_t
   TEST_ASSERT_EQUAL_DOUBLE(1.3, azimuth_mask[1].Max);
   TEST_ASSERT_EQUAL_DOUBLE(-11.1, azimuth_mask[2].Min);
   TEST_ASSERT_EQUAL_DOUBLE(-1.3, azimuth_mask[2].Max);
-  callback_count+=1;
+  callback_count += 1;
   return SL_STATUS_OK;
 }
 
@@ -231,8 +232,8 @@ void test_aox_locator_receive_aox_locator_azimuth_mask_update()
   ]
 })";
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
-  TEST_ASSERT_EQUAL(1,callback_count);
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_EQUAL(1, callback_count);
 
   // Unset for following tests.
   uic_mqtt_dotdot_aox_locator_attribute_azimuth_mask_callback_set(NULL);
@@ -259,7 +260,7 @@ static sl_status_t
   TEST_ASSERT_EQUAL_STRING("Tag4", allow_list[3]);
   TEST_ASSERT_EQUAL_STRING("Tag5", allow_list[4]);
   TEST_ASSERT_EQUAL_STRING("Tag6", allow_list[5]);
-  callback_count+=1;
+  callback_count += 1;
   return SL_STATUS_OK;
 }
 
@@ -283,8 +284,8 @@ void test_aox_locator_receive_aox_allow_list_update()
   ]
 })";
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
-  TEST_ASSERT_EQUAL(1,callback_count);
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
+  TEST_ASSERT_EQUAL(1, callback_count);
 
   // Unset for following tests.
   uic_mqtt_dotdot_aox_locator_attribute_allow_list_callback_set(NULL);

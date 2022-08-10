@@ -12,7 +12,11 @@
  *****************************************************************************/
 // Includes from this component
 #include "attribute_store.h"
+#include "attribute_store_type_registration.h"
+#include "attribute_store_configuration.h"
+#include "attribute_store_callbacks.h"
 #include "attribute_store_fixt.h"
+#include "attribute_store_internal.h"
 
 // Includes from other components
 #include "sl_status.h"
@@ -27,6 +31,8 @@ static int update_callback_1_counter          = 0;
 static int update_callback_1_creation_counter = 0;
 static int update_callback_1_update_counter   = 0;
 static int update_callback_1_deletion_counter = 0;
+static int delete_callback_node_counter       = 0;
+
 static int update_callback_delete_node_counter = 0;
 static int touch_callback_counter              = 0;
 static attribute_store_node_t received_callback_1_node
@@ -46,7 +52,7 @@ static int update_callback_add_child_value_counter    = 0;
 #define ATTRIBUTE_ENDPOINT_ID                        103
 #define ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID 104
 
-void update_callback_1_event(attribute_changed_event_t * event)
+void update_callback_1_event(attribute_changed_event_t *event)
 {
   received_callback_1_node = event->updated_node;
   update_callback_1_counter++;
@@ -84,6 +90,11 @@ void touch_callback(attribute_store_node_t touched_node)
 {
   received_touched_node = touched_node;
   touch_callback_counter++;
+}
+
+void delete_by_type_callback(attribute_store_node_t deleted_node)
+{
+  delete_callback_node_counter++;
 }
 
 void update_callback_read_deleted_value(attribute_store_node_t node,
@@ -138,9 +149,11 @@ void update_callback_add_child(attribute_store_node_t node,
 void update_callback_delete_node(attribute_store_node_t node,
                                  attribute_store_change_t change)
 {
-  // I am an evil callback that deletes stuffs in the attribute store
+  // I am an evil callback first try to add, then that deletes in the attribute store
   // Also if the node is already under deletion
   attribute_store_delete_node(node);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE,
+                    attribute_store_add_node(123, node));
   update_callback_delete_node_counter++;
 }
 
@@ -153,6 +166,7 @@ static void set_counters_to_zero()
   update_callback_1_creation_counter         = 0;
   update_callback_1_update_counter           = 0;
   update_callback_1_deletion_counter         = 0;
+  delete_callback_node_counter               = 0;
   update_callback_delete_node_counter        = 0;
   update_callback_read_deleted_value_counter = 0;
   update_callback_add_child_value_counter    = 0;
@@ -170,6 +184,7 @@ void setUp()
 {
   // This trigger a deletion of everything before each test
   TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_init());
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_callbacks_init());
   set_counters_to_zero();
   attribute_store_delete_node(attribute_store_get_root());
 }
@@ -601,6 +616,11 @@ void test_attribute_store()
     attribute_store_register_callback_by_type_and_state(update_callback_2,
                                                         ATTRIBUTE_NODE_ID,
                                                         DESIRED_ATTRIBUTE));
+
+  // Delete by type callback will only be notified of attribute deletions
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_delete_callback(delete_by_type_callback));
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     attribute_store_set_node_attribute_value(new_node_3,
                                                              DESIRED_ATTRIBUTE,
@@ -611,6 +631,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(0, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(1, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(0, update_callback_1_deletion_counter);
+  TEST_ASSERT_EQUAL(0, delete_callback_node_counter);
   TEST_ASSERT_EQUAL(new_node_3, received_callback_1_node);
   TEST_ASSERT_EQUAL(1, update_callback_2_counter);
   TEST_ASSERT_EQUAL(new_node_3, received_callback_2_node);
@@ -625,6 +646,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(0, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(1, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(0, update_callback_1_deletion_counter);
+  TEST_ASSERT_EQUAL(0, delete_callback_node_counter);
   TEST_ASSERT_EQUAL(new_node_3, received_callback_1_node);
   TEST_ASSERT_EQUAL(1, update_callback_2_counter);
   TEST_ASSERT_EQUAL(new_node_3, received_callback_2_node);
@@ -641,6 +663,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(0, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(2, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(0, update_callback_1_deletion_counter);
+  TEST_ASSERT_EQUAL(0, delete_callback_node_counter);
   TEST_ASSERT_EQUAL(new_node_2, received_callback_1_node);
   TEST_ASSERT_EQUAL(1, update_callback_2_counter);
   TEST_ASSERT_EQUAL(new_node_3, received_callback_2_node);
@@ -657,6 +680,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(0, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(2, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(0, update_callback_1_deletion_counter);
+  TEST_ASSERT_EQUAL(0, delete_callback_node_counter);
   TEST_ASSERT_EQUAL(new_node_2, received_callback_1_node);
   TEST_ASSERT_EQUAL(1, update_callback_2_counter);
   TEST_ASSERT_EQUAL(new_node_3, received_callback_2_node);
@@ -670,6 +694,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(3, update_callback_1_counter);
   TEST_ASSERT_EQUAL(1, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(2, update_callback_1_update_counter);
+  TEST_ASSERT_EQUAL(0, delete_callback_node_counter);
   TEST_ASSERT_EQUAL(0, update_callback_1_deletion_counter);
   TEST_ASSERT_EQUAL(new_node_6, received_callback_1_node);
   TEST_ASSERT_EQUAL(1, update_callback_2_counter);
@@ -682,6 +707,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(1, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(2, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(1, update_callback_1_deletion_counter);
+  TEST_ASSERT_EQUAL(1, delete_callback_node_counter);
 
   // Set counters back to 0
   set_counters_to_zero();
@@ -708,6 +734,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(0, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(1, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(0, update_callback_1_deletion_counter);
+  TEST_ASSERT_EQUAL(0, delete_callback_node_counter);
 
   // Create new_node_6 again
   new_node_6 = attribute_store_add_node(ATTRIBUTE_NODE_ID, new_node_1);
@@ -719,6 +746,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(1, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(1, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(0, update_callback_1_deletion_counter);
+  TEST_ASSERT_EQUAL(0, delete_callback_node_counter);
 
   // Modify new_node 3 value again:
   test_values[0] = 0x55;
@@ -733,6 +761,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(1, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(2, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(0, update_callback_1_deletion_counter);
+  TEST_ASSERT_EQUAL(0, delete_callback_node_counter);
 
   // Try deleting the node 6, see if the callback triggers:
   TEST_ASSERT_EQUAL(attribute_store_delete_node(new_node_6), SL_STATUS_OK);
@@ -742,6 +771,7 @@ void test_attribute_store()
   TEST_ASSERT_EQUAL(1, update_callback_1_creation_counter);
   TEST_ASSERT_EQUAL(2, update_callback_1_update_counter);
   TEST_ASSERT_EQUAL(1, update_callback_1_deletion_counter);
+  TEST_ASSERT_EQUAL(0, delete_callback_node_counter);
 
   // Set counters back to 0
   set_counters_to_zero();
@@ -1051,7 +1081,7 @@ void test_refreshing_node_and_children_callbacks()
   // Checking fault safety for none existent node
   state
     = attribute_store_refresh_node_and_children_callbacks(non_existent_node);
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 
   // Checking fault safety for non initialized attribute store
   attribute_store_teardown();
@@ -1087,11 +1117,13 @@ void test_uninitialized_attribute_store()
                                                              NULL,
                                                              3));
 
+  uint8_t value_size = 1;
   TEST_ASSERT_EQUAL(SL_STATUS_NOT_INITIALIZED,
                     attribute_store_get_node_attribute_value(test_node,
                                                              REPORTED_ATTRIBUTE,
                                                              NULL,
-                                                             NULL));
+                                                             &value_size));
+  TEST_ASSERT_EQUAL(0, value_size);
 
   TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
                     attribute_store_get_node_type(test_node));
@@ -1193,8 +1225,9 @@ void test_attribute_store_double_delete()
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     attribute_store_register_callback_by_type(&update_callback_delete_node, 2));
-  TEST_ASSERT_EQUAL(SL_STATUS_OK,
-                    attribute_store_register_callback(&update_callback_1_event));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_callback(&update_callback_1_event));
 
   // Trigger a full refresh, node 2 gets clipped as part of the callback.
   attribute_store_refresh_node_and_children_callbacks(node_1);
@@ -1262,4 +1295,103 @@ void test_attribute_store_touch_generic_callbacks()
   attribute_store_delete_node(node_3);
   TEST_ASSERT_EQUAL(3, touch_callback_counter);
   TEST_ASSERT_EQUAL(node_4, received_touched_node);
+}
+
+void test_save_or_load_from_datastore_when_not_initialized()
+{
+  attribute_store_teardown();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, attribute_store_save_to_datastore());
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, attribute_store_load_from_datastore());
+}
+
+void test_reset_callbacks()
+{
+  // Register callback 1:
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_callback(&update_callback_1_event));
+
+  // Init resets the callbacks
+  attribute_store_callbacks_init();
+
+  attribute_store_node_t node_1
+    = attribute_store_add_node(1, attribute_store_get_root());
+  attribute_store_node_t node_2 = attribute_store_add_node(2, node_1);
+  uint8_t value                 = 234;
+  attribute_store_set_node_attribute_value(node_2,
+                                           REPORTED_ATTRIBUTE,
+                                           &value,
+                                           sizeof(value));
+
+  // We should not have had any callbacks.
+  TEST_ASSERT_EQUAL(0, update_callback_1_counter);
+}
+
+void test_count_total_child()
+{
+  //uint8_t test_values[] = {0x15, 0x16, 0x17, 0x18};
+  /////////////////////////////////////////////
+  // Create a subtree
+  // 1 Node with 1 Endpoint for child
+  // The endpoint have 2 children
+  // Another Node with 1 Endpoint for child
+  // This endpoint have another child
+  /////////////////////////////////////////////
+  attribute_store_node_t root_node;
+  root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t new_node_1;
+  new_node_1 = attribute_store_add_node(ATTRIBUTE_HOME_ID, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_1);
+
+  attribute_store_node_t new_node_2;
+  new_node_2 = attribute_store_add_node(ATTRIBUTE_NODE_ID, new_node_1);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_2);
+
+  attribute_store_node_t new_node_3;
+  new_node_3 = attribute_store_add_node(ATTRIBUTE_NODE_ID, new_node_1);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_3);
+
+  attribute_store_node_t new_node_4;
+  new_node_4 = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, new_node_2);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_4);
+
+  attribute_store_node_t new_node_5;
+  new_node_5
+    = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID,
+                               new_node_4);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_5);
+
+  attribute_store_node_t new_node_6;
+  new_node_6
+    = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID,
+                               new_node_4);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_6);
+
+  attribute_store_node_t new_node_7;
+  new_node_7 = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, new_node_2);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_7);
+
+  attribute_store_node_t new_node_8;
+  new_node_8
+    = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID,
+                               new_node_7);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_8);
+
+  // Test if the function return the correct number of children
+  TEST_ASSERT_EQUAL(8, attribute_store_get_node_total_child_count(root_node));
+
+  // Try to call the function with a non-existing node
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_total_child_count(9));
+
+  // Try to call the function with invalid node
+  TEST_ASSERT_EQUAL(
+    0,
+    attribute_store_get_node_total_child_count(ATTRIBUTE_STORE_INVALID_NODE));
+
+  // Try to call the function when the attribute store is not initialized
+  attribute_store_teardown();
+  TEST_ASSERT_EQUAL(0, attribute_store_get_node_total_child_count(root_node));
 }

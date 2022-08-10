@@ -44,7 +44,18 @@ sl_status_t zwapi_soft_reset(void)
 {
   rf_region_cache.valid     = false;
   rf_region_cache.rf_region = ZWAVE_RF_REGION_UNDEFINED;
-  return zwapi_send_command(FUNC_ID_SERIAL_API_SOFT_RESET, NULL, 0);
+  sl_status_t status
+    = zwapi_send_command(FUNC_ID_SERIAL_API_SOFT_RESET, NULL, 0);
+
+  if (status == SL_STATUS_OK) {
+    sl_log_info(LOG_TAG,
+                "Z-Wave API module has been Soft Reset. "
+                "Now awaiting for Z-Wave API started callback.");
+    awaiting_zwave_api_started = true;
+    // Roll back our NodeID base type setting, it may be different again after reset.
+    node_id_basetype_setting = NODEID_8BITS;
+  }
+  return status;
 }
 
 uint8_t zwapi_get_zw_protocol_status(void)
@@ -243,6 +254,60 @@ tx_power_level_t zwapi_get_tx_power_level(void)
     }
   }
   return txpowerlevel;
+}
+
+bool zwapi_is_pti_supported()
+{
+  if (!zwapi_support_command_func(FUNC_ID_ENABLE_RADIO_PTI)
+      || !zwapi_support_command_func(FUNC_ID_GET_RADIO_PTI)) {
+    return false;
+  }
+  return true;
+}
+
+bool zwapi_is_pti_enabled()
+{
+  if (!zwapi_is_pti_supported()) {
+    return false;
+  }
+  uint8_t response_length                   = 0;
+  uint8_t response_buffer[FRAME_LENGTH_MAX] = {0};
+  sl_status_t send_command_status
+    = zwapi_send_command_with_response(FUNC_ID_GET_RADIO_PTI,
+                                       NULL,
+                                       0,
+                                       response_buffer,
+                                       &response_length);
+  if ((send_command_status == SL_STATUS_OK)
+      && (response_length == (IDX_DATA + 1))
+      && (response_buffer[IDX_DATA] == ZW_COMMAND_RETURN_VALUE_TRUE)) {
+    return true;
+  }
+  return false;
+}
+
+sl_status_t zwapi_set_radio_pti(bool state)
+{
+  if (!zwapi_is_pti_supported()) {
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+  uint8_t request_buffer[REQUEST_BUFFER_SIZE] = {0};
+  uint8_t index                               = 0;
+  uint8_t response_length                     = 0;
+  uint8_t response_buffer[FRAME_LENGTH_MAX]   = {0};
+  request_buffer[index++]                     = state;
+  sl_status_t send_command_status
+    = zwapi_send_command_with_response(FUNC_ID_ENABLE_RADIO_PTI,
+                                       request_buffer,
+                                       index,
+                                       response_buffer,
+                                       &response_length);
+  if ((send_command_status == SL_STATUS_OK)
+      && (response_length == (IDX_DATA + 1))
+      && (response_buffer[IDX_DATA] == ZW_COMMAND_RETURN_VALUE_TRUE)) {
+    return SL_STATUS_OK;
+  }
+  return SL_STATUS_FAIL;
 }
 
 sl_status_t zwapi_set_rf_region(zwave_rf_region_t rfregion)

@@ -161,6 +161,13 @@ typedef enum {
 
 void s0_bootstrapping_start(const zwave_controller_connection_info_t *conn,
                             uint8_t is_controller);
+
+/**
+ * @brief Stop the S0 bootstrapping timers
+ * 
+ */
+void s0_bootstrapping_stop(void);
+
 /**
  * @brief This function is used to notify the S0 Inclusion state machine that
  * S0 Scheme report frame was received.

@@ -22,11 +22,22 @@
 #include "sl_log.h"
 #include "zwapi_protocol_mem_mock.h"
 
+// Includes from LibS2
+#include "s2_protocol.h"
+
 #include "zwave_network_management_mock.h"
 
 PROCESS_NAME(zwave_s2_process);
 
 CTR_DRBG_CTX s2_ctr_drbg;
+
+// Create an S2 Context here:
+static struct S2 test_ctx;
+extern struct S2 *s2_ctx;
+
+// Const test variables
+static const zwave_home_id_t test_home_id = 0xcafebabe;
+static const zwave_node_id_t test_node_id = 0x1;
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp() {}
@@ -39,6 +50,11 @@ int suiteTearDown(int num_failures)
 
 void setUp()
 {
+  // Configure our HomeID and NodeID for the test:
+  zwave_network_management_get_home_id_IgnoreAndReturn(test_home_id);
+  zwave_network_management_get_node_id_IgnoreAndReturn(test_node_id);
+  s2_ctx = &test_ctx;
+  memset(s2_ctx, 0, sizeof(struct S2));
   contiki_test_helper_init();
 }
 
@@ -48,18 +64,6 @@ void tearDown()
 }
 
 static s2_event_handler_t my_event_handler;
-static zwave_home_id_t
-  zwave_network_management_get_home_id_CALLBACK(int cmock_num_calls)
-{
-  zwave_home_id_t homeID = 0xcafebabe;
-  return homeID;
-}
-static zwave_node_id_t
-  zwave_network_management_get_node_id_CALLBACK(int cmock_num_calls)
-{
-  zwave_node_id_t nodeID = 0x1;
-  return nodeID;
-}
 
 static void
   my_s2_inclusion_set_event_handler_CALLBACK(s2_event_handler_t evt_handler,
@@ -70,12 +74,7 @@ static void
 
 void test_s2_network_init()
 {
-  //Check that we a initializing libs2, S2_init and s2_inclusion init.
-  zwave_network_management_get_home_id_StubWithCallback(
-    zwave_network_management_get_home_id_CALLBACK);
-  zwave_network_management_get_node_id_StubWithCallback(
-    zwave_network_management_get_node_id_CALLBACK);
-
+  S2_destroy_Expect(s2_ctx);
   s2_inclusion_init_IgnoreAndReturn(true);
   s2_inclusion_set_event_handler_StubWithCallback(
     my_s2_inclusion_set_event_handler_CALLBACK);
@@ -108,25 +107,14 @@ void test_s2_add_node()
 
 void test_s2_learn_mode()
 {
-  zwave_node_id_t node      = 0x42;
-  zwave_node_id_t this_node = 0x1;
-  s2_connection_t peer      = {0};
+  zwave_node_id_t node = 0x42;
+  s2_connection_t peer = {0};
 
   peer.r_node        = node;
-  peer.l_node        = this_node;
+  peer.l_node        = test_node_id;
   peer.zw_tx_options = 0;
 
-  //We expect S2 to be re-initialized because homeID have changed
-  zwave_network_management_get_home_id_StubWithCallback(
-    zwave_network_management_get_home_id_CALLBACK);
-  zwave_network_management_get_node_id_StubWithCallback(
-    zwave_network_management_get_node_id_CALLBACK);
-
   zwapi_memory_get_buffer_IgnoreAndReturn(SL_STATUS_OK);
-  s2_inclusion_init_IgnoreAndReturn(true);
-  s2_inclusion_set_event_handler_StubWithCallback(
-    my_s2_inclusion_set_event_handler_CALLBACK);
-  S2_init_ctx_IgnoreAndReturn(0);
 
   s2_inclusion_joining_start_ExpectWithArray(0,
                                              0,

@@ -15,7 +15,7 @@
 #include "zcl_group_cluster_server.hpp"
 #include "zcl_cluster_servers_helpers.hpp"
 
-// UIC components
+// Unify components
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "uic_mqtt.h"
@@ -104,10 +104,9 @@ sl_status_t add_group(const std::string &unid,
   }
 
   attribute_store_node_t group_name_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       group_id_node,
-      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME,
-      0);
+      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME);
 
   if (group_name_node == ATTRIBUTE_STORE_INVALID_NODE) {
     group_name_node
@@ -187,10 +186,10 @@ sl_status_t remove_all_groups(const std::string &unid,
     return SL_STATUS_NOT_FOUND;
   }
 
-  attribute_store_node_t group_id_node = attribute_store_get_node_child_by_type(
-    endpoint_id_node,
-    DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,
-    0);
+  attribute_store_node_t group_id_node
+    = attribute_store_get_first_child_by_type(
+      endpoint_id_node,
+      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID);
 
   while (group_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
     uint16_t group_id = 0;
@@ -202,10 +201,9 @@ sl_status_t remove_all_groups(const std::string &unid,
     attribute_store_delete_node(group_id_node);
     unretain_group_name_publications(unid, endpoint_id, group_id);
 
-    group_id_node = attribute_store_get_node_child_by_type(
+    group_id_node = attribute_store_get_first_child_by_type(
       endpoint_id_node,
-      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,
-      0);
+      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID);
   }
 
   // Make a list publication only when we are done with deletion
@@ -313,8 +311,8 @@ void on_zcl_group_cluster_server_command_received(const char *topic,
   } else if (command == "RemoveAllGroups") {
     remove_all_groups(unid, endpoint_id);
   } else if (command == "AddGroupIfIdentifying") {
-    int32_t identify_time = 0;
-    identify_time         = dotdot_get_identify_identify_time(unid.c_str(),
+    uint16_t identify_time = 0;
+    identify_time          = dotdot_get_identify_identify_time(unid.c_str(),
                                                       endpoint_id,
                                                       REPORTED_ATTRIBUTE);
     if (identify_time == 0) {
@@ -672,10 +670,9 @@ static void
       endpoint_id_node,
       DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID,
       index++);
-    group_name_node = attribute_store_get_node_child_by_type(
+    group_name_node = attribute_store_get_first_child_by_type(
       group_id_node,
-      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME,
-      0);
+      DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME);
 
     publish_group_name_cluster_attribute(group_name_node);
   } while (group_id_node != ATTRIBUTE_STORE_INVALID_NODE);

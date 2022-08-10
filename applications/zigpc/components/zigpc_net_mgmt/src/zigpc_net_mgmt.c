@@ -14,7 +14,7 @@
 #include <string.h>
 #include <stdio.h>
 
-// Shared UIC includes
+// Shared Unify includes
 #include <sl_status.h>
 #include <sl_log.h>
 

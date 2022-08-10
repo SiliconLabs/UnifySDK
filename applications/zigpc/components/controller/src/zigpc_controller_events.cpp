@@ -17,7 +17,7 @@
 #include <string>
 #include <vector>
 
-// Shared UIC includes
+// Shared Unify includes
 #include <sl_log.h>
 #include <dotdot_mqtt.h>
 
@@ -30,6 +30,7 @@
 #include <zigpc_datastore.hpp>
 #include <zigpc_discovery.h>
 #include <zigpc_gateway.h>
+#include <zigpc_config.h>
 #include <zigpc_group_mgmt.h>
 #include <zigpc_net_mgmt.h>
 #include <zigpc_ota_zigbee.h>
@@ -189,7 +190,13 @@ sl_status_t perform_endpoint_configuration(const zigbee_eui64_t eui64,
     ep_data.cluster_list[i].cluster_id = server_cluster_list[i];
   }
 
-  status = zigpc_gateway_request_binding_endpoint(eui64, ep_data);
+  const zigpc_config_t *const config = zigpc_get_config();
+  bool request_binding = !config->poll_attr_only;
+
+  if(request_binding)
+  {
+    status = zigpc_gateway_request_binding_endpoint(eui64, ep_data);
+  }
 
   if (status == SL_STATUS_OK) {
     status = configure_attributes_endpoint(eui64, ep_data);

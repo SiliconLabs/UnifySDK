@@ -1,10 +1,12 @@
 # GMS Release Notes
 
+## [1.2.0] - Aug 2022
+
 ## [1.1.1] - Mar 2022
 
 ## [1.1.0] - Feb 2022
 
-### Change
+**Changed**:
 
 * Renamed Group Management Service acronym from ANGEL->GMS.
 * Switched to use the Unify MQTT component so that on restart the MQTT connection can be properly resumed.
@@ -13,8 +15,6 @@
 
 ## [1.0.2] - Oct 2021
 
-### Fixed
+**Fixed**:
 
 * Fixed to publish group capabilities correctly
-
-## Known Bugs

@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Specification
-   &#160;<span id="projectnumber">ver1_0_RC11_20211006-12-g5cdaf55</span>
+   &#160;<span id="projectnumber">ver1_0_RC11_20211006-19-g32c28c7</span>
    </div>
   </td>
  </tr>
@@ -68,7 +68,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This chapter contains cluster definitions used to support the AoX application. These cluster definitions are unique to the Unify Controller Language. This is an addition to the clusters already defined in the ZCL.</p>
-<h1><a class="anchor" id="autotoc_md145"></a>
+<h1><a class="anchor" id="autotoc_md137"></a>
 Terminology</h1>
 <p>We define here several entities as part of an AoX system:</p>
 <ul>
@@ -86,15 +86,15 @@ Terminology</h1>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_25.png" />
 </div>
-<h1><a class="anchor" id="autotoc_md146"></a>
+<h1><a class="anchor" id="autotoc_md138"></a>
 AoX Clusters</h1>
-<p>This section defines how to represent Angle-of-X (e.g, Angle of Arrival) IQ report, Angle, and Position data in the Unify SDK.</p>
+<p>This section defines how to represent Angle-of-X (e.g, Angle of Arrival) IQ report, Angle, and Position data in the Unify Framework.</p>
 <p>The AoX system relies on several new clusters:</p>
 <ul>
 <li>AoXLocator, used to manage locator devices within the AoXPC.</li>
 <li>AoXPositionEstimation, used to report Assets estimated position.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md147"></a>
+<h2><a class="anchor" id="autotoc_md139"></a>
 Locators and the AoXLocator cluster</h2>
 <p>The AoX Protocol Controller allows to read the configuration of its Locator using the AoXLocator Cluster. For example, an AoX Protocol Controller could advertise it like this:</p>
 <div class="fragment"><div class="line">ucl/by-unid/&lt;aoxpc_unid&gt;/ep0/AoXLocator/Attributes/PositionAndOrientationValid/Desired {&quot;value&quot;: true}</div>
@@ -157,11 +157,11 @@ Locators and the AoXLocator cluster</h2>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_26.png" />
 </div>
-<h3><a class="anchor" id="autotoc_md148"></a>
+<h3><a class="anchor" id="autotoc_md140"></a>
 AngleCorrection Command</h3>
 <p>For calibration and accuracy purposes, AoX locators generating <code>AngleReport</code> commands SHOULD support receiving the <code>AngleCorrection</code> command. The <code>AngleCorrection</code> command will indicate what values are expected for a given asset tag to an AoX locator.</p>
 <p>Details on applying angle correction are given in <a href="https://docs.silabs.com/rtl-lib/latest/group-sl-rtl-loc#ga788dcffb47a4bbb26b110bb9e817b0e5">Silicon Labs RTL Library: Get expected direction</a></p>
-<h2><a class="anchor" id="autotoc_md149"></a>
+<h2><a class="anchor" id="autotoc_md141"></a>
 AoXPositionEstimation cluster</h2>
 <p>A Positioning Service helper MQTT client can be used to listen to MQTT publications coming from the AoXLocator cluster to determine the position of each tag in the system.</p>
 <p>The Positioning Service does not have a UNID itself. It connects to the MQTT broker, and performs the following actions:</p>
@@ -199,11 +199,11 @@ AoXPositionEstimation cluster</h2>
 <div class="line">    &quot;Security&quot;: &quot;None&quot;,</div>
 <div class="line">    &quot;MaximumCommandDelay&quot;: &quot;unknown&quot;}</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>When a Positioning Service application shuts down, it MUST unretain all the AoXPositionEstimation and State data that it published for tags. </p>
-<h2><a class="anchor" id="autotoc_md150"></a>
+</div><!-- fragment --><p>When a Positioning Service application shuts down, it MUST unretain all the AoXPositionEstimation and State data that it published for tags.</p>
+<h2><a class="anchor" id="autotoc_md142"></a>
 Positioning Service</h2>
 <p>The Positioning Service is a helper component that can determine spatial coordinates, or position, for each tag UNID and publises the last reported position.</p>
-<h2><a class="anchor" id="autotoc_md151"></a>
+<h2><a class="anchor" id="autotoc_md143"></a>
 Asset Tag UNIDs</h2>
 <p>Asset Tag UNIDs MUST indicate the BLE address type in addition to the BLE address. The generic format is <code>ble-&lt;ADDRESS_TYPE&gt;-&lt;BLE_ADDRESS&gt;</code>. Refer to <a class="el" href="md_doc__chapter01-architecture-overview.html">Architecture overview</a> for details about UNID composition. Static random addresses can be abbreviated <b>sr</b> and public device addresses <b>pd</b>.</p>
 <p>An example of a public device address UNID is <code>ble-pd-842E1431C9F0</code>. </p>

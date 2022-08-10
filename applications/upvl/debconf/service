@@ -1,5 +1,5 @@
 [Unit]
-Description=Unify SDK Provisioning List
+Description=Unify Framework Provisioning List
 After=network.target mosquitto.service
 
 [Service]

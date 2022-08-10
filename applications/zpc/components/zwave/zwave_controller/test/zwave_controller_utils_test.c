@@ -12,13 +12,14 @@
  *****************************************************************************/
 // Includes from this component
 #include "zwave_controller_utils.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 
 // Includes from other components
 #include "unity.h"
 #include "sl_log.h"
 
 // Mock includes
+#include "zwave_tx_mock.h"
 
 // Generic includes
 #include <stdbool.h>
@@ -155,4 +156,33 @@ void test_is_command_class_in_supported_list()
 
   TEST_ASSERT_TRUE(
     is_command_class_in_supported_list(0x09, test_nif, test_nif_length));
+}
+
+void test_send_nop_to_node()
+{
+  const zwave_node_id_t test_node_id     = 12;
+  const uint32_t test_qos_priority       = 3485;
+  const uint32_t test_discard_timeout_ms = 1;
+  void *test_user                        = (void *)0x1233654;
+  on_zwave_tx_send_data_complete_t test_callback
+    = (on_zwave_tx_send_data_complete_t)23;
+
+  zwave_tx_send_data_ExpectAndReturn(NULL,
+                                     1,
+                                     NULL,
+                                     0,
+                                     test_callback,
+                                     test_user,
+                                     0,
+                                     SL_STATUS_FULL);
+  zwave_tx_send_data_IgnoreArg_connection();
+  zwave_tx_send_data_IgnoreArg_tx_options();
+  zwave_tx_send_data_IgnoreArg_data();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_FULL,
+                    zwave_send_nop_to_node(test_node_id,
+                                           test_qos_priority,
+                                           test_discard_timeout_ms,
+                                           test_callback,
+                                           test_user));
 }

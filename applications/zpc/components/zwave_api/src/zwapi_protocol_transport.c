@@ -22,7 +22,7 @@
 #include <assert.h>
 #include <stddef.h>
 
-// UIC Includes
+// Unify Includes
 #include "sl_log.h"
 
 #define LOG_TAG "zwapi_protocol_transport"

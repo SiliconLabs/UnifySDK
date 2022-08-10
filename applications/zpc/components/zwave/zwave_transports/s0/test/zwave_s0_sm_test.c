@@ -409,6 +409,6 @@ void test_s0_network_init()
 void test_s0_network_init_fail()
 {
   keystore_network_key_read_flag = 1;
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, zwave_s0_network_init());
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_s0_network_init());
   keystore_network_key_read_flag = 0;
 }

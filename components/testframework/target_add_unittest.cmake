@@ -5,8 +5,6 @@ set(UNITY2_RUBY_EXECUTABLE
     ${RUBY_EXECUTABLE}
     CACHE INTERNAL "")
 
-
-
 function(generate_unity_runner test_runner test_file)
 set(UNITY_DIR
 "${CMAKE_SOURCE_DIR}/components/testframework/libs/cmock/vendor/unity")
@@ -50,15 +48,18 @@ function(target_add_unittest)
   # first argument is the target to make unit-test exe of
   list(POP_FRONT ARGV TARGET)
 
-  cmake_parse_arguments(PARSED_ARGS "DISABLED" "NAME"
-                        "DEPENDS;SOURCES;EXCLUDE" ${ARGV} )
-  if (NOT ${PARSED_ARGS_UNPARSED_ARGUMENTS} STREQUAL "") 
+  cmake_parse_arguments(PARSED_ARGS "DISABLED" "NAME" "DEPENDS;SOURCES;EXCLUDE"
+                        ${ARGV})
+  if(NOT ${PARSED_ARGS_UNPARSED_ARGUMENTS} STREQUAL "")
     message(FATAL_ERROR "could not parse ${PARSED_ARGS_UNPARSED_ARGUMENTS}")
-  elseif (NOT ${PARSED_ARGS_KEYWORDS_MISSING_VALUES} STREQUAL "")
-    message(FATAL_ERROR "following keywords are missing values: ${PARSED_ARGS_KEYWORDS_MISSING_VALUES}")
+  elseif(NOT ${PARSED_ARGS_KEYWORDS_MISSING_VALUES} STREQUAL "")
+    message(
+      FATAL_ERROR
+        "following keywords are missing values: ${PARSED_ARGS_KEYWORDS_MISSING_VALUES}"
+    )
   endif()
 
-  if (NOT DEFINED PARSED_ARGS_NAME)
+  if(NOT DEFINED PARSED_ARGS_NAME)
     set(TEST_TARGET "${TARGET}_test")
   else()
     set(TEST_TARGET "${PARSED_ARGS_NAME}")
@@ -71,19 +72,41 @@ function(target_add_unittest)
   generate_unity_runner(${TEST_RUNNER} ${TEST_FILE})
 
   get_target_property(target_type ${TARGET} TYPE)
-  if (target_type STREQUAL "INTERFACE_LIBRARY")
+  if(target_type STREQUAL "INTERFACE_LIBRARY")
     list(APPEND PARSED_ARGS_DEPENDS ${TARGET})
   else()
     collect_object_files(${TARGET} "${TARGET_OBJS}" "${PARSED_ARGS_EXCLUDE}")
   endif()
-  # tests binaries reuse the o files of the actual target and relink them with the correct components
-  # nessicary for the test. e.g. mocks/stubs.
-  add_executable(${TEST_TARGET} ${PARSED_ARGS_SOURCES} ${TARGET_OBJS} ${TEST_RUNNER})
-  target_include_directories(${TEST_TARGET} PRIVATE . $<TARGET_PROPERTY:${TARGET},INCLUDE_DIRECTORIES>)
-  target_link_libraries(${TEST_TARGET} PRIVATE unity2 ${PARSED_ARGS_DEPENDS} $<TARGET_PROPERTY:${TARGET},LINK_LIBRARIES>)
+  # tests binaries reuse the o files of the actual target and relink them with
+  # the correct components nessicary for the test. e.g. mocks/stubs.
+  add_executable(${TEST_TARGET} ${PARSED_ARGS_SOURCES} ${TARGET_OBJS}
+                                ${TEST_RUNNER})
+  target_include_directories(
+    ${TEST_TARGET} PRIVATE . $<TARGET_PROPERTY:${TARGET},INCLUDE_DIRECTORIES>)
+  target_link_libraries(
+    ${TEST_TARGET} PRIVATE unity2 ${PARSED_ARGS_DEPENDS}
+                           $<TARGET_PROPERTY:${TARGET},LINK_LIBRARIES>)
   add_test(${TEST_NAME} ${TEST_TARGET})
 
-  if (${PARSED_ARGS_DISABLED})
+  if(${PARSED_ARGS_DISABLED})
+    set_tests_properties(${TEST_NAME} PROPERTIES DISABLED True)
+  endif()
+endfunction()
+
+function(add_unify_test)
+  list(POP_FRONT ARGV TARGET)
+  cmake_parse_arguments(PARSED_ARGS "DISABLED" "" "DEPENDS;SOURCES;INCLUDES"
+                        ${ARGV})
+
+  list(GET PARSED_ARGS_SOURCES 0 TEST_FILE)
+  get_filename_component(TEST_NAME ${TEST_FILE} NAME_WE)
+  set(TEST_RUNNER "${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}_runner.c")
+  generate_unity_runner(${TEST_RUNNER} ${TEST_FILE})
+  add_executable(${TARGET} ${PARSED_ARGS_SOURCES} ${TEST_RUNNER})
+  target_link_libraries(${TARGET} PRIVATE unity2 ${PARSED_ARGS_DEPENDS})
+  target_include_directories(${TARGET} PRIVATE . ${PARSED_ARGS_INCLUDES})
+  add_test(${TEST_NAME} ${TARGET})
+  if(${PARSED_ARGS_DISABLED})
     set_tests_properties(${TEST_NAME} PROPERTIES DISABLED True)
   endif()
 endfunction()

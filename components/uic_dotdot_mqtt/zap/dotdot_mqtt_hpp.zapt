@@ -25,6 +25,7 @@
 
 #include "dotdot_mqtt.h"
 #include "dotdot_bitmap.hpp"
+#include "dotdot_mqtt_helpers.hpp"
 
 #include <map>
 #include <string>
@@ -72,34 +73,6 @@ void {{dotdot_prefix}}_on_{{asSnakeCaseLower label}}_WriteAttributes(
   const size_t message_length);
 
 {{/if}}{{/zcl_clusters}}
-
-// Create a map of enums and their name label.
-{{#zcl_enums}}
-
-// Enum string map for for {{label}}
-#define {{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE 1
-const std::map<uint32_t, const char*> {{asSnakeCaseLower label}}_enum_data {
-  {{#zcl_enum_items}}
-  { {{value}}, "{{label}}" },
-  {{/zcl_enum_items}}
-};
-
-/**
- * @brief Finds the name of a field for the {{label}} enum
- *
- * @returns A string representation of the value.
- */
-std::string {{asSnakeCaseLower label}}_get_enum_value_name(
-  uint32_t value);
-
-/**
- * @brief Finds the enum number of a string representation for the {{label}} enum
- *
- * @returns A number enum value.
- */
-uint32_t {{asSnakeCaseLower label}}_get_enum_value_number(std::string str);
-
-{{/zcl_enums}}
 
 
 // All bitmaps are defined as the cluster label for the bitmap plus the command/attribute name

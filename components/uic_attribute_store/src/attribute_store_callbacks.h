@@ -17,9 +17,6 @@
 // Includes from this component
 #include "attribute_store.h"
 
-// Generic includes
-#include <map>
-
 /**
  * @defgroup attribute_store_callbacks Attribute Store callbacks registration module
  * @ingroup attribute_store
@@ -94,7 +91,7 @@ void attribute_store_invoke_type_callbacks(attribute_store_node_t updated_node,
  *
  * @param updated_node  The node handle of the node for which something
  *                      has changed
- * @param type          Th etype of the node that has just changed
+ * @param type          The type of the node that has just changed
  * @param value_state   The value state of the node that has just changed.
  * @param change        The type of change that the node underwent
  */
@@ -103,6 +100,14 @@ void attribute_store_invoke_value_callbacks(
   attribute_store_type_t type,
   attribute_store_node_value_state_t value_state,
   attribute_store_change_t change);
+
+/**
+ * @brief Invoke all delete callback functions
+ *
+ * @param deleted_node  The node handle of the node being deleted
+ */
+void attribute_store_invoke_delete_callbacks(
+  attribute_store_node_t deleted_node);
 
 /**
  * @brief Reset resources allocated for the attribute_store_callback module

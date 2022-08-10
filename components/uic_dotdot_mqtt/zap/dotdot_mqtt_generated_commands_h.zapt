@@ -1,0 +1,98 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+/**
+ * @defgroup dotdot_mqtt_generated_commands DotDot MQTT generated commands
+ * @ingroup dotdot_mqtt
+ *
+ * @brief This component provides helper functions to publish
+ * generated commands with json payloads sent over MQTT.
+ *
+ * @{
+ */
+
+#ifndef DOTDOT_MQTT_GENERATED_COMMANDS_H
+#define DOTDOT_MQTT_GENERATED_COMMANDS_H
+
+#include <stdint.h>
+#include <stdbool.h>
+
+#include "sl_status.h"
+#include "uic_typedefs.h"
+#include "zap-types.h"
+#include "uic_mqtt.h"
+
+#include "dotdot_mqtt.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif // __cplusplus
+
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+/**
+ * @brief Publishes an incoming/generated {{label}} command for
+ * the {{parent.label}} cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints parent.label)}}epID/{{/unless}}{{asPublicationName parent.label}}/GeneratedCommands/{{label}}
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * {{#unless (clusterWithoutEndpoints parent.label)}}
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * {{/unless}}
+ * {{#zcl_command_arguments}}{{#first}}
+ * @param fields                Struct pointer with the fields value of the command
+ * {{/first}}{{/zcl_command_arguments}}
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_publish_generated_{{asSnakeCaseLower label}}_command(
+  const dotdot_unid_t unid{{#unless (clusterWithoutEndpoints parent.label)}},
+  const dotdot_endpoint_id_t endpoint{{/unless}}{{#zcl_command_arguments}}{{#first}},
+  const {{asCommandFieldsType parent}} *fields
+  {{/first}}{{/zcl_command_arguments}}
+);
+{{/zcl_commands}}
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the {{label}} cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints label)}}epID/{{/unless}}{{asPublicationName label}}/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * {{#unless (clusterWithoutEndpoints label)}}
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * {{/unless}}
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower label}}_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,{{#unless (clusterWithoutEndpoints label)}}
+  const dotdot_endpoint_id_t endpoint,{{/unless}}
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t attribute_values,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t attribute_list
+);
+
+{{/if}}
+{{/zcl_clusters}}
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
+
+#endif // DOTDOT_MQTT_GENERATED_COMMANDS_H
+/** @} end dotdot_mqtt_generated_commands */

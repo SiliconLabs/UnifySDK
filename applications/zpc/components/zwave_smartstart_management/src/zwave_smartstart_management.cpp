@@ -32,7 +32,7 @@
 #include <map>
 #include <boost/algorithm/string.hpp>
 
-// UIC includes
+// Unify includes
 #include "sl_log.h"
 #include "attribute_store.h"
 #include "attribute_store_defined_attribute_types.h"
@@ -70,11 +70,14 @@ using node_protocol_capabilities_t = struct {
   bool zwave_long_range;
 };
 
-typedef enum {
+/**
+ * @brief List of possible states for the protocol discovery
+ */
+enum class protocol_discover_state_t {
   DISCOVERED_ZERO,
   DISCOVERED_ONE,
   DISCOVERED_ALL
-} protocol_discover_state;
+};
 
 class ProtocolDiscoveryEntry
 {
@@ -272,20 +275,27 @@ static bool
   }
 }
 
-static protocol_discover_state get_protocol_discovery_state(std::string dsk)
+/**
+ * @brief Returns the current state of protocol discovery for a given DSK
+ *
+ * @param dsk       The DSK to return the protocol discovery state for
+ * @return protocol_discover_state_t
+ */
+static protocol_discover_state_t
+  get_protocol_discovery_state(const std::string &dsk)
 {
   if (protocol_discovery_db.find(dsk) == protocol_discovery_db.end()) {
-    return DISCOVERED_ZERO;
+    return protocol_discover_state_t::DISCOVERED_ZERO;
   }
   auto entry = protocol_discovery_db[dsk].get();
   if (entry->has_capability(PROTOCOL_ZWAVE_LONG_RANGE)
       && entry->has_capability(PROTOCOL_ZWAVE)) {
-    return DISCOVERED_ALL;
+    return protocol_discover_state_t::DISCOVERED_ALL;
   } else if (entry->has_capability(PROTOCOL_ZWAVE_LONG_RANGE)
              || entry->has_capability(PROTOCOL_ZWAVE)) {
-    return DISCOVERED_ONE;
+    return protocol_discover_state_t::DISCOVERED_ONE;
   }
-  return DISCOVERED_ZERO;
+  return protocol_discover_state_t::DISCOVERED_ZERO;
 }
 
 /**
@@ -338,9 +348,10 @@ static void zwave_smartstart_management_on_inclusion_request(
   }
 
   if (has_several_protocol_candidates(matched->preferred_protocols) == true) {
-    protocol_discover_state state = get_protocol_discovery_state(matched->dsk);
+    protocol_discover_state_t state
+      = get_protocol_discovery_state(matched->dsk);
     switch (state) {
-      case DISCOVERED_ZERO: {
+      case protocol_discover_state_t::DISCOVERED_ZERO: {
         // First time we discover protocol for this node, let's start the timer and fill in the capability
         std::shared_ptr<ProtocolDiscoveryEntry> entry
           = std::make_shared<ProtocolDiscoveryEntry>();
@@ -357,7 +368,7 @@ static void zwave_smartstart_management_on_inclusion_request(
         return;
       }
 
-      case DISCOVERED_ONE: {
+      case protocol_discover_state_t::DISCOVERED_ONE: {
         // Entry exists but found new capability, reset the timer and fill in the capability
         if (protocol_discovery_db[matched->dsk].get()->has_capability(protocol)
             == false) {
@@ -368,7 +379,8 @@ static void zwave_smartstart_management_on_inclusion_request(
                        zwave_get_protocol_name(protocol),
                        home_id);
           // Early exit if we found all the capabilities.
-          if (DISCOVERED_ALL == get_protocol_discovery_state(matched->dsk)) {
+          if (protocol_discover_state_t::DISCOVERED_ALL
+              == get_protocol_discovery_state(matched->dsk)) {
             goto done_protocol_discovery;
           }
           return;
@@ -389,7 +401,7 @@ static void zwave_smartstart_management_on_inclusion_request(
         }
       }
 
-      case DISCOVERED_ALL: {
+      case protocol_discover_state_t::DISCOVERED_ALL: {
         goto done_protocol_discovery;
       }
 
@@ -502,7 +514,9 @@ static zwave_controller_callbacks_t smartstart_callbacks = {
  * @returns true if a node with the same DSK is included in our current network
  * false if no match were found
  */
-static bool is_dsk_already_included_in_current_network(const zwave_dsk_t &dsk_internal) {
+static bool
+  is_dsk_already_included_in_current_network(const zwave_dsk_t &dsk_internal)
+{
   using namespace attribute_store;
   attribute home_id_node = get_zpc_network_node();
   attribute dsk_node;
@@ -517,11 +531,11 @@ static bool is_dsk_already_included_in_current_network(const zwave_dsk_t &dsk_in
     try {
       dsk_data = dsk_node.reported<std::vector<uint8_t>>();
     } catch (const std::invalid_argument &e) {
-      sl_log_warning(
-        LOG_TAG,
-        "Failed to read the DSK reported value for attribute %d: %s",
-        e.what(),
-        dsk_node);
+      sl_log_warning(LOG_TAG,
+                     "Failed to read the DSK reported"
+                     "value for attribute %d: %s",
+                     e.what(),
+                     dsk_node);
       continue;
     }
     // Compare DSK. If DSK already in network, get UNID
@@ -534,11 +548,11 @@ static bool is_dsk_already_included_in_current_network(const zwave_dsk_t &dsk_in
       char dsk_str[100];
       zpc_converters_dsk_to_str(dsk_internal, dsk_str, sizeof(dsk_str));
 
-      sl_log_info(
-        LOG_TAG,
-        "DSK %s added in the provisioning list is already in the network (UNID: %s). No inclusion will take place.",
-        dsk_str,
-        n_unid);
+      sl_log_info(LOG_TAG,
+                  "DSK %s added in the provisioning list is already "
+                  "in the network (UNID: %s). No inclusion will take place.",
+                  dsk_str,
+                  n_unid);
       Management::get_instance()->notify_node_added(std::string(dsk_str),
                                                     std::string(n_unid));
       return true;
@@ -584,9 +598,9 @@ void has_entries_awaiting_inclusion(bool value)
       activate_smart_start = does_one_entry_need_inclusion();
     }
 
-    zwave_network_management_smart_start_enable(activate_smart_start);
+    zwave_network_management_enable_smart_start_add_mode(activate_smart_start);
   } else {
-    zwave_network_management_smart_start_enable(false);
+    zwave_network_management_enable_smart_start_add_mode(false);
   }
 }
 

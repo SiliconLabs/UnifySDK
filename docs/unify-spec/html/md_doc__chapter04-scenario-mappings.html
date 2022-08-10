@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Specification
-   &#160;<span id="projectnumber">ver1_0_RC11_20211006-12-g5cdaf55</span>
+   &#160;<span id="projectnumber">ver1_0_RC11_20211006-19-g32c28c7</span>
    </div>
   </td>
  </tr>
@@ -68,32 +68,32 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This chapter describes use-cases or scenarios using the same Unify commands but showing the Protocol Controller translation details for several PHYs.</p>
-<h1><a class="anchor" id="autotoc_md107"></a>
+<h1><a class="anchor" id="autotoc_md103"></a>
 Adding a Node to a Network</h1>
 <p>This use case explains how to include a new node into a network. It is assumed that the implementations follow the lines described in Network Management Commands and Service discovery.</p>
-<h2><a class="anchor" id="autotoc_md108"></a>
+<h2><a class="anchor" id="autotoc_md104"></a>
 Z-Wave PAN</h2>
 <div class="image">
 <img src="AddingAnodeWithaZ-WavePAN.png" alt="" width="450px"/>
 </div>
- <h2><a class="anchor" id="autotoc_md109"></a>
+ <h2><a class="anchor" id="autotoc_md105"></a>
 BLE PAN</h2>
 <div class="image">
 <img src="AddingAnodeWithaBLEPAN.png" alt="" width="450px"/>
 </div>
- <h2><a class="anchor" id="autotoc_md110"></a>
+ <h2><a class="anchor" id="autotoc_md106"></a>
 ZigBee PAN</h2>
 <p>The following section shows the Zigbee 3.0 Install Code based commissioning method. This method uses a Unify SmartStart DSK (Device-Specific Key) to convey the Install Code that is flashed out-of-band to a joining device. See the Zigbee Protocol Controller implementation references on how the DSK is formatted according to one of the formats specified in <a class="el" href="md_doc__chapter03-network-management.html">Network Management</a>.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_18.png" />
 </div>
 <p>NOTE: ZigBee touchlink is not currently supported as a commissioning method.</p>
-<h1><a class="anchor" id="autotoc_md111"></a>
+<h1><a class="anchor" id="autotoc_md107"></a>
 Special Requirements for BLE AoX Protocol Controllers</h1>
 <p>BLE-based AoX (Angle-of-X) solutions rely on AoX Locators to report the angle of arrival of beacons transmitted from asset tags. AoX Locators typically control radio boards connected to one or more antennas.</p>
 <p>An additional Positioning helper application is used to infer the position of the tag based on the several angle information readings from one or more locators.</p>
 <p>There are typically no network management operations available for such applications. The list of Asset Tags allowed in the Unify network can be configured using the AoX Locator cluster.</p>
-<h2><a class="anchor" id="autotoc_md112"></a>
+<h2><a class="anchor" id="autotoc_md108"></a>
 AoX Protocol Controller</h2>
 <p>The AoX Protocol Controller MUST publish a node state (<code>ucl/by-unid/&lt;unid&gt;/State</code>) for itself.</p>
 <p>The Endpoint ID should always be 0 for an AoX locator.</p>

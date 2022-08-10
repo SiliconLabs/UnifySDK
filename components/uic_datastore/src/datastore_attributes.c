@@ -378,6 +378,47 @@ sl_status_t datastore_fetch_attribute_child(datastore_attribute_id_t parent_id,
   return status;
 }
 
+sl_status_t
+  datastore_fetch_attribute_child_id(datastore_attribute_id_t parent_id,
+                                     uint32_t child_index,
+                                     datastore_attribute_id_t *child_id)
+{
+  sl_status_t status = SL_STATUS_FAIL;
+
+  if (db == NULL) {
+    log_database_not_initialized();
+    return status;
+  }
+
+  // Fill up those question marks from the SQL statements
+  int rc = sqlite3_bind_int64(select_child_index_statement, 1, parent_id);
+  if (rc != SQLITE_OK) {
+    log_binding_failed();
+    return status;
+  }
+  rc = sqlite3_bind_int64(select_child_index_statement, 2, child_index);
+  if (rc != SQLITE_OK) {
+    log_binding_failed();
+    return status;
+  }
+
+  // Execute the query
+  int step = sqlite3_step(select_child_index_statement);
+
+  if (step == SQLITE_ROW) {
+    // Pull the result from the first row (there should be only one)
+    *child_id = (uint32_t)sqlite3_column_int64(select_child_index_statement, 0);
+
+    status = SL_STATUS_OK;
+  } else {
+    // No result was found for the parent_id / child_index
+    status = SL_STATUS_NOT_FOUND;
+  }
+
+  sqlite3_reset(select_child_index_statement);
+  return status;
+}
+
 bool datastore_contains_attribute(datastore_attribute_id_t id)
 {
   bool result = false;

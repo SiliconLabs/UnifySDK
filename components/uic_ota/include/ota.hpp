@@ -13,7 +13,7 @@
 #ifndef OTA_H
 #define OTA_H
 
-// UIC Components
+// Unify Components
 #include "uic_typedefs.h"
 #include "sl_status.h"
 

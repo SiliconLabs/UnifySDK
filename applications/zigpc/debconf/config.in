@@ -9,90 +9,55 @@ set -e
 
 UIC_CONFDIR=${CPACK_PACKAGING_INSTALL_PREFIX}/etc/uic
 UIC_CONFFILE=$UIC_CONFDIR/uic.cfg
-CONF_ARG_PREFIX="CONF_ARG_"
-
-# Convert yaml args from UIC_CONFFILE
-# Print yaml args converted to bash format:
-# i.e.
-# UIC_CONFFILE
-# ---
-# a:
-#   b: 4
-# output:
-# ---
-# a_b="4"
-#
-convert_cfg_to_vars() {
-  r_s='[[:space:]]*'
-  r_w='[a-zA-Z0-9_]*'
-  sep=';'
-  # sed: Transform YAML file to be processed by awk
-  #
-  # Input
-  # ---
-  # first:
-  #     a: hello
-  #     b: "/tmp"
-  # second:
-  #     x: 4
-  #
-  # Output
-  # ---
-  # ;first;
-  #   ;a;hello
-  #   ;b;/tmp
-  # ;second;
-  #     ;x;4
-
-  sed -n \
-    -e "s|^\($r_s\)\($r_w\)$r_s:$r_s[\"']\(.*\)[\"']$r_s\$|\1$sep\2$sep\3|p" \
-    -e "s|^\($r_s\)\($r_w\)$r_s:$r_s\(.*\)$r_s\$|\1$sep\2$sep\3|p" \
-    $UIC_CONFFILE |
-  awk -F $sep '{
-    # Step 1: Calculate current indentation (4 spaces per indent)
-    i_indent=length($1)/4;
-    # Step 2: Save current key based on indentation
-    vname[i_indent]=$2;
-    # Only print keys that contain values
-    if (length($3) > 0) {
-      parent_key="";
-      # Step 3: Concatenate each parent key with "_"
-      for (i=0; i<i_indent; i++) { parent_key=(parent_key)(vname[i])("_") }
-      # Step 3: Print variable representation
-      printf("%s%s%s=\"%s\"\n", "'$CONF_ARG_PREFIX'",parent_key, $2, $3);
-    }
-  }'
-
-  # awk output:
-  # ---
-  # $CONF_ARG_PREFIX_first_a="hello"
-  # $CONF_ARG_PREFIX_first_b="/tmp"
-  # $CONF_ARG_PREFIX_second_x="4"
-}
 
 if [ -e $UIC_CONFFILE ]; then
-  echo "Setting debconf params from $UIC_CONFFILE"
+  while IFS= read line #Read IFS https://en.wikipedia.org/wiki/Input_Field_Separators
+  do
+    # Set the state depending on the line read from the config file
+    case "$line" in
+      "zigpc:" )   # State: zigpc
+        state="zigpc"
+        ;;
+      " "* | "-"* )   # Lines starting with '-' or ' ' don't trigger state change.
+        # Do nothing.
+        ;;
+      *) state="" ;;    # Set state to empty, Any unknown text, that doesn't begin with '-' or ' '
+    esac
+    # STM to update entries under 'zigpc:'
+    case $state in
+      "zigpc" )
+        case "$line" in
+        *"serial:"* | *"datastore_file:"*)
+          echo "$line" ;;
+        *)
+          ;;                 # Anything else inside zigpc we skip 
+        esac ;;
+      *)
+        ;;
+    esac
+  done < "$UIC_CONFFILE" > "$UIC_CONFFILE.sh.tmp"
 
-  eval $(convert_cfg_to_vars)
+  # Replace : With =", append " to each line, Remove all spaces,
+  # Remove - in the beginning of the line
+  # Remove lines having "",
+  # Rename serial to zigpc_serial
+  # Rename datastore_file to zigpc_datastore_file
 
-  # Preload debconf with what was in the conf file
-  if [ -n "$CONF_ARG_zigpc_serial" ]
-  then
-    echo "Setting debconf arg uic-zigpc/serial_port from $UIC_CONFFILE to: $CONF_ARG_zigpc_serial"
-    db_set uic-zigpc/serial_port "$CONF_ARG_zigpc_serial"
-  else
-    db_fset uic-zigpc/serial_port seen false
-  fi
+  # Above two changes are to co-exist with zpc debconf if someonse installs
+  #  both zpc and zigpc on same machine
+  sed -e 's/:/="/g;s/$/"/g;s/ //g;s/^-//g;/""/d;s/serial/zigpc_serial/g;s/datastore_file/zigpc_datastore_file/g;' $UIC_CONFFILE.sh.tmp > $UIC_CONFFILE.sh
 
-  if [ -n "$CONF_ARG_zigpc_datastore_file" ]
-  then
-    echo "Setting debconf arg uic-zigpc/datastore_file from $UIC_CONFFILE to: $CONF_ARG_zigpc_datastore_file"
-    db_set uic-zigpc/datastore_file "$CONF_ARG_zigpc_datastore_file"
-  else
-    db_fset uic-zigpc/datastore_file seen false
-  fi
+  echo "Existing config options"
+  cat $UIC_CONFFILE.sh
+  #Source the file to set $zigpc_serial and $zigpc_datastore_file
+  . $UIC_CONFFILE.sh || true
+  rm $UIC_CONFFILE.sh $UIC_CONFFILE.sh.tmp
 
+  #Preload debconf with what was in the conf file
+  db_set uic-zigpc/serial_port "$zigpc_serial"
+  db_set uic-zigpc/datastore_file "$zigpc_datastore_file"
 fi
+
 
 db_input critical uic-zigpc/serial_port || true
 db_input critical uic-zigpc/datastore_file || true

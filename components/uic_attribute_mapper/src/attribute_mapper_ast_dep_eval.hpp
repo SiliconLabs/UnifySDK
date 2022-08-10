@@ -49,10 +49,16 @@ class dep_eval
   {
     return dependencies;
   }
-  const dependencies_t &operator()(unsigned int n)
+  const dependencies_t &operator()(uint32_t )
   {
     return dependencies;
   }
+
+  const dependencies_t &operator()(float)
+  {
+    return dependencies;
+  }
+
   const dependencies_t &operator()(const attribute &a);
   const dependencies_t &operator()(const operation &x);
   const dependencies_t &operator()(const signed_ &x);
@@ -100,8 +106,8 @@ class dep_eval_path
   {
     return dependencies;
   }
-  /// just given by type id
-  const dependencies_t &operator()(unsigned int type_id);
+  /// just given by type
+  const dependencies_t &operator()(attribute_store_type_t type);
   /// Subscript operator
   const dependencies_t &operator()(const attribute_path_subscript &subscript);
   /// One path element

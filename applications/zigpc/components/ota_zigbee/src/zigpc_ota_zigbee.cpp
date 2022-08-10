@@ -26,7 +26,11 @@
 #include "zigpc_ota_zigbee.h"
 #include "zigpc_ota_zigbee_int.h"
 
+#include <zigpc_config.h>
+
 #define LOG_TAG "zigpc_ota_zigbee"
+
+const int INVALID_OTA_POINTER = -2;
 
 void zigpc_ota_zigbee_image_available(uic_ota::meta_t ota_meta_info)
 {
@@ -72,8 +76,13 @@ sl_status_t zigpc_ota_init()
 
   //check or create folder
   //absolutely required to exist when we pass it to the uic_ota_listener
-  int folder_check
-    = mkdir(ZIGPC_DEFAULT_OTA_PATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
+  int folder_check = INVALID_OTA_POINTER;
+  if (zigpc_get_config()->ota_path != nullptr)
+  {
+    folder_check = mkdir(zigpc_get_config()->ota_path,
+                           S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+  }
 
   if (folder_check == 0) {
     status = SL_STATUS_OK;
@@ -83,11 +92,16 @@ sl_status_t zigpc_ota_init()
     status = SL_STATUS_OK;
     sl_log_info(LOG_TAG, "Found required folder");
   } else {
-    status = SL_STATUS_FAIL;
     sl_log_warning(
       LOG_TAG,
       "Error accessing or creating folder for OTA with error code: %d",
       folder_check);
+    sl_log_warning(LOG_TAG,
+                   "Do not continue initialization of the OTA component");
+
+    //set to fail so other functions will not be enabled
+    //set to NOT_AVAILABLE to indicate setup failed non-critically
+    status = SL_STATUS_NOT_AVAILABLE;
   }
 
   if (SL_STATUS_OK == status) {
@@ -96,7 +110,7 @@ sl_status_t zigpc_ota_init()
 
   if (SL_STATUS_OK == status) {
     uic_ota::init(zigpc_ota_zigbee_image_available,
-                  ZIGPC_DEFAULT_OTA_PATH,
+                  zigpc_get_config()->ota_path,
                   ZIGPC_DEFAULT_OTA_CACHE_SIZE,
                   ZIGPC_DEFAULT_OTA_TIMEOUT);
   }

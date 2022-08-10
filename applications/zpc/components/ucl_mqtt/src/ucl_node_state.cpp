@@ -113,9 +113,8 @@ static node_state_topic_security_t
   get_node_security(attribute_store_node_t node_id_node)
 {
   attribute_store_node_t granted_keys_node
-    = attribute_store_get_node_child_by_type(node_id_node,
-                                             ATTRIBUTE_GRANTED_SECURITY_KEYS,
-                                             0);
+    = attribute_store_get_first_child_by_type(node_id_node,
+                                             ATTRIBUTE_GRANTED_SECURITY_KEYS);
 
   zwave_keyset_t granted_keys = 0;
   attribute_store_read_value(granted_keys_node,
@@ -138,16 +137,14 @@ static wake_up_interval_t
                                               sizeof(zwave_endpoint_id_t),
                                               0);
   attribute_store_node_t wake_up_setting_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE_COMMAND_CLASS_WAKE_UP_SETTING,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_WAKE_UP_SETTING);
 
   attribute_store_node_t wake_up_interval_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       wake_up_setting_node,
-      ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL);
 
   if (wake_up_interval_node == ATTRIBUTE_STORE_INVALID_NODE) {
     return MAX_COMMAND_DELAY_UNKNOWN;
@@ -354,7 +351,6 @@ static void unretain_node_publications(attribute_store_node_t node)
   attribute_store_network_helper_get_unid_from_node(node, unid);
   std::string pattern = "ucl/by-unid/";
   pattern.append(unid);
-  pattern.append("/State");
   uic_mqtt_unretain(pattern.data());
 }
 
@@ -468,9 +464,8 @@ node_state_topic_state_t
   node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
 
   attribute_store_node_t network_status_node
-    = attribute_store_get_node_child_by_type(node_id_node,
-                                             ATTRIBUTE_NETWORK_STATUS,
-                                             0);
+    = attribute_store_get_first_child_by_type(node_id_node,
+                                             ATTRIBUTE_NETWORK_STATUS);
   attribute_store_get_reported(network_status_node,
                                &network_status,
                                sizeof(network_status));

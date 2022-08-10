@@ -1,0 +1,4 @@
+[package]
+name = "rust_command_class_frame_types"
+version = "0.1.0"
+edition = "2021"

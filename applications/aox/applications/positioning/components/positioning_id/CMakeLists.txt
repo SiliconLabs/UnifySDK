@@ -8,5 +8,5 @@ target_include_directories(
 
 target_link_libraries(
   positioning_id
-  PUBLIC aoa_utils
+  PUBLIC aoa_util
   PRIVATE uic_log)

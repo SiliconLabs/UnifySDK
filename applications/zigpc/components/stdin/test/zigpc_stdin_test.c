@@ -14,7 +14,7 @@
 // Test framework
 #include "unity.h"
 
-// UIC Component
+// Unify Component
 #include "sl_status.h"
 #include "uic_stdin_test.h"
 

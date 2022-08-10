@@ -74,7 +74,7 @@ static void set_basic_cluster_serial_num(attribute endpoint_node)
       dotdot_serial
         = endpoint_node.add_node(DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
     }
-    dotdot_serial.set_reported(ss.str());
+    attribute_store_set_reported_string(dotdot_serial, ss.str().c_str());
   }
 }
 
@@ -93,7 +93,7 @@ static void set_basic_cluster_hardware_version(attribute endpoint_node)
   try {
     zwave_version_hardware_version_t hardware_version
       = hardware_version_node.reported<zwave_version_hardware_version_t>();
-    int32_t zcl_hardware_version = hardware_version;
+    uint8_t zcl_hardware_version = (uint8_t)hardware_version;
     attribute_store_set_child_reported(endpoint_node,
                                        DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION,
                                        &zcl_hardware_version,
@@ -124,10 +124,10 @@ static void set_basic_cluster_power_source(attribute endpoint_id,
         .reported_exists()
       || node_id_node.child_by_type(ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL)
            .reported_exists()) {
-    int32_t power_source = 0;
+    uint8_t power_source = 0;
     switch (zwave_get_operating_mode(node_id)) {
       case OPERATING_MODE_AL:
-        power_source = 4;
+        power_source = 1;
         break;
       case OPERATING_MODE_NL:
       case OPERATING_MODE_FL:

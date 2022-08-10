@@ -37,6 +37,7 @@ static const char *test_cafile   = "/home/test/cafile";
 static const char *test_certfile = "/home/test/certfile";
 static const char *test_keyfile  = "/home/test/keyfile";
 static char test_id_uid[16];
+const char *test_mqtt_client_id = test_id_uid;
 
 // Connect callbacks variables
 static bool after_connect_called     = false;
@@ -79,7 +80,7 @@ void setUp()
   contiki_test_helper_run(0);
 }
 
-// Test the initialization and teardown of an UIC MQTT Client process
+// Test the initialization and teardown of a Unify MQTT Client process
 void test_uic_client_process_init_teardown()
 {
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_HOST,
@@ -91,6 +92,10 @@ void test_uic_client_process_init_teardown()
   config_get_as_int_ExpectAndReturn(CONFIG_KEY_MQTT_PORT, 0, CONFIG_STATUS_OK);
   config_get_as_int_IgnoreArg_result();
   config_get_as_int_ReturnThruPtr_result((int *)&testport);
+
+  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CLIENT_ID, 0, CONFIG_STATUS_OK);
+  config_get_as_string_IgnoreArg_result();
+  config_get_as_string_ReturnThruPtr_result(&test_mqtt_client_id);
 
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CAFILE,
                                        0,
@@ -137,7 +142,7 @@ void test_uic_client_process_init_teardown()
   sl_log_debug("Test", "Testing here %d", before_disconnect_called);
 }
 
-// Test the initialization and teardown of an UIC MQTT Client process
+// Test the initialization and teardown of a Unify MQTT Client process
 void test_uic_client_process_init_teardown_no_client_id()
 {
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_HOST,
@@ -149,6 +154,10 @@ void test_uic_client_process_init_teardown_no_client_id()
   config_get_as_int_ExpectAndReturn(CONFIG_KEY_MQTT_PORT, 0, CONFIG_STATUS_OK);
   config_get_as_int_IgnoreArg_result();
   config_get_as_int_ReturnThruPtr_result((int *)&testport);
+
+  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CLIENT_ID, 0, CONFIG_STATUS_OK);
+  config_get_as_string_IgnoreArg_result();
+  config_get_as_string_ReturnThruPtr_result(&test_mqtt_client_id);
 
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CAFILE,
                                        0,
@@ -210,6 +219,10 @@ void test_uic_client_setup_happy()
   config_get_as_int_ExpectAndReturn(CONFIG_KEY_MQTT_PORT, 0, CONFIG_STATUS_OK);
   config_get_as_int_IgnoreArg_result();
   config_get_as_int_ReturnThruPtr_result((int *)&testport);
+
+  config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CLIENT_ID, 0, CONFIG_STATUS_OK);
+  config_get_as_string_IgnoreArg_result();
+  config_get_as_string_ReturnThruPtr_result(&test_mqtt_client_id);
 
   config_get_as_string_ExpectAndReturn(CONFIG_KEY_MQTT_CAFILE,
                                        0,

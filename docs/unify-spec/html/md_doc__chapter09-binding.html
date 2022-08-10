@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Specification
-   &#160;<span id="projectnumber">ver1_0_RC11_20211006-12-g5cdaf55</span>
+   &#160;<span id="projectnumber">ver1_0_RC11_20211006-19-g32c28c7</span>
    </div>
   </td>
  </tr>
@@ -71,14 +71,14 @@ $(function() {
 <p>The unify binding feature can be used by an IoT service / rules engine to impose direct rules between nodes on the PAN or even for nodes between PAN and wireless protocols. The benefit of the direct rules are a binding between two nodes in the same network will impose less network latency compared to a star topology where all events needs to be passed though an IoT service. Another benefit is that in the event of the a protocol controller going offline the binding rules setup in the network will still work.</p>
 <p>The Unify Binding framework also features a system to identify which nodes can be bound. Care must be taken when IoT services setup bindings, because the Protocol Controllers will not sanitise whether a binding is safe from a security perspective.</p>
 <p>An IoT service MUST verify what a binding is acceptable from a perspective before setting up the binding. </p>
-<h1><a class="anchor" id="autotoc_md153"></a>
+<h1><a class="anchor" id="autotoc_md145"></a>
 Establishing a binding</h1>
 <p>The main use case of a binding is to have a PAN node cluster client issue commands directly to another PAN node cluster server.</p>
 <p>An example is shown below.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_27.png" />
 </div>
-<h1><a class="anchor" id="autotoc_md154"></a>
+<h1><a class="anchor" id="autotoc_md146"></a>
 Binding object</h1>
 <p>A binding consists of the following elements/fields</p>
 <ul>
@@ -101,7 +101,7 @@ Binding object</h1>
 </li>
 </ul>
 <p>There is no real control over what triggers which commands from the client to the server. For example, an OccupancySensor server that is also an OnOff cluster client may decide to send On commands to bound device when OccupancySensing is True and Off when False, or vice-versa.</p>
-<h2><a class="anchor" id="autotoc_md155"></a>
+<h2><a class="anchor" id="autotoc_md147"></a>
 MQTT Topics and Parameters</h2>
 <table class="doxtable">
 <caption>Binding MQTT Topics</caption>
@@ -120,10 +120,10 @@ MQTT Topics and Parameters</h2>
 <tr>
 <td>ucl/by-unid/+/+/Binding/GeneratedCommands/&lt;CommandName&gt; </td><td>Topic used to publish generated commands.  </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md156"></a>
+<h2><a class="anchor" id="autotoc_md148"></a>
 Additional attributes</h2>
 <p>This cluster makes use of several additional attributes. These attributes are not present in the XML file. </p>
-<h3><a class="anchor" id="autotoc_md157"></a>
+<h3><a class="anchor" id="autotoc_md149"></a>
 Binding Table</h3>
 <p>A binding table will be kept by each PAN node, keeping track of the established bindings.</p>
 <p>The value of the binding table is an array of binding objects. Each binding object consists in a Cluster ID, Destination UNID and Destination Endpoint.</p>
@@ -175,7 +175,7 @@ Binding Table</h3>
 <div class="line">  },</div>
 <div class="line">  &quot;required&quot;:[&quot;value&quot;]</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md158"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md150"></a>
 Discovering what can be bound</h3>
 <p>Protocol Controller MUST advertise the list of available Clusters for binding for each PAN node. The <em>BindableClusterList</em> attribute indicates an array of Cluster IDs that can be used for Binding Commands.</p>
 <p>If the list of Cluster IDs that can be bound is unknown to the Protocol Controller, it MUST NOT publish any Binding capabilities for that UNID/Endpoint.</p>
@@ -201,7 +201,7 @@ Discovering what can be bound</h3>
 <div class="line">}</div>
 </div><!-- fragment --><p>IoT Service SHOULD NOT attempt to bind a node to a destination, if the destination does not have any Attributes or SupportedCommands for the Cluster used in the binding.</p>
 <p>Protocol Controller MUST reject bindings if the destination cannot receive commands from the cluster defined in the binding.</p>
-<h1><a class="anchor" id="autotoc_md159"></a>
+<h1><a class="anchor" id="autotoc_md151"></a>
 Binding levels</h1>
 <p>When a binding is estalished in the Unify system, it is possible that the 2 nodes cannot communicate directly with each other.</p>
 <p>Therefore, an IoT Service requesting to Bind 2 nodes can lead to 3 (hidden) substates</p>
@@ -222,13 +222,13 @@ Binding levels</h1>
 <img src="inline_umlgraph_28.png" />
 </div>
 <p>Protocol Controllers are not mandated to support creating Intra or Inter Protocol Controller bindings. In this case, it will appear from the IoT Service as if the Bind command was ignored or rejected.</p>
-<h2><a class="anchor" id="autotoc_md160"></a>
+<h2><a class="anchor" id="autotoc_md152"></a>
 Binding table capacity</h2>
 <p>A PAN node may have a limited capacity in its binding table. When that happens, a protocol controller can use the <em>BindingTableFull</em> attribute to indicate that we have reached the limit, and no more bindings can be made.</p>
 <div class="fragment"><div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindingTableFull/Reported {&quot;value&quot;: true}</div>
 </div><!-- fragment --><p>Note that Protocol Controllers MAY start establishing Intra Protocol Controller bindings when the capacity of the PAN node is reached. In this case, the Protocol Controller MUST NOT advertise that the binding table is full.</p>
 <p>A Protocol Controller establishing Intra Protocol Controller Bindings MUST advertise that the Binding table is full only if both the PAN node and the Protocol Controller have exhausted their binding capacity.</p>
-<h2><a class="anchor" id="autotoc_md161"></a>
+<h2><a class="anchor" id="autotoc_md153"></a>
 MQTT publications example</h2>
 <p>An example of a PAN node with the Bindings server PAN node able to send commands for the OnOff and Level clusters will be shown as follows:</p>
 <div class="fragment"><div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindingTableFull/Reported {&quot;value&quot;: false}</div>
@@ -239,19 +239,19 @@ MQTT publications example</h2>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/Attributes/BindingTable/Desired {&quot;value&quot;: []}</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/SupportedCommands {&quot;value&quot;: [&quot;Bind&quot;,&quot;Unbind&quot;]}</div>
 <div class="line">ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointId&gt;/Binding/SupportedGeneratedCommands {&quot;value&quot;: []}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md162"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md154"></a>
 Detailed examples</h2>
-<h3><a class="anchor" id="autotoc_md163"></a>
+<h3><a class="anchor" id="autotoc_md155"></a>
 Happy case</h3>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_29.png" />
 </div>
-<h3><a class="anchor" id="autotoc_md164"></a>
+<h3><a class="anchor" id="autotoc_md156"></a>
 Failed binding attempts</h3>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_30.png" />
 </div>
-<h3><a class="anchor" id="autotoc_md165"></a>
+<h3><a class="anchor" id="autotoc_md157"></a>
 Explicit binding towards a Protocol Controller</h3>
 <p>IoT Service MAY use the binding cluster to force binding towards a Protocol Controller. The Binding cluster provides a special command for this, so IoT services do not need to figure out which UNID/ep to use for the Binding to point at the Protocol Controller.</p>
 <p>Protocol Controllers supporting to establish bindings towards themselves SHOULD forward commands received by PAN nodes to IoT Services using the <b>ucl/by-unid/&lt;unid&gt;/ep&lt;id&gt;/&lt;ClusterName&gt;/GeneratedCommands</b> topic space.</p>

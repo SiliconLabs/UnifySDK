@@ -13,7 +13,7 @@
 #include "network_monitor_span_persistence.h"
 #include "unity.h"
 
-// UIC Components
+// Unify Components
 #include "datastore.h"
 #include "attribute_store.h"
 #include "attribute_store_fixt.h"

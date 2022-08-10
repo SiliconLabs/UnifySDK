@@ -12,9 +12,9 @@
 #include <string.h>
 #include "unity.h"
 
-#define MOCK_CALL_DB_SIZE  1024 /**< Size of the mock call database. */
-#define FAKE_CALL_DB_SIZE  255  /**< Size of the fake call database. */
-#define STUB_CALL_DB_SIZE  255  /**< Size of the stub call database. */
+#define MOCK_CALL_DB_SIZE  8192  /**< Size of the mock call database. */
+#define FAKE_CALL_DB_SIZE  255   /**< Size of the fake call database. */
+#define STUB_CALL_DB_SIZE  255   /**< Size of the stub call database. */
 #define MAX_MESSAGE_LENGTH 4096  /**< Size of error message length, increase value if long messages are needed. */
 
 
@@ -49,6 +49,7 @@ void mock_call_expect_ex(uint32_t line_number, const char * p_func_name, mock_t 
   (*pp_mock)->p_func_name = p_func_name;
   (*pp_mock)->executed    = false;
   (*pp_mock)->line_number = line_number;
+  (*pp_mock)->mock_id     = 0;
   mock_db_idx++;
 }
 
@@ -57,6 +58,15 @@ void mock_calls_clear(void)
   mock_db_idx = 0;
   stub_db_idx = 0;
   fake_db_idx = 0;
+}
+
+/**
+ * This is a separate function so we can place a breakpoint on it to diagnose
+ * "Expected mock call(s) never occurred" errors easily.
+ */
+static void mock_call_expected_did_not_occur()
+{
+  TEST_FAIL_MESSAGE("Expected mock call(s) never occurred, set breakpoint on mock_call_expected_did_not_occur() for details.");
 }
 
 void mock_calls_verify(void)
@@ -82,8 +92,19 @@ void mock_calls_verify(void)
 
   if (failed)
   {
-    TEST_FAIL_MESSAGE("Expected mock call(s) never occurred, see list above for details.");
+    mock_call_expected_did_not_occur();
   }
+}
+
+/**
+ * This is a separate function so we can place a breakpoint on it to diagnose Unexpected
+ * mock call errors easily.
+ */
+static void mock_call_did_not_find(char const * const p_function_name)
+{
+  char error_msg[MAX_MESSAGE_LENGTH];
+  sprintf(error_msg, "Unexpected mock call occurred: %s(...). Set breakpoint on mock_call_did_not_find() for details.", p_function_name);
+  UNITY_TEST_FAIL(0, error_msg);
 }
 
 bool mock_call_find(char const * const p_function_name, mock_t ** pp_mock)
@@ -104,9 +125,7 @@ bool mock_call_find(char const * const p_function_name, mock_t ** pp_mock)
   stub_db_idx = 0;
   fake_db_idx = 0;
 
-  char error_msg[MAX_MESSAGE_LENGTH];
-  sprintf(error_msg, "Unexpected mock call occurred: %s(...)", p_function_name);
-  UNITY_TEST_FAIL(0, error_msg);
+  mock_call_did_not_find(p_function_name);
   return false;
 }
 

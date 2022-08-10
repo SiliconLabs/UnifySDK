@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Specification
-   &#160;<span id="projectnumber">ver1_0_RC11_20211006-12-g5cdaf55</span>
+   &#160;<span id="projectnumber">ver1_0_RC11_20211006-19-g32c28c7</span>
    </div>
   </td>
  </tr>
@@ -70,13 +70,13 @@ $(function() {
 <div class="textblock"><p>This chapter describes the usage of a common naming and location service for PAN nodes in the Unify system.</p>
 <p>This functionality allows IoT Services to assign and readback a Name and a Location for each node/endpoint.</p>
 <p>The Name and Location Service is a helper MQTT component that allows to perform book-keeping on text names and locations that have been assigned.</p>
-<h1><a class="anchor" id="autotoc_md167"></a>
+<h1><a class="anchor" id="autotoc_md159"></a>
 Overview</h1>
 <p>The Name and Location Service will operate on the NameAndLocation cluster (see the <em>Unify_NameAndLocation.xml</em>).</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_32.png" />
 </div>
-<h1><a class="anchor" id="autotoc_md168"></a>
+<h1><a class="anchor" id="autotoc_md160"></a>
 Name and Location Service mechanism</h1>
 <p>The Name and Location Service listens to publications to the following topic filters:</p>
 <ul>
@@ -96,19 +96,19 @@ Name and Location Service mechanism</h1>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_34.png" />
 </div>
-<h1><a class="anchor" id="autotoc_md169"></a>
+<h1><a class="anchor" id="autotoc_md161"></a>
 Endpoint ID list provided</h1>
 <p>If the entire list of Endpoint ID is published under the state cluster (<b>EndpointIdList</b> attribute), the name and location cluster SHOULD skip monitoring existing endpoints based on publications under the <b>ucl/by-unid/+/+/#</b> topic filter, and rely exclusively on the value published for the reported value of the <b>EndpointIdList</b> attribute</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_35.png" />
 </div>
-<h1><a class="anchor" id="autotoc_md170"></a>
+<h1><a class="anchor" id="autotoc_md162"></a>
 Overlap with the Basic Cluster</h1>
 <p>Some PAN nodes are Basic Cluster Servers, and provide the <b>LocationDescription</b> attributes. If such an attribute is supported by a Basic Cluster Server, the Name and Location Service MUST proxy its Location Attribute to the Basic Cluster attribute.</p>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_36.png" />
 </div>
-<h1><a class="anchor" id="autotoc_md171"></a>
+<h1><a class="anchor" id="autotoc_md163"></a>
 Pushing the information to the end node</h1>
 <p>The Name and Location Service is provided on behalf of all PAN nodes, meaning that PAN node will not be aware that they have a name assigned.</p>
 <p>It is possible for Protocol Controllers to push the information down to PAN nodes, if they want to make sure that they would retain this information locally.</p>

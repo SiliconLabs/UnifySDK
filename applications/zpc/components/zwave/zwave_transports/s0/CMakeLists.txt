@@ -7,9 +7,7 @@ target_compile_definitions(zwave_s0 PRIVATE ZIPGW ZW_CONTROLLER)
 target_include_directories(zwave_s0 PUBLIC include)
 target_link_libraries(
   zwave_s0
-  PUBLIC uic_contiki uic_contiki_platform zwave_network_management
-  PRIVATE s2crypto aes zwave_controller
-  # PRIVATE s2_controller # for keystor and aes finctions
+  PRIVATE uic_contiki uic_contiki_platform zwave_s2 zwave_controller
 )
 install(TARGETS zwave_s0 LIBRARY DESTINATION lib)
 

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { TextField } from '@material-ui/core';
 import { EditableAttributeProps, EditableAttributeState } from './editable-attribute-types';
-import Autocomplete from '@mui/material/Autocomplete';
+import { TextField, Autocomplete } from '@mui/material';
 
 
 class EditableAttribute extends React.Component<EditableAttributeProps, EditableAttributeState> {
@@ -43,7 +42,9 @@ class EditableAttribute extends React.Component<EditableAttributeProps, Editable
     }
 
     onChange = (event: any) => {
-        this.setState({ Value: event.target.value });
+        //removing invalid characters and limiting the maximum string length to 256 characters
+        let val = event.target.value?.match(/[a-zA-Z0-9-_:. )(]{1,256}/g);
+        this.setState({ Value: val && val[0] });
     }
 
     onChangeAuto = (event: any, value: any) => {
@@ -65,8 +66,7 @@ class EditableAttribute extends React.Component<EditableAttributeProps, Editable
                 freeSolo
                 renderInput={(params) => <TextField {...params}
                     onChange={this.onChange}
-                    size="small" className="flex-input" type="text" variant="outlined" label={this.props.FieldName}
-                />}
+                    size="small" className="flex-input" type="text" variant="outlined" label={this.props.FieldName} />}
             />
             : <TextField size="small" className="flex-input" type="text" variant="outlined" label={this.props.FieldName} value={this.state.Value} onChange={this.onChange} />
     }

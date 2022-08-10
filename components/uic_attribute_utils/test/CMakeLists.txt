@@ -5,7 +5,6 @@ target_add_unittest(
   SOURCES attribute_transitions_test.c
   DEPENDS
     uic_contiki_stub
-    uic_datastore
     uic_attribute_store
 )
 
@@ -16,7 +15,6 @@ target_add_unittest(
   SOURCES attribute_timeouts_test.c
   DEPENDS
     uic_contiki_stub
-    uic_datastore
     uic_attribute_store
 )
 

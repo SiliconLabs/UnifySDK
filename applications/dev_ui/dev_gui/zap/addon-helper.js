@@ -1,10 +1,12 @@
 let supportedClusters = [
     "AoXLocator",
+    "Binding",
     "ConfigurationParameters",
     "AoXPositionEstimation",
     "Basic",
     "ColorControl",
     "DoorLock",
+    "ElectricalMeasurement",
     "IASZone",
     "Identify",
     "Level",
@@ -13,14 +15,18 @@ let supportedClusters = [
     "OnOff",
     "Scenes",
     "Thermostat",
-    "PowerConfiguration",
-    "ProtocolController-RFTelemetry"
+    "ProtocolController-RFTelemetry",
+    "SystemMetrics",
+    "Metering",
+    "PowerConfiguration"
 ];
 
 const enums = new Set();
+const enumList = {};
 const bitmaps = new Set();
-const unifyClusters = ["ProtocolController-RFTelemetry", "NameAndLocation", "AoXLocator", "AoXPositionEstimation", "ConfigurationParameters"];
-const clusterArayAttributes = [
+const bitmapList = {};
+const unifyClusters = ["ProtocolController-RFTelemetry", "NameAndLocation", "AoXLocator", "AoXPositionEstimation", "ConfigurationParameters", "SystemMetrics", "Binding"];
+const clusterArrayAttributes = [
     "Groups.GetGroupMembership.GroupList",
     "Groups.GetGroupMembershipResponse.GroupList",
     "Scenes.AddScene.ExtensionFieldSets",
@@ -41,23 +47,70 @@ const clusterArayAttributes = [
     "AoXLocator.IQReport.Samples",
     "ConfigurationParameters.ConfigurationParameters",
     "ProtocolController-RFTelemetry.TxReport.LastRouteRepeaters",
-    "ProtocolController-RFTelemetry.TxReport.IncomingRSSIRepeaters"
+    "ProtocolController-RFTelemetry.TxReport.IncomingRSSIRepeaters",
+    "SystemMetrics.CPUUsagePercent",
+    "SystemMetrics.CPUFrequencyMHz",
+    "SystemMetrics.CPUAverageUsagePercent",
+    "SystemMetrics.CPUMinUsagePercent",
+    "SystemMetrics.CPUMaxUsagePercent",
+    "SystemMetrics.DisksUsage",
+    "SystemMetrics.DisksCounters",
+    "SystemMetrics.NetworkInterfacesData",
+    "SystemMetrics.WirelessNetworkInterfacesData",
+    "ElectricalMeasurement.GetProfileInfoResponse.ListOfAttributes",
+    "ElectricalMeasurement.GetMeasurementProfileResponse.Intervals",
+    "Binding.BindableClusterList",
+    "Binding.BindingTable"
 ];
 
-function initEnums(enumItem) {
-    enums.add(enumItem);
+function initEnums(enumType, name, value) {
+    if (typeof name === 'string') {
+        if (!enumList[enumType])
+            enumList[enumType] = {};
+        enumList[enumType][name] = value;
+    }
+    enums.add(enumType);
 }
 
 function isEnum(type) {
     return (castType(type) === "enum") || enums.has(type);
 }
 
-function initBitmaps(bitmapItem) {
-    bitmaps.add(bitmapItem);
+function getEnum(parentLabel, label, additionalTab = 0) {
+    let enumObject = enumList[parentLabel + label] || enumList[label];
+    if (enumObject !== undefined) {
+        let enumArray = Object.keys(enumObject).map(i => "{ name: \"" + i + "\", value: " + (enumObject[i] === undefined ? i : enumObject[i]) + "}");
+        let joinString = ",\n" + "\t".repeat(8 + additionalTab);
+        return enumArray.join(joinString);
+    }
+}
+
+function initBitmaps(bitmapType, name, mask, type, offset) {
+    if (typeof name === 'string') {
+        if (!bitmapList[bitmapType])
+            bitmapList[bitmapType] = {};
+        bitmapList[bitmapType][name] = { mask: mask, type: type, offset: offset };
+    }
+    bitmaps.add(bitmapType);
 }
 
 function isBitmap(type) {
     return (castType(type) === "bitmap") || bitmaps.has(type);
+}
+
+function getBitmap(parentLabel, label) {
+    let bitmapObject = bitmapList[parentLabel + label] || bitmapList[label];
+    if (bitmapObject !== undefined) {
+        let bitmapArray = Object.keys(bitmapObject).map(i => {
+            let type = castType(bitmapObject[i].type);
+            let item = "{ name: \"" + i + "\", mask: " + bitmapObject[i].mask + ", type: \"" + type + "\", offset: " + bitmapObject[i].offset;
+            if (type === "enum")
+                item += ", enum: \n" + "\t".repeat(9) + "[ " + getEnum(label, i, 2) + " ]";
+            item += " }";
+            return item;
+        });
+        return bitmapArray.join(",\n" + "\t".repeat(8));
+    }
 }
 
 function isArray() {
@@ -65,7 +118,7 @@ function isArray() {
     indexes.pop();
     let label = arguments[indexes.shift()];
     indexes.forEach(i => label = label.concat(".").concat(arguments[i]));
-    return clusterArayAttributes.indexOf(label) > -1;
+    return clusterArrayAttributes.indexOf(label) > -1;
 }
 
 function getClusterTypesEnum() {
@@ -73,7 +126,7 @@ function getClusterTypesEnum() {
 }
 
 function getSupportedClusters() {
-    return supportedClusters.filter(i => i !== "ProtocolController-RFTelemetry").map((i) => `${i}: "${i}"`).join(', \n\t');
+    return supportedClusters.filter(i => i !== "ProtocolController-RFTelemetry" && i != "SystemMetrics").map((i) => `${i}: "${i}"`).join(', \n\t');
 }
 
 function getClusterName(name) {
@@ -178,3 +231,5 @@ exports.getClusterTypesEnum = getClusterTypesEnum
 exports.getClusterName = getClusterName
 exports.isStruct = isStruct
 exports.isArray = isArray
+exports.getEnum = getEnum
+exports.getBitmap = getBitmap

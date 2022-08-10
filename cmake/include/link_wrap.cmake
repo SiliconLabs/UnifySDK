@@ -1,3 +1,4 @@
+if (CMAKE_GENERATOR MATCHES "Ninja")
 # Make sure we are not double linking mocks
 set(FIX_MOCK ${CMAKE_SOURCE_DIR}/scripts/build/unify_mock_link.py)
 set(CMAKE_CXX_LINK_EXECUTABLE
@@ -6,3 +7,4 @@ set(CMAKE_CXX_LINK_EXECUTABLE
 set(CMAKE_C_LINK_EXECUTABLE
     "<CMAKE_C_COMPILER>  <FLAGS> <CMAKE_CXX_LINK_FLAGS> <LINK_FLAGS> <OBJECTS>  -o <TARGET> $$(${FIX_MOCK} <LINK_LIBRARIES>)"
 )
+endif()

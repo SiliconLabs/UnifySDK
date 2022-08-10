@@ -17,7 +17,7 @@
 #include "datastore.h"
 #include "attribute_mapper_engine.hpp"
 #include "attribute_store_test_helpers.hpp"
-#include "attribute_store_debug.h"
+#include "attribute_store_type_registration.h"
 
 extern "C" {
 
@@ -30,17 +30,27 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
-  attribute_store_register_attribute(
+  attribute_store_register_type(
     111,
-    "DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MEASURED_VALUE");
-  attribute_store_register_attribute(222,
-                                     "ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE");
-  attribute_store_register_attribute(333, "ATTRIBUTE_SENSOR_MULTILEVEL_SCALE");
-  attribute_store_register_attribute(444,
-                                     "ATTRIBUTE_SENSOR_MULTILEVEL_PRECISION");
-  attribute_store_register_attribute(
-    555,
-    "ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_VALUE");
+    "DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_MEASURED_VALUE",
+    ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+    UNKNOWN_STORAGE_TYPE);
+  attribute_store_register_type(222,
+                                "ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_TYPE",
+                                ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+                                UNKNOWN_STORAGE_TYPE);
+  attribute_store_register_type(333,
+                                "ATTRIBUTE_SENSOR_MULTILEVEL_SCALE",
+                                ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+                                UNKNOWN_STORAGE_TYPE);
+  attribute_store_register_type(444,
+                                "ATTRIBUTE_SENSOR_MULTILEVEL_PRECISION",
+                                ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+                                UNKNOWN_STORAGE_TYPE);
+  attribute_store_register_type(555,
+                                "ATTRIBUTE_SENSOR_MULTILEVEL_SENSOR_VALUE",
+                                ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
+                                UNKNOWN_STORAGE_TYPE);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)

@@ -30,6 +30,8 @@
 // Configuration keys for the AoXPC
 #define CONFIG_KEY_AOXPC_DATASTORE_FILE "aoxpc.datastore_file"
 #define CONFIG_KEY_AOXPC_CONFIG_FILE    "aoxpc.config"
+#define CONFIG_KEY_AOXPC_NCP_VERSION    "aoxpc.ncp.version"
+#define CONFIG_KEY_AOXPC_NCP_UPDATE     "aoxpc.ncp.update"
 #define CONFIG_KEY_AOXPC_NCP_SERIAL     "aoxpc.ncp.serial"
 #define CONFIG_KEY_AOXPC_NCP_BAUD_RATE  "aoxpc.ncp.baud_rate"
 #define CONFIG_KEY_AOXPC_NCP_TPC        "aoxpc.ncp.tcp"

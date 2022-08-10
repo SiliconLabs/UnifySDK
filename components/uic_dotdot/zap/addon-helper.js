@@ -26,9 +26,28 @@ function clusterWithoutEndpoints(clusterName) {
   switch (clusterName) {
     case "ProtocolController-RFTelemetry": return true
     case "State": return true
+    case "SystemMetrics": return true
+    case "ApplicationMonitoring": return true
     default: return false
   }
 }
+
+// Cluster that uses the Machine ID instead of the UNID.
+function clusterWithMachineID(clusterName) {
+  switch (clusterName) {
+    case "SystemMetrics": return true
+    default: return false
+  }
+}
+
+// Cluster that uses the MQTT Client ID instead of the UNID.
+function clusterWithMQTTClientID(clusterName) {
+  switch (clusterName) {
+    case "ApplicationMonitoring": return true
+    default: return false
+  }
+}
+
 
 function dotdot_prefix() {
   return "uic_mqtt_dotdot"
@@ -95,20 +114,40 @@ function isStruct(type) {
     case 'SphericalCoordinates': return true
     case 'EstimatedPosition': return true
     case 'ConfigurationParameter' : return true
+    case 'NetworkInterfaceData' : return true
+    case 'WirelessNetworkInterfaceData' : return true
+    case 'DiskIOCounters' : return true
+    case 'DiskUsageData': return true
     default: return false
   }
 }
 
 function isMonotonousArray(label) {
   switch (label) {
+    // Binding cluster:
     case 'BindableClusterList': return true
     case 'BindingTable': return true
+    // State cluster:
     case 'EndpointIdList': return true
+    // AoXLocator cluster:
     case 'AzimuthMask': return true
     case 'ElevationMask': return true
     case 'AllowList': return true
     case 'AntennaArray': return true
+    // ConfigurationParameters cluster:
     case 'ConfigurationParameters': return true
+    // SystemMetrics cluster:
+    case 'CPUUsagePercent': return true
+    case 'CPUFrequencyMHz': return true
+    case 'CPUAverageUsagePercent': return true
+    case 'CPUMinUsagePercent': return true
+    case 'CPUMaxUsagePercent': return true
+    case 'DisksUsage': return true
+    case 'DisksCounters': return true
+    case 'NetworkInterfacesData': return true
+    case 'WirelessNetworkInterfacesData': return true
+    // ApplicationMonitoring cluster:
+    case 'ApplicationMQTTTopics': return true
     default: return false
   }
 }
@@ -329,6 +368,8 @@ exports.asSnakeCaseLower = asSnakeCaseLower
 exports.asSnakeCaseUpper = asSnakeCaseUpper
 exports.asPublicationName = asPublicationName
 exports.clusterWithoutEndpoints = clusterWithoutEndpoints
+exports.clusterWithMachineID = clusterWithMachineID
+exports.clusterWithMQTTClientID = clusterWithMQTTClientID
 exports.asAttributeIdDefine = asAttributeIdDefine
 exports.asAttributeGetFunction = asAttributeGetFunction
 exports.asAttributeGetCountFunction = asAttributeGetCountFunction

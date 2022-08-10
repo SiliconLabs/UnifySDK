@@ -65,7 +65,6 @@ typedef enum {
 
 const char *s0_event_name(s0_bootstrap_event_t ev)
 {
-  static char message[25];
   switch (ev) {
     STR_CASE(EV_S0_BOOTSTRAPPING_START)
     STR_CASE(EV_S0_SCHEME_REPORT_RECEIVED)
@@ -77,14 +76,13 @@ const char *s0_event_name(s0_bootstrap_event_t ev)
     STR_CASE(EV_S0_BOOTSTRAP_ABORT)
     STR_CASE(EV_S0_TIMEOUT)
     default:
-      snprintf(message, sizeof(message), "%d", ev);
-      return message;
+      sl_log_warning(LOG_TAG, "Unknown S0 event: %d", ev);
+      return "Unknown";
   }
 }
 
 const char *s0_incl_state_name(s0_bootstrap_state_t state)
 {
-  static char message[25];
   switch (state) {
     STR_CASE(S0_INC_IDLE)
     STR_CASE(S0_AWAITING_SCHEME_REPORT)
@@ -93,14 +91,13 @@ const char *s0_incl_state_name(s0_bootstrap_state_t state)
     STR_CASE(S0_HANDLE_NET_KEY_VERIFY)
     STR_CASE(S0_AWAITING_2SCHEME_REPORT)
     default:
-      snprintf(message, sizeof(message), "%d", state);
-      return message;
+      sl_log_warning(LOG_TAG, "Unknown S0 state: %d", state);
+      return "Unknown";
   }
 }
 
 const char *s0_action_name(s0_action_t action)
 {
-  static char message[25];
   switch (action) {
     STR_CASE(S0_SEND_SCHEME_GET_ACTION)
     STR_CASE(S0_SCHEME_REPORT_RECV_ACTION)
@@ -111,8 +108,8 @@ const char *s0_action_name(s0_action_t action)
     STR_CASE(S0_BOOTSTRAP_ABORT_ACTION)
     STR_CASE(S0_NO_ACTION)
     default:
-      snprintf(message, sizeof(message), "%d", action);
-      return message;
+      sl_log_warning(LOG_TAG, "Unknown S0 action: %d", action);
+      return "Unknown";
   }
 }
 
@@ -495,4 +492,8 @@ void s0_set_callback(s0_on_bootstrapping_complete_cb cb)
 s0_bootstrap_state_t get_s0_sm_state()
 {
   return s0_sm.bootstrap_state;
+}
+
+void s0_bootstrapping_stop() {
+  reset_s0_sm();
 }

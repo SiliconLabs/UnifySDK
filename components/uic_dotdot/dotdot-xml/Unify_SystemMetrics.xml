@@ -1,0 +1,115 @@
+﻿<?xml version="1.0"?>
+<!--
+SystemMetrics
+This is a manufacturer specific cluster.
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD04" revision="1" name="SystemMetrics">
+  <classification role="utility" picsCode="USM" />
+
+
+  <type:type short="NetworkInterfaceData" name="NetworkInterfaceData" id="01">
+    <restriction>
+      <type:sequence>
+        <field name="InterfaceName" type="string" />
+        <field name="BytesSent" type="uint64" />
+        <field name="BytesReceived" type="uint64" />
+        <field name="PacketsSent" type="uint64" />
+        <field name="PacketsReceived" type="uint64" />
+        <field name="ErrorsIn" type="uint64" />
+        <field name="ErrorsOut" type="uint64" />
+        <field name="DropIn" type="uint64" />
+        <field name="DropOut" type="uint64" />
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+
+  <type:type short="WirelessNetworkInterfaceData" name="WirelessNetworkInterfaceData" id="02">
+    <restriction>
+      <type:sequence>
+        <field name="InterfaceName" type="string" />
+        <field name="SignalStrengthdBm" type="double" />
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <type:type short="DiskIOCounters" name="DiskIOCounters" id="03">
+    <restriction>
+      <type:sequence>
+        <field name="UUID" type="string" />
+        <field name="ReadCount" type="uint64" />
+        <field name="WriteCount" type="uint64" />
+        <field name="ReadBytes" type="uint64" />
+        <field name="WriteBytes" type="uint64" />
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <type:type short="DiskUsageData" name="DiskUsageData" id="04">
+    <restriction>
+      <type:sequence>
+        <field name="UUID" type="string" />
+        <field name="UsagePercent" type="double"/>
+        <field name="FreeSpaceMB" type="double"/>
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <server>
+
+    <attributes>
+      <!-- This attribute is used to control the System Metrics reporting interval
+           in Seconds.
+           The value 0 means that no update to the SystemMetrics are made
+           Any other value represent the interval at which attribute values are published -->
+      <attribute id="0000" name="ReportingIntervalSeconds" type="uint32" default="0" required="true" writable="true"/>
+
+      <!-- This attribute shows the CPU usage in percents, of all CPUs. -->
+      <attribute id="0010" name="CPUUsagePercent" array="true" type="double"/>
+      <attribute id="0011" name="CPUFrequencyMHz" array="true" type="double"/>
+      <attribute id="0012" name="CPUAverageUsagePercent" array="true" type="double"/>
+      <attribute id="0013" name="CPUMinUsagePercent" array="true" type="double"/>
+      <attribute id="0014" name="CPUMaxUsagePercent" array="true" type="double"/>
+
+      <!-- Memory data -->
+      <attribute id="0020" name="RAMTotalMB" type="double"/>
+      <attribute id="0021" name="RAMFreeMB" type="double"/>
+      <attribute id="0022" name="RAMAvailableMB" type="double"/>
+      <attribute id="0023" name="SWAPMemoryTotalMB" type="double"/>
+      <attribute id="0024" name="SWAPMemoryUsedMB" type="double"/>
+      <attribute id="0025" name="VirtualMemoryTotalMB" type="double"/>
+      <attribute id="0026" name="VirtualMemoryUsedMB" type="double"/>
+      <attribute id="0027" name="DisksUsage" array="true" type="DiskUsageData"/>
+      <attribute id="0028" name="DisksCounters" array="true" type="DiskIOCounters"/>
+
+      <!-- Network interfaces and networking attributes -->
+      <attribute id="0030" name="NetworkInterfacesData" array="true" type="NetworkInterfaceData"/>
+      <attribute id="0031" name="WirelessNetworkInterfacesData" array="true" type="WirelessNetworkInterfaceData"/>
+      <attribute id="0032" name="Hostname" type="string"/>
+      <attribute id="0033" name="FQDN" type="string"/>
+
+      <!-- Various others -->
+      <attribute id="0040" name="UptimeMinutes" type="uint64"/>
+
+      <!-- Temperature Sensor data -->
+      <attribute id="0050" name="CurrentTemperatureCelcius" type="double"/>
+      <attribute id="0051" name="AverageTemperatureCelcius" type="double"/>
+      <attribute id="0052" name="MinTemperatureCelcius" type="double"/>
+      <attribute id="0053" name="MaxTemperatureCelcius" type="double"/>
+
+      <!-- Power/Battery data -->
+      <attribute id="0060" name="PowerPlugged" type="bool"/>
+      <attribute id="0061" name="BatteryPercentage" type="double"/>
+
+      <!-- Hardware data -->
+      <attribute id="0070" name="SystemInterrupts" type="uint64"/>
+    </attributes>
+
+  </server>
+</zcl:cluster>

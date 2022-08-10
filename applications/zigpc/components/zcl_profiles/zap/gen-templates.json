@@ -1,6 +1,6 @@
 {
-  "name": "UIC ZigPC ZCL Profile Mapper",
-  "version": "UICZigPC-zcl-profile-mapper-v1",
+  "name": "Unify ZigPC ZCL Profile Mapper",
+  "version": "UnifyZigPC-zcl-profile-mapper-v1",
   "override": "../../zcl_util/zap/addon-override.js",
   "helpers": ["../../zcl_util/zap/addon-helper.js"],
   "templates": [

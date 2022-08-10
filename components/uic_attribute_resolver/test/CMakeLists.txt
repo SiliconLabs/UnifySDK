@@ -31,7 +31,6 @@ target_add_unittest(
   DEPENDS
   uic_contiki_stub
   uic_attribute_store
-  uic_datastore
   uic_attribute_resolver_mock)
 
 # Resolver Benchmark test

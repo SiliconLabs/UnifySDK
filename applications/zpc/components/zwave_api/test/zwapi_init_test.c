@@ -202,3 +202,33 @@ void test_zwapi_get_protocol_version(void)
   TEST_ASSERT_EQUAL(0x34, received_protocol.git_commit[4]);
   TEST_ASSERT_EQUAL(0x46, received_protocol.git_commit[15]);
 }
+
+void test_zwapi_awaiting_zwave_api_started(void)
+{
+  // Cheap trick to modify the value directly.
+  extern bool awaiting_zwave_api_started;
+  awaiting_zwave_api_started = false;
+  TEST_ASSERT_FALSE(zwapi_is_awaiting_zwave_api_started());
+  awaiting_zwave_api_started = true;
+  TEST_ASSERT_TRUE(zwapi_is_awaiting_zwave_api_started());
+}
+
+void test_zwapi_init()
+{
+  int serial_fd               = 0;
+  zwapi_callbacks_t callbacks = {};
+
+  zwapi_session_init_ExpectAndReturn("test", 3);
+  zwapi_session_send_frame_with_response_ExpectAndReturn(
+    FUNC_ID_SERIAL_API_GET_CAPABILITIES,
+    NULL,
+    0,
+    NULL,
+    NULL,
+    SL_STATUS_FAIL);
+  zwapi_session_send_frame_with_response_IgnoreArg_response_buf();
+  zwapi_session_send_frame_with_response_IgnoreArg_response_len();
+
+  zwapi_init("test", &serial_fd, &callbacks);
+  TEST_ASSERT_EQUAL(3, serial_fd);
+}

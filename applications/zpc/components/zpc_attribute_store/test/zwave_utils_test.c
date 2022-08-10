@@ -22,7 +22,7 @@
 #include "zwave_controller_utils_mock.h"
 
 #include "attribute_store_defined_attribute_types.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_unid.h"
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()
@@ -365,14 +365,15 @@ void test_get_protocol()
     test_protocol_node);
 
   zwave_protocol_t protocol = 34;
-  attribute_store_read_value_ExpectAndReturn(test_protocol_node,
-                                             REPORTED_ATTRIBUTE,
-                                             NULL,
-                                             sizeof(zwave_protocol_t),
-                                             SL_STATUS_OK);
-  attribute_store_read_value_IgnoreArg_read_value();
-  attribute_store_read_value_ReturnMemThruPtr_read_value(&protocol,
-                                                         sizeof(protocol));
+  attribute_store_get_desired_else_reported_ExpectAndReturn(
+    test_protocol_node,
+    NULL,
+    sizeof(zwave_protocol_t),
+    SL_STATUS_OK);
+  attribute_store_get_desired_else_reported_IgnoreArg_value();
+  attribute_store_get_desired_else_reported_ReturnMemThruPtr_value(
+    &protocol,
+    sizeof(protocol));
 
   TEST_ASSERT_EQUAL(34, zwave_get_inclusion_protocol(test_node_id));
 }
@@ -393,12 +394,12 @@ void test_get_protocol_attribute_store_empty()
     0,
     test_protocol_node);
 
-  attribute_store_read_value_ExpectAndReturn(test_protocol_node,
-                                             REPORTED_ATTRIBUTE,
-                                             NULL,
-                                             sizeof(zwave_protocol_t),
-                                             SL_STATUS_OK);
-  attribute_store_read_value_IgnoreArg_read_value();
+  attribute_store_get_desired_else_reported_ExpectAndReturn(
+    test_protocol_node,
+    NULL,
+    sizeof(zwave_protocol_t),
+    SL_STATUS_OK);
+  attribute_store_get_desired_else_reported_IgnoreArg_value();
 
   TEST_ASSERT_EQUAL(PROTOCOL_UNKNOWN,
                     zwave_get_inclusion_protocol(test_node_id));
@@ -474,7 +475,7 @@ void test_get_protocol_name()
                            zwave_get_protocol_name(PROTOCOL_UNKNOWN));
   TEST_ASSERT_EQUAL_STRING("PROTOCOL_ZWAVE_LONG_RANGE",
                            zwave_get_protocol_name(PROTOCOL_ZWAVE_LONG_RANGE));
-  TEST_ASSERT_EQUAL_STRING("255", zwave_get_protocol_name(255));
+  TEST_ASSERT_EQUAL_STRING("Unknown", zwave_get_protocol_name(255));
 }
 
 void test_nodemask_add_node()
@@ -946,38 +947,80 @@ void test_zwave_security_validation_is_node_s2_capable()
   TEST_ASSERT_FALSE(zwave_security_validation_is_node_s2_capable(test_node_id));
 }
 
-void test_zwave_security_validation_set_node_as_s2_capable()
+void test_endpoint_exists()
 {
-  // Test first where it exist and no creation is needed:
+  // True test:
   zwave_node_id_t test_node_id             = 45;
-  attribute_store_node_t test_node_id_node = 234;
+  zwave_endpoint_id_t test_endpoint_id     = 15;
+  attribute_store_node_t test_node_id_node = 2;
   attribute_store_network_helper_get_zwave_node_id_node_ExpectAndReturn(
     test_node_id,
     test_node_id_node);
 
-  attribute_store_node_t test_s2_capable_node = 321;
-  attribute_store_get_node_child_by_type_ExpectAndReturn(
+  attribute_store_get_node_child_by_value_ExpectAndReturn(
     test_node_id_node,
-    ATTRIBUTE_NODE_IS_S2_CAPABLE,
+    ATTRIBUTE_ENDPOINT_ID,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    sizeof(test_endpoint_id),
     0,
-    test_s2_capable_node);
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_OK,
-    zwave_security_validation_set_node_as_s2_capable(test_node_id));
+    1);
+  attribute_store_get_node_child_by_value_IgnoreArg_value();
 
-  // If it does not exist:
+  TEST_ASSERT_TRUE(endpoint_exists(test_node_id, test_endpoint_id));
+
+  // False test :
   attribute_store_network_helper_get_zwave_node_id_node_ExpectAndReturn(
     test_node_id,
     test_node_id_node);
-  attribute_store_get_node_child_by_type_ExpectAndReturn(
+
+  attribute_store_get_node_child_by_value_ExpectAndReturn(
     test_node_id_node,
-    ATTRIBUTE_NODE_IS_S2_CAPABLE,
+    ATTRIBUTE_ENDPOINT_ID,
+    REPORTED_ATTRIBUTE,
+    NULL,
+    sizeof(test_endpoint_id),
     0,
     ATTRIBUTE_STORE_INVALID_NODE);
-  attribute_store_add_node_ExpectAndReturn(ATTRIBUTE_NODE_IS_S2_CAPABLE,
-                                           test_node_id_node,
-                                           SL_STATUS_OWNERSHIP);
-  TEST_ASSERT_EQUAL(
-    SL_STATUS_OWNERSHIP,
-    zwave_security_validation_set_node_as_s2_capable(test_node_id));
+  attribute_store_get_node_child_by_value_IgnoreArg_value();
+
+  TEST_ASSERT_FALSE(endpoint_exists(test_node_id, test_endpoint_id));
+}
+
+void test_is_command_in_array()
+{
+  // Extended CC without command:
+  const uint8_t command_list_1[] = {0xFF, 0x00};
+  TEST_ASSERT_FALSE(
+    is_command_in_array(0xFF, 0x00, command_list_1, sizeof(command_list_1)));
+
+  // CC without command:
+  const uint8_t command_list_2[] = {0x9F};
+  TEST_ASSERT_FALSE(
+    is_command_in_array(0x9F, 0x00, command_list_2, sizeof(command_list_2)));
+
+  // Regular array with 1 extended CC:
+  const uint8_t command_list_3[]
+    = {0x26, 0x03, 0x71, 0x05, 0xFF, 0x12, 0x01, 0x01, 0x01};
+  TEST_ASSERT_FALSE(
+    is_command_in_array(0x26, 0x00, command_list_3, sizeof(command_list_3)));
+  TEST_ASSERT_TRUE(
+    is_command_in_array(0x26, 0x03, command_list_3, sizeof(command_list_3)));
+  TEST_ASSERT_TRUE(
+    is_command_in_array(0xFF12, 0x01, command_list_3, sizeof(command_list_3)));
+  TEST_ASSERT_TRUE(
+    is_command_in_array(0x01, 0x01, command_list_3, sizeof(command_list_3)));
+
+  // Array with Commands > 0xFE, but they are not to be interpreted as extended CCs
+  // Trailing Single byte at the end
+  const uint8_t command_list_4[]
+    = {0x26, 0x03, 0x71, 0xFF, 0x9F, 0x12, 0x01, 0x01, 0x02};
+  TEST_ASSERT_TRUE(
+    is_command_in_array(0x71, 0xFF, command_list_4, sizeof(command_list_4)));
+  TEST_ASSERT_FALSE(
+    is_command_in_array(0x03, 0x71, command_list_4, sizeof(command_list_4)));
+  TEST_ASSERT_FALSE(
+    is_command_in_array(0x01, 0x02, command_list_4, sizeof(command_list_4)));
+  TEST_ASSERT_TRUE(
+    is_command_in_array(0x9F, 0x12, command_list_4, sizeof(command_list_4)));
 }

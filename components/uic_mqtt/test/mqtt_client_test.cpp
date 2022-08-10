@@ -22,7 +22,7 @@
 #include "cmock.h"
 #include "unity_internals.h"
 
-// UIC components
+// Unify components
 #include "sl_log.h"
 
 extern "C" {

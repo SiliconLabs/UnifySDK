@@ -3,13 +3,12 @@ import { Button, Col, Form, Row, Table } from 'react-bootstrap';
 import * as FiIcons from 'react-icons/fi';
 import * as RiIcons from 'react-icons/ri';
 import { SmartStartProps, SmartStartState } from './smart-start-types';
-import Tooltip from '@material-ui/core/Tooltip';
 import { toast } from 'react-toastify';
 import PreferredProtocolsDlg from '../../components/preferred-protocols-dlg/preferred-protocols-dlg';
 import ConfirmDlg from '../../components/confirm-dlg/confirm-dlg';
 import QrCodeDlg from '../../components/qr-code-dlg/qr-code-dlg';
-import { InputAdornment, TextField } from '@material-ui/core';
 import './smart-start.css';
+import { InputAdornment, TextField, Tooltip } from '@mui/material';
 
 export class SmartStart extends React.Component<SmartStartProps, SmartStartState> {
   constructor(props: SmartStartProps) {
@@ -174,9 +173,9 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
                 if (item.IsNew || item.IsEdit)
                   return (
                     <tr key={index} className={`editable-tr ${item.IsError ? "blinking-error" : ""}`}>
-                      <td className={item.IsEdit ? "" : "padding-5"}>
+                      <td>
                         {item.IsEdit
-                          ? <TextField value={item.DSK} className="flex-input" size="small" type="text" />
+                          ? <TextField value={item.DSK} className="flex-input" label="DSK" size="small" type="text" />
                           : <TextField value={item.DSK} onChange={this.updateStateByEvent.bind(this, index, 'DSK')} className="flex-input" label="DSK" size="small" type="text" variant="outlined"
                             InputProps={window.location.protocol === "https:" ? {
                               endAdornment: <InputAdornment position="end"> <Tooltip title="Scan QR-code">
@@ -188,18 +187,18 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
                           />
                         }
                       </td>
-                      <td className="text-center">
+                      <td className="text-center vertical-middle">
                         <span className="icon">
                           {item.Include ? <FiIcons.FiCheckSquare color="#28a745" onClick={this.updateState.bind(this, index, "Include", false)} /> : <FiIcons.FiSquare color="#6c757d" onClick={this.updateState.bind(this, index, "Include", true)} />}
                         </span>
                       </td>
-                      <td className={item.IsEdit ? "" : "padding-5"}>
+                      <td>
                         <TextField size="small" className="flex-input" type="text" variant="outlined" label="PC UNID" value={item.ProtocolControllerUnid} onChange={this.updateStateByEvent.bind(this, index, 'ProtocolControllerUnid')} />
                       </td>
-                      <td className="padding-5">
+                      <td>
                         <TextField size="small" className="flex-input" type="text" variant="outlined" label="UNID" value={item.Unid} onChange={this.updateStateByEvent.bind(this, index, 'Unid')} />
                       </td>
-                      <td className="text-center">
+                      <td className="text-center vertical-middle">
                         <Tooltip title="Save">
                           <span className="icon">
                             <FiIcons.FiSave className="margin-h-5" onClick={this.save.bind(this, item)} />
@@ -215,8 +214,8 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
                   );
                 else return (
                   <tr key={index}>
-                    <td><TextField value={item.DSK} size="small" className="flex-input" type="text" /></td>
-                    <td className="text-center">
+                    <td><TextField value={item.DSK} label="DSK" size="small" className="flex-input" type="text" /></td>
+                    <td className="text-center vertical-middle">
                       <span>
                         {item.Include ? <FiIcons.FiCheck color="#28a745" /> : <FiIcons.FiXCircle color="#6c757d" />}
                       </span>
@@ -226,9 +225,9 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
                         </span>
                       </Tooltip>
                     </td>
-                    <td>{item.ProtocolControllerUnid}</td>
-                    <td>{item.Unid}</td>
-                    <td className="text-center">
+                    <td className="vertical-middle">{item.ProtocolControllerUnid}</td>
+                    <td className="vertical-middle">{item.Unid}</td>
+                    <td className="text-center vertical-middle">
                       <Tooltip title="Preferred Protocols">
                         <span className="icon">
                           <FiIcons.FiHeart className="margin-h-5" onClick={this.editPreferred.bind(this, item)} />

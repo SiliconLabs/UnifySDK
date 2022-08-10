@@ -88,7 +88,7 @@ void zwave_api_protocol_init_callbacks(void)
   zwapi_delete_return_route_callback            = NULL;
   zwapi_set_learn_mode_callback                 = NULL;
   zwapi_set_virtual_node_to_learn_mode_callback = NULL;
-  zwapi_request_neighbor_update_callback       = NULL;
+  zwapi_request_neighbor_update_callback        = NULL;
   zwapi_set_suc_node_id_callback                = NULL;
   zwapi_request_network_update_callback         = NULL;
   zwapi_remove_failed_node_callback             = NULL;
@@ -188,16 +188,17 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
 
       bStatus = pData[IDX_DATA];
       /* */
-      if ((bStatus == UPDATE_STATE_NODE_INFO_FOREIGN_HOMEID_RECEIVED) ||
-          (bStatus == UPDATE_STATE_NODE_INFO_SMARTSTART_HOMEID_RECEIVED_LR)) {
+      if ((bStatus == UPDATE_STATE_NODE_INFO_FOREIGN_HOMEID_RECEIVED)
+          || (bStatus
+              == UPDATE_STATE_NODE_INFO_SMARTSTART_HOMEID_RECEIVED_LR)) {
         /* ZW->HOST: 0x49 | 0x85 | Source NodeID (1/2 bytes) | brxStatus
                            | NWI HomeID[0] | NWI HomeID[1] | NWI HomeID[2] | NWI HomeID[3]
                            | nodeInfoLen | BasicDeviceType | GenericDeviceType | SpecificDeviceType
                            | nodeInfo[nodeInfoLen]
              */
-        zwave_home_id_t nwi_home_id    = 0;
-        uint8_t length                 = 0;
-        uint8_t index                  = IDX_DATA + 1;
+        zwave_home_id_t nwi_home_id = 0;
+        uint8_t length              = 0;
+        uint8_t index               = IDX_DATA + 1;
 
         zwave_node_id_t source_node_id = zwapi_read_node_id(pData, &index);
         index += 1;  // brxStatus field. We do not use
@@ -223,8 +224,8 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
                     | Source NodeID (1/2 bytes) | Length? | bINIFrxStatus | NWI HomeID [4]
                   E.g. Incoming Z-Wave API frame (hex): Length=0B Type=00 Cmd=49 86 02 05 14 EA 15 15 88
              */
-        zwave_home_id_t nwi_home_id    = 0;
-        uint8_t index                  = IDX_DATA + 1;
+        zwave_home_id_t nwi_home_id = 0;
+        uint8_t index               = IDX_DATA + 1;
 
         zwave_node_id_t source_node_id = zwapi_read_node_id(pData, &index);
         index += 1;  // Length? field. We do not use
@@ -258,7 +259,7 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
         for (i = 0; i < learnNodeInfo.bLen + 3; i++) {
           zwapi_command_buffer[i] = pData[current_index + i];
         }
-        learnNodeInfo.pCmd    = zwapi_command_buffer;
+        learnNodeInfo.pCmd = zwapi_command_buffer;
         callbacks->application_controller_update(learnNodeInfo.bStatus,
                                                  learnNodeInfo.bSource,
                                                  learnNodeInfo.pCmd,
@@ -270,11 +271,12 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
     case FUNC_ID_APPLICATION_COMMAND_HANDLER: {
       if (callbacks->application_command_handler != NULL) {
         // Parse the frame: ZW->HOST: REQ | 0x04 | rxStatus | sourceNode | cmdLength | pCmd[] | rxRSSIVal
-        uint8_t current_index       = IDX_DATA;
-        uint8_t rx_status           = pData[current_index++];
+        uint8_t current_index               = IDX_DATA;
+        uint8_t rx_status                   = pData[current_index++];
         zwave_node_id_t destination_node_id = 0;
-        zwave_node_id_t source_node_id = zwapi_read_node_id(pData, &current_index);
-        uint8_t command_length      = pData[current_index++];
+        zwave_node_id_t source_node_id
+          = zwapi_read_node_id(pData, &current_index);
+        uint8_t command_length = pData[current_index++];
         if (zwave_api_detect_buffer_overflow(command_length)) {
           break;
         }
@@ -325,11 +327,13 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
     case FUNC_ID_APPLICATION_COMMAND_HANDLER_BRIDGE: {
       if (callbacks->application_command_handler_bridge) {
         // Parse the frame: ZW->HOST: REQ | 0xA8 | rxStatus | destNodeID | srcNodeID | cmdLength | pCmd[ ] | multiDestsOffset_NodeMaskLen | multiDestsNodeMask | rxRSSIVal
-        uint8_t current_index       = IDX_DATA;
-        uint8_t rx_status           = pData[current_index++];
-        zwave_node_id_t destination_node_id         = zwapi_read_node_id(pData, &current_index);
-        zwave_node_id_t source_node_id              = zwapi_read_node_id(pData, &current_index);
-        uint8_t command_length      = pData[current_index++];
+        uint8_t current_index = IDX_DATA;
+        uint8_t rx_status     = pData[current_index++];
+        zwave_node_id_t destination_node_id
+          = zwapi_read_node_id(pData, &current_index);
+        zwave_node_id_t source_node_id
+          = zwapi_read_node_id(pData, &current_index);
+        uint8_t command_length = pData[current_index++];
         if (zwave_api_detect_buffer_overflow(command_length)) {
           break;
         }
@@ -404,9 +408,9 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
         txStatusReport.beam_250ms       = (*p) | (1 << 5);
         txStatusReport.last_route_speed = (*p++) & 0x7;
 
-        txStatusReport.routing_attempts        = *p++;
-        txStatusReport.last_failed_link.from   = *p++;
-        txStatusReport.last_failed_link.to     = *p++;
+        txStatusReport.routing_attempts      = *p++;
+        txStatusReport.last_failed_link.from = *p++;
+        txStatusReport.last_failed_link.to   = *p++;
 
         if (len >= 25) {
           txStatusReport.tx_power = *p++;
@@ -516,9 +520,7 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
               "higher than the total length of the frame. Clipping");
             learnNodeInfo.bLen = len - index;
           }
-          memcpy(zwapi_command_buffer,
-                 &pData[index],
-                 learnNodeInfo.bLen);
+          memcpy(zwapi_command_buffer, &pData[index], learnNodeInfo.bLen);
         }
 
         funcLearnInfo(&learnNodeInfo);
@@ -583,9 +585,9 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
 
     case FUNC_ID_ZW_SET_VIRTUAL_NODE_TO_LEARN_MODE:
       if (zwapi_set_virtual_node_to_learn_mode_callback != NULL) {
-        uint8_t index = IDX_DATA + 2;
+        uint8_t index                    = IDX_DATA + 2;
         zwave_node_id_t original_node_id = zwapi_read_node_id(pData, &index);
-        zwave_node_id_t new_node_id = zwapi_read_node_id(pData, &index);
+        zwave_node_id_t new_node_id      = zwapi_read_node_id(pData, &index);
         zwapi_set_virtual_node_to_learn_mode_callback(pData[IDX_DATA + 1],
                                                       original_node_id,
                                                       new_node_id);
@@ -625,6 +627,7 @@ void zwave_api_protocol_rx_dispatch(uint8_t *pData, uint16_t len)
     case FUNC_ID_SERIAL_API_STARTED:
       /* ZW->HOST: bWakeupReason | bWatchdogStarted | deviceOptionMask | */
       /*           node_type.generic | node_type.specific | cmdClassLength | cmdClass[] */
+      awaiting_zwave_api_started = false;
       if (callbacks->zwapi_started != NULL) {
         uint8_t data_length
           = len - IDX_DATA - 1;  //-1 to strip off the checksum field

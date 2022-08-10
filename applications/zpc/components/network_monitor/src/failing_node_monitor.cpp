@@ -10,349 +10,254 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-
-//Standard libraries
-#include <list>
-
-//ZPC libraries
-#include <zwave_node_id_definitions.h>
-#include <zwave_controller_connection_info.h>
-#include <sl_log.h>
-#include <ctimer.h>
-#include <zwave_utils.h>  // For Z-Wave operating mode functionality
-// for ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL and ATTRIBUTE_NODE_ID
-#include <attribute_store_defined_attribute_types.h>
-// for attribute_store_network_helper_get_zwave_node_id_node()
-#include <zpc_attribute_store_network_helper.h>
-#include <zpc_attribute_store.h>  // for get_zpc_network_node
-#include <attribute.hpp>
-#include <zwave_controller_utils.h>  // for zwave_send_nop_to_node()
-
-//This module
+// Includes from this component
 #include "failing_node_monitor.h"
+#include "network_monitor_utils.h"
 
-#define LOG_TAG                                 "failing_node_monitor"
-#define ALWAYS_LISTENING_PING_TIME_INTERVAL     (4 * CLOCK_SECOND)
-#define FREQUENTLY_LISTENING_PING_TIME_INTERVAL (40 * CLOCK_SECOND)
-#define MAX_PING_TIME_INTERVAL                  (24 * 60 * CLOCK_SECOND)  // 24 hours
+// Interfaces
+#include "attribute_store_defined_attribute_types.h"
+#include "ucl_definitions.h"
 
-void stop_monitoring_failing_node(zwave_node_id_t node_id);
-void start_monitoring_failing_node(zwave_node_id_t node_id);
-sl_status_t zwave_remove_failing_node_ping_interval_from_attribute_store(
-  zwave_node_id_t node_id);
-sl_status_t zwave_store_failing_node_ping_interval(zwave_node_id_t node_id,
-                                                   clock_time_t interval);
-static void ping_failing_node(void *user);
+// ZPC components
+#include "zwave_controller_utils.h"
 
-// last_timer is a timestamp of when the last timer of ping for any node
-// occured
-// used check if its time to ping the node by comparing
-// last timestamp(last_timer) the node was pinged and clock_time and see if its
-// more than next_ping_in
-// also used to adjust the next_ping_time for all other nodes when some node is
-// being pinged
-static clock_time_t last_timer = 0;
-static struct ctimer ping_timer;
+// Unify components
+#include "sl_log.h"
+#include "attribute_timeouts.h"
+#include "attribute_store_helper.h"
 
-struct failing_node_t {
-  zwave_node_id_t node_id;
-  clock_time_t next_ping_in;  //Duration to wait before next ping. This will be
-                              // changed when adjust is done
+// Type aliasing
+constexpr attribute_store_type_t PING_INTERVAL_ATTRIBUTE
+  = ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL;
 
-  clock_time_t last_ping_in;  //Previous ping duration. This is never changed
-                              // and used to calculate next ping interval
-  zwave_operating_mode_t zwave_operating_mode;
+constexpr char LOG_TAG[] = "failing_node_monitor";
 
-  bool operator<(const failing_node_t &n) const
-  {
-    return next_ping_in < n.next_ping_in;
-  }
-  bool operator>(const failing_node_t &n) const
-  {
-    return next_ping_in > n.next_ping_in;
-  }
-};
-
-static std::list<failing_node_t> ping_list;
-
-using namespace attribute_store;
-static void send_nop()
+// Private variables
+namespace
 {
-  if (ping_list.empty()) {
-    sl_log_warning(LOG_TAG,
-                   "Failing node list empty. No NOP will be sent out.");
+// boolean indicating if we qeueued a NOP and are waiting for a callback.
+bool nop_queued = false;
+}  // namespace
+
+// Forward declarations
+static void on_send_nop_completed(uint8_t status,
+                                  const zwapi_tx_report_t *tx_info,
+                                  void *user);
+
+////////////////////////////////////////////////////////////////////////////////
+// Private functions
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Puts a NOP in the Tx Queue for the first NodeID in the list.
+ *
+ */
+static void queue_nop_to_failing_node(attribute_store_node_t node_id_node)
+{
+  if (nop_queued == true) {
+    zwave_node_id_t node_id = 0;
+    attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
+    // Do not add more than 1 frame at a time in the Tx Queue.
+    // Wait for the duration of the discard timeout before retrying.
+    sl_log_debug(LOG_TAG,
+                 "Applying back-off before queueing the "
+                 "next NOP for NodeID: %d.",
+                 node_id);
+    attribute_timeout_set_callback(node_id_node,
+                                   NOP_REQUEUE_BACK_OFF_MS,
+                                   &queue_nop_to_failing_node);
     return;
   }
 
   zwave_node_id_t node_id = 0;
-  node_id                 = ping_list.begin()->node_id;
+  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
 
-  // No need to setup callback here. If the NOP succeeds, Network Monitor
-  // will detect it and will call stop_monitoring_failing_node()
-  zwave_send_nop_to_node(node_id, nullptr, nullptr);
+  sl_status_t send_status
+    = zwave_send_nop_to_node(node_id,
+                             ZWAVE_TX_QOS_MIN_PRIORITY,
+                             NOP_DISCARD_TIMEOUT_MS,
+                             &on_send_nop_completed,
+                             reinterpret_cast<void *>(node_id_node));
 
-  for (auto it = ping_list.begin(); it != ping_list.end(); ++it) {
-    // Existing node, double the back off time
-    if (it->node_id == node_id) {
-      if ((it->zwave_operating_mode == OPERATING_MODE_AL)
-          || (it->zwave_operating_mode == OPERATING_MODE_UNKNOWN)) {
-        it->next_ping_in = it->last_ping_in * 2;
-      } else if (it->zwave_operating_mode == OPERATING_MODE_FL) {
-        it->next_ping_in = it->last_ping_in * 4;
-      } else {
-        it->next_ping_in = it->last_ping_in * 2;
-      }
-      it->next_ping_in = (it->next_ping_in > MAX_PING_TIME_INTERVAL)
-                           ? MAX_PING_TIME_INTERVAL
-                           : it->next_ping_in;
-
-      it->last_ping_in = it->next_ping_in;
-    }
-    if (zwave_store_failing_node_ping_interval(it->node_id, it->next_ping_in)
-        != SL_STATUS_OK) {
-      sl_log_error(LOG_TAG,
-                   "Error persisting the failing node interval in Attribute "
-                   "Store for NodeID %d\n",
-                   it->node_id);
-    } else {
-      sl_log_debug(LOG_TAG,
-                   "Persisted the failing node interval in Attribute Store "
-                   "for NodeID %d\n",
-                   it->node_id);
-    }
-  }
-
-  ping_list.sort();
-
-  last_timer = clock_time();
-
-  sl_log_debug(
-    LOG_TAG,
-    "Next Failing node ping will be sent to NodeID %d in %lu seconds",
-    ping_list.begin()->node_id,
-    ping_list.begin()->next_ping_in / CLOCK_SECOND);
-  ctimer_set(&ping_timer,
-             ping_list.begin()->next_ping_in,
-             ping_failing_node,
-             0);
-}
-
-void stop_monitoring_failing_node(zwave_node_id_t node_id)
-{
-  for (auto it = ping_list.begin(); it != ping_list.end(); ++it) {
-    if (it->node_id == node_id) {
-      ping_list.erase(it);
-      if (ping_list.empty()) {
-        ctimer_stop(&ping_timer);
-      }
-      sl_log_debug(LOG_TAG,
-                   "Removing NodeID %d from failing node monitor list.",
-                   node_id);
-      zwave_remove_failing_node_ping_interval_from_attribute_store(node_id);
-      return;
-    }
-  }
-  sl_log_debug(LOG_TAG, "NodeID %d was not failing", node_id);
-  return;
-}
-
-static void read_all_nodes_failing_node_ping_interval()
-{
-  failing_node_t n;
-
-  //Read the home_id for ZPC network
-  attribute network = get_zpc_network_node();
-  for (auto zw_node: network.children(ATTRIBUTE_NODE_ID)) {
-    try {
-      if (zw_node == get_zpc_node_id_node()) {
-        continue;
-      }
-
-      zwave_node_id_t node_id = zw_node.reported<zwave_node_id_t>();
-
-      clock_time_t interval
-        = zw_node.child_by_type(ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL)
-            .reported<clock_time_t>();
-      zwave_operating_mode_t mode = zwave_get_operating_mode(node_id);
-      n.next_ping_in              = interval;
-      n.last_ping_in              = interval;
-      n.node_id                   = node_id;
-      n.zwave_operating_mode      = mode;
-      sl_log_info(LOG_TAG,
-                  "Node %d was failing and last interval it was pinged at "
-                  "was: : %lu seconds. Continuing from there",
-                  n.node_id,
-                  n.next_ping_in / CLOCK_SECOND);
-      ping_list.push_front(n);
-    } catch (const std::invalid_argument &) {
-    }
-  }
-}
-
-sl_status_t zwave_remove_failing_node_ping_interval_from_attribute_store(
-  zwave_node_id_t node_id)
-{
-  attribute node_id_node
-    = attribute_store_network_helper_get_zwave_node_id_node(node_id);
-
-  try {
-    attribute failing_node_interval_node
-      = node_id_node.child_by_type(ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL);
-    failing_node_interval_node.delete_node();
-  } catch (const std::invalid_argument &) {
-    return SL_STATUS_FAIL;
-  }
-  return SL_STATUS_OK;
-}
-
-sl_status_t zwave_store_failing_node_ping_interval(zwave_node_id_t node_id,
-                                                   clock_time_t interval)
-{
-  attribute node_id_node
-    = attribute_store_network_helper_get_zwave_node_id_node(node_id);
-
-  if (!node_id_node.is_valid()) {
+  if (SL_STATUS_OK == send_status) {
+    nop_queued = true;
+  } else {
     sl_log_debug(LOG_TAG,
-                 "Error: NodeID %d was not found in attribute store. "
-                 "Removing from the monitor list.",
+                 "Tx Queue rejected NOP frame to NodeID %d. "
+                 "Applying backing off before trying again.",
                  node_id);
-    stop_monitoring_failing_node(node_id);
-    return SL_STATUS_FAIL;
-  }
-  try {
-    attribute failing_node_interval_node
-      = node_id_node.child_by_type(ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL);
-    failing_node_interval_node.delete_node();
-
-    node_id_node.emplace_node<clock_time_t>(
-      ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL,
-      interval);
-    failing_node_interval_node
-      = node_id_node.child_by_type(ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL);
-  } catch (const std::invalid_argument &) {
-    return SL_STATUS_FAIL;
-  }
-  return SL_STATUS_OK;
-}
-
-static void adjust_next_ping_for_whole_list()
-{
-  // Adjust the next ping for all nodes by difference between current_timer and last_timer.
-  for (auto it = ping_list.begin(); it != ping_list.end(); ++it) {
-    if (it->next_ping_in < (clock_time() - last_timer)) {
-      it->next_ping_in = 0;
-    } else if (clock_time() > last_timer) {
-      it->next_ping_in -= (clock_time() - last_timer);
-    } else if (clock_time() < last_timer) {
-      it->next_ping_in -= (clock_time() + ~last_timer);
-    }
-  }
-  // set last_timer to current_timer
-  last_timer = clock_time();
-}
-
-static void ping_failing_node(void *user)
-{
-  adjust_next_ping_for_whole_list();
-  // ping the node who was in front of the list
-  if (!ping_list.empty()) {
-    send_nop();
+    attribute_timeout_set_callback(node_id_node,
+                                   NOP_REQUEUE_BACK_OFF_MS,
+                                   &queue_nop_to_failing_node);
   }
 }
 
-void start_monitoring_failing_node(zwave_node_id_t node_id)
+/**
+ * @brief Callback for when the Tx Queue has processed our NOP.
+ *
+ * @param status      Refer to @ref on_zwave_tx_send_data_complete_t
+ * @param tx_info     Refer to @ref on_zwave_tx_send_data_complete_t
+ * @param user        Refer to @ref on_zwave_tx_send_data_complete_t
+ */
+static void
+  on_send_nop_completed([[maybe_unused]] uint8_t status,
+                        [[maybe_unused]] const zwapi_tx_report_t *tx_info,
+                        void *user)
 {
-  zwave_operating_mode_t mode = zwave_get_operating_mode(node_id);
-  if (mode == OPERATING_MODE_NL) {
+  // Tell the component that we can queue new NOPs.
+  nop_queued = false;
+
+  auto node_id_node
+    = static_cast<attribute_store_node_t>(reinterpret_cast<intptr_t>(user));
+
+  zwave_node_id_t node_id = 0;
+  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
+  sl_log_debug(LOG_TAG, "Send NOP Completed for NodeID: %d.", node_id);
+
+  // Increment the Ping interval for the node that we just NOP'ed
+  attribute_store_node_t ping_interval_node
+    = attribute_store_get_node_child_by_type(node_id_node,
+                                             PING_INTERVAL_ATTRIBUTE,
+                                             0);
+  clock_time_t ping_interval = 0;
+  attribute_store_get_reported(ping_interval_node,
+                               &ping_interval,
+                               sizeof(ping_interval));
+  if (ping_interval == 0) {
+    return;
+  }
+
+  if (network_monitor_get_operating_mode(node_id_node) == OPERATING_MODE_AL) {
+    ping_interval *= AL_NODE_PING_TIME_FACTOR;
+  } else {
+    ping_interval *= FL_NODE_PING_TIME_FACTOR;
+  }
+  if (ping_interval > MAX_PING_TIME_INTERVAL) {
+    ping_interval = MAX_PING_TIME_INTERVAL;
+  }
+
+  attribute_store_set_reported(ping_interval_node,
+                               &ping_interval,
+                               sizeof(ping_interval));
+  attribute_timeout_set_callback(node_id_node,
+                                 ping_interval,
+                                 &queue_nop_to_failing_node);
+}
+
+/**
+ * @brief Verifies the network status value and tells if the node is failing.
+ *
+ * @param network_status_node   Network Status node
+ * @return true if the node is failing and should be monitored, false otherwise.
+ * @return false
+ */
+static bool is_node_failing(attribute_store_node_t network_status_node)
+{
+  // Assume the node is just included if we cannot read the network status
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  attribute_store_get_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+
+  switch (network_status) {
+    case NODE_STATE_TOPIC_STATE_OFFLINE:
+    case NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL:
+      return true;
+
+    // All the rest is considered as not failing.
+    default:
+      return false;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Attribute Store callback functions
+////////////////////////////////////////////////////////////////////////////////
+static void on_network_status_update(attribute_store_node_t network_status_node,
+                                     attribute_store_change_t change)
+{
+  if (change == ATTRIBUTE_CREATED) {
+    return;
+  }
+
+  // Get the NodeID node and its ping interval, it any.
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(network_status_node,
+                                                 ATTRIBUTE_NODE_ID);
+  attribute_store_node_t ping_interval_node
+    = attribute_store_get_node_child_by_type(node_id_node,
+                                             PING_INTERVAL_ATTRIBUTE,
+                                             0);
+
+  zwave_node_id_t node_id = 0;
+  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
+
+  // If the node just recovered or is being deleted, stop pinging
+  if ((false == is_node_failing(network_status_node))
+      || (change == ATTRIBUTE_DELETED)) {
+    attribute_timeout_cancel_callback(node_id_node, &queue_nop_to_failing_node);
+    attribute_store_delete_node(ping_interval_node);
     sl_log_debug(LOG_TAG,
-                 "NodeID %d is Non Listening. Skipping regular NOP retries.",
+                 "NodeID %d is not failing. It will not be monitored.",
                  node_id);
     return;
   }
 
-  sl_log_debug(LOG_TAG,
-               "Adding NodeID %d to failing node monitor list",
-               node_id);
+  // We only montoring AL and FL failing nodes:
+  zwave_operating_mode_t operating_mode
+    = network_monitor_get_operating_mode(node_id_node);
+  if ((operating_mode != OPERATING_MODE_AL)
+      && (operating_mode != OPERATING_MODE_FL)) {
+    sl_log_debug(LOG_TAG,
+                 "NodeID node %d is neither AL nor FL operating mode. "
+                 "It will not be monitored.",
+                 node_id);
+    return;
+  }
 
-  for (auto it = ping_list.begin(); it != ping_list.end(); ++it) {
-    // Existing node, remove it here and it will be added again to the list below
-    if (it->node_id == node_id) {
-      ping_list.erase(it);
-      break;
+  // At that point, the node is failing and we want to NOP it regularly.
+  // Make sure the ping interval node is valid
+  if (ping_interval_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    ping_interval_node
+      = attribute_store_add_node(PING_INTERVAL_ATTRIBUTE, node_id_node);
+  }
+
+  clock_time_t ping_interval = 0;
+  attribute_store_get_reported(ping_interval_node,
+                               &ping_interval,
+                               sizeof(ping_interval));
+  if (ping_interval == 0) {
+    if (operating_mode == OPERATING_MODE_AL) {
+      ping_interval = AL_NODE_PING_TIME_INTERVAL;
+    } else {
+      ping_interval = FL_NODE_PING_TIME_INTERVAL;
     }
   }
 
-  //New node, begin from 4 seconds interval for sending NOP
-  failing_node_t n = {};
-  if ((mode == OPERATING_MODE_AL) || (mode == OPERATING_MODE_UNKNOWN)) {
-    n.next_ping_in = ALWAYS_LISTENING_PING_TIME_INTERVAL;
-  } else if (mode == OPERATING_MODE_FL) {
-    n.next_ping_in = FREQUENTLY_LISTENING_PING_TIME_INTERVAL;
-  } else {  // Safety to handle new zwave operating modes
-    n.next_ping_in = ALWAYS_LISTENING_PING_TIME_INTERVAL;
-  }
-
-  n.last_ping_in         = n.next_ping_in;
-  n.node_id              = node_id;
-  n.zwave_operating_mode = mode;
-
-  if (zwave_store_failing_node_ping_interval(node_id, n.next_ping_in)
-      != SL_STATUS_OK) {
-    sl_log_error(LOG_TAG,
-                 "Error writing the failing node interval in Attribute "
-                 "Store for NodeID %d\n",
-                 node_id);
-  } else {
-    sl_log_debug(
-      LOG_TAG,
-      "Saved the failing node interval in Attribute Store for NodeID %d\n",
-      node_id);
-  }
-
-  ping_list.push_front(n);
   sl_log_debug(LOG_TAG,
-               "Failing Node: %d will be pinged after: %lu seconds",
-               n.node_id,
-               n.next_ping_in / CLOCK_SECOND);
-  // sort the list, so that the timer is set for the minimum next_ping_in timeout.
-  ping_list.sort();
-  adjust_next_ping_for_whole_list();
+               "Scheduling NOP command in %lu ms for NodeID: %d.",
+               ping_interval,
+               node_id);
+  attribute_store_set_reported(ping_interval_node,
+                               &ping_interval,
+                               sizeof(ping_interval));
 
-  ctimer_set(&ping_timer,
-             ping_list.begin()->next_ping_in,
-             ping_failing_node,
-             0);
+  attribute_timeout_set_callback(node_id_node,
+                                 ping_interval,
+                                 &queue_nop_to_failing_node);
 }
 
-void print_failing_node_monitor_list()
+////////////////////////////////////////////////////////////////////////////////
+// Shared/Public functions
+////////////////////////////////////////////////////////////////////////////////
+void failing_node_monitor_init()
 {
-  sl_log_debug(LOG_TAG, "Printing the failing node monitor list");
-  for (auto it = ping_list.begin(); it != ping_list.end(); ++it) {
-    sl_log_warning(LOG_TAG,
-                   "Node: %d, next ping in: %lu, last ping at: %lu",
-                   it->node_id,
-                   it->next_ping_in,
-                   it->last_ping_in);
-  }
-}
+  sl_log_info(LOG_TAG, "Initialization of the Failing node monitor");
 
-void failing_node_monitor_list_clear()
-{
-  sl_log_debug(LOG_TAG, "Clearing the failing node monitor list");
-  ctimer_stop(&ping_timer);
-  ping_list.clear();
-}
+  // Reset our private variables.
+  nop_queued = false;
 
-void failing_node_monitor_list_load()
-{
-  sl_log_debug(LOG_TAG, "Loading the failing node monitor list");
-  ping_list.clear();
-  read_all_nodes_failing_node_ping_interval();
-  last_timer = clock_time();
-  if (!ping_list.empty()) {
-    ctimer_set(&ping_timer,
-               ping_list.begin()->next_ping_in,
-               ping_failing_node,
-               0);
-  }
+  // Register Attribute Store callbacks
+  attribute_store_register_callback_by_type_and_state(&on_network_status_update,
+                                                      ATTRIBUTE_NETWORK_STATUS,
+                                                      REPORTED_ATTRIBUTE);
 }

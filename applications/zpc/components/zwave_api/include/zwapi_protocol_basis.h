@@ -80,7 +80,8 @@ typedef enum { NODEID_8BITS = 1, NODEID_16BITS = 2 } zwave_node_id_basetype_t;
 
 /// @name Chip type definitions for 700-series
 ///@{
-#define ZW_GECKO_CHIP_TYPE     7
+#define ZW_GECKO_CHIP_TYPE(x) ((x == 7) || (x == 8))
+#define ZW_GECKO_CHIP_700 7
 #define ZW_GECKO_CHIP_REVISION 0
 ///@}
 
@@ -328,6 +329,37 @@ sl_status_t zwapi_set_rf_region(zwave_rf_region_t rfregion);
  * @zgw_name ZW_RFRegionGet
  */
 zwave_rf_region_t zwapi_get_rf_region(void);
+
+/**
+ * @brief Check if PTI supported
+ *
+ * @returns True if supported, False on NO support
+ */
+bool zwapi_is_pti_supported();
+
+/**
+ * @brief Get the current state of pti.
+ *
+ * @returns true on enabled, false on disabled
+ */
+bool zwapi_is_pti_enabled();
+/**
+ * @brief Enable/disable the PTI on Z-Wave Radio
+ *
+ * zwapi_soft_reset() MUST be called after call to this function.
+ *
+ * zwapi_is_pti_enabled() can be called to verify if the PTI is enabled
+ *
+ * @param state: True to enable, False to disable
+ *
+ * @returns
+ *   SL_STATUS_OK if successfully enabled PTI
+ *   SL_STATUS_FAIL if failure in enabling/disabling PTI
+ *   SL_STATUS_NOT_SUPPORTED if FUNC_ID_ENABLE_RADIO_PTI or FUNC_ID_GET_RADIO_PTI
+ *      not supported
+ *
+ */
+sl_status_t zwapi_set_radio_pti(bool state);
 
 /**
  * @brief Get the maximum payload size allowed for sending frames in Z-Wave

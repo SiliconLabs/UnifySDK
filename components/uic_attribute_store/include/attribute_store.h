@@ -28,7 +28,7 @@
  * used in different contexts.
  * - If ATTRIBUTE_TYPE_MAP is define this macro output a key_value pair where the type is the key
  * - If ATTRIBUTE_NAME_MAP is define this macro output a key_value pair where the name is the key
- * - Otherwise this declaes a anonymous enum value. In this way the attribute can be used both expressions
+ * - Otherwise this declares a anonymous enum value. In this way the attribute can be used both expressions
  *   and in switch statements.
  */
 #ifdef ATTRIBUTE_TYPE_MAP
@@ -133,8 +133,12 @@ typedef void (*attribute_store_node_changed_callback_t)(
 /**
  * @brief Attribute store callback type for "touch" events
  */
-typedef void (*attribute_store_node_touch_callback_t)(
-  attribute_store_node_t);
+typedef void (*attribute_store_node_touch_callback_t)(attribute_store_node_t);
+
+/**
+ * @brief Attribute store callback type for deletion events
+ */
+typedef void (*attribute_store_node_delete_callback_t)(attribute_store_node_t);
 
 /**
  * @brief structure that contains information about the current state
@@ -306,6 +310,15 @@ attribute_store_node_t
 size_t attribute_store_get_node_child_count(attribute_store_node_t node);
 
 /**
+ * @brief Get the number of total children of the given node.
+ *
+ * @param node        The tree handle of the node for which
+ *                    the child handle will be returned
+ * @returns int       Total number of children
+ */
+size_t attribute_store_get_node_total_child_count(attribute_store_node_t node);
+
+/**
  * @brief Get the node handle of a child of a node with a certain type.
  *
  * @param node          The node handle of the node for which
@@ -324,6 +337,13 @@ attribute_store_node_t
   attribute_store_get_node_child_by_type(attribute_store_node_t node,
                                          attribute_store_type_t child_type,
                                          uint32_t child_index);
+
+static inline attribute_store_node_t
+  attribute_store_get_first_child_by_type(attribute_store_node_t node,
+                                          attribute_store_type_t child_type)
+{
+  return attribute_store_get_node_child_by_type(node, child_type, 0);
+}
 
 /**
  * @brief Get the node handle of a child of a node with a certain type and value.
@@ -371,7 +391,6 @@ attribute_store_node_t attribute_store_get_node_child_by_value(
 sl_status_t attribute_store_register_callback(
   attribute_store_node_update_callback_t callback_function);
 
-
 /**
  * @brief Register a callback function that will be called on touch events.
  *
@@ -384,6 +403,16 @@ sl_status_t attribute_store_register_callback(
  */
 sl_status_t attribute_store_register_touch_notification_callback(
   attribute_store_node_touch_callback_t callback_function);
+
+/**
+ * @brief Register a callback function that will be called when an attribute
+ * is deleted
+ *
+ * @param callback_function The function to invoke when a node is deleted
+ * @returns SL_STATUS_OK    If the callback was registered successfully.
+ */
+sl_status_t attribute_store_register_delete_callback(
+  attribute_store_node_delete_callback_t callback_function);
 
 /**
  * @brief Register a callback function to any node with a given type.

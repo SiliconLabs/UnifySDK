@@ -9,7 +9,7 @@ description = "Unified IOT OTA image provider"
 [package.metadata.deb]
 name = "uic-image-provider"
 maintainer = "Silicon Labs"
-depends = "libmosquitto1, libssl1.1, libc6, libgcc1, libuic"
+depends = "libuic"
 maintainer-scripts = "debconf/"
 systemd-units = { enable = true }
 
@@ -17,7 +17,7 @@ systemd-units = { enable = true }
 json = "0.12.*"
 unify_log_sys = { path = "../../components/uic_rust/unify_log_sys" }
 unify_config_sys = { path = "../../components/uic_rust/unify_config_sys" }
-unify_middleware = { path=  "../../components/uic_rust/unify_middleware" }
+unify_mqtt_sys = { path=  "../../components/uic_rust/unify_mqtt_sys" }
 unify_sl_status_sys = { path=  "../../components/uic_rust/unify_sl_status_sys" }
 lazy_static = "1.4.0"
 md5 = "0.7.0"
@@ -28,3 +28,6 @@ ctrlc = { version = "3.0", features = ["termination"] }
 
 [dev-dependencies]
 serial_test = "*"
+
+[build-dependencies]
+unify_build_utils = { path = "../../components/uic_rust/unify_build_utils" }

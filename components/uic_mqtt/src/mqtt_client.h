@@ -31,7 +31,7 @@
 #include <unistd.h>
 #include <inttypes.h>
 
-// UIC components
+// Unify components
 #include "sl_status.h"
 
 #ifndef MQTT_CLIENT_POLL_TIMER_MILLISECONDS

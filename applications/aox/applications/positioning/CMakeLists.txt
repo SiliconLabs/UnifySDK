@@ -13,7 +13,7 @@ target_link_libraries(positioning
   uic_main
   ucl_mqtt_helper
   aoa_parse
-  aoa_utils
+  aoa_util
   cjson
   angle_queue
   positioning_id
@@ -23,12 +23,6 @@ target_link_libraries(positioning
 
 target_compile_definitions(
   positioning PRIVATE CMAKE_PROJECT_VERSION="${CMAKE_PROJECT_VERSION}")
-
-set(description "Universal IOT controller - Positioning Service")
-cpack_add_component(positioning
-                    DISPLAY_NAME "positioning"
-                    DESCRIPTION ${description}
-                    INSTALL_TYPES Full)
 
 install(TARGETS positioning RUNTIME DESTINATION "bin" COMPONENT uic-positioning)
 install(DIRECTORY DESTINATION /var/lib/positioning COMPONENT uic-positioning)
@@ -44,3 +38,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/postinst
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/postinst)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/prerm
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/prerm)
+
+add_component_to_uic(
+  uic-positioning
+  "Universal IOT controller - Positioning Service"
+  "${CMAKE_PROJECT_NAME}-positioning"
+  "libuic"
+  "${CMAKE_BINARY_DIR}/applications/aox/applications/positioning/debconf/postinst;\
+  ${CMAKE_BINARY_DIR}/applications/aox/applications/positioning/debconf/prerm")
+

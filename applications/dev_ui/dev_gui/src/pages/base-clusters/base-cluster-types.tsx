@@ -8,7 +8,8 @@ export type BaseClustersProps = {
   IsConnected: boolean | null,
   ClusterType: ClusterTypes,
   ClusterTypeAttrs: any,
-  ClusterViewOverrides: ClusterViewOverride | null
+  ClusterViewOverrides: ClusterViewOverride | null,
+  ShowTitle: boolean
 }
 
 export type BaseClustersState = {
@@ -28,7 +29,8 @@ export type ClusterViewOverride = {
   BodyAttrValues: any | undefined,
   ViewTable: ViewTableItem[] | undefined,
   NodesTooltip: any | undefined,
-  NavbarItem: NavbarItem | undefined
+  NavbarItem: NavbarItem | undefined,
+  IsExpandable: boolean | undefined
 }
 
 export type ViewTableItem = {

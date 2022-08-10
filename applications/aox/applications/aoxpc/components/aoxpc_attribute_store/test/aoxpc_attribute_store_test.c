@@ -18,7 +18,7 @@
 // Test includes
 #include "unity.h"
 
-// UIC includes
+// Unify includes
 #include "datastore.h"
 #include "attribute_store_fixt.h"
 #include "attribute_store.h"

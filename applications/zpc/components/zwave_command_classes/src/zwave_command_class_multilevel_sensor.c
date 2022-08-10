@@ -18,7 +18,7 @@
 // Includes from other components
 #include "sl_log.h"
 #include "sl_status.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller_utils.h"
 #include "ZW_classcmd.h"
 #include "zwave_command_handler.h"
@@ -138,9 +138,8 @@ sl_status_t zwave_command_class_multilevel_sensor_supported_get(
   attribute_store_node_t endpoint_node
     = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
   attribute_store_node_t version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
 
   uint8_t supporting_node_version = 0;
   attribute_store_read_value(version_node,
@@ -193,9 +192,8 @@ sl_status_t zwave_command_class_multilevel_sensor_supported_scale_get(
   attribute_store_node_t endpoint_node
     = attribute_store_get_node_parent(type_node);
   attribute_store_node_t version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
 
   uint8_t supporting_node_version = 0;
   attribute_store_get_reported(version_node,
@@ -254,9 +252,8 @@ sl_status_t zwave_command_class_multilevel_sensor_get(
   attribute_store_node_t endpoint_node
     = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
   attribute_store_node_t version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
 
   uint8_t supporting_node_version = 0;
   attribute_store_get_reported(version_node,
@@ -289,11 +286,10 @@ sl_status_t zwave_command_class_multilevel_sensor_get(
       return SL_STATUS_FAIL;
     }
     attribute_store_node_t supported_scales_node
-      = attribute_store_get_node_child_by_type(type_node,
-                                               ATTRIBUTE(SUPPORTED_SCALES),
-                                               0);
+      = attribute_store_get_first_child_by_type(type_node,
+                                                ATTRIBUTE(SUPPORTED_SCALES));
 
-    uint32_t supported_scales = 0;
+    uint8_t supported_scales = 0;
     if (SL_STATUS_OK
         != attribute_store_get_reported(supported_scales_node,
                                         &supported_scales,
@@ -339,9 +335,8 @@ static sl_status_t zwave_command_class_multilevel_sensor_handle_report(
   // We need the version of the supporting node here
   uint8_t multilevel_sensor_version = 0;
   attribute_store_node_t version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
   attribute_store_get_reported(version_node,
                                &multilevel_sensor_version,
                                sizeof(multilevel_sensor_version));
@@ -446,9 +441,9 @@ static sl_status_t
     = zwave_command_class_get_endpoint_node(connection_info);
 
   attribute_store_node_t supported_bitmask_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(SUPPORTED_SENSOR_TYPES),
-                                             0);
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      ATTRIBUTE(SUPPORTED_SENSOR_TYPES));
 
   attribute_store_set_reported(supported_bitmask_node,
                                &frame_data[SUPPORTED_REPORT_BITMASK_INDEX],
@@ -504,14 +499,13 @@ static sl_status_t
   }
 
   attribute_store_node_t supported_scale_node
-    = attribute_store_get_node_child_by_type(type_node,
-                                             ATTRIBUTE(SUPPORTED_SCALES),
-                                             0);
+    = attribute_store_get_first_child_by_type(type_node,
+                                              ATTRIBUTE(SUPPORTED_SCALES));
 
   if (supported_scale_node == ATTRIBUTE_STORE_INVALID_NODE) {
     return SL_STATUS_FAIL;
   }
-  int32_t scale = frame_data[SUPPORTED_SCALE_REPORT_BITMASK_INDEX];
+  uint8_t scale = frame_data[SUPPORTED_SCALE_REPORT_BITMASK_INDEX];
   attribute_store_set_reported(supported_scale_node, &scale, sizeof(scale));
 
   uint8_t version

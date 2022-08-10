@@ -20,17 +20,17 @@ target_link_libraries(
   network_monitor
   uic_attribute_store
   uic_attribute_utils
+  uic_dotdot_attribute_store
   zpc_attribute_resolver
   zpc_attribute_store
-  unify_attribute_poll_target
+  unify_attribute_poll
   dotdot_mapper
   dotdot_mqtt_topics_handler
   uic_main
   uic_attribute_mapper
   ucl_mqtt
   zcl_cluster_servers
-  rust_command_classes_target
-  zwave_volatile_attr_poll_manager_target
+  zpc_rust
   zpc_ncp_update)
 
 target_include_directories(
@@ -40,46 +40,36 @@ target_include_directories(
 target_compile_definitions(
   zpc PRIVATE CMAKE_PROJECT_VERSION="${CMAKE_PROJECT_VERSION}")
 
-set(description "Universal IOT controller - Z-wave protocol Controller")
-cpack_add_component(
-  zpc
-  DISPLAY_NAME "zpc"
-  DESCRIPTION ${description}
-  INSTALL_TYPES Full)
-
 install(TARGETS zpc RUNTIME DESTINATION "bin" COMPONENT uic-zpc)
+
 install(
   FILES scripts/bash-completion/zpc
   DESTINATION share/bash-completion/completions
   COMPONENT uic-zpc)
+
 install(
   DIRECTORY components/dotdot_mapper/rules
   COMPONENT uic-zpc
   DESTINATION share/uic
   FILES_MATCHING
   PATTERN *.uam)
-install(
-  DIRECTORY
-  DESTINATION /var/lib/zpc
-  COMPONENT uic-zpc)
 
-if(NOT APPLE)
+if( "${CMAKE_INSTALL_PREFIX}" STREQUAL "/usr")
+    install(
+    DIRECTORY
+    DESTINATION /var/lib/zpc
+    COMPONENT uic-zpc)
+
   install(
     FILES scripts/systemd/uic-zpc.service
     DESTINATION /lib/systemd/system/
     COMPONENT uic-zpc)
+
+  install(
+    FILES scripts/udev/99-leds.rules
+    DESTINATION /etc/udev/rules.d/
+    COMPONENT uic-zpc)
 endif()
-
-install(
-  FILES scripts/udev/99-leds.rules
-  DESTINATION /etc/udev/rules.d/
-  COMPONENT uic-zpc)
-
-install(
-  FILES
-    components/zwave_rust/zwave_volatile_attr_poll_manager/zwave_poll_config.yaml
-  DESTINATION /usr/share/uic
-  COMPONENT uic-zpc)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/config.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/config)
@@ -93,3 +83,15 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/conffiles.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/conffiles)
 
 include(scripts/scripts.cmake)
+
+add_component_to_uic(
+  uic-zpc # Package Name
+  "Universal IOT controller - Z-Wave protocol Controller"
+  "${CMAKE_PROJECT_NAME}-zpc" # Package Debian filename
+  "libuic" # Package Depends on
+  "${CMAKE_BINARY_DIR}/applications/zpc/debconf/config;\
+    ${CMAKE_BINARY_DIR}/applications/zpc/debconf/templates;\
+    ${CMAKE_BINARY_DIR}/applications/zpc/debconf/conffiles;\
+    ${CMAKE_BINARY_DIR}/applications/zpc/debconf/postinst;\
+    ${CMAKE_BINARY_DIR}/applications/zpc/debconf/prerm")
+

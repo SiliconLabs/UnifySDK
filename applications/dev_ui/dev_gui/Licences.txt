@@ -55,9 +55,6 @@ MIT License https://github.com/GraphCMS/react-scripts/blob/master/LICENSE
 url-loader
 MIT License https://github.com/webpack-contrib/url-loader/blob/HEAD/LICENSE
 
-style-loader
-MIT License https://github.com/webpack-contrib/style-loader/blob/HEAD/LICENSE
-
 concurrently
 MIT License https://github.com/kimmobrunfeldt/concurrently/blob/master/LICENSE
 
@@ -66,3 +63,15 @@ MIT License https://github.com/fkhadra/react-toastify/blob/master/LICENSE
 
 react-qr-reader
 MIT License https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/LICENSE
+
+react-pro-sidebar
+MIT License https://github.com/azouaoui-med/react-pro-sidebar/blob/master/LICENSE
+
+sha1
+BSD 3-Clause License https://github.com/pvorb/node-sha1/blob/master/LICENSE
+
+process
+MIT License https://github.com/defunctzombie/node-process/blob/master/LICENSE
+
+recharts
+MIT License https://github.com/recharts/recharts/blob/master/LICENSE

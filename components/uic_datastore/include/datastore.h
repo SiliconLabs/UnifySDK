@@ -57,6 +57,30 @@ typedef const char *datastore_key_t;
 sl_status_t datastore_init(const char *database_path);
 
 /**
+ * @brief start a datastore transaction
+ * 
+ * With transactions, datastore calls will be cached so that they can be commited
+ * in one go. This increases the throughput of data.
+ * Only one transaction at the time can be open, otherwise `SL_STATUS_ABORT` is returned.
+ * 
+ * 
+ *  * @return sl_status_t
+ *                    SL_STATUS_OK for success
+ *                    SL_STATUS_IN_PROGRESS if there is an ongoing transaction
+ *                    SL_STATUS_FAIL if an error occurred
+ **/
+sl_status_t datastore_start_transaction();
+
+/**
+ * @brief commit an open transaction
+ * 
+ *  * @return sl_status_t
+ *                   SL_STATUS_OK for success
+ *                   SL_STATUS_FAIL if an error occurred
+**/
+sl_status_t datastore_commit_transaction();
+
+/**
  * @brief Tear down the Datastore component.
  *
  * Shall be called before exiting the application to close database file
@@ -118,9 +142,8 @@ sl_status_t datastore_store_arr(datastore_key_t key,
  *            SL_STATUS_WOULD_OVERFLOW if fetched data is larger than size
  *            SL_STATUS_FAIL if other failure,
  */
-sl_status_t datastore_fetch_arr(datastore_key_t key,
-                                uint8_t *value,
-                                unsigned int *size);
+sl_status_t
+  datastore_fetch_arr(datastore_key_t key, uint8_t *value, unsigned int *size);
 
 /**
  * @brief Check if the datastore contains an array value for given key.

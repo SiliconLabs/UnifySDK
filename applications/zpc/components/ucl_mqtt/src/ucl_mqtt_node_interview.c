@@ -42,7 +42,7 @@ sl_status_t ucl_mqtt_initiate_node_interview(const unid_t node_unid)
 
   // Start off by deleting all the endpoints under the node:
   attribute_store_node_t current_endpoint
-    = attribute_store_get_node_child_by_type(node, ATTRIBUTE_ENDPOINT_ID, 0);
+    = attribute_store_get_first_child_by_type(node, ATTRIBUTE_ENDPOINT_ID);
   while (current_endpoint != ATTRIBUTE_STORE_INVALID_NODE) {
     // No harm in calling delete on an invalid node.
     if (SL_STATUS_OK != attribute_store_delete_node(current_endpoint)) {
@@ -50,7 +50,7 @@ sl_status_t ucl_mqtt_initiate_node_interview(const unid_t node_unid)
     }
     // Keep the child index to 0 here, since we delete them
     current_endpoint
-      = attribute_store_get_node_child_by_type(node, ATTRIBUTE_ENDPOINT_ID, 0);
+      = attribute_store_get_first_child_by_type(node, ATTRIBUTE_ENDPOINT_ID);
   }
 
   // Now that we wiped the endpoints, create endpoint 0 again with an empty NIF.

@@ -10,7 +10,7 @@ configure_file(${CMAKE_CURRENT_LIST_DIR}/zpc/node_identify_rpi4_led.sh
 
 install(
         FILES ${CMAKE_CURRENT_BINARY_DIR}/node_identify_rpi4_led.sh
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/zpc
+        DESTINATION share/uic
         PERMISSIONS
           OWNER_READ
           OWNER_WRITE

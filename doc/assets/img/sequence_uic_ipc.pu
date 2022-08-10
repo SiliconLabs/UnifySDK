@@ -1,7 +1,7 @@
 @startuml
-    title UIC Main loop
+    title Unify Main loop
     participant process1
-    entity "UIC Main" as main
+    entity "Unify Main" as main
     participant etimer
     participant process2
 

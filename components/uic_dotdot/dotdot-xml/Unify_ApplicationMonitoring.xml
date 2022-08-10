@@ -1,0 +1,77 @@
+﻿<?xml version="1.0"?>
+<!--
+ApplicationMonitoring
+This is a manufacturer specific cluster.
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD05" revision="1" name="ApplicationMonitoring">
+  <classification role="utility" picsCode="UAM" />
+
+  <type:type short="LoggingLevelEnum" name="LoggingLevelEnum" id="01" inheritsFrom="enum8">
+    <restriction>
+      <type:enumeration value="00" name="Debug" />
+      <type:enumeration value="01" name="Info" />
+      <type:enumeration value="02" name="Warning" />
+      <type:enumeration value="03" name="Error" />
+      <type:enumeration value="04" name="Critical" />
+    </restriction>
+  </type:type>
+
+  <server>
+    <attributes>
+      <!-- Required attributes to be published at start up -->
+      <attribute id="0000" name="ApplicationName" type="string" required="true"/>
+      <attribute id="0001" name="ApplicationVersion" type="string" required="true"/>
+      <attribute id="0002" name="ApplicationConnected" type="bool" required="true"/>
+
+      <!-- List of expected topics to be used by the application. -->
+      <attribute id="0005" name="ApplicationMQTTTopics" array="true" type="string"/>
+
+      <!-- Additional monitoring attributes -->
+      <attribute id="0010" name="UptimeMinutes" type="uint64"/>
+      <attribute id="0011" name="ProcessId" type="uint64"/>
+      <attribute id="0012" name="Hostname" type="string"/> <!-- Allow to identify on which machine the application runs -->
+      <attribute id="0013" name="FQDN" type="string"/>  <!-- Allow to identify on which machine the application runs -->
+
+      <!-- Logging via MQTT -->
+      <attribute id="0021" name="MQTTLoggingEnabled" type="bool" writable="true"/>
+      <attribute id="0022" name="MQTTLoggingLevel" type="LoggingLevelEnum" writable="true"/>
+
+      <!-- MQTT statistics -->
+      <attribute id="0030" name="MQTTStatisticsReportingIntervalSeconds" type="uint32" default="0" writable="true"/>
+      <attribute id="0031" name="MQTTMessagesSent" type="uint64"/>
+      <attribute id="0032" name="MQTTMessagesReceived" type="uint64" />
+      <attribute id="0033" name="MQTTSubscriptionCount" type="uint64" />
+      <attribute id="0034" name="MQTTAverageDeliveryTimeSeconds" type="double" />
+      <attribute id="0035" name="MQTTMinDeliveryTimeSeconds" type="double" />
+      <attribute id="0036" name="MQTTMaxDeliveryTimeSeconds" type="double" />
+
+      <!-- Application System statistics -->
+      <attribute id="0040" name="ApplicationStatisticsReportingIntervalSeconds" type="uint32" default="0" writable="true"/>
+      <attribute id="0041" name="ApplicationCPUUsagePercent" type="double"/>
+      <attribute id="0042" name="ApplicationCPUAverageUsagePercent" type="double"/>
+      <attribute id="0043" name="ApplicationCPUMinUsagePercent" type="double"/>
+      <attribute id="0044" name="ApplicationCPUMaxUsagePercent" type="double"/>
+      <attribute id="0045" name="ApplicationRAMUsageMB" type="double"/>
+
+    </attributes>
+
+    <commands>
+      <!-- Sends a log message via MQTT -->
+      <command id="01" name="LogEntry">
+        <fields>
+          <field name="Timestamp" type="string" />
+          <field name="LogLevel" type="LoggingLevelEnum" />
+          <field name="LogTag" type="string" />
+          <field name="LogMessage" type="string" />
+        </fields>
+      </command>
+    </commands>
+
+  </server>
+</zcl:cluster>

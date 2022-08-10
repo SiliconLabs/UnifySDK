@@ -32,9 +32,8 @@ extern "C" {
 
 /**
  * @brief Initialize the Configuration Parameter Cluster Commands handler.
- * 
- * @returns true for success
- * @returns false on failure  
+ *
+ * @returns SL_STATUS_OK on success, any other code on failure
  */
 sl_status_t configuration_parameter_cluster_server_init(void);
 

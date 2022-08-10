@@ -907,6 +907,63 @@ void test_attribute_resolver_common_abort_and_restart_set_rule()
   TEST_ASSERT_EQUAL(0, test_get_function_call_count);
 }
 
+void test_attribute_resolver_common_abort_and_restart_get_rule()
+{
+  // Register a rule for type 10
+  attribute_resolver_register_rule(attribute_store_get_node_type(node_10),
+                                   NULL,
+                                   &test_get_resolution_function);
+
+  // Regular get resolution.
+  attribute_store_undefine_reported(node_10);
+
+  // Expect a Set resolution
+  send_function_return_code    = SL_STATUS_OK;
+  get_function_return_code     = SL_STATUS_OK;
+  expected_node_for_resolution = node_10;
+  contiki_test_helper_run(0);
+
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  // Simulate a send data complete
+  on_resolver_send_data_complete(RESOLVER_SEND_STATUS_OK,
+                                 0,
+                                 node_10,
+                                 RESOLVER_GET_RULE);
+
+  // nothing should happen here, we are waiting for the set resolution.
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(0, test_abort_function_call_count);
+
+  // Now it will try to resolve again
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_resolver_restart_get_resolution(node_10));
+
+  TEST_ASSERT_EQUAL(1, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(1, test_get_function_call_count);
+
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(2, test_send_function_call_count);
+  TEST_ASSERT_EQUAL(0, test_set_function_call_count);
+  TEST_ASSERT_EQUAL(2, test_get_function_call_count);
+
+  on_resolver_send_data_complete(RESOLVER_SEND_STATUS_OK,
+                                 0,
+                                 node_10,
+                                 RESOLVER_GET_RULE);
+  uint8_t value = 1;
+  attribute_store_set_reported(node_10, &value, sizeof(value));
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_FOUND,
+                    attribute_resolver_restart_get_resolution(node_10));
+}
+
 void test_attribute_resolver_common_set_node_groups_with_restart()
 {
   // Node 7 and 9 are "siblings", test that they get grouped in a
@@ -1165,7 +1222,8 @@ void test_attribute_resolver_send_data_cannot_send()
   TEST_ASSERT_EQUAL(1, test_set_function_call_count);
   TEST_ASSERT_EQUAL(0, test_get_function_call_count);
 
-  // Now the resolution stalls. TBD, should we try again spontaneously ?
+  // Now the resolution stalls.
+  // Should we try again spontaneously when a frame could not be prepared ?
 
   // Values of the attribute should be unchanged.
   attribute_store_get_desired(node_10, &value, sizeof(value));
@@ -1207,7 +1265,8 @@ void test_attribute_resolver_set_rule_status_fails_to_prepare_frame()
   TEST_ASSERT_EQUAL(1, test_set_function_call_count);
   TEST_ASSERT_EQUAL(0, test_get_function_call_count);
 
-  // Now the resolution stalls. TBD, should we try again spontaneously ?
+  // Now the resolution stalls.
+  // Should we try again spontaneously when a frame could not be prepared ?
 
   // Values of the attribute should be unchanged.
   attribute_store_get_desired(node_10, &value, sizeof(value));

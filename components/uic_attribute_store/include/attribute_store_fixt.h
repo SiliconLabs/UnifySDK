@@ -35,7 +35,7 @@ extern "C" {
  *
  * This component depends on the following components:
  * - @ref sl_log
- * - @ref datastore
+ * - @ref unify_datastore
  *
  * @returns SL_STATUS_OK on success
  * @returns SL_STATUS_FAIL on failure

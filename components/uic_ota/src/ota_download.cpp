@@ -21,7 +21,7 @@
 #include "ota_time.hpp"
 #include "ota_cache.hpp"
 
-// UIC components
+// Unify components
 #include "sl_log.h"
 #include "sys/ctimer.h"
 #include "uic_mqtt.h"

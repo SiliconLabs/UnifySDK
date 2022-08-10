@@ -31,7 +31,7 @@
 #include <map>
 #include <vector>
 
-// UIC
+// Unify
 #include "sys/ctimer.h"
 
 /**

@@ -1,4 +1,3 @@
-import { Tooltip } from '@material-ui/core';
 import React from 'react';
 import { Button, Col, OverlayTrigger, Popover, Row, Spinner, Table } from 'react-bootstrap';
 import * as AiIcons from 'react-icons/ai';
@@ -7,11 +6,12 @@ import * as MdIcons from 'react-icons/md'
 import { BaseClustersProps, BaseClustersState, ColorPickerProps } from './base-cluster-types';
 import CommandDlg from '../../components/command-dlg/command-dlg';
 import ClusterAttr from '../../components/cluster-attributes/cluster-attributes';
-import ScenesDlg from '../../components/scenes-dlg/scenes-dlg';
 import EditGroupDlg from '../../components/edit-group-dlg/edit-group-dlg';
 import { Group } from '../groups/groups-types';
 import EditableAttribute from '../../components/editable-attribute/editable-attribute';
 import { ChromePicker } from 'react-color';
+import { Tooltip } from '@mui/material';
+import { ClusterTypes } from '../../cluster-types/cluster-types';
 
 
 export class BaseClusters extends React.Component<BaseClustersProps, BaseClustersState> {
@@ -30,13 +30,22 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
     this.changeEditGroupDlg = React.createRef();
     this.changeCommandDlg = React.createRef();
     this.changeClusterAttr = React.createRef();
-    this.changeScenesDlg = React.createRef();
   }
 
   changeEditGroupDlg: any;
   changeCommandDlg: any;
   changeClusterAttr: any;
-  changeScenesDlg: any;
+
+  hslToHex = (h: number, s: number, l: number) => {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = (n: number) => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color).toString(16).padStart(2, '0');
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+  }
 
   getClusterList(nodeList: any[]) {
     if (!nodeList || !nodeList.length)
@@ -52,6 +61,8 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
             cluster.Ep = item;
             cluster.NameAndLocation = i.ep[item].Clusters.NameAndLocation;
             clusters.push(cluster);
+            if (this.props.ClusterType === ClusterTypes.ColorControl)
+              cluster.CurrentLevel = i.ep[item].Clusters[ClusterTypes.Level]?.Attributes?.CurrentLevel?.Reported
           }
         })
       }
@@ -107,7 +118,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
       UpdatingNodes: [],
       Clusters: []
     } as Group;
-    this.changeEditGroupDlg.current.updateState(newGroup, this.getNodesByClusterType(this.props.NodeList), true);
+    this.changeEditGroupDlg.current.updateState(newGroup, this.getNodesByClusterType(this.props.NodeList), true, true);
   }
 
   getUpdatingProperties(item: any) {
@@ -137,30 +148,12 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
 
   handleColorChangeComplete = (color: any) => {
     if (!this.state.ColorPicker?.ProcessedItem) return;
-    if (color.hsl.h !== this.state.ColorPicker.ColorPickerValue.hsl?.h || color.hsl.s !== this.state.ColorPicker.ColorPickerValue.hsl?.s) {
-      this.props.SocketServer.send(JSON.stringify(
-        {
-          type: "run-cluster-command",
-          data: {
-            Unid: this.state.ColorPicker.ProcessedItem.Unid,
-            ClusterType: this.props.ClusterType,
-            Cmd: "MoveToHueAndSaturation",
-            Payload: {
-              Hue: Math.round(color.hsl.h),
-              Saturation: Math.round(color.hsl.s * 100),
-              TransitionTime: 0,
-              OptionsMask: { ExecuteIfOff: false },
-              OptionsOverride: { ExecuteIfOff: false }
-            }
-          }
-        }));
-    }
     if (color.hsl.l !== this.state.ColorPicker.ColorPickerValue.hsl?.l) {
       this.props.SocketServer.send(JSON.stringify(
         {
           type: "run-cluster-command",
           data: {
-            Unid: this.state.ColorPicker.ProcessedItem.Unid,
+            Unid: `${this.state.ColorPicker.ProcessedItem.Unid}/${this.state.ColorPicker.ProcessedItem.Ep}`,
             ClusterType: "Level",
             Cmd: "MoveToLevel",
             Payload: {
@@ -178,19 +171,41 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
           }
         }));
     }
+    if (color.hsl.h !== this.state.ColorPicker.ColorPickerValue.hsl?.h || color.hsl.s !== this.state.ColorPicker.ColorPickerValue.hsl?.s) {
+      this.props.SocketServer.send(JSON.stringify(
+        {
+          type: "run-cluster-command",
+          data: {
+            Unid: `${this.state.ColorPicker.ProcessedItem.Unid}/${this.state.ColorPicker.ProcessedItem.Ep}`,
+            ClusterType: this.props.ClusterType,
+            Cmd: "MoveToHueAndSaturation",
+            Payload: {
+              Hue: Math.round(color.hsl.h / 360 * 254),
+              Saturation: Math.round(color.hsl.s * 254),
+              TransitionTime: 0,
+              OptionsMask: { ExecuteIfOff: false },
+              OptionsOverride: { ExecuteIfOff: false }
+            }
+          }
+        }));
+    }
     let picker = this.state.ColorPicker;
     picker.ColorPickerValue = color;
     this.setState({ ColorPicker: picker });
   };
 
   getColorPicker = (item: any) => {
+    let hue = item.Attributes?.CurrentHue?.Reported === undefined ? 211 : item.Attributes.CurrentHue.Reported / 254 * 360;
+    let saturation = item.Attributes?.CurrentSaturation?.Reported === undefined ? 100 : item.Attributes.CurrentSaturation.Reported / 254 * 100;
+    let level = item.CurrentLevel ?? 50;
     return <Tooltip title="Set Hue, Saturation and Level">
       <span className="pointer">
-        <MdIcons.MdInvertColors color="#007bff" onClick={(event: any) => {
+        <MdIcons.MdInvertColors color={`hsl(${hue}deg ${saturation}% ${level > 90 ? 90 : level}%)`} onClick={(event: any) => {
           let picker = this.state.ColorPicker;
           picker.ShowColorPicker = !this.state.ColorPicker.ShowColorPicker;
           picker.ColorPickerPosition = { top: event.clientY, left: event.clientX };
           picker.ProcessedItem = item;
+          picker.ColorPickerValue.hex = this.hslToHex(hue, saturation, level);
           this.setState({ ColorPicker: picker })
         }} />
       </span>
@@ -199,22 +214,29 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
 
   render() {
     let attrNames: string[] = this.props.ClusterViewOverrides?.ViewTable?.map(i => i.Name) || [];
-    if (!attrNames.length && this.state.ClusterList && this.state.ClusterList.length) {
-      this.state.ClusterList.forEach(i => {
+    if (!attrNames.length && this.props.ClusterTypeAttrs.server.attributes && this.state.ClusterList && this.state.ClusterList.length) {
+      let attrs = new Set<string>();
+      this.state.ClusterList?.forEach((i: any) => {
         if (i.Attributes) {
-          Object.keys(i.Attributes).slice(0, 5).forEach(attr => {
-            if (attrNames.indexOf(attr) === -1)
-              attrNames.push(attr);
+          Object.keys(i.Attributes).forEach(attr => {
+            attrs.add(attr);
           });
           return;
         }
       });
+      for (let index = 0; index < this.props.ClusterTypeAttrs.server.attributes.length; index++) {
+        if (attrs.has(this.props.ClusterTypeAttrs.server.attributes[index].name)) {
+          attrNames.push(this.props.ClusterTypeAttrs.server.attributes[index].name)
+          if (attrNames.length >= 5)
+            break;
+        }
+
+      }
     }
-    let sceneAttrs = this.props.ClusterTypeAttrs.server.attributes.filter((i: any) => i.sceneRequired === true);
 
     return (
       <>
-        <h3>{this.props.ClusterViewOverrides?.NavbarItem?.title || this.props.ClusterType}</h3>
+        <h3 hidden={!this.props.ShowTitle}>{this.props.ClusterViewOverrides?.NavbarItem?.title || this.props.ClusterType}</h3>
         <Row hidden={!this.props.IsConnected} >
           <Col xs={12}>
             <Button variant="outline-primary" className="float-left margin-b-10" onClick={() => this.createGroup()}>Create Group</Button>
@@ -226,7 +248,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table striped hover>
+          : <Table striped hover className='vertical-middle'>
             <thead>
               <tr>
                 <th>Name</th>
@@ -277,12 +299,6 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
                           <AiIcons.AiOutlineTool onClick={() => this.showClusterAttr(item)} />
                         </span>
                       </Tooltip>
-                      {/* <Tooltip title="Set Up Scenes" hidden={!sceneAttrs || !sceneAttrs.length}>
-                        <span className="margin-h-5 icon">
-                          <RiIcons.RiFileList3Line onClick={() =>
-                            this.changeScenesDlg.current.updateState(item.unid, item.Scenes)} />
-                        </span>
-                      </Tooltip> */}
                     </td>
                   </tr>
                 </Tooltip>
@@ -311,13 +327,6 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
           SocketServer={this.props.SocketServer}
           ClusterType={this.props.ClusterType}
           ClusterAttr={this.props.ClusterTypeAttrs.server.attributes} />
-
-        <div hidden={!sceneAttrs || !sceneAttrs.length}>
-          <ScenesDlg ref={this.changeScenesDlg}
-            SocketServer={this.props.SocketServer}
-            ClusterType={this.props.ClusterType}
-            SceneAttrs={sceneAttrs} />
-        </div>
       </>
     )
   };

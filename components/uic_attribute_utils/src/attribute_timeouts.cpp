@@ -12,7 +12,7 @@
  *****************************************************************************/
 #include "attribute_timeouts.h"
 
-// Includes from other UIC components
+// Includes from other Unify components
 #include "attribute_store_helper.h"
 #include "sl_log.h"
 
@@ -28,7 +28,7 @@ constexpr char LOG_TAG[] = "attribute_timeouts";
 // Private functions prototypes
 static void attribute_timeout_restart_watch_timer();
 static void attribute_timeout_invoke_timeout_functions(void *user);
-static void on_attribute_node_deleted(attribute_changed_event *event);
+static void on_attribute_node_deleted(attribute_store_node_t deleted_node);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Local definitions
@@ -122,14 +122,11 @@ static void attribute_timeout_invoke_timeout_functions(void *user)
   attribute_timeout_restart_watch_timer();
 }
 
-static void on_attribute_node_deleted(attribute_changed_event *event)
+static void on_attribute_node_deleted(attribute_store_node_t deleted_node)
 {
-  if (event->change != ATTRIBUTE_DELETED) {
-    return;
-  }
   // Cancel all the callbacks for that node, if we had any.
-  if (attribute_timeouts.count(event->updated_node)) {
-    attribute_timeouts.erase(event->updated_node);
+  if (attribute_timeouts.count(deleted_node)) {
+    attribute_timeouts.erase(deleted_node);
     // Check if that affects our timer:
     attribute_timeout_restart_watch_timer();
   }
@@ -140,9 +137,8 @@ static void on_attribute_node_deleted(attribute_changed_event *event)
 ///////////////////////////////////////////////////////////////////////////////
 sl_status_t attribute_timeouts_init()
 {
-  attribute_store_register_callback(&on_attribute_node_deleted);
+  attribute_store_register_delete_callback(&on_attribute_node_deleted);
   attribute_timeouts.clear();
-
   return SL_STATUS_OK;
 }
 

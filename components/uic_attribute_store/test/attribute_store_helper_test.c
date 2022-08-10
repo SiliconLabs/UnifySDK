@@ -14,15 +14,19 @@
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "attribute_store_fixt.h"
+#include "attribute_store_type_registration.h"
 
 // Includes from other components
 #include "sl_status.h"
 #include "sl_log.h"
 #include "config.h"
 #include "datastore_fixt.h"
-#include <arpa/inet.h>
+
 // Test includes
 #include "unity.h"
+
+// Generic includes
+#include <float.h>
 
 #define ATTRIBUTE_HOME_ID                            101
 #define ATTRIBUTE_NODE_ID                            102
@@ -34,18 +38,27 @@ typedef uint32_t zwave_home_id_t;
 void suiteSetUp()
 {
   datastore_fixt_setup(":memory:");
-  attribute_store_init();
-
-  // Ensure we start from scratch before creating our test network.
-  attribute_store_delete_node(attribute_store_get_root());
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
-  attribute_store_teardown();
   datastore_fixt_teardown();
   return num_failures;
+}
+
+// Before every test, ensure to clean up the datastore file, else it will grow for ever
+void setUp()
+{
+  // This trigger a deletion of everything before each test
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, attribute_store_init());
+  attribute_store_delete_node(attribute_store_get_root());
+}
+
+// After every test, clear up the registered attribute types
+void tearDown()
+{
+  attribute_store_teardown();
 }
 
 void test_attribute_store_read_value_helper()
@@ -895,6 +908,103 @@ void test_attribute_store_delete_all_children()
   TEST_ASSERT_EQUAL(0, attribute_store_get_node_child_count(test_node_1));
 }
 
+void test_attribute_store_walk_tree()
+{
+  // Create a few nodes
+  uint8_t value                    = 0;
+  attribute_store_node_t root_node = attribute_store_get_root();
+  attribute_store_set_reported(root_node, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(root_node, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_1
+    = attribute_store_add_node(0xAAAA, root_node);
+  attribute_store_set_reported(test_node_1, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_1, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_2
+    = attribute_store_add_node(0xAAAA, root_node);
+  attribute_store_set_reported(test_node_2, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_2, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_3
+    = attribute_store_add_node(0xAAAA, test_node_1);
+  attribute_store_set_reported(test_node_3, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_3, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_4
+    = attribute_store_add_node(0xAAAA, test_node_3);
+  attribute_store_set_reported(test_node_4, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_4, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_5
+    = attribute_store_add_node(0xAAAA, test_node_4);
+  attribute_store_set_reported(test_node_5, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_5, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_6
+    = attribute_store_add_node(0xAAAA, test_node_4);
+  attribute_store_set_reported(test_node_6, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_6, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_7
+    = attribute_store_add_node(0xAAAA, test_node_4);
+  attribute_store_set_reported(test_node_7, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_7, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_8
+    = attribute_store_add_node(0xAAAA, test_node_3);
+  attribute_store_set_reported(test_node_8, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_8, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_9
+    = attribute_store_add_node(0xAAAA, test_node_3);
+  attribute_store_set_reported(test_node_9, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_9, REPORTED_ATTRIBUTE));
+
+  attribute_store_node_t test_node_10
+    = attribute_store_add_node(0xAAAA, test_node_3);
+  attribute_store_set_reported(test_node_10, &value, sizeof(value));
+  TEST_ASSERT_TRUE(
+    attribute_store_is_value_defined(test_node_10, REPORTED_ATTRIBUTE));
+
+  // Invoke the magic function, it will undefine all reported in our tree:
+  attribute_store_walk_tree(root_node, &attribute_store_undefine_reported);
+
+  // Everything should be undefined:
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(root_node, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_1, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_2, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_3, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_4, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_5, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_6, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_7, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_8, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_9, REPORTED_ATTRIBUTE));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(test_node_10, REPORTED_ATTRIBUTE));
+}
+
 void test_attribute_store_get_reported_test()
 {
   attribute_store_node_t root_node = attribute_store_get_root();
@@ -944,4 +1054,312 @@ void test_attribute_store_get_reported_test()
                                               &received_value,
                                               sizeof(received_value)));
   TEST_ASSERT_EQUAL(value, received_value);
+}
+
+void test_attribute_store_get_reported_number_test()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1233, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const int32_t value1 = -12394;
+
+  // Write the value
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_node_attribute_value(test_node,
+                                             REPORTED_ATTRIBUTE,
+                                             (uint8_t *)&value1,
+                                             (uint8_t)sizeof(value1)));
+
+  // Read back with the get reported:
+  TEST_ASSERT_EQUAL(value1, attribute_store_get_reported_number(test_node));
+
+  // Try again after registering the attribute type:
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_type(1233, "Test name", 0, I64_STORAGE_TYPE));
+  const int64_t value2 = -12394;
+  // Write the value
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_node_attribute_value(test_node,
+                                             REPORTED_ATTRIBUTE,
+                                             (uint8_t *)&value2,
+                                             (uint8_t)sizeof(value2)));
+
+  TEST_ASSERT_EQUAL(value2, attribute_store_get_reported_number(test_node));
+}
+
+void test_attribute_store_get_float_number_test()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node = attribute_store_add_node(1234, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const float value1 = -12394;
+
+  // Read an undefined value:
+  TEST_ASSERT_EQUAL_FLOAT(FLT_MIN,
+                          attribute_store_get_reported_number(test_node));
+
+  // Now make it official that it is a Float:
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_register_type(1234,
+                                                  "Test name 1234",
+                                                  0,
+                                                  FLOAT_STORAGE_TYPE));
+
+  // Write the value
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_node_attribute_value(test_node,
+                                             DESIRED_ATTRIBUTE,
+                                             (uint8_t *)&value1,
+                                             (uint8_t)sizeof(value1)));
+
+  TEST_ASSERT_EQUAL(value1, attribute_store_get_desired_number(test_node));
+}
+
+void test_attribute_store_get_number_from_string_test()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_type(99, "", 0, C_STRING_STORAGE_TYPE));
+
+  attribute_store_node_t test_node = attribute_store_add_node(99, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    attribute_store_set_reported_number(99, 2134));
+
+  // Now read back:
+  TEST_ASSERT_EQUAL_FLOAT(FLT_MIN,
+                          attribute_store_get_reported_number(test_node));
+}
+
+void test_attribute_store_get_number_test()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_type(100, "", 0, U32_STORAGE_TYPE));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_type(101, "", 0, U64_STORAGE_TYPE));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_register_type(102, "", 0, I8_STORAGE_TYPE));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_type(103, "", 0, I16_STORAGE_TYPE));
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_type(104, "", 0, I32_STORAGE_TYPE));
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_register_type(105, "", 0, DOUBLE_STORAGE_TYPE));
+
+  attribute_store_node_t u32_node    = attribute_store_add_node(100, root_node);
+  attribute_store_node_t u64_node    = attribute_store_add_node(101, root_node);
+  attribute_store_node_t i8_node     = attribute_store_add_node(102, root_node);
+  attribute_store_node_t i16_node    = attribute_store_add_node(103, root_node);
+  attribute_store_node_t i32_node    = attribute_store_add_node(104, root_node);
+  attribute_store_node_t double_node = attribute_store_add_node(105, root_node);
+
+  attribute_store_set_reported_number(u32_node, 123);
+  TEST_ASSERT_EQUAL(123, attribute_store_get_reported_number(u32_node));
+  attribute_store_set_reported_number(u64_node, 123);
+  TEST_ASSERT_EQUAL(123, attribute_store_get_reported_number(u64_node));
+  attribute_store_set_reported_number(i8_node, 123);
+  TEST_ASSERT_EQUAL(123, attribute_store_get_reported_number(i8_node));
+  attribute_store_set_reported_number(i16_node, 123);
+  TEST_ASSERT_EQUAL(123, attribute_store_get_reported_number(i16_node));
+  attribute_store_set_reported_number(i32_node, 123);
+  TEST_ASSERT_EQUAL(123, attribute_store_get_reported_number(i32_node));
+  attribute_store_set_reported_number(double_node, 123);
+  TEST_ASSERT_EQUAL(123, attribute_store_get_reported_number(double_node));
+
+  // Now write some wrong size data in the node
+  const uint8_t garbage[]
+    = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 34, 0xFF, 2, 100, 101, 102, 103};
+  attribute_store_set_reported(u32_node, garbage, sizeof(garbage));
+  attribute_store_set_reported(u64_node, garbage, sizeof(garbage));
+  attribute_store_set_reported(i8_node, garbage, sizeof(garbage));
+  attribute_store_set_reported(i16_node, garbage, sizeof(garbage));
+  attribute_store_set_reported(i32_node, garbage, sizeof(garbage));
+  attribute_store_set_reported(double_node, garbage, sizeof(garbage));
+
+  // Reading their number will fail:
+  TEST_ASSERT_EQUAL_FLOAT(FLT_MIN,
+                          attribute_store_get_reported_number(u32_node));
+  TEST_ASSERT_EQUAL_FLOAT(FLT_MIN,
+                          attribute_store_get_reported_number(u64_node));
+  TEST_ASSERT_EQUAL_FLOAT(FLT_MIN,
+                          attribute_store_get_reported_number(i8_node));
+  TEST_ASSERT_EQUAL_FLOAT(FLT_MIN,
+                          attribute_store_get_reported_number(i16_node));
+  TEST_ASSERT_EQUAL_FLOAT(FLT_MIN,
+                          attribute_store_get_reported_number(i32_node));
+  TEST_ASSERT_EQUAL_FLOAT(FLT_MIN,
+                          attribute_store_get_reported_number(double_node));
+}
+
+void test_attribute_store_set_desired_string_happy_case()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node
+    = attribute_store_add_node(154672, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  const char *string = "Hello";
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_desired_string(test_node, string));
+
+  // Read back
+  uint8_t received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH - 1]     = 10;
+  uint8_t received_value_size                                  = 0;
+  attribute_store_get_node_attribute_value(test_node,
+                                           DESIRED_ATTRIBUTE,
+                                           (uint8_t *)&received_value,
+                                           &received_value_size);
+
+  TEST_ASSERT_EQUAL(6, received_value_size);
+  TEST_ASSERT_EQUAL('H', received_value[0]);
+  TEST_ASSERT_EQUAL('e', received_value[1]);
+  TEST_ASSERT_EQUAL('l', received_value[2]);
+  TEST_ASSERT_EQUAL('l', received_value[3]);
+  TEST_ASSERT_EQUAL('o', received_value[4]);
+  TEST_ASSERT_EQUAL('\0', received_value[5]);
+  TEST_ASSERT_EQUAL(
+    10,
+    received_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH
+                   - 1]);  // not Appended NULL termination, string was correct
+}
+
+void test_attribute_store_emplace()
+{
+  attribute_store_type_t test_type = 154672;
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  // Add a first node with the test type.
+  int32_t value = -234;
+  attribute_store_node_t test_node
+    = attribute_store_add_node(test_type, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+  attribute_store_set_reported(test_node, &value, sizeof(value));
+
+  // Add a second node with the test type, no value.
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE,
+                        attribute_store_add_node(test_type, root_node));
+
+  // Try to emplace a new node with the same value:
+  attribute_store_node_t emplaced_node
+    = attribute_store_emplace(root_node, test_type, &value, sizeof(value));
+
+  TEST_ASSERT_EQUAL(test_node, emplaced_node);
+
+  // Modify the value:
+  value += 1;
+  emplaced_node
+    = attribute_store_emplace(root_node, test_type, &value, sizeof(value));
+  TEST_ASSERT_NOT_EQUAL(test_node, emplaced_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, emplaced_node);
+
+  TEST_ASSERT_EQUAL(3, attribute_store_get_node_child_count(root_node));
+}
+
+void test_attribute_store_emplace_desired()
+{
+  attribute_store_type_t test_type = 154672;
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  // Add a first node with the test type.
+  int32_t value = -234;
+  attribute_store_node_t test_node
+    = attribute_store_add_node(test_type, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+  attribute_store_set_desired(test_node, &value, sizeof(value));
+
+  // Add a second node with the test type, no value.
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE,
+                        attribute_store_add_node(test_type, root_node));
+
+  // Try to emplace a new node with the same value:
+  attribute_store_node_t emplaced_node
+    = attribute_store_emplace_desired(root_node,
+                                      test_type,
+                                      &value,
+                                      sizeof(value));
+
+  TEST_ASSERT_EQUAL(test_node, emplaced_node);
+
+  // Modify the value:
+  value += 1;
+  emplaced_node = attribute_store_emplace_desired(root_node,
+                                                  test_type,
+                                                  &value,
+                                                  sizeof(value));
+  TEST_ASSERT_NOT_EQUAL(test_node, emplaced_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, emplaced_node);
+
+  TEST_ASSERT_EQUAL(3, attribute_store_get_node_child_count(root_node));
+}
+
+void test_attribute_store_set_child_reported_only_if_missing()
+{
+  attribute_store_type_t test_type = 154672;
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  // Add a first node with the test type.
+  int8_t value = -94;
+  attribute_store_node_t test_node
+    = attribute_store_add_node(test_type, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+  attribute_store_set_reported(test_node, &value, sizeof(value));
+  value = 0;
+
+  // The node already exists, nothing should change:
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_ALREADY_EXISTS,
+    attribute_store_set_child_reported_only_if_missing(root_node,
+                                                       test_type,
+                                                       &value,
+                                                       sizeof(value)));
+
+  // Check the value was unchanged
+  attribute_store_get_reported(test_node, &value, sizeof(value));
+  TEST_ASSERT_EQUAL(-94, value);
+
+  // Now try again with a non-existing child:
+  test_type = 3;
+  value     = 3;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_set_child_reported_only_if_missing(root_node,
+                                                       test_type,
+                                                       &value,
+                                                       sizeof(value)));
+  value = 0;
+  attribute_store_node_t new_node
+    = attribute_store_get_first_child_by_type(root_node, test_type);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node);
+  attribute_store_get_reported(new_node, &value, sizeof(value));
+  TEST_ASSERT_EQUAL(3, value);
 }

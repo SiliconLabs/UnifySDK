@@ -11,7 +11,7 @@
  *
  *****************************************************************************/
 
-// UIC shared components
+// Unify shared components
 #include <sl_status.h>
 #include <sl_log.h>
 #include <attribute_store.h>

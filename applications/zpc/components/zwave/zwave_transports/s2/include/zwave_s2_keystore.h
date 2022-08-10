@@ -74,6 +74,12 @@ void zwave_s2_keystore_get_dsk(zwave_s2_keystore_ecdh_key_mode_t mode,
 uint8_t zwave_s2_keystore_get_assigned_keys();
 
 /**
+ * @brief Resets the list of assigned keys (sets them to 0)
+ * Use this function before receiving keys when entering in a network.
+ */
+void zwave_s2_keystore_reset_assigned_keys();
+
+/**
  * Create new random network keys, which marks all keys as granted.
  */
 void zwave_s2_create_new_network_keys();

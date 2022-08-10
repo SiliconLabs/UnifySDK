@@ -16,14 +16,17 @@
 #include "zwave_command_classes_utils.h"
 
 // Includes from other components
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller_utils.h"
 #include "attribute_store.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "attribute_store_helper.h"
 #include "zpc_attribute_store_network_helper.h"
+#include "zwave_network_management.h"
 
+// Unify components
 #include "attribute_resolver.h"
+#include "attribute_timeouts.h"
 #include "zpc_attribute_resolver.h"
 #include "zwave_command_handler.h"
 #include "zwave_network_management.h"
@@ -69,6 +72,8 @@
 /// Timing to send a Wake Up No More (ms). The node falls asleep after 10s, so
 /// no reasons to keep this frame more than e.g 15 seconds in the queue.
 #define WAKE_UP_NO_MORE_DISCARD_TIMEOUT 15000
+// Time to delay a Wake Up No More message
+#define WAKE_UP_NO_MORE_DELAY 1000
 
 static const attribute_store_type_t setting_node_type[] = {ATTRIBUTE(SETTING)};
 static const attribute_store_type_t capabilities_node_type[]
@@ -93,6 +98,55 @@ static void send_wake_up_no_more(attribute_store_node_t node_id_node);
 // Private helper functions
 ///////////////////////////////////////////////////////////////////////////////
 /**
+ * @brief Verifies if we are the Wake Up destination of a NodeID.
+ *
+ * It will search all endpoints for a Wake Up Configuration containing our
+ * NodeID.
+ *
+ * @param node_id_node    The Attribute Store Node of the NodeID for which
+ *                        we want to check if we are the Wake Up Destination
+ * @returns true if we are the Wake Up Destination, false otherwise
+ */
+static bool we_are_the_wake_up_destination(attribute_store_node_t node_id_node)
+{
+  uint32_t endpoint_id_child_index = 0;
+  attribute_store_node_t endpoint_id_node
+    = attribute_store_get_node_child_by_type(node_id_node,
+                                             ATTRIBUTE_ENDPOINT_ID,
+                                             endpoint_id_child_index);
+
+  zwave_node_id_t zpc_node_id = zwave_network_management_get_node_id();
+
+  while (endpoint_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
+    // Find if there is a Wake Up Setting:
+    // Set up the Wake Up Interval
+    attribute_store_node_t wake_up_setting_node
+      = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                                ATTRIBUTE(SETTING));
+    attribute_store_node_t wake_up_node_id_node
+      = attribute_store_get_first_child_by_type(wake_up_setting_node,
+                                                ATTRIBUTE(NODE_ID));
+    zwave_node_id_t configured_node_id = 0;
+    attribute_store_get_reported(wake_up_node_id_node,
+                                 &configured_node_id,
+                                 sizeof(configured_node_id));
+
+    if (configured_node_id == zpc_node_id) {
+      return true;
+    }
+
+    // Move to the next Endpoint
+    endpoint_id_child_index += 1;
+    endpoint_id_node
+      = attribute_store_get_node_child_by_type(node_id_node,
+                                               ATTRIBUTE_ENDPOINT_ID,
+                                               endpoint_id_child_index);
+  }
+
+  return false;
+}
+
+/**
  * @brief Verifies if either NodeID / Wake Up interval settings are still
  * undefined or mismatched and a resolution is needed
  *
@@ -107,13 +161,11 @@ static void verify_if_wake_up_setting_needs_resolution(
 {
   // Do we need a Get ?
   attribute_store_node_t wake_up_node_id_node
-    = attribute_store_get_node_child_by_type(wake_up_setting_node,
-                                             ATTRIBUTE(NODE_ID),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_setting_node,
+                                              ATTRIBUTE(NODE_ID));
   attribute_store_node_t wake_up_interval_node
-    = attribute_store_get_node_child_by_type(wake_up_setting_node,
-                                             ATTRIBUTE(INTERVAL),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_setting_node,
+                                              ATTRIBUTE(INTERVAL));
 
   if (false
       == attribute_store_is_value_defined(wake_up_node_id_node,
@@ -203,14 +255,12 @@ static wake_up_interval_t
   // Looks into the capabilities and check for the interval that will be the largest.
   // the value 0 is largest (infinite), Else we will fall back on MAX Interval.
   attribute_store_node_t wake_up_capabilities_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(CAPABILITIES),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(CAPABILITIES));
 
   attribute_store_node_t minimum_interval_interval_node
-    = attribute_store_get_node_child_by_type(wake_up_capabilities_node,
-                                             ATTRIBUTE(MINIMUM_INTERVAL),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_capabilities_node,
+                                              ATTRIBUTE(MINIMUM_INTERVAL));
   wake_up_interval_t interval = 1;  // lowest non-zero.
   attribute_store_get_reported(minimum_interval_interval_node,
                                &interval,
@@ -220,9 +270,8 @@ static wake_up_interval_t
   }
 
   attribute_store_node_t maximum_interval_interval_node
-    = attribute_store_get_node_child_by_type(wake_up_capabilities_node,
-                                             ATTRIBUTE(MAXIMUM_INTERVAL),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_capabilities_node,
+                                              ATTRIBUTE(MAXIMUM_INTERVAL));
   attribute_store_get_reported(maximum_interval_interval_node,
                                &interval,
                                sizeof(interval));
@@ -249,28 +298,24 @@ static wake_up_interval_t
   wake_up_interval_t maximum_interval = MAXIMUM_WAKE_UP_INTERVAL;
   wake_up_interval_t interval_step    = DEFAULT_WAKE_UP_STEP;
   attribute_store_node_t wake_up_capabilities_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(CAPABILITIES),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(CAPABILITIES));
   attribute_store_node_t minimum_interval_interval_node
-    = attribute_store_get_node_child_by_type(wake_up_capabilities_node,
-                                             ATTRIBUTE(MINIMUM_INTERVAL),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_capabilities_node,
+                                              ATTRIBUTE(MINIMUM_INTERVAL));
   attribute_store_get_reported(minimum_interval_interval_node,
                                &minimum_interval,
                                sizeof(minimum_interval));
   attribute_store_node_t maximum_interval_interval_node
-    = attribute_store_get_node_child_by_type(wake_up_capabilities_node,
-                                             ATTRIBUTE(MAXIMUM_INTERVAL),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_capabilities_node,
+                                              ATTRIBUTE(MAXIMUM_INTERVAL));
   attribute_store_get_reported(maximum_interval_interval_node,
                                &maximum_interval,
                                sizeof(maximum_interval));
 
   attribute_store_node_t interval_step_node
-    = attribute_store_get_node_child_by_type(wake_up_capabilities_node,
-                                             ATTRIBUTE(INTERVAL_STEP),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_capabilities_node,
+                                              ATTRIBUTE(INTERVAL_STEP));
   attribute_store_get_reported(interval_step_node,
                                &interval_step,
                                sizeof(interval_step));
@@ -383,9 +428,8 @@ static sl_status_t
     = attribute_store_get_first_parent_with_type(wake_up_capabilities_node,
                                                  ATTRIBUTE_ENDPOINT_ID);
   attribute_store_node_t version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
 
   zwave_cc_version_t version = 0;
   attribute_store_get_reported(version_node, &version, sizeof(version));
@@ -433,14 +477,12 @@ static sl_status_t
   wake_up_interval_t wake_up_interval = 0;
 
   attribute_store_node_t wake_up_node_id_node
-    = attribute_store_get_node_child_by_type(wake_up_setting_node,
-                                             ATTRIBUTE(NODE_ID),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_setting_node,
+                                              ATTRIBUTE(NODE_ID));
 
   attribute_store_node_t wake_up_interval_node
-    = attribute_store_get_node_child_by_type(wake_up_setting_node,
-                                             ATTRIBUTE(INTERVAL),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_setting_node,
+                                              ATTRIBUTE(INTERVAL));
 
   if (SL_STATUS_OK
       != attribute_store_read_value(wake_up_node_id_node,
@@ -520,9 +562,8 @@ static sl_status_t handle_wake_up_interval_report(
     = zwave_command_class_get_endpoint_node(connection);
 
   attribute_store_node_t wake_up_setting_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(SETTING),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(SETTING));
 
   save_reported_interval(wake_up_setting_node,
                          ATTRIBUTE(INTERVAL),
@@ -558,9 +599,8 @@ static sl_status_t handle_wake_up_interval_capabilities_report(
     = zwave_command_class_get_endpoint_node(connection);
 
   attribute_store_node_t wake_up_capabilities_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(CAPABILITIES),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(CAPABILITIES));
 
   // Minimum Interval
   save_reported_interval(wake_up_capabilities_node,
@@ -612,25 +652,53 @@ static sl_status_t handle_wake_up_interval_capabilities_report(
 // Attribute Resolver callback functions
 ///////////////////////////////////////////////////////////////////////////////
 /**
- * @brief Sends a Wake Up No more command to a node.
+ * @brief Check if we need and send a Wake Up No more command to a node and puts
+ * it in the Tx Queue
  *
  * @param node_id_node   The Attribute Store node for the NODE_ID to send back to
  *                       sleep.
  */
 static void send_wake_up_no_more(attribute_store_node_t node_id_node)
 {
+  // We don't need a callback anymore
+  attribute_resolver_clear_resolution_listener(node_id_node,
+                                               &send_wake_up_no_more);
+
+  // If we have set the Wake Up Interval to ourselves, then put the node
+  // back to sleep, else just do nothing with this node.
+  if (false == we_are_the_wake_up_destination(node_id_node)) {
+    sl_log_debug(LOG_TAG,
+                 "We are not the Wake Up Destination. Skipping sending a "
+                 " Wake Up No More Command for attribute store node %d",
+                 node_id_node);
+    attribute_resolver_pause_node_resolution(node_id_node);
+    return;
+  }
+
+  // No more resolution, but we also want to wait a bit more if we are still
+  // establishing return routes with the node.
+  zwave_node_id_t node_id = 0;
+  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
+
+  if (true == we_have_return_routes_to_assign(node_id)) {
+    sl_log_debug(LOG_TAG,
+                 "Delaying Wake Up No More Command, as we still "
+                 "have return routes to establish for NodeID %d",
+                 node_id);
+    attribute_timeout_set_callback(node_id_node,
+                                   WAKE_UP_NO_MORE_DELAY,
+                                   &send_wake_up_no_more);
+    return;
+  }
+
+  // Now we just pause the resolution and queue a Wake Up No More.
   zwave_controller_connection_info_t connection_info = {};
-  zwave_node_id_t node_id                            = 0;
   const uint8_t no_more_info[]
     = {COMMAND_CLASS_WAKE_UP, WAKE_UP_NO_MORE_INFORMATION};
 
-  //We don't need a callback anymore
-  attribute_resolver_clear_resolution_listener(node_id_node,
-                                               &send_wake_up_no_more);
-  //Prevent the resolver from working on this node from now on.
+  // Prevent the resolver from working on this node from now on.
   attribute_resolver_pause_node_resolution(node_id_node);
 
-  attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
   zwave_tx_scheme_get_node_connection_info(node_id, 0, &connection_info);
   zwave_tx_options_t tx_options = {};
   zwave_tx_scheme_get_node_tx_options(
@@ -694,9 +762,8 @@ static void
   } else {
     // Find the node's favorite default. If unknown, use the ZPC config
     attribute_store_node_t default_interval_interval_node
-      = attribute_store_get_node_child_by_type(wake_up_capabilities_node,
-                                               ATTRIBUTE(DEFAULT_INTERVAL),
-                                               0);
+      = attribute_store_get_first_child_by_type(wake_up_capabilities_node,
+                                                ATTRIBUTE(DEFAULT_INTERVAL));
     if (attribute_store_is_value_defined(default_interval_interval_node,
                                          REPORTED_ATTRIBUTE)) {
       attribute_store_get_reported(default_interval_interval_node,
@@ -711,9 +778,8 @@ static void
   }
 
   attribute_store_node_t wake_up_setting_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(SETTING),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(SETTING));
 
   // Write down the interval to set.
   attribute_store_set_child_desired(wake_up_setting_node,
@@ -747,13 +813,11 @@ static void on_wake_up_setting_send_data_complete(
   }
 
   attribute_store_node_t wake_up_node_id_node
-    = attribute_store_get_node_child_by_type(wake_up_setting_node,
-                                             ATTRIBUTE(NODE_ID),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_setting_node,
+                                              ATTRIBUTE(NODE_ID));
   attribute_store_node_t wake_up_interval_node
-    = attribute_store_get_node_child_by_type(wake_up_setting_node,
-                                             ATTRIBUTE(INTERVAL),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_setting_node,
+                                              ATTRIBUTE(INTERVAL));
 
   switch (event) {
     case FRAME_SENT_EVENT_OK_SUPERVISION_WORKING:
@@ -818,13 +882,11 @@ static void on_version_attribute_update(attribute_store_node_t updated_node,
                                  COUNT_OF(capabilities_node_type));
 
   attribute_store_node_t wake_up_capabilities_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(CAPABILITIES),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(CAPABILITIES));
   attribute_store_node_t wake_up_setting_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(SETTING),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(SETTING));
 
   attribute_store_add_if_missing(wake_up_capabilities_node,
                                  capabilities_attributes,
@@ -959,14 +1021,12 @@ bool zwave_command_class_wake_up_supports_wake_up_on_demand(
   }
 
   attribute_store_node_t wake_up_capabilities_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(CAPABILITIES),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(CAPABILITIES));
 
   attribute_store_node_t wake_up_bitmask_node
-    = attribute_store_get_node_child_by_type(wake_up_capabilities_node,
-                                             ATTRIBUTE(CAPABILITIES_BITMASK),
-                                             0);
+    = attribute_store_get_first_child_by_type(wake_up_capabilities_node,
+                                              ATTRIBUTE(CAPABILITIES_BITMASK));
   wake_up_bitmask_t wake_up_bitmask = 0;
   attribute_store_get_reported(wake_up_bitmask_node,
                                &wake_up_bitmask,

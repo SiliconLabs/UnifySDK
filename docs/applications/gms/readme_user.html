@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GMS User’s Guide &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/gms/readme_user.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Image Provider User’s Guide" href="../image_provider/readme_user.html" />
+    <link rel="prev" title="AoX Positioning Developer’s Guide" href="../aox/applications/positioning/readme_developer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#systems-overview">Systems Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/UnifySDK.html#unify-applications-overview">Unify Applications Overview</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-protocol-controllers">Unify Framework Protocol Controllers</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-services">The Unify Framework Services</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../aox/applications/positioning/readme_user.html">AoX Positioning User Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aox/applications/positioning/readme_developer.html">AoX Positioning Developer’s Guide</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">GMS User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_provider/readme_user.html">Image Provider User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nal/readme_user.html">Name and location service User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../upti_cap/readme_user.html">UPTI CAP User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../upti_writer/readme_user.html">UPTI WRITER User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../upvl/readme_user.html">UPVL User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-provisioning-list-upvl">The Unify Framework Provisioning List (UPVL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-group-manager-gms">The Unify Framework Group Manager (GMS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-name-and-location-service-nal">The Unify Name and Location service (NAL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-ota-image-provider">The Unify Framework OTA Image Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-aox-positioning-application">The Unify AoX Positioning Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-upticap">The UPTICap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-uptiwriter">The UPTIWriter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../doc/UnifySDK.html#iot-services">IoT Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="gms-users-guide">
+<h1>GMS User’s Guide<a class="headerlink" href="#gms-users-guide" title="Permalink to this heading"></a></h1>
+<p>GMS is an acronym for <em>Group Management Service</em></p>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>The Group Management Service (GMS) a MQTT Client, is an application that manages the by-group
+topic <code class="docutils literal notranslate"><span class="pre">ucl/by-group/</span></code>. It acts as a lookup entity that provides protocol controllers
+or other MQTT clients information about the interactions between
+groups, endpoints, and supported commands. It does not handle the topics that are
+used to execute group commands, for example
+<code class="docutils literal notranslate"><span class="pre">ucl/by-group/&lt;group-id&gt;/&lt;Command&gt;</span></code>, which is done by protocol controllers.</p>
+<p>The GMS application does not persist any collected information. Instead, it collects
+and publishes its data over the MQTT Framework.</p>
+<p>Protocol controllers can run without the GMS application, which results in limited
+functionality.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>For installing please refer to the general installation method in
+<a class="reference internal" href="../../doc/getting_started.html"><span class="doc std std-doc">Getting started</span></a>.</p>
+</section>
+<section id="running-the-gms">
+<h2>Running the GMS<a class="headerlink" href="#running-the-gms" title="Permalink to this heading"></a></h2>
+<section id="using-systemd-service">
+<h3>Using Systemd Service<a class="headerlink" href="#using-systemd-service" title="Permalink to this heading"></a></h3>
+<p>The best way to run the GMS is using the Systemd service that is installed with
+the Debian installer. For more information, see <a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify User guide</span></a>.</p>
+</section>
+<section id="using-command-line">
+<h3>Using Command Line<a class="headerlink" href="#using-command-line" title="Permalink to this heading"></a></h3>
+<p>Alternatively, the GMS may be run by executing <code class="docutils literal notranslate"><span class="pre">uic-gms</span></code>. It is possible to
+configure the MQTT server, database path, through command line options. For more
+details, run <code class="docutils literal notranslate"><span class="pre">uic-gms</span> <span class="pre">--help</span></code>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

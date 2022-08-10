@@ -128,7 +128,7 @@ PROCESS_THREAD(uic_diagnostics_process, ev, data)
   PROCESS_END()
 }
 /**
- * @brief Callback for the diagnostics uic diagnostics request message
+ * @brief Callback for the diagnostics Unify diagnostics request message
  */
 void uic_diagnostics_mqtt_callback(const char *topic,
                                    const char *payload,
@@ -193,13 +193,16 @@ std::vector<std::string>
 
     metric_ids = jsn.get<std::vector<std::string>>();
   }
-  catch (const char* message)
+  catch (nlohmann::json::parse_error& ex)
   {
     sl_log_warning(
             "Diagnostics", 
             "Unable to handle or parse JSON string: %s with error message : %s", 
             payload_string->c_str(), 
-            message);
+            ex.what());
+
+    // return empty metric vector to handle exception and return to normal behavior
+    return std::vector<std::string> {};
   }
 
   return metric_ids;

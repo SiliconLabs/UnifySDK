@@ -50,7 +50,6 @@ Technology    | UIID components                                                 
 ------------- | -------------------------------------------------------------------------- | -------------
 ZigBee        |  "ZigBee"+ManufacturerCode+ImageType                                       | ZigBee010103
 Z-Wave        |  ZWave-ManufacturerID-ProductType-ProductID-FirmwareTarget-HardwareVersion | ZWave-0000-0002-0004-00-01
-Bluetooth     |  "BT"+ CompanyID+VendorInfo                                                | TBD
 
 
 ## UCL OTA Communication Protocol

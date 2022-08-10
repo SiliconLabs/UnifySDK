@@ -15,7 +15,7 @@
 #include <iomanip>
 #include "attribute.hpp"
 #include "attribute_mapper_ast.hpp"
-#include "attribute_store_debug.h"
+#include "attribute_store_type_registration.h"
 
 /**
  * @defgroup attribute_mapper_ast_print Abstract Syntax Tree Print
@@ -32,31 +32,36 @@ class print
   public:
   print(std::ostream &out) : _out(out) {};
 
-  void operator()(const nil &x)
+  inline void operator()(const nil &x)
   {
     _out << "undefined";
   }
 
-  void operator()(unsigned int n)
+  inline void operator()(float n) {
+    _out << n;
+  }
+
+  inline void operator()(uint32_t n)
   {
-    if (resolve_attr_names) {
-      const char *name = attribute_store_name_by_type(n);
+    attribute_store_type_t type = (attribute_store_type_t)round(n);
+    if (resolve_attr_names && attribute_store_is_type_registered(type)) {
+      const char *name = attribute_store_get_type_name(type);
       if (name) {
         _out << name;
         return;
       }
     }
-    _out << "0x" << std::setw(8) << std::setfill('0') << std::hex << n;
+    _out << std::hex << "0x" << type;
   }
 
-  void operator()(const attribute &a);
-  void operator()(const signed_ &x)
+  inline void operator()(const attribute &a);
+  inline void operator()(const signed_ &x)
   {
     _out << x.sign;
     boost::apply_visitor(*this, x.operand_);
   }
 
-  void operator()(const condition &x)
+  inline void operator()(const condition &x)
   {
     _out << "if ";
     boost::apply_visitor(*this, x.cond_value);
@@ -66,15 +71,15 @@ class print
     boost::apply_visitor(*this, x.cond_false);
   }
 
-  void operator()(const operation &x)
+  inline void operator()(const operation &x)
   {
     const char *op_str[]
-      = {"+", "-", "==", "*", "/", "&", "|", "^", "<", ">", "or"};
+      = {"+", "-", "==", "*", "/", "&", "|", "^", "<", ">", "or", "%", "**"};
     _out << op_str[x.operator_] << ' ';
     boost::apply_visitor(*this, x.operand_);
   }
 
-  void operator()(const expression &x)
+  inline void operator()(const expression &x)
   {
     _out << "( ";
     boost::apply_visitor(*this, x.first);
@@ -86,11 +91,29 @@ class print
     _out << ")";
   }
 
-  void operator()(const assignment &a)
+  inline void operator()(const assignment &a)
   {
     (*this)(a.lhs);
     _out << " = ";
     (*this)(a.rhs);
+  }
+
+  inline void operator()(const scope &x)
+  {
+    _out << "scope " << x.priority << " {" << std::endl;
+    for (auto &a: x.assignments) {
+      _out << "  ";
+      (*this)(a);
+      _out << std::endl;
+    }
+    _out << "}" << std::endl;
+  }
+
+  inline void operator()(const ast_tree ast)
+  {
+    for (const auto &ast_element: ast) {
+      boost::apply_visitor(*this, ast_element);
+    }
   }
 
   bool resolve_attr_names = false;
@@ -104,25 +127,25 @@ class path_printer
   public:
   path_printer(std::ostream &out) : _out(out), _printer(out) {}
 
-  void operator()(const ast::operand &operand)
+  inline void operator()(const ast::operand &operand)
   {
     _printer.resolve_attr_names = true;
     boost::apply_visitor(_printer, operand);
     _printer.resolve_attr_names = false;
   }
   // hat operator ^ (parent)
-  void operator()(const nil &nul)
+  inline void operator()(const nil &nul)
   {
     _out << '^';
   }
   // just given by type id
-  void operator()(unsigned int type_id)
+  inline void operator()(result_type_t type_id)
   {
-    _out << type_id;
+    _out << round(type_id);
   }
 
   // Subscript operator
-  void operator()(const attribute_path_subscript &subscript)
+  inline void operator()(const attribute_path_subscript &subscript)
   {
     _printer.resolve_attr_names = true;
     boost::apply_visitor(_printer, subscript.identifier);
@@ -132,7 +155,7 @@ class path_printer
     _out << ']';
   }
   // parse a path list
-  void operator()(const std::vector<attribute_path_element> &paths)
+  inline void operator()(const std::vector<attribute_path_element> &paths)
   {
     for (auto it = paths.begin(); it != paths.end(); it++) {
       boost::apply_visitor(*this, *it);
@@ -147,7 +170,7 @@ class path_printer
   print _printer;
 };
 
-void print::operator()(const attribute &a)
+inline void print::operator()(const attribute &a)
 {
   _out << a.value_type << '\'';
   path_printer pp(_out);
@@ -159,7 +182,7 @@ void print::operator()(const attribute &a)
 inline std::ostream &operator<<(std::ostream &s,
                                 const attribute_dependency_t &d)
 {
-  s << d.second << "'" << attribute_store_name_by_type(d.first);
+  s << d.second << "'" << attribute_store_get_type_name(d.first);
   return s;
 }
 
@@ -171,6 +194,13 @@ inline std::ostream &operator<<(std::ostream &s, const assignment &d)
 }
 
 inline std::ostream &operator<<(std::ostream &s, const attribute &d)
+{
+  print printer(s);
+  printer(d);
+  return s;
+}
+
+inline std::ostream &operator<<(std::ostream &s, const ast_tree &d)
 {
   print printer(s);
   printer(d);

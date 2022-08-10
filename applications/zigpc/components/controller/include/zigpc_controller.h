@@ -27,7 +27,7 @@
 #ifndef ZIGPC_CONTROLLER_H
 #define ZIGPC_CONTROLLER_H
 
-// Shared UIC includes
+// Shared Unify includes
 #include <sl_status.h>
 
 #ifdef __cplusplus

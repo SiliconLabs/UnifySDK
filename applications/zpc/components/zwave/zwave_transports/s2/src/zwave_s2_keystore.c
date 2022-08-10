@@ -78,7 +78,7 @@ void keystore_private_key_read(uint8_t *buf)
     uint8_t my_chip_type = 0;
     uint8_t version      = 0;
     zwapi_get_chip_type_version(&my_chip_type, &version);
-    if (my_chip_type == ZW_GECKO_CHIP_TYPE) {
+    if (ZW_GECKO_CHIP_TYPE(my_chip_type)) {
       zwapi_nvr_get_value(offsetof(NVR_FLASH_STRUCT, aSecurityPrivateKey),
                           NVR_SECURITY_PRIVATE_KEY_SIZE,
                           buf);
@@ -259,6 +259,12 @@ uint8_t zwave_s2_keystore_get_assigned_keys()
 
   nvm_config_get(assigned_keys, &assigned_keys);
   return assigned_keys;
+}
+
+void zwave_s2_keystore_reset_assigned_keys()
+{
+  uint8_t assigned_keys = 0;
+  nvm_config_set(assigned_keys, &assigned_keys);
 }
 
 void zwave_s2_create_new_dynamic_ecdh_key()

@@ -15,7 +15,7 @@
  * @file yaml_parser.hpp
  * @brief YAML Parser for Boost Program Options Config file
  *
- * Parse YAML configuration file for UIC.
+ * Parse YAML configuration file for Unify.
  * Each configuration name is prepended with its parent, e.g. for following YAML
  * mqtt:
  *     host: 127.0.0.1
@@ -145,7 +145,7 @@ class yaml_parser
     }
     if (result.description->find_nothrow(key, false) == NULL) {
       // If key is not defined in description, we ignore/skip it.
-      // Since the configuration file may be shared among multiple UIC modules,
+      // Since the configuration file may be shared among multiple Unify modules,
       // it is likely there are configuration options not for us.
       return;
     }

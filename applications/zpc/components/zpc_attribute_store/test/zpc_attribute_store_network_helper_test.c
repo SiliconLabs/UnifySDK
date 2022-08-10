@@ -27,14 +27,18 @@
 #include "zwave_controller_types.h"
 #include "sl_log.h"
 
+// Mock includes
+#include "zwave_network_management_mock.h"
+
 // Test includes
 #include "unity.h"
 
 // Test constants
-static unid_t my_unid_1                     = "zw-FC23F52D-0001";
-static unid_t my_unid_2                     = "zw-FC23F52D-0031";
-static unid_t my_unid_3                     = "zw-AAAAAAAA-0043";
-static unid_t my_unid_test_network_expected = "zw-01020304-00AA";
+static const zwave_home_id_t test_network_home_id = 0x01020304;
+static unid_t my_unid_1                           = "zw-FC23F52D-0001";
+static unid_t my_unid_2                           = "zw-FC23F52D-0031";
+static unid_t my_unid_3                           = "zw-AAAAAAAA-0043";
+static unid_t my_unid_test_network_expected       = "zw-01020304-00AA";
 static attribute_store_node_t home_id_expected;
 static attribute_store_node_t node_id_expected;
 static attribute_store_node_t endpoint_expected;
@@ -45,7 +49,17 @@ static attribute_store_node_t association_group_node;
 static void create_test_network();
 
 /// Setup the test suite (called once before all test_xxx functions are called)
-void suiteSetUp()
+void suiteSetUp() {}
+
+/// Teardown the test suite (called once after all test_xxx functions are called)
+int suiteTearDown(int num_failures)
+{
+  attribute_store_teardown();
+  datastore_teardown();
+  return num_failures;
+}
+
+void setUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
@@ -54,15 +68,7 @@ void suiteSetUp()
   attribute_store_delete_node(attribute_store_get_root());
 
   create_test_network();
-  attribute_store_log();  // Print out so we can try to see the network
-}
-
-/// Teardown the test suite (called once after all test_xxx functions are called)
-int suiteTearDown(int num_failures)
-{
-  attribute_store_teardown();
-  datastore_teardown();
-  return num_failures;
+  zwave_network_management_get_home_id_IgnoreAndReturn(test_network_home_id);
 }
 
 void test_attribute_store_create_home_id_helper()
@@ -292,6 +298,15 @@ void test_attribute_store_get_unid_endpoint_from_node_helper()
                       ATTRIBUTE_STORE_INVALID_NODE,
                       unid,
                       &endpoint_id));
+
+  // Try with the wrong HomeID, it should accept:
+  home_id = home_id + 3;
+  attribute_store_set_reported(home_id_expected, &home_id, sizeof(home_id));
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_network_helper_get_unid_endpoint_from_node(
+                      association_group_node,
+                      unid,
+                      &endpoint_id));
 }
 
 void test_attribute_store_get_unid_from_node_helper()
@@ -348,6 +363,14 @@ void test_attribute_store_get_unid_from_node_helper()
                     attribute_store_network_helper_get_unid_from_node(
                       ATTRIBUTE_STORE_INVALID_NODE,
                       unid));
+
+  // Try with the wrong HomeID, it should accept
+  home_id = home_id + 3;
+  attribute_store_set_reported(home_id_expected, &home_id, sizeof(home_id));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    attribute_store_network_helper_get_unid_from_node(association_group_node,
+                                                      unid));
 }
 
 void test_attribute_store_network_helper_get_node_id_from_node()
@@ -508,7 +531,6 @@ void test_attribute_store_network_helper_get_zwave_ids_from_node()
 
 static void create_test_network()
 {
-  zwave_home_id_t home_id         = 0x01020304;
   zwave_node_id_t node_id         = 1;
   zwave_endpoint_id_t endpoint_id = 1;
   uint8_t test_values[]           = {0x01, 0x02, 0x03, 0x04};
@@ -522,7 +544,7 @@ static void create_test_network()
 
   attribute_store_set_node_attribute_value(home_id_expected,
                                            REPORTED_ATTRIBUTE,
-                                           (uint8_t *)&home_id,
+                                           (uint8_t *)&test_network_home_id,
                                            sizeof(zwave_home_id_t));
 
   node_id_expected
@@ -553,6 +575,15 @@ static void create_test_network()
   endpoint_expected
     = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_expected);
 
+  // set the network status of
+  attribute_store_node_t network_status_node
+    = attribute_store_add_node(ATTRIBUTE_NETWORK_STATUS, node_id_expected);
+  uint8_t test_online_network_status = 0x01;
+  attribute_store_set_node_attribute_value(network_status_node,
+                                           REPORTED_ATTRIBUTE,
+                                           &test_online_network_status,
+                                           sizeof(test_online_network_status));
+
   endpoint_id = 0x05;  // This will be endpoint 05
   attribute_store_set_node_attribute_value(endpoint_expected,
                                            REPORTED_ATTRIBUTE,
@@ -581,4 +612,38 @@ static void create_test_network()
                                            DESIRED_ATTRIBUTE,
                                            test_values,
                                            1);
+}
+
+void test_attribute_store_network_helper_get_endpoint_0_node()
+{
+  attribute_store_node_t home_id_node
+    = attribute_store_network_helper_get_home_id_node(my_unid_1);
+
+  attribute_store_node_t node_id_node
+    = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
+
+  // Endpoint 0 does not exist
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE,
+                    attribute_store_get_endpoint_0_node(node_id_node));
+
+  attribute_store_node_t endpoint_id_node
+    = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
+
+  // Still not, no reported value.
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE,
+                    attribute_store_get_endpoint_0_node(node_id_node));
+
+  const zwave_endpoint_id_t endpoint_0 = 0;
+  attribute_store_set_reported(endpoint_id_node,
+                               &endpoint_0,
+                               sizeof(endpoint_0));
+  TEST_ASSERT_EQUAL(endpoint_id_node,
+                    attribute_store_get_endpoint_0_node(node_id_node));
+}
+
+void test_attribute_store_network_helper_get_network_status()
+{
+  TEST_ASSERT_EQUAL(
+    0x01,
+    attribute_store_network_helper_get_network_status(association_group_node));
 }

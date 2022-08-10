@@ -16,6 +16,7 @@
 #include "attribute_store_defined_attribute_types.h"
 #include "attribute.hpp"
 #include "zpc_attribute_store_test_helper.h"
+#include "zwave_command_classes_utils.h"
 
 #include "zwave_command_class_agi.h"
 #include "zwave_unid.h"

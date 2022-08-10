@@ -14,7 +14,7 @@
 #include <new>
 #include <string>
 
-/* UIC shared includes */
+/* Unify shared includes */
 #include <datastore.h>
 #include <sl_log.h>
 #include <sl_status.h>

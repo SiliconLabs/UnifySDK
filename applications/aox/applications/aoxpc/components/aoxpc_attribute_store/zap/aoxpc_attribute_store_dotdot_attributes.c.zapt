@@ -14,8 +14,8 @@
 {{zap_header}}
 
 // Includes from this component
-#include "aoxpc_attribute_store_defined_attribute_types.h"
 #include "aoxpc_attribute_store_network_helper.h"
+#include "aoxpc_attribute_store_defined_attribute_types.h"
 
 // Generic includes
 #include <stdlib.h>
@@ -41,9 +41,8 @@ bool {{asAttributeIsSupportedFunction parent.label label}} (
     aoxpc_attribute_store_network_helper_get_endpoint_node(unid, endpoint);
 
   attribute_store_node_t attribute_node =
-    attribute_store_get_node_child_by_type(endpoint_node,
-                                          {{asAttributeIdDefine parent.label label}},
-                                          0);
+    attribute_store_get_first_child_by_type(endpoint_node,
+                                          {{asAttributeIdDefine parent.label label}});
 
   return (attribute_node != ATTRIBUTE_STORE_INVALID_NODE);
 }
@@ -57,9 +56,8 @@ size_t {{asAttributeGetCountFunction parent.label label}}(
     aoxpc_attribute_store_network_helper_get_endpoint_node(unid, endpoint);
 
   attribute_store_node_t attribute_node =
-    attribute_store_get_node_child_by_type(endpoint_node,
-                                          {{asAttributeIdDefine parent.label label}},
-                                          0);
+    attribute_store_get_first_child_by_type(endpoint_node,
+                                          {{asAttributeIdDefine parent.label label}});
 
   // Assuming only the right type is stored under the attribute node.
   return attribute_store_get_node_child_count(attribute_node);
@@ -76,9 +74,8 @@ sl_status_t {{asAttributeGetFunction parent.label label}}(
     aoxpc_attribute_store_network_helper_get_endpoint_node(unid, endpoint);
 
   attribute_store_node_t attribute_node =
-    attribute_store_get_node_child_by_type(endpoint_node,
-                                          {{asAttributeIdDefine parent.label label}},
-                                          0);
+    attribute_store_get_first_child_by_type(endpoint_node,
+                                          {{asAttributeIdDefine parent.label label}});
 
   attribute_store_node_t child_node =
     attribute_store_get_node_child_by_type(attribute_node,
@@ -107,9 +104,8 @@ sl_status_t {{asAttributeGetFunction parent.label label}}(
     aoxpc_attribute_store_network_helper_get_endpoint_node(unid, endpoint);
 
   attribute_store_node_t attribute_node =
-    attribute_store_get_node_child_by_type(endpoint_node,
-                                          {{asAttributeIdDefine parent.label label}},
-                                          0);
+    attribute_store_get_first_child_by_type(endpoint_node,
+                                          {{asAttributeIdDefine parent.label label}});
 
   {{#if (isString type)}}
   return attribute_store_get_reported_string(attribute_node,
@@ -137,9 +133,8 @@ sl_status_t {{asAttributeSetFunction parent.label label}}(
     aoxpc_attribute_store_network_helper_create_endpoint_node(unid, endpoint);
 
   attribute_store_node_t attribute_node =
-    attribute_store_get_node_child_by_type(endpoint_node,
-                                          {{asAttributeIdDefine parent.label label}},
-                                          0);
+    attribute_store_get_first_child_by_type(endpoint_node,
+                                          {{asAttributeIdDefine parent.label label}});
 
   if (attribute_node == ATTRIBUTE_STORE_INVALID_NODE) {
     attribute_node = attribute_store_add_node({{asAttributeIdDefine parent.label label}},

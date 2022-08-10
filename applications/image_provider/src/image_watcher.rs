@@ -19,7 +19,7 @@ use std::time::Duration;
 use unify_config_sys::config_get_as_int;
 use unify_config_sys::config_get_as_string;
 use unify_config_sys::ConfigLoader;
-use unify_middleware::unify_mqtt_client::{sl_status_t, MqttClientTrait, UnifyMqttClient};
+use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 
 use std::thread;
 

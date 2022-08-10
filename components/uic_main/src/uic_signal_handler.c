@@ -12,7 +12,7 @@
  *****************************************************************************/
 #include "uic_signal_handler.h"
 #include <signal.h>
-PROCESS(uic_signal_handler_process, "UIC Signal Handler");
+PROCESS(uic_signal_handler_process, "Unify Signal Handler");
 
 #define SIGNAL_INIT 1
 

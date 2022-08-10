@@ -13,7 +13,7 @@
 // Includes from this component
 #include "zcl_OTA_cluster_server.hpp"
 
-// UIC Includes
+// Unify Includes
 #include "ota.hpp"
 #include "attribute.hpp"
 #include "attribute_resolver.h"

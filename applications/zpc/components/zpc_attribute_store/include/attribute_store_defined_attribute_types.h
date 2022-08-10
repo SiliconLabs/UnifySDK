@@ -71,8 +71,9 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_NODE_NAME, 0x000B)
 DEFINE_ATTRIBUTE(ATTRIBUTE_NODE_LOCATION, 0x000C)
 ///< This represents the Network Status of a node. node_state_topic_state_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_NETWORK_STATUS, 0x000D)
-///< This represents the last timestamp when we receive a frame from a node.
-/// For sleeping nodes, this represents the last timestamp when node is awake
+///< This represents a timestamp (in seconds!) of the last time when we received and/or
+///successfully transmitted a frame towards a node. storage type of the
+///timestamp is clock_time_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP, 0x000F)
 ///< This is the protocol used for including a node. zwave_protocol_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_INCLUSION_PROTOCOL, 0x0010)
@@ -103,6 +104,8 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_BASIC_DEVICE_CLASS, 0x0103)
 DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS, 0x0104)
 /** This represents the Z-Wave Specific Device Type of a node/endpoint. */
 DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_SPECIFIC_DEVICE_CLASS, 0x0105)
+///< This represent a zwave_key_protocol_combination_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_KEY_AND_PROTOCOL_TO_DISCOVER, 0x0106)
 
 // Generic attributes that can be placed anywhere under an endpoint.
 /** This indicates if more reports are expected to "complete" the value of an attribute */
@@ -113,6 +116,34 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_REPORTS_TO_FOLLOW, 0x0201)
 
 // Command class specific attributes, should be attached under endpoints
 // Suggested range (CC_identifier (4bytes) <<8) | 0x00..0xFF
+
+///////////////////////////////////
+// Alarm Sensor Command Class
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_VERSION,
+                 ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_SENSOR_ALARM))
+
+// Bitmask Attribute contains the bytes that describe the alarm
+// types that the device support. uint8_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_BITMASK,
+                 ((COMMAND_CLASS_SENSOR_ALARM << 8) | 0x02))
+
+// Alarm type contains the type of the alarm. alarm_sensor_type_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_TYPE,
+                 ((COMMAND_CLASS_SENSOR_ALARM << 8) | 0x03))
+
+// Sensor state contains the state of the alarm if alarm is active or not
+// alarm_sensor_state_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_STATE,
+                 ((COMMAND_CLASS_SENSOR_ALARM << 8) | 0x04))
+
+// Node ID, which detected the alarm condition. alarm_sensor_id_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_NODE_ID,
+                 ((COMMAND_CLASS_SENSOR_ALARM << 8) | 0x05))
+
+//Seconds indicates time the remote alarm must be active since last received report.
+// alarm_sensor_seconds_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_SECONDS,
+                 ((COMMAND_CLASS_SENSOR_ALARM << 8) | 0x06))
 
 ///////////////////////////////////
 // Basic Command Class
@@ -212,6 +243,37 @@ DEFINE_ATTRIBUTE(
   ((COMMAND_CLASS_SWITCH_MULTILEVEL << 8) | 0x07))
 
 ///////////////////////////////////
+// Color Switch Command Class
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_VERSION,
+                 ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_SWITCH_COLOR))
+
+///< This is a bitmask of the supported color components IDs. color_component_bitmask_t
+DEFINE_ATTRIBUTE(
+  ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_SUPPORTED_COLOR_COMPONENT_MASK,
+  ((COMMAND_CLASS_SWITCH_COLOR << 8) | 0x2))
+
+///< This this is an umbrella/parent attribute, containing the state of
+/// the color switch. command_status_values_t type
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_STATE,
+                 ((COMMAND_CLASS_SWITCH_COLOR << 8) | 0x03))
+
+///< This represents a Color Component ID, color_component_id_t type.
+/// Located under ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_STATE
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_COLOR_COMPONENT_ID,
+                 ((COMMAND_CLASS_SWITCH_COLOR << 8) | 0x4))
+
+///< This represents a Color Component ID's value, uint32_t (due to mapper)
+/// Located under ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_COLOR_COMPONENT_ID
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_VALUE,
+                 ((COMMAND_CLASS_SWITCH_COLOR << 8) | 0x5))
+
+///< This represents a Color Component ID's duration (to get to the desired value)
+/// uint32_t (due to mapper)
+/// Located under ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_COLOR_COMPONENT_ID
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_DURATION,
+                 ((COMMAND_CLASS_SWITCH_COLOR << 8) | 0x6))
+
+///////////////////////////////////
 // Multilevel Sensor Command Class
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SENSOR_MULTILEVEL_VERSION,
                  ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_SENSOR_MULTILEVEL))
@@ -254,9 +316,6 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_PROFILE,
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_VERSION,
                  ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_ASSOCIATION))
 
-/** This represents the number of supported association group by an endpoint. */
-DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_SUPPORTED_GROUPS,
-                 ((COMMAND_CLASS_ASSOCIATION << 8) | 0x02))
 /** This represents the ID of an Association group. */
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID,
                  ((COMMAND_CLASS_ASSOCIATION << 8) | 0x03))
@@ -269,6 +328,12 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_SUPPORTED_GROUPINGS,
 /** This represents The maximum number of destinations supported by the advertised association group */
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_MAX_NODES_SUPPORTED,
                  ((COMMAND_CLASS_ASSOCIATION << 8) | 0x06))
+
+///////////////////////////////////
+// Clock Command Class
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CLOCK_VERSION,
+                 ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_CLOCK))
 
 ///////////////////////////////////
 // Configuration Command Class
@@ -345,11 +410,72 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CONFIGURATION_PARAMETERS_TO_DISCOVER,
                  ((COMMAND_CLASS_CONFIGURATION << 8) | 0x11))
 
 /////////////////////////////////////////////////
+// CRC16 Command Class
+///< This represents the version of the CRC16 Locally Command Class.
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_CRC16_VERSION,
+                 ((COMMAND_CLASS_CRC_16_ENCAP << 8) | 0x01))
+
+/////////////////////////////////////////////////
 // Device Reset Locally Command Class
 ///< This represents the version of the Device Reset Locally Command class.
 /// zwave_cc_version_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_DEVICE_RESET_LOCALLY_VERSION,
                  ((COMMAND_CLASS_DEVICE_RESET_LOCALLY << 8) | 0x01))
+
+/////////////////////////////////////////////////
+// Inclusion Controller Command Class
+///< This represents the version of the Inclusion Controller Command class.
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_INCLUSION_CONTROLLER_VERSION,
+                 ((COMMAND_CLASS_INCLUSION_CONTROLLER << 8) | 0x01))
+
+/////////////////////////////////////////////////
+// Meter Command Class
+///< This represents the version of the Meter Command class.
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_METER_VERSION,
+                 ((COMMAND_CLASS_METER << 8) | 0x01))
+
+/// Indicates if the nodes supports Meter Reset
+/// meter_reset_supported_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_METER_RESET_SUPPORTED,
+                 ((COMMAND_CLASS_METER << 8) | 0x02))
+
+/// This represents the supported scales for a Meter type.
+/// byte array
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_METER_SUPPORTED_SCALES,
+                 ((COMMAND_CLASS_METER << 8) | 0x03))
+
+/// This represents the supported rate types for a Meter type.
+/// meter_supported_rate_types_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_METER_SUPPORTED_RATE_TYPES,
+                 ((COMMAND_CLASS_METER << 8) | 0x04))
+
+/// This represents a Meter type.
+/// meter_type_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_METER_TYPE,
+                 ((COMMAND_CLASS_METER << 8) | 0x05))
+
+/// This represents a Meter scale.
+/// meter_scale_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_METER_SCALE,
+                 ((COMMAND_CLASS_METER << 8) | 0x06))
+
+/// This represents a Meter Rate type.
+/// meter_rate_type_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_METER_RATE_TYPE,
+                 ((COMMAND_CLASS_METER << 8) | 0x07))
+
+/// This represents a Meter Value.
+/// meter_value_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_METER_VALUE,
+                 ((COMMAND_CLASS_METER << 8) | 0x08))
+
+/// This represents a Meter Value's precision.
+/// meter_precision_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_METER_PRECISION,
+                 ((COMMAND_CLASS_METER << 8) | 0x09))
 
 /////////////////////////////////////////////////
 // Multi Channel Association Command Class
@@ -475,7 +601,7 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_INTERVAL,
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_NODE_ID,
                  ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x03))
 
-///> Configured Wake Up NodeID for a node. zwave_node_id_t type.
+///> Configured Wake Up NodeID for a node. command_status_values_t type.
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES,
                  ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x0A))
 
@@ -496,16 +622,39 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_WAKE_UP_CAPABILITIES_BITMASK,
                  ((COMMAND_CLASS_WAKE_UP_V2 << 8) | 0x08))
 
 /////////////////////////////////////////////////
+// Scene Activation Command Class
+/// < This represent the version of the  Scene Activation Command Class
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTIVATION_VERSION,
+                 ((COMMAND_CLASS_SCENE_ACTIVATION << 8) | 0x01))
+
+/////////////////////////////////////////////////
+// Scene Actuator Configuration Command Class
+/// < This represent the version of the  Scene Actuator Configuration Command Class
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_ACTUATOR_CONF_VERSION,
+                 ((COMMAND_CLASS_SCENE_ACTUATOR_CONF << 8) | 0x01))
+
+/////////////////////////////////////////////////
+// Scene Controller Configuration Command Class
+/// < This represent the version of the  Scene Controller Configuration Command Class
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SCENE_CONTROLLER_CONF_VERSION,
+                 ((COMMAND_CLASS_SCENE_CONTROLLER_CONF << 8) | 0x01))
+
+/////////////////////////////////////////////////
 // Security 0 (S0) Command Class
+/// < This represent the version of the Security 0 Command Class
+/// zwave_cc_version_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SECURITY_0_VERSION,
                  ((COMMAND_CLASS_SECURITY << 8) | 0x01))
-/// < This represent the version of the Security 0 Command Class
 
 /////////////////////////////////////////////////
 // Security 2 (S2) Command Class
+/// < This represent the version of the Security 2 Command Class
+/// zwave_cc_version_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SECURITY_2_VERSION,
                  ((COMMAND_CLASS_SECURITY_2 << 8) | 0x01))
-/// < This represent the version of the Security 2 Command Class
 
 /////////////////////////////////////////////////
 // Transport Service Command Class
@@ -519,6 +668,13 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_TRANSPORT_SERVICE_VERSION,
 /// zwave_cc_version_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_COMMAND_CLASS_POWERLEVEL_VERSION,
                  ((COMMAND_CLASS_POWERLEVEL << 8) | 0x01))
+
+/////////////////////////////////////////////////
+// All Switch Command Class
+///< This represents the version of the All Switch Command class.
+/// zwave_cc_version_t
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ALL_SWITCH_VERSION,
+                 ((COMMAND_CLASS_SWITCH_ALL << 8) | 0x01))
 
 /////////////////////////////////////////////////
 // Z-Wave Plus Info CC
@@ -615,11 +771,11 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_APPLY_TIMESTAMP,
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_FILENAME,
                  ((COMMAND_CLASS_FIRMWARE_UPDATE_MD << 8) | 0x0D))
 ///> This is the highest received offset during the process.
-///> size_t type
+///> uint32_t type
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_OFFSET,
                  ((COMMAND_CLASS_FIRMWARE_UPDATE_MD << 8) | 0x0E))
 ///> This is the total size (in bytes) of the firmware to transfer.
-///> size_t type
+///> uint32_t type
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_SIZE,
                  ((COMMAND_CLASS_FIRMWARE_UPDATE_MD << 8) | 0x0F))
 ///> This is the last status received from the supporting node
@@ -637,13 +793,14 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_FWU_MD_FW_TRANSFER_EXPIRY_TIME,
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_INDICATOR_TIMEOUT, 0x87F0)
 
 // ZigBee specific attributes
-// Suggested range (ZigBee Cluster ID (4 bytes) <<16) | Zigbee attribute ID (4 bytes)
+// Suggested range (ZigBee Cluster ID (2 bytes) <<16) | Zigbee attribute ID (2 bytes)
 
 // Group Cluster
 ///< This represents a Group identifier. uint16_t
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_ID, 0x00040001)
 ///< This represents a Group name. String representation with Null termination.
 DEFINE_ATTRIBUTE(DOTDOT_ATTRIBUTE_ID_GROUPS_GROUP_NAME, 0x00040002)
-#endif     //ATTRIBUTE_AUTO_GENERATED
-#endif     //ATTRIBUTE_STORE_TYPES_H
-/** @} */  //end attribute_types
+
+#endif  //ATTRIBUTE_AUTO_GENERATED
+#endif  //ATTRIBUTE_STORE_TYPES_H
+        /** @} end zpc_attribute_types */

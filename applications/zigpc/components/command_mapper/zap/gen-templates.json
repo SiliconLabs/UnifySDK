@@ -1,5 +1,5 @@
 {
-  "name": "UIC ZigPC Command Mapper",
+  "name": "Unify ZigPC Command Mapper",
   "version": "uic-zigpc-command-mapper-v1",
   "override": "../../zcl_util/zap/addon-override.js",
   "helpers": ["../../zcl_util/zap/addon-helper.js"],

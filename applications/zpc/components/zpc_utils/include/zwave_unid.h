@@ -58,7 +58,7 @@ void zwave_unid_from_node_id(zwave_node_id_t node_id, unid_t unid);
  *  - SL_STATUS_INVALID_KEY       home id does not match the current home id
  *  - SL_STATUS_INVALID_RANGE     Node id is not in a valid range.
  */
-sl_status_t zwave_unid_to_node_id(const unid_t unid,zwave_node_id_t* node_id);
+sl_status_t zwave_unid_to_node_id(const unid_t unid, zwave_node_id_t *node_id);
 
 /**
  * @brief Convert a UNID to a Home ID.
@@ -68,7 +68,7 @@ sl_status_t zwave_unid_to_node_id(const unid_t unid,zwave_node_id_t* node_id);
  * @param unid    UNID to parse
  * @param home_id HomeID output, must be a valid pointer.
  * @return sl_status_t
- *  - SL_STATUS_OK                if node id could be mapped
+ *  - SL_STATUS_OK                if HomeID could be parsed
  *  - SL_STATUS_INVALID_PARAMETER format of the UNID could not be parsed correctly.
  */
 sl_status_t zwave_unid_to_home_id(const unid_t unid, zwave_home_id_t *home_id);

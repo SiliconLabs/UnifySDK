@@ -69,8 +69,12 @@ target_add_unittest(
   SOURCES
   zwave_command_class_security_0_test.c
   DEPENDS
-  zwave_command_class_test_helper
-  ${MOCK_LIBS})
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_controller
+  zwave_command_handler_mock
+  zwave_tx_scheme_selector_mock
+)
 
 target_add_unittest(
   zwave_command_classes
@@ -80,7 +84,10 @@ target_add_unittest(
   zwave_command_class_indicator_test.c
   DEPENDS
   zwave_command_class_test_helper
-  ${MOCK_LIBS}
+  uic_attribute_store_mock
+  zwave_command_handler_mock
+  zwave_controller_mock
+  zwave_tx_mock
   EXCLUDE
   platform_exec.c)
 
@@ -118,6 +125,7 @@ target_add_unittest(
   zwave_controller
   zwave_command_handler_mock
   uic_attribute_resolver_mock
+  uic_attribute_utils_mock
   zpc_attribute_resolver_mock
   zpc_config_mock
   zwave_network_management_mock
@@ -133,7 +141,11 @@ target_add_unittest(
   SOURCES
   zwave_command_class_security_2_test.c
   DEPENDS
-  ${MOCK_LIBS})
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  zwave_tx_scheme_selector_mock
+)
 
 target_add_unittest(
   zwave_command_classes
@@ -143,7 +155,6 @@ target_add_unittest(
   zwave_command_class_version_test.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zpc_utils
   zwave_controller
   zwave_command_handler_mock
   uic_attribute_resolver_mock
@@ -159,10 +170,25 @@ target_add_unittest(
   SOURCES
   zwave_command_class_node_info_resolver_test.c
   DEPENDS
-  ${MOCK_LIBS}
-  zwave_security_validation_mock
-  EXCLUDE
-  zwave_command_class_node_info_resolver.c)
+    zpc_attribute_store_test_helper
+    zpc_utils
+    zwave_controller_mock
+    uic_attribute_resolver_mock
+    zwave_network_management_mock
+)
+
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_granted_keys_resolver_test
+  SOURCES
+  zwave_command_class_granted_keys_resolver_test.c
+  DEPENDS
+    zpc_attribute_store_test_helper
+    uic_attribute_resolver_mock
+    zpc_attribute_resolver_mock
+)
+
 
 target_add_unittest(
   zwave_command_classes
@@ -187,6 +213,21 @@ target_add_unittest(
   EXCLUDE
   zwave_command_class_multi_channel.c)
 
+# Multilevel Sensor test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_multilevel_sensor_test
+  SOURCES
+  zwave_command_class_multilevel_sensor_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+)
+
 # Basic test
 target_add_unittest(
   zwave_command_classes
@@ -196,7 +237,6 @@ target_add_unittest(
   zwave_command_class_basic_test.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zpc_utils
   zwave_controller
   zwave_command_handler_mock
   uic_attribute_resolver_mock
@@ -246,7 +286,6 @@ target_add_unittest(
   zwave_command_classes_generic_tests.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zpc_utils
   zwave_command_handler_mock
   zwave_controller_mock
   uic_attribute_resolver_mock
@@ -265,7 +304,6 @@ target_add_unittest(
   zwave_command_class_central_scene_test.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zpc_utils
   uic_attribute_utils_mock
   zwave_command_handler_mock
   zwave_controller_mock
@@ -285,7 +323,35 @@ target_add_unittest(
   zwave_command_class_configuration_control_test.c
   DEPENDS
   zpc_attribute_store_test_helper
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zwave_network_management_mock)
+
+# Alarm Sensor Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_alarm_sensor_test
+  SOURCES
+  zwave_command_class_alarm_sensor_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
   zpc_utils
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zwave_network_management_mock)
+
+# Meter Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_meter_control_test
+  SOURCES
+  zwave_command_class_meter_control_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
   zwave_command_handler_mock
   uic_attribute_resolver_mock
   zpc_attribute_resolver_mock
@@ -300,7 +366,25 @@ target_add_unittest(
   zwave_command_class_switch_multilevel_test.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zpc_utils
+  uic_attribute_utils_mock
+  zwave_command_handler_mock
+  zwave_controller_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  zpc_config_mock
+  zwave_tx_scheme_selector_mock
+  zwave_tx_mock
+  uic_dotdot_mqtt_mock)
+
+# Z-Wave Color Switch Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_switch_color_test
+  SOURCES
+  zwave_command_class_switch_color_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
   uic_attribute_utils_mock
   zwave_command_handler_mock
   zwave_controller_mock
@@ -319,14 +403,14 @@ target_add_unittest(
   zwave_command_class_binary_switch_test.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zpc_utils
   zwave_command_handler_mock
   zwave_controller_mock
   uic_attribute_resolver_mock
   zpc_attribute_resolver_mock
   zpc_config_mock
   zwave_tx_scheme_selector_mock
-  zwave_tx_mock)
+  zwave_tx_mock
+  uic_dotdot_mqtt_mock)
 
 # Z-Wave Firmware Update functionality test
 target_add_unittest(
@@ -337,8 +421,6 @@ target_add_unittest(
   zwave_command_class_firmware_update_test.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zpc_attribute_store
-  zpc_utils
   uic_ota
   zwave_tx_scheme_selector
   zwave_controller
@@ -358,7 +440,6 @@ target_add_unittest(
   zwave_command_class_association_test.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zpc_utils
   uic_contiki_stub
   zwave_controller_mock
   zwave_command_handler_mock
@@ -366,20 +447,6 @@ target_add_unittest(
   zwave_tx_scheme_selector_mock
   zwave_network_management_mock
   zwave_tx_mock)
-
- # Association internals test
-target_add_unittest(
-  zwave_command_classes
-  NAME
-  zwave_command_class_association_internals_test
-  SOURCES
-  zwave_command_class_association_internals_test.c
-  DEPENDS
-  zpc_attribute_store_test_helper
-  zpc_utils
-  zwave_network_management_mock
-)
-
 
 # Multi Channel Association
 target_add_unittest(
@@ -390,7 +457,6 @@ target_add_unittest(
   zwave_command_class_multi_channel_association_test.c
   DEPENDS
   zpc_attribute_store_test_helper
-  zpc_utils
   zwave_controller
   zwave_command_handler_mock
   uic_attribute_resolver_mock
@@ -458,6 +524,21 @@ target_add_unittest(
   zwave_command_handler_mock
   zwave_controller_mock
   zwave_network_management_mock)
+
+# Thermostat mode test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_thermostat_mode_test
+  SOURCES
+  zwave_command_class_thermostat_mode_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+  uic_dotdot_mqtt_mock)
 
 # Tests for generated command classes
 set(GEN_TEST_INCLUDES

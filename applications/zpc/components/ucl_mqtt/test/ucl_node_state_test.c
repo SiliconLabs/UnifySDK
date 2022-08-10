@@ -60,6 +60,7 @@ const attribute_store_node_t node_id_in_network_2 = 0x25;
 
 // Expected publications
 const static char expected_state_topic[] = "ucl/by-unid/zw-DEADBEEF-0009/State";
+const static char expected_node_topic[] = "ucl/by-unid/zw-DEADBEEF-0009";
 const static char expected_state_message_1[]
   = "{\"NetworkStatus\": \"Online interviewing\", \"Security\": \"None\", "
     "\"MaximumCommandDelay\": \"infinite\"}";
@@ -398,7 +399,7 @@ void test_ucl_node_id_attribute_delete_case()
   attribute_store_network_helper_get_unid_from_node_ReturnMemThruPtr_unid(
     test_unid,
     sizeof(unid_t));
-  uic_mqtt_unretain_Expect(expected_state_topic);
+  uic_mqtt_unretain_Expect(expected_node_topic);
   node_id_update_callback_save(test_delete_node, ATTRIBUTE_DELETED);
 }
 

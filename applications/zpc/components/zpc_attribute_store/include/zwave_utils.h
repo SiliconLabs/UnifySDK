@@ -169,6 +169,31 @@ sl_status_t
  */
 wake_up_interval_t zwave_get_wake_up_interval(zwave_node_id_t node_id);
 
+/**
+ * @brief Searches if a Command Class/Command pair is in a byte array of
+ * Command class/command pairs
+ *
+ * @param command_class         The Command Class to look for
+ * @param command               The Command to look for
+ * @param command_list          Pointer to the Command Class/Command byte array
+ * @param command_list_length   Length of the command_list array (in bytes)
+ *
+ * @returns true if the Command Class/Command pair has been found, false if not found
+ */
+bool is_command_in_array(zwave_command_class_t command_class,
+                         zwave_command_t command,
+                         const uint8_t *command_list,
+                         uint8_t command_list_length);
+
+/**
+ * @brief Verifies if an endpoint exists under a NodeID
+ *
+ * @param node_id         NodeID for which we want to verify endpoint existence
+ * @param endpoint_id     Endpoint ID to look for
+ * @returns true if the endpoint exists, false otherwise
+ */
+bool endpoint_exists(zwave_node_id_t node_id, zwave_endpoint_id_t endpoint_id);
+
 /** @} (end addtogroup zwave_utils) */
 /** @} (end addtogroup zpc_utils) */
 #ifdef __cplusplus

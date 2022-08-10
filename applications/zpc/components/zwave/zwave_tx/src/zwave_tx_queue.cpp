@@ -14,7 +14,7 @@
 // Includes from this component
 #include "zwave_tx.h"
 #include "zwave_tx_process.h"
-#include "zwave_tx_queue.h"
+#include "zwave_tx_queue.hpp"
 
 // Includes from other components
 #include "sl_log.h"
@@ -24,6 +24,21 @@
 #include <cstdio>    // snprintf
 
 #define LOG_TAG "zwave_tx_queue"
+
+constexpr size_t DEBUG_MESSAGE_BUFFER_LENGTH = 512;
+
+namespace
+{
+// Private printing variable
+char message[DEBUG_MESSAGE_BUFFER_LENGTH];
+
+bool parent_session_id_equals(const zwave_tx_queue_element_t &element,
+                              const zwave_tx_session_id_t parent_session)
+{
+  return (element.options.transport.valid_parent_session_id)
+         && (element.options.transport.parent_session_id == parent_session);
+}
+}  // namespace
 
 sl_status_t zwave_tx_queue::enqueue(const zwave_tx_queue_element_t &new_element,
                                     zwave_tx_session_id_t *user_session_id)
@@ -38,38 +53,45 @@ sl_status_t zwave_tx_queue::enqueue(const zwave_tx_queue_element_t &new_element,
   }
 
   // Ensure that everything is initialized correctly:
-  if (e.zwave_tx_options.valid_parent_session_id == false) {
-    e.zwave_tx_options.parent_session_id = 0;
+  if (e.options.transport.valid_parent_session_id == false) {
+    e.options.transport.parent_session_id = nullptr;
   }
   // Ensure that the timing variables are correctly set:
   e.transmission_timestamp = 0;
   e.transmission_time      = 0;
   e.queue_timestamp        = clock_time();
 
-  // A bit of validation: If multicast destination, then number of expected replies must be 0.
-  if (e.connection_info.remote.is_multicast == true) {
-    e.zwave_tx_options.number_of_responses = 0;
-  }
-
   // Make a console message about our new frame
   this->simple_log(&e);
 
-  // Put our element in the list and keep it sorted, so highest QoS is first.
-  this->insert(e);
+  if (!queue.insert(std::move(e))) {
+    return SL_STATUS_FULL;
+  }
   return SL_STATUS_OK;
 }
 
 sl_status_t zwave_tx_queue::pop(const zwave_tx_session_id_t session_id)
 {
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
-    if (it->zwave_tx_session_id == session_id) {
-      it = this->erase(it);
-      return SL_STATUS_OK;
-    }
+  if (const auto it = find(session_id); it != queue.end()) {
+    queue.erase(it);
+    return SL_STATUS_OK;
   }
-
   return SL_STATUS_NOT_FOUND;
+}
+
+zwave_tx_queue_element_t *zwave_tx_queue::first_in_queue()
+{
+  return queue.begin();
+}
+
+void zwave_tx_queue::clear()
+{
+  queue.clear();
+}
+
+bool zwave_tx_queue::empty() const
+{
+  return queue.empty();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -77,26 +99,18 @@ sl_status_t zwave_tx_queue::pop(const zwave_tx_session_id_t session_id)
 ///////////////////////////////////////////////////////////////////////////////
 bool zwave_tx_queue::contains(const zwave_tx_session_id_t session_id) const
 {
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
-    if (it->zwave_tx_session_id == session_id) {
-      return true;
-    }
-  }
-  return false;
+  return find(session_id) != queue.end();
 }
 
 sl_status_t
   zwave_tx_queue::get_by_id(zwave_tx_queue_element_t *element,
                             const zwave_tx_session_id_t session_id) const
 {
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
-    if (it->zwave_tx_session_id == session_id) {
-      memcpy(element, &(*it), sizeof(zwave_tx_queue_element_t));
-      return SL_STATUS_OK;
-    }
+  if (auto it = find(session_id); it != queue.end()) {
+    memcpy(element, &(*it), sizeof(zwave_tx_queue_element_t));
+    return SL_STATUS_OK;
   }
+
   return SL_STATUS_NOT_FOUND;
 }
 
@@ -104,15 +118,22 @@ sl_status_t zwave_tx_queue::get_highest_priority_child(
   zwave_tx_queue_element_t *element,
   const zwave_tx_session_id_t session_id) const
 {
-  sl_status_t status   = SL_STATUS_NOT_FOUND;
+  sl_status_t status                    = SL_STATUS_NOT_FOUND;
+  const_queue_iterator highest_priority = queue.end();
 
-  for (auto it = this->begin(); it != this->end(); ++it) {
-    if ((it->zwave_tx_options.valid_parent_session_id)
-        && (it->zwave_tx_options.parent_session_id == session_id)) {
-      // Set is sorted by priority, so first found child is also highest priority.
-      memcpy(element, &(*it), sizeof(zwave_tx_queue_element_t));
-      status = SL_STATUS_OK;
+  auto it = queue.begin();
+  while (it != queue.end()) {
+    if (parent_session_id_equals(*it, session_id)
+        && (highest_priority == queue.end()
+            || queue_element_qos_compare()(*it, *highest_priority))) {
+      highest_priority = it;
     }
+    ++it;
+  }
+
+  if (highest_priority != queue.end()) {
+    memcpy(element, highest_priority, sizeof(zwave_tx_queue_element_t));
+    status = SL_STATUS_OK;
   }
   return status;
 }
@@ -125,32 +146,25 @@ sl_status_t zwave_tx_queue::set_transmissions_results(
   uint8_t status,
   zwapi_tx_report_t *tx_status)
 {
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
-    if (it->zwave_tx_session_id == session_id) {
-      zwave_tx_queue_element_t e = *it;
-      e.send_data_status         = status;
-      if (nullptr != tx_status) {
-        e.send_data_tx_status = *tx_status;
-      } else {
-        memset(&(e.send_data_tx_status), 0, sizeof(zwapi_tx_report_t));
-      }
-      // Capture the transmission time here.
-      e.transmission_time = clock_time() - e.transmission_timestamp;
-      // Prevent 0ms transmission time, we check on this value
-      // to verify that the element was sent
-      if (e.transmission_time == 0) {
-        e.transmission_time = 1;
-      }
-      // Copy this time in the tx_report, so the user component can read this data
-      e.send_data_tx_status.transmit_ticks
-        = (uint16_t)(e.transmission_time / 10);
-
-      // Remove the old element and re-insert the modified version of it.
-      this->insert(it, e);  // Hint the position of the element to remove.
-      this->erase(it);      // Remove the old element
-      return SL_STATUS_OK;
+  if (auto it = find(session_id); it != queue.end()) {
+    it->send_data_status = status;
+    if (nullptr != tx_status) {
+      it->send_data_tx_status = *tx_status;
+    } else {
+      memset(&(it->send_data_tx_status), 0, sizeof(zwapi_tx_report_t));
     }
+    // Capture the transmission time here.
+    it->transmission_time = clock_time() - it->transmission_timestamp;
+    // Prevent 0ms transmission time, we check on this value
+    // to verify that the element was sent
+    if (it->transmission_time == 0) {
+      it->transmission_time = 1;
+    }
+    // Copy this time in the tx_report, so the user component can read this data
+    it->send_data_tx_status.transmit_ticks
+      = (uint16_t)(it->transmission_time / 10);
+
+    return SL_STATUS_OK;
   }
   return SL_STATUS_NOT_FOUND;
 }
@@ -158,18 +172,16 @@ sl_status_t zwave_tx_queue::set_transmissions_results(
 sl_status_t zwave_tx_queue::decrement_expected_responses(
   const zwave_tx_session_id_t session_id)
 {
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
-    if (it->zwave_tx_session_id == session_id) {
-      if (it->zwave_tx_options.number_of_responses > 0) {
-        zwave_tx_queue_element_t e = *it;
-        e.zwave_tx_options.number_of_responses--;
-        // Remove the old element and re-insert the modified version of it.
-        this->insert(it, e);  // Hint the position of the element to remove.
-        this->erase(it);      // Remove the old element
-      }
-      return SL_STATUS_OK;
+  if (auto it = find(session_id); it != queue.end()) {
+    if (it->options.number_of_responses > 0) {
+      it->options.number_of_responses--;
+
+    } else if (it->options.transport.valid_parent_session_id) {
+      // Check if parents frame are expecting responses
+      return this->decrement_expected_responses(
+        it->options.transport.parent_session_id);
     }
+    return SL_STATUS_OK;
   }
   return SL_STATUS_NOT_FOUND;
 }
@@ -180,30 +192,42 @@ uint8_t zwave_tx_queue::get_number_of_responses(
   uint8_t total_number_of_responses = 0;
   zwave_tx_queue_element_t element  = {};
   if (this->get_by_id(&element, session_id) == SL_STATUS_OK) {
-    total_number_of_responses += element.zwave_tx_options.number_of_responses;
-    if (element.zwave_tx_options.valid_parent_session_id == true) {
+    total_number_of_responses += element.options.number_of_responses;
+    if (element.options.transport.valid_parent_session_id == true) {
       total_number_of_responses += this->get_number_of_responses(
-        element.zwave_tx_options.parent_session_id);
+        element.options.transport.parent_session_id);
     }
   }
 
   return total_number_of_responses;
 }
 
+const uint8_t *zwave_tx_queue::get_frame(const zwave_tx_session_id_t session_id)
+{
+  if (auto it = find(session_id); it != queue.end()) {
+    return it->data;
+  }
+
+  return nullptr;
+}
+
+uint16_t
+  zwave_tx_queue::get_frame_length(const zwave_tx_session_id_t session_id)
+{
+  if (auto it = find(session_id); it != queue.end()) {
+    return it->data_length;
+  }
+
+  return 0;
+}
+
 sl_status_t zwave_tx_queue::set_transmission_timestamp(
   const zwave_tx_session_id_t session_id)
 {
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
-    if (it->zwave_tx_session_id == session_id) {
-      // Make a copy of the element and modify its sending time.
-      zwave_tx_queue_element_t e = *it;
-      e.transmission_timestamp   = clock_time();
-      // Remove the old element and re-insert the modified version of it.
-      this->insert(it, e);  // Hint the position of the element to remove.
-      this->erase(it);      // Remove the old element
-      return SL_STATUS_OK;
-    }
+  auto it = find(session_id);
+  if (it != queue.end()) {
+    it->transmission_timestamp = clock_time();
+    return SL_STATUS_OK;
   }
   return SL_STATUS_NOT_FOUND;
 }
@@ -211,53 +235,22 @@ sl_status_t zwave_tx_queue::set_transmission_timestamp(
 sl_status_t zwave_tx_queue::reset_transmission_timestamp(
   const zwave_tx_session_id_t session_id)
 {
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
-    if (it->zwave_tx_session_id == session_id) {
-      // Make a copy of the element and modify its sending time.
-      zwave_tx_queue_element_t e = *it;
-      e.transmission_timestamp   = 0;
-      e.transmission_time        = 0;
-      // Remove the old element and re-insert the modified version of it.
-      this->insert(it, e);  // Hint the position of the element to remove.
-      this->erase(it);      // Remove the old element
-      return SL_STATUS_OK;
-    }
-  }
-  return SL_STATUS_NOT_FOUND;
-}
-sl_status_t
-  zwave_tx_queue::disable_fasttack(const zwave_tx_session_id_t session_id)
-{
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
-    if (it->zwave_tx_session_id == session_id) {
-      // Make a copy of the element and modify its data.
-      zwave_tx_queue_element_t e   = *it;
-      e.zwave_tx_options.fasttrack = false;
-      // Remove the old element and re-insert the modified version of it.
-      this->insert(it, e);  // Hint the position of the element to remove.
-      this->erase(it);      // Remove the old element
-      return SL_STATUS_OK;
-    }
+  auto it = find(session_id);
+  if (it != queue.end()) {
+    it->transmission_timestamp = 0;
+    it->transmission_time      = 0;
+    return SL_STATUS_OK;
   }
   return SL_STATUS_NOT_FOUND;
 }
 
-sl_status_t zwave_tx_queue::cancel_follow_up_frames(
-  const zwave_tx_session_id_t session_id)
+sl_status_t
+  zwave_tx_queue::disable_fasttack(const zwave_tx_session_id_t session_id)
 {
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
-    if (it->zwave_tx_session_id == session_id) {
-      // Make a copy of the element and modify its data.
-      zwave_tx_queue_element_t e         = *it;
-      e.zwave_tx_options.send_follow_ups = false;
-      // Remove the old element and re-insert the modified version of it.
-      this->insert(it, e);  // Hint the position of the element to remove.
-      this->erase(it);      // Remove the old element
-      return SL_STATUS_OK;
-    }
+  auto it = find(session_id);
+  if (it != queue.end()) {
+    it->options.fasttrack = false;
+    return SL_STATUS_OK;
   }
   return SL_STATUS_NOT_FOUND;
 }
@@ -268,9 +261,8 @@ sl_status_t zwave_tx_queue::cancel_follow_up_frames(
 
 void zwave_tx_queue::log(bool log_messages_payload) const
 {
-  zwave_tx_queue::iterator it;
-  sl_log_debug(LOG_TAG, "Queue size: %lu\n", (unsigned long)this->size());
-  for (it = this->begin(); it != this->end(); ++it) {
+  sl_log_debug(LOG_TAG, "Queue size: %lu\n", (unsigned long)queue.size());
+  for (auto it = queue.begin(); it != queue.end(); ++it) {
     sl_log_debug(LOG_TAG,
                  "Entry (id=%p): (address %p)\n",
                  it->zwave_tx_session_id,
@@ -290,24 +282,24 @@ void zwave_tx_queue::log(bool log_messages_payload) const
     sl_log_debug(LOG_TAG,
                  "\tEncapsulation: %d - Number of expected responses: %d\n",
                  it->connection_info.encapsulation,
-                 it->zwave_tx_options.number_of_responses);
+                 it->options.number_of_responses);
     sl_log_debug(LOG_TAG,
                  "\tQoS priority: %u / fasttrack %d\n",
-                 it->zwave_tx_options.qos_priority,
-                 it->zwave_tx_options.fasttrack);
+                 it->options.qos_priority,
+                 it->options.fasttrack);
     sl_log_debug(LOG_TAG,
                  "\tDiscard timeout: %d ms\n",
-                 it->zwave_tx_options.discard_timeout_ms);
+                 it->options.discard_timeout_ms);
     sl_log_debug(LOG_TAG,
                  "\tParent frame: %p, parent frame valid: %d\n",
-                 it->zwave_tx_options.parent_session_id,
-                 it->zwave_tx_options.valid_parent_session_id);
+                 it->options.transport.parent_session_id,
+                 it->options.transport.valid_parent_session_id);
     sl_log_debug(LOG_TAG,
                  "\tMulticast group: %p, is first follow-up: %d, send "
                  "follow-ups: %d\n",
-                 it->zwave_tx_options.group_id,
-                 it->zwave_tx_options.is_first_follow_up,
-                 it->zwave_tx_options.send_follow_ups);
+                 it->options.transport.group_id,
+                 it->options.transport.is_first_follow_up,
+                 it->options.send_follow_ups);
     sl_log_debug(LOG_TAG,
                  "\tTimestamps: queued %lu - transmitted %lu - Transmission "
                  "time (ms): %lu\n",
@@ -315,9 +307,7 @@ void zwave_tx_queue::log(bool log_messages_payload) const
                  it->transmission_timestamp,
                  it->transmission_time);
     if (true == log_messages_payload) {
-      char message[1000];
       uint16_t index = 0;
-
       index += snprintf(message + index,
                         sizeof(message) - index,
                         "Frame payload (hex): ");
@@ -334,10 +324,9 @@ void zwave_tx_queue::log(bool log_messages_payload) const
 }
 
 void zwave_tx_queue::log_element(const zwave_tx_session_id_t session_id,
-                                 bool log_messages_payload) const
+                                 bool log_frame_payload) const
 {
-  zwave_tx_queue::iterator it;
-  for (it = this->begin(); it != this->end(); ++it) {
+  for (auto it = queue.begin(); it != queue.end(); ++it) {
     if (it->zwave_tx_session_id == session_id) {
       sl_log_debug(
         LOG_TAG,
@@ -347,24 +336,22 @@ void zwave_tx_queue::log_element(const zwave_tx_session_id_t session_id,
  fasttrack: %d, Queue timestamp: %lu, transmission timestamp: %lu, transmission time (ms): %lu\n",
         it->zwave_tx_session_id,
         &(*it),
-        it->zwave_tx_options.qos_priority,
-        it->zwave_tx_options.discard_timeout_ms,
-        it->zwave_tx_options.number_of_responses,
+        it->options.qos_priority,
+        it->options.discard_timeout_ms,
+        it->options.number_of_responses,
         it->connection_info.local.node_id,
         it->connection_info.local.endpoint_id,
         it->connection_info.remote.node_id,
         it->connection_info.remote.endpoint_id,
         it->connection_info.remote.is_multicast,
-        it->zwave_tx_options.parent_session_id,
-        it->zwave_tx_options.valid_parent_session_id,
-        it->zwave_tx_options.fasttrack,
+        it->options.transport.parent_session_id,
+        it->options.transport.valid_parent_session_id,
+        it->options.fasttrack,
         it->queue_timestamp,
         it->transmission_timestamp,
         it->transmission_time);
-      if (true == log_messages_payload) {
-        char message[1000];
+      if (true == log_frame_payload) {
         uint16_t index = 0;
-
         index += snprintf(message + index,
                           sizeof(message) - index,
                           "Frame payload (hex): ");
@@ -385,19 +372,17 @@ void zwave_tx_queue::log_element(const zwave_tx_session_id_t session_id,
 
 void zwave_tx_queue::simple_log(zwave_tx_queue_element_t *e) const
 {
-  char message[1000];
   uint16_t index = 0;
-
   index += snprintf(message + index,
                     sizeof(message) - index,
                     "Enqueuing new frame (id=%p)",
                     e->zwave_tx_session_id);
 
-  if (e->zwave_tx_options.valid_parent_session_id == true) {
+  if (e->options.transport.valid_parent_session_id == true) {
     index += snprintf(message + index,
                       sizeof(message) - index,
                       " (parent id=%p)",
-                      e->zwave_tx_options.parent_session_id);
+                      e->options.transport.parent_session_id);
   }
 
   // Source address
@@ -425,8 +410,9 @@ void zwave_tx_queue::simple_log(zwave_tx_queue_element_t *e) const
   // Encapsulation & payload
   index += snprintf(message + index,
                     sizeof(message) - index,
-                    "Encapsulation %d - Payload [",
-                    e->connection_info.encapsulation);
+                    "Encapsulation %d - Payload (%d bytes) [",
+                    e->connection_info.encapsulation,
+                    e->data_length);
 
   for (uint16_t i = 0; i < e->data_length; i++) {
     index += snprintf(message + index,
@@ -435,4 +421,30 @@ void zwave_tx_queue::simple_log(zwave_tx_queue_element_t *e) const
                       e->data[i]);
   }
   sl_log_debug(LOG_TAG, "%s]\n", message);
+}
+
+zwave_tx_queue::queue_iterator
+  zwave_tx_queue::find(const zwave_tx_session_id_t key)
+{
+  // TODO: Linear search of elements is rather slow. this can easily be
+  // optimized to a constant complexity without excessive more memory. e.g. by
+  // implementing a lookup inside the priority queue.
+  return std::find_if(queue.begin(),
+                      queue.end(),
+                      [&key](const zwave_tx_queue_element_t &item) {
+                        return item.zwave_tx_session_id == key;
+                      });
+}
+
+zwave_tx_queue::const_queue_iterator
+  zwave_tx_queue::find(const zwave_tx_session_id_t key) const
+{
+  // TODO: Linear search of elements is rather slow. this can easily be
+  // optimized to a constant complexity without excessive more memory. e.g. by
+  // implementing a lookup inside the priority queue.
+  return std::find_if(queue.begin(),
+                      queue.end(),
+                      [&key](const zwave_tx_queue_element_t &item) {
+                        return item.zwave_tx_session_id == key;
+                      });
 }

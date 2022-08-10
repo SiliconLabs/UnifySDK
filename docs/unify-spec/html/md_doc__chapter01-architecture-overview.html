@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Specification
-   &#160;<span id="projectnumber">ver1_0_RC11_20211006-12-g5cdaf55</span>
+   &#160;<span id="projectnumber">ver1_0_RC11_20211006-19-g32c28c7</span>
    </div>
   </td>
  </tr>
@@ -73,13 +73,13 @@ Terminology And Abbreviations</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Term </th><th class="markdownTableHeadNone">Abbreviation </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Unify SDK </td><td class="markdownTableBodyNone">Unify </td><td class="markdownTableBodyNone">The system whose design is described here. Formerly known as Unified IoT Controller (UIC).  </td></tr>
+<td class="markdownTableBodyNone">Unify Framework </td><td class="markdownTableBodyNone">Unify </td><td class="markdownTableBodyNone">The system whose design is described here. Formerly known as Unified IoT Controller (UIC).  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Software Development Kit </td><td class="markdownTableBodyNone">SDK </td><td class="markdownTableBodyNone">A software package used as a building block for other software. Unify is itself an SDK.  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Unified Node ID </td><td class="markdownTableBodyNone">UNID </td><td class="markdownTableBodyNone">A unified addressing system with a separate sub-namespace for each PHY supported by the Unify SDK. It is arbitrarily chosen to resemble an IPv6 address in the current design.  </td></tr>
+<td class="markdownTableBodyNone">Unified Node ID </td><td class="markdownTableBodyNone">UNID </td><td class="markdownTableBodyNone">A unified addressing system with a separate sub-namespace for each PHY supported by the Unify Framework. It is arbitrarily chosen to resemble an IPv6 address in the current design.  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Unify Controller Language </td><td class="markdownTableBodyNone">UCL </td><td class="markdownTableBodyNone">The unified command language used as an internal abstraction layer in the Unify SDK.  </td></tr>
+<td class="markdownTableBodyNone">Unify Controller Language </td><td class="markdownTableBodyNone">UCL </td><td class="markdownTableBodyNone">The unified command language used as an internal abstraction layer in the Unify Framework.  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Cluster </td><td class="markdownTableBodyNone">CL </td><td class="markdownTableBodyNone">A grouping of related commands/attributes supported by an end-node. Examples include Door Lock, Multilevel Switch, Movement Sensor, and so on. For example, Bluetooth Profiles and Z-Wave Command Classes can be translated into CCs. CCs are encoded as MQTT topic strings, e.g., "door_lock", "movement_sensor", and so on.  </td></tr>
 <tr class="markdownTableRowEven">
@@ -100,9 +100,9 @@ Terminology And Abbreviations</h1>
 <p><em>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="https://tools.ietf.org/html/rfc2119">RFC2119</a>.</em></p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Introduction</h1>
-<p>The Unify SDK delivers a unified high-level API, such as cloud control, local HomeAssistant middle-wares, and so on to control, observe and manage end nodes in all PHYs supported by Silicon Labs. It also facilitates code reuse and allows easily adding new high-level APIs without the need to modify the PHY drivers. After a new high-level API module has been created, it should be possible to control all the supported PHYs without any changes to the PHY drivers. Likewise, after a new PHY driver has been created, it should immediately be possible to control that PHY from all the existing high-level APIs without modifying the high-level API module.</p>
-<p>In other words, the Unify SDK decouples API modules from the PHY drivers.</p>
-<p>The Unify SDK is a software component that runs inside a gateway product. It needs a hardware platform and an operating system to be a complete product.</p>
+<p>The Unify Framework delivers a unified high-level API, such as cloud control, local HomeAssistant middle-wares, and so on to control, observe and manage end nodes in all PHYs supported by Silicon Labs. It also facilitates code reuse and allows easily adding new high-level APIs without the need to modify the PHY drivers. After a new high-level API module has been created, it should be possible to control all the supported PHYs without any changes to the PHY drivers. Likewise, after a new PHY driver has been created, it should immediately be possible to control that PHY from all the existing high-level APIs without modifying the high-level API module.</p>
+<p>In other words, the Unify Framework decouples API modules from the PHY drivers.</p>
+<p>The Unify Framework is a software component that runs inside a gateway product. It needs a hardware platform and an operating system to be a complete product.</p>
 <div class="image">
 <img src="sl_gw_asset.png" alt="" width="800px"/>
 </div>
@@ -110,7 +110,7 @@ Introduction</h1>
 <p>The remainder of this document refers to PHY drivers as Protocol Controllers because they not only drive the modem but also translate the Application Layer commands from one PHY technology to another. Similarly, the high-level API modules are called IoT Services, which are named after the expected use case, but they can also connect to locally running services.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 System Components</h1>
-<p>The Unify SDK is a software component of a full plastic-enclosed GW box. You can think of it as a "device driver" for the IoT, seen from the Host MCU in the GW box. The Unify component uses MQTT as an internal message-bus for inter-process communication among MQTT clients that are each an independent process/thread. In a Linux or other full OS implementation, real processes should be used. The primary hardware platform of the Unify design is a Cortex A-class device or an equivalent.</p>
+<p>The Unify Framework is a software component of a full plastic-enclosed GW box. You can think of it as a "device driver" for the IoT, seen from the Host MCU in the GW box. The Unify component uses MQTT as an internal message-bus for inter-process communication among MQTT clients that are each an independent process/thread. In a Linux or other full OS implementation, real processes should be used. The primary hardware platform of the Unify design is a Cortex A-class device or an equivalent.</p>
 <p>The MQTT clients are one of these types:</p>
 <ul>
 <li>IoT Services (or IoT services): These modules expose the externally-visible APIs in Unify. IoT Services translate back and forth between external APIs and the intermediate UCL. The external API is typically consumed by a cloud-service or a local middleware/app. It is slightly confusing that an IoT Service can also provide APIs to a locally-running service. It is named after the expected use case, which is a cloud-based remote control. Examples of IoT Services include:<ul>
@@ -145,7 +145,6 @@ System Diagram</h1>
 <p>The Resource Directory is also an MQTT client.</p>
 <p>The MQTT server should run as a separate Linux process.</p>
 <p>The Resource Directory facilitates device discovery and communicates with each Protocol Controller through specific MQTT topics. The Protocol Controller MUST automatically notify the Resource Directory of nodes that join or leave the network, as well as multicast groups that are added/removed/modified.</p>
-<p>The ACL Engine validates all publish and subscribe requests before being processed by the Broker. The permissions of each MQTT Client is established by looking up a permission token in an Access Control List (ACL). The key to the ACL is a security token contained in the TLS certificate presented by the MQTT client. Local clients SHOULD only be allowed to connect TLS, but they may use raw TCP if absolutely necessary (note that this will prevent the ACL Engine from identifying the client). Remote clients MUST only connect with TLS. If non-TLS connections are accepted against this RECOMMENDATION, another simple (and non-secure) permission token exchange must be added.</p>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Design Variants</h2>
 <p>Unify gateways comes in a few variants that differ in the number of PHYs controlled:</p>
@@ -162,7 +161,7 @@ Design Variants</h2>
 Packet Format</h1>
 <p>When Unify MQTT clients attach to the locally-running MQTT broker, they publish and receive messages in the following format (i.e., a tcpdump attached to the sockets going to and from the MQTT Broker, would see the packets in the following two figures).</p>
 <div class="image">
-<img src="UniversalGWPacketFormatv2.0.png" alt="" width="800px"/>
+<img src="UniversalGWPacketFormatv2_0.png" alt="" width="800px"/>
 <div class="caption">
 PUBlish messages style</div></div>
  <div class="image">
@@ -172,7 +171,7 @@ SUBscribe messages style</div></div>
  <p>If the MQTT broker is running remotely, the MQTT MUST be using strong transport encryption to provide adequate security (e.g., MQTT over TLS or WebSocket).</p>
 <h1><a class="anchor" id="autotoc_md7"></a>
 Unify Controller Language Definition</h1>
-<p>The Unify Controller Language (UCL) is developed to allow the easiest possible translation to and from as many PHYs and cloud services as possible. The UCL serves as an abstraction layer between the PHY-specific data models and the models used in various cloud services for controlling IoT devices. The UCL data model MUST be the Zigbee Cluster Library/dotdot (dotdot is ZCL transported over CoAP, whereas UCL will be transported over MQTT). ZCL has been chosen to align Unify with the high-profile <a href="https://https://buildwithmatter.com/">Matter project</a>.</p>
+<p>The Unify Controller Language (UCL) is developed to allow the easiest possible translation to and from as many PHYs and cloud services as possible. The UCL serves as an abstraction layer between the PHY-specific data models and the models used in various cloud services for controlling IoT devices. The UCL data model MUST be the Zigbee Cluster Library/dotdot (dotdot is ZCL transported over CoAP, whereas UCL will be transported over MQTT). ZCL has been chosen to align Unify with the high-profile <a href="https://csa-iot.org/">Matter project</a>.</p>
 <p>In addition to the existing Zigbee Clusters, UCL is extended with the necessary commands to support all features of the supported PHYs.</p>
 <h1><a class="anchor" id="autotoc_md8"></a>
 UNID: Unified Node IDs</h1>
@@ -237,52 +236,96 @@ MQTT Topic Hierarchical Namespace</h1>
 <div class="line">                                      node state, that will affect this node only.</div>
 <div class="line">      NameAndLocation                 Topic for setting node name and location. Discover via ucl/by-location/ .</div>
 <div class="line"> </div>
-<div class="line">by-location                           Subscribe to ucl/by-location/+ to receive all locations.</div>
-<div class="line">  &lt;LOCATION&gt;                          Payload is the pretty-printed name of location. E.g.</div>
+<div class="line">  by-location                         Subscribe to ucl/by-location/+ to receive all locations.</div>
+<div class="line">    &lt;LOCATION&gt;                        Payload is the pretty-printed name of location. E.g.</div>
 <div class="line">                                      {&quot;location-name-utf8&quot; : &quot;walk-in closet&quot;} for topic ucl/by-location/</div>
 <div class="line">                                      walk-in_closet .</div>
-<div class="line">    &lt;UNID&gt;                            Each node in &lt;LOCATION&gt; publishes a retained message here using its</div>
+<div class="line">      &lt;UNID&gt;                          Each node in &lt;LOCATION&gt; publishes a retained message here using its</div>
 <div class="line">                                      UNID as topic here.</div>
 <div class="line">                                      Subscribe to ucl/by-location/&lt;LOCATION&gt;/+ to receive a message from</div>
 <div class="line">                                      each UNID in &lt;LOCATION&gt;.</div>
 <div class="line"> </div>
-<div class="line">by-type/</div>
-<div class="line">  by-devicetype/</div>
-<div class="line">    &lt;DEVICETYPE&gt;                      e.g. &quot;door_lock&quot;, &quot;light&quot; or &quot;sensor&quot;.</div>
-<div class="line">      &lt;UNID&gt;                          Each node of &lt;DEVICETYPE&gt; publishes a retained message here using</div>
+<div class="line">  by-type/</div>
+<div class="line">    by-devicetype/</div>
+<div class="line">      &lt;DEVICETYPE&gt;                    e.g. &quot;door_lock&quot;, &quot;light&quot; or &quot;sensor&quot;.</div>
+<div class="line">        &lt;UNID&gt;                        Each node of &lt;DEVICETYPE&gt; publishes a retained message here using</div>
 <div class="line">                                      its own UNID as sub-topic.</div>
 <div class="line">                                      Subscribe to ucl/by-devicetype/&lt;DEVICETYPE&gt;/+ to receive a message from</div>
 <div class="line">                                      each UNID in of that type.</div>
 <div class="line"> </div>
-<div class="line">by-homeassistant-type/</div>
-<div class="line">  &lt;HOMEASSISTANT_TYPE&gt;                e.g. &quot;binary_sensor&quot; or &quot;camera&quot;</div>
-<div class="line">    &lt;UNID&gt;                            Subscribe to ucl/by-type/by-homeassistant-type/+ to receive a message</div>
+<div class="line">  by-homeassistant-type/</div>
+<div class="line">    &lt;HOMEASSISTANT_TYPE&gt;              e.g. &quot;binary_sensor&quot; or &quot;camera&quot;</div>
+<div class="line">      &lt;UNID&gt;                          Subscribe to ucl/by-type/by-homeassistant-type/+ to receive a message</div>
 <div class="line">                                      for each HomeAssistant type in the network</div>
 <div class="line">                                      Subscribe to ucl/by-type/by-homeassistant-type/&lt;HOMEASSISTANT_TYPE&gt;/+ to</div>
 <div class="line">                                      receive messages from each UNID of that type</div>
-<div class="line">by-group/                             For multicast groups</div>
-<div class="line">  &lt;GroupID&gt;                           A unique, numeric group ID</div>
+<div class="line"> </div>
+<div class="line">  by-group/                           For multicast groups</div>
+<div class="line">    &lt;GroupID&gt;/                        A unique, numeric group ID</div>
 <div class="line">                                      e.g. 1, 2, ... 65535.</div>
-<div class="line">    GroupName                         Name assigned to the group.</div>
-<div class="line">    NodeList</div>
-<div class="line">      &lt;UNID&gt;                          Used to advertise the membership of a UNID</div>
+<div class="line">      GroupName                       Name assigned to the group.</div>
+<div class="line">      NodeList/</div>
+<div class="line">        &lt;UNID&gt;                        Used to advertise the membership of a UNID</div>
 <div class="line">                                      and a list of its endpoints for a group</div>
-<div class="line">    &lt;ClusterName&gt;</div>
-<div class="line">      Commands/</div>
-<div class="line">        &lt;CommandName&gt;                 Publish here to multicast &lt;CommandName&gt; to</div>
+<div class="line">      &lt;ClusterName&gt;/</div>
+<div class="line">        Commands/</div>
+<div class="line">          &lt;CommandName&gt;               Publish here to multicast &lt;CommandName&gt; to</div>
 <div class="line">                                      all UNIDs/endpoints that are part of the</div>
 <div class="line">                                      group.</div>
-<div class="line">        WriteAttributes               Publish here to multicast attribute write</div>
+<div class="line">          WriteAttributes             Publish here to multicast attribute write</div>
 <div class="line">                                      to all UNIDs/endpoints that are part of</div>
 <div class="line">                                      the group.</div>
-<div class="line">      SupportedCommands               List of commands supported by all UNIDs/</div>
+<div class="line">        SupportedCommands             List of commands supported by all UNIDs/</div>
 <div class="line">                                      endpoints that are part of the group.</div>
 <div class="line"> </div>
-<div class="line">  SmartStart                          Topics for managing SmartStart node provisioning</div>
+<div class="line">  SmartStart/                         Topics for managing SmartStart node provisioning</div>
 <div class="line">    List                              The full list of SmartStart entries is published here</div>
 <div class="line">    Update                            Publish here to add/update an entry to the list</div>
 <div class="line">    Remove                            Publish here to remove an entry from the list</div>
 <div class="line">  _well_known                         Versioning and list of supported ucl/ sub-topics</div>
+<div class="line"> </div>
+<div class="line">  by-machine-id/                      Topics for managing machines participating</div>
+<div class="line">                                      in a Unify system.</div>
+<div class="line">    &lt;id&gt;/                             Each machine identifies itself with a unique ID</div>
+<div class="line">      &lt;ClusterName&gt;/</div>
+<div class="line">        Commands/</div>
+<div class="line">          &lt;CommandName&gt;               Publish here to send &lt;CommandName&gt; to</div>
+<div class="line">                                      the machine that supports a cluster.</div>
+<div class="line">          WriteAttributes             Publish here to send a WriteAttributes to</div>
+<div class="line">                                      the machine that supports writable attributes.</div>
+<div class="line">        SupportedCommands             List of commands supported by a machine</div>
+<div class="line">                                      for a cluster.</div>
+<div class="line">        SupportedGeneratedCommands    List of generated commands by a machine</div>
+<div class="line">                                      for a cluster.</div>
+<div class="line">        GeneratedCommands/</div>
+<div class="line">          &lt;CommandName&gt;               Hosts will publish here &lt;CommandName&gt; to</div>
+<div class="line">                                      indicate that it wants to send a command.</div>
+<div class="line">        Attributes/                   Attribute namespace, where all attributes</div>
+<div class="line">                                      for the machine/cluster will be advertised.</div>
+<div class="line">          &lt;AttributeName&gt;/            Attribute name, e.g &quot;DisksUsage&quot;.</div>
+<div class="line">            Reported                  Reported state for a given attribute.</div>
+<div class="line"> </div>
+<div class="line">  by-mqtt-id/                         Topics for managing applications participating</div>
+<div class="line">                                      in a Unify system.</div>
+<div class="line">    &lt;mqtt-id&gt;/                        Each application identifies itself with a</div>
+<div class="line">                                      unique MQTT Client ID.</div>
+<div class="line">      &lt;ClusterName&gt;/</div>
+<div class="line">        Commands/</div>
+<div class="line">          &lt;CommandName&gt;               Publish here to send &lt;CommandName&gt; to</div>
+<div class="line">                                      the application that supports a cluster.</div>
+<div class="line">          WriteAttributes             Publish here to send a WriteAttributes to</div>
+<div class="line">                                      the application that supports writable attributes.</div>
+<div class="line">        SupportedCommands             List of commands supported by an application</div>
+<div class="line">                                      for a cluster.</div>
+<div class="line">        SupportedGeneratedCommands    List of generated commands by an application</div>
+<div class="line">                                      for a cluster.</div>
+<div class="line">        GeneratedCommands/</div>
+<div class="line">          &lt;CommandName&gt;               Applications will publish here &lt;CommandName&gt; to</div>
+<div class="line">                                      indicate that it wants to send a command.</div>
+<div class="line">        Attributes/                   Attribute namespace, where all attributes</div>
+<div class="line">                                      for the application/cluster will be advertised.</div>
+<div class="line">          &lt;AttributeName&gt;/            Attribute name, e.g &quot;ApplicationConnected&quot;.</div>
+<div class="line">            Reported                  Reported state for a given attribute.</div>
 </div><!-- fragment --><p>The &lt;DEVICETYPE&gt; MUST adequately describe the Device Types (i.e., the practical functions) of all the device types found in all PANs supported by Silicon Labs. The <a href="https://zigbeealliance.org/solution/dotdot/">dotdot Device Library specification</a> has a good list of device types.</p>
 <p>The &lt;HOMEASSISTANT_TYPE&gt; MUST be a strict superset of the <a href="https://www.home-assistant.io/docs/mqtt/discovery/">MQTT discovery types defined in the HomeAssistant open-source project</a>.</p>
 <p>The subscribers to the ucl/_well_known topic/+ MUST receive a <a href="https://www.w3schools.com/js/js_json_datatypes.asp">JSON-encoded</a> payload in a <a href="https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/">Retained Message</a> with at least the following contents:</p>
@@ -408,70 +451,58 @@ The Resource Directory MQTT Client</h1>
 <li>It MUST manage the global SmartStart provisioning list, which is common to all Protocol Controllers.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md18"></a>
-ACL Engine</h1>
-<p>The ACL Engine acts as a filter between the MQTT broker and the various MQTT clients. It ensures that IoT Service and Protocol Controllers can only issue the commands they are trusted for. Without the ACL Engine, any PAN Protocol Controller could send any and all commands to all other PAN nodes managed by other Protocol Controllers. It may not be appropriate for the BLE Protocol Controller to issue unlock commands directly to the Z-Wave DoorLocks, for example. Similarly, just because an Azure IoT Service is allowed to receive sensor data from the ZigBee PAN, it should not be allowed to unlock BT Mesh doorlocks. Without an ACL engine, the pub/sub nature of the MQTT broker would allow any MQTT client to publish and subscribe to any topic and hence control and monitor anything connected to Unify.</p>
-<p>Technically, the ACL Engine MUST identify each MQTT client by the TLS certificate it presents when connecting to the Broker. The ACL Engine MUST then look up the accessible topics for this client, either in an ACL stored in the ACL engine, or stored securely in the certificate itself (and signed by a trusted root). The exact mechanism to populate the internal ACL is TBD, but must be at least as strong as the TLS certificate validation and anchored in a strong-trust root certificate.</p>
-<h1><a class="anchor" id="autotoc_md19"></a>
 Security Considerations</h1>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 Mandatory TLS Transport on Remote Access</h2>
 <p>TCP (non-TLS) MQTT transport for local connection SHOULD NOT be allowed. Raw TCP transport (non-TLS) MUST be rejected for remote connections including all non-monolithic variants with a remote MQTT broker.</p>
 <p>MUST transport MQTT over TLS or WebSockets for Bridged Broker.</p>
 <p>The type of TLS negotiated <a href="https://www.w3.org/TR/wsc-ui/#typesoftls">MUST be strong</a> and the Trust Anchors used to validate certificates must be carefully selected. The trust anchors used in the PKI for public web browsers MUST NOT be used for Unify gateways. Instead, a trust anchor should be created and installed for a particular GW product. Unify should provide an example and make it easy for Unify integrators and manufacturing partners to generate and replace the trust anchor with their own.</p>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 Unify Process Isolation</h2>
 <p>The Unify processes (Protocol Controllers, Resource Directory, IoT Services) MUST be hardened against malformed input thorough input validation, for example, should avoid common bug classes, such as array out-of-bounds addressing and pointer errors by design. It is RECOMMENDED to use memory safe languages (not C/C++). The processes SHOULD adopt the <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">principle of least privileges</a>, and not require root privileges to run. If a root is required, the processes SHOULD drop the privileges after initialization. A similar hardening SHOULD be applied to the MQTT Broker, although this will probably be a third-party implementation, at least in the first several phases of the Unify project.</p>
 <p>The Protocol Controller and Resource Directory processes handle sensitive crypto key material (at least the certificates and private keys for establishing TLS session with MQTT broker, potentially also PAN network keys). PAN encryption keys SHOULD (MUST in later phase) be stored in the PHY radio chip whenever possible to protect from adversarial processes on the Unify GW itself. Therefore, it must be protected against hostile processes reading the memory of the Unify software. Similarly, the Unify software must have exclusive access to the radios, so hostile processes cannot inject commands into the PAN. This must be achieved through OS access control mechanisms.</p>
-<h2><a class="anchor" id="autotoc_md22"></a>
-Mapping PAN Device Security to the Unified Controller Language</h2>
-<p>Protocol Controllers MUST fill out the UCL Header field "PAN Security" to indicate the security level of the received PAN frame that triggered the UCL publish message. The field will be used by the ACL to make sure non-secure commands can't control secure devices. This field MUST NOT control the outgoing security level transmitted on a PAN, that is to be determined by the Protocol Controller.</p>
-<h1><a class="anchor" id="autotoc_md23"></a>
+<h1><a class="anchor" id="autotoc_md21"></a>
 Broker Discovery</h1>
 <p>To interact with the Unify GW and the PAN nodes behind it, the IP address of the broker must be discovered. The mechanism of discovery is not yet defined, but the most likely candidate is <a href="https://en.wikipedia.org/wiki/Multicast_DNS">Multicast DNS (mDNS)</a>. Once connected, Resource Discovery MUST be used to discover the nodes and capabilities of the PAN nodes.</p>
-<h1><a class="anchor" id="autotoc_md24"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
 Sleepy Devices</h1>
 <p>Protocol Controller must manage sleepy devices in the optimal way for each PHY. MQTT retained messages SHOULD be used to cache the latest status from a sleepy device.</p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Z-Wave Battery Device</h2>
-<p>A Z-Wave Protocol Controller must handle messages to Sleepy Devices, which are known as Battery Devices or devices implementing the Wake Up Command Class, in the following way:</p>
+<p>Z-Wave Protocol Controllers must handle messages to Sleepy Devices, which are known as Battery Devices or devices implementing the Wake Up Command Class, in the following way:</p>
 <p>Whenever a Battery Device is included in the PAN, the Protocol Controller MUST set itself as the Lifeline of that node (if allowed) (i.e., make the node report all status commands to the Protocol Controller). The Battery Node will send Wake Up Notification Commands to the Protocol Controller whenever it is available for two-way communication. Usually the frequency is selected to achieve a certain battery life.</p>
 <p>After a message for a particular battery device has been published, and again when the message has been delivered and acknowledged on the application layer, the Protocol Controller must publish attribute state updates to their respective topics (<code>ucl/by-unid/&lt;UNID&gt;/ep&lt;EndpointIdD&gt;/&lt;ClusterName&gt;/Attributes/Reported</code>).</p>
 <p>The state must be described both by a <a href="https://d1.awsstatic.com/whitepapers/Designing_MQTT_Topics_for_AWS_IoT_Core.pdf">"desired" and "reported" state</a>.</p>
 <p>The desired state must be updated when the message has been received by the Protocol Controller. When the message has been application layer acknowledged by the PAN Node ("the garage door is now fully lowered and closed"), another update must be published, this time changing the "reported" state. of the Cluster attrbutes. The Supervision Command Class can be used to obtain application level confirmations in Z-Wave.</p>
-<h2><a class="anchor" id="autotoc_md26"></a>
-Zigbee Sleepy Device</h2>
-<p><b>TBD:</b><b> Describe how to handle Zigbee Sleepy Devices</b></p>
-<h2><a class="anchor" id="autotoc_md27"></a>
-BT Mesh Low Power Devices</h2>
-<p><b>TBD: Describe how to handle BT Mesh/BLE low-power devices</b></p>
-<h1><a class="anchor" id="autotoc_md28"></a>
+<h1><a class="anchor" id="autotoc_md24"></a>
 Mailbox</h1>
 <p>Protocol Controllers will let IoT Service issue commands to sleepy devices whenever they want to. Protocol Controllers are responsible for reflecting the desired state change for the attributes that are affected by the command.</p>
 <p>The Protocol Controllers must subsequently issue all pending commands to the sleepy devices whenever communication becomes possible again.</p>
 <p>IoT Services may expect to wait a delay in seconds (<code>MaximumCommandDelay</code>) advertised in the state topic <code>ucl/by-unid/&lt;UNID&gt;State</code> for each node before commands are delivered to the end node.</p>
 <p>Refer to the <a class="el" href="md_doc__chapter06-service-discovery.html">Service Discovery chapter</a> for details about the the node state topic.</p>
-<h1><a class="anchor" id="autotoc_md29"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Reportables/Unsolicited Messages from the PAN</h1>
 <p>A IoT Service that wants to receive Reportables (a.k.a. unsolicited messages) from a PAN node MUST have a well-defined way to subscribe to all events from a PAN node. An IoT Service must also be able to subscribe to all event notifications from a particular cluster by subscribing to the topic ucl/by-unid/&lt;UNID&gt;/#. The IoT Service will then receive all reportables from the &lt;UNID&gt; device along with all commands sent to it.</p>
 <p><b>NOTE:</b> IOT Services should evaluate the PAN node security level before trusting reportables/unsolicited messages received from the PAN. For</p>
 <p>To receive event notifications from multiple devices, MQTT topic wildcards can be used.</p>
-<h1><a class="anchor" id="autotoc_md30"></a>
+<h1><a class="anchor" id="autotoc_md26"></a>
 True Status and Almost True Status for Sleepy Devices</h1>
 <p><a href="https://community.smartthings.com/t/z-wave-switches-with-instant-update-2016/59328/7">True Status is a feature that allows end nodes to immediately report changes in their status</a>, especially when it is locally initiated. It has been covered by <a href="https://community.smartthings.com/t/z-wave-switches-with-instant-update-2016/59328">patents for years</a>, but at least <a href="https://patents.google.com/patent/US5905442A/en">one patent</a> expired in 2016. This feature MUST be leveraged and exposed to the IoT Service in the Unify design, if the PAN nodes support it.</p>
-<p>Status updates must be advertised to IoT Service as described in the <a href="## Reportables/Unsolicited messages from the PAN">Reportables/Unsolicited messages from the PAN section</a>.</p>
-<h1><a class="anchor" id="autotoc_md31"></a>
+<p>Status updates must be advertised to IoT Service as described in the <a href="Reportables/Unsolicited messages from the PAN">Reportables/Unsolicited messages from the PAN section</a>.</p>
+<h1><a class="anchor" id="autotoc_md27"></a>
 Rules Engines</h1>
-<p>Rules engines allow certain actions to be published when certain other events are received. Rules Engines should be distributed, in the sense that multiple IoT Services should be able to set up rules without conflicting with each other. For this, a single Rules Engine Module should be provided that manages a namespace likg ucl/rules_engine/ and providing an API for setting, getting and modifying if-then-else style rules. TBD: Should there be access controls in place to prevent IoT Services from modifying each other's rules? More advanced rules engines can be implemented by IoT Services using the raw publish/subscribe semantics. The Rules Engine SHOULD be implemented as a separate MQTT client to keep the Broker simple.</p>
-<h1><a class="anchor" id="autotoc_md32"></a>
+<p>Rules engines allow certain actions to be published when certain other events are received. Rules Engines should be distributed, in the sense that multiple IoT Services should be able to set up rules without conflicting with each other. For this, a single Rules Engine Module should be provided that manages a namespace likg ucl/rules_engine/ and providing an API for setting, getting and modifying if-then-else style rules.</p>
+<p>The Rules Engine SHOULD be implemented as a separate MQTT client to keep the Broker simple.</p>
+<h1><a class="anchor" id="autotoc_md28"></a>
 Data Logging</h1>
 <p>A data logger is an MQTT client that subscribes to ucl/by-unid/+/+/&lt;CLUSTER-TO-LOG&gt;/# and logs the received messages somewhere. Multiple subscriptions and logging streams are possible.</p>
-<h1><a class="anchor" id="autotoc_md33"></a>
+<h1><a class="anchor" id="autotoc_md29"></a>
 Command-Line Interface</h1>
 <p>It must be possible to control PAN devices and IoT Services from a Command-line interface. The CLI must allow SQA to test Protocol Controllers or IoT Services in isolation by injecting test stimulus to the broker. The CLI MUST also allow Gateway manufacturers to initiate RF performance tests.</p>
-<h1><a class="anchor" id="autotoc_md34"></a>
+<h1><a class="anchor" id="autotoc_md30"></a>
 Data Caching or Status Database</h1>
 <p>A cache of recent status messages from the PAN SHOULD be maintained in the GW to reduce the load on the PAN network when facing repeated queries from the IoT Service. This Data Layer can be thought of as a continually updating database of the total PAN state. Ideally, IoT Services should query this self-refreshing Status Database, and never issue requests directly to the PAN. The subscriptions may need a mechanism to signal the desired freshness of the response, so the Data Caching component can decide to update the status before responding. Data caching should probably be handled in each Protocol Controller. The mechanism of distribution (Retained Messages in the MQTT broker) or a real database will be decided later. A replication mechanism between these data bases will allow multiple Unified Gateways to control the same PAN without multiplying the amount of probing traffic needed to keep their individual status data bases up to date.</p>
-<h1><a class="anchor" id="autotoc_md35"></a>
+<h1><a class="anchor" id="autotoc_md31"></a>
 Latency Considerations</h1>
 <p>Unify must provide a perceived "latency-free" end-user experience. Lights and other devices should appear to respond immediately regardless of the type of Unify configuration (local MQTT broker, slim MQTT broker in cloud, full security with TLS for all broker connections, and so on). In practice, this requires a latency below 250 ms, which should be achievable given the following latency budget (all times are round-trips):</p>
 <ul>
@@ -482,9 +513,9 @@ Latency Considerations</h1>
 <li>PHY latency: 100 ms</li>
 <li>TOTAL: &lt; 200 ms Care must be taken in the Protocol Controller to avoid extra processing delays when translating and communicating with the PHY Radio.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md36"></a>
+<h1><a class="anchor" id="autotoc_md32"></a>
 Examples and Use Cases</h1>
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 Turning On a Zigbee Light Bulb from AWS IoT</h2>
 <p>Assume the Zigbee Protocol Controller has the prefix "zb" and the bulb has EUI-64 0x9876543210abcdef. The Protocol Controller has assigned the UNID "zb-9876543210abcdef" to the bulb.</p>
 <ol type="1">
@@ -503,13 +534,13 @@ Turning On a Zigbee Light Bulb from AWS IoT</h2>
 <li>The Zigbee Protocol Controller receives this message, matches the prefix and translates the UCL message to a sequence of Zigbee Cluster Library Commands (maybe just one command) and sends those out over the NCP.</li>
 <li>The bulb turns on.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 Updating the Firmware of a PIR Sensor from the Cloud</h2>
 <p><b>Use case 1: Cloud service wants a fleet overview: A list of devices and their Firmware Versions.</b></p>
 <p>See <a class="el" href="md_doc__chapter05-common-ota.html">Common OTA FW Update Service</a></p>
 <p><b>Use case 2: A cloud user wants to firmware update a Unify-managed device</b></p>
 <p>See <a class="el" href="md_doc__chapter05-common-ota.html">Common OTA FW Update Service</a></p>
-<h2><a class="anchor" id="autotoc_md39"></a>
+<h2><a class="anchor" id="autotoc_md35"></a>
 Multicasting to Two Light Bulbs</h2>
 <p><b> Use case: A IoT Service wants to turn on two light bulbs simultaneously.</b></p>
 <p>Assume that the UNIDs (UNID1 and UNID2) have already been discovered.</p>
@@ -522,20 +553,20 @@ Multicasting to Two Light Bulbs</h2>
 <li>IoT Service publishes a command for the group. For example, {"Level:100", "TransitionTime":"0.05"} to topic ucl/by-group/1/Level/Commands/MoveToLevelWithOnOff.</li>
 <li>Protocol Controller receives the message and issues a multicast message to those nodes. If managed by two different Protocol Controllers, a singlecast on each PHY will happen instead.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md40"></a>
+<h2><a class="anchor" id="autotoc_md36"></a>
 Contractor Writing an IoT Service</h2>
 <p><b>Type 1: Cloud provider uses MQTT</b></p>
 <p>Assume that a contractor is commissioned to build an IoT service. The IoT service connects UCL to a cloud solution of some sort. The contractor picks a MQTT client in a preferred language (in this use case Python), subscribes to relevant channels on the Unify broker, and publishes translated-to-cloud-solution commands to the cloud solution and vice-verse.</p>
 <p>Translation should be a lot simpler than the Protocol Controllers due to structural similarities btw. UCL and prevalent IoT cloud solution architectures. For example, both AWS IoT and Azure IoT uses MQTT transport and fits in this category (AWS IoT is agnostic to the payload/data model, but UCL must be translated to the data model of the cloud service being targeted, so some translation is still needed).</p>
 <p><b>Type 2: Cloud provider does not use MQTT:</b></p>
 <p>Add MQTT client, subscribe to stuff on the GW broker, translate and transmit to cloud provider in whatever transport and format they use. This requires more work than type 1, obviously, but is still significantly easier than pre-Unify solutions.</p>
-<h2><a class="anchor" id="autotoc_md41"></a>
+<h2><a class="anchor" id="autotoc_md37"></a>
 Contractor Writing a Protocol Controller</h2>
 <p>Contractor chooses an MQTT client in a preferred language and starts implementing the APIs detailed above in the Protocol Controller API section. Preferably, the contractor has in-depth knowledge of the PHY in question.</p>
-<h2><a class="anchor" id="autotoc_md42"></a>
+<h2><a class="anchor" id="autotoc_md38"></a>
 IoT Service Discovering All Devices Supporting Cluster "DoorLock"</h2>
 <ol type="1">
-<li>IoT Service subscribes to topic ucl/by-unid/+/+/DoorLock.</li>
+<li>IoT Service subscribes to topic ucl/by-unid/+/+/DoorLock/#.</li>
 <li>IoT Service receives a <a href="https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/">Retained Message</a> from each endpoint supporting the DoorLock command class. These messages were published by the Protocol Controllers. </li>
 </ol>
 </div></div><!-- contents -->

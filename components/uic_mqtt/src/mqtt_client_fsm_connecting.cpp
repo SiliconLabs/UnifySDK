@@ -14,7 +14,7 @@
 #include <algorithm>
 #include <chrono>
 
-// UIC components
+// Unify components
 #include "sl_log.h"
 
 // This component

@@ -12,7 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 use crate::image_watcher::{get_image_file, ImageWatcher, OtaConfig};
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{
+use unify_mqtt_sys::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
 };
 

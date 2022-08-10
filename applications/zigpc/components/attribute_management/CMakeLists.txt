@@ -26,6 +26,7 @@ target_link_libraries(
   PRIVATE zigpc_zcl_profiles
           zigpc_gateway
           zigpc_common
+          zigpc_config
           zigpc_ucl
           uic_contiki
           uic_log

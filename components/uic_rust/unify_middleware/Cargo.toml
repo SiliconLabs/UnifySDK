@@ -20,10 +20,14 @@ unify_config_sys = { path = "../unify_config_sys" }
 unify_contiki_sys = { path = "../unify_contiki_sys" }
 unify_mqtt_sys = { path=  "../unify_mqtt_sys" }
 unify_attribute_store_sys = { path = "../unify_attribute_store_sys" }
-unify_main_sys = { path = "../unify_main_sys" }
+unify_attribute_utils_sys = { path = "../unify_attribute_utils_sys" }
 futures = "0.3.*"
 mockall_double= "0.2.*"
 cstr_core = "0.2.*"
+paste = "*"
 
 [dev-dependencies]
 serial_test = "0.5.*"
+
+[build-dependencies]
+unify_build_utils = { path = "../unify_build_utils" }

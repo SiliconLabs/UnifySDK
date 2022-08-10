@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "unify_portable_core",
+    "unify_portable_cli"
+]

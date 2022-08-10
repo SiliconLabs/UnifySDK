@@ -19,7 +19,7 @@
 #include "sys/etimer.h"
 #include "sys/process.h"
 
-// UIC components
+// Unify components
 #include "sl_log.h"
 #include "config.h"
 #include "uic_main_externals.h"
@@ -31,7 +31,7 @@
 
 #define LOG_TAG "uic_mqtt"
 
-PROCESS(uic_mqtt_process, "UIC MQTT Client");
+PROCESS(uic_mqtt_process, "Unify MQTT Client");
 
 // An instance of our C++ struct/class. We need to pass this to all of
 // its wrapper-functions.
@@ -100,11 +100,10 @@ void uic_mqtt_process_on_disconnect(mqtt_client_t instance,
 sl_status_t uic_mqtt_setup()
 {
   const char *mqtt_host;
+  const char *mqtt_client_id;
   const char *cafile;
   const char *certfile;
   const char *keyfile;
-  char uic_id[16];
-  snprintf(uic_id, sizeof(uic_id), "uic_%i", getpid());
 
   int mqtt_port;
   if (CONFIG_STATUS_OK
@@ -114,13 +113,17 @@ sl_status_t uic_mqtt_setup()
   if (CONFIG_STATUS_OK != config_get_as_int(CONFIG_KEY_MQTT_PORT, &mqtt_port)) {
     return SL_STATUS_FAIL;
   }
+  if (CONFIG_STATUS_OK != config_get_as_string(CONFIG_KEY_MQTT_CLIENT_ID, &mqtt_client_id)) {
+    sl_log_error(LOG_TAG, "MQTT client ID not set");
+    return SL_STATUS_FAIL;
+  }
   config_get_as_string(CONFIG_KEY_MQTT_CAFILE, &cafile);
   config_get_as_string(CONFIG_KEY_MQTT_CERTFILE, &certfile);
   config_get_as_string(CONFIG_KEY_MQTT_KEYFILE, &keyfile);
 
   client_instance = mqtt_client_new(mqtt_host,
                                     mqtt_port,
-                                    uic_id,
+                                    mqtt_client_id,
                                     cafile,
                                     certfile,
                                     keyfile,

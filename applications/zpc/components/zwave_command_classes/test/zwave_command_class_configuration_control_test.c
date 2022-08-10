@@ -711,29 +711,26 @@ void test_zwave_command_class_version_3_node_receive_properties_report_happy_cas
   int32_t parameter_max_value                       = 42;
   int32_t parameter_default_value                   = 1;
   configuration_parameter_format_t parameter_format = 0;
-  uint8_t incoming_frame[] = {COMMAND_CLASS_CONFIGURATION_V4,
-                              CONFIGURATION_PROPERTIES_REPORT_V4,
-                              (uint8_t)(parameter_id >> 8),
-                              (uint8_t)(parameter_id & 0xFF),
-                              (parameter_format << 3) | parameter_size,
-                              0,  // Min value MSB
-                              0,
-                              0,
-                              0,  // Min value LSB
-                              0,  // Max value MSB
-                              0,
-                              0,
-                              0,  // Max value LSB
-                              0,  // Default value MSB
-                              0,
-                              0,
-                              0,  // Default value LSB
-                              (uint8_t)(next_parameter_id >> 8),
-                              (uint8_t)(next_parameter_id & 0xFF)};
-
-  memcpy(&incoming_frame[5], &parameter_min_value, sizeof(int32_t));
-  memcpy(&incoming_frame[9], &parameter_max_value, sizeof(int32_t));
-  memcpy(&incoming_frame[13], &parameter_default_value, sizeof(int32_t));
+  uint8_t incoming_frame[]
+    = {COMMAND_CLASS_CONFIGURATION_V4,
+       CONFIGURATION_PROPERTIES_REPORT_V4,
+       (uint8_t)(parameter_id >> 8),
+       (uint8_t)(parameter_id & 0xFF),
+       (parameter_format << 3) | parameter_size,
+       (parameter_min_value >> 24) & 0xFF,  // Min value MSB
+       (parameter_min_value >> 16) & 0xFF,
+       (parameter_min_value >> 8) & 0xFF,
+       parameter_min_value & 0xFF,          // Min value LSB
+       (parameter_max_value >> 24) & 0xFF,  // Max value MSB
+       (parameter_max_value >> 16) & 0xFF,
+       (parameter_max_value >> 8) & 0xFF,
+       parameter_max_value & 0xFF,              // Max value LSB
+       (parameter_default_value >> 24) & 0xFF,  // Default value MSB
+       (parameter_default_value >> 16) & 0xFF,
+       (parameter_default_value >> 8) & 0xFF,
+       parameter_default_value & 0xFF,  // Default value LSB
+       (uint8_t)(next_parameter_id >> 8),
+       (uint8_t)(next_parameter_id & 0xFF)};
 
   TEST_ASSERT_NOT_NULL(configuration_handler.control_handler);
   TEST_ASSERT_EQUAL(
@@ -816,26 +813,23 @@ void test_zwave_command_class_version_4_node_receive_properties_report_happy_cas
   configuration_parameter_flag_t altering_capabilities = true;
   configuration_parameter_flag_t advanced              = true;
   configuration_parameter_flag_t no_bulk_support       = true;
-  uint8_t incoming_frame[] = {COMMAND_CLASS_CONFIGURATION_V4,
-                              CONFIGURATION_PROPERTIES_REPORT_V4,
-                              (uint8_t)(parameter_id >> 8),
-                              (uint8_t)(parameter_id & 0xFF),
-                              (altering_capabilities << 7) | (read_only << 6)
-                                | (parameter_format << 3) | parameter_size,
-                              0,  // Min value MSB
-                              0,  // Min value LSB
-                              0,  // Max value MSB
-                              0,  // Max value LSB
-                              0,  // Default value MSB
-                              0,  // Default value LSB
-                              (uint8_t)(next_parameter_id >> 8),
-                              (uint8_t)(next_parameter_id & 0xFF),
-                              ((no_bulk_support << 1) | advanced),
-                              0x23};
-
-  memcpy(&incoming_frame[5], &parameter_min_value, sizeof(int16_t));
-  memcpy(&incoming_frame[7], &parameter_max_value, sizeof(int16_t));
-  memcpy(&incoming_frame[9], &parameter_default_value, sizeof(int16_t));
+  uint8_t incoming_frame[]
+    = {COMMAND_CLASS_CONFIGURATION_V4,
+       CONFIGURATION_PROPERTIES_REPORT_V4,
+       (uint8_t)(parameter_id >> 8),
+       (uint8_t)(parameter_id & 0xFF),
+       (altering_capabilities << 7) | (read_only << 6) | (parameter_format << 3)
+         | parameter_size,
+       (parameter_min_value >> 8) & 0xFF,      // Min value MSB
+       parameter_min_value & 0xFF,             // Min value LSB
+       (parameter_max_value >> 8) & 0xFF,      // Max value MSB
+       parameter_max_value & 0xFF,             // Max value LSB
+       (parameter_default_value >> 8) & 0xFF,  // Default value MSB
+       parameter_default_value & 0xFF,         // Default value LSB
+       (uint8_t)(next_parameter_id >> 8),
+       (uint8_t)(next_parameter_id & 0xFF),
+       ((no_bulk_support << 1) | advanced),
+       0x23};
 
   TEST_ASSERT_NOT_NULL(configuration_handler.control_handler);
   TEST_ASSERT_EQUAL(
@@ -1198,13 +1192,11 @@ void test_zwave_command_class_version_1_node_receive_report_set_default_values()
     CONFIGURATION_REPORT_V4,
     (uint8_t)parameter_id,
     (uint8_t)parameter_size,
-    0,  // value MSB
-    0,
-    0,
-    0,  // value LSB
+    (parameter_value >> 24) & 0xFF,  // value MSB
+    (parameter_value >> 16) & 0xFF,
+    (parameter_value >> 8) & 0xFF,
+    parameter_value & 0xFF,  // value LSB
   };
-
-  memcpy(&incoming_frame[4], &parameter_value, sizeof(int32_t));
 
   TEST_ASSERT_NOT_NULL(configuration_handler.control_handler);
   TEST_ASSERT_EQUAL(

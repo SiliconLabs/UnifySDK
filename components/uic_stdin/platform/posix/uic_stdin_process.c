@@ -176,7 +176,7 @@ sl_status_t uic_stdin_setup(void)
   return SL_STATUS_OK;
 }
 
-// Teardown uic CLI again
+// Teardown Unify CLI again
 int uic_stdin_teardown()
 {
   thread_running = false;

@@ -12,7 +12,7 @@
  *
  ******************************************************************************/
 
-// Shared UIC includes
+// Shared Unify includes
 #include <process.h>
 #include <sl_log.h>
 

@@ -1,9 +1,9 @@
-import { Tooltip } from '@material-ui/core';
 import * as React from 'react';
 import { NodeTypesList } from '../../cluster-types/cluster-types';
 import { ClusterViewOverrides } from '../../pages/base-clusters/cluster-view-overrides';
 import { ClusterTypeTooltipProps } from './cluster-type-tooltip-types';
 import * as GrIcons from 'react-icons/gr';
+import { Tooltip } from '@mui/material';
 
 
 class ClusterTypeTooltip extends React.Component<ClusterTypeTooltipProps, {}> {
@@ -20,7 +20,7 @@ class ClusterTypeTooltip extends React.Component<ClusterTypeTooltipProps, {}> {
                 let clusters = this.props.Ep[ep].Clusters && Object.keys(this.props.Ep[ep].Clusters);
                 if (clusters && clusters.length)
                     return clusters.map((cluster: any, clIndex: number) => {
-                        return <div key={`${index}.${clIndex}`}> {this.getTooltip(ep, cluster, this.props.Ep[ep].Clusters[cluster].Attributes)}</div>
+                        return <div key={`${index}.${clIndex}`}> {this.getTooltip(ep.replace(/\D/g, ""), cluster, this.props.Ep[ep].Clusters[cluster].Attributes)}</div>
                     })
                 else return (<div key={index}></div>)
             })

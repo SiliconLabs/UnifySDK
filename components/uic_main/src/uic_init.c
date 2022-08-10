@@ -56,7 +56,7 @@ static void uic_main_contiki_setup(void)
 
 /**
  * Read in the configuration parameters. Initialize and start up
- * contiki OS.  Initialize and start up the UIC processes.
+ * contiki OS.  Initialize and start up the Unify processes.
  */
 sl_status_t uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
                      int argc,

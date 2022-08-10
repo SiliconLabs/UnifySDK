@@ -22,7 +22,7 @@ void zigpc_discovery_on_endpoint_discovered(void *data);
 
 extern "C" {
 
-// Shared UIC includes
+// Shared Unify includes
 #include <unity.h>
 #include <string.h>
 #include <sys/process.h>

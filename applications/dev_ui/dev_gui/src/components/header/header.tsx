@@ -27,7 +27,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                 <div className={`${this.state.IsCollapsed ? "col-sm-2" : "col-sm-2"} float-left margin-t-10`}>
                     <div className="float-left">
                         <img src={logo} alt="logo" />
-                        <h4 hidden={this.state.IsCollapsed}>Unified IoT Controller</h4>
+                        <h4 className="logo-title">Unified IoT</h4>
+                        <h4 className="logo-title">Controller</h4>
+                        <span className='version'>v{localStorage.Version}</span>
                     </div>
                 </div>
                 <Connect ref={this.changeConnect} {...this.props} IsCollapsed={this.state.IsCollapsed} />

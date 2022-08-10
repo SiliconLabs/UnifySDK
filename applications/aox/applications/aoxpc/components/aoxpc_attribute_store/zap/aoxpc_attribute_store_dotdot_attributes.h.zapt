@@ -27,6 +27,7 @@
 #ifndef AOXPC_ATTRIBUTE_STORE_DOTDOT_ATTRIBUTES_H
 #define AOXPC_ATTRIBUTE_STORE_DOTDOT_ATTRIBUTES_H
 
+#if !defined(ATTRIBUTE_TYPE_MAP) && !defined(ATTRIBUTE_VALUE_MAP)
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -43,6 +44,7 @@
 
 // Unify components
 #include "attribute_store.h"
+#endif // !defined(ATTRIBUTE_TYPE_MAP) && !defined(ATTRIBUTE_VALUE_MAP)
 
 {{#zcl_clusters}}
 {{#if (supportedCluster label)}}
@@ -57,6 +59,7 @@ DEFINE_ATTRIBUTE({{asAttributeIdDefine parent.label label}}, 0x{{attributeID thi
 {{/zcl_attributes}}
 
 
+#if !defined(ATTRIBUTE_TYPE_MAP) && !defined(ATTRIBUTE_VALUE_MAP)
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus
@@ -132,12 +135,12 @@ sl_status_t {{asAttributeSetFunction parent.label label}}(
   {{else}}{{asUnderlyingType type}} new_{{asSnakeCaseLower label}}{{/if}});
 
 {{/zcl_attributes}}
-{{/if}}
-{{/zcl_clusters}}
-
 #ifdef __cplusplus
 }
 #endif // __cplusplus
+#endif // !defined(ATTRIBUTE_TYPE_MAP) && !defined(ATTRIBUTE_VALUE_MAP)
+{{/if}}
+{{/zcl_clusters}}
 
 #endif // AOXPC_ATTRIBUTE_STORE_DOTDOT_ATTRIBUTES_H
 /** @} end aoxpc_attribute_store_dotdot_attributes */

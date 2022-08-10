@@ -1,20 +1,38 @@
 # ZigPC Release Notes
 
-## [1.1.1] - March 2022
+## [1.2.0] - August 2022
 
 ### Added
+* Network management improvements allowing parallel device joins
+and discovery
+* Added CLI option to configure OTA file folder destination
+* Added CLI option to poll attributes only and disable report configuration
+* Added zigbeed/multiprotocol integration
+
+### Changed
+* Bugfix for zigpc failing to start when the OTA file folder is not
+found
+* Update zigpc Linux permissions
+* Removed zigpc service auto-start to allow user to prevent conflicts
+with multiprotocol integration
+* More general bugfix for crashing on mal-formed JSON
+* Migrated to GeckoSDK 4.1
+
+## [1.1.1] - March 2022
+
+**Added**:
 
 * The NCP firmware update component to enable upgrading the NCP
 firmware using the zigbee protocol controller
 
-### Changed
+**Changed**:
 
 * Fixed a bug where the zigbee protocol controller would crash
 on malformed JSON
 
 ## [1.1.0] - Feb 2022
 
-### Added
+**Added**:
 
 * Debian Installer also configures ZigPC to run as a system service
 * Ability to get ZigPC specific diagnostic information (uptime, CPU use, memory
@@ -25,7 +43,7 @@ library generation
 * Publishing GeneratedCommands sent from Zigbee devices as responses or as
 unsolicited events
 
-### Changed
+**Changed**:
 
 * Migrate Zigbee-Host library (EmberZNet-based) from Appbuilder project
   (GeckoSDK 3.1) to SLC project (GeckoSDK 4.0). See
@@ -36,31 +54,32 @@ unsolicited events
 * Default datastore file has been changed from /var/lib/uic/database.db to /var/lib/uic/zigpc.db
 If you used the default configuration, keep your previous database by running `mv /var/lib/uic/database.db /var/lib/uic/zigpc.db`
 
-### Removed
+**Removed**:
 
 * Use of EmafDeviceTablePlugin in Zigbee-Host library to manage device discovery;
 This is now performed within ZigPC
 
-### Fixed
+**Fixed**:
 
 * Persisted information cleanup on device leaving the network
 * JSON payloads accepted for commands and attributes to be UCL compliant
 
-
 ## [1.0.3] - Nov 2021
 
-### Added
+**Added**:
 
 * Add persistence of Zigbee device discovery information to allow servicing
 devices after ZigPC reboots
 * Use of NCP address-table to manage EUI64 to NodeId mappings
-### Changed
+
+**Changed**:
 
 * Updates to network management
 * Improvements in Zigbee Host EZSP message performance
 * Merge ZigPC node state and ucl handling components
 * Reduce dependence on device table plugin, use address table
-### Fixed
+
+**Fixed**:
 
 * Improved ZCL frame error handling and empty string bug fix
 * Node unretain messages bugfix
@@ -70,11 +89,14 @@ devices after ZigPC reboots
 ## [1.0.2] - Oct 2021
 
 ## [1.0.1] - Aug 2021
-### Fixed
+
+**Fixed**:
+
 * Build issues
 
 ## [1.0.0] - Aug 2021
-### Added
+
+**Added**:
 
 * Implementation of Unify specification 1.0
 * Sleepy end device support
@@ -85,21 +107,22 @@ devices after ZigPC reboots
 * Attribute reporting configuration on supported clusters
 * UCL ForceReadAttribute support
 * UCL to ZCL command + attribute mappings
-  + (0x0003) Identify
-  + (0x0004) Groups
-  + (0x0006) OnOff
-  + (0x0008) Level
-  + (0x0101) DoorLock
-  + (0x0201) Thermostat
-  + (0x0300) ColorControl
-  + (0x0406) OccupancySensing
+  * (0x0003) Identify
+  * (0x0004) Groups
+  * (0x0006) OnOff
+  * (0x0008) Level
+  * (0x0101) DoorLock
+  * (0x0201) Thermostat
+  * (0x0300) ColorControl
+  * (0x0406) OccupancySensing
 * Zigbee Host-NCP EZSP-UART Support
-### Changed
+
+**Changed**:
 
 * Various bug fixes
 * Documentation updates
 
-# Known Issues
+## Known Issues
 
 | Known Issue                                                                                                                                           | Workaround
 |-------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
@@ -110,9 +133,10 @@ devices after ZigPC reboots
 | Including a node using the SmartStart list is only effective for 18 hours                                                                             | Ensure that a node is added within 18 hours of being put in the SmartStart List.            |
 | When performing network-steering, the device can either fail node addition or node interview partially.                                               | In the device's EmberCLI, enter the commands `network leave` and `keys clear` then retry.   |
 | When excluding devices, the protocol UNID is not removed from the node's SmartStart entry. This will cause the ZigPC to refuse to re-include the node.| Clear the ZigPC UNID from the SmartStart entry using the Dev UI.                            |
-| ZigPC is able to service the DotDot Color Control cluster (0x0300) but not publish any attribute changes.                                             |                                                                                             |
 | ZigPC only supports "Remove" and "Idle" PC state change requests via the Node List view in DevUI. "Add" and "Reset" options are not supported.        | To add nodes to the Zigbee network, using the Smartstart DSK process outlined in the readme.|
-| ZigPC can fail at initialization if the NCP image is based on GSDK 4.0 without ADDRESS_TABLE being set to 250                                         | Set macro `EMBER_ADDRESS_TABLE_SIZE=250` in NCP studio project before building NCP image.   |
+| ZigPC can fail at initialization if the NCP image is based on GSDK 4.1 without ADDRESS_TABLE being set to 32                                          | Set macro `EMBER_ADDRESS_TABLE_SIZE=32` in NCP studio project before building NCP image.    |
+| ZigPC can fail at initialization if the NCP image is based on a different version of the GeckoSDK than ZigPC                                          | Update the NCP image to the same GeckoSDK version as the one used to compile the ZigPC.     |
+| ZigPC sends the default response to a sleepy check-in command instead of the expected acknowledge message                                             | Disable the poll control cluster when managing sleepy devices to use the default behaviour. |
 
 ### Zigbee Devices Used for Testing
 

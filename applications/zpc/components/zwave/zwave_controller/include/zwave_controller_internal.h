@@ -67,6 +67,17 @@ void zwave_controller_on_node_added(sl_status_t status,
                                     zwave_keyset_t granted_keys,
                                     zwave_kex_fail_type_t kex_fail_type,
                                     zwave_protocol_t inclusion_protocol);
+
+/**
+ * @brief Tell the Z-Wave Controller to anounce to all other components that
+ * we changed network address.
+ *
+ * @param home_id   Our new HomeID
+ * @param node_id   Our new NodeID
+ */
+void zwave_controller_on_network_address_update(zwave_home_id_t home_id,
+                                                zwave_node_id_t node_id);
+
 /// see @ref zwave_controller_callbacks_t
 void zwave_controller_on_new_network_entered(
   zwave_home_id_t home_id,

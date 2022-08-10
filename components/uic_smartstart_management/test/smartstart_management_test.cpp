@@ -70,6 +70,18 @@ const std::vector<smartstart::Entry> test_entries_with_false
      smartstart::Entry(
        "11111-64107-46202-12845-60475-62452-54892-59867", false, "", "")};
 
+const std::vector<smartstart::Entry> no_entries_to_include
+  = {smartstart::Entry("24859-64107-46202-12845-60475-62452-54892-59867",
+                       true,
+                       "pc_unid_12345",
+                       ""),
+     smartstart::Entry("00000-12345-46202-12845-60475-62452-54892-12345",
+                       true,
+                       "",
+                       "node_unid_12345"),
+     smartstart::Entry(
+       "24859-12345-46202-12845-60475-62452-54892-59867", false, "", "")};
+
 const std::string partial_dsk_to_get_all_entries = "59867";
 
 std::string
@@ -283,17 +295,17 @@ void test_setting_manual_intervention_required_in_json()
   const std::string true_str  = "true";
   const std::string false_str = "false";
 
-  const std::string smartstart_list =
-      "{\"value\": [{\"DSK\":\"" + test_entries_with_mostly_true[0].dsk + "\","
-    + "\"Include\":true,"
-    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[0].protocol_controller_unid + "\","
-    + "\"Unid\":\"" + test_entries_with_mostly_true[0].device_unid + "\","
-    + "\"ManualInterventionRequired\":" + true_str + "},"
-    + "{\"DSK\":\"" + test_entries_with_mostly_true[1].dsk + "\","
-    + "\"Include\":true,"
-    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[1].protocol_controller_unid + "\","
-    + "\"Unid\":\"" + test_entries_with_mostly_true[1].device_unid + "\","
-    + "\"ManualInterventionRequired\":" + false_str + "}]}";
+  const std::string smartstart_list
+    = "{\"value\": [{\"DSK\":\"" + test_entries_with_mostly_true[0].dsk + "\","
+      + "\"Include\":true," + "\"ProtocolControllerUnid\":\""
+      + test_entries_with_mostly_true[0].protocol_controller_unid + "\","
+      + "\"Unid\":\"" + test_entries_with_mostly_true[0].device_unid + "\","
+      + "\"ManualInterventionRequired\":" + true_str + "}," + "{\"DSK\":\""
+      + test_entries_with_mostly_true[1].dsk + "\"," + "\"Include\":true,"
+      + "\"ProtocolControllerUnid\":\""
+      + test_entries_with_mostly_true[1].protocol_controller_unid + "\","
+      + "\"Unid\":\"" + test_entries_with_mostly_true[1].device_unid + "\","
+      + "\"ManualInterventionRequired\":" + false_str + "}]}";
 
   my_mqtt_on_list_update("", smartstart_list.c_str(), smartstart_list.size());
   contiki_test_helper_run(0);
@@ -305,7 +317,8 @@ void test_setting_manual_intervention_required_in_json()
                         test_entries_with_mostly_true[0].dsk);
   std::vector<smartstart::Entry> query_result_true
     = smartstart::Management::get_instance()->get_cache_entries(q_true);
-  TEST_ASSERT_EQUAL_INT(query_result_true[0].manual_intervention_required, true);
+  TEST_ASSERT_EQUAL_INT(query_result_true[0].manual_intervention_required,
+                        true);
 
   smartstart::Query q_false
     = smartstart::Query(smartstart::QueryType::exact,
@@ -313,27 +326,28 @@ void test_setting_manual_intervention_required_in_json()
                         test_entries_with_mostly_true[1].dsk);
   std::vector<smartstart::Entry> query_result_false
     = smartstart::Management::get_instance()->get_cache_entries(q_false);
-  TEST_ASSERT_EQUAL_INT(query_result_false[0].manual_intervention_required, false);
+  TEST_ASSERT_EQUAL_INT(query_result_false[0].manual_intervention_required,
+                        false);
 }
 
 void test_preffered_protocol()
 {
-  const std::string smartstart_list =
-      "{\"value\": [{\"DSK\":\"" + test_entries_with_mostly_true[0].dsk + "\","
-    + "\"Include\":true,"
-    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[0].protocol_controller_unid + "\","
-    + "\"Unid\":\"" + test_entries_with_mostly_true[0].device_unid + "\","
-    + "\"PreferredProtocols\":[\"Z-Wave\"]},"
-    + "{\"DSK\":\"" + test_entries_with_mostly_true[1].dsk + "\","
-    + "\"Include\":true,"
-    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[1].protocol_controller_unid + "\","
-    + "\"Unid\":\"" + test_entries_with_mostly_true[1].device_unid + "\","
-    + "\"PreferredProtocols\":[\"Z-Wave\",\"Z-Wave Long Range\"]},"
-    + "{\"DSK\":\"" + test_entries_with_mostly_true[2].dsk + "\","
-    + "\"Include\":true,"
-    + "\"ProtocolControllerUnid\":\"" + test_entries_with_mostly_true[2].protocol_controller_unid + "\","
-    + "\"Unid\":\"" + test_entries_with_mostly_true[2].device_unid + "\","
-    + "\"PreferredProtocols\":[\"Z-Wave Long Range\"]}]}";
+  const std::string smartstart_list
+    = "{\"value\": [{\"DSK\":\"" + test_entries_with_mostly_true[0].dsk + "\","
+      + "\"Include\":true," + "\"ProtocolControllerUnid\":\""
+      + test_entries_with_mostly_true[0].protocol_controller_unid + "\","
+      + "\"Unid\":\"" + test_entries_with_mostly_true[0].device_unid + "\","
+      + "\"PreferredProtocols\":[\"Z-Wave\"]}," + "{\"DSK\":\""
+      + test_entries_with_mostly_true[1].dsk + "\"," + "\"Include\":true,"
+      + "\"ProtocolControllerUnid\":\""
+      + test_entries_with_mostly_true[1].protocol_controller_unid + "\","
+      + "\"Unid\":\"" + test_entries_with_mostly_true[1].device_unid + "\","
+      + "\"PreferredProtocols\":[\"Z-Wave\",\"Z-Wave Long Range\"]},"
+      + "{\"DSK\":\"" + test_entries_with_mostly_true[2].dsk + "\","
+      + "\"Include\":true," + "\"ProtocolControllerUnid\":\""
+      + test_entries_with_mostly_true[2].protocol_controller_unid + "\","
+      + "\"Unid\":\"" + test_entries_with_mostly_true[2].device_unid + "\","
+      + "\"PreferredProtocols\":[\"Z-Wave Long Range\"]}]}";
 
   my_mqtt_on_list_update("", smartstart_list.c_str(), smartstart_list.size());
   contiki_test_helper_run(0);
@@ -346,7 +360,8 @@ void test_preffered_protocol()
                           test_entries_with_mostly_true[0].dsk);
     std::vector<smartstart::Entry> query_result_1
       = smartstart::Management::get_instance()->get_cache_entries(q_1);
-    TEST_ASSERT_EQUAL_STRING(query_result_1[0].preferred_protocols[0].c_str(), "Z-Wave");
+    TEST_ASSERT_EQUAL_STRING(query_result_1[0].preferred_protocols[0].c_str(),
+                             "Z-Wave");
   }
 
   {
@@ -357,8 +372,10 @@ void test_preffered_protocol()
     std::vector<smartstart::Entry> query_result_2
       = smartstart::Management::get_instance()->get_cache_entries(q_2);
     TEST_ASSERT_EQUAL(2, query_result_2[0].preferred_protocols.size());
-    TEST_ASSERT_EQUAL_STRING(query_result_2[0].preferred_protocols[0].c_str(), "Z-Wave");
-    TEST_ASSERT_EQUAL_STRING(query_result_2[0].preferred_protocols[1].c_str(), "Z-Wave Long Range");
+    TEST_ASSERT_EQUAL_STRING(query_result_2[0].preferred_protocols[0].c_str(),
+                             "Z-Wave");
+    TEST_ASSERT_EQUAL_STRING(query_result_2[0].preferred_protocols[1].c_str(),
+                             "Z-Wave Long Range");
   }
 
   {
@@ -368,7 +385,8 @@ void test_preffered_protocol()
                           test_entries_with_mostly_true[2].dsk);
     std::vector<smartstart::Entry> query_result_3
       = smartstart::Management::get_instance()->get_cache_entries(q_3);
-    TEST_ASSERT_EQUAL_STRING(query_result_3[0].preferred_protocols[0].c_str(), "Z-Wave Long Range");
+    TEST_ASSERT_EQUAL_STRING(query_result_3[0].preferred_protocols[0].c_str(),
+                             "Z-Wave Long Range");
   }
 }
 
@@ -426,5 +444,19 @@ void test_init_error_condition()
   uic_mqtt_subscribe_Ignore();
   smartstart::Management::get_instance()->init(MY_UNID,
                                                &on_entries_awaiting_inclusion);
+}
+
+/// Try with a SmartStart list that either has different PC unid
+// or already included nodes.
+void test_no_entries_to_include()
+{
+  std::string smartstart_list = generate_smartstart_list(no_entries_to_include);
+  my_mqtt_on_list_update("", smartstart_list.c_str(), smartstart_list.size());
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(smartstart_enable, false);
+
+  TEST_ASSERT_EQUAL(
+    smartstart::Management::get_instance()->has_entries_awaiting_inclusion(),
+    false);
 }
 }

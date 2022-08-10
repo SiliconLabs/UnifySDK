@@ -26,11 +26,11 @@
  * @{
  */
 
-#include "sl_status.h"
-#include "attribute_store.h"
-
 #ifndef ATTRIBUTE_POLL_ENGINE_H
 #define ATTRIBUTE_POLL_ENGINE_H
+
+#include "sl_status.h"
+#include "attribute_store.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,46 +38,46 @@ extern "C" {
 
 /**
  * @brief Register a node for polling
- * 
+ *
  * @param node Attribute store node id to poll
  * @param interval desired polling interval in seconds
- * @return sl_status_t 
+ * @returns sl_status_t
  */
 sl_status_t attribute_poll_register(attribute_store_node_t node,
                                     uint32_t interval);
 
-/** \ref{attribute_poll_register} with default polling interval */
+/** \ref attribute_poll_register with default polling interval */
 #define attribute_poll_register_default(node) attribute_poll_register(node, 0)
 
 /**
  * @brief Deregister polling of an attribute
- * 
+ *
  * @param node Node to deregister polling for
- * @return sl_status_t 
+ * @returns sl_status_t
  */
 sl_status_t attribute_poll_deregister(attribute_store_node_t node);
 
 /**
  * @brief Schedule a poll as soon as possible
- * 
- * @param node 
- * @return sl_status_t 
+ *
+ * @param node
+ * @returns sl_status_t
  */
 sl_status_t attribute_poll_schedule(attribute_store_node_t node);
 
 /**
  * @brief Initialize the attribute poll engine
- * 
- * @return sl_status_t SL_STATUS_OK on success
+ *
+ * @returns sl_status_t SL_STATUS_OK on success
  */
 sl_status_t attribute_poll_init();
 
 /**
  * @brief Disable the Poll Engine
- * 
+ *
  * Stop the Poll Engine from triggering any new polls
- * 
- * @return sl_status_t 
+ *
+ * @return sl_status_t
  */
 sl_status_t attribute_poll_disable();
 
@@ -87,7 +87,7 @@ sl_status_t attribute_poll_disable();
  * Start the Poll Engine, the engine is default started, so this only makes
  * sense to call after calling \ref attribute_poll_disable.
  *
- * @return sl_status_t 
+ * @return sl_status_t
  */
 sl_status_t attribute_poll_enable();
 

@@ -13,7 +13,7 @@
 #include "unity.h"
 #include "attribute_timeouts.h"
 
-// UIC includes
+// Unify includes
 #include "datastore.h"
 #include "attribute_store.h"
 #include "attribute_store_helper.h"

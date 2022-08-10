@@ -1,4 +1,4 @@
-import { Tooltip } from '@material-ui/core';
+import { Tooltip } from '@mui/material';
 import React from 'react';
 import { Button, Col, Row, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';

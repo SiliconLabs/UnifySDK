@@ -24,10 +24,14 @@
 #ifndef ZCL_RF_TELEMETRY_CLUSTER_SERVER_H
 #define ZCL_RF_TELEMETRY_CLUSTER_SERVER_H
 
+#include <stdbool.h>
 #include "sl_status.h"
 
 // Type for the value stored for the tx_report_enabled attribute
-typedef int32_t tx_report_enabled_t;
+typedef bool tx_report_enabled_t;
+
+// Type for the value stored for the tx_report_enabled attribute
+typedef bool pti_enabled_t;
 
 #ifdef __cplusplus
 extern "C" {

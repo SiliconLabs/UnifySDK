@@ -18,7 +18,7 @@ use std::string::ToString;
 use stoppable_thread;
 use unify_config_sys::*;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{sl_status_t, MqttClientTrait, UnifyMqttClient};
+use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 
 use get_if_addrs;
 use std::collections::HashMap;
@@ -672,13 +672,14 @@ fn get_raw_frame(received_data: &Vec<u8>) -> (usize, Option<Vec<u8>>) {
         while index < rd_len {
             // Find Start symbol
             if received_data[index - 1] == OPEN_BRACKET {
+                let len = (received_data[index + 1] as usize) << 8 | received_data[index] as usize;
                 // If we have enough data for RawFrame
-                if index + (received_data[index] as usize) < rd_len {
+                if index + len < rd_len {
                     // If we have End Symbol
-                    if received_data[index + (received_data[index] as usize)] == CLOSE_BRACKET {
+                    if received_data[index + len] == CLOSE_BRACKET {
                         // Bingo! We have full frame! Return data and number of consumed bytes
                         let start_pos = index - 1;
-                        let end_pos = index + 1 + received_data[index] as usize;
+                        let end_pos = index + 1 + len as usize;
                         // [RawFrame]
                         let data = &received_data[start_pos..end_pos];
                         return (end_pos, Some(data.to_vec()));
@@ -883,7 +884,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn full_frame_test() {
+    fn full_frame_1byte_length_field_test() {
         // Define some non-diagnostic frame
         let non_diagnostic_frame: Vec<u8> = vec![
             91, 33, 0, 2, 0, 49, 71, 17, 133, 0, 0, 42, 0, 1, 248, 196, 230, 184, 133, 1, 1, 1, 13,
@@ -893,6 +894,31 @@ mod tests {
         // Check if pti frame in buffer
         let (consumed, frame) = get_raw_frame(&non_diagnostic_frame);
         assert_eq!(consumed, non_diagnostic_frame.len());
+        assert!(frame.is_some());
+    }
+
+    #[test]
+    fn full_frame_2byte_length_fileld_test() {
+        // v2 debug message
+        let mut raw_data: Vec<u8> = vec![
+            0x5B, // Initial framing: '['
+            0x1C,
+            0x02, // Lenght includes everything except the framing '[' and ']' characters (0x021C).
+            0x02, 0x00, // Version
+            0xEB, 0x00, 0x32, 0x13, 0x00, 0x00, // Timestamp 0x133200EB = 322044139
+            0x2A, 0x00, // Debug type
+            0x03, // Sequence number
+            0xF8, 0x00, 0x14, 0x32, 0x62, 0xA4, 0x88, 0x21, 0xD1, 0xFA, 0xD5, 0x01, 0x00, 0x16,
+            0x51, // Content
+        ];
+
+        let dummy_data = vec![0xFF; 512];
+        raw_data.extend(dummy_data); // add 512 bytes
+        raw_data.push(0x5D); // addd end framing:  ']'
+
+        // Check if pti frame in buffer
+        let (consumed, frame) = get_raw_frame(&raw_data);
+        assert_eq!(consumed, raw_data.len());
         assert!(frame.is_some());
     }
 

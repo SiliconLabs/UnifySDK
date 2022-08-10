@@ -93,10 +93,26 @@ void my_sec0_inclusion_stub(const s0_on_bootstrapping_complete_cb cb,
   my_sec0_inclusion_cb = cb;
 }
 
+// Assign_return_route callback
+static cmock_zwapi_protocol_controller_func_ptr2
+  zwapi_assign_return_callback_save;
+sl_status_t zwapi_assign_return_route_stub(
+  zwave_node_id_t src_node_id,
+  zwave_node_id_t dest_node_id,
+  cmock_zwapi_protocol_controller_func_ptr2 completedFunc,
+  int cmock_retval)
+{
+  zwapi_assign_return_callback_save = completedFunc;
+  return SL_STATUS_OK;
+}
+
 PROCESS_NAME(zwave_network_management_process);
 
 /// Setup the test suite (called once before all test_xxx functions are called)
-void suiteSetUp() {}
+void suiteSetUp()
+{
+  zwapi_assign_return_callback_save = NULL;
+}
 
 void setUp()
 {
@@ -125,8 +141,13 @@ void setUp()
   zwapi_add_node_to_network_IgnoreAndReturn(SL_STATUS_OK);
   zwapi_remove_node_from_network_IgnoreAndReturn(SL_STATUS_OK);
   zwapi_set_learn_mode_IgnoreAndReturn(SL_STATUS_OK);
+  zwapi_get_controller_capabilities_IgnoreAndReturn(
+    (CONTROLLER_NODEID_SERVER_PRESENT | CONTROLLER_IS_SUC));
 
   zwave_network_management_fixt_setup();
+
+  // De-activate SmartStart learn mode for all tests by default
+  zwave_network_management_enable_smart_start_learn_mode(false);
 
   contiki_test_helper_init();
 
@@ -285,7 +306,7 @@ void test_zwave_network_management_add_node_smartstart_node_found_timeout()
 {
   //We expect sm mode to be enabled
   expect_smart_start_enable();
-  zwave_network_management_smart_start_enable(true);
+  zwave_network_management_enable_smart_start_add_mode(true);
   /* Check if the Network management state is idle */
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
@@ -327,7 +348,7 @@ void test_zwave_network_management_add_node_smartstart_end_node_found_timeout()
   //We expect sm mode to be enabled
   expect_smart_start_enable();
 
-  zwave_network_management_smart_start_enable(true);
+  zwave_network_management_enable_smart_start_add_mode(true);
   /* Check if the Network management state is idle */
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
@@ -400,7 +421,7 @@ void test_zwave_network_management_add_node_smartstart_prot_done_timeout()
   //We expect sm mode to be enabled
   expect_smart_start_enable();
 
-  zwave_network_management_smart_start_enable(true);
+  zwave_network_management_enable_smart_start_add_mode(true);
   /* Check if the Network management state is idle */
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
@@ -503,7 +524,7 @@ void test_zwave_network_management_add_node_smartstart_prot_done_add_failed()
   //We expect sm mode to be enabled
   expect_smart_start_enable();
 
-  zwave_network_management_smart_start_enable(true);
+  zwave_network_management_enable_smart_start_add_mode(true);
   /* Check if the Network management state is idle */
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
@@ -600,7 +621,7 @@ void test_add_node_status_update_unknown_status()
   //We expect sm mode to be enabled
   expect_smart_start_enable();
 
-  zwave_network_management_smart_start_enable(true);
+  zwave_network_management_enable_smart_start_add_mode(true);
   /* Check if the Network management state is idle */
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
@@ -662,7 +683,7 @@ void test_nif_length_invalid_max()
   //We expect sm mode to be enabled
   expect_smart_start_enable();
 
-  zwave_network_management_smart_start_enable(true);
+  zwave_network_management_enable_smart_start_add_mode(true);
   zwave_controller_on_state_updated_Ignore();
   contiki_test_helper_run(0);
   /* Check if the Network management state is idle */
@@ -735,7 +756,7 @@ void idle_common()
   //We expect sm mode to be enabled
   expect_smart_start_enable();
 
-  zwave_network_management_smart_start_enable(true);
+  zwave_network_management_enable_smart_start_add_mode(true);
   zwave_controller_on_state_updated_Ignore();
   contiki_test_helper_run(0);
   /* Check if the Network management state is idle */
@@ -810,7 +831,7 @@ void smart_start_common()
   }
   //We expect sm mode to be enabled
   expect_smart_start_enable();
-  zwave_network_management_smart_start_enable(true);
+  zwave_network_management_enable_smart_start_add_mode(true);
 
   zwave_controller_on_state_updated_Ignore();
   contiki_test_helper_run(0);
@@ -1241,13 +1262,13 @@ void test_zwave_network_management_add_node_smartstart()
 void test_smart_start_enable()
 {
   expect_smart_start_enable();
-  zwave_network_management_smart_start_enable(true);
+  zwave_network_management_enable_smart_start_add_mode(true);
   zwave_controller_on_state_updated_Ignore();
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
   zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, 0, SL_STATUS_OK);
-  zwave_network_management_smart_start_enable(false);
+  zwave_network_management_enable_smart_start_add_mode(false);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
@@ -1261,8 +1282,8 @@ void test_set_default()
   zwave_home_id_t home_id = 0xdeadbeef;
   zwave_node_id_t node_id = 0x1;
 
-  expect_smart_start_enable();
-  zwave_network_management_smart_start_enable(true);
+  //expect_smart_start_enable();
+  zwave_network_management_enable_smart_start_add_mode(true);
   zwave_controller_on_state_updated_Ignore();
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
@@ -1275,23 +1296,26 @@ void test_set_default()
   contiki_test_helper_run(0);
 
   zwave_controller_on_reset_step_complete_Expect(5);
-
+  zwapi_get_controller_capabilities_ExpectAndReturn(
+    CONTROLLER_NODEID_SERVER_PRESENT);
+  zwapi_memory_get_ids_ExpectAndReturn(0, 0, SL_STATUS_OK);
+  zwapi_memory_get_ids_IgnoreArg_home_id();
+  zwapi_memory_get_ids_IgnoreArg_node_id();
+  zwapi_memory_get_ids_ReturnMemThruPtr_home_id(&home_id, sizeof(home_id));
+  zwapi_memory_get_ids_ReturnMemThruPtr_node_id(&node_id, sizeof(node_id));
+  zwave_controller_on_network_address_update_Expect(home_id, node_id);
   zwave_s2_create_new_network_keys_Expect();
+  zwave_s2_network_init_Expect();
 
+  //on_new_network()
   zwapi_memory_get_ids_ExpectAndReturn(0, 0, SL_STATUS_OK);
   zwapi_memory_get_ids_IgnoreArg_home_id();
   zwapi_memory_get_ids_IgnoreArg_node_id();
   zwapi_memory_get_ids_ReturnMemThruPtr_home_id(&home_id, sizeof(home_id));
   zwapi_memory_get_ids_ReturnMemThruPtr_node_id(&node_id, sizeof(node_id));
 
-  zwapi_get_controller_capabilities_ExpectAndReturn(0);
+  zwapi_get_controller_capabilities_ExpectAndReturn(0xFF);
   zwave_s2_keystore_get_assigned_keys_ExpectAndReturn(0x87);
-  zwapi_set_suc_node_id_ExpectAndReturn(1,
-                                        true,
-                                        false,
-                                        ZW_SUC_FUNC_NODEID_SERVER,
-                                        0,
-                                        SL_STATUS_OK);
 
   zwave_controller_on_new_network_entered_Expect(
     home_id,
@@ -1299,7 +1323,7 @@ void test_set_default()
     0x87,
     ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE);
 
-  expect_smart_start_enable();
+  //expect_smart_start_enable();
 
   my_set_default_callbacks_save();
   contiki_test_helper_run(0);
@@ -1310,6 +1334,13 @@ void test_zwave_network_management_remove_node()
 {
   zwave_node_id_t node_id = 0x01;
   LEARN_INFO sample_remove_node_report;
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_remove_node_from_network function call
   zwapi_remove_node_from_network_ExpectAndReturn(
     (REMOVE_NODE_ANY | REMOVE_NODE_OPTION_NETWORK_WIDE),
@@ -1355,6 +1386,12 @@ void test_zwave_network_management_remove_node()
  */
 void test_zwave_network_management_remove_node_timeout()
 {
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
   zwapi_remove_node_from_network_ExpectAndReturn(
     (REMOVE_NODE_ANY | REMOVE_NODE_OPTION_NETWORK_WIDE),
     0,
@@ -1391,6 +1428,13 @@ void test_zwave_network_management_remove_node_timeout()
 // Test case for aborting the node remove network management operation
 void test_zwave_network_managemnt_remove_node_abort()
 {
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   zwapi_remove_node_from_network_ExpectAndReturn(
     (REMOVE_NODE_ANY | REMOVE_NODE_OPTION_NETWORK_WIDE),
     0,
@@ -1558,8 +1602,18 @@ void test_zwave_network_management_s0_add_controller_failed()
   node_id                           = 0x44;
   LEARN_INFO sample_add_node_report = {ADD_NODE_STATUS_LEARN_READY, node_id};
 
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_add_node_from_network function call
-  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_ANY), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
   // Ignoring the completedFunc argument of zwapi_add_node_from_network
   zwapi_add_node_to_network_IgnoreArg_completedFunc();
   zwave_controller_on_state_updated_Ignore();
@@ -1633,8 +1687,18 @@ void test_zwave_network_management_stop_add_mode()
 {
   node_id = 0x44;
 
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_add_node_from_network function call
-  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_ANY), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
   // Ignoring the completedFunc argument of zwapi_add_node_from_network
   zwapi_add_node_to_network_IgnoreArg_completedFunc();
   zwave_controller_on_state_updated_Ignore();
@@ -1657,8 +1721,18 @@ void test_zwave_network_management_s0_add_controller()
   node_id                           = 0x44;
   LEARN_INFO sample_add_node_report = {ADD_NODE_STATUS_LEARN_READY, node_id};
 
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_add_node_from_network function call
-  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_ANY), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
   // Ignoring the completedFunc argument of zwapi_add_node_from_network
   zwapi_add_node_to_network_IgnoreArg_completedFunc();
   zwave_controller_on_state_updated_Ignore();
@@ -1734,8 +1808,18 @@ void test_zwave_network_management_s0_add_end_node()
   node_id                           = 0x44;
   LEARN_INFO sample_add_node_report = {ADD_NODE_STATUS_LEARN_READY, node_id};
 
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_add_node_from_network function call
-  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_ANY), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
   // Ignoring the completedFunc argument of zwapi_add_node_from_network
   zwapi_add_node_to_network_IgnoreArg_completedFunc();
   zwave_controller_on_state_updated_Ignore();
@@ -1814,8 +1898,19 @@ void test_zwave_network_management_add_node()
   for (int i = 0; i < sizeof(dsk); i++) {
     dsk[i] = i;
   }
+
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_add_node_from_network function call
-  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_ANY), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
   // Ignoring the completedFunc argument of zwapi_add_node_from_network
   zwapi_add_node_to_network_IgnoreArg_completedFunc();
   zwave_controller_on_state_updated_Ignore();
@@ -1938,8 +2033,18 @@ void test_zwave_network_management_add_node_timeout()
   /* Check if the Network management state is idle */
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_add_node_from_network function call
-  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_ANY), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
   // Ignoring the completedFunc argument of zwapi_add_node_from_network
   zwapi_add_node_to_network_IgnoreArg_completedFunc();
   zwave_controller_on_state_updated_Ignore();
@@ -1974,8 +2079,18 @@ void test_zwave_network_management_add_node_end_node_found_timeout()
   /* Check if the Network management state is idle */
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_add_node_from_network function call
-  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_ANY), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
   // Ignoring the completedFunc argument of zwapi_add_node_from_network
   zwapi_add_node_to_network_IgnoreArg_completedFunc();
   zwave_controller_on_state_updated_Ignore();
@@ -2016,8 +2131,18 @@ void test_zwave_network_management_add_node_wrong_dsk_input()
   node_id                           = 0x44;
   LEARN_INFO sample_add_node_report = {ADD_NODE_STATUS_LEARN_READY, node_id};
 
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_add_node_from_network function call
-  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_ANY), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
   // Ignoring the completedFunc argument of zwapi_add_node_from_network
   zwapi_add_node_to_network_IgnoreArg_completedFunc();
   zwave_controller_on_state_updated_Ignore();
@@ -2099,144 +2224,67 @@ void test_zwave_network_management_add_node_wrong_dsk_input()
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
 
-// Testing Non-Secure Learn Mode Inclusion Operation
-void test_zwave_network_management_learn_mode_inclusion()
+// Test failure due to a low level protocol failure
+void test_zwave_network_management_learn_mode_inclusion_fail()
 {
-  zwave_node_id_t test_node_id    = 0x06;
-  zwave_home_id_t test_home_id    = 0xefceadde;
-  LEARN_INFO test_learn_mode_info = {LEARN_MODE_DONE, test_node_id};
+  LEARN_INFO test_learn_mode_info;
 
   zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
   zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
                                                  NULL,
                                                  SL_STATUS_OK);
-  zwapi_set_learn_mode_ExpectAndReturn(ZW_SET_LEARN_MODE_DISABLE,
-                                       NULL,
-                                       SL_STATUS_OK);
-  zwapi_set_learn_mode_ExpectAndReturn(ZW_SET_LEARN_MODE_DIRECT_RANGE,
-                                       NULL,
-                                       SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_NWI, NULL, SL_STATUS_OK);
   zwapi_set_learn_mode_IgnoreArg_completedFunc();
   zwapi_set_learn_mode_AddCallback(my_zwapi_set_learn_mode_stub);
   zwave_controller_on_state_updated_Ignore();
-  zwave_network_management_learn_mode(ZW_SET_LEARN_MODE_DIRECT_RANGE);
+  zwave_network_management_learn_mode(ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_LEARN_MODE, zwave_network_management_get_state());
 
-  zwapi_memory_get_ids_ExpectAndReturn(0, 0, SL_STATUS_OK);
-  zwapi_memory_get_ids_IgnoreArg_home_id();
-  zwapi_memory_get_ids_IgnoreArg_node_id();
-  zwapi_memory_get_ids_ReturnMemThruPtr_home_id(&test_home_id,
-                                                sizeof(test_home_id));
-  zwapi_memory_get_ids_ReturnMemThruPtr_node_id(&test_node_id,
-                                                sizeof(test_node_id));
-  // For on_new_network
-  zwapi_memory_get_ids_ExpectAndReturn(0, 0, SL_STATUS_OK);
-  zwapi_memory_get_ids_IgnoreArg_home_id();
-  zwapi_memory_get_ids_IgnoreArg_node_id();
-  zwapi_get_controller_capabilities_IgnoreAndReturn(SL_STATUS_OK);
-  zwave_s2_keystore_get_assigned_keys_IgnoreAndReturn(SL_STATUS_OK);
-  zwapi_set_suc_node_id_IgnoreAndReturn(SL_STATUS_OK);
-  zwave_controller_on_new_network_entered_Ignore();
-  //
-  zwapi_set_learn_mode_ExpectAndReturn(ZW_SET_LEARN_MODE_DISABLE,
-                                       NULL,
-                                       SL_STATUS_OK);
+  test_learn_mode_info.bStatus = LEARN_MODE_STARTED;
+  test_learn_mode_info.bSource = 1;
   my_zwapi_set_learn_mode_cb_save(&test_learn_mode_info);
+
+  zwave_s0_start_learn_mode_Expect(1);
+  zwave_s2_start_learn_mode_Expect(1);
   contiki_test_helper_run(0);
+
+  test_learn_mode_info.bStatus = LEARN_MODE_FAILED;
+  test_learn_mode_info.bSource = 0;
+  my_zwapi_set_learn_mode_cb_save(&test_learn_mode_info);
+
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+  zwave_controller_on_error_Expect(
+    ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_LEARN_MODE_FAIL);
+  contiki_test_helper_run(0);
+
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
 
-// Testing Non-Secure Learn Mode Exclusion Operation
-void test_zwave_network_management_learn_mode_exclusion()
-{
-  zwave_node_id_t test_node_id    = 0x01;
-  zwave_home_id_t test_home_id    = 0xefceadde;
-  LEARN_INFO test_learn_mode_info = {LEARN_MODE_DONE, test_node_id};
-
-  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
-  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
-                                                 NULL,
-                                                 SL_STATUS_OK);
-  zwapi_set_learn_mode_ExpectAndReturn(ZW_SET_LEARN_MODE_DISABLE,
-                                       NULL,
-                                       SL_STATUS_OK);
-  zwapi_set_learn_mode_ExpectAndReturn(ZW_SET_LEARN_MODE_DIRECT_RANGE,
-                                       NULL,
-                                       SL_STATUS_OK);
-  zwapi_set_learn_mode_IgnoreArg_completedFunc();
-  zwapi_set_learn_mode_AddCallback(my_zwapi_set_learn_mode_stub);
-  zwave_controller_on_state_updated_Ignore();
-  zwave_network_management_learn_mode(ZW_SET_LEARN_MODE_NWE);
-  contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(NM_LEARN_MODE, zwave_network_management_get_state());
-
-  zwapi_memory_get_ids_ExpectAndReturn(0, 0, SL_STATUS_OK);
-  zwapi_memory_get_ids_IgnoreArg_home_id();
-  zwapi_memory_get_ids_IgnoreArg_node_id();
-  zwapi_memory_get_ids_ReturnMemThruPtr_home_id(&test_home_id,
-                                                sizeof(test_home_id));
-  zwapi_memory_get_ids_ReturnMemThruPtr_node_id(&test_node_id,
-                                                sizeof(test_node_id));
-  //for set default
-  zwave_controller_on_reset_step_complete_Expect(5);
-  zwave_s2_create_new_network_keys_Ignore();
-  zwapi_memory_get_ids_ExpectAndReturn(0, 0, SL_STATUS_OK);
-  zwapi_memory_get_ids_IgnoreArg_home_id();
-  zwapi_memory_get_ids_IgnoreArg_node_id();
-  zwapi_get_controller_capabilities_IgnoreAndReturn(SL_STATUS_OK);
-  zwave_s2_keystore_get_assigned_keys_IgnoreAndReturn(SL_STATUS_OK);
-  zwapi_set_suc_node_id_IgnoreAndReturn(SL_STATUS_OK);
-  zwave_controller_on_new_network_entered_Ignore();
-
-  my_zwapi_set_learn_mode_cb_save(&test_learn_mode_info);
-  contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
-}
-
-// Testing Learn Mode NWI Operation steps
-void test_zwave_network_management_learn_mode_inclusion_nwi()
+// Test aborting learn mode
+void test_zwave_network_management_learn_mode_abort()
 {
   zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
   zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
                                                  NULL,
                                                  SL_STATUS_OK);
-  zwapi_set_learn_mode_ExpectAndReturn(ZW_SET_LEARN_MODE_DISABLE,
-                                       NULL,
-                                       SL_STATUS_OK);
-  zwapi_set_learn_mode_ExpectAndReturn(ZW_SET_LEARN_MODE_DIRECT_RANGE,
-                                       NULL,
-                                       SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_NWI, NULL, SL_STATUS_OK);
   zwapi_set_learn_mode_IgnoreArg_completedFunc();
   zwapi_set_learn_mode_AddCallback(my_zwapi_set_learn_mode_stub);
   zwave_controller_on_state_updated_Ignore();
-  zwave_network_management_learn_mode(ZW_SET_LEARN_MODE_NWI);
+  zwave_network_management_learn_mode(ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_LEARN_MODE, zwave_network_management_get_state());
 
-  zwapi_set_learn_mode_ExpectAndReturn(ZW_SET_LEARN_MODE_DISABLE,
-                                       NULL,
-                                       SL_STATUS_OK);
-  zwapi_set_learn_mode_ExpectAndReturn(ZW_SET_LEARN_MODE_NWI,
-                                       NULL,
-                                       SL_STATUS_OK);
-  zwapi_explore_request_inclusion_ExpectAndReturn(SL_STATUS_OK);
-  contiki_test_helper_run(6000);
+  zwave_network_management_abort();
   TEST_ASSERT_EQUAL(NM_LEARN_MODE, zwave_network_management_get_state());
 
-  zwapi_explore_request_inclusion_ExpectAndReturn(SL_STATUS_OK);
-  contiki_test_helper_run(6000);
-  TEST_ASSERT_EQUAL(NM_LEARN_MODE, zwave_network_management_get_state());
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+  contiki_test_helper_run(0);
 
-  zwapi_explore_request_inclusion_ExpectAndReturn(SL_STATUS_OK);
-  contiki_test_helper_run(6000);
-  TEST_ASSERT_EQUAL(NM_LEARN_MODE, zwave_network_management_get_state());
-
-  zwapi_explore_request_inclusion_ExpectAndReturn(SL_STATUS_OK);
-  contiki_test_helper_run(6000);
-  TEST_ASSERT_EQUAL(NM_LEARN_MODE, zwave_network_management_get_state());
-
-  contiki_test_helper_run(6000);
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
 
@@ -2245,8 +2293,18 @@ void test_zwave_network_management_add_node_false_positive_inclusion()
   /* Check if the Network management state is idle */
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
+  // First it'll attempt to stop all network operations
+  zwapi_add_node_to_network_ExpectAndReturn(ADD_NODE_STOP, NULL, SL_STATUS_OK);
+  zwapi_remove_node_from_network_ExpectAndReturn(REMOVE_NODE_STOP,
+                                                 NULL,
+                                                 SL_STATUS_OK);
+  zwapi_set_learn_mode_ExpectAndReturn(LEARN_MODE_DISABLE, NULL, SL_STATUS_OK);
+
   // Mocking the zwapi_add_node_from_network function call
-  zwapi_add_node_to_network_ExpectAndReturn((ADD_NODE_ANY), 0, SL_STATUS_OK);
+  zwapi_add_node_to_network_ExpectAndReturn(
+    (ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE),
+    0,
+    SL_STATUS_OK);
   // Ignoring the completedFunc argument of zwapi_add_node_from_network
   zwapi_add_node_to_network_IgnoreArg_completedFunc();
   zwave_controller_on_state_updated_Ignore();
@@ -2309,13 +2367,6 @@ void test_zwave_network_management_add_node_false_positive_inclusion()
 
   // Restart ignoring zwapi_get_node_list
   zwapi_get_full_node_list_IgnoreAndReturn(SL_STATUS_OK);
-}
-
-void test_zwave_network_management_is_zpc_sis()
-{
-  uint8_t test_zpc_capabilities = 0x04;
-  zwapi_get_controller_capabilities_IgnoreAndReturn(test_zpc_capabilities);
-  TEST_ASSERT_TRUE(zwave_network_management_is_zpc_sis());
 }
 
 void test_zwave_network_management_request_node_neighbor_discovery()
@@ -2424,12 +2475,67 @@ void test_zwave_network_inclusion_protocol_is_saved()
 
 void test_zwave_network_management_assign_return_route()
 {
+  zwave_node_id_t test_zpc_node_id = 0x07;
+  zwave_node_id_t test_node_id     = 0x08;
+  zwapi_assign_return_route_AddCallback(zwapi_assign_return_route_stub);
+  zwave_controller_on_state_updated_Ignore();
+  zwapi_assign_return_route_ExpectAndReturn(test_node_id,
+                                            test_zpc_node_id,
+                                            NULL,
+                                            SL_STATUS_OK);
+  zwapi_assign_return_route_IgnoreArg_completedFunc();
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  zwave_network_management_assign_return_route(test_node_id, test_zpc_node_id);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_ASSIGNING_RETURN_ROUTE,
+                    zwave_network_management_get_state());
+
+  zwapi_assign_return_callback_save(0x00);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+}
+
+void test_zwave_network_management_assign_return_route_back_to_back()
+{
   zwave_node_id_t test_zpc_node_id = 0x01;
   zwave_node_id_t test_node_id     = 0x02;
+  zwave_node_id_t test_node_id_2   = 0x03;
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  zwapi_assign_return_route_AddCallback(zwapi_assign_return_route_stub);
+
+  zwave_controller_on_state_updated_Ignore();
   zwapi_assign_return_route_ExpectAndReturn(test_node_id,
                                             test_zpc_node_id,
                                             NULL,
                                             SL_STATUS_OK);
   zwapi_assign_return_route_IgnoreArg_completedFunc();
   zwave_network_management_assign_return_route(test_node_id, test_zpc_node_id);
+  zwave_network_management_assign_return_route(test_node_id_2,
+                                               test_zpc_node_id);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_ASSIGNING_RETURN_ROUTE,
+                    zwave_network_management_get_state());
+  zwapi_assign_return_route_ExpectAndReturn(test_node_id_2,
+                                            test_zpc_node_id,
+                                            NULL,
+                                            SL_STATUS_OK);
+  zwapi_assign_return_route_IgnoreArg_completedFunc();
+  zwapi_assign_return_callback_save(0x00);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_ASSIGNING_RETURN_ROUTE,
+                    zwave_network_management_get_state());
+}
+
+void test_idle_events()
+{
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  my_sec2_inclusion_cb.on_dsk_challenge(granted_keys, 2, 0);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  my_sec2_inclusion_cb.on_keys_request(0, 0);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  my_sec2_inclusion_cb.on_inclusion_complete(0, 0);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }

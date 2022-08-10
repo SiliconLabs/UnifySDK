@@ -11,7 +11,7 @@
  *
  *****************************************************************************/
 
-// Shared UIC includes
+// Shared Unify includes
 #include "sl_log.h"
 
 // ZigPC includes

@@ -7,7 +7,7 @@ license = "Copyright 2021 Silicon Laboratories Inc. www.silabs.com\nThe licensor
 description = "unify proc macros"
 
 [dependencies]
-quote="*"
+quote="1.0.15"
 syn={version = "*", features = ["full"]}
 proc-macro2="*"
 

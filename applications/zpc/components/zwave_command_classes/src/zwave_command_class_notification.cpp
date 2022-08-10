@@ -15,7 +15,7 @@
 #include "zwave_command_class_notification.h"
 #include "zwave_command_class_notification_types.h"
 #include "notification_command_class_defined_notifications.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_command_classes_utils.h"
 #include "zwave_command_class_agi.h"
 
@@ -346,10 +346,9 @@ static sl_status_t
 
   // Update the notification types reported values in the Attribute Store
   attribute_store_node_t supported_notification_types_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       ep_node,
-      ATTRIBUTE(SUPPORTED_NOTIFICATION_TYPES),
-      0);
+      ATTRIBUTE(SUPPORTED_NOTIFICATION_TYPES));
   attribute_store_set_node_attribute_value(
     supported_notification_types_node,
     REPORTED_ATTRIBUTE,
@@ -442,10 +441,9 @@ static sl_status_t
   }
 
   attribute_store_node_t supported_state_or_event_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       notification_node,
-      ATTRIBUTE(SUPPORTED_STATES_OR_EVENTS),
-      0);
+      ATTRIBUTE(SUPPORTED_STATES_OR_EVENTS));
   if (ATTRIBUTE_STORE_INVALID_NODE == supported_state_or_event_node) {
     sl_log_debug(LOG_TAG,
                  "Failed to lookup Notification Supported Event State "
@@ -648,10 +646,9 @@ void zwave_command_class_notification_on_version_attribute_update(
     // Verify if there is already supported notification types attribute.
     // Note that updated_node is the ENDPOINT node in the Attribute Store.
     attribute_store_node_t supported_notification_type_node
-      = attribute_store_get_node_child_by_type(
+      = attribute_store_get_first_child_by_type(
         parent_node,
-        ATTRIBUTE(SUPPORTED_NOTIFICATION_TYPES),
-        0);
+        ATTRIBUTE(SUPPORTED_NOTIFICATION_TYPES));
     // If not, create it
     if (supported_notification_type_node == ATTRIBUTE_STORE_INVALID_NODE) {
       attribute_store_add_node(ATTRIBUTE(SUPPORTED_NOTIFICATION_TYPES),
@@ -687,10 +684,9 @@ static sl_status_t zwave_command_class_notification_get(
   uint8_t supported_notification_states[MAX_SUPPORTED_NOTIFICATION_STATES];
   uint8_t number_of_supported_states;
   attribute_store_node_t supported_states_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       attribute_store_get_first_parent_with_type(node, ATTRIBUTE(TYPE)),
-      ATTRIBUTE(SUPPORTED_STATES_OR_EVENTS),
-      0);
+      ATTRIBUTE(SUPPORTED_STATES_OR_EVENTS));
   attribute_store_get_node_attribute_value(supported_states_node,
                                            REPORTED_ATTRIBUTE,
                                            supported_notification_states,

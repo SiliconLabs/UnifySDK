@@ -9,7 +9,6 @@ target_include_directories(zwave_api_transport
 
 target_link_libraries(zwave_api_transport
   PRIVATE
-    zwave_api
     zwave_tx_groups
     uic_contiki
     zwave_controller

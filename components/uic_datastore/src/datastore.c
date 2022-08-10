@@ -27,6 +27,8 @@
 // Setup Log ID
 #define LOG_TAG "datastore"
 
+static bool ongoing_transaction = false;
+
 ////////////////////////////////////////////////////////////////////////////////
 // Types/Structs
 ////////////////////////////////////////////////////////////////////////////////
@@ -235,6 +237,32 @@ static bool datastore_contains_internal(const char *table,
 ////////////////////////////////////////////////////////////////////////////////
 // Public functions
 ////////////////////////////////////////////////////////////////////////////////
+sl_status_t datastore_start_transaction()
+{
+  if (ongoing_transaction) {
+    sl_log_info(LOG_TAG, "another transaction still ongoing");
+    return SL_STATUS_IN_PROGRESS;
+  }
+
+  int rc = sqlite3_exec(db, "BEGIN TRANSACTION", NULL, NULL, NULL);
+  if (rc != SQLITE_OK) {
+    return SL_STATUS_FAIL;
+  }
+  ongoing_transaction = true;
+  return SL_STATUS_OK;
+}
+
+sl_status_t datastore_commit_transaction()
+{
+  ongoing_transaction = false;
+  int rc              = sqlite3_exec(db, "END TRANSACTION", NULL, NULL, NULL);
+  if (rc != SQLITE_OK) {
+    return SL_STATUS_FAIL;
+  } else {
+    return SL_STATUS_OK;
+  }
+}
+
 sl_status_t datastore_store_int(const datastore_key_t key, int64_t value)
 {
   return datastore_store_internal(key, &value, 0, DATASTORE_VALUE_TYPE_INT);

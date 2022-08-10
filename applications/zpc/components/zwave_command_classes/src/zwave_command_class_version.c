@@ -27,7 +27,7 @@
 #include "zwave_controller_utils.h"
 #include "zwave_rx.h"
 #include "zwave_controller_transport.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
@@ -119,10 +119,9 @@ static bool is_command_class_version_already_known(attribute_store_node_t node)
     }
 
     attribute_store_node_t command_class_version_node
-      = attribute_store_get_node_child_by_type(
+      = attribute_store_get_first_child_by_type(
         current_endpoint_id_node,
-        attribute_store_get_node_type(node),
-        0);
+        attribute_store_get_node_type(node));
 
     if (true
         == attribute_store_is_value_defined(command_class_version_node,
@@ -168,10 +167,11 @@ static void
   // Check version support on endpoint 0, root device.
   if (!is_version_cc_found(endpoint_node)) {
     zwave_cc_version_t default_version = 1;
-    attribute_store_set_uint8_child_by_type(endpoint_node,
-                                            version_attribute[0],
-                                            REPORTED_ATTRIBUTE,
-                                            default_version);
+    attribute_store_set_reported(
+      attribute_store_get_first_child_by_type(endpoint_node,
+                                              version_attribute[0]),
+      &default_version,
+      sizeof(default_version));
   }
 }
 
@@ -208,9 +208,8 @@ static void zwave_command_class_version_create_cc_version_attributes(
 
   // Find the Non-Secure NIF under the endpoint
   attribute_store_node_t non_secure_nif_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE_ZWAVE_NIF,
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE_ZWAVE_NIF);
 
   uint8_t nif[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH];
   uint8_t nif_length = 0;
@@ -228,9 +227,8 @@ static void zwave_command_class_version_create_cc_version_attributes(
 
   // Same process for the Secure NIF
   attribute_store_node_t secure_nif_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE_ZWAVE_SECURE_NIF,
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
   if (SL_STATUS_OK
       == attribute_store_get_node_attribute_value(secure_nif_node,
                                                   REPORTED_ATTRIBUTE,
@@ -307,11 +305,13 @@ static sl_status_t
     // Set the CC version on the version attributes of all endpoints.
     // If the endpoint does not have the version CC this operation
     // has no effect
-    attribute_store_set_uint8_child_by_type(
-      endpoint_id_node,
-      ZWAVE_CC_VERSION_ATTRIBUTE(frame_data[2]),
-      REPORTED_ATTRIBUTE,
-      frame_data[3]);
+    attribute_store_node_t version_node
+      = attribute_store_get_first_child_by_type(
+        endpoint_id_node,
+        ZWAVE_CC_VERSION_ATTRIBUTE(frame_data[2]));
+    attribute_store_set_reported(version_node,
+                                 &frame_data[3],
+                                 sizeof(frame_data[3]));
 
     endpoint_id_node
       = attribute_store_get_node_child_by_type(node_id_node,
@@ -350,10 +350,13 @@ static sl_status_t
     = (frame_data[2]
        & VERSION_CAPABILITIES_REPORT_PROPERTIES1_Z_WAVE_SOFTWARE_BIT_MASK_V3)
       > 0;
-  attribute_store_set_uint8_child_by_type(endpoint_node,
-                                          ATTRIBUTE(ZWAVE_SOFTWARE_GET_SUPPORT),
-                                          REPORTED_ATTRIBUTE,
-                                          get_zwave_software);
+  attribute_store_node_t software_get_support_node
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      ATTRIBUTE(ZWAVE_SOFTWARE_GET_SUPPORT));
+  attribute_store_set_reported(software_get_support_node,
+                               &get_zwave_software,
+                               sizeof(get_zwave_software));
 
   if (get_zwave_software == true) {
     attribute_store_add_if_missing(endpoint_node,
@@ -388,9 +391,8 @@ static sl_status_t zwave_command_class_version_handle_software_report_command(
     = zwave_command_class_get_endpoint_node(connection_info);
   // Some data is repeated from the version report, except that it is more precise
   attribute_store_node_t version_report_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION_REPORT_DATA),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION_REPORT_DATA));
 
   sdk_version = (frame_data[2] << 16) | (frame_data[3] << 8) | (frame_data[4]);
   attribute_store_set_uint32_child_by_type(endpoint_node,
@@ -474,9 +476,8 @@ static sl_status_t zwave_command_class_version_handle_report_command(
     = zwave_command_class_get_endpoint_node(connection_info);
 
   attribute_store_node_t version_report_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION_REPORT_DATA),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION_REPORT_DATA));
 
   // Mark that we have received a Version Report
   const uint8_t report_received = 1;
@@ -986,7 +987,7 @@ bool is_version_cc_found(attribute_store_node_t node)
     = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_NODE_ID);
 
   const attribute_store_node_t version_cc_found
-    = attribute_store_get_node_child_by_type(node_id_node, ATTRIBUTE(FOUND), 0);
+    = attribute_store_get_first_child_by_type(node_id_node, ATTRIBUTE(FOUND));
 
   return (version_cc_found != ATTRIBUTE_STORE_INVALID_NODE);
 }

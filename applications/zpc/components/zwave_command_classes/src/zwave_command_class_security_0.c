@@ -13,16 +13,18 @@
 
 // Includes from this component
 #include "zwave_command_class_security_0.h"
-#include "attribute_store_defined_attribute_types.h"
+#include "zwave_command_class_granted_keys_resolver.h"
+#include "zwave_command_classes_utils.h"
 
 // ZPC Includes
-#include "zwave_unid.h"
-#include "zwave_controller_command_class_indices.h"
+#include "attribute_store_defined_attribute_types.h"
+#include "zwave_command_class_indices.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "zwave_command_handler.h"
+#include "zwave_tx_scheme_selector.h"
 #include "ZW_classcmd.h"
 
-// UIC Includes
+// Unify Includes
 #include "attribute_store_helper.h"
 #include "attribute_resolver.h"
 #include "sl_log.h"
@@ -35,49 +37,38 @@
 // Command Handler functions
 ///////////////////////////////////////////////////////////////////////////////
 static sl_status_t zwave_command_class_security_0_commands_supported_report(
-  const zwave_controller_connection_info_t *connection_info,
+  const zwave_controller_connection_info_t *connection,
   const uint8_t *frame_data,
   uint16_t frame_length)
 {
-  if (frame_length <= 3) {
-    sl_log_debug(LOG_TAG,
-                 "S0 Commands Supported Report Frame Length is too short\n");
-    return SL_STATUS_OK;
-  }
-
-  if (connection_info->encapsulation
-      < ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0) {
-    sl_log_debug(LOG_TAG,
-                 "S0 Commands Supported Report Frame encapsulated with a key "
-                 "lower than S0 \n");
-    return SL_STATUS_OK;
-  }
-
-  // Get the unid of the sending node
-  unid_t sending_node_unid;
-  zwave_unid_from_node_id(connection_info->remote.node_id, sending_node_unid);
-
-  // Get the assosiated Attribute Store entry for this unid/endpoint
   attribute_store_node_t endpoint_node
-    = attribute_store_network_helper_get_endpoint_node(
-      sending_node_unid,
-      connection_info->remote.endpoint_id);
+    = zwave_command_class_get_endpoint_node(connection);
 
-  // Get the Secure NIF atribute node under the endpoint
-  attribute_store_node_t secure_nif_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE_ZWAVE_SECURE_NIF,
-                                             0);
+  // We just received a S0 report, it means that if we were probing for
+  // Supported keys/protocol, this combination is working.
+  zwave_command_class_mark_key_protocol_as_supported(
+    attribute_store_get_first_parent_with_type(endpoint_node,
+                                               ATTRIBUTE_NODE_ID),
+    connection->encapsulation);
+
+  if (frame_length <= SECURE_SUPPORTED_COMMAND_CLASSES_INDEX) {
+    sl_log_debug(LOG_TAG,
+                 "S0 Commands Supported Report Command Class list is empty\n");
+    return SL_STATUS_OK;
+  }
+
+  // Save the list in the Secure NIF, only if this is the node's highest granted key.
+  if (ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0
+      != zwave_tx_scheme_get_node_highest_security_class(
+        connection->remote.node_id)) {
+    return SL_STATUS_OK;
+  }
   // Note that Securely Supported CC list will not be larger than 255
   uint8_t supported_cc_len
     = frame_length - SECURE_SUPPORTED_COMMAND_CLASSES_INDEX;
-  if (!supported_cc_len) {
-    sl_log_debug(LOG_TAG, "S0 supported command report list was empty\n");
-    return SL_STATUS_OK;
-  }
-  attribute_store_set_node_attribute_value(
-    secure_nif_node,
-    REPORTED_ATTRIBUTE,
+  attribute_store_set_child_reported(
+    endpoint_node,
+    ATTRIBUTE_ZWAVE_SECURE_NIF,
     &frame_data[SECURE_SUPPORTED_COMMAND_CLASSES_INDEX],
     supported_cc_len);
 

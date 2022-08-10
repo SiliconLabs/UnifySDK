@@ -20,10 +20,11 @@
 
 #include "sl_status.h"
 
-#include "mqtt_mock_helper.h"
+#include "mqtt_test_helper.h"
 
 extern "C" {
 #include "dotdot_mqtt.h"
+#include "dotdot_mqtt_generated_commands.h"
 
 #include "dotdot_mqtt_test.include"
 
@@ -33,7 +34,7 @@ static int callback_count = 0;
 void setUp()
 {
   callback_count = 0;
-  mqtt_mock_helper_init();
+  mqtt_test_helper_init();
   unset_all_callbacks();
   reset_callback_counters();
   num_command_callbacks = 0;
@@ -42,7 +43,7 @@ void setUp()
 void test_dotdot_mqtt_happy_no_registered_handlers()
 {
   uic_mqtt_dotdot_init();
-  TEST_ASSERT_EQUAL(0, mqtt_mock_helper_get_total_num_subscribers());
+  TEST_ASSERT_EQUAL(0, mqtt_test_helper_get_total_num_subscribers());
 }
 
 void test_dotdot_mqtt_commands_invalid_json()
@@ -52,21 +53,21 @@ void test_dotdot_mqtt_commands_invalid_json()
   // NOTE: The by-group subscriptions are registered (x2 registrations) only if
   // the group dispatch callback is set. The tests currently do not do this.
   TEST_ASSERT_EQUAL(num_callbacks,
-                    mqtt_mock_helper_get_total_num_subscribers());
+                    mqtt_test_helper_get_total_num_subscribers());
 
   // Test invalid json
   std::string json_str = "{\"foo: \"bar\"}";
-  mqtt_mock_helper_publish_to_all_topics(json_str.c_str(), json_str.length());
+  mqtt_test_helper_publish_to_all_topics(json_str.c_str(), json_str.length());
   TEST_ASSERT_EQUAL(0, num_command_callbacks);
 
   // Test empty json
   json_str = "";
-  mqtt_mock_helper_publish_to_all_topics(json_str.c_str(), json_str.length());
+  mqtt_test_helper_publish_to_all_topics(json_str.c_str(), json_str.length());
   TEST_ASSERT_EQUAL(0, num_command_callbacks);
 
   // Test valid but incomplete json
   json_str = R"({"foo":"bar")";
-  mqtt_mock_helper_publish_to_all_topics(json_str.c_str(), json_str.length());
+  mqtt_test_helper_publish_to_all_topics(json_str.c_str(), json_str.length());
   TEST_ASSERT_EQUAL(0, num_command_callbacks);
   unset_all_callbacks();
 }
@@ -79,9 +80,9 @@ void test_dotdot_mqtt_missing_required()
   uic_mqtt_dotdot_init();
   std::string msg    = R"({"PINOrRFIDCode":"1234"})";
   const char topic[] = "ucl/by-unid/zwDEADBEEF/ep0/DoorLock/Commands/LockDoor";
-  mqtt_mock_helper_publish(topic, msg.c_str(), msg.length());
+  mqtt_test_helper_publish(topic, msg.c_str(), msg.length());
   msg = R"({"Wazzap":"1234"})";
-  mqtt_mock_helper_publish(topic, msg.c_str(), msg.length());
+  mqtt_test_helper_publish(topic, msg.c_str(), msg.length());
   // Only the valid payload should have gone all the way through.
   TEST_ASSERT_EQUAL_INT(1, uic_mqtt_dotdot_door_lock_lock_door_callback_count);
 }
@@ -116,7 +117,7 @@ void test_dotdot_mqtt_write_attributes_integer_string()
   std::string payload = R"({"SystemMode": ")"
                         + std::to_string(ZCL_THERMOSTAT_SYSTEM_MODE_FAN_ONLY)
                         + "\"}";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(
     static_cast<uint8_t>(ZCL_THERMOSTAT_SYSTEM_MODE_FAN_ONLY),
     thermostat_systemmode,
@@ -125,7 +126,7 @@ void test_dotdot_mqtt_write_attributes_integer_string()
   // Test as json integer
   payload = R"({"SystemMode": )"
             + std::to_string(ZCL_THERMOSTAT_SYSTEM_MODE_COOL) + "}";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(
     static_cast<uint8_t>(ZCL_THERMOSTAT_SYSTEM_MODE_COOL),
     thermostat_systemmode,
@@ -133,7 +134,7 @@ void test_dotdot_mqtt_write_attributes_integer_string()
 
   // Test as string name
   payload = R"({"SystemMode": "EmergencyHeating"})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(
     static_cast<uint8_t>(ZCL_THERMOSTAT_SYSTEM_MODE_EMERGENCY_HEATING),
     thermostat_systemmode,
@@ -166,24 +167,24 @@ void test_dotdot_mqtt_write_attributes_bool()
     = "ucl/by-unid/zwDEADBEEF/ep0/DoorLock/Commands/WriteAttributes";
   // as json bool
   std::string payload = R"({"EnableLogging": false})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_FALSE_MESSAGE(doorlock_enablelogging, "Test bool as json bool");
 
   payload = R"({"EnableLogging": "true"})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_TRUE_MESSAGE(doorlock_enablelogging, "Test bool as sting");
 
   payload = R"({"EnableLogging": 0})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_FALSE_MESSAGE(doorlock_enablelogging, "Test bool as integer");
 
   payload = R"({"EnableLogging": "0"})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_FALSE_MESSAGE(doorlock_enablelogging,
                             "Test bool as string with number '0' inside");
 
   payload = R"({"EnableLogging": "123"})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_TRUE_MESSAGE(doorlock_enablelogging,
                            "Test bool as string with number '123' inside");
 }
@@ -198,12 +199,12 @@ void test_dotdot_mqtt_publish_attributes_int()
   uic_mqtt_dotdot_level_current_level_publish("test/hest",
                                               42,
                                               UCL_MQTT_PUBLISH_TYPE_ALL);
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_reported));
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_desired));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_reported));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_desired));
   char result[100];
-  mqtt_mock_helper_pop_publish(topic_reported, result);
+  mqtt_test_helper_pop_publish(topic_reported, result);
   TEST_ASSERT_EQUAL_JSON(R"({"value":42})", result);
-  mqtt_mock_helper_pop_publish(topic_desired, result);
+  mqtt_test_helper_pop_publish(topic_desired, result);
   TEST_ASSERT_EQUAL_JSON(R"({"value":42})", result);
 }
 
@@ -217,12 +218,12 @@ void test_dotdot_mqtt_publish_attributes_enum()
     "test/hest",
     ZCL_OTA_UPGRADE_UPGRADE_TIMEOUT_POLICY_APPLY_UPGRADE_AFTER_TIMEOUT,
     UCL_MQTT_PUBLISH_TYPE_ALL);
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_reported));
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_desired));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_reported));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_desired));
   char result[100];
-  mqtt_mock_helper_pop_publish(topic_reported, result);
+  mqtt_test_helper_pop_publish(topic_reported, result);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"ApplyUpgradeAfterTimeout"})", result);
-  mqtt_mock_helper_pop_publish(topic_desired, result);
+  mqtt_test_helper_pop_publish(topic_desired, result);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"ApplyUpgradeAfterTimeout"})", result);
 }
 
@@ -268,7 +269,7 @@ void test_dotdot_mqtt_enum_commands()
   uint8_t expected_user_type    = 1;
   std::string expected_pin_code = "1243";
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
 
   TEST_ASSERT_EQUAL(expected_user_id, user_id_value);
   TEST_ASSERT_EQUAL(expected_user_status, user_status_value);
@@ -292,7 +293,7 @@ void test_dotdot_mqtt_enum_commands()
   expected_user_type   = 255;
   expected_pin_code    = "6666";
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
 
   TEST_ASSERT_EQUAL(expected_user_id, user_id_value);
   TEST_ASSERT_EQUAL(expected_user_status, user_status_value);
@@ -308,12 +309,12 @@ void test_dotdot_mqtt_publish_attributes_string()
   uic_mqtt_dotdot_door_lock_language_publish("test/hest",
                                              "Danglish",
                                              UCL_MQTT_PUBLISH_TYPE_ALL);
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_reported));
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_desired));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_reported));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_desired));
   char result[100];
-  mqtt_mock_helper_pop_publish(topic_reported, result);
+  mqtt_test_helper_pop_publish(topic_reported, result);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"Danglish"})", result);
-  mqtt_mock_helper_pop_publish(topic_desired, result);
+  mqtt_test_helper_pop_publish(topic_desired, result);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"Danglish"})", result);
 }
 
@@ -326,25 +327,25 @@ void test_dotdot_mqtt_publish_attributes_reported_or_desired()
   uic_mqtt_dotdot_level_current_level_publish("test/hest",
                                               1,
                                               UCL_MQTT_PUBLISH_TYPE_DESIRED);
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_desired));
-  TEST_ASSERT_EQUAL(0, mqtt_mock_helper_get_num_publish(topic_reported));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_desired));
+  TEST_ASSERT_EQUAL(0, mqtt_test_helper_get_num_publish(topic_reported));
   char result[100];
   uic_mqtt_dotdot_level_current_level_publish("test/hest",
                                               2,
                                               UCL_MQTT_PUBLISH_TYPE_REPORTED);
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_desired));
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_reported));
-  mqtt_mock_helper_pop_publish(topic_desired, result);
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_desired));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_reported));
+  mqtt_test_helper_pop_publish(topic_desired, result);
   TEST_ASSERT_EQUAL_JSON(R"({"value":1})", result);
-  mqtt_mock_helper_pop_publish(topic_reported, result);
+  mqtt_test_helper_pop_publish(topic_reported, result);
   TEST_ASSERT_EQUAL_JSON(R"({"value":2})", result);
 }
 
 // Test bitmaps desired reported attributes
 void test_dotdot_mqtt_desired_reported_bool_and_enum_bitmaps()
 {
-  const char *topic_desired = "test/hest/Thermostat/Attributes/"
-                              "ThermostatProgrammingOperationMode/Desired";
+  const char *topic_desired  = "test/hest/Thermostat/Attributes/"
+                               "ThermostatProgrammingOperationMode/Desired";
   const char *topic_reported = "test/hest/Thermostat/Attributes/"
                                "ThermostatProgrammingOperationMode/Reported";
   char result[500];
@@ -353,20 +354,20 @@ void test_dotdot_mqtt_desired_reported_bool_and_enum_bitmaps()
     THERMOSTAT_THERMOSTAT_PROGRAMMING_OPERATION_MODE_PROGRAMMING_MODE
       | THERMOSTAT_THERMOSTAT_PROGRAMMING_OPERATION_MODE_AUTO_OR_RECOVERY,
     UCL_MQTT_PUBLISH_TYPE_DESIRED);
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_desired));
-  TEST_ASSERT_EQUAL(0, mqtt_mock_helper_get_num_publish(topic_reported));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_desired));
+  TEST_ASSERT_EQUAL(0, mqtt_test_helper_get_num_publish(topic_reported));
   uic_mqtt_dotdot_thermostat_thermostat_programming_operation_mode_publish(
     "test/hest",
     THERMOSTAT_THERMOSTAT_PROGRAMMING_OPERATION_MODE_ECONOMY_OR_ENERGY_STAR
       | THERMOSTAT_THERMOSTAT_PROGRAMMING_OPERATION_MODE_AUTO_OR_RECOVERY,
     UCL_MQTT_PUBLISH_TYPE_REPORTED);
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_desired));
-  TEST_ASSERT_EQUAL(1, mqtt_mock_helper_get_num_publish(topic_reported));
-  mqtt_mock_helper_pop_publish(topic_desired, result);
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_desired));
+  TEST_ASSERT_EQUAL(1, mqtt_test_helper_get_num_publish(topic_reported));
+  mqtt_test_helper_pop_publish(topic_desired, result);
   TEST_ASSERT_EQUAL_JSON(
     R"({"value": {"ProgrammingMode":"Schedule","AutoOrRecovery":true,"EconomyOrEnergyStar":false}})",
     result);
-  mqtt_mock_helper_pop_publish(topic_reported, result);
+  mqtt_test_helper_pop_publish(topic_reported, result);
   TEST_ASSERT_EQUAL_JSON(
     R"({"value": {"ProgrammingMode":"SimpleOrSetpoint","AutoOrRecovery":true,"EconomyOrEnergyStar":true}})",
     result);
@@ -412,7 +413,7 @@ void test_dotdot_mqtt_write_attributes_bitmap()
       | THERMOSTAT_AC_ERROR_CODE_INDOOR_COIL_TEMPERATURE_SENSOR_FAILURE
       | THERMOSTAT_AC_ERROR_CODE_OUTDOOR_TEMPERATURE_SENSOR_FAILURE;
   std::string payload = R"({"ACErrorCode": ")" + std::to_string(status) + "\"}";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(static_cast<uint8_t>(status),
                                 ac_error_code,
                                 "Test bitmap as int string");
@@ -420,7 +421,7 @@ void test_dotdot_mqtt_write_attributes_bitmap()
   ac_error_code = 0xff;
   // Test as json integer
   payload = R"({"ACErrorCode": )" + std::to_string(status) + "}";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(static_cast<uint8_t>(status),
                                 ac_error_code,
                                 "Test bitmap as int");
@@ -433,7 +434,7 @@ void test_dotdot_mqtt_write_attributes_bitmap()
       "FanFailure": "true"})";
 
   payload = R"({"ACErrorCode": )" + status_as_json + "}";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(static_cast<uint8_t>(status),
                                 ac_error_code,
                                 "Test bitmap as json");
@@ -448,7 +449,7 @@ void test_dotdot_mqtt_write_attributes_bitmap()
 
   payload = R"({"ThermostatProgrammingOperationMode": )" + status_as_json + "}";
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(
     static_cast<uint8_t>(status_thermostat_programming_mode),
     thermostat_programming_operation_mode,
@@ -460,7 +461,7 @@ void test_dotdot_mqtt_write_attributes_bitmap()
       "AtoOrRecovery": "true",
       "EconomyOrEnergySt": false})";
   payload = R"({"ThermostatProgrammingOperationMode": )" + status_as_json + "}";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(0xff,
                                 thermostat_programming_operation_mode,
                                 "Test JSON with incorrect keys");
@@ -485,7 +486,7 @@ void test_dotdot_mqtt_bitmap_interpretation_publish_and_read()
       | THERMOSTAT_AC_ERROR_CODE_FAN_FAILURE;
 
   std::string payload = R"({"ACErrorCode": ")" + std::to_string(status) + "\"}";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL_INT_MESSAGE(static_cast<uint8_t>(status),
                                 ac_error_code,
                                 "Test bitmap as int string");
@@ -503,7 +504,7 @@ void test_dotdot_mqtt_bitmap_interpretation_publish_and_read()
       "FanFailure": true}})";
 
   char result[500];
-  mqtt_mock_helper_pop_publish(topic_reported, result);
+  mqtt_test_helper_pop_publish(topic_reported, result);
   TEST_ASSERT_EQUAL_JSON(status_as_json.c_str(), result);
 }
 
@@ -569,7 +570,7 @@ void test_dotdot_mqtt_bitmaps_commands()
   uint32_t options_mask_payload     = 0;
   uint32_t options_override_payload = CC_COLOR_OPTIONS_EXECUTE_IF_OFF;
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
 
   TEST_ASSERT_EQUAL(update_flag_payload_status, update_flags_bitmap_value);
   TEST_ASSERT_EQUAL(
@@ -591,7 +592,7 @@ void test_dotdot_mqtt_supported_commands()
   uic_mqtt_dotdot_publish_supported_commands("zw-test-hest", 0);
   TEST_ASSERT_EQUAL(
     0,
-    mqtt_mock_helper_get_num_publish(
+    mqtt_test_helper_get_num_publish(
       "ucl/by-unid/zw-test-hest/ep0/DoorLock/SupportedCommands"));
 
   // Test that 1 supported command is published correct
@@ -600,9 +601,9 @@ void test_dotdot_mqtt_supported_commands()
   uic_mqtt_dotdot_publish_supported_commands("zw-test-hest", 0);
   TEST_ASSERT_EQUAL(
     1,
-    mqtt_mock_helper_get_num_publish(
+    mqtt_test_helper_get_num_publish(
       "ucl/by-unid/zw-test-hest/ep0/DoorLock/SupportedCommands"));
-  mqtt_mock_helper_pop_publish(
+  mqtt_test_helper_pop_publish(
     "ucl/by-unid/zw-test-hest/ep0/DoorLock/SupportedCommands",
     result);
   TEST_ASSERT_EQUAL_STRING(R"({"value": ["LockDoor"]})", result);
@@ -613,9 +614,9 @@ void test_dotdot_mqtt_supported_commands()
   uic_mqtt_dotdot_publish_supported_commands("zw-test-hest", 0);
   TEST_ASSERT_EQUAL(
     2,
-    mqtt_mock_helper_get_num_publish(
+    mqtt_test_helper_get_num_publish(
       "ucl/by-unid/zw-test-hest/ep0/DoorLock/SupportedCommands"));
-  mqtt_mock_helper_pop_publish(
+  mqtt_test_helper_pop_publish(
     "ucl/by-unid/zw-test-hest/ep0/DoorLock/SupportedCommands",
     result);
   TEST_ASSERT_EQUAL_STRING(R"({"value": ["LockDoor", "ToggleResponse"]})",
@@ -633,15 +634,15 @@ void test_dotdot_mqtt_write_attributes_badtopic()
   std::string payload = R"({"SystemMode": ")"
                         + std::to_string(ZCL_THERMOSTAT_SYSTEM_MODE_FAN_ONLY)
                         + "\"}";
-  mqtt_mock_helper_publish(
+  mqtt_test_helper_publish(
     "ucl/by-unid/zwDEADBEEF/ep999/Thermostat/Commands/WriteAttributes",
     payload.c_str(),
     payload.length());
-  mqtt_mock_helper_publish(
+  mqtt_test_helper_publish(
     "ucl/by-unid/zwDEADBEEF/ep/Thermostat/Commands/WriteAttributes",
     payload.c_str(),
     payload.length());
-  mqtt_mock_helper_publish(
+  mqtt_test_helper_publish(
     "ucl/by-unid/zwDEADBEEF/e/Thermostat/Commands/WriteAttributes",
     payload.c_str(),
     payload.length());
@@ -674,7 +675,7 @@ void test_dotdot_mqtt_force_read_attributes()
 
   // Test empty json
   std::string payload = R"({"value": []})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   // If an empty json is passed - all fields of "thermostat_updated" struct
   // should be set to "true". So if at least one of them is false - the test should fail
   bool test_value
@@ -729,14 +730,14 @@ void test_dotdot_mqtt_force_read_attributes()
 
   // Test one value array json
   payload = R"({"value": ["AbsMinCoolSetpointLimit"]})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_TRUE_MESSAGE(thermostat_updated.abs_min_cool_setpoint_limit,
                            "Test one value array json");
 
   // Test multiple values array json
   payload
     = R"({"value": ["AbsMinCoolSetpointLimit", "LocalTemperatureCalibration"]})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_TRUE_MESSAGE(thermostat_updated.abs_min_cool_setpoint_limit,
                            "Test multiple values array json");
   TEST_ASSERT_TRUE_MESSAGE(thermostat_updated.local_temperature_calibration,
@@ -831,7 +832,7 @@ void test_dotdot_mqtt_test_publish_integer_monotonous_string_array_attribute()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[]
     = R"({"value": ["OnOff","Level","NewClusterInTown"]})";
@@ -860,7 +861,7 @@ void test_dotdot_mqtt_test_publish_integer_monotonous_struct_array_attribute()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"({ "value":[
             { "ClusterName":"OnOff",
@@ -895,7 +896,7 @@ void test_dotdot_mqtt_test_publish_integer_monotonous_integer_array_attribute()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"({ "value":[ 0, 23, 55, 3, 10]})";
 
@@ -904,7 +905,7 @@ void test_dotdot_mqtt_test_publish_integer_monotonous_integer_array_attribute()
 
 void test_aox_locator_position_and_orientation_publish()
 {
-  const char *base_topic = "ucl/by-unid/ble2222/ep0";
+  const char *base_topic         = "ucl/by-unid/ble2222/ep0";
   CoordinateAndOrientation value = {.CoordinateX  = 2.3,
                                     .CoordinateY  = -34,
                                     .CoordinateZ  = -59.6,
@@ -925,7 +926,7 @@ void test_aox_locator_position_and_orientation_publish()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[]
     = R"({"value":{"CoordinateX":2.3,"CoordinateY":-34.0,"CoordinateZ":-59.6,"OrientationX":0.1,"OrientationY":22.0,"OrientationZ":1.111112}})";
@@ -978,7 +979,7 @@ void test_dotdot_mqtt_test_publish_monotonous_struct_array_attribute()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"({
   "value": [
@@ -1019,14 +1020,14 @@ void test_dotdot_mqtt_test_publish_generated_aox_angle_report()
   const dotdot_unid_t unid      = "ble-1334";
   dotdot_endpoint_id_t endpoint = 0;
   uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t fields;
-  fields.tag_unid                    = "ble-tag-23";
+  fields.tag_unid            = "ble-tag-23";
   fields.direction.Azimuth   = 34.2354563;
   fields.direction.Elevation = 3.00078;
   fields.direction.Distance  = 45.02;
-  fields.deviation.Azimuth     = 0.001;
-  fields.deviation.Elevation   = 0.002;
-  fields.deviation.Distance    = 0.00015;
-  fields.sequence                    = -10;
+  fields.deviation.Azimuth   = 0.001;
+  fields.deviation.Elevation = 0.002;
+  fields.deviation.Distance  = 0.00015;
+  fields.sequence            = -10;
 
   // Ask DotDot MQTT to publish.
   uic_mqtt_dotdot_aox_locator_publish_generated_angle_report_command(unid,
@@ -1039,7 +1040,7 @@ void test_dotdot_mqtt_test_publish_generated_aox_angle_report()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"(
     {
@@ -1062,11 +1063,12 @@ void test_dotdot_mqtt_test_publish_generated_aox_angle_report()
 }
 
 // Test function
-static sl_status_t uic_mqtt_dotdot_aox_locator_generated_angle_report_test_callback(
+static sl_status_t
+  uic_mqtt_dotdot_aox_locator_generated_angle_report_test_callback(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    const char* tag_unid,
+    const char *tag_unid,
     SphericalCoordinates measurement,
     SphericalCoordinates deviation,
     int32_t sequence)
@@ -1112,10 +1114,9 @@ void test_aox_locator_receive_generated_angle_report_command()
       "Distance": 6.5},
     "Sequence": 34})";
 
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL(1, callback_count);
 }
-
 
 void test_dotdot_mqtt_test_publish_generated_aox_iq_report()
 {
@@ -1141,7 +1142,7 @@ void test_dotdot_mqtt_test_publish_generated_aox_iq_report()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"(
     {"Channel":2,
@@ -1203,7 +1204,7 @@ void test_aox_apply_correction_callback()
       "Azimuth": 12.34,
       "Elevation": 1.012,
       "Distance": 6.5} ,"Sequence": 34})";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL(1, callback_count);
 }
 
@@ -1291,7 +1292,7 @@ void test_aox_locator_write_attributes_callback()
   "AntennaMode": "Array 4x4 DP URA",
   "ReportingMode": "AngleReport"
 })";
-  mqtt_mock_helper_publish(topic, payload.c_str(), payload.length());
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
   TEST_ASSERT_EQUAL(1, callback_count);
 }
 
@@ -1370,7 +1371,7 @@ void test_command_argument_struct_array_callback(void)
     { "TransitionTime": 5000, "HeatSetPoint": 1200, "CoolSetPoint": 2700 }
   ]
 })";
-  mqtt_mock_helper_publish(
+  mqtt_test_helper_publish(
     "ucl/by-unid/zwDEADBEEF/ep5/Thermostat/Commands/SetWeeklySchedule",
     payload.c_str(),
     payload.length());
@@ -1430,11 +1431,49 @@ void test_dotdot_mqtt_write_attributes_string_bitmap_enum(void)
       "ForcedDoorOpenUnderDoorLockedCondition": false
     }
   })";
-  mqtt_mock_helper_publish(
+  mqtt_test_helper_publish(
     "ucl/by-unid/zwDEADBEEF/ep0/DoorLock/Commands/WriteAttributes",
     payload.c_str(),
     payload.length());
 
   TEST_ASSERT_TRUE(stub_dl_writeattr_called);
+}
+
+// Test Command callback that contains NULLs instead of strings
+sl_status_t bind_callback(dotdot_unid_t unid,
+                          dotdot_endpoint_id_t endpoint,
+                          uic_mqtt_dotdot_callback_call_type_t call_type,
+                          const char *cluster_name,
+                          const char *destination_unid,
+                          uint8_t destination_ep)
+{
+  callback_count += 1;
+  return SL_STATUS_OK;
+}
+
+void test_dotdot_mqtt_incoming_command_with_null_json_object()
+{
+  uic_mqtt_dotdot_binding_bind_callback_set(&bind_callback);
+  uic_mqtt_dotdot_init();
+  const char topic[] = "ucl/by-unid/test_unid/ep0/Binding/Commands/Bind";
+
+  // test DestinationUnid is a Null object.
+  std::string payload
+    = R"({"ClusterName":"OnOff","DestinationUnid":null,"DestinationEp": 0})";
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
+
+  TEST_ASSERT_EQUAL(1, callback_count);
+
+  payload
+    = R"({"ClusterName":null,"DestinationUnid":"1234","DestinationEp": 0})";
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
+
+  TEST_ASSERT_EQUAL(2, callback_count);
+
+  payload
+    = R"({"ClusterName":"OnOff","DestinationUnid":"1234","DestinationEp": 0})";
+  mqtt_test_helper_publish(topic, payload.c_str(), payload.length());
+
+  TEST_ASSERT_EQUAL(3, callback_count);
 }
 }

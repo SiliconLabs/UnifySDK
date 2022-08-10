@@ -1,0 +1,200 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+#include "uic_mqtt.h"
+#include "json_helpers.hpp"
+
+#include "dotdot_mqtt.hpp"
+#include "dotdot_mqtt_generated_commands.h"
+#include "dotdot_mqtt_command_helpers.hpp"
+
+////////////////////////////////////////////////////////////////////////////////
+// Generated Commands publications functions
+////////////////////////////////////////////////////////////////////////////////
+{{#zcl_clusters}}
+{{#if (supportedCluster label)}}
+{{#zcl_commands}}
+/**
+ * @brief Publishes an incoming/generated {{label}} command for
+ * the {{parent.label}} cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints parent.label)}}epID/{{/unless}}{{asPublicationName parent.label}}/GeneratedCommands/{{label}}
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * {{#unless (clusterWithoutEndpoints parent.label)}}
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * {{/unless}}
+ * {{#zcl_command_arguments}}{{#first}}
+ * @param fields                Struct pointer with the fields value of the command
+ * {{/first}}{{/zcl_command_arguments}}
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_publish_generated_{{asSnakeCaseLower label}}_command(
+  const dotdot_unid_t unid{{#unless (clusterWithoutEndpoints parent.label)}},
+  const dotdot_endpoint_id_t endpoint{{/unless}}{{#zcl_command_arguments}}{{#first}},
+  const {{asCommandFieldsType parent}} *fields
+  {{/first}}{{/zcl_command_arguments}}
+) {
+  // Create the topic
+  {{#if (clusterWithoutEndpoints parent.label)}}
+  std::string topic = "ucl/by-unid/" + std::string(unid) + "/";
+  {{else}}
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  {{/if}}
+  topic += "{{asPublicationName parent.label}}/GeneratedCommands/{{label}}";
+
+  std::string payload =
+    get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_command(
+    {{#zcl_command_arguments}}{{#first}}fields{{/first}}{{/zcl_command_arguments}});
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                    payload.c_str(),
+                    payload.size(),
+                    false);
+}
+{{/zcl_commands}}
+
+
+/**
+ * @brief Publishes an incoming/generated WriteAttributes command for
+ * the {{label}} cluster.
+ *
+ * Publication will be made at the following topic
+ * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints label)}}epID/{{/unless}}{{asPublicationName label}}/GeneratedCommands/WriteAttributes
+ *
+ * @param unid      The UNID of the node that sent us the command.
+ * {{#unless (clusterWithoutEndpoints label)}}
+ * @param endpoint  The Endpoint ID of the node that sent us the command.
+ * {{/unless}}
+ * @param attribute_values  Values to assign to the attributes
+ * @param attribute_list    List of attributes that are written
+ */
+void {{dotdot_prefix}}_{{asSnakeCaseLower label}}_publish_generated_write_attributes_command(
+  const dotdot_unid_t unid,{{#unless (clusterWithoutEndpoints label)}}
+  const dotdot_endpoint_id_t endpoint,{{/unless}}
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t attribute_values,
+  {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t attribute_list
+){
+  // Create the topic
+  {{#if (clusterWithoutEndpoints label)}}
+  std::string topic = "ucl/by-unid/" + std::string(unid) + "/";
+  {{else}}
+  std::string topic = "ucl/by-unid/"+ std::string(unid) + "/ep" +
+                      std::to_string(endpoint) + "/";
+  {{/if}}
+  topic += "{{asPublicationName label}}/GeneratedCommands/WriteAttributes";
+
+  nlohmann::json json_object = nlohmann::json::object();
+
+  {{#zcl_attributes}}
+  {{#if isWritable}}
+
+  if (attribute_list.{{asSnakeCaseLower label}} == true) {
+
+  {{#if (isMonotonousArray label)}}
+  // This is a variable size array of the same known type.
+  // Create an array under the value {"value":[]}
+  json_object["{{label}}"] = nlohmann::json::array();
+
+  for (size_t i = 0; i<attribute_values.{{asSnakeCaseLower label}}_count;i++) {
+    {{#if_is_enum type}}
+    #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
+    json_object["{{label}}"].push_back(({{asUnderlyingType type}}){{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name((uint32_t)attribute_values.{{label}}[i]));
+    #else
+    json_object["{{label}}"].push_back(static_cast<{{chooseTypeOrEnumName type parent.label label}}>(attribute_values.{{asSnakeCaseLower label}}[i]));
+    #endif
+    {{else}}
+      {{#if_is_bitmap type}}
+        {{#if (isUnknownBitmap label)}}
+    // Unknown bitmap
+    json_object["{{label}}"].push_back(str(attribute_values.{{asSnakeCaseLower label}}[i]));
+        {{else}}
+    // Known bitmap
+    json_object["{{label}}"].push_back({{chooseTypeOrBitmapName type parent.label label}}.get_bitmap_values_as_json_tree((uint32_t)attribute_values.{{asSnakeCaseLower label}}[i]));
+        {{/if}}
+      {{else}}
+        {{#if (isString type)}}
+    // String type
+    json_object["{{label}}"].push_back(std::string(attribute_values.{{asSnakeCaseLower label}}[i]));
+        {{else}}
+          {{#if (isStruct type)}}
+    // Struct type
+    nlohmann::json json_sub_object = nlohmann::json::object();
+            {{#zcl_struct_items_by_struct_name type}}
+    json_sub_object["{{label}}"] = attribute_values.{{asSnakeCaseLower parent.label}}[i].{{label}};
+            {{/zcl_struct_items_by_struct_name}}
+    json_object["{{label}}"].push_back(json_sub_object);
+          {{else}}
+    json_object["{{label}}"].push_back(attribute_values.{{asSnakeCaseLower label}}[i]);
+          {{/if}}
+        {{/if}}
+      {{/if_is_bitmap}}
+    {{/if_is_enum}}
+  }
+
+  {{else}}
+  // This is a single value
+
+  {{#if_is_enum type}}
+  #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
+  json_object["{{label}}"] = {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name((uint32_t)attribute_values.{{asSnakeCaseLower label}});
+  #else
+  json_object["{{label}}"] = static_cast<{{chooseTypeOrEnumName type parent.label label}}>(attribute_values.{{asSnakeCaseLower label}});
+  #endif
+  {{else}}
+    {{#if_is_bitmap type}}
+      {{#if (isUnknownBitmap label)}}
+  json_object["{{label}}"] = std::to_string(attribute_values.{{asSnakeCaseLower label}});
+      {{else}}
+  nlohmann::json bitmap_values = {{chooseTypeOrBitmapName type parent.label label}}.get_bitmap_values_as_json_tree((uint32_t)attribute_values.{{asSnakeCaseLower label}});
+  json_object["{{label}}"] = bitmap_values;
+      {{/if}}
+    {{else}}
+      {{#if (isString type)}}
+  json_object["{{label}}"] = std::string(attribute_values.{{asSnakeCaseLower label}});
+      {{else}}
+        {{#if (isStruct type)}}
+  nlohmann::json json_sub_object = nlohmann::json::object();
+  {{#zcl_struct_items_by_struct_name type}}
+   json_sub_object["{{label}}"] = attribute_values.{{asSnakeCaseLower parent.label}}.{{label}};
+  {{/zcl_struct_items_by_struct_name}}
+  json_object["{{label}}"] = json_sub_object;
+         {{else}}
+  json_object["{{label}}"] = attribute_values.{{asSnakeCaseLower label}};
+         {{/if}}
+        {{/if}}
+      {{/if_is_bitmap}}
+    {{/if_is_enum}}
+
+  {{/if}}
+
+  }
+
+  {{/if}}
+  {{/zcl_attributes}}
+
+  std::string payload = json_object.dump();
+
+  // Publish our command
+  uic_mqtt_publish(topic.c_str(),
+                   payload.c_str(),
+                   payload.size(),
+                   false);
+}
+
+{{/if}}
+{{/zcl_clusters}}

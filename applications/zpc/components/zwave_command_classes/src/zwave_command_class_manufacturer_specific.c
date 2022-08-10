@@ -19,7 +19,7 @@
 #include "assert.h"
 
 // ZPC Components
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_controller_utils.h"
 #include "zwave_command_classes_utils.h"
@@ -30,7 +30,7 @@
 #include "ZW_classcmd.h"
 #include "zwave_security_validation.h"
 
-// UIC Components
+// Unify Components
 #include "sl_log.h"
 
 #define LOG_TAG "zwave_command_class_manufacturer_specific"

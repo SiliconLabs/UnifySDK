@@ -19,7 +19,7 @@
 #include <assert.h>
 
 // Includes from other ZPC Components
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller_utils.h"
 #include "zwave_command_handler.h"
 #include "zpc_attribute_store_network_helper.h"
@@ -28,12 +28,11 @@
 #include "zwave_tx.h"
 #include "zwave_tx_scheme_selector.h"
 
-// Includes from other UIC Component
+// Includes from other Unify Components
 #include "attribute_store_helper.h"
 #include "attribute_resolver.h"
 #include "attribute_timeouts.h"
-#include "dotdot_mqtt.h"
-#include "dotdot_mqtt_supported_generated_commands.h"
+#include "dotdot_mqtt_generated_commands.h"
 #include "sl_log.h"
 
 // Log tag
@@ -81,9 +80,8 @@ static basic_probe_status_t
   basic_probe_status_t probe_status = NOT_REQUESTED;
 
   attribute_store_node_t probe_node
-    = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                             ATTRIBUTE(PROBE_STATUS),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE(PROBE_STATUS));
   attribute_store_get_reported(probe_node, &probe_status, sizeof(probe_status));
   return probe_status;
 }
@@ -107,9 +105,8 @@ static sl_status_t
     return SL_STATUS_FAIL;
   }
   attribute_store_node_t probe_node
-    = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                             ATTRIBUTE(PROBE_STATUS),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE(PROBE_STATUS));
 
   if (probe_node == ATTRIBUTE_STORE_INVALID_NODE) {
     probe_node
@@ -222,9 +219,8 @@ static sl_status_t zwave_command_class_basic_set(attribute_store_node_t node,
     = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
 
   attribute_store_node_t duration_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(DURATION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(DURATION));
   uint32_t duration = 0;
   attribute_store_get_reported(duration_node, &duration, sizeof(duration));
   if (duration != 0) {
@@ -247,7 +243,6 @@ static sl_status_t zwave_command_class_basic_set(attribute_store_node_t node,
 ///////////////////////////////////////////////////////////////////////////////
 // Frame parsing functions
 ///////////////////////////////////////////////////////////////////////////////
-
 /**
  * @brief Handles incoming Basic Set Commands.
  *
@@ -274,12 +269,6 @@ static sl_status_t zwave_command_class_basic_handle_set(
   zwave_unid_from_node_id(connection_info->remote.node_id, node_unid);
   dotdot_endpoint_id_t endpoint_id = connection_info->remote.endpoint_id;
 
-  // Make sure we advertised that this node will send this type of commands
-  uic_mqtt_dotdot_on_off_supported_commands_t commands
-    = {.on = true, .off = true};
-  uic_mqtt_dotdot_on_off_publish_supported_generated_commands(node_unid,
-                                                              endpoint_id,
-                                                              &commands);
   // Indicate if the node is trying to set on or off.
   bool received_value = frame_data[SET_VALUE_INDEX];
   if (received_value) {
@@ -324,9 +313,7 @@ static sl_status_t zwave_command_class_basic_handle_report(
 
   // Now save all the data reported by the node
   attribute_store_node_t value_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VALUE),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(VALUE));
   uint32_t current_value = frame_data[REPORT_VALUE_INDEX];
   if (current_value >= 1 && current_value <= 100) {
     current_value = ON;
@@ -345,9 +332,8 @@ static sl_status_t zwave_command_class_basic_handle_report(
   uint32_t duration = 0;  // Assumed value if no duration is provided.
   if (frame_length > REPORT_DURATION_INDEX) {
     attribute_store_node_t duration_node
-      = attribute_store_get_node_child_by_type(endpoint_node,
-                                               ATTRIBUTE(DURATION),
-                                               0);
+      = attribute_store_get_first_child_by_type(endpoint_node,
+                                                ATTRIBUTE(DURATION));
     if (duration_node == ATTRIBUTE_STORE_INVALID_NODE
         && probe_status == ANSWERED) {
       duration_node
@@ -414,16 +400,15 @@ static void
   // Next stop, look at the NIFs:
   // First Non-secure
   attribute_store_node_t nif_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE_ZWAVE_NIF,
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE_ZWAVE_NIF);
   if (do_not_try_basic(nif_node) == true) {
     return;
   }
   // Then secure
-  nif_node = attribute_store_get_node_child_by_type(endpoint_node,
-                                                    ATTRIBUTE_ZWAVE_SECURE_NIF,
-                                                    0);
+  nif_node
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
   if (do_not_try_basic(nif_node) == true) {
     return;
   }

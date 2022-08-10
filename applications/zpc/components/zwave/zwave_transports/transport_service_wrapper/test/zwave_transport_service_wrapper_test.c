@@ -10,12 +10,15 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-#include "zwave_transport_service.h"
+#include "zwave_transport_service_wrapper.h"
+
+// Mock includes
 #include "zwave_controller_internal_mock.h"
 #include "zwave_controller_transport_mock.h"
 #include "transport_service_mock.h"
 #include "ZW_classcmd.h"
 #include "zwave_controller_utils_mock.h"
+#include "zwave_controller_storage_mock.h"
 #include "zwave_tx_scheme_selector_mock.h"
 #include "zwave_tx_mock.h"
 
@@ -438,20 +441,16 @@ void test_zwave_transport_service_send_data()
 {
   zwave_controller_connection_info_t connection_info = {};
   zwave_tx_options_t tx_options                      = {};
+  connection_info.local.node_id                      = 1;
+  connection_info.remote.node_id                     = 2;
+  connection_info.remote.endpoint_id                 = 0;
 
-  zwave_node_get_command_class_version_ExpectAndReturn(0, 0, 0, 2);
-  zwave_node_get_command_class_version_IgnoreArg_command_class();
-  zwave_node_get_command_class_version_IgnoreArg_endpoint_id();
-  zwave_node_get_command_class_version_IgnoreArg_node_id();
-  connection_info.local.node_id      = 1;
-  connection_info.remote.node_id     = 2;
-  connection_info.remote.endpoint_id = 0;
   zwave_tx_scheme_get_max_payload_ExpectAndReturn(
     connection_info.remote.node_id,
     MAX_MSDU_SIZE);
-  zwave_tx_scheme_get_max_payload_ExpectAndReturn(
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(
     connection_info.remote.node_id,
-    MAX_MSDU_SIZE);
+    true);
   transport_service_send_data_ExpectAndReturn(1,
                                               2,
                                               data,
@@ -476,10 +475,21 @@ void test_zwave_transport_service_send_data_overflow()
   zwave_controller_connection_info_t connection_info = {};
   zwave_tx_options_t tx_options                      = {};
 
-  zwave_node_get_command_class_version_ExpectAndReturn(0, 0, 0, 2);
-  zwave_node_get_command_class_version_IgnoreArg_command_class();
-  zwave_node_get_command_class_version_IgnoreArg_endpoint_id();
-  zwave_node_get_command_class_version_IgnoreArg_node_id();
+  connection_info.local.node_id      = 1;
+  connection_info.remote.node_id     = 2;
+  connection_info.remote.endpoint_id = 0;
+
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(
+    connection_info.remote.node_id,
+    MAX_MSDU_SIZE);
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(
+    connection_info.remote.node_id,
+    false);
+  zwave_controller_storage_get_cc_version_ExpectAndReturn(
+    COMMAND_CLASS_TRANSPORT_SERVICE_V2,
+    connection_info.remote.node_id,
+    connection_info.remote.endpoint_id,
+    2);
   transport_service_send_data_ExpectAndReturn(1,
                                               2,
                                               data,
@@ -489,26 +499,14 @@ void test_zwave_transport_service_send_data_overflow()
                                               TRANSPORT_SERVICE_WILL_OVERFLOW);
   transport_service_send_data_IgnoreArg_on_send_complete();
 
-  connection_info.local.node_id      = 1;
-  connection_info.remote.node_id     = 2;
-  connection_info.remote.endpoint_id = 0;
-  zwave_tx_scheme_get_max_payload_ExpectAndReturn(
-    connection_info.remote.node_id,
-    MAX_MSDU_SIZE);
-  zwave_tx_scheme_get_max_payload_ExpectAndReturn(
-    connection_info.remote.node_id,
-    MAX_MSDU_SIZE);
-  zwave_tx_scheme_get_max_payload_ExpectAndReturn(
-    connection_info.remote.node_id,
-    MAX_MSDU_SIZE);
-  TEST_ASSERT_EQUAL(zwave_transport_service_send_data(&connection_info,
+  TEST_ASSERT_EQUAL(SL_STATUS_WOULD_OVERFLOW,
+                    zwave_transport_service_send_data(&connection_info,
                                                       sizeof(data),
                                                       data,
                                                       &tx_options,
                                                       0,
                                                       0,
-                                                      0),
-                    SL_STATUS_WOULD_OVERFLOW);
+                                                      0));
 }
 
 void test_zwave_transport_service_send_data_fail()
@@ -516,10 +514,16 @@ void test_zwave_transport_service_send_data_fail()
   zwave_controller_connection_info_t connection_info = {};
   zwave_tx_options_t tx_options                      = {};
 
-  zwave_node_get_command_class_version_ExpectAndReturn(0, 0, 0, 2);
-  zwave_node_get_command_class_version_IgnoreArg_command_class();
-  zwave_node_get_command_class_version_IgnoreArg_endpoint_id();
-  zwave_node_get_command_class_version_IgnoreArg_node_id();
+  connection_info.local.node_id      = 1;
+  connection_info.remote.node_id     = 2;
+  connection_info.remote.endpoint_id = 0;
+
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(
+    connection_info.remote.node_id,
+    MAX_MSDU_SIZE);
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(
+    connection_info.remote.node_id,
+    true);
   transport_service_send_data_ExpectAndReturn(1,
                                               2,
                                               data,
@@ -529,15 +533,6 @@ void test_zwave_transport_service_send_data_fail()
                                               TRANSPORT_SERVICE_SEND_FAILURE);
   transport_service_send_data_IgnoreArg_on_send_complete();
 
-  connection_info.local.node_id      = 1;
-  connection_info.remote.node_id     = 2;
-  connection_info.remote.endpoint_id = 0;
-  zwave_tx_scheme_get_max_payload_ExpectAndReturn(
-    connection_info.remote.node_id,
-    MAX_MSDU_SIZE);
-  zwave_tx_scheme_get_max_payload_ExpectAndReturn(
-    connection_info.remote.node_id,
-    MAX_MSDU_SIZE);
   TEST_ASSERT_EQUAL(zwave_transport_service_send_data(&connection_info,
                                                       sizeof(data),
                                                       data,
@@ -553,13 +548,19 @@ void test_zwave_transport_service_send_data_cc_not_supported()
   zwave_controller_connection_info_t connection_info = {};
   zwave_tx_options_t tx_options                      = {};
 
-  zwave_node_get_command_class_version_ExpectAndReturn(0, 0, 0, 0);
-  zwave_node_get_command_class_version_IgnoreArg_command_class();
-  zwave_node_get_command_class_version_IgnoreArg_endpoint_id();
-  zwave_node_get_command_class_version_IgnoreArg_node_id();
-
   connection_info.local.node_id  = 1;
   connection_info.remote.node_id = 2;
+  zwave_tx_scheme_get_max_payload_ExpectAndReturn(
+    connection_info.remote.node_id,
+    MAX_MSDU_SIZE);
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(
+    connection_info.remote.node_id,
+    false);
+  zwave_controller_storage_get_cc_version_ExpectAndReturn(
+    COMMAND_CLASS_TRANSPORT_SERVICE_V2,
+    connection_info.remote.node_id,
+    connection_info.remote.endpoint_id,
+    1);
   TEST_ASSERT_EQUAL(zwave_transport_service_send_data(&connection_info,
                                                       sizeof(data),
                                                       data,

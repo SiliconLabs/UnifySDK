@@ -15,7 +15,7 @@
 #include "ota_time.h"
 #include "ota_time.hpp"
 
-// UIC Components
+// Unify Components
 #include "sl_log.h"
 
 // Standard library

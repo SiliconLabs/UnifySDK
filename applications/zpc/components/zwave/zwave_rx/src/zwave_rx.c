@@ -194,10 +194,9 @@ sl_status_t zwave_rx_init(const char *serial_port,
     } else {
       sl_log_info(LOG_TAG, "Applying soft reset of the Z-Wave Module\n");
       zwapi_soft_reset();
-      // Do we want to wait for the chip to come back up ? (approx. 1000ms-1500ms)
-      // I'd say no. If somebody else tries to use the Z-Wave API too early, it
-      // will just take a bit longer and do a couple of retransmissions to the
-      // serial device, so it's not worth to wait here and block everybody else.
+
+      // Wait for Z-Wave API started
+      zwave_rx_wait_for_zwave_api_to_be_ready();
     }
   }
 
@@ -212,6 +211,13 @@ sl_status_t zwave_rx_init(const char *serial_port,
   }
 
   return SL_STATUS_OK;
+}
+
+void zwave_rx_wait_for_zwave_api_to_be_ready()
+{
+  while (true == zwapi_is_awaiting_zwave_api_started()) {
+    zwapi_poll();
+  }
 }
 
 void zwave_rx_shutdown()

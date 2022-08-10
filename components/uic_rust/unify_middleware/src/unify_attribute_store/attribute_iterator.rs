@@ -13,7 +13,9 @@
 
 use std::collections::VecDeque;
 
-use crate::{AttributeStoreExtTrait, AttributeStoreTrait};
+use crate::verify_attribute_ok;
+
+use super::AttributeTrait;
 
 /// Searches the attribute store tree breadth first.
 ///
@@ -27,12 +29,12 @@ use crate::{AttributeStoreExtTrait, AttributeStoreTrait};
 /// If an ATTRIBUTE_STORE_INVALID_NODE is received from the C-API
 /// None is returned.
 #[derive(Debug, Clone, PartialEq)]
-pub struct UicAttributeStoreIterator<T: AttributeStoreExtTrait> {
+pub struct AttributeStoreIterator<T: AttributeTrait> {
     current_index: usize,
     queue: VecDeque<T>,
 }
 
-impl<T: AttributeStoreExtTrait> UicAttributeStoreIterator<T> {
+impl<T: AttributeTrait> AttributeStoreIterator<T> {
     pub fn new(attribute: T) -> Self {
         let mut queue = VecDeque::new();
         queue.push_back(attribute);
@@ -44,22 +46,24 @@ impl<T: AttributeStoreExtTrait> UicAttributeStoreIterator<T> {
     }
 }
 
-impl<T: AttributeStoreExtTrait + AttributeStoreTrait<Attribute = T>> Iterator
-    for UicAttributeStoreIterator<T>
+#[mockall::automock]
+impl<T> Iterator for AttributeStoreIterator<T>
+where
+    T: 'static + AttributeTrait,
 {
-    type Item = T::Attribute;
+    type Item = T;
 
     fn next(&mut self) -> Option<Self::Item> {
         let current = self.queue.pop_front()?;
 
         for x in 0..current.child_count() {
-            self.queue.push_back(current.child(x).ok()?);
+            self.queue.push_back(verify_attribute_ok(current.child(x))?);
         }
 
-        if current.exists() {
-            return Some(current);
+        if current.valid() {
+            Some(current)
         } else {
-            return None;
+            None
         }
     }
 }
@@ -76,11 +80,11 @@ impl<T: AttributeStoreExtTrait + AttributeStoreTrait<Attribute = T>> Iterator
 /// If an ATTRIBUTE_STORE_INVALID_NODE is received from the C-API
 /// None is returned.
 #[derive(Debug, Clone, PartialEq)]
-pub struct UicAttributeStoreIteratorDFS<T: AttributeStoreExtTrait> {
+pub struct AttributeStoreIteratorDFS<T: AttributeTrait> {
     stack: Vec<T>,
 }
 
-impl<T: AttributeStoreExtTrait> UicAttributeStoreIteratorDFS<T> {
+impl<T: AttributeTrait> AttributeStoreIteratorDFS<T> {
     pub fn new(attribute: T) -> Self {
         let mut stack = Vec::new();
         stack.push(attribute);
@@ -88,23 +92,25 @@ impl<T: AttributeStoreExtTrait> UicAttributeStoreIteratorDFS<T> {
     }
 }
 
-impl<T: AttributeStoreExtTrait + AttributeStoreTrait<Attribute = T>> Iterator
-    for UicAttributeStoreIteratorDFS<T>
+#[mockall::automock]
+impl<T> Iterator for AttributeStoreIteratorDFS<T>
+where
+    T: 'static + AttributeTrait,
 {
-    type Item = T::Attribute;
+    type Item = T;
 
     fn next(&mut self) -> Option<Self::Item> {
         let current = self.stack.pop()?;
         let child_size = current.child_count();
         for x in 0..child_size {
-            let child_node = current.child(x).ok()?;
+            let child_node = verify_attribute_ok(current.child(x))?;
             self.stack.push(child_node);
         }
 
-        if current.exists() {
-            return Some(current);
+        if current.valid() {
+            Some(current)
         } else {
-            return None;
+            None
         }
     }
 }

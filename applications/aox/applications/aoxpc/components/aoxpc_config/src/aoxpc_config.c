@@ -18,6 +18,7 @@
 // List of default settings
 #define DEFAULT_AOXPC_DATASTORE_FILE       UIC_VAR_DIR "/aoxpc.db"
 #define DEFAULT_AOXPC_CONFIG_FILE          ""
+#define DEFAULT_AOXPC_NCP_UPDATE_FILE      ""
 #define DEFAULT_AOXPC_NCP_SERIAL_PORT      "/dev/ttyACM0"
 #define DEFAULT_AOXPC_NCP_SERIAL_BAUD_RATE 115200
 #define DEFAULT_AOXPC_NCP_TCP_ADDRESS      ""
@@ -33,6 +34,13 @@ sl_status_t aoxpc_config_init()
   status |= config_add_string(CONFIG_KEY_AOXPC_DATASTORE_FILE,
                               "AoXPC datastore database file",
                               DEFAULT_AOXPC_DATASTORE_FILE);
+
+  status |= config_add_flag(CONFIG_KEY_AOXPC_NCP_VERSION,
+                            "Print the NCP firmaware version and exit");
+
+  status |= config_add_string(CONFIG_KEY_AOXPC_NCP_UPDATE,
+                              "Update the NCP firmware and exit",
+                              DEFAULT_AOXPC_NCP_UPDATE_FILE);
 
   status |= config_add_string(CONFIG_KEY_AOXPC_NCP_SERIAL,
                               "Serial port where NCP module is connected",

@@ -16,7 +16,7 @@ use proc_macro2::Span;
 use quote::{quote, ToTokens};
 use syn::{
     parse_macro_input,
-punctuated::Punctuated,
+    punctuated::Punctuated,
     token::{self, Extern, Unsafe},
     Abi, Block, ExprUnsafe, FnArg, LitStr, PatIdent, Path, PathSegment, Stmt, Token,
 };
@@ -146,7 +146,10 @@ pub fn generate_resolver_callback(_attr: TokenStream, item: TokenStream) -> Toke
         #func
         #[unify_proc_macro::generate_extern_c]
         fn #old_name(_node: u32, data: *mut u8, data_len: *mut u16) -> sl_status_t {
-            let node  = Attribute::new_from_handle(_node).unwrap();
+            use unify_sl_status_sys::SL_STATUS_FAIL;
+            use unify_middleware::attribute_store_or_return_with;
+            let attribute_store = attribute_store_or_return_with!(SL_STATUS_FAIL);
+            let node  = attribute_store.from_handle(_node);
 
             match #new_name(node) {
                 Ok( (status, frame) ) => {
@@ -158,7 +161,7 @@ pub fn generate_resolver_callback(_attr: TokenStream, item: TokenStream) -> Toke
                 },
                 Err(_) => {
                     unsafe { *data_len = 0 };
-                    SL_STATUS_OK
+                    unify_sl_status_sys::SL_STATUS_FAIL
                 }
 
             }

@@ -31,7 +31,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Adding command line interface commands to UIC process
+ * @brief Adding command line interface commands to Unify process
  *
  */
 void zpc_setup_cli();

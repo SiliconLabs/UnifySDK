@@ -15,7 +15,7 @@
 #include "uic_stdin.hpp"
 #include "uic_stdin_test.h"
 
-// UIC Components
+// Unify Components
 #include "sl_log.h"
 
 // Contiki includes
@@ -45,7 +45,7 @@ static int out_stream;
 ///      (e.g. in hello world), the arg is "world"
 typedef sl_status_t (*handler_func)(const handle_args_t &arg);
 
-// UIC handler functions
+// Unify handler functions
 static sl_status_t handle_help(const handle_args_t &arg);
 static sl_status_t handle_exit(const handle_args_t &arg);
 static sl_status_t handle_set_log_level(const handle_args_t &arg);
@@ -60,12 +60,12 @@ static std::map<std::string, std::pair<std::string, handler_func>> commands
   = {{"help", {" :Prints help", handle_help}},
      {"exit", {" :Exit the application", handle_exit}},
      {"log_level",
-      {COLOR_START "d|i||w|e|c" COLOR_END ":Set log level"
+      {COLOR_START "d|i||w|e|c" COLOR_END " :Set log level - "
                    "DEBUG | INFO | WARNING | ERROR | CRITICAL",
        handle_set_log_level}}};
 
 // The prompt string for the command line interface
-std::string prompt_string = "UIC> ";
+std::string prompt_string = "Unify> ";
 
 // Public  functions
 void uic_stdin_add_commands(
@@ -101,7 +101,7 @@ static sl_status_t handle_help(const handle_args_t &arg)
 {
   dprintf(out_stream, "==================================================\n");
   dprintf(out_stream,
-          COLOR_START "UIC Command line interface Help:\n" COLOR_END);
+          COLOR_START "Unify Command line interface Help:\n" COLOR_END);
   dprintf(out_stream, "==================================================\n");
   for (auto elem: commands) {
     dprintf(out_stream,

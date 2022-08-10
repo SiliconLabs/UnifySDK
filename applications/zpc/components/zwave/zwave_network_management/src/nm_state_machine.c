@@ -17,8 +17,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "nm_state_machine.h"
 #include "state_logging.h"
+#include "nm_state_machine.h"
+#include "zwave_network_management.h"
+#include "zwave_network_management_state.h"
+#include "zwave_network_management_process.h"
+#include "zwave_network_management_helpers.h"
+#include "zwave_network_management_callbacks.h"
+#include "zwave_network_management_return_route_queue.h"
 
 #include "sl_log.h"
 #include "zwapi_protocol_controller.h"
@@ -28,8 +34,6 @@
 #include "zwave_controller_types.h"
 #include "zwave_controller_utils.h"
 #include "zwave_controller_storage.h"
-#include "zwave_network_management.h"
-#include "zwave_network_management_state.h"
 #include "zwave_s0_network.h"
 #include "zwave_s2_network.h"
 #include "zwave_s2_keystore.h"
@@ -49,9 +53,6 @@ network_mgmt_state_t nms;
 static LEARN_INFO inf_bkup;
 static uint8_t info_buf[NODE_INFO_MAX_SIZE];
 PROCESS_NAME(zwave_network_management_process);
-
-//forward declarations
-static void stop_ongoing_nm_operations();
 
 /* Ctimer used to abort s2 incl asynchronously to avoid a buffer overwrite
  * in libs2. */
@@ -108,14 +109,15 @@ static void add_node_status_update(LEARN_INFO *inf)
   process_post(&zwave_network_management_process, ev, &inf_bkup);
 }
 
-static void on_inclusion_complete(zwave_keyset_t granted_keys,
-                                  zwave_kex_fail_type_t kex_fail_code)
+static void on_secure_inclusion_complete(zwave_keyset_t granted_keys,
+                                         zwave_kex_fail_type_t kex_fail_code)
 {
-  if (nms.state != NM_WAIT_FOR_SECURE_ADD)
-    return;
-  nms.granted_keys  = granted_keys;
-  nms.kex_fail_type = kex_fail_code;
-  process_post(&zwave_network_management_process, NM_EV_SECURITY_DONE, 0);
+  if ((nms.state == NM_WAIT_FOR_SECURE_ADD)
+      || (nms.state == NM_WAIT_FOR_SECURE_LEARN)) {
+    nms.granted_keys  = granted_keys;
+    nms.kex_fail_type = kex_fail_code;
+    process_post(&zwave_network_management_process, NM_EV_SECURITY_DONE, 0);
+  }
 }
 
 static void on_keys_request(zwave_keyset_t requested_keys, bool csa)
@@ -132,7 +134,8 @@ static void on_keys_request(zwave_keyset_t requested_keys, bool csa)
 static void
   on_dsk_challenge(zwave_keyset_t granted_keys, int dsk_length, zwave_dsk_t dsk)
 {
-  if (nms.state != NM_WAIT_FOR_SECURE_ADD)
+  if ((nms.state != NM_WAIT_FOR_SECURE_ADD)
+      && (nms.state != NM_WAIT_FOR_SECURE_LEARN))
     return;
   nms.granted_keys = granted_keys;
   memcpy(nms.reported_dsk, dsk, sizeof(zwave_dsk_t));
@@ -142,9 +145,12 @@ static void
                0);
 }
 
-static void on_inclusion_started()
+static void on_s2_inclusion_started()
 {
-  // TODO stop the S0 FSM
+  // Mark that we initiated an S2 bootstrapping (so we know the difference
+  // between no granted keys via bootstrapping or just a timeout)
+  nms.s2_bootstrapping_started = true;
+  zwave_s0_stop_bootstrapping();
 }
 
 /**
@@ -219,54 +225,6 @@ static void on_remove_node_status_update(LEARN_INFO *remove_node_information)
   }
 }
 
-static void on_set_default_complete()
-{
-  process_post(&zwave_network_management_process,
-               NM_EV_SET_DEFAULT_COMPLETE,
-               0);
-}
-
-/// Checking if a given command class is listed in the NIF
-static sl_status_t is_cc_in_nif(zwave_command_class_t *nif,
-                                uint8_t nif_len,
-                                zwave_command_class_t cc)
-{
-  int i;
-  if (nif_len > ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH) {
-    sl_log_error(
-      LOG_TAG,
-      "The NIF length is not correct, which means NIF is corrupted\n");
-    return SL_STATUS_FAIL;
-  } else {
-    for (i = 0; i < nif_len; i++) {
-      if (nif[i] == cc) {
-        return SL_STATUS_OK;
-      }
-    }
-  }
-
-  return SL_STATUS_NOT_SUPPORTED;
-}
-
-/**
- * @brief a helper function that referesh nms cashed home_id.
- */
-static void network_management_refresh_cached_ids()
-{
-  zwapi_memory_get_ids(&nms.cached_home_id, &nms.cached_local_node_id);
-}
-
-/**
- * @brief Asks the Z-Wave API about the list of NodeIDs in our network
- *
- * Should be used only when necessary, as communicating with the Z-Wave API
- * is slow.
- */
-static void network_management_refresh_cached_node_list()
-{
-  zwapi_get_full_node_list(nms.cached_node_list);
-}
-
 /**
  * @brief Tell the Z-Wave Controller that a Network Inclusion operation
  * has completed and returns the NM state machine to IDLE.
@@ -294,31 +252,18 @@ static void dispatch_node_added()
  */
 static void on_new_network(zwave_kex_fail_type_t kex_fail)
 {
-  zwave_home_id_t home_id;
-  zwave_node_id_t node_id;
-  zwave_keyset_t key_set;
+  /* Refresh the cached network properties*/
+  network_management_refresh_network_information();
+  nms.granted_keys = zwave_s2_keystore_get_assigned_keys();
 
-  /* Set the home id and node id */
-  zwapi_memory_get_ids(&home_id, &node_id);
-
-  /* cache for upper layers */
-  nms.cached_home_id       = home_id;
-  nms.cached_local_node_id = node_id;
-
-  uint8_t cap = zwapi_get_controller_capabilities();
-  key_set     = zwave_s2_keystore_get_assigned_keys();
-
-  //If there is not SUC in the network assign me the suc role.
-  if ((cap & (CONTROLLER_NODEID_SERVER_PRESENT | CONTROLLER_IS_SECONDARY))
-      == 0) {
-    zwapi_set_suc_node_id(node_id, true, false, ZW_SUC_FUNC_NODEID_SERVER, 0);
-  }
-
-  // Refresh our cached list of nodes
-  network_management_refresh_cached_node_list();
+  // Take the SUC/SIS role if noboby has it in our new network.
+  network_management_take_sis_role_if_no_suc_in_network();
 
   //Call the upper layer callbacks
-  zwave_controller_on_new_network_entered(home_id, node_id, key_set, kex_fail);
+  zwave_controller_on_new_network_entered(nms.cached_home_id,
+                                          nms.cached_local_node_id,
+                                          nms.granted_keys,
+                                          kex_fail);
 }
 
 static void
@@ -327,75 +272,14 @@ static void
   (void)tx_info;
   (void)user;
   sl_log_debug(LOG_TAG,
-               "NOP transmission completed. Tx Status: %d (0 for Ok, 1 for No "
-               "Ack, 2 for Fail)",
+               "NOP transmission completed. "
+               "Tx Status: %d (0 for Ok, 1 for No Ack, 2 for Fail)",
                status);
-  if (status != TRANSMIT_COMPLETE_OK) {
+  if (false == IS_TRANSMISSION_SUCCESSFUL(status)) {
     process_post(&zwave_network_management_process, NM_EV_NOP_FAIL, 0);
   } else {
     process_post(&zwave_network_management_process, NM_EV_NOP_SUCCESS, 0);
   }
-}
-
-/**
- * @brief callback function for @ref zwapi_set_learn_mode()
- */
-static void on_learn_mode_callback(LEARN_INFO *learn_mode_info)
-{
-  switch (learn_mode_info->bStatus) {
-    case LEARN_MODE_STARTED:
-      sl_log_info(
-        LOG_TAG,
-        "New Learn Mode operation (inclusion/exclusion/replication) started\n");
-      nms.node_id_being_handled = learn_mode_info->bSource;
-      break;
-    case LEARN_MODE_DONE:
-      sl_log_info(LOG_TAG,
-                  "Learn mode completed successfully. Back to idle.\n");
-      zwave_home_id_t home_id_before_learn_mode_done
-        = zwave_network_management_get_home_id();
-      network_management_refresh_cached_ids();
-      if (home_id_before_learn_mode_done != nms.cached_home_id) {
-        if ((nms.learn_mode_intent == ZW_SET_LEARN_MODE_NWE)
-            || (learn_mode_info->bSource == 0x01
-                && nms.learn_mode_intent == ZW_SET_LEARN_MODE_DIRECT_RANGE)) {
-          sl_log_info(LOG_TAG, "ZPC has been excluded from the network\n");
-          nms.state = NM_SET_DEFAULT;
-          process_post(&zwave_network_management_process,
-                       NM_EV_SET_DEFAULT_COMPLETE,
-                       0);
-        } else if (nms.learn_mode_intent == ZW_SET_LEARN_MODE_NWI
-                   || nms.learn_mode_intent == ZW_SET_LEARN_MODE_DIRECT_RANGE) {
-          sl_log_info(LOG_TAG, "ZPC has joined a new network\n");
-          on_new_network(ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE);
-        }
-      }
-      nms.learn_mode_intent = ZW_SET_LEARN_MODE_DISABLE;
-      process_post(&zwave_network_management_process, NM_EV_LEARN_STOP, 0);
-      break;
-    case LEARN_MODE_FAILED:
-      sl_log_warning(LOG_TAG,
-                     "Learn mode failed. No network changes. Back to idle.\n");
-      nms.learn_mode_intent = ZW_SET_LEARN_MODE_DISABLE;
-      process_post(&zwave_network_management_process, NM_EV_LEARN_STOP, 0);
-      break;
-    default:
-      sl_log_warning(
-        LOG_TAG,
-        "Learn Mode Callback is called without accepted status value\n");
-      break;
-  }
-}
-
-/**
- * @brief a helper function that allows to stop ongoing network
- *        management operations.
- */
-static void stop_ongoing_nm_operations()
-{
-  zwapi_add_node_to_network(ADD_NODE_STOP, NULL);
-  zwapi_remove_node_from_network(REMOVE_NODE_STOP, NULL);
-  zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DISABLE, NULL);
 }
 
 /**
@@ -409,26 +293,25 @@ static void on_request_node_neighbor_update(uint8_t status)
 void nm_state_machine_teardown()
 {
   memset(&nms, 0, sizeof(nms));
-  nms.state = NM_IDLE;
-  stop_ongoing_nm_operations();
+  network_management_stop_ongoing_operations();
 }
 
 void nm_state_machine_init()
 {
   zwave_s2_network_callbacks_t cb = {
-    .on_inclusion_complete = on_inclusion_complete,
+    .on_inclusion_complete = on_secure_inclusion_complete,
     .on_keys_request       = on_keys_request,
     .on_dsk_challenge      = on_dsk_challenge,
-    .on_inclusion_started  = on_inclusion_started,
+    .on_inclusion_started  = on_s2_inclusion_started,
   };
   zwave_s2_set_network_callbacks(&cb);
-  zwave_s0_set_network_callbacks(on_inclusion_complete);
+  zwave_s0_set_network_callbacks(on_secure_inclusion_complete);
   memset(&nms, 0, sizeof(nms));
   nms.state = NM_IDLE;
 
-  network_management_refresh_cached_ids();
-  network_management_refresh_cached_node_list();
-  stop_ongoing_nm_operations();
+  network_management_refresh_network_information();
+  network_management_stop_ongoing_operations();
+  zwave_network_management_return_route_clear_queue();
 
   // Print the HomeID, NodeID and DSK to console
   sl_log_info(LOG_TAG,
@@ -447,6 +330,8 @@ void nm_state_machine_init()
     }
     sl_log_info(LOG_TAG, "NodeID %d is present in our network", node_id);
   }
+
+  network_management_take_sis_role_if_no_suc_in_network();
 }
 
 void nm_fsm_post_event(nm_event_t ev, void *event_data)
@@ -456,55 +341,35 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
                nm_event_name(ev),
                nm_state_name(nms.state));
 
-#if 0
-
-  if((nms.state  ==NM_LEARN_MODE_STARTED) || (nms.state == NM_WAIT_FOR_SECURE_LEARN) ) {
-    if(ev == NM_EV_S0_STARTED) {
-      /* Make temporary NIF, used for inclusion */
-      DBG_PRINTF("S0 inclusion has started. Setting net_scheme to S0\n");
-      net_scheme = SECURITY_SCHEME_0;
-      SetPreInclusionNIF(SECURITY_SCHEME_0);
-      /*Make sure to clear the s2 keys.*/
-      keystore_network_key_clear(KEY_CLASS_S2_UNAUTHENTICATED);
-      keystore_network_key_clear(KEY_CLASS_S2_AUTHENTICATED);
-      keystore_network_key_clear(KEY_CLASS_S2_ACCESS);
-      /*Stop the S2 FSM */
-      sec2_abort_join();
-    }
-  }
-#endif
   switch (nms.state) {
     case NM_IDLE:
       if (ev == NM_EV_LEARN_SET) {
-        if (nms.learn_mode_intent == ZW_SET_LEARN_MODE_DIRECT_RANGE) {
-          nms.flags = 0;
-        } else if (nms.learn_mode_intent == ZW_SET_LEARN_MODE_NWI) {
-          nms.flags = NMS_FLAG_LEARNMODE_NWI;
-        } else if (nms.learn_mode_intent == ZW_SET_LEARN_MODE_NWE) {
-          nms.flags = NMS_FLAG_LEARNMODE_NWE;
-        }
-        // stop ongoing network management operations
-        stop_ongoing_nm_operations();
-        nms.state = NM_LEARN_MODE;
-        nms.count = 0;
-        zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DIRECT_RANGE,
-                             on_learn_mode_callback);
-        if (nms.learn_mode_intent == ZW_SET_LEARN_MODE_DIRECT_RANGE) {
-          etimer_set(&nms.timer, LEARN_MODE_TIMEOUT_DIRECT_RANGE);
+        // Make sure to stop ongoing network management operations
+        network_management_stop_ongoing_operations();
+        if (nms.learn_mode_intent == ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI) {
+          zwapi_set_learn_mode(LEARN_MODE_NWI, &on_learn_mode_callback);
+        } else if (nms.learn_mode_intent
+                   == ZWAVE_NETWORK_MANAGEMENT_LEARN_NWE) {
+          zwapi_set_learn_mode(LEARN_MODE_NWE, &on_learn_mode_callback);
         } else {
-          etimer_set(&nms.timer, LEARN_MODE_TIMEOUT_NETWORK_WIDE);
+          sl_log_warning(LOG_TAG,
+                         "Learn mode set with Neither NWI or NWE. Ignoring.");
+          return;
         }
+        nms.state = NM_LEARN_MODE;
+        etimer_set(&nms.timer, LEARN_MODE_TIMEOUT);
       }
       if (ev == NM_EV_SET_DEFAULT) {
         nms.state = NM_SET_DEFAULT;
-        zwapi_set_default(on_set_default_complete);
+        zwapi_set_default(&on_set_default_complete);
+        etimer_set(&nms.timer, SET_DEFAULT_TIMEOUT);
       } else if (ev == NM_EV_REMOVE_FAILED) {
         nms.state = NM_SEND_NOP;
         process_post(&zwave_network_management_process,
                      NM_EV_REMOVE_FAILED,
                      &inf_bkup);
       } else if (ev == NM_EV_SMART_START_ENABLE) {
-        if (!nms.smart_start_enabled) {
+        if (!nms.smart_start_add_mode_enabled) {
           // If SmartStart is disabled then we stop the SmartStart mode
           // If its enabled then we will enable this when this function exits.
           zwapi_add_node_to_network(ADD_NODE_STOP, NULL);
@@ -518,6 +383,16 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           nms.inclusion_protocol = PROTOCOL_ZWAVE_LONG_RANGE;
         }
 
+        sl_log_info(LOG_TAG,
+                    "Attempting to SmartStart include node with NWI HomeID "
+                    "%02X %02X %02X %02X using %s",
+                    e->dsk[8] | 0xC0,  // Bits 7 and 6 at 1
+                    e->dsk[9],
+                    e->dsk[10],
+                    e->dsk[11] & 0xFE,  // Bit 0 at 0
+                    ((e->preferred_inclusion == PROTOCOL_ZWAVE_LONG_RANGE)
+                       ? "Z-Wave Long Range"
+                       : "Z-Wave"));
         zwapi_add_smartstart_node_to_network(inclusion_mode,
                                              (uint8_t *)&e->dsk[8],
                                              add_node_status_update);
@@ -532,6 +407,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
 
         /*TODO: we were sending COMMAND_SMART_START_JOIN_STARTED_REPORT here*/
       } else if (ev == NM_EV_NODE_REMOVE) {
+        network_management_stop_ongoing_operations();
         nms.node_id_being_handled      = 0;
         sl_status_t remove_node_status = zwapi_remove_node_from_network(
           (REMOVE_NODE_ANY | REMOVE_NODE_OPTION_NETWORK_WIDE),
@@ -541,8 +417,10 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           etimer_set(&nms.timer, ADD_REMOVE_TIMEOUT);
         }
       } else if (ev == NM_EV_NODE_ADD) {
+        network_management_stop_ongoing_operations();
         network_management_refresh_cached_node_list();
-        zwapi_add_node_to_network(ADD_NODE_ANY, add_node_status_update);
+        zwapi_add_node_to_network(ADD_NODE_ANY | ADD_NODE_OPTION_NETWORK_WIDE,
+                                  add_node_status_update);
         nms.state              = NM_WAITING_FOR_ADD;
         nms.flags              = NMS_FLAG_S2_ADD;
         nms.inclusion_protocol = PROTOCOL_ZWAVE;
@@ -554,126 +432,15 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
         nms.state = NM_WAIT_FOR_PROTOCOL;
         nm_fsm_post_event(NM_EV_ADD_NODE_STATUS_DONE, 0);
         return;
-      }
-#if 0
-       else if (ev == NM_EV_REPLACE_FAILED_START || ev == NM_EV_REPLACE_FAILED_START_S2 || ev == NM_EV_REPLACE_FAILED_STOP)
-//      {
-//         ZW_FAILED_NODE_REPLACE_FRAME* f = (ZW_FAILED_NODE_REPLACE_FRAME*) event_data;
-//         ZW_FAILED_NODE_REPLACE_STATUS_FRAME_EX* reply = (ZW_FAILED_NODE_REPLACE_STATUS_FRAME_EX*) &nms.buf;
-//         nms.cmd = FAILED_NODE_REPLACE;
-//         nms.node_id_being_handled = f->nodeId;
-//         nms.state = NM_REPLACE_FAILED_REQ;
-//
-//         reply->cmdClass = COMMAND_CLASS_NETWORK_MANAGEMENT_INCLUSION;
-//         reply->cmd = FAILED_NODE_REPLACE_STATUS;
-//         reply->seqNo = nms.seq;
-//         reply->nodeId = nms.node_id_being_handled;
-//         reply->status = ZW_FAILED_NODE_REPLACE_FAILED;
-//         reply->kexFailType=0x00;
-//         reply->grantedKeys =0x00;
-//         nms.buf_len = sizeof(ZW_FAILED_NODE_REPLACE_STATUS_FRAME_EX);
-//
-//         if(ev == NM_EV_REPLACE_FAILED_START_S2) {
-//           nms.flags = NMS_FLAG_S2_ADD;
-//         }
-//         if(ev == NM_EV_REPLACE_FAILED_STOP) {
-//           goto send_reply;
-//         }
-//
-//         ZW_AddNodeToNetwork(ADD_NODE_STOP, NULL);
-//
-//         DBG_PRINTF("Replace failed, node %i \n",f->nodeId);
-//         if (ZW_ReplaceFailedNode(f->nodeId, f->tx_options != TRANSMIT_OPTION_LOW_POWER,
-//             ReplaceFailedNodeStatus) == ZW_FAILED_NODE_REMOVE_STARTED)
-//         {
-//           ctimer_set(&nms.timer, ADD_REMOVE_TIMEOUT * 10, timeout, 0);
-//         } else {
-//           WRN_PRINTF("replace failed not started\n");
-//           goto send_reply;
-//         }
-//     }  else if( ev == NM_EV_START_PROXY_INCLUSION || ev == NM_EV_START_PROXY_REPLACE) {
-//        nms.node_id_being_handled = *((uint8_t*)event_data);
-//        nms.cmd = (ev == NM_EV_START_PROXY_INCLUSION) ? NODE_ADD : FAILED_NODE_REPLACE;
-//
-//        ZW_RequestNodeInfo(nms.node_id_being_handled,0);
-//        nms.state = NM_PROXY_INCLUSION_WAIT_NIF;
-//        ctimer_set(&nms.timer,5000,timeout,0);
-//
-//        /* Send inclusion request to unsolicited destination */
-//        set_unsolicited_as_nm_dest();
-//      }
-#endif
-      break;
-#if 0
-    case NM_REPLACE_FAILED_REQ:
-      if(ev ==NM_EV_TIMEOUT || ev == NM_EV_REPLACE_FAILED_STOP || ev == NM_EV_REPLACE_FAILED_FAIL) {
-        ZW_AddNodeToNetwork(ADD_NODE_STOP,0);
-        goto send_reply;
-      } if(ev == NM_EV_REPLACE_FAILED_DONE) {
-        int common_flags = 0;
-        nms.state = NM_WAIT_FOR_SECURE_ADD;
-
-        /*Cache security flags*/
-        if(nms.flags & NMS_FLAG_PROXY_INCLUSION){
-          LEARN_INFO *inf = (LEARN_INFO *) event_data;
-          if(NULL != inf)
-          {
-            uint8_t* nif = inf->pCmd+3;
-            if(is_cc_in_nif(nif,inf->bLen-3,COMMAND_CLASS_SECURITY)) common_flags |=NODE_FLAG_SECURITY0;
-            if(is_cc_in_nif(nif,inf->bLen-3,COMMAND_CLASS_SECURITY_2)) common_flags |=(NODE_FLAG_SECURITY2_ACCESS |NODE_FLAG_SECURITY2_UNAUTHENTICATED | NODE_FLAG_SECURITY2_AUTHENTICATED);
-          }
-        } else {
-          common_flags = GetCacheEntryFlag(nms.node_id_being_handled);
+      } else if (ev == NM_EV_ASSIGN_RETURN_ROUTE_START) {
+        if (SL_STATUS_IN_PROGRESS
+            == zwave_network_management_return_route_assign_next()) {
+          sl_log_debug(LOG_TAG, "Initiating new Assign Return Routes.");
+          nms.state = NM_ASSIGNING_RETURN_ROUTE;
         }
-
-        ApplicationControllerUpdate(UPDATE_STATE_DELETE_DONE, nms.node_id_being_handled, 0, 0, NULL);
-
-        rd_probe_lock(TRUE);
-
-        uint8_t suc_node = ZW_GetSUCNodeID();
-
-        if(suc_node != MyNodeID &&  SupportsCmdClass(suc_node, COMMAND_CLASS_INCLUSION_CONTROLLER)) {
-           rNM_EV_ADD_NODE_FOUNDd_register_new_node(nms.node_id_being_handled, RD_NODE_FLAG_JUST_ADDED);
-           ctimer_set(&nms.timer,CLOCK_SECOND*2,timeout,0);
-           nms.state = NM_PREPARE_SUC_INCLISION;
-           return;
-        }
-
-        rd_register_new_node(nms.node_id_being_handled, RD_NODE_FLAG_JUST_ADDED | RD_NODE_FLAG_ADDED_BY_ME);
-
-        /* This is to keep the probe from doing a secure commands supported get */
-        SetCacheEntryFlagMasked(nms.node_id_being_handled,
-        NODE_FLAG_INFO_ONLY | NODE_FLAG_SECURITY0 | NODE_FLAG_KNOWN_BAD,
-        NODE_FLAG_INFO_ONLY | NODE_FLAG_SECURITY0 | NODE_FLAG_KNOWN_BAD);
-        rd_probe_lock(FALSE);
-
-        if( (nms.flags & NMS_FLAG_S2_ADD) &&
-            (common_flags & (NODE_FLAG_SECURITY2_ACCESS |NODE_FLAG_SECURITY2_UNAUTHENTICATED | NODE_FLAG_SECURITY2_AUTHENTICATED)))
-        {
-          sec2_start_add_node(nms.node_id_being_handled, SecureInclusionDone);
-          return;
-        }
-
-
-        if(common_flags & NODE_FLAG_SECURITY0) {
-          if(nms.flags & NMS_FLAG_PROXY_INCLUSION ) {
-            inclusion_controller_you_do_it(SecureInclusionDone);
-            return;
-          } else if (!(nms.flags & NMS_FLAG_SMART_START_INCLUSION)) { /* SmartStart inclusions must never be downgraded to S0 */
-            security_add_begin(nms.node_id_being_handled, nms.tx_options,
-                isNodeController(nms.node_id_being_handled), SecureInclusionDone);
-            return;
-          }
-        }
-
-        /*This is a non secure node or the node has already been included securely*/
-        ZW_FAILED_NODE_REPLACE_STATUS_FRAME_EX* reply = (ZW_FAILED_NODE_REPLACE_STATUS_FRAME_EX*) &nms.buf;
-        reply->status = ZW_FAILED_NODE_REPLACE_DONE;
-
-        nm_fsm_post_event(NM_EV_SECURITY_DONE, &zero);
       }
       break;
-#endif
+      // End of case NM_IDLE:
     case NM_SEND_NOP:
       if (ev == NM_EV_TIMEOUT) {
         sl_log_info(LOG_TAG,
@@ -715,7 +482,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           nms.state = NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL;
           etimer_set(&nms.timer, SEND_DATA_TIMEOUT);
           sl_log_debug(LOG_TAG,
-                       "Starting %d ms timer for Self destruct / Remove Failed "
+                       "Starting %d ms timer for Self destruct / Remove Offline"
                        "NodeID %u\n",
                        SEND_DATA_TIMEOUT,
                        nms.node_id_being_handled);
@@ -726,7 +493,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
                                      on_remove_failed_status_update)
             != ZW_FAILED_NODE_REMOVE_STARTED) {
           sl_log_error(LOG_TAG,
-                       "Failed node remove failed for NodeID: %d\n",
+                       "Remove offline operation failed for NodeID: %d\n",
                        nms.node_id_being_handled);
           on_remove_failed_status_update(ZW_FAILED_NODE_NOT_REMOVED);
         }
@@ -741,6 +508,9 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
                        nms.node_id_being_handled);
           on_remove_failed_status_update(ZW_FAILED_NODE_NOT_REMOVED);
         }
+        sl_log_error(LOG_TAG,
+                     "Self Destruct/Remove Offline operation"
+                     "failed\n");
         nms.state = NM_IDLE;
       } else if (ev == NM_EV_NOP_SUCCESS) {
         if (nms.state == NM_WAIT_FOR_TX_TO_SELF_DESTRUCT) {
@@ -749,11 +519,16 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
         } else {
           on_remove_failed_status_update(ZW_FAILED_NODE_NOT_REMOVED);
         }
+        sl_log_info(
+          LOG_TAG,
+          "NodeID: %d is reachable. Self Destruct/Remove Offline operation "
+          "failed\n",
+          nms.node_id_being_handled);
         nms.state = NM_IDLE;
       } else if (ev == NM_EV_ABORT) {
         // Abort the Remove Failed Operation
         sl_log_debug(LOG_TAG,
-                     "Aborting Remove Failed node operation for NodeID: %d\n",
+                     "Aborting Remove Offline operation for NodeID: %d\n",
                      nms.node_id_being_handled);
         on_remove_failed_status_update(ZW_FAILED_NODE_NOT_REMOVED);
         nms.state = NM_IDLE;
@@ -761,14 +536,32 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
       break;
     case NM_SET_DEFAULT:
       if (ev == NM_EV_SET_DEFAULT_COMPLETE) {
+        etimer_stop(&nms.timer);
         // Tell the Z-Wave Controller that we are done resetting.
         zwave_controller_on_reset_step_complete(
           ZWAVE_CONTROLLER_ZWAVE_NETWORK_MANAGEMENT_RESET_STEP_PRIORITY);
-        //Create new security keys
+        // Update the NMS data
+        network_management_refresh_network_information();
+        // Create new security keys
+        // It's important to generate new keys before calling zwave_s2_network_init
+        // and telling that we are in a new network here.
         zwave_s2_create_new_network_keys();
+        zwave_s2_network_init();
+        // Anounce that our NodeID / HomeID just changed.
+        zwave_controller_on_network_address_update(nms.cached_home_id,
+                                                   nms.cached_local_node_id);
+        // We expect nothing more after entering our network, it is ready to be operated
         on_new_network(ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE);
         nms.state = NM_IDLE;
+      } else if (ev == NM_EV_TIMEOUT) {
+        sl_log_error(LOG_TAG,
+                     "Timed out waiting for Z-Wave API callback "
+                     "after set default. Attempting to resume operation");
+        zwapi_soft_reset();
+        zwave_rx_wait_for_zwave_api_to_be_ready();
+        on_set_default_complete();
       }
+      break;
     case NM_WAITING_FOR_ADD:
       if ((ev == NM_EV_ABORT) || (ev == NM_EV_TIMEOUT)
           || (ev == NM_EV_ADD_FAILED)) {
@@ -780,14 +573,14 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           zwave_controller_on_error(
             ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_ADD_FAIL);
         }
-      } else if (ev == NM_EV_ADD_NODE_FOUND) {  // this event is from Serialapi
+      } else if (ev == NM_EV_ADD_NODE_FOUND) {  // this event is from Serial api
                                                 // from add_node_status_update
         nms.state = NM_NODE_FOUND;
         etimer_set(&nms.timer, ADD_NODE_STATUS_ADDING_END_NODE_TIMEOUT);
       }
       break;
     case NM_NODE_FOUND:
-      // this event is from Serialapi from add_node_status_update
+      // this event is from Serial api(i.e., zwave_api) from add_node_status_update
       if (ev == NM_EV_ADD_CONTROLLER || ev == NM_EV_ADD_END_NODE) {
         LEARN_INFO *inf = (LEARN_INFO *)event_data;
 
@@ -803,7 +596,7 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           }
 
           //ZW->HOST: REQ | 0x4A | funcID | bStatus | bSource | bLen | basic |
-          // generic | specific | cmdclasses[ ]
+          // generic | specific | command classes[ ]
           if ((inf->bLen) >= 3 && (inf->bLen < NODE_INFO_MAX_SIZE)) {
             nms.node_info.basic_device_class    = inf->pCmd[0];
             nms.node_info.generic_device_class  = inf->pCmd[1];
@@ -872,20 +665,20 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           zwave_s2_start_add_node(nms.node_id_being_handled);
           zwave_controller_storage_as_set_node_s2_capable(
             nms.node_id_being_handled);
-        } else if (is_cc_in_nif(nms.node_info.command_class_list,
-                                nms.node_info.command_class_list_length,
-                                COMMAND_CLASS_SECURITY_2)
-                   == SL_STATUS_OK) {
+        } else if (is_command_class_in_nif(
+                     nms.node_info.command_class_list,
+                     nms.node_info.command_class_list_length,
+                     COMMAND_CLASS_SECURITY_2)) {
           /// S2 inclusion starts, we set the flag to S2_ADD to ensure it is S2 inclusion
           nms.flags = NMS_FLAG_S2_ADD;
           nms.state = NM_WAIT_FOR_SECURE_ADD;
           zwave_s2_start_add_node(nms.node_id_being_handled);
           zwave_controller_storage_as_set_node_s2_capable(
             nms.node_id_being_handled);
-        } else if (is_cc_in_nif(nms.node_info.command_class_list,
-                                nms.node_info.command_class_list_length,
-                                COMMAND_CLASS_SECURITY)
-                   == SL_STATUS_OK) {
+        } else if (is_command_class_in_nif(
+                     nms.node_info.command_class_list,
+                     nms.node_info.command_class_list_length,
+                     COMMAND_CLASS_SECURITY)) {
           nms.state = NM_WAIT_FOR_SECURE_ADD;
           zwave_s0_start_bootstrapping(nms.node_id_being_handled,
                                        nms.is_controller);
@@ -983,122 +776,18 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
         zwave_s2_dsk_accept(0, nms.verified_dsk_input, 0);
       }
       break;
-#if 0
-//    case NM_WAIT_FOR_PROBE_BY_SIS:
-//      if( ev == NM_EV_TIMEOUT ) {
-//          /* rd_probe_lock(FALSE); dont unlock here, we will reset and then unlock */
-//          /*Create an async application reset */
-//          process_post(&zip_process, ZIP_EVENT_RESET, 0);
-//          nms.state = NM_WAIT_FOR_OUR_PROBE;
-//      } else if (ev  == NM_EV_FRAME_RECEIVED) {
-//        ctimer_set(&nms.timer, 6000, timeout, 0);
-//      }
-//      break;
-//    case NM_WAIT_FOR_SECURE_LEARN:
-//      if(ev == NM_EV_ADD_SECURITY_KEY_CHALLENGE) {
-//
-//        /*Update Command classes, according to our new network state. */
-//        SetPreInclusionNIF(SECURITY_SCHEME_2_ACCESS);
-//
-//        ZW_LEARN_MODE_SET_STATUS_FRAME_EX *f = (ZW_LEARN_MODE_SET_STATUS_FRAME_EX*) &nms.buf;
-//        s2_node_inclusion_challenge_t *challenge_evt = (s2_node_inclusion_challenge_t *)event_data;
-//
-//
-//        /*Fill in the dsk part of the answer, the rest of the answer is filled in later*/
-//        memcpy(f->dsk,challenge_evt->public_key,16);
-//        sec2_dsk_accept(1,f->dsk,2);
-//      } else if(ev == NM_EV_SECURITY_DONE) {
-//        ZW_LEARN_MODE_SET_STATUS_FRAME_EX *f = (ZW_LEARN_MODE_SET_STATUS_FRAME_EX*) &nms.buf;
-//        uint32_t inclusion_flags;
-//
-//        inclusion_flags = *(uint32_t*) event_data;
-//
-//        security_init();
-//        DBG_PRINTF("inclusion flags ...... %x\n",inclusion_flags);
-//        f->cmdClass =
-//        COMMAND_CLASS_NETWORK_MANAGEMENT_BASIC;
-//        f->cmd = LEARN_MODE_SET_STATUS;
-//        f->reserved = 0;
-//        f->seqNo = nms.seq;
-//        f->newNodeId = MyNodeID;
-//        f->granted_keys = sec2_gw_node_flags2keystore_flags(inclusion_flags & 0xFF);
-//        f->kexFailType = (inclusion_flags >> 16) & 0xFF;
-//        f->status = (NODE_FLAG_KNOWN_BAD & inclusion_flags) ? ADD_NODE_STATUS_SECURITY_FAILED : ADD_NODE_STATUS_DONE;
-//        nms.buf_len = sizeof(ZW_LEARN_MODE_SET_STATUS_FRAME_EX);
-//        nms.state = NM_WAIT_FOR_MDNS;
-//        /*Clear out our S0 key*/
-//        if((NODE_FLAG_SECURITY0 & inclusion_flags) ==0) {
-//          keystore_network_key_clear(KEY_CLASS_S0);
-//        }
-//        /* If we are non-securely included, we need to clear our S2 keys here.
-//         * We cannot rely on the S2 security modules to do it for us since
-//         * S2 bootstrapping might never started. */
-//        if((NODE_FLAGS_SECURITY2 & inclusion_flags) == 0) {
-//          WRN_PRINTF("Clearing all S2 keys - nonsecure inclusion or no S2 keys granted\n");
-//          keystore_network_key_clear(KEY_CLASS_S2_ACCESS);
-//          keystore_network_key_clear(KEY_CLASS_S2_AUTHENTICATED);
-//          keystore_network_key_clear(KEY_CLASS_S2_UNAUTHENTICATED);
-//        }
-//        /*This is a new network, start sending mDNS goodbye messages,  */
-//        /* NetworkManagement_mdns_exited will be called at some point */
-//        rd_exit();
-//      } else if(ev == NM_EV_LEARN_SET) {
-//        ZW_LEARN_MODE_SET_FRAME* f = (ZW_LEARN_MODE_SET_FRAME*)event_data;
-//        if(f->mode == ZW_SET_LEARN_MODE_DISABLE) {
-//          nms.seq = f->seqNo; //Just because this was how we did in 2.2x
-//          /* Aborting S2 will cause S2 to return a SECURITY_DONE with fail. */
-//          sec2_abort_join();
-//        }
-//      }
-//      break;
-//    case NM_LEARN_MODE:
-//      if(ev == NM_EV_TIMEOUT) {
-//        if(nms.count == 0) {
-//          /* We must stop Learn Mode (direct range) before starting learn mode NWI */
-//          ZW_SetLearnMode(ZW_SET_LEARN_MODE_DISABLE, NULL);
-//          if(nms.flags & NMS_FLAG_LEARNMODE_NWI) {
-//            ZW_SetLearnMode(ZW_SET_LEARN_MODE_NWI,LearnModeStatus);
-//          } else if(nms.flags & NMS_FLAG_LEARNMODE_NWE) {
-//            ZW_SetLearnMode(ZW_SET_LEARN_MODE_NWE,LearnModeStatus);
-//          }
-//        }
-//
-//        if( (nms.flags & (NMS_FLAG_LEARNMODE_NWI | NMS_FLAG_LEARNMODE_NWE)) && (nms.count < 4)) {
-//          if(nms.flags & NMS_FLAG_LEARNMODE_NWI) {
-//            ZW_ExploreRequestInclusion();
-//          } else {
-//            ZW_ExploreRequestExclusion();
-//          }
-//
-//          int delay =  CLOCK_SECOND*4 + (rand() & 0xFF);
-//          ctimer_set(&nms.timer,delay, timeout, 0);
-//          nms.count++;
-//        } else {
-//          LearnTimerExpired();
-//        }
-//      } else if(ev == NM_EV_LEARN_SET) {
-//        ZW_LEARN_MODE_SET_FRAME* f = (ZW_LEARN_MODE_SET_FRAME*) event_data;
-//
-//        if (f->mode == ZW_SET_LEARN_MODE_DISABLE)
-//        {
-//          nms.seq = f->seqNo; //Just because this was how we did in 2.2x
-//          LearnTimerExpired();
-//        }
-//      }
-//      break;
-#endif
     case NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL:
     case NM_WAITING_FOR_FAILED_NODE_REMOVAL:
       if (ev == NM_EV_REMOVE_FAILED_OK) {
         sl_log_debug(LOG_TAG,
-                     "Self Destruct/Remove Failed operation "
+                     "Self Destruct/Remove Offline operation "
                      "successful!\n");
         network_management_refresh_cached_node_list();
         zwave_controller_on_node_deleted(nms.node_id_being_handled);
         nms.state = NM_IDLE;
       } else if (ev == NM_EV_REMOVE_FAILED_FAIL) {
         sl_log_error(LOG_TAG,
-                     "Self Destruct/Removal Failed operation "
+                     "Self Destruct/Removal Offline operation "
                      "failed\n");
         if (nms.state == NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL) {
           nms.kex_fail_type = ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN;
@@ -1121,10 +810,12 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
           zwave_controller_on_error(
             ZWAVE_NETWORK_MANAGEMENT_ERROR_FAILED_NODE_REMOVE_FAIL);
         }
+        sl_log_error(LOG_TAG,
+                     "Self Destruct/Remove Offline operation"
+                     "failed\n");
         nms.state = NM_IDLE;
       }
       break;
-    case NM_LEARN_MODE_STARTED:
     case NM_WAITING_FOR_NODE_REMOVAL:
       if (ev == NM_EV_TIMEOUT || ev == NM_EV_NODE_REMOVE_FAILED
           || ev == NM_EV_ABORT) {
@@ -1136,104 +827,164 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
         network_management_refresh_cached_node_list();
         zwave_controller_on_node_deleted(nms.node_id_being_handled);
         nms.state = NM_IDLE;
-        etimer_stop(&nms.timer);
       }
       break;
 
     case NM_LEARN_MODE:
-      if (ev == NM_EV_TIMEOUT) {
-        if (nms.count == 0) {
-          zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DISABLE, NULL);
-          if (nms.flags & NMS_FLAG_LEARNMODE_NWI) {
-            zwapi_set_learn_mode(ZW_SET_LEARN_MODE_NWI, NULL);
-          } else if (nms.flags & NMS_FLAG_LEARNMODE_NWE) {
-            zwapi_set_learn_mode(ZW_SET_LEARN_MODE_NWE, NULL);
-          }
-        }
-
-        if ((nms.flags & (NMS_FLAG_LEARNMODE_NWI | NMS_FLAG_LEARNMODE_NWE))
-            && (nms.count < 4)) {
-          if (nms.flags & NMS_FLAG_LEARNMODE_NWI) {
-            sl_log_debug(LOG_TAG, "Sending explore_request_inclusion\n");
-            zwapi_explore_request_inclusion();
-          } else {
-            sl_log_debug(LOG_TAG, "Sending explore_request_exclusion\n");
-            zwapi_explore_request_exclusion();
-          }
-        } else {
-          nms.state = NM_IDLE;
-          etimer_stop(&nms.timer);
-        }
-
-        int delay_timer_learn_mode_nwi_nwe = CLOCK_SECOND * 4 + (rand() & 0xFF);
-        etimer_set(&nms.timer, delay_timer_learn_mode_nwi_nwe);
-        nms.count++;
-
-      } else if (ev == NM_EV_LEARN_STOP) {
-        zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DISABLE, NULL);
+      if (ev == NM_EV_TIMEOUT || ev == NM_EV_ABORT) {
+        // Just stop trying when we time out or abort
+        zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
         nms.state = NM_IDLE;
-        etimer_stop(&nms.timer);
+      } else if (ev == NM_EV_LEARN_STARTED) {
+        /* Start security here to make sure the timers are started in time */
+        // Do not accept S0 bootstrapping after a SmartStart inclusion.
+        if (nms.learn_mode_intent == ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI) {
+          zwave_s0_start_learn_mode(nms.node_id_being_handled);
+          zwave_s2_start_learn_mode(nms.node_id_being_handled);
+        } else if (nms.learn_mode_intent
+                   == ZWAVE_NETWORK_MANAGEMENT_LEARN_SMART_START) {
+          zwave_s2_start_learn_mode(nms.node_id_being_handled);
+        }
+
+        /*Print the DSK just to be friendly */
+        zwave_dsk_t dsk;
+        zwave_s2_keystore_get_dsk(ZWAVE_S2_KEYSTORE_STATIC_ECDH_KEY, dsk);
+        zwave_sl_log_dsk(LOG_TAG, dsk);
+        nms.state = NM_LEARN_MODE_STARTED;
+      } else if (ev == NM_EV_LEARN_DONE) {
+        //This is a controller replication, ie we should not do anything.
+        nms.state = NM_IDLE;
+      }
+      break;
+    case NM_LEARN_MODE_STARTED:
+      if (ev == NM_EV_LEARN_DONE) {
+        zwave_home_id_t previous_home_id
+          = zwave_network_management_get_home_id();
+        zwave_node_id_t previous_node_id
+          = zwave_network_management_get_node_id();
+
+        network_management_refresh_cached_ids();
+        network_management_refresh_cached_node_list();
+
+        if (nms.learn_mode_intent == ZWAVE_NETWORK_MANAGEMENT_LEARN_NWE) {
+          sl_log_info(LOG_TAG, "We were just excluded. Re-initializing\n");
+          nms.state = NM_SET_DEFAULT;
+          process_post(&zwave_network_management_process,
+                       NM_EV_SET_DEFAULT_COMPLETE,
+                       0);
+        } else if ((previous_home_id == zwave_network_management_get_home_id())
+                   || (previous_node_id
+                       == zwave_network_management_get_node_id())) {
+          zwave_s2_abort_join();
+          zwave_s0_stop_bootstrapping();
+          nms.state = NM_WAIT_FOR_SECURE_LEARN;
+          process_post(&zwave_network_management_process,
+                       NM_EV_SECURITY_DONE,
+                       0);
+        } else {
+          // Get started with S2 bootstrapping, the non-secure part of the inclusion is done.
+          zwave_controller_on_network_address_update(nms.cached_home_id,
+                                                     nms.cached_local_node_id);
+          zwave_s2_keystore_reset_assigned_keys();
+          zwave_s2_neighbor_discovery_complete();
+          nms.state = NM_WAIT_FOR_SECURE_LEARN;
+        }
+      } else if (ev == NM_EV_LEARN_FAILED) {
+        zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
+        zwave_controller_on_error(
+          ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_LEARN_MODE_FAIL);
+        nms.state = NM_IDLE;
       }
       break;
     case NM_WAIT_FOR_SECURE_LEARN:
-    case NM_WAIT_FOR_PROBE_BY_SIS:
+      if (ev == NM_EV_ADD_SECURITY_KEY_CHALLENGE) {
+        zwave_s2_dsk_accept(1, 0, 0);
+
+        //Now we assume that the sender knows S2
+        zwave_controller_storage_as_set_node_s2_capable(
+          nms.node_id_being_handled);
+      } else if (ev == NM_EV_SECURITY_DONE) {
+        if (we_should_self_destruct()) {
+          sl_log_info(LOG_TAG,
+                      "SmartStart inclusion (or its S2 bootstrapping) failed. "
+                      "we will reset ourselves now.");
+          // Self destruct ourselves if we could not get SmartStart'ed
+          zwave_controller_on_error(
+            ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_SMART_START_INCLUSION_SECURITY_FAIL);
+          nms.state = NM_SET_DEFAULT;
+          zwapi_set_default(&on_set_default_complete);
+          return;
+        }
+        // Else happily accept our new network.
+        on_new_network(nms.kex_fail_type);
+        nms.state = NM_IDLE;
+      } else if (ev == NM_EV_ABORT) {
+        /* Aborting S2 will cause S2 to return a SECURITY_DONE with fail. */
+        zwave_s2_abort_join();
+      }
+      break;
+    case NM_ASSIGNING_RETURN_ROUTE:
+      if (ev == NM_EV_ABORT) {
+        sl_log_debug(LOG_TAG,
+                     "Aborting the ongoing Assign Return Route operation.");
+        // Somebody wants to abort assigning return routes, we clear the queue
+        // and pretend that the last route has just completed
+        zwave_network_management_return_route_clear_queue();
+        on_assign_return_route_complete(0);
+      } else if (ev == NM_EV_ASSIGN_RETURN_ROUTE_COMPLETED) {
+        sl_log_debug(LOG_TAG, "Assign Return Route operation completed.");
+        nms.state = NM_IDLE;
+      }
+      break;
     case NM_REPLACE_FAILED_REQ:
     case NM_PREPARE_SUC_INCLISION:
     case NM_WAIT_FOR_SUC_INCLUSION:
     case NM_PROXY_INCLUSION_WAIT_NIF:
       break;
   }
+
   sl_log_debug(LOG_TAG,
-               "Exit event: %s state: %s SmartStart enabled %i\n",
+               "Exit event: %s state: %s.\n",
                nm_event_name(ev),
-               nm_state_name(nms.state),
-               nms.smart_start_enabled);
-  // Updating the network management state to the MQTT broker
+               nm_state_name(nms.state));
+
+  // If we are idle, ensure to clean up everything from the previous operations
+  if (nms.state == NM_IDLE) {
+    etimer_stop(&nms.timer);
+    reset_nms_last_operation_data();
+  }
+
+  // Check if we want to assign some return routes:
+  if (SL_STATUS_IN_PROGRESS
+      == zwave_network_management_return_route_assign_next()) {
+    sl_log_debug(LOG_TAG, "Initiating new Assign Return Routes.");
+    nms.state = NM_ASSIGNING_RETURN_ROUTE;
+  }
+
+  // Tell the Z-Wave Controller which state we are currently in.
   zwave_controller_on_state_updated(nms.state);
 
+  // Check if we want to activate SmartStart (Add or Learn mode)
   if (nms.state == NM_IDLE) {
-    // If we are idle, Ensure no timers are running
-    etimer_stop(&nms.timer);
-    // Don't get confused with previous operation data for the next operation
-    nms.node_id_being_handled = 0;
-    nms.flags                 = 0;
-    nms.inclusion_protocol    = PROTOCOL_ZWAVE;
-    nms.requested_csa         = 0;
-    nms.requested_keys        = 0;
-    nms.kex_fail_type         = 0;
-    memset(nms.reported_dsk, 0, sizeof(zwave_dsk_t));
-    memset(nms.expected_dsk, 0, sizeof(zwave_dsk_t));
+    sl_log_debug(LOG_TAG,
+                 "SmartStart Configuration: Add Mode %s, Learn Mode %s\n",
+                 nms.smart_start_add_mode_enabled ? "enabled" : "disabled",
+                 nms.smart_start_learn_mode_enabled ? "enabled" : "disabled");
 
     // Restart SmartStart on the Z-Wave module if idle and SmartStart is enabled.
-    if (nms.smart_start_enabled) {
+    if (nms.smart_start_add_mode_enabled
+        && zwave_network_management_is_zpc_sis()) {
       sl_log_debug(LOG_TAG, "Re-enabling SmartStart Add mode\n");
       zwapi_add_node_to_network(ADD_NODE_SMART_START
                                   | ADD_NODE_OPTION_NETWORK_WIDE,
                                 NULL);
+    } else if (nms.smart_start_learn_mode_enabled
+               && we_are_alone_in_our_network()) {
+      // If we are alone in our network, and no SmartStart Add Mode,
+      // then try SmartStart learn mode.
+      sl_log_debug(LOG_TAG, "Enabling SmartStart Learn mode\n");
+      nms.learn_mode_intent = ZWAVE_NETWORK_MANAGEMENT_LEARN_SMART_START;
+      zwapi_set_learn_mode(LEARN_MODE_SMART_START, &on_learn_mode_callback);
     }
   }
-}
-
-// void
-// NetworkManagement_s0_started()
-// {
-//   nm_fsm_post_event(NM_EV_S0_STARTED, 0);
-// }
-// void NetworkManagement_start_proxy_replace(uint8_t node_id) {
-//   nm_fsm_post_event(NM_EV_START_PROXY_REPLACE, &node_id);
-// }
-
-zwave_home_id_t zwave_network_management_get_home_id()
-{
-  return nms.cached_home_id;
-}
-
-zwave_node_id_t zwave_network_management_get_node_id()
-{
-  return nms.cached_local_node_id;
-}
-
-zwave_keyset_t zwave_network_management_get_granted_keys()
-{
-  return zwave_s2_keystore_get_assigned_keys();
 }

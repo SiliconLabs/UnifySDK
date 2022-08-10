@@ -42,7 +42,7 @@
 // Interfaces
 #include "zwave_generic_types.h"
 
-// UIC includes
+// Unify includes
 #include "sl_status.h"
 
 #ifdef __cplusplus
@@ -71,6 +71,9 @@ typedef enum {
   /// The node responded to a NOP; thus the node is no longer failing.
   ///
   ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_REPLACE_FAIL,
+  /// We were in SmartStart Learn mode but did not get a successful
+  /// security bootstrapping. We will reset oureslves now.
+  ZWAVE_NETWORK_MANAGEMENT_ERROR_NODE_SMART_START_INCLUSION_SECURITY_FAIL,
 } zwave_network_management_error_t;
 
 /**
@@ -121,6 +124,17 @@ typedef enum {
   /// Unknown KEX fail type.
   ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_UNKNOWN,
 } zwave_kex_fail_type_t;
+
+typedef enum {
+  /// No Learn mode intent.
+  ZWAVE_NETWORK_MANAGEMENT_LEARN_NONE,
+  /// Network Wide Inclusion learn mode
+  ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI,
+  /// Enable Network Wide Exclusion
+  ZWAVE_NETWORK_MANAGEMENT_LEARN_NWE,
+  /// SmartStart Learn mode
+  ZWAVE_NETWORK_MANAGEMENT_LEARN_SMART_START,
+} zwave_learn_mode_t;
 
 /**
  * @brief Get the current state of the network management module.
@@ -184,7 +198,7 @@ sl_status_t zwave_network_management_add_node_with_dsk(
   zwave_protocol_t preferred_inclusion);
 
 /**
- * @brief Set the controller in SmartStart mode.
+ * @brief Set the controller in SmartStart Add mode.
  *
  * When SmartStart is enabled the controller will open the Z-Wave controller for
  * SmartStart inclusions. If an other network management operation is activated
@@ -196,12 +210,21 @@ sl_status_t zwave_network_management_add_node_with_dsk(
  * start inclusion is not stated as a response to a SmartStart inclusion
  * request.
  *
- * @param enable
+ * @param enabled
  * - TRUE the network will be kept open for SmartStart inclusions.
  * - FALSE SmartStart inclusions are disabled.
  *
  */
-void zwave_network_management_smart_start_enable(bool enable);
+void zwave_network_management_enable_smart_start_add_mode(bool enabled);
+
+/**
+ * @brief Configures if the Network Management module will enter SmartStart
+ * learn mode when it goes back to IDLE, we are alone in a network SmartStart
+ * Add mode is disabled.
+ *
+ * @param enabled
+ */
+void zwave_network_management_enable_smart_start_learn_mode(bool enabled);
 
 /**
  * @brief Inform an S2 bootstrapping controller which
@@ -255,17 +278,11 @@ sl_status_t zwave_network_management_remove_node();
  * network. If the controller enters a network where this is not already a
  * SIS it assigns itself the SIS role.
  *
- * @param intent indicate the Learn Mode Intent (i.e., inclusion/exclusion,
+ * @param mode indicate the Learn Mode Intent (i.e., inclusion/exclusion,
  *               NWI, NWE and stop learn mode).
- * The Learn Mode intent value can be:
- * - 0x00: Stop learn mode (ZW_SET_LEARN_MODE_DISABLE)
- * - 0x01: Start direct range inclusion/exclusion (ZW_SET_LEARN_MODE_DIRECT_RANGE)
- * - 0x02: Start learn mode expecting NWI (ZW_SET_LEARN_MODE_NWI)
- * - 0x03: Start learn mode expecting NWE (ZW_SET_LEARN_MODE_NWE)
- *
  * @return sl_status_t BUSY if the state is not IDLE
  */
-sl_status_t zwave_network_management_learn_mode(uint8_t intent);
+sl_status_t zwave_network_management_learn_mode(zwave_learn_mode_t mode);
 
 /**
  * @brief Reset the controller.
@@ -319,6 +336,13 @@ zwave_home_id_t zwave_network_management_get_home_id();
 zwave_node_id_t zwave_network_management_get_node_id();
 
 /**
+ * @brief Get the cached Node List for the current network.
+ *
+ * @param [out] node_list Pointer where the node list will be copied.
+ */
+void zwave_network_management_get_network_node_list(zwave_nodemask_t node_list);
+
+/**
  * @brief Return the currently granted keys.
  *
  * @return zwave_keyset_t indicating the granted keys for our Z-Wave module
@@ -326,7 +350,10 @@ zwave_node_id_t zwave_network_management_get_node_id();
 zwave_keyset_t zwave_network_management_get_granted_keys();
 
 /**
- * @returns true if ZPC is the SIS in the current network.
+ * @brief Checks if we have the SIS role in the current network.
+ *
+ * @returns true if we have the SIS role
+ * @returns false if we do not have the SIS role in this network
  */
 bool zwave_network_management_is_zpc_sis();
 
@@ -351,12 +378,12 @@ sl_status_t zwave_network_management_start_proxy_inclusion(
   zwave_node_id_t node_id, zwave_node_info_t nif, uint8_t inclusion_step);
 
 /**
- * @brief Assign static return routes within a Routing End Node.
+ * @brief Assign static return routes to End Nodes.
  *
- * @param node_id is the Routing End Node ID
- * @param destination_node_id is the Route destination Node ID
+ * @param node_id              NodeID for which return routes will be provided
+ * @param destination_node_id  Destination NodeID of the return routes
  *
- * @returns returns  SL_STATUS_OK if assign return route was initiated
+ * @returns returns SL_STATUS_OK if the request was accepted.
  */
 sl_status_t zwave_network_management_assign_return_route(
   zwave_node_id_t node_id, zwave_node_id_t destination_node_id);
@@ -368,6 +395,13 @@ sl_status_t zwave_network_management_assign_return_route(
  */
 bool zwave_network_management_is_busy();
 
+/**
+ * @brief Checks if we have return routes to assign for a given NodeID
+ * @param node_id   NodeID to look for in the return route queue
+ * @returns true or false
+ */
+bool we_have_return_routes_to_assign(zwave_node_id_t node_id);
+
 /* An application MUST time out waiting for the
  * ADD_NODE_STATUS_NODE_FOUND status if it does not receive the indication
  * after calling AddNodeToNetwork(ADD_NODE_ANY).
@@ -375,9 +409,13 @@ bool zwave_network_management_is_busy();
 #define ADD_REMOVE_TIMEOUT                60000
 #define NOP_FOR_REMOVE_FAILED_TIMEOUT     65000
 #define SMART_START_SELF_DESTRUCT_TIMEOUT 3000  //3 seconds
-#define LEARN_MODE_TIMEOUT_NETWORK_WIDE   6000  //6 seconds
-// defining Direct range learn mode operation timeout to 20 seconds
-#define LEARN_MODE_TIMEOUT_DIRECT_RANGE 20000
+
+// How long do we wait for the Z-Wave API to callback after set default?
+#define SET_DEFAULT_TIMEOUT 15000
+
+// How long do we stay in Learn Mode before timing out and returning to IDLE in ms.
+#define LEARN_MODE_TIMEOUT 30000
+
 /// Time that Send data (including e.g. sending NOP) will take as a maximum.
 /// Protocol that tries routing with FLiRS nodes takes very very long.
 #define SEND_DATA_TIMEOUT 125000

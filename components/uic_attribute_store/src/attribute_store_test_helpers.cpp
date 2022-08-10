@@ -14,7 +14,7 @@
 
 #include "attribute_store_fixt.h"
 #include "datastore.h"
-#include "attribute_store_debug.h"
+#include "attribute_store_type_registration.h"
 #include "attribute_store_test_helpers.hpp"
 
 using namespace attribute_store;
@@ -130,7 +130,7 @@ static bool validate_path(std::vector<BranchNode> *branch_data,
 }
 
 // Converts node type from sytring or hex string to uint32_t
-// return 0xffffffff if cannot convert
+// return 0x0000000 (INVALID_TYPE) if cannot convert
 static uint32_t convert_node_type(std::string s_node_type)
 {
   //Decide if node is hex number
@@ -142,7 +142,7 @@ static uint32_t convert_node_type(std::string s_node_type)
       converted_value = 0xffffffff;
     }
   } else {
-    converted_value = attribute_store_type_by_name(s_node_type.c_str());
+    converted_value = attribute_store_get_type_by_name(s_node_type.c_str());
   }
   return converted_value;
 }

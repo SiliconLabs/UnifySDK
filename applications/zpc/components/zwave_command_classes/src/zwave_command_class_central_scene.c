@@ -24,20 +24,19 @@
 #include "ZW_classcmd.h"
 
 // Includes from other ZPC Components
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_command_handler.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_controller_utils.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "zwave_unid.h"
 
-// Includes from UIC Components
+// Includes from Unify Components
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "attribute_resolver.h"
 #include "attribute_timeouts.h"
-#include "dotdot_mqtt.h"
-#include "dotdot_mqtt_supported_generated_commands.h"
+#include "dotdot_mqtt_generated_commands.h"
 
 #include "sl_log.h"
 #define LOG_TAG "zwave_command_class_central_scene"
@@ -128,9 +127,8 @@ static central_scene_key_attribute_t
   // Read the version of the supporting node
   zwave_cc_version_t supporting_node_version = 0;
   attribute_store_node_t version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
   attribute_store_get_reported(version_node,
                                &supporting_node_version,
                                sizeof(supporting_node_version));
@@ -157,9 +155,8 @@ static central_scene_key_attribute_t
 {
   central_scene_key_attribute_t value = V3_KEY_ATTRIBUTES;
   attribute_store_node_t supported_attributes_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(MAX_KEY_ATTRIBUTE),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(MAX_KEY_ATTRIBUTE));
 
   attribute_store_get_reported(supported_attributes_node,
                                &value,
@@ -217,19 +214,17 @@ static void get_state(attribute_store_node_t endpoint_node,
                       central_scene_state_t *state)
 {
   attribute_store_node_t active_scene_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(ACTIVE_SCENE),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(ACTIVE_SCENE));
 
   attribute_store_get_reported(active_scene_node,
                                &(state->scene),
                                sizeof(state->scene));
 
   attribute_store_node_t sequence_number_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       active_scene_node,
-      ATTRIBUTE(ACTIVE_SCENE_SEQUENCE_NUMBER),
-      0);
+      ATTRIBUTE(ACTIVE_SCENE_SEQUENCE_NUMBER));
 
   attribute_store_get_reported(sequence_number_node,
                                &(state->scene_seq_number),
@@ -249,9 +244,8 @@ static void set_state(attribute_store_node_t endpoint_node,
                       const central_scene_state_t *state)
 {
   attribute_store_node_t active_scene_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(ACTIVE_SCENE),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(ACTIVE_SCENE));
 
   attribute_store_set_reported(active_scene_node,
                                &(state->scene),
@@ -633,9 +627,8 @@ static sl_status_t zwave_command_class_central_scene_configuration_get(
 
   zwave_cc_version_t supporting_node_version = 0;
   attribute_store_node_t version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
   attribute_store_get_reported(version_node,
                                &supporting_node_version,
                                sizeof(supporting_node_version));
@@ -674,9 +667,8 @@ static sl_status_t zwave_command_class_central_scene_configuration_set(
 
   zwave_cc_version_t supporting_node_version = 0;
   attribute_store_node_t version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
   attribute_store_get_reported(version_node,
                                &supporting_node_version,
                                sizeof(supporting_node_version));
@@ -756,21 +748,6 @@ static void zwave_command_class_central_scene_on_version_attribute_update(
                                      ATTRIBUTE(ACTIVE_SCENE),
                                      &active_scene,
                                      sizeof(active_scene));
-
-  // Advertise that such nodes will generate RecallScene commands
-  zwave_endpoint_id_t endpoint_id = 0;
-  unid_t unid;
-  if (SL_STATUS_OK
-      == attribute_store_network_helper_get_unid_endpoint_from_node(
-        endpoint_node,
-        unid,
-        &endpoint_id)) {
-    uic_mqtt_dotdot_scenes_supported_commands_t commands
-      = {.recall_scene = true};
-    uic_mqtt_dotdot_scenes_publish_supported_generated_commands(unid,
-                                                                endpoint_id,
-                                                                &commands);
-  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -810,7 +787,8 @@ sl_status_t zwave_command_class_central_scene_init()
   handler.command_class              = COMMAND_CLASS_CENTRAL_SCENE_V3;
   handler.version                    = CENTRAL_SCENE_VERSION_V3;
   handler.command_class_name         = "Central Scene";
-  handler.comments                   = "Partial control: key attributes are not displayed in the UI.";
+  handler.comments
+    = "Partial control: key attributes are not displayed in the UI.";
 
   zwave_command_handler_register_handler(handler);
 

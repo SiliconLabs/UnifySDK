@@ -1,7 +1,9 @@
 //This file is generated automatically. Don't try to change something here.
 //To add support for new clusters, modify addon-helper.js
 //To change the stucture of the ClusterTypeAttrs, modify cluster-type-attributes.zapt
-{{#zcl_enums}}{{initEnums label}}{{/zcl_enums}} {{#zcl_bitmaps}}{{initBitmaps label}}{{/zcl_bitmaps}}
+{{#zcl_enums}} {{#zcl_enum_items }} {{initEnums parent.label label value}} {{/zcl_enum_items }}{{/zcl_enums}} 
+{{#zcl_bitmaps}} {{#zcl_bitmap_items}} {{initBitmaps parent.label label mask type (asOffset mask) }} {{/zcl_bitmap_items}}{{/zcl_bitmaps}}
+
 
 //generate ClusterTypes
 export let ClusterTypeAttrs: any = {
@@ -38,16 +40,7 @@ export let ClusterTypeAttrs: any = {
                   isArray: {{isArray parent.parent.label parent.label label}},
                   {{#if (isEnum type)}}
                     enum:[
-                      {{#zcl_enums}}
-                        {{#if (isCurrentType parent label)}}
-                          {{#zcl_enum_items}}
-                            {
-                              name: "{{label}}",
-                              value: {{asNumber value}}
-                            }{{listComma this}}
-                          {{/zcl_enum_items}}
-                        {{/if}}                  
-                      {{/zcl_enums}}
+                      {{getEnum parent.label label}}
                     ],
                   {{/if}}
                 }{{listComma this}}
@@ -55,47 +48,13 @@ export let ClusterTypeAttrs: any = {
               ],
             {{/if}}
             {{#if (isEnum type)}}
-              enum:[
-                {{#zcl_enums}}
-                  {{#if (isCurrentType parent label)}}
-                    {{#zcl_enum_items}}
-                      {
-                        name: "{{label}}",
-                        value: {{asNumber value}}
-                      }{{listComma this}}
-                    {{/zcl_enum_items}}
-                  {{/if}}                  
-                {{/zcl_enums}}
+              enum: [
+                {{getEnum parent.label label}}
               ],
             {{/if}}
             {{#if (isBitmap type)}}
               bitmap: [
-                {{#zcl_bitmaps}}
-                  {{#if (isCurrentType parent label)}}
-                    {{#zcl_bitmap_items}}
-                      {
-                        name: "{{label}}",
-                        mask: {{mask}},
-                        type: "{{castType type}}",
-                        offset: {{asOffset mask}},
-                      {{#if (isEnum type)}}
-                        enum:[
-                          {{#zcl_enums}}
-                            {{#if (isCurrentBitmapEnum parent label)}}
-                              {{#zcl_enum_items}}
-                                {
-                                  name: "{{label}}",
-                                  value: {{asNumber value}}
-                                }{{listComma this}}
-                              {{/zcl_enum_items}}
-                            {{/if}}                  
-                          {{/zcl_enums}}
-                        ]
-                      {{/if}}
-                      }{{listComma this}}
-                    {{/zcl_bitmap_items}}
-                  {{/if}}   
-                {{/zcl_bitmaps}}
+                {{getBitmap parent.label label}}
               ]
             {{/if}}
             }{{listComma this}}

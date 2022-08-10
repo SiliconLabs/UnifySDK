@@ -7,7 +7,7 @@ add_library(uic_smartstart_management SHARED
 )
 
 target_include_directories(uic_smartstart_management PUBLIC
-  include
+  include ${nlohmann_json_include}
 )
 
 target_link_libraries(uic_smartstart_management PUBLIC

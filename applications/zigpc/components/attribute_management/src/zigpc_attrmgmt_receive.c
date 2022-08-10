@@ -11,7 +11,7 @@
  *
  *****************************************************************************/
 
-// Shared UIC components
+// Shared Unify components
 #include <sl_status.h>
 #include <sl_log.h>
 

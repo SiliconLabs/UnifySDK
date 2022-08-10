@@ -13,10 +13,10 @@
 // Includes from this component
 #include "zwave_command_class_multi_channel_association.h"
 #include "zwave_command_class_association.h"
-#include "zwave_command_class_association_internals.hpp"
+#include "zwave_command_class_association_internals.h"
 #include "zwave_command_class_agi.h"
 #include "zwave_command_classes_utils.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 
 // Generic includes
 #include <assert.h>
@@ -25,6 +25,7 @@
 #include <stdio.h>
 
 // Includes from other components
+#include "zwave_association_toolbox.hpp"
 #include "ZW_classcmd.h"
 #include "zwave_command_handler.h"
 #include "zwave_controller_connection_info.h"
@@ -33,13 +34,13 @@
 #include "zwave_rx.h"
 #include "zpc_attribute_resolver.h"
 #include "zwave_unid.h"
+#include "zpc_attribute_store_network_helper.h"
+#include "attribute_store_defined_attribute_types.h"
 
-// Includes from UIC Components
+// Includes from Unify Components
 #include "attribute_store.h"
 #include "attribute.hpp"
 #include "attribute_store_helper.h"
-#include "zpc_attribute_store_network_helper.h"
-#include "attribute_store_defined_attribute_types.h"
 #include "attribute_resolver.h"
 
 #include "sl_log.h"
@@ -53,9 +54,231 @@ using namespace attribute_store;
 // Note, Multi Channel Association shares attributes with Association
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_##type
 
+// Minimum 2 attributes to create under a Group ID when created:
+constexpr attribute_store_type_t group_attributes[]
+  = {ATTRIBUTE(GROUP_CONTENT), ATTRIBUTE(MAX_NODES_SUPPORTED)};
+
 ///////////////////////////////////////////////////////////////////////////////
 // Private helper functions
 ///////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Retrieves all the associated information to a Group ID node
+ *
+ * @param group_id_node      Attribute Store node of the Group ID
+ * @param [out] node_id      Pointer to a NodeID variable. NodeID under which the
+ *                           Group is located will be written here
+ * @param [out] endpoint_id  Pointer to a Endpoint ID variable. Endpoint under
+ *                           which the Group is located will be written here
+ * @param [out] group_id     Pointer to a Group ID variable. The value of the
+ *                           Group ID will be written here.
+ *
+ * @returns SL_STATUS_OK if all variables have been read successfully and pointers
+ *          have been assigned values. SL_STATUS_FAIL otherwise
+ */
+static sl_status_t
+  get_group_data_from_node(attribute_store_node_t group_id_node,
+                           zwave_node_id_t *node_id,
+                           zwave_endpoint_id_t *endpoint_id,
+                           association_group_id_t *group_id)
+{
+  if (SL_STATUS_OK
+      != attribute_store_network_helper_get_zwave_ids_from_node(group_id_node,
+                                                                node_id,
+                                                                endpoint_id)) {
+    return SL_STATUS_FAIL;
+  }
+
+  return attribute_store_get_reported(group_id_node,
+                                      group_id,
+                                      sizeof(association_group_id_t));
+}
+
+/**
+ * @brief Adds an association to the ZPC (endpoint 0)
+ *
+ * @param node_id                 The NodeID to associate to the ZPC.
+ * @param endpoint_id             The Endpoint ID to associate to the ZPC.
+ * @param group_id                The Association Group ID to associate to the ZPC
+ * @param forceful_association    Defines if we can remove an association to establish
+ *                                our new association.
+ *
+ * @returns true if a desired association was added, false if none was added.
+ */
+static bool add_association_to_zpc(zwave_node_id_t node_id,
+                                   zwave_endpoint_id_t endpoint_id,
+                                   association_group_id_t group_id,
+                                   bool forceful_association)
+{
+  // That will prevent to associate ourselves to endpoints > 0,
+  // or any group that does not allow any association
+  if (get_group_capacity(node_id, endpoint_id, group_id) == 0) {
+    sl_log_debug(LOG_TAG,
+                 "Not establishing association for Node %d:%d Group ID %d as "
+                 "max supported associations is 0",
+                 node_id,
+                 endpoint_id,
+                 group_id);
+    return false;
+  }
+
+  zwave_node_id_t zpc_node_id = zwave_network_management_get_node_id();
+  if (node_id == zpc_node_id) {
+    return false;
+  } else if (zpc_node_id > 255) {
+    // we cannot associate ourselve Assocation does not handle NodeIDs > 255.
+    sl_log_warning(LOG_TAG,
+                   "ZPC NodeID = %d. Cannot "
+                   "establish associations towards the ZPC.",
+                   zpc_node_id);
+    return false;
+  }
+
+  association_t new_association = {};
+  new_association.node_id       = zpc_node_id;
+  new_association.endpoint_id   = 0;
+  new_association.type          = NODE_ID;
+
+  // Do we want an Endpoint Association ?
+  if (true
+        == zwave_node_supports_command_class(COMMAND_CLASS_MULTI_CHANNEL_V4,
+                                             node_id,
+                                             0)
+      && zwave_node_get_command_class_version(
+           COMMAND_CLASS_MULTI_CHANNEL_ASSOCIATION_V3,
+           node_id,
+           endpoint_id)
+           >= 3) {
+    // Ensure that we are not already present as a NodeID association
+    remove_desired_association(node_id, endpoint_id, group_id, new_association);
+    new_association.type = ENDPOINT;
+  }
+
+  if (true
+      == is_association_in_group(node_id,
+                                 endpoint_id,
+                                 group_id,
+                                 new_association)) {
+    // We are already associated, nothing to do.
+    return false;
+  }
+
+  sl_status_t association_status = SL_STATUS_FAIL;
+  // Really get forceful if we are the SIS:
+  forceful_association &= zwave_network_management_is_zpc_sis();
+  if (forceful_association == true) {
+    /// CL:008E.01.51.05.1: Bump somebody out only if we are the SIS.
+    association_status = force_add_desired_association(node_id,
+                                                       endpoint_id,
+                                                       group_id,
+                                                       new_association);
+  } else {
+    association_status = add_desired_association(node_id,
+                                                 endpoint_id,
+                                                 group_id,
+                                                 new_association);
+  }
+
+  if (association_status == SL_STATUS_OK) {
+    sl_log_debug(LOG_TAG,
+                 "Establishing %s association to the ZPC "
+                 "for NodeID %d:%d Group ID %d. %s.",
+                 new_association.type == NODE_ID ? "NodeID" : "Endpoint",
+                 node_id,
+                 endpoint_id,
+                 group_id,
+                 forceful_association == true ? "Forceful" : "Non-forceful");
+    // Make sure the node has return routes for all its destinations
+    zwave_network_management_assign_return_route(node_id,
+                                                 new_association.node_id);
+    return true;
+  }
+  return false;
+}
+
+/**
+ * @brief Adds association towards the ZPC based on the Group profile
+ *
+ *  The following logic is applied on group profiles for establishing associations:
+ * 1. it is a lifeline group (LIFELINE profile) (forceful if SIS)
+ * 2. it has no AGI data or NA profile (AGI will set the profile as lifeline) (non-forceful)
+ *
+ * @param group_id_node   Attribute store node for the Association Group ID.
+ *
+ * @returns true if an association was added, false otherwise
+ */
+static bool establish_zpc_associations_based_on_group_profile(
+  attribute_store_node_t group_id_node)
+{
+  // Get all the necessary data about the Group ID, NodeID, etc
+  zwave_node_id_t node_id         = 0;
+  zwave_endpoint_id_t endpoint_id = 0;
+  association_group_id_t group_id = 0;
+  if (SL_STATUS_OK
+      != get_group_data_from_node(group_id_node,
+                                  &node_id,
+                                  &endpoint_id,
+                                  &group_id)) {
+    return false;
+  }
+
+  bool establish_forceful_association = false;
+  bool establish_association          = false;
+  agi_profile_t profile
+    = zwave_command_class_agi_get_group_profile(node_id, endpoint_id, group_id);
+  if (AGI_LIFELINE_PROFILE == profile) {
+    establish_forceful_association = true;
+  } else if (AGI_NA_PROFILE == profile) {
+    establish_association = true;
+  }
+
+  if (establish_association == false
+      && establish_forceful_association == false) {
+    return false;
+  }
+  // Ask the helper function to make sure to establish the ZPC as destination.
+  return add_association_to_zpc(node_id,
+                                endpoint_id,
+                                group_id,
+                                establish_forceful_association);
+}
+
+/**
+ * @brief Adds association towards the ZPC based on the Group command list
+ *
+ * Checks if we want to associate ourselve to a group based on the command
+ * it sends. Associations will be non-forceful in this case.
+ *
+ * @param group_id_node   Attribute store node for the Association Group ID.
+ *
+ * @returns true if an association was added, false otherwise
+ */
+static bool establish_zpc_associations_based_on_group_command_list(
+  attribute_store_node_t group_id_node)
+{
+  // Get all the necessary data about the Group ID, NodeID, etc
+  zwave_node_id_t node_id         = 0;
+  zwave_endpoint_id_t endpoint_id = 0;
+  association_group_id_t group_id = 0;
+  if (SL_STATUS_OK
+      != get_group_data_from_node(group_id_node,
+                                  &node_id,
+                                  &endpoint_id,
+                                  &group_id)) {
+    return false;
+  }
+
+  // Check if we want to associate ourselve to a group. Reasons include:
+  // 3. it sends some Command Class/commands that somebody wants to receive. (non-forceful)
+  if (false
+      == zwave_command_class_agi_group_contains_listeners(node_id,
+                                                          endpoint_id,
+                                                          group_id)) {
+    return false;
+  }
+
+  // Ask the helper function to make sure to establish the ZPC as destination.
+  return add_association_to_zpc(node_id, endpoint_id, group_id, false);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Command Handler functions
@@ -79,34 +302,22 @@ static sl_status_t
   association_group_count_t group_count
     = frame_data[GROUPING_REPORT_NUMBER_OF_GROUPS_INDEX];
   attribute_store_node_t group_count_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(SUPPORTED_GROUPINGS),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(SUPPORTED_GROUPINGS));
   attribute_store_set_reported(group_count_node,
                                &group_count,
                                sizeof(group_count));
 
   attribute_store_node_t group_node;
-  association_group_id_t group_identifer;
-  for (association_group_id_t i = 0; i < group_count; i++) {
-    group_node = attribute_store_get_node_child_by_type(endpoint_node,
-                                                        ATTRIBUTE(GROUP_ID),
-                                                        i);
+  for (association_group_id_t i = 1; i <= group_count; i++) {
+    group_node = attribute_store_emplace(endpoint_node,
+                                         ATTRIBUTE(GROUP_ID),
+                                         &i,
+                                         sizeof(i));
 
-    if (group_node == ATTRIBUTE_STORE_INVALID_NODE) {
-      group_node = attribute_store_add_node(ATTRIBUTE(GROUP_ID), endpoint_node);
-      group_identifer = i + 1;
-      attribute_store_set_node_attribute_value(group_node,
-                                               REPORTED_ATTRIBUTE,
-                                               (uint8_t *)&group_identifer,
-                                               sizeof(association_group_id_t));
-
-      // Create a group content attribute under each group ID :
-      attribute_store_add_node(ATTRIBUTE(GROUP_CONTENT), group_node);
-      // Create the Max Nodes Supported attribute that represents
-      // the maximum number of destinations supported by the advertised association group
-      attribute_store_add_node(ATTRIBUTE(MAX_NODES_SUPPORTED), group_node);
-    }
+    attribute_store_add_if_missing(group_node,
+                                   group_attributes,
+                                   COUNT_OF(group_attributes));
   }
   // We are done parsing the frame
   return SL_STATUS_OK;
@@ -302,17 +513,15 @@ static sl_status_t
   association_group_capacity_t capacity
     = association_report->max_nodes_supported;
   attribute_store_node_t group_capacity_node
-    = attribute_store_get_node_child_by_type(group_id_node,
-                                             ATTRIBUTE(MAX_NODES_SUPPORTED),
-                                             0);
+    = attribute_store_get_first_child_by_type(group_id_node,
+                                              ATTRIBUTE(MAX_NODES_SUPPORTED));
   attribute_store_set_reported(group_capacity_node,
                                &capacity,
                                sizeof(capacity));
 
   attribute_store_node_t group_content_node
-    = attribute_store_get_node_child_by_type(group_id_node,
-                                             ATTRIBUTE(GROUP_CONTENT),
-                                             0);
+    = attribute_store_get_first_child_by_type(group_id_node,
+                                              ATTRIBUTE(GROUP_CONTENT));
 
   if (frame_length <= REPORT_ASSOCIATION_BYTES_INDEX) {
     // Put an association marker to prevent re-resolution
@@ -324,13 +533,21 @@ static sl_status_t
   association_bytes bytes(&frame_data[REPORT_ASSOCIATION_BYTES_INDEX],
                           &frame_data[frame_length]);
 
+  // Convert into an association list:
   association_set list;
   get_association_list(bytes, list);
+
+  // Set back into bytes to save it in our attribute store.
+  bytes.clear();
+  get_association_bytestream(list, bytes);
+  attribute group(group_content_node);
+  group.set<association_bytes>(REPORTED_ATTRIBUTE, bytes);
+
   for (auto association: list) {
-    add_reported_association(connection_info->remote.node_id,
-                             connection_info->remote.endpoint_id,
-                             association_report->grouping_identifier,
-                             association);
+    // Make sure the node has return routes for all its destinations
+    zwave_network_management_assign_return_route(
+      connection_info->remote.node_id,
+      association.node_id);
   }
 
   return SL_STATUS_OK;
@@ -649,6 +866,62 @@ static void on_group_content_send_data_complete(attribute_store_node_t node,
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute update callbacks
 ///////////////////////////////////////////////////////////////////////////////
+/**
+ * @brief Ensures that we evaluate associations after a Group ID is created.
+ *
+ * @param group_id_node     The Group ID that was just updated.
+ * @param change            The attribute store change that took place
+ */
+static void zwave_command_class_multi_channel_association_on_group_id_update(
+  attribute_store_node_t group_id_node, attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
+
+  // Group ID just got updated, set a resolution listener on the Group ID, so
+  // we get to know when all the data about the group is known.
+  attribute_resolver_set_resolution_listener(group_id_node,
+                                             &establish_zpc_associations);
+}
+
+/**
+ * @brief Verifies if we want to modify associations when a group content is
+ * modified and also ensures that the desired value gets undefined when fully
+ * resolved.
+ *
+ * @param group_id_node     The Group ID that was just updated.
+ * @param change            The attribute store change that took place
+ */
+static void
+  zwave_command_class_multi_channel_association_on_group_content_update(
+    attribute_store_node_t group_content_node, attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
+  if (false
+      == attribute_store_is_value_defined(group_content_node,
+                                          REPORTED_ATTRIBUTE)) {
+    return;
+  }
+
+  // Reported got updated and the desired/reported are matched:
+  // then erase the desired to prevent mistakes if we need to set again.
+  if (true == attribute_store_is_value_matched(group_content_node)) {
+    attribute_store_undefine_desired(group_content_node);
+  }
+  // Group Content just got updated, check if we want to join the list of
+  // Association destinations
+  attribute_store_node_t group_id_node
+    = attribute_store_get_first_parent_with_type(group_content_node,
+                                                 ATTRIBUTE(GROUP_ID));
+  if (false == attribute_resolver_node_or_child_needs_resolution(group_id_node))
+    establish_zpc_associations(
+      attribute_store_get_first_parent_with_type(group_content_node,
+                                                 ATTRIBUTE(GROUP_ID)));
+}
+
 static void
   zwave_command_class_multi_channel_association_on_version_attribute_update(
     attribute_store_node_t updated_node, attribute_store_change_t change)
@@ -682,135 +955,27 @@ static void
                                  COUNT_OF(attribute_list));
 }
 
-static void on_nif_attribute_update(attribute_store_node_t updated_node,
-                                    attribute_store_change_t change)
-{
-  if (change == ATTRIBUTE_DELETED) {
-    return;
-  }
-
-  if (true
-      == attribute_store_is_value_defined(updated_node, REPORTED_ATTRIBUTE)) {
-    return;
-  }
-
-  // Fresh NIF created/updated but still undefined, it means we are interviewing.
-
-  // Find the parent endpoint and verify the lifeline setup when the interview
-  // is over.
-  attribute_store_node_t endpoint_node
-    = attribute_store_get_first_parent_with_type(updated_node,
-                                                 ATTRIBUTE_ENDPOINT_ID);
-  attribute_resolver_set_resolution_listener(endpoint_node,
-                                             establish_lifeline_association);
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 // Public interface functions
 ///////////////////////////////////////////////////////////////////////////////
-void establish_lifeline_association(attribute_store_node_t endpoint_node)
+void establish_zpc_associations(attribute_store_node_t group_id_node)
 {
-  // Remove the resolution listener, so we don't establish the lifeline several
-  // times
-  attribute_resolver_clear_resolution_listener(endpoint_node,
-                                               establish_lifeline_association);
+  bool association_established = false;
 
-  zwave_node_id_t node_id         = 0;
-  zwave_endpoint_id_t endpoint_id = 0;
-  if (SL_STATUS_OK
-      != attribute_store_network_helper_get_zwave_ids_from_node(endpoint_node,
-                                                                &node_id,
-                                                                &endpoint_id)) {
-    sl_log_error(LOG_TAG, "Cannot get Z-Wave IDs from node %d", endpoint_node);
-    return;
+  // Group is resolved. Let's check if we want to associate ourselves.
+  // First, based on the profile.
+  association_established
+    = establish_zpc_associations_based_on_group_profile(group_id_node);
+
+  // If not based on the profile, try based on the group command list.
+  if (false == association_established) {
+    association_established
+      = establish_zpc_associations_based_on_group_command_list(group_id_node);
   }
 
-  for (association_group_id_t i = 1;
-       i <= get_number_of_groups(node_id, endpoint_id);
-       i++) {
-    // Check if we want to associate ourselve to a group. Reasons include:
-    // 1. it is a lifeline group (LIFELINE profile) (forceful if SIS)
-    // 2. it has no AGI data or NA profile (AGI will set the profile as lifeline) (non-forceful)
-    // 3. it sends some Command Class/commands that somebody wants to receive. (non-forceful)
-    // Note: We do not check if the destination is Z-Wave Plus, profile data is enough
-    bool establish_forceful_association = false;
-    bool establish_association = false;
-    agi_profile_t profile
-      = zwave_command_class_agi_get_group_profile(node_id, endpoint_id, i);
-    if (AGI_LIFELINE_PROFILE == profile) {
-      establish_forceful_association = true;
-    } else if ((AGI_NA_PROFILE == profile)
-               || zwave_command_class_agi_group_contains_listeners(node_id,
-                                                                   endpoint_id,
-                                                                   i)) {
-      establish_association = true;
-    }
-
-    if (establish_association == false
-        && establish_forceful_association == false) {
-      continue;
-    }
-
-    // That will prevent to associate ourselves to endpoints > 0,
-    // or any group that does not allow any association
-    if (get_group_capacity(node_id, endpoint_id, i) == 0) {
-      sl_log_debug(LOG_TAG,
-                   "Not establishing lifeline for Node %d:%d Group ID %d as "
-                   "max supported associations is 0",
-                   node_id,
-                   endpoint_id,
-                   i);
-      continue;
-    }
-
-    zwave_node_id_t zpc_node_id = zwave_network_management_get_node_id();
-    if (zpc_node_id > 255) {
-      // we cannot associate ourselve Assocation does not handle NodeIDs > 255.
-      sl_log_warning(LOG_TAG,
-                     "ZPC NodeID = %d. Cannot "
-                     "establish associations towards the ZPC.",
-                     zpc_node_id);
-      return;
-    }
-
-    association_t new_association = {};
-    new_association.node_id       = zpc_node_id;
-    new_association.endpoint_id   = 0;
-    new_association.type          = NODE_ID;
-
-    // Do we want an Endpoint Association ?
-    if (true
-          == zwave_node_supports_command_class(COMMAND_CLASS_MULTI_CHANNEL_V4,
-                                               node_id,
-                                               0)
-        && zwave_node_get_command_class_version(
-             COMMAND_CLASS_MULTI_CHANNEL_ASSOCIATION_V3,
-             node_id,
-             endpoint_id)
-             >= 3) {
-      // Ensure that we are not already present as a NodeID association
-      remove_desired_association(node_id, endpoint_id, i, new_association);
-      new_association.type = ENDPOINT;
-    }
-    // Here we set the return route since ZPC is assigning a lifeline destination to itself
-    zwave_network_management_assign_return_route(node_id, zpc_node_id);
-
-    if ((zwave_network_management_is_zpc_sis() == true)
-        && (establish_forceful_association == true)) {
-      /// CL:008E.01.51.05.1: Bump somebody out only if we are the SIS.
-      force_add_desired_association(node_id, endpoint_id, i, new_association);
-    } else {
-      add_desired_association(node_id, endpoint_id, i, new_association);
-    }
-
-    sl_log_info(LOG_TAG,
-                "Establishing association (type %d) to the ZPC "
-                "for NodeID %d:%d Group ID %d.",
-                new_association.type,
-                node_id,
-                endpoint_id,
-                i);
-  }
+  // Make sure we don't get called again.
+  attribute_resolver_clear_resolution_listener(group_id_node,
+                                               &establish_zpc_associations);
 }
 
 sl_status_t zwave_command_class_multi_channel_association_init()
@@ -818,9 +983,6 @@ sl_status_t zwave_command_class_multi_channel_association_init()
   attribute_store_register_callback_by_type(
     zwave_command_class_multi_channel_association_on_version_attribute_update,
     ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_ASSOCIATION_VERSION);
-
-  attribute_store_register_callback_by_type(on_nif_attribute_update,
-                                            ATTRIBUTE_ZWAVE_NIF);
 
   // Multi channel is the one registering the rules, and calling the
   // association rules if the supporting node cannot use multi channel
@@ -833,6 +995,17 @@ sl_status_t zwave_command_class_multi_channel_association_init()
     ATTRIBUTE(GROUP_CONTENT),
     zwave_command_class_multi_channel_association_set,
     zwave_command_class_multi_channel_association_get);
+
+  // Listen to Group creations (group id updates), so we can associate ourselves.
+  attribute_store_register_callback_by_type_and_state(
+    &zwave_command_class_multi_channel_association_on_group_id_update,
+    ATTRIBUTE(GROUP_ID),
+    REPORTED_ATTRIBUTE);
+
+  attribute_store_register_callback_by_type_and_state(
+    &zwave_command_class_multi_channel_association_on_group_content_update,
+    ATTRIBUTE(GROUP_CONTENT),
+    REPORTED_ATTRIBUTE);
 
   // Attribute Resolver event listener:
   register_send_event_handler(ATTRIBUTE(GROUP_CONTENT),

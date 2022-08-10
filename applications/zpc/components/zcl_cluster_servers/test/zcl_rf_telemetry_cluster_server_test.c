@@ -32,9 +32,13 @@
 
 // Mocks
 #include "zwave_controller_callbacks_mock.h"
+#include "zwave_rx_mock.h"
 #include "zwave_network_management_mock.h"
 #include "dotdot_mqtt_mock.h"
+#include "dotdot_mqtt_generated_commands_mock.h"
 #include "dotdot_mqtt_supported_generated_commands_mock.h"
+#include "zwapi_protocol_basis_mock.h"
+#include "zwave_api_transport_mock.h"
 
 #include "sl_log.h"
 
@@ -84,14 +88,15 @@ void setUp()
 
 void test_configure_create_tx_report_enabled_attribute()
 {
-  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
-  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
+  zwapi_is_pti_supported_ExpectAndReturn(false);
 
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_ExpectWithArray(
     NULL,
     &expected_supported_generated_commands,
     sizeof(expected_supported_generated_commands));
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_IgnoreArg_unid();
+  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
 
   // Empty attribute store, expect the subscription by group after init
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zcl_rf_telemetry_cluster_server_init());
@@ -113,13 +118,14 @@ void test_configure_create_tx_report_enabled_attribute()
   attribute_store_delete_node(tx_report_enabled_node);
 
   // Ask for init again.
-  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
-  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_ExpectWithArray(
     NULL,
     &expected_supported_generated_commands,
     sizeof(expected_supported_generated_commands));
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_IgnoreArg_unid();
+  zwapi_is_pti_supported_ExpectAndReturn(false);
+  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zcl_rf_telemetry_cluster_server_init());
 
   // Same verifications again, attribute is created and set to default value:
@@ -139,13 +145,16 @@ void test_configure_create_tx_report_enabled_attribute()
     sizeof(expected_supported_generated_commands));
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_IgnoreArg_unid();
 
+  zwapi_is_pti_supported_ExpectAndReturn(false);
+  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zcl_rf_telemetry_cluster_server_init());
 }
 
 void test_update_desired_value()
 {
-  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
-  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
+  zwapi_is_pti_supported_ExpectAndReturn(true);
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_ExpectWithArray(
     NULL,
     &expected_supported_generated_commands,
@@ -153,6 +162,8 @@ void test_update_desired_value()
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_IgnoreArg_unid();
 
   // Empty attribute store, expect the subscription by group after init
+  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zcl_rf_telemetry_cluster_server_init());
 
   // Verify that ZPC endpoint 0 has a TX Report enabled attribute:
@@ -163,28 +174,95 @@ void test_update_desired_value()
       0);
   TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, tx_report_enabled_node);
 
+  attribute_store_node_t pti_enabled_node
+    = attribute_store_get_node_child_by_type(
+      zpc_endpoint_id_node,
+      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED,
+      0);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, pti_enabled_node);
+
   // Set the desired, the reported should follow.
-  tx_report_enabled_t value = 0xEE;
+  tx_report_enabled_t value = false;
   attribute_store_set_desired(tx_report_enabled_node, &value, sizeof(value));
   attribute_store_get_reported(tx_report_enabled_node, &value, sizeof(value));
-  TEST_ASSERT_EQUAL(0xEE, value);
+  TEST_ASSERT_EQUAL(false, value);
+
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
+  // Set the desired, the reported should follow.
+  pti_enabled_t pti_value = true;
+  attribute_store_set_desired(pti_enabled_node, &pti_value, sizeof(pti_value));
+  attribute_store_get_reported(pti_enabled_node, &pti_value, sizeof(pti_value));
+  TEST_ASSERT_EQUAL(true, pti_value);
+
+  //set the desired to 0 and mock that PTI is enabled
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
+  zwapi_set_radio_pti_ExpectAndReturn(0, SL_STATUS_OK);
+  zwapi_soft_reset_ExpectAndReturn(SL_STATUS_OK);
+  zwave_rx_wait_for_zwave_api_to_be_ready_Expect();
+  zwave_api_transport_reset_Expect();
+  pti_value = false;
+  attribute_store_set_desired(pti_enabled_node, &pti_value, sizeof(pti_value));
+  attribute_store_get_reported(pti_enabled_node, &pti_value, sizeof(pti_value));
+  TEST_ASSERT_EQUAL(false, pti_value);
+
+  //set the desired to 1 and mock that PTI is disabled
+  zwapi_is_pti_enabled_ExpectAndReturn(false);
+  zwapi_set_radio_pti_ExpectAndReturn(1, SL_STATUS_OK);
+  zwapi_soft_reset_ExpectAndReturn(SL_STATUS_OK);
+  zwave_rx_wait_for_zwave_api_to_be_ready_Expect();
+  zwave_api_transport_reset_Expect();
+  pti_value = true;
+  attribute_store_set_desired(pti_enabled_node, &pti_value, sizeof(pti_value));
+  attribute_store_get_reported(pti_enabled_node, &pti_value, sizeof(pti_value));
+  TEST_ASSERT_EQUAL(true, pti_value);
+
+  //Unchanged attribute value should not do anything
+  pti_value = true;
+  attribute_store_set_desired(pti_enabled_node, &pti_value, sizeof(pti_value));
+  attribute_store_get_reported(pti_enabled_node, &pti_value, sizeof(pti_value));
+  TEST_ASSERT_EQUAL(1, pti_value);
+
+  //set the desired to 0 and mock failure in PTI call to serialapi
+  //This will call the on_rf_telemetry_pti_enabled_desired_update() twice
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
+  zwapi_set_radio_pti_ExpectAndReturn(0, SL_STATUS_FAIL);
+  zwapi_is_pti_supported_ExpectAndReturn(true);
+  pti_value = false;
+  attribute_store_set_desired(pti_enabled_node, &pti_value, sizeof(pti_value));
+  attribute_store_get_reported(pti_enabled_node, &pti_value, sizeof(pti_value));
+  TEST_ASSERT_NOT_EQUAL(0, pti_value);  // reported should not change
+  attribute_store_get_desired(pti_enabled_node, &pti_value, sizeof(pti_value));
+  TEST_ASSERT_EQUAL(1,
+                    pti_value);  // desired value should roll back to reported
+
+  //set the desired to 1 and mock failure in PTI call to serialapi
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
+  zwapi_set_radio_pti_ExpectAndReturn(0, SL_STATUS_OK);
+  zwapi_soft_reset_ExpectAndReturn(SL_STATUS_OK);
+  zwave_rx_wait_for_zwave_api_to_be_ready_Expect();
+  zwave_api_transport_reset_Expect();
+  pti_value = false;
+  attribute_store_set_desired(pti_enabled_node, &pti_value, sizeof(pti_value));
+  attribute_store_get_reported(pti_enabled_node, &pti_value, sizeof(pti_value));
+  TEST_ASSERT_EQUAL(false, pti_value);  // reported should not change
 
   // Empty desired does not get propagated to reported:
+  value = true;
   attribute_store_set_desired(tx_report_enabled_node, NULL, 0);
-  value = 0x00;
   attribute_store_get_reported(tx_report_enabled_node, &value, sizeof(value));
-  TEST_ASSERT_EQUAL(0xEE, value);
+  TEST_ASSERT_EQUAL(false, value);
 
-  value = 0x00;
+  value = true;
   attribute_store_set_desired(tx_report_enabled_node, &value, sizeof(value));
   attribute_store_get_reported(tx_report_enabled_node, &value, sizeof(value));
-  TEST_ASSERT_EQUAL(0x00, value);
+  TEST_ASSERT_EQUAL(true, value);
 }
 
 void test_publish_rf_report_null_pointer()
 {
-  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
-  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
+  zwapi_is_pti_supported_ExpectAndReturn(true);
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
 
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_ExpectWithArray(
     NULL,
@@ -193,6 +271,8 @@ void test_publish_rf_report_null_pointer()
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_IgnoreArg_unid();
 
   // Empty attribute store, expect the subscription by group after init
+  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zcl_rf_telemetry_cluster_server_init());
 
   // Verify that ZPC endpoint 0 has a TX Report enabled attribute:
@@ -221,8 +301,8 @@ void test_publish_rf_report_null_pointer()
 
 void test_publish_rf_report()
 {
-  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
-  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
+  zwapi_is_pti_supported_ExpectAndReturn(true);
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_ExpectWithArray(
     NULL,
     &expected_supported_generated_commands,
@@ -230,6 +310,8 @@ void test_publish_rf_report()
   uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_IgnoreArg_unid();
 
   // Empty attribute store, expect the subscription by group after init
+  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zcl_rf_telemetry_cluster_server_init());
 
   // Verify that ZPC endpoint 0 has a TX Report enabled attribute:
@@ -337,4 +419,75 @@ void test_publish_rf_report()
 
   TEST_ASSERT_NOT_NULL(zwave_controller_callbacks->on_frame_transmission);
   zwave_controller_callbacks->on_frame_transmission(false, &tx_report, node_id);
+}
+
+void test_configure_create_pti_enabled_attribute()
+{
+  zwapi_is_pti_supported_ExpectAndReturn(false);
+
+  uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_ExpectWithArray(
+    NULL,
+    &expected_supported_generated_commands,
+    sizeof(expected_supported_generated_commands));
+  uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_IgnoreArg_unid();
+  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
+
+  // Empty attribute store, expect the subscription by group after init
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zcl_rf_telemetry_cluster_server_init());
+
+  // Verify that ZPC endpoint 0 has a PTI enabled attribute:
+  attribute_store_node_t pti_enabled_node
+    = attribute_store_get_node_child_by_type(
+      zpc_endpoint_id_node,
+      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED,
+      0);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, pti_enabled_node);
+
+  pti_enabled_t value = 0xEE;
+
+  // Delete the attribute.
+  attribute_store_delete_node(pti_enabled_node);
+
+  zwapi_is_pti_supported_ExpectAndReturn(true);
+  zwapi_is_pti_enabled_ExpectAndReturn(true);
+  // Ask for init again.
+  uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_ExpectWithArray(
+    NULL,
+    &expected_supported_generated_commands,
+    sizeof(expected_supported_generated_commands));
+  uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_IgnoreArg_unid();
+  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zcl_rf_telemetry_cluster_server_init());
+
+  // Same verifications again, attribute is created and set to value 1:
+  pti_enabled_node = attribute_store_get_node_child_by_type(
+    zpc_endpoint_id_node,
+    DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED,
+    0);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, pti_enabled_node);
+  value = 0xEE;
+  attribute_store_get_reported(pti_enabled_node, &value, sizeof(value));
+  TEST_ASSERT_EQUAL(1, value);
+
+  // Extra init should not do anything special.
+  zwapi_is_pti_supported_ExpectAndReturn(false);
+  uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_ExpectWithArray(
+    NULL,
+    &expected_supported_generated_commands,
+    sizeof(expected_supported_generated_commands));
+  uic_mqtt_dotdot_protocol_controller_rf_telemetry_publish_supported_generated_commands_IgnoreArg_unid();
+  uic_mqtt_dotdot_publish_supported_commands_Expect(NULL, 0);
+  uic_mqtt_dotdot_publish_supported_commands_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zcl_rf_telemetry_cluster_server_init());
+  // verifications again, attribute must be deleted because now we say that
+  // PTI is not supported
+  pti_enabled_node = attribute_store_get_node_child_by_type(
+    zpc_endpoint_id_node,
+    DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_PTI_ENABLED,
+    0);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, pti_enabled_node);
 }

@@ -28,7 +28,7 @@
 #include "ZW_classcmd.h"
 #include "zwave_utils.h"
 #include "zwave_controller_types.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 
 // Test helpers
 #include "zpc_attribute_store_test_helper.h"
@@ -271,9 +271,12 @@ void test_on_nif_attribute_update()
     if (supported_cc_list[i] < COMMAND_CLASS_FIRST_APPLICATION_CC) {
       TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, created_node);
     } else {
-      u8_value = 0;
-      attribute_store_get_reported(created_node, &u8_value, sizeof(u8_value));
-      TEST_ASSERT_EQUAL(1, u8_value);
+      zwave_cc_version_t default_version = 99;
+      TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                        attribute_store_get_reported(created_node,
+                                                     &default_version,
+                                                     sizeof(default_version)));
+      TEST_ASSERT_EQUAL(1, default_version);
     }
   }
 
@@ -832,8 +835,8 @@ void test_zwave_command_class_version_command_class_report_happy_case()
   connection_info.remote.endpoint_id = 23;
 
   // Simulate an incoming report with version cc data
-  uint8_t received_version       = 34;
-  const uint8_t incoming_frame[] = {COMMAND_CLASS_VERSION_V3,
+  zwave_cc_version_t received_version = 34;
+  const uint8_t incoming_frame[]      = {COMMAND_CLASS_VERSION_V3,
                                     VERSION_COMMAND_CLASS_REPORT_V3,
                                     COMMAND_CLASS_DOOR_LOCK,
                                     received_version};
@@ -847,10 +850,12 @@ void test_zwave_command_class_version_command_class_report_happy_case()
                     version_handler.control_handler(&connection_info,
                                                     incoming_frame,
                                                     sizeof(incoming_frame)));
-
-  u8_value = 0;
-  attribute_store_get_reported(cc_version_node, &u8_value, sizeof(u8_value));
-  TEST_ASSERT_EQUAL(received_version, u8_value);
+  received_version = 0;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_get_reported(cc_version_node,
+                                                 &received_version,
+                                                 sizeof(received_version)));
+  TEST_ASSERT_EQUAL(34, received_version);
 }
 
 void test_zwave_command_class_version_command_class_report_too_short()
@@ -899,11 +904,12 @@ void test_zwave_command_class_version_capabilities_report_happy_case()
                                                     incoming_frame,
                                                     sizeof(incoming_frame)));
 
-  u8_value = 0;
-  attribute_store_get_reported(zwave_sw_support_node,
-                               &u8_value,
-                               sizeof(u8_value));
-  TEST_ASSERT_EQUAL(true, u8_value);
+  bool received_value = false;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_get_reported(zwave_sw_support_node,
+                                                 &received_value,
+                                                 sizeof(received_value)));
+  TEST_ASSERT_TRUE(received_value);
   // A bunch of new attributes are created for the Z-Wave Software data
   TEST_ASSERT_EQUAL(8, attribute_store_get_node_child_count(endpoint_id_node));
 }

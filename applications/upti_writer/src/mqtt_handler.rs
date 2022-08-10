@@ -12,17 +12,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 use crate::log_formatter;
-use unify_log_sys::*;
 use unify_config_sys::*;
-use unify_middleware::unify_mqtt_client::{
+use unify_log_sys::*;
+use unify_mqtt_sys::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
 };
 
-use std::io::{BufWriter, Write};
+use std::collections::HashSet;
 use std::fs::File;
 use std::fs::OpenOptions;
+use std::io::{BufWriter, Write};
 use std::path::PathBuf;
-use std::collections::HashSet;
 
 use mockall::*;
 
@@ -36,12 +36,12 @@ pub struct MqttHandler<T: MqttClientTrait> {
     // File Writer
     writer: BufWriter<File>,
     // Adapters list as HashSet
-    adapters_list: HashSet<String>
+    adapters_list: HashSet<String>,
 }
 
 pub struct UptiWriterConfig {
     adapters: Vec<String>,
-    log_path: String
+    log_path: String,
 }
 
 declare_app_name!("upti_writer_mqtt_handler");
@@ -76,12 +76,12 @@ impl ConfigLoader for UptiWriterConfig {
 
         Ok(UptiWriterConfig {
             adapters: adapters,
-            log_path: log_path
+            log_path: log_path,
         })
     }
 }
 
-impl <T: MqttClientTrait> MqttClientCallbacksTrait for MqttHandler<T> {
+impl<T: MqttClientTrait> MqttClientCallbacksTrait for MqttHandler<T> {
     /// public function to be called by the mosquitto fwk on a received message.
     fn on_message(&mut self, msg: MosqMessage) {
         if let Err(e) = self.process_received_message(msg) {
@@ -100,16 +100,17 @@ pub trait MqttHandlerProcessTrait {
     fn process_adapters_list(&mut self, json: json::JsonValue);
 }
 
-impl <T: MqttClientTrait> MqttHandlerProcessTrait for MqttHandler<T> {
+impl<T: MqttClientTrait> MqttHandlerProcessTrait for MqttHandler<T> {
     /// Process adapters list and print adapters info messages
     fn process_adapters_list(&mut self, json: json::JsonValue) {
         if json["value"].is_array() {
             log_info!("Adapters list: ");
             let adapters = &json["value"];
             for adapter in adapters.members() {
-                log_info!("Serial number: {}, IP address: {}, is enabled: {}", 
-                    adapter["SerialNumber"], 
-                    adapter["PTIAddress"], 
+                log_info!(
+                    "Serial number: {}, IP address: {}, is enabled: {}",
+                    adapter["SerialNumber"],
+                    adapter["PTIAddress"],
                     adapter["Enabled"]
                 );
             }
@@ -130,7 +131,7 @@ impl <T: MqttClientTrait> MqttHandlerProcessTrait for MqttHandler<T> {
     }
 }
 
-impl <T: MqttClientTrait> MqttHandler<T> {
+impl<T: MqttClientTrait> MqttHandler<T> {
     pub fn new(client: T, writer_config: UptiWriterConfig) -> Result<Self, sl_status_t> {
         let adapters_list_topic = client.subscribe("ucl/UPTICap/List")?;
         let adapters_trace_packages_topic = client.subscribe("ucl/UPTICap/+/TracePackage")?;
@@ -144,20 +145,20 @@ impl <T: MqttClientTrait> MqttHandler<T> {
         // Build cross platform log file path
         let mut filename = PathBuf::new();
         filename.push(writer_config.log_path);
-        filename.push(
-            format!("capture_{}.log", 
-            chrono::offset::Local::now().format("%H-%M-%S").to_string())
-        );
+        filename.push(format!(
+            "capture_{}.log",
+            chrono::offset::Local::now().format("%H-%M-%S").to_string()
+        ));
         log_info!("Using log file {}", filename.display().to_string());
         let log_path = OpenOptions::new()
             .write(true)
             .create(true)
             .open(filename)
             .expect("Unable to open file");
-             
+
         let mut writer = BufWriter::new(log_path);
 
-        // Add header to log file. It looks Network Analyzer not recognized log files 
+        // Add header to log file. It looks Network Analyzer not recognized log files
         // without this header
         let header = "# (c) Ember - InSight Desktop\n".as_bytes();
         writer.write(header).expect("Unable to write data");
@@ -167,7 +168,7 @@ impl <T: MqttClientTrait> MqttHandler<T> {
             adapters_list_matcher: adapters_list_topic,
             adapters_trace_packages_matcher: adapters_trace_packages_topic,
             writer: writer,
-            adapters_list: adapters_list
+            adapters_list: adapters_list,
         })
     }
 
@@ -193,7 +194,7 @@ impl <T: MqttClientTrait> MqttHandler<T> {
     fn on_trace_package(
         &mut self,
         json: json::JsonValue,
-        topic: &str
+        topic: &str,
     ) -> std::result::Result<(), String> {
         let serial_number = get_serial_number_from_topic(topic)?;
         if self.adapters_list.is_empty() {
@@ -205,17 +206,16 @@ impl <T: MqttClientTrait> MqttHandler<T> {
     }
 
     /// ucl/UPTIcap/List handler
-    fn on_list_update(
-        &mut self, 
-        json: json::JsonValue
-    ) -> std::result::Result<(), String> {
+    fn on_list_update(&mut self, json: json::JsonValue) -> std::result::Result<(), String> {
         self.process_adapters_list(json);
         Ok(())
     }
 
     /// Add record to file
     pub fn add_record(&mut self, record: String) {
-        self.writer.write(record.as_bytes()).expect("Unable to write data");
+        self.writer
+            .write(record.as_bytes())
+            .expect("Unable to write data");
     }
 
     /// Flush writer's buffer
@@ -236,14 +236,14 @@ fn get_serial_number_from_topic(topic: &str) -> std::result::Result<String, Stri
 mod tests {
     use super::*;
     use mockall::predicate::eq;
-    use unify_middleware::unify_mqtt_client::MockMqttClientTrait;
-    use unify_middleware::unify_mqtt_client::MockTopicMatcherTrait;
+    use unify_mqtt_sys::MockMqttClientTrait;
+    use unify_mqtt_sys::MockTopicMatcherTrait;
 
     fn create_mocked_mqtt_handler() -> MqttHandler<MockMqttClientTrait> {
         let mut mqtt_client_mock = MockMqttClientTrait::new();
         let writer_config = UptiWriterConfig {
             adapters: vec!["440138076".to_string(), "440138077".to_string()],
-            log_path: String::new()
+            log_path: String::new(),
         };
         let adapters_list_update_matcher_mock: Result<TopicMatcherType, sl_status_t> =
             Ok(Box::new(MockTopicMatcherTrait::new()));
@@ -270,7 +270,13 @@ mod tests {
     #[test]
     fn test_serial_numbers_in_hashset() {
         let mqtt_writer_handler = create_mocked_mqtt_handler();
-        assert_eq!(mqtt_writer_handler.adapters_list.contains("440138076"), true);
-        assert_eq!(mqtt_writer_handler.adapters_list.contains("440138078"), false);
+        assert_eq!(
+            mqtt_writer_handler.adapters_list.contains("440138076"),
+            true
+        );
+        assert_eq!(
+            mqtt_writer_handler.adapters_list.contains("440138078"),
+            false
+        );
     }
 }

@@ -21,6 +21,7 @@
 #include "sl_status.h"
 #include "zwave_unid.h"
 #include "zwave_controller_types.h"  // for zwave_endpoint_id_t
+#include "ucl_definitions.h"
 
 /**
  * @defgroup zpc_attribute_store_network_helpers ZPC Attribute Store Z-Wave Network Helpers
@@ -121,8 +122,8 @@ attribute_store_node_t
  *          NodeID in the attribute store.
  * @returns ATTRIBUTE_STORE_INVALID_NODE if no matching Z-Wave NodeID node exists
  */
-attribute_store_node_t
-  attribute_store_network_helper_get_zwave_node_id_node(zwave_node_id_t zwave_node_id);
+attribute_store_node_t attribute_store_network_helper_get_zwave_node_id_node(
+  zwave_node_id_t zwave_node_id);
 
 /**
  * @brief Take a UNID/endpoint combination and returns its attribute store node.
@@ -137,6 +138,16 @@ attribute_store_node_t
  */
 attribute_store_node_t attribute_store_network_helper_get_endpoint_node(
   const unid_t node_unid, zwave_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Returns the Attribute Store node for Endpoint 0, under a NodeID node.
+ *
+ * @param node_id_node   The attribute store node for the NodeID.
+
+ * @returns attribute_store_node_t representing Endpoint ID 0 under the NodeID
+ */
+attribute_store_node_t
+  attribute_store_get_endpoint_0_node(attribute_store_node_t node_id_node);
 
 /**
  * @brief Traverse the tree up from a node and find under which UNID/endpoints it is.
@@ -229,6 +240,28 @@ sl_status_t attribute_store_network_helper_get_zwave_ids_from_node(
   attribute_store_node_t node,
   zwave_node_id_t *zwave_node_id,
   zwave_endpoint_id_t *zwave_endpoint_id);
+
+/**
+ * @brief Gets the Attribute Store Endpoint ID node for a given
+ *        Z-Wave NodeID / Endpoint ID in our network
+ *
+ * @param node_id           Z-Wave NodeID to find in the attribute store
+ * @param endpoint_id       Z-Wave Endpoint ID to find in the attribute store.
+ * @returns Attribute store node for the NodeID / Endpoint.
+ */
+attribute_store_node_t
+  zwave_command_class_get_endpoint_id_node(zwave_node_id_t node_id,
+                                           zwave_endpoint_id_t endpoint_id);
+
+/**
+ * @brief Reads the UCL network status of a node, starting from any attribute
+ * under the NodeID in the attribute store.
+ *
+ * @param node     Attribute store node under the NodeID for which we want
+ * to read the network status.
+ */
+node_state_topic_state_t attribute_store_network_helper_get_network_status(
+  attribute_store_node_t node);
 
 #ifdef __cplusplus
 }

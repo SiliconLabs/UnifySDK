@@ -12,6 +12,7 @@
  *****************************************************************************/
 #include "zwave_command_class_agi.h"
 #include "zwave_command_classes_utils.h"
+#include "zwave_command_class_association_helper.h"
 
 // Generic includes
 #include <assert.h>
@@ -19,7 +20,7 @@
 #include <set>
 
 // Interface includes
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_attribute_store.h"
 
@@ -27,8 +28,9 @@
 #include "zwave_command_handler.h"
 #include "zwave_controller_utils.h"  // for EXTENDED_COMMAND_CLASS_IDENTIFIER_START
 #include "zpc_attribute_store_network_helper.h"
+#include "zwave_utils.h"
 
-// UIC component includes
+// Unify component includes
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "attribute_resolver.h"
@@ -46,7 +48,7 @@ namespace
 // List of Command Class/Command pairs that, if sent by association groups,
 // we want to make sure to try to associate ourselves to.
 std::set<std::pair<zwave_command_class_t, zwave_command_t>> agi_listeners;
-}  // Private variables namespace
+}  // namespace
 
 // Function prototypes
 static void zwave_command_class_agi_zpc_group_init();
@@ -85,9 +87,8 @@ static void zwave_command_class_agi_zpc_group_init()
 
   // Set our number of groups in the attribute store
   attribute_store_node_t supported_groupings_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(SUPPORTED_GROUPINGS),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(SUPPORTED_GROUPINGS));
 
   if (supported_groupings_node == ATTRIBUTE_STORE_INVALID_NODE) {
     sl_log_debug(LOG_TAG,
@@ -105,22 +106,11 @@ static void zwave_command_class_agi_zpc_group_init()
        current_group <= NUMBER_OF_SUPPORTED_GROUPS;
        current_group++) {
     attribute_store_node_t group_node
-      = attribute_store_get_node_child_by_value(endpoint_node,
-                                                ATTRIBUTE(GROUP_ID),
-                                                REPORTED_ATTRIBUTE,
-                                                (uint8_t *)&current_group,
-                                                sizeof(current_group),
-                                                0);
+      = attribute_store_emplace(endpoint_node,
+                                ATTRIBUTE(GROUP_ID),
+                                &current_group,
+                                sizeof(current_group));
 
-    if (group_node == ATTRIBUTE_STORE_INVALID_NODE) {
-      sl_log_debug(LOG_TAG,
-                   "Creating Association Group ID %d for the ZPC",
-                   current_group);
-      group_node = attribute_store_add_node(ATTRIBUTE(GROUP_ID), endpoint_node);
-      attribute_store_set_reported(group_node,
-                                   &current_group,
-                                   sizeof(current_group));
-    }
     attribute_store_type_t attribute_list[] = {ATTRIBUTE(GROUP_NAME),
                                                ATTRIBUTE(GROUP_PROFILE),
                                                ATTRIBUTE(GROUP_COMMAND_LIST),
@@ -131,9 +121,8 @@ static void zwave_command_class_agi_zpc_group_init()
                                    COUNT_OF(attribute_list));
     // Ensure that we have no empty group content
     attribute_store_node_t group_content_node
-      = attribute_store_get_node_child_by_type(group_node,
-                                               ATTRIBUTE(GROUP_CONTENT),
-                                               0);
+      = attribute_store_get_first_child_by_type(group_node,
+                                                ATTRIBUTE(GROUP_CONTENT));
     if (attribute_store_is_value_defined(group_content_node, REPORTED_ATTRIBUTE)
         == false) {
       uint8_t marker = ASSOCIATION_MARKER;
@@ -141,24 +130,20 @@ static void zwave_command_class_agi_zpc_group_init()
     }
     // Ensure that the Group Name / Profile / Command list are empty at init
     attribute_store_node_t group_name_node
-      = attribute_store_get_node_child_by_type(group_node,
-                                               ATTRIBUTE(GROUP_NAME),
-                                               0);
+      = attribute_store_get_first_child_by_type(group_node,
+                                                ATTRIBUTE(GROUP_NAME));
     attribute_store_undefine_reported(group_name_node);
     attribute_store_node_t group_profile_node
-      = attribute_store_get_node_child_by_type(group_node,
-                                               ATTRIBUTE(GROUP_PROFILE),
-                                               0);
+      = attribute_store_get_first_child_by_type(group_node,
+                                                ATTRIBUTE(GROUP_PROFILE));
     attribute_store_undefine_reported(group_profile_node);
     attribute_store_node_t group_command_list_node
-      = attribute_store_get_node_child_by_type(group_node,
-                                               ATTRIBUTE(GROUP_COMMAND_LIST),
-                                               0);
+      = attribute_store_get_first_child_by_type(group_node,
+                                                ATTRIBUTE(GROUP_COMMAND_LIST));
     attribute_store_undefine_reported(group_command_list_node);
     attribute_store_node_t group_capacity_node
-      = attribute_store_get_node_child_by_type(group_node,
-                                               ATTRIBUTE(MAX_NODES_SUPPORTED),
-                                               0);
+      = attribute_store_get_first_child_by_type(group_node,
+                                                ATTRIBUTE(MAX_NODES_SUPPORTED));
     association_group_capacity_t group_capacity = MAX_SUPPORTED_NODES_PER_GROUP;
     attribute_store_set_reported(group_capacity_node,
                                  &group_capacity,
@@ -186,9 +171,8 @@ static void
                                               sizeof(group_id),
                                               0);
   attribute_store_node_t group_profile_node
-    = attribute_store_get_node_child_by_type(group_id_node,
-                                             ATTRIBUTE(GROUP_PROFILE),
-                                             0);
+    = attribute_store_get_first_child_by_type(group_id_node,
+                                              ATTRIBUTE(GROUP_PROFILE));
 
   attribute_store_set_reported(group_profile_node, &profile, sizeof(profile));
 }
@@ -213,62 +197,10 @@ static void zwave_command_class_agi_set_zpc_group_name(
                                               sizeof(group_id),
                                               0);
   attribute_store_node_t group_name_node
-    = attribute_store_get_node_child_by_type(group_id_node,
-                                             ATTRIBUTE(GROUP_NAME),
-                                             0);
+    = attribute_store_get_first_child_by_type(group_id_node,
+                                              ATTRIBUTE(GROUP_NAME));
 
   attribute_store_set_reported(group_name_node, name, name_size);
-}
-
-/**
- * @brief Searches if a Command Class/Command pair is in a byte array of
- * Command class/command pairs
- *
- * @param command_class         The Command Class to look for
- * @param command               The Command to look for
- * @param command_list          Pointer to the Command Class/Command byte array
- * @param command_list_length   Length of the command_list array (in bytes)
- *
- * @returns true if the COmmand Class/Command pair has been found, false if not found
- */
-static bool is_command_in_array(zwave_command_class_t command_class,
-                                zwave_command_t command,
-                                const uint8_t *command_list,
-                                uint8_t command_list_length)
-{
-  uint8_t i          = 0;
-  bool command_found = false;
-  while (i < command_list_length) {
-    if (command_list[i] >= EXTENDED_COMMAND_CLASS_IDENTIFIER_START) {
-      // 2 bytes CC:
-      if (i + 2 >= command_list_length) {
-        break;
-      }
-      zwave_command_class_t current_class
-        = (command_list[i] << 8) | (command_list[i + 1]);
-      zwave_command_t current_command = command_list[i + 2];
-      if (command_class == current_class && command == current_command) {
-        command_found = true;
-        break;
-      }
-      // Increment i and try again.
-      i += 3;
-
-    } else {
-      if (i + 1 >= command_list_length) {
-        break;
-      }
-      zwave_command_class_t current_class = command_list[i];
-      zwave_command_t current_command     = command_list[i + 1];
-      if (command_class == current_class && command == current_command) {
-        command_found = true;
-        break;
-      }
-      // Increment i and try again.
-      i += 2;
-    }
-  }
-  return command_found;
 }
 
 /**
@@ -327,30 +259,12 @@ agi_profile_t
                                               0);
 
   attribute_store_node_t profile_node
-    = attribute_store_get_node_child_by_type(group_node,
-                                             ATTRIBUTE(GROUP_PROFILE),
-                                             0);
+    = attribute_store_get_first_child_by_type(group_node,
+                                              ATTRIBUTE(GROUP_PROFILE));
 
   agi_profile_t profile = AGI_RESERVED_PROFILE;
   attribute_store_get_reported(profile_node, &profile, sizeof(profile));
   return profile;
-}
-
-attribute_store_node_t get_group_child_node(zwave_node_id_t node_id,
-                                            zwave_endpoint_id_t endpoint_id,
-                                            association_group_id_t group_id,
-                                            attribute_store_type_t type)
-{
-  attribute_store_node_t endpoint_node
-    = zwave_command_class_get_endpoint_id_node(node_id, endpoint_id);
-  attribute_store_node_t group_id_node
-    = attribute_store_get_node_child_by_value(endpoint_node,
-                                              ATTRIBUTE(GROUP_ID),
-                                              REPORTED_ATTRIBUTE,
-                                              (uint8_t *)&group_id,
-                                              sizeof(group_id),
-                                              0);
-  return attribute_store_get_node_child_by_type(group_id_node, type, 0);
 }
 
 sl_status_t zwave_command_class_agi_add_group_commands(
@@ -368,9 +282,8 @@ sl_status_t zwave_command_class_agi_add_group_commands(
                                               sizeof(group_id),
                                               0);
   attribute_store_node_t group_command_list_node
-    = attribute_store_get_node_child_by_type(group_id_node,
-                                             ATTRIBUTE(GROUP_COMMAND_LIST),
-                                             0);
+    = attribute_store_get_first_child_by_type(group_id_node,
+                                              ATTRIBUTE(GROUP_COMMAND_LIST));
   if (group_command_list_node == ATTRIBUTE_STORE_INVALID_NODE) {
     return SL_STATUS_NOT_FOUND;
   }
@@ -429,9 +342,8 @@ bool zwave_command_class_agi_is_command_allowed_for_group(
                                               sizeof(group_id),
                                               0);
   attribute_store_node_t group_command_list_node
-    = attribute_store_get_node_child_by_type(group_id_node,
-                                             ATTRIBUTE(GROUP_COMMAND_LIST),
-                                             0);
+    = attribute_store_get_first_child_by_type(group_id_node,
+                                              ATTRIBUTE(GROUP_COMMAND_LIST));
 
   uint8_t command_list[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
   uint8_t command_list_length                                = 0;
@@ -463,7 +375,7 @@ bool zwave_command_class_agi_group_contains_listeners(
                            group_id,
                            ATTRIBUTE(GROUP_COMMAND_LIST));
   uint8_t group_command_list[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
-  uint8_t group_command_list_length = 0;
+  uint8_t group_command_list_length                                = 0;
   attribute_store_get_node_attribute_value(command_list_node,
                                            REPORTED_ATTRIBUTE,
                                            group_command_list,
@@ -704,9 +616,8 @@ static sl_status_t zwave_command_class_agi_handle_group_name_get(
                                               0);
   if (group_identifier_node != ATTRIBUTE_STORE_INVALID_NODE) {
     attribute_store_node_t group_name_node
-      = attribute_store_get_node_child_by_type(group_identifier_node,
-                                               ATTRIBUTE(GROUP_NAME),
-                                               0);
+      = attribute_store_get_first_child_by_type(group_identifier_node,
+                                                ATTRIBUTE(GROUP_NAME));
     association_group_name_report_frame_t report = {};
     report.command_class       = COMMAND_CLASS_ASSOCIATION_GRP_INFO_V3;
     report.command             = ASSOCIATION_GROUP_NAME_REPORT_V3;
@@ -716,7 +627,7 @@ static sl_status_t zwave_command_class_agi_handle_group_name_get(
                                              REPORTED_ATTRIBUTE,
                                              report.name,
                                              &name_size);
-    report.name_length = name_size -1;
+    report.name_length = name_size - 1;
     uint8_t report_length
       = offsetof(association_group_name_report_frame_t, name) + name_size - 1;
     return zwave_command_class_send_report(connection_info,
@@ -844,9 +755,8 @@ static sl_status_t zwave_command_class_agi_handle_group_command_list_get(
                                               0);
   if (group_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
     attribute_store_node_t group_command_list_node
-      = attribute_store_get_node_child_by_type(group_id_node,
-                                               ATTRIBUTE(GROUP_COMMAND_LIST),
-                                               0);
+      = attribute_store_get_first_child_by_type(group_id_node,
+                                                ATTRIBUTE(GROUP_COMMAND_LIST));
     association_group_command_list_report_frame_t report_frame = {};
     report_frame.command_class       = COMMAND_CLASS_ASSOCIATION_GRP_INFO_V3;
     report_frame.command             = ASSOCIATION_GROUP_COMMAND_LIST_REPORT_V3;

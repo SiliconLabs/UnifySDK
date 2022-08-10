@@ -18,7 +18,7 @@
  * @defgroup dotdot_mqtt DotDot Serializer
  * @ingroup unify_components
  *
- * @brief This component provides helper functions for parsing and generates UIC
+ * @brief This component provides helper functions for parsing and generates Unify
  * json payloads sent over MQTT.
  *
  * @startuml
@@ -304,35 +304,6 @@ typedef void (*group_dispatch_t)(uint16_t group_id,
  */
 void {{dotdot_prefix}}_set_group_dispatch_callback(group_dispatch_t callback);
 
-
-
-{{#zcl_clusters}}
-{{#if (supportedCluster label)}}
-{{#zcl_commands}}
-/**
- * @brief Publishes an incoming/generated {{label}} command for
- * the {{parent.label}} cluster.
- *
- * Publication will be made at the following topic
- * ucl/by-unid/UNID/{{#unless (clusterWithoutEndpoints parent.label)}}epID/{{/unless}}{{asPublicationName parent.label}}/GeneratedCommands/{{label}}
- *
- * @param unid      The UNID of the node that sent us the command.
- * {{#unless (clusterWithoutEndpoints parent.label)}}
- * @param endpoint  The Endpoint ID of the node that sent us the command.
- * {{/unless}}
- * {{#zcl_command_arguments}}{{#first}}
- * @param fields                Struct pointer with the fields value of the command
- * {{/first}}{{/zcl_command_arguments}}
- */
-void {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_publish_generated_{{asSnakeCaseLower label}}_command(
-  const dotdot_unid_t unid{{#unless (clusterWithoutEndpoints parent.label)}},
-  const dotdot_endpoint_id_t endpoint{{/unless}}{{#zcl_command_arguments}}{{#first}},
-  const {{asCommandFieldsType parent}} *fields
-  {{/first}}{{/zcl_command_arguments}}
-);
-{{/zcl_commands}}
-{{/if}}
-{{/zcl_clusters}}
 
 #ifdef __cplusplus
 }

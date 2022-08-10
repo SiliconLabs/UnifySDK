@@ -1,0 +1,61 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+{{zap_header}}
+
+/**
+ * @defgroup dotdot_mqtt_helpers_ccp DotDot MQTT C++ helpers
+ * @ingroup dotdot_mqtt
+ * @brief Various helper functions for \ref dotdot_mqtt
+ *
+ * @{
+ */
+
+#ifndef DOTDOT_MQTT_HELPERS_HPP
+#define DOTDOT_MQTT_HELPERS_HPP
+
+#include <string>
+#include <functional>
+#include <map>
+
+{{#zcl_enums}}
+#define {{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE 1
+
+/**
+ * @brief Finds the name of a field for the {{label}} enum
+ *
+ * @returns A string representation of the value.
+ */
+std::string {{asSnakeCaseLower label}}_get_enum_value_name(
+  uint32_t value);
+
+/**
+ * @brief Finds the enum number of a string representation for the {{label}} enum
+ *
+ * @returns A number enum value.
+ */
+uint32_t {{asSnakeCaseLower label}}_get_enum_value_number(const std::string &str);
+
+{{/zcl_enums}}
+
+namespace unify {
+/**
+ * @brief Get UNID from MQTT topic
+ *
+ * @param topic MQTT topic
+ * @return std::optional<std::string> either a string with the UNID or
+ * std::nullopt if unable to get the UNID from the topic.
+ */
+std::optional<std::string> unid_from_mqtt_topic(const std::string &topic);
+}
+#endif  //DOTDOT_MQTT_HELPERS_HPP
+/** @} end dotdot_mqtt_helpers */

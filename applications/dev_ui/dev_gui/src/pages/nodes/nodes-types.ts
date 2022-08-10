@@ -23,5 +23,5 @@ export type NodesState = {
   DeviceType: string;
   SortName: string,
   IsSortAcs: boolean,
-  IsExtendedView: boolean
+  IsAllExpanded: boolean
 }

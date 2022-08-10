@@ -18,7 +18,7 @@
 #include <boost/algorithm/string.hpp>
 #include <nlohmann/json.hpp>
 
-// UIC shared includes
+// Unify shared includes
 #include <sl_log.h>
 
 // ZigPC includes

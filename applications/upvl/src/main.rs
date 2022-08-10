@@ -23,13 +23,13 @@ mod upvl_db;
 mod upvl_json;
 use unify_config_sys::*;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{sl_status_t, MqttClientTrait, UnifyMqttClient};
+use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 use unify_sl_status_sys::*;
 use upvl_db::*;
 mod mqtt_handler;
 use mqtt_handler::*;
 
-declare_app_name!("upvl_main");
+declare_app_name!("unify-upvl-main");
 
 const DB_FILE: &str = "/var/lib/uic/upvl.db";
 const CONFIG_VERSION: &str = env!("VERSION_STR");
@@ -64,11 +64,6 @@ fn parse_application_arguments(args: Vec<CString>) -> Result<(), config_status_t
         "File name of UPVL database",
         DB_FILE,
     )
-    .and(config_add_string(
-        "mqtt.client_id",
-        "Client ID for MQTT client",
-        APP_NAME,
-    ))
     .and(config_parse(args, CONFIG_VERSION))
 }
 
@@ -87,7 +82,7 @@ mod test {
 
     use super::*;
     use crate::CString;
-    use unify_config_sys::config_status_t::{CONFIG_STATUS_DOES_NOT_EXIST, CONFIG_STATUS_ERROR};
+    use unify_config_sys::config_status_t::CONFIG_STATUS_ERROR;
 
     #[test]
     fn test_parse_application_arguments() {
@@ -99,6 +94,5 @@ mod test {
             parse_application_arguments(test_args),
             Err(CONFIG_STATUS_ERROR)
         );
-        assert_eq!(UpvlConfig::from_config(), Err(CONFIG_STATUS_DOES_NOT_EXIST));
     }
 }

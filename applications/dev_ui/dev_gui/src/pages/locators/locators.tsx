@@ -1,4 +1,3 @@
-import { Tooltip } from '@material-ui/core';
 import React from 'react';
 import { Button, Col, Modal, Row, Tab, Table, Tabs } from 'react-bootstrap';
 import { LocatorsProps, LocatorsState } from './locators-types';
@@ -10,6 +9,7 @@ import { ClusterTypes } from '../../cluster-types/cluster-types';
 import { ClusterTypeAttrs } from '../../cluster-types/cluster-type-attributes';
 import CommandAttrs from '../../components/command-atts/command-attrs';
 import EditableAttribute from '../../components/editable-attribute/editable-attribute';
+import { Tooltip } from '@mui/material';
 
 class Locators extends React.Component<LocatorsProps, LocatorsState> {
     constructor(props: LocatorsProps) {
@@ -63,7 +63,7 @@ class Locators extends React.Component<LocatorsProps, LocatorsState> {
                                     <td className="vertical-middle">{cluster.Attributes?.Position?.Reported
                                         ? `X:${cluster.Attributes.Position.Reported.DeviationX?.toFixed(4)}, Y:${cluster.Attributes.Position.Reported.DeviationY?.toFixed(4)}, Z:${cluster.Attributes.Position.Reported.DeviationZ?.toFixed(4)}`
                                         : "-"}</td>
-                                    <td className="vertical-middle">{cluster.Attributes?.Position?.Reported.Sequence}</td>
+                                    <td className="vertical-middle">{cluster.Attributes?.Position?.Reported?.Sequence}</td>
                                 </tr>
                             );
                         });

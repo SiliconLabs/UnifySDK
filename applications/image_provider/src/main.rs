@@ -11,8 +11,8 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-//! UIC IMAGE PROVIDER
-//! Is an UIC helper application that advertises and provides OTA images.
+//! Unify IMAGE PROVIDER
+//! Is a Unify helper application that advertises and provides OTA images.
 #![doc(html_no_source)]
 
 mod image_watcher;
@@ -24,10 +24,10 @@ use crate::mqtt_ota::MqttOtaHandler;
 use image_watcher::OtaConfig;
 use unify_config_sys::*;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{sl_status_t, MqttClientTrait, UnifyMqttClient};
+use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 use unify_sl_status_sys::*;
 
-declare_app_name!("uic-image-provider");
+declare_app_name!("unify-image-provider");
 const IMAGE_PATH: &str = "/var/lib/uic-image-provider";
 const POLL_PERIOD: i32 = 15;
 const CONFIG_VERSION: &str = env!("VERSION_STR");
@@ -56,12 +56,11 @@ fn parse_application_arguments() -> std::result::Result<(), config_status_t> {
         .map(|arg| std::ffi::CString::new(arg).unwrap())
         .collect::<Vec<std::ffi::CString>>();
 
-    config_add_string("mqtt.client_id", "override mqtt client name", APP_NAME)
-        .and(config_add_string(
+    config_add_string(
             "image_provider.image_path",
             "image path",
             IMAGE_PATH,
-        ))
+        )
         .and(config_add_int(
             "image_provider.poll_period",
             "poll period",

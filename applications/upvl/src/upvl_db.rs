@@ -32,6 +32,8 @@ use crate::upvl_json::{self, SmartStartEntry};
 use rusqlite::{params, Connection, Error};
 use unify_config_sys::*;
 use unify_log_sys::*;
+use unify_mqtt_sys::sl_status_t;
+use unify_sl_status_sys::{SL_STATUS_FAIL, SL_STATUS_OK};
 pub const CONFIG_KEY_UPVL_DB_FILE: &str = "upvl.datastore_file";
 
 declare_app_name!("upvl_db");
@@ -126,9 +128,10 @@ pub fn is_entry_valid(entry: &serde_json::Value) -> bool {
 }
 
 /// Update database for a provision in deserialized json format.
+/// Returns an sl_status_t
 /// If a provision with this dsk already exists, update the
 /// fields. If it does not exist, create a new provison.
-pub fn db_upsert_entry(db_conn: &Connection, mut entry: SmartStartEntry) {
+pub fn db_upsert_entry(db_conn: &Connection, mut entry: SmartStartEntry) -> sl_status_t {
     // Insert the new DSK
     // If the dsk exists, and there are updates to some of the
     // fields, we need to replace those fields.
@@ -150,12 +153,12 @@ pub fn db_upsert_entry(db_conn: &Connection, mut entry: SmartStartEntry) {
             entry.Payload = new_payload;
         } else {
             log_warning!("Failed to merge SmartStart entries for DSK: {}", entry.DSK);
-            return;
+            return SL_STATUS_FAIL;
         }
     }
     if !is_entry_valid(&entry.Payload) {
         log_warning!("SmartStart Entry invalid: {}", entry.Payload.to_string());
-        return;
+        return SL_STATUS_FAIL;
     }
     match db_conn.execute(
         "INSERT INTO provision (dsk, payload)
@@ -166,8 +169,14 @@ pub fn db_upsert_entry(db_conn: &Connection, mut entry: SmartStartEntry) {
             (":payload", &entry.Payload.to_string()),
         ],
     ) {
-        Ok(_) => log_info!("Updated database for DSK {}.", entry.DSK),
-        Err(err) => log_error!("Error {} when updating table with DSK {}.", err, entry.DSK),
+        Ok(_) => {
+            log_info!("Updated database for DSK {}.", entry.DSK);
+            return SL_STATUS_OK;
+        }
+        Err(err) => {
+            log_error!("Error {} when updating table with DSK {}.", err, entry.DSK);
+            return SL_STATUS_FAIL;
+        }
     }
 }
 
@@ -302,6 +311,15 @@ mod test {
     use crate::upvl_json::SmartStartEntry;
     use rusqlite::{params, Connection};
     use serde_json::json;
+
+    impl UpvlConfig {
+        /// this function should be used in unit tests ONLY
+        pub fn new_for_unit_tests() -> Self {
+            UpvlConfig {
+                db_file: String::from(":memory:"),
+            }
+        }
+    }
 
     /// Helper for testing db_version check
     /// Sets the `db_version` as user_version and creates a table "provision"

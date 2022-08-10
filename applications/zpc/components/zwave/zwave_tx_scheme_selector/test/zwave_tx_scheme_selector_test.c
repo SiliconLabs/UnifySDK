@@ -114,8 +114,8 @@ void test_zwave_tx_scheme_get_node_tx_options()
                     test_tx_options.discard_timeout_ms);
 
   // Test the automatic parameters
-  TEST_ASSERT_EQUAL(false, test_tx_options.valid_parent_session_id);
-  TEST_ASSERT_EQUAL(false, test_tx_options.is_test_frame);
+  TEST_ASSERT_EQUAL(false, test_tx_options.transport.valid_parent_session_id);
+  TEST_ASSERT_EQUAL(false, test_tx_options.transport.is_test_frame);
+  TEST_ASSERT_EQUAL(0, test_tx_options.transport.rf_power);
   TEST_ASSERT_EQUAL(false, test_tx_options.fasttrack);
-  TEST_ASSERT_EQUAL(0, test_tx_options.rf_power);
 }

@@ -1,0 +1,24 @@
+#!/bin/sh
+# postinst script for uic-matter-bridge
+#
+# see: dh_installdeb(1)
+
+set -e
+
+setup_target_for_otbr() {
+    bash -c "cd /usr/share/otbr && INFRA_IF_NAME=@OTBR_INFRA_IF_NAME@ BACKBONE_ROUTER=0 WEB_GUI=0 RELEASE=1 REFERENCE_DEVICE=1 RADIO_URL=spinel+cpc://cpcd_0?iid=2 ./script/setup"
+    bash -c "sed -i \"s/spinel.* /spinel+cpc:\/\/cpcd_0?iid=2 /\" /etc/default/otbr-agent"
+}
+
+enable_otbr_agent_service() {
+    if type "systemctl" >/dev/null; then
+        systemctl --system daemon-reload
+        systemctl enable otbr-agent.service
+        systemctl start otbr-agent.service
+    fi
+}
+
+setup_target_for_otbr
+# enable_otbr_agent_service
+
+exit 0

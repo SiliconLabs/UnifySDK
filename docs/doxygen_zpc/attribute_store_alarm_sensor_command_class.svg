@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="503px" preserveAspectRatio="none" style="width:701px;height:503px;background:#FFFFFF;" version="1.1" viewBox="0 0 701 503" width="701px" zoomAndPan="magnify"><defs><filter height="300%" id="f1tp0ujw10vhv" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="223" x="232.5" y="16.708">Alarm Sensor data model</text><rect fill="#DDDDDD" height="26.2969" rx="5" ry="5" style="stroke:#000000;stroke-width:1.0;" width="510" x="88.5" y="28.9531"/><text fill="#FEFEFE" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="94.5" y="46.9482">ATTRIBUTE(type)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="376" x="216.5" y="46.9482">: ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_type</text><!--MD5=[ea3d5de2a0d35296bc751d5a1b771698]
+cluster Attribute Store--><path d="M6,80.25 C6,70.25 350,70.25 350,70.25 C350,70.25 694,70.25 694,80.25 L694,486.25 C694,496.25 350,496.25 350,496.25 C350,496.25 6,496.25 6,486.25 L6,80.25 " fill="#FFFFFF" filter="url(#f1tp0ujw10vhv)" style="stroke:#000000;stroke-width:1.5;"/><path d="M6,80.25 C6,90.25 350,90.25 350,90.25 C350,90.25 694,90.25 694,80.25 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="118" x="291" y="105.2451">Attribute Store</text><rect fill="#F2FFE6" filter="url(#f1tp0ujw10vhv)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="201" x="244.5" y="112.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="322.5" y="125.3887">NodeID</text><line style="stroke:#000000;stroke-width:1.5;" x1="245.5" x2="444.5" y1="130.2188" y2="130.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="189" x="250.5" y="143.501">Attribute Type = ATTRIBUTE_NODE_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="250.5" y="155.1416">value = Desired: [], Reported: [03]</text><rect fill="#E6FFF7" filter="url(#f1tp0ujw10vhv)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="224" x="233" y="221.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="287.5" y="234.3887">Endpoint Attribute</text><line style="stroke:#000000;stroke-width:1.5;" x1="234" x2="456" y1="239.2188" y2="239.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="212" x="239" y="252.501">Attribute Type = ATTRIBUTE_ENDPOINT_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="239" y="264.1416">value = Desired: [] - Reported: [04]</text><rect fill="#FEFEFE" filter="url(#f1tp0ujw10vhv)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="204" x="14" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="92.5" y="343.3887">Version</text><line style="stroke:#000000;stroke-width:1.5;" x1="15" x2="217" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="192" x="20" y="361.501">Attribute Type = ATTRIBUTE(VERSION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="20" y="373.1416">value = Desired: [] - Reported: [2]</text><rect fill="#FFFFFF" filter="url(#f1tp0ujw10vhv)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="183" x="253.5" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="29" x="330.5" y="343.3887">Type</text><line style="stroke:#000000;stroke-width:1.5;" x1="254.5" x2="435.5" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="171" x="259.5" y="361.501">Attribute Type = ATTRIBUTE(TYPE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="111" x="259.5" y="373.1416">value = Reported: [00]</text><rect fill="#FFFFFF" filter="url(#f1tp0ujw10vhv)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="202" x="472" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="49" x="548.5" y="343.3887">Bitmask</text><line style="stroke:#000000;stroke-width:1.5;" x1="473" x2="673" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="190" x="478" y="361.501">Attribute Type = ATTRIBUTE(BITMASK)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="111" x="478" y="373.1416">value = Reported: [01]</text><rect fill="#FFFFFF" filter="url(#f1tp0ujw10vhv)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="188" x="14" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="34" x="91" y="452.3887">State</text><line style="stroke:#000000;stroke-width:1.5;" x1="15" x2="201" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="176" x="20" y="470.501">Attribute Type = ATTRIBUTE(STATE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="117" x="20" y="482.1416">value = Reported: [255]</text><rect fill="#FFFFFF" filter="url(#f1tp0ujw10vhv)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="204" x="237" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="316.5" y="452.3887">NodeID</text><line style="stroke:#000000;stroke-width:1.5;" x1="238" x2="440" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="192" x="243" y="470.501">Attribute Type = ATTRIBUTE(NODE_ID)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="111" x="243" y="482.1416">value = Reported: [20]</text><rect fill="#FFFFFF" filter="url(#f1tp0ujw10vhv)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="210" x="476" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="554" y="452.3887">Seconds</text><line style="stroke:#000000;stroke-width:1.5;" x1="477" x2="685" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="198" x="482" y="470.501">Attribute Type = ATTRIBUTE(SECONDS)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="111" x="482" y="482.1416">value = Reported: [10]</text><!--MD5=[95477c314ce472250aabd32546a8a81f]
+reverse link node to endpoint--><path codeLine="1056" d="M345,174.8796 C345,190.2226 345,207.4737 345,221.1141 " fill="none" id="node-backto-endpoint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="345,161.4838,341,167.4838,345,173.4838,349,167.4838,345,161.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c4a4e185f2beba9fb9ec0dd52638d41f]
+reverse link endpoint to version--><path codeLine="1057" d="M281.4898,275.9798 C245.5665,293.0786 201.2281,314.1829 167.4896,330.2418 " fill="none" id="endpoint-backto-version" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="293.3224,270.3476,286.1857,269.3146,282.4872,275.5051,289.624,276.5381,293.3224,270.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[dea97374e41647b5d85ba43ed7ae4798]
+reverse link endpoint to type--><path codeLine="1058" d="M345,283.8796 C345,299.2226 345,316.4737 345,330.1141 " fill="none" id="endpoint-backto-type" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="345,270.4838,341,276.4838,345,282.4838,349,276.4838,345,270.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a832fc4dc2d31a8d9711222626bd34f1]
+reverse link type to state--><path codeLine="1059" d="M279.2711,384.9798 C242.0928,402.0786 196.2055,423.1829 161.2884,439.2418 " fill="none" id="type-backto-state" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="291.5171,379.3476,284.3946,378.2206,280.6149,384.3618,287.7374,385.4888,291.5171,379.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f37eb5156f75d31bc2e1a9e421613288]
+reverse link type to nodeid--><path codeLine="1060" d="M342.9011,392.8796 C342.0566,408.2226 341.107,425.4737 340.3561,439.1141 " fill="none" id="type-backto-nodeid" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="343.6385,379.4838,339.3147,385.2549,342.9789,391.4657,347.3026,385.6946,343.6385,379.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[04ad0aa6cbedaf5b096ab0285cd898b6]
+reverse link type to seconds--><path codeLine="1061" d="M410.4516,384.9798 C447.473,402.0786 493.1666,423.1829 527.9365,439.2418 " fill="none" id="type-backto-seconds" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="398.2573,379.3476,402.0271,385.4948,409.1514,384.3793,405.3816,378.2321,398.2573,379.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5ba4388ee92969e5160e43abed86d26b]
+reverse link endpoint to bitmask--><path codeLine="1062" d="M408.2329,275.9798 C443.9993,293.0786 488.1441,314.1829 521.7352,330.2418 " fill="none" id="endpoint-backto-bitmask" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="396.4519,270.3476,400.1398,276.5443,407.2783,275.5234,403.5904,269.3267,396.4519,270.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c586cfdfb17fde546f6f8bcbc5d87620]
+@startuml attribute_store_alarm_sensor_command_class.svg
+title Alarm Sensor data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_ALARM_SENSOR_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Type" as type #FFFFFF
+  type : Attribute Type = ATTRIBUTE(TYPE)
+  type : value = Reported: [00]
+
+  object "Bitmask" as bitmask #FFFFFF
+  bitmask : Attribute Type = ATTRIBUTE(BITMASK)
+  bitmask : value = Reported: [01]
+
+  object "State" as state #FFFFFF
+  state : Attribute Type = ATTRIBUTE(STATE)
+  state : value = Reported: [255]
+
+  object "NodeID" as nodeid #FFFFFF
+  nodeid : Attribute Type = ATTRIBUTE(NODE_ID)
+  nodeid : value = Reported: [20]
+
+  object "Seconds" as seconds #FFFFFF
+  seconds : Attribute Type = ATTRIBUTE(SECONDS)
+  seconds : value = Reported: [10]
+}
+
+node *- - endpoint
+endpoint *- - version
+endpoint *- - type
+type *- - state
+type *- - nodeid
+type *- - seconds
+endpoint *- - bitmask
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: ANSI_X3.4-1968
+Language: en
+Country: US
+--></g></svg>

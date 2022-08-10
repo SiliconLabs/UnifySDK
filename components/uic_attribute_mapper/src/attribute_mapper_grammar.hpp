@@ -32,9 +32,9 @@
 #include <boost/any.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_grammar.hpp>
-#include <boost/spirit/include/phoenix_operator.hpp>
-#include <boost/spirit/include/phoenix_object.hpp>
-#include <boost/spirit/include/phoenix_bind.hpp>
+#include <boost/phoenix/operator.hpp>
+#include <boost/phoenix/object.hpp>
+#include <boost/phoenix/bind.hpp>
 #include "attribute_mapper_ast.hpp"
 
 namespace qi = boost::spirit::qi;
@@ -44,21 +44,18 @@ namespace qi = boost::spirit::qi;
 struct term_rule_operators_ : qi::symbols<char, ast::operator_ids> {
   term_rule_operators_()
   {
-    add("*", ast::operator_ids::operator_mult)("/",
-                                               ast::operator_ids::operator_div)(
-      "<",
-      ast::operator_ids::
-        operator_left_shift)(">",
-                             ast::operator_ids::
-                               operator_right_shift)("|",
-                                                     ast::operator_ids::
-                                                       operator_bitor)("&",
-                                                                       ast::operator_ids::
-                                                                         operator_bitand)("^",
-                                                                                          ast::operator_ids::
-                                                                                            operator_bitxor)("or",
-                                                                                                             ast::operator_ids::
-                                                                                                               operator_or);
+    // clang-format off
+    add("*",  ast::operator_ids::operator_mult)
+       ("/",  ast::operator_ids::operator_div)
+       ("<",  ast::operator_ids::operator_left_shift)
+       (">",  ast::operator_ids::operator_right_shift)
+       ("|",  ast::operator_ids::operator_bitor)
+       ("&",  ast::operator_ids::operator_bitand)
+       ("^",  ast::operator_ids::operator_bitxor)
+       ("or", ast::operator_ids::operator_or)
+       ("%",  ast::operator_ids::operator_modulo)
+       ("**", ast::operator_ids::operator_exponent);
+    // clang-format on
   }
 } term_rule_operators;
 
@@ -67,10 +64,11 @@ struct term_rule_operators_ : qi::symbols<char, ast::operator_ids> {
 struct expr_rule_operators_ : qi::symbols<char, ast::operator_ids> {
   expr_rule_operators_()
   {
-    add("+", ast::operator_ids::operator_plus)(
-      "-",
-      ast::operator_ids::operator_minus)("==",
-                                         ast::operator_ids::operator_comp);
+    // clang-format off
+    add("+",    ast::operator_ids::operator_plus)
+       ("-",    ast::operator_ids::operator_minus)
+       ("==",   ast::operator_ids::operator_comp);
+    // clang-format on
   }
 } expr_rule_operators;
 
@@ -116,6 +114,13 @@ template<typename IteratorType> class SkipperGrammar :
  * @tparam IteratorType
  * @tparam Skipper
  */
+
+template <typename T>
+struct strict_real_policies : boost::spirit::qi::real_policies<T>
+{
+    static bool const expect_dot = true;
+};
+
 template<typename IteratorType, typename Skipper> class UAMGrammar :
   public qi::grammar<IteratorType, ast::ast_tree(), Skipper>
 {
@@ -127,13 +132,16 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     using qi::char_;
     using qi::hex;
     using qi::uint_;
-
+    
     using qi::fail;
     using qi::on_error;
     using namespace qi::labels;
     using boost::phoenix::construct;
+    using boost::spirit::qi::real_parser;
+    using boost::spirit::qi::strict_ureal_policies;
     using boost::phoenix::val;
-
+    //This parser parses real numbers, real numbers must contain a dot
+    real_parser<float, strict_ureal_policies<float> > ureal;
     // definitions, example: def my_var 1234
     // note that here we use a schematic action to build the defs parser.
     // in this way when the parse later passes an identifier the defs parser
@@ -156,7 +164,7 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     condition_rule = "if" > operand_rule > operand_rule > operand_rule;
 
     // any operand type, numbers, attributes conditions etc.
-    operand_rule = "undefined" | ("0x" > hex) | uint_ | attribute_rule
+    operand_rule = "undefined" | ("0x" > hex) | (ureal>>'f')  | uint_ | attribute_rule
                    | condition_rule | defs | ('(' > expression_rule > ')')
                    | (char_('-') > operand_rule) | (char_('+') > operand_rule);
 
@@ -175,6 +183,17 @@ template<typename IteratorType, typename Skipper> class UAMGrammar :
     // This is the entry rule for the grammer, definitions must come first, then scopes
     start_rule = *def_rule > *scope_rule;
 
+    expression_rule.name("expression");
+    term_rule.name("term");
+    operand_rule.name("operand");
+    condition_rule.name("condition");
+    attribute_rule.name("attribute");
+    assignment_rule.name("assignment");
+    scope_rule.name("scope");
+    def_rule.name("def");
+    identifier_rule.name("identifier");
+    attribute_path_element_rule.name("path element");
+    
     // Error handler for the parser
     // See https://www.boost.org/doc/libs/1_76_0/libs/spirit/doc/html/spirit/qi/tutorials/mini_xml___error_handling.html
     on_error<fail>(

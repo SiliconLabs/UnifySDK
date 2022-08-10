@@ -1,6 +1,6 @@
 {
-  "name": "UIC ZigPC ZCL Utilities",
-  "version": "uic-zigpc-zcl-util-v1",
+  "name": "Unify ZigPC ZCL Utilities",
+  "version": "unify-zigpc-zcl-util-v1",
   "override": "addon-override.js",
   "helpers": ["addon-helper.js"],
   "templates": [

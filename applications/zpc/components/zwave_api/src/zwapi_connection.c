@@ -181,7 +181,10 @@ zwapi_connection_status_t zwapi_connection_refresh()
             } else {
               sl_log_warning(
                 LOG_TAG,
-                "Frame parsing received unexpected value. Ignoring\n");
+                "Frame parsing received unexpected value (0x%02X). Ignoring\n",
+                c);
+              retVal         = ZWAPI_CONNECTION_STATUS_TX_TIMEOUT;
+              ack_nak_needed = false;
             }
           }
         }

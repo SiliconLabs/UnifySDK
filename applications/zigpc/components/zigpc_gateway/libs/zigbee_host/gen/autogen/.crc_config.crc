@@ -1,0 +1,22 @@
+#CRC Codes for initially generated config files -- do not modify!
+address-table-config.h=963189739
+concentrator-config.h=1745364590
+counters-config.h=-2020197964
+emlib_core_debug_config.h=171843933
+gateway-config.h=-1102325729
+legacy_common_ash_config.h=-1763532003
+ncp-configuration-config.h=1488244658
+network-creator-config.h=-1826367778
+network-creator-security-config.h=1495048980
+network-steering-config.h=-1636503521
+ota-server-config.h=692995710
+ota-storage-common-config.h=-1397618522
+reporting-config.h=-1556990761
+scan-dispatch-config.h=-305602671
+sl_zigbee_debug_print_config.h=847211325
+trust-center-nwk-key-update-periodic-config.h=1705351622
+unix-library-config.h=-904135903
+update-tc-link-key-config.h=-674955840
+zcl-framework-core-config.h=-291171264
+zcl_config.zap=-97177679
+zigbee_device_config.h=1078044382

@@ -59,66 +59,78 @@ static const zwave_tx_options_t test_tx_options_1
      .discard_timeout_ms  = 0,
      .qos_priority        = 0xFFFF,
      .fasttrack           = true,
-     .is_test_frame       = false,
-     .rf_power            = NORMAL_POWER,
-     .group_id            = ZWAVE_TX_INVALID_GROUP,
-     .is_first_follow_up  = false,
-     .send_follow_ups     = false};
+     .send_follow_ups     = false,
+     .transport           = {
+                 .group_id           = ZWAVE_TX_INVALID_GROUP,
+                 .rf_power           = NORMAL_POWER,
+                 .is_first_follow_up = false,
+                 .is_test_frame      = false,
+     }};
 
 static const zwave_tx_options_t test_tx_options_2
   = {.number_of_responses = 1,
      .discard_timeout_ms  = 400,
      .qos_priority        = 20,
      .fasttrack           = false,
-     .is_test_frame       = false,
-     .rf_power            = NORMAL_POWER,
-     .group_id            = ZWAVE_TX_INVALID_GROUP,
-     .is_first_follow_up  = false,
-     .send_follow_ups     = false};
+     .send_follow_ups     = false,
+     .transport           = {
+                 .is_first_follow_up = false,
+                 .is_test_frame      = false,
+                 .rf_power           = NORMAL_POWER,
+                 .group_id           = ZWAVE_TX_INVALID_GROUP,
+     }};
 
 static const zwave_tx_options_t test_tx_options_2_multi_responses
   = {.number_of_responses = 3,
      .discard_timeout_ms  = 400,
      .qos_priority        = 20,
      .fasttrack           = false,
-     .is_test_frame       = false,
-     .rf_power            = NORMAL_POWER,
-     .group_id            = ZWAVE_TX_INVALID_GROUP,
-     .is_first_follow_up  = false,
-     .send_follow_ups     = false};
+     .send_follow_ups     = false,
+     .transport           = {
+                 .is_first_follow_up = false,
+                 .is_test_frame      = false,
+                 .rf_power           = NORMAL_POWER,
+                 .group_id           = ZWAVE_TX_INVALID_GROUP,
+     }};
 
 static const zwave_tx_options_t test_tx_options_3
   = {.number_of_responses = 0,
      .discard_timeout_ms  = 0,
      .qos_priority        = 10,
      .fasttrack           = false,
-     .is_test_frame       = false,
-     .rf_power            = NORMAL_POWER,
-     .group_id            = ZWAVE_TX_INVALID_GROUP,
-     .is_first_follow_up  = false,
-     .send_follow_ups     = false};
+     .send_follow_ups     = false,
+     .transport           = {
+                 .is_test_frame      = false,
+                 .rf_power           = NORMAL_POWER,
+                 .group_id           = ZWAVE_TX_INVALID_GROUP,
+                 .is_first_follow_up = false,
+     }};
 
 static const zwave_tx_options_t test_tx_options_test_frame
   = {.number_of_responses = 1,
      .discard_timeout_ms  = 0,
      .qos_priority        = 4356,
      .fasttrack           = false,
-     .is_test_frame       = true,
-     .rf_power            = MINUS_3_DBM,
-     .group_id            = ZWAVE_TX_INVALID_GROUP,
-     .is_first_follow_up  = false,
-     .send_follow_ups     = false};
+     .send_follow_ups     = false,
+     .transport           = {
+                 .is_first_follow_up = false,
+                 .is_test_frame      = true,
+                 .rf_power           = MINUS_3_DBM,
+                 .group_id           = ZWAVE_TX_INVALID_GROUP,
+     }};
 
 static const zwave_tx_options_t test_tx_options_group_id
   = {.number_of_responses = 1,
      .discard_timeout_ms  = 0,
      .qos_priority        = 0xFFFF,
      .fasttrack           = false,
-     .is_test_frame       = false,
-     .rf_power            = NORMAL_POWER,
-     .group_id            = 34,
-     .is_first_follow_up  = false,
-     .send_follow_ups     = false};
+     .send_follow_ups     = false,
+     .transport           = {
+                 .is_first_follow_up = false,
+                 .is_test_frame      = false,
+                 .rf_power           = NORMAL_POWER,
+                 .group_id           = 34,
+     }};
 
 static const uint8_t expected_tx_options_singlecast
   = (TRANSMIT_OPTION_ACK | TRANSMIT_OPTION_AUTO_ROUTE

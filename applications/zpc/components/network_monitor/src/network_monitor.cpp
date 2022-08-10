@@ -20,7 +20,8 @@
 // Includes from this component
 #include "network_monitor.h"
 #include "network_monitor_span_persistence.h"
-#include "failing_node_monitor.h"
+#include "keep_sleeping_nodes_alive.h"
+#include "network_monitor_utils.h"
 
 // Interfaces
 #include "ucl_definitions.h"
@@ -40,7 +41,6 @@
 
 // ZPC components
 #include "zpc_endian.h"
-#include "zwave_api.h"
 #include "zwave_utils.h"
 #include "zwave_network_management.h"
 #include "zwave_network_management_state.h"
@@ -56,11 +56,19 @@
 #include "zwave_controller_storage.h"
 #include "zcl_cluster_servers.h"
 #include "ucl_node_state.h"
+#include "zwave_association_toolbox.h"
 
 #include "zpc_attribute_store_network_helper.h"
 
 // Setup the logging
 #define LOG_TAG "network_monitor"
+
+// NodeID attributes that should be created under all NodeIDs.
+constexpr attribute_store_type_t node_id_additional_attributes[]
+  = {ATTRIBUTE_GRANTED_SECURITY_KEYS,
+     ATTRIBUTE_ZWAVE_INCLUSION_PROTOCOL,
+     ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING,
+     ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL};
 
 using namespace attribute_store;
 
@@ -68,8 +76,8 @@ using namespace attribute_store;
  * @brief @ref Contiki Event definitions for the Network Monitor Process.
  */
 typedef enum {
-  /// The ZPC entered a new network
-  NEW_NETWORK_EVENT,
+  /// The network is ready to be operated. (bootstrapping, neigbor discovery, etc. is done)
+  NETWORK_READY_EVENT,
   /// The ZPC received a new NodeID for itself
   NODE_ID_ASSIGNED_EVENT,
   /// A new node was added to the network
@@ -89,14 +97,14 @@ typedef enum {
 } network_monitor_events_t;
 
 /**
- * @brief Struct used for sending event data with event \ref NEW_NETWORK_EVENT.
+ * @brief Struct used for sending event data with event
+ *  \ref NETWORK_READY_EVENT.
  */
-struct new_network_entered_data {
+struct network_data {
   zwave_home_id_t home_id;              ///< Home ID
-  zwave_home_id_t node_id;              ///< Node ID
+  zwave_node_id_t node_id;              ///< Node ID
   zwave_keyset_t granted_keys;          ///< Granted Keys
   zwave_kex_fail_type_t kex_fail_type;  ///< Kex Fail type.
-  bool remove_old_network;              ///< Set to true to remove old network
 };
 
 /**
@@ -119,13 +127,24 @@ struct node_id_assigned_event_data {
   zwave_protocol_t inclusion_protocol;
 };
 
-static std::map<zwave_node_id_t, uint8_t> failed_transmission_data;
-
 // Private variables
-static unid_t zpc_unid;
-static zwave_nodemask_t current_node_list;
+namespace
+{
+// The Current UNID for the ZPC.
+unid_t zpc_unid;
+// Indicates if we initialized a network. We use this variable to know
+// if the old network data should be removed (when changing network after
+// initialized in a previous network)
+// or if command class handlers should be re-init'ed
+bool network_initialized = false;
+// Cache of the list of nodes in our network.
+zwave_nodemask_t current_node_list;
+// List of NodeID and how many consecutive transmit failures they had.
+std::map<zwave_node_id_t, uint8_t> failed_transmission_data;
+}  // namespace
 
 // Forward declarations
+static void network_monitor_remove_attribute_store_home_id(unid_t old_unid);
 static void
   network_monitor_on_node_id_assigned(zwave_node_id_t node_id,
                                       bool included_by_us,
@@ -141,18 +160,10 @@ static void network_monitor_on_node_added(sl_status_t status,
 static void network_monitor_on_nif_updated(attribute_store_node_t updated_node,
                                            attribute_store_change_t change);
 
-static void
-  network_monitor_on_new_network_entered(zwave_home_id_t __home_id,
-                                         zwave_node_id_t __node_id,
-                                         zwave_keyset_t __granted_keys,
-                                         zwave_kex_fail_type_t kex_fail_type);
-
 static attribute network_monitor_add_attribute_store_node(
   zwave_node_id_t node_id, node_state_topic_state_t network_status);
 static void
   network_monitor_remove_attribute_store_node(zwave_node_id_t node_id);
-static void
-  network_monitor_activate_network_resolution(zwave_home_id_t current_home_id);
 
 static void
   network_monitor_on_frame_transmission_failed(zwave_node_id_t node_id);
@@ -170,13 +181,8 @@ static void
                                         const zwapi_tx_report_t *tx_report,
                                         zwave_node_id_t node_id);
 
-static zwave_controller_callbacks_t network_monitor_callbacks
-  = {.on_node_id_assigned    = &network_monitor_on_node_id_assigned,
-     .on_node_deleted        = &network_monitor_on_node_deleted,
-     .on_node_added          = &network_monitor_on_node_added,
-     .on_new_network_entered = &network_monitor_on_new_network_entered,
-     .on_frame_transmission  = &network_monitor_on_frame_transmission,
-     .on_rx_frame_received   = &network_monitor_on_frame_received};
+static void
+  network_monitor_handle_event_network_address_update(network_data *event_data);
 
 static void
   network_monitor_on_frame_transmission(bool transmission_successful,
@@ -217,11 +223,12 @@ static void network_monitor_on_nif_updated(attribute_store_node_t updated_node,
   }
 
   // Fresh NIF created/updated but still undefined, it means we are interviewing.
-  attribute attr_updated_node(updated_node);
-  attribute attr_node_id = attr_updated_node.first_parent(ATTRIBUTE_NODE_ID);
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(updated_node,
+                                                 ATTRIBUTE_NODE_ID);
   process_post(&network_monitor_process,
                NODE_INTERVIEW_INITIATED_EVENT,
-               (void *)(intptr_t)attr_node_id);
+               (void *)(intptr_t)node_id_node);
 }
 
 static void network_monitor_on_node_deleted(zwave_node_id_t node_id)
@@ -251,18 +258,47 @@ static void network_monitor_on_node_added(sl_status_t status,
   process_post(&network_monitor_process, NODE_ADDED_EVENT, event_data);
 }
 
-static void
-  network_monitor_on_new_network_entered(zwave_home_id_t home_id,
-                                         zwave_node_id_t node_id,
-                                         zwave_keyset_t granted_keys,
-                                         zwave_kex_fail_type_t kex_fail_type)
+/**
+ * @brief Generates an event indicating that the Network Addressing has
+ * changed.
+ *
+ * @param home_id       Our current Z-Wave HomeID.
+ * @param node_id       Our current Z-Wave NodeID.
+ */
+static void network_monitor_on_network_address_update(zwave_home_id_t home_id,
+                                                      zwave_node_id_t node_id)
 {
-  new_network_entered_data *data = new new_network_entered_data;
-  data->node_id                  = node_id;
-  data->home_id                  = home_id;
-  data->granted_keys             = granted_keys;
-  data->remove_old_network       = true;
-  process_post(&network_monitor_process, NEW_NETWORK_EVENT, data);
+  // Make sure to remove old network data from the attribute store immediately:
+  network_monitor_remove_attribute_store_home_id(zpc_unid);
+
+  network_data data  = {};
+  data.home_id       = node_id;
+  data.home_id       = home_id;
+  data.granted_keys  = (zwave_keyset_t)0;
+  data.kex_fail_type = (zwave_kex_fail_type_t)0;
+  network_monitor_handle_event_network_address_update(&data);
+}
+
+/**
+ * @brief Generates an event indicating that the Network is ready to be operated
+ *
+ * @param home_id           Our current Z-Wave HomeID.
+ * @param node_id           Our current Z-Wave NodeID.
+ * @param granted_keys      Our granted keys in this network.
+ * @param kex_fail_type     Our KEX fail type in this network.
+ */
+static void
+  network_monitor_on_network_ready(zwave_home_id_t home_id,
+                                   zwave_node_id_t node_id,
+                                   zwave_keyset_t granted_keys,
+                                   zwave_kex_fail_type_t kex_fail_type)
+{
+  network_data *data  = new network_data;
+  data->node_id       = node_id;
+  data->home_id       = home_id;
+  data->granted_keys  = granted_keys;
+  data->kex_fail_type = kex_fail_type;
+  process_post(&network_monitor_process, NETWORK_READY_EVENT, data);
 }
 
 static void
@@ -303,21 +339,25 @@ static void network_monitor_on_frame_received(zwave_node_id_t node_id)
  * @brief Create nodes in the attribute store for all
  * nodes currently in the network
  *
- * This function gets the list of nodes from @ref zwapi
+ * This function gets the list of nodes from @ref zwave_network_management
  * and populates the attribute store tree.
+ *
+ * @param granted_key     The granted keys of the Z-Wave Controller (ZPC)
+ * @param kex_fail_type   The KEX Fail type of the Z-Wave Controller (ZPC)
  */
 static void network_monitor_create_attribute_store_network_nodes(
-  zwave_keyset_t granted_keys)
+  zwave_keyset_t granted_keys, zwave_kex_fail_type_t kex_fail_type)
 {
-  if (SL_STATUS_OK != zwapi_get_full_node_list(current_node_list)) {
-    return;
-  }
+  // Make sure we have the latest node list:
+  zwave_network_management_get_network_node_list(current_node_list);
+
   for (zwave_node_id_t node_id = ZW_MIN_NODE_ID; node_id <= ZW_LR_MAX_NODE_ID;
        node_id++) {
     if (!ZW_IS_NODE_IN_MASK(node_id, current_node_list)) {
       continue;
     }
-    const bool zpc_node = node_id == zwave_network_management_get_node_id();
+
+    const bool zpc_node = (node_id == zwave_network_management_get_node_id());
     // Create the node, set NODE_STATE_TOPIC_STATE_INCLUDED for ZPC node,
     // NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED for all end devices
     attribute attr_node_id_node = network_monitor_add_attribute_store_node(
@@ -326,13 +366,21 @@ static void network_monitor_create_attribute_store_network_nodes(
                : NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED);
     // If it's our own NodeID, make sure to have our granted keys saved
     if (zpc_node) {
-      // Find if we have granted keys under our node_id_node
-      if (attr_node_id_node.child_by_type(ATTRIBUTE_GRANTED_SECURITY_KEYS, 0)
-          == ATTRIBUTE_STORE_INVALID_NODE) {
-        attr_node_id_node.add_node(ATTRIBUTE_GRANTED_SECURITY_KEYS)
-          .set_reported<zwave_keyset_t>(granted_keys);
-      }
+      // Configure our Granted keys and KEX Fail type.
+      attribute_store_set_child_reported(attr_node_id_node,
+                                         ATTRIBUTE_GRANTED_SECURITY_KEYS,
+                                         &granted_keys,
+                                         sizeof(granted_keys));
+      attribute_store_set_child_reported(attr_node_id_node,
+                                         ATTRIBUTE_KEX_FAIL_TYPE,
+                                         &kex_fail_type,
+                                         sizeof(kex_fail_type));
     } else {
+      // Make sure everything we need is under the NodeID:
+      attribute_store_add_if_missing(attr_node_id_node,
+                                     node_id_additional_attributes,
+                                     COUNT_OF(node_id_additional_attributes));
+
       // Create the non-secure NIF attribute under EP0 if it is missing
       attribute attr_endpoint0
         = attr_node_id_node.child_by_type(ATTRIBUTE_ENDPOINT_ID, 0);
@@ -374,11 +422,19 @@ static void network_monitor_pause_nl_nodes_resolution(
   }
 }
 
+/**
+ * @brief Pauses the network (attribute) resolution or all HomeIDs in the
+ * attribute store, and either pauses or activate resolution for our HomeID.
+ *
+ * @param resolve_our_network   Set to true to activate resolution in our network
+ *                              Else it will stay paused.
+ */
 static void
-  network_monitor_activate_network_resolution(zwave_home_id_t current_home_id)
+  network_monitor_activate_network_resolution(bool resolve_our_network)
 {
-  uint8_t home_id_node_index  = 0;
-  attribute_store_node_t root = attribute_store_get_root();
+  zwave_home_id_t current_home_id = zwave_network_management_get_home_id();
+  uint8_t home_id_node_index      = 0;
+  attribute_store_node_t root     = attribute_store_get_root();
   attribute_store_node_t current_network_node
     = attribute_store_get_node_child_by_value(root,
                                               ATTRIBUTE_HOME_ID,
@@ -394,12 +450,16 @@ static void
 
   // Pause the resolutions for all foreign networks
   while (ATTRIBUTE_STORE_INVALID_NODE != network_node) {
-    if (network_node != current_network_node) {
-      attribute_resolver_pause_node_resolution(network_node);
-      sl_log_debug(
-        LOG_TAG,
-        "Pausing foreign HomeID Network resolution. (Attribute ID %d)",
-        network_node);
+    attribute_resolver_pause_node_resolution(network_node);
+    sl_log_debug(LOG_TAG,
+                 "Pausing HomeID Network resolution. (Attribute ID %d)",
+                 network_node);
+    if ((network_node == current_network_node)
+        && (true == resolve_our_network)) {
+      attribute_resolver_resume_node_resolution(network_node);
+      sl_log_debug(LOG_TAG,
+                   "Resuming HomeID Network resolution. (Attribute ID %d)",
+                   network_node);
     }
     network_node = attribute_store_get_node_child_by_type(root,
                                                           ATTRIBUTE_HOME_ID,
@@ -410,8 +470,6 @@ static void
   // Then look at our network... But before we enable resolution, ensure
   // that NL nodes are paused, else we will send commands to sleeping nodes
   network_monitor_pause_nl_nodes_resolution(current_network_node);
-  // Activate the resolution for our network only:
-  attribute_resolver_resume_node_resolution(current_network_node);
 }
 
 /**
@@ -423,8 +481,9 @@ static void
  */
 static void network_monitor_remove_attribute_store_home_id(unid_t old_unid)
 {
-  zwave_home_id_t home_id;
+  zwave_home_id_t home_id = 0;
   zwave_unid_to_home_id(old_unid, &home_id);
+
   sl_log_debug(LOG_TAG,
                "Removing HomeID %08X from the Attribute Store.",
                home_id);
@@ -474,45 +533,26 @@ static attribute network_monitor_add_attribute_store_node(
                node_id);
   unid_t unid;
   zwave_unid_from_node_id(node_id, unid);
-  attribute attr_node_id_node(
-    attribute_store_network_helper_create_node_id_node(unid));
-  if (attr_node_id_node.child_by_type(ATTRIBUTE_ENDPOINT_ID, 0)
-      == static_cast<attribute_store_node_t>(ATTRIBUTE_STORE_INVALID_NODE)) {
-    attr_node_id_node.add_node(ATTRIBUTE_ENDPOINT_ID)
-      .set_reported<zwave_endpoint_id_t>(0);
-  }
-  if (attr_node_id_node.child_by_type(ATTRIBUTE_NETWORK_STATUS, 0)
-      == static_cast<attribute_store_node_t>(ATTRIBUTE_STORE_INVALID_NODE)) {
-    attr_node_id_node.add_node(ATTRIBUTE_NETWORK_STATUS)
-      .set_reported<node_state_topic_state_t>(network_status);
-  }
-  return attr_node_id_node;
-}
+  attribute_store_node_t node_id_node
+    = attribute_store_network_helper_create_node_id_node(unid);
 
-/**
- * @brief Checks if we had a long tx/rx inactivity that would result in
- * an NL node falling asleep.
- *
- * @param node_id         Attribute Store Node for the NodeID
- *
- * @returns true if the last tx/rx is too old and we should consider the node
- *          asleep now.
- */
-static bool network_monitor_is_node_asleep_due_to_inactivity(
-  attribute_store_node_t node_id_node)
-{
-  unsigned long current_time = clock_seconds();
-  unsigned long last_rx_tx   = 0;
-  attribute_store_node_t last_tx_rx_node
-    = attribute_store_get_node_child_by_type(
-      node_id_node,
-      ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
-      0);
-  attribute_store_get_reported(last_tx_rx_node,
-                               &last_rx_tx,
-                               sizeof(last_rx_tx));
+  const zwave_endpoint_id_t endpoint_id = 0;
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_ENDPOINT_ID,
+                                     &endpoint_id,
+                                     sizeof(endpoint_id));
 
-  return ((current_time - last_rx_tx) > 10);
+  attribute_store_node_t network_status_node
+    = attribute_store_get_first_child_by_type(node_id_node,
+                                              ATTRIBUTE_NETWORK_STATUS);
+  if (network_status_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    attribute_store_set_child_reported(node_id_node,
+                                       ATTRIBUTE_NETWORK_STATUS,
+                                       &network_status,
+                                       sizeof(network_status));
+  }
+
+  return attribute(node_id_node);
 }
 
 /**
@@ -638,47 +678,59 @@ static void network_monitor_update_new_node_attribute_store(
   attribute_store_node_t endpoint_id_node
     = attribute_store_network_helper_get_endpoint_node(unid, 0);
   attribute_store_node_t nif_node
-    = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                             ATTRIBUTE_ZWAVE_NIF,
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_NIF);
   if (nif_node == ATTRIBUTE_STORE_INVALID_NODE) {
     attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
   }
 }
 
 // Handler Functions for events
-
 static void
-  network_monitor_handle_event_new_network(new_network_entered_data *event_data)
+  network_monitor_handle_event_network_address_update(network_data *event_data)
 {
-  // If we just started, do not try to clean up the old network
-  if (event_data->remove_old_network) {
-    // Delete the old HomeID node from the attribute store, using the old HomeID
-    network_monitor_remove_attribute_store_home_id(zpc_unid);
-  }
-  // Configure our new HomeID
+  // Configure our new HomeID and set the ZPC UNID
   zwave_unid_set_home_id(event_data->home_id);
-  // Populate the Attribute Store: Important to do it before MQTT
-  // as MQTT publish functions read information from the Attribute Store
-  network_monitor_create_attribute_store_network_nodes(
-    event_data->granted_keys);
-  // Pause node resolution on any other network than ours in the Attribute Store.
-  network_monitor_activate_network_resolution(event_data->home_id);
-  //set the zpc unid
   zwave_unid_from_node_id(event_data->node_id, zpc_unid);
 
-  if (event_data->remove_old_network) {
-    // Reinitialize our command class handlers, it we entered a new network.
-    // This is for our supported CCs that write in the attribute store under the ZPC node.
+  // Clear all the static cache for the network
+  failed_transmission_data.clear();
+
+  // Prep the attribute store with our new address, create our keys and KEX fail.
+  network_monitor_create_attribute_store_network_nodes(
+    event_data->granted_keys,
+    event_data->kex_fail_type);
+
+  // Pause any network resolution, we have to wait for the network to be ready
+  network_monitor_activate_network_resolution(false);
+
+  // Re-Initialize our command class handlers, it we entered a new network.
+  // This is for our supported CCs that write in the attribute store under the ZPC node.
+  if (network_initialized == true) {
     zwave_command_classes_init();
     // Tell the ZCL Cluster servers to init in our new network.
     zcl_cluster_servers_init();
   }
 
+  // Let the component know that we are in a valid network now.
+  network_initialized = true;
+}
+
+static void network_monitor_handle_event_network_ready(network_data *event_data)
+{
+  // Make sure that UNID / ZPC UNID are configured correctly.
+  zwave_unid_set_home_id(event_data->home_id);
+  zwave_unid_from_node_id(event_data->node_id, zpc_unid);
+
+  // Save our updated granted keys/KEX fail
+  network_monitor_create_attribute_store_network_nodes(
+    event_data->granted_keys,
+    event_data->kex_fail_type);
+
+  // Pause node resolution on any other network than ours in the Attribute Store.
+  network_monitor_activate_network_resolution(true);
+
   delete event_data;
-  // Cleaning data structures that contains the zwave_node_id key
-  failed_transmission_data.clear();
-  failing_node_monitor_list_clear();
 }
 
 static void network_monitor_handle_event_node_id_assigned(
@@ -704,7 +756,7 @@ static void
                                  event_data->inclusion_protocol);
 
   // Finally we want to update our local cache of the node list:
-  zwapi_get_full_node_list(current_node_list);
+  zwave_network_management_get_network_node_list(current_node_list);
   // TODO: Add timeout system to detect node interview failed
   delete event_data;
 }
@@ -712,28 +764,25 @@ static void
 static void network_monitor_handle_event_node_interview_initiated(
   attribute_store_node_t node_id_node)
 {
-  attribute att(node_id_node);
-  attribute network_status = att.child_by_type(ATTRIBUTE_NETWORK_STATUS);
-  if (network_status.is_valid()) {
-    try {
-      node_state_topic_state_t node_state
-        = network_status.reported<node_state_topic_state_t>();
-      if (node_state == NODE_STATE_TOPIC_STATE_OFFLINE) {
-        network_status.set_reported<node_state_topic_state_t>(
-          NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL);
-      } else {
-        network_status.set_reported<node_state_topic_state_t>(
-          NODE_STATE_TOPIC_INTERVIEWING);
-      }
-    } catch (std::exception &ex) {
-      network_status.set_reported<node_state_topic_state_t>(
-        NODE_STATE_TOPIC_INTERVIEWING);
-      sl_log_warning(LOG_TAG,
-                     "Cannot read the previous network status of a node. "
-                     "Current status set to 'Interviewing' %s",
-                     ex.what());
-    }
+  attribute_store_node_t network_status_node
+    = attribute_store_get_first_child_by_type(node_id_node,
+                                              ATTRIBUTE_NETWORK_STATUS);
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  attribute_store_get_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+
+  if (network_status == NODE_STATE_TOPIC_STATE_OFFLINE) {
+    network_status = NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL;
+  } else {
+    network_status = NODE_STATE_TOPIC_INTERVIEWING;
   }
+
+  // Network status will also be created, if it was not here.
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
 
   // Register the listener for the node interview
   attribute_resolver_set_resolution_listener(
@@ -744,22 +793,21 @@ static void network_monitor_handle_event_node_interview_initiated(
 static void network_monitor_handle_event_node_interview_done(
   attribute_store_node_t node_id_node)
 {
-  attribute att(node_id_node);
   attribute_resolver_clear_resolution_listener(
     node_id_node,
     network_monitor_node_id_resolution_listener);
-  // update the NetworkStatus
-  if (attribute network_status = att.child_by_type(ATTRIBUTE_NETWORK_STATUS);
-      network_status.is_valid()) {
-    network_status.set_reported<node_state_topic_state_t>(
-      NODE_STATE_TOPIC_STATE_INCLUDED);
-  }
+
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_INCLUDED;
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
 }
 
 static void
   update_last_received_frame_timestamp(attribute_store_node_t node_id_node)
 {
-  unsigned long current_time = clock_seconds();
+  clock_time_t current_time = clock_seconds();
   attribute_store_set_child_reported(node_id_node,
                                      ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
                                      &current_time,
@@ -778,15 +826,12 @@ static void network_monitor_handle_event_node_deleted(zwave_node_id_t node_id)
   // Cleaning data structures that contains the zwave_node_id key
   auto it_failed_transmission = failed_transmission_data.find(node_id);
   if (it_failed_transmission != failed_transmission_data.end()) {
-    stop_monitoring_failing_node(node_id);
     failed_transmission_data.erase(it_failed_transmission);
   }
-
-  // Unretain anything we published about the node:
-  unid_t unid = {};
-  zwave_unid_from_node_id(node_id, unid);
-  std::string topic_regex = "ucl/by-unid/" + std::string(unid);
-  uic_mqtt_unretain(topic_regex.c_str());
+  sl_log_debug(LOG_TAG,
+               "Removing NodeID %d from all the associations in network.",
+               node_id);
+  remove_desired_node_id_from_all_associations_in_network(node_id);
 }
 
 static void network_monitor_handle_event_failed_frame_transmission(
@@ -809,7 +854,7 @@ static void network_monitor_handle_event_failed_frame_transmission(
   // and we did not manage to talk to them in the last 10s.
   if (operating_mode == OPERATING_MODE_NL) {
     if (true
-        == network_monitor_is_node_asleep_due_to_inactivity(node_id_node)) {
+        == network_monitor_is_node_asleep_due_to_inactivity(node_id_node, 10)) {
       sl_log_debug(LOG_TAG, "NodeID %d is now considered asleep", node_id);
       attribute_resolver_pause_node_resolution(node_id_node);
     }
@@ -835,7 +880,6 @@ static void network_monitor_handle_event_failed_frame_transmission(
   // Mark the node as offline:
   network_monitor_mark_node_as_offline(node_id_node);
   attribute_resolver_pause_node_resolution(node_id_node);
-  start_monitoring_failing_node(node_id);
 }
 
 static void network_monitor_handle_event_success_frame_transmission(
@@ -856,7 +900,6 @@ static void network_monitor_handle_event_success_frame_transmission(
     // Failing node monitor does not monitor NL nodes so no need of stopping
     if (OPERATING_MODE_NL != zwave_get_operating_mode(node_id)) {
       attribute_resolver_resume_node_resolution(node_id_node);
-      stop_monitoring_failing_node(node_id);
     }
   }
 
@@ -945,21 +988,34 @@ static void
 ////////////////////////////////////////////////////////////////////////////////
 // Shared functions
 ////////////////////////////////////////////////////////////////////////////////
+// Pack our functions in 2 const structs:
+static const zwave_controller_storage_callback_t
+  zwave_controller_storage_callbacks
+  = {
+    .set_node_as_s2_capable = zwave_security_validation_set_node_as_s2_capable,
+    .is_node_S2_capable     = zwave_security_validation_is_node_s2_capable,
+    .get_node_granted_keys  = zwave_get_node_granted_keys,
+    .get_inclusion_protocol = zwave_get_inclusion_protocol,
+    .zwave_controller_storage_cc_version = zwave_node_get_command_class_version,
+};
+
+static const zwave_controller_callbacks_t network_monitor_callbacks
+  = {.on_node_id_assigned       = &network_monitor_on_node_id_assigned,
+     .on_node_deleted           = &network_monitor_on_node_deleted,
+     .on_node_added             = &network_monitor_on_node_added,
+     .on_network_address_update = &network_monitor_on_network_address_update,
+     .on_new_network_entered    = &network_monitor_on_network_ready,
+     .on_frame_transmission     = &network_monitor_on_frame_transmission,
+     .on_rx_frame_received      = &network_monitor_on_frame_received};
+
 void network_state_monitor_init()
 {
-  static zwave_controller_storage_callback_t zwave_controller_storage_callbacks
-    = {
-      .on_set_node_as_s2_capable
-      = zwave_security_validation_set_node_as_s2_capable,
-      .on_verify_node_is_s2_capable
-      = zwave_security_validation_is_node_s2_capable,
-      .on_get_node_granted_keys  = zwave_get_node_granted_keys,
-      .on_get_inclusion_protocol = zwave_get_inclusion_protocol,
-      .on_zwave_controller_storage_cc_version
-      = zwave_node_get_command_class_version,
-    };
+  initialize_keep_alive_for_sleeping_nodes();
+
+  // Z-Wave Controller callbacks.
   zwave_controller_storage_callback_register(
     &zwave_controller_storage_callbacks);
+  zwave_controller_register_callbacks(&network_monitor_callbacks);
 
   // Monitor if NL nodes should be considered as failed, listening to
   // Wake Up interval settings and Last Rx/Tx timestampts
@@ -973,31 +1029,34 @@ void network_state_monitor_init()
     ATTRIBUTE_LAST_RECEIVED_FRAME_TIMESTAMP,
     REPORTED_ATTRIBUTE);
 
-  zwave_controller_register_callbacks(&network_monitor_callbacks);
-  memset(current_node_list, 0, sizeof(zwave_nodemask_t));
-
   // Listens to NIF creations, so we can detect node interviews
   attribute_store_register_callback_by_type(network_monitor_on_nif_updated,
                                             ATTRIBUTE_ZWAVE_NIF);
 
+  // Clear our cached variables.
+  memset(current_node_list, 0, sizeof(zwave_nodemask_t));
+  memset(zpc_unid, '\0', sizeof(zpc_unid));
+  network_initialized = false;
+
   // Enable the use of UNIDs from other components
-  zwave_unid_set_home_id(zwave_network_management_get_home_id());
-  new_network_entered_data *data = new new_network_entered_data;
-  data->node_id                  = zwave_network_management_get_node_id();
-  data->home_id                  = zwave_network_management_get_home_id();
+  network_data data = {};
+  data.node_id      = zwave_network_management_get_node_id();
+  data.home_id      = zwave_network_management_get_home_id();
   // At init, if our keys are not in the datastore, we do not want
   // to create a wrong granted_key data, so we ask zwave_network_management()
-  data->granted_keys       = zwave_network_management_get_granted_keys();
-  data->remove_old_network = false;
+  data.granted_keys  = zwave_network_management_get_granted_keys();
+  data.kex_fail_type = (zwave_kex_fail_type_t)0;
 
   // Execute directly, do not post an event for this, other components
   // initializing right after are depending on us doing the job
-  network_monitor_handle_event_new_network(
-    static_cast<new_network_entered_data *>(data));
+  network_monitor_handle_event_network_address_update(&data);
 
   // Restore the SPAN/MPAN data to S2
   network_monitor_restore_span_table_data();
   network_monitor_restore_mpan_table_data();
+
+  // Activate network resolution
+  network_monitor_activate_network_resolution(true);
 }
 
 uint8_t *network_monitor_get_cached_current_node_list()
@@ -1028,9 +1087,9 @@ PROCESS_THREAD(network_monitor_process, ev, data)
         // Do not do anything with this event, just wait to go down.
         break;
 
-      case NEW_NETWORK_EVENT:
-        network_monitor_handle_event_new_network(
-          static_cast<new_network_entered_data *>(data));
+      case NETWORK_READY_EVENT:
+        network_monitor_handle_event_network_ready(
+          static_cast<network_data *>(data));
         break;
 
       case NODE_ID_ASSIGNED_EVENT:

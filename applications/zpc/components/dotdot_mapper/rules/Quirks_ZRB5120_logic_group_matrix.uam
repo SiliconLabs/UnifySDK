@@ -1,0 +1,19 @@
+
+// Special maps to help controlling the ZRB5120 Logic Group Matrix
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+
+def zwCOLOR_SWITCH_VERSION 0x3301
+
+def ZRB5120_logic_group_matrix ((r'zwMANUFACTURER_ID == 0x0234) & (r'zwPRODUCT_TYPE_ID == 0x0003) & (r'zwPRODUCT_ID == 0x0325))
+
+scope 0 {
+
+// ZRB5120 Logic Group Matrix does not answer Command Class Version Get for Color Switch.
+// it supports v1:
+r'zwCOLOR_SWITCH_VERSION =
+  if ZRB5120_logic_group_matrix 1
+  undefined
+
+}

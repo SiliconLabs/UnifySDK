@@ -18,7 +18,7 @@
 #include <string.h>
 
 // Includes from the Z-Wave Controller
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_controller_transport.h"
 #include "zwave_controller_internal.h"
@@ -32,7 +32,7 @@
 // Contiki
 #include "process.h"
 
-// UIC Includes
+// Unify Includes
 #include "sl_log.h"
 #define LOG_TAG "zwave_api_transport"
 
@@ -81,7 +81,8 @@ static void zwave_api_transport_start_transmission(
 static void zwave_api_transport_emergency_timeout_step()
 {
   sl_log_error(LOG_TAG,
-               "Emergency timer fired! Aborting transmission for element %d\n",
+               "Emergency timer fired! "
+               "Aborting transmission for element id=%p\n",
                state.parent_session_id);
 
   if (state.awaiting_nif == true) {
@@ -162,8 +163,7 @@ void zwave_api_send_data_callback(uint8_t status, zwapi_tx_report_t *tx_status)
   // We want to notify the Z-Wave Controller about transmission status of a frame.
   // This enables the controller to track when a given node is not reachable.
   if (state.remote_node_id != INVALID_NODE_ID) {
-    if ((status == TRANSMIT_COMPLETE_OK)
-        || (status == TRANSMIT_COMPLETE_VERIFIED)) {
+    if (IS_TRANSMISSION_SUCCESSFUL(status)) {
       zwave_controller_on_frame_transmission(true,
                                              tx_status,
                                              state.remote_node_id);
@@ -303,12 +303,12 @@ static sl_status_t zwave_api_send_data(
     }
 
     sl_status_t transmit_status;
-    if (tx_options->is_test_frame == true) {
+    if (tx_options->transport.is_test_frame == true) {
       // Do not count transmit success/failures with test frames
       state.remote_node_id = INVALID_NODE_ID;
       transmit_status
         = zwapi_send_test_frame(info->remote.node_id,
-                                tx_options->rf_power,
+                                tx_options->transport.rf_power,
                                 &zwave_api_send_test_frame_callback);
     } else {
       transmit_status = zwapi_send_data(info->remote.node_id,
@@ -340,7 +340,7 @@ static sl_status_t zwave_api_send_data(
     // If the tx_options indicate a group ID for a multicast frame
     // (other than the connection_info.remote), it means that it is a multicast
     // frame to be sent as a broadcast
-    if (tx_options->group_id != ZWAVE_TX_INVALID_GROUP) {
+    if (tx_options->transport.group_id != ZWAVE_TX_INVALID_GROUP) {
       zwapi_tx_options |= TRANSMIT_OPTION_MULTICAST_AS_BROADCAST;
     }
 
@@ -414,7 +414,7 @@ sl_status_t zwave_api_transport_init()
 
   // Register our transport to the Z-Wave Controller Transport
   zwave_controller_transport_t transport = {0};
-  transport.priority                     = 1;
+  transport.priority                     = 0;
   transport.command_class     = 0x00;  // Does not matter, we cannot decapsulate
   transport.version           = 0x00;  // Does not matter, we cannot decapsulate
   transport.on_frame_received = NULL;  // We cannot decapsulate
@@ -422,6 +422,15 @@ sl_status_t zwave_api_transport_init()
   transport.abort_send_data   = &zwave_api_abort_send_data;
 
   return zwave_controller_transport_register(&transport);
+}
+
+void zwave_api_transport_reset()
+{
+  sl_log_debug(LOG_TAG, "Resetting the Z-Wave API transport.");
+  if (state.transmission_ongoing == true) {
+    zwave_api_send_data_callback(TRANSMIT_COMPLETE_FAIL, NULL);
+  }
+  zwave_api_reset_state();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

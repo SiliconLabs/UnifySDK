@@ -22,8 +22,7 @@ target_include_directories(
   PRIVATE src)
 target_link_libraries(
   zwave_command_handler
-  PUBLIC zwave_controller zwave_security_validation zwave_network_management
-         zwave_rx zwave_definitions)
+  PUBLIC zwave_controller zwave_security_validation)
 install(TARGETS zwave_command_handler LIBRARY DESTINATION lib)
 
 # Mocks

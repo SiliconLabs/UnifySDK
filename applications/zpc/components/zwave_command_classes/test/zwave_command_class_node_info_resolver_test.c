@@ -10,604 +10,421 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-//Generic includes
-#include "unity.h"
-#include <string.h>
-
 // Component being tested
 #include "zwave_command_class_node_info_resolver.h"
-#include "zwave_command_class_node_info_resolver.c"
+
+// Generic includes
+#include <string.h>
+
+// Includes from other components
+#include "datastore.h"
+#include "attribute_store.h"
+#include "attribute_store_helper.h"
+#include "attribute_store_fixt.h"
+
+// Interface includes
+#include "attribute_store_defined_attribute_types.h"
+#include "ZW_classcmd.h"
+#include "zwave_utils.h"
+#include "zwave_controller_types.h"
+
+// Test helpers
+#include "zpc_attribute_store_test_helper.h"
 
 // Mock includes
-#include "zwave_controller_utils_mock.h"
-#include "zwave_controller_keyset_mock.h"
-#include "zwave_utils_mock.h"
+#include "attribute_resolver_mock.h"
 #include "zwave_controller_callbacks_mock.h"
 #include "zwave_controller_keyset_mock.h"
-#include "attribute_store_mock.h"
-#include "zpc_attribute_store_mock.h"
-#include "zpc_attribute_store_network_helper_mock.h"
-#include "attribute_resolver_mock.h"
-#include "attribute_store_helper_mock.h"
-#include "zwave_unid_mock.h"
-#include "zwave_utils_mock.h"
-#include "zwave_security_validation_mock.h"
+#include "zwave_controller_utils_mock.h"
+#include "zwave_controller_storage_mock.h"
+#include "zwave_network_management_mock.h"
 
-// Static test variables
-static unid_t test_unid = "zw-38427";
-static attribute_store_node_t test_endpoint_id_node;
-static attribute_store_node_t test_node_id_node;
-static zwave_keyset_t test_supporting_node_keys;
-static zwave_controller_encapsulation_scheme_t test_supporting_node_scheme;
-static zwave_endpoint_id_t test_endpoint_id;
-static zwave_node_id_t test_node_id;
+// Static variables
+static attribute_resolver_function_t resolve_secure_node_info = NULL;
+static attribute_resolver_function_t resolve_node_info        = NULL;
 
-static uint8_t received_frame[ZWAVE_MAX_FRAME_SIZE];
-static uint16_t received_frame_length;
+static const zwave_controller_callbacks_t *controller_callbacks = NULL;
+
+static uint8_t received_frame[255]  = {};
+static uint16_t received_frame_size = 0;
+
+// Stub functions
+static sl_status_t
+  attribute_resolver_register_rule_stub(attribute_store_type_t node_type,
+                                        attribute_resolver_function_t set_func,
+                                        attribute_resolver_function_t get_func,
+                                        int cmock_num_calls)
+{
+  TEST_ASSERT_NULL(set_func);
+  if (node_type == ATTRIBUTE_ZWAVE_NIF) {
+    resolve_node_info = get_func;
+  } else if (node_type == ATTRIBUTE_ZWAVE_SECURE_NIF) {
+    resolve_secure_node_info = get_func;
+  } else {
+    TEST_FAIL_MESSAGE("Attribute rule registration on a wrong type");
+  }
+  return SL_STATUS_OK;
+}
+
+sl_status_t zwave_controller_register_callbacks_stub(
+  const zwave_controller_callbacks_t *callbacks, int cmock_num_calls)
+{
+  controller_callbacks = callbacks;
+  TEST_ASSERT_NOT_NULL(controller_callbacks->on_node_information);
+  return SL_STATUS_OK;
+}
 
 /// Setup the test suite (called once before all test_xxx functions are called)
-void suiteSetUp() {}
-
-/// Called before each and every test
-void setUp()
+void suiteSetUp()
 {
-  memset(received_frame, 0, sizeof(received_frame));
-  received_frame_length = 0;
+  datastore_init(":memory:");
+  attribute_store_init();
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
+  attribute_store_teardown();
+  datastore_teardown();
   return num_failures;
 }
 
-static void create_secure_nifs_if_missing_happy_case_verification(
-  attribute_store_node_t node_id_node)
+static void init_verification()
 {
-  test_node_id = 34;
-  attribute_store_get_reported_ExpectAndReturn(node_id_node,
-                                               NULL,
-                                               sizeof(zwave_node_id_t),
-                                               SL_STATUS_OK);
-  attribute_store_get_reported_IgnoreArg_value();
-  attribute_store_get_reported_ReturnMemThruPtr_value(&test_node_id,
-                                                      sizeof(test_node_id));
+  zwave_controller_register_callbacks_Stub(
+    &zwave_controller_register_callbacks_stub);
 
-  get_zpc_node_id_node_ExpectAndReturn(2);
+  // Rule registration
+  attribute_resolver_register_rule_Stub(&attribute_resolver_register_rule_stub);
 
-  test_supporting_node_keys = 0x34;
-  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
-  zwave_get_node_granted_keys_IgnoreArg_keys();
-  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
+  resolve_secure_node_info = NULL;
+  resolve_node_info        = NULL;
+  controller_callbacks     = NULL;
+  memset(received_frame, 0, sizeof(received_frame));
+  received_frame_size = 0;
 
-  test_supporting_node_scheme = 38;
-  zwave_controller_get_highest_encapsulation_ExpectAndReturn(
-    test_supporting_node_keys,
-    test_supporting_node_scheme);
-
-  zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
-    test_supporting_node_scheme,
-    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0,
-    true);
-
-  test_endpoint_id_node = 38;
-  attribute_store_get_node_child_by_type_ExpectAndReturn(node_id_node,
-                                                         ATTRIBUTE_ENDPOINT_ID,
-                                                         0,
-                                                         test_endpoint_id_node);
-  attribute_store_add_if_missing_Expect(test_endpoint_id_node, NULL, 1);
-  attribute_store_add_if_missing_IgnoreArg_attributes();
-
-  // No more enpoints
-  attribute_store_get_node_child_by_type_ExpectAndReturn(
-    node_id_node,
-    ATTRIBUTE_ENDPOINT_ID,
-    1,
-    ATTRIBUTE_STORE_INVALID_NODE);
-}
-
-void test_zwave_command_class_node_info_resolver_init()
-{
-  // We expect to know which functions/variables are
-  // registered since we include the .c file directly
-  zwave_controller_register_callbacks_ExpectAndReturn(
-    &zwave_controller_callbacks,
-    SL_STATUS_OK);
-
-  attribute_resolver_register_rule_ExpectAndReturn(ATTRIBUTE_ZWAVE_NIF,
-                                                   NULL,
-                                                   &resolve_node_info,
-                                                   SL_STATUS_OK);
-
-  attribute_resolver_register_rule_ExpectAndReturn(ATTRIBUTE_ZWAVE_SECURE_NIF,
-                                                   NULL,
-                                                   &resolve_secure_node_info,
-                                                   SL_STATUS_OK);
-
-  attribute_store_register_callback_by_type_ExpectAndReturn(
-    &on_non_secure_nif_update,
-    ATTRIBUTE_ZWAVE_NIF,
-    SL_STATUS_OK);
-
-  attribute_store_register_callback_by_type_ExpectAndReturn(
-    &on_granted_security_key_update,
-    ATTRIBUTE_GRANTED_SECURITY_KEYS,
-    SL_STATUS_OK);
-
+  // Call init
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     zwave_command_class_node_info_resolver_init());
 }
 
-void test_zwave_command_class_resolve_node_info_root_device()
+/// Called before each and every test
+void setUp()
 {
-  attribute_store_node_t test_updated_node = 0x87;
-  const uint8_t expected_frame[]
-    = {ZWAVE_PROTOCOL_COMMAND_CLASS, ZWAVE_NODE_INFO_REQUEST_COMMAND};
+  zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
+  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
+  zpc_attribute_store_test_helper_create_network();
+  zwave_unid_set_home_id(home_id);
 
-  attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
-                                                ATTRIBUTE_ZWAVE_NIF);
+  init_verification();
+}
 
-  attribute_store_node_t test_node_id_node = 23;
-  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_updated_node,
-                                                             ATTRIBUTE_NODE_ID,
-                                                             test_node_id_node);
-  get_zpc_node_id_node_ExpectAndReturn(test_node_id_node + 1);
+void test_resolve_node_info_endpoint_4()
+{
+  attribute_store_node_t nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
 
-  // The function should find out the endpoint ID now
-  test_endpoint_id = 0;
-  attribute_store_network_helper_get_endpoint_id_from_node_ExpectAndReturn(
-    test_updated_node,
-    NULL,
-    SL_STATUS_OK);
-  attribute_store_network_helper_get_endpoint_id_from_node_IgnoreArg_zwave_endpoint_id();
-  attribute_store_network_helper_get_endpoint_id_from_node_ReturnThruPtr_zwave_endpoint_id(
-    &test_endpoint_id);
+  TEST_ASSERT_NOT_NULL(resolve_node_info);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    resolve_node_info(nif_node, received_frame, &received_frame_size));
 
-  // Call the function to test
-  TEST_ASSERT_EQUAL(SL_STATUS_OK,
-                    resolve_node_info(test_updated_node,
-                                      received_frame,
-                                      &received_frame_length));
-
-  // It should have returned the request NIF frame.
-  TEST_ASSERT_EQUAL(sizeof(request_node_info_frame_t), received_frame_length);
-  // We can only verify the payload of the command
+  const uint8_t expected_frame[] = {COMMAND_CLASS_MULTI_CHANNEL_V4,
+                                    MULTI_CHANNEL_CAPABILITY_GET_V4,
+                                    endpoint_id};
+  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
                                 received_frame,
-                                sizeof(request_node_info_frame_t));
+                                received_frame_size);
 }
 
-void test_zwave_command_class_resolve_node_info_zpc_node()
+void test_resolve_node_info_endpoint_0()
 {
-  attribute_store_node_t test_updated_node = 0x87;
-  attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
-                                                ATTRIBUTE_ZWAVE_NIF);
+  attribute_store_node_t nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
+  zwave_endpoint_id_t new_endpoint_id = 0;
+  attribute_store_set_reported(endpoint_id_node,
+                               &new_endpoint_id,
+                               sizeof(new_endpoint_id));
 
-  attribute_store_node_t test_node_id_node = 23;
-  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_updated_node,
-                                                             ATTRIBUTE_NODE_ID,
-                                                             test_node_id_node);
-  get_zpc_node_id_node_ExpectAndReturn(test_node_id_node);
-  attribute_store_delete_node_ExpectAndReturn(test_updated_node, SL_STATUS_OK);
+  TEST_ASSERT_NOT_NULL(resolve_node_info);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    resolve_node_info(nif_node, received_frame, &received_frame_size));
 
-  // Call the function to test
-  TEST_ASSERT_EQUAL(SL_STATUS_ALREADY_EXISTS,
-                    resolve_node_info(test_updated_node,
-                                      received_frame,
-                                      &received_frame_length));
-
-  TEST_ASSERT_EQUAL(0, received_frame_length);
+  const uint8_t expected_frame[] = {0x01, 0x02};
+  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
+                                received_frame,
+                                received_frame_size);
 }
 
-void test_zwave_command_class_resolve_node_info_attribute_store_fails()
+void test_resolve_node_info_zpc()
 {
-  attribute_store_node_t test_updated_node = 123;
+  attribute_store_node_t nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, zpc_endpoint_id_node);
 
-  attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
-                                                ATTRIBUTE_ZWAVE_NIF);
+  TEST_ASSERT_NOT_NULL(resolve_node_info);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_ALREADY_EXISTS,
+    resolve_node_info(nif_node, received_frame, &received_frame_size));
 
-  attribute_store_node_t test_node_id_node = 23;
-  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_updated_node,
-                                                             ATTRIBUTE_NODE_ID,
-                                                             test_node_id_node);
-  get_zpc_node_id_node_ExpectAndReturn(test_node_id_node + 1);
-
-  // The function should find out the endpoint ID now
-  attribute_store_network_helper_get_endpoint_id_from_node_ExpectAndReturn(
-    test_updated_node,
-    NULL,
-    SL_STATUS_FAIL);
-  attribute_store_network_helper_get_endpoint_id_from_node_IgnoreArg_zwave_endpoint_id();
-
-  // Call the function to test
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
-                    resolve_node_info(test_updated_node,
-                                      received_frame,
-                                      &received_frame_length));
-
-  // No frame should be returned
-  TEST_ASSERT_EQUAL(0, received_frame_length);
+  TEST_ASSERT_FALSE(attribute_store_node_exists(nif_node));
 }
 
-static void zwave_command_class_multi_channel_capability_get_verification(
-  attribute_store_node_t node, zwave_endpoint_id_t endpoint)
+void test_resolve_node_info_undefined_endpoint()
 {
-  attribute_store_node_t endpoint_node = 3847;
-  attribute_store_get_first_parent_with_type_ExpectAndReturn(
-    node,
-    ATTRIBUTE_ENDPOINT_ID,
-    endpoint_node);
+  attribute_store_node_t nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
+  attribute_store_undefine_reported(endpoint_id_node);
 
-  test_endpoint_id = endpoint;
-  attribute_store_read_value_ExpectAndReturn(endpoint_node,
-                                             REPORTED_ATTRIBUTE,
-                                             NULL,
-                                             sizeof(zwave_endpoint_id_t),
-                                             SL_STATUS_OK);
-  attribute_store_read_value_IgnoreArg_read_value();
-  attribute_store_read_value_ReturnMemThruPtr_read_value(
-    &test_endpoint_id,
-    sizeof(test_endpoint_id));
+  TEST_ASSERT_NOT_NULL(resolve_node_info);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    resolve_node_info(nif_node, received_frame, &received_frame_size));
+
+  TEST_ASSERT_EQUAL(0, received_frame_size);
 }
 
-void test_zwave_command_class_resolve_node_info_endpoint()
+void test_resolve_secure_node_info_s2_key()
 {
-  attribute_store_node_t test_updated_node = 0x891A;
+  attribute_store_node_t secure_nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_SECURE_NIF, endpoint_id_node);
 
-  attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
-                                                ATTRIBUTE_ZWAVE_NIF);
-
-  attribute_store_node_t test_node_id_node = 23;
-  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_updated_node,
-                                                             ATTRIBUTE_NODE_ID,
-                                                             test_node_id_node);
-  get_zpc_node_id_node_ExpectAndReturn(test_node_id_node + 1);
-
-  // The function should find out the endpoint ID now (returns >0)
-  test_endpoint_id = 45;
-  attribute_store_network_helper_get_endpoint_id_from_node_ExpectAndReturn(
-    test_updated_node,
-    NULL,
-    SL_STATUS_OK);
-  attribute_store_network_helper_get_endpoint_id_from_node_IgnoreArg_zwave_endpoint_id();
-  attribute_store_network_helper_get_endpoint_id_from_node_ReturnThruPtr_zwave_endpoint_id(
-    &test_endpoint_id);
-
-  zwave_command_class_multi_channel_capability_get_verification(
-    test_updated_node,
-    test_endpoint_id);
-
-  // Call the function to test
-  sl_status_t received_status = resolve_node_info(test_updated_node,
-                                                  received_frame,
-                                                  &received_frame_length);
-
-  if (test_endpoint_id == 0) {
-    TEST_ASSERT_EQUAL(0, received_frame_length);
-    TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED, received_status);
-  } else {
-    const uint8_t expected_frame[] = {COMMAND_CLASS_MULTI_CHANNEL_V4,
-                                      MULTI_CHANNEL_CAPABILITY_GET_V4,
-                                      test_endpoint_id};
-    TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_length);
-    TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
-                                  received_frame,
-                                  received_frame_length);
-    TEST_ASSERT_EQUAL(SL_STATUS_OK, received_status);
-  }
-}
-
-void test_zwave_command_class_resolve_secure_node_info_attribute_store_fails()
-{
-  attribute_store_node_t test_updated_node = 0x2;
-
-  attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
-                                                ATTRIBUTE_ZWAVE_SECURE_NIF);
-
-  // The function should find out the Z-Wave NodeID
-  attribute_store_network_helper_get_node_id_from_node_ExpectAndReturn(
-    test_updated_node,
-    NULL,
-    SL_STATUS_FAIL);
-  attribute_store_network_helper_get_node_id_from_node_IgnoreArg_zwave_node_id();
-
-  // Call the function to test
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
-                    resolve_secure_node_info(test_updated_node,
-                                             received_frame,
-                                             &received_frame_length));
-
-  // Verify the received frame data
-  TEST_ASSERT_EQUAL(0, received_frame_length);
-}
-
-void test_zwave_command_class_resolve_secure_node_info_s2_happy_case()
-{
-  attribute_store_node_t test_updated_node = 0x2;
-
-  const uint8_t expected_frame[]
-    = {COMMAND_CLASS_SECURITY_2, SECURITY_2_COMMANDS_SUPPORTED_GET};
-
-  attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
-                                                ATTRIBUTE_ZWAVE_SECURE_NIF);
-
-  // The function should find out the Z-Wave NodeID
-  test_node_id = 3;
-  attribute_store_network_helper_get_node_id_from_node_ExpectAndReturn(
-    test_updated_node,
-    NULL,
-    SL_STATUS_OK);
-  attribute_store_network_helper_get_node_id_from_node_IgnoreArg_zwave_node_id();
-  attribute_store_network_helper_get_node_id_from_node_ReturnThruPtr_zwave_node_id(
-    &test_node_id);
-
-  test_supporting_node_keys = 0x12;
-  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
-  zwave_get_node_granted_keys_IgnoreArg_keys();
-  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
-
-  test_supporting_node_scheme
-    = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_AUTHENTICATED;
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
-    test_supporting_node_keys,
-    test_supporting_node_scheme);
-
+    0,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED);
   zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
-    test_supporting_node_scheme,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED,
     ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED,
     true);
 
-  // Call the function to test
+  TEST_ASSERT_NOT_NULL(resolve_secure_node_info);
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
-                    resolve_secure_node_info(test_updated_node,
+                    resolve_secure_node_info(secure_nif_node,
                                              received_frame,
-                                             &received_frame_length));
+                                             &received_frame_size));
 
-  // Verify the received frame data
-  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_length);
+  const uint8_t expected_frame[]
+    = {COMMAND_CLASS_SECURITY_2, SECURITY_2_COMMANDS_SUPPORTED_GET};
+  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
                                 received_frame,
-                                sizeof(expected_frame));
+                                received_frame_size);
 }
 
-void test_zwave_command_class_resolve_secure_node_info_s0_happy_case()
+void test_resolve_secure_node_info_s0_key()
 {
-  attribute_store_node_t test_updated_node = 0x2B;
+  attribute_store_node_t secure_nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_SECURE_NIF, endpoint_id_node);
+
+  zwave_controller_get_highest_encapsulation_ExpectAndReturn(
+    0,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0);
+  zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED,
+    false);
+
+  TEST_ASSERT_NOT_NULL(resolve_secure_node_info);
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    resolve_secure_node_info(secure_nif_node,
+                                             received_frame,
+                                             &received_frame_size));
 
   const uint8_t expected_frame[]
     = {COMMAND_CLASS_SECURITY, SECURITY_COMMANDS_SUPPORTED_GET};
-
-  attribute_store_get_node_type_ExpectAndReturn(test_updated_node,
-                                                ATTRIBUTE_ZWAVE_SECURE_NIF);
-
-  // The function should find out the Z-Wave NodeID
-  test_node_id = 3;
-  attribute_store_network_helper_get_node_id_from_node_ExpectAndReturn(
-    test_updated_node,
-    NULL,
-    SL_STATUS_OK);
-  attribute_store_network_helper_get_node_id_from_node_IgnoreArg_zwave_node_id();
-  attribute_store_network_helper_get_node_id_from_node_ReturnThruPtr_zwave_node_id(
-    &test_node_id);
-
-  test_supporting_node_keys = 0x80;
-  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
-  zwave_get_node_granted_keys_IgnoreArg_keys();
-  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
-
-  test_supporting_node_scheme = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
-  zwave_controller_get_highest_encapsulation_ExpectAndReturn(
-    test_supporting_node_keys,
-    test_supporting_node_scheme);
-
-  zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
-    test_supporting_node_scheme,
-    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED,
-    false);
-
-  // Call the function to test
-  TEST_ASSERT_EQUAL(SL_STATUS_OK,
-                    resolve_secure_node_info(test_updated_node,
-                                             received_frame,
-                                             &received_frame_length));
-
-  // Verify the received frame data
-  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_length);
+  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
   TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
                                 received_frame,
-                                sizeof(expected_frame));
+                                received_frame_size);
 }
 
-void test_zwave_command_class_resolve_secure_node_info_no_granted_keys()
+void test_resolve_secure_node_info_no_granted_key()
 {
-  attribute_store_node_t test_updated_node = 0xAA;
-  // Trigger the assert in this test
-  attribute_store_get_node_type_ExpectAndReturn(
-    test_updated_node,
-    ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE);
+  attribute_store_node_t secure_nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_SECURE_NIF, endpoint_id_node);
 
-  // The function should find out the Z-Wave NodeID
-  test_node_id = 3;
-  attribute_store_network_helper_get_node_id_from_node_ExpectAndReturn(
-    test_updated_node,
-    NULL,
-    SL_STATUS_OK);
-  attribute_store_network_helper_get_node_id_from_node_IgnoreArg_zwave_node_id();
-  attribute_store_network_helper_get_node_id_from_node_ReturnThruPtr_zwave_node_id(
-    &test_node_id);
-
-  test_supporting_node_keys = 0x80;
-  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
-  zwave_get_node_granted_keys_IgnoreArg_keys();
-  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
-
-  test_supporting_node_scheme = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
-    test_supporting_node_keys,
-    test_supporting_node_scheme);
-
+    0,
+    ZWAVE_CONTROLLER_ENCAPSULATION_NONE);
   zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
-    test_supporting_node_scheme,
+    ZWAVE_CONTROLLER_ENCAPSULATION_NONE,
     ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED,
     false);
 
-  // Call the function to test
+  TEST_ASSERT_NOT_NULL(resolve_secure_node_info);
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
-                    resolve_secure_node_info(test_updated_node,
+                    resolve_secure_node_info(secure_nif_node,
                                              received_frame,
-                                             &received_frame_length));
+                                             &received_frame_size));
 
-  // Verify the received frame data
-  TEST_ASSERT_EQUAL(0, received_frame_length);
+  TEST_ASSERT_EQUAL(0, received_frame_size);
 }
 
-void test_create_secure_nifs_happy_case()
+void test_creating_secure_nif_after_nif_granted_keys_updates()
 {
-  create_secure_nifs_if_missing_happy_case_verification(34);
+  // Add a second endpoint with value 1:
+  attribute_store_node_t endpoint_1_node
+    = attribute_store_add_node(ATTRIBUTE_ENDPOINT_ID, node_id_node);
 
-  // Trigger the test
-  create_secure_nifs_if_missing(34);
-}
+  // Add a non-secure nif:
+  attribute_store_node_t nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
 
-void test_create_secure_nifs_no_security()
-{
-  test_node_id_node = 0xB59;
-  test_node_id      = 92;
-  attribute_store_get_reported_ExpectAndReturn(test_node_id_node,
-                                               NULL,
-                                               sizeof(zwave_node_id_t),
-                                               SL_STATUS_OK);
-  attribute_store_get_reported_IgnoreArg_value();
-  attribute_store_get_reported_ReturnMemThruPtr_value(&test_node_id,
-                                                      sizeof(test_node_id));
-
-  get_zpc_node_id_node_ExpectAndReturn(2);
-
-  test_supporting_node_keys = 0x43;
-  zwave_get_node_granted_keys_ExpectAndReturn(test_node_id, NULL, SL_STATUS_OK);
-  zwave_get_node_granted_keys_IgnoreArg_keys();
-  zwave_get_node_granted_keys_ReturnThruPtr_keys(&test_supporting_node_keys);
-
-  test_supporting_node_scheme = 0x83;
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
-    test_supporting_node_keys,
-    test_supporting_node_scheme);
-
+    0x00,
+    ZWAVE_CONTROLLER_ENCAPSULATION_NONE);
   zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
-    test_supporting_node_scheme,
+    ZWAVE_CONTROLLER_ENCAPSULATION_NONE,
     ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0,
     false);
 
-  // Trigger the test
-  create_secure_nifs_if_missing(test_node_id_node);
+  const uint8_t nif_contents[] = {1, 2, 3, 4, 5, 6};
+  attribute_store_set_reported(nif_node, nif_contents, sizeof(nif_contents));
+
+  attribute_store_node_t granted_keys_node
+    = attribute_store_add_node(ATTRIBUTE_GRANTED_SECURITY_KEYS, node_id_node);
+
+  zwave_keyset_t keys = 0x84;
+  zwave_controller_get_highest_encapsulation_ExpectAndReturn(
+    keys,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS);
+  zwave_controller_encapsulation_scheme_greater_equal_ExpectAndReturn(
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0,
+    true);
+
+  attribute_store_set_reported(granted_keys_node, &keys, sizeof(keys));
+
+  attribute_store_node_t secure_nif_node
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, secure_nif_node);
+
+  attribute_store_node_t secure_nif_1_node
+    = attribute_store_get_first_child_by_type(endpoint_1_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, secure_nif_1_node);
+
+  // Delete the granted keys / nifs for test coverage.
+  attribute_store_delete_node(granted_keys_node);
+  attribute_store_delete_node(nif_node);
 }
 
-void test_create_secure_nifs_not_for_the_zpc()
+void test_not_creating_secure_nif_for_zpc()
 {
-  test_node_id_node = 0xB59;
-  test_node_id      = 92;
-  attribute_store_get_reported_ExpectAndReturn(test_node_id_node,
-                                               NULL,
-                                               sizeof(zwave_node_id_t),
-                                               SL_STATUS_OK);
-  attribute_store_get_reported_IgnoreArg_value();
-  attribute_store_get_reported_ReturnMemThruPtr_value(&test_node_id,
-                                                      sizeof(test_node_id));
+  // Add a non-secure nif:
+  attribute_store_node_t nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, zpc_endpoint_id_node);
 
-  get_zpc_node_id_node_ExpectAndReturn(test_node_id_node);
+  const uint8_t nif_contents[] = {1, 2, 3, 4, 5, 6};
+  attribute_store_set_reported(nif_node, nif_contents, sizeof(nif_contents));
 
-  // Trigger the test
-  create_secure_nifs_if_missing(test_node_id_node);
+  attribute_store_node_t granted_keys_node
+    = attribute_store_add_node(ATTRIBUTE_GRANTED_SECURITY_KEYS,
+                               zpc_node_id_node);
+
+  zwave_keyset_t keys = 3;
+  attribute_store_set_reported(granted_keys_node, &keys, sizeof(keys));
+
+  attribute_store_node_t secure_nif_node
+    = attribute_store_get_first_child_by_type(zpc_endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, secure_nif_node);
+
+  attribute_store_node_t secure_nif_1_node
+    = attribute_store_get_first_child_by_type(zpc_endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, secure_nif_1_node);
+}
+
+void test_not_creating_secure_nif_for_valueless_node_id()
+{
+  attribute_store_undefine_reported(zpc_node_id_node);
+  // Add a non-secure nif:
+  attribute_store_node_t nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, zpc_endpoint_id_node);
+
+  const uint8_t nif_contents[] = {1, 2, 3, 4, 5, 6};
+  attribute_store_set_reported(nif_node, nif_contents, sizeof(nif_contents));
+
+  attribute_store_node_t granted_keys_node
+    = attribute_store_add_node(ATTRIBUTE_GRANTED_SECURITY_KEYS,
+                               zpc_node_id_node);
+
+  zwave_keyset_t keys = 3;
+  attribute_store_set_reported(granted_keys_node, &keys, sizeof(keys));
+
+  attribute_store_node_t secure_nif_node
+    = attribute_store_get_first_child_by_type(zpc_endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, secure_nif_node);
+
+  attribute_store_node_t secure_nif_1_node
+    = attribute_store_get_first_child_by_type(zpc_endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+  TEST_ASSERT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, secure_nif_1_node);
 }
 
 void test_on_node_information_update()
 {
-  uint8_t test_node_info[]
-    = {0x5E, 0x86, 0x38, 0x8C, 0x83, 0xF3, 0xFD, 0xFE, 0x00, 0x94};
-  uint8_t test_node_info_length                   = sizeof(test_node_info);
-  test_endpoint_id_node                           = 0x0085;
-  attribute_store_node_t test_non_secure_nif_node = 0x0086;
-  zwave_node_id_t node_id                         = 34;
-  const zwave_node_info_t test_node_info_struct;
+  TEST_ASSERT_NOT_NULL(controller_callbacks->on_node_information);
 
-  zwave_unid_from_node_id_Expect(node_id, NULL);
-  zwave_unid_from_node_id_IgnoreArg_unid();
-  zwave_unid_from_node_id_ReturnMemThruPtr_unid(test_unid, sizeof(unid_t));
+  const zwave_node_info_t node_info
+    = {.listening_protocol        = 2,
+       .optional_protocol         = 3,
+       .basic_device_class        = 4,
+       .generic_device_class      = 5,
+       .specific_device_class     = 6,
+       .command_class_list_length = 3,
+       .command_class_list        = {0x9F, 0x98, 0x25}};
 
-  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(
-    test_unid,
-    0,
-    test_endpoint_id_node);
+  uint8_t command_class_list_u8[] = {0x9F, 0x98, 0x25};
+  uint8_t nif_length              = sizeof(command_class_list_u8);
 
-  attribute_store_get_node_child_by_type_ExpectAndReturn(
-    test_endpoint_id_node,
-    ATTRIBUTE_ZWAVE_NIF,
-    0,
-    test_non_secure_nif_node);
-
-  zwave_command_class_list_pack_Expect(&test_node_info_struct, NULL, NULL);
-  zwave_command_class_list_pack_IgnoreArg_node_info();
+  zwave_command_class_list_pack_Expect(&node_info, NULL, NULL);
   zwave_command_class_list_pack_IgnoreArg_nif();
   zwave_command_class_list_pack_IgnoreArg_nif_length();
-  zwave_command_class_list_pack_ReturnArrayThruPtr_nif(test_node_info,
-                                                       sizeof(test_node_info));
-  zwave_command_class_list_pack_ReturnThruPtr_nif_length(
-    &test_node_info_length);
+  zwave_command_class_list_pack_ReturnArrayThruPtr_nif(
+    command_class_list_u8,
+    sizeof(command_class_list_u8));
+  zwave_command_class_list_pack_ReturnArrayThruPtr_nif_length(
+    &nif_length,
+    sizeof(nif_length));
 
-  zwave_security_validation_is_s2_nif_downgrade_attack_detected_ExpectAndReturn(
-    node_id,
-    NULL,
-    sizeof(test_node_info),
-    false);
-  zwave_security_validation_is_s2_nif_downgrade_attack_detected_IgnoreArg_nif();
-
-  attribute_store_set_node_attribute_value_ExpectAndReturn(
-    test_non_secure_nif_node,
-    REPORTED_ATTRIBUTE,
-    test_node_info,
-    test_node_info_length,
-    SL_STATUS_OK);
-
-  zwave_node_supports_command_class_ExpectAndReturn(COMMAND_CLASS_SECURITY_2,
-                                                    node_id,
-                                                    0,
-                                                    true);
-  zwave_security_validation_set_node_as_s2_capable_ExpectAndReturn(
-    node_id,
-    SL_STATUS_OK);
-
-  // trigger the test
-  on_node_information_update(node_id, &test_node_info_struct);
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(node_id, true);
+  is_command_class_in_supported_list_IgnoreAndReturn(true);
+  controller_callbacks->on_node_information(node_id, &node_info);
 }
 
-void test_on_nif_attribute_update()
+void test_on_node_information_update_downgrade()
 {
-  attribute_store_node_t test_node = 672;
+  TEST_ASSERT_NOT_NULL(controller_callbacks->on_node_information);
 
-  // Test 1: Nothing happens on deletion.
-  on_non_secure_nif_update(test_node, ATTRIBUTE_DELETED);
+  const zwave_node_info_t node_info
+    = {.listening_protocol        = 2,
+       .optional_protocol         = 3,
+       .basic_device_class        = 4,
+       .generic_device_class      = 5,
+       .specific_device_class     = 6,
+       .command_class_list_length = 3,
+       .command_class_list        = {0x9F, 0x98, 0x25}};
 
-  // Test 2: Now test NIF created but undefined:
-  attribute_store_get_node_type_ExpectAndReturn(
-    test_node,
-    ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS);  // just trigger the assert here
-  attribute_store_is_value_defined_ExpectAndReturn(test_node,
-                                                   REPORTED_ATTRIBUTE,
-                                                   false);
+  uint8_t command_class_list_u8[] = {0x9F, 0x98, 0x25};
+  uint8_t nif_length              = sizeof(command_class_list_u8);
 
-  on_non_secure_nif_update(test_node, ATTRIBUTE_CREATED);
+  zwave_command_class_list_pack_Expect(&node_info, NULL, NULL);
+  zwave_command_class_list_pack_IgnoreArg_nif();
+  zwave_command_class_list_pack_IgnoreArg_nif_length();
+  zwave_command_class_list_pack_ReturnArrayThruPtr_nif(
+    command_class_list_u8,
+    sizeof(command_class_list_u8));
+  zwave_command_class_list_pack_ReturnArrayThruPtr_nif_length(
+    &nif_length,
+    sizeof(nif_length));
 
-  // Test 3: Now the happy case
-  attribute_store_get_node_type_ExpectAndReturn(test_node, ATTRIBUTE_ZWAVE_NIF);
-  attribute_store_is_value_defined_ExpectAndReturn(test_node,
-                                                   REPORTED_ATTRIBUTE,
-                                                   true);
-
-  attribute_store_node_t node_id_node = 321;
-  attribute_store_get_first_parent_with_type_ExpectAndReturn(test_node,
-                                                             ATTRIBUTE_NODE_ID,
-                                                             node_id_node);
-
-  create_secure_nifs_if_missing_happy_case_verification(node_id_node);
-  on_non_secure_nif_update(test_node, ATTRIBUTE_UPDATED);
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(node_id, true);
+  is_command_class_in_supported_list_IgnoreAndReturn(false);
+  controller_callbacks->on_node_information(node_id, &node_info);
 }

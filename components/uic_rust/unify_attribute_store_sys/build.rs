@@ -10,9 +10,12 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
+use unify_build_utils::*;
+
 fn main() {
-    // these exports are only used when an exe is compiled. e.g. integration
-    // tests or final binaries!
-    println!("cargo:rustc-link-lib=dylib=uic_attribute_store");
-    println!("cargo:rustc-link-lib=dylib=uic_datastore");
+    load_unify_environment!(
+        dylib "uic_attribute_store",
+        dylib "uic_datastore",
+        dylib "uic_attribute_resolver"
+    );
 }

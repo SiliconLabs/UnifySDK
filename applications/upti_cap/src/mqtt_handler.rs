@@ -13,14 +13,14 @@
 
 use crate::pti_sniffer;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{
+use unify_mqtt_sys::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
     UnifyMqttClient,
 };
 
 declare_app_name!("upti_cap_mqtt_handler");
 
-/// MqttHandler handles subscription messages related to UIC groups.
+/// MqttHandler handles subscription messages related to Unify groups.
 /// It subscribes to listen to the correct topics and is to be passed to the mosquitto client
 pub struct MqttHandler {
     // matchers that are used to scan incoming mqtt messages

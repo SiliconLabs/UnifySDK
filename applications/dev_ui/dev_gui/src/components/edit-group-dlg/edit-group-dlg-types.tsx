@@ -4,13 +4,16 @@ import { Group } from "../../pages/groups/groups-types"
 export type EditGroupDlgState = {
     ProcessingGroup: Group,
     PristineGroupName: string,
-    IsGroupValid: boolean,
+    EpExist: boolean,
+    IsGroupExist:boolean,
     EndpointList: any[],
     Filter: string,
     ShowModal: boolean,
     CheckedAll: boolean,
     ClusterType: ClusterTypes | null,
-    Updates: any
+    Updates: any,
+    IsNew: boolean,
+    GroupIds: number[]
 }
 
 export type EditGroupDlgProps = {

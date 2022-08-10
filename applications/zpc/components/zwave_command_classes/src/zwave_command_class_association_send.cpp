@@ -11,7 +11,6 @@
  *
  *****************************************************************************/
 #include "zwave_command_class_association_send.h"
-#include "zwave_command_class_association_internals.hpp"
 #include "zwave_command_class_agi.h"
 #include "zwave_command_class_supervision.h"
 
@@ -19,13 +18,14 @@
 #include "ZW_classcmd.h"
 
 // Includes from other components
+#include "zwave_association_toolbox.hpp"
 #include "zwave_controller_utils.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_tx.h"
 #include "zwave_tx_scheme_selector.h"
 #include "zwave_network_management.h"
 
-// UIC includes
+// Unify includes
 #include "attribute.hpp"
 #include "sl_log.h"
 

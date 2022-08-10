@@ -30,7 +30,7 @@
 #include "zigbee_host.h"
 #include "zigbee_host_common.h"
 
-#define ZIGBEE_HOST_EMBERAF_ARGV_LEN 3
+#define ZIGBEE_HOST_EMBERAF_ARGV_LEN 5
 #define ZIGBEE_HOST_EMBERAF_ARG0     "zigbeeHost"
 
 struct zigbeeHostState z3gwState;
@@ -55,7 +55,13 @@ int zigbeeHostInit(struct zigbeeHostOpts *opts)
   argv[0] = ZIGBEE_HOST_EMBERAF_ARG0;
   if (opts->serialPort != NULL) {
     argv[1] = "-p";
-    argv[2] = (char *)opts->serialPort;
+    argv[2] = opts->serialPort;
+    argc += 2;
+  }
+
+  if (opts->otaPath != NULL) {
+    argv[3] = "-d";
+    argv[4] = opts->otaPath;
     argc += 2;
   }
 
@@ -209,11 +215,10 @@ bool emberAfPluginZclFrameworkCoreEzspErrorCallback(EzspStatus status)
 //STANDALONE_BOOTLOADER_NORMAL_MODE is 1
 EmberStatus zigbeeHostLaunchBootloader()
 {
-    EmberStatus status = 
-        ezspLaunchStandaloneBootloader(1);
+  EmberStatus status = ezspLaunchStandaloneBootloader(1);
 
-    ezspClose();
-    //emberAfCoreFlush(); alternatively will work
+  ezspClose();
+  //emberAfCoreFlush(); alternatively will work
 
-    return status;
+  return status;
 }

@@ -20,7 +20,7 @@
 
 #include "sl_status.h"
 
-#include "mqtt_mock_helper.h"
+#include "mqtt_test_helper.h"
 
 extern "C" {
 #include "dotdot_mqtt.h"
@@ -29,7 +29,7 @@ extern "C" {
 /// Called before each and every test
 void setUp()
 {
-  mqtt_mock_helper_init();
+  mqtt_test_helper_init();
 }
 
 static struct {
@@ -60,9 +60,9 @@ void test_dotdot_mqtt_by_group_command_with_argument(void)
 
   std::string msg    = R"({"PINOrRFIDCode":"1 Two Three!"})";
   const char topic[] = "ucl/by-group/12/DoorLock/Commands/LockDoor";
-  mqtt_mock_helper_group_publish(topic, msg.c_str(), msg.length());
+  mqtt_test_helper_publish(topic, msg.c_str(), msg.length());
   msg = R"({"PIN":"1234"})";
-  mqtt_mock_helper_group_publish(topic, msg.c_str(), msg.length());
+  mqtt_test_helper_publish(topic, msg.c_str(), msg.length());
   // Only the valid payload should have gone all the way through.
   TEST_ASSERT_EQUAL_INT(1, stub_by_group_dl_lock.num_callbacks);
 }
@@ -103,10 +103,9 @@ void test_dotdot_mqtt_by_group_write_attributes()
 
   // Test as string name
   const std::string payload = R"({"Language": "None"})";
-  mqtt_mock_helper_group_publish(
-    "ucl/by-group/13/DoorLock/Commands/WriteAttributes",
-    payload.c_str(),
-    payload.length());
+  mqtt_test_helper_publish("ucl/by-group/13/DoorLock/Commands/WriteAttributes",
+                           payload.c_str(),
+                           payload.length());
 
   TEST_ASSERT_EQUAL_INT(1, stub_by_group_dl_lock.num_callbacks);
 }

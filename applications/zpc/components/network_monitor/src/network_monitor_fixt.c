@@ -14,14 +14,12 @@
 #include "network_monitor.h"
 #include "smart_start_list_monitor.h"
 #include "failing_node_monitor.h"
-#include "zwave_poll_manager.h"
 
 sl_status_t network_monitor_setup_fixt(void)
 {
   network_state_monitor_init();
   process_start(&network_monitor_process, NULL);
   smart_start_list_monitor_init();
-  failing_node_monitor_list_load();
-  zwave_poll_manager_init();
+  failing_node_monitor_init();
   return SL_STATUS_OK;
 }

@@ -11,19 +11,22 @@
  *
  *****************************************************************************/
 
-#include "ctimer.h"
-
-#include "assert.h"
-#include "ZW_classcmd.h"
 #include "zwave_command_class_indicator.h"
+
+#include "ZW_classcmd.h"
 #include "zwave_command_handler.h"
 #include "platform_exec.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_unid.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_command_classes_utils.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_tx.h"
-#include "sl_log.h"
 #include "script_defines.h"
+
+// Unify includes
+#include "ctimer.h"
+#include "dotdot_mqtt_generated_commands.h"
+#include "sl_log.h"
 
 #define LOG_TAG "zwave_command_class_indicator"
 
@@ -159,6 +162,26 @@ static void update_indicator(void)
                indicator_sequence_timout_callback,
                NULL);
   }
+}
+
+/**
+ * @brief Publishes that a node has sent us (generated) an identify command
+ *
+ * @param info  Connection info object
+ */
+static void publish_generated_identify_command(
+  const zwave_controller_connection_info_t *info)
+{
+  unid_t node_unid;
+  zwave_unid_from_node_id(info->remote.node_id, node_unid);
+  dotdot_endpoint_id_t endpoint_id = info->remote.endpoint_id;
+
+  // Identify time:
+  const uic_mqtt_dotdot_identify_command_identify_fields_t fields
+    = {.identify_time = (g_on_off_period_length * g_on_off_num_cycles / 10)};
+  uic_mqtt_dotdot_identify_publish_generated_identify_command(node_unid,
+                                                              endpoint_id,
+                                                              &fields);
 }
 
 /**
@@ -347,6 +370,7 @@ static sl_status_t zwave_command_class_indicator_handle_setV3(
     }
 
     update_indicator();
+    publish_generated_identify_command(connection_info);
   }
   return result ? SL_STATUS_OK : SL_STATUS_FAIL;
 }

@@ -13,13 +13,11 @@
 
 {{zap_header}}
 /**
- *
- * @file dotdot_mqtt_attributes.h
  * @defgroup dotdot_mqtt_attributes DotDot Attributes Serializer
  * @ingroup dotdot_mqtt
  *
  * @brief This component provides helper functions for parsing the
- * Attribute space of topics and generates UIC json payloads sent over MQTT.
+ * Attribute space of topics and generates Unify json payloads sent over MQTT.
  *
  * @{
  */

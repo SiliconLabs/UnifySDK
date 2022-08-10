@@ -40,15 +40,16 @@ if [ -e $UIC_CONFFILE ]; then
   # Remove lines having "",
   sed -e 's/:/="/g;s/$/"/g;s/ //g;s/^-//g;/""/d' $UIC_CONFFILE.sh.tmp > $UIC_CONFFILE.sh
 
+  echo "Existing config options"
   cat $UIC_CONFFILE.sh
-  #Source the file to set $serial, $rf_region and $file
+  #Source the file to set $serial, $rf_region and $datastore_file
   . $UIC_CONFFILE.sh || true
   rm $UIC_CONFFILE.sh $UIC_CONFFILE.sh.tmp
 
   #Preload debconf with what was in the conf file
   db_set uic-zpc/serial_port "$serial"
   db_set uic-zpc/region "$rf_region"
-  db_set uic-zpc/datastore_file "$file"
+  db_set uic-zpc/datastore_file "$datastore_file"
 fi
 
 

@@ -18,9 +18,10 @@ if(DOXYGEN_FOUND)
       */templates/*)
   set(DOXYGEN_HTML_EXTRA_STYLESHEET doc/doxygen/assets/customdoxygen.css)
   set(DOXYGEN_HTML_EXTRA_FILES doc/doxygen/assets/silicon-labs-logo.png)
+  set(DOXYGEN_LATEX_EXTRA_STYLESHEET doc/doxygen/assets/unicode_symbols_resolver.sty)
   set(DOXYGEN_EXTRACT_ALL YES)
   set(DOXYGEN_GENERATE_TREEVIEW YES)
-  # set(DOXYGEN_GENERATE_XML)
+  set(DOXYGEN_GENERATE_XML YES)
 
   set(DOXYGEN_GENERATE_LATEX YES)
   set(DOXYGEN_LATEX_OUTPUT latex)
@@ -76,7 +77,7 @@ if(DOXYGEN_FOUND)
   # Doxygen src for libuic
   set(LIBUIC_DOXYGEN_SRC
       ${CMAKE_SOURCE_DIR}/components ${CMAKE_CURRENT_BINARY_DIR}/components
-      ${CMAKE_BINARY_DIR}/components/dotdot_mqtt/src
+      ${CMAKE_BINARY_DIR}/components/uic_dotdot_mqtt/src
       ${CMAKE_SOURCE_DIR}/include)
 
   # ############################################################################
@@ -119,7 +120,7 @@ if(DOXYGEN_FOUND)
       ${ADD_DOX_TARGET}_zip
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${ADD_DOX_TARGET}
       DEPENDS ${ADD_DOX_TARGET_DEPENDS} ${ADD_DOX_TARGET}
-      COMMAND zip -r -q ${ADD_DOX_TARGET}_${CMAKE_PROJECT_VERSION}.docs.zip
+      COMMAND zip -r -q ${ADD_DOX_TARGET}_${FILE_NAME_VERSIONING}.docs.zip
               html)
 
     if(${ADD_DOX_PDF})
@@ -129,7 +130,7 @@ if(DOXYGEN_FOUND)
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${ADD_DOX_TARGET}/latex
         COMMAND
           ${CMAKE_CURRENT_SOURCE_DIR}/scripts/build/pdf_latex/compile_latex.sh
-          ${ADD_DOX_TARGET}_${CMAKE_PROJECT_VERSION})
+          ${ADD_DOX_TARGET}_${FILE_NAME_VERSIONING})
 
       add_dependencies(doxygen_pdf ${ADD_DOX_TARGET}_pdf)
     endif()
@@ -150,7 +151,7 @@ if(DOXYGEN_FOUND)
     TARGET
     reference_ucl_mqtt
     PROJECT_NAME
-    "Unify SDK UCL MQTT Reference"
+    "Unify Framework UCL MQTT Reference"
     TARGET_DEPENDS
     ${REFERENCE_UCL_MQTT_FILE}
     SRC_PATHS
@@ -167,7 +168,7 @@ if(DOXYGEN_FOUND)
     TARGET
     doxygen_uic
     PROJECT_NAME
-    "Unify SDK Lib"
+    "Unify Framework Lib"
     IMAGE_PATHS
     doc/assets/img/
     SRC_PATHS
@@ -228,7 +229,7 @@ if(DOXYGEN_FOUND)
     TARGET
     userguide
     PROJECT_NAME
-    "Unify SDK User Guide"
+    "Unify Framework User Guide"
     IMAGE_PATHS
     doc/assets/img/
     applications/dev_ui/dev_gui/doc/assets/img/
@@ -236,13 +237,13 @@ if(DOXYGEN_FOUND)
     applications/zigpc
     SRC_PATHS
     README.md
-    readme_user.md
     FAQ.md
     release_notes.md
     doc/readme_developer.md
     doc/readme_user.md
     doc/readme_building.md
-    doc/overview.md
+    doc/unify_library_overview.md
+    doc/how_to_develop_a_protocol_controller.md
     doc/readme_rust.md
     doc/readme_debug.md
     docker/readme_developer.md

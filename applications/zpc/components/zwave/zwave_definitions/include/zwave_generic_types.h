@@ -24,6 +24,11 @@
 #ifndef ZWAVE_GENERIC_TYPES_H
 #define ZWAVE_GENERIC_TYPES_H
 
+#include <stdint.h>
+
+typedef uint16_t zwave_command_class_t;
+typedef uint8_t zwave_command_t;
+
 /**
  * @brief Z-Wave Operating Modes (AL, FL or NL).
  * Refer to @ref zwave_nwk_spec for details.

@@ -39,7 +39,7 @@
 #include "zwave_tx_mock.h"
 #include "zwave_tx_scheme_selector_mock.h"
 #include "dotdot_mqtt_mock.h"
-#include "dotdot_mqtt_supported_generated_commands_mock.h"
+#include "dotdot_mqtt_generated_commands_mock.h"
 
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_BASIC_##type
@@ -741,14 +741,6 @@ void test_zwave_command_class_basic_publish_incoming_set_on()
     = {COMMAND_CLASS_BASIC_V2, BASIC_SET_V2, 0xAA};
 
   // Push it to MQTT
-  uic_mqtt_dotdot_on_off_supported_commands_t expected_commands
-    = {.on = true, .off = true};
-  uic_mqtt_dotdot_on_off_publish_supported_generated_commands_ExpectWithArray(
-    NULL,
-    connection_info.remote.endpoint_id,
-    &expected_commands,
-    sizeof(expected_commands));
-  uic_mqtt_dotdot_on_off_publish_supported_generated_commands_IgnoreArg_unid();
   uic_mqtt_dotdot_on_off_publish_generated_on_command_Expect(
     NULL,
     connection_info.remote.endpoint_id);
@@ -777,14 +769,6 @@ void test_zwave_command_class_basic_publish_incoming_set_off()
     = {COMMAND_CLASS_BASIC_V2, BASIC_SET_V2, 0x00};
 
   // Push it to MQTT
-  uic_mqtt_dotdot_on_off_supported_commands_t expected_commands
-    = {.on = true, .off = true};
-  uic_mqtt_dotdot_on_off_publish_supported_generated_commands_ExpectWithArray(
-    NULL,
-    connection_info.remote.endpoint_id,
-    &expected_commands,
-    sizeof(expected_commands));
-  uic_mqtt_dotdot_on_off_publish_supported_generated_commands_IgnoreArg_unid();
   uic_mqtt_dotdot_on_off_publish_generated_off_command_Expect(
     NULL,
     connection_info.remote.endpoint_id);

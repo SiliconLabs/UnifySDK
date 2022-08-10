@@ -1,0 +1,58 @@
+#!/bin/sh -e
+#
+# preinstall script to convert uic.cfg args to debconf input
+
+
+. /usr/share/debconf/confmodule
+
+set -e
+
+UIC_CONFDIR=${CPACK_PACKAGING_INSTALL_PREFIX}/etc/uic
+UIC_CONFFILE=$UIC_CONFDIR/uic.cfg
+
+if [ -e $UIC_CONFFILE ]; then
+  while IFS= read line #Read IFS https://en.wikipedia.org/wiki/Input_Field_Separators
+  do
+    # Set the state depending on the line read from the config file
+    case "$line" in
+      "cpcd:" )   # State: cpcd
+        state="cpcd"
+        ;;
+      " "* | "-"* )   # Lines starting with '-' or ' ' don't trigger state change.
+        # Do nothing.
+        ;;
+      *) state="" ;;    # Set state to empty, Any unknown text, that doesn't begin with '-' or ' '
+    esac
+    # STM to update entries under 'cpcd:'
+    case $state in
+      "cpcd" )
+        case "$line" in
+        *"serial:"*)
+          echo "$line" ;;
+        *)
+          ;;                 # Anything else inside cpcd we skip 
+        esac ;;
+      *)
+        ;;
+    esac
+  done < "$UIC_CONFFILE" > "$UIC_CONFFILE.sh.tmp"
+
+  # Replace : With =", append " to each line, Remove all spaces,
+  # Remove - in the beginning of the line
+  # Remove lines having "",
+  # Rename serial to cpcd_serial to coexist with zpc and/or zipgc
+  sed -e 's/:/="/g;s/$/"/g;s/ //g;s/^-//g;/""/d;s/serial/cpcd_serial/g' $UIC_CONFFILE.sh.tmp > $UIC_CONFFILE.sh
+
+  echo "Existing config options"
+  cat $UIC_CONFFILE.sh
+  #Source the file to set $cpcd_serial
+  . $UIC_CONFFILE.sh || true
+  rm $UIC_CONFFILE.sh $UIC_CONFFILE.sh.tmp
+
+  #Preload debconf with what was in the conf file
+  db_set uic-cpcd/serial_port "$cpcd_serial"
+fi
+
+
+db_input critical uic-cpcd/serial_port || true
+db_go

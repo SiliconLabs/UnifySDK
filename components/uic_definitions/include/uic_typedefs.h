@@ -24,7 +24,7 @@
  * @file uic_typedefs.h
  * @brief Generic type definitions for Unify
  *
- * Generic type definitions used by multiple UIC components.
+ * Generic type definitions used by multiple Unify components.
  *
  * @{
  */
@@ -39,6 +39,10 @@ typedef uint8_t dotdot_endpoint_id_t;
 typedef const char *dotdot_unid_t;
 typedef const char *ota_uiid_t;
 typedef uint16_t dotdot_group_id_t;
+
+typedef uint16_t dotdot_cluster_id_t;
+typedef uint16_t dotdot_attribute_id_t;
+typedef uint8_t dotdot_command_id_t;
 
 #endif  //UIC_TYPEDEFS_H
 /** @} end uic_typedefs */

@@ -1,22 +1,28 @@
+# Fetch dependencies if forced
+if(FETCH_GSDK MATCHES ON)
+  find_package(GeckoSDK 4.1 REQUIRED)
+endif()
+
 # Build options will determine if the applications will be included and build
+
+## Protocol Controllers
 if(BUILD_ZPC MATCHES ON)
   add_subdirectory(zpc)
 endif()
 
 if(BUILD_ZIGPC MATCHES ON)
-  find_package(GeckoSDK)
-  if(GeckoSDK_FOUND)
-    add_subdirectory(zigpc)
-    message(STATUS "Zigbee Protocol Controller will build")
-  else()
-    message(STATUS "Zigbee Protocol Controller will NOT build")
-  endif()
+  add_subdirectory(zigpc)
+  message(STATUS "Zigbee Protocol Controller will build")
+else()
+  message(STATUS "Zigbee Protocol Controller will NOT build")
 endif()
 
-if(BUILD_UIC_DEMO MATCHES ON)
-  add_subdirectory(demo_uic_lib)
+## Example applications/components
+if((BUILD_UIC_DEMO MATCHES ON) OR (BUILD_EPC MATCHES ON))
+  add_subdirectory(examples)
 endif()
 
+## IoT services
 if(BUILD_DEV_GUI MATCHES ON)
   add_subdirectory(dev_ui/dev_gui)
 endif()
@@ -34,23 +40,39 @@ if(BUILD_IMAGE_PROVIDER MATCHES ON)
 endif()
 
 if((BUILD_AOXPC MATCHES ON) OR (BUILD_POSITIONING MATCHES ON))
-  find_package(GeckoSDK)
-  if(GeckoSDK_FOUND)
-    add_subdirectory(aox)
-    message(STATUS "AoX applications will build")
-  else()
-    message(STATUS "AoX applications will NOT build")
-  endif()
+  add_subdirectory(aox)
+  message(STATUS "AoX applications will build")
+else()
+  message(STATUS "AoX applications will NOT build")
 endif()
 
 if(BUILD_NAL MATCHES ON)
   add_subdirectory(nal)
 endif()
 
-if (BUILD_UPTI_CAP MATCHES ON)
+if(BUILD_UPTI_CAP MATCHES ON)
   add_subdirectory(upti_cap)
 endif()
 
-if (BUILD_UPTI_WRITER MATCHES ON)
+if(BUILD_UPTI_WRITER MATCHES ON)
   add_subdirectory(upti_writer)
+endif()
+
+if(BUILD_CPCD MATCHES ON)
+  add_subdirectory(cpcd)
+  add_subdirectory(cpc-hci-bridge)
+  message(STATUS "CPCd daemon and applications will build")
+else()
+  message(STATUS "CPCd daemon and applications will NOT build")
+endif()
+
+IF (BUILD_OTBR MATCHES ON)
+  add_subdirectory(openthread_border_router)
+  message(STATUS "OTBR application will build")
+else()
+  message(STATUS "OTBR application will NOT build")
+endif()
+
+if(BUILD_ZIGBEED MATCHES ON)
+  add_subdirectory(zigbeed)
 endif()

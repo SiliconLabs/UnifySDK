@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="503px" preserveAspectRatio="none" style="width:1387px;height:503px;background:#FFFFFF;" version="1.1" viewBox="0 0 1387 503" width="1387px" zoomAndPan="magnify"><defs><filter height="300%" id="fhg3isio19lwc" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="229" x="572.5" y="16.708">Central Scene data model</text><rect fill="#DDDDDD" height="26.2969" rx="5" ry="5" style="stroke:#000000;stroke-width:1.0;" width="516" x="428.5" y="28.9531"/><text fill="#FEFEFE" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="434.5" y="46.9482">ATTRIBUTE(type)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="382" x="556.5" y="46.9482">: ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_type</text><!--MD5=[ea3d5de2a0d35296bc751d5a1b771698]
+cluster Attribute Store--><path d="M6,80.25 C6,70.25 693,70.25 693,70.25 C693,70.25 1380,70.25 1380,80.25 L1380,486.25 C1380,496.25 693,496.25 693,496.25 C693,496.25 6,496.25 6,486.25 L6,80.25 " fill="#FFFFFF" filter="url(#fhg3isio19lwc)" style="stroke:#000000;stroke-width:1.5;"/><path d="M6,80.25 C6,90.25 693,90.25 693,90.25 C693,90.25 1380,90.25 1380,80.25 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="118" x="634" y="105.2451">Attribute Store</text><rect fill="#F2FFE6" filter="url(#fhg3isio19lwc)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="201" x="591.5" y="112.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="669.5" y="125.3887">NodeID</text><line style="stroke:#000000;stroke-width:1.5;" x1="592.5" x2="791.5" y1="130.2188" y2="130.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="189" x="597.5" y="143.501">Attribute Type = ATTRIBUTE_NODE_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="597.5" y="155.1416">value = Desired: [], Reported: [03]</text><rect fill="#E6FFF7" filter="url(#fhg3isio19lwc)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="224" x="580" y="221.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="634.5" y="234.3887">Endpoint Attribute</text><line style="stroke:#000000;stroke-width:1.5;" x1="581" x2="803" y1="239.2188" y2="239.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="212" x="586" y="252.501">Attribute Type = ATTRIBUTE_ENDPOINT_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="586" y="264.1416">value = Desired: [] - Reported: [04]</text><rect fill="#FEFEFE" filter="url(#fhg3isio19lwc)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="204" x="14" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="92.5" y="343.3887">Version</text><line style="stroke:#000000;stroke-width:1.5;" x1="15" x2="217" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="192" x="20" y="361.501">Attribute Type = ATTRIBUTE(VERSION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="20" y="373.1416">value = Desired: [] - Reported: [2]</text><rect fill="#FFFFFF" filter="url(#fhg3isio19lwc)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="271" x="253.5" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="114" x="332" y="343.3887">Number of scenes</text><line style="stroke:#000000;stroke-width:1.5;" x1="254.5" x2="523.5" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="259" x="259.5" y="361.501">Attribute Type = ATTRIBUTE(NUMBER_OF_SCENES)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="259.5" y="373.1416">value = Desired: [] - Reported: [10]</text><rect fill="#FFFFFF" filter="url(#fhg3isio19lwc)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="264" x="560" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="184" x="600" y="343.3887">Max Number of Key attributes</text><line style="stroke:#000000;stroke-width:1.5;" x1="561" x2="823" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="252" x="566" y="361.501">Attribute Type = ATTRIBUTE(MAX_KEY_ATTRIBUTE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="566" y="373.1416">value = Desired: [] - Reported: [25]</text><rect fill="#FFFFFF" filter="url(#fhg3isio19lwc)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="241" x="859.5" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="940" y="343.3887">Slow Refresh</text><line style="stroke:#000000;stroke-width:1.5;" x1="860.5" x2="1099.5" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="229" x="865.5" y="361.501">Attribute Type = ATTRIBUTE(SLOW_REFRESH)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="865.5" y="373.1416">value = Desired: [1], Reported: [0]</text><rect fill="#FFFFFF" filter="url(#fhg3isio19lwc)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="236" x="1136" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="1214" y="343.3887">Active Scene</text><line style="stroke:#000000;stroke-width:1.5;" x1="1137" x2="1371" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="224" x="1142" y="361.501">Attribute Type = ATTRIBUTE(ACTIVE_SCENE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="1142" y="373.1416">value = Desired: [], Reported: [0]</text><rect fill="#FFFFFF" filter="url(#fhg3isio19lwc)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="352" x="1020" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="200" x="1096" y="452.3887">Active Scene Sequence Number</text><line style="stroke:#000000;stroke-width:1.5;" x1="1021" x2="1371" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="340" x="1026" y="470.501">Attribute Type = ATTRIBUTE(ACTIVE_SCENE_SEQUENCE_NUMBER)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="1026" y="482.1416">value = Desired: [], Reported: [2]</text><!--MD5=[95477c314ce472250aabd32546a8a81f]
+reverse link node to endpoint--><path codeLine="1250" d="M692,174.8796 C692,190.2226 692,207.4737 692,221.1141 " fill="none" id="node-backto-endpoint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="692,161.4838,688,167.4838,692,173.4838,696,167.4838,692,161.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c4a4e185f2beba9fb9ec0dd52638d41f]
+reverse link endpoint to version--><path codeLine="1251" d="M566.9429,268.2919 C475.2501,284.9736 347.7846,308.4833 236,330.25 C230.1561,331.3879 224.155,332.57 218.101,333.773 " fill="none" id="endpoint-backto-version" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="579.9218,265.9327,573.3032,263.0702,568.1153,268.0787,574.7339,270.9412,579.9218,265.9327" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[62ce358a5bbc157f0ea334921a5face6]
+reverse link endpoint to number_of_scenes--><path codeLine="1252" d="M611.3573,274.7601 C563.2489,292.0664 502.8366,313.7989 457.1282,330.2418 " fill="none" id="endpoint-backto-number_of_scenes" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="623.6231,270.3476,616.6233,268.6148,612.3315,274.4097,619.3313,276.1425,623.6231,270.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[6cf2f27a99d1f4ddf3453a5146469c87]
+reverse link endpoint to key_attributes--><path codeLine="1253" d="M692,283.8796 C692,299.2226 692,316.4737 692,330.1141 " fill="none" id="endpoint-backto-key_attributes" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="692,270.4838,688,276.4838,692,282.4838,696,276.4838,692,270.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[dd606bb71a1ea88cf6efa2bcf951a833]
+reverse link endpoint to slow_refresh--><path codeLine="1254" d="M769.2337,274.9808 C814.8647,292.2509 871.9834,313.8687 915.2445,330.2418 " fill="none" id="endpoint-backto-slow_refresh" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="756.9919,270.3476,761.1875,276.2125,768.2149,274.5953,764.0193,268.7305,756.9919,270.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[210bba6ee7baf90e0acdf41572180bf0]
+reverse link endpoint to active_scene--><path codeLine="1255" d="M816.9422,269.9826 C912.1554,288.4492 1042.3738,313.7051 1135.8626,331.8372 " fill="none" id="endpoint-backto-active_scene" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="804.0415,267.4805,809.1701,272.5498,815.822,269.7654,810.6934,264.6961,804.0415,267.4805" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[1a4b90a2f722466a6642fcb0db18ab07]
+reverse link active_scene to active_scene_sequence_number--><path codeLine="1256" d="M1234.7053,391.0107 C1226.2992,406.8083 1216.6634,424.917 1209.109,439.1141 " fill="none" id="active_scene-backto-active_scene_sequence_number" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1240.8389,379.4838,1234.4892,382.9016,1235.2018,390.0774,1241.5516,386.6596,1240.8389,379.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d48f3c05d25f2ef141194fbc18459ea7]
+@startuml attribute_store_central_scene_command_class.svg
+title Central Scene data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Number of scenes" as number_of_scenes #FFFFFF
+  number_of_scenes : Attribute Type = ATTRIBUTE(NUMBER_OF_SCENES)
+  number_of_scenes : value = Desired: [] - Reported: [10]
+
+  object "Max Number of Key attributes" as key_attributes #FFFFFF
+  key_attributes : Attribute Type = ATTRIBUTE(MAX_KEY_ATTRIBUTE)
+  key_attributes : value = Desired: [] - Reported: [25]
+
+  object "Slow Refresh" as slow_refresh #FFFFFF
+  slow_refresh : Attribute Type = ATTRIBUTE(SLOW_REFRESH)
+  slow_refresh : value = Desired: [1], Reported: [0]
+
+  object "Active Scene" as active_scene #FFFFFF
+  active_scene : Attribute Type = ATTRIBUTE(ACTIVE_SCENE)
+  active_scene : value = Desired: [], Reported: [0]
+
+  object "Active Scene Sequence Number" as active_scene_sequence_number #FFFFFF
+  active_scene_sequence_number : Attribute Type = ATTRIBUTE(ACTIVE_SCENE_SEQUENCE_NUMBER)
+  active_scene_sequence_number : value = Desired: [], Reported: [2]
+}
+
+node *- - endpoint
+endpoint *- - version
+endpoint *- - number_of_scenes
+endpoint *- - key_attributes
+endpoint *- - slow_refresh
+endpoint *- - active_scene
+active_scene *- - active_scene_sequence_number
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: ANSI_X3.4-1968
+Language: en
+Country: US
+--></g></svg>

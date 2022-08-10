@@ -26,7 +26,7 @@
 #ifndef ATTRIBUTE_TRANSITIONS_H
 #define ATTRIBUTE_TRANSITIONS_H
 
-// Includes from other UIC components
+// Includes from other Unify components
 #include "sl_status.h"
 #include "attribute_store.h"
 
@@ -88,14 +88,14 @@ clock_time_t
   attribute_transition_get_remaining_duration(attribute_store_node_t node);
 
 /**
- * @brief Initializes the UIC attribute transition component
+ * @brief Initializes the Unify attribute transition component
  *
  * @returns SL_STATUS_OK on success, any other value otherwise
  */
 sl_status_t attribute_transitions_init();
 
 /**
- * @brief Teardown the UIC attribute transition component
+ * @brief Teardown the Unify attribute transition component
  * @returns 0 on success.
  */
 int attribute_transitions_teardown();

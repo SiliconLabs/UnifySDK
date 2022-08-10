@@ -13,47 +13,42 @@
 
 //! C interface for the Attribute Poll Engine wrapping (inlcude/attribute_poll.h)
 
-use crate::attribute_poll_trait::AttributePollTrait;
+use unify_middleware::attribute_store_or_return_with;
+
 use super::*;
+use crate::attribute_poll_trait::AttributePollTrait;
+use unify_log_sys::*;
+
+declare_app_name!("poll_engine");
 
 #[no_mangle]
 pub unsafe extern "C" fn attribute_poll_register(
     handle: attribute_store_node_t,
     interval: IntervalType,
 ) -> sl_status_t {
-    if let Ok(attribute) = Attribute::new_from_handle(handle) {
-        AttributePoll::default().register(attribute, interval);
-        SL_STATUS_OK
-    } else {
-        SL_STATUS_FAIL
-    }
+    let attribute_store = attribute_store_or_return_with!(SL_STATUS_FAIL);
+    AttributePoll::default().register(attribute_store.from_handle(handle), interval);
+    SL_STATUS_OK
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn attribute_poll_deregister(handle: attribute_store_node_t) -> sl_status_t {
-    if let Ok(attribute) = Attribute::new_from_handle(handle) {
-        AttributePoll::default().deregister(attribute);
-        SL_STATUS_OK
-    } else {
-        SL_STATUS_FAIL
-    }
+    let attribute_store = attribute_store_or_return_with!(SL_STATUS_FAIL);
+    AttributePoll::default().deregister(attribute_store.from_handle(handle));
+    SL_STATUS_OK
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn attribute_poll_schedule(handle: attribute_store_node_t) -> sl_status_t {
-    if let Ok(attribute) = Attribute::new_from_handle(handle) {
-        AttributePoll::default().schedule_now(attribute);
-        SL_STATUS_OK
-    } else {
-        SL_STATUS_FAIL
-    }
+    let attribute_store = attribute_store_or_return_with!(SL_STATUS_FAIL);
+    AttributePoll::default().schedule_now(attribute_store.from_handle(handle));
+    SL_STATUS_OK
 }
 
 #[no_mangle]
 pub extern "C" fn attribute_poll_init() -> sl_status_t {
     // Fixme:Both backoff and default interval config should be parameters of
     // the init function instead of reading from config. (will be fixed in UIC-1526).
-    // FYI: Currently, the Poll Engine is used only via ZPC.
     if let Ok(backoff) = unify_config_sys::config_get_as_int("zpc.poll.backoff") {
         if let Ok(default_interval) =
             unify_config_sys::config_get_as_int("zpc.poll.default_interval")

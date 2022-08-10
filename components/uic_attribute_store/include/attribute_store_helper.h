@@ -20,6 +20,9 @@
 // Generic includes
 #include <stdbool.h>
 
+// FIXME: UIC-1920, change to float, then get everything to work.
+typedef double number_t;
+
 /**
  * @defgroup attribute_store_value_helpers Attribute Store Value Helpers
  * @ingroup attribute_store
@@ -122,6 +125,66 @@ sl_status_t attribute_store_get_reported(attribute_store_node_t node,
                                          size_t expected_size);
 
 /**
+ * @brief Sets a numerical value for an Attribute Store node
+ *
+ * Note: The storage type will be taken from Attribute Store registration
+ * The default type will be int32_t is no registration has been made for a
+ * given attribute
+ *
+ * @param node          The Attribute store node to set
+ * @param value         Value to set
+ *
+ * @returns sl_status_t returned by @ref attribute_store_set_node_attribute_value
+ */
+sl_status_t attribute_store_set_reported_number(attribute_store_node_t node,
+                                                number_t value);
+
+/**
+ * @brief Sets a numerical value for an Attribute Store node
+ *
+ * Note: The storage type will be taken from Attribute Store registration
+ * The default type will be int32_t is no registration has been made for a
+ * given attribute
+ *
+ * @param node          The Attribute store node to set
+ * @param value         Value to set
+ *
+ * @returns sl_status_t returned by @ref attribute_store_set_node_attribute_value
+ */
+sl_status_t attribute_store_set_desired_number(attribute_store_node_t node,
+                                               number_t value);
+
+/**
+ * @brief Gets a numerical value from an Attribute Store node
+ *
+ * Note: The storage type will be taken from Attribute Store registration
+ * The default type will be int32_t is no registration has been made for a
+ * given attribute
+ *
+ * @param node          The Attribute store node to get
+ *
+ * @returns Reported value found in the attribute store.
+ *          Returns FLT_MIN if no value is defined or an error occured reading the
+ *          value.
+ */
+number_t attribute_store_get_reported_number(attribute_store_node_t node);
+
+/**
+ * @brief Gets a numerical value from an Attribute Store node
+ *
+ * Note: The storage type will be taken from Attribute Store registration
+ * The default type will be int32_t is no registration has been made for a
+ * given attribute
+ *
+ * @param node          The Attribute store node to get
+ *
+ * @returns Desired value found in the attribute store.
+ *          Returns FLT_MIN if no value is defined or an error occured reading the
+ *          value.
+ */
+number_t attribute_store_get_desired_number(attribute_store_node_t node);
+
+/**
  * @brief Safely copies a String in the Attribute Store
  *
  * @param node          The Attribute store node under
@@ -132,6 +195,18 @@ sl_status_t attribute_store_get_reported(attribute_store_node_t node,
  */
 sl_status_t attribute_store_set_reported_string(attribute_store_node_t node,
                                                 const char *string);
+
+/**
+ * @brief Safely copies a String in the Attribute Store
+ *
+ * @param node          The Attribute store node under
+ *                      which the value must be written
+ * @param string        C char array containing a String
+ *
+ * @returns sl_status_t returned by @ref attribute_store_set_node_attribute_value
+ */
+sl_status_t attribute_store_set_desired_string(attribute_store_node_t node,
+                                               const char *string);
 
 /**
  * @brief Safely retrieves a String from the Attribute Store
@@ -338,6 +413,28 @@ sl_status_t attribute_store_set_child_desired(attribute_store_node_t parent,
                                               uint8_t value_size);
 
 /**
+ * @brief Adds and sets the reported value of the first child of a node with a
+ * given type only if it did not exist.
+ *
+ * If the child already exists, it will not be created.
+ *
+ * @param parent        The Attribute store node under
+ *                      which the child's reported value must be written
+ * @param type          The type of the child
+ * @param value         A pointer to a variable containing
+ *                      the data to be written for the node.
+ * @param value_size    The number of bytes to read from the value pointer.
+ *
+ * @returns sl_status_t returned by @ref attribute_store_set_node_attribute_value
+ *          SL_STATUS_ALREADY_EXIST if the child was already present.
+ */
+sl_status_t attribute_store_set_child_reported_only_if_missing(
+  attribute_store_node_t parent,
+  attribute_store_type_t type,
+  const void *value,
+  uint8_t value_size);
+
+/**
  * @brief Set the value of the first child with a given type.
  *
  * This function sets the value of the first attribute child
@@ -356,35 +453,15 @@ sl_status_t attribute_store_set_uint32_child_by_type(
   uint32_t value);
 
 /**
- * See @ref attribute_store_set_uint32_child_by_type
- * @param parent Parent node of children
- * @param type   Type of child
- * @param state  The value_state
- * @param value  Value
- * @return sl_status_t
- */
-sl_status_t attribute_store_set_uint8_child_by_type(
-  attribute_store_node_t parent,
-  attribute_store_type_t type,
-  attribute_store_node_value_state_t state,
-  uint8_t value);
-
-/**
  * @brief Visit all nodes in the tree.
  *
- * This function visits all tree nodes going from the top and down.
- * It will continue to the node children if the status returned by
- * the function is SL_STATUS_OK. If the function returns SL_STATUS_ABORT,
- * no more nodes are visited. Otherwise, siblings will be visited.
- *
+ * This function visits all the attribute store nodes under the "top" node and
+ * applies the function passed in parameter.
  * @param top First node to be visited
  * @param func function to execute
- * @param depth The current depth of the top node.
  */
-sl_status_t
-  attribute_store_walk_tree(attribute_store_node_t top,
-                            sl_status_t (*func)(attribute_store_node_t, int),
-                            int depth);
+void attribute_store_walk_tree(attribute_store_node_t top,
+                               void (*function)(attribute_store_node_t));
 
 /**
  * @brief Add multiple nodes to a parent if they are not already present.
@@ -399,6 +476,46 @@ sl_status_t
 void attribute_store_add_if_missing(attribute_store_node_t parent_node,
                                     const attribute_store_type_t attributes[],
                                     uint32_t count);
+
+/**
+ * @brief Adds a child with a given reported value under a parent node, if
+ * it does not already exist.
+ *
+ * This is a helper function that will add a child with a given reported value
+ * if the child does not already exist.
+ *
+ * @param parent_node   Parent node.
+ * @param type          Attribute Store type of the child node.
+ * @param value         A pointer to a variable containing
+ *                      the data to be set for the reported value
+ * @param value_size    The number of bytes to read from the value pointer.
+ * @returns Attribute Store Node ID of the created (or existing) node
+ */
+attribute_store_node_t
+  attribute_store_emplace(attribute_store_node_t parent_node,
+                          attribute_store_type_t type,
+                          const void *value,
+                          uint8_t value_size);
+
+/**
+ * @brief Adds a child with a given desired value under a parent node, if
+ * it does not already exist.
+ *
+ * This is a helper function that will add a child with a given desired value
+ * if the child does not already exist.
+ *
+ * @param parent_node   Parent node.
+ * @param type          Attribute Store type of the child node.
+ * @param value         A pointer to a variable containing
+ *                      the data to be set for the desired value
+ * @param value_size    The number of bytes to read from the value pointer.
+ * @returns Attribute Store Node ID of the created (or existing) node
+ */
+attribute_store_node_t
+  attribute_store_emplace_desired(attribute_store_node_t parent_node,
+                                  attribute_store_type_t type,
+                                  const void *value,
+                                  uint8_t value_size);
 
 /**
  * @brief Loop helper that register the same callback function for many attribute

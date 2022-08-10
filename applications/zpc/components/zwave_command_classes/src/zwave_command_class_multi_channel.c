@@ -24,7 +24,7 @@
 #include "zwave_command_handler.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_controller_utils.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_rx.h"
 
 #include "attribute_store.h"
@@ -145,10 +145,9 @@ static void create_aggregated_endpoints(attribute_store_node_t node_id_node)
                                               sizeof(zwave_endpoint_id_t),
                                               0);
   attribute_store_node_t aggregated_eps_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       root_device_node,
-      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_ENDPOINTS,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_ENDPOINTS);
 
   uint8_t aggregated_endpoints = 0;
   attribute_store_read_value(aggregated_eps_node,
@@ -205,10 +204,9 @@ static void check_if_all_individual_endpoints_are_found(
                                               sizeof(root_device_endpoint),
                                               0);
   attribute_store_node_t individual_endpoint_count
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       root_device_node,
-      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_INDIVIDUAL_ENDPOINTS,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_INDIVIDUAL_ENDPOINTS);
 
   uint8_t number_of_individual_ep = 0;
   if (SL_STATUS_OK
@@ -239,11 +237,12 @@ static void check_if_all_individual_endpoints_are_found(
   }
 
   if (number_of_individual_ep <= attribute_store_count) {
-    attribute_store_set_uint8_child_by_type(
-      root_device_node,
-      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_ALL_INDIVIDUAL_ENDPOINTS_FOUND,
-      REPORTED_ATTRIBUTE,
-      1);
+    attribute_store_node_t endpoint_found_node
+      = attribute_store_get_first_child_by_type(
+        root_device_node,
+        ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_ALL_INDIVIDUAL_ENDPOINTS_FOUND);
+    uint8_t found = 1;
+    attribute_store_set_reported(endpoint_found_node, &found, sizeof(found));
     create_aggregated_endpoints(node_id_node);
   }
 }
@@ -279,10 +278,9 @@ static sl_status_t
                   & REPORT_IDENTICAL_ENDPOINTS_MASK;
   }
   attribute_store_node_t identical_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_IDENTICAL_ENDPOINTS,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_IDENTICAL_ENDPOINTS);
   attribute_store_set_reported(identical_node,
                                &field_value,
                                sizeof(field_value));
@@ -293,10 +291,9 @@ static sl_status_t
     field_value = frame_data[REPORT_INDIVIDUAL_ENDPOINTS_INDEX] & ENDPOINT_MASK;
   }
   attribute_store_node_t individual_endpoints_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_INDIVIDUAL_ENDPOINTS,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_INDIVIDUAL_ENDPOINTS);
   attribute_store_set_reported(individual_endpoints_node,
                                &field_value,
                                sizeof(field_value));
@@ -307,10 +304,9 @@ static sl_status_t
     field_value = frame_data[REPORT_AGGREGATED_ENDPOINTS_INDEX] & ENDPOINT_MASK;
   }
   attribute_store_node_t aggregated_endpoints_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_ENDPOINTS,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_ENDPOINTS);
   attribute_store_set_reported(aggregated_endpoints_node,
                                &field_value,
                                sizeof(field_value));
@@ -347,10 +343,9 @@ static sl_status_t
                                               0);
 
   attribute_store_node_t endpoint_generic_device_class
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS,
-      0);
+      ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS);
   attribute_store_set_node_attribute_value(
     endpoint_generic_device_class,
     REPORTED_ATTRIBUTE,
@@ -358,10 +353,9 @@ static sl_status_t
     sizeof(uint8_t));
 
   attribute_store_node_t endpoint_specific_device_class
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE_ZWAVE_SPECIFIC_DEVICE_CLASS,
-      0);
+      ATTRIBUTE_ZWAVE_SPECIFIC_DEVICE_CLASS);
   attribute_store_set_node_attribute_value(
     endpoint_specific_device_class,
     REPORTED_ATTRIBUTE,
@@ -369,9 +363,8 @@ static sl_status_t
     sizeof(uint8_t));
 
   attribute_store_node_t endpoint_nif
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE_ZWAVE_NIF,
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE_ZWAVE_NIF);
   attribute_store_set_node_attribute_value(
     endpoint_nif,
     REPORTED_ATTRIBUTE,
@@ -446,10 +439,9 @@ static sl_status_t
                                               0);
 
   attribute_store_node_t aggregated_members_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_MEMBERS,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_MEMBERS);
 
   if (aggregated_members_length == 0) {
     // oh oh, we just asked aggregated members to an individual (or non-existing)
@@ -664,10 +656,9 @@ static void zwave_command_class_multi_channel_on_version_attribute_update(
 bool is_endpoint_aggregated(attribute_store_node_t endpoint_node)
 {
   const attribute_store_node_t aggregated_members_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_MEMBERS,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_AGGREGATED_MEMBERS);
 
   return (aggregated_members_node != ATTRIBUTE_STORE_INVALID_NODE);
 }

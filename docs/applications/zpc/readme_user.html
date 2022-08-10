@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZPC User’s Guide &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/zpc/readme_user.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="UAM maps for the ZPC" href="how_to_write_uam_files_for_the_zpc.html" />
+    <link rel="prev" title="ZigPC Coding Standard" href="../zigpc/coding_standard.zigpc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#systems-overview">Systems Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/UnifySDK.html#unify-applications-overview">Unify Applications Overview</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-protocol-controllers">Unify Framework Protocol Controllers</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../aox/applications/aoxpc/readme_user.html">AoXPC User Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aox/applications/aoxpc/readme_developer.html">AoXPC Developer’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../zigpc/readme_user.html">ZigPC User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../zigpc/readme_developer.html">ZigPC Developer Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../zigpc/coding_standard.zigpc.html">ZigPC Coding Standard</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ZPC User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="readme_certification.html">ZPC Certification Information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-services">The Unify Framework Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../doc/UnifySDK.html#iot-services">IoT Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="zpc-users-guide">
+<h1>ZPC User’s Guide<a class="headerlink" href="#zpc-users-guide" title="Permalink to this heading"></a></h1>
+<p>This user guide will guide the reader on how to install, configure and run the
+Z-Wave Protocol Controller (ZPC).</p>
+<p>The ZPC translates the Unify Controller Language (UCL) into Z-Wave commands and
+communicates with Z-Wave devices in a Z-Wave network and is a full certifiable
+Z-Wave controller.</p>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Permalink to this heading"></a></h2>
+<p>The Debian package of the ZPC contains the following files:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Path</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>/lib/systemd/system/uic-zpc.service</p></td>
+<td><p>Systemd service file</p></td>
+</tr>
+<tr class="row-odd"><td><p>/usr/bin/zpc</p></td>
+<td><p>ZPC application</p></td>
+</tr>
+<tr class="row-even"><td><p>/usr/bin/zpc_database_tool</p></td>
+<td><p>Tool for database manipulation</p></td>
+</tr>
+<tr class="row-odd"><td><p>/usr/bin/zpc_database_recover_tool</p></td>
+<td><p>Tool for triggering a re-interview of all nodes</p></td>
+</tr>
+<tr class="row-even"><td><p>/usr/share/bash-completion/completions/zpc</p></td>
+<td><p>script for bash auto completion</p></td>
+</tr>
+<tr class="row-odd"><td><p>/usr/share/uic/node_identify_rpi4_led.sh</p></td>
+<td><p>script used by the indicator CC</p></td>
+</tr>
+<tr class="row-even"><td><p>/usr/share/doc/uic-zpc/copyright</p></td>
+<td><p>copyright notice</p></td>
+</tr>
+<tr class="row-odd"><td><p>/etc/uic/uic.cfg</p></td>
+<td><p>Default location of config file</p></td>
+</tr>
+<tr class="row-even"><td><p>/var/lib/uic/zpc.db</p></td>
+<td><p>Default location of database</p></td>
+</tr>
+<tr class="row-odd"><td><p>/usr/share/uic/rules</p></td>
+<td><p>Default location of mapping rules</p></td>
+</tr>
+<tr class="row-even"><td><p>/usr/share/uic/zwave_poll_config.yaml</p></td>
+<td><p>Default location of network polling attribute list</p></td>
+</tr>
+</tbody>
+</table>
+<section id="configuration-file">
+<h3>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this heading"></a></h3>
+<p>The configuration file is written in YAML and is used to set up the ZPC.
+The ZPC can dump the running configuration using the command line option <code class="docutils literal notranslate"><span class="pre">--dump-config</span></code>.
+The dumped file can be used as a starting point a config file.</p>
+<p>Configuration file example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ zpc --dump-config
+<span class="c1"># Unify sample conf file</span>
+
+log:
+  - level:<span class="s1">&#39;d&#39;</span>
+  - tag_level:<span class="s1">&#39;uic_main:debug&#39;</span>
+mapdir: <span class="s1">&#39;/usr/share/uic/rules&#39;</span>
+mqtt:
+  - host:<span class="s1">&#39;localhost&#39;</span>
+  - port:1883
+zpc:
+  - datastore_file: <span class="s1">&#39;/var/lib/uic/zpc.db&#39;</span>
+  - accepted_transmit_failure:2
+  - default_wakeup_interval:4200
+  - device_id:<span class="s1">&#39;36833760FCEF5E5C8E66077764918592&#39;</span>
+  - hardware_version:1
+  - manufacturer_id:0
+  - measured_0dbm_power:0
+  - missing_wakeup_notification:2
+  - normal_tx_power_dbm:0
+  - product_id:1
+  - product_type:1
+  - rf_region:<span class="s1">&#39;EU&#39;</span>
+  - serial:<span class="s1">&#39;/dev/ttyUSB0&#39;</span>
+  - serial_log_file:<span class="s1">&#39;&#39;</span>
+  - poll:
+    - attribute_list_file:<span class="s1">&#39;/usr/share/uic/zwave_poll_config.yaml&#39;</span>
+    - backoff: <span class="m">30</span>
+    - default_interval: <span class="m">60</span>
+</pre></div>
+</div>
+<p>A special environment variable called UIC_CONF can be set to a path of a custom config file
+which will override the default config file. This can be used in a development environment</p>
+<p>for e.g.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">UIC_CONF</span><span class="o">=</span>../custom_uic.conf sudo -E ./applications/zpc/zpc
+</pre></div>
+</div>
+</section>
+<section id="database-file">
+<h3>Database File<a class="headerlink" href="#database-file" title="Permalink to this heading"></a></h3>
+<p>The ZPC uses a SQLite database for storing network information. The default
+location of the database is /var/lib/uic/zpc.db. The database must be located
+in a writable part of the file system. If the database is lost, the ZPC will lose
+all information about the network and need to probe all nodes in the network.</p>
+<blockquote>
+<div><p>NOTE: Some of the properties will not be recovered by re-interviewing,
+e.g. Nodes DSKs or KEX Fail types will be unknown.</p>
+</div></blockquote>
+<p>The best way to run ZPC is using the Systemd service that is
+installed with the Debian installer.
+For more information, see <a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">README.md</span></a>.</p>
+</section>
+</section>
+<section id="running-zpc-from-the-command-line">
+<h2>Running ZPC From the Command Line<a class="headerlink" href="#running-zpc-from-the-command-line" title="Permalink to this heading"></a></h2>
+<p>When running the ZPC from the command line provides an interactive Command Line Interface (CLI)
+is available. To get more information about the
+commands, type <code class="docutils literal notranslate"><span class="pre">help</span></code> in the CLI.</p>
+<p>These are the steps to run the ZPC from the command line:</p>
+<ol class="arabic simple">
+<li><p>Ensure Mosquitto broker is running, either by systemd <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">mosquitto</span></code> or by running <code class="docutils literal notranslate"><span class="pre">mosquitto</span> <span class="pre">-d</span></code> in a terminal.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">/usr/bin/zpc</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><p>NOTE: To get more information about command line arguments for ZPC, run <code class="docutils literal notranslate"><span class="pre">/usr/bin/zpc</span> <span class="pre">--help</span></code>.</p>
+</div></blockquote>
+<p>Note that the default permissions for the ZPC database file located in
+/var/lib/uic/zpc.db is only writable for the <em>uic</em> system user (which is
+created upon installation). If you run the zpc as another user,
+select a different database location.</p>
+<p>For example,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/ttyUSB0 --zpc.rf_region EU --zpc.datastore_file mydatabase.db --mapdir rules
+</pre></div>
+</div>
+</section>
+<section id="updating-the-ncp-firmware">
+<h2>Updating the NCP firmware<a class="headerlink" href="#updating-the-ncp-firmware" title="Permalink to this heading"></a></h2>
+<p>The ZPC is able to update the NCP firmware over the serial(USB) link. The
+firmware update is performed by providing a Gecko Boot loader file(GBL) at the
+command line when booting the ZPC.</p>
+<p>There are two command line options to be aware of, <code class="docutils literal notranslate"><span class="pre">--zpc.ncp_version</span></code> and
+<code class="docutils literal notranslate"><span class="pre">--zpc.ncp_update</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--zpc.ncp_version</span></code> will print the chip and software version of the
+SerialAPI and exit immediately. This can be used to determine if the firmware
+should be applied or not.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
+<span class="c1"># Unify build: ver_1.0.2_cert-196-g7d2caffd</span>
+<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728069 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: Unify Signal Handler
+<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728548 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: Unify MQTT Client
+<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728627 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: Unify STDIN
+<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728714 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: ZPC Config
+<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.765728 &lt;i&gt; <span class="o">[</span>zpc_ncp_update<span class="o">]</span> chip_hardware_type     :     <span class="m">7</span>
+<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.765847 &lt;i&gt; <span class="o">[</span>zpc_ncp_update<span class="o">]</span> chip_hardware_revision :     <span class="m">0</span>
+<span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.765908 &lt;i&gt; <span class="o">[</span>zpc_ncp_update<span class="o">]</span> chip_serial_api_version:  <span class="m">7</span>.15
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--zpc.ncp_update</span></code> performs a firmware update and exits the application when the
+update is completed.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/ttyUSB0 --zpc.ncp_update new_firmware.gbl
+</pre></div>
+</div>
+<p>If the firmware update succeeds the the exit code of the zpc will be <em>2</em> and if
+the update fails the exit code will be <em>1</em>.</p>
+<hr class="docutils" />
+<p><strong>NOTE</strong> for the NCP update to work, a Gecko Bootloader and possibly signing
+certificates need to be installed.</p>
+<hr class="docutils" />
+<p>In the event that the firmware upload process gets interrupted, the NCP may be
+left in bootloader. The ZPC will not be able to re-flash because it requires a
+functional serial API. In this case the device can be flashed manually using the
+XModem tool <em>sx</em> from the debian package lrzsx:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>  sudo apt install lrzsz
+  stty -F /dev/ttyUSB0 <span class="m">115200</span>
+  <span class="nb">echo</span> <span class="m">1</span> &gt; /dev/ttyUSB0
+  sx ZW_SerialAPI_Controller_7.15.4_256_EFR32ZG14_REGION_EU.gbl &lt; /dev/ttyUSB0 &gt; /dev/ttyUSB0
+  <span class="nb">echo</span> <span class="m">2</span> &gt; /dev/ttyUSB0
+</pre></div>
+</div>
+</section>
+<section id="performing-firmware-updates-of-end-devices">
+<h2>Performing Firmware Updates of End Devices<a class="headerlink" href="#performing-firmware-updates-of-end-devices" title="Permalink to this heading"></a></h2>
+<p>The ZPC has the capability to perform Firmware Updates of end devices.
+Performing firmware updates requires
+<a class="reference internal" href="../image_provider/readme_user.html"><span class="doc std std-doc">Image Provider</span></a> application to be
+run and configured correctly. The section below discuss how to construct
+UIID and VERSION information that are required to perform a firmware update of an
+end device.</p>
+<p>Firmware updates can be triggered by providing the
+<a class="reference internal" href="../image_provider/readme_user.html"><span class="doc std std-doc">Image Provider</span></a>
+with compatible firmware images and meta data information.</p>
+<p>Once the firmware update is successfully performed on an end device, the ZPC
+will automatically re-interview the device and presents the device capabilities of the
+device to the IoT services.</p>
+<section id="ota-uiid-construction">
+<h3>OTA UIID Construction<a class="headerlink" href="#ota-uiid-construction" title="Permalink to this heading"></a></h3>
+<p>To upload an image for a Z-Wave node, compute a Unique Image Identifier (UIID)
+for this device.</p>
+<p>The UIID for the ZPC is a string that can be constructed using the
+following information:</p>
+<ul class="simple">
+<li><p>The Manufacturer ID (Manufacturer Specific Command Class, 2 bytes)</p></li>
+<li><p>The Product Type (Manufacturer Specific Command Class, 2 bytes)</p></li>
+<li><p>The Product ID (Manufacturer Specific Command Class, 2 bytes)</p></li>
+<li><p>The Firmware Target (Firmware Update Command Class, 1 byte)</p></li>
+<li><p>The Hardware version (Version Command Class, 1 byte)</p></li>
+</ul>
+<p>The string must be formatted using the following format with all values in
+hexadecimal:
+<strong>ZWave-&lt;ManufacturerID&gt;-&lt;ProductType&gt;-&lt;ProductID&gt;-&lt;FirmwareTarget&gt;-&lt;HardwareVersion&gt;</strong></p>
+</section>
+<section id="uiid-unid-association">
+<h3>UIID/UNID Association<a class="headerlink" href="#uiid-unid-association" title="Permalink to this heading"></a></h3>
+<p>When the ZPC interviews a node, it will publish the detected firmware targets
+under the UIID space in the OTA cluster:
+<code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/#</span></code></p>
+<p>For more details about available attributes under each UIID, see
+the Unify specification - Common OTA FW Update Service chapter.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/CurrentVersion/Reported</span>
+</pre></div>
+</div>
+<p>For example, if a node has 2 Firmware Targets, the publications may look as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-00-01/CurrentVersion/Reported - {&quot;value&quot;: &quot;3.2.0&quot;}</span>
+<span class="go">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-01-01/CurrentVersion/Reported - {&quot;value&quot;: &quot;3.2.0&quot;}</span>
+</pre></div>
+</div>
+<p>UIID <em>ZWave-010f-1002-0b01-00-01</em> can be used to firmware update target 0.
+UIID <em>ZWave-010f-1002-0b01-01-01</em> can be used to firmware update target 1.</p>
+</section>
+<section id="version-string-calculation">
+<h3>Version String Calculation<a class="headerlink" href="#version-string-calculation" title="Permalink to this heading"></a></h3>
+<p>The version of a firmware image is determined based on the data reported by the
+Z-Wave node using the Version Command Class.</p>
+<p>The version string will be composed of three decimal digits following
+<a class="reference external" href="https://semver.org/">semantic versioning</a>. By default, the version
+for a given firmware will be fetched in the Version Command Class,
+in the Version Report Command. Only the Major and Minor digits can be retrieved
+from this report.</p>
+<p>For example, if a node sends a Version Report with</p>
+<ul class="simple">
+<li><p>Firmware 0 Version = 3</p></li>
+<li><p>Firmware 0 Sub Version = 14</p></li>
+</ul>
+<p>The resulting version string will be “3.14.0”. No patch version number is
+available.</p>
+<p>If a node supports the Version Z-Wave Software Report Command, the version string
+for Firmware 0 will be replaced by the Application Version field. For example,
+if a node sends a Version Z-Wave Software Report Command with:</p>
+<ul class="simple">
+<li><p>Application Version 1 (MSB) = 3</p></li>
+<li><p>Application Version 2 = 14</p></li>
+<li><p>Application Version 3 (LSB) = 15</p></li>
+</ul>
+<p>The resulting version string will be “3.14.15”.</p>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
+<p>This section provides an example using the
+<a class="reference internal" href="../image_provider/readme_user.html"><span class="doc std std-doc">Image Provider</span></a> and
+<a class="reference internal" href="../dev_ui/dev_gui/readme_user.html"><span class="doc std std-doc">Developer GUI</span></a> to perform a firmware update of a PowerStrip sample application.</p>
+<p>First, make sure that the ZPC,
+<a class="reference internal" href="../image_provider/readme_user.html"><span class="doc std std-doc">Image Provider</span></a> and
+<a class="reference internal" href="../dev_ui/dev_gui/readme_user.html"><span class="doc std std-doc">Developer GUI</span></a>
+are running.</p>
+<p>Flash a PowerStrip application on a Z-Wave module with the OTA bootloader
+and GBL encryption keys. See the Z-Wave/Gecko SDK documentation in
+<a class="reference external" href="https://www.silabs.com/developers/simplicity-studio">Simplicity Studio</a></p>
+<p>Start the DevGUI and include a PowerStrip (or any other) sample application.
+At the end of the interview, the OTA Cluster page will show the UIID of the PowerStrip.</p>
+<p><img alt="PowerStrip UIID in DevGUI" src="../../_images/powerstrip_uiid_dev_gui.png" /></p>
+<p>Prepare a GBL file with a newer firmware version that you upload to the Image
+Provider application. It will require several versions of the Z-Wave/Gecko SDK
+installed to access binaries with older or newer versions.</p>
+<p>You can also perform the operation with an identical firmware image (or older)
+but the end node will reject the upgrade operation after the transfer.</p>
+<p>Verify that your images are ready and readable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic-image-provider/updates $ ls -l
+-rw-r--r-- <span class="m">1</span> pi  pi   <span class="m">171380</span> Aug <span class="m">17</span> <span class="m">14</span>:52 powerstrip.gbl
+-rw-r--r-- <span class="m">1</span> pi  pi   <span class="m">168036</span> Aug <span class="m">17</span> <span class="m">14</span>:52 sensor_pir.gbl
+</pre></div>
+</div>
+<p>Then, use the found UIID to configure the <em>image.json</em> file from the image
+provider. Remember to set a version string as well as calculate the Md5 as
+described in the <a class="reference internal" href="../image_provider/readme_user.html"><span class="doc std std-doc">Image Provider User Guide</span></a>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;Images&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;FileName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;updates/powerstrip.gbl&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Uiid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZWave-0000-0005-0004-0000&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;zw-DB9E8293-0002&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.16.4&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;ApplyAfter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-06-29T16:39:57+02:00&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Md5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4XbdcGq2iXOD1EcZ905XxQ==&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Shortly after, the Image Provider will announce the image(s) over MQTT and the
+ZPC will download this image, if some nodes in its network have matching UIIDs.
+The Dev GUI will show the Image Provider announcement under the “Images” tab
+on the OTA cluster page:</p>
+<p><img alt="PowerStrip UIID image available in DevGUI" src="../../_images/powerstrip_image_available_dev_gui.png" /></p>
+<p>As soon as the ApplyAfter timestamp is passed, you will be able to observe
+the firmware transfer operation under the DevGUI:</p>
+<p><img alt="PowerStrip firmware transfer in DevGUI" src="../../_images/dev_gui_powerstrip_firmware_transfer.png" /></p>
+<p>When the firmware update is finished and successful, it will look as follows:</p>
+<p><img alt="PowerStrip firmware transfer completed in DevGUI" src="../../_images/dev_gui_powerstrip_firmware_transfer_complete.png" /></p>
+<p>The following conditions have to be met for a successful firmware transfer:</p>
+<ul class="simple">
+<li><p>The Size/Offset attributes are non-zero and set to the same value (The DevGUi will show 100%)</p></li>
+<li><p>The LastError attribute is set to “Success”</p></li>
+<li><p>The Status attribute is back to “Idle”</p></li>
+</ul>
+<p>for example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Offset/Reported - {&quot;value&quot;: 171380}
+ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Size/Reported - {&quot;value&quot;: 171380}
+ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/LastError/Reported - {&quot;value&quot;: &quot;Success&quot;}
+ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported - {&quot;value&quot;: &quot;Idle&quot;}
+</pre></div>
+</div>
+<p>This state will only be visible for a very short time, as the ZPC will
+re-interview the node and will unpublish its state and capabilities for the
+time of the interview.</p>
+</section>
+<section id="possible-errors">
+<h3>Possible Errors<a class="headerlink" href="#possible-errors" title="Permalink to this heading"></a></h3>
+<p>There are a few possible errors described in the Unify specification.
+The <em>LastError</em> attribute indicates the status of the last Firmware
+Update/transfer attempt.</p>
+<p><img alt="Errors during Firmware Update" src="../../_images/dev_gui_possible_firmware_udpate_errors.png" /></p>
+<ul class="simple">
+<li><p><strong>InvalidImage</strong>
+This error happens if the node rejected the image. Reasons can include the
+signature verification, the version downgrade protection or a wrong checksum.</p></li>
+<li><p><strong>NotSupported</strong>
+This error happens if the node’s firmware is not upgradeable. This error will be
+reported by the end node before any transfer is attempted.</p></li>
+<li><p><strong>Aborted</strong>
+This error can happen if the transfer could not complete without a timeout.</p></li>
+</ul>
+<p>In the case of an abort, you can retry a Firmware Update by modifying the Image
+Provider list of images. Remove the UIID(/UNID) combination, wait for the image
+Provider to advertise that the image is no longer available, and modify back the
+image list with the desired UIID(/UNID) combination.</p>
+</section>
+</section>
+<section id="understanding-how-the-zpc-works">
+<h2>Understanding how the ZPC Works<a class="headerlink" href="#understanding-how-the-zpc-works" title="Permalink to this heading"></a></h2>
+<p>The purpose of this section is to explain the ZPC behavior and how to correlate
+frames seen on a Z-Wave Ziffer with operations performed by the ZPC.</p>
+<section id="discovery-and-operation">
+<h3>Discovery and Operation<a class="headerlink" href="#discovery-and-operation" title="Permalink to this heading"></a></h3>
+<p>The ZPC performs network discovery and operation for both listening and
+non-listening devices using a software component called the attribute system.</p>
+<p>The basic idea of the attribute system is that all network state parameters have
+a reported value and a desired value. The following are examples of state
+parameters:</p>
+<ul class="simple">
+<li><p><em>is the lamp on</em></p></li>
+<li><p><em>is the door locked</em></p></li>
+<li><p><em>current room temperature</em></p></li>
+<li><p>…</p></li>
+</ul>
+<p>The reported value of an attribute is data about the current attribute state
+that the device has communicated to the ZPC. If the device has not told the ZPC
+what the value is, the reported value is unresolved.</p>
+<p>The desired value is the user-preferred attribute value, such as <em>the user wants the
+light to be off</em>. Note that it does not make sense for all attributes to have a
+desired value. In other words, a smoke detector should not have a desired value
+to prevent a user from turning it off or setting the smoke to go away.</p>
+<p>The ZPC attribute system is used to resolve an unresolved attribute using a set
+of rules. For instance, you can get the binary switch value of a Z-Wave Binary
+Switch node by sending the Z-Wave BINARY_SWITCH_GET command. If the attribute
+system notices that the desired value of an attribute is different than the
+reported value, the ZPC will issue a Z-Wave SET command.</p>
+<blockquote>
+<div><p>NOTE the ZPC will only send a SET command if it notices that the reported
+value of an attribute is different than the desired. The ZPC will do its best
+to make sure that it has the right reported value by setting up Lifeline
+associations, but there may be situations where the ZPC has outdated
+information.</p>
+</div></blockquote>
+<p>If a node supports supervision, the ZPC will use supervision encapsulation when
+sending a SET command. In this way, the ZPC will update the reported value
+automatically when sending a SET command. If a node does not support
+supervision, the ZPC will mark the reported value of an attribute unresolved
+when sending a SET and this will trigger a new GET command for the attribute to
+update the reported value.</p>
+<blockquote>
+<div><p>Currently, when the ZPC sends a SET command with supervision encapsulation and
+the device reports the supervision state working, the ZPC will not reflect
+this on the MQTT side. The reported value will be updated on MQTT side when
+the supervision state OK/FAILED is received.</p>
+</div></blockquote>
+<p>In the event that a node does not adapt a set value or does not answer a get command,
+the ZPC will try the ZPC command 3 times with a 20 seconds interval.</p>
+</section>
+</section>
+<section id="wake-up-device-support">
+<h2>Wake up device support<a class="headerlink" href="#wake-up-device-support" title="Permalink to this heading"></a></h2>
+<p>Z-Wave Wake up devices are supported by pausing node resolution when
+the device is sleeping, which means that if the temperature of a thermostat is
+changed multiple times while the device is sleeping, the ZPC will only send the
+latest change using the thermostat set point command. The ZPC will send wake-up
+no-more information when there is nothing more to resolve regarding the node.</p>
+<p>The default wake up interval used by the ZPC can be configured with the
+option <code class="docutils literal notranslate"><span class="pre">zpc.default_wake_up_interval</span></code>.</p>
+</section>
+<section id="failing-nodes">
+<h2>Failing nodes<a class="headerlink" href="#failing-nodes" title="Permalink to this heading"></a></h2>
+<p>The ZPC has a mechanism to detect if nodes in the network have become
+unresponsive. If consecutive transmissions to a node have failed a number of
+times, or if consecutive wake-up information frames have been missed from a node, that
+node has become failing and the ZPC will update the node <em>State</em> topic to
+<em>FAILING</em>. As soon as a frame, either application frame or Z-Wave acknowledgment frame,
+has been received from the node the ZPC will revert the
+node state to <em>INCLUDED</em>. The ZPC will periodically send <em>NOP</em> frames to
+listening and FLIRS failing nodes to check if they are resounding again.</p>
+<p>The NOP interval of failing nodes is</p>
+<ul class="simple">
+<li><p>4 * 2^n for Listening devices</p></li>
+<li><p>40 * 4^n for FLiRS devices</p></li>
+</ul>
+<p>The threshold values for the number of failed transmissions and missing wake-up
+notifications can be configured with the options, zpc.accepted_transmit_failure
+and zpc.missing_wake_up_notification</p>
+</section>
+<section id="network-polling">
+<h2>Network Polling<a class="headerlink" href="#network-polling" title="Permalink to this heading"></a></h2>
+<p>The ZPC relies on reports from the Z-Wave nodes to keep the state of the network.
+However, some devices may not report state updates when there are
+changes in the network. To fill this gap, The ZPC SDK includes a network polling
+feature, where the state of given attributes is periodically updated via
+sending a request to the Z-Wave node.</p>
+<p>To enable the network polling feature, the user shall provide a list of
+attributes and their expected polling interval in a yaml configuration file. If
+the controlling node gets the attribute state update due to the user request or
+unsolicited report, the polling will be postponed. Note that the polling
+interval represents the maximum ‘age’ of a given attribute state. The polling
+interval value shall be presented in seconds and the interval should be included
+distinctly for the Z-Wave Device Types:</p>
+<ul class="simple">
+<li><p>polling_interval_zwave: represents Z-Wave Devices that are not represented in
+Z-Wave Plus or Z-Wave Plus v2 Device Types</p></li>
+<li><p>polling_interval_zwave_v1: represents Z-Wave Plus Device Type</p></li>
+<li><p>polling_interval_zwave_v2: represents Z-Wave Plus v2 Device Type</p></li>
+</ul>
+<p>If the Z-Wave specific device type does not have a specific polling interval, the polling
+interval should not be specified in the configuration file. It is also
+important here to specify attribute types that have a resolver <em>get</em> rule
+registered.</p>
+<p>The Z-Wave attribute lists configuration file example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">attribute_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_STATE</span><span class="w"></span>
+<span class="w">  </span><span class="nt">polling_interval_zwave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span><span class="w"></span>
+<span class="w">  </span><span class="nt">polling_interval_zwave_v1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">attribute_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE</span><span class="w"></span>
+<span class="w">  </span><span class="nt">polling_interval_zwave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span><span class="w"></span>
+<span class="w">  </span><span class="nt">polling_interval_zwave_v1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span><span class="w"></span>
+<span class="w">  </span><span class="nt">polling_interval_zwave_v2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Attribute types can be provided either as their name like above, or with their
+type id, like <em>attribute_type:0x002502</em></p>
+<p>When the ZPC is installed on the Debian Buster platform the sample configuration
+(i.e., the sample contains the recommended attribute types that may require periodic
+polling based on the device type) file will be located in:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/share/uic/zwave_poll_config.yaml
+</pre></div>
+</div>
+<p>Besides, the user would also configure the minimum interval between two
+consecutive poll request (i.e., zpc.poll.backoff) and default polling interval
+(i.e., zpc.poll.default_interval) in case the attribute is registered to be
+polled without an interval. These values should be included in [Configuration
+File used to set up the ZPC](###Configuration File). The default backoff interval
+is set to 30 seconds. This value is selected based on experience and a user can
+configure a value above 1 second based on their network needs. Note that the
+minimum rate limit between two consecutive poll requests is 1 second as
+discussed in the Z-Wave Plus role Type Specification in Polling Devices section.</p>
+</section>
+<section id="dotdot-cluster-to-z-wave-command-class-mapping">
+<h2>Dotdot Cluster to Z-Wave Command Class Mapping<a class="headerlink" href="#dotdot-cluster-to-z-wave-command-class-mapping" title="Permalink to this heading"></a></h2>
+<section id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h3>
+<p>The ZPC maps DotDot clusters to Z-Wave command classes and vice versa.
+All maps are defined by a set of configuration files which the ZPC loads as boot.
+Default files are installed in the <code class="docutils literal notranslate"><span class="pre">/usr/share/uic/rules</span></code> directory.
+The mapping file extension is <em>.uam</em> which is short for <strong>Unify Attribute Map</strong>.</p>
+<p>The following table has a brief description of how ZCL clusters are mapped to Z-Wave command classes, by default.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>DotDot Cluster</p></th>
+<th class="head"><p>Z-Wave Command Classes</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OnOff</p></td>
+<td><p>Binary Switch <br> Basic <br> Multilevel Switch</p></td>
+<td><p>The DotDot OnOff commands (On and Off) are mapped to Z-Wave Binary Switch Set command  or Basic SET</p></td>
+</tr>
+<tr class="row-odd"><td><p>OccupancySensing</p></td>
+<td><p>Notification</p></td>
+<td><p>The Z-Wave Notification Report command is mapped to Occupancy and OccupacyType DotDot attributes</p></td>
+</tr>
+<tr class="row-even"><td><p>IASZone</p></td>
+<td><p>Notification</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Illumiance level sensing</p></td>
+<td><p>Notification</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>DoorLock</p></td>
+<td><p>Door Lock</p></td>
+<td><p>The DotDot DoorLock commands (LockDoor and UnlockDoor) are mapped to Z-Wave Door Lock Set command</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thermostat</p></td>
+<td><p>Multilevel Sensor<br> Thermostat Setpoint <br> Thermostat Mode</p></td>
+<td><p>The DotDot SetpointRaiseOrLower and WriteAttribute commands are mapped to Thermostat Setpoint and Thermostat Mode Commands</p></td>
+</tr>
+<tr class="row-even"><td><p>TemperatureMeasurement</p></td>
+<td><p>Multilevel Sensor</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Level</p></td>
+<td><p>Multilevel Switch</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>IASZone</p></td>
+<td><p>Battery</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="modifying-maps-for-the-zpc">
+<h3>Modifying maps for the ZPC<a class="headerlink" href="#modifying-maps-for-the-zpc" title="Permalink to this heading"></a></h3>
+<div class="toctree-wrapper compound">
+</div>
+<p>While it is not recommended to change the default UAM files, it is possible
+to add new maps. Follow the instructions in this <a class="reference internal" href="how_to_write_uam_files_for_the_zpc.html"><span class="doc std std-doc">guide</span></a> to enable additional mappings.</p>
+</section>
+</section>
+<section id="migrating-to-zpc-from-z-ip-gateway">
+<h2>Migrating to ZPC from Z/IP Gateway<a class="headerlink" href="#migrating-to-zpc-from-z-ip-gateway" title="Permalink to this heading"></a></h2>
+<p>This section describes how to migrate to a ZPC from a Z/IP gateway. If migration
+from a third-party gateway is desired, the first step in the migration process
+is to migrate to a Z/IP Gateway.</p>
+<p>To successfully migrate, the following Z/IP Gateway SDK tools are needed.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">zw_programmer</span></code> Is required for programming new firmware on the Z-Wave modules
+and for reading and writing the Z-Wave controller module NVM.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zw_nvm_converter</span></code> this tool is used for converting the Z-Wave NVM between
+protocol versions. The tool can be used to migrate from a 500 series Z-Wave
+chip to a 700 series chip.</p></li>
+</ul>
+<p>You can get Z/IP Gateway through Simplicity Studio. Read the Z/IP Gateway SDK
+user guide on how to compile and install the Z/IP gateway on your platform.</p>
+<p>For Z-Wave Long Range support, the ZPC requires a Z-Wave API controller version
+7.16 or higher. For details about migrating between protocol versions, see the
+Z/IP Gateway manual, <em>Migration Support Tools</em></p>
+<p>To ensure that the ZPC is working correctly, it must have access to the network
+encryption keys as well as information about which security keys have been
+granted to each node in the network. The Z/IP Gateway stores the encryption keys
+in the right place in the module NVM for the ZPC to read.</p>
+<p>In general, the ZPC will query all network information from the nodes in the
+network on the first boot, but it needs to know which network keys have been
+granted to the nodes in the network. The Unify Framework contains the tool
+<code class="docutils literal notranslate"><span class="pre">zpc_database_tool</span></code>; which can be used for manipulating the ZPC database.
+zpc_database_tool can import/export the ZPC database from/to a JSON file.
+The easiest way to set the granted key information is to do the following:</p>
+<ol class="arabic">
+<li><p>Migrate the Z-Wave controller using the Z/IP Gateway SDK tools as described
+above.</p></li>
+<li><p>Start the ZPC with the migrated Z-Wave controller module but with an empty
+database file. <code class="docutils literal notranslate"><span class="pre">zpc</span> <span class="pre">--zpc.datastore_file</span> <span class="pre">datastore.db</span></code></p></li>
+<li><p>Shut down the ZPC by typing <code class="docutils literal notranslate"><span class="pre">exit</span></code> on the console. The ZPC will now have
+created an initial database that matches the Z-Wave network.</p></li>
+<li><p>Use the zpc_database_tool to export the database to a JSON file
+<code class="docutils literal notranslate"><span class="pre">zpc_database_tool</span> <span class="pre">--zpc.datastore_file</span> <span class="pre">datastore.db</span> <span class="pre">--export</span> <span class="pre">datastore.json</span></code></p></li>
+<li><p>Open and edit the JSON file and locate the following attributes under each
+ATTRIBUTE_NODE_ID object:</p>
+<ul>
+<li><p>ATTRIBUTE_NETWORK_STATUS must be set to “reported”: “00”</p></li>
+<li><p>ATTRIBUTE_KEX_FAIL_TYPE should be set to “reported”: “00”</p></li>
+<li><p>ATTRIBUTE_S2_DSK this is optional but should be set to the DSK of the node.</p></li>
+<li><p>ATTRIBUTE_NODE_IS_S2_CAPABLE should only be defined if the node supports
+S2</p></li>
+<li><p>ATTRIBUTE_ZWAVE_INCLUSION_PROTOCOL must be set to 1 if the node was
+included using Z-Wave long range and should be 0 otherwise.</p></li>
+<li><p>ATTRIBUTE_ENDPOINT_ID: all endpoint objects besides endpoint 0 must be
+removed. Endpoint 0 should only contain the ATTRIBUTE_ZWAVE_NIF with no
+desired or reported values.</p></li>
+<li><p>ATTRIBUTE_GRANTED_SECURITY_KEYS is a bitmask of which network keys a node
+have been granted the following keys are currently defined:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Mask</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ZWAVE_CONTROLLER_S0_KEY</p></td>
+<td><p>0x80</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZWAVE_CONTROLLER_S2_UNAUTHENTICATED_KEY</p></td>
+<td><p>0x01</p></td>
+</tr>
+<tr class="row-even"><td><p>ZWAVE_CONTROLLER_S2_AUTHENTICATED_KEY</p></td>
+<td><p>0x02</p></td>
+</tr>
+<tr class="row-odd"><td><p>ZWAVE_CONTROLLER_S2_ACCESS_KEY</p></td>
+<td><p>0x04</p></td>
+</tr>
+</tbody>
+</table>
+<p>Ie if a node has all keys the granted keys attribute should be</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_GRANTED_SECURITY_KEYS&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;87&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>With the updated JSON file, a new database can be constructed with zpc_database_tool. <code class="docutils literal notranslate"><span class="pre">zpc_database_tool</span> <span class="pre">--zpc.datastore_file</span> <span class="pre">datastore.db</span> <span class="pre">--import</span> <span class="pre">modified_datastore.json</span></code></p></li>
+<li><p>You can now start the ZPC as usual. The ZPC will start probing all nodes, sleeping devices will be probed
+when they wake up.</p></li>
+</ol>
+<section id="zpc-database-json-example">
+<h3>ZPC Database JSON Example<a class="headerlink" href="#zpc-database-json-example" title="Permalink to this heading"></a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00000001&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_HOME_ID&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2ab89dc4&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NODE_ID&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0100&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ENDPOINT_ID&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_NIF&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">              </span><span class="p">]</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NETWORK_STATUS&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_GRANTED_SECURITY_KEYS&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9f&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NODE_ID&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0500&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ENDPOINT_ID&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_NIF&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">              </span><span class="p">]</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NETWORK_STATUS&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_GRANTED_SECURITY_KEYS&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_KEX_FAIL_TYPE&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_S2_DSK&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123498a7ac59a1b9096f99a0edb95e06&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;d3&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9c&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_ZWAVE_INCLUSION_PROTOCOL&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;reported&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00000000&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ATTRIBUTE_NODE_IS_S2_CAPABLE&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">]</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="transitioning-from-z-ip-gateway-z-ware">
+<h2>Transitioning from Z/IP Gateway + Z-Ware<a class="headerlink" href="#transitioning-from-z-ip-gateway-z-ware" title="Permalink to this heading"></a></h2>
+<p>The ZPC provides a subset of Z-Wave features compared to the Z/IP Gateway.</p>
+<ul class="simple">
+<li><p>The ZPC is based on the Generic Controller Device type</p></li>
+<li><p>Does not support Learn Mode which enables it to be included in other networks.</p></li>
+<li><p>Does not allow to establish arbitrary Associations and only establishes Lifeline Association.</p></li>
+<li><p>Does not control all Command Classes fully, but only provides partial control
+Z-Wave Command Classes where the ZPC provides partial control include:</p></li>
+<li><p>Switch Multilevel, version 4,</p></li>
+<li><p>Multilevel Sensor, version 11,</p></li>
+<li><p>Thermostat Mode, version 3,</p></li>
+<li><p>Thermostat Setpoint, version 3 and</p></li>
+<li><p>Notification, version 11.</p></li>
+</ul>
+</section>
+<section id="performing-backup-and-restore">
+<h2>Performing Backup and Restore<a class="headerlink" href="#performing-backup-and-restore" title="Permalink to this heading"></a></h2>
+<p>The backup and restore process works under the assumption that the
+controller firmware version for the backup and restore is identical.</p>
+<p>The following are the backup steps:</p>
+<ul class="simple">
+<li><p>Stop the ZPC.</p></li>
+<li><p>Use zw_programmer to back up the NVM of the Z-Wave module.</p></li>
+<li><p>Make a copy of the SQLite database used by the ZPC.</p></li>
+<li><p>Start the ZPC again.</p></li>
+</ul>
+<p>The process of restoring a backup is following:</p>
+<ul class="simple">
+<li><p>Stop the ZPC.</p></li>
+<li><p>Use zw_programmer to restore the NVM to the Z-Wave module.
+Copy a backup of the SQLite database to an active SQLite database.</p></li>
+<li><p>Start the ZPC again.</p></li>
+</ul>
+</section>
+<section id="datastore-versioning">
+<h2>Datastore Versioning<a class="headerlink" href="#datastore-versioning" title="Permalink to this heading"></a></h2>
+<p>The ZPC defines a revision of the datastore. Every time a non-compatible change
+will be made in a new version, the ZPC datastore version will be incremented.</p>
+<p>The ZPC will automatically refuse to start if it detects a version mismatch
+between its ZPC datastore version and the version written in the datastore file.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;E&gt; [datastore_fixt] Datastore version: 1 in datastore file is non compatible
+with the ZPC datastore version: 2. Please convert your ZPC datastore using the
+ZPC datastore tools
+&lt;C&gt; [uic_component_fixtures] Failed  [1]: Datastore.
+</pre></div>
+</div>
+<section id="recovering-a-database">
+<h3>Recovering a Database<a class="headerlink" href="#recovering-a-database" title="Permalink to this heading"></a></h3>
+<p>If you wish to keep the previous datastore file, you can use the
+<code class="docutils literal notranslate"><span class="pre">zpc_database_recover_tool</span></code>. This tool will remove all information under all
+endpoints and keep the minimum in the datastore.</p>
+<p>After running the recover tool, the ZPC will re-interview all devices in the
+network, as if a step migration was performed.</p>
+<p>Stop the ZPC and make a database backup:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic $ service uic-zpc stop
+pi@unify:/var/lib/uic $ cp zpc.db zpc_back_up.db
+</pre></div>
+</div>
+<p>Run the recover tool. Specifying the target version is optional:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic $ zpc_database_recover_tool --target_version <span class="m">2</span> --zpc.datastore_file /var/lib/uic/zpc.db
+
+&lt;i&gt; <span class="o">[</span>datastore_fixt<span class="o">]</span> Using datastore file: /var/lib/uic/zpc.db
+&lt;d&gt; <span class="o">[</span>datastore_fixt<span class="o">]</span> SQLITE Version: <span class="m">3</span>.28.0
+&lt;i&gt; <span class="o">[</span>zpc_database_recover_tool<span class="o">]</span> Datastore version reported from the datastore file: <span class="m">3</span>
+&lt;i&gt; <span class="o">[</span>zpc_database_recover_tool<span class="o">]</span> Erasing endpoint data <span class="k">in</span> the datastore.
+&lt;i&gt; <span class="o">[</span>zpc_database_recover_tool<span class="o">]</span> Writing version <span class="m">2</span> to the datastore.
+&lt;d&gt; <span class="o">[</span>attribute_store<span class="o">]</span> Teardown of the attribute store
+</pre></div>
+</div>
+<p>Finally, restart the ZPC.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic $ service uic-zpc start
+</pre></div>
+</div>
+<p>If this step does not work and the network cannot be used, you have 2 options:</p>
+<ul class="simple">
+<li><p>Create a new database file using the migration tool.</p></li>
+<li><p>Reset the network.</p></li>
+</ul>
+</section>
+</section>
+<section id="z-wave-certification">
+<h2>Z-Wave Certification<a class="headerlink" href="#z-wave-certification" title="Permalink to this heading"></a></h2>
+<p>Not all versions of the ZPC are certified. The list of versions that have passed
+<a class="reference external" href="https://certification.z-wavealliance.org/">Z-Wave certification</a> is:</p>
+<ul class="simple">
+<li><p>ZPC v1.1.1</p></li>
+<li><p>ZPC v1.0.1</p></li>
+</ul>
+<p>For information relevant to Z-Wave certification, please read the
+<a class="reference internal" href="readme_certification.html"><span class="doc std std-doc">ZPC Z-Wave Certification Guide</span></a></p>
+</section>
+<section id="developer-resources">
+<h2>Developer resources<a class="headerlink" href="#developer-resources" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="how_to_implement_new_zwave_command_classes.html">Guideline for implementing Command Classes</a></li>
+</ul>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p><em>My Z-Wave device doesn’t seem to include get included into my gateway</em></p>
+<ol class="arabic">
+<li><p>Make sure your device and gateway match the frequency region. i.e., an EU device
+is incompatible with a US gateway. Information on the region can be found on
+the packaging of the device.</p>
+<p>To verify the RF region on your gateway, execute the following command in
+your gateway terminal:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cat /etc/uic/uic.cfg
+</pre></div>
+</div>
+<p>It outputs the configured rf_region:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:/etc/uic $ cat uic.cfg
+zpc:
+  serial: /dev/ttyUSB0
+  rf_region: US
+  datatore_file: /var/lib/uic/zpc.db
+</pre></div>
+</div>
+</li>
+<li><p>Make sure your device isn’t still connected to a previous network. To remove
+a previous inclusion, hit the action button on your product and put the
+gateway in the <em>remove</em> state.</p></li>
+<li><p>Power-cycling your device could make it include.</p></li>
+<li><p>To change the frequency region of the gateway, see the startup options for
+the ZPC.</p></li>
+</ol>
+</li>
+<li><p><em>The gateway doesn’t respond anymore!</em></p>
+<ol class="arabic simple">
+<li><p>It could be that the gateway experiences some delays while communicating with
+the Z-Wave node (missing Acknowledgment/Report, routing issues…). In this
+case, it may look like the gateway does not react to IoT Services commands.
+You could verify that the gateway still responds by modifying the state of
+another Z-Wave device in the gateway and see if the gateway responds to these
+changes. A way to modify the state is to open MQTT explorer and publish a
+command to a cluster for a particular node.</p></li>
+<li><p>As last resort, try to restart the Unify gateway.</p></li>
+</ol>
+</li>
+<li><p><em>How do I run the ZPC in isolation?</em></p>
+<p>Stop the ZPC systemd service:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl stop uic-zpc
+</pre></div>
+</div>
+<p>run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/usr/bin/zpc --zpc.serial /dev/ttyUSB0 --mapdir<span class="o">=</span>/usr/share/uic/rules
+</pre></div>
+</div>
+<p>Replace the serial argument with the port the Z-Wave controller is connected to.
+Replace the mapdir argument with the UAM rules file if custom UAM rules need to be provided</p>
+</li>
+<li><p><em>I have an old Z-Wave device, is it still supported?</em></p>
+<p>Yes. However, older devices may be inconsistent in reporting their actual
+state. This usually means that by operating the same command for a second time,
+the state gets updated correctly.</p>
+</li>
+<li><p><em>ZPC complains about var/lib/uic/zpc.db permissions, How do I fix it?</em></p>
+<p>This means your probably running the ZPC as an executable and not as a
+<code class="docutils literal notranslate"><span class="pre">systemd</span></code> service. Advised is to run ZPC with a database path that is writable
+in this case:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>/usr/bin/zpc --zpc.datastore_file ~/zpc.db
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

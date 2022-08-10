@@ -23,7 +23,7 @@
 #include "zwapi_protocol_basis.h"
 #include "zwave_controller_storage.h"
 
-// UIC Includes
+// Unify Includes
 #include "sl_log.h"
 #define LOG_TAG "zwave_tx_scheme_selector"
 
@@ -42,7 +42,6 @@
 /// (Routing header + Wake Up extension). Normal Explore Frame is also 8
 #define MAX_ROUTING_HEADER_SIZE_R3 8
 /// Maximum Routing header size for Z-Wave Long Range channels... No routing here
-/// TBD: Should we still set that to 8, so we allow for future routing?
 #define MAX_ROUTING_HEADER_SIZE_LONG_RANGE 0
 
 // Encapsulation overhead Constants
@@ -91,16 +90,17 @@ void zwave_tx_scheme_get_node_tx_options(uint32_t expected_qos_priority,
                                          zwave_tx_options_t *tx_options)
 {
   // Prepare the Z-Wave TX options.
-  tx_options->number_of_responses     = expected_number_of_response;
-  tx_options->valid_parent_session_id = false;
-  tx_options->fasttrack               = false;
-  tx_options->discard_timeout_ms      = expected_discard_timeout_ms;
-  tx_options->qos_priority            = expected_qos_priority;
-  tx_options->is_test_frame           = false;
-  tx_options->rf_power                = NORMAL_POWER;
-  tx_options->group_id                = ZWAVE_TX_INVALID_GROUP;
-  tx_options->send_follow_ups         = false;
-  tx_options->is_first_follow_up      = false;
+  tx_options->number_of_responses = expected_number_of_response;
+  tx_options->fasttrack           = false;
+  tx_options->discard_timeout_ms  = expected_discard_timeout_ms;
+  tx_options->qos_priority        = expected_qos_priority;
+  tx_options->send_follow_ups     = false;
+  // Zero out the transport options.
+  tx_options->transport.valid_parent_session_id = false;
+  tx_options->transport.is_test_frame           = false;
+  tx_options->transport.rf_power                = NORMAL_POWER;
+  tx_options->transport.group_id                = ZWAVE_TX_INVALID_GROUP;
+  tx_options->transport.is_first_follow_up      = false;
 }
 
 zwave_controller_encapsulation_scheme_t
@@ -135,7 +135,10 @@ uint16_t zwave_tx_scheme_get_max_payload(zwave_node_id_t node_id)
       maximum_fragment_size -= MAX_ROUTING_HEADER_SIZE_R1_R2;
     }
   } else {
-    maximum_fragment_size = ZWAVE_TX_SAFE_LOWEST_MAX_PAYLOAD;
+      // Else we have to assume R1/R2:
+      maximum_fragment_size = MAX_MSDU_SIZE_R1_R2;
+      maximum_fragment_size -= MAX_ROUTING_HEADER_SIZE_R1_R2;
+
     sl_log_warning(LOG_TAG,
                    "Unknown protocol for NodeID %d. Selecting the "
                    "lowest possible payload size(%d).",

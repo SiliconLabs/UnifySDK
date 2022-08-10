@@ -10,9 +10,11 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
+use unify_build_utils::load_unify_environment;
+
 fn main() {
-    // these exports are only used when an exe is compiled. e.g. integration
-    // tests or final binaries!
-    println!("cargo:rustc-link-lib=dylib=uic_contiki_platform");
-    println!("cargo:rustc-link-lib=dylib=uic_contiki");
+    load_unify_environment!(
+        dylib "uic_contiki",
+        dylib "uic_contiki_platform"
+    );
 }

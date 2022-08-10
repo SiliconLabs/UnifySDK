@@ -165,16 +165,16 @@ static void add_device_9()
   Management::get_instance()->update_smartstart_cache(smartstart_list);
 }
 
-const zwave_node_id_t zpc_node_id            = 1;
-const zwave_node_id_t node_id_10             = 10;
-const zwave_node_id_t node_id_11             = 11;
+const zwave_node_id_t zpc_node_id = 1;
+const zwave_node_id_t node_id_10  = 10;
+const zwave_node_id_t node_id_11  = 11;
 
-attribute_store_node_t home_id_node          = ATTRIBUTE_STORE_INVALID_NODE;
-attribute_store_node_t zpc_node_id_node      = ATTRIBUTE_STORE_INVALID_NODE;
-attribute_store_node_t node_id_10_node       = ATTRIBUTE_STORE_INVALID_NODE;
-attribute_store_node_t node_id_11_node       = ATTRIBUTE_STORE_INVALID_NODE;
-attribute_store_node_t dsk_node_id_10_node   = ATTRIBUTE_STORE_INVALID_NODE;
-attribute_store_node_t dsk_node_id_11_node   = ATTRIBUTE_STORE_INVALID_NODE;
+attribute_store_node_t home_id_node        = ATTRIBUTE_STORE_INVALID_NODE;
+attribute_store_node_t zpc_node_id_node    = ATTRIBUTE_STORE_INVALID_NODE;
+attribute_store_node_t node_id_10_node     = ATTRIBUTE_STORE_INVALID_NODE;
+attribute_store_node_t node_id_11_node     = ATTRIBUTE_STORE_INVALID_NODE;
+attribute_store_node_t dsk_node_id_10_node = ATTRIBUTE_STORE_INVALID_NODE;
+attribute_store_node_t dsk_node_id_11_node = ATTRIBUTE_STORE_INVALID_NODE;
 
 static void create_test_network()
 {
@@ -206,7 +206,9 @@ static void create_test_network()
 
   // NodeID 11 zw-C87FFD5F-000B
   node_id_11_node = attribute_store_add_node(ATTRIBUTE_NODE_ID, home_id_node);
-  attribute_store_set_reported(node_id_11_node, &node_id_11, sizeof(node_id_11));
+  attribute_store_set_reported(node_id_11_node,
+                               &node_id_11,
+                               sizeof(node_id_11));
 
   dsk_node_id_11_node
     = attribute_store_add_node(ATTRIBUTE_S2_DSK, node_id_11_node);
@@ -219,7 +221,8 @@ static void create_test_network()
 ////////////////////////////////////////////////////////////////////////////////
 
 // Setup the test suite (called once before all test_xxx functions are called)
-void suiteSetUp() {
+void suiteSetUp()
+{
   datastore_init(":memory:");
   attribute_store_init();
 
@@ -258,7 +261,7 @@ void test_zwave_smartstart_on_inclusion_request()
   // Z-Wave, then Z-Wave Long Range for this test
   test_config.inclusion_protocol_preference = "1,2";
   // Inclusion request with Home ID matched and entry found
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   add_device_4();
   zwave_network_management_add_node_with_dsk_ExpectAndReturn(device_4_dsk_array,
@@ -282,7 +285,7 @@ void test_zwave_smartstart_on_inclusion_request()
                                                          PROTOCOL_ZWAVE);
 
   // Received inclusion request but don't want to include yet, disable SmartStart
-  zwave_network_management_smart_start_enable_Expect(false);
+  zwave_network_management_enable_smart_start_add_mode_Expect(false);
   add_device_5();
 
   smartstart_callbacks->on_smart_start_inclusion_request(nwi_home_id,
@@ -298,7 +301,7 @@ void test_zwave_smartstart_inclusion_request_but_no_matching_protocol()
   test_config.inclusion_protocol_preference = "1";
 
   // Inclusion request with Home ID matched and entry found
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   add_device_4();
   // Not the preferred protocol will be ignored
@@ -322,7 +325,7 @@ void test_zwave_smartstart_inclusion_request_pick_protocol_from_config()
   test_config.inclusion_protocol_preference = "2,1";
 
   // Inclusion request with Home ID matched and entry found
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   add_device_6();
 
@@ -348,7 +351,7 @@ void test_zwave_smartstart_inclusion_request_pick_protocol_from_smartstart_list(
 {
   zwave_controller_is_reset_ongoing_IgnoreAndReturn(false);
   // Inclusion request with Home ID matched and entry found
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   add_device_7();
 
@@ -373,7 +376,7 @@ void test_zwave_smartstart_inclusion_request_pick_protocol_from_smartstart_list(
                                                          NULL,
                                                          PROTOCOL_ZWAVE);
 
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   add_device_8();
   smartstart_callbacks->on_smart_start_inclusion_request(device_8_nwi_home_id,
@@ -392,7 +395,7 @@ void test_zwave_smartstart_inclusion_request_pick_protocol_from_smartstart_list(
     NULL,
     PROTOCOL_ZWAVE_LONG_RANGE);
 
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   // Z-Wave preferred only
   add_device_9();
@@ -414,7 +417,7 @@ void test_zwave_smartstart_inclusion_request_multiple_entires_in_list()
   // Z-Wave, then Z-Wave Long Range for this test
   test_config.inclusion_protocol_preference = "1,2";
   // Inclusion request with Home ID matched and entry found
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   {
@@ -500,7 +503,7 @@ void test_zwave_smartstart_inclusion_all_dsk_already_in_network()
   // Inclusion request with Home ID matched and entry found
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
-  zwave_network_management_smart_start_enable_Expect(false);
+  zwave_network_management_enable_smart_start_add_mode_Expect(false);
 
   // "11161-14532-28714-35861-02690-50097-47954-03920" is already in the network
   // "11161-14532-28714-35861-02690-50097-47954-03921" is already in the network
@@ -526,7 +529,7 @@ void test_zwave_smartstart_inclusion_one_dsk_already_in_network()
   // Inclusion request with Home ID matched and entry found
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
 
   // "11161-14532-28714-35861-02690-50097-47954-03920" is already in the network
   // "11161-14532-28714-35861-02690-50097-47954-03922" new DSK
@@ -552,7 +555,7 @@ void test_zwave_smartstart_inclusion_no_dsk_in_network()
   // Inclusion request with Home ID matched and entry found
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
   zwave_network_management_get_home_id_ExpectAndReturn(home_id);
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
 
   // "11161-14532-28714-35861-02690-50097-47954-03922" new DSK
   // "11161-14532-28714-35861-02690-50097-47954-03923" new DSK
@@ -576,7 +579,7 @@ void test_zwave_smartstart_inclusion_all_dsk_already_in_network_but_reset_ongoin
   // Nothing should happen if we are reseting, we activate SmartStart
   // in anticipation of our new network
   zwave_controller_is_reset_ongoing_IgnoreAndReturn(true);
-  zwave_network_management_smart_start_enable_Expect(true);
+  zwave_network_management_enable_smart_start_add_mode_Expect(true);
 
   // "11161-14532-28714-35861-02690-50097-47954-03920" is already in the network
   // "11161-14532-28714-35861-02690-50097-47954-03921" is already in the network

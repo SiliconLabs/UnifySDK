@@ -24,11 +24,11 @@
 #include "workaround.hpp"
 #include "ota.hpp"
 
-// UIC imports
+// Unify imports
 #include "contiki_test_helper.h"
 #include "sl_status.h"
 #include "sl_log.h"
-#include "mqtt_mock_helper.h"
+#include "mqtt_test_helper.h"
 
 std::string construct_status_update_topic(const dotdot_unid_t &unid,
                                           const dotdot_endpoint_id_t &endpoint,
@@ -74,7 +74,7 @@ void setUp()
 {
   contiki_test_helper_init();
   contiki_test_helper_run(0);
-  mqtt_mock_helper_init();
+  mqtt_test_helper_init();
   uic_ota::init(image_available_function_callback,
                 image_dir,
                 cache_size,
@@ -101,7 +101,7 @@ void test_ota_subscribes_and_callback()
   // Check that meta info is updated when a MQTT message is received on info
   // topic for a UIID
   uic_ota::subscribe_unid("unid", "uiid");
-  mqtt_mock_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
+  mqtt_test_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
 
   TEST_ASSERT_EQUAL_STRING("0.0.1", meta_info.version.c_str());
   TEST_ASSERT_EQUAL_STRING("uiid", meta_info.uiid.c_str());
@@ -118,7 +118,7 @@ void test_ota_subscribes_and_callback()
   meta_info.version     = "0.0.0";
 
   uic_ota::unsubscribe_unid("unid", "uiid");
-  mqtt_mock_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
+  mqtt_test_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
 
   TEST_ASSERT_EQUAL_STRING("0.0.0", meta_info.version.c_str());
   TEST_ASSERT_EQUAL_STRING("", meta_info.uiid.c_str());
@@ -137,7 +137,7 @@ void test_ota_subscribes_and_callback()
     "Filename": "ZW_PowerStrip_7.16.0_90_ZGM130S_REGION_EU_LR.gbl"
   })";
 
-  mqtt_mock_helper_publish(topic_2,
+  mqtt_test_helper_publish(topic_2,
                            payload_meta.c_str(),
                            payload_meta.length());
   TEST_ASSERT_EQUAL_STRING("0.1.0", meta_info.version.c_str());
@@ -155,7 +155,7 @@ void test_ota_subscribes_and_callback()
 
   uic_ota::unsubscribe_unid("unid", "uiid");
 
-  mqtt_mock_helper_publish(topic_2,
+  mqtt_test_helper_publish(topic_2,
                            payload_meta.c_str(),
                            payload_meta.length());
 
@@ -175,7 +175,7 @@ void test_ota_subscribes_and_callback()
     "Filename": "ZW_PowerStrip_7.16.0_90_ZGM130S_REGION_EU_LR.gbl"
   })";
 
-  mqtt_mock_helper_publish(topic_3,
+  mqtt_test_helper_publish(topic_3,
                            payload_meta.c_str(),
                            payload_meta.length());
 
@@ -193,7 +193,7 @@ void test_ota_subscribes_and_callback()
     "Filename": "ZW_PowerStrip_7.16.0_90_ZGM130S_REGION_EU_LR.gbl"
   })";
 
-  mqtt_mock_helper_publish(topic_4,
+  mqtt_test_helper_publish(topic_4,
                            payload_meta.c_str(),
                            payload_meta.length());
 
@@ -211,7 +211,7 @@ void test_ota_subscribes_and_callback()
     "Version": "0.1.0"
   })";
 
-  mqtt_mock_helper_publish(topic_5,
+  mqtt_test_helper_publish(topic_5,
                            payload_meta.c_str(),
                            payload_meta.length());
 
@@ -231,7 +231,7 @@ void test_ota_subscribes_and_callback()
     "Filename": "ZW_PowerStrip_7.16.0_90_ZGM130S_REGION_EU_LR.gbl"
   })";
 
-  mqtt_mock_helper_publish(topic_6,
+  mqtt_test_helper_publish(topic_6,
                            payload_meta.c_str(),
                            payload_meta.length());
 
@@ -249,7 +249,7 @@ void test_ota_subscribes_and_callback()
     "Version": "0.1.0"
   })";
 
-  mqtt_mock_helper_publish(topic_9,
+  mqtt_test_helper_publish(topic_9,
                            payload_meta.c_str(),
                            payload_meta.length());
 
@@ -269,7 +269,7 @@ void test_ota_subscribes_and_callback()
     "Filename": "ZW_PowerStrip_7.16.0_90_ZGM130S_REGION_EU_LR.gbl"
   })";
 
-  mqtt_mock_helper_publish(topic_10,
+  mqtt_test_helper_publish(topic_10,
                            payload_meta.c_str(),
                            payload_meta.length());
 
@@ -288,7 +288,7 @@ void test_ota_subscribes_and_callback()
     "ApplyAfter": "2021-07-13T15:13:59+06:00"
   })";
 
-  mqtt_mock_helper_publish(topic_11,
+  mqtt_test_helper_publish(topic_11,
                            payload_meta.c_str(),
                            payload_meta.length());
 
@@ -311,7 +311,7 @@ void test_ota_subscribes_and_callback()
   uic_ota::subscribe_unid("unid_12_2", "uiid_12");
   uic_ota::subscribe_unid("unid_12_3", "uiid_12");
   uic_ota::subscribe_unid("unid_12_4", "uiid_12");
-  mqtt_mock_helper_publish(topic_12,
+  mqtt_test_helper_publish(topic_12,
                            payload_meta_12.c_str(),
                            payload_meta_12.length());
 
@@ -341,7 +341,7 @@ void test_ota_subscribes_and_callback()
   uic_ota::subscribe_unid("unid_13", "uiid_13_4");
 
   uic_ota::unsubscribe_all_unids_uiid("unid_13");
-  mqtt_mock_helper_publish(topic_13,
+  mqtt_test_helper_publish(topic_13,
                            payload_meta_13.c_str(),
                            payload_meta_13.length());
 
@@ -399,7 +399,7 @@ void test_ota_timer_apply_after()
   payload_meta.replace(payload_meta.find("$"), time_1.length(), time_1.c_str());
 
   uic_ota::subscribe_unid("unid", "uiid");
-  mqtt_mock_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
+  mqtt_test_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
 
   std::string date     = "2021-07-13T11:13:59+00:00";
   time_t expected_time = get_time_from_string(date, format);
@@ -422,7 +422,7 @@ void test_ota_timer_apply_after()
 
   payload_meta.replace(payload_meta.find("$"), time_1.length(), time_1);
 
-  mqtt_mock_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
+  mqtt_test_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
 
   std::string date_2     = "2021-07-13T13:15:59+00:00";
   time_t expected_time_2 = get_time_from_string(date_2, format);
@@ -446,7 +446,7 @@ void test_ota_timer_apply_after()
 
   payload_meta.replace(payload_meta_3.find("$"), time_3.length(), time_3);
 
-  mqtt_mock_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
+  mqtt_test_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
 
   std::string date_3 = "2021-07-14T00:15:59+00:00";
   struct tm tm_3     = {0};
@@ -472,7 +472,7 @@ void test_ota_timer_apply_after()
   std::string time_4 = "2021-07-13T12:13:59" + test_offset_string_4;
   payload_meta.replace(payload_meta_4.find("$"), time_4.length(), time_4);
 
-  mqtt_mock_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
+  mqtt_test_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
 
   std::string date_4     = "2021-07-12T23:11:59+00:00";
   time_t expected_time_4 = get_time_from_string(date_4, format);
@@ -492,7 +492,7 @@ void test_ota_timer_apply_after()
   std::string time_5 = "2021-07-13T12:13:59+00:00";
   payload_meta.replace(payload_meta_5.find("$"), time_5.length(), time_5);
 
-  mqtt_mock_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
+  mqtt_test_helper_publish(topic, payload_meta.c_str(), payload_meta.length());
 
   std::string date_5     = "2021-07-13T12:13:59+00:00";
   time_t expected_time_5 = get_time_from_string(date_5, format);
@@ -564,7 +564,7 @@ void image_dummy_meta_info(const std::string image_key)
     "Filename": "dummy.gbl"
   })";
 
-  mqtt_mock_helper_publish(topic.c_str(),
+  mqtt_test_helper_publish(topic.c_str(),
                            payload_meta.c_str(),
                            payload_meta.length());
 }
@@ -582,7 +582,7 @@ void test_ota_image_ready_uiid()
   uic_ota::get_by_unid("unid", "UIC-000-000-001_EU", image_ready_callback_1);
 
   std::string image_payload = "Image";
-  mqtt_mock_helper_publish(image_provider_topic_1,
+  mqtt_test_helper_publish(image_provider_topic_1,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -602,7 +602,7 @@ void test_ota_image_ready_uiid()
   uic_ota::get_by_unid("unid", "UIC-000-000-002_EU", image_ready_callback_2);
 
   image_payload = "Image";
-  mqtt_mock_helper_publish(image_provider_topic_2,
+  mqtt_test_helper_publish(image_provider_topic_2,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -620,7 +620,7 @@ void test_ota_image_ready_uiid()
   uic_ota::get_by_unid("unid", "UIC-000-000-012_EU", image_ready_callback_2);
   const char image_provider_topic_3[] = "ucl/OTA/data/UIC-000-000-012_EU/all";
 
-  mqtt_mock_helper_publish(image_provider_topic_3,
+  mqtt_test_helper_publish(image_provider_topic_3,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -645,7 +645,7 @@ void test_ota_image_ready_uiid()
   uic_ota::get_by_unid("unid_4", "UIC-000-000-012_EU", image_ready_callback_2);
   uic_ota::get_by_unid("unid_5", "UIC-000-000-012_EU", image_ready_callback_2);
 
-  mqtt_mock_helper_publish(image_provider_topic_3,
+  mqtt_test_helper_publish(image_provider_topic_3,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -676,7 +676,7 @@ void test_ota_image_ready_unid()
                        image_ready_callback_1);
 
   std::string image_payload = "Image";
-  mqtt_mock_helper_publish(image_provider_topic_1,
+  mqtt_test_helper_publish(image_provider_topic_1,
                            image_payload.c_str(),
                            image_payload.length());
   TEST_ASSERT_EQUAL_MESSAGE(1,
@@ -708,7 +708,7 @@ void test_ota_image_ready_unid()
                        "UIC-000-000-004_EU",
                        image_ready_callback_2);
 
-  mqtt_mock_helper_publish(image_provider_topic_2,
+  mqtt_test_helper_publish(image_provider_topic_2,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -725,7 +725,7 @@ void test_ota_image_ready_unid()
                        "UIC-000-000-004_EU",
                        image_ready_callback_1);
 
-  mqtt_mock_helper_publish(image_provider_topic_2,
+  mqtt_test_helper_publish(image_provider_topic_2,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -753,7 +753,7 @@ void test_ota_image_ready_unid()
     "Filename": "dummy_3.gbl"
   })";
 
-  mqtt_mock_helper_publish("ucl/OTA/info/UIC-000-000-010_EU/UIC-C87E6FB9-0010",
+  mqtt_test_helper_publish("ucl/OTA/info/UIC-000-000-010_EU/UIC-C87E6FB9-0010",
                            payload_meta.c_str(),
                            payload_meta.length());
 
@@ -761,13 +761,13 @@ void test_ota_image_ready_unid()
                        "UIC-000-000-010_EU",
                        image_ready_callback_1);
 
-  mqtt_mock_helper_publish(image_provider_topic_3,
+  mqtt_test_helper_publish(image_provider_topic_3,
                            image_payload.c_str(),
                            image_payload.length());
 
   TEST_ASSERT_EQUAL_STRING("", file_path_result.c_str());
 
-  mqtt_mock_helper_publish("ucl/OTA/data/UIC-000-000-010_EU/UIC-C87E6FB9-0010",
+  mqtt_test_helper_publish("ucl/OTA/data/UIC-000-000-010_EU/UIC-C87E6FB9-0010",
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -781,13 +781,13 @@ void test_ota_image_ready_unid()
 
   // 5
   // Check that meta info is removed on unretained image info
-  mqtt_mock_helper_publish("ucl/OTA/info/UIC-000-000-010_EU/UIC-C87E6FB9-0010",
+  mqtt_test_helper_publish("ucl/OTA/info/UIC-000-000-010_EU/UIC-C87E6FB9-0010",
                            "",
                            0);
   uic_ota::get_by_unid("UIC-C87E6FB9-0010",
                        "UIC-000-000-010_EU",
                        image_ready_callback_1);
-  mqtt_mock_helper_publish(image_provider_topic_3,
+  mqtt_test_helper_publish(image_provider_topic_3,
                            image_payload.c_str(),
                            image_payload.length());
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);
@@ -839,7 +839,7 @@ void test_ota_image_ready_status()
                        image_ready_callback_2);
 
   std::string image_payload = "Image";
-  mqtt_mock_helper_publish(image_provider_topic_2,
+  mqtt_test_helper_publish(image_provider_topic_2,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -887,7 +887,7 @@ void test_ota_validating_images()
   uic_ota::get_by_unid("ZWave-000-000-006_EU",
                        "UIC-000-000-006_EU",
                        image_ready_callback_1);
-  mqtt_mock_helper_publish(image_provider_topic_1,
+  mqtt_test_helper_publish(image_provider_topic_1,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -902,7 +902,7 @@ void test_ota_validating_images()
                        image_ready_callback_1);
   const char image_provider_topic_2[]
     = "ucl/OTA/data/UIC-000-000-016_EU/ZWave-000-000-016_EU";
-  mqtt_mock_helper_publish(image_provider_topic_2,
+  mqtt_test_helper_publish(image_provider_topic_2,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -919,7 +919,7 @@ void test_ota_validating_images()
                        "UIC-000-000-006_EU",
                        image_ready_callback_1);
 
-  mqtt_mock_helper_publish(image_provider_topic_1,
+  mqtt_test_helper_publish(image_provider_topic_1,
                            image_payload.c_str(),
                            image_payload.length());
 
@@ -946,8 +946,8 @@ void test_ota_status_updates()
       + "/Reported";
 
   uic_ota::update_current_version(unid, endpoint, uiid, "0x070F01");
-  mqtt_mock_helper_pop_publish(status_topic_desired.c_str(), message_desired);
-  mqtt_mock_helper_pop_publish(status_topic_reported.c_str(), message_reported);
+  mqtt_test_helper_pop_publish(status_topic_desired.c_str(), message_desired);
+  mqtt_test_helper_pop_publish(status_topic_reported.c_str(), message_reported);
 
   TEST_ASSERT_EQUAL_JSON(R"({"value":"0x070F01"})", message_desired);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"0x070F01"})", message_reported);
@@ -962,8 +962,8 @@ void test_ota_status_updates()
       + "/Reported";
 
   uic_ota::update_target_version(unid, endpoint, uiid, "0x070F01");
-  mqtt_mock_helper_pop_publish(status_topic_desired.c_str(), message_desired);
-  mqtt_mock_helper_pop_publish(status_topic_reported.c_str(), message_reported);
+  mqtt_test_helper_pop_publish(status_topic_desired.c_str(), message_desired);
+  mqtt_test_helper_pop_publish(status_topic_reported.c_str(), message_reported);
 
   TEST_ASSERT_EQUAL_JSON(R"({"value":"0x070F01"})", message_desired);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"0x070F01"})", message_reported);
@@ -982,8 +982,8 @@ void test_ota_status_updates()
   time_t time_argument    = get_time_from_string(date_string, "%Y-%m-%dT%T%z");
 
   uic_ota::update_apply_after(unid, endpoint, uiid, time_argument);
-  mqtt_mock_helper_pop_publish(status_topic_desired.c_str(), message_desired);
-  mqtt_mock_helper_pop_publish(status_topic_reported.c_str(), message_reported);
+  mqtt_test_helper_pop_publish(status_topic_desired.c_str(), message_desired);
+  mqtt_test_helper_pop_publish(status_topic_reported.c_str(), message_reported);
 
   std::string expected_payload = R"({"value":"2021-07-13T13:13:59+00:00"})";
 
@@ -1003,8 +1003,8 @@ void test_ota_status_updates()
                          endpoint,
                          uiid,
                          uic_ota::status_t::DOWNLOAD_IN_PROGRESS);
-  mqtt_mock_helper_pop_publish(status_topic_desired.c_str(), message_desired);
-  mqtt_mock_helper_pop_publish(status_topic_reported.c_str(), message_reported);
+  mqtt_test_helper_pop_publish(status_topic_desired.c_str(), message_desired);
+  mqtt_test_helper_pop_publish(status_topic_reported.c_str(), message_reported);
 
   TEST_ASSERT_EQUAL_JSON(R"({"value":"DownloadInProgress"})", message_desired);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"DownloadInProgress"})", message_reported);
@@ -1017,8 +1017,8 @@ void test_ota_status_updates()
     = construct_status_update_topic(unid, endpoint, uiid, "Size") + "/Reported";
 
   uic_ota::update_size(unid, endpoint, uiid, 256);
-  mqtt_mock_helper_pop_publish(status_topic_desired.c_str(), message_desired);
-  mqtt_mock_helper_pop_publish(status_topic_reported.c_str(), message_reported);
+  mqtt_test_helper_pop_publish(status_topic_desired.c_str(), message_desired);
+  mqtt_test_helper_pop_publish(status_topic_reported.c_str(), message_reported);
 
   TEST_ASSERT_EQUAL_JSON(R"({"value":256})", message_desired);
   TEST_ASSERT_EQUAL_JSON(R"({"value":256})", message_reported);
@@ -1033,8 +1033,8 @@ void test_ota_status_updates()
       + "/Reported";
 
   uic_ota::update_offset(unid, endpoint, uiid, 50);
-  mqtt_mock_helper_pop_publish(status_topic_desired.c_str(), message_desired);
-  mqtt_mock_helper_pop_publish(status_topic_reported.c_str(), message_reported);
+  mqtt_test_helper_pop_publish(status_topic_desired.c_str(), message_desired);
+  mqtt_test_helper_pop_publish(status_topic_reported.c_str(), message_reported);
 
   TEST_ASSERT_EQUAL_JSON(R"({"value":50})", message_desired);
   TEST_ASSERT_EQUAL_JSON(R"({"value":50})", message_reported);
@@ -1052,8 +1052,8 @@ void test_ota_status_updates()
                              endpoint,
                              uiid,
                              uic_ota::last_error_t::SUCCESS);
-  mqtt_mock_helper_pop_publish(status_topic_desired.c_str(), message_desired);
-  mqtt_mock_helper_pop_publish(status_topic_reported.c_str(), message_reported);
+  mqtt_test_helper_pop_publish(status_topic_desired.c_str(), message_desired);
+  mqtt_test_helper_pop_publish(status_topic_reported.c_str(), message_reported);
 
   TEST_ASSERT_EQUAL_JSON(R"({"value":"Success"})", message_desired);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"Success"})", message_reported);
@@ -1078,8 +1078,8 @@ void test_ota_supported_commands()
       + "/Reported";
 
   uic_ota::update_current_version(unid, endpoint, uiid, "0x070F01");
-  mqtt_mock_helper_pop_publish(status_topic_desired.c_str(), message_desired);
-  mqtt_mock_helper_pop_publish(status_topic_reported.c_str(), message_reported);
+  mqtt_test_helper_pop_publish(status_topic_desired.c_str(), message_desired);
+  mqtt_test_helper_pop_publish(status_topic_reported.c_str(), message_reported);
 
   TEST_ASSERT_EQUAL_JSON(R"({"value":"0x070F01"})", message_desired);
   TEST_ASSERT_EQUAL_JSON(R"({"value":"0x070F01"})", message_reported);
@@ -1091,7 +1091,7 @@ void test_ota_supported_commands()
   sl_log_debug(LOG_TAG,
                "SupportedCommands topic: %s",
                supported_commands_topic.c_str());
-  mqtt_mock_helper_pop_publish(supported_commands_topic.c_str(),
+  mqtt_test_helper_pop_publish(supported_commands_topic.c_str(),
                                message_desired);
 
   TEST_ASSERT_EQUAL_JSON(R"({"value":[]})", message_desired);
@@ -1176,7 +1176,7 @@ void test_ota_cached_images()
                        image_ready_callback_1);
 
   std::string image_payload = "Image";
-  mqtt_mock_helper_publish(image_provider_topic_1,
+  mqtt_test_helper_publish(image_provider_topic_1,
                            image_payload.c_str(),
                            image_payload.length());
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);
@@ -1214,14 +1214,14 @@ void test_ota_cached_images()
     "Filename": "dummy_2.gbl"
   })";
 
-  mqtt_mock_helper_publish(topic.c_str(),
+  mqtt_test_helper_publish(topic.c_str(),
                            payload_meta.c_str(),
                            payload_meta.length());
 
   uic_ota::get_by_unid("UIC-C87E6FB9-0010",
                        "UIC-000-000-010_EU",
                        image_ready_callback_1);
-  mqtt_mock_helper_publish(image_provider_topic_1,
+  mqtt_test_helper_publish(image_provider_topic_1,
                            image_payload.c_str(),
                            image_payload.length());
   contiki_test_helper_run(image_timeout * CLOCK_SECOND);

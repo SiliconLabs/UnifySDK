@@ -24,8 +24,9 @@
 // Includes from ZPC components
 #include "attribute_store_defined_attribute_types.h"
 #include "zwave_tx_scheme_selector.h"
+#include "zpc_attribute_store_network_helper.h"
 
-// Includes from UIC components
+// Includes from Unify components
 #include "attribute_store_helper.h"
 #include "attribute_timeouts.h"
 #include "ota_time.h"
@@ -149,9 +150,8 @@ sl_status_t
                              const char *file_name)
 {
   attribute_store_node_t file_name_node
-    = attribute_store_get_node_child_by_type(firmware_transfer_node,
-                                             ATTRIBUTE(FW_TRANSFER_FILENAME),
-                                             0);
+    = attribute_store_get_first_child_by_type(firmware_transfer_node,
+                                              ATTRIBUTE(FW_TRANSFER_FILENAME));
   if (file_name_node == ATTRIBUTE_STORE_INVALID_NODE) {
     file_name_node = attribute_store_add_node(ATTRIBUTE(FW_TRANSFER_FILENAME),
                                               firmware_transfer_node);
@@ -210,11 +210,10 @@ sl_status_t set_firmware_transfer_fragment_size(
                                                  ATTRIBUTE_ENDPOINT_ID);
 
   attribute_store_node_t firmware_update_node
-    = attribute_store_get_node_child_by_type(endpoint_node, ATTRIBUTE(FWU), 0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(FWU));
   attribute_store_node_t fragment_size_node
-    = attribute_store_get_node_child_by_type(firmware_update_node,
-                                             ATTRIBUTE(FWU_FRAGMENT_SIZE),
-                                             0);
+    = attribute_store_get_first_child_by_type(firmware_update_node,
+                                              ATTRIBUTE(FWU_FRAGMENT_SIZE));
   if (attribute_store_is_value_defined(fragment_size_node, REPORTED_ATTRIBUTE)
       == false) {
     return SL_STATUS_FAIL;
@@ -222,9 +221,8 @@ sl_status_t set_firmware_transfer_fragment_size(
 
   // Make a copy of this attribute under the firmware transfer.
   attribute_store_node_t transfer_fragment_size_node
-    = attribute_store_get_node_child_by_type(firmware_transfer_node,
-                                             ATTRIBUTE(FWU_FRAGMENT_SIZE),
-                                             0);
+    = attribute_store_get_first_child_by_type(firmware_transfer_node,
+                                              ATTRIBUTE(FWU_FRAGMENT_SIZE));
   if (transfer_fragment_size_node == ATTRIBUTE_STORE_INVALID_NODE) {
     transfer_fragment_size_node
       = attribute_store_add_node(ATTRIBUTE(FWU_FRAGMENT_SIZE),
@@ -240,12 +238,11 @@ bool node_supports_firmware_activation(attribute_store_node_t endpoint_node)
   uint32_t node_supports_firmware_activation = 0;
 
   attribute_store_node_t firmware_update_node
-    = attribute_store_get_node_child_by_type(endpoint_node, ATTRIBUTE(FWU), 0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(FWU));
 
   attribute_store_node_t activation_node
-    = attribute_store_get_node_child_by_type(firmware_update_node,
-                                             ATTRIBUTE(FWU_ACTIVATION),
-                                             0);
+    = attribute_store_get_first_child_by_type(firmware_update_node,
+                                              ATTRIBUTE(FWU_ACTIVATION));
 
   attribute_store_get_reported(activation_node,
                                &node_supports_firmware_activation,
@@ -257,9 +254,8 @@ bool node_supports_firmware_activation(attribute_store_node_t endpoint_node)
 
   zwave_cc_version_t version = 0;
   attribute_store_node_t version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
   attribute_store_get_reported(version_node, &version, sizeof(version));
 
   if (version < 7) {
@@ -274,12 +270,11 @@ bool node_supports_cc(attribute_store_node_t endpoint_node)
   uint32_t node_supports_cc = 0;
 
   attribute_store_node_t firmware_update_node
-    = attribute_store_get_node_child_by_type(endpoint_node, ATTRIBUTE(FWU), 0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(FWU));
 
   attribute_store_node_t cc_node
-    = attribute_store_get_node_child_by_type(firmware_update_node,
-                                             ATTRIBUTE(FWU_CC),
-                                             0);
+    = attribute_store_get_first_child_by_type(firmware_update_node,
+                                              ATTRIBUTE(FWU_CC));
 
   attribute_store_get_reported(cc_node,
                                &node_supports_cc,
@@ -292,7 +287,7 @@ bool is_firmware_target_valid(attribute_store_node_t endpoint_node,
                               uint32_t firmware_target)
 {
   attribute_store_node_t firmware_update_node
-    = attribute_store_get_node_child_by_type(endpoint_node, ATTRIBUTE(FWU), 0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(FWU));
 
   attribute_store_node_t firmware_entry_node
     = attribute_store_get_node_child_by_value(firmware_update_node,
@@ -311,12 +306,11 @@ bool is_firmware_update_ongoing(attribute_store_node_t endpoint_node)
   // 1. The reported value of the firmware transfer
   // 2. The expiry timer is not expired.
   attribute_store_node_t firmware_update_node
-    = attribute_store_get_node_child_by_type(endpoint_node, ATTRIBUTE(FWU), 0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(FWU));
 
   attribute_store_node_t firmware_transfer_node
-    = attribute_store_get_node_child_by_type(firmware_update_node,
-                                             ATTRIBUTE(FW_TRANSFER),
-                                             0);
+    = attribute_store_get_first_child_by_type(firmware_update_node,
+                                              ATTRIBUTE(FW_TRANSFER));
 
   // During a transfer, we expect Reported = ONGOING.
   zwave_firmware_transfer_state_t state = IDLE;
@@ -335,9 +329,9 @@ bool is_firmware_update_ongoing(attribute_store_node_t endpoint_node)
   // Check the expiry timestamp:
   clock_time_t expiry_time = 0;
   attribute_store_node_t expiry_time_node
-    = attribute_store_get_node_child_by_type(firmware_transfer_node,
-                                             ATTRIBUTE(FW_TRANSFER_EXPIRY_TIME),
-                                             0);
+    = attribute_store_get_first_child_by_type(
+      firmware_transfer_node,
+      ATTRIBUTE(FW_TRANSFER_EXPIRY_TIME));
   if (attribute_store_is_value_defined(expiry_time_node, REPORTED_ATTRIBUTE)
       == false) {
     // No expiry is defined, the transfer does not expire and is ongoing
@@ -362,12 +356,11 @@ sl_status_t
     return SL_STATUS_FAIL;
   }
   attribute_store_node_t firmware_update_node
-    = attribute_store_get_node_child_by_type(endpoint_node, ATTRIBUTE(FWU), 0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(FWU));
 
   attribute_store_node_t firmware_transfer_node
-    = attribute_store_get_node_child_by_type(firmware_update_node,
-                                             ATTRIBUTE(FW_TRANSFER),
-                                             0);
+    = attribute_store_get_first_child_by_type(firmware_update_node,
+                                              ATTRIBUTE(FW_TRANSFER));
 
   clock_time_t duration   = FIRMWARE_TRANSFER_TIMEOUT;
   clock_time_t new_expiry = clock_time() + duration;
@@ -393,7 +386,7 @@ sl_status_t command_class_firmware_update_initiate_firmware_update(
   attribute_store_node_t endpoint_node
     = zwave_command_class_get_endpoint_id_node(node_id, endpoint_id);
   attribute_store_node_t firmware_update_node
-    = attribute_store_get_node_child_by_type(endpoint_node, ATTRIBUTE(FWU), 0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(FWU));
 
   // Interview not completed
   if (firmware_update_node == ATTRIBUTE_STORE_INVALID_NODE) {
@@ -417,9 +410,8 @@ sl_status_t command_class_firmware_update_initiate_firmware_update(
   }
 
   attribute_store_node_t firmware_transfer_node
-    = attribute_store_get_node_child_by_type(firmware_update_node,
-                                             ATTRIBUTE(FW_TRANSFER),
-                                             0);
+    = attribute_store_get_first_child_by_type(firmware_update_node,
+                                              ATTRIBUTE(FW_TRANSFER));
   if (firmware_transfer_node == ATTRIBUTE_STORE_INVALID_NODE) {
     firmware_transfer_node
       = create_firmware_transfer_attribute(firmware_update_node);
@@ -519,11 +511,10 @@ void command_class_firmware_update_abort_ongoing_firmware_operation(
   attribute_store_node_t endpoint_node
     = zwave_command_class_get_endpoint_id_node(node_id, endpoint_id);
   attribute_store_node_t firmware_update_node
-    = attribute_store_get_node_child_by_type(endpoint_node, ATTRIBUTE(FWU), 0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(FWU));
   attribute_store_node_t firmware_transfer_node
-    = attribute_store_get_node_child_by_type(firmware_update_node,
-                                             ATTRIBUTE(FW_TRANSFER),
-                                             0);
+    = attribute_store_get_first_child_by_type(firmware_update_node,
+                                              ATTRIBUTE(FW_TRANSFER));
 
   abort_transfer_if_ongoing(firmware_transfer_node);
 }

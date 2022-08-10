@@ -1,0 +1,1 @@
+target_add_unittest(epc_config SOURCES epc_config_test.c)

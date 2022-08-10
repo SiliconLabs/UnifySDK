@@ -20,6 +20,16 @@
 #include "zwapi_protocol_transport.h"
 #include "zwapi_protocol_basis.h"
 
+#ifndef ZWAVE_TX_QUEUE_BUFFER_SIZE
+// max amount of frames that can be store int the internal zwave_tx_queue
+#define ZWAVE_TX_QUEUE_BUFFER_SIZE 64
+#endif
+
+#ifndef ZWAVE_TX_INCOMING_FRAMES_BUFFER_SIZE
+// Max amount of NodeID that can send us frames to track.
+#define ZWAVE_TX_INCOMING_FRAMES_BUFFER_SIZE 10
+#endif
+
 /**
  * @defgroup zwave_tx Z-Wave TX
  * @ingroup zwave_controller
@@ -202,38 +212,13 @@ tx -> u: <b>zwave_tx_send_data</b> callback\n(frame 1 transmission results)
  */
 typedef void *zwave_tx_session_id_t;
 
-typedef struct zwave_tx_options {
-  /// The \ref zwave_tx_process will wait for the expected responses to a frame before
-  /// transmitting the next frame. It will time out and resume TX operations after a
-  /// recommended backoff time for the expected number of responses
-  /// If S2 uses the VERIFY_DELIVERY mechanism, the number of expected responses should be
-  /// equal or greater than 1.
-  /// If is possible to specify that multiple responses are expected.
-  /// In case of Supervision with status update flag, the number_of_responses should
-  /// be set to 1, as only one frame will be returned immediately for sure, the other(s) one will
-  /// come later after an arbitrary time.
-  uint8_t number_of_responses;
-
-  /// Maximum time in ms this transmission is allowed to spend in queue waiting
-  /// to be processed before it is dropped. Discard timeout of 0 means to never
-  /// drop the frame.
-  uint32_t discard_timeout_ms;
-
-  /// Priority of transmission element. Frames with higher numbers are sent
-  /// first.
-  /// If the valid_parent_session_id field is set to true and a valid parent_session_id is
-  /// provided in the parent_session_id, this value will be overwritten with the
-  /// qos_priority value of the parent + 1.
-  uint32_t qos_priority;
-
-  /// This flag indicates if the message should be attempted to be sent without
-  /// beaming or route resolution. This option should only be used for FL nodes.
-  /// If the transmission fails, the message will be re-queued and attempted
-  /// again later.
-  bool fasttrack;
-
-  /// zwave_tx_session_id_t of the parent frame. A parent frame is a frame that caused
-  /// this frame to be added to the queue. Child frames are sent before their parent.
+/**
+ * @brief Data used by Z-Wave Transports to track their "session"
+ */
+typedef struct zwave_tx_transport_options {
+  /// zwave_tx_session_id_t of the parent frame. A parent frame is a frame
+  // that caused this frame to be added to the queue. Child frames are
+  // sent before their parent.
   zwave_tx_session_id_t parent_session_id;
 
   /// This flag indicates if the parent_session_id field is supposed to contain
@@ -241,17 +226,6 @@ typedef struct zwave_tx_options {
   /// If this field is set to true, qos_priority will be overwritten so that the
   /// frame is sent before the parent.
   bool valid_parent_session_id;
-
-  /// This flag indicates if the frame is to be sent as a test frame
-  /// Test frame was intended to be used to test link reliability, the
-  /// Z-Wave API will send a test frame without any routing and with 9600 kbit/s
-  /// transmission speed. The payload will also be ignored.
-  bool is_test_frame;
-
-  /// This value indicates if the a test frame must be sent
-  /// with a particular Tx Power. This value will be ignored if the
-  /// is_test_frame flag is set to false.
-  rf_power_level_t rf_power;
 
   /// This flag can be used for tracking multicast/singlecast follow-ups
   /// transmissions.
@@ -265,16 +239,54 @@ typedef struct zwave_tx_options {
   zwave_multicast_group_id_t group_id;
 
   /// Is this the first Singlecast follow-up frame ?
-  /// Only set this to true if queuing the first follow-up frame. User components
-  /// SHOULD always set this to false and let the Tx Queue handle the singlecast
-  /// follow-ups.
+  /// Only set this to true if queuing the first follow-up frame.
   bool is_first_follow_up;
 
-  /// The TX Queue can automatically queue Follow-up messages following a
+  /// This flag indicates if the frame is to be sent as a test frame
+  /// Test frame was intended to be used to test link reliability, the
+  /// Z-Wave API will send a test frame without any routing and with 9600 kbit/s
+  /// transmission speed. The payload will also be ignored.
+  bool is_test_frame;
+
+  /// This value indicates if the a test frame must be sent
+  /// with a particular Tx Power. This value will be ignored if the
+  /// is_test_frame flag is set to false.
+  rf_power_level_t rf_power;
+} zwave_tx_transport_options_t;
+
+typedef struct zwave_tx_options {
+  /// The \ref zwave_tx_process will wait for the expected responses to a frame before
+  /// transmitting the next frame. It will time out and resume TX operations after a
+  /// recommended backoff time for the expected number of responses
+  /// It is possible to specify that multiple responses are expected.
+  /// In case of Supervision with status update flag, the number_of_responses should
+  /// be set to 1, as only one frame will be returned immediately for sure,
+  /// the other(s) one will come later after an arbitrary time.
+  uint8_t number_of_responses;
+
+  /// Maximum time in ms this transmission is allowed to spend in queue waiting
+  /// to be processed before it is dropped. Discard timeout of 0 means to never
+  /// drop the frame.
+  uint32_t discard_timeout_ms;
+
+  /// Priority of transmission element. Frames with higher numbers are sent
+  /// first.
+  uint32_t qos_priority;
+
+  /// This flag indicates if the message should be attempted to be sent without
+  /// beaming or route resolution. This option should only be used for FL nodes.
+  /// If the transmission fails, the message will be re-queued and attempted
+  /// again later.
+  bool fasttrack;
+
+  /// The transports can automatically queue Follow-up messages following a
   /// multicast. If you wish to activate this functionality, set this field
   /// to true.
   bool send_follow_ups;
 
+  /// Data for Z-Wave Transport. This should be zero'ed out by user components
+  /// and used only by Z-Wave Transports.
+  zwave_tx_transport_options_t transport;
 } zwave_tx_options_t;
 
 /**
@@ -309,20 +321,20 @@ extern "C" {
  * allow all kind of frames to be transmitted, including multicast/broadcast.
  *
  *
- * @param connection       Connection object describing the source and
- *                         destination. If either the source or destination
- *                         endpoints ID are not null, the frame will
- *                         be Multi Channel encapsulated.
- * @param data_length      Length of the frame to send
- * @param data             Points to the payload to send
- * @param tx_options       Transmit options to use.
- * @param on_send_complete Callback function that will be called when the send
- *                         operation has completed
- * @param user             User pointer passed in argument of the on_send_complete
- *                         callback function
- * @param session          Pointer to location where to write the session id of
- *                         the queued message. If this is set NULL the session id
- *                         will not be written
+ * @param connection          Connection object describing the source and
+ *                            destination. If either the source or destination
+ *                            endpoints ID are not null, the frame will
+ *                            be Multi Channel encapsulated.
+ * @param data_length         Length of the frame to send
+ * @param data                Points to the payload to send
+ * @param tx_options          Transmit options to use.
+ * @param on_send_complete    Callback function that will be called when the send
+ *                            operation has completed
+ * @param user                User pointer passed in argument of the on_send_complete
+ *                            callback function
+ * @param session             Pointer to location where to write the session id of
+ *                            the queued message. If this is set NULL the session id
+ *                            will not be written
  *
  * @returns
  * - SL_STATUS_OK The transmission request has been accepted and callback will be
@@ -355,7 +367,7 @@ sl_status_t
  *                              the send operation is completed
  * @param user                  User pointer passed in argument of
  *                              the on_send_complete callback function
- * @param session               Pointer to location where to write the
+ * @param session_id            Pointer to location where to write the
  *                              session id of the queued message. If
  *                              this is set NULL the session id will
  *                              not be written
@@ -371,33 +383,63 @@ sl_status_t zwave_tx_send_test_frame(
   rf_power_level_t power_level,
   const on_zwave_tx_send_data_complete_t on_send_complete,
   void *user,
-  zwave_tx_session_id_t *session);
+  zwave_tx_session_id_t *session_id);
 
 /**
  * @brief Abort a queued or ongoing transmission.
  *
  * Calling this function will attempt to cancel/abort a queued transmission.
  *
- * @param  session Session id returned by zwave_tx_send_data
+ * @param  session_id      Session id returned by zwave_tx_send_data
  *
  * @returns
  * - SL_STATUS_OK          if the frame transmission has been aborted
  *                         (removed from the queue and not sent)
  * - SL_STATUS_NOT_FOUND   if the session_id is not valid.
  */
-sl_status_t zwave_tx_abort_transmission(zwave_tx_session_id_t session);
+sl_status_t zwave_tx_abort_transmission(zwave_tx_session_id_t session_id);
 
 /**
  * @brief Returns the total number of responses that a frame (and its parent)
  *        will generate
  * *
- * @param  session Session id returned by zwave_tx_send_data for a queue element
+ * @param  session_id Session id returned by zwave_tx_send_data for a queue element
  *
  * @returns The number of expected responses for the element identified by the
  *          Session ID.  0 if the Session ID does not exist or has been removed
  *          from the Tx Queue.
  */
-uint8_t zwave_tx_get_number_of_responses(zwave_tx_session_id_t session);
+uint8_t zwave_tx_get_number_of_responses(zwave_tx_session_id_t session_id);
+
+/**
+ * @brief Tell the Tx Queue that a remote NodeID is about to send some frames
+ *        and we should back-off a little more.
+ *
+ * Calling this function back-to-back with the same NodeID will update the
+ * number of frames that we are expecting from a given NodeID.
+ *
+ * @param remote_node_id             The NodeID that is about to send us something.
+ * @param number_of_incoming_frames  The number of expected frames
+ *
+ */
+void zwave_tx_set_expected_frames(zwave_node_id_t remote_node_id,
+                                  uint8_t number_of_incoming_frames);
+
+/**
+ * @brief Returns a pointer to frame data for a given Z-Wave Tx session ID.
+ * @param  session_id Session id returned by zwave_tx_send_data for a queue element
+ *
+ * @returns NULL if the session ID is not found, else a pointer to a payload.
+ */
+const uint8_t *zwave_tx_get_frame(zwave_tx_session_id_t session_id);
+
+/**
+ * @brief Returns the length of a frame in the Z-Wave Tx Queue.
+ * @param  session_id Session id returned by zwave_tx_send_data for a queue element
+ *
+ * @returns 0 if the session ID is not found, the length of the frame in bytes.
+ */
+uint16_t zwave_tx_get_frame_length(zwave_tx_session_id_t session_id);
 
 /**
  * @brief Initialize the zwave_tx component.
@@ -428,6 +470,15 @@ void zwave_tx_shutdown();
  *
  */
 void zwave_tx_log_queue(bool with_contents);
+
+/**
+ * @brief Log the details about an element in the Tx Queue
+ *
+ * @param session_id            Session id returned by zwave_tx_send_data
+ * @param log_frame_payload   Display the frame payload in the logs
+ */
+void zwave_tx_log_element(zwave_tx_session_id_t session_id,
+                          bool log_frame_payload);
 
 #ifdef __cplusplus
 }

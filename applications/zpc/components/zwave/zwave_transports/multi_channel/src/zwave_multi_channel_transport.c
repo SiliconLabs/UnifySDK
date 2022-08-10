@@ -20,14 +20,14 @@
 
 // Includes from other components
 #include "ZW_classcmd.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_controller_transport.h"
 #include "zwave_controller_internal.h"
 #include "zwave_rx.h"
 #include "zwave_tx.h"
 
-// UIC includes
+// Unify includes
 #include "sl_log.h"
 #define LOG_TAG "zwave_multi_channel_transport"
 
@@ -189,10 +189,10 @@ static sl_status_t zwave_command_class_multi_channel_send_data(
     return SL_STATUS_BUSY;
   }
 
-  zwave_tx_options_t multi_channel_tx_options      = *tx_options;
-  multi_channel_tx_options.parent_session_id       = parent_session_id;
-  multi_channel_tx_options.valid_parent_session_id = true;
-  multi_channel_tx_options.number_of_responses     = 0;
+  zwave_tx_options_t multi_channel_tx_options          = *tx_options;
+  multi_channel_tx_options.transport.parent_session_id = parent_session_id;
+  multi_channel_tx_options.transport.valid_parent_session_id = true;
+  multi_channel_tx_options.number_of_responses               = 0;
 
   // Set the endpoint data to 0 now that we have encapsulated it.
   zwave_controller_connection_info_t new_connection = *connection;
@@ -333,7 +333,7 @@ sl_status_t zwave_multi_channel_transport_init()
 
   // Register our transport to the Z-Wave Controller Transport
   zwave_controller_transport_t transport = {0};
-  transport.priority                     = 6;
+  transport.priority                     = 5;
   transport.command_class                = COMMAND_CLASS_MULTI_CHANNEL_V4;
   transport.version                      = MULTI_CHANNEL_VERSION;
   transport.on_frame_received = &zwave_command_class_multi_channel_decapsulate;

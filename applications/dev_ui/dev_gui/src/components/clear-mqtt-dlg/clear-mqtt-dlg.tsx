@@ -1,4 +1,4 @@
-import { MenuItem, TextField } from '@material-ui/core';
+import { MenuItem, TextField } from '@mui/material';
 import * as React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { ClearMqttDlgProps, ClearMqttDlgState } from './clear-mqtt-dlg-types';

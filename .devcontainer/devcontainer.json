@@ -1,17 +1,21 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.128.0/containers/docker-existing-dockerfile
 {
-  "name": "UIC container",
+  "name": "Unify container",
   // Sets the run context to one level up instead of the .devcontainer folder.
-  "context": "..",
+  "build": {
+    "dockerfile":"../docker/Dockerfile",
+    "context": "../docker",
+    "args": {"ARCH": "amd64"}
+  },
   // Forward port 1883 (mosquitto) to host
   "forwardPorts": [
-    1883
+    1883, // Mosquitto
+    8030  // DevGui
   ],
   // Set *default* container specific settings.json values on container create.
   "settings": {
-    "terminal.integrated.shell.linux": null,
-    "cmake.cmakePath": "/usr/bin/cmake",
+    "cmake.cmakePath": "cmake",
     "cmake.buildDirectory": "${workspaceRoot}/build_docker",
     "C_Cpp.default.cStandard": "c99",
     "C_Cpp.default.cppStandard": "c++11",
@@ -25,7 +29,7 @@
     "cheshirekow.cmake-format",
     "xaver.clang-format"
   ],
-  "containerUser": "root",
+  "containerUser": "user",
   "remoteUser": "user",
   "updateRemoteUserUID": true,
   // Install clang-format-10
@@ -38,9 +42,7 @@
     // Uncomment this to forward /dev/ttyUSB to the container (e.g. UZB)
     //"--device=/dev/ttyUSB0"
   ],
-  "build": {
-    "dockerfile": "../docker/Dockerfile"
-  },
+
   "mounts": [
     // Uncomment when building ZigPC to mount the Gecko SDK to the container
     // "source=/opt/super,target=/opt/super,type=bind,consistency=cached",

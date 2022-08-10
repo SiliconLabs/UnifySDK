@@ -79,6 +79,14 @@ typedef struct {
   zwave_node_list_t nodes_in_multicast;
 } zwave_rx_receive_options_t;
 
+/**
+ * @brief Waits for the Z-Wave API to have restarted/be ready
+ * after a soft reset.
+ *
+ * NOTE: This function will be blocking for up to a couple of seconds.
+ */
+void zwave_rx_wait_for_zwave_api_to_be_ready();
+
 #ifdef __cplusplus
 }
 #endif

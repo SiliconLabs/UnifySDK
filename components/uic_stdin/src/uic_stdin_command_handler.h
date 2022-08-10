@@ -56,7 +56,7 @@ char *uic_stdin_command_generator(const char *text, int state);
 const char *get_prompt_string();
 
 /**
- * @brief Initialize uic stdin/stdout
+ * @brief Initialize Unify stdin/stdout
  *
  */
 void uic_stdin_init();

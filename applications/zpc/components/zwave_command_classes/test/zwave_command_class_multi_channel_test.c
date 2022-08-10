@@ -891,12 +891,13 @@ void check_if_all_individual_endpoints_are_found_verification(
     4,
     ATTRIBUTE_STORE_INVALID_NODE);
 
-  attribute_store_set_uint8_child_by_type_ExpectAndReturn(
+  attribute_store_get_node_child_by_type_ExpectAndReturn(
     test_root_device_node,
     ATTRIBUTE_COMMAND_CLASS_MULTI_CHANNEL_ALL_INDIVIDUAL_ENDPOINTS_FOUND,
-    REPORTED_ATTRIBUTE,
-    1,
-    SL_STATUS_OK);
+    0,
+    23);
+  attribute_store_set_reported_ExpectAndReturn(23, NULL,sizeof(uint8_t), SL_STATUS_OK);
+  attribute_store_set_reported_IgnoreArg_value();
 
   create_aggregated_endpoints_verification(node_id_node);
 }

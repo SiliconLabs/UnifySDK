@@ -38,7 +38,7 @@ PROJECT_NAME           = "Unify Specification"
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = ver1_0_RC11_20211006-12-g5cdaf55
+PROJECT_NUMBER         = ver1_0_RC11_20211006-19-g32c28c7
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
@@ -1817,7 +1817,7 @@ LATEX_FOOTER           =
 # list).
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-LATEX_EXTRA_STYLESHEET =
+LATEX_EXTRA_STYLESHEET =templates/latex/unicode_symbols_resolver.sty
 
 # The LATEX_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the LATEX_OUTPUT output

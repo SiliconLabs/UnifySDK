@@ -1,6 +1,6 @@
 .header {
     text-align: center;
-    border-bottom: 1px solid #ececec;
+    border-bottom: 1px solid #dddddd;
     display: inline-block;
     width: 100%;
     background: #f7f7f7;
@@ -9,6 +9,8 @@
     height: 139px;
     transition: height 0.3s;
     overflow: hidden;
+    position: fixed;
+    z-index: 4;
 }
 
 .header.collapsed {
@@ -27,8 +29,21 @@
 
 img {
     height: 71px;
+    transition: 0.4s;
 }
 
 .collapsed img {
     height: 40px;
+    transition: 0.3s;
+}
+
+.logo-title {
+    transition: 0.3s;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.header.collapsed .logo-title {
+    font-size: 0px;
 }

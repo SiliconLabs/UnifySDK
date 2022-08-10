@@ -5,13 +5,17 @@ skinparam roundCorner 15
 top to bottom direction
 
 cloud "IoT Services" as IOTService {
-    rectangle "Developer GUI"
-    rectangle "UPTICap"
+    rectangle "Developer GUI" as DEVGUI
+    rectangle "UPTICap" as UPTICAP
+    rectangle "UPTIWriter" as UPTIWRITER
+
+    DEVGUI -[hidden]r->UPTICAP
+    UPTICAP -[hidden]r->UPTIWRITER 
 }
 
 rectangle "IoT Gateway" {
 
-    package "Unify SDK services" as services {
+    package "Unify Framework services" as services {
         rectangle "NAL" as NAL
         rectangle "UPVL" as UPVL
         rectangle "Image provider" as IMP
@@ -30,7 +34,7 @@ rectangle "IoT Gateway" {
     NAL -[hidden]d-> GMS
     UPVL -[hidden]d-> positioning
 
-    package "Unify SDK protocol controllers" as PCS {
+    package "Unify Framework protocol controllers" as PCS {
         rectangle "Z-Wave - ZPC" as ZPC
         rectangle "Zigbee - ZigPC" as ZIGPC
         rectangle "Angle of X - AoXPC" as AOX

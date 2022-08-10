@@ -158,10 +158,7 @@ class MapperEngine
    *
    * @param t Type to use as start context
    */
-  void set_ep_type(attribute_store_type_t t)
-  {
-    ep_type = t;
-  }
+  void set_ep_type(attribute_store_type_t t);
 
   /**
    * @brief Get the singletron
@@ -169,6 +166,20 @@ class MapperEngine
    * @return The singletron
    */
   static MapperEngine &get_instance();
+
+  /**
+   * @brief Called when an attribute is updated.
+   *
+   * This function will do a look up the updated attribute in the relation
+   * table and evaluate the expressios which depends on the attribute.
+   *
+   * @param node            Node that has been updated
+   * @param state           What updated desired or reported
+   * @param change          Type of update, create, delete, value change
+   */
+  void on_attribute_updated(attribute_store_node_t node,
+                            attribute_store_node_value_state_t state,
+                            attribute_store_change_t change);
 
   private:
   /**
@@ -185,32 +196,6 @@ class MapperEngine
     get_destination_for_attribute(const attribute_store::attribute &endpoint,
                                   const ast::attribute &attribute,
                                   bool create_if_missing) const;
-
-  /**
-   * @brief Called when an attribute is updated.
-   *
-   * This function will do a look up the updated attribute in the relation
-   * table and evaluate the expressios which depends on the attribute.
-   *
-   * @param original_node   Node that has been updated
-   * @param state           What updated desired or reported
-   * @param change          Type of update, create, delete, value change
-   */
-  void on_attribute_updated(attribute_store::attribute const &original_node,
-                            attribute_store_node_value_state_t state,
-                            attribute_store_change_t change);
-
-  /**
-   * @brief Adapter function for the attribute store
-   */
-  static void on_attribute_updated_reported(attribute_store_node_t n,
-                                            attribute_store_change_t change);
-
-  /**
-   * @brief Adapter function for the attribute store
-   */
-  static void on_attribute_updated_desired(attribute_store_node_t n,
-                                           attribute_store_change_t change);
 
   //Lookup table for which assignments depend on which attributes
   std::multimap<ast::attribute_dependency_t, std::shared_ptr<ast::assignment>>

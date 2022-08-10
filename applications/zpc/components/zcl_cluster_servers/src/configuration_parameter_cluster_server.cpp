@@ -11,21 +11,22 @@
  *
  *****************************************************************************/
 #include "configuration_parameter_cluster_server.h"
-#include "zpc_attribute_store_network_helper.h"
-#include "attribute_store_defined_attribute_types.h"
-#include "attribute_store_helper.h"
-#include "zwave_command_class_configuration_types.h"
+#include "zcl_cluster_servers_helpers.hpp"
 
 // Interfaces
 #include "zwave_command_class_version_types.h"
+#include "zwave_command_class_configuration_types.h"
 #include "ucl_definitions.h"
 
 // ZPC includes
 #include "zpc_attribute_store.h"
+#include "zpc_attribute_store_network_helper.h"
 #include "zwave_command_class_generic_types.h"
+#include "attribute_store_defined_attribute_types.h"
 
 // Includes from Unify shared components
 #include "attribute.hpp"
+#include "attribute_store_helper.h"
 #include "sl_log.h"
 
 // Includes from auto-generated files
@@ -82,9 +83,8 @@ static zwave_cc_version_t
   get_configuration_command_class_version(attribute_store_node_t endpoint_node)
 {
   attribute_store_node_t configuration_version_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(VERSION),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(VERSION));
   zwave_cc_version_t configuration_cc_version = 0;
   attribute_store_get_reported(configuration_version_node,
                                &configuration_cc_version,
@@ -167,67 +167,59 @@ static void get_configuration_parameters(
                                  sizeof(parameter.ParameterId));
 
     attribute_store_node_t parameter_value_node
-      = attribute_store_get_node_child_by_type(parameter_id_node,
-                                               ATTRIBUTE(PARAMETER_VALUE),
-                                               0);
+      = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                ATTRIBUTE(PARAMETER_VALUE));
     status |= get_value_function(parameter_value_node,
                                  &parameter.Value,
                                  sizeof(parameter.Value));
 
     attribute_store_node_t parameter_min_value_node
-      = attribute_store_get_node_child_by_type(parameter_id_node,
-                                               ATTRIBUTE(PARAMETER_MIN_VALUE),
-                                               0);
+      = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                ATTRIBUTE(PARAMETER_MIN_VALUE));
     status |= get_value_function(parameter_min_value_node,
                                  &parameter.MinimumValue,
                                  sizeof(parameter.MinimumValue));
 
     attribute_store_node_t parameter_max_value_node
-      = attribute_store_get_node_child_by_type(parameter_id_node,
-                                               ATTRIBUTE(PARAMETER_MAX_VALUE),
-                                               0);
+      = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                ATTRIBUTE(PARAMETER_MAX_VALUE));
     status |= get_value_function(parameter_max_value_node,
                                  &parameter.MaximumValue,
                                  sizeof(parameter.MaximumValue));
 
     attribute_store_node_t parameter_default_value_node
-      = attribute_store_get_node_child_by_type(
+      = attribute_store_get_first_child_by_type(
         parameter_id_node,
-        ATTRIBUTE(PARAMETER_DEFAULT_VALUE),
-        0);
+        ATTRIBUTE(PARAMETER_DEFAULT_VALUE));
     status |= get_value_function(parameter_default_value_node,
                                  &parameter.DefaultValue,
                                  sizeof(parameter.DefaultValue));
 
     attribute_store_node_t parameter_format_node
-      = attribute_store_get_node_child_by_type(parameter_id_node,
-                                               ATTRIBUTE(PARAMETER_FORMAT),
-                                               0);
+      = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                ATTRIBUTE(PARAMETER_FORMAT));
     status |= get_value_function(parameter_format_node,
                                  &parameter.DisplayFormat,
                                  sizeof(parameter.DisplayFormat));
 
     attribute_store_node_t parameter_read_only_node
-      = attribute_store_get_node_child_by_type(parameter_id_node,
-                                               ATTRIBUTE(PARAMETER_READ_ONLY),
-                                               0);
+      = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                ATTRIBUTE(PARAMETER_READ_ONLY));
     status |= get_value_function(parameter_read_only_node,
                                  &parameter.ReadOnly,
                                  sizeof(parameter.ReadOnly));
 
     attribute_store_node_t parameter_advanced_node
-      = attribute_store_get_node_child_by_type(parameter_id_node,
-                                               ATTRIBUTE(PARAMETER_ADVANCED),
-                                               0);
+      = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                ATTRIBUTE(PARAMETER_ADVANCED));
     status |= get_value_function(parameter_advanced_node,
                                  &parameter.Advanced,
                                  sizeof(parameter.Advanced));
 
     attribute_store_node_t parameter_altering_capabilities_node
-      = attribute_store_get_node_child_by_type(
+      = attribute_store_get_first_child_by_type(
         parameter_id_node,
-        ATTRIBUTE(PARAMETER_ALTERING_CAPABILITIES),
-        0);
+        ATTRIBUTE(PARAMETER_ALTERING_CAPABILITIES));
     status |= get_value_function(parameter_altering_capabilities_node,
                                  &parameter.AlteringCapabilities,
                                  sizeof(parameter.AlteringCapabilities));
@@ -237,9 +229,8 @@ static void get_configuration_parameters(
     name_string       = (char *)malloc(ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
     if (name_string != nullptr) {
       attribute_store_node_t parameter_name_node
-        = attribute_store_get_node_child_by_type(parameter_id_node,
-                                                 ATTRIBUTE(PARAMETER_NAME),
-                                                 0);
+        = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                  ATTRIBUTE(PARAMETER_NAME));
       status |= get_string_function(parameter_name_node,
                                     name_string,
                                     ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
@@ -251,9 +242,8 @@ static void get_configuration_parameters(
     info_string       = (char *)malloc(ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
     if (info_string != nullptr) {
       attribute_store_node_t parameter_info_node
-        = attribute_store_get_node_child_by_type(parameter_id_node,
-                                                 ATTRIBUTE(PARAMETER_INFO),
-                                                 0);
+        = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                  ATTRIBUTE(PARAMETER_INFO));
       status |= get_string_function(parameter_info_node,
                                     info_string,
                                     ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH);
@@ -266,32 +256,6 @@ static void get_configuration_parameters(
       free_configuration_parameter(parameter);
     }
   }
-}
-
-/**
- * @brief Reads the UCL network status of a node, starting from any attribute
- * under the NodeID in the attribute store.
- *
- * @param node     Attribute store node under the NodeID for which we want
- * to read the network status.
- */
-node_state_topic_state_t get_network_status(attribute_store_node_t node)
-{
-  // Default to UNAVAILABLE if the value is undefined in the attribute store
-  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
-
-  attribute_store_node_t node_id_node
-    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_NODE_ID);
-
-  attribute_store_node_t network_status_node
-    = attribute_store_get_node_child_by_type(node_id_node,
-                                             ATTRIBUTE_NETWORK_STATUS,
-                                             0);
-  attribute_store_get_reported(network_status_node,
-                               &network_status,
-                               sizeof(network_status));
-
-  return network_status;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -325,9 +289,9 @@ static sl_status_t configuration_parameter_discover_parameter_command(
 
   // Store the "wish" for parameter discover under the PARAMETERS_TO_DISCOVER attribute
   attribute_store_node_t parameter_list_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(PARAMETERS_TO_DISCOVER),
-                                             0);
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      ATTRIBUTE(PARAMETERS_TO_DISCOVER));
   if (parameter_list_node == ATTRIBUTE_STORE_INVALID_NODE) {
     parameter_list_node
       = attribute_store_add_node(ATTRIBUTE(PARAMETERS_TO_DISCOVER),
@@ -359,10 +323,9 @@ static sl_status_t configuration_parameter_discover_parameter_command(
                                sizeof(parameter_id_to_discover));
 
   attribute_store_node_t next_parameter_id_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID),
-      0);
+      ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID));
   on_next_parameter_id_update(next_parameter_id_node, ATTRIBUTE_UPDATED);
 
   return SL_STATUS_OK;
@@ -396,9 +359,8 @@ static sl_status_t configuration_parameter_set_parameter_command(
       0);
 
   attribute_store_node_t configuration_parameter_value_node
-    = attribute_store_get_node_child_by_type(configuration_parameter_id,
-                                             ATTRIBUTE(PARAMETER_VALUE),
-                                             0);
+    = attribute_store_get_first_child_by_type(configuration_parameter_id,
+                                              ATTRIBUTE(PARAMETER_VALUE));
   configuration_parameter_value_t new_value
     = (configuration_parameter_value_t)value;
 
@@ -426,9 +388,9 @@ static sl_status_t configuration_parameter_default_reset_command(
     }
   }
   attribute_store_node_t configuration_default_reset_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(DEFAULT_RESET_REQUESTED),
-                                             0);
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      ATTRIBUTE(DEFAULT_RESET_REQUESTED));
   const command_status_values_t reset_requested = NEEDS_ONE_COMMAND;
   attribute_store_set_desired(configuration_default_reset_node,
                               &reset_requested,
@@ -536,15 +498,14 @@ void on_next_parameter_id_update(attribute_store_node_t updated_node,
     = attribute_store_get_first_parent_with_type(updated_node,
                                                  ATTRIBUTE_ENDPOINT_ID);
   attribute_store_node_t parameter_list_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(PARAMETERS_TO_DISCOVER),
-                                             0);
+    = attribute_store_get_first_child_by_type(
+      endpoint_node,
+      ATTRIBUTE(PARAMETERS_TO_DISCOVER));
 
   // Just pick the first parameter from the wishlist.
   attribute_store_node_t parameter_id_node
-    = attribute_store_get_node_child_by_type(parameter_list_node,
-                                             ATTRIBUTE(PARAMETER_ID),
-                                             0);
+    = attribute_store_get_first_child_by_type(parameter_list_node,
+                                              ATTRIBUTE(PARAMETER_ID));
   configuration_parameter_id_t parameter_id = 0;
   attribute_store_get_reported(parameter_id_node,
                                &parameter_id,
@@ -602,8 +563,8 @@ void on_configuration_update(attribute_store_node_t updated_node,
  * @param network_status_node    Attribute Store node that was modified.
  * @param change          Type of change applied to the node.
  */
-void on_network_status_update(attribute_store_node_t network_status_node,
-                              attribute_store_change_t change)
+static void on_network_status_update(attribute_store_node_t network_status_node,
+                                     attribute_store_change_t change)
 {
   if (change != ATTRIBUTE_UPDATED) {
     return;
@@ -656,8 +617,7 @@ void on_network_status_update(attribute_store_node_t network_status_node,
 //////////////////////////////////////////////////////////////////////////////
 sl_status_t configuration_parameter_cluster_server_init(void)
 {
-  sl_log_debug(LOG_TAG,
-               "Configuration Parameter Commands handler initialization");
+  sl_log_debug(LOG_TAG, "Configuration Parameter server initialization");
   // Register the callback for handling commands from IoT service
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback_set(
     configuration_parameter_discover_parameter_command);

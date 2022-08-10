@@ -1,6 +1,6 @@
 {
-  "name": "UIC Dotdot Shared",
-  "version": "UICShared-dotdot-v1",
+  "name": "Unify Dotdot Shared",
+  "version": "UnifyShared-dotdot-v1",
   "override": "addon-override.js",
   "helpers": ["addon-helper.js"],
   "templates": [
@@ -8,6 +8,21 @@
       "path": "zap-types.zapt",
       "name": "ZCL types",
       "output": "include/zap-types.h"
+    },
+    {
+      "path": "dotdot_cluster_command_id_definitions.h.zapt",
+      "name": "ZCL Cluster Command ID definitions",
+      "output": "include/dotdot_cluster_command_id_definitions.h"
+    },
+    {
+      "path": "dotdot_cluster_id_definitions.h.zapt",
+      "name": "ZCL Cluster ID definitions",
+      "output": "include/dotdot_cluster_id_definitions.h"
+    },
+    {
+      "path": "dotdot_cluster_id_definitions.c.zapt",
+      "name": "ZCL Cluster ID implementation",
+      "output": "src/dotdot_cluster_id_definitions.c"
     },
     {
       "path": "readme_ucl_mqtt_reference.md.zapt",

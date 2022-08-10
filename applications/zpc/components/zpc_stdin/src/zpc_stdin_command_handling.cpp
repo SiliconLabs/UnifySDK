@@ -13,7 +13,7 @@
 
 #include "zpc_stdin_command_handling.h"
 
-// UIC components
+// Unify components
 #include "sl_log.h"
 #include "uic_mqtt.h"
 #include "uic_stdin.hpp"
@@ -37,7 +37,8 @@
 #include "zwave_command_class_firmware_update.h"
 #include "zpc_converters.h"
 #include "ucl_mqtt_node_interview.h"
-#include "attribute_store_debug.h"
+#include "attribute_store_configuration.h"
+#include "attribute_store_type_registration.h"
 #include "attribute.hpp"
 #include "attribute_poll.h"
 #include "zwave_s2_keystore.h"
@@ -54,7 +55,15 @@
 #include <vector>
 #include <array>
 #include <stdexcept>
+#include <float.h>
 #include <unistd.h>
+
+// Type aliasing
+using attribute_store_get_string_function_t
+  = sl_status_t (*)(attribute_store_node_t, char *, size_t);
+
+using tuple_node_and_level
+  = std::tuple<attribute_store_node_t,int>;
 
 constexpr char LOG_TAG[] = "zpc_stdin";
 /// File descripter for output stream
@@ -74,6 +83,12 @@ static sl_status_t
   handle_zwave_command_handler_dispatch(const handle_args_t &arg);
 static sl_status_t handle_remove_zwave_node(const handle_args_t &arg);
 static sl_status_t handle_attribute_store_log(const handle_args_t &arg);
+static sl_status_t handle_attribute_store_log_network(const handle_args_t &arg);
+static sl_status_t handle_attribute_store_log_search(const handle_args_t &arg);
+static sl_status_t
+  handle_attribute_store_configuration_set_auto_save(const handle_args_t &arg);
+static sl_status_t handle_attribute_store_configuration_set_type_validation(
+  const handle_args_t &arg);
 static sl_status_t
   handle_attribute_store_set_reported(const handle_args_t &arg);
 static sl_status_t handle_attribute_store_set_desired(const handle_args_t &arg);
@@ -107,7 +122,8 @@ static sl_status_t handle_attribute_poll_deregister(const handle_args_t &arg);
 /// <handler_func>: callback, that is called whenever the command is receied
 const std::map<std::string, std::pair<std::string, handler_func>> commands = {
   {"zwave_set_default", {"Reset Z-Wave network", &handle_zwave_set_default}},
-  {"zwave_log_security_keys", {"Log Z-Wave network security keys", &handle_zwave_log_security_keys}},
+  {"zwave_log_security_keys",
+   {"Log Z-Wave network security keys", &handle_zwave_log_security_keys}},
   {"zwave_remove_failed",
    {COLOR_START "<Node ID >" COLOR_END " :Remove a failing Z-Wave node.",
     &handle_zwave_remove_failed}},
@@ -148,22 +164,41 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
     " :Dumps the content of the attribute store for a given NodeID. "
     "The entire attribute store is dumped if no NodeID is provided",
     &handle_attribute_store_log}},
+  {"attribute_store_log_network",
+   {COLOR_START
+    "<Node ID>" COLOR_END
+    " :Logs the attribute store up to 3 levels and then just displays"
+    " the number of children nodes "
+    "The entire attribute store is dumped if no NodeID is provided",
+    &handle_attribute_store_log_network}},
+    {"attribute_store_log_search",
+   {COLOR_START
+    "<Attribute Name>" COLOR_END
+    " :Prints the tree path to nodes with the specified <Attribute Type",
+    &handle_attribute_store_log_search}},
+  {"attribute_store_configuration_set_auto_save",
+   {COLOR_START "<Enabled>" COLOR_END
+                " :Configures if the Attribute Store auto-save is enabled."
+                "Use the value 0 for disabled, 1 for enabled",
+    &handle_attribute_store_configuration_set_auto_save}},
+  {"attribute_store_configuration_set_type_validation",
+   {COLOR_START
+    "<Enabled>" COLOR_END
+    " :Configures if the Attribute Store type write validation is enabled."
+    "Use the value 0 for disabled, 1 for enabled",
+    &handle_attribute_store_configuration_set_type_validation}},
   {"attribute_store_set_all_desired_types",
    {COLOR_START "<type>,<Value>" COLOR_END
                 " :Goes throught the entire attribute store and set all "
-                "attribute types to the indicated value. "
-                "Value will be stored as int32_t. Arguments are in "
-                "hexadecimal format",
+                "attribute types to the indicated value. ",
     &handle_attribute_store_set_all_desired_types}},
   {"attribute_store_set_desired",
    {COLOR_START "<ID>,<Value>" COLOR_END
-                " :Sets the Attribute ID to the given DESIRED value."
-                " Value is int32_t, decimal format",
+                " :Sets the Attribute ID to the given DESIRED value.",
     &handle_attribute_store_set_desired}},
   {"attribute_store_set_reported",
    {COLOR_START "<ID>,<Value>" COLOR_END
-                " :Sets the Attribute ID to the given REPORTED value."
-                " Value is int32_t, decimal format",
+                " :Sets the Attribute ID to the given REPORTED value.",
     &handle_attribute_store_set_reported}},
   {"attribute_store_log_node",
    {COLOR_START "<Node ID>" COLOR_END
@@ -249,7 +284,7 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
 // Pre declaration of setup function
 sl_status_t zpc_stdin_command_handling_init();
 
-// Adding zpc commands to the UIC CLI
+// Adding zpc commands to the Unify CLI
 void zpc_setup_cli()
 {
   uic_stdin_add_commands(commands);
@@ -269,7 +304,6 @@ static sl_status_t handle_zwave_log_security_keys(const handle_args_t &arg)
   zwave_s2_log_security_keys(SL_LOG_INFO);
   return SL_STATUS_OK;
 }
-
 
 static sl_status_t handle_zwave_remove_failed(const handle_args_t &arg)
 {
@@ -452,7 +486,7 @@ static sl_status_t handle_zwave_tx_multi(const handle_args_t &arg)
     connection_info.remote.multicast_group = group_id;
 
     // Some pre-defined Z-Wave TX options.
-    uint8_t number_of_expected_responses = 1;
+    uint8_t number_of_expected_responses = 0;
     uint32_t discard_timeout_ms          = 5 * CLOCK_CONF_SECOND;
     zwave_tx_scheme_get_node_tx_options(ZWAVE_TX_QOS_MIN_PRIORITY,
                                         number_of_expected_responses,
@@ -532,9 +566,10 @@ static sl_status_t handle_zwave_wake_up(const handle_args_t &arg)
 
 static sl_status_t handle_zwave_learn_mode(const handle_args_t &arg)
 {
-  if (arg.size() < 2 || arg.size() > 3) {
+  if (arg.size() != 2) {
     dprintf(out_stream,
-            "Invalid number of arguments, expected args: <Learn Mode Intent>"
+            "Invalid number of arguments, expected args: <Learn Mode Intent>\n"
+            "Supported modes nwi, nwe or stop\n"
             "For example zwave_learn_mode nwi\n");
     return SL_STATUS_FAIL;
   }
@@ -542,23 +577,18 @@ static sl_status_t handle_zwave_learn_mode(const handle_args_t &arg)
   learn_mode_intent.assign(arg[1].c_str());
   if (learn_mode_intent.compare("nwi") == 0) {
     dprintf(out_stream, "Starting NWI Learn Mode Operation.\n");
-    return zwave_network_management_learn_mode(0x02);
-  }
-  if (learn_mode_intent.compare("nwe") == 0) {
+    return zwave_network_management_learn_mode(
+      ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI);
+  } else if (learn_mode_intent.compare("nwe") == 0) {
     dprintf(out_stream, "Starting NWE Learn Mode Operation.\n");
-    return zwave_network_management_learn_mode(0x03);
-  }
-  if (learn_mode_intent.compare("inclusion") == 0) {
-    dprintf(out_stream, "Starting Direct Range Inclusion Operation\n");
-    return zwave_network_management_learn_mode(0x01);
-  }
-  if (learn_mode_intent.compare("exclusion") == 0) {
-    dprintf(out_stream, "Starting Direct Range Exclusion Operation\n");
-    return zwave_network_management_learn_mode(0x01);
-  }
-  if (learn_mode_intent.compare("stop") == 0) {
-    dprintf(out_stream, "Stoping Learn Mode Operation\n");
-    return zwave_network_management_learn_mode(0x00);
+    return zwave_network_management_learn_mode(
+      ZWAVE_NETWORK_MANAGEMENT_LEARN_NWE);
+  } else if (learn_mode_intent.compare("stop") == 0) {
+    dprintf(out_stream, "Stopping Learn Mode Operation.\n");
+    return zwave_network_management_learn_mode(
+      ZWAVE_NETWORK_MANAGEMENT_LEARN_NONE);
+  } else {
+    dprintf(out_stream, "Unknown learn mode intent!\n");
   }
   return SL_STATUS_OK;
 }
@@ -625,51 +655,152 @@ static sl_status_t handle_accept_dsk(const handle_args_t &arg)
   }
 }
 
-static std::ostream &attribute_value(std::ostream &stream,
-                                     const attribute_store::attribute a,
-                                     attribute_store_node_value_state_t state)
+static std::string attribute_value(const attribute_store::attribute a,
+                                   attribute_store_node_value_state_t state)
 {
-  try {
-    std::vector<uint8_t> data = a.get<std::vector<uint8_t>>(state);
-    stream << std::hex << std::setfill('0');
-    stream << '[';
-    for (auto v = data.begin(); v != data.end(); v++) {
-      stream << std::setw(2) << static_cast<int>(*v);
-      if (v != data.end() - 1) {
-        stream << ",";
-      }
-    }
-    stream << ']';
-  } catch (std::exception &e) {
-    stream << "<undefined>";
+  attribute_store_storage_type_t storage_type
+    = attribute_store_get_storage_type(attribute_store_get_node_type(a));
+
+  std::stringstream stream;
+
+  if (storage_type == EMPTY_STORAGE_TYPE) {
+    // Attribute has no value.
+    stream << "<>";
+    return stream.str();
   }
-  return stream;
+
+  if (attribute_store_is_value_defined(a, state) == false) {
+    stream << "<undefined>";
+    return stream.str();
+  }
+
+  switch (storage_type) {
+    // Attribute is a string
+    case C_STRING_STORAGE_TYPE: {
+      attribute_store_get_string_function_t get_string
+        = &attribute_store_get_reported_string;
+      if (state == DESIRED_ATTRIBUTE) {
+        get_string = attribute_store_get_desired_string;
+      }
+      char string_value[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+      get_string(a, string_value, sizeof(string_value));
+      stream << '"' << string_value << '"';
+      return stream.str();
+    }
+
+    // Numbers:
+    case U8_STORAGE_TYPE:
+    case U16_STORAGE_TYPE:
+    case U32_STORAGE_TYPE:
+    case U64_STORAGE_TYPE:
+    case I8_STORAGE_TYPE:
+    case I16_STORAGE_TYPE:
+    case I32_STORAGE_TYPE:
+    case I64_STORAGE_TYPE:
+    case FLOAT_STORAGE_TYPE:
+    case DOUBLE_STORAGE_TYPE: {
+      float value = FLT_MIN;
+      if (state == DESIRED_ATTRIBUTE) {
+        value = attribute_store_get_desired_number(a);
+      } else {
+        value = attribute_store_get_reported_number(a);
+      }
+      if (value != FLT_MIN) {
+        stream << std::dec << value;
+      } else {
+        stream << "<!>Invalid value<!> ";
+      }
+      return stream.str();
+    }
+
+    // Consider all the rest as unknown/byte arrays
+    // UNKNOWN_STORAGE_TYPE:
+    // BYTE_ARRAY_STORAGE_TYPE:
+    default:
+      try {
+        std::vector<uint8_t> data = a.get<std::vector<uint8_t>>(state);
+        stream << '[';
+        stream << std::hex << std::setfill('0');
+        for (auto v = data.begin(); v != data.end(); v++) {
+          stream << std::setw(2) << static_cast<int>(*v);
+          if (v != data.end() - 1) {
+            stream << ",";
+          }
+        }
+        stream << ']';
+      } catch (std::exception &e) {
+        stream << "<undefined>";
+      }
+      return stream.str();
+  }
 }
 
-static sl_status_t do_ats_log(attribute_store_node_t n, std::string lead = "")
+static std::string attribute_info(attribute_store_node_t n,
+                                  int indentation_level = 0)
+{
+  attribute_store_type_t t = attribute_store_get_node_type(n);
+  std::stringstream info;
+  for (int i = 0; i < indentation_level; i++) {
+    if (i == 0) {
+      info << "    ";
+    } else {
+      info << "│   ";
+    }
+    if (i == (indentation_level - 1)) {
+      info << "│───";
+    }
+  }
+  info << "(" << std::dec << n << ") ";
+  info << attribute_store_get_type_name(t) << " ";
+  return info.str();
+}
+
+static sl_status_t do_ats_log(attribute_store_node_t n,
+                              int indentation_level = 0,
+                              bool print_total_child_count = false,
+                              bool print_only_n_node = false)
 {
   if (n == ATTRIBUTE_STORE_INVALID_NODE) {
     return SL_STATUS_FAIL;
   }
-  attribute_store_type_t t = attribute_store_get_node_type(n);
 
   std::stringstream line;
-  line << lead << std::setfill(' ');
-  line << "id:" << std::dec << std::setw(6) << n << " type: ";
-  line << "0x" << std::setfill('0') << std::setw(8) << std::hex
-       << static_cast<uint32_t>(t);
-  line << ": reported: ";
-  attribute_value(line, n, REPORTED_ATTRIBUTE);
-  line << " desired: ";
-  attribute_value(line, n, DESIRED_ATTRIBUTE);
-  line << std::setfill(' ') << std::setw(80 - line.tellp()) << " "
-       << attribute_store_name_by_type(t) << std::endl;
+  if (indentation_level>2 && print_total_child_count){
+    return SL_STATUS_OK;
+  }
+  line << attribute_info(n, indentation_level);
+  line << std::setfill('.');
+  // These │ and ─ characters use 2 bytes, making the line.tellp() inaccurate.
+  int extra_spaces = 0;
+  if (indentation_level == 1) {
+    extra_spaces = 8;
+  } else if (indentation_level > 1) {
+    extra_spaces = 8 + (indentation_level - 1) * 2;
+  }
+  line << std::setw(80 - line.tellp() + extra_spaces) << " ";
+  line << attribute_value(n, REPORTED_ATTRIBUTE);
+
+  if (attribute_store_is_value_defined(n, DESIRED_ATTRIBUTE)
+      && (false == attribute_store_is_value_matched(n))) {
+    line << " (desired: ";
+    line << attribute_value(n, DESIRED_ATTRIBUTE);
+    line << ")";
+  }
+  line << std::endl;
+  
+  if (indentation_level == 2 && print_total_child_count){
+    line << "{ "
+         << attribute_store_get_node_total_child_count(n)
+         << " children nodes } \n";
+  }
+ 
   if (write(out_stream, line.str().data(), line.str().length()) < 0) {
     sl_log_error(LOG_TAG, "Failed to write to out_stream");
   };
-
-  for (size_t i = 0; i < attribute_store_get_node_child_count(n); i++) {
-    do_ats_log(attribute_store_get_node_child(n, i), lead + "  ");
+  if(!print_only_n_node){
+    for (size_t i = 0; i < attribute_store_get_node_child_count(n); i++) {
+      do_ats_log(attribute_store_get_node_child(n, i), indentation_level + 1,print_total_child_count);
+    }
   }
 
   return SL_STATUS_OK;
@@ -695,14 +826,162 @@ static sl_status_t handle_attribute_store_log(const handle_args_t &arg)
     return SL_STATUS_FAIL;
   }
 }
+ 
+static sl_status_t handle_attribute_store_log_network(const handle_args_t &arg)
+{
+  try {
+    if (arg.size() == 2) {
+      // Parse the NodeID and get its node.
+      zwave_node_id_t node_id
+        = static_cast<zwave_node_id_t>(std::stoi(arg[1].c_str(), nullptr, 10));
+      unid_t unid;
+      zwave_unid_from_node_id(node_id, unid);
+      attribute_store_node_t node_to_print
+        = attribute_store_network_helper_get_node_id_node(unid);
+      return do_ats_log(node_to_print,0,true);
+    } else {
+      return do_ats_log(attribute_store_get_root(),0,true);
+    }
+  } catch (const std::invalid_argument &e) {
+    dprintf(out_stream, "%s\n", e.what());
+    return SL_STATUS_FAIL;
+  }
+}
+
+static sl_status_t print_vector(const std::vector <tuple_node_and_level> subtree)
+{
+  sl_status_t status;
+  std::stringstream line;
+  if(subtree.empty()){
+    return SL_STATUS_FAIL;
+  }
+  for (const auto& [node,level] : subtree){
+    status = do_ats_log(node, level , false, true);
+    if(status == SL_STATUS_FAIL)
+      return status;
+  }
+  return SL_STATUS_OK;
+
+}
+
+static sl_status_t collect_the_parent_nodes(std::vector<tuple_node_and_level>& tree,
+                                     attribute_store_node_t node,
+                                    int level,
+                                    bool is_the_first_call=true,
+                                    int pos = 0)
+{ 
+  // Finding the correct place to add each node into the 
+  // vector, in order to start from the root and end to the node of interest and 
+  // avoid duplications of nodes in the vector
+  tuple_node_and_level parent {attribute_store_get_node_parent(node),level-1}; 
+  bool result = ((std::find (tree.begin(), tree.end(), parent))!= tree.end());
+  if (result) {
+    tree.insert(tree.end()-pos,tuple_node_and_level(node,level));
+    return SL_STATUS_OK;
+  }else if(!result && is_the_first_call){
+    pos++;
+    tree.insert(tree.end(),tuple_node_and_level(node,level));
+  }else {
+    tree.insert(tree.end()-pos,tuple_node_and_level(node,level));
+    pos++;
+  }
+  
+  if( node != attribute_store_get_root())
+    collect_the_parent_nodes(tree,attribute_store_get_node_parent(node), 
+                                                    level-1, false, pos);
+
+  return SL_STATUS_OK;
+}
+
+static sl_status_t find_the_node(std::vector <tuple_node_and_level>& tree,
+                                 const std::string& attribute,
+                                 attribute_store_node_t node 
+                                 = attribute_store_get_root()
+                                 ,int level = 0)
+{
+
+  std::stringstream line;
+  if (node == ATTRIBUTE_STORE_INVALID_NODE) {
+    return SL_STATUS_FAIL;
+  }
+  
+  const char* type = attribute_store_get_type_name(attribute_store_get_node_type(node));
+
+  // Each time that finds a node calls the collect_the_parent_node to collect the nodes
+  // that lead to the node of interest, in a vector
+  std::string str(type);
+  if (str.find(attribute) != std::string::npos){
+   collect_the_parent_nodes(tree,node,level);
+  }
+  
+  for (size_t i = 0; i < attribute_store_get_node_child_count(node); i++) {
+    find_the_node(tree,attribute,attribute_store_get_node_child(node, i),level+1);
+  }
+  
+  return SL_STATUS_OK;
+}
+
+static sl_status_t handle_attribute_store_log_search(const handle_args_t &arg)
+{
+  // Ensure that debug is active for the attribute store
+  sl_log_set_tag_level("attribute_store", SL_LOG_DEBUG);
+
+  if (arg.size() != 2) {
+    dprintf(out_stream, "Invalid number of arguments, expected args: <Attribute Type>\n");
+    return SL_STATUS_FAIL;
+  }
+  try {
+    std::vector <tuple_node_and_level> tree;
+
+    if(find_the_node(tree,arg[1]) == SL_STATUS_FAIL)
+      return SL_STATUS_FAIL;
+    return print_vector(tree);
+  } catch (const std::invalid_argument &e) {
+    dprintf(out_stream, "%s\n", e.what());
+    return SL_STATUS_FAIL;
+  }
+}
+
+static sl_status_t
+  handle_attribute_store_configuration_set_auto_save(const handle_args_t &arg)
+{
+  try {
+    if (arg.size() == 2) {
+      // Parse the "Enabled" argument
+      bool enabled = static_cast<bool>(std::stoi(arg[1].c_str(), nullptr, 10));
+      attribute_store_configuration_set_auto_save(enabled);
+      return SL_STATUS_OK;
+    }
+  } catch (const std::invalid_argument &e) {
+    dprintf(out_stream, "%s\n", e.what());
+    return SL_STATUS_FAIL;
+  }
+  return SL_STATUS_FAIL;
+}
+
+static sl_status_t handle_attribute_store_configuration_set_type_validation(
+  const handle_args_t &arg)
+{
+  try {
+    if (arg.size() == 2) {
+      // Parse the "Enabled" argument
+      bool enabled = static_cast<bool>(std::stoi(arg[1].c_str(), nullptr, 10));
+      attribute_store_configuration_set_type_validation(enabled);
+      return SL_STATUS_OK;
+    }
+  } catch (const std::invalid_argument &e) {
+    dprintf(out_stream, "%s\n", e.what());
+    return SL_STATUS_FAIL;
+  }
+  return SL_STATUS_FAIL;
+}
 
 static sl_status_t handle_attribute_store_set_desired(const handle_args_t &arg)
 {
   if (arg.size() != 3) {
     dprintf(out_stream,
             "Invalid number of arguments, expected args:"
-            "attribute_store_set_desired <ID>,<Value>. Value is 4 bytes, "
-            "decimal\n");
+            "attribute_store_set_desired <ID>,<Value>\n");
     return SL_STATUS_FAIL;
   }
   attribute_store_node_t node = ATTRIBUTE_STORE_INVALID_NODE;
@@ -713,10 +992,8 @@ static sl_status_t handle_attribute_store_set_desired(const handle_args_t &arg)
     return SL_STATUS_FAIL;
   }
   try {
-    int32_t value
-      = static_cast<int32_t>(std::stoi(arg[2].c_str(), nullptr, 10));
-    attribute_store::attribute(node).set_desired(value);
-    return SL_STATUS_OK;
+    float value = std::stof(arg[2]);
+    return attribute_store_set_desired_number(node, value);
   } catch (const std::invalid_argument &e) {
     dprintf(out_stream, "%s: Invalid argument: %s\n", arg[2].c_str(), e.what());
     return SL_STATUS_FAIL;
@@ -727,16 +1004,17 @@ static void
   set_all_children_with_type(attribute_store_node_t node,
                              attribute_store_type_t type,
                              attribute_store_node_value_state_t value_state,
-                             int32_t value)
+                             float value)
 {
   if (node == ATTRIBUTE_STORE_INVALID_NODE) {
     return;
   }
   if (attribute_store_get_node_type(node) == type) {
-    attribute_store_set_node_attribute_value(node,
-                                             value_state,
-                                             (uint8_t *)&value,
-                                             sizeof(value));
+    if (value_state == REPORTED_ATTRIBUTE) {
+      attribute_store_set_reported_number(node, value);
+    } else {
+      attribute_store_set_desired_number(node, value);
+    }
   }
   for (size_t i = 0; i < attribute_store_get_node_child_count(node); i++) {
     set_all_children_with_type(attribute_store_get_node_child(node, i),
@@ -762,9 +1040,8 @@ static sl_status_t
     dprintf(out_stream, "%s: Invalid argument: %s\n", arg[1].c_str(), e.what());
     return SL_STATUS_FAIL;
   }
-  int32_t value = 0;
   try {
-    value = static_cast<int32_t>(std::stoi(arg[2].c_str(), nullptr, 16));
+    float value = std::stof(arg[2]);
 
     set_all_children_with_type(attribute_store_get_root(),
                                type,
@@ -784,8 +1061,7 @@ static sl_status_t handle_attribute_store_set_reported(const handle_args_t &arg)
   if (arg.size() != 3) {
     dprintf(out_stream,
             "Invalid number of arguments, expected args:"
-            "attribute_store_set_reported <ID>,<Value>. Value is 4 bytes, "
-            "decimal\n");
+            "attribute_store_set_reported <ID>,<Value> \n");
     return SL_STATUS_FAIL;
   }
   attribute_store_node_t node = ATTRIBUTE_STORE_INVALID_NODE;
@@ -796,10 +1072,8 @@ static sl_status_t handle_attribute_store_set_reported(const handle_args_t &arg)
     return SL_STATUS_FAIL;
   }
   try {
-    int32_t value
-      = static_cast<int32_t>(std::stoi(arg[2].c_str(), nullptr, 10));
-    attribute_store::attribute(node).set_reported(value);
-    return SL_STATUS_OK;
+    float value = std::stof(arg[2]);
+    return attribute_store_set_reported_number(node, value);
   } catch (const std::invalid_argument &e) {
     dprintf(out_stream, "%s: Invalid argument: %s\n", arg[2].c_str(), e.what());
     return SL_STATUS_FAIL;
@@ -837,13 +1111,11 @@ static sl_status_t handle_attribute_store_log_subtree(const handle_args_t &arg)
     dprintf(out_stream, "Invalid number of arguments, expected args: <NodeID>");
     return SL_STATUS_FAIL;
   }
-
   try {
     // Just print the individual node:
     attribute_store_node_t node_to_print
       = std::stoi(arg[1].c_str(), nullptr, 10);
-    attribute_store_log_node(node_to_print, true);
-    return SL_STATUS_OK;
+    return do_ats_log(node_to_print);
   } catch (const std::invalid_argument &e) {
     dprintf(out_stream, "%s\n", e.what());
     return SL_STATUS_FAIL;

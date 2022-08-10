@@ -1,0 +1,68 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+// clang-format off
+{{zap_header}}
+
+/**
+ * @defgroup dotdot_cluster_id_definitions DotDot Cluster ID definitions
+ * @brief Header with Cluster ID definitions
+ *
+ * Cluster identifier defines (e.g. OnOff ID is 0x0006)
+ *
+ * @{
+ */
+
+#ifndef DOTDOT_CLUSTER_ID_DEFINITIONS_H
+#define DOTDOT_CLUSTER_ID_DEFINITIONS_H
+
+#include "uic_typedefs.h"
+
+// Special value to use when the Cluster ID cannot be found.
+#define DOTDOT_INVALID_CLUSTER_ID ((dotdot_cluster_id_t){0xFFFF})
+
+
+{{#zcl_clusters}}
+
+// Definitions for cluster: {{label}}
+#define DOTDOT_{{asSnakeCaseUpper label}}_CLUSTER_ID ((dotdot_cluster_id_t){{asHex code}})
+
+{{/zcl_clusters}}
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief Get the cluster name based on the cluster ID.
+ *
+ * @param cluster_id        Cluster ID, for example 0x0006 or DOTDOT_ON_OFF_CLUSTER_ID
+ * @returns const char*      Name of the cluster ("OnOff"). "Unknown" if it does not exist.
+ */
+const char* uic_dotdot_get_cluster_name(dotdot_cluster_id_t cluster_id);
+
+/**
+ * @brief Get the cluster name based on the cluster ID.
+ *
+ * @param cluster_name          Cluster Name, for example "Level"
+ * @returns dotdot_cluster_id_t  ID of the cluster (e.g. 0x0006),
+ *          DOTDOT_INVALID_CLUSTER_ID if it does not exist.
+ */
+dotdot_cluster_id_t uic_dotdot_get_cluster_id(const char* cluster_name);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  //DOTDOT_CLUSTER_ID_DEFINITIONS_H
+/** @} end dotdot_cluster_id_definitions */

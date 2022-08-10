@@ -27,7 +27,7 @@ static const unsigned int ZIGPC_ATTR_MGMT_DELAY_READ_ATTRIBUTES
   = CLOCK_SECOND * 5;
 
 static const unsigned int ZIGPC_ATTR_MGMT_POLL_PERIOD_MS
-  = CLOCK_SECOND;  //1000ms
+  = CLOCK_SECOND/2;  //500ms
 
 /**
  * @brief Limit of Read Attribute Records to send per ZCL Message

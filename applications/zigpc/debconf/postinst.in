@@ -33,7 +33,9 @@ fix_permissions() {
   mkdir -p $UIC_VAR_DIR
   chown uic $UIC_VAR_DIR
   mkdir -p $ZIGPC_OTA_DIR
+  ln -sf $ZIGPC_OTA_DIR ${CPACK_PACKAGING_INSTALL_PREFIX}/usr/bin/ota-files
   chown uic $ZIGPC_OTA_DIR
+
 }
 
 enable_start_uic_zigpc() {
@@ -67,48 +69,44 @@ handle_conf() {
   fi
 
   # Update configuration file with outcome of configuration
-  # This is a small state machine that can update the UIC config file, which is written in YAML
+  # This is a small state machine that can update the Unify config file, which is written in YAML
   state=""
-
-  while IFS= read line; do #Read IFS https://en.wikipedia.org/wiki/Input_Field_Separators
+  while IFS= read line #Read IFS https://en.wikipedia.org/wiki/Input_Field_Separators
+  do
     # Set the state depending on the line read from the config file
     case "$line" in
-    "zigpc:"*) # State: zigpc
-      state="zigpc"
-      echo "$line"
-      ;;
-    *)
-      state=""
-      ;; # Set state to empty, Any unknown text, that doesn't begin with '-' or ' '
+      "zigpc:" )   # State: zigpc
+        state="zigpc"
+        ;;
+      " "* | "-"* )   # Lines starting with '-' or ' ' don't trigger state change.
+        # Do nothing.
+        ;;
+      *) state="" ;;    # Set state to empty, Any unknown text, that doesn't begin with '-' or ' '
     esac
-    # STM to update entries under 'zigpc:' or 'datastore:' (more may be added later)
+    leftside=$(echo "$line" | cut -f1 -d":")
+    # STM to update entries under 'zigpc:'
     case $state in
-    "zigpc")
-      while IFS= read line; do
+      "zigpc" )
         case "$line" in
-        "  serial:"*)
-          echo "  serial: $CFG_ZIGPC_SERIAL"
-          ;;
-        "  datastore_file:"*)
-          echo "  datastore_file: $CFG_DATASTORE_FILE"
-          ;;
+        "zigpc:" )
+          echo "$line" ;;                   # zigpc should not be indented
+        *"serial:"*)
+          echo "$leftside: $CFG_ZIGPC_SERIAL" ;;
+        *"datastore_file:"*)
+          echo "$leftside: $CFG_DATASTORE_FILE" ;;
         *)
-          echo "$line"
-          ;; # Anything inside zigpc we indent
-        esac
-      done
-      ;;
-    *)
-      echo "$line"
-      ;; # Anything else we just echo the line
-      # Without IFS= , echo here would remove the leading spaces and ruin the yaml formatting
+          echo "$line" ;;                 # Anything inside zigpc we indent
+        esac ;;
+      *)
+        echo "$line" ;;                     # Anything else we just echo the line
+                        # Without IFS= , echo here would remove the leading spaces and ruin the yaml formatting
     esac
-  done <"$UIC_CONFFILE" >"$UIC_CONFFILE.tmp"
-
+  done < "$UIC_CONFFILE" > "$UIC_CONFFILE.tmp"
+ 
   mv "$UIC_CONFFILE.tmp" "$UIC_CONFFILE"
 
   echo "==="
-  echo "$UIC_CONFFILE contents:"
+  echo "$UIC_CONFFILE new contents:"
   echo "==="
   cat "$UIC_CONFFILE"
   echo "==="

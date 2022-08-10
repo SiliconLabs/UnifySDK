@@ -14,7 +14,7 @@
 #include "zpc_dotdot_mqtt_group_dispatch.h"
 #include "dotdot_mqtt_topics_handler.h"
 
-// UIC includes
+// Unify includes
 #include "dotdot_mqtt.h"
 
 sl_status_t zpc_dodot_mqtt_init()

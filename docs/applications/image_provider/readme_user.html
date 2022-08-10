@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Provider User’s Guide &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/image_provider/readme_user.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Name and location service User’s Guide" href="../nal/readme_user.html" />
+    <link rel="prev" title="GMS User’s Guide" href="../gms/readme_user.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#systems-overview">Systems Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/UnifySDK.html#unify-applications-overview">Unify Applications Overview</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-protocol-controllers">Unify Framework Protocol Controllers</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-services">The Unify Framework Services</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../aox/applications/positioning/readme_user.html">AoX Positioning User Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aox/applications/positioning/readme_developer.html">AoX Positioning Developer’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gms/readme_user.html">GMS User’s Guide</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Image Provider User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nal/readme_user.html">Name and location service User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../upti_cap/readme_user.html">UPTI CAP User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../upti_writer/readme_user.html">UPTI WRITER User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../upvl/readme_user.html">UPVL User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-provisioning-list-upvl">The Unify Framework Provisioning List (UPVL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-group-manager-gms">The Unify Framework Group Manager (GMS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-name-and-location-service-nal">The Unify Name and Location service (NAL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-ota-image-provider">The Unify Framework OTA Image Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-aox-positioning-application">The Unify AoX Positioning Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-upticap">The UPTICap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-uptiwriter">The UPTIWriter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../doc/UnifySDK.html#iot-services">IoT Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="image-provider-users-guide">
+<h1>Image Provider User’s Guide<a class="headerlink" href="#image-provider-users-guide" title="Permalink to this heading"></a></h1>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>The Image Provider is a generic application that allows storing and
+distributing OTA Firmware images for Protocol Controllers over MQTT.</p>
+<p>For more details about the interactions between the Image Provider and Protocol
+Controllers, see the Unify specifications - Common OTA FW Update Service
+chapter.</p>
+<p>The Image Provider application is required for most Protocol Controller to
+access firmware images for a given node. Protocol Controllers running without
+the Image Provider application available will most likely not be able to provide
+OTA functionalities.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>For installing please refer to the general installation method in
+<a class="reference internal" href="../../doc/getting_started.html"><span class="doc std std-doc">Getting started</span></a>.</p>
+</section>
+<section id="running-the-image-provider">
+<h2>Running the Image Provider<a class="headerlink" href="#running-the-image-provider" title="Permalink to this heading"></a></h2>
+<section id="using-systemd-service">
+<h3>Using Systemd Service<a class="headerlink" href="#using-systemd-service" title="Permalink to this heading"></a></h3>
+<p>The best way to run the Image Provider is using the Systemd service that is
+installed with the Debian installer.
+For more information, see <a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify Framework User guide</span></a>.</p>
+</section>
+<section id="using-the-command-line">
+<h3>Using the Command Line<a class="headerlink" href="#using-the-command-line" title="Permalink to this heading"></a></h3>
+<p>Alternatively, you can run the Image Provider by executing <code class="docutils literal notranslate"><span class="pre">uic-image-provider</span></code>.
+You can configure the MQTT server, database path, through command line options.
+For details about options, run <code class="docutils literal notranslate"><span class="pre">uic-image-provider</span> <span class="pre">--help</span></code> command:</p>
+<p>Make sure that you do not run the Image Provider both as a service and using the
+command line.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~ $ service uic-image-provider status
+* uic-image-provider.service - Unified IoT OTA Image Provider
+   Loaded: loaded <span class="o">(</span>/lib/systemd/system/uic-image-provider.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2021</span>-08-17 <span class="m">14</span>:50:26 CEST<span class="p">;</span> <span class="m">1</span> day 20h ago
+ Main PID: <span class="m">13235</span> <span class="o">(</span>uic-image-provi<span class="o">)</span>
+    Tasks: <span class="m">2</span> <span class="o">(</span>limit: <span class="m">4915</span><span class="o">)</span>
+   CGroup: /system.slice/uic-image-provider.service
+           <span class="p">|</span>─13235 /usr/bin/uic-image-provider
+</pre></div>
+</div>
+<p>If the service is running, stop it using the following command before
+you run the application manually:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~ $ service uic-image-provider stop
+</pre></div>
+</div>
+</section>
+</section>
+<section id="using-the-image-provider">
+<h2>Using the Image Provider<a class="headerlink" href="#using-the-image-provider" title="Permalink to this heading"></a></h2>
+<section id="ota-folder-structure">
+<h3>OTA Folder Structure<a class="headerlink" href="#ota-folder-structure" title="Permalink to this heading"></a></h3>
+<p>The Image Provider will use the configured <strong>image_provider.image_path</strong> to
+store a JSON file that will represent the list of available images.</p>
+<p>The <em>images.json</em> file must be configured to indicate which images to advertise
+to the MQTT broker/Protocol Controllers.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic-image-provider $ tree
+.
+<span class="p">|</span>── images.json
+<span class="p">|</span>── updates
+    <span class="p">|</span>── ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl
+    <span class="p">|</span>── ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl
+</pre></div>
+</div>
+</section>
+<section id="metadata-file-name-and-format">
+<h3>Metadata File Name and Format<a class="headerlink" href="#metadata-file-name-and-format" title="Permalink to this heading"></a></h3>
+<p>The filename for the metadata is static and must stay <em>images.json</em>.</p>
+<p>The Image Provider will poll the images.json for changes with a configurable
+period. It will then advertise images.</p>
+<p>The JSON file must follow the following JSON schema:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;$schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Image Provider Metadata file format&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;List of Available Firmwares files for the Image Provider&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;definitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;Image Entry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;FileName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Uiid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;ApplyAfter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Md5&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;FileName&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;Uiid&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;Unid&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;Version&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;ApplyAfter&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;Md5&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;Images&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/definitions/Image Entry&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;Version&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;Images&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This is a sample <em>images.json</em> file advertising 2 images.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;Images&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">   </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;FileName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;updates/ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Uiid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZWave-0000-0003-0004-00-01&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.15.4&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;ApplyAfter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-06-29T16:39:57+02:00&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Md5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cZYo9OIM+rnuUk6G9dXmtg==&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;FileName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;updates/ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Uiid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZWave-0000-0002-0004-00-01&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Unid&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;zw-C87E6FB8-0006&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;zw-C87E6FB8-0007&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;zw-C87E6FB8-0008&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.15.4&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;ApplyAfter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-06-29T16:42:59+02:00&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;Md5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GnzJgyfhQhzJQHRVtVy8vw==&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The following parameters must be provided for each Firmware entry:</p>
+<ul class="simple">
+<li><p><strong>FileName</strong> : This is the relative path from the <em>images.json</em> to the
+firmware files. Absolute path can be used.</p></li>
+<li><p><strong>Uiid</strong> : The Unique Image Identifier. This allows Protocol Controller
+to identify know which nodes can receive the firmware. More details about how
+to build the UIID is described in each individual Protocol Controller manual</p></li>
+<li><p><strong>Unid</strong> : A list of UNIDs that should receive the update. An empty array
+will instruct the Protocol Controller to update all compatible nodes. An array
+with UNIDs will instruct the Protocol Controller to update only the list of
+nodes in this array.</p></li>
+<li><p><strong>Version</strong> : The version of the firmware file. It may be used by
+protocol controllers to prevent a downgrade or attempting to upgrade to the same
+version. The construct and interpretation of the version string is
+Protocol Controller specific</p></li>
+<li><p><strong>ApplyAfter</strong> : A timestamp encoded using RFC 3339, that will indicate when
+to first attempt to apply the Firmware Update. A date in the past will
+instruct Protocol Controllers to initiate the firmware update as soon as
+possible.</p></li>
+<li><p><strong>Md5</strong> : A checksum that will verify that the data located in the <em>fileName</em>
+is coherent with what we expect.</p></li>
+</ul>
+<section id="md5-checksum-calculation">
+<h4>Md5 Checksum calculation<a class="headerlink" href="#md5-checksum-calculation" title="Permalink to this heading"></a></h4>
+<p>The Md5 checksum value must be set to a base64 encoded md5 digest of image file.</p>
+<p>In Rust, the checksum can be generated like this:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">base64</span>::<span class="n">encode</span><span class="p">(</span><span class="n">md5</span>::<span class="n">compute</span><span class="p">(</span><span class="n">buffer</span><span class="p">).</span><span class="n">to_vec</span><span class="p">());</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The checksum string can also be created using openssl:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl <span class="p">|</span> openssl dgst -binary -md5 <span class="p">|</span> openssl base64
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

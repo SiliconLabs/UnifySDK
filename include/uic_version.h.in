@@ -19,10 +19,10 @@
 #define UIC_VERSION_REV   @VERSION_REV@
 
 #define DEFAULT_RULES_MAPPING_DIR \
-  "@CPACK_PACKAGING_INSTALL_PREFIX@/usr/share/uic/rules"
+  "@CMAKE_INSTALL_PREFIX@/share/uic/rules"
 #define CONFIG_ZWAVE_POLL_ATTRIBUTE_LIST_DIR \
-  "@CPACK_PACKAGING_INSTALL_PREFIX@/usr/share/uic"
-#define UIC_VAR_DIR "@CPACK_PACKAGING_INSTALL_PREFIX@/var/lib/uic"
+  "@CMAKE_INSTALL_PREFIX@/share/uic"
+#define UIC_VAR_DIR "/var/lib/uic"
 
 #endif /* UIC_VERSION_H */
        /** @} (end addtogroup uic_version_h) */

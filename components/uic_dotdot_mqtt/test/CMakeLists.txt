@@ -37,6 +37,19 @@ target_add_unittest(
 target_include_directories(dotdot_mqtt_send_commands_test
                            PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
+# Dotdot MQTT Generated Commands test
+target_add_unittest(
+  uic_dotdot_mqtt
+  NAME
+  dotdot_mqtt_generated_commands_test
+  SOURCES
+  dotdot_mqtt_generated_commands_test.cpp
+  DEPENDS
+  uic_mqtt_stub)
+
+target_include_directories(dotdot_mqtt_generated_commands_test
+                          PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+
 target_add_unittest(
   uic_dotdot_mqtt
   NAME
@@ -61,5 +74,14 @@ target_add_unittest(
   dotdot_mqtt_supported_generated_commands_test
   SOURCES
   dotdot_mqtt_supported_generated_commands_test.cpp
+  DEPENDS
+  uic_mqtt_stub)
+
+target_add_unittest(
+  uic_dotdot_mqtt
+  NAME
+  dotdot_mqtt_helpers_test
+  SOURCES
+  dotdot_mqtt_helpers_test.cpp
   DEPENDS
   uic_mqtt_stub)

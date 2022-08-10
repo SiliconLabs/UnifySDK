@@ -24,14 +24,14 @@
 
 #include <string>
 #include <map>
+#include <float.h>
 #include <boost/optional.hpp>
 #include "attribute.hpp"
 #include "attribute_mapper_ast.hpp"
+#include "attribute_mapper_ast_path_eval.hpp"
 
 namespace ast
 {
-typedef boost::optional<int> result_type;
-
 struct nil;
 struct signed_;
 struct expression;
@@ -66,27 +66,42 @@ struct assignment;
  * See https://www.boost.org/doc/libs/1_76_0/doc/html/boost/apply_visitor.html
  * for details.
  */
-struct eval {
+
+template<typename T> struct eval {
   public:
+  using result_type = boost::optional<T>;
+
   /**
    * @brief Construct a new eval object
    *
    * @param context Context in which this evaluator should work.
    */
-  eval(const attribute_store::attribute context = 0);
+  explicit eval(const attribute_store::attribute context = 0) : context(context)
+  {}
 
   /**
    * @brief the undefined keyword
    */
-  result_type operator()(const nil &) const;
+  result_type operator()(const nil &) const
+  {
+    return result_type();
+  }
+
   /**
    * @brief a literal number
    */
-  result_type operator()(const unsigned int n) const;
+  result_type operator()(const uint32_t n) const
+  {
+    return n;
+  }
+
   /**
-   * @brief an attribute read from the attribute store
+   * @brief a literal number
    */
-  result_type operator()(const attribute &a) const;
+  result_type operator()(const float n) const
+  {
+    return n;
+  }
 
   /**
    * @brief An operation
@@ -97,82 +112,130 @@ struct eval {
    * @param x The operation
    * @param lhs Left hand side of the operation
    */
-  result_type operator()(const operation &x, result_type lhs) const;
+  result_type operator()(const operation &x, result_type lhs) const
+  {
+    if (x.operator_ == operator_or) {
+      if (!context.is_valid()) {
+        return result_type();
+      }
+
+      if (lhs) {
+        return lhs;
+      } else {
+        return boost::apply_visitor(*this, x.operand_);
+      }
+    }
+
+    result_type rhs = boost::apply_visitor(*this, x.operand_);
+    if (rhs && lhs) {
+      switch (x.operator_) {
+        case operator_plus:
+          return lhs.value() + rhs.value();
+        case operator_minus:
+          return lhs.value() - rhs.value();
+        case operator_mult:
+          return lhs.value() * rhs.value();
+        case operator_div:
+          return lhs.value() / rhs.value();
+        case operator_comp:
+          return trunc(1000. * lhs.value()) == trunc(1000. * rhs.value());
+        case operator_left_shift:
+          return lhs.value() < rhs.value();
+        case operator_right_shift:
+          return lhs.value() > rhs.value();
+        case operator_bitand:
+          return ((int)round(lhs.value())) & ((int)round(rhs.value()));
+        case operator_bitor:
+          return ((int)round(lhs.value())) | ((int)round(rhs.value()));
+        case operator_bitxor:
+          return ((int)round(lhs.value())) ^ ((int)round(rhs.value()));
+        case operator_modulo:
+          return fmod(lhs.value(), rhs.value());
+        case operator_exponent:
+          return pow(lhs.value(), rhs.value());
+        case operator_or:  //handled above
+          break;
+        default:
+          break;
+      }
+    }
+    return result_type();
+  }
   /**
    * @brief Unary operation
    */
-  result_type operator()(const signed_ &x) const;
+  result_type operator()(const signed_ &x) const
+  {
+    result_type rhs = boost::apply_visitor(*this, x.operand_);
+    if (rhs) {
+      switch (x.sign) {
+        case '-':
+          return -rhs.value();
+        default: // Assumed to be only '+' for now.
+          return +rhs.value();
+      }
+    }
+    return result_type();
+  }
+
   /**
    * @brief Condition
    *
    * for if statements
    */
-  result_type operator()(const condition &x) const;
+  result_type operator()(const expression &x) const
+  {
+    result_type state = boost::apply_visitor(*this, x.first);
+    for (operation const &oper: x.rest) {
+      state = (*this)(oper, state);
+    }
+    return state;
+  }
 
   /**
    * @brief The normal entry point of the evaluator
    */
-  result_type operator()(const expression &x) const;
+  result_type operator()(const condition &x) const
+  {
+    result_type cond = boost::apply_visitor(*this, x.cond_value);
+    if (cond && cond.value()) {
+      return boost::apply_visitor(*this, x.cond_true);
+    } else {
+      return boost::apply_visitor(*this, x.cond_false);
+    }
+  }
+
+  /**
+     * @brief an attribute read from the attribute store
+     */
+  result_type operator()(const attribute &a) const
+  {
+    if (!context.is_valid()) {
+      return result_type();
+    }
+
+    attribute_path_eval ape(context);
+    attribute_store::attribute node = ape(a.attribute_path);
+
+    if (a.value_type == 'e') {  //existence evaluation
+      //If all elements have bee parsed this means that we have found the attribute
+      return ape.all_elements_parsed();
+    } else if (ape.all_elements_parsed()) {
+      T result = 0;
+      if (a.value_type == 'd') {
+        result = attribute_store_get_desired_number(node);
+      } else if (a.value_type == 'r') {
+        result = attribute_store_get_reported_number(node);
+      }
+      if (result != FLT_MIN) {
+        return result;
+      }
+    }
+    return result_type();
+  }
 
   private:
   attribute_store::attribute context;
-};
-
-/**
-   * @brief The attribute path evaluator evalues a full attribute path
-   * and returns the matching attribute store attribute for that attribute
-   * path.
-   *
-   * The evaluation is done in the context context.
-   *
-   */
-struct attribute_path_eval {
-  /**
-   * @brief Construct a new attribute path eval object
-   *
-   * @param context parent on the attribute store
-   */
-  attribute_path_eval(const attribute_store::attribute context);
-
-  /// hat operator ^ (parent)
-  attribute_store::attribute operator()(const operand &oper);
-  /// hat operator ^ (parent)
-  attribute_store::attribute operator()(const nil &nul);
-  /// just given by type id
-  attribute_store::attribute operator()(const unsigned int type_id);
-  /// Subscript operator
-  attribute_store::attribute
-    operator()(const attribute_path_subscript &subscript) const;
-
-  /// parse a path list return the last successfull evaluated attribute
-  attribute_store::attribute
-    operator()(const std::vector<attribute_path_element> &paths);
-
-  /**
-   * Return true if the path has been fully resolved
-   */
-  bool all_elements_parsed() const;
-
-  /**
-   *  return true if all but the last path elements has been resolved
-   */
-  bool last_token_failed() const;
-
-  /**
-   *  get the type is of the last element that was attempted to be parsed
-   */
-  attribute_store_type_t last_fail_type() const;
-
-  /**
-   *  Return the depth of the path, ie the number ofr path elemnts
-   */
-  size_t get_depth(const std::vector<attribute_path_element> &paths) const;
-
-  private:
-  //ID of last type passed
-  attribute_store_type_t last_type_id = 0;
-  int elements_left                   = 0;
-  attribute_store::attribute context  = 0;
 };
 
 }  // namespace ast

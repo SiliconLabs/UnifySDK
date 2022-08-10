@@ -19,6 +19,8 @@
 // List of static test variables
 static int zwapi_send_data_test_callback_call_count                     = 0;
 static int zwapi_application_controller_update_test_function_call_count = 0;
+static int zwapi_zwave_api_started_test_function_call_count             = 0;
+static int zwapi_application_command_handler_test_function_call_count   = 0;
 
 // book-keeping variables
 static uint8_t received_status              = 0;
@@ -51,11 +53,32 @@ void zwapi_application_controller_update_test_function(
   zwapi_application_controller_update_test_function_call_count += 1;
 }
 
+void zwapi_application_command_handler_test_function(
+  uint8_t rx_status,
+  zwave_node_id_t destination_node_id,
+  zwave_node_id_t source_node_id,
+  const uint8_t *received_frame,
+  uint8_t received_frame_length,
+  int8_t rssi_value)
+{
+  zwapi_application_command_handler_test_function_call_count += 1;
+}
+
+void zwapi_zwave_api_started_test_function(const uint8_t *buffer,
+                                           uint8_t buffer_length)
+{
+  (void)buffer;
+  (void)buffer_length;
+  zwapi_zwave_api_started_test_function_call_count += 1;
+}
+
 static void reset_all_test_variables()
 {
   // callback counters
   zwapi_send_data_test_callback_call_count                     = 0;
   zwapi_application_controller_update_test_function_call_count = 0;
+  zwapi_zwave_api_started_test_function_call_count             = 0;
+  zwapi_application_command_handler_test_function_call_count   = 0;
 
   // Received data
   received_status  = 0;
@@ -234,6 +257,61 @@ void test_zwapi_protocol_rx_dispatch_response_frame()
   TEST_ASSERT_EQUAL(0, zwapi_send_data_test_callback_call_count);
 }
 
+void test_zwapi_protocol_rx_dispatch_controller_update_no_callback()
+{
+  // No callback
+  test_zwapi_callbacks.application_controller_update = NULL;
+  callbacks                                          = &test_zwapi_callbacks;
+  uint8_t frame[]                                    = {0x0F,
+                     0x00,
+                     0x49,
+                     0x84,
+                     0x00,
+                     0x02,
+                     0x08,
+                     0x04,
+                     0x18,
+                     0x00,
+                     0x5E,
+                     0x55,
+                     0x98,
+                     0x9F,
+                     0x6C};
+  zwave_api_protocol_rx_dispatch(frame, sizeof(frame));
+
+  TEST_ASSERT_EQUAL(
+    0,
+    zwapi_application_controller_update_test_function_call_count);
+}
+
+void test_zwapi_protocol_rx_dispatch_controller_update_smart_start_prime_lr()
+{
+  // Configure callback
+  test_zwapi_callbacks.application_controller_update
+    = &zwapi_application_controller_update_test_function;
+  callbacks       = &test_zwapi_callbacks;
+  uint8_t frame[] = {0x0F,
+                     0x00,
+                     0x49,
+                     0x87,
+                     0x00,
+                     0x02,
+                     0x08,
+                     0x04,
+                     0x18,
+                     0x00,
+                     0x5E,
+                     0x55,
+                     0x98,
+                     0x9F,
+                     0x6C};
+  zwave_api_protocol_rx_dispatch(frame, sizeof(frame));
+
+  TEST_ASSERT_EQUAL(
+    1,
+    zwapi_application_controller_update_test_function_call_count);
+}
+
 void test_zwapi_protocol_rx_dispatch_buffer_overflow()
 {
   // Manually add our callback:
@@ -259,4 +337,52 @@ void test_zwapi_protocol_rx_dispatch_buffer_overflow()
   TEST_ASSERT_EQUAL(
     0,
     zwapi_application_controller_update_test_function_call_count);
+}
+
+void test_zwapi_protocol_rx_dispatch_zwave_api_started()
+{
+  // Manually add our callback:
+  test_zwapi_callbacks.zwapi_started = &zwapi_zwave_api_started_test_function;
+  callbacks                          = &test_zwapi_callbacks;
+  uint8_t frame[]
+    = {22,   0x00, 0x0A, 0x03, 0x00, 0x01, 0x01, 0x00, 0x18, 0x5E, 0x55, 0x6C,
+       0x74, 0x8A, 0x8F, 0x98, 0x9F, 0xEF, 0x25, 0x26, 0x30, 0x31, 0x32, 0x33,
+       0x40, 0x43, 0x5B, 0x60, 0x62, 0x70, 0x71, 0x80, 0x84, 0x00};
+  zwave_api_protocol_rx_dispatch(frame, sizeof(frame));
+
+  TEST_ASSERT_EQUAL(1, zwapi_zwave_api_started_test_function_call_count);
+}
+
+void test_zwapi_protocol_rx_dispatch_application_command_handler_bridge()
+{
+  // Manually add our callback:
+  test_zwapi_callbacks.application_command_handler_bridge
+    = &zwapi_application_command_handler_test_function;
+  callbacks = &test_zwapi_callbacks;
+
+  uint8_t frame[]
+    = {0x1E, 0x00, 0xA8, 0x00, 0x00, 0x01, 0x00, 0x02, 0x10, 0x9F,
+       0x03, 0x59, 0x01, 0x02, 0x7F, 0x68, 0x1C, 0x60, 0x4B, 0xE2,
+       0x40, 0x58, 0x9B, 0x2C, 0x6D, 0x00, 0xB1, 0x00, 0x7F, 0x7F};
+  zwave_api_protocol_rx_dispatch(frame, sizeof(frame));
+
+  TEST_ASSERT_EQUAL(1,
+                    zwapi_application_command_handler_test_function_call_count);
+}
+
+void test_zwapi_protocol_rx_dispatch_application_command_handler()
+{
+  // Manually add our callback:
+  test_zwapi_callbacks.application_command_handler
+    = &zwapi_application_command_handler_test_function;
+  callbacks = &test_zwapi_callbacks;
+
+  uint8_t frame[]
+    = {0x1E, 0x00, 0x04, 0x00, 0x00, 0x01, 0x00, 0x02, 0x10, 0x9F,
+       0x03, 0x59, 0x01, 0x02, 0x7F, 0x68, 0x1C, 0x60, 0x4B, 0xE2,
+       0x40, 0x58, 0x9B, 0x2C, 0x6D, 0x00, 0xB1, 0x00, 0x7F, 0x7F};
+  zwave_api_protocol_rx_dispatch(frame, sizeof(frame));
+
+  TEST_ASSERT_EQUAL(1,
+                    zwapi_application_command_handler_test_function_call_count);
 }

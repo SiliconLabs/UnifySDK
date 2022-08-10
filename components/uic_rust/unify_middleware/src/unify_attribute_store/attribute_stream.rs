@@ -11,7 +11,12 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-use crate::{contiki::contiki_register_shutdown_callback, AttributeEvent};
+use super::AttributeEvent;
+
+use crate::contiki::contiki_register_shutdown_callback;
+use crate::unify_attribute_store::attribute_store_trait::AttributeStoreTrait;
+use crate::Attribute;
+use crate::AttributeStore;
 use core::task::Poll::{Pending, Ready};
 use futures::Stream;
 use mockall_double::double;
@@ -19,7 +24,6 @@ use unify_attribute_store_sys::*;
 use unify_log_sys::*;
 use unify_sl_status_sys::*;
 declare_app_name!("attribute_stream");
-
 use unify_tools::waker_cache_trait::WakerCacheTrait;
 #[double]
 use wrapped_c::inner;
@@ -36,12 +40,12 @@ pub type AttributeValueState = attribute_store_node_value_state_t;
 pub type AttributeEventType = attribute_store_change_t;
 
 /// Static struct that book-keeps attribute change subscriptions.
-static mut CHANGE_LISTENER: Option<Box<dyn WakerCacheTrait<AttributeEvent>>> = None;
+static mut CHANGE_LISTENER: Option<Box<dyn WakerCacheTrait<AttributeEvent<Attribute>>>> = None;
 
 #[allow(unused_variables)]
 pub fn initialize_attribute_changes<Cache>(attr_cache: Cache) -> u32
 where
-    Cache: WakerCacheTrait<AttributeEvent> + 'static,
+    Cache: WakerCacheTrait<AttributeEvent<Attribute>> + 'static,
 {
     unsafe {
         // workaround: other test-cases will call this init function
@@ -97,18 +101,18 @@ where
 ///   it will end and close down the stream.
 pub struct AttributeChangedStream<T, Pred>
 where
-    Pred: 'static + Fn(&AttributeEvent) -> bool,
+    Pred: 'static + Fn(&AttributeEvent<Attribute>) -> bool,
 {
     predicate: Option<Box<Pred>>,
     change_handle: Option<u64>,
-    conversion: fn(AttributeEvent) -> T,
+    conversion: fn(AttributeEvent<Attribute>) -> T,
 }
 
 impl<T, Pred> AttributeChangedStream<T, Pred>
 where
-    Pred: 'static + Fn(&AttributeEvent) -> bool,
+    Pred: 'static + Fn(&AttributeEvent<Attribute>) -> bool,
 {
-    pub fn new(predicate: Pred, conversion: fn(AttributeEvent) -> T) -> Self {
+    pub fn new(predicate: Pred, conversion: fn(AttributeEvent<Attribute>) -> T) -> Self {
         AttributeChangedStream {
             predicate: Some(Box::new(predicate)),
             change_handle: None,
@@ -120,7 +124,7 @@ where
 impl<T, Pred> Stream for AttributeChangedStream<T, Pred>
 where
     T: Unpin,
-    Pred: 'static + Fn(&AttributeEvent) -> bool,
+    Pred: 'static + Fn(&AttributeEvent<Attribute>) -> bool,
 {
     type Item = T;
 
@@ -194,7 +198,7 @@ fn has_initialization_errors<T>() -> Option<std::task::Poll<Option<T>>> {
 
 impl<T, Pred> Drop for AttributeChangedStream<T, Pred>
 where
-    Pred: 'static + Fn(&AttributeEvent) -> bool,
+    Pred: 'static + Fn(&AttributeEvent<Attribute>) -> bool,
 {
     fn drop(&mut self) {
         unsafe {
@@ -221,8 +225,8 @@ unsafe extern "C" fn uic_attribute_store_get_attribute_change_callback(
     let node_id = (*event_data).updated_node;
     let node_type = (*event_data).type_;
 
-    let attribute =
-        super::Attribute::new(node_id, node_type).expect("internal error constructing attribute");
+    let attribute_store = AttributeStore::new().expect("attribute store to be initialized");
+    let attribute = attribute_store.from_handle_and_type(node_id, node_type);
 
     let change = AttributeEvent {
         event_type: (*event_data).change,
@@ -280,10 +284,12 @@ mod test {
         ctx.expect().withf(|f| f.is_some()).return_const(0u32);
 
         unsafe {
-            CHANGE_LISTENER = Some(Box::new(MockWakerCacheTrait::<AttributeEvent>::default()))
+            CHANGE_LISTENER = Some(Box::new(
+                MockWakerCacheTrait::<AttributeEvent<Attribute>>::default(),
+            ))
         };
 
-        let mut listener = WakerCache::<AttributeEvent>::default();
+        let mut listener = WakerCache::<AttributeEvent<Attribute>>::default();
         assert_eq!(0, listener.register(noop_waker(), Box::new(|_| true)));
 
         // also consecutive times
@@ -297,7 +303,8 @@ mod test {
         );
 
         // get change
-        let attribute = Attribute::new(123, 345).unwrap();
+        let attribute_store = AttributeStore::new().unwrap();
+        let attribute = attribute_store.from_handle_and_type(123, 345);
         listener.new_event(AttributeEvent::default());
 
         assert_eq!(Some(AttributeEvent::default()), listener.take_change(0));
@@ -320,6 +327,7 @@ mod test {
     fn stream_happy_flow() {
         teardown_change_listeners();
 
+        let attribute_store = AttributeStore::new().unwrap();
         let ctx = inner::register_callback_context();
         ctx.expect().withf(|f| f.is_some()).return_const(0u32);
 
@@ -331,7 +339,7 @@ mod test {
         assert_eq!(Pin::new(&mut stream).poll_next(&mut context), Ready(None));
 
         let mut seq = Sequence::new();
-        let mut mock = MockWakerCacheTrait::<AttributeEvent>::new();
+        let mut mock = MockWakerCacheTrait::<AttributeEvent<Attribute>>::new();
 
         mock.expect_register()
             .with(predicate::always(), predicate::always())
@@ -340,26 +348,22 @@ mod test {
             .in_sequence(&mut seq);
 
         let mut test_event1 = AttributeEvent::default();
-        test_event1.attribute = Attribute::new(1, 1).unwrap();
+        test_event1.attribute = attribute_store.from_handle_and_type(1, 1);
 
         let test1_clone = test_event1.clone();
         mock.expect_take_change()
             .with(eq(2))
-            .returning(move |_| {
-                return Some(test1_clone);
-            })
+            .returning(move |_| Some(test1_clone.clone()))
             .times(1)
             .in_sequence(&mut seq);
 
         let mut test_event2 = AttributeEvent::default();
-        test_event2.attribute = Attribute::new(3, 3).unwrap();
+        test_event2.attribute = attribute_store.from_handle_and_type(3, 3);
         let test2_clone = test_event2.clone();
 
         mock.expect_take_change()
             .with(eq(2))
-            .returning(move |_| {
-                return Some(test2_clone);
-            })
+            .returning(move |_| Some(test2_clone.clone()))
             .times(1)
             .in_sequence(&mut seq);
 
@@ -400,7 +404,7 @@ mod test {
         // no cache initialized
         assert_eq!(Pin::new(&mut stream).poll_next(&mut context), Ready(None));
 
-        let mut mock = MockWakerCacheTrait::<AttributeEvent>::new();
+        let mut mock = MockWakerCacheTrait::<AttributeEvent<Attribute>>::new();
         mock.expect_register()
             .with(predicate::always(), predicate::always())
             .return_const(2u64)
@@ -424,7 +428,7 @@ mod test {
     #[test]
     #[serial(change_listener)]
     fn teardown_forces_wake() {
-        let mut mock = MockWakerCacheTrait::<AttributeEvent>::new();
+        let mut mock = MockWakerCacheTrait::<AttributeEvent<Attribute>>::new();
         mock.expect_force_wake_all().returning(|| ());
         unsafe { CHANGE_LISTENER = Some(Box::new(mock)) };
 

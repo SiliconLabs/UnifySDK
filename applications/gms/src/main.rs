@@ -12,7 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 //! UIC GMS
-//! Is an UIC helper application that enables propagation of the mqtt ucl/by-group functionality.
+//! Is a Unify helper application that enables propagation of the mqtt ucl/by-group functionality.
 //! Groups MAY span several Protocol Controllers, so the capabilities of a group will not be advertised by Protocol Controllers themselves.
 //! This application alleviates the aggregation logic for other MQTT Clients such as IoT Service that want to make use of the group functionalities.
 #![doc(html_no_source)]
@@ -21,9 +21,9 @@ mod mqtt_handler;
 use mqtt_handler::*;
 use unify_config_sys::*;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{sl_status_t, MqttClientTrait, UnifyMqttClient};
+use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 
-declare_app_name!("uic-gms");
+declare_app_name!("unify-gms");
 const CONFIG_VERSION: &str = env!("VERSION_STR");
 
 fn main() -> std::result::Result<(), sl_status_t> {
@@ -47,6 +47,5 @@ fn parse_application_arguments() -> std::result::Result<(), config_status_t> {
         .map(|arg| std::ffi::CString::new(arg).unwrap())
         .collect::<Vec<std::ffi::CString>>();
 
-    config_add_string("mqtt.client_id", "override mqtt client name", APP_NAME)
-        .and(config_parse(args, CONFIG_VERSION))
+    config_parse(args, CONFIG_VERSION)
 }

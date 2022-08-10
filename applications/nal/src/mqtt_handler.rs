@@ -2,11 +2,11 @@
 
 use crate::cache::*;
 use unify_log_sys::*;
-use unify_validator_sys::*;
-use unify_middleware::unify_mqtt_client::{
+use unify_mqtt_sys::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
     UnifyMqttClient,
 };
+use unify_validator_sys::*;
 
 /// MqttNALHandler handles subscription messages related to Name and Location service.
 /// It subscribes to listen to the correct topics and is to be passed to the mosquitto client.
@@ -54,11 +54,9 @@ impl<T: MqttClientTrait> MqttClientCallbacksTrait for MqttNALHandler<T> {
                     it.unid, it.ep_id
                 );
                 let payload = String::from("{\"value\":[\"WriteAttributes\"]}");
-                let _ = self.client.publish(
-                    &topic.as_str(),
-                    &payload.as_str().as_bytes(),
-                    true
-                );
+                let _ = self
+                    .client
+                    .publish(&topic.as_str(), &payload.as_str().as_bytes(), true);
             }
         }
     }
@@ -66,18 +64,20 @@ impl<T: MqttClientTrait> MqttClientCallbacksTrait for MqttNALHandler<T> {
 
 impl<T: MqttClientTrait> MqttNALHandler<T> {
     pub fn new(client: T, nal_config: NALConfig) -> Result<Self, sl_status_t> {
-        let state                = client.subscribe("ucl/by-unid/+/State")?;
-        let endpoint_id_list     = client.subscribe("ucl/by-unid/+/State/Attributes/EndpointIdList/Reported")?;
-        let attributes           = client.subscribe("ucl/by-unid/+/+/NameAndLocation/#")?;
-        let location_description = client.subscribe("ucl/by-unid/+/+/Basic/Attributes/LocationDescription/#")?;
+        let state = client.subscribe("ucl/by-unid/+/State")?;
+        let endpoint_id_list =
+            client.subscribe("ucl/by-unid/+/State/Attributes/EndpointIdList/Reported")?;
+        let attributes = client.subscribe("ucl/by-unid/+/+/NameAndLocation/#")?;
+        let location_description =
+            client.subscribe("ucl/by-unid/+/+/Basic/Attributes/LocationDescription/#")?;
 
         Ok(MqttNALHandler {
             client: client,
-            state_matcher                : state,
-            endpoint_id_list_matcher     : endpoint_id_list,
-            attributes_matcher           : attributes,
-            location_description_matcher : location_description,
-            cache                        : Cache::new(nal_config),
+            state_matcher: state,
+            endpoint_id_list_matcher: endpoint_id_list,
+            attributes_matcher: attributes,
+            location_description_matcher: location_description,
+            cache: Cache::new(nal_config),
         })
     }
 
@@ -114,11 +114,7 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
     /// If payload is **not** empty - checks is such UNID already registered
     /// if yes - does nothing;
     /// if **not** - registers this UNID and processes delayed messages for this UNID (see `process_delayed_messages_state()`)
-    fn on_state_reported(
-        &mut self,
-        topic: &str,
-        payload: &str)
-    -> std::result::Result<(), String> {
+    fn on_state_reported(&mut self, topic: &str, payload: &str) -> std::result::Result<(), String> {
         let unid = get_unid_from_topic(topic);
         if false == validate_unid(unid.as_str()) {
             return Err(String::from("Invalid UNID provided"));
@@ -165,8 +161,8 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
     fn on_endpoint_id_list_reported(
         &mut self,
         topic: &str,
-        payload: &str)
-    -> std::result::Result<(), String> {
+        payload: &str,
+    ) -> std::result::Result<(), String> {
         let unid = get_unid_from_topic(topic);
         if false == validate_unid(unid.as_str()) {
             return Err(String::from("Invalid UNID provided"));
@@ -176,27 +172,23 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
         // but we have to save this message to delayed messages to process it later, if the State topic message for such UNID will be received
         // the priority is '0' because the EndpointIdList message should be processed before any Attribute message
         if false == self.cache.is_unid_registered(unid.as_str()) {
-            self.cache.add_delayed_message(unid.as_str(), topic, payload, 0)?;
+            self.cache
+                .add_delayed_message(unid.as_str(), topic, payload, 0)?;
             return Err(String::from(""));
         }
 
         self.cache.register_received_epidlist(unid.as_str())?;
 
         // create node for all endpoints, reported by EndpointIdList
-        let ids: serde_json::Value = serde_json::from_str(payload).map_err(|e| {
-            format!(
-                "Could not parse payload for topic '{}' : {}",
-                topic,
-                e
-            )
-        })?;
+        let ids: serde_json::Value = serde_json::from_str(payload)
+            .map_err(|e| format!("Could not parse payload for topic '{}' : {}", topic, e))?;
 
         let mut i = 0;
 
         while ids["value"][i].as_u64() != None {
             let key = NodeEpKey {
                 unid: unid.clone(),
-                ep_id: ids["value"][i].as_u64().unwrap() as u16
+                ep_id: ids["value"][i].as_u64().unwrap() as u16,
             };
 
             // if node with such key already presents - do nothing to not owerwrite already existing Name and Location
@@ -264,9 +256,11 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
         // If EndpointIdList hasn't been already received - this message can't be processed right now
         // but we have to save it to delayed messages to process it later
         // The priority is '1' to be processed after EndpointIdList message
-        if false == self.cache.is_unid_registered(unid.as_str()) ||
-           false == self.cache.is_epidlist_received(unid.as_str()) {
-            self.cache.add_delayed_message(unid.as_str(), topic, payload, 1)?;
+        if false == self.cache.is_unid_registered(unid.as_str())
+            || false == self.cache.is_epidlist_received(unid.as_str())
+        {
+            self.cache
+                .add_delayed_message(unid.as_str(), topic, payload, 1)?;
             return Err(String::from(""));
         }
 
@@ -277,23 +271,20 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
 
         // if a node with such UNID/endpoint ID doesn't present in database - this message can't be processed
         if false == self.cache.node_presents(&key) {
-            return Err(format!("Can't process message: unknown endpoint '{}' for UNID '{}' detected", ep_id, unid))
+            return Err(format!(
+                "Can't process message: unknown endpoint '{}' for UNID '{}' detected",
+                ep_id, unid
+            ));
         }
 
         // convert payload to Json
-        let json: serde_json::Value = serde_json::from_str(payload).map_err(|e| {
-            format!(
-                "Could not parse payload for topic '{}' : {}",
-                topic,
-                e
-            )
-        })?;
+        let json: serde_json::Value = serde_json::from_str(payload)
+            .map_err(|e| format!("Could not parse payload for topic '{}' : {}", topic, e))?;
 
         if json["Name"] != serde_json::Value::Null {
             let new_name: &str = json["Name"].as_str().unwrap();
 
-            if new_name.len() != 0 &&
-                false == validate_string_contains_letter_or_digit(new_name) {
+            if new_name.len() != 0 && false == validate_string_contains_letter_or_digit(new_name) {
                 return Err(String::from("Invalid Name attribute value provided"));
             }
 
@@ -310,8 +301,9 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
         if json["Location"] != serde_json::Value::Null {
             let new_location: &str = json["Location"].as_str().unwrap();
 
-            if new_location.len() != 0 &&
-                false == validate_string_contains_letter_or_digit(new_location) {
+            if new_location.len() != 0
+                && false == validate_string_contains_letter_or_digit(new_location)
+            {
                 return Err(String::from("Invalid Location attribute value provided"));
             }
 
@@ -323,7 +315,10 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
                     "ucl/by-unid/{}/ep{}/Basic/Commands/WriteAttributes",
                     key.unid, key.ep_id
                 );
-                let payload = serde_json::json! ({"LocationDescription" : serde_json::Value::from(new_location)}).to_string();
+                let payload = serde_json::json!({
+                    "LocationDescription": serde_json::Value::from(new_location)
+                })
+                .to_string();
                 self.client
                     .publish(&topic.as_str(), &payload.as_bytes(), false)
                     .map_err(|e| format!("error publishing topic '{}' : {}", topic, e))?;
@@ -383,9 +378,11 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
         // If EndpointIdList hasn't been already received - this message can't be processed right now
         // but we have to save it to delayed messages to process it later
         // The priority is '1' to be processed after EndpointIdList message
-        if false == self.cache.is_unid_registered(unid.as_str()) ||
-           false == self.cache.is_epidlist_received(unid.as_str()) {
-            self.cache.add_delayed_message(unid.as_str(), topic, payload, 1)?;
+        if false == self.cache.is_unid_registered(unid.as_str())
+            || false == self.cache.is_epidlist_received(unid.as_str())
+        {
+            self.cache
+                .add_delayed_message(unid.as_str(), topic, payload, 1)?;
             return Err(String::from(""));
         }
 
@@ -396,24 +393,23 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
 
         // if a node with such UNID/endpoint ID doesn't present in database - this message can't be processed
         if false == self.cache.node_presents(&key) {
-            return Err(format!("Can't process message: unknown endpoint '{}' for UNID '{}' detected", ep_id, unid))
+            return Err(format!(
+                "Can't process message: unknown endpoint '{}' for UNID '{}' detected",
+                ep_id, unid
+            ));
         }
 
         // convert payload to Json
-        let json: serde_json::Value = serde_json::from_str(payload).map_err(|e| {
-            format!(
-                "Could not parse payload for topic '{}' : {}",
-                topic,
-                e
-            )
-        })?;
+        let json: serde_json::Value = serde_json::from_str(payload)
+            .map_err(|e| format!("Could not parse payload for topic '{}' : {}", topic, e))?;
 
         if json["value"] != serde_json::Value::Null {
             // "proxying" feature implementation
             let new_location: &str = json["value"].as_str().unwrap();
 
-            if new_location.len() != 0 &&
-                false == validate_string_contains_letter_or_digit(new_location) {
+            if new_location.len() != 0
+                && false == validate_string_contains_letter_or_digit(new_location)
+            {
                 return Err(String::from("Invalid Location attribute value provided"));
             }
 
@@ -514,9 +510,20 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
     /// * `ucl/by-unid/<UNID>/ep<endpoint_id>/NameAndLocation/Attributes/Location/Desired`
     /// * `ucl/by-unid/<UNID>/ep<endpoint_id>/NameAndLocation/Attributes/Location/Reported`
     /// * `ucl/by-unid/<UNID>/ep<endpoint_id>/NameAndLocation/SupportedCommands`
+    ///
+    /// /// Cancels subscription tu such topic:
+    /// * `ucl/by-unid/<UNID>/ep<endpoint_id>/NameAndLocation/Commands/WriteAttributes`
     fn unretain_all_node_messages(&mut self, key: &NodeEpKey) -> std::result::Result<(), String> {
         let mqtt_client = UnifyMqttClient::default();
 
+        {
+            let topic = format!(
+                "ucl/by-unid/{}/ep{}/NameAndLocation/Commands/WriteAttributes",
+                key.unid, key.ep_id
+            );
+            let _ = mqtt_client.unsubscribe(&topic)
+                .map_err(|e| format!("error unsubscribing from topic '{}' : {}", topic, e));
+        }
         {
             let topic = format!(
                 "ucl/by-unid/{}/ep{}/NameAndLocation/Attributes/Name/Desired",
@@ -685,7 +692,8 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
     ///
     /// * _unid_ - messages for this UNID will be processed
     fn process_delayed_messages_state(&mut self, unid: &str) -> std::result::Result<(), String> {
-        let msgs_to_exec: Vec<(String, String)> = self.cache.get_all_delayed_messages(unid).unwrap();
+        let msgs_to_exec: Vec<(String, String)> =
+            self.cache.get_all_delayed_messages(unid).unwrap();
 
         if msgs_to_exec.len() == 0 {
             return Ok(());
@@ -726,14 +734,15 @@ impl<T: MqttClientTrait> MqttNALHandler<T> {
     ///
     /// * _unid_ - messages for this UNID will be processed
     fn process_delayed_messages_epidlist(&mut self, unid: &str) -> std::result::Result<(), String> {
-        let msgs_to_exec: Vec<(String, String)> = self.cache.get_all_delayed_messages(unid).unwrap();
+        let msgs_to_exec: Vec<(String, String)> =
+            self.cache.get_all_delayed_messages(unid).unwrap();
 
         if msgs_to_exec.len() == 0 {
             return Ok(());
         }
 
         for it in &msgs_to_exec {
-            let topic   = it.0.clone();
+            let topic = it.0.clone();
             let payload = it.1.clone();
 
             self.on_attributes_reported(topic.as_str(), payload.as_str())?;
@@ -812,14 +821,13 @@ fn get_ep_id_from_topic(topic: &str) -> std::result::Result<u16, String> {
     Ok(ep_id)
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
     use mockall::predicate;
     use mockall::predicate::eq;
     use serial_test::serial;
-    use unify_middleware::unify_mqtt_client::{MockMqttClientTrait, MockTopicMatcherTrait};
+    use unify_mqtt_sys::{MockMqttClientTrait, MockTopicMatcherTrait};
 
     fn create_mocked_mqtt_handler() -> MqttNALHandler<MockMqttClientTrait> {
         let mut mqtt_client_mock = MockMqttClientTrait::new();
@@ -865,10 +873,7 @@ mod tests {
         }
         {
             let test_topic = "";
-            assert_eq!(
-                get_penultimate_topic_chunk(test_topic),
-                String::from("")
-            );
+            assert_eq!(get_penultimate_topic_chunk(test_topic), String::from(""));
         }
     }
 
@@ -892,41 +897,48 @@ mod tests {
             assert_eq!(res, 5);
         }
         {
-            let test_topic = "ucl/by-unid/unid/invalid_ep_id/NameAndLocation/Commands/WriteAttributes";
+            let test_topic =
+                "ucl/by-unid/unid/invalid_ep_id/NameAndLocation/Commands/WriteAttributes";
             assert_eq!(get_ep_id_from_topic(test_topic), Err(String::from("")));
         }
         {
-            let test_topic = "ucl/by-unid/unid/epinvaliddecimanvalue/NameAndLocation/Commands/WriteAttributes";
-            assert_eq!(get_ep_id_from_topic(test_topic), Err(String::from("could not parse invaliddecimanvalue to integer. invalid digit found in string")));
+            let test_topic =
+                "ucl/by-unid/unid/epinvaliddecimanvalue/NameAndLocation/Commands/WriteAttributes";
+            assert_eq!(
+                get_ep_id_from_topic(test_topic),
+                Err(String::from(
+                    "could not parse invaliddecimanvalue to integer. invalid digit found in string"
+                ))
+            );
         }
     }
 
     #[test]
     fn test_validate_unid() {
-        assert_eq!(validate_unid("zw-EE7F73CF-0001"),   true );
-        assert_eq!(validate_unid("z"),                  true );
-        assert_eq!(validate_unid("Z"),                  true );
-        assert_eq!(validate_unid("2"),                  true );
-        assert_eq!(validate_unid("zw-EE7F 73CF-0001"),  false);
-        assert_eq!(validate_unid("zw-EE7F/73CF-0001"),  false);
+        assert_eq!(validate_unid("zw-EE7F73CF-0001"), true);
+        assert_eq!(validate_unid("z"), true);
+        assert_eq!(validate_unid("Z"), true);
+        assert_eq!(validate_unid("2"), true);
+        assert_eq!(validate_unid("zw-EE7F 73CF-0001"), false);
+        assert_eq!(validate_unid("zw-EE7F/73CF-0001"), false);
         assert_eq!(validate_unid(r"zw-EE7F\73CF-0001"), false);
-        assert_eq!(validate_unid(""),                   false);
-        assert_eq!(validate_unid("\""),                 false);
-        assert_eq!(validate_unid("\"\"\""),             false);
-        assert_eq!(validate_unid("\'"),                 false);
-        assert_eq!(validate_unid("\'\'\'"),             false);
+        assert_eq!(validate_unid(""), false);
+        assert_eq!(validate_unid("\""), false);
+        assert_eq!(validate_unid("\"\"\""), false);
+        assert_eq!(validate_unid("\'"), false);
+        assert_eq!(validate_unid("\'\'\'"), false);
     }
 
     #[test]
     fn test_validate_name_or_location() {
-        assert_eq!(validate_string_contains_letter_or_digit(""),        false);
-        assert_eq!(validate_string_contains_letter_or_digit("new_loc"), true );
-        assert_eq!(validate_string_contains_letter_or_digit("new-loc"), true );
-        assert_eq!(validate_string_contains_letter_or_digit("new loc"), true );
-        assert_eq!(validate_string_contains_letter_or_digit("1"),       true );
-        assert_eq!(validate_string_contains_letter_or_digit("_"),       false);
-        assert_eq!(validate_string_contains_letter_or_digit("---"),     false);
-        assert_eq!(validate_string_contains_letter_or_digit("---"),     false);
+        assert_eq!(validate_string_contains_letter_or_digit(""), false);
+        assert_eq!(validate_string_contains_letter_or_digit("new_loc"), true);
+        assert_eq!(validate_string_contains_letter_or_digit("new-loc"), true);
+        assert_eq!(validate_string_contains_letter_or_digit("new loc"), true);
+        assert_eq!(validate_string_contains_letter_or_digit("1"), true);
+        assert_eq!(validate_string_contains_letter_or_digit("_"), false);
+        assert_eq!(validate_string_contains_letter_or_digit("---"), false);
+        assert_eq!(validate_string_contains_letter_or_digit("---"), false);
     }
 
     macro_rules! EXPECT_PUBLISH_EMPTY {
@@ -958,7 +970,7 @@ mod tests {
     macro_rules! EXPECT_PUBLISH_VALUE {
         ($mqtt_handler:ident, $topic:expr, $value:expr) => {{
             let expected = predicate::function(|x| {
-                x == serde_json::json! ({"value" : serde_json::Value::from($value)})
+                x == serde_json::json!({ "value": serde_json::Value::from($value) })
                     .to_string()
                     .as_bytes()
             });
@@ -986,9 +998,9 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let state_topic        = "ucl/by-unid/test_node_1/State";
-        let state_payload      = "some_dummy_data";
-        let ep_id_list_topic   = "ucl/by-unid/test_node_1/State/Attributes/EndpointIdList/Reported";
+        let state_topic = "ucl/by-unid/test_node_1/State";
+        let state_payload = "some_dummy_data";
+        let ep_id_list_topic = "ucl/by-unid/test_node_1/State/Attributes/EndpointIdList/Reported";
         let ep_id_list_payload = r#"{"value": [1, 2]}"#;
 
         mqtt_nal_handler
@@ -1060,7 +1072,10 @@ mod tests {
             ep_id: 1,
         };
 
-        assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node_1"), true);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_unid_registered("test_node_1"),
+            true
+        );
         assert_eq!(mqtt_nal_handler.cache.node_presents(&key_presents_1), true);
         assert_eq!(mqtt_nal_handler.cache.node_presents(&key_presents_2), true);
         assert_eq!(mqtt_nal_handler.cache.node_presents(&key_not_pres_1), false);
@@ -1108,7 +1123,10 @@ mod tests {
         mqtt_nal_handler.on_state_reported(mock_topic, "").unwrap();
 
         assert_eq!(mqtt_nal_handler.cache.node_presents(&key), false);
-        assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node_1"), false);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_unid_registered("test_node_1"),
+            false
+        );
     }
 
     #[test]
@@ -1117,8 +1135,9 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let attributes_topic            = "ucl/by-unid/test_node_1/ep0/NameAndLocation/Commands/WriteAttributes";
-        let attributes_payload_name     = r#"{"Name": "New name"}"#;
+        let attributes_topic =
+            "ucl/by-unid/test_node_1/ep0/NameAndLocation/Commands/WriteAttributes";
+        let attributes_payload_name = r#"{"Name": "New name"}"#;
         let attributes_payload_location = r#"{"Location": "New location"}"#;
 
         let key = NodeEpKey {
@@ -1127,7 +1146,12 @@ mod tests {
         };
 
         assert_eq!(mqtt_nal_handler.cache.register_unid("test_node_1"), Ok(()));
-        assert_eq!(mqtt_nal_handler.cache.register_received_epidlist("test_node_1"), Ok(()));
+        assert_eq!(
+            mqtt_nal_handler
+                .cache
+                .register_received_epidlist("test_node_1"),
+            Ok(())
+        );
         {
             let attributes = Attributes::default();
             assert_eq!(mqtt_nal_handler.cache.node_set(&key, &attributes), Ok(()));
@@ -1146,10 +1170,7 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                attributes_payload_name
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, attributes_payload_name),
             Ok(())
         );
         {
@@ -1175,10 +1196,7 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                attributes_payload_location
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, attributes_payload_location),
             Ok(())
         );
         {
@@ -1198,17 +1216,15 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let attributes_topic   = "ucl/by-unid/test_node_1/ep1/NameAndLocation/Commands/WriteAttributes";
+        let attributes_topic =
+            "ucl/by-unid/test_node_1/ep1/NameAndLocation/Commands/WriteAttributes";
         let attributes_payload = r#"{"value":"some_dummy_data_to_detect_endpoint"}"#;
 
         // add node "test_node_1", endpoint 1
         // node with UNID "test_node_1" doesn't exist (there wasn't pub to "ucl/by-unid/test_node_1/State" topic)
         // so the endpoint 1 node should not be added
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                attributes_payload
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, attributes_payload),
             Err(String::from(""))
         );
     }
@@ -1225,45 +1241,27 @@ mod tests {
         let payload_3 = "";
 
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                topic,
-                payload_1
-            ),
+            mqtt_nal_handler.on_attributes_reported(topic, payload_1),
             Ok(())
         );
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                topic,
-                payload_2
-            ),
+            mqtt_nal_handler.on_attributes_reported(topic, payload_2),
             Ok(())
         );
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                topic,
-                payload_3
-            ),
+            mqtt_nal_handler.on_attributes_reported(topic, payload_3),
             Ok(())
         );
         assert_eq!(
-            mqtt_nal_handler.on_location_description_reported(
-                topic,
-                payload_1
-            ),
+            mqtt_nal_handler.on_location_description_reported(topic, payload_1),
             Ok(())
         );
         assert_eq!(
-            mqtt_nal_handler.on_location_description_reported(
-                topic,
-                payload_2
-            ),
+            mqtt_nal_handler.on_location_description_reported(topic, payload_2),
             Ok(())
         );
         assert_eq!(
-            mqtt_nal_handler.on_location_description_reported(
-                topic,
-                payload_3
-            ),
+            mqtt_nal_handler.on_location_description_reported(topic, payload_3),
             Ok(())
         );
     }
@@ -1274,12 +1272,15 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let state_topic                                    = "ucl/by-unid/test_node_1/State";
-        let ep_id_list_topic                               = "ucl/by-unid/test_node_1/State/Attributes/EndpointIdList/Reported";
-        let ep_id_list_payload                             = r#"{"value": [0]}"#;
-        let attributes_topic                               = "ucl/by-unid/test_node_1/ep0/NameAndLocation/Commands/WriteAttributes";
-        let attributes_location_description_desired_topic  = "ucl/by-unid/test_node_1/ep0/Basic/Attributes/LocationDescription/Desired";
-        let attributes_location_description_reported_topic = "ucl/by-unid/test_node_1/ep0/Basic/Attributes/LocationDescription/Reported";
+        let state_topic = "ucl/by-unid/test_node_1/State";
+        let ep_id_list_topic = "ucl/by-unid/test_node_1/State/Attributes/EndpointIdList/Reported";
+        let ep_id_list_payload = r#"{"value": [0]}"#;
+        let attributes_topic =
+            "ucl/by-unid/test_node_1/ep0/NameAndLocation/Commands/WriteAttributes";
+        let attributes_location_description_desired_topic =
+            "ucl/by-unid/test_node_1/ep0/Basic/Attributes/LocationDescription/Desired";
+        let attributes_location_description_reported_topic =
+            "ucl/by-unid/test_node_1/ep0/Basic/Attributes/LocationDescription/Reported";
 
         let key = NodeEpKey {
             unid: String::from("test_node_1"),
@@ -1314,14 +1315,9 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler
-                .on_endpoint_id_list_reported(
-                    ep_id_list_topic,
-                    ep_id_list_payload
-                ),
+            mqtt_nal_handler.on_endpoint_id_list_reported(ep_id_list_topic, ep_id_list_payload),
             Ok(())
         );
-
 
         // Protocol controller takes control of node
         // test Desired location
@@ -1340,7 +1336,10 @@ mod tests {
         );
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
             assert_eq!(attributes.location_desired, String::from("New location"));
             assert_eq!(attributes.is_proxied, true);
         }
@@ -1361,7 +1360,10 @@ mod tests {
         );
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
             assert_eq!(attributes.location_reported, String::from("New location"));
             assert_eq!(attributes.is_proxied, true);
         }
@@ -1371,7 +1373,10 @@ mod tests {
             let expected = predicate::function(|x| {
                 x == serde_json::json! ({"LocationDescription" : serde_json::Value::from("Updated location")}).to_string().as_bytes()
             });
-            mqtt_nal_handler.client.expect_publish().with(
+            mqtt_nal_handler
+                .client
+                .expect_publish()
+                .with(
                     eq("ucl/by-unid/test_node_1/ep0/Basic/Commands/WriteAttributes"),
                     expected,
                     eq(false),
@@ -1379,10 +1384,8 @@ mod tests {
                 .return_once_st(|_, _, _| Ok(()));
         }
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                r#"{"Location":"Updated location"}"#
-            ),
+            mqtt_nal_handler
+                .on_attributes_reported(attributes_topic, r#"{"Location":"Updated location"}"#),
             Ok(())
         );
 
@@ -1402,8 +1405,14 @@ mod tests {
         );
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
-            assert_eq!(attributes.location_desired, String::from("Updated location"));
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
+            assert_eq!(
+                attributes.location_desired,
+                String::from("Updated location")
+            );
         }
 
         EXPECT_PUBLISH_VALUE!(
@@ -1421,8 +1430,14 @@ mod tests {
         );
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
-            assert_eq!(attributes.location_reported, String::from("Updated location"));
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
+            assert_eq!(
+                attributes.location_reported,
+                String::from("Updated location")
+            );
         }
 
         // verify that name changing wasn't affected
@@ -1438,15 +1453,15 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                r#"{"Name":"New name"}"#
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, r#"{"Name":"New name"}"#),
             Ok(())
         );
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
             assert_eq!(attributes.name_desired, String::from("New name"));
             assert_eq!(attributes.name_reported, String::from("New name"));
             assert_eq!(attributes.is_proxied, true);
@@ -1459,28 +1474,28 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let state_topic         = "ucl/by-unid/test_node/State";
-        let ep_id_list_topic    = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
-        let ep_id_list_payload  = r#"{"value": [1]}"#;
-        let attributes_topic    = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
-        let attributes_payload  = r#"{"Name": "test_name"}"#;
+        let state_topic = "ucl/by-unid/test_node/State";
+        let ep_id_list_topic = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
+        let ep_id_list_payload = r#"{"value": [1]}"#;
+        let attributes_topic = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
+        let attributes_payload = r#"{"Name": "test_name"}"#;
 
         let key = NodeEpKey {
-            unid:  String::from("test_node"),
+            unid: String::from("test_node"),
             ep_id: 1,
         };
 
         // State topic
         assert_eq!(
-            mqtt_nal_handler.on_state_reported(
-                state_topic,
-                "dummy_payload"
-            ),
+            mqtt_nal_handler.on_state_reported(state_topic, "dummy_payload"),
             Ok(())
         );
 
-        assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"),   true);
-        assert_eq!(mqtt_nal_handler.cache.is_epidlist_received("test_node"), false);
+        assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"), true);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_epidlist_received("test_node"),
+            false
+        );
 
         // EndpointIdList topic
         EXPECT_PUBLISH_VALUE!(
@@ -1518,14 +1533,15 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_endpoint_id_list_reported(
-                ep_id_list_topic,
-                ep_id_list_payload),
+            mqtt_nal_handler.on_endpoint_id_list_reported(ep_id_list_topic, ep_id_list_payload),
             Ok(())
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, true);
-        assert_eq!(mqtt_nal_handler.cache.is_epidlist_received("test_node"), true);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_epidlist_received("test_node"),
+            true
+        );
 
         // Attributes topic (Name)
         EXPECT_PUBLISH_VALUE!(
@@ -1540,17 +1556,17 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                attributes_payload
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, attributes_payload),
             Ok(())
         );
 
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
-            assert_eq!(attributes.name_desired,  String::from("test_name"));
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
+            assert_eq!(attributes.name_desired, String::from("test_name"));
             assert_eq!(attributes.name_reported, String::from("test_name"));
         }
     }
@@ -1561,23 +1577,20 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let state_topic         = "ucl/by-unid/test_node/State";
-        let ep_id_list_topic    = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
-        let ep_id_list_payload  = r#"{"value": [1]}"#;
-        let attributes_topic    = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
-        let attributes_payload  = r#"{"Name": "test_name"}"#;
+        let state_topic = "ucl/by-unid/test_node/State";
+        let ep_id_list_topic = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
+        let ep_id_list_payload = r#"{"value": [1]}"#;
+        let attributes_topic = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
+        let attributes_payload = r#"{"Name": "test_name"}"#;
 
         let key = NodeEpKey {
-            unid:  String::from("test_node"),
+            unid: String::from("test_node"),
             ep_id: 1,
         };
 
         // State topic
         assert_eq!(
-            mqtt_nal_handler.on_state_reported(
-                state_topic,
-                "dummy_payload"
-            ),
+            mqtt_nal_handler.on_state_reported(state_topic, "dummy_payload"),
             Ok(())
         );
 
@@ -1585,10 +1598,7 @@ mod tests {
 
         // Attributes topic (Name) (should go to delayed messages)
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                attributes_payload
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, attributes_payload),
             Err(String::from(""))
         );
 
@@ -1630,20 +1640,23 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_endpoint_id_list_reported(
-                ep_id_list_topic,
-                ep_id_list_payload
-            ),
+            mqtt_nal_handler.on_endpoint_id_list_reported(ep_id_list_topic, ep_id_list_payload),
             Ok(())
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, true);
-        assert_eq!(mqtt_nal_handler.cache.is_epidlist_received("test_node"), true);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_epidlist_received("test_node"),
+            true
+        );
 
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
-            assert_eq!(attributes.name_desired,  String::from("test_name"));
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
+            assert_eq!(attributes.name_desired, String::from("test_name"));
             assert_eq!(attributes.name_reported, String::from("test_name"));
         }
     }
@@ -1654,28 +1667,28 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let state_topic         = "ucl/by-unid/test_node/State";
-        let ep_id_list_topic    = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
-        let ep_id_list_payload  = r#"{"value": [1]}"#;
-        let attributes_topic    = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
-        let attributes_payload  = r#"{"Name": "test_name"}"#;
+        let state_topic = "ucl/by-unid/test_node/State";
+        let ep_id_list_topic = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
+        let ep_id_list_payload = r#"{"value": [1]}"#;
+        let attributes_topic = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
+        let attributes_payload = r#"{"Name": "test_name"}"#;
 
         let key = NodeEpKey {
-            unid:  String::from("test_node"),
+            unid: String::from("test_node"),
             ep_id: 1,
         };
 
         // EndpointIdList topic (should go to delayed messages)
         assert_eq!(
-            mqtt_nal_handler.on_endpoint_id_list_reported(
-                ep_id_list_topic,
-                ep_id_list_payload
-            ),
+            mqtt_nal_handler.on_endpoint_id_list_reported(ep_id_list_topic, ep_id_list_payload),
             Err(String::from(""))
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, false);
-        assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"), false);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_unid_registered("test_node"),
+            false
+        );
 
         // State topic
         EXPECT_PUBLISH_VALUE!(
@@ -1703,16 +1716,16 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_state_reported(
-                state_topic,
-                "dummy_payload"
-            ),
+            mqtt_nal_handler.on_state_reported(state_topic, "dummy_payload"),
             Ok(())
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, true);
         assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"), true);
-        assert_eq!(mqtt_nal_handler.cache.is_epidlist_received("test_node"), true);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_epidlist_received("test_node"),
+            true
+        );
 
         // Attributes topic (Name)
         EXPECT_PUBLISH_VALUE!(
@@ -1727,17 +1740,17 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                attributes_payload
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, attributes_payload),
             Ok(())
         );
 
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
-            assert_eq!(attributes.name_desired,  String::from("test_name"));
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
+            assert_eq!(attributes.name_desired, String::from("test_name"));
             assert_eq!(attributes.name_reported, String::from("test_name"));
         }
     }
@@ -1748,35 +1761,32 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let state_topic         = "ucl/by-unid/test_node/State";
-        let ep_id_list_topic    = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
-        let ep_id_list_payload  = r#"{"value": [1]}"#;
-        let attributes_topic    = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
-        let attributes_payload  = r#"{"Name": "test_name"}"#;
+        let state_topic = "ucl/by-unid/test_node/State";
+        let ep_id_list_topic = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
+        let ep_id_list_payload = r#"{"value": [1]}"#;
+        let attributes_topic = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
+        let attributes_payload = r#"{"Name": "test_name"}"#;
 
         let key = NodeEpKey {
-            unid:  String::from("test_node"),
+            unid: String::from("test_node"),
             ep_id: 1,
         };
 
         // EndpointIdList topic (should go to delayed messages)
         assert_eq!(
-            mqtt_nal_handler.on_endpoint_id_list_reported(
-                ep_id_list_topic,
-                ep_id_list_payload
-            ),
+            mqtt_nal_handler.on_endpoint_id_list_reported(ep_id_list_topic, ep_id_list_payload),
             Err(String::from(""))
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, false);
-        assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"), false);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_unid_registered("test_node"),
+            false
+        );
 
         // Attributes topic (Name)
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                attributes_payload
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, attributes_payload),
             Err(String::from(""))
         );
 
@@ -1816,21 +1826,24 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_state_reported(
-                state_topic,
-                "dummy_payload"
-            ),
+            mqtt_nal_handler.on_state_reported(state_topic, "dummy_payload"),
             Ok(())
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, true);
         assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"), true);
-        assert_eq!(mqtt_nal_handler.cache.is_epidlist_received("test_node"), true);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_epidlist_received("test_node"),
+            true
+        );
 
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
-            assert_eq!(attributes.name_desired,  String::from("test_name"));
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
+            assert_eq!(attributes.name_desired, String::from("test_name"));
             assert_eq!(attributes.name_reported, String::from("test_name"));
         }
     }
@@ -1841,38 +1854,35 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let state_topic         = "ucl/by-unid/test_node/State";
-        let ep_id_list_topic    = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
-        let ep_id_list_payload  = r#"{"value": [1]}"#;
-        let attributes_topic    = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
-        let attributes_payload  = r#"{"Name": "test_name"}"#;
+        let state_topic = "ucl/by-unid/test_node/State";
+        let ep_id_list_topic = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
+        let ep_id_list_payload = r#"{"value": [1]}"#;
+        let attributes_topic = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
+        let attributes_payload = r#"{"Name": "test_name"}"#;
 
         let key = NodeEpKey {
-            unid:  String::from("test_node"),
+            unid: String::from("test_node"),
             ep_id: 1,
         };
 
         // Attributes topic (Name)
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                attributes_payload
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, attributes_payload),
             Err(String::from(""))
         );
 
         // State topic
         assert_eq!(
-            mqtt_nal_handler.on_state_reported(
-                state_topic,
-                "dummy_payload"
-            ),
+            mqtt_nal_handler.on_state_reported(state_topic, "dummy_payload"),
             Ok(())
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, false);
         assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"), true);
-        assert_eq!(mqtt_nal_handler.cache.is_epidlist_received("test_node"), false);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_epidlist_received("test_node"),
+            false
+        );
 
         // EndpointIdList topic
         EXPECT_PUBLISH_VALUE!(
@@ -1910,21 +1920,24 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_endpoint_id_list_reported(
-                ep_id_list_topic,
-                ep_id_list_payload
-            ),
+            mqtt_nal_handler.on_endpoint_id_list_reported(ep_id_list_topic, ep_id_list_payload),
             Ok(())
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, true);
         assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"), true);
-        assert_eq!(mqtt_nal_handler.cache.is_epidlist_received("test_node"), true);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_epidlist_received("test_node"),
+            true
+        );
 
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
-            assert_eq!(attributes.name_desired,  String::from("test_name"));
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
+            assert_eq!(attributes.name_desired, String::from("test_name"));
             assert_eq!(attributes.name_reported, String::from("test_name"));
         }
     }
@@ -1935,38 +1948,38 @@ mod tests {
         let mut mqtt_nal_handler = create_mocked_mqtt_handler();
         mqtt_nal_handler.cache.clean_up_db_for_unit_tests();
 
-        let state_topic         = "ucl/by-unid/test_node/State";
-        let ep_id_list_topic    = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
-        let ep_id_list_payload  = r#"{"value": [1]}"#;
-        let attributes_topic    = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
-        let attributes_payload  = r#"{"Name": "test_name"}"#;
+        let state_topic = "ucl/by-unid/test_node/State";
+        let ep_id_list_topic = "ucl/by-unid/test_node/State/Attributes/EndpointIdList/Reported";
+        let ep_id_list_payload = r#"{"value": [1]}"#;
+        let attributes_topic = "ucl/by-unid/test_node/ep1/NameAndLocation/Commands/WriteAttributes";
+        let attributes_payload = r#"{"Name": "test_name"}"#;
 
         let key = NodeEpKey {
-            unid:  String::from("test_node"),
+            unid: String::from("test_node"),
             ep_id: 1,
         };
 
         // Attributes topic (Name)
         assert_eq!(
-            mqtt_nal_handler.on_attributes_reported(
-                attributes_topic,
-                attributes_payload
-            ),
+            mqtt_nal_handler.on_attributes_reported(attributes_topic, attributes_payload),
             Err(String::from(""))
         );
 
         // EndpointIdList topic
         assert_eq!(
-            mqtt_nal_handler.on_endpoint_id_list_reported(
-                ep_id_list_topic,
-                ep_id_list_payload
-            ),
+            mqtt_nal_handler.on_endpoint_id_list_reported(ep_id_list_topic, ep_id_list_payload),
             Err(String::from(""))
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, false);
-        assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"), false);
-        assert_eq!(mqtt_nal_handler.cache.is_epidlist_received("test_node"), false);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_unid_registered("test_node"),
+            false
+        );
+        assert_eq!(
+            mqtt_nal_handler.cache.is_epidlist_received("test_node"),
+            false
+        );
 
         // State topic
         EXPECT_PUBLISH_VALUE!(
@@ -2004,21 +2017,24 @@ mod tests {
         );
 
         assert_eq!(
-            mqtt_nal_handler.on_state_reported(
-                state_topic,
-                "dummy_payload"
-            ),
+            mqtt_nal_handler.on_state_reported(state_topic, "dummy_payload"),
             Ok(())
         );
 
         CHECK_NODE_PRESENCE_IN_CACHE!(mqtt_nal_handler, "test_node", 1, true);
         assert_eq!(mqtt_nal_handler.cache.is_unid_registered("test_node"), true);
-        assert_eq!(mqtt_nal_handler.cache.is_epidlist_received("test_node"), true);
+        assert_eq!(
+            mqtt_nal_handler.cache.is_epidlist_received("test_node"),
+            true
+        );
 
         {
             let mut attributes = Attributes::default();
-            mqtt_nal_handler.cache.node_get(&key, &mut attributes).unwrap();
-            assert_eq!(attributes.name_desired,  String::from("test_name"));
+            mqtt_nal_handler
+                .cache
+                .node_get(&key, &mut attributes)
+                .unwrap();
+            assert_eq!(attributes.name_desired, String::from("test_name"));
             assert_eq!(attributes.name_reported, String::from("test_name"));
         }
     }

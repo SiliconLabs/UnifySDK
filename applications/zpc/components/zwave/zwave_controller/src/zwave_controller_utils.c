@@ -25,14 +25,22 @@
 #include "zwave_controller_utils.h"
 #include "zwave_controller_types.h"
 #include "zwave_controller_keyset.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 
 // Setup Log ID
 #define LOG_TAG "zwave_controller_utils"
 
-void zwave_send_nop_to_node(zwave_node_id_t node,
-                     const on_zwave_tx_send_data_complete_t on_send_complete,
-                     void *user)
+#define DEBUG_MESSAGE_BUFFER_LENGTH 512
+
+// NOP frame constant.
+static const uint8_t nop_frame[1] = {0};
+
+sl_status_t zwave_send_nop_to_node(
+  zwave_node_id_t node,
+  uint32_t qos_priority,
+  uint32_t discard_timeout_ms,
+  const on_zwave_tx_send_data_complete_t on_send_complete,
+  void *user)
 {
   // Prepare the Connection Info data:
   zwave_controller_connection_info_t connection_info = {};
@@ -41,17 +49,21 @@ void zwave_send_nop_to_node(zwave_node_id_t node,
 
   // Prepare the Z-Wave TX options.
   zwave_tx_options_t tx_options = {0};
-  tx_options.qos_priority       = ZWAVE_TX_QOS_MIN_PRIORITY;
+  tx_options.qos_priority       = qos_priority;
+  tx_options.discard_timeout_ms = discard_timeout_ms;
 
-  uint8_t nop_frame[1]    = {0};
-  sl_log_debug(LOG_TAG, "Sending NOP to Failing Node: %d.", node);
-  zwave_tx_send_data(&connection_info,
-                     sizeof(nop_frame),
-                     nop_frame,
-                     &tx_options,
-                     0,
-                     on_send_complete,
-                     user);
+  sl_log_debug(LOG_TAG,
+               "Sending NOP to Node: %d. QoS : %u, Discard timeout : %u ms",
+               node,
+               qos_priority,
+               discard_timeout_ms);
+  return zwave_tx_send_data(&connection_info,
+                            sizeof(nop_frame),
+                            nop_frame,
+                            &tx_options,
+                            on_send_complete,
+                            user,
+                            NULL);
 }
 
 void zwave_sl_log_frame_data(
@@ -61,7 +73,7 @@ void zwave_sl_log_frame_data(
   uint16_t frame_length)
 {
   // Just make a nice print of the frame data
-  char message[1000];
+  char message[DEBUG_MESSAGE_BUFFER_LENGTH];
   uint16_t index = 0;
 
   index += snprintf(message + index,
@@ -103,7 +115,7 @@ void zwave_sl_log_nif_data(zwave_node_id_t node_id,
                            const zwave_node_info_t *node_info)
 {
   // Just make a nice print of the NIF data
-  char message[1000];
+  char message[DEBUG_MESSAGE_BUFFER_LENGTH];
   uint16_t index = 0;
 
   index += snprintf(message + index,
@@ -164,7 +176,7 @@ void zwave_sl_log_nif_data(zwave_node_id_t node_id,
 void zwave_sl_log_dsk(const char *tag, const zwave_dsk_t dsk)
 {
   (void)tag;  // Unused in Z-Wave build.
-  char message[1000];
+  char message[DEBUG_MESSAGE_BUFFER_LENGTH];
   uint16_t index = 0;
   index += snprintf(message + index, sizeof(message) - index, "DSK: ");
   zpc_converters_dsk_to_str(dsk, message + index, sizeof(message) - index);

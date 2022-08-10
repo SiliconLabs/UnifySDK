@@ -22,7 +22,7 @@
 // Includes from other components
 #include "ZW_classcmd.h"
 #include "zwave_command_handler.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_tx.h"
 #include "zwapi_protocol_basis.h"

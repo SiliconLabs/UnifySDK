@@ -20,7 +20,7 @@
 #include "zwave_controller_transport.h"
 #include "zwave_controller_storage.h"
 #include "zwave_tx.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller_utils.h"
 #include "zwave_tx_scheme_selector.h"
 
@@ -96,16 +96,16 @@ static uint8_t send_data(ts_node_id_t source,
   conn.remote.node_id                           = dest;
   conn.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
 
-  options.number_of_responses     = no_of_expected_responses;
-  options.valid_parent_session_id = zwave_tx_valid_parent_session_id;
-  options.parent_session_id       = zwave_tx_parent_session_id;
+  options.number_of_responses               = no_of_expected_responses;
+  options.transport.valid_parent_session_id = zwave_tx_valid_parent_session_id;
+  options.transport.parent_session_id       = zwave_tx_parent_session_id;
 
   // FIXME: Here the concept of parent session id is quite dangerous
   // in this context, the thing is that tranport service can
   // start receiving instead of sending due to the tie breaking rules.
   if (transport_service_busy) {
-    options.valid_parent_session_id = true;
-    options.parent_session_id       = zwave_tx_parent_session_id;
+    options.transport.valid_parent_session_id = true;
+    options.transport.parent_session_id       = zwave_tx_parent_session_id;
   } else {
     // Frames sent by Transport service as part of the protocol should have more
     // priority than responses to get frames which transport service assembled.
@@ -167,8 +167,9 @@ sl_status_t zwave_transport_service_send_data(
     return SL_STATUS_NOT_SUPPORTED;
   }
 
-  if (data_length
-      <= zwave_tx_scheme_get_max_payload(conn_info->remote.node_id)) {
+  uint16_t maximum_payload
+    = zwave_tx_scheme_get_max_payload(conn_info->remote.node_id);
+  if (data_length <= maximum_payload) {
     return SL_STATUS_NOT_SUPPORTED;
   }
 
@@ -209,13 +210,12 @@ sl_status_t zwave_transport_service_send_data(
   zwave_tx_parent_session_id                 = parent_session_id;
   zwave_tx_valid_parent_session_id           = true;
 
-  ret = transport_service_send_data(
-    conn_info->local.node_id,
-    conn_info->remote.node_id,
-    cmd_data,
-    data_length,
-    zwave_tx_scheme_get_max_payload(conn_info->remote.node_id),
-    on_transport_service_send_data_complete);
+  ret = transport_service_send_data(conn_info->local.node_id,
+                                    conn_info->remote.node_id,
+                                    cmd_data,
+                                    data_length,
+                                    maximum_payload,
+                                    on_transport_service_send_data_complete);
 
   if (ret == TRANSPORT_SERVICE_SEND_SUCCESS) {
     transport_service_busy = true;
@@ -289,7 +289,7 @@ sl_status_t zwave_transport_service_transport_init()
 {
   transport_service_init(1, upper_layer_command_handler, send_data);
   static zwave_controller_transport_t transport = {
-    .priority          = 2,  // see zwave_controller_transport->priority
+    .priority          = 1,  // see zwave_controller_transport->priority
     .command_class     = COMMAND_CLASS_TRANSPORT_SERVICE_V2,
     .version           = 2,
     .send_data         = zwave_transport_service_send_data,

@@ -70,7 +70,7 @@ bool {{asAttributeIsSupportedFunction parent.label label}} (
  *                    see \ref attribute_store_get_node_attribute_value
  * @returns {{label}} attribute
  */
-int32_t {{asAttributeGetFunction parent.label label}}(
+{{asUnderlyingType type}} {{asAttributeGetFunction parent.label label}}(
   const unid_t unid,
   const zwave_endpoint_id_t endpoint,
   attribute_store_node_value_state_t value_state);
@@ -89,7 +89,7 @@ sl_status_t {{asAttributeSetFunction parent.label label}}(
   const unid_t unid,
   const zwave_endpoint_id_t endpoint,
   attribute_store_node_value_state_t value_state,
-  int32_t new_{{asSnakeCaseLower label}});
+  {{asUnderlyingType type}} new_{{asSnakeCaseLower label}});
 
 {{/zcl_attributes}}
 {{/if}}

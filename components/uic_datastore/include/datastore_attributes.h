@@ -147,6 +147,25 @@ sl_status_t datastore_fetch_attribute_child(datastore_attribute_id_t parent_id,
                                             uint8_t *desired_value_size);
 
 /**
+ * @brief Fetch the Attribute ID of a child of an attribute from the persistent
+ * datastore.
+ *
+ * @param parent_id           Unique ID for the Attribute Store node of which the
+ *                            nth child will be returned.
+ * @param child_index         The index of the child to find. 0 for the first child,
+ *                            1 for the second child, etc.
+ * @param child_id            Pointer where the Unique ID of the found child will be copied
+ *
+ * @returns SL_STATUS_OK if successful
+ * @returns SL_STATUS_FAIL if an error happened
+ * @returns SL_STATUS_NOT_FOUND nth child or parent does not exist.
+ */
+sl_status_t
+  datastore_fetch_attribute_child_id(datastore_attribute_id_t parent_id,
+                                     uint32_t child_index,
+                                     datastore_attribute_id_t *child_id);
+
+/**
  * @brief Check if the datastore contains an attribute for given key.
  *
  * @param id Unique ID for the Attribute Store node to search for

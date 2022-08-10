@@ -1,0 +1,120 @@
+#!/bin/sh
+# postinst script for uic
+#
+# see: dh_installdeb(1)
+
+. /usr/share/debconf/confmodule
+set -e
+
+UIC_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic"
+UIC_CONFDIR=${CPACK_PACKAGING_INSTALL_PREFIX}/etc/uic
+UIC_CONFFILE=$UIC_CONFDIR/uic.cfg
+CPCD_CONFFILE=${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_SYSCONFDIR}/cpcd.conf
+
+# Defaults for required arguments
+CPCD_DEFAULT_CFG_SERIAL="/dev/ttyACM0"
+
+setup_uic_user() {
+  if ! getent group uic >/dev/null; then
+    addgroup --quiet --system uic
+  fi
+
+  if ! getent passwd uic >/dev/null; then
+    adduser --quiet --system --no-create-home --ingroup uic --home "$UIC_VAR_DIR" --shell /usr/sbin/nologin uic
+    usermod -a -G dialout uic
+  fi
+}
+
+fix_permissions() {
+  mkdir -p $UIC_VAR_DIR
+  chown uic $UIC_VAR_DIR
+}
+
+enable_start_uic_cpcd() {
+  if type "systemctl" >/dev/null; then
+    systemctl --system daemon-reload
+    systemctl start uic-cpcd
+    systemctl enable uic-cpcd
+  fi
+}
+
+handle_conf() {
+  if ! grep -q "cpcd:" $UIC_CONFFILE; then
+    mkdir -p $UIC_CONFDIR
+    echo "cpcd:" >> $UIC_CONFFILE
+    echo "  serial: $CPCD_DEFAULT_CFG_SERIAL" >> $UIC_CONFFILE
+  fi
+
+  db_go
+  db_get uic-cpcd/serial_port
+  CFG_CPCD_SERIAL="$RET"
+  if [ "$RET" = "" ]; then
+    CFG_CPCD_SERIAL="$CPCD_DEFAULT_CFG_SERIAL"
+  fi
+
+  # Update configuration file with outcome of configuration
+  # This is a small state machine that can update the Unify config file, which is written in YAML
+  state=""
+
+  while IFS= read line #Read IFS https://en.wikipedia.org/wiki/Input_Field_Separators
+  do
+    # Set the state depending on the line read from the config file
+    case "$line" in
+      "cpcd:" )   # State: cpcd
+        state="cpcd"
+        ;;
+      " "* | "-"* )   # Lines starting with '-' or ' ' don't trigger state change.
+        # Do nothing.
+        ;;
+      *) state="" ;;    # Set state to empty, Any unknown text, that doesn't begin with '-' or ' '
+    esac
+    leftside=$(echo "$line" | cut -f1 -d":")
+    # STM to update entries under 'cpcd:'
+    case $state in
+      "cpcd" )
+        case "$line" in
+        "cpcd:" )
+          echo "$line" ;;                   # cpcd should not be indented
+        *"serial:"*)
+          echo "$leftside: $CFG_CPCD_SERIAL" ;;
+        *)
+          echo "$line" ;;                 # Anything inside cpcd we indent
+        esac ;;
+      *)
+        echo "$line" ;;                     # Anything else we just echo the line
+                        # Without IFS= , echo here would remove the leading spaces and ruin the yaml formatting
+    esac
+  done < "$UIC_CONFFILE" > "$UIC_CONFFILE.tmp"
+  mv "$UIC_CONFFILE.tmp" "$UIC_CONFFILE"
+
+  echo "==="
+  echo "$UIC_CONFFILE new contents:"
+  echo "==="
+  cat "$UIC_CONFFILE"
+  echo "==="
+
+
+}
+
+case "$1" in
+configure)
+  handle_conf
+  setup_uic_user
+  fix_permissions
+  ;;
+
+abort-upgrade | abort-remove | abort-deconfigure) ;;
+
+\
+  *)
+  echo "postinst called with unknown argument \`$1'" >&2
+  exit 1
+  ;;
+esac
+
+#DEBHELPER#
+
+# Enable and start UIC_CPCD daemon
+# enable_start_uic_cpcd
+
+exit 0

@@ -24,23 +24,23 @@ partition "Z-Wave RX" {
   if "Z-Wave API Frame is a Z-Wave Command Class frame" then
 }
 
-partition "UIC-95 Z-Wave Transport/Encapsulation plugin" {
+partition "Z-Wave Transports" {
    -->[Yes] Incoming Z-Wave CC Frame
   -->[De-encapsulate] Incoming Z-Wave CC Frame
 }
 
 partition "Z-Wave Controller" {
-  -->[zwave_controller_on_frame_received()] Frame Dispatch 
+  -->[zwave_controller_on_frame_received()] Frame Dispatch
 }
 
 partition "Subscribers" {
   -->[on_frame_received()] Subscriber function
-  -->[return] Frame Dispatch 
+  -->[return] Frame Dispatch
 }
 
 partition "Z-Wave Command Handler" {
   -->[on_frame_received()] Handle the Z-Wave Command
-  
+
   if "Command Class is supported and/or controlled" then
     if "Security level is ok" then
       -->[Yes] Call the Z-Wave Handler
@@ -51,7 +51,7 @@ partition "Z-Wave Command Handler" {
     --> Handle the Z-Wave Command
   endif
 
-  -->[return] Frame Dispatch 
+  -->[return] Frame Dispatch
 }
 
 

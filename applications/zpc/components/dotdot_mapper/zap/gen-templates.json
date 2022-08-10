@@ -15,17 +15,6 @@
       "path": "dotdot_attributes_h.zapt",
       "name": "Interface for the ZPC attributes for the attribute store",
       "output": "include/dotdot_attributes.h"
-    },
-    {
-      "path": "dotdot_attributes_uam.zapt",
-      "name": "Interface for the ZPC attributes for the attribute store",
-      "output": "include/dotdot_attributes.uam"
-    },
-    {
-      "path": "dotdot_attributes_id_h.zapt",
-      "name": "Interface for the ZPC attributes for the attribute store",
-      "output": "include/dotdot_attributes_id.h"
     }
-
   ]
 }

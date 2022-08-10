@@ -11,7 +11,9 @@
  *
  *****************************************************************************/
 
+// clang-format off
 {{zap_header}}
+
 #include "sl_log.h"
 #include "sl_status.h"
 #include "attribute_store.h"
@@ -25,6 +27,8 @@
 #include "dotdot_mqtt.h"
 #include "uic_mqtt.h"
 #include "ucl_definitions.h"
+#include "attribute_mapper.h"
+#include "attribute_timeouts.h"
 
 #include <stdio.h>
 #include <string>
@@ -34,6 +38,10 @@
 #include <set>
 
 #define LOG_TAG "dotdot_mqtt_topics_handler"
+
+// Forward declarations:
+static void on_pan_node_interview_done(attribute_store_node_t updated_node,
+                                       attribute_store_change_t change);
 
 {{#zcl_clusters}}
 {{#if (supportedCluster label)}}
@@ -92,7 +100,7 @@ static void {{asSnakeCaseLower label}}_cluster_attrs_desired_state_publisher_cal
           {{else}}
             {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
               base_topic.str().c_str(),
-              static_cast<{{asUnderlyingType type}}>(attr.desired_or_reported<int32_t>()),
+              static_cast<{{asUnderlyingType type}}>(attr.desired_or_reported<{{asUnderlyingType type}}>()),
               UCL_MQTT_PUBLISH_TYPE_DESIRED);
           {{/if}}
           return;
@@ -157,7 +165,7 @@ static void {{asSnakeCaseLower label}}_cluster_attrs_reported_state_publisher_ca
           {{else}}
             {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_publish(
               base_topic.str().c_str(),
-              static_cast<{{asUnderlyingType type}}>(attr.reported<int32_t>()),
+              static_cast<{{asUnderlyingType type}}>(attr.reported<{{asUnderlyingType type}}>()),
               attr.desired_exists() ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
           {{/if}}
 
@@ -225,10 +233,9 @@ static sl_status_t {{asSnakeCaseLower label}}_cluster_mapper_write_attributes_ca
                        "because it is a complicated type (struct: {{type}}). "
                        "Please change the code to do this manually.");
           {{else if (isString type)}}
-            std::vector<uint8_t> value(attributes.{{asSnakeCaseLower label}}, std::next(attributes.{{asSnakeCaseLower label}}, strlen(attributes.{{asSnakeCaseLower label}}) +1) );
-            updated_node.set(DESIRED_ATTRIBUTE, value);
+            attribute_store_set_desired_string(updated_node,attributes.{{asSnakeCaseLower label}});
           {{else}}
-            updated_node.set_desired<int32_t>(attributes.{{asSnakeCaseLower label}});
+            attribute_store_set_desired_number(updated_node,attributes.{{asSnakeCaseLower label}});
           {{/if}}
         }
       }
@@ -290,6 +297,19 @@ const std::set<attribute_store_type_t> zcl_{{asSnakeCaseLower label}}_attributes
 {{/if}}
 {{/zcl_clusters}}
 
+// clang-format on
+/**
+ * @brief Wrapper that calls on_pan_node_interview_done. This function matches
+ * the attribute_timeout_callback_t signature
+ *
+ * @param updated_node Network Status node.
+ */
+static void
+  on_pan_node_interview_done_callback(attribute_store_node_t updated_node)
+{
+  on_pan_node_interview_done(updated_node, ATTRIBUTE_UPDATED);
+}
+// clang-format off
 
 // A Network Status callback function which will be called when
 // a node is included and interviewed and publish all supported
@@ -301,21 +321,37 @@ static void on_pan_node_interview_done(attribute_store_node_t updated_node,
       == false) {
     return;
   }
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+  attribute_store_get_reported(updated_node,
+                               &network_status,
+                               sizeof(network_status));
+  if ((network_status == NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED)
+      || (network_status == NODE_STATE_TOPIC_STATE_UNAVAILABLE)) {
+    // Wait for the node to be fully included before publishing anything.
+    return;
+  }
+  if (attribute_mapper_has_pending_evaluations()) {
+    // Wait that the mapper has reached a final state.
+    // Try again in 200 ms
+    sl_log_debug(LOG_TAG,
+                   "Mapper is still working. "
+                   "Postponing DotDot attribute publications by 200ms.");
+    attribute_timeout_set_callback(updated_node,
+                                   200,
+                                   &on_pan_node_interview_done_callback);
+    return;
+  }
 
   try {
-    unid_t unid = "\0";
+    unid_t unid                     = "\0";
     zwave_endpoint_id_t endpoint_id = 0;
     sl_status_t status_unid
       = attribute_store_network_helper_get_unid_from_node(updated_node, unid);
-    attribute_store::attribute attr_network_status(updated_node);
-    node_state_topic_state_t network_status = attr_network_status.reported<node_state_topic_state_t>();
-    attribute_store::attribute node_id_node = attr_network_status.first_parent(ATTRIBUTE_NODE_ID);
+    attribute_store::attribute node_id_node
+      = attribute_store_get_first_parent_with_type(updated_node,
+                                                   ATTRIBUTE_NODE_ID);
 
-    if ((network_status == NODE_STATE_TOPIC_STATE_NODEID_ASSIGNED)
-        || (network_status == NODE_STATE_TOPIC_STATE_UNAVAILABLE)) {
-      // Wait for the node to be fully included.
-      return;
-    } else if (network_status == NODE_STATE_TOPIC_STATE_INCLUDED) {
+   if (network_status == NODE_STATE_TOPIC_STATE_INCLUDED) {
       if (status_unid == SL_STATUS_OK){
         for(attribute_store::attribute endpoint_node : node_id_node.children(ATTRIBUTE_ENDPOINT_ID)) {
           // Publish the SupportedCommands if the node has just become functional
@@ -339,7 +375,6 @@ static void on_pan_node_interview_done(attribute_store_node_t updated_node,
           {{/if}}
           topic_no_commands += "/{{asPublicationName label}}/SupportedCommands";
           {{#if (isSameString label "State")}}
-          // FixMe: remove hardcoded commands for State cluster (UIC-1577)
           if ((network_status == NODE_STATE_TOPIC_INTERVIEWING)
                || (network_status == NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL)) {
             // If state is interviewing or interview fail we publish all available commands

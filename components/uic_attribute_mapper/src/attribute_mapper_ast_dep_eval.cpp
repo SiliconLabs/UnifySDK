@@ -65,7 +65,7 @@ dep_eval_path::dep_eval_path(value_type_t value_type) : value_type(value_type)
 
 const dependencies_t &dep_eval_path::operator()(const ast::operand &operand)
 {
-  ast::eval evaluator;
+  ast::eval<uint32_t> evaluator;
   auto value = boost::apply_visitor(evaluator, operand);
 
   if (value) {
@@ -76,9 +76,9 @@ const dependencies_t &dep_eval_path::operator()(const ast::operand &operand)
   return dependencies;
 }
 
-const dependencies_t &dep_eval_path::operator()(unsigned int type_id)
+const dependencies_t &dep_eval_path::operator()(attribute_store_type_t type)
 {
-  dependencies.push_back({type_id, value_type});
+  dependencies.push_back({type, value_type});
   return dependencies;
 }
 
@@ -107,7 +107,7 @@ const dependencies_t &
 const dependencies_t &
   dep_eval_path::operator()(const std::vector<attribute_path_element> &paths)
 {
-  for (auto &p: paths) {
+  for (const auto &p: paths) {
     (*this)(p);
   }
   return dependencies;

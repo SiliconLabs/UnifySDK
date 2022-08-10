@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+Zigbee Alliance owns the copyright to the text and content displayed or
+included in this document (including in PDF, XML files and other formats) in
+all forms of media, which copyright is protected by the copyright laws of the
+United States and by international treaties.  Full text of licensing terms
+applicable to this document can be found in the LICENSE.md file.
+-->
+<zcl:cluster xmlns:zcl="http://zigbee.org/zcl/clusters"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:type="http://zigbee.org/zcl/types"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+  id="0702" revision="1" name="Metering">
+  <classification role="application" picsCode="SEMT" primaryTransaction="1" />
+  <server>
+    <attributes>
+      <!-- 0x00xx Reading Information Set -->
+      <attribute id="0000" name="CurrentSummationDelivered" type="uint64" required="true" />
+      <attribute id="0001" name="CurrentSummationReceived" type="uint64" />
+      <attribute id="0002" name="CurrentMaxDemandDelivered" type="uint64" />
+      <attribute id="0003" name="CurrentMaxDemandReceived" type="int8" />
+      <attribute id="0006" name="PowerFactor" type="int8" default="0x00" />
+      <attribute id="0007" name="ReadingSnapShotTime" type="UTC" default="0" />
+      <attribute id="0008" name="CurrentMaxDemandDeliveredTime" type="UTC" default="0" />
+      <attribute id="0009" name="CurrentMaxDemandReceivedTime" type="UTC" default="0" />
+      <attribute id="000A" name="DefaultUpdatePeriod" type="uint8" default="0x1E" />
+      <attribute id="0014" name="SupplyStatus" type="enum8" >
+        <restriction>
+          <type:enumeration value="00" name="SupplyOFF" />
+          <type:enumeration value="01" name="SupplyOFFOrARMED" />
+          <type:enumeration value="02" name="SupplyON" />
+        </restriction>
+      </attribute>
+      <!-- * Mandatory for Heat or Cooling; Optional for others -->
+      <attribute id="0015" name="CurrentInletEnergyCarrierSummation" type="uint64" required="true" />
+      <attribute id="0016" name="CurrentOutletEnergyCarrierSummation" type="uint64" required="true" />
+      <attribute id="0017" name="InletTemperature" type="int24" required="true" />
+      <attribute id="0018" name="OutletTemperature" type="int24" required="true" />
+      <!-- 0x03xx Formatting -->
+      <attribute id="0300" name="UnitofMeasure" type="enum8" required="true" >
+        <restriction>
+          <type:enumeration value="00" name="KilowattHoursOrKilowatts" />
+          <type:enumeration value="01" name="CubicMeterOrCubicMeterPerHour" />
+          <type:enumeration value="02" name="CubicFeetOrCubicFeetPerHour" />
+          <type:enumeration value="03" name="CentumCubicFeetOrCentum" />
+          <type:enumeration value="04" name="USGallonsOrUSGalonsPerHour" />
+          <type:enumeration value="05" name="ImperialGallonsOrImperialGallonsPerhour" />
+          <type:enumeration value="06" name="BTUsOrBTUPerhour" />
+          <type:enumeration value="07" name="LitersOrLitersPerHour" />
+          <type:enumeration value="08" name="kPAGaugein" />
+          <type:enumeration value="09" name="kPAabsolute" />
+          <type:enumeration value="0A" name="mcfCubicFeetOr mcfPerHour" />
+          <type:enumeration value="0B" name="Unitless" />
+          <type:enumeration value="0C" name="MegaJouleMegaJoulePerSecond" />
+        </restriction>
+      </attribute>
+      <attribute id="0301" name="Multiplier" type="uint24" />
+      <attribute id="0302" name="Divisor" type="uint24" />
+      <attribute id="0303" name="SummationFormatting" type="map8" required="true" >
+        <bitmap>
+          <element name="SuppressLeadingZeros" type="bool" mask="01" />
+          <element name="NumberOfDigitsToTheRightOfDecimalPoint" type="bool" mask="E0" />
+          <element name="NumberOfDigitsToTheLeftOfTheDecimalPoint" type="bool"  mask="1E" />
+        </bitmap>
+      </attribute>
+      <attribute id="0304" name="DemandFormatting" type="map8" >
+        <bitmap>
+          <element name="SuppressLeadingZeros" type="bool" mask="01" />
+          <element name="NumberOfDigitsToTheRightOfDecimalPoint" type="bool" mask="E0" />
+          <element name="NumberOfDigitsToTheLeftOfTheDecimalPoint" type="bool"  mask="1E" />
+        </bitmap>
+      </attribute>
+      <attribute id="0305" name="HistoricalConsumptionFormatting" type="map8" >
+        <bitmap>
+          <element name="SuppressLeadingZeros" type="bool" mask="01" />
+          <element name="NumberOfDigitsToTheRightOfDecimalPoint" type="bool" mask="E0" />
+          <element name="NumberOfDigitsToTheLeftOfTheDecimalPoint" type="bool"  mask="1E"  />
+        </bitmap>
+      </attribute>
+      <attribute id="0306" name="MeteringDeviceType" type="enum8" required="true">
+        <restriction>
+          <type:enumeration value="00" name="ElectricMetering" />
+          <type:enumeration value="01" name="GasMetering" />
+          <type:enumeration value="02" name="WaterMetering" />
+          <type:enumeration value="03" name="ThermalMetering" />
+          <type:enumeration value="04" name="PressureMetering" />
+          <type:enumeration value="05" name="HeatMetering" />
+          <type:enumeration value="06" name="CoolingMetering" />
+          <type:enumeration value="80" name="MirroredGasMetering" />
+          <type:enumeration value="81" name="MirroredWaterMetering" />
+          <type:enumeration value="82" name="MirroredThermalMetering" />
+          <type:enumeration value="83" name="MirroredPressureMetering" />
+          <type:enumeration value="84" name="MirroredHeatMetering" />
+          <type:enumeration value="85" name="MirroredCoolingMetering" />
+        </restriction>
+      </attribute>
+      <!-- * Mandatory for Heat or Cooling; Optional for others -->
+      <attribute id="0309" name="EnergyCarrierUnitOfMeasure" type="enum8" required="true" >
+        <restriction>
+          <type:enumeration value="00" name="KilowattHoursOrKilowatts" />
+          <type:enumeration value="01" name="CubicMeterOrCubicMeterPerHour" />
+          <type:enumeration value="02" name="CubicFeetOrCubicFeetPerHour" />
+          <type:enumeration value="03" name="CentumCubicFeetOrCentum" />
+          <type:enumeration value="04" name="USGallonsOrUSGalonsPerHour" />
+          <type:enumeration value="05" name="ImperialGallonsOrImperialGallonsPerhour" />
+          <type:enumeration value="06" name="BTUsOrBTUPerhour" />
+          <type:enumeration value="07" name="LitersOrLitersPerHour" />
+          <type:enumeration value="08" name="kPAGaugein" />
+          <type:enumeration value="09" name="kPAabsolute" />
+          <type:enumeration value="0A" name="mcfCubicFeetOr mcfPerHour" />
+          <type:enumeration value="0B" name="Unitless" />
+          <type:enumeration value="0C" name="MegaJouleMegaJoulePerSecond" />
+        </restriction>
+      </attribute>
+      <attribute id="030A" name="EnergyCarrierSummationFormatting" type="map8" required="true" >
+        <bitmap>
+          <element name="SuppressLeadingZeros" type="bool" mask="01" />
+          <element name="NumberOfDigitsToTheRightOfDecimalPoint" type="bool" mask="E0" />
+          <element name="NumberOfDigitsToTheLeftOfTheDecimalPoint" type="bool"  mask="1E" />
+        </bitmap>
+      </attribute>
+      <attribute id="030B" name="EnergyCarrierDemandFormatting" type="map8" >
+        <bitmap>
+          <element name="SuppressLeadingZeros" type="bool" mask="01" />
+          <element name="NumberOfDigitsToTheRightOfDecimalPoint" type="bool" mask="E0" />
+          <element name="NumberOfDigitsToTheLeftOfTheDecimalPoint" type="bool"  mask="1E" />
+        </bitmap>
+      </attribute>
+      <attribute id="030C" name="TemperatureUnitOfMeasure" type="enum8" required="true" >
+        <restriction>
+          <type:enumeration value="00" name="DegreesKelvin" />
+          <type:enumeration value="01" name="DegreesCelsius" />
+          <type:enumeration value="02" name="DegreesFahrenheit" />
+        </restriction>
+      </attribute>
+      <attribute id="030D" name="TemperatureFormatting" type="map8" required="true" >
+        <bitmap>
+          <element name="SuppressLeadingZeros" type="bool" mask="01" />
+          <element name="NumberOfDigitsToTheRightOfDecimalPoint" type="bool" mask="E0" />
+          <element name="NumberOfDigitsToTheLeftOfTheDecimalPoint" type="bool"  mask="1E" />
+        </bitmap>
+      </attribute>
+    </attributes>
+  </server>
+</zcl:cluster>

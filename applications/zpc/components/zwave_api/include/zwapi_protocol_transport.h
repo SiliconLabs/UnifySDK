@@ -117,6 +117,10 @@ extern "C" {
 /// Assign route transmit complete but no routes was found
 #define TRANSMIT_COMPLETE_NOROUTE  0x04
 #define TRANSMIT_COMPLETE_VERIFIED 0x05  ///< Verified delivery
+
+// Helper macro that will indicate if a transmission is successful.
+#define IS_TRANSMISSION_SUCCESSFUL(status) \
+  ((status == TRANSMIT_COMPLETE_OK) || (status == TRANSMIT_COMPLETE_VERIFIED))
 ///@}
 
 /// @name ZW_REDISCOVERY_NEEDED callback values

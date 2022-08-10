@@ -117,10 +117,11 @@ extern "C" {
 
 /// @name zwapi_set_learn_mode() mode values
 ///@{
-#define ZW_SET_LEARN_MODE_DISABLE      0x00
-#define ZW_SET_LEARN_MODE_DIRECT_RANGE 0x01
-#define ZW_SET_LEARN_MODE_NWI          0x02
-#define ZW_SET_LEARN_MODE_NWE          0x03
+#define LEARN_MODE_DISABLE      0x00
+#define LEARN_MODE_DIRECT_RANGE 0x01
+#define LEARN_MODE_NWI          0x81
+#define LEARN_MODE_NWE          0x83
+#define LEARN_MODE_SMART_START  0x84
 ///@}
 
 /// zwapi_set_learn_mode() return interview status bit
@@ -713,10 +714,10 @@ sl_status_t zwapi_request_node_info(zwave_node_id_t node_id);
  * results.
  *
  * Learn Mode Intent values can be:
- * - 0x00: Stop learn mode (ZW_SET_LEARN_MODE_DISABLE)
- * - 0x01: Start direct range inclusion/exclusion (ZW_SET_LEARN_MODE_DIRECT_RANGE)
- * - 0x02: Start learn mode expecting NWI (ZW_SET_LEARN_MODE_NWI)
- * - 0x03: Start learn mode expecting NWE (ZW_SET_LEARN_MODE_NWE)
+ * - 0x00: Stop learn mode (LEARN_MODE_DISABLE)
+ * - 0x01: Start direct range inclusion/exclusion (LEARN_MODE_DIRECT_RANGE)
+ * - 0x02: Start learn mode expecting NWI (LEARN_MODE_NWI)
+ * - 0x03: Start learn mode expecting NWE (LEARN_MODE_NWE)
  *
  * @returns SL_STATUS_OK    if the requested operation was accepted and has started
  * @returns SL_STATUS_FAIL  if the requested operation has not been started

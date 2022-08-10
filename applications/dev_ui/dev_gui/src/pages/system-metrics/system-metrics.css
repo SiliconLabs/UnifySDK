@@ -1,0 +1,232 @@
+.recharts-responsive-container {
+    display: inline-flex;
+}
+
+.recharts-legend-wrapper {
+    bottom: 2px !important;
+}
+
+.thermometr {
+    display: block;
+    width: 26px;
+    height: 150px;
+    border-radius: 12px 12px 0 0px;
+    padding: 6px;
+    border: solid 1px lightgrey;
+    border-bottom: none;
+    box-shadow: rgb(99 99 99 / 20%) 0px -3px 8px 3px;
+    margin-left: 12px;
+    margin-top: 6px;
+    position: absolute;
+    z-index: 1;
+    background: white;
+}
+
+.thermometr-inner {
+    display: block;
+    position: absolute;
+    background-color: lightgrey;
+    height: 145px;
+    width: 13px;
+    border-radius: 10px 10px 0 0;
+    z-index: 1;
+}
+
+.thermometr-inner-value {
+    display: block;
+    position: absolute;
+    background: linear-gradient(#ca8282, #82ca9d);
+    width: 13px;
+    border-radius: 10px 10px 0 0;
+    z-index: 1;
+}
+
+.thermometr-bottom {
+    display: block;
+    border: solid 1px lightgrey;
+    width: 50px;
+    height: 50px;
+    padding: 6px;
+    border-radius: 25px;
+    box-shadow: rgb(99 99 99 / 20%) 0px 0px 8px 4px;
+    position: absolute;
+    top: 150px;
+    background: white;
+}
+
+.thermometr-bottom-inner {
+    display: block;
+    background-color: #82ca9d;
+    height: 36px;
+    border-radius: 18px;
+}
+
+.thermometr-container {
+    display: inline-block;
+    height: 199px;
+    margin-left: 20px;
+}
+
+.thermometr-indicator-value {
+    display: block;
+    position: absolute;
+}
+
+.thermometr-value {
+    display: block;
+    position: absolute;
+}
+
+.thermometr-indicator {
+    display: block;
+    position: absolute;
+    border-top: 1px solid;
+    width: 27px;
+    height: 1px;
+    top: 6px;
+    z-index: 1;
+}
+
+.max {
+    color: #ca8282;
+    border-color: #ca8282;
+}
+
+.max .thermometr-value,
+.min .thermometr-value {
+    margin-left: 35px;
+}
+
+.min {
+    color: #82ca9d;
+    border-color: #82ca9d;
+}
+
+.avrg {
+    color: #ffc658;
+    border-color: #ffc658;
+    margin-left: -18px;
+}
+
+.avrg .thermometr-value {
+    margin-left: -42px;
+}
+
+.current {
+    color: white;
+    font-size: 12px;
+    line-height: 36px;
+    text-align: center;
+}
+
+.battery-container {
+    display: inline-block;
+    height: 199px;
+    padding: 0px 70px !important;
+    top: 15px;
+}
+
+.battery {
+    position: absolute;
+    width: 85px;
+    height: 180px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: rgb(99 99 99 / 20%) 0px 0px 5px 3px;
+}
+
+.battery-inner-container {
+    background: #ca8282;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.battery-inner {
+    position: absolute;
+    width: 73px;
+    max-height: 170px;
+    background-color: white;
+    border-radius: 7px 7px 0 0;
+}
+
+.battery-value {
+    position: absolute;
+    margin-left: 23px;
+    margin-top: 54px;
+}
+
+.battery-top {
+    display: block;
+    height: 7px;
+    width: 28px;
+    margin-left: 27px;
+    border: 1px solid lightgray;
+    border-radius: 4px 4px 0 0;
+    border-bottom: none;
+    box-shadow: rgb(99 99 99 / 20%) 0px -3px 10px 1px;
+    position: absolute;
+    z-index: 1;
+    margin-top: -6px;
+    background: white;
+}
+
+.battery-line {
+    border-top: 4px solid white;
+    position: absolute;
+    width: 73px;
+}
+
+.fourth .battery-inner-container {
+    background-color: #ffc658;
+}
+
+.half .battery-inner-container {
+    background-color: #82ca9d;
+}
+
+.full .battery-inner-container {
+    background-color: #82ca9d;
+}
+
+.full .battery-value {
+    margin-left: 19px;
+}
+
+.empty {
+    color: rgb(255, 0, 0);
+}
+
+.empty .battery-top,
+.empty .battery {
+    box-shadow: rgb(255 0 0 / 20%) 0px -3px 10px 1px;
+    border-color: red;
+}
+
+.full .battery-top,
+.full .battery {
+    box-shadow: rgb(130, 202, 157 / 20%) 0px -3px 10px 1px;
+    border-color: #82ca9d;
+}
+
+.full .battery-top {
+    background-color: #82ca9d;
+}
+
+.battery-icon {
+    position: absolute;
+    margin-left: 24px;
+    height: 30px;
+    width: 23px;
+    top: 95px;
+}
+
+.battery-plugged {
+    content: url('../../assets/plugged.svg');
+    width: 29px;
+    margin-left: 21px;
+}
+
+.battery-unplugged {
+    content: url('../../assets/unplugged.svg');
+}

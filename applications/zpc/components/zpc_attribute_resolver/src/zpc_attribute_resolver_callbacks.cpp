@@ -13,7 +13,7 @@
 #include "zpc_attribute_resolver.h"
 #include "zpc_attribute_resolver_callbacks.h"
 
-// UIC Components
+// Unify Components
 #include "sl_log.h"
 
 // ZPC Components includes

@@ -8,7 +8,7 @@ target_include_directories(zwave_multi_channel
 )
 
 target_link_libraries(zwave_multi_channel
-  PUBLIC zwave_controller zwave_definitions
+  PUBLIC zwave_controller
 )
 
 target_add_mock(zwave_multi_channel)

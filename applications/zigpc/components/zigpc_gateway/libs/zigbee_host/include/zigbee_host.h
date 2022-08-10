@@ -36,6 +36,7 @@ extern "C" {
  */
 struct zigbeeHostOpts {
   char *serialPort;
+  char *otaPath;
   struct zigbeeHostCallbacks *callbacks;
 };
 

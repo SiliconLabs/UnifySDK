@@ -17,7 +17,7 @@
 #include "ZW_classcmd.h"
 #include "zwave_command_class_time.h"
 #include "zwave_command_handler.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_command_classes_utils.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_tx.h"

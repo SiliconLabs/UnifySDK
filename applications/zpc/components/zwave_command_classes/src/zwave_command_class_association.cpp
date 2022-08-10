@@ -13,11 +13,11 @@
 
 // Includes from this component
 #include "zwave_command_class_association.h"
-#include "zwave_command_class_association_internals.hpp"
+#include "zwave_command_class_association_internals.h"
 #include "zwave_command_class_multi_channel_association.h"
 #include "zwave_command_class_agi.h"
 #include "zwave_command_classes_utils.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 
 // Generic includes
 #include <stdlib.h>
@@ -27,18 +27,19 @@
 #include <algorithm>
 #include <vector>
 
-// UIC Includes
+// Unify Includes
 #include "sl_log.h"
 #include "attribute.hpp"
+#include "attribute_store_helper.h"
 #include "attribute_resolver.h"
 
 // Contiki includes
 #include "ctimer.h"
 
 // ZPC Components
+#include "zwave_association_toolbox.hpp"
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
-#include "attribute_store_helper.h"
 #include "zwave_unid.h"
 #include "zwave_tx.h"
 #include "zwave_controller_keyset.h"
@@ -61,6 +62,10 @@ static struct ctimer association_clean_up_timer;
 
 // How long we will let the resolver try to clean up associations (ms)
 constexpr int ASSOCIATION_CLEAN_UP_TIMEOUT = 1500;
+
+// Minimum 2 attributes to create under a Group ID when created:
+constexpr attribute_store_type_t group_attributes[]
+  = {ATTRIBUTE(GROUP_CONTENT), ATTRIBUTE(MAX_NODES_SUPPORTED)};
 
 ///////////////////////////////////////////////////////////////////////////////
 // Private functions, used to handle individual incoming commands.
@@ -87,34 +92,22 @@ static sl_status_t
   association_group_count_t group_count
     = frame_data[GROUPING_REPORT_NUMBER_OF_GROUPS_INDEX];
   attribute_store_node_t group_count_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(SUPPORTED_GROUPINGS),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(SUPPORTED_GROUPINGS));
   attribute_store_set_reported(group_count_node,
                                &group_count,
                                sizeof(group_count));
 
   attribute_store_node_t group_node;
-  association_group_id_t group_identifer;
-  for (association_group_id_t i = 0; i < group_count; i++) {
-    group_node = attribute_store_get_node_child_by_type(endpoint_node,
-                                                        ATTRIBUTE(GROUP_ID),
-                                                        i);
+  for (association_group_id_t i = 1; i <= group_count; i++) {
+    group_node = attribute_store_emplace(endpoint_node,
+                                         ATTRIBUTE(GROUP_ID),
+                                         &i,
+                                         sizeof(i));
 
-    if (group_node == ATTRIBUTE_STORE_INVALID_NODE) {
-      group_node = attribute_store_add_node(ATTRIBUTE(GROUP_ID), endpoint_node);
-      group_identifer = i + 1;
-      attribute_store_set_node_attribute_value(group_node,
-                                               REPORTED_ATTRIBUTE,
-                                               (uint8_t *)&group_identifer,
-                                               sizeof(association_group_id_t));
-
-      // Create a group content attribute under each group ID :
-      attribute_store_add_node(ATTRIBUTE(GROUP_CONTENT), group_node);
-      // Create the Max Nodes Supported attribute that represents
-      // the maximum number of destinations supported by the advertised association group
-      attribute_store_add_node(ATTRIBUTE(MAX_NODES_SUPPORTED), group_node);
-    }
+    attribute_store_add_if_missing(group_node,
+                                   group_attributes,
+                                   COUNT_OF(group_attributes));
   }
   // We are done parsing the frame
   return SL_STATUS_OK;
@@ -150,17 +143,15 @@ static sl_status_t zwave_command_class_association_handle_report_command(
   association_group_capacity_t capacity
     = association_report->max_nodes_supported;
   attribute_store_node_t group_capacity_node
-    = attribute_store_get_node_child_by_type(group_id_node,
-                                             ATTRIBUTE(MAX_NODES_SUPPORTED),
-                                             0);
+    = attribute_store_get_first_child_by_type(group_id_node,
+                                              ATTRIBUTE(MAX_NODES_SUPPORTED));
   attribute_store_set_reported(group_capacity_node,
                                &capacity,
                                sizeof(capacity));
 
   attribute_store_node_t group_content_node
-    = attribute_store_get_node_child_by_type(group_id_node,
-                                             ATTRIBUTE(GROUP_CONTENT),
-                                             0);
+    = attribute_store_get_first_child_by_type(group_id_node,
+                                              ATTRIBUTE(GROUP_CONTENT));
 
   if (frame_length <= REPORT_ASSOCIATION_BYTES_INDEX) {
     // Put an association marker to prevent re-resolution
@@ -174,11 +165,18 @@ static sl_status_t zwave_command_class_association_handle_report_command(
 
   association_set list;
   get_node_id_association_list(bytes, list);
+
+  // Convert back into bytes to save in the attribute store
+  bytes.clear();
+  get_association_bytestream(list, bytes);
+  attribute group(group_content_node);
+  group.set<association_bytes>(REPORTED_ATTRIBUTE, bytes);
+
   for (auto association: list) {
-    add_reported_association(connection_info->remote.node_id,
-                             connection_info->remote.endpoint_id,
-                             association_report->grouping_identifier,
-                             association);
+    // Make sure the node has return routes for all its destinations
+    zwave_network_management_assign_return_route(
+      connection_info->remote.node_id,
+      association.node_id);
   }
 
   return SL_STATUS_OK;

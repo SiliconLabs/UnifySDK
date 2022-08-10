@@ -11,158 +11,274 @@
  *
  *****************************************************************************/
 #include "zwave_command_class_security_0.h"
-#include "zwave_command_handler_mock.h"
-#include "zwave_command_class_test_helper.h"
-#include "ZW_classcmd.h"
-#include "zwave_unid_mock.h"
-#include "zpc_attribute_store_network_helper_mock.h"
+
+// Generic includes
+#include <string.h>
+
+// Includes from other components
+#include "datastore.h"
+#include "attribute_store.h"
+#include "attribute_store_helper.h"
+#include "attribute_store_fixt.h"
+
+// Interface includes
 #include "attribute_store_defined_attribute_types.h"
+#include "ZW_classcmd.h"
+#include "zwave_utils.h"
+#include "zwave_controller_types.h"
 
-#define LOG_TAG "zwave_command_class_security_0"
+// Test helpers
+#include "zpc_attribute_store_test_helper.h"
 
-static sl_status_t zwave_command_handler_register_handler_CALLBACK(
-  zwave_command_handler_t actual, int cmock_num_calls)
+// Mocks
+#include "zwave_command_handler_mock.h"
+#include "zwave_tx_scheme_selector_mock.h"
+
+static zwave_command_handler_t s0_handler = {};
+static uint8_t received_frame[255]        = {};
+static uint16_t received_frame_size       = 0;
+
+static sl_status_t zwave_command_handler_register_handler_stub(
+  zwave_command_handler_t new_command_class_handler, int cmock_num_calls)
 {
-  zwave_command_handler_t expected = {0};
-  expected.minimal_scheme          = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
-  expected.command_class           = COMMAND_CLASS_SECURITY;
-  expected.command_class_name      = "Security";
-  expected.version                 = SECURITY_VERSION;
-  expected.support_handler = &zwave_command_class_security_0_support_handler;
-  expected.control_handler = &zwave_command_class_security_0_control_handler;
+  s0_handler = new_command_class_handler;
 
-  TEST_ASSERT_EQUAL_PTR(expected.support_handler, actual.support_handler);
-  TEST_ASSERT_EQUAL_PTR(expected.control_handler, actual.control_handler);
-  TEST_ASSERT_EQUAL(expected.minimal_scheme, actual.minimal_scheme);
-  TEST_ASSERT_EQUAL(expected.command_class, actual.command_class);
-  TEST_ASSERT_EQUAL_STRING(expected.command_class_name,
-                           actual.command_class_name);
-  TEST_ASSERT_EQUAL(expected.version, actual.version);
-  TEST_ASSERT_TRUE(actual.manual_security_validation);
+  TEST_ASSERT_EQUAL(ZWAVE_CONTROLLER_ENCAPSULATION_NONE,
+                    s0_handler.minimal_scheme);
+  TEST_ASSERT_EQUAL(COMMAND_CLASS_SECURITY, s0_handler.command_class);
+  TEST_ASSERT_EQUAL(SECURITY_VERSION, s0_handler.version);
+  TEST_ASSERT_NOT_NULL(s0_handler.control_handler);
+  TEST_ASSERT_NOT_NULL(s0_handler.support_handler);
+  TEST_ASSERT_NOT_NULL(s0_handler.control_handler);
+  TEST_ASSERT_TRUE(s0_handler.manual_security_validation);
+
   return SL_STATUS_OK;
 }
 
-void test_zwave_command_class_s0_init_registers_handler()
+/// Setup the test suite (called once before all test_xxx functions are called)
+void suiteSetUp()
 {
-  zwave_command_handler_register_handler_AddCallback(
-    zwave_command_handler_register_handler_CALLBACK);
-  zwave_command_handler_register_handler_IgnoreAndReturn(SL_STATUS_OK);
-
-  zwave_command_class_security_0_init();
+  datastore_init(":memory:");
+  attribute_store_init();
 }
 
-void test_zwave_command_class_s0_ignore_non_relevant_cc()
+/// Teardown the test suite (called once after all test_xxx functions are called)
+int suiteTearDown(int num_failures)
 {
-  uint8_t cmd_frame_unknown[] = {
-    0xFF,
-    0xFF  // arbitrary Command
-  };
-
-  execute_frame_expect_result(zwave_command_class_security_0_support_handler,
-                              cmd_frame_unknown,
-                              sizeof(cmd_frame_unknown),
-                              SL_STATUS_NOT_SUPPORTED);
+  attribute_store_teardown();
+  datastore_teardown();
+  return num_failures;
 }
 
-void test_zwave_command_class_s0_control_ignore_non_relevant_cc()
+static void zwave_command_class_s0_init_verification()
 {
-  uint8_t cmd_frame_unknown[] = {
-    0xFF,
-    0xFF  // arbitrary Command
-  };
+  // Handler registration
+  zwave_command_handler_register_handler_Stub(
+    &zwave_command_handler_register_handler_stub);
 
-  execute_frame_expect_result(zwave_command_class_security_0_control_handler,
-                              cmd_frame_unknown,
-                              sizeof(cmd_frame_unknown),
-                              SL_STATUS_NOT_SUPPORTED);
+  // Call init
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_command_class_security_0_init());
 }
 
-void test_zwave_command_class_security_0_ignore_non_relevant_cmd()
+/// Called before each and every test
+void setUp()
 {
-  uint8_t cmd_frame_unknown[] = {
-    COMMAND_CLASS_MANUFACTURER_SPECIFIC,
-    0xFF  // arbitrary Command
-  };
+  zpc_attribute_store_test_helper_create_network();
+  zwave_unid_set_home_id(home_id);
 
-  execute_frame_expect_result(zwave_command_class_security_0_support_handler,
-                              cmd_frame_unknown,
-                              sizeof(cmd_frame_unknown),
-                              SL_STATUS_NOT_SUPPORTED);
+  memset(received_frame, 0, sizeof(received_frame));
+  received_frame_size = 0;
+  memset(&s0_handler, 0, sizeof(zwave_command_handler_t));
+
+  zwave_command_class_s0_init_verification();
 }
 
-static zwave_controller_connection_info_t test_connection_info = {};
-
-void test_zwave_command_class_security_0_report_short_frame()
+void test_s0_supported_get()
 {
-  const uint8_t cmd_frame_security_0_command[]
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_command_class_security_0_commands_supported_get(
+                      received_frame,
+                      &received_frame_size));
+
+  const uint8_t expected_frame[]
+    = {COMMAND_CLASS_SECURITY, SECURITY_COMMANDS_SUPPORTED_GET};
+  TEST_ASSERT_EQUAL(sizeof(expected_frame), received_frame_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_frame,
+                                received_frame,
+                                received_frame_size);
+}
+
+void test_s0_control_handler_command_too_short()
+{
+  TEST_ASSERT_NOT_NULL(s0_handler.control_handler);
+  zwave_controller_connection_info_t info = {};
+  const uint8_t incoming_frame[]          = {COMMAND_CLASS_SECURITY};
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    s0_handler.control_handler(&info, incoming_frame, sizeof(incoming_frame)));
+}
+
+void test_s0_control_handler_command_unknown()
+{
+  TEST_ASSERT_NOT_NULL(s0_handler.control_handler);
+  zwave_controller_connection_info_t info = {};
+  const uint8_t incoming_frame[]          = {COMMAND_CLASS_SECURITY, 0xFF};
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    s0_handler.control_handler(&info, incoming_frame, sizeof(incoming_frame)));
+}
+
+void test_s0_control_handler_supported_level_on_too_low_level()
+{
+  TEST_ASSERT_NOT_NULL(s0_handler.control_handler);
+  zwave_controller_connection_info_t info = {.encapsulation = 0};
+  attribute_store_get_reported(node_id_node,
+                               &(info.remote.node_id),
+                               sizeof(info.remote.node_id));
+  attribute_store_get_reported(endpoint_id_node,
+                               &(info.remote.endpoint_id),
+                               sizeof(info.remote.endpoint_id));
+  const uint8_t incoming_frame[]
+    = {COMMAND_CLASS_SECURITY, SECURITY_COMMANDS_SUPPORTED_REPORT};
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    s0_handler.control_handler(&info, incoming_frame, sizeof(incoming_frame)));
+}
+
+void test_s0_control_handler_happy_case()
+{
+  TEST_ASSERT_NOT_NULL(s0_handler.control_handler);
+  zwave_controller_connection_info_t info
+    = {.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0};
+  attribute_store_get_reported(node_id_node,
+                               &(info.remote.node_id),
+                               sizeof(info.remote.node_id));
+  attribute_store_get_reported(endpoint_id_node,
+                               &(info.remote.endpoint_id),
+                               sizeof(info.remote.endpoint_id));
+
+  const uint8_t incoming_frame[] = {COMMAND_CLASS_SECURITY,
+                                    SECURITY_COMMANDS_SUPPORTED_REPORT,
+                                    0,
+                                    23,
+                                    34,
+                                    45};
+
+  zwave_tx_scheme_get_node_highest_security_class_ExpectAndReturn(
+    info.remote.node_id,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0);
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    s0_handler.control_handler(&info, incoming_frame, sizeof(incoming_frame)));
+
+  attribute_store_node_t secure_nif_node
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+
+  const uint8_t expected_data[] = {23, 34, 45};
+  uint8_t array_size            = 0;
+  attribute_store_get_node_attribute_value(secure_nif_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_frame,
+                                           &array_size);
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(expected_data, received_frame, array_size);
+}
+
+void test_s0_control_handler_wrong_encapsulation_level()
+{
+  TEST_ASSERT_NOT_NULL(s0_handler.control_handler);
+  zwave_controller_connection_info_t info
+    = {.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0};
+  attribute_store_get_reported(node_id_node,
+                               &(info.remote.node_id),
+                               sizeof(info.remote.node_id));
+  attribute_store_get_reported(endpoint_id_node,
+                               &(info.remote.endpoint_id),
+                               sizeof(info.remote.endpoint_id));
+
+  const uint8_t incoming_frame[] = {COMMAND_CLASS_SECURITY,
+                                    SECURITY_COMMANDS_SUPPORTED_REPORT,
+                                    0,
+                                    23,
+                                    34,
+                                    45};
+
+  zwave_tx_scheme_get_node_highest_security_class_ExpectAndReturn(
+    info.remote.node_id,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS);
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    s0_handler.control_handler(&info, incoming_frame, sizeof(incoming_frame)));
+
+  attribute_store_node_t secure_nif_node
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+
+  uint8_t array_size = 0;
+  attribute_store_get_node_attribute_value(secure_nif_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_frame,
+                                           &array_size);
+  TEST_ASSERT_EQUAL(0, array_size);
+}
+
+void test_s0_control_handler_report_too_short()
+{
+  TEST_ASSERT_NOT_NULL(s0_handler.control_handler);
+  zwave_controller_connection_info_t info
+    = {.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0};
+  attribute_store_get_reported(node_id_node,
+                               &(info.remote.node_id),
+                               sizeof(info.remote.node_id));
+  attribute_store_get_reported(endpoint_id_node,
+                               &(info.remote.endpoint_id),
+                               sizeof(info.remote.endpoint_id));
+
+  const uint8_t incoming_frame[]
     = {COMMAND_CLASS_SECURITY, SECURITY_COMMANDS_SUPPORTED_REPORT, 0};
 
-  test_connection_info.encapsulation
-    = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
-  sl_status_t result = zwave_command_class_security_0_control_handler(
-    &test_connection_info,
-    cmd_frame_security_0_command,
-    sizeof(cmd_frame_security_0_command));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    s0_handler.control_handler(&info, incoming_frame, sizeof(incoming_frame)));
 
-  TEST_ASSERT_EQUAL(result, SL_STATUS_OK);
+  attribute_store_node_t secure_nif_node
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_SECURE_NIF);
+
+  uint8_t array_size = 0;
+  attribute_store_get_node_attribute_value(secure_nif_node,
+                                           REPORTED_ATTRIBUTE,
+                                           received_frame,
+                                           &array_size);
+  TEST_ASSERT_EQUAL(0, array_size);
 }
 
-void test_zwave_command_class_security_0_report_wrong_encap()
+void test_s0_support_handler_too_short()
 {
-  const uint8_t cmd_frame_security_0_command[]
-    = {COMMAND_CLASS_SECURITY,
-       SECURITY_COMMANDS_SUPPORTED_REPORT,
-       0,
-       COMMAND_CLASS_TIME};
+  TEST_ASSERT_NOT_NULL(s0_handler.support_handler);
+  zwave_controller_connection_info_t info = {};
 
-  test_connection_info.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
-  sl_status_t result = zwave_command_class_security_0_control_handler(
-    &test_connection_info,
-    cmd_frame_security_0_command,
-    sizeof(cmd_frame_security_0_command));
+  const uint8_t incoming_frame[] = {COMMAND_CLASS_SECURITY};
 
-  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED, result);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    s0_handler.support_handler(&info, incoming_frame, sizeof(incoming_frame)));
 }
 
-void test_zwave_command_class_security_0_report()
+void test_s0_support_handler_non_supported_command()
 {
-  zwave_node_id_t nodeid = 42;
-  const uint8_t nif[2]   = {COMMAND_CLASS_TIME, COMMAND_CLASS_ALARM};
-  const uint8_t cmd_frame_security_0_command[]
-    = {COMMAND_CLASS_SECURITY,
-       SECURITY_COMMANDS_SUPPORTED_REPORT,
-       0,
-       nif[0],
-       nif[1]};
+  TEST_ASSERT_NOT_NULL(s0_handler.support_handler);
+  zwave_controller_connection_info_t info = {};
 
-  test_connection_info.encapsulation
-    = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0;
-  test_connection_info.remote.node_id = nodeid;
-  zwave_unid_from_node_id_Expect(nodeid, 0);
-  zwave_unid_from_node_id_IgnoreArg_unid();
-  attribute_store_network_helper_get_endpoint_node_ExpectAndReturn(0, 0, 0);
-  attribute_store_network_helper_get_endpoint_node_IgnoreArg_endpoint_id();
-  attribute_store_network_helper_get_endpoint_node_IgnoreArg_node_unid();
+  const uint8_t incoming_frame[]
+    = {COMMAND_CLASS_SECURITY, SECURITY_COMMANDS_SUPPORTED_REPORT};
 
-  attribute_store_get_node_child_by_type_ExpectAndReturn(
-    0,
-    ATTRIBUTE_ZWAVE_SECURE_NIF,
-    0,
-    0);
-  attribute_store_get_node_child_by_type_IgnoreArg_node();
-  attribute_store_get_node_child_by_type_IgnoreArg_child_index();
-
-  attribute_store_set_node_attribute_value_ExpectAndReturn(0,
-                                                           REPORTED_ATTRIBUTE,
-                                                           nif,
-                                                           sizeof(nif),
-                                                           0);
-  attribute_store_set_node_attribute_value_IgnoreArg_node();
-
-  sl_status_t result = zwave_command_class_security_0_control_handler(
-    &test_connection_info,
-    cmd_frame_security_0_command,
-    sizeof(cmd_frame_security_0_command));
-
-  TEST_ASSERT_EQUAL(result, SL_STATUS_OK);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    s0_handler.support_handler(&info, incoming_frame, sizeof(incoming_frame)));
 }

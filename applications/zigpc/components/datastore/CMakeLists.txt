@@ -1,3 +1,6 @@
+set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
+find_package(Threads REQUIRED)
+
 add_library(
   zigpc_datastore src/zigpc_datastore.cpp src/zigpc_datastore_accessor.cpp
                   src/zigpc_datastore_util.cpp)
@@ -8,7 +11,8 @@ target_include_directories(
   PRIVATE src)
 
 target_link_libraries(zigpc_datastore PRIVATE zigpc_common uic_log
-                                              uic_attribute_store)
+                                              uic_attribute_store
+                                              pthread)
 
 add_subdirectory(test)
 

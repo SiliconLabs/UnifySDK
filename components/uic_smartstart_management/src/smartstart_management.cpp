@@ -123,7 +123,10 @@ std::vector<Entry> Management::get_cache_entries(const Query &query)
       const bool *query_value = std::get_if<bool>(&query.query_value);
       if (query_value != nullptr) {
         for (const auto &entry: _smartstart_cache) {
-          if (entry.second.include == *query_value) {
+          if ((entry.second.include == *query_value)
+              && (entry.second.protocol_controller_unid.empty()
+                  || entry.second.protocol_controller_unid
+                       == this->_protocol_controller_unid)) {
             entries.push_back(entry.second);
           }
         }
@@ -143,10 +146,12 @@ bool Management::has_entries_awaiting_inclusion()
 {
   Query q(QueryType::exact, QueryKey::include, true);
   std::vector<Entry> entries_to_include = this->get_cache_entries(q);
-  if (entries_to_include.empty()) {
-    return false;
+  for (Entry entry: entries_to_include) {
+    if (entry.include && entry.device_unid.empty()) {
+      return true;
+    }
   }
-  return true;
+  return false;
 }
 
 sl_status_t Management::notify_node_added(const std::string &dsk,
@@ -254,10 +259,10 @@ sl_status_t
   bool has_entries_awaiting_inclusion = false;
 
   try {
-    nlohmann::json jsn = nlohmann::json::parse(smartstart_list);
+    nlohmann::json jsn   = nlohmann::json::parse(smartstart_list);
     nlohmann::json value = jsn["value"];
 
-    for (auto& element : value) {
+    for (auto &element: value) {
       try {
         std::vector<std::string> preferred_protocols;
 
@@ -268,7 +273,7 @@ sl_status_t
 
         // PreferredProtocols is an optional field
         if (!element["PreferredProtocols"].is_null()) {
-          for (auto& prot : element["PreferredProtocols"]) {
+          for (auto &prot: element["PreferredProtocols"]) {
             preferred_protocols.push_back(prot.front());
           }
 
@@ -279,15 +284,16 @@ sl_status_t
         if (element["ManualInterventionRequired"].is_null()) {
           entry.manual_intervention_required = false;
         } else {
-          entry.manual_intervention_required = element["ManualInterventionRequired"];
+          entry.manual_intervention_required
+            = element["ManualInterventionRequired"];
         }
 
-        if (entry.protocol_controller_unid.empty()
-            || entry.protocol_controller_unid == this->_protocol_controller_unid) {
-          _smartstart_cache_temp.insert(std::pair<std::string, Entry>(entry.dsk, entry));
-        }
+        _smartstart_cache_temp.try_emplace(entry.dsk, entry);
 
-        if (entry.include && entry.device_unid.empty()) {
+        if (entry.include && entry.device_unid.empty()
+            && (entry.protocol_controller_unid.empty()
+                || entry.protocol_controller_unid
+                     == this->_protocol_controller_unid)) {
           has_entries_awaiting_inclusion = true;
         }
       } catch (std::exception &err) {

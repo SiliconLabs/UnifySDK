@@ -13,12 +13,13 @@
 use crate::upvl_db;
 use crate::upvl_json;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{
+use unify_mqtt_sys::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
 };
+use unify_sl_status_sys::SL_STATUS_OK;
 use upvl_db::*;
 
-/// MqttHandler handles subscription messages related to UIC groups.
+/// MqttHandler handles subscription messages related to Unify groups.
 /// It subscribes to listen to the correct topics and is to be passed to the mosquitto client
 pub struct MqttHandler<T: MqttClientTrait> {
     client: T,
@@ -97,8 +98,12 @@ impl<T: MqttClientTrait> MqttHandler<T> {
         // if there are changes in the database,
         // upsert() should return whether the
         // provision was a duplicate.
-        upvl_db::db_upsert_entry(&self.db_conn, provision);
-        self.publish_list();
+        let status: sl_status_t = upvl_db::db_upsert_entry(&self.db_conn, provision);
+
+        // Publish only if the database could take the update.
+        if status == SL_STATUS_OK {
+            self.publish_list();
+        }
         Ok(())
     }
 
@@ -113,11 +118,11 @@ impl<T: MqttClientTrait> MqttHandler<T> {
         // TODO: put this in a business logic module?
         //
         // Currently, the interface uses the upvl_json types.
-        if upvl_db::db_remove_entry(&self.db_conn, &provision) == 1 {
+        if upvl_db::db_remove_entry(&self.db_conn, &provision) > 0 {
             // Return true to say: Publish an updated List
             self.publish_list();
         } else {
-            log_error!("Cannot update db");
+            log_debug!("Skipping SmartStart list publication, as no entry was removed.");
         }
         Ok(())
     }
@@ -141,10 +146,170 @@ impl<T: MqttClientTrait> MqttHandler<T> {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+    use mockall::predicate;
+    use mockall::predicate::eq;
+    use unify_mqtt_sys::{MockMqttClientTrait, MockTopicMatcherTrait};
+
+    fn create_mocked_mqtt_handler() -> MqttHandler<MockMqttClientTrait> {
+        let mut mqtt_client_mock = MockMqttClientTrait::new();
+        let update_topic_matcher_mock: Result<TopicMatcherType, sl_status_t> =
+            Ok(Box::new(MockTopicMatcherTrait::new()));
+        mqtt_client_mock
+            .expect_subscribe()
+            .with(eq("ucl/SmartStart/List/Update/#"))
+            .return_once_st(|_| update_topic_matcher_mock);
+
+        let remove_topic_matcher_mock: Result<TopicMatcherType, sl_status_t> =
+            Ok(Box::new(MockTopicMatcherTrait::new()));
+        mqtt_client_mock
+            .expect_subscribe()
+            .with(eq("ucl/SmartStart/List/Remove/#"))
+            .return_once_st(|_| remove_topic_matcher_mock);
+
+        // MqttHandler publishes SmartStart list in it's constructor - so we have to handle this MQTT publication
+        {
+            let expected = predicate::function(|x| {
+                x == serde_json::json!({ "value": serde_json::Value::Array(vec![]) })
+                    .to_string()
+                    .as_bytes()
+            });
+            mqtt_client_mock
+                .expect_publish()
+                .with(eq("ucl/SmartStart/List"), expected, eq(true))
+                .return_once_st(|_, _, _| Ok(()));
+        }
+
+        MqttHandler::new(mqtt_client_mock, UpvlConfig::new_for_unit_tests()).unwrap()
+    }
+
+    macro_rules! EXPECT_PUBLISH_VALUE {
+        ($mqtt_handler:ident, $topic:expr, $value:expr) => {{
+            let expected = predicate::function(|x| {
+                x == serde_json::json!({ "value": serde_json::Value::Array($value) })
+                    .to_string()
+                    .as_bytes()
+            });
+            log_error!(
+                "expected: '{}'",
+                serde_json::json!({ "value": serde_json::Value::from($value) }).to_string()
+            );
+            $mqtt_handler
+                .client
+                .expect_publish()
+                .with(eq($topic), expected, eq(true))
+                .return_once_st(|_, _, _| Ok(()));
+        }};
+    }
+
     #[test]
-    fn test_subscriptions() {
-        // let mut mqtt_client = MockMqttClient::new();
-        // mqtt_client.expect_subscribe().returning(|_, _| Err(_));
-        // let handler = MqttHandler::new(mqtt_client);
+    fn test_update_remove() {
+        let mut mqtt_upvl_handler = create_mocked_mqtt_handler();
+
+        let list_topic = "ucl/SmartStart/List";
+
+        // add the first node
+        EXPECT_PUBLISH_VALUE!(
+            mqtt_upvl_handler,
+            list_topic,
+            vec![
+                serde_json::json! ({"DSK":"1111", "Include":true, "ProtocolControllerUnid":"zw-D7C4FD24-00001", "Unid":"zw-D7C4FD24-0001"})
+            ]
+        );
+        {
+            let json: serde_json::Value = serde_json::from_str("{\"DSK\":\"1111\",\"Unid\":\"zw-D7C4FD24-0001\",\"ProtocolControllerUnid\":\"zw-D7C4FD24-00001\",\"Include\":true}").unwrap();
+            assert_eq!(mqtt_upvl_handler.on_update_subscriber(json), Ok(()));
+        }
+
+        // add the second node
+        EXPECT_PUBLISH_VALUE!(
+            mqtt_upvl_handler,
+            list_topic,
+            vec![
+                serde_json::json! ({"DSK":"1111", "Include":true,  "ProtocolControllerUnid":"zw-D7C4FD24-00001", "Unid":"zw-D7C4FD24-0001"}),
+                serde_json::json! ({"DSK":"2222", "Include":false, "ProtocolControllerUnid":"zw-D7C4FD24-00002", "Unid":"zw-D7C4FD24-0002"})
+            ]
+        );
+        {
+            let json: serde_json::Value = serde_json::from_str("{\"DSK\":\"2222\",\"Unid\":\"zw-D7C4FD24-0002\",\"ProtocolControllerUnid\":\"zw-D7C4FD24-00002\",\"Include\":false}").unwrap();
+            assert_eq!(mqtt_upvl_handler.on_update_subscriber(json), Ok(()));
+        }
+
+        // add the third node
+        EXPECT_PUBLISH_VALUE!(
+            mqtt_upvl_handler,
+            list_topic,
+            vec![
+                serde_json::json! ({"DSK":"1111", "Include":true,  "ProtocolControllerUnid":"zw-D7C4FD24-00001", "Unid":"zw-D7C4FD24-0001"}),
+                serde_json::json! ({"DSK":"2222", "Include":false, "ProtocolControllerUnid":"zw-D7C4FD24-00002", "Unid":"zw-D7C4FD24-0002"}),
+                serde_json::json! ({"DSK":"3333", "Include":true , "ProtocolControllerUnid":"zw-D7C4FD24-00003", "Unid":"zw-D7C4FD24-0003"})
+            ]
+        );
+        {
+            let json: serde_json::Value = serde_json::from_str("{\"DSK\":\"3333\",\"Unid\":\"zw-D7C4FD24-0003\",\"ProtocolControllerUnid\":\"zw-D7C4FD24-00003\",\"Include\":true}").unwrap();
+            assert_eq!(mqtt_upvl_handler.on_update_subscriber(json), Ok(()));
+        }
+
+        // delete the second node
+        EXPECT_PUBLISH_VALUE!(
+            mqtt_upvl_handler,
+            list_topic,
+            vec![
+                serde_json::json! ({"DSK":"1111", "Include":true,  "ProtocolControllerUnid":"zw-D7C4FD24-00001", "Unid":"zw-D7C4FD24-0001"}),
+                serde_json::json! ({"DSK":"3333", "Include":true , "ProtocolControllerUnid":"zw-D7C4FD24-00003", "Unid":"zw-D7C4FD24-0003"})
+            ]
+        );
+        {
+            let json: serde_json::Value = serde_json::from_str("{\"DSK\":\"2222\"}").unwrap();
+            assert_eq!(mqtt_upvl_handler.on_remove_subscriber(json), Ok(()));
+        }
+    }
+
+    #[test]
+    fn test_update_existing_dsk() {
+        let mut mqtt_upvl_handler = create_mocked_mqtt_handler();
+
+        let list_topic = "ucl/SmartStart/List";
+
+        // add the first node
+        EXPECT_PUBLISH_VALUE!(
+            mqtt_upvl_handler,
+            list_topic,
+            vec![
+                serde_json::json! ({"DSK":"1111", "Include":true, "ProtocolControllerUnid":"zw-D7C4FD24-00001", "Unid":"zw-D7C4FD24-0001"})
+            ]
+        );
+        {
+            let json: serde_json::Value = serde_json::from_str("{\"DSK\":\"1111\",\"Unid\":\"zw-D7C4FD24-0001\",\"ProtocolControllerUnid\":\"zw-D7C4FD24-00001\",\"Include\":true}").unwrap();
+            assert_eq!(mqtt_upvl_handler.on_update_subscriber(json), Ok(()));
+        }
+
+        // add the second node
+        EXPECT_PUBLISH_VALUE!(
+            mqtt_upvl_handler,
+            list_topic,
+            vec![
+                serde_json::json! ({"DSK":"1111", "Include":true,  "ProtocolControllerUnid":"zw-D7C4FD24-00001", "Unid":"zw-D7C4FD24-0001"}),
+                serde_json::json! ({"DSK":"2222", "Include":false, "ProtocolControllerUnid":"zw-D7C4FD24-00002", "Unid":"zw-D7C4FD24-0002"})
+            ]
+        );
+        {
+            let json: serde_json::Value = serde_json::from_str("{\"DSK\":\"2222\",\"Unid\":\"zw-D7C4FD24-0002\",\"ProtocolControllerUnid\":\"zw-D7C4FD24-00002\",\"Include\":false}").unwrap();
+            assert_eq!(mqtt_upvl_handler.on_update_subscriber(json), Ok(()));
+        }
+
+        // update several fields of the first node
+        EXPECT_PUBLISH_VALUE!(
+            mqtt_upvl_handler,
+            list_topic,
+            vec![
+                serde_json::json! ({"DSK":"1111", "Include":false,  "ProtocolControllerUnid":"zw-D7C4FD24-00003", "Unid":"zw-D7C4FD24-0001"}),
+                serde_json::json! ({"DSK":"2222", "Include":false, "ProtocolControllerUnid":"zw-D7C4FD24-00002", "Unid":"zw-D7C4FD24-0002"})
+            ]
+        );
+        {
+            let json: serde_json::Value = serde_json::from_str("{\"DSK\":\"1111\",\"ProtocolControllerUnid\":\"zw-D7C4FD24-00003\",\"Include\":false}").unwrap();
+            assert_eq!(mqtt_upvl_handler.on_update_subscriber(json), Ok(()));
+        }
     }
 }

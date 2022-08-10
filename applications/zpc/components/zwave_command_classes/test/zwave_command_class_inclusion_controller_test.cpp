@@ -13,7 +13,7 @@
 // Component being tested
 #include "zwave_command_class_inclusion_controller.h"
 
-// UIC Includes
+// Unify Includes
 #include "datastore.h"
 #include "attribute_store_fixt.h"
 #include "attribute_store.h"

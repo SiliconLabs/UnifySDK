@@ -27,6 +27,7 @@ extern "C" {
 #include <unity.h>
 #include <sl_status.h>
 #include "dotdot_mqtt_mock.h"
+#include "dotdot_mqtt_generated_commands_mock.h"
 
 // ZigPC includes
 #include <zigpc_common_zigbee.h>

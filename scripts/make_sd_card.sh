@@ -11,7 +11,7 @@ fi
 
 if [ "$#" -ne 2 ]
 then
-  echo "Usage: make_sd_card.sh <Rapsbian image> <Directory with UIC deb packages to be installed>"
+  echo "Usage: make_sd_card.sh <Rapsbian image> <Directory with Unify deb packages to be installed>"
   echo "Raspbian images can be downloaded from https://downloads.raspberrypi.org/raspios_full_armhf/images/"
   exit 0
 fi
@@ -38,38 +38,59 @@ else
   exit 1
 fi
 
-if ls $deb_dir/uic-dev-cli_*_armhf.deb &> /dev/null; then
-  echo "UIC Dev Cli deb package found"
-else
-  echo "UIC Dev Cli deb package NOT found"
-  exit 1
-fi
-
 if ls $deb_dir/uic-dev-gui_*_armhf.deb &> /dev/null; then
-  echo "UIC Dev Gui deb package found"
+  echo "Unify Dev Gui deb package found"
 else
-  echo "UIC Dev Gui deb package NOT found"
+  echo "Unify Dev Gui deb package NOT found"
   exit 1
 fi
 
 if ls $deb_dir/uic-image-provider_*_armhf.deb &> /dev/null; then
-  echo "UIC Image Provider deb package found"
+  echo "Unify Image Provider deb package found"
 else
-  echo "UIC Image Provider deb package NOT found"
+  echo "Unify Image Provider deb package NOT found"
   exit 1
 fi
 
 if ls $deb_dir/uic-upvl_*_armhf.deb &> /dev/null; then
-  echo "UIC UPVL deb package found"
+  echo "Unify UPVL deb package found"
 else
-  echo "UIC UPVL deb package NOT found"
+  echo "Unify UPVL deb package NOT found"
   exit 1
 fi
 
 if ls $deb_dir/uic-zpc_*_armhf.deb &> /dev/null; then
-  echo "UIC ZPC deb package found"
+  echo "Unify ZPC deb package found"
 else
-  echo "UIC ZPC libuic deb package NOT found"
+  echo "Unify ZPC libunify deb package NOT found"
+  exit 1
+fi
+
+if ls $deb_dir/uic-upti-writer_*_armhf.deb &> /dev/null; then
+  echo "UIC UPTI Writer deb package found"
+else
+  echo "UIC UPTI Writer deb package NOT found"
+  exit 1
+fi
+
+if ls $deb_dir/uic-upti-cap_*_armhf.deb &> /dev/null; then
+  echo "UIC UPTI Capture package found"
+else
+  echo "UIC UPTI Capture deb package NOT found"
+  exit 1
+fi
+
+if ls $deb_dir/uic-nal_*_armhf.deb &> /dev/null; then
+  echo "UIC NAL deb package found"
+else
+  echo "UIC NAL deb package NOT found"
+  exit 1
+fi
+
+if ls $deb_dir/uic-gms_*_armhf.deb &> /dev/null; then
+  echo "UIC GMS deb package found"
+else
+  echo "UIC GMS deb package NOT found"
   exit 1
 fi
 

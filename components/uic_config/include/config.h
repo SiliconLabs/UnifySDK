@@ -16,7 +16,7 @@
  * @ingroup unify_components
  * @brief Unify Configuration System
  *
- * Configuration system for UIC Components/Applications.
+ * Configuration system for Unify Components/Applications.
  * It supports reading configuration from a YAML config file,
  * as well as from command line (arguments).
  * Command line arguments overrides the configurations from the config file.
@@ -39,13 +39,14 @@ extern "C" {
 #endif
 
 // Configuration keys
-#define CONFIG_KEY_MQTT_HOST     "mqtt.host"
-#define CONFIG_KEY_MQTT_PORT     "mqtt.port"
-#define CONFIG_KEY_MQTT_CAFILE   "mqtt.cafile"
-#define CONFIG_KEY_MQTT_CERTFILE "mqtt.certfile"
-#define CONFIG_KEY_MQTT_KEYFILE  "mqtt.keyfile"
-#define CONFIG_KEY_LOG_LEVEL     "log.level"
-#define CONFIG_KEY_LOG_TAG_LEVEL "log.tag_level"
+#define CONFIG_KEY_MQTT_HOST      "mqtt.host"
+#define CONFIG_KEY_MQTT_PORT      "mqtt.port"
+#define CONFIG_KEY_MQTT_CLIENT_ID "mqtt.client_id"
+#define CONFIG_KEY_MQTT_CAFILE    "mqtt.cafile"
+#define CONFIG_KEY_MQTT_CERTFILE  "mqtt.certfile"
+#define CONFIG_KEY_MQTT_KEYFILE   "mqtt.keyfile"
+#define CONFIG_KEY_LOG_LEVEL      "log.level"
+#define CONFIG_KEY_LOG_TAG_LEVEL  "log.tag_level"
 
 // Default Settings
 #define DEFAULT_CONFIG_PATH "/etc/uic/uic.cfg"

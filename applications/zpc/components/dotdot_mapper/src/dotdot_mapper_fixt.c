@@ -19,60 +19,37 @@
 #include "basic_cluster_mapper.h"
 #include "on_off_cluster_mapper.h"
 #include "level_cluster_mapper.h"
+#include "color_control_cluster_mapper.h"
 #include "thermostat_cluster_mapper.h"
 #include "sl_status.h"
 #include "door_lock_cluster_mapper.h"
 #include "identify_cluster_mapper.h"
+#include "binding_cluster_mapper.h"
 
 sl_status_t dotdot_mapper_init()
 {
   // Initializes all clusters individually.
-  // Abort and return false if any of them fails.
+  bool init_status = true;
 
   // Basic Cluster
-  if (!basic_cluster_mapper_init()) {
-    return SL_STATUS_FAIL;
-  }
+  init_status &= basic_cluster_mapper_init();
+  init_status &= on_off_cluster_mapper_init();
+  init_status &= level_cluster_mapper_init();
+  init_status &= color_control_cluster_mapper_init();
+  init_status &= thermostat_cluster_mapper_init();
+  init_status &= door_lock_cluster_mapper_init();
+  init_status &= identify_cluster_mapper_init();
+  init_status &= binding_cluster_mapper_init();
 
-  // OnOff Cluster
-  if (!on_off_cluster_mapper_init()) {
-    return SL_STATUS_FAIL;
-  }
-
-  // Level Cluster
-  if (!level_cluster_mapper_init()) {
-    return SL_STATUS_FAIL;
-  }
-
-  // Thermostat Cluster
-  if (!thermostat_cluster_mapper_init()) {
-    return SL_STATUS_FAIL;
-  }
-
-  // DooLock Cluster
-  if (!door_lock_cluster_mapper_init()) {
-    return SL_STATUS_FAIL;
-  }
-
-  // Identify Cluster
-  if (!identify_cluster_mapper_init()) {
-    return SL_STATUS_FAIL;
-  }
-
-  return SL_STATUS_OK;
+  return (init_status == true) ? SL_STATUS_OK : SL_STATUS_FAIL;
 }
 
 int dotdot_mapper_teardown()
 {
-  // Basic Cluster
   basic_cluster_mapper_teardown();
-  // OnOff Cluster
   on_off_cluster_mapper_teardown();
-  // Level Cluster
   level_cluster_mapper_teardown();
-  // Thermostat Cluster
   thermostat_cluster_mapper_teardown();
-  //DoorLock Cluster
   door_lock_cluster_mapper_teardown();
   return 0;
 }

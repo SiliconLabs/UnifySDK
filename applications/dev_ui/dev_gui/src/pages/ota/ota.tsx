@@ -1,9 +1,9 @@
 import React from 'react';
 import { Col, ProgressBar, Row, Tab, Table, Tabs } from 'react-bootstrap';
-import Tooltip from '@material-ui/core/Tooltip';
 import { OTAProps, OTAState, Image } from './ota-types';
 import './ota.css';
 import ClusterTypeTooltip from '../../components/cluster-type-tooltip/cluster-type-tooltip';
+import { Tooltip } from '@mui/material';
 
 export class OTA extends React.Component<OTAProps, OTAState> {
   constructor(props: OTAProps) {

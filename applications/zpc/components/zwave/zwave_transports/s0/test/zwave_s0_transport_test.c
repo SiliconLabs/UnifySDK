@@ -13,6 +13,7 @@
 #include "zwave_s0_internal.h"
 #include "zwave_controller_internal_mock.h"
 #include "zwave_controller_transport_mock.h"
+#include "zwave_controller_callbacks_mock.h"
 #include "ZW_classcmd.h"
 #include "zwave_s0_sm_mock.h"
 #include "zwave_tx_mock.h"
@@ -230,7 +231,7 @@ sl_status_t zwave_controller_transport_register_stub(
 {
   TEST_ASSERT_EQUAL(COMMAND_CLASS_SECURITY, transport->command_class);
   TEST_ASSERT_EQUAL(COMMAND_CLASS_SECURITY_VERSION, transport->version);
-  TEST_ASSERT_EQUAL(4, transport->priority);
+  TEST_ASSERT_EQUAL(3, transport->priority);
 
   return SL_STATUS_OK;
 }
@@ -244,6 +245,8 @@ void test_zwave_s0_transport_init()
 
   zwave_controller_transport_register_ExpectAndReturn(NULL, SL_STATUS_OK);
   zwave_controller_transport_register_IgnoreArg_transport();
+  zwave_controller_register_callbacks_ExpectAndReturn(NULL, SL_STATUS_OK);
+  zwave_controller_register_callbacks_IgnoreArg_callbacks();
   // Call the function_
   zwave_s0_network_init_ExpectAndReturn(SL_STATUS_OK);
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_s0_transport_init());

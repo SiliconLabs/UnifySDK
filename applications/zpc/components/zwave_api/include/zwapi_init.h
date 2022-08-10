@@ -485,6 +485,13 @@ zwave_lr_channel_t zwapi_get_zwave_lr_channel();
  */
 sl_status_t zwapi_set_zwave_lr_channel(zwave_lr_channel_t new_channel);
 
+/**
+ * @brief Checks if we are waiting for a Z-Wave API started message
+ *
+ * @returns true if we are awaiting for it, false otherwise
+ */
+bool zwapi_is_awaiting_zwave_api_started();
+
 // CLEANUP: Moved form sdk_versioning.h
 /**
  * @brief Convert protocol version string to Z-Wave SDK version string

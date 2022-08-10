@@ -9,7 +9,7 @@ add_library(
   target_include_directories(
   zigpc_diagnostics
   PUBLIC include
-  PRIVATE src src/health_metrics)
+  PRIVATE src src/health_metrics ${nlohmann_json_include})
 
   add_subdirectory(test)
 

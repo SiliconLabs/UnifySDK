@@ -26,6 +26,7 @@
 #ifndef ATTRIBUTE_MAPPER_H
 #define ATTRIBUTE_MAPPER_H
 
+#include <stdbool.h>
 #include "sl_status.h"
 
 #ifdef __cplusplus
@@ -40,6 +41,16 @@ extern "C" {
 sl_status_t attribute_mapper_init();
 
 /**
+ * @brief   Checks if the mapper has pending evaluations
+ *
+ * Components can use this function if they want to check if the mapper may
+ * still update the attribute store tree after some attribute updates.
+ *
+ * @returns true if more evaluations are to be done, false otherwise
+ */
+bool attribute_mapper_has_pending_evaluations();
+
+/**
  * @brief Adds the required configuration to the @ref unify_config for the
  * @ref unify_attribute_mapper.
  *
@@ -50,5 +61,5 @@ void attribute_mapper_config_init();
 }
 #endif
 
-#endif //ATTRIBUTE_MAPPER_H
+#endif  //ATTRIBUTE_MAPPER_H
 /** @} end attribute_mapper */

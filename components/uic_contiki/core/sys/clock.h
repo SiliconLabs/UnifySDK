@@ -104,7 +104,11 @@ void clock_init(void);
  *
  * \return The current clock time, measured in system ticks.
  */
+#ifdef ZIPGW
+unsigned long clock_time(void);
+#else
 CCIF clock_time_t clock_time(void);
+#endif
 
 /**
  * This is a asynchronous delay function.

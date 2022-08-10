@@ -213,6 +213,18 @@ attribute_store_node_t attribute_store_network_helper_get_endpoint_node(
                                                  0);
 }
 
+attribute_store_node_t
+  attribute_store_get_endpoint_0_node(attribute_store_node_t node_id_node)
+{
+  const zwave_endpoint_id_t endpoint_id = 0;
+  return attribute_store_get_node_child_by_value(node_id_node,
+                                                 ATTRIBUTE_ENDPOINT_ID,
+                                                 REPORTED_ATTRIBUTE,
+                                                 &endpoint_id,
+                                                 sizeof(endpoint_id),
+                                                 0);
+}
+
 sl_status_t attribute_store_network_helper_get_unid_endpoint_from_node(
   attribute_store_node_t node, unid_t unid, zwave_endpoint_id_t *endpoint_id)
 {
@@ -226,10 +238,7 @@ sl_status_t attribute_store_network_helper_get_unid_endpoint_from_node(
 
   zwave_endpoint_id_t endpoint;
   if (SL_STATUS_OK
-      != attribute_store_read_value(node,
-                                    REPORTED_ATTRIBUTE,
-                                    &endpoint,
-                                    sizeof(endpoint))) {
+      != attribute_store_get_reported(node, &endpoint, sizeof(endpoint))) {
     // Abort if no endpoint data was retrieved.
     return SL_STATUS_FAIL;
   }
@@ -243,17 +252,21 @@ sl_status_t attribute_store_network_helper_get_unid_endpoint_from_node(
 
   zwave_node_id_t node_id;
   if (SL_STATUS_OK
-      != attribute_store_read_value(node,
-                                    REPORTED_ATTRIBUTE,
-                                    &node_id,
-                                    sizeof(zwave_node_id_t))) {
+      != attribute_store_get_reported(node,
+                                      &node_id,
+                                      sizeof(zwave_node_id_t))) {
     // Abort if no NodeID data was retrieved.
     return SL_STATUS_FAIL;
   }
 
-  ///FIXME: Should we verify that the HomeID is matching?
-  /// As long as we always have 1 HomeID in the Attribute Store,
-  /// then it's not necessary.
+  // Continue climbing up until we find the HomeID type of node, check that it
+  // it our HomeID. Do not reject the request if it is not our HomeID.
+  node = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_HOME_ID);
+  if (node != get_zpc_network_node()) {
+    sl_log_debug(
+      LOG_TAG,
+      "Note: Retrieving UNID/endpoint values from a foreign HomeID.");
+  }
 
   // At that point, we are happy and can copy the variables
   // back to the caller's pointers
@@ -281,17 +294,19 @@ sl_status_t
 
   zwave_node_id_t node_id;
   if (SL_STATUS_OK
-      != attribute_store_read_value(node,
-                                    REPORTED_ATTRIBUTE,
-                                    &node_id,
-                                    sizeof(zwave_node_id_t))) {
+      != attribute_store_get_reported(node,
+                                      &node_id,
+                                      sizeof(zwave_node_id_t))) {
     // Abort if no NodeID data was retrieved.
     return SL_STATUS_FAIL;
   }
 
-  ///FIXME: Should we verify that the HomeID is matching?
-  /// As long as we always have 1 HomeID in the Attribute Store,
-  /// then it's not necessary.
+  // Continue climbing up until we find the HomeID type of node, check that it
+  // it our HomeID. Do not reject the request if it is not our HomeID.
+  node = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_HOME_ID);
+  if (node != get_zpc_network_node()) {
+    sl_log_debug(LOG_TAG, "Note: Retrieving UNID value from a foreign HomeID.");
+  }
 
   // At that point, we are happy and can copy the variables
   // back to the caller's pointers
@@ -310,10 +325,9 @@ sl_status_t attribute_store_network_helper_get_node_id_from_node(
   }
 
   if (SL_STATUS_OK
-      != attribute_store_read_value(node_id_node,
-                                    REPORTED_ATTRIBUTE,
-                                    zwave_node_id,
-                                    sizeof(zwave_node_id_t))) {
+      != attribute_store_get_reported(node_id_node,
+                                      zwave_node_id,
+                                      sizeof(zwave_node_id_t))) {
     // Abort if no NodeID data was retrieved.
     return SL_STATUS_FAIL;
   }
@@ -331,10 +345,9 @@ sl_status_t attribute_store_network_helper_get_endpoint_id_from_node(
   }
 
   if (SL_STATUS_OK
-      != attribute_store_read_value(endpoint_id_node,
-                                    REPORTED_ATTRIBUTE,
-                                    zwave_endpoint_id,
-                                    sizeof(zwave_endpoint_id_t))) {
+      != attribute_store_get_reported(endpoint_id_node,
+                                      zwave_endpoint_id,
+                                      sizeof(zwave_endpoint_id_t))) {
     // Abort if no Endpoint ID data was retrieved.
     return SL_STATUS_FAIL;
   }
@@ -369,21 +382,56 @@ sl_status_t attribute_store_network_helper_get_zwave_ids_from_node(
   // If the parent node is not invalid, when we found the NodeID/endpoint combo
   // Copy the data and return
   if (SL_STATUS_OK
-      != attribute_store_read_value(parent_node,
-                                    REPORTED_ATTRIBUTE,
-                                    zwave_node_id,
-                                    sizeof(zwave_node_id_t))) {
+      != attribute_store_get_reported(parent_node,
+                                      zwave_node_id,
+                                      sizeof(zwave_node_id_t))) {
     // Abort if no NodeID data was retrieved.
     return SL_STATUS_FAIL;
   }
   if (SL_STATUS_OK
-      != attribute_store_read_value(node,
-                                    REPORTED_ATTRIBUTE,
-                                    zwave_endpoint_id,
-                                    sizeof(zwave_endpoint_id_t))) {
+      != attribute_store_get_reported(node,
+                                      zwave_endpoint_id,
+                                      sizeof(zwave_endpoint_id_t))) {
     // Abort if no Endpoint ID data was retrieved.
     return SL_STATUS_FAIL;
   }
 
   return SL_STATUS_OK;
+}
+
+attribute_store_node_t
+  zwave_command_class_get_endpoint_id_node(zwave_node_id_t node_id,
+                                           zwave_endpoint_id_t endpoint_id)
+{
+  return attribute_store_get_node_child_by_value(
+    attribute_store_get_node_child_by_value(get_zpc_network_node(),
+                                            ATTRIBUTE_NODE_ID,
+                                            REPORTED_ATTRIBUTE,
+                                            (uint8_t *)&node_id,
+                                            sizeof(node_id),
+                                            0),
+    ATTRIBUTE_ENDPOINT_ID,
+    REPORTED_ATTRIBUTE,
+    &endpoint_id,
+    sizeof(endpoint_id),
+    0);
+}
+
+node_state_topic_state_t
+  attribute_store_network_helper_get_network_status(attribute_store_node_t node)
+{
+  // Default to UNAVAILABLE if the value is undefined in the attribute store
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_UNAVAILABLE;
+
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_NODE_ID);
+
+  attribute_store_node_t network_status_node
+    = attribute_store_get_first_child_by_type(node_id_node,
+                                              ATTRIBUTE_NETWORK_STATUS);
+  attribute_store_get_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+
+  return network_status;
 }

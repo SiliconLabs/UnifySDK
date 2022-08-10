@@ -1,6 +1,6 @@
 {
-  "name": "UIC Dotdot Mappers",
-  "version": "UIC-dotdot-v1",
+  "name": "Unify Dotdot Mappers",
+  "version": "Unify-dotdot-v1",
   "override": "../../uic_dotdot/zap/addon-override.js",
   "helpers": [
     "../../uic_dotdot/zap/addon-helper.js"
@@ -8,7 +8,7 @@
   "templates": [
     {
       "path": "dotdot_mqtt_cpp.zapt",
-      "name": "Implementation for parsing mqtt topics for the UIC",
+      "name": "Implementation for parsing mqtt topics for Unify",
       "output": "src/dotdot_mqtt.cpp"
     },
     {
@@ -18,8 +18,23 @@
     },
     {
       "path": "dotdot_mqtt_h.zapt",
-      "name": "Code for parsing mqtt topics for the UIC",
+      "name": "Code for parsing mqtt topics for Unify",
       "output": "include/dotdot_mqtt.h"
+    },
+    {
+      "path": "dotdot_mqtt_helpers_hpp.zapt",
+      "name": "Dotdot MQTT Helpers interface",
+      "output": "include/dotdot_mqtt_helpers.hpp"
+    },
+    {
+      "path": "dotdot_mqtt_helpers_h.zapt",
+      "name": "Dotdot MQTT Helpers C interface",
+      "output": "include/dotdot_mqtt_helpers.h"
+    },
+    {
+      "path": "dotdot_mqtt_helpers_cpp.zapt",
+      "name": "Dotdot MQTT Helpers implementation",
+      "output": "src/dotdot_mqtt_helpers.cpp"
     },
     {
       "path": "dotdot_mqtt_hpp.zapt",
@@ -28,12 +43,12 @@
     },
     {
       "path": "dotdot_mqtt_attributes_h.zapt",
-      "name": "Definitions for parsing MQTT Attributes topics for the UIC",
+      "name": "Definitions for parsing MQTT Attributes topics for Unify",
       "output": "include/dotdot_mqtt_attributes.h"
     },
     {
       "path": "dotdot_mqtt_attributes_cpp.zapt",
-      "name": "Implementation for parsing MQTT Attributes topics for the UIC",
+      "name": "Implementation for parsing MQTT Attributes topics for Unify",
       "output": "src/dotdot_mqtt_attributes.cpp"
     },
     {
@@ -75,6 +90,16 @@
       "path": "dotdot_mqtt_supported_generated_commands_cpp.zapt",
       "name": "Implementation for advertising Supported Generated Commands over MQTT",
       "output": "src/dotdot_mqtt_supported_generated_commands.cpp"
+    },
+    {
+      "path": "dotdot_mqtt_generated_commands_h.zapt",
+      "name": "Definitions for publishing Generated Commands over MQTT",
+      "output": "include/dotdot_mqtt_generated_commands.h"
+    },
+    {
+      "path": "dotdot_mqtt_generated_commands_cpp.zapt",
+      "name": "Implementation for publishing Generated Commands over MQTT",
+      "output": "src/dotdot_mqtt_generated_commands.cpp"
     },
     {
       "path": "../test/dotdot_mqtt_test.include.zapt",

@@ -15,7 +15,7 @@
 #include "zpc_attribute_resolver_send.h"
 #include "zpc_attribute_resolver_callbacks.h"
 
-// UIC Includes
+// Unify Includes
 #include "attribute_resolver.h"
 #include "attribute_resolver_rule.h"
 

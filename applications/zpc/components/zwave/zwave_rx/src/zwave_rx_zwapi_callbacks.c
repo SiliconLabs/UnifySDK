@@ -157,10 +157,13 @@ void zwave_rx_zwave_api_started(const uint8_t *buffer, uint8_t buffer_length)
 {
   (void)buffer;
   (void)buffer_length;
+  // Make sure we are still running the right settings:
+  zwapi_set_node_id_basetype(NODEID_16BITS);
+
   // Ensure that no add/remove/learn mode is active
   zwapi_add_node_to_network(ADD_NODE_STOP, NULL);
   zwapi_remove_node_from_network(REMOVE_NODE_STOP, NULL);
-  zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DISABLE, NULL);
+  zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
 
   // I can't think of a reason to do something with our NIF here. (buffer, buffer_length)
 }

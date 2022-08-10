@@ -13,9 +13,10 @@
 ///
 use async_trait::async_trait;
 use unify_middleware::AttributeEvent;
+use unify_middleware::Attribute;
 
 #[cfg_attr(test, mockall::automock)]
 #[async_trait]
 pub trait AttributeWatcherTrait {
-    async fn next_change(&mut self) -> AttributeEvent;
+    async fn next_change(&mut self) -> AttributeEvent<Attribute>;
 }

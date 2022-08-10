@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Specification
-   &#160;<span id="projectnumber">ver1_0_RC11_20211006-12-g5cdaf55</span>
+   &#160;<span id="projectnumber">ver1_0_RC11_20211006-19-g32c28c7</span>
    </div>
   </td>
  </tr>
@@ -67,10 +67,10 @@ $(function() {
 <div class="title">Service Discovery </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md122"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md118"></a>
 Concept</h1>
 <p>All MQTT Clients (possibly including Protocol Controllers) must be able to find out the existing devices and their capabilities to provide functionalities. Using MQTT subscriptions as a service discovery, each client can receive information about what they are interested in given that they have a starting point.</p>
-<h2><a class="anchor" id="autotoc_md123"></a>
+<h2><a class="anchor" id="autotoc_md119"></a>
 MQTT Topics</h2>
 <p>Some high-level functionalities will be expected to be present at the MQTT broker from the beginning, as follows:</p>
 <ul>
@@ -79,11 +79,11 @@ MQTT Topics</h2>
 </ul>
 <p>More than this can be appended to the initial list in future versions. An MQTT client MAY subscribe to the 'ucl/#' topic filter and get all published messages by the MQTT broker. However, this is not optimal from a traffic point of view. MQTT Clients SHOULD subscribe to the minimum they need, while still ensuring that they do not miss anything.</p>
 <p>The minimum requirement to discover nodes and their capabilities is a single subscription to <em>ucl/by-unid/#</em>. If the resources are available, the discovery will happen via the publication of new MQTT messages, which will show that devices have been added to the network and their associated capabilities.</p>
-<h2><a class="anchor" id="autotoc_md124"></a>
+<h2><a class="anchor" id="autotoc_md120"></a>
 Discovery of the Protocol Controllers</h2>
 <p>Protocol Controllers will start by advertising themselves as a resource by publishing to <em>ucl/by-unid/&lt;their-unid&gt;/ProtocolController/NetworkManagement</em>. They will be able to issue a payload indicating their current network management state and what they can do to set up a network. For more details, see <a class="el" href="md_doc__chapter03-network-management.html">Network Management</a>.</p>
 <p>An IoT Service can therefore find out more about Protocol Controllers in general by subscribing to <em>ucl/by-unid/+/ProtocolController/+</em>.</p>
-<h2><a class="anchor" id="autotoc_md125"></a>
+<h2><a class="anchor" id="autotoc_md121"></a>
 Discovery Done by Protocol Controllers</h2>
 <p>The Protocol Controllers are devices that are capable to add/remove devices in their PAN and therefore publish about their identity and capabilities. For example, after a network inclusion, a Protocol Controller will perform the necessary node interview, which will allow it to publish about the newly added PAN node. It is expected that the Protocol Controller assign a unique identifier to the node and start by publishing using the assigned UNID.</p>
 <p>All nodes will have a generic state topic, where general information is published about the node. The topic is <em>ucl/by-unid/&lt;unid&gt;/State</em>.</p>
@@ -243,7 +243,7 @@ Discovery Done by Protocol Controllers</h2>
 <p>If none of the attributes in a cluster are writable (i.e., they are all read-only), this command will not have any effect.</p>
 <p>Commands that cannot be translated by the Protocol Controller translator module (e.g., Z-Wave Commands that are not translated into any ZigBee Cluster) will not be advertised as capabilities as it is required that the commands are translated correctly before delivery to the end node.</p>
 <p>Commands will be mapped as topics under each cluster. When an MQTT Client issues a command that will modify one or more attributes in a cluster, the Protocol Controller will publish back the list of attributes and their values after it made sure that the attributes values were correctly changed. For protocols like Z-Wave, it will include the translator to add Supervision Encapsulation or issue a subsequent Get Command in order to verify the state/value of each attribute.</p>
-<h3><a class="anchor" id="autotoc_md126"></a>
+<h3><a class="anchor" id="autotoc_md122"></a>
 NetworkStatus</h3>
 <p>The NetworkStatus property of the UNID state topic JSON object can take the following values.</p>
 <table class="doxtable">
@@ -261,7 +261,7 @@ NetworkStatus</h3>
 <tr>
 <td>"Offline" </td><td>The node has joined the network but cannot be reached by the Protocol Controller within expected delays. The node has a connectivity issue.  </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md127"></a>
+<h2><a class="anchor" id="autotoc_md123"></a>
 List of endpoints available for nodes</h2>
 <p>Protocol Controller SHOULD advertise the list of available endpoints for a given node and themselves under the topics:</p>
 <ul>
@@ -270,9 +270,9 @@ List of endpoints available for nodes</h2>
 </ul>
 <p>IoT Services cannot assume that the Endpoint ID list will always be available.</p>
 <p>IoT Services can also deduce Endpoints ID based on publications made to the application clusters for a each endpoint.</p>
-<h1><a class="anchor" id="autotoc_md128"></a>
+<h1><a class="anchor" id="autotoc_md124"></a>
 MQTT Client Controlling Examples</h1>
-<h2><a class="anchor" id="autotoc_md129"></a>
+<h2><a class="anchor" id="autotoc_md125"></a>
 OnOff Cluster Control</h2>
 <p>An IoT Service interested only in OnOff Cluster control will subscribe to the following two topic filters:</p><ul>
 <li><em>ucl/by-unid/+/+/OnOff/Attributes/#</em>.</li>
@@ -284,7 +284,7 @@ OnOff Cluster Control</h2>
 <p>Publish Topic: <em>ucl/by-unid/98146584/ep10/OnOff/Attributes/On/Reported</em><br  />
  Payload: <code>{"value": true}</code> </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md130"></a>
+<h2><a class="anchor" id="autotoc_md126"></a>
 Delay in Command Execution</h2>
 <p>If an IoT Service wants to display accurate state information, it needs to subscribe to the <em>ucl/by-unid/+/State</em> topic. This topic contains information that may affect the way they can expect to interact with the end device, such as the <em>MaximumCommandDelay</em> parameter. This value indicates how long they have to expect a publish message back showing the effect of their command in the worst case.</p>
 <p>The Maximum Command Delay is identical for all endpoints under an UNID. If a Protocol Controller has several endpoints that have a different response delay, this value MUST advertise the worst case scenario.</p>
@@ -309,7 +309,7 @@ Delay in Command Execution</h2>
 </ol>
 </blockquote>
 <p>A more detailed example of this mechanism is shown in the diagrams in <a class="el" href="md_doc__chapter02-_z_c_l-in-uic.html">Chapter 2 - ZCL in Unify</a>.</p>
-<h2><a class="anchor" id="autotoc_md131"></a>
+<h2><a class="anchor" id="autotoc_md127"></a>
 Unresponsive Node</h2>
 <p>A Protocol Controller will publish using the node state topic when it finds out that a node is failing and may have left the network. It may not constantly monitor nodes' link and it may figure out an unexpected delay when an MQTT Client publishes to the following:</p>
 <blockquote class="doxtable">
@@ -345,7 +345,7 @@ Unresponsive Node</h2>
 </blockquote>
 <p>Doing this will allow MQTT clients to know that the resource is no longer available and SHOULD be deleted from their node list. Subsequent subscribers will not receive the retained cluster states and states because of the zero byte payload.</p>
 <p>If a node has dynamic capabilities and a cluster server is removed, the same procedure must take place and the cluster Attribute and SupportedCommands topics MUST be published as an empty retained payload. In this case, the State topic will stay and the node MUST still be shown as available and operational by the MQTT clients.</p>
-<h2><a class="anchor" id="autotoc_md132"></a>
+<h2><a class="anchor" id="autotoc_md128"></a>
 Protocol Controller is Unable to Service PAN Nodes</h2>
 <p>A Protocol Controller may be carrying operations that will restrict sending commands to the end devices. This could for example be rebooting or performing a firmware update. When this happens, the Protocol Controller MUST publish on the state of every UNID it can no longer service, for example if it has four nodes:</p>
 <blockquote class="doxtable">
@@ -393,7 +393,7 @@ Protocol Controller is Unable to Service PAN Nodes</h2>
 </ol>
 </blockquote>
 <p>This status indicates that any publication made by MQTT clients for this PAN node will be ignored. MQTT Clients have to wait until the node is online again.</p>
-<h1><a class="anchor" id="autotoc_md133"></a>
+<h1><a class="anchor" id="autotoc_md129"></a>
 Group Discovery</h1>
 <p>The MQTT Topic ucl/by-unid/# is the only one that provides a "per end device" granularity. The same end nodes will also be represented by conceptual groupings.</p>
 <p>For example:</p>
@@ -402,7 +402,7 @@ Group Discovery</h1>
 <li><em>ucl/by-type/DoorLock</em>: All Door Lock devices</li>
 <li><em>ucl/by-group/GroupID</em>: Some devices that the user has grouped together for simultaneous actuation</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md134"></a>
+<h2><a class="anchor" id="autotoc_md130"></a>
 By Location</h2>
 <p>The location setting can be modified for each individual node using a dedicated cluster named NameAndLocation. This cluster contains two string attributes, "Name" and "Location". This data can be associated with a node, but it will be identical for each and every endpoint and it is not possible to set a different name and/or location to the different endpoints.</p>
 <p>A ResourceDirectory MQTT Client will be in charge of aggregating and re-distributing this data. Protocol Controllers will not be aware of nodes names and location and will not use it for anything. The ResourceDirectory MQTT Client will listen to <em>ucl/by-unid/+/State</em> to get notifications of new nodes in the network. When a new node is added, it starts by assigning a default name a location, publish on a cluster for the node, and advertises it by publishing in the following two topics:</p>
@@ -440,11 +440,11 @@ By Location</h2>
  </p>
 </blockquote>
 <p>When a node is removed from the network, the ResourceDirectory MQTT Client will update the location by publishing without the retain flag at <em>ucl/by-location/&lt;location&gt;/&lt;unid&gt;</em> and <em>ucl/by-unid/&lt;unid&gt;/NameAndLocation</em> with an empty payload without the retain flag.</p>
-<h2><a class="anchor" id="autotoc_md135"></a>
+<h2><a class="anchor" id="autotoc_md131"></a>
 By Type</h2>
 <p>The by-type namespace is postponed for now, because few PHYs use it. It is always possible to iterate over the by-unid namespace and filter by Cluster or derive the types manually.</p>
 <p>The type is based on the ZCL Device Type. The ZCL device ID type is read-only and cannot be changed. In ZigBee, it can be read using the Simple_Desc_Req for each endpoint. The Simple_Desc_rsp contains a 2-byte field named "Application device identifier". This group should work in a similar fashion as the by-location group, except that it is read-only and clients cannot change the device type of a given node.</p>
-<h2><a class="anchor" id="autotoc_md136"></a>
+<h2><a class="anchor" id="autotoc_md132"></a>
 By Group</h2>
 <p>The ZCL also allows to group nodes with actual user-defined groups. These groups are available under the Groups Cluster (0x0004). The by-group namespace has the advantage of being both editable and addressable directly.</p>
 <p>If an IoT Service wants to control a set of nodes that belong to the same group, it can issue the commands directly to the GroupId topic.</p>
@@ -482,7 +482,7 @@ By Group</h2>
 <p>The JSON-Schema for this topic MUST be identical to the Name attribute defined the <a class="el" href="md_doc__chapter02-_z_c_l-in-uic.html">Group Cluster additional attributes</a>.</p>
 <p>The name attribute is pushed individually by IoT Service to Protocol Controllers that forward the information to the PAN nodes. There is a risk that PAN nodes are assigned as part of the same group (e.g., Group 3) but with different names.</p>
 <p>A Group Manager component MUST ensure that GroupName is updated and uniform for all nodes that are part of the same group.</p>
-<h3><a class="anchor" id="autotoc_md137"></a>
+<h3><a class="anchor" id="autotoc_md133"></a>
 Protocol Controller and Groups Topics</h3>
 <p>Protocol Controllers will only listen to incoming commands for groups and dispatch them to individual nodes.</p>
 <p>When the group cluster is used to add groups at nodes/enpoints for an end-node, a Protocol Controller MUST subscribe to group command topic, for example using one of the following filters:</p>
@@ -497,7 +497,7 @@ Protocol Controller and Groups Topics</h3>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_21.png" />
 </div>
-<h3><a class="anchor" id="autotoc_md138"></a>
+<h3><a class="anchor" id="autotoc_md134"></a>
 Group Manager Helper Component</h3>
 <p>Groups MAY span several Protocol Controllers, so the capabilities of a group will not be advertised by Protocol Controllers themselves.</p>
 <p>A special MQTT Client named the "Group Manager" can alleviate the aggregation logic for other MQTT Clients such as IoT Service that want to make use of the group functionalities.</p>
@@ -516,7 +516,7 @@ Group Manager Helper Component</h3>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_23.png" />
 </div>
-<h3><a class="anchor" id="autotoc_md139"></a>
+<h3><a class="anchor" id="autotoc_md135"></a>
 IoT Services and Groups</h3>
 <p>The IoT services have the ability to define groups using the application level group cluster. <a class="el" href="md_doc__chapter02-_z_c_l-in-uic.html">See Chapter 2 - ZCL in Unify</a>.</p>
 <p>With the help of the Group Manager component, the IoT services will get notified of the groups capabilities after each update.</p>

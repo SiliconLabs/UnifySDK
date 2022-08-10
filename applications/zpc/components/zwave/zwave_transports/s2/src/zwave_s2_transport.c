@@ -55,23 +55,24 @@ struct S2 *s2_ctx;
 
 typedef enum { SINGLECAST, MULTICAST } zwave_s2_current_transmission_type_t;
 
-// Z-Wave TX settings
-static on_zwave_tx_send_data_complete_t s2_send_callback;
-static zwave_tx_session_id_t zwave_tx_parent_session_id = NULL;
-static bool zwave_tx_valid_parent_session_id            = false;
-static zwave_s2_current_transmission_type_t current_transmission_type
-  = SINGLECAST;
-// FIXME: For now we make a local copy of the last sent frame,
-// as Z-Wave TX does not guarantee that it will stay available.
-// (actually in most case it is moved somewhere else when S2 tries to use it)
-// Ideally we have TX to make a pointer available for us.
-uint8_t last_frame_data[ZWAVE_MAX_FRAME_SIZE];
-uint16_t last_frame_data_length = 0;
+// Session data for send data call
+typedef struct s2_transport_session_state {
+  on_zwave_tx_send_data_complete_t s2_send_callback;
+  void *s2_send_user;
+  /* Holds the TX_STATUS_TYPE of ZW_SendDataXX() callback for the most recent S2 frame */
+  zwapi_tx_report_t s2_send_tx_status;
+  clock_time_t transmit_start_time;
+  zwave_s2_current_transmission_type_t current_transmission_type;
+  zwave_tx_session_id_t parent_session_id;
+  bool valid_parent_session_id;
+  uint8_t last_frame_data[ZWAVE_MAX_FRAME_SIZE];
+  uint16_t last_frame_data_length;
+} s2_transport_session_state_t;
 
-/* Holds the TX_STATUS_TYPE of ZW_SendDataXX() callback for the most recent S2 frame */
-static zwapi_tx_report_t s2_send_tx_status;
-static void *s2_send_user;
-static clock_time_t transmit_start_time;
+// Z-Wave TX settings
+static s2_transport_session_state_t state = {};
+
+// Secure NIF contents
 static uint8_t secure_nif[ZWAVE_MAX_FRAME_SIZE];
 static uint8_t secure_nif_length;
 
@@ -169,10 +170,10 @@ static void send_frame_callback(uint8_t status,
 {
   (void)user;
   if (tx_info) {
-    s2_send_tx_status = *tx_info;
+    state.s2_send_tx_status = *tx_info;
   }
-  uint16_t tx_time = clock_time() - transmit_start_time;
-  if (current_transmission_type == SINGLECAST) {
+  uint16_t tx_time = (uint16_t)(clock_time() - state.transmit_start_time);
+  if (state.current_transmission_type == SINGLECAST) {
     tx_time += NONCE_REP_TIME;
   }
   S2_send_frame_done_notify(s2_ctx,
@@ -256,15 +257,15 @@ void S2_send_done_event(struct S2 *ctxt, s2_tx_status_t status)
   on_zwave_tx_send_data_complete_t cb_save;
 
   S2_stop_timeout(ctxt);
-  cb_save          = s2_send_callback;
-  s2_send_callback = NULL;
+  cb_save                = state.s2_send_callback;
+  state.s2_send_callback = NULL;
   if (cb_save) {
-    cb_save(s2zw_codes[status], &s2_send_tx_status, s2_send_user);
+    cb_save(s2zw_codes[status], &state.s2_send_tx_status, state.s2_send_user);
   }
 
   // Forget about the parent frame if it triggered the transmission
-  zwave_tx_valid_parent_session_id = false;
-  memset(&s2_send_tx_status, 0, sizeof s2_send_tx_status);
+  state.valid_parent_session_id = false;
+  memset(&state.s2_send_tx_status, 0, sizeof(state.s2_send_tx_status));
 }
 
 void S2_msg_received_event(struct S2 *ctxt,
@@ -276,14 +277,14 @@ void S2_msg_received_event(struct S2 *ctxt,
   zwave_controller_connection_info_t info = {};
   zwave_rx_receive_options_t options      = {};
 
-  info.encapsulation       = class_to_encapsulation(src->class_id);
-  info.local.node_id       = src->l_node;
-  info.local.endpoint_id   = 0;
+  info.encapsulation      = class_to_encapsulation(src->class_id);
+  info.local.node_id      = src->l_node;
+  info.local.endpoint_id  = 0;
   info.local.is_multicast = (src->rx_options & S2_RXOPTION_MULTICAST) != 0;
 
-  info.remote.node_id      = src->r_node;
-  info.remote.endpoint_id  = 0;
-  
+  info.remote.node_id     = src->r_node;
+  info.remote.endpoint_id = 0;
+
   options.rssi         = src->zw_rx_RSSIval;
   options.status_flags = src->zw_rx_status;
 
@@ -309,9 +310,9 @@ uint8_t S2_send_frame(struct S2 *ctxt,
   options.discard_timeout_ms  = 0;
 
   // If the call initiated from outside S2, the parent frame options will take precedence.
-  options.valid_parent_session_id = zwave_tx_valid_parent_session_id;
-  options.parent_session_id       = zwave_tx_parent_session_id;
-  if (zwave_tx_valid_parent_session_id == true) {
+  options.transport.valid_parent_session_id = state.valid_parent_session_id;
+  options.transport.parent_session_id       = state.parent_session_id;
+  if (state.valid_parent_session_id == true) {
     options.number_of_responses = 0;
   }
 
@@ -320,7 +321,7 @@ uint8_t S2_send_frame(struct S2 *ctxt,
     options.number_of_responses = 1;
   }
 
-  transmit_start_time = clock_time();
+  state.transmit_start_time = clock_time();
   return SL_STATUS_OK
          == zwave_tx_send_data(&info,
                                len,
@@ -369,11 +370,11 @@ uint8_t S2_send_frame_multi(struct S2 *ctxt,
   info.remote.is_multicast = true;
 
   // Set the Z-Wave TX Options
-  options.group_id                = conn->r_node;
-  options.valid_parent_session_id = zwave_tx_valid_parent_session_id;
-  options.parent_session_id       = zwave_tx_parent_session_id;
+  options.transport.group_id = (zwave_multicast_group_id_t)conn->r_node;
+  options.transport.valid_parent_session_id = state.valid_parent_session_id;
+  options.transport.parent_session_id       = state.parent_session_id;
 
-  transmit_start_time = clock_time();
+  state.transmit_start_time = clock_time();
   return SL_STATUS_OK
          == zwave_tx_send_data(&info,
                                len,
@@ -409,37 +410,37 @@ sl_status_t
   }
 
   // Can we handle the frame size?
-  if (data_length > sizeof(last_frame_data)) {
+  if (data_length > ZWAVE_MAX_FRAME_SIZE) {
     sl_log_error(LOG_TAG,
                  "Too large frame requested for transmitting. Discarding\n");
     return SL_STATUS_WOULD_OVERFLOW;
   }
 
-  cb_save   = s2_send_callback;
-  user_save = s2_send_user;
+  cb_save   = state.s2_send_callback;
+  user_save = state.s2_send_user;
 
   // Call for sending data comes from outside S2, so we use the parent frame functionality
-  zwave_tx_parent_session_id       = parent_session_id;
-  zwave_tx_valid_parent_session_id = true;
+  state.parent_session_id       = parent_session_id;
+  state.valid_parent_session_id = true;
 
   // save the frame data
-  last_frame_data_length = data_length;
-  memcpy(last_frame_data, cmd_data, last_frame_data_length);
+  state.last_frame_data_length = data_length;
+  memcpy(state.last_frame_data, cmd_data, state.last_frame_data_length);
 
-  s2_send_callback = on_send_complete;
-  s2_send_user     = user;
+  state.s2_send_callback = on_send_complete;
+  state.s2_send_user     = user;
 
   if (connection->remote.is_multicast == false) {
     // Singlecast message.
-    current_transmission_type   = SINGLECAST;
-    s2_connection.r_node        = connection->remote.node_id;
+    state.current_transmission_type = SINGLECAST;
+    s2_connection.r_node            = connection->remote.node_id;
     s2_connection.zw_tx_options = 0;  // Z-Wave TX Queue takes the decision here
 
     // Is it a Singlecast follow-up ?
-    if (tx_options->group_id != ZWAVE_TX_INVALID_GROUP) {
+    if (tx_options->transport.group_id != ZWAVE_TX_INVALID_GROUP) {
       s2_connection.tx_options |= S2_TXOPTION_SINGLECAST_FOLLOWUP;
-      s2_connection.mgrp_group_id = tx_options->group_id;
-      if (tx_options->is_first_follow_up == true) {
+      s2_connection.mgrp_group_id = tx_options->transport.group_id;
+      if (tx_options->transport.is_first_follow_up == true) {
         s2_connection.tx_options |= S2_TXOPTION_FIRST_SINGLECAST_FOLLOWUP;
       }
 
@@ -450,12 +451,12 @@ sl_status_t
             s2_ctx,
             &s2_connection,
             get_s2_keyset_from_node(connection->remote.node_id),
-            last_frame_data,
-            last_frame_data_length)) {
+            state.last_frame_data,
+            state.last_frame_data_length)) {
         return SL_STATUS_OK;
       } else {
-        s2_send_callback = cb_save;
-        s2_send_user     = user_save;
+        state.s2_send_callback = cb_save;
+        state.s2_send_user     = user_save;
         return SL_STATUS_BUSY;
       }
     }
@@ -465,29 +466,29 @@ sl_status_t
           s2_ctx,
           &s2_connection,
           get_s2_keyset_from_node(connection->remote.node_id),
-          last_frame_data,
-          last_frame_data_length)) {
+          state.last_frame_data,
+          state.last_frame_data_length)) {
       return SL_STATUS_OK;
     } else {
-      s2_send_callback = cb_save;
-      s2_send_user     = user_save;
+      state.s2_send_callback = cb_save;
+      state.s2_send_user     = user_save;
       return SL_STATUS_BUSY;
     }
   } else {
     // Multicast message.
-    s2_connection.r_node      = connection->remote.multicast_group;
-    current_transmission_type = MULTICAST;
+    s2_connection.r_node            = connection->remote.multicast_group;
+    state.current_transmission_type = MULTICAST;
 
     if (S2_send_data_multicast_with_keyset(
           s2_ctx,
           &s2_connection,
           get_s2_keyset_from_group(connection->remote.multicast_group),
-          last_frame_data,
-          last_frame_data_length)) {
+          state.last_frame_data,
+          state.last_frame_data_length)) {
       return SL_STATUS_OK;
     } else {
-      s2_send_callback = cb_save;
-      s2_send_user     = user_save;
+      state.s2_send_callback = cb_save;
+      state.s2_send_user     = user_save;
       return SL_STATUS_BUSY;
     }
   }
@@ -551,12 +552,12 @@ sl_status_t zwave_s2_set_secure_nif(const uint8_t *nif, uint8_t nif_length)
 
 void zwave_s2_transport_init()
 {
-  s2_send_callback                 = NULL;
-  zwave_tx_parent_session_id       = NULL;
-  zwave_tx_valid_parent_session_id = false;
-  current_transmission_type        = SINGLECAST;
-  memset(last_frame_data, 0, sizeof(last_frame_data));
-  last_frame_data_length = 0;
+  state.s2_send_callback        = NULL;
+  state.parent_session_id       = NULL;
+  state.valid_parent_session_id = false;
+  memset(state.last_frame_data, 0, sizeof(state.last_frame_data));
+  state.last_frame_data_length    = 0;
+  state.current_transmission_type = SINGLECAST;
 }
 
 void S2_resynchronization_event(node_t remote_node,
@@ -582,13 +583,13 @@ void zwave_s2_on_on_multicast_group_deleted(zwave_multicast_group_id_t group_id)
 
 sl_status_t zwave_s2_abort_send_data(zwave_tx_session_id_t session_id)
 {
-  if (zwave_tx_parent_session_id == session_id) {
+  if (state.parent_session_id == session_id) {
     sl_log_debug(LOG_TAG,
                  "Aborting S2 send session for frame id=%p",
                  session_id);
-    zwave_tx_parent_session_id       = NULL;
-    zwave_tx_valid_parent_session_id = false;
-    send_frame_callback(TRANSMIT_COMPLETE_FAIL, &s2_send_tx_status, NULL);
+    state.parent_session_id       = NULL;
+    state.valid_parent_session_id = false;
+    send_frame_callback(TRANSMIT_COMPLETE_FAIL, &state.s2_send_tx_status, NULL);
     return SL_STATUS_OK;
   }
   return SL_STATUS_NOT_FOUND;

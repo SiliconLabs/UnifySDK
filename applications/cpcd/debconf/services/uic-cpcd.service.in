@@ -1,0 +1,15 @@
+[Unit]
+Description=UIC CPC Daemon
+
+[Service]
+ExecStartPre=-${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/cpcd --bind ecdh --key /var/lib/uic/cpcd-binding-key
+ExecStart=${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}/cpcd -c ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_SYSCONFDIR}/cpcd.conf --key /var/lib/uic/cpcd-binding-key
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+KillMode=process
+User=uic
+Group=uic
+LimitMEMLOCK=infinity
+
+[Install]
+WantedBy=multi-user.target

@@ -15,7 +15,6 @@
 #define ZWAVE_COMMAND_CLASS_SWITCH_MULTILEVEL_H
 
 #include "sl_status.h"
-#include "attribute_store.h"
 
 #ifdef __cplusplus
 extern "C" {

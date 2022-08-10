@@ -22,9 +22,7 @@
 #ifndef ZWAVE_KEYSET_DEFINITIONS_H
 #define ZWAVE_KEYSET_DEFINITIONS_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <stdint.h>
 
 #define ZWAVE_CONTROLLER_S0_KEY                 0x80
 #define ZWAVE_CONTROLLER_S2_UNAUTHENTICATED_KEY 0x01
@@ -32,6 +30,10 @@ extern "C" {
 #define ZWAVE_CONTROLLER_S2_ACCESS_KEY          0x04
 
 typedef uint8_t zwave_keyset_t;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifdef __cplusplus
 }

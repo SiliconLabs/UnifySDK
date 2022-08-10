@@ -16,7 +16,7 @@
 
 extern "C" {
 
-// Shared UIC includes
+// Shared Unify includes
 #include <unity.h>
 #include <contiki_test_helper.h>
 

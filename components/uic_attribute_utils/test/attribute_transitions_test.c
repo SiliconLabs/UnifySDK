@@ -13,7 +13,7 @@
 #include "unity.h"
 #include "attribute_transitions.h"
 
-// UIC includes
+// Unify includes
 #include "datastore.h"
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
@@ -53,7 +53,7 @@ void test_attribute_transitions_test()
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
                     attribute_start_transition(value_node, 1000));
 
-  uint32_t value = 0;
+  int32_t value = 0;
   attribute_store_set_reported(value_node, &value, sizeof(value));
 
   // Desired is still undefined, it won't work.
@@ -71,19 +71,13 @@ void test_attribute_transitions_test()
 
   // Wait for 2 seconds. We expect to have the value at 20 now.
   contiki_test_helper_run(2000);
-  attribute_store_read_value(value_node,
-                             REPORTED_ATTRIBUTE,
-                             &value,
-                             sizeof(value));
+  attribute_store_get_reported(value_node, &value, sizeof(value));
   TEST_ASSERT_EQUAL(20, value);
 
   // Wait for 0.5 seconds. We expect to have the value still at 20 due to the
   // refresh step being larger.
   contiki_test_helper_run(500);
-  attribute_store_read_value(value_node,
-                             REPORTED_ATTRIBUTE,
-                             &value,
-                             sizeof(value));
+  attribute_store_get_reported(value_node, &value, sizeof(value));
   TEST_ASSERT_EQUAL(20, value);
 
   // Now restart the transition. 20 -> 100 in 4 seconds
@@ -92,10 +86,7 @@ void test_attribute_transitions_test()
 
   // Wait for 2 seconds. We expect to have the value at 60 now.
   contiki_test_helper_run(2000);
-  attribute_store_read_value(value_node,
-                             REPORTED_ATTRIBUTE,
-                             &value,
-                             sizeof(value));
+  attribute_store_get_reported(value_node, &value, sizeof(value));
   TEST_ASSERT_EQUAL(60, value);
 
   // Test the is_transition_ongoing part:
@@ -111,10 +102,7 @@ void test_attribute_transitions_test()
 
   // Pass the rest of the transition
   contiki_test_helper_run(5000);
-  attribute_store_read_value(value_node,
-                             REPORTED_ATTRIBUTE,
-                             &value,
-                             sizeof(value));
+  attribute_store_get_reported(value_node, &value, sizeof(value));
   TEST_ASSERT_EQUAL(100, value);
   TEST_ASSERT_EQUAL(0, attribute_transition_get_remaining_duration(value_node));
   TEST_ASSERT_FALSE(is_attribute_transition_ongoing(value_node));
@@ -123,8 +111,8 @@ void test_attribute_transitions_test()
 void test_attribute_transitions_teardown_during_transition()
 {
   // Start with a transition on undefined values:
-  value_node     = attribute_store_add_node(0x02, attribute_store_get_root());
-  uint32_t value = 0;
+  value_node    = attribute_store_add_node(0x02, attribute_store_get_root());
+  int32_t value = 0;
   attribute_store_set_reported(value_node, &value, sizeof(value));
   value = 100;
   attribute_store_set_desired(value_node, &value, sizeof(value));
@@ -145,4 +133,29 @@ void test_attribute_transitions_teardown_during_transition()
 
   TEST_ASSERT_FALSE(
     attribute_store_is_value_defined(value_node, REPORTED_ATTRIBUTE));
+}
+
+void test_attribute_transitions_node_deleted_during_transition()
+{
+  // Start with a transition on undefined values:
+  value_node    = attribute_store_add_node(0x02, attribute_store_get_root());
+  int32_t value = 0;
+  attribute_store_set_reported(value_node, &value, sizeof(value));
+  value = 100;
+  attribute_store_set_desired(value_node, &value, sizeof(value));
+
+  // It should accept a transition 0->100 in 10000 ms
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_start_transition(value_node, 10000));
+  contiki_test_helper_run(0);  // Let it start the refresh timer
+
+  // Now delete:
+  attribute_store_delete_node(value_node);
+
+  TEST_ASSERT_FALSE(is_attribute_transition_ongoing(value_node));
+
+  // No more update should happen.
+  contiki_test_helper_run(5000);
+
+  TEST_ASSERT_FALSE(is_attribute_transition_ongoing(value_node));
 }

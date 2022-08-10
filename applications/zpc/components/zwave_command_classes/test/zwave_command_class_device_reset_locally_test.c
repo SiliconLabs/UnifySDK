@@ -24,7 +24,7 @@
 #include "zwave_controller_callbacks_mock.h"
 #include "zwave_command_class_association_send_mock.h"
 
-// UIC includes
+// Unify includes
 #include "attribute_store.h"
 #include "attribute_store_fixt.h"
 #include "datastore.h"

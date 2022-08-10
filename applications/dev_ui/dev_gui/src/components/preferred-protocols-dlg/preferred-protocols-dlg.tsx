@@ -1,7 +1,7 @@
+import { Tooltip } from '@mui/material';
 import * as React from 'react';
 import { Button, Form, ListGroup, Modal } from 'react-bootstrap';
 import * as IoIcons from 'react-icons/io';
-import Tooltip from '@material-ui/core/Tooltip';
 import { PreferredProtocolsDlgProps, PreferredProtocolsDlgState, Protocol } from './preferred-protocols-dlg-types';
 import './preferred-protocols.css'
 

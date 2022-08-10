@@ -23,6 +23,7 @@
         "myargs",
         "mystr",
         "mytag",
+        "nlohmann",
         "nocase",
         "Posix",
         "QEMU",

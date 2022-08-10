@@ -1,5 +1,5 @@
 {
-  "name": "UIC ZigPC Attribute Management",
+  "name": "Unify ZigPC Attribute Management",
   "version": "uic-zigpc-attrmgmt-v1",
   "override": "../../../../../components/uic_dotdot/zap/addon-override.js",
   "helpers": ["../../zcl_util/zap/addon-helper.js"],

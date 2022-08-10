@@ -11,7 +11,6 @@
  *
  *****************************************************************************/
 
-
 /**
  * @defgroup zwave_controller_types Z-Wave Controller Types
  * @ingroup zwave_controller_component
@@ -20,14 +19,15 @@
  * @{
  */
 
-
 #ifndef ZWAVE_CONTROLLER_TYPES_H
 #define ZWAVE_CONTROLLER_TYPES_H
 
 #include <stdbool.h>
 #include <stdint.h>
+
 // Z-Wave definitions
 #include "zwave_node_id_definitions.h"
+#include "zwave_generic_types.h"
 #include "zwave_rf_region.h"
 
 #ifdef __cplusplus
@@ -43,15 +43,12 @@ extern "C" {
 
 #define ZWAVE_DSK_LENGTH                                   16
 #define ZWAVE_NODE_MASK_LENGTH                             29
-#define ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH 150
+#define ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH 64
 
 typedef uint8_t zwave_dsk_t[ZWAVE_DSK_LENGTH];
 typedef zwave_nodemask_t zwave_node_list_t;
 typedef uint8_t zwave_multicast_group_id_t;
 typedef zwave_rf_region_t zwave_controller_region_t;
-typedef uint8_t zwave_endpoint_id_t;
-typedef uint16_t zwave_command_class_t;
-typedef uint8_t zwave_command_t;
 
 /**
  * @brief Structure holding a Z-Wave node info frame.
@@ -60,29 +57,31 @@ typedef uint8_t zwave_command_t;
 typedef struct {
   /// This represents the first byte of the NIF, also known as "capability"
   /// It is composed of several subfields that can be read using the
-  /// ZWAVE_NODE_INFO_LISTENING_PROTOCOL_* masks. For a complete field
-  /// description, refer to @ref application_cc_spec, section Node Information Frame.
+  /// ZWAVE_NODE_INFO_LISTENING_PROTOCOL_* masks.  For a complete field
+  /// description, refer to the Z-Wave Specifications
+  /// https://sdomembers.z-wavealliance.org/
   uint8_t listening_protocol;
 
   /// This represents the first byte of the NIF, also known as "security"
   /// It is composed of several subfields that can be read using the
   /// ZWAVE_NODE_INFO_OPTIONAL_PROTOCOL_* masks. For a complete field
-  /// description, refer to @ref application_cc_spec, section Node Information Frame.
+  /// description, refer to the Z-Wave Specifications
+  /// https://sdomembers.z-wavealliance.org/
   uint8_t optional_protocol;
 
   /// This field indicates the Basic Device Class of the actual node.
-  /// The Basic Device Classes are listed in @ref device_class_spec.
-  /// This byte is omitted by End Nodes and will be set to 0x00 in this case.
+  /// The Basic Device Classes are listed in the Z-Wave Specifications
+  /// https://sdomembers.z-wavealliance.org/
   uint8_t basic_device_class;
 
   /// This field indicates the Generic Device Class of the actual node.
-  /// The Generic Device Classes are listed in @ref device_class_spec for
-  /// Z-Wave and @ref device_type_spec_v2, @ref device_type_spec for Z-Wave Plus
+  /// The Generic Device Classes are listed in the Z-Wave Specifications
+  /// https://sdomembers.z-wavealliance.org/
   uint8_t generic_device_class;
 
   /// This field indicates the Specific Device Class of the actual node.
-  /// The Specific Device Classes are listed in @ref device_class_spec for
-  /// Z-Wave and @ref device_type_spec, @ref device_type_spec_v2 for Z-Wave Plus
+  /// The Specific Device Classes are listed in the Z-Wave Specifications
+  /// https://sdomembers.z-wavealliance.org/
   uint8_t specific_device_class;
 
   /// Length of the command class list

@@ -11,11 +11,18 @@ def zbSCENES_NAME_SUPPORT  0x00050004
 
 scope 0 {
 
+// Existence links (left hand side gets deleted if right hand side does)
+e'zbSCENE_COUNT = e'zwNUMBER_OF_SCENES
+e'zbCURRENT_SCENE = e'zwACTIVE_SCENE
+e'zbSCENE_VALID = e'zwACTIVE_SCENE
+e'zbCURRENT_GROUP = e'zwACTIVE_SCENE
+e'zbSCENES_NAME_SUPPORT = e'zwACTIVE_SCENE
+
 // Linking reported attributes zwave -> zigbee
 r'zbSCENE_COUNT = r'zwNUMBER_OF_SCENES
 
 r'zbCURRENT_SCENE =
-  if (r'zwACTIVE_SCENE > 0) (r'zwACTIVE_SCENE-1)
+  if (r'zwACTIVE_SCENE > 0) (r'zwACTIVE_SCENE - 1)
   undefined
 
 r'zbSCENE_VALID = r'zwACTIVE_SCENE > 0

@@ -20,8 +20,11 @@ mockall= "0.11.*"
 
 unify_log_sys = { path = "../../components/uic_rust/unify_log_sys" }
 unify_config_sys = { path = "../../components/uic_rust/unify_config_sys" }
-unify_middleware = {path = "../../components/uic_rust/unify_middleware" }
+unify_mqtt_sys = {path = "../../components/uic_rust/unify_mqtt_sys" }
 unify_sl_status_sys = {path = "../../components/uic_rust/unify_sl_status_sys" }
 
 [dev-dependencies]
 mockall= "0.11.*"
+
+[build-dependencies]
+unify_build_utils = { path = "../../components/uic_rust/unify_build_utils" }

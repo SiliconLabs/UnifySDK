@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portable runtime environment &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/portable_runtime/readme_user.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Unify Host SDK User guide" href="../doc/unify_readme_user.html" />
+    <link rel="prev" title="Getting Started with the Unify Host SDK" href="../doc/getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../doc/getting_started.html">Getting Started with the Unify Host SDK</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Portable runtime environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unify-portable-runtime-environment">Unify Portable Runtime Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start">Quick start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-options">Advanced options</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#z-wave-rf-region">Z-Wave RF Region</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multiple-devices-connected">Multiple devices connected</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../doc/getting_started.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doc/getting_started.html#how-to-install-packages">How to install packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doc/getting_started.html#unify-framework">Unify Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../doc/getting_started.html#multiprotocol-setup">Multiprotocol Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="portable-runtime-environment">
+<h1>Portable runtime environment<a class="headerlink" href="#portable-runtime-environment" title="Permalink to this heading"></a></h1>
+<section id="unify-portable-runtime-environment">
+<h2>Unify Portable Runtime Environment<a class="headerlink" href="#unify-portable-runtime-environment" title="Permalink to this heading"></a></h2>
+<p><strong>Disclaimer</strong>: Currently the Unify Portable Runtime environment only supports the <code class="docutils literal notranslate"><span class="pre">ZPC</span></code>.</p>
+<p><strong>Prerequisites</strong>:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
+<li><p>Docker version &gt; 20.10.12 installed.</p></li>
+<li><p>docker-compose version &gt; 2.5.1</p></li>
+<li><p>x86-64/amd64 CPU architecture.</p></li>
+</ol>
+<p>The Unify Portable Runtime Environment strives to get Unify running as fast as
+possible on your desktop. The portable runtime comes as a binary executable CLI,
+together with Unify Debian packages, a docker-compose file and a tool which can
+map a Silicon Labs devices into a Linux docker environment on Windows, MacOS and
+Linux.</p>
+</section>
+<section id="quick-start">
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p><strong>WARNING</strong>: If you start up the portable docker environment on a host already
+running Unify Framework applications this will cause unexpected behavior.</p>
+<p>Setting up the portable runtime environment should be as easy as downloading
+portable_runtime_&lt;OS&gt;.zip file from the
+<a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">Unify’s GitHub release page</a>
+and unzipping it.</p>
+<p>After unzipping make sure you only have a single <a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a>
+connected to your desktop and run the binary <code class="docutils literal notranslate"><span class="pre">portable_runtime_cli</span></code>.
+This should setup the whole Unify Framework ecosystem.
+An example of such can be seen below on a Windows machine.</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">PS </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">someuser</span><span class="p">\</span><span class="n">Downloads</span><span class="p">\</span><span class="n">portable_runtime_windows</span><span class="p">&gt;</span> <span class="p">.\</span><span class="n">unify_portable_cli</span><span class="p">.</span><span class="n">exe</span>
+<span class="n">Attempting</span> <span class="n">to</span> <span class="n">automap</span> <span class="n">the</span> <span class="n">connected</span> <span class="n">device</span><span class="p">...</span>
+<span class="n">Mapping</span> <span class="n">device</span> <span class="n">with</span> <span class="n">Silink</span><span class="p">...</span>
+<span class="n">Verifying</span> <span class="n">Docker</span> <span class="n">installation</span>
+<span class="n">Building</span> <span class="n">Unify</span> <span class="n">Portable</span> <span class="n">Runtime</span><span class="p">...</span>
+<span class="n">Building</span> <span class="n">docker</span> <span class="n">image</span> <span class="n">with</span> <span class="n">unify_1</span><span class="p">.</span><span class="n">2</span><span class="p">.</span><span class="n">0_x86_64</span><span class="p">.</span><span class="n">zip</span>
+<span class="n">Unify</span> <span class="n">is</span> <span class="n">running</span><span class="p">!</span>
+<span class="n">Please</span> <span class="n">visit</span> <span class="n">http</span><span class="p">://</span><span class="n">localhost</span><span class="p">:</span><span class="n">3080</span> <span class="k">in</span> <span class="n">your</span> <span class="n">browser</span><span class="p">.</span>
+<span class="n">Change</span> <span class="n">the</span> <span class="s1">&#39;Host&#39;</span> <span class="n">field</span> <span class="n">to</span> <span class="s1">&#39;mqtt-broker&#39;</span> <span class="n">and</span> <span class="n">press</span> <span class="s1">&#39;Connect&#39;</span><span class="p">.</span>
+
+<span class="n">Press</span> <span class="n">Ctrl-C</span> <span class="n">to</span> <span class="n">stop</span><span class="p">...</span>
+</pre></div>
+</div>
+<p>After starting the Portable Runtime, one can test it and control it with
+the developer GUI on <code class="docutils literal notranslate"><span class="pre">http://localhost:3080</span></code>. Details on the developer GUI can
+be found in the <a class="reference internal" href="../applications/dev_ui/dev_gui/readme_user.html"><span class="doc std std-doc">Dev GUI User’s Guide</span></a>.</p>
+<p><strong>IMPORTANT</strong>: To connect the DevGUI to the correct MQTT broker, change
+<code class="docutils literal notranslate"><span class="pre">localhost</span></code> to <code class="docutils literal notranslate"><span class="pre">mqtt-broker</span></code>.</p>
+</section>
+<section id="advanced-options">
+<h2>Advanced options<a class="headerlink" href="#advanced-options" title="Permalink to this heading"></a></h2>
+<p>To start up the environment, run the <em>unify_portable_cli</em> binary file.
+With only one device connected, you can just run the <em>unify_portable_cli</em> application - for multiple connected devices, see below.
+Once it is running, it will wait for you to press ‘<em>CTRL-C</em>’ to end it.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe</span>
+</pre></div>
+</div>
+<section id="z-wave-rf-region">
+<h3>Z-Wave RF Region<a class="headerlink" href="#z-wave-rf-region" title="Permalink to this heading"></a></h3>
+<p>The Z-Wave controller will default to running the <code class="docutils literal notranslate"><span class="pre">EU</span></code> region setting.
+A commandline switch is available to choose a different region from the region list EU, US, US_LR, ANZ, HK, MA, IN, IS, RU, CN, JP, KR.
+Here is an example on how to start it up in the US region.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe --zwave-rf-region US</span>
+</pre></div>
+</div>
+</section>
+<section id="multiple-devices-connected">
+<h3>Multiple devices connected<a class="headerlink" href="#multiple-devices-connected" title="Permalink to this heading"></a></h3>
+<p>Having multiple Thunderboard or WSTK boards connected via USB, you will have to specify which of the devices to use.
+This can be done by providing the path to a serial device, a serial number or an IP address of the Z-Wave device which can run the <em>ZPC</em> Z-Wave controller.</p>
+<p>Failing to specify a serial number, a list of all the connected devices will be printed.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe</span>
+<span class="go">Multiple devices detected and no device string was given.</span>
+<span class="go">Please provide the device serial number of the controller device eg. &#39;-d 440262195&#39;.</span>
+<span class="go">Here is a list of connected devices:</span>
+<span class="go">deviceCount=2</span>
+<span class="go">device(440262195) {</span>
+<span class="go">  serialNumber=440262195</span>
+<span class="go">  adapterType=JLink</span>
+<span class="go">  adapterLabel=J-Link Silicon Labs</span>
+<span class="go">  adapterId=2603A</span>
+<span class="go">  adapterName=BRD2603A Rev. A00</span>
+<span class="go">  adapterDescription=Unknown board</span>
+<span class="go">  ....</span>
+<span class="go">}</span>
+<span class="go">device(440247860) {</span>
+<span class="go">  serialNumber=440247860</span>
+<span class="go">  adapterType=JLink</span>
+<span class="go">  adapterLabel=J-Link Silicon Labs</span>
+<span class="go">  adapterId=4002A</span>
+<span class="go">  adapterName=BRD4002A Rev. A04</span>
+<span class="go">  adapterDescription=Wireless Starter Kit Mainboard</span>
+<span class="go">  ...</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<section id="serial-no">
+<h4>Serial no<a class="headerlink" href="#serial-no" title="Permalink to this heading"></a></h4>
+<p>Specifying the device’s serial no. that you would like to use, can be done like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe --serial-no 440262195</span>
+</pre></div>
+</div>
+<p>Be aware that running it like this on Linux, requires libqt5network5 to be installed.
+For Debian based distro, it can be installed like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>sudo apt install -y --no-install-recommends libqt5network5
+</pre></div>
+</div>
+</section>
+<section id="ip-address">
+<h4>IP address<a class="headerlink" href="#ip-address" title="Permalink to this heading"></a></h4>
+<p>If you have eg. a WSTK board connected to the same network, you can specify it’s IP like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\portable_runtime_windows&gt; unify_portable_cli.exe --ip-address 10.0.0.12</span>
+</pre></div>
+</div>
+</section>
+<section id="direct-device">
+<h4>Direct device<a class="headerlink" href="#direct-device" title="Permalink to this heading"></a></h4>
+<p>This method is only supported on Linux.
+By specifying the device path, you can map that device into the portable runtime.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">user@portable_runtime_environment:~$ </span>unify_portable_cli --device /dev/ttyUSB0.
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<p>In case you run into any issues, two log files are produced.
+The two files, <code class="docutils literal notranslate"><span class="pre">docker.log</span></code> and <code class="docutils literal notranslate"><span class="pre">silink.log</span></code>, can be used during support.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

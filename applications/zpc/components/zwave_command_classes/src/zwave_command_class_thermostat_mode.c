@@ -13,13 +13,12 @@
 
 // Includes from this component
 #include "zwave_command_class_thermostat_mode.h"
-#include "zwave_command_class_thermostat_mode_attributes.h"
 #include "zwave_command_classes_utils.h"
 
 // Includes from other components
 #include "sl_log.h"
 #include "sl_status.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "ZW_classcmd.h"
 #include "zwave_command_handler.h"
 #include "zpc_attribute_store_network_helper.h"
@@ -27,12 +26,17 @@
 #include "attribute_store_helper.h"
 #include "attribute_store.h"
 #include "attribute_resolver.h"
+#include "dotdot_mqtt_generated_commands.h"
 
 // Generic includes
 #include <assert.h>
 
 // Log define
 #define LOG_TAG "zwave_command_class_thermostat_mode"
+
+// Mode field index in the Thermostat Mode Set
+#define SET_MODE_INDEX 2
+#define SET_MODE_MASK  0x1F
 
 ///////////////////////////////////////////////////////////////////////////////
 // Attribute Callback functions
@@ -74,14 +78,6 @@ static void zwave_command_class_thermostat_mode_on_version_attribute_update(
 sl_status_t zwave_command_class_thermostat_mode_supported_get(
   attribute_store_node_t node, uint8_t *frame, uint16_t *frame_len)
 {
-  // Check that we have the right type of attribute.
-  assert(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_MODES
-         == attribute_store_get_node_type(node));
-
-  // Default frame length in case of error
-  *frame_len = 0;
-
-  // We will just always use 4 bytes, precision 2.
   ZW_THERMOSTAT_MODE_SUPPORTED_GET_FRAME *supported_get_frame
     = (ZW_THERMOSTAT_MODE_SUPPORTED_GET_FRAME *)frame;
 
@@ -96,14 +92,6 @@ sl_status_t zwave_command_class_thermostat_mode_get(attribute_store_node_t node,
                                                     uint8_t *frame,
                                                     uint16_t *frame_len)
 {
-  // Check that we have the right type of attribute.
-  assert(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE
-         == attribute_store_get_node_type(node));
-
-  // Default frame length in case of error
-  *frame_len = 0;
-
-  // We will just always use 4 bytes, precision 2.
   ZW_THERMOSTAT_MODE_GET_FRAME *get_frame
     = (ZW_THERMOSTAT_MODE_GET_FRAME *)frame;
 
@@ -118,14 +106,6 @@ sl_status_t zwave_command_class_thermostat_mode_set(attribute_store_node_t node,
                                                     uint8_t *frame,
                                                     uint16_t *frame_len)
 {
-  // Check that we have the right type of attribute.
-  assert(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE
-         == attribute_store_get_node_type(node));
-
-  // Default frame length in case of error
-  *frame_len = 0;
-
-  // We will just always use 4 bytes, precision 2.
   ZW_THERMOSTAT_MODE_SET_FRAME *set_frame
     = (ZW_THERMOSTAT_MODE_SET_FRAME *)frame;
 
@@ -142,6 +122,53 @@ sl_status_t zwave_command_class_thermostat_mode_set(attribute_store_node_t node,
 ///////////////////////////////////////////////////////////////////////////////
 // Command Handler functions
 ///////////////////////////////////////////////////////////////////////////////
+static sl_status_t zwave_command_class_thermostat_mode_handle_set(
+  const zwave_controller_connection_info_t *connection_info,
+  const uint8_t *frame_data,
+  uint16_t frame_length)
+{
+  // We expect to have at least 1 byte of value.
+  if (frame_length <= SET_MODE_INDEX) {
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
+  uint8_t received_mode = frame_data[SET_MODE_INDEX] & SET_MODE_MASK;
+  if (received_mode == 0) {
+    received_mode = 0;
+  } else if (received_mode == 1) {
+    received_mode = 4;
+  } else if (received_mode == 2) {
+    received_mode = 3;
+  } else if (received_mode == 3) {
+    received_mode = 1;
+  } else if (received_mode == 6) {
+    received_mode = 7;
+  } else if (received_mode == 8) {
+    received_mode = 8;
+  } else {
+    // Unknown mode, default on auto
+    received_mode = 1;
+  }
+
+  // Map the mode to a ZCL mode:
+  uic_mqtt_dotdot_thermostat_state_t attribute_values
+    = {.system_mode = received_mode};
+  const uic_mqtt_dotdot_thermostat_updated_state_t attribute_list
+    = {.system_mode = true};
+
+  unid_t node_unid;
+  zwave_unid_from_node_id(connection_info->remote.node_id, node_unid);
+  dotdot_endpoint_id_t endpoint_id = connection_info->remote.endpoint_id;
+
+  uic_mqtt_dotdot_thermostat_publish_generated_write_attributes_command(
+    node_unid,
+    endpoint_id,
+    attribute_values,
+    attribute_list);
+
+  return SL_STATUS_NOT_SUPPORTED;
+}
+
 static sl_status_t zwave_command_class_thermostat_mode_handle_supported_report(
   const zwave_controller_connection_info_t *connection_info,
   const uint8_t *frame_data,
@@ -156,10 +183,10 @@ static sl_status_t zwave_command_class_thermostat_mode_handle_supported_report(
     = zwave_command_class_get_endpoint_node(connection_info);
 
   attribute_store_node_t supported_modes_node
-    = attribute_store_get_node_child_by_type(
+    = attribute_store_get_first_child_by_type(
       endpoint_node,
-      ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_MODES,
-      0);
+      ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SUPPORTED_MODES);
+      
   uint8_t bitmask_length
     = frame_length - THERMOSTAT_MODE_SUPPORTED_REPORT_BITMASK_INDEX;
 
@@ -184,32 +211,16 @@ static sl_status_t zwave_command_class_thermostat_mode_handle_report(
   // Just retrieve the data and save it.
   attribute_store_node_t endpoint_node
     = zwave_command_class_get_endpoint_node(connection_info);
-  unid_t unid;
-  zwave_endpoint_id_t endpoint_id;
-  if (SL_STATUS_OK
-      != attribute_store_network_helper_get_unid_endpoint_from_node(
-        endpoint_node,
-        unid,
-        &endpoint_id)) {
-    sl_log_warning(LOG_TAG,
-                   "Failed to find unid and endpoint from node %d",
-                   endpoint_node);
 
-    return SL_STATUS_FAIL;
-  }
-
-  command_class_thermostat_mode_set_mode(
-    unid,
-    endpoint_id,
-    REPORTED_ATTRIBUTE,
-    frame_data[THERMOSTAT_MODE_REPORT_MODE_INDEX]);
-
-  // We have a set function for this attribute, so we also align the desired here.
-  command_class_thermostat_mode_set_mode(
-    unid,
-    endpoint_id,
-    DESIRED_ATTRIBUTE,
-    frame_data[THERMOSTAT_MODE_REPORT_MODE_INDEX]);
+  int32_t current_mode = frame_data[THERMOSTAT_MODE_REPORT_MODE_INDEX] & 0x1F;
+  attribute_store_set_child_reported(endpoint_node,
+                                     ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE,
+                                     &current_mode,
+                                     sizeof(current_mode));
+  attribute_store_set_child_desired(endpoint_node,
+                                    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_MODE,
+                                    &current_mode,
+                                    sizeof(current_mode));
 
   return SL_STATUS_OK;
 }
@@ -226,6 +237,13 @@ sl_status_t zwave_command_class_thermostat_mode_control_handler(
   assert(frame_data[COMMAND_CLASS_INDEX] == COMMAND_CLASS_THERMOSTAT_MODE_V3);
 
   switch (frame_data[COMMAND_INDEX]) {
+    case THERMOSTAT_MODE_SET_V3:
+      // Note: This command is not supported, but we want to indicate
+      // to the application that we received it.
+      return zwave_command_class_thermostat_mode_handle_set(connection_info,
+                                                            frame_data,
+                                                            frame_length);
+
     case THERMOSTAT_MODE_REPORT_V3:
       return zwave_command_class_thermostat_mode_handle_report(connection_info,
                                                                frame_data,

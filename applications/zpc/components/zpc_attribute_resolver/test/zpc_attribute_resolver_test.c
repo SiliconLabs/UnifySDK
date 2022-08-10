@@ -17,7 +17,7 @@
 #include "zpc_attribute_resolver_test.hpp"
 #include "unity.h"
 
-// UIC Mock includes
+// Unify Mock includes
 #include "attribute_store_mock.h"
 #include "attribute_store_helper_mock.h"
 #include "attribute_resolver_mock.h"
@@ -49,7 +49,7 @@ static uint8_t custom_handler_calls                                     = 0;
 static void *received_user                                              = NULL;
 
 // Stub functions.
-// Saving registration/init data to the UIC Attribute resolver.
+// Saving registration/init data to the Unify Attribute resolver.
 static void
   register_set_rule_listener_Stub(resolver_on_set_rule_registered_t function,
                                   int cmock_num_calls)

@@ -13,7 +13,7 @@
 #include "network_monitor.h"
 #include "network_monitor_span_persistence.h"
 
-// UIC Includes
+// Unify Includes
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "sl_log.h"
@@ -61,9 +61,8 @@ void network_monitor_store_span_table_data()
       = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
     attribute_store_node_t span_node
-      = attribute_store_get_node_child_by_type(node_id_node,
-                                               ATTRIBUTE_S2_SPAN_ENTRY,
-                                               0);
+      = attribute_store_get_first_child_by_type(node_id_node,
+                                               ATTRIBUTE_S2_SPAN_ENTRY);
 
     if (span_node == ATTRIBUTE_STORE_INVALID_NODE) {
       span_node
@@ -96,9 +95,8 @@ void network_monitor_restore_span_table_data()
       = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
     attribute_store_node_t span_node
-      = attribute_store_get_node_child_by_type(node_id_node,
-                                               ATTRIBUTE_S2_SPAN_ENTRY,
-                                               0);
+      = attribute_store_get_first_child_by_type(node_id_node,
+                                               ATTRIBUTE_S2_SPAN_ENTRY);
 
     span_entry_t span_data = {};
     sl_status_t span_status
@@ -141,9 +139,8 @@ static void store_group_membership(zwave_multicast_group_id_t group_id)
       = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
     attribute_store_node_t group_list_node
-      = attribute_store_get_node_child_by_type(node_id_node,
-                                               ATTRIBUTE_MULTICAST_GROUP_LIST,
-                                               0);
+      = attribute_store_get_first_child_by_type(node_id_node,
+                                               ATTRIBUTE_MULTICAST_GROUP_LIST);
 
     if (group_list_node == ATTRIBUTE_STORE_INVALID_NODE) {
       group_list_node = attribute_store_add_node(ATTRIBUTE_MULTICAST_GROUP_LIST,
@@ -185,9 +182,8 @@ void network_monitor_store_mpan_table_data()
     = attribute_store_network_helper_get_zwave_node_id_node(zpc_node_id);
 
   attribute_store_node_t mpan_table_node
-    = attribute_store_get_node_child_by_type(zpc_node_id_node,
-                                             ATTRIBUTE_S2_MPAN_TABLE,
-                                             0);
+    = attribute_store_get_first_child_by_type(zpc_node_id_node,
+                                             ATTRIBUTE_S2_MPAN_TABLE);
   if (mpan_table_node == ATTRIBUTE_STORE_INVALID_NODE) {
     mpan_table_node
       = attribute_store_add_node(ATTRIBUTE_S2_MPAN_TABLE, zpc_node_id_node);
@@ -230,9 +226,8 @@ void network_monitor_restore_mpan_table_data()
     = attribute_store_network_helper_get_zwave_node_id_node(zpc_node_id);
 
   attribute_store_node_t mpan_table_node
-    = attribute_store_get_node_child_by_type(zpc_node_id_node,
-                                             ATTRIBUTE_S2_MPAN_TABLE,
-                                             0);
+    = attribute_store_get_first_child_by_type(zpc_node_id_node,
+                                             ATTRIBUTE_S2_MPAN_TABLE);
   // No MPAN table, we don't do anything
   if (mpan_table_node == ATTRIBUTE_STORE_INVALID_NODE) {
     sl_log_debug(LOG_TAG, "No MPAN table saved, skipping MPAN table reload");
@@ -277,9 +272,8 @@ void network_monitor_restore_mpan_table_data()
       = attribute_store_network_helper_get_zwave_node_id_node(node_id);
 
     attribute_store_node_t group_list_node
-      = attribute_store_get_node_child_by_type(node_id_node,
-                                               ATTRIBUTE_MULTICAST_GROUP_LIST,
-                                               0);
+      = attribute_store_get_first_child_by_type(node_id_node,
+                                               ATTRIBUTE_MULTICAST_GROUP_LIST);
 
     size_t group_entry_index = 0;
     attribute_store_node_t group_node

@@ -12,7 +12,7 @@
  *****************************************************************************/
 #include "zpc_dotdot_mqtt_group_dispatch.h"
 
-// UIC Includes
+// Unify Includes
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "dotdot_mqtt.h"

@@ -16,7 +16,7 @@
 // Standard library
 #include <stdbool.h>
 
-// UIC components
+// Unify components
 #include "sl_status.h"
 
 #ifdef __cplusplus

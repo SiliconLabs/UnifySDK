@@ -15,3 +15,9 @@ DEPENDS
   zwave_tx_groups_mock
   zwave_s2_mock
 )
+
+# Test with the real attribute store
+target_add_unittest(zpc_stdin
+  SOURCES zpc_stdin_attribute_store_log_test.c
+  NAME zpc_stdin_attribute_store_log_test
+)

@@ -30,7 +30,7 @@
 #ifndef ZWAVE_COMMAND_CLASS_ASSOCIATION_SEND_H
 #define ZWAVE_COMMAND_CLASS_ASSOCIATION_SEND_H
 
-#include "zwave_command_class_association_internals.h"
+#include "zwave_command_class_association_types.h"
 
 #include "sl_status.h"
 #include "zwave_tx.h"
@@ -98,4 +98,4 @@ sl_status_t
 #endif
 
 #endif  //ZWAVE_COMMAND_CLASS_ASSOCIATION_SEND_H
-/** @} end zwave_command_class_association_send */
+        /** @} end zwave_command_class_association_send */

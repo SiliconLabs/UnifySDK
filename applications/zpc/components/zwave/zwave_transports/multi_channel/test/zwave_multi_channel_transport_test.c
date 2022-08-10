@@ -43,7 +43,7 @@ sl_status_t zwave_controller_transport_register_stub(
 {
   TEST_ASSERT_EQUAL(COMMAND_CLASS_MULTI_CHANNEL_V4, transport->command_class);
   TEST_ASSERT_EQUAL(MULTI_CHANNEL_VERSION, transport->version);
-  TEST_ASSERT_EQUAL(6, transport->priority);
+  TEST_ASSERT_EQUAL(5, transport->priority);
 
   // Save the transport for our tests
   multi_channel_transport = *transport;
@@ -313,9 +313,9 @@ void test_encapsulation_happy_case()
   // Verify that our decapsulation worked
   TEST_ASSERT_EQUAL(0, last_received_connection_info.remote.endpoint_id);
   TEST_ASSERT_EQUAL(0, last_received_connection_info.local.endpoint_id);
-  TEST_ASSERT_TRUE(last_received_tx_options.valid_parent_session_id);
+  TEST_ASSERT_TRUE(last_received_tx_options.transport.valid_parent_session_id);
   TEST_ASSERT_EQUAL_PTR(parent_session_id,
-                        last_received_tx_options.parent_session_id);
+                        last_received_tx_options.transport.parent_session_id);
   const uint8_t expected_frame_data[] = {COMMAND_CLASS_MULTI_CHANNEL_V4,
                                          MULTI_CHANNEL_CMD_ENCAP_V4,
                                          0x01,
@@ -386,9 +386,9 @@ void test_encapsulation_multi_channel_capability_get()
   // Verify that our decapsulation worked
   TEST_ASSERT_EQUAL(0, last_received_connection_info.remote.endpoint_id);
   TEST_ASSERT_EQUAL(0, last_received_connection_info.local.endpoint_id);
-  TEST_ASSERT_TRUE(last_received_tx_options.valid_parent_session_id);
+  TEST_ASSERT_TRUE(last_received_tx_options.transport.valid_parent_session_id);
   TEST_ASSERT_EQUAL_PTR(parent_session_id,
-                        last_received_tx_options.parent_session_id);
+                        last_received_tx_options.transport.parent_session_id);
   const uint8_t expected_frame_data[]
     = {COMMAND_CLASS_MULTI_CHANNEL_V4,
        MULTI_CHANNEL_CMD_ENCAP_V4,
@@ -439,9 +439,9 @@ void test_encapsulation_multi_channel_aggregated_member_get()
   // Verify that our decapsulation worked
   TEST_ASSERT_EQUAL(0, last_received_connection_info.remote.endpoint_id);
   TEST_ASSERT_EQUAL(0, last_received_connection_info.local.endpoint_id);
-  TEST_ASSERT_TRUE(last_received_tx_options.valid_parent_session_id);
+  TEST_ASSERT_TRUE(last_received_tx_options.transport.valid_parent_session_id);
   TEST_ASSERT_EQUAL_PTR(parent_session_id,
-                        last_received_tx_options.parent_session_id);
+                        last_received_tx_options.transport.parent_session_id);
   const uint8_t expected_frame_data[]
     = {COMMAND_CLASS_MULTI_CHANNEL_V4,
        MULTI_CHANNEL_CMD_ENCAP_V4,
@@ -540,9 +540,9 @@ void test_encapsulation_session_max_out()
   // Verify that our decapsulation worked
   TEST_ASSERT_EQUAL(0, last_received_connection_info.remote.endpoint_id);
   TEST_ASSERT_EQUAL(0, last_received_connection_info.local.endpoint_id);
-  TEST_ASSERT_TRUE(last_received_tx_options.valid_parent_session_id);
+  TEST_ASSERT_TRUE(last_received_tx_options.transport.valid_parent_session_id);
   TEST_ASSERT_EQUAL_PTR(parent_session_id,
-                        last_received_tx_options.parent_session_id);
+                        last_received_tx_options.transport.parent_session_id);
   const uint8_t expected_frame_data[] = {COMMAND_CLASS_MULTI_CHANNEL_V4,
                                          MULTI_CHANNEL_CMD_ENCAP_V4,
                                          0x01,
@@ -609,9 +609,9 @@ void test_abort_send_data()
   // Verify that our decapsulation worked
   TEST_ASSERT_EQUAL(0, last_received_connection_info.remote.endpoint_id);
   TEST_ASSERT_EQUAL(0, last_received_connection_info.local.endpoint_id);
-  TEST_ASSERT_TRUE(last_received_tx_options.valid_parent_session_id);
+  TEST_ASSERT_TRUE(last_received_tx_options.transport.valid_parent_session_id);
   TEST_ASSERT_EQUAL_PTR(parent_session_id,
-                        last_received_tx_options.parent_session_id);
+                        last_received_tx_options.transport.parent_session_id);
   const uint8_t expected_frame_data[] = {COMMAND_CLASS_MULTI_CHANNEL_V4,
                                          MULTI_CHANNEL_CMD_ENCAP_V4,
                                          0x01,

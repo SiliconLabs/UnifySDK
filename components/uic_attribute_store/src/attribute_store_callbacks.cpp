@@ -54,11 +54,14 @@ std::map<attribute_store_type_t,
          std::set<attribute_store_node_changed_callback_t>>
   type_callbacks;
 
-// 4. For modification of a value/state (reported/desired) for a given node type
+// 4. Attribute Deletion callbacks
+std::set<attribute_store_node_delete_callback_t> delete_callbacks;
+
+// 5. For modification of a value/state (reported/desired) for a given node type
 std::map<attribute_store_value_callback_setting_t,
          std::set<attribute_store_node_changed_callback_t>>
   value_callbacks;
-}  // Private variables namespace
+}  // namespace
 
 ///////////////////////////////////////////////////////////////////////////////
 // Private functions, shared in the component
@@ -85,6 +88,9 @@ void attribute_store_invoke_callbacks(
                                          type,
                                          value_state,
                                          change);
+  if (change == ATTRIBUTE_DELETED) {
+    attribute_store_invoke_delete_callbacks(updated_node);
+  }
 }
 
 void attribute_store_invoke_generic_callbacks(
@@ -132,11 +138,21 @@ void attribute_store_invoke_value_callbacks(
   }
 }
 
+void attribute_store_invoke_delete_callbacks(
+  attribute_store_node_t deleted_node)
+{
+  // Make the delete callbacks:
+  for (auto callback_function: delete_callbacks) {
+    callback_function(deleted_node);
+  }
+}
+
 sl_status_t attribute_store_callbacks_init(void)
 {
   // Remove all registered callbacks
   generic_callbacks.clear();
   type_callbacks.clear();
+  delete_callbacks.clear();
   value_callbacks.clear();
   touch_generic_callbacks.clear();
 
@@ -148,6 +164,7 @@ int attribute_store_callbacks_teardown(void)
   // Remove all registered callbacks
   generic_callbacks.clear();
   type_callbacks.clear();
+  delete_callbacks.clear();
   value_callbacks.clear();
   touch_generic_callbacks.clear();
 
@@ -167,6 +184,19 @@ sl_status_t attribute_store_register_touch_notification_callback(
     return SL_STATUS_FAIL;
   }
   touch_generic_callbacks.insert(callback_function);
+  return SL_STATUS_OK;
+}
+
+sl_status_t attribute_store_register_delete_callback(
+  attribute_store_node_delete_callback_t callback_function)
+{
+  if (callback_function == nullptr) {
+    sl_log_warning(LOG_TAG,
+                   "Attempt to register a nullptr delete callback "
+                   "function. Discarding.");
+    return SL_STATUS_FAIL;
+  }
+  delete_callbacks.insert(callback_function);
   return SL_STATUS_OK;
 }
 

@@ -15,6 +15,6 @@
 #define SCRIPT_DEFINES_H
 
 #define IDENTIFY_SCRIPT_PATH \
-  "@CMAKE_INSTALL_PREFIX@/zpc/node_identify_rpi4_led.sh"
+  "@CMAKE_INSTALL_PREFIX@/share/uic/node_identify_rpi4_led.sh"
 
 #endif

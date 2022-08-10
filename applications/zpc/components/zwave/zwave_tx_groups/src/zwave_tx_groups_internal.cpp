@@ -73,7 +73,7 @@ sl_status_t
   uint16_t common_nodes_count = 0;
   uint16_t total_list_size    = 0;
 
-  //TBD: is there something better than an iteration here ?
+  // loop through all NodeIDs and check if they are in the group/List
   for (zwave_node_id_t n = ZW_MIN_NODE_ID; n <= ZW_LR_MAX_NODE_ID; n++) {
     bool node_in_group = ZW_IS_NODE_IN_MASK(n, group_nodes);
     bool node_in_list  = ZW_IS_NODE_IN_MASK(n, list);

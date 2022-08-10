@@ -10,7 +10,7 @@
  * sections of the MSLA applicable to Source Code.
  */
 
-// UIC Components
+// Unify Components
 #include "process.h"
 #include "unity.h"
 
@@ -30,7 +30,7 @@ void suiteTeardown() {}
 void test_get_prompt()
 {
   const char *prompt = get_prompt_string();
-  TEST_ASSERT_EQUAL_STRING(prompt, "UIC> ");
+  TEST_ASSERT_EQUAL_STRING(prompt, "Unify> ");
 }
 
 void test_handle_help()

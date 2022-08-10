@@ -28,18 +28,12 @@
 
 #include <string>
 
-// Shared UIC includes
+// Shared Unify includes
 #include <ota.hpp>
 #include <sl_status.h>
 
 // ZigPC includes
 #include <zcl_definitions.h>
-
-/*
- * @brief ZIGPC_DEFAULT_OTA_PATH
- * The default path where to save OTA images
- */
-static const char ZIGPC_DEFAULT_OTA_PATH[] = "./ota-files/";
 
 /*
  * @brief ZIGPC_DEFAULT_OTA_CACHE_SIZE  
@@ -81,7 +75,7 @@ void on_ota_zigbee_upgrade_complete(void *data);
  * Callback for unsubscribing ota image listeners
  * on a device remove event
  */
-void on_remove_unsubscribe_ota_listeners( void *data);
+void on_remove_unsubscribe_ota_listeners(void *data);
 
 /**
  * @brief zigpc_ota_zigbee_image_available 

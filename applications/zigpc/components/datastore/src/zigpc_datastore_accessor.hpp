@@ -24,7 +24,7 @@
 
 #include <sstream>
 
-// UIC shared includes
+// Unify shared includes
 #include <sl_status.h>
 #include <sl_log.h>
 #include <attribute_store.h>
@@ -484,10 +484,9 @@ template<typename list_entry_t> class StoreListAccessor
       // Ensure there is no existing array under the parent by checking if
       // first element exists.
       attribute_store_node_t child_node
-        = attribute_store_get_node_child_by_type(
+        = attribute_store_get_first_child_by_type(
           list_parent,
-          this->list_entry.get_node_type(),
-          0);
+          this->list_entry.get_node_type());
       if (child_node != ATTRIBUTE_STORE_INVALID_NODE) {
         status = SL_STATUS_ALREADY_EXISTS;
       }

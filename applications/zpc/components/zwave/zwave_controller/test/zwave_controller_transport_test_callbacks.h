@@ -49,17 +49,19 @@ sl_status_t send_data2(const zwave_controller_connection_info_t *connection,
                        void *user,
                        zwave_tx_session_id_t session);
 
+sl_status_t abort_send_data2(zwave_tx_session_id_t session);
+
 sl_status_t
   on_frame_received2(const zwave_controller_connection_info_t *connection_info,
                      const zwave_rx_receive_options_t *rx_options,
                      const uint8_t *frame_data,
                      uint16_t frame_length);
 
-void
-  on_frame_received3(const zwave_controller_connection_info_t *connection_info,
-                     const zwave_rx_receive_options_t *rx_options,
-                     const uint8_t *frame_data,
-                     uint16_t frame_length);
+void on_frame_received3(
+  const zwave_controller_connection_info_t *connection_info,
+  const zwave_rx_receive_options_t *rx_options,
+  const uint8_t *frame_data,
+  uint16_t frame_length);
 
 #ifdef __cplusplus
 }

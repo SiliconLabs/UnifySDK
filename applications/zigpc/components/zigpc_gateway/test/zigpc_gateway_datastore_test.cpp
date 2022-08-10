@@ -19,7 +19,7 @@
 
 extern "C" {
 
-// Shared UIC includes
+// Shared Unify includes
 #include "datastore_mock.h"
 
 // ZigPC includes

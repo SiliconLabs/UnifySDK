@@ -34,7 +34,7 @@
 #ifndef ATTRIBUTE_TIMEOUTS_H
 #define ATTRIBUTE_TIMEOUTS_H
 
-// Includes from other UIC components
+// Includes from other Unify components
 #include "sl_status.h"
 #include "attribute_store.h"
 
@@ -95,14 +95,14 @@ sl_status_t attribute_timeout_cancel_callback(
   attribute_store_node_t node, attribute_timeout_callback_t callback_function);
 
 /**
- * @brief Initializes the UIC attribute timeouts component
+ * @brief Initializes the Unify attribute timeouts component
  *
  * @returns SL_STATUS_OK on success, any other value otherwise
  */
 sl_status_t attribute_timeouts_init();
 
 /**
- * @brief Teardown the UIC attribute timeouts component
+ * @brief Teardown the Unify attribute timeouts component
  * @returns 0 on success.
  */
 int attribute_timeouts_teardown();

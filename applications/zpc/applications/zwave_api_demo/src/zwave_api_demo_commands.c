@@ -82,28 +82,26 @@ static sl_status_t start_add_node()
 static sl_status_t start_learn_mode_inclusion()
 {
   sl_log_info(LOG_TAG, "Starting learn mode inclusion (direct range).\n");
-  return zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DIRECT_RANGE,
+  return zwapi_set_learn_mode(LEARN_MODE_DIRECT_RANGE,
                               zwapi_demo_learn_mode_callback);
 }
 
 static sl_status_t start_nwi_learn_mode()
 {
   sl_log_info(LOG_TAG, "Starting NWI learn mode.\n");
-  return zwapi_set_learn_mode(ZW_SET_LEARN_MODE_NWI,
-                              zwapi_demo_learn_mode_callback);
+  return zwapi_set_learn_mode(LEARN_MODE_NWI, zwapi_demo_learn_mode_callback);
 }
 
 static sl_status_t start_nwe_learn_mode()
 {
   sl_log_info(LOG_TAG, "Starting NWE learn mode.\n");
-  return zwapi_set_learn_mode(ZW_SET_LEARN_MODE_NWE,
-                              zwapi_demo_learn_mode_callback);
+  return zwapi_set_learn_mode(LEARN_MODE_NWE, zwapi_demo_learn_mode_callback);
 }
 
 static sl_status_t stop_learn_mode()
 {
   sl_log_info(LOG_TAG, "Stopping learn mode.\n");
-  return zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DISABLE, NULL);
+  return zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
 }
 
 static sl_status_t stop_add_node()

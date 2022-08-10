@@ -23,7 +23,7 @@
 // Includes from other components
 #include "zwave_controller.h"
 #include "zwave_controller_utils.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "attribute_store.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_attribute_store_network_helper.h"
@@ -56,7 +56,7 @@ static void create_secure_nifs_if_missing(attribute_store_node_t node_id_node)
 
   // If S0 or S2 keys have been granted, then we create this secure NIF
   // We don't really care if the S0/S2 CCs are present in the non-secure NIF.
-  zwave_keyset_t supporting_node_keys;
+  zwave_keyset_t supporting_node_keys = 0;
   zwave_get_node_granted_keys(node_id, &supporting_node_keys);
   zwave_controller_encapsulation_scheme_t supporting_node_scheme
     = zwave_controller_get_highest_encapsulation(supporting_node_keys);
@@ -197,7 +197,7 @@ static sl_status_t resolve_secure_node_info(attribute_store_node_t node,
     return SL_STATUS_FAIL;
   }
 
-  zwave_keyset_t supporting_node_keys;
+  zwave_keyset_t supporting_node_keys = 0;
   zwave_get_node_granted_keys(node_id, &supporting_node_keys);
 
   zwave_controller_encapsulation_scheme_t supporting_node_scheme
@@ -235,9 +235,8 @@ static void on_node_information_update(zwave_node_id_t node_id,
     = attribute_store_network_helper_get_endpoint_node(unid, 0);
 
   attribute_store_node_t non_secure_nif_node
-    = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                             ATTRIBUTE_ZWAVE_NIF,
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_NIF);
 
   // Pack the NIF data into a nif array:
   uint8_t nif[ZWAVE_CONTROLLER_MAXIMUM_COMMAND_CLASS_LIST_LENGTH];
@@ -261,10 +260,7 @@ static void on_node_information_update(zwave_node_id_t node_id,
     nif_length += 1;
   }
 
-  attribute_store_set_node_attribute_value(non_secure_nif_node,
-                                           REPORTED_ATTRIBUTE,
-                                           nif,
-                                           nif_length);
+  attribute_store_set_reported(non_secure_nif_node, nif, nif_length);
 
   // We just wrote down a new NIF.
   // Verify if it is the first time that we detect a node supports S2/S0:
@@ -272,6 +268,37 @@ static void on_node_information_update(zwave_node_id_t node_id,
       == true) {
     zwave_security_validation_set_node_as_s2_capable(node_id);
   }
+
+  // Save the additional data: (Protocol listening / Optional protocol)
+  attribute_store_node_t node_id_node
+    = attribute_store_get_first_parent_with_type(endpoint_id_node,
+                                                 ATTRIBUTE_NODE_ID);
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING,
+                                     &node_info->listening_protocol,
+                                     sizeof(node_info->listening_protocol));
+
+  // Find the optional protocol byte from the NIF
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL,
+                                     &node_info->optional_protocol,
+                                     sizeof(node_info->optional_protocol));
+
+  // Save all the device type information.
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE_ZWAVE_BASIC_DEVICE_CLASS,
+                                     &node_info->basic_device_class,
+                                     sizeof(node_info->basic_device_class));
+
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE_ZWAVE_GENERIC_DEVICE_CLASS,
+                                     &node_info->generic_device_class,
+                                     sizeof(node_info->generic_device_class));
+
+  attribute_store_set_child_reported(endpoint_id_node,
+                                     ATTRIBUTE_ZWAVE_SPECIFIC_DEVICE_CLASS,
+                                     &node_info->specific_device_class,
+                                     sizeof(node_info->specific_device_class));
 }
 
 ///////////////////////////////////////////////////////////////////////////////

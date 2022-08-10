@@ -25,8 +25,8 @@
  * It supports initializing other components through setup fixture functions,
  * see @ref uic_fixt_setup_t.
  * These functions are either added to the @ref uic_fixt_setup_steps array,
- * if the component is part of the UIC library, or supplied the @ref uic_main
- * function, if it resides outside the UIC library
+ * if the component is part of the Unify library, or supplied the @ref uic_main
+ * function, if it resides outside the Unify library
  *
  * If a component is implemented with a Contiki process, that process
  * shall be started in the component setup fixture using @ref process_start
@@ -39,7 +39,7 @@
  *
  *  @ingroup uic_fixt_int
  *
- * These functions are executed in order before entering the UIC main loop.
+ * These functions are executed in order before entering the Unify main loop.
  */
 typedef struct uic_fixt_setup_step {
   /** Initializer function */
@@ -64,8 +64,12 @@ typedef struct uic_fixt_shutdown_step {
   const char *description;
 } uic_fixt_shutdown_step_t;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
- * @brief Run UIC/Contiki Main loop
+ * @brief Run Unify/Contiki Main loop
  *
  * This function will initialize Contiki OS and loop until the program exits.
  * It has following stages:
@@ -87,4 +91,7 @@ int uic_main(const uic_fixt_setup_step_t *fixt_setup,
              char **argv,
              const char *version);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

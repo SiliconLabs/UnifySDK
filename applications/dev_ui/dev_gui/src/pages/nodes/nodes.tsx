@@ -4,7 +4,6 @@ import * as GrIcons from 'react-icons/gr';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
 import * as MdIcons from 'react-icons/md';
-import Tooltip from '@material-ui/core/Tooltip';
 import { DeviceTypes, NodesProps, NodesState } from './nodes-types';
 import { NodeTypesList } from '../../cluster-types/cluster-types';
 import { ClusterViewOverrides } from '../base-clusters/cluster-view-overrides';
@@ -12,12 +11,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './nodes.css';
 import ClusterTypeTooltip from '../../components/cluster-type-tooltip/cluster-type-tooltip';
-import { MenuItem, TextField } from '@material-ui/core';
 import EditableAttribute from '../../components/editable-attribute/editable-attribute';
 import { Link } from 'react-router-dom';
-//import { FormControlLabel, Switch } from '@mui/material';
 import { ClusterTypeAttrs } from '../../cluster-types/cluster-type-attributes';
 import CommandDlg from '../../components/command-dlg/command-dlg';
+import { MenuItem, TextField, Tooltip } from '@mui/material';
+import ConfirmDlg from '../../components/confirm-dlg/confirm-dlg';
 
 export class Nodes extends React.Component<NodesProps, NodesState> {
   constructor(props: NodesProps) {
@@ -36,15 +35,18 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
       IsSortAcs: true,
       DeviceTypes: DeviceTypes,
       DeviceType: "Any",
-      IsExtendedView: props.Storage.Get()?.IsExtendedView || false
+      IsAllExpanded: false
     };
     this.search = this.search.bind(this);
     this.handleDskChange = this.handleDskChange.bind(this);
     this.getDSK = this.getDSK.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.changeCommandDlg = React.createRef();
+    this.changeConfirmDlg = React.createRef();
   }
   changeCommandDlg: any;
+  changeConfirmDlg: any;
+  processedCommand: any;
   ClusterTypeAttrs = ClusterTypeAttrs;
 
   searchEvent(event: any) {
@@ -82,8 +84,11 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
           i.ep !== undefined && Object.keys(i.ep).filter(
             (ep: any) => i.ep[ep].Clusters?.NameAndLocation?.Attributes?.Name?.Reported?.toLowerCase().includes(this.state.Filter.toLowerCase())
               || i.ep[ep].Clusters?.NameAndLocation?.Attributes?.Location?.Reported?.toLowerCase().includes(this.state.Filter.toLowerCase())).length > 0
-        )))
+        ))) {
+        if (this.state.NodeList.find(n => n.Unid === i.Unid)?.IsExpanded)
+          i.IsExpanded = true;
         filtered.push(i);
+      }
       let parsedUnid = i.Unid.split("-");
       if (parsedUnid.length > 1 && !deviceTypes.has(parsedUnid[0].toLowerCase()))
         deviceTypes.set(parsedUnid[0].toLowerCase(), parsedUnid[0].toUpperCase());
@@ -98,7 +103,19 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
   }
 
   runStateCommand(unid: string, cmdType: string, cmd: string) {
-    this.runCommand(unid, cmdType, { State: cmd })
+    if (cmd === "reset") {
+      this.processedCommand = { Unid: unid, CmdType: cmdType, Cmd: cmd };
+      this.changeConfirmDlg?.current.update(
+        `Reset ${unid}`,
+        `Are you sure, you want to reset this Protocol Controller?`
+      );
+    }
+    else
+      this.runCommand(unid, cmdType, { State: cmd })
+  }
+
+  runConfirmedCommand = () => {
+    this.runCommand(this.processedCommand.Unid, this.processedCommand.CmdType, { State: this.processedCommand.Cmd })
   }
 
   runCommand(unid: string, cmdType: string, payload: any) {
@@ -163,9 +180,16 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
       return dsk.slice(5);
   }
 
-  actionsList = (actions: any[], title: string, runCmd: any, className: string) => <>
+  toggleIsAllExpanded = () => {
+    this.state.NodeList.forEach(item =>
+      item.IsExpanded = !this.state.IsAllExpanded
+    );
+    this.setState({ IsAllExpanded: !this.state.IsAllExpanded });
+  }
+
+  actionsList = (actions: any[], title: string, runCmd: any, className: string, variant: string = "outline-primary", isSmall: boolean = false) => <>
     {actions && actions.length
-      ? <DropdownButton variant="outline-primary" title={title} className={`float-right ${className}`}>
+      ? <DropdownButton variant={variant} title={title} {...(isSmall ? { size: "sm" } : {})} className={`float-right ${className}`}>
         {actions.map((cmd: string, cmdIndex: number) => {
           return (
             <Dropdown.Item key={cmdIndex} onClick={() => runCmd(cmd)}> {cmd.charAt(0).toUpperCase() + cmd.slice(1)}</Dropdown.Item>
@@ -181,28 +205,32 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
     return (<Fragment key={`${index}-${indexEp}`}>
       <tr>
-        <td className={`${tdClassName} vertical-middle`} rowSpan={endPointsCount + clustersCount} hidden={indexEp > 0}>{item.Unid}</td>
-        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView && ep?.Clusters ? Object.keys(ep.Clusters).length + 1 : 1}>{epName}</td>
-        <td className={`${tdClassName} flex padding-v-20`} >{(item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1)
+        <td className={`${tdClassName} no-padding-h`} rowSpan={endPointsCount + clustersCount} hidden={indexEp > 0}>
+          <span className='icon small' onClick={() => item.IsExpanded = !item.IsExpanded} hidden={item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1}>
+            {item.IsExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}</span>
+        </td>
+        <td className={tdClassName} rowSpan={endPointsCount + clustersCount} hidden={indexEp > 0}>{item.Unid}</td>
+        <td className={tdClassName} rowSpan={item.IsExpanded ? 1 + (ep?.Clusters ? Object.keys(ep?.Clusters).filter(f => (ClusterViewOverrides as any)[f]?.IsExpandable).length : 0) : 1}>{epName}</td>
+        <td className={`${tdClassName} flex`} >{(item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1)
           ? <><Tooltip title="Protocol Controller" ><span className="icon cursor-default"><GrIcons.GrNodes /></span></Tooltip>
             <Tooltip hidden={!item.RFTelemetry} title="RF Telemetry" ><span className="icon cursor-default"><Link to={`/rftelemetry`}><MdIcons.MdOutlineTransform color="black" /></Link></span></Tooltip></>
           : ep && <ClusterTypeTooltip Ep={[ep]} />}
         </td>
-        <td className={`${tdClassName} vertical-middle`}>
+        <td className={tdClassName}>
           <EditableAttribute Node={item} EpName={epName} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name"
             SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
         </td>
-        <td className={`${tdClassName} vertical-middle`}>
+        <td className={tdClassName}>
           <EditableAttribute Node={item} EpName={epName} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Location"
             SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} GetOptions={this.getLocationList} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
         </td>
-        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>
+        <td className={tdClassName} rowSpan={item.IsExpanded ? 1 : endPointsCount} hidden={!item.IsExpanded && indexEp > 0}>
           <div className="flex">
             <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
             <div> {item.NetworkStatus}</div>
           </div>
         </td>
-        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>
+        <td className={tdClassName} rowSpan={item.IsExpanded ? 1 : endPointsCount} hidden={!item.IsExpanded && indexEp > 0}>
           <div className="flex">
             <div>
               <div className={`dot-icon ${item.Security?.toLocaleLowerCase().includes("s2") ? "s2-security" : (item.Security?.toLocaleLowerCase().includes("s0") ? "s0-security" : "none-security")}`}></div>
@@ -210,39 +238,42 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
             <div>{item.Security}</div>
           </div>
         </td>
-        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>{item.MaximumCommandDelay}</td>
-        <td className={`${tdClassName} vertical-middle`} rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>{item.State}</td>
-        <td className="vertical-middle" rowSpan={this.state.IsExtendedView ? 1 : endPointsCount} hidden={!this.state.IsExtendedView && indexEp > 0}>
+        <td className={tdClassName} rowSpan={item.IsExpanded ? 1 : endPointsCount} hidden={!item.IsExpanded && indexEp > 0}>{item.MaximumCommandDelay}</td>
+        <td className={tdClassName} rowSpan={item.IsExpanded ? 1 : endPointsCount} hidden={!item.IsExpanded && indexEp > 0}>{item.State}</td>
+        <td rowSpan={item.IsExpanded ? 1 : endPointsCount} hidden={!item.IsExpanded && indexEp > 0}>
           {this.actionsList(item.SupportedCommands, "Commands", this.runCommand.bind(this, item.Unid, "run-node-command"), "")}
           {this.actionsList(item.SupportedStateList, "States", this.runStateCommand.bind(this, item.Unid, "run-state-command"), "margin-r-5")}
         </td>
       </tr>
-      {this.state.IsExtendedView && ep?.Clusters !== undefined
-        ? Object.keys(ep.Clusters).map((cluster, clIndex) => {
-          let tableRow = (ClusterViewOverrides as any)[cluster]?.ViewTable;
-          return (
-            <tr key={`${index}-${indexEp}-${clIndex}`} className={`${tdClassName} cluster-info`}>
-              <td><b>{cluster}</b></td>
-              {[...Array(6).keys()].map((i, iKey) => {
-                let attributes = ep.Clusters[cluster].Attributes && Object.keys(ep.Clusters[cluster].Attributes);
-                return (
-                  <td key={`${index}-${indexEp}-${clIndex}-${iKey}`}>
-                    {tableRow
-                      ? (tableRow[i] ? <span><b><i>{tableRow[i].Name}</i></b>: {tableRow[i].Value(ep.Clusters[cluster])}</span> : null)
-                      : <span>{attributes[i] !== undefined ? <span><b><i>{attributes[i]}</i></b>: {JSON.stringify(ep.Clusters[cluster].Attributes[attributes[i]]?.Reported || "")} </span> : null}</span>
-                    }
-                  </td>
-                )
-              }
-              )}
-              <td>
-                {this.actionsList(ep.Clusters[cluster].SupportedCommands && ep.Clusters[cluster].SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes"), "Commands", this.preSendCommand.bind(this, item, epName, cluster), "")}
-              </td>
-            </tr>)
-        })
-        : null
+      {
+        item.IsExpanded && ep?.Clusters !== undefined
+          ? Object.keys(ep.Clusters).map((cluster, clIndex) => {
+            if (!(ClusterViewOverrides as any)[cluster]?.IsExpandable)
+              return null;
+            let tableRow = (ClusterViewOverrides as any)[cluster]?.ViewTable;
+            return (
+              <tr key={`${index}-${indexEp}-${clIndex}`} className={`${tdClassName} cluster-info`}>
+                <td><b>{cluster}</b></td>
+                {[...Array(6).keys()].map((i, iKey) => {
+                  let attributes = ep.Clusters[cluster].Attributes && Object.keys(ep.Clusters[cluster].Attributes);
+                  return (
+                    <td key={`${index}-${indexEp}-${clIndex}-${iKey}`}>
+                      {tableRow
+                        ? (tableRow[i] ? <span><b><i>{tableRow[i].Name}</i></b>: {tableRow[i].Value(ep.Clusters[cluster], undefined, ep.Clusters)}</span> : null)
+                        : <span>{attributes && attributes[i] !== undefined && attributes[i] !== "ClusterRevision" ? <span><b><i>{attributes[i]}</i></b>: {JSON.stringify(ep.Clusters[cluster].Attributes[attributes[i]]?.Reported || "")} </span> : null}</span>
+                      }
+                    </td>
+                  )
+                }
+                )}
+                <td className="buttons-group">
+                  {this.actionsList(ep.Clusters[cluster].SupportedCommands && ep.Clusters[cluster].SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes"), "Commands", this.preSendCommand.bind(this, item, epName, cluster), "", "outline-secondary", true)}
+                </td>
+              </tr>)
+          })
+          : null
       }
-    </Fragment>
+    </Fragment >
     )
   }
 
@@ -269,7 +300,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
   getEndPoints = (item: any, index: number) => {
     let endPoints = Object.keys(item.ep);
-    let clustersCount = this.state.IsExtendedView ? endPoints.reduce((i, j: any) => (i + (item.ep[j].Clusters !== undefined ? Object.keys(item.ep[j].Clusters).length : 0)), 0) : 0;
+    let clustersCount = item.IsExpanded ? endPoints.reduce((i, j: any) => (i + (item.ep[j].Clusters !== undefined ? Object.keys(item.ep[j].Clusters).filter(f => (ClusterViewOverrides as any)[f]?.IsExpandable).length : 0)), 0) : 0;
     return (<>
       {endPoints.map((endPoint: any, indexEp: number) => {
         return this.getRow(item, index, endPoint, item.ep[endPoint], indexEp, endPoints.length, clustersCount);
@@ -288,10 +319,6 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
     this.search(this.props.NodeList, event.target.value)
   }
 
-  toggleView = () => {
-    this.setState({ IsExtendedView: !this.state.IsExtendedView }, () => { this.props.Storage.Set("IsExtendedView", this.state.IsExtendedView) });
-  }
-
   render() {
     return (
       <>
@@ -306,10 +333,6 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
                 </MenuItem>
               })}
             </TextField>
-            {/*
-            UIC-1724: Re-enable this when the view is fixed. Note that the toggle should be per node.
-            <FormControlLabel className="float-left flex-input col-sm-2" control={<Switch checked={this.state.IsExtendedView} onChange={this.toggleView} />} label={'Extended View'} />
-            */}
             <Tooltip title="Search by 'Unid', 'Name' or 'Location'">
               <Form.Group as={Row} className="float-right">
                 <Form.Label column sm="3" className="float-right">Search:</Form.Label>
@@ -326,9 +349,14 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table>
+          : <Table className='nodes-table'>
             <thead>
               <tr className="">
+                <th className="no-padding-h">
+                  <span className='icon small' onClick={this.toggleIsAllExpanded}>
+                    {this.state.IsAllExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}
+                  </span>
+                </th>
                 <th>Unid
                   <span onClick={() => this.sort("Unid")}>
                     {this.state.IsSortAcs
@@ -375,9 +403,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
           <Modal.Body>
             <InputGroup>
               <Form.Control type="text" placeholder="xxxxx" onKeyPress={this.handleKeyPress} value={this.state.Dsk} onChange={this.handleDskChange} maxLength={5} />
-              <InputGroup.Prepend>
-                <InputGroup.Text>{this.getDSK()}</InputGroup.Text>
-              </InputGroup.Prepend>
+              <InputGroup.Text>{this.getDSK()}</InputGroup.Text>
             </InputGroup>
           </Modal.Body>
           <Modal.Footer>
@@ -392,7 +418,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
           </Modal.Header>
           <Modal.Body>
             <TextField size="small" fullWidth={true} select label="UNID" value={this.state.UnidToRemove} defaultValue={this.state.UnidToRemove}
-              onChange={(e) => this.setState({ UnidToRemove: e.target.value })} variant="outlined">
+              onChange={(e: any) => this.setState({ UnidToRemove: e.target.value })} variant="outlined">
               {this.props.NodeList.filter(i => i.ClusterTypes.indexOf("ProtocolController") < 0).map((node: any) => {
                 return <MenuItem key={node.Unid} value={node.Unid}>
                   {node.Unid}
@@ -408,6 +434,8 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
         <CommandDlg ref={this.changeCommandDlg}
           SocketServer={this.props.SocketServer} />
+
+        <ConfirmDlg ConfirmAction={this.runConfirmedCommand} ref={this.changeConfirmDlg} />
       </>
     )
   };

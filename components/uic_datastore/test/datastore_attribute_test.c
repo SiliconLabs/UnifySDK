@@ -29,6 +29,7 @@ void suiteSetUp() {}
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTeardown(int num_failures)
 {
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, datastore_teardown());
   return num_failures;
 }
 
@@ -167,6 +168,13 @@ void test_datastore_attribute_storage()
   TEST_ASSERT_EQUAL_INT8_ARRAY(test_array, received_value, received_value_size);
   TEST_ASSERT_EQUAL(0, received_desired_value_size);
 
+  received_id = 0;
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_OK,
+    datastore_fetch_attribute_child_id(0x01, 1, &received_id),
+    "Fetching 2nd child ID of node 0x01 went wrong");
+  TEST_ASSERT_EQUAL(0x03, received_id);
+
   // Fetch third child of node 0x01 (should not exist):
   TEST_ASSERT_EQUAL_MESSAGE(
     SL_STATUS_NOT_FOUND,
@@ -178,6 +186,12 @@ void test_datastore_attribute_storage()
                                     &received_value_size,
                                     received_desired_value,
                                     &received_desired_value_size),
+    "Fetching 3rd child of node 0x01 went well, though there should be only "
+    "2!");
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_NOT_FOUND,
+    datastore_fetch_attribute_child_id(0x01, 2, &received_id),
     "Fetching 3rd child of node 0x01 went well, though there should be only "
     "2!");
 
@@ -251,4 +265,56 @@ void test_datastore_attribute_storage()
   TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
                             datastore_teardown(),
                             "Expect teardown to match SL_STATUS_OK");
+}
+
+// Try stuff without initializing the datastore
+void test_datastore_attribute_not_initialized()
+{
+  // Make sure to teardown, So it is not initialized
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, datastore_teardown());
+
+  // Try to fetch stuff now
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    datastore_fetch_attribute_child_id(0x00, 1, NULL));
+
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_delete_all_attributes());
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_delete_all_attributes());
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    datastore_delete_attribute_with_children(0));
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    datastore_delete_attribute_with_children(2));
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_delete_attribute(0));
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_delete_attribute(2));
+
+  TEST_ASSERT_FALSE(datastore_contains_attribute(1));
+  TEST_ASSERT_FALSE(datastore_contains_attribute(0));
+  TEST_ASSERT_FALSE(datastore_contains_attribute(99));
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    datastore_fetch_attribute_child(0, 0, NULL, NULL, NULL, NULL, NULL, NULL));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    datastore_fetch_attribute_child(0, 1, NULL, NULL, NULL, NULL, NULL, NULL));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    datastore_fetch_attribute_child(2, 1, NULL, NULL, NULL, NULL, NULL, NULL));
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    datastore_fetch_attribute(0, NULL, NULL, NULL, NULL, NULL, NULL));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    datastore_fetch_attribute(1, NULL, NULL, NULL, NULL, NULL, NULL));
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    datastore_fetch_attribute(2, NULL, NULL, NULL, NULL, NULL, NULL));
+
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    datastore_store_attribute(4, 0, 1, NULL, 3, NULL, 4));
+
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    datastore_store_attribute(1, 1, 1, NULL, 3, NULL, 4));
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    datastore_store_attribute(4, 1, 3, NULL, 3, NULL, 4));
 }

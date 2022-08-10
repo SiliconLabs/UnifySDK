@@ -43,6 +43,14 @@ const char *zwave_tx_state_name(zwave_tx_state_t state);
  */
 const char *zwave_tx_event_name(process_event_t event);
 
+/**
+ * @brief Returns the name of a Z-Wave Tx back-off reason
+ *
+ * @param reason      The back-off reason to convert to string
+ * @return const char*
+ */
+const char *zwave_back_off_reason_name(zwave_tx_backoff_reason_t reason);
+
 #ifdef __cplusplus
 }
 #endif

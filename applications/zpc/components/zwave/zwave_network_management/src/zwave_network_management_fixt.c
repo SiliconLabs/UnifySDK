@@ -19,6 +19,7 @@
 #include "zwave_network_management_fixt.h"
 #include "nm_state_machine.h"
 #include "zwave_network_management_process.h"
+#include "zwave_network_management_return_route_queue.h"
 #include "sl_status.h"
 #include "zwave_controller_callbacks.h"
 
@@ -35,7 +36,7 @@ sl_status_t zwave_network_management_fixt_setup(void)
 
 int zwave_network_management_fixt_teardown(void)
 {
-  // FIXME: Is there anything to be done here?
+  zwave_network_management_return_route_clear_queue();
   nm_state_machine_teardown();
   return 0;
 }

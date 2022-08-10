@@ -1,5 +1,0 @@
-<map id="Unify definitions" name="Unify definitions">
-<area shape="rect" id="node1" href="$group__unify__enums.html" title="Contains defines to make enums with specified underlying types." alt="" coords="183,5,328,31"/>
-<area shape="rect" id="node2" href="$group__unify__sl__status__codes.html" title="Status codes used to indicate the outcome of a function." alt="" coords="202,55,309,80"/>
-<area shape="rect" id="node3" title="Type definitions and macros for Unify components and applications." alt="" coords="5,31,135,56"/>
-</map>

@@ -27,7 +27,11 @@
  *
  * Unit is contiki clock_time_t units.
  * FIXME: move this to some global definitions place. */
+#ifdef ZWAVE_BUILD_SYSTEM
+#define UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY  0
+#else
 #define UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY 300
+#endif
 
 /* Prototypes */
 
@@ -54,7 +58,6 @@ static clock_time_t uic_main_loop_find_delay(void)
       delay = time_next_etimer_timeout - time_now;
     }
   }
-
   return delay;
 }
 
@@ -62,8 +65,6 @@ static clock_time_t uic_main_loop_find_delay(void)
 
 bool uic_main_loop_run(void)
 {
-  clock_time_t delay = UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY;
-
 #ifdef ZWAVE_BUILD_SYSTEM
   /* Check if there are time-out events by polling etimer. */
   etimer_request_poll();
@@ -83,16 +84,19 @@ bool uic_main_loop_run(void)
     return false;
   }
 
-  delay = uic_main_loop_find_delay();
+  clock_time_t delay = uic_main_loop_find_delay();
 
   /* Check for external events, e.e., on file descriptors, and
     * send them to their respective handlers.
     *
     * Poll handlers are only expected to read the data and post a
     * conktiki event to handle it later. */
+#ifdef ZWAVE_BUILD_SYSTEM 
+  if (delay) {
+    uic_main_ext_select(delay);
+  }
+#else
   uic_main_ext_select(delay);
-
-#ifndef ZWAVE_BUILD_SYSTEM
   /* Check if there are time-out events by polling etimer. */
   etimer_request_poll();
 #endif

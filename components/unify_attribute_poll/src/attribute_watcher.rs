@@ -17,19 +17,17 @@ use futures::{select, StreamExt};
 use once_cell::sync::Lazy;
 use unify_attribute_store_sys::attribute_store_node_t;
 use unify_log_sys::*;
-use unify_middleware::AttributeValueState;
+use unify_middleware::{attribute_changed, AttributeValueState};
+use unify_middleware::{attribute_store_or_return_with, Attribute, AttributeTrait};
+use unify_middleware::{contiki::contiki_spawn, AttributeEvent, AttributeEventType};
 use unify_sl_status_sys::SL_STATUS_OK;
-
-use unify_middleware::{
-    contiki::contiki_spawn, Attribute, AttributeEvent, AttributeEventType, AttributeStoreTrait,
-};
 
 use crate::attribute_watcher_trait::AttributeWatcherTrait;
 declare_app_name!("poll_engine");
 
 static mut TOUCH_CHANNEL: Lazy<(
-    UnboundedSender<AttributeEvent>,
-    UnboundedReceiver<AttributeEvent>,
+    UnboundedSender<AttributeEvent<Attribute>>,
+    UnboundedReceiver<AttributeEvent<Attribute>>,
 )> = Lazy::new(|| unbounded());
 
 /// Run a Tasks which awaits changes of Attributes that are in the `PollQueue`.
@@ -41,7 +39,7 @@ static mut TOUCH_CHANNEL: Lazy<(
 /// * Touch events
 #[derive(Debug)]
 pub struct AttributeWatcher {
-    receiver: UnboundedReceiver<AttributeEvent>,
+    receiver: UnboundedReceiver<AttributeEvent<Attribute>>,
 }
 
 impl AttributeWatcher {
@@ -64,11 +62,12 @@ impl AttributeWatcher {
         }
     }
 
-    async unsafe fn listen(mut sender: UnboundedSender<AttributeEvent>) {
-        let attribute_predicate =
-            move |e: &AttributeEvent| e.event_type == AttributeEventType::ATTRIBUTE_DELETED;
+    async unsafe fn listen(mut sender: UnboundedSender<AttributeEvent<Attribute>>) {
+        let attribute_predicate = move |e: &AttributeEvent<Attribute>| {
+            e.event_type == AttributeEventType::ATTRIBUTE_DELETED
+        };
 
-        let mut attribute_changes = Attribute::attribute_changed(attribute_predicate).fuse();
+        let mut attribute_changes = attribute_changed(attribute_predicate).fuse();
         loop {
             let cmd = select! {
                 event = attribute_changes.select_next_some() => event,
@@ -85,7 +84,7 @@ impl AttributeWatcher {
 
 #[async_trait]
 impl AttributeWatcherTrait for AttributeWatcher {
-    async fn next_change(&mut self) -> AttributeEvent {
+    async fn next_change(&mut self) -> AttributeEvent<Attribute> {
         self.receiver.select_next_some().await
     }
 }
@@ -94,18 +93,20 @@ impl AttributeWatcherTrait for AttributeWatcher {
 unsafe extern "C" fn uic_attribute_store_get_attribute_touch_callback(
     node: attribute_store_node_t,
 ) {
-    match Attribute::new_from_handle(node) {
-        Ok(attribute) => {
-            let event = AttributeEvent {
-                attribute,
-                event_type: AttributeEventType::ATTRIBUTE_UPDATED,
-                value_state: AttributeValueState::REPORTED_ATTRIBUTE,
-            };
+    let attribute_store = attribute_store_or_return_with!();
+    let attribute = attribute_store.from_handle(node);
 
-            if let Err(e) = TOUCH_CHANNEL.0.start_send(event) {
-                log_error!("attribute watcher disappeared!{}", e);
-            }
+    if attribute.valid() {
+        let event = AttributeEvent {
+            attribute,
+            event_type: AttributeEventType::ATTRIBUTE_UPDATED,
+            value_state: AttributeValueState::REPORTED_ATTRIBUTE,
+        };
+
+        if let Err(e) = TOUCH_CHANNEL.0.start_send(event) {
+            log_error!("attribute watcher disappeared!{}", e);
         }
-        Err(err) => log_error!("touch callback called with invalid attribute {:?}", err),
-    };
+    } else {
+        log_error!("touch callback called with invalid attribute {}", attribute);
+    }
 }

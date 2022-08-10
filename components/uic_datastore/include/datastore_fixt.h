@@ -17,7 +17,7 @@
  * @brief Persistent Datastore fixture
  *
  * Fixture to initialize the datastore from uic_main,
- * in order to enable the Datastore in a UIC application,
+ * in order to enable the Datastore in a Unify application,
  * add \ref datastore_fixt_setup to the fixt_setup array,
  * when calling \ref uic_main
  *
@@ -72,11 +72,11 @@ int datastore_fixt_teardown();
  * then this function checks if the database version
  * is same as current version. (Generic tables have the database version stored)
  *
- * If the versioning is good then writes the current UIC version in generic
+ * If the versioning is good then writes the current Unify version in generic
  * table and calls datastore_attribure_init to initialize attribute store
  * table
  * If there is no database version found, it writes the current database version
- * and writes the current UIC version in generic table
+ * and writes the current Unify version in generic table
  * and calls datastore_attribure_init to initialize attribute store
  *
  *  @param datastore_file path for the datastore file.

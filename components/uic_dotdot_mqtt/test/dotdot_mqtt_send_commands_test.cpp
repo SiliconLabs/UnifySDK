@@ -19,15 +19,16 @@
 #include "cmock.h"
 
 #include "sl_status.h"
-#include "mqtt_mock_helper.h"
+#include "mqtt_test_helper.h"
 
 extern "C" {
 #include "dotdot_mqtt_send_commands.h"
+#include "dotdot_mqtt_generated_commands.h"
 
 /// Called before each and every test
 void setUp()
 {
-  mqtt_mock_helper_init();
+  mqtt_test_helper_init();
 }
 
 void test_aox_locator_publish_angle_correction_command()
@@ -57,7 +58,7 @@ void test_aox_locator_publish_angle_correction_command()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"(
     {
@@ -86,7 +87,7 @@ void test_on_off_publish_on_off_command()
 
   // Ask DotDot MQTT to publish.
   uic_mqtt_dotdot_on_off_publish_toggle_command(destination_unid,
-                                             destination_endpoint);
+                                                destination_endpoint);
 
   // Verify that it did its job:
   const char *expected_topic
@@ -94,7 +95,7 @@ void test_on_off_publish_on_off_command()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = "{}";
   TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
@@ -119,7 +120,7 @@ void test_level_publish_move_command_to_group()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"({
   "Level": 20,
@@ -180,7 +181,7 @@ void test_publish_generated_rf_telemetry_tx_report()
 
   char published_message[1000] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"({
   "AckChannel": 2,
@@ -226,7 +227,7 @@ void test_publish_state_interview_command()
 
   char published_message[4] = {};
   TEST_ASSERT_NOT_NULL(
-    mqtt_mock_helper_pop_publish(expected_topic, published_message));
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
 
   const char expected_published_message[] = R"({})";
   TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);

@@ -191,32 +191,38 @@ void test_datastore_missing_init()
 
 void test_datastore_fixt_setup()
 {
-  datastore_fixt_setup_and_handle_version("datastore.db",DATASTORE_VERSION_V1);
+  datastore_fixt_setup_and_handle_version("datastore.db", DATASTORE_VERSION_V1);
   uint8_t fetched_uic_version[UIC_VERSION_MAX_LEN] = {0};
-  unsigned int fetched_uic_version_size = UIC_VERSION_MAX_LEN;
+  unsigned int fetched_uic_version_size            = UIC_VERSION_MAX_LEN;
 
-  TEST_ASSERT_EQUAL_MESSAGE(
-    SL_STATUS_OK,
-    datastore_fetch_arr("uic_version", fetched_uic_version, &fetched_uic_version_size),
-    "Expect OK when fetching uic_version");
-  TEST_ASSERT_EQUAL_INT8_ARRAY_MESSAGE(fetched_uic_version,
-                                       UIC_VERSION,
-                                       fetched_uic_version_size,
-                                       "Expect fetched UIC version to match fetched_uic_version");
-   int64_t version_fetched = 0;
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                            datastore_fetch_arr("uic_version",
+                                                fetched_uic_version,
+                                                &fetched_uic_version_size),
+                            "Expect OK when fetching uic_version");
+  TEST_ASSERT_EQUAL_INT8_ARRAY_MESSAGE(
+    fetched_uic_version,
+    UIC_VERSION,
+    fetched_uic_version_size,
+    "Expect fetched UIC version to match fetched_uic_version");
+  int64_t version_fetched = 0;
   TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
                             datastore_fetch_int("version", &version_fetched),
                             "Expect OK when fetching version");
-  TEST_ASSERT_EQUAL_MESSAGE(DATASTORE_VERSION_V1,
-                            version_fetched,
-                            "Expect fetched version to match DATASTORE_VERSION_V1");
+  TEST_ASSERT_EQUAL_MESSAGE(
+    DATASTORE_VERSION_V1,
+    version_fetched,
+    "Expect fetched version to match DATASTORE_VERSION_V1");
 
   //Write incompatible version number in datastore
   datastore_store_int("version", 100);
   //Check if it fails or not
-  TEST_ASSERT_EQUAL(datastore_fixt_setup_and_handle_version("datastore.db",DATASTORE_VERSION_V1), SL_STATUS_FAIL);
+  TEST_ASSERT_EQUAL(
+    datastore_fixt_setup_and_handle_version("datastore.db",
+                                            DATASTORE_VERSION_V1),
+    SL_STATUS_FAIL);
   //Remove the datastore.db or in next run the test case will fail
-   TEST_ASSERT_EQUAL_MESSAGE(0,
+  TEST_ASSERT_EQUAL_MESSAGE(0,
                             remove("datastore.db"),
                             "Expect Remove DB file successful");
 }
@@ -248,4 +254,16 @@ void test_datastore_underflow_protection()
   TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
                             datastore_teardown(),
                             "Expect teardown to match SL_STATUS_OK");
+}
+
+void test_datastore_transaction()
+{
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_start_transaction());
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                            datastore_init(":memory:"),
+                            "Initialization of datastore");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_commit_transaction());
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, datastore_start_transaction());
+  TEST_ASSERT_EQUAL(SL_STATUS_IN_PROGRESS, datastore_start_transaction());
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, datastore_commit_transaction());
 }

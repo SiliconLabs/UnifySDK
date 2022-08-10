@@ -42,11 +42,10 @@ sl_status_t ota_zigbee_register_observers()
       on_ota_zigbee_upgrade_complete);
   }
 
-  if(result == SL_STATUS_OK)
-  {
-      result = zigpc_gateway_register_observer(
-        ZIGPC_GATEWAY_NOTIFY_NODE_REMOVED,
-        on_remove_unsubscribe_ota_listeners);
+  if (result == SL_STATUS_OK) {
+    result
+      = zigpc_gateway_register_observer(ZIGPC_GATEWAY_NOTIFY_NODE_REMOVED,
+                                        on_remove_unsubscribe_ota_listeners);
   }
 
   sl_log_info(LOG_TAG, "Registering observers with result: %d", result);
@@ -152,40 +151,35 @@ void on_ota_zigbee_upgrade_complete(void *data)
   }
 }
 
-void on_remove_unsubscribe_ota_listeners( void* data)
+void on_remove_unsubscribe_ota_listeners(void *data)
 {
-   
-    zigpc_gateway_on_node_removed_t* removed_data =
-        (zigpc_gateway_on_node_removed_t*)data;
- 
+    if (data == nullptr) {
+    sl_log_warning(LOG_TAG, "Error unsubscribing OTA topics");
+    return;
+  }
 
-    if(data == nullptr)
-    {
-        sl_log_warning(LOG_TAG, "Error unsubscribing OTA topics");
-        return;
-    }
 
-    sl_status_t status = SL_STATUS_OK;
-    char eui64_cstr[ZIGBEE_EUI64_HEX_STR_LENGTH];
+  auto *removed_data
+    = (zigpc_gateway_on_node_removed_t *)data;
 
-    status = zigbee_eui64_to_str(removed_data->eui64,
-                                    eui64_cstr,
-                                    ZIGBEE_EUI64_HEX_STR_LENGTH);
 
-    if(SL_STATUS_OK == status)
-    {
-        
-        std::string eui64_str(eui64_cstr);
-        std::string prefix(ZIGPC_UNID_PREFIX);
-        std::string unid = prefix + eui64_str;
-        
-        sl_log_info(LOG_TAG, "Removing OTA listeners for UNID: %s", unid.c_str());
-        
-        uic_ota::unsubscribe_all_unids_uiid(unid);
-    }
-    else
-    {
-        sl_log_warning(LOG_TAG, "Error unsubscribing OTA topics");
-    }
 
+  sl_status_t status = SL_STATUS_OK;
+  char eui64_cstr[ZIGBEE_EUI64_HEX_STR_LENGTH];
+
+  status = zigbee_eui64_to_str(removed_data->eui64,
+                               eui64_cstr,
+                               ZIGBEE_EUI64_HEX_STR_LENGTH);
+
+  if (SL_STATUS_OK == status) {
+    std::string eui64_str(eui64_cstr);
+    std::string prefix(ZIGPC_UNID_PREFIX);
+    std::string unid = prefix + eui64_str;
+
+    sl_log_info(LOG_TAG, "Removing OTA listeners for UNID: %s", unid.c_str());
+
+    uic_ota::unsubscribe_all_unids_uiid(unid);
+  } else {
+    sl_log_warning(LOG_TAG, "Error unsubscribing OTA topics");
+  }
 }

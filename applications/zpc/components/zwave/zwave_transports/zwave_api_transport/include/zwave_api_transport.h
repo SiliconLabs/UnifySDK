@@ -22,7 +22,7 @@
 #ifndef ZWAVE_API_TRANSPORT_H
 #define ZWAVE_API_TRANSPORT_H
 
-// UIC includes
+// Unify includes
 #include "sl_status.h"
 
 // ZPC includes
@@ -80,6 +80,18 @@ extern "C" {
  * @returns SL_STATUS_FAIL if an error occurred
  */
 sl_status_t zwave_api_transport_init(void);
+
+/**
+ * @brief Resets the state of the Z-Wave API transport.
+ *
+ * This function will invoke the user callback of the ongoing transmission
+ * with TRANSMIT_STATUS_FAIL if a transmission is ongoing. No call to Z-Wave
+ * API send data abort is made when using this function.
+ *
+ * Use this function, for example, when restarting the Z-Wave API or expecting
+ * that it may not callback after invoking Z-Wave API send data.
+ */
+void zwave_api_transport_reset();
 
 #ifdef __cplusplus
 }

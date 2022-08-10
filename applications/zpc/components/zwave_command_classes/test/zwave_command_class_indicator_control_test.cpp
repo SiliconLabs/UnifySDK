@@ -41,12 +41,11 @@ extern "C" {
 // is isolated from direct accessing of attribute store using the following
 // callbacks.
 static zwave_controller_storage_callback_t zwave_controller_storage_cb_mock = {
-  .on_set_node_as_s2_capable = zwave_security_validation_set_node_as_s2_capable,
-  .on_verify_node_is_s2_capable = zwave_security_validation_is_node_s2_capable,
-  .on_get_node_granted_keys     = zwave_get_node_granted_keys,
-  .on_get_inclusion_protocol    = zwave_get_inclusion_protocol,
-  .on_zwave_controller_storage_cc_version
-  = zwave_node_get_command_class_version,
+  .set_node_as_s2_capable = zwave_security_validation_set_node_as_s2_capable,
+  .is_node_S2_capable     = zwave_security_validation_is_node_s2_capable,
+  .get_node_granted_keys  = zwave_get_node_granted_keys,
+  .get_inclusion_protocol = zwave_get_inclusion_protocol,
+  .zwave_controller_storage_cc_version = zwave_node_get_command_class_version,
 };
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp()

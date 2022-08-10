@@ -1,0 +1,101 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+{{zap_header}}
+
+#include "dotdot_mqtt_helpers.hpp"
+
+#include <regex>
+#include <functional>
+
+namespace unify
+{
+std::optional<std::string> unid_from_mqtt_topic(const std::string &topic)
+{
+  std::regex rgx_unid(R"(by-unid/([^/]*).*)");
+  std::smatch match;
+  if (std::regex_search(topic, match, rgx_unid)) {
+    return match[1];
+  }
+  return std::nullopt;
+}
+}  // namespace unify
+
+// Create a map of enums and their name label.
+// Functions are declared in dotdot_mqtt.hpp
+{{#zcl_enums}}
+
+// Enum to string map for {{label}}
+const std::map<uint32_t, std::string> {{asSnakeCaseLower label}}_enum_id_to_string_map {
+  {{#zcl_enum_items}}
+  { {{value}}, "{{label}}" },
+  {{/zcl_enum_items}}
+};
+
+// String to enum map for {{label}}
+const std::map<std::string, uint32_t> {{asSnakeCaseLower label}}_enum_string_to_id_map {
+  {{#zcl_enum_items}}
+  { "{{label}}", {{value}} },
+  {{/zcl_enum_items}}
+};
+
+std::string {{asSnakeCaseLower label}}_get_enum_value_name(
+  uint32_t value)
+{
+  auto it = {{asSnakeCaseLower label}}_enum_id_to_string_map.find(value);
+  if (it != {{asSnakeCaseLower label}}_enum_id_to_string_map.end()){
+    return it->second;
+  }
+
+  // No known name value is set for this field.
+  // Set it to a string version of the value.
+  return std::to_string(value);
+}
+
+uint32_t {{asSnakeCaseLower label}}_get_enum_value_number(const std::string &str)
+{
+  auto it = {{asSnakeCaseLower label}}_enum_string_to_id_map.find(str);
+  if (it != {{asSnakeCaseLower label}}_enum_string_to_id_map.end()){
+    return it->second;
+  }
+
+  // No known numeric value is set for this string.
+  // Return UINT32_MAX to indicate an error.
+  return std::numeric_limits<uint32_t>::max();
+}
+{{/zcl_enums}}
+
+// C Wrapper
+extern "C" {
+{{#zcl_enums}}
+char *{{asSnakeCaseLower label}}_get_enum_value_name_c(
+  uint32_t value, char *result, size_t max_result_size)
+{
+  snprintf(result, max_result_size, "%s", {{asSnakeCaseLower label}}_get_enum_value_name(value).c_str());
+  return result;
+}
+
+uint32_t {{asSnakeCaseLower label}}_get_enum_value_number_c(const char *str)
+{
+  return {{asSnakeCaseLower label}}_get_enum_value_number(std::string(str));
+}
+{{/zcl_enums}}
+
+const char * unid_from_mqtt_topic_c(const char *topic, char *result, size_t max_result_size) {
+  auto res = unify::unid_from_mqtt_topic(std::string(topic));
+  if (res == std::nullopt) {
+    return NULL;
+  }
+  snprintf(result, max_result_size, "%s", res.value().c_str());
+    return result;
+}
+}

@@ -31,6 +31,11 @@ static sl_status_t
     if (fixture_result == SL_STATUS_OK) {
       sl_log_info(LOG_TAG, "Completed: %s\n", fixt_list[ii].description);
       ii++;
+    } else if (fixture_result == SL_STATUS_NOT_AVAILABLE) {
+      sl_log_warning(LOG_TAG, 
+                     "Non critical error in setup for: %s. Continuing setup.\n",
+                     fixt_list[ii].description);
+      ii++;
     } else if (fixture_result == SL_STATUS_ABORT) {
       sl_log_debug(LOG_TAG,
                    "Startup sequence aborted by: %s.\n",
@@ -47,7 +52,7 @@ static sl_status_t
   return SL_STATUS_OK;
 }
 
-/* Run the set-up functions for the UIC components. */
+/* Run the set-up functions for the Unify components. */
 sl_status_t uic_fixt_setup_loop(const uic_fixt_setup_step_t *fixt_app_setup)
 {
   sl_status_t status = uic_fixt_setup_loop_list(uic_fixt_setup_steps);
@@ -73,11 +78,11 @@ static int
   return res;
 }
 
-/* Run the UIC shutdown steps. */
+/* Run the Unify shutdown steps. */
 int uic_fixt_shutdown_loop(const uic_fixt_shutdown_step_t *fixt_app_shutdown)
 {
   // The uic_fixt_shutdown_steps needs to be executed after, because some
-  // of the application-shutdown fixtures might use some UIC features in order
+  // of the application-shutdown fixtures might use some Unify features in order
   // to gracefully shut down (e.g. OnOffCluster requires MQTT).
   int status = uic_fixt_shutdown_loop_helper(fixt_app_shutdown);
   status += uic_fixt_shutdown_loop_helper(uic_fixt_shutdown_steps);

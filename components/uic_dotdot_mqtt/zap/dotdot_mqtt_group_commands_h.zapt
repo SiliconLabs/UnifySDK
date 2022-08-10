@@ -14,7 +14,6 @@
 {{zap_header}}
 /**
  *
- * @file dotdot_mqtt_group_commands.h
  * @defgroup dotdot_mqtt_group_commands DotDot ByGroup Listeners
  * @ingroup dotdot_mqtt
  *

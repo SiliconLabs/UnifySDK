@@ -17,6 +17,7 @@
 #include "sl_log.h"
 #include "process.h"
 #include "dotdot_mqtt.h"
+#include "dotdot_mqtt_generated_commands.h"
 
 // AoXPC
 #include "aoxpc.h"
@@ -25,7 +26,7 @@
 #include "aoxpc_unid.h"
 #include "aox_locator_configuration.h"
 #include "ucl_mqtt_helper.h"
-#include "ncp.h"
+#include "aoxpc_ncp_process.h"
 #include "aoxpc_datastore_fixt.h"
 
 // Gecko SDK
@@ -36,11 +37,11 @@
 #ifdef AOA_ANGLE
 #include "aoa_angle.h"
 #include "aoxpc_correction.h"
-#endif // AOA_ANGLE
+#endif  // AOA_ANGLE
 
 #define LOG_TAG "aoxpc"
 
-#define panic()  process_post(PROCESS_BROADCAST, PROCESS_EVENT_EXIT, 0)
+#define panic() process_post(PROCESS_BROADCAST, PROCESS_EVENT_EXIT, 0)
 
 static void sl_bt_on_event(sl_bt_msg_t *evt);
 static void aoxpc_teardown(void);
@@ -87,23 +88,24 @@ void aoa_cte_on_iq_report(aoa_db_entry_t *tag, aoa_iq_report_t *iq_report)
 #ifndef AOA_ANGLE
   // Assemble and publish command.
   uic_mqtt_dotdot_aox_locator_command_iq_report_fields_t command;
-  command.tag_unid = tag_unid;
-  command.channel = iq_report->channel;
-  command.rssi = iq_report->rssi;
-  command.sequence = iq_report->event_counter;
+  command.tag_unid      = tag_unid;
+  command.channel       = iq_report->channel;
+  command.rssi          = iq_report->rssi;
+  command.sequence      = iq_report->event_counter;
   command.samples_count = iq_report->length;
-  command.samples = iq_report->samples;
+  command.samples       = iq_report->samples;
 
   uic_mqtt_dotdot_aox_locator_publish_generated_iq_report_command(
     locator_unid,
     AOXPC_ENDPOINT_ID,
     &command);
 
-#else // AOA_ANGLE
+#else   // AOA_ANGLE
   enum sl_rtl_error_code ec;
   aoa_angle_t angle;
   ec = aoa_calculate((aoa_state_t *)tag->user_data,
-                     iq_report, &angle,
+                     iq_report,
+                     &angle,
                      locator_unid);
   if (ec == SL_RTL_ERROR_ESTIMATION_IN_PROGRESS) {
     // No valid angles are available yet.
@@ -119,21 +121,20 @@ void aoa_cte_on_iq_report(aoa_db_entry_t *tag, aoa_iq_report_t *iq_report)
 
   // Assemble and publish command.
   uic_mqtt_dotdot_aox_locator_command_angle_report_fields_t command;
-  command.tag_unid = tag_unid;
-  command.direction.Azimuth = angle.azimuth;
+  command.tag_unid            = tag_unid;
+  command.direction.Azimuth   = angle.azimuth;
   command.direction.Elevation = angle.elevation;
-  command.direction.Distance = angle.distance;
-  // Standard deviation estimation not supported yet.
-  command.deviation.Azimuth = 0;
-  command.deviation.Elevation = 0;
-  command.deviation.Distance = 0;
-  command.sequence = angle.sequence;
+  command.direction.Distance  = angle.distance;
+  command.deviation.Azimuth   = angle.azimuth_stdev;
+  command.deviation.Elevation = angle.elevation_stdev;
+  command.deviation.Distance  = angle.distance_stdev;
+  command.sequence            = angle.sequence;
 
   uic_mqtt_dotdot_aox_locator_publish_generated_angle_report_command(
     locator_unid,
     AOXPC_ENDPOINT_ID,
     &command);
-#endif // AOA_ANGLE
+#endif  // AOA_ANGLE
 }
 
 // Bluetooth stack event handler
@@ -153,7 +154,8 @@ static void sl_bt_on_event(sl_bt_msg_t *evt)
     // Do not call any stack command before receiving this boot event!
     case sl_bt_evt_system_boot_id:
       // Print boot message.
-      sl_log_info(LOG_TAG, "Bluetooth stack booted: v%d.%d.%d-b%d",
+      sl_log_info(LOG_TAG,
+                  "Bluetooth stack booted: v%d.%d.%d-b%d",
                   evt->data.evt_system_boot.major,
                   evt->data.evt_system_boot.minor,
                   evt->data.evt_system_boot.patch,
@@ -161,11 +163,14 @@ static void sl_bt_on_event(sl_bt_msg_t *evt)
       // Get BT Address.
       sc = sl_bt_system_get_identity_address(&address, &address_type);
       if (sc != SL_STATUS_OK) {
-        sl_log_error(LOG_TAG, "sl_bt_system_get_identity_address failed: 0x%04x", sc);
+        sl_log_error(LOG_TAG,
+                     "sl_bt_system_get_identity_address failed: 0x%04x",
+                     sc);
         panic();
         return;
       }
-      sl_log_info(LOG_TAG, "Bluetooth %s address: %02X:%02X:%02X:%02X:%02X:%02X",
+      sl_log_info(LOG_TAG,
+                  "Bluetooth %s address: %02X:%02X:%02X:%02X:%02X:%02X",
                   address_type ? "static random" : "public device",
                   address.addr[5],
                   address.addr[4],
@@ -189,12 +194,12 @@ static void sl_bt_on_event(sl_bt_msg_t *evt)
 
         publish_node_state(locator_unid, true);
 
-        #ifdef AOA_ANGLE
+#ifdef AOA_ANGLE
         aoa_angle_config_t *config;
         aoa_angle_add_config(locator_unid, &config);
         // Share antenna array configuration with the CTE component.
         aoa_cte_config.antenna_array = &config->antenna_array;
-        #endif // AOA_ANGLE
+#endif  // AOA_ANGLE
 
         // Load the previous AoXLocator configuration from the attribute store
         // Config file is loaded afterwards, which will overwrite the persisted values
@@ -234,8 +239,8 @@ static void sl_bt_on_event(sl_bt_msg_t *evt)
                                                    AOXPC_ENDPOINT_ID);
       }
       break;
-    // -------------------------------
-    // Add further event handlers here.
+      // -------------------------------
+      // Add further event handlers here.
   }
   // Call the CTE specific event handler.
   sc = aoa_cte_bt_on_event(evt);
@@ -245,7 +250,7 @@ static void sl_bt_on_event(sl_bt_msg_t *evt)
   }
 }
 
-/**************************************************************************//**
+/**************************************************************************/ /**
  * Tag added callback.
  *****************************************************************************/
 void aoa_db_on_tag_added(aoa_db_entry_t *tag)
@@ -275,10 +280,11 @@ void aoa_db_on_tag_added(aoa_db_entry_t *tag)
     panic();
     return;
   }
-#endif // AOA_ANGLE
+#endif  // AOA_ANGLE
 
   size_t tags = aoa_db_get_number_of_tags();
-  sl_log_info(LOG_TAG, "New tag added (%zu): %02X:%02X:%02X:%02X:%02X:%02X",
+  sl_log_info(LOG_TAG,
+              "New tag added (%zu): %02X:%02X:%02X:%02X:%02X:%02X",
               tags,
               tag->address.addr[5],
               tag->address.addr[4],
@@ -299,7 +305,7 @@ static void aoxpc_teardown(void)
   uic_mqtt_unretain_by_regex("^(?!ucl\\/by-unid\\/.*\\/State$).*");
 }
 
-/**************************************************************************//**
+/**************************************************************************/ /**
  * Tag removed callback.
  *****************************************************************************/
 void aoa_db_on_tag_removed(aoa_db_entry_t *tag)
@@ -322,8 +328,9 @@ void aoa_db_on_tag_removed(aoa_db_entry_t *tag)
     return;
   }
   free(tag->user_data);
-#endif // AOA_ANGLE
-  sl_log_info(LOG_TAG, "Tag removed: %02X:%02X:%02X:%02X:%02X:%02X",
+#endif  // AOA_ANGLE
+  sl_log_info(LOG_TAG,
+              "Tag removed: %02X:%02X:%02X:%02X:%02X:%02X",
               tag->address.addr[5],
               tag->address.addr[4],
               tag->address.addr[3],

@@ -108,8 +108,11 @@ void test_serial_number_mapper()
     = attribute(endpoint_id_node)
         .child_by_type(DOTDOT_ATTRIBUTE_ID_BASIC_SERIAL_NUMBER);
 
-  TEST_ASSERT_TRUE(dotdot_serial_node.reported<std::string>()
-                   == "h'112233445566");
+  char stored_string[ATTRIBUTE_STORE_MAXIMUM_VALUE_LENGTH] = {};
+  attribute_store_get_reported_string(dotdot_serial_node,
+                                      stored_string,
+                                      sizeof(stored_string));
+  TEST_ASSERT_EQUAL_STRING("h'112233445566", stored_string);
 }
 
 void test_hardware_version_mapper()
@@ -136,7 +139,7 @@ void test_hardware_version_mapper()
         .child_by_type(DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION);
   TEST_ASSERT_TRUE(basic_hardware_version_node.is_valid());
 
-  TEST_ASSERT_EQUAL(235, basic_hardware_version_node.reported<int32_t>());
+  TEST_ASSERT_EQUAL(235, basic_hardware_version_node.reported<uint8_t>());
 }
 
 void test_power_source_mapper()
@@ -156,12 +159,12 @@ void test_power_source_mapper()
   attr_node_id_node.add_node(ATTRIBUTE_NETWORK_STATUS)
     .set_reported<node_state_topic_state_t>(NODE_STATE_TOPIC_STATE_INCLUDED);
 
-  // AL node mapped to 4
+  // AL node mapped to 1
   attribute power_source_node
     = attribute(endpoint_id_node)
         .child_by_type(DOTDOT_ATTRIBUTE_ID_BASIC_POWER_SOURCE);
   TEST_ASSERT_TRUE(power_source_node.is_valid());
-  TEST_ASSERT_EQUAL(4, power_source_node.reported<int32_t>());
+  TEST_ASSERT_EQUAL(1, power_source_node.reported<uint8_t>());
 }
 void test_power_source_mapper_FL_node()
 {
@@ -185,7 +188,7 @@ void test_power_source_mapper_FL_node()
     = attribute(endpoint_id_node)
         .child_by_type(DOTDOT_ATTRIBUTE_ID_BASIC_POWER_SOURCE);
   TEST_ASSERT_TRUE(power_source_node.is_valid());
-  TEST_ASSERT_EQUAL(3, power_source_node.reported<int32_t>());
+  TEST_ASSERT_EQUAL(3, power_source_node.reported<uint8_t>());
 }
 void test_power_source_mapper_uknown_node()
 {
@@ -210,6 +213,6 @@ void test_power_source_mapper_uknown_node()
     = attribute(endpoint_id_node)
         .child_by_type(DOTDOT_ATTRIBUTE_ID_BASIC_POWER_SOURCE);
   TEST_ASSERT_TRUE(power_source_node.is_valid());
-  TEST_ASSERT_EQUAL(0, power_source_node.reported<int32_t>());
+  TEST_ASSERT_EQUAL(0, power_source_node.reported<uint8_t>());
 }
 }

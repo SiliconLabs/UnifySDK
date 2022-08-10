@@ -3,8 +3,8 @@ import { Button, Col, Form, Modal, Row, Spinner, Table } from 'react-bootstrap';
 import * as FiIcons from 'react-icons/fi';
 import * as CgIcons from 'react-icons/cg';
 import { UPTIListProps, UPTIListState, UPTIItem } from './upti-list-types';
-import Tooltip from '@material-ui/core/Tooltip';
 import { Link, useHistory } from 'react-router-dom';
+import { Tooltip } from '@mui/material';
 
 export class UPTI extends React.Component<UPTIListProps, UPTIListState> {
   constructor(props: UPTIListProps) {
@@ -18,10 +18,7 @@ export class UPTI extends React.Component<UPTIListProps, UPTIListState> {
         AdditionalDataEnable: false
       }
     };
-    this.changeConfirmDlg = React.createRef();
   }
-
-  changeConfirmDlg: any;
 
   discoverCompleted() {
     this.setState({ IsDiscover: false });

@@ -56,6 +56,16 @@ bool zwave_controller_encapsulation_scheme_greater_equal(
   zwave_controller_encapsulation_scheme_t k,
   zwave_controller_encapsulation_scheme_t v);
 
+/**
+ * @brief Get the Z-Wave Key used for a given encapsulation.
+ *
+ * @param keyset @ref zwave_keyset_t representing the set of
+ *                granted keys to a node
+ * @returns zwave_keyset_t with only 1 key.
+ */
+zwave_keyset_t zwave_controller_get_key_from_encapsulation(
+  zwave_controller_encapsulation_scheme_t encapsulation);
+
 #ifdef __cplusplus
 }
 #endif

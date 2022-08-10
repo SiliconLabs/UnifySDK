@@ -102,6 +102,15 @@ typedef struct {
   bool ncp_version;
   /// If not zero length we should flash the NCP firmware and exit
   const char *ncp_update_filename;
+
+  /// The following three configuration types describes the Node type structure
+  /// that will be used in the ZPC Node Information Frames.
+  // Z-Wave Basic Device Type
+  uint8_t zpc_basic_device_type;
+  /// Z-Wave Generic Device Type
+  uint8_t zpc_generic_device_type;
+  /// Z-Wave Specific Device Type
+  uint8_t zpc_specific_device_type;
 } zpc_config_t;
 
 /**

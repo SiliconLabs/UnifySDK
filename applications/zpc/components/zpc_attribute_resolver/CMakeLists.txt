@@ -7,18 +7,20 @@ target_include_directories(
   zpc_attribute_resolver
   PUBLIC include
   PRIVATE src
-          # break cyclic dependency. references to this includes should be moved
-          # to a central place.
-          ../zwave_command_classes/include)
+)
 
 target_link_libraries(
   zpc_attribute_resolver
-  uic_log
-  zwave_tx_groups
-  uic_attribute_store
-  uic_attribute_resolver
-  zpc_utils
-  zpc_attribute_store)
+  PUBLIC
+    uic_attribute_resolver
+  PRIVATE
+    zpc_attribute_store
+    uic_log
+    zwave_tx_groups
+    uic_attribute_store
+    zpc_utils
+    zwave_command_classes
+)
 
 install(TARGETS zpc_attribute_resolver LIBRARY DESTINATION lib)
 

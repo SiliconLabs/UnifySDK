@@ -106,7 +106,7 @@ macro(RUN_ZAP TEMPLATE_JSON)
 endmacro()
 
 run_zap(zap/gen-templates.json)
-add_library(uic_dotdot_types INTERFACE
-            ${CMAKE_CURRENT_BINARY_DIR}/include/zap-types.h)
-target_include_directories(uic_dotdot_types
-                           INTERFACE ${CMAKE_CURRENT_BINARY_DIR}/include)
+add_library(uic_dotdot SHARED
+  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_cluster_id_definitions.c)
+target_link_libraries(uic_dotdot uic_definitions)
+target_include_directories(uic_dotdot PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include/)

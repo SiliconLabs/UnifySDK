@@ -8,7 +8,7 @@ target_include_directories(
 
 target_link_libraries(
   aoxpc_unid
-  PUBLIC aoa_utils
+  PUBLIC aoa_util
   PRIVATE uic_log)
 
 # Mocks

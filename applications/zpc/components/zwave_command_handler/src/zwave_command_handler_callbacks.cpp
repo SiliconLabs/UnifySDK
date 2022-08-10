@@ -18,7 +18,7 @@
 // Includes from other components
 #include "zwave_controller.h"
 #include "zwave_controller_keyset.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_rx.h"
 #include "ZW_classcmd.h"
 #include "sl_log.h"
@@ -214,7 +214,8 @@ void zwave_command_handler_on_frame_received(
 
   // Print out the frame dispatch
   std::stringstream message;
-  message << "Dispatching incoming command from NodeID "
+  message << "Dispatching incoming command (encapsulation "
+          << int(connection_info->encapsulation) << ") from NodeID "
           << int(connection_info->remote.node_id) << ":"
           << int(connection_info->remote.endpoint_id) << " - [ ";
 

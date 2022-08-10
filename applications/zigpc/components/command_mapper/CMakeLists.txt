@@ -17,7 +17,7 @@ add_library(
 target_include_directories(
   zigpc_command_mapper
   PUBLIC include
-  PRIVATE src)
+  PRIVATE src ${nlohmann_json_include})
 
 target_link_libraries(
   zigpc_command_mapper

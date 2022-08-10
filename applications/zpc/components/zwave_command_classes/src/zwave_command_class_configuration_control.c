@@ -19,7 +19,7 @@
 #include "attribute_store_defined_attribute_types.h"
 
 // Includes from other ZPC Components
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_command_handler.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_controller_utils.h"
@@ -78,33 +78,6 @@ static const attribute_store_type_t configuration_parameter_attributes[]
 // Private helper functions
 ///////////////////////////////////////////////////////////////////////////////
 /**
- * @brief Find the command class version of a supporting node from a configuration
- * CC attribute
- *
- * @param configuration_attribute_node    Attribute store node attribute under
- *                                        the Endpoint ID
- * @return zwave_cc_version_t Indicating the version of the command class supported
- *         by the node. 0 if unknown.
- */
-static zwave_cc_version_t get_supporting_node_configuration_version(
-  attribute_store_node_t configuration_attribute_node)
-{
-  attribute_store_node_t endpoint_node
-    = attribute_store_get_first_parent_with_type(configuration_attribute_node,
-                                                 ATTRIBUTE_ENDPOINT_ID);
-
-  attribute_store_node_t version_node = attribute_store_get_node_child_by_type(
-    endpoint_node,
-    ZWAVE_CC_VERSION_ATTRIBUTE(COMMAND_CLASS_CONFIGURATION_V4),
-    0);
-
-  zwave_cc_version_t version = 0;
-  attribute_store_get_reported(version_node, &version, sizeof(version));
-
-  return version;
-}
-
-/**
  * @brief Checks if the node we are talking to supports Bulk Commands
  *
  * @param configuration_attribute_node    Attribute store node attribute under
@@ -119,9 +92,8 @@ static bool
                                                  ATTRIBUTE_ENDPOINT_ID);
 
   attribute_store_node_t bulk_support_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(BULK_SUPPORT),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(BULK_SUPPORT));
 
   configuration_parameter_flag_t bulk_support = false;
   attribute_store_get_reported(bulk_support_node,
@@ -147,9 +119,8 @@ static bool
 
   bool read_only = false;
   attribute_store_node_t read_only_node
-    = attribute_store_get_node_child_by_type(parameter_id_node,
-                                             ATTRIBUTE(PARAMETER_READ_ONLY),
-                                             0);
+    = attribute_store_get_first_child_by_type(parameter_id_node,
+                                              ATTRIBUTE(PARAMETER_READ_ONLY));
   attribute_store_get_reported(read_only_node, &read_only, sizeof(read_only));
   return read_only;
 }
@@ -199,9 +170,8 @@ static configuration_parameter_size_t
   get_configuration_parameter_size(attribute_store_node_t parameter_id_node)
 {
   attribute_store_node_t parameter_size_node
-    = attribute_store_get_node_child_by_type(parameter_id_node,
-                                             ATTRIBUTE(PARAMETER_SIZE),
-                                             0);
+    = attribute_store_get_first_child_by_type(parameter_id_node,
+                                              ATTRIBUTE(PARAMETER_SIZE));
 
   configuration_parameter_size_t size = 0;
   attribute_store_get_reported(parameter_size_node, &size, sizeof(size));
@@ -218,9 +188,8 @@ static configuration_parameter_value_t
   get_configuration_parameter_value(attribute_store_node_t parameter_id_node)
 {
   attribute_store_node_t parameter_value_node
-    = attribute_store_get_node_child_by_type(parameter_id_node,
-                                             ATTRIBUTE(PARAMETER_VALUE),
-                                             0);
+    = attribute_store_get_first_child_by_type(parameter_id_node,
+                                              ATTRIBUTE(PARAMETER_VALUE));
 
   configuration_parameter_value_t value = 0;
   attribute_store_get_reported(parameter_value_node, &value, sizeof(value));
@@ -237,9 +206,8 @@ static configuration_parameter_format_t
   get_configuration_parameter_format(attribute_store_node_t parameter_id_node)
 {
   attribute_store_node_t parameter_format_node
-    = attribute_store_get_node_child_by_type(parameter_id_node,
-                                             ATTRIBUTE(PARAMETER_FORMAT),
-                                             0);
+    = attribute_store_get_first_child_by_type(parameter_id_node,
+                                              ATTRIBUTE(PARAMETER_FORMAT));
 
   configuration_parameter_format_t format = 0;
   attribute_store_get_reported(parameter_format_node, &format, sizeof(format));
@@ -287,33 +255,9 @@ static void save_parameter_value(const uint8_t *frame,
   configuration_parameter_value_t value = 0;
   if (format != PARAMETER_FORMAT_SIGNED_INTEGER) {
     // We stored the value as signed by default, if not signed format, convert to unsigned.
-    if (size == 1) {
-      uint8_t new_value = 0;
-      memcpy(&new_value, frame, size);
-      value = new_value;
-    } else if (size == 2) {
-      uint16_t new_value = 0;
-      memcpy(&new_value, frame, size);
-      value = new_value;
-    } else {
-      uint32_t new_value = 0;
-      memcpy(&new_value, frame, size);
-      value = new_value;
-    }
+    value = get_unsigned_value_from_frame_and_size(frame, size);
   } else {
-    if (size == 1) {
-      int8_t new_value = 0;
-      memcpy(&new_value, frame, size);
-      value = new_value;
-    } else if (size == 2) {
-      int16_t new_value = 0;
-      memcpy(&new_value, frame, size);
-      value = new_value;
-    } else {
-      int32_t new_value = 0;
-      memcpy(&new_value, frame, size);
-      value = new_value;
-    }
+    value = get_signed_value_from_frame_and_size(frame, size);
   }
 
   // Store in the attribute store.
@@ -427,14 +371,12 @@ static void
 
   while (parameter_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
     attribute_store_node_t value_node
-      = attribute_store_get_node_child_by_type(parameter_id_node,
-                                               ATTRIBUTE(PARAMETER_VALUE),
-                                               0);
+      = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                ATTRIBUTE(PARAMETER_VALUE));
     attribute_store_node_t default_value_node
-      = attribute_store_get_node_child_by_type(
+      = attribute_store_get_first_child_by_type(
         parameter_id_node,
-        ATTRIBUTE(PARAMETER_DEFAULT_VALUE),
-        0);
+        ATTRIBUTE(PARAMETER_DEFAULT_VALUE));
 
     // Do not update if it is read-only
     if (false == is_parameter_read_only(value_node)) {
@@ -473,9 +415,8 @@ static void undefine_all_parameter_values(attribute_store_node_t node)
 
   while (parameter_id_node != ATTRIBUTE_STORE_INVALID_NODE) {
     attribute_store_node_t value_node
-      = attribute_store_get_node_child_by_type(parameter_id_node,
-                                               ATTRIBUTE(PARAMETER_VALUE),
-                                               0);
+      = attribute_store_get_first_child_by_type(parameter_id_node,
+                                                ATTRIBUTE(PARAMETER_VALUE));
     attribute_store_undefine_desired(value_node);
     attribute_store_undefine_reported(value_node);
     // Increment to the next parameter ID.
@@ -527,8 +468,7 @@ static sl_status_t zwave_command_class_configuration_handle_report_command(
   }
 
   attribute_store_node_t endpoint_node
-    = zwave_command_class_get_endpoint_id_node(info->remote.node_id,
-                                               info->remote.endpoint_id);
+    = zwave_command_class_get_endpoint_node(info);
 
   // Fetch the parameter ID from the frame:
   configuration_parameter_id_t parameter_id = frame[2];
@@ -540,7 +480,8 @@ static sl_status_t zwave_command_class_configuration_handle_report_command(
 
   // If node is v1-v2, make sure to set back the next parameter id to 0.
   zwave_cc_version_t supporting_node_version
-    = get_supporting_node_configuration_version(parameter_id_node);
+    = zwave_command_class_get_version_from_node(parameter_id_node,
+                                                COMMAND_CLASS_CONFIGURATION_V4);
   if (supporting_node_version < 3) {
     configuration_parameter_id_t next_id = 0;
     attribute_store_set_child_reported(endpoint_node,
@@ -698,10 +639,9 @@ static sl_status_t
                                                info->remote.endpoint_id);
 
   configuration_parameter_id_t next_id = 0;
-  attribute_store_node_t next_id_node  = attribute_store_get_node_child_by_type(
+  attribute_store_node_t next_id_node = attribute_store_get_first_child_by_type(
     endpoint_node,
-    ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID),
-    0);
+    ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID));
   if (frame_length < 5) {
     // Make sure to stop trying to do Properties Get:
     attribute_store_set_reported(next_id_node, &next_id, sizeof(next_id));
@@ -857,9 +797,8 @@ static sl_status_t zwave_command_class_configuration_handle_info_report_command(
                             info->remote.endpoint_id,
                             parameter_id);
   attribute_store_node_t parameter_info_node
-    = attribute_store_get_node_child_by_type(parameter_id_node,
-                                             ATTRIBUTE(PARAMETER_INFO),
-                                             0);
+    = attribute_store_get_first_child_by_type(parameter_id_node,
+                                              ATTRIBUTE(PARAMETER_INFO));
 
   // Check if we just received a "Report To Follow"
   bool concatenate_with_previous_value = false;
@@ -921,9 +860,8 @@ static sl_status_t zwave_command_class_configuration_handle_name_report_command(
                             info->remote.endpoint_id,
                             parameter_id);
   attribute_store_node_t parameter_name_node
-    = attribute_store_get_node_child_by_type(parameter_id_node,
-                                             ATTRIBUTE(PARAMETER_NAME),
-                                             0);
+    = attribute_store_get_first_child_by_type(parameter_id_node,
+                                              ATTRIBUTE(PARAMETER_NAME));
 
   // Check if we just received a "Report To Follow"
   bool concatenate_with_previous_value = false;
@@ -1115,9 +1053,8 @@ static sl_status_t zwave_command_class_configuration_set(
 
   // Fetch the size and the value
   attribute_store_node_t parameter_value_node
-    = attribute_store_get_node_child_by_type(parameter_id_node,
-                                             ATTRIBUTE(PARAMETER_VALUE),
-                                             0);
+    = attribute_store_get_first_child_by_type(parameter_id_node,
+                                              ATTRIBUTE(PARAMETER_VALUE));
   configuration_parameter_value_t value = 0;
   attribute_store_get_desired(parameter_value_node, &value, sizeof(value));
   configuration_parameter_size_t size
@@ -1191,7 +1128,8 @@ static sl_status_t zwave_command_class_configuration_get_next_parameter(
   attribute_store_get_desired(node, &parameter_id, sizeof(parameter_id));
 
   zwave_cc_version_t supporting_node_version
-    = get_supporting_node_configuration_version(node);
+    = zwave_command_class_get_version_from_node(node,
+                                                COMMAND_CLASS_CONFIGURATION_V4);
 
   // For version 3 and higher, discover using the Properties Get command:
   if (supporting_node_version > 2) {
@@ -1264,7 +1202,8 @@ static sl_status_t zwave_command_class_configuration_name_get(
                                sizeof(parameter_id));
 
   zwave_cc_version_t supporting_node_version
-    = get_supporting_node_configuration_version(node);
+    = zwave_command_class_get_version_from_node(node,
+                                                COMMAND_CLASS_CONFIGURATION_V4);
 
   // Just fill a default string if the node cannot be asked.
   if (supporting_node_version < 3) {
@@ -1312,7 +1251,8 @@ static sl_status_t zwave_command_class_configuration_info_get(
                                sizeof(parameter_id));
 
   zwave_cc_version_t supporting_node_version
-    = get_supporting_node_configuration_version(node);
+    = zwave_command_class_get_version_from_node(node,
+                                                COMMAND_CLASS_CONFIGURATION_V4);
 
   // Just fill a default string if the node cannot be asked.
   if (supporting_node_version < 3) {
@@ -1356,7 +1296,8 @@ static sl_status_t zwave_command_class_configuration_properties_get(
                                sizeof(parameter_id));
 
   zwave_cc_version_t supporting_node_version
-    = get_supporting_node_configuration_version(node);
+    = zwave_command_class_get_version_from_node(node,
+                                                COMMAND_CLASS_CONFIGURATION_V4);
 
   // Just fill a default string if the node cannot be asked.
   if (supporting_node_version < 3) {
@@ -1389,7 +1330,8 @@ static sl_status_t zwave_command_class_configuration_default_reset(
   attribute_store_node_t node, uint8_t *frame, uint16_t *frame_length)
 {
   zwave_cc_version_t supporting_node_version
-    = get_supporting_node_configuration_version(node);
+    = zwave_command_class_get_version_from_node(node,
+                                                COMMAND_CLASS_CONFIGURATION_V4);
 
   // Double check that we are not doing anything wrong here:
   if (supporting_node_version < 4) {
@@ -1512,9 +1454,8 @@ static void zwave_command_class_configuration_on_version_attribute_update(
 
   // Set the bulk support based on the version, if not known:
   attribute_store_node_t bulk_support_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(BULK_SUPPORT),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE(BULK_SUPPORT));
   if (false
       == attribute_store_is_value_defined(bulk_support_node,
                                           REPORTED_ATTRIBUTE)) {

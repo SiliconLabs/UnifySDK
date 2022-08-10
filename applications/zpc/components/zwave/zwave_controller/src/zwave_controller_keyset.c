@@ -52,3 +52,21 @@ bool zwave_controller_encapsulation_scheme_greater_equal(
   }
   return k >= v;
 }
+
+zwave_keyset_t zwave_controller_get_key_from_encapsulation(
+  zwave_controller_encapsulation_scheme_t encapsulation)
+{
+  if (encapsulation == ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS) {
+    return ZWAVE_CONTROLLER_S2_ACCESS_KEY;
+  } else if (encapsulation
+             == ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_AUTHENTICATED) {
+    return ZWAVE_CONTROLLER_S2_AUTHENTICATED_KEY;
+  } else if (encapsulation
+             == ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_UNAUTHENTICATED) {
+    return ZWAVE_CONTROLLER_S2_UNAUTHENTICATED_KEY;
+  } else if (encapsulation == ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_0) {
+    return ZWAVE_CONTROLLER_S0_KEY;
+  } else {
+    return 0x00;
+  }
+}

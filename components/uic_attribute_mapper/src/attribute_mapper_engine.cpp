@@ -13,11 +13,14 @@
 #include "attribute_mapper_engine.hpp"
 
 #include "attribute_mapper.h"
+#include "attribute_mapper_process.h"
 #include "attribute_mapper_parser.hpp"
 #include "attribute_mapper_ast_print.hpp"
 #include "attribute_mapper_ast_eval.hpp"
 #include "attribute_mapper_ast_dep_eval.hpp"
 #include "attribute_mapper_cyclic_check.hpp"
+#include "attribute_mapper_ast_reducer.hpp"
+
 #include "sl_log.h"
 #include <map>
 #include <fstream>
@@ -57,9 +60,6 @@ bool MapperEngine::load_path(const std::string &uam_path)
     }
   }
 
-  //Reduce the ast
-  //ast::reducer reducer;
-  //reduce(ast);
   return true;
 }
 
@@ -94,6 +94,12 @@ bool MapperEngine::load_file(std::string uam_file_name)
     return false;
   }
 
+  // Perform the reduction
+  //ast::reducer reducer_instance;
+
+  //std::cout << "Before reduction " << ast;
+  //ast = reducer_instance(ast);
+  //std::cout << "After reduction " << ast;
   return update_dependencies(ast);
 }
 
@@ -131,7 +137,7 @@ bool MapperEngine::update_dependencies(const ast::ast_tree &ast)
         //if there is no right hand side dependencies we treat this as an error
         if (dependencies.size() == 0) {
           std::stringstream ss;
-          ss << "Constant assignment in " << assignment;
+          ss << "Constant assignment in " << *assignment;
           sl_log_error(LOG_TAG, ss.str().c_str());
           return false;
         }
@@ -155,12 +161,12 @@ bool MapperEngine::update_dependencies(const ast::ast_tree &ast)
           // Register the a callback on the dependency
           if ((a.second == 'r') || (a.second == 'e')) {
             attribute_store_register_callback_by_type_and_state(
-              MapperEngine::on_attribute_updated_reported,
+              &on_reported_attribute_update,
               a.first,
               REPORTED_ATTRIBUTE);
           } else if (a.second == 'd') {
             attribute_store_register_callback_by_type_and_state(
-              MapperEngine::on_attribute_updated_desired,
+              &on_desired_attribute_update,
               a.first,
               DESIRED_ATTRIBUTE);
           }
@@ -176,6 +182,12 @@ bool MapperEngine::update_dependencies(const ast::ast_tree &ast)
   // as a cyclic dependency
   //return false == ast::check_cyclic_dependencies(ast,relations);
   return true;
+}
+
+void MapperEngine::set_ep_type(attribute_store_type_t t)
+{
+  sl_log_debug(LOG_TAG, "Mapper engine configured with endpoint type %d", t);
+  ep_type = t;
 }
 
 //Get the singletron
@@ -201,7 +213,7 @@ attribute_store::attribute MapperEngine::get_destination_for_attribute(
     // a and b can be resolved. c should be created under b
     sl_log_debug(
       LOG_TAG,
-      "Creating attribute with type %08x under Attribute ID %d (type=%08x)",
+      "Creating attribute with type 0x%08x under Attribute ID %d (type=0x%08x)",
       path_evaluator.last_fail_type(),
       dest,
       dest.type());
@@ -212,10 +224,11 @@ attribute_store::attribute MapperEngine::get_destination_for_attribute(
 }
 
 void MapperEngine::on_attribute_updated(
-  attribute_store::attribute const &original_node,
+  attribute_store_node_t node,
   attribute_store_node_value_state_t state,
   attribute_store_change_t change)
 {
+  auto original_node = attribute_store::attribute(node);
   ast::value_type_t updated_value_type;
 
   if ((change == ATTRIBUTE_CREATED) || (change == ATTRIBUTE_DELETED)) {
@@ -225,9 +238,9 @@ void MapperEngine::on_attribute_updated(
   } else if (state == REPORTED_ATTRIBUTE) {
     updated_value_type = 'r';
   } else {
-    sl_log_error(
-      LOG_TAG,
-      "Invalid Attribute Store Update state (neither Desired nor Reported)");
+    sl_log_error(LOG_TAG,
+                 "Invalid Attribute Store Update state "
+                 "(neither Desired nor Reported)");
     return;
   }
 
@@ -264,43 +277,58 @@ void MapperEngine::on_attribute_updated(
     const ast::assignment &assignment = *(r->second);
 
     // attempt evaluation of the right hand side of the assignment
-    ast::eval evaluator(endpoint);
-    ast::result_type value = evaluator(assignment.rhs);
+    ast::eval<result_type_t> evaluator(endpoint);
+    auto value = evaluator(assignment.rhs);
 
     if (value) {
-      std::stringstream ss;
-      ss << "Match expression: " << assignment << " triggered by attribute ID "
-         << std::dec << original_node;
-      sl_log_debug(LOG_TAG, ss.str().c_str());
+      // Verify if we want to create an attribute.
+      const bool create_if_missing = (assignment.lhs.value_type == 'r'
+                                      || assignment.lhs.value_type == 'e');
 
       // Find the destination, start from the Endpoint node.
       attribute_store::attribute destination_node
         = get_destination_for_attribute(endpoint,
                                         assignment.lhs,
-                                        assignment.lhs.value_type == 'r');
+                                        create_if_missing);
       if (!destination_node.is_valid()) {
         continue;
       }
-      // Uncomment this to check dependencies
-      //attribute_store_log_node(original_node, true);
-      //attribute_store_log_node(destination_node, true);
+
+#ifndef NDEBUG
+      // Debug build will print the matched expressions
+      std::stringstream ss;
+      ss << "Match expression: " << assignment.lhs
+         << " triggered by Attribute ID " << std::dec << original_node
+         << " affecting Attribute ID " << std::dec << destination_node
+         << " - Result value: " << value.value();
+      sl_log_debug(LOG_TAG, ss.str().c_str());
+#endif
+
       try {
         if (assignment.lhs.value_type == 'r') {
+          if (change != ATTRIBUTE_DELETED) {
+            attribute_store_set_reported_number(destination_node,
+                                                value.value());
+            destination_node.clear_desired();
+          }
+        } else if (assignment.lhs.value_type == 'd') {
+          attribute_store_set_desired_number(destination_node, value.value());
+        } else if (assignment.lhs.value_type == 'e') {
+          //don't set a value just create the attribute
           if (change == ATTRIBUTE_DELETED) {
+            sl_log_debug(LOG_TAG,
+                         "Deleting Attribute ID %d after "
+                         "the deletion of Attribute ID %d",
+                         original_node,
+                         destination_node);
             destination_node.delete_node();
             //TODO: Now that we have deleted a node we should asynchronously
             // re-evaluate the realtions which depend on the type of the
             // original deleted node, because the relations may be forfilled in
-            // a another way ie in the expression r'a = r'b | r'c, here if b is
-            // deleted c can forfill the relation
-          } else {
-            destination_node.set_reported<int32_t>(value.value());
-            destination_node.clear_desired();
+            // a another way ie in the expression e'a = e'b | e'c, here if b is
+            // deleted, perhaps c still exists
           }
-        } else if (assignment.lhs.value_type == 'd') {
-          destination_node.set_desired<int32_t>(value.value());
-        } else if (assignment.lhs.value_type == 'e') {
-          //don't set a value just create the attribute
+          // The ATTRIBUTE_CREATED case is handled above in get_destination_for_attribute
         }
       } catch (std::invalid_argument const &) {
         sl_log_error(LOG_TAG,
@@ -309,18 +337,4 @@ void MapperEngine::on_attribute_updated(
       }
     }
   }
-}
-
-void MapperEngine::on_attribute_updated_reported(
-  attribute_store_node_t n, attribute_store_change_t change)
-{
-  attribute_store::attribute node(n);
-  get_instance().on_attribute_updated(node, REPORTED_ATTRIBUTE, change);
-}
-
-void MapperEngine::on_attribute_updated_desired(attribute_store_node_t n,
-                                                attribute_store_change_t change)
-{
-  attribute_store::attribute node(n);
-  get_instance().on_attribute_updated(node, DESIRED_ATTRIBUTE, change);
 }

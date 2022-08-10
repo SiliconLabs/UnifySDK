@@ -15,7 +15,7 @@
 
 extern "C" {
 
-// Shared UIC includes
+// Shared Unify includes
 #include <unity.h>
 #include <sl_status.h>
 #include "uic_mqtt_mock.h"

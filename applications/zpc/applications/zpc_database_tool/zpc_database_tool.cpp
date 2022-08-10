@@ -20,7 +20,7 @@
 
 #include "attribute.hpp"
 #include "attribute_store.h"
-#include "attribute_store_debug.h"
+#include "attribute_store_type_registration.h"
 #include "sl_log.h"
 #include "sl_status.h"
 
@@ -38,23 +38,24 @@ static nlohmann::json dump_data_store(const attribute &node)
 {
   nlohmann::json jsn;
 
-  const char *type_str = attribute_store_name_by_type(node.type());
-  jsn["type"] = std::string(type_str);
+  const char *type_str = attribute_store_get_type_name(node.type());
+  jsn["type"]          = std::string(type_str);
 
   vector<uint8_t> reported = node.get<vector<uint8_t>>(REPORTED_ATTRIBUTE);
   vector<uint8_t> desired  = node.get<vector<uint8_t>>(DESIRED_ATTRIBUTE);
   if (reported.size() > 0) {
     std::stringstream ss;
 
-    for (auto i : reported)
-      ss << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(i);
+    for (auto i: reported)
+      ss << std::hex << std::setfill('0') << std::setw(2)
+         << static_cast<int>(i);
 
     jsn["reported"] = ss.str();
   }
   if (desired.size() > 0) {
     std::stringstream ss;
 
-    for (auto i : desired)
+    for (auto i: desired)
       ss << std::hex << static_cast<int>(i);
 
     jsn["desired"] = desired;
@@ -87,10 +88,9 @@ static bool is_reported_desired_str_valid(const std::string &str)
     return false;
   }
 
-  for (auto chr : str) {
-    if (!((chr >= 'a' && chr <= 'h') ||
-          (chr >= 'A' && chr <= 'H') ||
-          (chr >= '0' && chr <= '9'))) {
+  for (auto chr: str) {
+    if (!((chr >= 'a' && chr <= 'h') || (chr >= 'A' && chr <= 'H')
+          || (chr >= '0' && chr <= '9'))) {
       return false;
     }
   }
@@ -107,10 +107,15 @@ static bool is_reported_desired_str_valid(const std::string &str)
  *
  * @return SL_STATUS_OK if success, error code otherwise.
  */
-static sl_status_t reported_desired_str_to_vector(const std::string &str, std::vector<uint8_t> &vect, const char *log_tag)
+static sl_status_t reported_desired_str_to_vector(const std::string &str,
+                                                  std::vector<uint8_t> &vect,
+                                                  const char *log_tag)
 {
   if (false == is_reported_desired_str_valid(str)) {
-    sl_log_error("zpc_database_tool", "Provided invalid '%s' value: '%s'", log_tag, str.c_str());
+    sl_log_error("zpc_database_tool",
+                 "Provided invalid '%s' value: '%s'",
+                 log_tag,
+                 str.c_str());
     return SL_STATUS_INVALID_PARAMETER;
   }
 
@@ -123,8 +128,11 @@ static sl_status_t reported_desired_str_to_vector(const std::string &str, std::v
 
     try {
       vect.push_back(static_cast<uint8_t>(std::stoi(buf, nullptr, 16)));
-    } catch ([[maybe_unused]] const std::invalid_argument & e) {
-      sl_log_error("zpc_database_tool", "Provided invalid '%s' value: '%s'", log_tag, str.c_str());
+    } catch ([[maybe_unused]] const std::invalid_argument &e) {
+      sl_log_error("zpc_database_tool",
+                   "Provided invalid '%s' value: '%s'",
+                   log_tag,
+                   str.c_str());
       return SL_STATUS_INVALID_PARAMETER;
     }
   }
@@ -138,8 +146,8 @@ static void import_data_store(attribute &parent, nlohmann::json &jsn)
     sl_log_error("zpc_database_tool", "Missing type attribute in json");
     return;
   }
-  std::string type_str = jsn["type"].get<std::string>();
-  attribute_store_type_t type = attribute_store_type_by_name(type_str.c_str());
+  std::string type_str        = jsn["type"].get<std::string>();
+  attribute_store_type_t type = attribute_store_get_type_by_name(type_str.c_str());
   attribute node;
 
   if (type == ATTRIBUTE_TREE_ROOT) {
@@ -150,10 +158,10 @@ static void import_data_store(attribute &parent, nlohmann::json &jsn)
     if (!jsn["reported"].is_null()) {
       vector<uint8_t> reported_arr;
 
-      if (SL_STATUS_OK != reported_desired_str_to_vector(
-            jsn["reported"].get<std::string>(),
-            reported_arr,
-            "reported")) {
+      if (SL_STATUS_OK
+          != reported_desired_str_to_vector(jsn["reported"].get<std::string>(),
+                                            reported_arr,
+                                            "reported")) {
         return;
       }
 
@@ -164,7 +172,10 @@ static void import_data_store(attribute &parent, nlohmann::json &jsn)
       std::string desired_str = jsn["desired"].get<std::string>();
       vector<uint8_t> desired_arr;
 
-      if (SL_STATUS_OK != reported_desired_str_to_vector(desired_str, desired_arr, "desired"))
+      if (SL_STATUS_OK
+          != reported_desired_str_to_vector(desired_str,
+                                            desired_arr,
+                                            "desired"))
         return;
 
       node.set<vector<uint8_t>>(DESIRED_ATTRIBUTE, desired_arr);

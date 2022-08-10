@@ -23,13 +23,12 @@
 #ifndef ZWAVE_NETWORK_MANAGEMENT_STATE_H
 #define ZWAVE_NETWORK_MANAGEMENT_STATE_H
 
-
 /**
  * @brief States of the Network Management module.
  *
  */
 typedef enum {
-   /** Idle state. */
+  /** Idle state. */
   NM_IDLE,
 
   /** Add mode state.
@@ -165,22 +164,6 @@ typedef enum {
    */
   NM_WAIT_FOR_SECURE_LEARN,
 
-
-  /** Learn mode state.
-   * TODO: do we need this?
-   * Only used with #NMS_FLAG_LEARNMODE_NEW.
-   *
-   * After learn mode, the gateway must wait for the SIS to probe
-   * before resetting.  So we stay in #NM_WAIT_FOR_PROBE_BY_SIS, and
-   * restart the 6 s timer every time a frame is received.
-   *
-   * On timeout, i.e., when no frames have been received for at least
-   * 6 s, we assume the SIS is done, post \ref ZIP_EVENT_RESET to \ref
-   * ZIP_Router and go to \ref NM_WAIT_FOR_OUR_PROBE.
-   */
-  NM_WAIT_FOR_PROBE_BY_SIS,
-
-
   /** Replace failed state.
    *
    * Replace and replace S2.
@@ -265,6 +248,13 @@ typedef enum {
    *  was due to timeout event or NM_EV_REMOVE_FAILED event from NM_IDLE.
    */
   NM_SEND_NOP,
+  /**
+   * Assign return route state
+   * when the NM get the zwave_api assign return route callback
+   * the NM state shall be shift to IDLE
+   * 
+   */
+  NM_ASSIGNING_RETURN_ROUTE,
 } zwave_network_management_state_t;
 #endif
 

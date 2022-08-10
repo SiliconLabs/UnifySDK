@@ -19,14 +19,16 @@
 #include <assert.h>
 
 // Includes from other ZPC Components
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_command_handler.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
 #include "ZW_classcmd.h"
 #include "zpc_attribute_resolver.h"
 
-// Includes from other UIC Components
+// Includes from other Unify Components
+#include "dotdot_mqtt.h"
+#include "dotdot_mqtt_generated_commands.h"
 #include "attribute_store_helper.h"
 #include "attribute_resolver.h"
 #include "attribute_timeouts.h"
@@ -37,6 +39,9 @@
 
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_##type
+
+// Value field index in the Binary Switch Set
+#define SET_VALUE_INDEX 2
 
 /**
  * @brief Full state of a binary Switch supporting node.
@@ -99,9 +104,7 @@ static void get_state(attribute_store_node_t state_node,
                              sizeof(command_status_values_t));
 
   attribute_store_node_t duration_node
-    = attribute_store_get_node_child_by_type(state_node,
-                                             ATTRIBUTE(DURATION),
-                                             0);
+    = attribute_store_get_first_child_by_type(state_node, ATTRIBUTE(DURATION));
   // Default duration, if v1
   state->desired_duration  = 0;
   state->reported_duration = 0;
@@ -115,7 +118,7 @@ static void get_state(attribute_store_node_t state_node,
                              sizeof(uint32_t));
 
   attribute_store_node_t value_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
+    = attribute_store_get_first_child_by_type(state_node, ATTRIBUTE(VALUE));
 
   attribute_store_read_value(value_node,
                              DESIRED_OR_REPORTED_ATTRIBUTE,
@@ -130,7 +133,7 @@ static void get_state(attribute_store_node_t state_node,
 static void set_desired_value(attribute_store_node_t state_node, uint32_t value)
 {
   attribute_store_node_t value_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
+    = attribute_store_get_first_child_by_type(state_node, ATTRIBUTE(VALUE));
 
   attribute_store_set_desired(value_node, &value, sizeof(value));
 }
@@ -139,7 +142,7 @@ static void set_reported_value(attribute_store_node_t state_node,
                                uint32_t value)
 {
   attribute_store_node_t value_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
+    = attribute_store_get_first_child_by_type(state_node, ATTRIBUTE(VALUE));
 
   attribute_store_set_reported(value_node, &value, sizeof(value));
 }
@@ -148,9 +151,7 @@ static void set_desired_duration(attribute_store_node_t state_node,
                                  uint32_t duration)
 {
   attribute_store_node_t duration_node
-    = attribute_store_get_node_child_by_type(state_node,
-                                             ATTRIBUTE(DURATION),
-                                             0);
+    = attribute_store_get_first_child_by_type(state_node, ATTRIBUTE(DURATION));
 
   attribute_store_set_desired(duration_node, &duration, sizeof(duration));
 }
@@ -159,9 +160,7 @@ static void set_reported_duration(attribute_store_node_t state_node,
                                   uint32_t duration)
 {
   attribute_store_node_t duration_node
-    = attribute_store_get_node_child_by_type(state_node,
-                                             ATTRIBUTE(DURATION),
-                                             0);
+    = attribute_store_get_first_child_by_type(state_node, ATTRIBUTE(DURATION));
 
   attribute_store_set_reported(duration_node, &duration, sizeof(duration));
 }
@@ -201,6 +200,32 @@ static sl_status_t zwave_command_class_binary_switch_set(
 ///////////////////////////////////////////////////////////////////////////////
 // Frame parsing functions
 ///////////////////////////////////////////////////////////////////////////////
+static sl_status_t zwave_command_class_binary_switch_handle_set(
+  const zwave_controller_connection_info_t *connection_info,
+  const uint8_t *frame_data,
+  uint16_t frame_length)
+{
+  // We expect to have at least 1 byte of value.
+  if (frame_length <= SET_VALUE_INDEX) {
+    return SL_STATUS_NOT_SUPPORTED;
+  }
+
+  unid_t node_unid;
+  zwave_unid_from_node_id(connection_info->remote.node_id, node_unid);
+  dotdot_endpoint_id_t endpoint_id = connection_info->remote.endpoint_id;
+
+  // Indicate if the node is trying to set on or off.
+  bool received_value = frame_data[SET_VALUE_INDEX];
+  if (received_value) {
+    uic_mqtt_dotdot_on_off_publish_generated_on_command(node_unid, endpoint_id);
+  } else {
+    uic_mqtt_dotdot_on_off_publish_generated_off_command(node_unid,
+                                                         endpoint_id);
+  }
+
+  return SL_STATUS_NOT_SUPPORTED;
+}
+
 static sl_status_t zwave_command_class_binary_switch_handle_report(
   const zwave_controller_connection_info_t *connection_info,
   const uint8_t *frame_data,
@@ -216,11 +241,9 @@ static sl_status_t zwave_command_class_binary_switch_handle_report(
     = zwave_command_class_get_endpoint_node(connection_info);
 
   attribute_store_node_t state_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE(STATE),
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node, ATTRIBUTE(STATE));
   attribute_store_node_t value_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
+    = attribute_store_get_first_child_by_type(state_node, ATTRIBUTE(VALUE));
 
   binary_switch_state_t state = {};
   get_state(state_node, &state);
@@ -370,9 +393,8 @@ static void zwave_command_class_binary_switch_on_version_attribute_update(
 
   if (supporting_node_version >= 1) {
     attribute_store_node_t state_node
-      = attribute_store_get_node_child_by_type(endpoint_node,
-                                               ATTRIBUTE(STATE),
-                                               0);
+      = attribute_store_get_first_child_by_type(endpoint_node,
+                                                ATTRIBUTE(STATE));
     if (state_node == ATTRIBUTE_STORE_INVALID_NODE) {
       state_node = attribute_store_add_node(ATTRIBUTE(STATE), endpoint_node);
     }
@@ -394,11 +416,9 @@ static void zwave_command_class_binary_switch_on_version_attribute_update(
 static void update_node_state(attribute_store_node_t state_node)
 {
   attribute_store_node_t duration_node
-    = attribute_store_get_node_child_by_type(state_node,
-                                             ATTRIBUTE(DURATION),
-                                             0);
+    = attribute_store_get_first_child_by_type(state_node, ATTRIBUTE(DURATION));
   attribute_store_node_t value_node
-    = attribute_store_get_node_child_by_type(state_node, ATTRIBUTE(VALUE), 0);
+    = attribute_store_get_first_child_by_type(state_node, ATTRIBUTE(VALUE));
 
   if (!attribute_store_is_value_defined(duration_node, REPORTED_ATTRIBUTE)
       || !attribute_store_is_value_defined(value_node, REPORTED_ATTRIBUTE)) {
@@ -459,6 +479,13 @@ sl_status_t zwave_command_class_binary_switch_control_handler(
   assert(frame_data[COMMAND_CLASS_INDEX] == COMMAND_CLASS_SWITCH_BINARY_V2);
 
   switch (frame_data[COMMAND_INDEX]) {
+    case SWITCH_BINARY_SET_V2:
+      // Note: This command is not supported, but we want to indicate
+      // to the application that we received it.
+      return zwave_command_class_binary_switch_handle_set(connection_info,
+                                                          frame_data,
+                                                          frame_length);
+
     case SWITCH_BINARY_REPORT_V2:
       return zwave_command_class_binary_switch_handle_report(connection_info,
                                                              frame_data,

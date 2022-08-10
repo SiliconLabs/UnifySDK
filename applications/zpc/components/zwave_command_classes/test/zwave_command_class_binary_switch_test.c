@@ -36,6 +36,8 @@
 #include "attribute_resolver_mock.h"
 #include "zpc_attribute_resolver_mock.h"
 #include "zwave_command_handler_mock.h"
+#include "dotdot_mqtt_mock.h"
+#include "dotdot_mqtt_generated_commands_mock.h"
 
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_BINARY_SWITCH_##type
@@ -397,4 +399,66 @@ void test_zwave_command_class_switch_binary_set_state()
   on_send_complete(state_node,
                    RESOLVER_SET_RULE,
                    FRAME_SENT_EVENT_OK_NO_SUPERVISION);
+}
+
+void test_zwave_command_class_switch_binary_generated_on_off_commands_on()
+{
+  // Simulate an incoming Binary Switch Set, with non-zero value
+  TEST_ASSERT_NOT_NULL(binary_handler.control_handler);
+
+  zwave_controller_connection_info_t connection_info = {};
+  connection_info.remote.node_id                     = node_id;
+  connection_info.remote.endpoint_id                 = endpoint_id;
+
+  const uint32_t value = 0x23;
+  const uint8_t incoming_set_frame[]
+    = {COMMAND_CLASS_SWITCH_BINARY_V2, SWITCH_BINARY_SET, (uint8_t)value};
+
+  uic_mqtt_dotdot_on_off_publish_generated_on_command_Expect(NULL, endpoint_id);
+  uic_mqtt_dotdot_on_off_publish_generated_on_command_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    binary_handler.control_handler(&connection_info,
+                                                   incoming_set_frame,
+                                                   sizeof(incoming_set_frame)));
+}
+
+void test_zwave_command_class_switch_binary_generated_on_off_commands_off()
+{
+  // Simulate an incoming Binary Switch Set, with zero value
+  TEST_ASSERT_NOT_NULL(binary_handler.control_handler);
+
+  zwave_controller_connection_info_t connection_info = {};
+  connection_info.remote.node_id                     = node_id;
+  connection_info.remote.endpoint_id                 = endpoint_id;
+
+  const uint8_t incoming_set_frame[]
+    = {COMMAND_CLASS_SWITCH_BINARY_V2, SWITCH_BINARY_SET, 0};
+
+  uic_mqtt_dotdot_on_off_publish_generated_off_command_Expect(NULL,
+                                                              endpoint_id);
+  uic_mqtt_dotdot_on_off_publish_generated_off_command_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    binary_handler.control_handler(&connection_info,
+                                                   incoming_set_frame,
+                                                   sizeof(incoming_set_frame)));
+}
+
+void test_zwave_command_class_switch_binary_generated_on_off_commands_too_short()
+{
+  // Simulate an incoming Binary Switch Set that's too short
+  TEST_ASSERT_NOT_NULL(binary_handler.control_handler);
+
+  zwave_controller_connection_info_t connection_info = {};
+  connection_info.remote.node_id                     = node_id;
+  connection_info.remote.endpoint_id                 = endpoint_id;
+
+  const uint8_t incoming_set_frame[]
+    = {COMMAND_CLASS_SWITCH_BINARY_V2, SWITCH_BINARY_SET};
+
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    binary_handler.control_handler(&connection_info,
+                                                   incoming_set_frame,
+                                                   sizeof(incoming_set_frame)));
 }

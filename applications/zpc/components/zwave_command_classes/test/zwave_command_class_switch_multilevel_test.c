@@ -39,14 +39,15 @@
 #include "zwave_command_handler_mock.h"
 #include "attribute_transitions_mock.h"
 #include "attribute_timeouts_mock.h"
+#include "dotdot_mqtt_generated_commands_mock.h"
 
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_##type
 
 // Static variables
-static attribute_resolver_function_t multilevel_set                = NULL;
-static attribute_resolver_function_t multilevel_get                = NULL;
-static attribute_resolver_function_t multilevel_capabilities_get   = NULL;
+static attribute_resolver_function_t multilevel_set              = NULL;
+static attribute_resolver_function_t multilevel_get              = NULL;
+static attribute_resolver_function_t multilevel_capabilities_get = NULL;
 static zpc_resolver_event_notification_function_t on_send_complete = NULL;
 static zwave_command_handler_t multilevel_handler                  = {};
 
@@ -101,9 +102,11 @@ static sl_status_t register_send_event_handler_stub(
   zpc_resolver_event_notification_function_t function,
   int cmock_num_calls)
 {
-  on_send_complete = function;
+  if (ATTRIBUTE(STATE) == type) {
+    on_send_complete = function;
+  }
   TEST_ASSERT_NOT_NULL(on_send_complete);
-  TEST_ASSERT_EQUAL(ATTRIBUTE(STATE), type);
+
   return SL_STATUS_OK;
 }
 
@@ -183,10 +186,7 @@ void test_zwave_command_class_switch_multilevel_new_supporting_node()
                                              0);
   node = attribute_store_get_node_child_by_type(node, ATTRIBUTE(ON_OFF), 0);
   uint32_t on_off_value = 0;
-  attribute_store_read_value(node,
-                             REPORTED_ATTRIBUTE,
-                             &on_off_value,
-                             sizeof(on_off_value));
+  attribute_store_get_reported(node, &on_off_value, sizeof(on_off_value));
   TEST_ASSERT_EQUAL(0xFF, on_off_value);
 
   u8_value = 3;
@@ -639,4 +639,202 @@ void test_zwave_command_class_switch_multilevel_supervision_success_when_we_want
   // Now simulate that we get a Supervision OK:
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(state_node, REPORTED_ATTRIBUTE));
+}
+
+void test_zwave_command_class_switch_multilevel_generated_level_commands_move()
+{
+  // Then simulate an start level change
+  TEST_ASSERT_NOT_NULL(multilevel_handler.control_handler);
+  zwave_controller_connection_info_t connection_info = {};
+  connection_info.remote.node_id                     = node_id;
+  connection_info.remote.endpoint_id                 = endpoint_id;
+
+  const uint8_t incoming_frame[] = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
+                                    SWITCH_MULTILEVEL_START_LEVEL_CHANGE};
+
+  // Nothing will be published with a too short frame
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    multilevel_handler.control_handler(&connection_info,
+                                                       incoming_frame,
+                                                       sizeof(incoming_frame)));
+
+  // Move up
+  const uint8_t incoming_frame_up[] = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
+                                       SWITCH_MULTILEVEL_START_LEVEL_CHANGE,
+                                       0x00};
+  uic_mqtt_dotdot_level_command_move_fields_t expected_fields = {};
+  expected_fields.move_mode = ZCL_MOVE_STEP_MODE_UP;
+  expected_fields.rate      = 0xFF;
+
+  uic_mqtt_dotdot_level_publish_generated_move_command_ExpectWithArray(
+    NULL,
+    endpoint_id,
+    &expected_fields,
+    sizeof(expected_fields));
+  uic_mqtt_dotdot_level_publish_generated_move_command_IgnoreArg_unid();
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    multilevel_handler.control_handler(&connection_info,
+                                       incoming_frame_up,
+                                       sizeof(incoming_frame_up)));
+
+  // Move down
+  const uint8_t incoming_frame_down[] = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
+                                         SWITCH_MULTILEVEL_START_LEVEL_CHANGE,
+                                         0x40};
+  expected_fields.move_mode           = ZCL_MOVE_STEP_MODE_DOWN;
+
+  uic_mqtt_dotdot_level_publish_generated_move_command_ExpectWithArray(
+    NULL,
+    endpoint_id,
+    &expected_fields,
+    sizeof(expected_fields));
+  uic_mqtt_dotdot_level_publish_generated_move_command_IgnoreArg_unid();
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    multilevel_handler.control_handler(&connection_info,
+                                       incoming_frame_down,
+                                       sizeof(incoming_frame_down)));
+
+  // Move down with rate
+  const uint8_t incoming_frame_down_with_rate[]
+    = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
+       SWITCH_MULTILEVEL_START_LEVEL_CHANGE,
+       0x40,
+       0x00,
+       33};
+  expected_fields.rate = 3;
+
+  uic_mqtt_dotdot_level_publish_generated_move_command_ExpectWithArray(
+    NULL,
+    endpoint_id,
+    &expected_fields,
+    sizeof(expected_fields));
+  uic_mqtt_dotdot_level_publish_generated_move_command_IgnoreArg_unid();
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    multilevel_handler.control_handler(&connection_info,
+                                       incoming_frame_down_with_rate,
+                                       sizeof(incoming_frame_down_with_rate)));
+
+  // Move down with rate 0xFF
+  const uint8_t incoming_frame_down_with_default_rate[]
+    = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4,
+       SWITCH_MULTILEVEL_START_LEVEL_CHANGE,
+       0x40,
+       0x00,
+       0xFF};
+  expected_fields.rate = 0xFF;
+
+  uic_mqtt_dotdot_level_publish_generated_move_command_ExpectWithArray(
+    NULL,
+    endpoint_id,
+    &expected_fields,
+    sizeof(expected_fields));
+  uic_mqtt_dotdot_level_publish_generated_move_command_IgnoreArg_unid();
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    multilevel_handler.control_handler(
+                      &connection_info,
+                      incoming_frame_down_with_default_rate,
+                      sizeof(incoming_frame_down_with_default_rate)));
+}
+
+void test_zwave_command_class_switch_multilevel_generated_level_commands_stop()
+{
+  // Then simulate an stop level change
+  TEST_ASSERT_NOT_NULL(multilevel_handler.control_handler);
+  zwave_controller_connection_info_t connection_info = {};
+  connection_info.remote.node_id                     = node_id;
+  connection_info.remote.endpoint_id                 = endpoint_id;
+
+  const uint8_t incoming_frame[]
+    = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4, SWITCH_MULTILEVEL_STOP_LEVEL_CHANGE};
+
+  uic_mqtt_dotdot_level_command_stop_fields_t expected_fields = {};
+  uic_mqtt_dotdot_level_publish_generated_stop_command_ExpectWithArray(
+    NULL,
+    endpoint_id,
+    &expected_fields,
+    sizeof(expected_fields));
+  uic_mqtt_dotdot_level_publish_generated_stop_command_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    multilevel_handler.control_handler(&connection_info,
+                                                       incoming_frame,
+                                                       sizeof(incoming_frame)));
+}
+
+void test_zwave_command_class_switch_multilevel_generated_level_commands_move_to_level()
+{
+  // Then simulate a Multilevel Switch Set
+  TEST_ASSERT_NOT_NULL(multilevel_handler.control_handler);
+  zwave_controller_connection_info_t connection_info = {};
+  connection_info.remote.node_id                     = node_id;
+  connection_info.remote.endpoint_id                 = endpoint_id;
+
+  const uint8_t incoming_frame[]
+    = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4, SWITCH_MULTILEVEL_SET};
+
+  // Nothing will be published with a too short frame
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    multilevel_handler.control_handler(&connection_info,
+                                                       incoming_frame,
+                                                       sizeof(incoming_frame)));
+
+  // Move to a value
+  const uint8_t incoming_frame_value[]
+    = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4, SWITCH_MULTILEVEL_SET, 0x23};
+  uic_mqtt_dotdot_level_command_move_to_level_fields_t expected_fields = {};
+  expected_fields.level                                                = 0x23;
+
+  uic_mqtt_dotdot_level_publish_generated_move_to_level_command_ExpectWithArray(
+    NULL,
+    endpoint_id,
+    &expected_fields,
+    sizeof(expected_fields));
+  uic_mqtt_dotdot_level_publish_generated_move_to_level_command_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    multilevel_handler.control_handler(&connection_info,
+                                       incoming_frame_value,
+                                       sizeof(incoming_frame_value)));
+
+  // Move to a value with duration
+  const uint8_t incoming_frame_value_duration[]
+    = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4, SWITCH_MULTILEVEL_SET, 0x23, 10};
+  expected_fields.level                                                = 0x23;
+  expected_fields.transition_time                                      = 100;
+
+  uic_mqtt_dotdot_level_publish_generated_move_to_level_command_ExpectWithArray(
+    NULL,
+    endpoint_id,
+    &expected_fields,
+    sizeof(expected_fields));
+  uic_mqtt_dotdot_level_publish_generated_move_to_level_command_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_NOT_SUPPORTED,
+    multilevel_handler.control_handler(&connection_info,
+                                       incoming_frame_value_duration,
+                                       sizeof(incoming_frame_value_duration)));
+
+  // Move to a value with default duration
+  const uint8_t incoming_frame_value_default_duration[]
+    = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4, SWITCH_MULTILEVEL_SET, 0x0, 0xFF};
+  expected_fields.level                                                = 0;
+  expected_fields.transition_time                                      = 0;
+
+  uic_mqtt_dotdot_level_publish_generated_move_to_level_command_ExpectWithArray(
+    NULL,
+    endpoint_id,
+    &expected_fields,
+    sizeof(expected_fields));
+  uic_mqtt_dotdot_level_publish_generated_move_to_level_command_IgnoreArg_unid();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_NOT_SUPPORTED,
+                    multilevel_handler.control_handler(
+                      &connection_info,
+                      incoming_frame_value_default_duration,
+                      sizeof(incoming_frame_value_default_duration)));
 }

@@ -62,6 +62,7 @@ void test_init()
                             "    - serial: /dev/ttyUSB0\n"
                             "    - tc_use_well_known_key: true\n"
                             "    - datastore_file: /tmp/database_file.db\n"
+                            "    - ota_path: /test-ota-mock/\n"
                             "mqtt:\n"
                             "    - host: localhost\n"
                             "    - port: 2000\n";
@@ -78,5 +79,7 @@ void test_init()
   TEST_ASSERT_EQUAL_STRING("/dev/ttyUSB0", zigpc_get_config()->serial_port);
   TEST_ASSERT_EQUAL_STRING("/tmp/database_file.db",
                            zigpc_get_config()->datastore_file);
+  TEST_ASSERT_EQUAL_STRING("/test-ota-mock/",
+                           zigpc_get_config()->ota_path);
   TEST_ASSERT_TRUE(zigpc_get_config()->tc_use_well_known_key);
 }

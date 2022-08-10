@@ -12,6 +12,7 @@
  *****************************************************************************/
 // Includes from this component
 #include "zwave_command_class_association_send.h"
+#include "zwave_command_class_association_helper.h"
 #include "zwave_command_class_agi.h"
 
 // Generic includes

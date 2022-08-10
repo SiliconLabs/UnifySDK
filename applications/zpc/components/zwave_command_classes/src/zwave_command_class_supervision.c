@@ -14,7 +14,7 @@
 #include "zwave_command_class_supervision.h"
 #include "zwave_command_class_supervision_internals.h"
 #include "zwave_command_class_supervision_process.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_command_class_wake_up.h"
 #include "zwave_command_classes_utils.h"
 
@@ -443,14 +443,11 @@ sl_status_t zwave_command_class_supervision_send_data(
     = sizeof(frame) - SUPERVISION_ENCAPSULATED_COMMAND_MAXIMUM_SIZE
       + data_length;
 
-  // Supervision Get expect 1 frame (or more) frames in response, if singlecast.
+  // Supervision Get expect 1 frame (or more) frames in response.
   // Update the tx option accordingly.
-  zwave_tx_options_t supervision_tx_options = *tx_options;
-  if (connection->remote.is_multicast == false) {
-    supervision_tx_options.number_of_responses = 1;
-  } else {
-    supervision_tx_options.number_of_responses = 0;
-  }
+  zwave_tx_options_t supervision_tx_options  = *tx_options;
+  supervision_tx_options.number_of_responses = tx_options->number_of_responses;
+  supervision_tx_options.number_of_responses += 1;
 
   intptr_t user_parameter = (intptr_t)INVALID_SUPERVISION_ID;
   if (connection->remote.is_multicast == false) {

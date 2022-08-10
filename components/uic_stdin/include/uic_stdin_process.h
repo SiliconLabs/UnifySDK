@@ -15,14 +15,14 @@
 
 /**
  * @ingroup uic_stdin
- * @brief UIC interface to Contiki STDIN feature.
+ * @brief Unify interface to Contiki STDIN feature.
  *
- * Contains setup logic for UIC and some code that would normally be part of
+ * Contains setup logic for Unify and some code that would normally be part of
  * the Contiki main loop.
  *
- * UIC STDIN makes it possible to integrate CLI commands to an existing
- * CLI system running in the UIC part. When integrating UIC in an application
- * the UIC will start a CLI by default.
+ * Unify STDIN makes it possible to integrate CLI commands to an existing
+ * CLI system running in the Unify part. When integrating Unify in an application
+ * the Unify will start a CLI by default.
  *
  * The Contiki code has been modified to remove the usual STDIN setup logic.
  *
@@ -36,7 +36,7 @@ extern "C" {
 #include "sl_status.h"
 
 /**
- * @brief Start and setup CLI process in UIC other.
+ * @brief Start and setup CLI process in Unify other.
  *
  * Starts the CLI process and enables other applications
  * to interface the same CLI.

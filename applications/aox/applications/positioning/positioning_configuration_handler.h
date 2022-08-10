@@ -24,6 +24,13 @@
 #ifndef POSITIONING_CONFIGURATION_HANDLER_H
 #define POSITIONING_CONFIGURATION_HANDLER_H
 
+#include "angle_queue.h"
+
+/**
+ * @brief Global configuration settings for the angle queue component.
+ */
+extern angle_queue_config_t angle_queue_config;
+
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -25,7 +25,7 @@
 
 #include <nlohmann/json.hpp>
 
-// UIC shared includes
+// Unify shared includes
 #include <sl_status.h>
 #include <uic_mqtt.h>
 

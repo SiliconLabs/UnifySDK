@@ -52,3 +52,7 @@
 .writable .MuiSelect-iconOutlined {
     margin-right: 20px;
 }
+
+.cluster-attributes .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root {
+    padding-right: 1px;
+}

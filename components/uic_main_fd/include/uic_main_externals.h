@@ -18,7 +18,7 @@ extern "C" {
 
 #include <stdbool.h>
 
-#include "process.h"
+#include "sys/process.h"
 #include "sl_status.h"
 
 /** @defgroup uic_main_ext Unify External Event Demultiplexer

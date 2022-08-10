@@ -14,7 +14,7 @@
 #include "identify_cluster_mapper.h"
 #include "dotdot_attributes.h"
 
-// Includes from UIC
+// Includes from Unify
 #include "sl_log.h"
 #include "sl_status.h"
 
@@ -32,7 +32,6 @@ static sl_status_t on_identify(dotdot_unid_t unid,
              : SL_STATUS_FAIL;
   }
 
-  ;
   return dotdot_set_identify_identify_time(unid,
                                            endpoint,
                                            DESIRED_ATTRIBUTE,

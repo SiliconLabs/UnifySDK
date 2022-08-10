@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="721px" preserveAspectRatio="none" style="width:1163px;height:721px;background:#FFFFFF;" version="1.1" viewBox="0 0 1163 721" width="1163px" zoomAndPan="magnify"><defs><filter height="300%" id="f197bam82l3x4w" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="260" x="445" y="16.708">Firmware Update data model</text><rect fill="#DDDDDD" height="26.2969" rx="5" ry="5" style="stroke:#000000;stroke-width:1.0;" width="459" x="345" y="28.9531"/><text fill="#FEFEFE" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="351" y="46.9482">ATTRIBUTE(type)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="325" x="473" y="46.9482">: ATTRIBUTE_COMMAND_CLASS_FWU_MD_type</text><!--MD5=[ea3d5de2a0d35296bc751d5a1b771698]
+cluster Attribute Store--><path d="M6,80.25 C6,70.25 581,70.25 581,70.25 C581,70.25 1156,70.25 1156,80.25 L1156,704.25 C1156,714.25 581,714.25 581,714.25 C581,714.25 6,714.25 6,704.25 L6,80.25 " fill="#FFFFFF" filter="url(#f197bam82l3x4w)" style="stroke:#000000;stroke-width:1.5;"/><path d="M6,80.25 C6,90.25 581,90.25 581,90.25 C581,90.25 1156,90.25 1156,80.25 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="118" x="522" y="105.2451">Attribute Store</text><!--MD5=[351cc048e20f2d2b722368ee5711c030]
+cluster For each Firmware ID (0..N)--><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="193" style="stroke:#000000;stroke-width:1.5;" width="483" x="665" y="412.25"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="216" x="798.5" y="427.2451">For each Firmware ID (0..N)</text><rect fill="#F2FFE6" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="201" x="282.5" y="112.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="360.5" y="125.3887">NodeID</text><line style="stroke:#000000;stroke-width:1.5;" x1="283.5" x2="482.5" y1="130.2188" y2="130.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="189" x="288.5" y="143.501">Attribute Type = ATTRIBUTE_NODE_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="288.5" y="155.1416">value = Desired: [], Reported: [03]</text><rect fill="#E6FFF7" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="224" x="271" y="221.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="325.5" y="234.3887">Endpoint Attribute</text><line style="stroke:#000000;stroke-width:1.5;" x1="272" x2="494" y1="239.2188" y2="239.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="212" x="277" y="252.501">Attribute Type = ATTRIBUTE_ENDPOINT_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="277" y="264.1416">value = Desired: [] - Reported: [04]</text><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="204" x="168" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="246.5" y="343.3887">Version</text><line style="stroke:#000000;stroke-width:1.5;" x1="169" x2="371" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="192" x="174" y="361.501">Attribute Type = ATTRIBUTE(VERSION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="174" y="373.1416">value = Desired: [] - Reported: [5]</text><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="180" x="407" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="106" x="444" y="343.3887">Firmware Update</text><line style="stroke:#000000;stroke-width:1.5;" x1="408" x2="586" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="413" y="361.501">Attribute Type = ATTRIBUTE(FWU)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="413" y="373.1416">value = Desired: [], Reported: [1]</text><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="288" x="14" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="100" x="108" y="452.3887">Manufacturer ID</text><line style="stroke:#000000;stroke-width:1.5;" x1="15" x2="301" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="276" x="20" y="470.501">Attribute Type = ATTRIBUTE(FWU_MANUFACTURER_ID)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="180" x="20" y="482.1416">value = Desired: [], Reported: [0000]</text><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="270" x="126" y="657.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="87" x="217.5" y="670.3887">Fragment size</text><line style="stroke:#000000;stroke-width:1.5;" x1="127" x2="395" y1="675.2188" y2="675.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="258" x="132" y="688.501">Attribute Type = ATTRIBUTE(FWU_FRAGMENT_SIZE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="132" y="700.1416">value = Desired: [], Reported: [50]</text><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="246" x="374" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="61" x="466.5" y="452.3887">Activation</text><line style="stroke:#000000;stroke-width:1.5;" x1="375" x2="619" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="234" x="380" y="470.501">Attribute Type = ATTRIBUTE(FWU_ACTIVATION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="380" y="482.1416">value = Desired: [], Reported: [1]</text><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="201" x="466.5" y="657.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="16" x="559" y="670.3887">CC</text><line style="stroke:#000000;stroke-width:1.5;" x1="467.5" x2="666.5" y1="675.2188" y2="675.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="189" x="472.5" y="688.501">Attribute Type = ATTRIBUTE(FWU_CC)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="472.5" y="700.1416">value = Desired: [], Reported: [1]</text><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="200" x="692" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="92" x="746" y="452.3887">Firmware Entry</text><line style="stroke:#000000;stroke-width:1.5;" x1="693" x2="891" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="188" x="698" y="470.501">Attribute Type = ATTRIBUTE(FWU_FW)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="698" y="482.1416">value = Desired: [], Reported: [0]</text><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="216" x="673" y="548.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="72" x="745" y="561.3887">Firmware ID</text><line style="stroke:#000000;stroke-width:1.5;" x1="674" x2="888" y1="566.2188" y2="566.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="204" x="679" y="579.501">Attribute Type = ATTRIBUTE(FWU_FW_ID)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="180" x="679" y="591.1416">value = Desired: [], Reported: [1234]</text><rect fill="#FFFFFF" filter="url(#f197bam82l3x4w)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="216" x="924" y="548.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="133" x="965.5" y="561.3887">Firmware Upgradable</text><line style="stroke:#000000;stroke-width:1.5;" x1="925" x2="1139" y1="566.2188" y2="566.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="204" x="930" y="579.501">Attribute Type = ATTRIBUTE(FWU_FW_ID)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="180" x="930" y="591.1416">value = Desired: [], Reported: [0xFF]</text><!--MD5=[95477c314ce472250aabd32546a8a81f]
+reverse link node to endpoint--><path codeLine="716" d="M383,174.8796 C383,190.2226 383,207.4737 383,221.1141 " fill="none" id="node-backto-endpoint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="383,161.4838,379,167.4838,383,173.4838,387,167.4838,383,161.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c4a4e185f2beba9fb9ec0dd52638d41f]
+reverse link endpoint to version--><path codeLine="717" d="M347.799,279.705 C330.8815,296.0236 310.9796,315.221 295.54,330.1141 " fill="none" id="endpoint-backto-version" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="357.3586,270.4838,350.2632,271.7704,348.7218,278.8148,355.8172,277.5282,357.3586,270.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7d1ed1816a5a9902fa1639e46584bfcc]
+reverse link endpoint to firmware_update--><path codeLine="718" d="M418.5125,279.705 C435.5797,296.0236 455.6578,315.221 471.234,330.1141 " fill="none" id="endpoint-backto-firmware_update" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="408.8684,270.4838,410.4408,277.5214,417.5418,278.7767,415.9694,271.7391,408.8684,270.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b8e12eee613e48a83327c0100383b1a0]
+reverse link firmware_update to firmare_entry--><path codeLine="719" d="M600.0705,382.3406 C628.8648,390.9729 659.9428,401.1701 688,412.25 C707.6767,420.0204 728.7081,430.0804 746.6728,439.2446 " fill="none" id="firmware_update-backto-firmare_entry" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="587.4546,378.6134,592.0754,384.1495,598.9628,382.0135,594.3421,376.4774,587.4546,378.6134" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8f3ca9a186f290be2c9976ca7a0b7377]
+reverse link firmare_entry to firmare_id--><path codeLine="720" d="M788.1521,501.8796 C786.6037,517.2226 784.8627,534.4737 783.4862,548.1141 " fill="none" id="firmare_entry-backto-firmare_id" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="789.5039,488.4838,784.9216,494.0518,788.2989,500.4231,792.8812,494.8551,789.5039,488.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9593bf30636bc60122d4ce4d130f9b2c]
+reverse link firmare_entry to firmare_upgradable--><path codeLine="721" d="M858.0704,493.757 C895.8055,510.895 942.5242,532.1131 978.0371,548.2418 " fill="none" id="firmare_entry-backto-firmare_upgradable" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="846.1599,488.3476,849.9688,494.4707,857.0859,493.3098,853.2769,487.1867,846.1599,488.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[3069d37a82388a920fdef4ce32bfa04f]
+reverse link firmware_update to manufacturer_id--><path codeLine="722" d="M407.8027,383.4299 C353.8134,400.7893 285.6875,422.6942 234.2226,439.2418 " fill="none" id="firmware_update-backto-manufacturer_id" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="420.4991,379.3476,413.5627,377.3763,409.0751,383.0209,416.0116,384.9922,420.4991,379.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4cdd9546a6c50bb6b31e84855b0c880c]
+reverse link firmware_update to fragment_size--><path codeLine="723" d="M394.8763,384.5696 C380.895,391.9334 367.6958,401.0337 357,412.25 C339.3476,430.7616 287.9424,593.9883 268.5357,657.0425 " fill="none" id="firmware_update-backto-fragment_size" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="406.7668,378.7841,399.6215,377.8124,395.9763,384.0344,403.1217,385.0061,406.7668,378.7841" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4dfa77f72ca65a30c48dd9aa6f868c63]
+reverse link firmware_update to activation--><path codeLine="724" d="M497,392.8796 C497,408.2226 497,425.4737 497,439.1141 " fill="none" id="firmware_update-backto-activation" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="497,379.4838,493,385.4838,497,391.4838,501,385.4838,497,379.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4e01f990e0224445047fbdf0e2103dd8]
+reverse link firmware_update to cc--><path codeLine="725" d="M599.0954,379.0677 C614.4599,387.149 628.3634,397.9131 638,412.25 C690.903,490.9567 621.1794,607.1197 585.5904,657.2476 " fill="none" id="firmware_update-backto-cc" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="587.1079,373.3962,590.8208,379.578,597.9551,378.5282,594.2422,372.3465,587.1079,373.3962" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[943fd35787c044128dbb131ab215fa3a]
+link manufacturer_id to fragment_size--><!--MD5=[09f0a58dd013a10df06ac97f2a2661c4]
+link activation to cc--><!--MD5=[6b2b3da0dfec8ed5df5df0674c319702]
+@startuml attribute_store_firmware_update.svg
+title Firmware Update data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_FWU_MD_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FFFFFF
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [5]
+
+  object "Firmware Update" as firmware_update #FFFFFF
+  firmware_update : Attribute Type = ATTRIBUTE(FWU)
+  firmware_update : value = Desired: [], Reported: [1]
+
+  package "For each Firmware ID (0..N)" <<Rectangle>> {
+    object "Firmware Entry" as firmare_entry #FFFFFF
+    firmare_entry : Attribute Type = ATTRIBUTE(FWU_FW)
+    firmare_entry : value = Desired: [], Reported: [0]
+
+    object "Firmware ID" as firmare_id #FFFFFF
+    firmare_id : Attribute Type = ATTRIBUTE(FWU_FW_ID)
+    firmare_id : value = Desired: [], Reported: [1234]
+
+    object "Firmware Upgradable" as firmare_upgradable #FFFFFF
+    firmare_upgradable : Attribute Type = ATTRIBUTE(FWU_FW_ID)
+    firmare_upgradable : value = Desired: [], Reported: [0xFF]
+  }
+
+  object "Manufacturer ID" as manufacturer_id #FFFFFF
+  manufacturer_id : Attribute Type = ATTRIBUTE(FWU_MANUFACTURER_ID)
+  manufacturer_id : value = Desired: [], Reported: [0000]
+
+  object "Fragment size" as fragment_size #FFFFFF
+  fragment_size : Attribute Type = ATTRIBUTE(FWU_FRAGMENT_SIZE)
+  fragment_size : value = Desired: [], Reported: [50]
+
+  object "Activation" as activation #FFFFFF
+  activation : Attribute Type = ATTRIBUTE(FWU_ACTIVATION)
+  activation : value = Desired: [], Reported: [1]
+
+  object "CC" as cc #FFFFFF
+  cc : Attribute Type = ATTRIBUTE(FWU_CC)
+  cc : value = Desired: [], Reported: [1]
+}
+
+node *- - endpoint
+endpoint *- - version
+endpoint *- - firmware_update
+firmware_update *- - firmare_entry
+firmare_entry *- - firmare_id
+firmare_entry *- - firmare_upgradable
+firmware_update *- - manufacturer_id
+firmware_update *- - fragment_size
+firmware_update *- - activation
+firmware_update *- - cc
+
+manufacturer_id -[hidden]- -> fragment_size
+activation -[hidden]- -> cc
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: ANSI_X3.4-1968
+Language: en
+Country: US
+--></g></svg>

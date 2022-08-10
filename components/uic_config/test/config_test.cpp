@@ -405,7 +405,7 @@ void test_dump_config()
   // vm["zpc.poll.backoff"] = 42
   // vm["zpc.poll.default_interval"] = 500
 
-  const std::string expected(R"(# Unify sample conf file
+  std::string expected(R"(# Unify sample conf file
 
 conf: '/etc/uic/uic.cfg'
 log:
@@ -414,6 +414,7 @@ log:
 mqtt:
   cafile: ''
   certfile: ''
+  client_id: 'test_config_$pid'
   host: 'localhost'
   keyfile: ''
   port: 1883
@@ -423,6 +424,11 @@ zpc:
     default_interval: 44
   serial: '/dev/ttyUSB0'
 )");
+  expected.find("$pid_number");
+  getpid();
+  char pid[16];
+  snprintf(pid, sizeof(pid), "%i", getpid());
+  expected.replace(expected.find("$pid"), 4, pid);
   TEST_ASSERT_EQUAL(CONFIG_STATUS_OK,
                     config_add_string("zpc.serial", "TTY", "/dev/ttyUSB0"));
   TEST_ASSERT_EQUAL(

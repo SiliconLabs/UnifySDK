@@ -1,0 +1,11 @@
+# Debugging failed asserts
+
+In order to debug a failed assertion, it can be helpful to run the unit test in a
+debugger and set a breakpoint. The table shows where to place the
+breakpoint when troubleshooting different assertion error messages.
+
+|Test Error Message | Where to put breakpoint |
+| ---               | ---                     |
+|":38:test_name:FAIL: Expected 3 Was 5" (and similar)|UnityTestResultsFailBegin()|
+|"Expected mock call(s) never occurred, see list above for details."|mock_call_expected_did_not_occur()|
+|"Unexpected mock call occurred: "|mock_call_did_not_find()|

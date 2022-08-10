@@ -20,4 +20,3 @@
 #include "zwave_COMMAND_CLASS_INDICATOR_attribute_id.h"
 #include "zwave_COMMAND_CLASS_ZWAVEPLUS_INFO_attribute_id.h"
 #include "zwave_COMMAND_CLASS_MANUFACTURER_SPECIFIC_attribute_id.h"
-#include "zwave_COMMAND_CLASS_SWITCH_COLOR_attribute_id.h"

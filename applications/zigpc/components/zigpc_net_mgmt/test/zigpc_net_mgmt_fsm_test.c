@@ -13,7 +13,7 @@
 
 #include <string.h>
 
-// Shared UIC includes
+// Shared Unify includes
 #include <unity.h>
 
 // ZigPC includes

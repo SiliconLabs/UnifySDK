@@ -8,7 +8,7 @@ target_include_directories(uic_log PUBLIC include)
 target_link_libraries(
   uic_log
   PUBLIC uic_config
-  PRIVATE Boost::log Boost::log_setup)
+  PRIVATE Boost::log Boost::log_setup pthread)
 
 target_add_unittest(uic_log SOURCES test/sl_log_test.c)
 # Disable compiler note for ps abi on Linux

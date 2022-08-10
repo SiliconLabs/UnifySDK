@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// UIC shared includes
+// Unify shared includes
 #include <sl_log.h>
 #include <sl_status.h>
 #include <sys/etimer.h>

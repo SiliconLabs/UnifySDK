@@ -19,7 +19,7 @@
 #include "attribute_store_defined_attribute_types.h"
 #include "zpc_converters.h"
 
-// Includes from UIC components
+// Includes from Unify components
 #include "attribute.hpp"
 #include "smartstart_management.hpp"
 #include "sl_log.h"

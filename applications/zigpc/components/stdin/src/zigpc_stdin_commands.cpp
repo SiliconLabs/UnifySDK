@@ -14,7 +14,7 @@
 #include <map>
 #include <string>
 
-// UIC components
+// Unify components
 #include "sl_status.h"
 #include "sl_log.h"
 #include "uic_stdin.hpp"
@@ -84,7 +84,7 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
    {" :Log current Zigbee Network key", &handle_print_emberaf_nwk_key}},
 };
 
-// Adding zpc commands to the UIC CLI
+// Adding zpc commands to the Unify CLI
 sl_status_t zigpc_stdin_setup_fixt(void)
 {
   uic_stdin_add_commands(commands);

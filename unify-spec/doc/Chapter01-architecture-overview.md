@@ -4,10 +4,10 @@
 
 Term                       | Abbreviation   | Description
 ------------- | ------------- | -------------
-Unify SDK | Unify | The system whose design is described here. Formerly known as Unified IoT Controller (UIC).
+Unify Framework | Unify | The system whose design is described here. Formerly known as Unified IoT Controller (UIC).
 Software Development Kit | SDK | A software package used as a building block for other software. Unify is itself an SDK.
-Unified Node ID | UNID | A unified addressing system with a separate sub-namespace for each PHY supported by the Unify SDK. It is arbitrarily chosen to resemble an IPv6 address in the current design.
-Unify Controller Language | UCL | The unified command language used as an internal abstraction layer in the Unify SDK.
+Unified Node ID | UNID | A unified addressing system with a separate sub-namespace for each PHY supported by the Unify Framework. It is arbitrarily chosen to resemble an IPv6 address in the current design.
+Unify Controller Language | UCL | The unified command language used as an internal abstraction layer in the Unify Framework.
 Cluster | CL | A grouping of related commands/attributes supported by an end-node. Examples include Door Lock, Multilevel Switch, Movement Sensor, and so on. For example, Bluetooth Profiles and Z-Wave Command Classes can be translated into CCs. CCs are encoded as MQTT topic strings, e.g., "door_lock", "movement_sensor", and so on.
 Command | CMD | An attribute or command that can either be sent to the endnode or received from it. Grouped into Clusters. Zigbee Commands and Attributes, Z-Wave Commands, and Bluetooth Profiles can all be translated or broken down into CMDs. CMDs are encoded as MQTT topic strings, e.g., "doorlock_operation_set" and "doorlock_operation_get" and "doorlock_operation_report".
 Endpoint | EndPointID | Endpoints are sub-addresses in unsigned integers of a UNID. Devices without PAN-side support for endpoints use ep0.
@@ -21,11 +21,11 @@ Gateway | GW | An IP host connecting two different domains. A Unify Gateway cons
 
 ## Introduction
 
-The Unify SDK delivers a unified high-level API, such as cloud control, local HomeAssistant middle-wares, and so on to control, observe and manage end nodes in all PHYs supported by Silicon Labs. It also facilitates code reuse and allows easily adding new high-level APIs without the need to modify the PHY drivers. After a new high-level API module has been created, it should be possible to control all the supported PHYs without any changes to the PHY drivers. Likewise, after a new PHY driver has been created, it should immediately be possible to control that PHY from all the existing high-level APIs without modifying the high-level API module.
+The Unify Framework delivers a unified high-level API, such as cloud control, local HomeAssistant middle-wares, and so on to control, observe and manage end nodes in all PHYs supported by Silicon Labs. It also facilitates code reuse and allows easily adding new high-level APIs without the need to modify the PHY drivers. After a new high-level API module has been created, it should be possible to control all the supported PHYs without any changes to the PHY drivers. Likewise, after a new PHY driver has been created, it should immediately be possible to control that PHY from all the existing high-level APIs without modifying the high-level API module.
 
-In other words, the Unify SDK decouples API modules from the PHY drivers.
+In other words, the Unify Framework decouples API modules from the PHY drivers.
 
-The Unify SDK is a software component that runs inside a gateway product. It needs a hardware platform and an operating system to be a complete product.
+The Unify Framework is a software component that runs inside a gateway product. It needs a hardware platform and an operating system to be a complete product.
 
 \image html sl_gw_asset.png width=800px
 \image latex sl_gw_asset.png
@@ -36,7 +36,7 @@ The remainder of this document refers to PHY drivers as Protocol Controllers bec
 
 ## System Components
 
-The Unify SDK is a software component of a full plastic-enclosed GW box. You can think of it as a "device driver" for the IoT, seen from the Host MCU in the GW box. The Unify component uses MQTT as an internal message-bus for inter-process communication among MQTT clients that are each an independent process/thread. In a Linux or other full OS implementation, real processes should be used. The primary hardware platform of the Unify design is a Cortex A-class device or an equivalent.
+The Unify Framework is a software component of a full plastic-enclosed GW box. You can think of it as a "device driver" for the IoT, seen from the Host MCU in the GW box. The Unify component uses MQTT as an internal message-bus for inter-process communication among MQTT clients that are each an independent process/thread. In a Linux or other full OS implementation, real processes should be used. The primary hardware platform of the Unify design is a Cortex A-class device or an equivalent.
 
 The MQTT clients are one of these types:
 
@@ -82,8 +82,6 @@ The MQTT server should run as a separate Linux process.
 
 The Resource Directory facilitates device discovery and communicates with each Protocol Controller through specific MQTT topics. The Protocol Controller MUST \reqnumber{UNS:000001.1}  automatically notify the Resource Directory of nodes that join or leave the network, as well as multicast groups that are added/removed/modified.
 
-The ACL Engine validates all publish and subscribe requests before being processed by the Broker. The permissions of each MQTT Client is established by looking up a permission token in an Access Control List (ACL). The key to the ACL is a security token contained in the TLS certificate presented by the MQTT client. Local clients SHOULD only be allowed to connect TLS, but they may use raw TCP if absolutely necessary (note that this will prevent the ACL Engine from identifying the client). Remote clients MUST only connect with TLS. If non-TLS connections are accepted against this RECOMMENDATION, another simple (and non-secure) permission token exchange must be added.
-
 ### Design Variants
 
 Unify gateways comes in a few variants that differ in the number of PHYs controlled:
@@ -120,8 +118,8 @@ publish and receive messages in the following format (i.e., a tcpdump attached t
 the sockets going to and from the MQTT Broker, would see the packets in the
 following two figures).
 
-\image html UniversalGWPacketFormatv2.0.png "PUBlish messages style" width=800px
-\image latex UniversalGWPacketFormatv2.0.png "PUBlish messages style"
+\image html UniversalGWPacketFormatv2_0.png "PUBlish messages style" width=800px
+\image latex UniversalGWPacketFormatv2_0.png "PUBlish messages style"
 
 \image html UniversalGWPacketFormatSUBSCRIBE.png "SUBscribe messages style" width=800px
 \image latex UniversalGWPacketFormatSUBSCRIBE.png "SUBscribe messages style"
@@ -138,7 +136,7 @@ models used in various cloud services for controlling IoT devices. The UCL data
 model MUST be the Zigbee Cluster Library/dotdot (dotdot is ZCL transported over
 CoAP, whereas UCL will be transported over MQTT). ZCL has been chosen to align
 Unify with the high-profile
-[Matter project](https://https://buildwithmatter.com/).
+[Matter project](https://csa-iot.org/).
 
 In addition to the existing Zigbee Clusters, UCL is extended with the necessary
 commands to support all features of the supported PHYs.
@@ -228,52 +226,96 @@ ucl/
                                       node state, that will affect this node only.
       NameAndLocation                 Topic for setting node name and location. Discover via ucl/by-location/ .
 
-by-location                           Subscribe to ucl/by-location/+ to receive all locations.
-  <LOCATION>                          Payload is the pretty-printed name of location. E.g.
+  by-location                         Subscribe to ucl/by-location/+ to receive all locations.
+    <LOCATION>                        Payload is the pretty-printed name of location. E.g.
                                       {"location-name-utf8" : "walk-in closet"} for topic ucl/by-location/
                                       walk-in_closet .
-    <UNID>                            Each node in <LOCATION> publishes a retained message here using its
+      <UNID>                          Each node in <LOCATION> publishes a retained message here using its
                                       UNID as topic here.
                                       Subscribe to ucl/by-location/<LOCATION>/+ to receive a message from
                                       each UNID in <LOCATION>.
 
-by-type/
-  by-devicetype/
-    <DEVICETYPE>                      e.g. "door_lock", "light" or "sensor".
-      <UNID>                          Each node of <DEVICETYPE> publishes a retained message here using
+  by-type/
+    by-devicetype/
+      <DEVICETYPE>                    e.g. "door_lock", "light" or "sensor".
+        <UNID>                        Each node of <DEVICETYPE> publishes a retained message here using
                                       its own UNID as sub-topic.
                                       Subscribe to ucl/by-devicetype/<DEVICETYPE>/+ to receive a message from
                                       each UNID in of that type.
 
-by-homeassistant-type/
-  <HOMEASSISTANT_TYPE>                e.g. "binary_sensor" or "camera"
-    <UNID>                            Subscribe to ucl/by-type/by-homeassistant-type/+ to receive a message
+  by-homeassistant-type/
+    <HOMEASSISTANT_TYPE>              e.g. "binary_sensor" or "camera"
+      <UNID>                          Subscribe to ucl/by-type/by-homeassistant-type/+ to receive a message
                                       for each HomeAssistant type in the network
                                       Subscribe to ucl/by-type/by-homeassistant-type/<HOMEASSISTANT_TYPE>/+ to
                                       receive messages from each UNID of that type
-by-group/                             For multicast groups
-  <GroupID>                           A unique, numeric group ID
+
+  by-group/                           For multicast groups
+    <GroupID>/                        A unique, numeric group ID
                                       e.g. 1, 2, ... 65535.
-    GroupName                         Name assigned to the group.
-    NodeList
-      <UNID>                          Used to advertise the membership of a UNID
+      GroupName                       Name assigned to the group.
+      NodeList/
+        <UNID>                        Used to advertise the membership of a UNID
                                       and a list of its endpoints for a group
-    <ClusterName>
-      Commands/
-        <CommandName>                 Publish here to multicast <CommandName> to
+      <ClusterName>/
+        Commands/
+          <CommandName>               Publish here to multicast <CommandName> to
                                       all UNIDs/endpoints that are part of the
                                       group.
-        WriteAttributes               Publish here to multicast attribute write
+          WriteAttributes             Publish here to multicast attribute write
                                       to all UNIDs/endpoints that are part of
                                       the group.
-      SupportedCommands               List of commands supported by all UNIDs/
+        SupportedCommands             List of commands supported by all UNIDs/
                                       endpoints that are part of the group.
 
-  SmartStart                          Topics for managing SmartStart node provisioning
+  SmartStart/                         Topics for managing SmartStart node provisioning
     List                              The full list of SmartStart entries is published here
     Update                            Publish here to add/update an entry to the list
     Remove                            Publish here to remove an entry from the list
   _well_known                         Versioning and list of supported ucl/ sub-topics
+
+  by-machine-id/                      Topics for managing machines participating
+                                      in a Unify system.
+    <id>/                             Each machine identifies itself with a unique ID
+      <ClusterName>/
+        Commands/
+          <CommandName>               Publish here to send <CommandName> to
+                                      the machine that supports a cluster.
+          WriteAttributes             Publish here to send a WriteAttributes to
+                                      the machine that supports writable attributes.
+        SupportedCommands             List of commands supported by a machine
+                                      for a cluster.
+        SupportedGeneratedCommands    List of generated commands by a machine
+                                      for a cluster.
+        GeneratedCommands/
+          <CommandName>               Hosts will publish here <CommandName> to
+                                      indicate that it wants to send a command.
+        Attributes/                   Attribute namespace, where all attributes
+                                      for the machine/cluster will be advertised.
+          <AttributeName>/            Attribute name, e.g "DisksUsage".
+            Reported                  Reported state for a given attribute.
+
+  by-mqtt-id/                         Topics for managing applications participating
+                                      in a Unify system.
+    <mqtt-id>/                        Each application identifies itself with a
+                                      unique MQTT Client ID.
+      <ClusterName>/
+        Commands/
+          <CommandName>               Publish here to send <CommandName> to
+                                      the application that supports a cluster.
+          WriteAttributes             Publish here to send a WriteAttributes to
+                                      the application that supports writable attributes.
+        SupportedCommands             List of commands supported by an application
+                                      for a cluster.
+        SupportedGeneratedCommands    List of generated commands by an application
+                                      for a cluster.
+        GeneratedCommands/
+          <CommandName>               Applications will publish here <CommandName> to
+                                      indicate that it wants to send a command.
+        Attributes/                   Attribute namespace, where all attributes
+                                      for the application/cluster will be advertised.
+          <AttributeName>/            Attribute name, e.g "ApplicationConnected".
+            Reported                  Reported state for a given attribute.
 ```
 
 The &lt;DEVICETYPE&gt; MUST adequately describe the Device Types (i.e., the practical functions) of all the device types found in all PANs supported by Silicon Labs. The [dotdot Device Library specification](https://zigbeealliance.org/solution/dotdot/) has a good list of device types.
@@ -522,22 +564,6 @@ The Resource Discovery works in the following way:
   full UTF-8 location name.
 * It MUST manage the global SmartStart provisioning list, which is common to all Protocol Controllers.
 
-## ACL Engine
-
-The ACL Engine acts as a filter between the MQTT broker and the various MQTT
-clients. It ensures that IoT Service and Protocol
-Controllers can only issue the commands they are trusted for. Without the ACL
-Engine, any PAN Protocol Controller could send any and all commands to all other
-PAN nodes managed by other Protocol Controllers. It may not be appropriate
-for the BLE Protocol Controller to issue unlock commands directly to the Z-Wave
-DoorLocks, for example. Similarly, just because an Azure IoT Service is allowed
-to receive sensor data from the ZigBee PAN, it should not be allowed to unlock
-BT Mesh doorlocks. Without an ACL engine, the pub/sub nature of the MQTT broker
-would allow any MQTT client to publish and subscribe to any topic and hence
-control and monitor anything connected to Unify.
-
-Technically, the ACL Engine MUST identify each MQTT client by the TLS certificate it presents when connecting to the Broker. The ACL Engine MUST then look up the accessible topics for this client, either in an ACL stored in the ACL engine, or stored securely in the certificate itself (and signed by a trusted root). The exact mechanism to populate the internal ACL is TBD, but must be at least as strong as the TLS certificate validation and anchored in a strong-trust root certificate.
-
 ## Security Considerations
 
 ### Mandatory TLS Transport on Remote Access
@@ -577,10 +603,6 @@ the Unify software. Similarly, the Unify software must have exclusive access to
 the radios, so hostile processes cannot inject commands into the PAN. This must
 be achieved through OS access control mechanisms.
 
-### Mapping PAN Device Security to the Unified Controller Language
-
-Protocol Controllers MUST fill out the UCL Header field "PAN Security" to indicate the security level of the received PAN frame that triggered the UCL publish message. The field will be used by the ACL to make sure non-secure commands can't control secure devices. This field MUST NOT control the outgoing security level transmitted on a PAN, that is to be determined by the Protocol Controller.
-
 ## Broker Discovery
 
 To interact with the Unify GW and the PAN nodes behind it, the IP address of the
@@ -597,7 +619,7 @@ MQTT retained messages SHOULD be used to cache the latest status from a sleepy d
 
 ### Z-Wave Battery Device
 
-A Z-Wave Protocol Controller must handle messages to Sleepy Devices,
+Z-Wave Protocol Controllers must handle messages to Sleepy Devices,
 which are known as Battery Devices or devices implementing the
 Wake Up Command Class, in the following way:
 
@@ -622,14 +644,6 @@ by the PAN Node ("the garage door is now fully lowered and closed"), another
 update must be published, this time changing the "reported" state. of
 the Cluster attrbutes. The Supervision Command Class can be used to
 obtain application level confirmations in Z-Wave.
-
-### Zigbee Sleepy Device
-
-<b>TBD:</b><b> Describe how to handle Zigbee Sleepy Devices</b>
-
-### BT Mesh Low Power Devices
-
-<b>TBD: Describe how to handle BT Mesh/BLE low-power devices</b>
 
 ## Mailbox
 
@@ -659,11 +673,19 @@ To receive event notifications from multiple devices, MQTT topic wildcards can b
 
 [True Status is a feature that allows end nodes to immediately report changes in their status](https://community.smartthings.com/t/z-wave-switches-with-instant-update-2016/59328/7), especially when it is locally initiated. It has been covered by [patents for years](https://community.smartthings.com/t/z-wave-switches-with-instant-update-2016/59328), but at least [one patent](https://patents.google.com/patent/US5905442A/en) expired in 2016. This feature MUST be leveraged and exposed to the IoT Service in the Unify design, if the PAN nodes support it.
 
-Status updates must be advertised to IoT Service as described in the [Reportables/Unsolicited messages from the PAN section](## Reportables/Unsolicited messages from the PAN).
+Status updates must be advertised to IoT Service as described in the
+[Reportables/Unsolicited messages from the PAN section](Reportables/Unsolicited messages from the PAN).
 
 ## Rules Engines
 
-Rules engines allow certain actions to be published when certain other events are received. Rules Engines should be distributed, in the sense that multiple IoT Services should be able to set up rules without conflicting with each other. For this, a single Rules Engine Module should be provided that manages a namespace likg ucl/rules_engine/ and providing an API for setting, getting and modifying if-then-else style rules. TBD: Should there be access controls in place to prevent IoT Services from modifying each other's rules? More advanced rules engines can be implemented by IoT Services using the raw publish/subscribe semantics. The Rules Engine SHOULD be implemented as a separate MQTT client to keep the Broker simple.
+Rules engines allow certain actions to be published when certain other events
+are received. Rules Engines should be distributed, in the sense that
+multiple IoT Services should be able to set up rules without conflicting
+with each other. For this, a single Rules Engine Module should be provided
+that manages a namespace likg ucl/rules_engine/ and providing an API for
+setting, getting and modifying if-then-else style rules.
+
+The Rules Engine SHOULD be implemented as a separate MQTT client to keep the Broker simple.
 
 ## Data Logging
 
@@ -786,5 +808,5 @@ Preferably, the contractor has in-depth knowledge of the PHY in question.
 
 ### IoT Service Discovering All Devices Supporting Cluster "DoorLock"
 
-1. IoT Service subscribes to topic ucl/by-unid/+/+/DoorLock.
+1. IoT Service subscribes to topic ucl/by-unid/+/+/DoorLock/#.
 2. IoT Service receives a [Retained Message](https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/) from each endpoint supporting the DoorLock command class. These messages were published by the Protocol Controllers.

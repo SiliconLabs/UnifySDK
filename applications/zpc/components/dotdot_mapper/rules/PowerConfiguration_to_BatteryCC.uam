@@ -9,6 +9,8 @@ scope 0 {
 
 r'zbBATTERY_PERCENTAGE =
   if ((r'zwBATTERY > 0) & (r'zwBATTERY < 101)) r'zwBATTERY
+  if (r'zwBATTERY == 0xFF) 0
+  if (r'zwBATTERY == 0) 0
   undefined
 
 r'zbBATTERY_LOW =

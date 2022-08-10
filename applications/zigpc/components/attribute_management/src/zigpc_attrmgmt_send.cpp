@@ -23,6 +23,8 @@
 #include "zigpc_common_zigbee.h"
 #include "zigpc_gateway.h"
 
+#include "zigpc_config.h"
+
 #include "attribute_management_int.h"
 #include "zigpc_attrmgmt_int.hpp"
 
@@ -152,23 +154,41 @@ sl_status_t
 {
   sl_status_t status = SL_STATUS_OK;
 
+  const zigpc_config_t * const config = zigpc_get_config();
+
+  bool poll_only = config->poll_attr_only;
+
   if (!is_valid_zigbee_endpoint(endpoint) || (eui64 == nullptr)) {
     status = SL_STATUS_INVALID_PARAMETER;
   }
 
   for (size_t i = 0U; (i < endpoint.cluster_count) && (status == SL_STATUS_OK);
-       i++) {
+       i++) 
+  {
     zigbee_endpoint_id_t endpoint_id = endpoint.endpoint_id;
     zcl_cluster_id_t cluster_id      = endpoint.cluster_list[i].cluster_id;
-    std::vector<zigpc_zcl_configure_reporting_record_t> records;
 
-    status = zigpc_attrmgmt_build_configure_report_records(cluster_id, records);
-    if ((status == SL_STATUS_OK) && (records.size() > 0)) {
-      status = zigpc_attrmgmt_send_split_report_config_cmds(eui64,
-                                                            endpoint_id,
-                                                            cluster_id,
-                                                            records);
+    if(!poll_only)
+    {
+        std::vector<zigpc_zcl_configure_reporting_record_t> records;
+
+        status = zigpc_attrmgmt_build_configure_report_records(cluster_id, records);
+        if ((status == SL_STATUS_OK) && (records.size() > 0)) {
+            status = zigpc_attrmgmt_send_split_report_config_cmds(eui64,
+                                                                    endpoint_id,
+                                                                    cluster_id,
+                                                                    records);
+        }
     }
+    else
+    {
+        status =
+            zigpc_attrmgmt_add_poll_entry(
+                    eui64,
+                    endpoint_id,
+                    cluster_id);
+    }
+
     /*
      * NOTE: Request attribute reads regardless of if reportable attributes
      * have been configured.

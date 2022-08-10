@@ -14,7 +14,7 @@
 #include "door_lock_cluster_mapper.h"
 #include "dotdot_attributes.h"
 
-// Includes from UIC
+// Includes from Unify
 #include "sl_log.h"
 #include "sl_status.h"
 

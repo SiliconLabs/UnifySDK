@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cpc-hci-bridge User Guide &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/cpc-hci-bridge/readme_user.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Getting Started with the Unify Host SDK" href="../../doc/getting_started.html" />
+    <link rel="prev" title="OpenThread Border Router User Guide" href="../openthread_border_router/readme_user.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/multiprotocol.html">Multiprotocol Host Software</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/multiprotocol.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/multiprotocol.html#zigbee">Zigbee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/multiprotocol.html#openthread">OpenThread</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/multiprotocol.html#applications">Applications</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../cpcd/readme_user.html">CPC Daemon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../zigbeed/readme_user.html">Zigbee</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openthread_border_router/readme_user.html">OpenThread Border Router User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openthread_border_router/readme_user.html#openthread-boarder-router-user-guide">OpenThread Boarder Router User Guide</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bluetooth</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-cpc-hci-bridge">Running cpc-hci-bridge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="cpc-hci-bridge-user-guide">
+<h1>cpc-hci-bridge User Guide<a class="headerlink" href="#cpc-hci-bridge-user-guide" title="Permalink to this heading"></a></h1>
+<p>This page explains how to use the BlueZ Linux Bluetooth stack with
+the multiprotocol RCP using the <code class="docutils literal notranslate"><span class="pre">cpc-hci-bridge</span></code> utility. This utility
+allows the BlueZ stack to connect to the Coprocessor
+Communication Daemon (CPCd) and communicate with the Bluetooth
+Controller on the RCP via the Host Controller Interface (HCI) protocol.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<p>First make sure you’ve flashed the proper multiprotocol RCP image with
+BLE HCI support to the EFR32 (rcp-uart-802154-blehci). For details on
+how to do that, see
+<a class="reference external" href="https://www.silabs.com/documents/public/application-notes/an1333-concurrent-protocols-with-802-15-4-rcp.pdf">AN1333</a>.</p>
+<p>Next, make sure you’ve successfully started and connected CPCd to the RCP
+as described on the <a class="reference internal" href="../../doc/getting_started_multiprotocol_cpc.html"><span class="doc std std-doc">Multiprotocol Setup page</span></a>.</p>
+<p>If you followed the
+<a class="reference internal" href="../../doc/getting_started.html"><span class="doc std std-doc">Unify Host SDK installation instructions</span></a>,
+the BlueZ Bluetooth stack should already be installed on your Raspberry Pi.
+If not, BlueZ can be installed using <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">bluez</span></code>, or can be downloaded and compiled from source from the <a class="reference external" href="https://git.kernel.org/pub/scm/bluetooth/bluez.git/about/">offical BlueZ repository</a>.</p>
+</section>
+<section id="running-cpc-hci-bridge">
+<h2>Running cpc-hci-bridge<a class="headerlink" href="#running-cpc-hci-bridge" title="Permalink to this heading"></a></h2>
+<p>cpc-hci-bridge connects to CPCd using the standard instance name cpcd_0,
+and creates a numbered virtual serial device, for example /dev/pts/2.
+The actual number may vary. For convenience, cpc-hci-bridge also creates
+a symlink to the device from <code class="docutils literal notranslate"><span class="pre">pts_hci</span></code> in the working directory.</p>
+<p>To start cpc-hci-bridge as a system service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo systemctl start uic-cpc-hci-bridge
+</pre></div>
+</div>
+<p>Or from the command line, simply start the application:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ cpc-hci-bridge
+</pre></div>
+</div>
+<p>Next, the BlueZ stack must be attached to the newly created virtual serial device,
+where <code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code> is the name of the virtual serial device:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo hciattach &lt;device&gt; any
+</pre></div>
+</div>
+<p>Now BlueZ is running and any of the standard BlueZ tools may be used.
+For example, to start the BlueZ CLI utility:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo bluetoothctl
+</pre></div>
+</div>
+<p>Another utility that comes with the standard Bluetooth tools, called <code class="docutils literal notranslate"><span class="pre">btmon</span></code>,
+can be used to view the traffic going through the Bluetooth device.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.silabs.com/documents/public/application-notes/an1333-concurrent-protocols-with-802-15-4-rcp.pdf">AN1333 Silicon Labs Multiprotocol RCP</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

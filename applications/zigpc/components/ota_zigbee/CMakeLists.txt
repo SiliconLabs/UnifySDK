@@ -16,8 +16,9 @@ target_link_libraries(
           zigpc_gateway
           zigpc_zcl_util
           uic_ota
-          uic_log)
+          uic_log
+          zigpc_config)
 
-# Testing add_subdirectory(test)
+add_subdirectory(test)
 
 target_add_mock(zigpc_ota_zigbee)

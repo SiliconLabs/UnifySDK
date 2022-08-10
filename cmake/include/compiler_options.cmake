@@ -14,6 +14,14 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pipe -Werror -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pipe -Werror -Wall")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  set(CMAKE_C_FLAGS
+      "${CMAKE_C_FLAGS} -Wl,--unresolved-symbols=ignore-in-object-files")
+  set(CMAKE_CXX_FLAGS
+      "${CMAKE_CXX_FLAGS} -Wl,--unresolved-symbols=ignore-in-object-files")
+  add_compile_options (-fdiagnostics-color=always)
+endif()
+
 # Only add code coverage when CMAKE_GCOV is True
 if(CMAKE_GCOV)
   message(STATUS "Adding GCOV flags")
@@ -23,7 +31,16 @@ if(CMAKE_GCOV)
 
   add_custom_target(
     clean-gcov
-    COMMAND find ${PROJECT_BINARY_DIR} -name \\*.gcda -exec rm {} \\\\; \\;
+    COMMAND find ${PROJECT_BINARY_DIR} -name \\*.gcda -exec rm {} \\\\;
     COMMAND find ${PROJECT_BINARY_DIR} -name \\*.gcno -exec rm {} \\\\;
     COMMENT "Cleaning GCOV statistics")
+endif()
+
+# assume built-in pthreads on MacOS when building with gcc
+if(APPLE AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  set(CMAKE_THREAD_LIBS_INIT "-lpthread")
+  set(CMAKE_HAVE_THREADS_LIBRARY 1)
+  set(CMAKE_USE_WIN32_THREADS_INIT 0)
+  set(CMAKE_USE_PTHREADS_INIT 1)
+  set(THREADS_PREFER_PTHREAD_FLAG ON)
 endif()

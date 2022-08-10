@@ -16,7 +16,7 @@ add_library(uic_ota SHARED ${uic_ota_source_files})
 
 target_include_directories(
   uic_ota
-  PRIVATE src
+  PRIVATE src ${nlohmann_json_include} 
   PUBLIC platform/${COMPATIBLE_PLATFORM} include)
 
 target_link_libraries(uic_ota PUBLIC uic_definitions uic_contiki uic_mqtt

@@ -16,7 +16,7 @@
 #include "zpc_attribute_resolver_group.h"
 #include "zpc_attribute_resolver_send.h"
 
-// UIC Components includes
+// Unify Components includes
 #include "attribute_resolver.h"
 
 sl_status_t zpc_attribute_resolver_init()

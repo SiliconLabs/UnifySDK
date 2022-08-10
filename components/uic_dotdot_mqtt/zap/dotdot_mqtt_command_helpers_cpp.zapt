@@ -34,38 +34,6 @@
 
 static constexpr char LOG_TAG[] = "dotdot_mqtt";
 
-// Create a map of enums and their name label.
-// Functions are declared in dotdot_mqtt.hpp
-{{#zcl_enums}}
-
-std::string {{asSnakeCaseLower label}}_get_enum_value_name(
-  uint32_t value)
-{
-  auto it = {{asSnakeCaseLower label}}_enum_data.find(value);
-  if (it != {{asSnakeCaseLower label}}_enum_data.end()){
-    return it->second;
-  }
-
-  // No known name value is set for this field.
-  // Set it to a string version of the value.
-  return std::to_string(value);
-}
-
-uint32_t {{asSnakeCaseLower label}}_get_enum_value_number(std::string str)
-{
-  for (auto it = {{asSnakeCaseLower label}}_enum_data.begin();
-        it != {{asSnakeCaseLower label}}_enum_data.end(); ++it) {
-    if (std::string(it->second) == str) {
-      return static_cast<uint32_t>(it->first);
-    }
-  }
-
-  // No known numeric value is set for this string.
-  // Return UINT32_MAX to indicate an error.
-  return std::numeric_limits<uint32_t>::max();
-}
-{{/zcl_enums}}
-
 template<typename Type>
 Type get_enum_decimal_value(std::string key, nlohmann::json &jsn)
 {
@@ -176,6 +144,10 @@ void {{asCommandParseFunction parent}}(
 {{/zcl_command_arguments}}
 {{! populate arguments from JSON object }}
 {{#zcl_command_arguments}}
+  if (jsn.at("{{label}}").is_null()) {
+    sl_log_debug(LOG_TAG, "Ignoring JSON Null object");
+    return;
+  }
   {{#if_is_bitmap type}}
       {{#if (isUnknownBitmap label)}}
   {{asSnakeCaseLower label}} = jsn.at("{{label}}").get<{{asUnderlyingType type}}>();

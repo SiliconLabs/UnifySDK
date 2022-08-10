@@ -1,3 +1,5 @@
+find_package(GeckoSDK 4.1 REQUIRED)
+
 add_subdirectory(components)
 add_subdirectory(applications)
 
@@ -31,14 +33,20 @@ target_link_libraries(
 target_compile_definitions(
   zigpc PRIVATE CMAKE_PROJECT_VERSION="${CMAKE_PROJECT_VERSION}")
 
-set(description "Universal IOT Controller - Zigbee Protocol Controller")
+install(
+    TARGETS zigpc 
+    RUNTIME DESTINATION "bin" 
+    PERMISSIONS
+     OWNER_READ
+     OWNER_WRITE
+     OWNER_EXECUTE
+     GROUP_READ
+     GROUP_WRITE
+     GROUP_EXECUTE
+     WORLD_READ
+     WORLD_EXECUTE
+    COMPONENT uic-zigpc)
 
-cpack_add_component(
-  zigpc
-  DISPLAY_NAME "zigpc"
-  DESCRIPTION ${description}
-  INSTALL_TYPES Full)
-install(TARGETS zigpc RUNTIME DESTINATION "bin" COMPONENT uic-zigpc)
 install(
   DIRECTORY
   DESTINATION /var/lib/zigpc
@@ -63,3 +71,16 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/templates.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/templates)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/conffiles.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/conffiles)
+
+add_component_to_uic(
+  uic-zigpc # Package Name
+  "Universal IOT Controller - Zigbee Protocol Controller"
+  "${CMAKE_PROJECT_NAME}-zigpc" # Package Debian filename
+  "libuic" # Package Depends on
+  "${CMAKE_BINARY_DIR}/applications/zigpc/debconf/config;\
+    ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/templates;\
+    ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/conffiles;\
+    ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/postinst;\
+    ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/prerm;\
+    ${CMAKE_BINARY_DIR}/applications/zigpc/debconf/postrm")
+

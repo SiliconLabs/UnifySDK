@@ -14,13 +14,13 @@ use crate::cache::Cache;
 use std::collections::BTreeMap;
 use std::collections::HashSet;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{
+use unify_mqtt_sys::{
     sl_status_t, MosqMessage, MqttClientCallbacksTrait, MqttClientTrait, TopicMatcherType,
 };
 use unify_validator_sys::*;
 
 const EMPTY_ARRAY_VALUE: &str = "{\"value\":[]}";
-/// MqttGroupHandler handles subscription messages related to UIC groups.
+/// MqttGroupHandler handles subscription messages related to Unify groups.
 /// It subscribes to listen to the correct topics and is to be passed to the mosquitto client
 pub struct MqttGroupHandler<T: MqttClientTrait> {
     client: T,
@@ -338,8 +338,8 @@ mod tests {
     use super::*;
     use mockall::predicate;
     use mockall::predicate::eq;
-    use unify_middleware::unify_mqtt_client::MockMqttClientTrait;
-    use unify_middleware::unify_mqtt_client::MockTopicMatcherTrait;
+    use unify_mqtt_sys::MockMqttClientTrait;
+    use unify_mqtt_sys::MockTopicMatcherTrait;
 
     fn create_mocked_mqtt_handler() -> MqttGroupHandler<MockMqttClientTrait> {
         let mut mqtt_client_mock = MockMqttClientTrait::new();

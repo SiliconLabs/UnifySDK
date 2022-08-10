@@ -13,16 +13,17 @@
 
 use unify_attribute_poll::attribute_poll_trait::AttributePollTrait;
 use unify_attribute_poll::{AttributePoll, PollEngineConfig};
-use unify_middleware::{Attribute, AttributeStoreTrait};
+use unify_middleware::{AttributeStore, AttributeStoreTrait, AttributeTrait};
 
 #[test]
 fn test_something() {
+    let attribute_store = AttributeStore::new().unwrap();
     let attribute_poll = AttributePoll::default();
     attribute_poll.initialize(PollEngineConfig {
         backoff: 30,
         default_interval: 60,
     });
-    let root = Attribute::root().unwrap();
+    let root = attribute_store.root();
     let child = root.add(1, Some(1234u32), Some(42u32)).unwrap();
     attribute_poll.register(child.clone(), 100);
 }

@@ -73,7 +73,7 @@ bool ZW_NVM_Backup(const char* filename,uint8_t chiptype)
   }
 
  /* On 700-series chips, zwapi_nvm_close must be followed by a chip reset */
-  if (chiptype == ZW_GECKO_CHIP_TYPE) {
+  if (ZW_GECKO_CHIP_TYPE(chiptype)) {
     zwapi_soft_reset();
   }
 
@@ -169,7 +169,7 @@ bool ZW_NVM_Restore(const char* filename, uint8_t chiptype)
 
  /*The WatchDog is used to reset the chip after restoring EEPROM image to Z-Wave module from backup on 500 series,
   *in 700 series: the FUNC_ID_ZW_WATCHDOG_ENABLE will be removed, therefore, zwapi_soft_reset() should be used*/
-  if (chiptype == ZW_GECKO_CHIP_TYPE) {
+  if (ZW_GECKO_CHIP_TYPE(chiptype)) {
     zwapi_soft_reset();
   }
   else {

@@ -16,7 +16,7 @@
  * @defgroup zigpc_ucl ZigPC UCL Utility Component
  * @ingroup zigpc_components
  * @brief This is responsible for publishing and subscribing to Zigbee Protocol
- * Controller specific topics that is not exposed by the UIC shared component.
+ * Controller specific topics that is not exposed by the Unify shared component.
  *
  * These topics are (currently):
  *  - ucl/by-unid/PC_UNID/ProtocolController/NetworkManagement
@@ -38,7 +38,7 @@
 
 #include <string>
 
-// Shared UIC includes
+// Shared Unify includes
 #include <sl_status.h>
 
 // ZigPC includes

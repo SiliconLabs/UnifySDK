@@ -1,4 +1,3 @@
-import { TextField, Tooltip } from '@material-ui/core';
 import * as React from 'react';
 import { Button, Col, Form, Modal, Row, Table } from 'react-bootstrap';
 import { NodeTypesList } from '../../cluster-types/cluster-types';
@@ -6,6 +5,7 @@ import { Group } from '../../pages/groups/groups-types';
 import { EditGroupDlgProps, EditGroupDlgState } from './edit-group-dlg-types';
 import * as RiIcons from 'react-icons/ri';
 import ClusterTypeTooltip from '../cluster-type-tooltip/cluster-type-tooltip';
+import { TextField, Tooltip } from '@mui/material';
 
 class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState> {
     constructor(props: EditGroupDlgProps) {
@@ -13,12 +13,15 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
         this.state = {
             ProcessingGroup: {} as Group,
             PristineGroupName: "",
-            IsGroupValid: true,
+            EpExist: true,
+            IsGroupExist: false,
             EndpointList: [],
             Filter: "",
             ClusterType: null,
             CheckedAll: false,
             ShowModal: false,
+            IsNew: false,
+            GroupIds: [],
             Updates: {
                 AddList: new Set<string>(),
                 RemoveList: new Set<string>()
@@ -75,9 +78,9 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
         return isContains;
     }
 
-    updateState(item: Group, nodeList: any[], checkedAll: boolean = false) {
+    updateState(item: Group, nodeList: any[], checkedAll: boolean = false, isNew: boolean = false, groupIds: number[] = []) {
         this.setState({ ProcessingGroup: item, PristineGroupName: item.GroupName, CheckedAll: checkedAll }, () => {
-            this.setState({ EndpointList: this.getEndpointList(nodeList) }, () => {
+            this.setState({ EndpointList: this.getEndpointList(nodeList), IsNew: isNew, GroupIds: groupIds }, () => {
                 this.setState({
                     Updates: {
                         AddList: checkedAll ? new Set<string>(this.state.EndpointList.map(item => `${item.Unid}/${item.Ep}`)) : new Set<string>(),
@@ -97,6 +100,15 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
         let group = { ...this.state.ProcessingGroup };
         group.GroupName = event.target.value;
         this.setState({ ProcessingGroup: group });
+    }
+
+    handleIdChange = (event: any) => {
+        let group = { ...this.state.ProcessingGroup };
+        let val = event.target.value?.match(/[0-9]{1,8}/g);
+        val = val && val[0] !== undefined ? Number(val[0]) : "";
+        event.target.value = val;
+        group.GroupId = val;
+        this.setState({ ProcessingGroup: group }, () => this.isGroupIdValid());
     }
 
     handleCheckboxChange(item: any, event?: any) {
@@ -119,29 +131,29 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
         this.state.EndpointList.forEach(i => {
             allChecked = allChecked && i.Checked
         });
-        this.setState({ EndpointList: this.state.EndpointList, CheckedAll: allChecked, Updates: updates }, () => this.isGroupValid());
+        this.setState({ EndpointList: this.state.EndpointList, CheckedAll: allChecked, Updates: updates }, () => this.epExist());
     }
 
-    handleCheckAllChange(event: any) {
+    handleCheckAllChange(checked: any) {
         let updates = {
             AddList: new Set<string>(),
             RemoveList: new Set<string>()
         };
 
         this.state.EndpointList.forEach(item => {
-            item.Checked = event.target.checked;
-            if (event.target.checked) {
+            item.Checked = checked;
+            if (checked) {
                 updates.AddList.add(`${item.Unid}/${item.Ep}`)
             }
             else {
                 updates.RemoveList.add(`${item.Unid}/${item.Ep}`)
             }
         });
-        this.setState({ EndpointList: this.state.EndpointList, CheckedAll: event.target.checked, Updates: updates }, () => this.isGroupValid());
+        this.setState({ EndpointList: this.state.EndpointList, CheckedAll: checked, Updates: updates }, () => this.epExist());
     }
 
     updateGroup() {
-        if (!this.isGroupValid())
+        if (!this.isGroupIdValid() || !this.epExist())
             return;
 
         (this.state.Updates.AddList as Set<string>).forEach((i) => {
@@ -178,10 +190,16 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
             }));
     }
 
-    isGroupValid() {
-        let valid = !!this.state.EndpointList.find(i => i.Checked);
-        this.setState({ IsGroupValid: valid });
-        return valid;
+    epExist() {
+        let epExist = !!this.state.EndpointList.find(i => i.Checked);
+        this.setState({ EpExist: epExist });
+        return epExist;
+    }
+
+    isGroupIdValid() {
+        let isGroupExist = this.state.IsNew && (this.state.ProcessingGroup.GroupId === undefined || this.state.ProcessingGroup.GroupId === null || this.state.GroupIds.indexOf(Number(this.state.ProcessingGroup.GroupId)) > -1);
+        this.setState({ IsGroupExist: isGroupExist });
+        return !isGroupExist;
     }
 
     handleFilterChange = (event: any) => {
@@ -194,13 +212,16 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
                 <Modal.Header closeButton className="col-sm-12 float-left group-modal">
                     <Modal.Title className="col-sm-10">
                         <div className="row col-sm-12 flex">
-                            {`Group [${this.state.ProcessingGroup.GroupId}]: `}
-                            <TextField className="col-sm-6 group-popup-input" placeholder="Group Name" defaultValue={this.state.ProcessingGroup.GroupName} onKeyUp={this.handleNameChange} variant="standard" />
+                            <div className='row margin-t-10'>
+                                <TextField size="small" className="col-sm-6 group-popup-input" label="ID" defaultValue={this.state.ProcessingGroup.GroupId} onKeyUp={this.handleIdChange} disabled={!this.state.IsNew} variant="outlined" />
+                                <TextField size="small" className="margin-h-10 col-sm-6 group-popup-input " label="Name" defaultValue={this.state.ProcessingGroup.GroupName} onKeyUp={this.handleNameChange} variant="outlined" />
+                            </div>
                         </div>
 
                     </Modal.Title>
                 </Modal.Header>
-                <div className="error-modal-header col-sm-12" hidden={this.state.IsGroupValid}>The group must have at least one endpoint.</div>
+                <div className="error-modal-header col-sm-12" hidden={this.state.EpExist}>The group must have at least one endpoint.</div>
+                <div className="error-modal-header col-sm-12" hidden={!this.state.IsGroupExist}>The group with current ID already exist.</div>
                 <Modal.Body>
                     <Row>
                         <Col xs={12}>
@@ -224,7 +245,7 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
                                     <th className="wd-col-3">Location</th>
                                     <th className="wd-col-2">Type</th>
                                     <th>Security</th>
-                                    <th className="text-center"><Form.Check name="CheckedAll" checked={this.state.CheckedAll} onChange={(e) => this.handleCheckAllChange(e)} /></th>
+                                    <th className="text-center"><Form.Check name="CheckedAll" checked={this.state.CheckedAll} onChange={(e) => this.handleCheckAllChange(e.target.checked)} /></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -253,8 +274,8 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-primary" disabled={!this.state.IsGroupValid} onClick={() => this.updateGroup()}>Save</Button>
-                    <Button variant="primary" onClick={() => this.toggleEditModal(false)}>Cancel</Button>
+                    <Button variant="outline-primary" disabled={this.state.IsGroupExist || !this.state.EpExist} onClick={() => this.updateGroup()}>Save</Button>
+                    <Button variant="primary" onClick={() => this.toggleEditModal(false) }>Cancel</Button>
                 </Modal.Footer>
             </Modal>
         );

@@ -6,3 +6,5 @@ edition = "2021"
 [build-dependencies]
 regex = "1.5.*"
 convert_case = "0.5.*"
+quote="1.0.15"
+syn= "1.0.*"

@@ -13,6 +13,7 @@
 #include "zpc_attribute_resolver_fixt.h"
 #include "attribute_store_fixt.h"
 #include "attribute_store.h"
+#include "uic_dotdot_attribute_store_registration.h"
 #include "attribute_transitions.h"
 #include "attribute_timeouts.h"
 #include "attribute_mapper.h"
@@ -28,6 +29,7 @@
 #include "zpc_config.h"
 #include "zpc_stdin_fixt.h"
 #include "zpc_attribute_store.h"
+#include "zwave_controller.h"
 #include "zwave_command_handler.h"
 #include "zwave_network_management_fixt.h"
 #include "zwave_rx_fixt.h"
@@ -40,10 +42,10 @@
 #include "zpc_datastore_fixt.h"
 #include "zwave_rust_handlers.h"
 #include "request_poller.h"
-#include "zpc_attribute_store_attr_type_name_helper.h"
 #include "zpc_ncp_update_fixt.h"
 #include "rust_contiki_fixt.h"
 #include "rust_attribute_store.h"
+#include "zwave_poll_manager.h"
 
 // Z-Wave Command Classes
 #include "zwave_command_classes_fixt.h"
@@ -95,7 +97,7 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
   {&attribute_timeouts_init, "Attribute timeouts"},
 
   /**
-   * Initialize the ZPC attribute resolver, and the UIC part of it
+   * Initialize the ZPC attribute resolver, and the Unify part of it
    * Keep that right before the network monitor,
    * in order to get proper paused/enabled resolution right after init.
    */
@@ -107,12 +109,7 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
    */
   {&attribute_poll_init, "Attribute Poll Engine"},
 
-  /**
-   * Initialize the module to register all attribute used by the zpc and 
-   * enable the APIs to convert the attribute type name to attribute type id.
-   */
-  {&zpc_attribute_store_attr_type_name_helper_init,
-   "ZPC Attribute type name to id convertor"},
+  {&zwave_poll_manager_init, "zwave attribute poller"},
 
   /**
    * Network monitor starts, sets our UNID to zwave_unid
@@ -156,6 +153,9 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
 
   /** Initializes all supported / controlled CCs */
   {&zwave_command_class_init_rust_handlers, "Z-Wave Rust Command Classes"},
+  {&zwave_command_class_init_rust_handlers_legacy,
+   "Z-Wave legacy Command Classes"},
+
   {&zwave_command_classes_init, "Z-Wave Command Classes"},
 
   /** Initialize the Z-Wave Command handler framework after the Command Classes */
@@ -165,6 +165,11 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
 
   {&zpc_stdin_setup_fixt, "ZPC Stdin"},
   {&attribute_mapper_init, "Attribute Mapper"},
+
+  /**
+   * Registers all supported ZCL attributes to the Attribute Store.
+   */
+  {&uic_dotdot_attribute_store_registration_init, "ZCL Attribute Registration"},
 
   /**
    * Initialize attribute_store specifically for ZPC.
@@ -185,7 +190,6 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
  * been stopped.
  */
 static uic_fixt_shutdown_step_t uic_fixt_shutdown_steps_list[] = {
-  /** Demo dummy */
   {&zcl_cluster_servers_teardown, "ZCL Cluster servers"},
   {&zpc_attribute_resolver_teardown, "ZPC attribute resolver"},
   {&zwave_command_handler_teardown, "Z-Wave Command Handler framework"},

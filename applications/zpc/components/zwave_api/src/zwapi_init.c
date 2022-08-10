@@ -36,11 +36,14 @@ const char *zw_lib_names[] = {
   "Installer library",
 };
 
+// Module shared variables
 zwapi_callbacks_t *callbacks;
+bool awaiting_zwave_api_started;
 
 static void zwapi_init_local_variables()
 {
   memset(&chip, 0, sizeof(chip));
+  awaiting_zwave_api_started = false;
 }
 
 bool zwapi_support_command_func(uint8_t func_id)
@@ -520,6 +523,10 @@ sl_status_t zwapi_send_command_no_ack(uint8_t command,
   return zwapi_session_send_frame_no_ack(command,
                                          payload_buffer,
                                          payload_buffer_length);
+}
+
+bool zwapi_is_awaiting_zwave_api_started(){
+  return awaiting_zwave_api_started;
 }
 
 zwave_lr_channel_t zwapi_get_zwave_lr_channel()

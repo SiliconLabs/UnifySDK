@@ -24,6 +24,7 @@
 // Unify components
 #include "sl_log.h"
 #include "dotdot_mqtt.h"
+#include "attribute_store.h"
 
 // AoXPC components
 #include "aoxpc_unid.h"

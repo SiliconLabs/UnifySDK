@@ -17,10 +17,16 @@
  * @addtogroup uic_main
  */
 struct uic_fixt_setup_step_t;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 sl_status_t uic_init(const uic_fixt_setup_step_t *fixt_app_setup,
                      int argc,
                      char **argv,
                      const char *version);
 
+#ifdef __cplusplus
+}
+#endif
 #endif

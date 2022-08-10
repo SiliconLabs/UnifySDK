@@ -28,6 +28,7 @@
 #ifndef ZWAVE_RX_ZWAPI_CALLBACKS_H
 #define ZWAVE_RX_ZWAPI_CALLBACKS_H
 
+#include "zwave_node_id_definitions.h"
 #include <stdint.h>
 
 #ifdef __cplusplus
@@ -81,6 +82,9 @@ void zwave_rx_application_controller_update(uint8_t status,
 /**
  * @brief functions handling when the Z-Wave API is ready to use. This
  * is called after soft reset. See @ref zwapi_callbacks
+ *
+ * This function will configure the NodeID base type again with the Z-Wave API
+ * module and ensure that no network management operation in ongoing.
  *
  * @param buffer
  * Contains the payload of the currently configured NIF for the Z-Wave module

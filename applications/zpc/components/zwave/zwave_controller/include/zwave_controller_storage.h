@@ -33,7 +33,7 @@
 #include "zwave_keyset_definitions.h"
 #include "zwave_generic_types.h"
 
-// UIC includes
+// Unify includes
 #include "sl_status.h"
 
 #ifdef __cplusplus
@@ -42,16 +42,16 @@ extern "C" {
 
 typedef struct {
   /// This function is used to set node as S2 capable
-  sl_status_t (*on_set_node_as_s2_capable)(zwave_node_id_t node_id);
+  sl_status_t (*set_node_as_s2_capable)(zwave_node_id_t node_id);
   /// This function is used to verfy if a nod is S2 capable or not
-  bool (*on_verify_node_is_s2_capable)(zwave_node_id_t node_id);
+  bool (*is_node_S2_capable)(zwave_node_id_t node_id);
   /// This function is used to get the node granted key
-  sl_status_t (*on_get_node_granted_keys)(zwave_node_id_t node_id,
-                                          zwave_keyset_t *keys);
+  sl_status_t (*get_node_granted_keys)(zwave_node_id_t node_id,
+                                       zwave_keyset_t *keys);
   /// This function is used to get the current zwave protocol running on a node
-  zwave_protocol_t (*on_get_inclusion_protocol)(zwave_node_id_t node_id);
+  zwave_protocol_t (*get_inclusion_protocol)(zwave_node_id_t node_id);
   /// This function is used the cc version of a node
-  zwave_cc_version_t (*on_zwave_controller_storage_cc_version)(
+  zwave_cc_version_t (*zwave_controller_storage_cc_version)(
     zwave_command_class_t command_class,
     zwave_node_id_t node_id,
     zwave_endpoint_id_t endpoint_id);

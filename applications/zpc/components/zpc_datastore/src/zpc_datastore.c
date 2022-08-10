@@ -21,7 +21,6 @@
 #include "sl_log.h"
 
 #define LOG_TAG "zpc_datastore_fixt"
-sl_status_t print_recover_tool_info_if_needed();
 
 sl_status_t zpc_datastore_fixt_setup()
 {

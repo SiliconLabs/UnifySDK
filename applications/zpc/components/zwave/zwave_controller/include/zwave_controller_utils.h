@@ -38,19 +38,25 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/**
- * @brief Send a z-wave NOP frame to Z-Wave node 
- *
- * This function takes the arguments
- * @param node_id           NodeID of the node to which the NIF belongs
- * @param on_send_complete  Zwave-tx on send complete callback
- * @param user              User data pointer
- */
 
-void zwave_send_nop_to_node(
-  zwave_node_id_t node,
+/**
+ * @brief Send a Z-Wave NOP frame to Z-Wave NodeID
+ *
+ * @param node_id             Destination NodeID
+ * @param qos_priority        QoS Priority of the NOP frame
+ * @param discard_timeout_ms  Discard timeout for the NOP frame
+ * @param on_send_complete    Z-Wave Tx on send complete callback
+ * @param user                User data pointer
+ *
+ * @returns status code returned by @ref zwave_tx_send_data
+ */
+sl_status_t zwave_send_nop_to_node(
+  zwave_node_id_t node_id,
+  uint32_t qos_priority,
+  uint32_t discard_timeout_ms,
   const on_zwave_tx_send_data_complete_t on_send_complete,
   void *user);
+
 /**
  * @brief Log the Z-Wave received frame data using the sl_log system.
  *
@@ -92,7 +98,7 @@ void zwave_sl_log_dsk(const char *tag, const zwave_dsk_t dsk);
  * @brief Unpack the given NIF and parse it into command class list in
  * zwave_node_info and fill the length of resulted command class list.
  *
- * @param node_info Struct where the parsed result is stored into
+ * @param [out] node_info Struct where the parsed result is stored into
  * @param nif NIF as a byte array
  * @param nif_length Length of incoming NIF
  */

@@ -1,0 +1,39 @@
+/******************************************************************************
+ * # License
+ * <b>Copyright 2022 Silicon Laboratories Inc. www.silabs.com</b>
+ ******************************************************************************
+ * The licensor of this software is Silicon Laboratories Inc. Your use of this
+ * software is governed by the terms of Silicon Labs Master Software License
+ * Agreement (MSLA) available at
+ * www.silabs.com/about-us/legal/master-software-license-agreement. This
+ * software is distributed to you in Source Code format and is governed by the
+ * sections of the MSLA applicable to Source Code.
+ *
+ *****************************************************************************/
+
+{{zap_header}}
+
+#include "dotdot_cluster_id_definitions.h"
+#include <string.h>
+
+const char* uic_dotdot_get_cluster_name(dotdot_cluster_id_t cluster_id) {
+  switch(cluster_id) {
+{{#zcl_clusters}}
+  case DOTDOT_{{asSnakeCaseUpper label}}_CLUSTER_ID:
+    return "{{label}}";
+{{/zcl_clusters}}
+  default:
+    return "Unknown";
+  }
+}
+
+dotdot_cluster_id_t uic_dotdot_get_cluster_id(const char* cluster_name) {
+{{#zcl_clusters}}
+ if (strcmp ("{{label}}", cluster_name) == 0) {
+   return DOTDOT_{{asSnakeCaseUpper label}}_CLUSTER_ID;
+ }
+{{/zcl_clusters}}
+
+  // Return an invalid ID if we did not get any match.
+  return DOTDOT_INVALID_CLUSTER_ID;
+}

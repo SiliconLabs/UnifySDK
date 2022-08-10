@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unify Rust Development &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/readme_rust.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Unify Library Overview" href="unify_library_overview.html" />
+    <link rel="prev" title="Unify Debugging Guide" href="readme_debug.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="readme_building.html">Unify Build Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_cmake.html">CMake Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_debug.html">Unify Debugging Guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Unify Rust Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building">Building</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-chain">Build Chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-cargo-standalone">Using cargo standalone</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-environment">Setting up environment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-rust-project">Creating a new rust project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-unit-tests">Creating Unit tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#c-c-to-rust">C/C++ to Rust</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#binding-generator">Binding generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#declaring-native-libraries">Declaring native libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sys-crates">_sys crates</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#rust-to-c-c">Rust to C/C++</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#crate-types">Crate types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-targets">Cmake targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#appendix-generating-test-coverage-report">Appendix: Generating test coverage report</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">Api documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docker/readme_developer.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#component-templates">Component Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="unify-rust-development">
+<h1>Unify Rust Development<a class="headerlink" href="#unify-rust-development" title="Permalink to this heading"></a></h1>
+<p>The Unify Framework has support for programming in Rust. Several components are already written using Rust and more components will be added in the future. This document describes how to setup, build and develop rust components for the Unify Framework.</p>
+<blockquote>
+<div><p>The docker images provided by the Unify Host SDK contain already everything you need to program Rust.</p>
+</div></blockquote>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Rust has its own ecosystem regarding building and package management, see <a class="reference external" href="https://doc.rust-lang.org/cargo/">Cargo</a>. We tried to integrate this as best as possible to our own cmake build environment. The overall philosophy is to keep the amount of changes and configurations we need to do to cargo as simple as possible. This means we can leverage from cargo tooling without interference of our build-system.
+<br>
+At the moment of writing we have 2 components that make use of Rust and buildup with different rust crates:</p>
+<ul class="simple">
+<li><p>ZPC binary, &lt;project_root&gt;/applications/zpc/components/zpc_rust</p></li>
+<li><p>Unify libraries, &lt;project_root&gt;/components/uic_rust</p></li>
+</ul>
+<p>But mix and matching Rust and C libraries is possible with little effort.</p>
+</section>
+<section id="building">
+<h2>Building<a class="headerlink" href="#building" title="Permalink to this heading"></a></h2>
+<p>rust packages can be build by using the command in your build output folder (assuming ninja is used as build generator):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ninja cargo_build
+</pre></div>
+</div>
+<p>or for building and running rust tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ninja cargo_test
+</pre></div>
+</div>
+<p>take a look at [Using cargo standalone](## Using cargo standalone) for information about how to setup your environment to use native cargo commands.</p>
+</section>
+<section id="build-chain">
+<h2>Build Chain<a class="headerlink" href="#build-chain" title="Permalink to this heading"></a></h2>
+<p>This section explains briefly the order in which rust components are build by the build system. As mentioned before, rust packages are build as one target. A full run of the build-system usually contains the following sequence of rust related build tasks, which are executed in the following order:<br></p>
+<ol class="arabic simple">
+<li><p>Rust binding generator, <code class="docutils literal notranslate"><span class="pre">rust_bindgen</span></code>, generates the required binding files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cargo_build</span></code> is executed, building all rust binaries.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cargo_test</span></code> will recompile test binaries and execute the tests.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cargo_doc</span></code> will generate documentation of rust code. note that rust code also need to be compilable in this step as code snippets inside the comments is build as well.</p></li>
+</ol>
+<blockquote>
+<div><p>Even though the majority of rust libraries dont require this, all dependencies of the <code class="docutils literal notranslate"><span class="pre">cargo_build</span></code> target are build prior. Making a split between packages that require linkage and those who dont would provide more flexibility. This is something we want to investigate in the future.</p>
+</div></blockquote>
+</section>
+<section id="using-cargo-standalone">
+<h2>Using cargo standalone<a class="headerlink" href="#using-cargo-standalone" title="Permalink to this heading"></a></h2>
+<p>Using cargo natively can be preferable as it provides more flexibility for your workflows. It comes with some caveats though, which will be described in more detail in this paragraph. Note that the official way of building remains via the cmake build-system. Therefore calling cargo directly should only be done in local development scenarios.</p>
+<blockquote>
+<div><p>Make sure to do a full build via cmake prior using cargo standalone. This way you are sure all the native libs are present on your hard drive.</p>
+</div></blockquote>
+<section id="setting-up-environment">
+<h3>Setting up environment<a class="headerlink" href="#setting-up-environment" title="Permalink to this heading"></a></h3>
+<p>On the first time cmake is run, a script (<code class="docutils literal notranslate"><span class="pre">unify_env.source</span></code>) is generated which describes the environment the build system uses to compile rust sources. Since we are going to bypass the build-system, we need to replicate this environment. You have a couple of options on how to source this environment, which depends on your preference. There are a couple of things to take into consideration before choosing:</p>
+<ul class="simple">
+<li><p>The environment script is platform dependant. This means that a generated script for armhf cannot be used to build for x86_64. If you cycle a lot between building different targets a dynamic load of this environment script would be desirable.</p></li>
+<li><p>Changes to the cmake build-system requires, worst-case, a reload of this script.</p></li>
+</ul>
+<p>We advise one of the following options:<br></p>
+<ol class="arabic simple">
+<li><p>Static loading. Directly source the file inside of your bash profile:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;. unify_root/my_build_folder/unify_env.source&quot;</span> &gt;&gt; ~/.bashrc
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Dynamic loading. We created a script that scans for multiple build directories and asks you wich environment to load. You can execute it manually every time. or choose to add it to your shell profile. i.e.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;unify_root/scripts/source_env_prompt.sh&quot;</span> &gt;&gt; ~/.bashrc
+</pre></div>
+</div>
+<p>executing it would look like followed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>maccph0015787:scripts svradema$ ./source_env_prompt.sh 
+please select the correct environment to source:
+  [0]    /Users/svradema/git/unify/build
+  [1]    /Users/svradema/git/unify/build_arm
+0
+sourced!
+</pre></div>
+</div>
+<p>You should be good to go after sourcing the environment. From here on refer to the official <a class="reference external" href="https://doc.rust-lang.org/book/ch01-03-hello-cargo.html">Cargo documentation</a></p>
+</section>
+</section>
+<section id="creating-a-new-rust-project">
+<h2>Creating a new rust project<a class="headerlink" href="#creating-a-new-rust-project" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">init</span> <span class="pre">&lt;project_name&gt;</span></code> command to setup an empty rust project. Use <code class="docutils literal notranslate"><span class="pre">--lib</span></code> argument to init a library type.</p></li>
+<li><p>Add your project to the cargo workspace by appending it to the top level <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> file.</p></li>
+</ol>
+<blockquote>
+<div><p>When creating a new sys crate, post-pend the name with <em>_sys</em>!</p>
+</div></blockquote>
+<section id="creating-unit-tests">
+<h3>Creating Unit tests<a class="headerlink" href="#creating-unit-tests" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Inside Rust there is a distinction between integration test and unit-tests, familiarize yourself with the concept <a class="reference external" href="https://doc.rust-lang.org/book/ch11-03-test-organization.html">here</a>. Please follow up on the recommendations and put integration tests inside <code class="docutils literal notranslate"><span class="pre">rust_project/tests</span></code></p></li>
+<li><p>Usually unit tests blow up the source files quite quickly, to put unit tests in a separate file could help you maintaining order in your source files.</p></li>
+</ul>
+</section>
+</section>
+<section id="c-c-to-rust">
+<h2>C/C++ to Rust<a class="headerlink" href="#c-c-to-rust" title="Permalink to this heading"></a></h2>
+<p>In order to use C in rust some steps need to be taken. You can read more about the overall concept <a class="reference external" href="https://docs.rust-embedded.org/book/interoperability/c-with-rust.html">here</a>. In short, we want to create a small wrapper project that imports the c symbols so that they can referenced correctly in Rust. Next to that, we need to tell the rust compiler how to link towards these symbols. The “cargo-bindgen” is a tool that generates this symbol definitions for you. In the next paragraph is explained how to declare the C libraries in rust as well as how to configure the binding generator.</p>
+<section id="binding-generator">
+<h3>Binding generator<a class="headerlink" href="#binding-generator" title="Permalink to this heading"></a></h3>
+<p>The binding generator is configured and run by the cmake build-system. As input this generator requires a configuration file, which describes what c symbols to generate bindings for. See <code class="docutils literal notranslate"><span class="pre">generate_rust_bindings</span></code> documentation on usage. Inside rust we have an macro which can easily import the generated bindings file as source code to your source file. Take a look at <code class="docutils literal notranslate"><span class="pre">unify_tools::include_binding</span></code> inside cargo doc.</p>
+<blockquote>
+<div><p>Every time you update the <code class="docutils literal notranslate"><span class="pre">DEPENDS</span></code> argument of the binding configuration. resource your unify environment file!</p>
+</div></blockquote>
+<blockquote>
+<div><p>The binding generator will install itself on your system the first time you run a build. You can run it manually on the command line execute <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">bindgen</span> <span class="pre">-h</span></code> on the commandline for more info on the usage.</p>
+</div></blockquote>
+</section>
+<section id="declaring-native-libraries">
+<h3>Declaring native libraries<a class="headerlink" href="#declaring-native-libraries" title="Permalink to this heading"></a></h3>
+<p>link dependencies need to be declared as dictated by the official cargo documentation. <a class="reference external" href="https://docs.rust-embedded.org/book/interoperability/c-with-rust.html">read more</a>. Since the our build environment already resolves all paths to unify libraries, only library names have to be passed as followed:</p>
+<ul class="simple">
+<li><p>in the project you imported the bindings, create an <a class="reference external" href="http://build.rs">build.rs</a> file.</p></li>
+<li><p>Inside the main function of this <a class="reference external" href="http://build.rs">build.rs</a> file you print the library to link towards as followed:</p></li>
+</ul>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// these exports are only used when an exe is compiled. e.g. integration</span>
+<span class="w">    </span><span class="c1">// tests or final binaries!</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;cargo:rustc-link-lib=dylib=uic_log&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>(here uic_log is taken as an example)<br>
+your project should now build correctly!</p>
+</section>
+<section id="sys-crates">
+<h3>_sys crates<a class="headerlink" href="#sys-crates" title="Permalink to this heading"></a></h3>
+<p>A good practice is to create a separate project which handles the import and linkage of a particular C library. The name of such a project is typically post-fixed with <code class="docutils literal notranslate"><span class="pre">_sys</span></code>. This way the transition between C to Rust stays contained in one place. Other projects can depend on this _sys crate to interface with C.</p>
+</section>
+</section>
+<section id="rust-to-c-c">
+<h2>Rust to C/C++<a class="headerlink" href="#rust-to-c-c" title="Permalink to this heading"></a></h2>
+<p>Linking of rust libraries inside C is also possible. An example is the <code class="docutils literal notranslate"><span class="pre">rust_command_classes</span></code> project. The following steps need to be executed to successfully link Rust libraries to C:</p>
+<ul class="simple">
+<li><p>Make sure the rust project is know to cmake. you do this by calling function <code class="docutils literal notranslate"><span class="pre">cargo_build</span></code> for your rust project. See the in code documentation for more information about the usage of this command.</p></li>
+<li><p>Declare your rust project as a static native library. add the following to your <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> file:</p></li>
+</ul>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[lib]</span><span class="w"></span>
+<span class="n">crate-type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;staticlib&quot;</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>In cmake, add a dependency to your rust project. You want to add it to the target_link_libraries list in cmake. use the name <code class="docutils literal notranslate"><span class="pre">&lt;rust_project&gt;_target</span></code> to reference to the rust project. example:</p></li>
+</ul>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span>
+<span class="w">  </span><span class="s">zpc</span>
+<span class="w">   </span><span class="s">...</span>
+<span class="w">  </span><span class="s">rust_command_handlers_target</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>you should now be all set!</p>
+<blockquote>
+<div><p>At the moment C headers have to be written manually, we don’t have a generator in place to generate them.</p>
+</div></blockquote>
+</section>
+<section id="crate-types">
+<h2>Crate types<a class="headerlink" href="#crate-types" title="Permalink to this heading"></a></h2>
+<p>We define 4 different kinds of rust crates (build targets) in our code-base:<br></p>
+<ul class="simple">
+<li><p><b>_sys crates.</b> The purpose of this crate is to expose a native c library as a rust library into rust. They require the native library they are wrapping in order to build. They make use of the rust binding generator to import c symbols. Example: unify_log_sys, zwave_command_classes_sys etc.</p></li>
+<li><p><b>Binary crates</b>. Standalone crates that build binaries. examples are GMS, UPVL, image_provider.</p></li>
+<li><p><b>Library crates</b>. Output rust library files (.rlib), Examples: unify_middleware.</p></li>
+<li><p><b>Native library crates</b>. Libraries that build into native library format. (e.g. librust_command_classes.a) so that they can be used in C code.</p></li>
+</ul>
+</section>
+<section id="cmake-targets">
+<h2>Cmake targets<a class="headerlink" href="#cmake-targets" title="Permalink to this heading"></a></h2>
+<p>the following build targets are available in cmake:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cargo_build</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cargo_test</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cargo_doc</span></code></p></li>
+</ul>
+</section>
+<section id="appendix-generating-test-coverage-report">
+<h2>Appendix: Generating test coverage report<a class="headerlink" href="#appendix-generating-test-coverage-report" title="Permalink to this heading"></a></h2>
+<p>Generating test reports is currently not part of the buildsystem, like we have for our C/C++. However it can be enabled if desired by using the following steps:</p>
+<ol class="arabic simple">
+<li><p>Enable nightly for Rust and add code coverage component<br />
+<code class="docutils literal notranslate"><span class="pre">rustup</span> <span class="pre">component</span> <span class="pre">add</span> <span class="pre">llvm-tools-preview</span></code></p></li>
+<li><p>Build with extra flags<br />
+<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">RUSTFLAGS=&quot;-Zinstrument-coverage&quot;</span> <span class="pre">cargo</span> <span class="pre">test</span></code><br />
+In our case we should just modify <code class="docutils literal notranslate"><span class="pre">CMakeCargo.cmake</span></code> to add the RUSTFLAGS and run<br />
+<code class="docutils literal notranslate"><span class="pre">ninja</span> <span class="pre">cargo_test</span></code></p></li>
+<li><p>Run grcov on the generated files and filter out unittest code itself<br />
+<code class="docutils literal notranslate"><span class="pre">grcov</span> <span class="pre">.</span> <span class="pre">--binary-path</span> <span class="pre">./target/</span> <span class="pre">-s</span> <span class="pre">.</span> <span class="pre">-t</span> <span class="pre">cobertura</span> <span class="pre">--ignore-not-existing</span> <span class="pre">-o</span> <span class="pre">./target/coverage/rust_cobertura.xml</span> <span class="pre">--excl-start</span> <span class="pre">&quot;#\[test\]|mod</span> <span class="pre">tests</span> <span class="pre">\{|mod</span> <span class="pre">test</span> <span class="pre">\{&quot;</span> <span class="pre">--ignore</span> <span class="pre">&quot;build/bindings/*&quot;</span> <span class="pre">--ignore</span> <span class="pre">&quot;*_tests.rs&quot;</span> <span class="pre">--ignore</span> <span class="pre">&quot;build/*&quot;</span> <span class="pre">--ignore</span> <span class="pre">&quot;unify_tools/*&quot;</span> <span class="pre">--ignore</span> <span class="pre">&quot;*/build.rs&quot;</span> <span class="pre">--ignore</span> <span class="pre">&quot;*_test/*&quot;</span></code>
+The output format can also be html if you replace <code class="docutils literal notranslate"><span class="pre">cobertura</span></code> with <code class="docutils literal notranslate"><span class="pre">html</span></code> and pass a folder path <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">./target/coverage</span></code> instead.</p></li>
+<li><p>(Optional) Combine the Rust cobertura report with the one for C<br />
+E.g. <code class="docutils literal notranslate"><span class="pre">npx</span> <span class="pre">cobertura-merge</span> <span class="pre">-o</span> <span class="pre">gcov_results.xml</span> <span class="pre">package1=c_cobertura.xml</span> <span class="pre">package2=rust_cobertura.xml</span></code></p></li>
+<li><p>(Optional) Feed the final xml report to SonarQube</p></li>
+</ol>
+<section id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Branch is not supported yet (ref: <a class="reference external" href="https://github.com/taiki-e/cargo-llvm-cov/issues/8">https://github.com/taiki-e/cargo-llvm-cov/issues/8</a> and <a class="reference external" href="https://github.com/rust-lang/rust/issues/79649">https://github.com/rust-lang/rust/issues/79649</a>)</p></li>
+<li><p>Not supported on ARM platform (ref: <a class="reference external" href="https://github.com/mozilla/grcov/issues/508">https://github.com/mozilla/grcov/issues/508</a>)</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -87,7 +87,7 @@ static void rx_init_successful_test_helper()
   zwapi_get_chip_data_Stub(
     (CMOCK_zwapi_get_chip_data_CALLBACK)zwapi_get_chip_data_stub);
   test_chip_data.library_type = ZWAVE_LIBRARY_TYPE_CONTROLLER_STATIC;
-  test_chip_data.chip_type    = ZW_GECKO_CHIP_TYPE;
+  test_chip_data.chip_type    = ZW_GECKO_CHIP_700;
 
   // 2.b we read the version and print at init
   zwapi_get_protocol_version_ExpectAndReturn(NULL, SL_STATUS_OK);
@@ -111,7 +111,7 @@ static void rx_init_successful_test_helper()
   // 4. zwapi_set_tx_status_reporting goes well
   zwapi_set_tx_status_reporting_ExpectAndReturn(true, SL_STATUS_OK);
 
-  // 5. zwapi_set_rf_region goes well, in this case, the module is soft reset.
+  // 5. zwapi_set_rf_region is happy
   zwapi_get_rf_region_ExpectAndReturn(ZWAVE_RX_TEST_RF_REGION_INT);
 
   // 6. zwapi_set_node_id_basetype well
@@ -183,7 +183,7 @@ void test_zwave_rx_init_wrong_library()
     zwapi_get_chip_data_Stub(
       (CMOCK_zwapi_get_chip_data_CALLBACK)zwapi_get_chip_data_stub);
     test_chip_data.library_type = library;
-    test_chip_data.chip_type    = ZW_GECKO_CHIP_TYPE;
+    test_chip_data.chip_type    = ZW_GECKO_CHIP_700;
 
     zwapi_get_protocol_version_ExpectAndReturn(NULL, SL_STATUS_OK);
     zwapi_get_protocol_version_IgnoreArg_protocol_version();
@@ -248,7 +248,7 @@ void test_zwave_rx_init_cannot_set_rf_resgion()
   zwapi_get_chip_data_Stub(
     (CMOCK_zwapi_get_chip_data_CALLBACK)zwapi_get_chip_data_stub);
   test_chip_data.library_type = ZWAVE_LIBRARY_TYPE_CONTROLLER;
-  test_chip_data.chip_type    = ZW_GECKO_CHIP_TYPE;
+  test_chip_data.chip_type    = ZW_GECKO_CHIP_700;
 
   zwapi_get_protocol_version_ExpectAndReturn(NULL, SL_STATUS_NOT_SUPPORTED);
   zwapi_get_protocol_version_IgnoreArg_protocol_version();
@@ -287,7 +287,7 @@ void test_zwave_rx_init_non_critical_failures()
   zwapi_get_chip_data_Stub(
     (CMOCK_zwapi_get_chip_data_CALLBACK)zwapi_get_chip_data_stub);
   test_chip_data.library_type = ZWAVE_LIBRARY_TYPE_CONTROLLER;
-  test_chip_data.chip_type    = ZW_GECKO_CHIP_TYPE;
+  test_chip_data.chip_type    = ZW_GECKO_CHIP_700;
 
   zwapi_get_protocol_version_ExpectAndReturn(NULL, SL_STATUS_NOT_SUPPORTED);
   zwapi_get_protocol_version_IgnoreArg_protocol_version();
@@ -306,6 +306,15 @@ void test_zwave_rx_init_non_critical_failures()
   zwapi_set_rf_region_ExpectAndReturn(ZWAVE_RX_TEST_RF_REGION_INT,
                                       SL_STATUS_OK);
   zwapi_soft_reset_ExpectAndReturn(SL_STATUS_FAIL);
+  // zwave_rx_wait_for_zwave_api_to_be_ready will keep asking if we have completed
+  // soft reset.
+  zwapi_is_awaiting_zwave_api_started_ExpectAndReturn(true);
+  zwapi_poll_ExpectAndReturn(true);
+  zwapi_is_awaiting_zwave_api_started_ExpectAndReturn(true);
+  zwapi_poll_ExpectAndReturn(true);
+  zwapi_is_awaiting_zwave_api_started_ExpectAndReturn(true);
+  zwapi_poll_ExpectAndReturn(false);
+  zwapi_is_awaiting_zwave_api_started_ExpectAndReturn(false);
 
   // 6. zwapi_set_node_id_basetype fails
   zwapi_set_node_id_basetype_ExpectAndReturn(NODEID_16BITS, SL_STATUS_FAIL);
@@ -431,7 +440,7 @@ void test_zwave_rx_on_node_information()
     sizeof(expected_node_info_array_1),
     0);
 
-   // Rx event
+  // Rx event
   zwave_controller_on_frame_reception_Expect(ZWAVE_RX_TEST_DESTINATION_NODE_ID);
   // Change the get_protocol_info to return a failure
   zwapi_get_protocol_info_Stub(
@@ -469,8 +478,8 @@ void test_zwave_rx_on_node_added()
   // Init:
   rx_init_successful_test_helper();
 
-  zwave_controller_on_node_id_assigned_Expect(
-    ZWAVE_RX_TEST_DESTINATION_NODE_ID, PROTOCOL_ZWAVE);
+  zwave_controller_on_node_id_assigned_Expect(ZWAVE_RX_TEST_DESTINATION_NODE_ID,
+                                              PROTOCOL_ZWAVE);
   // Trigger a on_new_node_added callback:
   registered_zwapi_callbacks->application_controller_update(
     0x40,  //New ID assigned

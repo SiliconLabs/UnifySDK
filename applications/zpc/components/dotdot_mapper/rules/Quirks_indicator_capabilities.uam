@@ -15,9 +15,6 @@ scope 0 {
 // Shortcut Endpoints Indicator Capabilities, they are broken and redundant from
 // the root device.
 
-// FIXME: UIC-1341 This does not work, the mapper does not understand
-// the ^ operator properly.
-
 r'^.ep[1].zwINDICATOR_ID[0x43].zwPROPERTY_BIT_MASK =
   if logic_soft_wall_switch 0
   undefined

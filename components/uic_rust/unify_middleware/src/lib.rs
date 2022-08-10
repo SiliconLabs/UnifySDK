@@ -10,9 +10,9 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
+
 #![doc(html_no_source)]
 pub mod contiki;
 pub mod unify_attribute_store;
-pub mod unify_mqtt_client;
 #[doc(inline)]
 pub use unify_attribute_store::*;

@@ -49,14 +49,10 @@ add_custom_target(
                                                   # dev-gui-client build
 )
 
-# Package as .debian
-set(description "Universal IOT controller - Developer GUI")
-cpack_add_component(
-  uic-dev-gui
-  DISPLAY_NAME "dev-gui"
-  DESCRIPTION ${description}
-  INSTALL_TYPES Full)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/public/index.html.in ${CMAKE_CURRENT_SOURCE_DIR}/public/index.html)
 
+if( "${CMAKE_INSTALL_PREFIX}" STREQUAL "/usr")
+# Package as .debian
 install(
   FILES assets/cert.pem assets/key.pem
   DESTINATION /var/lib/dev-gui
@@ -70,6 +66,7 @@ install(
   FILES debconf/services/uic-dev-gui-client.service
   DESTINATION /lib/systemd/system/
   COMPONENT uic-dev-gui)
+endif()
 
 # Install binaries they come from custom target build_dev_gui
 install(
@@ -101,3 +98,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/scripts/prerm
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/prerm)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/scripts/postinst
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/postinst)
+
+add_component_to_uic(
+  uic-dev-gui
+  "Universal IOT controller - Developer GUI"
+  "${CMAKE_PROJECT_NAME}-dev-gui"
+  ""
+  "${CMAKE_BINARY_DIR}/applications/dev_ui/dev_gui/debconf/postinst;\
+    ${CMAKE_BINARY_DIR}/applications/dev_ui/dev_gui/debconf/prerm;\
+    ${CMAKE_BINARY_DIR}/applications/dev_ui/dev_gui/debconf/postrm")

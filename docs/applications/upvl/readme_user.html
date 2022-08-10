@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UPVL User’s Guide &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/applications/upvl/readme_user.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Dev GUI User’s Guide" href="../dev_ui/dev_gui/readme_user.html" />
+    <link rel="prev" title="UPTI WRITER User’s Guide" href="../upti_writer/readme_user.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../doc/introduction.html" class="icon icon-home"> Unify
+            <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../doc/introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../doc/UnifySDK.html">Unify Framework</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#systems-overview">Systems Overview</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../doc/UnifySDK.html#unify-applications-overview">Unify Applications Overview</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-protocol-controllers">Unify Framework Protocol Controllers</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-services">The Unify Framework Services</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../aox/applications/positioning/readme_user.html">AoX Positioning User Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../aox/applications/positioning/readme_developer.html">AoX Positioning Developer’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../gms/readme_user.html">GMS User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_provider/readme_user.html">Image Provider User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nal/readme_user.html">Name and location service User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../upti_cap/readme_user.html">UPTI CAP User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../upti_writer/readme_user.html">UPTI WRITER User’s Guide</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">UPVL User’s Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-provisioning-list-upvl">The Unify Framework Provisioning List (UPVL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-group-manager-gms">The Unify Framework Group Manager (GMS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-name-and-location-service-nal">The Unify Name and Location service (NAL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-framework-ota-image-provider">The Unify Framework OTA Image Provider</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-unify-aox-positioning-application">The Unify AoX Positioning Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-upticap">The UPTICap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../doc/UnifySDK.html#the-uptiwriter">The UPTIWriter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../doc/UnifySDK.html#iot-services">IoT Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#overview-of-relations-among-unify-applications">Overview of relations among Unify Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#overview-of-communication-among-unify-framework-applications">Overview of communication among Unify Framework Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-release-notes">Unify Framework Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#unify-framework-developer-guides">Unify Framework Developer Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../doc/UnifySDK.html#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../doc/license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../doc/introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="upvl-users-guide">
+<h1>UPVL User’s Guide<a class="headerlink" href="#upvl-users-guide" title="Permalink to this heading"></a></h1>
+<p>UPVL is an acronym for <em>Unify Framework Provisioning List</em></p>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<p>The UPVL MQTT Client is an
+application that manages the SmartStart List topic <code class="docutils literal notranslate"><span class="pre">ucl/SmartStart/List</span></code>.</p>
+<p>The UPVL is required for all/any of the protocol controllers to support
+SmartStart.</p>
+<p>It listens to the following MQTT topics, which is used to modify the SmartStart
+List and publish the list to <code class="docutils literal notranslate"><span class="pre">ucl/SmartStart/List</span></code> whenever it was updated:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ucl/SmartStart/List/Update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ucl/SmartStart/List/Remove</span></code></p></li>
+</ul>
+<p>The SmartStart List is persisted in the file system by the UPVL and is published
+whenever the UPVL connects to the MQTT broker (i.e., when the UPVL or MQTT
+broker restarts, the persisted SmartStart list is published to
+<code class="docutils literal notranslate"><span class="pre">ucl/SmartStart/List</span></code>).</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>For installing please refer to the general installation method in
+<a class="reference internal" href="../../doc/getting_started.html"><span class="doc std std-doc">Getting started</span></a>.</p>
+</section>
+<section id="running-the-upvl">
+<h2>Running the UPVL<a class="headerlink" href="#running-the-upvl" title="Permalink to this heading"></a></h2>
+<section id="using-systemd-service">
+<h3>Using Systemd Service<a class="headerlink" href="#using-systemd-service" title="Permalink to this heading"></a></h3>
+<p>The best way to run the UPVL is using the Systemd service that is installed with
+the Debian installer. For more information, see <a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify User guide</span></a>.</p>
+</section>
+<section id="using-command-line">
+<h3>Using Command Line<a class="headerlink" href="#using-command-line" title="Permalink to this heading"></a></h3>
+<p>Alternatively, the UPVL may be run by executing <code class="docutils literal notranslate"><span class="pre">uic-upvl</span></code>. It is possible to
+configure the MQTT broker Hostname or IP, UPVL database path, through command line
+options. For more details about the options, run <code class="docutils literal notranslate"><span class="pre">uic-upvl</span> <span class="pre">--help</span></code>.</p>
+<p>Make sure that you do not run the UPVL both as a service and using the
+command line.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~ $ service uic-upvl status
+● uic-upvl.service - Unify Framework Provisioning List
+     Loaded: loaded <span class="o">(</span>/lib/systemd/system/uic-upvl.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+     Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2022</span>-02-01 <span class="m">13</span>:32:57 CET<span class="p">;</span> 20h ago
+   Main PID: <span class="m">1736</span> <span class="o">(</span>uic-upvl<span class="o">)</span>
+      Tasks: <span class="m">1</span> <span class="o">(</span>limit: <span class="m">4624</span><span class="o">)</span>
+     Memory: <span class="m">3</span>.2M
+     CGroup: /system.slice/uic-upvl.service
+             └─1736 /usr/bin/uic-upvl --upvl.db_file /var/lib/uic/upvl.db
+
+Feb <span class="m">02</span> <span class="m">09</span>:20:06 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:06.343484 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> Disconnected from MQTT broker. Status: <span class="m">7</span>.
+Feb <span class="m">02</span> <span class="m">09</span>:20:06 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: Published <span class="m">0</span> messages.
+Feb <span class="m">02</span> <span class="m">09</span>:20:06 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: Received <span class="m">0</span> messages of which <span class="m">0</span> were dropped.
+Feb <span class="m">02</span> <span class="m">09</span>:20:07 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:07.344734 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> <span class="o">(</span>Re-<span class="o">)</span>connected to broker
+Feb <span class="m">02</span> <span class="m">09</span>:20:07 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:07.344815 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> Subscribing
+Feb <span class="m">02</span> <span class="m">09</span>:20:08 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:08.345994 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> Disconnected from MQTT broker. Status: <span class="m">7</span>.
+Feb <span class="m">02</span> <span class="m">09</span>:20:08 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: Published <span class="m">0</span> messages.
+Feb <span class="m">02</span> <span class="m">09</span>:20:08 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: Received <span class="m">0</span> messages of which <span class="m">0</span> were dropped.
+Feb <span class="m">02</span> <span class="m">09</span>:20:09 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:09.347998 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> <span class="o">(</span>Re-<span class="o">)</span>connected to broker
+Feb <span class="m">02</span> <span class="m">09</span>:20:09 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:09.348156 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> Subscribing
+</pre></div>
+</div>
+<p>If the service is running, stop it using the following command before
+you run the application manually:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~ $ service uic-upvl stop
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p><em>Inclusion of a device keeps failing</em> try to reset the UPVL database:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>sudo systemctl stop uic-upvl <span class="o">&amp;&amp;</span> rm /var/lib/uic/upvl.db <span class="o">&amp;&amp;</span> sudo systemctl start uic-upvl
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

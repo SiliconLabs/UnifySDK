@@ -30,13 +30,6 @@ extern "C" {
 #include "zwave_tx.h"
 
 /**
- * @brief Initialize this component
- *
- * @return sl_status_t
- */
-sl_status_t zwave_controller_transport_init();
-
-/**
  * @brief Entry point of of frame to the transport plugin system .
  *
  * @param connection_info Information about the source and destination node if

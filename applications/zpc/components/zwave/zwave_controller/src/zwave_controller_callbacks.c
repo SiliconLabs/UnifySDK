@@ -22,7 +22,7 @@
 // Generic includes
 #include <stddef.h>
 
-// UIC includes
+// Unify includes
 #include "sl_log.h"
 #define LOG_TAG "zwave_controller_dispatch"
 
@@ -250,6 +250,20 @@ void zwave_controller_on_node_added(sl_status_t status,
                                       inclusion_protocol)
 }
 
+void zwave_controller_on_network_address_update(zwave_home_id_t home_id,
+                                                zwave_node_id_t node_id)
+{
+  sl_log_info(LOG_TAG,
+              "Network address update: "
+              "HomeID %08X - NodeID: %d",
+              home_id,
+              node_id);
+
+  ZWAVE_CONTROLLER_DISPATCH_CALLBACKS(on_network_address_update,
+                                      home_id,
+                                      node_id)
+}
+
 void zwave_controller_on_new_network_entered(
   zwave_home_id_t home_id,
   zwave_node_id_t node_id,
@@ -257,8 +271,8 @@ void zwave_controller_on_new_network_entered(
   zwave_kex_fail_type_t kex_fail_type)
 {
   sl_log_info(LOG_TAG,
-              "Entering new network. HomeID %08X - ZPC NodeID: %d - "
-              "Granted keys: 0x%02X",
+              "New network ready to be operated. "
+              "HomeID %08X - ZPC NodeID: %d - Granted keys: 0x%02X",
               home_id,
               node_id,
               granted_keys);

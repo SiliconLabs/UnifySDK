@@ -138,7 +138,7 @@ void test_zwave_command_class_powerlevel_test_node_set_fail_zwapi_send_test_fram
                                            SL_STATUS_OK);
   zwave_tx_send_test_frame_IgnoreArg_on_send_complete();
   zwave_tx_send_test_frame_IgnoreArg_user();
-  zwave_tx_send_test_frame_IgnoreArg_session();
+  zwave_tx_send_test_frame_IgnoreArg_session_id();
   execute_frame_expect_result(
     zwave_command_class_powerlevel_support_handler,
     cmd_frame_powerlevel_test_node_set_command,
@@ -167,7 +167,7 @@ void test_zwave_command_class_powerlevel_test_node_set()
                                            SL_STATUS_OK);
   zwave_tx_send_test_frame_IgnoreArg_on_send_complete();
   zwave_tx_send_test_frame_IgnoreArg_user();
-  zwave_tx_send_test_frame_IgnoreArg_session();
+  zwave_tx_send_test_frame_IgnoreArg_session_id();
 
   execute_frame_expect_result(
     zwave_command_class_powerlevel_support_handler,
@@ -184,7 +184,7 @@ void test_zwave_command_class_powerlevel_test_node_set()
                                            SL_STATUS_OK);
   zwave_tx_send_test_frame_IgnoreArg_on_send_complete();
   zwave_tx_send_test_frame_IgnoreArg_user();
-  zwave_tx_send_test_frame_IgnoreArg_session();
+  zwave_tx_send_test_frame_IgnoreArg_session_id();
   my_power_level_test_callback(TRANSMIT_COMPLETE_OK, NULL, NULL);
 
   // No more test frame. callback will trigger the unsolicited report
@@ -220,7 +220,7 @@ void test_zwave_command_class_powerlevel_test_node_set_and_get()
                                            SL_STATUS_OK);
   zwave_tx_send_test_frame_IgnoreArg_on_send_complete();
   zwave_tx_send_test_frame_IgnoreArg_user();
-  zwave_tx_send_test_frame_IgnoreArg_session();
+  zwave_tx_send_test_frame_IgnoreArg_session_id();
   zwave_tx_send_test_frame_AddCallback(save_my_power_level_test_callback);
 
   execute_frame_expect_result(

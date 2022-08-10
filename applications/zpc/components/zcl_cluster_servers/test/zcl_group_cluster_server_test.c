@@ -117,7 +117,7 @@ static void create_test_network()
   attribute_store_node_t identify_node
     = attribute_store_add_node(DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME,
                                endpoint_id_node);
-  int32_t identify_time = 3;
+  uint16_t identify_time = 3;
   attribute_store_set_reported(identify_node,
                                &identify_time,
                                sizeof(identify_time));
@@ -208,6 +208,7 @@ void setUp()
   // Set the homeID / NodeID to 0, so our UNID is zw-00000000-0001
   zwave_unid_set_home_id(home_id);
   zwave_network_management_get_node_id_IgnoreAndReturn(1);
+  zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
 
   uic_mqtt_subscribe_AddCallback(uic_mqtt_subscribe_callback);
 }

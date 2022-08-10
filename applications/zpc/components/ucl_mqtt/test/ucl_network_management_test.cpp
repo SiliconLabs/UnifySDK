@@ -19,7 +19,7 @@
 #include "zpc_converters.h"
 #include "ucl_network_management.h"
 #include "contiki_test_helper.h"
-#include "mqtt_mock_helper.h"
+#include "mqtt_test_helper.h"
 #include "zwave_unid.h"
 #include "process.h"
 
@@ -60,13 +60,13 @@ int suiteTearDown(int num_failures)
 void setUp()
 {
   contiki_test_helper_init();
-  mqtt_mock_helper_init();
+  mqtt_test_helper_init();
   init_ucl_network_management();
 }
 
 void tearDown()
 {
-  TEST_ASSERT_NULL_MESSAGE(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf),
+  TEST_ASSERT_NULL_MESSAGE(mqtt_test_helper_pop_publish(ucl_nm_topic, buf),
                            "Expect no more messages");
 }
 
@@ -79,15 +79,13 @@ static sl_status_t my_nm_callback_save(const zwave_controller_callbacks_t *cb,
 
 static void init_ucl_network_management()
 {
-  uint32_t home_id            = 0xdeadbeef;
-  zwave_node_id_t node_id     = 0x1;
-  zwave_keyset_t granted_keys = 0x83;
+  uint32_t home_id        = 0xdeadbeef;
+  zwave_node_id_t node_id = 0x1;
   zwave_controller_register_callbacks_AddCallback(my_nm_callback_save);
   zwave_controller_register_callbacks_ExpectAndReturn(NULL, SL_STATUS_OK);
   zwave_controller_register_callbacks_IgnoreArg_callbacks();
   zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
   zwave_network_management_get_node_id_IgnoreAndReturn(node_id);
-  zwave_network_management_get_granted_keys_IgnoreAndReturn(granted_keys);
   zwave_network_management_get_state_IgnoreAndReturn(NM_IDLE);
   ucl_nm_neighbor_discovery_init_Ignore();
 
@@ -96,15 +94,15 @@ static void init_ucl_network_management()
 
   TEST_ASSERT_EQUAL_MESSAGE(
     1,
-    mqtt_mock_helper_get_num_subscribers(ucl_nm_state_write_topic),
+    mqtt_test_helper_get_num_subscribers(ucl_nm_state_write_topic),
     "ucl_network_management shall subscribe to this topic on init");
   TEST_ASSERT_EQUAL_MESSAGE(
     1,
-    mqtt_mock_helper_get_num_publish(ucl_nm_topic),
+    mqtt_test_helper_get_num_publish(ucl_nm_topic),
     "Expect 1 publish to ucl network management state topic");
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"idle", "SupportedStateList": ["add node", "remove node", "reset"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 }
 
 void test_ucl_network_management_init()
@@ -120,34 +118,33 @@ void test_ucl_network_management_exit()
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_MESSAGE(
     0,
-    mqtt_mock_helper_get_num_subscribers(ucl_nm_state_write_topic),
+    mqtt_test_helper_get_num_subscribers(ucl_nm_state_write_topic),
     "ucl_network_management shall unsubscribe to this topic on exit");
-  TEST_ASSERT_EQUAL_JSON(
-    R"({"State":"idle", "SupportedStateList": []})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+  TEST_ASSERT_EQUAL_JSON(R"({"State":"idle", "SupportedStateList": []})",
+                         mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   TEST_ASSERT_EQUAL_MESSAGE(2,
-                            mqtt_mock_helper_get_num_publish(ucl_nm_topic),
+                            mqtt_test_helper_get_num_publish(ucl_nm_topic),
                             "Dont expect any additional publish");
 }
 
 void test_malformed_json()
 {
   const char message[] = R"({"State": "add node",})";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   contiki_test_helper_run(0);
 }
 
 void test_invalid_state()
 {
   const char message[] = R"({"State": "something invalid"})";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   contiki_test_helper_run(0);
 }
 
 void test_missing_state()
 {
   const char message[] = "{}";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   contiki_test_helper_run(0);
 }
 
@@ -157,14 +154,14 @@ void test_missing_state()
 static void add_node_over_mqtt(zwave_dsk_t dsk, unsigned int on_dsk_report_len)
 {
   char message[] = R"({"State": "add node"})";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, strlen(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, strlen(message));
   zwave_network_management_add_node_ExpectAndReturn(SL_STATUS_OK);
   contiki_test_helper_run(0);
   nm_callbacks->on_state_updated(NM_WAITING_FOR_ADD);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"add node", "SupportedStateList": ["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 
   zwave_network_management_keys_set_ExpectAndReturn(true,
                                                     true,
@@ -207,8 +204,8 @@ static void add_node_over_mqtt_validate_result(zwave_dsk_t dsk,
                       "SupportedStateList": ["idle"]
                     })");
   TEST_ASSERT_EQUAL_JSON(expected.c_str(),
-                         mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
-  TEST_ASSERT_NULL_MESSAGE(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf),
+                         mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
+  TEST_ASSERT_NULL_MESSAGE(mqtt_test_helper_pop_publish(ucl_nm_topic, buf),
                            "Expect no more messages");
 }
 
@@ -230,11 +227,11 @@ void test_add_node_dsk_len()
   add_node_over_mqtt_validate_result(dsk, 16);
   // Test on_dsk_report_len of uneven is ignored
   add_node_over_mqtt(dsk, 1);
-  TEST_ASSERT_NULL_MESSAGE(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf),
+  TEST_ASSERT_NULL_MESSAGE(mqtt_test_helper_pop_publish(ucl_nm_topic, buf),
                            "Expect no more messages");
   // Test on_dsk_report_len greater than MAX dsk len is ignored
   add_node_over_mqtt(dsk, 18);
-  TEST_ASSERT_NULL_MESSAGE(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf),
+  TEST_ASSERT_NULL_MESSAGE(mqtt_test_helper_pop_publish(ucl_nm_topic, buf),
                            "Expect no more messages");
 }
 
@@ -252,7 +249,7 @@ void test_add_node_sunny_day()
                               "SecurityCode" : "12345-44510-61374-04097-44510-61374-61183-00256"
                             }
                           })";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   dsk[0] = 0x30;
   dsk[1] = 0x39;
   zwave_network_management_dsk_set_ExpectAndReturn(dsk, SL_STATUS_OK);
@@ -273,7 +270,7 @@ void test_add_node_user_accept_false()
                               "SecurityCode" : "12345-44510-61374-04097-44510-61374-61183-00256"
                             }
                           })";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   zwave_network_management_abort_ExpectAndReturn(SL_STATUS_OK);
   contiki_test_helper_run(0);
 }
@@ -292,7 +289,7 @@ void test_add_node_user_accept_missing()
                               }
                             })";
   zwave_network_management_add_node_ExpectAndReturn(SL_STATUS_OK);
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   contiki_test_helper_run(0);
 }
 
@@ -309,7 +306,7 @@ void test_add_node_security_code_is_missing()
                                 "UserAccept": true
                               }
                             })";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   contiki_test_helper_run(0);
 }
 
@@ -326,7 +323,7 @@ void test_add_node_user_accept_no_dsk()
                               "UserAccept": true
                             }
                           })";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   dsk[0] = 0x30;
   dsk[1] = 0x39;
   contiki_test_helper_run(0);
@@ -347,7 +344,7 @@ void test_add_node_malformed_dsk()
                                   "SecurityCode" : "12345-44510-61374-04097-44510-61374-90000-00256"
                                 }
                             })";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message,
                              sizeof(message));
     contiki_test_helper_run(0);
@@ -361,7 +358,7 @@ void test_add_node_malformed_dsk()
                                   "SecurityCode" : "1-2-3-4-5-6-7-8-9"
                                 }
                               })";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message,
                              sizeof(message));
     contiki_test_helper_run(0);
@@ -375,7 +372,7 @@ void test_add_node_malformed_dsk()
                                   "SecurityCode" : "1-J-3-4-5-6-7-8"
                                 }
                               })";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message,
                              sizeof(message));
     contiki_test_helper_run(0);
@@ -392,19 +389,20 @@ void test_add_node_no_state_parameters()
   add_node_over_mqtt_validate_result(dsk, 2);
   const char message[] = R"({"State": "add node"})";
   zwave_network_management_add_node_ExpectAndReturn(SL_STATUS_OK);
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   contiki_test_helper_run(0);
 }
 
 void test_add_allow_multiple_inclusions()
 {
+  TEST_ASSERT_NOT_NULL(nm_callbacks->on_state_updated);
   // Set AllowMultipleInclusions to true
   {
     const char message[] = R"({
                                 "State": "add node",
                                 "StateParameters": {"AllowMultipleInclusions": true}
                               })";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message,
                              sizeof(message));
   }
@@ -413,32 +411,35 @@ void test_add_allow_multiple_inclusions()
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"add node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
+
   // When Network Management goes to NM_IDLE state,
   // expect zwave_network_management_add_node to be called
-  nm_callbacks->on_state_updated(NM_IDLE);
   zwave_network_management_add_node_ExpectAndReturn(SL_STATUS_OK);
+  nm_callbacks->on_state_updated(NM_IDLE);
+
   contiki_test_helper_run(0);
-  TEST_ASSERT_NULL_MESSAGE(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf),
+  TEST_ASSERT_NULL_MESSAGE(mqtt_test_helper_pop_publish(ucl_nm_topic, buf),
                            "Expect no mqtt messages are published");
   // Enter idle from MQTT side,
   // should go not trigger zwave_network_management_add_node
   {
     const char message[] = R"({"State": "idle"})";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message,
                              sizeof(message));
   }
   zwave_network_management_abort_ExpectAndReturn(SL_STATUS_OK);
-  nm_callbacks->on_state_updated(NM_IDLE);
   contiki_test_helper_run(0);
+
+  nm_callbacks->on_state_updated(NM_IDLE);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State": "idle", "SupportedStateList":["add node", "remove node", "reset"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   // Test add node doesn't get re-triggered when NM_IDLE is reported
   {
     const char message[] = R"({"State": "add node"})";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message,
                              sizeof(message));
   }
@@ -447,13 +448,13 @@ void test_add_allow_multiple_inclusions()
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"add node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 
   nm_callbacks->on_state_updated(NM_IDLE);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"idle", "SupportedStateList":["add node", "remove node", "reset"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 
   // Test add node with "AllowMultipleInclusions": false
   // doesn't get re-triggered when NM_IDLE is reported
@@ -462,7 +463,7 @@ void test_add_allow_multiple_inclusions()
                                 "State": "add node",
                                 "StateParameters": {"AllowMultipleInclusions": false}
                               })";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message,
                              sizeof(message));
   }
@@ -472,7 +473,7 @@ void test_add_allow_multiple_inclusions()
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"idle", "SupportedStateList":["add node", "remove node", "reset"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 }
 
 void test_case_insensitive_json()
@@ -486,7 +487,7 @@ void test_case_insensitive_json()
                                 "StaTe": "AdD nOdE",
                                 "StAtepaRamEtErS": {"ALloWMuLtiPleInclUsiOns": false}
                               })";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message,
                              sizeof(message));
   }
@@ -497,6 +498,7 @@ void test_case_insensitive_json()
                                                     true,
                                                     KEYS_ALL,
                                                     SL_STATUS_OK);
+  TEST_ASSERT_NOT_NULL(nm_callbacks->on_keys_report);
   nm_callbacks->on_keys_report(true, KEYS_ALL);
   contiki_test_helper_run(0);
 
@@ -517,7 +519,7 @@ void test_case_insensitive_json()
                               "SupportedStateList":["idle"]
                             })";
   TEST_ASSERT_EQUAL_JSON(expected,
-                         mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+                         mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 
   {
     const char message[] = R"({
@@ -527,7 +529,7 @@ void test_case_insensitive_json()
                                   "SecuRItyCOde" : "12345-44510-61374-04097-44510-61374-61183-00256"
                                 }
                               })";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message,
                              sizeof(message));
   }
@@ -543,7 +545,7 @@ void test_case_insensitive_json()
 void test_remove_node()
 {
   const char message[] = R"({"State": "remove node"})";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   zwave_network_management_remove_node_ExpectAndReturn(SL_STATUS_OK);
   contiki_test_helper_run(0);
 }
@@ -558,7 +560,7 @@ void test_remove_node()
 void test_reset()
 {
   const char message[] = R"({"State":"reset"})";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   zwave_controller_reset_Expect();
   contiki_test_helper_run(0);
 }
@@ -569,7 +571,7 @@ void test_reset()
 void test_idle()
 {
   const char message[] = R"({"State":"idle"})";
-  mqtt_mock_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   zwave_network_management_abort_ExpectAndReturn(SL_STATUS_OK);
   contiki_test_helper_run(0);
 }
@@ -590,7 +592,7 @@ void test_invalid_states()
                                              "æøå¨¨'!@?\"\0 "};
   for (std::string &state: invalid_states) {
     std::string message = R"({"State":")" + state + R"("})";
-    mqtt_mock_helper_publish(ucl_nm_state_write_topic,
+    mqtt_test_helper_publish(ucl_nm_state_write_topic,
                              message.c_str(),
                              message.length());
     contiki_test_helper_run(0);
@@ -603,95 +605,90 @@ void test_invalid_states()
 ////////////////////////////////////////////////////////////////////////////////
 void test_nm_callback_on_state_updated()
 {
+  TEST_ASSERT_NOT_NULL(nm_callbacks->on_state_updated);
   nm_callbacks->on_state_updated(NM_IDLE);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"idle", "SupportedStateList":["add node", "remove node", "reset"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_WAITING_FOR_ADD);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"add node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 
   nm_callbacks->on_state_updated(NM_NODE_FOUND);
   contiki_test_helper_run(0);
-  TEST_ASSERT_NULL(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+  TEST_ASSERT_NULL(mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_WAIT_FOR_PROTOCOL);
   contiki_test_helper_run(0);
-  TEST_ASSERT_NULL(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+  TEST_ASSERT_NULL(mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_WAIT_FOR_SECURE_ADD);
   contiki_test_helper_run(0);
-  TEST_ASSERT_NULL(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+  TEST_ASSERT_NULL(mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_PREPARE_SUC_INCLISION);
   contiki_test_helper_run(0);
-  TEST_ASSERT_NULL(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+  TEST_ASSERT_NULL(mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_WAIT_FOR_SUC_INCLUSION);
   contiki_test_helper_run(0);
-  TEST_ASSERT_NULL(mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+  TEST_ASSERT_NULL(mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 
   nm_callbacks->on_state_updated(NM_SET_DEFAULT);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(R"({"State":"reset", "SupportedStateList":[]})",
-                         mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+                         mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 
   nm_callbacks->on_state_updated(NM_LEARN_MODE);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"join network", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_LEARN_MODE_STARTED);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"join network", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_WAIT_FOR_SECURE_LEARN);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"join network", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
-  nm_callbacks->on_state_updated(NM_WAIT_FOR_PROBE_BY_SIS);
-  contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL_JSON(
-    R"({"State":"join network", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
-
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_WAITING_FOR_NODE_REMOVAL);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"remove node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 
   nm_callbacks->on_state_updated(NM_WAITING_FOR_FAILED_NODE_REMOVAL);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"remove node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_REPLACE_FAILED_REQ);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"remove node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_SEND_NOP);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"remove node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_WAIT_FOR_TX_TO_SELF_DESTRUCT);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"remove node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"remove node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
   nm_callbacks->on_state_updated(NM_FAILED_NODE_REMOVE);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"remove node", "SupportedStateList":["idle"]})",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 }
 
 void test_nm_callback_on_node_added()
@@ -712,23 +709,21 @@ void test_nm_callback_on_node_added()
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL_JSON(
     R"({"State":"idle", "SupportedStateList":["add node", "remove node", "reset"] })",
-    mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+    mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
 }
 
 void test_nm_callback_on_new_network_entered()
 {
   zwave_home_id_t home_id = 0x12345678;
   zwave_node_id_t node_id = 3;
-  nm_callbacks->on_new_network_entered(home_id,
-                                       node_id,
-                                       KEYS_ALL,
-                                       ZWAVE_NETWORK_MANAGEMENT_KEX_FAIL_NONE);
-  contiki_test_helper_run(0);
+  uic_mqtt_unretain_Expect(ucl_nm_topic);
+  TEST_ASSERT_NOT_NULL(nm_callbacks->on_network_address_update);
+  nm_callbacks->on_network_address_update(home_id, node_id);
   TEST_ASSERT_EQUAL(
     0,
-    mqtt_mock_helper_get_num_subscribers(ucl_nm_state_write_topic));
+    mqtt_test_helper_get_num_subscribers(ucl_nm_state_write_topic));
   TEST_ASSERT_EQUAL(1,
-                    mqtt_mock_helper_get_num_subscribers(
+                    mqtt_test_helper_get_num_subscribers(
                       "ucl/by-unid/zw-12345678-0003/ProtocolController/"
                       "NetworkManagement/Write"));
 }
@@ -745,6 +740,7 @@ void test_nm_callback_on_keys_report()
 
 void test_nm_callback_on_dsk_report()
 {
+  TEST_ASSERT_NOT_NULL(nm_callbacks->on_dsk_report);
   // clang-format off
   zwave_dsk_t dsk = {0x30, 0x39, 0xad, 0xde, 0xef, 0xbe, 0x10, 0x01,
                      0xad, 0xde, 0xef, 0xbe, 0xee, 0xff, 0x01, 0x00};
@@ -785,7 +781,7 @@ void test_nm_callback_on_dsk_report()
                       "SupportedStateList":["idle"]
                     })");
       TEST_ASSERT_EQUAL_JSON(expected.c_str(),
-                             mqtt_mock_helper_pop_publish(ucl_nm_topic, buf));
+                             mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
     }
   }
 }

@@ -14,16 +14,20 @@
 
 // Includes from the Z-Wave controller
 #include "zwave_controller_callbacks.h"
+#include "zwave_rx.h"
 
 // ZPC Includes
 #include "zpc_attribute_store.h"
 #include "zpc_attribute_store_network_helper.h"
 #include "dotdot_attributes.h"
+#include "zwapi_protocol_basis.h"
+#include "zwave_api_transport.h"
 
-// UIC Includes
+// Unify Includes
 #include "sl_log.h"
 #include "dotdot_mqtt.h"
 #include "dotdot_mqtt_supported_generated_commands.h"
+#include "dotdot_mqtt_generated_commands.h"
 #include "attribute_store_helper.h"
 
 // Generic includes
@@ -38,6 +42,8 @@
 /// Under which ZPC endpoint the RF Telemetry is available.
 #define ZPC_ENDPOINT_ID 0
 
+#define ATTRIBUTE(type) \
+  DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_##type
 ///////////////////////////////////////////////////////////////////////////////
 // Private helper functions functions.
 //////////////////////////////////////////////////////////////////////////////
@@ -48,26 +54,35 @@ static void create_rf_telemetry_attributes()
     = get_zpc_endpoint_id_node(ZPC_ENDPOINT_ID);
 
   attribute_store_node_t tx_report_enabled
-    = attribute_store_get_node_child_by_type(
-      zpc_endpoint,
-      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_TX_REPORT_ENABLED,
-      0);
+    = attribute_store_get_first_child_by_type(zpc_endpoint,
+                                              ATTRIBUTE(TX_REPORT_ENABLED));
 
   if (tx_report_enabled == ATTRIBUTE_STORE_INVALID_NODE) {
     tx_report_enabled_t value = DEFAULT_TX_REPORT_ENABLED;
-    attribute_store_set_child_reported(
-      zpc_endpoint,
-      DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_TX_REPORT_ENABLED,
-      &value,
-      sizeof(value));
+    attribute_store_set_child_reported(zpc_endpoint,
+                                       ATTRIBUTE(TX_REPORT_ENABLED),
+                                       &value,
+                                       sizeof(value));
+  }
 
-    // If we just created attributes, make sure to publish the SupportedCommands
-    // for the ZPC. (ZPC has no NetworkStatus)
-    unid_t zpc_unid;
-    if (SL_STATUS_OK
-        == attribute_store_network_helper_get_unid_from_node(zpc_endpoint,
-                                                             zpc_unid)) {
-      uic_mqtt_dotdot_publish_supported_commands(zpc_unid, ZPC_ENDPOINT_ID);
+  // Make sure we have the PTIEnabled ZCL attribute created under the ZPC.
+  attribute_store_node_t pti_enabled_node
+    = attribute_store_get_first_child_by_type(zpc_endpoint,
+                                              ATTRIBUTE(PTI_ENABLED));
+
+  if (pti_enabled_node == ATTRIBUTE_STORE_INVALID_NODE) {
+    if (zwapi_is_pti_supported()) {
+      pti_enabled_t value = zwapi_is_pti_enabled();
+      attribute_store_set_child_reported(zpc_endpoint,
+                                         ATTRIBUTE(PTI_ENABLED),
+                                         &value,
+                                         sizeof(value));
+    }
+  } else {
+    if (!zwapi_is_pti_supported()) {
+      sl_log_debug(LOG_TAG,
+                   "PTI is not supported. Removing the attribute store node");
+      attribute_store_delete_node(pti_enabled_node);
     }
   }
 }
@@ -109,6 +124,49 @@ static void on_rf_telemetry_tx_report_enabled_desired_update(
     return;
   }
 
+  // Whenever the desired value of the RF Telemetry is updated, we just align the reported
+  if (attribute_store_is_value_defined(node, DESIRED_ATTRIBUTE)) {
+    attribute_store_set_reported_as_desired(node);
+  }
+}
+
+static void
+  on_rf_telemetry_pti_enabled_desired_update(attribute_store_node_t node,
+                                             attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
+
+  // Find our UNID.
+  zwave_node_id_t zpc_node_id = zwave_network_management_get_node_id();
+  unid_t zpc_unid;
+  zwave_unid_from_node_id(zpc_node_id, zpc_unid);
+
+  pti_enabled_t rf_telemetry_pti_enabled
+    = dotdot_get_protocol_controller_rf_telemetry_pti_enabled(
+      zpc_unid,
+      ZPC_ENDPOINT_ID,
+      DESIRED_ATTRIBUTE);
+
+  // If the attribute store and the Z-Wave module say the same
+  // No need of setting PTI in Z-Wave module
+  if (rf_telemetry_pti_enabled != zwapi_is_pti_enabled()) {
+    if (zwapi_set_radio_pti(rf_telemetry_pti_enabled) != SL_STATUS_OK) {
+      sl_log_error(LOG_TAG,
+                   "Could not set PTI to %d\n",
+                   (int)rf_telemetry_pti_enabled);
+      if (!zwapi_is_pti_supported()) {
+        sl_log_debug(LOG_TAG, "PTI is not supported\n");
+      }
+      // Roll back the desired value as it was rejected
+      attribute_store_set_desired_as_reported(node);
+      return;
+    }
+    zwapi_soft_reset();
+    zwave_rx_wait_for_zwave_api_to_be_ready();
+    zwave_api_transport_reset();
+  }
   // Whenever the desired value of the RF Telemetry is updated, we just align the reported
   if (attribute_store_is_value_defined(node, DESIRED_ATTRIBUTE)) {
     attribute_store_set_reported_as_desired(node);
@@ -182,10 +240,9 @@ static void
   }
 
   // Prepare an array of UNIDs for the route.
-  char ** repeaters_unid = NULL;
+  char **repeaters_unid = NULL;
   if (tx_report->number_of_repeaters > 0) {
-    repeaters_unid
-      = malloc(sizeof(char *) * tx_report->number_of_repeaters);
+    repeaters_unid = malloc(sizeof(char *) * tx_report->number_of_repeaters);
     for (uint8_t i = 0; i < tx_report->number_of_repeaters; i++) {
       repeaters_unid[i] = malloc(sizeof(unid_t));
       zwave_unid_from_node_id(tx_report->last_route_repeaters[i],
@@ -206,10 +263,10 @@ static void
   fields.route_changed
     = (tx_report->route_scheme_state == ROUTINGSCHEME_CACHED_ROUTE) ? false
                                                                     : true;
-  fields.transmission_speed         = transmission_speed;
-  fields.measured_noise_floord_bm   = tx_report->measured_noise_floor;
-  fields.last_route_repeaters_count = tx_report->number_of_repeaters;
-  fields.last_route_repeaters = (const char**)repeaters_unid;
+  fields.transmission_speed           = transmission_speed;
+  fields.measured_noise_floord_bm     = tx_report->measured_noise_floor;
+  fields.last_route_repeaters_count   = tx_report->number_of_repeaters;
+  fields.last_route_repeaters         = (const char **)repeaters_unid;
   fields.incomingrssi_repeaters_count = tx_report->number_of_repeaters;
   fields.incomingrssi_repeaters
     = (const int8_t *)tx_report->rssi_values.incoming;
@@ -252,14 +309,30 @@ sl_status_t zcl_rf_telemetry_cluster_server_init()
   // Make sure we have the ZCL attributes under our endpoint
   create_rf_telemetry_attributes();
 
-  // Listen to Tx Report Enabled attribute updates and accept them
+  // listen to tx report enabled attribute updates and accept them
   attribute_store_register_callback_by_type_and_state(
     &on_rf_telemetry_tx_report_enabled_desired_update,
-    DOTDOT_ATTRIBUTE_ID_PROTOCOL_CONTROLLER_RF_TELEMETRY_TX_REPORT_ENABLED,
+    ATTRIBUTE(TX_REPORT_ENABLED),
+    DESIRED_ATTRIBUTE);
+
+  // listen to pti enabled attribute updates and accept them
+  attribute_store_register_callback_by_type_and_state(
+    &on_rf_telemetry_pti_enabled_desired_update,
+    ATTRIBUTE(PTI_ENABLED),
     DESIRED_ATTRIBUTE);
 
   // Publish the supported Generated Commands
   publish_rf_telemetry_supported_generated_commands();
+
+  // If we just initialized, make sure to publish the SupportedCommands
+  attribute_store_node_t zpc_endpoint
+    = get_zpc_endpoint_id_node(ZPC_ENDPOINT_ID);
+  unid_t zpc_unid;
+  if (SL_STATUS_OK
+      == attribute_store_network_helper_get_unid_from_node(zpc_endpoint,
+                                                           zpc_unid)) {
+    uic_mqtt_dotdot_publish_supported_commands(zpc_unid, ZPC_ENDPOINT_ID);
+  }
 
   return SL_STATUS_OK;
 }

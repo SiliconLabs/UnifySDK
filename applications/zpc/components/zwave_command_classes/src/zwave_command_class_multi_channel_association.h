@@ -53,11 +53,12 @@ extern "C" {
 sl_status_t zwave_command_class_multi_channel_association_init();
 
 /**
- * @brief Ensures that the lifeline association is set properly for an endpoint
+ * @brief Ensures that the lifeline association or other associations are
+ * set properly for a group_id node
  *
- * @param endpoint_node attribute store node for the endpoint.
+ * @param group_id_node       Attribute Store node for the Group ID.
  */
-void establish_lifeline_association(attribute_store_node_t endpoint_node);
+void establish_zpc_associations(attribute_store_node_t group_id_node);
 
 #ifdef __cplusplus
 }

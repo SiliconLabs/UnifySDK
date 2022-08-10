@@ -13,133 +13,56 @@
 
 #ifndef FAILING_NODE_MONITOR_H
 #define FAILING_NODE_MONITOR_H
-#include <zwave_node_id_definitions.h>
+
+// Interfaces
+#include "zwave_node_id_definitions.h"
+
+// Contiki defines (CLOCK_SECOND)
+#include "clock.h"
+
+/**
+ * @defgroup failing_network_monitor Failing Node Monitor
+ * @ingroup network_monitor
+ * @brief Monitors AL and FL failing nodes, queues NOPs to verify if they
+ * started responding again
+ *
+ * @{
+ *
+ */
+
+// Pinging nodes is not that important, we do not want NOPs messages to clutter
+// the queue, so if they are not sent within 2 seconds, remove them from the
+// Tx Queue
+#define NOP_DISCARD_TIMEOUT_MS 2000
+
+// When we already queued a NOP, back-off for that duration before
+// re-attempting the next NOP.
+#define NOP_REQUEUE_BACK_OFF_MS 10000
+
+// Start interval for pinging AL nodes
+#define AL_NODE_PING_TIME_INTERVAL (4 * CLOCK_SECOND)
+// Multication factor for AL nodes intervals
+#define AL_NODE_PING_TIME_FACTOR 2
+
+// Start interval for pinging FL nodes
+#define FL_NODE_PING_TIME_INTERVAL (40 * CLOCK_SECOND)
+// Multication factor for FL nodes intervals
+#define FL_NODE_PING_TIME_FACTOR 4
+
+// Maximum time we settle on between ping intervals:
+#define MAX_PING_TIME_INTERVAL (24 * 60 * CLOCK_SECOND)
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-/**
- * @defgroup failing_node_monitor Failing Node Monitor 
- * @ingroup network_monitor 
- * @ingroup zpc_components
- * @brief The Failing node monitor
- *
- * @startuml
-  [*] -> Network_Monitor
-  state Failing_Node_Monitor {
-    State Wait#magenta
-        state FailingNodeList #lightblue {
-            state Node1 #Green
-    Node1: next ping, last ping
-            state Node2 #Green
-    Node2: next ping, last ping
-            state Node3 #Green
-    Node3: next ping, last ping
-    
-        }
-    Network_Monitor -> Insert: Node offline
-    Network_Monitor -> Init: Initialization
-    Init-[#blue,bold]->FailingNodeList
-    Insert-[#blue,bold]->FailingNodeList
-    Network_Monitor -> Remove : Node online
-    Insert: Insert node id into failing node list.
-    Insert->Check_FailingList
-    Check_FailingList-[#blue,bold]->FailingNodeList
-    
-    Check_FailingList: Check if node is in failing list.
-    Check_FailingList: If it exists, remove it
-    Check_FailingList-->Adjust
-    Adjust:Adjust next ping timer of all nodes in failing node list according to current timer.
-    Adjust-->Check_Node_Type
-    state Check_Node_Type << fork >>
-    Check_Node_Type --> AL
-    Check_Node_Type --> FL
-    AL:set initial timer value to 4 seconds
-    FL: set initial timer value to 40 seconds
-    
-    state Send_NOP << join >>
-    AL--> Send_NOP
-    FL--> Send_NOP
-    Insert: Adjust all timer for all existing nodes.
-    Insert: Sort the failing node list
-    
-    state Send_NOP {
-      Send_NOP_First-->Change_Intervals
-      Change_Intervals-[#blue,bold]->FailingNodeList
-      Change_Intervals: For AL: double the timer value
-      Change_Intervals: For FL: quadraple the timer value
-      Send_NOP_First: send NOP to first item in the list
-      Change_Intervals-->And_wait
-      And_wait-[#magenta,bold]->Wait
-    }
-    
-    
-    Wait -[#magenta,bold]-> Send_NOP: Send NOP again
-    Wait: wait for timer value
-    state Remove {
-      Remove_Failing_List-[#blue,bold]->FailingNodeList
-      Remove_Failing_List: remove node from failing node list
-      Remvoe_Attribute_Store: Remove from Attribute store
-      Stop_Timer: Stop timer if Failing Node list is empty
-      Stop_Timer-[#blue,bold]->FailingNodeList
-      Stop_Timer-[#magenta,bold]->Wait
-      Remove_Failing_List-->Remvoe_Attribute_Store
-      Remvoe_Attribute_Store-->Stop_Timer
-    }
-  }
-  Init-->Attribute_Store: Read failing nodes if any \nand their last interval
-  Remvoe_Attribute_Store->Attribute_Store: Remove value
-  AL-->Attribute_Store: Store value
-  FL-->Attribute_Store: Store value
-  Check_Node_Type-->ZWave_utils: zwave_get_operating_mode()
-  ZWave_utils-->Check_Node_Type
-  Send_NOP_First --> Zwave_Controller
-  Zwave_Controller: Call zwave_tx to send NOP
-  Zwave_Controller-->[*]
-  @enduml
- */
- 
-/**
- * @brief Stop monitoring the failing node by
- * removing the node id from Failing list monitor list 
- */
-void stop_monitoring_failing_node(zwave_node_id_t node_id);
-/**
- * @brief Start monitoring the failing node by 
- * inserting the node id to Failing list monitor list 
- *
- * On insertion, the Always listeing nodes are first pinged after an interval of 
- * 4 seconds then the intrval is doubled on failure of nop sent every time.
- *
- * On insertion, the Frequently listeing nodes are first pinged after an interval of 
- * 40 seconds then the intrval is doubled on failure of nop sent every time.
- *
- * Max ping interval for nodes is 24 hours.
- *
- * This also store the interval in datastore everytime the interval changes
- */
-void start_monitoring_failing_node(zwave_node_id_t node_id);
 
 /**
- * @brief Print the the failing node monitor list.
+ * @brief Initializes the failing node monitoring by registering callbacks to the
+ * attribute store.
  *
  */
-void print_failing_node_monitor_list();
+void failing_node_monitor_init();
 
-/**
- * @brief Load the failing node monitor list.
- *
- * This function will load any existing failing nodes and their last 
- * interval from the datastore on call of this function. Which is called in ZPC
- * booting 
- */
-void failing_node_monitor_list_load();
-/**
- * @brief Clear the failing node monitor list and stop the timer.
- *
- * This MUST be called on set default
- *
- */
-void failing_node_monitor_list_clear();
 #ifdef __cplusplus
 }
 #endif

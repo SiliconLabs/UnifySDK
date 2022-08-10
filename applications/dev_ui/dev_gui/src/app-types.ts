@@ -9,7 +9,9 @@ export type AppState = {
   GroupList: any[],
   SmartStartList: any[],
   OTAImageList: Image[],
-  UPTI: UPTI
+  UPTI: UPTI,
+  SystemMetrics: any,
+  SceneList: any
 }
 
 export type LocalStorage = {

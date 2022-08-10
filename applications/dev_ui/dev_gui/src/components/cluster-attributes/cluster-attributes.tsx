@@ -5,7 +5,7 @@ import "./cluster-attributes.css";
 import * as AiIcons from 'react-icons/ai';
 import * as MdIcons from 'react-icons/md';
 import * as FiIcons from 'react-icons/fi';
-import { InputAdornment, MenuItem, TextField, Tooltip } from '@material-ui/core';
+import { InputAdornment, MenuItem, TextField, Tooltip } from '@mui/material';
 
 class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
     constructor(props: ClusterAttrProps) {
@@ -209,7 +209,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                 case "enum":
                                     return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
                                         {writable && b.enum
-                                            ? <TextField size="small" className="writable flex-input" fullWidth={true} select label={b.name} name={b.name} disabled={!supported}
+                                            ? <TextField size="small" className="writable flex-input" fullWidth={true} select={b.enum && b.enum.length > 0} label={b.name} name={b.name} disabled={!supported}
                                                 value={value ?? 0} defaultValue={value ?? 0}
                                                 onChange={this.handleBitmapChange.bind(this, prefixNames, i, false, false)} variant="outlined" onBlur={this.validateAttr.bind(this, b, prefixNames.concat(i.name))} >
                                                 {b.enum.map((option: any) => {
@@ -250,63 +250,28 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                     </Card.Body>
                 </Card>
             case "enum":
-                if (i.enum && i.enum.length) {
                 return (
                     <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
-                    {writable && supported
-                        ? <TextField size="small" className="writable flex-input" fullWidth={true} select label={i.name} name={i.name} value={attr ?? ""}
-                            defaultValue={attr ?? ""} onChange={this.handleChange.bind(this.props, prefixNames, false, false)} variant="outlined" onBlur={this.validateAttr.bind(this, i, prefixNames)} InputProps={adornment} >
-                            {i.enum.map((option: any) => {
-                                return <MenuItem key={option.name} value={option.name}>
-                                    {option.name}
-                                </MenuItem>
-                            })}
-                        </TextField>
-                        : <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} disabled={!supported} label={i.name}
-                            value={attr} variant="outlined" InputProps={adornment} />
-                    }
-                    {this.getHintText(i)}
-                    </div>
-                    )
-                } else {
-                    return (
-                        <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
-                        {(writable && supported) ?
-                            <TextField  size="small"
-                                        className="writable flex-input"
-                                        fullWidth={true}
-                                        label={i.name}
-                                        name={i.name}
-                                        variant="outlined"
-                                        type={i.type}
-                                        value={attr || ""}
-                                        onChange={this.handleChange.bind(this, prefixNames, false, i.type === "number")}
-                                        onBlur={this.validateAttr.bind(this, i, prefixNames)}
-                                        onFocus={(event) => event.target.select()}
-                                        InputProps={adornment}
-                                        />
-
-                        :
-                            <TextField  size="small"
-                                        className="flex-input"
-                                        fullWidth={true}
-                                        inputProps={{ readOnly: true }}
-                                        disabled={!supported}
-                                        label={i.name}
-                                        value={attr}
-                                        variant="outlined"
-                                        InputProps={adornment} />
+                        {writable && supported
+                            ? <TextField size="small" className="writable flex-input" fullWidth={true} select={i.enum && i.enum.length > 0} label={i.name} name={i.name} value={attr ?? ""}
+                                onChange={this.handleChange.bind(this.props, prefixNames, false, false)} variant="outlined" onBlur={this.validateAttr.bind(this, i, prefixNames)} InputProps={adornment} >
+                                {i.enum.map((option: any) => {
+                                    return <MenuItem key={option.name} value={option.name}>
+                                        {option.name}
+                                    </MenuItem>
+                                })}
+                            </TextField>
+                            : <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} disabled={!supported} label={i.name}
+                                value={attr} variant="outlined" InputProps={adornment} />
                         }
                         {this.getHintText(i)}
-                        </div>
-                    )
-                }
-
+                    </div>
+                )
             case "struct":
                 return <Card key={index} className="inline margin-v-10">
                     <Card.Header>{i.name} {i.isArray
                         ? <span className="pointer icon">
-                            {writable
+                            {writable && supported
                                 ? <Tooltip title={`Add Item`} className="float-right">
                                     <span className="pointer icon">
                                         <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, prefixNames.concat(i.name), attr, i)} />
@@ -324,7 +289,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                     </Card.Header>
                     <Card.Body className='col-sm-12 no-padding'>
                         {i.isArray ?
-                            (attr.length === undefined || attr.length === 0
+                            (attr?.length === undefined || attr.length === 0
                                 ? <></>
                                 : attr.map((arrayItem: any, arrayIndex: number) => {
                                     return <div key={`${index}-${arrayIndex}`} className='col-sm-6 inline'>
@@ -346,7 +311,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                 })
                             )
                             : i.struct.map((field: any, sIndex: number) => {
-                                return this.renderField(field, attr[field.name], isValid, isForceReadAttrSupported, prefixNames.concat(i.name), supported, writable, `${index}-${sIndex}`);
+                                return this.renderField(field, attr && attr[field.name], isValid, isForceReadAttrSupported, prefixNames.concat(i.name), supported, writable, `${index}-${sIndex}`);
                             })
                         }
                     </Card.Body>
@@ -354,11 +319,11 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
             default:
                 return writable && supported
                     ? (i.isArray ?
-                        (attr.length === undefined || attr.length === 0
+                        (attr?.length === undefined || attr.length === 0
                             ? <div key={index}></div>
                             : <Card key={index} className="inline margin-v-10">
                                 <Card.Header>{i.name}
-                                    {writable
+                                    {writable && supported
                                         ? <Tooltip title={`Add Item`} className="float-right">
                                             <span className="pointer icon">
                                                 <FiIcons.FiPlus onClick={this.addArrayItem.bind(this, prefixNames.concat(i.name), attr, i)} />
@@ -401,7 +366,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                     )
                     : <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
                         <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} disabled={!supported} label={i.name} variant="outlined" type="text"
-                            value={i.isArray ? attr.join("; ") : (attr || "")} InputProps={adornment} />
+                            value={i.isArray && attr !== undefined ? attr.join("; ") : (attr || "")} InputProps={adornment} />
                         {this.getHintText(i)}
                     </div>
         }
@@ -412,57 +377,59 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
         let isForceReadAttrSupported = this.state.SupportedCommands !== undefined && this.state.SupportedCommands.indexOf("ForceReadAttributes") > -1;
         let isWriteAttrSupported = this.state.SupportedCommands && this.state.SupportedCommands.indexOf("WriteAttributes") > -1;
         return (
-            <Modal show={this.state.ShowModal} size="lg" onHide={() => this.toggleModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{this.props.ClusterType} Attribute(s) &nbsp;
-                        {this.state.HideUnSup
-                            ? <Tooltip title="Show All Attributes">
-                                <span className="icon"><AiIcons.AiOutlineEye color="green" onClick={() => this.setState({ HideUnSup: false })} /></span>
+            this.state.ShowModal ?
+                <Modal show={this.state.ShowModal} size="lg" onHide={() => this.toggleModal(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{this.props.ClusterType} Attribute(s) &nbsp;
+                            {this.state.HideUnSup
+                                ? <Tooltip title="Show All Attributes">
+                                    <span className="icon"><AiIcons.AiOutlineEye color="green" onClick={() => this.setState({ HideUnSup: false })} /></span>
+                                </Tooltip>
+                                : <Tooltip title="Hide Unsupported Attributes">
+                                    <span className="icon"><AiIcons.AiOutlineEyeInvisible color="green" onClick={() => this.setState({ HideUnSup: true })} /></span>
+                                </Tooltip>}
+                            <Tooltip title={`Force Read Attributes ${isForceReadAttrSupported ? "" : "(maybe not supported)"}`} className="margin-h-5">
+                                <span className={`${isForceReadAttrSupported ? "" : "disabled pointer"} icon`}><MdIcons.MdRefresh onClick={() => this.forceRead()} /></span>
                             </Tooltip>
-                            : <Tooltip title="Hide Unsupported Attributes">
-                                <span className="icon"><AiIcons.AiOutlineEyeInvisible color="green" onClick={() => this.setState({ HideUnSup: true })} /></span>
-                            </Tooltip>}
-                        <Tooltip title={`Force Read Attributes ${isForceReadAttrSupported ? "" : "(maybe not supported)"}`} className="margin-h-5">
-                            <span className={`${isForceReadAttrSupported ? "" : "disabled pointer"} icon`}><MdIcons.MdRefresh onClick={() => this.forceRead()} /></span>
-                        </Tooltip>
-                        <div className="col-sm-12 writable-hint">
-                            <div className="col-md-12">
-                                <span className="writable"></span> - Writable Attributes
+                            <div className="col-sm-12 writable-hint">
+                                <div className="col-md-12">
+                                    <span className="writable"></span> - Writable Attributes
+                                </div>
+                                <div className="col-md-12" hidden={isWriteAttrSupported}>
+                                    <span>
+                                        <FiIcons.FiAlertTriangle color="orange" fontSize="15px" />
+                                    </span> - "WriteAttributes" command is not advertised by the cluster, so this feature may not be supported
+                                </div>
+                                <div className="col-md-12" hidden={isForceReadAttrSupported}>
+                                    <span>
+                                        <FiIcons.FiAlertTriangle color="orange" fontSize="15px" />
+                                    </span> - "ForceReadAttributes" command is not advertised by the cluster, so this feature may not be supported
+                                </div>
                             </div>
-                            <div className="col-md-12" hidden={isWriteAttrSupported}>
-                                <span>
-                                    <FiIcons.FiAlertTriangle color="orange" fontSize="15px" />
-                                </span> - "WriteAttributes" command is not advertised by the cluster, so this feature may not be supported
-                            </div>
-                            <div className="col-md-12" hidden={isForceReadAttrSupported}>
-                                <span>
-                                    <FiIcons.FiAlertTriangle color="orange" fontSize="15px" />
-                                </span> - "ForceReadAttributes" command is not advertised by the cluster, so this feature may not be supported
-                            </div>
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="col-sm-12 cluster-attributes">
+                            {this.props.ClusterAttr && this.props.ClusterAttr.map((i: any, index: number) => {
+                                let supported = keys.indexOf(i.name) > -1;
+                                let isValid = this.state.SupportedAttributes[i.name] === undefined || this.state.SupportedAttributes[i.name].isValid === true;
+                                return this.renderField(i, this.state.SupportedAttributes[i.name]?.Reported, isValid, isForceReadAttrSupported,
+                                    [], supported, i.writable, index.toString())
+                            })}
                         </div>
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <div className="col-sm-12 cluster-attributes">
-                        {this.props.ClusterAttr && this.props.ClusterAttr.map((i: any, index: number) => {
-                            let supported = keys.indexOf(i.name) > -1;
-                            let isValid = this.state.SupportedAttributes[i.name] === undefined || this.state.SupportedAttributes[i.name].isValid === true;
-                            return this.renderField(i, this.state.SupportedAttributes[i.name]?.Reported, isValid, isForceReadAttrSupported,
-                                [], supported, i.writable, index.toString())
-                        })}
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Tooltip title={`${isWriteAttrSupported ? "" : "Maybe not supported"}`}>
-                        <Button variant="outline-primary" className={`${isWriteAttrSupported ? "" : "disabled"}`} onClick={() => this.saveAttr()}>
-                            Save
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Tooltip title={`${isWriteAttrSupported ? "" : "Maybe not supported"}`}>
+                            <Button variant="outline-primary" className={`${isWriteAttrSupported ? "" : "disabled"}`} onClick={() => this.saveAttr()}>
+                                Save
+                            </Button>
+                        </Tooltip>
+                        <Button variant="primary" onClick={() => this.toggleModal(false)}>
+                            Cancel
                         </Button>
-                    </Tooltip>
-                    <Button variant="primary" onClick={() => this.toggleModal(false)}>
-                        Cancel
-                    </Button>
-                </Modal.Footer>
-            </Modal >
+                    </Modal.Footer>
+                </Modal >
+                : <></>
         );
     }
 }

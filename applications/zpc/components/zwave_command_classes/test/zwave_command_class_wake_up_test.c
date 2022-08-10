@@ -41,6 +41,7 @@
 #include "zwave_tx_mock.h"
 #include "zwave_tx_scheme_selector_mock.h"
 #include "zwave_network_management_mock.h"
+#include "attribute_timeouts_mock.h"
 
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_WAKE_UP_##type
@@ -346,7 +347,7 @@ void test_zwave_command_class_wake_up_capabilities_get_v1()
   attribute_store_node_t version_node
     = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
 
-  zwave_cc_version_t version                                = 1;
+  zwave_cc_version_t version                     = 1;
   my_test_configuration.default_wake_up_interval = 20;
   attribute_store_set_reported(version_node, &version, sizeof(version));
 
@@ -432,7 +433,7 @@ void test_zwave_command_class_wake_up_capabilities_get_v2()
   attribute_store_node_t version_node
     = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
 
-  zwave_cc_version_t version                                = 2;
+  zwave_cc_version_t version                     = 2;
   my_test_configuration.default_wake_up_interval = 20;
   attribute_store_set_reported(version_node, &version, sizeof(version));
 
@@ -473,7 +474,7 @@ void test_zwave_command_class_wake_up_capabilities_get_v3()
   attribute_store_node_t version_node
     = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
 
-  zwave_cc_version_t version                                = 3;
+  zwave_cc_version_t version                     = 3;
   my_test_configuration.default_wake_up_interval = 20;
   attribute_store_set_reported(version_node, &version, sizeof(version));
 
@@ -506,7 +507,7 @@ void test_zwave_command_class_wake_up_version_1_supporting_node()
   // Nothing should be created as long as version is undefined
   TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_id_node));
 
-  zwave_cc_version_t version                                = 1;
+  zwave_cc_version_t version                     = 1;
   my_test_configuration.default_wake_up_interval = 20;
   attribute_store_set_reported(version_node, &version, sizeof(version));
 
@@ -730,12 +731,31 @@ void test_zwave_command_class_wake_up_no_more_information()
   // V1 default capabilities should have been created:
   TEST_ASSERT_EQUAL(3, attribute_store_get_node_child_count(endpoint_id_node));
 
-  // A Wake Up no more is to be sent when we are done here.
+  // Try to ask sending a Wake Up No More. Won't happen if we are not the destination
   TEST_ASSERT_NOT_NULL(send_wake_up_no_more);
   attribute_resolver_clear_resolution_listener_Expect(node_id_node,
                                                       send_wake_up_no_more);
-
   attribute_resolver_pause_node_resolution_Expect(node_id_node);
+  send_wake_up_no_more(node_id_node);
+
+  // Now Configure ourselves as the Wake Up Destination
+  attribute_store_node_t wake_up_setting_node
+    = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                             ATTRIBUTE(SETTING),
+                                             0);
+  attribute_store_node_t wake_up_node_id_node
+    = attribute_store_get_node_child_by_type(wake_up_setting_node,
+                                             ATTRIBUTE(NODE_ID),
+                                             0);
+  attribute_store_set_reported(wake_up_node_id_node,
+                               &zpc_node_id,
+                               sizeof(zpc_node_id));
+
+  // And check that pause the node and send a Wake Up No More.
+  attribute_resolver_clear_resolution_listener_Expect(node_id_node,
+                                                      send_wake_up_no_more);
+  attribute_resolver_pause_node_resolution_Expect(node_id_node);
+  we_have_return_routes_to_assign_ExpectAndReturn(node_id, false);
   zwave_node_id_t remote_node_id = 0;
   attribute_store_get_reported(node_id_node,
                                &remote_node_id,
@@ -760,6 +780,48 @@ void test_zwave_command_class_wake_up_no_more_information()
   zwave_tx_send_data_IgnoreArg_connection();
   zwave_tx_send_data_IgnoreArg_data();
   zwave_tx_send_data_IgnoreArg_tx_options();
+
+  send_wake_up_no_more(node_id_node);
+}
+
+void test_postpone_wake_up_no_more_information()
+{
+  // Create a version node under the endpoint
+  attribute_store_node_t version_node
+    = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
+
+  // Nothing should be created as long as version is undefined
+  TEST_ASSERT_EQUAL(1, attribute_store_get_node_child_count(endpoint_id_node));
+
+  zwave_cc_version_t version = 3;
+  attribute_store_set_reported(version_node, &version, sizeof(version));
+
+  // V1 default capabilities should have been created:
+  TEST_ASSERT_EQUAL(3, attribute_store_get_node_child_count(endpoint_id_node));
+
+  // Now Configure ourselves as the Wake Up Destination
+  attribute_store_node_t wake_up_setting_node
+    = attribute_store_get_node_child_by_type(endpoint_id_node,
+                                             ATTRIBUTE(SETTING),
+                                             0);
+  attribute_store_node_t wake_up_node_id_node
+    = attribute_store_get_node_child_by_type(wake_up_setting_node,
+                                             ATTRIBUTE(NODE_ID),
+                                             0);
+  attribute_store_set_reported(wake_up_node_id_node,
+                               &zpc_node_id,
+                               sizeof(zpc_node_id));
+
+  // If we have return routes to assign, it will postpone the pausing/sending of
+  // the wake up no more message
+  attribute_resolver_clear_resolution_listener_Expect(node_id_node,
+                                                      send_wake_up_no_more);
+  we_have_return_routes_to_assign_ExpectAndReturn(node_id, true);
+  attribute_timeout_set_callback_ExpectAndReturn(
+    node_id_node,
+    1000,
+    send_wake_up_no_more,
+    SL_STATUS_OK);
 
   send_wake_up_no_more(node_id_node);
 }

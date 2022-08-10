@@ -15,6 +15,7 @@
 #include "zcl_group_cluster_server.h"
 #include "zcl_rf_telemetry_cluster_server.h"
 #include "configuration_parameter_cluster_server.h"
+#include "zcl_binding_cluster_server.h"
 
 //Includes from other components
 #include "attribute_store.h"
@@ -36,6 +37,7 @@ sl_status_t zcl_cluster_servers_init()
   init_status |= zcl_OTA_cluster_server_init();
   init_status |= zcl_rf_telemetry_cluster_server_init();
   init_status |= configuration_parameter_cluster_server_init();
+  init_status |= binding_cluster_server_init();
   return init_status;
 }
 

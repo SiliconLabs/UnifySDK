@@ -14,6 +14,7 @@
 // Includes from this component
 #include "attribute_store.h"
 #include "attribute_store_node.h"
+#include "attribute_store_type_registration.h"
 
 // Generic includes
 #include <stdio.h>
@@ -22,7 +23,6 @@
 
 // Includes from other components
 #include "sl_log.h"
-#include "attribute_store_debug.h"
 
 /// Setup Log tag
 #define LOG_TAG "attribute_store"
@@ -115,10 +115,9 @@ void attribute_store_node::log(uint8_t indent)
 
   log_index += snprintf(log_message + log_index,
                         sizeof(log_message) - log_index,
-                        "ID: %d - %s (0x%08X) - ",
+                        "ID: %d - %s - ",
                         id,
-                        attribute_store_name_by_type(type),
-                        type);
+                        attribute_store_get_type_name(type));
 
   // Desired value
   char desired_value_data[MAXIMUM_MESSAGE_SIZE] = {0};
@@ -146,11 +145,17 @@ void attribute_store_node::log(uint8_t indent)
   }
 
   // Add the desired and reported to the list
-  snprintf(log_message + log_index,
-           sizeof(log_message) - log_index,
-           "Desired (hex): [%s] - Reported (hex): [%s]",
-           desired_value_data,
-           reported_value_data);
+  log_index += snprintf(log_message + log_index,
+                        sizeof(log_message) - log_index,
+                        "Reported (hex): [%s] ",
+                        reported_value_data);
+
+  if (this->desired_value.size() > 0) {
+    snprintf(log_message + log_index,
+             sizeof(log_message) - log_index,
+             "(Desired (hex): [%s])",
+             desired_value_data);
+  }
 
   sl_log_debug(LOG_TAG, "%s", log_message);
 }

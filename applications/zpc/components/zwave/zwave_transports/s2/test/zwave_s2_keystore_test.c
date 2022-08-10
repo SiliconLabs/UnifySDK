@@ -65,7 +65,7 @@ void test_read_private_ecdh_key()
 {
   uint8_t key[32];
   const uint8_t my_ecdh_priv_key[] = ".This is the App NVM dynamic key";
-  chip_type                        = ZW_GECKO_CHIP_TYPE;
+  chip_type                        = ZW_GECKO_CHIP_700;
 
   nvm_config_set(ecdh_priv_key, my_ecdh_priv_key);
   memcpy(dynamic_ecdh_private_key, ".....This is the dynamic key....", 32);
@@ -105,4 +105,13 @@ void test_sl_log_keys()
 {
   // Nothing to test here really.
   zwave_s2_log_security_keys(SL_LOG_INFO);
+}
+
+void test_zwave_s2_keystore_reset_and_get_assigned_keys()
+{
+  uint8_t assigned_keys = 0xFF;
+  nvm_config_set(assigned_keys, &assigned_keys);
+  zwave_s2_keystore_reset_assigned_keys();
+
+  TEST_ASSERT_EQUAL(0, zwave_s2_keystore_get_assigned_keys());
 }

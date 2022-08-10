@@ -11,6 +11,8 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+use convert_case::{Case, Casing};
+use quote::{format_ident, ToTokens, __private::TokenStream};
 use std::{
     env,
     fs::File,
@@ -61,5 +63,35 @@ fn write_file(status_codes: Vec<(String, String)>) -> std::io::Result<()> {
     file.write_all(line.as_bytes())?;
     file.write_all(b"\t}\t}")?;
 
+    file.write_all(generate_map_functions(status_codes).as_bytes())?;
+
     Ok(())
+}
+
+fn generate_map_functions(status_codes: Vec<(String, String)>) -> String {
+    let mut tokens = TokenStream::new();
+
+    status_codes
+        .iter()
+        .map(|(name, val)| {
+            (
+                format_ident!("map_to_{}", name.to_case(Case::Snake)),
+                if val.chars().any(|c| c.is_ascii_alphabetic()) {
+                    u32::from_str_radix(val.trim_start_matches("0x"), 16)
+                        .expect("hex value to be valid")
+                } else {
+                    val.parse::<u32>().expect("expected an integer value")
+                },
+            )
+        })
+        .for_each(|(method_name, val)| {
+            let method = quote::quote! {
+                pub fn #method_name<T>(_:T) -> u32{
+                    #val
+                }
+            };
+            method.to_tokens(&mut tokens);
+        });
+
+    tokens.to_string()
 }

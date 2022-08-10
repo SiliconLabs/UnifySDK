@@ -73,6 +73,7 @@
 #include <vector>
 
 #include "sl_log.h"
+#include "sl_status.h"
 
 namespace smartstart
 {

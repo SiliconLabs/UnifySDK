@@ -84,7 +84,13 @@ static volatile unsigned char poll_requested;
 #define PROCESS_STATE_RUNNING 1
 #define PROCESS_STATE_CALLED  2
 
-#define EVENT_TIME_WARNING 100
+// Time logging defines
+#ifdef NDEBUG
+#define LOG_SLOW_EVENTS 0
+#else
+#define LOG_SLOW_EVENTS 1
+#endif
+#define EVENT_TIME_WARNING 50
 #define EVENT_TIME_ERROR   300
 
 static void call_process(struct process *p,
@@ -206,7 +212,9 @@ static void call_process(struct process *p,
   }
 #endif /* DEBUG */
 
+#if LOG_SLOW_EVENTS
   clock_time_t start_time = clock_time();
+#endif  // LOG_SLOW_EVENTS
 
   if ((p->state & PROCESS_STATE_RUNNING) && p->thread != NULL) {
 #if !CC_NO_VA_ARGS
@@ -224,21 +232,23 @@ static void call_process(struct process *p,
     }
   }
 
+#if LOG_SLOW_EVENTS
   clock_time_t elapsed_timed = clock_time() - start_time;
 
   if (elapsed_timed > EVENT_TIME_ERROR) {
-    sl_log_debug(LOG_TAG,
+    sl_log_error(LOG_TAG,
                  "Process %s took %lu ms to execute event %d. ",
                  p->name,
                  elapsed_timed,
                  ev);
   } else if (elapsed_timed > EVENT_TIME_WARNING) {
-    sl_log_debug(LOG_TAG,
-                 "Process %s took %lu ms to execute event %d. ",
-                 p->name,
-                 elapsed_timed,
-                 ev);
+    sl_log_warning(LOG_TAG,
+                   "Process %s took %lu ms to execute event %d. ",
+                   p->name,
+                   elapsed_timed,
+                   ev);
   }
+#endif  // LOG_SLOW_EVENTS
 }
 /*---------------------------------------------------------------------------*/
 void process_exit(struct process *p) CC_REENTRANT_ARG

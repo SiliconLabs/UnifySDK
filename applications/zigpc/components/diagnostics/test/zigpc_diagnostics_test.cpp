@@ -27,7 +27,7 @@ extern "C" {
 #include "uic_mqtt_mock.h"
 #include "zigpc_gateway_mock.h"
 
-// UIC Component
+// Unify Component
 #include "sl_status.h"
 
 // A global flag to check if the test/stub metric called "update_value"

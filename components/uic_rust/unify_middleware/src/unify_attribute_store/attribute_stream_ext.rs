@@ -11,19 +11,19 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+use super::{AttributeEvent, AttributeStore};
+use crate::attribute_changed;
+use crate::unify_attribute_store::attribute_store_trait::AttributeStoreTrait;
+use crate::Attribute;
+use crate::AttributeTrait;
+use crate::{contiki::contiki_spawn, AttributeEventType, AttributeValueState};
 use core::task::Poll::Ready;
-
 use futures::{
     channel::mpsc::{unbounded, UnboundedReceiver},
     stream::LocalBoxStream,
     Stream, StreamExt,
 };
 use unify_log_sys::*;
-
-use crate::{
-    contiki::contiki_spawn, Attribute, AttributeEvent, AttributeEventType, AttributeStoreTrait,
-    AttributeValueState,
-};
 declare_app_name!("attribute_stream");
 
 /// Attribute stream which streams all current items in the attribute store
@@ -33,12 +33,12 @@ declare_app_name!("attribute_stream");
 /// it will first check if there are items left in this channel. If so it will
 /// return these items, otherwise poll the AttributeChangedStream
 pub struct ForceUpdateAttributeStream {
-    attribute_stream: LocalBoxStream<'static, AttributeEvent>,
-    receiver: Option<UnboundedReceiver<AttributeEvent>>,
+    attribute_stream: LocalBoxStream<'static, AttributeEvent<Attribute>>,
+    receiver: Option<UnboundedReceiver<AttributeEvent<Attribute>>>,
 }
 
 impl ForceUpdateAttributeStream {
-    pub fn new(predicate: impl Fn(&AttributeEvent) -> bool + 'static) -> Self {
+    pub fn new(predicate: impl Fn(&AttributeEvent<Attribute>) -> bool + 'static) -> Self {
         let (mut sender, receiver) = unbounded();
         let changes = get_changes(&predicate);
 
@@ -49,15 +49,18 @@ impl ForceUpdateAttributeStream {
         });
 
         Self {
-            attribute_stream: Attribute::attribute_changed(predicate),
+            attribute_stream: attribute_changed(predicate),
             receiver: Some(receiver),
         }
     }
 }
 
-fn get_changes(predicate: &impl Fn(&AttributeEvent) -> bool) -> Vec<AttributeEvent> {
+fn get_changes(
+    predicate: &impl Fn(&AttributeEvent<Attribute>) -> bool,
+) -> Vec<AttributeEvent<Attribute>> {
+    let attribute_store = AttributeStore::new().expect("attribute store to be initialized");
     let mut changes = Vec::new();
-    for attribute in Attribute::root().unwrap().iter() {
+    for attribute in attribute_store.root().iter() {
         let change = AttributeEvent {
             event_type: AttributeEventType::ATTRIBUTE_UPDATED,
             value_state: AttributeValueState::REPORTED_ATTRIBUTE,
@@ -72,7 +75,7 @@ fn get_changes(predicate: &impl Fn(&AttributeEvent) -> bool) -> Vec<AttributeEve
 }
 
 impl Stream for ForceUpdateAttributeStream {
-    type Item = AttributeEvent;
+    type Item = AttributeEvent<Attribute>;
 
     fn poll_next(
         self: std::pin::Pin<&mut Self>,

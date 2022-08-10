@@ -15,7 +15,7 @@
 #include <unordered_map>
 #include <nlohmann/json.hpp>
 
-// UIC shared includes
+// Unify shared includes
 #include <sl_log.h>
 
 // ZigPC includes

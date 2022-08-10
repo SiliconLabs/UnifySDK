@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Col, OverlayTrigger, Popover, Row, Spinner, Table } from 'react-bootstrap';
-import Tooltip from '@material-ui/core/Tooltip';
 import { Group, GroupsProps, GroupsState } from './groups-types';
 import * as FiIcons from 'react-icons/fi';
 import * as AiIcons from 'react-icons/ai';
 import ConfirmDlg from '../../components/confirm-dlg/confirm-dlg';
 import GroupCommandDlg from '../../components/group-command-dlg/group-command-dlg';
 import EditGroupDlg from '../../components/edit-group-dlg/edit-group-dlg';
+import { Tooltip } from '@mui/material';
 
 export class Groups extends React.Component<GroupsProps, GroupsState> {
   constructor(props: GroupsProps) {
@@ -34,7 +34,7 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
       group.NodeList && Object.keys(group.NodeList).forEach((unid) => {
         let node = nodeList.find(i => i.Unid === unid);
         if (!node) return;
-        group.NodeList[unid].forEach((ep: any) => {
+        group.NodeList[unid]?.forEach((ep: any) => {
           let endPoint = "ep" + ep;
           if (!node.ep || !node.ep[endPoint])
             return;
@@ -54,11 +54,9 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
                   let type = typeof (attribute.Desired);
                   if (type !== "object" && (attribute.Reported !== attribute.Desired))
                     updatingProperties.push(`${attr}: ${attribute.Desired}`)
-                  else if (type === "object")
-                    Object.keys(attribute.Desired).forEach(i => {
-                      if (!attribute.Reported || (attribute.Reported[i] !== attribute.Desired[i]))
-                        updatingProperties.push(`${attr}.${i}: ${attribute.Desired[i]}`)
-                    });
+                  else if (type === "object") {
+                    this.compareAttr(updatingProperties, attr, attribute.Desired, attribute.Reported);
+                  }
                 }
               });
               if (updatingProperties.length)
@@ -71,6 +69,16 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
       });
     });
     return groupList.sort((a, b) => a.GroupId - b.GroupId);
+  }
+
+  compareAttr(updatingProperties: string[], parent: string, desired: any, reported: any) {
+    Object.keys(desired).forEach(i => {
+      if (typeof (desired[i]) === 'object')
+        return this.compareAttr(updatingProperties, `${parent}.${i}`, desired[i], reported && reported[i])
+      else
+        if (!reported || (reported[i] !== desired[i]))
+          updatingProperties.push(`${parent}.${i}: ${desired[i]}`);
+    });
   }
 
   updateState(groupList: any[], nodeList: any[]) {
@@ -89,17 +97,16 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
       UpdatingNodes: [],
       Clusters: []
     } as Group;
-    this.edit(newGroup);
+    this.edit(newGroup, true);
   }
 
-  edit(group: Group) {
-    this.changeEditGroupDlg.current.updateState(group, this.props.NodeList);
+  edit(group: Group, isNew: boolean) {
+    this.changeEditGroupDlg.current.updateState(group, this.props.NodeList, false, isNew, this.state.GroupList.map((i: any) => i.GroupId));
   }
 
   remove(item: Group) {
     this.setState({ ProcessingGroup: item }, () => {
       this.changeConfirmDlg?.current.update(
-        true,
         `Remove Group ${this.state.ProcessingGroup.GroupName || "-"}[${this.state.ProcessingGroup.GroupId}]`,
         `Are you sure, you want to remove this group?`
       );
@@ -154,6 +161,7 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
             </thead>
             <tbody>
               {this.state.GroupList.map((item, index) => {
+                if (item.GroupId === 0) return;
                 let waitingPopover = (
                   <Popover id={`w${item.GroupId}`} className="popover-l">
                     <Popover.Title as="h3">Waiting for update next properties</Popover.Title>
@@ -194,7 +202,7 @@ export class Groups extends React.Component<GroupsProps, GroupsState> {
                       </Tooltip>
                       <Tooltip title="View/Edit">
                         <span className="icon">
-                          <FiIcons.FiEdit className="margin-h-5" onClick={() => this.edit(item)} />
+                          <FiIcons.FiEdit className="margin-h-5" onClick={() => this.edit(item, false)} />
                         </span>
                       </Tooltip>
                       <Tooltip title="Remove">

@@ -69,6 +69,9 @@
 #define ZW_LR_NODEMASK_OFFSET     ((ZW_LR_MIN_NODE_ID) / 8)
 #define NODEMASK_GET_LR(nodemask) ((nodemask) + ZW_LR_NODEMASK_OFFSET)
 
+// Maximum Z-Wave Endpoint ID
+#define ZWAVE_MAXIMUM_ENDPOINT_ID 127
+
 // Tell if a NodeID is a broadcast NodeID.
 #define IS_BROADCAST_NODE_ID(node_id)   \
   ((node_id == ZWAVE_BROADCAST_NODE_ID) \
@@ -117,6 +120,9 @@ typedef uint32_t zwave_home_id_t;
           ? ((nodemask[(node_id - 1) / 8])           \
              &= (0xFF - (1 << ((node_id - 1) % 8)))) \
           : ((nodemask[(node_id) / 8]) &= (0xFF - (1 << ((node_id) % 8))))))
+
+/// Z-Wave Endpoint ID type
+typedef uint8_t zwave_endpoint_id_t;
 
 /// Node type structure, used in Node Information Frames
 typedef struct {

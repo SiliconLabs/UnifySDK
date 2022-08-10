@@ -15,7 +15,7 @@
 #include "ota_cache.hpp"
 #include "ota.hpp"
 
-// UIC components
+// Unify components
 #include "sl_log.h"
 #include "sys/ctimer.h"
 

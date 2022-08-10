@@ -26,7 +26,6 @@ uic_add_shared_library(
   zwave_tx_scheme_selector
   zwave_s2
   zwave_s0
-  zwave_s0
   zwave_api_transport
   zwave_s2_nonce_management
   s2_controller

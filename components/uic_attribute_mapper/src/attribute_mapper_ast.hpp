@@ -32,6 +32,8 @@
 #include <boost/spirit/home/x3/support/ast/variant.hpp>
 #include <boost/fusion/include/adapt_struct.hpp>
 
+using result_type_t = float;
+
 namespace ast
 {
 namespace x3 = boost::spirit::x3;
@@ -65,6 +67,8 @@ enum operator_ids {
   operator_left_shift,
   operator_right_shift,
   operator_or,
+  operator_modulo,
+  operator_exponent,
 };
 
 /**
@@ -77,7 +81,8 @@ enum operator_ids {
  * about which type the objects actually is.
  */
 using operand = x3::variant<ast::nil,
-                            unsigned int,
+                            uint32_t,
+                            float,
                             x3::forward_ast<attribute>,
                             x3::forward_ast<signed_>,
                             x3::forward_ast<expression>,
@@ -90,10 +95,10 @@ using operand = x3::variant<ast::nil,
  *
  */
 using attribute_path_element = boost::
-  variant<ast::nil, ast::operand, unsigned int, attribute_path_subscript>;
+  variant<ast::nil, ast::operand, uint32_t, attribute_path_subscript>;
 
 /**
- * @brief Uniary sigend operand
+ * @brief Uniary signed operand
  *
  * Examples -1 , +2
  */

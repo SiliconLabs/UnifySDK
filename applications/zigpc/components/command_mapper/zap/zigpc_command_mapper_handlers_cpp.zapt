@@ -25,7 +25,7 @@
 #include <vector>
 #include <unordered_map>
 
-// UIC shared components
+// Unify shared components
 #include <sl_status.h>
 #include <sl_log.h>
 #include <dotdot_mqtt.h>
@@ -117,8 +117,8 @@ void {{component_zigpc_cmdmapper_prefix}}_populate_read_attr_record(
 /**
  * @brief DotDot MQTT handler for {{label}}/WriteAttributes command.
  *
- * @param unid UIC device identifier string
- * @param endpoint UIC device endpoint identifier
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
  * {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_state_t Attribute values
  * {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_updated_state_t Boolean flags of which attributes to write
  */
@@ -179,8 +179,8 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label
 /**
  * @brief DotDot MQTT handler for {{label}}/Commands/ForceReadAttributes.
  *
- * @param unid UIC device identifier string
- * @param endpoint UIC device endpoint identifier
+ * @param unid Unify device identifier string
+ * @param endpoint Unify device endpoint identifier
  * {{component_dotdot_mqtt_prefix}}_{{asSnakeCaseLower parent.label}}_updated_state_t Boolean flags of which attributes to read
  */
 sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label}}_force_read_attributes_handler(
@@ -233,8 +233,8 @@ sl_status_t {{component_zigpc_cmdmapper_prefix}}_{{asSnakeCaseLower parent.label
 /**
  * @brief DotDot MQTT translator handler for {{parent.label}}/{{label}} command.
  *
- * @param unid  UIC device identifier string
- * @param endpoint  UIC device endpoint identifier
+ * @param unid  Unify device identifier string
+ * @param endpoint  Unify device endpoint identifier
  * @param callback_type Callback type
 {{#zcl_command_arguments}}
 {{#if isArray}} * @param {{asSnakeCaseLower label}}_count  Count of {{asUnderlyingType type}} items{{/if}}

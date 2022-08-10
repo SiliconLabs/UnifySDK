@@ -1,1 +1,0 @@
-initSidebarItems({"constant":[["APP_NAME",""],["CONFIG_VERSION",""],["DB_FILE",""]],"fn":[["main",""],["ok_or_exit_with_message",""],["parse_application_arguments",""],["run",""]],"mod":[["cache","Cache is an object that bookkeeps UNID, endpoint_ID and it’s attributes (name and location). The storage is implemented with SQLite DB - so it is persistent."],["mqtt_handler",""]]});

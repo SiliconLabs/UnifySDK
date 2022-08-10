@@ -20,7 +20,7 @@
 #include <set>
 #include <unordered_map>
 
-// UIC shared components
+// Unify shared components
 #include "sl_log.h"
 
 #include "zigpc_gateway_notify.h"

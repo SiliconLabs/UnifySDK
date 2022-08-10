@@ -25,7 +25,7 @@
 #include "zpc_attribute_store_network_helper.h"
 #include "attribute_store_defined_attribute_types.h"
 
-// UIC Includes
+// Unify Includes
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
 #include "sl_log.h"
@@ -68,31 +68,27 @@ attribute_store_node_t zwave_command_class_get_node_id_node(
   return attribute_store_network_helper_get_node_id_node(node_unid);
 }
 
-attribute_store_node_t
-  zwave_command_class_get_endpoint_id_node(zwave_node_id_t node_id,
-                                           zwave_endpoint_id_t endpoint_id)
+zwave_cc_version_t
+  zwave_command_class_get_version_from_node(attribute_store_node_t node,
+                                            zwave_command_class_t command_class)
 {
-  return attribute_store_get_node_child_by_value(
-    attribute_store_get_node_child_by_value(get_zpc_network_node(),
-                                            ATTRIBUTE_NODE_ID,
-                                            REPORTED_ATTRIBUTE,
-                                            (uint8_t *)&node_id,
-                                            sizeof(node_id),
-                                            0),
-    ATTRIBUTE_ENDPOINT_ID,
-    REPORTED_ATTRIBUTE,
-    &endpoint_id,
-    sizeof(endpoint_id),
-    0);
+  attribute_store_node_t endpoint_node
+    = attribute_store_get_first_parent_with_type(node, ATTRIBUTE_ENDPOINT_ID);
+
+  attribute_store_node_t version_node = attribute_store_get_first_child_by_type(
+    endpoint_node,
+    ZWAVE_CC_VERSION_ATTRIBUTE(command_class));
+
+  zwave_cc_version_t version = 0;
+  attribute_store_get_reported(version_node, &version, sizeof(version));
+  return version;
 }
 
 bool has_reports_to_follow(attribute_store_node_t node)
 {
   reports_to_follow_t reports = 0;
   attribute_store_get_reported(
-    attribute_store_get_node_child_by_type(node,
-                                           ATTRIBUTE_REPORTS_TO_FOLLOW,
-                                           0),
+    attribute_store_get_first_child_by_type(node, ATTRIBUTE_REPORTS_TO_FOLLOW),
     &reports,
     sizeof(reports));
 
@@ -103,9 +99,7 @@ reports_to_follow_t get_reports_to_follow(attribute_store_node_t node)
 {
   reports_to_follow_t reports = 0;
   attribute_store_get_reported(
-    attribute_store_get_node_child_by_type(node,
-                                           ATTRIBUTE_REPORTS_TO_FOLLOW,
-                                           0),
+    attribute_store_get_first_child_by_type(node, ATTRIBUTE_REPORTS_TO_FOLLOW),
     &reports,
     sizeof(reports));
 
@@ -115,6 +109,14 @@ reports_to_follow_t get_reports_to_follow(attribute_store_node_t node)
 sl_status_t set_reports_to_follow(attribute_store_node_t node,
                                   reports_to_follow_t reports_to_follow)
 {
+  zwave_node_id_t zwave_node_id = 0;
+  if ((reports_to_follow > 0)
+      && (SL_STATUS_OK
+          == attribute_store_network_helper_get_node_id_from_node(
+            node,
+            &zwave_node_id))) {
+    zwave_tx_set_expected_frames(zwave_node_id, reports_to_follow);
+  }
   return attribute_store_set_child_reported(node,
                                             ATTRIBUTE_REPORTS_TO_FOLLOW,
                                             &reports_to_follow,
@@ -236,9 +238,8 @@ zwave_role_type_t get_zwave_node_role_type(zwave_node_id_t node_id)
     = attribute_store_network_helper_get_endpoint_node(unid, 0);
 
   attribute_store_node_t role_type_node
-    = attribute_store_get_node_child_by_type(endpoint_node,
-                                             ATTRIBUTE_ZWAVE_ROLE_TYPE,
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_node,
+                                              ATTRIBUTE_ZWAVE_ROLE_TYPE);
 
   if (role_type_node != ATTRIBUTE_STORE_INVALID_NODE) {
     attribute_store_get_reported(role_type_node, &role_type, sizeof(role_type));
@@ -274,24 +275,38 @@ int32_t command_class_get_int32_value(uint8_t size,
                                       uint8_t precision,
                                       const uint8_t *value)
 {
-  uint64_t setpoint_value = 0;
-  if (size > sizeof(setpoint_value)) {
-    //Overflow
-    sl_log_error(LOG_TAG,
-                 "Unable convert a value of %i bytes to an integer.",
-                 size);
-    return 0;
+  int64_t extracted_value = 0;
+  extracted_value         = get_signed_value_from_frame_and_size(value, size);
+
+  // We save this value with 3 decimal places in the attribute store.
+  extracted_value = extracted_value * 1000;
+  for (uint8_t i = 0; i < precision; i++) {
+    extracted_value = extracted_value / 10;
+  }
+  return extracted_value;
+}
+
+int32_t get_signed_value_from_frame_and_size(const uint8_t *frame, uint8_t size)
+{
+  int32_t extracted_value = get_unsigned_value_from_frame_and_size(frame, size);
+
+  // Check if that was a negative value
+  if (extracted_value & (1 << (size * 8-1))) {
+    extracted_value |= ~((1 << (size * 8-1)) - 1);
   }
 
+  return extracted_value;
+}
+
+uint32_t get_unsigned_value_from_frame_and_size(const uint8_t *frame,
+                                                uint8_t size)
+{
+  uint32_t extracted_value = 0;
   for (int i = 0; i < size; i++) {
-    setpoint_value = (setpoint_value << 8ULL) | value[i];
+    extracted_value = (extracted_value << 8) | frame[i];
   }
-  // We want this with 3 decimals
-  setpoint_value = setpoint_value * 1000;
-  for (uint8_t i = 0; i < precision; i++) {
-    setpoint_value = setpoint_value / 10;
-  }
-  return setpoint_value;
+
+  return extracted_value;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

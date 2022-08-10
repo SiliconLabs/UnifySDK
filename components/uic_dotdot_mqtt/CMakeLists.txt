@@ -24,25 +24,28 @@ add_library(
   ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_command_helpers.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_send_commands.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_group_commands.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_generated_commands.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_supported_generated_commands.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_helpers.cpp
   src/dotdot_mqtt_internals.cpp
   src/dotdot_bitmap.cpp
   src/json_helpers.cpp)
 
 target_include_directories(
   uic_dotdot_mqtt
-  PRIVATE src ${CMAKE_CURRENT_BINARY_DIR}/src
+  PRIVATE src ${CMAKE_CURRENT_BINARY_DIR}/src ${nlohmann_json_include}
   PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include ${Boost_INCLUDE_DIRS})
-target_link_libraries(uic_dotdot_mqtt uic_definitions uic_dotdot_types uic_mqtt)
+target_link_libraries(uic_dotdot_mqtt uic_definitions uic_dotdot uic_mqtt)
 
-add_mock(uic_dotdot_mqtt_mock
-  ${CMAKE_CURRENT_BINARY_DIR}/include/dotdot_mqtt.h
+add_mock(
+  uic_dotdot_mqtt_mock ${CMAKE_CURRENT_BINARY_DIR}/include/dotdot_mqtt.h
   ${CMAKE_CURRENT_BINARY_DIR}/include/dotdot_mqtt_group_commands.h
   ${CMAKE_CURRENT_BINARY_DIR}/include/dotdot_mqtt_supported_generated_commands.h
+  ${CMAKE_CURRENT_BINARY_DIR}/include/dotdot_mqtt_generated_commands.h
 )
 
 target_interface_libraries(uic_dotdot_mqtt_mock uic_definitions
-                           uic_dotdot_types uic_mqtt)
+                           uic_dotdot uic_mqtt)
 target_include_directories(uic_dotdot_mqtt_mock
                            PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include)
 

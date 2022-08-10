@@ -10,9 +10,15 @@
  * sections of the MSLA applicable to Source Code.
  *
  *****************************************************************************/
-
-#include <stdio.h>
+// Includes from this component
 #include "zwave_tx_state_logging.h"
+
+// Generic includes
+#include <stdio.h>
+
+// Unify Includes
+#include "sl_log.h"
+#define LOG_TAG "zwave_tx_state_logging"
 
 #define STR_CASE(x) \
   case x:           \
@@ -20,20 +26,18 @@
 
 const char *zwave_tx_state_name(zwave_tx_state_t state)
 {
-  static char message[25];
   switch (state) {
     STR_CASE(ZWAVE_TX_STATE_IDLE)
     STR_CASE(ZWAVE_TX_STATE_TRANSMISSION_ONGOING)
     STR_CASE(ZWAVE_TX_STATE_BACKOFF)
     default:
-      snprintf(message, sizeof(message), "%d", state);
-      return message;
+      sl_log_warning(LOG_TAG, "Unknown Tx state : %d", state);
+      return "Unknown";
   }
 }
 
 const char *zwave_tx_event_name(process_event_t event)
 {
-  static char message[25];
   switch (event) {
     STR_CASE(ZWAVE_TX_SEND_NEXT_MESSAGE)
     STR_CASE(ZWAVE_TX_SEND_OPERATION_COMPLETE)
@@ -49,7 +53,18 @@ const char *zwave_tx_event_name(process_event_t event)
     STR_CASE(PROCESS_EVENT_TIMER)
     STR_CASE(PROCESS_EVENT_COM)
     default:
-      snprintf(message, sizeof(message), "%d", event);
-      return message;
+      sl_log_warning(LOG_TAG, "Unknown Tx event : %d", event);
+      return "Unknown";
+  }
+}
+
+const char *zwave_back_off_reason_name(zwave_tx_backoff_reason_t reason)
+{
+  switch (reason) {
+    STR_CASE(BACKOFF_CURRENT_SESSION_ID)
+    STR_CASE(BACKOFF_EXPECTED_ADDITIONAL_FRAMES)
+    default:
+      sl_log_warning(LOG_TAG, "Unknown Tx back-off reason : %d", reason);
+      return "Unknown";
   }
 }

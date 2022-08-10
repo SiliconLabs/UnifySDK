@@ -280,10 +280,10 @@ void zwapi_demo_learn_mode_callback(LEARN_INFO *learn_mode_info)
                 "New operation (inclusion/exclusion/replication) started\n");
   } else if (learn_mode_info->bStatus == LEARN_MODE_DONE) {
     sl_log_info(LOG_TAG, "Learn mode completed successfully. Back to idle.\n");
-    zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DISABLE, NULL);
+    zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
   } else if (learn_mode_info->bStatus == LEARN_MODE_FAILED) {
     sl_log_error(LOG_TAG, "Learn mode failed. Back to idle.\n");
-    zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DISABLE, NULL);
+    zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
   }
 }
 
@@ -300,7 +300,7 @@ void zwapi_demo_zwave_api_started(const uint8_t *buffer, uint8_t buffer_length)
   // ensure that no add/remove/learn mode is active
   zwapi_add_node_to_network(ADD_NODE_STOP, NULL);
   zwapi_remove_node_from_network(REMOVE_NODE_STOP, NULL);
-  zwapi_set_learn_mode(ZW_SET_LEARN_MODE_DISABLE, NULL);
+  zwapi_set_learn_mode(LEARN_MODE_DISABLE, NULL);
 
   char message[MAXIMUM_MESSAGE_SIZE];
   uint8_t index = 0;

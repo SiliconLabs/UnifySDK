@@ -25,18 +25,22 @@ let topics = ["ucl/SmartStart/List",
     "ucl/by-unid/+/State/SupportedCommands",
     "ucl/by-unid/+/ProtocolController/NetworkManagement",
     "ucl/by-unid/+/ProtocolController/RFTelemetry/#",
-    "ucl/by-unid/+/+/Location/Attributes/+/+/Reported",
     "ucl/by-unid/+/+/Groups/#",
     "ucl/by-unid/+/+/OTA/#",
     "ucl/OTA/info/+/+",
     "ucl/by-group/#",
     "ucl/UPTICap/List",
-    "ucl/UPTICap/+/TracePackage"
+    "ucl/UPTICap/+/TracePackage",
+    "ucl/by-machine-id/+/SystemMetrics/SupportedCommands",
+    "ucl/by-machine-id/+/SystemMetrics/Attributes/#",
+    "ucl/by-unid/+/+/Scenes/GeneratedCommands/RecallScene"
+
 ];
 Object.keys(supportedClusters).forEach((i) => {
     topics.push(`ucl/by-unid/+/+/${i}/SupportedCommands`);
     topics.push(`ucl/by-unid/+/+/${i}/Attributes/#`);
-    topics.push(`ucl/by-unid/+/+/${i}/GeneratedCommands/#`);
+    topics.push(`ucl/by-unid/+/+/${i}/GeneratedCommands/IQReport`);
+    topics.push(`ucl/by-unid/+/+/${i}/GeneratedCommands/AngleReport`);
 });
 console.log(`TopicList:${JSON.stringify(topics)}`);
 
@@ -137,6 +141,10 @@ function onRequest(request) {
                     console.log(`Update ${mes.data.ClusterType} Attribute: ucl/by-unid/${mes.data.Unid}/${mes.data.ClusterType}/Commands/WriteAttributes ${JSON.stringify(mes.data.Payload)}`);
                     mqttConnection.publish(`ucl/by-unid/${mes.data.Unid}/${mes.data.ClusterType}/Commands/WriteAttributes`, JSON.stringify(mes.data.Payload));
                     break;
+                case "update-metric-interval":
+                    console.log(`Update System Metric Reporting Interval: ucl/by-machine-id/${mes.data.Mid}/SystemMetrics/Commands/WriteAttributes ${JSON.stringify(mes.data.Payload)}`);
+                    mqttConnection.publish(`ucl/by-machine-id/${mes.data.Mid}/SystemMetrics/Commands/WriteAttributes`, JSON.stringify(mes.data.Payload));
+                    break;
                 case "force-read-cluster-attr":
                     console.log(`Force Read ${mes.data.ClusterType} Attributes: ucl/by-unid/${mes.data.Unid}/${mes.data.ClusterType}/Commands/ForceReadAttributes ${JSON.stringify(mes.data.Payload)}`);
                     mqttConnection.publish(`ucl/by-unid/${mes.data.Unid}/${mes.data.ClusterType}/Commands/ForceReadAttributes`, JSON.stringify(mes.data.Payload));
@@ -178,6 +186,21 @@ function onRequest(request) {
                 case "discovery-upti":
                     console.log(`Discovery UPTI: ucl/UPTICap/Discovery`);
                     mqttConnection.publish(`ucl/UPTICap/Discovery`, '{}');
+                    break;
+                case "save-scene":
+                    console.log(`Save Scene: ${JSON.stringify(mes.data)}`);
+                    if (!mes.data.Payload) {
+                        if (handler.state.Scenes[mes.data.GroupID] && handler.state.Scenes[mes.data.GroupID][mes.data.SceneID])
+                            delete(handler.state.Scenes[mes.data.GroupID][mes.data.SceneID]);
+                    } else {
+                        if (!handler.state.Scenes[mes.data.GroupID])
+                            handler.state.Scenes[mes.data.GroupID] = {};
+                        handler.state.Scenes[mes.data.GroupID][mes.data.SceneID] = mes.data.Payload;
+                    }
+                    handler.sendToAll({
+                        type: "scenes-list",
+                        data: handler.state.Scenes
+                    });
                     break;
             }
         } catch {
@@ -244,46 +267,89 @@ function disconnect() {
 function onMqttMessage(topic, message) {
     //Depending on the topic will determine the way to save the inputs on messages
     let response = {};
-    let updateNodeList = true;
     if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/OTA\/(.*)/)) {
         response = handler.processOTAByUnid(topic, message);
+        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/(.*)\/Groups/)) {
         response = handler.processClusterGroup(topic, message);
+        handler.setUpdateNodeList(true);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/Location\/Attributes\/(.*)\/(.*)\/Reported/)) {
         response = processLocator(topic, message);
+        handler.setUpdateNodeList(true);
+    } else if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/Scenes\/GeneratedCommands\/RecallScene/)) {
+        recallScene(topic, message);
+        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/(ep\d+)\/(.*)/)) {
+        handler.setUpdateNodeList(true);
         response = handler.processCluster(topic, message);
     } else if (topic.match(/ucl\/by-unid\/.*\/ProtocolController\/NetworkManagement/)) {
         response = handler.processProtocolController(topic, message);
+        handler.setUpdateNodeList(true);
     } else if (topic.match(/ucl\/by-unid\/(.*)\/ProtocolController\/RFTelemetry\/(.*)/)) {
         response = handler.processRFTelemetry(topic, message);
+        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/by-unid\/.*\/State/)) {
         response = handler.processNodeState(topic, message);
+        handler.setUpdateNodeList(true);
+    } else if (topic.match(/ucl\/by-machine-id\/(.*)\/SystemMetrics\/(.*)/)) {
+        response = handler.processSystemMetrics(topic, message);
+        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/UPTICap\/.*\/TracePackage/)) {
         response = handler.processUPTITrace(topic, message);
-        updateNodeList = false;
+        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/by-group\/.*/)) {
         response = handler.processGroup(topic, message);
-        updateNodeList = false;
+        handler.setUpdateNodeList(false);
     } else if (topic.match(/ucl\/OTA\/info\/(.*)\/(.*)/)) {
         response = handler.processOTAInfo(topic, message);
-        updateNodeList = false;
+        handler.setUpdateNodeList(false);
     } else if (topic === "ucl/SmartStart/List") {
         response = handler.processSmartStart(topic, message);
-        updateNodeList = false;
+        handler.setUpdateNodeList(false);
     } else if (topic === "ucl/UPTICap/List") {
         response = handler.processUPTIList(topic, message);
-        updateNodeList = false;
+        handler.setUpdateNodeList(false);
     }
 
     handler.sendToAll(response);
-    if (updateNodeList) {
+
+    if (handler.state.updateNodeList === true) {
         response = {
             type: "nodes-list",
             data: handler.state.Nodes
         };
         handler.sendToAll(response);
     }
+}
+
+function recallScene(topic, message) {
+    try {
+        console.log(`Received Scenes: topic='${topic}', mes='${message}'`);
+        if (message.toString() === "") return;
+        let payload = JSON.parse(message);
+        if (payload.GroupID !== 0) {
+            if (handler.state.Scenes[payload.GroupID] && handler.state.Scenes[payload.GroupID][payload.SceneID])
+                runSceneByGroup(payload.GroupID, handler.state.Scenes[payload.GroupID][payload.SceneID]);
+        } else if (payload.GroupID === 0) {
+            handler.state.Groups.forEach(group => {
+                if (handler.state.Scenes[group.GroupId] && handler.state.Scenes[group.GroupId][payload.SceneID])
+                    runSceneByGroup(group.GroupId, handler.state.Scenes[group.GroupId][payload.SceneID]);
+            });
+        }
+    } catch (err) {
+        return handler.sendToAll(handler.getErrorResponse(`Failed Parsing Recall Scene: ${err}`));
+    }
+}
+
+function runSceneByGroup(groupId, scene) {
+    if (!scene.SceneTableExtensions)
+        return;
+    Object.keys(scene.SceneTableExtensions).forEach(cluster => {
+        scene.SceneTableExtensions[cluster] && Object.keys(scene.SceneTableExtensions[cluster]).forEach(cmd => {
+            console.log(`Run Group Command: ucl/by-group/${groupId}/${cluster}/Commands/${cmd} ${JSON.stringify(scene.SceneTableExtensions[cluster][cmd])}`);
+            mqttConnection.publish(`ucl/by-group/${groupId}/${cluster}/Commands/${cmd}`, JSON.stringify(scene.SceneTableExtensions[cluster][cmd]));
+        });
+    });
 }
 
 function saveFile(file) {

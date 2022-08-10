@@ -41,16 +41,10 @@
 #include "zwave_command_handler_mock.h"
 #include "zwave_tx_mock.h"
 #include "zwave_tx_scheme_selector_mock.h"
-#include "dotdot_mqtt_mock.h"
-#include "dotdot_mqtt_supported_generated_commands_mock.h"
+#include "dotdot_mqtt_generated_commands_mock.h"
 
 // Attribute macro, shortening those long defines for attribute types:
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_CENTRAL_SCENE_##type
-
-// Constants
-static const uic_mqtt_dotdot_scenes_supported_commands_t
-  expected_supported_generated_commands
-  = {.recall_scene = true};
 
 // Static variables
 static attribute_resolver_function_t central_scene_configuration_set = NULL;
@@ -241,12 +235,6 @@ void test_zwave_command_class_central_scene_configuration_get_happy_case()
   attribute_store_node_t version_node
     = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
 
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_ExpectWithArray(
-    NULL,
-    endpoint_id,
-    &expected_supported_generated_commands,
-    sizeof(expected_supported_generated_commands));
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_IgnoreArg_unid();
   zwave_cc_version_t version = 3;
   attribute_store_set_reported(version_node, &version, sizeof(version));
 
@@ -271,13 +259,6 @@ void test_zwave_command_class_central_scene_configuration_get_not_supported()
   // Create a version node under the endpoint
   attribute_store_node_t version_node
     = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
-
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_ExpectWithArray(
-    NULL,
-    endpoint_id,
-    &expected_supported_generated_commands,
-    sizeof(expected_supported_generated_commands));
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_IgnoreArg_unid();
 
   zwave_cc_version_t version = 2;
   attribute_store_set_reported(version_node, &version, sizeof(version));
@@ -306,12 +287,6 @@ void test_zwave_command_class_central_scene_configuration_set_slow_refresh()
   attribute_store_node_t version_node
     = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
 
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_ExpectWithArray(
-    NULL,
-    endpoint_id,
-    &expected_supported_generated_commands,
-    sizeof(expected_supported_generated_commands));
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_IgnoreArg_unid();
   zwave_cc_version_t version = 3;
   attribute_store_set_reported(version_node, &version, sizeof(version));
 
@@ -342,12 +317,6 @@ void test_zwave_command_class_central_scene_configuration_set_no_slow_refresh()
   attribute_store_node_t version_node
     = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
 
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_ExpectWithArray(
-    NULL,
-    endpoint_id,
-    &expected_supported_generated_commands,
-    sizeof(expected_supported_generated_commands));
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_IgnoreArg_unid();
   zwave_cc_version_t version = 3;
   attribute_store_set_reported(version_node, &version, sizeof(version));
 
@@ -541,13 +510,6 @@ void test_zwave_command_class_central_scene_supported_report_happy_bitmask_too_s
   attribute_store_node_t version_node
     = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
 
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_ExpectWithArray(
-    NULL,
-    endpoint_id,
-    &expected_supported_generated_commands,
-    sizeof(expected_supported_generated_commands));
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_IgnoreArg_unid();
-
   zwave_cc_version_t version = 1;
   attribute_store_set_reported(version_node, &version, sizeof(version));
 
@@ -588,13 +550,6 @@ void test_zwave_command_class_central_scene_supported_report_happy_bitmask_too_s
 {
   attribute_store_node_t version_node
     = attribute_store_add_node(ATTRIBUTE(VERSION), endpoint_id_node);
-
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_ExpectWithArray(
-    NULL,
-    endpoint_id,
-    &expected_supported_generated_commands,
-    sizeof(expected_supported_generated_commands));
-  uic_mqtt_dotdot_scenes_publish_supported_generated_commands_IgnoreArg_unid();
 
   zwave_cc_version_t version = 3;
   attribute_store_set_reported(version_node, &version, sizeof(version));

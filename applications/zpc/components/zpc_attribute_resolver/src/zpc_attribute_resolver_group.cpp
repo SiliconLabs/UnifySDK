@@ -14,7 +14,7 @@
 #include "zpc_attribute_resolver_group.h"
 #include "zpc_attribute_resolver_callbacks.h"
 
-// UIC Includes
+// Unify Includes
 #include "attribute_resolver_rule.h"
 #include "attribute_store.h"
 #include "attribute_store_helper.h"
@@ -339,9 +339,9 @@ static void zpc_attribute_resolver_send_singlecast_follow_ups(
       info.remote.endpoint_id = it->endpoint_id;
       info.encapsulation      = it->encapsulation;
 
-      options.qos_priority       = DEFAULT_QOS;
-      options.is_first_follow_up = is_first_follow_up;
-      options.group_id           = it->group_id;
+      options.qos_priority                 = DEFAULT_QOS;
+      options.transport.is_first_follow_up = is_first_follow_up;
+      options.transport.group_id           = it->group_id;
 
       if (zwave_get_operating_mode(node_id) == OPERATING_MODE_FL) {
         options.fasttrack = true;
@@ -401,7 +401,7 @@ static void zpc_attribute_resolver_send_singlecast_follow_ups(
 /**
  * @brief Triggers the transmissions of all unsent multicast pools.
  *
- * @param initiating_node  The node that the UIC Attribute resolver is trying
+ * @param initiating_node  The node that the Unify Attribute resolver is trying
  *                         to resolve, which has triggered this whole
  *                         group transmission frenzy.
  *

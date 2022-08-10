@@ -20,6 +20,7 @@
 
 #ifndef NETWORK_MONITOR_FIXT_H
 #define NETWORK_MONITOR_FIXT_H
+
 #include <stdbool.h>
 #include "sl_status.h"
 

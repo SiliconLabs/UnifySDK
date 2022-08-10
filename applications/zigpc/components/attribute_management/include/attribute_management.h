@@ -23,7 +23,7 @@
 #ifndef ATTRIBUTE_MANAGEMENT_H
 #define ATTRIBUTE_MANAGEMENT_H
 
-// Shared UIC includes
+// Shared Unify includes
 #include <sl_status.h>
 
 // ZigPC includes

@@ -1,8 +1,8 @@
-import { MenuItem, TextField, Tooltip, InputAdornment } from '@material-ui/core';
 import * as React from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { CommandAttrsState } from './command-attrs-types';
 import * as FiIcons from 'react-icons/fi';
+import { InputAdornment, MenuItem, TextField, Tooltip } from '@mui/material';
 
 class CommandAttrs extends React.Component<{}, CommandAttrsState> {
     constructor(props: {}) {
@@ -49,7 +49,7 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
     handleChange(prefixNames: string[], isCheckBox: boolean, isNumber: boolean, event: any) {
         let tempData = this.state.Payload;
         prefixNames.forEach((i: any) => tempData = tempData[i]);
-        tempData[event.target.name] = isCheckBox ? event.target.checked : (isNumber ? event.target.valueAsNumber : event.target.value);
+        tempData[event.target.name] = isCheckBox ? event.target.checked : (isNumber ? (isNaN(event.target.valueAsNumber) ? null : event.target.valueAsNumber) : event.target.value);
         this.setState({ Payload: this.state.Payload });
     }
 
@@ -68,6 +68,12 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
     removeArrayItem(attr: any[], arrayIndex: number) {
         attr.splice(arrayIndex, 1);
         this.setState({ Payload: this.state.Payload });
+    }
+
+    getValue = (type: string, value: any) => {
+        if (type === "number" && value !== undefined && value !== null)
+            return Number(Math.round((value + "e+" + 3) as unknown as number) + "e-" + 3)
+        else return value || "";
     }
 
     renderField = (item: any, payload: any, prefixNames: any[], index: any) => {
@@ -126,7 +132,7 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
                                     default:
                                         return <div key={`${index}:${bIndex}`} className="col-sm-6 inline margin-v-10">
                                             <TextField size="small" className="flex-input" fullWidth={true} label={b.name} name={b.name} variant="outlined" type={b.type}
-                                                defaultValue={payload[b.name]} onChange={this.handleChange.bind(this, prefixNames.concat(item.name), false, b.type === "number")} onFocus={(event) => event.target.select()}
+                                                defaultValue={this.getValue(b.type, payload[b.name])} onChange={this.handleChange.bind(this, prefixNames.concat(item.name), false, b.type === "number")} onFocus={(event: any) => event.target.select()}
                                                 inputProps={
                                                     { readOnly: this.state.ReadOnly }
                                                 } />
@@ -205,8 +211,8 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
                             {payload.map((arrayItem: any, arrayIndex: number) => {
                                 return <Card.Body key={`${index}-${arrayIndex}`} className="col-sm-6 inline no-padding-v margin-v-10">
                                     <TextField size="small" className="flex-input" label={`[${arrayIndex}]`} name={arrayIndex.toString()} variant="outlined" type={item.type}
-                                        value={arrayItem} onChange={this.handleChange.bind(this, prefixNames.concat(item.name), false, item.type === "number")}
-                                        onFocus={(event) => event.target.select()} InputProps={{
+                                        value={this.getValue(item.type, arrayItem)} onChange={this.handleChange.bind(this, prefixNames.concat(item.name), false, item.type === "number")}
+                                        onFocus={(event: any) => event.target.select()} InputProps={{
                                             endAdornment: <InputAdornment position="end">
                                                 <Tooltip title={`Remove Item`}>
                                                     <span className="pointer icon">
@@ -221,7 +227,7 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
                     </Card>
                     : <div key={index} className={`col-sm-6 inline margin-v-10`}>
                         <TextField size="small" className="flex-input" fullWidth={true} label={item.name} name={item.name} variant="outlined" type={item.type}
-                            value={payload} onChange={this.handleChange.bind(this, prefixNames, false, item.type === "number")} onFocus={(event) => event.target.select()} inputProps={
+                            value={this.getValue(item.type, payload)} onChange={this.handleChange.bind(this, prefixNames, false, item.type === "number")} onFocus={(event: any) => event.target.select()} inputProps={
                                 { readOnly: this.state.ReadOnly }
                             } />
                     </div>

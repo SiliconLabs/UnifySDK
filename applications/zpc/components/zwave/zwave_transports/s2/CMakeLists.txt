@@ -10,7 +10,7 @@ target_include_directories(
 
 target_link_libraries(zwave_s2_nonce_management
                       PUBLIC s2_controller
-                      PRIVATE zwave_definitions zwave_network_management)
+                      PRIVATE zwave_controller)
 target_compile_definitions(zwave_s2_nonce_management PRIVATE ZW_CONTROLLER)
 
 
@@ -26,10 +26,18 @@ add_library(
   src/zwave_s2_fixt.c ${KEYSTORE_SOURCES} src/zwave_s2_network.c
   src/zwave_s2_printf.c src/zwave_s2_process.c src/zwave_s2_transport.c)
 
+IF(ZWAVE_BUILD_SYSTEM EQUAL 1)
+target_include_directories(
+  zwave_s2
+  PUBLIC include
+  ${SUBTREE_UIC}/applications/zpc/components/zpc_utils/include/
+  PRIVATE libs/zw-libs2/include src)
+ELSE()
 target_include_directories(
   zwave_s2
   PUBLIC include
   PRIVATE libs/zw-libs2/include src)
+ENDIF()
 
 install(TARGETS zwave_s2 LIBRARY DESTINATION lib)
 
@@ -40,8 +48,7 @@ ENDIF()
 target_link_libraries(
   zwave_s2
   PUBLIC zwave_s2_nonce_management
-  PRIVATE s2_controller uic_contiki zwave_definitions zwave_network_management
-          zwave_rx zwave_controller)
+  PRIVATE s2_controller uic_contiki zwave_controller zwave_s0)
 
 target_compile_definitions(zwave_s2 PRIVATE ZIPGW ZW_CONTROLLER)
 

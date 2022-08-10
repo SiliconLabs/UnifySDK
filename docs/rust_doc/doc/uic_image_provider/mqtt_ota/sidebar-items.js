@@ -1,1 +1,0 @@
-initSidebarItems({"constant":[["APP_NAME",""]],"struct":[["MqttOtaHandler","hanldes subscription message related to OTA"]]});

@@ -1,9 +1,13 @@
 # Library
 add_library(
   uic_attribute_store SHARED
-  src/attribute_store.cpp src/attribute_store_callbacks.cpp
-  src/attribute_store_debug.cpp src/attribute_store_helper.c
-  src/attribute_store_node.cpp)
+  src/attribute_store.cpp
+  src/attribute_store_callbacks.cpp
+  src/attribute_store_helper.c
+  src/attribute_store_node.cpp
+  src/attribute_store_type_registration.cpp
+  src/attribute_store_configuration.cpp
+  src/attribute_store_validation.cpp)
 
 target_include_directories(
   uic_attribute_store

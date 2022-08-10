@@ -13,7 +13,7 @@
 
 // Includes from this component
 #include "zwave_tx.h"
-#include "zwave_tx_queue.h"
+#include "zwave_tx_queue.hpp"
 #include "zwave_tx_callbacks.h"
 #include "zwave_tx_process.h"
 
@@ -62,8 +62,10 @@ sl_status_t
                  data_length);
     return SL_STATUS_FAIL;
   }
-  // The length has to be >0 for regular frames (test frames do not need a payload)
-  if (data_length == 0 && tx_options->is_test_frame == false) {
+
+  // The length has to be >0 for regular frames
+  // (test frames do not need a payload)
+  if ((data_length == 0) && (tx_options->transport.is_test_frame == false)) {
     sl_log_error(LOG_TAG,
                  "Empty frame sent to the Tx Queue. (size=%d). Ignoring.",
                  data_length);
@@ -75,36 +77,30 @@ sl_status_t
   if (new_element.data_length > 0) {
     memcpy(&new_element.data, data, data_length);
   }
-  new_element.zwave_tx_options  = *tx_options;
+  new_element.options           = *tx_options;
   new_element.data_length       = data_length;
   new_element.callback_function = on_send_complete;
   new_element.user              = user;
 
   // Is there a parent element?
-  if (new_element.zwave_tx_options.valid_parent_session_id == true) {
+  if (new_element.options.transport.valid_parent_session_id == true) {
     // Fetch the parent data
-    zwave_tx_queue_element_t parent_element = {0};
+    zwave_tx_queue_element_t parent_element = {};
     sl_status_t fetch_parent_status;
     fetch_parent_status
       = tx_queue.get_by_id(&parent_element,
-                           new_element.zwave_tx_options.parent_session_id);
+                           new_element.options.transport.parent_session_id);
     if (fetch_parent_status != SL_STATUS_OK) {
       sl_log_warning(LOG_TAG,
                      "Non-existing parent session ID (id=%p) for incoming TX "
-                     "Queue frame. Discarding incoming frame.\n",
-                     new_element.zwave_tx_options.parent_session_id);
-      return SL_STATUS_FAIL;
-    }
-
-    // Child must be sent before the parent.
-    if ((new_element.zwave_tx_options.qos_priority
-         & (ZWAVE_TX_QOS_MAX_PRIORITY))
-        == ZWAVE_TX_QOS_MAX_PRIORITY) {
-      parent_element.zwave_tx_options.qos_priority
-        = new_element.zwave_tx_options.qos_priority;
-    } else {
-      new_element.zwave_tx_options.qos_priority
-        = parent_element.zwave_tx_options.qos_priority + 1;
+                     "Queue frame. Queueing it as a standalone frame.\n",
+                     new_element.options.transport.parent_session_id);
+      new_element.options.transport.valid_parent_session_id = false;
+    } else if (parent_element.options.qos_priority
+               >= new_element.options.qos_priority) {
+      // Increment the QoS so we find the child faster when iterating through the queue.
+      new_element.options.qos_priority
+        = parent_element.options.qos_priority + 1;
     }
   }
 
@@ -157,14 +153,14 @@ sl_status_t zwave_tx_send_test_frame(
   // Prepare the tx_options / connection_info automatically
   zwave_tx_options_t tx_options = {.number_of_responses = 0,
                                    .discard_timeout_ms  = 0,
-                                   .qos_priority = ZWAVE_TX_QOS_MIN_PRIORITY,
-                                   .parent_session_id       = 0,
-                                   .valid_parent_session_id = 0,
-                                   .is_test_frame           = true,
-                                   .rf_power                = power_level,
-                                   .group_id           = ZWAVE_TX_INVALID_GROUP,
-                                   .is_first_follow_up = false,
-                                   .send_follow_ups    = false};
+                                   .qos_priority    = ZWAVE_TX_QOS_MIN_PRIORITY,
+                                   .send_follow_ups = false,
+                                   .transport = {.parent_session_id = nullptr,
+                                                 .valid_parent_session_id = 0,
+                                                 .group_id                = 0,
+                                                 .is_first_follow_up = false,
+                                                 .is_test_frame      = true,
+                                                 .rf_power = power_level}};
 
   zwave_controller_connection_info_t connection = {};
   connection.remote.node_id                     = destination_node_id;
@@ -190,9 +186,26 @@ sl_status_t zwave_tx_abort_transmission(zwave_tx_session_id_t session_id)
   return zwave_tx_process_abort_transmission(session_id);
 }
 
-uint8_t zwave_tx_get_number_of_responses(zwave_tx_session_id_t session)
+uint8_t zwave_tx_get_number_of_responses(zwave_tx_session_id_t session_id)
 {
-  return tx_queue.get_number_of_responses(session);
+  return tx_queue.get_number_of_responses(session_id);
+}
+
+void zwave_tx_set_expected_frames(zwave_node_id_t remote_node_id,
+                                  uint8_t number_of_incoming_frames)
+{
+  zwave_tx_process_set_expected_frames(remote_node_id,
+                                       number_of_incoming_frames);
+}
+
+const uint8_t *zwave_tx_get_frame(zwave_tx_session_id_t session_id)
+{
+  return tx_queue.get_frame(session_id);
+}
+
+uint16_t zwave_tx_get_frame_length(zwave_tx_session_id_t session_id)
+{
+  return tx_queue.get_frame_length(session_id);
 }
 
 sl_status_t zwave_tx_init()
@@ -211,4 +224,10 @@ void zwave_tx_log_queue(bool with_contents)
 {
   zwave_tx_process_log_state();
   tx_queue.log(with_contents);
+}
+
+void zwave_tx_log_element(zwave_tx_session_id_t session_id,
+                          bool log_frame_payload)
+{
+  tx_queue.log_element(session_id, log_frame_payload);
 }

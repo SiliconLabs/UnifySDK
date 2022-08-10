@@ -18,7 +18,7 @@
 #include <process.h>
 #include <sys/etimer.h>
 
-// Shared UIC includes
+// Shared Unify includes
 #include "sl_log.h"
 
 // Component includes
@@ -46,9 +46,13 @@ sl_status_t zigpc_gateway_process_setup(void)
   if (result == SL_STATUS_OK) {
     zigpc_config = zigpc_get_config();
 
-    z3gw_opts.serialPort = (char *)zigpc_config->serial_port;
+    std::string serial_port(zigpc_config->serial_port);
+    z3gw_opts.serialPort = serial_port.data();
 
     z3gw_opts.callbacks = &zigpc_gateway_zigbee_host_callbacks;
+
+    std::string ota_path(zigpc_config->ota_path);
+    z3gw_opts.otaPath = ota_path.data();
 
     result = (zigbeeHostInit(&z3gw_opts) == EMBER_SUCCESS) ? SL_STATUS_OK
                                                            : SL_STATUS_FAIL;

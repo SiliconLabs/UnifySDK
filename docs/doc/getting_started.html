@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started with the Unify Host SDK &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/getting_started.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Portable runtime environment" href="../portable_runtime/readme_user.html" />
+    <link rel="prev" title="cpc-hci-bridge User Guide" href="../applications/cpc-hci-bridge/readme_user.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started with the Unify Host SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../portable_runtime/readme_user.html">Portable runtime environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="unify_readme_user.html">Unify Host SDK User guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-install-packages">How to install packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#verify-the-configuration">Verify the configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-if-an-application-is-running">Verifying if an application is running</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#unify-framework">Unify Framework</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_unify_sdk.html">Getting Started with the Unify Framework</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multiprotocol-setup">Multiprotocol Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started_multiprotocol_cpc.html">Getting Started with the Multiprotocol Setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started-with-the-unify-host-sdk">
+<h1>Getting Started with the Unify Host SDK<a class="headerlink" href="#getting-started-with-the-unify-host-sdk" title="Permalink to this heading"></a></h1>
+<p>Before installing the Unify Host SDK components on our reference platform, a
+Raspberry Pi 4 (RPi4), the following prerequisites must be fulfilled:</p>
+<p>The Unify Host SDK targets our reference platform, a Raspberry Pi 4 (RPi4).
+It is therefore recommended to set up a RPi4 for evaluating the full set of functionalities.
+If you instead want a quick demo of a Z-Wave only Unify IoT gateway running on
+your Windows, MacOS or Linux desktop, please try our
+<a class="reference internal" href="../portable_runtime/readme_user.html"><span class="doc std std-doc">Portable Runtime environment User guide</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+<p>The rest of this guide focuses on how to set up all of the applications and
+services on a RPi4.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>An RPi4 preinstalled with <a class="reference external" href="https://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-14">Raspberry Pi OS Linux Version 10, Buster</a></p></li>
+<li><p>At least one of the following, supported wireless radios is connected to the RPi4 via USB:</p>
+<ul>
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/z-wave">Z-Wave module</a> flashed with Z-Wave - NCP Serial API Controller.</p></li>
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/zigbee">Zigbee module</a> EFR32MG12/EFR32xG22 running NCP for Zigbee or RCP for Multiprotocol</p></li>
+<li><p><a class="reference external" href="https://www.silabs.com/wireless/bluetooth">Bluetooth module</a> EFR32xG22 running NCP Firmware for AoXPC</p></li>
+</ul>
+</li>
+</ul>
+<p>For details on setting up a bare RPi4, follow the setup instructions in the
+<a class="reference external" href="https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up">Official Raspberry Pi User Guide</a>,
+and ensure a supported radio module is attached to your RPi4.</p>
+<p>For running Unify Framework it is required to have a running MQTT broker to which the Unify Framework can connect.
+To get an MQTT broker installed on the RPi4:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo apt update
+pi@raspberrypi:~ $ sudo apt install mosquitto
+</pre></div>
+</div>
+<p>For more information regarding logging and configuration of eg. the Mosquitto broker, see the <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify Framework User Guide</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="how-to-install-packages">
+<span id="how-to-install"></span><h2>How to install packages<a class="headerlink" href="#how-to-install-packages" title="Permalink to this heading"></a></h2>
+<p>The Unify Host SDK distribution targets the reference platform Debian Buster
+platform. Binary Debian packages are provided with the SDK and they are
+available in a Zip file eg. unify_x.y.z_armhf.zip on
+<a class="reference external" href="https://github.com/SiliconLabs/UnifySDK/releases">Unify’s GitHub release page</a>.</p>
+<p>The simplest way to install the Unify components is to use the <code class="docutils literal notranslate"><span class="pre">apt</span></code> tool.
+Transfer the <code class="docutils literal notranslate"><span class="pre">.deb</span></code> packages to the target via eg. SCP. Make sure to use either
+a local relative path with <code class="docutils literal notranslate"><span class="pre">./</span></code> or absolute paths. Otherwise apt will look
+for the package in the wrong place and fail.</p>
+<p>Install a specific Unify package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo apt install uic-sdk-dir/uic-&lt;component&gt;_&lt;version&gt;_armhf.deb
+</pre></div>
+</div>
+<p>Install all packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo apt install uic-sdk-dir/*.deb
+</pre></div>
+</div>
+<p>Update installed packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo apt reinstall uic-sdk-dir/*.deb
+</pre></div>
+</div>
+<section id="verify-the-configuration">
+<h3>Verify the configuration<a class="headerlink" href="#verify-the-configuration" title="Permalink to this heading"></a></h3>
+<p>After installing the desired Unify Host SDK packages, make sure the configuration is set correctly.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ cat /etc/uic/uic.cfg
+zpc:
+  serial: /dev/ttyUSB0
+  rf_region: EU
+  datastore_file: /var/lib/uic/zpc.db
+zigpc:
+  serial: /dev/ttyACM0
+  datastore_file: /var/lib/uic/zigpc.db
+cpcd:
+  serial: /dev/ttyACM0
+</pre></div>
+</div>
+<p>If your configuration is wrong, you can either edit the file directly or reconfigure a specific package.
+After making changes to the configuration make sure to either reboot or restart the service.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo dpkg-reconfigure uic-zpc
+</pre></div>
+</div>
+</section>
+<section id="verifying-if-an-application-is-running">
+<h3>Verifying if an application is running<a class="headerlink" href="#verifying-if-an-application-is-running" title="Permalink to this heading"></a></h3>
+<p>The Unify applications all install SystemD service files for handling the starting and stopping of the applications on a RPi4.
+You can check if a Unify Host SDK application is running by using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>.
+For information on how to handle SystemD services using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>, see <a class="reference external" href="https://man7.org/linux/man-pages/man1/systemctl.1.html">the systemctl man pages</a>.</p>
+<p>Here we can see that the <code class="docutils literal notranslate"><span class="pre">uic-zpc</span></code> service is loaded and active:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ systemctl status uic-zpc.service
+* uic-zpc.service - Unify Z-Wave protocol controller
+   Loaded: loaded <span class="o">(</span>/lib/systemd/system/uic-zpc.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2022</span>-08-02 <span class="m">14</span>:14:58 CEST<span class="p">;</span> 8s ago
+ Main PID: <span class="m">9471</span> <span class="o">(</span>zpc<span class="o">)</span>
+    Tasks: <span class="m">1</span> <span class="o">(</span>limit: <span class="m">4915</span><span class="o">)</span>
+   CGroup: /system.slice/uic-zpc.service
+           -9471 /usr/bin/zpc
+
+aug <span class="m">02</span> <span class="m">14</span>:15:02 raspberrypi zpc<span class="o">[</span><span class="m">9471</span><span class="o">]</span>: <span class="m">2022</span>-Aug-02 <span class="m">14</span>:15:02.158423 &lt;W&gt; <span class="o">[</span>uic_stdin_process<span class="o">]</span> stdin is not a tty, input will not be handled.
+aug <span class="m">02</span> <span class="m">14</span>:15:02 raspberrypi zpc<span class="o">[</span><span class="m">9471</span><span class="o">]</span>: <span class="m">2022</span>-Aug-02 <span class="m">14</span>:15:02.166045 &lt;i&gt; <span class="o">[</span>mqtt_client<span class="o">]</span> Connection to MQTT broker localhost:1883 established.
+aug <span class="m">02</span> <span class="m">14</span>:15:02 raspberrypi zpc<span class="o">[</span><span class="m">9471</span><span class="o">]</span>: <span class="m">2022</span>-Aug-02 <span class="m">14</span>:15:02.168337 &lt;i&gt; <span class="o">[</span>mqtt_client_fsm_connecting<span class="o">]</span> We are connected to the MQTT broker.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="unify-framework">
+<h2>Unify Framework<a class="headerlink" href="#unify-framework" title="Permalink to this heading"></a></h2>
+<p>If you are interested in building an IoT Gateway based on the Unify Framework refer to
+the <a class="reference internal" href="getting_started_unify_sdk.html"><span class="doc std std-doc">Unify Framework Getting Started</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="multiprotocol-setup">
+<h2>Multiprotocol Setup<a class="headerlink" href="#multiprotocol-setup" title="Permalink to this heading"></a></h2>
+<p>If you are interested in setting up multiprotocol CPC-based applications
+see the <a class="reference internal" href="getting_started_multiprotocol_cpc.html"><span class="doc std std-doc">Multiprotocol Setup page</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

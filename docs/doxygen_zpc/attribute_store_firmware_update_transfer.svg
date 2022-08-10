@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="952px" preserveAspectRatio="none" style="width:1131px;height:952px;background:#FFFFFF;" version="1.1" viewBox="0 0 1131 952" width="1131px" zoomAndPan="magnify"><defs><filter height="300%" id="fmy28gs5rav9g" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="335" x="391.6661" y="16.708">Firmware Update transfer data model</text><rect fill="#DDDDDD" height="26.2969" rx="5" ry="5" style="stroke:#000000;stroke-width:1.0;" width="459" x="329.1661" y="28.9531"/><text fill="#FEFEFE" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="335.1661" y="46.9482">ATTRIBUTE(type)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="325" x="457.1661" y="46.9482">: ATTRIBUTE_COMMAND_CLASS_FWU_MD_type</text><!--MD5=[ea3d5de2a0d35296bc751d5a1b771698]
+cluster Attribute Store--><path d="M13.3321,80.25 C13.3321,70.25 568.8321,70.25 568.8321,70.25 C568.8321,70.25 1124.3321,70.25 1124.3321,80.25 L1124.3321,935.25 C1124.3321,945.25 568.8321,945.25 568.8321,945.25 C568.8321,945.25 13.3321,945.25 13.3321,935.25 L13.3321,80.25 " fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" style="stroke:#000000;stroke-width:1.5;"/><path d="M13.3321,80.25 C13.3321,90.25 568.8321,90.25 568.8321,90.25 C568.8321,90.25 1124.3321,90.25 1124.3321,80.25 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="118" x="509.8321" y="105.2451">Attribute Store</text><rect fill="#F2FFE6" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="201" x="505.8321" y="112.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="583.8321" y="125.3887">NodeID</text><line style="stroke:#000000;stroke-width:1.5;" x1="506.8321" x2="705.8321" y1="130.2188" y2="130.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="189" x="511.8321" y="143.501">Attribute Type = ATTRIBUTE_NODE_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="511.8321" y="155.1416">value = Desired: [], Reported: [03]</text><rect fill="#E6FFF7" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="224" x="494.3321" y="221.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="548.8321" y="234.3887">Endpoint Attribute</text><line style="stroke:#000000;stroke-width:1.5;" x1="495.3321" x2="717.3321" y1="239.2188" y2="239.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="212" x="500.3321" y="252.501">Attribute Type = ATTRIBUTE_ENDPOINT_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="500.3321" y="264.1416">value = Desired: [] - Reported: [04]</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="180" x="516.3321" y="330.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="106" x="553.3321" y="343.3887">Firmware Update</text><line style="stroke:#000000;stroke-width:1.5;" x1="517.3321" x2="695.3321" y1="348.2188" y2="348.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="522.3321" y="361.501">Attribute Type = ATTRIBUTE(FWU)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="522.3321" y="373.1416">value = Desired: [], Reported: [1]</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="231" x="490.8321" y="439.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="90" x="561.3321" y="452.3887">Transfer State</text><line style="stroke:#000000;stroke-width:1.5;" x1="491.8321" x2="720.8321" y1="457.2188" y2="457.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="219" x="496.8321" y="470.501">Attribute Type = ATTRIBUTE(FW_TRANSFER)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="496.8321" y="482.1416">value = Desired: [1] - Reported: []</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="255" x="58.8321" y="548.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="41" x="165.8321" y="561.3887">Target</text><line style="stroke:#000000;stroke-width:1.5;" x1="59.8321" x2="312.8321" y1="566.2188" y2="566.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="243" x="64.8321" y="579.501">Attribute Type = ATTRIBUTE(TRANSFER_TARGET)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="64.8321" y="591.1416">value = Desired: [], Reported: [0]</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="314" x="728.3321" y="548.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="105" x="832.8321" y="561.3887">Apply Timestamp</text><line style="stroke:#000000;stroke-width:1.5;" x1="729.3321" x2="1041.3321" y1="566.2188" y2="566.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="302" x="734.3321" y="579.501">Attribute Type = ATTRIBUTE(TRANSFER_APPLY_TIMESTAMP)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="246" x="734.3321" y="591.1416">value = Desired: [], Reported: [234030495820439]</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="269" x="386.8321" y="548.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="493.3321" y="561.3887">Filename</text><line style="stroke:#000000;stroke-width:1.5;" x1="387.8321" x2="654.8321" y1="566.2188" y2="566.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="257" x="392.8321" y="579.501">Attribute Type = ATTRIBUTE(TRANSFER_FILENAME)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="247" x="392.8321" y="591.1416">value = Desired: [], Reported: [ZW_PowerStrip.gbl]</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="255" x="58.8321" y="718.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="37" x="167.8321" y="731.3887">Offset</text><line style="stroke:#000000;stroke-width:1.5;" x1="59.8321" x2="312.8321" y1="736.2188" y2="736.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="243" x="64.8321" y="749.501">Attribute Type = ATTRIBUTE(TRANSFER_OFFSET)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="64.8321" y="761.1416">value = Desired: [], Reported: [4]</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="239" x="839.8321" y="718.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="947.3321" y="731.3887">Size</text><line style="stroke:#000000;stroke-width:1.5;" x1="840.8321" x2="1077.8321" y1="736.2188" y2="736.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="227" x="845.8321" y="749.501">Attribute Type = ATTRIBUTE(TRANSFER_SIZE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="186" x="845.8321" y="761.1416">value = Desired: [], Reported: [85020]</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="305" x="466.8321" y="718.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="71" x="583.8321" y="731.3887">Last Status</text><line style="stroke:#000000;stroke-width:1.5;" x1="467.8321" x2="770.8321" y1="736.2188" y2="736.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="293" x="472.8321" y="749.501">Attribute Type = ATTRIBUTE(FW_TRANSFER_LAST_STATUS)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="162" x="472.8321" y="761.1416">value = Desired: [], Reported: [0]</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="270" x="29.3321" y="888.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="88" x="120.3321" y="901.3887">Fragment Size</text><line style="stroke:#000000;stroke-width:1.5;" x1="30.3321" x2="298.3321" y1="906.2188" y2="906.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="258" x="35.3321" y="919.501">Attribute Type = ATTRIBUTE(FWU_FRAGMENT_SIZE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="170" x="35.3321" y="931.1416">value = Desired: [], Reported: [1C]</text><rect fill="#FFFFFF" filter="url(#fmy28gs5rav9g)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="282" x="830.3321" y="888.25"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="67" x="937.8321" y="901.3887">Expiry time</text><line style="stroke:#000000;stroke-width:1.5;" x1="831.3321" x2="1111.3321" y1="906.2188" y2="906.2188"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="270" x="836.3321" y="919.501">Attribute Type = ATTRIBUTE(TRANSFER_EXPIRY_TIME)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="246" x="836.3321" y="931.1416">value = Desired: [], Reported: [234030496320439]</text><!--MD5=[95477c314ce472250aabd32546a8a81f]
+reverse link node to endpoint--><path codeLine="789" d="M606.3321,174.8796 C606.3321,190.2226 606.3321,207.4737 606.3321,221.1141 " fill="none" id="node-backto-endpoint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="606.3321,161.4838,602.3321,167.4838,606.3321,173.4838,610.3321,167.4838,606.3321,161.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7d1ed1816a5a9902fa1639e46584bfcc]
+reverse link endpoint to firmware_update--><path codeLine="790" d="M606.3321,283.8796 C606.3321,299.2226 606.3321,316.4737 606.3321,330.1141 " fill="none" id="endpoint-backto-firmware_update" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="606.3321,270.4838,602.3321,276.4838,606.3321,282.4838,610.3321,276.4838,606.3321,270.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[82b96b8df41c2483ec125ea464a9121c]
+reverse link firmware_update to transfer_state--><path codeLine="791" d="M606.3321,392.8796 C606.3321,408.2226 606.3321,425.4737 606.3321,439.1141 " fill="none" id="firmware_update-backto-transfer_state" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="606.3321,379.4838,602.3321,385.4838,606.3321,391.4838,610.3321,385.4838,606.3321,379.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d54e690aecf99c36cddea8030be82c18]
+reverse link transfer_state to firmware_target--><path codeLine="792" d="M499.0373,491.5956 C431.6945,509.0726 345.6577,531.4012 280.8833,548.2117 " fill="none" id="transfer_state-backto-firmware_target" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="511.8142,488.2797,505.0018,485.9152,500.199,491.2942,507.0114,493.6587,511.8142,488.2797" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ff0c1e08695cd52d13363c18ca51aaee]
+reverse link transfer_state to apply_timestamp--><path codeLine="793" d="M681.4351,493.0913 C725.5932,510.343 780.7803,531.9036 822.6002,548.2418 " fill="none" id="transfer_state-backto-apply_timestamp" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="669.293,488.3476,673.426,494.2568,680.4703,492.7144,676.3372,486.8053,669.293,488.3476" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9962f39f13c400066fac09409ffaa516]
+reverse link transfer_state to filename--><path codeLine="794" d="M578.7779,499.0842 C566.2911,515.0967 551.8318,533.6386 540.5436,548.1141 " fill="none" id="transfer_state-backto-filename" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="587.0443,488.4838,580.2004,490.7555,579.665,497.9467,586.509,495.675,587.0443,488.4838" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9a059fc0622a9639ad2a73012cda3d2a]
+link firmware_target to transfer_offset--><!--MD5=[150a78716bb2050a13238e60c1e2a28e]
+link apply_timestamp to total_size--><!--MD5=[d971e61c6bae2dc1d40dc050770d71fb]
+link filename to last_status--><!--MD5=[ad7536fd16d3e542f633cb0b8c7a75ce]
+link transfer_offset to fragment_size--><!--MD5=[45ed49e13ee8ab284a04f88b667b2d01]
+link total_size to expiry_time--><!--MD5=[3870cd651cd1a8f48372f665a1b19b1a]
+reverse link transfer_state to transfer_offset--><path codeLine="802" d="M485.597,492.2 C446.1714,505.1648 403.7241,523.341 369.3321,548.25 C347.0122,564.4156 349.5384,576.5609 331.3321,597.25 C292.1056,641.8257 242.568,689.9658 212.725,718.178 " fill="none" id="transfer_state-backto-transfer_offset" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="497.9997,488.257,491.0698,486.2629,486.5637,491.8927,493.4936,493.8869,497.9997,488.257" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b93c742665071a865721aabc1f0e6863]
+reverse link transfer_state to total_size--><path codeLine="803" d="M735.1191,469.8517 C854.4979,478.5273 1019.6155,499.2558 1060.3321,548.25 C1105.0785,602.0932 1033.3252,679.0158 989.4245,718.0257 " fill="none" id="transfer_state-backto-total_size" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="721.8953,468.926,727.6013,473.3352,733.866,469.764,728.16,465.3548,721.8953,468.926" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[dad26949e5a1ccdd32e2d3bebc6d768c]
+reverse link transfer_state to last_status--><path codeLine="804" d="M642.1532,498.0481 C654.5246,512.2655 666.8895,529.755 673.3321,548.25 C694.2557,608.316 658.3667,680.9774 635.7062,718.1817 " fill="none" id="transfer_state-backto-last_status" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="633.2284,488.3063,634.3321,495.4324,641.3346,497.1545,640.2309,490.0283,633.2284,488.3063" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f3ea6a472c7aa3063be1359f6abe68b5]
+reverse link transfer_state to fragment_size--><path codeLine="805" d="M477.6986,475.0552 C320.677,490.0617 72.1043,518.188 41.3321,548.25 C6,582.7666 22.3321,608.3561 22.3321,657.75 C22.3321,657.75 22.3321,657.75 22.3321,742.75 C22.3321,806.5862 82.039,859.1149 124.0204,888.1593 " fill="none" id="transfer_state-backto-fragment_size" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="490.7175,473.821,484.3667,470.4052,478.7711,474.9538,485.1219,478.3695,490.7175,473.821" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c51410a46bb64ab4cb6f1230543e59fd]
+reverse link transfer_state to expiry_time--><path codeLine="806" d="M734.9736,472.5035 C855.9916,483.2288 1025.921,505.5073 1076.3321,548.25 C1115.736,581.6599 1115.3321,606.0887 1115.3321,657.75 C1115.3321,657.75 1115.3321,657.75 1115.3321,742.75 C1115.3321,806.7638 1055.1484,859.0599 1012.5967,888.0349 " fill="none" id="transfer_state-backto-expiry_time" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="721.9479,471.3767,727.5808,475.879,733.9032,472.4111,728.2704,467.9088,721.9479,471.3767" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b52d1253c2520adcc5e9a3147423e7ec]
+@startuml attribute_store_firmware_update_transfer.svg
+title Firmware Update transfer data model
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_FWU_MD_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Firmware Update" as firmware_update #FFFFFF
+  firmware_update : Attribute Type = ATTRIBUTE(FWU)
+  firmware_update : value = Desired: [], Reported: [1]
+
+  object "Transfer State" as transfer_state #FFFFFF
+  transfer_state : Attribute Type = ATTRIBUTE(FW_TRANSFER)
+  transfer_state : value = Desired: [1] - Reported: []
+
+  object "Target" as firmware_target #FFFFFF
+  firmware_target : Attribute Type = ATTRIBUTE(TRANSFER_TARGET)
+  firmware_target : value = Desired: [], Reported: [0]
+
+  object "Apply Timestamp" as apply_timestamp #FFFFFF
+  apply_timestamp : Attribute Type = ATTRIBUTE(TRANSFER_APPLY_TIMESTAMP)
+  apply_timestamp : value = Desired: [], Reported: [234030495820439]
+
+  object "Filename" as filename #FFFFFF
+  filename : Attribute Type = ATTRIBUTE(TRANSFER_FILENAME)
+  filename : value = Desired: [], Reported: [ZW_PowerStrip.gbl]
+
+  object "Offset" as transfer_offset #FFFFFF
+  transfer_offset : Attribute Type = ATTRIBUTE(TRANSFER_OFFSET)
+  transfer_offset : value = Desired: [], Reported: [4]
+
+  object "Size" as total_size #FFFFFF
+  total_size : Attribute Type = ATTRIBUTE(TRANSFER_SIZE)
+  total_size : value = Desired: [], Reported: [85020]
+
+  object "Last Status" as last_status #FFFFFF
+  last_status : Attribute Type = ATTRIBUTE(FW_TRANSFER_LAST_STATUS)
+  last_status : value = Desired: [], Reported: [0]
+
+  object "Fragment Size" as fragment_size #FFFFFF
+  fragment_size : Attribute Type = ATTRIBUTE(FWU_FRAGMENT_SIZE)
+  fragment_size : value = Desired: [], Reported: [1C]
+
+  object "Expiry time" as expiry_time #FFFFFF
+  expiry_time : Attribute Type = ATTRIBUTE(TRANSFER_EXPIRY_TIME)
+  expiry_time : value = Desired: [], Reported: [234030496320439]
+}
+
+node *- - endpoint
+endpoint *- - firmware_update
+firmware_update *- - transfer_state
+transfer_state *- - firmware_target
+transfer_state *- - apply_timestamp
+transfer_state *- - filename
+
+firmware_target -[hidden]- -> transfer_offset
+apply_timestamp -[hidden]- -> total_size
+filename -[hidden]- -> last_status
+transfer_offset -[hidden]- -> fragment_size
+total_size -[hidden]- -> expiry_time
+
+transfer_state *- - transfer_offset
+transfer_state *- - total_size
+transfer_state *- - last_status
+transfer_state *- - fragment_size
+transfer_state *- - expiry_time
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: ANSI_X3.4-1968
+Language: en
+Country: US
+--></g></svg>

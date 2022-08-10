@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Specification
-   &#160;<span id="projectnumber">ver1_0_RC11_20211006-12-g5cdaf55</span>
+   &#160;<span id="projectnumber">ver1_0_RC11_20211006-19-g32c28c7</span>
    </div>
   </td>
  </tr>
@@ -72,7 +72,7 @@ $(function() {
 <div class="plantumlgraph">
 <img src="inline_umlgraph_19.png" />
 </div>
-<h1><a class="anchor" id="autotoc_md114"></a>
+<h1><a class="anchor" id="autotoc_md110"></a>
 UCL OTA Framework</h1>
 <p>The UCL OTA framework supports updating the firmware PAN devices connected to the MQTT broker through protocol controllers. Each PAN device can have any number of firmware images needed to operate the device. Examples of firmware images are Protocol Stack code, Application code, and a bitmap image used as background in a display. The framework supports updating both individual nodes and all nodes, which may support a given firmware image.</p>
 <p>Because each image can be anything, the format of the firmware data file is not mandated by this specification. Examples of firmware file data are the following:</p><ul>
@@ -95,10 +95,8 @@ UCL OTA Framework</h1>
 <td class="markdownTableBodyNone">ZigBee </td><td class="markdownTableBodyNone">"ZigBee"+ManufacturerCode+ImageType </td><td class="markdownTableBodyNone">ZigBee010103  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Z-Wave </td><td class="markdownTableBodyNone">ZWave-ManufacturerID-ProductType-ProductID-FirmwareTarget-HardwareVersion </td><td class="markdownTableBodyNone">ZWave-0000-0002-0004-00-01  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Bluetooth </td><td class="markdownTableBodyNone">"BT"+ CompanyID+VendorInfo </td><td class="markdownTableBodyNone">TBD  </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md115"></a>
+<h1><a class="anchor" id="autotoc_md111"></a>
 UCL OTA Communication Protocol</h1>
 <p>The OTA communication protocol is between two types of components, <em>image providers</em> and <em>image consumers</em>. The image provider is responsible for keeping a repository of firmware images and announce which images are available. The image provider also manages MQTT topics in the ucl/OTA namespace. This is an independent MQTT client. The image provider operates with two topic namespaces. One namespace is used to apply firmware images to a specific device, while the other namespace is for applying firmware one firmware image to all devices which support the image. The image consumers manages topics in the ucl/by-unid/&lt;UNID&gt;/OTA/&lt;UIID&gt; namespace, which provide information about the firmware download progress.</p>
 <p>The following MQTT topics are relevant for the firmware update process:</p>
@@ -124,7 +122,7 @@ UCL OTA Communication Protocol</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">ucl/by-unid/&lt;UNID&gt;/ep&lt;ID&gt;/OTA/SupportedCommands </td><td class="markdownTableBodyNone">N/A </td><td class="markdownTableBodyNone">Publish(retained) </td><td class="markdownTableBodyNone">List of commands that can be executed for a device.  </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md116"></a>
+<h2><a class="anchor" id="autotoc_md112"></a>
 Announcing Images</h2>
 <p>When an image is available, the Image Provider publishes meta information about available images on the general topic ucl/OTA/info/&lt;UIID&gt;/all or optionally on the ucl/OTA/info/&lt;UIID&gt;/&lt;UNID&gt;. The latter topic is device specific and can be used to provide an image for a specific device. The two firmware info messages have the same format, but the device-specific image has precedence over the general topic.</p>
 <div class="fragment"><div class="line">{</div>
@@ -152,11 +150,11 @@ Announcing Images</h2>
 <li><em>Version</em> A string that identifies the version of the firmware image. If the a PAN node is running a lower version of the firmware, it should apply the image. Comparing image versions is not defined by this specification because this may be protocol controller specific.</li>
 <li><em>ApplyAfter</em> This is the minimum timestamp when to apply this image. A possible use case is as follows: <em>I want to upgrade all my light bulbs at 1AM as everyone is sleeping</em>. A protocol controller may start to transfer the image before this timestamp, if the device does not activate the image by itself. This value MUST comply with the RFC 3339. If this parameter is omitted, the Firmware Update should take place as soon as possible.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md117"></a>
+<h2><a class="anchor" id="autotoc_md113"></a>
 Retrieving Images</h2>
 <p>Protocol controllers must subscribe to the ucl/OTA/info/+ topic to monitor the availability of new firmware images. When a protocol controller identifies that a new image is available, it must request the image data from the image provider. It does so by temporarily subscribing to ucl/OTA/data&lt;UIID&gt;/all or ucl/OTA/data&lt;UIID&gt;/&lt;UNID&gt;, and then publishing an empty JSON object {} message on ucl/OTA/data&lt;UIID&gt;/all/get or ucl/OTA/data&lt;UIID&gt;/&lt;UNID&gt;/get. This MUST trigger the image provider to do a publish of the entire image on the ucl/OTA/data/&lt;UIID&gt;/all or ucl/OTA/data&lt;UIID&gt;/&lt;UNID&gt; topics. If the image provider does not recognize the UIID, the get command must be ignored. The publish of the <em>data</em> topic MUST not be retained. MQTT allows for a maximum payload of 256 MB which should be enough for the firmware image.</p>
 <p>After getting the firmware image, the protocol controller must start updating the devices affected. If the protocol controller needs to send the same image to multiple devices, the protocol controller SHOULD cache the image and not request the same image multiple times.</p>
-<h2><a class="anchor" id="autotoc_md118"></a>
+<h2><a class="anchor" id="autotoc_md114"></a>
 Providing Firmware Status</h2>
 <p>Protocol controllers must announce the current firmware status for all devices and all active firmware images. The protocol controller publishes retained on ucl/by-unid/&lt;UNID&gt;/OTA/&lt;UIID&gt;/+ topic pattern. The firmware update status is used by IOT services to monitor the firmware download progress. If a device firmware update leads to an UIID no longer there, the protocol controller must un-retain all attributes on the given UIID. For example, <em>the display background in now contained in the firmware file</em>.</p>
 <p>The following attributes are defined as regular DotDot attributes. An endpoint prefix is also used. If the Firmware Update functionality applies for the entire device, it should be reported under endpoint 0.</p>
@@ -249,7 +247,7 @@ Providing Firmware Status</h2>
 </li>
 <li><em>ClusterRevision</em> The Cluster Revision for the generic OTA cluster.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md119"></a>
+<h1><a class="anchor" id="autotoc_md115"></a>
 Z-Wave Firmware Update Example</h1>
 <p>The ZPC (Z-Wave Protocol Controller) MUST provide the /OTA topic for all Z-Wave nodes supporting the Firmware Update Command Class.</p>
 <p>It must gather a list of UIID for all images using information from the Version Command Class as well as information from the Firmware Update Command Class and subscribe the ucl/OTA/info/&lt;UIID&gt;/all and ucl/OTA/info&lt;UIID&gt;/&lt;UNID&gt; topics for all its nodes (or uses a wildcard and filters on incoming messages).</p>
@@ -259,7 +257,7 @@ Z-Wave Firmware Update Example</h1>
 <p>The firmware transfer is done on the Z-Wave side after receiving a Firmware Update Firmware Update Meta Data Status Report Command. If the Z-Wave node sends the command with the status code set to 0xFD (wait for activation), the ZPC MUST wait to the time noted in the apply_after attribute to send the Firmware Update Activation Set Command to the Z-Wave node.</p>
 <p>If the device supports activation, the image will be applied immediately and the UUID status attribute must be update immediately.</p>
 <p>If the node does not support delayed activations, the ZPC SHOULD indicate it.</p>
-<h2><a class="anchor" id="autotoc_md120"></a>
+<h2><a class="anchor" id="autotoc_md116"></a>
 Z-Wave OTA Example with Activation Support</h2>
 <div class="plantumlgraph">
 <img src="inline_umlgraph_20.png" />

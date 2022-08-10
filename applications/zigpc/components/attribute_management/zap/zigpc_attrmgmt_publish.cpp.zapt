@@ -16,7 +16,7 @@
 #include <cstring>
 #include <string>
 
-// UIC shared includes
+// Unify shared includes
 #include <sl_log.h>
 #include <dotdot_mqtt.h>
 

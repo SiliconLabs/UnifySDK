@@ -15,23 +15,15 @@
 #include "zwave_tx.h"
 #include "zwave_tx_process.h"
 #include "zwave_tx_callbacks.h"
-#include "zwave_tx_queue.h"
+#include "zwave_tx_queue.hpp"
 #include "zwave_tx_state_logging.h"
-#include "zwave_tx_follow_ups.h"
-
-// Generic includes
-#include <vector>
+#include "zwave_tx_incoming_frames.hpp"
 
 // Includes from other components
 #include "sl_log.h"
 #include "zwave_tx_groups.h"
 #include "zwave_controller_internal.h"
 #include "zwave_controller_transport.h"
-
-// Helper macro to determine if a transmit status indicates that the tramission
-// was successful.
-#define IS_TRANSMISSION_SUCCESSFUL(status) \
-  ((status == TRANSMIT_COMPLETE_OK) || (status == TRANSMIT_COMPLETE_VERIFIED))
 
 // Constants
 static constexpr char LOG_TAG[] = "zwave_tx_process";
@@ -47,6 +39,10 @@ struct etimer backoff_timer;
 bool queue_flush_ongoing = false;
 // The frame currently being handled
 zwave_tx_session_id_t current_tx_session_id;
+// Map of NodeIDs and the number of frames that we expect from Nodes in our network.
+zwave_tx_incoming_frames expected_incoming_frames;
+// Reason for back-off (current_tx_session_id or we were told of extra frames)
+zwave_tx_backoff_reason_t backoff_reason;
 }  // namespace
 
 // The Z-Wave TX queue
@@ -91,11 +87,11 @@ static void zwave_tx_finalize_element(zwave_tx_session_id_t session_id)
   }
 
   // Stay in Transmission ongoing or go back to idle?
-  if ((completed_element.zwave_tx_options.valid_parent_session_id == true)
+  if ((completed_element.options.transport.valid_parent_session_id == true)
       && (SL_STATUS_OK
           == tx_queue.get_by_id(
             &completed_element,
-            completed_element.zwave_tx_options.parent_session_id))) {
+            completed_element.options.transport.parent_session_id))) {
     // Keep the transmission "ONGOING" if the frame has parents
     // that are still in the queue, set the parent as ongoing.
     state                 = ZWAVE_TX_STATE_TRANSMISSION_ONGOING;
@@ -117,6 +113,48 @@ static void zwave_tx_finalize_element(zwave_tx_session_id_t session_id)
 }
 
 /**
+ * @brief Initiates a Backoff for a given duration.
+ *
+ * @param backoff_time  The time to back-off until we get all the responses.
+ * @param reason        Why are we backing-off
+ */
+static void zwave_tx_process_initiate_backoff(clock_time_t backoff_time,
+                                              zwave_tx_backoff_reason_t reason)
+{
+  sl_log_debug(LOG_TAG,
+               "Starting Z-Wave TX back off for %lu ms. Reason: %s\n",
+               backoff_time,
+               zwave_back_off_reason_name(reason));
+  state          = ZWAVE_TX_STATE_BACKOFF;
+  backoff_reason = reason;
+  etimer_stop(&backoff_timer);
+  PROCESS_CONTEXT_BEGIN(&zwave_tx_process);
+  etimer_set(&backoff_timer, backoff_time);
+  PROCESS_CONTEXT_END(&zwave_tx_process);
+}
+
+/**
+ * @brief Resumes from back-off state.
+ *
+ */
+static void zwave_tx_resume_from_backoff_step()
+{
+  if (state == ZWAVE_TX_STATE_BACKOFF) {
+    // Ensure that the backoff timer is not running anymore
+    etimer_stop(&backoff_timer);
+    if (backoff_reason == BACKOFF_CURRENT_SESSION_ID) {
+      // Remove from the queue and make the correct state transision.
+      zwave_tx_finalize_element(current_tx_session_id);
+    } else if (backoff_reason == BACKOFF_EXPECTED_ADDITIONAL_FRAMES) {
+      // Move back to IDLE
+      state = ZWAVE_TX_STATE_IDLE;
+    }
+    // Check if there is more work to do
+    zwave_tx_process_check_queue();
+  }
+}
+
+/**
  * @brief Verifies if a frame is fully processed or needs
  * to be discarded.
  *
@@ -133,11 +171,9 @@ static void zwave_tx_finalize_element(zwave_tx_session_id_t session_id)
 static bool is_frame_to_be_sent(const zwave_tx_queue_element_t &e)
 {
   // Verify if the frame has expired and was not sent yet.
-  if ((e.zwave_tx_options.discard_timeout_ms > 0)
-      && (e.transmission_timestamp == 0)
-      && ((e.queue_timestamp + e.zwave_tx_options.discard_timeout_ms)
-          < clock_time())) {
-    sl_log_warning(LOG_TAG, "Frame discard timeout has expired.\n");
+  if ((e.options.discard_timeout_ms > 0) && (e.transmission_timestamp == 0)
+      && ((e.queue_timestamp + e.options.discard_timeout_ms) < clock_time())) {
+    sl_log_debug(LOG_TAG, "Frame discard timeout has expired.\n");
     zwave_tx_drop_unsent_current_message();
     return false;
   }
@@ -212,7 +248,7 @@ static void zwave_tx_process_send_next_message_step()
     }
   } else if (state == ZWAVE_TX_STATE_IDLE) {
     // We are idle, take the highest priority element from the queue.
-    current_element = *tx_queue.begin();
+    current_element = *tx_queue.first_in_queue();
     state           = ZWAVE_TX_STATE_TRANSMISSION_ONGOING;
   } else {
     // Other tx queue states should not try to call this function!
@@ -234,7 +270,7 @@ static void zwave_tx_process_send_next_message_step()
     &(current_element.connection_info),
     current_element.data_length,
     current_element.data,
-    &(current_element.zwave_tx_options),
+    &(current_element.options),
     &on_zwave_transport_send_data_complete,
     current_tx_session_id,
     current_tx_session_id);
@@ -281,7 +317,7 @@ static void
 
   // Did the element fail and need to be requeued ? (fasttrack)
   if ((false == IS_TRANSMISSION_SUCCESSFUL(completed_element.send_data_status))
-      && (completed_element.zwave_tx_options.fasttrack == true)
+      && (completed_element.options.fasttrack == true)
       && (!zwave_tx_process_queue_flush_is_ongoing())) {
     sl_log_debug(LOG_TAG,
                  "Fastrack transmit attempt failed (status = %d). "
@@ -297,17 +333,6 @@ static void
     return;
   }
 
-  // Do we need to send some follow-up frames ?
-  if ((completed_element.connection_info.remote.is_multicast == true)
-      && (completed_element.zwave_tx_options.send_follow_ups == true)
-      && (!zwave_tx_process_queue_flush_is_ongoing())
-      && (SL_STATUS_OK
-          == zwave_tx_enqueue_follow_ups(
-            completed_element.zwave_tx_session_id))) {
-    zwave_tx_process_check_queue();
-    return;
-  }
-
   // Call the callback function, if there is one registered for the element
   if (completed_element.callback_function) {
     completed_element.callback_function(
@@ -318,24 +343,18 @@ static void
 
   // Apply backoff if it was successful singlecast and we expect replies.
   if (IS_TRANSMISSION_SUCCESSFUL(completed_element.send_data_status)
-      && completed_element.zwave_tx_options.number_of_responses > 0
+      && completed_element.options.number_of_responses > 0
       && completed_element.connection_info.remote.is_multicast == false
       && (!zwave_tx_process_queue_flush_is_ongoing())
       && !IS_BROADCAST_NODE_ID(
         completed_element.connection_info.remote.node_id)) {
-    clock_time_t backoff_time
-      = completed_element.zwave_tx_options.number_of_responses
-        * (completed_element.transmission_time + CLOCK_SECOND);
-    sl_log_debug(LOG_TAG,
-                 "Starting Z-Wave TX backoff for frame sent to NodeID %d, "
-                 "backoff time: %u ms.\n",
-                 completed_element.connection_info.remote.node_id,
-                 backoff_time);
-    state                 = ZWAVE_TX_STATE_BACKOFF;
-    current_tx_session_id = session_id;
     // The backoff time should be transmission_time + 1 second.
     // Details are available in the Role Type specification, section "Node interview and response timeouts"
-    etimer_set(&backoff_timer, backoff_time);
+    clock_time_t backoff_time
+      = completed_element.options.number_of_responses
+        * (completed_element.transmission_time + CLOCK_SECOND);
+    current_tx_session_id = session_id;
+    zwave_tx_process_initiate_backoff(backoff_time, BACKOFF_CURRENT_SESSION_ID);
     // Here we will just return without removing the element from the queue
     // just yet, so that we can match it with a response if we receive one.
     return;
@@ -346,18 +365,6 @@ static void
 
   // Check if there is more work to do
   zwave_tx_process_check_queue();
-}
-
-static void zwave_tx_resume_from_backoff_step()
-{
-  if (state == ZWAVE_TX_STATE_BACKOFF) {
-    // Ensure that the backoff timer is not running anymore
-    etimer_stop(&backoff_timer);
-    // Remove from the queue and make the correct state transision.
-    zwave_tx_finalize_element(current_tx_session_id);
-    // Check if there is more work to do
-    zwave_tx_process_check_queue();
-  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -378,10 +385,26 @@ void zwave_tx_process_open_tx_queue()
 
 void zwave_tx_process_inspect_received_frame(zwave_node_id_t node_id)
 {
-  if (state == ZWAVE_TX_STATE_IDLE) {
+  // Are we waiting for "spontaneous frames" ?
+  if (backoff_reason == BACKOFF_EXPECTED_ADDITIONAL_FRAMES) {
+    if (expected_incoming_frames.get_frames(node_id) > 0) {
+      expected_incoming_frames.decrement_frames(node_id);
+
+      if (expected_incoming_frames.get_frames(node_id) == 0) {
+        // We got the last needed reply:
+        sl_log_debug(LOG_TAG,
+                     "Received all expected frames from NodeID %d.\n",
+                     node_id);
+        zwave_tx_resume_from_backoff_step();
+      }
+    }
     return;
   }
 
+  // Else here, we backed off due to our current frame:
+  if (state == ZWAVE_TX_STATE_IDLE) {
+    return;
+  }
   zwave_tx_queue_element_t current_element;
   if (SL_STATUS_OK
       != tx_queue.get_by_id(&current_element, current_tx_session_id)) {
@@ -391,7 +414,7 @@ void zwave_tx_process_inspect_received_frame(zwave_node_id_t node_id)
   // We only match the destination NodeID, not the payload.
   if (node_id == current_element.connection_info.remote.node_id) {
     // Is that the last or do we need more replies?
-    if (current_element.zwave_tx_options.number_of_responses <= 1) {
+    if (current_element.options.number_of_responses <= 1) {
       //We got the last needed reply:
       sl_log_debug(LOG_TAG,
                    "Received all expected replies from NodeID "
@@ -418,8 +441,8 @@ sl_status_t
   tx_queue.disable_fasttack(session_id);
 
   // Ensure we are not stuck in a back-off for that frame
-  if ((current_tx_session_id == session_id)
-      && (state == ZWAVE_TX_STATE_BACKOFF)) {
+  if ((current_tx_session_id == session_id) && (state == ZWAVE_TX_STATE_BACKOFF)
+      && (backoff_reason == BACKOFF_CURRENT_SESSION_ID)) {
     zwave_tx_resume_from_backoff_step();
     return SL_STATUS_OK;
   }
@@ -488,9 +511,26 @@ sl_status_t zwave_tx_process_flush_queue_reset_step()
 
 void zwave_tx_process_check_queue()
 {
+  if ((ZWAVE_TX_STATE_IDLE == state) && (!expected_incoming_frames.empty())) {
+    // We are idle and just expect some frames. Just make an additional back-off
+    // It could be nice here to determine the length of the back-off based on the
+    // number of frames / average transmission time with the nodes that are about
+    // to send us something.
+    clock_time_t backoff_time = 1 * CLOCK_SECOND;
+    zwave_tx_process_initiate_backoff(backoff_time,
+                                      BACKOFF_EXPECTED_ADDITIONAL_FRAMES);
+  }
+
   if (ZWAVE_TX_STATE_BACKOFF != state && !tx_queue.empty()) {
     process_post(&zwave_tx_process, ZWAVE_TX_SEND_NEXT_MESSAGE, nullptr);
   }
+}
+
+void zwave_tx_process_set_expected_frames(zwave_node_id_t remote_node_id,
+                                          uint8_t number_of_incoming_frames)
+{
+  expected_incoming_frames.set_frames(remote_node_id,
+                                      number_of_incoming_frames);
 }
 
 void zwave_tx_process_log_state()
@@ -515,6 +555,7 @@ PROCESS_THREAD(zwave_tx_process, ev, data)
     if (ev == PROCESS_EVENT_INIT) {
       state = ZWAVE_TX_STATE_IDLE;
       tx_queue.clear();
+      expected_incoming_frames.clear();
       zwave_tx_init();
       zwave_tx_process_open_tx_queue();
       sl_log_info(LOG_TAG, "Z-Wave Tx process initialized.\n");
@@ -522,14 +563,20 @@ PROCESS_THREAD(zwave_tx_process, ev, data)
     } else if (ev == PROCESS_EVENT_EXIT) {
       state = ZWAVE_TX_STATE_IDLE;
       tx_queue.clear();
+      expected_incoming_frames.clear();
       sl_log_info(LOG_TAG, "Z-Wave Tx process exited.\n");
 
     } else if (ev == PROCESS_EVENT_EXITED) {
       // Do not do anything with this event, just wait to go down.
 
     } else if (ev == ZWAVE_TX_SEND_NEXT_MESSAGE) {
-      // Look at the next frame if we are not in back-off
-      if (state != ZWAVE_TX_STATE_BACKOFF) {
+      if (!expected_incoming_frames.empty()) {
+        sl_log_debug(LOG_TAG,
+                     "Not sending the next message as we should "
+                     "receive more frames first.");
+        zwave_tx_process_check_queue();
+      } else if (state != ZWAVE_TX_STATE_BACKOFF) {
+        // Look at the next frame if we are not in back-off
         zwave_tx_process_send_next_message_step();
       }
 

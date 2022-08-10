@@ -277,10 +277,10 @@ supervision_id_t zwave_command_class_supervision_create_session(
       tx_options->discard_timeout_ms,
       callback,
       user);
-  } else if (tx_options->group_id != ZWAVE_TX_INVALID_GROUP) {
+  } else if (tx_options->transport.group_id != ZWAVE_TX_INVALID_GROUP) {
     return zwave_command_class_supervision_update_singlecast_follow_up_session(
       connection->remote.node_id,
-      tx_options->group_id,
+      tx_options->transport.group_id,
       connection->remote.endpoint_id,
       tx_options->discard_timeout_ms,
       callback,

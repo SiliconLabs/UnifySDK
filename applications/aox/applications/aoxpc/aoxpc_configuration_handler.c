@@ -22,7 +22,8 @@
 // Gecko SDK
 #include "aoa_db.h"
 #include "aoa_parse.h"
-#include "aoa_cte_parse.h"
+#include "aoa_parse_cte.h"
+#include "aoa_parse_enum.h"
 
 #ifdef AOA_ANGLE
 #include "aoa_angle.h"
@@ -35,7 +36,7 @@
 #include "sl_log.h"
 
 // NCP
-#include "ncp.h"
+#include "aoxpc_ncp_process.h"
 
 #define LOG_TAG "aoxpc_configuration_handler"
 
@@ -43,35 +44,6 @@
 #define MAXIMUM_ALLOW_LIST_SIZE     5000
 #define MAXIMUM_AZIMUTH_MASK_SIZE   MAXIMUM_ALLOW_LIST_SIZE
 #define MAXIMUM_ELEVATION_MASK_SIZE MAXIMUM_ALLOW_LIST_SIZE
-
-#ifdef AOA_ANGLE
-// AoX Mode strings
-static const char *aox_mode_string[] = {
-  "PLACEHOLDER",
-  "PLACEHOLDER",
-  "PLACEHOLDER",
-  "SL_RTL_AOX_MODE_ONE_SHOT_BASIC",
-  "SL_RTL_AOX_MODE_ONE_SHOT_BASIC_LIGHTWEIGHT",
-  "SL_RTL_AOX_MODE_ONE_SHOT_FAST_RESPONSE",
-  "SL_RTL_AOX_MODE_ONE_SHOT_HIGH_ACCURACY",
-  "SL_RTL_AOX_MODE_ONE_SHOT_BASIC_AZIMUTH_ONLY",
-  "SL_RTL_AOX_MODE_ONE_SHOT_FAST_RESPONSE_AZIMUTH_ONLY",
-  "SL_RTL_AOX_MODE_ONE_SHOT_HIGH_ACCURACY_AZIMUTH_ONLY",
-  "SL_RTL_AOX_MODE_REAL_TIME_FAST_RESPONSE",
-  "SL_RTL_AOX_MODE_REAL_TIME_BASIC",
-  "SL_RTL_AOX_MODE_REAL_TIME_HIGH_ACCURACY",
-};
-
-// AoX antenna array type strings
-static const char *antenna_type_string[] = {
-  "SL_RTL_AOX_ARRAY_TYPE_4x4_URA",
-  "SL_RTL_AOX_ARRAY_TYPE_3x3_URA",
-  "SL_RTL_AOX_ARRAY_TYPE_1x4_ULA",
-  "SL_RTL_AOX_ARRAY_TYPE_4x4_DP_URA",
-  "SL_RTL_AOX_ARRAY_TYPE_COREHW_15x15_DP",
-  "SL_RTL_AOX_ARRAY_TYPE_COREHW_12x12_DP",
-};
-#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // Private functions
@@ -103,6 +75,7 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
   uint8_t *antenna_switch_pattern = NULL;
   uint8_t antenna_switch_pattern_size = 0;
   enum sl_rtl_aox_array_type antenna_array_type;
+  char *str_config;
 
 #ifdef AOA_ANGLE
   float mask_min                   = 0;
@@ -150,29 +123,35 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
     }
 
 #ifdef AOA_ANGLE
-  sc = aoa_parse_aox_mode(&angle_config->aox_mode, locator_unid);
+  sc = aoa_parse_string_config(&str_config, "aoxMode", locator_unid);
   if (sc == SL_STATUS_OK) {
-    sl_log_info(LOG_TAG,
-                "AoX mode set to: %s",
-                aox_mode_string[angle_config->aox_mode]);
-    // TBD: AoX Mode is not supported in MQTT; do nothing?
+    sc = aoa_parse_aox_mode_from_string(str_config, &angle_config->aox_mode);
+    if (sc == SL_STATUS_OK) {
+      sl_log_info(LOG_TAG, "AoX mode set to: %s", str_config);
+      // TBD: AoX Mode is not supported in MQTT; do nothing?
+    } else {
+      sl_log_error(LOG_TAG, "Failed to set AoX mode to %s.", str_config);
+    }
   }
 #endif
 
-  sc = aoa_parse_antenna_mode(&antenna_array_type, locator_unid);
+  sc = aoa_parse_string_config(&str_config, "antennaMode", locator_unid);
   if (sc == SL_STATUS_OK) {
-    sl_log_info(LOG_TAG,
-                "Antenna mode set to: %s",
-                antenna_type_string[antenna_array_type]);
-    // TBD: Antenna Mode is not supported in MQTT; do nothing?
+    sc = aoa_parse_antenna_type_from_string(str_config, &antenna_array_type);
+    if (sc == SL_STATUS_OK) {
+      sl_log_info(LOG_TAG, "Antenna mode set to: %s", str_config);
+      // TBD: Antenna Mode is not supported in MQTT; do nothing?
 #ifdef AOA_ANGLE
-    sc = antenna_array_init(&angle_config->antenna_array, antenna_array_type);
-    if (sc != SL_STATUS_OK) {
-      sl_log_error(LOG_TAG,
-                   "antenna_array_init failed for %s",
-                    antenna_type_string[antenna_array_type]);
-    }
+      sc = antenna_array_init(&angle_config->antenna_array, antenna_array_type);
+      if (sc != SL_STATUS_OK) {
+        sl_log_error(LOG_TAG,
+                     "antenna_array_init failed for %s",
+                     str_config);
+      }
 #endif
+    } else {
+      sl_log_error(LOG_TAG, "Failed to set antenna mode to %s", str_config);
+    }
   }
 
   sc = aoa_parse_antenna_array(&antenna_switch_pattern,
@@ -199,7 +178,9 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
   }
 
 #ifdef AOA_ANGLE
-  sc = aoa_parse_angle_filtering(&angle_config->angle_filtering, locator_unid);
+  sc = aoa_parse_bool_config(&angle_config->angle_filtering,
+                             "angleFiltering",
+                             locator_unid);
   if (sc == SL_STATUS_OK) {
     sl_log_info(LOG_TAG,
                 "Angle filtering set to: %s",
@@ -207,8 +188,9 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
     // TBD: Angle filtering is not supported in MQTT; do nothing?
   }
 
-  sc = aoa_parse_angle_filtering_weight(&angle_config->angle_filtering_weight,
-                                        locator_unid);
+  sc = aoa_parse_float_config(&angle_config->angle_filtering_weight,
+                              "angleFilteringWeight",
+                              locator_unid);
   if (sc == SL_STATUS_OK) {
     sl_log_info(LOG_TAG,
                 "Angle filtering weight set to: %f",
@@ -216,7 +198,7 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
     // TBD: Angle filtering weight is not supported in MQTT; do nothing?
   }
 
-  sc = aoa_parse_simple_config(&angle_config->angle_correction_timeout,
+  sc = aoa_parse_uint16_config(&angle_config->angle_correction_timeout,
                                "angleCorrectionTimeout",
                                locator_unid);
   if (sc == SL_STATUS_OK) {
@@ -226,7 +208,7 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
     // TBD: Angle correction is not supported in MQTT; do nothing?
   }
 
-  sc = aoa_parse_simple_config(&angle_config->angle_correction_delay,
+  sc = aoa_parse_uint16_config(&angle_config->angle_correction_delay,
                                "angleCorrectionDelay",
                                locator_unid);
   if (sc == SL_STATUS_OK) {
@@ -237,18 +219,21 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
   }
 #endif
 
-  sc = aoa_cte_parse_mode(&cte_mode, locator_unid);
+  sc = aoa_parse_string_config(&str_config, "cteMode", locator_unid);
   if (sc == SL_STATUS_OK) {
-    sl_log_info(LOG_TAG,
-                "CTE mode set to: %s",
-                cte_mode == AOA_CTE_TYPE_SILABS ? "SILABS"
-                : cte_mode == AOA_CTE_TYPE_CONN ? "CONN"
-                                                : "CONNLESS");
-    // Tell AoXLocator MQTT about the CTE Mode setting
-    aox_locator_set_cte_mode_attribute(cte_mode);
+    sc = aoa_parse_cte_mode_from_string(str_config, &cte_mode);
+    if (sc == SL_STATUS_OK) {
+      sl_log_info(LOG_TAG,
+                  "CTE mode set to: %s",
+                  cte_mode == AOA_CTE_TYPE_SILABS ? "SILABS"
+                  : cte_mode == AOA_CTE_TYPE_CONN ? "CONN"
+                                                  : "CONNLESS");
+      // Tell AoXLocator MQTT about the CTE Mode setting
+      aox_locator_set_cte_mode_attribute(cte_mode);
+    }
   }
 
-  sc = aoa_parse_simple_config(&aoa_cte_config.cte_sampling_interval,
+  sc = aoa_parse_uint16_config(&aoa_cte_config.cte_sampling_interval,
                                "cteSamplingInterval",
                                locator_unid);
   if (sc == SL_STATUS_OK) {
@@ -258,7 +243,7 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
     // TBD: CTE sample interval is not supported in MQTT; do nothing?
   }
 
-  sc = aoa_parse_simple_config(&aoa_cte_config.cte_min_length,
+  sc = aoa_parse_uint16_config(&aoa_cte_config.cte_min_length,
                                "cteLength",
                                locator_unid);
   if (sc == SL_STATUS_OK) {
@@ -271,7 +256,7 @@ static void aoxpc_configuration_handler_parse_config(const char *config)
     // TBD: CTE Length is not supported in MQTT; do nothing?
   }
 
-  sc = aoa_parse_simple_config(&aoa_cte_config.cte_slot_duration,
+  sc = aoa_parse_uint16_config(&aoa_cte_config.cte_slot_duration,
                                "slotDuration",
                                locator_unid);
   if (sc == SL_STATUS_OK) {

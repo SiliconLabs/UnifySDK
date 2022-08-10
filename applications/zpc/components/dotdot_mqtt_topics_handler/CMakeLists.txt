@@ -15,7 +15,7 @@ target_link_libraries(
   dotdot_mqtt_topics_handler
   PUBLIC dotdot_attributes zpc_attribute_store uic_attribute_store
   PRIVATE zcl_cluster_servers uic_mqtt uic_dotdot_mqtt zwave_controller
-          ucl_definitions)
+          ucl_definitions uic_attribute_mapper uic_attribute_utils)
 
 target_compile_options(dotdot_mqtt_topics_handler PRIVATE -Wno-unused-variable
                                                           -Wno-unused-function)

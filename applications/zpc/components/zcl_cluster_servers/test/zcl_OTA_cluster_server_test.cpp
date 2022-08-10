@@ -11,7 +11,7 @@
  *
  *****************************************************************************/
 //Mocks
-#include "mqtt_mock_helper.h"
+#include "mqtt_test_helper.h"
 
 // Component being tested
 #include "../src/zcl_OTA_cluster_server.hpp"
@@ -55,7 +55,7 @@ void suiteSetUp()
   datastore_init(":memory:");
   attribute_store_init();
 
-  mqtt_mock_helper_init();
+  mqtt_test_helper_init();
   zcl_OTA_cluster_server_init();
 
   //This is ugly....
@@ -75,7 +75,8 @@ void suiteSetUp()
   n5ep0.emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA, 1)
     .emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_FIRMWARE, 0x1)
     .emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_FIRMWARE_VERSION, 0x00112233);
-  n5ep0.child_by_type(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA).emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_HARDWARE_VERSION, 1);
+  n5ep0.child_by_type(ATTRIBUTE_CC_VERSION_VERSION_REPORT_DATA)
+    .emplace_node<uint32_t>(ATTRIBUTE_CC_VERSION_HARDWARE_VERSION, 1);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -92,7 +93,7 @@ void setUp() {}
 void test_zcl_OTA_cluster_server_current_version()
 {
   TEST_ASSERT_EQUAL(0,
-                    mqtt_mock_helper_get_num_publish(
+                    mqtt_test_helper_get_num_publish(
                       "ucl/by-unid/zw-DEADBEEF-0005/ep0/OTA/Attributes/UIID/"
                       "ZWave-0000-0001-002a-01-01/CurrentVersion/Reported"));
 
@@ -102,7 +103,7 @@ void test_zcl_OTA_cluster_server_current_version()
                     attribute_store_refresh_node_and_children_callbacks(n5ep0));
 
   TEST_ASSERT_EQUAL(1,
-                    mqtt_mock_helper_get_num_publish(
+                    mqtt_test_helper_get_num_publish(
                       "ucl/by-unid/zw-DEADBEEF-0005/ep0/OTA/Attributes/UIID/"
                       "ZWave-0000-0001-002a-01-01/CurrentVersion/Reported"));
 }
@@ -119,10 +120,10 @@ void test_zcl_OTA_cluster_server_test_image_available()
     // anymore.
     std::string meta
       = R"({"Version":"1.0.2","ApplyAfter":"2021-06-29T16:39:57+02:00","Filename":"ZW_SensorPir_7.16.1_104_EFR32ZG13P32_REGION_EU_DEBUG_v255.gbl"})";
-    mqtt_mock_helper_publish("ucl/OTA/info/ZWave-0000-0001-002a-01-01/all",
+    mqtt_test_helper_publish("ucl/OTA/info/ZWave-0000-0001-002a-01-01/all",
                              meta.c_str(),
                              meta.length());
-    mqtt_mock_helper_publish(
+    mqtt_test_helper_publish(
       "ucl/OTA/info/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005",
       meta.c_str(),
       meta.length());
@@ -130,22 +131,22 @@ void test_zcl_OTA_cluster_server_test_image_available()
 
   TEST_ASSERT_EQUAL(
     1,
-    mqtt_mock_helper_get_num_subscribers(
+    mqtt_test_helper_get_num_subscribers(
       "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005"));
 
   TEST_ASSERT_GREATER_OR_EQUAL(
     1,
-    mqtt_mock_helper_get_num_publish(
+    mqtt_test_helper_get_num_publish(
       "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005/get"));
 
   fwu_fw.delete_node();
 
   TEST_ASSERT_EQUAL(
     0,
-    mqtt_mock_helper_get_num_subscribers(
+    mqtt_test_helper_get_num_subscribers(
       "ucl/OTA/info/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005"));
   TEST_ASSERT_EQUAL(0,
-                    mqtt_mock_helper_get_num_subscribers(
+                    mqtt_test_helper_get_num_subscribers(
                       "ucl/OTA/info/ZWave-0000-0001-002a-01-01/all"));
 
   // FIXME: ota_mqtt does not unsubscribe from the data topic it seems:
@@ -153,7 +154,7 @@ void test_zcl_OTA_cluster_server_test_image_available()
                       "listening to the following topic too!");
   TEST_ASSERT_EQUAL(
     0,
-    mqtt_mock_helper_get_num_subscribers(
+    mqtt_test_helper_get_num_subscribers(
       "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005"));
 }
 
@@ -164,22 +165,22 @@ void test_zcl_OTA_cluster_server_test_file_available()
   std::string meta
     = R"({"Version":"1.0.2","ApplyAfter":"2021-06-29T16:39:57+02:00","Filename":"ZW_SensorPir_7.16.1_104_EFR32ZG13P32_REGION_EU_DEBUG_v255.gbl"})";
 
-  mqtt_mock_helper_publish("ucl/OTA/info/ZWave-0000-0001-002a-01-01/all",
+  mqtt_test_helper_publish("ucl/OTA/info/ZWave-0000-0001-002a-01-01/all",
                            meta.c_str(),
                            meta.length());
-  mqtt_mock_helper_publish(
+  mqtt_test_helper_publish(
     "ucl/OTA/info/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005",
     meta.c_str(),
     meta.length());
 
   TEST_ASSERT_EQUAL(
     1,
-    mqtt_mock_helper_get_num_subscribers(
+    mqtt_test_helper_get_num_subscribers(
       "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005"));
 
   TEST_ASSERT_GREATER_OR_EQUAL(
     1,
-    mqtt_mock_helper_get_num_publish(
+    mqtt_test_helper_get_num_publish(
       "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005/get"));
 
   command_class_firmware_update_initiate_firmware_update_ExpectAndReturn(
@@ -193,7 +194,7 @@ void test_zcl_OTA_cluster_server_test_file_available()
   command_class_firmware_update_initiate_firmware_update_IgnoreArg_filename();
 
   std::string data = "My firmware data";
-  mqtt_mock_helper_publish(
+  mqtt_test_helper_publish(
     "ucl/OTA/data/ZWave-0000-0001-002a-01-01/zw-DEADBEEF-0005",
     data.c_str(),
     data.length());

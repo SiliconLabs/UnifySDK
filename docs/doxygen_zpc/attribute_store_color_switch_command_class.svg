@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="599px" preserveAspectRatio="none" style="width:1111px;height:599px;background:#FFFFFF;" version="1.1" viewBox="0 0 1111 599" width="1111px" zoomAndPan="magnify"><defs><filter height="300%" id="fqia8untd8xqz" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#DDDDDD" height="26.2969" rx="5" ry="5" style="stroke:#000000;stroke-width:1.0;" width="508" x="294.5" y="8"/><text fill="#FEFEFE" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118" x="300.5" y="25.9951">ATTRIBUTE(type)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="374" x="422.5" y="25.9951">: ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_type</text><!--MD5=[ea3d5de2a0d35296bc751d5a1b771698]
+cluster Attribute Store--><path d="M6,59.2969 C6,49.2969 555,49.2969 555,49.2969 C555,49.2969 1104,49.2969 1104,59.2969 L1104,582.2969 C1104,592.2969 555,592.2969 555,592.2969 C555,592.2969 6,592.2969 6,582.2969 L6,59.2969 " fill="#FFFFFF" filter="url(#fqia8untd8xqz)" style="stroke:#000000;stroke-width:1.5;"/><path d="M6,59.2969 C6,69.2969 555,69.2969 555,69.2969 C555,69.2969 1104,69.2969 1104,59.2969 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="118" x="496" y="84.292">Attribute Store</text><!--MD5=[7583de943a424965281d8f4386470c52]
+cluster For each Component ID--><rect fill="#FFFFFF" filter="url(#fqia8untd8xqz)" height="193" style="stroke:#000000;stroke-width:1.5;" width="455" x="607" y="391.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="185" x="742" y="406.292">For each Component ID</text><rect fill="#F2FFE6" filter="url(#fqia8untd8xqz)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="201" x="338.5" y="91.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="416.5" y="104.4355">NodeID</text><line style="stroke:#000000;stroke-width:1.5;" x1="339.5" x2="538.5" y1="109.2656" y2="109.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="189" x="344.5" y="122.5479">Attribute Type = ATTRIBUTE_NODE_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="168" x="344.5" y="134.1885">value = Desired: [], Reported: [03]</text><rect fill="#E6FFF7" filter="url(#fqia8untd8xqz)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="224" x="327" y="200.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="115" x="381.5" y="213.4355">Endpoint Attribute</text><line style="stroke:#000000;stroke-width:1.5;" x1="328" x2="550" y1="218.2656" y2="218.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="212" x="333" y="231.5479">Attribute Type = ATTRIBUTE_ENDPOINT_ID</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="333" y="243.1885">value = Desired: [] - Reported: [04]</text><rect fill="#FEFEFE" filter="url(#fqia8untd8xqz)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="204" x="14" y="309.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="92.5" y="322.4355">Version</text><line style="stroke:#000000;stroke-width:1.5;" x1="15" x2="217" y1="327.2656" y2="327.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="192" x="20" y="340.5479">Attribute Type = ATTRIBUTE(VERSION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="20" y="352.1885">value = Desired: [] - Reported: [2]</text><rect fill="#FFFFFF" filter="url(#fqia8untd8xqz)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="371" x="253.5" y="309.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="172" x="353" y="322.4355">Supported Components IDs</text><line style="stroke:#000000;stroke-width:1.5;" x1="254.5" x2="623.5" y1="327.2656" y2="327.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="359" x="259.5" y="340.5479">Attribute Type = ATTRIBUTE(SUPPORTED_COLOR_COMPONENT_MASK)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="174" x="259.5" y="352.1885">value = Desired: [] - Reported: [1C]</text><rect fill="#FFFFFF" filter="url(#fqia8untd8xqz)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="436" x="660" y="309.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="70" x="843" y="322.4355">Color State</text><line style="stroke:#000000;stroke-width:1.5;" x1="661" x2="1095" y1="327.2656" y2="327.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="424" x="666" y="340.5479">Attribute Type = ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_STATE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="172" x="666" y="352.1885">value = Desired: [1] - Reported: [0]</text><rect fill="#FFFFFF" filter="url(#fqia8untd8xqz)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="283" x="736.5" y="418.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="88" x="834" y="431.4355">Component ID</text><line style="stroke:#000000;stroke-width:1.5;" x1="737.5" x2="1018.5" y1="436.2656" y2="436.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="271" x="742.5" y="449.5479">Attribute Type = ATTRIBUTE(COLOR_COMPONENT_ID)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="742.5" y="461.1885">value = Desired: [] - Reported: [3]</text><rect fill="#FFFFFF" filter="url(#fqia8untd8xqz)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="192" x="615" y="527.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="35" x="693.5" y="540.4355">Value</text><line style="stroke:#000000;stroke-width:1.5;" x1="616" x2="806" y1="545.2656" y2="545.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="180" x="621" y="558.5479">Attribute Type = ATTRIBUTE(VALUE)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="178" x="621" y="570.1885">value = Desired: [] - Reported: [255]</text><rect fill="#FFFFFF" filter="url(#fqia8untd8xqz)" height="49.25" style="stroke:#000000;stroke-width:1.5;" width="211" x="842.5" y="527.2969"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="921" y="540.4355">Duration</text><line style="stroke:#000000;stroke-width:1.5;" x1="843.5" x2="1052.5" y1="545.2656" y2="545.2656"/><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="199" x="848.5" y="558.5479">Attribute Type = ATTRIBUTE(DURATION)</text><text fill="#000000" font-family="sans-serif" font-size="10" lengthAdjust="spacing" textLength="166" x="848.5" y="570.1885">value = Desired: [] - Reported: [2]</text><!--MD5=[95477c314ce472250aabd32546a8a81f]
+reverse link node to endpoint--><path codeLine="425" d="M439,153.9265 C439,169.2695 439,186.5206 439,200.161 " fill="none" id="node-backto-endpoint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="439,140.5307,435,146.5307,439,152.5307,443,146.5307,439,140.5307" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c4a4e185f2beba9fb9ec0dd52638d41f]
+reverse link endpoint to version--><path codeLine="426" d="M353.6869,253.5868 C302.2977,270.9286 237.5575,292.776 188.6251,309.2887 " fill="none" id="endpoint-backto-version" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="366.1098,249.3945,359.1458,247.523,354.7398,253.2316,361.7038,255.103,366.1098,249.3945" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9e08ca69acc9dcc41316b4b6a3d47918]
+reverse link endpoint to supported_components_ids--><path codeLine="427" d="M439,262.9265 C439,278.2695 439,295.5206 439,309.161 " fill="none" id="endpoint-backto-supported_components_ids" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="439,249.5307,435,255.5307,439,261.5307,443,255.5307,439,249.5307" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7158b3765a2854d485ade9af545be9ff]
+reverse link endpoint to color_state--><path codeLine="428" d="M550.7099,252.5335 C621.1638,270.0266 711.326,292.4132 779.1715,309.2586 " fill="none" id="endpoint-backto-color_state" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="537.7937,249.3266,542.653,254.6546,549.4401,252.2183,544.5808,246.8903,537.7937,249.3266" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e0d2bf26db4930fa960514801035d5e8]
+reverse link color_state to component_id--><path codeLine="429" d="M878,371.9265 C878,387.2695 878,404.5206 878,418.161 " fill="none" id="color_state-backto-component_id" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="878,358.5307,874,364.5307,878,370.5307,882,364.5307,878,358.5307" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b90e78a2484eedf311c853422e468ea5]
+reverse link component_id to component_id_value--><path codeLine="430" d="M829.1075,474.7088 C803.461,491.4481 772.5224,511.6416 748.7449,527.161 " fill="none" id="component_id-backto-component_id_value" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="840.1051,467.5307,832.8943,467.4605,830.0562,474.0897,837.267,474.1598,840.1051,467.5307" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[6a2dc96b86bfaae80a06aa968736dca6]
+reverse link component_id to component_id_duration--><path codeLine="431" d="M900.9888,478.5937 C911.2037,494.4998 922.972,512.8247 932.1788,527.161 " fill="none" id="component_id-backto-component_id_duration" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="893.8841,467.5307,893.7606,474.7407,900.3686,477.6278,900.492,470.4177,893.8841,467.5307" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[dd6b477bf545981ba022204ec8ba3e62]
+@startuml attribute_store_color_switch_command_class.svg
+allow_mixing
+skinparam objectBorderColor black
+
+legend top
+<font color=#FEFEFE>ATTRIBUTE(type)</font> : ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_type
+endlegend
+
+package "Attribute Store" <<Database>> {
+  object "NodeID" as node #f2ffe6
+  node : Attribute Type = ATTRIBUTE_NODE_ID
+  node : value = Desired: [], Reported: [03]
+
+  object "Endpoint Attribute" as endpoint #e6fff7
+  endpoint : Attribute Type = ATTRIBUTE_ENDPOINT_ID
+  endpoint : value = Desired: [] - Reported: [04]
+
+  object "Version" as version #FEFEFE
+  version : Attribute Type = ATTRIBUTE(VERSION)
+  version : value = Desired: [] - Reported: [2]
+
+  object "Supported Components IDs" as supported_components_ids #FFFFFF
+  supported_components_ids : Attribute Type = ATTRIBUTE(SUPPORTED_COLOR_COMPONENT_MASK)
+  supported_components_ids : value = Desired: [] - Reported: [1C]
+
+  object "Color State" as color_state #FFFFFF
+  color_state : Attribute Type = ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_SWITCH_COLOR_STATE)
+  color_state : value = Desired: [1] - Reported: [0]
+
+  package "For each Component ID" <<Rectangle>> {
+
+    object "Component ID" as component_id #FFFFFF
+    component_id : Attribute Type = ATTRIBUTE(COLOR_COMPONENT_ID)
+    component_id : value = Desired: [] - Reported: [3]
+
+    object "Value" as component_id_value #FFFFFF
+    component_id_value : Attribute Type = ATTRIBUTE(VALUE)
+    component_id_value : value = Desired: [] - Reported: [255]
+
+    object "Duration" as component_id_duration #FFFFFF
+    component_id_duration : Attribute Type = ATTRIBUTE(DURATION)
+    component_id_duration : value = Desired: [] - Reported: [2]
+}
+
+node *- - endpoint
+endpoint *- - version
+endpoint *- - supported_components_ids
+endpoint *- - color_state
+color_state *- - component_id
+component_id *- - component_id_value
+component_id *- - component_id_duration
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: ANSI_X3.4-1968
+Language: en
+Country: US
+--></g></svg>

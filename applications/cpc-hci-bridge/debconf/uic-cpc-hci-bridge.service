@@ -1,0 +1,13 @@
+[Unit]
+Description=CPC HCI Bridge service
+After=uic-cpcd.service
+
+[Service]
+ExecStart=/usr/bin/cpc-hci-bridge
+Restart=on-failure
+KillMode=process
+User=uic
+Group=uic
+
+[Install]
+WantedBy=multi-user.target

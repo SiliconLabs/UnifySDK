@@ -113,7 +113,7 @@ void {{dotdot_prefix}}_on_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower l
 {{#if isArray}}
   std::vector<{{asUnderlyingType type}}> {{asSnakeCaseLower label}};
 {{else}}
-  {{asUnderlyingType type}} {{asSnakeCaseLower label}};
+  {{asUnderlyingType type}} {{asSnakeCaseLower label}} = {};
 {{/if}}{{/zcl_command_arguments}}
 
   nlohmann::json jsn;

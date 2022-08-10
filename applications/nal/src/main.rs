@@ -11,7 +11,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-//! UIC Name and location service
+//! Unify Name and location service
 //! The Name and Location Service is a helper MQTT component that allows to perform book-keeping on text names and locations that have been assigned.
 //! This functionality allows IoT Services to assign and readback a Name and a Location for each node/endpoint.
 #![doc(html_no_source)]
@@ -22,10 +22,10 @@ use crate::cache::{NALConfig, CONFIG_KEY_NAL_DB_FILE};
 use mqtt_handler::*;
 use unify_config_sys::*;
 use unify_log_sys::*;
-use unify_middleware::unify_mqtt_client::{sl_status_t, MqttClientTrait, UnifyMqttClient};
+use unify_mqtt_sys::{sl_status_t, MqttClientTrait, UnifyMqttClient};
 use unify_sl_status_sys::*;
 
-declare_app_name!("uic-nal");
+declare_app_name!("unify-nal");
 const DB_FILE: &str = "/var/lib/uic/nal.db";
 const CONFIG_VERSION: &str = env!("VERSION_STR");
 
@@ -45,12 +45,11 @@ fn parse_application_arguments() -> std::result::Result<(), config_status_t> {
         .map(|arg| std::ffi::CString::new(arg).unwrap())
         .collect::<Vec<std::ffi::CString>>();
 
-    config_add_string("mqtt.client_id", "override mqtt client name", APP_NAME)
-        .and(config_add_string(
+    config_add_string(
             CONFIG_KEY_NAL_DB_FILE,
             "File name of NAL database",
             DB_FILE,
-        ))
+        )
         .and(config_parse(args, CONFIG_VERSION))
 }
 

@@ -34,7 +34,6 @@
 extern "C" {
 #endif
 
-
 /**
  * @brief Reference to options used by ZigPC.
  *
@@ -47,9 +46,11 @@ typedef struct {
   bool tc_use_well_known_key; /**< Allow Trust Center joins using
                                            well-known link key */
 
+  bool poll_attr_only;
   bool ncp_update_firmware_flag;
 
   const char *ncp_update_firmware_path;
+  const char *ota_path;
 } zigpc_config_t;
 
 /**

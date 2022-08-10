@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import QrReader from 'react-qr-reader';
 import { QrCodeDlgProps, QrCodeDlgState } from './qr-code-dlg-types';
-import { createHash } from 'crypto';
+import sha1 from 'sha1';
 
 class QrCodeDlg extends React.Component<QrCodeDlgProps, QrCodeDlgState> {
     constructor(props: QrCodeDlgProps) {
@@ -31,16 +31,26 @@ class QrCodeDlg extends React.Component<QrCodeDlgProps, QrCodeDlgState> {
                 this.setState({ Error: "Incorrect Qr-Code format" });
                 return;
             }
-            let sha1 = createHash("sha1").update(data.slice(9)).digest();
-            let sha1CheckSum = (sha1[0] << 8) + sha1[1];
-            let dataCheckSum = parseInt(data.slice(4, 4 + 5))
-            if (sha1CheckSum !== dataCheckSum) {
-                this.setState({ Error: "Checksum is incorrect" });
+            try {
+                let sha = sha1(data.slice(9));
+                let shaArray: number[] = [];
+                for (let index = 0; index < sha.length; index = index + 2) {
+                    shaArray.push(parseInt("0x" + sha.slice(index, index + 2)));
+                }
+                let sha1CheckSum = (shaArray[0] << 8) + shaArray[1];
+                let dataCheckSum = parseInt(data.slice(4, 4 + 5))
+                if (sha1CheckSum !== dataCheckSum) {
+                    this.setState({ Error: "Checksum is incorrect" });
+                    return;
+                }
+
+                let dsk = data.slice(12, 12 + 40);
+                this.props.UpdateDSK(this.state.ItemIndex, "DSK", dsk);
+                this.toggleModal(false);
+            } catch (error) {
+                this.setState({ Error: "Can't parse DSK" });
                 return;
             }
-            let dsk = data.slice(12, 12 + 40);
-            this.props.UpdateDSK(this.state.ItemIndex, "DSK", dsk);
-            this.toggleModal(false);
         }
     }
 

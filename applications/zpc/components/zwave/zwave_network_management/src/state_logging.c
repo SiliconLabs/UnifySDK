@@ -20,13 +20,15 @@
 #include "nm_state_machine.h"
 #include "zwave_network_management_state.h"
 
+#include "sl_log.h"
+#define LOG_TAG "network_management_state_logging"
+
 #define STR_CASE(x) \
   case x:           \
     return #x;
 
 const char *nm_state_name(zwave_network_management_state_t state)
 {
-  static char message[25];
   switch (state) {
     STR_CASE(NM_IDLE)
     STR_CASE(NM_WAITING_FOR_ADD)
@@ -39,7 +41,6 @@ const char *nm_state_name(zwave_network_management_state_t state)
     STR_CASE(NM_WAITING_FOR_NODE_REMOVAL)
     STR_CASE(NM_WAITING_FOR_FAILED_NODE_REMOVAL)
     STR_CASE(NM_WAIT_FOR_SECURE_LEARN)
-    STR_CASE(NM_WAIT_FOR_PROBE_BY_SIS)
     STR_CASE(NM_REPLACE_FAILED_REQ)
     STR_CASE(NM_PREPARE_SUC_INCLISION)
     STR_CASE(NM_WAIT_FOR_SUC_INCLUSION)
@@ -47,15 +48,15 @@ const char *nm_state_name(zwave_network_management_state_t state)
     STR_CASE(NM_WAIT_FOR_TX_TO_SELF_DESTRUCT)
     STR_CASE(NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL)
     STR_CASE(NM_SEND_NOP)
+    STR_CASE(NM_ASSIGNING_RETURN_ROUTE)
     STR_CASE(NM_FAILED_NODE_REMOVE)
     default:
-      snprintf(message, sizeof(message), "%d", state);
-      return message;
+      sl_log_warning(LOG_TAG, "Unknown state: %d", state);
+      return "Unknown";
   }
 }
 const char *nm_event_name(nm_event_t event)
 {
-  static char message[25];
   switch (event) {
     STR_CASE(NM_EV_ADD_LEARN_READY)
     STR_CASE(NM_EV_ADD_NODE_FOUND)
@@ -80,6 +81,7 @@ const char *nm_event_name(nm_event_t event)
     STR_CASE(NM_EV_REPLACE_FAILED_FAIL)
     STR_CASE(NM_EV_REPLACE_FAILED_START_S2)
     STR_CASE(NM_EV_LEARN_SET)
+    STR_CASE(NM_EV_LEARN_FAILED)
     STR_CASE(NM_EV_REQUEST_NODE_LIST)
     STR_CASE(NM_EV_REQUEST_FAILED_NODE_LIST)
     STR_CASE(NM_EV_PROXY_COMPLETE)
@@ -101,11 +103,14 @@ const char *nm_event_name(nm_event_t event)
     STR_CASE(NM_EV_NOP_FAIL)
     STR_CASE(NM_EV_NOP_SUCCESS)
     STR_CASE(NM_EV_REQUEST_NODE_NEIGHBOR_REQUEST)
+    STR_CASE(NM_EV_LEARN_STARTED)
+    STR_CASE(NM_EV_LEARN_DONE)
+    STR_CASE(NM_EV_ASSIGN_RETURN_ROUTE_START)
+    STR_CASE(NM_EV_ASSIGN_RETURN_ROUTE_COMPLETED)
     STR_CASE(NM_EV_MAX)
 
-
     default:
-      snprintf(message, sizeof(message), "%d", event);
-      return message;
+      sl_log_warning(LOG_TAG, "Unknown event: %d", event);
+      return "Unknown";
   }
 }

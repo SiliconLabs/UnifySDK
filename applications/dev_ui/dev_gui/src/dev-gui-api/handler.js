@@ -5,11 +5,13 @@ let state = {
     Groups: [],
     Certificates: {},
     OTA: [],
+    Scenes: {},
     UPTI: { List: [], Trace: {} },
+    SystemMetrics: {},
+    updateNodeList: true
 };
-
-exports.clients = clients;
-exports.state = state;
+let sendClusterTimeout = null;
+let sendOTATimeout = null;
 
 exports.processSmartStart = (topic, message) => {
     console.log(`Received SmartStart List: '${message}'`);
@@ -55,8 +57,44 @@ exports.processCluster = (topic, message) => {
         let payload = message.toString() === "" ? null : JSON.parse(message);
         payload = payload && payload.value !== undefined ? payload.value : payload;
         initProp(endpoint.Clusters[clusterType], path, payload);
+        if (clusterType === "AoXLocator" || clusterType === "AoXPositionEstimation") {
+            setTimeoutProt(sendClusterTimeout, {
+                type: "nodes-list",
+                data: state.Nodes
+            });
+            state.updateNodeList = false;
+        }
     } catch (error) {
         return getErrorResponse(`Failed Parsing Cluster ${clusterType}`);
+    }
+}
+
+exports.processSystemMetrics = (topic, message) => {
+    let match = topic.match(/ucl\/by-machine-id\/(.*)\/SystemMetrics\/(.*)/)
+    if (match === null || match.length < 3) {
+        console.log(`Unknown topic: '${topic}'; data: '${message}'`);
+        return;
+    }
+
+    let mid = match[1];
+    let path = match[2].split('/');
+
+    try {
+        console.log(`Received Cluster SystemMetrics: machine-id='${mid}', topic='${topic}', mes='${message}'`);
+        if (!state.SystemMetrics[mid])
+            state.SystemMetrics[mid] = {};
+
+        let payload = message.toString() === "" ? null : JSON.parse(message);
+        payload = payload && payload.value !== undefined ? payload.value : payload;
+        if (path[0] === "Attributes")
+            path.pop();
+        initProp(state.SystemMetrics[mid], path, payload);
+        return {
+            type: "system-metrics",
+            data: state.SystemMetrics
+        };
+    } catch (error) {
+        return getErrorResponse(`Failed Parsing Cluster SystemMetrics`);
     }
 }
 
@@ -86,10 +124,13 @@ exports.processOTAByUnid = (topic, message) => {
                 endpoint.OTA[uiid] = {};
             initProp(endpoint.OTA[uiid], path, payload && payload.value);
         }
+        setTimeoutProt(sendClusterTimeout, {
+            type: "nodes-list",
+            data: state.Nodes
+        });
     } catch (err) {
         return getErrorResponse("Cluster OTA info error: " + err);
     }
-
 }
 
 exports.processOTAInfo = (topic, message) => {
@@ -135,10 +176,10 @@ exports.processOTAInfo = (topic, message) => {
                     state.OTA[index].Unid.push(unid);
             }
         }
-        return {
+        setTimeoutProt(sendOTATimeout, {
             type: "ota",
             data: state.OTA
-        };
+        });
     } catch (error) {
         return getErrorResponse(`Failed Parsing OTA`);
     }
@@ -399,7 +440,10 @@ exports.processRFTelemetry = (topic, message) => {
         } else {
             initProp(node.RFTelemetry, path, payload && payload.value);
         }
-        console.log(node.RFTelemetry);
+        setTimeoutProt(sendClusterTimeout, {
+            type: "nodes-list",
+            data: state.Nodes
+        });
     } catch (error) {
         return getErrorResponse(`Failed Parsing RFTelemetry`);
     }
@@ -466,19 +510,12 @@ exports.clearMqttOTA = () => {
     });
 }
 
-exports.sendToAll = (response) => {
-    if (!response || Object.keys(response).length === 0) return;
-    let json = JSON.stringify(response);
-    for (let i = 0; i < clients.length; i++) {
-        clients[i].sendUTF(json);
-    }
-}
-
 exports.resetState = () => {
     state.SmartStart = [];
     state.Nodes = [];
     state.Groups = [];
     state.OTA = [];
+    state.UPTI = { List: [], Trace: {} };
 }
 
 exports.getInitState = (mqttConnectionProps) => {
@@ -492,9 +529,23 @@ exports.getInitState = (mqttConnectionProps) => {
             SmartStart: state.SmartStart,
             Groups: state.Groups,
             OTA: state.OTA,
-            UPTI: state.UPTI
+            UPTI: state.UPTI,
+            SystemMetrics: state.SystemMetrics,
+            Scenes: state.Scenes
         }
     };
+}
+
+exports.setUpdateNodeList = (value) => {
+    state.updateNodeList = value;
+}
+
+function sendToAll(response) {
+    if (!response || Object.keys(response).length === 0) return;
+    let json = JSON.stringify(response);
+    for (let i = 0; i < clients.length; i++) {
+        clients[i].sendUTF(json);
+    }
 }
 
 function getErrorResponse(message) {
@@ -564,4 +615,16 @@ function getNodeByUnid(unid) {
     return state.Nodes[index];
 }
 
+function setTimeoutProt(sendTimeout, payload) {
+    if (!sendTimeout) {
+        sendTimeout = setTimeout(() => {
+            sendToAll(payload);
+            sendTimeout = null;
+        }, 1000);
+    }
+}
+
+exports.sendToAll = sendToAll;
 exports.getErrorResponse = getErrorResponse;
+exports.clients = clients;
+exports.state = state;

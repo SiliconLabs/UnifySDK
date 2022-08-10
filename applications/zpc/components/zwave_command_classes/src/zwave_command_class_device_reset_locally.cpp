@@ -19,7 +19,7 @@
 #include "zwave_network_management.h"
 #include "zwave_network_management_state.h"
 #include "sys/ctimer.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "zwave_controller.h"
 #include "zwave_controller_callbacks.h"
 #include "zwave_command_handler.h"

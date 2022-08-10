@@ -10,7 +10,7 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
-///
+
 use crate::PollEngineConfig;
 use unify_middleware::Attribute;
 

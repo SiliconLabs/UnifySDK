@@ -69,7 +69,7 @@ static sl_status_t zwave_controller_transport_register_stub(
   TEST_ASSERT_NULL(zwave_api_transport.on_frame_received);
   TEST_ASSERT_EQUAL(0x00, zwave_api_transport.command_class);
   TEST_ASSERT_EQUAL(0, zwave_api_transport.version);
-  TEST_ASSERT_EQUAL(1, zwave_api_transport.priority);
+  TEST_ASSERT_EQUAL(0, zwave_api_transport.priority);
   return SL_STATUS_OK;
 }
 
@@ -504,13 +504,13 @@ void test_zwave_api_transport_send_data_multi_happy_case()
   TEST_ASSERT_NOT_NULL(zwave_api_transport.send_data);
 
   // Prepare data:
-  info.remote.node_id         = 23;
-  info.remote.is_multicast    = true;
-  info.remote.multicast_group = 22;
-  tx_options.group_id         = 2;
-  const uint8_t frame[]       = {0x56, 0x32, 0x9F, 0x22, 0x01, 0xFF};
-  user                        = (void *)34;
-  parent_session_id           = (void *)53;
+  info.remote.node_id           = 23;
+  info.remote.is_multicast      = true;
+  info.remote.multicast_group   = 22;
+  tx_options.transport.group_id = 2;
+  const uint8_t frame[]         = {0x56, 0x32, 0x9F, 0x22, 0x01, 0xFF};
+  user                          = (void *)34;
+  parent_session_id             = (void *)53;
 
   uint8_t expected_zwapi_tx_options = TRANSMIT_OPTION_MULTICAST_AS_BROADCAST;
 
@@ -554,13 +554,13 @@ void test_zwave_api_transport_send_data_multi_frame_rejected()
   TEST_ASSERT_NOT_NULL(zwave_api_transport.send_data);
 
   // Prepare data:
-  info.remote.node_id         = 23;
-  info.remote.is_multicast    = true;
-  info.remote.multicast_group = 22;
-  tx_options.group_id         = 2;
-  const uint8_t frame[]       = {0x56, 0x32, 0x9F, 0x22, 0x01, 0xFF};
-  user                        = (void *)34;
-  parent_session_id           = (void *)53;
+  info.remote.node_id           = 23;
+  info.remote.is_multicast      = true;
+  info.remote.multicast_group   = 22;
+  tx_options.transport.group_id = 2;
+  const uint8_t frame[]         = {0x56, 0x32, 0x9F, 0x22, 0x01, 0xFF};
+  user                          = (void *)34;
+  parent_session_id             = (void *)53;
 
   uint8_t expected_zwapi_tx_options = TRANSMIT_OPTION_MULTICAST_AS_BROADCAST;
 
@@ -597,12 +597,12 @@ void test_zwave_api_transport_send_data_multi_no_node_mask()
   TEST_ASSERT_NOT_NULL(zwave_api_transport.send_data);
 
   // Prepare data:
-  info.remote.node_id         = 23;
-  info.remote.is_multicast    = true;
-  info.remote.multicast_group = 22;
-  tx_options.group_id         = 2;
-  const uint8_t frame[]       = {0x56, 0x32, 0x9F, 0x22, 0x01, 0xFF};
-  parent_session_id           = (void *)200;
+  info.remote.node_id           = 23;
+  info.remote.is_multicast      = true;
+  info.remote.multicast_group   = 22;
+  tx_options.transport.group_id = 2;
+  const uint8_t frame[]         = {0x56, 0x32, 0x9F, 0x22, 0x01, 0xFF};
+  parent_session_id             = (void *)200;
 
   zwave_tx_get_nodes_ExpectAndReturn(NULL,
                                      info.remote.multicast_group,
@@ -627,14 +627,14 @@ void test_zwave_api_transport_send_test_frame_happy_case()
   TEST_ASSERT_NOT_NULL(zwave_api_transport.send_data);
 
   // Prepare data:
-  info.remote.node_id      = 3;
-  tx_options.is_test_frame = true;
-  tx_options.rf_power      = MINUS_7_DBM;
-  user                     = (void *)199;
+  info.remote.node_id                = 3;
+  tx_options.transport.is_test_frame = true;
+  tx_options.transport.rf_power      = MINUS_7_DBM;
+  user                               = (void *)199;
 
   zwapi_send_test_frame_AddCallback(zwapi_send_test_frame_stub);
   zwapi_send_test_frame_ExpectAndReturn(info.remote.node_id,
-                                        tx_options.rf_power,
+                                        tx_options.transport.rf_power,
                                         NULL,
                                         SL_STATUS_OK);
   zwapi_send_test_frame_IgnoreArg_callback_function();
@@ -664,13 +664,13 @@ void test_zwave_api_transport_send_test_frame_rejected()
   TEST_ASSERT_NOT_NULL(zwave_api_transport.send_data);
 
   // Prepare data:
-  info.remote.node_id      = 3;
-  tx_options.is_test_frame = true;
-  tx_options.rf_power      = MINUS_1_DBM;
+  info.remote.node_id                = 3;
+  tx_options.transport.is_test_frame = true;
+  tx_options.transport.rf_power      = MINUS_1_DBM;
 
   zwapi_send_test_frame_AddCallback(NULL);
   zwapi_send_test_frame_ExpectAndReturn(info.remote.node_id,
-                                        tx_options.rf_power,
+                                        tx_options.transport.rf_power,
                                         NULL,
                                         SL_STATUS_FAIL);
   zwapi_send_test_frame_IgnoreArg_callback_function();
@@ -1002,4 +1002,75 @@ void test_zwave_api_transport_send_data_rejects_double_frame()
                            &received_tx_report,
                            sizeof(zwapi_tx_report_t));
   TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_OK, received_status);
+}
+
+void test_zwave_api_transport_reset_state()
+{
+  // Nothing should happen outside of transmissions.
+  zwave_api_transport_reset();
+  zwave_api_transport_reset();
+
+  TEST_ASSERT_NOT_NULL(zwave_api_transport.send_data);
+
+  // Prepare data:
+  info.remote.node_id   = 53;
+  tx_options.fasttrack  = false;
+  const uint8_t frame[] = {0x56, 0x32, 0x9F, 0x22, 0x01, 0x6F};
+  user                  = (void *)34;
+  parent_session_id     = (void *)53;
+
+  uint8_t expected_zwapi_tx_options = TRANSMIT_OPTION_ACK
+                                      | TRANSMIT_OPTION_AUTO_ROUTE
+                                      | TRANSMIT_OPTION_EXPLORE;
+
+  zwapi_send_data_AddCallback(zwapi_send_data_stub);
+  zwapi_send_data_ExpectAndReturn(info.remote.node_id,
+                                  frame,
+                                  sizeof(frame),
+                                  expected_zwapi_tx_options,
+                                  NULL,
+                                  SL_STATUS_OK);
+  zwapi_send_data_IgnoreArg_callback_function();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_api_transport.send_data(&info,
+                                                  sizeof(frame),
+                                                  frame,
+                                                  &tx_options,
+                                                  &on_send_data_complete,
+                                                  user,
+                                                  parent_session_id));
+
+  //Run the contiki events
+  contiki_test_helper_run(0);
+
+  // Expect to notify of a frame transmission failure
+  zwave_controller_on_frame_transmission_Expect(false,
+                                                NULL,
+                                                info.remote.node_id);
+
+  // Now ask to reset the state:
+  zwave_api_transport_reset();
+
+  // Check if higher level callback has been invoked
+  TEST_ASSERT_EQUAL_PTR(user, received_user);
+  TEST_ASSERT_EQUAL(TRANSMIT_COMPLETE_FAIL, received_status);
+
+  // Queueing should be possible again:
+  zwapi_send_data_ExpectAndReturn(info.remote.node_id,
+                                  frame,
+                                  sizeof(frame),
+                                  expected_zwapi_tx_options,
+                                  NULL,
+                                  SL_STATUS_OK);
+  zwapi_send_data_IgnoreArg_callback_function();
+
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    zwave_api_transport.send_data(&info,
+                                                  sizeof(frame),
+                                                  frame,
+                                                  &tx_options,
+                                                  &on_send_data_complete,
+                                                  user,
+                                                  parent_session_id));
 }

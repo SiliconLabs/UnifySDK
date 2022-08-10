@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Requirements &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/system_requirements.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="License" href="license.html" />
+    <link rel="prev" title="Unify Dockerfile" href="../docker/readme_developer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="system-requirements">
+<h1>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h1>
+<p>The Unify Host SDK is at the moment only implemented for the Linux OS. The table
+below shows the resource usage of the individual components measured on armhf
+release binaries. No debug symbols included. RAM figures are indicative for
+applications without any data added (i.e. initial memory usage). The measurement
+used for the RAM figures is the programs Resident Set Size (RSS) measured by
+<code class="docutils literal notranslate"><span class="pre">ps</span></code> or <code class="docutils literal notranslate"><span class="pre">smem</span></code>. Bear in mind that the RAM measurement for each application also
+includes memory used by shared libraries, thereby the actual memory consumed
+when running multiple Unify applications that use the same shared library
+(libuic and various system libraries) is lower than the sum of this table.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Release binaries are compiled with <code class="docutils literal notranslate"><span class="pre">-O2</span> <span class="pre">-s</span></code></p></li>
+<li><p>RAM size = Resident Set Size (RSS)</p></li>
+</ul>
+</div></blockquote>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head text-right"><p>Flash</p></th>
+<th class="head text-right"><p>RAM (RSS)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>libuic</p></td>
+<td class="text-right"><p>10568 kB</p></td>
+<td class="text-right"><p>N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p>uic-aoxpc</p></td>
+<td class="text-right"><p>4296 kB</p></td>
+<td class="text-right"><p>10500 kB</p></td>
+</tr>
+<tr class="row-even"><td><p>uic-zigpc</p></td>
+<td class="text-right"><p>740 kB</p></td>
+<td class="text-right"><p>15000 kB</p></td>
+</tr>
+<tr class="row-odd"><td><p>uic-zpc</p></td>
+<td class="text-right"><p>2580 kB</p></td>
+<td class="text-right"><p>20000 kB</p></td>
+</tr>
+<tr class="row-even"><td><p>uic-gms</p></td>
+<td class="text-right"><p>412 kB</p></td>
+<td class="text-right"><p>8700 kB</p></td>
+</tr>
+<tr class="row-odd"><td><p>uic-nal</p></td>
+<td class="text-right"><p>448 kB</p></td>
+<td class="text-right"><p>10000 kB</p></td>
+</tr>
+<tr class="row-even"><td><p>uic-positioning</p></td>
+<td class="text-right"><p>4256 kB</p></td>
+<td class="text-right"><p>11500 kB</p></td>
+</tr>
+<tr class="row-odd"><td><p>uic-upti-cap</p></td>
+<td class="text-right"><p>452 kB</p></td>
+<td class="text-right"><p>8600 kB</p></td>
+</tr>
+<tr class="row-even"><td><p>uic-upti-writer</p></td>
+<td class="text-right"><p>400 kB</p></td>
+<td class="text-right"><p>8700 kB</p></td>
+</tr>
+<tr class="row-odd"><td><p>uic-image-provider</p></td>
+<td class="text-right"><p>428 kB</p></td>
+<td class="text-right"><p>8500 kB</p></td>
+</tr>
+<tr class="row-even"><td><p>uic-upvl</p></td>
+<td class="text-right"><p>492 kB</p></td>
+<td class="text-right"><p>10000 kB</p></td>
+</tr>
+<tr class="row-odd"><td><p>uic-dev-gui</p></td>
+<td class="text-right"><p>30000 kB</p></td>
+<td class="text-right"><p>10000 kB</p></td>
+</tr>
+<tr class="row-even"><td><p>zigbeed</p></td>
+<td class="text-right"><p>496 kB</p></td>
+<td class="text-right"><p>1100 kB</p></td>
+</tr>
+<tr class="row-odd"><td><p>Z3Gateway</p></td>
+<td class="text-right"><p>608 kB</p></td>
+<td class="text-right"><p>600 kB</p></td>
+</tr>
+<tr class="row-even"><td><p>cpcd</p></td>
+<td class="text-right"><p>160 kB</p></td>
+<td class="text-right"><p>2200 kB</p></td>
+</tr>
+<tr class="row-odd"><td><p>cpc-hci-bridge</p></td>
+<td class="text-right"><p>12 kB</p></td>
+<td class="text-right"><p>TBD kB</p></td>
+</tr>
+</tbody>
+</table>
+<p>The SDK depends on the following Debian packages:</p>
+<ul class="simple">
+<li><p>ipset</p></li>
+<li><p>libavahi-client3</p></li>
+<li><p>libboost-atomic1.67.0</p></li>
+<li><p>libboost-chrono1.67.0</p></li>
+<li><p>libboost-date-time1.67.0</p></li>
+<li><p>libboost-filesystem1.67.0</p></li>
+<li><p>libboost-log1.67.0</p></li>
+<li><p>libboost-program-options1.67.0</p></li>
+<li><p>libboost-regex1.67.0</p></li>
+<li><p>libboost-system1.67.0</p></li>
+<li><p>libboost-thread1.67.0</p></li>
+<li><p>libipset11</p></li>
+<li><p>libmbedcrypto3</p></li>
+<li><p>libmbedtls12</p></li>
+<li><p>libmbedx509-0</p></li>
+<li><p>libyaml-cpp0.6</p></li>
+<li><p>socat</p></li>
+<li><p>libmosquitto1</p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

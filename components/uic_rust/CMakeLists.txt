@@ -10,6 +10,19 @@ generate_rust_bindings(
   "uic_attribute_store"
   "uic_datastore")
 
+  generate_rust_bindings(
+    NAME
+    uic_attribute_utils
+    ALLOW_LIST
+    ".*attribute_timeout.*|.*attribute.*transition.*"
+    HEADERS
+    "$<TARGET_PROPERTY:uic_attribute_utils,SOURCE_DIR>/include/*.h"
+    DEPENDS
+    "uic_attribute_store"
+    "uic_attribute_utils"
+    "uic_datastore")
+
+
 generate_rust_bindings(
   NAME
   uic_log

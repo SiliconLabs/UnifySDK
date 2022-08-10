@@ -46,6 +46,10 @@ static sl_status_t
                         SphericalCoordinates direction,
                         SphericalCoordinates deviation,
                         int32_t sequence);
+static void on_angles_ready(aoa_id_t tag_id,
+                            uint32_t angle_count,
+                            aoa_angle_t *angle_list,
+                            aoa_id_t *locator_list);
 static sl_status_t locator_position_and_orientation_callback(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
@@ -100,6 +104,7 @@ sl_status_t positioning_fixt_setup(void)
     &locator_position_and_orientation_callback);
   uic_mqtt_dotdot_aox_locator_attribute_position_and_orientation_valid_callback_set(
     &locator_position_and_orientation_valid_callback);
+  angle_queue_config.on_angles_ready = on_angles_ready;
   return parse_config_file();
 }
 
@@ -176,6 +181,16 @@ static sl_status_t
   sc = angle_queue_push((char *)tag_unid,
                         (char *)unid,
                         &angle);
+  if (sc == SL_STATUS_NOT_INITIALIZED) {
+    sl_log_debug(LOG_TAG,
+                 "Angle queue is not initialized. Angle data for locator %s / "
+                 "asset tag %s will not be processed.",
+                 unid,
+                 tag_unid);
+  }
+  else if (sc != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, "angle_queue_push failed: 0x%04x", sc);
+  }
 
   return sc;
 }
@@ -204,7 +219,6 @@ static sl_status_t locator_position_and_orientation_callback(
   sl_status_t sc;
   aoa_locator_t *locator;
   struct sl_rtl_loc_locator_item item      = {};
-  angle_queue_config_t *angle_queue_config = angle_queue_get_config();
 
   // Delete every tag.
   // Tags will be added when new data arrives.
@@ -259,9 +273,9 @@ static sl_status_t locator_position_and_orientation_callback(
     return sc;
   }
 
-  angle_queue_config->locator_count = aoa_loc_get_number_of_locators();
+  angle_queue_config.locator_count = aoa_loc_get_number_of_locators();
 
-  sc = angle_queue_init(angle_queue_config);
+  sc = angle_queue_init(&angle_queue_config);
   if (sc != SL_STATUS_OK) {
     return sc;
   }
@@ -280,7 +294,6 @@ static sl_status_t locator_position_and_orientation_valid_callback(
   aoa_locator_t *locator = NULL;
   struct sl_rtl_loc_locator_item item = {};
   uint32_t locator_idx;
-  angle_queue_config_t *angle_queue_config = angle_queue_get_config();
 
   if (UCL_DESIRED_UPDATED == update_type) {
     return SL_STATUS_OK;
@@ -324,14 +337,14 @@ static sl_status_t locator_position_and_orientation_valid_callback(
     locator->functional = position_and_orientation_valid;
   }
 
-  sc                  = aoa_loc_finalize_config();
+  sc = aoa_loc_finalize_config();
   if (sc != SL_STATUS_OK) {
     return sc;
   }
 
-  angle_queue_config->locator_count = aoa_loc_get_number_of_locators();
+  angle_queue_config.locator_count = aoa_loc_get_number_of_locators();
 
-  sc = angle_queue_init(angle_queue_config);
+  sc = angle_queue_init(&angle_queue_config);
   if (sc != SL_STATUS_OK) {
     return sc;
   }
@@ -348,10 +361,10 @@ static void positioning_teardown(void)
 /**************************************************************************//**
  * Angles ready callback for angle queue.
  *****************************************************************************/
-void angle_queue_on_angles_ready(aoa_id_t tag_id,
-                                        uint32_t angle_count,
-                                        aoa_angle_t *angle_list,
-                                        aoa_id_t *locator_list)
+static void on_angles_ready(aoa_id_t tag_id,
+                            uint32_t angle_count,
+                            aoa_angle_t *angle_list,
+                            aoa_id_t *locator_list)
 {
   sl_status_t sc;
 
@@ -377,9 +390,9 @@ void aoa_loc_on_position_ready(aoa_asset_tag_t *tag)
     .X = tag->position.x,
     .Y = tag->position.y,
     .Z = tag->position.z,
-    .DeviationX = tag->position.dev_x,
-    .DeviationY = tag->position.dev_y,
-    .DeviationZ = tag->position.dev_z,
+    .DeviationX = tag->position.x_stdev,
+    .DeviationY = tag->position.y_stdev,
+    .DeviationZ = tag->position.z_stdev,
     .Sequence = tag->position.sequence,
     .ApplicationId = NULL,
   };
@@ -401,7 +414,7 @@ void aoa_loc_on_correction_ready(aoa_asset_tag_t *tag,
                                  int32_t sequence,
                                  aoa_id_t loc_id,
                                  uint32_t loc_idx,
-                                 aoa_correction_t *correction)
+                                 aoa_angle_t *correction)
 {
   bool enabled = true;
   config_get_as_bool(CONFIG_KEY_POSITIONING_ANGLE_CORRECTION, &enabled);
@@ -411,12 +424,12 @@ void aoa_loc_on_correction_ready(aoa_asset_tag_t *tag,
   }
 
   const uic_mqtt_dotdot_aox_locator_command_angle_correction_fields_t fields
-    = {.direction.Azimuth   = correction->direction.azimuth,
-       .direction.Elevation = correction->direction.elevation,
-       .direction.Distance  = correction->direction.distance,
-       .deviation.Azimuth   = correction->deviation.azimuth,
-       .deviation.Elevation = correction->deviation.elevation,
-       .deviation.Distance  = correction->deviation.distance,
+    = {.direction.Azimuth   = correction->azimuth,
+       .direction.Elevation = correction->elevation,
+       .direction.Distance  = correction->distance,
+       .deviation.Azimuth   = correction->azimuth_stdev,
+       .deviation.Elevation = correction->elevation_stdev,
+       .deviation.Distance  = correction->distance_stdev,
        .sequence            = correction->sequence,
        .tag_unid            = tag->id};
 

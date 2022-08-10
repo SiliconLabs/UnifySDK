@@ -208,7 +208,10 @@ void test_zwave_command_class_association_support()
 {
   // Get the AGI to initialize our groups.
   attribute_resolver_register_rule_IgnoreAndReturn(SL_STATUS_OK);
+  attribute_resolver_node_or_child_needs_resolution_IgnoreAndReturn(false);
   zwave_command_handler_register_handler_IgnoreAndReturn(SL_STATUS_OK);
+  attribute_resolver_set_resolution_listener_Ignore();
+  attribute_resolver_clear_resolution_listener_Ignore();
   TEST_ASSERT_EQUAL(SL_STATUS_OK, zwave_command_class_agi_init());
 
   // Receive a Set Command:
@@ -414,6 +417,16 @@ void test_zwave_command_class_association_control()
   connection.remote.endpoint_id = endpoint_id;
   connection.remote.node_id     = node_id;
 
+  // 2 groups, 2 listeners to when they are resolved.
+  attribute_resolver_set_resolution_listener_Expect(
+    0,
+    &establish_zpc_associations);
+  attribute_resolver_set_resolution_listener_IgnoreArg_node();
+  attribute_resolver_set_resolution_listener_Expect(
+    0,
+    &establish_zpc_associations);
+  attribute_resolver_set_resolution_listener_IgnoreArg_node();
+
   TEST_ASSERT_NOT_NULL(association_handler.control_handler);
   association_handler.control_handler(&connection,
                                       (uint8_t *)&grouping_report,
@@ -460,6 +473,10 @@ void test_zwave_command_class_association_control()
   connection.remote.endpoint_id = endpoint_id;
   connection.remote.node_id     = node_id;
 
+  attribute_resolver_node_or_child_needs_resolution_ExpectAndReturn(
+    group_1_node,
+    true);
+
   TEST_ASSERT_NOT_NULL(association_handler.control_handler);
   association_handler.control_handler(&connection,
                                       (uint8_t *)&report,
@@ -484,12 +501,6 @@ void test_zwave_command_class_association_control()
                                (uint8_t *)&saved_group_capacity,
                                sizeof(saved_group_capacity));
   TEST_ASSERT_EQUAL(report.max_nodes_supported, saved_group_capacity);
-  // Now trigger a Lifeline establishement.
-  // First shot, nothing happens due to no AGI profile data.
-  attribute_resolver_clear_resolution_listener_Expect(
-    endpoint_id_node,
-    &establish_lifeline_association);
-  establish_lifeline_association(endpoint_id_node);
 
   // Now set a group with a Profile 1:
   attribute_store_node_t group_profile_node
@@ -500,21 +511,26 @@ void test_zwave_command_class_association_control()
   attribute_store_set_reported(group_profile_node,
                                &lifeline_profile,
                                sizeof(lifeline_profile));
-  // Second shot, we are not the SIS so we will fail:
-  attribute_resolver_clear_resolution_listener_Expect(
-    endpoint_id_node,
-    &establish_lifeline_association);
-  zwave_network_management_is_zpc_sis_ExpectAndReturn(false);
-  establish_lifeline_association(endpoint_id_node);
   // Now go check the group data in the attribute store:
   TEST_ASSERT_FALSE(
     attribute_store_is_value_defined(group_content_node, DESIRED_ATTRIBUTE));
-  // Third time the charm, we bump somebody out!
+
+  // Try the lifeline without being the SIS (will fail)
+  zwave_network_management_is_zpc_sis_ExpectAndReturn(false);
   attribute_resolver_clear_resolution_listener_Expect(
-    endpoint_id_node,
-    &establish_lifeline_association);
+    group_1_node,
+    &establish_zpc_associations);
+  establish_zpc_associations(group_1_node);
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(group_content_node, DESIRED_ATTRIBUTE));
+
+  // Now are are the SIS, remove an association to get ourselves in
   zwave_network_management_is_zpc_sis_ExpectAndReturn(true);
-  establish_lifeline_association(endpoint_id_node);
+
+  attribute_resolver_clear_resolution_listener_Expect(
+    group_1_node,
+    &establish_zpc_associations);
+  establish_zpc_associations(group_1_node);
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(group_content_node, DESIRED_ATTRIBUTE));
   TEST_ASSERT_FALSE(attribute_store_is_value_matched(group_content_node));
@@ -531,14 +547,14 @@ void test_zwave_command_class_association_control()
                                 received_frame_size);
 
   // Pretend it worked by updating the reported value of the attribute store
+  attribute_resolver_node_or_child_needs_resolution_ExpectAndReturn(
+    group_1_node,
+    true);
   received_data[0] = 3;
-  received_data[1] = 0;
-  received_data[2] = 4;
-  received_data[3] = 1;
   attribute_store_set_node_attribute_value(group_content_node,
                                            REPORTED_ATTRIBUTE,
                                            received_data,
-                                           4);
+                                           1);
 
   // Now the frame handler should try to add node ID 1
   TEST_ASSERT_NOT_NULL(association_set);
@@ -561,14 +577,18 @@ void test_zwave_controller_reset_step()
 
   // Group content : node 2, node 1, node 1:2, node 2:1
   uint8_t group_content[] = {0x02, 0x01, 0x00, 0x01, 0x02, 0x02, 0x01};
-
+  attribute_resolver_node_or_child_needs_resolution_ExpectAndReturn(
+    group_id_node,
+    false);
+  attribute_resolver_clear_resolution_listener_Expect(
+    group_id_node,
+    &establish_zpc_associations);
   attribute_store_set_reported(group_content_node,
                                group_content,
                                sizeof(group_content));
 
   // Trigger the reset step:
   TEST_ASSERT_EQUAL(SL_STATUS_OK, reset_step());
-  attribute_store_log();
 
   const uint8_t expected_new_group_content[] = {0x02, 0x00, 0x02, 0x01};
   attribute_store_get_desired(group_content_node,

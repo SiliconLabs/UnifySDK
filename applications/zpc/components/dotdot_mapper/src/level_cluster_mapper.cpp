@@ -14,7 +14,7 @@
 #include "level_cluster_mapper.h"
 #include "dotdot_attributes.h"
 
-// Includes from UIC
+// Includes from Unify
 #include "sl_log.h"
 #include "sl_status.h"
 
@@ -33,6 +33,26 @@ constexpr uint8_t DEFAULT_MOVE_RATE = 0xFF;
 // Z-Wave does 0..99%, the UAM file advertises this range.
 constexpr uint8_t DEFAULT_MIN_LEVEL = 0x00;
 constexpr uint8_t DEFAULT_MAX_LEVEL = 0x63;
+
+/**
+ * @brief Verifies that the Level is within the allowed range and returns a valid
+ * value from it.
+ *
+ * @param level     The value that we received
+ * @return uint8_t  The validated value that we should apply.
+ */
+static uint8_t validated_level_value(uint8_t level)
+{
+  if (level > DEFAULT_MAX_LEVEL) {
+    return DEFAULT_MAX_LEVEL;
+  }
+
+  if (level < DEFAULT_MIN_LEVEL) {
+    return DEFAULT_MIN_LEVEL;
+  }
+
+  return level;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Incoming command/control functions
@@ -53,6 +73,7 @@ sl_status_t level_cluster_mapper_move_to_level(
              : SL_STATUS_FAIL;
   }
   // Set the level and transition time as received in the command.
+  level = validated_level_value(level);
   dotdot_set_level_current_level(unid,
                                  endpoint,
                                  DESIRED_ATTRIBUTE,
@@ -64,7 +85,7 @@ sl_status_t level_cluster_mapper_move_to_level(
                                             (uint32_t)transition_time);
   }
 
-  //FIXME: We ignore OptionsMask / OptionsOverride for now.
+  // We ignore OptionsMask / OptionsOverride.
   return SL_STATUS_OK;
 }
 
@@ -119,7 +140,7 @@ sl_status_t
                                           DESIRED_ATTRIBUTE,
                                           (uint32_t)transition_time);
 
-  //FIXME: We ignore OptionsMask / OptionsOverride for now.
+  // We ignore OptionsMask / OptionsOverride.
   return SL_STATUS_OK;
 }
 
@@ -158,11 +179,7 @@ sl_status_t
   }
 
   // Boundary verification
-  if (level > DEFAULT_MAX_LEVEL) {
-    level = DEFAULT_MAX_LEVEL;
-  } else if (level < DEFAULT_MIN_LEVEL) {
-    level = DEFAULT_MIN_LEVEL;
-  }
+  level = validated_level_value(level);
 
   // Transition time 0xFFFF will be converted to "as fast as possible."
   if (transition_time == 0xFFFF) {
@@ -179,7 +196,7 @@ sl_status_t
                                           DESIRED_ATTRIBUTE,
                                           (uint32_t)transition_time);
 
-  //FIXME: We ignore OptionsMask / OptionsOverride for now.
+  // We ignore OptionsMask / OptionsOverride.
   return SL_STATUS_OK;
 }
 
@@ -208,7 +225,7 @@ sl_status_t
                                  DESIRED_ATTRIBUTE,
                                  current_reported_level);
 
-  //FIXME: We ignore OptionsMask / OptionsOverride for now.
+  // We ignore OptionsMask / OptionsOverride.
   return SL_STATUS_OK;
 }
 
@@ -229,6 +246,7 @@ sl_status_t level_cluster_mapper_move_to_level_with_on_off(
              : SL_STATUS_FAIL;
   }
   // Set the level and transition time as received in the command.
+  level = validated_level_value(level);
   dotdot_set_level_current_level(unid,
                                  endpoint,
                                  DESIRED_ATTRIBUTE,
@@ -243,7 +261,7 @@ sl_status_t level_cluster_mapper_move_to_level_with_on_off(
     dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, ON);
   }
 
-  //FIXME: We ignore OptionsMask / OptionsOverride for now.
+  // We ignore OptionsMask / OptionsOverride.
   return SL_STATUS_OK;
 }
 
@@ -258,6 +276,7 @@ sl_status_t level_cluster_mapper_move_with_on_off(
 {
   if (call_type == UIC_MQTT_DOTDOT_CALLBACK_TYPE_SUPPORT_CHECK) {
     return (dotdot_is_supported_level_current_level(unid, endpoint)
+            && dotdot_is_supported_level_on_off_transition_time(unid, endpoint)
             && dotdot_is_supported_on_off_on_off(unid, endpoint))
              ? SL_STATUS_OK
              : SL_STATUS_FAIL;
@@ -292,12 +311,10 @@ sl_status_t level_cluster_mapper_move_with_on_off(
                                  endpoint,
                                  DESIRED_ATTRIBUTE,
                                  (uint32_t)level);
-  if (dotdot_is_supported_level_on_off_transition_time(unid, endpoint)) {
-    dotdot_set_level_on_off_transition_time(unid,
-                                            endpoint,
-                                            DESIRED_ATTRIBUTE,
-                                            (uint32_t)transition_time);
-  }
+  dotdot_set_level_on_off_transition_time(unid,
+                                          endpoint,
+                                          DESIRED_ATTRIBUTE,
+                                          (uint32_t)transition_time);
 
   // Do the with OnOff magic:
   // Do not go off here, the multilevel switch level going to zero will make
@@ -306,7 +323,7 @@ sl_status_t level_cluster_mapper_move_with_on_off(
     dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, ON);
   }
 
-  //FIXME: We ignore OptionsMask / OptionsOverride for now.
+  // We ignore OptionsMask / OptionsOverride.
   return SL_STATUS_OK;
 }
 
@@ -345,11 +362,7 @@ sl_status_t level_cluster_mapper_step_with_on_off(
   }
 
   // Boundary verification
-  if (level > DEFAULT_MAX_LEVEL) {
-    level = DEFAULT_MAX_LEVEL;
-  } else if (level < DEFAULT_MIN_LEVEL) {
-    level = DEFAULT_MIN_LEVEL;
-  }
+  level = validated_level_value(level);
 
   // Transition time 0xFFFF will be converted to "as fast as possible."
   if (transition_time == 0xFFFF) {
@@ -373,7 +386,7 @@ sl_status_t level_cluster_mapper_step_with_on_off(
     dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, ON);
   }
 
-  //FIXME: We ignore OptionsMask / OptionsOverride for now.
+  // We ignore OptionsMask / OptionsOverride.
   return SL_STATUS_OK;
 }
 
@@ -391,9 +404,6 @@ sl_status_t level_cluster_mapper_stop_with_on_off(
              ? SL_STATUS_OK
              : SL_STATUS_FAIL;
   }
-  // FIXME: Here we may need ZCL / ZigBee gurus: If I do a stop with OnOff,
-  // when the current level is non-zero and the OnOff is 0,
-  // do I switch the OnOff to On ??
 
   // Set the remaining of the transition time to 0.
   dotdot_set_level_on_off_transition_time(unid, endpoint, DESIRED_ATTRIBUTE, 0);
@@ -411,7 +421,7 @@ sl_status_t level_cluster_mapper_stop_with_on_off(
     dotdot_set_on_off_on_off(unid, endpoint, DESIRED_ATTRIBUTE, ON);
   }
 
-  //FIXME: We ignore OptionsMask / OptionsOverride for now.
+  // We ignore OptionsMask / OptionsOverride.
   return SL_STATUS_OK;
 }
 

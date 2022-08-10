@@ -223,6 +223,11 @@ sl_status_t zwapi_session_send_frame(uint8_t command,
         // Try again without back-off
         continue;
 
+      case ZWAPI_CONNECTION_STATUS_TX_NAK:
+        // The other end is unhappy about our frame.
+        // Parsing went off the rails for them
+        return SL_STATUS_FAIL;
+
       default:
         sl_log_error(LOG_TAG,
                      "Unknown Z-Wave API connection state: %d. Ignoring\n",

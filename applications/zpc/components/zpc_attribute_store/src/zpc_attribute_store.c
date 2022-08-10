@@ -11,7 +11,8 @@
 // Includes from this component
 #include "zpc_attribute_store.h"
 #include "attribute_store_defined_attribute_types.h"
-#include "zpc_attribute_store_attr_type_name_helper.h"
+#include "zpc_attribute_store_type_registration.h"
+#include "zpc_attribute_store_register_default_attribute_type_data.h"
 
 // Generic includes
 #include <string.h>
@@ -24,6 +25,7 @@
 
 // Unify Components
 #include "attribute_store_helper.h"
+#include "attribute_store_configuration.h"
 
 #include "sl_log.h"
 #define LOG_TAG "zpc_attribute_store"
@@ -164,5 +166,16 @@ static sl_status_t invoke_update_callbacks_in_network()
 
 sl_status_t zpc_attribute_store_init()
 {
-  return invoke_update_callbacks_in_network();
+  sl_status_t status = zpc_attribute_store_register_known_attribute_types();
+
+  // For all other attribute, fill default registration data
+  status |= zpc_attribute_store_register_default_attribute_type_data();
+
+  status |= invoke_update_callbacks_in_network();
+
+  // Configure the attribute store:
+  attribute_store_configuration_set_auto_save(true);
+  attribute_store_configuration_set_type_validation(true);
+
+  return status;
 }

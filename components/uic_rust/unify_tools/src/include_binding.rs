@@ -30,10 +30,10 @@ macro_rules! include_binding {
                 non_upper_case_globals
             )]
             use super::*;
-            
+
             use unify_tools::platform_type_mapping::ctypes;
             include!(concat!(
-                env!("UIC_OUT"),
+                env!("UNIFY_BINARY_DIR"),
                 "/bindings/",
                 stringify!($name),
                 ".rs"

@@ -12,9 +12,9 @@
  *****************************************************************************/
 
 /**
- * @defgroup zpc_ncp_update_fixt
+ * @defgroup zpc_ncp_update_fixt NCP Update fixture
  * @ingroup zpc_components
- * 
+ *
  * @brief Componet that handles NCP updates
  *
  * This component check if a NCP firmware update has been requested from
@@ -34,11 +34,11 @@ extern "C" {
 
 /**
  * @brief This function check if the NCP firmware should be updated
- * 
+ *
  * If an update is requested the ZPC boot process is stopped, by this
  * function returning SL_STATUS_BUSY
- * 
- * @return sl_status_t 
+ *
+ * @return sl_status_t
  */
 sl_status_t zpc_ncp_update_fixt_setup();
 

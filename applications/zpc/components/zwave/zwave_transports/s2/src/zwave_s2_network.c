@@ -16,6 +16,8 @@
 #include "s2_classcmd.h"
 #include "s2_inclusion.h"
 #include "s2_keystore.h"
+#include "s2_protocol.h"
+
 #include "sl_log.h"
 #include "zpc_endian.h"
 #include "zwapi_protocol_transport.h"
@@ -29,10 +31,8 @@
     return #x;
 
 static zwave_s2_network_callbacks_t callbacks;
-static zwave_node_id_t my_node_id;
 const char *s2_inclusion_event_name(zwave_event_codes_t ev)
 {
-  static char message[25];
   switch (ev) {
     STR_CASE(S2_NODE_INCLUSION_INITIATED_EVENT)
     STR_CASE(S2_NODE_INCLUSION_KEX_REPORT_EVENT)
@@ -42,8 +42,8 @@ const char *s2_inclusion_event_name(zwave_event_codes_t ev)
     STR_CASE(S2_NODE_INCLUSION_FAILED_EVENT)
     STR_CASE(S2_JOINING_COMPLETE_NEVER_STARTED_EVENT)
     default:
-      snprintf(message, sizeof(message), "%d", ev);
-      return message;
+      sl_log_warning(LOG_TAG, "Unknown S2 inclusion event: %d", ev);
+      return "Unknown";
   }
 }
 
@@ -77,6 +77,7 @@ static void event_handler(zwave_event_t *event)
       break;
     case S2_NODE_INCLUSION_COMPLETE_EVENT:
     case S2_NODE_JOINING_COMPLETE_EVENT:
+    case S2_JOINING_COMPLETE_NEVER_STARTED_EVENT:
       // Security 2 event, inclusion of the node  to the network has been
       // completed.
       if (callbacks.on_inclusion_complete) {
@@ -116,15 +117,11 @@ void zwave_s2_dsk_accept(bool accept, uint8_t *dsk, uint8_t len)
 
 void zwave_s2_network_init()
 {
-  zwave_home_id_t home_id;
+  sl_log_debug(LOG_TAG, "Initializing S2 engine for the current network");
 
-  sl_log_debug(LOG_TAG, "Initializing Security 2 engine\n");
-
-  home_id    = zwave_network_management_get_home_id();
-  my_node_id = zwave_network_management_get_node_id();
-
-  if (s2_ctx)
+  if (s2_ctx) {
     S2_destroy(s2_ctx);
+  }
 
   s2_inclusion_init(
     SECURITY_2_SCHEME_1_SUPPORT,
@@ -132,14 +129,14 @@ void zwave_s2_network_init()
     SECURITY_2_SECURITY_2_CLASS_0 | SECURITY_2_SECURITY_2_CLASS_1
       | SECURITY_2_SECURITY_2_CLASS_2 | SECURITY_2_SECURITY_0_NETWORK_KEY);
 
-  s2_ctx = S2_init_ctx(home_id);
+  s2_ctx = S2_init_ctx(zwave_network_management_get_home_id());
 
   s2_inclusion_set_event_handler(&event_handler);
   zwave_s2_create_new_dynamic_ecdh_key();
 
-#ifdef NDEBUG // If not debug build do not print the S2 keys 
+#ifdef NDEBUG  // If not debug build do not print the S2 keys
   sl_log_info(LOG_TAG,
-               "Use command line (zwave_log_security_keys) to log keys\n");
+              "Use command line (zwave_log_security_keys) to log keys\n");
 #else
   // Print out our keys on the console
   zwave_s2_log_security_keys(SL_LOG_INFO);
@@ -150,10 +147,10 @@ void zwave_s2_start_learn_mode(zwave_node_id_t node_id)
 {
   s2_connection_t s2_connection = {0};
 
-  /*We update the context here because the homeID has changed */
-  zwave_s2_network_init();
+  // Make sure to capture if the HomeID has changed.
+  zwave_s2_refresh_home_id(zwave_network_management_get_home_id());
 
-  s2_connection.l_node        = my_node_id;
+  s2_connection.l_node        = zwave_network_management_get_node_id();
   s2_connection.r_node        = node_id;
   s2_connection.zw_tx_options = 0;
 
@@ -181,7 +178,7 @@ void zwave_s2_start_add_node(zwave_node_id_t node_id)
 {
   s2_connection_t s2_connection = {0};
 
-  s2_connection.l_node        = my_node_id;
+  s2_connection.l_node        = zwave_network_management_get_node_id();
   s2_connection.r_node        = node_id;
   s2_connection.zw_tx_options = 0;
 
@@ -194,4 +191,16 @@ void zwave_s2_start_add_node(zwave_node_id_t node_id)
 void zwave_s2_set_network_callbacks(const zwave_s2_network_callbacks_t *cb)
 {
   callbacks = *cb;
+}
+
+void zwave_s2_abort_join()
+{
+  s2_inclusion_abort(s2_ctx);
+}
+
+void zwave_s2_refresh_home_id(zwave_home_id_t current_home_id)
+{
+  if (s2_ctx != NULL) {
+    s2_ctx->my_home_id = current_home_id;
+  }
 }

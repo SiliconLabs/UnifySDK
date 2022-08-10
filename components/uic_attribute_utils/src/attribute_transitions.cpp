@@ -13,7 +13,7 @@
 #include "attribute_transitions.h"
 #include "attribute_transitions_process.h"
 
-// Includes from other UIC components
+// Includes from other Unify components
 #include "attribute_store_helper.h"
 #include "sl_log.h"
 
@@ -21,23 +21,24 @@
 #include "etimer.h"
 
 // Generic includes
+#include <float.h>
 #include <map>
 #include <vector>
 
 constexpr char LOG_TAG[] = "attribute_transitions";
 
-// FIXME: UIC-806 make this timer a configurable value
+// UIC-806 make this timer a configurable value
 constexpr clock_time_t transition_refresh_rate = 1000;  // in ms
 
 ///////////////////////////////////////////////////////////////////////////////
 // Local definitions
 ///////////////////////////////////////////////////////////////////////////////
-typedef struct transition {
+using transition_t = struct transition {
   float start_value;
   float finish_value;
   clock_time_t start_time;
   clock_time_t finish_time;
-} transition_t;
+};
 
 /**
  * @brief Event definitions for the attribute transitions.
@@ -53,11 +54,20 @@ static std::map<attribute_store_node_t, transition_t> nodes_under_transition;
 static struct etimer refresh_timer;
 
 ///////////////////////////////////////////////////////////////////////////////
+// Private functions
+///////////////////////////////////////////////////////////////////////////////
+static void on_attribute_node_deleted(attribute_store_node_t deleted_node)
+{
+  nodes_under_transition.erase(deleted_node);
+}
+
+///////////////////////////////////////////////////////////////////////////////
 // Public interface functions
 ///////////////////////////////////////////////////////////////////////////////
 sl_status_t attribute_transitions_init()
 {
   nodes_under_transition.clear();
+  attribute_store_register_delete_callback(&on_attribute_node_deleted);
   process_start(&attribute_transitions_process, nullptr);
 
   return SL_STATUS_OK;
@@ -82,36 +92,26 @@ sl_status_t attribute_start_transition(attribute_store_node_t node,
                                        clock_time_t duration)
 {
   if (is_attribute_transition_ongoing(node) == true) {
-    sl_log_debug(LOG_TAG, "Re-starting a new transition on Node %d", node);
+    sl_log_debug(LOG_TAG,
+                 "Re-starting a new transition on Attribute ID %d",
+                 node);
     attribute_stop_transition(node);
   }
 
   transition_t transition = {};
-  uint32_t start_value    = 0;
-  uint32_t finish_value   = 0;
-  if (SL_STATUS_OK
-      != attribute_store_read_value(node,
-                                    REPORTED_ATTRIBUTE,
-                                    (uint8_t *)&start_value,
-                                    sizeof(start_value))) {
-    return SL_STATUS_FAIL;
-  }
-  if (SL_STATUS_OK
-      != attribute_store_read_value(node,
-                                    DESIRED_ATTRIBUTE,
-                                    (uint8_t *)&finish_value,
-                                    sizeof(finish_value))) {
+  transition.start_value  = attribute_store_get_reported_number(node);
+  transition.finish_value = attribute_store_get_desired_number(node);
+  if ((transition.start_value == FLT_MIN)
+      || (transition.finish_value == FLT_MIN)) {
     return SL_STATUS_FAIL;
   }
 
-  transition.start_value  = static_cast<float>(start_value);
-  transition.finish_value = static_cast<float>(finish_value);
-  transition.start_time   = clock_time();
-  transition.finish_time  = clock_time() + duration;
+  transition.start_time  = clock_time();
+  transition.finish_time = clock_time() + duration;
 
   sl_log_debug(
     LOG_TAG,
-    "Starting transition on Node %d, value goes %.0f -> %.0f in %d ms",
+    "Starting transition on Attribute ID %d, value goes %.0f -> %.0f in %d ms",
     node,
     transition.start_value,
     transition.finish_value,
@@ -129,7 +129,7 @@ sl_status_t attribute_start_transition(attribute_store_node_t node,
 
 sl_status_t attribute_stop_transition(attribute_store_node_t node)
 {
-  sl_log_debug(LOG_TAG, "Stopping transition on node %d", node);
+  sl_log_debug(LOG_TAG, "Stopping transition on Attribute ID %d", node);
   nodes_under_transition.erase(node);
 
   if (nodes_under_transition.empty()) {
@@ -208,10 +208,7 @@ static void refresh_all_transitions()
     }
 
     // Update the reported.
-    uint32_t current_value = static_cast<uint32_t>(value);
-    attribute_store_set_reported(it->first,
-                                 &current_value,
-                                 sizeof(current_value));
+    attribute_store_set_reported_number(it->first, value);
   }
 
   // Remove all the finished transitions from the map

@@ -21,7 +21,7 @@
 // Includes from other components
 #include "multi_invoke.hpp"
 #include "attribute_store_helper.h"
-#include "attribute_store_debug.h"
+#include "attribute_store_type_registration.h"
 #include "sl_log.h"
 #include "process.h"
 #include "clock.h"
@@ -83,8 +83,6 @@ static bool scan_requested;
 // Forward declaration for static functions
 static bool needs_get(attribute_store_node_t node);
 static bool needs_set(attribute_store_node_t node);
-static void resolver_find_next_resolve();
-static void on_resolver_node_update(attribute_changed_event_t *event_data);
 static void on_resolver_node_deleted(attribute_store_node_t node);
 
 /**
@@ -235,6 +233,17 @@ sl_status_t
   return SL_STATUS_NOT_FOUND;
 }
 
+sl_status_t
+  attribute_resolver_restart_get_resolution(attribute_store_node_t node)
+{
+  if (pending_get_resolutions.count(node) > 0) {
+    pending_get_resolutions.erase(node);
+    scan_node(node);
+    return SL_STATUS_OK;
+  }
+  return SL_STATUS_NOT_FOUND;
+}
+
 attribute_resolver_config_t attribute_resolver_get_config()
 {
   return attribute_resolver_config;
@@ -367,15 +376,15 @@ static bool resolution_already_queued(resolver_rule_type_t rule_type,
     if ((rule_type == RESOLVER_GET_RULE) && pending_get_resolutions.count(a)) {
       sl_log_debug(LOG_TAG,
                    "Already resolving GET %s vs %s id %i",
-                   attribute_store_name_by_type(a.type()),
-                   attribute_store_name_by_type(node.type()),
+                   attribute_store_type_get_node_type_name(a),
+                   attribute_store_type_get_node_type_name(node),
                    a);
       return true;
     }
     if ((rule_type == RESOLVER_SET_RULE) && pending_set_resolutions.count(a)) {
       sl_log_debug(LOG_TAG,
                    "Already resolving SET %s id %i",
-                   attribute_store_name_by_type(a.type()),
+                   attribute_store_type_get_node_type_name(a),
                    a);
       return true;
     }
@@ -612,41 +621,43 @@ static bool needs_set(attribute_store_node_t node)
 }
 
 /**
- * @brief Callback function registered to attribute store when node has updates
+ * @brief Callback function registered to attribute store when node has been updated
+ *
+ * @param updated_node      The node that was updated
+ * @param change            The change that occured.
  */
-static void on_resolver_node_update(attribute_changed_event_t *event_data)
+static void on_resolver_node_update(attribute_store_node_t updated_node,
+                                    attribute_store_change_t change)
 {
-  assert(event_data);
   //If the node has been deleted make sure to clear it from our watch
-  if ((event_data->change == ATTRIBUTE_DELETED)
-      || (attribute_store_get_node_type(event_data->updated_node)
+  if ((change == ATTRIBUTE_DELETED)
+      || (attribute_store_get_node_type(updated_node)
           == ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE)) {
-    on_resolver_node_deleted(event_data->updated_node);
+    on_resolver_node_deleted(updated_node);
     return;
   }
   // If the node is blocked due to maximum retry count and it was just updated
   // try to see if resolution is needed or if it works now.
-  if ((!needs_get(event_data->updated_node))
-      || (is_node_get_resolution_max_retries_reached(event_data->updated_node)
-          == true)) {
-    pending_get_resolutions.erase(event_data->updated_node);
+  if ((!needs_get(updated_node))
+      || (is_node_get_resolution_max_retries_reached(updated_node) == true)) {
+    pending_get_resolutions.erase(updated_node);
   }
 
   // If the node was updated and does not need a set anymore, we remove it from
   // the pending sets
-  if (!needs_set(event_data->updated_node)) {
-    pending_set_resolutions.erase(event_data->updated_node);
+  if (!needs_set(updated_node)) {
+    pending_set_resolutions.erase(updated_node);
   }
 
   // See if we need to scan something.
   // if somebody is waiting for a resolution notification, (possibly above the current node)
   // ensure that the node gets scanned again
   attribute_store_node_t parent_with_listener
-    = get_highest_parent_with_resolution_listener(event_data->updated_node);
+    = get_highest_parent_with_resolution_listener(updated_node);
   if (parent_with_listener != ATTRIBUTE_STORE_INVALID_NODE) {
     scan_node(parent_with_listener);
-  } else if (is_node_to_be_scanned(event_data->updated_node)) {
-    scan_node(event_data->updated_node);
+  } else if (is_node_to_be_scanned(updated_node)) {
+    scan_node(updated_node);
   }
 }
 
@@ -886,6 +897,17 @@ sl_status_t
 {
   attribute_resolver_rule_register(node_type, set_func, get_func);
 
+  if (set_func != nullptr) {
+    // Both Get and Set or only Set rule registered, we want to know about both DESIRED and REPORTED updates.
+    attribute_store_register_callback_by_type(&on_resolver_node_update,
+                                              node_type);
+  } else if (get_func != nullptr) {
+    // Just a Get Rule, we want to know about undefined Reported values only:
+    attribute_store_register_callback_by_type_and_state(
+      &on_resolver_node_update,
+      node_type,
+      REPORTED_ATTRIBUTE);
+  }
   // Just verify the tree, in case some new rules can be applied.
   if (stack.empty() && (scan_requested == false)) {
     scan_requested = true;
@@ -930,9 +952,6 @@ sl_status_t attribute_resolver_init(attribute_resolver_config_t resolver_config)
   if (attribute_resolver_config.send_init != NULL) {
     attribute_resolver_config.send_init();
   }
-
-  // Tell the Attribute Store that we want to be notified of everything
-  attribute_store_register_callback(on_resolver_node_update);
 
   process_start(&attribute_resolver_process, 0);
 

@@ -1,6 +1,6 @@
 {
-  "name": "UIC Dotdot Mappers",
-  "version": "UIC-dotdot-v1",
+  "name": "Unify Dotdot Mappers",
+  "version": "Unify-dotdot-v1",
   "override": "override.js",
   "helpers": [
     "addon-helper.js"

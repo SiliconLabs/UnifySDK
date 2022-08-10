@@ -16,7 +16,7 @@
 #include <sstream>
 #include <nlohmann/json.hpp>
 
-// UIC libraries
+// Unify libraries
 #include <sl_log.h>
 #include <sl_status.h>
 #include <uic_mqtt.h>

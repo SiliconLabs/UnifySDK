@@ -22,7 +22,7 @@
 #include "uic_version.h"
 #include "attribute.hpp"
 #include "attribute_store.h"
-#include "attribute_store_debug.h"
+#include "attribute_store_type_registration.h"
 #include "sl_log.h"
 
 // ZPC includes

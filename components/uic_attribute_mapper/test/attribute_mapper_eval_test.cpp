@@ -12,12 +12,15 @@
  *****************************************************************************/
 #include "unity.h"
 #include "attribute_store_fixt.h"
+#include "attribute_store_type_registration.h"
 #include "datastore.h"
 #include "attribute_mapper_engine.hpp"
 #include "attribute_mapper_parser.hpp"
 #include "attribute_mapper_ast_eval.hpp"
-// #include "attribute_mapper_ast_dep_eval.hpp"
-// #include "attribute_mapper_ast_reducer.hpp"
+#include "attribute_mapper_ast_reducer.hpp"
+#include "attribute_mapper_ast_print.hpp"
+#include "attribute_mapper_ast_complexity.hpp"
+#include "sl_log.h"
 using namespace attribute_store;
 
 attribute n1234;
@@ -25,14 +28,33 @@ attribute n1235;
 attribute n0;
 attribute n1;
 
-ast::result_type eval_simple(std::string expr)
+ast::eval<result_type_t>::result_type eval_simple(std::string expr)
 {
   ast::ast_tree ast;
 
   TEST_ASSERT_TRUE(ast::Parse("scope 0 { d'6 = " + expr + "}", ast));
-  ast::eval eval(attribute::root());
+
+  ast::eval<result_type_t> eval(attribute::root());
   ast::scope scope = boost::get<ast::scope>(ast[0]);
-  return eval(scope.assignments[0].rhs);
+  ast::reducer reducer;
+
+  ast::print printer(std::cout);
+  ast::complexity complexity;
+
+  int complexity_before = complexity(scope.assignments[0].rhs);
+  std::cout << "Before reduction: " << complexity_before << std::endl;
+  printer(scope.assignments[0].rhs);
+  std::cout << std::endl;
+  ast::expression reduced = reducer.reduce_expression(scope.assignments[0].rhs);
+  int complexity_after    = complexity(reduced);
+  std::cout << "After reduction: " << complexity_after << std::endl;
+  printer(reduced);
+
+  std::cout << std::endl;
+
+  TEST_ASSERT_LESS_OR_EQUAL(complexity_before, complexity_after);
+
+  return eval(reduced);
 }
 
 extern "C" {
@@ -42,6 +64,7 @@ void suiteSetUp()
 {
   datastore_init(":memory:");
   attribute_store_init();
+  attribute_store_register_type(42, "Index type", 0, U8_STORAGE_TYPE);
 }
 
 /// Teardown the test suite (called once after all test_xxx functions are called)
@@ -82,7 +105,7 @@ void setUp()
 void test_simple_reference()
 {
   ast::ast_tree ast;
-  ast::eval ass_evaluator(attribute::root());
+  ast::eval<result_type_t> ass_evaluator(attribute::root());
   ast::attribute_path_eval path_evaluator(attribute::root());
 
   TEST_ASSERT_TRUE(ast::Parse("scope 0 { d'1234 = 1 }", ast));
@@ -137,7 +160,7 @@ void test_dep_eval()
 void test_def()
 {
   ast::ast_tree ast;
-  ast::eval ass_evaluator(attribute::root());
+  ast::eval<result_type_t> ass_evaluator(attribute::root());
   ast::attribute_path_eval path_evaluator(attribute::root());
 
   TEST_ASSERT_TRUE(ast::Parse("def hello 1 + 1\n"
@@ -158,10 +181,10 @@ void test_simple_assignment()
 
   ast::attribute attr;
   attr.value_type = 'd';
-  attr.attribute_path.push_back(ast::operand(6));  // <-- extra layer
+  attr.attribute_path.push_back(ast::operand(6U));  // <-- extra layer
 
   ast::expression first;  // <-- redundant, expression in expression
-  first.first = 1;
+  first.first = 1U;
 
   ast::expression expr;
   expr.first = first;
@@ -217,6 +240,18 @@ void test_operators()
   auto val = eval_simple(" 1 == 1");
   TEST_ASSERT_EQUAL(1, val.value());
 
+  val = eval_simple(" (2/3) == 1");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple(" (3/4) == 0.75f");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple(" 2 == 1");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple(" (1/3) == 1");
+  TEST_ASSERT_EQUAL(0, val.value());
+
   val = eval_simple(" 1 + 1");
   TEST_ASSERT_EQUAL(2, val.value());
 
@@ -227,6 +262,40 @@ void test_operators()
   TEST_ASSERT_EQUAL(6, val.value());
 
   val = eval_simple("10 / 2");
+  TEST_ASSERT_EQUAL(5, val.value());
+
+  val = eval_simple("1 / 3 * 3");
+  TEST_ASSERT_EQUAL_FLOAT(1, val.value());
+
+  val = eval_simple("9/2");
+  TEST_ASSERT_EQUAL_FLOAT(4.5, val.value());
+
+  val = eval_simple("(((1 / 30) + (3 * 234)) - 4) * 3");
+  TEST_ASSERT_EQUAL_FLOAT(2094.1, val.value());
+
+  val = eval_simple("1/3*5+2/3*6");
+  TEST_ASSERT_EQUAL_FLOAT(17.0 / 3, val.value());
+
+  val = eval_simple("10 % 100");
+  TEST_ASSERT_EQUAL(10, val.value());
+
+  val = eval_simple("36 % 5");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  // Modulo between float numbers
+  val = eval_simple("9.7f % 2.3f");
+  TEST_ASSERT_EQUAL(0.5, val.value());
+
+  val = eval_simple("(36 + 2/5) % (2+1/10)");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple("(10 ** 5)");
+  TEST_ASSERT_EQUAL(100000, val.value());
+
+  val = eval_simple("(10 ** 0)");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple("(25 ** (1/2))");  // Square root my friend!
   TEST_ASSERT_EQUAL(5, val.value());
 
   val = eval_simple("10 < 100");
@@ -254,6 +323,10 @@ void test_comparison_operator()
   TEST_ASSERT_EQUAL(1, val.value());
 
   val = eval_simple(" 5 ^ 2 == 7 ");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  // The beauty of floating points :-)
+  val = eval_simple(" (1.1f + 2.2f) == 3.30000019f");
   TEST_ASSERT_EQUAL(1, val.value());
 }
 }

@@ -16,8 +16,9 @@
 
 // Generic includes
 #include <stdbool.h>
+#include <string.h>
 
-// UIC includes
+// Unify includes
 #include "sl_status.h"
 #include "zwave_controller_connection_info.h"
 #include "zwave_generic_types.h"
@@ -33,6 +34,9 @@
 
 // Contiki timing includes
 #include "clock.h"
+
+// Value to set in a 8-bits reserved field
+#define RESERVED_BYTE 0x00
 
 /**
  * @defgroup command_classes_utils Command Classes utils
@@ -84,17 +88,17 @@ attribute_store_node_t zwave_command_class_get_endpoint_node(
 attribute_store_node_t zwave_command_class_get_node_id_node(
   const zwave_controller_connection_info_t *connection_info);
 
+
 /**
- * @brief Gets the Attribute Store Endpoint ID node for a given
- *        Z-Wave NodeID / Endpoint ID in our network
+ * @brief Find the version of the command class by navigating up to the
+ * endpoint from a given attribute store node.
  *
- * @param node_id
- * @param endpoint_id
- * @return attribute_store_node_t
+ * @param node            Attribute Store node under the endpoint
+ * @param command_class   Command class for which we want the version
+ * @return zwave_cc_version_t
  */
-attribute_store_node_t
-  zwave_command_class_get_endpoint_id_node(zwave_node_id_t node_id,
-                                           zwave_endpoint_id_t endpoint_id);
+zwave_cc_version_t zwave_command_class_get_version_from_node(
+  attribute_store_node_t node, zwave_command_class_t command_class);
 
 /**
  * @brief Verifies if a node has some Reports to Follow.
@@ -179,6 +183,27 @@ int32_t command_class_get_int32_value(uint8_t size,
                                       uint8_t precision,
                                       const uint8_t *value);
 
+/**
+ * @brief Extracts a 1,2 or 4 bytes signed value from a frame
+ *
+ * @param [in]  frame   Pointer to the frame data where the value is stored
+ * @param [in]  size    Size of the value (1, 2 or 4 bytes)
+ *
+ * @returns Parsed value at the frame pointer.
+ */
+int32_t get_signed_value_from_frame_and_size(const uint8_t *frame,
+                                             uint8_t size);
+
+/**
+ * @brief Extracts a 1,2 or 4 bytes unsigned value from a frame
+ *
+ * @param [in]  frame   Pointer to the frame data where the value is stored
+ * @param [in]  size    Size of the value (1, 2 or 4 bytes)
+ *
+ * @returns Parsed value at the frame pointer.
+ */
+uint32_t get_unsigned_value_from_frame_and_size(const uint8_t *frame,
+                                                uint8_t size);
 /**
  * @brief Converts a clock_time_t duration to a Z-Wave Command Class duration
  * byte

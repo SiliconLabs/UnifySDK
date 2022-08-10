@@ -19,7 +19,7 @@
 #include <unistd.h>
 #include <regex>
 
-// UIC components
+// Unify components
 #include "sl_status.h"
 #include "sl_status_strings.h"
 #include "sl_log.h"

@@ -10,19 +10,18 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
-
 use serde::{Deserialize, Serialize};
 use serial_test::serial;
 use std::ffi::CString;
 use std::sync::Once;
-use unify_middleware::{
-    Attribute, AttributeStoreError, AttributeStoreExtTrait, AttributeStoreTrait,
-};
+use unify_log_sys::*;
+use unify_middleware::{attribute_store_or_return_with, AttributeStoreError, AttributeTrait};
 
 extern "C" {
     pub fn datastore_init(database: *const std::os::raw::c_char) -> u32;
     //pub fn datastore_teardown() -> u32;
 }
+declare_app_name!("attribute_store_test");
 
 fn setup_datastore() {
     unsafe {
@@ -48,7 +47,7 @@ pub fn initialize() {
 #[serial]
 fn get_root() {
     initialize();
-    let root = Attribute::root().unwrap();
+    let root = attribute_store_or_return_with!().root();
     assert_eq!(1, root.type_of());
 }
 
@@ -56,30 +55,30 @@ fn get_root() {
 #[serial]
 fn add_node() {
     initialize();
-    let root = Attribute::root().unwrap();
+    let root = attribute_store_or_return_with!().root();
     assert_eq!(
-        Err(AttributeStoreError::FailedToGet(root.clone())),
+        Err(AttributeStoreError::FailedToGet(root)),
         root.get_desired::<u32>()
     );
     let child42 = root.add::<u32>(42, None, None).unwrap();
     assert_eq!(42, child42.type_of());
-    assert_eq!(root, child42.get_parent().unwrap());
+    assert_eq!(root, child42.parent());
     assert_eq!(
-        Err(AttributeStoreError::FailedToGet(child42.clone())),
+        Err(AttributeStoreError::FailedToGet(child42)),
         child42.get_desired::<u32>()
     );
     let child43 = child42.add(43, Some(321_u32), Some(123_u32)).unwrap();
     assert_eq!(43, child43.type_of());
     assert_eq!(123_u32, child43.get_desired().unwrap());
     assert_eq!(321_u32, child43.get_reported().unwrap());
-    assert_eq!(child42, child43.get_parent().unwrap());
+    assert_eq!(child42, child43.parent());
 }
 
 #[test]
 #[serial]
 fn attribute_type_string() {
     initialize();
-    let root = Attribute::root().unwrap();
+    let root = attribute_store_or_return_with!().root();
     let child = root.add::<u32>(100, None, None).unwrap();
     let desired = "Hello Attribute Store".to_string();
     child.set_desired(Some(desired.clone())).unwrap();
@@ -103,7 +102,7 @@ struct TestType1 {
 #[serial]
 fn attribute_type_test_type1() {
     initialize();
-    let root = Attribute::root().unwrap();
+    let root = attribute_store_or_return_with!().root();
     let child = root.add::<TestType1>(100, None, None).unwrap();
     let desired = TestType1 {
         t1: 42,
@@ -119,7 +118,7 @@ fn attribute_type_test_type1() {
 #[serial]
 fn attribute_children() {
     initialize();
-    let root = Attribute::root().unwrap();
+    let root = attribute_store_or_return_with!().root();
     root.delete().unwrap();
     let _ = root
         .add::<TestType1>(100, None, None)
@@ -128,6 +127,6 @@ fn attribute_children() {
         .add::<TestType1>(100, None, None)
         .expect("adding a second child to root should not fail");
 
-    let chlds = root.get_children_by_type(100).unwrap();
+    let chlds = root.get_children_by_type(100);
     assert_eq!(2, chlds.len());
 }

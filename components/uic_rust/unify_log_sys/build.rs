@@ -10,8 +10,8 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
+use unify_build_utils::load_unify_environment;
+
 fn main() {
-    // these exports are only used when an exe is compiled. e.g. integration
-    // tests or final binaries!
-    println!("cargo:rustc-link-lib=dylib=uic_log");
+    load_unify_environment!(dylib "uic_log");
 }

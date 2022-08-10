@@ -21,7 +21,7 @@
 #include <map>
 #include <vector>
 
-// UIC Components
+// Unify Components
 #include "attribute_store_helper.h"
 #include "process.h"
 #include "sl_log.h"

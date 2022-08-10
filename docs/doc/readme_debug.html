@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unify Debugging Guide &mdash; Unify Host SDK</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom_styles.css" type="text/css" />
+    <link rel="canonical" href="https://siliconlabs.github.io/UnifySDK/doc/readme_debug.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Unify Rust Development" href="readme_rust.html" />
+    <link rel="prev" title="CMake coding standard" href="standards/cmake-standard.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="introduction.html" class="icon icon-home"> Unify
+            <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                ver_1.2.0
+
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Unify Host SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnifySDK.html">Unify Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multiprotocol.html">Multiprotocol Host Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with the Unify Host SDK</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="readme_developer.html">Unify Developer Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="readme_building.html">Unify Build Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_cmake.html">CMake Integration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Unify Debugging Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#zpc-debugging-guide">ZPC Debugging Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#interpreting-zpc-console-logs-for-various-operations">Interpreting ZPC Console Logs for Various Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#changing-log-debug-level-in-zpc">Changing Log Debug Level in ZPC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#collecting-z-wave-serial-logs-in-zpc">Collecting Z-Wave Serial Logs in ZPC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-mqtt-explorer-to-monitor-messages">Using MQTT Explorer to Monitor Messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="readme_rust.html">Unify Rust Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unify_library_overview.html">Unify Library Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standards/coding-standard.html">Unify Coding Standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">Api documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docker/readme_developer.html">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#directory-structure-and-file-naming-conventions">Directory Structure and File Naming Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#component-templates">Component Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#clang-format-autoformat-code">Clang-Format (autoformat code)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#pre-commit-hooks">Pre-commit Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#creating-a-new-application">Creating a New Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_developer.html#unify-framework-library-unify-main-and-ipc">Unify Framework Library (Unify Main) and IPC</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="introduction.html">Unify</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <script>
+    $(".wy-side-scroll").append("<div class='github-button'><iframe src='https://ghbtns.com/github-btn.html?user=SiliconLabs&repo=UnifySDK&type=watch&count=true&size=large&v=2' allowtransparency='true' frameborder='0' scrolling='0' width='170' height='30'></iframe></div>");
+</script>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="unify-debugging-guide">
+<h1>Unify Debugging Guide<a class="headerlink" href="#unify-debugging-guide" title="Permalink to this heading"></a></h1>
+<section id="zpc-debugging-guide">
+<h2>ZPC Debugging Guide<a class="headerlink" href="#zpc-debugging-guide" title="Permalink to this heading"></a></h2>
+<section id="interpreting-zpc-console-logs-for-various-operations">
+<h3>Interpreting ZPC Console Logs for Various Operations<a class="headerlink" href="#interpreting-zpc-console-logs-for-various-operations" title="Permalink to this heading"></a></h3>
+<section id="using-the-zpc-command-line-interface">
+<h4>Using the ZPC Command Line Interface<a class="headerlink" href="#using-the-zpc-command-line-interface" title="Permalink to this heading"></a></h4>
+<p>Pressing return in ZPC console logs will open Unify Command Line Interface.
+“help” command will display the available commands in Command Line Interface as
+shown below.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ZPC&gt;help
+<span class="o">==================================================</span>
+Unify Command line interface Help:
+<span class="o">==================================================</span>
+<span class="o">[</span>...<span class="o">]</span>
+ZPC&gt;
+</pre></div>
+</div>
+<p>Several types of commands will be available. They use similar prefixes
+and suffixes. For example,</p>
+<ul class="simple">
+<li><p><strong>attribute_store</strong>_ provides access to Attribute Store functionalities</p></li>
+<li><p><strong>zwave</strong>_ provides access to Z-Wave functionalities</p></li>
+<li><p>_<strong>log</strong> prints out information about the state of a component</p></li>
+</ul>
+<p>Note that the Command Line commands should only be used to log information and
+are not recommended to trigger changes, such as network management operations or
+modifying data in the Attribute Store.</p>
+<p>When an unexpected outcome occurs, log the state of the components that are
+expected to perform an action.</p>
+</section>
+<section id="incoming-z-wave-frame-to-zpc-from-z-wave-module">
+<h4>Incoming Z-Wave Frame to ZPC from Z-Wave Module<a class="headerlink" href="#incoming-z-wave-frame-to-zpc-from-z-wave-module" title="Permalink to this heading"></a></h4>
+<p>Incoming Z-Wave API frames are printed directly to the console, which allows
+detecting incoming Z-Wave frames or other messages from the Z-Wave API module.</p>
+<p>For example,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwapi_protocol_rx_dispatch<span class="o">]</span> Incoming Z-Wave API frame <span class="o">(</span>hex<span class="o">)</span>: <span class="nv">Length</span><span class="o">=</span><span class="m">12</span> <span class="nv">Type</span><span class="o">=</span><span class="m">00</span>
+<span class="nv">Cmd</span><span class="o">=</span>A8 <span class="m">00</span> <span class="m">00</span> <span class="m">01</span> <span class="m">00</span> <span class="m">02</span> <span class="m">04</span> <span class="m">86</span> <span class="m">14</span> 5E <span class="m">02</span> <span class="m">00</span> C0 <span class="m">00</span> 7F 7F
+</pre></div>
+</div>
+<p>If the ZPC is communicating to the nodes with S2/S0, the log message will show
+encrypted frames. The exact frame payload is typically not printed out.</p>
+<p>Shortly after receiving the frame, the Command Class handler will print out the
+outcome of processing the Z-Wave frame:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_command_handler_callbacks<span class="o">]</span> Command <span class="nv">Class</span><span class="o">=</span>0x25 - <span class="nv">Command</span><span class="o">=</span>0x03 from
+NodeID <span class="m">004</span>:1 handled successfully.
+</pre></div>
+</div>
+</section>
+<section id="outgoing-z-wave-frame-from-zpc-to-z-wave-module">
+<h4>Outgoing Z-Wave Frame from ZPC to Z-Wave Module<a class="headerlink" href="#outgoing-z-wave-frame-from-zpc-to-z-wave-module" title="Permalink to this heading"></a></h4>
+<p>Outgoing Z-Wave frames can be identified in the console log. For example,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_tx_queue<span class="o">]</span> Enqueuing new frame <span class="o">(</span><span class="nv">id</span><span class="o">=</span>0x24<span class="o">)</span> - <span class="m">001</span>:0 -&gt;  <span class="m">002</span>:0 -
+Encapsulation <span class="m">1</span> - Payload <span class="o">[</span>6C <span class="m">01</span> A4 <span class="m">04</span> 8E <span class="m">01</span> <span class="m">01</span> <span class="m">01</span> <span class="o">]</span>
+</pre></div>
+</div>
+<p>A single frame can result in several TX Queue elements, so multiple TX Queue
+messages may appear.</p>
+</section>
+<section id="z-wave-module-information">
+<h4>Z-Wave Module Information<a class="headerlink" href="#z-wave-module-information" title="Permalink to this heading"></a></h4>
+<p>The following console log describes various things about Z-Wave module.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module type: <span class="m">7</span>
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module revision: <span class="m">0</span>
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module software version: <span class="m">7</span>.15
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module Manufacturer ID 0x0000
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module Product <span class="nb">type</span> 0x0004
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module Product ID 0x0004
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module supported setup mask 0xFE
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module provides a Controller API
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module is primary or inclusion controller
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module is SIS <span class="k">in</span> the network
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module library type: <span class="m">7</span>
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API module RF region <span class="m">1</span>
+</pre></div>
+</div>
+</section>
+<section id="z-wave-protocol-version">
+<h4>Z-Wave Protocol Version<a class="headerlink" href="#z-wave-protocol-version" title="Permalink to this heading"></a></h4>
+<p>The following console log describes version information about Z-Wave Protocol.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API protocol type: <span class="m">0</span>
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API protocol version: <span class="m">7</span>.15.03
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API protocol build number: <span class="m">211</span>
+<span class="o">[</span>zwave_rx<span class="o">]</span> Z-Wave API protocol git commit: <span class="m">30313233343536373839414243444546</span>
+</pre></div>
+</div>
+</section>
+<section id="s2-keys">
+<h4>S2 Keys<a class="headerlink" href="#s2-keys" title="Permalink to this heading"></a></h4>
+<p>S2 keys are printed in console logs under each key level header.</p>
+<p>S2 Unauthenticated:     Key class 1<br />
+S2 Authenticated:       Key class 2<br />
+S2 Access:              Key class 4<br />
+S2 Authenticated LR:    Key class 8<br />
+S2 Access LR:           Key class 10</p>
+<p>For example,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_s2_keystore<span class="o">]</span> Key class <span class="m">1</span>
+<span class="o">[</span>zwave_s2_keystore<span class="o">]</span> FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+<span class="o">[</span>zwave_s2_keystore<span class="o">]</span> Key class <span class="m">2</span>
+<span class="o">[</span>zwave_s2_keystore<span class="o">]</span> CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+</pre></div>
+</div>
+</section>
+<section id="unify-build-version">
+<h4>Unify Build Version<a class="headerlink" href="#unify-build-version" title="Permalink to this heading"></a></h4>
+<p>Unify Build version is printed on the first line after the ZPC starts. It looks
+like the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># uic build: ver_0.0.6_RC1-339-g3af36c4c</span>
+</pre></div>
+</div>
+</section>
+<section id="mqtt-subscriptions-done-by-zpc">
+<h4>MQTT Subscriptions Done by ZPC<a class="headerlink" href="#mqtt-subscriptions-done-by-zpc" title="Permalink to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>mqtt_client<span class="o">]</span> Subscribing to: ucl/by-group/+/Basic/Commands/WriteAttributes
+<span class="o">[</span>mqtt_client<span class="o">]</span> Subscribing to: ucl/by-group/+/Basic/Commands/ResetToFactoryDefaults
+<span class="o">[</span>mqtt_client<span class="o">]</span> Subscribing to: ucl/by-group/+/PowerConfiguration/Commands/WriteAttributes
+<span class="o">[</span>mqtt_client<span class="o">]</span> Subscribing to: ucl/by-group/+/DeviceTemperatureConfiguration/Commands/WriteAttributes
+</pre></div>
+</div>
+</section>
+</section>
+<section id="changing-log-debug-level-in-zpc">
+<h3>Changing Log Debug Level in ZPC<a class="headerlink" href="#changing-log-debug-level-in-zpc" title="Permalink to this heading"></a></h3>
+<section id="log-severity">
+<h4>Log Severity<a class="headerlink" href="#log-severity" title="Permalink to this heading"></a></h4>
+<p>Log level of ZPC can be changed by using the following command line argument or config
+file option.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc  --log.level arg <span class="o">(=</span>d<span class="o">)</span>
+</pre></div>
+</div>
+<p>d: Debug<br />
+i: Info<br />
+w: Warning<br />
+e: Error<br />
+c: Critical</p>
+</section>
+<section id="component-based-log-severity">
+<h4>Component-Based Log Severity<a class="headerlink" href="#component-based-log-severity" title="Permalink to this heading"></a></h4>
+<p>Log levels of ZPC can also be changed on component granularity by using the
+following command line argument or config file option for each component.</p>
+<p>Tag based log level</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Format: &lt;component&gt;:&lt;severity&gt;,&lt;component&gt;:&lt;severity&gt;</span>
+zpc   --log.tag_level component1:level,component2:level
+</pre></div>
+</div>
+<p>For example, to set ZPC MQTT log level to Info(i) and UIC Main log level to
+Error(e), use the following command line.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc --log.tag_level uic_mqtt:i,uic_main:e
+</pre></div>
+</div>
+</section>
+</section>
+<section id="collecting-z-wave-serial-logs-in-zpc">
+<h3>Collecting Z-Wave Serial Logs in ZPC<a class="headerlink" href="#collecting-z-wave-serial-logs-in-zpc" title="Permalink to this heading"></a></h3>
+<p>Serial Log collection in ZPC can be enabled by using the following command line
+argument or config file option.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial_log_file &lt;filename&gt;
+</pre></div>
+</div>
+<p>If this is set, the ZPC will write a log of the communication over the serial
+interface with the Z-Wave module to the path provided. If the file exists, the
+log will be appended to this file, otherwise, the file will be created. The
+ZPC will not handle log rotation.</p>
+</section>
+<section id="using-mqtt-explorer-to-monitor-messages">
+<h3>Using MQTT Explorer to Monitor Messages<a class="headerlink" href="#using-mqtt-explorer-to-monitor-messages" title="Permalink to this heading"></a></h3>
+<p>You can publish MQTT message and observe the MQTT messages stored in the broker
+with a MQTT Explorer. MQTT explorer is an MQTT client that provides a structured
+overview of your MQTT topics.</p>
+<p>First, while ZPC is running, connect the MQTT Explorer to the host where your
+MQTT broker is located and the topics should be observed and structured based on
+Unify spec.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+    <hr/>
+    <p>Copyright © 2022 Silicon Laboratories. All rights reserved.</p>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -62,14 +62,14 @@ void test_init()
                             "    serial: /dev/ttyUSB0\n"
                             "    datastore_file: myfile.db\n"
                             "    manufacturer_id: 4660\n"
+                            "    hardware_version: 1\n"
                             "    product_type: 5789\n"
                             "    product_id: 2130\n"
                             "    device_id: 1234567890ABCDEF\n"
                             "\n"
                             "mqtt:\n"
                             "    host: localhost\n"
-                            "    port: 2000\n"
-                            "    hardware_version: 1\n";
+                            "    port: 2000\n";
   TEST_ASSERT_TRUE_MESSAGE(
     create_file_with_content(TEST_CONFIG_FILE, ini_content),
     "Failed to create config file");
@@ -86,4 +86,7 @@ void test_init()
   TEST_ASSERT_EQUAL(2130, zpc_get_config()->product_id);
   TEST_ASSERT_EQUAL_STRING("1234567890ABCDEF", zpc_get_config()->device_id);
   TEST_ASSERT_EQUAL(1, zpc_get_config()->hardware_version);
+  TEST_ASSERT_EQUAL(0x02, zpc_get_config()->zpc_basic_device_type);
+  TEST_ASSERT_EQUAL(0x01, zpc_get_config()->zpc_generic_device_type);
+  TEST_ASSERT_EQUAL(0x00, zpc_get_config()->zpc_specific_device_type);
 }

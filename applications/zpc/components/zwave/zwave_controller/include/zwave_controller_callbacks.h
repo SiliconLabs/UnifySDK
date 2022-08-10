@@ -108,8 +108,19 @@ typedef struct {
                         zwave_kex_fail_type_t kex_fail_type,
                         zwave_protocol_t inclusion_protocol);
 
-  /// This function is called then the controller enters a new network.
-  /// this can happen either after a controller set_default or after
+  /// This function is called then the controller network address
+  /// (either NodeID and/or HomeID) has changed. This happens after a
+  /// Network inclusion, network exclusion or set default operation.
+  ///
+  /// @param home_id        New HomeID. (may be identical to previous)
+  /// @param node_id        New NodeID (may be identical to previous)
+  void (*on_network_address_update)(zwave_home_id_t home_id,
+                                    zwave_node_id_t node_id);
+
+  /// This function is called then the controller has entered a new network
+  /// and all bootstrapping/initial setup procedures are completed.
+  /// The network is ready to be operated.
+  /// This can happen either after a controller set_default or after
   /// a learn mode operation.
   ///
   /// @param home_id Home ID of the new network.

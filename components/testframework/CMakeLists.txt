@@ -31,11 +31,14 @@ target_include_directories(
 target_link_libraries(uic_contiki_stub
                       $<TARGET_PROPERTY:uic_contiki,LINK_LIBRARIES>)
 
+find_package(Mosquitto REQUIRED)
 add_library(uic_mqtt_stub SHARED $<TARGET_OBJECTS:uic_mqtt_mock>
-                                 src/mqtt_mock_helper.cpp)
-target_link_libraries(uic_mqtt_stub
-                      PUBLIC $<TARGET_PROPERTY:uic_mqtt_mock,LINK_LIBRARIES>
-                      uic_log)
+                                 src/mqtt_test_helper.cpp)
+target_link_libraries(
+  uic_mqtt_stub PUBLIC ${MOSQUITTO_LIBRARIES}
+                       $<TARGET_PROPERTY:uic_mqtt_mock,LINK_LIBRARIES> uic_log)
+
 target_include_directories(
-  uic_mqtt_stub PUBLIC include
-                       $<TARGET_PROPERTY:uic_mqtt_mock,INCLUDE_DIRECTORIES>)
+  uic_mqtt_stub
+  PRIVATE ${MOSQUITTO_INCLUDE_DIR}
+  PUBLIC include $<TARGET_PROPERTY:uic_mqtt_mock,INCLUDE_DIRECTORIES>)

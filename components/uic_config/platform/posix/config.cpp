@@ -13,6 +13,8 @@
 #include "config.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/program_options.hpp>
+#include <unistd.h>
+#include <libgen.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -20,6 +22,18 @@
 #include <iomanip>
 #include "yaml_parser.hpp"
 namespace po = boost::program_options;
+
+std::string mapper(std::string env_var)
+{
+  // ensure the env_var is all caps
+  std::transform(env_var.begin(), env_var.end(), env_var.begin(), ::toupper);
+
+  if (env_var == "UIC_CONF") {
+    std::cout << "Enviornment variable UIC_CONF is found: \n";
+    return "conf";
+  }
+  return "";
+}
 
 /**
  * @brief Config class supporting adding, removing and parsing configurations
@@ -43,25 +57,6 @@ class Config
             "\n Options and values passed on command line here take "
             "precedence over the options and values in config file")
   {
-    this->config_add(CONFIG_KEY_MQTT_HOST,
-                     "MQTT broker hostname or IP",
-                     std::string("localhost"));
-    this->config_add(CONFIG_KEY_MQTT_PORT, "MQTT broker port", 1883);
-    this->config_add(CONFIG_KEY_MQTT_CAFILE,
-                     "Path to file containing the PEM encoded CA certificate "
-                     "to connect to Mosquitto MQTT broker for TLS "
-                     "encryption",
-                     std::string(""));
-    this->config_add(CONFIG_KEY_MQTT_CERTFILE,
-                     "Path to file containing the PEM encoded client "
-                     "certificate to connect to Mosquitto "
-                     "MQTT broker for TLS "
-                     "encryption",
-                     std::string(""));
-    this->config_add(CONFIG_KEY_MQTT_KEYFILE,
-                     "Path to a file containing the PEM encoded unencrypted "
-                     "private key for this client",
-                     std::string(""));
     this->config_add(CONFIG_KEY_LOG_LEVEL,
                      "Log Level (d,i,w,e,c)",
                      std::string("i"));
@@ -84,6 +79,39 @@ class Config
   {
     general.add_options()(name, help);
     return CONFIG_STATUS_OK;
+  }
+
+  void add_mqtt_config_default(char **argv)
+  {
+    this->config_add(CONFIG_KEY_MQTT_HOST,
+                     "MQTT broker hostname or IP",
+                     std::string("localhost"));
+    this->config_add(CONFIG_KEY_MQTT_PORT, "MQTT broker port", 1883);
+    this->config_add(CONFIG_KEY_MQTT_CAFILE,
+                     "Path to file containing the PEM encoded CA certificate "
+                     "to connect to Mosquitto MQTT broker for TLS "
+                     "encryption",
+                     std::string(""));
+    this->config_add(CONFIG_KEY_MQTT_CERTFILE,
+                     "Path to file containing the PEM encoded client "
+                     "certificate to connect to Mosquitto "
+                     "MQTT broker for TLS "
+                     "encryption",
+                     std::string(""));
+    this->config_add(CONFIG_KEY_MQTT_KEYFILE,
+                     "Path to a file containing the PEM encoded unencrypted "
+                     "private key for this client",
+                     std::string(""));
+
+    char mqtt_client_id[64];
+    snprintf(mqtt_client_id,
+             sizeof(mqtt_client_id),
+             "%s_%i",
+             basename(argv[0]),
+             getpid());
+    this->config_add(CONFIG_KEY_MQTT_CLIENT_ID,
+                     "Set the MQTT client ID of the application.",
+                     std::string(mqtt_client_id));
   }
 
   /**
@@ -197,12 +225,27 @@ class Config
     cmdline.add_options()
       ("conf",
         po::value<std::string>()->default_value(DEFAULT_CONFIG_PATH),
-        "Config file in YAML format")
+        "Config file in YAML format. UIC_CONF env variable can be set to override the default config file path")
       ("help", "Print this help message and quit")
       ("dump-config", "Dumps the current configuration on a YAML config file format that can be passed to --conf option")
       ("version", "Print version information and quit");
+
+    // MQTT Default Config
+    add_mqtt_config_default(argv);
+
     // clang-format on
     cmdline.add(general);
+
+    store(
+      po::parse_environment(cmdline,
+                            boost::function1<std::string, std::string>(mapper)),
+      vm);
+
+    if (vm["conf"].as<std::string>().length() == 0) {
+      std::cout << "Empty UIC_CONF env found. Consider unsetting "
+                   "the env variable\n";
+    }
+
     std::string exe_file(argv[0]);
     try {
       // Parse the command line arguments
@@ -219,6 +262,8 @@ class Config
       } else if (vm.count("dump-config")) {
         dump_requested = true;
       } else if (vm.count("conf")) {
+        std::cout << "Using confg file: " << vm["conf"].as<std::string>()
+                  << std::endl;
         const std::string config_file(vm["conf"].as<std::string>());
         std::ifstream istrm(config_file);
         if (istrm) {

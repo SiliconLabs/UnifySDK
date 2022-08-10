@@ -47,6 +47,9 @@
 
 #include "zwave_command_class_version_types.h"
 
+// The maximum number of transports that can be registered.
+#define NUMBER_OF_TRANSPORTS 7
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -63,12 +66,14 @@ typedef struct zwave_controller_transport {
    * (first frame byte).
    *
    * Recommended priorities:
-   * - 1 Z-Wave API, lowest layer
-   * - 2 Transport Service
-   * - 3 Security 2
-   * - 4 Security 0
-   * - 5 CRC 16
-   * - 6 Multi Channel
+   * - 0 Z-Wave API, lowest layer
+   * - 1 Transport Service
+   * - 2 Security 2
+   * - 3 Security 0
+   * - 4 CRC 16
+   * - 5 Multi Channel
+   * - 6 Multicast follow ups sessions
+   *
    *
    */
   uint32_t priority;
@@ -144,6 +149,13 @@ typedef struct zwave_controller_transport {
     uint16_t frame_length);
   /* data */
 } zwave_controller_transport_t;
+
+/**
+ * @brief Initialize the Z-Wave Controller transport component
+ *
+ * @return sl_status_t
+ */
+sl_status_t zwave_controller_transport_init();
 
 /**
  * @brief Must be called to register a transport.

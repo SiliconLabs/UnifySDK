@@ -25,8 +25,7 @@ static zwave_controller_connection_info_t connection = {};
 static zwave_keyset_t dummy_keyset                   = 0xbc;
 
 /// Setup the test suite (called once before all test_xxx functions are called)
-void suiteSetUp()
-{}
+void suiteSetUp() {}
 /// Teardown the test suite (called once after all test_xxx functions are called)
 int suiteTearDown(int num_failures)
 {
@@ -124,6 +123,27 @@ void test_zwave_security_validation_is_security_valid_for_support()
   TEST_ASSERT_TRUE(
     zwave_security_validation_is_security_valid_for_support(minimal_scheme,
                                                             &connection));
+  // Not highest key: (zpc_scheme != connection.encapsulation)
+  // and minimal scheme == NONE, node request on its own highest key
+  minimal_scheme = ZWAVE_CONTROLLER_ENCAPSULATION_NONE;
+  zpc_scheme     = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS;
+  connection.encapsulation
+    = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_AUTHENTICATED;
+  connection.remote.node_id = 25;
+  zpc_highest_security_class_ExpectAndReturn(zpc_scheme);
+  /// TODO: UIC-1102 Wait for the 2021D spec release to be in force for cert to re-activate this.
+  //zwave_controller_get_highest_encapsulation_ExpectAndReturn(
+  //  dummy_keyset,
+  //  connection.encapsulation);
+  zwave_controller_storage_get_node_granted_keys_ExpectAndReturn(
+    connection.remote.node_id,
+    NULL,
+    SL_STATUS_FAIL);
+  zwave_controller_storage_get_node_granted_keys_IgnoreArg_keys();
+  TEST_ASSERT_FALSE(
+    zwave_security_validation_is_security_valid_for_support(minimal_scheme,
+                                                            &connection));
+
 }
 
 void test_zwave_security_validation_is_security_valid_for_control()
@@ -149,7 +169,8 @@ void test_zwave_security_validation_is_security_valid_for_control()
     NULL,
     SL_STATUS_OK);
   zwave_controller_storage_get_node_granted_keys_IgnoreArg_keys();
-  zwave_controller_storage_get_node_granted_keys_ReturnThruPtr_keys(&dummy_keyset);
+  zwave_controller_storage_get_node_granted_keys_ReturnThruPtr_keys(
+    &dummy_keyset);
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
     dummy_keyset,
     connection.encapsulation);
@@ -167,13 +188,33 @@ void test_zwave_security_validation_is_security_valid_for_control()
     NULL,
     SL_STATUS_OK);
   zwave_controller_storage_get_node_granted_keys_IgnoreArg_keys();
-  zwave_controller_storage_get_node_granted_keys_ReturnThruPtr_keys(&dummy_keyset);
+  zwave_controller_storage_get_node_granted_keys_ReturnThruPtr_keys(
+    &dummy_keyset);
+  zwave_controller_get_highest_encapsulation_ExpectAndReturn(
+    dummy_keyset,
+    ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_AUTHENTICATED);
   zwave_controller_get_highest_encapsulation_ExpectAndReturn(
     dummy_keyset,
     ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_AUTHENTICATED);
 
   TEST_ASSERT_FALSE(
     zwave_security_validation_is_security_valid_for_control(&connection));
+
+  // S2, not using its highest key:
+  connection.encapsulation = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_ACCESS;
+  zwave_controller_storage_is_node_s2_capable_ExpectAndReturn(
+    connection.remote.node_id,
+    true);
+  zwave_controller_storage_get_node_granted_keys_ExpectAndReturn(
+    connection.remote.node_id,
+    NULL,
+    SL_STATUS_FAIL);
+  zwave_controller_storage_get_node_granted_keys_IgnoreArg_keys();
+  zwave_controller_storage_get_node_granted_keys_ReturnThruPtr_keys(
+    &dummy_keyset);
+  TEST_ASSERT_TRUE(
+    zwave_security_validation_is_security_valid_for_control(&connection));
+
 }
 
 void test_zwave_security_validation_is_s2_nif_downgrade_attack_detected()

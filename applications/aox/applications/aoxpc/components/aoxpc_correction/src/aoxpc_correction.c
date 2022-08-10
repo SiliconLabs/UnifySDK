@@ -49,7 +49,7 @@ static sl_status_t
                             SphericalCoordinates deviation,
                             int32_t sequence)
 {
-  aoa_correction_t correction;
+  aoa_angle_t correction;
   bd_addr tag_addr;
   uint8_t tag_addr_type;
   aoa_db_entry_t *tag = NULL;
@@ -86,12 +86,12 @@ static sl_status_t
   }
 
   // Fill up internal correction structure.
-  correction.direction.azimuth   = direction.Azimuth;
-  correction.direction.elevation = direction.Elevation;
-  correction.direction.distance  = direction.Distance;
-  correction.deviation.azimuth   = deviation.Azimuth;
-  correction.deviation.elevation = deviation.Elevation;
-  correction.deviation.distance  = deviation.Distance;
+  correction.azimuth   = direction.Azimuth;
+  correction.elevation = direction.Elevation;
+  correction.distance  = direction.Distance;
+  correction.azimuth_stdev   = deviation.Azimuth;
+  correction.elevation_stdev = deviation.Elevation;
+  correction.distance_stdev  = deviation.Distance;
   correction.sequence = sequence;
 
   if (aoa_sequence_compare(tag->sequence, correction.sequence)

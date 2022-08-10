@@ -16,7 +16,6 @@ import { NavbarItems } from './components/navbar/navbar-items';
 import Groups from './pages/groups/groups';
 import OTA from './pages/ota/ota';
 import { Image } from "./pages/ota/ota-types";
-import * as IoIcons from 'react-icons/io';
 import RFTelemetryList from './pages/rf-telemetry/rf-telemetry-list/rf-telemetry-list';
 import RFTelemetry from './pages/rf-telemetry/rf-telemetry/rf-telemetry';
 import UPTI from './pages/upti/upti-list/upti-list';
@@ -24,6 +23,11 @@ import UPTITrace from './pages/upti/upti-trace/upti-trace';
 import Locators from './pages/locators/locators';
 import ConfigurationParamsList from './pages/configuration-params/configuration-params-list/configuration-params-list';
 import ConfigurationParams from './pages/configuration-params/configuration-params/configuration-params';
+import SystemMetricsList from './pages/system-metrics/system-metrics-list/system-metrics-list';
+import SystemMetrics from './pages/system-metrics/system-metrics/system-metrics';
+import SceneList from './pages/scenes/scene-list/scene-list';
+import Scene from './pages/scenes/scene/scene';
+import Binding from './pages/binding/binding';
 
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
@@ -40,7 +44,9 @@ class App extends Component<{}, AppState> {
       GroupList: [],
       SmartStartList: [],
       OTAImageList: ([] as Image[]),
-      UPTI: { List: [], Trace: {} }
+      UPTI: { List: [], Trace: {} },
+      SystemMetrics: {},
+      SceneList: {}
     }
     this.changeHeader = React.createRef();
     this.changeNodes = React.createRef();
@@ -49,8 +55,11 @@ class App extends Component<{}, AppState> {
     this.changeOTA = React.createRef();
     this.changeSmartStart = React.createRef();
     this.changeClusters = React.createRef();
+    this.changeConfParams = React.createRef();
     this.changeUPTI = React.createRef();
     this.changeUPTITrace = React.createRef();
+    this.changeScenes = React.createRef();
+    this.changeBinding = React.createRef();
     setTimeout(() => this.initWebSocket(), 100);
     this.handleIsConnectedChange = this.handleIsConnectedChange.bind(this);
   }
@@ -62,8 +71,11 @@ class App extends Component<{}, AppState> {
   changeOTA: any;
   changeSmartStart: any;
   changeClusters: any;
+  changeConfParams: any;
   changeUPTI: any;
   changeUPTITrace: any;
+  changeScenes: any;
+  changeBinding: any;
   attemptsCount = 0;
 
   resetState() {
@@ -107,6 +119,12 @@ class App extends Component<{}, AppState> {
       this.changeOTA.current.updateNodeList(list);
     if (this.changeClusters.current)
       this.changeClusters.current.updateState(list);
+    if (this.changeConfParams.current)
+      this.changeConfParams.current.updateState(list);
+    if (this.changeBinding.current)
+      this.changeBinding.current.updateState(list);
+    if (this.changeScenes.current?.changeClusters?.current)
+      this.changeScenes.current.changeClusters.current.updateState(list);
   }
 
   handleSmartStartChange(list: any) {
@@ -155,6 +173,14 @@ class App extends Component<{}, AppState> {
       this.changeOTA.current.updateImageList([...list]);
   }
 
+  handleSystemMetrics(list: any) {
+    this.setState({ SystemMetrics: list });
+  }
+
+  handleScenesChange(list: any) {
+    this.setState({ SceneList: list });
+  }
+
   getClusterProps(clusterType: string) {
     return {
       SocketServer: this.state.SocketServer,
@@ -184,8 +210,8 @@ class App extends Component<{}, AppState> {
     localStorage.unify = JSON.stringify(storage);
   }
 
-  toggleSideBar = () => {
-    this.setState({ IsSideBarCollapsed: !this.state.IsSideBarCollapsed })
+  toggleSideBar = (isCollapsed?: boolean) => {
+    this.setState({ IsSideBarCollapsed: isCollapsed === undefined ? !this.state.IsSideBarCollapsed : isCollapsed })
   }
 
   render() {
@@ -203,35 +229,35 @@ class App extends Component<{}, AppState> {
         <Header ref={this.changeHeader} {...baseProps} handleIsConnectedChange={this.handleIsConnectedChange} />
         <BrowserRouter>
           <div className={`split-container ${this.state.IsSideBarCollapsed ? "side-bar-collapsed" : ""}`}>
-            <div className="split1">
-              <Navbar ToggleSideBar={() => this.toggleSideBar()} IsSideBarCollapsed={this.state.IsSideBarCollapsed} />
-            </div>
-            <div className="split2">
-              <span className="icon side-bar-collapse" onClick={this.toggleSideBar} >
-                <IoIcons.IoIosArrowBack />
-              </span>
+            <Navbar ToggleSideBar={this.toggleSideBar} IsSideBarCollapsed={this.state.IsSideBarCollapsed} />
+            <div className="split2" onClick={() => { this.toggleSideBar(true); this.changeHeader.current?.toggleCollapse(true) }}>
               <div className="col-sm-12 no-padding-l">
                 <Switch>
-                  <Route path='/nodes' exact render={() => <Nodes ref={this.changeNodes} {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/groups' exact render={() => <Groups ref={this.changeGroups}  {...baseProps} NodeList={this.state.NodeList} GroupList={this.state.GroupList} />} />
                   <Route path='/smartstart' exact render={() => <SmartStart ref={this.changeSmartStart} {...baseProps} SmartStartList={this.state.SmartStartList} />} />
+                  <Route path='/scenes' exact render={() => <SceneList ref={this.changeScenes} {...baseProps} SceneList={this.state.SceneList} GroupList={this.state.GroupList} NodeList={this.state.NodeList} />} />
+                  <Route path='/scenes/:gid/:sid' exact render={(pr) => <Scene ref={this.changeScenes} {...baseProps} SceneList={this.state.SceneList} GroupID={pr.match.params.gid} SceneID={pr.match.params.sid} GroupList={this.state.GroupList} />} />
                   <Route path='/upti' exact render={() => <UPTI ref={this.changeUPTI}  {...baseProps} UPTI={this.state.UPTI} />} />
                   <Route path='/upti/:serial' render={(pr) => <UPTITrace ref={this.changeUPTITrace}
                     IsConnected={this.state.IsConnected || false} UPTI={this.state.UPTI} SerialNumber={pr.match.params.serial} SocketServer={this.state.SocketServer} />} />
                   <Route path='/rftelemetry' exact render={() => <RFTelemetryList ref={this.changeTelemetry}  {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/rftelemetry/:unid/:dst' exact render={(pr) => <RFTelemetry IsConnected={this.state.IsConnected || false} NodeList={this.state.NodeList} Unid={pr.match.params.unid} DestinationUNID={pr.match.params.dst} SocketServer={this.state.SocketServer} />} />
                   <Redirect from="/rftelemetry/:unid/" exact to="/rftelemetry/" />
+                  <Route path='/systemmetrics' exact render={() => <SystemMetricsList  {...baseProps} SystemMetricsList={this.state.SystemMetrics} />} />
+                  <Route path='/systemmetrics/:mid' exact render={(pr) => <SystemMetrics IsConnected={this.state.IsConnected || false} SystemMetricsList={this.state.SystemMetrics} Mid={pr.match.params.mid} SocketServer={this.state.SocketServer} />} />
                   <Route path='/locators' exact render={() => <Locators {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/ota' exact render={() => <OTA ref={this.changeOTA}  {...baseProps} NodeList={this.state.NodeList} />} />
-                  <Route path='/configurationparameters' exact render={() => <ConfigurationParamsList {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Route path='/configurationparameters' exact render={() => <ConfigurationParamsList ref={this.changeConfParams} {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/configurationparameters/:unid/:ep/:paramId' exact render={(pr) => <ConfigurationParams IsConnected={this.state.IsConnected || false} NodeList={this.state.NodeList} Unid={pr.match.params.unid} EndPoint={pr.match.params.ep} ParamId={pr.match.params.paramId} SocketServer={this.state.SocketServer} />} />
                   <Redirect from="/configurationparameters/:unid/:ep/" exact to="/configurationparameters/" />
                   <Redirect from="/configurationparameters/:unid/" exact to="/configurationparameters/" />
+                  <Route path='/binding' exact render={() => <Binding ref={this.changeBinding} {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Route path='/nodes' exact render={() => <Nodes ref={this.changeNodes} {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Redirect from="/" exact to="/nodes" />
                   {Object.keys(ClusterTypes).map((type, index) =>
                     <Route key={index} path={NavbarItems.find(i => i.name === type)?.path} render={() =>
-                      <BaseClusters key={index} ref={this.changeClusters} {...this.getClusterProps(type)} />} />
+                      <BaseClusters key={index} ref={this.changeClusters} {...this.getClusterProps(type)} ShowTitle={true} />} />
                   )}
-                  <Redirect from="/" to="/nodes" />
                 </Switch>
               </div>
             </div>
@@ -294,6 +320,18 @@ class App extends Component<{}, AppState> {
       return;
     }
     switch (mes.type) {
+      case "nodes-list":
+        this.handleNodesChange(mes.data);
+        break;
+      case "protocol-controller-state":
+        this.changeNodes.current && this.changeNodes.current.handleProtocolControllerState(mes.data);
+        break;
+      case "error":
+        toast(mes.data, { type: "error" });
+        break;
+      case "state":
+        this.changeNodes.current && this.changeNodes.current.updateNodeState(mes.data);
+        break;
       case "connect":
         this.handleIsConnectedChange(mes.data);
         if (!mes.data)
@@ -303,12 +341,6 @@ class App extends Component<{}, AppState> {
         this.changeHeader.current.changeConnect.current.updateAttr("CAName", mes.data?.CA);
         this.changeHeader.current.changeConnect.current.updateAttr("ClientKeyName", mes.data?.ClientKey);
         this.changeHeader.current.changeConnect.current.updateAttr("ClientCertificateName", mes.data?.ClientCertificate);
-        break;
-      case "error":
-        toast(mes.data, { type: "error" });
-        break;
-      case "state":
-        this.changeNodes.current && this.changeNodes.current.updateNodeState(mes.data);
         break;
       case "init-state":
         this.changeHeader.current?.changeConnect.current.updateAttr("Port", mes.data.Port);
@@ -320,12 +352,11 @@ class App extends Component<{}, AppState> {
         this.handleOTAChange(mes.data.OTA);
         this.handleUPTIChange(mes.data.UPTI.List);
         this.handleUPTITraceInit(mes.data.UPTI.Trace);
+        this.handleSystemMetrics(mes.data.SystemMetrics)
+        this.handleScenesChange(mes.data.Scenes);
         break;
       case "smart-start-list":
         this.handleSmartStartChange(mes.data);
-        break;
-      case "nodes-list":
-        this.handleNodesChange(mes.data);
         break;
       case "groups":
         this.handleGroupsChange(mes.data);
@@ -333,14 +364,17 @@ class App extends Component<{}, AppState> {
       case "ota":
         this.handleOTAChange(mes.data);
         break;
-      case "protocol-controller-state":
-        this.changeNodes.current && this.changeNodes.current.handleProtocolControllerState(mes.data);
-        break;
       case "upti-trace":
         this.handleUPTITraceChange(mes.data);
         break;
       case "upti-list":
         this.handleUPTIChange(mes.data);
+        break;
+      case "system-metrics":
+        this.handleSystemMetrics(mes.data);
+        break;
+      case "scenes-list":
+        this.handleScenesChange(mes.data);
         break;
     }
   }

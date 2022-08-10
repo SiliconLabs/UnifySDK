@@ -3,8 +3,8 @@ import './connect.css';
 import Button from 'react-bootstrap/Button';
 import { ConnectionState, ConnectionProps } from './connect-types';
 import { Form } from 'react-bootstrap';
-import { Tooltip } from '@material-ui/core';
 import ClearMqttDlg from '../clear-mqtt-dlg/clear-mqtt-dlg';
+import { Tooltip } from '@mui/material';
 
 class Connect extends React.Component<ConnectionProps, ConnectionState> {
     constructor(props: ConnectionProps) {

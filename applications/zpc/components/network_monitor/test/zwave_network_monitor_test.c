@@ -35,15 +35,21 @@
 #include "zwave_controller_callbacks_mock.h"
 #include "zwave_controller_storage_mock.h"
 #include "zwave_network_management_mock.h"
+#include "zwave_command_classes_fixt_mock.h"
+#include "zcl_cluster_servers_mock.h"
 #include "zpc_config_mock.h"
-#include "zwapi_protocol_basis_mock.h"
 #include "uic_mqtt_mock.h"
+#include "zwave_command_class_association_helper_mock.h"
 
 // Test helpers
 #include "unity.h"
 #include "zpc_attribute_store_test_helper.h"
 #include "contiki_test_helper.h"
 
+// Generic includes
+#include <string.h>
+
+static zwave_nodemask_t current_node_list                          = {};
 const zwave_controller_callbacks_t *zwave_callbacks                = NULL;
 const zwave_controller_storage_callback_t *zwave_storage_callbacks = NULL;
 
@@ -91,13 +97,13 @@ void setUp()
   zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);
   zwave_network_management_get_granted_keys_IgnoreAndReturn(0);
 
-  // It will try to query the Z-Wave API for the node list.
-  // Just pretend it failed, so we do not need to mock a bunch of Z-Wave API calls
-  zwapi_get_full_node_list_IgnoreAndReturn(SL_STATUS_FAIL);
+  // By default return nothing if asked for the node list.
+  zwave_network_management_get_network_node_list_Ignore();
 
   // Initialize all variables
   zwave_callbacks         = NULL;
   zwave_storage_callbacks = NULL;
+  memset(&current_node_list, 0, sizeof(zwave_nodemask_t));
 
   // Stub setup
   zwave_controller_register_callbacks_Stub(
@@ -557,15 +563,15 @@ void test_network_monitor_on_node_deleted()
   TEST_ASSERT_NOT_NULL(zwave_callbacks);
   TEST_ASSERT_NOT_NULL(zwave_callbacks->on_node_deleted);
 
+  remove_desired_node_id_from_all_associations_in_network_Expect(0xAA);
   // Nothing bad should happen with non-existing nodes:
   zwave_callbacks->on_node_deleted(0);
   zwave_callbacks->on_node_deleted(0xAA);
-  uic_mqtt_unretain_Expect("ucl/by-unid/zw-CAFECAFE-00AA");
   contiki_test_helper_run(0);
 
+  remove_desired_node_id_from_all_associations_in_network_Expect(node_id);
   // Now delete the supporting node:
   TEST_ASSERT_TRUE(attribute_store_node_exists(node_id_node));
-  uic_mqtt_unretain_Expect("ucl/by-unid/zw-CAFECAFE-0004");
   zwave_callbacks->on_node_deleted(node_id);
   contiki_test_helper_run(0);
   TEST_ASSERT_FALSE(attribute_store_node_exists(node_id_node));
@@ -741,4 +747,385 @@ void test_network_monitor_on_node_added_with_dsk()
                                &received_protocol,
                                sizeof(received_protocol));
   TEST_ASSERT_EQUAL(inclusion_protocol, received_protocol);
+}
+
+void test_network_monitor_init_in_network()
+{
+  zwave_network_management_get_network_node_list_StopIgnore();
+  // Lets say nodeID 4,38,1742 are in our network:
+  ZW_ADD_NODE_TO_MASK(1, current_node_list);  // This is the ZPC
+  ZW_ADD_NODE_TO_MASK(4, current_node_list);
+  ZW_ADD_NODE_TO_MASK(38, current_node_list);
+  ZW_ADD_NODE_TO_MASK(1742, current_node_list);
+  zwave_network_management_get_network_node_list_Expect(NULL);
+  zwave_network_management_get_network_node_list_IgnoreArg_node_list();
+  zwave_network_management_get_network_node_list_ReturnMemThruPtr_node_list(
+    current_node_list,
+    sizeof(current_node_list));
+
+  network_state_monitor_init();
+  contiki_test_helper_run(1);
+
+  // Check that that attribute store looks at it should:
+  zwave_node_id_t test_node_id = 4;
+  attribute_store_node_t network_node
+    = attribute_store_get_node_child_by_value(home_id_node,
+                                              ATTRIBUTE_NODE_ID,
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&test_node_id,
+                                              sizeof(test_node_id),
+                                              0);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, network_node);
+
+  test_node_id = 38;
+  network_node
+    = attribute_store_get_node_child_by_value(home_id_node,
+                                              ATTRIBUTE_NODE_ID,
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&test_node_id,
+                                              sizeof(test_node_id),
+                                              0);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, network_node);
+
+  test_node_id = 1742;
+  network_node
+    = attribute_store_get_node_child_by_value(home_id_node,
+                                              ATTRIBUTE_NODE_ID,
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&test_node_id,
+                                              sizeof(test_node_id),
+                                              0);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, network_node);
+}
+
+void test_network_monitor_pause_nl_nodes_at_init()
+{
+  // Make NodeID 4 an NL node.
+  uint8_t protocol_flag = 0;
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_ZWAVE_PROTOCOL_LISTENING,
+                                     &protocol_flag,
+                                     sizeof(protocol_flag));
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_ZWAVE_OPTIONAL_PROTOCOL,
+                                     &protocol_flag,
+                                     sizeof(protocol_flag));
+
+  network_state_monitor_init();
+  contiki_test_helper_run(1);
+  TEST_ASSERT_TRUE(is_node_or_parent_paused(node_id_node));
+  TEST_ASSERT_FALSE(is_node_or_parent_paused(zpc_node_id_node));
+}
+
+void test_network_monitor_init_with_empty_attribute_store()
+{
+  zwave_network_management_get_network_node_list_StopIgnore();
+  ZW_ADD_NODE_TO_MASK(1, current_node_list);  // This is the ZPC
+  zwave_network_management_get_network_node_list_Expect(NULL);
+  zwave_network_management_get_network_node_list_IgnoreArg_node_list();
+  zwave_network_management_get_network_node_list_ReturnMemThruPtr_node_list(
+    current_node_list,
+    sizeof(current_node_list));
+  attribute_store_delete_node(attribute_store_get_root());
+  network_state_monitor_init();
+  contiki_test_helper_run(1);
+
+  attribute_store_node_t new_home_id_node
+    = attribute_store_get_first_child_by_type(attribute_store_get_root(),
+                                              ATTRIBUTE_HOME_ID);
+
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_home_id_node);
+
+  attribute_store_node_t new_node_id_node
+    = attribute_store_get_first_child_by_type(new_home_id_node,
+                                              ATTRIBUTE_NODE_ID);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_id_node);
+
+  zwave_node_id_t new_node_id = 0;
+  attribute_store_get_reported(new_node_id_node,
+                               &new_node_id,
+                               sizeof(new_node_id));
+  TEST_ASSERT_EQUAL(1, new_node_id);
+}
+
+void test_teardown_process_exit()
+{
+  // Not much should happen here.
+  process_exit(&network_monitor_process);
+  contiki_test_helper_run(1);
+}
+
+void test_double_init()
+{
+  zwave_network_management_get_network_node_list_StopIgnore();
+  ZW_ADD_NODE_TO_MASK(1, current_node_list);  // This is the ZPC
+  zwave_network_management_get_network_node_list_Expect(NULL);
+  zwave_network_management_get_network_node_list_IgnoreArg_node_list();
+  zwave_network_management_get_network_node_list_ReturnMemThruPtr_node_list(
+    current_node_list,
+    sizeof(current_node_list));
+  zwave_network_management_get_network_node_list_Expect(NULL);
+  zwave_network_management_get_network_node_list_IgnoreArg_node_list();
+  zwave_network_management_get_network_node_list_ReturnMemThruPtr_node_list(
+    current_node_list,
+    sizeof(current_node_list));
+  network_state_monitor_init();
+  network_state_monitor_init();
+  contiki_test_helper_run(1);
+
+  attribute_store_node_t new_home_id_node
+    = attribute_store_get_first_child_by_type(attribute_store_get_root(),
+                                              ATTRIBUTE_HOME_ID);
+
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_home_id_node);
+
+  attribute_store_node_t new_node_id_node
+    = attribute_store_get_first_child_by_type(new_home_id_node,
+                                              ATTRIBUTE_NODE_ID);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_id_node);
+
+  zwave_node_id_t new_node_id = 0;
+  attribute_store_get_reported(new_node_id_node,
+                               &new_node_id,
+                               sizeof(new_node_id));
+  TEST_ASSERT_EQUAL(1, new_node_id);
+}
+
+void test_on_node_id_added()
+{
+  TEST_ASSERT_NOT_NULL(zwave_callbacks->on_node_id_assigned);
+  zwave_node_id_t new_zwave_node_id = 0x24;
+  zwave_callbacks->on_node_id_assigned(new_zwave_node_id, true, PROTOCOL_ZWAVE);
+  contiki_test_helper_run(1);
+
+  // Now we expect that the Inclusion Protocol is saved in the attribute store.
+  attribute_store_node_t new_node_id_node
+    = attribute_store_get_node_child_by_value(home_id_node,
+                                              ATTRIBUTE_NODE_ID,
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&new_zwave_node_id,
+                                              sizeof(new_zwave_node_id),
+                                              0);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, new_node_id_node);
+
+  attribute_store_node_t inclusion_protocol_node
+    = attribute_store_get_first_child_by_type(
+      new_node_id_node,
+      ATTRIBUTE_ZWAVE_INCLUSION_PROTOCOL);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, inclusion_protocol_node);
+  zwave_protocol_t stored_protocol = PROTOCOL_UNKNOWN;
+  attribute_store_get_reported(inclusion_protocol_node,
+                               &stored_protocol,
+                               sizeof(stored_protocol));
+  TEST_ASSERT_EQUAL(PROTOCOL_ZWAVE, stored_protocol);
+}
+
+void test_on_nif_updated()
+{
+  // Create a NIF under NodeID 4, endpoint 0
+  attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
+  contiki_test_helper_run(0);
+
+  // Now the node should be marked as interviewing:
+  attribute_store_node_t network_status_node
+    = attribute_store_get_first_child_by_type(node_id_node,
+                                              ATTRIBUTE_NETWORK_STATUS);
+
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_LAST;
+  attribute_store_get_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+  TEST_ASSERT_EQUAL(NODE_STATE_TOPIC_INTERVIEWING, network_status);
+
+  // At some point, the interview is over. In this case, the network
+  // status will be moved to online functional.
+  process_post(&network_monitor_process,
+               4,  //NODE_INTERVIEW_DONE_EVENT,
+               (void *)(intptr_t)node_id_node);
+  contiki_test_helper_run(0);
+  network_status = NODE_STATE_TOPIC_LAST;
+  attribute_store_get_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+  TEST_ASSERT_EQUAL(NODE_STATE_TOPIC_STATE_INCLUDED, network_status);
+}
+
+void test_on_nif_added_when_offline()
+{
+  // Set node 4 offline.
+  node_state_topic_state_t network_status = NODE_STATE_TOPIC_STATE_OFFLINE;
+  attribute_store_set_child_reported(node_id_node,
+                                     ATTRIBUTE_NETWORK_STATUS,
+                                     &network_status,
+                                     sizeof(network_status));
+  attribute_store_node_t network_status_node
+    = attribute_store_get_first_child_by_type(node_id_node,
+                                              ATTRIBUTE_NETWORK_STATUS);
+
+  // Create a NIF under NodeID 4, endpoint 0
+  attribute_store_node_t nif_node
+    = attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
+  contiki_test_helper_run(0);
+
+  // Now the node should be marked as offline/interviewing:
+  attribute_store_get_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+  TEST_ASSERT_EQUAL(NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL, network_status);
+
+  // Set the NIF to a value. It should not affect anything.
+  attribute_store_set_reported(nif_node,
+                               &network_status,
+                               sizeof(network_status));
+  attribute_store_get_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+  TEST_ASSERT_EQUAL(NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL, network_status);
+
+  // Delete the NIF to a value. It should not affect anything.
+  attribute_store_delete_node(nif_node);
+  attribute_store_get_reported(network_status_node,
+                               &network_status,
+                               sizeof(network_status));
+  TEST_ASSERT_EQUAL(NODE_STATE_TOPIC_STATE_INTERVIEW_FAIL, network_status);
+}
+
+void test_storage_callbacks_get_granted_keys()
+{
+  TEST_ASSERT_NOT_NULL(zwave_storage_callbacks->get_node_granted_keys);
+
+  // Let's set no keys for the ZPC, ask for the keys
+  zwave_keyset_t keys = 0xFF;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    zwave_storage_callbacks->get_node_granted_keys(zpc_node_id, &keys));
+
+  attribute_store_set_child_reported(zpc_node_id_node,
+                                     ATTRIBUTE_GRANTED_SECURITY_KEYS,
+                                     &keys,
+                                     sizeof(keys));
+  keys = 0;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    zwave_storage_callbacks->get_node_granted_keys(zpc_node_id, &keys));
+
+  TEST_ASSERT_EQUAL(0xFF, keys);
+}
+
+void test_storage_callbacks_get_zwave_protocol()
+{
+  TEST_ASSERT_NOT_NULL(zwave_storage_callbacks->get_inclusion_protocol);
+
+  // Let's try with the ZPC NodeID
+  TEST_ASSERT_EQUAL(
+    PROTOCOL_UNKNOWN,
+    zwave_storage_callbacks->get_inclusion_protocol(zpc_node_id));
+
+  zwave_protocol_t inclusion_protocol = PROTOCOL_ZWAVE_LONG_RANGE;
+  attribute_store_set_child_reported(zpc_node_id_node,
+                                     ATTRIBUTE_ZWAVE_INCLUSION_PROTOCOL,
+                                     &inclusion_protocol,
+                                     sizeof(inclusion_protocol));
+  TEST_ASSERT_EQUAL(
+    PROTOCOL_ZWAVE_LONG_RANGE,
+    zwave_storage_callbacks->get_inclusion_protocol(zpc_node_id));
+}
+
+void test_storage_callbacks_set_node_as_s2_capable()
+{
+  TEST_ASSERT_NOT_NULL(zwave_storage_callbacks->set_node_as_s2_capable);
+  TEST_ASSERT_NOT_NULL(zwave_storage_callbacks->is_node_S2_capable);
+
+  TEST_ASSERT_FALSE(zwave_storage_callbacks->is_node_S2_capable(zpc_node_id));
+  zwave_storage_callbacks->set_node_as_s2_capable(zpc_node_id);
+  TEST_ASSERT_TRUE(zwave_storage_callbacks->is_node_S2_capable(zpc_node_id));
+
+  TEST_ASSERT_FALSE(zwave_storage_callbacks->is_node_S2_capable(99));
+  zwave_storage_callbacks->set_node_as_s2_capable(99);
+  TEST_ASSERT_FALSE(zwave_storage_callbacks->is_node_S2_capable(99));
+}
+
+void test_on_network_address_update()
+{
+  zwave_network_management_get_network_node_list_StopIgnore();
+
+  zwave_network_management_get_network_node_list_Expect(NULL);
+  zwave_network_management_get_network_node_list_IgnoreArg_node_list();
+  zwave_command_classes_init_ExpectAndReturn(SL_STATUS_OK);
+  zcl_cluster_servers_init_ExpectAndReturn(SL_STATUS_OK);
+
+  TEST_ASSERT_NOT_NULL(zwave_callbacks->on_network_address_update);
+  zwave_callbacks->on_network_address_update(0x12121212, 1);
+}
+
+void test_on_network_ready()
+{
+  zwave_network_management_get_network_node_list_StopIgnore();
+  // Lets say nodeID 4,38,1742 are in our network:
+  ZW_ADD_NODE_TO_MASK(1, current_node_list);  // This is the ZPC
+  ZW_ADD_NODE_TO_MASK(4, current_node_list);
+  ZW_ADD_NODE_TO_MASK(38, current_node_list);
+  ZW_ADD_NODE_TO_MASK(1742, current_node_list);
+  zwave_network_management_get_network_node_list_Expect(NULL);
+  zwave_network_management_get_network_node_list_IgnoreArg_node_list();
+  zwave_network_management_get_network_node_list_ReturnMemThruPtr_node_list(
+    current_node_list,
+    sizeof(current_node_list));
+
+  TEST_ASSERT_NOT_NULL(zwave_callbacks->on_new_network_entered);
+  zwave_callbacks->on_new_network_entered(home_id, zpc_node_id, 2, 3);
+  contiki_test_helper_run(1);
+
+  // Go around and check our attribute store.
+  attribute_store_node_t zpc_granted_keys_node
+    = attribute_store_get_first_child_by_type(zpc_node_id_node,
+                                              ATTRIBUTE_GRANTED_SECURITY_KEYS);
+  attribute_store_log();
+  zwave_keyset_t zpc_keyset = 0;
+  attribute_store_get_reported(zpc_granted_keys_node,
+                               &zpc_keyset,
+                               sizeof(zpc_keyset));
+  TEST_ASSERT_EQUAL(2, zpc_keyset);
+
+  attribute_store_node_t zpc_kex_fail_node
+    = attribute_store_get_first_child_by_type(zpc_node_id_node,
+                                              ATTRIBUTE_KEX_FAIL_TYPE);
+  zwave_kex_fail_type_t zpc_kex_fail = 0;
+  attribute_store_get_reported(zpc_kex_fail_node,
+                               &zpc_kex_fail,
+                               sizeof(zpc_kex_fail));
+  TEST_ASSERT_EQUAL(3, zpc_kex_fail);
+
+  // Check on node 1742. it should have an Endpoint 0 and a NIF:
+  const zwave_node_id_t test_node_id = 1742;
+  attribute_store_node_t test_node_id_node
+    = attribute_store_get_node_child_by_value(home_id_node,
+                                              ATTRIBUTE_NODE_ID,
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&test_node_id,
+                                              sizeof(test_node_id),
+                                              0);
+
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node_id_node);
+  const zwave_endpoint_id_t test_endpoint_id = 0;
+  attribute_store_node_t test_endpoint_id_node
+    = attribute_store_get_node_child_by_value(test_node_id_node,
+                                              ATTRIBUTE_ENDPOINT_ID,
+                                              REPORTED_ATTRIBUTE,
+                                              (uint8_t *)&test_endpoint_id,
+                                              sizeof(test_endpoint_id),
+                                              0);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_endpoint_id_node);
+
+  attribute_store_node_t test_nif_node
+    = attribute_store_get_first_child_by_type(test_endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_NIF);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_nif_node);
+
+  // We expect 4 nodes under the HomeID:
+  TEST_ASSERT_EQUAL(4, attribute_store_get_node_child_count(home_id_node));
+
+  // We expect 6 nodes under a non-zpc NodeID:
+  // Network status, Endpoint 0, Granted Keys, protocol Listening, Optional protocol, inclusion protocol
+  TEST_ASSERT_EQUAL(6, attribute_store_get_node_child_count(test_node_id_node));
 }

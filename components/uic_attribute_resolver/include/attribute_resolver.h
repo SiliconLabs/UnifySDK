@@ -217,10 +217,22 @@ void attribute_resolver_set_resolution_give_up_listener(
  *
  * @param node Node to resolve again.
  *
- * @returns SL_STATUS_OK if the node will be retried. SL_STATUS_NOT_FAIL otherwise
+ * @returns SL_STATUS_OK if the node will be retried. SL_STATUS_NOT_FOUND otherwise
  */
 sl_status_t
   attribute_resolver_restart_set_resolution(attribute_store_node_t node);
+
+/**
+ * @brief Instructs the resolver to try to resolve a get rule that was pending
+ *
+ * This function will have no effect if the node is not in the pending gets.
+ *
+ * @param node Node to resolve again.
+ *
+ * @returns SL_STATUS_OK if the node will be retried. SL_STATUS_NOT_FOUND otherwise
+ */
+sl_status_t
+  attribute_resolver_restart_get_resolution(attribute_store_node_t node);
 
 /**
  * @brief returns the current configuration for the attribute

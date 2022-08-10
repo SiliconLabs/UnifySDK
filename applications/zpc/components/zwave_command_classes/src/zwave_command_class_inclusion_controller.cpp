@@ -34,7 +34,7 @@
 #include "attribute_store_defined_attribute_types.h"
 #include "attribute_resolver.h"
 #include "zwave_unid.h"
-#include "zwave_controller_command_class_indices.h"
+#include "zwave_command_class_indices.h"
 #include "sl_log.h"
 
 constexpr char LOG_TAG[] = "zwave_command_class_inclusion_controller";
@@ -119,13 +119,11 @@ static void zwave_command_class_inclusion_request_nif(zwave_node_id_t node_id)
     attribute_store_node_t node_id_node
       = attribute_store_network_helper_get_zwave_node_id_node(node_id);
     attribute_store_node_t endpoint_id_node
-      = attribute_store_get_node_child_by_type(node_id_node,
-                                               ATTRIBUTE_ENDPOINT_ID,
-                                               0);
+      = attribute_store_get_first_child_by_type(node_id_node,
+                                                ATTRIBUTE_ENDPOINT_ID);
     attribute_store_node_t nif_attribute
-      = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                               ATTRIBUTE_ZWAVE_NIF,
-                                               0);
+      = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                                ATTRIBUTE_ZWAVE_NIF);
     if (nif_attribute == ATTRIBUTE_STORE_INVALID_NODE) {
       attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
     }
@@ -227,20 +225,17 @@ static void zwave_command_class_inclusion_timer_on_node_add_received(void *user)
   attribute_store_node_t endpoint_id_node
     = attribute_store_network_helper_create_endpoint_node(unid, 0);
   attribute_store_node_t nif_attribute
-    = attribute_store_get_node_child_by_type(endpoint_id_node,
-                                             ATTRIBUTE_ZWAVE_NIF,
-                                             0);
+    = attribute_store_get_first_child_by_type(endpoint_id_node,
+                                              ATTRIBUTE_ZWAVE_NIF);
   if (nif_attribute == ATTRIBUTE_STORE_INVALID_NODE) {
     attribute_store_add_node(ATTRIBUTE_ZWAVE_NIF, endpoint_id_node);
   }
-  //Here we also need to create the ATTRIBUTE_GRANTED_SECURITY_KEYS
-  attribute_store_node_t granted_security_key_node = attribute_store_add_node(
-    ATTRIBUTE_GRANTED_SECURITY_KEYS,
-    attribute_store_get_node_parent(endpoint_id_node));
-  uint8_t granted_key_set = 0x00;
-  attribute_store_set_reported(granted_security_key_node,
-                               &granted_key_set,
-                               sizeof(uint8_t));
+  // Here we also need to create the ATTRIBUTE_GRANTED_SECURITY_KEYS
+  const attribute_store_type_t type = ATTRIBUTE_GRANTED_SECURITY_KEYS;
+  attribute_store_add_if_missing(
+    attribute_store_get_node_parent(endpoint_id_node),
+    &type,
+    1);
 }
 
 // A ctimer calback function taht will be called when requested nif is not received
@@ -406,9 +401,8 @@ static bool
     = attribute_store_network_helper_get_zwave_node_id_node(
       info->remote.node_id);
   attribute_store_node_t granted_keys_node
-    = attribute_store_get_node_child_by_type(node_id_node,
-                                             ATTRIBUTE_GRANTED_SECURITY_KEYS,
-                                             0);
+    = attribute_store_get_first_child_by_type(node_id_node,
+                                              ATTRIBUTE_GRANTED_SECURITY_KEYS);
   if (SL_STATUS_OK
       != attribute_store_get_reported(granted_keys_node,
                                       &remote_node_keys,
@@ -542,17 +536,17 @@ static sl_status_t zwave_command_class_inclusion_controller_support_handler(
         attribute_resolver_resume_node_resolution(node_id_node);
         attribute_resolver_set_resolution_listener(node_id_node,
                                                    node_id_resolusion_listener);
-        attribute_store_node_t granted_security_key_node
-          = attribute_store_add_node(ATTRIBUTE_GRANTED_SECURITY_KEYS,
-                                     node_id_node);
-        uint8_t granted_key_set = 0x00;
+
+        // Set the granted keys of the new node
+        zwave_keyset_t granted_key_set = 0x00;
         if (complete_frame->status == COMPLETE_STEP_OK) {
           granted_key_set
             = ZWAVE_CONTROLLER_S0_KEY;  // Here we are sure that the node is added with security 0
         }
-        attribute_store_set_reported(granted_security_key_node,
-                                     &granted_key_set,
-                                     sizeof(uint8_t));
+        attribute_store_set_child_reported(node_id_node,
+                                           ATTRIBUTE_GRANTED_SECURITY_KEYS,
+                                           &granted_key_set,
+                                           sizeof(granted_key_set));
         break;
       }
     }

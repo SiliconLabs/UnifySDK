@@ -60,21 +60,25 @@ zwave_tx_options_t tx_options_1 = {.number_of_responses = 0,
                                    .discard_timeout_ms  = 0,
                                    .qos_priority        = 0xFFFF,
                                    .fasttrack           = true,
-                                   .is_test_frame       = false,
-                                   .rf_power            = NORMAL_POWER,
-                                   .group_id            = 25,
-                                   .is_first_follow_up  = false,
-                                   .send_follow_ups     = false};
+                                   .send_follow_ups     = false,
+                                   .transport           = {
+                                               .group_id           = 25,
+                                               .is_first_follow_up = false,
+                                               .is_test_frame      = false,
+                                               .rf_power           = NORMAL_POWER,
+                                   }};
 
 zwave_tx_options_t tx_options_2 = {.number_of_responses = 1,
                                    .discard_timeout_ms  = 400,
                                    .qos_priority        = 20,
                                    .fasttrack           = false,
-                                   .is_test_frame       = false,
-                                   .rf_power            = NORMAL_POWER,
-                                   .group_id            = 36,
-                                   .is_first_follow_up  = false,
-                                   .send_follow_ups     = false};
+                                   .send_follow_ups     = false,
+                                   .transport           = {
+                                               .group_id           = 36,
+                                               .is_first_follow_up = false,
+                                               .is_test_frame      = false,
+                                               .rf_power           = NORMAL_POWER,
+                                   }};
 
 zwave_multicast_group_id_t group_id_1 = 39;
 

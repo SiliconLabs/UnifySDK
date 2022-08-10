@@ -1,20 +1,3 @@
-.nav-menu {
-    justify-content: center;
-    height: calc(100vh - 139px);
-    background: #f7f7f7;
-    border-right: 1px solid #ececec;
-    transition: height 0.3s;
-}
-
-.nav-menu-icon {
-    width: 18px;
-}
-
-.nav-menu-items {
-    width: 100%;
-    padding: 0;
-}
-
 .nav-text {
     padding: 0;
     height: 45px;
@@ -22,11 +5,6 @@
     border-bottom: 1px solid #ececec;
     transition: width 0.3s;
     overflow: hidden;
-}
-
-.side-bar-collapsed .nav-text {
-    width: 50px;
-    transition: width 0.3s;
 }
 
 .nav-text.active a {
@@ -54,7 +32,97 @@
     margin-left: 5px;
 }
 
-.header.collapsed+.split-container>.split1>.nav-menu {
-    height: calc(100vh - 59px);
+.split-container {
+    display: flex;
+    position: relative;
+}
+
+.split-container .pro-sidebar {
+    position: fixed;
+    border-right: 1px solid #dddddd;
+    padding-top: 139px;
     transition: 0.3s;
+}
+
+.header.collapsed+.split-container .pro-sidebar {
+    padding-top: 59px;
+    transition: 0.3s;
+}
+
+.split-container .pro-sidebar .pro-menu {
+    padding-top: 1px;
+}
+
+.split-container .pro-sidebar {
+    z-index: 3;
+}
+
+.pro-sidebar .pro-menu a {
+    display: flex;
+}
+
+.split-container .pro-sidebar.collapsed {
+    width: 65px;
+    min-width: 65px;
+}
+
+.split-container .pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item>.pro-icon-wrapper {
+    margin-right: 0;
+    font-size: 20px;
+}
+
+.split-container .pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu {
+    border-bottom: solid 1px #dddddd;
+}
+
+.split-container .pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu .pro-inner-list-item {
+    padding-left: 0px;
+}
+
+.split-container .pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu.open .pro-inner-list-item .pro-inner-item {
+    padding: 8px 30px 8px 40px !important;
+}
+
+.split-container .pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item {
+    padding: 8px 30px 8px 15px;
+}
+
+.split-container .pro-sidebar>.pro-sidebar-inner,
+.split-container .pro-sidebar.collapsed .pro-menu>ul>.pro-menu-item.pro-sub-menu>.pro-inner-list-item>.popper-inner {
+    background: #f7f7f7;
+    padding-left: 0;
+}
+
+.split-container .pro-sidebar .pro-menu a,
+.split-container .pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item,
+.split-container .pro-sidebar.collapsed .pro-menu>ul>.pro-menu-item.pro-sub-menu>.pro-inner-list-item>.popper-inner {
+    color: #303030 !important;
+}
+
+.split-container .pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item:hover,
+.split-container .pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item:active,
+.split-container .pro-sidebar .pro-menu .pro-menu-item.active>.pro-inner-item {
+    color: #303030 !important;
+    font-weight: bold !important;
+    background-color: #d7d7d7;
+}
+
+.split-container .pro-sidebar .pro-menu .pro-menu-item {
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.split-container .pro-sidebar.collapsed .pro-menu>ul>.pro-menu-item.pro-sub-menu:hover>.pro-inner-list-item {
+    border: 1px solid;
+    border-radius: 4px;
+    padding-left: 0;
+}
+
+.split-container .pro-sidebar .pro-menu>ul>.pro-sub-menu>.pro-inner-list-item {
+    background-color: #e7e7e7;
+}
+
+.split-container .pro-sidebar .pro-menu>ul>.pro-sub-menu>.pro-inner-list-item>div>ul {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }

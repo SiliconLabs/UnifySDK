@@ -34,6 +34,7 @@ if ("${GIT_VERSION}" STREQUAL "")
         OUTPUT_VARIABLE GIT_VERSION
         ERROR_QUIET
     )
+
   endif()
   if ("${GIT_VERSION}" STREQUAL "")
     # If both git describe and release-version.cmake are not available
@@ -69,17 +70,29 @@ if ("${OUT}" STREQUAL "")
     message (WARNING "${GIT_VERSION}")
   endif()
 endif()
+
+# Sanitize the patch component of the symantic versioning. According debian
+# spec only  + . ~ (plus, full stop, tilde) are allowed inside the patch
+# version. We should update our code to align with the debian spec
+# (simplicity) untill then, we sanitize the patch version.
+string(REGEX MATCH "(^ver_[0-9]+.[0-9]+.[0-9]+-?)(.*)" GIT_VERSION "${GIT_VERSION}")
+if (${CMAKE_MATCH_2})
+  string(REPLACE "_" "-" CMAKE_MATCH_2 ${CMAKE_MATCH_2})
+endif()
+set(GIT_VERSION ${CMAKE_MATCH_1}${CMAKE_MATCH_2})
 message (STATUS "Build number will be: " ${GIT_VERSION})
 
 #Generate MAJOR MINOR REV and PATCH from GIT_VERSION for CMAKE_PROJECT_VERSION
 string(REGEX REPLACE "^ver_([0-9]+).*" "\\1" VERSION_MAJOR "${GIT_VERSION}")
 string(REGEX REPLACE "^ver_[0-9]+.([0-9]+).*" "\\1" VERSION_MINOR "${GIT_VERSION}")
 string(REGEX REPLACE "^ver_[0-9]+.[0-9]+.([0-9]+).*" "\\1" VERSION_REV "${GIT_VERSION}")
-string(REGEX REPLACE "^ver_[0-9]+.[0-9]+.[0-9]+-(.*)" "\\1" VERSION_PATCH "${GIT_VERSION}")
+string(REGEX REPLACE "^ver_[0-9]+.[0-9]+.[0-9]+-?(.*)" "\\1" VERSION_PATCH "${GIT_VERSION}")
 
 # Generating version info file for CI and release packaging
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/version-info.json.in
                ${CMAKE_BINARY_DIR}/cmake/version-info.json)
 
-message(STATUS "Version is: " ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV})
-message(STATUS "Patch is " ${VERSION_PATCH})
+message(STATUS "MAJOR: " ${VERSION_MAJOR})
+message(STATUS "MINOR: " ${VERSION_MINOR})
+message(STATUS "REVISION: " ${VERSION_REV})
+message(STATUS "PATCH: " ${VERSION_PATCH})

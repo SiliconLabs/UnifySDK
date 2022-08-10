@@ -1,0 +1,25 @@
+{
+  "name": "Unify Attribute store type registration for ZCL / Dotdot attributes",
+  "version": "Unify-dotdot-v1",
+  "override": "../../uic_dotdot/zap/addon-override.js",
+  "helpers": [
+    "../../uic_dotdot/zap/addon-helper.js"
+  ],
+  "templates": [
+    {
+      "path": "uic_dotdot_attribute_store_registration_cpp.zapt",
+      "name": "Implementation for registerting ZCL dotdot attributes",
+      "output": "src/uic_dotdot_attribute_store_registration.cpp"
+    },
+    {
+      "path": "dotdot_attributes_uam.zapt",
+      "name": "Interface for the ZPC attributes for the attribute store",
+      "output": "include/dotdot_attributes.uam"
+    },
+    {
+      "path": "dotdot_attributes_id_h.zapt",
+      "name": "Interface for the ZPC attributes for the attribute store",
+      "output": "include/dotdot_attributes_id.h"
+    }
+  ]
+}

@@ -20,7 +20,7 @@ using namespace smartstart;
 
 extern "C" {
 
-// UIC Components
+// Unify Components
 #include "datastore.h"
 #include "attribute_store.h"
 #include "attribute_store_fixt.h"

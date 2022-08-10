@@ -61,28 +61,35 @@ void S2_set_timeout(struct S2 *ctxt, uint32_t interval)
   process_post(&zwave_s2_process, S2_TIMER, (void *)(intptr_t)interval);
 }
 
+static void zwave_s2_on_network_address_update(zwave_home_id_t home_id,
+                                               zwave_node_id_t node_id)
+{
+  (void)node_id;
+  zwave_s2_refresh_home_id(home_id);
+}
+
 static void zwave_s2_on_new_network_entered(zwave_home_id_t home_id,
                                             zwave_node_id_t node_id,
                                             zwave_keyset_t granted_keys,
                                             zwave_kex_fail_type_t kex_fail_type)
 {
-  (void)home_id;
   (void)node_id;
   (void)granted_keys;
   (void)kex_fail_type;
-  zwave_s2_network_init();
+  zwave_s2_refresh_home_id(home_id);
 }
 
 static void zwave_s2_init()
 {
   static zwave_controller_callbacks_t callbacks
-    = {.on_new_network_entered     = zwave_s2_on_new_network_entered,
+    = {.on_network_address_update  = zwave_s2_on_network_address_update,
+       .on_new_network_entered     = zwave_s2_on_new_network_entered,
        .on_multicast_group_deleted = zwave_s2_on_on_multicast_group_deleted};
 
   zwave_controller_register_callbacks(&callbacks);
 
   static zwave_controller_transport_t transport = {
-    .priority          = 3,
+    .priority          = 2,
     .command_class     = COMMAND_CLASS_SECURITY_2,
     .version           = COMMAND_CLASS_SECURITY_2_VERSION,
     .send_data         = zwave_s2_send_data,

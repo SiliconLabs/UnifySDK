@@ -390,3 +390,194 @@ void test_is_portable_end_node()
   attribute_store_get_reported_ReturnThruPtr_value(&role_type);
   TEST_ASSERT_FALSE(is_portable_end_node(node_id_node));
 }
+
+void test_signed_value_extraction()
+{
+  int32_t test_signed_value_4_bytes = 12345677;
+  uint8_t frame[4]                  = {};
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)((test_signed_value_4_bytes >> 24) & 0xFF);
+  frame[1] = (uint8_t)((test_signed_value_4_bytes >> 16) & 0xFF);
+  frame[2] = (uint8_t)((test_signed_value_4_bytes >> 8) & 0xFF);
+  frame[3] = (uint8_t)((test_signed_value_4_bytes >> 0) & 0xFF);
+
+  int32_t extracted_value = get_signed_value_from_frame_and_size(frame, 4);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_4_bytes, extracted_value);
+
+  test_signed_value_4_bytes = -1;
+  frame[0] = (uint8_t)((test_signed_value_4_bytes >> 24) & 0xFF);
+  frame[1] = (uint8_t)((test_signed_value_4_bytes >> 16) & 0xFF);
+  frame[2] = (uint8_t)((test_signed_value_4_bytes >> 8) & 0xFF);
+  frame[3] = (uint8_t)((test_signed_value_4_bytes >> 0) & 0xFF);
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 4);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_4_bytes, extracted_value);
+
+  test_signed_value_4_bytes = INT32_MAX;
+  frame[0] = (uint8_t)((test_signed_value_4_bytes >> 24) & 0xFF);
+  frame[1] = (uint8_t)((test_signed_value_4_bytes >> 16) & 0xFF);
+  frame[2] = (uint8_t)((test_signed_value_4_bytes >> 8) & 0xFF);
+  frame[3] = (uint8_t)((test_signed_value_4_bytes >> 0) & 0xFF);
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 4);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_4_bytes, extracted_value);
+
+  test_signed_value_4_bytes = INT32_MIN;
+  frame[0] = (uint8_t)((test_signed_value_4_bytes >> 24) & 0xFF);
+  frame[1] = (uint8_t)((test_signed_value_4_bytes >> 16) & 0xFF);
+  frame[2] = (uint8_t)((test_signed_value_4_bytes >> 8) & 0xFF);
+  frame[3] = (uint8_t)((test_signed_value_4_bytes >> 0) & 0xFF);
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 4);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_4_bytes, extracted_value);
+
+  // Test with 0xfffe = -2, size 2 bytes.
+  frame[0] = 0xff;
+  frame[1] = 0xfe;
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 2);
+  TEST_ASSERT_EQUAL_INT32(-2, extracted_value);
+
+  // Test with 0xfed4 = -300, size 2 bytes.
+  frame[0] = 0xfe;
+  frame[1] = 0xd4;
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 2);
+  TEST_ASSERT_EQUAL_INT32(-300, extracted_value);
+
+  //  Try with 1 byte signed value:
+  int8_t test_signed_value_1_byte = -37;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)test_signed_value_1_byte;
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 1);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_1_byte, extracted_value);
+
+  // Value 37
+  test_signed_value_1_byte = 37;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)test_signed_value_1_byte;
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 1);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_1_byte, extracted_value);
+
+  // Value 127
+  test_signed_value_1_byte = 127;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)test_signed_value_1_byte;
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 1);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_1_byte, extracted_value);
+
+  // Value -127
+  test_signed_value_1_byte = -127;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)test_signed_value_1_byte;
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 1);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_1_byte, extracted_value);
+
+  // Try with 2 bytes signed value:
+  int16_t test_signed_value_2_bytes = -15000;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)((test_signed_value_2_bytes >> 8) & 0xFF);
+  frame[1] = (uint8_t)((test_signed_value_2_bytes >> 0) & 0xFF);
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 2);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_2_bytes, extracted_value);
+
+  // Try with 2 bytes signed value:
+  test_signed_value_2_bytes = 15000;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)((test_signed_value_2_bytes >> 8) & 0xFF);
+  frame[1] = (uint8_t)((test_signed_value_2_bytes >> 0) & 0xFF);
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 2);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_2_bytes, extracted_value);
+
+  // Try with 2 bytes signed value:
+  test_signed_value_2_bytes = INT16_MAX;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)((test_signed_value_2_bytes >> 8) & 0xFF);
+  frame[1] = (uint8_t)((test_signed_value_2_bytes >> 0) & 0xFF);
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 2);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_2_bytes, extracted_value);
+
+  // Try with 2 bytes signed value:
+  test_signed_value_2_bytes = INT16_MIN;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)((test_signed_value_2_bytes >> 8) & 0xFF);
+  frame[1] = (uint8_t)((test_signed_value_2_bytes >> 0) & 0xFF);
+
+  extracted_value = get_signed_value_from_frame_and_size(frame, 2);
+  TEST_ASSERT_EQUAL_INT32(test_signed_value_2_bytes, extracted_value);
+}
+
+void test_unsigned_value_extraction()
+{
+  const uint32_t test_unsigned_value = 0x1265324;
+  uint8_t frame[4]                   = {};
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)((test_unsigned_value >> 24) & 0xFF);
+  frame[1] = (uint8_t)((test_unsigned_value >> 16) & 0xFF);
+  frame[2] = (uint8_t)((test_unsigned_value >> 8) & 0xFF);
+  frame[3] = (uint8_t)((test_unsigned_value >> 0) & 0xFF);
+
+  uint32_t extracted_value = get_unsigned_value_from_frame_and_size(frame, 4);
+  TEST_ASSERT_EQUAL_UINT32(test_unsigned_value, extracted_value);
+
+  // Test with 0xfffe = 65534, size 2 bytes.
+  frame[0] = 0xff;
+  frame[1] = 0xfe;
+
+  extracted_value = get_unsigned_value_from_frame_and_size(frame, 2);
+  TEST_ASSERT_EQUAL_UINT32(65534, extracted_value);
+
+  // Test with 0xfed4 = 65236, size 2 bytes.
+  frame[0] = 0xfe;
+  frame[1] = 0xd4;
+
+  extracted_value = get_unsigned_value_from_frame_and_size(frame, 2);
+  TEST_ASSERT_EQUAL_UINT32(65236, extracted_value);
+
+  //  Try with 1 byte signed value:
+  const uint8_t test_unsigned_value_1 = 37;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)test_unsigned_value_1;
+
+  extracted_value = get_unsigned_value_from_frame_and_size(frame, 1);
+  TEST_ASSERT_EQUAL_UINT32(test_unsigned_value_1, extracted_value);
+
+  //  Try with 2 bytes signed value:
+  const uint16_t test_unsigned_value_2 = 15000;
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)((test_unsigned_value_2 >> 8) & 0xFF);
+  frame[1] = (uint8_t)((test_unsigned_value_2 >> 0) & 0xFF);
+
+  extracted_value = get_unsigned_value_from_frame_and_size(frame, 2);
+  TEST_ASSERT_EQUAL_UINT32(test_unsigned_value_2, extracted_value);
+}
+
+void test_value_size_precision_extraction()
+{
+  const int32_t test_signed_value = 3560;
+  uint8_t frame[4]                = {};
+  // Pack in the frame, MSB first
+  frame[0] = (uint8_t)((test_signed_value >> 24) & 0xFF);
+  frame[1] = (uint8_t)((test_signed_value >> 16) & 0xFF);
+  frame[2] = (uint8_t)((test_signed_value >> 8) & 0xFF);
+  frame[3] = (uint8_t)((test_signed_value >> 0) & 0xFF);
+
+  uint32_t extracted_value = command_class_get_int32_value(4, 3, frame);
+  TEST_ASSERT_EQUAL_UINT32(test_signed_value, extracted_value);
+
+  extracted_value = command_class_get_int32_value(4, 0, frame);
+  TEST_ASSERT_EQUAL_UINT32(test_signed_value * 1000, extracted_value);
+
+  extracted_value = command_class_get_int32_value(4, 1, frame);
+  TEST_ASSERT_EQUAL_UINT32(test_signed_value * 100, extracted_value);
+
+  extracted_value = command_class_get_int32_value(4, 2, frame);
+  TEST_ASSERT_EQUAL_UINT32(test_signed_value * 10, extracted_value);
+}
