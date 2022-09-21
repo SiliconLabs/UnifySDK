@@ -69,6 +69,8 @@ enum operator_ids {
   operator_or,
   operator_modulo,
   operator_exponent,
+  operator_leeq,
+  operator_greq
 };
 
 /**
