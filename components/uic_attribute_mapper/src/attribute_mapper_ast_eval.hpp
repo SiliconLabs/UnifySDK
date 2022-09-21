@@ -143,6 +143,10 @@ template<typename T> struct eval {
           return lhs.value() < rhs.value();
         case operator_right_shift:
           return lhs.value() > rhs.value();
+        case operator_leeq:
+          return lhs.value() <= rhs.value();
+        case operator_greq:
+          return lhs.value() >= rhs.value();
         case operator_bitand:
           return ((int)round(lhs.value())) & ((int)round(rhs.value()));
         case operator_bitor:

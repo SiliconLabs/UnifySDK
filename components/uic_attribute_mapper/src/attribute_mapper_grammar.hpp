@@ -49,6 +49,8 @@ struct term_rule_operators_ : qi::symbols<char, ast::operator_ids> {
        ("/",  ast::operator_ids::operator_div)
        ("<",  ast::operator_ids::operator_left_shift)
        (">",  ast::operator_ids::operator_right_shift)
+       ("<=",  ast::operator_ids::operator_leeq)
+       (">=",  ast::operator_ids::operator_greq)
        ("|",  ast::operator_ids::operator_bitor)
        ("&",  ast::operator_ids::operator_bitand)
        ("^",  ast::operator_ids::operator_bitxor)
