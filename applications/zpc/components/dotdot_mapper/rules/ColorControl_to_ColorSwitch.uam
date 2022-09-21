@@ -53,7 +53,7 @@ def zbON_OFF                    0x00060000
 // If we have a node with Binary Switch + Color Switch, we need to simulate
 // the Level cluster.
 def simulate_level (e'zwCOLOR_SWITCH_v & (e'zwMULTILEVEL_v==0))
-def simulate_on_off (e'zwCOLOR_SWITCH_v & (e'zwBINARY_SWITCH_v ==0))
+def simulate_on_off (e'zwCOLOR_SWITCH_v & (e'zwMULTILEVEL_v==0) & (e'zwBINARY_SWITCH_v ==0))
 
 // Intermediate calculations
 // Hue/Saturation/Level is just a lot easier than CieXY.
