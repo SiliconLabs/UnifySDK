@@ -34,8 +34,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -203,9 +202,8 @@ on two different ports. For example, in the following mosquitto.conf, Mosquitto 
 will accept non-TLS communication on port 1883.</p>
 <section id="mosquitto-conf">
 <h3>mosquitto.conf<a class="headerlink" href="#mosquitto-conf" title="Permalink to this heading"></a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>port <span class="m">1883</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>listener <span class="m">1883</span>
 allow_anonymous <span class="nb">true</span>
-per_listener_settings <span class="nb">true</span>
 
 listener <span class="m">8883</span>
 cafile ca/ca.crt

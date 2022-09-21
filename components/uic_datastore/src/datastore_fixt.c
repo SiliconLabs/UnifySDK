@@ -161,7 +161,7 @@ sl_status_t datastore_fixt_setup_and_handle_version(const char *datastore_file,
                         fetched_uic_version,
                         &fetched_uic_version_size);
     sl_log_info(LOG_TAG,
-                "Last Unify version that has written in the datastore file: %s\n",
+                "Last Unify version that has written in the datastore file: %s",
                 fetched_uic_version);
     if (version_fetched != db_version) {
       sl_log_error(LOG_TAG,

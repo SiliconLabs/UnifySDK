@@ -13,6 +13,6 @@ var zpc__attribute__store__network__helper_8h =
     [ "attribute_store_network_helper_get_unid_endpoint_from_node", "group__zpc__attribute__store__network__helpers.html#gafae8b9288ffd88bbbe138edf03680b14", null ],
     [ "attribute_store_network_helper_get_unid_from_node", "group__zpc__attribute__store__network__helpers.html#gadca32f16d205120c5b1377322987f9c0", null ],
     [ "attribute_store_network_helper_get_zwave_ids_from_node", "group__zpc__attribute__store__network__helpers.html#gacd36836093319f5642cf566d6f26cb61", null ],
-    [ "attribute_store_network_helper_get_zwave_node_id_node", "group__zpc__attribute__store__network__helpers.html#gaf253f3e06706ce03ab524ec785cd6600", null ],
+    [ "attribute_store_network_helper_get_zwave_node_id_node", "group__zpc__attribute__store__network__helpers.html#ga7a3f40a9cbc90f2674b9e9e454fd6207", null ],
     [ "zwave_command_class_get_endpoint_id_node", "group__zpc__attribute__store__network__helpers.html#ga39def804d7d68ac6f534f61a9528c8be", null ]
 ];

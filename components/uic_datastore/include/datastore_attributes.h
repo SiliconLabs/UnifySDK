@@ -187,18 +187,6 @@ bool datastore_contains_attribute(const datastore_attribute_id_t id);
 sl_status_t datastore_delete_attribute(const datastore_attribute_id_t id);
 
 /**
- * @brief Delete an attribute and all its children from the persistent datastore.
- *
- * @param id              Unique ID for the Attribute Store node to be
- *                        deleted (with all its children)
- *
- * @returns SL_STATUS_OK if successful
- * @returns SL_STATUS_FAIL if an error happened
- */
-sl_status_t
-  datastore_delete_attribute_with_children(const datastore_attribute_id_t id);
-
-/**
  * @brief Delete the whole attribute table in the persistent datastore.
  *
  * @returns SL_STATUS_OK if successful

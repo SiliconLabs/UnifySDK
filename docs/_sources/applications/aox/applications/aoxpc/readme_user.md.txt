@@ -181,8 +181,8 @@ aoxpc --aoxpc.ncp.serial /dev/ttyACM2 --aoxpc.datastore_file aoxpc_2.db
 
 Write AoXLocator cluster attributes from a remote client.
 
-```console
-ucl/by-unid/ble-pd-111111111111/ep0/AoXLocator/Commands/WriteAttributes {
+```mqtt
+ucl/by-unid/ble-pd-111111111111/ep0/AoXLocator/Commands/WriteAttributes - {
   "PositionAndOrientation": {
     "CoordinateX": 0.0,
     "CoordinateY": 0.0,
@@ -195,8 +195,8 @@ ucl/by-unid/ble-pd-111111111111/ep0/AoXLocator/Commands/WriteAttributes {
 }
 ```
 
-```console
-ucl/by-unid/ble-pd-222222222222/ep0/AoXLocator/Commands/WriteAttributes {
+```mqtt
+ucl/by-unid/ble-pd-222222222222/ep0/AoXLocator/Commands/WriteAttributes - {
   "PositionAndOrientation": {
     "CoordinateX": 0.0,
     "CoordinateY": 4.0,

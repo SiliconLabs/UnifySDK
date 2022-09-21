@@ -476,6 +476,7 @@ applicable to this document can be found in the LICENSE.md file.
   <xi:include href="Metering.xml" parse="xml"/>
 
   <xi:include href="Unify_ProtocolController_RFTelemetry.xml" parse="xml"/>
+  <xi:include href="Unify_ProtocolController_NetworkManagement.xml" parse="xml"/>
   <xi:include href="Unify_State.xml" parse="xml"/>
   <xi:include href="Unify_Binding.xml" parse="xml"/>
   <xi:include href="Unify_NameAndLocation.xml" parse="xml"/>

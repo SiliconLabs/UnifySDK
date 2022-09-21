@@ -34,7 +34,7 @@ ARG HOST_DEPS="ninja-build git git-lfs zip unzip curl pkg-config \
   build-essential devscripts debhelper \
   rsync acl zlib1g-dev python3-dev libxml2-dev libxslt-dev\
   openjdk-11-jre\
-  clang nlohmann-json3-dev"
+  clang nlohmann-json3-dev parted"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -69,7 +69,7 @@ RUN curl -L https://github.com/Kitware/CMake/releases/download/v3.19.2/cmake-3.1
 # Install pip3 packages
 RUN pip3 install gcovr==5.0 \
   pybars3==0.9.7 PyMeta3==0.5.1 xmltodict==0.12.0 \
-  sphinx==5.1.0 breathe==4.34.0 myst-parser==0.18.0 linkify-it-py==2.0.0 sphinxcontrib-plantuml==0.24 sphinx-rtd-theme==1.0.0
+  sphinx==5.1.0 breathe==4.34.0 myst-parser==0.18.0 linkify-it-py==2.0.0 sphinxcontrib-plantuml==0.24 sphinx-markdown-tables==0.0.17 sphinx-rtd-theme==1.0.0
 
 
 # Install doxygen 1.8.20 to fix issues with preprocessor defines in code blocks in markdown files

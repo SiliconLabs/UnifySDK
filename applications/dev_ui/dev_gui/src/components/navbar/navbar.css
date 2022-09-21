@@ -40,13 +40,14 @@
 .split-container .pro-sidebar {
     position: fixed;
     border-right: 1px solid #dddddd;
-    padding-top: 139px;
+    margin-top: 139px;
     transition: 0.3s;
 }
 
 .header.collapsed+.split-container .pro-sidebar {
-    padding-top: 59px;
+    margin-top: 59px;
     transition: 0.3s;
+    z-index: 4;
 }
 
 .split-container .pro-sidebar .pro-menu {

@@ -1,3 +1,5 @@
+use std::vec;
+
 ///////////////////////////////////////////////////////////////////////////////
 // # License
 // <b>Copyright 2022  Silicon Laboratories Inc. www.silabs.com</b>
@@ -16,10 +18,19 @@ use crate::poll_queue_trait::PollQueueTrait;
 use crate::PollEngineConfig;
 use futures::channel::mpsc::UnboundedReceiver;
 use futures::{select_biased, FutureExt, StreamExt};
+
+use unify_attribute_store_sys::{attribute_resolver_register_rule, sl_status_t};
 use unify_log_sys::*;
 use unify_middleware::contiki::PlatformTrait;
-use unify_middleware::{Attribute, AttributeEvent, AttributeEventType, AttributeTrait};
+use unify_middleware::{
+    Attribute, AttributeEvent, AttributeEventType, AttributeStoreError, AttributeTrait,
+};
+use unify_proc_macro::{as_extern_c, generate_resolver_callback};
+use unify_sl_status_sys::SL_STATUS_ALREADY_EXISTS;
+
 declare_app_name!("poll_engine");
+
+pub const ATTRIBUTE_POLL_ENGINE_MARK: u32 = 0x0018;
 
 #[derive(Debug)]
 /// Enum with commands send send to the PollEngine
@@ -77,12 +88,28 @@ pub(crate) struct PollEngine {
     running: bool,
 }
 
+#[generate_resolver_callback]
+fn poll_engine_mark(a: Attribute) -> Result<(sl_status_t, Vec<u8>), AttributeStoreError> {
+    // Clear the reported attribute of the the parent to trigger a resolution
+    // and delete this meta attribute
+    a.parent().set_reported::<u32>(None)?;
+    a.delete()?;
+    // This meta rule does not produce a frame
+    Ok((SL_STATUS_ALREADY_EXISTS, vec![]))
+}
+
 impl PollEngine {
     pub fn new(
         platform: impl PlatformTrait + 'static,
         poll_queue: impl PollQueueTrait + 'static,
         config: PollEngineConfig,
     ) -> Self {
+        attribute_resolver_register_rule(
+            ATTRIBUTE_POLL_ENGINE_MARK,
+            None,
+            as_extern_c!(poll_engine_mark),
+        );
+
         PollEngine {
             config,
             poll_queue: Box::new(poll_queue),
@@ -232,7 +259,7 @@ impl PollEngine {
     ) -> PollEngineDispatch {
         loop {
             let event = attribute_watcher.next_change().await;
-            if event.attribute.valid() && self.poll_queue.contains(&event.attribute) {
+            if self.poll_queue.contains(&event.attribute) {
                 return PollEngineDispatch::AttributeUpdated(event);
             }
         }
@@ -260,13 +287,17 @@ impl PollEngine {
             }
         };
 
-        if let Err(e) = attribute.set_reported(None as Option<u32>) {
+        // In order to support cases where the resolver tree is paused, attribute are marked for polling
+        // by placing the meta attribute ATTRIBUTE_POLL_ENGINE_MARK under the attribute to be polled.
+        // An attribute resolver rule will then clear the reported value of the parent, ensuring that
+        // the device is polled when its ready. In this way we even persist poll request over reboots.
+        if let Err(e) = attribute.emplace::<u32>(ATTRIBUTE_POLL_ENGINE_MARK, None, None) {
             log_warning!("Failed to clear reported for {} {}", attribute, e);
         } else {
             let now = self.platform.clock_seconds();
             self.last_poll = now;
             self.poll_queue.queue(attribute, interval, now);
-            log_debug!("Cleared reported for {}", attribute);
+            log_debug!("Marking {} for poll", attribute);
         }
     }
 
@@ -284,13 +315,15 @@ impl PollEngine {
             PollEngineCommand::Disable => self.on_disable(),
         }
 
-        #[cfg(not(test))]
-        log_debug!("{}", self.poll_queue);
+        // Comment this in to get poll_engine to print the entire configuration
+        //#[cfg(not(test))]
+        //log_debug!("{}", self.poll_queue);
     }
 
     fn on_handle_attribute_update(&mut self, event: AttributeEvent<Attribute>) {
         match event.event_type {
             AttributeEventType::ATTRIBUTE_DELETED => {
+                log_debug!("Removing {} because it is deleted", event.attribute);
                 if !self.poll_queue.remove(&event.attribute) {
                     log_warning!(
                         "could not delete {}. not in the poll_queue anymore",
@@ -376,11 +409,12 @@ fn calculate_poll_time(backoff: u64, upcoming_entry: u64, now: u64, last_poll: u
 
 #[cfg(test)]
 mod tests {
+    use crate::attribute_watcher::test::AttributeWatcherStub;
     use crate::poll_queue_trait::MockPollQueueTrait;
 
     use super::*;
+    use crate::poll_entries::PollEntries;
     use async_trait::async_trait;
-
     use futures::channel::mpsc::unbounded;
     use futures::pin_mut;
     use futures::stream;
@@ -395,6 +429,7 @@ mod tests {
     use unify_middleware::contiki::TimeoutSuccess;
     use unify_middleware::AttributeStore;
     use unify_middleware::AttributeStoreTrait;
+    use unify_middleware::AttributeValueState;
     struct NoValueAttributeWatcher;
 
     #[async_trait]
@@ -649,6 +684,115 @@ mod tests {
             .unwrap();
 
         assert_stream_pending!(stream);
+        assert_stream_pending!(stream);
+    }
+
+    #[test]
+    #[serial(poll_engine)]
+    fn poll_engine_mark_test() {
+        let store = AttributeStore::new().unwrap();
+        let mut a = store.root().add(11111, Some(42), Some(24)).unwrap();
+
+        let cfg = PollEngineConfig {
+            backoff: 0,
+            default_interval: 0,
+        };
+
+        let mut poll_queue = PollEntries::new();
+        let mut sequence = Sequence::new();
+        let mut contiki_clock_mock = MockPlatformTrait::new();
+
+        contiki_clock_mock
+            .expect_clock_seconds()
+            .with()
+            .return_const(0u64);
+
+        let mut engine = PollEngine::new(contiki_clock_mock, poll_queue, cfg);
+        engine.on_register(a, 1111);
+        engine.do_poll();
+        engine.do_poll();
+
+        assert_eq!(a.get_reported::<u32>(), Ok(42));
+        assert_eq!(a.get_desired::<u32>(), Ok(24));
+
+        let mark = a.get_child_by_type(ATTRIBUTE_POLL_ENGINE_MARK);
+        assert_ne!(mark, Attribute::invalid());
+        assert_eq!(
+            poll_engine_mark_rust(mark),
+            Ok((SL_STATUS_ALREADY_EXISTS, vec! {}))
+        );
+
+        assert_eq!(a.is_reported_set(), false);
+        assert_eq!(a.get_desired::<u32>(), Ok(24));
+    }
+
+    #[test]
+    #[serial(poll_engine)]
+    fn poll_engine_delete_test() {
+        let attribute_store = AttributeStore::new().unwrap();
+        let a = attribute_store.root().add(1, Some(42), Some(52)).unwrap();
+        let (mut attribute_watcher_sender, attribute_watcher_receiver) = unbounded();
+
+        let attribute_watcher_stub = AttributeWatcherStub::new(attribute_watcher_receiver);
+        let cfg = PollEngineConfig {
+            backoff: 0,
+            default_interval: 0,
+        };
+
+        let mut poll_queue_mock = MockPollQueueTrait::new();
+        let mut sequence = Sequence::new();
+        poll_queue_mock
+            .expect_queue()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .with(eq(a), eq(22), eq(0))
+            .returning(|_, _, _| true);
+        poll_queue_mock
+            .expect_contains()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .with(eq(a))
+            .returning(|_| true);
+        poll_queue_mock
+            .expect_remove()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .with(eq(a))
+            .returning(|_| true);
+        poll_queue_mock
+            .expect_upcoming()
+            .with()
+            .times(1)
+            .in_sequence(&mut sequence)
+            .return_const(None);
+
+        let mut contiki_clock_mock = MockPlatformTrait::new();
+
+        contiki_clock_mock
+            .expect_clock_seconds()
+            .with()
+            .return_const(0u64);
+        let (mut sender, receiver) = unbounded();
+        let engine = PollEngine::new(contiki_clock_mock, poll_queue_mock, cfg);
+
+        let stream =
+            stream::once(PollEngine::run(engine, attribute_watcher_stub, receiver).pending_once());
+        pin_mut!(stream);
+        sender
+            .start_send(PollEngineCommand::Register {
+                attribute: a,
+                interval: 22,
+            })
+            .unwrap();
+        assert_stream_pending!(stream);
+        let attribute_event = AttributeEvent {
+            attribute: a,
+            event_type: AttributeEventType::ATTRIBUTE_DELETED,
+            value_state: AttributeValueState::DESIRED_OR_REPORTED_ATTRIBUTE,
+        };
+        attribute_watcher_sender
+            .start_send(attribute_event)
+            .unwrap();
         assert_stream_pending!(stream);
     }
 }

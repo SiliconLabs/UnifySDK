@@ -14,6 +14,7 @@ set(CPACK_SOURCE_IGNORE_FILES
     "${PROJECT_SOURCE_DIR}/build.*/"
     "${PROJECT_SOURCE_DIR}/GeckoSDK.*/"
     "Jenkinsfile"
+    "Earthfile"
     "\\\\.git*"
     "\\\\.pre-commit-config.yaml"
     "${PROJECT_SOURCE_DIR}/externals"
@@ -53,6 +54,8 @@ macro(add_component_to_uic PKG_NAME PKG_DESCRIPTION PKG_FILE_NAME PKG_DEPNDS PKG
     string(REPLACE " " "" TMP_EXTRA "${PKG_EXTRA}")
     set(CPACK_DEBIAN_${PKG_NAME_UPPER}_PACKAGE_CONTROL_EXTRA ${TMP_EXTRA}                               CACHE STRING "Extras for ${PKG_NAME}: ${TMP_EXTRA}"                                   FORCE)
 
+    #Remove the item incase it was already in list incase there was "ninja package" done before 
+    list(REMOVE_ITEM CPACK_COMPONENTS_ALL "${PKG_NAME}")
     list(APPEND CPACK_COMPONENTS_ALL "${PKG_NAME}")
     set(CPACK_COMPONENTS_ALL                                ${CPACK_COMPONENTS_ALL}                     CACHE STRING "Packages that will have Debian packages built: ${CPACK_COMPONENTS_ALL}" FORCE)
 

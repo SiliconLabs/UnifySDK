@@ -92,7 +92,7 @@ static sl_status_t
 
 void attribute_resolver_set_resolution_listener_stub(
   attribute_store_node_t node,
-  cmock_attribute_resolver_func_ptr1 callback,
+  attribute_resolver_callback_t callback,
   int cmock_num_calls)
 {
   if (attribute_store_get_node_type(node)
@@ -626,6 +626,7 @@ void test_zwave_command_class_wake_up_version_2_supporting_node()
   TEST_ASSERT_EQUAL(zpc_node_id, configured_node_id);
 
   // Ask to configure the Wake Up Interval, again with a default higher than max:
+  attribute_store_undefine_desired(wake_up_interval_node);
   my_test_configuration.default_wake_up_interval = 300;
   TEST_ASSERT_NOT_NULL(configure_wake_up_interval);
   attribute_resolver_clear_resolution_listener_Expect(
@@ -639,7 +640,23 @@ void test_zwave_command_class_wake_up_version_2_supporting_node()
                               sizeof(configured_interval));
   TEST_ASSERT_EQUAL(25, configured_interval);
 
+  // Ask to configure the Wake Up Interval, we do not re-configure if the
+  // desired is set:
+  my_test_configuration.default_wake_up_interval = 0;
+  TEST_ASSERT_NOT_NULL(configure_wake_up_interval);
+  attribute_resolver_clear_resolution_listener_Expect(
+    wake_up_capabilities_node,
+    configure_wake_up_interval);
+  configure_wake_up_interval(wake_up_capabilities_node);
+  // Verify if the desired values are matching what we expect:
+  configured_interval = 0;
+  attribute_store_get_desired(wake_up_interval_node,
+                              &configured_interval,
+                              sizeof(configured_interval));
+  TEST_ASSERT_EQUAL(25, configured_interval);
+
   // Ask to configure the Wake Up Interval, again with a default lower than min:
+  attribute_store_undefine_desired(wake_up_interval_node);
   my_test_configuration.default_wake_up_interval = 0;
   TEST_ASSERT_NOT_NULL(configure_wake_up_interval);
   attribute_resolver_clear_resolution_listener_Expect(
@@ -654,6 +671,7 @@ void test_zwave_command_class_wake_up_version_2_supporting_node()
   TEST_ASSERT_EQUAL(1, configured_interval);
 
   // Ask to configure the Wake Up Interval, when we are not the sis
+  attribute_store_undefine_desired(wake_up_interval_node);
   my_test_configuration.default_wake_up_interval = 300;
   sis_test_configuration                         = false;
   TEST_ASSERT_NOT_NULL(configure_wake_up_interval);
@@ -662,13 +680,11 @@ void test_zwave_command_class_wake_up_version_2_supporting_node()
     configure_wake_up_interval);
   configure_wake_up_interval(wake_up_capabilities_node);
   // Verify if the desired values has not changed
-  configured_interval = 0;
-  attribute_store_get_desired(wake_up_interval_node,
-                              &configured_interval,
-                              sizeof(configured_interval));
-  TEST_ASSERT_EQUAL(1, configured_interval);
+  TEST_ASSERT_FALSE(
+    attribute_store_is_value_defined(wake_up_interval_node, DESIRED_ATTRIBUTE));
 
   // Mess up with the interval step, see that we don't divide by 0
+  attribute_store_undefine_desired(wake_up_interval_node);
   interval_step = 0;
   attribute_store_set_reported(interval_step_node,
                                &interval_step,
@@ -688,6 +704,7 @@ void test_zwave_command_class_wake_up_version_2_supporting_node()
                     configured_interval);
 
   // Less than min for default:
+  attribute_store_undefine_desired(wake_up_interval_node);
   my_test_configuration.default_wake_up_interval = 0;
   sis_test_configuration                         = true;
   TEST_ASSERT_NOT_NULL(configure_wake_up_interval);
@@ -702,6 +719,7 @@ void test_zwave_command_class_wake_up_version_2_supporting_node()
   TEST_ASSERT_EQUAL(1, configured_interval);
 
   // More than max for default:
+  attribute_store_undefine_desired(wake_up_interval_node);
   my_test_configuration.default_wake_up_interval = 4200;
   sis_test_configuration                         = true;
   TEST_ASSERT_NOT_NULL(configure_wake_up_interval);
@@ -755,7 +773,10 @@ void test_zwave_command_class_wake_up_no_more_information()
   attribute_resolver_clear_resolution_listener_Expect(node_id_node,
                                                       send_wake_up_no_more);
   attribute_resolver_pause_node_resolution_Expect(node_id_node);
-  we_have_return_routes_to_assign_ExpectAndReturn(node_id, false);
+  zwave_network_management_is_protocol_sending_frames_to_node_ExpectAndReturn(
+    node_id,
+    false);
+  zwave_tx_has_frames_for_node_ExpectAndReturn(node_id, false);
   zwave_node_id_t remote_node_id = 0;
   attribute_store_get_reported(node_id_node,
                                &remote_node_id,
@@ -816,12 +837,27 @@ void test_postpone_wake_up_no_more_information()
   // the wake up no more message
   attribute_resolver_clear_resolution_listener_Expect(node_id_node,
                                                       send_wake_up_no_more);
-  we_have_return_routes_to_assign_ExpectAndReturn(node_id, true);
-  attribute_timeout_set_callback_ExpectAndReturn(
-    node_id_node,
-    1000,
-    send_wake_up_no_more,
-    SL_STATUS_OK);
+  zwave_network_management_is_protocol_sending_frames_to_node_ExpectAndReturn(
+    node_id,
+    true);
+  attribute_timeout_set_callback_ExpectAndReturn(node_id_node,
+                                                 1000,
+                                                 send_wake_up_no_more,
+                                                 SL_STATUS_OK);
+
+  send_wake_up_no_more(node_id_node);
+
+  // Same if we have tx frames in the queue
+  attribute_resolver_clear_resolution_listener_Expect(node_id_node,
+                                                      send_wake_up_no_more);
+  zwave_network_management_is_protocol_sending_frames_to_node_ExpectAndReturn(
+    node_id,
+    false);
+  zwave_tx_has_frames_for_node_ExpectAndReturn(node_id, true);
+  attribute_timeout_set_callback_ExpectAndReturn(node_id_node,
+                                                 1000,
+                                                 send_wake_up_no_more,
+                                                 SL_STATUS_OK);
 
   send_wake_up_no_more(node_id_node);
 }
@@ -930,7 +966,7 @@ void test_zwave_command_class_wake_up_incoming_unknown_command()
                                                     sizeof(incoming_frame)));
 }
 
-void test_zwave_command_class_wake_up_incoming_wrong_command_clas()
+void test_zwave_command_class_wake_up_incoming_wrong_command_class()
 {
   TEST_ASSERT_NOT_NULL(wake_up_handler.control_handler);
   zwave_controller_connection_info_t connection_info = {};
@@ -993,11 +1029,11 @@ void test_zwave_command_class_wake_up_incoming_wake_up_report()
   wake_up_interval_t expected_interval = 283741;
   zwave_node_id_t expected_node_id     = 232;
   const uint8_t incoming_frame[]       = {COMMAND_CLASS_WAKE_UP,
-                                    WAKE_UP_INTERVAL_REPORT,
-                                    (expected_interval >> 16) & 0xFF,
-                                    (expected_interval >> 8) & 0xFF,
-                                    (expected_interval)&0xFF,
-                                    (uint8_t)(expected_node_id)};
+                                          WAKE_UP_INTERVAL_REPORT,
+                                          (expected_interval >> 16) & 0xFF,
+                                          (expected_interval >> 8) & 0xFF,
+                                          (expected_interval)&0xFF,
+                                          (uint8_t)(expected_node_id)};
 
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     wake_up_handler.control_handler(&connection_info,
@@ -1056,10 +1092,10 @@ void test_zwave_command_class_wake_up_incoming_wake_up_report_too_short()
 
   wake_up_interval_t expected_interval = 283741;
   const uint8_t incoming_frame[]       = {COMMAND_CLASS_WAKE_UP,
-                                    WAKE_UP_INTERVAL_REPORT,
-                                    (expected_interval >> 16) & 0xFF,
-                                    (expected_interval >> 8) & 0xFF,
-                                    (expected_interval)&0xFF};
+                                          WAKE_UP_INTERVAL_REPORT,
+                                          (expected_interval >> 16) & 0xFF,
+                                          (expected_interval >> 8) & 0xFF,
+                                          (expected_interval)&0xFF};
 
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
                     wake_up_handler.control_handler(&connection_info,
@@ -1112,20 +1148,20 @@ void test_zwave_command_class_wake_up_incoming_wake_up_capabilities_report_v3()
   wake_up_interval_t expected_interval_step    = 123451;
   wake_up_bitmask_t expected_bitmask           = 0xEF;
   const uint8_t incoming_frame[]               = {COMMAND_CLASS_WAKE_UP,
-                                    WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V2,
-                                    (expected_min_interval >> 16) & 0xFF,
-                                    (expected_min_interval >> 8) & 0xFF,
-                                    (expected_min_interval)&0xFF,
-                                    (expected_max_interval >> 16) & 0xFF,
-                                    (expected_max_interval >> 8) & 0xFF,
-                                    (expected_max_interval)&0xFF,
-                                    (expected_default_interval >> 16) & 0xFF,
-                                    (expected_default_interval >> 8) & 0xFF,
-                                    (expected_default_interval)&0xFF,
-                                    (expected_interval_step >> 16) & 0xFF,
-                                    (expected_interval_step >> 8) & 0xFF,
-                                    (expected_interval_step)&0xFF,
-                                    expected_bitmask};
+                                                  WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V2,
+                                                  (expected_min_interval >> 16) & 0xFF,
+                                                  (expected_min_interval >> 8) & 0xFF,
+                                                  (expected_min_interval)&0xFF,
+                                                  (expected_max_interval >> 16) & 0xFF,
+                                                  (expected_max_interval >> 8) & 0xFF,
+                                                  (expected_max_interval)&0xFF,
+                                                  (expected_default_interval >> 16) & 0xFF,
+                                                  (expected_default_interval >> 8) & 0xFF,
+                                                  (expected_default_interval)&0xFF,
+                                                  (expected_interval_step >> 16) & 0xFF,
+                                                  (expected_interval_step >> 8) & 0xFF,
+                                                  (expected_interval_step)&0xFF,
+                                                  expected_bitmask};
 
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     wake_up_handler.control_handler(&connection_info,
@@ -1216,6 +1252,7 @@ void test_zwave_command_class_wake_up_incoming_wake_up_capabilities_report_v3()
 
   // Additional test: (get_maximum_possible_interval)
   // Set the min to 0, check that this is used for the max
+  attribute_store_undefine_desired(wake_up_interval_node);
   received_interval = 0;
   attribute_store_set_reported(wake_up_min_interval_node,
                                &received_interval,
@@ -1253,19 +1290,19 @@ void test_zwave_command_class_wake_up_incoming_wake_up_capabilities_report_v2()
   wake_up_interval_t expected_default_interval = 123457;
   wake_up_interval_t expected_interval_step    = 123451;
   const uint8_t incoming_frame[]               = {COMMAND_CLASS_WAKE_UP,
-                                    WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V2,
-                                    (expected_min_interval >> 16) & 0xFF,
-                                    (expected_min_interval >> 8) & 0xFF,
-                                    (expected_min_interval)&0xFF,
-                                    (expected_max_interval >> 16) & 0xFF,
-                                    (expected_max_interval >> 8) & 0xFF,
-                                    (expected_max_interval)&0xFF,
-                                    (expected_default_interval >> 16) & 0xFF,
-                                    (expected_default_interval >> 8) & 0xFF,
-                                    (expected_default_interval)&0xFF,
-                                    (expected_interval_step >> 16) & 0xFF,
-                                    (expected_interval_step >> 8) & 0xFF,
-                                    (expected_interval_step)&0xFF};
+                                                  WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V2,
+                                                  (expected_min_interval >> 16) & 0xFF,
+                                                  (expected_min_interval >> 8) & 0xFF,
+                                                  (expected_min_interval)&0xFF,
+                                                  (expected_max_interval >> 16) & 0xFF,
+                                                  (expected_max_interval >> 8) & 0xFF,
+                                                  (expected_max_interval)&0xFF,
+                                                  (expected_default_interval >> 16) & 0xFF,
+                                                  (expected_default_interval >> 8) & 0xFF,
+                                                  (expected_default_interval)&0xFF,
+                                                  (expected_interval_step >> 16) & 0xFF,
+                                                  (expected_interval_step >> 8) & 0xFF,
+                                                  (expected_interval_step)&0xFF};
 
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     wake_up_handler.control_handler(&connection_info,
@@ -1344,18 +1381,18 @@ void test_zwave_command_class_wake_up_incoming_wake_up_capabilities_report_too_s
   wake_up_interval_t expected_default_interval = 123457;
   wake_up_interval_t expected_interval_step    = 123451;
   const uint8_t incoming_frame[]               = {COMMAND_CLASS_WAKE_UP,
-                                    WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V2,
-                                    (expected_min_interval >> 16) & 0xFF,
-                                    (expected_min_interval >> 8) & 0xFF,
-                                    (expected_min_interval)&0xFF,
-                                    (expected_max_interval >> 16) & 0xFF,
-                                    (expected_max_interval >> 8) & 0xFF,
-                                    (expected_max_interval)&0xFF,
-                                    (expected_default_interval >> 16) & 0xFF,
-                                    (expected_default_interval >> 8) & 0xFF,
-                                    (expected_default_interval)&0xFF,
-                                    (expected_interval_step >> 16) & 0xFF,
-                                    (expected_interval_step >> 8) & 0xFF};
+                                                  WAKE_UP_INTERVAL_CAPABILITIES_REPORT_V2,
+                                                  (expected_min_interval >> 16) & 0xFF,
+                                                  (expected_min_interval >> 8) & 0xFF,
+                                                  (expected_min_interval)&0xFF,
+                                                  (expected_max_interval >> 16) & 0xFF,
+                                                  (expected_max_interval >> 8) & 0xFF,
+                                                  (expected_max_interval)&0xFF,
+                                                  (expected_default_interval >> 16) & 0xFF,
+                                                  (expected_default_interval >> 8) & 0xFF,
+                                                  (expected_default_interval)&0xFF,
+                                                  (expected_interval_step >> 16) & 0xFF,
+                                                  (expected_interval_step >> 8) & 0xFF};
 
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
                     wake_up_handler.control_handler(&connection_info,
@@ -1462,11 +1499,11 @@ void test_zwave_command_class_wake_up_verify_if_resolution_is_needed()
   wake_up_interval_t expected_interval = 283741;
   zwave_node_id_t expected_node_id     = 232;
   const uint8_t incoming_frame[]       = {COMMAND_CLASS_WAKE_UP,
-                                    WAKE_UP_INTERVAL_REPORT,
-                                    (expected_interval >> 16) & 0xFF,
-                                    (expected_interval >> 8) & 0xFF,
-                                    (expected_interval)&0xFF,
-                                    (uint8_t)(expected_node_id)};
+                                          WAKE_UP_INTERVAL_REPORT,
+                                          (expected_interval >> 16) & 0xFF,
+                                          (expected_interval >> 8) & 0xFF,
+                                          (expected_interval)&0xFF,
+                                          (uint8_t)(expected_node_id)};
 
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     wake_up_handler.control_handler(&connection_info,

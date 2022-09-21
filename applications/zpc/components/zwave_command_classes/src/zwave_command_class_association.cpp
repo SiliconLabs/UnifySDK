@@ -649,11 +649,12 @@ sl_status_t zwave_command_class_association_clean_up_on_zpc_reset()
     zwave_network_management_get_node_id());
 
   ctimer_set(&association_clean_up_timer,
-             ASSOCIATION_CLEAN_UP_TIMEOUT,
+             ASSOCIATION_CLEAN_UP_TIMEOUT
+               + (zwave_network_management_get_network_size() * 300),
              &zwave_command_class_association_clean_up_on_zpc_reset_complete,
              nullptr);
 
-  // We want to give 2 seconds to the resolver to try setting stuff, before we
+  // We want to give a few seconds to the resolver to try setting stuff, before we
   // move on
   return SL_STATUS_OK;
 }

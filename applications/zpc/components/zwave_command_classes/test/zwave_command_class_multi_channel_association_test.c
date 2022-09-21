@@ -525,6 +525,8 @@ void test_zwave_command_class_multi_channel_association_control()
 
   // Try again, except that now we are SIS.
   zwave_network_management_is_zpc_sis_ExpectAndReturn(true);
+  attribute_resolver_restart_set_resolution_ExpectAndReturn(group_content_node,
+                                                            SL_STATUS_FAIL);
   attribute_resolver_clear_resolution_listener_Expect(
     group_1_node,
     &establish_zpc_associations);
@@ -584,6 +586,7 @@ void test_zwave_command_class_multi_channel_association_control()
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(group_content_node, DESIRED_ATTRIBUTE));
 
+  // Command 1
   on_send_complete(group_content_node,
                    RESOLVER_SET_RULE,
                    FRAME_SENT_EVENT_OK_SUPERVISION_WORKING);
@@ -600,12 +603,13 @@ void test_zwave_command_class_multi_channel_association_control()
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(group_content_node, DESIRED_ATTRIBUTE));
 
+  // Command 2
   on_send_complete(group_content_node,
                    RESOLVER_SET_RULE,
                    FRAME_SENT_EVENT_OK_NO_SUPERVISION);
   TEST_ASSERT_FALSE(
     attribute_store_is_value_defined(group_content_node, REPORTED_ATTRIBUTE));
-  TEST_ASSERT_TRUE(
+  TEST_ASSERT_FALSE(
     attribute_store_is_value_defined(group_content_node, DESIRED_ATTRIBUTE));
 
   on_send_complete(group_content_node,
@@ -675,12 +679,12 @@ void test_zwave_command_class_multi_channel_association_association_to_relevant_
   attribute_store_node_t group_content_node
     = attribute_store_add_node(ATTRIBUTE(GROUP_CONTENT), group_id_node);
   uint8_t group_content[] = {2, 3};
+  // As soon as the reported is set, we will trigger the lifeline establishment.
+  attribute_resolver_restart_set_resolution_ExpectAndReturn(group_content_node,
+                                                            SL_STATUS_OK);
   attribute_store_set_reported(group_content_node,
                                group_content,
                                sizeof(group_content));
-
-  //Trigger lifeline establishment
-  establish_zpc_associations(group_id_node);
 
   // Verify the desired value:
   const uint8_t expected_associations[] = {1, 2, 3};
@@ -826,6 +830,7 @@ void test_establish_association_endpoint_association()
                                      &group_profile,
                                      sizeof(group_profile));
 
+  attribute_resolver_restart_set_resolution_IgnoreAndReturn(SL_STATUS_OK);
   uint8_t group_content[] = {1};
   attribute_store_node_t group_content_node_1
     = attribute_store_emplace(group_id_node,

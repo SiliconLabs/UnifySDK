@@ -1,0 +1,8 @@
+# Main unit test
+target_add_unittest(uic_stdin SOURCES uic_stdin_test.c)
+
+# Attribute Store commands tests
+target_add_unittest(uic_stdin
+NAME unify_stdin_attribute_store_commands_test
+SOURCES unify_stdin_attribute_store_commands_test.c
+DEPENDS uic_attribute_store_mock)

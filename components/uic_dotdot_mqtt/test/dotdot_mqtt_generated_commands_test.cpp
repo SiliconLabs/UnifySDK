@@ -101,4 +101,34 @@ void test_thermostat_publish_generated_write_attribute_command()
 
   TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
 }
+
+void test_publish_generated_write_attributes_command_non_utf8()
+{
+  const dotdot_unid_t unid                  = "zw-1234567-1234";
+  dotdot_endpoint_id_t destination_endpoint = 99;
+  const char str[] = {'h', 'e', 'l', 'l', 'o', static_cast<char>(0xa2), 0};
+  uic_mqtt_dotdot_basic_state_t attribute_values
+    = {.location_description = str};
+  uic_mqtt_dotdot_basic_updated_state_t attribute_list
+    = {.location_description = true};
+  uic_mqtt_dotdot_basic_publish_generated_write_attributes_command(
+    unid,
+    destination_endpoint,
+    attribute_values,
+    attribute_list);
+  // Verify that it did its job:
+  const char *expected_topic = "ucl/by-unid/zw-1234567-1234/ep99/"
+                               "Basic/GeneratedCommands/WriteAttributes";
+
+  char published_message[1000] = {};
+  TEST_ASSERT_NOT_NULL(
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
+
+  const char expected_published_message[] = R"(
+    {
+      "LocationDescription":"hello�"
+    } )";
+
+  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
+}
 }

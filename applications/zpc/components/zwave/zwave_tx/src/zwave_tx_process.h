@@ -93,7 +93,14 @@ typedef enum {
   BACKOFF_CURRENT_SESSION_ID,
   /// Back-off has been initiated due to the application telling us of expected
   /// incoming frames.
-  BACKOFF_EXPECTED_ADDITIONAL_FRAMES
+  BACKOFF_EXPECTED_ADDITIONAL_FRAMES,
+  /// Back-off has been initiated because Z-Wave API module is sending frames
+  /// on its own, and we do not want to interfere with this.
+  BACKOFF_PROTOCOL_SENDING_FRAMES,
+  /// Back-off has been initiated becasue we received a routed frame and we
+  /// want to avoid using the route before we are sure that the sender has
+  /// received the routed ack.
+  BACKOFF_INCOMING_UNSOLICITED_ROUTED_FRAME,
 } zwave_tx_backoff_reason_t;
 
 /**

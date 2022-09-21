@@ -419,7 +419,7 @@ static void
     // Try again when it wakes up
     sl_log_debug(LOG_TAG,
                  "NodeID resolution paused, postponing Basic Get probe");
-    attribute_resolver_set_resolution_listener(
+    attribute_resolver_set_resolution_resumption_listener(
       endpoint_node,
       &on_endpoint_interview_completed);
     return;

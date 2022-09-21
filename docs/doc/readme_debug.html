@@ -34,8 +34,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -134,24 +133,21 @@ expected to perform an action.</p>
 <p>Incoming Z-Wave API frames are printed directly to the console, which allows
 detecting incoming Z-Wave frames or other messages from the Z-Wave API module.</p>
 <p>For example,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwapi_protocol_rx_dispatch<span class="o">]</span> Incoming Z-Wave API frame <span class="o">(</span>hex<span class="o">)</span>: <span class="nv">Length</span><span class="o">=</span><span class="m">12</span> <span class="nv">Type</span><span class="o">=</span><span class="m">00</span>
-<span class="nv">Cmd</span><span class="o">=</span>A8 <span class="m">00</span> <span class="m">00</span> <span class="m">01</span> <span class="m">00</span> <span class="m">02</span> <span class="m">04</span> <span class="m">86</span> <span class="m">14</span> 5E <span class="m">02</span> <span class="m">00</span> C0 <span class="m">00</span> 7F 7F
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwapi_protocol_rx_dispatch<span class="o">]</span> Incoming Z-Wave API frame <span class="o">(</span>hex<span class="o">)</span>: <span class="nv">Length</span><span class="o">=</span><span class="m">12</span> <span class="nv">Type</span><span class="o">=</span><span class="m">00</span> <span class="nv">Cmd</span><span class="o">=</span>A8 <span class="m">00</span> <span class="m">00</span> <span class="m">01</span> <span class="m">00</span> <span class="m">02</span> <span class="m">04</span> <span class="m">86</span> <span class="m">14</span> 5E <span class="m">02</span> <span class="m">00</span> C0 <span class="m">00</span> 7F 7F
 </pre></div>
 </div>
 <p>If the ZPC is communicating to the nodes with S2/S0, the log message will show
 encrypted frames. The exact frame payload is typically not printed out.</p>
 <p>Shortly after receiving the frame, the Command Class handler will print out the
 outcome of processing the Z-Wave frame:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_command_handler_callbacks<span class="o">]</span> Command <span class="nv">Class</span><span class="o">=</span>0x25 - <span class="nv">Command</span><span class="o">=</span>0x03 from
-NodeID <span class="m">004</span>:1 handled successfully.
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_command_handler_callbacks<span class="o">]</span> Command <span class="nv">Class</span><span class="o">=</span>0x25 - <span class="nv">Command</span><span class="o">=</span>0x03 from NodeID <span class="m">004</span>:1 handled successfully.
 </pre></div>
 </div>
 </section>
 <section id="outgoing-z-wave-frame-from-zpc-to-z-wave-module">
 <h4>Outgoing Z-Wave Frame from ZPC to Z-Wave Module<a class="headerlink" href="#outgoing-z-wave-frame-from-zpc-to-z-wave-module" title="Permalink to this heading"></a></h4>
 <p>Outgoing Z-Wave frames can be identified in the console log. For example,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_tx_queue<span class="o">]</span> Enqueuing new frame <span class="o">(</span><span class="nv">id</span><span class="o">=</span>0x24<span class="o">)</span> - <span class="m">001</span>:0 -&gt;  <span class="m">002</span>:0 -
-Encapsulation <span class="m">1</span> - Payload <span class="o">[</span>6C <span class="m">01</span> A4 <span class="m">04</span> 8E <span class="m">01</span> <span class="m">01</span> <span class="m">01</span> <span class="o">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_tx_queue<span class="o">]</span> Enqueuing new frame <span class="o">(</span><span class="nv">id</span><span class="o">=</span>0x24<span class="o">)</span> - <span class="m">001</span>:0 -&gt;  <span class="m">002</span>:0 - Encapsulation <span class="m">1</span> - Payload <span class="o">[</span>6C <span class="m">01</span> A4 <span class="m">04</span> 8E <span class="m">01</span> <span class="m">01</span> <span class="m">01</span> <span class="o">]</span>
 </pre></div>
 </div>
 <p>A single frame can result in several TX Queue elements, so multiple TX Queue
@@ -188,10 +184,10 @@ messages may appear.</p>
 <section id="s2-keys">
 <h4>S2 Keys<a class="headerlink" href="#s2-keys" title="Permalink to this heading"></a></h4>
 <p>S2 keys are printed in console logs under each key level header.</p>
-<p>S2 Unauthenticated:     Key class 1<br />
-S2 Authenticated:       Key class 2<br />
-S2 Access:              Key class 4<br />
-S2 Authenticated LR:    Key class 8<br />
+<p>S2 Unauthenticated:     Key class 1
+S2 Authenticated:       Key class 2
+S2 Access:              Key class 4
+S2 Authenticated LR:    Key class 8
 S2 Access LR:           Key class 10</p>
 <p>For example,</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>zwave_s2_keystore<span class="o">]</span> Key class <span class="m">1</span>
@@ -228,10 +224,10 @@ file option.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc  --log.level arg <span class="o">(=</span>d<span class="o">)</span>
 </pre></div>
 </div>
-<p>d: Debug<br />
-i: Info<br />
-w: Warning<br />
-e: Error<br />
+<p>d: Debug
+i: Info
+w: Warning
+e: Error
 c: Critical</p>
 </section>
 <section id="component-based-log-severity">
@@ -265,11 +261,13 @@ ZPC will not handle log rotation.</p>
 <section id="using-mqtt-explorer-to-monitor-messages">
 <h3>Using MQTT Explorer to Monitor Messages<a class="headerlink" href="#using-mqtt-explorer-to-monitor-messages" title="Permalink to this heading"></a></h3>
 <p>You can publish MQTT message and observe the MQTT messages stored in the broker
-with a MQTT Explorer. MQTT explorer is an MQTT client that provides a structured
-overview of your MQTT topics.</p>
-<p>First, while ZPC is running, connect the MQTT Explorer to the host where your
-MQTT broker is located and the topics should be observed and structured based on
-Unify spec.</p>
+with a <a class="reference external" href="https://mqtt-explorer.com/">MQTT Explorer</a>.
+<a class="reference external" href="https://mqtt-explorer.com/">MQTT Explorer</a> is an MQTT client that provides a
+structured overview of your MQTT topics.</p>
+<p>Configure <a class="reference external" href="https://mqtt-explorer.com/">MQTT Explorer</a> to connect to the host
+where your MQTT broker is located and the topics can be observed. Use the
+<a class="reference external" href="https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html">Unify Specifications</a>
+if you need assistance to understand what topics and they data represent.</p>
 </section>
 </section>
 </section>

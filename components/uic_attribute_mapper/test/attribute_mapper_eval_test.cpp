@@ -221,6 +221,9 @@ void test_if()
 
   val = eval_simple("if (undefined) 2 3");
   TEST_ASSERT_EQUAL(3, val.value());
+
+  val = eval_simple("if ((r'1 or 1000) == 1000) 2 3");
+  TEST_ASSERT_EQUAL(2, val.value());
 }
 
 void test_option()
@@ -233,6 +236,9 @@ void test_option()
 
   val = eval_simple(" 55 or undefined");
   TEST_ASSERT_EQUAL(55, val.value());
+
+  val = eval_simple("r'1 or d'1");
+  TEST_ASSERT_FALSE(val);
 }
 
 void test_operators()
@@ -302,6 +308,15 @@ void test_operators()
   TEST_ASSERT_EQUAL(1, val.value());
 
   val = eval_simple("10 > 100");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple("10 != 100");
+  TEST_ASSERT_EQUAL(1, val.value());
+
+  val = eval_simple("100 != 100");
+  TEST_ASSERT_EQUAL(0, val.value());
+
+  val = eval_simple("0.4f != (2/5)");
   TEST_ASSERT_EQUAL(0, val.value());
 }
 

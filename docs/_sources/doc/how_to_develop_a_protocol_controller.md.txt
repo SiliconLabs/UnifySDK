@@ -402,9 +402,9 @@ the **ZPC** navigates up the **Attribute Store**, collects the value of the
 Endpoint, NodeID, HomeID and derives the UNID (from the NodeID / HomeID) and
 Endpoint. The **ZPC** can subsequently make these 2 publications:
 
-```console
-ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired { "value": true }
-ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported { "value": false }
+```mqtt
+ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired - { "value": true }
+ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported - { "value": false }
 ```
 
 If a frame is to be sent using the Protocol Controller networking protocol,
@@ -467,9 +467,9 @@ the **AoxPC** navigates up the **Attribute Store**, collects the value of the
 Endpoint, UNID, and does require any further calculation.
 The **AoxPC** can subsequently make these 2 publications:
 
-```console
-ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired { "value": true}
-ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported { "value": false}
+```mqtt
+ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Desired - { "value" : true}
+ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Attributes/OnOff/Reported - { "value" : false}
 ```
 
 However, when using UNIDs, if a frame is to be sent using the Protocol
@@ -719,8 +719,8 @@ operations. It is used for mapping, but can also be used as information
 database in some cases.
 
 [//]: # (FIXME: I think we want to make a generic mapper documentation)
-A tutorial and examples on how to create <i>.uam</i> files are given in the
-[ZPC User Guide](../applications/zpc/readme_user.md).
+A tutorial and examples on how to create *.uam* files are given in the
+[ZPC User Guide](../applications/zpc/how_to_write_uam_files_for_the_zpc.md).
 
 ## Connecting the Attribute Store and MQTT
 
@@ -737,14 +737,26 @@ provide a uniform way to subscribe and listen to incoming commands.
 The component will take a callback function for each Cluster/Command combination,
 and in turn will take care of publishing the list of SupportedCommands.
 
-```console
-ucl/by-unid/<UNID>/ep<EndpointId>/Level/SupportedCommands { "value": ["Move","MoveToLevel"]] }
+```mqtt
+ucl/by-unid/<UNID>/ep<EndpointId>/Level/SupportedCommands - { "value" : ["Move","MoveToLevel"] }
 ```
 
 When such a publication to a command is received, e.g. :
 
-```console
-ucl/by-unid/<UNID>/ep<EndpointId>/Level/Commands/MoveToLevel {“Level”:50,“TransitionTime”:0,“OptionsMask”:{“ExecuteIfOff”:false,“CoupleColorTempToLevel”:false},“OptionsOverride”:{“ExecuteIfOff”:false,“CoupleColorTempToLevel”:false}}
+```mqtt
+ucl/by-unid/<UNID>/ep<EndpointId>/Level/Commands/MoveToLevel -
+{
+  "Level": 50,
+  "TransitionTime": 0,
+  "OptionsMask": {
+    "ExecuteIfOff": false,
+    "CoupleColorTempToLevel": false
+  },
+  "OptionsOverride": {
+    "ExecuteIfOff": false,
+    "CoupleColorTempToLevel": false
+  }
+}
 ```
 
 It would parse the UNID, Endpoint, JSON payload, and dispatch it to to the
@@ -907,8 +919,8 @@ sl_status_t
 
 At this point, if an IoT Service publishes a command such as
 
-```console
-ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Commands/On {}
+```mqtt
+ucl/by-unid/<UNID>/ep<EndpointId>/OnOff/Commands/On - {}
 ```
 
 The command will be received, passed forward to the right command handler, and
@@ -999,7 +1011,7 @@ Protocol Controllers must publish the node state for each node they can
 access, so that IoT services can build up a list of entities.
 If possible, the state should be published after publishing the list of
 attributes/cluster functionalities, so that IoT Services have a full picture
-of the node's capabilities when it is announced to be <i>"Online Functional"</i>.
+of the node's capabilities when it is announced to be *"Online Functional"*.
 
 The Protocol Controller UCL node state component should listen
 to its proprietary attributes and/or components to determine
@@ -1015,9 +1027,13 @@ change:
 At the end, the component must be able to publish for all reachable nodes the
 following topic:
 
-```console
-ucl/by-unid/<UNID>/State
-{"NetworkStatus": "Online functional", "Security": "Z-Wave S2 Authenticated", "MaximumCommandDelay": 1}
+```mqtt
+ucl/by-unid/<UNID>/State -
+{
+  "NetworkStatus": "Online functional",
+  "Security": "Z-Wave S2 Authenticated",
+  "MaximumCommandDelay": 1
+}
 ```
 
 ```{uml}
@@ -1152,10 +1168,10 @@ void ucl_node_state_teardown()
 
 This will have the effect of publishing an unavailable state for all nodes:
 
-```console
-ucl/by-unid/zw-D4BFAE7D-0001/State {"NetworkStatus": "Unavailable", "Security": "Z-Wave S2 Access Control", "MaximumCommandDelay": 0}
-ucl/by-unid/zw-D4BFAE7D-000C/State {"NetworkStatus": "Unavailable", "Security": "None", "MaximumCommandDelay": 4200}
-ucl/by-unid/zw-D4BFAE7D-000D/State {"NetworkStatus": "Unavailable", "Security": "Z-Wave S2 Authenticated", "MaximumCommandDelay": 1}
+```mqtt
+ucl/by-unid/zw-D4BFAE7D-0001/State - {"NetworkStatus": "Unavailable", "Security": "Z-Wave S2 Access Control", "MaximumCommandDelay": 0}
+ucl/by-unid/zw-D4BFAE7D-000C/State - {"NetworkStatus": "Unavailable", "Security": "None", "MaximumCommandDelay": 4200}
+ucl/by-unid/zw-D4BFAE7D-000D/State - {"NetworkStatus": "Unavailable", "Security": "Z-Wave S2 Authenticated", "MaximumCommandDelay": 1}
 ```
 
 Whenever the Protocol Controller starts again, it needs to iterate over the

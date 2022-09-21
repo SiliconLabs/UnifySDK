@@ -16,7 +16,6 @@ var nm__state__machine_8c =
     [ "on_new_network", "nm__state__machine_8c.html#abcdc17538148dcf4141793a866836aae", null ],
     [ "on_remove_failed_status_update", "nm__state__machine_8c.html#a771db33db0966e9dfda26f16423ebd8a", null ],
     [ "on_remove_node_status_update", "nm__state__machine_8c.html#abea8332a6608bd1315ba68682471a486", null ],
-    [ "on_request_node_neighbor_update", "nm__state__machine_8c.html#a4d8d3fd20fd95caff73e5cb166a02e7b", null ],
     [ "on_s2_inclusion_started", "nm__state__machine_8c.html#a920bcc49d14869b40c10158d125bba7b", null ],
     [ "on_secure_inclusion_complete", "nm__state__machine_8c.html#a91e54e7af314fb21e1c38313ccb3d876", null ],
     [ "PROCESS_NAME", "nm__state__machine_8c.html#a2c71823803aa0c6afb4f0feb87efefa9", null ],

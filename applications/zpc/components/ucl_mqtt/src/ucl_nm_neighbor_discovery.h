@@ -24,6 +24,24 @@
 #ifndef UCL_NM_NEIGHBOR_DISCOVERY_H
 #define UCL_NM_NEIGHBOR_DISCOVERY_H
 
+/// setting a 5 minutes timeout to tackle a defect in protocol
+/// which may not send a callback message to the host application.
+/// The value is estimated considering that neigbour discovery
+/// is triggered in a large network (i.e., 232 nodes)
+#define UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_DEFAULT_TIMEOUT 3000000
+
+/**
+ * @brief All possible values for Node Request Node Neighbor Discovery Statuses
+ *        \ref zwapi_request_neighbor_update() callback status values
+ *         i.e., UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED = 0x21
+ */
+typedef enum {
+  UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED       = 0x21,
+  UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_COMPLETED     = 0x22,
+  UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_FAILED        = 0x23,
+  UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_NOT_SUPPORTED = 255,
+} ucl_network_management_neighbor_discovery_t;
+
 #ifdef __cplusplus
 extern "C" {
 #endif

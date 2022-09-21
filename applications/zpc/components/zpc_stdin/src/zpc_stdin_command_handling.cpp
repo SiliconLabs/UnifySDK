@@ -62,8 +62,7 @@
 using attribute_store_get_string_function_t
   = sl_status_t (*)(attribute_store_node_t, char *, size_t);
 
-using tuple_node_and_level
-  = std::tuple<attribute_store_node_t,int>;
+using tuple_node_and_level = std::tuple<attribute_store_node_t, int>;
 
 constexpr char LOG_TAG[] = "zpc_stdin";
 /// File descripter for output stream
@@ -85,10 +84,7 @@ static sl_status_t handle_remove_zwave_node(const handle_args_t &arg);
 static sl_status_t handle_attribute_store_log(const handle_args_t &arg);
 static sl_status_t handle_attribute_store_log_network(const handle_args_t &arg);
 static sl_status_t handle_attribute_store_log_search(const handle_args_t &arg);
-static sl_status_t
-  handle_attribute_store_configuration_set_auto_save(const handle_args_t &arg);
-static sl_status_t handle_attribute_store_configuration_set_type_validation(
-  const handle_args_t &arg);
+
 static sl_status_t
   handle_attribute_store_set_reported(const handle_args_t &arg);
 static sl_status_t handle_attribute_store_set_desired(const handle_args_t &arg);
@@ -171,22 +167,11 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
     " the number of children nodes "
     "The entire attribute store is dumped if no NodeID is provided",
     &handle_attribute_store_log_network}},
-    {"attribute_store_log_search",
+  {"attribute_store_log_search",
    {COLOR_START
     "<Attribute Name>" COLOR_END
     " :Prints the tree path to nodes with the specified <Attribute Type",
     &handle_attribute_store_log_search}},
-  {"attribute_store_configuration_set_auto_save",
-   {COLOR_START "<Enabled>" COLOR_END
-                " :Configures if the Attribute Store auto-save is enabled."
-                "Use the value 0 for disabled, 1 for enabled",
-    &handle_attribute_store_configuration_set_auto_save}},
-  {"attribute_store_configuration_set_type_validation",
-   {COLOR_START
-    "<Enabled>" COLOR_END
-    " :Configures if the Attribute Store type write validation is enabled."
-    "Use the value 0 for disabled, 1 for enabled",
-    &handle_attribute_store_configuration_set_type_validation}},
   {"attribute_store_set_all_desired_types",
    {COLOR_START "<type>,<Value>" COLOR_END
                 " :Goes throught the entire attribute store and set all "
@@ -528,17 +513,21 @@ static sl_status_t
     return SL_STATUS_FAIL;
   }
   std::array<uint8_t, ZWAVE_MAX_FRAME_SIZE> frame_data;
-
-  for (std::size_t i = 0; i < (arg[1].length()); i += 2) {
-    frame_data.at(i / 2)
-      = static_cast<uint8_t>(std::stoi(arg[1].substr(i, 2), nullptr, 16));
+  try {
+    for (std::size_t i = 0; i < (arg[1].length()); i += 2) {
+      frame_data.at(i / 2)
+        = static_cast<uint8_t>(std::stoi(arg[1].substr(i, 2), nullptr, 16));
+    }
+    zwave_controller_connection_info_t connection_info = {{{0}}};
+    connection_info.remote.node_id = zwave_network_management_get_node_id();
+    connection_info.encapsulation  = zpc_highest_security_class();
+    return zwave_command_handler_dispatch(&connection_info,
+                                          frame_data.data(),
+                                          (uint16_t)(arg[1].length() / 2));
+  } catch (const std::invalid_argument &e) {
+    dprintf(out_stream, "%s: Invalid argument: %s\n", arg[0].c_str(), e.what());
+    return SL_STATUS_FAIL;
   }
-  zwave_controller_connection_info_t connection_info = {{{0}}};
-  connection_info.remote.node_id = zwave_network_management_get_node_id();
-  connection_info.encapsulation  = zpc_highest_security_class();
-  return zwave_command_handler_dispatch(&connection_info,
-                                        frame_data.data(),
-                                        (uint16_t)(arg[1].length() / 2));
 }
 
 static sl_status_t handle_remove_zwave_node(const handle_args_t &arg)
@@ -756,16 +745,16 @@ static std::string attribute_info(attribute_store_node_t n,
 }
 
 static sl_status_t do_ats_log(attribute_store_node_t n,
-                              int indentation_level = 0,
+                              int indentation_level        = 0,
                               bool print_total_child_count = false,
-                              bool print_only_n_node = false)
+                              bool print_only_n_node       = false)
 {
   if (n == ATTRIBUTE_STORE_INVALID_NODE) {
     return SL_STATUS_FAIL;
   }
 
   std::stringstream line;
-  if (indentation_level>2 && print_total_child_count){
+  if (indentation_level > 2 && print_total_child_count) {
     return SL_STATUS_OK;
   }
   line << attribute_info(n, indentation_level);
@@ -787,19 +776,20 @@ static sl_status_t do_ats_log(attribute_store_node_t n,
     line << ")";
   }
   line << std::endl;
-  
-  if (indentation_level == 2 && print_total_child_count){
-    line << "{ "
-         << attribute_store_get_node_total_child_count(n)
+
+  if (indentation_level == 2 && print_total_child_count) {
+    line << "{ " << attribute_store_get_node_total_child_count(n)
          << " children nodes } \n";
   }
- 
+
   if (write(out_stream, line.str().data(), line.str().length()) < 0) {
     sl_log_error(LOG_TAG, "Failed to write to out_stream");
   };
-  if(!print_only_n_node){
+  if (!print_only_n_node) {
     for (size_t i = 0; i < attribute_store_get_node_child_count(n); i++) {
-      do_ats_log(attribute_store_get_node_child(n, i), indentation_level + 1,print_total_child_count);
+      do_ats_log(attribute_store_get_node_child(n, i),
+                 indentation_level + 1,
+                 print_total_child_count);
     }
   }
 
@@ -826,7 +816,7 @@ static sl_status_t handle_attribute_store_log(const handle_args_t &arg)
     return SL_STATUS_FAIL;
   }
 }
- 
+
 static sl_status_t handle_attribute_store_log_network(const handle_args_t &arg)
 {
   try {
@@ -838,9 +828,9 @@ static sl_status_t handle_attribute_store_log_network(const handle_args_t &arg)
       zwave_unid_from_node_id(node_id, unid);
       attribute_store_node_t node_to_print
         = attribute_store_network_helper_get_node_id_node(unid);
-      return do_ats_log(node_to_print,0,true);
+      return do_ats_log(node_to_print, 0, true);
     } else {
-      return do_ats_log(attribute_store_get_root(),0,true);
+      return do_ats_log(attribute_store_get_root(), 0, true);
     }
   } catch (const std::invalid_argument &e) {
     dprintf(out_stream, "%s\n", e.what());
@@ -848,76 +838,83 @@ static sl_status_t handle_attribute_store_log_network(const handle_args_t &arg)
   }
 }
 
-static sl_status_t print_vector(const std::vector <tuple_node_and_level> subtree)
+static sl_status_t print_vector(const std::vector<tuple_node_and_level> subtree)
 {
   sl_status_t status;
   std::stringstream line;
-  if(subtree.empty()){
+  if (subtree.empty()) {
     return SL_STATUS_FAIL;
   }
-  for (const auto& [node,level] : subtree){
-    status = do_ats_log(node, level , false, true);
-    if(status == SL_STATUS_FAIL)
+  for (const auto &[node, level]: subtree) {
+    status = do_ats_log(node, level, false, true);
+    if (status == SL_STATUS_FAIL)
       return status;
   }
   return SL_STATUS_OK;
-
 }
 
-static sl_status_t collect_the_parent_nodes(std::vector<tuple_node_and_level>& tree,
-                                     attribute_store_node_t node,
-                                    int level,
-                                    bool is_the_first_call=true,
-                                    int pos = 0)
-{ 
-  // Finding the correct place to add each node into the 
-  // vector, in order to start from the root and end to the node of interest and 
+static sl_status_t
+  collect_the_parent_nodes(std::vector<tuple_node_and_level> &tree,
+                           attribute_store_node_t node,
+                           int level,
+                           bool is_the_first_call = true,
+                           int pos                = 0)
+{
+  // Finding the correct place to add each node into the
+  // vector, in order to start from the root and end to the node of interest and
   // avoid duplications of nodes in the vector
-  tuple_node_and_level parent {attribute_store_get_node_parent(node),level-1}; 
-  bool result = ((std::find (tree.begin(), tree.end(), parent))!= tree.end());
+  tuple_node_and_level parent {attribute_store_get_node_parent(node),
+                               level - 1};
+  bool result = ((std::find(tree.begin(), tree.end(), parent)) != tree.end());
   if (result) {
-    tree.insert(tree.end()-pos,tuple_node_and_level(node,level));
+    tree.insert(tree.end() - pos, tuple_node_and_level(node, level));
     return SL_STATUS_OK;
-  }else if(!result && is_the_first_call){
+  } else if (!result && is_the_first_call) {
     pos++;
-    tree.insert(tree.end(),tuple_node_and_level(node,level));
-  }else {
-    tree.insert(tree.end()-pos,tuple_node_and_level(node,level));
+    tree.insert(tree.end(), tuple_node_and_level(node, level));
+  } else {
+    tree.insert(tree.end() - pos, tuple_node_and_level(node, level));
     pos++;
   }
-  
-  if( node != attribute_store_get_root())
-    collect_the_parent_nodes(tree,attribute_store_get_node_parent(node), 
-                                                    level-1, false, pos);
+
+  if (node != attribute_store_get_root())
+    collect_the_parent_nodes(tree,
+                             attribute_store_get_node_parent(node),
+                             level - 1,
+                             false,
+                             pos);
 
   return SL_STATUS_OK;
 }
 
-static sl_status_t find_the_node(std::vector <tuple_node_and_level>& tree,
-                                 const std::string& attribute,
-                                 attribute_store_node_t node 
-                                 = attribute_store_get_root()
-                                 ,int level = 0)
+static sl_status_t find_the_node(std::vector<tuple_node_and_level> &tree,
+                                 const std::string &attribute,
+                                 attribute_store_node_t node
+                                 = attribute_store_get_root(),
+                                 int level = 0)
 {
-
   std::stringstream line;
   if (node == ATTRIBUTE_STORE_INVALID_NODE) {
     return SL_STATUS_FAIL;
   }
-  
-  const char* type = attribute_store_get_type_name(attribute_store_get_node_type(node));
+
+  const char *type
+    = attribute_store_get_type_name(attribute_store_get_node_type(node));
 
   // Each time that finds a node calls the collect_the_parent_node to collect the nodes
   // that lead to the node of interest, in a vector
   std::string str(type);
-  if (str.find(attribute) != std::string::npos){
-   collect_the_parent_nodes(tree,node,level);
+  if (str.find(attribute) != std::string::npos) {
+    collect_the_parent_nodes(tree, node, level);
   }
-  
+
   for (size_t i = 0; i < attribute_store_get_node_child_count(node); i++) {
-    find_the_node(tree,attribute,attribute_store_get_node_child(node, i),level+1);
+    find_the_node(tree,
+                  attribute,
+                  attribute_store_get_node_child(node, i),
+                  level + 1);
   }
-  
+
   return SL_STATUS_OK;
 }
 
@@ -927,53 +924,20 @@ static sl_status_t handle_attribute_store_log_search(const handle_args_t &arg)
   sl_log_set_tag_level("attribute_store", SL_LOG_DEBUG);
 
   if (arg.size() != 2) {
-    dprintf(out_stream, "Invalid number of arguments, expected args: <Attribute Type>\n");
+    dprintf(out_stream,
+            "Invalid number of arguments, expected args: <Attribute Type>\n");
     return SL_STATUS_FAIL;
   }
   try {
-    std::vector <tuple_node_and_level> tree;
+    std::vector<tuple_node_and_level> tree;
 
-    if(find_the_node(tree,arg[1]) == SL_STATUS_FAIL)
+    if (find_the_node(tree, arg[1]) == SL_STATUS_FAIL)
       return SL_STATUS_FAIL;
     return print_vector(tree);
   } catch (const std::invalid_argument &e) {
     dprintf(out_stream, "%s\n", e.what());
     return SL_STATUS_FAIL;
   }
-}
-
-static sl_status_t
-  handle_attribute_store_configuration_set_auto_save(const handle_args_t &arg)
-{
-  try {
-    if (arg.size() == 2) {
-      // Parse the "Enabled" argument
-      bool enabled = static_cast<bool>(std::stoi(arg[1].c_str(), nullptr, 10));
-      attribute_store_configuration_set_auto_save(enabled);
-      return SL_STATUS_OK;
-    }
-  } catch (const std::invalid_argument &e) {
-    dprintf(out_stream, "%s\n", e.what());
-    return SL_STATUS_FAIL;
-  }
-  return SL_STATUS_FAIL;
-}
-
-static sl_status_t handle_attribute_store_configuration_set_type_validation(
-  const handle_args_t &arg)
-{
-  try {
-    if (arg.size() == 2) {
-      // Parse the "Enabled" argument
-      bool enabled = static_cast<bool>(std::stoi(arg[1].c_str(), nullptr, 10));
-      attribute_store_configuration_set_type_validation(enabled);
-      return SL_STATUS_OK;
-    }
-  } catch (const std::invalid_argument &e) {
-    dprintf(out_stream, "%s\n", e.what());
-    return SL_STATUS_FAIL;
-  }
-  return SL_STATUS_FAIL;
 }
 
 static sl_status_t handle_attribute_store_set_desired(const handle_args_t &arg)
@@ -1296,19 +1260,34 @@ static void
 
 static sl_status_t handle_attribute_poll_register(const handle_args_t &arg)
 {
-  uint32_t interval = 0;
   if (arg.size() < 2) {
     return SL_STATUS_FAIL;
-  } else if (arg.size() == 3) {
-    interval = std::stoul(arg[2].c_str(), nullptr, 10);
   }
-  attribute_store_node_t node = std::stoul(arg[1].c_str(), nullptr, 10);
-  return attribute_poll_register(node, interval);
+  try {
+    uint32_t interval = 0;
+    if (arg.size() == 3) {
+      interval = std::stoul(arg[2].c_str(), nullptr, 10);
+    }
+    attribute_store_node_t node = std::stoul(arg[1].c_str(), nullptr, 10);
+    return attribute_poll_register(node, interval);
+  } catch (const std::invalid_argument &e) {
+    dprintf(out_stream, "%s: Invalid argument: %s\n", arg[0].c_str(), e.what());
+    return SL_STATUS_FAIL;
+  }
 }
+
 static sl_status_t handle_attribute_poll_deregister(const handle_args_t &arg)
 {
-  attribute_store_node_t node = std::stoul(arg[1].c_str(), nullptr, 10);
-  return attribute_poll_deregister(node);
+  if (arg.size() < 2) {
+    return SL_STATUS_FAIL;
+  }
+  try {
+    attribute_store_node_t node = std::stoul(arg[1].c_str(), nullptr, 10);
+    return attribute_poll_deregister(node);
+  } catch (const std::invalid_argument &e) {
+    dprintf(out_stream, "%s: Invalid argument: %s\n", arg[0].c_str(), e.what());
+    return SL_STATUS_FAIL;
+  }
 }
 
 static zwave_controller_callbacks_t stdin_zwave_controller_cb = {

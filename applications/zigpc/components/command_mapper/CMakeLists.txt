@@ -1,4 +1,3 @@
-find_program(ZAP_EXECUTABLE "zap" REQUIRED)
 run_zap(zap/gen-templates.json)
 
 # Find nlohmann_json, unfortunately the find_package doesn't work for this when
@@ -10,9 +9,9 @@ find_path(nlohmann_json_include nlohmann/json.hpp REQUIRED)
 add_library(
   zigpc_command_mapper
   src/zigpc_command_mapper.c
-  ${CMAKE_CURRENT_BINARY_DIR}/src/zigpc_command_mapper_handlers.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/src/zigpc_command_mapper_bygroup_handlers.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/src/zigpc_cmdmapper_gen_cmd_publish.cpp)
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/zigpc_command_mapper_handlers.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/zigpc_command_mapper_bygroup_handlers.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/zigpc_cmdmapper_gen_cmd_publish.cpp)
 
 target_include_directories(
   zigpc_command_mapper

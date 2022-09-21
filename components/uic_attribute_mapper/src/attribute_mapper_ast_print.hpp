@@ -37,7 +37,8 @@ class print
     _out << "undefined";
   }
 
-  inline void operator()(float n) {
+  inline void operator()(float n)
+  {
     _out << n;
   }
 
@@ -73,8 +74,20 @@ class print
 
   inline void operator()(const operation &x)
   {
-    const char *op_str[]
-      = {"+", "-", "==", "*", "/", "&", "|", "^", "<", ">", "or", "%", "**"};
+    const char *op_str[] = {"+",
+                            "-",
+                            "==",
+                            "!=",
+                            "*",
+                            "/",
+                            "&",
+                            "|",
+                            "^",
+                            "<",
+                            ">",
+                            "or",
+                            "%",
+                            "**"};
     _out << op_str[x.operator_] << ' ';
     boost::apply_visitor(*this, x.operand_);
   }

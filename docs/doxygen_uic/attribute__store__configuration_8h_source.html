@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework Lib
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -111,23 +111,28 @@ $(document).ready(function(){initNavTree('attribute__store__configuration_8h_sou
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="group__attribute__store__configuration.html#ga408eee6fa57291d2af90c583c965122b">   42</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__attribute__store__configuration.html#ga408eee6fa57291d2af90c583c965122b">attribute_store_configuration_set_type_validation</a>(<span class="keywordtype">bool</span> enabled);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="group__attribute__store__configuration.html#ga5990d421e8c6c4e5a3455273ef25ef83">   55</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__attribute__store__configuration.html#ga5990d421e8c6c4e5a3455273ef25ef83">attribute_store_configuration_set_auto_save</a>(<span class="keywordtype">bool</span> enabled);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif  //ATTRIBUTE_STORE_CONFIGURATION_H</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="group__attribute__store__configuration.html#gaee85de2d72c55a320c146f01ceeffe78">   52</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__attribute__store__configuration.html#gaee85de2d72c55a320c146f01ceeffe78">attribute_store_configuration_set_auto_save_safety_interval</a>(</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seconds);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="group__attribute__store__configuration.html#ga2725f76fb87b3db49bcf2ab88c52b39c">   67</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__attribute__store__configuration.html#ga2725f76fb87b3db49bcf2ab88c52b39c">attribute_store_configuration_set_auto_save_cooldown_interval</a>(</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seconds);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#endif  //ATTRIBUTE_STORE_CONFIGURATION_H</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="agroup__attribute__store__configuration_html_ga408eee6fa57291d2af90c583c965122b"><div class="ttname"><a href="group__attribute__store__configuration.html#ga408eee6fa57291d2af90c583c965122b">attribute_store_configuration_set_type_validation</a></div><div class="ttdeci">void attribute_store_configuration_set_type_validation(bool enabled)</div><div class="ttdoc">Configures if the Attribute Store will use the known type registration to validate any writing to nod...</div></div>
-<div class="ttc" id="agroup__attribute__store__configuration_html_ga5990d421e8c6c4e5a3455273ef25ef83"><div class="ttname"><a href="group__attribute__store__configuration.html#ga5990d421e8c6c4e5a3455273ef25ef83">attribute_store_configuration_set_auto_save</a></div><div class="ttdeci">void attribute_store_configuration_set_auto_save(bool enabled)</div><div class="ttdoc">Configures if the Attribute Store will save changes to SQLite automatically after each change.</div></div>
+<div class="ttc" id="agroup__attribute__store__configuration_html_ga2725f76fb87b3db49bcf2ab88c52b39c"><div class="ttname"><a href="group__attribute__store__configuration.html#ga2725f76fb87b3db49bcf2ab88c52b39c">attribute_store_configuration_set_auto_save_cooldown_interval</a></div><div class="ttdeci">void attribute_store_configuration_set_auto_save_cooldown_interval(unsigned int seconds)</div><div class="ttdoc">Configures a delay after Attribute Store updates before saving changes to the datastore.</div></div>
+<div class="ttc" id="agroup__attribute__store__configuration_html_gaee85de2d72c55a320c146f01ceeffe78"><div class="ttname"><a href="group__attribute__store__configuration.html#gaee85de2d72c55a320c146f01ceeffe78">attribute_store_configuration_set_auto_save_safety_interval</a></div><div class="ttdeci">void attribute_store_configuration_set_auto_save_safety_interval(unsigned int seconds)</div><div class="ttdoc">Configures if the Attribute Store will save changes to the datastore following a periodic interval as...</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_d7fba4d9e86299b704b642937f0243e8.html">uic_attribute_store</a></li><li class="navelem"><a class="el" href="dir_1258395076e871e9609ba7f43babf823.html">include</a></li><li class="navelem"><a class="el" href="attribute__store__configuration_8h.html">attribute_store_configuration.h</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:41:57 for Unify Framework Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:41 for Unify Framework Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

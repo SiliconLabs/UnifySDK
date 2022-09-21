@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -149,6 +149,18 @@ $(document).ready(function(){initNavTree('globals_defs_l.html',''); initResizabl
 <li>LEARN_MODE_UNDOCUMENTED_VALUE
 : <a class="el" href="zwave__network__management__callbacks_8c.html#a930e969a7ee0f26a9d9c2f79106703de">zwave_network_management_callbacks.c</a>
 </li>
+<li>LEVEL_OPTIONS_COUPLE_COLOR_TEMP_TO_LEVEL
+: <a class="el" href="group__zap.html#ga5e562290c5ba8341785041c5403017d9">zap-types.h</a>
+</li>
+<li>LEVEL_OPTIONS_COUPLE_COLOR_TEMP_TO_LEVEL_OFFSET
+: <a class="el" href="group__zap.html#ga539bfca1b2234a2a9ff6109d625cfcb9">zap-types.h</a>
+</li>
+<li>LEVEL_OPTIONS_EXECUTE_IF_OFF
+: <a class="el" href="group__zap.html#gaf2e787a74fd10c301879d0cead40c648">zap-types.h</a>
+</li>
+<li>LEVEL_OPTIONS_EXECUTE_IF_OFF_OFFSET
+: <a class="el" href="group__zap.html#ga74de7047d1e300e47bcf47d1b967febc">zap-types.h</a>
+</li>
 <li>LIFELINE_GROUP_ID
 : <a class="el" href="group__agi__command__class.html#gabaeacc915945ec6f7f48f5313f75157f">zwave_command_class_agi.h</a>
 </li>
@@ -225,10 +237,9 @@ $(document).ready(function(){initNavTree('globals_defs_l.html',''); initResizabl
 : <a class="el" href="group__process.html#gadf2f1289f7a7eaafc3c4c44ba0016acd">process.c</a>
 </li>
 <li>LOG_TAG
-: <a class="el" href="zwapi__connection_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_connection.c</a>
-, <a class="el" href="zwapi__serial_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_serial.c</a>
+: <a class="el" href="zwapi__serial_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_serial.c</a>
 , <a class="el" href="zwave__tx__scheme__selector_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_tx_scheme_selector.c</a>
-, <a class="el" href="zwapi__init_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_init.c</a>
+, <a class="el" href="zwave__tx__state__logging_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_tx_state_logging.c</a>
 , <a class="el" href="zwave__api__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_api_transport.c</a>
 , <a class="el" href="transport__service_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">transport_service.c</a>
 , <a class="el" href="zwave__transport__service__wrapper_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_transport_service_wrapper.c</a>
@@ -240,7 +251,7 @@ $(document).ready(function(){initNavTree('globals_defs_l.html',''); initResizabl
 , <a class="el" href="zwave__s0__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_s0_transport.c</a>
 , <a class="el" href="zwave__s0__sm_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_s0_sm.c</a>
 , <a class="el" href="zwave__s0__network_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_s0_network.c</a>
-, <a class="el" href="multicast__follow__ups__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">multicast_follow_ups_transport.c</a>
+, <a class="el" href="zwapi__protocol__rx__dispatch_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_protocol_rx_dispatch.c</a>
 , <a class="el" href="zwave__multi__channel__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_multi_channel_transport.c</a>
 , <a class="el" href="zwave__security__validation_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_security_validation.c</a>
 , <a class="el" href="zwave__rx_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_rx.c</a>
@@ -248,14 +259,14 @@ $(document).ready(function(){initNavTree('globals_defs_l.html',''); initResizabl
 , <a class="el" href="zwave__network__management__process_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_network_management_process.c</a>
 , <a class="el" href="zwave__network__management__helpers_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_network_management_helpers.c</a>
 , <a class="el" href="zwave__network__management__callbacks_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_network_management_callbacks.c</a>
-, <a class="el" href="zwave__network__management_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_network_management.c</a>
+, <a class="el" href="zwave__command__class__firmware__update_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_firmware_update.c</a>
 , <a class="el" href="state__logging_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">state_logging.c</a>
-, <a class="el" href="zwave__command__class__binary__switch_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_binary_switch.c</a>
-, <a class="el" href="zwave__command__class__indicator_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_indicator.c</a>
-, <a class="el" href="zwave__command__class__wake__up_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_wake_up.c</a>
+, <a class="el" href="nm__state__machine_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">nm_state_machine.c</a>
+, <a class="el" href="zwave__controller__utils_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_controller_utils.c</a>
+, <a class="el" href="zwave__controller__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_controller_transport.c</a>
 , <a class="el" href="zwave__controller__storage_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_controller_storage.c</a>
 , <a class="el" href="zwave__controller__callbacks_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_controller_callbacks.c</a>
-, <a class="el" href="zwave__controller_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_controller.c</a>
+, <a class="el" href="zwave__command__class__multi__channel_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_multi_channel.c</a>
 , <a class="el" href="zpc__hex__to__int_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zpc_hex_to_int.c</a>
 , <a class="el" href="zpc__ncp__update__fixt_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zpc_ncp_update_fixt.c</a>
 , <a class="el" href="zpc__datastore_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zpc_datastore.c</a>
@@ -268,51 +279,57 @@ $(document).ready(function(){initNavTree('globals_defs_l.html',''); initResizabl
 , <a class="el" href="zcl__rf__telemetry__cluster__server_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zcl_rf_telemetry_cluster_server.c</a>
 , <a class="el" href="ucl__mqtt__node__interview_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">ucl_mqtt_node_interview.c</a>
 , <a class="el" href="network__monitor__span__persistence_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">network_monitor_span_persistence.c</a>
-, <a class="el" href="zwapi__protocol__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_protocol_transport.c</a>
-, <a class="el" href="zwapi__protocol__mem_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_protocol_mem.c</a>
-, <a class="el" href="zwave__command__class__transport__service_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_transport_service.c</a>
-, <a class="el" href="zwave__command__class__thermostat__setpoint_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_thermostat_setpoint.c</a>
-, <a class="el" href="zwave__tx__state__logging_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_tx_state_logging.c</a>
-, <a class="el" href="zwave__command__class__basic_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_basic.c</a>
-, <a class="el" href="posix_2uic__main__externals__platform_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_main_externals_platform.c</a>
-, <a class="el" href="zwave__command__class__version_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_version.c</a>
-, <a class="el" href="uic__stdin__process_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_stdin_process.c</a>
-, <a class="el" href="zwave__command__class__firmware__update_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_firmware_update.c</a>
-, <a class="el" href="zwave__command__classes__utils_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_classes_utils.c</a>
-, <a class="el" href="zwave__command__class__zwave__plus__info_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_zwave_plus_info.c</a>
-, <a class="el" href="uic__mqtt_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_mqtt.c</a>
-, <a class="el" href="zwave__command__class__switch__multilevel_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_switch_multilevel.c</a>
-, <a class="el" href="uic__init_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_init.c</a>
-, <a class="el" href="zwave__controller__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_controller_transport.c</a>
-, <a class="el" href="datastore__internals_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">datastore_internals.c</a>
-, <a class="el" href="zwave__command__class__node__info__resolver_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_node_info_resolver.c</a>
-, <a class="el" href="datastore__attributes_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">datastore_attributes.c</a>
-, <a class="el" href="datastore_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">datastore.c</a>
-, <a class="el" href="uic__main__externals_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_main_externals.c</a>
-, <a class="el" href="zwave__command__class__supervision_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_supervision.c</a>
-, <a class="el" href="uic__main_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_main.c</a>
-, <a class="el" href="datastore__fixt_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">datastore_fixt.c</a>
 , <a class="el" href="binding__cluster__mapper_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">binding_cluster_mapper.c</a>
-, <a class="el" href="zwapi__protocol__rx__dispatch_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_protocol_rx_dispatch.c</a>
-, <a class="el" href="uic__component__fixtures_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_component_fixtures.c</a>
+, <a class="el" href="zwave__command__class__node__info__resolver_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_node_info_resolver.c</a>
+, <a class="el" href="posix_2uic__main__externals__platform_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_main_externals_platform.c</a>
+, <a class="el" href="datastore__attributes_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">datastore_attributes.c</a>
+, <a class="el" href="attribute__store__process_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">attribute_store_process.c</a>
 , <a class="el" href="zwave__command__class__alarm__sensor_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_alarm_sensor.c</a>
-, <a class="el" href="zwave__command__class__thermostat__mode_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_thermostat_mode.c</a>
+, <a class="el" href="zwave__command__class__zwave__plus__info_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_zwave_plus_info.c</a>
+, <a class="el" href="zwave__command__class__wake__up_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_wake_up.c</a>
+, <a class="el" href="uic__main_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_main.c</a>
 , <a class="el" href="zwave__command__class__configuration__control_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_configuration_control.c</a>
-, <a class="el" href="zwave__command__class__granted__keys__resolver_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_granted_keys_resolver.c</a>
-, <a class="el" href="zwave__controller__utils_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_controller_utils.c</a>
-, <a class="el" href="nm__state__machine_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">nm_state_machine.c</a>
-, <a class="el" href="zwave__command__class__multilevel__sensor_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_multilevel_sensor.c</a>
-, <a class="el" href="zwave__command__class__powerlevel_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_powerlevel.c</a>
-, <a class="el" href="zwave__command__class__security__2_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_security_2.c</a>
-, <a class="el" href="group__process.html#ga7ce0df38eb467e59f209470c8f5ac4e6">process.c</a>
-, <a class="el" href="zwapi__session_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_session.c</a>
-, <a class="el" href="platform__exec_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">platform_exec.c</a>
+, <a class="el" href="uic__init_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_init.c</a>
+, <a class="el" href="zwave__command__classes__utils_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_classes_utils.c</a>
+, <a class="el" href="multicast__follow__ups__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">multicast_follow_ups_transport.c</a>
 , <a class="el" href="zwave__command__class__manufacturer__specific_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_manufacturer_specific.c</a>
+, <a class="el" href="datastore_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">datastore.c</a>
+, <a class="el" href="group__process.html#ga7ce0df38eb467e59f209470c8f5ac4e6">process.c</a>
+, <a class="el" href="zwave__network__management_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_network_management.c</a>
+, <a class="el" href="zwave__command__class__transport__service_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_transport_service.c</a>
+, <a class="el" href="zwave__controller_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_controller.c</a>
+, <a class="el" href="uic__component__fixtures_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_component_fixtures.c</a>
+, <a class="el" href="zwave__command__class__multilevel__sensor_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_multilevel_sensor.c</a>
+, <a class="el" href="zwave__command__class__security__2_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_security_2.c</a>
+, <a class="el" href="datastore__internals_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">datastore_internals.c</a>
+, <a class="el" href="datastore__fixt_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">datastore_fixt.c</a>
+, <a class="el" href="uic__stdin__process_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_stdin_process.c</a>
+, <a class="el" href="zwave__command__class__thermostat__setpoint_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_thermostat_setpoint.c</a>
+, <a class="el" href="uic__mqtt_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_mqtt.c</a>
+, <a class="el" href="zwapi__protocol__mem_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_protocol_mem.c</a>
+, <a class="el" href="zwapi__init_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_init.c</a>
+, <a class="el" href="platform__exec_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">platform_exec.c</a>
+, <a class="el" href="zwave__command__class__basic_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_basic.c</a>
 , <a class="el" href="zwave__command__class__central__scene_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_central_scene.c</a>
-, <a class="el" href="zwave__command__class__multi__channel_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_multi_channel.c</a>
-, <a class="el" href="zwave__command__class__security__0_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_security_0.c</a>
-, <a class="el" href="zwapi__protocol__basis_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_protocol_basis.c</a>
+, <a class="el" href="zwave__command__class__version_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_version.c</a>
+, <a class="el" href="zwave__command__class__indicator_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_indicator.c</a>
+, <a class="el" href="uic__main__externals_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">uic_main_externals.c</a>
+, <a class="el" href="zwave__command__class__granted__keys__resolver_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_granted_keys_resolver.c</a>
 , <a class="el" href="zwave__command__class__meter__control_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_meter_control.c</a>
+, <a class="el" href="zwave__command__class__security__0_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_security_0.c</a>
+, <a class="el" href="zwave__command__class__supervision_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_supervision.c</a>
+, <a class="el" href="zwave__command__class__thermostat__mode_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_thermostat_mode.c</a>
+, <a class="el" href="zwave__command__class__switch__multilevel_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_switch_multilevel.c</a>
+, <a class="el" href="zwapi__session_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_session.c</a>
+, <a class="el" href="zwapi__protocol__transport_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_protocol_transport.c</a>
+, <a class="el" href="zwave__command__class__binary__switch_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_binary_switch.c</a>
+, <a class="el" href="zwapi__connection_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_connection.c</a>
+, <a class="el" href="zwave__command__class__powerlevel_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwave_command_class_powerlevel.c</a>
+, <a class="el" href="zwapi__protocol__basis_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6">zwapi_protocol_basis.c</a>
+</li>
+<li>LOGGING_LEVEL_ENUM_ENUM_NAME_AVAILABLE
+: <a class="el" href="group__dotdot__mqtt__helpers__ccp.html#ga439fac5bd8f1b8524020b653b8992f9b">dotdot_mqtt_helpers.hpp</a>
+, <a class="el" href="group__dotdot__mqtt__helpers.html#ga439fac5bd8f1b8524020b653b8992f9b">dotdot_mqtt_helpers.h</a>
 </li>
 <li>LR_ACCESS_KEY_SLOT
 : <a class="el" href="zwave__s2__transport_8c.html#ae909358c5d63a9566520fb064ce116a4">zwave_s2_transport.c</a>
@@ -326,7 +343,7 @@ $(document).ready(function(){initNavTree('globals_defs_l.html',''); initResizabl
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:29 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:53 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

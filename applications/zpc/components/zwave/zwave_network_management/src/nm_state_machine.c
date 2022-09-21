@@ -282,14 +282,6 @@ static void
   }
 }
 
-/**
- * @brief a callback function for Request Node Neighbor Discovery Command
- */
-static void on_request_node_neighbor_update(uint8_t status)
-{
-  zwave_controller_on_request_neighbor_update(status);
-}
-
 void nm_state_machine_teardown()
 {
   memset(&nms, 0, sizeof(nms));
@@ -427,7 +419,13 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
         etimer_set(&nms.timer, ADD_REMOVE_TIMEOUT);
       } else if (ev == NM_EV_REQUEST_NODE_NEIGHBOR_REQUEST) {
         zwave_node_id_t node_id = (zwave_node_id_t)(intptr_t)event_data;
-        zwapi_request_neighbor_update(node_id, on_request_node_neighbor_update);
+        if (SL_STATUS_OK
+            == zwapi_request_neighbor_update(
+              node_id,
+              &on_request_node_neighbor_update_completed)) {
+          nms.state = NM_NEIGHBOR_DISCOVERY_ONGOING;
+          nms.node_id_being_handled = node_id;
+        }
       } else if (ev == NM_EV_START_PROXY_INCLUSION) {
         nms.state = NM_WAIT_FOR_PROTOCOL;
         nm_fsm_post_event(NM_EV_ADD_NODE_STATUS_DONE, 0);
@@ -435,7 +433,6 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
       } else if (ev == NM_EV_ASSIGN_RETURN_ROUTE_START) {
         if (SL_STATUS_IN_PROGRESS
             == zwave_network_management_return_route_assign_next()) {
-          sl_log_debug(LOG_TAG, "Initiating new Assign Return Routes.");
           nms.state = NM_ASSIGNING_RETURN_ROUTE;
         }
       }
@@ -936,6 +933,15 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
         nms.state = NM_IDLE;
       }
       break;
+    case NM_NEIGHBOR_DISCOVERY_ONGOING:
+      if (ev == NM_EV_ABORT) {
+        sl_log_debug(LOG_TAG,
+                     "Forcing to move back to idle during Neighbor discovery.");
+        on_request_node_neighbor_update_completed(0x23);
+      } else if (ev == NM_EV_REQUEST_NODE_NEIGHBOR_REQUEST_COMPLETE) {
+        nms.state = NM_IDLE;
+      }
+      break;
     case NM_REPLACE_FAILED_REQ:
     case NM_PREPARE_SUC_INCLISION:
     case NM_WAIT_FOR_SUC_INCLUSION:
@@ -957,7 +963,6 @@ void nm_fsm_post_event(nm_event_t ev, void *event_data)
   // Check if we want to assign some return routes:
   if (SL_STATUS_IN_PROGRESS
       == zwave_network_management_return_route_assign_next()) {
-    sl_log_debug(LOG_TAG, "Initiating new Assign Return Routes.");
     nms.state = NM_ASSIGNING_RETURN_ROUTE;
   }
 

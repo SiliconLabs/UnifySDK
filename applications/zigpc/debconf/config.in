@@ -2,10 +2,7 @@
 #
 # preinstall script to convert uic.cfg args to debconf input
 
-
 . /usr/share/debconf/confmodule
-
-set -e
 
 UIC_CONFDIR=${CPACK_PACKAGING_INSTALL_PREFIX}/etc/uic
 UIC_CONFFILE=$UIC_CONFDIR/uic.cfg
@@ -54,10 +51,13 @@ if [ -e $UIC_CONFFILE ]; then
   rm $UIC_CONFFILE.sh $UIC_CONFFILE.sh.tmp
 
   #Preload debconf with what was in the conf file
-  db_set uic-zigpc/serial_port "$zigpc_serial"
-  db_set uic-zigpc/datastore_file "$zigpc_datastore_file"
+  if [ ! -z "$zigpc_serial" ]; then
+    db_set uic-zigpc/serial_port "$zigpc_serial"
+  fi
+  if [ ! -z "$zigpc_datastore_file" ]; then
+    db_set uic-zigpc/datastore_file "$zigpc_datastore_file"
+  fi
 fi
-
 
 db_input critical uic-zigpc/serial_port || true
 db_input critical uic-zigpc/datastore_file || true

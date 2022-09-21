@@ -6,7 +6,8 @@ add_library(
   src/zwave_tx_fixt.c
   src/zwave_tx_process.cpp
   src/zwave_tx_queue.cpp
-  src/zwave_tx_state_logging.c)
+  src/zwave_tx_state_logging.c
+  src/zwave_tx_route_cache.cpp)
 
 target_include_directories(
   zwave_tx

@@ -290,8 +290,7 @@ exports.processProtocolController = (topic, message) => {
         console.log(`Received ProtocolController: unid='${unid}', mes='${message}'`);
         let node = getNodeByUnid(unid);
         let data = JSON.parse(message.toString());
-        node.State = data.State;
-        node.SupportedStateList = data.SupportedStateList;
+        node.NetworkManagementState = data;
         if (node.ClusterTypes.indexOf("ProtocolController") === -1)
             node.ClusterTypes.push("ProtocolController");
         data.Unid = unid;

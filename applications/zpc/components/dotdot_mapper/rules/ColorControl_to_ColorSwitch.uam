@@ -6,10 +6,13 @@ def zwCOMPONENT_ID       0x3304
 def zwCOLOR_VALUE        0x3305
 def zwCOLOR_DURATION     0x3306
 
-// CC versions
-def zwBINARY_SWITCH_v   0x2501
-def zwMULTILEVEL_v      0x2601
-def zwCOLOR_SWITCH_v    0x3301
+// Z-Wave Multilevel Switch
+def zwMULTILEVEL_STATE     0x2602
+def zwMULTILEVEL_VALUE     0x2603
+
+// Z-Wave Binary Switch
+def zwSWITCH_BINARY_STATE 0x2502
+def zwSWITCH_BINARY_VALUE 0x2503
 
 // Z-Wave Indictes for the Component IDs
 def WARM_WHITE 0
@@ -20,11 +23,14 @@ def BLUE 4
 
 // Aliases
 def r_zwDURATION      r'zwSTATE.zwCOLOR_DURATION
-def r_zw_WARM_WHITE   (r'zwSTATE.zwCOMPONENT_ID[WARM_WHITE].zwCOLOR_VALUE or 0)
-def r_zw_COLD_WHITE   (r'zwSTATE.zwCOMPONENT_ID[COLD_WHITE].zwCOLOR_VALUE or 0)
-def r_zw_RED          (r'zwSTATE.zwCOMPONENT_ID[RED].zwCOLOR_VALUE or 0)
-def r_zw_GREEN        (r'zwSTATE.zwCOMPONENT_ID[GREEN].zwCOLOR_VALUE or 0)
-def r_zw_BLUE         (r'zwSTATE.zwCOMPONENT_ID[BLUE].zwCOLOR_VALUE or 0)
+def r_zw_WARM_WHITE   (r'zwSTATE.zwCOMPONENT_ID[WARM_WHITE].zwCOLOR_VALUE)
+def r_zw_COLD_WHITE   (r'zwSTATE.zwCOMPONENT_ID[COLD_WHITE].zwCOLOR_VALUE)
+def r_zw_RED          (r'zwSTATE.zwCOMPONENT_ID[RED].zwCOLOR_VALUE)
+def r_zw_GREEN        (r'zwSTATE.zwCOMPONENT_ID[GREEN].zwCOLOR_VALUE)
+def r_zw_BLUE         (r'zwSTATE.zwCOMPONENT_ID[BLUE].zwCOLOR_VALUE)
+def d_zw_RED          (d'zwSTATE.zwCOMPONENT_ID[RED].zwCOLOR_VALUE)
+def d_zw_GREEN        (d'zwSTATE.zwCOMPONENT_ID[GREEN].zwCOLOR_VALUE)
+def d_zw_BLUE         (d'zwSTATE.zwCOMPONENT_ID[BLUE].zwCOLOR_VALUE)
 def e_zw_WARM_WHITE   e'zwSTATE.zwCOMPONENT_ID[WARM_WHITE].zwCOLOR_VALUE
 def e_zw_COLD_WHITE   e'zwSTATE.zwCOMPONENT_ID[COLD_WHITE].zwCOLOR_VALUE
 def e_zw_RED          e'zwSTATE.zwCOMPONENT_ID[RED].zwCOLOR_VALUE
@@ -44,16 +50,33 @@ def zbMIN_COLOR_TEMPERATURE     0x0300400B
 def zbMAX_COLOR_TEMPERATURE     0x0300400C
 
 // ZCL Level attributes
-def zbLEVEL                     0x00080000
-def zbLEVEL_CLUSTER_MIN_LEVEL   0x00080002
-def zbLEVEL_CLUSTER_MAX_LEVEL   0x00080003
+def zbLEVEL                           0x00080000
+def zbLEVEL_CLUSTER_MIN_LEVEL         0x00080002
+def zbLEVEL_CLUSTER_MAX_LEVEL         0x00080003
+def zbLEVEL_CLUSTER_TRANSITION_TIME   0x00080010
 // ZCL OnOff attributes
 def zbON_OFF                    0x00060000
 
+// Shortcut to check if any of the Hue / Level / Saturation attribute has a desired value
+def zcl_no_desired_value ((d'zbCURRENT_SATURATION or d'zbLEVEL or d'zbCURRENT_HUE or 1000) == 1000)
+// ZCL OnOff value
+def zcl_on_off (d'zbON_OFF or r'zbON_OFF)
+// Check if any of the RGB colors are undefined
+def zwave_rgb_undefined (((r_zw_RED+ r_zw_GREEN + r_zw_BLUE + 2) or 1) == 1)
+// Check if any of the RGB colors or Multilevel Switch have desired values
+// Warning: Command Class handlers do not undefine the desired, they align it to the reported.
+def zwave_desired_rgb_defined ((d_zw_RED != r_zw_RED) | (d_zw_GREEN != r_zw_GREEN) | (d_zw_BLUE != r_zw_BLUE))
+// Check if Color Switch exists for the endpoint
+def zwave_color_exists (((r'zwSTATE.zwCOMPONENT_ID) or 1000) != 1000)
+// Check if Multilevel Switch exists for the endpoint
+def no_zwave_multilevel (((r'zwMULTILEVEL_STATE.zwMULTILEVEL_VALUE) or 1000) == 1000)
+// Check if Binary Switch exists for the endpoint
+def no_zwave_binary (((r'zwSWITCH_BINARY_STATE.zwSWITCH_BINARY_VALUE) or 1000) == 1000)
+
 // If we have a node with Binary Switch + Color Switch, we need to simulate
 // the Level cluster.
-def simulate_level (e'zwCOLOR_SWITCH_v & (e'zwMULTILEVEL_v==0))
-def simulate_on_off (e'zwCOLOR_SWITCH_v & (e'zwBINARY_SWITCH_v ==0))
+def simulate_level (zwave_color_exists & no_zwave_multilevel)
+def simulate_on_off (zwave_color_exists & no_zwave_binary)
 
 // Intermediate calculations
 // Hue/Saturation/Level is just a lot easier than CieXY.
@@ -75,14 +98,15 @@ def simulate_on_off (e'zwCOLOR_SWITCH_v & (e'zwBINARY_SWITCH_v ==0))
 def Lmax (if(r'zbLEVEL_CLUSTER_MAX_LEVEL == 99) 100 r'zbLEVEL_CLUSTER_MAX_LEVEL)
 def Smax (254)
 
-// Therefore C = (1 - |2*L - 1|)*S
+// Therefore we scale back
 def L ((d'zbLEVEL or r'zbLEVEL) / Lmax)
-def S ((d'zbCURRENT_SATURATION) / Smax)
+def S ((d'zbCURRENT_SATURATION or r'zbCURRENT_SATURATION) / Smax)
 
 // Let's denote 2*L - 1 as L_diff and |2*L - 1| as L_diff_abs
 def L_diff (2 * L - 1)
 def L_diff_abs (if(L_diff > 0) L_diff (0 - L_diff))
 
+// Caculate C = (1 - |2*L - 1|)*S
 def C ((1 - L_diff_abs) * (S))
 
 // dC1 = 255*(1/2)*C + 255*L
@@ -99,7 +123,7 @@ def dC2 ((C * (0-255) / 2) + (255 * L))
 // dC3 = 255*X -C*255/2 + 255*L
 // Next step, X = C * (1 - |(H/60)mod 2-1|)
 
-def H_degrees ((d'zbCURRENT_HUE) * 360 / 254)
+def H_degrees ((d'zbCURRENT_HUE or r'zbCURRENT_HUE) * 360 / 254)
 def H_diff (((H_degrees / 60) % 2 ) - 1)
 def H_diff_abs (if(H_diff > 0) (H_diff) (0 - H_diff))
 
@@ -130,6 +154,9 @@ def Xmid ((Xmax + Xmin) / 2)
 def Xmid_diff (2 * Xmid - 1)
 def Xmid_diff_abs (if(Xmid_diff > 0) Xmid_diff (0 - Xmid_diff))
 
+// Desired version of the Xmax value.
+def desired_Xmax (if ((d_zw_RED > d_zw_GREEN) & (d_zw_RED > d_zw_BLUE)) (d_zw_RED / 255)
+                  if ((d_zw_GREEN > d_zw_RED) & (d_zw_GREEN > d_zw_BLUE)) (d_zw_GREEN / 255) (d_zw_BLUE / 255))
 
 ////////////////////////////////////////////////////////////////
 /// Color temperatures
@@ -144,33 +171,33 @@ scope 0 {
   // Light temperature, only if color mode is 2:
   // We do an linear fit where warm = 0 at 5000K and warm = zbLEVEL at 3000K
   d'zwSTATE.zwCOMPONENT_ID[WARM_WHITE].zwCOLOR_VALUE =
-    if (r'zbCOLOR_MODE < 2) 0
-    if (r'zbCOLOR_MODE > 2) 0
-    if (r'zbCOLOR_MODE == 2) (L * 255 * (5000 - (1000000 / d'zbCOLOR_TEMPERATURE)) / 2000 )
-    undefined
+    if (r'zbCOLOR_MODE != 2) 0 (L * 255 * (5000 - (1000000 / d'zbCOLOR_TEMPERATURE)) / 2000 )
 
   // We do an linear fit where cold = 0 at 3000K and cold = zbLEVEL at 5000K
   d'zwSTATE.zwCOMPONENT_ID[COLD_WHITE].zwCOLOR_VALUE =
-    if (r'zbCOLOR_MODE < 2) 0
-    if (r'zbCOLOR_MODE > 2) 0
-    if (r'zbCOLOR_MODE == 2) (L * 255 * ((1000000 / d'zbCOLOR_TEMPERATURE) - 3000) / 2000 )
-    undefined
+    if (r'zbCOLOR_MODE != 2) 0 (L * 255 * ((1000000 / d'zbCOLOR_TEMPERATURE) - 3000) / 2000 )
 
   // RGB Colors:
   // Only if color mode is 0:
   d'zwSTATE.zwCOMPONENT_ID[RED].zwCOLOR_VALUE =
-    if (r'zbCOLOR_MODE > 0) 0
+    if (r'zbCOLOR_MODE != 0) 0
+    if (zcl_no_desired_value) undefined
+    if (zcl_on_off == 0) undefined
     if (H_degrees < 60) dC1
     if (H_degrees < 120) dC3
     if (H_degrees < 240) dC2
     if (H_degrees < 300) dC3 dC1
   d'zwSTATE.zwCOMPONENT_ID[GREEN].zwCOLOR_VALUE =
-    if (r'zbCOLOR_MODE > 0) 0
+    if (r'zbCOLOR_MODE != 0) 0
+    if (zcl_no_desired_value) undefined
+    if (zcl_on_off == 0) undefined
     if (H_degrees < 60) dC3
     if (H_degrees < 180) dC1
     if (H_degrees < 240) dC3 dC2
   d'zwSTATE.zwCOMPONENT_ID[BLUE].zwCOLOR_VALUE =
-    if (r'zbCOLOR_MODE > 0) 0
+    if (r'zbCOLOR_MODE != 0) 0
+    if (zcl_no_desired_value) undefined
+    if (zcl_on_off == 0) undefined
     if (H_degrees < 120) dC2
     if (H_degrees < 180) dC3
     if (H_degrees < 300) dC1 dC3
@@ -181,25 +208,40 @@ scope 0 {
     if ( d'zbREMAINING_TIME < 1270 ) (d'zbREMAINING_TIME / 10)
     (127 + d'zbREMAINING_TIME / 600)
 
+  // Multilevel Switch get scale here, in order to be able to achieve full
+  // brightness with a given color
+  d'zwMULTILEVEL_STATE.zwMULTILEVEL_VALUE =
+    if (zcl_on_off == 0) undefined
+    if (zwave_color_exists & zwave_desired_rgb_defined & (r'zbCOLOR_MODE == 0)) (desired_Xmax * 99)
+    if (zwave_color_exists & (r'zbCOLOR_MODE == 0) & ((d'zbLEVEL * 2) > 99)) 99
+    if (zwave_color_exists & (r'zbCOLOR_MODE == 0)) (d'zbLEVEL * 2)
+    if (zwave_color_exists & (r'zbCOLOR_MODE == 2)) (d'zbLEVEL)
+    undefined
+
   // Z-Wave to ZCL
   // Temperature, average of the Warm/Cold white components
   r'zbCOLOR_TEMPERATURE =
     if ((r'zbCOLOR_CAPABILITIES & 0x10) == 0) undefined
-    if (r'zbCOLOR_MODE < 2) 0
-    if (r'zbCOLOR_MODE > 2) 0
-    if (r'zbCOLOR_MODE == 2) (1000000 / (((r_zw_WARM_WHITE * 3000) + (r_zw_COLD_WHITE * 5000)) / (r_zw_COLD_WHITE+r_zw_WARM_WHITE)))
-    undefined
+    if (r'zbCOLOR_MODE != 2) 0 (1000000 / (((r_zw_WARM_WHITE * 3000) + (r_zw_COLD_WHITE * 5000)) / (r_zw_COLD_WHITE+r_zw_WARM_WHITE)))
 
   // Hue and Saturation
   r'zbCURRENT_HUE =
     if ((r'zbCOLOR_CAPABILITIES & 0x1) == 0) undefined
+    if (r'zbCOLOR_MODE != 0) 0
+    if ((zcl_on_off == 0) & ((d'zbCURRENT_HUE or 1000) != 1000)) (d'zbCURRENT_HUE)
+    if (zwave_rgb_undefined) undefined
+    if (zwave_desired_rgb_defined) undefined
     if (Cx == 0) 0
     if (Xmax == (r_zw_RED / 255)) (((0 + 60 * (r_zw_GREEN - r_zw_BLUE) / 255 / Cx) / 254 ) * 180 )
     if (Xmax == (r_zw_GREEN / 255)) (((120 + 60 * (r_zw_BLUE - r_zw_RED) / 255 / Cx) / 254 ) * 180 )
-    (((240 + 60 * (r_zw_RED - r_zw_GREEN) / 255 / Cx) / 254 ) * 180 )
+      (((240 + 60 * (r_zw_RED - r_zw_GREEN) / 255 / Cx) / 254 ) * 180 )
 
   r'zbCURRENT_SATURATION =
     if ((r'zbCOLOR_CAPABILITIES & 0x1) == 0) undefined
+    if (r'zbCOLOR_MODE != 0) 0
+    if ((zcl_on_off == 0) & ((d'zbCURRENT_SATURATION or 1000) != 1000)) (d'zbCURRENT_SATURATION)
+    if (zwave_rgb_undefined) undefined
+    if (zwave_desired_rgb_defined) undefined
     if (Xmid == 0) 0
     if (Xmid == 1) 0 (254 * ( Cx / (1 - Xmid_diff_abs)))
 
@@ -207,17 +249,18 @@ scope 0 {
   r'zbLEVEL_CLUSTER_MIN_LEVEL = if(simulate_level) 0 undefined
   r'zbLEVEL_CLUSTER_MAX_LEVEL = if(simulate_level) 100 undefined
 
-  // Do we adjust the Level Cluster back? For now, no, because
-  // 1. We get a conflict with the Multilevel Switch mapping. Whatever gets updated last will prevail as a mapping.
-  // 2. It creates a deadlock situation if Xmid is 0.
-  r'zbLEVEL = if(simulate_level) (Xmid * 100) undefined
-  r'zbLEVEL = if(simulate_level)
-              if(d'zbLEVEL>100) 100 d'zbLEVEL
-              undefined
+  // Adjust the ZCL level back.
+  r'zbLEVEL =
+    if ((simulate_level | (zcl_on_off == 0)) & (d'zbLEVEL>100)) 100
+    if ((simulate_level | (zcl_on_off == 0)) & (d'zbLEVEL<101) & (d'zbLEVEL !=r'zbLEVEL)) (d'zbLEVEL)
+    if (simulate_level & ((d'zbLEVEL or 1000) == 1000) & (zcl_on_off != 0)) (Xmid * Lmax)
+    if (simulate_level & ((d'zbLEVEL or 1000) == 1000)) undefined
+    if (zwave_color_exists & (r'zbCOLOR_MODE == 0)) (Xmid * r'zbLEVEL_CLUSTER_MAX_LEVEL)
+    if (zwave_color_exists & (r'zbCOLOR_MODE == 2)) r'zwMULTILEVEL_STATE.zwMULTILEVEL_VALUE
+    undefined
 
   // OnOff cluster simulation
-  r'zbON_OFF = if(simulate_on_off) (if(r_zw_WARM_WHITE>0) 1 if(r_zw_COLD_WHITE>0) 1 if(r_zw_RED>0) 1 if(r_zw_GREEN>0) 1 if(r_zw_BLUE>0) 1 0) undefined
-  r'zbON_OFF = if(simulate_on_off) d'zbON_OFF  undefined
+  r'zbON_OFF = if(simulate_on_off) (d'zbON_OFF) undefined
 
   r'zbREMAINING_TIME  =
     if ( r_zwDURATION == 0 ) 0
@@ -235,15 +278,9 @@ scope 0 {
 
   // Color mode will be toggled by incoming ZCL commands
   // At start, we try to based it on the reported state of the node.
-  r'zbCOLOR_MODE =
-    if(r_zw_WARM_WHITE>0) 2
-    if(r_zw_COLD_WHITE>0) 2
-    if(r_zw_RED>0) 0
-    if(r_zw_GREEN>0) 0
-    if(r_zw_BLUE>0) 0 undefined
-
-  // Mirror the value from Color Mode here.
-  r'zbENHANCED_COLOR_MODE = r'zbCOLOR_MODE
+  // Enhanced color more mirrors the value from Color Mode here.
+  r'zbCOLOR_MODE = if (e_zw_RED) 0 if (e_zw_WARM_WHITE) 2 undefined
+  r'zbENHANCED_COLOR_MODE = if (e_zw_RED) 0 if (e_zw_WARM_WHITE) 2 undefined
 
   // Color temperature capabilities. We consider Warm White = 3000K and e_zw_COLD_WHITE = 5000K
   r'zbMIN_COLOR_TEMPERATURE =
@@ -255,4 +292,13 @@ scope 0 {
     if ( e_zw_WARM_WHITE ) (1000000 / 3000)
     if ( e_zw_COLD_WHITE ) (1000000 / 5000)
     undefined
+
+  // Existence links: needed in case reported values are undefined to start with
+  // These rules only trigger when attributes are created/deleted.
+  //r'zbCURRENT_SATURATION = if (e_zw_RED & e_zw_GREEN & e_zw_BLUE) 0 undefined
+  //r'zbCURRENT_HUE = if (e_zw_RED & e_zw_GREEN & e_zw_BLUE) 0 undefined
+  e'zbLEVEL = if (simulate_level & ((e_zw_RED & e_zw_GREEN & e_zw_BLUE) | e_zw_COLD_WHITE | e_zw_WARM_WHITE)) 1 0
+  r'zbLEVEL_CLUSTER_TRANSITION_TIME = if (simulate_level & ((e_zw_RED & e_zw_GREEN & e_zw_BLUE) | e_zw_COLD_WHITE | e_zw_WARM_WHITE)) 0 undefined
+  e'zbON_OFF = if (simulate_on_off & ((e_zw_RED & e_zw_GREEN & e_zw_BLUE) | e_zw_COLD_WHITE | e_zw_WARM_WHITE)) 1 0
+  //r'zbCOLOR_TEMPERATURE = if (e_zw_COLD_WHITE | e_zw_WARM_WHITE) 0 undefined
 }

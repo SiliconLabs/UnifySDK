@@ -1,10 +1,9 @@
-#!/bin/sh
+#!/bin/sh -e
 # postinst script for Unify
 #
 # see: dh_installdeb(1)
 
 . /usr/share/debconf/confmodule
-set -e
 
 UIC_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/"
 
@@ -39,16 +38,16 @@ fix_permissions() {
 
 reload_udev() {
   if type "udevadm" > /dev/null; then
-    udevadm control --reload-rules
-    udevadm trigger
+    udevadm control --reload-rules || true
+    udevadm trigger || true
   fi
 }
 
 enable_start_uic_zpc() {
   if type "systemctl" > /dev/null; then
-    systemctl --system daemon-reload
-    systemctl enable uic-zpc.service
-    systemctl start uic-zpc.service
+    systemctl --system daemon-reload || true
+    systemctl enable uic-zpc.service || true
+    systemctl start uic-zpc.service || true
   fi
 }
 
@@ -68,14 +67,12 @@ handle_conf() {
     	PORT="/dev/ttyUSB0"
     fi
 
-    db_go
     db_get uic-zpc/region
     REGION="$RET"
     if [ "$RET" = "" ]; then
     	REGION="EU"
     fi
 
-    db_go
     db_get uic-zpc/datastore_file
     DSTORE="$RET"
     if [ "$RET" = "" ]; then

@@ -2,6 +2,7 @@ var modules =
 [
     [ "Dotdot Mapper", "group__dotdot__mapper.html", "group__dotdot__mapper" ],
     [ "ZPC Dotdot MQTT", "group__zpc__dotdot__mqtt.html", "group__zpc__dotdot__mqtt" ],
+    [ "DotDot MQTT Topics Handler", "group__dotdot__mqtt__topics__handler.html", "group__dotdot__mqtt__topics__handler" ],
     [ "Network Monitor", "group__network__monitor.html", "group__network__monitor" ],
     [ "UCL definitions", "group__ucl__definitions.html", "group__ucl__definitions" ],
     [ "UCL MQTT", "group__ucl__mqtt.html", "group__ucl__mqtt" ],
@@ -21,9 +22,8 @@ var modules =
     [ "Z-Wave Application Command Class Handler", "group__zwave__command__handler.html", "group__zwave__command__handler" ],
     [ "Zwave_command_type", "group__zwave__command__type.html", "group__zwave__command__type" ],
     [ "Z-Wave SmartStart Management", "group__zwave__smartstart__management.html", "group__zwave__smartstart__management" ],
-    [ "Process definitions for the Unify Attribute Mapper", "group__attribute__mapper__process.html", "group__attribute__mapper__process" ],
     [ "Unify Components", "group__unify__components.html", "group__unify__components" ],
-    [ "Attribute Store Registration for UCL DotDot Attributes", "group__uic__dotdot__attribute__store__registration.html", "group__uic__dotdot__attribute__store__registration" ],
-    [ "Dotdot MQTT internal shared functions", "group__dotdot__mqtt__internals.html", "group__dotdot__mqtt__internals" ],
-    [ "Unify_node_state_monitor", "group__unify__node__state__monitor.html", "group__unify__node__state__monitor" ]
+    [ "DotDot Cluster Commands ID definitions", "group__dotdot__cluster__command__id__definitions.html", "group__dotdot__cluster__command__id__definitions" ],
+    [ "DotDot Cluster ID definitions", "group__dotdot__cluster__id__definitions.html", "group__dotdot__cluster__id__definitions" ],
+    [ "Internal C++ ZAP definitions", "group__dotdot__mqtt__hpp.html", "group__dotdot__mqtt__hpp" ]
 ];

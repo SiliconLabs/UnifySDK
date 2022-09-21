@@ -24,11 +24,13 @@ project(
 
 # Set shared version string to use in filenames (deb packages etc.)
 set(FILE_NAME_VERSIONING "${CMAKE_PROJECT_VERSION}")
-if (VERSION_PATCH)
-    string(APPEND FILE_NAME_VERSIONING "-${VERSION_PATCH}")
+if(VERSION_PATCH)
+  string(APPEND FILE_NAME_VERSIONING "-${VERSION_PATCH}")
 endif()
-set(FILE_NAME_VERSIONING_ARCH "${FILE_NAME_VERSIONING}_${CMAKE_SYSTEM_PROCESSOR}")
+set(FILE_NAME_VERSIONING_ARCH
+    "${FILE_NAME_VERSIONING}_${CMAKE_SYSTEM_PROCESSOR}")
 
+include(cmake/include/zap.cmake)
 include(cmake/include/target_interface_libraries.cmake)
 include(cmake/include/compiler_options.cmake)
 include(cmake/include/compatible_platform.cmake)
@@ -37,10 +39,11 @@ include(cmake/include/doxygen.cmake)
 include(cmake/include/package-helper.cmake)
 include(cmake/include/uic_helper.cmake)
 
-
-if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT OR NOT DEFINED CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    set(CMAKE_INSTALL_PREFIX "/usr"
-           CACHE PATH "default install path" FORCE)
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT
+   OR NOT DEFINED CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX
+      "/usr"
+      CACHE PATH "default install path" FORCE)
 endif()
 
 enable_language(Rust)

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -115,6 +115,9 @@ Macros</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:afb3517445a1dab89133291b37d52108d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__thermostat__setpoint_8c.html#afb3517445a1dab89133291b37d52108d">zwave_command_class_thermostat_setpoint_set_default_capabilities</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> type_node)</td></tr>
 <tr class="separator:afb3517445a1dab89133291b37d52108d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c2705cdf62fb2f60542ab322bdfdee"><td class="memItemLeft" align="right" valign="top">static int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__thermostat__setpoint_8c.html#a99c2705cdf62fb2f60542ab322bdfdee">thermostat_setpoint_get_valid_desired_setpoint_value</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> value_node)</td></tr>
+<tr class="memdesc:a99c2705cdf62fb2f60542ab322bdfdee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the desired value of a setpoint and validate if it is within the valid range.  <a href="zwave__command__class__thermostat__setpoint_8c.html#a99c2705cdf62fb2f60542ab322bdfdee">More...</a><br /></td></tr>
+<tr class="separator:a99c2705cdf62fb2f60542ab322bdfdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a326207cd9644bb237af5cc2234e8f769"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__thermostat__setpoint_8c.html#a326207cd9644bb237af5cc2234e8f769">zwave_command_class_thermostat_setpoint_on_version_attribute_update</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> updated_node, <a class="el" href="group__attribute__store__api.html#ga27a25d4910253f286d7e355ad9874699">attribute_store_change_t</a> change)</td></tr>
 <tr class="separator:a326207cd9644bb237af5cc2234e8f769"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9b7ab9afd17c3e3ae9e380e351e5623"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__command__class__thermostat__setpoint_8c.html#af9b7ab9afd17c3e3ae9e380e351e5623">zwave_command_class_thermostat_setpoint_create_type</a> (<a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> endpoint_node, uint8_t type)</td></tr>
@@ -173,6 +176,41 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a99c2705cdf62fb2f60542ab322bdfdee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99c2705cdf62fb2f60542ab322bdfdee">&#9670;&nbsp;</a></span>thermostat_setpoint_get_valid_desired_setpoint_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int32_t thermostat_setpoint_get_valid_desired_setpoint_value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a>&#160;</td>
+          <td class="paramname"><em>value_node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks the desired value of a setpoint and validate if it is within the valid range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value_node</td><td>Attribute Store node for the value to apply. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int32_t valid desired value </dd></dl>
+
+</div>
+</div>
 <a id="a72a0b012f7295a134a34635a23ea9639"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a72a0b012f7295a134a34635a23ea9639">&#9670;&nbsp;</a></span>zwave_command_class_thermostat_setpoint_capabilities_get()</h2>
 
@@ -581,7 +619,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6ac9bb75d77e4d974481da8e3d01cbca.html">zwave_command_classes</a></li><li class="navelem"><a class="el" href="dir_a7413761325a0de7b31d33e30e75f050.html">src</a></li><li class="navelem"><a class="el" href="zwave__command__class__thermostat__setpoint_8c.html">zwave_command_class_thermostat_setpoint.c</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:11 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:46 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

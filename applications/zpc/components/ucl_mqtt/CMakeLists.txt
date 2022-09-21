@@ -32,7 +32,7 @@ target_link_libraries(ucl_network_management zwave_controller
 add_library(ucl_nm_neighbor_discovery src/ucl_nm_neighbor_discovery.cpp)
 target_include_directories(ucl_nm_neighbor_discovery PRIVATE src)
 target_link_libraries(ucl_nm_neighbor_discovery zwave_controller
-                      uic_contiki zpc_attribute_store)
+                      uic_contiki zpc_attribute_store uic_attribute_resolver)
 
 # UCL MQTT Node interview
 add_library(ucl_mqtt_node_interview src/ucl_mqtt_node_interview.c)

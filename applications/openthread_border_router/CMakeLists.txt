@@ -1,9 +1,12 @@
 include(FetchContent)
-find_package(GeckoSDK 4.1 REQUIRED)
-find_package(CPCD 4.1 REQUIRED)
+find_package(GeckoSDK 4.1.1 REQUIRED)
+find_package(CPCD 4.1.1 REQUIRED)
 
 set(FETCHCONTENT_QUIET False)
 set(CMAKE_INSTALL_DEFAULT_COMPONENT_NAME uic-otbr)
+
+# ot-br-posix unfortunately has a variable set but not used, making our compiler fail because of warnings as errors.
+add_compile_options(-Wno-unused-but-set-variable)
 
 FetchContent_Declare(
   ot-br-posix

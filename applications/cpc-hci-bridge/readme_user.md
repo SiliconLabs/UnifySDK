@@ -30,27 +30,27 @@ a symlink to the device from `pts_hci` in the working directory.
 
 To start cpc-hci-bridge as a system service:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo systemctl start uic-cpc-hci-bridge
 ```
 
 Or from the command line, simply start the application:
 
-```bash
+```console
 pi@raspberrypi:~ $ cpc-hci-bridge
 ```
 
 Next, the BlueZ stack must be attached to the newly created virtual serial device,
 where `<device>` is the name of the virtual serial device:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo hciattach <device> any
 ```
 
 Now BlueZ is running and any of the standard BlueZ tools may be used.
 For example, to start the BlueZ CLI utility:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo bluetoothctl
 ```
 

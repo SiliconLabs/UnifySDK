@@ -1,5 +1,5 @@
 {
-  "name": "AoX Locator Configuration",
+  "name": "AoX Locator Attributestore",
   "version": "AoXLocator-v1",
   "override": "../../../../../../../components/uic_dotdot/zap/addon-override.js",
   "helpers": ["addon-helper.js"],

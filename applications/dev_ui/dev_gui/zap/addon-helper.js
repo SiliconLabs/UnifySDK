@@ -16,6 +16,7 @@ let supportedClusters = [
     "Scenes",
     "Thermostat",
     "ProtocolController-RFTelemetry",
+    "ProtocolController-NetworkManagement",
     "SystemMetrics",
     "Metering",
     "PowerConfiguration"
@@ -25,7 +26,7 @@ const enums = new Set();
 const enumList = {};
 const bitmaps = new Set();
 const bitmapList = {};
-const unifyClusters = ["ProtocolController-RFTelemetry", "NameAndLocation", "AoXLocator", "AoXPositionEstimation", "ConfigurationParameters", "SystemMetrics", "Binding"];
+const unifyClusters = ["ProtocolController-RFTelemetry", "ProtocolController-NetworkManagement", "NameAndLocation", "AoXLocator", "AoXPositionEstimation", "ConfigurationParameters", "SystemMetrics", "Binding"];
 const clusterArrayAttributes = [
     "Groups.GetGroupMembership.GroupList",
     "Groups.GetGroupMembershipResponse.GroupList",
@@ -48,6 +49,8 @@ const clusterArrayAttributes = [
     "ConfigurationParameters.ConfigurationParameters",
     "ProtocolController-RFTelemetry.TxReport.LastRouteRepeaters",
     "ProtocolController-RFTelemetry.TxReport.IncomingRSSIRepeaters",
+    "ProtocolController-NetworkManagement.NetworkManagementState.SupportedStateList",
+    "ProtocolController-NetworkManagement.NetworkManagementState.RequestedStateParameters",
     "SystemMetrics.CPUUsagePercent",
     "SystemMetrics.CPUFrequencyMHz",
     "SystemMetrics.CPUAverageUsagePercent",
@@ -76,8 +79,8 @@ function isEnum(type) {
     return (castType(type) === "enum") || enums.has(type);
 }
 
-function getEnum(parentLabel, label, additionalTab = 0) {
-    let enumObject = enumList[parentLabel + label] || enumList[label];
+function getEnum(parentLabel, label, type, additionalTab = 0) {
+    let enumObject = enumList[parentLabel + label] || enumList[label] || enumList[type];
     if (enumObject !== undefined) {
         let enumArray = Object.keys(enumObject).map(i => "{ name: \"" + i + "\", value: " + (enumObject[i] === undefined ? i : enumObject[i]) + "}");
         let joinString = ",\n" + "\t".repeat(8 + additionalTab);
@@ -126,11 +129,18 @@ function getClusterTypesEnum() {
 }
 
 function getSupportedClusters() {
-    return supportedClusters.filter(i => i !== "ProtocolController-RFTelemetry" && i != "SystemMetrics").map((i) => `${i}: "${i}"`).join(', \n\t');
+    return supportedClusters.filter(i => i !== "ProtocolController-RFTelemetry" && i != "ProtocolController-NetworkManagement" && i != "SystemMetrics").map((i) => `${i}: "${i}"`).join(', \n\t');
 }
 
 function getClusterName(name) {
-    return name === "ProtocolController-RFTelemetry" ? "RFTelemetry" : name;
+    switch (name) {
+        case "ProtocolController-RFTelemetry":
+            return "RFTelemetry";
+        case "ProtocolController-NetworkManagement":
+            return "NetworkManagement";
+        default:
+            return name;
+    }
 }
 
 function isSupportedCluster(cluster) {
@@ -212,6 +222,12 @@ function not(value) {
     return !value;
 }
 
+async function initHeplersComplete() {
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    return true;
+}
+
+exports.initHeplersComplete = initHeplersComplete
 exports.initEnums = initEnums
 exports.initBitmaps = initBitmaps
 exports.isEnum = isEnum

@@ -20,8 +20,8 @@
 // Generic includes
 #include <stdbool.h>
 
-// FIXME: UIC-1920, change to float, then get everything to work.
-typedef double number_t;
+// Type that we use to represent "any" number
+typedef float number_t;
 
 /**
  * @defgroup attribute_store_value_helpers Attribute Store Value Helpers
@@ -413,6 +413,24 @@ sl_status_t attribute_store_set_child_desired(attribute_store_node_t parent,
                                               uint8_t value_size);
 
 /**
+ * @brief Finds the reported value of the first child of a node with a given type.
+ *
+ * @param parent        The Attribute store node under
+ *                      which the child's reported value must be read
+ * @param type          The type of the child
+ * @param value         A pointer to a variable containing
+ *                      the data to be read from the node's child.
+ * @param expected_size The expected size of the memory to be copied in
+ *                      the value pointer
+ *
+ * @returns sl_status_t returned by @ref attribute_store_get_node_attribute_value
+ */
+sl_status_t attribute_store_get_child_reported(attribute_store_node_t parent,
+                                               attribute_store_type_t type,
+                                               void *value,
+                                               size_t expected_size);
+
+/**
  * @brief Adds and sets the reported value of the first child of a node with a
  * given type only if it did not exist.
  *
@@ -433,24 +451,6 @@ sl_status_t attribute_store_set_child_reported_only_if_missing(
   attribute_store_type_t type,
   const void *value,
   uint8_t value_size);
-
-/**
- * @brief Set the value of the first child with a given type.
- *
- * This function sets the value of the first attribute child
- * matching a given type.
- *
- * @param parent Parent node of children
- * @param type   Type of child
- * @param state  The value_state
- * @param value  Value
- * @return sl_status_t
- */
-sl_status_t attribute_store_set_uint32_child_by_type(
-  attribute_store_node_t parent,
-  attribute_store_type_t type,
-  attribute_store_node_value_state_t state,
-  uint32_t value);
 
 /**
  * @brief Visit all nodes in the tree.

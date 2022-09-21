@@ -1398,7 +1398,20 @@ var NAVTREE =
         [ "AoXPositionEstimation/ForceReadAttributes Command", "aox_position_estimation.html#aox_position_estimation_force_read_attr_cmd", null ]
       ] ]
     ] ],
+    [ "ProtocolController/NetworkManagement Cluster", "protocol_controller_network_management.html", [
+      [ "ProtocolController/NetworkManagement Attributes", "protocol_controller_network_management.html#protocol_controller_network_management_attrs", [
+        [ "ProtocolController-NetworkManagement/NetworkManagementState Attribute", "protocol_controller_network_management.html#protocol_controller_network_management_attr_network_management_state", null ],
+        [ "ProtocolController/NetworkManagement/ClusterRevision Attribute", "protocol_controller_network_management.html#protocol_controller_network_management_attr_cluster_revision", null ]
+      ] ],
+      [ "ProtocolController/NetworkManagement Command Support", "protocol_controller_network_management.html#protocol_controller_network_management_recv_cmd_support", null ],
+      [ "ProtocolController/NetworkManagement Commands", "protocol_controller_network_management.html#protocol_controller_network_management_cmds", [
+        [ "ProtocolController/NetworkManagement/Write Command", "protocol_controller_network_management.html#protocol_controller_network_management_write_cmd", null ],
+        [ "ProtocolController/NetworkManagement/WriteAttributes Command", "protocol_controller_network_management.html#protocol_controller_network_management_write_attr_cmd", null ],
+        [ "ProtocolController/NetworkManagement/ForceReadAttributes Command", "protocol_controller_network_management.html#protocol_controller_network_management_force_read_attr_cmd", null ]
+      ] ]
+    ] ],
     [ "UCL Structs", "ucl_structs.html", [
+      [ "NetworkManagementState Struct", "ucl_structs.html#struct_network_management_state", null ],
       [ "BindingObject Struct", "ucl_structs.html#struct_binding_object", null ],
       [ "ConfigurationParameter Struct", "ucl_structs.html#struct_configuration_parameter", null ],
       [ "CoordinateAndOrientation Struct", "ucl_structs.html#struct_coordinate_and_orientation", null ],
@@ -1479,6 +1492,7 @@ var NAVTREE =
       [ "MeteringTemperatureUnitOfMeasure Enum", "ucl_enums.html#enum_metering_temperature_unit_of_measure", null ],
       [ "MeteringUnitofMeasure Enum", "ucl_enums.html#enum_metering_unitof_measure", null ],
       [ "MoveStepMode Enum", "ucl_enums.html#enum_move_step_mode", null ],
+      [ "NM_State Enum", "ucl_enums.html#enum_nm_state", null ],
       [ "NodeStateNetworkStatus Enum", "ucl_enums.html#enum_node_state_network_status", null ],
       [ "NodeStateSecurity Enum", "ucl_enums.html#enum_node_state_security", null ],
       [ "OTADeviceSpecificImageType Enum", "ucl_enums.html#enum_ota_device_specific_image_type", null ],
@@ -1606,8 +1620,8 @@ var NAVTREEINDEX =
 "color_control.html#color_control_step_color_temperature_cmd",
 "electrical_measurement.html#electrical_measurement_attr_dc_current_overload",
 "metering.html#metering_attrs",
-"scenes.html#scenes_attr_last_configured_by",
-"ucl_bitmaps.html#enum_tstat_schedule_mode"
+"relativity_humidity.html#relativity_humidity_force_read_attr_cmd",
+"ucl_bitmaps.html#enum_thermostat_remote_sensing"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

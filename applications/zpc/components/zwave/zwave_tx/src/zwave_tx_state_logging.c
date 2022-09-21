@@ -63,6 +63,8 @@ const char *zwave_back_off_reason_name(zwave_tx_backoff_reason_t reason)
   switch (reason) {
     STR_CASE(BACKOFF_CURRENT_SESSION_ID)
     STR_CASE(BACKOFF_EXPECTED_ADDITIONAL_FRAMES)
+    STR_CASE(BACKOFF_PROTOCOL_SENDING_FRAMES)
+    STR_CASE(BACKOFF_INCOMING_UNSOLICITED_ROUTED_FRAME)
     default:
       sl_log_warning(LOG_TAG, "Unknown Tx back-off reason : %d", reason);
       return "Unknown";

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -104,6 +104,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga35626ad9b68eb9eebb9ea48143adae65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management__callbacks.html#ga35626ad9b68eb9eebb9ea48143adae65">on_set_default_complete</a> ()</td></tr>
 <tr class="memdesc:ga35626ad9b68eb9eebb9ea48143adae65"><td class="mdescLeft">&#160;</td><td class="mdescRight">callback function for <a class="el" href="group__ZWAPI__CONTROLLER.html#ga1115444ea0d3fcec24e731f25264836f">zwapi_set_default()</a>  <a href="group__zwave__network__management__callbacks.html#ga35626ad9b68eb9eebb9ea48143adae65">More...</a><br /></td></tr>
 <tr class="separator:ga35626ad9b68eb9eebb9ea48143adae65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga069b7c6353ba052b03cded55a439a185"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management__callbacks.html#ga069b7c6353ba052b03cded55a439a185">on_request_node_neighbor_update_completed</a> (uint8_t status)</td></tr>
+<tr class="memdesc:ga069b7c6353ba052b03cded55a439a185"><td class="mdescLeft">&#160;</td><td class="mdescRight">a callback function for Request Node Neighbor Discovery Command  <a href="group__zwave__network__management__callbacks.html#ga069b7c6353ba052b03cded55a439a185">More...</a><br /></td></tr>
+<tr class="separator:ga069b7c6353ba052b03cded55a439a185"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Z-Wave Network Management callback functions. </p>
@@ -126,6 +129,32 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>callback function for <a class="el" href="group__ZWAPI__CONTROLLER.html#ga6e50a93518af078f107923bca22a6880">zwapi_set_learn_mode()</a> </p>
+
+</div>
+</div>
+<a id="ga069b7c6353ba052b03cded55a439a185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga069b7c6353ba052b03cded55a439a185">&#9670;&nbsp;</a></span>on_request_node_neighbor_update_completed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void on_request_node_neighbor_update_completed </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>status</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>a callback function for Request Node Neighbor Discovery Command </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>the status of the request neighbor operation </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -179,7 +208,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:16 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:49 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

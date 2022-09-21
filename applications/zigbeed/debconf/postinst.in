@@ -28,11 +28,11 @@ fix_permissions() {
 
 enable_start_uic_zigbeed() {
   if type "systemctl" >/dev/null; then
-    systemctl --system daemon-reload
-    systemctl enable uic-zigbeed-socat
-    systemctl start uic-zigbeed-socat
-    systemctl enable uic-zigbeed
-    systemctl start uic-zigbeed
+    systemctl --system daemon-reload || true
+    systemctl enable uic-zigbeed-socat || true
+    systemctl start uic-zigbeed-socat || true
+    systemctl enable uic-zigbeed || true
+    systemctl start uic-zigbeed || true
   fi
 }
 

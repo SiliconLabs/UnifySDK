@@ -2,8 +2,6 @@
 
 . /usr/share/debconf/confmodule
 
-set -e
-
 UIC_CONFDIR=${CPACK_PACKAGING_INSTALL_PREFIX}/etc/uic
 UIC_CONFFILE=$UIC_CONFDIR/uic.cfg
 
@@ -47,9 +45,15 @@ if [ -e $UIC_CONFFILE ]; then
   rm $UIC_CONFFILE.sh $UIC_CONFFILE.sh.tmp
 
   #Preload debconf with what was in the conf file
-  db_set uic-zpc/serial_port "$serial"
-  db_set uic-zpc/region "$rf_region"
-  db_set uic-zpc/datastore_file "$datastore_file"
+  if [ ! -z "$serial" ]; then
+     db_set uic-zpc/serial_port "$serial"
+  fi
+  if [ ! -z "$rf_region" ]; then
+    db_set uic-zpc/region "$rf_region"
+  fi
+  if [ ! -z "$datastore_file" ]; then
+    db_set uic-zpc/datastore_file "$datastore_file"
+  fi
 fi
 
 
@@ -57,4 +61,3 @@ db_input critical uic-zpc/serial_port || true
 db_input critical uic-zpc/region || true
 db_input critical uic-zpc/datastore_file || true
 db_go
-

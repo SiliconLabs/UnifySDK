@@ -25,11 +25,11 @@ var group__zwave__tx__interface =
     [ "zwave_tx_get_frame", "group__zwave__tx__interface.html#ga1815491d1149ccc8dc91aa4629bba835", null ],
     [ "zwave_tx_get_frame_length", "group__zwave__tx__interface.html#gaf669f3e5ba5a01c411842fae2c58637c", null ],
     [ "zwave_tx_get_number_of_responses", "group__zwave__tx__interface.html#gaaf93d9d3d5b0961a55f7967fc7628092", null ],
+    [ "zwave_tx_has_frames_for_node", "group__zwave__tx__interface.html#gabb799c67f2008618877071e96e2fca77", null ],
     [ "zwave_tx_init", "group__zwave__tx__interface.html#gaecd18ffa418c0db342d7af2132b6c92f", null ],
     [ "zwave_tx_log_element", "group__zwave__tx__interface.html#gaa5028dc3dc8b356caa485d12ba18aa4f", null ],
     [ "zwave_tx_log_queue", "group__zwave__tx__interface.html#ga4b1785eddaa2ebfc6a702d9b4d0b27a3", null ],
     [ "zwave_tx_send_data", "group__zwave__tx__interface.html#gad1538f36d226fe8147c5e538625568df", null ],
     [ "zwave_tx_send_test_frame", "group__zwave__tx__interface.html#gaa9f1d1d606b194a14547c2fd1d4e18e2", null ],
-    [ "zwave_tx_set_expected_frames", "group__zwave__tx__interface.html#gadddb568914e58a17dd75b381133926de", null ],
-    [ "zwave_tx_shutdown", "group__zwave__tx__interface.html#ga3f2735c543a9cfdcefdeaf8a76709155", null ]
+    [ "zwave_tx_set_expected_frames", "group__zwave__tx__interface.html#gadddb568914e58a17dd75b381133926de", null ]
 ];

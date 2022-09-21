@@ -27,7 +27,8 @@ For installing please refer to the general installation method in
 ### Using Systemd Service
 
 The best way to run the GMS is using the Systemd service that is installed with
-the Debian installer. For more information, see [Unify User guide](../../doc/unify_readme_user.md).
+the Debian installer. For more information, see the
+[Unify Framework User guide](../../doc/unify_readme_user.md).
 
 ### Using Command Line
 

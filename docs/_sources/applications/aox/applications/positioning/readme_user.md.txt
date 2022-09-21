@@ -10,7 +10,7 @@ the AoXPC instances.
 ## Operation
 
 The positioning service starts automatically as a systemd service. For more
-information on installation and systemd services, see [Unify User guide](../../../../doc/unify_readme_user.md).
+information on installation and systemd services, see [Unify Framework User guide](../../../../doc/unify_readme_user.md).
 
 The service detects the locators connected to the system automatically.
 Locators need to be configured as described in the [AoXPC User Guide](../aoxpc/readme_user.md).
@@ -24,8 +24,8 @@ Asset tags are presented as individual nodes on the MQTT network by the
 positioning service. The estimated position of the asset tag is presented as an
 AoXPositionEstimation cluster attribute, as follows.
 
-```console
-ucl/by-unid/<TAG_UNID>/ep0/AoXPositionEstimation/Attributes/Position/Reported {
+```mqtt
+ucl/by-unid/<TAG_UNID>/ep0/AoXPositionEstimation/Attributes/Position/Reported - {
   "value": {
     "ApplicationId": "positioning_4154",
     "DeviationX": 3.1297969818115234,

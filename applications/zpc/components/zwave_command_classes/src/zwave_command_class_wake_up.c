@@ -680,10 +680,12 @@ static void send_wake_up_no_more(attribute_store_node_t node_id_node)
   zwave_node_id_t node_id = 0;
   attribute_store_get_reported(node_id_node, &node_id, sizeof(node_id));
 
-  if (true == we_have_return_routes_to_assign(node_id)) {
+  if ((true
+       == zwave_network_management_is_protocol_sending_frames_to_node(node_id))
+      || (true == zwave_tx_has_frames_for_node(node_id))) {
     sl_log_debug(LOG_TAG,
                  "Delaying Wake Up No More Command, as we still "
-                 "have return routes to establish for NodeID %d",
+                 "are still communicating with NodeID %d",
                  node_id);
     attribute_timeout_set_callback(node_id_node,
                                    WAKE_UP_NO_MORE_DELAY,
@@ -782,10 +784,23 @@ static void
                                               ATTRIBUTE(SETTING));
 
   // Write down the interval to set.
-  attribute_store_set_child_desired(wake_up_setting_node,
-                                    ATTRIBUTE(INTERVAL),
-                                    &interval,
-                                    sizeof(interval));
+  attribute_store_node_t wake_up_interval_node
+    = attribute_store_get_first_child_by_type(wake_up_setting_node,
+                                              ATTRIBUTE(INTERVAL));
+  if (false
+      == attribute_store_is_value_defined(wake_up_interval_node,
+                                          DESIRED_ATTRIBUTE)) {
+    attribute_store_set_desired(wake_up_interval_node,
+                                &interval,
+                                sizeof(interval));
+  } else {
+    sl_log_debug(LOG_TAG,
+                 "Interval desired value is already defined. "
+                 "It will not be modified");
+    attribute_store_get_desired(wake_up_interval_node,
+                                &interval,
+                                sizeof(interval));
+  }
 
   // NodeID is always ours.
   zwave_node_id_t zpc_node_id = zwave_network_management_get_node_id();

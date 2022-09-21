@@ -55,11 +55,12 @@ export class ConfigurationParamsList extends React.Component<ConfigurationParams
       Object.keys(item.ep).forEach(ep => {
         if (!item.ep[ep].Clusters?.ConfigurationParameters)
           return;
+        let params = item.ep[ep].Clusters?.ConfigurationParameters?.Attributes?.ConfigurationParameters?.Reported;
         list.set(item.Unid + ep, {
           Node: item,
           EndPoint: ep,
-          Params: item.ep[ep].Clusters?.ConfigurationParameters?.Attributes?.ConfigurationParameters?.Reported,
-          IsExpanded: (this.state && this.state.List && this.state.List.get(item.Unid + ep)?.IsExpanded) || false
+          Params: params,
+          IsExpanded: (this.state && this.state.List && this.state.List.get(item.Unid + ep)?.IsExpanded) ?? params?.length < 3
         });
       });
     });

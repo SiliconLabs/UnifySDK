@@ -555,11 +555,7 @@ static sl_status_t zwave_command_class_configuration_handle_bulk_report_command(
 
   reports_to_follow_t reports = frame[5];
   if (reports > 0) {
-    // UIC-1697
-    sl_log_debug(
-      LOG_TAG,
-      "Supporting node is going wild and will send several Bulk Reports. "
-      "We should tell the Tx Queue to back-off for more frames.");
+    zwave_tx_set_expected_frames(info->remote.node_id, reports);
   }
 
   // Get the size

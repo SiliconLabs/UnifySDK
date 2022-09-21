@@ -1,11 +1,36 @@
 # ZPC Release Notes
 
+## [1.2.1] - Sep 2022
+
+### Changed (1.2.1)
+
+* Allowed UAM files to define the desired value of the Wake Up Interval.
+* Attribute Store is now configured to back-up to the datastore 10 seconds
+  after the last Attribute Store update, and every 10 minutes if the attribute
+  Store is being changed more often than every 10 seconds for 10 minutes in a
+  row.
+  Note that the Attribute Store is always saved at shutdown.
+
+### Fixed (1.2.1)
+
+* Network management waits for NL nodes to be awake before initiating return
+  routes / neighbor discovery operations
+* Tx Queue applies back-off when network management sends frames to destinations
+* Tx Queue applies back-off when we received unsolicited routed frames.
+* (Multi Channel) Association Remove/Set commands will be attempted only 2 times
+  if the end node does not accept values.
+* Network Management will not accept new operations once the Z-Wave Controller
+  has initiated a reset.
+* Attribute Store Poll Engine did not remove attributes from the poll queue,
+  when they were deleted causing a warning to be printed when a deleted
+  attribute was to be polled.
+
 ## [1.2.0] - Aug 2022
 
 _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 1.2.1 release.
 
-**Added**:
+### Added (1.2.0)
 
 * ZPC can recover and operate networks if started without any datastore
   * DSK and Kex Fail type will be missing
@@ -19,26 +44,26 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 
 * PTI enabling/disabling via the RF Telemetry cluster.
 
-**Changed**:
+### Changed (1.2.0)
 
 * Associations and Wake Up are configured as early as possible during the
   interview, to minimize damage if sleeping nodes fall asleep during the interview.
 
 * ZCL attributes are now stored with their real storage type instead of int.
 
-**Fixed**:
+### Fixed (1.2.0)
 
 * Tx Queue gets flooded with NOPs if a few nodes are failing in the network.
 * Tx Queue backs off too much in some cases.
 
 ## [1.1.1] - Mar 2022
 
-**Added**:
+### Added (1.1.1)
 
 * Full control for Configuration Command Class, version 4
 * Added generated OnOff cluster commands for nodes issuing Basic Set commands to the ZPC.
 
-**Changed**:
+### Changed (1.1.1)
 
 * Changed configuration keys for OTA config, if these have been specified in
   the ZPC config file, they need to be updated to the new keys manually
@@ -48,7 +73,7 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 * Default get retry timer is lowered to 3s instead of 20s to mitigate against Wake
   Up nodes falling asleep during node interviews.
 
-**Fixed**:
+### Fixed (1.1.1)
 
 * ZPC gets stuck at reset in some rare cases.
 * ZPC stops controlling OnOff if Binary Switch Set without supervision failed.
@@ -61,7 +86,7 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 
 ## [1.1.0] - Feb 2022
 
-**Added**:
+### Added (1.1.0)
 
 * Partial Control for Central Scene Command Class
   * Populating Scene Attributes to reflect the node's capabilities (total number of scenes)
@@ -75,7 +100,7 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 * Monitoring if Offline nodes are responding again with regular NOPs commands.
 * Network Polling
 
-**Changed**:
+### Changed (1.1.0)
 
 * ZPC datastore file key has been changed from --datastore.file to --zpc.datastore_file
 * Default datastore file has been changed from /var/lib/uic/database.db to /var/lib/uic/zpc.db
@@ -84,7 +109,7 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 * Increased Z-Wave Tx Queue robustness to multiple Tx sessions.
 * Communication with Z-Wave Module optimized
 
-**Fixed**:
+### Fixed (1.1.0)
 
 * Interviewing an offline node would make it appear online.
 * Missing Wake Up Interval Set during interview for door/window sensor
@@ -94,7 +119,7 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 
 ## [1.0.2] - Oct 2021
 
-**Added**:
+### Added (1.0.2)
 
 * ZPC is Z-Wave Certified against the Z-Wave Specification release 2021A.
 * Support of Z-Wave Command Classes
@@ -103,23 +128,23 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
   * Firmware Update
   * Indicator
 
-**Changed**:
+### Changed (1.0.2)
 
 * OTA UIID has been updated to include hardware revision
 
-**Fixed**:
+### Fixed (1.0.2)
 
 * Fixed various certification issues
 
 ## [1.0.1] - Aug 2021
 
-**Fixed**:
+### Fixed (1.0.1)
 
 * Build issues
 
 ## [1.0.0] - Aug 2021
 
-**Added**:
+### Added (1.0.0)
 
 * Implementation of Unify specification 1.0
 * Support for performing Over The Air update(OTA) of Z-Wave devices
@@ -166,7 +191,7 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
   * OccupancySensing
   * OnOff
 
-**Changed**:
+### Changed (1.0.0)
 
 * Various bug fixes
 * UAM Language updates
@@ -184,80 +209,60 @@ _Note_: GA releases are not certified. The ZPC will be Z-Wave certified in the
 * **UIC-2232**:
   A node with capabilities mapping to Level and OnOff cluster
   may stop responding to Toggle commands after a MoveToLevelWithOnOff command.
-  *Note*: Avoid using Toggle and use On or Off instead.
-
-* **UIC-2222**/**UIC-2230**:
-  When routing is involved to reach a destination, the interview
-  get-retries are too aggressive and create multi-hop collisions.
-  *Note*: Increase the get_retry_timeout in the zpc_attribute_resolver if this
-  is a problem. Note that sleeping nodes have a higher chance to fall asleep
-  during an interview with high values.
+  _Note_: Avoid using Toggle and use On or Off instead.
 
 * **UIC-2219**:
   Bindings command processing do not validate the full UNID.
   This may trigger to establish spurious associations if having several
   Z-Wave networks.
-  *Note*: Do not try to bind nodes accross networks. (inter-pc bindings)
+  _Note_: Do not try to bind nodes accross networks. (inter-pc bindings)
 
 * **UIC-2218**:
   Start and stop the ZPC quickly may lead to a few leftover MQTT topics not removed.
-  *Note*: Wait a few seconds before stopping the ZPC.
-
-* **UIC-2213**:
-  When a sleeping device supports Battery Command Class version 3,
-  the ZPC does not finish interviewing the device and continuously send Battery
-  Health Get commands when the device wakes up.
-  *Note*: Wait for all the retries to complete
-
-* **UIC-2211**:
-  If a node does not respond to Supervision Get with an
-  Association Set Command and does not establish the association, the ZPC will
-  go into an infinite loop of trying to set the association
-  *Note*: Remove the lifeline establishment of such a device with a UAM file,
-  if one exists.
+  _Note_: Wait a few seconds before stopping the ZPC.
 
 * **UIC-1927**:
   Color Switch Command Class durations are completely ignored.
-  *Note*: Set the colors instantaneously to avoid issues.
+  _Note_: Set the colors instantaneously to avoid issues.
 
 * **UIC-1780**:
   Security 0 Supported Commands Report reports to follow set
   to > 0 are not handled and will trigger a SPAN increase out-of-sync situation.
-  *Note*: No workaround, wait for the nodes to recover.
+  _Note_: No workaround, wait for the nodes to recover.
 
 * **UIC-1779**:
   Multi Channel Endpoint Find Reports reports to follow set
   to > 0 are not handled and will trigger a SPAN increase out-of-sync situation.
-  *Note*: No workaround, wait for the nodes to recover.
+  _Note_: No workaround, wait for the nodes to recover.
 
 * **UIC-1778**:
   Multi Channel Association / Association Report reports to follow set
   to > 0 are not handled and will trigger a SPAN increase out-of-sync situation.
-  *Note*: No workaround, wait for the nodes to recover.
+  _Note_: No workaround, wait for the nodes to recover.
 
 * **UIC-1652**:
   The ZPC silently ignores incorrect YAML and uses default values
   if it cannot parse the YAML content for its configuration.
-  *Note*: Verify the validity of the YAML in the configuration file.
+  _Note_: Verify the validity of the YAML in the configuration file.
 
 * **UIC-1271**
   IdentifyTime from the Identify cluster stays fixed, even
   though it should be a countdown.
-  *Note*: Avoid using large IdentifyTime values.
+  _Note_: Avoid using large IdentifyTime values.
 
 * **UIC-1162**:
   When a device have multiple Z-Wave functionalities mapped to
   the same Zigbee attribute, the state of the device will be ambiguous.
   The ZCL state will represent the functionality that was last updated.
-  *Note*: Update tha UAM file with a device fingerprint to circumvent issues.
+  _Note_: Update tha UAM file with a device fingerprint to circumvent issues.
 
 * **UIC-1088**:
   Potentially wrong controller NIF after controller migration.
-  *Note*: Usually not a problem in practice
+  _Note_: Usually not a problem in practice
 
 * **UIC-729**
   Assigned Group cluster attributes are erased at re-interview.
-  *Note*: Re-setup all group membership after a node re-interview
+  _Note_: Re-setup all group membership after a node re-interview
 
 ## Z-Wave Certification information
 

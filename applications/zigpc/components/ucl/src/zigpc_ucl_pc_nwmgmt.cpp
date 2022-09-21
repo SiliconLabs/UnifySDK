@@ -27,6 +27,8 @@
 // Component includes
 #include "zigpc_ucl_int.hpp"
 
+static constexpr char LOG_FMT_JSON_ERROR[] = "%s: Unable to parse JSON payload: %s";
+
 /**
  * @brief Map between the Network Management FSM states and the
  * next states supported. This map is used by the component
@@ -71,8 +73,24 @@ static sl_status_t helper_parse_requested_state(
                    status);
     return status;
   }
+  
+  std::string state_field = ""; 
+  try
+  {
+    state_field  = payload_jsn[KEY_STATE].get<std::string>();
+  }
+  catch(const nlohmann::json::exception& e)
+  {
+    status = SL_STATUS_OBJECT_READ;
+    sl_log_warning(zigpc_ucl::LOG_TAG,
+                   "Failed to parse the JSON payload: 0x%X",
+                   status);
+    sl_log_debug(zigpc_ucl::LOG_TAG,
+                 LOG_FMT_JSON_ERROR,
+                 e.what());
+    return status;
+  }
 
-  std::string state_field = payload_jsn[KEY_STATE].get<std::string>();
   for (auto &state_entry: STATE_TYPE_MAP) {
     if (state_entry.second == state_field) {
       state_change.requested_state = state_entry.first;
@@ -119,7 +137,22 @@ static sl_status_t helper_parse_state_parameters(
     return status;
   }
 
-  std::string unid_field = state_parameters_obj[KEY_STATE_PARAMETER_UNID].get<std::string>();
+  std::string unid_field = ""; 
+  try
+  {
+    unid_field = state_parameters_obj[KEY_STATE_PARAMETER_UNID].get<std::string>();
+  }
+  catch(const nlohmann::json::exception& e)
+  {
+    status = SL_STATUS_OBJECT_READ;
+    sl_log_warning(zigpc_ucl::LOG_TAG,
+                   "Failed to parse the JSON payload: 0x%X",
+                   status);
+    sl_log_debug(zigpc_ucl::LOG_TAG,
+                 LOG_FMT_JSON_ERROR,
+                 e.what());
+    return status;
+  }
 
   zigbee_eui64_uint_t eui64;
   status = zigpc_ucl::mqtt::parse_unid(unid_field, eui64);

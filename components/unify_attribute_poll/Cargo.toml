@@ -11,6 +11,7 @@ unify_attribute_store_sys = {path = "../uic_rust/unify_attribute_store_sys"}
 unify_contiki_sys = {path = "../uic_rust/unify_contiki_sys"}
 unify_config_sys = { path = "../uic_rust/unify_config_sys" }
 unify_sl_status_sys = { path = "../uic_rust/unify_sl_status_sys" }
+unify_proc_macro = { path = "../uic_rust/unify_proc_macro" }
 futures = "0.3.*"
 once_cell = "1.9.*"
 mockall = "0.11.*"

@@ -57,12 +57,14 @@ static int test_get_function_call_count                  = 0;
 static int test_resolution_listener_function_call_count  = 0;
 static int test_set_rule_listener_function_call_count    = 0;
 static int test_get_give_up_listener_function_call_count = 0;
+static int test_resumption_listener_function_call_count  = 0;
 
 static attribute_store_node_t expected_node_for_resolution               = 0;
 static attribute_store_node_t expected_node_for_listening_notification   = 0;
 static attribute_store_node_t expected_node_for_abort                    = 0;
 static attribute_store_type_t expected_type_for_listening_notification   = 0;
 static attribute_store_node_t expected_node_for_get_give_up_notification = 0;
+static attribute_store_node_t expected_node_for_resumption_notification  = 0;
 static sl_status_t send_function_return_code = SL_STATUS_OK;
 static sl_status_t set_function_return_code  = SL_STATUS_OK;
 static sl_status_t get_function_return_code  = SL_STATUS_OK;
@@ -145,6 +147,15 @@ static void test_get_give_up_listener_function(attribute_store_type_t node)
     TEST_ASSERT_EQUAL(expected_node_for_get_give_up_notification, node);
   }
   test_get_give_up_listener_function_call_count += 1;
+}
+
+static void test_resumption_listener_function(attribute_store_type_t node)
+{
+  if (expected_node_for_resumption_notification
+      != ATTRIBUTE_STORE_INVALID_NODE) {
+    TEST_ASSERT_EQUAL(expected_node_for_resumption_notification, node);
+  }
+  test_resumption_listener_function_call_count += 1;
 }
 
 /// Setup the test suite (called once before all test_xxx functions are called)
@@ -245,10 +256,12 @@ void setUp()
   test_abort_function_call_count                = 0;
   test_set_rule_listener_function_call_count    = 0;
   test_get_give_up_listener_function_call_count = 0;
+  test_resumption_listener_function_call_count  = 0;
   expected_node_for_resolution                  = ATTRIBUTE_STORE_INVALID_NODE;
   expected_node_for_listening_notification      = ATTRIBUTE_STORE_INVALID_NODE;
   expected_node_for_abort                       = ATTRIBUTE_STORE_INVALID_NODE;
   expected_node_for_get_give_up_notification    = ATTRIBUTE_STORE_INVALID_NODE;
+  expected_node_for_resumption_notification     = ATTRIBUTE_STORE_INVALID_NODE;
   send_function_return_code                     = SL_STATUS_OK;
   set_function_return_code                      = SL_STATUS_OK;
   get_function_return_code                      = SL_STATUS_OK;
@@ -1764,5 +1777,71 @@ void test_attribute_resolver_rule_get_group_node()
   TEST_ASSERT_EQUAL(1, g2.count(b2c1));
   TEST_ASSERT_EQUAL(1, g2.count(b2c2));
   TEST_ASSERT_EQUAL(4, g2.size());
+}
+
+void test_attribute_resumption_listener()
+{
+  // register a register a resumption listner on node 3 and 6
+  attribute_resolver_set_resolution_resumption_listener(
+    node_3,
+    &test_resumption_listener_function);
+
+  attribute_resolver_set_resolution_resumption_listener(
+    node_6,
+    &test_resumption_listener_function);
+
+  // No callbacks yet.
+  TEST_ASSERT_EQUAL(0, test_resumption_listener_function_call_count);
+
+  // Pause node 2, 6 is a child and 3 is not.
+  attribute_resolver_pause_node_resolution(node_2);
+  TEST_ASSERT_EQUAL(0, test_resumption_listener_function_call_count);
+
+  expected_node_for_resumption_notification = node_6;
+  attribute_resolver_resume_node_resolution(node_2);
+  TEST_ASSERT_EQUAL(1, test_resumption_listener_function_call_count);
+
+  // Now pause both the root and node 2.
+  attribute_resolver_pause_node_resolution(node_2);
+  attribute_resolver_pause_node_resolution(attribute_store_get_root());
+
+  // Unpause node 2, root is still paused, no notification
+  attribute_resolver_resume_node_resolution(node_2);
+  TEST_ASSERT_EQUAL(1, test_resumption_listener_function_call_count);
+
+  // Pause node 6 itself
+  attribute_resolver_pause_node_resolution(node_6);
+
+  // Unpause the root. Node 3 will get a notification.
+  expected_node_for_resumption_notification = node_3;
+  attribute_resolver_resume_node_resolution(attribute_store_get_root());
+  TEST_ASSERT_EQUAL(2, test_resumption_listener_function_call_count);
+
+  // Now unpause node_6
+  expected_node_for_resumption_notification = node_6;
+  attribute_resolver_resume_node_resolution(node_6);
+  TEST_ASSERT_EQUAL(3, test_resumption_listener_function_call_count);
+
+  // Pause the root, unpause, both node 3 and 6 will get a notification.
+  attribute_resolver_pause_node_resolution(attribute_store_get_root());
+  expected_node_for_resumption_notification = ATTRIBUTE_STORE_INVALID_NODE;
+  TEST_ASSERT_EQUAL(3, test_resumption_listener_function_call_count);
+  attribute_resolver_resume_node_resolution(attribute_store_get_root());
+  TEST_ASSERT_EQUAL(5, test_resumption_listener_function_call_count);
+
+  // Clear the resolution resumption listener for node 3.
+  attribute_resolver_clear_resolution_resumption_listener(
+    node_3,
+    &test_resumption_listener_function);
+
+  // Nothing should happend with non-matching functions
+  attribute_resolver_clear_resolution_resumption_listener(node_6, nullptr);
+
+  // Pause and resume the root node, only node 6 should be notified now:
+  attribute_resolver_pause_node_resolution(attribute_store_get_root());
+  expected_node_for_resumption_notification = node_6;
+  TEST_ASSERT_EQUAL(5, test_resumption_listener_function_call_count);
+  attribute_resolver_resume_node_resolution(attribute_store_get_root());
+  TEST_ASSERT_EQUAL(6, test_resumption_listener_function_call_count);
 }
 }

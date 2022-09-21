@@ -30,11 +30,11 @@
 #define LOG_TAG "attribute_store_benchmark_test"
 
 // Define for the test
-#define BENCHMARK_NUMBER_OF_NODES           10000
+#define BENCHMARK_NUMBER_OF_NODES           1000000
 #define BENCHMARK_NUMBER_OF_NODES_TO_ACCESS 2000
-#define MAXIMUM_ATTRIBUTE_STORE_DEPTH       10
-#define READ_PASS_CRITERIA                  0.05
-#define WRITE_PASS_CRITERIA                 4.0
+#define MAXIMUM_ATTRIBUTE_STORE_DEPTH       5
+#define READ_PASS_CRITERIA                  1.0
+#define WRITE_PASS_CRITERIA                 1.0
 
 #define ATTRIBUTE_HOME_ID 101
 // Static test variables
@@ -49,7 +49,7 @@ static attribute_store_node_t root_node = ATTRIBUTE_STORE_INVALID_NODE;
 void suiteSetUp()
 {
   // Component initialization
-  datastore_fixt_setup("attribute_store_benchmark.db");
+  datastore_fixt_setup(":memory:");
   attribute_store_init();
   // Initialize the Randon Number Generator
   srand(time(NULL));
@@ -62,7 +62,7 @@ void suiteSetUp()
   nodes[0]       = attribute_store_add_node(ATTRIBUTE_HOME_ID, root_node);
   nodes_depth[0] = 1;
 
-  for (uint16_t i = 1; i < BENCHMARK_NUMBER_OF_NODES; i++) {
+  for (uint32_t i = 1; i < BENCHMARK_NUMBER_OF_NODES; i++) {
     // Try to attach the node with a "realistic depth". (MAXIMUM_ATTRIBUTE_STORE_DEPTH).
     attribute_store_node_t parent_node_index = rand() % i;
 

@@ -106,13 +106,14 @@ export class Binding extends React.Component<BindingProps, BindingState> {
       Object.keys(item.ep).forEach(ep => {
         if (!item.ep[ep].Clusters?.Binding)
           return;
+        let bindingTable = this.getBindingTable(item.ep[ep].Clusters?.Binding?.Attributes?.BindingTable?.Reported, item.ep[ep].Clusters?.Binding?.Attributes?.BindingTable?.Desired);
         list.set(item.Unid + ep, {
           Node: item,
           EndPoint: ep,
           BindingTableFull: item.ep[ep].Clusters?.Binding?.Attributes?.BindingTableFull?.Reported,
           BindableClusterList: item.ep[ep].Clusters?.Binding?.Attributes?.BindableClusterList?.Reported,
-          BindingTable: this.getBindingTable(item.ep[ep].Clusters?.Binding?.Attributes?.BindingTable?.Reported, item.ep[ep].Clusters?.Binding?.Attributes?.BindingTable?.Desired),
-          IsExpanded: (this.state && this.state.List && this.state.List.get(item.Unid + ep)?.IsExpanded) || false
+          BindingTable: bindingTable,
+          IsExpanded: (this.state && this.state.List && this.state.List.get(item.Unid + ep)?.IsExpanded) ?? bindingTable?.length
         });
       });
     });

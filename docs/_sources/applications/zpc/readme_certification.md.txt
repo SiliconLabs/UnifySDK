@@ -7,6 +7,26 @@ devices from other manufacturers. All mains operated nodes within the network
 will act as repeaters regardless of vendor to increase reliability of the
 network.
 
+## Z-Wave and ZCL data models
+
+Note that the ZPC maps functionality from Z-Wave to ZCL, and vice versa. In the
+UI, all Z-Wave nodes will be presented to behave as closely as possible to a
+ZCL compliant end device.
+
+Due to this mapping, some dependencies may be added or removed between the
+different functionalities of a node.
+
+Further, the UI may sometimes get stuck, waiting for an update after issuing a
+command. This may be due to the fact that mappings are not always a bijection
+and multiple states may map to only 1 or vice versa.
+
+If commands do not seem to be sent out after an update (spinny wheel on the UI)
+
+![Dev GUI Waiting for attribute updates](doc/assets/img/dev_gui_spinny_wheel.png)
+
+It is recommended to try to modify more attributes by issuing more commands or
+the same command with slightly different parameters.
+
 ## Device Type and Role Type
 
 The ZPC has a Generic Controller Device type and uses the following device classes:
@@ -88,7 +108,7 @@ To cancel an exclusion attempt, select the "Idle" option under the "States" butt
 
 #### Management Operations for Individual Nodes
 
-When a network management is to be targetted for a particular node, the list of
+When a network management is to be targeted for a particular node, the list of
 available commands is available in the node list page, under the **Commands** button.
 
 ![Dev GUI commands button](doc/assets/img/dev_gui_commands_button.png)
@@ -96,7 +116,6 @@ available commands is available in the node list page, under the **Commands** bu
 * Interview will perform a new node Interview
 * RemoveOffline will perform a Z-Wave Remove Failed Node.
 * DiscoverNeighbors will request Z-Wave node to perform a neighbor discovery. It will have no effect for nodes includes with Z-Wave Long Range.
-
 
 While a node is under interview, its status will be *Online interviewing*. When
 The interview is over, its status moves back to *Online functional*.
@@ -128,14 +147,14 @@ The following table shows supported and controlled Z-Wave Command Classes by the
 | Door Lock                      |       2 |         |       x | N/A                         | Control Part is auto-generated. |
 | Firmware Update                |       7 |       x |       x | Network Scheme              |         |
 | Inclusion Controller           |       1 |       x |       x | Unencrypted                 |         |
-| Indicator                      |       3 |       x |       x |<©≤ƒ> Network Scheme              |         |
+| Indicator                      |       3 |       x |       x | Network Scheme              |         |
 | Manufacturer Specific          |       2 |       x |       x | Network Scheme              |         |
-| Meter                          |       6 |         |       x | N/A                         |         |
+| Meter                          |       6 |         |       x | N/A                         | Partial control: <br>1. Meter Reset Command is not supported since there were not a corresponding command on dotdot ZCl data model. <br> |
 | Multi Channel                  |       4 |         |       x | N/A                         |         |
 | Multi Channel Association      |       3 |       x |       x | Network Scheme              |         |
 | Multi Command                  |       1 |       x |         | Unencrypted                 |         |
 | Multilevel Sensor              |      11 |         |       x | N/A                         | Partial control: <br>1. Not all scales are supported<br>2. Not all types are shown in the UI. |
-| Multilevel Switch              |       4 |         |       x | N/A                         |         |
+| Multilevel Switch              |       4 |         |       x | N/A                         | Partial Control: The value 0xFF cannot be used in Multilevel Switch Set Commands |
 | Notification                   |       8 |         |       x | N/A                         | Partial Control: <br>1. No Push/Pull discovery is done.<br>2. No Pull sensor support. <br>3. Unknown types are not supported. <br>4. No Regular probing is done.  |
 | Powerlevel                     |       1 |       x |         | Network Scheme              |         |
 | Security 0                     |       1 |       x |       x | Unencrypted                 |         |
@@ -173,18 +192,72 @@ The ZPC supports the following Association Groups
 | ------------------------------ | ------------------------------ | ---------- | --------------------------------------------------- |
 | 1                              | 10                             | Lifeline   | ZPC reset will issue a Device Reset Locally Command |
 
-The ZPC also controls the Association and Multi Channel Association. It only
-establishes lifeline associations or establishes association if some
-controlled command classes require it. (i.e. Notification, Central Scene, etc.)
+The ZPC controls the Association and Multi Channel Association.
+By default, it establishes lifeline associations or establishes associations if
+some controlled Command Classes require it. (i.e. Notification, Central Scene,
+etc.)
+
+It is also possible to establish associations between 2 nodes in the network
+if the following conditions are fulfilled:
+
+* The 2 nodes operate using Z-Wave (and not LR) and have identical highest security levels.
+* The destination is not an NL node.
+* The source node has AGI information and sends commands corresponding to a bindable
+  cluster in the table below
+* The destination supports the Command Class that the source is sending.
+
+| Command Class                        | Command                               | Bindable cluster           |
+| ------------------------------------ | --------------------------------------| -------------------------- |
+| COMMAND_CLASS_BASIC                  | BASIC_SET                             |  OnOff                     |
+| COMMAND_CLASS_SWITCH_BINARY          | SWITCH_BINARY_SET                     |  OnOff                     |
+| COMMAND_CLASS_SWITCH_MULTILEVEL      | SWITCH_MULTILEVEL_SET                 |  Level                     |
+| COMMAND_CLASS_SWITCH_MULTILEVEL      | SWITCH_MULTILEVEL_START_LEVEL_CHANGE  |  Level                     |
+| COMMAND_CLASS_SWITCH_MULTILEVEL      | SWITCH_MULTILEVEL_STOP_LEVEL_CHANGE   |  Level                     |
+| COMMAND_CLASS_INDICATOR              | INDICATOR_SET                         |  Identify                  |
+| COMMAND_CLASS_DOOR_LOCK              | DOOR_LOCK_OPERATION_SET               |  DoorLock                  |
+| COMMAND_CLASS_DOOR_LOCK              | DOOR_LOCK_CONFIGURATION_SET           |  DoorLock                  |
+| COMMAND_CLASS_WINDOW_COVERING        | WINDOW_COVERING_SET                   |  WindowCovering            |
+| COMMAND_CLASS_WINDOW_COVERING        | WINDOW_COVERING_START_LEVEL_CHANGE    |  WindowCovering            |
+| COMMAND_CLASS_WINDOW_COVERING        | WINDOW_COVERING_STOP_LEVEL_CHANGE     |  WindowCovering            |
+| COMMAND_CLASS_BARRIER_OPERATOR       | BARRIER_OPERATOR_SET                  |  BarrierControl            |
+| COMMAND_CLASS_THERMOSTAT_MODE        | THERMOSTAT_MODE_SET                   |  Thermostat                |
+| COMMAND_CLASS_THERMOSTAT_SETPOINT    | THERMOSTAT_SETPOINT_SET               |  Thermostat                |
+| COMMAND_CLASS_THERMOSTAT_FAN_MODE    | THERMOSTAT_FAN_MODE_SET               |  FanControl                |
+| COMMAND_CLASS_HUMIDITY_CONTROL_MODE  | HUMIDITY_CONTROL_MODE_SET             |  DehumidificationControl   |
+| COMMAND_CLASS_SWITCH_COLOR           | SWITCH_COLOR_SET                      |  ColorControl              |
+
+Note that it will be allowed to establish bindings towards
+the ZPC in most cases.
 
 #### Node status
 
-It is not possible to see association groups state from the Dev GUI.
+It is not possible to see the full association groups details from the Dev GUI.
+However, The binding page will allow to add cluster bindings, which in turn will
+add and remove associations.
+
+![Dev GUI Binding Cluster](./doc/assets/img/dev_gui_binding_cluster.png)
+
+The list of cluster bindings will be shown on this page.
+
+![Dev GUI Binding Node State](./doc/assets/img/dev_gui_binding_cluster_node_state.png)
+
+* **Bindable Cluster List**: Indicates if some association groups send commands from
+  the binding table above, and show which clusters are available for binding.
+* **Table full**: If set to true, new bindings will be rejected, due to
+  a lack of capacity to add more destinations.
+* **Binding table**: Shows the current bindings. Green color indicates that the
+  binding is to be established and the red color indicates that the binding is
+  to be removed.
+
+Note that for example, if a node has 2 Association groups sending Basic Set Commands,
+a binding to the OnOff cluster will result in associate all groups sending
+these commands.
 
 #### Sending commands
 
-It is not possible to issue Association / Multi Channel Association commands
-from the Dev GUI.
+The Bind/Unbind commands will send Association Set/Remove commands.
+
+![Dev GUI Binding commands](./doc/assets/img/dev_gui_binding_cluster_commands.png)
 
 ### Basic Command Class Information
 
@@ -280,21 +353,24 @@ scene is active or has been activated last in supporting nodes.
 To see the state of the Central Scene Command Class, select the Scenes page
 from the left menu on the Dev GUI.
 
-The state of the node is displayed for each entry, it only consist in
+![Dev GUI Scenes Cluster](./doc/assets/img/dev_gui_scenes_cluster.png)
+
+The state of the node is displayed for each entry, it consists in
 the following attributes:
 
-* **Number of Scenes**: The total number of scenes/key attributes combinations that could
-be used by the supporting node.
+* **Scene count**: The total number of scenes/key attributes combinations that
+could be used by the supporting node.
 * **Current Scene**: The active or last active scene. This is a unique number
 derived from the Scene Number and Key attribute combination, it is in the range
 [0 ; **Number of Scenes** - 1]. The Scene is calculated as follow:
 *Current Scene = ((SceneID - 1) * Max Key Attribute) + (Key Attribute);*
 If no Central Scene Notification has been received yet, this value stays undefined.
-* **Current Scene valid**: Indicates if the Current Scene is active,
+* **Scene valid**: Indicates if the Current Scene is active,
 meaning that the scene was activated within the last 5 seconds or is being
 activated (e.g. button is being held down). When this is set to false,
 it means that the *Current Scene* attribute represents the last active scene.
 
+![Dev GUI Scenes Node State](./doc/assets/img/dev_gui_scenes_node_state.png)
 
 #### Sending commands
 
@@ -310,20 +386,100 @@ The state of a Color Switch node can be found on ColorControl cluster page.
 
 ![Dev GUI ColorControl Cluster](./doc/assets/img/dev_gui_color_control_cluster.png)
 
-Note that nodes will be presented on the ColorControl page only if they also
-support either the Binary Switch Command Class and/or the Multilevel Switch
-Command Class.
+Note that nodes will be presented on the ColorControl will also display a Level
+and OnOff cluster capability. These capabilities are normally mapped if the
+supporting node also supports Binary Switch Command Class and/or the Multilevel Switch
+Command Class, but they will be emulated if the supporting node does not support
+these Command Classes.
 
-The ColorControl cluster will operate using the Hue Saturation Lightness (HSL)
+Note that the Level value depends on the OnOff value, and the Color values
+depend on the Level value.
+
+The ColorControl cluster will operate using the
+[Hue Saturation Lightness (HSL)](https://en.wikipedia.org/wiki/HSL_and_HSV)
 system to determine colors.
 
 The lightness is taken from the Multilevel Switch value, or if the node supports
 Binary Switch Command Class, it will be calculated based on the RGB values.
 
+* **Current Hue**: Value from 0 to 254 representing the Hue in degrees.
+  Get the real Hue (range [0;360]) by doing **Current Hue** / 254 * 360
+* **Current Saturation**: Value from 0 to 254 representing the Saturation.
+  Get the real saturation (range [0;1]) by doing **Current Saturation** / 254.
+
+The current estimated Hue and Saturation are shown in the ColorControl page.
+
+![Dev GUI ColorControl Node State](./doc/assets/img/dev_gui_color_control_node_state.png)
+
+If the node has Cold and/or Warm white capabilities, the DevGUI will also
+show an estimate of its color temperature using the
+[Mired scale](https://en.wikipedia.org/wiki/Mired).
+
+Nodes will operate either using the **CurrentHueAndCurrentSaturation** or
+**ColorTemperatureMireds**, but not both. This is indicated by the
+**Color Mode** column.
+
+The Color Mode is determined by which command has last been sent to the node.
+The following commands will change the **Color Mode** to **ColorTemperatureMireds**:
+
+* MoveToColorTemperature
+* MoveColorTemperature
+* StepColorTemperature
+
+The color temperature is determined by mixing the Warm and Cold white components
+
+* **Temperature Mireds**: Current estimated value of the light temperature
+* **MinMireds**: Minimum possible value (cold white)
+* **MaxMireds**: Maximem possible value (warm white)
+
+The following commands will change the **Color Mode** to **CurrentHueAndCurrentSaturation**:
+
+* MoveToHue
+* MoveHue
+* StepHue
+* MoveToSaturation
+* MoveSaturation
+* StepSaturation
+* MoveToHueAndSaturation
+
+Note that setting colors will require that both the OnOff settting is set to
+On and Level setting is set to a value different than 0. Setting the color before
+the OnOff and Level setting will result in inaccurate mappings.
+
+When running with the **CurrentHueAndCurrentSaturation** **Color Mode**, the
+Multilevel Switch value will be scaled proportionally to the highest color
+component value. For example, if Green is set to 255, Multilevel Switch value
+will be 99, if all color components are set to 127, Multilevel Switch value will
+be 49.
+If the highest color component is set to 64, Multilevel Switch will be set at 25, etc.
+
+When both Multilevel Switch and Color Switch are supported, the Level cluster
+value will be scaled by a factor between 1 and 2. In HSL, full brightness with a color
+component can be achieved with the CurrentLevel = 50, whereas the Multilevel
+Switch value will be set to the maximum value (99). This scaling factor only applies
+when running with the **CurrentHueAndCurrentSaturation** **Color Mode**.
+Note that if the **Saturation** is close to 0, the Multilevel Switch value will
+get scaled by a factor closer to 1 and as **Saturation** gets close to 254,
+the Multilevel Switch level value will be closer to 2.
+[See the Hue Saturation Lightness (HSL) wikipedia page for more details](https://en.wikipedia.org/wiki/HSL_and_HSV)
+
+Note that with **Saturation** set to 0, the color settings will be ambiguous,
+as any hue value will result in a white color. RGB component combination of
+equal values will trigger the Saturation to be 0.
+
+Here are a few mappings:
+
+* HSL(0,254,50) <=> RGB (255,0,0), Multilevel Switch value = 99, Binary Switch = 0xFF
+* HSL(85,254,50) <=> RGB (0,255,0), Multilevel Switch value = 99, Binary Switch = 0xFF
+* HSL(170,254,50) <=> RGB (0,0,255), Multilevel Switch value = 99, Binary Switch = 0xFF
+* HSL(212,254,25) <=> RGB (128,0,120), Multilevel Switch value = 50, Binary Switch = 0xFF
+* HSL(214,254,50) <=> RGB (255,0,253), Multilevel Switch value = 99, Binary Switch = 0xFF
+* HSL(212,254,75) <=> RGB (253,112,255), Multilevel Switch value = 99, Binary Switch = 0xFF
+
 ##### Sending commands
 
 It is possible to issue Color Switch Set Commands by using the
-MoveToHueAndSaturation Command.
+MoveToHueAndSaturation or MoveToColorTemperature Commands.
 
 Given that the full color consists of Hue, Saturation and Lightness,
 a color picker is available and will send both Level/ColorControl commands
@@ -331,6 +487,15 @@ automatically to match a given RGB combination whenever it is clicked.
 
 Due to rounding errors, the reported values by the device may drift a little
 after being set.
+
+**Note**: Durations are completely ignored at the moment and all commands will
+be sent with an instantaneous value.
+
+**Note**: Make sure that the OnOff setting is On in the OnOff cluster,
+before setting the color.
+
+**Note**: Make sure that the Level setting is higher than 0 in the Level cluster,
+before setting the color.
 
 ### Configuration Command Class Information
 
@@ -442,48 +607,92 @@ For example, a node identifying for 66 seconds will be shown as follows:
 #### Sending commands
 
 To trigger an Identify command, select the Identify command.
-A pop-up will appear, asking about the duration. Set the value to 3 in order
+A pop-up will appear, asking about the duration. Set the value to 2 in order
 to trigger the Identify command.
 
 ![Dev GUI Identify Command](./doc/assets/img/dev_gui_send_identify_command.png)
-
 
 #### Meter Command Class Information
 
 The ZPC controls (partially) the Meter Command Class.
 The meter values will be queried and mapped whenever possible to ZCL clusters.
-
-Not all sensor values are available on the Dev GUI.
 ##### Node status
 
-Meter values are probed every 6 hours if no update was received
-from the end nodes.
+It is possible to see some of the metering data in DevGUI. Instantaneous
+and accumulated values are separated.
+
+###### Accumulated values
+
+Cumulated values are mapped to the Metering Cluster.
+All Meter types will be mapped for Cumulated values.
+
+![Dev GUI Metering Cluster](./doc/assets/img/dev_gui_metering_cluster.png)
+
+In the Metering page, the following is displayed:
+
+* **Summation Delivered**: Import or default rate type
+* **Summation Received**: Export rate type
+
+The following units are used:
+
+* Electric Meter: kWh
+* Gas Meter: Cubic meter or Cubic feet, depending on the Z-Wave availability
+* Water Meter: Cubic meter or Cubic feet, depending on the Z-Wave availability
+* Heating Meter: kWh
+* Cooling Meter: kWh
+
+![Dev GUI Metering Node State](./doc/assets/img/dev_gui_metering_node_state.png)
+
+###### Instantaneous values
+
+Instantaneous values for the Electric Meter types are mapped to the
+Electrical Measurement Cluster.
+
+![Dev GUI Electrical Measurement Cluster](./doc/assets/img/dev_gui_electrical_measurement_cluster.png)
+
+The last reported values for each node will be displayed in the cluster view.
+
+![Dev GUI Electrical Measurement Node State](./doc/assets/img/dev_gui_electrical_measurement_node_state.png)
+
+Note that ZCL uses the following units:
+
+* Active Power: W*10 (deci-Watts)
+* RMS Current: A (Amperes)
+* Power Factor: Unitless
+* RMS Voltage: V (Volts)
+* Reactive Power: kVar
 
 ##### Sending commands
 
-It is not possible to send Meter Commands.
+It is not possible to send Meter Commands using the DevGUI. Meter values are
+probed every 6 hours if no update was received from the end nodes.
 
 #### Multilevel Sensor Command Class Information
 
 The ZPC controls (partially) the Multilevel Sensor Command Class.
 The sensor values will be queried and mapped whenever possible to ZCL clusters.
 
-Not all sensor values are available on the Dev GUI.
+Not all sensor values are available on the Dev GUI and unknown values are not
+forwarded to the Dev GUI.
+
 ##### Node status
 
-Sensors values are probed every 6 hours if no update was received
-from the end nodes.
+Sensors values (known and unknown) are probed every 6 hours if no update was
+received from the end nodes.
 
-Different type of sensors will be shown in different places in the Dev GUI.
-For example, temperature sensors will be shown in the Thermostat attribute page.
+At the moment, the only displayed type of sensor in the DevGUI will be
+temperature sensors, shown in the Thermostat attribute page.
+
+Unknown values are not presented in the Dev GUI.
+
 ##### Sending commands
 
 It is not possible to send Multilevel Sensor Commands.
 
 ### Multilevel Switch Command Class Information
 
-The ZPC controls the Multilevel Switch Command Class. It is possible to set and
-see the current level of a multilevel switch supporting node.
+The ZPC controls partially the Multilevel Switch Command Class. It is possible
+to set and see the current level of a Multilevel Switch supporting node.
 
 However, the model on which the Unify system and
 [Dev GUI](../dev_ui/dev_gui/readme_user.md) operate is based on
@@ -500,6 +709,9 @@ be 0, no matter what the current level shows.
 
 * If OnOff is on, the Multilevel Switch value at the end node will be according
 to the level setting.
+
+**Note**: Multilevel Switch mapping will behave differently if Color Switch
+is supported. In this case, refer to the Color Switch Command Class information.
 
 #### Node status
 
@@ -521,7 +733,8 @@ are available:
 To trigger a Multilevel Switch Set, select the MoveToLevelWithOnOff command.
 A pop-up will appear, asking about the parameters.
 
-* CurrentLevel: Multilevel Switch Level, from 0 to 99.
+* CurrentLevel: Multilevel Switch Level, from 0 to 99. It is not possible to send
+  the value 0xFF.
 * OnOffTransitionTime: Transition time, in tenth of seconds, from 0 to 65534.
 The transition time will be floored to the nearest Z-Wave supported value.
 
@@ -563,7 +776,6 @@ table:
 ![Dev GUI Occupancy Sensing Occupied](./doc/assets/img/dev_gui_occupancy_sensing_occupied.png)
 ![Dev GUI Occupancy Sensing UnOccupied](./doc/assets/img/dev_gui_occupancy_sensing_unoccupied.png)
 
-
 The occupancy sensing will be shown as Occupied when receiving:
 
 * Home Security - Motion Detection
@@ -571,7 +783,6 @@ The occupancy sensing will be shown as Occupied when receiving:
 * Home Security - Intrusion
 * Home Security - Intrusion (location provided)
 * Acces Control - Door window open
-
 
 The occupancy sensing will be shown as UnOccupied when receiving:
 
@@ -658,7 +869,7 @@ Class.
 
 #### Sending commands
 
-There are 2 available commands for Thermotats by default:
+There are 2 available commands for Thermostats by default:
 * WriteAttributes (wrench icon)
 * SetpointRaiseOrLower
 
@@ -670,7 +881,7 @@ wrench icon and modify the attributes values in the dialog.
 ![Dev GUI Thermostat send Set Command](./doc/assets/img/dev_gui_send_thermostat_command.png)
 
 In the Thermostat Attributes dialog,
-all temperatures are in centi-celcius (1/100 of a Celcius degree)
+all temperatures are in centi-celcius (1/100 of a Celsius degree)
 
 * Heating Setpoint will trigger a Thermostat Setpoint Set with the temperature
 for the indicated mode.
@@ -695,6 +906,8 @@ the current cool, heat or both setpoints. For example, if a user selects
 Both and -17 in the amount, it will lower both the cool and heat setpoints
 by 1.7 degrees.
 
+Note that Amount is processed as a int8_t value, so the acceptable range is
+[-128..127], so from -12.8 to +12.7
 
 ## SmartStart Information
 
@@ -714,7 +927,7 @@ The SmartStart list will be displayed as shown below.
 ![Dev GUI SmartStart list format](./doc/assets/img/dev_gui_smart_start_list_format.png)
 
 The **DSK** indicates the DSK of the node.
-The **Include** tickmark indicates if the node should be included or not.
+The **Include** tick-mark indicates if the node should be included or not.
 In the example above, the third entry will not be included upon inclusion requests.
 
 The **Unid** field indicates the unique identifier assigned to the node.
@@ -760,14 +973,13 @@ the preferred protocol for inclusion.
 
 ![Dev GUI SmartStart preferred protocol](./doc/assets/img/dev_gui_smart_start_preferred_protocol.png)
 
-Pick Z-Wave Long Range in the pop-up. The SmartSart inclusion will now be
+Pick Z-Wave Long Range in the pop-up. The SmartStart inclusion will now be
 performed using Z-Wave Long Range.
 
 ![Dev GUI SmartStart preferred protocol list](./doc/assets/img/dev_gui_smart_start_preferred_protocol_list.png)
 
 The order of the protocols matters only if you select both Z-Wave and Z-Wave
 Long Range.
-
 
 ### SmartStart Supported Protocol Detection
 

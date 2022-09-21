@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -84,6 +84,8 @@ $(document).ready(function(){initNavTree('ucl__nm__neighbor__discovery_8h.html',
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ucl_nm_neighbor_discovery.h File Reference</div>  </div>
@@ -93,6 +95,21 @@ $(document).ready(function(){initNavTree('ucl__nm__neighbor__discovery_8h.html',
 </div>
 <p><a href="ucl__nm__neighbor__discovery_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gaefba9560c38bae45ccbcdec20ad6793b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ucl__nm__neighbor__discovery.html#gaefba9560c38bae45ccbcdec20ad6793b">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_DEFAULT_TIMEOUT</a>&#160;&#160;&#160;3000000</td></tr>
+<tr class="separator:gaefba9560c38bae45ccbcdec20ad6793b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gac927f348721c90a4059dabb6f62df8bb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ucl__nm__neighbor__discovery.html#gac927f348721c90a4059dabb6f62df8bb">ucl_network_management_neighbor_discovery_t</a> { <a class="el" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba79fe32439fea3ea546b24c65fb337b37">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED</a> = 0x21, 
+<a class="el" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba9fbbfceda542bd9fec082a4583258a63">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_COMPLETED</a> = 0x22, 
+<a class="el" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bbafa720494631f58d721b760303eaf7afe">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_FAILED</a> = 0x23, 
+<a class="el" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba871c7b7ff3d78b1ed472ff97b8c53bc7">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_NOT_SUPPORTED</a> = 255
+ }</td></tr>
+<tr class="memdesc:gac927f348721c90a4059dabb6f62df8bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">All possible values for Node Request Node Neighbor Discovery Statuses <a class="el" href="group__ZWAPI__CONTROLLER.html#gac2f0350721c0485f44682d9369262528">zwapi_request_neighbor_update()</a> callback status values i.e., UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED = 0x21.  <a href="group__ucl__nm__neighbor__discovery.html#gac927f348721c90a4059dabb6f62df8bb">More...</a><br /></td></tr>
+<tr class="separator:gac927f348721c90a4059dabb6f62df8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ga735db8afb305ad30d92006a575ca60d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ucl__nm__neighbor__discovery.html#ga735db8afb305ad30d92006a575ca60d6">ucl_nm_trigger_node_neighbor_update</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
@@ -108,7 +125,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6b85f8de57a896b19916185a245d7220.html">ucl_mqtt</a></li><li class="navelem"><a class="el" href="dir_b66120388821a14e8747d1b6667630a9.html">src</a></li><li class="navelem"><a class="el" href="ucl__nm__neighbor__discovery_8h.html">ucl_nm_neighbor_discovery.h</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:06 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:46 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

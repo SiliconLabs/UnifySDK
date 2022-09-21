@@ -16,8 +16,18 @@ target_add_unittest(
   uic_attribute_store
   NAME attribute_store_save_to_datastore_test
   SOURCES attribute_store_save_to_datastore_test.c
+  DEPENDS uic_contiki_stub
 )
 target_include_directories(attribute_store_save_to_datastore_test PRIVATE ../src)
+
+# Attribute store process test
+target_add_unittest(
+  uic_attribute_store
+  NAME attribute_store_process_test
+  SOURCES attribute_store_process_test.c
+  DEPENDS uic_contiki_stub
+)
+target_include_directories(attribute_store_process_test PRIVATE ../src)
 
 # Attribute store validation test
 target_add_unittest(

@@ -48,7 +48,7 @@
 #define START_LEVEL_CHANGE_DURATION_INDEX 4
 
 // Constant values for our OnOff virtual attribute, taken from the OnOff ZCL cluster
-#define ON  0xFF
+#define ON  0x01
 #define OFF 0x00
 
 // Constant values for our Multilevel Switch
@@ -318,7 +318,7 @@ static sl_status_t zwave_command_class_switch_multilevel_set(
   clock_time_t remaining_duration
     = attribute_transition_get_remaining_duration(value_node);
 
-  if (remaining_duration != 0
+  if ((remaining_duration != 0)
       && (state.desired_duration == state.reported_duration)) {
     state.desired_duration  = time_to_zwave_duration(remaining_duration);
     state.reported_duration = state.desired_duration;
@@ -341,8 +341,8 @@ static sl_status_t zwave_command_class_switch_multilevel_set(
   // If we just switch on during a virtual transition, we will use 2 commands:
   // Set at the current virtual level, then Set to start dimming with the
   // remainder of the duration
-  if (state.reported_on_off == OFF && state.desired_on_off == ON
-      && state.desired_duration != 0 && remaining_duration > 0) {
+  if ((state.reported_on_off == OFF) && (state.desired_on_off != OFF)
+      && (state.desired_duration != 0) && (remaining_duration > 0)) {
     sl_log_debug(LOG_TAG, "Set ON during a virtual transition");
     set_frame->value           = state.reported_value;
     set_frame->dimmingDuration = 0;
@@ -352,8 +352,8 @@ static sl_status_t zwave_command_class_switch_multilevel_set(
   }
 
   // Now the case where we switch off during a transition:
-  if (state.reported_on_off == ON && state.desired_on_off == OFF
-      && state.desired_duration != 0 && remaining_duration > 0) {
+  if ((state.reported_on_off != OFF) && (state.desired_on_off == OFF)
+      && (state.desired_duration != 0) && (remaining_duration > 0)) {
     sl_log_debug(LOG_TAG, "Set OFF during a transition");
     set_frame->value           = 0;
     set_frame->dimmingDuration = 0;
@@ -362,9 +362,9 @@ static sl_status_t zwave_command_class_switch_multilevel_set(
   }
 
   // Are we OFF and we need to make or modify virtual transition ?
-  if (state.desired_on_off == OFF && state.reported_on_off == OFF
-      && state.desired_duration > 0
-      && state.desired_duration != state.reported_duration) {
+  if ((state.desired_on_off == OFF) && (state.reported_on_off == OFF)
+      && (state.desired_duration > 0)
+      && (state.desired_duration != state.reported_duration)) {
     sl_log_debug(LOG_TAG,
                  "Transition change while OFF. Starting virtual transition");
     // start a virtual transition
@@ -978,7 +978,8 @@ sl_status_t zwave_command_class_switch_multilevel_init()
   handler.command_class              = COMMAND_CLASS_SWITCH_MULTILEVEL_V4;
   handler.version                    = SWITCH_MULTILEVEL_VERSION_V4;
   handler.command_class_name         = "Multilevel Switch";
-  handler.comments                   = "";
+  handler.comments                   = "Partial Control: The value 0xFF cannot "
+                                       "be used in Multilevel Switch Set Commands";
 
   zwave_command_handler_register_handler(handler);
 

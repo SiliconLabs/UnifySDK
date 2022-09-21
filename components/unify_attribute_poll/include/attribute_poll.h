@@ -70,7 +70,7 @@ sl_status_t attribute_poll_schedule(attribute_store_node_t node);
  *
  * @returns sl_status_t SL_STATUS_OK on success
  */
-sl_status_t attribute_poll_init();
+sl_status_t attribute_poll_init(uint32_t backoff, uint32_t default_interval);
 
 /**
  * @brief Disable the Poll Engine

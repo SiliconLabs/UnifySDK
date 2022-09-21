@@ -34,8 +34,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -117,21 +116,21 @@ and creates a numbered virtual serial device, for example /dev/pts/2.
 The actual number may vary. For convenience, cpc-hci-bridge also creates
 a symlink to the device from <code class="docutils literal notranslate"><span class="pre">pts_hci</span></code> in the working directory.</p>
 <p>To start cpc-hci-bridge as a system service:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo systemctl start uic-cpc-hci-bridge
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl start uic-cpc-hci-bridge
 </pre></div>
 </div>
 <p>Or from the command line, simply start the application:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ cpc-hci-bridge
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>cpc-hci-bridge
 </pre></div>
 </div>
 <p>Next, the BlueZ stack must be attached to the newly created virtual serial device,
 where <code class="docutils literal notranslate"><span class="pre">&lt;device&gt;</span></code> is the name of the virtual serial device:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo hciattach &lt;device&gt; any
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo hciattach &lt;device&gt; any
 </pre></div>
 </div>
 <p>Now BlueZ is running and any of the standard BlueZ tools may be used.
 For example, to start the BlueZ CLI utility:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo bluetoothctl
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo bluetoothctl
 </pre></div>
 </div>
 <p>Another utility that comes with the standard Bluetooth tools, called <code class="docutils literal notranslate"><span class="pre">btmon</span></code>,

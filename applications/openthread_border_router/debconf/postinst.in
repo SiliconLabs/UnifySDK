@@ -12,9 +12,9 @@ setup_target_for_otbr() {
 
 enable_otbr_agent_service() {
     if type "systemctl" >/dev/null; then
-        systemctl --system daemon-reload
-        systemctl enable otbr-agent.service
-        systemctl start otbr-agent.service
+        systemctl --system daemon-reload || true
+        systemctl enable otbr-agent.service || true
+        systemctl start otbr-agent.service || true
     fi
 }
 

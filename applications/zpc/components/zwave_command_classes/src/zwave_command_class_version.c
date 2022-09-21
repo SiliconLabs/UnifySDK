@@ -395,39 +395,38 @@ static sl_status_t zwave_command_class_version_handle_software_report_command(
                                               ATTRIBUTE(VERSION_REPORT_DATA));
 
   sdk_version = (frame_data[2] << 16) | (frame_data[3] << 8) | (frame_data[4]);
-  attribute_store_set_uint32_child_by_type(endpoint_node,
-                                           ATTRIBUTE(SDK_VERSION),
-                                           REPORTED_ATTRIBUTE,
-                                           sdk_version);
+  attribute_store_set_child_reported(endpoint_node,
+                                     ATTRIBUTE(SDK_VERSION),
+                                     &sdk_version,
+                                     sizeof(sdk_version));
 
   zwave_api_version
     = (frame_data[5] << 16) | (frame_data[6] << 8) | (frame_data[7]);
-  attribute_store_set_uint32_child_by_type(
+  attribute_store_set_child_reported(
     endpoint_node,
     ATTRIBUTE(APPLICATION_FRAMEWORK_API_VERSION),
-    REPORTED_ATTRIBUTE,
-    zwave_api_version);
+    &zwave_api_version,
+    sizeof(zwave_api_version));
 
   zwave_api_built_version = (frame_data[8] << 8) | (frame_data[9]);
-  attribute_store_set_uint32_child_by_type(
+  attribute_store_set_child_reported(
     endpoint_node,
     ATTRIBUTE(APPLICATION_FRAMEWORK_BUILD_NUMBER),
-    REPORTED_ATTRIBUTE,
-    zwave_api_built_version);
+    &zwave_api_built_version,
+    sizeof(zwave_api_built_version));
 
   host_interface_version
     = (frame_data[10] << 16) | (frame_data[11] << 8) | (frame_data[12]);
-  attribute_store_set_uint32_child_by_type(endpoint_node,
-                                           ATTRIBUTE(HOST_INTERFACE_VERSION),
-                                           REPORTED_ATTRIBUTE,
-                                           host_interface_version);
+  attribute_store_set_child_reported(endpoint_node,
+                                     ATTRIBUTE(HOST_INTERFACE_VERSION),
+                                     &host_interface_version,
+                                     sizeof(host_interface_version));
 
   host_interface_built_version = (frame_data[13] << 8) | (frame_data[14]);
-  attribute_store_set_uint32_child_by_type(
-    endpoint_node,
-    ATTRIBUTE(HOST_INTERFACE_BUILD_NUMBER),
-    REPORTED_ATTRIBUTE,
-    host_interface_built_version);
+  attribute_store_set_child_reported(endpoint_node,
+                                     ATTRIBUTE(HOST_INTERFACE_BUILD_NUMBER),
+                                     &host_interface_built_version,
+                                     sizeof(host_interface_built_version));
 
   // Protocol version is under the version report.
   uint32_t zwave_protocol_version
@@ -438,11 +437,10 @@ static sl_status_t zwave_command_class_version_handle_software_report_command(
                                      sizeof(zwave_protocol_version));
 
   protocol_built_version = (frame_data[18] << 8) | (frame_data[19]);
-  attribute_store_set_uint32_child_by_type(
-    endpoint_node,
-    ATTRIBUTE(ZWAVE_PROTOCOL_BUILD_NUMBER),
-    REPORTED_ATTRIBUTE,
-    protocol_built_version);
+  attribute_store_set_child_reported(endpoint_node,
+                                     ATTRIBUTE(ZWAVE_PROTOCOL_BUILD_NUMBER),
+                                     &protocol_built_version,
+                                     sizeof(protocol_built_version));
 
   // Application version is actually Firmware 0 version, but with 3 digits.
   // Overwrite this value from the Version Report as it is more precise.

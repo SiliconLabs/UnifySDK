@@ -40,7 +40,7 @@ using namespace std;
 
 
 template<typename Type>
-Type get_enum_decimal_value(std::string key, nlohmann::json &jsn)
+Type get_enum_decimal_value(const std::string &key, nlohmann::json &jsn)
 {
   if (jsn[key].is_number_integer()) {
     return jsn[key].get<Type>();

@@ -20,7 +20,7 @@ if(DEFINED ENV{GSDK_LOCATION})
 endif()
 if(NOT FETCH_GSDK_VERSION)
   # fetch from HEAD to retrieve latest GeckoSDK
-  set(FETCH_GSDK_VERSION "v4.1.0")
+  set(FETCH_GSDK_VERSION "v4.1.1")
 endif()
 include(FetchContent)
 set(FETCHCONTENT_QUIET FALSE)

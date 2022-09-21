@@ -261,6 +261,21 @@ void test_datastore_attribute_storage()
                                received_desired_value_size);
   TEST_ASSERT_EQUAL(sizeof(test_array), received_desired_value_size);
 
+  // Try to delete attribute 0xf000001
+  TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
+                            datastore_delete_attribute(0xf0000001),
+                            "Deleting attribute node 0xf0000001 went wrong.");
+
+  TEST_ASSERT_EQUAL_MESSAGE(
+    SL_STATUS_NOT_FOUND,
+    datastore_fetch_attribute(0xf0000001,
+                              &received_type,
+                              &received_parent_id,
+                              received_value,
+                              &received_value_size,
+                              received_desired_value,
+                              &received_desired_value_size),
+    "Fetching attribute node 0xf0000001 should not work as it was deleted.");
   // Teardown
   TEST_ASSERT_EQUAL_MESSAGE(SL_STATUS_OK,
                             datastore_teardown(),
@@ -279,10 +294,6 @@ void test_datastore_attribute_not_initialized()
 
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_delete_all_attributes());
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_delete_all_attributes());
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
-                    datastore_delete_attribute_with_children(0));
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
-                    datastore_delete_attribute_with_children(2));
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_delete_attribute(0));
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, datastore_delete_attribute(2));
 

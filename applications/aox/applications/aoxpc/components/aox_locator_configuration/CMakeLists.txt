@@ -1,19 +1,14 @@
-# ZAP is required here
-find_program(ZAP_EXECUTABLE "zap" REQUIRED)
 run_zap(zap/gen-templates.json)
 
 # Library
 add_library(
   aox_locator_configuration
   src/aox_locator_configuration.c
-  ${CMAKE_CURRENT_BINARY_DIR}/src/aox_locator_configuration_attributes.c
-  )
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/aox_locator_configuration_attributes.c)
 
 target_include_directories(
   aox_locator_configuration
-  PUBLIC
-    include
-    ${CMAKE_CURRENT_BINARY_DIR}/include/
+  PUBLIC include ${ZAP_CURRENT_OUTPUT_DIR}/include/
   PRIVATE src)
 
 target_link_libraries(

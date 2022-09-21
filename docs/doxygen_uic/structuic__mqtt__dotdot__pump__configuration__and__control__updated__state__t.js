@@ -1,0 +1,27 @@
+var structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t =
+[
+    [ "alarm_mask", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a042a57c748cc9463f6855f744bec0d3b", null ],
+    [ "capacity", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a6851c32e0f247e7b7940c92d6c249e52", null ],
+    [ "control_mode", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a8d253c1fba3a957c765a28601ad4fa17", null ],
+    [ "effective_control_mode", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a4beb6705c5de8b6f7ef016e90b468bd1", null ],
+    [ "effective_operation_mode", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#abcab50f2b7abbb82488e41dbb767639b", null ],
+    [ "lifetime_energy_consumed", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#afa6a36b942cdacbe6e97cf7d034ae411", null ],
+    [ "lifetime_running_hours", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#ab18d267d69f8034115cf420101238797", null ],
+    [ "max_comp_pressure", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a3ecd398f93ec5b8a2dc419d2b1855495", null ],
+    [ "max_const_flow", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a54276113b03187be43a112b777098277", null ],
+    [ "max_const_pressure", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#ad107329fbe01810d61ab1f8adc57e3da", null ],
+    [ "max_const_speed", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#ac2e26b3358109ad3078368991a38d349", null ],
+    [ "max_const_temp", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a0b454c994b86b1b65130b3039c1ff63d", null ],
+    [ "max_flow", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a887d120f8be3f0238024c6565e71de9a", null ],
+    [ "max_pressure", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#aa0c4f87da0d810f278c46a12549e2572", null ],
+    [ "max_speed", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a73831e9aaa6f87b20e26d220e7aa93e3", null ],
+    [ "min_comp_pressure", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a01401de17ef58b2c7962a758e7df86fe", null ],
+    [ "min_const_flow", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#ae9fa62d30d32defa7f6d373d68341e98", null ],
+    [ "min_const_pressure", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a8cc4103023af27f886bcaf685b4460c8", null ],
+    [ "min_const_speed", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#aad60e3fa5ebd4baadf855d92e649d89b", null ],
+    [ "min_const_temp", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a06a97ebabcd4c1af580e092137d1e0be", null ],
+    [ "operation_mode", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a91e21ffdb3770b2302bb012ebd42f226", null ],
+    [ "power", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a7da4a8c101d862d4c9ceb2b7712b8d53", null ],
+    [ "pump_status", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#aa9355aae3a777bdb5c7c637a4adca538", null ],
+    [ "speed", "structuic__mqtt__dotdot__pump__configuration__and__control__updated__state__t.html#a51ed38978fb1a1ba02795701cd405092", null ]
+];

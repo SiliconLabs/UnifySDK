@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['image_5fready_5fresult_5ft_8419',['image_ready_result_t',['../namespaceuic__ota.html#a51531aaaf7c3f22f4b9683843de618ee',1,'uic_ota']]]
+  ['fancontrolfanmode_29600',['FanControlFanMode',['../group__zap.html#ga6451d5bbf6ecebfdcb8b39d34437a1ae',1,'zap-types.h']]],
+  ['fancontrolfanmodesequence_29601',['FanControlFanModeSequence',['../group__zap.html#ga32c99f0b7f7db154677df0839db0563b',1,'zap-types.h']]]
 ];

@@ -92,13 +92,14 @@ no priority handling is implemented in the mapper.
 Conditional statements are also available for maps. The available comparison
 operators are:
 
-| Operator | Name         |
-|----------|--------------|
-| ==       | Equal to     |
-| >        | Greater than |
-| <        | Less than    |
+| Operator | Name             |
+|----------|------------------|
+| ==       | Equal to         |
+| !=       | Not equal to     |
+| >        | Greater than     |
+| <        | Less than        |
 
-These operators should be used with `if` statements. The `if` synthax is as
+These operators should be used with `if` statements. The `if` syntax is as
 follows: `if condition value`. A switch-like statement can be made using
 multiple `if` statements.
 
@@ -437,6 +438,70 @@ r'zwASSOCIATION_GROUP_ID[1].zwASSOCIATION_GROUP_PROFILE =
 // Establish a regular association Association Group 2 of the PowerStrip sample application
 r'zwASSOCIATION_GROUP_ID[2].zwASSOCIATION_GROUP_PROFILE =
   if (powerstrip_sample_app) ESTABLISH_ASSOCIATION
+  undefined
+}
+```
+
+## Configuring a non-default Wake Up Interval
+
+The ZPC will perform the Wake Up interval configuration as follows:
+
+1. If Wake Up on demand is supported (version 3), then the Wake Up interval will
+   be the maximum possible value (or 0 if supported).
+2. If the Default Wake Up Interval is advertised, this value will be used
+3. Else the closest supported value to the ZPC default configuration default
+   Wake Up interval will be used.
+
+UAM files can be used to override this setting for a particular device.
+For example:
+
+```uam
+// Configure non-default Wake Up intervals for particular nodes.
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+
+def WAKE_UP             0x00008409
+def INTERVAL            0x00008402
+def CAPABILITIES        0x0000840A
+def MINIMUM_INTERVAL    0x00008404
+def MAXIMUM_INTERVAL    0x00008405
+
+// Device fingerprints
+def sensor_pir_sample_app ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x03))
+
+scope 0 {
+
+// SensorPIR runs with aggressive Wake Up Interval for testing purposes.
+d'WAKE_UP.INTERVAL =
+  if (sensor_pir_sample_app) 20
+  undefined
+}
+```
+
+Values can also be taken from devices capabilities, for example here, setting
+the maximum supported value:
+
+```uam
+// Configure non-default Wake Up intervals for particular nodes.
+def zwMANUFACTURER_ID           0x00007202
+def zwPRODUCT_TYPE_ID           0x00007203
+def zwPRODUCT_ID                0x00007204
+
+def WAKE_UP             0x00008409
+def INTERVAL            0x00008402
+def CAPABILITIES        0x0000840A
+def MINIMUM_INTERVAL    0x00008404
+def MAXIMUM_INTERVAL    0x00008405
+
+// Device fingerprints
+def sensor_pir_sample_app ((r'zwMANUFACTURER_ID == 0x00) & (r'zwPRODUCT_TYPE_ID == 0x04) & (r'zwPRODUCT_ID == 0x03))
+
+scope 0 {
+
+// Example of settting automatically to the maximum value:
+d'WAKE_UP.INTERVAL =
+  if (sensor_pir_sample_app) r'CAPABILITIES.MAXIMUM_INTERVAL
   undefined
 }
 ```

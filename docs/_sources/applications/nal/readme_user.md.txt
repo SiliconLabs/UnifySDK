@@ -30,19 +30,20 @@ For installing please refer to the general installation method in
 ### Using Systemd Service
 
 The best way to run the NAL is using the Systemd service that is installed with
-the Debian installer. For more information, see [Unify User guide](../../doc/unify_readme_user.md).
+the Debian installer. For more information, see
+[Unify Framework User guide](../../doc/unify_readme_user.md).
 
 ### Using Command Line
 
 Alternatively, the NAL may be run by executing `nal`. It is possible to
-configure the MQTT broker Hostname or IP, NAL database path, through command line 
+configure the MQTT broker Hostname or IP, NAL database path, through command line
 options. For more details about the options, run `uic-nal --help`.
 
 ## How to use it
 
 ### How to create a node with two endpoints, update it's Name and Location attributes and delete a node
 
-``` bash
+```console
 username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State" -m 'some_dummy_data' # register UNID "node_test"
 username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported" -m '{"value":[1,2,3]}' # create 3 nodes with UNID "node_test" and endpoints 1,2,3
 username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep1/Basic/Attributes/PowerSource/Reported" -m '{"any_json":"payload"}' # add a node with UNID "node_test", endpoint 1
@@ -53,7 +54,7 @@ username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_te
 
 ### How to test a proxying feature
 
-``` bash
+```console
 username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State" -m 'some_dummy_data' # register UNID "node_test"
 username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/State/Attributes/EndpointIdList/Reported" -m '{"value":[0]}' # create a node with UNID "node_test" and endpoints 0
 username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep0/Basic/Attributes/LocationDescription/Desired" -m '{"value":"Rooftop"}' # after receiving a "LocationDescription" message - the node is "proxied" and couldn't perform the Location attribute update without Protocol Controller
@@ -61,14 +62,17 @@ username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_te
 
 Now a user wants to update a Location attribute by publishing to "WriteAttributes" topic:
 
-``` bash
+```console
 username@hostname:~ $ mosquitto_pub -h localhost -p 1883 -t "ucl/by-unid/node_test/ep0/NameAndLocation/Commands/WriteAttributes" -m '{"Location":"updated_location"}'
 ```
 
 But the NAL service doesn't update anything, it publishes a message to `ucl/by-unid/node_test/ep0/Basic/Commands/WriteAttributes` topic and waits a command to change Location attribute from the Protocol Controller:
 
-``` bash
+```console
 username@hostname:~ $ mosquitto_sub -v -h localhost -p 1883 -t '#'
+```
+
+```mqtt
 ucl/by-unid/node_test/State some_dummy_data # published by user
 ucl/by-unid/node_test/ep0/NameAndLocation/Attributes/Name/Desired {"value":""} # published by NAL service
 ucl/by-unid/node_test/ep0/NameAndLocation/Attributes/Name/Reported {"value":""} # published by NAL service

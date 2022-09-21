@@ -17,7 +17,7 @@ include:
   file_list:
   - {path: zigbeed_configuration.h}
   - {path: openthread-config-generic.h}
-sdk: {id: gecko_sdk, version: 4.1.0}
+sdk: {id: gecko_sdk, version: 4.1.1}
 toolchain_settings: []
 component:
 - {id: zigbee_app_framework_common}
@@ -65,6 +65,5 @@ configuration:
 - {name: EMBER_APS_MESSAGE_COUNT, value: '64'}
 ui_hints:
   highlight:
-  - {path: null, focus: true}
   - {path: readme.html}
 

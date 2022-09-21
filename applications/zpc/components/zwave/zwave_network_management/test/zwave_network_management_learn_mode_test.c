@@ -74,6 +74,7 @@ void test_zwave_network_management_activate_learn_mode_nwi_happy_case()
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
   // Activate NWI learn mode:
+  network_management_is_ready_for_a_new_operation_ExpectAndReturn(true);
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     zwave_network_management_learn_mode(ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI));
@@ -150,9 +151,10 @@ void test_zwave_network_management_start_learn_mode_while_add_mode()
   nms.state = NM_WAITING_FOR_ADD;
   TEST_ASSERT_EQUAL(NM_WAITING_FOR_ADD, zwave_network_management_get_state());
 
-  // Try to stop Learn mode
+  // Try to start Learn mode
+  network_management_is_ready_for_a_new_operation_ExpectAndReturn(false);
   TEST_ASSERT_EQUAL(
-    SL_STATUS_BUSY,
+    SL_STATUS_FAIL,
     zwave_network_management_learn_mode(ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI));
 
   // Nothing should happen, we were in Add node..
@@ -168,6 +170,7 @@ void test_zwave_network_management_learn_mode_nwi_timeout()
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
   // Activate NWI learn mode:
+  network_management_is_ready_for_a_new_operation_ExpectAndReturn(true);
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     zwave_network_management_learn_mode(ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI));
@@ -193,7 +196,8 @@ void test_zwave_network_management_learn_mode_nwe_timeout()
 {
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
-  // Activate NWI learn mode:
+  // Activate NWE learn mode:
+  network_management_is_ready_for_a_new_operation_ExpectAndReturn(true);
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     zwave_network_management_learn_mode(ZWAVE_NETWORK_MANAGEMENT_LEARN_NWE));
@@ -219,7 +223,8 @@ void test_zwave_network_management_learn_mode_nwe_successful_exclusion()
 {
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 
-  // Activate NWI learn mode:
+  // Activate NWE learn mode:
+  network_management_is_ready_for_a_new_operation_ExpectAndReturn(true);
   TEST_ASSERT_EQUAL(
     SL_STATUS_OK,
     zwave_network_management_learn_mode(ZWAVE_NETWORK_MANAGEMENT_LEARN_NWE));

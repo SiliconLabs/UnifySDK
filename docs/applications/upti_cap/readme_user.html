@@ -34,8 +34,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -400,7 +399,8 @@ You will see the table of captured trace packages with additional data:</p>
 <section id="using-systemd-service">
 <h3>Using Systemd Service<a class="headerlink" href="#using-systemd-service" title="Permalink to this heading"></a></h3>
 <p>The best way to run the UPTI CAP is using the Systemd service that is installed with</p>
-<p>the Debian installer. For more information, see  <a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify Framework User guide</span></a>.</p>
+<p>the Debian installer. For more information, see the
+<a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify Framework User guide</span></a>.</p>
 </section>
 <section id="using-command-line">
 <h3>Using Command Line<a class="headerlink" href="#using-command-line" title="Permalink to this heading"></a></h3>
@@ -409,19 +409,19 @@ You can configure the MQTT server, database path, through command line options.
 For details about options, run <code class="docutils literal notranslate"><span class="pre">uic-upti-cap</span> <span class="pre">--help</span></code> command:</p>
 <p>Make sure that you do not run the UPTICAP both as a service and using the
 command line.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@uic-upti-cap:~ $ service uic-upti-cap status
-● uic-upti-cap.service - Unified IoT UPTI cap
-   Loaded: loaded <span class="o">(</span>/lib/systemd/system/uic-upti-cap.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-   Active: active <span class="o">(</span>running<span class="o">)</span> since Thu <span class="m">2021</span>-11-04 <span class="m">11</span>:38:32 EET<span class="p">;</span> 17min ago
- Main PID: <span class="m">1506</span> <span class="o">(</span>uic-upti-cap<span class="o">)</span>
-    Tasks: <span class="m">3</span> <span class="o">(</span>limit: <span class="m">4915</span><span class="o">)</span>
-   CGroup: /system.slice/uic-upti-cap.service
-           └─1506 /usr/bin/uic-upti-cap
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@uic-upti-cap:~ $ </span>service uic-upti-cap status
+<span class="go">● uic-upti-cap.service - Unified IoT UPTI cap</span>
+<span class="go">   Loaded: loaded (/lib/systemd/system/uic-upti-cap.service; enabled; vendor preset: enabled)</span>
+<span class="go">   Active: active (running) since Thu 2021-11-04 11:38:32 EET; 17min ago</span>
+<span class="go"> Main PID: 1506 (uic-upti-cap)</span>
+<span class="go">    Tasks: 3 (limit: 4915)</span>
+<span class="go">   CGroup: /system.slice/uic-upti-cap.service</span>
+<span class="go">           └─1506 /usr/bin/uic-upti-cap</span>
 </pre></div>
 </div>
 <p>If the service is running, stop it using the following command before
 you run the application manually:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~ $ service uic-upti-cap stop
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>service uic-upti-cap stop
 </pre></div>
 </div>
 </section>

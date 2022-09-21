@@ -2,14 +2,16 @@
 
 ## [1.2.0] - August 2022
 
-### Added
+### Added (1.2.0)
+
 * Network management improvements allowing parallel device joins
 and discovery
 * Added CLI option to configure OTA file folder destination
 * Added CLI option to poll attributes only and disable report configuration
 * Added zigbeed/multiprotocol integration
 
-### Changed
+### Changed (1.2.0)
+
 * Bugfix for zigpc failing to start when the OTA file folder is not
 found
 * Update zigpc Linux permissions
@@ -20,19 +22,19 @@ with multiprotocol integration
 
 ## [1.1.1] - March 2022
 
-**Added**:
+### Added (1.1.1)
 
 * The NCP firmware update component to enable upgrading the NCP
 firmware using the zigbee protocol controller
 
-**Changed**:
+### Changed (1.1.1)
 
 * Fixed a bug where the zigbee protocol controller would crash
 on malformed JSON
 
 ## [1.1.0] - Feb 2022
 
-**Added**:
+### Added (1.1.0)
 
 * Debian Installer also configures ZigPC to run as a system service
 * Ability to get ZigPC specific diagnostic information (uptime, CPU use, memory
@@ -43,7 +45,7 @@ library generation
 * Publishing GeneratedCommands sent from Zigbee devices as responses or as
 unsolicited events
 
-**Changed**:
+### Changed (1.1.0)
 
 * Migrate Zigbee-Host library (EmberZNet-based) from Appbuilder project
   (GeckoSDK 3.1) to SLC project (GeckoSDK 4.0). See
@@ -54,32 +56,32 @@ unsolicited events
 * Default datastore file has been changed from /var/lib/uic/database.db to /var/lib/uic/zigpc.db
 If you used the default configuration, keep your previous database by running `mv /var/lib/uic/database.db /var/lib/uic/zigpc.db`
 
-**Removed**:
+### Removed (1.1.0)
 
 * Use of EmafDeviceTablePlugin in Zigbee-Host library to manage device discovery;
 This is now performed within ZigPC
 
-**Fixed**:
+### Fixed (1.1.0)
 
 * Persisted information cleanup on device leaving the network
 * JSON payloads accepted for commands and attributes to be UCL compliant
 
 ## [1.0.3] - Nov 2021
 
-**Added**:
+### Added (1.0.3)
 
 * Add persistence of Zigbee device discovery information to allow servicing
 devices after ZigPC reboots
 * Use of NCP address-table to manage EUI64 to NodeId mappings
 
-**Changed**:
+### Changed (1.0.3)
 
 * Updates to network management
 * Improvements in Zigbee Host EZSP message performance
 * Merge ZigPC node state and ucl handling components
 * Reduce dependence on device table plugin, use address table
 
-**Fixed**:
+### Fixed (1.0.3)
 
 * Improved ZCL frame error handling and empty string bug fix
 * Node unretain messages bugfix
@@ -90,13 +92,13 @@ devices after ZigPC reboots
 
 ## [1.0.1] - Aug 2021
 
-**Fixed**:
+### Fixed (1.0.1)
 
 * Build issues
 
 ## [1.0.0] - Aug 2021
 
-**Added**:
+### Added (1.0.0)
 
 * Implementation of Unify specification 1.0
 * Sleepy end device support
@@ -117,7 +119,7 @@ devices after ZigPC reboots
   * (0x0406) OccupancySensing
 * Zigbee Host-NCP EZSP-UART Support
 
-**Changed**:
+### Changed (1.0.0)
 
 * Various bug fixes
 * Documentation updates

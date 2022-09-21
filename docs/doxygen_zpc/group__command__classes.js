@@ -11,6 +11,7 @@ var group__command__classes =
     [ "Alarm Sensor Command Class", "group__alarm__sensor__command__class.html", "group__alarm__sensor__command__class" ],
     [ "Association Command Class", "group__association__command__class.html", "group__association__command__class" ],
     [ "Basic Command Class", "group__zwave__command__class__basic.html", "group__zwave__command__class__basic" ],
+    [ "Battery Command Class control handler", "group__zwave__command__class__battery.html", "group__zwave__command__class__battery" ],
     [ "Binary Switch Command Class", "group__binary__switch__command__class.html", "group__binary__switch__command__class" ],
     [ "Central Scene Command Class", "group__zwave__command__class__central__scene.html", "group__zwave__command__class__central__scene" ],
     [ "Configuration Command Class", "group__zwave__command__class__configuration.html", "group__zwave__command__class__configuration" ],

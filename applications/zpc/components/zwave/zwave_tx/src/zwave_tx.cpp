@@ -135,7 +135,7 @@ sl_status_t
   }
 
   if (SL_STATUS_OK == tx_queue.enqueue(new_element, session)) {
-    process_post(&zwave_tx_process, ZWAVE_TX_SEND_NEXT_MESSAGE, nullptr);
+    zwave_tx_process_check_queue();
     return SL_STATUS_OK;
   }
 
@@ -206,6 +206,11 @@ const uint8_t *zwave_tx_get_frame(zwave_tx_session_id_t session_id)
 uint16_t zwave_tx_get_frame_length(zwave_tx_session_id_t session_id)
 {
   return tx_queue.get_frame_length(session_id);
+}
+
+bool zwave_tx_has_frames_for_node(zwave_node_id_t node_id)
+{
+  return tx_queue.zwave_tx_has_frames_for_node(node_id);
 }
 
 sl_status_t zwave_tx_init()

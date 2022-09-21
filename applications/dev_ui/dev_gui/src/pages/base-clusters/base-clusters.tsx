@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, OverlayTrigger, Popover, Row, Spinner, Table } from 'react-bootstrap';
+import { Button, Col, Dropdown, DropdownButton, OverlayTrigger, Popover, Row, Spinner, Table } from 'react-bootstrap';
 import * as AiIcons from 'react-icons/ai';
 import * as RiIcons from 'react-icons/ri';
 import * as MdIcons from 'react-icons/md'
@@ -172,27 +172,33 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
         }));
     }
     if (color.hsl.h !== this.state.ColorPicker.ColorPickerValue.hsl?.h || color.hsl.s !== this.state.ColorPicker.ColorPickerValue.hsl?.s) {
-      this.props.SocketServer.send(JSON.stringify(
-        {
-          type: "run-cluster-command",
-          data: {
-            Unid: `${this.state.ColorPicker.ProcessedItem.Unid}/${this.state.ColorPicker.ProcessedItem.Ep}`,
-            ClusterType: this.props.ClusterType,
-            Cmd: "MoveToHueAndSaturation",
-            Payload: {
-              Hue: Math.round(color.hsl.h / 360 * 254),
-              Saturation: Math.round(color.hsl.s * 254),
-              TransitionTime: 0,
-              OptionsMask: { ExecuteIfOff: false },
-              OptionsOverride: { ExecuteIfOff: false }
+      if (!(color.hsl.s === 0 && (this.state.ColorPicker.ColorPickerValue.hsl?.s === 0 || this.isZeroSaturation(this.state.ColorPicker.ColorPickerValue.hex))))
+        this.props.SocketServer.send(JSON.stringify(
+          {
+            type: "run-cluster-command",
+            data: {
+              Unid: `${this.state.ColorPicker.ProcessedItem.Unid}/${this.state.ColorPicker.ProcessedItem.Ep}`,
+              ClusterType: this.props.ClusterType,
+              Cmd: "MoveToHueAndSaturation",
+              Payload: {
+                Hue: Math.round(color.hsl.h / 360 * 254),
+                Saturation: Math.round(color.hsl.s * 254),
+                TransitionTime: 0,
+                OptionsMask: { ExecuteIfOff: false },
+                OptionsOverride: { ExecuteIfOff: false }
+              }
             }
-          }
-        }));
+          }));
     }
     let picker = this.state.ColorPicker;
     picker.ColorPickerValue = color;
     this.setState({ ColorPicker: picker });
   };
+
+  isZeroSaturation(hex: string) {
+    let idx = hex[0] === "#" ? 1 : 0;
+    return hex[idx] === hex[idx + 2] && hex[idx] === hex[idx + 4] && hex[idx + 1] === hex[idx + 3] && hex[idx + 1] === hex[idx + 5];
+  }
 
   getColorPicker = (item: any) => {
     let hue = item.Attributes?.CurrentHue?.Reported === undefined ? 211 : item.Attributes.CurrentHue.Reported / 254 * 360;
@@ -210,6 +216,22 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
         }} />
       </span>
     </Tooltip>
+  }
+
+  actionsList = (item: any) => {
+    let commands = item.SupportedCommands && item.SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes")
+    return commands && commands.length
+      ? <DropdownButton variant="outline-primary" title="Commands" size="sm" className={`float-right`} disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"}>
+        {commands.map((cmd: string, cmdIndex: number) => {
+          return (
+            <Dropdown.Item key={cmdIndex} onClick={this.preSendCommand.bind(this, item, cmd)}> {cmd.charAt(0).toUpperCase() + cmd.slice(1)}</Dropdown.Item>
+          )
+        })
+        }
+      </DropdownButton>
+      : <></>
+
+
   }
 
   render() {
@@ -289,10 +311,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
                         <Spinner hidden={!updatingProperties.length || item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} as="span" animation="border" size="sm" variant="primary" />
                       </OverlayTrigger>
                     </td>
-                    <td>{item.SupportedCommands && item.SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes").map((cmd: string, index: number) => {
-                      return <Button disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} key={index} className="margin-5" size="sm" onClick={this.preSendCommand.bind(this, item, cmd)}>{cmd}</Button>
-                    })}
-                    </td>
+                    <td>{this.actionsList(item)}</td>
                     <td className="text-center">
                       <Tooltip title="Customize Attributes">
                         <span className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" || !item.Attributes) ? "margin-h-5 icon cursor-default disabled" : "margin-h-5 icon"}>

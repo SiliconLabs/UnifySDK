@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -109,7 +109,9 @@ Enumerations</h2></td></tr>
 <tr class="memdesc:ga01ff7baa7653524ec6e0d2b5b70a884a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event definitions for the Z-Wave TX Process.  <a href="group__zwave__tx__process.html#ga01ff7baa7653524ec6e0d2b5b70a884a">More...</a><br /></td></tr>
 <tr class="separator:ga01ff7baa7653524ec6e0d2b5b70a884a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeb08015e4688663a184dcc9786da838d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__process.html#gaeb08015e4688663a184dcc9786da838d">zwave_tx_backoff_reason_t</a> { <a class="el" href="group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838dac8ec5edb249a54f0cbec8fa3bb896ede">BACKOFF_CURRENT_SESSION_ID</a>, 
-<a class="el" href="group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838dadb40f28a277a755676cbfe031a50a232">BACKOFF_EXPECTED_ADDITIONAL_FRAMES</a>
+<a class="el" href="group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838dadb40f28a277a755676cbfe031a50a232">BACKOFF_EXPECTED_ADDITIONAL_FRAMES</a>, 
+<a class="el" href="group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838dad1d72d2aba47b3db2b9dd14101a90ed8">BACKOFF_PROTOCOL_SENDING_FRAMES</a>, 
+<a class="el" href="group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838da40499038892c49103c247dc64d924741">BACKOFF_INCOMING_UNSOLICITED_ROUTED_FRAME</a>
  }</td></tr>
 <tr class="memdesc:gaeb08015e4688663a184dcc9786da838d"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of reasons for going into a Tx Back-off-.  <a href="group__zwave__tx__process.html#gaeb08015e4688663a184dcc9786da838d">More...</a><br /></td></tr>
 <tr class="separator:gaeb08015e4688663a184dcc9786da838d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +194,10 @@ Functions</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggaeb08015e4688663a184dcc9786da838dac8ec5edb249a54f0cbec8fa3bb896ede"></a>BACKOFF_CURRENT_SESSION_ID&#160;</td><td class="fielddoc"><p>Back-off has been initiated due to the current_tx_session_id expecting some responses </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ggaeb08015e4688663a184dcc9786da838dadb40f28a277a755676cbfe031a50a232"></a>BACKOFF_EXPECTED_ADDITIONAL_FRAMES&#160;</td><td class="fielddoc"><p>Back-off has been initiated due to the application telling us of expected incoming frames. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaeb08015e4688663a184dcc9786da838dad1d72d2aba47b3db2b9dd14101a90ed8"></a>BACKOFF_PROTOCOL_SENDING_FRAMES&#160;</td><td class="fielddoc"><p>Back-off has been initiated because Z-Wave API module is sending frames on its own, and we do not want to interfere with this. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaeb08015e4688663a184dcc9786da838da40499038892c49103c247dc64d924741"></a>BACKOFF_INCOMING_UNSOLICITED_ROUTED_FRAME&#160;</td><td class="fielddoc"><p>Back-off has been initiated becasue we received a routed frame and we want to avoid using the route before we are sure that the sender has received the routed ack. </p>
 </td></tr>
 </table>
 
@@ -464,7 +470,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:17 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:49 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

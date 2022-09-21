@@ -25,6 +25,7 @@ function supportedCluster(clusterName) {
 function clusterWithoutEndpoints(clusterName) {
   switch (clusterName) {
     case "ProtocolController-RFTelemetry": return true
+    case "ProtocolController-NetworkManagement": return true
     case "State": return true
     case "SystemMetrics": return true
     case "ApplicationMonitoring": return true
@@ -118,6 +119,7 @@ function isStruct(type) {
     case 'WirelessNetworkInterfaceData' : return true
     case 'DiskIOCounters' : return true
     case 'DiskUsageData': return true
+    case 'NetworkManagementState': return true
     default: return false
   }
 }
@@ -148,6 +150,9 @@ function isMonotonousArray(label) {
     case 'WirelessNetworkInterfacesData': return true
     // ApplicationMonitoring cluster:
     case 'ApplicationMQTTTopics': return true
+    // ProtocolController-NetworkManagement
+    case 'SupportedStateList': return true
+    case 'RequestedStateParameters': return true
     default: return false
   }
 }

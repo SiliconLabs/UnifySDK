@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -105,32 +105,46 @@ $(document).ready(function(){initNavTree('ucl__nm__neighbor__discovery_8h_source
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifndef UCL_NM_NEIGHBOR_DISCOVERY_H</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define UCL_NM_NEIGHBOR_DISCOVERY_H</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#ga735db8afb305ad30d92006a575ca60d6">   34</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__ucl__nm__neighbor__discovery.html#ga735db8afb305ad30d92006a575ca60d6">ucl_nm_trigger_node_neighbor_update</a>(<a class="code" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="code" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#ga4f4d63ccbd243294c45ca81a7b144db3">   37</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__ucl__nm__neighbor__discovery.html#ga4f4d63ccbd243294c45ca81a7b144db3">ucl_nm_neighbor_discovery_init</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif  //UCL_NM_NEIGHBOR_DISCOVERY_H</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#gaefba9560c38bae45ccbcdec20ad6793b">   31</a></span>&#160;<span class="preprocessor">#define UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_DEFAULT_TIMEOUT 3000000</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#gac927f348721c90a4059dabb6f62df8bb">   38</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba79fe32439fea3ea546b24c65fb337b37">   39</a></span>&#160;  <a class="code" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba79fe32439fea3ea546b24c65fb337b37">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED</a>       = 0x21,</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba9fbbfceda542bd9fec082a4583258a63">   40</a></span>&#160;  <a class="code" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba9fbbfceda542bd9fec082a4583258a63">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_COMPLETED</a>     = 0x22,</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bbafa720494631f58d721b760303eaf7afe">   41</a></span>&#160;  <a class="code" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bbafa720494631f58d721b760303eaf7afe">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_FAILED</a>        = 0x23,</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba871c7b7ff3d78b1ed472ff97b8c53bc7">   42</a></span>&#160;  <a class="code" href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba871c7b7ff3d78b1ed472ff97b8c53bc7">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_NOT_SUPPORTED</a> = 255,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} <a class="code" href="group__ucl__nm__neighbor__discovery.html#gac927f348721c90a4059dabb6f62df8bb">ucl_network_management_neighbor_discovery_t</a>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#ga735db8afb305ad30d92006a575ca60d6">   52</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__ucl__nm__neighbor__discovery.html#ga735db8afb305ad30d92006a575ca60d6">ucl_nm_trigger_node_neighbor_update</a>(<a class="code" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="code" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="group__ucl__nm__neighbor__discovery.html#ga4f4d63ccbd243294c45ca81a7b144db3">   55</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__ucl__nm__neighbor__discovery.html#ga4f4d63ccbd243294c45ca81a7b144db3">ucl_nm_neighbor_discovery_init</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif  //UCL_NM_NEIGHBOR_DISCOVERY_H</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="agroup__ucl__nm__neighbor__discovery_html_ga735db8afb305ad30d92006a575ca60d6"><div class="ttname"><a href="group__ucl__nm__neighbor__discovery.html#ga735db8afb305ad30d92006a575ca60d6">ucl_nm_trigger_node_neighbor_update</a></div><div class="ttdeci">void ucl_nm_trigger_node_neighbor_update(zwave_node_id_t node_id)</div><div class="ttdoc">Trigger the request node neighbor discovery.</div></div>
+<div class="ttc" id="agroup__ucl__nm__neighbor__discovery_html_ggac927f348721c90a4059dabb6f62df8bbafa720494631f58d721b760303eaf7afe"><div class="ttname"><a href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bbafa720494631f58d721b760303eaf7afe">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_FAILED</a></div><div class="ttdeci">@ UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_FAILED</div><div class="ttdef"><b>Definition:</b> ucl_nm_neighbor_discovery.h:41</div></div>
 <div class="ttc" id="azwave__utils_8h_html"><div class="ttname"><a href="zwave__utils_8h.html">zwave_utils.h</a></div><div class="ttdoc">Various Z-Wave related utilities.</div></div>
+<div class="ttc" id="agroup__ucl__nm__neighbor__discovery_html_ggac927f348721c90a4059dabb6f62df8bba79fe32439fea3ea546b24c65fb337b37"><div class="ttname"><a href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba79fe32439fea3ea546b24c65fb337b37">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED</a></div><div class="ttdeci">@ UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_STARTED</div><div class="ttdef"><b>Definition:</b> ucl_nm_neighbor_discovery.h:39</div></div>
+<div class="ttc" id="agroup__ucl__nm__neighbor__discovery_html_gac927f348721c90a4059dabb6f62df8bb"><div class="ttname"><a href="group__ucl__nm__neighbor__discovery.html#gac927f348721c90a4059dabb6f62df8bb">ucl_network_management_neighbor_discovery_t</a></div><div class="ttdeci">ucl_network_management_neighbor_discovery_t</div><div class="ttdoc">All possible values for Node Request Node Neighbor Discovery Statuses zwapi_request_neighbor_update()...</div><div class="ttdef"><b>Definition:</b> ucl_nm_neighbor_discovery.h:38</div></div>
+<div class="ttc" id="agroup__ucl__nm__neighbor__discovery_html_ggac927f348721c90a4059dabb6f62df8bba9fbbfceda542bd9fec082a4583258a63"><div class="ttname"><a href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba9fbbfceda542bd9fec082a4583258a63">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_COMPLETED</a></div><div class="ttdeci">@ UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_COMPLETED</div><div class="ttdef"><b>Definition:</b> ucl_nm_neighbor_discovery.h:40</div></div>
 <div class="ttc" id="azpc__attribute__store__test__helper_8h_html_a8571121ca4b060a8eaca9b120d728ac8"><div class="ttname"><a href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a></div><div class="ttdeci">const zwave_node_id_t node_id</div></div>
 <div class="ttc" id="agroup__ucl__nm__neighbor__discovery_html_ga4f4d63ccbd243294c45ca81a7b144db3"><div class="ttname"><a href="group__ucl__nm__neighbor__discovery.html#ga4f4d63ccbd243294c45ca81a7b144db3">ucl_nm_neighbor_discovery_init</a></div><div class="ttdeci">void ucl_nm_neighbor_discovery_init()</div><div class="ttdoc">intialize ucl network management node neighbor discovery submodule</div></div>
+<div class="ttc" id="agroup__ucl__nm__neighbor__discovery_html_ggac927f348721c90a4059dabb6f62df8bba871c7b7ff3d78b1ed472ff97b8c53bc7"><div class="ttname"><a href="group__ucl__nm__neighbor__discovery.html#ggac927f348721c90a4059dabb6f62df8bba871c7b7ff3d78b1ed472ff97b8c53bc7">UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_NOT_SUPPORTED</a></div><div class="ttdeci">@ UCL_NM_REQUEST_NODE_NEIGHBOR_UPDATE_NOT_SUPPORTED</div><div class="ttdef"><b>Definition:</b> ucl_nm_neighbor_discovery.h:42</div></div>
 <div class="ttc" id="agroup__zwave__node__id__definitions_html_gad2b01997b1abb48bc7a1877551536935"><div class="ttname"><a href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a></div><div class="ttdeci">uint16_t zwave_node_id_t</div><div class="ttdoc">Z-Wave NodeID type.</div><div class="ttdef"><b>Definition:</b> zwave_node_id_definitions.h:84</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_6b85f8de57a896b19916185a245d7220.html">ucl_mqtt</a></li><li class="navelem"><a class="el" href="dir_b66120388821a14e8747d1b6667630a9.html">src</a></li><li class="navelem"><a class="el" href="ucl__nm__neighbor__discovery_8h.html">ucl_nm_neighbor_discovery.h</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:41:59 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:44 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

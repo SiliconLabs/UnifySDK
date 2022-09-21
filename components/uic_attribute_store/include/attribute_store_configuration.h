@@ -42,17 +42,30 @@ extern "C" {
 void attribute_store_configuration_set_type_validation(bool enabled);
 
 /**
- * @brief Configures if the Attribute Store will save changes to SQLite automatically
- * after each change
+ * @brief Configures if the Attribute Store will save changes to the datastore
+ * following a periodic interval as a backup if too many updates are performed.
  *
- * Auto-save enabled will slow down the attribute store, but ensure accurate
- * data after a non-graceful shutdown/teardown.
- *
- * @param enabled Set to true to save all changes immediately to the datastore.
- *                Set to false to save all changes only on attribute
- *                store teardown
+ * @param seconds  Interval in seconds used to make periodic saves of the
+ *                 Attribute Store in the Datastore. The value 0 indicates to
+ *                 disable any safety back-up interval.
  */
-void attribute_store_configuration_set_auto_save(bool enabled);
+void attribute_store_configuration_set_auto_save_safety_interval(
+  unsigned int seconds);
+
+/**
+ * @brief Configures a delay after Attribute Store updates before saving
+ * changes to the datastore.
+ *
+ * The 0 cooldown value will slow down dramatically the Attribute Store, but
+ * ensure accurate data after a non-graceful shutdown/teardown, as
+ * everything will be saved sequentially.
+ *
+ * @param seconds  Interval in seconds to wait after the last attribute update
+ *                 to save it into the attribute store. The value 0 indicates to
+ *                 save everything instantly.
+ */
+void attribute_store_configuration_set_auto_save_cooldown_interval(
+  unsigned int seconds);
 
 #ifdef __cplusplus
 }

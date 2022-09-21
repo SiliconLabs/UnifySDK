@@ -137,7 +137,7 @@ template<typename T> struct eval {
           return lhs.value() * rhs.value();
         case operator_div:
           return lhs.value() / rhs.value();
-        case operator_comp:
+        case operator_equals:
           return trunc(1000. * lhs.value()) == trunc(1000. * rhs.value());
         case operator_left_shift:
           return lhs.value() < rhs.value();
@@ -153,6 +153,8 @@ template<typename T> struct eval {
           return fmod(lhs.value(), rhs.value());
         case operator_exponent:
           return pow(lhs.value(), rhs.value());
+        case operator_neq:
+          return lhs.value() != rhs.value();
         case operator_or:  //handled above
           break;
         default:
@@ -171,7 +173,7 @@ template<typename T> struct eval {
       switch (x.sign) {
         case '-':
           return -rhs.value();
-        default: // Assumed to be only '+' for now.
+        default:  // Assumed to be only '+' for now.
           return +rhs.value();
       }
     }

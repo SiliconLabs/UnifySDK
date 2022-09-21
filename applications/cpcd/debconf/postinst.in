@@ -1,10 +1,9 @@
-#!/bin/sh
+#!/bin/sh -e
 # postinst script for uic
 #
 # see: dh_installdeb(1)
 
 . /usr/share/debconf/confmodule
-set -e
 
 UIC_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic"
 UIC_CONFDIR=${CPACK_PACKAGING_INSTALL_PREFIX}/etc/uic
@@ -32,9 +31,9 @@ fix_permissions() {
 
 enable_start_uic_cpcd() {
   if type "systemctl" >/dev/null; then
-    systemctl --system daemon-reload
-    systemctl start uic-cpcd
-    systemctl enable uic-cpcd
+    systemctl --system daemon-reload || true
+    systemctl start uic-cpcd || true
+    systemctl enable uic-cpcd || true
   fi
 }
 
@@ -45,7 +44,6 @@ handle_conf() {
     echo "  serial: $CPCD_DEFAULT_CFG_SERIAL" >> $UIC_CONFFILE
   fi
 
-  db_go
   db_get uic-cpcd/serial_port
   CFG_CPCD_SERIAL="$RET"
   if [ "$RET" = "" ]; then
@@ -76,7 +74,10 @@ handle_conf() {
         "cpcd:" )
           echo "$line" ;;                   # cpcd should not be indented
         *"serial:"*)
-          echo "$leftside: $CFG_CPCD_SERIAL" ;;
+          echo "$leftside: $CFG_CPCD_SERIAL"
+          # Update CPCd configuration file
+          sed -i "/uart_device_file/c\uart_device_file: $CFG_CPCD_SERIAL" $CPCD_CONFFILE
+          ;;
         *)
           echo "$line" ;;                 # Anything inside cpcd we indent
         esac ;;
@@ -92,7 +93,6 @@ handle_conf() {
   echo "==="
   cat "$UIC_CONFFILE"
   echo "==="
-
 
 }
 

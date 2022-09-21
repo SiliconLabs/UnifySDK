@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -103,29 +103,34 @@ $(document).ready(function(){initNavTree('attribute__store__configuration__inter
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef ATTRIBUTE_STORE_CONFIGURATION_INTERNAL_H</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define ATTRIBUTE_STORE_CONFIGURATION_INTERNAL_H</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="group__attribute__store__configuration__internal.html#ga763b170aed6edd71cc4dd066a86976c9">   34</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__attribute__store__configuration__internal.html#ga763b170aed6edd71cc4dd066a86976c9">attribute_store_is_type_validation_enabled</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="group__attribute__store__configuration__internal.html#gaeaf6c10d39b69451e63a69527a07b5f1">   41</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__attribute__store__configuration__internal.html#gaeaf6c10d39b69451e63a69527a07b5f1">attribute_store_is_auto_save_enabled</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif  //ATTRIBUTE_STORE_CONFIGURATION_INTERNAL_H</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="group__attribute__store__configuration__internal.html#ga763b170aed6edd71cc4dd066a86976c9">   36</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="group__attribute__store__configuration__internal.html#ga763b170aed6edd71cc4dd066a86976c9">attribute_store_is_type_validation_enabled</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="group__attribute__store__configuration__internal.html#ga6ec9ba73765ba7cb2689e69008e710b0">   44</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__attribute__store__configuration__internal.html#ga6ec9ba73765ba7cb2689e69008e710b0">attribute_store_get_auto_save_safety_interval</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="group__attribute__store__configuration__internal.html#ga57d51b6f657ed8b284728f67c1d8fb4c">   52</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group__attribute__store__configuration__internal.html#ga57d51b6f657ed8b284728f67c1d8fb4c">attribute_store_get_auto_save_cooldown_interval</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif  //ATTRIBUTE_STORE_CONFIGURATION_INTERNAL_H</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="agroup__attribute__store__configuration__internal_html_ga57d51b6f657ed8b284728f67c1d8fb4c"><div class="ttname"><a href="group__attribute__store__configuration__internal.html#ga57d51b6f657ed8b284728f67c1d8fb4c">attribute_store_get_auto_save_cooldown_interval</a></div><div class="ttdeci">unsigned int attribute_store_get_auto_save_cooldown_interval()</div><div class="ttdoc">Returns the auto-save safety cooldown configuration.</div></div>
 <div class="ttc" id="agroup__attribute__store__configuration__internal_html_ga763b170aed6edd71cc4dd066a86976c9"><div class="ttname"><a href="group__attribute__store__configuration__internal.html#ga763b170aed6edd71cc4dd066a86976c9">attribute_store_is_type_validation_enabled</a></div><div class="ttdeci">bool attribute_store_is_type_validation_enabled()</div><div class="ttdoc">Checks if the Type validation setting is enabled.</div></div>
-<div class="ttc" id="agroup__attribute__store__configuration__internal_html_gaeaf6c10d39b69451e63a69527a07b5f1"><div class="ttname"><a href="group__attribute__store__configuration__internal.html#gaeaf6c10d39b69451e63a69527a07b5f1">attribute_store_is_auto_save_enabled</a></div><div class="ttdeci">bool attribute_store_is_auto_save_enabled()</div><div class="ttdoc">Checks if the auto save setting is enabled.</div></div>
+<div class="ttc" id="agroup__attribute__store__configuration__internal_html_ga6ec9ba73765ba7cb2689e69008e710b0"><div class="ttname"><a href="group__attribute__store__configuration__internal.html#ga6ec9ba73765ba7cb2689e69008e710b0">attribute_store_get_auto_save_safety_interval</a></div><div class="ttdeci">unsigned int attribute_store_get_auto_save_safety_interval()</div><div class="ttdoc">Returns the auto-save safety interval configuration.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_d7fba4d9e86299b704b642937f0243e8.html">uic_attribute_store</a></li><li class="navelem"><a class="el" href="dir_b6b570a130638b4ba43524545f06d395.html">src</a></li><li class="navelem"><a class="el" href="attribute__store__configuration__internal_8h.html">attribute_store_configuration_internal.h</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:05 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:45 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

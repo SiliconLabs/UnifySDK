@@ -68,6 +68,21 @@ sl_status_t datastore_attribute_table_init()
     return SL_STATUS_FAIL;
   }
 
+  // Do not do use exessive checkpointing, we never rollback anyway
+  rc = datastore_exec_sql("PRAGMA wal_autocheckpoint = 0;");
+  if (rc != SQLITE_OK) {
+    sqlite3_close(db);
+    return SL_STATUS_FAIL;
+  }
+
+  // Filesystem operations are reduced and there is some performance gain if
+  // running in exclusive lock mocde (though nobody else can open the database)
+  rc = datastore_exec_sql("PRAGMA locking_mode = EXCLUSIVE;");
+  if (rc != SQLITE_OK) {
+    sqlite3_close(db);
+    return SL_STATUS_FAIL;
+  }
+
   // The attribute store table:
   rc = datastore_exec_sql(
     "CREATE TABLE IF NOT EXISTS " DATASTORE_TABLE_ATTRIBUTES "("
@@ -82,6 +97,16 @@ sl_status_t datastore_attribute_table_init()
     " CHECK (type > 0), "
     " CHECK (id > 0), "
     " CHECK (id != parent_id));");  // Last condition: We do not want to allow nodes being their own parent.
+  if (rc != SQLITE_OK) {
+    sqlite3_close(db);
+    return SL_STATUS_FAIL;
+  }
+
+  // Run an optimization at init.
+  // From the SQLite documentation: https://www.sqlite.org/pragma.html#pragma_optimize
+  // Long-running applications might also benefit from setting a timer to run "PRAGMA optimize" every few hours.
+  // We should consider adding an API for this.
+  rc = datastore_exec_sql("PRAGMA optimize(0xfffe);");
   if (rc != SQLITE_OK) {
     sqlite3_close(db);
     return SL_STATUS_FAIL;
@@ -428,7 +453,7 @@ bool datastore_contains_attribute(datastore_attribute_id_t id)
     return result;
   }
 
-  int rc = sqlite3_bind_int(select_statement, 1, id);
+  int rc = sqlite3_bind_int64(select_statement, 1, id);
   if (rc != SQLITE_OK) {
     log_binding_failed();
     return result;
@@ -444,31 +469,6 @@ bool datastore_contains_attribute(datastore_attribute_id_t id)
 }
 
 sl_status_t datastore_delete_attribute(const datastore_attribute_id_t id)
-{
-  sl_status_t result = SL_STATUS_FAIL;
-
-  if (db == NULL) {
-    log_database_not_initialized();
-    return result;
-  }
-
-  int rc = sqlite3_bind_int(delete_statement, 1, id);
-  if (rc != SQLITE_OK) {
-    log_binding_failed();
-    return result;
-  }
-
-  int step = sqlite3_step(delete_statement);
-  if (step == SQLITE_DONE || step == SQLITE_ROW) {
-    result = SL_STATUS_OK;
-  }
-
-  sqlite3_reset(delete_statement);
-  return result;
-}
-
-sl_status_t
-  datastore_delete_attribute_with_children(const datastore_attribute_id_t id)
 {
   sl_status_t result = SL_STATUS_FAIL;
 

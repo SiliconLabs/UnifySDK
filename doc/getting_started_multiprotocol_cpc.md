@@ -11,7 +11,7 @@ single-protocol Zigbee NCP. This service runs the Unify Framework Zigbee Protoco
 Controller. It can be configured to run with the multiprotocol RCP, as described
 below. For now, stop the service using `systemctl`:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo systemctl stop uic-zigpc
 ```
 
@@ -34,13 +34,13 @@ connecting the Raspberry Pi to the WSTK with a USB cable, verify that the
 CPCd must be running before any of the protocol services can be started.
 Start the `uic-cpcd` service using `systemctl`:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo systemctl start uic-cpcd
 ```
 
 Check to make sure it is running and successfully connected to the RCP:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo systemctl status uic-cpcd
 ```
 
@@ -67,7 +67,7 @@ the binding keys. If this is the case, the best solution is to
 delete the binding keys on the host and the RCP and restart the `uic-cpcd`
 service. To delete the host binding key:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo rm /var/lib/uic/binding-key.key
 ```
 
@@ -87,13 +87,13 @@ for security reasons. For more information, see the [CPCd user guide](../applica
 
 Start the zigbeed service using `systemctl`:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo systemctl start uic-zigbeed
 ```
 
 Verify that it is active:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo systemctl status uic-zigbeed
 ```
 
@@ -120,13 +120,13 @@ and ZigPC.
 Z3Gateway is the traditional Zigbee sample gateway application. Start it as
 follows:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo /usr/bin/Z3Gateway -p /dev/ttyZigbeeNCP
 ```
 
 ZigPC is the Unify Framework's Zigbee Protocol Controller.  Start it like this:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo /usr/bin/zigpc --log.level d --zigpc.serial /dev/ttyZigbeeNCP --zigpc.datastore_file my_test.db
 ```
 
@@ -137,7 +137,7 @@ a CLI prompt will appear.
 
 To run the OpenThread Border Router (OTBR), start the `otbr-agent` service:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo systemctl start otbr-agent
 ```
 
@@ -145,7 +145,7 @@ As usual, verify that it is running using `systemctl status`. Next, run the
 `ot-ctl` CLI application.  This connects to OTBR and provides a CLI for
 entering OpenThread commands:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo ot-ctl
 ```
 

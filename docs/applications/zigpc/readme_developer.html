@@ -34,8 +34,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -147,11 +146,11 @@ for more details.</p>
 <ul class="simple">
 <li><p>Run the container with the GSDK locations mounted:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>docker run -it --rm \
-  --env GSDK_LOCATION \
-  -v`pwd`:`pwd` \
-  -w `pwd` \
-  -v ${GSDK_LOCATION}:${GSDK_LOCATION} \
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -it --rm <span class="se">\</span>
+  --env GSDK_LOCATION <span class="se">\</span>
+  -v<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:<span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> <span class="se">\</span>
+  -w <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> <span class="se">\</span>
+  -v <span class="si">${</span><span class="nv">GSDK_LOCATION</span><span class="si">}</span>:<span class="si">${</span><span class="nv">GSDK_LOCATION</span><span class="si">}</span> <span class="se">\</span>
   uic_armhf
 </pre></div>
 </div>

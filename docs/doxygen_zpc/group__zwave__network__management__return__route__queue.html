@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -87,6 +87,7 @@ $(document).ready(function(){initNavTree('group__zwave__network__management__ret
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Return Route Assignment Queue<div class="ingroups"><a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> &raquo; <a class="el" href="group__zwave__network__management.html">Z-Wave Network Management</a></div></div>  </div>
@@ -103,13 +104,24 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:gad338fabb6ca498c3e67bebe70db1250b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management__return__route__queue.html#gad338fabb6ca498c3e67bebe70db1250b">ASSIGN_RETURN_ROUTE_QUEUE_SIZE</a>&#160;&#160;&#160;5</td></tr>
+<tr class="memitem:gad338fabb6ca498c3e67bebe70db1250b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management__return__route__queue.html#gad338fabb6ca498c3e67bebe70db1250b">ASSIGN_RETURN_ROUTE_QUEUE_SIZE</a>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:gad338fabb6ca498c3e67bebe70db1250b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac4407c5450104f52bb08fa9c7af8d403"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management__return__route__queue.html#gac4407c5450104f52bb08fa9c7af8d403">ASSIGN_RETURN_ROUTE_COOLDOWN</a>&#160;&#160;&#160;60000</td></tr>
+<tr class="separator:gac4407c5450104f52bb08fa9c7af8d403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ga67e5026b6ced86b869fa94851d4721ea"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct__assign__return__route__.html">_assign_return_route_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management__return__route__queue.html#ga67e5026b6ced86b869fa94851d4721ea">assign_return_route_t</a></td></tr>
 <tr class="separator:ga67e5026b6ced86b869fa94851d4721ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gafac77a683ce1e4afc406e92fe56bbf71"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management__return__route__queue.html#gafac77a683ce1e4afc406e92fe56bbf71">route_state_t</a> { <a class="el" href="group__zwave__network__management__return__route__queue.html#ggafac77a683ce1e4afc406e92fe56bbf71a33340c3cafa40c38c39267e5ba7d523a">ROUTE_STATE_UNASSIGNED_ENTRY</a>, 
+<a class="el" href="group__zwave__network__management__return__route__queue.html#ggafac77a683ce1e4afc406e92fe56bbf71a08f30a62191dc941adcc8ce6a548f0b3">ROUTE_STATE_NOT_ESTABLISHED</a>, 
+<a class="el" href="group__zwave__network__management__return__route__queue.html#ggafac77a683ce1e4afc406e92fe56bbf71a423cca8c38371240354fd56da8ce2c1f">ROUTE_STATE_IN_PROGRESS</a>, 
+<a class="el" href="group__zwave__network__management__return__route__queue.html#ggafac77a683ce1e4afc406e92fe56bbf71a1640f76f863251f6497677c8a46084df">ROUTE_STATE_ESTABLISHED</a>
+ }</td></tr>
+<tr class="separator:gafac77a683ce1e4afc406e92fe56bbf71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -130,6 +142,20 @@ Functions</h2></td></tr>
 <p>Small queue component for assigning return routes. </p>
 <p>Small queue component that will cache and process the assign return route requests issued by the application. </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="gac4407c5450104f52bb08fa9c7af8d403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac4407c5450104f52bb08fa9c7af8d403">&#9670;&nbsp;</a></span>ASSIGN_RETURN_ROUTE_COOLDOWN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSIGN_RETURN_ROUTE_COOLDOWN&#160;&#160;&#160;60000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="gad338fabb6ca498c3e67bebe70db1250b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gad338fabb6ca498c3e67bebe70db1250b">&#9670;&nbsp;</a></span>ASSIGN_RETURN_ROUTE_QUEUE_SIZE</h2>
 
@@ -137,7 +163,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ASSIGN_RETURN_ROUTE_QUEUE_SIZE&#160;&#160;&#160;5</td>
+          <td class="memname">#define ASSIGN_RETURN_ROUTE_QUEUE_SIZE&#160;&#160;&#160;10</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -156,6 +182,31 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="gafac77a683ce1e4afc406e92fe56bbf71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafac77a683ce1e4afc406e92fe56bbf71">&#9670;&nbsp;</a></span>route_state_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__zwave__network__management__return__route__queue.html#gafac77a683ce1e4afc406e92fe56bbf71">route_state_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggafac77a683ce1e4afc406e92fe56bbf71a33340c3cafa40c38c39267e5ba7d523a"></a>ROUTE_STATE_UNASSIGNED_ENTRY&#160;</td><td class="fielddoc"><p>The entry is unassigned. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggafac77a683ce1e4afc406e92fe56bbf71a08f30a62191dc941adcc8ce6a548f0b3"></a>ROUTE_STATE_NOT_ESTABLISHED&#160;</td><td class="fielddoc"><p>The entry is in use, but the return route has not been assigned yet. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggafac77a683ce1e4afc406e92fe56bbf71a423cca8c38371240354fd56da8ce2c1f"></a>ROUTE_STATE_IN_PROGRESS&#160;</td><td class="fielddoc"><p>The entry is in use, and the return route is being established. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggafac77a683ce1e4afc406e92fe56bbf71a1640f76f863251f6497677c8a46084df"></a>ROUTE_STATE_ESTABLISHED&#160;</td><td class="fielddoc"><p>The entry is in use, the return route has been established and we wait a cooldown period before we re-use this entry. </p>
+</td></tr>
+</table>
 
 </div>
 </div>
@@ -257,7 +308,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:16 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:49 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

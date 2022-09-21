@@ -4,8 +4,8 @@
 
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "armhf")
 
-    find_package(GeckoSDK 4.1 EXACT REQUIRED)
-    find_package(CPCD 4.1 EXACT REQUIRED)
+    find_package(GeckoSDK 4.1.1 EXACT REQUIRED)
+    find_package(CPCD 4.1.1 EXACT REQUIRED)
     find_program(MAKE_EXECUTABLE NAMES make REQUIRED)
 
     set(OUTPUT_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/build)
@@ -87,8 +87,8 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "armhf")
         COMPONENT uic-zigbeed)
 
     install(
-        FILES ${CMAKE_CURRENT_SOURCE_DIR}/zigbeed.conf 
-        DESTINATION /usr/local/etc/ 
+        FILES ${CMAKE_CURRENT_SOURCE_DIR}/zigbeed.conf
+        DESTINATION /usr/local/etc/
         COMPONENT uic-zigbeed)
 else()
     message("Unable to build zigbeed for target architecture")

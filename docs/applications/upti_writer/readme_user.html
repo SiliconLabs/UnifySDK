@@ -34,8 +34,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -119,7 +118,7 @@
 <p>You can run the UPTI WRITER by executing <code class="docutils literal notranslate"><span class="pre">uic-upti-writer</span></code>.</p>
 <p>You can configure the MQTT server, log file path, etc through command line options.</p>
 <p>For details about options, run the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:uic-upti-writer --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pi@unify:uic-upti-writer --help</span>
 </pre></div>
 </div>
 </section>
@@ -132,11 +131,11 @@ These fields are decoded as follows:
 
 •94143017 - Timestamp in microseconds when event completed (start time can be inferred from subtracting Duration from this value).
 •800 - Event duration in microseconds.
-•16908330 - Event type ID. This varies for different kinds of trace events (Packets, traces, etc.) 
+•16908330 - Event type ID. This varies for different kinds of trace events (Packets, traces, etc.)
 •Packet - Event type string. This is the friendly name (as ASCII text) for the event type and will match what Network Analyzer displays in the event window for this event type.
 •1B - Debug protocol&#39;s sequence number from the capture source (used to detect gaps in the capture stream).
 •440138076 - Source device serial number where event was captured.
-•[F8 C4 ... 51] - Event data bytes (prior to any decryption; includes any RadioInfo data appended to end of packets by the hardware). 
+•[F8 C4 ... 51] - Event data bytes (prior to any decryption; includes any RadioInfo data appended to end of packets by the hardware).
 </pre></div>
 </div>
 <section id="file-example">

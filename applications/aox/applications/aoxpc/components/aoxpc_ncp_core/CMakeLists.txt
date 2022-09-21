@@ -7,6 +7,11 @@ add_library(aoxpc_ncp_core
   ${GeckoSDK_ROOT_DIR}/app/bluetooth/common_host/tcp/tcp_posix.c
 )
 
+# Make sure that the sl_status.h comes from the GSDK
+target_include_directories(aoxpc_ncp_core BEFORE
+  PRIVATE ${GeckoSDK_ROOT_DIR}/platform/common/inc
+)
+
 target_include_directories(aoxpc_ncp_core
   PUBLIC
   include

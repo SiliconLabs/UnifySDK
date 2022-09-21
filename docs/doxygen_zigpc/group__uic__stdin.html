@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -84,6 +84,7 @@ $(document).ready(function(){initNavTree('group__uic__stdin.html',''); initResiz
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Modules</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -94,20 +95,29 @@ $(document).ready(function(){initNavTree('group__uic__stdin.html',''); initResiz
 <p>Unify Stdin interface for other applications.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__unify__stdin__attribute__store__command__handler"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__unify__stdin__attribute__store__command__handler.html">Unfiy Attribute Store Commands</a></td></tr>
+<tr class="memdesc:group__unify__stdin__attribute__store__command__handler"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set of Attribute Store commands available by default with the stdin console. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:gacf1ba285cfb23de27cf6997b522fba80"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a></td></tr>
-<tr class="memdesc:gacf1ba285cfb23de27cf6997b522fba80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arguments type.  <a href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">More...</a><br /></td></tr>
-<tr class="separator:gacf1ba285cfb23de27cf6997b522fba80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf2e355ac61e6583e7e7d8123d13eab6d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">handler_func</a>) (const <a class="el" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a> &amp;arg)</td></tr>
-<tr class="memdesc:gaf2e355ac61e6583e7e7d8123d13eab6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler function callback type.  <a href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">More...</a><br /></td></tr>
-<tr class="separator:gaf2e355ac61e6583e7e7d8123d13eab6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga11eb1053fbe810b3078b6352d286da65"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#ga11eb1053fbe810b3078b6352d286da65">handle_args_t</a> = std::vector&lt; std::string &gt;</td></tr>
+<tr class="memdesc:ga11eb1053fbe810b3078b6352d286da65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arguments type.  <a href="group__uic__stdin.html#ga11eb1053fbe810b3078b6352d286da65">More...</a><br /></td></tr>
+<tr class="separator:ga11eb1053fbe810b3078b6352d286da65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa4685e09c5ee62cf6b79c56a964da8ee"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gaa4685e09c5ee62cf6b79c56a964da8ee">handler_func</a> = <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(*)(const <a class="el" href="group__uic__stdin.html#ga11eb1053fbe810b3078b6352d286da65">handle_args_t</a> &amp;arg)</td></tr>
+<tr class="memdesc:gaa4685e09c5ee62cf6b79c56a964da8ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler function callback type.  <a href="group__uic__stdin.html#gaa4685e09c5ee62cf6b79c56a964da8ee">More...</a><br /></td></tr>
+<tr class="separator:gaa4685e09c5ee62cf6b79c56a964da8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa4d11441da74d83f0109afd864f9fb97"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97">command_map_t</a> = std::map&lt; std::string, std::pair&lt; std::string, <a class="el" href="group__uic__stdin.html#gaa4685e09c5ee62cf6b79c56a964da8ee">handler_func</a> &gt; &gt;</td></tr>
+<tr class="memdesc:gaa4d11441da74d83f0109afd864f9fb97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command map object, used to register a set of functions to handle incoming commands.  <a href="group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97">More...</a><br /></td></tr>
+<tr class="separator:gaa4d11441da74d83f0109afd864f9fb97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gab6d00df5652bedd76245f3d87942328e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#gab6d00df5652bedd76245f3d87942328e">uic_stdin_add_commands</a> (const std::map&lt; std::string, std::pair&lt; std::string, <a class="el" href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">handler_func</a> &gt;&gt; &amp;append_commands)</td></tr>
-<tr class="memdesc:gab6d00df5652bedd76245f3d87942328e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add commands to command line interface This function is used at compile time to add commands to command line interface.  <a href="group__uic__stdin.html#gab6d00df5652bedd76245f3d87942328e">More...</a><br /></td></tr>
-<tr class="separator:gab6d00df5652bedd76245f3d87942328e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga914fe74285cc40d4ecdc52646fad1f9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#ga914fe74285cc40d4ecdc52646fad1f9d">uic_stdin_add_commands</a> (const <a class="el" href="group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97">command_map_t</a> &amp;append_commands)</td></tr>
+<tr class="memdesc:ga914fe74285cc40d4ecdc52646fad1f9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add commands to command line interface This function is used at compile time to add commands to command line interface.  <a href="group__uic__stdin.html#ga914fe74285cc40d4ecdc52646fad1f9d">More...</a><br /></td></tr>
+<tr class="separator:ga914fe74285cc40d4ecdc52646fad1f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga647041f25e0775f209a0550669e195d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__uic__stdin.html#ga647041f25e0775f209a0550669e195d4">uic_stdin_set_prompt_string</a> (const std::string &amp;des_prompt_string)</td></tr>
 <tr class="memdesc:ga647041f25e0775f209a0550669e195d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set prompt string for command line interface This function sets the prompt string for the CLI.  <a href="group__uic__stdin.html#ga647041f25e0775f209a0550669e195d4">More...</a><br /></td></tr>
 <tr class="separator:ga647041f25e0775f209a0550669e195d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,14 +138,30 @@ Functions</h2></td></tr>
 <p>Unify Stdin interface for other applications. </p>
 <p>Functions enabling adding commands to the CLI and integrating applications speific command prompt. </p>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="gacf1ba285cfb23de27cf6997b522fba80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacf1ba285cfb23de27cf6997b522fba80">&#9670;&nbsp;</a></span>handle_args_t</h2>
+<a id="gaa4d11441da74d83f0109afd864f9fb97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa4d11441da74d83f0109afd864f9fb97">&#9670;&nbsp;</a></span>command_map_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::vector&lt;std::string&gt; <a class="el" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a></td>
+          <td class="memname">using <a class="el" href="group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97">command_map_t</a> =  std::map&lt;std::string, std::pair&lt;std::string, <a class="el" href="group__uic__stdin.html#gaa4685e09c5ee62cf6b79c56a964da8ee">handler_func</a>&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Command map object, used to register a set of functions to handle incoming commands. </p>
+
+</div>
+</div>
+<a id="ga11eb1053fbe810b3078b6352d286da65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga11eb1053fbe810b3078b6352d286da65">&#9670;&nbsp;</a></span>handle_args_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="group__uic__stdin.html#ga11eb1053fbe810b3078b6352d286da65">handle_args_t</a> =  std::vector&lt;std::string&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -144,14 +170,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gaf2e355ac61e6583e7e7d8123d13eab6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf2e355ac61e6583e7e7d8123d13eab6d">&#9670;&nbsp;</a></span>handler_func</h2>
+<a id="gaa4685e09c5ee62cf6b79c56a964da8ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa4685e09c5ee62cf6b79c56a964da8ee">&#9670;&nbsp;</a></span>handler_func</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>(* handler_func) (const <a class="el" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a> &amp;arg)</td>
+          <td class="memname">using <a class="el" href="group__uic__stdin.html#gaa4685e09c5ee62cf6b79c56a964da8ee">handler_func</a> =  <a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> (*)(const <a class="el" href="group__uic__stdin.html#ga11eb1053fbe810b3078b6352d286da65">handle_args_t</a> &amp;arg)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -167,8 +193,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="gab6d00df5652bedd76245f3d87942328e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab6d00df5652bedd76245f3d87942328e">&#9670;&nbsp;</a></span>uic_stdin_add_commands()</h2>
+<a id="ga914fe74285cc40d4ecdc52646fad1f9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga914fe74285cc40d4ecdc52646fad1f9d">&#9670;&nbsp;</a></span>uic_stdin_add_commands()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,7 +202,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void uic_stdin_add_commands </td>
           <td>(</td>
-          <td class="paramtype">const std::map&lt; std::string, std::pair&lt; std::string, <a class="el" href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">handler_func</a> &gt;&gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97">command_map_t</a> &amp;&#160;</td>
           <td class="paramname"><em>append_commands</em></td><td>)</td>
           <td></td>
         </tr>
@@ -307,7 +333,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:08 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:46 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

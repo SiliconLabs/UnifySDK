@@ -210,9 +210,12 @@ typedef struct {
   /// Z-Wave TX Group was deleted.
   /// @param group_id Group ID that was deleted.
   void (*on_multicast_group_deleted)(zwave_multicast_group_id_t group_id);
-  /// Request Node Neighbor Discovery
+
+  /// Request Node Neighbor Discovery status information
+  /// This callback is invoked when a new event in a Neighbor discovery happened.
   /// @param status represents Neighbor Discovery Status
   void (*on_request_neighbor_update)(uint8_t status);
+
   /// Notify that a singlecast frame transmission has been completed.
   /// @param transmission_successful Indicates if the transmission succeeded or failed.
   /// @param tx_report               Pointer to Tx Report data.

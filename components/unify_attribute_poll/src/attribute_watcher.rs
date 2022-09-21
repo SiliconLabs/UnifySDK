@@ -110,3 +110,22 @@ unsafe extern "C" fn uic_attribute_store_get_attribute_touch_callback(
         log_error!("touch callback called with invalid attribute {}", attribute);
     }
 }
+
+#[cfg(test)]
+pub mod test {
+    use super::*;
+    pub struct AttributeWatcherStub {
+        receiver: UnboundedReceiver<AttributeEvent<Attribute>>,
+    }
+    impl AttributeWatcherStub {
+        pub fn new(receiver: UnboundedReceiver<AttributeEvent<Attribute>>) -> Self {
+            AttributeWatcherStub { receiver }
+        }
+    }
+    #[async_trait]
+    impl AttributeWatcherTrait for AttributeWatcherStub {
+        async fn next_change(&mut self) -> AttributeEvent<Attribute> {
+            self.receiver.select_next_some().await
+        }
+    }
+}

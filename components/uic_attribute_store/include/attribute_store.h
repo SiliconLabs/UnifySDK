@@ -455,6 +455,19 @@ sl_status_t attribute_store_register_callback_by_type_and_state(
 bool attribute_store_node_exists(attribute_store_node_t node);
 
 /**
+ * @brief Verify whether a node is a child of another node
+ *
+ * @param node              The identifier of the node to verify if it
+ *                          is a child of the possible parent node.
+ * @param possible_parent   The identifier of the node to verify if it
+ *                          is a parent of the node
+ * @returns true  if the node is located under the possible parent node in
+ *          the Attribute Store, false otherwise
+ */
+bool attribute_store_is_node_a_child(attribute_store_node_t node,
+                                     attribute_store_node_t possible_parent);
+
+/**
  * @brief Invoking update of callbacks for the given node and all children nodes
  *
  * WARNING: Callbacks registered by DESIRED_ATTRIBUTE or

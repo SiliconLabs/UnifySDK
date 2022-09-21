@@ -12,8 +12,7 @@
  *****************************************************************************/
 
 /**
- * @file uic_gbl_interface.h
- * @defgroup uic_gbl_interface
+ * @defgroup uic_gbl_interface Unify GBL Interface
  * @ingroup unify_components
  * @brief This component interfaces with the Gecko bootloader to perform OTA updates
  *
@@ -32,7 +31,7 @@ extern "C" {
 
 /**
  * @brief Callback function used to monitor the transfer progress of the file
- * 
+ *
  * @param offset Offset of last transferred block
  * @param size  Total file size.
  */
@@ -40,21 +39,21 @@ typedef void (*uic_gbl_interface_transfer_progress_t)(int offset, int size);
 
 /**
  * @brief Probe for Gecko Bootloader
- * 
+ *
  * Detect if there is a gecko bootloader in the other end of the file descriptor
- * 
- * @param serial_fd 
+ *
+ * @param serial_fd
  * @return sl_status_t SL_STATUS_OK on success
  */
 sl_status_t uic_gbl_interface_detect_bootloader(int serial_fd);
 
 /**
  * @brief Perfrom at DFU firmware update using the gecko bootloader
- * 
+ *
  * This function transfers an image to a device using the gecko bootloader.
- * It is assumed that the chip is already in DFU mode when this function 
+ * It is assumed that the chip is already in DFU mode when this function
  * is invoked.
- * 
+ *
  * @param gbl_filename GBL file to transfer
  * @param serial_fd File descripter to the serial interafce of the bootloader. Data will
  * be read and written to this file descriptor.

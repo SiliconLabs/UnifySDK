@@ -49,6 +49,17 @@ void reset_nms_last_operation_data();
 bool we_are_alone_in_our_network();
 
 /**
+ * @brief Checks if all the conditions are fulfilled to start a new
+ *        network management operation. (Set default operation excluded)
+ *
+ * We will check that we are not already doing something and that for example
+ * the Z-Wave Controller is not resetting.
+ *
+ * @returns true if we can start a new operation, false otherwise
+ */
+bool network_management_is_ready_for_a_new_operation();
+
+/**
  * @brief Asks the Z-Wave API to tell us our current HomeID and NodeID
  *
  * NOTE: Should be used only when necessary, as communicating with the Z-Wave API
@@ -111,7 +122,6 @@ bool we_should_self_destruct();
  * @brief Attempts to take the SUC/SIS Role, if there is no SUC in the network
  */
 void network_management_take_sis_role_if_no_suc_in_network();
-
 
 #ifdef __cplusplus
 }

@@ -15,6 +15,7 @@
 #include "zwave_tx_callbacks.h"
 #include "zwave_tx_fixt.h"
 #include "zwave_tx_process.h"
+#include "zwave_tx_route_cache.h"
 #include "zwave_tx_queue.hpp"
 
 // Includes from other components
@@ -65,6 +66,19 @@ void on_zwave_transport_send_data_complete(uint8_t status,
                    user);
     tx_queue.log(false);
     return;
+  }
+
+  // Save if we used routing to reach a destination.
+  zwave_tx_queue_element_t element = {};
+  if (SL_STATUS_OK != tx_queue.get_by_id(&element, user)) {
+    return;
+  }
+  if ((element.send_data_tx_status.number_of_repeaters > 0)
+      && (true == IS_TRANSMISSION_SUCCESSFUL(element.send_data_status))
+      && (false == element.connection_info.remote.is_multicast)) {
+    zwave_tx_route_cache_set_number_of_repeaters(
+      element.connection_info.remote.node_id,
+      element.send_data_tx_status.number_of_repeaters);
   }
 
   // Get TX to look at the queue again, now that we are done.

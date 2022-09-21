@@ -30,6 +30,10 @@
 #define ZWAVE_TX_INCOMING_FRAMES_BUFFER_SIZE 10
 #endif
 
+#ifndef ZWAVE_TX_ROUTE_CACHE_BUFFER_SIZE
+// Maximum amount of NodeIDs for which we cache the number of repeaters.
+#define ZWAVE_TX_ROUTE_CACHE_BUFFER_SIZE 50
+#endif
 /**
  * @defgroup zwave_tx Z-Wave TX
  * @ingroup zwave_controller
@@ -200,7 +204,7 @@ tx -> u: <b>zwave_tx_send_data</b> callback\n(frame 1 transmission results)
  * \ref zwave_tx_send_data() and \ref zwave_tx_abort_transmission()
  * are the two main functions to be used from other components.
  *
- * \ref zwave_tx_init() and \ref zwave_tx_shutdown should not be called
+ * \ref zwave_tx_init() should not be called
  * by other components.
  *
  * @{
@@ -442,6 +446,18 @@ const uint8_t *zwave_tx_get_frame(zwave_tx_session_id_t session_id);
 uint16_t zwave_tx_get_frame_length(zwave_tx_session_id_t session_id);
 
 /**
+ * @brief Verifies if we have frames in the queue to send to a NodeID.
+ * @param node_id   NodeID to check for in the queue
+ *
+ * Note that this function will return true when we are backing off waiting
+ * for an answer following a frame we have just sent, because the frame is still
+ * in the queue.
+ *
+ * @returns true if we have frames to send to the NodeID, false otherwise.
+ */
+bool zwave_tx_has_frames_for_node(zwave_node_id_t node_id);
+
+/**
  * @brief Initialize the zwave_tx component.
  *
  * Z-Wave Tx will register an on_frame_received() callback to the
@@ -450,17 +466,6 @@ uint16_t zwave_tx_get_frame_length(zwave_tx_session_id_t session_id);
  * @returns SL_STATUS_OK on success.
  */
 sl_status_t zwave_tx_init();
-
-/**
- * @brief Stop the tx component.
- *
- * This will stop ongoing transmission and flush all queues. No callbacks
- * will be called when queues are emptied due to a shutdown.
- * It will also unregister the on_frame_received() callback to the
- * \ref zwave_controller
- *
- */
-void zwave_tx_shutdown();
 
 /**
  * @brief Log the contents of the TX Queue.

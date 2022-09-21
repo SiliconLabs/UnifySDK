@@ -5,6 +5,7 @@
 
 set -e
 UIC_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/"
+UIC_DEV_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/dev/"
 
 setup_uic_user() {
         if ! getent group uic >/dev/null; then
@@ -20,6 +21,8 @@ setup_uic_user() {
 fix_permissions() {
         mkdir -p $UIC_VAR_DIR
         chown uic $UIC_VAR_DIR
+        mkdir -p $UIC_DEV_DIR
+        chown uic $UIC_DEV_DIR
 }
 
 case "$1" in

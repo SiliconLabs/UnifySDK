@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -100,6 +100,9 @@ $(document).ready(function(){initNavTree('group__zigpc__zcl__util.html',''); ini
 Modules</h2></td></tr>
 <tr class="memitem:group__zigpc__zcl__util__int"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util__int.html">Internal API used within the ZCL utility component.</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:group__zigpc__zcl__definitions"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__definitions.html">ZigPC ZCL Definitions</a></td></tr>
+<tr class="memdesc:group__zigpc__zcl__definitions"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains definitions used by ZigPC in order to intrepret ZCL information. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -117,22 +120,22 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga760d88319d072b0f12ac9865903d64f0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#ga760d88319d072b0f12ac9865903d64f0">zigpc_zcl_get_data_type_size</a> (zigpc_zcl_data_type_t type)</td></tr>
+<tr class="memitem:ga760d88319d072b0f12ac9865903d64f0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#ga760d88319d072b0f12ac9865903d64f0">zigpc_zcl_get_data_type_size</a> (<a class="el" href="group__zigpc__zcl__definitions.html#ga9c6f4d01fe3bbd394c751f5b132addb2">zigpc_zcl_data_type_t</a> type)</td></tr>
 <tr class="memdesc:ga760d88319d072b0f12ac9865903d64f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get data size of ZCL type passed in.  <a href="group__zigpc__zcl__util.html#ga760d88319d072b0f12ac9865903d64f0">More...</a><br /></td></tr>
 <tr class="separator:ga760d88319d072b0f12ac9865903d64f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac1f0477c5a1f90ad1ce1a78497657de8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#gac1f0477c5a1f90ad1ce1a78497657de8">zigpc_zcl_frame_init_command</a> (<a class="el" href="structzcl__frame__t.html">zcl_frame_t</a> *const frame, <a class="el" href="group__zigpc__common__zigbee.html#gaed421b76934373eb9336c93ab848eaab">zcl_command_id_t</a> command_id, uint8_t frame_control)</td></tr>
 <tr class="memdesc:gac1f0477c5a1f90ad1ce1a78497657de8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the ZCL Frame for sending ZCL command.  <a href="group__zigpc__zcl__util.html#gac1f0477c5a1f90ad1ce1a78497657de8">More...</a><br /></td></tr>
 <tr class="separator:gac1f0477c5a1f90ad1ce1a78497657de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4802fec563b073a8228c5e2a2fbb3be1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#ga4802fec563b073a8228c5e2a2fbb3be1">zigpc_zcl_frame_fill_data</a> (<a class="el" href="structzcl__frame__t.html">zcl_frame_t</a> *const frame, zigpc_zcl_data_type_t type, const void *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>)</td></tr>
+<tr class="memitem:ga4802fec563b073a8228c5e2a2fbb3be1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#ga4802fec563b073a8228c5e2a2fbb3be1">zigpc_zcl_frame_fill_data</a> (<a class="el" href="structzcl__frame__t.html">zcl_frame_t</a> *const frame, <a class="el" href="group__zigpc__zcl__definitions.html#ga9c6f4d01fe3bbd394c751f5b132addb2">zigpc_zcl_data_type_t</a> type, const void *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>)</td></tr>
 <tr class="memdesc:ga4802fec563b073a8228c5e2a2fbb3be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate the given ZCL frame with data. The data copied is dictated by the type passed in. Once successfully copied into the frame, the buffer size is incremented based on the size of the data type passed in.  <a href="group__zigpc__zcl__util.html#ga4802fec563b073a8228c5e2a2fbb3be1">More...</a><br /></td></tr>
 <tr class="separator:ga4802fec563b073a8228c5e2a2fbb3be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa47bc7ae3bb00aa6bef9443fc2c02964"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#gaa47bc7ae3bb00aa6bef9443fc2c02964">zigpc_zcl_frame_fill_data_array</a> (<a class="el" href="structzcl__frame__t.html">zcl_frame_t</a> *const frame, zigpc_zcl_data_type_t type, size_t type_count, const void *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>)</td></tr>
+<tr class="memitem:gaa47bc7ae3bb00aa6bef9443fc2c02964"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#gaa47bc7ae3bb00aa6bef9443fc2c02964">zigpc_zcl_frame_fill_data_array</a> (<a class="el" href="structzcl__frame__t.html">zcl_frame_t</a> *const frame, <a class="el" href="group__zigpc__zcl__definitions.html#ga9c6f4d01fe3bbd394c751f5b132addb2">zigpc_zcl_data_type_t</a> type, size_t type_count, const void *<a class="el" href="group__process.html#ga43a278d13284fb3412e9eee1db1d967e">data</a>)</td></tr>
 <tr class="memdesc:gaa47bc7ae3bb00aa6bef9443fc2c02964"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populate the ZCL frame with an array of the given ZCL data type. Once successfully copied into the frame, the buffer size is incremented based on the size of the data type and array count passed in.  <a href="group__zigpc__zcl__util.html#gaa47bc7ae3bb00aa6bef9443fc2c02964">More...</a><br /></td></tr>
 <tr class="separator:gaa47bc7ae3bb00aa6bef9443fc2c02964"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac5674da34a32f0a3793e3b130e20c791"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#gac5674da34a32f0a3793e3b130e20c791">zigpc_zcl_build_command_frame</a> (<a class="el" href="structzcl__frame__t.html">zcl_frame_t</a> *const frame, const <a class="el" href="group__zigpc__zcl__util.html#gab93b3d8de226b13b5d58eb91ab75cacc">zigpc_zcl_frame_type_t</a> frame_type, const <a class="el" href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a> cluster_id, const <a class="el" href="group__zigpc__common__zigbee.html#gaed421b76934373eb9336c93ab848eaab">zcl_command_id_t</a> command_id, const size_t command_arg_count, const <a class="el" href="structzigpc__zcl__frame__data__t.html">zigpc_zcl_frame_data_t</a> *const command_arg_list)</td></tr>
 <tr class="memdesc:gac5674da34a32f0a3793e3b130e20c791"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a ZCL command frame to be sent on the Zigbee network.  <a href="group__zigpc__zcl__util.html#gac5674da34a32f0a3793e3b130e20c791">More...</a><br /></td></tr>
 <tr class="separator:gac5674da34a32f0a3793e3b130e20c791"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6fa85accf025b453fa8b711716103dae"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#ga6fa85accf025b453fa8b711716103dae">zigpc_zcl_get_type_size</a> (zigpc_zcl_data_type_t type)</td></tr>
+<tr class="memitem:ga6fa85accf025b453fa8b711716103dae"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zigpc__zcl__util.html#ga6fa85accf025b453fa8b711716103dae">zigpc_zcl_get_type_size</a> (<a class="el" href="group__zigpc__zcl__definitions.html#ga9c6f4d01fe3bbd394c751f5b132addb2">zigpc_zcl_data_type_t</a> type)</td></tr>
 <tr class="memdesc:ga6fa85accf025b453fa8b711716103dae"><td class="mdescLeft">&#160;</td><td class="mdescRight">zigpc_zcl_get_type_size - retrieve the size (in bytes) of a given ZCL type  <a href="group__zigpc__zcl__util.html#ga6fa85accf025b453fa8b711716103dae">More...</a><br /></td></tr>
 <tr class="separator:ga6fa85accf025b453fa8b711716103dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -242,7 +245,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">zigpc_zcl_data_type_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zigpc__zcl__definitions.html#ga9c6f4d01fe3bbd394c751f5b132addb2">zigpc_zcl_data_type_t</a>&#160;</td>
           <td class="paramname"><em>type</em>, </td>
         </tr>
         <tr>
@@ -287,7 +290,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">zigpc_zcl_data_type_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zigpc__zcl__definitions.html#ga9c6f4d01fe3bbd394c751f5b132addb2">zigpc_zcl_data_type_t</a>&#160;</td>
           <td class="paramname"><em>type</em>, </td>
         </tr>
         <tr>
@@ -378,7 +381,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">size_t zigpc_zcl_get_data_type_size </td>
           <td>(</td>
-          <td class="paramtype">zigpc_zcl_data_type_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zigpc__zcl__definitions.html#ga9c6f4d01fe3bbd394c751f5b132addb2">zigpc_zcl_data_type_t</a>&#160;</td>
           <td class="paramname"><em>type</em></td><td>)</td>
           <td></td>
         </tr>
@@ -405,7 +408,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">size_t zigpc_zcl_get_type_size </td>
           <td>(</td>
-          <td class="paramtype">zigpc_zcl_data_type_t&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zigpc__zcl__definitions.html#ga9c6f4d01fe3bbd394c751f5b132addb2">zigpc_zcl_data_type_t</a>&#160;</td>
           <td class="paramname"><em>type</em></td><td>)</td>
           <td></td>
         </tr>
@@ -428,7 +431,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:05 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:44 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

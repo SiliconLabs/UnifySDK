@@ -21,11 +21,13 @@
 #include "attribute_store_type_registration_internal.h"
 #include "attribute_store_configuration_internal.h"
 #include "attribute_store_validation.h"
+#include "attribute_store_process.h"
 
 // Generic includes
 #include <stdbool.h>
 #include <map>
 #include <set>
+#include <queue>
 #include <string.h>
 #include <assert.h>
 
@@ -51,6 +53,8 @@ std::map<attribute_store_node_t, attribute_store_node *> id_node_map;
 // List of attribute store nodes that we have added/modified, that are not
 // saved yet in the datastore.
 std::set<attribute_store_node_t> node_id_pending_save;
+// List of attribute store nodes that we have deleted from the attribute store
+std::queue<attribute_store_node_t> node_id_pending_deletion;
 
 // Keep track of which ID to assign next in the datastore
 attribute_store_node_t last_assigned_id = ATTRIBUTE_STORE_INVALID_NODE;
@@ -87,12 +91,37 @@ static inline void
  */
 static attribute_store_node_t attribute_store_get_next_id()
 {
+  // Increment at least once.
+  // It will prevent to re-use an id pending deletion in the datastore.
+  // (Add -> Delete -> Re-add before datastore delete is called)
+  last_assigned_id += 1;
+
   while (last_assigned_id == ATTRIBUTE_STORE_INVALID_NODE
          || last_assigned_id == ATTRIBUTE_STORE_ROOT_ID
          || id_node_map.count(last_assigned_id)) {
     last_assigned_id++;
   }
+
   return last_assigned_id;
+}
+
+/**
+ * @brief Decides if we push attribute modifications directly to the datastore
+ * or add it in the pending queue
+ *
+ * Note: Do not use this function when an attribute gets deleted,
+ * only on creation, modification or move.
+ */
+static void attribute_store_store_attribute(attribute_store_node *node)
+{
+  if (node == root_node) {
+    STORE_ROOT_ATTRIBUTE(root_node);
+  } else if (attribute_store_get_auto_save_cooldown_interval() == 0) {
+    STORE_ATTRIBUTE(node);
+  } else {
+    node_id_pending_save.insert(node->id);
+    attribute_store_process_restart_auto_save_cooldown_timer();
+  }
 }
 
 /**
@@ -349,6 +378,30 @@ static sl_status_t
   return save_status;
 }
 
+/**
+ * @brief Deletes all the nodes pending datastore deletion from the datastore
+ *
+ * @returns SL_STATUS_OK if all the nodes pending deletions have been removed
+ * @returns SL_STATUS_FAIL if an error occurred.
+ */
+static sl_status_t attribute_store_delete_pending_deletions_from_datastore()
+{
+  sl_status_t aggregated_status = SL_STATUS_OK;
+  while (false == node_id_pending_deletion.empty()) {
+    attribute_store_node_t node_id_to_delete = node_id_pending_deletion.front();
+    sl_status_t deletion_status = datastore_delete_attribute(node_id_to_delete);
+    if (SL_STATUS_OK != deletion_status) {
+      sl_log_error(LOG_TAG,
+                   "Could not delete ID %d from the datastore.",
+                   node_id_to_delete);
+    }
+    aggregated_status |= deletion_status;
+    node_id_pending_deletion.pop();
+  }
+
+  return aggregated_status;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Init and teardown functions, declared in the attribute_store_fixt.h file
 ///////////////////////////////////////////////////////////////////////////////
@@ -393,6 +446,7 @@ sl_status_t attribute_store_init(void)
 
   if (nullptr != root_node) {
     // Save the root in the datastore:
+    process_start(&unify_attribute_store_process, nullptr);
     STORE_ROOT_ATTRIBUTE(root_node);
     return SL_STATUS_OK;
   }
@@ -425,6 +479,8 @@ int attribute_store_teardown(void)
     // Reset to NULL, so we can detect un-initialized attribute store
     root_node = nullptr;
   }
+
+  process_exit(&unify_attribute_store_process);
   return 0;
 }
 
@@ -434,13 +490,22 @@ int attribute_store_teardown(void)
 sl_status_t attribute_store_save_to_datastore()
 {
   if (root_node != nullptr) {
-    datastore_start_transaction();
-    sl_log_info(LOG_TAG,
-                "Saving %d attributes to the datastore. "
-                "This may take a moment.",
-                node_id_pending_save.size());
-    sl_status_t res = attribute_store_save_node_to_datastore(root_node);
-    datastore_commit_transaction();
+    sl_status_t res = SL_STATUS_OK;
+    if ((false == node_id_pending_save.empty())
+        || (false == node_id_pending_deletion.empty())) {
+      datastore_start_transaction();
+      sl_log_debug(LOG_TAG,
+                   "Saving %d attributes to the datastore. ",
+                   node_id_pending_save.size());
+      res |= attribute_store_save_node_to_datastore(root_node);
+      sl_log_debug(LOG_TAG,
+                   "Deleting %d attributes from the datastore. ",
+                   node_id_pending_deletion.size());
+      res |= attribute_store_delete_pending_deletions_from_datastore();
+      datastore_commit_transaction();
+    }
+    // Tell the process we made a fresh back-up.
+    attribute_store_process_on_attribute_store_saved();
     return res;
   } else {
     log_attribute_store_not_initialized();
@@ -511,11 +576,7 @@ attribute_store_node_t
   // If it worked, save it in the datastore and invoke callbacks
   if (new_node != nullptr) {
     // Save the new node in the database:
-    if (attribute_store_is_auto_save_enabled()) {
-      STORE_ATTRIBUTE(new_node);
-    } else {
-      node_id_pending_save.insert(new_node->id);
-    }
+    attribute_store_store_attribute(new_node);
 
     // Update our local map
     id_node_map[new_node->id] = new_node;
@@ -583,12 +644,13 @@ sl_status_t attribute_store_delete_node(attribute_store_node_t id)
     // Set the node as read-only. No more write operations allowed at this point
     node_to_delete->undergoing_deletion = true;
 
-    // Then delete from our persistent memory, since no write are allowed.
+    // Do not process datastore updates for the node, and mark it for deletion
     node_id_pending_save.erase(node_to_delete->id);
-    if (SL_STATUS_OK != datastore_delete_attribute(node_to_delete->id)) {
-      sl_log_error(LOG_TAG,
-                   "Could not delete ID %d from the datastore.",
-                   node_to_delete->id);
+    node_id_pending_deletion.push(node_to_delete->id);
+    if (attribute_store_get_auto_save_cooldown_interval() == 0) {
+      attribute_store_delete_pending_deletions_from_datastore();
+    } else {
+      attribute_store_process_restart_auto_save_cooldown_timer();
     }
 
     // Fire the callback now, so Attribute Store users have a chance
@@ -728,13 +790,7 @@ sl_status_t attribute_store_set_node_attribute_value(
   }
 
   // Save in the datastore
-  if (node_to_modify == root_node) {
-    STORE_ROOT_ATTRIBUTE(root_node);
-  } else if (attribute_store_is_auto_save_enabled()) {
-    STORE_ATTRIBUTE(node_to_modify);
-  } else {
-    node_id_pending_save.insert(node_to_modify->id);
-  }
+  attribute_store_store_attribute(node_to_modify);
 
   // Invoke callbacks to indicate that something changed.
   attribute_store_invoke_callbacks(node_to_modify->id,
@@ -900,6 +956,30 @@ bool attribute_store_node_exists(attribute_store_node_t id)
   }
 
   return true;
+}
+
+bool attribute_store_is_node_a_child(attribute_store_node_t id,
+                                     attribute_store_node_t parent_id)
+{
+  if (root_node == nullptr) {
+    log_attribute_store_not_initialized();
+    return false;
+  }
+
+  attribute_store_node *node = attribute_store_get_node_from_id(id);
+
+  if (node == nullptr) {
+    return false;
+  }
+
+  while (node->parent_node != nullptr) {
+    if (node->parent_node->id == parent_id) {
+      return true;
+    }
+    node = node->parent_node;
+  }
+
+  return false;
 }
 
 attribute_store_node_t

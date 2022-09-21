@@ -1,0 +1,70 @@
+﻿<?xml version="1.0"?>
+<!--
+ProtocolController
+This is a manufacturer specific cluster.
+-->
+<zcl:cluster
+	xmlns:zcl="http://zigbee.org/zcl/clusters"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:type="http://zigbee.org/zcl/types"
+	xmlns:xi="http://www.w3.org/2001/XInclude"
+	xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+	id="FD12" revision="1" name="ProtocolController-NetworkManagement">
+  <classification role="utility" picsCode="UPCNM" />
+
+  <type:type short="NetworkManagementState" name="NetworkManagementState" id="01">
+     <restriction>
+      <type:sequence>
+        <field name="State" type="NM_State" />
+        <field name="SupportedStateList" type="string" array="true"/>
+        <field name="StateParameters" type="NM_StateParameters" />
+        <field name="RequestedStateParameters" type="string" array="true"/>
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <type:type short="NM_State" name="NM_State" id="02" inheritsFrom="enum8">
+    <restriction>
+        <type:enumeration value="00" name="idle" />
+        <type:enumeration value="01" name="add node" />
+        <type:enumeration value="02" name="remove node" />
+        <type:enumeration value="03" name="join network" />
+        <type:enumeration value="04" name="leave network" />
+        <type:enumeration value="05" name="network repair" />
+        <type:enumeration value="06" name="network update" />
+        <type:enumeration value="07" name="reset" />
+        <type:enumeration value="08" name="scan mode" />
+      </restriction>
+  </type:type>
+
+  <type:type short="NM_StateParameters" name="NM_StateParameters" id="03">
+     <restriction>
+      <type:sequence>
+        <field name="ProvisioningMode" type="string" />
+        <field name="UserAccept" type="bool" />
+        <field name="SecurityCode" type="string" />
+        <field name="Unid" type="string" />
+        <field name="AllowMultipleInclusions" type="bool" />
+      </type:sequence>
+    </restriction>
+  </type:type>
+
+  <server>
+    <attributes>
+      <attribute id="0001" name="NetworkManagementState" type="NetworkManagementState"/>
+    </attributes>
+
+    <commands>
+      <command id="01" name="Write">
+			<fields>
+				<restriction>
+          <type:sequence>
+            <field name="AttributeIdentifier" type="attribId" />
+				    <field name="Attribute" type="anyType" />
+          </type:sequence>
+        </restriction>
+			</fields>
+		</command>
+    </commands>
+  </server>
+</zcl:cluster>

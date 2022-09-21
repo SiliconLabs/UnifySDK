@@ -7,7 +7,10 @@ var group__unify__components =
     [ "Unify Configuration System", "group__unify__config.html", "group__unify__config" ],
     [ "The Contiki RTOS", "group__contiki.html", "group__contiki" ],
     [ "Unify Datastore", "group__unify__datastore.html", "group__unify__datastore" ],
-    [ "Uic_gbl_interface", "group__uic__gbl__interface.html", "group__uic__gbl__interface" ],
+    [ "ZAP (ZigBee Automation Platform)", "group__zap.html", "group__zap" ],
+    [ "Attribute Store Registration for UCL DotDot Attributes", "group__uic__dotdot__attribute__store__registration.html", "group__uic__dotdot__attribute__store__registration" ],
+    [ "DotDot Serializer", "group__dotdot__mqtt.html", "group__dotdot__mqtt" ],
+    [ "Unify GBL Interface", "group__uic__gbl__interface.html", "group__uic__gbl__interface" ],
     [ "Unify Logging system", "group__sl__log.html", "group__sl__log" ],
     [ "Main Function for Contiki", "group__uic__main.html", "group__uic__main" ],
     [ "Unify MQTT Client", "group__uic__mqtt.html", "group__uic__mqtt" ],
@@ -16,6 +19,7 @@ var group__unify__components =
     [ "Unify SmartStart Management", "group__unify__smartstart__management.html", "group__unify__smartstart__management" ],
     [ "Unify Stdin", "group__uic__stdin.html", "group__uic__stdin" ],
     [ "Attribute Poll Engine", "group__attribute__poll.html", "group__attribute__poll" ],
+    [ "Unify_node_state_monitor", "group__unify__node__state__monitor.html", "group__unify__node__state__monitor" ],
     [ "Unify Validator component", "group__uic__validator.html", "group__uic__validator" ],
     [ "Unify definitions", "group__unify__definitions.html", "group__unify__definitions" ]
 ];

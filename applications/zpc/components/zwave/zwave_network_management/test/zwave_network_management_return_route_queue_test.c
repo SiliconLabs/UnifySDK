@@ -213,7 +213,36 @@ void test_zwave_api_reject_request()
   on_assign_return_route_complete(0);
   reset_nms_last_operation_data_Expect();
   contiki_test_helper_run(1);
+
+  // 1->1 has just been assigned, it should be in cooldown, nothing happens.
+  request.node_id             = 1;
+  request.destination_node_id = 1;
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    zwave_network_management_return_route_add_to_queue(&request));
+  contiki_test_helper_run(1);
+
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  TEST_ASSERT_FALSE(we_have_return_routes_to_assign(1));
+
+  // Now pass the cooldown and try to assign again
+  contiki_test_helper_run(ASSIGN_RETURN_ROUTE_COOLDOWN);
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    zwave_network_management_return_route_add_to_queue(&request));
+
+  // Now it should assign 1->1, when we run the events.
+  // Z-Wave API will reject the first request:
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  zwapi_assign_return_route_ExpectAndReturn(1,
+                                            1,
+                                            &on_assign_return_route_complete,
+                                            SL_STATUS_OK);
+  contiki_test_helper_run(1);
+  TEST_ASSERT_EQUAL(NM_ASSIGNING_RETURN_ROUTE,
+                    zwave_network_management_get_state());
 }
 
 void test_zwave_network_management_abort()

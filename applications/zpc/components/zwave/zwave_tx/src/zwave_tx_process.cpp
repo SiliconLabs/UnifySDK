@@ -15,6 +15,7 @@
 #include "zwave_tx.h"
 #include "zwave_tx_process.h"
 #include "zwave_tx_callbacks.h"
+#include "zwave_tx_route_cache.h"
 #include "zwave_tx_queue.hpp"
 #include "zwave_tx_state_logging.h"
 #include "zwave_tx_incoming_frames.hpp"
@@ -24,6 +25,7 @@
 #include "zwave_tx_groups.h"
 #include "zwave_controller_internal.h"
 #include "zwave_controller_transport.h"
+#include "zwave_network_management.h"
 
 // Constants
 static constexpr char LOG_TAG[] = "zwave_tx_process";
@@ -51,6 +53,25 @@ zwave_tx_queue tx_queue;  // zwave_tx.cpp uses the tx_queue.
 // Forward declarations
 static void zwave_tx_message_transmission_completed_step(
   zwave_tx_session_id_t session_id);
+
+/**
+ * @brief Checks if the protocol is busy sending frames already
+ *
+ * @returns true if the protocol carries an operation that is sending or
+ * expecting frames where we should back-off, false otherwise
+ */
+static bool zwave_tx_is_protocol_sending_frames()
+{
+  zwave_network_management_state_t zwave_network_management_state
+    = zwave_network_management_get_state();
+  if (NM_ASSIGNING_RETURN_ROUTE == zwave_network_management_state) {
+    return true;
+  } else if (NM_NEIGHBOR_DISCOVERY_ONGOING == zwave_network_management_state) {
+    return true;
+  }
+
+  return false;
+}
 
 /**
  * @brief Used if the current message should be dropped
@@ -145,7 +166,10 @@ static void zwave_tx_resume_from_backoff_step()
     if (backoff_reason == BACKOFF_CURRENT_SESSION_ID) {
       // Remove from the queue and make the correct state transision.
       zwave_tx_finalize_element(current_tx_session_id);
-    } else if (backoff_reason == BACKOFF_EXPECTED_ADDITIONAL_FRAMES) {
+    } else if ((backoff_reason == BACKOFF_EXPECTED_ADDITIONAL_FRAMES)
+               || (backoff_reason == BACKOFF_PROTOCOL_SENDING_FRAMES)
+               || (backoff_reason
+                   == BACKOFF_INCOMING_UNSOLICITED_ROUTED_FRAME)) {
       // Move back to IDLE
       state = ZWAVE_TX_STATE_IDLE;
     }
@@ -401,10 +425,23 @@ void zwave_tx_process_inspect_received_frame(zwave_node_id_t node_id)
     return;
   }
 
-  // Else here, we backed off due to our current frame:
-  if (state == ZWAVE_TX_STATE_IDLE) {
+  // If we are idle and received an unsolicited routed frame, initiate a back-off
+  // If we were backing off due to unsolicited routed frame, restart the back-off
+  if ((state == ZWAVE_TX_STATE_IDLE)
+      || ((state == ZWAVE_TX_STATE_BACKOFF)
+          && (backoff_reason == BACKOFF_INCOMING_UNSOLICITED_ROUTED_FRAME))) {
+    uint8_t repeaters = zwave_tx_route_cache_get_number_of_repeaters(node_id);
+    if (repeaters > 0) {
+      // Extra back-off will be 10ms + (number of links in the route) * 10ms.
+      const clock_time_t backoff_time = 10 * (1 + (repeaters + 1) * 2);
+      zwave_tx_process_initiate_backoff(
+        backoff_time,
+        BACKOFF_INCOMING_UNSOLICITED_ROUTED_FRAME);
+    }
     return;
   }
+
+  // Else here, we backed off due to our current frame:
   zwave_tx_queue_element_t current_element;
   if (SL_STATUS_OK
       != tx_queue.get_by_id(&current_element, current_tx_session_id)) {
@@ -412,7 +449,8 @@ void zwave_tx_process_inspect_received_frame(zwave_node_id_t node_id)
   }
 
   // We only match the destination NodeID, not the payload.
-  if (node_id == current_element.connection_info.remote.node_id) {
+  if ((backoff_reason == BACKOFF_CURRENT_SESSION_ID)
+      && (node_id == current_element.connection_info.remote.node_id)) {
     // Is that the last or do we need more replies?
     if (current_element.options.number_of_responses <= 1) {
       //We got the last needed reply:
@@ -511,14 +549,19 @@ sl_status_t zwave_tx_process_flush_queue_reset_step()
 
 void zwave_tx_process_check_queue()
 {
+  // Check if we want to back-off
+  const clock_time_t backoff_time = 1 * CLOCK_SECOND;
   if ((ZWAVE_TX_STATE_IDLE == state) && (!expected_incoming_frames.empty())) {
     // We are idle and just expect some frames. Just make an additional back-off
     // It could be nice here to determine the length of the back-off based on the
     // number of frames / average transmission time with the nodes that are about
     // to send us something.
-    clock_time_t backoff_time = 1 * CLOCK_SECOND;
     zwave_tx_process_initiate_backoff(backoff_time,
                                       BACKOFF_EXPECTED_ADDITIONAL_FRAMES);
+  } else if ((ZWAVE_TX_STATE_BACKOFF != state)
+             && (zwave_tx_is_protocol_sending_frames())) {
+    zwave_tx_process_initiate_backoff(backoff_time,
+                                      BACKOFF_PROTOCOL_SENDING_FRAMES);
   }
 
   if (ZWAVE_TX_STATE_BACKOFF != state && !tx_queue.empty()) {
@@ -557,6 +600,7 @@ PROCESS_THREAD(zwave_tx_process, ev, data)
       tx_queue.clear();
       expected_incoming_frames.clear();
       zwave_tx_init();
+      zwave_tx_route_cache_init();
       zwave_tx_process_open_tx_queue();
       sl_log_info(LOG_TAG, "Z-Wave Tx process initialized.\n");
 
@@ -588,9 +632,7 @@ PROCESS_THREAD(zwave_tx_process, ev, data)
     } else if (ev == PROCESS_EVENT_TIMER) {
       if (data == &backoff_timer) {
         sl_log_debug(LOG_TAG,
-                     "Tx backoff timer expired. Did not get all expected "
-                     "answer(s) for frame id=%p.\n",
-                     current_tx_session_id);
+                     "Tx backoff timer expired. Resuming from back-off.\n");
         zwave_tx_resume_from_backoff_step();
       }
     } else {

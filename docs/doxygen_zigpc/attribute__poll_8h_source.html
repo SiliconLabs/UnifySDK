@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('attribute__poll_8h_source.html',''); i
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="group__attribute__poll.html#ga0a7e267c7b54500983ac56f26ebfe1a3">   66</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__attribute__poll.html#ga0a7e267c7b54500983ac56f26ebfe1a3">attribute_poll_schedule</a>(<a class="code" href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a> node);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="group__attribute__poll.html#ga5c93fe34d6b2868d5bd1aa1b525c3e75">   73</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__attribute__poll.html#ga5c93fe34d6b2868d5bd1aa1b525c3e75">attribute_poll_init</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="group__attribute__poll.html#gaf500a936f7681850bacd495b70020f9b">   73</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__attribute__poll.html#gaf500a936f7681850bacd495b70020f9b">attribute_poll_init</a>(<a class="code" href="classuint32__t.html">uint32_t</a> backoff, <a class="code" href="classuint32__t.html">uint32_t</a> default_interval);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="group__attribute__poll.html#gab8144e43a05346cf9c8266bacf5d3815">   82</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__attribute__poll.html#gab8144e43a05346cf9c8266bacf5d3815">attribute_poll_disable</a>();</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
@@ -133,7 +133,6 @@ $(document).ready(function(){initNavTree('attribute__poll_8h_source.html',''); i
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="agroup__attribute__poll_html_ga5c93fe34d6b2868d5bd1aa1b525c3e75"><div class="ttname"><a href="group__attribute__poll.html#ga5c93fe34d6b2868d5bd1aa1b525c3e75">attribute_poll_init</a></div><div class="ttdeci">sl_status_t attribute_poll_init()</div><div class="ttdoc">Initialize the attribute poll engine.</div></div>
 <div class="ttc" id="aattribute__store_8h_html"><div class="ttname"><a href="attribute__store_8h.html">attribute_store.h</a></div></div>
 <div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:139</div></div>
 <div class="ttc" id="agroup__attribute__store__api_html_ga66c4c40720e5271c527c718924261fc6"><div class="ttname"><a href="group__attribute__store__api.html#ga66c4c40720e5271c527c718924261fc6">attribute_store_node_t</a></div><div class="ttdeci">datastore_attribute_id_t attribute_store_node_t</div><div class="ttdoc">Handle to identify attribute store nodes.</div><div class="ttdef"><b>Definition:</b> attribute_store.h:101</div></div>
@@ -144,11 +143,12 @@ $(document).ready(function(){initNavTree('attribute__poll_8h_source.html',''); i
 <div class="ttc" id="aclassuint32__t_html"><div class="ttname"><a href="classuint32__t.html">uint32_t</a></div></div>
 <div class="ttc" id="agroup__attribute__poll_html_ga0a7e267c7b54500983ac56f26ebfe1a3"><div class="ttname"><a href="group__attribute__poll.html#ga0a7e267c7b54500983ac56f26ebfe1a3">attribute_poll_schedule</a></div><div class="ttdeci">sl_status_t attribute_poll_schedule(attribute_store_node_t node)</div><div class="ttdoc">Schedule a poll as soon as possible.</div></div>
 <div class="ttc" id="agroup__attribute__poll_html_gab8144e43a05346cf9c8266bacf5d3815"><div class="ttname"><a href="group__attribute__poll.html#gab8144e43a05346cf9c8266bacf5d3815">attribute_poll_disable</a></div><div class="ttdeci">sl_status_t attribute_poll_disable()</div><div class="ttdoc">Disable the Poll Engine.</div></div>
+<div class="ttc" id="agroup__attribute__poll_html_gaf500a936f7681850bacd495b70020f9b"><div class="ttname"><a href="group__attribute__poll.html#gaf500a936f7681850bacd495b70020f9b">attribute_poll_init</a></div><div class="ttdeci">sl_status_t attribute_poll_init(uint32_t backoff, uint32_t default_interval)</div><div class="ttdoc">Initialize the attribute poll engine.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_7b00dbf5ead577980f53c854973806c1.html">unify_attribute_poll</a></li><li class="navelem"><a class="el" href="dir_f99281d2c8a4408dd2f7d4d6a33eadf2.html">include</a></li><li class="navelem"><a class="el" href="attribute__poll_8h.html">attribute_poll.h</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:01 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:43 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

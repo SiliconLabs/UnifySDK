@@ -240,7 +240,10 @@ static bool datastore_contains_internal(const char *table,
 sl_status_t datastore_start_transaction()
 {
   if (ongoing_transaction) {
-    sl_log_info(LOG_TAG, "another transaction still ongoing");
+    sl_log_warning(LOG_TAG,
+                   "Attempt to start a new transaction while another is still "
+                   "ongoing. Verify that transactions are started and "
+                   "ended correctly.");
     return SL_STATUS_IN_PROGRESS;
   }
 

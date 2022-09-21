@@ -35,7 +35,7 @@
 static constexpr char LOG_TAG[] = "dotdot_mqtt";
 
 template<typename Type>
-Type get_enum_decimal_value(std::string key, nlohmann::json &jsn)
+Type get_enum_decimal_value(const std::string &key, nlohmann::json &jsn)
 {
   if (jsn[key].is_number_integer()) {
     return jsn[key].get<Type>();
@@ -117,7 +117,8 @@ std::string get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCase
   if (command_with_no_fields == true) {
     return std::string("{}");
   }
-  return json_payload.dump();
+  // Payload may contain data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  return json_payload.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
 }
 
 {{!-- START OF Command parser template --}}

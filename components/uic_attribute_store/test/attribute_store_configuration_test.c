@@ -45,8 +45,8 @@ int suiteTearDown(int num_failures)
 
 void test_uic_attribute_store_configuration_auto_save_teardown_test()
 {
-  // Start with Auto-Save
-  attribute_store_configuration_set_auto_save(true);
+  // Start with Auto-Save in the agressive mode (i.e. slow)
+  attribute_store_configuration_set_auto_save_cooldown_interval(0);
 
   // Create a network
   attribute_store_node_t root_node = attribute_store_get_root();
@@ -59,8 +59,8 @@ void test_uic_attribute_store_configuration_auto_save_teardown_test()
                                            &value,
                                            sizeof(value));
 
-  // Disable auto-save:
-  attribute_store_configuration_set_auto_save(false);
+  // Disable auto-save, configure it to save every 20 seconds
+  attribute_store_configuration_set_auto_save_cooldown_interval(20);
 
   value = 199;
   attribute_store_set_node_attribute_value(test_node,

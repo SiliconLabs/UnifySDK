@@ -18,8 +18,10 @@
 #include "zwave_network_management.h"
 #include "zwave_network_management_process.h"
 #include "zwave_network_management_return_route_queue.h"
+#include "zwave_network_management_helpers.h"
 #include "nm_state_machine.h"
 
+#include "zwave_controller.h"
 #include "zwave_controller_types.h"
 #include "zwapi_protocol_controller.h"
 #include "zwave_s2_keystore.h"
@@ -57,12 +59,13 @@ sl_status_t zwave_network_management_add_node_with_dsk(
   zwave_keyset_t granted_keys,
   zwave_protocol_t preferred_inclusion)
 {
-  if (nms.state != NM_IDLE) {
+  if (false == network_management_is_ready_for_a_new_operation()) {
     sl_log_info(LOG_TAG,
-                "Network management is busy. "
+                "Network management is not ready for a new operation. "
                 "Ignoring Add node with DSK request.\n");
-    return SL_STATUS_BUSY;
+    return SL_STATUS_FAIL;
   }
+
   memcpy(smartstart_event_data.dsk, dsk, sizeof(zwave_dsk_t));
   smartstart_event_data.granted_keys        = granted_keys;
   smartstart_event_data.preferred_inclusion = preferred_inclusion;
@@ -95,12 +98,13 @@ sl_status_t zwave_network_management_set_default()
 
 sl_status_t zwave_network_management_remove_failed(zwave_node_id_t node_id)
 {
-  if (nms.state != NM_IDLE) {
+  if (false == network_management_is_ready_for_a_new_operation()) {
     sl_log_info(LOG_TAG,
-                "Network management is busy. "
+                "Network management is not ready for a new operation. "
                 "Ignoring Remove Failed node request.\n");
-    return SL_STATUS_BUSY;
+    return SL_STATUS_FAIL;
   }
+
   sl_log_info(LOG_TAG,
               "Initiating a Remove Offline operation for NodeID: %d\n",
               node_id);
@@ -111,12 +115,13 @@ sl_status_t zwave_network_management_remove_failed(zwave_node_id_t node_id)
 
 sl_status_t zwave_network_management_remove_node()
 {
-  if (nms.state != NM_IDLE) {
+  if (false == network_management_is_ready_for_a_new_operation()) {
     sl_log_info(LOG_TAG,
-                "Network management is busy. "
-                "Ignoring Remove node request.\n");
-    return SL_STATUS_BUSY;
+                "Network management is not ready for a new operation. "
+                "Ignoring Remove Node request.\n");
+    return SL_STATUS_FAIL;
   }
+
   sl_log_info(LOG_TAG, "Initiating a Z-Wave Network Exclusion\n");
   process_post(&zwave_network_management_process, NM_EV_NODE_REMOVE, 0);
   return SL_STATUS_OK;
@@ -153,12 +158,13 @@ sl_status_t zwave_network_management_abort()
 
 sl_status_t zwave_network_management_add_node()
 {
-  if (nms.state != NM_IDLE) {
+  if (false == network_management_is_ready_for_a_new_operation()) {
     sl_log_info(LOG_TAG,
-                "Network management is busy. "
+                "Network management is not ready for a new operation. "
                 "Ignoring Add node request.\n");
-    return SL_STATUS_BUSY;
+    return SL_STATUS_FAIL;
   }
+
   sl_log_info(LOG_TAG, "Initiating a Z-Wave Network Inclusion\n");
   process_post(&zwave_network_management_process, NM_EV_NODE_ADD, 0);
   return SL_STATUS_OK;
@@ -206,11 +212,11 @@ sl_status_t zwave_network_management_learn_mode(zwave_learn_mode_t mode)
     return SL_STATUS_OK;
   }
 
-  if (nms.state != NM_IDLE) {
+  if (false == network_management_is_ready_for_a_new_operation()) {
     sl_log_info(LOG_TAG,
-                "Network management is busy. "
+                "Network management is not ready for a new operation. "
                 "Ignoring Learn Mode request.\n");
-    return SL_STATUS_BUSY;
+    return SL_STATUS_FAIL;
   }
 
   nms.learn_mode_intent = mode;
@@ -229,11 +235,22 @@ bool zwave_network_management_is_zpc_sis()
   return we_have_the_sis_role;
 }
 
+bool zwave_network_management_is_protocol_sending_frames_to_node(
+  zwave_node_id_t node_id)
+{
+  return (we_have_return_routes_to_assign(node_id)
+          || (nms.state == NM_NEIGHBOR_DISCOVERY_ONGOING
+              && nms.node_id_being_handled == node_id));
+}
+
 sl_status_t zwave_network_management_request_node_neighbor_discovery(
   zwave_node_id_t node_id)
 {
-  if (nms.state != NM_IDLE) {
-    return SL_STATUS_BUSY;
+  if (false == network_management_is_ready_for_a_new_operation()) {
+    sl_log_info(LOG_TAG,
+                "Network management is not ready for a new operation. "
+                "Ignoring Request node neighbor request.\n");
+    return SL_STATUS_FAIL;
   }
 
   process_post(&zwave_network_management_process,
@@ -246,8 +263,11 @@ sl_status_t zwave_network_management_request_node_neighbor_discovery(
 sl_status_t zwave_network_management_start_proxy_inclusion(
   zwave_node_id_t node_id, zwave_node_info_t nif, uint8_t inclusion_step)
 {
-  if (nms.state != NM_IDLE) {
-    return SL_STATUS_BUSY;
+  if (false == network_management_is_ready_for_a_new_operation()) {
+    sl_log_info(LOG_TAG,
+                "Network management is not ready for a new operation. "
+                "Ignoring start proxy inclusion request.\n");
+    return SL_STATUS_FAIL;
   }
   nms.node_id_being_handled = node_id;
   nms.flags                 = 0;
@@ -262,10 +282,15 @@ sl_status_t zwave_network_management_start_proxy_inclusion(
 sl_status_t zwave_network_management_assign_return_route(
   zwave_node_id_t node_id, zwave_node_id_t destination_node_id)
 {
+  if (zwave_controller_is_reset_ongoing()) {
+    sl_log_debug(LOG_TAG,
+                 "Z-Wave controller is resetting."
+                 "Ignoring Assign Return Route request.\n");
+    return SL_STATUS_FAIL;
+  }
+
   assign_return_route_t assign_return_request
-    = {.node_id             = node_id,
-       .destination_node_id = destination_node_id,
-       .in_progress         = false};
+    = {.node_id = node_id, .destination_node_id = destination_node_id};
   return zwave_network_management_return_route_add_to_queue(
     &assign_return_request);
 }
@@ -286,6 +311,18 @@ zwave_home_id_t zwave_network_management_get_home_id()
 zwave_node_id_t zwave_network_management_get_node_id()
 {
   return nms.cached_local_node_id;
+}
+
+uint16_t zwave_network_management_get_network_size()
+{
+  uint16_t number_of_nodes = 0;
+  for (zwave_node_id_t n = ZW_MIN_NODE_ID; n <= ZW_LR_MAX_NODE_ID; n++) {
+    if (ZW_IS_NODE_IN_MASK(n, nms.cached_node_list)) {
+      number_of_nodes += 1;
+    }
+  }
+
+  return number_of_nodes;
 }
 
 void zwave_network_management_get_network_node_list(zwave_nodemask_t node_list)

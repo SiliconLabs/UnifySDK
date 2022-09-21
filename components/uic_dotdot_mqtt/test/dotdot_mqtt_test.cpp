@@ -1015,6 +1015,73 @@ void test_dotdot_mqtt_test_publish_monotonous_struct_array_attribute()
   TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
 }
 
+void test_dotdot_mqtt_test_publish_configuration_parameters_attribute()
+{
+  static const char info_str[]         = {'h',
+                                          'e',
+                                          'l',
+                                          'l',
+                                          'o',
+                                          ' ',
+                                          'w',
+                                          'o',
+                                          'r',
+                                          'l',
+                                          'd',
+                                          static_cast<char>(0xa2),
+                                          0};
+  const char *base_topic               = "ucl/by-location/Kitchen";
+  const ConfigurationParameter value[] = {{
+    .ParameterId          = 1,
+    .Value                = 23,
+    .Name                 = "Parameter 1",
+    .Info                 = info_str,
+    .MinimumValue         = 0,
+    .MaximumValue         = 100,
+    .DefaultValue         = 1,
+    .DisplayFormat        = 0,
+    .ReadOnly             = false,
+    .Advanced             = false,
+    .AlteringCapabilities = false,
+  }};
+
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_OK,
+    uic_mqtt_dotdot_configuration_parameters_configuration_parameters_publish(
+      base_topic,
+      1,
+      value,
+      UCL_MQTT_PUBLISH_TYPE_REPORTED));
+
+  const char *expected_topic
+    = "ucl/by-location/Kitchen/ConfigurationParameters/Attributes/"
+      "ConfigurationParameters/Reported";
+
+  char published_message[1000] = {};
+  TEST_ASSERT_NOT_NULL(
+    mqtt_test_helper_pop_publish(expected_topic, published_message));
+
+  const char expected_published_message[] = R"({
+  "value": [
+    {
+      "ParameterId": 1,
+      "Value": 23,
+      "Name": "Parameter 1",
+      "Info": "hello world�",
+      "DisplayFormat": 0,
+      "MinimumValue": 0,
+      "MaximumValue": 100,
+      "DefaultValue": 1,
+      "ReadOnly": false,
+      "Advanced": false,
+      "AlteringCapabilities": false
+    }
+  ]
+})";
+
+  TEST_ASSERT_EQUAL_JSON(expected_published_message, published_message);
+}
+
 void test_dotdot_mqtt_test_publish_generated_aox_angle_report()
 {
   const dotdot_unid_t unid      = "ble-1334";

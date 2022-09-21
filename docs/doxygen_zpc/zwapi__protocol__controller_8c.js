@@ -13,7 +13,7 @@ var zwapi__protocol__controller_8c =
     [ "zwapi_get_priority_route", "group__ZWAPI__CONTROLLER.html#ga96d2223f3b07ebcdea76c9719518a83a", null ],
     [ "zwapi_get_protocol_info", "group__ZWAPI__CONTROLLER.html#ga36f9cc653f890606e5d482ecef45a6b8", null ],
     [ "zwapi_get_suc_node_id", "group__ZWAPI__CONTROLLER.html#gab4889f7c87ff9da037203fb99a6e5189", null ],
-    [ "zwapi_get_virtual_nodes", "zwapi__protocol__controller_8c.html#af29dbaa1776401db71af7817b88a78b2", null ],
+    [ "zwapi_get_virtual_nodes", "group__ZWAPI__CONTROLLER.html#ga113990b4e0cc7159ade5a9273a4fe79d", null ],
     [ "zwapi_is_node_failed", "group__ZWAPI__CONTROLLER.html#gab3e61d986c2d186deb45b535cefabb38", null ],
     [ "zwapi_is_node_primary_ctrl", "group__ZWAPI__CONTROLLER.html#gad2510dfcd8ed49f52c05ea5421626f1b", null ],
     [ "zwapi_remove_failed_node", "group__ZWAPI__CONTROLLER.html#gac21344422be9ce06ad84438f12c1e466", null ],

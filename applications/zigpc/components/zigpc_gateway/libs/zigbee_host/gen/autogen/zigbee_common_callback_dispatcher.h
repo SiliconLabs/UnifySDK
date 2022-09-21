@@ -25,7 +25,6 @@
 void emAfEventInit(void);
 void emAfZclFrameworkCoreInitEventsCallback(uint8_t init_level);
 void emAfServiceDiscoveryInitEventsCallback(uint8_t init_level);
-void emberAfPluginGatewayInitCallback(uint8_t init_level);
 void emAfPluginNetworkSteeringInitCallback(uint8_t init_level);
 void emberAfPluginReportingInitCallback(uint8_t init_level);
 void emAfPluginScanDispatchInitCallback(uint8_t init_level);
@@ -38,6 +37,7 @@ void emberAfPluginConcentratorInitCallback(uint8_t init_level);
 // Init done
 void emAfInitDone(void);
 void emAfInitCallback(uint8_t init_level);
+void sli_zigbee_zcl_cli_init(uint8_t init_level);
 void emberAfInit(uint8_t init_level);
 void emberAfPluginCountersInitCallback(uint8_t init_level);
 void emberAfPluginGatewayInitCallback(uint8_t init_level);
@@ -49,6 +49,7 @@ void emAfNetworkInit(uint8_t init_level);
 
 // Tick
 void emAfTick(void);
+void emberAfPluginGatewayTickCallback(void);
 void emAfHostFrameworkTick(void);
 void emberAfOtaServerTick(void);
 

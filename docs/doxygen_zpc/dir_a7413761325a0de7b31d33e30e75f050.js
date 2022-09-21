@@ -7,6 +7,7 @@ var dir_a7413761325a0de7b31d33e30e75f050 =
     [ "zwave_command_class_association_internals.h", "zwave__command__class__association__internals_8h.html", "zwave__command__class__association__internals_8h" ],
     [ "zwave_command_class_basic.c", "zwave__command__class__basic_8c.html", "zwave__command__class__basic_8c" ],
     [ "zwave_command_class_basic.h", "zwave__command__class__basic_8h.html", "zwave__command__class__basic_8h" ],
+    [ "zwave_command_class_battery.h", "zwave__command__class__battery_8h.html", "zwave__command__class__battery_8h" ],
     [ "zwave_command_class_binary_switch.c", "zwave__command__class__binary__switch_8c.html", "zwave__command__class__binary__switch_8c" ],
     [ "zwave_command_class_binary_switch.h", "zwave__command__class__binary__switch_8h.html", "zwave__command__class__binary__switch_8h" ],
     [ "zwave_command_class_central_scene.c", "zwave__command__class__central__scene_8c.html", "zwave__command__class__central__scene_8c" ],

@@ -29,14 +29,40 @@
 #include "sl_status.h"
 #include "zwave_node_id_definitions.h"
 
-// Size of the Assign Return Route queue.
-#define ASSIGN_RETURN_ROUTE_QUEUE_SIZE 5
+// Contiki
+#include "clock.h"
+
+// Size of the Assign Return Route queue. Note that this amount represents
+// the amount of return routes we will allow to establish
+// per ASSIGN_RETURN_ROUTE_COOLDOWN ms periods.
+#define ASSIGN_RETURN_ROUTE_QUEUE_SIZE 10
+
+// Time in ms that we should wait before we re-assign a previously assigned
+// return route. It prevents to assign duplicates, e.g. in case
+// associations are being flickered.
+#define ASSIGN_RETURN_ROUTE_COOLDOWN 60000
+
+typedef enum {
+  /// The entry is unassigned.
+  ROUTE_STATE_UNASSIGNED_ENTRY,
+  /// The entry is in use, but the return route has not been assigned yet
+  ROUTE_STATE_NOT_ESTABLISHED,
+  /// The entry is in use, and the return route is being established.
+  ROUTE_STATE_IN_PROGRESS,
+  /// The entry is in use, the return route has been established and we wait
+  /// a cooldown period before we re-use this entry.
+  ROUTE_STATE_ESTABLISHED
+} route_state_t;
 
 typedef struct _assign_return_route_ {
+  // Source NodeID
   zwave_node_id_t node_id;
+  // Destination NodeID
   zwave_node_id_t destination_node_id;
-  // Flag that indicates if we requested the Z-Wave API to assign this route
-  bool in_progress;
+  // State for the entry
+  route_state_t state;
+  // Timestamp indicating when we can reuse this entry.
+  clock_time_t reuse_timestamp;
 } assign_return_route_t;
 
 #ifdef __cplusplus

@@ -26,6 +26,7 @@
 #include <string>
 #include <functional>
 #include <map>
+#include <optional>
 
 {{#zcl_enums}}
 #define {{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE 1

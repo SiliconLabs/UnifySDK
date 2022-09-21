@@ -382,7 +382,7 @@ bool zwave_command_class_agi_group_contains_listeners(
                                            &group_command_list_length);
 
   // Is there a Command Class / Command pair that we want to listen to ?
-  for (auto [command_class, command]: agi_listeners) {
+  for (const auto &[command_class, command]: agi_listeners) {
     if (true
         == is_command_in_array(command_class,
                                command,

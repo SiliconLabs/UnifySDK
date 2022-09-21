@@ -933,7 +933,7 @@ sl_status_t zwapi_set_virtual_node_to_learn_mode(
  *
  * @zgw_name ZW_GetVirtualNodes
  */
-sl_status_t zwapi_get_virtual_nodes(uint8_t *nodeMask);
+sl_status_t zwapi_get_virtual_nodes(zwave_nodemask_t nodeMask);
 
 /**
  * @brief Read out neighbor information

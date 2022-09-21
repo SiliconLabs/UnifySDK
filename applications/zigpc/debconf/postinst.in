@@ -1,10 +1,9 @@
-#!/bin/sh
+#!/bin/sh -e
 # postinst script for uic
 #
 # see: dh_installdeb(1)
 
 . /usr/share/debconf/confmodule
-set -e
 
 # ZigPC data directories
 UIC_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic"
@@ -40,9 +39,9 @@ fix_permissions() {
 
 enable_start_uic_zigpc() {
   if type "systemctl" >/dev/null; then
-    systemctl --system daemon-reload
-    systemctl start uic-zigpc
-    systemctl enable uic-zigpc
+    systemctl --system daemon-reload || true
+    systemctl start uic-zigpc || true
+    systemctl enable uic-zigpc || true
   fi
 }
 
@@ -54,14 +53,12 @@ handle_conf() {
     echo "  datastore_file: $ZIGPC_DEFAULT_CFG_DATSTORE_FILE" >> $UIC_CONFFILE
   fi
 
-  db_go
   db_get uic-zigpc/serial_port
   CFG_ZIGPC_SERIAL="$RET"
   if [ "$RET" = "" ]; then
     CFG_ZIGPC_SERIAL="$ZIGPC_DEFAULT_CFG_SERIAL"
   fi
 
-  db_go
   db_get uic-zigpc/datastore_file
   CFG_DATASTORE_FILE="$RET"
   if [ "$RET" = "" ]; then
@@ -110,6 +107,7 @@ handle_conf() {
   echo "==="
   cat "$UIC_CONFFILE"
   echo "==="
+  
 }
 
 case "$1" in

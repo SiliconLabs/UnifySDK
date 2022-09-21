@@ -58,7 +58,7 @@ struct ast_tree : public std::vector<ast_node> {};
 enum operator_ids {
   operator_plus,
   operator_minus,
-  operator_comp,
+  operator_equals,
   operator_mult,
   operator_div,
   operator_bitand,
@@ -69,6 +69,7 @@ enum operator_ids {
   operator_or,
   operator_modulo,
   operator_exponent,
+  operator_neq,
 };
 
 /**

@@ -17,6 +17,7 @@
 #include "zwave_tx_queue.hpp"
 
 // Includes from other components
+#include "zwave_tx_groups.h"
 #include "sl_log.h"
 
 // Generic includes
@@ -253,6 +254,26 @@ sl_status_t
     return SL_STATUS_OK;
   }
   return SL_STATUS_NOT_FOUND;
+}
+
+bool zwave_tx_queue::zwave_tx_has_frames_for_node(const zwave_node_id_t node_id)
+{
+  for (auto it = queue.begin(); it != queue.end(); ++it) {
+    // If singlecast, just check the NodeID
+    if ((it->connection_info.remote.is_multicast == false)
+        && (it->connection_info.remote.node_id == node_id)) {
+      return true;
+    }
+    // If multicast, check if the NodeID is part of the group
+    if (it->connection_info.remote.is_multicast == true) {
+      zwave_nodemask_t nodes = {};
+      zwave_tx_get_nodes(nodes, it->connection_info.remote.multicast_group);
+      if (ZW_IS_NODE_IN_MASK(node_id, nodes)) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -31,7 +31,8 @@ For installing please refer to the general installation method in
 ### Using Systemd Service
 
 The best way to run the UPVL is using the Systemd service that is installed with
-the Debian installer. For more information, see [Unify User guide](../../doc/unify_readme_user.md).
+the Debian installer. For more information, see
+[Unify Framework User guide](../../doc/unify_readme_user.md).
 
 ### Using Command Line
 
@@ -42,7 +43,7 @@ options. For more details about the options, run `uic-upvl --help`.
 Make sure that you do not run the UPVL both as a service and using the
 command line.
 
-```bash
+```console
 pi@unify:~ $ service uic-upvl status
 ● uic-upvl.service - Unify Framework Provisioning List
      Loaded: loaded (/lib/systemd/system/uic-upvl.service; enabled; vendor preset: enabled)
@@ -69,7 +70,7 @@ Feb 02 09:20:09 ubunty200402 uic-upvl[1736]: 2022-Feb-02 09:20:09.348156 <i> [up
 If the service is running, stop it using the following command before
 you run the application manually:
 
-```bash
+```console
 pi@unify:~ $ service uic-upvl stop
 ```
 

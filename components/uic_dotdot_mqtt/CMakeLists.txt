@@ -7,7 +7,6 @@
 # should only affect this directory and is children.
 string(REPLACE "-pipe" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 
-find_program(ZAP_EXECUTABLE "zap" REQUIRED)
 set(Boost_USE_MULTITHREADED ON)
 find_package(Boost REQUIRED)
 
@@ -19,34 +18,34 @@ run_zap(zap/gen-templates.json)
 
 add_library(
   uic_dotdot_mqtt SHARED
-  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_attributes.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_command_helpers.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_send_commands.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_group_commands.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_generated_commands.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_supported_generated_commands.cpp
-  ${CMAKE_CURRENT_BINARY_DIR}/src/dotdot_mqtt_helpers.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_attributes.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_command_helpers.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_send_commands.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_group_commands.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_generated_commands.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_supported_generated_commands.cpp
+  ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_helpers.cpp
   src/dotdot_mqtt_internals.cpp
   src/dotdot_bitmap.cpp
   src/json_helpers.cpp)
 
 target_include_directories(
   uic_dotdot_mqtt
-  PRIVATE src ${CMAKE_CURRENT_BINARY_DIR}/src ${nlohmann_json_include}
-  PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include ${Boost_INCLUDE_DIRS})
+  PRIVATE src ${ZAP_CURRENT_OUTPUT_DIR}/src ${nlohmann_json_include}
+  PUBLIC ${ZAP_CURRENT_OUTPUT_DIR}/include ${Boost_INCLUDE_DIRS})
 target_link_libraries(uic_dotdot_mqtt uic_definitions uic_dotdot uic_mqtt)
 
 add_mock(
-  uic_dotdot_mqtt_mock ${CMAKE_CURRENT_BINARY_DIR}/include/dotdot_mqtt.h
-  ${CMAKE_CURRENT_BINARY_DIR}/include/dotdot_mqtt_group_commands.h
-  ${CMAKE_CURRENT_BINARY_DIR}/include/dotdot_mqtt_supported_generated_commands.h
-  ${CMAKE_CURRENT_BINARY_DIR}/include/dotdot_mqtt_generated_commands.h
-)
+  uic_dotdot_mqtt_mock
+  ${ZAP_CURRENT_OUTPUT_DIR}/include/dotdot_mqtt.h
+  ${ZAP_CURRENT_OUTPUT_DIR}/include/dotdot_mqtt_group_commands.h
+  ${ZAP_CURRENT_OUTPUT_DIR}/include/dotdot_mqtt_supported_generated_commands.h
+  ${ZAP_CURRENT_OUTPUT_DIR}/include/dotdot_mqtt_generated_commands.h)
 
-target_interface_libraries(uic_dotdot_mqtt_mock uic_definitions
-                           uic_dotdot uic_mqtt)
+target_interface_libraries(uic_dotdot_mqtt_mock uic_definitions uic_dotdot
+                           uic_mqtt)
 target_include_directories(uic_dotdot_mqtt_mock
-                           PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include)
+                           PUBLIC ${ZAP_CURRENT_OUTPUT_DIR}/include)
 
 add_subdirectory(test)

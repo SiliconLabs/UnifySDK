@@ -18,6 +18,7 @@
 // Generic includes
 #include <map>
 #include <string>
+#include <stdexcept>
 
 // Includes from other components
 #include "sl_status.h"

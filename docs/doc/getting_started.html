@@ -34,8 +34,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -122,11 +121,12 @@ services on a RPi4.</p>
 and ensure a supported radio module is attached to your RPi4.</p>
 <p>For running Unify Framework it is required to have a running MQTT broker to which the Unify Framework can connect.
 To get an MQTT broker installed on the RPi4:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo apt update
-pi@raspberrypi:~ $ sudo apt install mosquitto
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo apt update
+<span class="gp">pi@raspberrypi:~ $ </span>sudo apt install mosquitto
 </pre></div>
 </div>
-<p>For more information regarding logging and configuration of eg. the Mosquitto broker, see the <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify Framework User Guide</span></a>.</p>
+<p>For more information regarding logging and configuration of eg. the Mosquitto
+broker, see the <a class="reference internal" href="unify_readme_user.html"><span class="doc std std-doc">Unify Framework User Guide</span></a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -141,35 +141,35 @@ Transfer the <code class="docutils literal notranslate"><span class="pre">.deb</
 a local relative path with <code class="docutils literal notranslate"><span class="pre">./</span></code> or absolute paths. Otherwise apt will look
 for the package in the wrong place and fail.</p>
 <p>Install a specific Unify package:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo apt install uic-sdk-dir/uic-&lt;component&gt;_&lt;version&gt;_armhf.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo apt install uic-sdk-dir/uic-&lt;component&gt;_&lt;version&gt;_armhf.deb
 </pre></div>
 </div>
 <p>Install all packages:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo apt install uic-sdk-dir/*.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo apt install uic-sdk-dir/*.deb
 </pre></div>
 </div>
 <p>Update installed packages:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo apt reinstall uic-sdk-dir/*.deb
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo apt reinstall uic-sdk-dir/*.deb
 </pre></div>
 </div>
 <section id="verify-the-configuration">
 <h3>Verify the configuration<a class="headerlink" href="#verify-the-configuration" title="Permalink to this heading"></a></h3>
 <p>After installing the desired Unify Host SDK packages, make sure the configuration is set correctly.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ cat /etc/uic/uic.cfg
-zpc:
-  serial: /dev/ttyUSB0
-  rf_region: EU
-  datastore_file: /var/lib/uic/zpc.db
-zigpc:
-  serial: /dev/ttyACM0
-  datastore_file: /var/lib/uic/zigpc.db
-cpcd:
-  serial: /dev/ttyACM0
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>cat /etc/uic/uic.cfg
+<span class="go">zpc:</span>
+<span class="go">  serial: /dev/ttyUSB0</span>
+<span class="go">  rf_region: EU</span>
+<span class="go">  datastore_file: /var/lib/uic/zpc.db</span>
+<span class="go">zigpc:</span>
+<span class="go">  serial: /dev/ttyACM0</span>
+<span class="go">  datastore_file: /var/lib/uic/zigpc.db</span>
+<span class="go">cpcd:</span>
+<span class="go">  serial: /dev/ttyACM0</span>
 </pre></div>
 </div>
 <p>If your configuration is wrong, you can either edit the file directly or reconfigure a specific package.
 After making changes to the configuration make sure to either reboot or restart the service.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo dpkg-reconfigure uic-zpc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo dpkg-reconfigure uic-zpc
 </pre></div>
 </div>
 </section>
@@ -179,18 +179,18 @@ After making changes to the configuration make sure to either reboot or restart 
 You can check if a Unify Host SDK application is running by using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>.
 For information on how to handle SystemD services using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>, see <a class="reference external" href="https://man7.org/linux/man-pages/man1/systemctl.1.html">the systemctl man pages</a>.</p>
 <p>Here we can see that the <code class="docutils literal notranslate"><span class="pre">uic-zpc</span></code> service is loaded and active:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ systemctl status uic-zpc.service
-* uic-zpc.service - Unify Z-Wave protocol controller
-   Loaded: loaded <span class="o">(</span>/lib/systemd/system/uic-zpc.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2022</span>-08-02 <span class="m">14</span>:14:58 CEST<span class="p">;</span> 8s ago
- Main PID: <span class="m">9471</span> <span class="o">(</span>zpc<span class="o">)</span>
-    Tasks: <span class="m">1</span> <span class="o">(</span>limit: <span class="m">4915</span><span class="o">)</span>
-   CGroup: /system.slice/uic-zpc.service
-           -9471 /usr/bin/zpc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>systemctl status uic-zpc.service
+<span class="go">* uic-zpc.service - Unify Z-Wave protocol controller</span>
+<span class="go">   Loaded: loaded (/lib/systemd/system/uic-zpc.service; enabled; vendor preset: enabled)</span>
+<span class="go">   Active: active (running) since Tue 2022-08-02 14:14:58 CEST; 8s ago</span>
+<span class="go"> Main PID: 9471 (zpc)</span>
+<span class="go">    Tasks: 1 (limit: 4915)</span>
+<span class="go">   CGroup: /system.slice/uic-zpc.service</span>
+<span class="go">           -9471 /usr/bin/zpc</span>
 
-aug <span class="m">02</span> <span class="m">14</span>:15:02 raspberrypi zpc<span class="o">[</span><span class="m">9471</span><span class="o">]</span>: <span class="m">2022</span>-Aug-02 <span class="m">14</span>:15:02.158423 &lt;W&gt; <span class="o">[</span>uic_stdin_process<span class="o">]</span> stdin is not a tty, input will not be handled.
-aug <span class="m">02</span> <span class="m">14</span>:15:02 raspberrypi zpc<span class="o">[</span><span class="m">9471</span><span class="o">]</span>: <span class="m">2022</span>-Aug-02 <span class="m">14</span>:15:02.166045 &lt;i&gt; <span class="o">[</span>mqtt_client<span class="o">]</span> Connection to MQTT broker localhost:1883 established.
-aug <span class="m">02</span> <span class="m">14</span>:15:02 raspberrypi zpc<span class="o">[</span><span class="m">9471</span><span class="o">]</span>: <span class="m">2022</span>-Aug-02 <span class="m">14</span>:15:02.168337 &lt;i&gt; <span class="o">[</span>mqtt_client_fsm_connecting<span class="o">]</span> We are connected to the MQTT broker.
+<span class="go">aug 02 14:15:02 raspberrypi zpc[9471]: 2022-Aug-02 14:15:02.158423 &lt;W&gt; [uic_stdin_process] stdin is not a tty, input will not be handled.</span>
+<span class="go">aug 02 14:15:02 raspberrypi zpc[9471]: 2022-Aug-02 14:15:02.166045 &lt;i&gt; [mqtt_client] Connection to MQTT broker localhost:1883 established.</span>
+<span class="go">aug 02 14:15:02 raspberrypi zpc[9471]: 2022-Aug-02 14:15:02.168337 &lt;i&gt; [mqtt_client_fsm_connecting] We are connected to the MQTT broker.</span>
 </pre></div>
 </div>
 </section>

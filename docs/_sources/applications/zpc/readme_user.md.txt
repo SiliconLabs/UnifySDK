@@ -25,6 +25,8 @@ The Debian package of the ZPC contains the following files:
 | /usr/share/uic/rules                       | Default location of mapping rules                  |
 | /usr/share/uic/zwave_poll_config.yaml      | Default location of network polling attribute list |
 
+(configuration_file)=
+
 ### Configuration File
 
 The configuration file is written in YAML and is used to set up the ZPC.
@@ -66,9 +68,8 @@ zpc:
 ```
 
 A special environment variable called UIC_CONF can be set to a path of a custom config file
-which will override the default config file. This can be used in a development environment
-
-for e.g.
+which will override the default config file. This can be used in a development environment.
+For example:
 
 ```bash
 UIC_CONF=../custom_uic.conf sudo -E ./applications/zpc/zpc
@@ -86,7 +87,8 @@ all information about the network and need to probe all nodes in the network.
 
 The best way to run ZPC is using the Systemd service that is
 installed with the Debian installer.
-For more information, see [README.md](../../doc/unify_readme_user.md).
+For more information, see the
+[Unify Framework User guide](../../doc/unify_readme_user.md).
 
 ## Running ZPC From the Command Line
 
@@ -126,7 +128,7 @@ There are two command line options to be aware of, `--zpc.ncp_version` and
 SerialAPI and exit immediately. This can be used to determine if the firmware
 should be applied or not.
 
-```sh
+```bash
 zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
 # Unify build: ver_1.0.2_cert-196-g7d2caffd
 2022-Jan-05 14:48:25.728069 <i> [uic_component_fixtures] Completed: Unify Signal Handler
@@ -141,7 +143,7 @@ zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
 `--zpc.ncp_update` performs a firmware update and exits the application when the
 update is completed.
 
-```sh
+```bash
 zpc --zpc.serial /dev/ttyUSB0 --zpc.ncp_update new_firmware.gbl
 ```
 
@@ -211,13 +213,13 @@ under the UIID space in the OTA cluster:
 For more details about available attributes under each UIID, see
 the Unify specification - Common OTA FW Update Service chapter.
 
-```console
+```mqtt
 ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/CurrentVersion/Reported
 ```
 
 For example, if a node has 2 Firmware Targets, the publications may look as follows:
 
-```console
+```mqtt
 ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-00-01/CurrentVersion/Reported - {"value": "3.2.0"}
 ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-01-01/CurrentVersion/Reported - {"value": "3.2.0"}
 ```
@@ -283,7 +285,7 @@ but the end node will reject the upgrade operation after the transfer.
 
 Verify that your images are ready and readable:
 
-```bash
+```console
 pi@unify:/var/lib/uic-image-provider/updates $ ls -l
 -rw-r--r-- 1 pi  pi   171380 Aug 17 14:52 powerstrip.gbl
 -rw-r--r-- 1 pi  pi   168036 Aug 17 14:52 sensor_pir.gbl
@@ -333,7 +335,7 @@ The following conditions have to be met for a successful firmware transfer:
 
 for example:
 
-```text
+```mqtt
 ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/Offset/Reported - {"value": 171380}
 ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/Size/Reported - {"value": 171380}
 ucl/by-unid/<UNID>/ep0/OTA/Attributes/UIID/<UIID>/LastError/Reported - {"value": "Success"}
@@ -373,7 +375,7 @@ frames seen on a Z-Wave Ziffer with operations performed by the ZPC.
 
 ### Discovery and Operation
 
-The ZPC performs network discovery and operation for both listening and 
+The ZPC performs network discovery and operation for both listening and
 non-listening devices using a software component called the attribute system.
 
 The basic idea of the attribute system is that all network state parameters have
@@ -426,8 +428,9 @@ the ZPC will try the ZPC command 3 times with a 20 seconds interval.
 Z-Wave Wake up devices are supported by pausing node resolution when
 the device is sleeping, which means that if the temperature of a thermostat is
 changed multiple times while the device is sleeping, the ZPC will only send the
-latest change using the thermostat set point command. The ZPC will send wake-up
-no-more information when there is nothing more to resolve regarding the node.
+latest change using the thermostat set point command. The ZPC sends
+Wake Up No More Information automatically when it no longer needs to
+communicate with the node.
 
 The default wake up interval used by the ZPC can be configured with the
 option `zpc.default_wake_up_interval`.
@@ -449,8 +452,8 @@ The NOP interval of failing nodes is
 * 40 * 4^n for FLiRS devices
 
 The threshold values for the number of failed transmissions and missing wake-up
-notifications can be configured with the options, zpc.accepted_transmit_failure
-and zpc.missing_wake_up_notification
+notifications can be configured with the options, `zpc.accepted_transmit_failure`
+and `zpc.missing_wake_up_notification`
 
 ## Network Polling
 
@@ -472,8 +475,8 @@ distinctly for the Z-Wave Device Types:
   Z-Wave Plus or Z-Wave Plus v2 Device Types
 * polling_interval_zwave_v1: represents Z-Wave Plus Device Type
 * polling_interval_zwave_v2: represents Z-Wave Plus v2 Device Type
-  
-If the Z-Wave specific device type does not have a specific polling interval, the polling 
+
+If the Z-Wave specific device type does not have a specific polling interval, the polling
 interval should not be specified in the configuration file. It is also
 important here to specify attribute types that have a resolver _get_ rule
 registered.
@@ -504,9 +507,10 @@ polling based on the device type) file will be located in:
 Besides, the user would also configure the minimum interval between two
 consecutive poll request (i.e., zpc.poll.backoff) and default polling interval
 (i.e., zpc.poll.default_interval) in case the attribute is registered to be
-polled without an interval. These values should be included in [Configuration
-File used to set up the ZPC](###Configuration File). The default backoff interval
-is set to 30 seconds. This value is selected based on experience and a user can
+polled without an interval. These values should be included in
+[Configuration File used to set up the ZPC](configuration_file).
+The default backoff interval is set to 30 seconds. This value is selected
+based on experience and a user can
 configure a value above 1 second based on their network needs. Note that the
 minimum rate limit between two consecutive poll requests is 1 second as
 discussed in the Z-Wave Plus role Type Specification in Polling Devices section.
@@ -520,19 +524,59 @@ All maps are defined by a set of configuration files which the ZPC loads as boot
 Default files are installed in the `/usr/share/uic/rules` directory.
 The mapping file extension is _.uam_ which is short for __Unify Attribute Map__.
 
-The following table has a brief description of how ZCL clusters are mapped to Z-Wave command classes, by default.
+The [ZPC Z-Wave Certification Guide](readme_certification.md) indicates
+how commands classes relates to each DotDot cluster with the default maps.
 
-| DotDot Cluster           | Z-Wave Command Classes                                         | Notes                                                                                                                      |
-| ------------------------ | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| OnOff                    | Binary Switch <br> Basic <br> Multilevel Switch                | The DotDot OnOff commands (On and Off) are mapped to Z-Wave Binary Switch Set command  or Basic SET                        |
-| OccupancySensing         | Notification                                                   | The Z-Wave Notification Report command is mapped to Occupancy and OccupacyType DotDot attributes                           |
-| IASZone                  | Notification                                                   |                                                                                                                            |
-| Illumiance level sensing | Notification                                                   |                                                                                                                            |
-| DoorLock                 | Door Lock                                                      | The DotDot DoorLock commands (LockDoor and UnlockDoor) are mapped to Z-Wave Door Lock Set command                          |
-| Thermostat               | Multilevel Sensor<br> Thermostat Setpoint <br> Thermostat Mode | The DotDot SetpointRaiseOrLower and WriteAttribute commands are mapped to Thermostat Setpoint and Thermostat Mode Commands |
-| TemperatureMeasurement   | Multilevel Sensor                                              |                                                                                                                            |
-| Level                    | Multilevel Switch                                              |                                                                                                                            |
-| IASZone                  | Battery                                                        |                                                                                                                            |
+### Generated Commands from end nodes
+
+The ZPC, if associated to association groups that send controlling commands, will
+forward incoming controlling commands on MQTT.
+
+| Command Class                        | Command                               | Cluster and Command          |
+| ------------------------------------ | --------------------------------------| ---------------------------- |
+| COMMAND_CLASS_BASIC                  | BASIC_SET (Value == 0x00)             |  OnOff::Off                  |
+| COMMAND_CLASS_BASIC                  | BASIC_SET (Value != 0x00)             |  OnOff::On                   |
+| COMMAND_CLASS_SWITCH_BINARY          | SWITCH_BINARY_SET (Value == 0)        |  OnOff::Off                  |
+| COMMAND_CLASS_SWITCH_BINARY          | SWITCH_BINARY_SET (Value != 0)        |  OnOff::On                   |
+| COMMAND_CLASS_SWITCH_MULTILEVEL      | SWITCH_MULTILEVEL_SET                 |  Level::MoveToLevel          |
+| COMMAND_CLASS_SWITCH_MULTILEVEL      | SWITCH_MULTILEVEL_START_LEVEL_CHANGE  |  Level::Move                 |
+| COMMAND_CLASS_SWITCH_MULTILEVEL      | SWITCH_MULTILEVEL_STOP_LEVEL_CHANGE   |  Level::Stop                 |
+| COMMAND_CLASS_INDICATOR              | INDICATOR_SET                         |  Identify::Identify          |
+| COMMAND_CLASS_THERMOSTAT_MODE        | THERMOSTAT_MODE_SET                   |  Thermostat::WriteAttributes |
+
+For example, if the ZPC receives a Multilevel Switch Set with value = 50,
+it will publish:
+
+```mqtt
+ucl/by-unid/zw-<HomeID>-<NodeID>/ep0/Level/GeneratedCommands/MoveToLevel -
+{
+  "Level": 50,
+  "TransitionTime": 0,
+  "OptionsMask": {
+    "ExecuteIfOff": false,
+    "CoupleColorTempToLevel": false
+  },
+  "OptionsOverride": {
+    "ExecuteIfOff": false,
+    "CoupleColorTempToLevel": false
+  }
+}
+```
+
+The ZPC will publish the list of possible generated commands reading from the
+AGI data. For example, if a node shows Multilevel Switch Start Level Change and
+Multilevel Switch Stop Level Change in association groups, the following
+publication will take place:
+
+```mqtt
+ucl/by-unid/zw-<HomeID>-<NodeID>/ep0/Level/SupportedGeneratedCommands -
+{
+  "value": [
+    "Move",
+    "Stop"
+  ]
+}
+```
 
 ### Modifying maps for the ZPC
 
@@ -769,14 +813,14 @@ network, as if a step migration was performed.
 
 Stop the ZPC and make a database backup:
 
-```bash
+```console
 pi@unify:/var/lib/uic $ service uic-zpc stop
 pi@unify:/var/lib/uic $ cp zpc.db zpc_back_up.db
 ```
 
 Run the recover tool. Specifying the target version is optional:
 
-```bash
+```console
 pi@unify:/var/lib/uic $ zpc_database_recover_tool --target_version 2 --zpc.datastore_file /var/lib/uic/zpc.db
 
 <i> [datastore_fixt] Using datastore file: /var/lib/uic/zpc.db
@@ -789,7 +833,7 @@ pi@unify:/var/lib/uic $ zpc_database_recover_tool --target_version 2 --zpc.datas
 
 Finally, restart the ZPC.
 
-```bash
+```console
 pi@unify:/var/lib/uic $ service uic-zpc start
 ```
 
@@ -803,6 +847,7 @@ If this step does not work and the network cannot be used, you have 2 options:
 Not all versions of the ZPC are certified. The list of versions that have passed
 [Z-Wave certification](https://certification.z-wavealliance.org/) is:
 
+* ZPC v1.2.1
 * ZPC v1.1.1
 * ZPC v1.0.1
 
@@ -830,13 +875,13 @@ how_to_implement_new_zwave_command_classes.md
      To verify the RF region on your gateway, execute the following command in
      your gateway terminal:
 
-      ``` sh
+      ```bash
       cat /etc/uic/uic.cfg
       ```
 
       It outputs the configured rf_region:
 
-      ```bash
+      ```console
       pi@raspberrypi:/etc/uic $ cat uic.cfg
       zpc:
         serial: /dev/ttyUSB0

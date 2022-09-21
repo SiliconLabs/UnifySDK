@@ -45,9 +45,9 @@
 #define ATTRIBUTE(type) ATTRIBUTE_COMMAND_CLASS_MULTILEVEL_SWITCH_##type
 
 // Static variables
-static attribute_resolver_function_t multilevel_set              = NULL;
-static attribute_resolver_function_t multilevel_get              = NULL;
-static attribute_resolver_function_t multilevel_capabilities_get = NULL;
+static attribute_resolver_function_t multilevel_set                = NULL;
+static attribute_resolver_function_t multilevel_get                = NULL;
+static attribute_resolver_function_t multilevel_capabilities_get   = NULL;
 static zpc_resolver_event_notification_function_t on_send_complete = NULL;
 static zwave_command_handler_t multilevel_handler                  = {};
 
@@ -187,7 +187,7 @@ void test_zwave_command_class_switch_multilevel_new_supporting_node()
   node = attribute_store_get_node_child_by_type(node, ATTRIBUTE(ON_OFF), 0);
   uint32_t on_off_value = 0;
   attribute_store_get_reported(node, &on_off_value, sizeof(on_off_value));
-  TEST_ASSERT_EQUAL(0xFF, on_off_value);
+  TEST_ASSERT_EQUAL(0x01, on_off_value);
 
   u8_value = 3;
   attribute_store_set_reported(version_node, &u8_value, sizeof(u8_value));
@@ -803,8 +803,8 @@ void test_zwave_command_class_switch_multilevel_generated_level_commands_move_to
   // Move to a value with duration
   const uint8_t incoming_frame_value_duration[]
     = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4, SWITCH_MULTILEVEL_SET, 0x23, 10};
-  expected_fields.level                                                = 0x23;
-  expected_fields.transition_time                                      = 100;
+  expected_fields.level           = 0x23;
+  expected_fields.transition_time = 100;
 
   uic_mqtt_dotdot_level_publish_generated_move_to_level_command_ExpectWithArray(
     NULL,
@@ -822,8 +822,8 @@ void test_zwave_command_class_switch_multilevel_generated_level_commands_move_to
   // Move to a value with default duration
   const uint8_t incoming_frame_value_default_duration[]
     = {COMMAND_CLASS_SWITCH_MULTILEVEL_V4, SWITCH_MULTILEVEL_SET, 0x0, 0xFF};
-  expected_fields.level                                                = 0;
-  expected_fields.transition_time                                      = 0;
+  expected_fields.level           = 0;
+  expected_fields.transition_time = 0;
 
   uic_mqtt_dotdot_level_publish_generated_move_to_level_command_ExpectWithArray(
     NULL,

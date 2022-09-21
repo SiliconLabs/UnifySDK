@@ -12,6 +12,7 @@ var group__zigpc__components =
     [ "ZigPC SmartStart", "group__zigpc__smartstart.html", "group__zigpc__smartstart" ],
     [ "ZigPC STDIN Interface", "group__zigpc__stdin.html", "group__zigpc__stdin" ],
     [ "ZigPC UCL Utility Component", "group__zigpc__ucl.html", "group__zigpc__ucl" ],
+    [ "ZigPC ZCL Command Parser", "group__zigpc__zclcmdparse.html", "group__zigpc__zclcmdparse" ],
     [ "ZigPC ZCL Utilities", "group__zigpc__zcl__util.html", "group__zigpc__zcl__util" ],
     [ "ZigPC Gateway Component", "group__zigpc__gateway.html", "group__zigpc__gateway" ],
     [ "ZigPC Network Management", "group__zigpc__net__mgmt.html", "group__zigpc__net__mgmt" ],

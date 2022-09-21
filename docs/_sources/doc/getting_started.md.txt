@@ -37,12 +37,13 @@ and ensure a supported radio module is attached to your RPi4.
 For running Unify Framework it is required to have a running MQTT broker to which the Unify Framework can connect.
 To get an MQTT broker installed on the RPi4:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo apt update
 pi@raspberrypi:~ $ sudo apt install mosquitto
 ```
 
-For more information regarding logging and configuration of eg. the Mosquitto broker, see the [Unify Framework User Guide](unify_readme_user.md).
+For more information regarding logging and configuration of eg. the Mosquitto
+broker, see the [Unify Framework User Guide](unify_readme_user.md).
 
 ```{toctree}
 ---
@@ -69,19 +70,19 @@ for the package in the wrong place and fail.
 
 Install a specific Unify package:
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo apt install uic-sdk-dir/uic-<component>_<version>_armhf.deb
 ```
 
 Install all packages:
 
- ```bash
+ ```console
 pi@raspberrypi:~ $ sudo apt install uic-sdk-dir/*.deb
 ```
 
 Update installed packages:
 
- ```bash
+ ```console
 pi@raspberrypi:~ $ sudo apt reinstall uic-sdk-dir/*.deb
 ```
 
@@ -89,7 +90,7 @@ pi@raspberrypi:~ $ sudo apt reinstall uic-sdk-dir/*.deb
 
 After installing the desired Unify Host SDK packages, make sure the configuration is set correctly.
 
-```bash
+```console
 pi@raspberrypi:~ $ cat /etc/uic/uic.cfg
 zpc:
   serial: /dev/ttyUSB0
@@ -105,7 +106,7 @@ cpcd:
 If your configuration is wrong, you can either edit the file directly or reconfigure a specific package.
 After making changes to the configuration make sure to either reboot or restart the service.
 
-```bash
+```console
 pi@raspberrypi:~ $ sudo dpkg-reconfigure uic-zpc
 ```
 
@@ -117,7 +118,7 @@ For information on how to handle SystemD services using `systemctl`, see [the sy
 
 Here we can see that the `uic-zpc` service is loaded and active:
 
-```bash
+```console
 pi@raspberrypi:~ $ systemctl status uic-zpc.service
 * uic-zpc.service - Unify Z-Wave protocol controller
    Loaded: loaded (/lib/systemd/system/uic-zpc.service; enabled; vendor preset: enabled)

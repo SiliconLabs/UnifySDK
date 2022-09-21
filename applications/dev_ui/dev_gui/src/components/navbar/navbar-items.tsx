@@ -17,6 +17,14 @@ export const NavbarItems: NavbarItem[] = [
     subMenu: SideMenu.NetworkManagement
   },
   {
+    name: 'Network Management',
+    title: 'Network Management',
+    path: '/networkmanagement',
+    icon: <MdIcons.MdHistoryEdu />,
+    cName: 'nav-text',
+    subMenu: SideMenu.NetworkManagement
+  },
+  {
     name: 'SmartStart',
     title: 'SmartStart',
     path: '/smartstart',

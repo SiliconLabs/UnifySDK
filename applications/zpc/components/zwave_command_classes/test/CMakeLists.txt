@@ -1,16 +1,16 @@
 set(MOCK_LIBS
-    uic_attribute_store_mock
-    zpc_attribute_store_mock
-    zwave_command_handler_mock
-    zwave_controller_mock
-    uic_attribute_resolver_mock
-    uic_attribute_resolver_rule_mock
-    zpc_config_mock
-    zwave_tx_scheme_selector_mock
-    zwave_tx_mock
-    zwave_network_management_mock
-    zwave_api_mock
-    zwave_unid_mock)
+  uic_attribute_store_mock
+  zpc_attribute_store_mock
+  zwave_command_handler_mock
+  zwave_controller_mock
+  uic_attribute_resolver_mock
+  uic_attribute_resolver_rule_mock
+  zpc_config_mock
+  zwave_tx_scheme_selector_mock
+  zwave_tx_mock
+  zwave_network_management_mock
+  zwave_api_mock
+  zwave_unid_mock)
 
 add_library(zwave_command_class_test_helper zwave_command_class_test_helper.c)
 target_link_libraries(
@@ -170,11 +170,11 @@ target_add_unittest(
   SOURCES
   zwave_command_class_node_info_resolver_test.c
   DEPENDS
-    zpc_attribute_store_test_helper
-    zpc_utils
-    zwave_controller_mock
-    uic_attribute_resolver_mock
-    zwave_network_management_mock
+  zpc_attribute_store_test_helper
+  zpc_utils
+  zwave_controller_mock
+  uic_attribute_resolver_mock
+  zwave_network_management_mock
 )
 
 target_add_unittest(
@@ -184,11 +184,10 @@ target_add_unittest(
   SOURCES
   zwave_command_class_granted_keys_resolver_test.c
   DEPENDS
-    zpc_attribute_store_test_helper
-    uic_attribute_resolver_mock
-    zpc_attribute_resolver_mock
+  zpc_attribute_store_test_helper
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
 )
-
 
 target_add_unittest(
   zwave_command_classes
@@ -540,9 +539,24 @@ target_add_unittest(
   zpc_attribute_resolver_mock
   uic_dotdot_mqtt_mock)
 
+# Thermostat setpoint test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_thermostat_setpoint_test
+  SOURCES
+  zwave_command_class_thermostat_setpoint_test.c
+  DEPENDS
+  zpc_attribute_store_test_helper
+  zwave_controller
+  zwave_command_handler_mock
+  uic_attribute_resolver_mock
+  zpc_attribute_resolver_mock
+)
+
 # Tests for generated command classes
 set(GEN_TEST_INCLUDES
-    "${CMAKE_SOURCE_DIR}/applications/zpc/components/zwave_controller/include ${CMAKE_SOURCE_DIR}/include"
+  "${CMAKE_SOURCE_DIR}/applications/zpc/components/zwave_controller/include ${CMAKE_SOURCE_DIR}/include"
 )
 
 # Generated Command Class Door Lock test
@@ -557,13 +571,13 @@ target_add_unittest(
   zwave_handlers
   ${MOCK_LIBS})
 target_include_directories(generated_door_lock_test
-                           PRIVATE ${GEN_TEST_INCLUDES})
+  PRIVATE ${GEN_TEST_INCLUDES})
 target_compile_options(generated_door_lock_test PRIVATE -Wno-unused-variable
-                                                        -Wno-unused-function)
+  -Wno-unused-function)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   target_compile_options(generated_door_lock_test
-                         PRIVATE -Wno-unused-but-set-variable)
+    PRIVATE -Wno-unused-but-set-variable)
 endif()
 
 # Generated Command Class Basic Tariff Info test
@@ -578,13 +592,13 @@ target_add_unittest(
   zwave_handlers
   ${MOCK_LIBS})
 target_include_directories(generated_basic_tariff_info_test
-                           PRIVATE ${GEN_TEST_INCLUDES})
+  PRIVATE ${GEN_TEST_INCLUDES})
 target_compile_options(generated_basic_tariff_info_test
-                       PRIVATE -Wno-unused-variable -Wno-unused-function)
+  PRIVATE -Wno-unused-variable -Wno-unused-function)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   target_compile_options(generated_basic_tariff_info_test
-                         PRIVATE -Wno-unused-but-set-variable)
+    PRIVATE -Wno-unused-but-set-variable)
 endif()
 
 # Class Indicator control test
@@ -600,3 +614,16 @@ target_add_unittest(
   uic_attribute_store
   zwave_network_management_mock
   uic_attribute_resolver_mock)
+
+# Battery Command Class test
+target_add_unittest(
+  zwave_command_classes
+  NAME
+  zwave_command_class_battery_test
+  SOURCES
+  zwave_command_class_battery_test.cpp
+  DEPENDS
+  uic_log
+  zwave_handlers
+  uic_attribute_store
+  zpc_attribute_store_test_helper)

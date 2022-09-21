@@ -252,9 +252,15 @@ typedef enum {
    * Assign return route state
    * when the NM get the zwave_api assign return route callback
    * the NM state shall be shift to IDLE
-   * 
+   *
    */
   NM_ASSIGNING_RETURN_ROUTE,
+  /**
+   * Performing a neighbor discovery/update
+   * The protocol has requested a node to perform a neighbor discovery and
+   * waits for the result.
+   */
+  NM_NEIGHBOR_DISCOVERY_ONGOING,
 } zwave_network_management_state_t;
 #endif
 

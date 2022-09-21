@@ -1,6 +1,9 @@
 # Unit Tests
-target_add_unittest(zpc_stdin SOURCES zpc_stdin_test.c
-DEPENDS
+target_add_unittest(
+  zpc_stdin
+  SOURCES
+  zpc_stdin_test.c
+  DEPENDS
   zwave_network_management_mock
   zwave_tx_scheme_selector_mock
   uic_attribute_resolver_mock
@@ -14,10 +17,8 @@ DEPENDS
   zwave_unid_mock
   zwave_tx_groups_mock
   zwave_s2_mock
-)
+  unify_attribute_poll_mock)
 
 # Test with the real attribute store
-target_add_unittest(zpc_stdin
-  SOURCES zpc_stdin_attribute_store_log_test.c
-  NAME zpc_stdin_attribute_store_log_test
-)
+target_add_unittest(zpc_stdin SOURCES zpc_stdin_attribute_store_log_test.c NAME
+                    zpc_stdin_attribute_store_log_test)

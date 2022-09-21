@@ -18,7 +18,8 @@ if(DOXYGEN_FOUND)
       */templates/*)
   set(DOXYGEN_HTML_EXTRA_STYLESHEET doc/doxygen/assets/customdoxygen.css)
   set(DOXYGEN_HTML_EXTRA_FILES doc/doxygen/assets/silicon-labs-logo.png)
-  set(DOXYGEN_LATEX_EXTRA_STYLESHEET doc/doxygen/assets/unicode_symbols_resolver.sty)
+  set(DOXYGEN_LATEX_EXTRA_STYLESHEET
+      doc/doxygen/assets/unicode_symbols_resolver.sty)
   set(DOXYGEN_EXTRACT_ALL YES)
   set(DOXYGEN_GENERATE_TREEVIEW YES)
   set(DOXYGEN_GENERATE_XML YES)
@@ -120,8 +121,7 @@ if(DOXYGEN_FOUND)
       ${ADD_DOX_TARGET}_zip
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${ADD_DOX_TARGET}
       DEPENDS ${ADD_DOX_TARGET_DEPENDS} ${ADD_DOX_TARGET}
-      COMMAND zip -r -q ${ADD_DOX_TARGET}_${FILE_NAME_VERSIONING}.docs.zip
-              html)
+      COMMAND zip -r -q ${ADD_DOX_TARGET}_${FILE_NAME_VERSIONING}.docs.zip html)
 
     if(${ADD_DOX_PDF})
       add_custom_target(
@@ -142,7 +142,7 @@ if(DOXYGEN_FOUND)
   # Configure Doxygen for UCL MQTT Reference Guide
   # ############################################################################
   set(REFERENCE_UCL_MQTT_FILE
-      ${CMAKE_CURRENT_BINARY_DIR}/components/uic_dotdot/readme_ucl_mqtt_reference.md
+      ${CMAKE_SOURCE_DIR}/components/uic_dotdot/zap-generated/readme_ucl_mqtt_reference.md
   )
   set(DOXYGEN_USE_MDFILE_AS_MAINPAGE ${REFERENCE_UCL_MQTT_FILE})
   set_source_files_properties(${REFERENCE_UCL_MQTT_FILE} PROPERTIES GENERATED
@@ -214,48 +214,6 @@ if(DOXYGEN_FOUND)
     ${CMAKE_CURRENT_BINARY_DIR}/applications/zigpc/components/zcl_command_parser/include
     ${CMAKE_CURRENT_BINARY_DIR}/applications/zigpc/components/zcl_util/include
     ${LIBUIC_DOXYGEN_SRC})
-  # ############################################################################
-  # Configure Doxygen for User Guides
-  # ############################################################################
-  set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
-  file(GLOB USERGUIDE_MD_FILES1 applications/*/*.md LIST_DIRECTORIES true)
-  list(FILTER USERGUIDE_MD_FILES1 EXCLUDE REGEX "zigpc.md$")
-  file(GLOB USERGUIDE_MD_FILES2 applications/dev_ui/dev_gui/*.md
-       LIST_DIRECTORIES true)
-  file(GLOB USERGUIDE_MD_FILES3 applications/aox/applications/*/*.md
-       LIST_DIRECTORIES true)
-
-  add_doxygen_target(
-    TARGET
-    userguide
-    PROJECT_NAME
-    "Unify Framework User Guide"
-    IMAGE_PATHS
-    doc/assets/img/
-    applications/dev_ui/dev_gui/doc/assets/img/
-    applications/zpc/doc/assets/img/
-    applications/zigpc
-    SRC_PATHS
-    README.md
-    FAQ.md
-    release_notes.md
-    doc/readme_developer.md
-    doc/readme_user.md
-    doc/readme_building.md
-    doc/unify_library_overview.md
-    doc/how_to_develop_a_protocol_controller.md
-    doc/readme_rust.md
-    doc/readme_debug.md
-    docker/readme_developer.md
-    ${USERGUIDE_MD_FILES2}
-    ${USERGUIDE_MD_FILES1}
-    ${USERGUIDE_MD_FILES3}
-    doc/standards/known-abbreviations.md
-    doc/standards/coding-standard.md
-    applications/zigpc/components/zigpc_gateway/libs/zigbee_host/readme.libzigbee_host.zigpc.md
-    PDF
-    true)
-  unset(DOXYGEN_USE_MDFILE_AS_MAINPAGE)
 
 else()
   message(

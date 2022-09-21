@@ -15,6 +15,9 @@
 #include "zwave_network_management_helpers.h"
 #include "nm_state_machine.h"
 
+// Z-Wave Controller callbacks.
+#include "zwave_controller_internal.h"
+
 #include "sl_log.h"
 #define LOG_TAG "zwave_network_management_callbacks"
 
@@ -71,4 +74,14 @@ void on_set_default_complete()
   process_post(&zwave_network_management_process,
                NM_EV_SET_DEFAULT_COMPLETE,
                0);
+}
+
+void on_request_node_neighbor_update_completed(uint8_t status)
+{
+  zwave_controller_on_request_neighbor_update(status);
+  if (0x21 != status) {
+    process_post(&zwave_network_management_process,
+                 NM_EV_REQUEST_NODE_NEIGHBOR_REQUEST_COMPLETE,
+                 0);
+  }
 }

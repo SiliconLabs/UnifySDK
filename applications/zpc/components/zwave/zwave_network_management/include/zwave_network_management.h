@@ -313,27 +313,32 @@ sl_status_t zwave_network_management_set_default(void);
  * - on_error
  *
  * @param nodeid Node id of failing node which will be removed
- * @return sl_status_t
- *   - SL_STATUS_BUSY if Network Management (State Machine) is busy in some
- *                    other operation
- *   - SL_STATUS_OK when remove failed is triggered
+ * @returns sl_status_t SL_STATUS_OK when remove failed is triggered, any other
+ * code if it failed
  */
 
 sl_status_t zwave_network_management_remove_failed(zwave_node_id_t nodeid);
 
 /**
- * @brief Get the cached home_id.
+ * @brief Get the cached HomeID.
  *
- * @return home_id
+ * @returns The current HomeID assigned to the Z-Wave Controller
  */
 zwave_home_id_t zwave_network_management_get_home_id();
 
 /**
- * @brief Get the cached node_id.
+ * @brief Get the cached NodeID.
  *
- * @return node_id
+ * @returns The current NodeID assigned to the Z-Wave Controller
  */
 zwave_node_id_t zwave_network_management_get_node_id();
+
+/**
+ * @brief Returns the number of nodes in our network.
+ *
+ * @return Number of nodes in our netowrk.
+ */
+uint16_t zwave_network_management_get_network_size();
 
 /**
  * @brief Get the cached Node List for the current network.
@@ -358,10 +363,21 @@ zwave_keyset_t zwave_network_management_get_granted_keys();
 bool zwave_network_management_is_zpc_sis();
 
 /**
+ * @brief Checks if the protocol may be sending some frames to a particular NodeID
+ *
+ * @param node_id       The Z-Wave NodeID that we want to check for.
+ * @returns true if the protocol is currently sending frames to the node, false
+ *          if there is no operation that may trigger communications with the node.
+ */
+bool zwave_network_management_is_protocol_sending_frames_to_node(
+  zwave_node_id_t node_id);
+
+/**
  * @brief Request Node Neighbor Discovery
  * @param node_id the NodeID of the node for which the neighbor discovery is requested
  *
- * @return sl_status_t BUSY if the state is not IDLE
+ * @return sl_status_t SL_STATUS_OK if the operation was accepted, any other
+ * code is case of failure
  */
 sl_status_t zwave_network_management_request_node_neighbor_discovery(
   zwave_node_id_t node_id);
@@ -372,7 +388,8 @@ sl_status_t zwave_network_management_request_node_neighbor_discovery(
  * @param nif
  * @param inclusion_step
  *
- * @return sl_status_t BUSY if the state is not IDLE
+ * @return sl_status_t SL_STATUS_OK if the operation was accepted, any other
+ * code is case of failure
  */
 sl_status_t zwave_network_management_start_proxy_inclusion(
   zwave_node_id_t node_id, zwave_node_info_t nif, uint8_t inclusion_step);

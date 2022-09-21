@@ -51,7 +51,7 @@ static void zwave_command_class_thermostat_setpoint_set_default_capabilities(
   attribute_store_node_t max_value_node
     = attribute_store_get_first_child_by_type(type_node, ATTRIBUTE(MAX_VALUE));
 
-  int32_t max_value = DEFAULT_MAX_VALUE * 1000;
+  int32_t max_value = DEFAULT_MAX_VALUE;
   attribute_store_set_reported(max_value_node, &max_value, sizeof(max_value));
 
   attribute_store_node_t min_value_scale_node
@@ -66,6 +66,92 @@ static void zwave_command_class_thermostat_setpoint_set_default_capabilities(
                                               ATTRIBUTE(MAX_VALUE_SCALE));
 
   attribute_store_set_reported(max_value_scale_node, &scale, sizeof(scale));
+}
+
+/**
+ * @brief Checks the desired value of a setpoint and validate if it is within
+ * the valid range.
+ *
+ * @param value_node      Attribute Store node for the value to apply.
+ * @returns int32_t valid desired value
+ */
+static int32_t thermostat_setpoint_get_valid_desired_setpoint_value(
+  attribute_store_node_t value_node)
+{
+  int32_t value_to_set = 0;
+  attribute_store_get_desired_else_reported(value_node,
+                                            &value_to_set,
+                                            sizeof(value_to_set));
+
+  zwave_cc_version_t supporting_node_version
+    = zwave_command_class_get_version_from_node(
+      value_node,
+      COMMAND_CLASS_THERMOSTAT_SETPOINT_V3);
+  // V1-v2, we don't know the capabilities, so we allow to try anything:
+  if (3 > supporting_node_version) {
+    return value_to_set;
+  }
+
+  // V3 nodes, fetch min/max
+  attribute_store_node_t setpoint_type_node
+    = attribute_store_get_first_parent_with_type(value_node, ATTRIBUTE(TYPE));
+  uint32_t value_scale = CELSIUS_SCALE;
+  attribute_store_get_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(VALUE_SCALE),
+                                     &value_scale,
+                                     sizeof(value_scale));
+  if (value_scale == FAHRENHEIT_SCALE) {
+    value_to_set = FAHRENHEIT_TO_DEGREES(value_to_set)
+  }
+
+  int32_t min_value = DEFAULT_MIN_VALUE;
+  attribute_store_get_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(MIN_VALUE),
+                                     &min_value,
+                                     sizeof(min_value));
+  uint32_t min_value_scale = CELSIUS_SCALE;
+  attribute_store_get_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(MIN_VALUE_SCALE),
+                                     &min_value_scale,
+                                     sizeof(min_value_scale));
+  if (min_value_scale == FAHRENHEIT_SCALE) {
+    min_value = FAHRENHEIT_TO_DEGREES(min_value)
+  }
+
+  // Lower bound validation:
+  if (value_to_set < min_value) {
+    sl_log_debug(LOG_TAG,
+                 "Attempting to set a setpoint (%d) lower than the "
+                 "minimum (%d). Using the minimum value.",
+                 value_to_set,
+                 min_value);
+    return min_value;
+  }
+
+  int32_t max_value = DEFAULT_MAX_VALUE;
+  attribute_store_get_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(MAX_VALUE),
+                                     &max_value,
+                                     sizeof(max_value));
+  uint32_t max_value_scale = CELSIUS_SCALE;
+  attribute_store_get_child_reported(setpoint_type_node,
+                                     ATTRIBUTE(MAX_VALUE_SCALE),
+                                     &max_value_scale,
+                                     sizeof(max_value_scale));
+  if (max_value_scale == FAHRENHEIT_SCALE) {
+    max_value = FAHRENHEIT_TO_DEGREES(max_value)
+  }
+  // Upper bound validation:
+  if (value_to_set > max_value) {
+    sl_log_debug(LOG_TAG,
+                 "Attempting to set a setpoint (%d) higher than the "
+                 "maximum (%d). Using the maximum value.",
+                 value_to_set,
+                 max_value);
+    return max_value;
+  }
+
+  return value_to_set;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -120,36 +206,19 @@ static attribute_store_node_t
     attribute_store_node_t endpoint_node, uint8_t type)
 {
   // Do we already have the node ?
-  attribute_store_node_t type_node = attribute_store_get_node_child_by_value(
-    endpoint_node,
-    ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_TYPE,
-    REPORTED_ATTRIBUTE,
-    &type,
-    sizeof(type),
-    0);
-
-  if (type_node != ATTRIBUTE_STORE_INVALID_NODE) {
-    // Already exists, nothing to do.
-    return type_node;
-  }
-
-  type_node
-    = attribute_store_add_node(ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_TYPE,
-                               endpoint_node);
-
-  if (SL_STATUS_OK
-      != attribute_store_set_reported(type_node, &type, sizeof(type))) {
-    return ATTRIBUTE_STORE_INVALID_NODE;
-  };
+  attribute_store_node_t type_node = attribute_store_emplace(endpoint_node,
+                                                             ATTRIBUTE(TYPE),
+                                                             &type,
+                                                             sizeof(type));
 
   // Add the six other nodes under the type.
   const attribute_store_type_t additional_nodes[]
-    = {ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE,
-       ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_VALUE_SCALE,
-       ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE,
-       ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MIN_VALUE_SCALE,
-       ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE,
-       ATTRIBUTE_COMMAND_CLASS_THERMOSTAT_SETPOINT_MAX_VALUE_SCALE};
+    = {ATTRIBUTE(VALUE),
+       ATTRIBUTE(VALUE_SCALE),
+       ATTRIBUTE(MIN_VALUE),
+       ATTRIBUTE(MIN_VALUE_SCALE),
+       ATTRIBUTE(MAX_VALUE),
+       ATTRIBUTE(MAX_VALUE_SCALE)};
   attribute_store_add_if_missing(type_node,
                                  additional_nodes,
                                  COUNT_OF(additional_nodes));
@@ -283,28 +352,23 @@ sl_status_t zwave_command_class_thermostat_setpoint_set(
   set_frame->cmd      = THERMOSTAT_SETPOINT_SET_V3;
   // set_frame->level ? This is 4 bits reserved / 4 bits setpoint type.
   set_frame->level = 0;
-  attribute_store_read_value(type_node,
-                             REPORTED_ATTRIBUTE,
-                             &set_frame->level,
-                             sizeof(set_frame->level));
+  attribute_store_get_reported(type_node,
+                               &set_frame->level,
+                               sizeof(set_frame->level));
 
   // set_frame->level2 ? This is Precision (3 bits) / Scale (2 bits) / size (3 bits)
   uint32_t setpoint_value_scale = 0;
   // Reuse the same scale as current value.
-  attribute_store_read_value(scale_node,
-                             REPORTED_ATTRIBUTE,
-                             &setpoint_value_scale,
-                             sizeof(setpoint_value_scale));
+  attribute_store_get_reported(scale_node,
+                               &setpoint_value_scale,
+                               sizeof(setpoint_value_scale));
 
   set_frame->level2 = SET_DEFAULT_PRECISION;
   set_frame->level2 |= SET_DEFAULT_SIZE;
   set_frame->level2 |= ((setpoint_value_scale << 3) & SCALE_MASK);
 
-  int32_t setpoint_value_integer = 0;
-  attribute_store_read_value(node,
-                             DESIRED_ATTRIBUTE,
-                             &setpoint_value_integer,
-                             sizeof(setpoint_value_integer));
+  int32_t setpoint_value_integer
+    = thermostat_setpoint_get_valid_desired_setpoint_value(node);
 
   set_frame->value1 = (setpoint_value_integer & 0xFF000000) >> 24;  // MSB
   set_frame->value2 = (setpoint_value_integer & 0x00FF0000) >> 16;

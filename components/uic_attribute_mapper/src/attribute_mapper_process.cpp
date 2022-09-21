@@ -84,7 +84,7 @@ void on_reported_attribute_update(attribute_store_node_t updated_node,
                                                       REPORTED_ATTRIBUTE,
                                                       change);
   } else if (change == ATTRIBUTE_DELETED) {
-    // Evaluate immediately if the attribtue got deleted, if we wait we can't
+    // Evaluate immediately if the attribute got deleted, if we wait we cannot
     // read its context again.
     MapperEngine::get_instance().on_attribute_updated(updated_node,
                                                       REPORTED_ATTRIBUTE,

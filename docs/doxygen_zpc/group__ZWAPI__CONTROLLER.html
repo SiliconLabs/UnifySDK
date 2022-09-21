@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -211,9 +211,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gaaeb8063b47eb7b36f8a1d0491d00d0f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gaaeb8063b47eb7b36f8a1d0491d00d0f2">zwapi_set_virtual_node_to_learn_mode</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> node, uint8_t mode, void(*learnFunc)(uint8_t bStatus, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> orgID, <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> newID))</td></tr>
 <tr class="memdesc:gaaeb8063b47eb7b36f8a1d0491d00d0f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable/disable learn mode for a virtual node.  <a href="group__ZWAPI__CONTROLLER.html#gaaeb8063b47eb7b36f8a1d0491d00d0f2">More...</a><br /></td></tr>
 <tr class="separator:gaaeb8063b47eb7b36f8a1d0491d00d0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6b5f90bf16a067c34951b6d40dfc3206"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga6b5f90bf16a067c34951b6d40dfc3206">zwapi_get_virtual_nodes</a> (uint8_t *nodeMask)</td></tr>
-<tr class="memdesc:ga6b5f90bf16a067c34951b6d40dfc3206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request nodemask containing virtual nodes in controller bridge.  <a href="group__ZWAPI__CONTROLLER.html#ga6b5f90bf16a067c34951b6d40dfc3206">More...</a><br /></td></tr>
-<tr class="separator:ga6b5f90bf16a067c34951b6d40dfc3206"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga113990b4e0cc7159ade5a9273a4fe79d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga113990b4e0cc7159ade5a9273a4fe79d">zwapi_get_virtual_nodes</a> (<a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> nodeMask)</td></tr>
+<tr class="memdesc:ga113990b4e0cc7159ade5a9273a4fe79d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request nodemask containing virtual nodes in controller bridge.  <a href="group__ZWAPI__CONTROLLER.html#ga113990b4e0cc7159ade5a9273a4fe79d">More...</a><br /></td></tr>
+<tr class="separator:ga113990b4e0cc7159ade5a9273a4fe79d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaac34a04ebe6b6ab18a1b755d787aea8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#gaac34a04ebe6b6ab18a1b755d787aea8c">zwapi_get_old_routing_info</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, uint8_t *buf, uint8_t bRemoveBad, uint8_t bRemoveNonReps)</td></tr>
 <tr class="memdesc:gaac34a04ebe6b6ab18a1b755d787aea8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read out neighbor information.  <a href="group__ZWAPI__CONTROLLER.html#gaac34a04ebe6b6ab18a1b755d787aea8c">More...</a><br /></td></tr>
 <tr class="separator:gaac34a04ebe6b6ab18a1b755d787aea8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2998,8 +2998,8 @@ false if No LWR found for bNodeID.</dd></dl>
 
 </div>
 </div>
-<a id="ga6b5f90bf16a067c34951b6d40dfc3206"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6b5f90bf16a067c34951b6d40dfc3206">&#9670;&nbsp;</a></span>zwapi_get_virtual_nodes()</h2>
+<a id="ga113990b4e0cc7159ade5a9273a4fe79d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga113990b4e0cc7159ade5a9273a4fe79d">&#9670;&nbsp;</a></span>zwapi_get_virtual_nodes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3007,7 +3007,7 @@ false if No LWR found for bNodeID.</dd></dl>
         <tr>
           <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_virtual_nodes </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
           <td class="paramname"><em>nodeMask</em></td><td>)</td>
           <td></td>
         </tr>
@@ -3820,7 +3820,7 @@ SL_STATUS_FAIL if node is invalid or controller is primary.</dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:18 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:49 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

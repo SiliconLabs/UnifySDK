@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -107,36 +107,43 @@ $(document).ready(function(){initNavTree('uic__stdin_8hpp_source.html',''); init
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">   37</a></span>&#160;<span class="keyword">typedef</span> std::vector&lt;std::string&gt; <a class="code" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">   44</a></span>&#160;<span class="keyword">typedef</span> <a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> (*<a class="code" href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">handler_func</a>)(<span class="keyword">const</span> <a class="code" href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a> &amp;arg);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#gab6d00df5652bedd76245f3d87942328e">   54</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__stdin.html#gab6d00df5652bedd76245f3d87942328e">uic_stdin_add_commands</a>(</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keyword">const</span> std::map&lt;std::string, std::pair&lt;std::string, handler_func&gt;&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    &amp;append_commands);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#ga647041f25e0775f209a0550669e195d4">   64</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__stdin.html#ga647041f25e0775f209a0550669e195d4">uic_stdin_set_prompt_string</a>(<span class="keyword">const</span> std::string &amp;des_prompt_string);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// Unify definitions</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sl__status_8h.html">sl_status.h</a>&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#ga11eb1053fbe810b3078b6352d286da65">   40</a></span>&#160;<span class="keyword">using</span> <a class="code" href="group__uic__stdin.html#ga11eb1053fbe810b3078b6352d286da65">handle_args_t</a> = std::vector&lt;std::string&gt;;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#gaa4685e09c5ee62cf6b79c56a964da8ee">   47</a></span>&#160;<span class="keyword">using</span> <a class="code" href="group__uic__stdin.html#gaa4685e09c5ee62cf6b79c56a964da8ee">handler_func</a> = <a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> (*)(<span class="keyword">const</span> <a class="code" href="group__uic__stdin.html#ga11eb1053fbe810b3078b6352d286da65">handle_args_t</a> &amp;arg);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97">   53</a></span>&#160;<span class="keyword">using</span> <a class="code" href="group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97">command_map_t</a></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  = std::map&lt;std::string, std::pair&lt;std::string, handler_func&gt;&gt;;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#ga914fe74285cc40d4ecdc52646fad1f9d">   64</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__stdin.html#ga914fe74285cc40d4ecdc52646fad1f9d">uic_stdin_add_commands</a>(<span class="keyword">const</span> <a class="code" href="group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97">command_map_t</a> &amp;append_commands);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#gae47a6c88b804f228bf1832cb013bb0af">   70</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__uic__stdin.html#gae47a6c88b804f228bf1832cb013bb0af">uic_stdin_get_output_fd</a>();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#gad349cbdec1a224f71d114cbe90e2848e">   76</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__uic__stdin.html#gad349cbdec1a224f71d114cbe90e2848e">uic_stdin_handle_command</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *command);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif </span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">//UIC_STDIN_HPP</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#ga647041f25e0775f209a0550669e195d4">   72</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__uic__stdin.html#ga647041f25e0775f209a0550669e195d4">uic_stdin_set_prompt_string</a>(<span class="keyword">const</span> std::string &amp;des_prompt_string);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#gae47a6c88b804f228bf1832cb013bb0af">   78</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__uic__stdin.html#gae47a6c88b804f228bf1832cb013bb0af">uic_stdin_get_output_fd</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="group__uic__stdin.html#gad349cbdec1a224f71d114cbe90e2848e">   84</a></span>&#160;<a class="code" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> <a class="code" href="group__uic__stdin.html#gad349cbdec1a224f71d114cbe90e2848e">uic_stdin_handle_command</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *command);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif </span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">//UIC_STDIN_HPP</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="agroup__uic__stdin_html_gad349cbdec1a224f71d114cbe90e2848e"><div class="ttname"><a href="group__uic__stdin.html#gad349cbdec1a224f71d114cbe90e2848e">uic_stdin_handle_command</a></div><div class="ttdeci">sl_status_t uic_stdin_handle_command(const char *command)</div><div class="ttdoc">Run a command manually from CLI.</div></div>
 <div class="ttc" id="agroup__unify__sl__status__codes_html_ga7e293ad81575c986a476d3065d7ae49f"><div class="ttname"><a href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a></div><div class="ttdeci">uint32_t sl_status_t</div><div class="ttdef"><b>Definition:</b> sl_status.h:139</div></div>
+<div class="ttc" id="asl__status_8h_html"><div class="ttname"><a href="sl__status_8h.html">sl_status.h</a></div><div class="ttdoc">SL Status Codes.</div></div>
+<div class="ttc" id="agroup__uic__stdin_html_ga11eb1053fbe810b3078b6352d286da65"><div class="ttname"><a href="group__uic__stdin.html#ga11eb1053fbe810b3078b6352d286da65">handle_args_t</a></div><div class="ttdeci">std::vector&lt; std::string &gt; handle_args_t</div><div class="ttdoc">Arguments type.</div><div class="ttdef"><b>Definition:</b> uic_stdin.hpp:40</div></div>
+<div class="ttc" id="agroup__uic__stdin_html_gaa4685e09c5ee62cf6b79c56a964da8ee"><div class="ttname"><a href="group__uic__stdin.html#gaa4685e09c5ee62cf6b79c56a964da8ee">handler_func</a></div><div class="ttdeci">sl_status_t(*)(const handle_args_t &amp;arg) handler_func</div><div class="ttdoc">Handler function callback type.</div><div class="ttdef"><b>Definition:</b> uic_stdin.hpp:47</div></div>
+<div class="ttc" id="agroup__uic__stdin_html_gaa4d11441da74d83f0109afd864f9fb97"><div class="ttname"><a href="group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97">command_map_t</a></div><div class="ttdeci">std::map&lt; std::string, std::pair&lt; std::string, handler_func &gt; &gt; command_map_t</div><div class="ttdoc">Command map object, used to register a set of functions to handle incoming commands.</div><div class="ttdef"><b>Definition:</b> uic_stdin.hpp:54</div></div>
 <div class="ttc" id="agroup__uic__stdin_html_gae47a6c88b804f228bf1832cb013bb0af"><div class="ttname"><a href="group__uic__stdin.html#gae47a6c88b804f228bf1832cb013bb0af">uic_stdin_get_output_fd</a></div><div class="ttdeci">int uic_stdin_get_output_fd()</div><div class="ttdoc">Get stdout file number.</div></div>
 <div class="ttc" id="agroup__uic__stdin_html_ga647041f25e0775f209a0550669e195d4"><div class="ttname"><a href="group__uic__stdin.html#ga647041f25e0775f209a0550669e195d4">uic_stdin_set_prompt_string</a></div><div class="ttdeci">void uic_stdin_set_prompt_string(const std::string &amp;des_prompt_string)</div><div class="ttdoc">Set prompt string for command line interface This function sets the prompt string for the CLI.</div></div>
-<div class="ttc" id="agroup__uic__stdin_html_gab6d00df5652bedd76245f3d87942328e"><div class="ttname"><a href="group__uic__stdin.html#gab6d00df5652bedd76245f3d87942328e">uic_stdin_add_commands</a></div><div class="ttdeci">void uic_stdin_add_commands(const std::map&lt; std::string, std::pair&lt; std::string, handler_func &gt;&gt; &amp;append_commands)</div><div class="ttdoc">Add commands to command line interface This function is used at compile time to add commands to comma...</div></div>
-<div class="ttc" id="agroup__uic__stdin_html_gacf1ba285cfb23de27cf6997b522fba80"><div class="ttname"><a href="group__uic__stdin.html#gacf1ba285cfb23de27cf6997b522fba80">handle_args_t</a></div><div class="ttdeci">std::vector&lt; std::string &gt; handle_args_t</div><div class="ttdoc">Arguments type.</div><div class="ttdef"><b>Definition:</b> uic_stdin.hpp:37</div></div>
-<div class="ttc" id="agroup__uic__stdin_html_gaf2e355ac61e6583e7e7d8123d13eab6d"><div class="ttname"><a href="group__uic__stdin.html#gaf2e355ac61e6583e7e7d8123d13eab6d">handler_func</a></div><div class="ttdeci">sl_status_t(* handler_func)(const handle_args_t &amp;arg)</div><div class="ttdoc">Handler function callback type.</div><div class="ttdef"><b>Definition:</b> uic_stdin.hpp:44</div></div>
+<div class="ttc" id="agroup__uic__stdin_html_ga914fe74285cc40d4ecdc52646fad1f9d"><div class="ttname"><a href="group__uic__stdin.html#ga914fe74285cc40d4ecdc52646fad1f9d">uic_stdin_add_commands</a></div><div class="ttdeci">void uic_stdin_add_commands(const command_map_t &amp;append_commands)</div><div class="ttdoc">Add commands to command line interface This function is used at compile time to add commands to comma...</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_409f97388efe006bc3438b95e9edef48.html">components</a></li><li class="navelem"><a class="el" href="dir_66b8a743c1b42e2dacc13fc162290ee0.html">uic_stdin</a></li><li class="navelem"><a class="el" href="dir_74951aefa685b1a320aab43b379431e6.html">include</a></li><li class="navelem"><a class="el" href="uic__stdin_8hpp.html">uic_stdin.hpp</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:05 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:46 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

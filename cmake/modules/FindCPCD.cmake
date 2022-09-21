@@ -20,7 +20,7 @@ endif()
 
 if(NOT DEFINED FETCH_CPCD_VERSION)
   # The version to fetch should ideally be the same as the version used for fetching GeckoSDK
-  set(FETCH_CPCD_VERSION "v4.1.0")
+  set(FETCH_CPCD_VERSION "v4.1.1")
 endif()
 
 set(FETCHCONTENT_QUIET FALSE)

@@ -25,6 +25,7 @@
 #include "zwave_network_management_mock.h"
 #include "zwave_controller_callbacks_mock.h"
 #include "zwave_controller_mock.h"
+#include "zwave_controller_utils_mock.h"
 #include "zwave_command_handler_mock.h"
 #include "zwave_tx_mock.h"
 #include "zwave_tx_scheme_selector_mock.h"
@@ -42,6 +43,7 @@
 #include "zwave_command_class_association_send_mock.h"
 #include "zwave_command_class_firmware_update_mock.h"
 #include "zwave_s2_keystore_mock.h"
+#include "attribute_poll_mock.h"
 
 // Standard
 #include <stdbool.h>
@@ -74,21 +76,21 @@ void test_zwave_set_default()
 void test_callbacks()
 {
   zwave_dsk_t dsk                                 = {0x00,
-                     0x00,
-                     0xad,
-                     0xde,
-                     0xef,
-                     0xbe,
-                     0x10,
-                     0x01,
-                     0xad,
-                     0xde,
-                     0xef,
-                     0xbe,
-                     0xee,
-                     0xff,
-                     0x01,
-                     0x00};
+                                                     0x00,
+                                                     0xad,
+                                                     0xde,
+                                                     0xef,
+                                                     0xbe,
+                                                     0x10,
+                                                     0x01,
+                                                     0xad,
+                                                     0xde,
+                                                     0xef,
+                                                     0xbe,
+                                                     0xee,
+                                                     0xff,
+                                                     0x01,
+                                                     0x00};
   const zwave_controller_callbacks_t nm_callbacks = get_zpc_stdin_callbacks();
   nm_callbacks.on_keys_report(true, 0x87);
   nm_callbacks.on_dsk_report(2, dsk, 0x87);
@@ -248,12 +250,12 @@ void test_attribute_store_log_search()
   attribute_store_get_storage_type_IgnoreAndReturn(UNKNOWN_STORAGE_TYPE);
   attribute_store_is_value_defined_IgnoreAndReturn(false);
   attribute_store_get_type_name_IgnoreAndReturn("Hest");
-  sl_status_t state = uic_stdin_handle_command("attribute_store_log_search Hest");
+  sl_status_t state
+    = uic_stdin_handle_command("attribute_store_log_search Hest");
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
 
   state = uic_stdin_handle_command("attribute_store_log_search");
   TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
 }
 
 void test_attribute_store_log_node()
@@ -569,58 +571,6 @@ void test_zwave_abort_firmware_update()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }
 
-void test_attribute_store_configuration_set_auto_save()
-{
-  sl_status_t state;
-  state
-    = uic_stdin_handle_command("attribute_store_configuration_set_auto_save");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command(
-    "attribute_store_configuration_set_auto_save zzz");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command(
-    "attribute_store_configuration_set_auto_save 1,2");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  attribute_store_configuration_set_auto_save_Expect(true);
-  state
-    = uic_stdin_handle_command("attribute_store_configuration_set_auto_save 1");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  attribute_store_configuration_set_auto_save_Expect(false);
-  state
-    = uic_stdin_handle_command("attribute_store_configuration_set_auto_save 0");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-}
-
-void test_attribute_store_configuration_set_type_validation()
-{
-  sl_status_t state;
-  state = uic_stdin_handle_command(
-    "attribute_store_configuration_set_type_validation");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command(
-    "attribute_store_configuration_set_type_validation zzz");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  state = uic_stdin_handle_command(
-    "attribute_store_configuration_set_type_validation 1,2");
-  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
-
-  attribute_store_configuration_set_type_validation_Expect(true);
-  state = uic_stdin_handle_command(
-    "attribute_store_configuration_set_type_validation 1");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-
-  attribute_store_configuration_set_type_validation_Expect(false);
-  state = uic_stdin_handle_command(
-    "attribute_store_configuration_set_type_validation 0");
-  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
-}
-
 void test_zwave_learn_mode()
 {
   sl_status_t state;
@@ -652,5 +602,58 @@ void test_zwave_learn_mode()
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 
   state = uic_stdin_handle_command("zwave_learn_mode ");
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
+}
+
+void test_zwave_command_handler_dispatch()
+{
+  sl_status_t state
+    = uic_stdin_handle_command("zwave_command_handler_dispatch");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+
+  state = uic_stdin_handle_command("zwave_command_handler_dispatch s");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+
+  uint8_t expected_frame_data[] = {0xde, 0xad, 0xbe, 0xef, 0x42};
+  zwave_network_management_get_node_id_ExpectAndReturn(0);
+  zwave_controller_encapsulation_scheme_t zpc_scheme
+    = ZWAVE_CONTROLLER_ENCAPSULATION_SECURITY_2_AUTHENTICATED;
+  zpc_highest_security_class_ExpectAndReturn(zpc_scheme);
+  zwave_command_handler_dispatch_ExpectAndReturn(NULL,
+                                                 expected_frame_data,
+                                                 sizeof(expected_frame_data),
+                                                 SL_STATUS_OK);
+  zwave_command_handler_dispatch_IgnoreArg_connection_info();
+  state = uic_stdin_handle_command("zwave_command_handler_dispatch deadbeef42");
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
+}
+
+void test_attribute_poll_register()
+{
+  sl_status_t state = uic_stdin_handle_command("attribute_poll_register");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+
+  state = uic_stdin_handle_command("attribute_poll_register fish");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+
+  attribute_poll_register_ExpectAndReturn(42, 0, SL_STATUS_OK);
+  state = uic_stdin_handle_command("attribute_poll_register 42");
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
+
+  attribute_poll_register_ExpectAndReturn(1234, 42, SL_STATUS_OK);
+  state = uic_stdin_handle_command("attribute_poll_register 1234,42");
+  TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
+}
+
+void test_attribute_poll_deregister()
+{
+  sl_status_t state = uic_stdin_handle_command("attribute_poll_deregister");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+
+  state = uic_stdin_handle_command("attribute_poll_deregister fish");
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, state);
+
+  attribute_poll_deregister_ExpectAndReturn(42, SL_STATUS_OK);
+  state = uic_stdin_handle_command("attribute_poll_deregister 42");
   TEST_ASSERT_EQUAL(SL_STATUS_OK, state);
 }

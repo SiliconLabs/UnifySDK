@@ -46,21 +46,12 @@ pub unsafe extern "C" fn attribute_poll_schedule(handle: attribute_store_node_t)
 }
 
 #[no_mangle]
-pub extern "C" fn attribute_poll_init() -> sl_status_t {
-    // Fixme:Both backoff and default interval config should be parameters of
-    // the init function instead of reading from config. (will be fixed in UIC-1526).
-    if let Ok(backoff) = unify_config_sys::config_get_as_int("zpc.poll.backoff") {
-        if let Ok(default_interval) =
-            unify_config_sys::config_get_as_int("zpc.poll.default_interval")
-        {
-            AttributePoll::default().initialize(PollEngineConfig {
-                backoff: backoff as u32,
-                default_interval: default_interval as u32,
-            });
-            return SL_STATUS_OK;
-        }
-    }
-    SL_STATUS_FAIL
+pub extern "C" fn attribute_poll_init(backoff : u32, default_interval : u32) -> sl_status_t {
+    AttributePoll::default().initialize(PollEngineConfig {
+        backoff: backoff,
+        default_interval: default_interval,
+    });
+    SL_STATUS_OK
 }
 
 #[no_mangle]

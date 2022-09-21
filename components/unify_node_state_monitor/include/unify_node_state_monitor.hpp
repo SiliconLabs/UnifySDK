@@ -13,6 +13,7 @@
 
 /**
  * @defgroup unify_node_state_monitor
+ * @ingroup unify_components
  * @brief Monitors when Unify nodes are added, removed, or failing
  *
  * Monitor Unify nodes on MQTT and support following:
@@ -234,7 +235,7 @@ class node_state_monitor
 
   /**
    * @brief Get a reference to the nodes object containing all the nodes.
-   * 
+   *
    * @return const std::unordered_map<std::string, node>& map of all nodes.
    */
   const std::unordered_map<std::string, node> &get_nodes() const

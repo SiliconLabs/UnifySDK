@@ -28,6 +28,10 @@
 // Number of Reports to Follow
 typedef uint8_t reports_to_follow_t;
 
+// Set Command counter (i.e. how many commands have been sent) for an attribute
+// in a multi-set resolution.
+typedef uint8_t set_commands_count_t;
+
 // Values that can be used for "Umbrella" attributes
 typedef enum {
   FINAL_STATE             = 0,

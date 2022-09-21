@@ -75,6 +75,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/config.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/config)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/postinst.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/postinst)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/postrm.in
+               ${CMAKE_CURRENT_BINARY_DIR}/debconf/postrm)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/prerm.in
                ${CMAKE_CURRENT_BINARY_DIR}/debconf/prerm)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/debconf/templates.in

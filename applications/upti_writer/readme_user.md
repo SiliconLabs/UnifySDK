@@ -1,10 +1,10 @@
 # UPTI WRITER User's Guide
 
-The _UPTI_WRITER_ is an application to receive trace packages captured with _UPTI_CAP_ application and save them to file in [Network Analyzer](https://docs.silabs.com/simplicity-studio-5-users-guide/latest/ss-5-users-guide-tools-network-analyzer/) compatible format. 
+The _UPTI_WRITER_ is an application to receive trace packages captured with _UPTI_CAP_ application and save them to file in [Network Analyzer](https://docs.silabs.com/simplicity-studio-5-users-guide/latest/ss-5-users-guide-tools-network-analyzer/) compatible format.
 
-The _UPTI_WRITER_ subscribes to topics 
+The _UPTI_WRITER_ subscribes to topics
 
-* `ucl/UPTICap/List` 
+* `ucl/UPTICap/List`
 * `ucl/UPTICap/+/TracePackage`
 
 ## Running the UPTI WRITER
@@ -17,7 +17,7 @@ You can configure the MQTT server, log file path, etc through command line optio
 
 For details about options, run the following command:
 
-```bash
+```console
 pi@unify:uic-upti-writer --help
 ```
 
@@ -30,11 +30,11 @@ These fields are decoded as follows:
 
 •94143017 - Timestamp in microseconds when event completed (start time can be inferred from subtracting Duration from this value).
 •800 - Event duration in microseconds.
-•16908330 - Event type ID. This varies for different kinds of trace events (Packets, traces, etc.) 
+•16908330 - Event type ID. This varies for different kinds of trace events (Packets, traces, etc.)
 •Packet - Event type string. This is the friendly name (as ASCII text) for the event type and will match what Network Analyzer displays in the event window for this event type.
 •1B - Debug protocol's sequence number from the capture source (used to detect gaps in the capture stream).
 •440138076 - Source device serial number where event was captured.
-•[F8 C4 ... 51] - Event data bytes (prior to any decryption; includes any RadioInfo data appended to end of packets by the hardware). 
+•[F8 C4 ... 51] - Event data bytes (prior to any decryption; includes any RadioInfo data appended to end of packets by the hardware).
 ```
 
 ### File Example
@@ -87,7 +87,7 @@ On the File menu, select Open File (Network Analyzer trace ..):
 
 ![SS_Network_Analyzer_Open_File](doc/assets/img/studio_network_analyzer_open_file.png)
 
-Save log file in upgraded format: 
+Save log file in upgraded format:
 
 ![SS_Network_Analyzer_Upgrade_File](doc/assets/img/studio_network_analyzer_upgrade_file.png)
 

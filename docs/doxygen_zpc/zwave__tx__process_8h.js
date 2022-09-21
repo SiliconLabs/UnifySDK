@@ -3,7 +3,9 @@ var zwave__tx__process_8h =
     [ "zwave_tx_state_t", "group__zwave__tx__process.html#gaf23d19e8b58de89df0b17367f24efd55", null ],
     [ "zwave_tx_backoff_reason_t", "group__zwave__tx__process.html#gaeb08015e4688663a184dcc9786da838d", [
       [ "BACKOFF_CURRENT_SESSION_ID", "group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838dac8ec5edb249a54f0cbec8fa3bb896ede", null ],
-      [ "BACKOFF_EXPECTED_ADDITIONAL_FRAMES", "group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838dadb40f28a277a755676cbfe031a50a232", null ]
+      [ "BACKOFF_EXPECTED_ADDITIONAL_FRAMES", "group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838dadb40f28a277a755676cbfe031a50a232", null ],
+      [ "BACKOFF_PROTOCOL_SENDING_FRAMES", "group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838dad1d72d2aba47b3db2b9dd14101a90ed8", null ],
+      [ "BACKOFF_INCOMING_UNSOLICITED_ROUTED_FRAME", "group__zwave__tx__process.html#ggaeb08015e4688663a184dcc9786da838da40499038892c49103c247dc64d924741", null ]
     ] ],
     [ "zwave_tx_events_t", "group__zwave__tx__process.html#ga01ff7baa7653524ec6e0d2b5b70a884a", [
       [ "ZWAVE_TX_SEND_NEXT_MESSAGE", "group__zwave__tx__process.html#gga01ff7baa7653524ec6e0d2b5b70a884aa18031f9233bd88db00a50ec83e12e6aa", null ],

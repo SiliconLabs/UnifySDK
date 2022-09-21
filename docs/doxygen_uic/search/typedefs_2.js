@@ -1,12 +1,14 @@
 var searchData=
 [
-  ['datastore_5fattribute_5fid_5ft_2488',['datastore_attribute_id_t',['../group__datastore__attributes.html#ga5918f3c1eb857df59e4b33c9032bf10a',1,'datastore_attributes.h']]],
-  ['datastore_5fkey_5ft_2489',['datastore_key_t',['../group__unify__datastore.html#gaf5b54b66e8ded7f7ed747fd984b38a67',1,'datastore.h']]],
-  ['dependencies_5ft_2490',['dependencies_t',['../namespaceast.html#a3546c9117df2077a10c18303e52c29d1',1,'ast']]],
-  ['dotdot_5fattribute_5fid_5ft_2491',['dotdot_attribute_id_t',['../uic__typedefs_8h.html#a60e7b628260e288991332e2cf298bf88',1,'uic_typedefs.h']]],
-  ['dotdot_5fcluster_5fid_5ft_2492',['dotdot_cluster_id_t',['../uic__typedefs_8h.html#ab3d3270ff0f5bf7fc4182cecf47c197e',1,'uic_typedefs.h']]],
-  ['dotdot_5fcommand_5fid_5ft_2493',['dotdot_command_id_t',['../uic__typedefs_8h.html#a4f9d73e2b8b782a2dd3b0e17184d94fc',1,'uic_typedefs.h']]],
-  ['dotdot_5fendpoint_5fid_5ft_2494',['dotdot_endpoint_id_t',['../uic__typedefs_8h.html#aaf28aac2318abc987ffd6f71dcda14c2',1,'uic_typedefs.h']]],
-  ['dotdot_5fgroup_5fid_5ft_2495',['dotdot_group_id_t',['../uic__typedefs_8h.html#a5525a5473b4e055677cccaece6cbfbe1',1,'uic_typedefs.h']]],
-  ['dotdot_5funid_5ft_2496',['dotdot_unid_t',['../uic__typedefs_8h.html#afa204c3a4aca223f5345d60519083395',1,'uic_typedefs.h']]]
+  ['cccolorloopdirection_17351',['cccolorloopdirection',['../group__zap.html#ga1551e2fd6d2d3bf0bb889609eb1b8980',1,'zap-types.h']]],
+  ['cccoloroptions_17352',['cccoloroptions',['../group__zap.html#ga7561d36ab07355bb6766380172d6a6bd',1,'zap-types.h']]],
+  ['ccmaxmiredsfield_17353',['CCMaxMiredsField',['../group__zap.html#ga6f7609bbfa19b58dcaca34b6fe65a8e7',1,'zap-types.h']]],
+  ['ccminmiredsfield_17354',['CCMinMiredsField',['../group__zap.html#ga752e3e02ae7fb24c540bc0c284a73cab',1,'zap-types.h']]],
+  ['clock_5ftime_5ft_17355',['clock_time_t',['../gecko_2contiki-conf_8h.html#a6e6c13e871b82d881a01d1bc8df69d23',1,'clock_time_t():&#160;contiki-conf.h'],['../posix_2contiki-conf_8h.html#a42fc7b708ad04499c436158fd5f37ed4',1,'clock_time_t():&#160;contiki-conf.h']]],
+  ['clusterid_17356',['clusterId',['../group__zap.html#gada30b9990a59cbccdd345b747405328f',1,'zap-types.h']]],
+  ['command_5fmap_5ft_17357',['command_map_t',['../group__uic__stdin.html#gaa4d11441da74d83f0109afd864f9fb97',1,'uic_stdin.hpp']]],
+  ['configurationparameter_17358',['ConfigurationParameter',['../group__zap.html#gab54a2648a5c734d11cd20990b29c2319',1,'zap-types.h']]],
+  ['connection_5fcallback_5ft_17359',['connection_callback_t',['../mqtt__client_8hpp.html#a61c7385469ae06687e64450a07875e71',1,'mqtt_client.hpp']]],
+  ['connection_5fstatus_5fcallback_5ft_17360',['connection_status_callback_t',['../mqtt__client_8hpp.html#ae62a8a2deca0ff4491d851f62836c048',1,'mqtt_client.hpp']]],
+  ['coordinateandorientation_17361',['CoordinateAndOrientation',['../group__zap.html#gad4769a21a2958e8535f97197ee6e88ff',1,'zap-types.h']]]
 ];

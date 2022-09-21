@@ -42,10 +42,6 @@ static uint8_t the_nvr_version;
 
 extern uint8_t dynamic_ecdh_private_key[32];
 
-/// Stubs
-// TODO: re-add this after UIC-933 is done
-//CTR_DRBG_CTX s2_ctr_drbg;
-
 /// Override mock implementation of zwapi_nvr_get_value
 sl_status_t
   zwapi_nvr_get_value(uint8_t bOffset, uint8_t bLength, uint8_t *bRetBuffer)

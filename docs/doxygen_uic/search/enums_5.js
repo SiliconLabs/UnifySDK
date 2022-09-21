@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['mqtt_5fevent_5ft_2544',['mqtt_event_t',['../group__mqtt__client.html#gaca6b39d8cd48e315ea885c3f715a7ff3',1,'mqtt_client.h']]]
+  ['getlogrecordresponseeventtype_18756',['GetLogRecordResponseEventType',['../group__zap.html#gaa28a09e2ea7706b0a839eb599dce5731',1,'zap-types.h']]],
+  ['getmeasurementprofileresponsestatus_18757',['GetMeasurementProfileResponseStatus',['../group__zap.html#gad56ae2898a8bdf55b3c346ae87316a74',1,'zap-types.h']]]
 ];

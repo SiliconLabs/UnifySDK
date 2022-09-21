@@ -61,7 +61,8 @@ var group__zwave__network__management =
       [ "NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a5850e11b011b41855070d76e1c74998e", null ],
       [ "NM_FAILED_NODE_REMOVE", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a1809dd1ffd3d4217877bd42e77d63b08", null ],
       [ "NM_SEND_NOP", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a35407950f9012a40a262d892e9c5b7ae", null ],
-      [ "NM_ASSIGNING_RETURN_ROUTE", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694ad79dfac24fb54f04b3229dc2fad738e0", null ]
+      [ "NM_ASSIGNING_RETURN_ROUTE", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694ad79dfac24fb54f04b3229dc2fad738e0", null ],
+      [ "NM_NEIGHBOR_DISCOVERY_ONGOING", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a5b90cc6ede27aceb64ff3eff80d4d21e", null ]
     ] ],
     [ "we_have_return_routes_to_assign", "group__zwave__network__management.html#ga90aba971e0bdba90096c533bcd803dc4", null ],
     [ "zwave_network_management_abort", "group__zwave__network__management.html#ga4f29e019031e0fea2e461121666c10de", null ],
@@ -74,9 +75,11 @@ var group__zwave__network__management =
     [ "zwave_network_management_get_granted_keys", "group__zwave__network__management.html#gae30cb70a49076bdf1809f281e63e694c", null ],
     [ "zwave_network_management_get_home_id", "group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967", null ],
     [ "zwave_network_management_get_network_node_list", "group__zwave__network__management.html#gaf385a1580adbef8a8d6b9c65da5f5664", null ],
+    [ "zwave_network_management_get_network_size", "group__zwave__network__management.html#ga157dae4a3bf86cb296df917954c27d18", null ],
     [ "zwave_network_management_get_node_id", "group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e", null ],
     [ "zwave_network_management_get_state", "group__zwave__network__management.html#gaaf0ce0b04ebf420e4f7e23e166121a35", null ],
     [ "zwave_network_management_is_busy", "group__zwave__network__management.html#ga496a9fcbb21a3ffa39b17eeb532a70fa", null ],
+    [ "zwave_network_management_is_protocol_sending_frames_to_node", "group__zwave__network__management.html#ga38921e3a42a10fc5135615b50f0573cd", null ],
     [ "zwave_network_management_is_zpc_sis", "group__zwave__network__management.html#ga10d248f803b45c70adf8ecec24308109", null ],
     [ "zwave_network_management_keys_set", "group__zwave__network__management.html#ga3b0416e91e7de032f028aada296111c6", null ],
     [ "zwave_network_management_learn_mode", "group__zwave__network__management.html#ga9872a0f15f3797e33edc76f73c7972e6", null ],

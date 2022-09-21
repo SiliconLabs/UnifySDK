@@ -29,6 +29,10 @@
 #include "sl_status.h"
 #include "attribute_store.h"
 
+// Constant stating how many commands we need as a maximum to set an
+// association group content.
+#define MAXIMUM_COMMANDS_TO_SET_GROUP_CONTENT 2
+
 ///< Index for parsing commands
 #define GROUPING_REPORT_MINIMUM_LENGTH         3
 #define GROUPING_REPORT_NUMBER_OF_GROUPS_INDEX 2

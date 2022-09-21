@@ -46,6 +46,7 @@ NAME      zwave_network_management_helpers_test
 SOURCES   zwave_network_management_helpers_test.c
 DEPENDS
   zwave_api_mock
+  zwave_controller_mock
 )
 target_include_directories(zwave_network_management_helpers_test PRIVATE ../src)
 
@@ -98,3 +99,35 @@ EXCLUDE
   zwave_network_management_helpers.c
 )
 target_include_directories(zwave_network_management_set_default_test PRIVATE ../src)
+
+## Various state tests
+target_add_unittest(zwave_network_management
+NAME      zwave_network_management_various_test
+SOURCES   zwave_network_management_various_test.c
+DEPENDS
+  uic_contiki_stub
+  zwave_api_mock
+  zwave_s2_mock
+  zwave_s0_mock
+  zwave_network_management_helpers_mock
+  zwave_rx_mock
+EXCLUDE
+  zwave_network_management_helpers.c
+)
+target_include_directories(zwave_network_management_various_test PRIVATE ../src)
+
+## Various state tests
+target_add_unittest(zwave_network_management
+NAME      zwave_network_management_neighbor_discovery_test
+SOURCES   zwave_network_management_neighbor_discovery_test.c
+DEPENDS
+  uic_contiki_stub
+  zwave_api_mock
+  zwave_s2_mock
+  zwave_s0_mock
+  zwave_network_management_helpers_mock
+  zwave_rx_mock
+EXCLUDE
+  zwave_network_management_helpers.c
+)
+target_include_directories(zwave_network_management_neighbor_discovery_test PRIVATE ../src)

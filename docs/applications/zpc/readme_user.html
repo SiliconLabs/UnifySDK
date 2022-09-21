@@ -34,8 +34,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -106,50 +105,62 @@ Z-Wave controller.</p>
 <section id="files">
 <h2>Files<a class="headerlink" href="#files" title="Permalink to this heading"></a></h2>
 <p>The Debian package of the ZPC contains the following files:</p>
-<table class="docutils align-default">
+<table border="1" class="docutils">
 <thead>
-<tr class="row-odd"><th class="head"><p>Path</p></th>
-<th class="head"><p>Description</p></th>
+<tr>
+<th>Path</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>/lib/systemd/system/uic-zpc.service</p></td>
-<td><p>Systemd service file</p></td>
+<tr>
+<td>/lib/systemd/system/uic-zpc.service</td>
+<td>Systemd service file</td>
 </tr>
-<tr class="row-odd"><td><p>/usr/bin/zpc</p></td>
-<td><p>ZPC application</p></td>
+<tr>
+<td>/usr/bin/zpc</td>
+<td>ZPC application</td>
 </tr>
-<tr class="row-even"><td><p>/usr/bin/zpc_database_tool</p></td>
-<td><p>Tool for database manipulation</p></td>
+<tr>
+<td>/usr/bin/zpc_database_tool</td>
+<td>Tool for database manipulation</td>
 </tr>
-<tr class="row-odd"><td><p>/usr/bin/zpc_database_recover_tool</p></td>
-<td><p>Tool for triggering a re-interview of all nodes</p></td>
+<tr>
+<td>/usr/bin/zpc_database_recover_tool</td>
+<td>Tool for triggering a re-interview of all nodes</td>
 </tr>
-<tr class="row-even"><td><p>/usr/share/bash-completion/completions/zpc</p></td>
-<td><p>script for bash auto completion</p></td>
+<tr>
+<td>/usr/share/bash-completion/completions/zpc</td>
+<td>script for bash auto completion</td>
 </tr>
-<tr class="row-odd"><td><p>/usr/share/uic/node_identify_rpi4_led.sh</p></td>
-<td><p>script used by the indicator CC</p></td>
+<tr>
+<td>/usr/share/uic/node_identify_rpi4_led.sh</td>
+<td>script used by the indicator CC</td>
 </tr>
-<tr class="row-even"><td><p>/usr/share/doc/uic-zpc/copyright</p></td>
-<td><p>copyright notice</p></td>
+<tr>
+<td>/usr/share/doc/uic-zpc/copyright</td>
+<td>copyright notice</td>
 </tr>
-<tr class="row-odd"><td><p>/etc/uic/uic.cfg</p></td>
-<td><p>Default location of config file</p></td>
+<tr>
+<td>/etc/uic/uic.cfg</td>
+<td>Default location of config file</td>
 </tr>
-<tr class="row-even"><td><p>/var/lib/uic/zpc.db</p></td>
-<td><p>Default location of database</p></td>
+<tr>
+<td>/var/lib/uic/zpc.db</td>
+<td>Default location of database</td>
 </tr>
-<tr class="row-odd"><td><p>/usr/share/uic/rules</p></td>
-<td><p>Default location of mapping rules</p></td>
+<tr>
+<td>/usr/share/uic/rules</td>
+<td>Default location of mapping rules</td>
 </tr>
-<tr class="row-even"><td><p>/usr/share/uic/zwave_poll_config.yaml</p></td>
-<td><p>Default location of network polling attribute list</p></td>
+<tr>
+<td>/usr/share/uic/zwave_poll_config.yaml</td>
+<td>Default location of network polling attribute list</td>
 </tr>
 </tbody>
 </table>
 <section id="configuration-file">
-<h3>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this heading"></a></h3>
+<span id="id1"></span><h3>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this heading"></a></h3>
 <p>The configuration file is written in YAML and is used to set up the ZPC.
 The ZPC can dump the running configuration using the command line option <code class="docutils literal notranslate"><span class="pre">--dump-config</span></code>.
 The dumped file can be used as a starting point a config file.</p>
@@ -186,8 +197,8 @@ zpc:
 </pre></div>
 </div>
 <p>A special environment variable called UIC_CONF can be set to a path of a custom config file
-which will override the default config file. This can be used in a development environment</p>
-<p>for e.g.</p>
+which will override the default config file. This can be used in a development environment.
+For example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">UIC_CONF</span><span class="o">=</span>../custom_uic.conf sudo -E ./applications/zpc/zpc
 </pre></div>
 </div>
@@ -204,7 +215,8 @@ e.g. Nodes DSKs or KEX Fail types will be unknown.</p>
 </div></blockquote>
 <p>The best way to run ZPC is using the Systemd service that is
 installed with the Debian installer.
-For more information, see <a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">README.md</span></a>.</p>
+For more information, see the
+<a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify Framework User guide</span></a>.</p>
 </section>
 </section>
 <section id="running-zpc-from-the-command-line">
@@ -239,7 +251,7 @@ command line when booting the ZPC.</p>
 <p><code class="docutils literal notranslate"><span class="pre">--zpc.ncp_version</span></code> will print the chip and software version of the
 SerialAPI and exit immediately. This can be used to determine if the firmware
 should be applied or not.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/tty.usbserial-14310 --zpc.ncp_version
 <span class="c1"># Unify build: ver_1.0.2_cert-196-g7d2caffd</span>
 <span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728069 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: Unify Signal Handler
 <span class="m">2022</span>-Jan-05 <span class="m">14</span>:48:25.728548 &lt;i&gt; <span class="o">[</span>uic_component_fixtures<span class="o">]</span> Completed: Unify MQTT Client
@@ -252,7 +264,7 @@ should be applied or not.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">--zpc.ncp_update</span></code> performs a firmware update and exits the application when the
 update is completed.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/ttyUSB0 --zpc.ncp_update new_firmware.gbl
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zpc --zpc.serial /dev/ttyUSB0 --zpc.ncp_update new_firmware.gbl
 </pre></div>
 </div>
 <p>If the firmware update succeeds the the exit code of the zpc will be <em>2</em> and if
@@ -311,12 +323,12 @@ under the UIID space in the OTA cluster:
 <code class="docutils literal notranslate"><span class="pre">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/#</span></code></p>
 <p>For more details about available attributes under each UIID, see
 the Unify specification - Common OTA FW Update Service chapter.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/CurrentVersion/Reported</span>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/CurrentVersion/Reported</span>
 </pre></div>
 </div>
 <p>For example, if a node has 2 Firmware Targets, the publications may look as follows:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-00-01/CurrentVersion/Reported - {&quot;value&quot;: &quot;3.2.0&quot;}</span>
-<span class="go">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-01-01/CurrentVersion/Reported - {&quot;value&quot;: &quot;3.2.0&quot;}</span>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-00-01/CurrentVersion/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.2.0&quot;</span>}
+<span class="ow">ucl/by-unid/zw-DB9E8293-0007/ep0/OTA/Attributes/UIID/ZWave-010f-1002-0b01-01-01/CurrentVersion/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.2.0&quot;</span>}
 </pre></div>
 </div>
 <p>UIID <em>ZWave-010f-1002-0b01-00-01</em> can be used to firmware update target 0.
@@ -369,9 +381,9 @@ installed to access binaries with older or newer versions.</p>
 <p>You can also perform the operation with an identical firmware image (or older)
 but the end node will reject the upgrade operation after the transfer.</p>
 <p>Verify that your images are ready and readable:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic-image-provider/updates $ ls -l
--rw-r--r-- <span class="m">1</span> pi  pi   <span class="m">171380</span> Aug <span class="m">17</span> <span class="m">14</span>:52 powerstrip.gbl
--rw-r--r-- <span class="m">1</span> pi  pi   <span class="m">168036</span> Aug <span class="m">17</span> <span class="m">14</span>:52 sensor_pir.gbl
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic-image-provider/updates $ </span>ls -l
+<span class="go">-rw-r--r-- 1 pi  pi   171380 Aug 17 14:52 powerstrip.gbl</span>
+<span class="go">-rw-r--r-- 1 pi  pi   168036 Aug 17 14:52 sensor_pir.gbl</span>
 </pre></div>
 </div>
 <p>Then, use the found UIID to configure the <em>image.json</em> file from the image
@@ -409,10 +421,10 @@ the firmware transfer operation under the DevGUI:</p>
 <li><p>The Status attribute is back to “Idle”</p></li>
 </ul>
 <p>for example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Offset/Reported - {&quot;value&quot;: 171380}
-ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Size/Reported - {&quot;value&quot;: 171380}
-ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/LastError/Reported - {&quot;value&quot;: &quot;Success&quot;}
-ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported - {&quot;value&quot;: &quot;Idle&quot;}
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Offset/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">171380</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Size/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">171380</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/LastError/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Success&quot;</span>}
+<span class="ow">ucl/by-unid/&lt;UNID&gt;/ep0/OTA/Attributes/UIID/&lt;UIID&gt;/Status/Reported</span> - {<span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Idle&quot;</span>}
 </pre></div>
 </div>
 <p>This state will only be visible for a very short time, as the ZPC will
@@ -498,8 +510,9 @@ the ZPC will try the ZPC command 3 times with a 20 seconds interval.</p>
 <p>Z-Wave Wake up devices are supported by pausing node resolution when
 the device is sleeping, which means that if the temperature of a thermostat is
 changed multiple times while the device is sleeping, the ZPC will only send the
-latest change using the thermostat set point command. The ZPC will send wake-up
-no-more information when there is nothing more to resolve regarding the node.</p>
+latest change using the thermostat set point command. The ZPC sends
+Wake Up No More Information automatically when it no longer needs to
+communicate with the node.</p>
 <p>The default wake up interval used by the ZPC can be configured with the
 option <code class="docutils literal notranslate"><span class="pre">zpc.default_wake_up_interval</span></code>.</p>
 </section>
@@ -519,8 +532,8 @@ listening and FLIRS failing nodes to check if they are resounding again.</p>
 <li><p>40 * 4^n for FLiRS devices</p></li>
 </ul>
 <p>The threshold values for the number of failed transmissions and missing wake-up
-notifications can be configured with the options, zpc.accepted_transmit_failure
-and zpc.missing_wake_up_notification</p>
+notifications can be configured with the options, <code class="docutils literal notranslate"><span class="pre">zpc.accepted_transmit_failure</span></code>
+and <code class="docutils literal notranslate"><span class="pre">zpc.missing_wake_up_notification</span></code></p>
 </section>
 <section id="network-polling">
 <h2>Network Polling<a class="headerlink" href="#network-polling" title="Permalink to this heading"></a></h2>
@@ -567,9 +580,10 @@ polling based on the device type) file will be located in:</p>
 <p>Besides, the user would also configure the minimum interval between two
 consecutive poll request (i.e., zpc.poll.backoff) and default polling interval
 (i.e., zpc.poll.default_interval) in case the attribute is registered to be
-polled without an interval. These values should be included in [Configuration
-File used to set up the ZPC](###Configuration File). The default backoff interval
-is set to 30 seconds. This value is selected based on experience and a user can
+polled without an interval. These values should be included in
+<a class="reference internal" href="#configuration-file"><span class="std std-ref">Configuration File used to set up the ZPC</span></a>.
+The default backoff interval is set to 30 seconds. This value is selected
+based on experience and a user can
 configure a value above 1 second based on their network needs. Note that the
 minimum rate limit between two consecutive poll requests is 1 second as
 discussed in the Z-Wave Plus role Type Specification in Polling Devices section.</p>
@@ -582,53 +596,99 @@ discussed in the Z-Wave Plus role Type Specification in Polling Devices section.
 All maps are defined by a set of configuration files which the ZPC loads as boot.
 Default files are installed in the <code class="docutils literal notranslate"><span class="pre">/usr/share/uic/rules</span></code> directory.
 The mapping file extension is <em>.uam</em> which is short for <strong>Unify Attribute Map</strong>.</p>
-<p>The following table has a brief description of how ZCL clusters are mapped to Z-Wave command classes, by default.</p>
-<table class="docutils align-default">
+<p>The <a class="reference internal" href="readme_certification.html"><span class="doc std std-doc">ZPC Z-Wave Certification Guide</span></a> indicates
+how commands classes relates to each DotDot cluster with the default maps.</p>
+</section>
+<section id="generated-commands-from-end-nodes">
+<h3>Generated Commands from end nodes<a class="headerlink" href="#generated-commands-from-end-nodes" title="Permalink to this heading"></a></h3>
+<p>The ZPC, if associated to association groups that send controlling commands, will
+forward incoming controlling commands on MQTT.</p>
+<table border="1" class="docutils">
 <thead>
-<tr class="row-odd"><th class="head"><p>DotDot Cluster</p></th>
-<th class="head"><p>Z-Wave Command Classes</p></th>
-<th class="head"><p>Notes</p></th>
+<tr>
+<th>Command Class</th>
+<th>Command</th>
+<th>Cluster and Command</th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>OnOff</p></td>
-<td><p>Binary Switch <br> Basic <br> Multilevel Switch</p></td>
-<td><p>The DotDot OnOff commands (On and Off) are mapped to Z-Wave Binary Switch Set command  or Basic SET</p></td>
+<tr>
+<td>COMMAND_CLASS_BASIC</td>
+<td>BASIC_SET (Value == 0x00)</td>
+<td>OnOff::Off</td>
 </tr>
-<tr class="row-odd"><td><p>OccupancySensing</p></td>
-<td><p>Notification</p></td>
-<td><p>The Z-Wave Notification Report command is mapped to Occupancy and OccupacyType DotDot attributes</p></td>
+<tr>
+<td>COMMAND_CLASS_BASIC</td>
+<td>BASIC_SET (Value != 0x00)</td>
+<td>OnOff::On</td>
 </tr>
-<tr class="row-even"><td><p>IASZone</p></td>
-<td><p>Notification</p></td>
-<td><p></p></td>
+<tr>
+<td>COMMAND_CLASS_SWITCH_BINARY</td>
+<td>SWITCH_BINARY_SET (Value == 0)</td>
+<td>OnOff::Off</td>
 </tr>
-<tr class="row-odd"><td><p>Illumiance level sensing</p></td>
-<td><p>Notification</p></td>
-<td><p></p></td>
+<tr>
+<td>COMMAND_CLASS_SWITCH_BINARY</td>
+<td>SWITCH_BINARY_SET (Value != 0)</td>
+<td>OnOff::On</td>
 </tr>
-<tr class="row-even"><td><p>DoorLock</p></td>
-<td><p>Door Lock</p></td>
-<td><p>The DotDot DoorLock commands (LockDoor and UnlockDoor) are mapped to Z-Wave Door Lock Set command</p></td>
+<tr>
+<td>COMMAND_CLASS_SWITCH_MULTILEVEL</td>
+<td>SWITCH_MULTILEVEL_SET</td>
+<td>Level::MoveToLevel</td>
 </tr>
-<tr class="row-odd"><td><p>Thermostat</p></td>
-<td><p>Multilevel Sensor<br> Thermostat Setpoint <br> Thermostat Mode</p></td>
-<td><p>The DotDot SetpointRaiseOrLower and WriteAttribute commands are mapped to Thermostat Setpoint and Thermostat Mode Commands</p></td>
+<tr>
+<td>COMMAND_CLASS_SWITCH_MULTILEVEL</td>
+<td>SWITCH_MULTILEVEL_START_LEVEL_CHANGE</td>
+<td>Level::Move</td>
 </tr>
-<tr class="row-even"><td><p>TemperatureMeasurement</p></td>
-<td><p>Multilevel Sensor</p></td>
-<td><p></p></td>
+<tr>
+<td>COMMAND_CLASS_SWITCH_MULTILEVEL</td>
+<td>SWITCH_MULTILEVEL_STOP_LEVEL_CHANGE</td>
+<td>Level::Stop</td>
 </tr>
-<tr class="row-odd"><td><p>Level</p></td>
-<td><p>Multilevel Switch</p></td>
-<td><p></p></td>
+<tr>
+<td>COMMAND_CLASS_INDICATOR</td>
+<td>INDICATOR_SET</td>
+<td>Identify::Identify</td>
 </tr>
-<tr class="row-even"><td><p>IASZone</p></td>
-<td><p>Battery</p></td>
-<td><p></p></td>
+<tr>
+<td>COMMAND_CLASS_THERMOSTAT_MODE</td>
+<td>THERMOSTAT_MODE_SET</td>
+<td>Thermostat::WriteAttributes</td>
 </tr>
 </tbody>
 </table>
+<p>For example, if the ZPC receives a Multilevel Switch Set with value = 50,
+it will publish:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-&lt;HomeID&gt;-&lt;NodeID&gt;/ep0/Level/GeneratedCommands/MoveToLevel</span> -
+{<span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;Level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;TransitionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;OptionsMask&quot;</span><span class="p">:</span><span class="w"> </span>{<span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;ExecuteIfOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;CoupleColorTempToLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">  </span>}<span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;OptionsOverride&quot;</span><span class="p">:</span><span class="w"> </span>{<span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;ExecuteIfOff&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;CoupleColorTempToLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">  </span>}<span class="w"></span>
+}
+</pre></div>
+</div>
+<p>The ZPC will publish the list of possible generated commands reading from the
+AGI data. For example, if a node shows Multilevel Switch Start Level Change and
+Multilevel Switch Stop Level Change in association groups, the following
+publication will take place:</p>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/zw-&lt;HomeID&gt;-&lt;NodeID&gt;/ep0/Level/SupportedGeneratedCommands</span> -
+{<span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;Move&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;Stop&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+}
+</pre></div>
+</div>
 </section>
 <section id="modifying-maps-for-the-zpc">
 <h3>Modifying maps for the ZPC<a class="headerlink" href="#modifying-maps-for-the-zpc" title="Permalink to this heading"></a></h3>
@@ -866,23 +926,23 @@ endpoints and keep the minimum in the datastore.</p>
 <p>After running the recover tool, the ZPC will re-interview all devices in the
 network, as if a step migration was performed.</p>
 <p>Stop the ZPC and make a database backup:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic $ service uic-zpc stop
-pi@unify:/var/lib/uic $ cp zpc.db zpc_back_up.db
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic $ </span>service uic-zpc stop
+<span class="gp">pi@unify:/var/lib/uic $ </span>cp zpc.db zpc_back_up.db
 </pre></div>
 </div>
 <p>Run the recover tool. Specifying the target version is optional:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic $ zpc_database_recover_tool --target_version <span class="m">2</span> --zpc.datastore_file /var/lib/uic/zpc.db
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic $ </span>zpc_database_recover_tool --target_version <span class="m">2</span> --zpc.datastore_file /var/lib/uic/zpc.db
 
-&lt;i&gt; <span class="o">[</span>datastore_fixt<span class="o">]</span> Using datastore file: /var/lib/uic/zpc.db
-&lt;d&gt; <span class="o">[</span>datastore_fixt<span class="o">]</span> SQLITE Version: <span class="m">3</span>.28.0
-&lt;i&gt; <span class="o">[</span>zpc_database_recover_tool<span class="o">]</span> Datastore version reported from the datastore file: <span class="m">3</span>
-&lt;i&gt; <span class="o">[</span>zpc_database_recover_tool<span class="o">]</span> Erasing endpoint data <span class="k">in</span> the datastore.
-&lt;i&gt; <span class="o">[</span>zpc_database_recover_tool<span class="o">]</span> Writing version <span class="m">2</span> to the datastore.
-&lt;d&gt; <span class="o">[</span>attribute_store<span class="o">]</span> Teardown of the attribute store
+<span class="go">&lt;i&gt; [datastore_fixt] Using datastore file: /var/lib/uic/zpc.db</span>
+<span class="go">&lt;d&gt; [datastore_fixt] SQLITE Version: 3.28.0</span>
+<span class="go">&lt;i&gt; [zpc_database_recover_tool] Datastore version reported from the datastore file: 3</span>
+<span class="go">&lt;i&gt; [zpc_database_recover_tool] Erasing endpoint data in the datastore.</span>
+<span class="go">&lt;i&gt; [zpc_database_recover_tool] Writing version 2 to the datastore.</span>
+<span class="go">&lt;d&gt; [attribute_store] Teardown of the attribute store</span>
 </pre></div>
 </div>
 <p>Finally, restart the ZPC.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic $ service uic-zpc start
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic $ </span>service uic-zpc start
 </pre></div>
 </div>
 <p>If this step does not work and the network cannot be used, you have 2 options:</p>
@@ -897,6 +957,7 @@ pi@unify:/var/lib/uic $ cp zpc.db zpc_back_up.db
 <p>Not all versions of the ZPC are certified. The list of versions that have passed
 <a class="reference external" href="https://certification.z-wavealliance.org/">Z-Wave certification</a> is:</p>
 <ul class="simple">
+<li><p>ZPC v1.2.1</p></li>
 <li><p>ZPC v1.1.1</p></li>
 <li><p>ZPC v1.0.1</p></li>
 </ul>
@@ -921,15 +982,15 @@ is incompatible with a US gateway. Information on the region can be found on
 the packaging of the device.</p>
 <p>To verify the RF region on your gateway, execute the following command in
 your gateway terminal:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>cat /etc/uic/uic.cfg
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /etc/uic/uic.cfg
 </pre></div>
 </div>
 <p>It outputs the configured rf_region:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:/etc/uic $ cat uic.cfg
-zpc:
-  serial: /dev/ttyUSB0
-  rf_region: US
-  datatore_file: /var/lib/uic/zpc.db
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:/etc/uic $ </span>cat uic.cfg
+<span class="go">zpc:</span>
+<span class="go">  serial: /dev/ttyUSB0</span>
+<span class="go">  rf_region: US</span>
+<span class="go">  datatore_file: /var/lib/uic/zpc.db</span>
 </pre></div>
 </div>
 </li>

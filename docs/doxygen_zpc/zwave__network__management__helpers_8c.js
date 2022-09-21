@@ -2,6 +2,7 @@ var zwave__network__management__helpers_8c =
 [
     [ "LOG_TAG", "zwave__network__management__helpers_8c.html#a7ce0df38eb467e59f209470c8f5ac4e6", null ],
     [ "is_command_class_in_nif", "group__zwave__network__management__helpers.html#ga20d05c0e568e376f069e4638270f4d29", null ],
+    [ "network_management_is_ready_for_a_new_operation", "group__zwave__network__management__helpers.html#ga49b020a521982049a986e9d0daee026e", null ],
     [ "network_management_refresh_cached_ids", "group__zwave__network__management__helpers.html#ga5b5936eb9f5a42d143b0c1714d8a7d68", null ],
     [ "network_management_refresh_cached_node_list", "group__zwave__network__management__helpers.html#ga5227fb50c1c2561cb1e9f4eda182c62c", null ],
     [ "network_management_refresh_controller_capabilities_bitmask", "group__zwave__network__management__helpers.html#gad93f9cb8e3a634d25bc50f6b452a143e", null ],

@@ -17,6 +17,7 @@
 
 // Unify Components
 #include "sl_log.h"
+#include "attribute_store.h"
 
 // Contiki includes
 #include "process.h"
@@ -34,16 +35,8 @@
 #include <vector>
 #include <stdexcept>
 
-typedef std::vector<std::string> handle_args_t;
-
 /// File descripter for output stream
 static int out_stream;
-
-/// handler function callback type
-/// out_stream: fd for output stream
-/// arg: whatever is written after the command
-///      (e.g. in hello world), the arg is "world"
-typedef sl_status_t (*handler_func)(const handle_args_t &arg);
 
 // Unify handler functions
 static sl_status_t handle_help(const handle_args_t &arg);
@@ -56,11 +49,11 @@ static sl_status_t handle_set_log_level(const handle_args_t &arg);
 /// <command>: The command written on the command interface (e.g. "help")
 /// <help_message>: Help message printed to output when "help" is executed
 /// <handler_func>: callback, that is called whenever the command is receied
-static std::map<std::string, std::pair<std::string, handler_func>> commands
+static command_map_t commands
   = {{"help", {" :Prints help", handle_help}},
      {"exit", {" :Exit the application", handle_exit}},
      {"log_level",
-      {COLOR_START "d|i||w|e|c" COLOR_END " :Set log level - "
+      {COLOR_START "d|i|w|e|c" COLOR_END " :Set log level - "
                    "DEBUG | INFO | WARNING | ERROR | CRITICAL",
        handle_set_log_level}}};
 

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('zigpc__attrmgmt__int_8hpp_source.html'
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sl__status_8h.html">sl_status.h</a>&quot;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="zcl__attribute__info_8h.html">zcl_attribute_info.h</a>&quot;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;zcl_definitions.h&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="zcl__definitions_8h.html">zcl_definitions.h</a>&quot;</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="group__attribute__management__int.html#gad4f252f590e302c1e7682dd7a2d3540a">   35</a></span>&#160;<span class="preprocessor">#define ZCL_CONFIGURE_STATUS_RESPONSE_SIZE 4</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
@@ -163,6 +163,7 @@ $(document).ready(function(){initNavTree('zigpc__attrmgmt__int_8hpp_source.html'
 <div class="ttc" id="agroup__zigpc__common__zigbee_html_ga8f3272c35bee4ed0e44533d82440cbe8"><div class="ttname"><a href="group__zigpc__common__zigbee.html#ga8f3272c35bee4ed0e44533d82440cbe8">zigbee_eui64_uint_t</a></div><div class="ttdeci">uint64_t zigbee_eui64_uint_t</div><div class="ttdoc">Zigbee Device Identifier (stored as integer)</div><div class="ttdef"><b>Definition:</b> zigpc_common_zigbee.h:198</div></div>
 <div class="ttc" id="agroup__zigpc__common__zigbee_html_ga63e73ae1f77c81910f6bc682830830dd"><div class="ttname"><a href="group__zigpc__common__zigbee.html#ga63e73ae1f77c81910f6bc682830830dd">zcl_cluster_id_t</a></div><div class="ttdeci">uint16_t zcl_cluster_id_t</div><div class="ttdoc">A representation of the endpoint cluster id used in ZCL.</div><div class="ttdef"><b>Definition:</b> zigpc_common_zigbee.h:253</div></div>
 <div class="ttc" id="azigpc__attrmgmt__gateway_8c_html_a6cf64edb3a536e257d21ec45233d3ed8"><div class="ttname"><a href="zigpc__attrmgmt__gateway_8c.html#a6cf64edb3a536e257d21ec45233d3ed8">zigpc_attrmgmt_callback_on_attribute_frame</a></div><div class="ttdeci">void zigpc_attrmgmt_callback_on_attribute_frame(const zigpc_gateway_on_attribute_reported_t *received_data, bool is_read_reponse)</div><div class="ttdef"><b>Definition:</b> zigpc_attrmgmt_gateway.c:27</div></div>
+<div class="ttc" id="azcl__definitions_8h_html"><div class="ttname"><a href="zcl__definitions_8h.html">zcl_definitions.h</a></div></div>
 <div class="ttc" id="agroup__attribute__management__int_html_ga594928750f167b071f7eb0ec59a48990"><div class="ttname"><a href="group__attribute__management__int.html#ga594928750f167b071f7eb0ec59a48990">zigpc_attrmgmt_buffer_to_configure_status_list</a></div><div class="ttdeci">sl_status_t zigpc_attrmgmt_buffer_to_configure_status_list(const uint8_t *buffer, size_t buffer_len, std::list&lt; zigpc_attrmgmt_configure_status_record_t &gt; &amp;record_list)</div><div class="ttdoc">zigpc_attrmgmt_buffer_to_configure_status_list Extracts a series of records from a buffer of bytes</div></div>
 <div class="ttc" id="astructzigpc__attrmgmt__configure__status__record__t_html_a1e3c2bf17e19a09aed1e86079bd754b7"><div class="ttname"><a href="structzigpc__attrmgmt__configure__status__record__t.html#a1e3c2bf17e19a09aed1e86079bd754b7">zigpc_attrmgmt_configure_status_record_t::status</a></div><div class="ttdeci">uint8_t status</div><div class="ttdef"><b>Definition:</b> zigpc_attrmgmt_int.hpp:44</div></div>
 <div class="ttc" id="agroup__ctimer_html_ga43a278d13284fb3412e9eee1db1d967e"><div class="ttname"><a href="group__ctimer.html#ga43a278d13284fb3412e9eee1db1d967e">data</a></div><div class="ttdeci">#define data</div><div class="ttdef"><b>Definition:</b> ctimer.c:49</div></div>
@@ -211,7 +212,7 @@ $(document).ready(function(){initNavTree('zigpc__attrmgmt__int_8hpp_source.html'
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_fcadbd503984564e27bcda7a4aa33b0f.html">zigpc</a></li><li class="navelem"><a class="el" href="dir_5426e8af32fac66c5da7ecb2763e469f.html">components</a></li><li class="navelem"><a class="el" href="dir_b6f745f966ae74add2521a551533f539.html">attribute_management</a></li><li class="navelem"><a class="el" href="dir_65cbbcbe9e4af1172428fcc9ed2fe9fe.html">src</a></li><li class="navelem"><a class="el" href="zigpc__attrmgmt__int_8hpp.html">zigpc_attrmgmt_int.hpp</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:41:57 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:42 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

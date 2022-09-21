@@ -13,6 +13,7 @@
 
 /**
  * @defgroup uic_dotdot_attribute_store_registration Attribute Store Registration for UCL DotDot Attributes
+ * @ingroup unify_components
  * @brief Components performs a registration for the attribute store for all ZCL
  * attributes.
  *

@@ -21,8 +21,8 @@
 // What we assume when we can't discover min/max capabilities.
 #define CELSIUS_SCALE     0
 #define FAHRENHEIT_SCALE  1
-#define DEFAULT_MIN_VALUE -10
-#define DEFAULT_MAX_VALUE 100
+#define DEFAULT_MIN_VALUE (-10 * 1000)
+#define DEFAULT_MAX_VALUE (100 * 1000)
 #define DEFAULT_SCALE     CELSIUS_SCALE
 
 #define SETPOINT_TYPE_MASK 0x0F

@@ -111,9 +111,8 @@ will accept non-TLS communication on port 1883.
 ### mosquitto.conf
 
 ```bash
-port 1883
+listener 1883
 allow_anonymous true
-per_listener_settings true
 
 listener 8883
 cafile ca/ca.crt

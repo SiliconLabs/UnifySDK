@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['last_5ferror_5ft_8420',['last_error_t',['../namespaceuic__ota.html#a061d9131ad0a8a302d543c11819b0394',1,'uic_ota']]],
-  ['last_5froute_5fspeed_8421',['last_route_speed',['../group__ZWAPI__TRANSPORT.html#ga5dc1ccd95f0cdf3b8c5123252b653bd9',1,'zwapi_protocol_transport.h']]]
+  ['getlogrecordresponseeventtype_29602',['GetLogRecordResponseEventType',['../group__zap.html#gaa28a09e2ea7706b0a839eb599dce5731',1,'zap-types.h']]],
+  ['getmeasurementprofileresponsestatus_29603',['GetMeasurementProfileResponseStatus',['../group__zap.html#gad56ae2898a8bdf55b3c346ae87316a74',1,'zap-types.h']]]
 ];

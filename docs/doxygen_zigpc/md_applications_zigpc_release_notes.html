@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Zigbee Protocol Controller
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('md_applications_zigpc_release_notes.ht
 <div class="textblock"><h1><a class="anchor" id="autotoc_md85"></a>
 [1.2.0] - August 2022</h1>
 <h2><a class="anchor" id="autotoc_md86"></a>
-Added</h2>
+Added (1.2.0)</h2>
 <ul>
 <li>Network management improvements allowing parallel device joins and discovery</li>
 <li>Added CLI option to configure OTA file folder destination</li>
@@ -98,7 +98,7 @@ Added</h2>
 <li>Added zigbeed/multiprotocol integration</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md87"></a>
-Changed</h2>
+Changed (1.2.0)</h2>
 <ul>
 <li>Bugfix for zigpc failing to start when the OTA file folder is not found</li>
 <li>Update zigpc Linux permissions</li>
@@ -108,17 +108,20 @@ Changed</h2>
 </ul>
 <h1><a class="anchor" id="autotoc_md88"></a>
 [1.1.1] - March 2022</h1>
-<p><b>Added</b>:</p>
+<h2><a class="anchor" id="autotoc_md89"></a>
+Added (1.1.1)</h2>
 <ul>
 <li>The NCP firmware update component to enable upgrading the NCP firmware using the zigbee protocol controller</li>
 </ul>
-<p><b>Changed</b>:</p>
+<h2><a class="anchor" id="autotoc_md90"></a>
+Changed (1.1.1)</h2>
 <ul>
 <li>Fixed a bug where the zigbee protocol controller would crash on malformed JSON</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md89"></a>
+<h1><a class="anchor" id="autotoc_md91"></a>
 [1.1.0] - Feb 2022</h1>
-<p><b>Added</b>:</p>
+<h2><a class="anchor" id="autotoc_md92"></a>
+Added (1.1.0)</h2>
 <ul>
 <li>Debian Installer also configures ZigPC to run as a system service</li>
 <li>Ability to get ZigPC specific diagnostic information (uptime, CPU use, memory use, Zigbee stack counters) from the host and the coordinator</li>
@@ -126,53 +129,61 @@ Changed</h2>
 <li>Attribute polling if report configuration fails</li>
 <li>Publishing GeneratedCommands sent from Zigbee devices as responses or as unsolicited events</li>
 </ul>
-<p><b>Changed</b>:</p>
+<h2><a class="anchor" id="autotoc_md93"></a>
+Changed (1.1.0)</h2>
 <ul>
 <li>Migrate Zigbee-Host library (EmberZNet-based) from Appbuilder project (GeckoSDK 3.1) to SLC project (GeckoSDK 4.0). See Zigbee Host Library Readme for more details. NOTE: In order to listen to new ZCL cluster messages, the SLC project configuration should be changed in addition to the ZAP dotdot helpers</li>
 <li>ZigPC datastore file key has been changed from &ndash;datastore.file to &ndash;zigpc.datastore_file</li>
 <li>Default datastore file has been changed from /var/lib/uic/database.db to /var/lib/uic/zigpc.db If you used the default configuration, keep your previous database by running <code>mv /var/lib/uic/database.db /var/lib/uic/zigpc.db</code></li>
 </ul>
-<p><b>Removed</b>:</p>
+<h2><a class="anchor" id="autotoc_md94"></a>
+Removed (1.1.0)</h2>
 <ul>
 <li>Use of EmafDeviceTablePlugin in Zigbee-Host library to manage device discovery; This is now performed within ZigPC</li>
 </ul>
-<p><b>Fixed</b>:</p>
+<h2><a class="anchor" id="autotoc_md95"></a>
+Fixed (1.1.0)</h2>
 <ul>
 <li>Persisted information cleanup on device leaving the network</li>
 <li>JSON payloads accepted for commands and attributes to be UCL compliant</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md90"></a>
+<h1><a class="anchor" id="autotoc_md96"></a>
 [1.0.3] - Nov 2021</h1>
-<p><b>Added</b>:</p>
+<h2><a class="anchor" id="autotoc_md97"></a>
+Added (1.0.3)</h2>
 <ul>
 <li>Add persistence of Zigbee device discovery information to allow servicing devices after ZigPC reboots</li>
 <li>Use of NCP address-table to manage EUI64 to NodeId mappings</li>
 </ul>
-<p><b>Changed</b>:</p>
+<h2><a class="anchor" id="autotoc_md98"></a>
+Changed (1.0.3)</h2>
 <ul>
 <li>Updates to network management</li>
 <li>Improvements in Zigbee Host EZSP message performance</li>
 <li>Merge ZigPC node state and ucl handling components</li>
 <li>Reduce dependence on device table plugin, use address table</li>
 </ul>
-<p><b>Fixed</b>:</p>
+<h2><a class="anchor" id="autotoc_md99"></a>
+Fixed (1.0.3)</h2>
 <ul>
 <li>Improved ZCL frame error handling and empty string bug fix</li>
 <li>Node unretain messages bugfix</li>
 <li>Empty group name bugfix</li>
 <li>Added polling for unreportable attributes</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md91"></a>
+<h1><a class="anchor" id="autotoc_md100"></a>
 [1.0.2] - Oct 2021</h1>
-<h1><a class="anchor" id="autotoc_md92"></a>
+<h1><a class="anchor" id="autotoc_md101"></a>
 [1.0.1] - Aug 2021</h1>
-<p><b>Fixed</b>:</p>
+<h2><a class="anchor" id="autotoc_md102"></a>
+Fixed (1.0.1)</h2>
 <ul>
 <li>Build issues</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md93"></a>
+<h1><a class="anchor" id="autotoc_md103"></a>
 [1.0.0] - Aug 2021</h1>
-<p><b>Added</b>:</p>
+<h2><a class="anchor" id="autotoc_md104"></a>
+Added (1.0.0)</h2>
 <ul>
 <li>Implementation of Unify specification 1.0</li>
 <li>Sleepy end device support</li>
@@ -195,12 +206,13 @@ Changed</h2>
 </li>
 <li>Zigbee Host-NCP EZSP-UART Support</li>
 </ul>
-<p><b>Changed</b>:</p>
+<h2><a class="anchor" id="autotoc_md105"></a>
+Changed (1.0.0)</h2>
 <ul>
 <li>Various bug fixes</li>
 <li>Documentation updates</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md94"></a>
+<h1><a class="anchor" id="autotoc_md106"></a>
 Known Issues</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -228,7 +240,7 @@ Known Issues</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">ZigPC sends the default response to a sleepy check-in command instead of the expected acknowledge message  </td><td class="markdownTableBodyNone">Disable the poll control cluster when managing sleepy devices to use the default behaviour.   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md95"></a>
+<h2><a class="anchor" id="autotoc_md107"></a>
 Zigbee Devices Used for Testing</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -250,7 +262,7 @@ Zigbee Devices Used for Testing</h2>
 <td class="markdownTableBodyNone">Silabs  </td><td class="markdownTableBodyNone">xG12 or xG21 radio  </td><td class="markdownTableBodyNone">Z3DoorLock  </td><td class="markdownTableBodyNone">Yes  </td><td class="markdownTableBodyNone"><br  />
    </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md96"></a>
+<h1><a class="anchor" id="autotoc_md108"></a>
 Zigbee Certification information</h1>
 <blockquote class="doxtable">
 <p><em>NOTE the ZigPC is at this point not certifiable</em> </p>
@@ -261,7 +273,7 @@ Zigbee Certification information</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:05 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:44 for Zigbee Protocol Controller by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

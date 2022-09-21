@@ -173,8 +173,13 @@ sl_status_t zpc_attribute_store_init()
 
   status |= invoke_update_callbacks_in_network();
 
-  // Configure the attribute store:
-  attribute_store_configuration_set_auto_save(true);
+  // Configure the attribute store.
+  // Save in the worst case scenario every 10 minutes if we keep changing the
+  // Attribute Store aggressively
+  attribute_store_configuration_set_auto_save_safety_interval(10 * 60);
+  // Wait 10 seconds since the last Attribute Store change before saving
+  // to the datastore.
+  attribute_store_configuration_set_auto_save_cooldown_interval(10);
   attribute_store_configuration_set_type_validation(true);
 
   return status;

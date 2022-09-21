@@ -54,6 +54,16 @@ different security schemes are displayed:
 
 ## SmartStart List
 
+The SmartStart list enables including devices easily. A page of the SmartStart
+list enables to add and edit Device Specific Keys (DSK). When a device
+starts up or resets, it will automatically get included. A SmartStart entry and
+inclusion may look like this:
+
+![SmartStart List](doc/assets/img/save_smart_start_device.PNG)
+
+After filling in the **DSK** key and checking include, click save. If the _Unify
+UPVL_ is running, it will be saved to the SmartStart list.
+
 ### Using SmartStart with different PHYs
 
 To make use of the SmartStart functionality, it is required to find out the
@@ -142,16 +152,6 @@ before they will seek inclusion in a new network.
 #### BLE DSKs
 
 There is currently no support for BLE DSKs in the SmartStart List.
-
-The SmartStart list enables including devices easily. A page of the smart
-start list enables editing and inputting **DSK** keys of devices. When a device
-starts up or resets, it will automatically get included. A SmartStart entry and
-inclusion may look like this:
-
-![SmartStart List](doc/assets/img/save_smart_start_device.PNG)
-
-After filling in the **DSK** key and checking include, click save. If the _Unify
-UPVL_ is running, it will be saved to the SmartStart list.
 
 ## Clusters
 

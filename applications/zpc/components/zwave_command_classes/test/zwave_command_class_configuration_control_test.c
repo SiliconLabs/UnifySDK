@@ -128,7 +128,7 @@ static sl_status_t register_send_event_handler_stub(
 
 static void attribute_resolver_set_resolution_give_up_listener_stub(
   attribute_store_type_t node_type,
-  cmock_attribute_resolver_func_ptr3 callback,
+  attribute_resolver_callback_t callback,
   int cmock_num_calls)
 {
   TEST_ASSERT_EQUAL(ATTRIBUTE(NEXT_SUPPORTED_PARAMETER_ID), node_type);

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -113,6 +113,8 @@ Macros</h2></td></tr>
 <tr class="separator:a9e7222d368150d7c77593572edcd36e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbe21e818fbc2703f0562181212ce3ab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__tx_8h.html#adbe21e818fbc2703f0562181212ce3ab">ZWAVE_TX_INCOMING_FRAMES_BUFFER_SIZE</a>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:adbe21e818fbc2703f0562181212ce3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86ebfe9b659127cc3dca1ccc29e1d1a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwave__tx_8h.html#a86ebfe9b659127cc3dca1ccc29e1d1a9">ZWAVE_TX_ROUTE_CACHE_BUFFER_SIZE</a>&#160;&#160;&#160;50</td></tr>
+<tr class="separator:a86ebfe9b659127cc3dca1ccc29e1d1a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga81e8ae68a4840121a9bfa9c1d754c02d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__options__qos__priority.html#ga81e8ae68a4840121a9bfa9c1d754c02d">ZWAVE_TX_QOS_MAX_PRIORITY</a>&#160;&#160;&#160;0xFFFFFF00</td></tr>
 <tr class="separator:ga81e8ae68a4840121a9bfa9c1d754c02d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga52d0081a515679eb7ff7ad04346e6bee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__options__qos__priority.html#ga52d0081a515679eb7ff7ad04346e6bee">ZWAVE_TX_QOS_RECOMMENDED_TIMING_CRITICAL_PRIORITY</a>&#160;&#160;&#160;0x0FFFFFFF</td></tr>
@@ -167,12 +169,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gaf669f3e5ba5a01c411842fae2c58637c"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gaf669f3e5ba5a01c411842fae2c58637c">zwave_tx_get_frame_length</a> (<a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> session_id)</td></tr>
 <tr class="memdesc:gaf669f3e5ba5a01c411842fae2c58637c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the length of a frame in the Z-Wave Tx Queue.  <a href="group__zwave__tx__interface.html#gaf669f3e5ba5a01c411842fae2c58637c">More...</a><br /></td></tr>
 <tr class="separator:gaf669f3e5ba5a01c411842fae2c58637c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb799c67f2008618877071e96e2fca77"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gabb799c67f2008618877071e96e2fca77">zwave_tx_has_frames_for_node</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memdesc:gabb799c67f2008618877071e96e2fca77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if we have frames in the queue to send to a NodeID.  <a href="group__zwave__tx__interface.html#gabb799c67f2008618877071e96e2fca77">More...</a><br /></td></tr>
+<tr class="separator:gabb799c67f2008618877071e96e2fca77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaecd18ffa418c0db342d7af2132b6c92f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gaecd18ffa418c0db342d7af2132b6c92f">zwave_tx_init</a> ()</td></tr>
 <tr class="memdesc:gaecd18ffa418c0db342d7af2132b6c92f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the zwave_tx component.  <a href="group__zwave__tx__interface.html#gaecd18ffa418c0db342d7af2132b6c92f">More...</a><br /></td></tr>
 <tr class="separator:gaecd18ffa418c0db342d7af2132b6c92f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3f2735c543a9cfdcefdeaf8a76709155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga3f2735c543a9cfdcefdeaf8a76709155">zwave_tx_shutdown</a> ()</td></tr>
-<tr class="memdesc:ga3f2735c543a9cfdcefdeaf8a76709155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the tx component.  <a href="group__zwave__tx__interface.html#ga3f2735c543a9cfdcefdeaf8a76709155">More...</a><br /></td></tr>
-<tr class="separator:ga3f2735c543a9cfdcefdeaf8a76709155"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4b1785eddaa2ebfc6a702d9b4d0b27a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga4b1785eddaa2ebfc6a702d9b4d0b27a3">zwave_tx_log_queue</a> (bool with_contents)</td></tr>
 <tr class="memdesc:ga4b1785eddaa2ebfc6a702d9b4d0b27a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the contents of the TX Queue.  <a href="group__zwave__tx__interface.html#ga4b1785eddaa2ebfc6a702d9b4d0b27a3">More...</a><br /></td></tr>
 <tr class="separator:ga4b1785eddaa2ebfc6a702d9b4d0b27a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,13 +211,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a86ebfe9b659127cc3dca1ccc29e1d1a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86ebfe9b659127cc3dca1ccc29e1d1a9">&#9670;&nbsp;</a></span>ZWAVE_TX_ROUTE_CACHE_BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZWAVE_TX_ROUTE_CACHE_BUFFER_SIZE&#160;&#160;&#160;50</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_f3e54dd29e621d563099d452e62da9f8.html">zwave</a></li><li class="navelem"><a class="el" href="dir_99fcbcb75e556cb0c2dfb06eb3d295b0.html">zwave_tx</a></li><li class="navelem"><a class="el" href="dir_41ce947160806bc935fcc764198feb5c.html">include</a></li><li class="navelem"><a class="el" href="zwave__tx_8h.html">zwave_tx.h</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:08 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:46 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

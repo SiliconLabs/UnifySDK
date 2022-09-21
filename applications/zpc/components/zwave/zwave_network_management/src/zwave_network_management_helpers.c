@@ -24,6 +24,9 @@
 #include "zwapi_protocol_mem.h"
 #include "zwapi_protocol_controller.h"
 
+// Z-Wave Controller
+#include "zwave_controller.h"
+
 // Generic includes
 #include <string.h>
 
@@ -58,6 +61,18 @@ bool we_are_alone_in_our_network()
       return false;
     }
   }
+  return true;
+}
+
+bool network_management_is_ready_for_a_new_operation()
+{
+  if (nms.state != NM_IDLE) {
+    return false;
+  }
+  if (zwave_controller_is_reset_ongoing()) {
+    return false;
+  }
+
   return true;
 }
 

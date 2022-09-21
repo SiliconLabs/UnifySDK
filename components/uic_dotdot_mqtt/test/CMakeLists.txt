@@ -1,3 +1,5 @@
+set(ZAP_FILE_INCLUDE_PATH ${ZAP_CURRENT_OUTPUT_DIR}/test)
+
 # Dotdot MQTT test
 target_add_unittest(
   uic_dotdot_mqtt
@@ -9,7 +11,7 @@ target_add_unittest(
   uic_mqtt_stub)
 
 target_include_directories(uic_dotdot_mqtt_test
-                           PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+                           PRIVATE ${ZAP_FILE_INCLUDE_PATH})
 
 # Dotdot MQTT Attributes test
 target_add_unittest(
@@ -22,7 +24,7 @@ target_add_unittest(
   uic_mqtt_stub)
 
 target_include_directories(dotdot_mqtt_attributes_test
-                           PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+                           PRIVATE ${ZAP_FILE_INCLUDE_PATH})
 
 # Dotdot MQTT Send Commands test
 target_add_unittest(
@@ -35,7 +37,7 @@ target_add_unittest(
   uic_mqtt_stub)
 
 target_include_directories(dotdot_mqtt_send_commands_test
-                           PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+                           PRIVATE ${ZAP_FILE_INCLUDE_PATH})
 
 # Dotdot MQTT Generated Commands test
 target_add_unittest(
@@ -48,7 +50,7 @@ target_add_unittest(
   uic_mqtt_stub)
 
 target_include_directories(dotdot_mqtt_generated_commands_test
-                          PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+                           PRIVATE ${ZAP_FILE_INCLUDE_PATH})
 
 target_add_unittest(
   uic_dotdot_mqtt

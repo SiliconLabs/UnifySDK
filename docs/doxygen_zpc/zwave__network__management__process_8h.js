@@ -49,6 +49,7 @@ var zwave__network__management__process_8h =
       [ "NM_EV_NOP_FAIL", "zwave__network__management__process_8h.html#ad13aadb189cec7c76947756a5a8809d3ae9063b6c73b858c8bc563b43a8d9d36d", null ],
       [ "NM_EV_NOP_SUCCESS", "zwave__network__management__process_8h.html#ad13aadb189cec7c76947756a5a8809d3a4852d83b20c46430c08ab98ca14b455a", null ],
       [ "NM_EV_REQUEST_NODE_NEIGHBOR_REQUEST", "zwave__network__management__process_8h.html#ad13aadb189cec7c76947756a5a8809d3a9deb399d548bdd0940862ea06fe9675d", null ],
+      [ "NM_EV_REQUEST_NODE_NEIGHBOR_REQUEST_COMPLETE", "zwave__network__management__process_8h.html#ad13aadb189cec7c76947756a5a8809d3a07c0df36b8da601d44c1899a102280dd", null ],
       [ "NM_EV_ASSIGN_RETURN_ROUTE_START", "zwave__network__management__process_8h.html#ad13aadb189cec7c76947756a5a8809d3a0905a6fbfe629bd6a4d4e06ebbf2b8da", null ],
       [ "NM_EV_ASSIGN_RETURN_ROUTE_COMPLETED", "zwave__network__management__process_8h.html#ad13aadb189cec7c76947756a5a8809d3a330a9276e75722c1d9d1c1acc80e8d08", null ],
       [ "NM_EV_MAX", "zwave__network__management__process_8h.html#ad13aadb189cec7c76947756a5a8809d3a81619461d3cbf79669f2a9c17f1dc99d", null ]

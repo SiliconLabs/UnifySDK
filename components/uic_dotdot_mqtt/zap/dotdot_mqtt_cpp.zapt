@@ -394,7 +394,7 @@ sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLow
   for (size_t i = 0; i<value_count;i++){
     {{#if_is_enum type}}
     #ifdef {{asSnakeCaseUpper parent.label}}_{{asSnakeCaseUpper label}}_ENUM_NAME_AVAILABLE
-    jsn["value"].push_back(({{asUnderlyingType type}}){{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name((uint32_t)value[i]));
+    jsn["value"].push_back({{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name((uint32_t)value[i]));
     #else
     jsn["value"].push_back(static_cast<{{chooseTypeOrEnumName type parent.label label}}>(value[i]));
     #endif
@@ -464,7 +464,14 @@ sl_status_t {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLow
 
   {{/if}}
 
-  std::string payload_str = jsn.dump();
+  std::string payload_str;
+  try {
+    // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+    payload_str = jsn.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
+  } catch (const nlohmann::json::exception& e) {
+    sl_log_debug(LOG_TAG, LOG_FMT_JSON_ERROR, "{{asPublicationName parent.label}}/Attributes/{{label}}", e.what());
+    return SL_STATUS_OK;
+  }
 
   {{#if_is_bitmap type}}
   boost::replace_all(payload_str, "\"true\"", "true");
@@ -602,8 +609,8 @@ void {{dotdot_prefix}}_publish_supported_commands(
     {{/zcl_commands}}
     // Check for a WriteAttributes Callback
     if({{asWriteAttributesCallback this}}) {
-      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t {{asSnakeCaseLower label}}_new_state = {0};
-      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t {{asSnakeCaseLower label}}_new_updated_state = {0};
+      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_state_t {{asSnakeCaseLower label}}_new_state = {};
+      {{dotdot_prefix}}_{{asSnakeCaseLower label}}_updated_state_t {{asSnakeCaseLower label}}_new_updated_state = {};
 
       if({{asWriteAttributesCallback this}}(
             unid,

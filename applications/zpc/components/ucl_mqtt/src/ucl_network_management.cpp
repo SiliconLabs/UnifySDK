@@ -385,6 +385,7 @@ static void ucl_network_management_on_state_updated(
       ucl_nm_state = UCL_NM_TOPIC_REMOVE_NODE;
       break;
     case NM_ASSIGNING_RETURN_ROUTE:
+    case NM_NEIGHBOR_DISCOVERY_ONGOING:
       ucl_nm_state = UCL_NM_TOPIC_NETWORK_REPAIR;
       break;
     default:
@@ -673,6 +674,11 @@ static sl_status_t write_topic_received(const std::string &message)
         break;
       case UCL_NM_TOPIC_RESET:
         zwave_controller_reset();
+        if (true == zwave_controller_is_reset_ongoing()) {
+          // Publish immediately that we initiated reset
+          state_topic_update(zpc_unid,
+                             UclNetworkManagementStateData(UCL_NM_TOPIC_RESET));
+        }
         break;
       case UCL_NM_TOPIC_TEMPORARILY_OFFLINE:
         break;

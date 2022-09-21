@@ -30,18 +30,28 @@
 #include <map>
 #include <vector>
 #include <string>
+
+// Unify definitions
+#include "sl_status.h"
+
 /**
  * @brief Arguments type
- *
  */
-typedef std::vector<std::string> handle_args_t;
+using handle_args_t = std::vector<std::string>;
 
 /**
  * @brief Handler function callback type
  *
  * @param arg Arguments of a command
  */
-typedef sl_status_t (*handler_func)(const handle_args_t &arg);
+using handler_func = sl_status_t (*)(const handle_args_t &arg);
+
+/**
+ * @brief Command map object, used to register a set of functions to handle
+ * incoming commands
+ */
+using command_map_t
+  = std::map<std::string, std::pair<std::string, handler_func>>;
 
 /**
  * @brief Add commands to command line interface
@@ -51,9 +61,7 @@ typedef sl_status_t (*handler_func)(const handle_args_t &arg);
  * @param append_commands Dictionary with a command name, command usage
  * and a function pointer to command functionality
  */
-void uic_stdin_add_commands(
-  const std::map<std::string, std::pair<std::string, handler_func>>
-    &append_commands);
+void uic_stdin_add_commands(const command_map_t &append_commands);
 
 /**
  * @brief Set prompt string for command line interface

@@ -927,7 +927,7 @@ void test_is_association_valid()
     is_association_legal(node_id, endpoint_id, 1, test_association));
 
   test_association.type = ENDPOINT;
-  TEST_ASSERT_FALSE(
+  TEST_ASSERT_TRUE(
     is_association_legal(node_id, endpoint_id, 1, test_association));
 
   test_association.type        = ENDPOINT + 25;

@@ -1,6 +1,6 @@
 # Fetch dependencies if forced
 if(FETCH_GSDK MATCHES ON)
-  find_package(GeckoSDK 4.1 REQUIRED)
+  find_package(GeckoSDK 4.1.1 REQUIRED)
 endif()
 
 # Build options will determine if the applications will be included and build

@@ -54,7 +54,7 @@ typedef sl_status_t (*{{asAttributeCallback this}}_t)(
 {{#if (isMonotonousArray label)}}
   size_t {{asSnakeCaseLower label}}_count,
   {{#if_is_enum type}}
-  {{enumType type}} {{asSnakeCaseLower label}}
+  {{enumType type}}* {{asSnakeCaseLower label}}
   {{else}}
   {{#unless (isString type)}}const {{/unless}}{{asUnderlyingType type}}* {{asSnakeCaseLower label}}
   {{/if_is_enum}}

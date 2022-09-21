@@ -187,7 +187,8 @@ void {{dotdot_prefix}}_{{asSnakeCaseLower label}}_publish_generated_write_attrib
   {{/if}}
   {{/zcl_attributes}}
 
-  std::string payload = json_object.dump();
+  // Payload contains data from end nodes, which we cannot control, thus we handle if there are non-utf8 characters
+  std::string payload = json_object.dump(-1, ' ', false, nlohmann::detail::error_handler_t::replace);
 
   // Publish our command
   uic_mqtt_publish(topic.c_str(),

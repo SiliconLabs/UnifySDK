@@ -530,6 +530,8 @@ void test_zwave_command_class_association_control()
   attribute_resolver_clear_resolution_listener_Expect(
     group_1_node,
     &establish_zpc_associations);
+  attribute_resolver_restart_set_resolution_ExpectAndReturn(group_content_node,
+                                                            SL_STATUS_OK);
   establish_zpc_associations(group_1_node);
   TEST_ASSERT_TRUE(
     attribute_store_is_value_defined(group_content_node, DESIRED_ATTRIBUTE));
@@ -588,6 +590,9 @@ void test_zwave_controller_reset_step()
                                sizeof(group_content));
 
   // Trigger the reset step:
+  attribute_resolver_restart_set_resolution_ExpectAndReturn(group_content_node,
+                                                            SL_STATUS_OK);
+  zwave_network_management_get_network_size_ExpectAndReturn(3);
   TEST_ASSERT_EQUAL(SL_STATUS_OK, reset_step());
 
   const uint8_t expected_new_group_content[] = {0x02, 0x00, 0x02, 0x01};
@@ -598,7 +603,7 @@ void test_zwave_controller_reset_step()
                                 group_content,
                                 sizeof(expected_new_group_content));
 
-  contiki_test_helper_run(1499);
+  contiki_test_helper_run(1499 + 3 * 300);
   // Nothing happensj just yet.
   zwave_controller_on_reset_step_complete_Expect(
     ZWAVE_CONTROLLER_CLEAN_UP_ASSOCIATIONS_STEP_PRIORITY);

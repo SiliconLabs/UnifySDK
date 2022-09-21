@@ -16,6 +16,7 @@
 
 #include <regex>
 #include <functional>
+#include <limits>
 
 namespace unify
 {

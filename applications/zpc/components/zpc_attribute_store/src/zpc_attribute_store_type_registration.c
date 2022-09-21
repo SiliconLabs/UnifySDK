@@ -258,6 +258,12 @@ sl_status_t zpc_attribute_store_register_known_attribute_types()
     ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_ID,
     U32_STORAGE_TYPE);
 
+  status |= attribute_store_register_type(
+    ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_CONTENT_COMMAND_COUNT,
+    "Set Command Count",
+    ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_CONTENT,
+    U8_STORAGE_TYPE);
+
   /////////////////////////////////////////////////////////////////////
   //        Alarm Sensor Command Class attributes
   /////////////////////////////////////////////////////////////////////
@@ -310,6 +316,38 @@ sl_status_t zpc_attribute_store_register_known_attribute_types()
                                           "Battery Level",
                                           ATTRIBUTE_ENDPOINT_ID,
                                           U32_STORAGE_TYPE);
+
+  status
+    |= attribute_store_register_type(ATTRIBUTE_BATTERY_HEALTH_MAXIMUM_CAPACITY,
+                                     "Battery maximum capacity",
+                                     ATTRIBUTE_ENDPOINT_ID,
+                                     U8_STORAGE_TYPE);
+
+  status |= attribute_store_register_type(ATTRIBUTE_BATTERY_HEALTH_SCALE,
+                                          "Battery temperature value Scale",
+                                          ATTRIBUTE_ENDPOINT_ID,
+                                          U8_STORAGE_TYPE);
+
+  status |= attribute_store_register_type(ATTRIBUTE_BATTERY_HEALTH_PRECISION,
+                                          "Battery temperature value precision",
+                                          ATTRIBUTE_ENDPOINT_ID,
+                                          U8_STORAGE_TYPE);
+
+  status |= attribute_store_register_type(
+    ATTRIBUTE_BATTERY_HEALTH_BATTERY_TEMPERATURE,
+    "Battery temperature value",
+    ATTRIBUTE_ENDPOINT_ID,
+    I32_STORAGE_TYPE);
+
+  status |= attribute_store_register_type(ATTRIBUTE_BATTERY_CHARGING_STATUS,
+                                          "Battery charging status ",
+                                          ATTRIBUTE_ENDPOINT_ID,
+                                          U8_STORAGE_TYPE);
+
+  status |= attribute_store_register_type(ATTRIBUTE_BATTERY_REPLACE_RECHARGE,
+                                          "Battery replace notification",
+                                          ATTRIBUTE_ENDPOINT_ID,
+                                          U8_STORAGE_TYPE);
 
   /////////////////////////////////////////////////////////////////////
   //        Basic Command Class attributes

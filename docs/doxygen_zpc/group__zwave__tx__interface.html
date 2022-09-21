@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -147,12 +147,12 @@ Functions</h2></td></tr>
 <tr class="memitem:gaf669f3e5ba5a01c411842fae2c58637c"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gaf669f3e5ba5a01c411842fae2c58637c">zwave_tx_get_frame_length</a> (<a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> session_id)</td></tr>
 <tr class="memdesc:gaf669f3e5ba5a01c411842fae2c58637c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the length of a frame in the Z-Wave Tx Queue.  <a href="group__zwave__tx__interface.html#gaf669f3e5ba5a01c411842fae2c58637c">More...</a><br /></td></tr>
 <tr class="separator:gaf669f3e5ba5a01c411842fae2c58637c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabb799c67f2008618877071e96e2fca77"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gabb799c67f2008618877071e96e2fca77">zwave_tx_has_frames_for_node</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memdesc:gabb799c67f2008618877071e96e2fca77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if we have frames in the queue to send to a NodeID.  <a href="group__zwave__tx__interface.html#gabb799c67f2008618877071e96e2fca77">More...</a><br /></td></tr>
+<tr class="separator:gabb799c67f2008618877071e96e2fca77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaecd18ffa418c0db342d7af2132b6c92f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#gaecd18ffa418c0db342d7af2132b6c92f">zwave_tx_init</a> ()</td></tr>
 <tr class="memdesc:gaecd18ffa418c0db342d7af2132b6c92f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the zwave_tx component.  <a href="group__zwave__tx__interface.html#gaecd18ffa418c0db342d7af2132b6c92f">More...</a><br /></td></tr>
 <tr class="separator:gaecd18ffa418c0db342d7af2132b6c92f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3f2735c543a9cfdcefdeaf8a76709155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga3f2735c543a9cfdcefdeaf8a76709155">zwave_tx_shutdown</a> ()</td></tr>
-<tr class="memdesc:ga3f2735c543a9cfdcefdeaf8a76709155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the tx component.  <a href="group__zwave__tx__interface.html#ga3f2735c543a9cfdcefdeaf8a76709155">More...</a><br /></td></tr>
-<tr class="separator:ga3f2735c543a9cfdcefdeaf8a76709155"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4b1785eddaa2ebfc6a702d9b4d0b27a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__tx__interface.html#ga4b1785eddaa2ebfc6a702d9b4d0b27a3">zwave_tx_log_queue</a> (bool with_contents)</td></tr>
 <tr class="memdesc:ga4b1785eddaa2ebfc6a702d9b4d0b27a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log the contents of the TX Queue.  <a href="group__zwave__tx__interface.html#ga4b1785eddaa2ebfc6a702d9b4d0b27a3">More...</a><br /></td></tr>
 <tr class="separator:ga4b1785eddaa2ebfc6a702d9b4d0b27a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,7 +163,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>This is the public interface for the Z-Wave TX component. </p>
 <p><a class="el" href="group__zwave__tx__interface.html#gad1538f36d226fe8147c5e538625568df">zwave_tx_send_data()</a> and <a class="el" href="group__zwave__tx__interface.html#ga6f1b21f8eaea9acf202a08d92b80547a">zwave_tx_abort_transmission()</a> are the two main functions to be used from other components.</p>
-<p><a class="el" href="group__zwave__tx__interface.html#gaecd18ffa418c0db342d7af2132b6c92f">zwave_tx_init()</a> and <a class="el" href="group__zwave__tx__interface.html#ga3f2735c543a9cfdcefdeaf8a76709155">zwave_tx_shutdown</a> should not be called by other components. </p>
+<p><a class="el" href="group__zwave__tx__interface.html#gaecd18ffa418c0db342d7af2132b6c92f">zwave_tx_init()</a> should not be called by other components. </p>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="gabfbc700a89ba6dce9c1f38fa3ed41789"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gabfbc700a89ba6dce9c1f38fa3ed41789">&#9670;&nbsp;</a></span>on_zwave_tx_send_data_complete_t</h2>
@@ -347,6 +347,34 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of expected responses for the element identified by the Session ID. 0 if the Session ID does not exist or has been removed from the Tx Queue. </dd></dl>
+
+</div>
+</div>
+<a id="gabb799c67f2008618877071e96e2fca77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabb799c67f2008618877071e96e2fca77">&#9670;&nbsp;</a></span>zwave_tx_has_frames_for_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool zwave_tx_has_frames_for_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramname"><em>node_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifies if we have frames in the queue to send to a NodeID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_id</td><td>NodeID to check for in the queue</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Note that this function will return true when we are backing off waiting for an answer following a frame we have just sent, because the frame is still in the queue.</p>
+<dl class="section return"><dt>Returns</dt><dd>true if we have frames to send to the NodeID, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -616,32 +644,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga3f2735c543a9cfdcefdeaf8a76709155"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3f2735c543a9cfdcefdeaf8a76709155">&#9670;&nbsp;</a></span>zwave_tx_shutdown()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void zwave_tx_shutdown </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Stop the tx component. </p>
-<p>This will stop ongoing transmission and flush all queues. No callbacks will be called when queues are emptied due to a shutdown. It will also unregister the on_frame_received() callback to the <a class="el" href="group__zwave__controller.html">Z-Wave Controller</a> </p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:17 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:49 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

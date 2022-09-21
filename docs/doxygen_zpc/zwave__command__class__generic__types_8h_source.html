@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -109,35 +109,40 @@ $(document).ready(function(){initNavTree('zwave__command__class__generic__types_
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// Number of Reports to Follow</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#gacde31fbcd1e13f9a6f6f9f51590eb5c8">   29</a></span>&#160;<span class="keyword">typedef</span> uint8_t <a class="code" href="group__zwave__command__class__generic__types.html#gacde31fbcd1e13f9a6f6f9f51590eb5c8">reports_to_follow_t</a>;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// Values that can be used for &quot;Umbrella&quot; attributes</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#gafb8d304ba182570dc688ef06a555e8e0">   32</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac">   33</a></span>&#160;  <a class="code" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac">FINAL_STATE</a>             = 0,</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285">   34</a></span>&#160;  <a class="code" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285">NEEDS_ONE_COMMAND</a>       = 1,</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4">   35</a></span>&#160;  <a class="code" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4">NEEDS_MULTIPLE_COMMANDS</a> = 2,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <a class="code" href="group__zwave__command__class__generic__types.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// Set Command counter (i.e. how many commands have been sent) for an attribute</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// in a multi-set resolution.</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#ga797117ac3a64c2adf50e0c57e6238a2f">   33</a></span>&#160;<span class="keyword">typedef</span> uint8_t <a class="code" href="group__zwave__command__class__generic__types.html#ga797117ac3a64c2adf50e0c57e6238a2f">set_commands_count_t</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// Values that can be used for &quot;Umbrella&quot; attributes</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#gafb8d304ba182570dc688ef06a555e8e0">   36</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac">   37</a></span>&#160;  <a class="code" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac">FINAL_STATE</a>             = 0,</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285">   38</a></span>&#160;  <a class="code" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285">NEEDS_ONE_COMMAND</a>       = 1,</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4">   39</a></span>&#160;  <a class="code" href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4">NEEDS_MULTIPLE_COMMANDS</a> = 2,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;} <a class="code" href="group__zwave__command__class__generic__types.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif  //ZWAVE_COMMAND_CLASS_GENERIC_TYPES_H</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif  //ZWAVE_COMMAND_CLASS_GENERIC_TYPES_H</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="agroup__zwave__command__class__generic__types_html_ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac">FINAL_STATE</a></div><div class="ttdeci">@ FINAL_STATE</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:33</div></div>
+<div class="ttc" id="agroup__zwave__command__class__generic__types_html_ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a1b5757828d7b174efa07d686e5d5acac">FINAL_STATE</a></div><div class="ttdeci">@ FINAL_STATE</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:37</div></div>
 <div class="ttc" id="agroup__zwave__command__class__generic__types_html_gacde31fbcd1e13f9a6f6f9f51590eb5c8"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#gacde31fbcd1e13f9a6f6f9f51590eb5c8">reports_to_follow_t</a></div><div class="ttdeci">uint8_t reports_to_follow_t</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:29</div></div>
-<div class="ttc" id="agroup__zwave__command__class__generic__types_html_ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4">NEEDS_MULTIPLE_COMMANDS</a></div><div class="ttdeci">@ NEEDS_MULTIPLE_COMMANDS</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:35</div></div>
-<div class="ttc" id="agroup__zwave__command__class__generic__types_html_ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285">NEEDS_ONE_COMMAND</a></div><div class="ttdeci">@ NEEDS_ONE_COMMAND</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:34</div></div>
-<div class="ttc" id="agroup__zwave__command__class__generic__types_html_gafb8d304ba182570dc688ef06a555e8e0"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a></div><div class="ttdeci">command_status_values_t</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:32</div></div>
+<div class="ttc" id="agroup__zwave__command__class__generic__types_html_ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0af5327b63a6783dad292e0f3daa8cb2d4">NEEDS_MULTIPLE_COMMANDS</a></div><div class="ttdeci">@ NEEDS_MULTIPLE_COMMANDS</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:39</div></div>
+<div class="ttc" id="agroup__zwave__command__class__generic__types_html_ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#ggafb8d304ba182570dc688ef06a555e8e0a3ed5a8b283cce878ec439109c8099285">NEEDS_ONE_COMMAND</a></div><div class="ttdeci">@ NEEDS_ONE_COMMAND</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:38</div></div>
+<div class="ttc" id="agroup__zwave__command__class__generic__types_html_ga797117ac3a64c2adf50e0c57e6238a2f"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#ga797117ac3a64c2adf50e0c57e6238a2f">set_commands_count_t</a></div><div class="ttdeci">uint8_t set_commands_count_t</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:33</div></div>
+<div class="ttc" id="agroup__zwave__command__class__generic__types_html_gafb8d304ba182570dc688ef06a555e8e0"><div class="ttname"><a href="group__zwave__command__class__generic__types.html#gafb8d304ba182570dc688ef06a555e8e0">command_status_values_t</a></div><div class="ttdeci">command_status_values_t</div><div class="ttdef"><b>Definition:</b> zwave_command_class_generic_types.h:36</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_20462f6d7be47578489ee94c8a2b0b2b.html">zpc_attribute_store</a></li><li class="navelem"><a class="el" href="dir_542069e8d36990607394b5241df245e1.html">include</a></li><li class="navelem"><a class="el" href="dir_29155eda6be39799d9b000d76215fc40.html">command_class_types</a></li><li class="navelem"><a class="el" href="zwave__command__class__generic__types_8h.html">zwave_command_class_generic_types.h</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:41:59 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:44 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

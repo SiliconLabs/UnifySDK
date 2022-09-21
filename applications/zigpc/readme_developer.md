@@ -52,7 +52,7 @@ cd ..
 
 * Run the container with the GSDK locations mounted:
 
-```
+``` bash
 docker run -it --rm \
   --env GSDK_LOCATION \
   -v`pwd`:`pwd` \

@@ -7,14 +7,17 @@ add_library(
   src/attribute_store_node.cpp
   src/attribute_store_type_registration.cpp
   src/attribute_store_configuration.cpp
-  src/attribute_store_validation.cpp)
+  src/attribute_store_validation.cpp
+  src/attribute_store_process.c)
 
 target_include_directories(
   uic_attribute_store
   PUBLIC include
   PRIVATE src)
 
-target_link_libraries(uic_attribute_store PUBLIC uic_datastore)
+target_link_libraries(uic_attribute_store
+  PUBLIC  uic_datastore
+  PRIVATE uic_contiki uic_contiki_platform)
 
 add_library(uic_attribute_store_test_helpers
             src/attribute_store_test_helpers.cpp)

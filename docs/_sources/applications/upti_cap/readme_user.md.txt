@@ -314,7 +314,8 @@ For installing please refer to the general installation method in
 
 The best way to run the UPTI CAP is using the Systemd service that is installed with
 
-the Debian installer. For more information, see  [Unify Framework User guide](../../doc/unify_readme_user.md).
+the Debian installer. For more information, see the
+[Unify Framework User guide](../../doc/unify_readme_user.md).
 
 ### Using Command Line
 
@@ -325,7 +326,7 @@ For details about options, run `uic-upti-cap --help` command:
 Make sure that you do not run the UPTICAP both as a service and using the
 command line.
 
-```bash
+```console
 pi@uic-upti-cap:~ $ service uic-upti-cap status
 ● uic-upti-cap.service - Unified IoT UPTI cap
    Loaded: loaded (/lib/systemd/system/uic-upti-cap.service; enabled; vendor preset: enabled)
@@ -339,6 +340,6 @@ pi@uic-upti-cap:~ $ service uic-upti-cap status
 If the service is running, stop it using the following command before
 you run the application manually:
 
-```bash
+```console
 pi@unify:~ $ service uic-upti-cap stop
 ```

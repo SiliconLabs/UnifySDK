@@ -37,7 +37,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
       DeviceType: "Any",
       IsAllExpanded: false
     };
-    this.search = this.search.bind(this);
+    this.updateList = this.updateList.bind(this);
     this.handleDskChange = this.handleDskChange.bind(this);
     this.getDSK = this.getDSK.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -50,7 +50,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
   ClusterTypeAttrs = ClusterTypeAttrs;
 
   searchEvent(event: any) {
-    this.setState({ Filter: event.target.value }, () => this.search(this.props.NodeList));
+    this.setState({ Filter: event.target.value }, () => this.updateList(this.props.NodeList));
   }
 
   updateNodeState(node: any) {
@@ -72,7 +72,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
         this.setState({ RequestedData: data, ShowRemoveModal: true });
   }
 
-  search(list: any[], deviceType?: string) {
+  updateList(list: any[], deviceType?: string) {
     let filtered: any[] = [];
     let deviceTypes: Map<string, string> = DeviceTypes;
     deviceType = deviceType || this.state.DeviceType;
@@ -202,7 +202,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
   getRow = (item: any, index: number, epName: string = "", ep: any = null, indexEp: number = -1, endPointsCount: number = 1, clustersCount: number = 0) => {
     let tdClassName = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
-
+    
     return (<Fragment key={`${index}-${indexEp}`}>
       <tr>
         <td className={`${tdClassName} no-padding-h`} rowSpan={endPointsCount + clustersCount} hidden={indexEp > 0}>
@@ -239,10 +239,10 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
           </div>
         </td>
         <td className={tdClassName} rowSpan={item.IsExpanded ? 1 : endPointsCount} hidden={!item.IsExpanded && indexEp > 0}>{item.MaximumCommandDelay}</td>
-        <td className={tdClassName} rowSpan={item.IsExpanded ? 1 : endPointsCount} hidden={!item.IsExpanded && indexEp > 0}>{item.State}</td>
+        <td className={tdClassName} rowSpan={item.IsExpanded ? 1 : endPointsCount} hidden={!item.IsExpanded && indexEp > 0}>{item.NetworkManagementState?.State}</td>
         <td rowSpan={item.IsExpanded ? 1 : endPointsCount} hidden={!item.IsExpanded && indexEp > 0}>
           {this.actionsList(item.SupportedCommands, "Commands", this.runCommand.bind(this, item.Unid, "run-node-command"), "")}
-          {this.actionsList(item.SupportedStateList, "States", this.runStateCommand.bind(this, item.Unid, "run-state-command"), "margin-r-5")}
+          {this.actionsList(item.NetworkManagementState?.SupportedStateList, "States", this.runStateCommand.bind(this, item.Unid, "run-state-command"), "margin-r-5")}
         </td>
       </tr>
       {
@@ -310,13 +310,13 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
   sort = (name: string) => {
     if (this.state.SortName === name)
-      this.setState({ IsSortAcs: !this.state.IsSortAcs }, () => this.search(this.props.NodeList));
+      this.setState({ IsSortAcs: !this.state.IsSortAcs }, () => this.updateList(this.props.NodeList));
     else
-      this.setState({ SortName: name, IsSortAcs: true }, () => this.search(this.props.NodeList));
+      this.setState({ SortName: name, IsSortAcs: true }, () => this.updateList(this.props.NodeList));
   }
 
   handleDeviceTypeChange = (event: any) => {
-    this.search(this.props.NodeList, event.target.value)
+    this.updateList(this.props.NodeList, event.target.value)
   }
 
   render() {

@@ -382,11 +382,22 @@ sl_status_t attribute_store_set_child_desired(attribute_store_node_t parent,
   return attribute_store_set_desired(child_node, value, value_size);
 }
 
-sl_status_t
-  attribute_store_set_child_reported_only_if_missing(attribute_store_node_t parent,
-                                                attribute_store_type_t type,
-                                                const void *value,
-                                                uint8_t value_size)
+sl_status_t attribute_store_get_child_reported(attribute_store_node_t parent,
+                                               attribute_store_type_t type,
+                                               void *value,
+                                               size_t expected_size)
+{
+  return attribute_store_get_reported(
+    attribute_store_get_first_child_by_type(parent, type),
+    value,
+    expected_size);
+}
+
+sl_status_t attribute_store_set_child_reported_only_if_missing(
+  attribute_store_node_t parent,
+  attribute_store_type_t type,
+  const void *value,
+  uint8_t value_size)
 {
   attribute_store_node_t child_node
     = attribute_store_get_first_child_by_type(parent, type);
@@ -395,20 +406,6 @@ sl_status_t
   }
   child_node = attribute_store_add_node(type, parent);
   return attribute_store_set_reported(child_node, value, value_size);
-}
-
-sl_status_t attribute_store_set_uint32_child_by_type(
-  attribute_store_node_t parent,
-  attribute_store_type_t type,
-  attribute_store_node_value_state_t state,
-  uint32_t value)
-{
-  attribute_store_node_t child
-    = attribute_store_get_first_child_by_type(parent, type);
-  return attribute_store_set_node_attribute_value(child,
-                                                  state,
-                                                  (uint8_t *)&value,
-                                                  sizeof(uint32_t));
 }
 
 void attribute_store_walk_tree(attribute_store_node_t top,

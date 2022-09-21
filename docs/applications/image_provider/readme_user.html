@@ -34,8 +34,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -129,7 +128,8 @@ OTA functionalities.</p>
 <h3>Using Systemd Service<a class="headerlink" href="#using-systemd-service" title="Permalink to this heading"></a></h3>
 <p>The best way to run the Image Provider is using the Systemd service that is
 installed with the Debian installer.
-For more information, see <a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify Framework User guide</span></a>.</p>
+For more information, see
+<a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify Framework User guide</span></a>.</p>
 </section>
 <section id="using-the-command-line">
 <h3>Using the Command Line<a class="headerlink" href="#using-the-command-line" title="Permalink to this heading"></a></h3>
@@ -138,19 +138,19 @@ You can configure the MQTT server, database path, through command line options.
 For details about options, run <code class="docutils literal notranslate"><span class="pre">uic-image-provider</span> <span class="pre">--help</span></code> command:</p>
 <p>Make sure that you do not run the Image Provider both as a service and using the
 command line.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~ $ service uic-image-provider status
-* uic-image-provider.service - Unified IoT OTA Image Provider
-   Loaded: loaded <span class="o">(</span>/lib/systemd/system/uic-image-provider.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2021</span>-08-17 <span class="m">14</span>:50:26 CEST<span class="p">;</span> <span class="m">1</span> day 20h ago
- Main PID: <span class="m">13235</span> <span class="o">(</span>uic-image-provi<span class="o">)</span>
-    Tasks: <span class="m">2</span> <span class="o">(</span>limit: <span class="m">4915</span><span class="o">)</span>
-   CGroup: /system.slice/uic-image-provider.service
-           <span class="p">|</span>─13235 /usr/bin/uic-image-provider
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>service uic-image-provider status
+<span class="go">* uic-image-provider.service - Unified IoT OTA Image Provider</span>
+<span class="go">   Loaded: loaded (/lib/systemd/system/uic-image-provider.service; enabled; vendor preset: enabled)</span>
+<span class="go">   Active: active (running) since Tue 2021-08-17 14:50:26 CEST; 1 day 20h ago</span>
+<span class="go"> Main PID: 13235 (uic-image-provi)</span>
+<span class="go">    Tasks: 2 (limit: 4915)</span>
+<span class="go">   CGroup: /system.slice/uic-image-provider.service</span>
+<span class="go">           |─13235 /usr/bin/uic-image-provider</span>
 </pre></div>
 </div>
 <p>If the service is running, stop it using the following command before
 you run the application manually:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~ $ service uic-image-provider stop
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>service uic-image-provider stop
 </pre></div>
 </div>
 </section>
@@ -163,12 +163,12 @@ you run the application manually:</p>
 store a JSON file that will represent the list of available images.</p>
 <p>The <em>images.json</em> file must be configured to indicate which images to advertise
 to the MQTT broker/Protocol Controllers.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:/var/lib/uic-image-provider $ tree
-.
-<span class="p">|</span>── images.json
-<span class="p">|</span>── updates
-    <span class="p">|</span>── ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl
-    <span class="p">|</span>── ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:/var/lib/uic-image-provider $ </span>tree
+<span class="go">.</span>
+<span class="go">|── images.json</span>
+<span class="go">|── updates</span>
+<span class="go">    |── ZW_SensorPir_7.15.4_256_ZGM130S_REGION_EU.gbl</span>
+<span class="go">    |── ZW_SwitchOnOff_7.15.4_256_ZGM130S_REGION_EU.gbl</span>
 </pre></div>
 </div>
 </section>

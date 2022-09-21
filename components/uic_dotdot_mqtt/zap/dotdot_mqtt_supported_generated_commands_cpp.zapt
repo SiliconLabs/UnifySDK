@@ -58,11 +58,11 @@ void {{dotdot_prefix}}_{{asSnakeCaseLower label}}_publish_supported_generated_co
   std::vector<std::string> command_vector;
   {{#zcl_commands}}
   if (command_list->{{asSnakeCaseLower label}} == true) {
-    command_vector.push_back(std::string("{{label}}"));
+    command_vector.emplace_back("{{label}}");
   }
   {{/zcl_commands}}
   if (command_list->write_attributes == true) {
-    command_vector.push_back(std::string("WriteAttributes"));
+    command_vector.emplace_back("WriteAttributes");
   }
 
   // JSONify, then Stringify

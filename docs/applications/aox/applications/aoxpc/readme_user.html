@@ -34,8 +34,7 @@
             <img src="../../../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -263,30 +262,30 @@ aoxpc --aoxpc.ncp.serial /dev/ttyACM2 --aoxpc.datastore_file aoxpc_2.db
 </pre></div>
 </div>
 <p>Write AoXLocator cluster attributes from a remote client.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ucl/by-unid/ble-pd-111111111111/ep0/AoXLocator/Commands/WriteAttributes {</span>
-<span class="go">  &quot;PositionAndOrientation&quot;: {</span>
-<span class="go">    &quot;CoordinateX&quot;: 0.0,</span>
-<span class="go">    &quot;CoordinateY&quot;: 0.0,</span>
-<span class="go">    &quot;CoordinateZ&quot;: 2.6,</span>
-<span class="go">    &quot;OrientationX&quot;: 180.0,</span>
-<span class="go">    &quot;OrientationY&quot;: 0.0,</span>
-<span class="go">    &quot;OrientationZ&quot;: 0.0</span>
-<span class="go">  },</span>
-<span class="go">  &quot;PositionAndOrientationValid&quot;: true</span>
-<span class="go">}</span>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/ble-pd-111111111111/ep0/AoXLocator/Commands/WriteAttributes</span> - {<span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;PositionAndOrientation&quot;</span><span class="p">:</span><span class="w"> </span>{<span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;CoordinateX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;CoordinateY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;CoordinateZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;OrientationX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;OrientationY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;OrientationZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="w">  </span>}<span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;PositionAndOrientationValid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+}
 </pre></div>
 </div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ucl/by-unid/ble-pd-222222222222/ep0/AoXLocator/Commands/WriteAttributes {</span>
-<span class="go">  &quot;PositionAndOrientation&quot;: {</span>
-<span class="go">    &quot;CoordinateX&quot;: 0.0,</span>
-<span class="go">    &quot;CoordinateY&quot;: 4.0,</span>
-<span class="go">    &quot;CoordinateZ&quot;: 2.6,</span>
-<span class="go">    &quot;OrientationX&quot;: 180.0,</span>
-<span class="go">    &quot;OrientationY&quot;: 0.0,</span>
-<span class="go">    &quot;OrientationZ&quot;: 0.0</span>
-<span class="go">  },</span>
-<span class="go">  &quot;PositionAndOrientationValid&quot;: true</span>
-<span class="go">}</span>
+<div class="highlight-mqtt notranslate"><div class="highlight"><pre><span></span><span class="ow">ucl/by-unid/ble-pd-222222222222/ep0/AoXLocator/Commands/WriteAttributes</span> - {<span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;PositionAndOrientation&quot;</span><span class="p">:</span><span class="w"> </span>{<span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;CoordinateX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;CoordinateY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;CoordinateZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.6</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;OrientationX&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">180.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;OrientationY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;OrientationZ&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="w">  </span>}<span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;PositionAndOrientationValid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+}
 </pre></div>
 </div>
 </section>

@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -145,6 +145,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab129987e297c0a02c4ba0fcb181cf314"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzwave__tx__queue.html#ab129987e297c0a02c4ba0fcb181cf314">disable_fasttack</a> (const <a class="el" href="group__zwave__tx__interface.html#ga1938ab567086a053bb3fbd0cddae43c2">zwave_tx_session_id_t</a> session_id)</td></tr>
 <tr class="memdesc:ab129987e297c0a02c4ba0fcb181cf314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the fasttrack options from the Z-Wave Tx Options.  <a href="classzwave__tx__queue.html#ab129987e297c0a02c4ba0fcb181cf314">More...</a><br /></td></tr>
 <tr class="separator:ab129987e297c0a02c4ba0fcb181cf314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f77587afbac88debd088b3e3ed1c67f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzwave__tx__queue.html#a1f77587afbac88debd088b3e3ed1c67f">zwave_tx_has_frames_for_node</a> (const <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memdesc:a1f77587afbac88debd088b3e3ed1c67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds if we have elements to send to a NodeID destination.  <a href="classzwave__tx__queue.html#a1f77587afbac88debd088b3e3ed1c67f">More...</a><br /></td></tr>
+<tr class="separator:a1f77587afbac88debd088b3e3ed1c67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7374bb502bea52d285284a751b48512"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classzwave__tx__queue.html#ad7374bb502bea52d285284a751b48512">log</a> (bool log_messages_payload) const</td></tr>
 <tr class="memdesc:ad7374bb502bea52d285284a751b48512"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs the content of the queue using <a class="el" href="group__sl__log.html">Unify Logging system</a>.  <a href="classzwave__tx__queue.html#ad7374bb502bea52d285284a751b48512">More...</a><br /></td></tr>
 <tr class="separator:ad7374bb502bea52d285284a751b48512"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -834,6 +837,33 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a1f77587afbac88debd088b3e3ed1c67f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f77587afbac88debd088b3e3ed1c67f">&#9670;&nbsp;</a></span>zwave_tx_has_frames_for_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool zwave_tx_queue::zwave_tx_has_frames_for_node </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramname"><em>node_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finds if we have elements to send to a NodeID destination. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_id</td><td>The NodeID to check for in the queue</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if we have elements pending for this NodeID, false otherwise. </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ad61bd9e04dcd7998ced3051da0ecf9a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad61bd9e04dcd7998ced3051da0ecf9a7">&#9670;&nbsp;</a></span>queue</h2>
@@ -888,7 +918,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classzwave__tx__queue.html">zwave_tx_queue</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:26 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:53 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

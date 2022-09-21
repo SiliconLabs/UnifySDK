@@ -24,9 +24,9 @@ fix_permissions() {
 
 enable_start_uic_positioning() {
   if type "systemctl" > /dev/null; then
-    systemctl --system daemon-reload
-    systemctl enable uic-positioning.service
-    systemctl start uic-positioning.service
+    systemctl --system daemon-reload || true
+    systemctl enable uic-positioning.service || true
+    systemctl start uic-positioning.service || true
   fi
 }
 

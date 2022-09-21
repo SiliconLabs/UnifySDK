@@ -28,6 +28,7 @@
 #include "zwapi_protocol_basis_mock.h"
 #include "zwapi_protocol_mem_mock.h"
 #include "zwapi_protocol_controller_mock.h"
+#include "zwave_controller_mock.h"
 
 /// Setup the test suite (called once before all test_xxx functions are called)
 void suiteSetUp() {}
@@ -304,4 +305,16 @@ void test_take_sis_role_if_no_suc_in_network()
   zwapi_get_controller_capabilities_ExpectAndReturn(23);
 
   network_management_take_sis_role_if_no_suc_in_network();
+}
+
+void test_network_management_is_ready_for_a_new_operation()
+{
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(false);
+  TEST_ASSERT_TRUE(network_management_is_ready_for_a_new_operation());
+
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_FALSE(network_management_is_ready_for_a_new_operation());
+
+  nms.state = NM_IDLE + 1;
+  TEST_ASSERT_FALSE(network_management_is_ready_for_a_new_operation());
 }

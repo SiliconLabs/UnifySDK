@@ -1145,6 +1145,7 @@ void test_uninitialized_attribute_store()
                                                             0,
                                                             0));
   TEST_ASSERT_EQUAL(false, attribute_store_node_exists(test_node));
+  TEST_ASSERT_FALSE(attribute_store_is_node_a_child(1, 0));
 }
 
 void test_attribute_store_delete_nodes_and_read_their_value()
@@ -1394,4 +1395,43 @@ void test_count_total_child()
   // Try to call the function when the attribute store is not initialized
   attribute_store_teardown();
   TEST_ASSERT_EQUAL(0, attribute_store_get_node_total_child_count(root_node));
+}
+
+void test_attribute_store_is_node_a_child()
+{
+  TEST_ASSERT_FALSE(attribute_store_is_node_a_child(1, 0));
+
+  // node_1 under root
+  attribute_store_node_t node_1
+    = attribute_store_add_node(1, attribute_store_get_root());
+
+  TEST_ASSERT_TRUE(
+    attribute_store_is_node_a_child(node_1, attribute_store_get_root()));
+  TEST_ASSERT_FALSE(
+    attribute_store_is_node_a_child(attribute_store_get_root(), node_1));
+
+  // node_2 under node_1
+  attribute_store_node_t node_2 = attribute_store_add_node(2, node_1);
+
+  TEST_ASSERT_TRUE(
+    attribute_store_is_node_a_child(node_2, attribute_store_get_root()));
+  TEST_ASSERT_TRUE(attribute_store_is_node_a_child(node_2, node_1));
+  TEST_ASSERT_FALSE(attribute_store_is_node_a_child(node_1, node_1));
+  TEST_ASSERT_FALSE(attribute_store_is_node_a_child(node_1, node_2));
+
+  // node_3 under node_1
+  attribute_store_node_t node_3 = attribute_store_add_node(3, node_1);
+
+  TEST_ASSERT_TRUE(
+    attribute_store_is_node_a_child(node_3, attribute_store_get_root()));
+  TEST_ASSERT_TRUE(attribute_store_is_node_a_child(node_3, node_1));
+  TEST_ASSERT_FALSE(attribute_store_is_node_a_child(node_1, node_1));
+  TEST_ASSERT_FALSE(attribute_store_is_node_a_child(node_1, node_3));
+  TEST_ASSERT_FALSE(attribute_store_is_node_a_child(node_2, node_3));
+  TEST_ASSERT_FALSE(attribute_store_is_node_a_child(node_3, node_2));
+
+  // Try with a non-existing node:
+  TEST_ASSERT_FALSE(
+    attribute_store_is_node_a_child(ATTRIBUTE_STORE_INVALID_NODE, node_1));
+  TEST_ASSERT_FALSE(attribute_store_is_node_a_child(9999999, 124));
 }

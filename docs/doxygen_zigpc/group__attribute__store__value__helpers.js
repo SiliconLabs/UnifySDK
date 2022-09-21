@@ -6,6 +6,7 @@ var group__attribute__store__value__helpers =
     [ "attribute_store_delete_all_children", "group__attribute__store__value__helpers.html#gae8c7595b27344009488bbd8f288b713e", null ],
     [ "attribute_store_emplace", "group__attribute__store__value__helpers.html#gabeb5582a3f870d0035aebc314041d598", null ],
     [ "attribute_store_emplace_desired", "group__attribute__store__value__helpers.html#ga2a509580d5a4f6f45e46376233e191e1", null ],
+    [ "attribute_store_get_child_reported", "group__attribute__store__value__helpers.html#ga22c0468db7a990bfb94dd0467b4a6f63", null ],
     [ "attribute_store_get_desired", "group__attribute__store__value__helpers.html#gae32bcc665b36442ec966a81c49ff1b23", null ],
     [ "attribute_store_get_desired_else_reported", "group__attribute__store__value__helpers.html#ga349400c9e5b910502180d00326a9863e", null ],
     [ "attribute_store_get_desired_else_reported_string", "group__attribute__store__value__helpers.html#gac0b1d43a1c2c696daf896fbd109e8685", null ],
@@ -29,7 +30,6 @@ var group__attribute__store__value__helpers =
     [ "attribute_store_set_reported_as_desired", "group__attribute__store__value__helpers.html#ga6baaa77f0226538dda0a084a9deb80d8", null ],
     [ "attribute_store_set_reported_number", "group__attribute__store__value__helpers.html#ga4a42f00f39fb61014f387f03902eabb1", null ],
     [ "attribute_store_set_reported_string", "group__attribute__store__value__helpers.html#ga7ceb404ec14e9ffc8eabf8fe6c21027a", null ],
-    [ "attribute_store_set_uint32_child_by_type", "group__attribute__store__value__helpers.html#ga3736691d1717b5b4711a0badb05ebb3f", null ],
     [ "attribute_store_undefine_desired", "group__attribute__store__value__helpers.html#gafd25eb8ffc71c17e8bcb6de66b87d958", null ],
     [ "attribute_store_undefine_reported", "group__attribute__store__value__helpers.html#ga9b75cfe657037462ef719564e459dfd5", null ],
     [ "attribute_store_walk_tree", "group__attribute__store__value__helpers.html#gafbd1a36fe6dfe6aaba58d02650d87598", null ]

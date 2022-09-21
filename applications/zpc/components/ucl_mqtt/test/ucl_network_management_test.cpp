@@ -557,12 +557,26 @@ void test_remove_node()
 ////////////////////////////////////////////////////////////////////////////////
 // Test "State": "reset"
 ////////////////////////////////////////////////////////////////////////////////
-void test_reset()
+void test_reset_success()
 {
   const char message[] = R"({"State":"reset"})";
   mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
   zwave_controller_reset_Expect();
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
   contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL_JSON(R"({"State":"reset", "SupportedStateList":[]})",
+                         mqtt_test_helper_pop_publish(ucl_nm_topic, buf));
+}
+
+void test_reset_failed()
+{
+  const char message[] = R"({"State":"reset"})";
+  mqtt_test_helper_publish(ucl_nm_state_write_topic, message, sizeof(message));
+  zwave_controller_reset_Expect();
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(false);
+  contiki_test_helper_run(0);
+  TEST_ASSERT_NULL_MESSAGE(mqtt_test_helper_pop_publish(ucl_nm_topic, buf),
+                           "No publication should have been made");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

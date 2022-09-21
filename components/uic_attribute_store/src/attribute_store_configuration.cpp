@@ -12,6 +12,7 @@
  *****************************************************************************/
 #include "attribute_store_configuration.h"
 #include "attribute_store_configuration_internal.h"
+#include "attribute_store_process.h"
 #include "attribute_store_internal.h"
 
 #include "sl_log.h"
@@ -20,9 +21,13 @@ constexpr char LOG_TAG[] = "attribute_store_configuration";
 // Private variables.
 namespace
 {
-// Should the Attribute Store save to the datastore after each modification?
-// It was enabled when first released, so it is enabled by default.
-bool auto_save_enabled = true;
+// How long should elapse in the worst case before the Attribute Store saves to
+// the SQLite storage in. Unit is seconds
+// Default will back-up the database every minute.
+unsigned int auto_save_safety_interval = 60;
+// How long should elapse since last write in the attribute store before we back
+// up in the datastore. Unit is seconds
+unsigned int auto_save_cooldown_interval = 10;
 // Should the Attribute Store perform additional validation when values
 // Based on the registered type informat?
 bool type_valiation_enabled = false;
@@ -39,16 +44,27 @@ void attribute_store_configuration_set_type_validation(bool enabled)
               type_valiation_enabled ? "Enabled" : "Disabled");
 }
 
-void attribute_store_configuration_set_auto_save(bool enabled)
+void attribute_store_configuration_set_auto_save_safety_interval(
+  unsigned int seconds)
 {
-  if ((auto_save_enabled == false) && (enabled == true)) {
-    // Save everything we missed until the auto-save got enabled:
-    attribute_store_save_to_datastore();
-  }
-  auto_save_enabled = enabled;
   sl_log_info(LOG_TAG,
-              "Attribute Store auto-save: %s",
-              (auto_save_enabled == true) ? "Enabled" : "Disabled");
+              "Updating the Attribute Store auto-save safety interval "
+              "from %d seconds to %d seconds.",
+              auto_save_safety_interval,
+              seconds);
+  auto_save_safety_interval = seconds;
+  attribute_store_process_restart_auto_save_safety_timer();
+}
+
+void attribute_store_configuration_set_auto_save_cooldown_interval(
+  unsigned int seconds)
+{
+  sl_log_info(LOG_TAG,
+              "Updating the Attribute Store auto-save cooldown interval "
+              "from %d seconds to %d seconds.",
+              auto_save_cooldown_interval,
+              seconds);
+  auto_save_cooldown_interval = seconds;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,7 +75,12 @@ bool attribute_store_is_type_validation_enabled()
   return type_valiation_enabled;
 }
 
-bool attribute_store_is_auto_save_enabled()
+unsigned int attribute_store_get_auto_save_safety_interval()
 {
-  return auto_save_enabled;
+  return auto_save_safety_interval;
+}
+
+unsigned int attribute_store_get_auto_save_cooldown_interval()
+{
+  return auto_save_cooldown_interval;
 }

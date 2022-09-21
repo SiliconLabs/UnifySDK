@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -106,8 +106,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga36f9cc653f890606e5d482ecef45a6b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga36f9cc653f890606e5d482ecef45a6b8">zwapi_get_protocol_info</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> bNodeID, <a class="el" href="group__ZWAPI__CONTROLLER.html#gaad5cc41ebf2d4ad67f95f155838df3b2">zwapi_node_info_header_t</a> *node_info_header)</td></tr>
 <tr class="memdesc:ga36f9cc653f890606e5d482ecef45a6b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy the Node's current protocol information from the non-volatile memory.  <a href="group__ZWAPI__CONTROLLER.html#ga36f9cc653f890606e5d482ecef45a6b8">More...</a><br /></td></tr>
 <tr class="separator:ga36f9cc653f890606e5d482ecef45a6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af29dbaa1776401db71af7817b88a78b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zwapi__protocol__controller_8c.html#af29dbaa1776401db71af7817b88a78b2">zwapi_get_virtual_nodes</a> (<a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> node_mask)</td></tr>
-<tr class="separator:af29dbaa1776401db71af7817b88a78b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga113990b4e0cc7159ade5a9273a4fe79d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga113990b4e0cc7159ade5a9273a4fe79d">zwapi_get_virtual_nodes</a> (<a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> node_mask)</td></tr>
+<tr class="memdesc:ga113990b4e0cc7159ade5a9273a4fe79d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request nodemask containing virtual nodes in controller bridge.  <a href="group__ZWAPI__CONTROLLER.html#ga113990b4e0cc7159ade5a9273a4fe79d">More...</a><br /></td></tr>
+<tr class="separator:ga113990b4e0cc7159ade5a9273a4fe79d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga1115444ea0d3fcec24e731f25264836f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__ZWAPI__CONTROLLER.html#ga1115444ea0d3fcec24e731f25264836f">zwapi_set_default</a> (void(*completedFunc)(void))</td></tr>
 <tr class="memdesc:ga1115444ea0d3fcec24e731f25264836f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all Nodes and timers from the EEPROM memory.  <a href="group__ZWAPI__CONTROLLER.html#ga1115444ea0d3fcec24e731f25264836f">More...</a><br /></td></tr>
 <tr class="separator:ga1115444ea0d3fcec24e731f25264836f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -274,24 +275,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af29dbaa1776401db71af7817b88a78b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af29dbaa1776401db71af7817b88a78b2">&#9670;&nbsp;</a></span>zwapi_get_virtual_nodes()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a> zwapi_get_virtual_nodes </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a>&#160;</td>
-          <td class="paramname"><em>node_mask</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a56f0f17e04f7eab5eefa2bf351710e3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a56f0f17e04f7eab5eefa2bf351710e3b">&#9670;&nbsp;</a></span>zwapi_replace_failed_node()</h2>
 
@@ -430,7 +413,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_1f99965fdbe101b1a068485db2f23081.html">zpc</a></li><li class="navelem"><a class="el" href="dir_7619deabe98ce62d677c018eac259f19.html">components</a></li><li class="navelem"><a class="el" href="dir_9376f99cbc649c5813b13d9244dc2fa3.html">zwave_api</a></li><li class="navelem"><a class="el" href="dir_997db13a0f767278426e906412983c64.html">src</a></li><li class="navelem"><a class="el" href="zwapi__protocol__controller_8c.html">zwapi_protocol_controller.c</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:09 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:46 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

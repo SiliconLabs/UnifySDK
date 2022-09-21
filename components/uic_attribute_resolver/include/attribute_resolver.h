@@ -39,6 +39,14 @@
 #include "attribute_store.h"
 #include "clock.h"
 #include <stdbool.h>
+
+/**
+ * @brief A callback type for notifying about resolver events.
+ *
+ * @param node        The attribute store node for which something happened.
+ */
+typedef void (*attribute_resolver_callback_t)(attribute_store_node_t node);
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -184,7 +192,7 @@ void attribute_resolver_resume_node_resolution(attribute_store_node_t node);
  * @param callback Function to invoke when the node resolution is done.
  */
 void attribute_resolver_set_resolution_listener(
-  attribute_store_node_t node, void (*callback)(attribute_store_node_t));
+  attribute_store_node_t node, attribute_resolver_callback_t callback);
 
 /**
  * @brief Clear a node resolve listener.
@@ -197,7 +205,7 @@ void attribute_resolver_set_resolution_listener(
  * @param callback Callback function to clear from node
  */
 void attribute_resolver_clear_resolution_listener(
-  attribute_store_node_t node, void (*callback)(attribute_store_node_t));
+  attribute_store_node_t node, attribute_resolver_callback_t callback);
 
 /**
  * @brief Registers a listener that will be informed if we give up trying to
@@ -207,7 +215,31 @@ void attribute_resolver_clear_resolution_listener(
  * @param callback Function to invoke when the node resolution has been given up
  */
 void attribute_resolver_set_resolution_give_up_listener(
-  attribute_store_type_t node_type, void (*callback)(attribute_store_node_t));
+  attribute_store_type_t node_type, attribute_resolver_callback_t callback);
+
+/**
+ * @brief Sets a listener for unpausing nodes.
+ *
+ * Listeners to unpausing/resume will get a synchronous callback
+ *
+ * @param node Node to set a listener for
+ * @param callback Callback function to invoke when the node is resumed for
+ *                  resolution.
+ */
+void attribute_resolver_set_resolution_resumption_listener(
+  attribute_store_node_t node, attribute_resolver_callback_t callback);
+
+/**
+ * @brief Sets a listener for unpausing nodes.
+ *
+ * Listeners to unpausing/resume will get a synchronous callback
+ *
+ * @param node Node to set a listener for
+ * @param callback Callback function to invoke when the node is resumed for
+ *                  resolution.
+ */
+void attribute_resolver_clear_resolution_resumption_listener(
+  attribute_store_node_t node, attribute_resolver_callback_t callback);
 
 /**
  * @brief Instructs the resolver to try to resolve a set rule that was pending

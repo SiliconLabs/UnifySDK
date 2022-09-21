@@ -14,6 +14,7 @@ add_library(
   src/zwave_command_class_association_send.cpp
   src/zwave_command_class_basic.c
   src/zwave_command_class_binary_switch.c
+  src/zwave_command_class_battery.cpp
   src/zwave_command_class_central_scene.c
   src/zwave_command_class_configuration_control.c
   src/zwave_command_class_device_reset_locally.cpp

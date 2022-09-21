@@ -141,6 +141,10 @@ int suiteTearDown(int num_failures)
 /// Called before each and every test
 void setUp()
 {
+  // FIXME: This should not be necessary in this test.
+  // Tx Queue checks the state of network management before transmitting.
+  zwave_network_management_get_state_IgnoreAndReturn(NM_IDLE);
+
   zwave_unid_set_home_id(home_id);
   zwave_network_management_get_home_id_IgnoreAndReturn(home_id);
   zwave_network_management_get_node_id_IgnoreAndReturn(zpc_node_id);

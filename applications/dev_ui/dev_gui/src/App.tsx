@@ -28,6 +28,7 @@ import SystemMetrics from './pages/system-metrics/system-metrics/system-metrics'
 import SceneList from './pages/scenes/scene-list/scene-list';
 import Scene from './pages/scenes/scene/scene';
 import Binding from './pages/binding/binding';
+import NetworkManagement from './pages/network-management/network-management';
 
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
@@ -112,7 +113,7 @@ class App extends Component<{}, AppState> {
       });
     this.setState({ NodeList: list });
     if (this.changeNodes.current)
-      this.changeNodes.current.search(list);
+      this.changeNodes.current.updateList(list);
     if (this.changeGroups.current)
       this.changeGroups.current.updateState(this.state.GroupList, list);
     if (this.changeOTA.current)
@@ -253,6 +254,7 @@ class App extends Component<{}, AppState> {
                   <Redirect from="/configurationparameters/:unid/" exact to="/configurationparameters/" />
                   <Route path='/binding' exact render={() => <Binding ref={this.changeBinding} {...baseProps} NodeList={this.state.NodeList} />} />
                   <Route path='/nodes' exact render={() => <Nodes ref={this.changeNodes} {...baseProps} NodeList={this.state.NodeList} />} />
+                  <Route path='/networkmanagement' exact render={() => <NetworkManagement ref={this.changeNodes} {...baseProps} NodeList={this.state.NodeList} />} />
                   <Redirect from="/" exact to="/nodes" />
                   {Object.keys(ClusterTypes).map((type, index) =>
                     <Route key={index} path={NavbarItems.find(i => i.name === type)?.path} render={() =>

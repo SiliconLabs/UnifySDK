@@ -76,7 +76,7 @@ static sl_status_t
 
 void attribute_resolver_set_resolution_listener_stub(
   attribute_store_node_t node,
-  cmock_attribute_resolver_func_ptr1 callback,
+  attribute_resolver_callback_t callback,
   int cmock_num_calls)
 {
   on_endpoint_interview_completed = callback;
@@ -311,7 +311,7 @@ void test_zwave_command_class_basic_probe_no_probe_node_paused()
 
   // node is paused, reset the resolution listener
   is_node_or_parent_paused_ExpectAndReturn(endpoint_id_node, true);
-  attribute_resolver_set_resolution_listener_Expect(
+  attribute_resolver_set_resolution_resumption_listener_Expect(
     endpoint_id_node,
     on_endpoint_interview_completed);
 

@@ -793,6 +793,15 @@ void test_attribute_store_set_child_reported()
   TEST_ASSERT_EQUAL(sizeof(value), received_value_size);
   TEST_ASSERT_EQUAL(value, received_value);
 
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_get_child_reported(test_node,
+                                                       0xBBBB,
+                                                       &received_value,
+                                                       sizeof(received_value)));
+
+  TEST_ASSERT_EQUAL(sizeof(value), received_value_size);
+  TEST_ASSERT_EQUAL(value, received_value);
+
   // Finally, just for fun, call the API with an invalid node.
   TEST_ASSERT_EQUAL(
     SL_STATUS_FAIL,
@@ -876,6 +885,57 @@ void test_attribute_store_set_child_desired()
                                       ATTRIBUTE_STORE_INVALID_ATTRIBUTE_TYPE,
                                       &value,
                                       sizeof(value)));
+}
+
+void test_attribute_store_get_child_reported()
+{
+  attribute_store_node_t root_node = attribute_store_get_root();
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, root_node);
+
+  attribute_store_node_t test_node
+    = attribute_store_add_node(0xAAAA, root_node);
+  TEST_ASSERT_NOT_EQUAL(ATTRIBUTE_STORE_INVALID_NODE, test_node);
+
+  // No child, nothing will be retrieved
+  uint32_t received_value = 0;
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    attribute_store_get_child_reported(test_node,
+                                                       0xBBBB,
+                                                       &received_value,
+                                                       sizeof(received_value)));
+  TEST_ASSERT_EQUAL(0, received_value);
+
+  // Set the value of a child:
+  uint32_t value = 9393;
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_set_child_reported(test_node,
+                                                       0xBBBB,
+                                                       &value,
+                                                       sizeof(value)));
+
+  /// Read it back:
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    attribute_store_get_child_reported(test_node,
+                                                       0xBBBB,
+                                                       &received_value,
+                                                       sizeof(received_value)));
+
+  TEST_ASSERT_EQUAL(value, received_value);
+
+  // Try with the wrong size:
+  received_value = 0;
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    attribute_store_get_child_reported(test_node, 0xBBBB, &received_value, 23));
+
+  TEST_ASSERT_EQUAL(0, received_value);
+
+  attribute_store_teardown();
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    attribute_store_get_child_reported(test_node,
+                                                       0xBBBB,
+                                                       &received_value,
+                                                       sizeof(received_value)));
 }
 
 void test_attribute_store_delete_all_children()

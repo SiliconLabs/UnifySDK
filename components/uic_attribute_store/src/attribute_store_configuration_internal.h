@@ -22,6 +22,8 @@
 #ifndef ATTRIBUTE_STORE_CONFIGURATION_INTERNAL_H
 #define ATTRIBUTE_STORE_CONFIGURATION_INTERNAL_H
 
+#include <stdbool.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -34,11 +36,20 @@ extern "C" {
 bool attribute_store_is_type_validation_enabled();
 
 /**
- * @brief Checks if the auto save setting is enabled
+ * @brief Returns the auto-save safety interval configuration.
  *
- * @returns true if enabled, false if not
+ * @returns The interval in seconds at which auto-save should run even if
+ * the attribute store is being modified constantly.
  */
-bool attribute_store_is_auto_save_enabled();
+unsigned int attribute_store_get_auto_save_safety_interval();
+
+/**
+ * @brief Returns the auto-save safety cooldown configuration.
+ *
+ * @returns The back-off in seconds to apply before saving to SQLite after
+ * the last update in the Attribute Store
+ */
+unsigned int attribute_store_get_auto_save_cooldown_interval();
 
 #ifdef __cplusplus
 }

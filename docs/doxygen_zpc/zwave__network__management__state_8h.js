@@ -20,6 +20,7 @@ var zwave__network__management__state_8h =
       [ "NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a5850e11b011b41855070d76e1c74998e", null ],
       [ "NM_FAILED_NODE_REMOVE", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a1809dd1ffd3d4217877bd42e77d63b08", null ],
       [ "NM_SEND_NOP", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a35407950f9012a40a262d892e9c5b7ae", null ],
-      [ "NM_ASSIGNING_RETURN_ROUTE", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694ad79dfac24fb54f04b3229dc2fad738e0", null ]
+      [ "NM_ASSIGNING_RETURN_ROUTE", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694ad79dfac24fb54f04b3229dc2fad738e0", null ],
+      [ "NM_NEIGHBOR_DISCOVERY_ONGOING", "group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a5b90cc6ede27aceb64ff3eff80d4d21e", null ]
     ] ]
 ];

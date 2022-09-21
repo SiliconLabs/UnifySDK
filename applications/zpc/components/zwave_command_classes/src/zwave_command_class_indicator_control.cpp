@@ -337,18 +337,18 @@ static void on_indicator_timeout_updated(attribute_store_node_t updated_node,
   attribute timeout   = updated_node;
   attribute indicator = timeout.parent();
 
-  if (timeout.reported_exists()) {
-    try {
+  try {
+    if ((timeout.reported_exists()) && (timeout.reported<int32_t>() != 0)) {
       attribute_timeout_set_callback(indicator,
                                      timeout.reported<int32_t>(),
                                      on_timeout_zero_properties);
-    } catch (const std::invalid_argument &e) {
-      sl_log_warning(LOG_TAG,
-                     "Could not process the Indicator Timeout value for "
-                     "node %d. No update will be made",
-                     timeout);
-      attribute_store_log_node(timeout, true);
     }
+  } catch (const std::invalid_argument &e) {
+    sl_log_warning(LOG_TAG,
+                   "Could not process the Indicator Timeout value for "
+                   "node %d. No update will be made",
+                   timeout);
+    attribute_store_log_node(timeout, true);
   }
 }
 

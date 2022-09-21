@@ -38,9 +38,9 @@ Incoming Z-Wave API frames are printed directly to the console, which allows
 detecting incoming Z-Wave frames or other messages from the Z-Wave API module.
 
 For example,
+
 ```bash
-[zwapi_protocol_rx_dispatch] Incoming Z-Wave API frame (hex): Length=12 Type=00
-Cmd=A8 00 00 01 00 02 04 86 14 5E 02 00 C0 00 7F 7F
+[zwapi_protocol_rx_dispatch] Incoming Z-Wave API frame (hex): Length=12 Type=00 Cmd=A8 00 00 01 00 02 04 86 14 5E 02 00 C0 00 7F 7F
 ```
 
 If the ZPC is communicating to the nodes with S2/S0, the log message will show
@@ -50,8 +50,7 @@ Shortly after receiving the frame, the Command Class handler will print out the
 outcome of processing the Z-Wave frame:
 
 ```bash
-[zwave_command_handler_callbacks] Command Class=0x25 - Command=0x03 from
-NodeID 004:1 handled successfully.
+[zwave_command_handler_callbacks] Command Class=0x25 - Command=0x03 from NodeID 004:1 handled successfully.
 ```
 
 #### Outgoing Z-Wave Frame from ZPC to Z-Wave Module
@@ -59,8 +58,7 @@ NodeID 004:1 handled successfully.
 Outgoing Z-Wave frames can be identified in the console log. For example,
 
 ```bash
-[zwave_tx_queue] Enqueuing new frame (id=0x24) - 001:0 ->  002:0 -
-Encapsulation 1 - Payload [6C 01 A4 04 8E 01 01 01 ]
+[zwave_tx_queue] Enqueuing new frame (id=0x24) - 001:0 ->  002:0 - Encapsulation 1 - Payload [6C 01 A4 04 8E 01 01 01 ]
 ```
 
 A single frame can result in several TX Queue elements, so multiple TX Queue
@@ -99,11 +97,11 @@ The following console log describes version information about Z-Wave Protocol.
 
 S2 keys are printed in console logs under each key level header.
 
-S2 Unauthenticated:     Key class 1  
-S2 Authenticated:       Key class 2  
-S2 Access:              Key class 4  
-S2 Authenticated LR:    Key class 8  
-S2 Access LR:           Key class 10  
+S2 Unauthenticated:     Key class 1
+S2 Authenticated:       Key class 2
+S2 Access:              Key class 4
+S2 Authenticated LR:    Key class 8
+S2 Access LR:           Key class 10
 
 For example,
 
@@ -142,11 +140,12 @@ file option.
 ```bash
 zpc  --log.level arg (=d)
 ```
-d: Debug  
-i: Info  
-w: Warning  
-e: Error  
-c: Critical  
+
+d: Debug
+i: Info
+w: Warning
+e: Error
+c: Critical
 
 #### Component-Based Log Severity
 
@@ -154,14 +153,15 @@ Log levels of ZPC can also be changed on component granularity by using the
 following command line argument or config file option for each component.
 
 Tag based log level
+
 ```bash
 # Format: <component>:<severity>,<component>:<severity>
 zpc   --log.tag_level component1:level,component2:level
 ```
 
-
 For example, to set ZPC MQTT log level to Info(i) and UIC Main log level to
 Error(e), use the following command line.
+
 ```bash
 zpc --log.tag_level uic_mqtt:i,uic_main:e
 ```
@@ -184,9 +184,11 @@ ZPC will not handle log rotation.
 ### Using MQTT Explorer to Monitor Messages
 
 You can publish MQTT message and observe the MQTT messages stored in the broker
-with a MQTT Explorer. MQTT explorer is an MQTT client that provides a structured
-overview of your MQTT topics.
+with a [MQTT Explorer](https://mqtt-explorer.com/).
+[MQTT Explorer](https://mqtt-explorer.com/) is an MQTT client that provides a
+structured overview of your MQTT topics.
 
-First, while ZPC is running, connect the MQTT Explorer to the host where your
-MQTT broker is located and the topics should be observed and structured based on
-Unify spec.
+Configure [MQTT Explorer](https://mqtt-explorer.com/) to connect to the host
+where your MQTT broker is located and the topics can be observed. Use the
+[Unify Specifications](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html)
+if you need assistance to understand what topics and they data represent.

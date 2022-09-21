@@ -92,6 +92,9 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_MULTICAST_GROUP, 0x0016)
 ///< This is the interval for sending NOPs to failing node clock_time_t
 DEFINE_ATTRIBUTE(ATTRIBUTE_ZWAVE_FAILING_NODE_PING_INTERVAL, 0x0017)
 
+///< Used by poll engine to request of for polling of the  attributer
+DEFINE_ATTRIBUTE(ATTRIBUTE_POLL_ENGINE_MARK, 0x0018)
+
 // Generic endpoint attributes, should be attached under endpoints
 // Suggested range 0x100..0x1FF (using Z-Wave Protocol CC identifier)
 /** This represents the list of supported command classes (NIF) for a node */
@@ -328,6 +331,9 @@ DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_SUPPORTED_GROUPINGS,
 /** This represents The maximum number of destinations supported by the advertised association group */
 DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_MAX_NODES_SUPPORTED,
                  ((COMMAND_CLASS_ASSOCIATION << 8) | 0x06))
+/** Count for commands trying to set group content. set_commands_count_t */
+DEFINE_ATTRIBUTE(ATTRIBUTE_COMMAND_CLASS_ASSOCIATION_GROUP_CONTENT_COMMAND_COUNT,
+                 ((COMMAND_CLASS_ASSOCIATION << 8) | 0x07))
 
 ///////////////////////////////////
 // Clock Command Class

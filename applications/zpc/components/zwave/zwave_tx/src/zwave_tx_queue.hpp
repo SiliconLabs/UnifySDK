@@ -309,6 +309,15 @@ class zwave_tx_queue
   */
   sl_status_t disable_fasttack(const zwave_tx_session_id_t session_id);
 
+  /**
+   * @brief Finds if we have elements to send to a NodeID destination
+   *
+   * @param node_id     The NodeID to check for in the queue
+   *
+   * @returns true if we have elements pending for this NodeID, false otherwise.
+  */
+  bool zwave_tx_has_frames_for_node(const zwave_node_id_t node_id);
+
   /////////////////////////////////////////////////////////////////////////////
   // Print functions
   /////////////////////////////////////////////////////////////////////////////

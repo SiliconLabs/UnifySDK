@@ -17,6 +17,13 @@
     non_camel_case_types,
     non_upper_case_globals
 )]
+use crate::rust_command_handlers::{
+    zwave_command_class_definitions::{ConnectionInfoTrait, ZwaveControllerEncapsulationScheme},
+    zwave_command_class_interface::{
+        CommandClassConfigurationTrait, FrameControlSupportTrait, ZwaveVersionChangedTrait,
+    },
+};
+use crate::zwave_controller_sys::zwave_controller_endpoint_t;
 use rust_command_class_frame_types::command_class_switch_color::*;
 use unify_attribute_store_sys::{
     attribute_resolver_register_rule, attribute_resolver_restart_set_resolution,
@@ -30,13 +37,6 @@ use unify_middleware::{
 use unify_proc_macro::{as_extern_c, generate_resolver_callback};
 use unify_sl_status_sys::{map_to_sl_status_fail, SL_STATUS_FAIL, SL_STATUS_OK};
 use zwave_rust_proc_macros::zwave_command_class;
-
-use crate::rust_command_handlers::{
-    zwave_command_class_definitions::{ConnectionInfoTrait, ZwaveControllerEncapsulationScheme},
-    zwave_command_class_interface::{
-        CommandClassConfigurationTrait, FrameControlSupportTrait, ZwaveVersionChangedTrait,
-    },
-};
 
 /// Attribute definitions
 const ATTRIBUTE_ENDPOINT_ID: u32 = 0x4;
@@ -184,7 +184,10 @@ impl FrameControlSupportTrait for SwitchColorSupportedReportFrame {
         }
 
         // Create the duration under the State node, if does not exist
-        if !state_node.get_child_by_type(ATTRIBUTE_COLOR_DURATION).valid() {
+        if !state_node
+            .get_child_by_type(ATTRIBUTE_COLOR_DURATION)
+            .valid()
+        {
             state_node
                 .add::<color_component_id_duration_t>(ATTRIBUTE_COLOR_DURATION, None, None)
                 .map_err(map_to_sl_status_fail)?;
@@ -257,6 +260,14 @@ impl FrameControlSupportTrait for SwitchColorReportFrame {
             .set_reported(Some(FINAL_STATE))
             .and(state_node.set_desired(Some(FINAL_STATE)));
 
+        log_debug!(
+            "NodeID {}:{} reported Color ID {} set to {}",
+            unsafe { info.get_remote().__bindgen_anon_1.node_id },
+            info.get_remote().endpoint_id,
+            self.color_component_id,
+            self.current_value
+        );
+
         Ok(())
     }
 }
@@ -283,10 +294,11 @@ fn switch_color_set(state_node: Attribute) -> Result<(sl_status_t, Vec<u8>), Att
     let mut _duration: color_component_id_duration_t = 0xFF as color_component_id_duration_t;
     // Check if this component has a desired duration
     match state_node
-    .get_child_by_type(ATTRIBUTE_COLOR_DURATION)
-    .get_desired::<color_component_id_duration_t>() {
-            Ok(desired_duration) => _duration = desired_duration,
-            Err(_) => (),
+        .get_child_by_type(ATTRIBUTE_COLOR_DURATION)
+        .get_desired::<color_component_id_duration_t>()
+    {
+        Ok(desired_duration) => _duration = desired_duration,
+        Err(_) => (),
     }
     // Gather data tor all color components
     for component in state_node.get_children_by_type(ATTRIBUTE_COLOR_COMPONENT_ID) {
@@ -412,6 +424,11 @@ mod test {
             .expect_get_endpoint()
             .times(1)
             .return_const(ep);
+        let mock_controller_endpoint_info: zwave_controller_endpoint_t = Default::default();
+        mock_connection_info
+            .expect_get_remote()
+            .times(2)
+            .return_const(mock_controller_endpoint_info);
 
         let status = f.on_control(&mock_connection_info);
         assert_eq!(Ok(()), status);
@@ -446,6 +463,10 @@ mod test {
             .expect_get_endpoint()
             .times(1)
             .return_const(ep);
+        mock_connection_info
+            .expect_get_remote()
+            .times(2)
+            .return_const(mock_controller_endpoint_info);
 
         let status = f.on_control(&mock_connection_info);
         assert_eq!(Ok(()), status);

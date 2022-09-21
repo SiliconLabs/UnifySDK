@@ -216,6 +216,21 @@ export let ClusterViewOverrides = {
     ColorControl: {
         ViewTable: [
             {
+                Name: `Capabilities`,
+                Value: (item: any) => {
+                    let capabilities = item.Attributes?.ColorCapabilities?.Reported;
+                    let capabilitiesKeys = capabilities && Object.keys(capabilities);
+                    return capabilitiesKeys ? <ul className='padding-l-15'> {capabilitiesKeys.map((i: string, index: number) => {
+                        return <Tooltip title={capabilities[i] ? "Supported": "Not Supported"}><li key={index} className={capabilities[i] ? "supported": "not-supported"}>{i}</li></Tooltip>
+                    })}
+                    </ul> : "-"
+                }
+            },
+            {
+                Name: `Color Mode`,
+                Value: (item: any) => item.Attributes?.ColorMode?.Reported ?? item.Attributes?.EnhancedColorMode?.Reported ?? "-"
+            },
+            {
                 Name: `Color`,
                 Value: (item: any, colorPicker: any, clusters: any) => {
                     let hue = item.Attributes?.CurrentHue?.Reported === undefined ? 211 : item.Attributes.CurrentHue.Reported / 254 * 360;
@@ -235,12 +250,20 @@ export let ClusterViewOverrides = {
                 Value: (item: any) => item.Attributes?.CurrentSaturation?.Reported ?? "-"
             },
             {
-                Name: `Remaining Time`,
-                Value: (item: any) => item.Attributes?.RemainingTime?.Reported ?? "-"
+                Name: `Temperature Mireds`,
+                Value: (item: any) => item.Attributes?.ColorTemperatureMireds?.Reported ?? "-"
             },
             {
-                Name: `Drift Compensation`,
-                Value: (item: any) => item.Attributes?.DriftCompensation?.Reported ?? "-"
+                Name: `MinMireds`,
+                Value: (item: any) => item.Attributes?.ColorTempPhysicalMinMireds?.Reported ?? "-"
+            },
+            {
+                Name: `MaxMireds`,
+                Value: (item: any) => item.Attributes?.ColorTempPhysicalMaxMireds?.Reported ?? "-"
+            },
+            {
+                Name: `Remaining Time`,
+                Value: (item: any) => item.Attributes?.RemainingTime?.Reported ?? "-"
             }
         ],
         NodesTooltip: (endpoint: string) =>
@@ -344,7 +367,7 @@ export let ClusterViewOverrides = {
             }
         ],
         NodesTooltip: (endpoint: string, attr: any) => {
-            let percentage = attr?.BatteryPercentageRemaining?.Reported || "Unknown";
+            let percentage = attr?.BatteryPercentageRemaining?.Reported !== undefined ? attr?.BatteryPercentageRemaining?.Reported : "Unknown";
             let icon = <MdIcons.MdBatteryUnknown color="#212529" />;
             if (attr && attr.BatteryPercentageRemaining !== undefined && attr.BatteryPercentageRemaining.Reported !== undefined) {
                 if (attr.BatteryAlarmMask && attr.BatteryAlarmMask.Reported && attr.BatteryAlarmMask.Reported.BatteryVoltageTooLow)
@@ -497,10 +520,10 @@ export let ClusterViewOverrides = {
             {
                 Name: `Names Supported`,
                 Value: (item: any) => item.Attributes?.NameSupport?.Reported?.SceneNamesSupported !== undefined ?
-                (item.Attributes.NameSupport.Reported.SceneNamesSupported === true
-                    ? <FiIcons.FiCheck color="#28a745" />
-                    : <FiIcons.FiXCircle color="#6c757d" />)
-                : "-"
+                    (item.Attributes.NameSupport.Reported.SceneNamesSupported === true
+                        ? <FiIcons.FiCheck color="#28a745" />
+                        : <FiIcons.FiXCircle color="#6c757d" />)
+                    : "-"
             },
         ],
         NodesTooltip: (endpoint: string) =>

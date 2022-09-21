@@ -59,7 +59,7 @@
 
 #include "zwave_COMMAND_CLASS_DOOR_LOCK_handlers.h"
 #include "zwave_COMMAND_CLASS_ZWAVEPLUS_INFO_handlers.h"
-#include "zwave_COMMAND_CLASS_BATTERY_handlers.h"
+#include "zwave_command_class_battery.h"
 #include "zwave_COMMAND_CLASS_SENSOR_BINARY_handlers.h"
 
 sl_status_t zwave_command_classes_init()
@@ -110,7 +110,7 @@ sl_status_t zwave_command_classes_init()
   // Auto-generated handlers
   initialization_status |= zwave_COMMAND_CLASS_DOOR_LOCK_init();
   initialization_status |= zwave_COMMAND_CLASS_ZWAVEPLUS_INFO_init();
-  initialization_status |= zwave_COMMAND_CLASS_BATTERY_init();
+  initialization_status |= zwave_command_class_battery_control_init();
   initialization_status |= zwave_COMMAND_CLASS_SENSOR_BINARY_init();
 
   zwave_command_handler_print_info(-1);

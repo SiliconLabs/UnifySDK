@@ -34,8 +34,7 @@
             <img src="../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -101,7 +100,7 @@ to set up your Raspberry Pi 4 and install the Unify Host SDK Debian packages.</p
 single-protocol Zigbee NCP. This service runs the Unify Framework Zigbee Protocol
 Controller. It can be configured to run with the multiprotocol RCP, as described
 below. For now, stop the service using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo systemctl stop uic-zigpc
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl stop uic-zigpc
 </pre></div>
 </div>
 </section>
@@ -122,11 +121,11 @@ connecting the Raspberry Pi to the WSTK with a USB cable, verify that the
 <h2>CPCd Setup<a class="headerlink" href="#cpcd-setup" title="Permalink to this heading"></a></h2>
 <p>CPCd must be running before any of the protocol services can be started.
 Start the <code class="docutils literal notranslate"><span class="pre">uic-cpcd</span></code> service using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo systemctl start uic-cpcd
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl start uic-cpcd
 </pre></div>
 </div>
 <p>Check to make sure it is running and successfully connected to the RCP:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo systemctl status uic-cpcd
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl status uic-cpcd
 </pre></div>
 </div>
 <p>If the connection was successful you will see the following lines at the end
@@ -148,7 +147,7 @@ and there are security error messages in the logs, there may be a problem with
 the binding keys. If this is the case, the best solution is to
 delete the binding keys on the host and the RCP and restart the <code class="docutils literal notranslate"><span class="pre">uic-cpcd</span></code>
 service. To delete the host binding key:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo rm /var/lib/uic/binding-key.key
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo rm /var/lib/uic/binding-key.key
 </pre></div>
 </div>
 <p>(Note that the location of the host binding key differs in the Unify Host SDK
@@ -165,11 +164,11 @@ for security reasons. For more information, see the <a class="reference internal
 <section id="zigbeed-and-socat">
 <h3>Zigbeed and Socat<a class="headerlink" href="#zigbeed-and-socat" title="Permalink to this heading"></a></h3>
 <p>Start the zigbeed service using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo systemctl start uic-zigbeed
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl start uic-zigbeed
 </pre></div>
 </div>
 <p>Verify that it is active:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo systemctl status uic-zigbeed
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl status uic-zigbeed
 </pre></div>
 </div>
 <p>If there are problems, make sure that CPCd is properly connected to the RCP.</p>
@@ -191,11 +190,11 @@ the correct PTY device name.</p>
 and ZigPC.</p>
 <p>Z3Gateway is the traditional Zigbee sample gateway application. Start it as
 follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo /usr/bin/Z3Gateway -p /dev/ttyZigbeeNCP
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo /usr/bin/Z3Gateway -p /dev/ttyZigbeeNCP
 </pre></div>
 </div>
 <p>ZigPC is the Unify Framework’s Zigbee Protocol Controller.  Start it like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo /usr/bin/zigpc --log.level d --zigpc.serial /dev/ttyZigbeeNCP --zigpc.datastore_file my_test.db
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo /usr/bin/zigpc --log.level d --zigpc.serial /dev/ttyZigbeeNCP --zigpc.datastore_file my_test.db
 </pre></div>
 </div>
 <p>In both cases, if the host application successfully connects to zigbeed,
@@ -205,13 +204,13 @@ a CLI prompt will appear.</p>
 <section id="openthread-border-router">
 <h2>OpenThread Border Router<a class="headerlink" href="#openthread-border-router" title="Permalink to this heading"></a></h2>
 <p>To run the OpenThread Border Router (OTBR), start the <code class="docutils literal notranslate"><span class="pre">otbr-agent</span></code> service:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo systemctl start otbr-agent
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo systemctl start otbr-agent
 </pre></div>
 </div>
 <p>As usual, verify that it is running using <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">status</span></code>. Next, run the
 <code class="docutils literal notranslate"><span class="pre">ot-ctl</span></code> CLI application.  This connects to OTBR and provides a CLI for
 entering OpenThread commands:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@raspberrypi:~ $ sudo ot-ctl
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@raspberrypi:~ $ </span>sudo ot-ctl
 </pre></div>
 </div>
 </section>

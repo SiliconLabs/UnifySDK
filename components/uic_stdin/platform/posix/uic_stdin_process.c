@@ -37,6 +37,7 @@
 
 // Includes from this component
 #include "uic_stdin_command_handler.h"
+#include "unify_stdin_attribute_store_command_handler.h"
 
 // Log
 #define LOG_TAG "uic_stdin_process"
@@ -140,6 +141,7 @@ PROCESS_THREAD(uic_stdin_process, ev, data)
   while (1) {
     if (ev == STARTUP) {
       uic_stdin_init();
+      unify_stdin_add_attribute_store_commands();
       if (isatty(STDIN_FILENO)) {
         //We use a pipe to send line string from readline thread to the contiki
         //process.

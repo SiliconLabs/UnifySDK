@@ -34,8 +34,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -134,7 +133,8 @@ broker restarts, the persisted SmartStart list is published to
 <section id="using-systemd-service">
 <h3>Using Systemd Service<a class="headerlink" href="#using-systemd-service" title="Permalink to this heading"></a></h3>
 <p>The best way to run the UPVL is using the Systemd service that is installed with
-the Debian installer. For more information, see <a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify User guide</span></a>.</p>
+the Debian installer. For more information, see
+<a class="reference internal" href="../../doc/unify_readme_user.html"><span class="doc std std-doc">Unify Framework User guide</span></a>.</p>
 </section>
 <section id="using-command-line">
 <h3>Using Command Line<a class="headerlink" href="#using-command-line" title="Permalink to this heading"></a></h3>
@@ -143,31 +143,31 @@ configure the MQTT broker Hostname or IP, UPVL database path, through command li
 options. For more details about the options, run <code class="docutils literal notranslate"><span class="pre">uic-upvl</span> <span class="pre">--help</span></code>.</p>
 <p>Make sure that you do not run the UPVL both as a service and using the
 command line.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~ $ service uic-upvl status
-● uic-upvl.service - Unify Framework Provisioning List
-     Loaded: loaded <span class="o">(</span>/lib/systemd/system/uic-upvl.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-     Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2022</span>-02-01 <span class="m">13</span>:32:57 CET<span class="p">;</span> 20h ago
-   Main PID: <span class="m">1736</span> <span class="o">(</span>uic-upvl<span class="o">)</span>
-      Tasks: <span class="m">1</span> <span class="o">(</span>limit: <span class="m">4624</span><span class="o">)</span>
-     Memory: <span class="m">3</span>.2M
-     CGroup: /system.slice/uic-upvl.service
-             └─1736 /usr/bin/uic-upvl --upvl.db_file /var/lib/uic/upvl.db
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>service uic-upvl status
+<span class="go">● uic-upvl.service - Unify Framework Provisioning List</span>
+<span class="go">     Loaded: loaded (/lib/systemd/system/uic-upvl.service; enabled; vendor preset: enabled)</span>
+<span class="go">     Active: active (running) since Tue 2022-02-01 13:32:57 CET; 20h ago</span>
+<span class="go">   Main PID: 1736 (uic-upvl)</span>
+<span class="go">      Tasks: 1 (limit: 4624)</span>
+<span class="go">     Memory: 3.2M</span>
+<span class="go">     CGroup: /system.slice/uic-upvl.service</span>
+<span class="go">             └─1736 /usr/bin/uic-upvl --upvl.db_file /var/lib/uic/upvl.db</span>
 
-Feb <span class="m">02</span> <span class="m">09</span>:20:06 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:06.343484 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> Disconnected from MQTT broker. Status: <span class="m">7</span>.
-Feb <span class="m">02</span> <span class="m">09</span>:20:06 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: Published <span class="m">0</span> messages.
-Feb <span class="m">02</span> <span class="m">09</span>:20:06 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: Received <span class="m">0</span> messages of which <span class="m">0</span> were dropped.
-Feb <span class="m">02</span> <span class="m">09</span>:20:07 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:07.344734 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> <span class="o">(</span>Re-<span class="o">)</span>connected to broker
-Feb <span class="m">02</span> <span class="m">09</span>:20:07 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:07.344815 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> Subscribing
-Feb <span class="m">02</span> <span class="m">09</span>:20:08 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:08.345994 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> Disconnected from MQTT broker. Status: <span class="m">7</span>.
-Feb <span class="m">02</span> <span class="m">09</span>:20:08 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: Published <span class="m">0</span> messages.
-Feb <span class="m">02</span> <span class="m">09</span>:20:08 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: Received <span class="m">0</span> messages of which <span class="m">0</span> were dropped.
-Feb <span class="m">02</span> <span class="m">09</span>:20:09 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:09.347998 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> <span class="o">(</span>Re-<span class="o">)</span>connected to broker
-Feb <span class="m">02</span> <span class="m">09</span>:20:09 ubunty200402 uic-upvl<span class="o">[</span><span class="m">1736</span><span class="o">]</span>: <span class="m">2022</span>-Feb-02 <span class="m">09</span>:20:09.348156 &lt;i&gt; <span class="o">[</span>upvl_mqtt<span class="o">]</span> Subscribing
+<span class="go">Feb 02 09:20:06 ubunty200402 uic-upvl[1736]: 2022-Feb-02 09:20:06.343484 &lt;i&gt; [upvl_mqtt] Disconnected from MQTT broker. Status: 7.</span>
+<span class="go">Feb 02 09:20:06 ubunty200402 uic-upvl[1736]: Published 0 messages.</span>
+<span class="go">Feb 02 09:20:06 ubunty200402 uic-upvl[1736]: Received 0 messages of which 0 were dropped.</span>
+<span class="go">Feb 02 09:20:07 ubunty200402 uic-upvl[1736]: 2022-Feb-02 09:20:07.344734 &lt;i&gt; [upvl_mqtt] (Re-)connected to broker</span>
+<span class="go">Feb 02 09:20:07 ubunty200402 uic-upvl[1736]: 2022-Feb-02 09:20:07.344815 &lt;i&gt; [upvl_mqtt] Subscribing</span>
+<span class="go">Feb 02 09:20:08 ubunty200402 uic-upvl[1736]: 2022-Feb-02 09:20:08.345994 &lt;i&gt; [upvl_mqtt] Disconnected from MQTT broker. Status: 7.</span>
+<span class="go">Feb 02 09:20:08 ubunty200402 uic-upvl[1736]: Published 0 messages.</span>
+<span class="go">Feb 02 09:20:08 ubunty200402 uic-upvl[1736]: Received 0 messages of which 0 were dropped.</span>
+<span class="go">Feb 02 09:20:09 ubunty200402 uic-upvl[1736]: 2022-Feb-02 09:20:09.347998 &lt;i&gt; [upvl_mqtt] (Re-)connected to broker</span>
+<span class="go">Feb 02 09:20:09 ubunty200402 uic-upvl[1736]: 2022-Feb-02 09:20:09.348156 &lt;i&gt; [upvl_mqtt] Subscribing</span>
 </pre></div>
 </div>
 <p>If the service is running, stop it using the following command before
 you run the application manually:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pi@unify:~ $ service uic-upvl stop
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@unify:~ $ </span>service uic-upvl stop
 </pre></div>
 </div>
 </section>

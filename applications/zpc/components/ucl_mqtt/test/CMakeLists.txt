@@ -32,8 +32,12 @@ target_add_unittest(
 target_add_unittest(
   ucl_nm_neighbor_discovery
   SOURCES
-  ucl_nm_neighbor_discovery_test.cpp
+  ucl_nm_neighbor_discovery_test.c
   DEPENDS
+  uic_contiki_stub
   zwave_controller_mock
   zwave_network_management_mock
-  zpc_attribute_store_mock)
+  zpc_attribute_store_mock
+  uic_attribute_store_mock
+  uic_attribute_resolver_mock
+)

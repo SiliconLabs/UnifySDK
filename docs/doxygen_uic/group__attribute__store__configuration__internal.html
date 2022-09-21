@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Unify Framework Lib
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -98,21 +98,24 @@ Functions</h2></td></tr>
 <tr class="memitem:ga763b170aed6edd71cc4dd066a86976c9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__configuration__internal.html#ga763b170aed6edd71cc4dd066a86976c9">attribute_store_is_type_validation_enabled</a> ()</td></tr>
 <tr class="memdesc:ga763b170aed6edd71cc4dd066a86976c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the Type validation setting is enabled.  <a href="group__attribute__store__configuration__internal.html#ga763b170aed6edd71cc4dd066a86976c9">More...</a><br /></td></tr>
 <tr class="separator:ga763b170aed6edd71cc4dd066a86976c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaeaf6c10d39b69451e63a69527a07b5f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__configuration__internal.html#gaeaf6c10d39b69451e63a69527a07b5f1">attribute_store_is_auto_save_enabled</a> ()</td></tr>
-<tr class="memdesc:gaeaf6c10d39b69451e63a69527a07b5f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the auto save setting is enabled.  <a href="group__attribute__store__configuration__internal.html#gaeaf6c10d39b69451e63a69527a07b5f1">More...</a><br /></td></tr>
-<tr class="separator:gaeaf6c10d39b69451e63a69527a07b5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6ec9ba73765ba7cb2689e69008e710b0"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__configuration__internal.html#ga6ec9ba73765ba7cb2689e69008e710b0">attribute_store_get_auto_save_safety_interval</a> ()</td></tr>
+<tr class="memdesc:ga6ec9ba73765ba7cb2689e69008e710b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the auto-save safety interval configuration.  <a href="group__attribute__store__configuration__internal.html#ga6ec9ba73765ba7cb2689e69008e710b0">More...</a><br /></td></tr>
+<tr class="separator:ga6ec9ba73765ba7cb2689e69008e710b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga57d51b6f657ed8b284728f67c1d8fb4c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__attribute__store__configuration__internal.html#ga57d51b6f657ed8b284728f67c1d8fb4c">attribute_store_get_auto_save_cooldown_interval</a> ()</td></tr>
+<tr class="memdesc:ga57d51b6f657ed8b284728f67c1d8fb4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the auto-save safety cooldown configuration.  <a href="group__attribute__store__configuration__internal.html#ga57d51b6f657ed8b284728f67c1d8fb4c">More...</a><br /></td></tr>
+<tr class="separator:ga57d51b6f657ed8b284728f67c1d8fb4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Internal functions for the attribute store configuration. </p>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="gaeaf6c10d39b69451e63a69527a07b5f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaeaf6c10d39b69451e63a69527a07b5f1">&#9670;&nbsp;</a></span>attribute_store_is_auto_save_enabled()</h2>
+<a id="ga57d51b6f657ed8b284728f67c1d8fb4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga57d51b6f657ed8b284728f67c1d8fb4c">&#9670;&nbsp;</a></span>attribute_store_get_auto_save_cooldown_interval()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool attribute_store_is_auto_save_enabled </td>
+          <td class="memname">unsigned int attribute_store_get_auto_save_cooldown_interval </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -120,8 +123,28 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Checks if the auto save setting is enabled. </p>
-<dl class="section return"><dt>Returns</dt><dd>true if enabled, false if not </dd></dl>
+<p>Returns the auto-save safety cooldown configuration. </p>
+<dl class="section return"><dt>Returns</dt><dd>The back-off in seconds to apply before saving to SQLite after the last update in the Attribute Store </dd></dl>
+
+</div>
+</div>
+<a id="ga6ec9ba73765ba7cb2689e69008e710b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6ec9ba73765ba7cb2689e69008e710b0">&#9670;&nbsp;</a></span>attribute_store_get_auto_save_safety_interval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int attribute_store_get_auto_save_safety_interval </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the auto-save safety interval configuration. </p>
+<dl class="section return"><dt>Returns</dt><dd>The interval in seconds at which auto-save should run even if the attribute store is being modified constantly. </dd></dl>
 
 </div>
 </div>
@@ -150,7 +173,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:00 for Unify Framework Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:43 for Unify Framework Lib by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

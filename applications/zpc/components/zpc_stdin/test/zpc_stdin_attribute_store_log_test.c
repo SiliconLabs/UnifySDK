@@ -81,7 +81,7 @@ void test_zpc_stdin_attribute_store_log_test()
   attribute_store_set_reported_number(node_5, 23254);
   attribute_store_set_desired_number(node_5, 23252);
   attribute_store_node_t node_6 = attribute_store_add_node(6, node_2);
-  attribute_store_set_reported_number(node_6, 12393842938);
+  attribute_store_set_reported_number(node_6, 12392938);
   attribute_store_set_desired_number(node_6, 0);
   attribute_store_node_t node_7 = attribute_store_add_node(7, node_1);
   attribute_store_set_reported_number(node_7, 300);  // Should be clipped here.

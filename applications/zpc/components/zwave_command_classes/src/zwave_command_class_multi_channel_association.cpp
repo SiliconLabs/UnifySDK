@@ -844,6 +844,17 @@ static void on_group_content_send_data_complete(attribute_store_node_t node,
   if (rule_type == RESOLVER_GET_RULE) {
     return;
   }
+
+  // Capture how many Set command we have been sending to align the group content
+  set_commands_count_t command_count = 0;
+  attribute_store_get_child_reported(node,
+                                     ATTRIBUTE(GROUP_CONTENT_COMMAND_COUNT),
+                                     &command_count,
+                                     sizeof(command_count));
+
+  // Increase the previous value by 1.
+  command_count += 1;
+
   switch (event) {
     case FRAME_SENT_EVENT_OK_SUPERVISION_WORKING:
       // Wait for more. Weird to have a working Supervision for Association
@@ -852,6 +863,10 @@ static void on_group_content_send_data_complete(attribute_store_node_t node,
     case FRAME_SENT_EVENT_OK_SUPERVISION_SUCCESS:
     case FRAME_SENT_EVENT_OK_NO_SUPERVISION:
       attribute_store_undefine_reported(node);
+      if (command_count >= MAXIMUM_COMMANDS_TO_SET_GROUP_CONTENT) {
+        command_count = 0;
+        attribute_store_undefine_desired(node);
+      }
       break;
 
     case FRAME_SENT_EVENT_OK_SUPERVISION_NO_SUPPORT:
@@ -859,8 +874,15 @@ static void on_group_content_send_data_complete(attribute_store_node_t node,
     default:
       attribute_store_undefine_desired(node);
       attribute_store_undefine_reported(node);
+      command_count = 0;
       break;
   }
+
+  // Save the command count in the attribute store.
+  attribute_store_set_child_reported(node,
+                                     ATTRIBUTE(GROUP_CONTENT_COMMAND_COUNT),
+                                     &command_count,
+                                     sizeof(command_count));
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -894,7 +916,7 @@ static void zwave_command_class_multi_channel_association_on_group_id_update(
  * @param change            The attribute store change that took place
  */
 static void
-  zwave_command_class_multi_channel_association_on_group_content_update(
+  zwave_command_class_multi_channel_association_on_group_content_reported_update(
     attribute_store_node_t group_content_node, attribute_store_change_t change)
 {
   if (change != ATTRIBUTE_UPDATED) {
@@ -920,6 +942,39 @@ static void
     establish_zpc_associations(
       attribute_store_get_first_parent_with_type(group_content_node,
                                                  ATTRIBUTE(GROUP_ID)));
+}
+
+/**
+ * @brief Verifies if the group content desired value got modified in the middle
+ * of a multi-set operation and restarts resolution if needed.
+ *
+ * @param group_id_node     The Group ID that was just updated.
+ * @param change            The attribute store change that took place
+ */
+static void
+  zwave_command_class_multi_channel_association_on_group_content_desired_update(
+    attribute_store_node_t group_content_node, attribute_store_change_t change)
+{
+  if (change != ATTRIBUTE_UPDATED) {
+    return;
+  }
+  if (false
+      == attribute_store_is_value_defined(group_content_node,
+                                          DESIRED_ATTRIBUTE)) {
+    return;
+  }
+
+  // Desired got updated, not undefined and not matching the reported value
+  // Make sure to restart resolution from the beginning
+  if (false == attribute_store_is_value_matched(group_content_node)) {
+    set_commands_count_t command_count = 0;
+    attribute_store_set_child_reported(group_content_node,
+                                       ATTRIBUTE(GROUP_CONTENT_COMMAND_COUNT),
+                                       &command_count,
+                                       sizeof(command_count));
+
+    attribute_resolver_restart_set_resolution(group_content_node);
+  }
 }
 
 static void
@@ -1003,9 +1058,14 @@ sl_status_t zwave_command_class_multi_channel_association_init()
     REPORTED_ATTRIBUTE);
 
   attribute_store_register_callback_by_type_and_state(
-    &zwave_command_class_multi_channel_association_on_group_content_update,
+    &zwave_command_class_multi_channel_association_on_group_content_reported_update,
     ATTRIBUTE(GROUP_CONTENT),
     REPORTED_ATTRIBUTE);
+
+  attribute_store_register_callback_by_type_and_state(
+    &zwave_command_class_multi_channel_association_on_group_content_desired_update,
+    ATTRIBUTE(GROUP_CONTENT),
+    DESIRED_ATTRIBUTE);
 
   // Attribute Resolver event listener:
   register_send_event_handler(ATTRIBUTE(GROUP_CONTENT),

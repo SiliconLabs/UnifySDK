@@ -17,7 +17,6 @@
 #include "attribute_transitions.h"
 #include "attribute_timeouts.h"
 #include "attribute_mapper.h"
-#include "attribute_poll.h"
 #include "datastore_fixt.h"
 #include "dotdot_mqtt_topics_handler.h"
 #include "dotdot_mapper_fixt.h"
@@ -107,8 +106,6 @@ static uic_fixt_setup_step_t uic_fixt_setup_steps_list[] = {
    * Initialize the Attribute Poll Engine, this shall be initialized before
    * registering any attributes for polling.
    */
-  {&attribute_poll_init, "Attribute Poll Engine"},
-
   {&zwave_poll_manager_init, "zwave attribute poller"},
 
   /**

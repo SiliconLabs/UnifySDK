@@ -46,6 +46,12 @@ void on_set_suc_node_id_completed(uint8_t set_suc_status);
  */
 void on_set_default_complete();
 
+/**
+ * @brief a callback function for Request Node Neighbor Discovery Command
+ * @param status the status of the request neighbor operation
+ */
+void on_request_node_neighbor_update_completed(uint8_t status);
+
 #ifdef __cplusplus
 }
 #endif

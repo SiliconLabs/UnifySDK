@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -193,7 +193,9 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a5850e11b011b41855070d76e1c74998e">NM_WAIT_FOR_SELF_DESTRUCT_REMOVAL</a>, 
 <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a1809dd1ffd3d4217877bd42e77d63b08">NM_FAILED_NODE_REMOVE</a>, 
 <a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a35407950f9012a40a262d892e9c5b7ae">NM_SEND_NOP</a>, 
-<a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694ad79dfac24fb54f04b3229dc2fad738e0">NM_ASSIGNING_RETURN_ROUTE</a>
+<a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694ad79dfac24fb54f04b3229dc2fad738e0">NM_ASSIGNING_RETURN_ROUTE</a>, 
+<br />
+&#160;&#160;<a class="el" href="group__zwave__network__management.html#gga151fc4231aa100f1acc0542648a17694a5b90cc6ede27aceb64ff3eff80d4d21e">NM_NEIGHBOR_DISCOVERY_ONGOING</a>
 <br />
  }</td></tr>
 <tr class="memdesc:ga151fc4231aa100f1acc0542648a17694"><td class="mdescLeft">&#160;</td><td class="mdescRight">States of the Network Management module.  <a href="group__zwave__network__management.html#ga151fc4231aa100f1acc0542648a17694">More...</a><br /></td></tr>
@@ -238,11 +240,14 @@ Functions</h2></td></tr>
 <tr class="memdesc:gade18f44167921855f974d5efb34f4837"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a failed node.  <a href="group__zwave__network__management.html#gade18f44167921855f974d5efb34f4837">More...</a><br /></td></tr>
 <tr class="separator:gade18f44167921855f974d5efb34f4837"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac01bf38badf30f94eac9a04b486cb967"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__node__id__definitions.html#ga4afdc83ff2cd0daf56a53dac916a11c2">zwave_home_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">zwave_network_management_get_home_id</a> ()</td></tr>
-<tr class="memdesc:gac01bf38badf30f94eac9a04b486cb967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cached home_id.  <a href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">More...</a><br /></td></tr>
+<tr class="memdesc:gac01bf38badf30f94eac9a04b486cb967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cached HomeID.  <a href="group__zwave__network__management.html#gac01bf38badf30f94eac9a04b486cb967">More...</a><br /></td></tr>
 <tr class="separator:gac01bf38badf30f94eac9a04b486cb967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae265f1e935804f3f0b971755ab0ee61e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">zwave_network_management_get_node_id</a> ()</td></tr>
-<tr class="memdesc:gae265f1e935804f3f0b971755ab0ee61e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cached node_id.  <a href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">More...</a><br /></td></tr>
+<tr class="memdesc:gae265f1e935804f3f0b971755ab0ee61e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cached NodeID.  <a href="group__zwave__network__management.html#gae265f1e935804f3f0b971755ab0ee61e">More...</a><br /></td></tr>
 <tr class="separator:gae265f1e935804f3f0b971755ab0ee61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga157dae4a3bf86cb296df917954c27d18"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga157dae4a3bf86cb296df917954c27d18">zwave_network_management_get_network_size</a> ()</td></tr>
+<tr class="memdesc:ga157dae4a3bf86cb296df917954c27d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of nodes in our network.  <a href="group__zwave__network__management.html#ga157dae4a3bf86cb296df917954c27d18">More...</a><br /></td></tr>
+<tr class="separator:ga157dae4a3bf86cb296df917954c27d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf385a1580adbef8a8d6b9c65da5f5664"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#gaf385a1580adbef8a8d6b9c65da5f5664">zwave_network_management_get_network_node_list</a> (<a class="el" href="group__zwave__node__id__definitions.html#ga6d38d1aa10a5aa432326a6154ac9a9a0">zwave_nodemask_t</a> node_list)</td></tr>
 <tr class="memdesc:gaf385a1580adbef8a8d6b9c65da5f5664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cached Node List for the current network.  <a href="group__zwave__network__management.html#gaf385a1580adbef8a8d6b9c65da5f5664">More...</a><br /></td></tr>
 <tr class="separator:gaf385a1580adbef8a8d6b9c65da5f5664"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -252,6 +257,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga10d248f803b45c70adf8ecec24308109"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga10d248f803b45c70adf8ecec24308109">zwave_network_management_is_zpc_sis</a> ()</td></tr>
 <tr class="memdesc:ga10d248f803b45c70adf8ecec24308109"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if we have the SIS role in the current network.  <a href="group__zwave__network__management.html#ga10d248f803b45c70adf8ecec24308109">More...</a><br /></td></tr>
 <tr class="separator:ga10d248f803b45c70adf8ecec24308109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga38921e3a42a10fc5135615b50f0573cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga38921e3a42a10fc5135615b50f0573cd">zwave_network_management_is_protocol_sending_frames_to_node</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
+<tr class="memdesc:ga38921e3a42a10fc5135615b50f0573cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the protocol may be sending some frames to a particular NodeID.  <a href="group__zwave__network__management.html#ga38921e3a42a10fc5135615b50f0573cd">More...</a><br /></td></tr>
+<tr class="separator:ga38921e3a42a10fc5135615b50f0573cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga529c2e3e0edac5ed86f98fe55fc77c57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f">sl_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__zwave__network__management.html#ga529c2e3e0edac5ed86f98fe55fc77c57">zwave_network_management_request_node_neighbor_discovery</a> (<a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> <a class="el" href="zpc__attribute__store__test__helper_8h.html#a8571121ca4b060a8eaca9b120d728ac8">node_id</a>)</td></tr>
 <tr class="memdesc:ga529c2e3e0edac5ed86f98fe55fc77c57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request Node Neighbor Discovery.  <a href="group__zwave__network__management.html#ga529c2e3e0edac5ed86f98fe55fc77c57">More...</a><br /></td></tr>
 <tr class="separator:ga529c2e3e0edac5ed86f98fe55fc77c57"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -574,6 +582,8 @@ Functions</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694ad79dfac24fb54f04b3229dc2fad738e0"></a>NM_ASSIGNING_RETURN_ROUTE&#160;</td><td class="fielddoc"><p>Assign return route state when the NM get the zwave_api assign return route callback the NM state shall be shift to IDLE </p>
 </td></tr>
+<tr><td class="fieldname"><a id="gga151fc4231aa100f1acc0542648a17694a5b90cc6ede27aceb64ff3eff80d4d21e"></a>NM_NEIGHBOR_DISCOVERY_ONGOING&#160;</td><td class="fielddoc"><p>Performing a neighbor discovery/update The protocol has requested a node to perform a neighbor discovery and waits for the result. </p>
+</td></tr>
 </table>
 
 </div>
@@ -868,8 +878,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the cached home_id. </p>
-<dl class="section return"><dt>Returns</dt><dd>home_id </dd></dl>
+<p>Get the cached HomeID. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current HomeID assigned to the Z-Wave Controller </dd></dl>
 
 </div>
 </div>
@@ -899,6 +909,26 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ga157dae4a3bf86cb296df917954c27d18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga157dae4a3bf86cb296df917954c27d18">&#9670;&nbsp;</a></span>zwave_network_management_get_network_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t zwave_network_management_get_network_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the number of nodes in our network. </p>
+<dl class="section return"><dt>Returns</dt><dd>Number of nodes in our netowrk. </dd></dl>
+
+</div>
+</div>
 <a id="gae265f1e935804f3f0b971755ab0ee61e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gae265f1e935804f3f0b971755ab0ee61e">&#9670;&nbsp;</a></span>zwave_network_management_get_node_id()</h2>
 
@@ -914,8 +944,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the cached node_id. </p>
-<dl class="section return"><dt>Returns</dt><dd>node_id </dd></dl>
+<p>Get the cached NodeID. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current NodeID assigned to the Z-Wave Controller </dd></dl>
 
 </div>
 </div>
@@ -956,6 +986,33 @@ Functions</h2></td></tr>
 
 <p>Verify if we are carrying some network management operations. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if we are busy doing something, false if IDLE. </dd></dl>
+
+</div>
+</div>
+<a id="ga38921e3a42a10fc5135615b50f0573cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga38921e3a42a10fc5135615b50f0573cd">&#9670;&nbsp;</a></span>zwave_network_management_is_protocol_sending_frames_to_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool zwave_network_management_is_protocol_sending_frames_to_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td>
+          <td class="paramname"><em>node_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if the protocol may be sending some frames to a particular NodeID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_id</td><td>The Z-Wave NodeID that we want to check for. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the protocol is currently sending frames to the node, false if there is no operation that may trigger communications with the node. </dd></dl>
 
 </div>
 </div>
@@ -1083,11 +1140,7 @@ false if we do not have the SIS role in this network </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>sl_status_t<ul>
-<li>SL_STATUS_BUSY if Network Management (State Machine) is busy in some other operation</li>
-<li>SL_STATUS_OK when remove failed is triggered </li>
-</ul>
-</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK when remove failed is triggered, any other code if it failed </dd></dl>
 
 </div>
 </div>
@@ -1140,7 +1193,7 @@ false if we do not have the SIS role in this network </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>sl_status_t BUSY if the state is not IDLE </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK if the operation was accepted, any other code is case of failure </dd></dl>
 
 </div>
 </div>
@@ -1212,7 +1265,7 @@ false if we do not have the SIS role in this network </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>sl_status_t BUSY if the state is not IDLE </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>sl_status_t SL_STATUS_OK if the operation was accepted, any other code is case of failure </dd></dl>
 
 </div>
 </div>
@@ -1221,7 +1274,7 @@ false if we do not have the SIS role in this network </dd></dl>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:16 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:49 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>

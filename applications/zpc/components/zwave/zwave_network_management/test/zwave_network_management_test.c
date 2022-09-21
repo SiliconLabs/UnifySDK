@@ -29,6 +29,7 @@
 #include "zwapi_protocol_mem_mock.h"
 #include "zwapi_protocol_basis_mock.h"
 
+#include "zwave_controller_mock.h"
 #include "zwave_controller_internal_mock.h"
 #include "zwave_controller_utils_mock.h"
 #include "zwave_controller_callbacks_mock.h"
@@ -119,6 +120,8 @@ void setUp()
   zwave_controller_register_reset_step_ExpectAndReturn(NULL, 5, SL_STATUS_OK);
   zwave_controller_register_reset_step_IgnoreArg_step_function();
   zwave_controller_storage_as_set_node_s2_capable_IgnoreAndReturn(SL_STATUS_OK);
+
+  zwave_controller_is_reset_ongoing_IgnoreAndReturn(false);
 
   zwave_s2_set_network_callbacks_Stub(my_sec2_inclusion_stub);
   zwave_s0_set_network_callbacks_Stub(my_sec0_inclusion_stub);
@@ -782,7 +785,7 @@ void idle_common()
 void test_zwave_network_management_add_node_with_dsk_when_not_idle()
 {
   idle_common();
-  TEST_ASSERT_EQUAL(SL_STATUS_BUSY,
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
                     zwave_network_management_add_node_with_dsk(dsk,
                                                                granted_keys,
                                                                PROTOCOL_ZWAVE));
@@ -792,7 +795,7 @@ void test_zwave_network_management_add_node_with_dsk_when_not_idle()
 void test_zwave_network_management_set_default_when_not_idle()
 {
   idle_common();
-  TEST_ASSERT_EQUAL(SL_STATUS_BUSY,
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
                     zwave_network_management_add_node_with_dsk(dsk,
                                                                granted_keys,
                                                                PROTOCOL_ZWAVE));
@@ -802,11 +805,11 @@ void test_zwave_network_management_set_default_when_not_idle()
 void test_zwave_network_management_remove_node_when_not_idle()
 {
   idle_common();
-  TEST_ASSERT_EQUAL(SL_STATUS_BUSY,
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
                     zwave_network_management_add_node_with_dsk(dsk,
                                                                granted_keys,
                                                                PROTOCOL_ZWAVE));
-  TEST_ASSERT_EQUAL(SL_STATUS_BUSY, zwave_network_management_remove_node());
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, zwave_network_management_remove_node());
 }
 
 /* Common SmartStart code until dsk accepting. This code is used in
@@ -2377,7 +2380,8 @@ void test_zwave_network_management_request_node_neighbor_discovery()
   zwave_network_management_request_node_neighbor_discovery(test_node_id);
   zwave_controller_on_state_updated_Ignore();
   contiki_test_helper_run(0);
-  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  TEST_ASSERT_EQUAL(NM_NEIGHBOR_DISCOVERY_ONGOING,
+                    zwave_network_management_get_state());
 
   uint8_t neighbor_update_status = 0x22;
   zwave_controller_on_request_neighbor_update_Expect(neighbor_update_status);
@@ -2385,6 +2389,40 @@ void test_zwave_network_management_request_node_neighbor_discovery()
   zwave_controller_on_state_updated_Ignore();
   contiki_test_helper_run(10);
   TEST_ASSERT_EQUAL(request_neighbor_node_id, test_node_id);
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+}
+
+void test_zwave_network_management_abort_request_node_neighbor_discovery()
+{
+  zwave_node_id_t test_node_id = 0x55;
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  zwapi_request_neighbor_update_Stub(my_zwapi_request_neighbor_update_stub);
+  zwave_network_management_request_node_neighbor_discovery(test_node_id);
+  zwave_controller_on_state_updated_Ignore();
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_NEIGHBOR_DISCOVERY_ONGOING,
+                    zwave_network_management_get_state());
+
+  zwave_controller_on_request_neighbor_update_Expect(0x23);
+  zwave_network_management_abort();
+  zwave_controller_on_state_updated_Ignore();
+  contiki_test_helper_run(10);
+  TEST_ASSERT_EQUAL(request_neighbor_node_id, test_node_id);
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+}
+
+void test_zwave_network_management_node_neighbor_discovery_rejected()
+{
+  zwave_node_id_t test_node_id = 300;
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+  zwave_network_management_request_node_neighbor_discovery(test_node_id);
+  zwave_controller_on_state_updated_Ignore();
+  zwapi_request_neighbor_update_ExpectAndReturn(test_node_id,
+                                                NULL,
+                                                SL_STATUS_FAIL);
+  zwapi_request_neighbor_update_IgnoreArg_completedFunc();
+  contiki_test_helper_run(0);
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
 }
 
 void test_zwave_network_management_start_proxy_inclusion()
@@ -2538,4 +2576,65 @@ void test_idle_events()
   my_sec2_inclusion_cb.on_inclusion_complete(0, 0);
   contiki_test_helper_run(0);
   TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+}
+
+void test_activate_new_operations_while_controller_reset()
+{
+  TEST_ASSERT_EQUAL(NM_IDLE, zwave_network_management_get_state());
+
+  // Get the Z-Wave Controller to be resetting.
+  zwave_controller_is_reset_ongoing_StopIgnore();
+
+  // Activate NWE learn mode:
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    zwave_network_management_learn_mode(ZWAVE_NETWORK_MANAGEMENT_LEARN_NWE));
+
+  // Activate NWI learn mode:
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    zwave_network_management_learn_mode(ZWAVE_NETWORK_MANAGEMENT_LEARN_NWI));
+
+  // Activate learn mode of the future:
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_network_management_learn_mode(
+                      ZWAVE_NETWORK_MANAGEMENT_LEARN_SMART_START + 3));
+
+  // Try to remove failed NodeID 2
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, zwave_network_management_remove_failed(2));
+
+  // Activate Remove node
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, zwave_network_management_remove_node());
+
+  // Activate Add node with DSK
+  const zwave_dsk_t dsk = {};
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_network_management_add_node_with_dsk(dsk, 0, 0));
+
+  // Activate Add node.
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL, zwave_network_management_add_node());
+
+  // Start a neighbor discovery during reset:
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(
+    SL_STATUS_FAIL,
+    zwave_network_management_request_node_neighbor_discovery(2));
+
+  // Start a neighbor discovery during reset:
+  zwave_node_info_t nif = {};
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_network_management_start_proxy_inclusion(3, nif, 4));
+
+  // Try to assign return routes
+  zwave_controller_is_reset_ongoing_ExpectAndReturn(true);
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    zwave_network_management_assign_return_route(3, 4));
 }

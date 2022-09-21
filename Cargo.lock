@@ -1339,6 +1339,7 @@ dependencies = [
  "unify_contiki_sys",
  "unify_log_sys",
  "unify_middleware",
+ "unify_proc_macro",
  "unify_sl_status_sys",
 ]
 

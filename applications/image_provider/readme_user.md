@@ -25,7 +25,8 @@ For installing please refer to the general installation method in
 
 The best way to run the Image Provider is using the Systemd service that is
 installed with the Debian installer.
-For more information, see [Unify Framework User guide](../../doc/unify_readme_user.md).
+For more information, see
+[Unify Framework User guide](../../doc/unify_readme_user.md).
 
 ### Using the Command Line
 
@@ -36,7 +37,7 @@ For details about options, run `uic-image-provider --help` command:
 Make sure that you do not run the Image Provider both as a service and using the
 command line.
 
-```bash
+```console
 pi@unify:~ $ service uic-image-provider status
 * uic-image-provider.service - Unified IoT OTA Image Provider
    Loaded: loaded (/lib/systemd/system/uic-image-provider.service; enabled; vendor preset: enabled)
@@ -50,7 +51,7 @@ pi@unify:~ $ service uic-image-provider status
 If the service is running, stop it using the following command before
 you run the application manually:
 
-```bash
+```console
 pi@unify:~ $ service uic-image-provider stop
 ```
 
@@ -64,7 +65,7 @@ store a JSON file that will represent the list of available images.
 The *images.json* file must be configured to indicate which images to advertise
 to the MQTT broker/Protocol Controllers.
 
-```bash
+```console
 pi@unify:/var/lib/uic-image-provider $ tree
 .
 |── images.json

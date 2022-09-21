@@ -151,8 +151,8 @@ Services (e.g. Developer GUI, UPTICap) and multiple application services that
 facilitate various functionalities such as SmartStart Provisioning, Group
 Management, Name and Location Service and OTA Image Provider.
 
-Please read the [Unify User Guide](unify_readme_user.md) for details on running
-and configuration of the Unify Framework applications.
+Please read the [Unify Framework User guide](unify_readme_user.md) for details
+on configuring and running Unify Framework applications.
 
 Please read the [Unify Build Guide](readme_building.md) for details on building the Unify
 Framework.

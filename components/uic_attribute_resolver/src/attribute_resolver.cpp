@@ -39,6 +39,9 @@ constexpr char LOG_TAG[] = "attribute_resolver";
 #include <cassert>
 using namespace attribute_store;
 
+using resumption_listeners_t
+  = std::multimap<attribute_store_node_t, attribute_resolver_callback_t>;
+
 typedef enum {
   RESOLVER_NEXT_EVENT,
   RESOLVER_WATCH_EVENT,
@@ -58,7 +61,10 @@ multi_invoke<attribute_store_node_t, attribute_store_node_t> listeners;
 // make a get resolution on a node.
 multi_invoke<attribute_store_type_t, attribute_store_node_t>
   get_give_up_listeners;
-static attribute_resolver_config_t attribute_resolver_config;
+// List of callback functions that want to be informed when resume the resolution
+// on a node.
+resumption_listeners_t resumption_listeners;
+attribute_resolver_config_t attribute_resolver_config;
 }  // namespace
 
 /*
@@ -179,9 +185,24 @@ void attribute_resolver_pause_node_resolution(attribute_store_node_t node)
 
 void attribute_resolver_resume_node_resolution(attribute_store_node_t node)
 {
+  sl_log_debug(LOG_TAG, "Resolution resumed on Attribute ID %d", node);
   paused_nodes.erase(node);
 
-  sl_log_debug(LOG_TAG, "Resolution resumed on Attribute ID %d", node);
+  // Tell the world that we resumed resolution on a bunch of nodes.
+  // Make a copy of the container, in case some function un-register themselves
+  // when invoking the callback (would invalidate the container)
+  resumption_listeners_t listeners_to_invoke;
+  for (const auto &[registered_node, callback]: resumption_listeners) {
+    if ((attribute_store_is_node_a_child(registered_node, node)
+         || (registered_node == node))
+        && (false == is_node_or_parent_paused(registered_node))) {
+      listeners_to_invoke.emplace(registered_node, callback);
+    }
+  }
+  for (const auto &[registered_node, callback]: listeners_to_invoke) {
+    callback(registered_node);
+  }
+
   // It can be that the node itself does not need to be scanned, but some
   // unpaused children do. So schedule a scan again unless we are
   // waiting for a response.
@@ -192,7 +213,7 @@ void attribute_resolver_resume_node_resolution(attribute_store_node_t node)
 }
 
 void attribute_resolver_set_resolution_listener(
-  attribute_store_node_t node, void (*callback)(attribute_store_node_t))
+  attribute_store_node_t node, attribute_resolver_callback_t callback)
 {
   if (node == ATTRIBUTE_STORE_INVALID_NODE) {
     return;
@@ -206,13 +227,31 @@ void attribute_resolver_set_resolution_listener(
 }
 
 void attribute_resolver_clear_resolution_listener(
-  attribute_store_node_t node, void (*callback)(attribute_store_node_t))
+  attribute_store_node_t node, attribute_resolver_callback_t callback)
 {
   listeners.remove(node, callback);
 }
 
+void attribute_resolver_set_resolution_resumption_listener(
+  attribute_store_node_t node, attribute_resolver_callback_t callback)
+{
+  resumption_listeners.emplace(node, callback);
+}
+
+void attribute_resolver_clear_resolution_resumption_listener(
+  attribute_store_node_t node, attribute_resolver_callback_t callback)
+{
+  auto range = resumption_listeners.equal_range(node);
+  for (auto it = range.first; it != range.second; ++it) {
+    if (it->second == callback) {
+      resumption_listeners.erase(it);
+      break;
+    }
+  }
+}
+
 void attribute_resolver_set_resolution_give_up_listener(
-  attribute_store_type_t node_type, void (*callback)(attribute_store_node_t))
+  attribute_store_type_t node_type, attribute_resolver_callback_t callback)
 {
   get_give_up_listeners.add(node_type, callback);
 }
@@ -665,6 +704,7 @@ static void on_resolver_node_deleted(attribute_store_node_t node)
 {
   // Remove listeners and also from the pause resolution set.
   listeners.erase(node);
+  resumption_listeners.erase(node);
   paused_nodes.erase(node);
   pending_get_resolutions.erase(node);
   pending_set_resolutions.erase(node);

@@ -307,9 +307,9 @@ void MapperEngine::on_attribute_updated(
       try {
         if (assignment.lhs.value_type == 'r') {
           if (change != ATTRIBUTE_DELETED) {
+            destination_node.clear_desired();
             attribute_store_set_reported_number(destination_node,
                                                 value.value());
-            destination_node.clear_desired();
           }
         } else if (assignment.lhs.value_type == 'd') {
           attribute_store_set_desired_number(destination_node, value.value());

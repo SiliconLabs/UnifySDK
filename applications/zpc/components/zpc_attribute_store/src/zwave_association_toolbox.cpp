@@ -54,10 +54,6 @@ static bool is_association_valid(association_t association)
   if (association.node_id > ZW_MAX_NODES) {
     return false;
   }
-  if ((association.type == ENDPOINT)
-      && (association.endpoint_id > ZWAVE_MAXIMUM_ENDPOINT_ID)) {
-    return false;
-  }
   return true;
 }
 

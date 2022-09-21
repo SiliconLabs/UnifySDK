@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s32_5ft_2523',['s32_t',['../gecko_2contiki-conf_8h.html#a10f9a3d7baef58ccc23228c3bd29c1fb',1,'s32_t():&#160;contiki-conf.h'],['../posix_2contiki-conf_8h.html#a10f9a3d7baef58ccc23228c3bd29c1fb',1,'s32_t():&#160;contiki-conf.h']]],
-  ['sl_5flog_5flevel_5ft_2524',['sl_log_level_t',['../group__sl__log.html#gacd69524374ffb27db69ca4d5ed0e6851',1,'sl_log.h']]],
-  ['sl_5fstatus_5ft_2525',['sl_status_t',['../group__unify__sl__status__codes.html#ga7e293ad81575c986a476d3065d7ae49f',1,'sl_status.h']]]
+  ['process_5fdata_5ft_17407',['process_data_t',['../group__process.html#gaacfecee3e853f3904a8e695de0f6649d',1,'process.h']]],
+  ['process_5fevent_5ft_17408',['process_event_t',['../group__process.html#ga4d81d85c09c89d0e97cd0d239728a942',1,'process.h']]],
+  ['process_5fnum_5fevents_5ft_17409',['process_num_events_t',['../group__process.html#ga7434c88e71afb7d2a2da615c016fc7b6',1,'process.h']]]
 ];

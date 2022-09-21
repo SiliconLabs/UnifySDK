@@ -17,15 +17,16 @@ file(GLOB GUI_SRCS .)
 
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/package-lock.json
-  DEPENDS
-    ${GUI_SRCS}
-    ${CMAKE_CURRENT_BINARY_DIR}/src/cluster-types/cluster-type-attributes.ts
-    ${CMAKE_CURRENT_BINARY_DIR}/src/cluster-types/cluster-types.ts
-    ${CMAKE_CURRENT_BINARY_DIR}/src/cluster-types/supported-clusters.js
+  DEPENDS ${GUI_SRCS}
+          ${ZAP_CURRENT_OUTPUT_DIR}/src/cluster-types/cluster-type-attributes.ts
+          ${ZAP_CURRENT_OUTPUT_DIR}/src/cluster-types/cluster-types.ts
+          ${ZAP_CURRENT_OUTPUT_DIR}/src/cluster-types/supported-clusters.js
   COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/. .
+  COMMAND cp -r ${ZAP_CURRENT_OUTPUT_DIR}/. .
   COMMAND ${NPM_EXECUTABLE} version
           ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV}
-  COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps # With yarn 38s with npm 69s change
+  COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps # With yarn 38s with npm
+                                                       # 69s change
   COMMAND ${NPM_EXECUTABLE} run build
   USES_TERMINAL)
 
@@ -49,23 +50,24 @@ add_custom_target(
                                                   # dev-gui-client build
 )
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/public/index.html.in ${CMAKE_CURRENT_SOURCE_DIR}/public/index.html)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/public/index.html.in
+               ${CMAKE_CURRENT_SOURCE_DIR}/public/index.html)
 
-if( "${CMAKE_INSTALL_PREFIX}" STREQUAL "/usr")
-# Package as .debian
-install(
-  FILES assets/cert.pem assets/key.pem
-  DESTINATION /var/lib/dev-gui
-  COMPONENT uic-dev-gui)
+if("${CMAKE_INSTALL_PREFIX}" STREQUAL "/usr")
+  # Package as .debian
+  install(
+    FILES assets/cert.pem assets/key.pem
+    DESTINATION /var/lib/dev-gui
+    COMPONENT uic-dev-gui)
 
-install(
-  FILES debconf/services/uic-dev-gui-api.service
-  DESTINATION /lib/systemd/system/
-  COMPONENT uic-dev-gui)
-install(
-  FILES debconf/services/uic-dev-gui-client.service
-  DESTINATION /lib/systemd/system/
-  COMPONENT uic-dev-gui)
+  install(
+    FILES debconf/services/uic-dev-gui-api.service
+    DESTINATION /lib/systemd/system/
+    COMPONENT uic-dev-gui)
+  install(
+    FILES debconf/services/uic-dev-gui-client.service
+    DESTINATION /lib/systemd/system/
+    COMPONENT uic-dev-gui)
 endif()
 
 # Install binaries they come from custom target build_dev_gui

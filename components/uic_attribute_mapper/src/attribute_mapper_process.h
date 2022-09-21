@@ -13,6 +13,7 @@
 
 /**
  * @defgroup attribute_mapper_process Process definitions for the Unify Attribute Mapper
+ * @ingroup unify_attribute_mapper
  * @brief Process definitions for the Unify Attribute Mapper
  *
  * The Unify Attribute Mapper helps arbitrating when to make calculations

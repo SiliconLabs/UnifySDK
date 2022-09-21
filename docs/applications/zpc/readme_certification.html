@@ -34,8 +34,7 @@
             <img src="../../_static/silicon-labs-logo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                ver_1.2.0
-
+                ver_1.2.1
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -104,6 +103,21 @@
 devices from other manufacturers. All mains operated nodes within the network
 will act as repeaters regardless of vendor to increase reliability of the
 network.</p>
+</section>
+<section id="z-wave-and-zcl-data-models">
+<h2>Z-Wave and ZCL data models<a class="headerlink" href="#z-wave-and-zcl-data-models" title="Permalink to this heading"></a></h2>
+<p>Note that the ZPC maps functionality from Z-Wave to ZCL, and vice versa. In the
+UI, all Z-Wave nodes will be presented to behave as closely as possible to a
+ZCL compliant end device.</p>
+<p>Due to this mapping, some dependencies may be added or removed between the
+different functionalities of a node.</p>
+<p>Further, the UI may sometimes get stuck, waiting for an update after issuing a
+command. This may be due to the fact that mappings are not always a bijection
+and multiple states may map to only 1 or vice versa.</p>
+<p>If commands do not seem to be sent out after an update (spinny wheel on the UI)</p>
+<p><img alt="Dev GUI Waiting for attribute updates" src="../../_images/dev_gui_spinny_wheel.png" /></p>
+<p>It is recommended to try to modify more attributes by issuing more commands or
+the same command with slightly different parameters.</p>
 </section>
 <section id="device-type-and-role-type">
 <h2>Device Type and Role Type<a class="headerlink" href="#device-type-and-role-type" title="Permalink to this heading"></a></h2>
@@ -180,7 +194,7 @@ after excluding a node.</p>
 </section>
 <section id="management-operations-for-individual-nodes">
 <h4>Management Operations for Individual Nodes<a class="headerlink" href="#management-operations-for-individual-nodes" title="Permalink to this heading"></a></h4>
-<p>When a network management is to be targetted for a particular node, the list of
+<p>When a network management is to be targeted for a particular node, the list of
 available commands is available in the node list page, under the <strong>Commands</strong> button.</p>
 <p><img alt="Dev GUI commands button" src="../../_images/dev_gui_commands_button.png" /></p>
 <ul class="simple">
@@ -201,254 +215,289 @@ on the UI.</p>
 <section id="command-class-information">
 <h2>Command Class Information<a class="headerlink" href="#command-class-information" title="Permalink to this heading"></a></h2>
 <p>The following table shows supported and controlled Z-Wave Command Classes by the ZPC.</p>
-<table class="docutils align-default">
+<table border="1" class="docutils">
 <thead>
-<tr class="row-odd"><th class="head"><p>Command Class</p></th>
-<th class="head"><p>Version</p></th>
-<th class="head"><p>Support</p></th>
-<th class="head"><p>Control</p></th>
-<th class="head"><p>Security Level</p></th>
-<th class="head"><p>Comment</p></th>
+<tr>
+<th>Command Class</th>
+<th>Version</th>
+<th>Support</th>
+<th>Control</th>
+<th>Security Level</th>
+<th>Comment</th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Alarm Sensor</p></td>
-<td><p>1</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p></p></td>
+<tr>
+<td>Alarm Sensor</td>
+<td>1</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Association</p></td>
-<td><p>2</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Network Scheme</p></td>
-<td><p></p></td>
+<tr>
+<td>Association</td>
+<td>2</td>
+<td>x</td>
+<td>x</td>
+<td>Network Scheme</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Association Group Info (AGI)</p></td>
-<td><p>3</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Network Scheme</p></td>
-<td><p></p></td>
+<tr>
+<td>Association Group Info (AGI)</td>
+<td>3</td>
+<td>x</td>
+<td>x</td>
+<td>Network Scheme</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Basic</p></td>
-<td><p>2</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p></p></td>
+<tr>
+<td>Basic</td>
+<td>2</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Battery</p></td>
-<td><p>3</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p>Control Part is auto-generated.</p></td>
+<tr>
+<td>Battery</td>
+<td>3</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Control Part is auto-generated.</td>
 </tr>
-<tr class="row-odd"><td><p>Binary Sensor</p></td>
-<td><p>1</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p>Control Part is auto-generated.</p></td>
+<tr>
+<td>Binary Sensor</td>
+<td>1</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Control Part is auto-generated.</td>
 </tr>
-<tr class="row-even"><td><p>Binary Switch</p></td>
-<td><p>2</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p></p></td>
+<tr>
+<td>Binary Switch</td>
+<td>2</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Central Scene</p></td>
-<td><p>3</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p>Partial control: key attributes are not displayed in the UI.</p></td>
+<tr>
+<td>Central Scene</td>
+<td>3</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Partial control: key attributes are not displayed in the UI.</td>
 </tr>
-<tr class="row-even"><td><p>Color Switch</p></td>
-<td><p>3</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p>Partial Control:<br>1. Durations are ignored<br>2. No support for Start/Stop Level Change<br>3. No support for other Color Component IDs than 0,1,2,3,4</p></td>
+<tr>
+<td>Color Switch</td>
+<td>3</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Partial Control:<br>1. Durations are ignored<br>2. No support for Start/Stop Level Change<br>3. No support for other Color Component IDs than 0,1,2,3,4</td>
 </tr>
-<tr class="row-odd"><td><p>Configuration</p></td>
-<td><p>4</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p></p></td>
+<tr>
+<td>Configuration</td>
+<td>4</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Device Reset Locally</p></td>
-<td><p>1</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Network Scheme</p></td>
-<td><p></p></td>
+<tr>
+<td>Device Reset Locally</td>
+<td>1</td>
+<td>x</td>
+<td>x</td>
+<td>Network Scheme</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Door Lock</p></td>
-<td><p>2</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p>Control Part is auto-generated.</p></td>
+<tr>
+<td>Door Lock</td>
+<td>2</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Control Part is auto-generated.</td>
 </tr>
-<tr class="row-even"><td><p>Firmware Update</p></td>
-<td><p>7</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Network Scheme</p></td>
-<td><p></p></td>
+<tr>
+<td>Firmware Update</td>
+<td>7</td>
+<td>x</td>
+<td>x</td>
+<td>Network Scheme</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Inclusion Controller</p></td>
-<td><p>1</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Unencrypted</p></td>
-<td><p></p></td>
+<tr>
+<td>Inclusion Controller</td>
+<td>1</td>
+<td>x</td>
+<td>x</td>
+<td>Unencrypted</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Indicator</p></td>
-<td><p>3</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>&lt;©≤ƒ&gt; Network Scheme</p></td>
-<td><p></p></td>
+<tr>
+<td>Indicator</td>
+<td>3</td>
+<td>x</td>
+<td>x</td>
+<td>Network Scheme</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Manufacturer Specific</p></td>
-<td><p>2</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Network Scheme</p></td>
-<td><p></p></td>
+<tr>
+<td>Manufacturer Specific</td>
+<td>2</td>
+<td>x</td>
+<td>x</td>
+<td>Network Scheme</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Meter</p></td>
-<td><p>6</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p></p></td>
+<tr>
+<td>Meter</td>
+<td>6</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Partial control: <br>1. Meter Reset Command is not supported since there were not a corresponding command on dotdot ZCl data model. <br></td>
 </tr>
-<tr class="row-odd"><td><p>Multi Channel</p></td>
-<td><p>4</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p></p></td>
+<tr>
+<td>Multi Channel</td>
+<td>4</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Multi Channel Association</p></td>
-<td><p>3</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Network Scheme</p></td>
-<td><p></p></td>
+<tr>
+<td>Multi Channel Association</td>
+<td>3</td>
+<td>x</td>
+<td>x</td>
+<td>Network Scheme</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Multi Command</p></td>
-<td><p>1</p></td>
-<td><p>x</p></td>
-<td><p></p></td>
-<td><p>Unencrypted</p></td>
-<td><p></p></td>
+<tr>
+<td>Multi Command</td>
+<td>1</td>
+<td>x</td>
+<td></td>
+<td>Unencrypted</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Multilevel Sensor</p></td>
-<td><p>11</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p>Partial control: <br>1. Not all scales are supported<br>2. Not all types are shown in the UI.</p></td>
+<tr>
+<td>Multilevel Sensor</td>
+<td>11</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Partial control: <br>1. Not all scales are supported<br>2. Not all types are shown in the UI.</td>
 </tr>
-<tr class="row-odd"><td><p>Multilevel Switch</p></td>
-<td><p>4</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p></p></td>
+<tr>
+<td>Multilevel Switch</td>
+<td>4</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Partial Control: The value 0xFF cannot be used in Multilevel Switch Set Commands</td>
 </tr>
-<tr class="row-even"><td><p>Notification</p></td>
-<td><p>8</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p>Partial Control: <br>1. No Push/Pull discovery is done.<br>2. No Pull sensor support. <br>3. Unknown types are not supported. <br>4. No Regular probing is done.</p></td>
+<tr>
+<td>Notification</td>
+<td>8</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Partial Control: <br>1. No Push/Pull discovery is done.<br>2. No Pull sensor support. <br>3. Unknown types are not supported. <br>4. No Regular probing is done.</td>
 </tr>
-<tr class="row-odd"><td><p>Powerlevel</p></td>
-<td><p>1</p></td>
-<td><p>x</p></td>
-<td><p></p></td>
-<td><p>Network Scheme</p></td>
-<td><p></p></td>
+<tr>
+<td>Powerlevel</td>
+<td>1</td>
+<td>x</td>
+<td></td>
+<td>Network Scheme</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Security 0</p></td>
-<td><p>1</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Unencrypted</p></td>
-<td><p></p></td>
+<tr>
+<td>Security 0</td>
+<td>1</td>
+<td>x</td>
+<td>x</td>
+<td>Unencrypted</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Security 2</p></td>
-<td><p>1</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Unencrypted</p></td>
-<td><p></p></td>
+<tr>
+<td>Security 2</td>
+<td>1</td>
+<td>x</td>
+<td>x</td>
+<td>Unencrypted</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Supervision</p></td>
-<td><p>2</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Unencrypted</p></td>
-<td><p></p></td>
+<tr>
+<td>Supervision</td>
+<td>2</td>
+<td>x</td>
+<td>x</td>
+<td>Unencrypted</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Thermostat Mode</p></td>
-<td><p>3</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p>Partial Control: Not all modes can be set</p></td>
+<tr>
+<td>Thermostat Mode</td>
+<td>3</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Partial Control: Not all modes can be set</td>
 </tr>
-<tr class="row-even"><td><p>Thermostat Setpoint</p></td>
-<td><p>3</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p>Partial Control: <br>1. No discovery of ambiguous types in v1-v2 <br>2. Only a few setpoints can be configured. <br>3. Precision/size fields in the set are determined <br>automatically by the controller.</p></td>
+<tr>
+<td>Thermostat Setpoint</td>
+<td>3</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td>Partial Control: <br>1. No discovery of ambiguous types in v1-v2 <br>2. Only a few setpoints can be configured. <br>3. Precision/size fields in the set are determined <br>automatically by the controller.</td>
 </tr>
-<tr class="row-odd"><td><p>Time</p></td>
-<td><p>1</p></td>
-<td><p>x</p></td>
-<td><p></p></td>
-<td><p>Unencrypted</p></td>
-<td><p></p></td>
+<tr>
+<td>Time</td>
+<td>1</td>
+<td>x</td>
+<td></td>
+<td>Unencrypted</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Transport Service</p></td>
-<td><p>2</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Unencrypted</p></td>
-<td><p></p></td>
+<tr>
+<td>Transport Service</td>
+<td>2</td>
+<td>x</td>
+<td>x</td>
+<td>Unencrypted</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Version</p></td>
-<td><p>3</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Network Scheme</p></td>
-<td><p></p></td>
+<tr>
+<td>Version</td>
+<td>3</td>
+<td>x</td>
+<td>x</td>
+<td>Network Scheme</td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p>Wake Up</p></td>
-<td><p>3</p></td>
-<td><p></p></td>
-<td><p>x</p></td>
-<td><p>N/A</p></td>
-<td><p></p></td>
+<tr>
+<td>Wake Up</td>
+<td>3</td>
+<td></td>
+<td>x</td>
+<td>N/A</td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p>Z-Wave Plus Info</p></td>
-<td><p>2</p></td>
-<td><p>x</p></td>
-<td><p>x</p></td>
-<td><p>Unencrypted</p></td>
-<td><p></p></td>
+<tr>
+<td>Z-Wave Plus Info</td>
+<td>2</td>
+<td>x</td>
+<td>x</td>
+<td>Unencrypted</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -487,17 +536,142 @@ will be set to 1.</p>
 </tr>
 </tbody>
 </table>
-<p>The ZPC also controls the Association and Multi Channel Association. It only
-establishes lifeline associations or establishes association if some
-controlled command classes require it. (i.e. Notification, Central Scene, etc.)</p>
+<p>The ZPC controls the Association and Multi Channel Association.
+By default, it establishes lifeline associations or establishes associations if
+some controlled Command Classes require it. (i.e. Notification, Central Scene,
+etc.)</p>
+<p>It is also possible to establish associations between 2 nodes in the network
+if the following conditions are fulfilled:</p>
+<ul class="simple">
+<li><p>The 2 nodes operate using Z-Wave (and not LR) and have identical highest security levels.</p></li>
+<li><p>The destination is not an NL node.</p></li>
+<li><p>The source node has AGI information and sends commands corresponding to a bindable
+cluster in the table below</p></li>
+<li><p>The destination supports the Command Class that the source is sending.</p></li>
+</ul>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Command Class</th>
+<th>Command</th>
+<th>Bindable cluster</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMMAND_CLASS_BASIC</td>
+<td>BASIC_SET</td>
+<td>OnOff</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_SWITCH_BINARY</td>
+<td>SWITCH_BINARY_SET</td>
+<td>OnOff</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_SWITCH_MULTILEVEL</td>
+<td>SWITCH_MULTILEVEL_SET</td>
+<td>Level</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_SWITCH_MULTILEVEL</td>
+<td>SWITCH_MULTILEVEL_START_LEVEL_CHANGE</td>
+<td>Level</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_SWITCH_MULTILEVEL</td>
+<td>SWITCH_MULTILEVEL_STOP_LEVEL_CHANGE</td>
+<td>Level</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_INDICATOR</td>
+<td>INDICATOR_SET</td>
+<td>Identify</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_DOOR_LOCK</td>
+<td>DOOR_LOCK_OPERATION_SET</td>
+<td>DoorLock</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_DOOR_LOCK</td>
+<td>DOOR_LOCK_CONFIGURATION_SET</td>
+<td>DoorLock</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_WINDOW_COVERING</td>
+<td>WINDOW_COVERING_SET</td>
+<td>WindowCovering</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_WINDOW_COVERING</td>
+<td>WINDOW_COVERING_START_LEVEL_CHANGE</td>
+<td>WindowCovering</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_WINDOW_COVERING</td>
+<td>WINDOW_COVERING_STOP_LEVEL_CHANGE</td>
+<td>WindowCovering</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_BARRIER_OPERATOR</td>
+<td>BARRIER_OPERATOR_SET</td>
+<td>BarrierControl</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_THERMOSTAT_MODE</td>
+<td>THERMOSTAT_MODE_SET</td>
+<td>Thermostat</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_THERMOSTAT_SETPOINT</td>
+<td>THERMOSTAT_SETPOINT_SET</td>
+<td>Thermostat</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_THERMOSTAT_FAN_MODE</td>
+<td>THERMOSTAT_FAN_MODE_SET</td>
+<td>FanControl</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_HUMIDITY_CONTROL_MODE</td>
+<td>HUMIDITY_CONTROL_MODE_SET</td>
+<td>DehumidificationControl</td>
+</tr>
+<tr>
+<td>COMMAND_CLASS_SWITCH_COLOR</td>
+<td>SWITCH_COLOR_SET</td>
+<td>ColorControl</td>
+</tr>
+</tbody>
+</table>
+<p>Note that it will be allowed to establish bindings towards
+the ZPC in most cases.</p>
 <section id="id1">
 <h4>Node status<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
-<p>It is not possible to see association groups state from the Dev GUI.</p>
+<p>It is not possible to see the full association groups details from the Dev GUI.
+However, The binding page will allow to add cluster bindings, which in turn will
+add and remove associations.</p>
+<p><img alt="Dev GUI Binding Cluster" src="../../_images/dev_gui_binding_cluster.png" /></p>
+<p>The list of cluster bindings will be shown on this page.</p>
+<p><img alt="Dev GUI Binding Node State" src="../../_images/dev_gui_binding_cluster_node_state.png" /></p>
+<ul class="simple">
+<li><p><strong>Bindable Cluster List</strong>: Indicates if some association groups send commands from
+the binding table above, and show which clusters are available for binding.</p></li>
+<li><p><strong>Table full</strong>: If set to true, new bindings will be rejected, due to
+a lack of capacity to add more destinations.</p></li>
+<li><p><strong>Binding table</strong>: Shows the current bindings. Green color indicates that the
+binding is to be established and the red color indicates that the binding is
+to be removed.</p></li>
+</ul>
+<p>Note that for example, if a node has 2 Association groups sending Basic Set Commands,
+a binding to the OnOff cluster will result in associate all groups sending
+these commands.</p>
 </section>
 <section id="id2">
 <h4>Sending commands<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
-<p>It is not possible to issue Association / Multi Channel Association commands
-from the Dev GUI.</p>
+<p>The Bind/Unbind commands will send Association Set/Remove commands.</p>
+<p><img alt="Dev GUI Binding commands" src="../../_images/dev_gui_binding_cluster_commands.png" /></p>
 </section>
 </section>
 <section id="basic-command-class-information">
@@ -578,21 +752,23 @@ scene is active or has been activated last in supporting nodes.</p>
 <h4>Node status<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h4>
 <p>To see the state of the Central Scene Command Class, select the Scenes page
 from the left menu on the Dev GUI.</p>
-<p>The state of the node is displayed for each entry, it only consist in
+<p><img alt="Dev GUI Scenes Cluster" src="../../_images/dev_gui_scenes_cluster.png" /></p>
+<p>The state of the node is displayed for each entry, it consists in
 the following attributes:</p>
 <ul class="simple">
-<li><p><strong>Number of Scenes</strong>: The total number of scenes/key attributes combinations that could
-be used by the supporting node.</p></li>
+<li><p><strong>Scene count</strong>: The total number of scenes/key attributes combinations that
+could be used by the supporting node.</p></li>
 <li><p><strong>Current Scene</strong>: The active or last active scene. This is a unique number
 derived from the Scene Number and Key attribute combination, it is in the range
 [0 ; <strong>Number of Scenes</strong> - 1]. The Scene is calculated as follow:
 <em>Current Scene = ((SceneID - 1) * Max Key Attribute) + (Key Attribute);</em>
 If no Central Scene Notification has been received yet, this value stays undefined.</p></li>
-<li><p><strong>Current Scene valid</strong>: Indicates if the Current Scene is active,
+<li><p><strong>Scene valid</strong>: Indicates if the Current Scene is active,
 meaning that the scene was activated within the last 5 seconds or is being
 activated (e.g. button is being held down). When this is set to false,
 it means that the <em>Current Scene</em> attribute represents the last active scene.</p></li>
 </ul>
+<p><img alt="Dev GUI Scenes Node State" src="../../_images/dev_gui_scenes_node_state.png" /></p>
 </section>
 <section id="id10">
 <h4>Sending commands<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h4>
@@ -605,23 +781,101 @@ it means that the <em>Current Scene</em> attribute represents the last active sc
 <h5>Node status<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h5>
 <p>The state of a Color Switch node can be found on ColorControl cluster page.</p>
 <p><img alt="Dev GUI ColorControl Cluster" src="../../_images/dev_gui_color_control_cluster.png" /></p>
-<p>Note that nodes will be presented on the ColorControl page only if they also
-support either the Binary Switch Command Class and/or the Multilevel Switch
-Command Class.</p>
-<p>The ColorControl cluster will operate using the Hue Saturation Lightness (HSL)
+<p>Note that nodes will be presented on the ColorControl will also display a Level
+and OnOff cluster capability. These capabilities are normally mapped if the
+supporting node also supports Binary Switch Command Class and/or the Multilevel Switch
+Command Class, but they will be emulated if the supporting node does not support
+these Command Classes.</p>
+<p>Note that the Level value depends on the OnOff value, and the Color values
+depend on the Level value.</p>
+<p>The ColorControl cluster will operate using the
+<a class="reference external" href="https://en.wikipedia.org/wiki/HSL_and_HSV">Hue Saturation Lightness (HSL)</a>
 system to determine colors.</p>
 <p>The lightness is taken from the Multilevel Switch value, or if the node supports
 Binary Switch Command Class, it will be calculated based on the RGB values.</p>
+<ul class="simple">
+<li><p><strong>Current Hue</strong>: Value from 0 to 254 representing the Hue in degrees.
+Get the real Hue (range [0;360]) by doing <strong>Current Hue</strong> / 254 * 360</p></li>
+<li><p><strong>Current Saturation</strong>: Value from 0 to 254 representing the Saturation.
+Get the real saturation (range [0;1]) by doing <strong>Current Saturation</strong> / 254.</p></li>
+</ul>
+<p>The current estimated Hue and Saturation are shown in the ColorControl page.</p>
+<p><img alt="Dev GUI ColorControl Node State" src="../../_images/dev_gui_color_control_node_state.png" /></p>
+<p>If the node has Cold and/or Warm white capabilities, the DevGUI will also
+show an estimate of its color temperature using the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Mired">Mired scale</a>.</p>
+<p>Nodes will operate either using the <strong>CurrentHueAndCurrentSaturation</strong> or
+<strong>ColorTemperatureMireds</strong>, but not both. This is indicated by the
+<strong>Color Mode</strong> column.</p>
+<p>The Color Mode is determined by which command has last been sent to the node.
+The following commands will change the <strong>Color Mode</strong> to <strong>ColorTemperatureMireds</strong>:</p>
+<ul class="simple">
+<li><p>MoveToColorTemperature</p></li>
+<li><p>MoveColorTemperature</p></li>
+<li><p>StepColorTemperature</p></li>
+</ul>
+<p>The color temperature is determined by mixing the Warm and Cold white components</p>
+<ul class="simple">
+<li><p><strong>Temperature Mireds</strong>: Current estimated value of the light temperature</p></li>
+<li><p><strong>MinMireds</strong>: Minimum possible value (cold white)</p></li>
+<li><p><strong>MaxMireds</strong>: Maximem possible value (warm white)</p></li>
+</ul>
+<p>The following commands will change the <strong>Color Mode</strong> to <strong>CurrentHueAndCurrentSaturation</strong>:</p>
+<ul class="simple">
+<li><p>MoveToHue</p></li>
+<li><p>MoveHue</p></li>
+<li><p>StepHue</p></li>
+<li><p>MoveToSaturation</p></li>
+<li><p>MoveSaturation</p></li>
+<li><p>StepSaturation</p></li>
+<li><p>MoveToHueAndSaturation</p></li>
+</ul>
+<p>Note that setting colors will require that both the OnOff settting is set to
+On and Level setting is set to a value different than 0. Setting the color before
+the OnOff and Level setting will result in inaccurate mappings.</p>
+<p>When running with the <strong>CurrentHueAndCurrentSaturation</strong> <strong>Color Mode</strong>, the
+Multilevel Switch value will be scaled proportionally to the highest color
+component value. For example, if Green is set to 255, Multilevel Switch value
+will be 99, if all color components are set to 127, Multilevel Switch value will
+be 49.
+If the highest color component is set to 64, Multilevel Switch will be set at 25, etc.</p>
+<p>When both Multilevel Switch and Color Switch are supported, the Level cluster
+value will be scaled by a factor between 1 and 2. In HSL, full brightness with a color
+component can be achieved with the CurrentLevel = 50, whereas the Multilevel
+Switch value will be set to the maximum value (99). This scaling factor only applies
+when running with the <strong>CurrentHueAndCurrentSaturation</strong> <strong>Color Mode</strong>.
+Note that if the <strong>Saturation</strong> is close to 0, the Multilevel Switch value will
+get scaled by a factor closer to 1 and as <strong>Saturation</strong> gets close to 254,
+the Multilevel Switch level value will be closer to 2.
+<a class="reference external" href="https://en.wikipedia.org/wiki/HSL_and_HSV">See the Hue Saturation Lightness (HSL) wikipedia page for more details</a></p>
+<p>Note that with <strong>Saturation</strong> set to 0, the color settings will be ambiguous,
+as any hue value will result in a white color. RGB component combination of
+equal values will trigger the Saturation to be 0.</p>
+<p>Here are a few mappings:</p>
+<ul class="simple">
+<li><p>HSL(0,254,50) &lt;=&gt; RGB (255,0,0), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
+<li><p>HSL(85,254,50) &lt;=&gt; RGB (0,255,0), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
+<li><p>HSL(170,254,50) &lt;=&gt; RGB (0,0,255), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
+<li><p>HSL(212,254,25) &lt;=&gt; RGB (128,0,120), Multilevel Switch value = 50, Binary Switch = 0xFF</p></li>
+<li><p>HSL(214,254,50) &lt;=&gt; RGB (255,0,253), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
+<li><p>HSL(212,254,75) &lt;=&gt; RGB (253,112,255), Multilevel Switch value = 99, Binary Switch = 0xFF</p></li>
+</ul>
 </section>
 <section id="id12">
 <h5>Sending commands<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h5>
 <p>It is possible to issue Color Switch Set Commands by using the
-MoveToHueAndSaturation Command.</p>
+MoveToHueAndSaturation or MoveToColorTemperature Commands.</p>
 <p>Given that the full color consists of Hue, Saturation and Lightness,
 a color picker is available and will send both Level/ColorControl commands
 automatically to match a given RGB combination whenever it is clicked.</p>
 <p>Due to rounding errors, the reported values by the device may drift a little
 after being set.</p>
+<p><strong>Note</strong>: Durations are completely ignored at the moment and all commands will
+be sent with an instantaneous value.</p>
+<p><strong>Note</strong>: Make sure that the OnOff setting is On in the OnOff cluster,
+before setting the color.</p>
+<p><strong>Note</strong>: Make sure that the Level setting is higher than 0 in the Level cluster,
+before setting the color.</p>
 </section>
 </section>
 </section>
@@ -715,7 +969,7 @@ For example, a node identifying for 66 seconds will be shown as follows:</p>
 <section id="id18">
 <h4>Sending commands<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h4>
 <p>To trigger an Identify command, select the Identify command.
-A pop-up will appear, asking about the duration. Set the value to 3 in order
+A pop-up will appear, asking about the duration. Set the value to 2 in order
 to trigger the Identify command.</p>
 <p><img alt="Dev GUI Identify Command" src="../../_images/dev_gui_send_identify_command.png" /></p>
 </section>
@@ -723,28 +977,66 @@ to trigger the Identify command.</p>
 <h4>Meter Command Class Information<a class="headerlink" href="#meter-command-class-information" title="Permalink to this heading"></a></h4>
 <p>The ZPC controls (partially) the Meter Command Class.
 The meter values will be queried and mapped whenever possible to ZCL clusters.</p>
-<p>Not all sensor values are available on the Dev GUI.</p>
 <section id="id19">
 <h5>Node status<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h5>
-<p>Meter values are probed every 6 hours if no update was received
-from the end nodes.</p>
+<p>It is possible to see some of the metering data in DevGUI. Instantaneous
+and accumulated values are separated.</p>
+<section id="accumulated-values">
+<h6>Accumulated values<a class="headerlink" href="#accumulated-values" title="Permalink to this heading"></a></h6>
+<p>Cumulated values are mapped to the Metering Cluster.
+All Meter types will be mapped for Cumulated values.</p>
+<p><img alt="Dev GUI Metering Cluster" src="../../_images/dev_gui_metering_cluster.png" /></p>
+<p>In the Metering page, the following is displayed:</p>
+<ul class="simple">
+<li><p><strong>Summation Delivered</strong>: Import or default rate type</p></li>
+<li><p><strong>Summation Received</strong>: Export rate type</p></li>
+</ul>
+<p>The following units are used:</p>
+<ul class="simple">
+<li><p>Electric Meter: kWh</p></li>
+<li><p>Gas Meter: Cubic meter or Cubic feet, depending on the Z-Wave availability</p></li>
+<li><p>Water Meter: Cubic meter or Cubic feet, depending on the Z-Wave availability</p></li>
+<li><p>Heating Meter: kWh</p></li>
+<li><p>Cooling Meter: kWh</p></li>
+</ul>
+<p><img alt="Dev GUI Metering Node State" src="../../_images/dev_gui_metering_node_state.png" /></p>
+</section>
+<section id="instantaneous-values">
+<h6>Instantaneous values<a class="headerlink" href="#instantaneous-values" title="Permalink to this heading"></a></h6>
+<p>Instantaneous values for the Electric Meter types are mapped to the
+Electrical Measurement Cluster.</p>
+<p><img alt="Dev GUI Electrical Measurement Cluster" src="../../_images/dev_gui_electrical_measurement_cluster.png" /></p>
+<p>The last reported values for each node will be displayed in the cluster view.</p>
+<p><img alt="Dev GUI Electrical Measurement Node State" src="../../_images/dev_gui_electrical_measurement_node_state.png" /></p>
+<p>Note that ZCL uses the following units:</p>
+<ul class="simple">
+<li><p>Active Power: W*10 (deci-Watts)</p></li>
+<li><p>RMS Current: A (Amperes)</p></li>
+<li><p>Power Factor: Unitless</p></li>
+<li><p>RMS Voltage: V (Volts)</p></li>
+<li><p>Reactive Power: kVar</p></li>
+</ul>
+</section>
 </section>
 <section id="id20">
 <h5>Sending commands<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h5>
-<p>It is not possible to send Meter Commands.</p>
+<p>It is not possible to send Meter Commands using the DevGUI. Meter values are
+probed every 6 hours if no update was received from the end nodes.</p>
 </section>
 </section>
 <section id="multilevel-sensor-command-class-information">
 <h4>Multilevel Sensor Command Class Information<a class="headerlink" href="#multilevel-sensor-command-class-information" title="Permalink to this heading"></a></h4>
 <p>The ZPC controls (partially) the Multilevel Sensor Command Class.
 The sensor values will be queried and mapped whenever possible to ZCL clusters.</p>
-<p>Not all sensor values are available on the Dev GUI.</p>
+<p>Not all sensor values are available on the Dev GUI and unknown values are not
+forwarded to the Dev GUI.</p>
 <section id="id21">
 <h5>Node status<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h5>
-<p>Sensors values are probed every 6 hours if no update was received
-from the end nodes.</p>
-<p>Different type of sensors will be shown in different places in the Dev GUI.
-For example, temperature sensors will be shown in the Thermostat attribute page.</p>
+<p>Sensors values (known and unknown) are probed every 6 hours if no update was
+received from the end nodes.</p>
+<p>At the moment, the only displayed type of sensor in the DevGUI will be
+temperature sensors, shown in the Thermostat attribute page.</p>
+<p>Unknown values are not presented in the Dev GUI.</p>
 </section>
 <section id="id22">
 <h5>Sending commands<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h5>
@@ -754,8 +1046,8 @@ For example, temperature sensors will be shown in the Thermostat attribute page.
 </section>
 <section id="multilevel-switch-command-class-information">
 <h3>Multilevel Switch Command Class Information<a class="headerlink" href="#multilevel-switch-command-class-information" title="Permalink to this heading"></a></h3>
-<p>The ZPC controls the Multilevel Switch Command Class. It is possible to set and
-see the current level of a multilevel switch supporting node.</p>
+<p>The ZPC controls partially the Multilevel Switch Command Class. It is possible
+to set and see the current level of a Multilevel Switch supporting node.</p>
 <p>However, the model on which the Unify system and
 <a class="reference internal" href="../dev_ui/dev_gui/readme_user.html"><span class="doc std std-doc">Dev GUI</span></a> operate is based on
 The Dotdot model.</p>
@@ -769,6 +1061,8 @@ be 0, no matter what the current level shows.</p></li>
 <li><p>If OnOff is on, the Multilevel Switch value at the end node will be according
 to the level setting.</p></li>
 </ul>
+<p><strong>Note</strong>: Multilevel Switch mapping will behave differently if Color Switch
+is supported. In this case, refer to the Color Switch Command Class information.</p>
 <section id="id23">
 <h4>Node status<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h4>
 <p>To see the state of the Multilevel Switch Command Class, select the Level page
@@ -787,7 +1081,8 @@ are available:</p>
 <p>To trigger a Multilevel Switch Set, select the MoveToLevelWithOnOff command.
 A pop-up will appear, asking about the parameters.</p>
 <ul class="simple">
-<li><p>CurrentLevel: Multilevel Switch Level, from 0 to 99.</p></li>
+<li><p>CurrentLevel: Multilevel Switch Level, from 0 to 99. It is not possible to send
+the value 0xFF.</p></li>
 <li><p>OnOffTransitionTime: Transition time, in tenth of seconds, from 0 to 65534.
 The transition time will be floored to the nearest Z-Wave supported value.</p></li>
 </ul>
@@ -865,24 +1160,29 @@ table, with a JSON representation:</p>
 <p>The ZPC supports and controls the Security 2 and Security 0 Command Classes.
 As the ZPC does not support Learn Mode, the set of granted keys is always as
 shown in the following table:</p>
-<table class="docutils align-default">
+<table border="1" class="docutils">
 <thead>
-<tr class="row-odd"><th class="head"><p>Security Class</p></th>
-<th class="head"><p>Protocol</p></th>
+<tr>
+<th>Security Class</th>
+<th>Protocol</th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>S2 Access Control</p></td>
-<td><p>Z-Wave and Z-Wave Long Range</p></td>
+<tr>
+<td>S2 Access Control</td>
+<td>Z-Wave and Z-Wave Long Range</td>
 </tr>
-<tr class="row-odd"><td><p>S2 Authenticated</p></td>
-<td><p>Z-Wave and Z-Wave Long Range</p></td>
+<tr>
+<td>S2 Authenticated</td>
+<td>Z-Wave and Z-Wave Long Range</td>
 </tr>
-<tr class="row-even"><td><p>S2 Unauthenticated</p></td>
-<td><p>Z-Wave</p></td>
+<tr>
+<td>S2 Unauthenticated</td>
+<td>Z-Wave</td>
 </tr>
-<tr class="row-odd"><td><p>S0</p></td>
-<td><p>Z-Wave</p></td>
+<tr>
+<td>S0</td>
+<td>Z-Wave</td>
 </tr>
 </tbody>
 </table>
@@ -921,7 +1221,7 @@ Class.</p></li>
 </section>
 <section id="id30">
 <h4>Sending commands<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h4>
-<p>There are 2 available commands for Thermotats by default:</p>
+<p>There are 2 available commands for Thermostats by default:</p>
 <ul class="simple">
 <li><p>WriteAttributes (wrench icon)</p></li>
 <li><p>SetpointRaiseOrLower</p></li>
@@ -932,7 +1232,7 @@ Class.</p></li>
 wrench icon and modify the attributes values in the dialog.</p>
 <p><img alt="Dev GUI Thermostat send Set Command" src="../../_images/dev_gui_send_thermostat_command.png" /></p>
 <p>In the Thermostat Attributes dialog,
-all temperatures are in centi-celcius (1/100 of a Celcius degree)</p>
+all temperatures are in centi-celcius (1/100 of a Celsius degree)</p>
 <ul class="simple">
 <li><p>Heating Setpoint will trigger a Thermostat Setpoint Set with the temperature
 for the indicated mode.</p></li>
@@ -958,6 +1258,8 @@ setpoint(s).</p>
 the current cool, heat or both setpoints. For example, if a user selects
 Both and -17 in the amount, it will lower both the cool and heat setpoints
 by 1.7 degrees.</p>
+<p>Note that Amount is processed as a int8_t value, so the acceptable range is
+[-128…127], so from -12.8 to +12.7</p>
 </section>
 </section>
 </section>
@@ -975,7 +1277,7 @@ the left menu.</p>
 <p>The SmartStart list will be displayed as shown below.</p>
 <p><img alt="Dev GUI SmartStart list format" src="../../_images/dev_gui_smart_start_list_format.png" /></p>
 <p>The <strong>DSK</strong> indicates the DSK of the node.
-The <strong>Include</strong> tickmark indicates if the node should be included or not.
+The <strong>Include</strong> tick-mark indicates if the node should be included or not.
 In the example above, the third entry will not be included upon inclusion requests.</p>
 <p>The <strong>Unid</strong> field indicates the unique identifier assigned to the node.
 A non-empty value means that it is included in our network.</p>
@@ -1009,7 +1311,7 @@ US_LR RF region.</p>
 <p>Go to the SmartStart list and add an entry, then click the heart icon to select
 the preferred protocol for inclusion.</p>
 <p><img alt="Dev GUI SmartStart preferred protocol" src="../../_images/dev_gui_smart_start_preferred_protocol.png" /></p>
-<p>Pick Z-Wave Long Range in the pop-up. The SmartSart inclusion will now be
+<p>Pick Z-Wave Long Range in the pop-up. The SmartStart inclusion will now be
 performed using Z-Wave Long Range.</p>
 <p><img alt="Dev GUI SmartStart preferred protocol list" src="../../_images/dev_gui_smart_start_preferred_protocol_list.png" /></p>
 <p>The order of the protocols matters only if you select both Z-Wave and Z-Wave

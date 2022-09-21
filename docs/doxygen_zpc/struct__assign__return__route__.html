@@ -27,7 +27,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Z-Wave Protocol Controller Refrence
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.1</span>
    </div>
   </td>
  </tr>
@@ -99,8 +99,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a489f7cf2204a0b127f24b9a5c3a38f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a5643de3b3827071bcf92f8603bd0ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__assign__return__route__.html#a8a5643de3b3827071bcf92f8603bd0ab">destination_node_id</a></td></tr>
 <tr class="separator:a8a5643de3b3827071bcf92f8603bd0ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4ed5d05950c3ab2da8ff51bf9919ed3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__assign__return__route__.html#ae4ed5d05950c3ab2da8ff51bf9919ed3">in_progress</a></td></tr>
-<tr class="separator:ae4ed5d05950c3ab2da8ff51bf9919ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b2f1d1bea754b4574cf7597ea70a33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="group__zwave__network__management__return__route__queue.html#gafac77a683ce1e4afc406e92fe56bbf71">route_state_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__assign__return__route__.html#a02b2f1d1bea754b4574cf7597ea70a33">state</a></td></tr>
+<tr class="separator:a02b2f1d1bea754b4574cf7597ea70a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a349eb3f2c768bd22e03d7752755092b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="gecko_2contiki-conf_8h.html#a6e6c13e871b82d881a01d1bc8df69d23">clock_time_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__assign__return__route__.html#a349eb3f2c768bd22e03d7752755092b5">reuse_timestamp</a></td></tr>
+<tr class="separator:a349eb3f2c768bd22e03d7752755092b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a8a5643de3b3827071bcf92f8603bd0ab"></a>
@@ -111,20 +113,6 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="group__zwave__node__id__definitions.html#gad2b01997b1abb48bc7a1877551536935">zwave_node_id_t</a> _assign_return_route_::destination_node_id</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae4ed5d05950c3ab2da8ff51bf9919ed3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4ed5d05950c3ab2da8ff51bf9919ed3">&#9670;&nbsp;</a></span>in_progress</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool _assign_return_route_::in_progress</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -145,6 +133,34 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a349eb3f2c768bd22e03d7752755092b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a349eb3f2c768bd22e03d7752755092b5">&#9670;&nbsp;</a></span>reuse_timestamp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="gecko_2contiki-conf_8h.html#a6e6c13e871b82d881a01d1bc8df69d23">clock_time_t</a> _assign_return_route_::reuse_timestamp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02b2f1d1bea754b4574cf7597ea70a33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02b2f1d1bea754b4574cf7597ea70a33">&#9670;&nbsp;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__zwave__network__management__return__route__queue.html#gafac77a683ce1e4afc406e92fe56bbf71">route_state_t</a> _assign_return_route_::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>applications/zpc/components/zwave/zwave_network_management/src/<a class="el" href="zwave__network__management__return__route__queue_8h_source.html">zwave_network_management_return_route_queue.h</a></li>
 </ul>
@@ -154,7 +170,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="struct__assign__return__route__.html">_assign_return_route_</a></li>
-    <li class="footer">Generated on Wed Aug 10 2022 13:42:21 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
+    <li class="footer">Generated on Wed Sep 21 2022 18:53:51 for Z-Wave Protocol Controller Refrence by <a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20 </li>
   </ul>
 </div>
 </body>
