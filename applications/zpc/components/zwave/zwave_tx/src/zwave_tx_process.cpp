@@ -354,7 +354,12 @@ static void
       = completed_element.options.number_of_responses
         * (completed_element.transmission_time + CLOCK_SECOND);
     current_tx_session_id = session_id;
-    zwave_tx_process_initiate_backoff(backoff_time, BACKOFF_CURRENT_SESSION_ID);
+    // we want to expected_incoming_frames.decrement_frames when next frame arrives
+    if (expected_incoming_frames.get_frames(completed_element.connection_info.remote.node_id) > 0) {
+      zwave_tx_process_initiate_backoff(backoff_time, BACKOFF_EXPECTED_ADDITIONAL_FRAMES);
+    } else {
+      zwave_tx_process_initiate_backoff(backoff_time, BACKOFF_CURRENT_SESSION_ID);
+    }
     // Here we will just return without removing the element from the queue
     // just yet, so that we can match it with a response if we receive one.
     return;
