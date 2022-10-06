@@ -1,0 +1,12 @@
+//zzz_generated/bridge-app/
+//src/include/
+//src/
+//x86_64-apple-darwin/gen/include/
+//zzz_generated/app-common/
+//config/standalone/
+//third_party/nlassert/repo/include/
+//third_party/nlio/repo/include/
+//third_party/nlfaultinjection/repo/include/
+//zzz_generated/
+//examples/platform/linux/
+//examples/common/tracing/

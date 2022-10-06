@@ -23,7 +23,6 @@ target_link_libraries(
   uic_dotdot_attribute_store
   zpc_attribute_resolver
   zpc_attribute_store
-  unify_attribute_poll
   dotdot_mapper
   dotdot_mqtt_topics_handler
   uic_main

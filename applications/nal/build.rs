@@ -10,8 +10,9 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
-use unify_build_utils::load_unify_environment;
+use anyhow::Result;
+use unify_build_utils::*;
 
-fn main() {
-    load_unify_environment!();
+fn main() -> Result<()> {
+    load_environment("uic_main").map(|_| ())
 }

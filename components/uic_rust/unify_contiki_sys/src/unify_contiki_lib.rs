@@ -11,5 +11,5 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 #![doc(html_no_source)]
-unify_tools::include_binding!(uic_contiki);
+unify_tools::include_binding!(concat!(env!("OUT_DIR"), "/binding.rs"), uic_contiki);
 pub use uic_contiki::*;

@@ -19,6 +19,14 @@
 #include "ZW_classcmd.h"
 #include "s2_classcmd.h"
 
+void setUpSuite(void) {
+
+}
+
+void tearDownSuite(void) {
+
+}
+
 #define ELEM_COUNT(ARRAY)  (sizeof(ARRAY)/(sizeof(ARRAY[0])))
 #ifdef ZW_CONTROLLER
 #define UNIT_TEST_TEMP_KEY_SECURE             5       //< Value identifying index for the temporary key in S2 network key when transmitting secure frames.
@@ -4630,10 +4638,20 @@ void test_kex_inclusion_transfer_end_key_not_verified_TO7507() {
   p_mock->expect_arg[3].value   = sizeof(S2_network_key_verify_frame);
   p_mock->return_code.value     = 1;
 
+  // Expect KEX FAIL to be sent.
+  uint8_t S2_network_kex_fail_frame[] = {COMMAND_CLASS_SECURITY_2, KEX_FAIL, KEX_FAIL_KEY_VERIFY};
+  mock_call_expect(TO_STR(S2_send_frame), &p_mock);
+  p_mock->compare_rule_arg[0]   = COMPARE_ANY;  // For the outline, we just expect any/null pointers now.
+  p_mock->compare_rule_arg[1]   = COMPARE_NOT_NULL; // This shall be updated once excact frame is defined for S2 frames.
+  p_mock->expect_arg[2].pointer = S2_network_kex_fail_frame;
+  p_mock->expect_arg[3].value   = sizeof(S2_network_kex_fail_frame);
+  p_mock->return_code.value     = 1;
+
+
   // When S2 Transfer End is received, we expect a corresponding Node inclusion complete event from libs2.
   zwave_event_t  * p_expected_inc_fail_event = (zwave_event_t *)m_test_mem_pool[1];
   p_expected_inc_fail_event->event_type = S2_NODE_INCLUSION_FAILED_EVENT;
-  p_expected_inc_fail_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = 0x00;
+  p_expected_inc_fail_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = KEX_FAIL_KEY_VERIFY;
   mock_call_expect(TO_STR(s2_event_handler), &p_mock);
   p_mock->expect_arg[0].pointer = p_expected_inc_fail_event;
 
@@ -4788,10 +4806,20 @@ void test_kex_inclusion_transfer_end_key_request_complete_error() {
   p_mock->expect_arg[3].value   = sizeof(S2_network_key_verify_frame);
   p_mock->return_code.value     = 1;
 
+  // Expect KEX FAIL to be sent.
+  uint8_t S2_network_kex_fail_frame[] = {COMMAND_CLASS_SECURITY_2, KEX_FAIL, KEX_FAIL_KEY_VERIFY};
+  mock_call_expect(TO_STR(S2_send_frame), &p_mock);
+  p_mock->compare_rule_arg[0]   = COMPARE_ANY;  // For the outline, we just expect any/null pointers now.
+  p_mock->compare_rule_arg[1]   = COMPARE_NOT_NULL; // This shall be updated once excact frame is defined for S2 frames.
+  p_mock->expect_arg[2].pointer = S2_network_kex_fail_frame;
+  p_mock->expect_arg[3].value   = sizeof(S2_network_kex_fail_frame);
+  p_mock->return_code.value     = 1;
+
+
   // When S2 Transfer End is received, we expect a corresponding Node inclusion complete event from libs2.
   zwave_event_t  * p_expected_inc_fail_event = (zwave_event_t *)m_test_mem_pool[1];
   p_expected_inc_fail_event->event_type = S2_NODE_INCLUSION_FAILED_EVENT;
-  p_expected_inc_fail_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = 0x00;
+  p_expected_inc_fail_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = KEX_FAIL_KEY_VERIFY;
   mock_call_expect(TO_STR(s2_event_handler), &p_mock);
   p_mock->expect_arg[0].pointer = p_expected_inc_fail_event;
 
@@ -5959,6 +5987,7 @@ void test_kex_joining_node_error_transfer_end(void) {
   zwave_event_t  * p_expected_complete_event = (zwave_event_t *)m_test_mem_pool[1];
   p_expected_complete_event->event_type = S2_NODE_INCLUSION_FAILED_EVENT;
   p_expected_complete_event->evt.s2_event.s2_data.inclusion_complete.exchanged_keys = 0x0;
+  p_expected_complete_event->evt.s2_event.s2_data.inclusion_fail.kex_fail_type = KEX_FAIL_KEY_VERIFY;
   mock_call_expect(TO_STR(s2_event_handler), &p_mock);
   p_mock->expect_arg[0].pointer = p_expected_complete_event ;
 
@@ -6047,6 +6076,15 @@ void test_kex_joining_node_error_transfer_end(void) {
   s2_context.length = sizeof(s2_net_key_report_0_frame);
   s2_con.class_id = UNIT_TEST_TEMP_KEY_SECURE;
   s2_inclusion_post_event(&s2_context, &s2_con);
+
+  // Expect KEX FAIL to be sent.
+  uint8_t S2_network_kex_fail_frame[] = {COMMAND_CLASS_SECURITY_2, KEX_FAIL, KEX_FAIL_KEY_VERIFY};
+  mock_call_expect(TO_STR(S2_send_frame), &p_mock);
+  p_mock->compare_rule_arg[0]   = COMPARE_ANY;  // For the outline, we just expect any/null pointers now.
+  p_mock->compare_rule_arg[1]   = COMPARE_NOT_NULL; // This shall be updated once excact frame is defined for S2 frames.
+  p_mock->expect_arg[2].pointer = S2_network_kex_fail_frame;
+  p_mock->expect_arg[3].value   = sizeof(S2_network_kex_fail_frame);
+  p_mock->return_code.value     = 1;
 
   // Set Key Verify to 0 and verify that inclusion gets aborted after it.
 

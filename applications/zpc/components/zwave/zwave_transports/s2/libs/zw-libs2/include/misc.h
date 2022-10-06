@@ -19,7 +19,7 @@
 #ifdef __C51__
 #include "../../basis-include/ZW_assert.h"
 //#define _ASSERT_WRAPPER(cond,msg) do { if(!cond) ; } while(0)
-#elif defined (EFR32ZG)
+#elif defined(EFR32ZG) || defined(ZWAVE_ON_LINUX)
 // Do nothing at this stage in this file for EFR32ZG
 #else
 //#define _ASSERT_WRAPPER(cond,msg) do { if(!cond) printf(msg); } while(0)

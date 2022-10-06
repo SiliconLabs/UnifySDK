@@ -8,6 +8,7 @@ DEPENDS
   zwave_tx_mock
   zwave_api_mock
   zwave_s0_mock
+  zwave_smartstart_management_mock
 )
 
 ## SmartStart learn mode tests

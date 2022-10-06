@@ -11,5 +11,10 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 #![doc(html_no_source)]
+mod bindgen;
+mod compiler_arguments;
 mod load_unify_env;
+mod ninja_parser;
+pub use crate::bindgen::*;
+pub use compiler_arguments::*;
 pub use load_unify_env::*;

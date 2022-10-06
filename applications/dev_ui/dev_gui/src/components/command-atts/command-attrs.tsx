@@ -57,7 +57,10 @@ class CommandAttrs extends React.Component<{}, CommandAttrsState> {
         if (attrInfo.type === "struct") {
             let newItem: any = {};
             attrInfo.struct.forEach((i: any) => {
-                newItem[i.name] = i.type === "number" ? 0 : "";
+                if (i.isArray)
+                    newItem[i.name] = [];
+                else
+                    newItem[i.name] = i.type === "number" ? 0 : "";
             });
             attrArray.push(newItem);
         } else

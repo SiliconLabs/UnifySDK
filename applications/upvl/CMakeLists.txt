@@ -1,1 +1,1 @@
-cargo_build(MANIFEST_FILE Cargo.toml)
+cargo_build(NAME "uic-upvl" DEPENDS unify)

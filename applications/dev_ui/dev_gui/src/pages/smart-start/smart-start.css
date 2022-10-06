@@ -19,3 +19,10 @@
 .MuiInput-underline:before {
     border-bottom: none !important;
 }
+
+.mobile .table-content.smart-start .MuiOutlinedInput-root,
+.mobile .table-content.smart-start .MuiMenuItem-root,
+.mobile .table-content.smart-start .form-control,
+.mobile .table-content.smart-start .input-group-text {
+    font-size: 32px !important;
+}

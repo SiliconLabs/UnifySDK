@@ -125,7 +125,7 @@ void S2_dbg_printf(const char *str, ...);
 #ifdef ZIPGW
 unsigned long clock_time(void);
 #else
-uint16_t clock_time(void);
+uint32_t clock_time(void);
 #endif
 
 /**

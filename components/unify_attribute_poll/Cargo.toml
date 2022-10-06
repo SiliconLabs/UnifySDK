@@ -18,7 +18,7 @@ mockall = "0.11.*"
 async-trait = "0.1.*"
 
 [lib]
-crate-type = ["rlib", "dylib"]
+crate-type = ["staticlib", "rlib"]
 
 [dev-dependencies]
 serial_test = "0.5.*"

@@ -413,7 +413,7 @@ exports.processRFTelemetry = (topic, message) => {
                 TxReport: {
                     Statistics: {
                         Count: 0,
-                        SuccessRate: 0,
+                        SuccessRate: null,
                         AverageTime: 0,
                         AverageRepeaters: 0
                     },
@@ -426,7 +426,7 @@ exports.processRFTelemetry = (topic, message) => {
                 node.RFTelemetry.TxReport.Destinations[payload.DestinationUNID] = {
                     Statistics: {
                         Count: 0,
-                        SuccessRate: 0,
+                        SuccessRate: null,
                         AverageTime: 0,
                         AverageRepeaters: 0
                     },
@@ -568,7 +568,7 @@ function removeAttr(unid, ep, cluster, attr, attrName) {
 
 function setRFTelemetryStatistics(statistics, payload) {
     let count = statistics.Count++;
-    let successTx = Math.round(count * statistics.SuccessRate);
+    let successTx = statistics.SuccessRate === null ? 0 : Math.round(count * statistics.SuccessRate);
     statistics.SuccessRate = (payload.TransmissionSuccessful ? ++successTx : successTx) / statistics.Count;
     statistics.AverageTime = ((statistics.AverageTime * count) + payload.TransmissionTimeMs) / statistics.Count;
     statistics.AverageRepeaters = ((statistics.AverageRepeaters * count) + payload.LastRouteRepeaters.length) / statistics.Count;

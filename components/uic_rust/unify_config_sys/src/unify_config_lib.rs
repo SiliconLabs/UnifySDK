@@ -17,7 +17,7 @@
 //! To keep the wrappers light-weight we checked in these files, hence they are
 //! not regenerated when the C interface changes.
 #![doc(html_no_source)]
-unify_tools::include_binding!(uic_config);
+unify_tools::include_binding!(concat!(env!("OUT_DIR"), "/binding.rs"), uic_config);
 pub use uic_config::config_status_t;
 use unify_log_sys::*;
 

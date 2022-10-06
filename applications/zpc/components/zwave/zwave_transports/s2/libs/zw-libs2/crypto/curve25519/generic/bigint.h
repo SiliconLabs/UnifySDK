@@ -17,9 +17,9 @@
 #define bigint_cmov avrnacl_bigint_cmov
 */
 
-uint8_t bigint_add(uint8_t r[32], const uint8_t a[32], const uint8_t b[32], uint16_t len);
+uint8_t bigint_add(uint8_t *r, const uint8_t *a, const uint8_t *b, uint16_t len);
 
-uint8_t bigint_sub(uint8_t r[32], const uint8_t a[32], const uint8_t b[32], uint16_t len);
+uint8_t bigint_sub(uint8_t *r, const uint8_t *a, const uint8_t *b, uint16_t len);
 
 void bigint_mul(unsigned char *r, const unsigned char *a, const unsigned char *b, uint8_t len);
 

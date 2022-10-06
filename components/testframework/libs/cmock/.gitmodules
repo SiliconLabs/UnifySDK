@@ -1,0 +1,8 @@
+[submodule "vendor/unity"]
+	path = vendor/unity
+	url = ../ths_unity
+	branch = master
+[submodule "vendor/c_exception"]
+	path = vendor/c_exception
+	url = ../ths_cexception
+	branch = master

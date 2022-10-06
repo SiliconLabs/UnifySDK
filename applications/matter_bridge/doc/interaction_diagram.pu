@@ -1,0 +1,81 @@
+
+
+title "Unify matter bridge interaction diagram"
+
+legend top left
+ |=Implemented in |
+ |<back:#LightSalmon>  Matter Framework </back> |
+ |<back:#LightBlue>  Unify Framework  </back>|
+endlegend
+
+class matter_bridge
+
+class matter_node_state {
+  - on_added()
+  - on_removed()
+  - on_changed()
+}
+
+class endpoint_map {
+  - add_endpoint()
+  - remove_endpoint()
+  - get_endpoint()
+}
+
+class device_translator {
+  - get_device_type( cluster_list[] ) -> int
+  - cluster_id( String ) -> int
+  - command_id( String) -> int
+  - attribute_id (String ) -> int
+}
+
+
+class translator {
+  - register_translator()
+}
+
+class xxx_command_translator {
+  - on_command()
+}
+
+class xxx_attribute_translator {
+  - read()
+  - write()
+}
+
+class attribute_table #LightSalmon
+class attribute_store #LightSalmon
+
+class mqtt_client #LightBlue {
+  - publish(topic, payload)
+  - subscribe( topic )
+}
+
+class unify_node_state #LightBlue {
+  - on_added()
+  - on_removed()
+  - on_changed()
+}
+
+matter_bridge -- translator
+matter_bridge -- matter_node_state
+matter_bridge -- endpoint_map
+
+matter_node_state -- device_translator 
+matter_node_state -- attribute_store
+matter_node_state -- unify_node_state
+
+endpoint_map .- translator
+endpoint_map .- matter_node_state
+
+translator <-- xxx_command_translator
+translator <-- xxx_attribute_translator
+
+
+unify_node_state <-- mqtt_client
+
+xxx_command_translator --> mqtt_client
+
+
+xxx_attribute_translator <--> mqtt_client
+xxx_attribute_translator <--> attribute_table

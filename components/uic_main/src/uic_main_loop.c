@@ -28,7 +28,7 @@
  * Unit is contiki clock_time_t units.
  * FIXME: move this to some global definitions place. */
 #ifdef ZWAVE_BUILD_SYSTEM
-#define UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY  0
+#define UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY 0
 #else
 #define UIC_DEFAULT_CLOCK_TIME_SELECT_DELAY 300
 #endif
@@ -65,10 +65,8 @@ static clock_time_t uic_main_loop_find_delay(void)
 
 bool uic_main_loop_run(void)
 {
-#ifdef ZWAVE_BUILD_SYSTEM
   /* Check if there are time-out events by polling etimer. */
   etimer_request_poll();
-#endif
 
   int retval = 1;
   /* Keep going as long as there are events on the event queue or
@@ -79,11 +77,12 @@ bool uic_main_loop_run(void)
     retval = process_run();
   }
 
-  /* Bail out if all the processes have stopped running */
-  if (PROCESS_LIST() == NULL) {
-    return false;
-  }
+  /* return false if there are no processes running */
+  return PROCESS_LIST() != NULL;
+}
 
+void uic_main_wait_for_file_descriptors(void)
+{
   clock_time_t delay = uic_main_loop_find_delay();
 
   /* Check for external events, e.e., on file descriptors, and
@@ -91,26 +90,23 @@ bool uic_main_loop_run(void)
     *
     * Poll handlers are only expected to read the data and post a
     * conktiki event to handle it later. */
-#ifdef ZWAVE_BUILD_SYSTEM 
+#ifdef ZWAVE_BUILD_SYSTEM
   if (delay) {
     uic_main_ext_select(delay);
   }
 #else
   uic_main_ext_select(delay);
-  /* Check if there are time-out events by polling etimer. */
-  etimer_request_poll();
 #endif
-
-  return true;
 }
-
 
 bool uic_main_loop(void)
 {
   while (1) {
-    if(!uic_main_loop_run()) {
+    if (!uic_main_loop_run()) {
       break;
     }
+
+    uic_main_wait_for_file_descriptors();
   }
   return true;
 }

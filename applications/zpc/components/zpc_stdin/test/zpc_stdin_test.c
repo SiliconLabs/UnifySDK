@@ -76,21 +76,21 @@ void test_zwave_set_default()
 void test_callbacks()
 {
   zwave_dsk_t dsk                                 = {0x00,
-                                                     0x00,
-                                                     0xad,
-                                                     0xde,
-                                                     0xef,
-                                                     0xbe,
-                                                     0x10,
-                                                     0x01,
-                                                     0xad,
-                                                     0xde,
-                                                     0xef,
-                                                     0xbe,
-                                                     0xee,
-                                                     0xff,
-                                                     0x01,
-                                                     0x00};
+                     0x00,
+                     0xad,
+                     0xde,
+                     0xef,
+                     0xbe,
+                     0x10,
+                     0x01,
+                     0xad,
+                     0xde,
+                     0xef,
+                     0xbe,
+                     0xee,
+                     0xff,
+                     0x01,
+                     0x00};
   const zwave_controller_callbacks_t nm_callbacks = get_zpc_stdin_callbacks();
   nm_callbacks.on_keys_report(true, 0x87);
   nm_callbacks.on_dsk_report(2, dsk, 0x87);
@@ -500,6 +500,17 @@ void test_handle_zwave_s2_log_security_keys()
   zwave_s2_log_security_keys_Expect(1);
   TEST_ASSERT_EQUAL(SL_STATUS_OK,
                     uic_stdin_handle_command("zwave_log_security_keys"));
+}
+
+void test_handle_zwave_save_security_keys_to_file()
+{
+  zwave_s2_save_security_keys_Expect("test.txt");
+  TEST_ASSERT_EQUAL(SL_STATUS_OK,
+                    uic_stdin_handle_command(
+                      "zwave_save_security_keys_to_file test.txt"));
+  TEST_ASSERT_EQUAL(SL_STATUS_FAIL,
+                    uic_stdin_handle_command(
+                      "zwave_save_security_keys_to_file"));
 }
 
 void test_zwave_tx_association()

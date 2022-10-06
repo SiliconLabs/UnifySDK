@@ -473,7 +473,8 @@ sl_status_t bind_callback(dotdot_unid_t unid,
   association_t new_association = {};
   new_association.node_id       = destination_node_id;
   new_association.endpoint_id   = destination_ep;
-  new_association.type          = (destination_ep == 0) ? NODE_ID : ENDPOINT;
+  new_association.type
+    = ((destination_ep == 0) && (endpoint == 0)) ? NODE_ID : ENDPOINT;
 
   number_of_groups = 0;
   binding_mapper_helper_get_association_group_list_from_cluster(
@@ -533,7 +534,8 @@ sl_status_t unbind_callback(dotdot_unid_t unid,
   association_t old_association = {};
   old_association.node_id       = destination_node_id;
   old_association.endpoint_id   = destination_ep;
-  old_association.type          = (destination_ep == 0) ? NODE_ID : ENDPOINT;
+  old_association.type
+    = ((destination_ep == 0) && (endpoint == 0)) ? NODE_ID : ENDPOINT;
 
   binding_mapper_helper_get_association_group_list_from_cluster(
     unid,

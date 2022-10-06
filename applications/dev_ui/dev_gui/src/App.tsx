@@ -266,7 +266,7 @@ class App extends Component<{}, AppState> {
           </div>
         </BrowserRouter>
         <ToastContainer
-          position="bottom-right"
+          position={/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? "bottom-center" : "bottom-right"}
           autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}

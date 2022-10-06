@@ -561,6 +561,31 @@ static bool
   return false;
 }
 
+bool find_dsk_obfuscated_bytes_from_smart_start_list(zwave_dsk_t dsk,
+                                                     uint8_t obfuscated_bytes)
+{
+  zwave_dsk_t dsk_internal = {0};
+
+  for (const auto &[key, value]: Management::get_instance()->get_cache()) {
+    if (SL_STATUS_OK
+        == zpc_converters_dsk_str_to_internal(value.dsk.c_str(),
+                                              dsk_internal)) {
+      sl_log_debug(LOG_TAG, "Comparing\n");
+      sl_log_byte_arr(LOG_TAG, SL_LOG_DEBUG, dsk_internal, sizeof(zwave_dsk_t))
+      sl_log_debug(LOG_TAG, "with sent: \n");
+      sl_log_byte_arr(LOG_TAG, SL_LOG_DEBUG, dsk, sizeof(zwave_dsk_t))
+      if (memcmp(dsk + obfuscated_bytes,
+                 dsk_internal + obfuscated_bytes,
+                 (sizeof(zwave_dsk_t) - obfuscated_bytes))
+          == 0) {
+        memcpy(dsk, dsk_internal, obfuscated_bytes);
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 /**
  * @brief Verify if DSKs are already in the network.
  *

@@ -9,7 +9,7 @@
 
 #ifndef PROTOCOL_S2_PROTOCOL_H_
 #define PROTOCOL_S2_PROTOCOL_H_
-
+#include <stdbool.h>
 #include "S2.h"
 #include "ctr_drbg.h"
 #include "s2_classcmd.h"
@@ -27,7 +27,7 @@
 #ifdef __C51__
 #define SPAN_TABLE_SIZE 5
 #define MPAN_TABLE_SIZE 5
-#elif defined(ZW_CONTROLLER)
+#elif defined(ZW_CONTROLLER) && !defined(HOST_SECURITY_INCLUDED)
 /* Largest size that fits in uint8_t (minus 1). */
 #define SPAN_TABLE_SIZE 254
 #define MPAN_TABLE_SIZE 254
@@ -36,7 +36,7 @@
 #define MPAN_TABLE_SIZE 10
 #endif
 #define MOS_LIST_LENGTH 3
-#ifdef ZW050x
+#if defined(EFR32ZG) || defined(ZW050x)
 #define WORKBUF_SIZE 200
 #else
 #define WORKBUF_SIZE 1280
@@ -231,7 +231,7 @@ struct S2
   uint8_t inclusion_buf_length;
 
   public_key_t public_key;
-
+  bool is_keys_restored;
   //network_key_t temp_network_key;
 };
 
@@ -270,7 +270,7 @@ void s2_inclusion_post_event(struct S2 *p_context,s2_connection_t* src);
 /**
  * Load all keys from keystore
  */
-void s2_restore_keys(struct S2 *p_context);
+void s2_restore_keys(struct S2 *p_context, bool make_keys_persist_se);
 
 
 /** Update the network key of a context
@@ -286,8 +286,10 @@ void s2_restore_keys(struct S2 *p_context);
  *
  * \param temp_key_expand Set to true if temp key is being expanded.
  *
+ * \param make_keys_persist_se Set to true if the key should be saved in as a persistent key.
+ *
  */
 uint8_t
-S2_network_key_update(struct S2 *ctxt, uint32_t key_id, security_class_t class_id, const network_key_t net_key, uint8_t temp_key_expand);
+S2_network_key_update(struct S2 *ctxt, uint32_t key_id, security_class_t class_id, const network_key_t net_key, uint8_t temp_key_expand, bool make_keys_persist_se);
 
 #endif /* PROTOCOL_S2_PROTOCOL_H_ */

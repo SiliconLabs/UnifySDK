@@ -101,6 +101,9 @@ void test_sl_log_keys()
 {
   // Nothing to test here really.
   zwave_s2_log_security_keys(SL_LOG_INFO);
+  uint8_t assigned_keys = 0xFF;
+  nvm_config_set(assigned_keys, &assigned_keys);
+  zwave_s2_save_security_keys("test.txt");
 }
 
 void test_zwave_s2_keystore_reset_and_get_assigned_keys()

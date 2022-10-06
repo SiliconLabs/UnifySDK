@@ -520,10 +520,10 @@ export let ClusterViewOverrides = {
             {
                 Name: `Names Supported`,
                 Value: (item: any) => item.Attributes?.NameSupport?.Reported?.SceneNamesSupported !== undefined ?
-                    (item.Attributes.NameSupport.Reported.SceneNamesSupported === true
-                        ? <FiIcons.FiCheck color="#28a745" />
-                        : <FiIcons.FiXCircle color="#6c757d" />)
-                    : "-"
+                (item.Attributes.NameSupport.Reported.SceneNamesSupported === true
+                    ? <FiIcons.FiCheck color="#28a745" />
+                    : <FiIcons.FiXCircle color="#6c757d" />)
+                : "-"
             },
         ],
         NodesTooltip: (endpoint: string) =>

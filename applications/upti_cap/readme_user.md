@@ -67,6 +67,8 @@ to start/stop trace packages capturing and visualize trace packages.
     or without additional data:
     ![WithoutAdditionalData](assets/without_additional_data.png)
 
+
+
 ## MQTT Topics and messages format
 
 * `ucl/UPTICap/Discover` - topic to control PTI compatible devices discovery. Message payload - empty JSON.

@@ -71,12 +71,12 @@
 //! }
 //! ```
 
-unify_tools::include_binding!(zwave_controller_sys);
+unify_tools::include_binding!(concat!(env!("OUT_DIR"),"/zwave_controller.rs"), zwave_controller_sys);
 use zwave_controller_sys::zwave_controller_connection_info_t;
 use zwave_controller_sys::zwave_controller_encapsulation_scheme_t;
-unify_tools::include_binding!(zwave_command_handler_sys);
-unify_tools::include_binding!(zwave_tx_sys);
-unify_tools::include_binding!(zwave_command_classes_sys);
+unify_tools::include_binding!(concat!(env!("OUT_DIR"),"/zwave_command_handler.rs"), zwave_command_handler_sys); 
+unify_tools::include_binding!(concat!(env!("OUT_DIR"),"/zwave_tx.rs"),zwave_tx_sys );
+unify_tools::include_binding!(concat!(env!("OUT_DIR"),"/zwave_command_classes.rs"),zwave_command_classes_sys );
 
 pub mod rust_command_handlers;
 mod zpc_attribute_store;

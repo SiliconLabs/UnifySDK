@@ -149,7 +149,7 @@ well as a few C/C++ headers with definitions.
 This represents the data model used between all entities in the Unify
 Framework. Note that the definitions in these XML files take precedence
 over examples from the
-[Unify Framework Specifications](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).
+[Unify Framework Specifications](./unify_specifications/index.rst).
 
 These XML files represent ZCL/Dotdot clusters and can be split into 2 ranges:
 

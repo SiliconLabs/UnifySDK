@@ -11,8 +11,8 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-use unify_build_utils::load_unify_environment;
+use unify_build_utils::load_environment;
 
 fn main() {
-    load_unify_environment!();
+   load_environment("uic_attribute_resolver").unwrap();
 }

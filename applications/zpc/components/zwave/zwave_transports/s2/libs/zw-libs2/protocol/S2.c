@@ -25,6 +25,8 @@
 #ifdef ZWAVE_PSA_SECURE_VAULT
 #include "s2_psa.h"
 #endif
+
+//#define DEBUG       // To enable debug_print_hex()
 //#define DEBUGPRINT
 
 #ifdef DEBUGPRINT
@@ -106,7 +108,7 @@ static void convert_lr_to_normal_keyclass(s2_connection_t *con);
 static uint8_t
 S2_send_data_all_cast(struct S2* p_context, const s2_connection_t* con, const uint8_t* buf, uint16_t len, event_t ev);
 
-//#define DEBUG
+
 #ifdef DEBUG
 
 void
@@ -164,6 +166,33 @@ const char * s2_event_name(event_t ev)
 }
 
 #endif /* DEBUG_S2_FSM */
+#ifdef ZWAVE_PSA_SECURE_VAULT
+static uint32_t convert_key_slot_to_keyid(uint8_t slot_id)
+{
+  uint32_t class_id;
+  switch (slot_id) {
+    case 0:
+      class_id = KEY_CLASS_S2_UNAUTHENTICATED;
+      break;
+    case 1:
+      class_id = KEY_CLASS_S2_AUTHENTICATED;
+      break;
+    case 2:
+      class_id = KEY_CLASS_S2_ACCESS;
+      break;
+    case 3:
+      class_id = KEY_CLASS_S2_AUTHENTICATED_LR;
+      break;
+    case 4:
+      class_id = KEY_CLASS_S2_ACCESS_LR;
+      break;
+    default:
+      class_id = 0xFF;
+      break;
+  }
+  return class_id;
+}
+#endif
 
 /**
  * Find or allocate an mpan by group_id id no match can be found
@@ -533,13 +562,18 @@ S2_encrypt_and_send(struct S2* p_context)
   next_nonce_generate(&span->d.rng, nonce); //Create the new nonce
   ZW_DEBUG_SEND_STR("after next_nonce_generate\r\n");
 #ifdef DEBUG
-  DPRINT("%p Encryption class %i\n",ctxt,ctxt->peer.class_id);
+  DPRINTF("%p Encryption class %i\n",ctxt,ctxt->peer.class_id);
   DPRINT("Nonce \n");
-  dbg_print_hex(nonce,16);
+  debug_print_hex(nonce,16);
   DPRINT("key \n");
-  dbg_print_hex(ctxt->sg[ctxt->peer.class_id].enc_key,16);
+  debug_print_hex(ctxt->sg[ctxt->peer.class_id].enc_key,16);
   DPRINT("AAD \n");
-  dbg_print_hex(aad,aad_len);
+  debug_print_hex(aad,aad_len);
+  DPRINTF("State: %d\n",ctxt->inclusion_state);
+  DPRINTF("==>ReceivedKey: %X\n", mp_context->buf[SECURITY_2_NET_KEY_REP_GRANT_KEY_POS]);
+  DPRINTF("==>KeyExchange: %X\n", mp_context->key_exchange);
+  DPRINTF("==>KeyGranted : %X\n", mp_context->key_granted);
+  DPRINTF("==>LoadedKeys: %X\n", mp_context->loaded_keys);
 #endif
 
   DPRINT("ciphertext \n");
@@ -548,16 +582,25 @@ S2_encrypt_and_send(struct S2* p_context)
   DPRINT("CCM enc auth\r\n");
 #if defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZWAVE_PSA_AES)
   size_t out_len;
-  uint32_t key_id = ZWAVE_CCM_TEMP_ENC_KEY_ID;
-  /* Import key into secure vault */
-  zw_wrap_aes_key_secure_vault(&key_id, ctxt->sg[ctxt->peer.class_id].enc_key, ZW_PSA_ALG_CCM);
-  /* Use secure vault for encryption using PSA APIs */
-  zw_psa_aead_encrypt_ccm(key_id, nonce, ZWAVE_PSA_AES_NONCE_LENGTH, aad, aad_len, ciphertext,
+  uint32_t ccm_key_id = ZWAVE_CCM_TEMP_ENC_KEY_ID;
+  if (ctxt->is_keys_restored == false)
+  {
+       /* Import key into secure vault */
+     zw_wrap_aes_key_secure_vault(&ccm_key_id, ctxt->sg[ctxt->peer.class_id].enc_key, ZW_PSA_ALG_CCM);
+  }
+  else
+  {
+    /* Use secure vault for encryption using PSA APIs */
+    ccm_key_id = convert_keyclass_to_derived_key_id(convert_key_slot_to_keyid(ctxt->peer.class_id), ZWAVE_KEY_TYPE_SINGLE_CAST);
+  }
+  zw_psa_aead_encrypt_ccm(ccm_key_id, nonce, ZWAVE_PSA_AES_NONCE_LENGTH, aad, aad_len, ciphertext,
                         ctxt->length + shdr_len, ciphertext, ctxt->length+shdr_len+ZWAVE_PSA_AES_MAC_LENGTH, &out_len);
   msg_len = out_len;
   assert(msg_len == (ctxt->length + shdr_len + ZWAVE_PSA_AES_MAC_LENGTH));
   /* Remove key from vault */
-  zw_psa_destroy_key(key_id);
+  if (ctxt->is_keys_restored == false) {
+    zw_psa_destroy_key(ccm_key_id);
+  }
 #else
   msg_len = CCM_encrypt_and_auth(ctxt->sg[ctxt->peer.class_id].enc_key, nonce, aad, aad_len, ciphertext,
         ctxt->length + shdr_len);
@@ -611,7 +654,17 @@ S2_encrypt_and_send_multi(struct S2* p_context)
   aad_len = S2_make_aad(ctxt, ctxt->peer.l_node, ctxt->peer.r_node, msg, hdr_len, ctxt->length + hdr_len + AUTH_TAG_LEN,
       aad, sizeof(aad));
 
+#if defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZWAVE_PSA_AES)
+    uint32_t key_id = ZWAVE_ECB_TEMP_ENC_KEY_ID;
+    /* Import key into secure vault */
+    zw_wrap_aes_key_secure_vault(&key_id, ctxt->sg[ctxt->mpan->class_id].mpan_key, ZW_PSA_ALG_ECB_NO_PAD);
+    zw_psa_aes_ecb_encrypt(key_id, ctxt->mpan->inner_state, nonce);
+    /* Remove key from vault */
+    zw_psa_destroy_key(key_id);
+#else
   AES128_ECB_encrypt(ctxt->mpan->inner_state, ctxt->sg[ctxt->mpan->class_id].mpan_key, nonce);
+#endif
+
   next_mpan_state(ctxt->mpan);
 
 #ifdef DEBUGPRINT
@@ -625,17 +678,29 @@ S2_encrypt_and_send_multi(struct S2* p_context)
 #endif
 
 #if defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZWAVE_PSA_AES)
+  //////////////////////////////////////////////
   size_t out_len;
-  uint32_t key_id = ZWAVE_CCM_TEMP_ENC_KEY_ID;
-  /* Import key into secure vault */
-  zw_wrap_aes_key_secure_vault(&key_id, ctxt->sg[ctxt->mpan->class_id].enc_key, ZW_PSA_ALG_CCM);
-  /* Use secure vault for encryption using PSA APIs */
+  key_id = ZWAVE_CCM_TEMP_ENC_KEY_ID;
+  if (ctxt->is_keys_restored == false)
+  {
+       /* Import key into secure vault */
+    zw_wrap_aes_key_secure_vault(&key_id, ctxt->sg[ctxt->mpan->class_id].enc_key, ZW_PSA_ALG_CCM);
+    DPRINTF("==> wrapping using temp <==\n");
+  }
+  else
+  {
+    /* Use secure vault for encryption using PSA APIs */
+    key_id = convert_keyclass_to_derived_key_id(convert_key_slot_to_keyid(ctxt->mpan->class_id), ZWAVE_KEY_TYPE_MULTI_CAST);
+    DPRINTF("==> Using Persistent:KeyId. Conversion : %lX <==\n", key_id);
+  }
   zw_psa_aead_encrypt_ccm(key_id, nonce, ZWAVE_PSA_AES_NONCE_LENGTH, aad, aad_len, ciphertext,
                                      ctxt->length, ciphertext, ctxt->length+ZWAVE_PSA_AES_MAC_LENGTH, &out_len);
   msg_len = out_len;
   assert(msg_len == (ctxt->length + ZWAVE_PSA_AES_MAC_LENGTH));
   /* Remove key from vault */
-  zw_psa_destroy_key(key_id);
+  if (ctxt->is_keys_restored == false) {
+    zw_psa_destroy_key(key_id);
+  }
 #else
   msg_len = CCM_encrypt_and_auth(ctxt->sg[ctxt->mpan->class_id].enc_key, nonce, aad, aad_len, ciphertext, ctxt->length);
 #endif
@@ -908,6 +973,7 @@ S2_decrypt_msg(struct S2* p_context, s2_connection_t* conn,
   flags = msg[3];
   if (msg_len < (hdr_len + AUTH_TAG_LEN))
   {
+    DPRINTF("====> parse_fail\n");
     goto parse_fail;
   }
 
@@ -921,6 +987,7 @@ S2_decrypt_msg(struct S2* p_context, s2_connection_t* conn,
     /* Verify sequence */
     if (!S2_verify_seq(ctxt, conn, msg[2]))
     {
+      DPRINTF("====> sequence_fail\n");
       return SEQUENCE_FAIL;
     }
 
@@ -1012,7 +1079,7 @@ S2_decrypt_msg(struct S2* p_context, s2_connection_t* conn,
   aad = &aad_buf[0];
 
   aad_len = S2_make_aad(ctxt, conn->r_node, conn->l_node, msg, hdr_len, msg_len, aad, sizeof(aad_buf));
-
+  
   if (span)
   {
     /*Single cast decryption */
@@ -1041,31 +1108,42 @@ S2_decrypt_msg(struct S2* p_context, s2_connection_t* conn,
         debug_print_hex(ctxt->sg[span->class_id].enc_key,16);
         DPRINT("AAD \n");
         debug_print_hex(aad,aad_len);
+        DPRINTF("State: %d\n",ctxt->inclusion_state);
+        DPRINTF("==>ReceivedKey: %X\n", mp_context->buf[SECURITY_2_NET_KEY_REP_GRANT_KEY_POS]);
+        DPRINTF("==>KeyExchange: %X\n", mp_context->key_exchange);
+        DPRINTF("==>KeyGranted : %X\n", mp_context->key_granted);
+        DPRINTF("==>LoadedKeys: %X\n", mp_context->loaded_keys);
 #endif
 
 #if defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZWAVE_PSA_AES)
-        size_t out_len;
-        uint32_t key_id = ZWAVE_CCM_TEMP_DEC_KEY_ID;
-        zw_status_t status;
-        /* Import key into secure vault */
-        zw_wrap_aes_key_secure_vault(&key_id, ctxt->sg[span->class_id].enc_key, ZW_PSA_ALG_CCM);
-        /* Use secure vault for Decryption using PSA APIs */
-        status = zw_psa_aead_decrypt_ccm(key_id, nonce, ZWAVE_PSA_AES_NONCE_LENGTH, aad, aad_len,
+       size_t out_len;
+       zw_status_t status;
+       uint32_t ccm_key_id = ZWAVE_CCM_TEMP_DEC_KEY_ID;
+       if (ctxt->is_keys_restored == false) {
+         DPRINTF("==> Wrapping using temp <===\n");
+         /* Import key into secure vault */
+         zw_wrap_aes_key_secure_vault(&ccm_key_id, ctxt->sg[span->class_id].enc_key, ZW_PSA_ALG_CCM);
+       } else {
+         /* Use secure vault for encryption using PSA APIs */
+         ccm_key_id = convert_keyclass_to_derived_key_id(convert_key_slot_to_keyid(span->class_id), ZWAVE_KEY_TYPE_SINGLE_CAST);
+         DPRINTF("==> Using Persistent:KeyId: Conversion  %lX <==\n", ccm_key_id);
+       }
+        status = zw_psa_aead_decrypt_ccm(ccm_key_id, nonce, ZWAVE_PSA_AES_NONCE_LENGTH, aad, aad_len,
                                 ciphertext, ciphertext_len, ciphertext, ciphertext_len+ZWAVE_PSA_AES_MAC_LENGTH, &out_len);
-        if (status == ZW_PSA_ERROR_INVALID_SIGNATURE)
-        {
+        if (status == ZW_PSA_ERROR_INVALID_SIGNATURE) {
           decrypt_len = 0;
-        }
-        else
-        {
+        } else {
           decrypt_len = out_len;
         }
         /* Remove key from vault */
-        zw_psa_destroy_key(key_id);
+        if (ctxt->is_keys_restored == false) {
+          zw_psa_destroy_key(ccm_key_id);
+        }
 #else
         decrypt_len = CCM_decrypt_and_auth(ctxt->sg[span->class_id].enc_key, nonce, aad, aad_len, ciphertext,
             ciphertext_len);
 #endif
+        DPRINTF("decrypt_len: %i\n", decrypt_len);
 
         if (decrypt_len)
         {
@@ -1117,24 +1195,30 @@ S2_decrypt_msg(struct S2* p_context, s2_connection_t* conn,
   else
   {
     /*Multicast decryption*/
+#ifdef ZWAVE_PSA_AES
+    uint32_t key_id = ZWAVE_CCM_TEMP_ENC_KEY_ID;
+    zw_wrap_aes_key_secure_vault(&key_id, ctxt->sg[mpan->class_id].mpan_key, ZW_PSA_ALG_ECB_NO_PAD);
+    /* Import key into secure vault */
+    zw_psa_aes_ecb_encrypt(key_id, mpan->inner_state, nonce);
+    /* Remove key from vault */
+    zw_psa_destroy_key(key_id);
+#else
     AES128_ECB_encrypt(mpan->inner_state, ctxt->sg[mpan->class_id].mpan_key, nonce);
+#endif
     next_mpan_state(mpan);
 
 #if defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZWAVE_PSA_AES)
         size_t out_len;
-        uint32_t key_id = ZWAVE_CCM_TEMP_DEC_KEY_ID;
+        key_id = ZWAVE_CCM_TEMP_DEC_KEY_ID;
         zw_status_t status;
         /* Import key into secure vault */
         zw_wrap_aes_key_secure_vault(&key_id, ctxt->sg[mpan->class_id].enc_key, ZW_PSA_ALG_CCM);
         /* Use secure vault for decryption using PSA APIs */
         status = zw_psa_aead_decrypt_ccm(key_id, nonce, ZWAVE_PSA_AES_NONCE_LENGTH, aad, aad_len,
                                 ciphertext, ciphertext_len, ciphertext, ciphertext_len+ZWAVE_PSA_AES_MAC_LENGTH, &out_len);
-        if (status == ZW_PSA_ERROR_INVALID_SIGNATURE)
-        {
+        if (status == ZW_PSA_ERROR_INVALID_SIGNATURE) {
           decrypt_len = 0;
-        }
-        else
-        {
+        } else {
           decrypt_len = out_len;
         }
         /* Remove key from vault */
@@ -1316,16 +1400,19 @@ S2_init_ctx(uint32_t home)
   ctx->loaded_keys = 0;
 
   ctx->fsm = IDLE;
-  s2_restore_keys(ctx);
+  ctx->is_keys_restored = false;
+  s2_restore_keys(ctx, false);
 
   return ctx;
 }
 
 uint8_t
 S2_network_key_update(struct S2 *p_context, uint32_t key_id, security_class_t class_id, const network_key_t net_key,
-    uint8_t temp_key_expand)
+    uint8_t temp_key_expand, bool make_keys_persist_se)
 {
-
+#ifndef ZWAVE_PSA_SECURE_VAULT
+UNUSED(make_keys_persist_se);
+#endif
   CTX_DEF
   if (class_id >= N_SEC_CLASS)
   {
@@ -1342,6 +1429,23 @@ S2_network_key_update(struct S2 *p_context, uint32_t key_id, security_class_t cl
   else
   {
     networkkey_expand(key_id, net_key, ctxt->sg[class_id].enc_key, ctxt->sg[class_id].nonce_key, ctxt->sg[class_id].mpan_key);
+#ifdef ZWAVE_PSA_SECURE_VAULT
+    if (make_keys_persist_se) {
+      DPRINTF("Network key buffer is not empty\n");
+      uint32_t ccm_key_id = convert_keyclass_to_derived_key_id(convert_key_slot_to_keyid(class_id), ZWAVE_KEY_TYPE_SINGLE_CAST);
+      assert((ccm_key_id >= ZWAVE_PSA_KEY_ID_MIN) && (ccm_key_id <= ZWAVE_PSA_KEY_ID_MAX));
+      DPRINTF("Importing SPAN: %lX\n", ccm_key_id);
+      zw_wrap_aes_key_secure_vault(&ccm_key_id, ctxt->sg[class_id].enc_key, ZW_PSA_ALG_CCM);
+      DPRINTF("Imported : %lX\n", ccm_key_id);
+
+      ccm_key_id = convert_keyclass_to_derived_key_id(convert_key_slot_to_keyid(class_id), ZWAVE_KEY_TYPE_MULTI_CAST);
+      assert((ccm_key_id >= ZWAVE_PSA_KEY_ID_MIN) && (ccm_key_id <= ZWAVE_PSA_KEY_ID_MAX));
+      DPRINTF("Importing MPAN: %lX\n", ccm_key_id);
+      zw_wrap_aes_key_secure_vault(&ccm_key_id, ctxt->sg[class_id].mpan_key, ZW_PSA_ALG_CCM);
+      DPRINTF("Imported : %lX\n", ccm_key_id);
+      ctxt->is_keys_restored = true;
+    }
+#endif /*#ifdef ZWAVE_PSA_SECURE_VAULT*/
   }
 
   ctxt->loaded_keys |= 1 << class_id;
@@ -1511,7 +1615,7 @@ S2_fsm_post_event(struct S2* p_context, event_t e, event_data_t* d)
   CTX_DEF
 
   uint8_t nr_flag;
-    DPRINTF("Got S2 fsm event "); ZW_DEBUG_SEND_NUM((uint8_t)e); ZW_DEBUG_SEND_NL(); ZW_DEBUG_SEND_STR("Is peer node: "); ZW_DEBUG_SEND_NUM(S2_is_peernode(ctxt, d->con)); ZW_DEBUG_SEND_STR(" event data: "); ZW_DEBUG_SEND_NUM(d->con->l_node); ZW_DEBUG_SEND_NUM(d->con->r_node); ZW_DEBUG_SEND_NUM(ctxt->peer.l_node); ZW_DEBUG_SEND_NUM(ctxt->peer.r_node); ZW_DEBUG_SEND_NL();
+    DPRINT("Got S2 fsm event "); ZW_DEBUG_SEND_NUM((uint8_t)e); ZW_DEBUG_SEND_NL(); ZW_DEBUG_SEND_STR("Is peer node: "); ZW_DEBUG_SEND_NUM(S2_is_peernode(ctxt, d->con)); ZW_DEBUG_SEND_STR(" event data: "); ZW_DEBUG_SEND_NUM(d->con->l_node); ZW_DEBUG_SEND_NUM(d->con->r_node); ZW_DEBUG_SEND_NUM(ctxt->peer.l_node); ZW_DEBUG_SEND_NUM(ctxt->peer.r_node); ZW_DEBUG_SEND_NL();
 #ifdef DEBUG_S2_FSM
   /* ifdef'ed to save codespace on c51 build for event/state _name() functions */
 DPRINTF("S2_fsm_post_event event: %s, state %s\n", s2_event_name(e), s2_state_name(ctxt->fsm));
@@ -1847,7 +1951,7 @@ S2_send_data_all_cast(struct S2* p_context, const s2_connection_t* con, const ui
   CTX_DEF
   event_data_t e;
 
-  if (len == 0 || len > 1280 || buf == 0 || S2_is_send_data_busy(ctxt))
+  if (len == 0 || len > WORKBUF_SIZE || buf == 0 || S2_is_send_data_busy(ctxt))
   {
     return 0;
   }

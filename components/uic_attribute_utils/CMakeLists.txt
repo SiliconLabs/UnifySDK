@@ -1,5 +1,5 @@
 # Attribute transitions
-add_library(uic_attribute_utils SHARED
+add_library(uic_attribute_utils
     src/attribute_transitions.cpp
     src/attribute_timeouts.cpp
 )
@@ -8,6 +8,7 @@ target_include_directories(uic_attribute_utils
   PUBLIC include
   PRIVATE src
 )
+
 target_link_libraries(uic_attribute_utils
   PUBLIC
     uic_attribute_store
@@ -16,6 +17,7 @@ target_link_libraries(uic_attribute_utils
     uic_contiki_platform
 )
 
+install_headers(uic_attribute_utils "uic" "uic-dev")
 # Unit tests
 add_subdirectory(test)
 

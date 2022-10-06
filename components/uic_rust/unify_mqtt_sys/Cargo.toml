@@ -17,3 +17,4 @@ unify_sl_status_sys = { path = "../unify_sl_status_sys" }
 
 [build-dependencies]
 unify_build_utils = { path = "../unify_build_utils" }
+anyhow ="*"

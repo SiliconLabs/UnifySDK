@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Dropdown, DropdownButton, OverlayTrigger, Popover, Row, Spinner, Table } from 'react-bootstrap';
+import { Button, Card, Col, Dropdown, DropdownButton, OverlayTrigger, Popover, Row, Spinner, Table } from 'react-bootstrap';
 import * as AiIcons from 'react-icons/ai';
 import * as RiIcons from 'react-icons/ri';
 import * as MdIcons from 'react-icons/md'
@@ -221,7 +221,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
   actionsList = (item: any) => {
     let commands = item.SupportedCommands && item.SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes")
     return commands && commands.length
-      ? <DropdownButton variant="outline-primary" title="Commands" size="sm" className={`float-right`} disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"}>
+      ? <DropdownButton menuAlign={'right'} variant="outline-primary" title="Commands" size="sm" className={`float-right`} disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"}>
         {commands.map((cmd: string, cmdIndex: number) => {
           return (
             <Dropdown.Item key={cmdIndex} onClick={this.preSendCommand.bind(this, item, cmd)}> {cmd.charAt(0).toUpperCase() + cmd.slice(1)}</Dropdown.Item>
@@ -255,7 +255,7 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
 
       }
     }
-
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return (
       <>
         <h3 hidden={!this.props.ShowTitle}>{this.props.ClusterViewOverrides?.NavbarItem?.title || this.props.ClusterType}</h3>
@@ -270,60 +270,110 @@ export class BaseClusters extends React.Component<BaseClustersProps, BaseCluster
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table striped hover className='vertical-middle'>
-            <thead>
-              <tr>
-                <th>Name</th>
-                {attrNames.map((item, index) => {
-                  return <th key={index}>{item}</th>
+          : (isMobile
+            ? <div className='table-content'>
+              {
+                this.state.ClusterList.map((item, index) => {
+                  let updatingProperties: string[] = this.getUpdatingProperties(item);
+                  let className = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
+                  let popover = (
+                    <Popover id={`${item.Unid}/${item.Ep}`} className="popover-l">
+                      <Popover.Title as="h3">Waiting for update next properties</Popover.Title>
+                      <Popover.Content>
+                        {updatingProperties.join(', \n')}
+                      </Popover.Content>
+                    </Popover>
+                  );
+                  return (
+                    <Tooltip key={index} title={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable") ? "Node is Offline" : ""}>
+                      <Card key={index} className="inline margin-v-10">
+                        <Card.Header className='flex'>
+                          <div className={`col-sm-6 ${className}`}>
+                            <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
+                            <b><EditableAttribute Node={item} EpName={item.Ep} Cluster={item.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} /></b></div>
+                          <div className="col-sm-6 float-right">
+                            {this.actionsList(item)}
+                            <Tooltip title="Customize Attributes">
+                              <span className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" || !item.Attributes) ? "margin-h-5 icon cursor-default disabled float-right" : "margin-h-5 icon float-right"}>
+                                <AiIcons.AiOutlineTool onClick={() => this.showClusterAttr(item)} />
+                              </span>
+                            </Tooltip>
+                            <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={popover}>
+                              <Spinner hidden={!updatingProperties.length || item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} as="span" animation="border" size="sm" variant="primary" className='float-right margin-t-10' />
+                            </OverlayTrigger>
+                          </div>
+                        </Card.Header>
+                        <Card.Body className={className}>
+                          <div className='col-sm-12'>
+                            {this.props.ClusterViewOverrides?.ViewTable?.map((column, colIndex) => {
+                              return <div className="col-sm-6 inline" key={colIndex}><b><i>{column.Name}: </i></b>{column.Value(item, this.getColorPicker)}</div>
+                            })
+                              || attrNames.map((column, colIndex) => {
+                                return <div className="col-sm-6 inline" key={colIndex}><b><i>{column}: </i></b>{item.Attributes && item.Attributes[column] && item.Attributes[column].Reported !== null && item.Attributes[column].Reported !== undefined ? JSON.stringify(item.Attributes[column].Reported) : "-"}</div>
+                              })
+                            }
+                          </div>
+                        </Card.Body>
+                      </Card>
+                    </Tooltip>
+                  );
                 })}
-                <th className="wd-40px">&nbsp;</th>
-                <th>Supported Commands</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.ClusterList.map((item, index) => {
-                let updatingProperties: string[] = this.getUpdatingProperties(item);
-                let popover = (
-                  <Popover id={`${item.Unid}/${item.Ep}`} className="popover-l">
-                    <Popover.Title as="h3">Waiting for update next properties</Popover.Title>
-                    <Popover.Content>
-                      {updatingProperties.join(', \n')}
-                    </Popover.Content>
-                  </Popover>
-                );
-                return <Tooltip key={index} title={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable") ? "Node is Offline" : ""}>
-                  <tr className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable") ? "disabled" : ""}>
-                    <td>
-                      <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
-                      <EditableAttribute Node={item} EpName={item.Ep} Cluster={item.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
-                    </td>
-                    {this.props.ClusterViewOverrides?.ViewTable?.map((column, colIndex) => {
-                      return <td key={colIndex}>{column.Value(item, this.getColorPicker)}</td>
-                    })
-                      || attrNames.map((column, colIndex) => {
-                        return <td key={colIndex}>{item.Attributes && item.Attributes[column] && item.Attributes[column].Reported !== null && item.Attributes[column].Reported !== undefined ? JSON.stringify(item.Attributes[column].Reported) : "-"}</td>
+            </div>
+            : <Table striped hover className='vertical-middle'>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  {attrNames.map((item, index) => {
+                    return <th key={index}>{item}</th>
+                  })}
+                  <th className="wd-40px">&nbsp;</th>
+                  <th>Supported Commands</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.ClusterList.map((item, index) => {
+                  let updatingProperties: string[] = this.getUpdatingProperties(item);
+                  let popover = (
+                    <Popover id={`${item.Unid}/${item.Ep}`} className="popover-l">
+                      <Popover.Title as="h3">Waiting for update next properties</Popover.Title>
+                      <Popover.Content>
+                        {updatingProperties.join(', \n')}
+                      </Popover.Content>
+                    </Popover>
+                  );
+                  return <Tooltip key={index} title={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable") ? "Node is Offline" : ""}>
+                    <tr className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable") ? "disabled" : ""}>
+                      <td>
+                        <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
+                        <EditableAttribute Node={item} EpName={item.Ep} Cluster={item.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name" SocketServer={this.props.SocketServer} ReplaceNameWithUnid={true} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
+                      </td>
+                      {this.props.ClusterViewOverrides?.ViewTable?.map((column, colIndex) => {
+                        return <td key={colIndex}>{column.Value(item, this.getColorPicker)}</td>
                       })
-                    }
-                    <td>
-                      <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={popover}>
-                        <Spinner hidden={!updatingProperties.length || item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} as="span" animation="border" size="sm" variant="primary" />
-                      </OverlayTrigger>
-                    </td>
-                    <td>{this.actionsList(item)}</td>
-                    <td className="text-center">
-                      <Tooltip title="Customize Attributes">
-                        <span className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" || !item.Attributes) ? "margin-h-5 icon cursor-default disabled" : "margin-h-5 icon"}>
-                          <AiIcons.AiOutlineTool onClick={() => this.showClusterAttr(item)} />
-                        </span>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                </Tooltip>
-              })}
-            </tbody>
-          </Table>
+                        || attrNames.map((column, colIndex) => {
+                          return <td key={colIndex}>{item.Attributes && item.Attributes[column] && item.Attributes[column].Reported !== null && item.Attributes[column].Reported !== undefined ? JSON.stringify(item.Attributes[column].Reported) : "-"}</td>
+                        })
+                      }
+                      <td>
+                        <OverlayTrigger trigger={['hover', 'focus']} placement="right" overlay={popover}>
+                          <Spinner hidden={!updatingProperties.length || item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} as="span" animation="border" size="sm" variant="primary" />
+                        </OverlayTrigger>
+                      </td>
+                      <td>{this.actionsList(item)}</td>
+                      <td className="text-center">
+                        <Tooltip title="Customize Attributes">
+                          <span className={(item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" || !item.Attributes) ? "margin-h-5 icon cursor-default disabled" : "margin-h-5 icon"}>
+                            <AiIcons.AiOutlineTool onClick={() => this.showClusterAttr(item)} />
+                          </span>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  </Tooltip>
+                })}
+              </tbody>
+            </Table>
+          )
         }
 
         <div className="color-picker-container" hidden={!this.state.ColorPicker.ShowColorPicker} style={{

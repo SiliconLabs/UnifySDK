@@ -235,7 +235,6 @@ template<typename T> struct eval {
     }
     return result_type();
   }
-
   private:
   attribute_store::attribute context;
 };

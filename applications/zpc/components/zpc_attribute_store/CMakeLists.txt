@@ -18,7 +18,7 @@ target_link_libraries(
 add_library(
   zpc_attribute_store
   src/zpc_attribute_store.c
-  src/zpc_attribute_store_type_registration.c
+  src/zpc_attribute_store_type_registration.cpp
   src/zpc_attribute_store_register_default_attribute_type_data.cpp
   src/zpc_attribute_store_network_helper.c
   src/zwave_utils.c

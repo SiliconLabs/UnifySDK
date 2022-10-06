@@ -13,6 +13,15 @@
 #include "unity.h"
 #include "curve25519.h"
 #include "s2_keystore.h"
+
+void setUpSuite(void) {
+
+}
+
+void tearDownSuite(void) {
+
+}
+
 #define ELEM_COUNT(ARRAY)  (sizeof(ARRAY)/(sizeof(ARRAY[0])))
 #define UNIT_TEST_TEMP_KEY_SECURE             5       //< Value identifying index for the temporary key in S2 network key when transmitting secure frames.
 #define UNIT_TEST_NETWORK_KEY                 6       //< Value identifying index for the temporary key in S2 network key when transmitting secure frames.

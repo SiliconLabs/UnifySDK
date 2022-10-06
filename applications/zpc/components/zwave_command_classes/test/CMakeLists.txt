@@ -12,6 +12,9 @@ set(MOCK_LIBS
   zwave_api_mock
   zwave_unid_mock)
 
+add_library(zwave_command_classes_test SHARED $<TARGET_OBJECTS:zwave_command_classes>)
+target_link_libraries(zwave_command_classes_test PUBLIC zwave_command_classes)
+
 add_library(zwave_command_class_test_helper zwave_command_class_test_helper.c)
 target_link_libraries(
   zwave_command_class_test_helper
@@ -77,7 +80,7 @@ target_add_unittest(
 )
 
 target_add_unittest(
-  zwave_command_classes
+  zwave_command_classes_test
   NAME
   zwave_command_class_indicator_test
   SOURCES
@@ -556,7 +559,7 @@ target_add_unittest(
 
 # Tests for generated command classes
 set(GEN_TEST_INCLUDES
-  "${CMAKE_SOURCE_DIR}/applications/zpc/components/zwave_controller/include ${CMAKE_SOURCE_DIR}/include"
+  "${CMAKE_SOURCE_DIR}/applications/zpc/components/zwave_controller/include" "${CMAKE_SOURCE_DIR}/include"
 )
 
 # Generated Command Class Door Lock test

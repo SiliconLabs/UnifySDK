@@ -184,12 +184,12 @@ class Scene extends React.Component<SceneProps, SceneState> {
                       className='display-inline'
                       renderInput={(params) => <TextField {...params}
                         onChange={this.handleGroupChange}
-                        size="small" variant="outlined" label="Group ID" className="col-sm-3 margin-l-5 margin-r-10" onFocus={(event) => event.target.select()} />}
+                        size="small" variant="outlined" label="Group ID" className="col-sm-2 margin-l-5 margin-r-10" onFocus={(event) => event.target.select()} />}
                     />
-                    : <TextField size="small" disabled={this.props.GroupID !== "new"} variant="outlined" label="Group ID" className="col-sm-3 margin-l-5 margin-r-10" value={this.state.Scene.GroupID ?? null} onChange={this.handleGroupChange} onFocus={(event) => event.target.select()} />
+                    : <TextField size="small" disabled={this.props.GroupID !== "new"} variant="outlined" label="Group ID" className="col-sm-2 margin-l-5 margin-r-10" value={this.state.Scene.GroupID ?? null} onChange={this.handleGroupChange} onFocus={(event) => event.target.select()} />
 
                 }
-                <TextField size="small" className="col-sm-3 margin-l-5 margin-r-10" label="Scene ID" disabled={this.props.GroupID !== "new"} value={this.state.Scene.SceneID ?? null} onChange={this.handleIdChange} variant="outlined" onFocus={(event) => event.target.select()}
+                <TextField size="small" className="col-sm-2 margin-l-5 margin-r-10" label="Scene ID" disabled={this.props.GroupID !== "new"} value={this.state.Scene.SceneID ?? null} onChange={this.handleIdChange} variant="outlined" onFocus={(event) => event.target.select()}
                   onKeyDownCapture={(event: any) => {
                     if (event.keyCode !== 9 && event.keyCode !== 8 && event.keyCode !== 46 && (isNaN(event.key) || event.keyCode === 13)) {
                       event.stopPropagation();

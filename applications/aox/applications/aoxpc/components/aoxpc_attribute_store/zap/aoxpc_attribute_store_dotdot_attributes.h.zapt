@@ -94,6 +94,7 @@ size_t {{asAttributeGetCountFunction parent.label label}}(
  * @param unid        UNID to get value for
  * @param endpoint    Endpoint to get value for
  * @param value       Pointer where the value will be copied
+ * @param index       Index value of the attribute array
  * @returns sl_status_ok if the value was copied to the value pointer.
  */
 sl_status_t {{asAttributeGetFunction parent.label label}}(

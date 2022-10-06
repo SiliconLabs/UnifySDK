@@ -101,6 +101,9 @@ std::string get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCase
   json_payload["{{label}}"] =
     {{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_get_enum_value_name(
       (uint32_t)fields->{{asSnakeCaseLower label}});
+  #elif defined({{asSnakeCaseUpper type}}_ENUM_NAME_AVAILABLE)
+  json_payload["{{label}}"] =
+    {{asSnakeCaseLower type}}_get_enum_value_name((uint32_t)fields->{{asSnakeCaseLower label}});
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["{{label}}"] = fields->{{asSnakeCaseLower label}};

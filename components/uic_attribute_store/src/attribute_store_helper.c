@@ -467,6 +467,7 @@ sl_status_t attribute_store_delete_all_children(attribute_store_node_t node)
  *
  * @param node            Attribute Store node to read the value from
  * @param value           The value to set
+ * @param value_state     The value state/type to set (desired or reported)
  * @return sl_status_t
  */
 static sl_status_t

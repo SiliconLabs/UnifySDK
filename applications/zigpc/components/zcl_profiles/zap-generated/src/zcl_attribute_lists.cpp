@@ -1869,6 +1869,114 @@ const zcl_attribute_t occupancy_sensing_attribute_list[] = {
 static const unsigned int occupancy_sensing_num_attributes =
     sizeof(occupancy_sensing_attribute_list)/ sizeof(zcl_attribute_t);
 
+/**
+ * @brief ZCL Attribute list for IASZone cluster
+**/
+const zcl_attribute_t ias_zone_attribute_list[] = {
+  {
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE, // cluster_id
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM8, // type
+    false, // is_reportable
+    "ZoneState", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE, // cluster_id
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_TYPE, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_ENUM16, // type
+    false, // is_reportable
+    "ZoneType", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE, // cluster_id
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONE_STATUS, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_MAP16, // type
+    false, // is_reportable
+    "ZoneStatus", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE, // cluster_id
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_IASCIE_ADDRESS, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_EUI64, // type
+    false, // is_reportable
+    "IASCIEAddress", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE, // cluster_id
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_ZONEID, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "ZoneID", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE, // cluster_id
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "NumberOfZoneSensitivityLevelsSupported", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+  {
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE, // cluster_id
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_CURRENT_ZONE_SENSITIVITY_LEVEL, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT8, // type
+    false, // is_reportable
+    "CurrentZoneSensitivityLevel", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+    {
+        ZIGPC_ZCL_CLUSTER_IAS_ZONE, // cluster_id
+        ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
+        (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+        false, // is_reportable
+        "ClusterRevision", // attribute_name
+        "", // desired_payload
+        "", // reported_payload
+    },
+};
+
+static const unsigned int ias_zone_num_attributes =
+    sizeof(ias_zone_attribute_list)/ sizeof(zcl_attribute_t);
+
+/**
+ * @brief ZCL Attribute list for IASWD cluster
+**/
+const zcl_attribute_t iaswd_attribute_list[] = {
+  {
+    ZIGPC_ZCL_CLUSTER_IASWD, // cluster_id
+    ZIGPC_ZCL_CLUSTER_IASWD_ATTR_MAX_DURATION, // attribute_id
+    (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+    false, // is_reportable
+    "MaxDuration", // attribute_name
+    "", // desired_payload
+    "", // reported_payload
+  },
+    {
+        ZIGPC_ZCL_CLUSTER_IASWD, // cluster_id
+        ZIGPC_ZCL_GLOBAL_ATTR_CLUSTER_REVISION, // attribute_id
+        (e_zcl_attribute_type) ZIGPC_ZCL_DATA_TYPE_UINT16, // type
+        false, // is_reportable
+        "ClusterRevision", // attribute_name
+        "", // desired_payload
+        "", // reported_payload
+    },
+};
+
+static const unsigned int iaswd_num_attributes =
+    sizeof(iaswd_attribute_list)/ sizeof(zcl_attribute_t);
+
 //Lists of zcl_profiles
 
 static const zcl_profile_t identify_profile = {
@@ -1951,6 +2059,22 @@ static const zcl_profile_t occupancy_sensing_profile = {
 };
 
 
+static const zcl_profile_t ias_zone_profile = {
+    "IASZone", //Cluster Name
+    0x500, //Cluser ID
+    ias_zone_attribute_list,
+    ias_zone_num_attributes //number of attributes
+};
+
+
+static const zcl_profile_t iaswd_profile = {
+    "IASWD", //Cluster Name
+    0x502, //Cluser ID
+    iaswd_attribute_list,
+    iaswd_num_attributes //number of attributes
+};
+
+
 //Add into the profile map from zcl_attribute_info.cpp
 sl_status_t zigpc_zcl_profiles_init()
 {
@@ -1966,6 +2090,8 @@ sl_status_t zigpc_zcl_profiles_init()
   profile_list.push_back(thermostat_profile);
   profile_list.push_back(color_control_profile);
   profile_list.push_back(occupancy_sensing_profile);
+  profile_list.push_back(ias_zone_profile);
+  profile_list.push_back(iaswd_profile);
 
   return SL_STATUS_OK;
 }

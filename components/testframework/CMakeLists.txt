@@ -11,8 +11,6 @@ target_include_directories(unity2 PUBLIC libs/cmock/vendor/unity/src include
                                          ${nlohmann_json_include})
 target_compile_definitions(unity2 PUBLIC UNITY_SUPPORT_64 UNITY_INCLUDE_DOUBLE
                                          UNITY_DOUBLE_PRECISION=1e-12f)
-# target_link_libraries(unity2 PUBLIC nlohmann_json::nlohmann_json)
-disable_target_check(unity2)
 target_compile_options(unity2 PRIVATE "-fPIC")
 
 add_library(cmock STATIC libs/cmock/src/cmock.c)
@@ -28,8 +26,7 @@ add_library(uic_contiki_stub SHARED $<TARGET_OBJECTS:uic_contiki>
 target_include_directories(
   uic_contiki_stub PUBLIC include
                           $<TARGET_PROPERTY:uic_contiki,INCLUDE_DIRECTORIES>)
-target_link_libraries(uic_contiki_stub
-                      $<TARGET_PROPERTY:uic_contiki,LINK_LIBRARIES>)
+target_link_libraries(uic_contiki_stub uic_log uic_config)
 
 find_package(Mosquitto REQUIRED)
 add_library(uic_mqtt_stub SHARED $<TARGET_OBJECTS:uic_mqtt_mock>

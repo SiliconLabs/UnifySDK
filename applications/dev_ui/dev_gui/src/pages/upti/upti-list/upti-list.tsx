@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Form, Modal, Row, Spinner, Table } from 'react-bootstrap';
+import { Button, Card, Col, Form, Modal, Row, Spinner, Table } from 'react-bootstrap';
 import * as FiIcons from 'react-icons/fi';
 import * as CgIcons from 'react-icons/cg';
 import { UPTIListProps, UPTIListState, UPTIItem } from './upti-list-types';
@@ -73,6 +73,7 @@ export class UPTI extends React.Component<UPTIListProps, UPTIListState> {
   }
 
   render() {
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return (
       <>
         <h3>The UPTI List</h3>
@@ -88,44 +89,79 @@ export class UPTI extends React.Component<UPTIListProps, UPTIListState> {
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table striped hover>
-            <thead>
-              <tr>
-                <th>Serial Number</th>
-                <th>IP Address</th>
-                <th>Enabled</th>
-                <th>&ensp;</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.UPTI.List.map((item, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{item.SerialNumber}</td>
-                    <td>{item.PTIAddress}</td>
-                    <td>
-                      <span>
-                        {item.Enabled ? <FiIcons.FiCheck color="#28a745" /> : <FiIcons.FiXCircle color="#6c757d" />}
-                      </span>
-                    </td>
-                    <td>
-                      <Tooltip title={item.Enabled ? "Disable" : "Enable"} className="float-right">
-                        <span className="icon">
-                          {item.Enabled ? <FiIcons.FiStopCircle color="#dc3545" className="margin-h-5" onClick={this.togglePTI.bind(this, item)} />
-                            : <FiIcons.FiPlayCircle color="#28a745" className="margin-h-5" onClick={this.togglePTI.bind(this, item)} />}
+          : (isMobile
+            ? <div className='table-content'>
+              {
+                this.props.UPTI.List.map((item, index) => {
+                  return (
+                    <Card key={index} className="inline margin-v-10">
+                      <Card.Header className='flex'>
+                        <div className="col-sm-8">
+                          Serial Number: <b>{item.SerialNumber}</b>
+                        </div>
+                        <div className="col-sm-4 float-right">
+                          <Tooltip title={item.Enabled ? "Disable" : "Enable"} className="float-right">
+                            <span className="icon">
+                              {item.Enabled ? <FiIcons.FiStopCircle color="#dc3545" className="margin-h-5" onClick={this.togglePTI.bind(this, item)} />
+                                : <FiIcons.FiPlayCircle color="#28a745" className="margin-h-5" onClick={this.togglePTI.bind(this, item)} />}
+                            </span>
+                          </Tooltip>
+                          <Tooltip title="View Trace" hidden={!item.Enabled} className="float-right">
+                            <span className="icon">
+                              <Link to={`/upti/${item.SerialNumber}`}><CgIcons.CgDebug className="margin-h-5" /></Link>
+                            </span>
+                          </Tooltip>
+                        </div>
+                      </Card.Header>
+                      <Card.Body>
+                        <div className='col-sm-12'>
+                          <div className="col-sm-6 inline"><b><i>IP: </i></b>{item.PTIAddress}</div>
+                          <div className="col-sm-6 inline"><b><i>Enabled: </i></b>{item.Enabled ? <FiIcons.FiCheck color="#28a745" /> : <FiIcons.FiXCircle color="#6c757d" />}</div>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  );
+                })}
+            </div>
+            : <Table striped hover>
+              <thead>
+                <tr>
+                  <th>Serial Number</th>
+                  <th>IP Address</th>
+                  <th>Enabled</th>
+                  <th>&ensp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.props.UPTI.List.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{item.SerialNumber}</td>
+                      <td>{item.PTIAddress}</td>
+                      <td>
+                        <span>
+                          {item.Enabled ? <FiIcons.FiCheck color="#28a745" /> : <FiIcons.FiXCircle color="#6c757d" />}
                         </span>
-                      </Tooltip>
-                      <Tooltip title="View Trace" hidden={!item.Enabled} className="float-right">
-                        <span className="icon">
-                          <Link to={`/upti/${item.SerialNumber}`}><CgIcons.CgDebug className="margin-h-5" /></Link>
-                        </span>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
+                      </td>
+                      <td>
+                        <Tooltip title={item.Enabled ? "Disable" : "Enable"} className="float-right">
+                          <span className="icon">
+                            {item.Enabled ? <FiIcons.FiStopCircle color="#dc3545" className="margin-h-5" onClick={this.togglePTI.bind(this, item)} />
+                              : <FiIcons.FiPlayCircle color="#28a745" className="margin-h-5" onClick={this.togglePTI.bind(this, item)} />}
+                          </span>
+                        </Tooltip>
+                        <Tooltip title="View Trace" hidden={!item.Enabled} className="float-right">
+                          <span className="icon">
+                            <Link to={`/upti/${item.SerialNumber}`}><CgIcons.CgDebug className="margin-h-5" /></Link>
+                          </span>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          )
         }
 
         <Modal show={this.state.ShowModal} onHide={() => this.toggleModal(false)}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Row, Tab, Table, Tabs } from 'react-bootstrap';
+import { Button, Card, Col, Row, Tab, Table, Tabs } from 'react-bootstrap';
 import { SceneItem, SceneListProps, SceneListState } from './scene-list-types';
 import { Tooltip } from '@mui/material';
 import * as FiIcons from 'react-icons/fi'
@@ -75,90 +75,137 @@ export class SceneList extends React.Component<SceneListProps, SceneListState> {
   }
 
   render() {
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return (
       <>
         <h3>Scene List</h3>
-        
-          <Tabs hidden={!this.props.IsConnected} defaultActiveKey={this.state.ActivePage} onSelect={(k: string | null) => { this.props.Storage.Set("ActiveScenePage", k); this.setState({ ActivePage: k || "" }); }}>
-            <Tab eventKey="Scenes" title="Scenes">
-              <br />
-              <BaseClusters
-                ref={this.changeClusters}
-                SocketServer={this.props.SocketServer}
-                IsConnected={this.props.IsConnected}
-                ClusterType={(ClusterTypes as any)["Scenes"]}
-                ClusterTypeAttrs={ClusterTypeAttrs["Scenes"]}
-                NodeList={this.props.NodeList}
-                GroupList={this.props.GroupList}
-                ClusterViewOverrides={(ClusterViewOverrides as any)["Scenes"]}
-                ShowTitle={false} />
-            </Tab>
-            <Tab eventKey="Configuration" title="Scenes Configuration">
-              <br />
-              <Row hidden={!this.props.IsConnected} >
-                <Col xs={12}>
-                  <Link to={"/scenes/new/new"} >
-                    <Button variant="outline-primary" className="float-left margin-b-10">Create Scene</Button>
-                  </Link>
+        <Tabs hidden={!this.props.IsConnected} defaultActiveKey={this.state.ActivePage} onSelect={(k: string | null) => { this.props.Storage.Set("ActiveScenePage", k); this.setState({ ActivePage: k || "" }); }}>
+          <Tab eventKey="Scenes" title="Scenes">
+            <br />
+            <BaseClusters
+              ref={this.changeClusters}
+              SocketServer={this.props.SocketServer}
+              IsConnected={this.props.IsConnected}
+              ClusterType={(ClusterTypes as any)["Scenes"]}
+              ClusterTypeAttrs={ClusterTypeAttrs["Scenes"]}
+              NodeList={this.props.NodeList}
+              GroupList={this.props.GroupList}
+              ClusterViewOverrides={(ClusterViewOverrides as any)["Scenes"]}
+              ShowTitle={false} />
+          </Tab>
+          <Tab eventKey="Configuration" title="Scenes Configuration">
+            <br />
+            <Row hidden={!this.props.IsConnected} >
+              <Col xs={12}>
+                <Link to={"/scenes/new/new"} >
+                  <Button variant="outline-primary" className="float-left margin-b-10">Create Scene</Button>
+                </Link>
+              </Col>
+            </Row>
+            {(!this.props.SceneList || !Object.keys(this.props.SceneList).length)
+              ? <Row>
+                <Col xs={12} className="text-center">
+                  <span className="no-content">No Content</span>
                 </Col>
               </Row>
-              {(!this.props.SceneList || !Object.keys(this.props.SceneList).length)
-          ? <Row>
-            <Col xs={12} className="text-center">
-              <span className="no-content">No Content</span>
-            </Col>
-          </Row>
-          :
-              <Table striped hover>
-                <thead>
-                  <tr className="">
-                    <th>Group</th>
-                    <th>Scene</th>
-                    <th>Involved Clusters</th>
-                    <th className="wd-col-2">&ensp;</th>
-                  </tr>
-                </thead>
-                <tbody>
+              :
+              (isMobile
+                ? <div className='table-content'>
                   {Object.keys(this.props.SceneList).map((groupId, groupIndex) => {
                     let groupScenes = Object.keys(this.props.SceneList[groupId]);
                     return groupScenes?.map((sceneId, sceneIndex) => {
                       let scene: any = this.props.SceneList[groupId][sceneId];
                       return (
-                        <tr key={`${groupIndex}-${sceneIndex}`}>
-                          <td rowSpan={groupScenes.length} hidden={sceneIndex > 0}>{`[ID: ${groupId}] ${this.props.GroupList.find(i => i.GroupId === scene.GroupID)?.GroupName ?? ""}`}</td>
-                          <td>{`[ID: ${sceneId}] ${scene.SceneName ?? ""}`}</td>
-                          <td>{Object.keys(scene.SceneTableExtensions).join(", ")}</td>
-                          <td>
-                            <Tooltip title="Remove" className='float-right'>
-                              <span className="icon">
-                                <FiIcons.FiTrash2 color="#dc3545" onClick={() => this.remove(scene)} />
-                              </span>
-                            </Tooltip>
-                            <Tooltip title="Send to all Groups" className='float-right'>
-                              <span className="icon">
-                                <FiIcons.FiSend className="margin-r-5" color="grey" onClick={() => this.send(scene, true)} />
-                              </span>
-                            </Tooltip>
-                            <Tooltip title="Send" className='float-right'>
-                              <span className="icon">
-                                <FiIcons.FiSend className="margin-r-5" onClick={() => this.send(scene)} />
-                              </span>
-                            </Tooltip>
-                            <Tooltip title="View/Edit Scene" className='float-right margin-r-5'>
-                              <span className="icon">
-                                <Link to={`/scenes/${groupId}/${sceneId}`}><FiIcons.FiEdit /></Link>
-                              </span>
-                            </Tooltip>
-                          </td>
-                        </tr>
-                      )
+                        <Card key={`${groupIndex}-${sceneIndex}`} className="inline margin-v-10">
+                          <Card.Header className='flex'>
+                            <div className="col-sm-7">
+                              <b> <i>Group:</i></b> {`[ID: ${groupId}] ${this.props.GroupList.find(i => i.GroupId === scene.GroupID)?.GroupName ?? ""}`}
+                            </div>
+                            <div className='inline col-sm-5'>
+                              <Tooltip title="Remove" className='float-right'>
+                                <span className="icon">
+                                  <FiIcons.FiTrash2 color="#dc3545" onClick={() => this.remove(scene)} />
+                                </span>
+                              </Tooltip>
+                              <Tooltip title="Send to all Groups" className='float-right'>
+                                <span className="icon">
+                                  <FiIcons.FiSend className="margin-r-5" color="grey" onClick={() => this.send(scene, true)} />
+                                </span>
+                              </Tooltip>
+                              <Tooltip title="Send" className='float-right'>
+                                <span className="icon">
+                                  <FiIcons.FiSend className="margin-r-5" onClick={() => this.send(scene)} />
+                                </span>
+                              </Tooltip>
+                              <Tooltip title="View/Edit Scene" className='float-right margin-r-5'>
+                                <span className="icon">
+                                  <Link to={`/scenes/${groupId}/${sceneId}`}><FiIcons.FiEdit /></Link>
+                                </span>
+                              </Tooltip>
+                            </div>
+                          </Card.Header>
+                          <Card.Body>
+                            <div className='col-sm-12'>
+                              <div className="col-sm-12 inline"><b><i>Scene: </i></b>{`[ID: ${sceneId}] ${scene.SceneName ?? ""}`}</div>
+                              <div className="col-sm-12 inline"><b><i>Involved Clusters: </i></b>{Object.keys(scene.SceneTableExtensions).join(", ")}</div>
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      );
                     })
                   })}
-                </tbody>
-              </Table>
-          }
-            </Tab>
-          </Tabs>
+                </div>
+                : <Table striped hover>
+                  <thead>
+                    <tr className="">
+                      <th>Group</th>
+                      <th>Scene</th>
+                      <th>Involved Clusters</th>
+                      <th className="wd-col-2">&ensp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.keys(this.props.SceneList).map((groupId, groupIndex) => {
+                      let groupScenes = Object.keys(this.props.SceneList[groupId]);
+                      return groupScenes?.map((sceneId, sceneIndex) => {
+                        let scene: any = this.props.SceneList[groupId][sceneId];
+                        return (
+                          <tr key={`${groupIndex}-${sceneIndex}`}>
+                            <td rowSpan={groupScenes.length} hidden={sceneIndex > 0}>{`[ID: ${groupId}] ${this.props.GroupList.find(i => i.GroupId === scene.GroupID)?.GroupName ?? ""}`}</td>
+                            <td>{`[ID: ${sceneId}] ${scene.SceneName ?? ""}`}</td>
+                            <td>{Object.keys(scene.SceneTableExtensions).join(", ")}</td>
+                            <td>
+                              <Tooltip title="Remove" className='float-right'>
+                                <span className="icon">
+                                  <FiIcons.FiTrash2 color="#dc3545" onClick={() => this.remove(scene)} />
+                                </span>
+                              </Tooltip>
+                              <Tooltip title="Send to all Groups" className='float-right'>
+                                <span className="icon">
+                                  <FiIcons.FiSend className="margin-r-5" color="grey" onClick={() => this.send(scene, true)} />
+                                </span>
+                              </Tooltip>
+                              <Tooltip title="Send" className='float-right'>
+                                <span className="icon">
+                                  <FiIcons.FiSend className="margin-r-5" onClick={() => this.send(scene)} />
+                                </span>
+                              </Tooltip>
+                              <Tooltip title="View/Edit Scene" className='float-right margin-r-5'>
+                                <span className="icon">
+                                  <Link to={`/scenes/${groupId}/${sceneId}`}><FiIcons.FiEdit /></Link>
+                                </span>
+                              </Tooltip>
+                            </td>
+                          </tr>
+                        )
+                      })
+                    })}
+                  </tbody>
+                </Table>
+              )
+            }
+          </Tab>
+        </Tabs>
         <ConfirmDlg ConfirmAction={this.confirmRemove} ref={this.changeConfirmDlg} />
       </>
     )

@@ -18,7 +18,7 @@
 #include "datastore.h"
 #include "attribute_mapper_engine.hpp"
 #include "attribute_store_test_helpers.hpp"
-
+#include "uic_version.h"
 extern "C" {
 
 // Short alias for this namespace
@@ -76,7 +76,7 @@ void test_mapper_engine_example()
 
   // Load UAM file
   // Assumes that file located in uic/components/uic_attribute_mapper/test/rules/
-  TEST_ASSERT_TRUE(e.load_file("../../../../components/uic_attribute_mapper/"
+  TEST_ASSERT_TRUE(e.load_file(SOURCE_DIR "/components/uic_attribute_mapper/"
                                "test/rules/complex_test_map_1.uam"));
 
   // Activate rules

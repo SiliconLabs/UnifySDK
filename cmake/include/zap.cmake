@@ -1,6 +1,11 @@
 # ZAP Generation By default no ZAP generation be done unless CMAKE option
 # ZAP_GENERATE is set to ON ZAP generated files are placed in ZAP_OUTPUT_FOLDER
 option(ZAP_GENERATE "Generate ZAP files" OFF)
+if (NOT ZAP_CMAKE)
+  set(ZAP_CMAKE True)
+else()
+  return()
+endif()
 
 if(ZAP_GENERATE MATCHES ON)
   add_custom_target(zap)
@@ -19,6 +24,7 @@ if(ZAP_GENERATE MATCHES ON)
       STATUS "Missing ENV(HEADLESS_HOST), running zap will require a display")
   endif()
 
+  set(DIR_OF_ZAP_CMAKE ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "DIR_OF_ZAP_CMAKE")
   set(ZAP_GENERATE_CMD_STR
       ${ZAP_GENERATE_CMD_STR}
       CACHE INTERNAL zap_generate_cmd_str)
@@ -107,7 +113,7 @@ macro(RUN_ZAP TEMPLATE_JSON)
       DEPENDS ${zap_input}
       COMMAND
         ${ZAP_GENERATE_CMD_ARGS} -z
-        ${CMAKE_SOURCE_DIR}/components/uic_dotdot/dotdot-xml/library.xml -g
+        ${DIR_OF_ZAP_CMAKE}/../../components/uic_dotdot/dotdot-xml/library.xml -g
         ${CMAKE_CURRENT_SOURCE_DIR}/${TEMPLATE_JSON} -o
         ${ZAP_CURRENT_OUTPUT_DIR})
     # Create a custom target for running ZAP on current tamplate based on the

@@ -24,15 +24,37 @@
 #include <assert.h>
 #include <ctr_drbg.h>
 #include <aes.h>
+#include <s2_psa.h>
 
 #ifdef VERBOSE
 #include <stdio.h>
 #endif
 
+#ifdef ZWAVE_PSA_AES
+void AES128_ECB_encrypt(uint8_t *in, const uint8_t *key, uint8_t *out)
+{
+    uint32_t key_id = ZWAVE_ECB_TEMP_ENC_KEY_ID;
+    zw_wrap_aes_key_secure_vault(&key_id, key, ZW_PSA_ALG_ECB_NO_PAD);
+    /* Import key into secure vault */
+    zw_psa_aes_ecb_encrypt(key_id, in, out);
+    /* Remove key from vault */
+    zw_psa_destroy_key(key_id);
+}
+#endif
+
 #ifndef __C51__
 void AJ_AES_ECB_128_ENCRYPT(uint8_t* key, uint8_t* in, uint8_t* out)
 {
+#ifdef ZWAVE_PSA_AES
+    uint32_t key_id = ZWAVE_ECB_TEMP_ENC_KEY_ID;
+    zw_wrap_aes_key_secure_vault(&key_id, key, ZW_PSA_ALG_ECB_NO_PAD);
+    /* Import key into secure vault */
+    zw_psa_aes_ecb_encrypt(key_id, in, out);
+    /* Remove key from vault */
+    zw_psa_destroy_key(key_id);
+#else
     AES128_ECB_encrypt(in, key, out);
+#endif
 }
 #endif
 

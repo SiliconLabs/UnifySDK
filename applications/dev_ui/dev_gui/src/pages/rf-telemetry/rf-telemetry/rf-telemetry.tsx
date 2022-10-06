@@ -44,7 +44,7 @@ class RFTelemetry extends React.Component<RFTelemetryProps, RFTelemetryState> {
                         :
                         <div className="col-sm-12 cluster-attributes">
                             {command.fields.map((field: any, cIndex: number) => {
-                                return <div key={cIndex} className={`col-sm-3 inline margin-v-10`}>
+                                return <div key={cIndex} className={`col-xl-3 col-sm-6 inline margin-v-10`}>
                                     <Tooltip title={field.name}>
                                         <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} label={field.name} variant="outlined" type="text"
                                             value={this.state.Report[field.name]} />

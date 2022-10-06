@@ -18,6 +18,7 @@ Some of the highlights are listed below.
 
 * Take most shared resources from Gecko SDK
 
+
 ## [1.1.1] - Mar 2022
 
 ### Added (1.1.1)

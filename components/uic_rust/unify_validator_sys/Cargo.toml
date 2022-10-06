@@ -13,4 +13,5 @@ path = "src/unify_validator_sys.rs"
 unify_tools = { path = "../unify_tools" }
 
 [build-dependencies]
+anyhow= "*"
 unify_build_utils = { path = "../unify_build_utils" }

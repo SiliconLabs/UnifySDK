@@ -24,6 +24,7 @@ Some of the highlights are listed below.
 * Support for new dual-polarized antenna array board BRD4191A
 * Angle standard deviation values
 
+
 ## [1.1.1] - Mar 2022
 
 ### Added (1.1.1)

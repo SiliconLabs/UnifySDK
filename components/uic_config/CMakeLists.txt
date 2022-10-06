@@ -15,15 +15,15 @@ endif()
 set(CONFIG_SRC platform/${COMPATIBLE_PLATFORM}/config.cpp)
 set(CONFIG_INCLUDE include/)
 set(CONFIG_DEPS Boost::program_options ${YAML_CPP_LIBRARIES})
-add_library(uic_config SHARED ${CONFIG_SRC})
+add_library(uic_config ${CONFIG_SRC})
 target_include_directories(
   uic_config
   PUBLIC ${CONFIG_INCLUDE}
   PRIVATE platform/${COMPATIBLE_PLATFORM})
-target_link_libraries(uic_config ${CONFIG_DEPS})
+target_link_libraries(uic_config ${CONFIG_DEPS} uic_contiki)
 target_compile_definitions(
   uic_config PRIVATE CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
-
+install_headers(uic_config "uic" "uic-dev")
 
 add_subdirectory(test)
 

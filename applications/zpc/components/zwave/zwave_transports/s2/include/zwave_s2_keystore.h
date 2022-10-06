@@ -90,6 +90,12 @@ void zwave_s2_create_new_network_keys();
  */
 void zwave_s2_log_security_keys(sl_log_level_t log_level);
 
+/**
+ * Save the Z-Wave Security Keys in a file in Zniffer friendly format.
+ * @param filename Name/path of the file where keys should be saved 
+ */
+void zwave_s2_save_security_keys(const char *filename);
+
 #ifdef __cplusplus
 }
 #endif

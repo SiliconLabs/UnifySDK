@@ -11,9 +11,9 @@ class Connect extends React.Component<ConnectionProps, ConnectionState> {
         super(props);
         this.storage = this.props.Storage.Get();
         this.state = {
-            Host: this.storage.Host || 'localhost',
+            Host: this.storage.Host || process.env.REACT_APP_MQTT_HOST ||'localhost',
             Port: this.storage.Port || 1883,
-            Status: "No connection established",
+            Status: "No connection",
             IsError: false,
             TLS: this.storage.TLS || false,
             CA: null,
@@ -107,11 +107,11 @@ class Connect extends React.Component<ConnectionProps, ConnectionState> {
     render() {
         return (<>
             {this.props.IsCollapsed
-                ? <div className="col-sm-9 float-left margin-v-10">
-                    <div className="offset-sm-1 margin-v-10 col-sm-3  float-left">
-                        Host: <b>{this.state.Host}:{this.state.Port}</b>
+                ? <div className="col-sm-10 float-left margin-v-10">
+                    <div className="col-sm-4 float-left">
+                        <span className='row justify-content-center'>Host:</span> <b className='row justify-content-center'>{this.state.Host}:{this.state.Port}</b>
                     </div>
-                    <div className="col-sm-3 float-left">
+                    <div className="col-sm-2 float-left">
                         <Form.Label column>
                             <div className="check-container">
                                 <Form.Check checked={this.state.TLS} readOnly={true} />
@@ -119,65 +119,73 @@ class Connect extends React.Component<ConnectionProps, ConnectionState> {
                             <span className="padding-l-5">TLS</span>
                         </Form.Label>
                     </div>
-                    <div className="col-sm-3 margin-v-10 float-left">
-                        Status: <b>{this.state.Status}</b>
+                    <div className="col-sm-3 float-left">
+                        <span className='row justify-content-center'>Status:</span> <b className='row justify-content-center'>{this.state.Status}</b>
                     </div>
-                    {this.props.IsConnected === true
-                        ? <Button variant="outline-primary" className="float-right" type="button" onMouseDown={this.connect}>Disconnect</Button>
-                        : <Button variant="primary" className="float-right" disabled={!this.state.Host || !this.state.Port || this.props.IsConnected === null} type="button" onMouseDown={this.connect}>Connect</Button>}
+                    <div className='col-sm-3 float-left connect-btn-cont'>
+                        {this.props.IsConnected === true
+                            ? <Button variant="outline-primary" className="float-right" type="button" onMouseDown={this.connect}>Disconnect</Button>
+                            : <Button variant="primary" className="float-right" disabled={!this.state.Host || !this.state.Port || this.props.IsConnected === null} type="button" onMouseDown={this.connect}>Connect</Button>}
+                    </div>
                 </div>
-                : <div className="col-sm-10 float-left">
+                : <div className="col-sm-10 float-left no-padding-l">
                     <h5 className="margin-b-0">Unify MQTT broker connection</h5>
                     <div className="con-container col-sm-12">
                         <div className="col-sm-12 flex">
-                            <Form.Label column className="col-sm-5p"></Form.Label>
-                            <div className="con-item col-sm-30p">
-                                <div className="item-title col-sm-4">Host</div>
-                                <div className="item-value">
+                            <div className="con-item col-sm-4">
+                                <div className="item-title col-sm-3">Host</div>
+                                <div className="item-value col-xl-9 col-sm-12">
                                     <input type="text" name="Host" className={`${this.state.IsError && !this.state.Host ? "error-border" : ""}`} disabled={this.props.IsConnected !== false} value={this.state.Host} onMouseDown={(e) => e?.stopPropagation()} onChange={this.handleChange} />
                                 </div>
                             </div>
-                            <div className="con-item col-sm-30p">
-                                <div className="item-title col-sm-4">Port</div>
-                                <div className="item-value">
+                            <div className="con-item col-sm-4">
+                                <div className="item-title col-sm-3">Port</div>
+                                <div className="item-value col-xl-9 col-sm-12">
                                     <input type="text" name="Port" pattern="#" className={`${this.state.IsError && !this.state.Port ? "error-border" : ""}`} disabled={this.props.IsConnected !== false} value={this.state.Port} onMouseDown={(e) => e?.stopPropagation()} onChange={this.handleChange} />
                                 </div>
                             </div>
-                            <div className="con-item col-sm-30p">
+                            <div className="con-item col-sm-4">
                                 <div className="item-title col-sm-4">Status</div>
-                                <div className="item-value">
+                                <div className="item-value col-xl-8 col-sm-12">
                                     <b>{this.state.Status}</b>
                                 </div>
                             </div>
                         </div>
                         <div className="col-sm-12 flex">
-                            <Form.Label column className="col-sm-5p" onMouseDown={(e: any) => e?.stopPropagation()} >
-                                <div className="check-container">
-                                    <Form.Check checked={this.state.TLS} name="TLS" disabled={this.props.IsConnected !== false} onChange={this.handleCheckboxChange} />
+                                <div className="con-item col-sm-4">
+                                    <div className="item-title col-sm-3">TLS</div>
+                                    <div className="item-value col-sm-9">
+                                        <div className="check-container float-left" onMouseDown={(e: any) => e?.stopPropagation()}>
+                                            <Form.Check className='float-left' checked={this.state.TLS} name="TLS" disabled={this.props.IsConnected !== false} onChange={this.handleCheckboxChange} />
+                                        <div className='padding-l-15 tls-name'>TLS</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span className="padding-l-5">TLS</span>
-                            </Form.Label>
-                            <div className="con-item col-sm-30p">
-                                <div className="item-title col-sm-4">CA</div>
-                                <div className="item-value">
+                            <Form.Label column className="col-sm-4"></Form.Label>
+                            <Form.Label column className="col-sm-4"></Form.Label>
+                        </div>
+                        <div className="col-sm-12 flex">
+                            <div className="con-item col-sm-4">
+                                <div className="item-title col-sm-3">CA</div>
+                                <div className="item-value col-xl-9 col-sm-12">
                                     <input className="hidden" type="file" name="CA" ref={this.fileRefs.uploadCA} onChange={this.handleFileChange} />
                                     <Tooltip title="Click to change CA file" disableHoverListener={!this.state.TLS} disableTouchListener={!this.state.TLS}  >
                                         <input type="text" name="CA" className={`${this.state.IsError && !this.state.CAName ? "error-border" : ""} pointer`} disabled={!this.state.TLS || this.props.IsConnected !== false} readOnly defaultValue={this.state.CAName} placeholder="CA File" onMouseDown={(e) => e?.stopPropagation()} onClick={this.browseFile} />
                                     </Tooltip>
                                 </div>
                             </div>
-                            <div className="con-item col-sm-30p">
-                                <div className="item-title col-sm-4">Key</div>
-                                <div className="item-value">
+                            <div className="con-item col-sm-4">
+                                <div className="item-title col-sm-3">Key</div>
+                                <div className="item-value col-xl-9 col-sm-12">
                                     <input className="hidden" type="file" name="ClientKey" ref={this.fileRefs.uploadCK} onChange={this.handleFileChange} />
                                     <Tooltip title="Click to change ClientKey file" disableHoverListener={!this.state.TLS} disableTouchListener={!this.state.TLS}  >
                                         <input type="text" name="CK" className={`${this.state.IsError && !this.state.ClientKeyName ? "error-border" : ""} pointer`} disabled={!this.state.TLS || this.props.IsConnected !== false} readOnly defaultValue={this.state.ClientKeyName} placeholder="ClientKey File" onMouseDown={(e) => e?.stopPropagation()} onClick={this.browseFile} />
                                     </Tooltip>
                                 </div>
                             </div>
-                            <div className="con-item col-sm-30p">
-                                <div className="item-title col-sm-4">Certificate</div>
-                                <div className="item-value">
+                            <div className="con-item col-sm-4">
+                                <div className="item-title col-md-4">Certificate</div>
+                                <div className="item-value col-xl-9 col-sm-12">
                                     <input className="hidden" type="file" name="ClientCertificate" ref={this.fileRefs.uploadCC} onChange={this.handleFileChange} />
                                     <Tooltip title="Click to change ClientCertificate file" disableHoverListener={!this.state.TLS} disableTouchListener={!this.state.TLS}  >
                                         <input type="text" name="CC" className={`${this.state.IsError && !this.state.ClientCertificateName ? "error-border" : ""} pointer`} disabled={!this.state.TLS || this.props.IsConnected !== false} readOnly defaultValue={this.state.ClientCertificateName} placeholder="ClientCertificate File" onMouseDown={(e) => e?.stopPropagation()} onClick={this.browseFile} />
@@ -185,14 +193,17 @@ class Connect extends React.Component<ConnectionProps, ConnectionState> {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-sm-12">
-                            <div className="connect-btn">
-                                {this.props.IsConnected === true
-                                    ? <>
-                                        <Button className="margin-r-5" variant="outline-primary" type="button" onMouseDown={this.clearMqtt}>Clear Mqtt Messages</Button>
-                                        <Button variant="outline-primary" type="button" onMouseDown={this.connect}>Disconnect</Button>
-                                    </>
-                                    : <Button variant="primary" disabled={!this.state.Host || !this.state.Port || this.props.IsConnected === null} type="button" onMouseDown={this.connect}>Connect</Button>}
+                        <div className="col-sm-12 flex margin-v-10">
+                            <div className="con-item col-sm-12 justify-content-end ">
+                                <div className="connect-btn">
+                                    {this.props.IsConnected === true
+                                        ? <>
+                                            <Button className="margin-r-5" variant="outline-primary" type="button" onMouseDown={this.clearMqtt}>Clear Mqtt Messages</Button>
+                                            <Button variant="outline-primary" type="button" onMouseDown={this.connect}>Disconnect</Button>
+                                        </>
+                                        : <Button variant="primary" disabled={!this.state.Host || !this.state.Port || this.props.IsConnected === null} type="button" onMouseDown={this.connect}>Connect</Button>}
+                                </div>
+
                             </div>
                         </div>
                     </div>

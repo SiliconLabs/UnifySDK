@@ -226,7 +226,7 @@ class EditGroupDlg extends React.Component<EditGroupDlgProps, EditGroupDlgState>
                     <Row>
                         <Col xs={12}>
                             <Form.Group as={Row} className="">
-                                <Col sm={4}>
+                                <Col sm={5}>
                                     <Form.Control type="text" placeholder="Filter: Name, Location" defaultValue={this.state.Filter} onKeyUp={this.handleFilterChange} />
                                 </Col>
                             </Form.Group>

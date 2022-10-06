@@ -1,6 +1,5 @@
-# Library
 add_library(
-  uic_attribute_store SHARED
+  uic_attribute_store
   src/attribute_store.cpp
   src/attribute_store_callbacks.cpp
   src/attribute_store_helper.c
@@ -16,7 +15,7 @@ target_include_directories(
   PRIVATE src)
 
 target_link_libraries(uic_attribute_store
-  PUBLIC  uic_datastore
+  PUBLIC  uic_datastore uic_log uic_config
   PRIVATE uic_contiki uic_contiki_platform)
 
 add_library(uic_attribute_store_test_helpers
@@ -27,8 +26,7 @@ target_include_directories(uic_attribute_store_test_helpers PUBLIC ../src)
 target_link_libraries(uic_attribute_store_test_helpers
                       PUBLIC uic_datastore uic_attribute_store)
 
-# For using static library:
-disable_target_check(uic_attribute_store_test_helpers)
+install_headers(uic_attribute_store "uic" "uic-dev")
 
 # Mocks
 target_add_mock(uic_attribute_store)

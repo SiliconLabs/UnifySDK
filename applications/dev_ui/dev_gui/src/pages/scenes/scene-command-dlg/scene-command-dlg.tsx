@@ -1,3 +1,4 @@
+import { MenuItem, TextField } from '@mui/material';
 import * as React from 'react';
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -74,25 +75,25 @@ class SceneCommandDlg extends React.Component<SceneCommandDlgProps, SceneCommand
                 </Modal.Header>
                 <Modal.Body>
                     <div className="row">
-                        <div className="col-md-6">
-                            <Form.Label column>Cluster Type</Form.Label>
-                            <div>
-                                <Form.Control as="select" name="ClusterType" onChange={this.handleClusterChange} value={this.state.ClusterType}>
-                                    {Object.keys(ClusterTypeAttrs)?.map((cluster: any, index: number) => {
-                                        return <option key={index} value={cluster}>{cluster}</option>
-                                    })}
-                                </Form.Control>
-                            </div>
+                        <div className="col-sm-6 inline margin-v-10">
+                            <TextField size="small" className="flex-input" fullWidth={true} select label="Cluster Type" name="ClusterType"
+                                value={this.state.ClusterType} onChange={this.handleClusterChange} variant="outlined">
+                                {Object.keys(ClusterTypeAttrs)?.map((cluster: any, index: number) => {
+                                    return <MenuItem key={index} value={cluster}>
+                                        {cluster}
+                                    </MenuItem>
+                                })}
+                            </TextField>
                         </div>
-                        <div className="col-md-6">
-                            <Form.Label column>Command</Form.Label>
-                            <div>
-                                <Form.Control as="select" name="Command" onChange={this.handleCommandChange} value={this.state.Command && this.state.Command.id} disabled={!this.state.ClusterType || !this.state.Command}>
-                                    {ClusterTypeAttrs[this.state.ClusterType]?.server.commands?.map((cmd: any, ind: number) => {
-                                        return <option key={ind} value={cmd.id}>{cmd.name}</option>
-                                    })}
-                                </Form.Control>
-                            </div>
+                        <div className="col-sm-6 inline margin-v-10">
+                            <TextField size="small" className="flex-input" fullWidth={true} select label="Command" name="Command" disabled={!this.state.ClusterType || !this.state.Command}
+                                value={this.state.Command && this.state.Command.id} onChange={this.handleCommandChange} variant="outlined">
+                                {ClusterTypeAttrs[this.state.ClusterType]?.server.commands?.map((cmd: any, ind: number) => {
+                                    return <MenuItem key={ind} value={cmd.id}>
+                                        {cmd.name}
+                                    </MenuItem>
+                                })}
+                            </TextField>
                         </div>
                     </div>
                     <hr />

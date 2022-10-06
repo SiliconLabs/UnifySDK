@@ -5,7 +5,9 @@
 # arm-linux-gnueabihf-g++ (Debian 8.3.0-2) 8.3.0 Its likely caused by the fact
 # that the dotdot_mqtt.cpp file becomes quiete large. Setting CMAKE_CXX_FLAGS
 # should only affect this directory and is children.
-string(REPLACE "-pipe" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+if (CMAKE_CXX_FLAGS MATCHES "-pipe")
+  string(REPLACE "-pipe" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
+endif()
 
 set(Boost_USE_MULTITHREADED ON)
 find_package(Boost REQUIRED)
@@ -17,7 +19,7 @@ find_path(nlohmann_json_include nlohmann/json.hpp REQUIRED)
 run_zap(zap/gen-templates.json)
 
 add_library(
-  uic_dotdot_mqtt SHARED
+  uic_dotdot_mqtt
   ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt.cpp
   ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_attributes.cpp
   ${ZAP_CURRENT_OUTPUT_DIR}/src/dotdot_mqtt_command_helpers.cpp
@@ -49,3 +51,4 @@ target_include_directories(uic_dotdot_mqtt_mock
                            PUBLIC ${ZAP_CURRENT_OUTPUT_DIR}/include)
 
 add_subdirectory(test)
+install_headers(uic_dotdot_mqtt "uic" "uic-dev")

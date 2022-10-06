@@ -22,6 +22,11 @@ For the application specific release notes, please follow these links:
 * [Zigbeed](applications/zigbeed/release_notes.md)
 * [Portable Runtime](portable_runtime/release_notes.md)
 
+## [1.3.0]
+
+### Changed (1.3.0)
+* updated Rust compiler from 1.60 to 1.64.
+
 ## [1.2.1] - Sep 2022
 
 ### Changed (1.2.1)

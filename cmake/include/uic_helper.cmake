@@ -1,34 +1,4 @@
-function(get_recursive_targets result curdir omit_mocks)
-  # Currently only globbing direct sub-directories (faster)!! no recursive
-  # childs!
-  file(
-    GLOB children
-    LIST_DIRECTORIES true
-    ${curdir} ${curdir}/*)
-  foreach(child ${children})
-    if(IS_DIRECTORY "${child}" AND EXISTS "${child}/CMakeLists.txt")
-      # if you get an error on the get_directory_proeperty, double check the
-      # directory is included in the Cmakelists.txt tree!
-      get_directory_property(targets DIRECTORY "${child}" BUILDSYSTEM_TARGETS)
-      if(DEFINED omit_mocks)
-        list(FILTER targets EXCLUDE REGEX ".*mock.*")
-      endif()
-      list(APPEND target_list ${targets})
-    endif()
-  endforeach()
-
-  get_property(disabled_targets GLOBAL
-               PROPERTY disabled_uic_targets_type_checker)
-  list(REMOVE_ITEM target_list ${disabled_targets})
-  set(${result}
-      ${target_list}
-      PARENT_SCOPE)
-endfunction()
-
-function(disable_target_check target)
-  set_property(GLOBAL APPEND PROPERTY disabled_uic_targets_type_checker
-                                      ${target})
-endfunction()
+set(DIR_OF_UIC_HELPER_CMAKE ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "DIR_OF_UIC_HELPER_CMAKE")  
 
 function(collect_object_files TARGET TARGET_OBJS EXCLUDES)
   set(TARGET_OBJS
@@ -74,9 +44,7 @@ function(uic_add_shared_library)
   # belonging to the target
   foreach(L ${LIBS})
     get_target_property(TARGET_TYPE ${L} TYPE)
-    if(NOT (${TARGET_TYPE} MATCHES "STATIC_LIBRARY"))
-      message(FATAL_ERROR " ${L} is not a static library its a ${TARGET_TYPE}")
-    endif()
+
     list(APPEND GENERATOR_EXPRS "$<TARGET_FILE:${L}>")
   endforeach()
 
@@ -89,3 +57,15 @@ function(uic_add_shared_library)
   target_link_options(${LIBNAME} PRIVATE ${LINK_OPTIONS_START}
                       ${GENERATOR_EXPRS} ${LINK_OPTIONS_END})
 endfunction()
+
+if(NOT TARGET sl_status_strings)
+  add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
+    COMMAND bash ${DIR_OF_UIC_HELPER_CMAKE}/../../scripts/sl_status_strings.sh >
+            ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
+    DEPENDS ${DIR_OF_UIC_HELPER_CMAKE}/../../include/sl_status.h
+            ${DIR_OF_UIC_HELPER_CMAKE}/../../scripts/sl_status_strings.sh)
+  add_custom_target(
+    sl_status_strings
+    DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h)
+endif()

@@ -71,12 +71,12 @@ class PreferredProtocolsDlg extends React.Component<PreferredProtocolsDlgProps, 
                         <ListGroup className="preferred-protocols">
                             <ListGroup.Item>
                                 <Form.Check className="float-left" checked={this.state.PreferredProtocols[0].Enabled} onChange={this.handleChange.bind(this, 0)} />
-                                <span className="float-left">{this.state.PreferredProtocols[0].Name}</span>
+                                <span className="float-left padding-l-15">{this.state.PreferredProtocols[0].Name}</span>
                                 <Tooltip className="float-right" title="Move Down"><span className="icon"><IoIcons.IoMdArrowRoundDown onClick={()=>this.reverse()} /></span></Tooltip>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Form.Check className="float-left" checked={this.state.PreferredProtocols[1].Enabled} onChange={this.handleChange.bind(this, 1)} />
-                                <span className="float-left">{this.state.PreferredProtocols[1].Name}</span>
+                                <span className="float-left padding-l-15">{this.state.PreferredProtocols[1].Name}</span>
                                 <Tooltip className="float-right" title="Move Up"><span className="icon"><IoIcons.IoMdArrowRoundUp onClick={() => this.reverse()} /></span></Tooltip>
                             </ListGroup.Item>
                         </ListGroup>

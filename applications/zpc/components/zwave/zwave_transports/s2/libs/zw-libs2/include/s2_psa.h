@@ -18,12 +18,13 @@
  */
 #define ZWAVE_PSA_KEY_ID_MIN    0x00070000
 #define ZWAVE_PSA_KEY_ID_MAX    0x0007FFFF
-
+#define ZWAVE_PSA_KEY_ID_MARKER 0x00070012
 #define ZWAVE_NET_KEY_SPAN_INDEX        01
 #define ZWAVE_NET_KEY_MPAN_INDEX        02
 
 #define ZW_PSA_ALG_CCM          0x05500100
 #define ZW_PSA_ALG_CMAC         0x03c00200
+#define ZW_PSA_ALG_ECB_NO_PAD   0x04404400
 
 #define ZWAVE_PSA_AES_MAC_LENGTH         8
 #define ZWAVE_PSA_AES_NONCE_LENGTH      13
@@ -31,6 +32,8 @@
 /* Temporary key_ids for volatile AES keys for in-place usage */
 #define ZWAVE_CCM_TEMP_ENC_KEY_ID        3
 #define ZWAVE_CCM_TEMP_DEC_KEY_ID        4
+#define ZWAVE_ECB_TEMP_ENC_KEY_ID        5
+#define ZWAVE_CMAC_TEMP_KEY_ID           6
 
 /**
  * \brief Mapping to PSA error code types.
@@ -41,6 +44,17 @@ typedef enum {
   ZW_PSA_ERROR_INVALID_SIGNATURE = -149,
   ZW_PSA_STATUS_INVALID = 200 /* Refine this */
 } zw_status_t;
+
+/**
+ *  \brief KeyType derived from network key
+ *  Used to define keyid
+ */
+typedef enum
+{
+  ZWAVE_KEY_TYPE_SINGLE_CAST = 0x01,
+  ZWAVE_KEY_TYPE_MULTI_CAST,
+  ZWAVE_KEY_TYPE_NONCE
+} zwave_derived_key_type_t;
 
 /**
  * \brief Convert PSA error code types to zwave error types.
@@ -89,6 +103,11 @@ extern zw_status_t zw_psa_aead_decrypt_ccm(uint32_t key_id, const uint8_t *nonce
                                  size_t *cipher_len);
 
 /**
+ * \brief PSA wrapper for AES ECB encryption
+ */
+extern zw_status_t zw_psa_aes_ecb_encrypt(uint32_t key_id, const uint8_t *input, uint8_t *output);
+
+/**
  * \brief PSA wrapper for storing a key in secure vault either as peristent or volatile.
  */
 extern zw_status_t zw_wrap_aes_key_secure_vault_test(uint32_t *key_id, const uint8_t *aes_key, uint32_t key_algorithm);
@@ -100,6 +119,14 @@ extern zw_status_t zw_wrap_aes_key_secure_vault_test(uint32_t *key_id, const uin
  */
 
 extern uint8_t convert_keyslot_to_key_class_id (uint8_t key_slot);
+
+/**
+ * \brief Mapping between derived keys (encryption/decryption CCM keys) to PSA key IDs.
+ */
+
+extern uint32_t convert_keyclass_to_derived_key_id (uint32_t key_class, zwave_derived_key_type_t key_type);
+
+
 /**
  * \brief PSA wrapper to destroy a key stored in secure vault.
  */

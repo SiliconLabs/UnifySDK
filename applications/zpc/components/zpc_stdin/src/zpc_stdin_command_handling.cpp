@@ -74,6 +74,8 @@ static uint8_t node_reported_dsk[16] = {0};
 // Private handler functions
 static sl_status_t handle_zwave_set_default(const handle_args_t &arg);
 static sl_status_t handle_zwave_log_security_keys(const handle_args_t &arg);
+static sl_status_t
+  handle_zwave_save_security_keys_to_file(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx_association(const handle_args_t &arg);
 static sl_status_t handle_zwave_tx_multi(const handle_args_t &arg);
@@ -120,6 +122,9 @@ const std::map<std::string, std::pair<std::string, handler_func>> commands = {
   {"zwave_set_default", {"Reset Z-Wave network", &handle_zwave_set_default}},
   {"zwave_log_security_keys",
    {"Log Z-Wave network security keys", &handle_zwave_log_security_keys}},
+  {"zwave_save_security_keys_to_file",
+   {"Save Z-Wave network security keys to a file",
+    &handle_zwave_save_security_keys_to_file}},
   {"zwave_remove_failed",
    {COLOR_START "<Node ID >" COLOR_END " :Remove a failing Z-Wave node.",
     &handle_zwave_remove_failed}},
@@ -287,6 +292,22 @@ static sl_status_t handle_zwave_set_default(const handle_args_t &arg)
 static sl_status_t handle_zwave_log_security_keys(const handle_args_t &arg)
 {
   zwave_s2_log_security_keys(SL_LOG_INFO);
+  return SL_STATUS_OK;
+}
+
+static sl_status_t
+  handle_zwave_save_security_keys_to_file(const handle_args_t &arg)
+{
+  if (arg.size() != 2) {
+    dprintf(out_stream,
+            "Invalid number of arguments, expected args: <File name>"
+            "For example zwave_save_security_keys_to_file keys.txt\n");
+    return SL_STATUS_FAIL;
+  }
+ 
+  const char *key_file_name
+      = static_cast<const char*>(arg[1].c_str());
+  zwave_s2_save_security_keys(key_file_name);
   return SL_STATUS_OK;
 }
 

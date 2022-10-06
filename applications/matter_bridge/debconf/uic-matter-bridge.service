@@ -1,0 +1,13 @@
+[Unit]
+Description=Unified IoT Unify Matter Bridge
+After=network.target mosquitto.service
+
+[Service]
+ExecStart=/usr/bin/unify_matter_bridge
+Restart=on-failure
+KillMode=process
+User=uic
+Group=uic_matter
+
+[Install]
+WantedBy=multi-user.target

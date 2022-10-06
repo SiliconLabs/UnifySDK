@@ -184,15 +184,15 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
             return <span key={index} hidden={true}></span>;
         switch (i.type) {
             case "boolean":
-                return <div key={index} className="col-sm-6 inline margin-v-10">
-                    <div className={`col-sm-12 no-padding-r ${writable ? "writable" : ""}`}>
+                return <div key={index} className="col-sm-6 inline margin-v-10 attr-item">
+                    <div className={`col-sm-12 no-padding-r boolean-container ${writable ? "writable" : ""}`}>
                         <Form.Label column sm="11" className={supported ? "" : "disabled"}>
                             <div className="check-container">
                                 {writable && supported
                                     ? <Form.Check name={i.name} disabled={!supported} defaultChecked={attr} onChange={this.handleChange.bind(this, prefixNames, true, false)} />
                                     : <Form.Check name={i.name} readOnly={true} disabled={!supported} checked={attr} />}
                             </div>
-                            {i.name}</Form.Label>
+                            <span className='word-break'>{i.name}</span></Form.Label>
                         {adornment}
                     </div>
                     {this.getHintText(i)}
@@ -207,7 +207,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                 value = attr[b.name]
                             switch (b.type) {
                                 case "enum":
-                                    return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
+                                    return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
                                         {writable && b.enum
                                             ? <TextField size="small" className="writable flex-input" fullWidth={true} select={b.enum && b.enum.length > 0} label={b.name} name={b.name} disabled={!supported}
                                                 value={value ?? 0} defaultValue={value ?? 0}
@@ -223,8 +223,8 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                         }
                                     </div>
                                 case "boolean":
-                                    return <div key={`${index}:${bIndex}`} className="col-sm-6 inline margin-v-10">
-                                        <div className={`col-sm-12 no-padding-r ${writable ? "writable" : ""}`}>
+                                    return <div key={`${index}:${bIndex}`} className="col-sm-6 inline margin-v-10 attr-item">
+                                        <div className={`col-sm-12 no-padding-r boolean-container ${writable ? "writable" : ""}`}>
                                             <Form.Label column sm="12" className="flex">
                                                 <div className="check-container">
                                                     {writable
@@ -236,7 +236,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                         </div>
                                     </div>
                                 default:
-                                    return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
+                                    return <div key={`${index}:${bIndex}`} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
                                         {writable && supported
                                             ? <TextField size="small" className="writable flex-input" fullWidth={true} label={b.name} name={b.name} variant="outlined" type={b.type}
                                                 defaultValue={value || ""} onChange={this.handleBitmapChange.bind(this, prefixNames, i, false, b.type === "number")}
@@ -251,7 +251,7 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                 </Card>
             case "enum":
                 return (
-                    <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
+                    <div key={index} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
                         {writable && supported
                             ? <TextField size="small" className="writable flex-input" fullWidth={true} select={i.enum && i.enum.length > 0} label={i.name} name={i.name} value={attr ?? ""}
                                 onChange={this.handleChange.bind(this.props, prefixNames, false, false)} variant="outlined" onBlur={this.validateAttr.bind(this, i, prefixNames)} InputProps={adornment} >
@@ -357,14 +357,14 @@ class ClusterAttr extends React.Component<ClusterAttrProps, ClusterAttrState> {
                                 </div>
                             </Card>
                         )
-                        : <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
+                        : <div key={index} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
                             <TextField size="small" className="writable flex-input" fullWidth={true} label={i.name} name={i.name} variant="outlined" type={i.type}
                                 value={attr || ""} onChange={this.handleChange.bind(this, prefixNames, false, i.type === "number")} onBlur={this.validateAttr.bind(this, i, prefixNames)}
                                 onFocus={(event) => event.target.select()} InputProps={adornment} />
                             {this.getHintText(i)}
                         </div>
                     )
-                    : <div key={index} className={`col-sm-6 inline margin-v-10 ${isValid ? "" : "invalid"}`}>
+                    : <div key={index} className={`col-sm-6 inline margin-v-10 attr-item ${isValid ? "" : "invalid"}`}>
                         <TextField size="small" className="flex-input" fullWidth={true} inputProps={{ readOnly: true }} disabled={!supported} label={i.name} variant="outlined" type="text"
                             value={i.isArray && attr !== undefined ? attr.join("; ") : (attr || "")} InputProps={adornment} />
                         {this.getHintText(i)}

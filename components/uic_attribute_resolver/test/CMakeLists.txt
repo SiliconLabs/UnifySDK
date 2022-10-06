@@ -1,3 +1,4 @@
+
 # Attribute resolver rule mock
 add_mock(uic_attribute_resolver_rule_mock ../include/attribute_resolver_rule.h
          ../src/attribute_resolver_rule_internal.h)
@@ -12,6 +13,7 @@ target_interface_libraries(uic_attribute_resolver_rule_test_mock uic_contiki
 # Resolver test
 target_add_unittest(
   uic_attribute_resolver
+  NAME uic_attribute_resolver_test
   SOURCES
   attribute_resolver_test.c
   attribute_resolver_rule_mock.cpp
@@ -19,7 +21,7 @@ target_add_unittest(
   uic_contiki_stub
   uic_attribute_resolver_rule_mock
   EXCLUDE
-  src/attribute_resolver_rule.cpp)
+  attribute_resolver_rule.cpp)
 
 # Resolver test number 2 (common test for rule + resolver parts)
 target_add_unittest(

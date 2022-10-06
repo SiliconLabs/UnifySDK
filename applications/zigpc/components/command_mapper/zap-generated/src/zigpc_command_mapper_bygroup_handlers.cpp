@@ -3749,6 +3749,248 @@ void zigpc_command_mapper_bygroup_occupancy_sensing_write_attributes_handler(
 
 
 
+void zigpc_command_mapper_bygroup_ias_zone_write_attributes_handler(
+  const dotdot_group_id_t group_id,
+  uic_mqtt_dotdot_ias_zone_state_t values,
+  uic_mqtt_dotdot_ias_zone_updated_state_t values_to_write
+) {
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (values_to_write.iascie_address == true) {
+    zigpc_command_mapper_populate_write_attr_record(
+      write_attr_data,
+      attr_id_list,
+      attr_data_type_list,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_IASCIE_ADDRESS,
+      ZIGPC_ZCL_DATA_TYPE_EUI64,
+      &values.iascie_address
+    );
+  }
+
+  if (values_to_write.current_zone_sensitivity_level == true) {
+    zigpc_command_mapper_populate_write_attr_record(
+      write_attr_data,
+      attr_id_list,
+      attr_data_type_list,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE_ATTR_CURRENT_ZONE_SENSITIVITY_LEVEL,
+      ZIGPC_ZCL_DATA_TYPE_UINT8,
+      &values.current_zone_sensitivity_level
+    );
+  }
+
+  if (write_attr_data.size() > 0) {
+    zigpc_command_mapper_send_multicast(
+      group_id,
+      ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+      ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+      write_attr_data.size(),
+      write_attr_data.data()
+    );
+  }
+
+}
+
+
+
+/**
+ * @brief DotDot MQTT by-group handler for IASZone/ZoneEnrollResponse command.
+ *
+ * @param group_id  UCL group identifier.
+
+ * @param fields    Command fields data.
+
+ */
+void zigpc_command_mapper_bygroup_ias_zone_zone_enroll_response_handler(
+  const dotdot_group_id_t group_id,
+  const uic_mqtt_dotdot_ias_zone_command_zone_enroll_response_fields_t *fields
+  
+) {
+
+  if (fields == nullptr) {
+    sl_log_warning(LOG_TAG, LOG_FMT_INVALID_FIELDS, "ZoneEnrollResponse", "EnrollResponseCode");
+  }
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &fields->enroll_response_code });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &fields->zoneid });
+
+  zigpc_command_mapper_send_multicast(
+    group_id,
+    ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_RESPONSE,
+    cmd_arg_list.size(),
+    cmd_arg_list.data()
+  );
+
+}
+
+/**
+ * @brief DotDot MQTT by-group handler for IASZone/InitiateNormalOperationMode command.
+ *
+ * @param group_id  UCL group identifier.
+
+ */
+void zigpc_command_mapper_bygroup_ias_zone_initiate_normal_operation_mode_handler(
+  const dotdot_group_id_t group_id
+) {
+
+
+
+
+  zigpc_command_mapper_send_multicast(
+    group_id,
+    ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_INITIATE_NORMAL_OPERATION_MODE,
+    0,
+    nullptr
+  );
+
+}
+
+/**
+ * @brief DotDot MQTT by-group handler for IASZone/InitiateTestMode command.
+ *
+ * @param group_id  UCL group identifier.
+
+ * @param fields    Command fields data.
+
+ */
+void zigpc_command_mapper_bygroup_ias_zone_initiate_test_mode_handler(
+  const dotdot_group_id_t group_id,
+  const uic_mqtt_dotdot_ias_zone_command_initiate_test_mode_fields_t *fields
+  
+) {
+
+  if (fields == nullptr) {
+    sl_log_warning(LOG_TAG, LOG_FMT_INVALID_FIELDS, "InitiateTestMode", "TestModeDuration");
+  }
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &fields->test_mode_duration });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &fields->current_zone_sensitivity_level });
+
+  zigpc_command_mapper_send_multicast(
+    group_id,
+    ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_INITIATE_TEST_MODE,
+    cmd_arg_list.size(),
+    cmd_arg_list.data()
+  );
+
+}
+
+void zigpc_command_mapper_bygroup_iaswd_write_attributes_handler(
+  const dotdot_group_id_t group_id,
+  uic_mqtt_dotdot_iaswd_state_t values,
+  uic_mqtt_dotdot_iaswd_updated_state_t values_to_write
+) {
+  std::vector<zigpc_zcl_frame_data_t> write_attr_data;
+  std::list<zcl_attribute_id_t> attr_id_list;
+  std::list<zigpc_zcl_data_type_t> attr_data_type_list;
+
+  if (values_to_write.max_duration == true) {
+    zigpc_command_mapper_populate_write_attr_record(
+      write_attr_data,
+      attr_id_list,
+      attr_data_type_list,
+      ZIGPC_ZCL_CLUSTER_IASWD_ATTR_MAX_DURATION,
+      ZIGPC_ZCL_DATA_TYPE_UINT16,
+      &values.max_duration
+    );
+  }
+
+  if (write_attr_data.size() > 0) {
+    zigpc_command_mapper_send_multicast(
+      group_id,
+      ZIGPC_ZCL_FRAME_TYPE_GLOBAL_CMD_TO_SERVER,
+      ZIGPC_ZCL_CLUSTER_IASWD,
+      ZIGPC_ZCL_GLOBAL_COMMAND_WRITE_ATTRIBUTES,
+      write_attr_data.size(),
+      write_attr_data.data()
+    );
+  }
+
+}
+
+
+
+/**
+ * @brief DotDot MQTT by-group handler for IASWD/StartWarning command.
+ *
+ * @param group_id  UCL group identifier.
+
+ * @param fields    Command fields data.
+
+ */
+void zigpc_command_mapper_bygroup_iaswd_start_warning_handler(
+  const dotdot_group_id_t group_id,
+  const uic_mqtt_dotdot_iaswd_command_start_warning_fields_t *fields
+  
+) {
+
+  if (fields == nullptr) {
+    sl_log_warning(LOG_TAG, LOG_FMT_INVALID_FIELDS, "StartWarning", "SirenConfiguration");
+  }
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &fields->siren_configuration });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT16, &fields->warning_duration });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_UINT8, &fields->strobe_duty_cycle });
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_ENUM8, &fields->strobe_level });
+
+  zigpc_command_mapper_send_multicast(
+    group_id,
+    ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+    ZIGPC_ZCL_CLUSTER_IASWD,
+    ZIGPC_ZCL_CLUSTER_IASWD_COMMAND_START_WARNING,
+    cmd_arg_list.size(),
+    cmd_arg_list.data()
+  );
+
+}
+
+/**
+ * @brief DotDot MQTT by-group handler for IASWD/Squawk command.
+ *
+ * @param group_id  UCL group identifier.
+
+ * @param fields    Command fields data.
+
+ */
+void zigpc_command_mapper_bygroup_iaswd_squawk_handler(
+  const dotdot_group_id_t group_id,
+  const uic_mqtt_dotdot_iaswd_command_squawk_fields_t *fields
+  
+) {
+
+  if (fields == nullptr) {
+    sl_log_warning(LOG_TAG, LOG_FMT_INVALID_FIELDS, "Squawk", "SquawkConfiguration");
+  }
+
+
+  std::vector< zigpc_zcl_frame_data_t > cmd_arg_list;
+  cmd_arg_list.push_back({ ZIGPC_ZCL_DATA_TYPE_MAP8, &fields->squawk_configuration });
+
+  zigpc_command_mapper_send_multicast(
+    group_id,
+    ZIGPC_ZCL_FRAME_TYPE_CMD_TO_SERVER,
+    ZIGPC_ZCL_CLUSTER_IASWD,
+    ZIGPC_ZCL_CLUSTER_IASWD_COMMAND_SQUAWK,
+    cmd_arg_list.size(),
+    cmd_arg_list.data()
+  );
+
+}
+
 
 sl_status_t zigpc_command_mapper_mqtt_bygroup_handlers_init(void)
 {
@@ -3836,5 +4078,12 @@ sl_status_t zigpc_command_mapper_mqtt_bygroup_handlers_init(void)
   uic_mqtt_dotdot_by_group_color_control_move_color_temperature_callback_set(zigpc_command_mapper_bygroup_color_control_move_color_temperature_handler);
   uic_mqtt_dotdot_by_group_color_control_step_color_temperature_callback_set(zigpc_command_mapper_bygroup_color_control_step_color_temperature_handler);
   uic_mqtt_dotdot_by_group_occupancy_sensing_write_attributes_callback_set(zigpc_command_mapper_bygroup_occupancy_sensing_write_attributes_handler);
+  uic_mqtt_dotdot_by_group_ias_zone_write_attributes_callback_set(zigpc_command_mapper_bygroup_ias_zone_write_attributes_handler);
+  uic_mqtt_dotdot_by_group_ias_zone_zone_enroll_response_callback_set(zigpc_command_mapper_bygroup_ias_zone_zone_enroll_response_handler);
+  uic_mqtt_dotdot_by_group_ias_zone_initiate_normal_operation_mode_callback_set(zigpc_command_mapper_bygroup_ias_zone_initiate_normal_operation_mode_handler);
+  uic_mqtt_dotdot_by_group_ias_zone_initiate_test_mode_callback_set(zigpc_command_mapper_bygroup_ias_zone_initiate_test_mode_handler);
+  uic_mqtt_dotdot_by_group_iaswd_write_attributes_callback_set(zigpc_command_mapper_bygroup_iaswd_write_attributes_handler);
+  uic_mqtt_dotdot_by_group_iaswd_start_warning_callback_set(zigpc_command_mapper_bygroup_iaswd_start_warning_handler);
+  uic_mqtt_dotdot_by_group_iaswd_squawk_callback_set(zigpc_command_mapper_bygroup_iaswd_squawk_handler);
   return SL_STATUS_OK;
 }

@@ -3,7 +3,7 @@
 /**
  * @file ccm.h
  */
-#ifndef ZWAVE_PSA_SECURE_VAULT
+#ifndef ZWAVE_PSA_AES
 
 #ifndef CCM_H_
 #define CCM_H_

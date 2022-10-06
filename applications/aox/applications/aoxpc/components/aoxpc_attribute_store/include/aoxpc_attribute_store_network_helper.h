@@ -44,7 +44,7 @@ extern "C" {
  * Note: If the HomeID of that UNID does not exist in the attribute store,
  * this function will create it.
  *
- * @param node_unid The unid_t value to parse and search in the tree.
+ * @param node_unid The aoa_id_t value to parse and search in the tree.
  *
  * @returns attribute_store_node_t representing the HomeID for the UNID
  *          in the attribute store
@@ -58,8 +58,8 @@ attribute_store_node_t aoxpc_attribute_store_network_helper_create_unid_node(
  * Note: If the UNID/endpoint does not exist in the attribute store, this function
  * will create it.
 
- * @param node_unid   The @ref unid_t value to parse and search in the tree.
- * @param endpoint_id The @ref zwave_endpoint_id_t to search under the UNID
+ * @param node_unid   The @ref aoa_id_t value to parse and search in the tree.
+ * @param endpoint_id The @ref dotdot_endpoint_id_t to search under the UNID
  *                    in the @ref attribute_store tree.
  *
  * @returns attribute_store_node_t representing the UNID/endpoint
@@ -84,8 +84,8 @@ attribute_store_node_t
 /**
  * @brief Take a UNID/endpoint combination and returns its attribute store node.
  *
- * @param node_unid   The @ref unid_t value to parse and search in the tree.
- * @param endpoint_id The @ref zwave_endpoint_id_t to search under the UNID
+ * @param node_unid   The @ref aoa_id_t value to parse and search in the tree.
+ * @param endpoint_id The @ref dotdot_endpoint_id_t to search under the UNID
  *                    in the @ref attribute_store tree.
  *
  * @returns attribute_store_node_t representing the UNID/endpoint

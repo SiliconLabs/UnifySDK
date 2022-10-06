@@ -13,6 +13,12 @@ ENV HEADLESS_HOST=true
 
 # Openthread border router
 ARG HOST_OPENTHREAD_BORDER_ROUTER_DEPS="libsystemd-dev cpputest"
+ARG TARGET_MATTER_BRIDGE_DEPS="libglib2.0-dev libavahi-client-dev"
+ARG HOST_MATTER_BRIDGE_DEPS="vim \
+  unzip bluez wget tar tk-dev \
+  libreadline6-dev libdb5.3-dev libgdbm-dev \
+  libexpat1-dev liblzma-dev libffi-dev \
+  libbz2-dev libavahi-client-dev"
 
 # Target dependenciesls
 ARG TARGET_DEPS="libavahi-client-dev libssl-dev libsystemd-dev libwrap0-dev uthash-dev \
@@ -24,8 +30,8 @@ ARG TARGET_DEPS="libavahi-client-dev libssl-dev libsystemd-dev libwrap0-dev utha
   libboost-log-dev procps libmbedtls-dev"
 
 # Host and Multiarch dependencies
-ARG HOST_DEPS="ninja-build git git-lfs zip unzip curl pkg-config \
-  xsltproc flex bison valgrind \
+ARG HOST_DEPS="ninja-build git zip unzip pkg-config \
+  xsltproc flex bison valgrind curl \
   python3 python3-pip python3-setuptools python3-wheel \
   ruby ruby-dev sudo \
   mscgen graphviz \
@@ -50,12 +56,19 @@ RUN apt-get update \
   #&& curl -sL http://repo.mosquitto.org/debian/mosquitto-buster.list > /etc/apt/sources.list.d/mosquitto-buster.list \
   && apt-get update \
   && apt-get install --no-install-recommends -y \
-  ${HOST_DEPS} ${HOST_OPENTHREAD_BORDER_ROUTER_DEPS} \
+  ${HOST_DEPS} ${HOST_MATTER_BRIDGE_DEPS} ${HOST_OPENTHREAD_BORDER_ROUTER_DEPS} \
   $(for dep in ${TARGET_DEPS} ; do \
+  for arch in ${ARCH} ; do echo $dep:$arch ; done ; \
+  done) \
+  $(for dep in ${TARGET_MATTER_BRIDGE_DEPS} ; do \
   for arch in ${ARCH} ; do echo $dep:$arch ; done ; \
   done) \
   $(for arch in ${ARCH} ; do echo crossbuild-essential-${arch} ; done)\
   && rm -rf /var/lib/apt/lists/*
+
+# Install latest git-lfs package
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
+  && apt-get install --no-install-recommends -y git-lfs
 
 # Install cmake 3.19.2
 RUN curl -L https://github.com/Kitware/CMake/releases/download/v3.19.2/cmake-3.19.2-Linux-x86_64.sh --output /tmp/cmake-3.19.2-Linux-x86_64.sh \
@@ -110,7 +123,7 @@ RUN touch /dummyroot/etc/ld.so.cache
 ENV QEMU_LD_PREFIX=/dummyroot
 
 # Rust Version to install
-ENV RUST_VERSION=1.60.0
+ENV RUST_VERSION=1.64.0
 # Rust and Cargo home directories
 ENV RUSTUP_HOME=/opt/rustup-home
 ENV CARGO_HOME=/opt/cargo-home

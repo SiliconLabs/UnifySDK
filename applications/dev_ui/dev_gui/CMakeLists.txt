@@ -23,10 +23,9 @@ add_custom_command(
           ${ZAP_CURRENT_OUTPUT_DIR}/src/cluster-types/supported-clusters.js
   COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/. .
   COMMAND cp -r ${ZAP_CURRENT_OUTPUT_DIR}/. .
-  COMMAND ${NPM_EXECUTABLE} version
+  COMMAND ${NPM_EXECUTABLE} version --allow-same-version 
           ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV}
-  COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps # With yarn 38s with npm
-                                                       # 69s change
+  COMMAND ${NPM_EXECUTABLE} install --legacy-peer-deps --allow-same-version # With yarn 38s with npm 69s change
   COMMAND ${NPM_EXECUTABLE} run build
   USES_TERMINAL)
 
@@ -51,7 +50,7 @@ add_custom_target(
 )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/public/index.html.in
-               ${CMAKE_CURRENT_SOURCE_DIR}/public/index.html)
+               ${CMAKE_CURRENT_BINARY_DIR}/public/index.html)
 
 if("${CMAKE_INSTALL_PREFIX}" STREQUAL "/usr")
   # Package as .debian

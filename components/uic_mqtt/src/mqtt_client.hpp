@@ -47,6 +47,17 @@ typedef std::function<void()> connection_status_callback_t;
 
 struct mqtt_client {
   public:
+
+  struct callback_info {
+    message_callback_ex_t callback;
+    void* user;
+
+    inline bool operator==(const callback_info& rhs ) const {
+      return ((callback == rhs.callback) && (user == rhs.user) );
+    }
+  };
+
+
   mqtt_client(
     const std::string &hostname,
     const uint32_t port,
@@ -105,9 +116,9 @@ struct mqtt_client {
    */
   int count_topics(const std::string &prefix_pattern);
 
-  void subscribe(const std::string &topic, message_callback_t callback);
+  void subscribe(const std::string &topic, const callback_info& callback);
   void resubscribe();
-  void unsubscribe(const std::string &topic, message_callback_t callback);
+  void unsubscribe(const std::string &topic,  const callback_info& callback);
 
   // Callbacks to the outside world
   void on_connect_callback_set(connection_callback_t);
@@ -129,6 +140,7 @@ struct mqtt_client {
   void after_connect_callback_call();
   void before_disconnect_callback_call();
 
+
   private:
   const std::string hostname;
   const uint32_t port;
@@ -145,7 +157,7 @@ struct mqtt_client {
   std::deque<message_queue_element_t> publishing_queue;
   std::queue<std::string> subscription_queue;
   std::queue<std::string> unsubscription_queue;
-  std::map<std::string, std::vector<message_callback_t>> subscription_callbacks;
+  std::map<std::string, std::vector<callback_info>> subscription_callbacks;
   std::set<std::string> retained_topics;
 
   bool publish_messages_waiting();

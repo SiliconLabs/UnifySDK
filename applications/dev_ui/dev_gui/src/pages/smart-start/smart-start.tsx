@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Form, Row, Table } from 'react-bootstrap';
+import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
 import * as FiIcons from 'react-icons/fi';
 import * as RiIcons from 'react-icons/ri';
 import { SmartStartProps, SmartStartState } from './smart-start-types';
@@ -137,7 +137,76 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
     this.props.SocketServer.send(JSON.stringify({ type: "get-smart-start-list" }));
   }
 
+  getField(item: any, fieldName: string, index: number) {
+    switch (fieldName) {
+      case "DSK":
+        return item.IsNew
+          ? <TextField value={item.DSK} onChange={this.updateStateByEvent.bind(this, index, 'DSK')} className="flex-input" label="DSK" size="small" type="text" variant="outlined"
+            InputProps={window.location.protocol === "https:" ? {
+              endAdornment: <InputAdornment position="end"> <Tooltip title="Scan QR-code">
+                <span className="icon">
+                  <RiIcons.RiQrScan2Line onClick={() => this.changeQrCodeDlg.current?.updateState(true, index)} />
+                </span>
+              </Tooltip> </InputAdornment>
+            } : {}}
+          />
+          : <TextField value={item.DSK} className="flex-input" label="DSK" size="small" type="text" />
+      case "Include":
+        return item.IsNew || item.IsEdit
+          ? <span className="icon">
+            {item.Include ? <FiIcons.FiCheckSquare color="#28a745" onClick={this.updateState.bind(this, index, "Include", false)} /> : <FiIcons.FiSquare color="#6c757d" onClick={this.updateState.bind(this, index, "Include", true)} />}
+          </span>
+          : <>
+            <span>
+              {item.Include ? <FiIcons.FiCheck color="#28a745" /> : <FiIcons.FiXCircle color="#6c757d" />}
+            </span>
+            <Tooltip title="Manual Intervention Required" hidden={!item || !item.ManualInterventionRequired}>
+              <span className="icon" >
+                <FiIcons.FiAlertTriangle color="orange" />
+              </span>
+            </Tooltip>
+          </>
+      case "PC UNID":
+        return item.IsNew || item.IsEdit
+          ? <TextField size="small" className="flex-input" type="text" variant="outlined" label="PC UNID" value={item.ProtocolControllerUnid} onChange={this.updateStateByEvent.bind(this, index, 'ProtocolControllerUnid')} />
+          : item.ProtocolControllerUnid
+      case "UNID":
+        return item.IsNew || item.IsEdit
+          ? <TextField size="small" className="flex-input" type="text" variant="outlined" label="UNID" value={item.Unid} onChange={this.updateStateByEvent.bind(this, index, 'Unid')} />
+          : item.Unid
+      case "Actions":
+        return item.IsNew || item.IsEdit
+          ? <><Tooltip title="Save">
+            <span className="icon">
+              <FiIcons.FiSave className="margin-h-5" onClick={this.save.bind(this, item)} />
+            </span>
+          </Tooltip>
+            <Tooltip title="Cancel">
+              <span className="icon">
+                <FiIcons.FiXCircle color="#dc3545" onClick={this.cancel.bind(this)} />
+              </span>
+            </Tooltip>
+          </>
+          : <><Tooltip title="Preferred Protocols">
+            <span className="icon">
+              <FiIcons.FiHeart className="margin-h-5" onClick={this.editPreferred.bind(this, item)} />
+            </span>
+          </Tooltip>
+            <Tooltip title="Edit">
+              <span className="icon">
+                <FiIcons.FiEdit className="margin-h-5" onClick={this.edit.bind(this, index)} />
+              </span>
+            </Tooltip>
+            <Tooltip title="Remove">
+              <span className="icon">
+                <FiIcons.FiTrash2 color="#dc3545" onClick={this.remove.bind(this, item)} />
+              </span>
+            </Tooltip></>
+    }
+  }
+
   render() {
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return (
       <>
         <h3>The SmartStart List</h3>
@@ -158,97 +227,82 @@ export class SmartStart extends React.Component<SmartStartProps, SmartStartState
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table striped hover>
-            <thead>
-              <tr className="">
-                <th className="wd-col-5">DSK</th>
-                <th className="text-center wd-col-1">Include</th>
-                <th className="wd-col-2">PC Unid</th>
-                <th className="wd-col-2">Unid</th>
-                <th className="wd-col-1">&ensp;</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.SmartStartList.map((item, index) => {
-                if (item.IsNew || item.IsEdit)
+          : (isMobile
+            ? <div className='table-content smart-start'>
+              {
+                this.state.SmartStartList.map((item, index) => {
                   return (
-                    <tr key={index} className={`editable-tr ${item.IsError ? "blinking-error" : ""}`}>
-                      <td>
-                        {item.IsEdit
-                          ? <TextField value={item.DSK} className="flex-input" label="DSK" size="small" type="text" />
-                          : <TextField value={item.DSK} onChange={this.updateStateByEvent.bind(this, index, 'DSK')} className="flex-input" label="DSK" size="small" type="text" variant="outlined"
-                            InputProps={window.location.protocol === "https:" ? {
-                              endAdornment: <InputAdornment position="end"> <Tooltip title="Scan QR-code">
-                                <span className="icon">
-                                  <RiIcons.RiQrScan2Line onClick={() => this.changeQrCodeDlg.current?.updateState(true, index)} />
-                                </span>
-                              </Tooltip> </InputAdornment>
-                            } : {}}
-                          />
-                        }
-                      </td>
-                      <td className="text-center vertical-middle">
-                        <span className="icon">
-                          {item.Include ? <FiIcons.FiCheckSquare color="#28a745" onClick={this.updateState.bind(this, index, "Include", false)} /> : <FiIcons.FiSquare color="#6c757d" onClick={this.updateState.bind(this, index, "Include", true)} />}
-                        </span>
-                      </td>
-                      <td>
-                        <TextField size="small" className="flex-input" type="text" variant="outlined" label="PC UNID" value={item.ProtocolControllerUnid} onChange={this.updateStateByEvent.bind(this, index, 'ProtocolControllerUnid')} />
-                      </td>
-                      <td>
-                        <TextField size="small" className="flex-input" type="text" variant="outlined" label="UNID" value={item.Unid} onChange={this.updateStateByEvent.bind(this, index, 'Unid')} />
-                      </td>
-                      <td className="text-center vertical-middle">
-                        <Tooltip title="Save">
-                          <span className="icon">
-                            <FiIcons.FiSave className="margin-h-5" onClick={this.save.bind(this, item)} />
-                          </span>
-                        </Tooltip>
-                        <Tooltip title="Cancel">
-                          <span className="icon">
-                            <FiIcons.FiXCircle color="#dc3545" onClick={this.cancel.bind(this)} />
-                          </span>
-                        </Tooltip>
-                      </td>
-                    </tr>
+                    <Card key={index} className={`${item.IsNew || item.IsEdit ? `editable-tr inline margin-v-10 ${item.IsError ? "blinking-error" : ""}` : "inline margin-v-10"}`}>
+                      <Card.Header className='flex'>
+                        <div className="col-sm-12 text-right">
+                          {this.getField(item, "Actions", index)}
+                        </div>
+                      </Card.Header>
+                      <Card.Body>
+                        <div className='col-sm-12'>
+                          <div className="col-sm-12 inline padding-v-5">{this.getField(item, "DSK", index)}</div>
+                          <div className="col-sm-6 inline padding-v-5"><b hidden={item.IsNew || item.IsEdit}><i>PC UNID: </i></b>{this.getField(item, "PC UNID", index)}</div>
+                          <div className="col-sm-6 inline padding-v-5"><b hidden={item.IsNew || item.IsEdit}><i>UNID: </i></b>{this.getField(item, "UNID", index)}</div>
+                          <div className="col-sm-6 inline padding-v-5"><b><i>Include: </i></b>{this.getField(item, "Include", index)}</div>
+                        </div>
+                      </Card.Body>
+                    </Card>
                   );
-                else return (
-                  <tr key={index}>
-                    <td><TextField value={item.DSK} label="DSK" size="small" className="flex-input" type="text" /></td>
-                    <td className="text-center vertical-middle">
-                      <span>
-                        {item.Include ? <FiIcons.FiCheck color="#28a745" /> : <FiIcons.FiXCircle color="#6c757d" />}
-                      </span>
-                      <Tooltip title="Manual Intervention Required" hidden={!item || !item.ManualInterventionRequired}>
-                        <span className="icon" >
-                          <FiIcons.FiAlertTriangle color="orange" />
-                        </span>
-                      </Tooltip>
+                })}
+            </div>
+            : <Table striped hover>
+              <thead>
+                <tr className="">
+                  <th className="wd-col-5">DSK</th>
+                  <th className="text-center wd-col-1">Include</th>
+                  <th className="wd-col-2">PC Unid</th>
+                  <th className="wd-col-2">Unid</th>
+                  <th className="wd-col-1">&ensp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.SmartStartList.map((item, index) =>
+                  <tr key={index} className={`${item.IsNew || item.IsEdit ? `editable-tr ${item.IsError ? "blinking-error" : ""}` : ""}`}>
+                    <td>{this.getField(item, "DSK", index)}
+                      {/* {item.IsEdit
+                            ? <TextField value={item.DSK} className="flex-input" label="DSK" size="small" type="text" />
+                            : <TextField value={item.DSK} onChange={this.updateStateByEvent.bind(this, index, 'DSK')} className="flex-input" label="DSK" size="small" type="text" variant="outlined"
+                              InputProps={window.location.protocol === "https:" ? {
+                                endAdornment: <InputAdornment position="end"> <Tooltip title="Scan QR-code">
+                                  <span className="icon">
+                                    <RiIcons.RiQrScan2Line onClick={() => this.changeQrCodeDlg.current?.updateState(true, index)} />
+                                  </span>
+                                </Tooltip> </InputAdornment>
+                              } : {}}
+                            />
+                          } */}
                     </td>
-                    <td className="vertical-middle">{item.ProtocolControllerUnid}</td>
-                    <td className="vertical-middle">{item.Unid}</td>
                     <td className="text-center vertical-middle">
-                      <Tooltip title="Preferred Protocols">
-                        <span className="icon">
-                          <FiIcons.FiHeart className="margin-h-5" onClick={this.editPreferred.bind(this, item)} />
-                        </span>
-                      </Tooltip>
-                      <Tooltip title="Edit">
-                        <span className="icon">
-                          <FiIcons.FiEdit className="margin-h-5" onClick={this.edit.bind(this, index)} />
-                        </span>
-                      </Tooltip>
-                      <Tooltip title="Remove">
-                        <span className="icon">
-                          <FiIcons.FiTrash2 color="#dc3545" onClick={this.remove.bind(this, item)} />
-                        </span>
-                      </Tooltip>
+                      {this.getField(item, "Include", index)}
+                    </td>
+                    <td className={`${item.IsNew || item.IsEdit ? "" : "vertical-middle"}`}>
+                      {this.getField(item, "PC UNID", index)}
+                    </td>
+                    <td className={`${item.IsNew || item.IsEdit ? "" : "vertical-middle"}`}>
+                      {this.getField(item, "UNID", index)}
+                    </td>
+                    <td className="text-center vertical-middle">
+                      {this.getField(item, "Actions", index)}
+                      {/* <Tooltip title="Save">
+                            <span className="icon">
+                              <FiIcons.FiSave className="margin-h-5" onClick={this.save.bind(this, item)} />
+                            </span>
+                          </Tooltip>
+                          <Tooltip title="Cancel">
+                            <span className="icon">
+                              <FiIcons.FiXCircle color="#dc3545" onClick={this.cancel.bind(this)} />
+                            </span>
+                          </Tooltip> */}
                     </td>
                   </tr>
-                );
-              })}
-            </tbody>
-          </Table>
+                )}
+              </tbody>
+            </Table>)
         }
 
         <PreferredProtocolsDlg ref={this.changePreferredDlg} SaveFunc={this.savePreferred.bind(this)} />

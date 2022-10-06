@@ -23,6 +23,7 @@
 #define CONFIG_ZWAVE_POLL_ATTRIBUTE_LIST_DIR \
   "@CMAKE_INSTALL_PREFIX@/share/uic"
 #define UIC_VAR_DIR "/var/lib/uic"
+#define SOURCE_DIR "@CMAKE_SOURCE_DIR@"
 
 #endif /* UIC_VERSION_H */
        /** @} (end addtogroup uic_version_h) */

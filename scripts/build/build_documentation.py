@@ -59,6 +59,7 @@ def setup_doxygen_project(project_name, outdir):
 setup_doxygen_project("doxygen_uic",        output_dir)
 setup_doxygen_project("doxygen_zigpc",      output_dir)
 setup_doxygen_project("doxygen_zpc",        output_dir)
+setup_doxygen_project("doxygen_aox",        output_dir)
 setup_doxygen_project("reference_ucl_mqtt", output_dir)
 
 sphinx_build_cmd=f"sphinx-build -b {args.builder} -c {doc_dir} -D root_doc={root_doc} -D version={sphinx_opt_version} -D release={sphinx_opt_version} -d {doctree_dir} {documentation_root} {output_dir}"

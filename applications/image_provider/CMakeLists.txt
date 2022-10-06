@@ -1,1 +1,1 @@
-cargo_build(MANIFEST_FILE Cargo.toml)
+cargo_build(NAME "uic-image-provider" DEPENDS unify)

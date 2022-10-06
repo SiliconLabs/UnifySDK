@@ -454,6 +454,26 @@ typedef struct {
 } zigpc_zclcmdparse_thermostat_get_relay_status_log_response_t;
 
 /**
+ * @brief Data for IASZone/ZoneStatusChangeNotification command.
+ *
+ */
+typedef struct {
+  uint16_t zone_status; /**< Command argument of type IasZoneStatus */
+  uint8_t extended_status; /**< Command argument of type map8 */
+  uint8_t zoneid; /**< Command argument of type uint8 */
+  uint16_t delay; /**< Command argument of type uint16 */
+} zigpc_zclcmdparse_ias_zone_zone_status_change_notification_t;
+
+/**
+ * @brief Data for IASZone/ZoneEnrollRequest command.
+ *
+ */
+typedef struct {
+  uint16_t zone_type; /**< Command argument of type IasZoneType */
+  uint16_t manufacturer_code; /**< Command argument of type uint16 */
+} zigpc_zclcmdparse_ias_zone_zone_enroll_request_t;
+
+/**
  * @brief Container for the different types of command data that can be
  * received.
  */
@@ -497,6 +517,8 @@ typedef union {
   zigpc_zclcmdparse_door_lock_programming_event_notification_t door_lock_programming_event_notification;
   zigpc_zclcmdparse_thermostat_get_weekly_schedule_response_t thermostat_get_weekly_schedule_response;
   zigpc_zclcmdparse_thermostat_get_relay_status_log_response_t thermostat_get_relay_status_log_response;
+  zigpc_zclcmdparse_ias_zone_zone_status_change_notification_t ias_zone_zone_status_change_notification;
+  zigpc_zclcmdparse_ias_zone_zone_enroll_request_t ias_zone_zone_enroll_request;
 } zigpc_zclcmdparse_callback_data_t;
 
 typedef void (*zigpc_zclcmdparse_callback_t)(

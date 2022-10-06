@@ -107,6 +107,18 @@ typedef void (*message_callback_t)(const char *topic,
                                    const char *message,
                                    const size_t message_length);
 
+/**
+ * @brief A callback type for pushing incoming messages.
+ *
+ * @param topic The topic the message came from
+ * @param message The message payload
+ * @param message_length The size of the message payload in bytes.
+ * @param user User defined pointer provided when subscribing
+ */
+typedef void (*message_callback_ex_t)(const char *topic,
+                                   const char *message,
+                                   const size_t message_length,void* user);
+
 // C-wrappers. All of those functions have a C++ counterpart within mqtt_client
 // or a C++ specific functionality that needs to be bridged to C-land (e.g. new).
 
@@ -236,6 +248,24 @@ void mqtt_client_subscribe(mqtt_client_t instance,
                            const char *topic,
                            message_callback_t callback);
 
+
+/**
+ * @brief Subscribe to an MQTT-topic.
+ *
+ * This, like (almost) all other functionality of the mqtt_client, is an asynchronous
+ * (non-blocking) call. The subscription request is queued and then sent if/when the
+ * connection-state allows for it.
+ *
+ * @param instance Pointer to an mqtt_client instance.
+ * @param topic The MQTT-topic name/pattern to subscribe to.
+ * @param callback Function-pointer to a callback-function that receives the incoming
+ *                 messages and has the \ref message_callback_t function-signature.
+ * @param user  User defined pointer which will be returned in the callback
+ */
+void mqtt_client_subscribe_ex(mqtt_client_t instance,
+                           const char *topic,
+                           message_callback_ex_t callback,void* user);
+
 /**
  * @brief Unsubscribe from an MQTT-topic
  *
@@ -252,6 +282,27 @@ void mqtt_client_subscribe(mqtt_client_t instance,
 void mqtt_client_unsubscribe(mqtt_client_t instance,
                              const char *topic,
                              message_callback_t callback);
+
+
+/**
+ * @brief Unsubscribe from an MQTT-topic
+ *
+ * This, like (almost) all other functionality of the mqtt_client, is an asynchronous
+ * (non-blocking) call. The unsubscription request is queued and then sent if/when the
+ * connection-state allows for it, with one caveat: The callback-registration happens
+ * immediately, but sending the unsubscription-command to the broker is asynchronous.
+ *
+ * @param instance Pointer to an mqtt_client instance.
+ * @param topic The MQTT-topic name/pattern to unsubscribe from.
+ * @param callback Function-pointer to a callback-function that receives the incoming
+ *                 messages and has the \ref message_callback_t function-signature.
+ * @param user    Argument used when registering
+ */
+void mqtt_client_unsubscribe_ex(mqtt_client_t instance,
+                             const char *topic,
+                             message_callback_ex_t callback,
+                             void* user);
+
 
 /**
  * @brief Allocates a new mqtt_client instance.

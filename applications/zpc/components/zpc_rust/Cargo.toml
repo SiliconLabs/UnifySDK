@@ -35,3 +35,4 @@ mockall = "0.11.0"
 
 [build-dependencies]
 unify_build_utils =  { path = "../../../../components/uic_rust/unify_build_utils" }
+anyhow= "*"

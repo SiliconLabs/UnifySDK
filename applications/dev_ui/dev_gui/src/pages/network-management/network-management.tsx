@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Button, Col, Dropdown, DropdownButton, Form, InputGroup, Modal, Row, Table } from 'react-bootstrap';
+import { Button, Card, Col, Dropdown, DropdownButton, Form, InputGroup, Modal, Row, Table } from 'react-bootstrap';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
 import { NetworkManagementProps, NetworkManagementState } from './network-management-types';
@@ -154,6 +154,7 @@ export class NetworkManagement extends React.Component<NetworkManagementProps, N
   }
 
   render() {
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return (
       <>
         <h3>Network Management</h3>
@@ -163,66 +164,21 @@ export class NetworkManagement extends React.Component<NetworkManagementProps, N
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table>
-            <thead>
-              <tr>
-                <th>Unid
-                  <span onClick={() => this.setSort("Unid")}>
-                    {this.state.IsSortAcs
-                      ? <BsIcons.BsSortDownAlt size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
-                      : <BsIcons.BsSortUp size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
-                    }
-                  </span>
-                </th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>State</th>
-                <th>Network Status</th>
-                <th>Supported State List</th>
-                <th>State Parameters</th>
-                <th>Requested State Parameters</th>
-                <th>&ensp;</th>
-              </tr>
-            </thead>
-            <tbody>
+          : (isMobile
+            ? <div className='table-content'>
               {this.state.NodeList.map((item, index) => {
                 if (!item.ClusterTypes || item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) === -1) return;
-                let tdClassName = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
+                let className = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
                 let title = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"
                   ? "Node is Offline"
                   : (item.Security?.toLocaleLowerCase().includes("s2") ? "" : "This node using non-secure communication and could be compromised");
                 return (
                   <Tooltip key={index} title={title}>
-                    <Fragment>
-                      <tr>
-                        <td className={tdClassName}>{item.Unid}</td>
-                        <td className={tdClassName}>
-                          <EditableAttribute Node={item} EpName={"ep0"} Cluster={item.ep?.ep0?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name"
-                            SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
-                        </td>
-                        <td className={tdClassName}>
-                          <EditableAttribute Node={item} EpName={"ep0"} Cluster={item.ep?.ep0?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Location"
-                            SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} GetOptions={this.getLocationList} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
-                        </td>
-                        <td className={tdClassName}>{item.NetworkManagementState.State}</td>
-                        <td className={tdClassName}>
-                          <div className="flex">
-                            <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
-                            <div> {item.NetworkStatus}</div>
-                          </div>
-                        </td>
-                        <td className={tdClassName}>{item.NetworkManagementState?.SupportedStateList
-                          ? <ul className='padding-l-15'> {item.NetworkManagementState.SupportedStateList.map((i: string, key: number) => <li key={key}>{i}</li>)}</ul>
-                          : "-"}</td>
-                        <td className={tdClassName}>{item.NetworkManagementState?.StateParameters
-                          ? <ul className='padding-l-15'>{Object.keys(item.NetworkManagementState.StateParameters).map((i: any, key: number) => <li key={key}>{i}: {item.NetworkManagementState?.StateParameters[i]}</li>)}</ul>
-                          : "-"}</td>
-                        <td className={tdClassName}>{item.NetworkManagementState?.RequestedStateParameters
-                          ? <ul className='padding-l-15'> {item.NetworkManagementState.RequestedStateParameters.map((i: string, key: number) => <li key={key}>{i}</li>)}</ul>
-                          : "-"}</td>
-                        <td>
+                    <Card key={index} className="inline margin-v-10">
+                      <Card.Header className='flex'><div className={`col-sm-6 ${className}`}><b>{item.Unid}</b></div>
+                        <div className="col-sm-5 float-right">
                           {item.NetworkManagementState?.SupportedStateList && item.NetworkManagementState.SupportedStateList.length
-                            ? <DropdownButton variant="outline-primary" title="Actions" className="float-right margin-r-5">
+                            ? <DropdownButton menuAlign={'right'} variant="outline-primary" title="Actions" className="float-right margin-r-5">
                               {item.NetworkManagementState.SupportedStateList.map((cmd: string, cmdIndex: number) => {
                                 return (
                                   <Dropdown.Item key={cmdIndex} onClick={() => this.runStateCommand(item.Unid, "run-state-command", cmd)}> {cmd.charAt(0).toUpperCase() + cmd.slice(1)}</Dropdown.Item>
@@ -232,14 +188,124 @@ export class NetworkManagement extends React.Component<NetworkManagementProps, N
                               <Dropdown.Item onClick={() => this.sendStateParams(item)} hidden={!item.NetworkManagementState.RequestedStateParameters}>Send State Params</Dropdown.Item>
                             </DropdownButton>
                             : <></>}
-                        </td>
-                      </tr>
-                    </Fragment >
+                        </div>
+                      </Card.Header>
+                      <Card.Body className={className}>
+                        <div className='col-sm-12 flex'>
+                          <div className="col-sm-6">
+                            <b><i>Name: </i></b><EditableAttribute Node={item} EpName="ep0" Cluster={item.ep?.ep0?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name"
+                              SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
+                          </div>
+                          <div className="col-sm-6">
+                            <b><i>Location: </i></b><EditableAttribute Node={item} EpName="ep0" Cluster={item.ep?.ep0?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Location"
+                              SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} GetOptions={this.getLocationList} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
+                          </div>
+                        </div>
+                        <div className='col-sm-12 flex'>
+                          <div className="col-sm-6">
+                            <div className="flex">
+                              <b><i>Status: </i></b> <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
+                              <div> {item.NetworkStatus}</div>
+                            </div>
+                          </div>
+                          <div className="col-sm-6"><b><i>State: </i></b>{item.NetworkManagementState?.State}</div>
+                        </div>
+                        <div className='col-sm-12 flex'>
+                          <div className="col-sm-6"><b><i>Supported State List: </i></b>{item.NetworkManagementState?.SupportedStateList
+                            ? <ul> {item.NetworkManagementState.SupportedStateList.map((i: string, key: number) => <li key={key}>{i}</li>)}</ul>
+                            : "-"}</div>
+                          <div className="col-sm-6"><b><i>Requested State Parameters: </i></b>{item.NetworkManagementState?.RequestedStateParameters
+                            ? <ul> {item.NetworkManagementState.RequestedStateParameters.map((i: string, key: number) => <li key={key}>{i}</li>)}</ul>
+                            : "-"}</div>
+                        </div>
+                        <div className='col-sm-12 flex'>
+                          <div className="col-sm-12"><b><i>State Parameters: </i></b>{item.NetworkManagementState?.StateParameters
+                            ? <ul>{Object.keys(item.NetworkManagementState.StateParameters).map((i: any, key: number) => <li key={key}>{i}: {item.NetworkManagementState?.StateParameters[i]}</li>)}</ul>
+                            : "-"}</div>
+                        </div>
+                      </Card.Body>
+                    </Card>
                   </Tooltip>
                 );
               })}
-            </tbody>
-          </Table>
+            </div>
+            : <Table>
+              <thead>
+                <tr>
+                  <th>Unid
+                    <span onClick={() => this.setSort("Unid")}>
+                      {this.state.IsSortAcs
+                        ? <BsIcons.BsSortDownAlt size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
+                        : <BsIcons.BsSortUp size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
+                      }
+                    </span>
+                  </th>
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>State</th>
+                  <th>Network Status</th>
+                  <th>Supported State List</th>
+                  <th>State Parameters</th>
+                  <th>Requested State Parameters</th>
+                  <th>&ensp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.NodeList.map((item, index) => {
+                  if (!item.ClusterTypes || item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) === -1) return;
+                  let tdClassName = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
+                  let title = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"
+                    ? "Node is Offline"
+                    : (item.Security?.toLocaleLowerCase().includes("s2") ? "" : "This node using non-secure communication and could be compromised");
+                  return (
+                    <Tooltip key={index} title={title}>
+                      <Fragment>
+                        <tr>
+                          <td className={tdClassName}>{item.Unid}</td>
+                          <td className={tdClassName}>
+                            <EditableAttribute Node={item} EpName={"ep0"} Cluster={item.ep?.ep0?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name"
+                              SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
+                          </td>
+                          <td className={tdClassName}>
+                            <EditableAttribute Node={item} EpName={"ep0"} Cluster={item.ep?.ep0?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Location"
+                              SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} GetOptions={this.getLocationList} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
+                          </td>
+                          <td className={tdClassName}>{item.NetworkManagementState.State}</td>
+                          <td className={tdClassName}>
+                            <div className="flex">
+                              <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
+                              <div> {item.NetworkStatus}</div>
+                            </div>
+                          </td>
+                          <td className={tdClassName}>{item.NetworkManagementState?.SupportedStateList
+                            ? <ul className='padding-l-15'> {item.NetworkManagementState.SupportedStateList.map((i: string, key: number) => <li key={key}>{i}</li>)}</ul>
+                            : "-"}</td>
+                          <td className={tdClassName}>{item.NetworkManagementState?.StateParameters
+                            ? <ul className='padding-l-15'>{Object.keys(item.NetworkManagementState.StateParameters).map((i: any, key: number) => <li key={key}>{i}: {item.NetworkManagementState?.StateParameters[i]}</li>)}</ul>
+                            : "-"}</td>
+                          <td className={tdClassName}>{item.NetworkManagementState?.RequestedStateParameters
+                            ? <ul className='padding-l-15'> {item.NetworkManagementState.RequestedStateParameters.map((i: string, key: number) => <li key={key}>{i}</li>)}</ul>
+                            : "-"}</td>
+                          <td>
+                            {item.NetworkManagementState?.SupportedStateList && item.NetworkManagementState.SupportedStateList.length
+                              ? <DropdownButton menuAlign={'right'} variant="outline-primary" title="Actions" className="float-right margin-r-5">
+                                {item.NetworkManagementState.SupportedStateList.map((cmd: string, cmdIndex: number) => {
+                                  return (
+                                    <Dropdown.Item key={cmdIndex} onClick={() => this.runStateCommand(item.Unid, "run-state-command", cmd)}> {cmd.charAt(0).toUpperCase() + cmd.slice(1)}</Dropdown.Item>
+                                  )
+                                })
+                                }
+                                <Dropdown.Item onClick={() => this.sendStateParams(item)} hidden={!item.NetworkManagementState.RequestedStateParameters}>Send State Params</Dropdown.Item>
+                              </DropdownButton>
+                              : <></>}
+                          </td>
+                        </tr>
+                      </Fragment >
+                    </Tooltip>
+                  );
+                })}
+              </tbody>
+            </Table>)
         }
 
         <Modal show={this.state.ShowSecurityModal} onHide={this.setSecurity.bind(this, false)}>
@@ -282,7 +348,7 @@ export class NetworkManagement extends React.Component<NetworkManagementProps, N
           SocketServer={this.props.SocketServer} />
 
         <ConfirmDlg ConfirmAction={this.runConfirmedCommand} ref={this.changeConfirmDlg} />
-        <StateParamsDlg ref={this.changeStateParamsDlg} SocketServer={this.props.SocketServer}/>
+        <StateParamsDlg ref={this.changeStateParamsDlg} SocketServer={this.props.SocketServer} />
       </>
     )
   };

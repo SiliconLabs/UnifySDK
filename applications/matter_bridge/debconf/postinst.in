@@ -1,0 +1,66 @@
+#!/bin/sh
+# postinst script for uic-matter-bridge
+#
+# see: dh_installdeb(1)
+
+set -e
+MATTER_VAR_DIR="${CPACK_PACKAGING_INSTALL_PREFIX}/var/lib/uic/matter"
+
+setup_uic_user() {
+        
+        # UIC Matter group
+        if ! getent group uic_matter >/dev/null; then
+                addgroup --quiet --system uic_matter
+        fi
+
+        # UIC Group
+        if ! getent group uic >/dev/null; then
+                addgroup --quiet --system uic
+        fi
+
+        # UIC User
+        if ! getent passwd uic >/dev/null; then
+                adduser --quiet --system --no-create-home --ingroup uic --home "$MATTER_VAR_DIR" --shell /usr/sbin/nologin uic
+                usermod -a -G dialout uic
+                usermod -a -G uic_matter uic
+        fi
+}
+
+enable_start_uic_matter_bridge() {
+  if type "systemctl" > /dev/null; then
+    systemctl --system daemon-reload
+    systemctl enable uic-matter-bridge.service
+    systemctl start uic-matter-bridge.service
+  fi
+}
+
+
+fix_permissions() {
+        mkdir -p $MATTER_VAR_DIR
+        usermod -a -G uic_matter $SUDO_USER
+        chown uic $MATTER_VAR_DIR
+        chgrp uic_matter $MATTER_VAR_DIR
+        chmod g+wr $MATTER_VAR_DIR
+        chmod a+wr $MATTER_VAR_DIR # This should be deleted
+}
+
+case "$1" in
+        configure)
+                setup_uic_user
+                fix_permissions
+        ;;
+
+        abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+        *)
+                echo "postinst called with unknown argument \`$1'" >&2
+                exit 1
+        ;;
+esac
+
+#DEBHELPER#
+
+enable_start_uic_matter_bridge
+
+exit 0

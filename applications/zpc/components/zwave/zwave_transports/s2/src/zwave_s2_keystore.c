@@ -147,6 +147,73 @@ bool keystore_network_key_read(uint8_t keyclass, uint8_t *buf)
   return true;
 }
 
+void write_key_to_file(uint8_t *key, FILE *f, bool is_key_s0)
+{
+  char str[NETWORK_KEY_SIZE * 2 + 1] = {0};
+  uint8_t index = 0;
+  
+  if (is_key_s0) {
+    index += snprintf(str, 4, "98;");
+  } else { 
+    index += snprintf(str, 4, "9F;");
+  }
+
+  for (int i = 0; i < NETWORK_KEY_SIZE; i++) {
+      index += snprintf(str + index, 4, "%02X", (uint8_t)key[i]);
+  }
+  snprintf(str + index, 4, ";1\n");
+
+  fputs(str, f);
+}
+
+void zwave_s2_save_security_keys(const char *filename)
+{
+  FILE *f;
+  uint8_t current_key[NETWORK_KEY_SIZE] = {};
+  f = fopen(filename, "w");
+  if (!f) {
+    sl_log_error(LOG_TAG,
+                "Could not open %s for writing S2 keys to it\n",
+                filename);
+    return;
+  }
+  uint8_t assigned_keys = zwave_s2_keystore_get_assigned_keys();
+
+  // Can not run in the loop here because the order of keys zniffer wants in the
+  // dump is different than the the way keys are identified by class
+
+  if (KEY_CLASS_S0 & assigned_keys) {
+    nvm_config_get(security_netkey, current_key);
+    write_key_to_file(current_key, f, 1);
+  }
+
+  if (KEY_CLASS_S2_UNAUTHENTICATED & assigned_keys) {
+    nvm_config_get(security2_key[0], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+
+  if (KEY_CLASS_S2_AUTHENTICATED & assigned_keys) {
+    nvm_config_get(security2_key[1], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+
+  if (KEY_CLASS_S2_AUTHENTICATED_LR & assigned_keys) {
+    nvm_config_get(security2_lr_key[0], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+ 
+  if (KEY_CLASS_S2_ACCESS & assigned_keys) {
+    nvm_config_get(security2_key[2], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+
+  if (KEY_CLASS_S2_ACCESS_LR & assigned_keys) {
+    nvm_config_get(security2_lr_key[1], current_key);
+    write_key_to_file(current_key, f, 0);
+  }
+  fclose(f);
+}
+
 void zwave_s2_log_security_keys(sl_log_level_t log_level)
 {
   (void)log_level;  // Unused in Z-Wave build.

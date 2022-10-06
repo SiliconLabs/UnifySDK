@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Button, Col, Dropdown, DropdownButton, Form, InputGroup, Modal, Row, Table } from 'react-bootstrap';
+import { Button, Card, Col, Dropdown, DropdownButton, Form, InputGroup, Modal, Row, Table } from 'react-bootstrap';
 import * as GrIcons from 'react-icons/gr';
 import * as BsIcons from 'react-icons/bs';
 import * as RiIcons from 'react-icons/ri';
@@ -189,7 +189,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
   actionsList = (actions: any[], title: string, runCmd: any, className: string, variant: string = "outline-primary", isSmall: boolean = false) => <>
     {actions && actions.length
-      ? <DropdownButton variant={variant} title={title} {...(isSmall ? { size: "sm" } : {})} className={`float-right ${className}`}>
+      ? <DropdownButton menuAlign={'right'} variant={variant} title={title} {...(isSmall ? { size: "sm" } : {})} className={`float-right ${className}`}>
         {actions.map((cmd: string, cmdIndex: number) => {
           return (
             <Dropdown.Item key={cmdIndex} onClick={() => runCmd(cmd)}> {cmd.charAt(0).toUpperCase() + cmd.slice(1)}</Dropdown.Item>
@@ -202,7 +202,7 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
 
   getRow = (item: any, index: number, epName: string = "", ep: any = null, indexEp: number = -1, endPointsCount: number = 1, clustersCount: number = 0) => {
     let tdClassName = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
-    
+
     return (<Fragment key={`${index}-${indexEp}`}>
       <tr>
         <td className={`${tdClassName} no-padding-h`} rowSpan={endPointsCount + clustersCount} hidden={indexEp > 0}>
@@ -277,6 +277,110 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
     )
   }
 
+  getEndPointsM = (item: any, index: number) => {
+    let endPoints = Object.keys(item.ep);
+    let clustersCount = item.IsExpanded ? endPoints.reduce((i, j: any) => (i + (item.ep[j].Clusters !== undefined ? Object.keys(item.ep[j].Clusters).filter(f => (ClusterViewOverrides as any)[f]?.IsExpandable).length : 0)), 0) : 0;
+    return (<>
+      {endPoints.map((endPoint: any, indexEp: number) => {
+        return this.getRowM(item, index, endPoint, item.ep[endPoint], indexEp, endPoints.length, clustersCount);
+      })}
+    </>)
+  }
+
+  getRowM = (item: any, index: number, epName: string = "", ep: any = null, indexEp: number = -1, endPointsCount: number = 1, clustersCount: number = 0) => {
+    let className = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable" ? "disabled" : "";
+
+    return (<Fragment key={`${index}-${indexEp}`}>
+      <Card key={index} className="inline margin-v-10">
+        <Card.Header className='flex'><div className={`col-sm-6 ${className}`}><b>{item.Unid}/{epName}</b></div>
+          <div className="col-sm-6 float-right">
+            {this.actionsList(item.SupportedCommands, "Commands", this.runCommand.bind(this, item.Unid, "run-node-command"), "")}
+            {this.actionsList(item.NetworkManagementState?.SupportedStateList, "States", this.runStateCommand.bind(this, item.Unid, "run-state-command"), "margin-r-5")}
+          </div>
+        </Card.Header>
+        <Card.Body className={className}>
+          <div className='col-sm-12 flex'>
+            <div className="col-sm-6">
+              <b><i>Name: </i></b><EditableAttribute Node={item} EpName={epName} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Name"
+                SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
+            </div>
+            <div className="col-sm-6">
+              <b><i>Location: </i></b><EditableAttribute Node={item} EpName={epName} Cluster={ep?.Clusters?.NameAndLocation} ClusterName="NameAndLocation" FieldName="Location"
+                SocketServer={this.props.SocketServer} ReplaceNameWithUnid={false} GetOptions={this.getLocationList} Disabled={item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"} />
+            </div>
+          </div>
+          <div className='col-sm-12 flex'>
+            <div className="col-sm-6">
+              <div className="flex">
+                <b><i>Status: </i></b> <span hidden={item.NetworkStatus !== "Offline" || item.NetworkStatus === "Unavailable"} className="margin-h-5"><RiIcons.RiWifiOffLine color="red" /></span>
+                <div>{item.NetworkStatus}</div>
+              </div>
+            </div>
+            <div className="col-sm-6"><b><i>State: </i></b>{item.NetworkManagementState?.State}</div>
+          </div>
+          <div className='col-sm-12 flex'>
+            <div className="col-sm-6">
+              <div className="flex">
+                <div>
+                  <div className={`dot-icon ${item.Security?.toLocaleLowerCase().includes("s2") ? "s2-security" : (item.Security?.toLocaleLowerCase().includes("s0") ? "s0-security" : "none-security")}`}></div>
+                </div>
+                <div>{item.Security}</div>
+              </div>
+            </div>
+            <div className="col-sm-6"><b><i>Max Delay: </i></b>{item.MaximumCommandDelay}</div>
+          </div>
+          <div className='col-sm-12'>
+            <div className='col-sm-12 flex'>
+              <span className='icon small padding-r-10' onClick={() => item.IsExpanded = !item.IsExpanded} hidden={item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1}>
+                {item.IsExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}</span>
+              <div className='flex'>{(item.ClusterTypes.indexOf(NodeTypesList.ProtocolController) > -1)
+                ? <><Tooltip title="Protocol Controller" ><span className="cursor-default padding-r-10"><GrIcons.GrNodes /></span></Tooltip>
+                  <Tooltip hidden={!item.RFTelemetry} title="RF Telemetry" ><span className="cursor-default padding-h-15"><Link to={`/rftelemetry`}><MdIcons.MdOutlineTransform color="black" /></Link></span></Tooltip></>
+                : ep && <div className='flex cluster-icon'><ClusterTypeTooltip Ep={[ep]} /></div>}
+              </div>
+            </div>
+          </div>
+          {
+            item.IsExpanded && ep?.Clusters !== undefined
+              ? Object.keys(ep.Clusters).map((cluster, clIndex) => {
+                if (!(ClusterViewOverrides as any)[cluster]?.IsExpandable)
+                  return null;
+                let tableRow = (ClusterViewOverrides as any)[cluster]?.ViewTable;
+                return (
+                  <Card key={clIndex} className="inline margin-v-10 small">
+                    <Card.Header className='flex'>
+                      <div className="col-sm-6"><b>{cluster}</b></div>
+                      <div className="col-sm-6 float-right">
+                        {this.actionsList(ep.Clusters[cluster].SupportedCommands && ep.Clusters[cluster].SupportedCommands.filter((cmd: any) => cmd !== "WriteAttributes"), "Commands", this.preSendCommand.bind(this, item, epName, cluster), "small", "outline-secondary", true)}
+                      </div>
+                    </Card.Header>
+                    <Card.Body>
+                      <div className='col-sm-12 flex-wrap'>
+                        {[...Array(6).keys()].map((i, iKey) => {
+                          let attributes = ep.Clusters[cluster].Attributes && Object.keys(ep.Clusters[cluster].Attributes);
+                          return (
+                            <div className="col-sm-6" key={`${clIndex}-${iKey}`}>
+                              {tableRow
+                                ? (tableRow[i] ? <span><b><i>{tableRow[i].Name}</i></b>: {tableRow[i].Value(ep.Clusters[cluster], undefined, ep.Clusters)}</span> : null)
+                                : <span>{attributes && attributes[i] !== undefined && attributes[i] !== "ClusterRevision" ? <span><b><i>{attributes[i]}</i></b>: {JSON.stringify(ep.Clusters[cluster].Attributes[attributes[i]]?.Reported || "")} </span> : null}</span>
+                              }
+                            </div>
+                          )
+                        }
+                        )}
+                      </div>
+                    </Card.Body>
+                  </Card>
+                )
+              })
+              : null
+          }
+        </Card.Body>
+      </Card>
+    </Fragment >
+    )
+  }
+
 
   preSendCommand(node: any, epName: string, clusterType: string, cmd: string) {
     let command = this.ClusterTypeAttrs[clusterType].server.commands.find((i: { name: string; }) => i.name === cmd);
@@ -320,10 +424,11 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
   }
 
   render() {
+    let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return (
       <>
         <h3>Node List</h3>
-        <Row hidden={!this.props.IsConnected} >
+        <Row hidden={!this.props.IsConnected} className="search-bar">
           <Col xs={12}>
             <TextField className="float-left flex-input col-sm-2" select label="Device Type" size="small" defaultValue="Any" disabled={this.state.DeviceTypes.size === 1}
               onChange={this.handleDeviceTypeChange} variant="outlined" >
@@ -349,34 +454,8 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
               <span className="no-content">No Content</span>
             </Col>
           </Row>
-          : <Table className='nodes-table'>
-            <thead>
-              <tr className="">
-                <th className="no-padding-h">
-                  <span className='icon small' onClick={this.toggleIsAllExpanded}>
-                    {this.state.IsAllExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}
-                  </span>
-                </th>
-                <th>Unid
-                  <span onClick={() => this.sort("Unid")}>
-                    {this.state.IsSortAcs
-                      ? <BsIcons.BsSortDownAlt size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
-                      : <BsIcons.BsSortUp size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
-                    }
-                  </span>
-                </th>
-                <th>Ep</th>
-                <th>Type</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>Status</th>
-                <th>Security</th>
-                <th>Max Delay</th>
-                <th>State</th>
-                <th>&ensp;</th>
-              </tr>
-            </thead>
-            <tbody>
+          : (isMobile
+            ? <div className='table-content'>
               {this.state.NodeList.map((item, index) => {
                 let title = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"
                   ? "Node is Offline"
@@ -385,15 +464,58 @@ export class Nodes extends React.Component<NodesProps, NodesState> {
                   <Tooltip key={index} title={title}>
                     {
                       !item.ep
-                        ? this.getRow(item, index)
-                        : this.getEndPoints(item, index)
+                        ? this.getRowM(item, index)
+                        : this.getEndPointsM(item, index)
                     }
-
                   </Tooltip>
                 );
               })}
-            </tbody>
-          </Table>
+            </div>
+            : <Table className='nodes-table'>
+              <thead>
+                <tr className="">
+                  <th className="no-padding-h">
+                    <span className='icon small' onClick={this.toggleIsAllExpanded}>
+                      {this.state.IsAllExpanded ? <BsIcons.BsDashSquare /> : <BsIcons.BsPlusSquare />}
+                    </span>
+                  </th>
+                  <th>Unid
+                    <span onClick={() => this.sort("Unid")}>
+                      {this.state.IsSortAcs
+                        ? <BsIcons.BsSortDownAlt size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
+                        : <BsIcons.BsSortUp size={20} className={`pointer padding-l-5 ${this.state.SortName === "Unid" ? "" : "disabled"}`} />
+                      }
+                    </span>
+                  </th>
+                  <th>Ep</th>
+                  <th>Type</th>
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Security</th>
+                  <th>Max Delay</th>
+                  <th>State</th>
+                  <th>&ensp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.NodeList.map((item, index) => {
+                  let title = item.NetworkStatus === "Offline" || item.NetworkStatus === "Unavailable"
+                    ? "Node is Offline"
+                    : (item.Security?.toLocaleLowerCase().includes("s2") ? "" : "This node using non-secure communication and could be compromised");
+                  return (
+                    <Tooltip key={index} title={title}>
+                      {
+                        !item.ep
+                          ? this.getRow(item, index)
+                          : this.getEndPoints(item, index)
+                      }
+
+                    </Tooltip>
+                  );
+                })}
+              </tbody>
+            </Table>)
         }
 
         <Modal show={this.state.ShowSecurityModal} onHide={this.setSecurity.bind(this, false)}>

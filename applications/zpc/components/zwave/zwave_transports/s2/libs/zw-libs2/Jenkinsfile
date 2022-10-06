@@ -1,0 +1,82 @@
+pipeline {
+    agent {
+        dockerfile true
+    }
+    stages {
+        stage('Build') {
+            steps {
+                dir('build') {
+                    sh 'cmake -GNinja -DZWAVE_INCLUDE_DIR=../test/dependencies/sdk670_headers/Z-Wave/include/ -DCMAKE_C_FLAGS="-fprofile-arcs -ftest-coverage" ..'
+                    sh 'build-wrapper --out-dir bw_output ninja'
+                    sh 'ninja libs2_doxygen | tee build_doc.log'
+                    sh 'ctest --no-compress-output -T test || true'
+                    sh './test/new_test_t2'
+                    sh 'gcovr --sonarqube ../coverage_sonarqube.xml --gcov-exclude=.*[Tt]est.* --gcov-exclude=.*mock.* -r .. --xml-pretty > ../gcov_results.xml'
+                    script {
+                        doxygen_warnings = scanForIssues tool: doxygen(pattern: 'build_doc.log')
+                    }
+                }
+                stash includes: '''build/doc/*docs.zip, build/doc/html/**''', name: 'doc'
+            }
+        }
+        stage ('SonarQube analysis of PR') {
+          when {
+              expression { env.CHANGE_ID != null }
+          }
+          steps {
+            withSonarQubeEnv('Silabs SonarQube') {
+              withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_SECRET')]) {
+                sh """sonar-scanner -X \
+                -D\"project.settings=sonar-project.properties\" \
+                -D\"sonar.cfamily.cache.path=${env.WORKSPACE}/.sonarqube-cache\" \
+                -D\"sonar.login=${SONAR_SECRET}\" \
+                -D\"sonar.pullrequest.key=${env.CHANGE_ID}\" \
+                -D\"sonar.pullrequest.branch=${env.CHANGE_BRANCH}\" \
+                -D\"sonar.pullrequest.base=${env.CHANGE_TARGET}\""""
+              }
+            }
+          }
+        } // SonarQube analysis of PR
+        stage ('SonarQube analysis of branch') {
+          when {
+              expression { env.CHANGE_ID == null }
+          }
+          steps {
+            withSonarQubeEnv('Silabs SonarQube') {
+              withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_SECRET')]) {
+                sh """sonar-scanner -X \
+                -D\"project.settings=sonar-project.properties\" \
+                -D\"sonar.cfamily.cache.path=${env.WORKSPACE}/.sonarqube-cache\" \
+                -D\"sonar.login=${SONAR_SECRET}\" \
+                -D\"sonar.branch.name=${env.BRANCH_NAME}\""""
+              }
+            }
+          }
+        } // SonarQube analysis of branch
+        stage('Post Build') {
+            steps {
+                cobertura(autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/gcov_results.xml',
+                          conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false,
+                          lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0',
+                          onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false)
+                xunit(thresholds: [failed(unstableNewThreshold: '0', unstableThreshold: '0'),
+                                skipped(unstableNewThreshold: '0', unstableThreshold: '0')],
+                    tools: [CTest(deleteOutputFiles: true,
+                                failIfNotNew: false,
+                                pattern: '**/Testing/**/Test.xml',
+                                skipNoTestFiles: true,
+                                stopProcessingIfError: false)])
+                dir('post_build') {
+                  unstash 'doc'
+                  publishHTML([allowMissing: false,
+                              alwaysLinkToLastBuild: false,
+                              keepAll: false,
+                              reportDir: 'build/doc/html',
+                              reportFiles: 'index.html', reportName: 'LibS2 Doxygen',
+                              reportTitles: ''])
+                  archiveArtifacts artifacts: '''build/doc/libs2_ver*docs.zip, build/doc/html/**''', onlyIfSuccessful: true
+                }
+            }
+        }
+    }
+}

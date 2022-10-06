@@ -12,7 +12,7 @@ add_library(
 
 target_link_libraries(zwave_network_management
                       PUBLIC zwave_controller uic_contiki
-                      PRIVATE zwave_s0 zwave_s2)
+                      PRIVATE zwave_s0 zwave_s2 zwave_smartstart_management)
 target_include_directories(zwave_network_management PUBLIC include)
 install(TARGETS zwave_network_management LIBRARY DESTINATION lib)
 

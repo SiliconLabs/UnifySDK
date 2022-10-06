@@ -24,14 +24,12 @@ extern BYTE MyNodeID; /* Instead of including ZIP_Router.h */
 
 
 #include <S2_external.h>
-#ifdef EFR32ZG
-#include <stdint.h>
-#include <stdbool.h>
-#include <CRC.h>
-#define CRC_FUNC CRC_CheckCrc16
-// Include Random.h from Components/Utils/
-#include "Random.h"
-extern uint8_t *g_ZwRandomSeed;
+#if defined (EFR32ZG) || defined(ZWAVE_ON_LINUX)
+  #include <stdint.h>
+  #include <stdbool.h>
+  #include <CRC.h>
+  #define CRC_FUNC CRC_CheckCrc16
+  #include "zpal_entropy.h"
 #endif
 
 #ifdef NEW_TEST_T2
@@ -377,7 +375,7 @@ bool ZW_TransportService_SendData(ts_param_t* p, const uint8_t *pData,
                                   uint16_t dataLength,
                                   void (*completedFunc)(uint8_t txStatus, TX_STATUS_TYPE *t))
 #else
-#ifdef EFR32ZG
+#if defined (EFR32ZG) || defined(ZWAVE_ON_LINUX)
 bool ZW_TransportService_SendData(ts_param_t* p, const uint8_t *pData,
                                   uint16_t dataLength,
                                   void (*completedFunc)(uint8_t txStatus, void *t))
@@ -814,10 +812,10 @@ static void send_first_frag()
     if (!scb.cmn.session_id) {
         /* Session id begins with random number and then keeps incrementing */
         /* Only 4 bits for session id, so max session id can be 0xf */
-        #ifdef EFR32ZG
-            scb.cmn.session_id = (GetRandom(g_ZwRandomSeed) % 0xf);
+        #if defined (EFR32ZG) || defined(ZWAVE_ON_LINUX)
+            scb.cmn.session_id = zpal_get_pseudo_random() % 0x10;
         #else
-            scb.cmn.session_id = (rand() % 0xf);
+            scb.cmn.session_id = (rand() % 0x10);
         #endif
     }
     else {
@@ -1696,7 +1694,7 @@ static uint8_t send_frag_complete_cmd()
 #endif
     /* FIXME: should this be in the call back? */
     t2_sm_post_event(EV_SUCCESS); /* just change the state to ST_RECEIVING */
-#if defined(__C51__) || ( defined(EFR32ZG) && !defined(NEW_TEST_T2) )
+#if defined(__C51__) || ( (defined(EFR32ZG) || defined(ZWAVE_ON_LINUX)) && !defined(NEW_TEST_T2) )
 #if DATAGRAM_SIZE_MAX > 250
 #error Datagram size does not fit in uin8_t.
 #endif

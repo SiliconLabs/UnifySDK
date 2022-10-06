@@ -12,7 +12,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 #![doc(html_no_source)]
 
-unify_tools::include_binding!(uic_mqtt);
+unify_tools::include_binding!(concat!(env!("OUT_DIR"),"/binding.rs"), uic_mqtt);
 
 mod mqtt_client;
 mod mqtt_client_trait;

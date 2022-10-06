@@ -16,9 +16,10 @@ message(STATUS "Building Unify with BUILD_TYPE=${CMAKE_BUILD_TYPE}")
 include(cmake/include/version.cmake)
 include(cmake/include/build_permutations.cmake)
 include(cmake/include/link_wrap.cmake)
+include(ExternalProject)
 
 project(
-  uic
+  UnifySdk
   LANGUAGES C CXX
   VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REV})
 
@@ -38,7 +39,8 @@ include(cmake/include/unittest.cmake)
 include(cmake/include/doxygen.cmake)
 include(cmake/include/package-helper.cmake)
 include(cmake/include/uic_helper.cmake)
-
+include(cmake/include/package.cmake)
+include(components/testframework/target_add_unittest.cmake)
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT
    OR NOT DEFINED CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX
@@ -47,7 +49,7 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT
 endif()
 
 enable_language(Rust)
-set(RUST_MIN_VERSION 1.60)
+set(RUST_MIN_VERSION 1.64)
 if(CMAKE_Rust_COMPILER_VERSION VERSION_LESS RUST_MIN_VERSION)
   message(
     FATAL_ERROR
@@ -56,38 +58,17 @@ if(CMAKE_Rust_COMPILER_VERSION VERSION_LESS RUST_MIN_VERSION)
       see https://www.rust-lang.org/tools/install documentation for further details."
   )
 endif()
+
 include(CMakeCargo)
 # ##############################################################################
 # Global includes
 # ##############################################################################
 include_directories(include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
-add_custom_command(
-  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
-  COMMAND bash ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sl_status_strings.sh >
-          ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/include/sl_status.h
-          ${CMAKE_CURRENT_SOURCE_DIR}/scripts/sl_status_strings.sh)
-add_custom_target(
-  sl_status_strings
-  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/include/sl_status_strings.h)
-
 # ##############################################################################
 # Subdirectories
-# ##############################################################################
+# #############################################################################
 add_subdirectory(components)
 add_subdirectory(applications)
 
-include(cmake/include/package.cmake)
-
-# This is for generating cmake/release-version.cmake to add to source package
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake.in
-               ${CMAKE_BINARY_DIR}/cmake/release-version.cmake)
-add_custom_target(
-  uic_source
-  COMMAND cp ${CMAKE_BINARY_DIR}/cmake/release-version.cmake
-          ${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake
-  COMMAND ${CMAKE_MAKE_PROGRAM} package_source
-  COMMAND rm ${CMAKE_CURRENT_SOURCE_DIR}/cmake/release-version.cmake)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/uic_version.h.in
-               ${CMAKE_BINARY_DIR}/include/uic_version.h)
+include(cmake/version_file.cmake)

@@ -13,7 +13,6 @@
 #![doc(html_no_source)]
 
 mod include_binding;
-pub mod platform_type_mapping;
 pub mod waker_cache;
 pub mod waker_cache_trait;
 pub use include_binding::*;

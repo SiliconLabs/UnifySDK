@@ -1,0 +1,5 @@
+#!/bin/sh
+if type "systemctl" > /dev/null; then
+    systemctl stop uic-matter-bridge.service
+    systemctl disable uic-matter-bridge.service
+fi

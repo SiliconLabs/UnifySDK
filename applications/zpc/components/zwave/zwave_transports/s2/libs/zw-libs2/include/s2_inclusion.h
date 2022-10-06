@@ -237,7 +237,7 @@ void s2_inclusion_key_grant(struct S2 *p_context, uint8_t include, uint8_t keys,
  *  @param[in] p_context Pointer to the context with information of peer to include.
  *  @param[in] p_peer    The peer to include
  */
-void s2_inclusion_including_start(struct S2 *p_context, s2_connection_t * p_peer);
+void s2_inclusion_including_start(struct S2 *p_context, const s2_connection_t * p_peer);
 #endif
 
 /** @brief This function requests a controller/slave to continue a secure inclusion as joining

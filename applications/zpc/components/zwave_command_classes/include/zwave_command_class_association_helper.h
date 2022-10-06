@@ -66,22 +66,6 @@ attribute_store_node_t get_group_content_node(zwave_node_id_t node_id,
                                               association_group_id_t group_id);
 
 /**
- * @brief Checks if an association is legal or if we will get in trouble
- * with cert if we establish it :-)
- *
- * @param node_id           Z-Wave Node ID
- * @param endpoint_id       Z-Wave Endpoint ID
- * @param group_id          Association Group ID
- * @param association       The Association object (i.e. destination)
- *
- * @returns true if we may establish the association, false otherwise
- */
-bool is_association_legal(zwave_node_id_t node_id,
-                          zwave_endpoint_id_t endpoint_id,
-                          association_group_id_t group_id,
-                          association_t association);
-
-/**
  * @brief Returns how many groups are supported by an endpoint
  *
  * @param node_id           Z-Wave Node ID

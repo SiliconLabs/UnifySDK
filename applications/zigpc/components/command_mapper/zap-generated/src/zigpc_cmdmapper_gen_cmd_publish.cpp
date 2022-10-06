@@ -785,6 +785,46 @@ static void zigpc_command_mapper_publish_thermostat_get_relay_status_log_respons
   );
 }
 
+static void zigpc_command_mapper_publish_ias_zone_zone_status_change_notification(
+  const zigbee_eui64_t eui64,
+  const zigbee_endpoint_id_t endpoint_id,
+  const zigpc_zclcmdparse_callback_data_t *data
+) {
+  std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
+
+  uic_mqtt_dotdot_ias_zone_command_zone_status_change_notification_fields_t fields = {
+    (uint16_t) data->ias_zone_zone_status_change_notification.zone_status,
+    (uint8_t) data->ias_zone_zone_status_change_notification.extended_status,
+    (uint8_t) data->ias_zone_zone_status_change_notification.zoneid,
+    (uint16_t) data->ias_zone_zone_status_change_notification.delay
+  };
+
+  uic_mqtt_dotdot_ias_zone_publish_generated_zone_status_change_notification_command(
+    unid.c_str(),
+    endpoint_id,
+    &fields
+  );
+}
+
+static void zigpc_command_mapper_publish_ias_zone_zone_enroll_request(
+  const zigbee_eui64_t eui64,
+  const zigbee_endpoint_id_t endpoint_id,
+  const zigpc_zclcmdparse_callback_data_t *data
+) {
+  std::string unid(zigpc_ucl::mqtt::build_unid(zigbee_eui64_to_uint(eui64)));
+
+  uic_mqtt_dotdot_ias_zone_command_zone_enroll_request_fields_t fields = {
+    (IasZoneType) data->ias_zone_zone_enroll_request.zone_type,
+    (uint16_t) data->ias_zone_zone_enroll_request.manufacturer_code
+  };
+
+  uic_mqtt_dotdot_ias_zone_publish_generated_zone_enroll_request_command(
+    unid.c_str(),
+    endpoint_id,
+    &fields
+  );
+}
+
 
 static constexpr char CMDPARSE_REGISTER_ERR_FMT_STR[] = "Failed to listen to %s/%s cmd parsing: 0x%X";
 
@@ -1181,6 +1221,26 @@ sl_status_t zigpc_command_mapper_setup_gen_cmd_publish_listeners(void) {
     return status;
   }
 
+  status = zigpc_zclcmdparse_register_callback(
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_STATUS_CHANGE_NOTIFICATION,
+    zigpc_command_mapper_publish_ias_zone_zone_status_change_notification
+  );
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"IASZone","ZoneStatusChangeNotification", status);
+    return status;
+  }
+
+  status = zigpc_zclcmdparse_register_callback(
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_REQUEST,
+    zigpc_command_mapper_publish_ias_zone_zone_enroll_request
+  );
+  if (status != SL_STATUS_OK) {
+    sl_log_error(LOG_TAG, CMDPARSE_REGISTER_ERR_FMT_STR,"IASZone","ZoneEnrollRequest", status);
+    return status;
+  }
+
   return status;
 }
 
@@ -1419,6 +1479,18 @@ void zigpc_command_mapper_cleanup_gen_cmd_publish_listeners(void) {
     ZIGPC_ZCL_CLUSTER_THERMOSTAT,
     ZIGPC_ZCL_CLUSTER_THERMOSTAT_COMMAND_GET_RELAY_STATUS_LOG_RESPONSE,
     zigpc_command_mapper_publish_thermostat_get_relay_status_log_response
+  );
+
+  zigpc_zclcmdparse_remove_callback(
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_STATUS_CHANGE_NOTIFICATION,
+    zigpc_command_mapper_publish_ias_zone_zone_status_change_notification
+  );
+
+  zigpc_zclcmdparse_remove_callback(
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE,
+    ZIGPC_ZCL_CLUSTER_IAS_ZONE_COMMAND_ZONE_ENROLL_REQUEST,
+    zigpc_command_mapper_publish_ias_zone_zone_enroll_request
   );
 }
 

@@ -10,11 +10,35 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
-use unify_build_utils::load_unify_environment;
+use anyhow::Result;
+use std::path::PathBuf;
+use unify_build_utils::*;
 
-fn main() {
-    load_unify_environment!(
-        dylib "uic_contiki",
-        dylib "uic_contiki_platform"
-    );
+fn main() -> Result<()> {
+    let link_dependencies = load_environment("uic_contiki")?;
+
+    let binding_file =
+        PathBuf::from(std::env::var("OUT_DIR").expect("OUT_DIR is always set during build stage"))
+            .join("binding.rs");
+            
+    let contiki_path = PathBuf::from(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../..",
+        "/uic_contiki"
+    ))
+    .to_string_lossy()
+    .to_string();
+
+    generate_bindings(
+        &binding_file,
+        &link_dependencies.include_directories,
+        Some("process.*|ctimer_.*|CLOCK_SECOND|.*_poll_.*|clock_.*"),
+        None,
+        Some(&[
+            format!("{}/core/sys/clock.h", contiki_path),
+            format!("{}/core/sys/ctimer.h", contiki_path),
+            format!("{}/core/sys/process.h", contiki_path),
+            format!("{}/include/request_poller.h", contiki_path),
+        ]),
+    )
 }

@@ -22,7 +22,7 @@ a Protocol Controller.
 ## Before getting started
 
 First and foremost, take a moment to read the
-[Unify Framework Specifications](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html).
+[Unify Framework Specifications](./unify_specifications/index.rst).
 They describe how the Protocol Controller will translate and display nodes
 using the UCL framework.
 
@@ -728,7 +728,7 @@ When the attributes are set in the Attribute Store, it is time to advertise
 them using MQTT.
 
 There are a few things to set in place to get the Protocol Controller to follow the
-[Unify Framework Specifications](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html)
+[Unify Framework Specifications](./unify_specifications/index.rst)
 
 ### Listening to incoming MQTT commands
 
@@ -1004,7 +1004,7 @@ needed, there is one final step to set up: The UCL node state.
 The node state topic is a special topic, which does not fully follow
 the standard cluster attributes publications.
 Refer to the
-[Unify Framework Specifications](https://siliconlabs.github.io/UnifySDK/unify-spec/html/index.html)
+[Unify Framework Specifications](./unify_specifications/index.rst)
 for details.
 
 Protocol Controllers must publish the node state for each node they can

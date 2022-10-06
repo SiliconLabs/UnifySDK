@@ -37,4 +37,3 @@ uic_add_shared_library(
   zwave_api
   zpc_utils)
 
-rust_add_native_libs(zwave)

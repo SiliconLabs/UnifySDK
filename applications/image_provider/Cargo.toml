@@ -31,3 +31,4 @@ serial_test = "*"
 
 [build-dependencies]
 unify_build_utils = { path = "../../components/uic_rust/unify_build_utils" }
+anyhow = "*"

@@ -21,7 +21,7 @@
 
 .con-item {
     display: flex;
-    padding: 5px 1px !important;
+    padding: 1px 1px !important;
     margin-bottom: auto;
     margin-top: auto;
 }
@@ -38,7 +38,34 @@
 }
 
 .connect-btn {
-    margin-right: -12px;
+    margin-right: 6px;
     padding-bottom: 5px;
     float: right;
+}
+
+.mobile .con-container {
+    font-size: 25px;
+    width: 100% !important;
+}
+
+.mobile .item-value input {
+    width: inherit;
+}
+
+.mobile .con-container .check-container {
+    display: flex;
+    line-height: 35px;
+}
+
+body:not(.mobile) .tls-name {
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
+    .logo-container {
+        max-width: 100%;
+    }
+    .item-title {
+        display: none;
+    }
 }

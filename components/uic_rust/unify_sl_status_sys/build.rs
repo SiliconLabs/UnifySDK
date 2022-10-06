@@ -59,8 +59,8 @@ fn write_file(status_codes: Vec<(String, String)>) -> std::io::Result<()> {
         file.write_all(line.as_bytes())?;
     }
 
-    let line = format!("\t\t _ => \"UNKNOWN_STATUS_CODE\",\n");
-    file.write_all(line.as_bytes())?;
+    let line = b"\t\t _ => \"UNKNOWN_STATUS_CODE\",\n";
+    file.write_all(line)?;
     file.write_all(b"\t}\t}")?;
 
     file.write_all(generate_map_functions(status_codes).as_bytes())?;

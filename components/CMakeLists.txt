@@ -1,3 +1,22 @@
+project(uic)
+cmake_minimum_required(VERSION 3.19)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/modules"
+                      ${CMAKE_MODULE_PATH})
+set(CMAKE_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/include"
+                       ${CMAKE_INCLUDE_PATH})
+enable_language(Rust)
+
+include(../cmake/include/target_interface_libraries.cmake)
+include(../cmake/include/uic_helper.cmake)
+include(../cmake/include/compatible_platform.cmake)
+include(../cmake/include/compiler_options.cmake)
+include(../cmake/include/version.cmake)
+include(../cmake/include/doxygen.cmake)
+include(../cmake/modules/CMakeCargo.cmake)
+include(../cmake/include/package-helper.cmake)
+include(../cmake/include/zap.cmake)
+include(../cmake/include/version_file.cmake)
+
 add_subdirectory(testframework)
 add_subdirectory(uic_definitions)
 add_subdirectory(uic_attribute_mapper)
@@ -24,99 +43,71 @@ add_subdirectory(uic_ota)
 add_subdirectory(uic_gbl_interface)
 add_subdirectory(unify_node_state_monitor)
 
-get_recursive_targets(targets ${CMAKE_CURRENT_SOURCE_DIR} True)
-list(LENGTH targets length)
-message(STATUS "found ${length} uic target(s)")
-set(UIC_LIBS "" )
-foreach(target ${targets})
-  get_target_property(target_type ${target} TYPE)
-  if(target_type MATCHES "UTILITY")
-    continue()
-  endif()
-  if(${target} MATCHES "stub\$")
-    message(STATUS "Not installing target" ${target} "to libuic as its stub")
-    continue()
-  endif()
-  if(NOT
-     (target_type MATCHES "SHARED_LIBRARY"
-      OR target_type MATCHES "EXECUTABLE"
-      OR target_type MATCHES "INTERFACE_LIBRARY"))
-    message(
-      FATAL_ERROR
-        "Target \"${target}\" is not a SHARED_LIBRARY. \
-         Unify Components are required to be build as shared libraries. change its type from ${target_type} to SHARED_LIBRARY.\
-         if you absolutely sure you dont require a shared library, you can disable this check with function \"disable_target_check(${target})\""
-    )
-  endif()
-  if(NOT (${target} MATCHES "^uic_" OR ${target} MATCHES "^unify_"))
-    message(
-      FATAL_ERROR
-        "Unify libraries need to start with uic_ or unify_. Update target \"${target}\" to \"uic_${target}\" or \"unify_${target}\"!"
-    )
-  endif()
+set(unify_components
+    unify_attribute_poll
+    uic_attribute_mapper
+    uic_attribute_resolver
+    uic_attribute_store
+    uic_attribute_utils
+    uic_config
+    uic_contiki
+    uic_contiki_platform
+    uic_datastore
+    uic_definitions
+    uic_dotdot
+    uic_dotdot_attribute_store
+    uic_dotdot_mqtt
+    uic_gbl_interface
+    uic_log
+    uic_main
+    uic_main_fd
+    uic_mqtt
+    uic_mqtt_client
+    uic_mqtt_wrapper
+    uic_multi_invoke
+    uic_ota
+    uic_smartstart_management
+    uic_stdin
+    unify_node_state_monitor
+    unify_validator)
 
-  install(TARGETS ${target} LIBRARY DESTINATION lib COMPONENT libuic)
-  list(APPEND UIC_LIBS "${target}")
+foreach(item ${unify_components})
+  get_target_property(target_type ${item} TYPE)
+  if(NOT target_type STREQUAL "INTERFACE_LIBRARY")
+    list(APPEND target-objects "\$<TARGET_OBJECTS:${item}>")
+  endif()
+  get_target_property(includes ${item} INTERFACE_INCLUDE_DIRECTORIES)
+  list(APPEND target-includes "${includes}")
 endforeach()
 
-string (REPLACE ";" " " UIC_LIBS "${UIC_LIBS}")
-configure_file(assets/libuic.pc.in libuic.pc @ONLY)
+add_library(unify ${target-objects})
+target_link_libraries(unify ${unify_components})
+
 install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/libuic.pc
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/libunify.pc
   DESTINATION share/pkgconfig
-  COMPONENT libuic-dev
-)
+  COMPONENT libuic-dev)
 
-file(GLOB_RECURSE PUBLIC_HEADERS
-../include/*.h
-../include/*.hpp
-uic_*/include/*.h
-uic_*/include/*.hpp
-unify_*/include/*.h
-unify_*/include/*.hpp
-uic_contiki/core/*.h
-uic_contiki/platform/posix/*.h
-)
+# This is not a real solution...
+if(APPLE)
+  set(UNIFY_EXTERNAL_LIBS
+      "-lboost_log-mt  -lboost_log_setup-mt -lboost_thread-mt -lboost_program_options-mt -lsqlite3 -lreadline -lmosquitto -lyaml-cpp -lpthread"
+  )
+else()
+  set(UNIFY_EXTERNAL_LIBS
+      "-lboost_log  -lboost_log_setup -lboost_thread -lboost_program_options -lsqlite3 -lreadline -lmosquitto -lyaml-cpp -lpthread"
+  )
+endif()
 
-file(GLOB_RECURSE PUBLIC_CONTIKI_SYS
-  uic_contiki/core/sys/*.h
-  uic_contiki/core/sys/*.hpp
-)
+configure_file(assets/libunify.pc.in libunify.pc @ONLY)
 
-file(GLOB_RECURSE PUBLIC_CONTIKI_LIB
-  uic_contiki/core/lib/*.h
-  uic_contiki/core/lib/*.hpp
-)
-
-add_custom_command(
-  COMMAND mkdir -p include/uic/lib
-  COMMAND mkdir -p include/uic/sys
-  COMMAND cp -r ${PUBLIC_HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/include/uic
-  COMMAND cp -r ${PUBLIC_CONTIKI_SYS} ${CMAKE_CURRENT_BINARY_DIR}/include/uic/sys
-  COMMAND cp -r ${PUBLIC_CONTIKI_LIB} ${CMAKE_CURRENT_BINARY_DIR}/include/uic/lib
-  OUTPUT include/uic/PUBLIC_HEADERS include/uic/sys/PUBLIC_CONTIKI_SYS include/uic/lib/PUBLIC_CONTIKI_LIB
-)
-
-add_custom_target(libuic-dev
-  DEPENDS include/uic/PUBLIC_HEADERS
-)
-
-add_dependencies(libuic-dev ${targets})
-
-install (
-FILES ${PUBLIC_HEADERS}
-DESTINATION include/uic
-COMPONENT libuic-dev
-)
-
-
-add_component_to_uic(
-  libuic-dev "Unified IOT Controller library - Development"
-  "libuic-dev" "libuic" "")
-
-add_component_to_uic(
-  libuic "Unified IOT Controller library"
-  "libuic" "libboost-program-options1.67.0,\
-      libedit2, libsqlite3-0, libmosquitto1,\
-      libyaml-cpp0.6, libboost-log1.67.0" "")
+install(
+  FILES ${headers}
+  DESTINATION uic
+  COMPONENT unify-dev)
+install(
+  FILES $<TARGET_FILE:unify>
+  DESTINATION lib
+  COMPONENT unify-dev)
+export(PACKAGE unify-dev)
 

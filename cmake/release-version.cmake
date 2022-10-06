@@ -1,1 +1,0 @@
-SET(GIT_VERSION "ver_1.2.1")

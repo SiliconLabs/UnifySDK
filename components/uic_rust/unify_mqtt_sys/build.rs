@@ -10,11 +10,27 @@
 // sections of the MSLA applicable to Source Code.
 //
 ///////////////////////////////////////////////////////////////////////////////
-use unify_build_utils::load_unify_environment;
+use anyhow::Result;
+use std::path::PathBuf;
+use unify_build_utils::*;
 
-fn main() {
-    load_unify_environment!(
-        dylib "uic_main",
-        dylib "uic_mqtt"
-    );
+fn main() -> Result<()> {
+    let link_dependencies = load_environment("uic_mqtt")?;
+
+    let binding_file =
+        PathBuf::from(std::env::var("OUT_DIR").expect("OUT_DIR is always set during build stage"))
+            .join("binding.rs");
+
+    let components_path = PathBuf::from(concat!(env!("CARGO_MANIFEST_DIR"), "/../.."));
+
+    generate_bindings(
+        &binding_file,
+        &link_dependencies.include_directories,
+        Some("mqtt.*|uic_mqtt.*"),
+        None,
+        Some(&[format!(
+            "{}/uic_mqtt/include/*.h",
+            components_path.to_string_lossy()
+        )]),
+    )
 }

@@ -33,7 +33,7 @@
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Basic::ResetToFactoryDefaults command
+ * fields of a Basic ResetToFactoryDefaults command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -45,7 +45,7 @@ std::string get_json_payload_for_basic_reset_to_factory_defaults_command(
 
 
 /**
- * @brief JSON parser for Basic::WriteAttributes command arguments.
+ * @brief JSON parser for Basic WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -57,7 +57,7 @@ void uic_mqtt_dotdot_parse_basic_write_attributes(
 
 
 /**
- * @brief JSON parser for PowerConfiguration::WriteAttributes command arguments.
+ * @brief JSON parser for PowerConfiguration WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -69,7 +69,7 @@ void uic_mqtt_dotdot_parse_power_configuration_write_attributes(
 
 
 /**
- * @brief JSON parser for DeviceTemperatureConfiguration::WriteAttributes command arguments.
+ * @brief JSON parser for DeviceTemperatureConfiguration WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -82,7 +82,7 @@ void uic_mqtt_dotdot_parse_device_temperature_configuration_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Identify::Identify command
+ * fields of a Identify Identify command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -96,7 +96,7 @@ std::string get_json_payload_for_identify_identify_command(
 
 
 /**
- * @brief JSON parser for Identify::Identify command arguments.
+ * @brief JSON parser for Identify Identify command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -110,7 +110,7 @@ void uic_mqtt_dotdot_parse_identify_identify(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Identify::IdentifyQueryResponse command
+ * fields of a Identify IdentifyQueryResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -124,7 +124,7 @@ std::string get_json_payload_for_identify_identify_query_response_command(
 
 
 /**
- * @brief JSON parser for Identify::IdentifyQueryResponse command arguments.
+ * @brief JSON parser for Identify IdentifyQueryResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -138,7 +138,7 @@ void uic_mqtt_dotdot_parse_identify_identify_query_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Identify::IdentifyQuery command
+ * fields of a Identify IdentifyQuery command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -151,7 +151,7 @@ std::string get_json_payload_for_identify_identify_query_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Identify::TriggerEffect command
+ * fields of a Identify TriggerEffect command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -165,7 +165,7 @@ std::string get_json_payload_for_identify_trigger_effect_command(
 
 
 /**
- * @brief JSON parser for Identify::TriggerEffect command arguments.
+ * @brief JSON parser for Identify TriggerEffect command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -180,7 +180,7 @@ void uic_mqtt_dotdot_parse_identify_trigger_effect(
 
 
 /**
- * @brief JSON parser for Identify::WriteAttributes command arguments.
+ * @brief JSON parser for Identify WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -193,7 +193,7 @@ void uic_mqtt_dotdot_parse_identify_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::AddGroup command
+ * fields of a Groups AddGroup command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -207,7 +207,7 @@ std::string get_json_payload_for_groups_add_group_command(
 
 
 /**
- * @brief JSON parser for Groups::AddGroup command arguments.
+ * @brief JSON parser for Groups AddGroup command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -223,7 +223,7 @@ void uic_mqtt_dotdot_parse_groups_add_group(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::AddGroupResponse command
+ * fields of a Groups AddGroupResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -237,7 +237,7 @@ std::string get_json_payload_for_groups_add_group_response_command(
 
 
 /**
- * @brief JSON parser for Groups::AddGroupResponse command arguments.
+ * @brief JSON parser for Groups AddGroupResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -253,7 +253,7 @@ void uic_mqtt_dotdot_parse_groups_add_group_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::ViewGroup command
+ * fields of a Groups ViewGroup command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -267,7 +267,7 @@ std::string get_json_payload_for_groups_view_group_command(
 
 
 /**
- * @brief JSON parser for Groups::ViewGroup command arguments.
+ * @brief JSON parser for Groups ViewGroup command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -281,7 +281,7 @@ void uic_mqtt_dotdot_parse_groups_view_group(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::ViewGroupResponse command
+ * fields of a Groups ViewGroupResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -295,7 +295,7 @@ std::string get_json_payload_for_groups_view_group_response_command(
 
 
 /**
- * @brief JSON parser for Groups::ViewGroupResponse command arguments.
+ * @brief JSON parser for Groups ViewGroupResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -313,7 +313,7 @@ void uic_mqtt_dotdot_parse_groups_view_group_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::GetGroupMembership command
+ * fields of a Groups GetGroupMembership command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -327,7 +327,7 @@ std::string get_json_payload_for_groups_get_group_membership_command(
 
 
 /**
- * @brief JSON parser for Groups::GetGroupMembership command arguments.
+ * @brief JSON parser for Groups GetGroupMembership command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -341,7 +341,7 @@ void uic_mqtt_dotdot_parse_groups_get_group_membership(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::GetGroupMembershipResponse command
+ * fields of a Groups GetGroupMembershipResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -355,7 +355,7 @@ std::string get_json_payload_for_groups_get_group_membership_response_command(
 
 
 /**
- * @brief JSON parser for Groups::GetGroupMembershipResponse command arguments.
+ * @brief JSON parser for Groups GetGroupMembershipResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -371,7 +371,7 @@ void uic_mqtt_dotdot_parse_groups_get_group_membership_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::RemoveGroup command
+ * fields of a Groups RemoveGroup command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -385,7 +385,7 @@ std::string get_json_payload_for_groups_remove_group_command(
 
 
 /**
- * @brief JSON parser for Groups::RemoveGroup command arguments.
+ * @brief JSON parser for Groups RemoveGroup command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -399,7 +399,7 @@ void uic_mqtt_dotdot_parse_groups_remove_group(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::RemoveGroupResponse command
+ * fields of a Groups RemoveGroupResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -413,7 +413,7 @@ std::string get_json_payload_for_groups_remove_group_response_command(
 
 
 /**
- * @brief JSON parser for Groups::RemoveGroupResponse command arguments.
+ * @brief JSON parser for Groups RemoveGroupResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -429,7 +429,7 @@ void uic_mqtt_dotdot_parse_groups_remove_group_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::RemoveAllGroups command
+ * fields of a Groups RemoveAllGroups command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -442,7 +442,7 @@ std::string get_json_payload_for_groups_remove_all_groups_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Groups::AddGroupIfIdentifying command
+ * fields of a Groups AddGroupIfIdentifying command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -456,7 +456,7 @@ std::string get_json_payload_for_groups_add_group_if_identifying_command(
 
 
 /**
- * @brief JSON parser for Groups::AddGroupIfIdentifying command arguments.
+ * @brief JSON parser for Groups AddGroupIfIdentifying command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -471,7 +471,7 @@ void uic_mqtt_dotdot_parse_groups_add_group_if_identifying(
 
 
 /**
- * @brief JSON parser for Groups::WriteAttributes command arguments.
+ * @brief JSON parser for Groups WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -484,7 +484,7 @@ void uic_mqtt_dotdot_parse_groups_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::AddScene command
+ * fields of a Scenes AddScene command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -498,7 +498,7 @@ std::string get_json_payload_for_scenes_add_scene_command(
 
 
 /**
- * @brief JSON parser for Scenes::AddScene command arguments.
+ * @brief JSON parser for Scenes AddScene command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -520,7 +520,7 @@ void uic_mqtt_dotdot_parse_scenes_add_scene(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::AddSceneResponse command
+ * fields of a Scenes AddSceneResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -534,7 +534,7 @@ std::string get_json_payload_for_scenes_add_scene_response_command(
 
 
 /**
- * @brief JSON parser for Scenes::AddSceneResponse command arguments.
+ * @brief JSON parser for Scenes AddSceneResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -552,7 +552,7 @@ void uic_mqtt_dotdot_parse_scenes_add_scene_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::ViewScene command
+ * fields of a Scenes ViewScene command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -566,7 +566,7 @@ std::string get_json_payload_for_scenes_view_scene_command(
 
 
 /**
- * @brief JSON parser for Scenes::ViewScene command arguments.
+ * @brief JSON parser for Scenes ViewScene command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -582,7 +582,7 @@ void uic_mqtt_dotdot_parse_scenes_view_scene(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::ViewSceneResponse command
+ * fields of a Scenes ViewSceneResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -596,7 +596,7 @@ std::string get_json_payload_for_scenes_view_scene_response_command(
 
 
 /**
- * @brief JSON parser for Scenes::ViewSceneResponse command arguments.
+ * @brief JSON parser for Scenes ViewSceneResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -620,7 +620,7 @@ void uic_mqtt_dotdot_parse_scenes_view_scene_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::RemoveScene command
+ * fields of a Scenes RemoveScene command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -634,7 +634,7 @@ std::string get_json_payload_for_scenes_remove_scene_command(
 
 
 /**
- * @brief JSON parser for Scenes::RemoveScene command arguments.
+ * @brief JSON parser for Scenes RemoveScene command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -650,7 +650,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_scene(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::RemoveSceneResponse command
+ * fields of a Scenes RemoveSceneResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -664,7 +664,7 @@ std::string get_json_payload_for_scenes_remove_scene_response_command(
 
 
 /**
- * @brief JSON parser for Scenes::RemoveSceneResponse command arguments.
+ * @brief JSON parser for Scenes RemoveSceneResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -682,7 +682,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_scene_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::RemoveAllScenes command
+ * fields of a Scenes RemoveAllScenes command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -696,7 +696,7 @@ std::string get_json_payload_for_scenes_remove_all_scenes_command(
 
 
 /**
- * @brief JSON parser for Scenes::RemoveAllScenes command arguments.
+ * @brief JSON parser for Scenes RemoveAllScenes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -710,7 +710,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_all_scenes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::RemoveAllScenesResponse command
+ * fields of a Scenes RemoveAllScenesResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -724,7 +724,7 @@ std::string get_json_payload_for_scenes_remove_all_scenes_response_command(
 
 
 /**
- * @brief JSON parser for Scenes::RemoveAllScenesResponse command arguments.
+ * @brief JSON parser for Scenes RemoveAllScenesResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -740,7 +740,7 @@ void uic_mqtt_dotdot_parse_scenes_remove_all_scenes_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::StoreScene command
+ * fields of a Scenes StoreScene command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -754,7 +754,7 @@ std::string get_json_payload_for_scenes_store_scene_command(
 
 
 /**
- * @brief JSON parser for Scenes::StoreScene command arguments.
+ * @brief JSON parser for Scenes StoreScene command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -770,7 +770,7 @@ void uic_mqtt_dotdot_parse_scenes_store_scene(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::StoreSceneResponse command
+ * fields of a Scenes StoreSceneResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -784,7 +784,7 @@ std::string get_json_payload_for_scenes_store_scene_response_command(
 
 
 /**
- * @brief JSON parser for Scenes::StoreSceneResponse command arguments.
+ * @brief JSON parser for Scenes StoreSceneResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -802,7 +802,7 @@ void uic_mqtt_dotdot_parse_scenes_store_scene_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::RecallScene command
+ * fields of a Scenes RecallScene command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -816,7 +816,7 @@ std::string get_json_payload_for_scenes_recall_scene_command(
 
 
 /**
- * @brief JSON parser for Scenes::RecallScene command arguments.
+ * @brief JSON parser for Scenes RecallScene command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -834,7 +834,7 @@ void uic_mqtt_dotdot_parse_scenes_recall_scene(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::GetSceneMembership command
+ * fields of a Scenes GetSceneMembership command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -848,7 +848,7 @@ std::string get_json_payload_for_scenes_get_scene_membership_command(
 
 
 /**
- * @brief JSON parser for Scenes::GetSceneMembership command arguments.
+ * @brief JSON parser for Scenes GetSceneMembership command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -862,7 +862,7 @@ void uic_mqtt_dotdot_parse_scenes_get_scene_membership(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::GetSceneMembershipResponse command
+ * fields of a Scenes GetSceneMembershipResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -876,7 +876,7 @@ std::string get_json_payload_for_scenes_get_scene_membership_response_command(
 
 
 /**
- * @brief JSON parser for Scenes::GetSceneMembershipResponse command arguments.
+ * @brief JSON parser for Scenes GetSceneMembershipResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -896,7 +896,7 @@ void uic_mqtt_dotdot_parse_scenes_get_scene_membership_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::EnhancedAddScene command
+ * fields of a Scenes EnhancedAddScene command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -910,7 +910,7 @@ std::string get_json_payload_for_scenes_enhanced_add_scene_command(
 
 
 /**
- * @brief JSON parser for Scenes::EnhancedAddScene command arguments.
+ * @brief JSON parser for Scenes EnhancedAddScene command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -932,7 +932,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::EnhancedAddSceneResponse command
+ * fields of a Scenes EnhancedAddSceneResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -946,7 +946,7 @@ std::string get_json_payload_for_scenes_enhanced_add_scene_response_command(
 
 
 /**
- * @brief JSON parser for Scenes::EnhancedAddSceneResponse command arguments.
+ * @brief JSON parser for Scenes EnhancedAddSceneResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -964,7 +964,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_add_scene_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::EnhancedViewScene command
+ * fields of a Scenes EnhancedViewScene command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -978,7 +978,7 @@ std::string get_json_payload_for_scenes_enhanced_view_scene_command(
 
 
 /**
- * @brief JSON parser for Scenes::EnhancedViewScene command arguments.
+ * @brief JSON parser for Scenes EnhancedViewScene command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -994,7 +994,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::EnhancedViewSceneResponse command
+ * fields of a Scenes EnhancedViewSceneResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1008,7 +1008,7 @@ std::string get_json_payload_for_scenes_enhanced_view_scene_response_command(
 
 
 /**
- * @brief JSON parser for Scenes::EnhancedViewSceneResponse command arguments.
+ * @brief JSON parser for Scenes EnhancedViewSceneResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1032,7 +1032,7 @@ void uic_mqtt_dotdot_parse_scenes_enhanced_view_scene_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::CopyScene command
+ * fields of a Scenes CopyScene command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1046,7 +1046,7 @@ std::string get_json_payload_for_scenes_copy_scene_command(
 
 
 /**
- * @brief JSON parser for Scenes::CopyScene command arguments.
+ * @brief JSON parser for Scenes CopyScene command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1068,7 +1068,7 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Scenes::CopySceneResponse command
+ * fields of a Scenes CopySceneResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1082,7 +1082,7 @@ std::string get_json_payload_for_scenes_copy_scene_response_command(
 
 
 /**
- * @brief JSON parser for Scenes::CopySceneResponse command arguments.
+ * @brief JSON parser for Scenes CopySceneResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1099,7 +1099,7 @@ void uic_mqtt_dotdot_parse_scenes_copy_scene_response(
 
 
 /**
- * @brief JSON parser for Scenes::WriteAttributes command arguments.
+ * @brief JSON parser for Scenes WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1112,7 +1112,7 @@ void uic_mqtt_dotdot_parse_scenes_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OnOff::Off command
+ * fields of a OnOff Off command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -1125,7 +1125,7 @@ std::string get_json_payload_for_on_off_off_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OnOff::On command
+ * fields of a OnOff On command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -1138,7 +1138,7 @@ std::string get_json_payload_for_on_off_on_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OnOff::Toggle command
+ * fields of a OnOff Toggle command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -1151,7 +1151,7 @@ std::string get_json_payload_for_on_off_toggle_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OnOff::OffWithEffect command
+ * fields of a OnOff OffWithEffect command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1165,7 +1165,7 @@ std::string get_json_payload_for_on_off_off_with_effect_command(
 
 
 /**
- * @brief JSON parser for OnOff::OffWithEffect command arguments.
+ * @brief JSON parser for OnOff OffWithEffect command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1181,7 +1181,7 @@ void uic_mqtt_dotdot_parse_on_off_off_with_effect(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OnOff::OnWithRecallGlobalScene command
+ * fields of a OnOff OnWithRecallGlobalScene command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -1194,7 +1194,7 @@ std::string get_json_payload_for_on_off_on_with_recall_global_scene_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OnOff::OnWithTimedOff command
+ * fields of a OnOff OnWithTimedOff command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1208,7 +1208,7 @@ std::string get_json_payload_for_on_off_on_with_timed_off_command(
 
 
 /**
- * @brief JSON parser for OnOff::OnWithTimedOff command arguments.
+ * @brief JSON parser for OnOff OnWithTimedOff command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1225,7 +1225,7 @@ void uic_mqtt_dotdot_parse_on_off_on_with_timed_off(
 
 
 /**
- * @brief JSON parser for OnOff::WriteAttributes command arguments.
+ * @brief JSON parser for OnOff WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1238,7 +1238,7 @@ void uic_mqtt_dotdot_parse_on_off_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Level::MoveToLevel command
+ * fields of a Level MoveToLevel command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1252,7 +1252,7 @@ std::string get_json_payload_for_level_move_to_level_command(
 
 
 /**
- * @brief JSON parser for Level::MoveToLevel command arguments.
+ * @brief JSON parser for Level MoveToLevel command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1272,7 +1272,7 @@ void uic_mqtt_dotdot_parse_level_move_to_level(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Level::Move command
+ * fields of a Level Move command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1286,7 +1286,7 @@ std::string get_json_payload_for_level_move_command(
 
 
 /**
- * @brief JSON parser for Level::Move command arguments.
+ * @brief JSON parser for Level Move command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1306,7 +1306,7 @@ void uic_mqtt_dotdot_parse_level_move(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Level::Step command
+ * fields of a Level Step command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1320,7 +1320,7 @@ std::string get_json_payload_for_level_step_command(
 
 
 /**
- * @brief JSON parser for Level::Step command arguments.
+ * @brief JSON parser for Level Step command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1342,7 +1342,7 @@ void uic_mqtt_dotdot_parse_level_step(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Level::Stop command
+ * fields of a Level Stop command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1356,7 +1356,7 @@ std::string get_json_payload_for_level_stop_command(
 
 
 /**
- * @brief JSON parser for Level::Stop command arguments.
+ * @brief JSON parser for Level Stop command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1372,7 +1372,7 @@ void uic_mqtt_dotdot_parse_level_stop(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Level::MoveToLevelWithOnOff command
+ * fields of a Level MoveToLevelWithOnOff command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1386,7 +1386,7 @@ std::string get_json_payload_for_level_move_to_level_with_on_off_command(
 
 
 /**
- * @brief JSON parser for Level::MoveToLevelWithOnOff command arguments.
+ * @brief JSON parser for Level MoveToLevelWithOnOff command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1406,7 +1406,7 @@ void uic_mqtt_dotdot_parse_level_move_to_level_with_on_off(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Level::MoveWithOnOff command
+ * fields of a Level MoveWithOnOff command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1420,7 +1420,7 @@ std::string get_json_payload_for_level_move_with_on_off_command(
 
 
 /**
- * @brief JSON parser for Level::MoveWithOnOff command arguments.
+ * @brief JSON parser for Level MoveWithOnOff command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1440,7 +1440,7 @@ void uic_mqtt_dotdot_parse_level_move_with_on_off(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Level::StepWithOnOff command
+ * fields of a Level StepWithOnOff command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1454,7 +1454,7 @@ std::string get_json_payload_for_level_step_with_on_off_command(
 
 
 /**
- * @brief JSON parser for Level::StepWithOnOff command arguments.
+ * @brief JSON parser for Level StepWithOnOff command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1476,7 +1476,7 @@ void uic_mqtt_dotdot_parse_level_step_with_on_off(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Level::StopWithOnOff command
+ * fields of a Level StopWithOnOff command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1490,7 +1490,7 @@ std::string get_json_payload_for_level_stop_with_on_off_command(
 
 
 /**
- * @brief JSON parser for Level::StopWithOnOff command arguments.
+ * @brief JSON parser for Level StopWithOnOff command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1506,7 +1506,7 @@ void uic_mqtt_dotdot_parse_level_stop_with_on_off(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Level::MoveToClosestFrequency command
+ * fields of a Level MoveToClosestFrequency command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1520,7 +1520,7 @@ std::string get_json_payload_for_level_move_to_closest_frequency_command(
 
 
 /**
- * @brief JSON parser for Level::MoveToClosestFrequency command arguments.
+ * @brief JSON parser for Level MoveToClosestFrequency command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1533,7 +1533,7 @@ void uic_mqtt_dotdot_parse_level_move_to_closest_frequency(
 
 
 /**
- * @brief JSON parser for Level::WriteAttributes command arguments.
+ * @brief JSON parser for Level WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1546,7 +1546,7 @@ void uic_mqtt_dotdot_parse_level_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Alarms::ResetAlarm command
+ * fields of a Alarms ResetAlarm command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1560,7 +1560,7 @@ std::string get_json_payload_for_alarms_reset_alarm_command(
 
 
 /**
- * @brief JSON parser for Alarms::ResetAlarm command arguments.
+ * @brief JSON parser for Alarms ResetAlarm command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1576,7 +1576,7 @@ void uic_mqtt_dotdot_parse_alarms_reset_alarm(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Alarms::Alarm command
+ * fields of a Alarms Alarm command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1590,7 +1590,7 @@ std::string get_json_payload_for_alarms_alarm_command(
 
 
 /**
- * @brief JSON parser for Alarms::Alarm command arguments.
+ * @brief JSON parser for Alarms Alarm command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1606,7 +1606,7 @@ void uic_mqtt_dotdot_parse_alarms_alarm(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Alarms::ResetAllAlarms command
+ * fields of a Alarms ResetAllAlarms command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -1619,7 +1619,7 @@ std::string get_json_payload_for_alarms_reset_all_alarms_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Alarms::GetAlarmResponse command
+ * fields of a Alarms GetAlarmResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1633,7 +1633,7 @@ std::string get_json_payload_for_alarms_get_alarm_response_command(
 
 
 /**
- * @brief JSON parser for Alarms::GetAlarmResponse command arguments.
+ * @brief JSON parser for Alarms GetAlarmResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1653,7 +1653,7 @@ void uic_mqtt_dotdot_parse_alarms_get_alarm_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Alarms::GetAlarm command
+ * fields of a Alarms GetAlarm command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -1666,7 +1666,7 @@ std::string get_json_payload_for_alarms_get_alarm_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Alarms::ResetAlarmLog command
+ * fields of a Alarms ResetAlarmLog command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -1678,7 +1678,7 @@ std::string get_json_payload_for_alarms_reset_alarm_log_command(
 
 
 /**
- * @brief JSON parser for Alarms::WriteAttributes command arguments.
+ * @brief JSON parser for Alarms WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1690,7 +1690,7 @@ void uic_mqtt_dotdot_parse_alarms_write_attributes(
 
 
 /**
- * @brief JSON parser for Time::WriteAttributes command arguments.
+ * @brief JSON parser for Time WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1703,7 +1703,7 @@ void uic_mqtt_dotdot_parse_time_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::ImageNotify command
+ * fields of a OTAUpgrade ImageNotify command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1717,7 +1717,7 @@ std::string get_json_payload_for_ota_upgrade_image_notify_command(
 
 
 /**
- * @brief JSON parser for OTAUpgrade::ImageNotify command arguments.
+ * @brief JSON parser for OTAUpgrade ImageNotify command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1739,7 +1739,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_image_notify(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::QueryNextImageRequest command
+ * fields of a OTAUpgrade QueryNextImageRequest command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1753,7 +1753,7 @@ std::string get_json_payload_for_ota_upgrade_query_next_image_request_command(
 
 
 /**
- * @brief JSON parser for OTAUpgrade::QueryNextImageRequest command arguments.
+ * @brief JSON parser for OTAUpgrade QueryNextImageRequest command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1775,7 +1775,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_query_next_image_request(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::QueryNextImageResponse command
+ * fields of a OTAUpgrade QueryNextImageResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1789,7 +1789,7 @@ std::string get_json_payload_for_ota_upgrade_query_next_image_response_command(
 
 
 /**
- * @brief JSON parser for OTAUpgrade::QueryNextImageResponse command arguments.
+ * @brief JSON parser for OTAUpgrade QueryNextImageResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1811,7 +1811,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_query_next_image_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::ImageBlockRequest command
+ * fields of a OTAUpgrade ImageBlockRequest command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1825,7 +1825,7 @@ std::string get_json_payload_for_ota_upgrade_image_block_request_command(
 
 
 /**
- * @brief JSON parser for OTAUpgrade::ImageBlockRequest command arguments.
+ * @brief JSON parser for OTAUpgrade ImageBlockRequest command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1853,7 +1853,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_image_block_request(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::ImagePageRequest command
+ * fields of a OTAUpgrade ImagePageRequest command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1867,7 +1867,7 @@ std::string get_json_payload_for_ota_upgrade_image_page_request_command(
 
 
 /**
- * @brief JSON parser for OTAUpgrade::ImagePageRequest command arguments.
+ * @brief JSON parser for OTAUpgrade ImagePageRequest command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1897,7 +1897,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_image_page_request(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::ImageBlockResponse command
+ * fields of a OTAUpgrade ImageBlockResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1911,7 +1911,7 @@ std::string get_json_payload_for_ota_upgrade_image_block_response_command(
 
 
 /**
- * @brief JSON parser for OTAUpgrade::ImageBlockResponse command arguments.
+ * @brief JSON parser for OTAUpgrade ImageBlockResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1941,7 +1941,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_image_block_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::UpgradeEndRequest command
+ * fields of a OTAUpgrade UpgradeEndRequest command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1955,7 +1955,7 @@ std::string get_json_payload_for_ota_upgrade_upgrade_end_request_command(
 
 
 /**
- * @brief JSON parser for OTAUpgrade::UpgradeEndRequest command arguments.
+ * @brief JSON parser for OTAUpgrade UpgradeEndRequest command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -1975,7 +1975,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_upgrade_end_request(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::UpgradeEndResponse command
+ * fields of a OTAUpgrade UpgradeEndResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -1989,7 +1989,7 @@ std::string get_json_payload_for_ota_upgrade_upgrade_end_response_command(
 
 
 /**
- * @brief JSON parser for OTAUpgrade::UpgradeEndResponse command arguments.
+ * @brief JSON parser for OTAUpgrade UpgradeEndResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2011,7 +2011,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_upgrade_end_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::QueryDeviceSpecificFileRequest command
+ * fields of a OTAUpgrade QueryDeviceSpecificFileRequest command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2025,7 +2025,7 @@ std::string get_json_payload_for_ota_upgrade_query_device_specific_file_request_
 
 
 /**
- * @brief JSON parser for OTAUpgrade::QueryDeviceSpecificFileRequest command arguments.
+ * @brief JSON parser for OTAUpgrade QueryDeviceSpecificFileRequest command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2047,7 +2047,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_query_device_specific_file_request(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a OTAUpgrade::QueryDeviceSpecificFileResponse command
+ * fields of a OTAUpgrade QueryDeviceSpecificFileResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2061,7 +2061,7 @@ std::string get_json_payload_for_ota_upgrade_query_device_specific_file_response
 
 
 /**
- * @brief JSON parser for OTAUpgrade::QueryDeviceSpecificFileResponse command arguments.
+ * @brief JSON parser for OTAUpgrade QueryDeviceSpecificFileResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2082,7 +2082,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_query_device_specific_file_response(
 
 
 /**
- * @brief JSON parser for OTAUpgrade::WriteAttributes command arguments.
+ * @brief JSON parser for OTAUpgrade WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2095,7 +2095,7 @@ void uic_mqtt_dotdot_parse_ota_upgrade_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a PollControl::CheckIn command
+ * fields of a PollControl CheckIn command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -2108,7 +2108,7 @@ std::string get_json_payload_for_poll_control_check_in_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a PollControl::CheckInResponse command
+ * fields of a PollControl CheckInResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2122,7 +2122,7 @@ std::string get_json_payload_for_poll_control_check_in_response_command(
 
 
 /**
- * @brief JSON parser for PollControl::CheckInResponse command arguments.
+ * @brief JSON parser for PollControl CheckInResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2138,7 +2138,7 @@ void uic_mqtt_dotdot_parse_poll_control_check_in_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a PollControl::FastPollStop command
+ * fields of a PollControl FastPollStop command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -2151,7 +2151,7 @@ std::string get_json_payload_for_poll_control_fast_poll_stop_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a PollControl::SetLongPollInterval command
+ * fields of a PollControl SetLongPollInterval command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2165,7 +2165,7 @@ std::string get_json_payload_for_poll_control_set_long_poll_interval_command(
 
 
 /**
- * @brief JSON parser for PollControl::SetLongPollInterval command arguments.
+ * @brief JSON parser for PollControl SetLongPollInterval command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2179,7 +2179,7 @@ void uic_mqtt_dotdot_parse_poll_control_set_long_poll_interval(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a PollControl::SetShortPollInterval command
+ * fields of a PollControl SetShortPollInterval command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2193,7 +2193,7 @@ std::string get_json_payload_for_poll_control_set_short_poll_interval_command(
 
 
 /**
- * @brief JSON parser for PollControl::SetShortPollInterval command arguments.
+ * @brief JSON parser for PollControl SetShortPollInterval command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2206,7 +2206,7 @@ void uic_mqtt_dotdot_parse_poll_control_set_short_poll_interval(
 
 
 /**
- * @brief JSON parser for PollControl::WriteAttributes command arguments.
+ * @brief JSON parser for PollControl WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2218,7 +2218,7 @@ void uic_mqtt_dotdot_parse_poll_control_write_attributes(
 
 
 /**
- * @brief JSON parser for ShadeConfiguration::WriteAttributes command arguments.
+ * @brief JSON parser for ShadeConfiguration WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2231,7 +2231,7 @@ void uic_mqtt_dotdot_parse_shade_configuration_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::LockDoor command
+ * fields of a DoorLock LockDoor command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2245,7 +2245,7 @@ std::string get_json_payload_for_door_lock_lock_door_command(
 
 
 /**
- * @brief JSON parser for DoorLock::LockDoor command arguments.
+ * @brief JSON parser for DoorLock LockDoor command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2259,7 +2259,7 @@ void uic_mqtt_dotdot_parse_door_lock_lock_door(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::LockDoorResponse command
+ * fields of a DoorLock LockDoorResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2273,7 +2273,7 @@ std::string get_json_payload_for_door_lock_lock_door_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::LockDoorResponse command arguments.
+ * @brief JSON parser for DoorLock LockDoorResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2287,7 +2287,7 @@ void uic_mqtt_dotdot_parse_door_lock_lock_door_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::UnlockDoor command
+ * fields of a DoorLock UnlockDoor command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2301,7 +2301,7 @@ std::string get_json_payload_for_door_lock_unlock_door_command(
 
 
 /**
- * @brief JSON parser for DoorLock::UnlockDoor command arguments.
+ * @brief JSON parser for DoorLock UnlockDoor command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2315,7 +2315,7 @@ void uic_mqtt_dotdot_parse_door_lock_unlock_door(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::UnlockDoorResponse command
+ * fields of a DoorLock UnlockDoorResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2329,7 +2329,7 @@ std::string get_json_payload_for_door_lock_unlock_door_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::UnlockDoorResponse command arguments.
+ * @brief JSON parser for DoorLock UnlockDoorResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2343,7 +2343,7 @@ void uic_mqtt_dotdot_parse_door_lock_unlock_door_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::Toggle command
+ * fields of a DoorLock Toggle command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2357,7 +2357,7 @@ std::string get_json_payload_for_door_lock_toggle_command(
 
 
 /**
- * @brief JSON parser for DoorLock::Toggle command arguments.
+ * @brief JSON parser for DoorLock Toggle command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2371,7 +2371,7 @@ void uic_mqtt_dotdot_parse_door_lock_toggle(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ToggleResponse command
+ * fields of a DoorLock ToggleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2385,7 +2385,7 @@ std::string get_json_payload_for_door_lock_toggle_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ToggleResponse command arguments.
+ * @brief JSON parser for DoorLock ToggleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2399,7 +2399,7 @@ void uic_mqtt_dotdot_parse_door_lock_toggle_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::UnlockWithTimeout command
+ * fields of a DoorLock UnlockWithTimeout command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2413,7 +2413,7 @@ std::string get_json_payload_for_door_lock_unlock_with_timeout_command(
 
 
 /**
- * @brief JSON parser for DoorLock::UnlockWithTimeout command arguments.
+ * @brief JSON parser for DoorLock UnlockWithTimeout command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2429,7 +2429,7 @@ void uic_mqtt_dotdot_parse_door_lock_unlock_with_timeout(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::UnlockWithTimeoutResponse command
+ * fields of a DoorLock UnlockWithTimeoutResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2443,7 +2443,7 @@ std::string get_json_payload_for_door_lock_unlock_with_timeout_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::UnlockWithTimeoutResponse command arguments.
+ * @brief JSON parser for DoorLock UnlockWithTimeoutResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2457,7 +2457,7 @@ void uic_mqtt_dotdot_parse_door_lock_unlock_with_timeout_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetLogRecord command
+ * fields of a DoorLock GetLogRecord command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2471,7 +2471,7 @@ std::string get_json_payload_for_door_lock_get_log_record_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetLogRecord command arguments.
+ * @brief JSON parser for DoorLock GetLogRecord command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2485,7 +2485,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetLogRecordResponse command
+ * fields of a DoorLock GetLogRecordResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2499,7 +2499,7 @@ std::string get_json_payload_for_door_lock_get_log_record_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetLogRecordResponse command arguments.
+ * @brief JSON parser for DoorLock GetLogRecordResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2525,7 +2525,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_log_record_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetPINCode command
+ * fields of a DoorLock SetPINCode command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2539,7 +2539,7 @@ std::string get_json_payload_for_door_lock_setpin_code_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetPINCode command arguments.
+ * @brief JSON parser for DoorLock SetPINCode command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2559,7 +2559,7 @@ void uic_mqtt_dotdot_parse_door_lock_setpin_code(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetPINCodeResponse command
+ * fields of a DoorLock SetPINCodeResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2573,7 +2573,7 @@ std::string get_json_payload_for_door_lock_setpin_code_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetPINCodeResponse command arguments.
+ * @brief JSON parser for DoorLock SetPINCodeResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2587,7 +2587,7 @@ void uic_mqtt_dotdot_parse_door_lock_setpin_code_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetPINCode command
+ * fields of a DoorLock GetPINCode command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2601,7 +2601,7 @@ std::string get_json_payload_for_door_lock_getpin_code_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetPINCode command arguments.
+ * @brief JSON parser for DoorLock GetPINCode command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2615,7 +2615,7 @@ void uic_mqtt_dotdot_parse_door_lock_getpin_code(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetPINCodeResponse command
+ * fields of a DoorLock GetPINCodeResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2629,7 +2629,7 @@ std::string get_json_payload_for_door_lock_getpin_code_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetPINCodeResponse command arguments.
+ * @brief JSON parser for DoorLock GetPINCodeResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2649,7 +2649,7 @@ void uic_mqtt_dotdot_parse_door_lock_getpin_code_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearPINCode command
+ * fields of a DoorLock ClearPINCode command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2663,7 +2663,7 @@ std::string get_json_payload_for_door_lock_clearpin_code_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ClearPINCode command arguments.
+ * @brief JSON parser for DoorLock ClearPINCode command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2677,7 +2677,7 @@ void uic_mqtt_dotdot_parse_door_lock_clearpin_code(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearPINCodeResponse command
+ * fields of a DoorLock ClearPINCodeResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2691,7 +2691,7 @@ std::string get_json_payload_for_door_lock_clearpin_code_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ClearPINCodeResponse command arguments.
+ * @brief JSON parser for DoorLock ClearPINCodeResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2705,7 +2705,7 @@ void uic_mqtt_dotdot_parse_door_lock_clearpin_code_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearAllPINCodes command
+ * fields of a DoorLock ClearAllPINCodes command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -2718,7 +2718,7 @@ std::string get_json_payload_for_door_lock_clear_allpin_codes_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearAllPINCodesResponse command
+ * fields of a DoorLock ClearAllPINCodesResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2732,7 +2732,7 @@ std::string get_json_payload_for_door_lock_clear_allpin_codes_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ClearAllPINCodesResponse command arguments.
+ * @brief JSON parser for DoorLock ClearAllPINCodesResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2746,7 +2746,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_allpin_codes_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetUserStatus command
+ * fields of a DoorLock SetUserStatus command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2760,7 +2760,7 @@ std::string get_json_payload_for_door_lock_set_user_status_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetUserStatus command arguments.
+ * @brief JSON parser for DoorLock SetUserStatus command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2776,7 +2776,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user_status(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetUserStatusResponse command
+ * fields of a DoorLock SetUserStatusResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2790,7 +2790,7 @@ std::string get_json_payload_for_door_lock_set_user_status_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetUserStatusResponse command arguments.
+ * @brief JSON parser for DoorLock SetUserStatusResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2804,7 +2804,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user_status_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetUserStatus command
+ * fields of a DoorLock GetUserStatus command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2818,7 +2818,7 @@ std::string get_json_payload_for_door_lock_get_user_status_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetUserStatus command arguments.
+ * @brief JSON parser for DoorLock GetUserStatus command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2832,7 +2832,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_status(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetUserStatusResponse command
+ * fields of a DoorLock GetUserStatusResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2846,7 +2846,7 @@ std::string get_json_payload_for_door_lock_get_user_status_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetUserStatusResponse command arguments.
+ * @brief JSON parser for DoorLock GetUserStatusResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2862,7 +2862,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_status_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetWeekdaySchedule command
+ * fields of a DoorLock SetWeekdaySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2876,7 +2876,7 @@ std::string get_json_payload_for_door_lock_set_weekday_schedule_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetWeekdaySchedule command arguments.
+ * @brief JSON parser for DoorLock SetWeekdaySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2902,7 +2902,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetWeekdayScheduleResponse command
+ * fields of a DoorLock SetWeekdayScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2916,7 +2916,7 @@ std::string get_json_payload_for_door_lock_set_weekday_schedule_response_command
 
 
 /**
- * @brief JSON parser for DoorLock::SetWeekdayScheduleResponse command arguments.
+ * @brief JSON parser for DoorLock SetWeekdayScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2930,7 +2930,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_weekday_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetWeekdaySchedule command
+ * fields of a DoorLock GetWeekdaySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2944,7 +2944,7 @@ std::string get_json_payload_for_door_lock_get_weekday_schedule_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetWeekdaySchedule command arguments.
+ * @brief JSON parser for DoorLock GetWeekdaySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -2960,7 +2960,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetWeekdayScheduleResponse command
+ * fields of a DoorLock GetWeekdayScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -2974,7 +2974,7 @@ std::string get_json_payload_for_door_lock_get_weekday_schedule_response_command
 
 
 /**
- * @brief JSON parser for DoorLock::GetWeekdayScheduleResponse command arguments.
+ * @brief JSON parser for DoorLock GetWeekdayScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3002,7 +3002,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_weekday_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearWeekdaySchedule command
+ * fields of a DoorLock ClearWeekdaySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3016,7 +3016,7 @@ std::string get_json_payload_for_door_lock_clear_weekday_schedule_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ClearWeekdaySchedule command arguments.
+ * @brief JSON parser for DoorLock ClearWeekdaySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3032,7 +3032,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_weekday_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearWeekdayScheduleResponse command
+ * fields of a DoorLock ClearWeekdayScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3046,7 +3046,7 @@ std::string get_json_payload_for_door_lock_clear_weekday_schedule_response_comma
 
 
 /**
- * @brief JSON parser for DoorLock::ClearWeekdayScheduleResponse command arguments.
+ * @brief JSON parser for DoorLock ClearWeekdayScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3060,7 +3060,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_weekday_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetYearDaySchedule command
+ * fields of a DoorLock SetYearDaySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3074,7 +3074,7 @@ std::string get_json_payload_for_door_lock_set_year_day_schedule_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetYearDaySchedule command arguments.
+ * @brief JSON parser for DoorLock SetYearDaySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3094,7 +3094,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_year_day_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetYearDayScheduleResponse command
+ * fields of a DoorLock SetYearDayScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3108,7 +3108,7 @@ std::string get_json_payload_for_door_lock_set_year_day_schedule_response_comman
 
 
 /**
- * @brief JSON parser for DoorLock::SetYearDayScheduleResponse command arguments.
+ * @brief JSON parser for DoorLock SetYearDayScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3122,7 +3122,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_year_day_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetYearDaySchedule command
+ * fields of a DoorLock GetYearDaySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3136,7 +3136,7 @@ std::string get_json_payload_for_door_lock_get_year_day_schedule_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetYearDaySchedule command arguments.
+ * @brief JSON parser for DoorLock GetYearDaySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3152,7 +3152,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetYearDayScheduleResponse command
+ * fields of a DoorLock GetYearDayScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3166,7 +3166,7 @@ std::string get_json_payload_for_door_lock_get_year_day_schedule_response_comman
 
 
 /**
- * @brief JSON parser for DoorLock::GetYearDayScheduleResponse command arguments.
+ * @brief JSON parser for DoorLock GetYearDayScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3188,7 +3188,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_year_day_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearYearDaySchedule command
+ * fields of a DoorLock ClearYearDaySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3202,7 +3202,7 @@ std::string get_json_payload_for_door_lock_clear_year_day_schedule_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ClearYearDaySchedule command arguments.
+ * @brief JSON parser for DoorLock ClearYearDaySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3218,7 +3218,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_year_day_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearYearDayScheduleResponse command
+ * fields of a DoorLock ClearYearDayScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3232,7 +3232,7 @@ std::string get_json_payload_for_door_lock_clear_year_day_schedule_response_comm
 
 
 /**
- * @brief JSON parser for DoorLock::ClearYearDayScheduleResponse command arguments.
+ * @brief JSON parser for DoorLock ClearYearDayScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3246,7 +3246,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_year_day_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetHolidaySchedule command
+ * fields of a DoorLock SetHolidaySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3260,7 +3260,7 @@ std::string get_json_payload_for_door_lock_set_holiday_schedule_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetHolidaySchedule command arguments.
+ * @brief JSON parser for DoorLock SetHolidaySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3280,7 +3280,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_holiday_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetHolidayScheduleResponse command
+ * fields of a DoorLock SetHolidayScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3294,7 +3294,7 @@ std::string get_json_payload_for_door_lock_set_holiday_schedule_response_command
 
 
 /**
- * @brief JSON parser for DoorLock::SetHolidayScheduleResponse command arguments.
+ * @brief JSON parser for DoorLock SetHolidayScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3308,7 +3308,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_holiday_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetHolidaySchedule command
+ * fields of a DoorLock GetHolidaySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3322,7 +3322,7 @@ std::string get_json_payload_for_door_lock_get_holiday_schedule_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetHolidaySchedule command arguments.
+ * @brief JSON parser for DoorLock GetHolidaySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3336,7 +3336,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetHolidayScheduleResponse command
+ * fields of a DoorLock GetHolidayScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3350,7 +3350,7 @@ std::string get_json_payload_for_door_lock_get_holiday_schedule_response_command
 
 
 /**
- * @brief JSON parser for DoorLock::GetHolidayScheduleResponse command arguments.
+ * @brief JSON parser for DoorLock GetHolidayScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3372,7 +3372,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_holiday_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearHolidaySchedule command
+ * fields of a DoorLock ClearHolidaySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3386,7 +3386,7 @@ std::string get_json_payload_for_door_lock_clear_holiday_schedule_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ClearHolidaySchedule command arguments.
+ * @brief JSON parser for DoorLock ClearHolidaySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3400,7 +3400,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_holiday_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearHolidayScheduleResponse command
+ * fields of a DoorLock ClearHolidayScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3414,7 +3414,7 @@ std::string get_json_payload_for_door_lock_clear_holiday_schedule_response_comma
 
 
 /**
- * @brief JSON parser for DoorLock::ClearHolidayScheduleResponse command arguments.
+ * @brief JSON parser for DoorLock ClearHolidayScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3428,7 +3428,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_holiday_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetUserType command
+ * fields of a DoorLock SetUserType command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3442,7 +3442,7 @@ std::string get_json_payload_for_door_lock_set_user_type_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetUserType command arguments.
+ * @brief JSON parser for DoorLock SetUserType command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3458,7 +3458,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user_type(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetUserTypeResponse command
+ * fields of a DoorLock SetUserTypeResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3472,7 +3472,7 @@ std::string get_json_payload_for_door_lock_set_user_type_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetUserTypeResponse command arguments.
+ * @brief JSON parser for DoorLock SetUserTypeResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3486,7 +3486,7 @@ void uic_mqtt_dotdot_parse_door_lock_set_user_type_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetUserType command
+ * fields of a DoorLock GetUserType command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3500,7 +3500,7 @@ std::string get_json_payload_for_door_lock_get_user_type_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetUserType command arguments.
+ * @brief JSON parser for DoorLock GetUserType command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3514,7 +3514,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_type(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetUserTypeResponse command
+ * fields of a DoorLock GetUserTypeResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3528,7 +3528,7 @@ std::string get_json_payload_for_door_lock_get_user_type_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetUserTypeResponse command arguments.
+ * @brief JSON parser for DoorLock GetUserTypeResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3544,7 +3544,7 @@ void uic_mqtt_dotdot_parse_door_lock_get_user_type_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetRFIDCode command
+ * fields of a DoorLock SetRFIDCode command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3558,7 +3558,7 @@ std::string get_json_payload_for_door_lock_setrfid_code_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetRFIDCode command arguments.
+ * @brief JSON parser for DoorLock SetRFIDCode command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3578,7 +3578,7 @@ void uic_mqtt_dotdot_parse_door_lock_setrfid_code(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::SetRFIDCodeResponse command
+ * fields of a DoorLock SetRFIDCodeResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3592,7 +3592,7 @@ std::string get_json_payload_for_door_lock_setrfid_code_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::SetRFIDCodeResponse command arguments.
+ * @brief JSON parser for DoorLock SetRFIDCodeResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3606,7 +3606,7 @@ void uic_mqtt_dotdot_parse_door_lock_setrfid_code_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetRFIDCode command
+ * fields of a DoorLock GetRFIDCode command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3620,7 +3620,7 @@ std::string get_json_payload_for_door_lock_getrfid_code_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetRFIDCode command arguments.
+ * @brief JSON parser for DoorLock GetRFIDCode command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3634,7 +3634,7 @@ void uic_mqtt_dotdot_parse_door_lock_getrfid_code(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::GetRFIDCodeResponse command
+ * fields of a DoorLock GetRFIDCodeResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3648,7 +3648,7 @@ std::string get_json_payload_for_door_lock_getrfid_code_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::GetRFIDCodeResponse command arguments.
+ * @brief JSON parser for DoorLock GetRFIDCodeResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3668,7 +3668,7 @@ void uic_mqtt_dotdot_parse_door_lock_getrfid_code_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearRFIDCode command
+ * fields of a DoorLock ClearRFIDCode command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3682,7 +3682,7 @@ std::string get_json_payload_for_door_lock_clearrfid_code_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ClearRFIDCode command arguments.
+ * @brief JSON parser for DoorLock ClearRFIDCode command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3696,7 +3696,7 @@ void uic_mqtt_dotdot_parse_door_lock_clearrfid_code(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearRFIDCodeResponse command
+ * fields of a DoorLock ClearRFIDCodeResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3710,7 +3710,7 @@ std::string get_json_payload_for_door_lock_clearrfid_code_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ClearRFIDCodeResponse command arguments.
+ * @brief JSON parser for DoorLock ClearRFIDCodeResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3724,7 +3724,7 @@ void uic_mqtt_dotdot_parse_door_lock_clearrfid_code_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearAllRFIDCodes command
+ * fields of a DoorLock ClearAllRFIDCodes command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -3737,7 +3737,7 @@ std::string get_json_payload_for_door_lock_clear_allrfid_codes_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ClearAllRFIDCodesResponse command
+ * fields of a DoorLock ClearAllRFIDCodesResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3751,7 +3751,7 @@ std::string get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
 
 
 /**
- * @brief JSON parser for DoorLock::ClearAllRFIDCodesResponse command arguments.
+ * @brief JSON parser for DoorLock ClearAllRFIDCodesResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3765,7 +3765,7 @@ void uic_mqtt_dotdot_parse_door_lock_clear_allrfid_codes_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::OperatingEventNotification command
+ * fields of a DoorLock OperatingEventNotification command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3779,7 +3779,7 @@ std::string get_json_payload_for_door_lock_operating_event_notification_command(
 
 
 /**
- * @brief JSON parser for DoorLock::OperatingEventNotification command arguments.
+ * @brief JSON parser for DoorLock OperatingEventNotification command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3803,7 +3803,7 @@ void uic_mqtt_dotdot_parse_door_lock_operating_event_notification(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a DoorLock::ProgrammingEventNotification command
+ * fields of a DoorLock ProgrammingEventNotification command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3817,7 +3817,7 @@ std::string get_json_payload_for_door_lock_programming_event_notification_comman
 
 
 /**
- * @brief JSON parser for DoorLock::ProgrammingEventNotification command arguments.
+ * @brief JSON parser for DoorLock ProgrammingEventNotification command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3844,7 +3844,7 @@ void uic_mqtt_dotdot_parse_door_lock_programming_event_notification(
 
 
 /**
- * @brief JSON parser for DoorLock::WriteAttributes command arguments.
+ * @brief JSON parser for DoorLock WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3857,7 +3857,7 @@ void uic_mqtt_dotdot_parse_door_lock_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a WindowCovering::UpOrOpen command
+ * fields of a WindowCovering UpOrOpen command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -3870,7 +3870,7 @@ std::string get_json_payload_for_window_covering_up_or_open_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a WindowCovering::DownOrClose command
+ * fields of a WindowCovering DownOrClose command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -3883,7 +3883,7 @@ std::string get_json_payload_for_window_covering_down_or_close_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a WindowCovering::Stop command
+ * fields of a WindowCovering Stop command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -3896,7 +3896,7 @@ std::string get_json_payload_for_window_covering_stop_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a WindowCovering::GoToLiftValue command
+ * fields of a WindowCovering GoToLiftValue command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3910,7 +3910,7 @@ std::string get_json_payload_for_window_covering_go_to_lift_value_command(
 
 
 /**
- * @brief JSON parser for WindowCovering::GoToLiftValue command arguments.
+ * @brief JSON parser for WindowCovering GoToLiftValue command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3924,7 +3924,7 @@ void uic_mqtt_dotdot_parse_window_covering_go_to_lift_value(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a WindowCovering::GoToLiftPercentage command
+ * fields of a WindowCovering GoToLiftPercentage command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3938,7 +3938,7 @@ std::string get_json_payload_for_window_covering_go_to_lift_percentage_command(
 
 
 /**
- * @brief JSON parser for WindowCovering::GoToLiftPercentage command arguments.
+ * @brief JSON parser for WindowCovering GoToLiftPercentage command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3952,7 +3952,7 @@ void uic_mqtt_dotdot_parse_window_covering_go_to_lift_percentage(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a WindowCovering::GoToTiltValue command
+ * fields of a WindowCovering GoToTiltValue command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3966,7 +3966,7 @@ std::string get_json_payload_for_window_covering_go_to_tilt_value_command(
 
 
 /**
- * @brief JSON parser for WindowCovering::GoToTiltValue command arguments.
+ * @brief JSON parser for WindowCovering GoToTiltValue command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -3980,7 +3980,7 @@ void uic_mqtt_dotdot_parse_window_covering_go_to_tilt_value(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a WindowCovering::GoToTiltPercentage command
+ * fields of a WindowCovering GoToTiltPercentage command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -3994,7 +3994,7 @@ std::string get_json_payload_for_window_covering_go_to_tilt_percentage_command(
 
 
 /**
- * @brief JSON parser for WindowCovering::GoToTiltPercentage command arguments.
+ * @brief JSON parser for WindowCovering GoToTiltPercentage command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4007,7 +4007,7 @@ void uic_mqtt_dotdot_parse_window_covering_go_to_tilt_percentage(
 
 
 /**
- * @brief JSON parser for WindowCovering::WriteAttributes command arguments.
+ * @brief JSON parser for WindowCovering WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4020,7 +4020,7 @@ void uic_mqtt_dotdot_parse_window_covering_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a BarrierControl::GoToPercent command
+ * fields of a BarrierControl GoToPercent command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4034,7 +4034,7 @@ std::string get_json_payload_for_barrier_control_go_to_percent_command(
 
 
 /**
- * @brief JSON parser for BarrierControl::GoToPercent command arguments.
+ * @brief JSON parser for BarrierControl GoToPercent command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4048,7 +4048,7 @@ void uic_mqtt_dotdot_parse_barrier_control_go_to_percent(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a BarrierControl::Stop command
+ * fields of a BarrierControl Stop command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -4060,7 +4060,7 @@ std::string get_json_payload_for_barrier_control_stop_command(
 
 
 /**
- * @brief JSON parser for BarrierControl::WriteAttributes command arguments.
+ * @brief JSON parser for BarrierControl WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4072,7 +4072,7 @@ void uic_mqtt_dotdot_parse_barrier_control_write_attributes(
 
 
 /**
- * @brief JSON parser for PumpConfigurationAndControl::WriteAttributes command arguments.
+ * @brief JSON parser for PumpConfigurationAndControl WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4085,7 +4085,7 @@ void uic_mqtt_dotdot_parse_pump_configuration_and_control_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Thermostat::SetpointRaiseOrLower command
+ * fields of a Thermostat SetpointRaiseOrLower command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4099,7 +4099,7 @@ std::string get_json_payload_for_thermostat_setpoint_raise_or_lower_command(
 
 
 /**
- * @brief JSON parser for Thermostat::SetpointRaiseOrLower command arguments.
+ * @brief JSON parser for Thermostat SetpointRaiseOrLower command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4115,7 +4115,7 @@ void uic_mqtt_dotdot_parse_thermostat_setpoint_raise_or_lower(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Thermostat::GetWeeklyScheduleResponse command
+ * fields of a Thermostat GetWeeklyScheduleResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4129,7 +4129,7 @@ std::string get_json_payload_for_thermostat_get_weekly_schedule_response_command
 
 
 /**
- * @brief JSON parser for Thermostat::GetWeeklyScheduleResponse command arguments.
+ * @brief JSON parser for Thermostat GetWeeklyScheduleResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4149,7 +4149,7 @@ void uic_mqtt_dotdot_parse_thermostat_get_weekly_schedule_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Thermostat::SetWeeklySchedule command
+ * fields of a Thermostat SetWeeklySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4163,7 +4163,7 @@ std::string get_json_payload_for_thermostat_set_weekly_schedule_command(
 
 
 /**
- * @brief JSON parser for Thermostat::SetWeeklySchedule command arguments.
+ * @brief JSON parser for Thermostat SetWeeklySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4183,7 +4183,7 @@ void uic_mqtt_dotdot_parse_thermostat_set_weekly_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Thermostat::GetRelayStatusLogResponse command
+ * fields of a Thermostat GetRelayStatusLogResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4197,7 +4197,7 @@ std::string get_json_payload_for_thermostat_get_relay_status_log_response_comman
 
 
 /**
- * @brief JSON parser for Thermostat::GetRelayStatusLogResponse command arguments.
+ * @brief JSON parser for Thermostat GetRelayStatusLogResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4221,7 +4221,7 @@ void uic_mqtt_dotdot_parse_thermostat_get_relay_status_log_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Thermostat::GetWeeklySchedule command
+ * fields of a Thermostat GetWeeklySchedule command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4235,7 +4235,7 @@ std::string get_json_payload_for_thermostat_get_weekly_schedule_command(
 
 
 /**
- * @brief JSON parser for Thermostat::GetWeeklySchedule command arguments.
+ * @brief JSON parser for Thermostat GetWeeklySchedule command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4251,7 +4251,7 @@ void uic_mqtt_dotdot_parse_thermostat_get_weekly_schedule(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Thermostat::ClearWeeklySchedule command
+ * fields of a Thermostat ClearWeeklySchedule command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -4264,7 +4264,7 @@ std::string get_json_payload_for_thermostat_clear_weekly_schedule_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Thermostat::GetRelayStatusLog command
+ * fields of a Thermostat GetRelayStatusLog command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -4276,7 +4276,7 @@ std::string get_json_payload_for_thermostat_get_relay_status_log_command(
 
 
 /**
- * @brief JSON parser for Thermostat::WriteAttributes command arguments.
+ * @brief JSON parser for Thermostat WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4288,7 +4288,7 @@ void uic_mqtt_dotdot_parse_thermostat_write_attributes(
 
 
 /**
- * @brief JSON parser for FanControl::WriteAttributes command arguments.
+ * @brief JSON parser for FanControl WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4300,7 +4300,7 @@ void uic_mqtt_dotdot_parse_fan_control_write_attributes(
 
 
 /**
- * @brief JSON parser for DehumidificationControl::WriteAttributes command arguments.
+ * @brief JSON parser for DehumidificationControl WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4312,7 +4312,7 @@ void uic_mqtt_dotdot_parse_dehumidification_control_write_attributes(
 
 
 /**
- * @brief JSON parser for ThermostatUserInterfaceConfiguration::WriteAttributes command arguments.
+ * @brief JSON parser for ThermostatUserInterfaceConfiguration WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4325,7 +4325,7 @@ void uic_mqtt_dotdot_parse_thermostat_user_interface_configuration_write_attribu
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::MoveToHue command
+ * fields of a ColorControl MoveToHue command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4339,7 +4339,7 @@ std::string get_json_payload_for_color_control_move_to_hue_command(
 
 
 /**
- * @brief JSON parser for ColorControl::MoveToHue command arguments.
+ * @brief JSON parser for ColorControl MoveToHue command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4361,7 +4361,7 @@ void uic_mqtt_dotdot_parse_color_control_move_to_hue(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::MoveHue command
+ * fields of a ColorControl MoveHue command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4375,7 +4375,7 @@ std::string get_json_payload_for_color_control_move_hue_command(
 
 
 /**
- * @brief JSON parser for ColorControl::MoveHue command arguments.
+ * @brief JSON parser for ColorControl MoveHue command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4395,7 +4395,7 @@ void uic_mqtt_dotdot_parse_color_control_move_hue(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::StepHue command
+ * fields of a ColorControl StepHue command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4409,7 +4409,7 @@ std::string get_json_payload_for_color_control_step_hue_command(
 
 
 /**
- * @brief JSON parser for ColorControl::StepHue command arguments.
+ * @brief JSON parser for ColorControl StepHue command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4431,7 +4431,7 @@ void uic_mqtt_dotdot_parse_color_control_step_hue(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::MoveToSaturation command
+ * fields of a ColorControl MoveToSaturation command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4445,7 +4445,7 @@ std::string get_json_payload_for_color_control_move_to_saturation_command(
 
 
 /**
- * @brief JSON parser for ColorControl::MoveToSaturation command arguments.
+ * @brief JSON parser for ColorControl MoveToSaturation command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4465,7 +4465,7 @@ void uic_mqtt_dotdot_parse_color_control_move_to_saturation(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::MoveSaturation command
+ * fields of a ColorControl MoveSaturation command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4479,7 +4479,7 @@ std::string get_json_payload_for_color_control_move_saturation_command(
 
 
 /**
- * @brief JSON parser for ColorControl::MoveSaturation command arguments.
+ * @brief JSON parser for ColorControl MoveSaturation command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4499,7 +4499,7 @@ void uic_mqtt_dotdot_parse_color_control_move_saturation(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::StepSaturation command
+ * fields of a ColorControl StepSaturation command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4513,7 +4513,7 @@ std::string get_json_payload_for_color_control_step_saturation_command(
 
 
 /**
- * @brief JSON parser for ColorControl::StepSaturation command arguments.
+ * @brief JSON parser for ColorControl StepSaturation command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4535,7 +4535,7 @@ void uic_mqtt_dotdot_parse_color_control_step_saturation(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::MoveToHueAndSaturation command
+ * fields of a ColorControl MoveToHueAndSaturation command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4549,7 +4549,7 @@ std::string get_json_payload_for_color_control_move_to_hue_and_saturation_comman
 
 
 /**
- * @brief JSON parser for ColorControl::MoveToHueAndSaturation command arguments.
+ * @brief JSON parser for ColorControl MoveToHueAndSaturation command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4571,7 +4571,7 @@ void uic_mqtt_dotdot_parse_color_control_move_to_hue_and_saturation(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::MoveToColor command
+ * fields of a ColorControl MoveToColor command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4585,7 +4585,7 @@ std::string get_json_payload_for_color_control_move_to_color_command(
 
 
 /**
- * @brief JSON parser for ColorControl::MoveToColor command arguments.
+ * @brief JSON parser for ColorControl MoveToColor command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4607,7 +4607,7 @@ void uic_mqtt_dotdot_parse_color_control_move_to_color(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::MoveColor command
+ * fields of a ColorControl MoveColor command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4621,7 +4621,7 @@ std::string get_json_payload_for_color_control_move_color_command(
 
 
 /**
- * @brief JSON parser for ColorControl::MoveColor command arguments.
+ * @brief JSON parser for ColorControl MoveColor command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4641,7 +4641,7 @@ void uic_mqtt_dotdot_parse_color_control_move_color(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::StepColor command
+ * fields of a ColorControl StepColor command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4655,7 +4655,7 @@ std::string get_json_payload_for_color_control_step_color_command(
 
 
 /**
- * @brief JSON parser for ColorControl::StepColor command arguments.
+ * @brief JSON parser for ColorControl StepColor command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4677,7 +4677,7 @@ void uic_mqtt_dotdot_parse_color_control_step_color(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::MoveToColorTemperature command
+ * fields of a ColorControl MoveToColorTemperature command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4691,7 +4691,7 @@ std::string get_json_payload_for_color_control_move_to_color_temperature_command
 
 
 /**
- * @brief JSON parser for ColorControl::MoveToColorTemperature command arguments.
+ * @brief JSON parser for ColorControl MoveToColorTemperature command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4711,7 +4711,7 @@ void uic_mqtt_dotdot_parse_color_control_move_to_color_temperature(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::EnhancedMoveToHue command
+ * fields of a ColorControl EnhancedMoveToHue command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4725,7 +4725,7 @@ std::string get_json_payload_for_color_control_enhanced_move_to_hue_command(
 
 
 /**
- * @brief JSON parser for ColorControl::EnhancedMoveToHue command arguments.
+ * @brief JSON parser for ColorControl EnhancedMoveToHue command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4747,7 +4747,7 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_move_to_hue(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::EnhancedMoveHue command
+ * fields of a ColorControl EnhancedMoveHue command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4761,7 +4761,7 @@ std::string get_json_payload_for_color_control_enhanced_move_hue_command(
 
 
 /**
- * @brief JSON parser for ColorControl::EnhancedMoveHue command arguments.
+ * @brief JSON parser for ColorControl EnhancedMoveHue command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4781,7 +4781,7 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_move_hue(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::EnhancedStepHue command
+ * fields of a ColorControl EnhancedStepHue command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4795,7 +4795,7 @@ std::string get_json_payload_for_color_control_enhanced_step_hue_command(
 
 
 /**
- * @brief JSON parser for ColorControl::EnhancedStepHue command arguments.
+ * @brief JSON parser for ColorControl EnhancedStepHue command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4817,7 +4817,7 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_step_hue(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::EnhancedMoveToHueAndSaturation command
+ * fields of a ColorControl EnhancedMoveToHueAndSaturation command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4831,7 +4831,7 @@ std::string get_json_payload_for_color_control_enhanced_move_to_hue_and_saturati
 
 
 /**
- * @brief JSON parser for ColorControl::EnhancedMoveToHueAndSaturation command arguments.
+ * @brief JSON parser for ColorControl EnhancedMoveToHueAndSaturation command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4853,7 +4853,7 @@ void uic_mqtt_dotdot_parse_color_control_enhanced_move_to_hue_and_saturation(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::ColorLoopSet command
+ * fields of a ColorControl ColorLoopSet command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4867,7 +4867,7 @@ std::string get_json_payload_for_color_control_color_loop_set_command(
 
 
 /**
- * @brief JSON parser for ColorControl::ColorLoopSet command arguments.
+ * @brief JSON parser for ColorControl ColorLoopSet command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4893,7 +4893,7 @@ void uic_mqtt_dotdot_parse_color_control_color_loop_set(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::StopMoveStep command
+ * fields of a ColorControl StopMoveStep command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4907,7 +4907,7 @@ std::string get_json_payload_for_color_control_stop_move_step_command(
 
 
 /**
- * @brief JSON parser for ColorControl::StopMoveStep command arguments.
+ * @brief JSON parser for ColorControl StopMoveStep command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4923,7 +4923,7 @@ void uic_mqtt_dotdot_parse_color_control_stop_move_step(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::MoveColorTemperature command
+ * fields of a ColorControl MoveColorTemperature command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4937,7 +4937,7 @@ std::string get_json_payload_for_color_control_move_color_temperature_command(
 
 
 /**
- * @brief JSON parser for ColorControl::MoveColorTemperature command arguments.
+ * @brief JSON parser for ColorControl MoveColorTemperature command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -4961,7 +4961,7 @@ void uic_mqtt_dotdot_parse_color_control_move_color_temperature(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ColorControl::StepColorTemperature command
+ * fields of a ColorControl StepColorTemperature command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -4975,7 +4975,7 @@ std::string get_json_payload_for_color_control_step_color_temperature_command(
 
 
 /**
- * @brief JSON parser for ColorControl::StepColorTemperature command arguments.
+ * @brief JSON parser for ColorControl StepColorTemperature command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5000,7 +5000,7 @@ void uic_mqtt_dotdot_parse_color_control_step_color_temperature(
 
 
 /**
- * @brief JSON parser for ColorControl::WriteAttributes command arguments.
+ * @brief JSON parser for ColorControl WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5012,7 +5012,7 @@ void uic_mqtt_dotdot_parse_color_control_write_attributes(
 
 
 /**
- * @brief JSON parser for BallastConfiguration::WriteAttributes command arguments.
+ * @brief JSON parser for BallastConfiguration WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5024,7 +5024,7 @@ void uic_mqtt_dotdot_parse_ballast_configuration_write_attributes(
 
 
 /**
- * @brief JSON parser for IlluminanceMeasurement::WriteAttributes command arguments.
+ * @brief JSON parser for IlluminanceMeasurement WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5036,7 +5036,7 @@ void uic_mqtt_dotdot_parse_illuminance_measurement_write_attributes(
 
 
 /**
- * @brief JSON parser for IlluminanceLevelSensing::WriteAttributes command arguments.
+ * @brief JSON parser for IlluminanceLevelSensing WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5048,7 +5048,7 @@ void uic_mqtt_dotdot_parse_illuminance_level_sensing_write_attributes(
 
 
 /**
- * @brief JSON parser for TemperatureMeasurement::WriteAttributes command arguments.
+ * @brief JSON parser for TemperatureMeasurement WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5060,7 +5060,7 @@ void uic_mqtt_dotdot_parse_temperature_measurement_write_attributes(
 
 
 /**
- * @brief JSON parser for PressureMeasurement::WriteAttributes command arguments.
+ * @brief JSON parser for PressureMeasurement WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5072,7 +5072,7 @@ void uic_mqtt_dotdot_parse_pressure_measurement_write_attributes(
 
 
 /**
- * @brief JSON parser for FlowMeasurement::WriteAttributes command arguments.
+ * @brief JSON parser for FlowMeasurement WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5084,7 +5084,7 @@ void uic_mqtt_dotdot_parse_flow_measurement_write_attributes(
 
 
 /**
- * @brief JSON parser for RelativityHumidity::WriteAttributes command arguments.
+ * @brief JSON parser for RelativityHumidity WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5096,7 +5096,7 @@ void uic_mqtt_dotdot_parse_relativity_humidity_write_attributes(
 
 
 /**
- * @brief JSON parser for OccupancySensing::WriteAttributes command arguments.
+ * @brief JSON parser for OccupancySensing WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5108,7 +5108,7 @@ void uic_mqtt_dotdot_parse_occupancy_sensing_write_attributes(
 
 
 /**
- * @brief JSON parser for PhMeasurement::WriteAttributes command arguments.
+ * @brief JSON parser for PhMeasurement WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5120,7 +5120,7 @@ void uic_mqtt_dotdot_parse_ph_measurement_write_attributes(
 
 
 /**
- * @brief JSON parser for ElectricalConductivityMeasurement::WriteAttributes command arguments.
+ * @brief JSON parser for ElectricalConductivityMeasurement WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5132,7 +5132,7 @@ void uic_mqtt_dotdot_parse_electrical_conductivity_measurement_write_attributes(
 
 
 /**
- * @brief JSON parser for WindSpeedMeasurement::WriteAttributes command arguments.
+ * @brief JSON parser for WindSpeedMeasurement WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5144,7 +5144,7 @@ void uic_mqtt_dotdot_parse_wind_speed_measurement_write_attributes(
 
 
 /**
- * @brief JSON parser for CarbonMonoxide::WriteAttributes command arguments.
+ * @brief JSON parser for CarbonMonoxide WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5157,7 +5157,7 @@ void uic_mqtt_dotdot_parse_carbon_monoxide_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a IASZone::ZoneEnrollResponse command
+ * fields of a IASZone ZoneEnrollResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5171,7 +5171,7 @@ std::string get_json_payload_for_ias_zone_zone_enroll_response_command(
 
 
 /**
- * @brief JSON parser for IASZone::ZoneEnrollResponse command arguments.
+ * @brief JSON parser for IASZone ZoneEnrollResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5187,7 +5187,7 @@ void uic_mqtt_dotdot_parse_ias_zone_zone_enroll_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a IASZone::ZoneStatusChangeNotification command
+ * fields of a IASZone ZoneStatusChangeNotification command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5201,7 +5201,7 @@ std::string get_json_payload_for_ias_zone_zone_status_change_notification_comman
 
 
 /**
- * @brief JSON parser for IASZone::ZoneStatusChangeNotification command arguments.
+ * @brief JSON parser for IASZone ZoneStatusChangeNotification command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5221,7 +5221,7 @@ void uic_mqtt_dotdot_parse_ias_zone_zone_status_change_notification(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a IASZone::InitiateNormalOperationMode command
+ * fields of a IASZone InitiateNormalOperationMode command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -5234,7 +5234,7 @@ std::string get_json_payload_for_ias_zone_initiate_normal_operation_mode_command
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a IASZone::ZoneEnrollRequest command
+ * fields of a IASZone ZoneEnrollRequest command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5248,7 +5248,7 @@ std::string get_json_payload_for_ias_zone_zone_enroll_request_command(
 
 
 /**
- * @brief JSON parser for IASZone::ZoneEnrollRequest command arguments.
+ * @brief JSON parser for IASZone ZoneEnrollRequest command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5264,7 +5264,7 @@ void uic_mqtt_dotdot_parse_ias_zone_zone_enroll_request(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a IASZone::InitiateTestMode command
+ * fields of a IASZone InitiateTestMode command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5278,7 +5278,7 @@ std::string get_json_payload_for_ias_zone_initiate_test_mode_command(
 
 
 /**
- * @brief JSON parser for IASZone::InitiateTestMode command arguments.
+ * @brief JSON parser for IASZone InitiateTestMode command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5293,7 +5293,7 @@ void uic_mqtt_dotdot_parse_ias_zone_initiate_test_mode(
 
 
 /**
- * @brief JSON parser for IASZone::WriteAttributes command arguments.
+ * @brief JSON parser for IASZone WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5306,7 +5306,7 @@ void uic_mqtt_dotdot_parse_ias_zone_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a IASWD::StartWarning command
+ * fields of a IASWD StartWarning command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5320,7 +5320,7 @@ std::string get_json_payload_for_iaswd_start_warning_command(
 
 
 /**
- * @brief JSON parser for IASWD::StartWarning command arguments.
+ * @brief JSON parser for IASWD StartWarning command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5340,7 +5340,7 @@ void uic_mqtt_dotdot_parse_iaswd_start_warning(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a IASWD::Squawk command
+ * fields of a IASWD Squawk command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5354,7 +5354,7 @@ std::string get_json_payload_for_iaswd_squawk_command(
 
 
 /**
- * @brief JSON parser for IASWD::Squawk command arguments.
+ * @brief JSON parser for IASWD Squawk command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5367,7 +5367,7 @@ void uic_mqtt_dotdot_parse_iaswd_squawk(
 
 
 /**
- * @brief JSON parser for IASWD::WriteAttributes command arguments.
+ * @brief JSON parser for IASWD WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5379,7 +5379,7 @@ void uic_mqtt_dotdot_parse_iaswd_write_attributes(
 
 
 /**
- * @brief JSON parser for Metering::WriteAttributes command arguments.
+ * @brief JSON parser for Metering WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5392,7 +5392,7 @@ void uic_mqtt_dotdot_parse_metering_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ElectricalMeasurement::GetProfileInfoResponse command
+ * fields of a ElectricalMeasurement GetProfileInfoResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5406,7 +5406,7 @@ std::string get_json_payload_for_electrical_measurement_get_profile_info_respons
 
 
 /**
- * @brief JSON parser for ElectricalMeasurement::GetProfileInfoResponse command arguments.
+ * @brief JSON parser for ElectricalMeasurement GetProfileInfoResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5426,7 +5426,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_profile_info_response(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ElectricalMeasurement::GetProfileInfo command
+ * fields of a ElectricalMeasurement GetProfileInfo command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -5439,7 +5439,7 @@ std::string get_json_payload_for_electrical_measurement_get_profile_info_command
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ElectricalMeasurement::GetMeasurementProfileResponse command
+ * fields of a ElectricalMeasurement GetMeasurementProfileResponse command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5453,7 +5453,7 @@ std::string get_json_payload_for_electrical_measurement_get_measurement_profile_
 
 
 /**
- * @brief JSON parser for ElectricalMeasurement::GetMeasurementProfileResponse command arguments.
+ * @brief JSON parser for ElectricalMeasurement GetMeasurementProfileResponse command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5477,7 +5477,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile_respon
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ElectricalMeasurement::GetMeasurementProfile command
+ * fields of a ElectricalMeasurement GetMeasurementProfile command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5491,7 +5491,7 @@ std::string get_json_payload_for_electrical_measurement_get_measurement_profile_
 
 
 /**
- * @brief JSON parser for ElectricalMeasurement::GetMeasurementProfile command arguments.
+ * @brief JSON parser for ElectricalMeasurement GetMeasurementProfile command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5508,7 +5508,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_get_measurement_profile(
 
 
 /**
- * @brief JSON parser for ElectricalMeasurement::WriteAttributes command arguments.
+ * @brief JSON parser for ElectricalMeasurement WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5520,7 +5520,7 @@ void uic_mqtt_dotdot_parse_electrical_measurement_write_attributes(
 
 
 /**
- * @brief JSON parser for Diagnostics::WriteAttributes command arguments.
+ * @brief JSON parser for Diagnostics WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5533,7 +5533,7 @@ void uic_mqtt_dotdot_parse_diagnostics_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ProtocolController/RFTelemetry::TxReport command
+ * fields of a ProtocolController/RFTelemetry TxReport command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5547,7 +5547,7 @@ std::string get_json_payload_for_protocol_controller_rf_telemetry_tx_report_comm
 
 
 /**
- * @brief JSON parser for ProtocolController-RFTelemetry::TxReport command arguments.
+ * @brief JSON parser for ProtocolController-RFTelemetry TxReport command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5596,7 +5596,7 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_tx_report(
 
 
 /**
- * @brief JSON parser for ProtocolController-RFTelemetry::WriteAttributes command arguments.
+ * @brief JSON parser for ProtocolController-RFTelemetry WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5609,7 +5609,7 @@ void uic_mqtt_dotdot_parse_protocol_controller_rf_telemetry_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a State::Remove command
+ * fields of a State Remove command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -5622,7 +5622,7 @@ std::string get_json_payload_for_state_remove_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a State::RemoveOffline command
+ * fields of a State RemoveOffline command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -5635,7 +5635,7 @@ std::string get_json_payload_for_state_remove_offline_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a State::DiscoverNeighbors command
+ * fields of a State DiscoverNeighbors command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -5648,7 +5648,7 @@ std::string get_json_payload_for_state_discover_neighbors_command(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a State::Interview command
+ * fields of a State Interview command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -5660,7 +5660,7 @@ std::string get_json_payload_for_state_interview_command(
 
 
 /**
- * @brief JSON parser for State::WriteAttributes command arguments.
+ * @brief JSON parser for State WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5673,7 +5673,7 @@ void uic_mqtt_dotdot_parse_state_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Binding::Bind command
+ * fields of a Binding Bind command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5687,7 +5687,7 @@ std::string get_json_payload_for_binding_bind_command(
 
 
 /**
- * @brief JSON parser for Binding::Bind command arguments.
+ * @brief JSON parser for Binding Bind command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5705,7 +5705,7 @@ void uic_mqtt_dotdot_parse_binding_bind(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Binding::Unbind command
+ * fields of a Binding Unbind command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5719,7 +5719,7 @@ std::string get_json_payload_for_binding_unbind_command(
 
 
 /**
- * @brief JSON parser for Binding::Unbind command arguments.
+ * @brief JSON parser for Binding Unbind command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5737,7 +5737,7 @@ void uic_mqtt_dotdot_parse_binding_unbind(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Binding::BindToProtocolController command
+ * fields of a Binding BindToProtocolController command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5751,7 +5751,7 @@ std::string get_json_payload_for_binding_bind_to_protocol_controller_command(
 
 
 /**
- * @brief JSON parser for Binding::BindToProtocolController command arguments.
+ * @brief JSON parser for Binding BindToProtocolController command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5765,7 +5765,7 @@ void uic_mqtt_dotdot_parse_binding_bind_to_protocol_controller(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a Binding::UnbindFromProtocolController command
+ * fields of a Binding UnbindFromProtocolController command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5779,7 +5779,7 @@ std::string get_json_payload_for_binding_unbind_from_protocol_controller_command
 
 
 /**
- * @brief JSON parser for Binding::UnbindFromProtocolController command arguments.
+ * @brief JSON parser for Binding UnbindFromProtocolController command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5792,7 +5792,7 @@ void uic_mqtt_dotdot_parse_binding_unbind_from_protocol_controller(
 
 
 /**
- * @brief JSON parser for Binding::WriteAttributes command arguments.
+ * @brief JSON parser for Binding WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5804,7 +5804,7 @@ void uic_mqtt_dotdot_parse_binding_write_attributes(
 
 
 /**
- * @brief JSON parser for SystemMetrics::WriteAttributes command arguments.
+ * @brief JSON parser for SystemMetrics WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5817,7 +5817,7 @@ void uic_mqtt_dotdot_parse_system_metrics_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ApplicationMonitoring::LogEntry command
+ * fields of a ApplicationMonitoring LogEntry command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5831,7 +5831,7 @@ std::string get_json_payload_for_application_monitoring_log_entry_command(
 
 
 /**
- * @brief JSON parser for ApplicationMonitoring::LogEntry command arguments.
+ * @brief JSON parser for ApplicationMonitoring LogEntry command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5850,7 +5850,7 @@ void uic_mqtt_dotdot_parse_application_monitoring_log_entry(
 
 
 /**
- * @brief JSON parser for ApplicationMonitoring::WriteAttributes command arguments.
+ * @brief JSON parser for ApplicationMonitoring WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5862,7 +5862,7 @@ void uic_mqtt_dotdot_parse_application_monitoring_write_attributes(
 
 
 /**
- * @brief JSON parser for NameAndLocation::WriteAttributes command arguments.
+ * @brief JSON parser for NameAndLocation WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5875,7 +5875,7 @@ void uic_mqtt_dotdot_parse_name_and_location_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ConfigurationParameters::DiscoverParameter command
+ * fields of a ConfigurationParameters DiscoverParameter command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5889,7 +5889,7 @@ std::string get_json_payload_for_configuration_parameters_discover_parameter_com
 
 
 /**
- * @brief JSON parser for ConfigurationParameters::DiscoverParameter command arguments.
+ * @brief JSON parser for ConfigurationParameters DiscoverParameter command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5903,7 +5903,7 @@ void uic_mqtt_dotdot_parse_configuration_parameters_discover_parameter(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ConfigurationParameters::DefaultResetAllParameters command
+ * fields of a ConfigurationParameters DefaultResetAllParameters command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -5916,7 +5916,7 @@ std::string get_json_payload_for_configuration_parameters_default_reset_all_para
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ConfigurationParameters::SetParameter command
+ * fields of a ConfigurationParameters SetParameter command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5930,7 +5930,7 @@ std::string get_json_payload_for_configuration_parameters_set_parameter_command(
 
 
 /**
- * @brief JSON parser for ConfigurationParameters::SetParameter command arguments.
+ * @brief JSON parser for ConfigurationParameters SetParameter command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5945,7 +5945,7 @@ void uic_mqtt_dotdot_parse_configuration_parameters_set_parameter(
 
 
 /**
- * @brief JSON parser for ConfigurationParameters::WriteAttributes command arguments.
+ * @brief JSON parser for ConfigurationParameters WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5958,7 +5958,7 @@ void uic_mqtt_dotdot_parse_configuration_parameters_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a AoXLocator::IQReport command
+ * fields of a AoXLocator IQReport command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -5972,7 +5972,7 @@ std::string get_json_payload_for_aox_locator_iq_report_command(
 
 
 /**
- * @brief JSON parser for AoXLocator::IQReport command arguments.
+ * @brief JSON parser for AoXLocator IQReport command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -5994,7 +5994,7 @@ void uic_mqtt_dotdot_parse_aox_locator_iq_report(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a AoXLocator::AngleReport command
+ * fields of a AoXLocator AngleReport command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -6008,7 +6008,7 @@ std::string get_json_payload_for_aox_locator_angle_report_command(
 
 
 /**
- * @brief JSON parser for AoXLocator::AngleReport command arguments.
+ * @brief JSON parser for AoXLocator AngleReport command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -6028,7 +6028,7 @@ void uic_mqtt_dotdot_parse_aox_locator_angle_report(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a AoXLocator::AngleCorrection command
+ * fields of a AoXLocator AngleCorrection command
  * 
  * @param fields       Struct pointer with the list of fields for the command
  * 
@@ -6042,7 +6042,7 @@ std::string get_json_payload_for_aox_locator_angle_correction_command(
 
 
 /**
- * @brief JSON parser for AoXLocator::AngleCorrection command arguments.
+ * @brief JSON parser for AoXLocator AngleCorrection command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -6061,7 +6061,7 @@ void uic_mqtt_dotdot_parse_aox_locator_angle_correction(
 
 
 /**
- * @brief JSON parser for AoXLocator::WriteAttributes command arguments.
+ * @brief JSON parser for AoXLocator WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -6077,7 +6077,7 @@ void uic_mqtt_dotdot_parse_aox_locator_write_attributes(
 
 
 /**
- * @brief JSON parser for AoXPositionEstimation::WriteAttributes command arguments.
+ * @brief JSON parser for AoXPositionEstimation WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */
@@ -6090,7 +6090,7 @@ void uic_mqtt_dotdot_parse_aox_position_estimation_write_attributes(
 
 /**
  * @brief Private helper function that will create a JSON string based on the
- * fields of a ProtocolController/NetworkManagement::Write command
+ * fields of a ProtocolController/NetworkManagement Write command
  * 
  * @returns std::string that contains JSON payload
  */
@@ -6102,7 +6102,7 @@ std::string get_json_payload_for_protocol_controller_network_management_write_co
 
 
 /**
- * @brief JSON parser for ProtocolController-NetworkManagement::WriteAttributes command arguments.
+ * @brief JSON parser for ProtocolController-NetworkManagement WriteAttributes command arguments.
  *
  * Parse incoming JSON object to populate command arguments passed in by reference.
  */

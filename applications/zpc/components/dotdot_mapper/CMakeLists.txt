@@ -48,3 +48,6 @@ target_link_libraries(
   PRIVATE zwave_handlers zwave_controller ucl_definitions)
 
 add_subdirectory(test)
+
+# Copy rules to binary dir as they are runtime dependencies for the tests.
+file(COPY rules DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

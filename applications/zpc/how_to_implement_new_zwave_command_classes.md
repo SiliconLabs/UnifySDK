@@ -149,7 +149,7 @@ the same file.
 
 Register Z-wave Command Class handler: This piece of code is responsible to
 register the handler of the command class. In the command_handler assign the
- function that will handle the commands that are addressed to our command class.
+function that will handle the commands that are addressed to our command class.
 
 #### Implementation of the assigned functions
 
@@ -200,11 +200,135 @@ the attribute store (i.e., using 'attribute_store_log <node_id>' CLI commands).
 
 To ensure the implemented functionalities are mapped to the doddot ZCl data
 model, one should create the UAM file under dotodot_mappers/rules for Dotdot
-Cluster to Z-Wave Command Class Mapping. More information regarding mapping
-can be found above in Dotdot Cluster Mapping section.
+Cluster to Z-Wave Command Class Mapping.
+
+**Implement UAM file**: A new command class can require the implementation
+of a new UAM file to map the data to an existing or a new XML cluster. The
+first step is to find how the data are stored through the command class,
+in `attribute_store_defined_attribute_types.h`, we can find the
+definitions of the attributes. For example, all attributes of the Alarm
+Sensor Command class start with 0x9C this is the definition for
+`COMMAND_CLASS_SENSOR_ALARM`, under the definition of the command class
+version you can find the definitions for the rest of the attributes,
+for the Alarm Sensor Type attribute is defining as
+`COMMAND_CLASS_SENSOR_ALARM << 8 | 0x03`, this means that the type of
+the alarm is stored at 0x9C03. The next step is to find corresponding
+ZCL attributes to map the data from the Z-Wave Attributes.
+For example, we will map the alarm sensor data to the IASZone XML. The
+id of IASZone XML is 0500 we would like to have IASZone state, type, and
+status, based on that we create the following UAM where the
+`zbIAS_ZONE_ZONE_STATE` takes the value 1 if the Alarm sensor state exists,
+in IASZone XML the type of state attribute is enum8 this means that the
+attributes have tags that depend on the value that the attribute have,
+in this occasion the value will give to ZoneState the Enrolled tag.
+Moreover, if alarm sensor state exist, the ZoneType will take the
+value 0, this attribute is type IasZoneType which is defined as enum in
+`zap-type.h` and the 0 value represents the
+`EMBER_ZCL_IAS_ZONE_TYPE_STANDARD_CIE`. At the end, if the state of the
+alarm is bigger than 0 means that we have an alarm so the
+`zbIAS_ZONE_ZONE_STATUS` will take the value 1. It is important to
+know how the attributes are stored in terms of type, as some times need
+to make some changes in the values, an example is if we store a value as
+float but we need to map it as integer we have to multiply it to be in
+the right type, so for some values should be necessary to do some proper
+operation. In `zap-types.h` can be found defined enum types and structs.
+
+```uam
+// Z-Wave Attributes
+def zwALARM_SENSOR_TYPE                         0x9C03
+def zwALARM_SENSOR_STATE                        0x9C04
+
+// DotDot Attributes
+def zbIAS_ZONE_ZONE_STATE   0x05000000
+def zbIAS_ZONE_ZONE_TYPE    0x05000001
+def zbIAS_ZONE_ZONE_STATUS  0x05000002
+
+scope 0 {
+    // Just consider the Zone enrolled if Alarm Sensor is supported.
+    r'zbIAS_ZONE_ZONE_STATE = if (e'zwALARM_SENSOR_TYPE.zwALARM_SENSOR_STATE) 1 undefined
+    // Zone type will be Standard CIE
+    r'zbIAS_ZONE_ZONE_TYPE = if (e'zwALARM_SENSOR_TYPE.zwALARM_SENSOR_STATE) 0 undefined
+    // Set Alarm 1 active if the Alarm Sensor is non-zero
+    r'zbIAS_ZONE_ZONE_STATUS = if (r'zwALARM_SENSOR_TYPE.zwALARM_SENSOR_STATE > 0) 1 0
+}
+```
+
+An example of custom XML Cluster can be found below, we gave
+id FF02 to the Alarm Sensor XML Cluster, in this case, we need to map two
+attributes type and state of the alarm. Each attribute in the XML has an
+id the id of attribute type is 0000 and the state's id is 0001. In the
+same logic as previously, we can say that the data regarding type have to
+be mapped to 0xFF020000 and the state to 0xFF020001. The structure of the
+XML should cope with the specification of the command class.
+
+```xml
+<zcl:cluster
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:type="http://zigbee.org/zcl/types"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:zcl="http://zigbee.org/zcl/clusters"
+  xsi:schemaLocation="http://zigbee.org/zcl/clusters cluster.xsd http://zigbee.org/zcl/types type.xsd"
+  id="FF02" revision="1" name="AlarmSensors">
+  <classification role="application" picsCode="AS"/>
+  <server>
+    <attributes>
+      <attribute id="0000" name="Type" type="enum8" default="255">
+        <restriction>
+          <type:enumeration value="00" name="General" />
+          <type:enumeration value="01" name="Smoke" />
+          <type:enumeration value="02" name="CO" />
+          <type:enumeration value="03" name="CO2" />
+          <type:enumeration value="04" name="Heat" />
+          <type:enumeration value="05" name="Water Leak" />
+        </restriction> 
+        </attribute>
+      <attribute id="0001" name="State" type="uint8"/> 
+    </attributes>
+  </server>
+</zcl:cluster>
+```
+
+As we found how the data are stored we can implement the UAM file that will
+map the data from the Z-Wave command class to the XML Cluster. The first step
+is to define the DotDot attributes and Z-Wave attributes. Below is an example
+of the UAM file that maps the z-wave attributes to the dotdot. We use the
+information that we found in the previous step, the alarm type for the DotDot
+will be defined as 0xFF020000, the state 0xFF020001. In this example, let's
+say that we want to map the state of the alarm sensor type smoke. Based on the
+documentation in [UAM map for ZPC](how_to_write_uam_files_for_the_zpc.md) that
+explains the structure, grammar, and keywords for UAM, we are mapping the type
+of the Z-wave alarm sensor to the DotDot with this command
+`r'DOTDOT_ATTRIBUTE_ID_ALARM_TYPE = r'zwALARM_SENSOR_TYPE`. For the state,
+we use this command `r'zwALARM_SENSOR_TYPE[SMOKE].zwALARM_SENSOR_STATE`, in
+brackets, we refer to a specific type in this occasion we want the smoke
+alarm so after the type we put into brackets the smoke id which is 0x01
+based on the specification of alarm sensor command class. Moreover, this is
+a simple example of how to map data from Z-Wave to DotDot a mapper can be
+more complex consisting of if statements or/and more of attributes. Moreover,
+after any modification on an XML file, we need to make a
+clean build, after that you can verify that the changes applied by check in
+`dotdot_attributes_id.h` and in `dotdot_attributes.cpp` under the build folder,
+if the dotdot attributes are included.
+
+```uam
+// DotDot Attributes
+def DOTDOT_ATTRIBUTE_ID_ALARM_TYPE 0xFF020000
+def DOTDOT_ATTRIBUTE_ID_ALARM_STATE 0xFF020001
+
+// Z-Wave Attributes
+def zwALARM_SENSOR_TYPE        0x9C03
+def zwALARM_SENSOR_STATE       0x9C04
+
+def SMOKE 0x01
+
+scope 0 {
+  r'DOTDOT_ATTRIBUTE_ID_ALARM_TYPE = r'zwALARM_SENSOR_TYPE
+  r'DOTDOT_ATTRIBUTE_ID_ALARM_STATE = r'zwALARM_SENSOR_TYPE[SMOKE].zwALARM_SENSOR_STATE
+}
+```
 
 If the command class attributes state required to be updated via issue 'get'
-type of commands, one could add the attribute and the polling  interval in the
+type of commands, one could add the attribute and the polling interval in the
 zwave_poll_config.yaml which can be found under the zpc_rust package. More
 information regarding polling can be found in the
 Network Polling section in [ZPC User's Guide](readme_user.md).

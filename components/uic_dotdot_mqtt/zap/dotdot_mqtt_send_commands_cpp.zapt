@@ -18,10 +18,13 @@
 #include "dotdot_mqtt.hpp"
 #include "dotdot_mqtt_command_helpers.hpp"
 #include "dotdot_mqtt_internals.hpp"
+#include "sl_log.h"
 
 // Generic includes
 #include <string>
 #include <nlohmann/json.hpp>
+
+#define LOG_TAG "dotdot_mqtt_send_commands"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Sending Commands functions
@@ -64,7 +67,8 @@ void {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_publish_{{asSnakeCaseLo
   std::string payload =
     get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_command(
     {{#zcl_command_arguments}}{{#first}}fields{{/first}}{{/zcl_command_arguments}});
-
+  
+  sl_log_debug(LOG_TAG, "Sending command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),
@@ -97,6 +101,8 @@ void {{dotdot_prefix}}_{{asSnakeCaseLower parent.label}}_publish_{{asSnakeCaseLo
   std::string payload =
     get_json_payload_for_{{asSnakeCaseLower parent.label}}_{{asSnakeCaseLower label}}_command(
     {{#zcl_command_arguments}}{{#first}}fields{{/first}}{{/zcl_command_arguments}});
+
+  sl_log_info(LOG_TAG, "Sending group command to %s with payload %s ---", topic.c_str() , payload.c_str());
 
   // Publish our command, not retained
   uic_mqtt_publish(topic.c_str(),

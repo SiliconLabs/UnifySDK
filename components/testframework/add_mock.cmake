@@ -5,11 +5,13 @@ set(CMOCK_RUBY_EXECUTABLE
     ${RUBY_EXECUTABLE}
     CACHE INTERNAL "")
 
+set(DIR_OF_ADD_MOCK_CMAKE ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "DIR_OF_ADD_MOCK_CMAKE")  
+
 # Documentation add_mock(<TARGET_NAME> header1 [header2] ... [headerN]  )
 #
 # Make a mock library using cmake given a list of header files.
 function(ADD_MOCK TARGET)
-  set(CMOCK_DIR "${CMAKE_SOURCE_DIR}/components/testframework/")
+  set(CMOCK_DIR "${DIR_OF_ADD_MOCK_CMAKE}")
 
   set(MOCK_HEADERS ${ARGV})
   # Pop the first argument of the list

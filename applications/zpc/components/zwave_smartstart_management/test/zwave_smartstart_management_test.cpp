@@ -18,6 +18,7 @@
 #include "attribute_store_fixt.h"
 #include "attribute_store_helper.h"
 #include "attribute_store_defined_attribute_types.h"
+#include "zwave_smartstart_management.h"
 
 // Contiki
 #include "contiki_test_helper.h"
@@ -520,6 +521,17 @@ void test_zwave_smartstart_inclusion_all_dsk_already_in_network()
     // clang-format on
     Management::get_instance()->update_smartstart_cache(smartstart_list);
   }
+  // Hex conversion of "11161-14532-28714-35861-02690-50097-47954-03920"
+  zwave_dsk_t dsk = {0x00, 0x00, 0x38, 0xC4, 0x70, 0x2A, 0x8C, 0x15, 0x0A, 0x82, 0xC3, 0xB1, 0xBB, 0x52, 0x0F, 0x50};  
+
+  TEST_ASSERT_EQUAL(find_dsk_obfuscated_bytes_from_smart_start_list(dsk, 2), true);
+  TEST_ASSERT_EQUAL_CHAR(dsk[0], 0x2B);
+  TEST_ASSERT_EQUAL_CHAR(dsk[1], 0x99);
+  // Garbled DS                    VV
+  zwave_dsk_t gdsk = {0x00, 0x00, 0x00, 0xC4, 0x70, 0x2A, 0x8C, 0x15, 0x0A, 0x82, 0xC3, 0xB1, 0xBB, 0x52, 0x0F, 0x50};  
+  TEST_ASSERT_EQUAL(find_dsk_obfuscated_bytes_from_smart_start_list(gdsk, 2), false);
+  TEST_ASSERT_EQUAL_CHAR(gdsk[0], 0x00);
+  TEST_ASSERT_EQUAL_CHAR(gdsk[1], 0x00);
 }
 
 void test_zwave_smartstart_inclusion_one_dsk_already_in_network()

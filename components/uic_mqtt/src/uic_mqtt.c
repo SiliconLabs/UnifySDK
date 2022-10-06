@@ -148,12 +148,14 @@ int uic_mqtt_teardown()
   return retval;
 }
 
-void uic_mqtt_subscribe(const char *topic,
-                        void (*callBack)(const char *topic,
-                                         const char *message,
-                                         const size_t message_length))
+void uic_mqtt_subscribe(const char *topic, mqtt_message_callback_t callBack)
 {
   mqtt_client_subscribe(client_instance, topic, callBack);
+}
+
+void uic_mqtt_subscribe_ex(const char *topic, mqtt_message_callback_ex_t callBack,void* user)
+{
+  mqtt_client_subscribe_ex(client_instance, topic, callBack,user);
 }
 
 void uic_mqtt_publish(const char *topic,
@@ -187,11 +189,15 @@ void uic_mqtt_unretain_by_regex(const char *regex)
 }
 
 void uic_mqtt_unsubscribe(const char *topic,
-                          void (*callBack)(const char *topic,
-                                           const char *message,
-                                           const size_t message_length))
+                          mqtt_message_callback_t callback)
 {
-  mqtt_client_unsubscribe(client_instance, topic, callBack);
+  mqtt_client_unsubscribe(client_instance, topic, callback);
+}
+
+void uic_mqtt_unsubscribe_ex(const char *topic,
+                          mqtt_message_callback_ex_t callback,void* user) 
+{
+  mqtt_client_unsubscribe_ex(client_instance, topic, callback,user);
 }
 
 void uic_mqtt_set_before_disconnect_callback(void (*before_disconnect)())

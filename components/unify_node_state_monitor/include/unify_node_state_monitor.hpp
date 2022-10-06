@@ -67,8 +67,8 @@ class cluster
    *
    * @param cluster_name ZCL Cluster ID.
    */
-  explicit cluster(const std::string &cluster_name) :
-    cluster_name(cluster_name) {};
+  explicit cluster(const std::string &name) :
+    cluster_name(name) {};
 
   /**
    * @brief Get a string representation of the cluster.
@@ -138,7 +138,7 @@ class node
    *
    * @param unid UNID of the node.
    */
-  explicit node(const std::string &unid) : unid(unid)
+  explicit node(const std::string &_unid) : unid(_unid)
   {
     last_update = clock_time();
   };

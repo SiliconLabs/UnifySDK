@@ -11,8 +11,8 @@
  *
  *****************************************************************************/
 // Includes from this component
-#include "zwave_command_class_association_helper.h"
 #include "zwave_command_classes_utils.h"
+#include "zwave_association_toolbox.h"
 
 // Includes from other components
 #include "unity.h"

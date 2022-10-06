@@ -19,7 +19,7 @@
 #![doc(html_no_source)]
 use std::ffi::CString;
 
-unify_tools::include_binding!(uic_log);
+unify_tools::include_binding!(concat!(env!("OUT_DIR"), "/binding.rs"), uic_log);
 use uic_log::*;
 
 impl std::fmt::Display for sl_log_level_t {

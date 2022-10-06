@@ -56,3 +56,55 @@
 .cluster-attributes .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root {
     padding-right: 1px;
 }
+
+.attr-item {
+    vertical-align: top;
+}
+
+.mobile .writable-hint {
+    font-size: 20px;
+}
+
+.mobile .cluster-attributes .MuiInputAdornment-positionEnd {
+    line-height: 35px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.mobile .adornment {
+    line-height: 55px;
+    margin-left: -15px;
+}
+
+.mobile .boolean-container {
+    display: flex;
+}
+
+.mobile .css-1pysi21-MuiFormLabel-root-MuiInputLabel-root {
+    max-width: calc(100% - 60px);
+}
+
+.mobile .form-text.hint {
+    margin-top: 10px;
+}
+
+.mobile .check-container {
+    line-height: 55px;
+}
+
+.mobile .boolean-container label {
+    display: flex;
+    margin-right: 5px;
+}
+
+.mobile .col-form-label {
+    padding-right: 5px !important;
+}
+
+.mobile .writable-hint span {
+    vertical-align: unset;
+}
+
+.mobile .writable-hint svg {
+    font-size: 25px;
+}

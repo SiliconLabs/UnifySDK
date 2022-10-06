@@ -35,7 +35,7 @@ extern "C" {
 
 static const char *non_existing_uam_path = "./non/existing/path";
 static const char *valid_uam_path
-  = "../../../../applications/zpc/components/dotdot_mapper/rules";
+  = "../../../applications/zpc/components/dotdot_mapper/rules";
 
 attribute n1234;
 attribute n1235;

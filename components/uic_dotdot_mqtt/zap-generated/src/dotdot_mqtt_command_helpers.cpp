@@ -664,6 +664,9 @@ std::string get_json_payload_for_identify_trigger_effect_command(
   json_payload["EffectIdentifier"] =
     trigger_effect_effect_identifier_get_enum_value_name(
       (uint32_t)fields->effect_identifier);
+  #elif defined(TRIGGER_EFFECT_EFFECT_IDENTIFIER_ENUM_NAME_AVAILABLE)
+  json_payload["EffectIdentifier"] =
+    trigger_effect_effect_identifier_get_enum_value_name((uint32_t)fields->effect_identifier);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["EffectIdentifier"] = fields->effect_identifier;
@@ -676,6 +679,9 @@ std::string get_json_payload_for_identify_trigger_effect_command(
   json_payload["EffectVariant"] =
     trigger_effect_effect_variant_get_enum_value_name(
       (uint32_t)fields->effect_variant);
+  #elif defined(TRIGGER_EFFECT_EFFECT_VARIANT_ENUM_NAME_AVAILABLE)
+  json_payload["EffectVariant"] =
+    trigger_effect_effect_variant_get_enum_value_name((uint32_t)fields->effect_variant);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["EffectVariant"] = fields->effect_variant;
@@ -813,6 +819,9 @@ std::string get_json_payload_for_groups_add_group_response_command(
   json_payload["Status"] =
     add_group_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    enum8_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -914,6 +923,9 @@ std::string get_json_payload_for_groups_view_group_response_command(
   json_payload["Status"] =
     view_group_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    enum8_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -1119,6 +1131,9 @@ std::string get_json_payload_for_groups_remove_group_response_command(
   json_payload["Status"] =
     remove_group_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    enum8_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -1355,6 +1370,9 @@ std::string get_json_payload_for_scenes_add_scene_response_command(
   json_payload["Status"] =
     add_scene_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -1480,6 +1498,9 @@ std::string get_json_payload_for_scenes_view_scene_response_command(
   json_payload["Status"] =
     view_scene_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -1643,6 +1664,9 @@ std::string get_json_payload_for_scenes_remove_scene_response_command(
   json_payload["Status"] =
     remove_scene_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -1756,6 +1780,9 @@ std::string get_json_payload_for_scenes_remove_all_scenes_response_command(
   json_payload["Status"] =
     remove_all_scenes_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -1869,6 +1896,9 @@ std::string get_json_payload_for_scenes_store_scene_response_command(
   json_payload["Status"] =
     store_scene_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -2044,6 +2074,9 @@ std::string get_json_payload_for_scenes_get_scene_membership_response_command(
   json_payload["Status"] =
     get_scene_membership_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -2221,6 +2254,9 @@ std::string get_json_payload_for_scenes_enhanced_add_scene_response_command(
   json_payload["Status"] =
     enhanced_add_scene_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -2346,6 +2382,9 @@ std::string get_json_payload_for_scenes_enhanced_view_scene_response_command(
   json_payload["Status"] =
     enhanced_view_scene_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -2546,6 +2585,9 @@ std::string get_json_payload_for_scenes_copy_scene_response_command(
   json_payload["Status"] =
     copy_scene_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -2694,6 +2736,9 @@ std::string get_json_payload_for_on_off_off_with_effect_command(
   json_payload["EffectIdentifier"] =
     off_with_effect_effect_identifier_get_enum_value_name(
       (uint32_t)fields->effect_identifier);
+  #elif defined(OFF_WITH_EFFECT_EFFECT_IDENTIFIER_ENUM_NAME_AVAILABLE)
+  json_payload["EffectIdentifier"] =
+    off_with_effect_effect_identifier_get_enum_value_name((uint32_t)fields->effect_identifier);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["EffectIdentifier"] = fields->effect_identifier;
@@ -2960,6 +3005,9 @@ std::string get_json_payload_for_level_move_command(
   json_payload["MoveMode"] =
     move_move_mode_get_enum_value_name(
       (uint32_t)fields->move_mode);
+  #elif defined(MOVE_STEP_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["MoveMode"] =
+    move_step_mode_get_enum_value_name((uint32_t)fields->move_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["MoveMode"] = fields->move_mode;
@@ -3049,6 +3097,9 @@ std::string get_json_payload_for_level_step_command(
   json_payload["StepMode"] =
     step_step_mode_get_enum_value_name(
       (uint32_t)fields->step_mode);
+  #elif defined(MOVE_STEP_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["StepMode"] =
+    move_step_mode_get_enum_value_name((uint32_t)fields->step_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["StepMode"] = fields->step_mode;
@@ -3278,6 +3329,9 @@ std::string get_json_payload_for_level_move_with_on_off_command(
   json_payload["MoveMode"] =
     move_with_on_off_move_mode_get_enum_value_name(
       (uint32_t)fields->move_mode);
+  #elif defined(MOVE_STEP_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["MoveMode"] =
+    move_step_mode_get_enum_value_name((uint32_t)fields->move_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["MoveMode"] = fields->move_mode;
@@ -3367,6 +3421,9 @@ std::string get_json_payload_for_level_step_with_on_off_command(
   json_payload["StepMode"] =
     step_with_on_off_step_mode_get_enum_value_name(
       (uint32_t)fields->step_mode);
+  #elif defined(MOVE_STEP_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["StepMode"] =
+    move_step_mode_get_enum_value_name((uint32_t)fields->step_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["StepMode"] = fields->step_mode;
@@ -3623,6 +3680,9 @@ std::string get_json_payload_for_alarms_reset_alarm_command(
   json_payload["AlarmCode"] =
     reset_alarm_alarm_code_get_enum_value_name(
       (uint32_t)fields->alarm_code);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  json_payload["AlarmCode"] =
+    enum8_get_enum_value_name((uint32_t)fields->alarm_code);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["AlarmCode"] = fields->alarm_code;
@@ -3686,6 +3746,9 @@ std::string get_json_payload_for_alarms_alarm_command(
   json_payload["AlarmCode"] =
     alarm_alarm_code_get_enum_value_name(
       (uint32_t)fields->alarm_code);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  json_payload["AlarmCode"] =
+    enum8_get_enum_value_name((uint32_t)fields->alarm_code);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["AlarmCode"] = fields->alarm_code;
@@ -3768,6 +3831,9 @@ std::string get_json_payload_for_alarms_get_alarm_response_command(
   json_payload["Status"] =
     get_alarm_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -3780,6 +3846,9 @@ std::string get_json_payload_for_alarms_get_alarm_response_command(
   json_payload["AlarmCode"] =
     get_alarm_response_alarm_code_get_enum_value_name(
       (uint32_t)fields->alarm_code);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  json_payload["AlarmCode"] =
+    enum8_get_enum_value_name((uint32_t)fields->alarm_code);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["AlarmCode"] = fields->alarm_code;
@@ -3987,6 +4056,9 @@ std::string get_json_payload_for_ota_upgrade_image_notify_command(
   json_payload["PayloadType"] =
     image_notify_payload_type_get_enum_value_name(
       (uint32_t)fields->payload_type);
+  #elif defined(IMAGE_NOTIFY_PAYLOAD_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["PayloadType"] =
+    image_notify_payload_type_get_enum_value_name((uint32_t)fields->payload_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["PayloadType"] = fields->payload_type;
@@ -4173,6 +4245,9 @@ std::string get_json_payload_for_ota_upgrade_query_next_image_response_command(
   json_payload["Status"] =
     query_next_image_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -4530,6 +4605,9 @@ std::string get_json_payload_for_ota_upgrade_image_block_response_command(
   json_payload["Status"] =
     image_block_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -4677,6 +4755,9 @@ std::string get_json_payload_for_ota_upgrade_upgrade_end_request_command(
   json_payload["Status"] =
     upgrade_end_request_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -4858,6 +4939,9 @@ std::string get_json_payload_for_ota_upgrade_query_device_specific_file_request_
   json_payload["ImageType"] =
     query_device_specific_file_request_image_type_get_enum_value_name(
       (uint32_t)fields->image_type);
+  #elif defined(OTA_DEVICE_SPECIFIC_IMAGE_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["ImageType"] =
+    ota_device_specific_image_type_get_enum_value_name((uint32_t)fields->image_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["ImageType"] = fields->image_type;
@@ -4949,6 +5033,9 @@ std::string get_json_payload_for_ota_upgrade_query_device_specific_file_response
   json_payload["Status"] =
     query_device_specific_file_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -4965,6 +5052,9 @@ std::string get_json_payload_for_ota_upgrade_query_device_specific_file_response
   json_payload["ImageType"] =
     query_device_specific_file_response_image_type_get_enum_value_name(
       (uint32_t)fields->image_type);
+  #elif defined(OTA_DEVICE_SPECIFIC_IMAGE_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["ImageType"] =
+    ota_device_specific_image_type_get_enum_value_name((uint32_t)fields->image_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["ImageType"] = fields->image_type;
@@ -5354,6 +5444,9 @@ std::string get_json_payload_for_door_lock_lock_door_response_command(
   json_payload["Status"] =
     lock_door_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -5443,6 +5536,9 @@ std::string get_json_payload_for_door_lock_unlock_door_response_command(
   json_payload["Status"] =
     unlock_door_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -5532,6 +5628,9 @@ std::string get_json_payload_for_door_lock_toggle_response_command(
   json_payload["Status"] =
     toggle_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -5633,6 +5732,9 @@ std::string get_json_payload_for_door_lock_unlock_with_timeout_response_command(
   json_payload["Status"] =
     unlock_with_timeout_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -5730,6 +5832,9 @@ std::string get_json_payload_for_door_lock_get_log_record_response_command(
   json_payload["EventType"] =
     get_log_record_response_event_type_get_enum_value_name(
       (uint32_t)fields->event_type);
+  #elif defined(GET_LOG_RECORD_RESPONSE_EVENT_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["EventType"] =
+    get_log_record_response_event_type_get_enum_value_name((uint32_t)fields->event_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["EventType"] = fields->event_type;
@@ -5742,6 +5847,9 @@ std::string get_json_payload_for_door_lock_get_log_record_response_command(
   json_payload["SourceOperationEvent"] =
     get_log_record_response_source_operation_event_get_enum_value_name(
       (uint32_t)fields->source_operation_event);
+  #elif defined(DRLK_OPER_EVENT_SOURCE_ENUM_NAME_AVAILABLE)
+  json_payload["SourceOperationEvent"] =
+    drlk_oper_event_source_get_enum_value_name((uint32_t)fields->source_operation_event);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["SourceOperationEvent"] = fields->source_operation_event;
@@ -5862,6 +5970,9 @@ std::string get_json_payload_for_door_lock_setpin_code_command(
   json_payload["UserStatus"] =
     setpin_code_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
+  #elif defined(DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["UserStatus"] =
+    drlk_settable_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -5874,6 +5985,9 @@ std::string get_json_payload_for_door_lock_setpin_code_command(
   json_payload["UserType"] =
     setpin_code_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
+  #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    drlk_user_type_get_enum_value_name((uint32_t)fields->user_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserType"] = fields->user_type;
@@ -5958,6 +6072,9 @@ std::string get_json_payload_for_door_lock_setpin_code_response_command(
   json_payload["Status"] =
     setpin_code_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_SET_CODE_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_set_code_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -6051,6 +6168,9 @@ std::string get_json_payload_for_door_lock_getpin_code_response_command(
   json_payload["UserStatus"] =
     getpin_code_response_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
+  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["UserStatus"] =
+    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -6063,6 +6183,9 @@ std::string get_json_payload_for_door_lock_getpin_code_response_command(
   json_payload["UserType"] =
     getpin_code_response_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
+  #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    drlk_user_type_get_enum_value_name((uint32_t)fields->user_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserType"] = fields->user_type;
@@ -6185,6 +6308,9 @@ std::string get_json_payload_for_door_lock_clearpin_code_response_command(
   json_payload["Status"] =
     clearpin_code_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -6255,6 +6381,9 @@ std::string get_json_payload_for_door_lock_clear_allpin_codes_response_command(
   json_payload["Status"] =
     clear_allpin_codes_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -6310,6 +6439,9 @@ std::string get_json_payload_for_door_lock_set_user_status_command(
   json_payload["UserStatus"] =
     set_user_status_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
+  #elif defined(DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["UserStatus"] =
+    drlk_settable_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -6369,6 +6501,9 @@ std::string get_json_payload_for_door_lock_set_user_status_response_command(
   json_payload["Status"] =
     set_user_status_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -6462,6 +6597,9 @@ std::string get_json_payload_for_door_lock_get_user_status_response_command(
   json_payload["UserStatus"] =
     get_user_status_response_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
+  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["UserStatus"] =
+    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -6632,6 +6770,9 @@ std::string get_json_payload_for_door_lock_set_weekday_schedule_response_command
   json_payload["Status"] =
     set_weekday_schedule_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -6741,6 +6882,9 @@ std::string get_json_payload_for_door_lock_get_weekday_schedule_response_command
   json_payload["Status"] =
     get_weekday_schedule_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -6919,6 +7063,9 @@ std::string get_json_payload_for_door_lock_clear_weekday_schedule_response_comma
   json_payload["Status"] =
     clear_weekday_schedule_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -7044,6 +7191,9 @@ std::string get_json_payload_for_door_lock_set_year_day_schedule_response_comman
   json_payload["Status"] =
     set_year_day_schedule_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -7153,6 +7303,9 @@ std::string get_json_payload_for_door_lock_get_year_day_schedule_response_comman
   json_payload["Status"] =
     get_year_day_schedule_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -7294,6 +7447,9 @@ std::string get_json_payload_for_door_lock_clear_year_day_schedule_response_comm
   json_payload["Status"] =
     clear_year_day_schedule_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -7357,6 +7513,9 @@ std::string get_json_payload_for_door_lock_set_holiday_schedule_command(
   json_payload["OperatingModeDuringHoliday"] =
     set_holiday_schedule_operating_mode_during_holiday_get_enum_value_name(
       (uint32_t)fields->operating_mode_during_holiday);
+  #elif defined(DRLK_OPER_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["OperatingModeDuringHoliday"] =
+    drlk_oper_mode_get_enum_value_name((uint32_t)fields->operating_mode_during_holiday);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["OperatingModeDuringHoliday"] = fields->operating_mode_during_holiday;
@@ -7432,6 +7591,9 @@ std::string get_json_payload_for_door_lock_set_holiday_schedule_response_command
   json_payload["Status"] =
     set_holiday_schedule_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -7525,6 +7687,9 @@ std::string get_json_payload_for_door_lock_get_holiday_schedule_response_command
   json_payload["Status"] =
     get_holiday_schedule_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(ZCL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    zcl_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -7545,6 +7710,9 @@ std::string get_json_payload_for_door_lock_get_holiday_schedule_response_command
   json_payload["OperatingModeDuringHoliday"] =
     get_holiday_schedule_response_operating_mode_during_holiday_get_enum_value_name(
       (uint32_t)fields->operating_mode_during_holiday);
+  #elif defined(DRLK_OPER_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["OperatingModeDuringHoliday"] =
+    drlk_oper_mode_get_enum_value_name((uint32_t)fields->operating_mode_during_holiday);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["OperatingModeDuringHoliday"] = fields->operating_mode_during_holiday;
@@ -7671,6 +7839,9 @@ std::string get_json_payload_for_door_lock_clear_holiday_schedule_response_comma
   json_payload["Status"] =
     clear_holiday_schedule_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -7726,6 +7897,9 @@ std::string get_json_payload_for_door_lock_set_user_type_command(
   json_payload["UserType"] =
     set_user_type_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
+  #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    drlk_user_type_get_enum_value_name((uint32_t)fields->user_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserType"] = fields->user_type;
@@ -7785,6 +7959,9 @@ std::string get_json_payload_for_door_lock_set_user_type_response_command(
   json_payload["Status"] =
     set_user_type_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -7878,6 +8055,9 @@ std::string get_json_payload_for_door_lock_get_user_type_response_command(
   json_payload["UserType"] =
     get_user_type_response_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
+  #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    drlk_user_type_get_enum_value_name((uint32_t)fields->user_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserType"] = fields->user_type;
@@ -7941,6 +8121,9 @@ std::string get_json_payload_for_door_lock_setrfid_code_command(
   json_payload["UserStatus"] =
     setrfid_code_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
+  #elif defined(DRLK_SETTABLE_USER_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["UserStatus"] =
+    drlk_settable_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -7953,6 +8136,9 @@ std::string get_json_payload_for_door_lock_setrfid_code_command(
   json_payload["UserType"] =
     setrfid_code_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
+  #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    drlk_user_type_get_enum_value_name((uint32_t)fields->user_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserType"] = fields->user_type;
@@ -8037,6 +8223,9 @@ std::string get_json_payload_for_door_lock_setrfid_code_response_command(
   json_payload["Status"] =
     setrfid_code_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_SET_CODE_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_set_code_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -8130,6 +8319,9 @@ std::string get_json_payload_for_door_lock_getrfid_code_response_command(
   json_payload["UserStatus"] =
     getrfid_code_response_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
+  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["UserStatus"] =
+    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -8142,6 +8334,9 @@ std::string get_json_payload_for_door_lock_getrfid_code_response_command(
   json_payload["UserType"] =
     getrfid_code_response_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
+  #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    drlk_user_type_get_enum_value_name((uint32_t)fields->user_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserType"] = fields->user_type;
@@ -8264,6 +8459,9 @@ std::string get_json_payload_for_door_lock_clearrfid_code_response_command(
   json_payload["Status"] =
     clearrfid_code_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -8334,6 +8532,9 @@ std::string get_json_payload_for_door_lock_clear_allrfid_codes_response_command(
   json_payload["Status"] =
     clear_allrfid_codes_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(DRLK_PASS_FAIL_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    drlk_pass_fail_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -8385,6 +8586,9 @@ std::string get_json_payload_for_door_lock_operating_event_notification_command(
   json_payload["OperationEventSource"] =
     operating_event_notification_operation_event_source_get_enum_value_name(
       (uint32_t)fields->operation_event_source);
+  #elif defined(DRLK_OPER_EVENT_SOURCE_ENUM_NAME_AVAILABLE)
+  json_payload["OperationEventSource"] =
+    drlk_oper_event_source_get_enum_value_name((uint32_t)fields->operation_event_source);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["OperationEventSource"] = fields->operation_event_source;
@@ -8397,6 +8601,9 @@ std::string get_json_payload_for_door_lock_operating_event_notification_command(
   json_payload["OperationEventCode"] =
     operating_event_notification_operation_event_code_get_enum_value_name(
       (uint32_t)fields->operation_event_code);
+  #elif defined(OPERATING_EVENT_NOTIFICATION_OPERATION_EVENT_CODE_ENUM_NAME_AVAILABLE)
+  json_payload["OperationEventCode"] =
+    operating_event_notification_operation_event_code_get_enum_value_name((uint32_t)fields->operation_event_code);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["OperationEventCode"] = fields->operation_event_code;
@@ -8509,6 +8716,9 @@ std::string get_json_payload_for_door_lock_programming_event_notification_comman
   json_payload["ProgramEventSource"] =
     programming_event_notification_program_event_source_get_enum_value_name(
       (uint32_t)fields->program_event_source);
+  #elif defined(PROGRAMMING_EVENT_NOTIFICATION_PROGRAM_EVENT_SOURCE_ENUM_NAME_AVAILABLE)
+  json_payload["ProgramEventSource"] =
+    programming_event_notification_program_event_source_get_enum_value_name((uint32_t)fields->program_event_source);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["ProgramEventSource"] = fields->program_event_source;
@@ -8521,6 +8731,9 @@ std::string get_json_payload_for_door_lock_programming_event_notification_comman
   json_payload["ProgramEventCode"] =
     programming_event_notification_program_event_code_get_enum_value_name(
       (uint32_t)fields->program_event_code);
+  #elif defined(PROGRAMMING_EVENT_NOTIFICATION_PROGRAM_EVENT_CODE_ENUM_NAME_AVAILABLE)
+  json_payload["ProgramEventCode"] =
+    programming_event_notification_program_event_code_get_enum_value_name((uint32_t)fields->program_event_code);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["ProgramEventCode"] = fields->program_event_code;
@@ -8541,6 +8754,9 @@ std::string get_json_payload_for_door_lock_programming_event_notification_comman
   json_payload["UserType"] =
     programming_event_notification_user_type_get_enum_value_name(
       (uint32_t)fields->user_type);
+  #elif defined(DRLK_USER_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["UserType"] =
+    drlk_user_type_get_enum_value_name((uint32_t)fields->user_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserType"] = fields->user_type;
@@ -8553,6 +8769,9 @@ std::string get_json_payload_for_door_lock_programming_event_notification_comman
   json_payload["UserStatus"] =
     programming_event_notification_user_status_get_enum_value_name(
       (uint32_t)fields->user_status);
+  #elif defined(DRLK_USER_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["UserStatus"] =
+    drlk_user_status_get_enum_value_name((uint32_t)fields->user_status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["UserStatus"] = fields->user_status;
@@ -9303,6 +9522,9 @@ std::string get_json_payload_for_thermostat_setpoint_raise_or_lower_command(
   json_payload["Mode"] =
     setpoint_raise_or_lower_mode_get_enum_value_name(
       (uint32_t)fields->mode);
+  #elif defined(SETPOINT_RAISE_OR_LOWER_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["Mode"] =
+    setpoint_raise_or_lower_mode_get_enum_value_name((uint32_t)fields->mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Mode"] = fields->mode;
@@ -9366,6 +9588,9 @@ std::string get_json_payload_for_thermostat_get_weekly_schedule_response_command
   json_payload["NumberOfTransitions"] =
     get_weekly_schedule_response_number_of_transitions_get_enum_value_name(
       (uint32_t)fields->number_of_transitions);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  json_payload["NumberOfTransitions"] =
+    enum8_get_enum_value_name((uint32_t)fields->number_of_transitions);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["NumberOfTransitions"] = fields->number_of_transitions;
@@ -9457,6 +9682,9 @@ std::string get_json_payload_for_thermostat_set_weekly_schedule_command(
   json_payload["NumberOfTransitions"] =
     set_weekly_schedule_number_of_transitions_get_enum_value_name(
       (uint32_t)fields->number_of_transitions);
+  #elif defined(ENUM8_ENUM_NAME_AVAILABLE)
+  json_payload["NumberOfTransitions"] =
+    enum8_get_enum_value_name((uint32_t)fields->number_of_transitions);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["NumberOfTransitions"] = fields->number_of_transitions;
@@ -10197,6 +10425,9 @@ std::string get_json_payload_for_color_control_move_to_hue_command(
   json_payload["Direction"] =
     move_to_hue_direction_get_enum_value_name(
       (uint32_t)fields->direction);
+  #elif defined(CC_DIRECTION_ENUM_NAME_AVAILABLE)
+  json_payload["Direction"] =
+    cc_direction_get_enum_value_name((uint32_t)fields->direction);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Direction"] = fields->direction;
@@ -10294,6 +10525,9 @@ std::string get_json_payload_for_color_control_move_hue_command(
   json_payload["MoveMode"] =
     move_hue_move_mode_get_enum_value_name(
       (uint32_t)fields->move_mode);
+  #elif defined(CC_MOVE_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["MoveMode"] =
+    cc_move_mode_get_enum_value_name((uint32_t)fields->move_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["MoveMode"] = fields->move_mode;
@@ -10383,6 +10617,9 @@ std::string get_json_payload_for_color_control_step_hue_command(
   json_payload["StepMode"] =
     step_hue_step_mode_get_enum_value_name(
       (uint32_t)fields->step_mode);
+  #elif defined(CC_STEP_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["StepMode"] =
+    cc_step_mode_get_enum_value_name((uint32_t)fields->step_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["StepMode"] = fields->step_mode;
@@ -10560,6 +10797,9 @@ std::string get_json_payload_for_color_control_move_saturation_command(
   json_payload["MoveMode"] =
     move_saturation_move_mode_get_enum_value_name(
       (uint32_t)fields->move_mode);
+  #elif defined(CC_MOVE_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["MoveMode"] =
+    cc_move_mode_get_enum_value_name((uint32_t)fields->move_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["MoveMode"] = fields->move_mode;
@@ -10649,6 +10889,9 @@ std::string get_json_payload_for_color_control_step_saturation_command(
   json_payload["StepMode"] =
     step_saturation_step_mode_get_enum_value_name(
       (uint32_t)fields->step_mode);
+  #elif defined(CC_STEP_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["StepMode"] =
+    cc_step_mode_get_enum_value_name((uint32_t)fields->step_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["StepMode"] = fields->step_mode;
@@ -11170,6 +11413,9 @@ std::string get_json_payload_for_color_control_enhanced_move_to_hue_command(
   json_payload["Direction"] =
     enhanced_move_to_hue_direction_get_enum_value_name(
       (uint32_t)fields->direction);
+  #elif defined(CC_DIRECTION_ENUM_NAME_AVAILABLE)
+  json_payload["Direction"] =
+    cc_direction_get_enum_value_name((uint32_t)fields->direction);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Direction"] = fields->direction;
@@ -11267,6 +11513,9 @@ std::string get_json_payload_for_color_control_enhanced_move_hue_command(
   json_payload["MoveMode"] =
     enhanced_move_hue_move_mode_get_enum_value_name(
       (uint32_t)fields->move_mode);
+  #elif defined(CC_MOVE_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["MoveMode"] =
+    cc_move_mode_get_enum_value_name((uint32_t)fields->move_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["MoveMode"] = fields->move_mode;
@@ -11356,6 +11605,9 @@ std::string get_json_payload_for_color_control_enhanced_step_hue_command(
   json_payload["StepMode"] =
     enhanced_step_hue_step_mode_get_enum_value_name(
       (uint32_t)fields->step_mode);
+  #elif defined(CC_STEP_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["StepMode"] =
+    cc_step_mode_get_enum_value_name((uint32_t)fields->step_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["StepMode"] = fields->step_mode;
@@ -11551,6 +11803,9 @@ std::string get_json_payload_for_color_control_color_loop_set_command(
   json_payload["Action"] =
     color_loop_set_action_get_enum_value_name(
       (uint32_t)fields->action);
+  #elif defined(COLOR_LOOP_SET_ACTION_ENUM_NAME_AVAILABLE)
+  json_payload["Action"] =
+    color_loop_set_action_get_enum_value_name((uint32_t)fields->action);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Action"] = fields->action;
@@ -11563,6 +11818,9 @@ std::string get_json_payload_for_color_control_color_loop_set_command(
   json_payload["Direction"] =
     color_loop_set_direction_get_enum_value_name(
       (uint32_t)fields->direction);
+  #elif defined(CC_COLOR_LOOP_DIRECTION_ENUM_NAME_AVAILABLE)
+  json_payload["Direction"] =
+    cc_color_loop_direction_get_enum_value_name((uint32_t)fields->direction);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Direction"] = fields->direction;
@@ -11736,6 +11994,9 @@ std::string get_json_payload_for_color_control_move_color_temperature_command(
   json_payload["MoveMode"] =
     move_color_temperature_move_mode_get_enum_value_name(
       (uint32_t)fields->move_mode);
+  #elif defined(CC_MOVE_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["MoveMode"] =
+    cc_move_mode_get_enum_value_name((uint32_t)fields->move_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["MoveMode"] = fields->move_mode;
@@ -11849,6 +12110,9 @@ std::string get_json_payload_for_color_control_step_color_temperature_command(
   json_payload["StepMode"] =
     step_color_temperature_step_mode_get_enum_value_name(
       (uint32_t)fields->step_mode);
+  #elif defined(CC_STEP_MODE_ENUM_NAME_AVAILABLE)
+  json_payload["StepMode"] =
+    cc_step_mode_get_enum_value_name((uint32_t)fields->step_mode);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["StepMode"] = fields->step_mode;
@@ -12427,6 +12691,9 @@ std::string get_json_payload_for_ias_zone_zone_enroll_response_command(
   json_payload["EnrollResponseCode"] =
     zone_enroll_response_enroll_response_code_get_enum_value_name(
       (uint32_t)fields->enroll_response_code);
+  #elif defined(ZONE_ENROLL_RESPONSE_ENROLL_RESPONSE_CODE_ENUM_NAME_AVAILABLE)
+  json_payload["EnrollResponseCode"] =
+    zone_enroll_response_enroll_response_code_get_enum_value_name((uint32_t)fields->enroll_response_code);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["EnrollResponseCode"] = fields->enroll_response_code;
@@ -12583,6 +12850,9 @@ std::string get_json_payload_for_ias_zone_zone_enroll_request_command(
   json_payload["ZoneType"] =
     zone_enroll_request_zone_type_get_enum_value_name(
       (uint32_t)fields->zone_type);
+  #elif defined(IAS_ZONE_TYPE_ENUM_NAME_AVAILABLE)
+  json_payload["ZoneType"] =
+    ias_zone_type_get_enum_value_name((uint32_t)fields->zone_type);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["ZoneType"] = fields->zone_type;
@@ -12740,6 +13010,9 @@ std::string get_json_payload_for_iaswd_start_warning_command(
   json_payload["StrobeLevel"] =
     start_warning_strobe_level_get_enum_value_name(
       (uint32_t)fields->strobe_level);
+  #elif defined(IASWD_LEVEL_ENUM_NAME_AVAILABLE)
+  json_payload["StrobeLevel"] =
+    iaswd_level_get_enum_value_name((uint32_t)fields->strobe_level);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["StrobeLevel"] = fields->strobe_level;
@@ -12896,6 +13169,9 @@ std::string get_json_payload_for_electrical_measurement_get_profile_info_respons
   json_payload["ProfileIntervalPeriod"] =
     get_profile_info_response_profile_interval_period_get_enum_value_name(
       (uint32_t)fields->profile_interval_period);
+  #elif defined(PROFILE_INTERVAL_PERIOD_ENUM_NAME_AVAILABLE)
+  json_payload["ProfileIntervalPeriod"] =
+    profile_interval_period_get_enum_value_name((uint32_t)fields->profile_interval_period);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["ProfileIntervalPeriod"] = fields->profile_interval_period;
@@ -13004,6 +13280,9 @@ std::string get_json_payload_for_electrical_measurement_get_measurement_profile_
   json_payload["Status"] =
     get_measurement_profile_response_status_get_enum_value_name(
       (uint32_t)fields->status);
+  #elif defined(GET_MEASUREMENT_PROFILE_RESPONSE_STATUS_ENUM_NAME_AVAILABLE)
+  json_payload["Status"] =
+    get_measurement_profile_response_status_get_enum_value_name((uint32_t)fields->status);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["Status"] = fields->status;
@@ -13016,6 +13295,9 @@ std::string get_json_payload_for_electrical_measurement_get_measurement_profile_
   json_payload["ProfileIntervalPeriod"] =
     get_measurement_profile_response_profile_interval_period_get_enum_value_name(
       (uint32_t)fields->profile_interval_period);
+  #elif defined(PROFILE_INTERVAL_PERIOD_ENUM_NAME_AVAILABLE)
+  json_payload["ProfileIntervalPeriod"] =
+    profile_interval_period_get_enum_value_name((uint32_t)fields->profile_interval_period);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["ProfileIntervalPeriod"] = fields->profile_interval_period;
@@ -13441,6 +13723,9 @@ std::string get_json_payload_for_protocol_controller_rf_telemetry_tx_report_comm
   json_payload["TransmissionSpeed"] =
     tx_report_transmission_speed_get_enum_value_name(
       (uint32_t)fields->transmission_speed);
+  #elif defined(TX_REPORT_TRANSMISSION_SPEED_ENUM_NAME_AVAILABLE)
+  json_payload["TransmissionSpeed"] =
+    tx_report_transmission_speed_get_enum_value_name((uint32_t)fields->transmission_speed);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["TransmissionSpeed"] = fields->transmission_speed;
@@ -14047,6 +14332,9 @@ std::string get_json_payload_for_application_monitoring_log_entry_command(
   json_payload["LogLevel"] =
     log_entry_log_level_get_enum_value_name(
       (uint32_t)fields->log_level);
+  #elif defined(LOGGING_LEVEL_ENUM_ENUM_NAME_AVAILABLE)
+  json_payload["LogLevel"] =
+    logging_level_enum_get_enum_value_name((uint32_t)fields->log_level);
   #else
   // If there is no name value for the enum, just write it directly.
   json_payload["LogLevel"] = fields->log_level;

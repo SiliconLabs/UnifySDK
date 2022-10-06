@@ -54,6 +54,11 @@ typedef void (*mqtt_message_callback_t)(const char *topic,
                                         const char *message,
                                         const size_t message_length);
 
+typedef void (*mqtt_message_callback_ex_t)(const char *topic,
+                                           const char *message,
+                                           const size_t message_length,
+                                           void *user);
+
 /**
  * @brief A callback type for a before disconnect and after connect.
  *
@@ -142,6 +147,18 @@ void uic_mqtt_unretain_by_regex(const char *regex);
 void uic_mqtt_subscribe(const char *topic, mqtt_message_callback_t callback);
 
 /**
+ * @brief Subscribe to a topic.
+ *
+ * @param topic Describes the subscription topic pattern.
+ * @param callback A callback function,
+ *                 that will be called when a message is received from the broker.
+ *
+ */
+void uic_mqtt_subscribe_ex(const char *topic,
+                           mqtt_message_callback_ex_t callback,
+                           void *user);
+
+/**
  * @brief Unsubscribe from a topic.
  *
  * @param topic Describes the subscription pattern.
@@ -149,6 +166,18 @@ void uic_mqtt_subscribe(const char *topic, mqtt_message_callback_t callback);
  *
  */
 void uic_mqtt_unsubscribe(const char *topic, mqtt_message_callback_t callback);
+
+/**
+ * @brief Unsubscribe from a topic.
+ *
+ * @param topic     Describes the subscription pattern.
+ * @param callback  A callback function corresponds to unsubscribe topic
+ * @param user      User pointer value to pass to the MQTT message callback
+ *
+ */
+void uic_mqtt_unsubscribe_ex(const char *topic,
+                             mqtt_message_callback_ex_t callback,
+                             void *user);
 
 /**
  * @brief Set a callback which will be executed before calling a disconnect.

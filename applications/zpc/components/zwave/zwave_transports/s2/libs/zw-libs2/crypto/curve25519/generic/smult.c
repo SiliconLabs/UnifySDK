@@ -6,7 +6,7 @@ Derived from public domain code by D. J. Bernstein.
 */
 
 //#include "crypto_scalarmult.h"
-#ifndef ZWAVE_PSA_SECURE_VAULT 
+#if !defined(ZWAVE_PSA_SECURE_VAULT) || (defined(ZWAVE_PSA_SECURE_VAULT) && defined(ZW_CONTROLLER))
 #ifndef NDEBUG
 #ifdef EFR32ZG
 #pragma GCC push_options

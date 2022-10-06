@@ -6,6 +6,10 @@
     bottom: 2px !important;
 }
 
+.mobile .recharts-responsive-container .recharts-legend-wrapper {
+    bottom: -10px !important;
+}
+
 .thermometr {
     display: block;
     width: 26px;
@@ -156,6 +160,11 @@
     margin-top: 54px;
 }
 
+.mobile .battery-value {
+    font-size: 30px;
+    margin-left: 3px;
+}
+
 .battery-top {
     display: block;
     height: 7px;
@@ -229,4 +238,9 @@
 
 .battery-unplugged {
     content: url('../../assets/unplugged.svg');
+}
+
+.mobile .recharts-legend-item {
+    margin-top: 6px;
+    margin-bottom: 6px;
 }

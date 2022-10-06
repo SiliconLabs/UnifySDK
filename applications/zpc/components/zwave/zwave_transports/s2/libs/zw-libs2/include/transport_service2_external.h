@@ -117,7 +117,7 @@ typedef struct ts_CommandHandler
  *      - false Transmission is not started, because another transmission is already on progress.
  *        The callback function will not be called.
  */
-#if defined(ZIPGW) || defined(EFR32ZG)
+#if defined(ZIPGW) || defined(EFR32ZG) || defined(ZWAVE_ON_LINUX)
 bool ZW_TransportService_SendData(ts_param_t* p, const uint8_t *pData, uint16_t dataLength,
     void (*completedFunc)(uint8_t txStatus, void *));
 #else
@@ -179,7 +179,7 @@ void TransportService_msg_received_event(unsigned char *pCmd, unsigned char cmdL
  * \}
  */
 
-#if defined (EFR32ZG) && !defined(NEW_TEST_T2)
+#if (defined (EFR32ZG) || defined(ZWAVE_ON_LINUX)) && !defined(NEW_TEST_T2)
 /**
  * Sending function called by the transport service module when a frame is ready to be sent by the lower layer.
  */

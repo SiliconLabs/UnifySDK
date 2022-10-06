@@ -137,3 +137,12 @@ template_contribution:
   # OccupancySensing
   - {name: cluster_service, value: {cluster_id: "0x0406", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
   - {name: cluster_service, value: {cluster_id: "0x0406", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  #IASZone
+  - {name: cluster_service, value: {cluster_id: "0x0500", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0500", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  #IASACE
+  - {name: cluster_service, value: {cluster_id: "0x0501", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0501", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}
+  #IASWD
+  - {name: cluster_service, value: {cluster_id: "0x0502", mfg_id: "NOT_MFG_SPECIFIC", side: "SERVER", service_function: "emberAfClusterServiceCallback"}}
+  - {name: cluster_service, value: {cluster_id: "0x0502", mfg_id: "NOT_MFG_SPECIFIC", side: "CLIENT", service_function: "emberAfClusterServiceCallback"}}

@@ -48,6 +48,7 @@ static bool event_loop_enabled                    = true;
 static int on_cb_count                            = 0;
 static bool callback1_called                      = false;
 static bool callback2_called                      = false;
+static void* callback1_user;
 
 void *connection_instance_mock;
 mqtt_client_t client_instance;
@@ -169,10 +170,11 @@ void subscription_callback_wildcard_second(const char *topic,
 
 void callback_test1(const char *topic,
                     const char *message,
-                    const size_t message_length)
+                    const size_t message_length,void* user )
 {
   sl_log_debug(LOG_TAG, "Subscriber got a message: %s: %s\n", topic, message);
   callback1_called = true;
+  callback1_user = user;
   on_cb_count++;
 }
 
@@ -207,6 +209,7 @@ void setUp()
   wildcard_subsciption_message_received = false;
   multi_subscription_received           = false;
   callback1_called                      = false;
+  callback1_user                         = (void*)0x1111111;
   callback2_called                      = false;
   event_loop_enabled                    = true;
 }
@@ -1476,7 +1479,7 @@ void test_mqtt_client_subscribe_multiple_callback_with_wildcard()
                               client_instance,
                               0);  // Connecting succeeded.
 
-  mqtt_client_subscribe(client_instance, "Topic1/#", callback_test1);
+  mqtt_client_subscribe_ex(client_instance, "Topic1/#", callback_test1, (void*)callback_test1);
 
   // Mock section for second callback
   {
@@ -1504,6 +1507,7 @@ void test_mqtt_client_subscribe_multiple_callback_with_wildcard()
   mqtt_client_test_on_message(NULL, client_instance, mock_message);
   free(mock_message);
   // check that the two registered functions are called
+  TEST_ASSERT_EQUAL( callback1_user ,callback_test1 );
   TEST_ASSERT_EQUAL_INT(2, on_cb_count);
   TEST_ASSERT_TRUE_MESSAGE(
     callback1_called,
@@ -1525,7 +1529,7 @@ void test_mqtt_client_subscribe_multiple_callback_with_wildcard()
                               client_instance,
                               0);  // Connecting succeeded.
 
-  mqtt_client_unsubscribe(client_instance, "Topic1/#", callback_test1);
+  mqtt_client_unsubscribe_ex(client_instance, "Topic1/#", callback_test1, (void*)callback_test1);
 
   struct mqtt_message *mock_message_2
     = (struct mqtt_message *)malloc(sizeof(struct mqtt_message));

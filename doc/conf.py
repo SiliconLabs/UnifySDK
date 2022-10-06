@@ -47,7 +47,7 @@ class mqtt_lexer(RegexLexer):
         'root': [
             (r'//.*?$', Comment.Singleline),
             (r'#.*?$', Comment.Singleline),
-            (r"^[a-zA-Z0-9_/\-<>]+", Operator.Word),
+            (r"^[a-zA-Z0-9_/\-<>+#]+", Operator.Word),
             (r'\{', Text, 'json-object'),
             (r'.', Text),
         ],
@@ -148,6 +148,13 @@ html_baseurl = "https://siliconlabs.github.io/UnifySDK"
 
 releases_github_path = "SiliconLabs/UnifySDK"
 
+# -- Options for figures and tables (https://www.sphinx-doc.org/en/master/usage/configuration.html)
+numfig = True
+numfig_format = dict()
+numfig_format['figure'] = 'Figure %s'
+numfig_format['table'] = 'Table %s'
+numfig_format['code-block'] = 'Listing %s'
+numfig_format['section'] = 'Section %s'
 
 # -- Options for LaTeX output ------------------------------------------------
 latex_engine = "lualatex"
@@ -173,6 +180,13 @@ latex_documents = [
         root_doc,
         "unify_sdk_documentation.tex",
         "Unify Framework documentation",
+        "Silicon Labs",
+        "howto",
+    ),
+    (
+        "doc/unify_specifications/index",
+        "unify_specifications.tex",
+        "Unify Specifications",
         "Silicon Labs",
         "howto",
     ),
