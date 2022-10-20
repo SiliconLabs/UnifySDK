@@ -305,6 +305,7 @@ look like this:
 It is OPTIONAL for a Protocol Controller to publish the availability of the
 *WriteAttributes* and *ForceReadAttributes* commands. These commands MUST be supported
 for all clusters advertised by a Protocol Controller.
+<mark>[Feedback: What is meant by "These commands"?. The grammar implies WriteAttributes and ForceReadAttributes, but that contradicts the main "ForceReadAttributes Generic Command" section, which says ForceReadAttributes is optional. If it means the commands advertised in the SupportedCommands payload, could that be clarified?]</mark>
 
   Note: A ProtocolController MAY publish an empty array for the SupportedCommands
   of a cluster. In this case, IoT Services can only use the WriteAttributes commands
@@ -324,10 +325,11 @@ Protocol Controllers SHOULD NOT advertise the availability of the
 writable attribute supported by the PAN node for the cluster. IoT Services MAY
 use this command but it will have no effect.
 
+<mark>
 Protocol Controllers SHOULD explicitly advertise the availability of the
 *ForceReadAttributes* Command in the SupportedCommands topic when there is at least
 one readable attribute that is of a type not of an integer or floating point type
-(i.e., an attribute of type "String" or other complex data types).
+(i.e., an attribute of type "String" or other complex data types).</mark>
 
 Protocol Controller SHOULD advertise the *ForceReadAttributes* Command for all
 endpoints with readable mandatory attributes, as supported in the ZCL cluster definition.
