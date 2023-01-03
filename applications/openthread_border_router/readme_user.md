@@ -9,4 +9,3 @@ networks use the same 802.15.4 channel.
 
 To get started running OTBR with CPCd, see the
 [Multiprotocol Setup](../../doc/getting_started_multiprotocol_cpc.md) page.
-# OpenThread Boarder Router User Guide
